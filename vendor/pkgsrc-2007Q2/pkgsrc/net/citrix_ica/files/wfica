@@ -1,0 +1,9 @@
+#!/bin/sh
+#
+# $Id: wfica 147965 2007-04-19 14:03:27Z seanb $
+#
+
+ICAROOT=DESTINATION
+export ICAROOT
+exec $ICAROOT/wfica
+

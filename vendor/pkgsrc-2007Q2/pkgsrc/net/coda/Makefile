@@ -1,0 +1,30 @@
+# $NetBSD: Makefile,v 1.3 2007/05/11 15:19:11 gdt Exp $
+#
+
+DISTNAME=	coda-6.9.1
+PKGREVISION=	1
+CATEGORIES=	net
+MASTER_SITES=	http://www.coda.cs.cmu.edu/pub/coda/src/
+
+MAINTAINER=	gdt@NetBSD.org
+HOMEPAGE=	http://www.coda.cs.cmu.edu/
+COMMENT=	Coda distributed fileystem
+
+# See http://coda.wikidev.net/Quick_Client_Action for hints on how
+# to configure venus.
+
+# Top-level Makefile is missing .WAIT, reported upstream 20070412 by gdt.
+MAKE_JOBS_SAFE=	no
+
+USE_TOOLS+=	gmake perl
+GNU_CONFIGURE=	yes
+USE_LANGUAGES=	c c++
+
+INSTALL_TARGET=	client-install server-install
+
+.include "../../devel/lwp/buildlink3.mk"
+.include "../../devel/rpc2/buildlink3.mk"
+.include "../../devel/rvm/buildlink3.mk"
+.include "../../devel/readline/buildlink3.mk"
+
+.include "../../mk/bsd.pkg.mk"
