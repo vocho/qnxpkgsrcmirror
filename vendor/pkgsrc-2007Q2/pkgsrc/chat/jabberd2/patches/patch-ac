@@ -1,0 +1,49 @@
+$NetBSD: patch-ac,v 1.2 2007/05/26 11:50:13 xtraeme Exp $
+
+--- etc/sm.xml.in.orig	2007-05-26 12:01:56.000000000 +0200
++++ etc/sm.xml.in	2007-05-26 12:03:46.000000000 +0200
+@@ -9,7 +9,7 @@
+   <!-- The process ID file. comment this out if you don't need to know
+        to know the process ID from outside the process (eg for control
+        scripts) -->
+-  <pidfile>@localstatedir@/jabberd/pid/sm.pid</pidfile>
++  <pidfile>@PIDDIR@/sm.pid</pidfile>
+ 
+   <!-- Router connection configuration -->
+   <router>
+@@ -31,7 +31,7 @@
+          If this is commented out, or the file can't be read, no attempt
+          will be made to establish an encrypted channel with the router. -->
+     <!--
+-    <pemfile>@sysconfdir@/server.pem</pemfile>
++    <pemfile>@SSLCERTS@/server.pem</pemfile>
+     -->
+ 
+     <!-- Router connection retry -->
+@@ -64,7 +64,7 @@
+ 
+     <!-- If logging to file, this is the filename of the logfile -->
+     <!--
+-    <file>@localstatedir@/jabberd/log/sm.log</file>
++    <file>@LOGDIR@/sm.log</file>
+     -->
+   </log>
+ 
+@@ -128,7 +128,7 @@
+     <!-- Berkeley DB driver configuration -->
+     <db>
+       <!-- Directory to store database files under -->
+-      <path>@localstatedir@/jabberd/db</path>
++      <path>@DBDIR@</path>
+ 
+       <!-- Synchronize the database to disk after each write. If you
+            disable this, database accesses may be faster, but data may
+@@ -153,7 +153,7 @@
+     <!-- SQLite driver configuration -->
+     <sqlite>
+       <!-- Database name -->
+-      <dbname>@localstatedir@/jabberd/db/sqlite.db</dbname>
++      <dbname>@DBDIR@/sqlite.db</dbname>
+ 
+       <!-- Transacation support. If this is commented out, transactions
+            will be disabled. This might make database accesses faster,

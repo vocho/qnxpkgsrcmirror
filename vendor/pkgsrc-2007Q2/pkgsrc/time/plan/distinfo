@@ -1,0 +1,11 @@
+$NetBSD: distinfo,v 1.8 2007/04/28 15:20:43 reed Exp $
+
+SHA1 (plan-1.9.tar.gz) = 65afff961f801f888714993a9ed6e42a95b2d958
+RMD160 (plan-1.9.tar.gz) = 7bed3f29c62341c264c9edeb60666d83092139ea
+Size (plan-1.9.tar.gz) = 441599 bytes
+SHA1 (patch-aa) = 8909b4fab90facef041879bc41d81e84a3bd7430
+SHA1 (patch-ab) = 6670c398271e5ee6d32194c0b69850f381b5cc5c
+SHA1 (patch-ae) = 64c71d707c8e99837a2395fc0cf115eb9f71d9cd
+SHA1 (patch-af) = 58fadadd62916452aa2036ddf9a26b7448149804
+SHA1 (patch-ag) = e99b6cf76ea463b9e75ee6760aaa1ad2e3a1afa1
+SHA1 (patch-ai) = c5cd47ea2bb004219df7807f107ff26fdcc53f51

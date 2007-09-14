@@ -1,0 +1,5 @@
+$NetBSD: distinfo,v 1.2 2007/04/01 09:10:34 obache Exp $
+
+SHA1 (sqlite3-ruby-1.2.1.tar.bz2) = 68d40bc263d36fed256ca74954c6894760d72ebd
+RMD160 (sqlite3-ruby-1.2.1.tar.bz2) = de3042471a2e021e299c79c189fb35eb364f0128
+Size (sqlite3-ruby-1.2.1.tar.bz2) = 83105 bytes

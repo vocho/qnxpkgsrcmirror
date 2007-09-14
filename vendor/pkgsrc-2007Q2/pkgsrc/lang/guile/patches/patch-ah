@@ -1,0 +1,13 @@
+$NetBSD: patch-ah,v 1.2 2007/06/12 03:02:34 dmcmahill Exp $
+
+--- guile-config/guile-config.in.orig	2006-09-20 00:19:02.000000000 +0000
++++ guile-config/guile-config.in
+@@ -155,7 +155,7 @@
+                (if (or (string=? libdir "/usr/lib")
+                        (string=? libdir "/usr/lib/"))
+ 		   ""
+-		   (string-append "-L" (get-build-info 'libdir)))
++		   (string-append "-Wl,-R" (get-build-info 'libdir) " -L" (get-build-info 'libdir)))
+ 	       (string-join other-flags)
+ 
+ 	       )))
