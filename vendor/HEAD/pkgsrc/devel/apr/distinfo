@@ -1,0 +1,5 @@
+$NetBSD: distinfo,v 1.21 2007/09/05 13:47:36 xtraeme Exp $
+
+SHA1 (apr-1.2.9.tar.gz) = 289657da57a6e7392c665dc9b44ada491724b537
+RMD160 (apr-1.2.9.tar.gz) = 02d5e81c4bcc389a7c28dd19b96b792fad729ba8
+Size (apr-1.2.9.tar.gz) = 1109990 bytes

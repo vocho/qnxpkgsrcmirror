@@ -1,0 +1,37 @@
+# $NetBSD: Makefile.common,v 1.4 2007/07/05 18:20:07 jnemeth Exp $
+#
+
+DISTNAME=	elib-1.0
+CATEGORIES=	devel
+MASTER_SITES=	http://jdee.sunsite.dk/
+
+MAINTAINER=	pkgsrc-users@NetBSD.org
+COMMENT=	Library of utility functions for Emacs
+
+.include "../../mk/emacs.mk"
+
+PKGSRC_MAKE_ENV+=	EMACS=${EMACS_FLAVOR:Q}
+MAKEFLAGS+=		EMACS=${EMACS_FLAVOR:Q}
+
+NO_CONFIGURE=	yes
+USE_TOOLS+=	gmake makeinfo
+
+INFO_FILES=	# PLIST
+
+DISTINFO_FILE=	${.CURDIR}/../../devel/elib/distinfo
+PATCHDIR=	${.CURDIR}/../../devel/elib/patches
+PLIST_SRC=	${.CURDIR}/../../devel/elib/PLIST
+
+INSTALLATION_DIRS=	${EMACS_LISPPREFIX}/elib ${EMACS_INFOPREFIX}
+
+SRCS=	stack-f.el stack-m.el queue-f.el queue-m.el elib-node.el	\
+	bintree.el avltree.el string.el read.el cookie.el dll.el	\
+	dll-debug.el
+
+do-install:
+	${INSTALL_DATA_DIR} ${EMACS_LISPPREFIX}/elib
+	cd ${WRKSRC} && ${INSTALL_DATA} ${SRCS} ${SRCS:.el=.elc} 	\
+			${EMACS_LISPPREFIX}/elib
+	cd ${WRKSRC} && ${INSTALL_DATA} elib.info* ${EMACS_INFOPREFIX}
+
+.include "../../mk/bsd.pkg.mk"

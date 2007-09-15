@@ -1,0 +1,47 @@
+# $NetBSD: Makefile,v 1.3 2007/08/17 17:26:03 bouyer Exp $
+#
+
+VERSION=	3.1.0
+DISTNAME=	xen-${VERSION}-src
+PKGNAME=	xenkernel3-${VERSION}
+PKGREVISION=	1
+CATEGORIES=	sysutils
+MASTER_SITES=	http://www.cl.cam.ac.uk/research/srg/netos/xen/downloads/ \
+		http://bits.xensource.com/oss-xen/release/${VERSION}/src.tgz/
+EXTRACT_SUFX=	.tgz
+
+MAINTAINER=	bouyer@NetBSD.org
+HOMEPAGE=	http://www.cl.cam.ac.uk/research/srg/netos/xen/
+COMMENT=	Xen3 Kernel
+
+ONLY_FOR_PLATFORM=	Linux-2.[46]*-i386 NetBSD-*-i386
+CONFLICTS=	xenkernel30-*
+
+
+WRKSRC=		${WRKDIR}/xen-${VERSION}-src
+
+NO_CONFIGURE=	yes
+USE_TOOLS+=	gmake
+
+PYTHON_VERSIONS_ACCEPTED= 24 23
+PY_PATCHPLIST=		no
+
+SUBST_CLASSES+=		py
+SUBST_STAGE.py=		pre-build
+SUBST_FILES.py=		xen/include/public/foreign/Makefile
+SUBST_SED.py=		-e "s,python,${PYTHONBIN},g"
+
+do-build:
+	cd ${WRKSRC} && ${GMAKE} XEN_TARGET_X86_PAE=n debug=n xen
+	${CP} ${WRKSRC}/dist/install/boot/xen.gz ${WRKDIR}/xen.gz
+	cd ${WRKSRC} && ${GMAKE} clean && \
+	    ${GMAKE} XEN_TARGET_X86_PAE=n debug=y xen
+	${CP} ${WRKSRC}/dist/install/boot/xen.gz ${WRKDIR}/xen-debug.gz
+	
+do-install:
+	${INSTALL_DATA_DIR} ${PREFIX}/xen3-kernel
+	${INSTALL_DATA} ${WRKDIR}/xen.gz ${PREFIX}/xen3-kernel/xen.gz
+	${INSTALL_DATA} ${WRKDIR}/xen-debug.gz ${PREFIX}/xen3-kernel/xen-debug.gz
+
+.include "../../lang/python/application.mk"
+.include "../../mk/bsd.pkg.mk"

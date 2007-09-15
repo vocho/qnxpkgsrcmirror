@@ -1,0 +1,87 @@
+$NetBSD: patch-an,v 1.2 2007/09/06 04:05:40 jlam Exp $
+
+--- courier/webmlmd.C.orig	Sat Jun 16 02:21:24 2007
++++ courier/webmlmd.C
+@@ -22,6 +22,7 @@
+ #include	<string.h>
+ #include	<signal.h>
+ 
++#include	<sys/param.h>
+ #include	<sys/types.h>
+ #include	<sys/stat.h>
+ #include        <sys/socket.h>
+@@ -39,6 +40,12 @@
+ #include	<iostream>
+ #include	<fstream>
+ #include	<sstream>
++#if defined(__FreeBSD_version) && (__FreeBSD_version < 500029)
++#include	<cwchar>
++namespace std {
++	typedef basic_string <wchar_t> wstring;
++}
++#endif
+ #include	<map>
+ 
+ #include	"cmlm.h"
+@@ -606,7 +613,10 @@ HANDLER("ADMINUPDATE", do_admin_update)
+ 	cmdset(args_array, false);
+ 
+ 	{
+-		std::istringstream i(std::string(cgi("optheaderadd")) + "\n");
++		std::string t(cgi("optheaderadd"));
++		t += "\n";
++
++		std::istringstream i(t);
+ 
+ 		std::ofstream ofs(HEADERADD ".new");
+ 
+@@ -623,7 +633,10 @@ HANDLER("ADMINUPDATE", do_admin_update)
+ 	}
+ 
+ 	{
+-		std::istringstream i(std::string(cgi("optheaderdel")) + "\n");
++		std::string t(cgi("optheaderdel"));
++		t += "\n";
++
++		std::istringstream i(t);
+ 
+ 		std::ofstream ofs(HEADERDEL ".new");
+ 
+@@ -953,10 +966,10 @@ static void sendsubunsub(std::string ext
+ 
+ 	if (ctlmsg.start(ext, address, "ctlmsg"))
+ 	{
+-		FILE *stdin=ctlmsg.stdin();
++		FILE *standard_input=ctlmsg.standard_input();
+ 
+ 		ctlmsg.mk_received_header();
+-		fprintf(stdin, "\nSubscription request received.\n");
++		fprintf(standard_input, "\nSubscription request received.\n");
+ 
+ 		if (ctlmsg.wait())
+ 		{
+@@ -1100,10 +1113,10 @@ static void listrequest2(std::string lis
+ 			if (confirm.start(method + "-" + token, "",
+ 					  "ctlmsg"))
+ 			{
+-				FILE *stdin=confirm.stdin();
++				FILE *standard_input=confirm.standard_input();
+ 
+ 				confirm.mk_received_header();
+-				fprintf(stdin,
++				fprintf(standard_input,
+ 					"Subject: yes -- confirmed by WebMLM\n"
+ 					"\n"
+ 					"Confirmed\n");
+@@ -1117,9 +1130,9 @@ static void listrequest2(std::string lis
+ 				char buf[1024];
+ 				bool isfirst=true;
+ 
+-				FILE *stdout=confirm.stdout();
++				FILE *standard_output=confirm.standard_output();
+ 
+-				while (fgets(buf, sizeof(buf), stdout))
++				while (fgets(buf, sizeof(buf), standard_output))
+ 				{
+ 					if (isfirst)
+ 					{

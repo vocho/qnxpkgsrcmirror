@@ -1,0 +1,13 @@
+$NetBSD: patch-ab,v 1.17 2007/07/07 15:21:07 wiz Exp $
+
+--- configure.orig	2007-06-30 15:40:25.000000000 +0000
++++ configure
+@@ -6150,7 +6150,7 @@ _ACEOF
+ _ACEOF
+ 
+     ;;
+- sparc*-sun-solaris2.*)
++ sparc*-sun-solaris2*)
+     machdep="mach_dep.lo sparc_mach_dep.lo"
+     ;;
+  ia64-*-*)

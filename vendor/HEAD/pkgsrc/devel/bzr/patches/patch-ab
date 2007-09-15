@@ -1,0 +1,13 @@
+$NetBSD: patch-ab,v 1.4 2007/07/08 19:53:21 wiz Exp $
+
+--- setup.py.orig	2007-06-18 05:09:04.000000000 +0000
++++ setup.py
+@@ -239,7 +239,7 @@ elif 'py2exe' in sys.argv:
+ else:
+     # std setup
+     ARGS = {'scripts': ['bzr'],
+-            'data_files': [('man/man1', ['bzr.1'])],
++            'data_files': [(os.getenv('PKGMANDIR', 'man') + '/man1', ['bzr.1'])],
+             'cmdclass': command_classes,
+             'ext_modules': ext_modules,
+            }

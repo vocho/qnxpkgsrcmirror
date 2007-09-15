@@ -1,0 +1,18 @@
+@comment $NetBSD: PLIST,v 1.2 2007/07/08 08:13:43 wiz Exp $
+include/libkdcraw/dcrawbinary.h
+include/libkdcraw/dcrawinfocontainer.h
+include/libkdcraw/dcrawsettingswidget.h
+include/libkdcraw/kdcraw.h
+include/libkdcraw/libkdcraw_export.h
+include/libkdcraw/rawdecodingsettings.h
+include/libkdcraw/rawfiles.h
+include/libkdcraw/version.h
+lib/libkdcraw.la
+lib/libkdcraw1/kdcraw
+lib/pkgconfig/libkdcraw.pc
+share/icons/hicolor/128x128/apps/kdcraw.png
+share/icons/hicolor/32x32/apps/kdcraw.png
+share/icons/hicolor/48x48/apps/kdcraw.png
+share/icons/hicolor/64x64/apps/kdcraw.png
+@dirrm lib/libkdcraw1
+@dirrm include/libkdcraw

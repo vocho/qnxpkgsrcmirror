@@ -1,0 +1,24 @@
+# $NetBSD: Makefile.common,v 1.37 2007/08/29 20:46:51 wiz Exp $
+
+DISTNAME=	links-2.1pre30
+CATEGORIES=	www
+MASTER_SITES=	http://links.twibright.com/download/
+EXTRACT_SUFX=  .tar.bz2
+
+MAINTAINER=	jschauma@NetBSD.org
+HOMEPAGE=	http://links.twibright.com/
+
+PKG_INSTALLATION_TYPES=	overwrite pkgviews
+
+GNU_CONFIGURE=		YES
+CONFIGURE_ARGS+=	--enable-javascript
+
+PLIST_SRC=		${.CURDIR}/../../www/links/PLIST
+PATCHDIR=		${.CURDIR}/../../www/links/patches
+DISTINFO_FILE=		${.CURDIR}/../../www/links/distinfo
+
+post-install:
+	${INSTALL_DATA_DIR} ${PREFIX}/share/doc/links
+	${INSTALL_DATA} ${WRKSRC}/KEYS ${PREFIX}/share/doc/links
+
+.include "../../security/openssl/buildlink3.mk"

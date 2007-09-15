@@ -1,0 +1,19 @@
+# $NetBSD: Makefile.common,v 1.8 2007/08/09 18:42:51 joerg Exp $
+#
+
+POPPLER_VERS=		0.5.4
+DISTNAME=		poppler-${POPPLER_VERS}
+CATEGORIES=		print
+MASTER_SITES=		http://poppler.freedesktop.org/
+
+MAINTAINER=		reed@reedmedia.net
+HOMEPAGE=		http://poppler.freedesktop.org/
+
+PKG_DESTDIR_SUPPORT=	user-destdir
+
+DISTINFO_FILE=		${.CURDIR}/../../print/poppler/distinfo
+PATCHDIR=		${.CURDIR}/../../print/poppler/patches
+
+USE_TOOLS+=		pkg-config
+USE_LIBTOOL=		yes
+USE_LANGUAGES=		c c++
