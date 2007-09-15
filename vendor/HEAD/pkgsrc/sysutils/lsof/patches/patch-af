@@ -1,0 +1,43 @@
+$NetBSD: patch-af,v 1.10 2007/08/14 19:59:18 veego Exp $
+
+--- dialects/n+obsd/dlsof.h.orig	2006-03-28 23:54:15.000000000 +0200
++++ dialects/n+obsd/dlsof.h	2007-08-11 18:16:59.000000000 +0200
+@@ -161,6 +161,7 @@
+ #include <sys/socketvar.h>
+ #include <sys/un.h>
+ #include <sys/unpcb.h>
++#include <net/route.h>
+ #include <netinet/in.h>
+ #include <netinet/in_systm.h>
+ #include <netinet/ip.h>
+@@ -170,7 +171,6 @@
+ #include <netinet6/in6_pcb.h>
+ # endif	/* defined(HASIPv6) && defined(NETBSDV) && !defined(HASINRIAIPv6) */
+ 
+-#include <net/route.h>
+ #include <netinet/in_pcb.h>
+ #include <netinet/ip_var.h>
+ #include <netinet/tcp.h>
+@@ -264,6 +264,9 @@
+ 
+ #undef KERNEL
+ #include <ufs/mfs/mfsnode.h>
++# if	defined(HASTMPFS)
++#include <fs/tmpfs/tmpfs.h>
++# endif	/* defined(HASTMPFS) */
+ 
+ # if	defined(HASNFSPROTO)
+ #include <nfs/rpcv2.h>
+@@ -489,7 +492,12 @@
+ struct l_vfs {
+ 	KA_T addr;			/* kernel address */
+ 	fsid_t	fsid;			/* file system ID */
++#if defined(NETBSDV) && __NetBSD_Version__ >= 499002500
++	/* MFSNAMELEN was removed from the kernel source after 4.99.24 */
++	char type[sizeof(((struct statvfs *)NULL)->f_fstypename)];	/* type of file system */
++#else
+ 	char type[MFSNAMELEN];		/* type of file system */
++#endif
+ 	char *dir;			/* mounted directory */
+ 	char *fsname;			/* file system name */
+ 	struct l_vfs *next;		/* forward link */

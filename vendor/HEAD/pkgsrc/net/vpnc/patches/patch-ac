@@ -1,0 +1,31 @@
+$NetBSD: patch-ac,v 1.4 2007/04/28 20:17:13 hubertf Exp $
+
+--- vpnc-script.orig	2007-02-18 12:52:03.000000000 +0100
++++ vpnc-script	2007-04-28 11:49:41.000000000 +0200
+@@ -31,12 +31,13 @@ case "$OS" in
+ 		;;
+ esac
+ 
+-DEFAULT_ROUTE_FILE=/var/run/vpnc/defaultroute
+-RESOLV_CONF_BACKUP=/var/run/vpnc/resolv.conf-backup
++STATEDIR=/var/run/vpnc
++DEFAULT_ROUTE_FILE=$STATEDIR/defaultroute
++RESOLV_CONF_BACKUP=$STATEDIR/resolv.conf-backup
+ 
+ # some systems, eg. Darwin & FreeBSD, prune /var/run on boot
+-if ! [ -d "/var/run/vpnc" ]; then
+-       mkdir -p /var/run/vpnc
++if ! [ -d $STATEDIR ]; then
++       mkdir -p $STATEDIR
+ fi
+ 
+ # stupid SunOS: no blubber in /usr/local/bin ... (on stdout)
+@@ -167,7 +168,7 @@ else
+ 	get_default_gw() {
+ 		# isn't -n supposed to give --numeric output?
+ 		# apperently not...
+-		netstat -r -n | sed 's/default/0.0.0.0/' | grep '^0.0.0.0' | awk '{print $2}'
++		netstat -r -n | awk '$2 ~ /^link/ { next; } /^(default|0.0.0.0)/ { print $2; }'
+ 	}
+ 	
+ 	set_vpngateway_route() {

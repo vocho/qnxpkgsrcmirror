@@ -1,0 +1,28 @@
+# $NetBSD: Makefile,v 1.25 2007/04/04 17:39:11 joerg Exp $
+#
+
+DISTNAME=	totd-1.5.1
+CATEGORIES=	net
+MASTER_SITES=	ftp://ftp.pasta.cs.uit.no/pub/Vermicelli/
+
+MAINTAINER=	feico@pasta.cs.uit.no
+HOMEPAGE=	http://www.vermicelli.pasta.cs.uit.no/ipv6/software.html
+COMMENT=	DNS proxy that supports IPv6 <==> IPv4 record translation
+
+GNU_CONFIGURE=	yes
+CONFIGURE_ARGS+=--sysconfdir=${PKG_SYSCONFDIR:Q}
+
+PKG_OPTIONS_VAR=		PKG_OPTIONS.totd
+PKG_OPTIONS_REQUIRED_GROUPS=	inet6 # require inet6 capability
+PKG_OPTIONS_GROUP.inet6=	inet6
+
+INSTALLATION_DIRS=	${PKGMANDIR}/man8 sbin share/examples/totd
+
+do-install:
+	${INSTALL_PROGRAM} ${WRKSRC}/totd ${PREFIX}/sbin/
+	${INSTALL_MAN} ${WRKSRC}/totd.8 ${PREFIX}/${PKGMANDIR}/man8/
+	${INSTALL_DATA} ${FILESDIR}/totd.conf.sample \
+		${PREFIX}/share/examples/totd/totd.conf.sample
+
+.include "../../mk/bsd.options.mk"
+.include "../../mk/bsd.pkg.mk"

@@ -1,0 +1,40 @@
+# $NetBSD: Makefile,v 1.29 2007/09/07 22:12:20 jlam Exp $
+
+DISTNAME=	trafshow-5.2.1
+PKGREVISION=	1
+CATEGORIES=	net
+MASTER_SITES=	ftp://ftp.nsk.su/pub/RinetSoftware/
+EXTRACT_SUFX=	.tgz
+
+MAINTAINER=	pkgsrc-users@NetBSD.org
+HOMEPAGE=	http://soft.risp.ru/trafshow/index.shtml
+COMMENT=	Full screen visualization of the network traffic
+
+BUILD_TARGET=	trafshow
+GNU_CONFIGURE=	yes
+
+PKG_OPTIONS_VAR=	PKG_OPTIONS.trafshow
+PKG_SUPPORTED_OPTIONS=	inet6
+
+.include "../../mk/bsd.options.mk"
+
+.if !empty(PKG_OPTIONS:Minet6)
+CPPFLAGS+=	-DINET6
+.endif
+
+CFLAGS.Darwin+=	-DBIND_8_COMPAT
+
+INSTALLATION_DIRS=	bin ${PKGMANDIR}/man1 share/examples/trafshow
+
+do-install:
+	${INSTALL_PROGRAM} ${WRKSRC}/trafshow ${PREFIX}/bin
+	${INSTALL_MAN} ${WRKSRC}/trafshow.1 ${PREFIX}/${PKGMANDIR}/man1
+	${INSTALL_DATA} ${WRKSRC}/.trafshow \
+		${PREFIX}/share/examples/trafshow/trafshow
+
+BUILDLINK_API_DEPENDS.libpcap+=	libpcap>=0.7
+.include "../../net/libpcap/buildlink3.mk"
+
+.include "../../mk/curses.buildlink3.mk"
+.include "../../mk/pthread.buildlink3.mk"
+.include "../../mk/bsd.pkg.mk"

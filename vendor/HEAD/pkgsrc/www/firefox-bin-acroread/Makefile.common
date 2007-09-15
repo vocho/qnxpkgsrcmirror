@@ -1,0 +1,30 @@
+# $NetBSD: Makefile.common,v 1.4 2007/07/30 16:12:56 jlam Exp $
+
+PKGNAME=		${DISTNAME:C|MozillaFirebird|firefox|}
+CATEGORIES=		www print
+MASTER_SITES=		# empty
+DISTFILES=		# empty
+
+DEPENDS+=		firefox-bin>=0.8:../../www/firefox-bin
+
+EMUL_PLATFORMS=		linux-i386
+
+ACRO_PLATFORM=		intellinux
+
+WRKSRC=			${WRKDIR}
+NO_CHECKSUM=		YES
+NO_CONFIGURE=		YES
+BUILD_DIRS=		# empty
+
+PLIST_SRC=		${PKGSRCDIR}/www/firefox-bin-acroread/PLIST
+
+FILES_SUBST+=		ACROREAD=${ACROREAD:Q}
+FILES_SUBST+=		ACRO_SUBDIR=${ACRO_SUBDIR:Q}
+FILES_SUBST+=		ACRO_PLATFORM=${ACRO_PLATFORM:Q}
+
+DEINSTALL_TEMPLATES+=	${PKGSRCDIR}/www/firefox-bin-acroread/DEINSTALL
+INSTALL_TEMPLATES+=	${PKGSRCDIR}/www/firefox-bin-acroread/INSTALL
+
+INSTALLATION_DIRS+=	${PREFIX}/lib/firefox-linux/plugins
+
+do-install:	# nothing
