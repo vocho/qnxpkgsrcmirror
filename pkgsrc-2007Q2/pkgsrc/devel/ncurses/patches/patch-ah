@@ -1,0 +1,13 @@
+$NetBSD$
+
+--- c++/internal.h.orig	2006-09-30 17:59:57.000000000 -0400
++++ c++/internal.h
+@@ -46,8 +46,6 @@
+ 
+ #define CTRL(x) ((x) & 0x1f)
+ 
+-#ifndef _QNX_SOURCE
+ #include <string.h>
+-#endif
+ 
+ #endif /* NCURSES_CPLUS_INTERNAL_H */

@@ -1,0 +1,74 @@
+$NetBSD$
+
+--- src/osdep/unix/os_nto.c.orig	2001-04-10 17:59:16.000000000 -0400
++++ src/osdep/unix/os_nto.c
+@@ -30,7 +30,6 @@
+ #include <netdb.h>
+ #include <ctype.h>
+ #include <errno.h>
+-extern int errno;		/* just in case */
+ #include <pwd.h>
+ #include <shadow.h>
+ #include <sys/select.h>
+@@ -38,6 +37,17 @@ extern int errno;		/* just in case */
+ 
+ #define DIR_SIZE(d) d->d_reclen
+ 
++struct ustat {
++	int f_tinode;
++};
++
++int ustat(dev_t, struct ustat *);
++
++#define EX_USAGE	EXIT_FAILURE
++#define EX_NOPERM	EXIT_FAILURE
++#define EX_CANTCREAT	EXIT_FAILURE
++#define EX_OK		EXIT_FAILURE
++
+ #include "fs_unix.c"
+ #include "ftl_unix.c"
+ #include "nl_unix.c"
+@@ -66,3 +76,43 @@ struct direct *Readdir (DIR *dirp)
+   dc.d_reclen = sizeof (dc);
+   return &dc;
+ }
++
++int ustat(dev_t dev, struct ustat *us)
++{
++	return -1;
++}
++
++#undef scandir
++
++int Scandir (char *dirname,struct direct ***namelist,select_t select,
++	     compar_t compar)
++{
++  struct direct *p,*d,**names;
++  int nitems;
++  long nlmax;
++  DIR *dirp = opendir (dirname);/* open directory and get status poop */
++  if ((!dirp)) return -1;
++  nlmax = 100;	/* guesstimate at number of files */
++  names = (struct direct **) fs_get (nlmax * sizeof (struct direct *));
++  nitems = 0;			/* initially none found */
++  while (d = Readdir (dirp)) {	/* read directory item */
++				/* matches select criterion? */
++    if (select && !(*select) (d)) continue;
++				/* get size of direct record for this file */
++    p = (struct direct *) fs_get (DIR_SIZE (d));
++    p->d_ino = d->d_ino;	/* copy the poop */
++    strcpy (p->d_name,d->d_name);
++    if (++nitems >= nlmax) {	/* if out of space, try bigger guesstimate */
++      void *s = (void *) names;	/* stupid language */
++      nlmax *= 2;		/* double it */
++      fs_resize ((void **) &s,nlmax * sizeof (struct direct *));
++      names = (struct direct **) s;
++    }
++    names[nitems - 1] = p;	/* store this file there */
++  }
++  closedir (dirp);		/* done with directory */
++				/* sort if necessary */
++  if (nitems && compar) qsort (names,nitems,sizeof (struct direct *),compar);
++  *namelist = names;		/* return directory */
++  return nitems;		/* and size */
++}

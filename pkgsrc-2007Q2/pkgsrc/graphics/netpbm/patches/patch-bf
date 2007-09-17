@@ -1,0 +1,14 @@
+$NetBSD$
+
+--- converter/ppm/picttoppm.c.orig	2006-06-17 15:11:56.000000000 -0400
++++ converter/ppm/picttoppm.c
+@@ -22,7 +22,9 @@
+  *
+  */
+ 
++#ifndef __QNXNTO__
+ #define _XOPEN_SOURCE
++#endif
+ 
+ #include <unistd.h>
+ #include <stdio.h>
