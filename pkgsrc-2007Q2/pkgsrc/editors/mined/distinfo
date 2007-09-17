@@ -1,0 +1,8 @@
+$NetBSD: distinfo,v 1.7 2007/06/21 13:48:25 tnn Exp $
+
+SHA1 (mined-2000.13.2.tar.gz) = 603ba089b4499ffede7b3397c94ae1fd655438e9
+RMD160 (mined-2000.13.2.tar.gz) = a0a6f70fd48551c071d47fe18d0e395f5b74ccbc
+Size (mined-2000.13.2.tar.gz) = 3915266 bytes
+SHA1 (patch-ac) = 143b4589cac371b18c8e1670202bcd8b1f253cba
+SHA1 (patch-ad) = ad901718e77a44fb1bd3f2165b4b1e6c4994a884
+SHA1 (patch-ae) = d842d09a248557dda9a5976b40e0adaae631fcb8

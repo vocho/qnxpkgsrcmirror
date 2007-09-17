@@ -1,0 +1,20 @@
+$NetBSD: patch-dc,v 1.1 2006/11/03 07:45:19 rillig Exp $
+
+--- converter/other/cameratopam/camera.c.orig	2007-01-19 22:39:49.000000000 -0500
++++ converter/other/cameratopam/camera.c
+@@ -1,7 +1,15 @@
++#ifndef __QNXNTO__
+ #define _BSD_SOURCE
++#endif
+     /* Make sure strcasecmp is in string.h */
++#ifdef __osf__
++#define _OSF_SOURCE
++#else
++#ifndef __QNXNTO__
+ #define _XOPEN_SOURCE
++#endif
+     /* Make sure putenv is in stdlib.h */
++#endif /* __osf__ */
+ #define __EXTENSIONS__
+ 
+ #include <stdlib.h>

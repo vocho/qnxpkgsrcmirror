@@ -1,0 +1,26 @@
+$NetBSD$
+
+--- configure.orig	2005-07-11 16:11:57.000000000 -0400
++++ configure
+@@ -79,9 +79,6 @@ if test "$gcc" -eq 1 && ($cc -c $cflags 
+   Linux | linux | GNU | GNU/*) LDSHARED=${LDSHARED-"$cc -shared -Wl,-soname,libz.so.1"};;
+   CYGWIN* | Cygwin* | cygwin* | OS/2* )
+              EXE='.exe';;
+-  QNX*)  # This is for QNX6. I suppose that the QNX rule below is for QNX2,QNX4
+-         # (alain.bonnefoy@icbt.com)
+-                 LDSHARED=${LDSHARED-"$cc -shared -Wl,-hlibz.so.1"};;
+   HP-UX*)
+          LDSHARED=${LDSHARED-"$cc -shared $SFLAGS"}
+          case `(uname -m || echo unknown) 2>/dev/null` in
+@@ -124,11 +121,6 @@ else
+   OSF1*)     SFLAGS=${CFLAGS-"-O -std1"}
+              CFLAGS=${CFLAGS-"-O -std1"}
+              LDSHARED=${LDSHARED-"cc -shared"};;
+-  QNX*)      SFLAGS=${CFLAGS-"-4 -O"}
+-             CFLAGS=${CFLAGS-"-4 -O"}
+-             LDSHARED=${LDSHARED-"cc"}
+-             RANLIB=${RANLIB-"true"}
+-             AR="cc -A";;
+   SCO_SV\ 3.2*) SFLAGS=${CFLAGS-"-O3 -dy -KPIC "}
+              CFLAGS=${CFLAGS-"-O3"}
+              LDSHARED=${LDSHARED-"cc -dy -KPIC -G"};;

@@ -1,0 +1,36 @@
+$NetBSD: patch-ba,v 1.6 2007/04/20 14:44:11 hira Exp $
+
+--- config_office/configure.orig	2007-01-19 22:01:19.000000000 +0900
++++ config_office/configure	2007-04-20 06:56:17.000000000 +0900
+@@ -2975,11 +2975,11 @@
+ 		test_cups=no
+ 		_os=OSF1
+ 		;;
+-	netbsd)
++	*netbsd*)
+ 		test_gtk=yes
+ 		build_cairo=yes
+ 		test_kde=yes
+-		test_cups=no
++		test_cups=yes
+ 		PTHREAD_CFLAGS="-pthread"
+ 		PTHREAD_LIBS="-pthread -lpthread"
+ 		_os=NetBSD
+@@ -8261,7 +8261,7 @@
+          echo "JAVA_HOME was not explicitly informed with --with-jdk-home. the configure script" >> warn
+          echo "attempted to find JAVA_HOME automatically, but apparently it failed" >> warn
+          echo "in case JAVA_HOME is incorrectly set, some projects with not be built correctly" >> warn
+-         if test "$JDK" == "gcj"; then
++         if test "$JDK" = "gcj"; then
+              echo "e.g. install java-1.4.2-gcj-compat-devel and use --with-jdk-home=/usr/lib/jvm/java-1.4.2-gcj" >> warn
+          fi
+       fi
+@@ -21383,7 +21383,7 @@
+     fi
+ 
+         KDE_CFLAGS="-I$qt_incdir -I$kde_incdir -DQT_CLEAN_NAMESPACE -DQT_THREAD_SUPPORT"
+-    KDE_LIBS="-L$kde_libdir -L$qt_libdir -lkdeui -lkdecore -lqt-mt"
++    KDE_LIBS="-L$kde_libdir -Wl,-R$kde_libdir -L$qt_libdir -Wl,-R$qt_libdir -lkdeui -lkdecore -lqt-mt"
+ fi
+ 
+ 

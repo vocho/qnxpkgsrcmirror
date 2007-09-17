@@ -1,0 +1,12 @@
+$NetBSD$
+
+--- keyserver/gpgkeys_curl.c.orig	2006-09-26 09:07:53.000000000 -0400
++++ keyserver/gpgkeys_curl.c
+@@ -33,6 +33,7 @@
+ #include <config.h>
+ #include <stdio.h>
+ #include <string.h>
++#include <strings.h>
+ #include <stdlib.h>
+ #include <errno.h>
+ #include <unistd.h>

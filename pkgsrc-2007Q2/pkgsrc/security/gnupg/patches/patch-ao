@@ -1,0 +1,12 @@
+$NetBSD$
+
+--- util/srv.c.orig	2006-02-12 04:07:05.000000000 -0500
++++ util/srv.c
+@@ -26,6 +26,7 @@
+ #else
+ #include <netinet/in.h>
+ #include <arpa/nameser.h>
++#include <arpa/inet.h>
+ #include <resolv.h>
+ #endif
+ #include <unistd.h>

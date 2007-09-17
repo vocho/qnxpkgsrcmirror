@@ -1,0 +1,62 @@
+@comment $NetBSD: PLIST,v 1.15 2007/04/11 17:50:42 drochner Exp $
+lib/gtk-2.0/2.10.0/engines/libclearlooks.la
+lib/gtk-2.0/2.10.0/engines/libcrux-engine.la
+lib/gtk-2.0/2.10.0/engines/libglide.la
+lib/gtk-2.0/2.10.0/engines/libhcengine.la
+lib/gtk-2.0/2.10.0/engines/libindustrial.la
+lib/gtk-2.0/2.10.0/engines/libmist.la
+lib/gtk-2.0/2.10.0/engines/libredmond95.la
+lib/gtk-2.0/2.10.0/engines/libsmooth.la
+lib/gtk-2.0/2.10.0/engines/libthinice.la
+lib/pkgconfig/gtk-engines-2.pc
+share/gtk-engines/clearlooks.xml
+share/gtk-engines/crux.xml
+share/gtk-engines/glide.xml
+share/gtk-engines/hc.xml
+share/gtk-engines/industrial.xml
+share/gtk-engines/mist.xml
+share/gtk-engines/redmond.xml
+share/gtk-engines/smooth.xml
+share/gtk-engines/thinice.xml
+share/locale/ar/LC_MESSAGES/gtk-engines.mo
+share/locale/bg/LC_MESSAGES/gtk-engines.mo
+share/locale/ca/LC_MESSAGES/gtk-engines.mo
+share/locale/da/LC_MESSAGES/gtk-engines.mo
+share/locale/de/LC_MESSAGES/gtk-engines.mo
+share/locale/dz/LC_MESSAGES/gtk-engines.mo
+share/locale/en_GB/LC_MESSAGES/gtk-engines.mo
+share/locale/es/LC_MESSAGES/gtk-engines.mo
+share/locale/et/LC_MESSAGES/gtk-engines.mo
+share/locale/fr/LC_MESSAGES/gtk-engines.mo
+share/locale/gl/LC_MESSAGES/gtk-engines.mo
+share/locale/gu/LC_MESSAGES/gtk-engines.mo
+share/locale/ko/LC_MESSAGES/gtk-engines.mo
+share/locale/mk/LC_MESSAGES/gtk-engines.mo
+share/locale/nl/LC_MESSAGES/gtk-engines.mo
+share/locale/pa/LC_MESSAGES/gtk-engines.mo
+share/locale/pt/LC_MESSAGES/gtk-engines.mo
+share/locale/pt_BR/LC_MESSAGES/gtk-engines.mo
+share/locale/sv/LC_MESSAGES/gtk-engines.mo
+share/locale/uk/LC_MESSAGES/gtk-engines.mo
+share/themes/Clearlooks/gtk-2.0/gtkrc
+share/themes/Crux/gtk-2.0/gtkrc
+share/themes/Industrial/gtk-2.0/gtkrc
+share/themes/Mist/gtk-2.0/gtkrc
+share/themes/Redmond/gtk-2.0/gtkrc
+share/themes/Redmond/gtk/gtkrc
+share/themes/ThinIce/gtk-2.0/gtkrc
+@dirrm share/themes/ThinIce/gtk-2.0
+@comment in theme-dirs: @dirrm share/themes/ThinIce
+@dirrm share/themes/Redmond/gtk-2.0
+@dirrm share/themes/Redmond/gtk
+@comment in theme-dirs: @dirrm share/themes/Redmond
+@dirrm share/themes/Mist/gtk-2.0
+@comment in theme-dirs: @dirrm share/themes/Mist
+@dirrm share/themes/Industrial/gtk-2.0
+@comment in theme-dirs: @dirrm share/themes/Industrial
+@dirrm share/themes/Crux/gtk-2.0
+@comment in theme-dirs: @dirrm share/themes/Crux
+@dirrm share/themes/Clearlooks/gtk-2.0
+@comment in theme-dirs: @dirrm share/themes/Clearlooks
+@dirrm share/gtk-engines
+@comment in gtk2: @dirrm lib/gtk-2.0/2.10.0/engines
