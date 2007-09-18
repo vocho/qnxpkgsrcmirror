@@ -1,0 +1,10 @@
+# $NetBSD: Makefile.common,v 1.2 2007/06/23 04:31:55 obache Exp $
+#
+
+MECAB_VERSION=	0.96
+
+CATEGORIES=	japanese textproc
+MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=mecab/}
+
+MAINTAINER=	obache@NetBSD.org
+HOMEPAGE=	http://mecab.sourceforge.net/

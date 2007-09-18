@@ -1,0 +1,20 @@
+$NetBSD$
+
+--- auth-shadow.c.orig	2007-07-04 18:26:06.000000000 -0400
++++ auth-shadow.c
+@@ -54,6 +54,7 @@ extern Buffer loginmsg;
+ int
+ auth_shadow_acctexpired(struct spwd *spw)
+ {
++#ifndef __QNXNTO__
+ 	time_t today;
+ 	int daysleft;
+ 	char buf[256];
+@@ -75,6 +76,7 @@ auth_shadow_acctexpired(struct spwd *spw
+ 		    daysleft == 1 ? "" : "s");
+ 		buffer_append(&loginmsg, buf, strlen(buf));
+ 	}
++#endif
+ 
+ 	return 0;
+ }

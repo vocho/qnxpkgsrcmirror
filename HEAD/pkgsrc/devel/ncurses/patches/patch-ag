@@ -1,0 +1,14 @@
+$NetBSD$
+
+--- c++/cursesf.h.orig	2007-05-01 21:43:03.000000000 -0400
++++ c++/cursesf.h
+@@ -38,9 +38,7 @@
+ 
+ #include <cursesp.h>
+ 
+-#ifndef __EXT_QNX
+ #include <string.h>
+-#endif
+ 
+ extern "C" {
+ #  include <form.h>

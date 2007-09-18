@@ -1,0 +1,14 @@
+$NetBSD$
+
+--- lib/libpam.c.orig	2006-04-22 21:50:53.000000000 -0400
++++ lib/libpam.c
+@@ -10,7 +10,9 @@
+ */
+ #define _FILE_OFFSET_BITS 64
+ #define _LARGE_FILES  
++#ifndef __QNXNTO__
+ #define _XOPEN_SOURCE
++#endif
+ 
+ #include <string.h>
+ #include <limits.h>

@@ -1,0 +1,58 @@
+$NetBSD: patch-ab,v 1.6 2007/07/06 19:13:13 drochner Exp $
+
+--- configure.orig	2007-06-18 18:54:07.000000000 +0200
++++ configure
+@@ -29520,7 +29520,7 @@ rm -f conftest.mmap
+ 
+ 
+ 
+-if test "x$ac_cv_func_mmap_fixed_mapped" == "xyes"; then
++if test "x$ac_cv_func_mmap_fixed_mapped" = "xyes"; then
+   GST_HAVE_MMAP_TRUE=
+   GST_HAVE_MMAP_FALSE='#'
+ else
+@@ -31352,7 +31352,7 @@ rm -f core conftest.err conftest.$ac_obj
+ echo "${ECHO_T}$flag_ok" >&6; }
+ 
+ 
+-        if test "x$ERROR_CFLAGS" == "x"
++        if test "x$ERROR_CFLAGS" = "x"
+     then
+ 
+   { echo "$as_me:$LINENO: checking to see if compiler understands -errwarn=%all,no%E_EMPTY_DECLARATION,no%E_STATEMENT_NOT_REACHED" >&5
+@@ -31415,7 +31415,7 @@ rm -f core conftest.err conftest.$ac_obj
+ echo "${ECHO_T}$flag_ok" >&6; }
+ 
+ 
+-            if test "x$ERROR_CFLAGS" == "x"
++            if test "x$ERROR_CFLAGS" = "x"
+       then
+ 
+   { echo "$as_me:$LINENO: checking to see if compiler understands -errwarn=%all" >&5
+@@ -37189,9 +37189,9 @@ if test x$USE_FLAC = xyes; then
+   HAVE_FLAC=no
+ 
+ 
+-  { echo "$as_me:$LINENO: checking for FLAC__seekable_stream_encoder_new in -lFLAC" >&5
+-echo $ECHO_N "checking for FLAC__seekable_stream_encoder_new in -lFLAC... $ECHO_C" >&6; }
+-if test "${ac_cv_lib_FLAC_FLAC__seekable_stream_encoder_new+set}" = set; then
++  { echo "$as_me:$LINENO: checking for FLAC__stream_encoder_new in -lFLAC" >&5
++echo $ECHO_N "checking for FLAC__stream_encoder_new in -lFLAC... $ECHO_C" >&6; }
++if test "${ac_cv_lib_FLAC_FLAC__stream_encoder_new+set}" = set; then
+   echo $ECHO_N "(cached) $ECHO_C" >&6
+ else
+   ac_check_lib_save_LIBS=$LIBS
+@@ -37209,11 +37209,11 @@ cat >>conftest.$ac_ext <<_ACEOF
+ #ifdef __cplusplus
+ extern "C"
+ #endif
+-char FLAC__seekable_stream_encoder_new ();
++char FLAC__stream_encoder_new ();
+ int
+ main ()
+ {
+-return FLAC__seekable_stream_encoder_new ();
++return FLAC__stream_encoder_new ();
+   ;
+   return 0;
+ }

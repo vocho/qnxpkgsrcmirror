@@ -1,0 +1,26 @@
+$NetBSD$
+
+--- sh.file.c.orig	2006-08-23 11:03:14.000000000 -0400
++++ sh.file.c
+@@ -234,7 +234,11 @@ pushback(const Char *string)
+     (void) ioctl(SHOUT, TCSETAW, (ioctl_t) &tty);
+ # endif /* POSIX */
+     tty_normal = tty;
++#ifndef __QNXNTO__
+     tty.c_lflag &= ~(ECHOKE | ECHO | ECHOE | ECHOK | ECHONL | ECHOPRT | ECHOCTL);
++#else
++    tty.c_lflag &= ~(ECHOKE | ECHO | ECHOE | ECHOK | ECHONL |           ECHOCTL);
++#endif
+ # ifdef POSIX
+     (void) xtcsetattr(SHOUT, TCSANOW, &tty);
+ # else
+@@ -390,7 +394,9 @@ retype(void)
+     (void) ioctl(SHOUT, TCGETA, (ioctl_t) &tty);
+ # endif /* POSIX */
+ 
++#ifndef __QNXNTO__
+     tty.c_lflag |= PENDIN;
++#endif
+ 
+ # ifdef POSIX
+     (void) xtcsetattr(SHOUT, TCSANOW, &tty);

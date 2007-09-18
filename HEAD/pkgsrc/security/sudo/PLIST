@@ -1,0 +1,15 @@
+@comment $NetBSD: PLIST,v 1.1 2007/07/04 20:37:50 jlam Exp $
+bin/sudo
+bin/sudoedit
+libexec/sudo_noexec.la
+man/man5/sudoers.5
+man/man8/sudo.8
+man/man8/sudoedit.8
+man/man8/visudo.8
+sbin/visudo
+share/doc/sudo/README
+share/doc/sudo/README.LDAP
+share/doc/sudo/UPGRADE
+share/examples/sudo/sudoers
+@dirrm share/examples/sudo
+@dirrm share/doc/sudo
