@@ -1,0 +1,14 @@
+$NetBSD$
+
+--- generator/ppmforge.c.orig	2005-12-22 04:29:37.000000000 -0500
++++ generator/ppmforge.c
+@@ -31,7 +31,9 @@
+ 
+ */
+ 
++#ifndef __QNXNTO__
+ #define _XOPEN_SOURCE   /* get M_PI in math.h */
++#endif
+ 
+ #include <math.h>
+ #include <assert.h>

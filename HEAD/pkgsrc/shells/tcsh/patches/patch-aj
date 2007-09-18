@@ -1,0 +1,18 @@
+$NetBSD$
+
+--- tc.os.h.orig	2006-02-13 19:52:52.000000000 -0500
++++ tc.os.h
+@@ -88,6 +88,13 @@
+ # endif /* POSIX */
+ #endif /* OREO */
+ 
++#ifdef __QNXNTO__
++#include <sys/resource.h>
++#include <fcntl.h>
++#undef O_TEXT
++#undef O_BINARY
++#endif
++
+ #ifdef convex
+ # include <sys/dmon.h>
+ #endif /* convex */

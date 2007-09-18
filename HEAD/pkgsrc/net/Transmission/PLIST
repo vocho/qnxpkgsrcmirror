@@ -1,0 +1,26 @@
+@comment $NetBSD: PLIST,v 1.5 2007/08/24 18:42:53 tnn Exp $
+bin/transmission-daemon
+${GTK}bin/transmission-gtk
+bin/transmission-proxy
+bin/transmission-remote
+bin/transmissioncli
+man/man1/transmission-daemon.1
+${GTK}man/man1/transmission-gtk.1
+man/man1/transmission-proxy.1
+man/man1/transmission-remote.1
+man/man1/transmissioncli.1
+${GTK}share/applications/transmission-gtk.desktop
+${GTK}share/locale/bg/LC_MESSAGES/transmission-gtk.mo
+${GTK}share/locale/es/LC_MESSAGES/transmission-gtk.mo
+${GTK}share/locale/fi/LC_MESSAGES/transmission-gtk.mo
+${GTK}share/locale/fr/LC_MESSAGES/transmission-gtk.mo
+${GTK}share/locale/it/LC_MESSAGES/transmission-gtk.mo
+${GTK}share/locale/nl/LC_MESSAGES/transmission-gtk.mo
+${GTK}share/locale/pl/LC_MESSAGES/transmission-gtk.mo
+${GTK}share/locale/pt/LC_MESSAGES/transmission-gtk.mo
+${GTK}share/locale/pt_BR/LC_MESSAGES/transmission-gtk.mo
+${GTK}share/locale/ro/LC_MESSAGES/transmission-gtk.mo
+${GTK}share/locale/ru/LC_MESSAGES/transmission-gtk.mo
+${GTK}share/locale/sk/LC_MESSAGES/transmission-gtk.mo
+${GTK}share/locale/sv/LC_MESSAGES/transmission-gtk.mo
+${GTK}share/pixmaps/transmission.png

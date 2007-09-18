@@ -1,0 +1,31 @@
+$NetBSD: patch-aa,v 1.5 2007/05/06 17:47:35 jdolecek Exp $
+
+--- Makefile.orig	2007-04-20 21:47:49.000000000 +0200
++++ Makefile	2007-05-06 19:17:16.000000000 +0200
+@@ -213,7 +213,7 @@
+ ifndef WIN32
+ 	ifndef MORPHOS
+ 		ifndef OSX
+-			LDFLAGS+=-lpthread
++			LDFLAGS+=${PTHREAD_LDFLAGS} ${PTHREAD_LIBS}
+ 		endif
+ 	endif
+ endif
+@@ -585,17 +585,6 @@
+ 		CDEFS += -DWITH_COCOA
+ 		LIBS += -F/System/Library/Frameworks -framework Cocoa -framework Carbon -framework AudioUnit
+ 	endif
+-
+-	# OSX path setup
+-	ifndef SECOND_DATA_PATH
+-		SECOND_DATA_PATH:="$(OSXAPP)/Contents/Data/"
+-	endif
+-
+-	ifndef CUSTOM_LANG_DIR
+-		ifndef DEDICATED
+-		CUSTOM_LANG_DIR:="$(OSXAPP)/Contents/Lang/"
+-		endif
+-	endif
+ endif
+ 
+ ifdef MIDI

@@ -1,0 +1,15 @@
+$NetBSD$
+
+--- c++/etip.h.in.orig	2005-08-06 15:55:57.000000000 -0400
++++ c++/etip.h.in
+@@ -336,8 +336,10 @@ public:
+ 
+ #if !((defined(__GNUG__) && defined(__EXCEPTIONS)) || defined(__SUNPRO_CC))
+ #  include <iostream.h>
++#ifndef __QNXNTO__
+    extern "C" void exit(int);
+ #endif
++#endif
+ 
+ inline void THROW(const NCursesException *e) {
+ #if defined(__GNUG__) && defined(__EXCEPTIONS)

@@ -1,0 +1,13 @@
+$NetBSD$
+
+--- lib/sh/getcwd.c.orig	2004-07-21 17:15:19.000000000 -0400
++++ lib/sh/getcwd.c
+@@ -180,7 +180,7 @@ getcwd (buf, size)
+ 	      name[dotlist + dotsize - dotp] = '/';
+ 	      memcpy (&name[dotlist + dotsize - dotp + 1],
+ 		      d->d_name, namlen + 1);
+-	      if (lstat (name, &st) < 0)
++	      if (stat (name, &st) < 0)
+ 		{
+ #if 0
+ 		  int save = errno;

@@ -1,0 +1,10 @@
+#!/bin/sh
+#
+# $Id: vipec.sh.in 147690 2007-01-03 15:01:08Z seanb $
+#
+
+VIPECHOME=@prefix@/vipec
+export VIPECHOME
+
+${VIPECHOME}/vipec $*
+

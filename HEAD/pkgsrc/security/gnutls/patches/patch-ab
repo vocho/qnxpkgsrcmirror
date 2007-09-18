@@ -1,0 +1,13 @@
+$NetBSD: patch-ab,v 1.7 2007/09/05 21:51:22 drochner Exp $
+
+--- doc/Makefile.in.orig	2007-05-26 17:45:35.000000000 +0200
++++ doc/Makefile.in
+@@ -603,7 +603,7 @@ gnutls.dvi: gnutls.texi $(srcdir)/versio
+ gnutls.pdf: gnutls.texi $(srcdir)/version.texi $(gnutls_TEXINFOS)
+ gnutls.html: gnutls.texi $(srcdir)/version.texi $(gnutls_TEXINFOS)
+ $(srcdir)/version.texi:  $(srcdir)/stamp-vti
+-$(srcdir)/stamp-vti: gnutls.texi $(top_srcdir)/configure
++$(srcdir)/stamp-vti: gnutls.texi
+ 	@(dir=.; test -f ./gnutls.texi || dir=$(srcdir); \
+ 	set `$(SHELL) $(top_srcdir)/build-aux/mdate-sh $$dir/gnutls.texi`; \
+ 	echo "@set UPDATED $$1 $$2 $$3"; \

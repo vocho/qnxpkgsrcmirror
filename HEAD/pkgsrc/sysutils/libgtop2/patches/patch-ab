@@ -1,0 +1,94 @@
+$NetBSD: patch-ab,v 1.8 2007/06/25 21:18:52 joerg Exp $
+
+--- sysdeps/freebsd/proctime.c.orig	2006-04-04 20:01:43.000000000 +0000
++++ sysdeps/freebsd/proctime.c
+@@ -32,6 +32,10 @@
+ #include <osreldate.h>
+ #endif
+ 
++#ifdef __NetBSD__
++#include <sys/resourcevar.h>
++#endif
++
+ static const unsigned long _glibtop_sysdeps_proc_time =
+ (1L << GLIBTOP_PROC_TIME_RTIME) + (1L << GLIBTOP_PROC_TIME_FREQUENCY);
+ 
+@@ -58,7 +62,7 @@ glibtop_init_proc_time_p (glibtop *serve
+  * system, and interrupt time usage.
+  */
+ 
+-#ifndef __FreeBSD__
++#if !defined(__FreeBSD__) && !defined(__DragonFly__)
+ 
+ #ifndef __FreeBSD__
+ static void
+@@ -125,7 +129,9 @@ glibtop_get_proc_time_p (glibtop *server
+ #else
+ 	struct user *u_addr = (struct user *)USRSTACK;
+ #endif
++#if !defined(__DragonFly__)
+ 	struct pstats pstats;
++#endif
+ 	int count;
+ 
+ 	glibtop_init_p (server, (1L << GLIBTOP_SYSDEPS_PROC_TIME), 0);
+@@ -142,11 +148,15 @@ glibtop_get_proc_time_p (glibtop *server
+ 
+ 	/* Get the process information */
+ 	pinfo = kvm_getprocs (server->machine.kd, KERN_PROC_PID, pid, &count);
+-	if ((pinfo == NULL) || (count != 1))
+-		glibtop_error_io_r (server, "kvm_getprocs (%d)", pid);
++	if ((pinfo == NULL) || (count != 1)) {
++		glibtop_warn_io_r (server, "kvm_getprocs (%d)", pid);
++		return;
++	}
+ 
+ #if defined(__FreeBSD__) && (__FreeBSD_version >= 500013)
+ 	buf->rtime = pinfo [0].ki_runtime;
++#elif defined(__DragonFly__)
++	buf->rtime = pinfo [0].kp_eproc.e_uticks / 100000;
+ #elif (defined __FreeBSD__) && (__FreeBSD_version <= 500013)
+ 	buf->rtime = pinfo [0].kp_proc.p_runtime;
+ #else
+@@ -189,16 +199,38 @@ glibtop_get_proc_time_p (glibtop *server
+        if ((pinfo [0].ki_flag & P_INMEM)) {
+ #endif
+            buf->utime = pinfo [0].ki_runtime;
+-           buf->stime = 0; /* XXX */
++		   buf->stime = tv2sec (pinfo [0].ki_rusage.ru_stime);
+            buf->cutime = tv2sec (pinfo [0].ki_childtime);
+-           buf->cstime = 0; /* XXX */
++#if __FreeBSD_version >= 600000
++		   buf->cstime = tv2sec (pinfo [0].ki_rusage_ch.ru_stime);
++#else
++		   buf->cstime = 0;
++#endif
+            buf->start_time = tv2sec (pinfo [0].ki_start);
+            buf->flags = _glibtop_sysdeps_proc_time_user;
+        }
+ 
+ 	glibtop_suid_enter (server);
+ 
+-#elif (__FreeBSD_version <= 500013)
++#elif defined(__DragonFly__)
++
++        if ((pinfo [0].kp_proc.p_flag & P_SWAPPEDOUT) == 0)
++		{
++
++                       buf->utime = pinfo[0].kp_eproc.e_uticks / 1000000;
++                       buf->stime = pinfo[0].kp_eproc.e_sticks / 1000000;
++#if __DragonFly_version >= 180000
++                       buf->cutime = 0; /* XXX no idea about this */
++                       buf->cstime = 0;
++#else
++                       buf->cutime = tv2sec (pinfo[0].kp_eproc.e_stats.p_cru.ru_utime);
++                       buf->cstime = tv2sec (pinfo[0].kp_eproc.e_stats.p_cru.ru_stime);
++#endif
++                       buf->start_time = tv2sec (pinfo[0].kp_thread.td_start);
++                       buf->flags = _glibtop_sysdeps_proc_time_user;
++                       glibtop_suid_leave (server);
++		}
++#elif defined(__FreeBSD__) && (__FreeBSD_version <= 500013)
+ 
+         if ((pinfo [0].kp_proc.p_flag & P_INMEM) &&
+             kvm_uread (server->machine.kd, &(pinfo [0]).kp_proc,

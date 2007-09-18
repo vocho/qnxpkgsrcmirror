@@ -1,0 +1,5 @@
+$NetBSD: distinfo,v 1.11 2007/07/01 08:12:13 adam Exp $
+
+SHA1 (glpk-4.18.tar.gz) = f3ceb53a4e5a79d70bc3c183323930ceef1f7fe2
+RMD160 (glpk-4.18.tar.gz) = 0a4812897e3c2ce93b09cf4ee015a2a4695d006f
+Size (glpk-4.18.tar.gz) = 1413429 bytes
