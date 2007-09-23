@@ -3,7 +3,7 @@
 /*
  * Missing stuff from OS's
  *
- *	$Id: util.c 147690 2007-01-03 15:01:08Z seanb $
+ *	$Id: util.c,v 1.1 2005/10/31 21:34:25 reed Exp $
  */
 
 #include "make.h"

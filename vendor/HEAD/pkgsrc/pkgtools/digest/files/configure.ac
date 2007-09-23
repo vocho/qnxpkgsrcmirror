@@ -1,4 +1,4 @@
-dnl $Id: configure.ac 153255 2007-09-09 17:26:59Z seanb $
+dnl $Id: configure.ac,v 1.13 2007/09/21 18:44:36 joerg Exp $
 dnl Process this file with autoconf to produce a configure script.
 AC_PREREQ(2.57)
 AC_INIT([nbsd-digest],[20070803],[agc@netbsd.org])
@@ -40,18 +40,20 @@ AC_FUNC_VPRINTF
 AC_CHECK_FUNCS([bcopy bzero memset memcpy setlocale])
 #
 AH_BOTTOM([
-
-#ifndef HAVE___ATTRIBUTE__
-# define __attribute__(x)
-#endif
-
 #ifdef HAVE_SYS_CDEFS_H
 #include <sys/cdefs.h>
 #endif
 
-#ifndef __IDSTRING
+#if defined(__GNUC__) && !defined(__IDSTRING)
+#if (__GNUC__ == 2 && __GNUC_MINOR >= 7) || (__GNUC__ > 2)
 # define __IDSTRING(name,string) \
        static const char name[] __attribute__((__unused__)) = string
+#endif
+#endif
+
+#ifndef __IDSTRING
+# define __IDSTRING(name,string) \
+       static const char name[] = string
 #endif
 
 #ifndef  __RCSID
@@ -60,14 +62,6 @@ AH_BOTTOM([
 
 #ifndef __COPYRIGHT
 # define __COPYRIGHT(_s) __IDSTRING(copyright,_s)
-#endif
-
-#ifndef __P
-# if defined(__STDC__) || defined(__cplusplus)
-#  define __P(protos)     protos          /* full-blown ANSI C */
-# else
-#  define __P(protos)     ()              /* traditional C preprocessor */
-# endif
 #endif
 
 #ifndef __CONCAT

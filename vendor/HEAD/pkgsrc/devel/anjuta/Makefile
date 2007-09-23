@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.54 2007/06/08 12:25:00 wiz Exp $
+# $NetBSD: Makefile,v 1.57 2007/09/21 13:03:33 wiz Exp $
 
 DISTNAME=	anjuta-2.0.2
-PKGREVISION=	5
+PKGREVISION=	7
 CATEGORIES=	devel
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=anjuta/}
 
@@ -13,7 +13,7 @@ DEPENDS+=	autogen-[0-9]*:../../devel/autogen
 DEPENDS+=	autoconf>=2.59:../../devel/autoconf
 DEPENDS+=	automake>=1.8.2:../../devel/automake
 DEPENDS+=	glade>=2.6.0:../../devel/glade
-DEPENDS+=	gnome2-terminal>=2.4.2:../../x11/gnome2-terminal
+DEPENDS+=	gnome-terminal>=2.4.2:../../x11/gnome-terminal
 DEPENDS+=	libtool>=1.5.2:../../devel/libtool
 DEPENDS+=	yelp>=2.4.2:../../misc/yelp
 

@@ -1,4 +1,4 @@
-# $NetBSD: replace.mk,v 1.18 2007/08/13 14:18:23 gdt Exp $
+# $NetBSD: replace.mk,v 1.20 2007/09/22 15:19:47 gdt Exp $
 #
 
 # _flavor-replace:

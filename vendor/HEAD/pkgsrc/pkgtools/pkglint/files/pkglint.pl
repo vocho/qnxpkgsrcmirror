@@ -1,5 +1,5 @@
 #! @PERL@
-# $NetBSD: pkglint.pl,v 1.717 2007/09/04 09:44:07 rillig Exp $
+# $NetBSD: pkglint.pl,v 1.720 2007/09/20 10:38:57 rillig Exp $
 #
 
 # pkglint - static analyzer and checker for pkgsrc packages
@@ -1831,11 +1831,10 @@ my $effective_pkgname;		# PKGNAME or DISTNAME from the package Makefile
 my $effective_pkgbase;		# The effective PKGNAME without the version
 my $effective_pkgversion;	# The version part of the effective PKGNAME
 my $effective_pkgname_line;	# The origin of the three effective_* values
-my $hack_php_patches;		# Ignore non-existing patches in distinfo
 my $seen_bsd_prefs_mk;		# Has bsd.prefs.mk already been included?
 
-my $pkgctx_vardef;		# variable name => line of definition
-my $pkgctx_varuse;		# variable name => Boolean
+my $pkgctx_vardef;		# { varname => line }
+my $pkgctx_varuse;		# { varname => line }
 my $pkgctx_bl3;			# buildlink3.mk name => line of inclusion
 my $seen_Makefile_common;	# Does the package have any .includes?
 
@@ -1845,6 +1844,8 @@ my $mkctx_indentations;		# Indentation depth of preprocessing directives
 my $mkctx_target;		# Current make(1) target
 my $mkctx_vardef;		# { varname => line } for all variables that
 				# are defined in the current file
+my $mkctx_varuse;		# { varname => line } for all variables
+				# that are used in the current file
 my $mkctx_build_defs;		# Set of variables that are registered in
 				# BUILD_DEFS, to assure that all user-defined
 				# variables are added to it.
@@ -2838,6 +2839,7 @@ sub checkperms($) {
 sub resolve_relative_path($$) {
 	my ($relpath, $adjust_depth) = @_;
 
+	my $arg = $relpath;
 	$relpath =~ s,\$\{PKGSRCDIR\},$cur_pkgsrcdir,;
 	$relpath =~ s,\$\{\.CURDIR\},.,;
 	$relpath =~ s,\$\{\.PARSEDIR\},.,;
@@ -2851,6 +2853,7 @@ sub resolve_relative_path($$) {
 		$relpath =~ s,\$\{PKGDIR\},$pkgdir,g;
 	}
 
+	$opt_debug_misc and log_debug(NO_FILE, NO_LINES, "resolve_relative_path: $arg => $relpath");
 	return $relpath;
 }
 
@@ -2988,6 +2991,51 @@ sub varname_param($) {
 	return ($varname =~ qr"^.*?\.(.*)$") ? $2 : undef;
 }
 
+sub use_var($$) {
+	my ($line, $varname) = @_;
+	my $varcanon = varname_canon($varname);
+
+	if (defined($mkctx_varuse)) {
+		$mkctx_varuse->{$varname} = $line;
+		$mkctx_varuse->{$varcanon} = $line;
+	}
+
+	if (defined($pkgctx_varuse)) {
+		$pkgctx_varuse->{$varname} = $line;
+		$pkgctx_varuse->{$varcanon} = $line;
+	}
+}
+
+sub var_is_used($) {
+	my ($varname) = @_;
+	my $varcanon = varname_canon($varname);
+
+	if (defined($mkctx_varuse)) {
+		return $mkctx_varuse->{$varname} if exists($mkctx_varuse->{$varname});
+		return $mkctx_varuse->{$varcanon} if exists($mkctx_varuse->{$varcanon});
+	}
+	if (defined($pkgctx_varuse)) {
+		return $pkgctx_varuse->{$varname} if exists($pkgctx_varuse->{$varname});
+		return $pkgctx_varuse->{$varcanon} if exists($pkgctx_varuse->{$varcanon});
+	}
+	return false;
+}
+
+sub var_is_defined($) {
+	my ($varname) = @_;
+	my $varcanon = varname_canon($varname);
+
+	if (defined($mkctx_vardef)) {
+		return $mkctx_vardef->{$varname} if exists($mkctx_vardef->{$varname});
+		return $mkctx_vardef->{$varcanon} if exists($mkctx_vardef->{$varcanon});
+	}
+	if (defined($pkgctx_vardef)) {
+		return $pkgctx_vardef->{$varname} if exists($pkgctx_vardef->{$varname});
+		return $pkgctx_vardef->{$varcanon} if exists($pkgctx_vardef->{$varcanon});
+	}
+	return false;
+}
+
 sub determine_used_variables($) {
 	my ($lines) = @_;
 	my ($rest);
@@ -2996,8 +3044,7 @@ sub determine_used_variables($) {
 		$rest = $line->text;
 		while ($rest =~ s/(?:\$\{|defined\(|empty\()([0-9+.A-Z_a-z]+)[:})]//) {
 			my ($varname) = ($1);
-			$pkgctx_varuse->{$varname} = $line;
-			$pkgctx_varuse->{varname_canon($varname)} = $line;
+			use_var($line, $varname);
 			$opt_debug_unused and $line->log_debug("Variable ${varname} is used.");
 		}
 	}
@@ -3508,7 +3555,7 @@ sub readmakefile($$$$) {
 sub load_package_Makefile($$$) {
 	my ($fname, $ref_whole, $ref_lines) = @_;
 	my ($subr) = "load_package_Makefile";
-	my ($whole, $lines, $all_lines);
+	my ($whole, $lines, $all_lines, $seen_php_pecl_version);
 
 	$opt_debug_trace and log_debug($fname, NO_LINES, "load_package_Makefile()");
 
@@ -3527,18 +3574,6 @@ sub load_package_Makefile($$$) {
 
 	determine_used_variables($all_lines);
 
-	# HACK
-	if ($whole =~ qr"\nPHPEXT_MK" && $whole !~ qr"\nUSE_PHP_EXT_PATCHES") {
-		$opt_debug_misc and log_debug($fname, NO_LINES, "[hack] USE_PHP_EXT_PATCHES");
-		$whole =~ s,\nPATCHDIR=.*PHPPKGSRCDIR.*,,;
-		$hack_php_patches = true;
-	}
-	# HACK
-	if ($whole =~ qr"\nPECL_VERSION") {
-		$opt_debug_misc and log_debug($fname, NO_LINES, "[hack] PECL_VERSION");
-		$whole =~ s,\nDISTINFO_FILE=.*PHPPKGSRCDIR.*,,;
-	}
-
 	$pkgdir = expand_variable($whole, "PKGDIR");
 	set_default_value(\$pkgdir, ".");
 	$distinfo_file = expand_variable($whole, "DISTINFO_FILE");
@@ -3547,6 +3582,15 @@ sub load_package_Makefile($$$) {
 	set_default_value(\$filesdir, "files");
 	$patchdir = expand_variable($whole, "PATCHDIR");
 	set_default_value(\$patchdir, "patches");
+
+	if (var_is_defined("PHPEXT_MK")) {
+		if (!var_is_defined("USE_PHP_EXT_PATCHES")) {
+			$patchdir = "patches";
+		}
+		if (var_is_defined("PECL_VERSION")) {
+			$distinfo_file = "distinfo";
+		}
+	}
 
 	$opt_debug_misc and log_debug(NO_FILE, NO_LINE_NUMBER, "[${subr}] DISTINFO_FILE=$distinfo_file");
 	$opt_debug_misc and log_debug(NO_FILE, NO_LINE_NUMBER, "[${subr}] FILESDIR=$filesdir");
@@ -3962,7 +4006,7 @@ sub checkline_mk_varuse($$$$) {
 		}
 	}
 
-	if ($context->shellword != VUC_SHELLWORD_UNKNOWN && $needs_quoting != dont_know) {
+	if ($opt_warn_quoting and $context->shellword != VUC_SHELLWORD_UNKNOWN && $needs_quoting != dont_know) {
 
 		# In GNU configure scripts, a few variables need to be
 		# passed through the :M* operator before they reach the
@@ -4748,8 +4792,8 @@ sub checkline_mk_vartype_basic($$$$$$$$) {
 
 	$value_novar = $value;
 	while ($value_novar =~ s/\$\{([^{}]*)\}//g) {
-		my ($pkgctx_varuse) = ($1);
-		if (!$list_context && $pkgctx_varuse =~ qr":Q$") {
+		my ($varuse) = ($1);
+		if (!$list_context && $varuse =~ qr":Q$") {
 			$line->log_warning("The :Q operator should only be used in lists and shell commands.");
 		}
 	}
@@ -5569,13 +5613,11 @@ sub checkline_mk_varassign($$$$$) {
 
 	# If the variable is not used and is untyped, it may be a
 	# spelling mistake.
-	if (defined($pkgctx_varuse)) {
+	if (!var_is_used($varname)) {
 		my $vartypes = get_vartypes_map();
 		my $deprecated = get_deprecated_map();
 
-		if (exists($pkgctx_varuse->{$varname}) || exists($pkgctx_varuse->{$varcanon})) {
-			# Ok
-		} elsif (exists($vartypes->{$varname}) || exists($vartypes->{$varcanon})) {
+		if (exists($vartypes->{$varname}) || exists($vartypes->{$varcanon})) {
 			# Ok
 		} elsif (exists($deprecated->{$varname}) || exists($deprecated->{$varcanon})) {
 			# Ok
@@ -5879,6 +5921,7 @@ sub checklines_mk($) {
 	$mkctx_vardef = {};
 	$mkctx_build_defs = {};
 	$mkctx_tools = {%{get_predefined_tool_names()}};
+	$mkctx_varuse = {};
 
 	foreach my $prefix (qw(pre do post)) {
 		foreach my $action (qw(fetch extract patch tools wrapper configure build test install package clean)) {
@@ -5892,16 +5935,25 @@ sub checklines_mk($) {
 	#
 
 	foreach my $line (@{$lines}) {
-		if ($line->has("is_varassign") && $line->get("varname") eq "BUILD_DEFS") {
+		next unless $line->has("is_varassign");
+		my $varcanon = $line->get("varcanon");
+
+		if ($varcanon eq "BUILD_DEFS" || $varcanon eq "PKG_GROUPS_VARS" || $varcanon eq "PKG_USERS_VARS") {
 			foreach my $varname (split(qr"\s+", $line->get("value"))) {
 				$mkctx_build_defs->{$varname} = true;
 				$opt_debug_misc and $line->log_debug("${varname} is added to BUILD_DEFS.");
 			}
-		}
-		if ($line->has("is_varassign") && $line->get("varname") eq "USE_TOOLS") {
+
+		} elsif ($varcanon eq "USE_TOOLS") {
 			foreach my $tool (split(qr"\s+", $line->get("value"))) {
 				$mkctx_tools->{$tool} = true;
 				$opt_debug_misc and $line->log_debug("${tool} is added to USE_TOOLS.");
+			}
+
+		} elsif ($varcanon eq "SUBST_VARS.*") {
+			foreach my $svar (split(/\s+/, $line->get("value"))) {
+				use_var($svar, varname_canon($svar));
+				$opt_debug_misc and $line->log_debug("varuse $svar");
 			}
 		}
 	}
@@ -6157,6 +6209,7 @@ sub checklines_mk($) {
 	$mkctx_vardef = undef;
 	$mkctx_build_defs = undef;
 	$mkctx_tools = undef;
+	$mkctx_varuse = undef;
 }
 
 sub checklines_buildlink3_inclusion($) {
@@ -6586,7 +6639,7 @@ sub checkfile_distinfo($) {
 			}
 		}
 
-		if ($is_patch && defined($patches_dir)) {
+		if ($is_patch && defined($patches_dir) && !(defined($distinfo_file) && $distinfo_file eq "./../../lang/php5/distinfo")) {
 			my $fname = "${current_dir}/${patches_dir}/${chksum_fname}";
 			if ($di_is_committed && !is_committed($fname)) {
 				$line->log_warning("${patches_dir}/${chksum_fname} is registered in distinfo but not added to CVS.");
@@ -6602,7 +6655,7 @@ sub checkfile_distinfo($) {
 				if ($sum ne $chksum) {
 					$line->log_error("${alg} checksum of ${chksum_fname} differs (expected ${sum}, got ${chksum}). Rerun '".conf_make." makepatchsum'.");
 				}
-			} elsif (!$hack_php_patches) {
+			} elsif (true) {
 				$line->log_warning("${chksum_fname} does not exist.");
 				$line->explain_warning(
 					"All patches that are mentioned in a distinfo file should actually exist.",
@@ -6750,7 +6803,7 @@ sub checkfile_package_Makefile($$$) {
 		my $languages_line = $pkgctx_vardef->{"USE_LANGUAGES"};
 		my $value = $languages_line->get("value");
 
-		if ($languages_line->has("comment") && $languages_line->get("comment") =~ qr"(?:^|\s+)c(?:\s+|$)"i) {
+		if ($languages_line->has("comment") && $languages_line->get("comment") =~ qr"\b(?:c|empty|none)\b"i) {
 			# Don't emit a warning, since the comment
 			# probably contains a statement that C is
 			# really not needed.
@@ -7808,7 +7861,6 @@ sub checkdir_package() {
 	$effective_pkgbase = undef;
 	$effective_pkgversion = undef;
 	$effective_pkgname_line = undef;
-	$hack_php_patches = false;
 	$seen_bsd_prefs_mk = false;
 	$pkgctx_vardef = {%{get_userdefined_variables()}};
 	$pkgctx_varuse = {};
@@ -7878,7 +7930,6 @@ cleanup:
 	$effective_pkgbase = undef;
 	$effective_pkgversion = undef;
 	$effective_pkgname_line = undef;
-	$hack_php_patches = undef;
 	$seen_bsd_prefs_mk = undef;
 	$pkgctx_vardef = undef;
 	$pkgctx_varuse = undef;

@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.58 2007/09/03 16:34:41 drochner Exp $
+# $NetBSD: Makefile,v 1.60 2007/09/21 13:04:28 wiz Exp $
 
 DISTNAME=		liferea-1.2.23
+PKGREVISION=		2
 CATEGORIES=		www
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=liferea/}
 
@@ -16,9 +17,9 @@ USE_PKGLOCALEDIR=	yes
 
 SHLIBTOOL_OVERRIDE=	# empty
 
-GCONF2_SCHEMAS=		liferea.schemas
+GCONF_SCHEMAS=		liferea.schemas
 
-.include "../../devel/GConf2/schemas.mk"
+.include "../../devel/GConf/schemas.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../devel/glib2/buildlink3.mk"
 .include "../../textproc/libxml2/buildlink3.mk"

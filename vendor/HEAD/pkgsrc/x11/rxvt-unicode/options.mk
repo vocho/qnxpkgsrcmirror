@@ -1,5 +1,5 @@
 #
-# $Id: options.mk 147690 2007-01-03 15:01:08Z seanb $
+# $Id: options.mk,v 1.3 2006/12/15 20:33:05 joerg Exp $
 #
 
 PKG_OPTIONS_VAR=        PKG_OPTIONS.rxvt-unicode

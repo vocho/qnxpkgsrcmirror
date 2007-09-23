@@ -6,7 +6,7 @@
  *  Fixed libkvm code.
  *  Tue Jul 15 16:42:22 EST 2003
  *
- * $Id: dfly-metrics.c 147690 2007-01-03 15:01:08Z seanb $
+ * $Id: dfly-metrics.c,v 1.1 2006/04/30 22:28:44 joerg Exp $
  */
 #include <stdio.h>
 #include <stdlib.h>

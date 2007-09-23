@@ -1,5 +1,5 @@
 // -*- C++ -*-
-// $Id: id3lib_strings.h 147690 2007-01-03 15:01:08Z seanb $
+// $Id: id3lib_strings.h,v 1.4 2006/09/23 13:26:24 wiz Exp $
 
 // id3lib: a software library for creating and manipulating id3v1/v2 tags
 // Copyright 1999, 2000  Scott Thomas Haug

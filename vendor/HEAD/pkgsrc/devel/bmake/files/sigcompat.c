@@ -98,7 +98,7 @@
 
 #if defined(LIBC_SCCS) && !defined(lint)
 /*static char *sccsid = "from: @(#)sigcompat.c	5.3 (Berkeley) 2/24/91";*/
-static char *rcsid = "$Id: sigcompat.c 149046 2007-07-02 12:31:29Z seanb $";
+static char *rcsid = "$Id: sigcompat.c,v 1.2 2007/04/15 11:23:07 tnn Exp $";
 #endif				/* LIBC_SCCS and not lint */
 
 #undef signal

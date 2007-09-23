@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.520 2007/09/03 09:35:15 drochner Exp $
+# $NetBSD: Makefile,v 1.526 2007/09/21 13:04:28 wiz Exp $
 #
 
 COMMENT=	Packages to support the X window system
@@ -25,6 +25,7 @@ SUBDIR+=	bitmap
 SUBDIR+=	blt
 SUBDIR+=	bwidget
 SUBDIR+=	compositeproto
+SUBDIR+=	control-center
 SUBDIR+=	damageproto
 SUBDIR+=	desklaunch
 SUBDIR+=	deskmenu
@@ -52,16 +53,15 @@ SUBDIR+=	fvwm-wharf
 SUBDIR+=	gdm
 SUBDIR+=	ggiterm
 SUBDIR+=	glproto
+SUBDIR+=	gnome-applets
 SUBDIR+=	gnome-desktop
 SUBDIR+=	gnome-mag
 SUBDIR+=	gnome-panel
 SUBDIR+=	gnome-screensaver
 SUBDIR+=	gnome-session
+SUBDIR+=	gnome-terminal
 SUBDIR+=	gnome-themes
 SUBDIR+=	gnome-themes-extras
-SUBDIR+=	gnome2-applets
-SUBDIR+=	gnome2-control-center
-SUBDIR+=	gnome2-terminal
 SUBDIR+=	gnopernicus
 SUBDIR+=	gnustep-back
 SUBDIR+=	gnustep-gui
@@ -79,7 +79,6 @@ SUBDIR+=	gtk2-engines-bluecurve
 SUBDIR+=	gtk2-sharp
 SUBDIR+=	gtk2-theme-switch
 SUBDIR+=	gtkglarea
-SUBDIR+=	gtkglarea2
 SUBDIR+=	gtkmm
 SUBDIR+=	gtksourceview
 SUBDIR+=	gtkstep
@@ -166,7 +165,7 @@ SUBDIR+=	kkbswitch
 SUBDIR+=	kmessage
 SUBDIR+=	kterm
 SUBDIR+=	lablgtk
-SUBDIR+=	lablgtk2
+SUBDIR+=	lablgtk1
 SUBDIR+=	labltk
 SUBDIR+=	lbxproxy
 SUBDIR+=	lesstif
@@ -444,6 +443,7 @@ SUBDIR+=	xlockmore
 SUBDIR+=	xlockmore-lite
 SUBDIR+=	xlogo
 SUBDIR+=	xlogout
+SUBDIR+=	xlsclients
 SUBDIR+=	xlupe
 SUBDIR+=	xmag
 SUBDIR+=	xman

@@ -1,5 +1,5 @@
 #!/usr/pkg/bin/perl
-# $Id: adjustkernel 147690 2007-01-03 15:01:08Z seanb $
+# $Id: adjustkernel,v 1.4 2005/02/28 00:48:52 hubertf Exp $
 #
 # Copyright (c) 2004,2005 Hubert Feyrer <hubertf@NetBSD.org>,
 #		          Martin Laubach <mjl@NetBSD.org>

@@ -7,7 +7,7 @@
 --                                 S p e c                                  --
 --                            (Default Version)                             --
 --                                                                          --
---                            $Revision: 147690 $
+--                            $Revision: 1.1 $
 --                                                                          --
 --          Copyright (C) 1992-2000 Free Software Foundation, Inc.          --
 --                                                                          --
