@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.379 2007/09/08 10:26:27 wiz Exp $
+# $NetBSD: Makefile,v 1.385 2007/09/21 00:06:31 wiz Exp $
 #
 
 COMMENT=	Text processing utilities (does not include desktop publishing)
@@ -69,6 +69,7 @@ SUBDIR+=	dtdparse
 SUBDIR+=	eb
 SUBDIR+=	eblook
 SUBDIR+=	emacs-dict-client
+SUBDIR+=	emacs-muse
 SUBDIR+=	enca
 SUBDIR+=	enchant
 SUBDIR+=	expat
@@ -94,6 +95,10 @@ SUBDIR+=	html
 SUBDIR+=	html2text
 SUBDIR+=	html2wml
 SUBDIR+=	hugs-HaXml
+SUBDIR+=	hunspell
+SUBDIR+=	hunspell-de
+SUBDIR+=	hunspell-en_GB
+SUBDIR+=	hunspell-en_US
 SUBDIR+=	hyperestraier
 SUBDIR+=	icu
 SUBDIR+=	intltool
@@ -133,7 +138,7 @@ SUBDIR+=	libpathan
 SUBDIR+=	libunicode
 SUBDIR+=	libxml
 SUBDIR+=	libxml++
-SUBDIR+=	libxml++2
+SUBDIR+=	libxml++1
 SUBDIR+=	libxml2
 SUBDIR+=	libxslt
 SUBDIR+=	lout
@@ -144,7 +149,7 @@ SUBDIR+=	mecab
 SUBDIR+=	mecab-base
 SUBDIR+=	mecab-ipadic
 SUBDIR+=	mecab-jumandic
-SUBDIR+=	namazu2
+SUBDIR+=	namazu
 SUBDIR+=	nbsed
 SUBDIR+=	ndtpd
 SUBDIR+=	nxml-mode
@@ -201,6 +206,7 @@ SUBDIR+=	p5-Text-Format
 SUBDIR+=	p5-Text-Glob
 SUBDIR+=	p5-Text-Kakasi
 SUBDIR+=	p5-Text-LevenshteinXS
+SUBDIR+=	p5-Text-Markdown
 SUBDIR+=	p5-Text-PDF
 SUBDIR+=	p5-Text-Quoted
 SUBDIR+=	p5-Text-Reflow

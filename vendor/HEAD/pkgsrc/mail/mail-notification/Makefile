@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.36 2007/06/05 05:37:29 wiz Exp $
+# $NetBSD: Makefile,v 1.39 2007/09/21 13:03:58 wiz Exp $
 #
 
 DISTNAME=	mail-notification-4.0
-PKGREVISION=	3
+PKGREVISION=	6
 CATEGORIES=	mail gnome
 MASTER_SITES=	http://savannah.nongnu.org/download/mailnotify/
 
@@ -17,7 +17,7 @@ USE_PKGLOCALEDIR=	YES
 
 CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR:Q}
 
-GCONF2_SCHEMAS=		mail-notification.schemas
+GCONF_SCHEMAS=		mail-notification.schemas
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.mail-notification
 PKG_SUPPORTED_OPTIONS=	inet6 sasl ssl
@@ -44,18 +44,18 @@ CONFIGURE_ARGS+=	--disable-sasl
 CONFIGURE_ARGS+=	--disable-ssl
 .endif
 
-.include "../../devel/eel2/buildlink3.mk"
-.include "../../devel/GConf2/schemas.mk"
+.include "../../devel/eel/buildlink3.mk"
+.include "../../devel/GConf/schemas.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../devel/glib2/buildlink3.mk"
 .include "../../devel/libbonobo/buildlink3.mk"
-.include "../../devel/libglade2/buildlink3.mk"
+.include "../../devel/libglade/buildlink3.mk"
 .include "../../devel/libgnome/buildlink3.mk"
 .include "../../devel/libgnomeui/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../mail/gmime/buildlink3.mk"
 .include "../../net/ORBit2/buildlink3.mk"
-.include "../../sysutils/gnome-vfs2/buildlink3.mk"
+.include "../../sysutils/gnome-vfs/buildlink3.mk"
 .include "../../sysutils/libnotify/buildlink3.mk"
 .include "../../textproc/scrollkeeper/omf.mk"
 .include "../../textproc/libxml2/buildlink3.mk"

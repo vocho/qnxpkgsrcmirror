@@ -1,4 +1,4 @@
-# $NetBSD: buildlink3.mk,v 1.17 2007/06/05 05:37:02 wiz Exp $
+# $NetBSD: buildlink3.mk,v 1.19 2007/09/21 13:03:37 wiz Exp $
 
 BUILDLINK_DEPTH:=		${BUILDLINK_DEPTH}+
 LIBBONOBOUI_BUILDLINK3_MK:=	${LIBBONOBOUI_BUILDLINK3_MK}+
@@ -17,14 +17,14 @@ BUILDLINK_ABI_DEPENDS.libbonoboui+=	libbonoboui>=2.18.0nb1
 BUILDLINK_PKGSRCDIR.libbonoboui?=	../../devel/libbonoboui
 .endif	# LIBBONOBOUI_BUILDLINK3_MK
 
-.include "../../devel/GConf2/buildlink3.mk"
+.include "../../devel/GConf/buildlink3.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../devel/libbonobo/buildlink3.mk"
-.include "../../devel/libglade2/buildlink3.mk"
+.include "../../devel/libglade/buildlink3.mk"
 .include "../../devel/libgnome/buildlink3.mk"
-.include "../../graphics/libart2/buildlink3.mk"
+.include "../../graphics/libart/buildlink3.mk"
 .include "../../graphics/libgnomecanvas/buildlink3.mk"
-.include "../../sysutils/gnome-vfs2/buildlink3.mk"
+.include "../../sysutils/gnome-vfs/buildlink3.mk"
 .include "../../x11/gtk2/buildlink3.mk"
 
 BUILDLINK_DEPTH:=		${BUILDLINK_DEPTH:S/+$//}

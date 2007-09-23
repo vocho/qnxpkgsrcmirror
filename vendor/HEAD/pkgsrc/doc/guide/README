@@ -1,4 +1,4 @@
-$Id: README 149046 2007-07-02 12:31:29Z seanb $
+$Id: README,v 1.2 2007/05/12 13:17:31 wiz Exp $
 
 The pkgsrc guide is written in DocBook, which is an SGML schema for
 writing technical documentation. A reference of the valid XML tags can

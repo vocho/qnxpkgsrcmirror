@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.40 2007/06/05 05:37:36 wiz Exp $
+# $NetBSD: Makefile,v 1.42 2007/09/21 13:04:21 wiz Exp $
 #
 
 DISTNAME=	rox-2.4.1
-PKGREVISION=	5
+PKGREVISION=	7
 CATEGORIES=	sysutils
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=rox/}
 EXTRACT_SUFX=	.tgz
@@ -63,7 +63,7 @@ BUILDLINK_DEPMETHOD.libXt?=	build
 
 .include "../../databases/shared-mime-info/buildlink3.mk"
 .include "../../devel/pango/buildlink3.mk"
-.include "../../sysutils/gnome-vfs2/buildlink3.mk"
+.include "../../sysutils/gnome-vfs/buildlink3.mk"
 .include "../../textproc/libxml2/buildlink3.mk"
 .include "../../x11/gtk2/buildlink3.mk"
 .include "../../x11/libSM/buildlink3.mk"

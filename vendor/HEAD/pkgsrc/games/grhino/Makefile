@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.30 2007/06/05 05:37:26 wiz Exp $
+# $NetBSD: Makefile,v 1.32 2007/09/21 13:03:42 wiz Exp $
 #
 
 DISTNAME=		grhino-0.15.1
-PKGREVISION=		3
+PKGREVISION=		5
 CATEGORIES=		games
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=rhino/}
 

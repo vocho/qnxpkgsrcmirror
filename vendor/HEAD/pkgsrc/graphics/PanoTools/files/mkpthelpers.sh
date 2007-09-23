@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-#	$Id: mkpthelpers.sh 147690 2007-01-03 15:01:08Z seanb $
+#	$Id: mkpthelpers.sh,v 1.1 2003/04/20 06:58:20 rh Exp $
 #
 # This script creates a Helpers directory in the current directory.
 # It will also create a Script.txt if it doesn't exist yet.

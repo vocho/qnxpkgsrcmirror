@@ -40,7 +40,7 @@
 #
 
 # RCSid:
-#	$Id: mkdeps.sh 147690 2007-01-03 15:01:08Z seanb $
+#	$Id: mkdeps.sh,v 1.1 2005/10/31 21:34:24 reed Exp $
 #
 #	@(#) Copyright (c) 1993 Simon J. Gerraty
 #

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.466 2007/08/13 08:12:46 rillig Exp $
+# $NetBSD: Makefile,v 1.469 2007/09/21 13:03:45 wiz Exp $
 #
 
 COMMENT=	Graphics tools and libraries
@@ -61,7 +61,7 @@ SUBDIR+=	djvulibre-lib
 SUBDIR+=	djvulibre-tools
 SUBDIR+=	dx
 SUBDIR+=	dxsamples
-SUBDIR+=	eog2
+SUBDIR+=	eog
 SUBDIR+=	epeg
 SUBDIR+=	exif
 SUBDIR+=	exifprobe
@@ -167,7 +167,7 @@ SUBDIR+=	kphotobook
 SUBDIR+=	kphotools
 SUBDIR+=	lcms
 SUBDIR+=	lib3ds
-SUBDIR+=	libart2
+SUBDIR+=	libart
 SUBDIR+=	libcaca
 SUBDIR+=	libexif
 SUBDIR+=	libexif-gtk
@@ -184,7 +184,7 @@ SUBDIR+=	libkdcraw
 SUBDIR+=	libkexif
 SUBDIR+=	libkexiv2
 SUBDIR+=	libkipi
-SUBDIR+=	librsvg2
+SUBDIR+=	librsvg
 SUBDIR+=	libscigraphica
 SUBDIR+=	libungif
 SUBDIR+=	libvideogfx
