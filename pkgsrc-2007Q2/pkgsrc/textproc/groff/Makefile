@@ -41,14 +41,20 @@ PLIST_SUBST+=	GNU_PREFIX=""
 .endif
 
 .if ${OPSYS} == "QNX"
-CFLAGS+=-D_NO_CPP_INLINES -D_HAS_GENERIC_TEMPLATES=0
-# It builds on the HEAD (or what will be 6.3.3 at time of writing)
-# with the defines above. Point the following to the head or delete
-# it if you're at a late enough rev.
-CFLAGS+=-nostdinc -Wp,-isystem -Wp,/home/seanb/svn/stage/usr/include
+# The "pre-build", "post-build" is to work around bugs in 6.3.2 Heads
+# and procnto. With latest procnto and headers, you only need 
+# 	CFLAGS+= -D_NO_CPP_INLINES -D_HAS_GENERIC_TEMPLATES=0
+# to get this package compiled.
+CFLAGS+=-D_HAS_GENERIC_TEMPLATES=0
 USE_TOOLS+=             automake
 pre-configure:
 	cd ${WRKSRC} && aclocal && autoconf
+pre-build:
+	@ln -sfP $(WRKSRC)/font $(PREFIX)/share/groff/site-font
+	@ln -sfP $(WRKSRC)/tmac $(PREFIX)/share/groff/site-tmac
+post-build:
+	@rm $(PREFIX)/share/groff/site-font
+	@rm $(PREFIX)/share/groff/site-tmac
 .endif
 
 BUILD_DEFS+=	PAPERSIZE
