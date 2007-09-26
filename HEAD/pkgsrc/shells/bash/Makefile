@@ -84,6 +84,12 @@ BUILDLINK_API_DEPENDS.readline+=	readline>=4.3
 .endif
 
 # QNX need to do more work in post-install
+# 1) copy the /etc/profile.d/qnxsdk.sh to /etc/profile.d/qnxsdk.bash
+#    this is so login will source /etc/profile which will in turn 
+#    source /etc/profile.d/qnxsdk.$(SHELL)
+# 2) did a local link so "/etc/photon/login/shells/bash" exist, this
+#    is what phlogin looking for start its "login shell".
+#    However, this is not necessary once PR#51431 is fixed.
 .if ${OPSYS} == "QNX"
 post-install:
 	${INSTALL_MAN} ${WRKSRC}/doc/bash.1 ${DESTDIR}${PREFIX}/${PKGMANDIR}/man1
