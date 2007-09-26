@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.5 2007/09/15 14:55:02 tnn Exp $
+# $NetBSD: Makefile,v 1.7 2007/09/25 10:03:52 hira Exp $
 #
 
 PKGNAME=		pidgin-${PIDGIN_VERSION}

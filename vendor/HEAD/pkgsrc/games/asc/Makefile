@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.37 2007/09/21 13:03:41 wiz Exp $
+# $NetBSD: Makefile,v 1.39 2007/09/25 10:07:06 hira Exp $
 
 DISTNAME=	asc-source-1.16.4.0
 PKGNAME=	${DISTNAME:S/-source//}

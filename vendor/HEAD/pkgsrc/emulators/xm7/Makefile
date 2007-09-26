@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.20 2007/02/16 10:53:11 rillig Exp $
+# $NetBSD: Makefile,v 1.22 2007/09/25 10:07:05 hira Exp $
 #
 
 DISTNAME=		xm71010s

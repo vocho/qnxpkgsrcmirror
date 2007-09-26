@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.3 2006/12/28 12:12:57 joerg Exp $
+# $NetBSD: Makefile,v 1.5 2007/09/25 10:03:52 hira Exp $
 #
 
 VER=		1.5.3

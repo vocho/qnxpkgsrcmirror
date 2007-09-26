@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.8 2007/05/22 18:53:55 plunky Exp $
+# $NetBSD: Makefile,v 1.10 2007/09/25 10:07:05 hira Exp $
 #
 
 DISTNAME=	obexapp-1.4.7
