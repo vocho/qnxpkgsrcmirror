@@ -10,10 +10,13 @@ MAINTAINER=	wiz@NetBSD.org
 HOMEPAGE=	http://www.gnu.org/software/groff/groff.html
 COMMENT=	GNU roff text processing suite
 
+CHECK_PERMS=            NO
+
 USE_LANGUAGES=		c c++
 GNU_CONFIGURE=		YES
 CONFIGURE_ENV+=		PERLPATH=${PERL5:Q}
 USE_TOOLS+=		perl:run sed:run awk:run
+USE_FEATURES=           getopt_long
 
 INFO_FILES=		YES
 
@@ -35,9 +38,10 @@ PLIST_SUBST+=	GNU_PREFIX="g"
 PLIST_SUBST+=	GNU_PREFIX=""
 .endif
 
-.if ${OPSYS} == "IRIX"
-# needs getopt_long()
-. include "../../pkgtools/libnbcompat/buildlink3.mk"
+.if ${OPSYS} == "SunOS" || ${OPSYS} == "HPUX"
+PLIST_SUBST+=   GNU_PREFIX_TMAC="g"
+.else
+PLIST_SUBST+=   GNU_PREFIX_TMAC=""
 .endif
 
 .if ${OPSYS} == "QNX"
@@ -55,6 +59,12 @@ pre-build:
 post-build:
 	@rm $(PREFIX)/share/groff/site-font
 	@rm $(PREFIX)/share/groff/site-tmac
+.endif
+
+.if ${OPSYS} == "SunOS" || ${OPSYS} == "HPUX" || ${OPSYS} == "OSF1"
+PLIST_SUBST+=   GNU_PREFIX_AN_TMAC="g"
+.else
+PLIST_SUBST+=   GNU_PREFIX_AN_TMAC=""
 .endif
 
 BUILD_DEFS+=	PAPERSIZE
