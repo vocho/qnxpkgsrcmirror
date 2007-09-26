@@ -83,9 +83,18 @@ BUILDLINK_API_DEPENDS.readline+=	readline>=4.3
 .include "../../devel/readline/buildlink3.mk"
 .endif
 
+# QNX need to do more work in post-install
+.if ${OPSYS} == "QNX"
 post-install:
 	${INSTALL_MAN} ${WRKSRC}/doc/bash.1 ${DESTDIR}${PREFIX}/${PKGMANDIR}/man1
 	${INSTALL_MAN} ${WRKSRC}/doc/bashbug.1 ${DESTDIR}${PREFIX}/${PKGMANDIR}/man1
+	@cp /etc/profile.d/qnxsdk.sh /etc/profile.d/qnxsdk.bash
+	@ln -sf . /etc/photon/login/shells
+.else
+post-install:
+	${INSTALL_MAN} ${WRKSRC}/doc/bash.1 ${DESTDIR}${PREFIX}/${PKGMANDIR}/man1
+	${INSTALL_MAN} ${WRKSRC}/doc/bashbug.1 ${DESTDIR}${PREFIX}/${PKGMANDIR}/man1
+.endif
 
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"
