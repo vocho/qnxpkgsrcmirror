@@ -298,7 +298,14 @@ make_dist(const char *pkg, const char *suffix, const package_t *plist)
 	if (create_views)
 		write_meta_file(views_file, archive);
 
-	initial_cwd = getcwd(NULL, 0);
+#ifdef __QNXNTO__
+        // getcwd(NULL, 0) on QNX6.3.2 returning NULL, and an EINVAL.
+        // before we could find out what *should* be the right behavior
+	// for POSIX, we use the line below to workaround the problem.
+        initial_cwd = getcwd(NULL, 1);
+#else
+        initial_cwd = getcwd(NULL, 0);
+#endif
 
 	for (p = plist->head; p; p = p->next) {
 		if (p->type == PLIST_FILE) {
