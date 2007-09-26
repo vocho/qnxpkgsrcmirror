@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.36 2007/09/06 19:23:25 joerg Exp $
+# $NetBSD: Makefile,v 1.38 2007/09/21 10:16:28 rillig Exp $
 #
 
 DISTNAME=	bmake-20051105
@@ -20,6 +20,8 @@ WRKSRC=		${WRKDIR}/bmake
 NO_CHECKSUM=	yes
 NO_MTREE=	yes
 
+USE_FEATURES=	nbcompat
+
 makesyspath=	${PREFIX}/share/mk
 
 INSTALLATION_DIRS=	bin ${PKGMANDIR}/man1
@@ -30,7 +32,7 @@ BOOTSTRAP_ARGS=		-q -o ${OPSYS} --prefix=${PREFIX} \
 
 .include "../../mk/bsd.prefs.mk"
 
-.if ${OPSYS} == "SunOS" && exists(/usr/xpg/bin/sh)
+.if ${OPSYS} == "SunOS" && exists(/usr/xpg4/bin/sh)
 BOOTSTRAP_ARGS+=	--with-defshell=/usr/xpg4/bin/sh
 .endif
 
@@ -47,5 +49,4 @@ do-install:
 	${INSTALL_PROGRAM} ${WRKDIR}/${OPSYS}/bmake ${PREFIX}/bin
 	${INSTALL_MAN} ${WRKSRC}/bmake.1 ${PREFIX}/${PKGMANDIR}/man1
 
-.include "../../pkgtools/libnbcompat/inplace.mk"
 .include "../../mk/bsd.pkg.mk"

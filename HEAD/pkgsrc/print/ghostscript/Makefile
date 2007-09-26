@@ -27,6 +27,14 @@ GS_RESOURCEDIR=		${PREFIX}/share/ghostscript/Resource
 
 .include "../../mk/bsd.prefs.mk"
 
+.if ${OPSYS} == "QNX"
+# configure script seems to tickle some ksh quoting bug
+USE_TOOLS+=		bash
+CONFIG_SHELL=		${LOCALBASE}/bin/bash
+WRAPPER_SHELL=		${LOCALBASE}/bin/bash
+.endif
+
+
 .if defined(PAPERSIZE) && (${PAPERSIZE} == "A4" || ${PAPERSIZE} == "a4")
 CFLAGS+=		-DA4
 .endif
@@ -56,4 +64,8 @@ post-extract:
 .include "../../devel/zlib/buildlink3.mk"
 # pkgsrc jasper is too new
 #.include "../../graphics/jasper/buildlink3.mk"
+.if ${OPSYS} == "QNX"
+# configure looks for this
+.include "../../converters/libiconv/buildlink3.mk"
+.endif
 .include "../../mk/bsd.pkg.mk"

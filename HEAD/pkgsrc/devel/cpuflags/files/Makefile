@@ -1,4 +1,7 @@
+<<<<<<< .working
 # $Id: Makefile 153258 2007-09-09 20:36:56Z seanb $
+=======
+# $Id: Makefile,v 1.12 2007/08/27 10:08:29 abs Exp $
 
 VERSION=1.14
 

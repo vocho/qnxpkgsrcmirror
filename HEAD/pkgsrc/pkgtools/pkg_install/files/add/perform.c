@@ -1,4 +1,4 @@
-/*	$NetBSD: perform.c,v 1.61 2007/09/08 09:58:14 rillig Exp $	*/
+/*	$NetBSD: perform.c,v 1.63 2007/09/11 13:39:05 rillig Exp $	*/
 
 #if HAVE_CONFIG_H
 #include "config.h"
@@ -14,7 +14,7 @@
 #if 0
 static const char *rcsid = "from FreeBSD Id: perform.c,v 1.44 1997/10/13 15:03:46 jkh Exp";
 #else
-__RCSID("$NetBSD: perform.c,v 1.61 2007/09/08 09:58:14 rillig Exp $");
+__RCSID("$NetBSD: perform.c,v 1.63 2007/09/11 13:39:05 rillig Exp $");
 #endif
 #endif
 
@@ -212,6 +212,9 @@ pkg_do_installed(int *replacing, char replace_via[MaxPathSize], char replace_to[
 	char    buf[MaxPathSize];
 	char *best_installed;
 
+	const size_t replace_via_size = MaxPathSize;
+	const size_t replace_to_size = MaxPathSize;
+
 	if ((s = strrchr(PkgName, '-')) == NULL) {
 		warnx("Package name %s does not contain a version, bailing out", PkgName);
 		return -1;
@@ -241,9 +244,9 @@ pkg_do_installed(int *replacing, char replace_via[MaxPathSize], char replace_to[
 	/* XXX Should list the steps in Fake mode */
 	snprintf(replace_from, sizeof(replace_from), "%s/%s/" REQUIRED_BY_FNAME,
 		 dbdir, best_installed);
-	snprintf(replace_via, sizeof(replace_via), "%s/.%s." REQUIRED_BY_FNAME,
+	snprintf(replace_via, replace_via_size, "%s/.%s." REQUIRED_BY_FNAME,
 		 dbdir, best_installed);
-	snprintf(replace_to, sizeof(replace_to), "%s/%s/" REQUIRED_BY_FNAME,
+	snprintf(replace_to, replace_to_size, "%s/%s/" REQUIRED_BY_FNAME,
 		 dbdir, PkgName);
 
 	if (Verbose)
@@ -382,7 +385,6 @@ pkg_do(const char *pkg, lpkg_head_t *pkgs)
 	char    replace_to[MaxPathSize];
 	char   *buildinfo[BI_ENUM_COUNT];
 	int	replacing = 0;
-	char   *where_to;
 	char   dbdir[MaxPathSize];
 	const char *exact;
 	const char *tmppkg;
@@ -418,7 +420,6 @@ pkg_do(const char *pkg, lpkg_head_t *pkgs)
 		if (Home == NULL) {
 			warnx("unable to fetch `%s' by URL", pkg);
 		}
-		where_to = Home;
 
 		/* make sure the pkg is verified */
 		if (!verify(pkg)) {
@@ -448,7 +449,6 @@ pkg_do(const char *pkg, lpkg_head_t *pkgs)
 		if (!Home)
 			warnx("unable to make playpen for %ld bytes",
 			      (long) (sb.st_size * 4));
-		where_to = Home;
 		result = unpack(pkg, &files);
 		while ((lfp = TAILQ_FIRST(&files)) != NULL) {
 			TAILQ_REMOVE(&files, lfp, lf_link);

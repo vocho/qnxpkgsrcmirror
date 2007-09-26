@@ -1,4 +1,4 @@
-/*  $Id: shlib.pl 147690 2007-01-03 15:01:08Z seanb $
+/*  $Id: shlib.pl,v 1.1.1.1 2004/05/20 11:09:17 hubertf Exp $
 
     Part of SWI-Prolog
 

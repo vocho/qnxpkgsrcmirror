@@ -35,6 +35,18 @@ PLIST_SUBST+=		GM4_LINK="@comment "
 .if ${OPSYS} == "DragonFly"
 post-patch:
 	${CP} ${FILESDIR}/bsd-fflush.c ${WRKSRC}/lib/fflush.c
+.elif ${OPSYS} == "QNX"
+# For now.
+#
+# Our fflush() happens to work the way m4 expects so their
+# replacement rpl_fflush() isn't brought in and therefore
+# their non-portable gnulib fpurge() and freading() aren't
+# needed.  The correct fix is for autoconf to remove all
+# references to fpurge() and freading() (including from the
+# tests) if fflush() works as expected.
+post-patch:
+	${CP} ${FILESDIR}/qnx-fpurge.c ${WRKSRC}/lib/fpurge.c
+	${CP} ${FILESDIR}/qnx-freading.c ${WRKSRC}/lib/freading.c
 .endif
 
 post-install:

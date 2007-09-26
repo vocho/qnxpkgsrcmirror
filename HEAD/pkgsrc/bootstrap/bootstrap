@@ -542,7 +542,7 @@ QNX)
 	need_pax=yes
 	need_bsd_install=yes
 #	need_awk=no
-#	need_sed=no #actually nbsed
+	need_sed=yes
 	set_opsys=no
 	groupsprog="id -gn"
 	whoamiprog="id -un"

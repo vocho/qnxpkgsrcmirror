@@ -1,4 +1,4 @@
-# $Id: hacks.mk 147963 2007-04-19 14:01:23Z seanb $
+# $Id: hacks.mk,v 1.2 2007/01/27 04:20:39 dmcmahill Exp $
 
 .if !defined(FOO_TGIF_MK)
 TGIF_HACKS_MK=	defined

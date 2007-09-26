@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.11 2007/07/30 10:18:32 joerg Exp $
+# $NetBSD: Makefile,v 1.13 2007/09/22 07:53:03 rillig Exp $
 #
 
-DISTNAME=	checkperms-1.7
+DISTNAME=	checkperms-1.9
 CATEGORIES=	sysutils
 MASTER_SITES=	http://www.schlechte-software.de/checkperms/
 
@@ -10,10 +10,10 @@ HOMEPAGE=	http://www.schlechte-software.de/checkperms/
 COMMENT=	Check and correct file permissions
 
 PKG_DESTDIR_SUPPORT=	user-destdir
+INSTALLATION_DIRS_FROM_PLIST=	yes
 
-INSTALLATION_DIRS=	bin ${PKGMANDIR}/cat1 ${PKGMANDIR}/man1
-
-USE_BSD_MAKEFILE=	yes
+# Don't use USE_BSD_MAKEFILE here to avoid the dependency on nroff.
+MAKE_ENV+=	${BSD_MAKE_ENV}
 
 .include "../../mk/bsd.prefs.mk"
 

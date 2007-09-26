@@ -88,3 +88,5 @@ GAMEGRP=		games
 GAMEMODE=		2555
 GAMEDIRMODE=		0775
 .endif
+
+PREFER.zlib?=		pkgsrc
