@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.333 2007/09/20 20:50:48 wiz Exp $
+# $NetBSD: Makefile,v 1.335 2007/09/23 15:00:27 ghen Exp $
 #
 
 COMMENT=	Electronic mail utilities

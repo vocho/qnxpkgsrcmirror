@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.59 2007/08/30 16:29:56 joerg Exp $
+# $NetBSD: Makefile,v 1.61 2007/09/25 10:07:05 hira Exp $
 
 DISTNAME=	mgetty1.1.31-Jul24
 PKGNAME=	mgetty-1.1.31

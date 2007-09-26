@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.48 2007/02/09 14:58:30 joerg Exp $
+# $NetBSD: Makefile,v 1.50 2007/09/25 10:07:05 hira Exp $
 
 DISTNAME=		bochs-2.3
 CATEGORIES=		emulators
