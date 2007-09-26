@@ -1,6 +1,6 @@
 $NetBSD: patch-ac,v 1.31 2007/08/04 14:29:43 tnn Exp $
 
---- Configure.orig	2007-08-04 14:54:41.000000000 +0200
+--- Configure.orig	2005-06-26 13:24:48.000000000 -0400
 +++ Configure
 @@ -180,7 +180,7 @@ my %table=(
  "solaris64-x86_64-gcc","gcc:-m64 -O3 -Wall -DL_ENDIAN -DMD32_REG_T=int::-D_REENTRANT::-lsocket -lnsl -ldl:SIXTY_FOUR_BIT_LONG RC4_CHUNK RC4_CHAR BF_PTR2 DES_INT DES_UNROLL:asm/x86_64-gcc.o::::::asm/rc4-x86_64.o:::dlfcn:solaris-shared:-fPIC:-m64 -shared -static-libgcc:.so.\$(SHLIB_MAJOR).\$(SHLIB_MINOR)",
@@ -48,7 +48,17 @@ $NetBSD: patch-ac,v 1.31 2007/08/04 14:29:43 tnn Exp $
  "FreeBSD-sparc64","gcc:-DB_ENDIAN -DTERMIOS -O3 -fomit-frame-pointer::-pthread -D_REENTRANT -D_THREAD_SAFE -D_THREADSAFE:::SIXTY_FOUR_BIT_LONG DES_INT DES_PTR DES_RISC2 BF_PTR::::::::::dlfcn:bsd-gcc-shared:-fPIC::.so.\$(SHLIB_MAJOR).\$(SHLIB_MINOR)",
  "FreeBSD-ia64","gcc:-DL_ENDIAN -DTERMIOS -O -fomit-frame-pointer::(unknown):::SIXTY_FOUR_BIT_LONG RC4_CHUNK RC4_CHAR:asm/ia64-cpp.o:::::::::dlfcn:bsd-gcc-shared:-fPIC::.so.\$(SHLIB_MAJOR).\$(SHLIB_MINOR)",
  "FreeBSD",      "gcc:-DTERMIOS -DL_ENDIAN -fomit-frame-pointer -O3 -m486 -Wall::(unknown):::BN_LLONG ${x86_gcc_des} ${x86_gcc_opts}:${x86_out_asm}",
-@@ -845,6 +861,10 @@ PROCESS_ARGS:
+@@ -431,7 +447,8 @@ my %table=(
+ "qnx4",	"cc:-DL_ENDIAN -DTERMIO::(unknown):::${x86_gcc_des} ${x86_gcc_opts}:",
+ 
+ # QNX 6
+-"qnx6",	"cc:-DL_ENDIAN -DTERMIOS::(unknown)::-lsocket:${x86_gcc_des} ${x86_gcc_opts}:",
++"QNX6",	"cc:-DTERMIOS::(unknown)::-lsocket:${x86_gcc_des} ${x86_gcc_opts}:",
++"QNX6-i386",	"cc:-DL_ENDIAN -DTERMIOS -O2 -Wall::(unknown)::-lsocket:${x86_gcc_des} ${x86_gcc_opts}:${x86_elf_asm}:dlfcn:bsd-gcc-shared:-fPIC::.so.\$(SHLIB_MAJOR).\$(SHLIB_MINOR)",
+ 
+ # Linux on ARM
+ # ARM comes in both little- and big-endian flavors. The following line is
+@@ -845,6 +862,10 @@ PROCESS_ARGS:
  				{
  				$libs.=$_." ";
  				}
@@ -59,7 +69,7 @@ $NetBSD: patch-ac,v 1.31 2007/08/04 14:29:43 tnn Exp $
  			elsif (/^-[^-]/ or /^\+/)
  				{
  				$flags.=$_." ";
-@@ -1323,7 +1343,7 @@ while (<IN>)
+@@ -1323,7 +1344,7 @@ while (<IN>)
  	elsif ($shared_extension ne "" && $shared_extension =~ /^\.s([ol])\.[^\.]*\.[^\.]*$/)
  		{
  		my $sotmp = $1;

@@ -1,4 +1,4 @@
-/* $Id: glob.h 147690 2007-01-03 15:01:08Z seanb $ */
+/* $Id: glob.h,v 1.3 2004/08/16 17:24:57 jlam Exp $ */
 /* from NetBSD: glob.h,v 1.13 2001/03/16 21:02:42 christos Exp */
 
 /*

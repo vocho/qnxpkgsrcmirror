@@ -1,4 +1,4 @@
-# $NetBSD: buildlink3.mk,v 1.23 2007/06/05 05:37:01 wiz Exp $
+# $NetBSD: buildlink3.mk,v 1.27 2007/09/21 13:04:20 wiz Exp $
 
 BUILDLINK_DEPTH:=		${BUILDLINK_DEPTH}+
 NAUTILUS_BUILDLINK3_MK:=	${NAUTILUS_BUILDLINK3_MK}+
@@ -23,8 +23,8 @@ PRINT_PLIST_AWK+=	/^@dirrm lib\/nautilus\/extensions-1.0$$/ \
 .endif	# NAUTILUS_BUILDLINK3_MK
 
 .include "../../audio/esound/buildlink3.mk"
-.include "../../devel/GConf2/buildlink3.mk"
-.include "../../devel/eel2/buildlink3.mk"
+.include "../../devel/GConf/buildlink3.mk"
+.include "../../devel/eel/buildlink3.mk"
 .include "../../devel/glib2/buildlink3.mk"
 .include "../../devel/libbonobo/buildlink3.mk"
 .include "../../devel/libbonoboui/buildlink3.mk"
@@ -32,11 +32,11 @@ PRINT_PLIST_AWK+=	/^@dirrm lib\/nautilus\/extensions-1.0$$/ \
 .include "../../devel/libgnomeui/buildlink3.mk"
 .include "../../devel/libgsf/buildlink3.mk"
 .include "../../devel/pango/buildlink3.mk"
-.include "../../graphics/libart2/buildlink3.mk"
+.include "../../graphics/libart/buildlink3.mk"
 .include "../../graphics/libexif/buildlink3.mk"
-.include "../../graphics/librsvg2/buildlink3.mk"
+.include "../../graphics/librsvg/buildlink3.mk"
 .include "../../net/ORBit2/buildlink3.mk"
-.include "../../sysutils/gnome-vfs2/buildlink3.mk"
+.include "../../sysutils/gnome-vfs/buildlink3.mk"
 .include "../../textproc/libxml2/buildlink3.mk"
 .include "../../x11/gnome-desktop/buildlink3.mk"
 .include "../../x11/gtk2/buildlink3.mk"

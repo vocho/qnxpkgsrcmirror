@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.58 2007/08/30 06:20:14 wiz Exp $
+# $NetBSD: Makefile,v 1.61 2007/09/21 13:04:14 wiz Exp $
 #
 
-DISTNAME=	libgnomeprint-2.18.1
+DISTNAME=	libgnomeprint-2.18.2
+PKGREVISION=	1
 CATEGORIES=	print gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/libgnomeprint/2.18/}
 EXTRACT_SUFX=	.tar.bz2
@@ -12,7 +13,7 @@ COMMENT=	Library for the GNOME2 Printing Architecture
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
-USE_TOOLS+=		bison gmake intltool msgfmt pkg-config
+USE_TOOLS+=		bison flex gmake intltool msgfmt pkg-config
 USE_PKGLOCALEDIR=	YES
 USE_LIBTOOL=		YES
 GNU_CONFIGURE=		YES
@@ -52,6 +53,6 @@ PRINT_PLIST_AWK+=	/cups/ { print "$${USE_CUPS}" $$0; next; }
 .include "../../devel/pango/buildlink3.mk"
 .include "../../fonts/fontconfig/buildlink3.mk"
 .include "../../graphics/freetype2/buildlink3.mk"
-.include "../../graphics/libart2/buildlink3.mk"
+.include "../../graphics/libart/buildlink3.mk"
 .include "../../textproc/libxml2/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

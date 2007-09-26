@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.55 2007/08/10 17:57:13 jlam Exp $
+# $NetBSD: Makefile,v 1.59 2007/09/22 04:42:04 jlam Exp $
 
 DISTNAME=	sqwebmail-5.1.6
+PKGREVISION=	4
 CATEGORIES=	mail www
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=courier/}
 EXTRACT_SUFX=	.tar.bz2
@@ -65,19 +66,21 @@ CONFIGURE_ARGS+=	--with-calendardir=${SQWEBMAIL_CALENDARDIR:Q}
 CONFIGURE_ARGS+=	--with-ispell="${PREFIX}/bin/ispell"
 CONFIGURE_ARGS+=	--with-mailer="${SENDMAIL} -oi -t"
 CONFIGURE_ARGS+=	--with-mailgroup=${COURIER_GROUP:Q}
-CONFIGURE_ARGS+=	--with-piddir=${VARBASE:Q}/run
+CONFIGURE_ARGS+=	--with-piddir=${COURIER_STATEDIR:Q}/tmp
 
 CONFIGURE_ENV+=		GZIP=${TOOLS_PATH.gzip:Q}
 CONFIGURE_ENV+=		GPG=${PREFIX:Q}/bin/gpg
-CONFIGURE_ENV+=		ldapsearch=${PREFIX:Q}/bin/ldapsearch
 
 REQD_DIRS+=		${DATADIR} ${DOCDIR} ${EGDIR} ${LIBEXECDIR}
 REQD_DIRS_PERMS+=	${LIBEXECDIR}/webmail				\
 			${REAL_ROOT_USER} ${REAL_ROOT_GROUP} 0700
-MAKE_DIRS+=		${VARBASE}/run ${LOCALSTATEDIR}
+MAKE_DIRS+=		${COURIER_STATEDIR}
+MAKE_DIRS_PERMS+=	${COURIER_STATEDIR}/tmp				\
+			${COURIER_USER} ${COURIER_GROUP} 0770
 OWN_DIRS+=		${SQWEBMAIL_STATEDIR}
-OWN_DIRS+=		${SQWEBMAIL_CACHEDIR}
-OWN_DIRS_PERMS=		${SQWEBMAIL_CALENDARDIR}			\
+OWN_DIRS_PERMS=		${SQWEBMAIL_CACHEDIR}				\
+			${REAL_ROOT_USER} ${REAL_ROOT_GROUP} 0700
+OWN_DIRS_PERMS+=	${SQWEBMAIL_CALENDARDIR}			\
 			${REAL_ROOT_USER} ${COURIER_GROUP} 0755
 OWN_DIRS_PERMS+=	${SQWEBMAIL_CALENDARDIR}/public			\
 			${REAL_ROOT_USER} ${COURIER_GROUP} 0755
@@ -91,7 +94,7 @@ CONF_FILES_PERMS+=	${EGDIR}/${_file_}				\
 			${PKG_SYSCONFDIR}/${_file_:S/.dist$//}		\
 			${COURIER_FILE_PERMS}
 .endfor
-.for _file_ in cleancache.pl ldapsearch sendit.sh
+.for _file_ in cleancache.pl sendit.sh
 CONF_FILES_PERMS+=	${PREFIX}/share/courier/sqwebmail/${_file_}	\
 			${PKG_SYSCONFDIR}/${_file_}			\
 			${COURIER_SCRIPT_PERMS}

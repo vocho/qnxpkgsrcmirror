@@ -25,6 +25,15 @@ FILES_SUBST+=	MAILWRAPPEES=${MAILWRAPPEES:Q}
 
 INSTALLATION_DIRS=	${PKGMANDIR}/cat5 ${PKGMANDIR}/cat8 ${PKGMANDIR}/man5 ${PKGMANDIR}/man8 sbin
 
+USE_FEATURES=	nbcompat
+
+.include "../../mk/bsd.prefs.mk"
+
+.if ${OPSYS} == "QNX"
+USE_TOOLS+=	nroff
+.endif
+
+
 do-configure:
 	cd ${WRKSRC};							\
 	for file in mailer.conf.5 mailwrapper.8 mailwrapper.c; do	\
@@ -38,3 +47,4 @@ post-install:
 	${INSTALL_DATA} ${WRKSRC}/mailer.conf ${EGDIR}/mailer.conf.sendmail
 
 .include "../../mk/bsd.pkg.mk"
+

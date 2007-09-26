@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.70 2007/07/17 10:17:11 drochner Exp $
+# $NetBSD: Makefile,v 1.72 2007/09/21 13:04:03 wiz Exp $
 #
 
 DISTNAME=		yelp-2.18.1
-PKGREVISION=		2
+PKGREVISION=		4
 CATEGORIES=		misc
 MASTER_SITES=		${MASTER_SITE_GNOME:=sources/yelp/2.18/}
 EXTRACT_SUFX=		.tar.bz2
@@ -23,7 +23,7 @@ GNU_CONFIGURE=		yes
 USE_LANGUAGES=		c c++
 CONFIGURE_ENV+=		PKGLOCALEDIR=${PKGLOCALEDIR}
 
-GCONF2_SCHEMAS=		yelp.schemas
+GCONF_SCHEMAS=		yelp.schemas
 
 .include "options.mk"
 
@@ -37,10 +37,10 @@ BUILDLINK_DEPMETHOD.gnome-doc-utils+=	full
 BUILDLINK_DEPMETHOD.libXt?=	build
 
 .include "../../archivers/bzip2/buildlink3.mk"
-.include "../../devel/GConf2/schemas.mk"
+.include "../../devel/GConf/schemas.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../devel/glib2/buildlink3.mk"
-.include "../../devel/libglade2/buildlink3.mk"
+.include "../../devel/libglade/buildlink3.mk"
 .include "../../devel/libgnome/buildlink3.mk"
 .include "../../devel/libgnomeui/buildlink3.mk"
 .include "../../devel/pango/buildlink3.mk"
@@ -50,7 +50,7 @@ BUILDLINK_DEPMETHOD.libXt?=	build
 .include "../../print/libgnomeprint/buildlink3.mk"
 .include "../../print/libgnomeprintui/buildlink3.mk"
 .include "../../sysutils/dbus-glib/buildlink3.mk"
-.include "../../sysutils/gnome-vfs2/buildlink3.mk"
+.include "../../sysutils/gnome-vfs/buildlink3.mk"
 .include "../../textproc/libxml2/buildlink3.mk"
 .include "../../textproc/libxslt/buildlink3.mk"
 .include "../../textproc/gnome-doc-utils/buildlink3.mk"

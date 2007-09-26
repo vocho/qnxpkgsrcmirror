@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.7 2007/06/26 14:47:56 joerg Exp $
+# $NetBSD: Makefile,v 1.13 2007/09/21 13:04:44 wiz Exp $
 #
 
 DISTNAME=	gnome-python-desktop-2.18.0
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME:S/-python/2/}
-PKGREVISION=	2
+PKGREVISION=	7
 CATEGORIES=	sysutils gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gnome-python-desktop/2.18/}
 EXTRACT_SUFX=	.tar.bz2
@@ -28,15 +28,15 @@ PLIST_SUBST+=	NAUTILUSBURN="@comment "
 #.include "../../sysutils/nautilus-cd-burner/buildlink3.mk"
 
 .include "../../graphics/py-cairo/buildlink3.mk"
-.include "../../graphics/librsvg2/buildlink3.mk"
+.include "../../graphics/librsvg/buildlink3.mk"
 .include "../../multimedia/totem/buildlink3.mk"
-.include "../../multimedia/gnome2-media/buildlink3.mk"
+.include "../../multimedia/gnome-media/buildlink3.mk"
 .include "../../x11/gnome-desktop/buildlink3.mk"
 .include "../../x11/gnome-panel/buildlink3.mk"
 .include "../../security/gnome-keyring/buildlink3.mk"
 .include "../../x11/gtksourceview/buildlink3.mk"
 .include "../../devel/libwnck/buildlink3.mk"
-.include "../../sysutils/libgtop2/buildlink3.mk"
+.include "../../sysutils/libgtop/buildlink3.mk"
 .include "../../x11/py-gtk2/buildlink3.mk"
 .include "../../x11/py-gnome2/buildlink3.mk"
 .include "../../print/libgnomeprint/buildlink3.mk"

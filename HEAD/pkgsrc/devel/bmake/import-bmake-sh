@@ -1,5 +1,5 @@
 :
-# $Id: import-bmake-sh 147690 2007-01-03 15:01:08Z seanb $
+# $Id: import-bmake-sh,v 1.1 2005/12/02 00:14:56 sjg Exp $
 
 # Nice and simple, but make sure it is done consistently...
 # Simply unpack bmake-<version>.tar.gz 

@@ -1,0 +1,17 @@
+$NetBSD$
+
+--- contrib/opvp/gdevopvp.c.orig	2007-05-08 18:00:10.000000000 -0400
++++ contrib/opvp/gdevopvp.c
+@@ -24,9 +24,12 @@
+ #include	<stdlib.h>
+ #include	<unistd.h>
+ #include	<string.h>
++#include	<strings.h>
+ #include	<locale.h>
+ #include	<iconv.h>
++#ifndef __QNXNTO__
+ #include	<langinfo.h>
++#endif
+ #include	<dlfcn.h>
+ #include	<sys/types.h>
+ #include	<sys/stat.h>

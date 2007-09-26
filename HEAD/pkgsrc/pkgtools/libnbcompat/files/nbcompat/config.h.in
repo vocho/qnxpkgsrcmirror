@@ -39,7 +39,7 @@
 /* Define to 1 if you have the <dirent.h> header file. */
 #undef HAVE_DIRENT_H
 
-/* Define to 1 if you have the `dirfd' function. */
+/* Define if dirfd is either a function or a macro. */
 #undef HAVE_DIRFD
 
 /* Define to 1 if `dd_fd' is member of `DIR'. */

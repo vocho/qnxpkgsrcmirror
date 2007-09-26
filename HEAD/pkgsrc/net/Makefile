@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.679 2007/09/08 12:05:53 wiz Exp $
+# $NetBSD: Makefile,v 1.682 2007/09/19 23:34:02 wiz Exp $
 #
 
 COMMENT=	Networking tools
@@ -124,7 +124,7 @@ SUBDIR+=	gnet
 SUBDIR+=	gnet1
 SUBDIR+=	gnetcat
 SUBDIR+=	gnome-netstatus
-SUBDIR+=	gnome-vfs2-smb
+SUBDIR+=	gnome-vfs-smb
 SUBDIR+=	gnugk
 SUBDIR+=	gofish
 SUBDIR+=	gopher
@@ -177,6 +177,7 @@ SUBDIR+=	libares
 SUBDIR+=	libcares
 SUBDIR+=	libdnet
 SUBDIR+=	liblive
+SUBDIR+=	libmms
 SUBDIR+=	libnids
 SUBDIR+=	libpcap
 SUBDIR+=	libradius
@@ -196,6 +197,7 @@ SUBDIR+=	mDNSResponder-nss
 SUBDIR+=	maradns
 SUBDIR+=	mbrowse
 SUBDIR+=	md-whois
+SUBDIR+=	microdc2
 SUBDIR+=	miredo
 SUBDIR+=	mirror
 SUBDIR+=	mldonkey

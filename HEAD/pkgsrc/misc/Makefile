@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.288 2007/09/07 20:58:49 wiz Exp $
+# $NetBSD: Makefile,v 1.290 2007/09/20 00:02:40 wiz Exp $
 #
 
 COMMENT=	Miscellaneous utilities
@@ -62,9 +62,9 @@ SUBDIR+=	gkrellm-moon
 SUBDIR+=	gkrellm-weather
 SUBDIR+=	gnome-dirs
 SUBDIR+=	gnome-user-docs
+SUBDIR+=	gnome-utils
 SUBDIR+=	gnome1-dirs
 SUBDIR+=	gnome2-dirs
-SUBDIR+=	gnome2-utils
 SUBDIR+=	gnuls
 SUBDIR+=	goffice
 SUBDIR+=	goffice0.2
@@ -88,6 +88,7 @@ SUBDIR+=	kanjidic
 SUBDIR+=	kanjidic2
 SUBDIR+=	kanjipad
 SUBDIR+=	kchm
+SUBDIR+=	kchmviewer
 SUBDIR+=	kde3-dirs
 SUBDIR+=	kdeaccessibility3
 SUBDIR+=	kdeaddons3

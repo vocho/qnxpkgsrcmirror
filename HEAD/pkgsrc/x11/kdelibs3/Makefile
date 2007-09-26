@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.126 2007/09/02 04:33:59 markd Exp $
+# $NetBSD: Makefile,v 1.128 2007/09/21 20:45:52 markd Exp $
 
 DISTNAME=	kdelibs-${_KDE_VERSION}
-PKGREVISION=	1
+PKGREVISION=	3
 CATEGORIES=	x11
 COMMENT=	Support libraries for the KDE integrated X11 desktop
 
 PATCH_SITES=	ftp://ftp.kde.org/pub/kde/security_patches/ \
 		http://mirrors.isc.org/pub/kde/security_patches/
-PATCHFILES=	post-3.5.7-kdelibs-kdecore.diff
+PATCHFILES=	post-3.5.7-kdelibs-kdecore-2.diff
 
 .include "../../meta-pkgs/kde3/Makefile.kde3"
 
@@ -99,7 +99,7 @@ GCC_REQD+=		2.95
 .include "../../devel/pcre/buildlink3.mk"
 .include "../../graphics/jasper/buildlink3.mk"
 .include "../../graphics/jpeg/buildlink3.mk"
-.include "../../graphics/libart2/buildlink3.mk"
+.include "../../graphics/libart/buildlink3.mk"
 .include "../../graphics/openexr/buildlink3.mk"
 .include "../../graphics/tiff/buildlink3.mk"
 .include "../../net/mDNSResponder/buildlink3.mk"

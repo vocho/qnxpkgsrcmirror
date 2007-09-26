@@ -21,7 +21,7 @@
 /
 / Stefan Bieschewski <stb@acm.org>
 /
-/ $Id: decode_i586_.s 147690 2007-01-03 15:01:08Z seanb $
+/ $Id: decode_i586_.s,v 1.2 2005/05/31 22:13:24 rillig Exp $
 /
 .bss
 	.comm	buffs,4352
