@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.34 2007/09/19 19:13:53 adam Exp $
+# $NetBSD: Makefile,v 1.36 2007/09/25 10:03:52 hira Exp $
 
 DISTNAME=	p7zip_4.55_src_all
 PKGNAME=	p7zip-4.55

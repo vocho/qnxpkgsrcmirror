@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.41 2007/09/21 13:03:55 wiz Exp $
+# $NetBSD: Makefile,v 1.43 2007/09/25 10:03:53 hira Exp $
 #
 
 DISTNAME=	scigraphica-2.1.0

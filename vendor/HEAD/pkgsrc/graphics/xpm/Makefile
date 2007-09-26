@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.56 2007/09/08 21:57:58 jlam Exp $
+# $NetBSD: Makefile,v 1.58 2007/09/25 10:03:53 hira Exp $
 
 DISTNAME=	xpm-3.4k
 PKGREVISION=	7

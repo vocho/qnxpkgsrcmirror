@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.33 2006/02/05 23:08:30 joerg Exp $
+# $NetBSD: Makefile,v 1.35 2007/09/25 10:03:52 hira Exp $
 
 DISTNAME=	freetds-0.63
 PKGREVISION=	4

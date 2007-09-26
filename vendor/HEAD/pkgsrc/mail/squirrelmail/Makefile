@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.89 2007/07/04 20:54:47 jlam Exp $
+# $NetBSD: Makefile,v 1.91 2007/09/25 10:07:06 hira Exp $
 
 DISTNAME=	squirrelmail-1.4.10a
 PKGREVISION=	2

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.24 2007/06/03 22:57:25 heinz Exp $
+# $NetBSD: Makefile,v 1.26 2007/09/25 10:03:52 hira Exp $
 
 DISTNAME=		flex-2.5.33
 PKGREVISION=		2

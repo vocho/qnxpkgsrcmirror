@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.26 2007/08/15 02:03:05 markd Exp $
+# $NetBSD: Makefile,v 1.28 2007/09/25 10:03:53 hira Exp $
 #
 
 PKGNAME=		sge-6.0.11
@@ -129,7 +129,7 @@ do-install:
 	cd ${SGE_ROOT} && ${SETENV} SGE_ROOT=${SGE_ROOT} ./util/setfileperm.sh -auto \
 		${SGE_ROOT}
 	for f in ${SGE_ROOT}/bin/${SGE_ARCH}/q* ; do \
-		cd ${PREFIX}/bin && ${LN} -fs $$f ; done
+		cd ${PREFIX}/bin && ln -fs $$f ; done
 
 #% scripts/distinst -local"
 

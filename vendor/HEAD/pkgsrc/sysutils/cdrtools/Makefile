@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.19 2007/09/18 23:07:26 wiz Exp $
+# $NetBSD: Makefile,v 1.23 2007/09/25 10:07:06 hira Exp $
 
 DISTNAME=	cdrtools-2.01.01a35
 PKGNAME=	cdrtools-2.01.01.35

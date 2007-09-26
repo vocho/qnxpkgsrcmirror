@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.4 2007/03/08 14:31:06 rillig Exp $
+# $NetBSD: Makefile,v 1.6 2007/09/25 10:03:53 hira Exp $
 #
 
 DISTNAME=	compiler-1.1
