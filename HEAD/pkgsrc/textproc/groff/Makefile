@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.47 2007/09/08 21:58:00 jlam Exp $
+# $NetBSD: Makefile,v 1.41 2007/02/19 11:19:48 rillig Exp $
 #
 
 DISTNAME=	groff-1.19.2
@@ -10,13 +10,10 @@ MAINTAINER=	wiz@NetBSD.org
 HOMEPAGE=	http://www.gnu.org/software/groff/groff.html
 COMMENT=	GNU roff text processing suite
 
-CHECK_PERMS=		NO
-
 USE_LANGUAGES=		c c++
 GNU_CONFIGURE=		YES
 CONFIGURE_ENV+=		PERLPATH=${PERL5:Q}
 USE_TOOLS+=		perl:run sed:run awk:run
-USE_FEATURES=		getopt_long
 
 INFO_FILES=		YES
 
@@ -38,27 +35,26 @@ PLIST_SUBST+=	GNU_PREFIX="g"
 PLIST_SUBST+=	GNU_PREFIX=""
 .endif
 
-.if ${OPSYS} == "SunOS" || ${OPSYS} == "HPUX"
-PLIST_SUBST+=	GNU_PREFIX_TMAC="g"
-.else
-PLIST_SUBST+=	GNU_PREFIX_TMAC=""
+.if ${OPSYS} == "IRIX"
+# needs getopt_long()
+. include "../../pkgtools/libnbcompat/buildlink3.mk"
 .endif
 
 .if ${OPSYS} == "QNX"
-CFLAGS+=-D_NO_CPP_INLINES -D_HAS_GENERIC_TEMPLATES=0
-# It builds on the HEAD (or what will be 6.3.3 at time of writing)
-# with the defines above. Point the following to the head or delete
-# it if you're at a late enough rev.
-CFLAGS+=-nostdinc -Wp,-isystem -Wp,/home/seanb/svn/stage/usr/include
+# The "pre-build", "post-build" is to work around bugs in 6.3.2 Heads
+# and procnto. With latest procnto and headers, you only need 
+# 	CFLAGS+= -D_NO_CPP_INLINES -D_HAS_GENERIC_TEMPLATES=0
+# to get this package compiled.
+CFLAGS+=-D_HAS_GENERIC_TEMPLATES=0
 USE_TOOLS+=             automake
 pre-configure:
 	cd ${WRKSRC} && aclocal && autoconf
-.endif
-
-.if ${OPSYS} == "SunOS" || ${OPSYS} == "HPUX" || ${OPSYS} == "OSF1"
-PLIST_SUBST+=	GNU_PREFIX_AN_TMAC="g"
-.else
-PLIST_SUBST+=	GNU_PREFIX_AN_TMAC=""
+pre-build:
+	@ln -sfP $(WRKSRC)/font $(PREFIX)/share/groff/site-font
+	@ln -sfP $(WRKSRC)/tmac $(PREFIX)/share/groff/site-tmac
+post-build:
+	@rm $(PREFIX)/share/groff/site-font
+	@rm $(PREFIX)/share/groff/site-tmac
 .endif
 
 BUILD_DEFS+=	PAPERSIZE
