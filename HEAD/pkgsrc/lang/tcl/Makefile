@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.61 2007/05/29 18:35:58 heinz Exp $
+# $NetBSD: Makefile,v 1.63 2007/09/25 10:03:53 hira Exp $
 
 DISTNAME=	tcl${TCL_VERSION}-src
 PKGNAME=	tcl-${TCL_VERSION}

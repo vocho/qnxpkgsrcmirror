@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.22 2007/03/06 22:57:46 rillig Exp $
+# $NetBSD: Makefile,v 1.24 2007/09/25 10:03:52 hira Exp $
 
 DISTNAME=	craftcc35
 PKGNAME=	craft-3.5

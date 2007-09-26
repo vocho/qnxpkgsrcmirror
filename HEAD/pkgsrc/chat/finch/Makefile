@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.6 2007/09/15 14:55:01 tnn Exp $
+# $NetBSD: Makefile,v 1.8 2007/09/25 10:03:52 hira Exp $
 #
 
 PKGNAME=	finch-${PIDGIN_VERSION}

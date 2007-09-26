@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.5 2007/09/21 13:03:49 wiz Exp $
+# $NetBSD: Makefile,v 1.7 2007/09/25 10:03:53 hira Exp $
 #
 
 DISTNAME=		gimp-fix-ca-2.1.0
