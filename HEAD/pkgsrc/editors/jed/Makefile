@@ -9,4 +9,11 @@ CONFLICTS=		xjed-[0-9]*
 
 CONFIGURE_ARGS+=	--without-X
 
+USE_TOOLS+=		autoconf
+
 .include "../../mk/bsd.pkg.mk"
+
+post-wrapper: ${WRKSRC}/configure
+
+${WRKSRC}/configure: ${WRKSRC}/autoconf/configure.in
+	cd ${WRKSRC}/autoconf && autoconf && cp configure $@
