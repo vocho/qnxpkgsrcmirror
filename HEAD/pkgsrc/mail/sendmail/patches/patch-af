@@ -2,23 +2,7 @@ $NetBSD: patch-af,v 1.11 2007/04/26 06:26:27 jnemeth Exp $
 
 --- sendmail/conf.c.orig	2007-04-03 17:32:29.000000000 -0400
 +++ sendmail/conf.c
-@@ -4232,6 +4232,7 @@ getipnodebyaddr(addr, len, family, err)
- 	return h;
- }
- 
-+#ifndef __QNXNTO__
- void
- freehostent(h)
- 	struct hostent *h;
-@@ -4243,6 +4244,7 @@ freehostent(h)
- 
- 	return;
- }
-+#endif
- #endif /* NETINET6 && NEEDSGETIPNODE */
- 
- struct hostent *
-@@ -4393,7 +4395,8 @@ sm_gethostbyaddr(addr, len, type)
+@@ -4393,7 +4393,8 @@ sm_gethostbyaddr(addr, len, type)
  
  #if NETINET6
  	if (type == AF_INET6 &&
