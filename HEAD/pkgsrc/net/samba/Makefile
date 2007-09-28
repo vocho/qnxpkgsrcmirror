@@ -147,6 +147,11 @@ install-samba-lib-symlinks:
 post-extract:
 	${CP} ${FILESDIR}/adduser.sh ${FILESDIR}/deluser.sh ${WRKDIR}
 
+.if ${OPSYS} == "QNX"
+post-patch:
+	${CP} ${FILESDIR}/qnx-strptime.c ${WRKSRC}/utils/strptime.c
+.endif
+
 post-install: install-samba-lib-symlinks
 	${RMDIR} ${PREFIX}/share/samba/swat/js
 	${RMDIR} ${PREFIX}/share/samba/swat/lang/ja/include
