@@ -34,6 +34,11 @@ case $arg in
 -std=c99		) transform_to "-Wc,-std=c99" ;;
 -std=gnu99		) transform_to "-Wc,-std=gnu99" ;;
 -d[DIMN]		) transform_to "-Wp,$arg" ;;
+# We suppose to transform -traditional to -Wp,-traditional
+# but qcc (cc1) does not support "-traditional", for now
+# we force them both to "-traditional-cpp" (PR51553)
+-traditional		) transform_to "-Wp,-traditional-cpp" ;;
+-traditional-cpp	) transform_to "-Wp,-traditional-cpp" ;;
 -W			|\
 -W[cLlS],*		|\
 -Wall			|\
