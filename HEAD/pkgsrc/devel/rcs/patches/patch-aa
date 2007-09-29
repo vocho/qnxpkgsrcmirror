@@ -1,0 +1,14 @@
+$NetBSD$
+
+--- src/rcsclean.c.orig	1995-06-16 02:19:24.000000000 -0400
++++ src/rcsclean.c
+@@ -32,6 +32,9 @@ Report problems and direct all questions
+ 	static int get_directory P((char const*,char***));
+ #endif
+ 
++#ifdef __QNXNTO__
++#define unlock rcsclean_unlock
++#endif
+ static int unlock P((struct hshentry *));
+ static void cleanup P((void));
+ 
