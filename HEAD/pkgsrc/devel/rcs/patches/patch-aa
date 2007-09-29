@@ -2,13 +2,30 @@ $NetBSD$
 
 --- src/rcsclean.c.orig	1995-06-16 02:19:24.000000000 -0400
 +++ src/rcsclean.c
-@@ -32,6 +32,9 @@ Report problems and direct all questions
+@@ -32,7 +32,7 @@ Report problems and direct all questions
  	static int get_directory P((char const*,char***));
  #endif
  
-+#ifdef __QNXNTO__
-+#define unlock rcsclean_unlock
-+#endif
- static int unlock P((struct hshentry *));
+-static int unlock P((struct hshentry *));
++static int rcsclean_unlock P((struct hshentry *));
  static void cleanup P((void));
  
+ static RILE *workptr;
+@@ -179,7 +179,7 @@ mainProg(rcscleanId, "rcsclean", "$Id: r
+ 			continue;
+ 
+ 		waslocked = delta && delta->lockedby;
+-		locker_expansion = unlock(delta);
++		locker_expansion = rcsclean_unlock(delta);
+ 		unlocked = locker_expansion & unlockflag;
+ 		if (unlocked<waslocked  &&  workstat.st_mode&(S_IWUSR|S_IWGRP|S_IWOTH))
+ 			continue;
+@@ -260,7 +260,7 @@ exiterr()
+ }
+ 
+ 	static int
+-unlock(delta)
++rcsclean_unlock(delta)
+ 	struct hshentry *delta;
+ {
+ 	register struct rcslock **al, *l;
