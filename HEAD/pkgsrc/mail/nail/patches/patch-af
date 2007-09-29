@@ -1,0 +1,13 @@
+$NetBSD$
+
+--- fio.c.orig	2005-02-19 08:39:34.000000000 -0500
++++ fio.c
+@@ -1015,7 +1015,7 @@ sgetline(char **line, size_t *linesize, 
+ }
+ 
+ enum okay
+-sopen(const char *xserver, struct sock *sp, int use_ssl,
++nail_sopen(const char *xserver, struct sock *sp, int use_ssl,
+ 		const char *uhp, const char *portstr, int verbose)
+ {
+ #ifdef	HAVE_IPv6_FUNCS

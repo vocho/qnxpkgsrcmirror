@@ -1,0 +1,13 @@
+$NetBSD$
+
+--- pop3.c.orig	2005-07-05 09:08:25.000000000 -0400
++++ pop3.c
+@@ -564,7 +564,7 @@ pop3_setfile(const char *server, int new
+ 	} else
+ 		user = NULL;
+ 	verbose = value("verbose") != NULL;
+-	if (sopen(sp, &so, use_ssl, uhp, use_ssl ? "pop3s" : "pop3",
++	if (nail_sopen(sp, &so, use_ssl, uhp, use_ssl ? "pop3s" : "pop3",
+ 				verbose) != OKAY) {
+ 		return -1;
+ 	}

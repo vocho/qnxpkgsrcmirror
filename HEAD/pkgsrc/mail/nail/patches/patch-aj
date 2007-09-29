@@ -1,0 +1,13 @@
+$NetBSD$
+
+--- smtp.c.orig	2005-07-13 08:58:36.000000000 -0400
++++ smtp.c
+@@ -409,7 +409,7 @@ smtp_mta(char *server, struct name *to, 
+ #endif
+ 	} else
+ 		use_ssl = 0;
+-	if (!debug && !_debug && sopen(server, &so, use_ssl, server,
++	if (!debug && !_debug && nail_sopen(server, &so, use_ssl, server,
+ 				use_ssl ? "smtps" : "smtp", verbose) != OKAY)
+ 		return 1;
+ 	so.s_desc = "SMTP";
