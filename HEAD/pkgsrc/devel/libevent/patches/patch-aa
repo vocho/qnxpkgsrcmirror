@@ -1,8 +1,8 @@
 $NetBSD: patch-aa,v 1.3 2007/08/01 17:00:03 joerg Exp $
 
---- select.c.orig	2007-08-01 18:53:42.000000000 +0200
+--- select.c.orig	2007-08-02 11:23:05.000000000 -0400
 +++ select.c
-@@ -47,6 +47,9 @@
+@@ -50,6 +50,9 @@
  #ifdef CHECK_INVARIANTS
  #include <assert.h>
  #endif
@@ -12,3 +12,15 @@ $NetBSD: patch-aa,v 1.3 2007/08/01 17:00:03 joerg Exp $
  
  #include "event.h"
  #include "event-internal.h"
+@@ -60,6 +63,11 @@
+ #define        howmany(x, y)   (((x)+((y)-1))/(y))
+ #endif
+ 
++#ifndef NFDBITS
++typedef int fd_mask;
++#define NFDBITS ((unsigned int)sizeof(fd_mask) * CHAR_BIT)
++#endif
++
+ struct selectop {
+ 	int event_fds;		/* Highest fd in fd set */
+ 	int event_fdsz;

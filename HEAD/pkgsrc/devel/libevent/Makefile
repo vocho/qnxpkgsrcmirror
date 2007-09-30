@@ -19,6 +19,7 @@ GNU_CONFIGURE=	yes
 USE_LIBTOOL=	yes
 TEST_TARGET=	verify
 PKG_DESTDIR_SUPPORT=	user-destdir
+USE_TOOLS+=	autoconf
 
 LIBS.SunOS+=	-lnsl -lresolv
 
@@ -28,7 +29,7 @@ LIBS.SunOS+=	-lnsl -lresolv
 .include "../../mk/bsd.prefs.mk"
 
 # Solaris and HPUX don't have u_intX_t types in <inttypes.h>.
-.if ${OPSYS} == "SunOS" || ${OPSYS} == "HPUX"
+.if ${OPSYS} == "SunOS" || ${OPSYS} == "HPUX" || ${OPSYS} == "QNX"
 CFLAGS+=	-Du_int8_t=uint8_t
 CFLAGS+=	-Du_int16_t=uint16_t
 CFLAGS+=	-Du_int32_t=uint32_t
@@ -41,4 +42,6 @@ SUBST_SED.inttypes+=	-e "s,u_int16_t,uint16_t,g"
 SUBST_SED.inttypes+=	-e "s,u_int32_t,uint32_t,g"
 .endif
 
+pre-configure:
+	cd ${WRKSRC} && autoconf
 .include "../../mk/bsd.pkg.mk"

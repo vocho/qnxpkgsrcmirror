@@ -3,5 +3,13 @@ $NetBSD: distinfo,v 1.17 2007/08/16 08:59:46 tnn Exp $
 SHA1 (libevent-1.3d.tar.gz) = 591b3c43652e1b88511d1022b296cf214b37644b
 RMD160 (libevent-1.3d.tar.gz) = 1eae8acefba6d09b4f7f5c99f9469c881dc5426a
 Size (libevent-1.3d.tar.gz) = 441883 bytes
-SHA1 (patch-aa) = 08a7dd87194730b0d3294deee7feb196e22c1b77
-SHA1 (patch-ad) = c842811d0b8e3f843a2f363dd2d11ec784fb8264
+SHA1 (patch-aa) = ea877baa6105a271fc53f0c1659b06d97324179b
+SHA1 (patch-ab) = 3650501e2dd051c3c2b6cc0bc1b865504b21e0bf
+SHA1 (patch-ac) = 31565bdc429d940d898a0ebc91318ab227a342a2
+SHA1 (patch-ad) = d890fc030a504cee5976f53933d7485472e920a0
+SHA1 (patch-ae) = 630e7c2b9f728675dd2799229189c378b0968bf7
+SHA1 (patch-af) = 55fd021502bc811218d0b61fc00fc57a1b2f6a3e
+SHA1 (patch-ag) = e08d56a1c047536011c4f450e2ba724b485aa9da
+SHA1 (patch-ah) = 12a40d31250edc2348dd59a12a4f1349cf4d37ce
+SHA1 (patch-ai) = 92f11b202411f84cc1c0852ba3d54a6f6290a713
+SHA1 (patch-aj) = e39c949c9da1208b4e64c14e8f34c7ed6e583a90
