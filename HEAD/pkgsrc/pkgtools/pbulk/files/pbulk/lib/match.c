@@ -38,6 +38,10 @@
 #include <nbcompat/stdio.h>
 #include <nbcompat/string.h>
 
+#ifdef HAVE_STRINGS_H
+#include <strings.h>
+#endif
+
 #include "pbulk.h"
 
 static int dewey_cmp(const char *, int, const char *);
