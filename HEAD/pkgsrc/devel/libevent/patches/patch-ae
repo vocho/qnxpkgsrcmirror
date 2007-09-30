@@ -1,0 +1,16 @@
+$NetBSD$
+
+--- poll.c.orig	2007-08-02 11:23:05.000000000 -0400
++++ poll.c
+@@ -38,7 +38,11 @@
+ #endif
+ #include <sys/queue.h>
+ #include <sys/tree.h>
++#ifdef HAVE_SYS_POLL_H
++#include <sys/poll.h>
++#else
+ #include <poll.h>
++#endif
+ #include <signal.h>
+ #include <stdio.h>
+ #include <stdlib.h>
