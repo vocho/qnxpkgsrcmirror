@@ -16,3 +16,7 @@ PTHREAD_OPTS+=		require
 
 .include "../../mk/pthread.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"
+
+.if ${OPSYS} == "QNX"
+LIBS+=			-lm
+.endif
