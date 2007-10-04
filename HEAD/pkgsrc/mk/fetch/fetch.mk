@@ -142,21 +142,6 @@ ${DISTDIR}/${_file_}: fetch-check-interactive do-fetch-file error-check
 .  endif
 .endfor
 
-.if ${OPSYS} == "QNX"
-# Bug?
-#
-# The 'do-fetch: ${_ALLFILES:S/^/${DISTDIR}\//}'
-# line above leaves a dependency on ${DISTDIR}/
-# if _ALLFILES is empty.  The proper fix is
-# probably to filter out the dependency in
-# question but use the brute force method. 
-
-.if !target(${DISTDIR}/)
-${DISTDIR}/:
-	${MKDIR} -m g+w ${.TARGET}
-.endif
-.endif
-
 ######################################################################
 ### fetch-check-interactive (PRIVATE)
 ######################################################################
