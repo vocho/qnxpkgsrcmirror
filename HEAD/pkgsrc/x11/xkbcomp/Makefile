@@ -14,8 +14,12 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=		yes
 USE_TOOLS+=		pkg-config
+USE_TOOLS+=		autoconf
 
 CONFIGURE_ENV+=		APP_MAN_SUFFIX=1
+
+pre-configure:
+	cd ${WRKSRC} && autoconf
 
 .include "../../x11/libX11/buildlink3.mk"
 .include "../../x11/libxkbfile/buildlink3.mk"
