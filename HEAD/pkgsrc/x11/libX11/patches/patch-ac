@@ -1,6 +1,6 @@
-$NetBSD: patch-ac,v 1.2 2007/08/05 22:39:38 joerg Exp $
+$NetBSD$
 
---- configure.orig	2007-08-06 00:08:02.000000000 +0200
+--- configure.orig	2007-08-01 20:36:36.000000000 +0200
 +++ configure
 @@ -926,6 +926,8 @@ XKB_FALSE
  XKBPROTO_CFLAGS
@@ -11,7 +11,94 @@ $NetBSD: patch-ac,v 1.2 2007/08/05 22:39:38 joerg Exp $
  LINT
  LINT_FLAGS
  LINT_TRUE
-@@ -23423,6 +23425,15 @@ else
+@@ -4357,7 +4359,7 @@ newos6*)
+   ;;
+ 
+ nto-qnx*)
+-  lt_cv_deplibs_check_method=unknown
++  lt_cv_deplibs_check_method='match_pattern /lib[^/]+(\.so|S\.a)$'
+   ;;
+ 
+ openbsd*)
+@@ -7463,6 +7465,10 @@ echo $ECHO_N "checking for $compiler opt
+       lt_prog_compiler_static='-Bstatic'
+       ;;
+ 
++    nto-qnx*)
++      lt_prog_compiler_pic='-fPIC'
++      ;;
++
+     *)
+       lt_prog_compiler_can_build_shared=no
+       ;;
+@@ -7933,6 +7939,11 @@ _LT_EOF
+       hardcode_shlibpath_var=no
+       ;;
+ 
++    nto-qnx*)
++       archive_cmds='$CC -shared $libobjs $deplibs $compiler_flags ${wl}-soname $wl$soname -o $lib'
++       archive_expsym_cmds='$CC -shared $libobjs $deplibs $compiler_flags ${wl}-soname $wl$soname ${wl}-retain-symbols-file $wl$export_symbols -o $lib'
++       ;;
++
+     *)
+       if $LD --help 2>&1 | grep ': supported targets:.* elf' > /dev/null; then
+ 	archive_cmds='$CC -shared $libobjs $deplibs $compiler_flags ${wl}-soname $wl$soname -o $lib'
+@@ -8625,6 +8636,13 @@ if test -z "$aix_libpath"; then aix_libp
+       hardcode_shlibpath_var=no
+       ;;
+ 
++    nto-qnx*)
++      archive_cmds='$LD -shared -o $lib $libobjs $deplibs $linker_flags'
++      hardcode_libdir_flag_spec='-R$libdir'
++      hardcode_direct=yes
++      hardcode_shlibpath_var=no
++      ;;
++
+     *)
+       ld_shlibs=no
+       ;;
+@@ -9153,6 +9171,7 @@ nto-qnx*)
+   need_lib_prefix=no
+   need_version=no
+   library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${release}${shared_ext}$major $libname${shared_ext}'
++  dynamic_linker='QNX libc.so'
+   soname_spec='${libname}${release}${shared_ext}$major'
+   shlibpath_var=LD_LIBRARY_PATH
+   shlibpath_overrides_runpath=yes
+@@ -13119,6 +13138,7 @@ nto-qnx*)
+   need_lib_prefix=no
+   need_version=no
+   library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${release}${shared_ext}$major $libname${shared_ext}'
++  dynamic_linker='QNX libc.so'
+   soname_spec='${libname}${release}${shared_ext}$major'
+   shlibpath_var=LD_LIBRARY_PATH
+   shlibpath_overrides_runpath=yes
+@@ -15720,6 +15740,7 @@ nto-qnx*)
+   need_lib_prefix=no
+   need_version=no
+   library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${release}${shared_ext}$major $libname${shared_ext}'
++  dynamic_linker='QNX libc.so'
+   soname_spec='${libname}${release}${shared_ext}$major'
+   shlibpath_var=LD_LIBRARY_PATH
+   shlibpath_overrides_runpath=yes
+@@ -18321,6 +18342,7 @@ nto-qnx*)
+   need_lib_prefix=no
+   need_version=no
+   library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${release}${shared_ext}$major $libname${shared_ext}'
++  dynamic_linker='QNX libc.so'
+   soname_spec='${libname}${release}${shared_ext}$major'
+   shlibpath_var=LD_LIBRARY_PATH
+   shlibpath_overrides_runpath=yes
+@@ -20258,7 +20280,7 @@ fi
+ 
+ 
+ 
+-for ac_prog in cpp
++for ac_prog in cpp ucpp
+ do
+   # Extract the first word of "$ac_prog", so it can be a program name with args.
+ set dummy $ac_prog; ac_word=$2
+@@ -23423,6 +23445,15 @@ else
  fi
  
  
@@ -27,7 +114,7 @@ $NetBSD: patch-ac,v 1.2 2007/08/05 22:39:38 joerg Exp $
  
  
  for ac_header in stdlib.h unistd.h
-@@ -24523,6 +24534,13 @@ echo "$as_me: error: conditional \"XKB\"
+@@ -24523,6 +24554,13 @@ echo "$as_me: error: conditional \"XKB\"
  Usually this means the macro was only invoked conditionally." >&2;}
     { (exit 1); exit 1; }; }
  fi
@@ -41,7 +128,18 @@ $NetBSD: patch-ac,v 1.2 2007/08/05 22:39:38 joerg Exp $
  if test -z "${LINT_TRUE}" && test -z "${LINT_FALSE}"; then
    { { echo "$as_me:$LINENO: error: conditional \"LINT\" was never defined.
  Usually this means the macro was only invoked conditionally." >&5
-@@ -25339,6 +25357,8 @@ XKB_FALSE!$XKB_FALSE$ac_delim
+@@ -24919,6 +24957,10 @@ do
+   case $ac_option in
+   # Handling of the options.
+   -recheck | --recheck | --rechec | --reche | --rech | --rec | --re | --r)
++	: Avoid regenerating within pkgsrc
++	exit 0
++	: Avoid regenerating within pkgsrc
++	exit 0
+     ac_cs_recheck=: ;;
+   --version | --versio | --versi | --vers | --ver | --ve | --v | -V )
+     echo "$ac_cs_version"; exit ;;
+@@ -25339,6 +25381,8 @@ XKB_FALSE!$XKB_FALSE$ac_delim
  XKBPROTO_CFLAGS!$XKBPROTO_CFLAGS$ac_delim
  XKBPROTO_LIBS!$XKBPROTO_LIBS$ac_delim
  XKBPROTO_REQUIRES!$XKBPROTO_REQUIRES$ac_delim
@@ -50,7 +148,7 @@ $NetBSD: patch-ac,v 1.2 2007/08/05 22:39:38 joerg Exp $
  LINT!$LINT$ac_delim
  LINT_FLAGS!$LINT_FLAGS$ac_delim
  LINT_TRUE!$LINT_TRUE$ac_delim
-@@ -25360,7 +25380,7 @@ LIBOBJS!$LIBOBJS$ac_delim
+@@ -25360,7 +25404,7 @@ LIBOBJS!$LIBOBJS$ac_delim
  LTLIBOBJS!$LTLIBOBJS$ac_delim
  _ACEOF
  
