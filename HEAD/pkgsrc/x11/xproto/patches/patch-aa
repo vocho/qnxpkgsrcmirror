@@ -1,4 +1,4 @@
-$NetBSD: patch-aa,v 1.4 2006/12/30 11:50:11 joerg Exp $
+$NetBSD$
 
 --- Xos_r.h.in.orig	2006-09-20 19:59:42.000000000 +0200
 +++ Xos_r.h.in
@@ -58,6 +58,15 @@ $NetBSD: patch-aa,v 1.4 2006/12/30 11:50:11 joerg Exp $
  #  define XOS_USE_MTSAFE_NETDBAPI 1
  # endif
  #endif
+@@ -430,7 +431,7 @@ typedef int _Xgetservbynameparams; /* du
+ /* UnixWare 2.0, or other systems with thread support but no _r API. */
+ /* WARNING:  The h_addr_list and s_aliases values are *not* copied! */
+ 
+-#if defined(__NetBSD__) || defined(__FreeBSD__) || defined(__DragonFly__)
++#if defined(__NetBSD__) || defined(__FreeBSD__) || defined(__DragonFly__) || defined(__QNX__)
+ #include <sys/param.h>
+ #endif
+ 
 @@ -573,7 +574,7 @@ typedef int _Xgetservbynameparams; /* du
  #   define dirent direct
  #  endif
