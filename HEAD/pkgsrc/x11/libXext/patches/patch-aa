@@ -1,0 +1,15 @@
+$NetBSD$
+
+search for ucpp as a preprocessor, too
+
+--- configure.orig	2007-10-18 20:53:29.000000000 +0200
++++ configure
+@@ -21151,7 +21151,7 @@ _ACEOF
+ # Man page processing requirements
+ 
+ 
+-for ac_prog in cpp
++for ac_prog in cpp ucpp
+ do
+   # Extract the first word of "$ac_prog", so it can be a program name with args.
+ set dummy $ac_prog; ac_word=$2
