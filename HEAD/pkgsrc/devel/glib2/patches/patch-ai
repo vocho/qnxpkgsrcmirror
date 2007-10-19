@@ -1,8 +1,8 @@
-$NetBSD: patch-ai,v 1.13 2007/01/10 14:57:33 drochner Exp $
+$NetBSD$
 
---- glib/gmain.c.orig	2007-01-10 14:36:51.000000000 +0100
+--- glib/gmain.c.orig	2007-09-16 19:32:03.000000000 +0200
 +++ glib/gmain.c
-@@ -2619,13 +2619,13 @@ g_main_context_iterate (GMainContext *co
+@@ -2636,13 +2636,13 @@ g_main_context_iterate (GMainContext *co
      {
        gboolean got_ownership;
        
@@ -18,7 +18,7 @@ $NetBSD: patch-ai,v 1.13 2007/01/10 14:57:33 drochner Exp $
        if (!context->cond)
  	context->cond = g_cond_new ();
            
-@@ -2635,7 +2635,6 @@ g_main_context_iterate (GMainContext *co
+@@ -2652,7 +2652,6 @@ g_main_context_iterate (GMainContext *co
  
        if (!got_ownership)
  	{
@@ -26,3 +26,16 @@ $NetBSD: patch-ai,v 1.13 2007/01/10 14:57:33 drochner Exp $
  	  return FALSE;
  	}
      }
+@@ -3938,7 +3937,12 @@ g_child_watch_source_init_multi_threaded
+  
+   action.sa_handler = g_child_watch_signal_handler;
+   sigemptyset (&action.sa_mask);
++#ifndef __QNXNTO__
+   action.sa_flags = SA_RESTART | SA_NOCLDSTOP;
++#else
++  #warning QNX does not yet support SA_RESTART - therefore do not use multi threaded applications!?
++  action.sa_flags = SA_NOCLDSTOP;
++#endif
+   sigaction (SIGCHLD, &action, NULL);
+ }
+ 
