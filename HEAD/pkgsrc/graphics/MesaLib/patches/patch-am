@@ -1,4 +1,4 @@
-$NetBSD: patch-am,v 1.7 2007/08/13 11:18:47 seb Exp $
+$NetBSD$
 
 --- include/GL/glxext.h.orig	2005-11-07 22:20:29.000000000 +0100
 +++ include/GL/glxext.h
@@ -15,12 +15,15 @@ $NetBSD: patch-am,v 1.7 2007/08/13 11:18:47 seb Exp $
  typedef long int int64_t;
  #else
  typedef long long int int64_t;   
-@@ -343,7 +343,7 @@ typedef long long int int64_t;   
+@@ -343,9 +343,9 @@ typedef long long int int64_t;   
  #elif defined(__UNIXOS2__) || defined(__SOL64__)
  typedef long int int32_t;
  typedef long long int int64_t;
 -#elif defined( __VMS )
 +#elif defined( __VMS ) || defined(__sgi)
  #include <inttypes.h>
- #elif defined(__SCO__) || defined(__USLC__)
+-#elif defined(__SCO__) || defined(__USLC__)
++#elif defined(__SCO__) || defined(__USLC__) || defined(__QNXNTO__)
+ #include <stdint.h>
+ #elif defined(WIN32) && defined(__GNUC__)
  #include <stdint.h>
