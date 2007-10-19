@@ -14,7 +14,7 @@ TOUCH_FLAGS?=
 USERADD?=	/usr/sbin/passwd
 
 CPP_PRECOMP_FLAGS?=	# unset
-DEF_UMASK?=		0022
+DEF_UMASK?=		0002
 EXPORT_SYMBOLS_LDFLAGS?=-Wl,-E	# add symbols to the dynamic symbol table
 NOLOGIN?=		/bin/false
 .if exists(${LOCALBASE}/sbin/pkg_info)
