@@ -9,5 +9,6 @@ Size (libiconv-1.11.tar.gz) = 4430930 bytes
 SHA1 (patch-aa) = 9bfac74baf8c103760c642e1fa57388886e75607
 SHA1 (patch-ab) = d459b849adf870c345007d11a0a9dc790649adbc
 SHA1 (patch-ac) = 52183b39c7fab57fc93972a62cbbba79b16ccce6
+SHA1 (patch-ad) = 3f80ffc9212a0807da5355e187e02f0223bccf83
 SHA1 (patch-ae) = e18c4d9dd76b27e40c8dcd273f856fe5933f72bc
 SHA1 (patch-af) = 1bcd89564e20834c605e4a78e6fe1035b515b9a6

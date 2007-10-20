@@ -1,0 +1,13 @@
+$NetBSD$
+
+--- configure.orig	2006-07-19 15:10:15.000000000 -0400
++++ configure
+@@ -21396,7 +21396,7 @@ LIBTOOL='$(SHELL) $(top_builddir)/libtoo
+ 
+   CFLAG_VISIBILITY=
+   HAVE_VISIBILITY=0
+-  if test -n "$GCC"; then
++  if test -n "$GCC" && ! echo $host_os | grep ^nto-qnx > /dev/null; then
+     { echo "$as_me:$LINENO: checking for simple visibility declarations" >&5
+ echo $ECHO_N "checking for simple visibility declarations... $ECHO_C" >&6; }
+     if test "${gl_cv_cc_visibility+set}" = set; then
