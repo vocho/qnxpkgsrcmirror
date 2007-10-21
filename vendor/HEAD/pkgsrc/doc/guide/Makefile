@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.29 2007/07/02 19:00:01 tnn Exp $
+# $NetBSD: Makefile,v 1.32 2007/10/12 01:29:10 dmcmahill Exp $
 #
 
 DISTNAME=		pkgsrc-guide-${PKGVERSION}
 CATEGORIES=		# empty
 MASTER_SITES=		${MASTER_SITE_LOCAL}
-DISTFILES=		htdocs-share-20070702.tar.gz
+DISTFILES=		htdocs-share-20071010.tar.gz
 
 MAINTAINER=		packages@NetBSD.org
 HOMEPAGE=		http://www.NetBSD.org/docs/pkgsrc/
@@ -48,6 +48,7 @@ pre-extract:
 
 do-build:
 .for _output_ in ${OUTPUTS}
+	@${ECHO} "-----> Building ${_output_} output"
 	@cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${MAKE_PROGRAM} ${MAKE_FLAGS} ${_output_}
 .endfor
 
@@ -133,7 +134,7 @@ detab:
 .PHONY: htdocs-share
 htdocs-share:
 	cd ${HTDOCSDIR}							\
-	&& pax -wz -f ${.CURDIR}/htdocs-share-${PKGVERSION}.tar.gz	\
+	&& ${PAX} -wz -f ${.CURDIR}/htdocs-share-${PKGVERSION}.tar.gz	\
 		-s ',^,htdocs/,'					\
 		global.css share
 

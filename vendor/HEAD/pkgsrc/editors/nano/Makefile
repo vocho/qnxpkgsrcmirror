@@ -1,11 +1,10 @@
-# $NetBSD: Makefile,v 1.26 2006/07/06 13:19:39 joerg Exp $
+# $NetBSD: Makefile,v 1.28 2007/10/14 13:30:45 obache Exp $
 
-DISTNAME=	nano-1.2.4
-PKGREVISION=	1
+DISTNAME=	nano-1.2.5
 CATEGORIES=	editors
 MASTER_SITES=	http://www.nano-editor.org/dist/v1.2/
 
-MAINTAINER=	shell@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.nano-editor.org/
 COMMENT=	Small and friendly text editor (a free replacement for Pico)
 
@@ -13,7 +12,7 @@ GNU_CONFIGURE=		yes
 USE_PKGLOCALEDIR=	yes
 USE_TOOLS+=		msgfmt
 
-INFO_FILES=	# PLIST
+INFO_FILES=	yes
 
 CONFIGURE_ARGS+=	--enable-color
 CONFIGURE_ARGS+=	--enable-multibuffer

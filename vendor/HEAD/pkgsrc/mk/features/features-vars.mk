@@ -1,11 +1,24 @@
-# $NetBSD: features-vars.mk,v 1.5 2007/09/08 05:06:40 jlam Exp $
+# $NetBSD: features-vars.mk,v 1.8 2007/10/16 23:49:01 tnn Exp $
 #
-# This file is include by bsd.prefs.mk.
+# This file is included by bsd.prefs.mk.
 #
 # Package-settable variables:
 #
 # USE_FEATURES
 #	Lists the system features required by the package.
+#
+#	Possible:
+#	* err: The functions err, verr, errx, verrx.
+#	* warn: The functions warn, vwarn, warnx, vwarnx.
+#	* fts_close, ftp_open, fts_read, fts_set: Functions
+#	  for filesystem traversal.
+#	* getopt_long: The GNU version of getopt.
+#	* getprogname, setprogname
+#	* glob
+#	* regcomp
+#	* snprintf, vsnprintf
+#	* utimes
+#	* nbcompat: All of the above.
 #
 #	Default value: undefined
 #
@@ -16,6 +29,11 @@
 #	current system.  Also includes "inet6" if the system doesn't
 #	support IPv6.
 #
+
+_VARGROUPS+=		features
+_USER_VARS.features=	# none
+_PKG_VARS.features=	USE_FEATURES
+_SYS_VARS.features=	MISSING_FEATURES
 
 MISSING_FEATURES=	# empty
 
@@ -79,7 +97,7 @@ MISSING_FEATURES+=	${_feature_}
 
 .for _feature_ in snprintf vsnprintf
 .  if defined(USE_FEATURES) && !empty(USE_FEATURES:M${_feature_})
-.    if !empty(LOWER_OPSYS:Mirix5*)
+.    if ${OPSYS} == "IRIX"
 MISSING_FEATURES+=	${_feature_}
 .    endif
 .  endif
