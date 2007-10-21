@@ -63,4 +63,6 @@ Size (vim/vim-7.1.tar.bz2) = 6876053 bytes
 SHA1 (patch-aa) = 295e02a4e95dc4b0a0e0036c68fa48cb061d840a
 SHA1 (patch-ab) = 6d27ed09cb741313e57b3550e62977797f7b285e
 SHA1 (patch-ad) = 64a58a538f8f48b4db7416b4ffec081ed6625329
+SHA1 (patch-af) = ae85c618ca948163facbadde785d5116e632089b
+SHA1 (patch-ag) = be045c4d8ab1ef039287fa93aa66fe1ea77f3ca8
 SHA1 (patch-zb) = d52bdc3b77c30c804e78c2c6a4182fad8096c9f0
