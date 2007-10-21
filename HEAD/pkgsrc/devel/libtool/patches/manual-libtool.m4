@@ -1,6 +1,6 @@
-$NetBSD: manual-libtool.m4,v 1.21 2007/09/15 12:11:45 joerg Exp $
+$NetBSD$
 
---- libtool.m4.orig	2007-06-24 04:19:11.000000000 +0200
+--- libtool.m4.orig	2007-06-23 22:19:11.000000000 -0400
 +++ libtool.m4
 @@ -402,11 +402,11 @@ else
  
@@ -102,9 +102,11 @@ $NetBSD: manual-libtool.m4,v 1.21 2007/09/15 12:11:45 joerg Exp $
      finish_cmds='PATH="\$PATH:/sbin" ldconfig -m $libdir'
      dynamic_linker='NetBSD (a.out) ld.so'
    else
-@@ -1663,13 +1681,14 @@ nto-qnx*)
+@@ -1662,14 +1680,16 @@ nto-qnx*)
+   version_type=linux
    need_lib_prefix=no
    need_version=no
++  sys_lib_search_path_spec="/lib /usr/lib"
    library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${release}${shared_ext}$major $libname${shared_ext}'
 +  dynamic_linker='QNX libc.so'
    soname_spec='${libname}${release}${shared_ext}$major'
@@ -118,7 +120,7 @@ $NetBSD: manual-libtool.m4,v 1.21 2007/09/15 12:11:45 joerg Exp $
    sys_lib_dlsearch_path_spec="/usr/lib"
    need_lib_prefix=no
    # Some older versions of OpenBSD (3.3 at least) *do* need versioned libs.
-@@ -1677,7 +1696,7 @@ openbsd*)
+@@ -1677,7 +1697,7 @@ openbsd*)
      openbsd3.3 | openbsd3.3.*) need_version=yes ;;
      *)                         need_version=no  ;;
    esac
@@ -127,7 +129,7 @@ $NetBSD: manual-libtool.m4,v 1.21 2007/09/15 12:11:45 joerg Exp $
    finish_cmds='PATH="\$PATH:/sbin" ldconfig -m $libdir'
    shlibpath_var=LD_LIBRARY_PATH
    if test -z "`echo __ELF__ | $CC -E - | grep __ELF__`" || test "$host_os-$host_cpu" = "openbsd2.8-powerpc"; then
-@@ -1871,9 +1890,7 @@ if test -f "$ltmain" && test -n "$tagnam
+@@ -1871,9 +1891,7 @@ if test -f "$ltmain" && test -n "$tagnam
  
        case $tagname in
        CXX)
@@ -138,7 +140,7 @@ $NetBSD: manual-libtool.m4,v 1.21 2007/09/15 12:11:45 joerg Exp $
  	  AC_LIBTOOL_LANG_CXX_CONFIG
  	else
  	  tagname=""
-@@ -2392,6 +2409,10 @@ interix[[3-9]]*)
+@@ -2392,6 +2410,10 @@ interix[[3-9]]*)
    lt_cv_deplibs_check_method='match_pattern /lib[[^/]]+(\.so|\.a)$'
    ;;
  
@@ -149,7 +151,7 @@ $NetBSD: manual-libtool.m4,v 1.21 2007/09/15 12:11:45 joerg Exp $
  irix5* | irix6* | nonstopux*)
    case $LD in
    *-32|*"-32 ") libmagic=32-bit;;
-@@ -2422,7 +2443,7 @@ newos6*)
+@@ -2422,7 +2444,7 @@ newos6*)
    ;;
  
  nto-qnx*)
@@ -158,7 +160,7 @@ $NetBSD: manual-libtool.m4,v 1.21 2007/09/15 12:11:45 joerg Exp $
    ;;
  
  openbsd*)
-@@ -2629,21 +2650,10 @@ AC_DEFUN([AC_LIBTOOL_CXX],
+@@ -2629,21 +2651,10 @@ AC_DEFUN([AC_LIBTOOL_CXX],
  # ---------------
  AC_DEFUN([_LT_AC_LANG_CXX],
  [AC_REQUIRE([AC_PROG_CXX])
@@ -181,7 +183,7 @@ $NetBSD: manual-libtool.m4,v 1.21 2007/09/15 12:11:45 joerg Exp $
  
  # AC_LIBTOOL_F77
  # --------------
-@@ -2781,7 +2791,7 @@ AC_DEFUN([AC_LIBTOOL_LANG_CXX_CONFIG], [
+@@ -2781,7 +2792,7 @@ AC_DEFUN([AC_LIBTOOL_LANG_CXX_CONFIG], [
  AC_DEFUN([_LT_AC_LANG_CXX_CONFIG],
  [AC_LANG_PUSH(C++)
  AC_REQUIRE([AC_PROG_CXX])
@@ -190,7 +192,7 @@ $NetBSD: manual-libtool.m4,v 1.21 2007/09/15 12:11:45 joerg Exp $
  
  _LT_AC_TAGVAR(archive_cmds_need_lc, $1)=no
  _LT_AC_TAGVAR(allow_undefined_flag, $1)=
-@@ -3294,6 +3304,16 @@ case $host_os in
+@@ -3294,6 +3305,16 @@ case $host_os in
      _LT_AC_TAGVAR(archive_cmds, $1)='$CC -shared $pic_flag $libobjs $deplibs $compiler_flags ${wl}-h,$soname ${wl}--image-base,`expr ${RANDOM-$$} % 4096 / 2 \* 262144 + 1342177280` -o $lib'
      _LT_AC_TAGVAR(archive_expsym_cmds, $1)='sed "s,^,_," $export_symbols >$output_objdir/$soname.expsym~$CC -shared $pic_flag $libobjs $deplibs $compiler_flags ${wl}-h,$soname ${wl}--retain-symbols-file,$output_objdir/$soname.expsym ${wl}--image-base,`expr ${RANDOM-$$} % 4096 / 2 \* 262144 + 1342177280` -o $lib'
      ;;
@@ -207,7 +209,7 @@ $NetBSD: manual-libtool.m4,v 1.21 2007/09/15 12:11:45 joerg Exp $
    irix5* | irix6*)
      case $cc_basename in
        CC*)
-@@ -3447,14 +3467,29 @@ case $host_os in
+@@ -3447,14 +3468,29 @@ case $host_os in
      ;;
    netbsd*)
      if echo __ELF__ | $CC -E - | grep __ELF__ >/dev/null; then
@@ -239,7 +241,7 @@ $NetBSD: manual-libtool.m4,v 1.21 2007/09/15 12:11:45 joerg Exp $
      ;;
    openbsd2*)
      # C++ shared libraries are fairly broken
-@@ -3767,6 +3802,11 @@ case $host_os in
+@@ -3767,6 +3803,11 @@ case $host_os in
      # FIXME: insert proper C++ library support
      _LT_AC_TAGVAR(ld_shlibs, $1)=no
      ;;
@@ -251,7 +253,7 @@ $NetBSD: manual-libtool.m4,v 1.21 2007/09/15 12:11:45 joerg Exp $
    *)
      # FIXME: insert proper C++ library support
      _LT_AC_TAGVAR(ld_shlibs, $1)=no
-@@ -3928,6 +3968,21 @@ if AC_TRY_EVAL(ac_compile); then
+@@ -3928,6 +3969,21 @@ if AC_TRY_EVAL(ac_compile); then
      esac
    done
  
@@ -273,7 +275,7 @@ $NetBSD: manual-libtool.m4,v 1.21 2007/09/15 12:11:45 joerg Exp $
    # Clean up.
    rm -f a.out a.exe
  else
-@@ -4966,9 +5021,11 @@ AC_MSG_CHECKING([for $compiler option to
+@@ -4966,9 +5022,11 @@ AC_MSG_CHECKING([for $compiler option to
        _LT_AC_TAGVAR(lt_prog_compiler_pic, $1)='-DDLL_EXPORT'
        ;;
      darwin* | rhapsody*)
@@ -286,7 +288,7 @@ $NetBSD: manual-libtool.m4,v 1.21 2007/09/15 12:11:45 joerg Exp $
        ;;
      *djgpp*)
        # DJGPP does not support shared libraries at all
-@@ -4994,6 +5051,10 @@ AC_MSG_CHECKING([for $compiler option to
+@@ -4994,6 +5052,10 @@ AC_MSG_CHECKING([for $compiler option to
  	;;
        esac
        ;;
@@ -297,7 +299,7 @@ $NetBSD: manual-libtool.m4,v 1.21 2007/09/15 12:11:45 joerg Exp $
      *)
        _LT_AC_TAGVAR(lt_prog_compiler_pic, $1)='-fPIC'
        ;;
-@@ -5072,6 +5133,8 @@ AC_MSG_CHECKING([for $compiler option to
+@@ -5072,6 +5134,8 @@ AC_MSG_CHECKING([for $compiler option to
  	# This is c89, which is MS Visual C++ (no shared libs)
  	# Anyone wants to do a port?
  	;;
@@ -306,7 +308,7 @@ $NetBSD: manual-libtool.m4,v 1.21 2007/09/15 12:11:45 joerg Exp $
        irix5* | irix6* | nonstopux*)
  	case $cc_basename in
  	  CC*)
-@@ -5211,6 +5274,8 @@ AC_MSG_CHECKING([for $compiler option to
+@@ -5211,6 +5275,8 @@ AC_MSG_CHECKING([for $compiler option to
  	;;
        vxworks*)
  	;;
@@ -315,7 +317,7 @@ $NetBSD: manual-libtool.m4,v 1.21 2007/09/15 12:11:45 joerg Exp $
        *)
  	_LT_AC_TAGVAR(lt_prog_compiler_can_build_shared, $1)=no
  	;;
-@@ -5251,9 +5316,11 @@ AC_MSG_CHECKING([for $compiler option to
+@@ -5251,9 +5317,11 @@ AC_MSG_CHECKING([for $compiler option to
        ;;
  
      darwin* | rhapsody*)
@@ -328,7 +330,7 @@ $NetBSD: manual-libtool.m4,v 1.21 2007/09/15 12:11:45 joerg Exp $
        ;;
  
      interix[[3-9]]*)
-@@ -5287,6 +5354,11 @@ AC_MSG_CHECKING([for $compiler option to
+@@ -5287,6 +5355,11 @@ AC_MSG_CHECKING([for $compiler option to
        esac
        ;;
  
@@ -340,7 +342,7 @@ $NetBSD: manual-libtool.m4,v 1.21 2007/09/15 12:11:45 joerg Exp $
      *)
        _LT_AC_TAGVAR(lt_prog_compiler_pic, $1)='-fPIC'
        ;;
-@@ -5441,6 +5513,10 @@ AC_MSG_CHECKING([for $compiler option to
+@@ -5441,6 +5514,10 @@ AC_MSG_CHECKING([for $compiler option to
        _LT_AC_TAGVAR(lt_prog_compiler_static, $1)='-Bstatic'
        ;;
  
@@ -351,7 +353,7 @@ $NetBSD: manual-libtool.m4,v 1.21 2007/09/15 12:11:45 joerg Exp $
      *)
        _LT_AC_TAGVAR(lt_prog_compiler_can_build_shared, $1)=no
        ;;
-@@ -5719,6 +5795,17 @@ EOF
+@@ -5719,6 +5796,17 @@ EOF
        fi
        ;;
  
@@ -369,7 +371,7 @@ $NetBSD: manual-libtool.m4,v 1.21 2007/09/15 12:11:45 joerg Exp $
      netbsd*)
        if echo __ELF__ | $CC -E - | grep __ELF__ >/dev/null; then
  	_LT_AC_TAGVAR(archive_cmds, $1)='$LD -Bshareable $libobjs $deplibs $linker_flags -o $lib'
-@@ -5784,6 +5871,11 @@ _LT_EOF
+@@ -5784,6 +5872,11 @@ _LT_EOF
        _LT_AC_TAGVAR(hardcode_shlibpath_var, $1)=no
        ;;
  
@@ -381,7 +383,7 @@ $NetBSD: manual-libtool.m4,v 1.21 2007/09/15 12:11:45 joerg Exp $
      *)
        if $LD --help 2>&1 | grep ': supported targets:.* elf' > /dev/null; then
  	_LT_AC_TAGVAR(archive_cmds, $1)='$CC -shared $libobjs $deplibs $compiler_flags ${wl}-soname $wl$soname -o $lib'
-@@ -6139,6 +6231,21 @@ _LT_EOF
+@@ -6139,6 +6232,21 @@ _LT_EOF
        fi
        ;;
  
@@ -403,7 +405,7 @@ $NetBSD: manual-libtool.m4,v 1.21 2007/09/15 12:11:45 joerg Exp $
      irix5* | irix6* | nonstopux*)
        if test "$GCC" = yes; then
  	_LT_AC_TAGVAR(archive_cmds, $1)='$CC -shared $libobjs $deplibs $compiler_flags ${wl}-soname ${wl}$soname `test -n "$verstring" && echo ${wl}-set_version ${wl}$verstring` ${wl}-update_registry ${wl}${output_objdir}/so_locations -o $lib'
-@@ -6364,6 +6471,13 @@ _LT_EOF
+@@ -6364,6 +6472,13 @@ _LT_EOF
        _LT_AC_TAGVAR(hardcode_shlibpath_var, $1)=no
        ;;
  
