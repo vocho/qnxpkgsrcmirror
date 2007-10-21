@@ -25,6 +25,12 @@ post-install:
 	${LN} -s vim ${PREFIX:Q}/bin/${f:Q}
 .endfor
 
+.if ${OPSYS} == "QNX"
+USE_TOOLS+=             automake
+pre-configure:
+	cd ${WRKSRC} && aclocal && autoconf
+.endif
+
 .include "../../devel/ncurses/buildlink3.mk"
 .include "../../converters/libiconv/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

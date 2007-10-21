@@ -1,0 +1,13 @@
+$NetBSD$
+
+--- src/configure.in.orig	2007-10-20 18:45:17.000000000 -0400
++++ src/configure.in
+@@ -2026,7 +2026,7 @@ if test $ac_cv_header_sys_wait_h = no; t
+ fi
+ 
+ AC_CHECK_HEADERS(stdarg.h stdlib.h string.h sys/select.h sys/utsname.h \
+-	termcap.h fcntl.h sgtty.h sys/ioctl.h sys/time.h termio.h \
++	termcap.h fcntl.h sgtty.h sys/ioctl.h sys/time.h sys/types.h termio.h \
+ 	iconv.h langinfo.h unistd.h stropts.h errno.h \
+ 	sys/resource.h sys/systeminfo.h locale.h \
+ 	sys/stream.h sys/ptem.h termios.h libc.h sys/statfs.h \
