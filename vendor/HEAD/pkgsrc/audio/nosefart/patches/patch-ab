@@ -1,4 +1,4 @@
-$NetBSD: patch-ab,v 1.2 2004/12/03 13:02:18 wiz Exp $
+$NetBSD: patch-ab,v 1.4 2007/09/29 11:35:11 rillig Exp $
 
 --- src/linux/main_linux.c.orig	Sat May  1 16:53:54 2004
 +++ src/linux/main_linux.c	Thu Dec  2 01:58:01 2004

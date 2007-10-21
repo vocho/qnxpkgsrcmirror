@@ -1,4 +1,4 @@
-# $NetBSD: OSF1.mk,v 1.18 2007/07/29 05:19:44 jlam Exp $
+# $NetBSD: OSF1.mk,v 1.21 2007/10/19 13:41:35 rillig Exp $
 #
 # Variable definitions for the OSF1 operating system.
 

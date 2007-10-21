@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.411 2007/09/20 21:12:04 wiz Exp $
+# $NetBSD: Makefile,v 1.413 2007/10/18 02:53:25 cjs Exp $
 #
 
 COMMENT=	System utilities
@@ -175,6 +175,7 @@ SUBDIR+=	notification-daemon
 SUBDIR+=	nrg2iso
 SUBDIR+=	ntfsprogs
 SUBDIR+=	nvnet
+SUBDIR+=	open-vm-tools
 SUBDIR+=	osname
 SUBDIR+=	p5-File-Copy-Recursive
 SUBDIR+=	p5-File-Remove
@@ -250,6 +251,7 @@ SUBDIR+=	torsmo
 SUBDIR+=	toshutils
 SUBDIR+=	tpb
 SUBDIR+=	tphdisk
+SUBDIR+=	tree
 SUBDIR+=	ups-nut
 SUBDIR+=	ups-nut-cgi
 SUBDIR+=	ups-nut-snmp

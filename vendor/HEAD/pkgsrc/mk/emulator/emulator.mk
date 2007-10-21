@@ -1,4 +1,4 @@
-# $NetBSD: emulator.mk,v 1.8 2007/08/23 18:20:36 jlam Exp $
+# $NetBSD: emulator.mk,v 1.10 2007/10/13 11:04:17 dsl Exp $
 #
 # This file is included by bsd.pkg.mk.
 #
@@ -72,14 +72,14 @@ OPSYS_EMULDIR?=		# empty
 #
 #	EMUL_DISTRO, EMULSUBDIR, EMULDIR, OPSYS_EMULDIR
 #
-.  include "${.PARSEDIR}/${EMUL_OPSYS}.mk"
+.  include "${EMUL_OPSYS}.mk"
 .endif
 
 # If we're doing true binary emulation, then file paths found in the
 # package's binaries, libraries and scripts won't necessarily match the
 # actual paths on the file system, so skip some path checks that are
 # likely to fail.
-# 
+#
 .if empty(EMUL_DISTRO:Mnative-*)
 CHECK_SHLIBS_SUPPORTED?=	no
 CHECK_INTERPRETER_SKIP=		*
@@ -140,7 +140,7 @@ _EMUL_PKG_FMTS+=	rpm
 
 EMUL_PKG_FMT?=		plain
 
-.include "${.PARSEDIR}/pkg-${EMUL_PKG_FMT}.mk"
+.include "pkg-${EMUL_PKG_FMT}.mk"
 
 .PHONY: emul-fetch
 emul-fetch:

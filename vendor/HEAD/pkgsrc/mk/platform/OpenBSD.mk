@@ -1,4 +1,4 @@
-# $NetBSD: OpenBSD.mk,v 1.25 2007/07/02 14:03:41 joerg Exp $
+# $NetBSD: OpenBSD.mk,v 1.27 2007/10/19 13:41:35 rillig Exp $
 #
 # Variable definitions for the OpenBSD operating system.
 

@@ -1,4 +1,4 @@
-# $NetBSD: Linux.mk,v 1.29 2007/07/29 05:19:44 jlam Exp $
+# $NetBSD: Linux.mk,v 1.31 2007/10/19 13:41:35 rillig Exp $
 #
 # Variable definitions for the Linux operating system.
 

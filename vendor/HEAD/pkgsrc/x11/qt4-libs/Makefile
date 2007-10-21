@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.12 2007/09/03 09:35:15 drochner Exp $
+# $NetBSD: Makefile,v 1.14 2007/10/13 12:02:14 adam Exp $
 
 .include "../../x11/qt4-libs/Makefile.common"
 
@@ -22,7 +22,8 @@ do-install:
 .for prog in moc rcc uic
 	${INSTALL_PROGRAM} ${WRKSRC}/bin/${prog} ${QTPREFIX}/bin/
 .endfor
-	${INSTALL_SCRIPT} ${WRKSRC}/bin/uic3 ${QTPREFIX}/bin/
+	${LIBTOOL} --mode=install ${INSTALL_PROGRAM} ${WRKSRC}/bin/uic3 \
+	    ${QTPREFIX}/bin
 	${INSTALL_DATA_DIR} ${QTPREFIX}/include
 .for incl in corelib gui network opengl qt3support sql svg xml script
 	cd ${WRKSRC}/src/${incl} && env ${MAKE_ENV} \
@@ -57,6 +58,7 @@ SUBST_FILES.socklen=	mkspecs/darwin-g++/qplatformdefs.h
 SUBST_SED.socklen=	-e 's/QT_SOCKLEN_T.*/QT_SOCKLEN_T socklen_t/'
 .endif
 
+.include "../../fonts/fontconfig/buildlink3.mk"
 .include "../../graphics/freetype2/buildlink3.mk"
 .include "../../graphics/jpeg/buildlink3.mk"
 .include "../../graphics/glu/buildlink3.mk"

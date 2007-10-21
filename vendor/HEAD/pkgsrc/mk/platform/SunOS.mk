@@ -1,4 +1,4 @@
-# $NetBSD: SunOS.mk,v 1.30 2007/07/29 05:19:44 jlam Exp $
+# $NetBSD: SunOS.mk,v 1.32 2007/10/19 13:41:35 rillig Exp $
 #
 # Variable definitions for the SunOS/Solaris operating system.
 
