@@ -1,6 +1,6 @@
-$NetBSD: patch-ad,v 1.31 2007/09/15 12:11:45 joerg Exp $
+$NetBSD$
 
---- libltdl/configure.orig	2007-09-14 11:49:53.000000000 +0200
+--- libltdl/configure.orig	2007-06-23 22:20:44.000000000 -0400
 +++ libltdl/configure
 @@ -630,11 +630,11 @@ else
  
@@ -59,18 +59,7 @@ $NetBSD: patch-ad,v 1.31 2007/09/15 12:11:45 joerg Exp $
  
  ac_ext=f
  ac_compile='$F77 -c $FFLAGS conftest.$ac_ext >&5'
-@@ -7535,10 +7532,6 @@ _lt_linker_boilerplate=`cat conftest.err
- $rm conftest*
- 
- 
--## CAVEAT EMPTOR:
--## There is no encapsulation within the following macros, do not change
--## the running order or otherwise move them around unless you know exactly
--## what you are doing...
- 
- lt_prog_compiler_no_builtin_flag=
- 
-@@ -7632,9 +7625,11 @@ echo $ECHO_N "checking for $compiler opt
+@@ -7632,9 +7629,11 @@ echo $ECHO_N "checking for $compiler opt
        ;;
  
      darwin* | rhapsody*)
@@ -83,7 +72,7 @@ $NetBSD: patch-ad,v 1.31 2007/09/15 12:11:45 joerg Exp $
        ;;
  
      interix[3-9]*)
-@@ -7668,6 +7663,11 @@ echo $ECHO_N "checking for $compiler opt
+@@ -7668,6 +7667,11 @@ echo $ECHO_N "checking for $compiler opt
        esac
        ;;
  
@@ -95,7 +84,7 @@ $NetBSD: patch-ad,v 1.31 2007/09/15 12:11:45 joerg Exp $
      *)
        lt_prog_compiler_pic='-fPIC'
        ;;
-@@ -7822,6 +7822,10 @@ echo $ECHO_N "checking for $compiler opt
+@@ -7822,6 +7826,10 @@ echo $ECHO_N "checking for $compiler opt
        lt_prog_compiler_static='-Bstatic'
        ;;
  
@@ -106,7 +95,7 @@ $NetBSD: patch-ad,v 1.31 2007/09/15 12:11:45 joerg Exp $
      *)
        lt_prog_compiler_can_build_shared=no
        ;;
-@@ -8227,6 +8231,17 @@ EOF
+@@ -8227,6 +8235,17 @@ EOF
        fi
        ;;
  
@@ -124,7 +113,7 @@ $NetBSD: patch-ad,v 1.31 2007/09/15 12:11:45 joerg Exp $
      netbsd*)
        if echo __ELF__ | $CC -E - | grep __ELF__ >/dev/null; then
  	archive_cmds='$LD -Bshareable $libobjs $deplibs $linker_flags -o $lib'
-@@ -8292,6 +8307,11 @@ _LT_EOF
+@@ -8292,6 +8311,11 @@ _LT_EOF
        hardcode_shlibpath_var=no
        ;;
  
@@ -136,7 +125,7 @@ $NetBSD: patch-ad,v 1.31 2007/09/15 12:11:45 joerg Exp $
      *)
        if $LD --help 2>&1 | grep ': supported targets:.* elf' > /dev/null; then
  	archive_cmds='$CC -shared $libobjs $deplibs $compiler_flags ${wl}-soname $wl$soname -o $lib'
-@@ -8759,6 +8779,21 @@ if test -z "$aix_libpath"; then aix_libp
+@@ -8759,6 +8783,21 @@ if test -z "$aix_libpath"; then aix_libp
        fi
        ;;
  
@@ -158,7 +147,7 @@ $NetBSD: patch-ad,v 1.31 2007/09/15 12:11:45 joerg Exp $
      irix5* | irix6* | nonstopux*)
        if test "$GCC" = yes; then
  	archive_cmds='$CC -shared $libobjs $deplibs $compiler_flags ${wl}-soname ${wl}$soname `test -n "$verstring" && echo ${wl}-set_version ${wl}$verstring` ${wl}-update_registry ${wl}${output_objdir}/so_locations -o $lib'
-@@ -8984,6 +9019,13 @@ if test -z "$aix_libpath"; then aix_libp
+@@ -8984,6 +9023,13 @@ if test -z "$aix_libpath"; then aix_libp
        hardcode_shlibpath_var=no
        ;;
  
@@ -172,7 +161,7 @@ $NetBSD: patch-ad,v 1.31 2007/09/15 12:11:45 joerg Exp $
      *)
        ld_shlibs=no
        ;;
-@@ -9200,6 +9242,7 @@ beos*)
+@@ -9200,6 +9246,7 @@ beos*)
  bsdi[45]*)
    version_type=linux
    need_version=no
@@ -180,7 +169,7 @@ $NetBSD: patch-ad,v 1.31 2007/09/15 12:11:45 joerg Exp $
    library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${release}${shared_ext}$major $libname${shared_ext}'
    soname_spec='${libname}${release}${shared_ext}$major'
    finish_cmds='PATH="\$PATH:/sbin" ldconfig $libdir'
-@@ -9298,7 +9341,7 @@ freebsd1*)
+@@ -9298,7 +9345,7 @@ freebsd1*)
    dynamic_linker=no
    ;;
  
@@ -189,7 +178,7 @@ $NetBSD: patch-ad,v 1.31 2007/09/15 12:11:45 joerg Exp $
    # DragonFly does not have aout.  When/if they implement a new
    # versioning mechanism, adjust this.
    if test -x /usr/bin/objformat; then
-@@ -9312,7 +9355,7 @@ freebsd* | dragonfly*)
+@@ -9312,7 +9359,7 @@ freebsd* | dragonfly*)
    version_type=freebsd-$objformat
    case $version_type in
      freebsd-elf*)
@@ -198,7 +187,7 @@ $NetBSD: patch-ad,v 1.31 2007/09/15 12:11:45 joerg Exp $
        need_version=no
        need_lib_prefix=no
        ;;
-@@ -9342,6 +9385,16 @@ freebsd* | dragonfly*)
+@@ -9342,6 +9389,16 @@ freebsd* | dragonfly*)
    esac
    ;;
  
@@ -215,7 +204,7 @@ $NetBSD: patch-ad,v 1.31 2007/09/15 12:11:45 joerg Exp $
  gnu*)
    version_type=linux
    need_lib_prefix=no
-@@ -9410,15 +9463,22 @@ interix[3-9]*)
+@@ -9410,15 +9467,22 @@ interix[3-9]*)
    hardcode_into_libs=yes
    ;;
  
@@ -244,7 +233,7 @@ $NetBSD: patch-ad,v 1.31 2007/09/15 12:11:45 joerg Exp $
    esac
    need_lib_prefix=no
    need_version=no
-@@ -9483,11 +9543,11 @@ linux* | k*bsd*-gnu)
+@@ -9483,11 +9547,11 @@ linux* | k*bsd*-gnu)
    ;;
  
  netbsd*)
@@ -258,9 +247,11 @@ $NetBSD: patch-ad,v 1.31 2007/09/15 12:11:45 joerg Exp $
      finish_cmds='PATH="\$PATH:/sbin" ldconfig -m $libdir'
      dynamic_linker='NetBSD (a.out) ld.so'
    else
-@@ -9512,13 +9572,14 @@ nto-qnx*)
+@@ -9511,14 +9575,16 @@ nto-qnx*)
+   version_type=linux
    need_lib_prefix=no
    need_version=no
++  sys_lib_search_path_spec="/lib /usr/lib"
    library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${release}${shared_ext}$major $libname${shared_ext}'
 +  dynamic_linker='QNX libc.so'
    soname_spec='${libname}${release}${shared_ext}$major'
@@ -274,7 +265,7 @@ $NetBSD: patch-ad,v 1.31 2007/09/15 12:11:45 joerg Exp $
    sys_lib_dlsearch_path_spec="/usr/lib"
    need_lib_prefix=no
    # Some older versions of OpenBSD (3.3 at least) *do* need versioned libs.
-@@ -9526,7 +9587,7 @@ openbsd*)
+@@ -9526,7 +9592,7 @@ openbsd*)
      openbsd3.3 | openbsd3.3.*) need_version=yes ;;
      *)                         need_version=no  ;;
    esac
@@ -283,7 +274,7 @@ $NetBSD: patch-ad,v 1.31 2007/09/15 12:11:45 joerg Exp $
    finish_cmds='PATH="\$PATH:/sbin" ldconfig -m $libdir'
    shlibpath_var=LD_LIBRARY_PATH
    if test -z "`echo __ELF__ | $CC -E - | grep __ELF__`" || test "$host_os-$host_cpu" = "openbsd2.8-powerpc"; then
-@@ -11096,9 +11157,7 @@ echo "$as_me: error: tag name \"$tagname
+@@ -11096,9 +11162,7 @@ echo "$as_me: error: tag name \"$tagname
  
        case $tagname in
        CXX)
@@ -294,7 +285,7 @@ $NetBSD: patch-ad,v 1.31 2007/09/15 12:11:45 joerg Exp $
  	  ac_ext=cpp
  ac_cpp='$CXXCPP $CPPFLAGS'
  ac_compile='$CXX -c $CXXFLAGS $CPPFLAGS conftest.$ac_ext >&5'
-@@ -11866,6 +11925,16 @@ if test -z "$aix_libpath"; then aix_libp
+@@ -11866,6 +11930,16 @@ if test -z "$aix_libpath"; then aix_libp
      archive_cmds_CXX='$CC -shared $pic_flag $libobjs $deplibs $compiler_flags ${wl}-h,$soname ${wl}--image-base,`expr ${RANDOM-$$} % 4096 / 2 \* 262144 + 1342177280` -o $lib'
      archive_expsym_cmds_CXX='sed "s,^,_," $export_symbols >$output_objdir/$soname.expsym~$CC -shared $pic_flag $libobjs $deplibs $compiler_flags ${wl}-h,$soname ${wl}--retain-symbols-file,$output_objdir/$soname.expsym ${wl}--image-base,`expr ${RANDOM-$$} % 4096 / 2 \* 262144 + 1342177280` -o $lib'
      ;;
@@ -311,7 +302,7 @@ $NetBSD: patch-ad,v 1.31 2007/09/15 12:11:45 joerg Exp $
    irix5* | irix6*)
      case $cc_basename in
        CC*)
-@@ -12019,14 +12088,29 @@ if test -z "$aix_libpath"; then aix_libp
+@@ -12019,14 +12093,29 @@ if test -z "$aix_libpath"; then aix_libp
      ;;
    netbsd*)
      if echo __ELF__ | $CC -E - | grep __ELF__ >/dev/null; then
@@ -343,7 +334,7 @@ $NetBSD: patch-ad,v 1.31 2007/09/15 12:11:45 joerg Exp $
      ;;
    openbsd2*)
      # C++ shared libraries are fairly broken
-@@ -12339,6 +12423,11 @@ if test -z "$aix_libpath"; then aix_libp
+@@ -12339,6 +12428,11 @@ if test -z "$aix_libpath"; then aix_libp
      # FIXME: insert proper C++ library support
      ld_shlibs_CXX=no
      ;;
@@ -355,18 +346,7 @@ $NetBSD: patch-ad,v 1.31 2007/09/15 12:11:45 joerg Exp $
    *)
      # FIXME: insert proper C++ library support
      ld_shlibs_CXX=no
-@@ -12351,10 +12440,6 @@ test "$ld_shlibs_CXX" = no && can_build_
- GCC_CXX="$GXX"
- LD_CXX="$LD"
- 
--## CAVEAT EMPTOR:
--## There is no encapsulation within the following macros, do not change
--## the running order or otherwise move them around unless you know exactly
--## what you are doing...
- 
- cat > conftest.$ac_ext <<EOF
- class Foo
-@@ -12449,6 +12534,21 @@ if { (eval echo "$as_me:$LINENO: \"$ac_c
+@@ -12449,6 +12543,21 @@ if { (eval echo "$as_me:$LINENO: \"$ac_c
      esac
    done
  
@@ -388,7 +368,7 @@ $NetBSD: patch-ad,v 1.31 2007/09/15 12:11:45 joerg Exp $
    # Clean up.
    rm -f a.out a.exe
  else
-@@ -12554,9 +12654,11 @@ echo $ECHO_N "checking for $compiler opt
+@@ -12554,9 +12663,11 @@ echo $ECHO_N "checking for $compiler opt
        lt_prog_compiler_pic_CXX='-DDLL_EXPORT'
        ;;
      darwin* | rhapsody*)
@@ -401,7 +381,7 @@ $NetBSD: patch-ad,v 1.31 2007/09/15 12:11:45 joerg Exp $
        ;;
      *djgpp*)
        # DJGPP does not support shared libraries at all
-@@ -12582,6 +12684,10 @@ echo $ECHO_N "checking for $compiler opt
+@@ -12582,6 +12693,10 @@ echo $ECHO_N "checking for $compiler opt
  	;;
        esac
        ;;
@@ -412,7 +392,7 @@ $NetBSD: patch-ad,v 1.31 2007/09/15 12:11:45 joerg Exp $
      *)
        lt_prog_compiler_pic_CXX='-fPIC'
        ;;
-@@ -12660,6 +12766,8 @@ echo $ECHO_N "checking for $compiler opt
+@@ -12660,6 +12775,8 @@ echo $ECHO_N "checking for $compiler opt
  	# This is c89, which is MS Visual C++ (no shared libs)
  	# Anyone wants to do a port?
  	;;
@@ -421,7 +401,7 @@ $NetBSD: patch-ad,v 1.31 2007/09/15 12:11:45 joerg Exp $
        irix5* | irix6* | nonstopux*)
  	case $cc_basename in
  	  CC*)
-@@ -12799,6 +12907,8 @@ echo $ECHO_N "checking for $compiler opt
+@@ -12799,6 +12916,8 @@ echo $ECHO_N "checking for $compiler opt
  	;;
        vxworks*)
  	;;
@@ -430,7 +410,7 @@ $NetBSD: patch-ad,v 1.31 2007/09/15 12:11:45 joerg Exp $
        *)
  	lt_prog_compiler_can_build_shared_CXX=no
  	;;
-@@ -13171,6 +13281,7 @@ beos*)
+@@ -13171,6 +13290,7 @@ beos*)
  bsdi[45]*)
    version_type=linux
    need_version=no
@@ -438,7 +418,7 @@ $NetBSD: patch-ad,v 1.31 2007/09/15 12:11:45 joerg Exp $
    library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${release}${shared_ext}$major $libname${shared_ext}'
    soname_spec='${libname}${release}${shared_ext}$major'
    finish_cmds='PATH="\$PATH:/sbin" ldconfig $libdir'
-@@ -13268,7 +13379,7 @@ freebsd1*)
+@@ -13268,7 +13388,7 @@ freebsd1*)
    dynamic_linker=no
    ;;
  
@@ -447,7 +427,7 @@ $NetBSD: patch-ad,v 1.31 2007/09/15 12:11:45 joerg Exp $
    # DragonFly does not have aout.  When/if they implement a new
    # versioning mechanism, adjust this.
    if test -x /usr/bin/objformat; then
-@@ -13282,7 +13393,7 @@ freebsd* | dragonfly*)
+@@ -13282,7 +13402,7 @@ freebsd* | dragonfly*)
    version_type=freebsd-$objformat
    case $version_type in
      freebsd-elf*)
@@ -456,7 +436,7 @@ $NetBSD: patch-ad,v 1.31 2007/09/15 12:11:45 joerg Exp $
        need_version=no
        need_lib_prefix=no
        ;;
-@@ -13312,6 +13423,16 @@ freebsd* | dragonfly*)
+@@ -13312,6 +13432,16 @@ freebsd* | dragonfly*)
    esac
    ;;
  
@@ -473,7 +453,7 @@ $NetBSD: patch-ad,v 1.31 2007/09/15 12:11:45 joerg Exp $
  gnu*)
    version_type=linux
    need_lib_prefix=no
-@@ -13380,15 +13501,22 @@ interix[3-9]*)
+@@ -13380,15 +13510,22 @@ interix[3-9]*)
    hardcode_into_libs=yes
    ;;
  
@@ -502,7 +482,7 @@ $NetBSD: patch-ad,v 1.31 2007/09/15 12:11:45 joerg Exp $
    esac
    need_lib_prefix=no
    need_version=no
-@@ -13453,11 +13581,11 @@ linux* | k*bsd*-gnu)
+@@ -13453,11 +13590,11 @@ linux* | k*bsd*-gnu)
    ;;
  
  netbsd*)
@@ -516,9 +496,11 @@ $NetBSD: patch-ad,v 1.31 2007/09/15 12:11:45 joerg Exp $
      finish_cmds='PATH="\$PATH:/sbin" ldconfig -m $libdir'
      dynamic_linker='NetBSD (a.out) ld.so'
    else
-@@ -13482,13 +13610,14 @@ nto-qnx*)
+@@ -13481,14 +13618,16 @@ nto-qnx*)
+   version_type=linux
    need_lib_prefix=no
    need_version=no
++  sys_lib_search_path_spec="/lib /usr/lib"
    library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${release}${shared_ext}$major $libname${shared_ext}'
 +  dynamic_linker='QNX libc.so'
    soname_spec='${libname}${release}${shared_ext}$major'
@@ -532,7 +514,7 @@ $NetBSD: patch-ad,v 1.31 2007/09/15 12:11:45 joerg Exp $
    sys_lib_dlsearch_path_spec="/usr/lib"
    need_lib_prefix=no
    # Some older versions of OpenBSD (3.3 at least) *do* need versioned libs.
-@@ -13496,7 +13625,7 @@ openbsd*)
+@@ -13496,7 +13635,7 @@ openbsd*)
      openbsd3.3 | openbsd3.3.*) need_version=yes ;;
      *)                         need_version=no  ;;
    esac
@@ -541,7 +523,7 @@ $NetBSD: patch-ad,v 1.31 2007/09/15 12:11:45 joerg Exp $
    finish_cmds='PATH="\$PATH:/sbin" ldconfig -m $libdir'
    shlibpath_var=LD_LIBRARY_PATH
    if test -z "`echo __ELF__ | $CC -E - | grep __ELF__`" || test "$host_os-$host_cpu" = "openbsd2.8-powerpc"; then
-@@ -14275,9 +14404,11 @@ echo $ECHO_N "checking for $compiler opt
+@@ -14275,9 +14414,11 @@ echo $ECHO_N "checking for $compiler opt
        ;;
  
      darwin* | rhapsody*)
@@ -554,7 +536,7 @@ $NetBSD: patch-ad,v 1.31 2007/09/15 12:11:45 joerg Exp $
        ;;
  
      interix[3-9]*)
-@@ -14311,6 +14442,11 @@ echo $ECHO_N "checking for $compiler opt
+@@ -14311,6 +14452,11 @@ echo $ECHO_N "checking for $compiler opt
        esac
        ;;
  
@@ -566,7 +548,7 @@ $NetBSD: patch-ad,v 1.31 2007/09/15 12:11:45 joerg Exp $
      *)
        lt_prog_compiler_pic_F77='-fPIC'
        ;;
-@@ -14465,6 +14601,10 @@ echo $ECHO_N "checking for $compiler opt
+@@ -14465,6 +14611,10 @@ echo $ECHO_N "checking for $compiler opt
        lt_prog_compiler_static_F77='-Bstatic'
        ;;
  
@@ -577,7 +559,7 @@ $NetBSD: patch-ad,v 1.31 2007/09/15 12:11:45 joerg Exp $
      *)
        lt_prog_compiler_can_build_shared_F77=no
        ;;
-@@ -14870,6 +15010,17 @@ EOF
+@@ -14870,6 +15020,17 @@ EOF
        fi
        ;;
  
@@ -595,7 +577,7 @@ $NetBSD: patch-ad,v 1.31 2007/09/15 12:11:45 joerg Exp $
      netbsd*)
        if echo __ELF__ | $CC -E - | grep __ELF__ >/dev/null; then
  	archive_cmds_F77='$LD -Bshareable $libobjs $deplibs $linker_flags -o $lib'
-@@ -14935,6 +15086,11 @@ _LT_EOF
+@@ -14935,6 +15096,11 @@ _LT_EOF
        hardcode_shlibpath_var_F77=no
        ;;
  
@@ -607,7 +589,7 @@ $NetBSD: patch-ad,v 1.31 2007/09/15 12:11:45 joerg Exp $
      *)
        if $LD --help 2>&1 | grep ': supported targets:.* elf' > /dev/null; then
  	archive_cmds_F77='$CC -shared $libobjs $deplibs $compiler_flags ${wl}-soname $wl$soname -o $lib'
-@@ -15382,6 +15538,21 @@ if test -z "$aix_libpath"; then aix_libp
+@@ -15382,6 +15548,21 @@ if test -z "$aix_libpath"; then aix_libp
        fi
        ;;
  
@@ -629,7 +611,7 @@ $NetBSD: patch-ad,v 1.31 2007/09/15 12:11:45 joerg Exp $
      irix5* | irix6* | nonstopux*)
        if test "$GCC" = yes; then
  	archive_cmds_F77='$CC -shared $libobjs $deplibs $compiler_flags ${wl}-soname ${wl}$soname `test -n "$verstring" && echo ${wl}-set_version ${wl}$verstring` ${wl}-update_registry ${wl}${output_objdir}/so_locations -o $lib'
-@@ -15607,6 +15778,13 @@ if test -z "$aix_libpath"; then aix_libp
+@@ -15607,6 +15788,13 @@ if test -z "$aix_libpath"; then aix_libp
        hardcode_shlibpath_var_F77=no
        ;;
  
@@ -643,7 +625,7 @@ $NetBSD: patch-ad,v 1.31 2007/09/15 12:11:45 joerg Exp $
      *)
        ld_shlibs_F77=no
        ;;
-@@ -15772,6 +15950,7 @@ beos*)
+@@ -15772,6 +15960,7 @@ beos*)
  bsdi[45]*)
    version_type=linux
    need_version=no
@@ -651,7 +633,7 @@ $NetBSD: patch-ad,v 1.31 2007/09/15 12:11:45 joerg Exp $
    library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${release}${shared_ext}$major $libname${shared_ext}'
    soname_spec='${libname}${release}${shared_ext}$major'
    finish_cmds='PATH="\$PATH:/sbin" ldconfig $libdir'
-@@ -15869,7 +16048,7 @@ freebsd1*)
+@@ -15869,7 +16058,7 @@ freebsd1*)
    dynamic_linker=no
    ;;
  
@@ -660,7 +642,7 @@ $NetBSD: patch-ad,v 1.31 2007/09/15 12:11:45 joerg Exp $
    # DragonFly does not have aout.  When/if they implement a new
    # versioning mechanism, adjust this.
    if test -x /usr/bin/objformat; then
-@@ -15883,7 +16062,7 @@ freebsd* | dragonfly*)
+@@ -15883,7 +16072,7 @@ freebsd* | dragonfly*)
    version_type=freebsd-$objformat
    case $version_type in
      freebsd-elf*)
@@ -669,7 +651,7 @@ $NetBSD: patch-ad,v 1.31 2007/09/15 12:11:45 joerg Exp $
        need_version=no
        need_lib_prefix=no
        ;;
-@@ -15913,6 +16092,16 @@ freebsd* | dragonfly*)
+@@ -15913,6 +16102,16 @@ freebsd* | dragonfly*)
    esac
    ;;
  
@@ -686,7 +668,7 @@ $NetBSD: patch-ad,v 1.31 2007/09/15 12:11:45 joerg Exp $
  gnu*)
    version_type=linux
    need_lib_prefix=no
-@@ -15981,15 +16170,22 @@ interix[3-9]*)
+@@ -15981,15 +16180,22 @@ interix[3-9]*)
    hardcode_into_libs=yes
    ;;
  
@@ -715,7 +697,7 @@ $NetBSD: patch-ad,v 1.31 2007/09/15 12:11:45 joerg Exp $
    esac
    need_lib_prefix=no
    need_version=no
-@@ -16054,11 +16250,11 @@ linux* | k*bsd*-gnu)
+@@ -16054,11 +16260,11 @@ linux* | k*bsd*-gnu)
    ;;
  
  netbsd*)
@@ -729,9 +711,11 @@ $NetBSD: patch-ad,v 1.31 2007/09/15 12:11:45 joerg Exp $
      finish_cmds='PATH="\$PATH:/sbin" ldconfig -m $libdir'
      dynamic_linker='NetBSD (a.out) ld.so'
    else
-@@ -16083,13 +16279,14 @@ nto-qnx*)
+@@ -16082,14 +16288,16 @@ nto-qnx*)
+   version_type=linux
    need_lib_prefix=no
    need_version=no
++  sys_lib_search_path_spec="/lib /usr/lib"
    library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${release}${shared_ext}$major $libname${shared_ext}'
 +  dynamic_linker='QNX libc.so'
    soname_spec='${libname}${release}${shared_ext}$major'
@@ -745,7 +729,7 @@ $NetBSD: patch-ad,v 1.31 2007/09/15 12:11:45 joerg Exp $
    sys_lib_dlsearch_path_spec="/usr/lib"
    need_lib_prefix=no
    # Some older versions of OpenBSD (3.3 at least) *do* need versioned libs.
-@@ -16097,7 +16294,7 @@ openbsd*)
+@@ -16097,7 +16305,7 @@ openbsd*)
      openbsd3.3 | openbsd3.3.*) need_version=yes ;;
      *)                         need_version=no  ;;
    esac
@@ -754,18 +738,7 @@ $NetBSD: patch-ad,v 1.31 2007/09/15 12:11:45 joerg Exp $
    finish_cmds='PATH="\$PATH:/sbin" ldconfig -m $libdir'
    shlibpath_var=LD_LIBRARY_PATH
    if test -z "`echo __ELF__ | $CC -E - | grep __ELF__`" || test "$host_os-$host_cpu" = "openbsd2.8-powerpc"; then
-@@ -16763,10 +16960,6 @@ archive_cmds_need_lc_GCJ=no
- 
- old_archive_cmds_GCJ=$old_archive_cmds
- 
--## CAVEAT EMPTOR:
--## There is no encapsulation within the following macros, do not change
--## the running order or otherwise move them around unless you know exactly
--## what you are doing...
- 
- lt_prog_compiler_no_builtin_flag_GCJ=
- 
-@@ -16860,9 +17053,11 @@ echo $ECHO_N "checking for $compiler opt
+@@ -16860,9 +17068,11 @@ echo $ECHO_N "checking for $compiler opt
        ;;
  
      darwin* | rhapsody*)
@@ -778,7 +751,7 @@ $NetBSD: patch-ad,v 1.31 2007/09/15 12:11:45 joerg Exp $
        ;;
  
      interix[3-9]*)
-@@ -16896,6 +17091,11 @@ echo $ECHO_N "checking for $compiler opt
+@@ -16896,6 +17106,11 @@ echo $ECHO_N "checking for $compiler opt
        esac
        ;;
  
@@ -790,7 +763,7 @@ $NetBSD: patch-ad,v 1.31 2007/09/15 12:11:45 joerg Exp $
      *)
        lt_prog_compiler_pic_GCJ='-fPIC'
        ;;
-@@ -17050,6 +17250,10 @@ echo $ECHO_N "checking for $compiler opt
+@@ -17050,6 +17265,10 @@ echo $ECHO_N "checking for $compiler opt
        lt_prog_compiler_static_GCJ='-Bstatic'
        ;;
  
@@ -801,7 +774,7 @@ $NetBSD: patch-ad,v 1.31 2007/09/15 12:11:45 joerg Exp $
      *)
        lt_prog_compiler_can_build_shared_GCJ=no
        ;;
-@@ -17455,6 +17659,17 @@ EOF
+@@ -17455,6 +17674,17 @@ EOF
        fi
        ;;
  
@@ -819,7 +792,7 @@ $NetBSD: patch-ad,v 1.31 2007/09/15 12:11:45 joerg Exp $
      netbsd*)
        if echo __ELF__ | $CC -E - | grep __ELF__ >/dev/null; then
  	archive_cmds_GCJ='$LD -Bshareable $libobjs $deplibs $linker_flags -o $lib'
-@@ -17520,6 +17735,11 @@ _LT_EOF
+@@ -17520,6 +17750,11 @@ _LT_EOF
        hardcode_shlibpath_var_GCJ=no
        ;;
  
@@ -831,7 +804,7 @@ $NetBSD: patch-ad,v 1.31 2007/09/15 12:11:45 joerg Exp $
      *)
        if $LD --help 2>&1 | grep ': supported targets:.* elf' > /dev/null; then
  	archive_cmds_GCJ='$CC -shared $libobjs $deplibs $compiler_flags ${wl}-soname $wl$soname -o $lib'
-@@ -17987,6 +18207,21 @@ if test -z "$aix_libpath"; then aix_libp
+@@ -17987,6 +18222,21 @@ if test -z "$aix_libpath"; then aix_libp
        fi
        ;;
  
@@ -853,7 +826,7 @@ $NetBSD: patch-ad,v 1.31 2007/09/15 12:11:45 joerg Exp $
      irix5* | irix6* | nonstopux*)
        if test "$GCC" = yes; then
  	archive_cmds_GCJ='$CC -shared $libobjs $deplibs $compiler_flags ${wl}-soname ${wl}$soname `test -n "$verstring" && echo ${wl}-set_version ${wl}$verstring` ${wl}-update_registry ${wl}${output_objdir}/so_locations -o $lib'
-@@ -18212,6 +18447,13 @@ if test -z "$aix_libpath"; then aix_libp
+@@ -18212,6 +18462,13 @@ if test -z "$aix_libpath"; then aix_libp
        hardcode_shlibpath_var_GCJ=no
        ;;
  
@@ -867,7 +840,7 @@ $NetBSD: patch-ad,v 1.31 2007/09/15 12:11:45 joerg Exp $
      *)
        ld_shlibs_GCJ=no
        ;;
-@@ -18377,6 +18619,7 @@ beos*)
+@@ -18377,6 +18634,7 @@ beos*)
  bsdi[45]*)
    version_type=linux
    need_version=no
@@ -875,7 +848,7 @@ $NetBSD: patch-ad,v 1.31 2007/09/15 12:11:45 joerg Exp $
    library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${release}${shared_ext}$major $libname${shared_ext}'
    soname_spec='${libname}${release}${shared_ext}$major'
    finish_cmds='PATH="\$PATH:/sbin" ldconfig $libdir'
-@@ -18474,7 +18717,7 @@ freebsd1*)
+@@ -18474,7 +18732,7 @@ freebsd1*)
    dynamic_linker=no
    ;;
  
@@ -884,7 +857,7 @@ $NetBSD: patch-ad,v 1.31 2007/09/15 12:11:45 joerg Exp $
    # DragonFly does not have aout.  When/if they implement a new
    # versioning mechanism, adjust this.
    if test -x /usr/bin/objformat; then
-@@ -18488,7 +18731,7 @@ freebsd* | dragonfly*)
+@@ -18488,7 +18746,7 @@ freebsd* | dragonfly*)
    version_type=freebsd-$objformat
    case $version_type in
      freebsd-elf*)
@@ -893,7 +866,7 @@ $NetBSD: patch-ad,v 1.31 2007/09/15 12:11:45 joerg Exp $
        need_version=no
        need_lib_prefix=no
        ;;
-@@ -18518,6 +18761,16 @@ freebsd* | dragonfly*)
+@@ -18518,6 +18776,16 @@ freebsd* | dragonfly*)
    esac
    ;;
  
@@ -910,7 +883,7 @@ $NetBSD: patch-ad,v 1.31 2007/09/15 12:11:45 joerg Exp $
  gnu*)
    version_type=linux
    need_lib_prefix=no
-@@ -18586,15 +18839,22 @@ interix[3-9]*)
+@@ -18586,15 +18854,22 @@ interix[3-9]*)
    hardcode_into_libs=yes
    ;;
  
@@ -939,7 +912,7 @@ $NetBSD: patch-ad,v 1.31 2007/09/15 12:11:45 joerg Exp $
    esac
    need_lib_prefix=no
    need_version=no
-@@ -18659,11 +18919,11 @@ linux* | k*bsd*-gnu)
+@@ -18659,11 +18934,11 @@ linux* | k*bsd*-gnu)
    ;;
  
  netbsd*)
@@ -953,9 +926,11 @@ $NetBSD: patch-ad,v 1.31 2007/09/15 12:11:45 joerg Exp $
      finish_cmds='PATH="\$PATH:/sbin" ldconfig -m $libdir'
      dynamic_linker='NetBSD (a.out) ld.so'
    else
-@@ -18688,13 +18948,14 @@ nto-qnx*)
+@@ -18687,14 +18962,16 @@ nto-qnx*)
+   version_type=linux
    need_lib_prefix=no
    need_version=no
++  sys_lib_search_path_spec="/lib /usr/lib"
    library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${release}${shared_ext}$major $libname${shared_ext}'
 +  dynamic_linker='QNX libc.so'
    soname_spec='${libname}${release}${shared_ext}$major'
@@ -969,7 +944,7 @@ $NetBSD: patch-ad,v 1.31 2007/09/15 12:11:45 joerg Exp $
    sys_lib_dlsearch_path_spec="/usr/lib"
    need_lib_prefix=no
    # Some older versions of OpenBSD (3.3 at least) *do* need versioned libs.
-@@ -18702,7 +18963,7 @@ openbsd*)
+@@ -18702,7 +18979,7 @@ openbsd*)
      openbsd3.3 | openbsd3.3.*) need_version=yes ;;
      *)                         need_version=no  ;;
    esac
