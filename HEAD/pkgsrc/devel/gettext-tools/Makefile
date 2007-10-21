@@ -30,3 +30,8 @@ USE_BUILTIN.gettext=	no # force use of pkgsrc gettext-lib
 
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"
+
+.if ${OPSYS} == "QNX"
+# otherwisi it pulls out the mcs utility as a C# compiler.
+CONFIGURE_ARGS+=	--enable-csharp=no
+.endif
