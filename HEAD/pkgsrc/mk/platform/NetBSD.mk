@@ -1,4 +1,4 @@
-# $NetBSD: NetBSD.mk,v 1.25 2007/08/21 22:49:33 jlam Exp $
+# $NetBSD: NetBSD.mk,v 1.27 2007/10/19 13:41:35 rillig Exp $
 #
 # Variable definitions for the NetBSD operating system.
 

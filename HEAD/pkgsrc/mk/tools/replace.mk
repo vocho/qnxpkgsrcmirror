@@ -1,4 +1,4 @@
-# $NetBSD: replace.mk,v 1.198 2007/09/10 07:25:14 rillig Exp $
+# $NetBSD: replace.mk,v 1.200 2007/09/30 12:22:44 rillig Exp $
 #
 # Copyright (c) 2005 The NetBSD Foundation, Inc.
 # All rights reserved.
@@ -322,9 +322,9 @@ MAKEFLAGS+=			TOOLS_IGNORE.flex=
 .  elif !empty(_TOOLS_USE_PKGSRC.flex:M[yY][eE][sS])
 .    include "../../devel/flex/buildlink3.mk"
 _TOOLS_DEPENDS.flex=		# empty
-.      for _dep_ in ${BUILDLINK_API_DEPENDS.flex}
+.    for _dep_ in ${BUILDLINK_API_DEPENDS.flex}
 _TOOLS_DEPENDS.flex+=		${_dep_}:${BUILDLINK_PKGSRCDIR.flex}
-.      endfor
+.    endfor
 TOOLS_DEPENDS.flex?=		${_TOOLS_DEPENDS.flex}
 TOOLS_CREATE+=			flex
 TOOLS_FIND_PREFIX+=		TOOLS_PREFIX.flex=flex
@@ -481,9 +481,9 @@ MAKEFLAGS+=			TOOLS_IGNORE.lex=
 .  elif !empty(_TOOLS_USE_PKGSRC.lex:M[yY][eE][sS])
 .    include "../../devel/flex/buildlink3.mk"
 _TOOLS_DEPENDS.lex=		# empty
-.      for _dep_ in ${BUILDLINK_API_DEPENDS.flex}
+.    for _dep_ in ${BUILDLINK_API_DEPENDS.flex}
 _TOOLS_DEPENDS.lex+=		${_dep_}:${BUILDLINK_PKGSRCDIR.flex}
-.      endfor
+.    endfor
 TOOLS_DEPENDS.lex?=		${_TOOLS_DEPENDS.lex}
 TOOLS_CREATE+=			lex
 TOOLS_FIND_PREFIX+=		TOOLS_PREFIX.lex=flex
@@ -992,33 +992,33 @@ TOOLS_PATH.${_t_}=	${TOOLS_PREFIX.${_t_}}/bin/${_t_}
 .  if !empty(PKGPATH:Mx11/iceauth)
 MAKEFLAGS+=		TOOLS_IGNORE.iceauth=
 .  elif !empty(X11_TYPE:Mnative)
-TOOLS_PATH.${_t_}=	${X11BASE}/bin/iceauth
+TOOLS_PATH.iceauth=	${X11BASE}/bin/iceauth
 .  else
 TOOLS_DEPENDS.iceauth?=		iceauth-[0-9]*:../../x11/iceauth
 TOOLS_FIND_PREFIX+=		TOOLS_PREFIX.iceauth=iceauth
 TOOLS_PATH.iceauth=		${TOOLS_PREFIX.iceauth}/bin/iceauth
 TOOLS_CREATE.iceauth=		iceauth
-.   endif
+.  endif
 .endif
 
 .if !defined(TOOLS_IGNORE.mkfontdir) && !empty(_USE_TOOLS:Mmkfontdir)
 .  if !empty(PKGPATH:Mfonts/mkfontdir)
 MAKEFLAGS+=		TOOLS_IGNORE.mkfontdir=
 .  elif !empty(X11_TYPE:Mnative)
-TOOLS_PATH.${_t_}=	${X11BASE}/bin/mkfontdir
+TOOLS_PATH.mkfontdir=	${X11BASE}/bin/mkfontdir
 .  else
 TOOLS_DEPENDS.mkfontdir?=	mkfontdir-[0-9]*:../../fonts/mkfontdir
 TOOLS_FIND_PREFIX+=		TOOLS_PREFIX.mkfontdir=mkfontdir
 TOOLS_PATH.mkfontdir=		${TOOLS_PREFIX.mkfontdir}/bin/mkfontdir
 TOOLS_CREATE.mkfontdir=		mkfontdir
-.   endif
+.  endif
 .endif
 
 .if !defined(TOOLS_IGNORE.mkfontscale) && !empty(_USE_TOOLS:Mmkfontscale)
 .  if !empty(PKGPATH:Mfonts/mkfontscale)
 MAKEFLAGS+=		TOOLS_IGNORE.mkfontscale=
 .  elif !empty(X11_TYPE:Mnative)
-TOOLS_PATH.${_t_}=	${X11BASE}/bin/mkfontscale
+TOOLS_PATH.mkfontscale=	${X11BASE}/bin/mkfontscale
 .  else
 TOOLS_DEPENDS.mkfontscale?=	mkfontscale-[0-9]*:../../fonts/mkfontscale
 TOOLS_FIND_PREFIX+=		TOOLS_PREFIX.mkfontscale=mkfontscale
@@ -1031,7 +1031,7 @@ TOOLS_CREATE.mkfontscale=	mkfontscale
 .  if !empty(PKGPATH:Mfonts/bdftopcf)
 MAKEFLAGS+=		TOOLS_IGNORE.bdftopcf=
 .  elif !empty(X11_TYPE:Mnative)
-TOOLS_PATH.${_t_}=	${X11BASE}/bin/bdftopcf
+TOOLS_PATH.bdftopcf=	${X11BASE}/bin/bdftopcf
 .  else
 TOOLS_DEPENDS.bdftopcf?=	bdftopcf-[0-9]*:../../fonts/bdftopcf
 TOOLS_FIND_PREFIX+=		TOOLS_PREFIX.bdftopcf=bdftopcf
@@ -1044,7 +1044,7 @@ TOOLS_CREATE.bdftopcf=		bdftopcf
 .  if !empty(PKGPATH:Mfonts/font-util)
 MAKEFLAGS+=		TOOLS_IGNORE.ucs2any=
 .  elif !empty(X11_TYPE:Mnative)
-TOOLS_PATH.${_t_}=	${X11BASE}/bin/ucs2any
+TOOLS_PATH.ucs2any=	${X11BASE}/bin/ucs2any
 .  else
 TOOLS_DEPENDS.ucs2any?=		font-util-[0-9]*:../../fonts/font-util
 TOOLS_FIND_PREFIX+=		TOOLS_PREFIX.ucs2any=ucs2any
@@ -1057,7 +1057,7 @@ TOOLS_CREATE.ucs2any=		ucs2any
 .  if !empty(PKGPATH:Mfonts/font-util)
 MAKEFLAGS+=		TOOLS_IGNORE.bdftruncate=
 .  elif !empty(X11_TYPE:Mnative)
-TOOLS_PATH.${_t_}=	${X11BASE}/bin/bdftruncate
+TOOLS_PATH.bdftruncate=	${X11BASE}/bin/bdftruncate
 .  else
 TOOLS_DEPENDS.bdftruncate?=	font-util-[0-9]*:../../fonts/font-util
 TOOLS_FIND_PREFIX+=		TOOLS_PREFIX.bdftruncate=bdftruncate
@@ -1070,39 +1070,39 @@ TOOLS_CREATE.bdftruncate=	bdftruncate
 .  if !empty(PKGPATH:Mx11/xauth)
 MAKEFLAGS+=		TOOLS_IGNORE.xauth=
 .  elif !empty(X11_TYPE:Mnative)
-TOOLS_PATH.${_t_}=	${X11BASE}/bin/xauth
+TOOLS_PATH.xauth=	${X11BASE}/bin/xauth
 .  else
 TOOLS_DEPENDS.xauth?=		xauth-[0-9]*:../../x11/xauth
 TOOLS_FIND_PREFIX+=		TOOLS_PREFIX.xauth=xauth
 TOOLS_PATH.xauth=		${TOOLS_PREFIX.xauth}/bin/xauth
 TOOLS_CREATE.xauth=		xauth
-.   endif
+.  endif
 .endif
 
 .if !defined(TOOLS_IGNORE.xinit) && !empty(_USE_TOOLS:Mxinit)
 .  if !empty(PKGPATH:Mx11/xinit)
 MAKEFLAGS+=		TOOLS_IGNORE.xinit=
 .  elif !empty(X11_TYPE:Mnative)
-TOOLS_PATH.${_t_}=	${X11BASE}/bin/xinit
+TOOLS_PATH.xinit=	${X11BASE}/bin/xinit
 .  else
 TOOLS_DEPENDS.xinit?=		xinit-[0-9]*:../../x11/xinit
 TOOLS_FIND_PREFIX+=		TOOLS_PREFIX.xinit=xinit
 TOOLS_PATH.xinit=		${TOOLS_PREFIX.xinit}/bin/xinit
 TOOLS_CREATE.xinit=		xinit
-.   endif
+.  endif
 .endif
 
 .if !defined(TOOLS_IGNORE.xmessage) && !empty(_USE_TOOLS:Mxmessage)
 .  if !empty(PKGPATH:Mx11/xmessage)
 MAKEFLAGS+=		TOOLS_IGNORE.xmessage=
 .  elif !empty(X11_TYPE:Mnative)
-TOOLS_PATH.${_t_}=	${X11BASE}/bin/xmessage
+TOOLS_PATH.xmessage=	${X11BASE}/bin/xmessage
 .  else
 TOOLS_DEPENDS.xmessage?=		xmessage-[0-9]*:../../x11/xmessage
 TOOLS_FIND_PREFIX+=		TOOLS_PREFIX.xmessage=xmessage
 TOOLS_PATH.xmessage=		${TOOLS_PREFIX.xmessage}/bin/xmessage
 TOOLS_CREATE.xmessage=		xmessage
-.   endif
+.  endif
 .endif
 
 ######################################################################
@@ -1179,13 +1179,13 @@ FIND_PREFIX:=	${TOOLS_FIND_PREFIX}
 #####
 ##### Add the dependencies for each pkgsrc-supplied tool.
 #####
-.      if defined(_TOOLS_DEPMETHOD.${_t_}) && defined(TOOLS_DEPENDS.${_t_})
-.        for _dep_ in ${TOOLS_DEPENDS.${_t_}}
-.          if empty(${_TOOLS_DEPMETHOD.${_t_}}:C/\:.*$//:M${_dep_:C/\:.*$//})
+.    if defined(_TOOLS_DEPMETHOD.${_t_}) && defined(TOOLS_DEPENDS.${_t_})
+.      for _dep_ in ${TOOLS_DEPENDS.${_t_}}
+.        if empty(${_TOOLS_DEPMETHOD.${_t_}}:C/\:.*$//:M${_dep_:C/\:.*$//})
 ${_TOOLS_DEPMETHOD.${_t_}}+=	${_dep_}
-.          endif
-.        endfor
-.      endif
+.        endif
+.      endfor
+.    endif
 .  elif defined(TOOLS_PLATFORM.${_t_}) && !empty(TOOLS_PLATFORM.${_t_})
 #####
 ##### For each system-supplied tool, break the tool down into a path

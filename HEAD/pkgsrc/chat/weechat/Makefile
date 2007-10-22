@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.16 2007/06/11 21:56:48 xtraeme Exp $
+# $NetBSD: Makefile,v 1.18 2007/10/12 23:06:27 wiz Exp $
 #
 
-DISTNAME=	weechat-0.2.5
+DISTNAME=	weechat-0.2.6
 CATEGORIES=	chat
 MASTER_SITES=	http://weechat.flashtux.org/download/
 EXTRACT_SUFX=	.tar.bz2
@@ -19,6 +19,8 @@ CONFIGURE_ARGS+=	--disable-ruby --disable-perl --disable-aspell
 MAKE_ENV+=		INSTALL_DATA_DIR=${INSTALL_DATA_DIR:Q}
 
 INCOMPAT_CURSES+=	NetBSD-*-*
+
+#LICENSE=		gplv3
 
 .include "options.mk"
 

@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.42 2007/04/04 13:34:42 joerg Exp $
+# $NetBSD: Makefile,v 1.44 2007/10/15 09:17:31 rillig Exp $
 #
 
-DISTNAME=	fluxbox-1.0rc3
+DISTNAME=	fluxbox-1.0.0
 PKGREVISION=	1
 CATEGORIES=	wm x11
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=fluxbox/}
