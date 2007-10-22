@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.11 2007/01/15 18:17:38 joerg Exp $
+# $NetBSD: Makefile,v 1.13 2007/10/01 11:59:59 rillig Exp $
 
 DISTNAME=	magicpoint-1.09a
 PKGNAME=	xmindpath-1.09a
@@ -11,6 +11,18 @@ COMMENT=	MindPath PocketPoint user-level driver for X11
 
 WRKSRC=		${WRKDIR}/${DISTNAME}/contrib/xmindpath
 GNU_CONFIGURE=	yes
+USE_FEATURES=	err
+
+.include "../../mk/bsd.prefs.mk"
+
+.if !empty(MISSING_FEATURES:Merr)
+pre-build:
+	cd ${BUILDLINK_DIR}/include && \
+	{ echo "#include <nbcompat/cdefs.h>"; \
+	  echo "#include <stdarg.h>"; \
+	  echo "#include <nbcompat/err.h>"; \
+	} > err.h
+.endif
 
 BUILDLINK_DEPMETHOD.libXt?=	build
 

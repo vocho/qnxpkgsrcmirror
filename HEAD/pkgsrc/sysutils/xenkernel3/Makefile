@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.3 2007/08/17 17:26:03 bouyer Exp $
+# $NetBSD: Makefile,v 1.5 2007/10/16 20:31:57 bouyer Exp $
 #
 
 VERSION=	3.1.0
 DISTNAME=	xen-${VERSION}-src
 PKGNAME=	xenkernel3-${VERSION}
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	sysutils
 MASTER_SITES=	http://www.cl.cam.ac.uk/research/srg/netos/xen/downloads/ \
 		http://bits.xensource.com/oss-xen/release/${VERSION}/src.tgz/
@@ -14,7 +14,7 @@ MAINTAINER=	bouyer@NetBSD.org
 HOMEPAGE=	http://www.cl.cam.ac.uk/research/srg/netos/xen/
 COMMENT=	Xen3 Kernel
 
-ONLY_FOR_PLATFORM=	Linux-2.[46]*-i386 NetBSD-*-i386
+ONLY_FOR_PLATFORM=	Linux-2.[46]*-i386 NetBSD-*-i386 Linux-2.[46]*-x86_64 NetBSD-*-x86_64
 CONFLICTS=	xenkernel30-*
 
 
@@ -37,7 +37,7 @@ do-build:
 	cd ${WRKSRC} && ${GMAKE} clean && \
 	    ${GMAKE} XEN_TARGET_X86_PAE=n debug=y xen
 	${CP} ${WRKSRC}/dist/install/boot/xen.gz ${WRKDIR}/xen-debug.gz
-	
+
 do-install:
 	${INSTALL_DATA_DIR} ${PREFIX}/xen3-kernel
 	${INSTALL_DATA} ${WRKDIR}/xen.gz ${PREFIX}/xen3-kernel/xen.gz

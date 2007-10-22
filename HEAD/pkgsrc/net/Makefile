@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.682 2007/09/19 23:34:02 wiz Exp $
+# $NetBSD: Makefile,v 1.687 2007/10/19 06:54:33 jnemeth Exp $
 #
 
 COMMENT=	Networking tools
@@ -21,6 +21,7 @@ SUBDIR+=	airportmodemutility
 SUBDIR+=	amule
 SUBDIR+=	aoe-vblade
 SUBDIR+=	argus
+SUBDIR+=	aria2
 SUBDIR+=	arla
 SUBDIR+=	arpd
 SUBDIR+=	arping
@@ -196,6 +197,7 @@ SUBDIR+=	mDNSResponder
 SUBDIR+=	mDNSResponder-nss
 SUBDIR+=	maradns
 SUBDIR+=	mbrowse
+SUBDIR+=	mcast-tools
 SUBDIR+=	md-whois
 SUBDIR+=	microdc2
 SUBDIR+=	miredo
@@ -220,6 +222,7 @@ SUBDIR+=	nagios-plugin-mysql
 SUBDIR+=	nagios-plugin-pgsql
 SUBDIR+=	nagios-plugin-radius
 SUBDIR+=	nagios-plugin-snmp
+SUBDIR+=	nagios-plugin-spamd
 SUBDIR+=	nagios-plugins
 SUBDIR+=	nam
 SUBDIR+=	nap
@@ -295,6 +298,7 @@ SUBDIR+=	p5-Net-IPv4Addr
 SUBDIR+=	p5-Net-IPv6Addr
 SUBDIR+=	p5-Net-IRC
 SUBDIR+=	p5-Net-Ident
+SUBDIR+=	p5-Net-LDAP-Server
 SUBDIR+=	p5-Net-Libdnet
 SUBDIR+=	p5-Net-NBName
 SUBDIR+=	p5-Net-OpenID-Consumer
@@ -432,6 +436,7 @@ SUBDIR+=	spegla
 SUBDIR+=	spread
 SUBDIR+=	spreadlogd
 SUBDIR+=	srsh
+SUBDIR+=	ssmping
 SUBDIR+=	ssync
 SUBDIR+=	stripes
 SUBDIR+=	sup

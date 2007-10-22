@@ -11,6 +11,7 @@ anthy-2ch-dict		Include the 2ch dictionary.
 anthy-okinawa-dict	Include the okinawa dictionary.
 antialias	
 apop	
+ares			Use the ares library for asynchronous name resolution.
 arping1	
 arping2	
 arts			Use the aRts audio daemon.
@@ -36,6 +37,7 @@ bugzilla-patchviewer	Enable patchiewer support.
 bugzilla-xmlimportbugs	Bulk import/export of bugs in XML format.
 bzip2			Enable compression using bzip2
 canna			Use Canna as Japanese conversion program.
+cares			Use the c-ares library for asynchronous name resolution.
 catalog-mysql		Store Bacula catalog in MySQL database.
 catalog-pgsql		Store Bacula catalog in PostgreSQL database.
 catalog-sqlite		Store Bacula catalog in SQLite database.
@@ -63,6 +65,7 @@ djbfft-pentium		Optimize for Pentium{,MMX} processors.
 djbfft-ppro		Optimize for Pentium{Pro,II,III} processors.
 djbfft-sparc		Optimize for UltraSPARC-{I,II} processors.
 djbware-errno-hack	Patch to #include <errno.h> for correctness.
+dnsrbl			Enable DNS Real-time Blackhole List support.
 doc			Include the documentation.
 domainscale	
 drac			Enable DRAC support.
@@ -270,6 +273,7 @@ perf-tuning
 perl	
 pf	
 pgsql			Enable PostgreSQL support.
+pinepwd			Enable $HOME/.pinepwd stored IMAP password file.
 pinfo-native-curses	Use NetBSD native curses rather than ncurses.
 plplot	
 png			Enable PNG support.
@@ -329,6 +333,7 @@ spamassassin-test-awl-sql	Enable tests of the SQL module for the automatic white
 spamassassin-test-bayes-sql	Enable tests of the SQL module for Bayes data.
 spamassassin-test-prefork	Enable spamd prefork test (kills processes containing "spam child").
 speex			Enable speex support.
+spf			Enable Sender Policy Framework support.
 spidermonkey		Enable Mozilla's C implementation of JavaScript.
 sqlite			Enable SQLite support.
 squirrelmail-japanese	Add experimental Japanese fix to squirrelmail.

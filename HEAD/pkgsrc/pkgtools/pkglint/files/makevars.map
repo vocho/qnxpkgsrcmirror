@@ -1,4 +1,4 @@
-# $NetBSD: makevars.map,v 1.166 2007/07/29 18:41:08 rillig Exp $
+# $NetBSD: makevars.map,v 1.171 2007/10/13 08:57:09 rillig Exp $
 #
 
 # This file contains the guessed type of some variables, according to
@@ -72,7 +72,7 @@ PREFER_NATIVE_PTHREADS		YesNo [$user]
 LOCALBASE			Pathname [$user]
 CROSSBASE			Pathname [$user]
 VARBASE				Pathname [$user]
-X11_TYPE			{ native xorg } [$user]
+X11_TYPE			{ modular native } [$user]
 X11BASE				Pathname [$user]
 MOTIFBASE			Pathname [$user]
 PKGINFODIR			Pathname [$user]
@@ -314,6 +314,7 @@ EXTRACT_OPTS_ZIP	List of ShellWord [m:as,c:as]
 EXTRACT_OPTS_ZOO	List of ShellWord [m:as,c:as]
 EXTRACT_SUFX		DistSuffix [$package]
 EXTRACT_USING		{ gtar nbtar pax } [$package]
+FAIL_MSG		ShellCommand [$system]
 FAMBASE			Pathname [$system]
 FAM_ACCEPTED		List of { fam gamin } [$package]
 FAM_DEFAULT		{ fam gamin } [$user]
@@ -398,7 +399,7 @@ LOWER_OPSYS		Identifier [$system]
 LTCONFIG_OVERRIDE	List of Pathmask [m:as,c:a]
 MACHINE_ARCH		Identifier [$system]
 MACHINE_GNU_PLATFORM	PlatformTriple [$system]
-MAINTAINER		Mail_Address [m:s,c:ds]
+MAINTAINER		Mail_Address [m:s,c:d]
 MAKE			ShellCommand [$system]
 MAKEFLAGS		List of ShellWord [$package_list]
 MAKEVARS		List of Varname [builtin.mk:a,b:a,h:a]
@@ -443,6 +444,7 @@ MASTER_SITE_XCONTRIB	List of URL [$system]
 MASTER_SITE_XEMACS	List of URL [$system]
 MESSAGE_SRC		List of Pathname [$package_list]
 MESSAGE_SUBST		List of ShellWord [c:a,m:a,o:a]
+MISSING_FEATURES	List of Identifier [$system]
 MYSQL_VERSIONS_ACCEPTED	List of { 40 41 50 } [m:s]
 MYSQL_VERSION_DEFAULT	Version [$user]
 NM			ShellCommand [$system]
@@ -676,6 +678,7 @@ USE_DIRS		List of {					\
 				xdg-1.1 xdg-1.2 xdg-1.3 xdg-1.4		\
 				xorg-1.0				\
 			} [m:a,c:a]
+USE_FEATURES		List of Identifier [$package]
 USE_GNU_CONFIGURE_HOST	YesNo [$package]
 USE_GNU_ICONV		Yes [m:s,c:s,o:s]
 USE_GNU_READLINE	Yes [m:s,c:s,o:s]

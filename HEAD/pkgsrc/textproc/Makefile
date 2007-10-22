@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.385 2007/09/21 00:06:31 wiz Exp $
+# $NetBSD: Makefile,v 1.387 2007/10/12 17:31:16 drochner Exp $
 #
 
 COMMENT=	Text processing utilities (does not include desktop publishing)
@@ -149,6 +149,7 @@ SUBDIR+=	mecab
 SUBDIR+=	mecab-base
 SUBDIR+=	mecab-ipadic
 SUBDIR+=	mecab-jumandic
+SUBDIR+=	mxml
 SUBDIR+=	namazu
 SUBDIR+=	nbsed
 SUBDIR+=	ndtpd
@@ -310,6 +311,7 @@ SUBDIR+=	py-yaml
 SUBDIR+=	qprint
 SUBDIR+=	qsubst
 SUBDIR+=	raptor
+SUBDIR+=	rarian
 SUBDIR+=	regexx
 SUBDIR+=	rfcutil
 SUBDIR+=	rman
