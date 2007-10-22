@@ -267,3 +267,8 @@ post-install:
 	[ ! -f ${PREFIX}/sbin/suexec ] || ${CHMOD} -w ${PREFIX}/sbin/suexec
 
 .include "../../mk/bsd.pkg.mk"
+
+.if ${OPSYS} == "QNX"
+# don't bring in mcheck() which is an __EXT_QNX as it conflicts.
+CFLAGS+=-D_POSIX_C_SOURCE=200112
+.endif
