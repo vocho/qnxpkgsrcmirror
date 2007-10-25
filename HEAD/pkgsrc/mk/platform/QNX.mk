@@ -1,5 +1,9 @@
 # Variable definitions for the QNX operating system.
 
+.if defined(PKGSRC_COMPILER) && ${PKGSRC_COMPILER} == "qcc"
+CC=		qcc
+.endif
+
 .if !defined(CPP) || ${CPP} == "cpp"
 CPP=		${CC} -E ${CPP_PRECOMP_FLAGS}
 .endif
