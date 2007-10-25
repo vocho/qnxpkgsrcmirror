@@ -1,4 +1,4 @@
-# $NetBSD: gcc.mk,v 1.88 2006/12/15 12:46:24 martti Exp $
+# $NetBSD: gcc.mk,v 1.92 2007/08/11 17:31:22 joerg Exp $
 #
 # This is the compiler definition for the GNU Compiler Collection.
 #
@@ -11,6 +11,11 @@ COMPILER_GCC_MK=	defined
 USE_NATIVE_GCC?=	no
 
 GCC_REQD+=	2.8.0
+
+# gcc2 doesn't support c99
+.if !empty(USE_LANGUAGES:Mc99)
+GCC_REQD+=	3.0
+.endif
 
 # _GCC_DIST_VERSION is the highest version of GCC installed by the pkgsrc
 # without the PKGREVISIONs.
@@ -42,30 +47,17 @@ MAKEFLAGS+=	_CC=${_CC:Q}
 .endif
 
 .if !defined(_GCC_VERSION)
-.  if ${OPSYS} != "QNX"
-_GCC_VERSION_STRING!=	\
-	( ${_CC} -v 2>&1 | ${GREP} 'gcc version' ) 2>/dev/null || ${ECHO} 0
-.  else
 # XXX should be able to pass different platform / version via 'cc -V ${FOO}'
 #     rather than always picking the default. 
 _GCC_VERSION_STRING!=	\
-	( ${_CC} -V 2>&1 | ${AWK} '/.*gcc.*(default)/ {print $$1}' ) 2>/dev/null || ${ECHO} 0
-.  endif
-.  if ${OPSYS} != "QNX"
-.    if !empty(_GCC_VERSION_STRING:Megcs*)
+	( ${SETENV} ${ALL_ENV} ${_CC} -V 2>&1 | ${AWK} '/.*gcc.*(default)/ {print $$1}' ) 2>/dev/null || ${ECHO} 0
+.  if !empty(_GCC_VERSION_STRING:Megcs*)
 _GCC_VERSION=	2.8.1		# egcs is considered to be gcc-2.8.1.
-.    elif !empty(_GCC_VERSION_STRING:Mgcc*)
-_GCC_VERSION!=	${_CC} -dumpversion
-.    else
-_GCC_VERSION=	0
-.    endif
-.  else
-.    if !empty(_GCC_VERSION_STRING:M*gcc*)
+.  elif !empty(_GCC_VERSION_STRING:M*gcc*)
 _GCC_VERSION!=	\
 	( ${ECHO} '${_GCC_VERSION_STRING}' | ${AWK} -F, '{print $$1}' ) 2>/dev/null || ${ECHO} 0
-.    else
+.  else
 _GCC_VERSION=	0
-.    endif
 .  endif
 .endif
 _GCC_PKG=	gcc-${_GCC_VERSION}
@@ -285,7 +277,7 @@ _NEED_NEWER_GCC!=	\
 .endif
 .if !empty(_USE_PKGSRC_GCC:M[yY][eE][sS]) && \
     !empty(_NEED_NEWER_GCC:M[yY][eE][sS])
-PKG_SKIP_REASON=	"Unable to satisfy dependency: ${_GCC_DEPENDS}"
+PKG_FAIL_REASON=	"Unable to satisfy dependency: ${_GCC_DEPENDS}"
 .endif
 
 # GNU ld option used to set the rpath
@@ -364,33 +356,36 @@ _GCCBINDIR=	${_GCC_PREFIX}bin
 .elif !empty(_IS_BUILTIN_GCC:M[yY][eE][sS])
 _GCCBINDIR=	${_CC:H}
 .endif
-.if exists(${_GCCBINDIR}/qcc)
+.if !empty(USE_CROSS_COMPILE:M[yY][eE][sS])
+_GCC_BIN_PREFIX=	${MACHINE_GNU_PLATFORM}-
+.endif
+.if exists(${_GCCBINDIR}/${_GCC_BIN_PREFIX}qcc)
 _GCC_VARS+=	CC
-_GCC_CC=	${_GCC_DIR}/bin/qcc
+_GCC_CC=	${_GCC_DIR}/bin/${_GCC_BIN_PREFIX}qcc
 _ALIASES.CC=	cc gcc
-CCPATH=		${_GCCBINDIR}/gcc
+CCPATH=		${_GCCBINDIR}/${_GCC_BIN_PREFIX}qcc
 PKG_CC:=	${_GCC_CC}
-
+.endif
 
 _GCC_VARS+=	CPP
-_GCC_CPP=	${_GCC_DIR}/bin/qcc
+_GCC_CPP=	${_GCC_DIR}/bin/${_GCC_BIN_PREFIX}qcc
 _ALIASES.CPP=	cpp
-CPPPATH=	${_GCCBINDIR}/cpp
+CPPPATH=	${_GCCBINDIR}/${_GCC_BIN_PREFIX}cpp
 PKG_CPP:=	${_GCC_CPP}
 
 
 _GCC_VARS+=	CXX
-_GCC_CXX=	${_GCC_DIR}/bin/qcc
+_GCC_CXX=	${_GCC_DIR}/bin/${_GCC_BIN_PREFIX}qcc
 _ALIASES.CXX=	c++ g++
-CXXPATH=	${_GCCBINDIR}/g++
+CXXPATH=	${_GCCBINDIR}/${_GCC_BIN_PREFIX}g++
 PKG_CXX:=	${_GCC_CXX}
-.endif
-.if exists(${_GCCBINDIR}/g77)
+
+.if exists(${_GCCBINDIR}/${_GCC_BIN_PREFIX}g77)
 _GCC_VARS+=	FC
-_GCC_FC=	${_GCC_DIR}/bin/g77
+_GCC_FC=	${_GCC_DIR}/bin/${_GCC_BIN_PREFIX}g77
 _ALIASES.FC=	f77 g77
-FCPATH=		${_GCCBINDIR}/g77
-F77PATH=	${_GCCBINDIR}/g77
+FCPATH=		${_GCCBINDIR}/${_GCC_BIN_PREFIX}g77
+F77PATH=	${_GCCBINDIR}/${_GCC_BIN_PREFIX}g77
 PKG_FC:=	${_GCC_FC}
 .endif
 _COMPILER_STRIP_VARS+=	${_GCC_VARS}
