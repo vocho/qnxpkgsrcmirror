@@ -19,10 +19,10 @@ INSTALL_MAKE_FLAGS+=	${MAKE_FLAGS} TOOLS_AWK=${TOOLS_AWK:Q} TOOLS_SETENV=${TOOLS
 
 PLIST_SUBST+=		VIM_SUBDIR=${VIM_SUBDIR:Q}
 
-.if ${OPSYS} == "QNX"
-USE_TOOLS+=             automake
-pre-configure:
-	cd ${WRKSRC} && aclocal && autoconf
-.endif
+#.if ${OPSYS} == "QNX"
+#USE_TOOLS+=             autoconf
+#pre-configure:
+#	cd ${WRKSRC} && autoheader && autoconf
+#.endif
 
 .include "../../mk/bsd.pkg.mk"
