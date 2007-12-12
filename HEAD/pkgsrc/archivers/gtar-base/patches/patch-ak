@@ -1,0 +1,18 @@
+$NetBSD$
+
+--- src/list.c.orig	2004-12-21 15:34:05.000000000 +0100
++++ src/list.c
+@@ -594,8 +594,13 @@ decode_header (union block *header, stru
+ 	{
+ 	case BLKTYPE:
+ 	case CHRTYPE:
++#if defined(__QNXNTO__)
++          stat_info->stat.st_rdev = makedev (0, stat_info->devmajor,
++                                             stat_info->devminor);
++#else
+ 	  stat_info->stat.st_rdev = makedev (stat_info->devmajor,
+ 					     stat_info->devminor);
++#endif
+ 	  break;
+ 
+ 	default:
