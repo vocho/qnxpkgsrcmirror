@@ -23,7 +23,9 @@ BUILDLINK_PKGSRCDIR.modular-xorg-server?=	../../x11/modular-xorg-server
 .include "../../x11/renderproto/buildlink3.mk"
 .include "../../x11/videoproto/buildlink3.mk"
 .include "../../x11/xextproto/buildlink3.mk"
+.if ${OPSYS} != "QNX"
 .include "../../x11/xf86driproto/buildlink3.mk"
+.endif
 .include "../../x11/xproto/buildlink3.mk"
 
 BUILDLINK_DEPTH:=			${BUILDLINK_DEPTH:S/+$//}
