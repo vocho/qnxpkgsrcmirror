@@ -19,7 +19,7 @@ PKGCONFIG_OVERRIDE+=	xorg-server.pc.in
 USE_TOOLS+=		pkg-config
 USE_TOOLS+=		gmake
 CONFIGURE_ARGS+=	--localstatedir=${VARBASE}
-CONFIGURE_ARGS+=	--enable-dri
+#only if dri is enabled: CONFIGURE_ARGS+=	--enable-dri
 
 PKG_SUPPORTED_OPTIONS=	dri
 PKG_OPTIONS_VAR=	PKG_OPTIONS.xorg-server
@@ -31,6 +31,7 @@ DISTFILES=		${DISTNAME}${EXTRACT_SUFX}
 DISTFILES+=		MesaLib-6.5.2.tar.bz2
 SITES.MesaLib-6.5.2.tar.bz2= ${MASTER_SITE_SOURCEFORGE:=mesa3d/}
 MESA_SRC=		${WRKDIR}/Mesa-6.5.2
+CONFIGURE_ARGS+=	--enable-dri
 CONFIGURE_ARGS+=	--enable-glx
 CONFIGURE_ARGS+=	--with-mesa-source=${MESA_SRC}
 .if ${MACHINE_ARCH} == "x86_64" || ${MACHINE_ARCH} == "sparc64" || \
@@ -91,7 +92,10 @@ post-extract:
 .include "../../x11/libXt/buildlink3.mk"
 .include "../../x11/libXxf86misc/buildlink3.mk"
 .include "../../x11/libXxf86vm/buildlink3.mk"
+.if !empty(PKG_OPTIONS:Mdri)
+# include dri only if enabled
 .include "../../x11/libdrm/buildlink3.mk"
+.endif
 .include "../../x11/libxkbfile/buildlink3.mk"
 .include "../../x11/libxkbui/buildlink3.mk"
 .include "../../x11/randrproto/buildlink3.mk"
@@ -105,7 +109,10 @@ post-extract:
 .include "../../x11/xextproto/buildlink3.mk"
 .include "../../x11/xf86bigfontproto/buildlink3.mk"
 .include "../../x11/xf86dgaproto/buildlink3.mk"
+.if !empty(PKG_OPTIONS:Mdri)
+# include dri only if enabled
 .include "../../x11/xf86driproto/buildlink3.mk"
+.endif
 .include "../../x11/xf86miscproto/buildlink3.mk"
 .include "../../x11/xf86vidmodeproto/buildlink3.mk"
 .include "../../x11/xineramaproto/buildlink3.mk"
