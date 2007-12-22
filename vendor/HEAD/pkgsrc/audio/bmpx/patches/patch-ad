@@ -1,13 +1,13 @@
-$NetBSD: patch-ad,v 1.3 2007/08/30 15:30:31 joerg Exp $
+$NetBSD: patch-ad,v 1.5 2007/12/08 14:42:51 drochner Exp $
 
---- src/network.cc.orig	2007-08-30 14:13:19.000000000 +0000
-+++ src/network.cc
-@@ -166,7 +166,7 @@ namespace Bmp
-             FD_SET (rc, &rfds);
+--- src/sanity.cc.orig	2007-12-08 15:29:18.000000000 +0100
++++ src/sanity.cc
+@@ -69,7 +69,7 @@ sanity_check_glib_msg (void)
+ }
  
-             tv.tv_sec  = time_t (timeout);
--            tv.tv_usec = suseconds_t ((timeout - tv.tv_sec) * 1000000);
-+            tv.tv_usec = (long)((timeout - tv.tv_sec) * 1000000);
- 
-             if (write)
-               retval = select (rc+1, &rfds, NULL, NULL, &tv);
+ C_FUNCTION
+-gchar *
++const gchar *
+ sanity_check_gtk (void)
+ {
+   return gtk_check_version (GTK_REQUIRED_MAJOR_VER,

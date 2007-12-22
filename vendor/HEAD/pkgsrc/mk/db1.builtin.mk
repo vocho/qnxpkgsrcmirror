@@ -1,4 +1,4 @@
-# $NetBSD: db1.builtin.mk,v 1.18 2007/10/17 10:43:37 rillig Exp $
+# $NetBSD: db1.builtin.mk,v 1.21 2007/11/16 08:14:20 rillig Exp $
 
 BUILTIN_PKG:=	db1
 
@@ -83,7 +83,7 @@ BUILDLINK_TARGETS+=	buildlink-db1-db185-h
 .  if !target(buildlink-db1-db185-h)
 .PHONY: buildlink-db1-db185-h
 buildlink-db1-db185-h:
-	${_PKG_SILENT}${_PKG_DEBUG}					\
+	${RUN}								\
 	src=${H_DB:Q};							\
 	dest=${BUILDLINK_DIR:Q}"/include/db_185.h";			\
 	if ${TEST} -f "$$src" -a ! -f "$$dest"; then			\

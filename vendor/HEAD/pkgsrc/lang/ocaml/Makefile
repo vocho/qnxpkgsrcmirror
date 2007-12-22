@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.55 2007/09/26 03:10:54 dmcmahill Exp $
+# $NetBSD: Makefile,v 1.57 2007/12/21 17:02:53 joerg Exp $
 
 .include "Makefile.common"
 
@@ -6,6 +6,7 @@ CONFIGURE_ARGS+=	-no-tk
 CONFIGURE_ENV+=		disable_x11=yes
 
 BUILD_TARGET=		world
+MAKE_JOBS_SAFE=		no
 
 ###
 ### PLIST components
@@ -13,7 +14,8 @@ BUILD_TARGET=		world
 
 # Stub libraries for functions missing from base system.
 .if !empty(MACHINE_PLATFORM:MDarwin-*-powerpc) || ${OPSYS} == "DragonFly" || \
-    ${OPSYS} == "NetBSD" || ${OPSYS} == "FreeBSD" || ${OPSYS} == "SunOS"
+    ${OPSYS} == "NetBSD" || ${OPSYS} == "FreeBSD" || ${OPSYS} == "SunOS" || \
+    ${OPSYS} == "Linux"
 PLIST_SRC+=	${PKGDIR}/PLIST.stub
 .endif
 

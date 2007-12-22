@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.111 2007/09/21 13:03:39 wiz Exp $
+# $NetBSD: Makefile,v 1.113 2007/12/17 22:05:59 drochner Exp $
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
@@ -13,6 +13,7 @@ CONFLICTS=	abiword-personal-[0-9]* abiword2-[0-9]*
 WRKSRC=		${WRKDIR}/${DISTNAME}/abi
 USE_TOOLS+=	perl
 
+REPLACE_SH+=	${WRKDIR}/${DISTNAME}/abiword-docs/make-html.sh
 REPLACE_PERL+=	user/wp/scripts/abw2html.pl
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.abiword
@@ -36,8 +37,6 @@ CONFIGURE_ARGS+=	--with-libjpeg-prefix=${BUILDLINK_PREFIX.jpeg}
 CONFIGURE_ARGS+=	--with-libxml2
 CONFIGURE_ARGS+=	--with-zlib=${BUILDLINK_PREFIX.zlib}
 
-USE_GNU_ICONV=		yes
-
 INSTALLATION_DIRS+=	${PKGMANDIR}/man1
 INSTALLATION_DIRS+=	share/AbiSuite-2.4/AbiWord
 
@@ -47,8 +46,8 @@ post-build:
 		ABI_DOC_PROG=${WRKSRC}/src/wp/main/unix/AbiWord-2.4 \
 		./make-html.sh
 	find ${WRKDIR}/help -type d -print | ${XARGS} ${CHMOD} ${PKGDIRMODE}
-	find ${WRKDIR}/help \( -name "*.abw.orig" -or -name "*.abw"	\
-		-or -name "*.info" -or -name "*.xhtml" \) -print | ${XARGS} ${RM} -f
+	find ${WRKDIR}/help \( -name "*.abw.orig" -o -name "*.abw"	\
+		-o -name "*.info" -o -name "*.xhtml" \) -print | ${XARGS} ${RM} -f
 
 post-install:
 	${INSTALL_MAN} ${WRKDIR}/${DISTNAME}/abiword-docs/man/abiword.1 \

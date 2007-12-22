@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.5 2007/09/10 04:06:45 joerg Exp $
+# $NetBSD: Makefile,v 1.7 2007/12/19 12:27:29 rillig Exp $
 
 DISTNAME=	# empty
 PKGNAME=	modular-xorg-drivers-1.1
@@ -10,15 +10,6 @@ DISTFILES=	# empty
 MAINTAINER=	joerg@NetBSD.org
 HOMEPAGE=	http://xorg.freedesktop.org/
 COMMENT=	Modular Xorg driver meta-package
-
-PKG_DESTDIR_SUPPORT=	user-destdir
-
-NO_BUILD=		yes
-NO_CHECKSUM=		yes
-NO_MTREE=		yes
-NO_CONFIGURE=		yes
-
-do-install:
 
 .include "../../mk/bsd.prefs.mk"
 
@@ -58,5 +49,7 @@ DEPENDS+=	xf86-video-vmware-[0-9]*:../../x11/xf86-video-vmware
 .if ${OPSYS} == "NetBSD" || ${OPSYS} == "OpenBSD"
 DEPENDS+=	xf86-video-wsfb-[0-9]*:../../x11/xf86-video-wsfb
 .endif
+
+META_PACKAGE=	yes
 
 .include "../../mk/bsd.pkg.mk"

@@ -1,14 +1,9 @@
-# $NetBSD: Makefile,v 1.6 2007/01/07 09:14:10 rillig Exp $
+# $NetBSD: Makefile,v 1.8 2007/12/02 12:28:09 wiz Exp $
 
 DISTNAME=		prngd-0.9.29
 CATEGORIES=		security
-MASTER_SITES=		ftp://ftp.aet.tu-cottbus.de/pub/postfix_tls/related/prngd/ \
-			ftp://ftp.ayamura.org/pub/prngd/ \
-			ftp://ftp.win.ne.jp/pub/misc/prngd/ \
-			http://www.mirrors.wiretapped.net/security/cryptography/libraries/math/prng-and-entropy/prngd/ \
-			ftp://ftp.mirrors.wiretapped.net/pub/security/cryptography/libraries/math/prng-and-entropy/prngd/ \
-			http://planetmirror.com/pub/solaris-random/prngd/ \
-			ftp://planetmirror.com/pub/solaris-random/prngd/
+MASTER_SITES=		http://www.mirrors.wiretapped.net/security/cryptography/libraries/math/prng-and-entropy/prngd/ \
+			ftp://ftp.mirrors.wiretapped.net/pub/security/cryptography/libraries/math/prng-and-entropy/prngd/
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://www.aet.tu-cottbus.de/personen/jaenicke/postfix_tls/prngd.html

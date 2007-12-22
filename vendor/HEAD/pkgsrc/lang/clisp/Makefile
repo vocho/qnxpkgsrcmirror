@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.63 2007/06/11 18:28:38 uwe Exp $
+# $NetBSD: Makefile,v 1.65 2007/11/23 21:59:44 drochner Exp $
 
 DISTNAME=	clisp-2.41
 CATEGORIES=	lang
@@ -16,6 +16,11 @@ NOT_FOR_PLATFORM=	*-*-sparc64
 PKG_INSTALLATION_TYPES= overwrite pkgviews
 
 .include "../../mk/bsd.prefs.mk"
+
+.if ${OPSYS} == "NetBSD"
+# CLISP doesn't work with jemalloc, which is default in current
+MODULES+=		--with-gmalloc
+.endif
 
 .if ${MACHINE_ARCH:Malpha} || ${MACHINE_ARCH:Mamd64} || ${MACHINE_ARCH:Mx86_64} || ${OPSYS} == "DragonFly"
 MODULES+=		--disable-mmap
@@ -37,6 +42,7 @@ CONFIGURE_ARGS+=	${MODULES}
 TEST_TARGET=		check
 MAKE_ENV+=		TOOLS_PLATFORM.install=${TOOLS_PLATFORM.install:Q}
 MAKE_FLAGS+=		mandir=${PREFIX}/${PKGMANDIR}
+MAKE_JOBS_SAFE=		no
 
 post-configure:
 	cd ${WRKSRC}/src && \

@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.6 2007/10/16 04:03:42 minskim Exp $
+# $NetBSD: Makefile,v 1.8 2007/12/13 14:46:58 taca Exp $
 
-DISTNAME=	rails-1.2.5
+DISTNAME=	rails-1.2.6
 CATEGORIES=	www
-MASTER_SITES=	http://rubyforge.org/frs/download.php/26563/
+MASTER_SITES=	http://rubyforge.org/frs/download.php/28338/
 EXTRACT_SUFX=	.tgz
 
 MAINTAINER=	minskim@NetBSD.org
@@ -20,7 +20,7 @@ WRKSRC=		${WRKDIR}/rails/vendor/rails/railties
 
 REPLACE_RUBY_DIRS=	${WRKSRC}/bin ${WRKSRC}/dispatches	\
 			${WRKSRC}/lib/commands/ncgi
-REPLACE_FILE_PAT=	*
+REPLACE_RUBY_PAT=	*
 
 SUBST_CLASSES+=		paths
 SUBST_MESSAGE.paths=	Fixing hardcoded paths.

@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.9 2007/10/04 12:03:19 obache Exp $
+# $NetBSD: Makefile,v 1.12 2007/12/02 13:04:16 wiz Exp $
 #
 
 DISTNAME=	compiz-0.4.0
-PKGREVISION=	4
+PKGREVISION=	6
 CATEGORIES=	wm x11
 MASTER_SITES=	http://xorg.freedesktop.org/releases/individual/app/
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.go-compiz.org/
+HOMEPAGE=	http://compiz.org/
 COMMENT=	Compositing window manager
 
 GNU_CONFIGURE=		yes
@@ -37,7 +37,7 @@ PKG_OPTIONS_VAR=	PKG_OPTIONS.compiz
 .if !empty(PKG_OPTIONS:Mgnome)
 CONFIGURE_ARGS+=	--enable-librsvg
 PLIST_SUBST+=		GNOME=""
-.include "../../x11/control-center/buildlink3.mk"
+.include "../../x11/gnome-control-center/buildlink3.mk"
 .include "../../wm/metacity/buildlink3.mk"
 .include "../../graphics/librsvg/buildlink3.mk"
 .else

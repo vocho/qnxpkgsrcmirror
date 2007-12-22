@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.20 2006/03/04 21:30:09 jlam Exp $
+# $NetBSD: Makefile,v 1.23 2007/12/19 12:27:29 rillig Exp $
 #
 
 DISTNAME=	netbsd-doc-print-1.2
@@ -13,15 +13,9 @@ COMMENT=	Meta-package including all packages to convert SGML->PDF/PS
 DEPENDS+=	tex-jadetex>=2.20nb1:../../print/tex-jadetex
 DEPENDS+=	openjade-[0-9]*:../../textproc/openjade
 DEPENDS+=	netbsd-doc>=1.2:../../meta-pkgs/netbsd-doc
-
-EXTRACT_ONLY=	# empty
-NO_CHECKSUM=	yes
-NO_CONFIGURE=	yes
-NO_BUILD=	yes
-NO_MTREE=	yes
 USE_TOOLS+=	gs:run
 
-do-install:	# empty
+META_PACKAGE=	yes
 
 .include "../../textproc/opensp/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

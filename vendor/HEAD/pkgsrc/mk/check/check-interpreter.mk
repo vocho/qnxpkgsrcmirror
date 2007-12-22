@@ -1,4 +1,4 @@
-# $NetBSD: check-interpreter.mk,v 1.19 2007/03/24 18:12:08 heinz Exp $
+# $NetBSD: check-interpreter.mk,v 1.21 2007/11/30 08:34:31 bjs Exp $
 #
 # This file checks that after installation, all files of the package
 # that start with a "#!" line will find their interpreter. Files that
@@ -23,7 +23,11 @@
 #	Example: share/package1/* share/package2/somefile
 #
 
+.if defined(PKG_DEVELOPER)
+CHECK_INTERPRETER?=		yes
+.else
 CHECK_INTERPRETER?=		no
+.endif
 CHECK_INTERPRETER_SKIP?=	# empty
 
 _CHECK_INTERP_SKIP=		share/doc/*
@@ -59,10 +63,14 @@ _check-interpreter: error-check .PHONY
 		case "$$interp" in					\
 		"") continue;						\
 		esac;							\
-		if [ ! -f "$$interp" ]; then				\
+									\
+		if { [ ! -f ${DESTDIR:Q}"$$interp" ] &&			\
+		     [ ! -f "$$interp" ]; }; then			\
+									\
 			if [ -x "$$file" ]; then			\
 				${DELAYED_ERROR_MSG} "[check-interpreter.mk] The interpreter \"$$interp\" of \"${DESTDIR}${PREFIX}/$$file\" does not exist."; \
 			else						\
+									\
 				${DELAYED_WARNING_MSG} "[check-interpreter.mk] The interpreter \"$$interp\" of \"${DESTDIR}${PREFIX}/$$file\" does not exist."; \
 			fi;						\
 		fi;							\

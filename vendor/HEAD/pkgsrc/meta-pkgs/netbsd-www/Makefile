@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.20 2006/12/24 10:36:49 jnemeth Exp $
+# $NetBSD: Makefile,v 1.23 2007/12/19 12:27:29 rillig Exp $
 #
 
 DISTNAME=	netbsd-www-1.4
@@ -9,6 +9,8 @@ DISTFILES=	# empty
 
 MAINTAINER=	grant@NetBSD.org
 COMMENT=	Packages required to build the NetBSD.org web site
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 # we add an explicit dependency on docbook-xsl here since earlier versions
 # generated slightly different html code, leading to a large number of
@@ -21,14 +23,8 @@ DEPENDS+=	xplanet>=1.2.0nb3:../../x11/xplanet
 DEPENDS+=	opensp>=1.1:../../textproc/opensp
 DEPENDS+=	psutils>=1.17:../../print/psutils
 DEPENDS+=	w3m>=0.4:../../www/w3m
-
 USE_TOOLS+=	perl:run
-NO_CHECKSUM=	yes
-NO_CONFIGURE=	yes
-NO_BUILD=	yes
-NO_MTREE=	yes
 
-do-install:
-	@${DO_NADA}
+META_PACKAGE=	yes
 
 .include "../../mk/bsd.pkg.mk"

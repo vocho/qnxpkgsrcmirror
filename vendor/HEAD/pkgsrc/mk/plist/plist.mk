@@ -1,4 +1,4 @@
-# $NetBSD: plist.mk,v 1.32 2007/10/10 02:37:13 rillig Exp $
+# $NetBSD: plist.mk,v 1.36 2007/10/31 21:09:03 rillig Exp $
 #
 # This Makefile fragment handles the creation of PLISTs for use by
 # pkg_create(8).
@@ -63,6 +63,20 @@ PLIST_SRC_DFLT+=	${PKGDIR}/PLIST
 .if exists(${PKGDIR}/PLIST.common_end)
 PLIST_SRC_DFLT+=	${PKGDIR}/PLIST.common_end
 .endif
+
+#
+# If the following 3 conditions hold, then fail the package build:
+#
+#    (1) The package doesn't set PLIST_SRC.
+#    (2) The package doesn't set GENERATE_PLIST.
+#    (3) There are no PLIST files.
+#
+.if !defined(PLIST_SRC) && !defined(GENERATE_PLIST)
+.  if !defined(PLIST_SRC_DFLT) || empty(PLIST_SRC_DFLT)
+PKG_FAIL_REASON+=      "Missing PLIST file or PLIST/GENERATE_PLIST definition."
+.  endif
+.endif
+
 PLIST_SRC?=		${PLIST_SRC_DFLT}
 
 # This is the path to the generated PLIST file.
@@ -145,8 +159,11 @@ PLIST_SUBST+=	OPSYS=${OPSYS:Q}					\
 _PLIST_AWK_ENV+=	${PLIST_SUBST:S/^/PLIST_/}
 _PLIST_AWK_ENV+=	PLIST_SUBST_VARS=${PLIST_SUBST:S/^/PLIST_/:C/=.*//:M*:Q}
 
+_PLIST_1_AWK+=		-f ${PKGSRCDIR}/mk/plist/plist-functions.awk
+_PLIST_1_AWK+=		-f ${PKGSRCDIR}/mk/plist/plist-subst.awk
+_PLIST_1_AWK+=		-f ${PKGSRCDIR}/mk/plist/plist-macros.awk
+
 _PLIST_AWK+=		-f ${.CURDIR}/../../mk/plist/plist-functions.awk
-_PLIST_AWK+=		-f ${.CURDIR}/../../mk/plist/plist-subst.awk
 _PLIST_AWK+=		-f ${.CURDIR}/../../mk/plist/plist-locale.awk
 _PLIST_AWK+=		-f ${.CURDIR}/../../mk/plist/plist-info.awk
 _PLIST_AWK+=		-f ${.CURDIR}/../../mk/plist/plist-man.awk
@@ -171,7 +188,11 @@ _SHLIB_AWKFILE.none=	${.CURDIR}/../../mk/plist/shlib-none.awk
 #	that outputs contents for a PLIST to stdout and is appended to
 #	the contents of ${PLIST_SRC}.
 #
+.if empty(PLIST_SRC)
+GENERATE_PLIST?=	${ECHO} "@comment "${PKGNAME:Q}" has no files.";
+.else
 GENERATE_PLIST?=	${TRUE};
+.endif
 
 .if ${PKG_INSTALLATION_TYPE} == "pkgviews"
 #
@@ -212,23 +233,21 @@ _GENERATE_PLIST=							\
 		${SED} -e "s|^${DESTDIR}${PREFIX}/|@unexec ${RMDIR} -p %D/|"	\
 		       -e "s,$$, 2>/dev/null || ${TRUE},";
 .else
-_GENERATE_PLIST=	${CAT} ${PLIST_SRC};				\
-			${GENERATE_PLIST}
+_GENERATE_PLIST=	${CAT} /dev/null ${PLIST_SRC}; ${GENERATE_PLIST}
 .endif
 
 .PHONY: plist
 plist: ${PLIST} ${_PLIST_NOKEYWORDS}
 
-.if ${PLIST_TYPE} == "static"
+.if (${PLIST_TYPE} == "static") && !empty(PLIST_SRC)
 ${PLIST}: ${PLIST_SRC}
 .endif
 ${PLIST}:
-	${_PKG_SILENT}${_PKG_DEBUG}${MKDIR} ${.TARGET:H}
-	${_PKG_SILENT}${_PKG_DEBUG}					\
-	{ ${_GENERATE_PLIST} } |					\
-	${SETENV} ${_PLIST_AWK_ENV} ${AWK} ${_PLIST_AWK} |		\
-	${SETENV} ${_PLIST_AWK_ENV} ${AWK} ${_PLIST_SHLIB_AWK}		\
-		> ${.TARGET}
+	${RUN} ${MKDIR} ${.TARGET:H}
+	${RUN} { ${_GENERATE_PLIST} } > ${.TARGET}-1src
+	${RUN} ${SETENV} ${_PLIST_AWK_ENV} ${AWK} ${_PLIST_1_AWK} < ${.TARGET}-1src > ${.TARGET}-2mac
+	${RUN} ${SETENV} ${_PLIST_AWK_ENV} ${AWK} ${_PLIST_AWK} < ${.TARGET}-2mac > ${.TARGET}-3mag
+	${RUN} ${SETENV} ${_PLIST_AWK_ENV} ${AWK} ${_PLIST_SHLIB_AWK} < ${.TARGET}-3mag > ${.TARGET}
 
 # for list of keywords see pkg_create(1)
 ${_PLIST_NOKEYWORDS}: ${PLIST}

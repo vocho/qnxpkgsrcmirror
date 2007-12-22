@@ -1,4 +1,4 @@
-$NetBSD: TODO,v 1.6760 2007/10/21 11:06:01 wiz Exp $
+$NetBSD: TODO,v 1.6919 2007/12/21 16:30:50 tron Exp $
 
 Suggested new packages
 ======================
@@ -209,24 +209,31 @@ Suggested new packages
 	http://oasis.frogfoot.net/code/tinysnmp/
 	Mini SNMP daemon
 
+	TrueCrypt
+	http://www.truecrypt.org/
+	Hard drive encryption software
+
+	ReportMagic
+	http://www.reportmagic.org/
+	Builds nice looking statistics reports for output from www/analog
+
 Suggested package updates
 =========================
 
 	o 9base-20060125
 	o CSP-0.34
-	o Cenon-3.82
 	o Chinput-3.0.1
 	o Coin-2.4.5
-	o GConf-2.20.1
+	o DatLib-2.22
+	o DatUtil-2.33
 	o GMT-4.2.1
 	o GUIlib-1.1.2
 	o GWLib-0.7.0
 	o GeoIP-1.4.2
-	o Gorm-1.2.1
 	o GridSim-3.3
-	o ORBit2-2.14.10
+	o MesaLib-7.0.2
 	o PAM-0.99.7.1
-	o R-2.6.0
+	o R-2.6.1
 	o R-CGIwithR-0.72
 	o R-DAAG-0.91
 	o R-Matrix-0.9975.11
@@ -255,12 +262,15 @@ Suggested package updates
 	o R-wle-0.9.3
 	o REminiscence-0.1.9
 	o RTx-Shredder-0.05
+	o RealPlayerGold-10.0.9.809.20070726 [pkg/37371]
 	o SmartEiffel-2.3
+	o TeXmacs-1.0.6.12
 	o TiffIO-130e
-	o YoSucker-75
+	o YoSucker-81
+	o ZIPIdent-2.9
 	o aap-0.144
-	o abcm2ps-5.5.2
-	o abcmidi-20070318
+	o abcm2ps-5.7.0
+	o abcmidi-20071209
 	o acme-091
 	o acr-0.5.2
 	o acroread-8.1.1
@@ -274,20 +284,23 @@ Suggested package updates
 	o alee-ttf-11.2
 	o algae-4.3.6
 	o aliados-0.2.0
-	o allegro-4.2.2
 	o amanda-2.5.2p1
 	o amanda-client-2.5.0
 	o amanda-common-2.5.0
 	o amanda-plot-2.5.0
 	o amanda-server-2.5.0
 	o amavis-perl-0.3.12 [called just amavis]
+	o amavisd-new-2.5.3
 	o amaya-9.54
+	o amsn-0.96 [pkg/37509]
 	o angband-3.0.9
-	o anjuta-2.2.1
+	o anjuta-2.2.3
+	o antiright-8.6
 	o ap-Embperl-1.3.6
 	o ap-auth-mysql-4.3.9
 	o ap-auth-pam-1.1.1
 	o ap-dtcl-1.0.0
+	o ap-fastcgi-2.4.6
 	o ap-layout-3.3
 	o ap-mp3-0.40
 	o ap-python-3.3.1
@@ -300,23 +313,25 @@ Suggested package updates
 	o ap2-transform-0.6.0
 	o apache-1.3.39
 	o apache-ant15-1.7.0
+	o apache-tomcat-5.5.25
 	o apsfilter-7.2.8
 	o aqsis-1.2
 	o aranym-0.9.5
 	o argtable-2.3
+	o aria2-0.12.0
 	o arla-0.90
 	o arnold-20040104
 	o arping-2.06
 	o arpwatch-2.1a15
 	o asapm-3.1
+	o asc-2.0.0
 	o ascii-3.8
-	o aspell-danish-1.6.7
-	o aspell-faroese-0.2.30
+	o aspell-danish-1.6.10
+	o aspell-faroese-0.2.31
 	o aspell-norwegian-2.0.9
 	o aspell-ukrainian-1.3.3
-	o asterisk-1.4.11
+	o asterisk-1.4.15
 	o astyle-1.15.3
-	o at-spi-1.20.1
 	o aterm-1.0.1
 	o autoconvert-0.3.16
 	o autogen-5.9.3
@@ -326,71 +341,69 @@ Suggested package updates
 	o avr-libc-1.4.5
 	o avrdude-5.3.1
 	o baci-20040415
-	o bacula-2.2.5
+	o bacula-2.2.6 [pkg/37396]
 	o bacula-doc-2.0.3
 	o balance-3.35
 	o balsa-2.4.16
-	o base64-1.4
 	o bbdb-2.35
 	o bbkeys-0.9.0
 	o bbsload-0.2.8
 	o bbweather-0.6.3
-	o bchunk-1.2.0
 	o bdb-xml-2.0.9
 	o beacon-1.3
 	o benchfft-3.1
-	o bibtex2html-1.86
 	o biew-5.6.4
 	o bind-8.4.7
+	o bind-9.4.2
 	o bioperl-1.5.0
-	o bitlbee-1.0.4
 	o bittorrent-5.0.5
 	o blender-2.44
 	o blur6ex-0.3.462
 	o bmon-2.1.0
-	o bmpx-0.40.9
 	o bochs-2.3.5
+	o bonnie++-1.03b
 	o bos-2.0.1
 	o boson-0.13
 	o botan-1.6.3
 	o btpd-0.12
 	o bug-buddy-2.20.1
-	o bwidget-1.7.0
-	o bzr-0.91
+	o bzr-1.0
 	o c4-1.10 [schmonz]
 	o cadaver-0.23.0
 	o cal3d-0.11.0
 	o calamaris-2.59
 	o capc-calc-2.12.2.2
 	o cardboard-schedule-1.14c [at http://www.bright-green.com/downloads/]
-	o cddb-1.5.2
 	o cddbd-1.5.2
 	o cdlabelgen-4.0.0
-	o cfengine2-2.2.2
 	o cfitsio-3.030
 	o cflow-1.2
 	o cgdb-0.6.4
 	o cgicc-3.2.4
 	o chemtool-1.6.11
 	o cherokee-0.5.6
-	o chrony-1.21
+	o chrony-1.23
 	o cint-5.16
 	o cjk-lyx-1.4.4
-	o classpath-0.96
-	o claws-mail-3.0.2
+	o clamav-0.92
+	o classpath-0.96.1
+	o claws-mail-3.2.0
 	o clearsilver-0.10.4
 	o clearsilver-base-0.10.4
-	o clisp-2.42
+	o clisp-2.43
 	o cmake-2.4.7
 	o cocoon-2.1.10
 	o compiz-0.6.2
+	o cone-0.74
 	o connect-1.96
 	o control-center-2.20.1
 	o cook-2.30
+	o courier-0.58.0
 	o cpio-2.9
 	o cpmtools-2.6
 	o cppunit-1.12.0
 	o crafty-19.5
+	o crimsonfields-0.5.2
 	o cross-h8300-hms-binutils-2.17
 	o crossfire-client-1.10.0
 	o crossfire-maps-1.10.0
@@ -398,31 +411,26 @@ Suggested package updates
 	o crypto++-523
 	o cstream-2.7.3
 	o cuetools-1.3.1
-	o cups-1.3.3
+	o cups-1.3.5
 	o cvs2p4-2.5.5 [schmonz]
-	o cvs2svn-2.0.0
+	o cvs2svn-2.0.1 [pkg/37401]
+	o cvsd-1.0.14
 	o cweb-3.64a
 	o cxref-1.6b
 	o cygwin_lib-1.5.24.2
-	o dar-2.3.6
-	o dasher-4.6.1
 	o dbench-3.04
-	o dbmail-2.2.4
 	o dbxml-2.1.8
 	o dc_gui2-0.80
 	o dctc-0.85.9
+	o dd_rescue-1.14
 	o ddclient-3.7.3
-	o dd_rescue-1.13
 	o defendguin-0.0.11
-	o dejavu-ttf-2.20
-	o delegate-9.7.4
-	o deskbar-applet-2.20.1
+	o delegate-9.7.5
 	o devIL-1.6.7
 	o devhelp-0.16.1
-	o devtodo-0.1.19
+	o dhcp-4.0.0 [DHCP6 supported.  as dhcp4?]
 	o dhid-5.3
 	o diction-1.11
-	o diffstat-1.44
 	o dinotrace-9.3e
 	o dinotrace-mode-9.3e
 	o dirac-0.8.0
@@ -432,54 +440,51 @@ Suggested package updates
 	o dnsmasq-2.40
 	o dnstop-20070307
 	o dnstracer-1.8
-	o doxygen-1.5.3
+	o doxygen-1.5.4
 	o dpkg-1.13.25
 	o drscheme-371
 	o dvdrip-0.98.8
-	o dvdstyler-1.5
 	o dvipng-1.9
-	o dwm-4.5
 	o eagle-4.16
 	o easymenu-0.7.2p1
+	o easytag-current-2.1.4
 	o ec-fonts-mftraced-1.0.12
 	o eclipse-3.2.0
 	o ed-0.8
-	o ede-1.1
+	o ede-1.2
 	o edonkeyclc-1.0.2 [replaces net/edonkey2k]
-	o eel-2.20.0
-	o efax-gtk-3.0.15
 	o egtk-0.3.6.2
+	o electric-8.06
 	o electricfence-2.4.16
 	o elf-0.5.4p1
 	o elfsh-0.65 [pkg/33959]
+	o elfsh-0.78
 	o elinks-0.12
-	o elm-me-2.4pl123d
+	o elm-me-2.4pl124a
 	o elscreen-1.5.2
-	o eltclsh-1.7
+	o eltclsh-1.8 [pkg/37283]
 	o emacs-wiki-2.72
 	o emech-2.8.5.1
 	o enlightenment-0.16.8.10
 	o enscript-1.6.4
-	o eog-2.20.1
 	o epic4-2.6
-	o epiphany-2.20.1
 	o epiphany-extensions-2.20.1
+	o epsg-6.14
 	o epstool-3.08
-	o eric3-4.0.3 [now called eric4]
+	o eric3-4.0.4 [now called eric4]
 	o esh-0.8.5
 	o et-2.60
 	o etach-1.4.1
 	o eukleides-1.0.3
 	o evilwm-1.0.0
-	o evince-2.20.1
-	o evolution-2.12.1
-	o evolution-data-server-1.12.1
-	o evolution-exchange-2.12.0
+	o evolution-2.12.2
+	o evolution-exchange-2.12.2
 	o evolution-webcal-2.12.0
 	o ex-20050325
-	o ezmlm-idx-5.1.0 [schmonz]
+	o ezmlm-idx-6.0.1 [schmonz]
 	o ezxml-0.8.6
 	o f2c-20061008
+	o faad2-2.6.1
 	o faces-1.7.7
 	o fakeroot-1.6.5
 	o fast-user-switch-applet-2.20.0
@@ -487,20 +492,22 @@ Suggested package updates
 	o fdgw-20040609
 	o festival-1.96
 	o fetchyahoo-2.11.2
-	o file-roller-2.20.1
 	o fillets-ng-0.7.4
 	o fillets-ng-data-0.7.4
-	o firefox-bin-flash-9.0.64.0
+	o firefox-bin-flash-9.0.115.0
 	o fisg-0.3.12
 	o flashplayer-0.4.13
+	o flightgear-1.0.0
 	o flpsed-0.4.4
 	o fmsx-3.0
 	o fondu-040927
 	o fop-0.20.5
-	o fort77-1.18
 	o fox-1.6.30
+	o freeciv-2.1.1
 	o freefont-ttf-20060126
 	o freeglut-2.4.0
+	o freepops-0.2.6
+	o freesci-0.6.2
 	o freetds-0.64
 	o freetype-lib-1.5.20050518
 	o freetype-utils-1.5.20050518
@@ -509,83 +516,72 @@ Suggested package updates
 	o ftplibpp-2.0.2
 	o fugu-1.2.3
 	o fvwm2-themes-0.7.0
-	o gaim-icb-20070203
 	o galculator-1.3.1
 	o gap-4r4p9
 	o gated-3.6
-	o gauche-0.8.11
+	o gauche-0.8.12
 	o gcalctool-5.20.2
 	o gcc-4.2.2
 	o gcc-ssp-3.4.4
-	o gcin-1.3.4
+	o gcin-1.3.7.1
 	o gcombust-0.1.55
-	o gcompris-8.4
+	o gcompris-8.4.2
 	o gconf-editor-2.18.2
-	o gconfmm-2.20.0
 	o gcpio-2.7
-	o gdal-1.4.1
-	o gdb-6.7
-	o gdb6-6.6
+	o gdal-lib-1.4.4
+	o gdb6-6.7.1
 	o gdeskcal-1.01
 	o gdl-0.7.5
-	o gdm-2.20.1
+	o gdm-2.20.2
 	o gdsreader-0.3.2
 	o geany-0.12
 	o geda-1.2.0.20070902
-	o gedit-2.20.3
 	o generator-cbiere-0.35r3
-	o genius-1.0.0
-	o gettext-0.16.1
+	o getmail-4.7.7
+	o gettext-0.17
 	o gfract-0.33
 	o ggiterm-0.7.1
+	o ghc-6.8.2
 	o ghostscript-esp-8.15.3
 	o gifsicle-1.48
-	o gimp-docs-2.0.10
 	o gimp-print-5.0.1 [now called gutenprint]
-	o gkrellm-2.3.0
+	o gimp-ufraw-0.13
+	o gindent-2.2.9
+	o gkrellm-2.3.1
 	o gkrellm-multiping-2.0.13
 	o gkrellm-snmp-1.0
 	o gkrellm-xmms-2.1.22
-	o glade3-3.4.0
+	o glade-2.12.2
+	o glade3-3.4.1
 	o glchess-1.0.5
-	o glib2-2.14.2
 	o global-5.6
-	o gmime-2.2.10
+	o glproto-1.4.9
+	o gmime-2.2.12
 	o gmpc-0.15.1
 	o gnash-0.8.1
 	o gnet1-1.1.9
 	o gnetman-20050429
-	o gnome-applets-2.20.0
 	o gnome-build-0.2.0
 	o gnome-common-2.20.0
-	o gnome-desktop-2.20.1
-	o gnome-games-2.20.1
-	o gnome-keyring-2.20.1
 	o gnome-mag-1.14.10
 	o gnome-media-2.20.1
-	o gnome-menus-2.20.1
-	o gnome-panel-2.20.1
-	o gnome-session-2.20.1
-	o gnome-speech-0.4.16
+	o gnome-speech-0.4.17
 	o gnome-spell-1.0.8
-	o gnome-system-monitor-2.20.0
-	o gnome-terminal-2.18.2
-	o gnome-themes-2.20.1
-	o gnome-user-docs-2.20.1
-	o gnome-utils-2.20.0.1
-	o gnome-vfs-2.20.0
+	o gnomeicu-0.99.14
 	o gnu-crypto-2.1.0
-	o gnupg2-2.0.7
+	o gnucash-2.2.2
+	o gnumeric-current-1.7.91
 	o gnustep-1.14.0
 	o gnustep-examples-1.2.0
-	o gnustep-make-2.0.1
 	o gnustep-objc-1.4.0
-	o gnutls-2.0.2
+	o gnutls-2.2.0
+	o gob2-2.0.15
 	o gobo-eiffel-3.3 [does not work with smarteiffel-2.0; perhaps 2.1?]
 	o gocr-0.43
+	o goffice0.5-0.6.0
 	o gogo-3.11p1
 	o gok-1.3.7
-	o gossip-0.26
+	o gossip-0.28
 	o gourmet-0.13.3
 	o gpaint-0.3.3
 	o gperiodic-2.0.10
@@ -595,25 +591,25 @@ Suggested package updates
 	o grace-5.1.21
 	o gramofile-1.6P
 	o grap-1.40
+	o graphviz-2.16.1
 	o grep-2.5.1a
 	o grhino-0.16.0
 	o gri-2.12.8
-	o gsasl-0.2.21
-	o gsed-4.1.6
 	o gsharutils-4.7
 	o gsl-1.10
 	o gsm-1.0.12
 	o gss-0.0.22
 	o gtar-1.19
-	o gtexinfo-4.11
+	o gtar-base-1.19
+	o gtexinfo-4.11 [pkg/37481]
 	o gthumb-2.10.7
 	o gtick-0.4.1
-	o gtk-doc-1.9
+	o gtk-send-pr-0.4.9
 	o gtk-systrace-20030623
-	o gtk2-2.12.1
+	o gtk2+-2.12.3
 	o gtk2-engines-2.12.2
 	o gtk2-sharp-2.10.2
-	o gtkhtml-3.16.1
+	o gtkhtml-3.16.2
 	o gtklife-5.1
 	o gtksee-0.6.0b
 	o gtksourceview-2.0.1
@@ -623,18 +619,19 @@ Suggested package updates
 	o gtranscript-0.2.0
 	o guile-1.8.3
 	o guile-gtk-2.0
-	o gwave-20031224
 	o gwenview-1.4.2
-	o gworkspace-0.8.5
-	o gzip-1.3.12
+	o gworkspace-0.8.6
+	o gxemul-0.4.6.1
 	o gzrecover-0.5
 	o hackbot-2.21
 	o hanzim-1.8
 	o haskell-mode-1.45
+	o hdf-4.2r2
 	o heimdal-1.0.1 [pkg/37010]
 	o hercules-3.04.1
 	o hesiod-3.1.0
-	o heyu-2.1.2
+	o hexedit-1.2.12
+	o heyu-2.1.3
 	o hobbitmon-4.0.4 [pkg/30484]
 	o honeyd-1.5c
 	o horde3-3.1.5
@@ -643,10 +640,11 @@ Suggested package updates
 	o html2ps-1.0b5
 	o html2wml-0.4.11
 	o htmldoc-1.8.27
+	o htop-0.7
 	o http_load-20060312
 	o httptunnel-3.3
 	o hydrogen-0.9.2
-	o hylafax-5.1.9
+	o hylafax-5.2.0
 	o i2ocfg-1.1
 	o ical-2.3.2
 	o icdprog-0.5
@@ -655,23 +653,23 @@ Suggested package updates
 	o icsi-finger-1.0.29
 	o ifile-1.3.5
 	o ike-2.0.1 [pkg/37032]
-	o ikiwiki-2.8
+	o ikiwiki-2.15
+	o imap-uw-2006k
 	o imapproxy-1.2.5 [see http://horde.org/imapproxy/ -> www.imapproxy.org]
 	o imapsync-1.217
-	o imp-4.1.5
-	o ingo-1.1.4
 	o instiki-0.11pl1
 	o intercal-0.24
-	o ion3-devel-20070927
+	o intltool-0.37.0
 	o iozone-3.283
 	o ipa-2.1.11
 	o ipcalc-0.41
-	o ircservices-5.1.2
+	o ircservices-5.1.10
 	o irrd-2.3.4 [pkg/36813]
 	o irrtoolset-nox11-4.8.4
+	o isapnptools-1.27
 	o iselect-1.3.1
 	o ispell-gaeilge-4.1
-	o ispell-german-20070829
+	o ispell-german-20071211
 	o ispell-slovak-0.3.2
 	o ispman-1.2
 	o ja-gawk-3.1.5
@@ -681,97 +679,102 @@ Suggested package updates
 	o ja-vflib-utils-2.25.6
 	o ja-vfxdvik-22.40y1
 	o jabberd-1.4.4
-	o jabberd2-2.1.16
+	o jabberd2-2.1.19
+	o jam-2.5.2 [pkg/37285]
 	o java-lang-spec-3.0
 	o jcabc2ps-20070110
 	o jdb-1.14
 	o jgrasp-183
-	o jhead-2.7
-	o jigdo-0.7.3
+	o jhead-2.8
 	o jools-1.0
 	o jwhois-4.0
+	o k3b-1.0.4
 	o kapooka-0.3
-	o kazehakase-0.4.6
 	o kbarcode-2.0.6
+	o kdbg-2.1.0
 	o kdrill-6.5
-	o kid3-0.9
 	o kinput2-3.1
 	o kismet-2007.01.1b
 	o kmp-0.5
+	o kmymoney2-0.8.8
 	o kmysqladmin-0.7.2
 	o kodos-2.4.5
 	o kphotobook-0.0.7
 	o kronolith-2.1.6
 	o ksi-3.4.2
 	o kye-0.9.3
-	o lablgtk-2.10.0
 	o lapack-20070226
 	o latd-1.21
+	o latex2rtf-1.9.19
 	o lavaps-2.7
 	o lcab-1.0b12
 	o lcc-4.2
 	o ldapsdk-6.0.2
 	o leafnode-1.11.6
 	o leafpad-0.8.12
-	o less-408
+	o less-416
 	o lft-2.5 [at http://pwhois.org/]
-	o lftp-3.5.14
+	o lftp-3.6.1
 	o libFoundation-1.1.3
-	o libarchive-2.2.7
-	o libassuan-1.0.1
+	o libICE-1.0.4
+	o libXaw-1.0.4
+	o libXcursor-1.1.9
+	o libXpm-3.5.7
+	o libXrender-0.9.4
+	o libXtst-1.0.3
+	o libXxf86dga-1.0.2
 	o libast-0.7
-	o libbonobo-2.20.1
-	o libcdio-0.78.2
+	o libbonobo-2.20.2
+	o libcares-1.5.1
+	o libcdio-0.79
 	o libchewing-0.3.0
 	o libdiscid-0.1.1
 	o libdockapp-0.6.1
-	o libdvbpsi-0.1.5
-	o libelf-0.8.10
-	o libetpan-0.51
-	o libevent-1.3e
+	o libdvbpsi-0.1.6
+	o libevent-1.4.0beta
 	o libflash-0.4.13
+	o libgcrypt-1.4.0
+	o libgda-3.1.2
 	o libggi-2.2.2
 	o libggigcp-1.0.2
 	o libggimisc-2.2.2
 	o libggiwmh-0.3.2
 	o libgii-1.0.2
 	o libgiigic-1.1.2
-	o libgnome-2.20.1.1
-	o libgnomecanvas-2.20.1.1
+	o libgnomedb-3.1.2
 	o libgnomekbd-2.20.0
-	o libgnomeui-2.20.1.1
-	o libgtop-2.20.0
 	o libhydrogen-0.9.2
+	o libidn-1.3
 	o libjit-0.1.0
 	o liblive-2007.02.20
 	o liblzo-2.02
 	o libmatheval-1.1.5
 	o libmatroska-0.8.1
 	o libmpeg3-1.7
+	o libmusicbrainz-3.0.1
 	o libnasl-2.3.1
 	o libnids-1.21
 	o libole2-2.2.8
 	o libopensync-0.30
-	o libprelude-0.9.16
-	o libpreludedb-0.9.13
+	o libprelude-0.9.16.1
+	o libpreludedb-0.9.14
 	o libshout-2.2.2
 	o libsoup-2.2.102
 	o libssh-0.2
 	o libstatgrab-0.15
 	o libstree-0.4.2
+	o libtasn1-1.2
 	o libtcl-nothread-8.4.9
-	o libwnck-2.20.1
 	o libxklavier-3.3
 	o libxml++2-2.20.0
-	o licq-1.3.4
-	o licq-core-1.3.0
-	o liferea-1.4.0
-	o lilypond-2.10.20
+	o licq-1.3.5
+	o lilypond-2.10.33
 	o lincvs-2.0.0 [now called CrossVC]
+	o links-gui-2.1.0.32
 	o linuxsms-0.77
-	o liquidwar-5.6.4
 	o lmms-0.2.1
 	o lout-3.31
+	o lpairs-1.0.3
 	o lq-sp-1.3.4.13
 	o lsh-2.0.3
 	o ltm-0.40
@@ -782,63 +785,59 @@ Suggested package updates
 	o maelstrom-x11-2.0.7
 	o magicpoint-1.12a
 	o mail-notification-4.1
-	o mailfront-1.10 [pkg/34765]
+	o mailfront-1.11 [pkg/34765]
 	o mailscanner-4.54.6
 	o maketool-0.8.4
 	o makeztxt-1.60
-	o manedit-0.8.1
-	o mapserver-4.2.5
-	o maradns-1.2.12.08
+	o mapserver-5.0.0
+	o maradns-1.2.12.09
 	o matchbox-panel-0.9.3
+	o mathomatic-12.8.2
 	o mcrypt-2.6.6
 	o memtestplus-1.70
-	o mercurial-0.9.5
+	o mergeant-0.67
 	o mesure-0.7.2
-	o metacity-2.20.0
 	o metakit-lib-2.4.9.6
 	o mgetty+sendfax-1.1.35
-	o micq-0.5.4.2
-	o minivmac-2.8.2
+	o minivmac-3.0.4
 	o mirmon-1.37
 	o mk-files-20061230
 	o mknmz-wwwoffle-0.7.2
-	o mksh-31.4
 	o mkvtoolnix-2.1.0
 	o mlview-0.9.0
 	o mmg-2.0.2
 	o moc-2.4.3
-	o mono-1.2.4
+	o modular-xorg-server-1.4
+	o mono-1.2.6
 	o moon-buggy-1.0.51
 	o moscow_ml-2.01
 	o most-4.10.2
 	o mowitz-0.3.1
 	o mp3blaster-3.2.3
-	o mpfr-2.2.1
-	o mpg123-0.66
-	o mpi-ch-1.2.7p1
-	o mpich-1.2.7
-	o mplayer-1.0rc10
+	o mpeg4ip-1.6.1
+	o mpg123-0.68
+	o mpich-1.2.7p1
+	o mpop-1.0.12
 	o mserv-devel-0.41
 	o msf-2.7
-	o mtools-3.9.11
 	o multitail-5.2.0
 	o muse-0.9.2
 	o mysql-5.2
 	o nagios-3.0a5
 	o naim-0.11.8.3.1
-	o nano-2.0.6
 	o nap-1.5.3
-	o nautilus-2.20.0
+	o nas-1.9.1
+	o nasm-2.00
 	o nautilus-cd-burner-2.18.2 [needs hal]
 	o ncview-1.93b
 	o ne-2.01
 	o nelma-3.1
 	o neon-0.27.2
 	o nessus-3.0.4
-	o nessus-core-2.3.1
 	o netcdf-3.6.2
 	o netperf-2.4.1
 	o netpipe-3.6.2
+	o netqmail-1.06
 	o netramet-50
 	o newmail-1.0.2
 	o newmat-11
@@ -846,20 +845,23 @@ Suggested package updates
 	o ng-1.4.4
 	o ngrep-1.45
 	o nkf-2.07 [pkg/37132]
+	o nmap-4.50
 	o nmh-1.2.1
 	o nomarch-1.4
-	o ns-flash-9.0.64.0
+	o ns-flash-9.0.115.0
 	o ns-plugger-common-5.1.3
 	o ns-plugger-communicator-5.1.3
 	o ns-plugger-navigator-5.1.3
 	o nsca-1.2.0
 	o nslint-2.1a7
+	o nss-3.11.7
 	o nss_ldap-255
-	o ntp-4.2.4p3
-	o ntp4-4.2.4
+	o ntp4-4.2.4p3
 	o nulib2-220
+	o nullmailer-1.04
 	o nut-12.0 [pkg/34466]
 	o nut-13.0
+	o nvi-1.81.6
 	o nxtvepg-2.7.7
 	o objc-3.2.8
 	o ocamlnet-2.2.4
@@ -870,50 +872,46 @@ Suggested package updates
 	o onyx-5.1.2
 	o oo2c-2.1.7
 	o openh323-1.19.1
+	o openldap-client-2.4.7
 	o openmortal-0.7.1
 	o openmotif-2.3
-	o openssl-0.9.8e (in wip/)
-	o openssl-0.9.8f
-	o orca-2.20.0.1
+	o openssl-0.9.8e [in wip]
+	o openssl-0.9.8g
+	o orca-2.20.2
 	o oregano-0.60.0
 	o oroborus-2.0.18
 	o osh-20070324
 	o otpCalc-0.97
-	o p5-Algorithm-Dependency-1.103
-	o p5-Algorithm-Merge-0.08
+	o p5-Algorithm-Dependency-1.104
 	o p5-Apache-ASP-2.59
 	o p5-Apache-AuthCookieDBI-2.02
 	o p5-Apache-SSI-2.17
-	o p5-Apache-Session-1.83
+	o p5-Apache-Session-1.84
+	o p5-Apache-Test-1.30
 	o p5-Asterisk-0.09
 	o p5-Authen-PAM-0.17
 	o p5-Authen-SASL-Cyrus-0.13
 	o p5-CDDB_get-2.27
-	o p5-CGI-Application-4.06
-	o p5-CGI-Minimal-1.25
-	o p5-Cache-Memcached-1.15
-	o p5-Class-Autouse-1.28
 	o p5-Class-DBI-3.0.16
 	o p5-Class-DBI-AbstractSearch-0.07
-	o p5-Class-Factory-1.05
+	o p5-Class-Inspector-1.18
 	o p5-Class-ReturnValue-0.55
-	o p5-Class-Trigger-0.11
-	o p5-Config-General-2.36
+	o p5-Clone-0.28
+	o p5-Config-General-2.37
+	o p5-Config-Tiny-2.12
 	o p5-Crypt-CBC-2.22
 	o p5-Curses-1.15
 	o p5-DBD-Sybase-1.07
 	o p5-DBD-mysql-4.004
-	o p5-DBIx-ContextualFetch-1.03
-	o p5-DBIx-SearchBuilder-1.49
+	o p5-DBIx-DBSchema-0.36
+	o p5-DBIx-SearchBuilder-1.50
 	o p5-Data-Dump-1.08
 	o p5-Data-FormValidator-4.50
-	o p5-Devel-Profile-1.05
+	o p5-Devel-Symdump-2.0800
 	o p5-Device-Gsm-1.48
 	o p5-Device-Modem-1.43
 	o p5-Device-SerialPort-1.2.0
-	o p5-Error-0.17009
-	o p5-File-Copy-Recursive-0.31
-	o p5-File-Remove-0.37
+	o p5-File-Flat-1.02
 	o p5-Filter-1.33
 	o p5-Font-TTF-0.40
 	o p5-GMail-IMAPD-0.94
@@ -921,38 +919,32 @@ Suggested package updates
 	o p5-HTML-Prototype-1.48
 	o p5-HTML-Prototype-Useful-0.05
 	o p5-HTML-Table-2.05
-	o p5-HTMLObject-2.26
 	o p5-HTTP-Proxy-0.20
 	o p5-HTTP-Request-Form-0.952
 	o p5-HTTP-Server-Simple-Static-0.05
 	o p5-HTTPD-User-Manage-1.62
 	o p5-IMAP-Admin-1.6.4
-	o p5-IO-Interface-1.03
-	o p5-Ima-DBI-0.34
-	o p5-Image-ExifTool-6.82
-	o p5-Image-Info-1.26
+	o p5-INET6-2.51
+	o p5-Image-Info-1.27
 	o p5-JSON-XS-1.52
 	o p5-Locale-Codes-2.07
+	o p5-Locale-Maketext-Fuzzy-0.10
 	o p5-MARC-1.38
-	o p5-MIME-tools-5.423
-	o p5-MP3-Info-1.22
 	o p5-Mail-SpamAssassin-3.2.2
-	o p5-Mail-Webmail-Gmail-1.09
 	o p5-Math-Pari-2.010709
 	o p5-Math-Random-0.69
+	o p5-Module-Refresh-0.13
 	o p5-Net-Amazon-S3-0.38
 	o p5-Net-Gnats-0.05
 	o p5-Net-Google-0.62
+	o p5-Net-ICQ2000-0.2.2
 	o p5-Net-Jabber-2.0
-	o p5-Net-SSH-1.30
 	o p5-Net-TFTP-0.16
 	o p5-Net-Z3950-0.46
 	o p5-PAR-0.90
 	o p5-PV-1.5
-	o p5-PathTools-3.24
-	o p5-Perl-Tidy-20070801
-	o p5-PerlMagick-6.3.5.8
-	o p5-PostScript-MailLabels-2.25
+	o p5-Params-Util-0.31
+	o p5-Perl-Tidy-20071205
 	o p5-RRDTool-OO-0.17
 	o p5-SVN-Mirror-0.73
 	o p5-SWF-File-0.42
@@ -961,36 +953,32 @@ Suggested package updates
 	o p5-Set-IntSpan-1.10
 	o p5-Set-Scalar-1.20
 	o p5-Spreadsheet-WriteExcel-2.20
-	o p5-Sub-Uplevel-0.16
 	o p5-Term-Size-0.203
-	o p5-Test-File-Contents-0.05
+	o p5-Test-Exception-0.26
 	o p5-Test-Harness-2.64
-	o p5-Test-Inline-2.207
-	o p5-Test-NoWarnings-0.083
-	o p5-Test-Simple-0.72
-	o p5-Test-Tester-0.104
+	o p5-Test-Inline-2.208
 	o p5-Test-Unit-0.25
-	o p5-Test-Warn-0.09
+	o p5-Test-WWW-Mechanize-1.18
 	o p5-Text-BibTeX-0.34
+	o p5-Text-Quoted-2.03
 	o p5-Text-Tabs+Wrap-2006.1117
 	o p5-Time-HiRes-1.9707
 	o p5-Time-TAI64-2.11
-	o p5-Want-0.15
+	o p5-WWW-Mechanize-1.34
+	o p5-XML-LibXSLT-1.63
 	o p5-XML-RAI-1.04
-	o p5-XML-RSS-1.31
 	o p5-XML-Stream-1.22
 	o p5-glib2-1.160
 	o p5-gtk2-1.160
 	o p5-ispman-1.2
-	o p5-perl-ldap-0.34
+	o p5-prefork-1.02
 	o p5-sybperl-2.18
 	o pam-smbpass-3.0.13
 	o pan-0.14.2.91 [pkg/33948]
-	o pango-1.18.3
 	o pari-2.1.7
 	o pcal-4.8
 	o pciids-20070322
-	o pciutils-2.2.0
+	o pciutils-2.2.9
 	o pdmenu-1.2.87
 	o pear-1.6.2
 	o pear-DB-1.7.10
@@ -1005,21 +993,22 @@ Suggested package updates
 	o pear-Numbers_Words-0.15.0
 	o pear-SOAP-0.10.1
 	o pen-0.17.1
+	o perl5-5.10.0
 	o pfqueue-0.5.6
 	o pfstat-1.8
 	o pgadmin3-1.6.0
 	o pgpool-3.1.1
 	o phoon-20050629
 	o photopc-3.05
+	o php-5.2.5
 	o php4-domxml-5.2.1
 	o php4-filepro-5.2.1
 	o php4-xslt-5.2.1
 	o php4-yp-5.2.1
-	o phpmyadmin-2.11.1.1
+	o phpmyadmin-2.11.3
 	o phppgadmin-4.1.2
 	o phylip-3.65
 	o picp-0.6.8
-	o piewm-1.04
 	o pim6dd-20040819a
 	o pim6sd-20040824a
 	o pine-pgp-filters-1.2
@@ -1027,14 +1016,11 @@ Suggested package updates
 	o pioneers-0.11.3
 	o pircbot-1.4.4
 	o pkg_select-20051209
-	o pload-0.9.5
-	o plone-2.5.3
-	o plone-3.0.1
 	o ploticus-2.33
 	o ploticus-examples-230
 	o plotutils-2.5
 	o plptools-0.13 [pkg/30244]
-	o plptools-0.18
+	o plptools-0.19
 	o pmccabe-2.3.1
 	o pnet-0.7.2 [pkg/31950]
 	o pnet-0.7.4
@@ -1042,23 +1028,28 @@ Suggested package updates
 	o pnetC-0.7.4
 	o pnetlib-0.7.2 [pkg/31950]
 	o pnetlib-0.7.4
+	o png-1.2.24
 	o pngcheck-2.3.0
 	o po4a-0.29
-	o poedit-1.3.7
+	o poedit-1.3.9
 	o polsms-2.1.0
-	o poppler-0.6
+	o poppler-0.6.3
+	o poppler-glib-0.6.3
+	o poppler-qt-0.6.3
 	o poppy-4.01
 	o poptop-1.3.0
 	o posh-0.5.5
 	o postal-0.66
+	o postgresql81-postgis-1.3.2
 	o powermanga-0.90
-	o prelude-manager-0.9.10
+	o prelude-lml-0.9.11
 	o profit-2.5.3
 	o projclock-0.9
 	o proxsmtp-1.6
-	o psi-0.11
+	o psi-0.11 [pkg/37345]
 	o psmisc-21.9
 	o pstoedit-3.45
+	o pstree-2.32
 	o puf-0.93.3
 	o puzzle-5.2
 	o pwlib-1.10.10
@@ -1074,20 +1065,16 @@ Suggested package updates
 	o py-ZODB-3.2.10
 	o py-ZopeInterface-3.3.0
 	o py-bdb-xml-2.1.8
+	o py-cairo-1.4.12
 	o py-checker-0.8.17
-	o py-clearsilver-0.10.4
+	o py-clearsilver-0.10.5
 	o py-curl-7.16.4
-	o py-gnome2-2.20.0
-	o py-gnome2-desktop-2.20.0
-	o py-gnome2-extras-2.14.3
 	o py-gnosis-1.2.2
 	o py-gnosis-utils-1.2.1
 	o py-gnutls-0.2.1
-	o py-gobject-2.14.0
-	o py-gtk2-2.12.0
+	o py-html2text-2.29
 	o py-imagingtk-1.1.6
 	o py-kenosis-0.96
-	o py-ldap-2.3.1
 	o py-libxml2-2.6.28
 	o py-logging-0.4.9.6
 	o py-m2crypto-0.18.2
@@ -1097,16 +1084,14 @@ Suggested package updates
 	o py-mutagen-1.11
 	o py-mysqldb-1.1.7
 	o py-paramiko-1.7
-	o py-pexpect-0.99999b
-	o py-prewikka-0.9.13
-	o py-proj-1.8.1a [at python.org]
+	o py-proj-1.8.3
 	o py-psyco-1.5.1
 	o py-pyrex-0.9.5.1a
 	o py-qt3-3.17.3
 	o py-qt3-base-3.17.3
 	o py-qt3-modules-3.17
 	o py-qt3-qscintilla-3.17
-	o py-qt3-sip-4.7.1
+	o py-qt3-sip-4.7.2
 	o py-reportlab-2.0
 	o py-soappy-0.11.6
 	o py-sqlite-1.1.7
@@ -1114,37 +1099,34 @@ Suggested package updates
 	o py-sybase-0.37
 	o py-textile-2.0.11
 	o py-twisted-2.4.0
-	o py-urwid-0.9.7.2
 	o py-zconfig-2.3.1
 	o pygopherd-2.0.13
 	o pysol-4.82
 	o python-2.5.1
 	o python-mode-1.0 (Revision 4.75)
 	o qDecoder-8.0
-	o qalculate-0.9.6
 	o qbrew-0.3.9
 	o qt1-1.45
 	o qt2-designer-2.3.2
 	o qt2-docs-2.3.2
 	o qt2-examples-2.3.2
 	o qt2-libs-2.3.2
-	o quagga-0.99.9
-	o quagga-devel-0.99.6
 	o qvplay-0.95
 	o qwspritefield-1.7
-	o qwt-0.4.0
 	o radiance-3.7.2
 	o radiusd-cistron-1.6.8
+	o radmind-1.11.0
+	o rails-2.0.2 [import as rails2?]
 	o raine-0.50.5
 	o randread-0.2
 	o raptor-1.4.16
 	o rat-4.2.25
-	o ratpoison-1.4.2
 	o rayshade-4.0.6
 	o rc-1.7.1 [at ftp://quenix2.dyndns.org/FreeBSD/ports/distfiles/]
 	o rdp-1.6
 	o regionset-0.2
 	o remind-3.1.3
+	o renderproto-0.9.3
 	o replex-0.1.6.8
 	o resize_image-0.7
 	o rhythmbox-0.10.1
@@ -1153,32 +1135,32 @@ Suggested package updates
 	o robodoc-4.99.6
 	o root-5.14.0
 	o root-tail-1.2
-	o rosegarden4-1.5.0 [replacing audio/rosegarden|pkgsrc-wip]
+	o rosegarden4-1.6.0 [replacing audio/rosegarden|pkgsrc-wip]
 	o roundup-1.3.3
-	o rox-2.6.1
+	o rox-2.7
 	o rox-session-0.29
 	o roxirc-2.0
 	o rp-l2tp-0.4
 	o rpm-4.4.2.1
+	o rss2email-2.61
 	o rt3-3.6.5
 	o rtcw-1.41.3
 	o ruby-clearsilver-0.10.4
 	o rudiments-0.30
+	o rxvt-unicode-8.8
 	o sablecc-3.2
-	o samba-3.0.26
+	o samba-3.0.28
 	o sarg-2.2.31
 	o sather-1.2.3
-	o sbcl-1.06 [pkg/36885]
-	o sbcl-1.09
 	o scamper-20070201
 	o scapy-1.1.1
 	o scew-0.4.0
 	o sch-3.8.3
+	o scmgit-1.5.3.7
 	o scons-0.97
 	o scribus-1.3.4
 	o scrollz-1.9.99
 	o scsh-1.3.0
-	o seahorse-2.20.1
 	o sendfile-20010424
 	o ser-0.9.6
 	o sge-6.1.2
@@ -1186,41 +1168,40 @@ Suggested package updates
 	o sharity-light-1.3
 	o shc-3.8
 	o shmux-1.0.1
-	o shntool-3.0.3
+	o shntool-3.0.5
 	o shorten-3.6.1
 	o siag-3.6.1
 	o sign-1.0.7
 	o silc-client-1.1.2
-	o silc-toolkit-1.1.3
-	o simh-3.7.0
+	o silc-server-1.1
+	o silc-toolkit-1.1.5
+	o simh-3.7.3
 	o simulavr-0.1.2.2
 	o sipcalc-1.1.4
 	o sitecopy-0.16.3
 	o sitescooper-3.1.2
 	o sjeng-11.2
 	o skampi-5.0.1
-	o skill-4.1.4 [pkg/36788]
 	o skkinput-2.06.4
-	o skype-1.4.0.118
+	o skype-2.0.0.13
 	o smalleiffel-0.90
 	o smalltalk-2.3.6
 	o smlnj-110.59 [pkgsrc-wip]
 	o smlnj-110.65
-	o smokeping-2.2.4
-	o snd-9.4
+	o snd-9.5
 	o snes9x-1.51
 	o snobol-1.1
-	o solfege-3.8.1
+	o snort-2.8.0.1
+	o solfege-3.8.2
 	o sope-4.5.9
 	o sound-juicer-2.16.4 [needs nautilus-cd-burner>=2.15.3]
 	o sound-juicer-2.20.1
 	o source-highlight-2.8
-	o spamdyke-3.0.1
+	o spamdyke-3.1.2
 	o spcaview-20060501
 	o spim-7.3
 	o sqlitemanager-1.1.3
-	o squeak-3.9.8
-	o squidGuard-1.2.1
+	o squeak-3.9.8 [pkg/37522]
 	o srp_client-1.7.5 [jlam]
 	o ssh-askpass-1.2.4.1
 	o statist-1.3.0
@@ -1228,43 +1209,42 @@ Suggested package updates
 	o stellarium-0.9.0
 	o stlport-4.6.2
 	o stratagus-2.2.2
+	o stunnel-4.21
 	o subtitleripper-0.3.4
 	o sunbird-0.5 [ghen]
-	o surfraw-2.2.0 [http://surfraw.alioth.debian.org/]
 	o suse_base-10.3
-	o swfdec-0.5.3
+	o swfdec-0.5.5
 	o swi-prolog-5.6.31
-	o sympa-5.3
+	o sympa-5.3.4
 	o sysinfo-4.2.2
-	o t-prot-2.5
+	o systrace-1.6e
 	o tacacs-4.0.4.14
 	o taskjuggler-2.4.0
 	o tcl83-8.3.5
 	o tcpdpriv-0.9
 	o tcpdstat-0.9
 	o tcpillust-1.00b
-	o tcpreplay-3.2
+	o tcpreplay-3.2.3
 	o tcpslice-1.2a3
 	o tct-1.16
 	o tdir-1.67
 	o tds-1.6.2
-	o tea-17.3.5
+	o tea-17.4.0
 	o ted-2.17
 	o ted-en-us-2.17
 	o texmaker-1.6
 	o tfmxplay-1.1.6
 	o tile-0.7.4
-	o tileworld-1.3.0
 	o tinyproxy-1.7.0
 	o tk83-8.3.5
-	o tkcvs-8.0.4
+	o tkcvs-8.1
 	o tkdiff-4.1.3 [pkg/34440]
+	o tkdiff-4.1.4
 	o tkgate-1.8.7
 	o tkhylafax-3.2
 	o tkpasman-2.2b
 	o tn5250-0.17.3 [at http://tn5250.sourceforge.net/]
 	o tob-0.26
-	o totem-2.20.1
 	o tpasm-1.2
 	o tpb-0.6.4
 	o transcode-1.0.4
@@ -1272,25 +1252,26 @@ Suggested package updates
 	o tripwire-2.3.1 [see also pkg/22362]
 	o tsclient-0.140
 	o ttf2pk-1.5.20050518
-	o turba-2.1.5
+	o tuxpaint-0.9.18
 	o twelf-1.5r1
 	o twolame-0.3.10
-	o txt2html-2.45
+	o txt2html-2.46
 	o ubs-0.20
 	o ucarp-1.3
 	o ucblogo-5.5
 	o uim-1.4.1
-	o unix2dos-1.3
+	o ups-nut-2.2.0 [pkg/37301]
 	o upx-2.90
 	o userppp-030706
 	o valgrind-3.2.3
 	o varnish-1.1.1
 	o vera-1.17
 	o vfu-4.03
+	o vicq-0.4.2
 	o vifm-0.3a
 	o vino-2.20.1
 	o visual-regexp-3.1
-	o vlc-0.8.6c
+	o vlc-0.8.6d
 	o vmips-1.3.2
 	o vmware-5.5
 	o vmware-module-3.2.2
@@ -1299,9 +1280,10 @@ Suggested package updates
 	o vp-1.6
 	o vpnc-0.5.1 [pkg/37046]
 	o vsftpd-2.0.5
-	o vttest-20070304
+	o vttest-20071216
 	o wMosaic-3.8.22
 	o wap-utils-1.4.1
+	o webmin-1.380
 	o wbm-cyrus-imapd-1.6.2
 	o wcalc-2.3
 	o wdm-1.28
@@ -1310,32 +1292,39 @@ Suggested package updates
 	o win32-codecs-20071007
 	o winbind-3.0.13
 	o windowlab-1.34
-	o wine-0.9.47
-	o wmii-3.5.1
+	o wine-0.9.50
+	o wmii-3.6
 	o wml-2.0.11
 	o wmweather-2.4.4
-	o worker-2.15.0
+	o worker-2.16.1
 	o wpa_gui-0.5.7
 	o wpi-firmware-1.14.2
 	o wwwoffle-2.9c
 	o wxGTK-2.8.6
 	o wxRemind-0.9.13
 	o wyrd-1.4.3
-	o x264-devel-20070324
+	o x264-devel-20071201
 	o xalan-c-1.10.0
 	o xanalyser-1.30
 	o xbindkeys-1.8.2
 	o xbindkeys-tk-1.8.0
 	o xblast-2.10.4
 	o xcircuit-3.6.85
-	o xdaliclock-2.23
+	o xdaliclock-2.25
 	o xdesktopwaves-1.3
 	o xdialog-2.3.1
-	o xemacs-21.4.19
+	o xdx-2.4
+	o xemacs-21.4.21
+	o xemacs-current-21.5.28
 	o xerces-c-2.9.0
 	o xerces-j-2.4.0 [pkg/21725]
 	o xerces-j-2.9.0
 	o xeukleides-1.0.1
+	o xf86-input-keyboard-1.2.2
+	o xf86-input-mouse-1.2.3
+	o xf86-video-intel-2.2.0
+	o xf86-video-nv-2.1.6
+	o xf86dgaproto-2.0.3
 	o xfstt-1.7
 	o xhippo-3.5
 	o xine-1.1.8
@@ -1343,13 +1332,14 @@ Suggested package updates
 	o xkbset-0.5
 	o xli-2006.11.10
 	o xlispstat-3.52.20
-	o xload-1.0.2
+	o xlog-1.6.1
 	o xm7-1020s
 	o xmahjongg-3.70
 	o xmbdfed-4.6
 	o xmcd-3.3.0
-	o xmlsec1-1.2.10
-	o xmms-crossfade-1.3.10
+	o xmlsec1-1.2.11
+	o xmlto-0.0.19
+	o xmms-crossfade-0.3.14
 	o xmms-dflowers-1.2.1
 	o xmms-dspectogram-1.2.1
 	o xmms-fmradio-1.5
@@ -1361,17 +1351,19 @@ Suggested package updates
 	o xmms-wma-1.0.5
 	o xmmsctrl-1.8
 	o xmon-1.5.6
-	o xmp-2.3.2
+	o xmp-2.5.1
 	o xmule-1.12.2
 	o xnap-2.5r3
-	o xpad-2.12
+	o xpad-2.13
+	o xpdf-3.02pl2
 	o xpp-1.5
+	o xproto-7.0.11
 	o xpuyopuyo-0.9.5
-	o xrestop-0.4
 	o xrmap-anthems-1.2
-	o xrmap-base-2.33
+	o xrmap-base-2.33.1
 	o xrn-9.02
-	o xscreensaver-5.03
+	o xsane-0.99.5
+	o xscreensaver-5.04
 	o xskat-4.0
 	o xsoldier-1.4
 	o xtraceroute-0.9.1
@@ -1383,19 +1375,14 @@ Suggested package updates
 	o xzip-182
 	o yacas-1.2.0
 	o yafc-1.1
-	o yasm-0.6.2
-	o yaz-2.1.54
 	o yelp-2.20.0
 	o yodl-2.01.02
 	o ysm-2.9.9.1
 	o zebra-0.95a
 	o zenicb-1.31 (needs merge with lots of local changes)
-	o zenity-2.20.0
-	o zile-2.2.48
+	o zile-2.2.52
 	o zircon-1.18.256
 	o zoom-1.0.5
-	o zope-2.9.8
-	o zope-2.10.4
 	o zope25-AbracadabraObject-2.0.0
 	o zope25-BTreeFolder2-1.0.1
 	o zope25-CMF-2.0.0
@@ -1408,7 +1395,7 @@ Suggested package updates
 	o zope25-XMLWidgets-0.10
 	o zope25-ZWiki-0.58.0
 	o zopeedit-0.8
-	o zsh-current-4.3.4
+	o zsh-4.2.7
 	o zziplib-0.13.38
 
 Infrastructure problems which need addressing
@@ -1510,7 +1497,12 @@ Suggested cleanups in pkgsrc
 
 	o Fix packages installing manual pages under share/man to install
 	  them directly under man.
-	  Affects: net/tsclient, security/fwbuilder, security/fwbuilder21
+	  Affects: net/tsclient, security/fwbuilder
 
 	o Convert packages to use generic install scripts where possible
 	  (for example, mail/majordomo).
+
+	o Remove the redundancy of builtin.mk files by factoring out the
+	  most commonly used cases into a well-documented file. For
+	  example, x11/kbproto/builtin.mk and x11/libXrender/builtin.mk
+	  almost look the same.

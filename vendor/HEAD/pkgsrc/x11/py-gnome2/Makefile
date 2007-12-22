@@ -1,16 +1,17 @@
-# $NetBSD: Makefile,v 1.48 2007/09/21 13:04:44 wiz Exp $
+# $NetBSD: Makefile,v 1.51 2007/11/29 20:49:56 drochner Exp $
 #
 
-DISTNAME=	gnome-python-2.18.2
+DISTNAME=	gnome-python-2.20.1
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME:S/gnome-python/gnome2/}
-PKGREVISION=	3
 CATEGORIES=	x11 python
-MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gnome-python/2.18/}
+MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gnome-python/2.20/}
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	recht@NetBSD.org
 HOMEPAGE=	http://www.gnome.org/
 COMMENT=	Python binding for GNOME2
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 PY_PATCHPLIST=	YES
 USE_LIBTOOL=	YES

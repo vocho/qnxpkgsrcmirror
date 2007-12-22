@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.235 2007/10/11 19:27:18 ghen Exp $
+# $NetBSD: Makefile,v 1.237 2007/12/04 00:35:28 grant Exp $
 #
 
 COMMENT=	Databases
@@ -7,6 +7,7 @@ SUBDIR+=	abook
 SUBDIR+=	adodb
 SUBDIR+=	bdb-xml
 SUBDIR+=	cdb
+#SUBDIR+=	cstore	# not enabled at present due to its size requirements
 SUBDIR+=	db
 SUBDIR+=	db3
 SUBDIR+=	db4
@@ -117,6 +118,7 @@ SUBDIR+=	php-filepro
 SUBDIR+=	php-ldap
 SUBDIR+=	php-mssql
 SUBDIR+=	php-mysql
+SUBDIR+=	php-oci8
 SUBDIR+=	php-odbc
 SUBDIR+=	php-oracle
 SUBDIR+=	php-pdo

@@ -1,4 +1,4 @@
-# $NetBSD: bsd.pkginstall.mk,v 1.34 2007/10/10 11:42:36 rillig Exp $
+# $NetBSD: bsd.pkginstall.mk,v 1.38 2007/12/13 11:10:42 rillig Exp $
 #
 # This Makefile fragment is included by bsd.pkg.mk and implements the
 # common INSTALL/DEINSTALL scripts framework.  To use the pkginstall
@@ -17,6 +17,42 @@
 #
 #	Default value: "all" for PKG_DEVELOPERs, empty otherwise.
 #
+
+_VARGROUPS+=		pkginstall
+_USER_VARS.pkginstall= \
+	PKGINSTALL_VERBOSE \
+	PKG_CREATE_USERGROUP \
+	PKG_CONFIG PKG_CONFIG_PERMS \
+	PKG_RCD_SCRIPTS \
+	PKG_REGISTER_SHELLS \
+	PKG_UPDATE_FONTS_DB
+_PKG_VARS.pkginstall= \
+	DEINSTALL_TEMPLATES INSTALL_TEMPLATES \
+	DEINSTALL_SRC INSTALL_SRC \
+	FILES_SUBST \
+	PKG_USERS PKG_GROUPS USERGROUP_PHASE
+.for u in ${PKG_USERS}
+_PKG_VARS.pkginstall+=	PKG_UID.${u} PKG_GECOS.${u} PKG_HOME.${u} PKG_SHELL.${u}
+.endfor
+.for g in ${PKG_GROUPS}
+_PKG_VARS.pkginstall+=	PKG_GID.${g}
+.endfor
+_PKG_VARS.pkginstall+= \
+	SPECIAL_PERMS \
+	CONF_FILES REQD_FILES \
+	CONF_FILES_MODE REQD_FILES_MODE \
+	CONF_FILES_PERMS REQD_FILES_PERMS \
+	RCD_SCRIPTS ${RCD_SCRIPTS:@s@RCD_SCRIPT_SRC.${s}@} \
+	OWN_DIRS MAKE_DIRS REQD_DIRS \
+	OWN_DIRS_PERMS MAKE_DIRS_PERMS REQD_DIRS_PERMS \
+	PKG_SYSCONFDIR_PERMS \
+	PKG_SHELL \
+	FONTS_DIRS.ttf FONTS_DIRS.type1 FONTS_DIRS.x11 \
+_SYS_VARS.pkginstall= \
+	SETUID_ROOT_PERMS \
+	SHLIB_TYPE \
+	LDCONFIG_ADD_CMD \
+	LDCONFIG_REMOVE_CMD
 
 # The Solaris /bin/sh does not know the ${foo#bar} shell substitution.
 # This shell function serves a similar purpose, but is specialized on
@@ -412,6 +448,42 @@ _INSTALL_FILES_FILE=		${_PKGINSTALL_DIR}/files
 _INSTALL_FILES_DATAFILE=	${_PKGINSTALL_DIR}/files-data
 _INSTALL_UNPACK_TMPL+=		${_INSTALL_FILES_FILE}
 _INSTALL_DATA_TMPL+=		${_INSTALL_FILES_DATAFILE}
+
+privileged-install-hook: _pkginstall-postinstall-check
+_pkginstall-postinstall-check: .PHONY
+	${RUN} p="${DESTDIR}${PREFIX}";					\
+	${_FUNC_STRIP_PREFIX};						\
+	canon() { f=`strip_prefix "$$1"`; case $$f in [!/]*) f="$$p/$$f"; esac; echo "$$f"; }; \
+	needargs() { [ $$3 -ge $$2 ] || ${FAIL_MSG} "[bsd.pkginstall.mk] $$1 must have a multiple of $$2 words. Rest: $$4"; }; \
+	set args ${RCD_SCRIPTS}; shift;					\
+	while [ $$# -gt 0 ]; do						\
+		egfile=`canon "${RCD_SCRIPTS_EXAMPLEDIR}/$$1"`; shift;	\
+		[ -f "$$egfile" ] || [ -c "$$egfile" ] || ${FAIL_MSG} "RCD_SCRIPT $$egfile does not exist."; \
+	done;								\
+	set args ${CONF_FILES}; shift;					\
+	while [ $$# -gt 0 ]; do						\
+		needargs CONF_FILES 2 $$# "$$*";			\
+		egfile=`canon "$$1"`; shift 2;				\
+		[ -f "$$egfile" ] || [ -c "$$egfile" ] || ${FAIL_MSG} "CONF_FILE $$egfile does not exist."; \
+	done;								\
+	set args ${REQD_FILES}; shift;					\
+	while [ $$# -gt 0 ]; do						\
+		needargs REDQ_FILES 2 $$# "$$*";			\
+		egfile=`canon "$$1"`; shift 2;				\
+		[ -f "$$egfile" ] || [ -c "$$egfile" ] || ${FAIL_MSG} "REQD_FILE $$egfile does not exist."; \
+	done;								\
+	set args ${CONF_FILES_PERMS}; shift;				\
+	while [ $$# -gt 0 ]; do						\
+		needargs CONF_FILES_PERMS 5 $$# "$$*";			\
+		egfile=`canon "$$1"`; shift 5;				\
+		[ -f "$$egfile" ] || [ -c "$$egfile" ] || ${FAIL_MSG} "CONF_FILES_PERMS $$egfile does not exist."; \
+	done;								\
+	set args ${REQD_FILES_PERMS}; shift;				\
+	while [ $$# -gt 0 ]; do						\
+		needargs REQD_FILES_PERMS 5 $$# "$$*";			\
+		egfile=`canon "$$1"`; shift 5;				\
+		[ -f "$$egfile" ] || [ -c "$$egfile" ] || ${FAIL_MSG} "REQD_FILES_PERMS $$egfile does not exist."; \
+	done
 
 ${_INSTALL_FILES_DATAFILE}:
 	${_PKG_SILENT}${_PKG_DEBUG}${MKDIR} ${.TARGET:H}

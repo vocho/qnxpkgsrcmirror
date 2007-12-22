@@ -1,13 +1,13 @@
-$NetBSD: patch-aa,v 1.3 2007/08/13 12:06:41 drochner Exp $
+$NetBSD: patch-aa,v 1.5 2007/11/01 22:49:15 tnn Exp $
 
---- configure.orig	2007-08-13 12:13:03.000000000 +0200
+--- configure.orig	2007-10-18 19:18:23.000000000 +0200
 +++ configure
-@@ -31402,7 +31402,7 @@ fi
-     { echo "$as_me:$LINENO: checking for SQLite3 library >= $sqlite3_version_req" >&5
- echo $ECHO_N "checking for SQLite3 library >= $sqlite3_version_req... $ECHO_C" >&6; }
+@@ -28551,7 +28551,7 @@ LIBTOOL='$(SHELL) $(top_builddir)/libtoo
  
--    for ac_sqlite3_path_tmp in /usr /usr/local /opt ; do
-+    for ac_sqlite3_path_tmp in ${SQL3PATH} /usr /usr/local /opt ; do
-         if test -f "$ac_sqlite3_path_tmp/include/$ac_sqlite3_header" \
-             && test -r "$ac_sqlite3_path_tmp/include/$ac_sqlite3_header"; then
-             ac_sqlite3_path=$ac_sqlite3_path_tmp
+ { echo "$as_me:$LINENO: checking whether $LD accepts --as-needed" >&5
+ echo $ECHO_N "checking whether $LD accepts --as-needed... $ECHO_C" >&6; }
+-case `$LD --as-needed -v 2>&1 </dev/null` in
++case false in
+ *GNU* | *'with BFD'*)
+   LDFLAGS="$LDFLAGS -Wl,--as-needed"
+   { echo "$as_me:$LINENO: result: yes" >&5

@@ -1,16 +1,13 @@
-# $NetBSD: Makefile,v 1.94 2007/10/17 20:45:47 wiz Exp $
+# $NetBSD: Makefile,v 1.99 2007/12/12 20:43:06 wiz Exp $
 
-DISTNAME=	libpng-1.2.22
+DISTNAME=	libpng-1.2.23
 PKGNAME=	${DISTNAME:S/lib//}
 CATEGORIES=	graphics
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=libpng/} \
-		http://www.libpng.org/pub/png/src/ \
-		ftp://swrinde.nde.swri.edu/pub/png/src/ \
-		ftp://ftp.simplesystems.org/pub/libpng/src/ \
 		ftp://ftp.fu-berlin.de/unix/graphics/png/src/
 EXTRACT_SUFX=	.tar.bz2
 
-MAINTAINER=	fredb@NetBSD.org
+MAINTAINER=	wiz@NetBSD.org
 HOMEPAGE=	http://www.libpng.org/pub/png/
 COMMENT=	Library for manipulating PNG images
 
@@ -24,7 +21,7 @@ USE_LIBTOOL=	yes
 
 .include "../../mk/bsd.prefs.mk"
 # keep this in sync with the same code in buildlink3.mk
-.if ${MACHINE_ARCH} != "i386"
+.if ${MACHINE_ARCH} != "i386" && ${MACHINE_ARCH} != "x86_64"
 CPPFLAGS+=	-DPNG_NO_ASSEMBLER_CODE
 .endif
 

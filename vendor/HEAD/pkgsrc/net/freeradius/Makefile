@@ -1,9 +1,8 @@
-# $NetBSD: Makefile,v 1.61 2007/09/18 22:15:07 adrianp Exp $
+# $NetBSD: Makefile,v 1.63 2007/12/02 11:26:20 wiz Exp $
 
 DISTNAME=	freeradius-${RADVER}
 CATEGORIES=	net
-MASTER_SITES=	ftp://ftp.freeradius.org/pub/radius/ \
-		ftp://ftp.Awfulhak.org/pub/radius/
+MASTER_SITES=	ftp://ftp.freeradius.org/pub/radius/
 
 MAINTAINER=	adrianp@NetBSD.org
 HOMEPAGE=	http://www.freeradius.org/
@@ -115,12 +114,12 @@ CONFIGURE_ARGS+=	--without-threads
 .if defined(PTHREAD_TYPE) && ${PTHREAD_TYPE} == "pth"
 .include "../../devel/pthread-sem/buildlink3.mk"
 SUBST_SED.make+=	-e 's|@ldap_ldflags@|@ldap_ldflags@ \
-			${PTHREAD_LDFLAGS:Q} ${PTHREAD_LIBS:Q} -lsemaphore|g'
+			${PTHREAD_LDFLAGS:M*:Q} ${PTHREAD_LIBS:M*:Q} -lsemaphore|g'
 .endif
 
 .if defined(PTHREAD_TYPE) && ${PTHREAD_TYPE} == "native"
 SUBST_SED.make+=	-e 's|@ldap_ldflags@|@ldap_ldflags@ \
-			${PTHREAD_LDFLAGS:Q} ${PTHREAD_LIBS:Q}|g'
+			${PTHREAD_LDFLAGS:M*:Q} ${PTHREAD_LIBS:M*:Q}|g'
 .endif
 
 .if ${MACHINE_ARCH} == "amd64"
