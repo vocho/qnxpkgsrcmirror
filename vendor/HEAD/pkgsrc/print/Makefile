@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.176 2007/09/04 20:12:55 drochner Exp $
+# $NetBSD: Makefile,v 1.178 2007/12/12 01:30:27 markd Exp $
 #
 
 COMMENT=	Desktop publishing
@@ -86,6 +86,7 @@ SUBDIR+=	pnm2ppa
 SUBDIR+=	poppler
 SUBDIR+=	poppler-glib
 SUBDIR+=	poppler-qt
+SUBDIR+=	poppler-qt4
 SUBDIR+=	poppler-utils
 SUBDIR+=	poster
 SUBDIR+=	pscal
@@ -115,6 +116,8 @@ SUBDIR+=	tex-bagpipetex
 SUBDIR+=	tex-chemarrow
 SUBDIR+=	tex-cooking
 SUBDIR+=	tex-dhucs
+SUBDIR+=	tex-draftwatermark
+SUBDIR+=	tex-everypage
 SUBDIR+=	tex-fixme
 SUBDIR+=	tex-foiltex
 SUBDIR+=	tex-glossaries

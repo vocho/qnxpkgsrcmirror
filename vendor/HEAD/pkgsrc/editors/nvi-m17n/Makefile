@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.38 2007/02/22 19:26:26 wiz Exp $
+# $NetBSD: Makefile,v 1.41 2007/11/28 11:40:35 obache Exp $
 
 DISTNAME=	nvi-1.79
 PKGNAME=	nvi-m17n-1.79.20040401
-PKGREVISION=	2
+PKGREVISION=	4
 CATEGORIES=	editors
 MASTER_SITES=	ftp://ftp.sleepycat.com/pub/ \
 		ftp://ftp.foretune.co.jp/pub/tools/nvi/
@@ -10,7 +10,7 @@ MASTER_SITES=	ftp://ftp.sleepycat.com/pub/ \
 PATCH_SITES=	ftp://ftp.foretune.co.jp/pub/tools/nvi-m17n/
 PATCHFILES=	nvi-1.79.m17n-20040401.diff.gz
 
-MAINTAINER=	itojun@itojun.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 COMMENT=	Clone of vi/ex, with multilingual patch
 
 CONFLICTS=	vigor-[0-9]* nvi-[0-9]*

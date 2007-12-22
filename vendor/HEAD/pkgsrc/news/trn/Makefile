@@ -1,11 +1,10 @@
-# $NetBSD: Makefile,v 1.28 2007/02/22 19:27:02 wiz Exp $
+# $NetBSD: Makefile,v 1.30 2007/12/02 11:32:25 wiz Exp $
 
 DISTNAME=		trn-4.0-test76
 PKGNAME=		trn-4.76
 PKGREVISION=		3
 CATEGORIES=		news
-MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=trn/} \
-			ftp://trn.sourceforge.net/pub/trn/
+MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=trn/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://trn.sourceforge.net/
@@ -27,7 +26,7 @@ HAS_CONFIGURE=		yes
 CONFIGURE_SCRIPT=	./Configure
 CONFIGURE_ENV+=		PREFIX=${PREFIX:Q}
 USE_TOOLS+=		awk basename cat cp diff echo egrep expr grep mkdir mv
-USE_TOOLS+=		perl:run rm sed tail tr
+USE_TOOLS+=		perl:run rm sed tail tr yacc
 CONFIGURE_ENV+=		TOOLS_AWK=${TOOLS_AWK:Q}
 CONFIGURE_ENV+=		TOOLS_BASENAME=${TOOLS_BASENAME:Q}
 CONFIGURE_ENV+=		TOOLS_CAT=${TOOLS_CAT:Q}

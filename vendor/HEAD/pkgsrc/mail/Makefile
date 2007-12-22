@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.337 2007/10/11 15:49:55 tv Exp $
+# $NetBSD: Makefile,v 1.340 2007/11/13 18:02:52 jlam Exp $
 #
 
 COMMENT=	Electronic mail utilities
@@ -43,6 +43,7 @@ SUBDIR+=	claws-mail-synce
 SUBDIR+=	claws-mail-trayicon
 SUBDIR+=	claws-mail-vcalendar
 SUBDIR+=	columba
+SUBDIR+=	cone
 SUBDIR+=	coolmail
 SUBDIR+=	courier-analog
 SUBDIR+=	courier-imap
@@ -142,6 +143,7 @@ SUBDIR+=	mush
 SUBDIR+=	mutt
 SUBDIR+=	mutt-devel
 SUBDIR+=	nail
+SUBDIR+=	netbiff
 SUBDIR+=	newmail
 SUBDIR+=	newspipe
 SUBDIR+=	nmh
@@ -256,6 +258,7 @@ SUBDIR+=	spamassassin
 SUBDIR+=	spamd
 SUBDIR+=	spamdyke
 SUBDIR+=	spamprobe
+SUBDIR+=	sqlgrey
 SUBDIR+=	squirrelmail
 SUBDIR+=	squirrelmail-decode
 SUBDIR+=	squirrelmail-locales

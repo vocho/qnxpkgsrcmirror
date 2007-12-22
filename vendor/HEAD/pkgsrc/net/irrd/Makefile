@@ -1,12 +1,10 @@
-# $NetBSD: Makefile,v 1.38 2007/09/07 22:12:18 jlam Exp $
+# $NetBSD: Makefile,v 1.40 2007/12/02 08:32:24 rillig Exp $
 
 DISTNAME=	irrd2.2.8
 PKGNAME=	irrd-2.2.8
 PKGREVISION=	2
 CATEGORIES=	net
-MASTER_SITES=	http://www.irrd.net/ \
-		ftp://ftp.merit.edu/radb/irrd/ \
-		ftp://ftp.merit.edu/radb/irrd/old_releases/
+MASTER_SITES=	http://www.irrd.net/
 EXTRACT_SUFX=	.tgz
 
 MAINTAINER=	kim@tac.nyc.ny.us
@@ -16,7 +14,7 @@ COMMENT=	Internet Routing Registry Daemon
 DEPENDS+=	gnupg-[0-9]*:../../security/gnupg
 DEPENDS+=	wget-[0-9]*:../../net/wget
 
-USE_TOOLS+=		automake flex perl:run
+USE_TOOLS+=		automake flex perl:run yacc
 
 WRKSRC=			${WRKDIR}/${DISTNAME}/src
 

@@ -1,10 +1,9 @@
-# $NetBSD: Makefile,v 1.76 2007/09/21 13:04:26 wiz Exp $
+# $NetBSD: Makefile,v 1.79 2007/11/29 20:40:51 drochner Exp $
 #
 
-DISTNAME=	epiphany-2.18.3
-PKGREVISION=	2
+DISTNAME=	epiphany-2.20.2
 CATEGORIES=	www gnome
-MASTER_SITES=	${MASTER_SITE_GNOME:=sources/epiphany/2.18/}
+MASTER_SITES=	${MASTER_SITE_GNOME:=sources/epiphany/2.20/}
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	jmmv@NetBSD.org
@@ -18,7 +17,7 @@ USE_LIBTOOL=		YES
 USE_PKGLOCALEDIR=	YES
 USE_LANGUAGES=		c c++
 
-PKGCONFIG_OVERRIDE=	data/epiphany-2.16.pc
+PKGCONFIG_OVERRIDE=	data/epiphany-2.20.pc
 
 .include "options.mk"
 
@@ -53,7 +52,7 @@ BUILDLINK_API_DEPENDS.libxml2+=		libxml2>=2.6.12
 .include "../../textproc/iso-codes/buildlink3.mk"
 .include "../../textproc/libxml2/buildlink3.mk"
 .include "../../textproc/libxslt/buildlink3.mk"
-.include "../../textproc/scrollkeeper/omf.mk"
+.include "../../mk/omf-scrollkeeper.mk"
 .include "../../x11/gnome-desktop/buildlink3.mk"
 .include "../../x11/gtk2/buildlink3.mk"
 .include "../../x11/libSM/buildlink3.mk"

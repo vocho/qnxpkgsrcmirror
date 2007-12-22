@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.103 2007/09/09 11:43:09 ghen Exp $
+# $NetBSD: Makefile,v 1.108 2007/12/12 13:15:48 ghen Exp $
 
-DISTNAME=		dovecot-1.0.5
+DISTNAME=		dovecot-1.0.9
 CATEGORIES=		mail
 MASTER_SITES=		http://www.dovecot.org/releases/1.0/
 
@@ -35,7 +35,7 @@ PKG_USERS_VARS+=	DOVECOT_USER
 PKG_GECOS.${DOVECOT_USER}=	Dovecot IMAP/POP3 user
 
 EGDIR=			${PREFIX}/share/examples/dovecot
-CONF_FILES=		${EGDIR}/dovecot.conf.default ${PKG_SYSCONFDIR}/dovecot.conf
+CONF_FILES=		${EGDIR}/dovecot-example.conf ${PKG_SYSCONFDIR}/dovecot.conf
 
 INSTALLATION_DIRS=	libexec/dovecot sbin share/doc/dovecot		\
 			share/examples/dovecot

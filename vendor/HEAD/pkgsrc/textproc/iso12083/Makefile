@@ -1,15 +1,13 @@
-# $NetBSD: Makefile,v 1.16 2006/03/21 06:00:50 jlam Exp $
+# $NetBSD: Makefile,v 1.18 2007/12/02 13:04:15 wiz Exp $
 
 DISTNAME=	iso12083-1993
 PKGREVISION=	5
 CATEGORIES=	textproc
-MASTER_SITES=	ftp://info.ex.ac.uk/pub/SGML/ISO-12083/ \
-		ftp://ftp.ifi.uio.no/pub/SGML/ISO12083/ \
-		ftp://ftp.oit.unc.edu/pub/packages/SGML/oslo-mirror/ISO12083/
+MASTER_SITES=	ftp://ftp.ifi.uio.no/pub/SGML/ISO12083/
 DISTFILES=	article.dtd book.dtd maths.dtd serial.dtd
 
 MAINTAINER=	rh@NetBSD.org
-HOMEPAGE=	http://www.oasis-open.org/cover/sgml-xml.html
+HOMEPAGE=	http://xml.coverpages.org/sgml-xml.html
 COMMENT=	SGML DTDs from the The Electronic Publishing Special Interest Group
 
 DIST_SUBDIR=	iso12083

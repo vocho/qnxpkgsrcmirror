@@ -1,14 +1,15 @@
-# $NetBSD: Makefile,v 1.45 2007/10/07 16:31:37 jmmv Exp $
+# $NetBSD: Makefile,v 1.47 2007/12/14 08:58:00 bjs Exp $
 #
 
-DISTNAME=	monotone-0.36
-PKGREVISION=	3
+DISTNAME=	monotone-0.38
 CATEGORIES=	devel scm
-MASTER_SITES=	http://monotone.ca/downloads/0.36/
+MASTER_SITES=	http://monotone.ca/downloads/0.38/
 
 MAINTAINER=	jmmv@NetBSD.org
 HOMEPAGE=	http://monotone.ca/
 COMMENT=	Free distributed version control system
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 GCC_REQD+=		3.0
 GNU_CONFIGURE=		yes
@@ -18,7 +19,7 @@ USE_TOOLS+=		gmake makeinfo
 USE_LANGUAGES=		c c++
 USE_PKGLOCALEDIR=	yes
 
-CONFIGURE_ARGS+=	BOOST_SUFFIX=-mt
+CONFIGURE_ARGS+=	--with-system-pcre
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.monotone
 PKG_SUPPORTED_OPTIONS=	inet6
@@ -35,7 +36,7 @@ CONFIGURE_ARGS+=	--disable-ipv6
 .endif
 
 post-install:
-	${INSTALL_DATA_DIR} ${PREFIX}/share/monotone
+	${INSTALL_DATA_DIR} ${DESTDIR}${PREFIX}/share/monotone
 	cd ${WRKSRC} && rm -rf contrib/.deps && \
 	    pax -rw -pp -pm contrib \
 	    ${DESTDIR}${PREFIX}/share/monotone
@@ -43,7 +44,8 @@ post-install:
 	    ${DESTDIR}${PREFIX}/share/doc/monotone
 
 .include "../../converters/libiconv/buildlink3.mk"
-.include "../../devel/boost-libs/buildlink3.mk"
+.include "../../devel/boost-headers/buildlink3.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"
+.include "../../devel/pcre/buildlink3.mk"
 .include "../../mk/pthread.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

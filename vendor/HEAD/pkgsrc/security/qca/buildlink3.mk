@@ -1,4 +1,4 @@
-# $NetBSD: buildlink3.mk,v 1.9 2007/10/09 19:19:15 martti Exp $
+# $NetBSD: buildlink3.mk,v 1.11 2007/12/20 20:37:22 jdolecek Exp $
 #
 BUILDLINK_DEPTH:=	${BUILDLINK_DEPTH}+
 QCA_BUILDLINK3_MK:=	${QCA_BUILDLINK3_MK}+

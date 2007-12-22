@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.305 2007/10/21 13:51:41 adrianp Exp $
+# $NetBSD: Makefile,v 1.309 2007/12/20 21:21:16 jdolecek Exp $
 #
 
 COMMENT=	Security tools
@@ -230,6 +230,8 @@ SUBDIR+=	py-tlslite
 SUBDIR+=	pyca
 SUBDIR+=	qca
 SUBDIR+=	qca-tls
+SUBDIR+=	qca2
+SUBDIR+=	qca2-ossl
 SUBDIR+=	qident
 SUBDIR+=	rainbowcrack
 SUBDIR+=	rats
@@ -251,6 +253,7 @@ SUBDIR+=	smimemsg
 SUBDIR+=	smtpd
 SUBDIR+=	sniff
 SUBDIR+=	snortsnarf
+SUBDIR+=	snow
 SUBDIR+=	srm
 SUBDIR+=	srp_client
 SUBDIR+=	ssh-askpass

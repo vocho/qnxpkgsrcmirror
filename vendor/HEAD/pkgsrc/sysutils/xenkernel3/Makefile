@@ -1,17 +1,16 @@
-# $NetBSD: Makefile,v 1.5 2007/10/16 20:31:57 bouyer Exp $
+# $NetBSD: Makefile,v 1.9 2007/12/05 22:06:26 bouyer Exp $
 #
 
-VERSION=	3.1.0
+VERSION=	3.1.2
 DISTNAME=	xen-${VERSION}-src
 PKGNAME=	xenkernel3-${VERSION}
-PKGREVISION=	2
+PKGREVISION=	1
 CATEGORIES=	sysutils
-MASTER_SITES=	http://www.cl.cam.ac.uk/research/srg/netos/xen/downloads/ \
-		http://bits.xensource.com/oss-xen/release/${VERSION}/src.tgz/
+MASTER_SITES=	${MASTER_SITE_LOCAL}
 EXTRACT_SUFX=	.tgz
 
 MAINTAINER=	bouyer@NetBSD.org
-HOMEPAGE=	http://www.cl.cam.ac.uk/research/srg/netos/xen/
+HOMEPAGE=	http://xen.org/
 COMMENT=	Xen3 Kernel
 
 ONLY_FOR_PLATFORM=	Linux-2.[46]*-i386 NetBSD-*-i386 Linux-2.[46]*-x86_64 NetBSD-*-x86_64
@@ -24,12 +23,28 @@ NO_CONFIGURE=	yes
 USE_TOOLS+=	gmake
 
 PYTHON_VERSIONS_ACCEPTED= 24 23
-PY_PATCHPLIST=		no
+PY_PATCHPLIST=		NO
 
 SUBST_CLASSES+=		py
 SUBST_STAGE.py=		pre-build
 SUBST_FILES.py=		xen/include/public/foreign/Makefile
+SUBST_FILES.py+=	xen/tools/get-fields.sh
 SUBST_SED.py=		-e "s,python,${PYTHONBIN},g"
+
+#PY_PATCHPLIST doesn't work because we have NO_CONFIGURE
+SUBST_CLASSES+=		py2
+SUBST_STAGE.py2=	pre-build
+SUBST_FILES.py2=	xen/tools/compat-build-source.py
+SUBST_FILES.py2+=	xen/tools/compat-build-header.py
+SUBST_SED.py2=		-e "s,/usr/bin/python,${PYTHONBIN},g"
+
+.if  ${MACHINE_ARCH} == "x86_64"
+USE_TOOLS+=		bash
+SUBST_CLASSES+=		bash
+SUBST_STAGE.bash=	pre-build
+SUBST_FILES.bash=	xen/include/Makefile
+SUBST_SED.bash=		-e "s,/bin/bash,${PREFIX}/bin/bash,g"
+.endif
 
 do-build:
 	cd ${WRKSRC} && ${GMAKE} XEN_TARGET_X86_PAE=n debug=n xen

@@ -1,6 +1,6 @@
 #!@RCD_SCRIPTS_SHELL@
 #
-# $NetBSD: dirmngr.sh,v 1.1 2005/05/02 22:33:37 shannonjr Exp $
+# $NetBSD: dirmngr.sh,v 1.3 2007/11/07 19:38:12 shannonjr Exp $
 #
 # PROVIDE: dirmngr
 # REQUIRE: DAEMON
@@ -12,8 +12,8 @@ fi
 
 name="dirmngr"
 rcvar="${name}"
-dirmngr_user="dirmngr"
-dirmngr_group="dirmngr"
+dirmngr_user="@DIRMNGR_USER@"
+dirmngr_group="@DIRMNGR_GROUP@"
 dirmngr_flags="--daemon"
 dirmngr_command="@PREFIX@/sbin/runDirmngr"
 start_precmd="dirmngr_precmd"
@@ -26,10 +26,12 @@ required_files="@PKG_SYSCONFDIR@/dirmngr/ldapservers.conf"
 dirmngr_precmd()
 {
 	mkdir -p @VARBASE@/run/dirmngr
-	chgrp dirmngr @VARBASE@/run/dirmngr
-	chmod 775 @VARBASE@/run/dirmngr
+	rm -f @VARBASE@/run/dirmngr/socket
+	chown @DIRMNGR_USER@  @VARBASE@/run/dirmngr
+	chgrp @DIRMNGR_GROUP@ @VARBASE@/run/dirmngr
+	chmod 1755 @VARBASE@/run/dirmngr
 	mkdir -p /tmp/dirmngr
-	chgrp dirmngr /tmp/dirmngr
+	chgrp @DIRMNGR_GROUP@ /tmp/dirmngr
 	chmod 755 /tmp/dirmngr
 }
 
@@ -65,6 +67,7 @@ dirmngr_stop()
 {
 	if [ -f /tmp/dirmngr/dirmngr.info ] ; then
 		kill `cut -f 2 -d ':' /tmp/dirmngr/dirmngr.info`
+		rm -f @VARBASE@/run/dirmngr/socket
 	fi
 }
 

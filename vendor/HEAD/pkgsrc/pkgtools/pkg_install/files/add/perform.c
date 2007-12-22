@@ -1,4 +1,4 @@
-/*	$NetBSD: perform.c,v 1.63 2007/09/11 13:39:05 rillig Exp $	*/
+/*	$NetBSD: perform.c,v 1.68 2007/11/30 00:30:39 rillig Exp $	*/
 
 #if HAVE_CONFIG_H
 #include "config.h"
@@ -14,7 +14,7 @@
 #if 0
 static const char *rcsid = "from FreeBSD Id: perform.c,v 1.44 1997/10/13 15:03:46 jkh Exp";
 #else
-__RCSID("$NetBSD: perform.c,v 1.63 2007/09/11 13:39:05 rillig Exp $");
+__RCSID("$NetBSD: perform.c,v 1.68 2007/11/30 00:30:39 rillig Exp $");
 #endif
 #endif
 
@@ -357,7 +357,7 @@ ignore_replace_depends_check:
 		if (Verbose)
 			printf("mv %s %s\n", replace_from, replace_via);						
 		if (rename(replace_from, replace_via) != 0)
-			err(EXIT_FAILURE, "rename failed");
+			err(EXIT_FAILURE, "renaming \"%s\" to \"%s\" failed", replace_from, replace_via);
 
 		*replacing = 1;
 	}
@@ -386,14 +386,12 @@ pkg_do(const char *pkg, lpkg_head_t *pkgs)
 	char   *buildinfo[BI_ENUM_COUNT];
 	int	replacing = 0;
 	char   dbdir[MaxPathSize];
-	const char *exact;
 	const char *tmppkg;
 	FILE   *cfile;
 	int     errc, err_prescan;
 	plist_t *p;
 	struct stat sb;
 	struct utsname host_uname;
-	int	rc;
 	uint64_t needed;
 	Boolean	is_depoted_pkg = FALSE;
 	lfile_t	*lfp;
@@ -665,11 +663,23 @@ pkg_do(const char *pkg, lpkg_head_t *pkgs)
 			printf("Package `%s' conflicts with `%s'.\n", PkgName, p->name);
 		best_installed = find_best_matching_installed_pkg(p->name);
 		if (best_installed) {
-			warnx("Conflicting package `%s'installed, please use\n"
-			      "\t\"pkg_delete %s\" first to remove it!",
-			      best_installed, best_installed);
+			warnx("Package `%s' conflicts with `%s', and `%s' is installed.",
+			      PkgName, p->name, best_installed);
 			free(best_installed);
 			++errc;
+		}
+	}
+
+	/* See if any of the installed packages conflicts with this one. */
+	{
+		char *inst_pkgname, *inst_pattern;
+
+		if (some_installed_package_conflicts_with(PkgName, &inst_pkgname, &inst_pattern)) {
+			warnx("Installed package `%s' conflicts with `%s' when trying to install `%s'.",
+				inst_pkgname, inst_pattern, PkgName);
+			free(inst_pkgname);
+			free(inst_pattern);
+			errc++;
 		}
 	}
 
@@ -762,17 +772,11 @@ pkg_do(const char *pkg, lpkg_head_t *pkgs)
 	
 
 	/* Now check the packing list for dependencies */
-	for (exact = NULL, p = Plist.head; p; p = p->next) {
+	for (p = Plist.head; p; p = p->next) {
 		char *best_installed;
 
-		if (p->type == PLIST_BLDDEP) {
-			exact = p->name;
+		if (p->type != PLIST_PKGDEP)
 			continue;
-		}
-		if (p->type != PLIST_PKGDEP) {
-			exact = NULL;
-			continue;
-		}
 		if (Verbose)
 			printf("Package `%s' depends on `%s'.\n", PkgName, p->name);
 
@@ -790,13 +794,7 @@ pkg_do(const char *pkg, lpkg_head_t *pkgs)
 				int done = 0;
 				int errc0 = 0;
 
-				if (exact != NULL) {
-					/* first try the exact name, from the @blddep */
-					done = installprereq(exact, &errc0, (Replace > 1) ? 2 : 0);
-				}
-				if (!done) {
-					done = installprereq(p->name, &errc0, (Replace > 1) ? 2 : 0);
-				}
+				done = installprereq(p->name, &errc0, (Replace > 1) ? 2 : 0);
 				if (!done && !Force) {
 					errc += errc0;
 				}
@@ -982,8 +980,8 @@ success:
 		 * Upgrade step 3/4: move back +REQUIRED_BY file
 		 * (see also step 2/4)
 		 */
-		rc = rename(replace_via, replace_to);
-		assert(rc == 0);
+		if (rename(replace_via, replace_to) != 0)
+			err(EXIT_FAILURE, "renaming \"%s\" to \"%s\" failed", replace_via, replace_to);
 		
 		/*
 		 * Upgrade step 4/4: Fix pkgs that depend on us to

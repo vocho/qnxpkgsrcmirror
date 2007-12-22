@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.32 2006/12/27 13:37:36 joerg Exp $
+# $NetBSD: Makefile,v 1.34 2007/12/02 13:04:09 wiz Exp $
 
 DISTNAME=	spim-7.1
 PKGREVISION=	3
 CATEGORIES=	emulators
-MASTER_SITES=	http://www.cs.wisc.edu/~larus/SPIM/ \
+MASTER_SITES=	http://pages.cs.wisc.edu/~larus/SPIM/ \
 		ftp://ftp.cs.wisc.edu/pub/spim/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.cs.wisc.edu/~larus/spim.html
+HOMEPAGE=	http://pages.cs.wisc.edu/~larus/spim.html
 COMMENT=	MIPS R2000 Simulator
 
 RESTRICTED=		selling is not allowed
@@ -20,7 +20,7 @@ WRKSRC=			${WRKDIR}/${PKGNAME_NOREV}
 HAS_CONFIGURE=		yes
 CONFIGURE_SCRIPT=	./Configure
 USE_IMAKE=		yes
-USE_TOOLS+=		gzip lex
+USE_TOOLS+=		gzip lex yacc
 XMKMF=			${X11BASE}/bin/xmkmf # don't specify -a option
 
 BUILD_TARGET=		y.tab.c depend all

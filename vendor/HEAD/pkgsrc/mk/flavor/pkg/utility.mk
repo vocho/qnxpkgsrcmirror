@@ -1,10 +1,4 @@
-# $NetBSD: utility.mk,v 1.5 2007/03/09 01:29:11 rillig Exp $
-
-######################################################################
-###
-### The targets below should probably be removed from pkgsrc.
-###
-######################################################################
+# $NetBSD: utility.mk,v 1.9 2007/11/19 14:59:40 tron Exp $
 
 # The 'info' target can be used to display information about a package.
 .PHONY: info
@@ -21,8 +15,17 @@ check:
 list:
 	${_PKG_SILENT}${_PKG_DEBUG}${PKG_INFO} -L "${PKGWILDCARD}"
 
-.PHONY: show-downlevel
-show-downlevel:
+######################################################################
+###
+### The targets below should probably be removed from pkgsrc.
+###
+######################################################################
+
+# show-downlevel:
+#	Lists the packages whose installed version does not match the
+#	current version in pkgsrc.
+#
+show-downlevel: .PHONY
 .if defined(PKG_FAIL_REASON)
 	${_PKG_SILENT}${_PKG_DEBUG}${DO_NADA}
 .else
@@ -38,7 +41,7 @@ show-downlevel:
 .endif
 
 .PHONY: show-installed-depends
-show-installed-depends:
+show-installed-depends: # will not be removed
 .if !empty(DEPENDS)
 	${_PKG_SILENT}${_PKG_DEBUG}					\
 	for i in ${DEPENDS:C/:.*$//:Q:S/\ / /g} ; do			\
@@ -47,7 +50,7 @@ show-installed-depends:
 .endif
 
 .PHONY: show-needs-update
-show-needs-update:
+show-needs-update: _about-to-be-removed
 .if !empty(DEPENDS)
 	${_PKG_SILENT}${_PKG_DEBUG}					\
 	${_DEPENDS_WALK_CMD} -r ${PKGPATH} |				\
@@ -64,7 +67,7 @@ show-needs-update:
 .endif
 
 .PHONY: show-pkgsrc-dir
-show-pkgsrc-dir:
+show-pkgsrc-dir: _about-to-be-removed
 .if defined(PKG_FAIL_REASON)
 	${_PKG_SILENT}${_PKG_DEBUG}${DO_NADA}
 .else
@@ -78,3 +81,9 @@ show-pkgsrc-dir:
 # Short aliases
 .PHONY: sid
 sid: show-installed-depends
+
+_about-to-be-removed: .USE
+	@${WARNING_MSG} "This make target (${.TARGET}) is about to be removed. Since you used"
+	@${WARNING_MSG} "it, it may not be completele useless.  Please tell us on the"
+	@${WARNING_MSG} "tech-pkg""@""NetBSD.org mailing list why you think this target should"
+	@${WARNING_MSG} "not be removed."

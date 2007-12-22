@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.43 2007/09/21 13:03:59 wiz Exp $
+# $NetBSD: Makefile,v 1.46 2007/12/19 12:27:27 rillig Exp $
 
 DISTNAME=	gnome-base-2.18.1
 CATEGORIES=	meta-pkgs x11 gnome
@@ -56,7 +56,6 @@ DEPENDS+=	libwnck>=2.18.0:../../devel/libwnck
 DEPENDS+=	gail>=1.18.0:../../devel/gail
 DEPENDS+=	gtkhtml314>=3.14.1:../../www/gtkhtml314
 DEPENDS+=	gtk2-engines>=2.10.1:../../x11/gtk2-engines
-DEPENDS+=	scrollkeeper>=0.3.14:../../textproc/scrollkeeper
 DEPENDS+=	gnome-desktop>=2.18.1:../../x11/gnome-desktop
 DEPENDS+=	gnome-menus>=2.18.0:../../sysutils/gnome-menus
 DEPENDS+=	eel>=2.18.0.1:../../devel/eel
@@ -68,7 +67,7 @@ DEPENDS+=	gst-plugins0.10-good>=0.10.5:../../multimedia/gst-plugins0.10-good
 DEPENDS+=	gst-plugins0.10-esound>=0.10.5:../../audio/gst-plugins0.10-esound
 DEPENDS+=	gst-plugins0.10-oss>=0.10.5:../../audio/gst-plugins0.10-oss
 DEPENDS+=	evolution-data-server>=1.10.1:../../mail/evolution-data-server
-DEPENDS+=	control-center>=2.18.1:../../x11/control-center
+DEPENDS+=	gnome-control-center>=2.18.1:../../x11/gnome-control-center
 DEPENDS+=	gnome-panel>=2.18.1:../../x11/gnome-panel
 DEPENDS+=	gucharmap>=1.10.0:../../fonts/gucharmap
 DEPENDS+=	gnome-applets>=2.18.0:../../x11/gnome-applets
@@ -78,12 +77,6 @@ DEPENDS+=	vte>=0.16.1:../../x11/vte
 DEPENDS+=	gnome-terminal>=2.18.0:../../x11/gnome-terminal
 DEPENDS+=	gnome-session>=2.18.0:../../x11/gnome-session
 
-EXTRACT_ONLY=	# empty
-NO_CHECKSUM=	yes
-NO_CONFIGURE=	yes
-NO_BUILD=	yes
-NO_MTREE=	yes
-
-do-install:	# empty
+META_PACKAGE=	yes
 
 .include "../../mk/bsd.pkg.mk"

@@ -1,4 +1,4 @@
-# $NetBSD: help.awk,v 1.16 2007/08/14 18:04:16 rillig Exp $
+# $NetBSD: help.awk,v 1.18 2007/12/13 11:48:38 rillig Exp $
 #
 
 # This program extracts the inline documentation from *.mk files.
@@ -27,7 +27,7 @@ BEGIN {
 }
 
 # Help topics are separated by either completely empty lines or by the
-# end of a file or by the end of all files. When here have been enough
+# end of a file or by the end of all files. When there have been enough
 # comment lines, the topic is considered worth printing.
 #
 function end_of_topic() {
@@ -100,8 +100,8 @@ $1 ~ /:$/ && $2 == ".PHONY" {
 #
 NF >= 1 {
 	# Reduce FOO.<param> and FOO.${param} to FOO.
-	w1 = gensub(/\.[<$].*[>}]$/, "", "g", $1);
-	w2 = gensub(/\.[<$].*[>}]$/, "", "g", $2);
+	w1 = $1; sub(/\.[<$].*[>}]$/, "", w1);
+	w2 = $2; sub(/\.[<$].*[>}]$/, "", w2);
 
 	# Convert all-lowercase words to all-uppercase.
 	w1 = (w1 == tolower(w1)) ? toupper(w1) : w1;
@@ -109,13 +109,13 @@ NF >= 1 {
 
 	this_line_is_definition = (w1 == toupper($1)) && (w2 == toupper($2));
 
+	w = (w1 == "#") ? w2 : w1;
 	if ((w1 == uctopic"?=") ||
 	    (w1 == uctopic"=") ||
 	    (index(w1, "#"uctopic"=") == 1) ||
 	    (index(w1, "#"uctopic"?=") == 1) ||
 	    (this_line_maybe_definition &&
-	        w1 == "#" &&
-	        (w2 == uctopic || w2 == uctopic":"))) {
+	        (w == uctopic || w == uctopic":"))) {
 		relevant = yes;
 	}
 }

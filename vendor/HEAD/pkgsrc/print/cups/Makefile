@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.126 2007/10/08 11:39:47 rillig Exp $
+# $NetBSD: Makefile,v 1.129 2007/11/08 20:03:21 joerg Exp $
 #
 # The CUPS author is very good about taking back changes into the main
 # CUPS distribution.  The correct place to send patches or bug-fixes is:
@@ -9,6 +9,7 @@ PKGNAME=	cups-${VERS}
 BASE_VERS=	1.2.12
 DIST_VERS=	${BASE_VERS}
 VERS=		${DIST_VERS:S/-/./g}
+PKGREVISION=	2
 CATEGORIES=	print
 MASTER_SITES=	http://ftp.easysw.com/pub/cups/${BASE_VERS}/ \
 		ftp://ftp2.easysw.com/pub/cups/${BASE_VERS}/ \
@@ -22,6 +23,8 @@ EXTRACT_SUFX=	.tar.bz2
 MAINTAINER=	jlam@pkgsrc.org
 HOMEPAGE=	http://www.cups.org/
 COMMENT=	Common UNIX Printing System
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 CONFLICTS+=	LPRng-[0-9]* LPRng-core-[0-9]*
 
@@ -136,6 +139,15 @@ SUBST_FILES.paths=	${WRKDIR}/cups.pam
 SUBST_SED.paths+=	-e 's,@LOCALBASE@,${LOCALBASE},g'
 SUBST_STAGE.paths=	post-patch
 
+SUBST_CLASSES+=		rpathfix
+SUBST_FILES.rpathfix=	cups-config.in
+SUBST_MESSAGE.rpathfix=	Adding rpath to cups-config.
+SUBST_SED.rpathfix=	-e 's|@EXPORT_LDFLAGS@|${COMPILER_RPATH_FLAG}${LOCALBASE}/lib|g'
+SUBST_STAGE.rpathfix=	post-patch
+
+INSTALLATION_DIRS=	${DOCDIR} ${EGDIR}
+INSTALL_ENV+=		DSTROOT=${DESTDIR:Q}
+
 pre-configure:
 	cd ${WRKSRC} && aclocal && autoconf
 
@@ -143,22 +155,22 @@ post-extract:
 	${CP} ${FILESDIR}/cups.pam ${WRKDIR}/cups.pam
 
 post-install:
-	${INSTALL_DATA_DIR} ${DOCDIR}
-	for file in LICENSE.txt README.txt; do	\
-		${INSTALL_DATA} ${WRKSRC}/$${file} ${DOCDIR}/$${file};	\
+	for file in LICENSE.txt README.txt; do				\
+		${INSTALL_DATA} ${WRKSRC}/$${file}			\
+		     ${DESTDIR}${DOCDIR}/$${file}; \
 	done
-	${INSTALL_DATA_DIR} ${EGDIR}
 	cd ${WRKSRC}/conf; for file in *.conf mime.*; do		\
 		case $${file} in					\
 		pam.conf)						\
 			;;						\
 		*)							\
-			${INSTALL_DATA} $${file} ${EGDIR}/$${file};	\
+			${INSTALL_DATA} $${file} 			\
+			    ${DESTDIR}${EGDIR}/$${file};		\
 			;;						\
 		esac;							\
 	done
 .if !empty(PKG_OPTIONS:Mpam)
-	${INSTALL_DATA} ${WRKDIR}/cups.pam ${EGDIR}
+	${INSTALL_DATA} ${WRKDIR}/cups.pam ${DESTDIR}${EGDIR}
 .endif
 
 .include "../../mk/bsd.pkg.mk"

@@ -1,16 +1,17 @@
-# $NetBSD: Makefile,v 1.58 2007/09/21 13:03:33 wiz Exp $
+# $NetBSD: Makefile,v 1.62 2007/11/20 11:57:59 martti Exp $
 
-DISTNAME=	rrdtool-1.2.23
-PKGREVISION=	1
+DISTNAME=	rrdtool-1.2.26
+#PKGREVISION=	1
 CATEGORIES=	databases graphics net
 MASTER_SITES=	http://oss.oetiker.ch/rrdtool/pub/
 
 MAINTAINER=	martti@NetBSD.org
 HOMEPAGE=	http://oss.oetiker.ch/rrdtool/
 COMMENT=	Data analysis tool generating graphical representations
+#LICENSE=	gnu-gpl-v2
 
 USE_LIBTOOL=		yes
-USE_TOOLS+=		gmake pkg-config
+USE_TOOLS+=		gmake pkg-config perl
 GNU_CONFIGURE=		yes
 CONFIGURE_ARGS+=	--enable-shared
 CONFIGURE_ARGS+=	--with-perl-options=${MAKE_PARAMS:Q}
