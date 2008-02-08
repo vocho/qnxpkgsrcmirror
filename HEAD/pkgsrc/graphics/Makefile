@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.469 2007/09/21 13:03:45 wiz Exp $
+# $NetBSD: Makefile,v 1.475 2007/12/17 19:48:00 drochner Exp $
 #
 
 COMMENT=	Graphics tools and libraries
@@ -57,6 +57,7 @@ SUBDIR+=	dia
 SUBDIR+=	dia-python
 SUBDIR+=	digikam
 SUBDIR+=	digikam-doc
+SUBDIR+=	djview4
 SUBDIR+=	djvulibre-lib
 SUBDIR+=	djvulibre-tools
 SUBDIR+=	dx
@@ -73,6 +74,7 @@ SUBDIR+=	feh
 SUBDIR+=	flphoto
 SUBDIR+=	fly
 SUBDIR+=	fnlib
+SUBDIR+=	fotox
 SUBDIR+=	freeglut
 SUBDIR+=	freetype
 SUBDIR+=	freetype-lib
@@ -96,6 +98,7 @@ SUBDIR+=	gimp
 SUBDIR+=	gimp-color-manager
 SUBDIR+=	gimp-docs
 SUBDIR+=	gimp-fix-ca
+SUBDIR+=	gimp-liquid-rescale
 SUBDIR+=	gimp-rawphoto
 SUBDIR+=	gimp-refocus-it
 SUBDIR+=	gimp-ufraw
@@ -105,7 +108,6 @@ SUBDIR+=	gimp1-base
 SUBDIR+=	gimp1-data
 SUBDIR+=	gimp1-wideangle
 SUBDIR+=	gimp2-wideangle
-SUBDIR+=	gimp24
 SUBDIR+=	giram
 SUBDIR+=	gle
 SUBDIR+=	glew
@@ -145,6 +147,7 @@ SUBDIR+=	hicolor-icon-theme
 SUBDIR+=	hp2xx
 SUBDIR+=	iGMT
 SUBDIR+=	icon-naming-utils
+SUBDIR+=	ilmbase
 SUBDIR+=	imlib
 SUBDIR+=	imlib2
 SUBDIR+=	impress
@@ -207,7 +210,6 @@ SUBDIR+=	ocrad
 SUBDIR+=	opencv
 SUBDIR+=	opendis
 SUBDIR+=	openexr
-SUBDIR+=	openexr-exrdisplay
 SUBDIR+=	optipng
 SUBDIR+=	ov519view
 SUBDIR+=	p5-Chart

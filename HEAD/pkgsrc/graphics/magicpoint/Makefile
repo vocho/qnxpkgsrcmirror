@@ -1,13 +1,12 @@
-# $NetBSD: Makefile,v 1.58 2007/08/18 14:33:09 taca Exp $
+# $NetBSD: Makefile,v 1.60 2007/12/02 00:06:13 wiz Exp $
 
 DISTNAME=		magicpoint-1.10a
 PKGREVISION=		11
 #DISTNAME=		magicpoint-1.11b.tar.gz
 CATEGORIES=		x11 graphics
-MASTER_SITES=		ftp://sh.wide.ad.jp/WIDE/free-ware/mgp/ \
-			ftp://ftp.mew.org/pub/MagicPoint/
+MASTER_SITES=		ftp://sh.wide.ad.jp/WIDE/free-ware/mgp/
 
-MAINTAINER=		itojun@itojun.org
+MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://member.wide.ad.jp/wg/mgp/
 COMMENT=		X11 based presentation tool
 

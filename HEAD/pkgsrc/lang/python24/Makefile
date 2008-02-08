@@ -1,10 +1,9 @@
-# $NetBSD: Makefile,v 1.35 2007/07/02 20:24:28 adrianp Exp $
+# $NetBSD: Makefile,v 1.39 2007/12/16 16:44:51 adrianp Exp $
 
 DISTNAME=	Python-2.4.4
 PKGNAME=	python24-2.4.4
 CATEGORIES=	lang python
-MASTER_SITES=	ftp://ftp.python.org/pub/python/2.4.4/ \
-		http://www.python.org/ftp/python/2.4.4/
+MASTER_SITES=	http://www.python.org/ftp/python/2.4.4/
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	recht@NetBSD.org
@@ -43,7 +42,7 @@ PLIST_SRC+=	${.CURDIR}/../../lang/python24/PLIST.${OPSYS}
 .endif
 PLIST_SRC+=	${.CURDIR}/../../lang/python24/PLIST.common_end
 
-.if ${OPSYS} == "NetBSD"
+.if ${OPSYS} == "NetBSD" && ${_USE_DESTDIR} == "no"
 PRIVILEGED_STAGES+=	clean
 .endif
 
@@ -93,9 +92,20 @@ PLIST_SUBST+=	OSSAUDIODEV=
 PLIST_SUBST+=	OSSAUDIODEV="@comment "
 .endif
 
+# Mac OS X Leopard support:
+# 1.) Fix detection of setpgrp(2).
+# 2.) "lib-dynload/_OSA.so" isn't built.
+.if !empty(MACHINE_PLATFORM:MDarwin-[9].*-*)
+CFLAGS+=	-D__DARWIN_UNIX03
+PLIST_SUBST+=	LEOPARD="@comment "
+.else
+PLIST_SUBST+=	LEOPARD=
+.endif
+
 # Make sure python modules can link correctly
 .if ${OPSYS} == "Darwin"
 INSTALL_UNSTRIPPED=	yes
+CFLAGS+=		-I${WRKSRC}/Include
 .endif
 
 .if ${OPSYS} == "IRIX"

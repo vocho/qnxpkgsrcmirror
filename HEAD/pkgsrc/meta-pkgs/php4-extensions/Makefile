@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.20 2006/11/06 21:36:49 jdolecek Exp $
+# $NetBSD: Makefile,v 1.22 2007/12/19 12:27:30 rillig Exp $
 
 DISTNAME=	php-extensions-4.4
 PKGREVISION=	9
@@ -61,14 +61,7 @@ DEPENDS+=	php4-apc-4.4.*:../../www/php4-apc
 DEPENDS+=	php4-domxml-4.4.*:../../textproc/php4-domxml
 DEPENDS+=	php4-xslt-4.4.*:../../textproc/php4-xslt
 
-EXTRACT_ONLY=	# empty
-NO_CHECKSUM=	yes
-NO_CONFIGURE=	yes
-NO_BUILD=	yes
-NO_MTREE=	yes
+META_PACKAGE=	yes
 
-do-install:	# empty
-
-.include "../../mk/apachever.mk"
-
+.include "../../mk/apache.mk"
 .include "../../mk/bsd.pkg.mk"

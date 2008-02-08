@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.292 2007/09/20 00:05:54 wiz Exp $
+# $NetBSD: Makefile,v 1.295 2007/11/25 23:53:15 wiz Exp $
 #
 
 COMMENT=	Games
@@ -10,6 +10,7 @@ SUBDIR+=	KoboDeluxe
 SUBDIR+=	REminiscence
 SUBDIR+=	abuse
 SUBDIR+=	adom
+SUBDIR+=	alephone
 SUBDIR+=	an
 SUBDIR+=	angband-tty
 SUBDIR+=	angband-x11
@@ -181,6 +182,7 @@ SUBDIR+=	prboom
 SUBDIR+=	pysol
 SUBDIR+=	pytraffic
 SUBDIR+=	qnetwalk
+SUBDIR+=	qonk
 SUBDIR+=	qstat
 SUBDIR+=	quake
 SUBDIR+=	quake2forge
@@ -221,6 +223,7 @@ SUBDIR+=	tads
 SUBDIR+=	tanked
 SUBDIR+=	teg
 SUBDIR+=	tetrinetx
+SUBDIR+=	thew
 SUBDIR+=	tileworld
 SUBDIR+=	tscp
 SUBDIR+=	tuxmath

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.64 2007/08/13 08:12:49 rillig Exp $
+# $NetBSD: Makefile,v 1.68 2007/12/17 20:17:42 drochner Exp $
 #
 
 COMMENT=	Clocks, calendars, daily planners and other time related applications
@@ -56,7 +56,9 @@ SUBDIR+=	p5-Schedule-Cron-Events
 SUBDIR+=	p5-Time
 SUBDIR+=	p5-Time-Clock
 SUBDIR+=	p5-Time-Duration
+SUBDIR+=	p5-Time-Format
 SUBDIR+=	p5-Time-HiRes
+SUBDIR+=	p5-Time-Interval
 SUBDIR+=	p5-Time-Local
 SUBDIR+=	p5-Time-Period
 SUBDIR+=	p5-Time-Piece
@@ -98,7 +100,9 @@ SUBDIR+=	xdkcal
 SUBDIR+=	xfce4-datetime-plugin
 SUBDIR+=	xfce4-orage
 SUBDIR+=	xfce4-timer-plugin
+SUBDIR+=	xonclock
 SUBDIR+=	xtimer
 SUBDIR+=	xtu
+SUBDIR+=	zonetab
 
 .include "../mk/misc/category.mk"

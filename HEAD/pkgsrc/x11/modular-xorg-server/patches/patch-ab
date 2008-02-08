@@ -1,16 +1,7 @@
-$NetBSD$
+$NetBSD: patch-ab,v 1.6 2007/11/01 14:43:47 joerg Exp $
 
---- configure.orig	2007-04-20 03:25:26.000000000 +0200
+--- configure.orig	2007-04-20 01:25:26.000000000 +0000
 +++ configure
-@@ -20550,7 +20550,7 @@ test -n "$YACC" || YACC="yacc"
- 
- 
- 
--for ac_prog in cpp
-+for ac_prog in cpp ucpp
- do
-   # Extract the first word of "$ac_prog", so it can be a program name with args.
- set dummy $ac_prog; ac_word=$2
 @@ -24767,6 +24767,10 @@ _ACEOF
  #define USE_DEV_IO 1
  _ACEOF
@@ -93,14 +84,3 @@ $NetBSD$
  		;;
  	  x86_64*|amd64*)
  		case $host_os in
-@@ -35222,6 +35230,10 @@ do
-   case $ac_option in
-   # Handling of the options.
-   -recheck | --recheck | --rechec | --reche | --rech | --rec | --re | --r)
-+	: Avoid regenerating within pkgsrc
-+	exit 0
-+	: Avoid regenerating within pkgsrc
-+	exit 0
-     ac_cs_recheck=: ;;
-   --version | --versio | --versi | --vers | --ver | --ve | --v | -V )
-     echo "$ac_cs_version"; exit ;;

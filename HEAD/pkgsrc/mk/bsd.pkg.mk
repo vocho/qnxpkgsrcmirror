@@ -1,4 +1,4 @@
-#	$NetBSD: bsd.pkg.mk,v 1.1928 2007/10/13 11:04:16 dsl Exp $
+#	$NetBSD: bsd.pkg.mk,v 1.1932 2007/12/19 12:32:06 rillig Exp $
 #
 # This file is in the public domain.
 #
@@ -72,6 +72,25 @@ PKGNAME_NOREV=		${DISTNAME}
 .else
 PKGNAME?=		${DISTNAME}
 PKGNAME_NOREV=		${PKGNAME}
+.endif
+
+# A meta-package is a package that does not have any files and whose
+# only purpose is to depend on other packages, giving that collection
+# a simple name.
+#
+# Keywords: meta meta-package META_PACKAGE
+#
+.if defined(META_PACKAGE)
+PKG_DESTDIR_SUPPORT=	user-destdir
+NO_CHECKSUM=		yes
+NO_CONFIGURE=		yes
+NO_BUILD=		yes
+DISTFILES=		# none
+PLIST_SRC=		# none
+do-patch:
+	@${DO_NADA}
+do-install:
+	@${DO_NADA}
 .endif
 
 ##### Others
@@ -248,7 +267,6 @@ _NONZERO_FILESIZE_P=	${AWK} 'END { exit (NR > 0) ? 0 : 1; }'
 # Automatically increase process limit where necessary for building.
 _ULIMIT_CMD=		${UNLIMIT_RESOURCES:@_lim_@${ULIMIT_CMD_${_lim_}};@}
 
-_INTERACTIVE_COOKIE=	${.CURDIR}/.interactive_stage
 _NULL_COOKIE=		${WRKDIR}/.null
 
 # Miscellaneous overridable commands:
@@ -686,6 +704,10 @@ show-pkgtools-version:
 
 # convenience target, to display make variables from command line
 # i.e. "make show-var VARNAME=var", will print var's value
+#
+# See also:
+#	show-vars, show-subdir-var
+#
 .PHONY: show-var
 show-var:
 	@${ECHO} ${${VARNAME}:Q}

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.143 2007/09/27 13:30:27 joerg Exp $
+# $NetBSD: Makefile,v 1.145 2007/11/11 11:35:50 martti Exp $
 
 # Notes to package maintainers:
 #
@@ -14,6 +14,7 @@ DISTFILES=		# empty
 MAINTAINER=		joerg@NetBSD.org
 HOMEPAGE=		http://www.pkgsrc.org/
 COMMENT=		Package management and administration tools for pkgsrc
+#LICENSE=		modified-bsd
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
@@ -38,6 +39,7 @@ NO_PKGTOOLS_REQD_CHECK=	yes
 NO_CHECKSUM=		yes
 NO_MTREE=		yes
 PKG_PRESERVE=		yes
+CHECK_PERMS=		no
 
 # These are needed to solve a chicken-and-egg problem where pkgsrc uses
 # newer features of pkg_install, but older NetBSD installations won't

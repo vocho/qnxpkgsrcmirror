@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.37 2007/01/15 18:46:39 joerg Exp $
+# $NetBSD: Makefile,v 1.39 2007/11/25 17:18:22 wiz Exp $
 
-DISTNAME=	gnustep-base-1.13.0
-PKGREVISION=	1
+DISTNAME=	gnustep-base-1.14.1
 CATEGORIES=	devel gnustep
 MASTER_SITES=	${MASTER_SITE_GNUSTEP:=core/}
 
@@ -11,12 +10,15 @@ COMMENT=	GNUstep foundation classes
 
 USE_LANGUAGES=	objc
 
+#LICENSE=		gnu-gplv3
+
 PTHREAD_LIBS=		-lpthread
 
 GNU_CONFIGURE=		yes
-CONFIGURE_ARGS+=	--exec-prefix=${PREFIX:Q}/libexec/GNUstep
+CONFIGURE_ARGS+=	--exec-prefix=${PREFIX}/libexec/GNUstep
 CONFIGURE_ENV+=		INSTALL_PROGRAM=${INSTALL_SCRIPT:Q}
 MAKE_FILE=		GNUmakefile
+MAKE_JOBS_SAFE=		no
 
 SUBST_CLASSES+=		pthread
 SUBST_STAGE.pthread=	pre-configure
@@ -24,10 +26,10 @@ SUBST_FILES.pthread=	configure base.make.in
 SUBST_SED.pthread=	-e 's|@PTHREAD_LIBS@|${PTHREAD_LIBS}|g'
 
 pre-configure:
-	sed 's|@PREFIX@|${PREFIX}|g' <${FILESDIR:Q}/openapp >${WRKDIR:Q}/openapp
+	sed 's|@PREFIX@|${PREFIX}|g' <${FILESDIR}/openapp >${WRKDIR}/openapp
 
 post-install:
-	${INSTALL_SCRIPT} ${WRKDIR:Q}/openapp ${PREFIX:Q}/bin
+	${INSTALL_SCRIPT} ${WRKDIR}/openapp ${PREFIX}/bin
 
 .include "../../mk/compiler.mk"
 

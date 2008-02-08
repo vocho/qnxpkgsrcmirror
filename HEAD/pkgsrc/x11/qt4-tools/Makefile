@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.12 2007/09/25 10:03:54 hira Exp $
+# $NetBSD: Makefile,v 1.15 2007/12/17 22:19:44 adam Exp $
 
 .include "../../x11/qt4-libs/Makefile.common"
 
@@ -31,13 +31,21 @@ do-install:
 		${MAKE_PROGRAM} install_assistant_headers
 	cd ${WRKSRC}/tools/designer/src/lib && env ${MAKE_ENV} \
 		${MAKE_PROGRAM} install_designer_headers
+	cd ${WRKSRC}/tools/designer/src/uitools && env ${MAKE_ENV} \
+		${MAKE_PROGRAM} install_quitools_headers
 	cd ${WRKSRC}/tools/qtestlib/src && env ${MAKE_ENV} \
 		${MAKE_PROGRAM} install_qtestlib_headers
 .for lib in QtAssistantClient QtDesigner QtDesignerComponents QtTest
 	${LIBTOOL} --mode=install ${INSTALL_LIB} ${WRKSRC}/lib/lib${lib}.la \
 		${QTPREFIX}/lib/
 .endfor
-	${INSTALL_DATA} ${WRKSRC}/lib/pkgconfig/QtTest.pc ${PREFIX}/lib/pkgconfig/
+	${LIBTOOL} --mode=install ${INSTALL_LIB} ${WRKSRC}/lib/libQtUiTools.a \
+		${QTPREFIX}/lib/
+.for lib in QtUiTools QtTest
+	sed -e "s:${WRKSRC}:${QTPREFIX}:g" \
+		${WRKSRC}/lib/pkgconfig/${lib}.pc > ${WRKDIR}/${lib}.pc
+	${INSTALL_DATA} ${WRKDIR}/${lib}.pc ${PREFIX}/lib/pkgconfig/
+.endfor
 	${INSTALL_LIB_DIR} ${QTPREFIX}/plugins/designer
 	${LIBTOOL} --mode=install ${INSTALL_LIB} \
 		${WRKSRC}/plugins/designer/libqt3supportwidgets.la \

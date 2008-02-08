@@ -1,13 +1,10 @@
-# $NetBSD: Makefile,v 1.29 2007/02/22 19:27:09 wiz Exp $
+# $NetBSD: Makefile,v 1.32 2007/12/02 11:35:41 wiz Exp $
 #
 
 DISTNAME=	pgp50i-unix-src
 PKGNAME=	pgp5-5.0i
 CATEGORIES=	security
 MASTER_SITES=	ftp://ftp.pgpi.com/pub/pgp/5.0/unix/ \
-		ftp://ftp.at.pgpi.com/pub/pgpi/5.0/unix/ \
-		ftp://ftp.se.pgpi.com/pub/pgp/5.0/unix/ \
-		ftp://ftp.ch.pgpi.com/pub/pgp/5.0/unix/ \
 		ftp://ftp.au.pgpi.com/pub/pgp/5.0/unix/ \
 		ftp://ftp.ifi.uio.no/pub/pgp/5.0/unix/ \
 		ftp://ftp.tuwien.ac.at/privacy/pgp/5.0/unix/ \
@@ -26,7 +23,7 @@ CRYPTO=		YES
 GNU_CONFIGURE=	YES
 
 # use of IDEA as crypto function
-LICENCE=	fee-based-commercial-use
+LICENSE=	fee-based-commercial-use
 
 PGPLIB=	${PREFIX}/share/pgp5
 

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.19 2007/09/24 22:31:16 joerg Exp $
+# $NetBSD: Makefile,v 1.23 2007/12/08 09:23:16 wiz Exp $
 
 DISTNAME=	xorg-server-1.3.0.0
 PKGNAME=	modular-${DISTNAME}
@@ -19,36 +19,7 @@ PKGCONFIG_OVERRIDE+=	xorg-server.pc.in
 USE_TOOLS+=		pkg-config
 USE_TOOLS+=		gmake
 CONFIGURE_ARGS+=	--localstatedir=${VARBASE}
-#only if dri is enabled: CONFIGURE_ARGS+=	--enable-dri
-
-PKG_SUPPORTED_OPTIONS=	dri
-PKG_OPTIONS_VAR=	PKG_OPTIONS.xorg-server
-PKG_OPTIONS_LEGACY_OPTS=glx:dri
-.include "../../mk/bsd.options.mk"
-
-.if !empty(PKG_OPTIONS:Mdri)
-DISTFILES=		${DISTNAME}${EXTRACT_SUFX}
-DISTFILES+=		MesaLib-6.5.2.tar.bz2
-SITES.MesaLib-6.5.2.tar.bz2= ${MASTER_SITE_SOURCEFORGE:=mesa3d/}
-MESA_SRC=		${WRKDIR}/Mesa-6.5.2
 CONFIGURE_ARGS+=	--enable-dri
-CONFIGURE_ARGS+=	--enable-glx
-CONFIGURE_ARGS+=	--with-mesa-source=${MESA_SRC}
-.if ${MACHINE_ARCH} == "x86_64" || ${MACHINE_ARCH} == "sparc64" || \
-    ${MACHINE_ARCH} == "alpha"
-GLX_DEFINES+=		-D__GLX_ALIGN64
-.endif
-CONFIGURE_ENV+=		GLX_DEFINES=${GLX_DEFINES:M*:Q}
-# glcore.h and dri_interface.h shipped with *proto are older than
-# those in Mesa-6.5.2. Either patch them or trick the build into using
-# the newer ones.
-#BUILDLINK_API_DEPENDS.glproto+= glproto>=1.4.8nb1
-#BUILDLINK_API_DEPENDS.xf86driproto+= xf86driproto>=2.0.3nb1
-PLIST_SUBST+=		USE_DRI=""
-.else
-CONFIGURE_ARGS+=	--disable-glx
-PLIST_SUBST+=		USE_DRI="@comment "
-.endif
 
 CONFIGURE_ENV+=	APP_MAN_SUFFIX=1 FILE_MAN_SUFFIX=5
 
@@ -62,19 +33,14 @@ BUILDLINK_API_DEPENDS.fixesproto+=	fixesproto>=4.0
 BUILDLINK_API_DEPENDS.kbproto+=		kbproto>=1.0.3
 BUILDLINK_API_DEPENDS.randrproto+=	randrproto>=1.2.1
 
-post-extract:
+post-extract: dri-post-extract
 	${CP} ${FILESDIR}/modeline2c.awk ${WRKSRC}/hw/xfree86/common
-.if !empty(PKG_OPTIONS:Mdri)
-	${LN} -s ${MESA_SRC:Q}/include/GL ${WRKSRC:Q}/GL/glx/GL
-.endif
+
+.include "options.mk"
 
 .include "../../devel/ncurses/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"
 .include "../../fonts/libfontenc/buildlink3.mk"
-.if empty(PKG_OPTIONS:Mdri)
-# for GLX we already have the Mesa source
-.include "../../graphics/MesaLib/buildlink3.mk"
-.endif
 .include "../../x11/bigreqsproto/buildlink3.mk"
 .include "../../x11/compositeproto/buildlink3.mk"
 .include "../../x11/damageproto/buildlink3.mk"
@@ -92,10 +58,7 @@ post-extract:
 .include "../../x11/libXt/buildlink3.mk"
 .include "../../x11/libXxf86misc/buildlink3.mk"
 .include "../../x11/libXxf86vm/buildlink3.mk"
-.if !empty(PKG_OPTIONS:Mdri)
-# include dri only if enabled
 .include "../../x11/libdrm/buildlink3.mk"
-.endif
 .include "../../x11/libxkbfile/buildlink3.mk"
 .include "../../x11/libxkbui/buildlink3.mk"
 .include "../../x11/randrproto/buildlink3.mk"
@@ -109,10 +72,7 @@ post-extract:
 .include "../../x11/xextproto/buildlink3.mk"
 .include "../../x11/xf86bigfontproto/buildlink3.mk"
 .include "../../x11/xf86dgaproto/buildlink3.mk"
-.if !empty(PKG_OPTIONS:Mdri)
-# include dri only if enabled
 .include "../../x11/xf86driproto/buildlink3.mk"
-.endif
 .include "../../x11/xf86miscproto/buildlink3.mk"
 .include "../../x11/xf86vidmodeproto/buildlink3.mk"
 .include "../../x11/xineramaproto/buildlink3.mk"

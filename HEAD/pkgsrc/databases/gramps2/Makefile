@@ -1,14 +1,15 @@
-# $NetBSD: Makefile,v 1.30 2007/09/21 13:03:31 wiz Exp $
+# $NetBSD: Makefile,v 1.32 2007/11/01 12:52:56 drochner Exp $
 #
 
-DISTNAME=		gramps-2.2.8
-PKGREVISION=		2
+DISTNAME=		gramps-2.2.9
 CATEGORIES=		databases
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=gramps/}
 
 MAINTAINER=	drochner@NetBSD.org
 HOMEPAGE=	http://gramps-project.org/
 COMMENT=	Genealogical Research and Analysis Management Programming System
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_DIRS+=		xdg-1.1
 USE_TOOLS+=		msgfmt pkg-config intltool msgconv
@@ -18,6 +19,7 @@ GNU_CONFIGURE=		yes
 CONFIGURE_ARGS+=	--disable-mime-install --enable-packager-mode
 
 CONFIGURE_ENV+=		PYTHON=${PYTHONBIN:Q}
+MAKE_JOBS_SAFE=		no
 # i18n support with other python versions appears to not work
 PYTHON_VERSIONS_ACCEPTED=	24
 

@@ -1,21 +1,12 @@
-# $NetBSD: Makefile,v 1.27 2007/09/21 13:03:59 wiz Exp $
+# $NetBSD: Makefile,v 1.30 2007/12/19 12:27:31 rillig Exp $
 
 .include "Makefile.common"
 
 DISTNAME=	xfce4-${XFCE4_VERSION}
-DISTFILES=	# empty
-PKGREVISION=	1
 CATEGORIES=	meta-pkgs
 COMMENT=	Xfce
 
-NO_CHECKSUM=	yes
-NO_CONFIGURE=	yes
-NO_BUILD=	yes
-NO_MTREE=	yes
-WRKSRC=		${WRKDIR}
-
-do-install:
-	@${DO_NADA}
+META_PACKAGE=	yes
 
 .include "../../audio/xfce4-mixer/buildlink3.mk"
 .include "../../editors/xfce4-mousepad/buildlink3.mk"

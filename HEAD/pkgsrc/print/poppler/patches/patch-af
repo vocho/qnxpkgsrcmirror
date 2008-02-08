@@ -1,30 +1,27 @@
-$NetBSD: patch-af,v 1.1 2007/08/02 14:41:19 drochner Exp $
+$NetBSD: patch-af,v 1.3 2007/11/28 20:54:38 drochner Exp $
 
---- poppler/Stream.cc.orig	2007-08-02 10:28:59.000000000 +0200
-+++ poppler/Stream.cc
-@@ -422,12 +422,6 @@ StreamPredictor::StreamPredictor(Stream 
-   ok = gFalse;
+--- glib/poppler-document.cc.orig	2007-11-28 21:04:53.000000000 +0100
++++ glib/poppler-document.cc
+@@ -137,8 +137,20 @@ poppler_document_new_from_file (const ch
+   g_free (filename);
  
-   nVals = width * nComps;
--  if (width <= 0 || nComps <= 0 || nBits <= 0 ||
--      nComps >= INT_MAX/nBits ||
--      width >= INT_MAX/nComps/nBits ||
--      nVals * nBits + 7 < 0) {
--    return;
--  }
-   totalBits = nVals * nBits;
-   if (totalBits == 0 ||
-       (totalBits / nBits) / nComps != width ||
-@@ -436,7 +430,11 @@ StreamPredictor::StreamPredictor(Stream 
-   }
-   pixBytes = (nComps * nBits + 7) >> 3;
-   rowBytes = ((totalBits + 7) >> 3) + pixBytes;
--  if (rowBytes < 0) {
-+  if (width <= 0 || nComps <= 0 || nBits <= 0 ||
-+      nComps > gfxColorMaxComps ||
-+      nBits > 16 ||
-+      width >= INT_MAX / nComps ||      // check for overflow in nVals
-+      nVals >= (INT_MAX - 7) / nBits) { // check for overflow in rowBytes
-     return;
-   }
-   predLine = (Guchar *)gmalloc(rowBytes);
+   password_g = NULL;
+-  if (password != NULL)
+-    password_g = new GooString (password);
++  if (password != NULL) {
++    if (g_utf8_validate (password, -1, NULL)) {
++      gchar *password_latin;
++
++      password_latin = g_convert (password, -1,
++				 "ISO-8859-1",
++				 "UTF-8",
++				 NULL, NULL, NULL);
++      password_g = new GooString (password_latin);
++      g_free (password_latin);
++    } else {
++      password_g = new GooString (password);
++    }
++  }
+ 
+   newDoc = new PDFDoc(filename_g, password_g, password_g);
+   if (password_g)

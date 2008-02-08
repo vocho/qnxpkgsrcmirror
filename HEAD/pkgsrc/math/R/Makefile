@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.92 2007/09/08 13:44:48 rillig Exp $
+# $NetBSD: Makefile,v 1.94 2007/11/08 19:39:43 joerg Exp $
 
-DISTNAME=		R-2.4.1
-PKGREVISION=		3
+DISTNAME=		R-2.6.0
+PKGREVISION=		1
 CATEGORIES=		math
 MASTER_SITES=		${MASTER_SITE_R_CRAN:=base/R-2/}
 
@@ -18,6 +18,7 @@ PKG_INSTALLATION_TYPES=	overwrite pkgviews
 TEST_TARGET=		check
 USE_TOOLS+=		gmake gzip:run makeinfo perl:run sed unzip:run xmkmf
 USE_GNU_READLINE=	yes		# uses callback interface
+USE_GNU_ICONV=		yes		# latin1 support, iconvlist
 USE_LANGUAGES=		c fortran
 USE_LIBTOOL=		yes
 TEXINFO_REQD=		4.7

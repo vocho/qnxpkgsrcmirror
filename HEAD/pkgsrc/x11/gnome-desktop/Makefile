@@ -1,10 +1,9 @@
-# $NetBSD: Makefile,v 1.72 2007/09/21 13:04:29 wiz Exp $
+# $NetBSD: Makefile,v 1.74 2007/11/29 20:28:56 drochner Exp $
 #
 
-DISTNAME=		gnome-desktop-2.18.3
-PKGREVISION=		2
+DISTNAME=		gnome-desktop-2.20.2
 CATEGORIES=		x11 gnome
-MASTER_SITES=		${MASTER_SITE_GNOME:=sources/gnome-desktop/2.18/}
+MASTER_SITES=		${MASTER_SITE_GNOME:=sources/gnome-desktop/2.20/}
 EXTRACT_SUFX=		.tar.bz2
 
 MAINTAINER=		drochner@NetBSD.org
@@ -33,7 +32,7 @@ post-install:
 .include "../../graphics/libgnomecanvas/buildlink3.mk"
 .include "../../sysutils/gnome-vfs/buildlink3.mk"
 .include "../../textproc/gnome-doc-utils/buildlink3.mk"
-.include "../../textproc/scrollkeeper/omf.mk"
+.include "../../mk/omf-scrollkeeper.mk"
 .include "../../x11/gtk2/buildlink3.mk"
 .include "../../x11/libSM/buildlink3.mk"
 .include "../../x11/startup-notification/buildlink3.mk"

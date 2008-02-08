@@ -1,8 +1,8 @@
-$NetBSD$
+$NetBSD: patch-aa,v 1.13 2007/05/16 04:56:26 martti Exp $
 
---- src/auto/configure.orig	2007-10-25 20:56:22.000000000 -0400
-+++ src/auto/configure
-@@ -7993,7 +7993,7 @@ fi
+--- src/auto/configure.orig	2007-05-12 14:49:09.000000000 +0300
++++ src/auto/configure	2007-05-14 12:20:05.000000000 +0300
+@@ -7991,7 +7991,7 @@
  
  
  if test -z "$SKIP_MOTIF"; then
@@ -11,12 +11,3 @@ $NetBSD$
      GUI_INC_LOC="`echo $GUI_INC_LOC|sed 's%-I%%g'`"
  
    echo "$as_me:$LINENO: checking for location of Motif GUI includes" >&5
-@@ -10266,7 +10266,7 @@ fi
- 
- 
- for ac_header in stdarg.h stdlib.h string.h sys/select.h sys/utsname.h \
--	termcap.h fcntl.h sgtty.h sys/ioctl.h sys/time.h termio.h \
-+	termcap.h fcntl.h sgtty.h sys/ioctl.h sys/time.h sys/types.h termio.h \
- 	iconv.h langinfo.h unistd.h stropts.h errno.h \
- 	sys/resource.h sys/systeminfo.h locale.h \
- 	sys/stream.h sys/ptem.h termios.h libc.h sys/statfs.h \

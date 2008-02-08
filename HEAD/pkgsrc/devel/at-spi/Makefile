@@ -1,10 +1,9 @@
-# $NetBSD: Makefile,v 1.41 2007/09/21 13:03:33 wiz Exp $
+# $NetBSD: Makefile,v 1.43 2007/11/07 18:19:19 drochner Exp $
 #
 
-DISTNAME=		at-spi-1.18.1
-PKGREVISION=		1
+DISTNAME=		at-spi-1.20.1
 CATEGORIES=		devel
-MASTER_SITES=		${MASTER_SITE_GNOME:=sources/at-spi/1.18/}
+MASTER_SITES=		${MASTER_SITE_GNOME:=sources/at-spi/1.20/}
 EXTRACT_SUFX=		.tar.bz2
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
@@ -16,7 +15,10 @@ USE_PKGLOCALEDIR=	yes
 USE_LIBTOOL=		yes
 GNU_CONFIGURE=		yes
 
+CONFIGURE_ENV+=		PYTHON=true
+
 PKGCONFIG_OVERRIDE+=	cspi-1.0.pc.in
+PKGCONFIG_OVERRIDE+=	libloginhelper-1.0.pc.in
 PKGCONFIG_OVERRIDE+=	libspi-1.0.pc.in
 
 BUILDLINK_API_DEPENDS.atk+=	atk>=1.18.0

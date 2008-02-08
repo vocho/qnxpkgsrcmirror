@@ -1,15 +1,12 @@
-# $NetBSD: Makefile,v 1.32 2007/09/13 23:26:24 wiz Exp $
+# $NetBSD: Makefile,v 1.35 2007/12/02 12:20:12 wiz Exp $
 #
 
 DISTNAME=	tin-1.8.3
 CATEGORIES=	news
 MASTER_SITES=	ftp://ftp.tin.org/pub/news/clients/tin/current/ \
 		ftp://ftp.cs.tu-berlin.de/pub/net/news/tin/current/ \
-		ftp://mirror.aarnet.edu.au/pub/tin/current/ \
 		ftp://gd.tuwien.ac.at/infosys/newsreaders/tin/current/ \
-		ftp://ftp.funet.fi/pub/unix/news/tin-unoff/ \
-		ftp://ftp.nuxi.com/pub/tin/current/ \
-		ftp://uiarchive.uiuc.edu/pub/packages/news/client/tin/unoff/
+		ftp://ftp.funet.fi/pub/unix/news/tin-unoff/
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	wiz@NetBSD.org

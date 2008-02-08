@@ -1,17 +1,17 @@
-$NetBSD: patch-ba,v 1.4 2007/02/11 18:39:04 tron Exp $
+$NetBSD: patch-ba,v 1.6 2007/11/06 00:47:51 rillig Exp $
 
---- Makefile.in.orig	2007-02-04 10:59:28.000000000 -0800
+--- Makefile.in.orig	2007-06-20 02:11:39.000000000 +0900
 +++ Makefile.in
-@@ -75,7 +75,7 @@ AUTHLIBDIR = $(LIBDIR)/auth
+@@ -81,7 +81,7 @@ AUTHLIBDIR = $(LIBDIR)/auth
  CONFIGLIBDIR = $(LIBDIR)/config
  CONFIGDIR = @configdir@
  VARDIR = @localstatedir@
 -MANDIR = @mandir@
-+MANDIR = /usr/pkg/man
++MANDIR = @mandir@
  DATADIR = @datadir@
  
  # The permissions to give the executables
-@@ -100,6 +100,9 @@ SWATDIR = @swatdir@
+@@ -106,6 +106,9 @@ SWATDIR = @swatdir@
  # the directory where lock files go
  LOCKDIR = @lockdir@
  
@@ -21,85 +21,63 @@ $NetBSD: patch-ba,v 1.4 2007/02/11 18:39:04 tron Exp $
  # the directory where pid files go
  PIDDIR = @piddir@
  
-@@ -126,7 +129,7 @@ PASSWD_FLAGS = -DSMB_PASSWD_FILE=\"$(SMB
+@@ -136,7 +139,7 @@ PASSWD_FLAGS = -DSMB_PASSWD_FILE=\"$(SMB
  PATH_FLAGS1 = -DCONFIGFILE=\"$(CONFIGFILE)\"  -DSBINDIR=\"$(SBINDIR)\"
- PATH_FLAGS2 = $(PATH_FLAGS1) -DBINDIR=\"$(BINDIR)\" -DDRIVERFILE=\"$(DRIVERFILE)\" 
- PATH_FLAGS3 = $(PATH_FLAGS2) -DLMHOSTSFILE=\"$(LMHOSTSFILE)\" 
+ PATH_FLAGS2 = $(PATH_FLAGS1) -DBINDIR=\"$(BINDIR)\"
+ PATH_FLAGS3 = $(PATH_FLAGS2) -DLMHOSTSFILE=\"$(LMHOSTSFILE)\"
 -PATH_FLAGS4 = $(PATH_FLAGS3) -DSWATDIR=\"$(SWATDIR)\"  -DLOCKDIR=\"$(LOCKDIR)\" -DPIDDIR=\"$(PIDDIR)\"
-+PATH_FLAGS4 = $(PATH_FLAGS3) -DSWATDIR=\"$(SWATDIR)\" -DLOCKDIR=\"$(LOCKDIR)\" -DSTATEDIR=\"$(STATEDIR)\" -DPIDDIR=\"$(PIDDIR)\"
++PATH_FLAGS4 = $(PATH_FLAGS3) -DSWATDIR=\"$(SWATDIR)\"  -DLOCKDIR=\"$(LOCKDIR)\" -DSTATEDIR=\"$(STATEDIR)\" -DPIDDIR=\"$(PIDDIR)\"
  PATH_FLAGS5 = $(PATH_FLAGS4) -DLIBDIR=\"$(LIBDIR)\" \
  	      -DLOGFILEBASE=\"$(LOGFILEBASE)\" -DSHLIBEXT=\"@SHLIBEXT@\"
  PATH_FLAGS6 = $(PATH_FLAGS5) -DCONFIGDIR=\"$(CONFIGDIR)\"
-@@ -498,6 +501,10 @@ PDBEDIT_OBJ = utils/pdbedit.o utils/pass
- 		$(SECRETS_OBJ) $(POPT_LIB_OBJ) $(SMBLDAP_OBJ) libsmb/asn1.o \
- 		$(RPC_PARSE_OBJ1) $(DOSERR_OBJ)
+@@ -1052,7 +1055,7 @@ bin/pdbedit@EXEEXT@: proto_exists $(PDBE
  
-+.if ${OPSYS} == "QNX"
-+PDBEDIT_OBJ += utils/strptime.o
-+.endif
-+
- SMBGET_OBJ = utils/smbget.o $(POPT_LIB_OBJ) $(LIBSMBCLIENT_OBJ)
- 
- RPCCLIENT_OBJ1 = rpcclient/rpcclient.o rpcclient/cmd_lsarpc.o \
-@@ -579,6 +586,10 @@ NET_OBJ1 = utils/net.o utils/net_ads.o u
- 	   utils/net_util.o utils/net_rpc_sh_acct.o utils/net_rpc_audit.o \
- 	   utils/passwd_util.o
- 
-+.if ${OPSYS} == "QNX"
-+NET_OBJ1 += utils/strptime.o
-+.endif
-+
- NET_OBJ = $(NET_OBJ1) $(PARAM_OBJ) $(SECRETS_OBJ) $(LIBSMB_OBJ) \
- 	  $(RPC_PARSE_OBJ) $(PASSDB_OBJ) $(GROUPDB_OBJ) \
- 	  $(KRBCLIENT_OBJ) $(LIB_NONSMBD_OBJ) \
-@@ -1009,7 +1020,7 @@ bin/pdbedit@EXEEXT@: $(PDBEDIT_OBJ) @BUI
- 
- bin/smbget@EXEEXT@: $(SMBGET_OBJ) @BUILD_POPT@ bin/.dummy
+ bin/smbget@EXEEXT@: proto_exists $(SMBGET_OBJ) @BUILD_POPT@ bin/.dummy
  	@echo Linking $@
--	@$(CC) $(FLAGS) @PIE_LDFLAGS@ -o $@ $(SMBGET_OBJ) $(LDFLAGS) $(DYNEXP) $(LIBS) @POPTLIBS@  $(KRB5LIBS) $(LDAP_LIBS) $(NSCD_LIBS)
-+	@$(CC) $(FLAGS) @PIE_LDFLAGS@ -o $@ $(SMBGET_OBJ) $(LDFLAGS) $(DYNEXP) $(LIBS) @POPTLIBS@  $(KRB5LIBS) $(LDAP_LIBS) $(NSCD_LIBS) $(PASSDB_LIBS)
+-	@$(CC) $(FLAGS) -o $@ $(SMBGET_OBJ) $(LDFLAGS) $(DYNEXP) $(LIBS) @POPTLIBS@  $(KRB5LIBS) $(LDAP_LIBS) $(NSCD_LIBS)
++	@$(CC) $(FLAGS) -o $@ $(SMBGET_OBJ) $(LDFLAGS) $(DYNEXP) $(LIBS) @POPTLIBS@  $(KRB5LIBS) $(LDAP_LIBS) $(NSCD_LIBS) $(PASSDB_LIBS)
  
  bin/samtest@EXEEXT@: $(SAMTEST_OBJ) @BUILD_POPT@ bin/.dummy
  	@echo Linking $@
-@@ -1038,12 +1049,12 @@ bin/msgtest@EXEEXT@: $(MSGTEST_OBJ) bin/
- bin/smbcacls@EXEEXT@: $(SMBCACLS_OBJ) @BUILD_POPT@ bin/.dummy
+@@ -1087,12 +1090,12 @@ bin/msgtest@EXEEXT@: proto_exists $(MSGT
+ bin/smbcacls@EXEEXT@: proto_exists $(SMBCACLS_OBJ) @BUILD_POPT@ bin/.dummy
  	@echo Linking $@
- 	@$(CC) $(FLAGS) @PIE_LDFLAGS@ -o $@ $(SMBCACLS_OBJ) $(DYNEXP) $(LDFLAGS) $(LIBS) @POPTLIBS@ \
+ 	@$(CC) $(FLAGS) -o $@ $(SMBCACLS_OBJ) $(DYNEXP) $(LDFLAGS) $(LIBS) @POPTLIBS@ \
 -	$(KRB5LIBS) $(LDAP_LIBS) $(NSCD_LIBS)
 +	$(KRB5LIBS) $(LDAP_LIBS) $(NSCD_LIBS) $(PASSDB_LIBS)
  
- bin/smbcquotas@EXEEXT@: $(SMBCQUOTAS_OBJ) @BUILD_POPT@ bin/.dummy
+ bin/smbcquotas@EXEEXT@: proto_exists $(SMBCQUOTAS_OBJ) @BUILD_POPT@ bin/.dummy
  	@echo Linking $@
- 	@$(CC) $(FLAGS) @PIE_LDFLAGS@ -o $@ $(SMBCQUOTAS_OBJ) $(DYNEXP) $(LDFLAGS) $(LIBS) @POPTLIBS@ \
+ 	@$(CC) $(FLAGS) -o $@ $(SMBCQUOTAS_OBJ) $(DYNEXP) $(LDFLAGS) $(LIBS) @POPTLIBS@ \
 -	$(KRB5LIBS) $(LDAP_LIBS) $(NSCD_LIBS)
 +	$(KRB5LIBS) $(LDAP_LIBS) $(NSCD_LIBS) $(PASSDB_LIBS)
  
- bin/eventlogadm@EXEEXT@: $(EVTLOGADM_OBJ) @BUILD_POPT@ bin/.dummy
+ bin/eventlogadm@EXEEXT@: proto_exists $(EVTLOGADM_OBJ) @BUILD_POPT@ bin/.dummy
  	@echo Linking $@
-@@ -1102,7 +1113,7 @@ bin/smbwrapper.@SHLIBEXT@: $(PICOBJS) bi
- bin/libsmbclient.@SHLIBEXT@: $(LIBSMBCLIENT_PICOBJS)
+@@ -1155,7 +1158,7 @@ bin/libaddns.a: proto_exists $(LIBADDNS_
+ bin/libsmbclient.@SHLIBEXT@: proto_exists $(LIBSMBCLIENT_OBJ)
  	@echo Linking libsmbclient shared library $@
- 	@$(SHLD) $(LDSHFLAGS) -o $@ $(LIBSMBCLIENT_PICOBJS) $(LDFLAGS) $(LIBS) \
--		$(KRB5LIBS) $(LDAP_LIBS) \
-+		$(KRB5LIBS) $(LDAP_LIBS) $(PASSDB_LIBS) \
+ 	@$(SHLD) $(LDSHFLAGS) -o $@ $(LIBSMBCLIENT_OBJ) $(LIBS) \
+-		$(KRB5LIBS) $(LDAP_LIBS) $(NSCD_LIBS) \
++		$(KRB5LIBS) $(LDAP_LIBS) $(NSCD_LIBS) $(PASSDB_LIBS) \
  		@SONAMEFLAG@`basename $@`.$(LIBSMBCLIENT_MAJOR)
  
- bin/libsmbclient.a: $(LIBSMBCLIENT_PICOBJS)
-@@ -1382,11 +1393,11 @@ bin/ntlm_auth@EXEEXT@: $(NTLM_AUTH_OBJ) 
+ bin/libsmbclient.a: proto_exists $(LIBSMBCLIENT_OBJ)
+@@ -1527,11 +1530,11 @@ bin/ntlm_auth@EXEEXT@: proto_exists $(NT
  	@echo Linking $@
- 	@$(CC) $(FLAGS) @PIE_LDFLAGS@ -o $@ $(LDFLAGS) $(DYNEXP) $(NTLM_AUTH_OBJ) \
+ 	@$(CC) $(FLAGS) -o $@ $(LDFLAGS) $(DYNEXP) $(NTLM_AUTH_OBJ) \
  		$(PARAM_OBJ) $(LIB_NONSMBD_OBJ) $(LIBS) \
 -		@POPTLIBS@ $(KRB5LIBS) $(LDAP_LIBS) $(NSCD_LIBS)
 +		@POPTLIBS@ $(KRB5LIBS) $(LDAP_LIBS) $(NSCD_LIBS) $(PASSDB_LIBS)
  
- bin/pam_smbpass.@SHLIBEXT@: $(PAM_SMBPASS_PICOOBJ)
+ bin/pam_smbpass.@SHLIBEXT@: $(PAM_SMBPASS_OBJ)
  	@echo "Linking shared library $@"
--	@$(SHLD) $(LDSHFLAGS) -o $@ $(PAM_SMBPASS_PICOOBJ) -lpam $(DYNEXP) $(LIBS) $(LDAP_LIBS) $(KRB5LIBS)
-+	@$(SHLD) $(LDSHFLAGS) -o $@ $(PAM_SMBPASS_PICOOBJ) -lpam $(DYNEXP) $(LIBS) $(LDAP_LIBS) $(KRB5LIBS) $(PASSDB_LIBS)
+-	@$(SHLD) $(LDSHFLAGS) -o $@ $(PAM_SMBPASS_OBJ) -lpam $(DYNEXP) $(LIBS) $(LDAP_LIBS) $(KRB5LIBS) $(NSCD_LIBS)
++	@$(SHLD) $(LDSHFLAGS) -o $@ $(PAM_SMBPASS_OBJ) -lpam $(DYNEXP) $(LIBS) $(LDAP_LIBS) $(KRB5LIBS) $(NSCD_LIBS) $(PASSDB_LIBS)
  
- bin/tdbbackup@EXEEXT@: $(TDBBACKUP_OBJ) bin/.dummy
+ bin/tdbbackup@EXEEXT@: proto_exists $(TDBBACKUP_OBJ) bin/.dummy
  	@echo Linking $@
-@@ -1437,7 +1448,7 @@ install-everything: install installmodul
+@@ -1580,7 +1583,7 @@ install-everything: install installmodul
  # is not used
  
  installdirs:
@@ -108,7 +86,18 @@ $NetBSD: patch-ba,v 1.4 2007/02/11 18:39:04 tron Exp $
  
  installservers: all installdirs
  	@$(SHELL) script/installbin.sh $(INSTALLPERMS) $(DESTDIR) $(prefix) $(SBINDIR) $(SBIN_PROGS)
-@@ -1550,6 +1561,7 @@ showlayout:
+@@ -1599,7 +1602,9 @@ installmodules: modules installdirs
+ 	@$(SHELL) $(srcdir)/script/installmodules.sh $(INSTALLPERMS) $(DESTDIR) $(prefix) $(PDBLIBDIR) $(PDB_MODULES)
+ 	@$(SHELL) $(srcdir)/script/installmodules.sh $(INSTALLPERMS) $(DESTDIR) $(prefix) $(RPCLIBDIR) $(RPC_MODULES)
+ 	@$(SHELL) $(srcdir)/script/installmodules.sh $(INSTALLPERMS) $(DESTDIR) $(prefix) $(IDMAPLIBDIR) $(IDMAP_MODULES)
+-	@$(SHELL) $(srcdir)/script/installmodules.sh $(INSTALLPERMS) $(DESTDIR) $(prefix) $(NSSINFOLIBDIR) $(NSS_INFO_MODULES)
++	@if [ ! -z "$(NSS_INFO_MODULES)" ]; then \
++		$(SHELL) $(srcdir)/script/installmodules.sh $(INSTALLPERMS) $(DESTDIR) $(prefix) $(NSSINFOLIBDIR) $(NSS_INFO_MODULES); \
++	fi
+ 	@$(SHELL) $(srcdir)/script/installmodules.sh $(INSTALLPERMS) $(DESTDIR) $(prefix) $(CHARSETLIBDIR) $(CHARSET_MODULES)
+ 	@$(SHELL) $(srcdir)/script/installmodules.sh $(INSTALLPERMS) $(DESTDIR) $(prefix) $(AUTHLIBDIR) $(AUTH_MODULES)
+ 	@$(SHELL) $(srcdir)/script/linkmodules.sh $(DESTDIR)$(PDBLIBDIR) ldapsam.@SHLIBEXT@ ldapsam_compat.@SHLIBEXT@
+@@ -1704,6 +1709,7 @@ showlayout:
  	@echo "  privatedir:  $(PRIVATE_DIR)"
  	@echo "  configdir:   $(CONFIGDIR)"
  	@echo "  lockdir:     $(LOCKDIR)"

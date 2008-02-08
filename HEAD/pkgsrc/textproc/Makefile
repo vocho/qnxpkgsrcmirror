@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.387 2007/10/12 17:31:16 drochner Exp $
+# $NetBSD: Makefile,v 1.392 2007/12/12 08:35:53 obache Exp $
 #
 
 COMMENT=	Text processing utilities (does not include desktop publishing)
@@ -68,6 +68,7 @@ SUBDIR+=	dsssl-docbook-modular
 SUBDIR+=	dtdparse
 SUBDIR+=	eb
 SUBDIR+=	eblook
+SUBDIR+=	ebview
 SUBDIR+=	emacs-dict-client
 SUBDIR+=	emacs-muse
 SUBDIR+=	enca
@@ -127,6 +128,7 @@ SUBDIR+=	ja-groff
 SUBDIR+=	ja-sed
 SUBDIR+=	jade
 SUBDIR+=	java-mecab
+SUBDIR+=	jdom
 SUBDIR+=	jing
 SUBDIR+=	kakasi
 SUBDIR+=	kbanner
@@ -167,6 +169,7 @@ SUBDIR+=	p5-Data-FormValidator
 SUBDIR+=	p5-Encode
 SUBDIR+=	p5-Encode-Detect
 SUBDIR+=	p5-Feed-Find
+SUBDIR+=	p5-File-ReadBackwards
 SUBDIR+=	p5-Filter
 SUBDIR+=	p5-Lingua-EN-Inflect
 SUBDIR+=	p5-Lingua-EN-Numbers-Ordinate
@@ -342,7 +345,7 @@ SUBDIR+=	ruby-xmlscan
 SUBDIR+=	sablotron
 SUBDIR+=	saxon
 SUBDIR+=	scew
-SUBDIR+=	scrollkeeper
+#SUBDIR+=	scrollkeeper	# incomplete package (only provides omf.mk)
 SUBDIR+=	source-highlight
 SUBDIR+=	stardic
 SUBDIR+=	subtitleripper
@@ -360,6 +363,7 @@ SUBDIR+=	trang
 SUBDIR+=	troffcvt
 SUBDIR+=	unroff
 SUBDIR+=	untex
+SUBDIR+=	uriparser
 SUBDIR+=	urlview
 SUBDIR+=	vis
 SUBDIR+=	wdiff

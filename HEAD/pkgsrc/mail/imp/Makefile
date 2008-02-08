@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.42 2007/07/04 20:54:44 jlam Exp $
+# $NetBSD: Makefile,v 1.44 2007/12/01 23:15:11 adrianp Exp $
 
 DISTNAME=	imp-h3-${IMPVER}
 PKGNAME=	imp-${IMPVER}
+PKGREVISION=	1
 CATEGORIES=	mail www
 MASTER_SITES=	http://ftp.horde.org/pub/imp/ \
 		ftp://ftp.horde.org/pub/imp/
@@ -22,10 +23,11 @@ DOCDIR=		${PREFIX}/share/doc/imp
 EGDIR=		${PREFIX}/share/examples/imp
 HORDEDIR=	${PREFIX}/share/horde
 IMPDIR=		${HORDEDIR}/imp
-IMPVER=		4.1.4
+IMPVER=		4.1.5
 PAXDIRS=	lib locale po scripts templates themes
 
 PKG_USERS_VARS+=	APACHE_USER
+BUILD_DEFS+=		APACHE_USER
 
 MESSAGE_SUBST+=	IMPDIR=${IMPDIR:Q}
 MESSAGE_SUBST+=	PKG_SYSCONFDIR=${PKG_SYSCONFDIR:Q}
@@ -41,8 +43,8 @@ CONF_FILES_PERMS+=	${IMPDIR}/config/conf.xml.dist \
 CONF_FILES_PERMS+=	${IMPDIR}/config/filter.txt.dist \
 			${IMPDIR}/config/filter.txt \
 			${APACHE_USER} ${ROOT_GROUP} 0440
-CONF_FILES_PERMS+=	${IMPDIR}/config/header.txt.dist \
-			${IMPDIR}/config/header.txt \
+CONF_FILES_PERMS+=	${IMPDIR}/config/header.php.dist \
+			${IMPDIR}/config/header.php \
 			${APACHE_USER} ${ROOT_GROUP} 0440
 CONF_FILES_PERMS+=	${IMPDIR}/config/menu.php.dist \
 			${IMPDIR}/config/menu.php \
