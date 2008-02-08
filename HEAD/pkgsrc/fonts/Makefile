@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.108 2007/09/16 15:41:43 wiz Exp $
+# $NetBSD: Makefile,v 1.111 2007/12/11 13:17:40 obache Exp $
 #
 
 COMMENT=	Fonts
@@ -115,6 +115,7 @@ SUBDIR+=	mkfontdir
 SUBDIR+=	mkfontscale
 SUBDIR+=	mminstance
 SUBDIR+=	monafonts
+SUBDIR+=	monafonts-ttf
 SUBDIR+=	mozilla-fonts
 SUBDIR+=	mplayer-fonts
 SUBDIR+=	ms-ttf
@@ -133,6 +134,7 @@ SUBDIR+=	terminus-font
 SUBDIR+=	tex-uhc-fonts-base
 SUBDIR+=	tex-uhc-fonts-extra
 SUBDIR+=	tex-unttf
+SUBDIR+=	thaixfonts
 SUBDIR+=	ttf2pk
 SUBDIR+=	ttf2pt1
 SUBDIR+=	ttftot42
@@ -142,6 +144,7 @@ SUBDIR+=	un-core-ttf
 SUBDIR+=	un-extra-ttf
 SUBDIR+=	vera-ttf
 SUBDIR+=	vfontcap-kochi
+SUBDIR+=	vlgothic-ttf
 SUBDIR+=	watanabe_vfont
 SUBDIR+=	xmbdfed
 

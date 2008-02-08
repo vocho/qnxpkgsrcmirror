@@ -1,4 +1,4 @@
-# $NetBSD: install.mk,v 1.47 2007/09/13 09:44:58 rillig Exp $
+# $NetBSD: install.mk,v 1.50 2007/12/10 22:49:19 rillig Exp $
 #
 # This file provides the code for the "install" phase.
 #
@@ -28,6 +28,7 @@
 #	to ${PREFIX}. As a convenience, a leading man/ is transformed
 #	to ${PKGMANDIR}, to save package authors from typing too much.
 #
+# AUTO_MKDIRS
 # INSTALLATION_DIRS_FROM_PLIST
 #	In most (or even all?) cases the PLIST files in the package
 #	directory already contain all directories that are needed.
@@ -102,7 +103,6 @@ install-check-interactive: .PHONY
 	@${ERROR_MSG} "The installation stage of this package requires user interaction"
 	@${ERROR_MSG} "Please install manually with:"
 	@${ERROR_MSG} "	\"cd ${.CURDIR} && ${MAKE} install\""
-	${RUN} ${TOUCH} ${_INTERACTIVE_COOKIE}
 	${RUN} ${FALSE}
 .else
 	@${DO_NADA}
@@ -163,6 +163,8 @@ _INSTALL_ALL_TARGETS+=		check-files-pre
 _INSTALL_ALL_TARGETS+=		install-makedirs
 .if defined(INSTALLATION_DIRS_FROM_PLIST) && \
 	!empty(INSTALLATION_DIRS_FROM_PLIST:M[Yy][Ee][Ss])
+_INSTALL_ALL_TARGETS+=		install-dirs-from-PLIST
+.elif defined(AUTO_MKDIRS) && !empty(AUTO_MKDIRS:M[Yy][Ee][Ss])
 _INSTALL_ALL_TARGETS+=		install-dirs-from-PLIST
 .endif
 .if ${_USE_DESTDIR} == "no"

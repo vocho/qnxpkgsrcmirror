@@ -1,4 +1,4 @@
-# $NetBSD: emacs.mk,v 1.42 2007/08/08 08:12:12 dsainty Exp $
+# $NetBSD: emacs.mk,v 1.47 2007/11/12 01:58:24 uebayasi Exp $
 #
 # This Makefile fragment handles Emacs Lisp Packages (== ELPs).
 #
@@ -40,7 +40,7 @@
 #		Description:
 #			The user's favourite Emacs version.
 #		Possible values:
-#			emacs21, emacs21nox, emacs22, emacs22nox, emacs20, xemacs215, xemacs214
+#			emacs21, emacs21nox, emacs22, emacs22nox, emacs20, xemacs215, xemacs215nox, xemacs214, xemacs214nox
 #		Default value:
 #			emacs21
 #
@@ -59,9 +59,9 @@
 #		Description:
 #			Versions the ELP accepts (supports).
 #		Possible values:
-#			emacs21, emacs21nox, emacs22, emacs22nox, emacs20, xemacs215, xemacs214
+#			emacs21, emacs21nox, emacs22, emacs22nox, emacs20, xemacs215, xemacs215nox, xemacs214, xemacs214nox
 #		Default value:
-#			emacs21, emacs21nox, emacs22, emacs22nox, emacs20, xemacs215, xemacs214
+#			emacs21, emacs21nox, emacs22, emacs22nox, emacs20, xemacs215, xemacs215nox, xemacs214, xemacs214nox
 #
 # Variables provided for ELPs:
 #
@@ -155,7 +155,7 @@
 #		Possible values:
 #			XXX
 #
-#	FOR_{emacs,emacs21,emacs21nox,emacs22,emacs22nox,emacs20,xemacs,xemacs215,xemacs214}
+#	FOR_{emacs,emacs21,emacs21nox,emacs22,emacs22nox,emacs20,xemacs,xemacs215,xemacs215nox,xemacs214,xemacs214nox}
 #		Description:
 #			These macros will become either an empty string or
 #			"@comment" depending on the Emacs version; when
@@ -167,9 +167,15 @@
 #		Possible values:
 #			"", "@comment"
 #
-#	NOTFOR_{emacs,emacs21,emacs21nox,emacs22,emacs22nox,emacs20,xemacs,xemacs215,xemacs214}
+#	NOTFOR_{emacs,emacs21,emacs21nox,emacs22,emacs22nox,emacs20,xemacs,xemacs215,xemacs215nox,xemacs214,xemacs214nox}
 #		Description:
 #			The opposite of FOR_*.  See above.
+#		Possible values:
+#			"", "@comment"
+#
+#	FOR_emacs_{x,nox},NOTFOR_emacs_{x,nox}
+#		Description:
+#			PLIST switches for X11 / non-X11.
 #		Possible values:
 #			"", "@comment"
 #
@@ -184,6 +190,7 @@ _SYS_VARS.emacs=	EMACS_BIN EMACS_ETCPREFIX EMACS_FLAVOR \
 			EMACS_INFOPREFIX EMACS_LISPPREFIX \
 			EMACS_PKGNAME_PREFIX \
 			EMACS_VERSION_MAJOR EMACS_VERSION_MINOR
+_DEF_VARS.emacs=	_EMACS_TYPE _EMACS_PKGBASE _EMACS_VERSION_FULL _EMACS_BLNK
 BUILD_DEFS+=		${_USER_VARS.emacs}
 BUILD_DEFS_EFFECTS+=	${_SYS_VARS.emacs}
 
@@ -194,7 +201,7 @@ BUILD_DEFS_EFFECTS+=	${_SYS_VARS.emacs}
 #
 
 _EMACS_VERSIONS_ALL= \
-	emacs20 emacs21 emacs21nox emacs22 emacs22nox xemacs214 xemacs215
+	emacs20 emacs21 emacs21nox emacs22 emacs22nox xemacs214 xemacs214nox xemacs215 xemacs215nox
 _EMACS_VERSIONS_ACCEPTED_DEFAULT=	${_EMACS_VERSIONS_ALL}
 _EMACS_VERSION_DEFAULT.emacs=	emacs21
 _EMACS_VERSION_DEFAULT.xemacs=	xemacs214
@@ -203,15 +210,41 @@ _EMACS_REQD.emacs21=	emacs>=21.2<22
 _EMACS_REQD.emacs21nox=	emacs-nox11>=21.2<22
 _EMACS_REQD.emacs22=	emacs>=22
 _EMACS_REQD.emacs22nox=	emacs-nox11>=22
-_EMACS_REQD.xemacs214=	xemacs>=21.4<22
-_EMACS_REQD.xemacs215=	xemacs>=21.5<22
+_EMACS_REQD.xemacs214=	xemacs>=21.4<21.5
+_EMACS_REQD.xemacs214nox=	xemacs-nox11>=21.4<21.5
+_EMACS_REQD.xemacs215=	xemacs>=21.5<21.6
+_EMACS_REQD.xemacs215nox=	xemacs-nox11>=21.5<21.6
+_LEIM_REQD.emacs20=	leim>=20.${EMACS_VERSION_MINOR}<21
+_LEIM_REQD.emacs20nox=	${_LEIM_REQD.emacs20}
+_LEIM_REQD.emacs21=	leim>=21.${EMACS_VERSION_MINOR}<22
+_LEIM_REQD.emacs21nox=	${_LEIM_REQD.emacs21}
+_LEIM_REQD.emacs22=	# nothing
+_LEIM_REQD.emacs22nox=	${_LEIM_REQD.emacs22}
 _EMACS_DEP.emacs20=	../../editors/emacs20
 _EMACS_DEP.emacs21=	../../editors/emacs21
 _EMACS_DEP.emacs21nox=	../../editors/emacs21-nox11
 _EMACS_DEP.emacs22=	../../editors/emacs
 _EMACS_DEP.emacs22nox=	../../editors/emacs-nox11
 _EMACS_DEP.xemacs214=	../../editors/xemacs
+_EMACS_DEP.xemacs214nox=../../editors/xemacs-nox11
 _EMACS_DEP.xemacs215=	../../editors/xemacs-current
+_EMACS_DEP.xemacs215nox=../../editors/xemacs-current-nox11
+_LEIM_DEP.emacs20=	../../editors/leim20
+_LEIM_DEP.emacs20nox=	${_LEIM_DEP.emacs20}
+_LEIM_DEP.emacs21=	../../editors/leim21
+_LEIM_DEP.emacs21nox=	${_LEIM_DEP.emacs21}
+_LEIM_DEP.emacs22=
+_LEIM_DEP.emacs20nox=	${_LEIM_DEP.emacs22}
+
+_EMACS_BLNK.emacs20=	../../editors/emacs20/buildlink3.mk
+_EMACS_BLNK.emacs21=	../../editors/emacs21/buildlink3.mk
+_EMACS_BLNK.emacs21nox=	../../editors/emacs21-nox11/buildlink3.mk
+_EMACS_BLNK.emacs22=	../../editors/emacs/buildlink3.mk
+_EMACS_BLNK.emacs22nox=	../../editors/emacs-nox11/buildlink3.mk
+_EMACS_BLNK.xemacs214=	../../editors/xemacs/buildlink3.mk
+_EMACS_BLNK.xemacs214nox=	../../editors/xemacs-nox11/buildlink3.mk
+_EMACS_BLNK.xemacs215=	../../editors/xemacs-current/buildlink3.mk
+_EMACS_BLNK.xemacs215nox=	../../editors/xemacs-current-nox11/buildlink3.mk
 
 #
 # Version decision
@@ -235,7 +268,7 @@ _EMACS_DEP.xemacs215=	../../editors/xemacs-current
 #		abort;
 #
 
-.if !empty(EMACS_TYPE:Memacs) || !empty(EMACS_TYPE:Mxemacs)
+.if ${EMACS_TYPE} == "emacs" || ${EMACS_TYPE} == "xemacs"
 _EMACS_TYPE=	${_EMACS_VERSION_DEFAULT.${EMACS_TYPE}}
 .endif
 _EMACS_TYPE?=	${EMACS_TYPE}
@@ -315,6 +348,11 @@ PLIST_SUBST+=	FOR_${e}="" NOTFOR_${e}="@comment "
 PLIST_SUBST+=	FOR_${e}="@comment " NOTFOR_${e}=""
 .  endif
 .endfor
+.if empty(EMACS_TYPE:M*nox)
+PLIST_SUBST+=	FOR_emacs_x="" NOTFOR_emacs_nox="@comment " FOR_emacs_nox="@comment " NOTFOR_emacs_nox="" 
+.else
+PLIST_SUBST+=	FOR_emacs_x="@comment " NOTFOR_emacs_nox="" FOR_emacs_nox="" NOTFOR_emacs_nox="@comment " 
+.endif
 
 PLIST_SUBST+=	EMACS_FLAVOR=${EMACS_FLAVOR:Q}
 PLIST_SUBST+=	EMACS_VERSION=${_EMACS_VERSION_NOREV:Q}
@@ -337,16 +375,22 @@ _EMACS_PKGDEP.${_EMACS_TYPE},base?=	\
 .endif
 
 # "leim" - input methods for international character sets
-.if !empty(_EMACS_TYPE:Mxemacs*) || !empty(_EMACS_TYPE:Memacs20*)
-_EMACS_PKGDEP.${_EMACS_TYPE},leim?=	leim>=20.7:../../editors/leim20
-.elif !empty(_EMACS_TYPE:Mxemacs*) || !empty(_EMACS_TYPE:Memacs21*)
-_EMACS_PKGDEP.${_EMACS_TYPE},leim?=	leim>=21.2:../../editors/leim
-.elif !empty(_EMACS_TYPE:Mxemacs*) || !empty(_EMACS_TYPE:Memacs22*)
-_EMACS_PKGDEP.${_EMACS_TYPE},leim?=	# nothing
-.endif
+_EMACS_PKGDEP.${_EMACS_TYPE},leim=	\
+		${_LEIM_REQD.${_EMACS_TYPE}}:${_LEIM_DEP.${_EMACS_TYPE}}
 
 .for _mod_ in ${EMACS_MODULES}
+.if ${_EMACS_PKGDEP.${_EMACS_TYPE},${_mod_}} != ":"
 DEPENDS+=	${_EMACS_PKGDEP.${_EMACS_TYPE},${_mod_}}
+.endif
 .endfor
+
+#
+# Build environment (buildlink3)
+#
+
+_EMACS_DIR=	${BUILDLINK_DIR}/share/emacs
+ALL_ENV+=	EMACSLOADPATH=${_EMACS_DIR}/${_EMACS_VERSION_NOREV}/lisp:${_EMACS_DIR}/site-lisp
+
+.include	"${_EMACS_BLNK.${_EMACS_TYPE}}"
 
 .endif	# EMACS_MK

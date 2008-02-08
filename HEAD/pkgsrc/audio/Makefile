@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.363 2007/09/19 23:33:09 wiz Exp $
+# $NetBSD: Makefile,v 1.366 2007/11/23 00:41:22 bjs Exp $
 #
 
 COMMENT=	Audio tools
@@ -131,6 +131,7 @@ SUBDIR+=	gtick
 SUBDIR+=	gtkmserv
 SUBDIR+=	gtkpod
 SUBDIR+=	guspatches
+SUBDIR+=	herrie
 SUBDIR+=	hydrogen
 SUBDIR+=	icecast
 SUBDIR+=	icecast1
@@ -176,6 +177,7 @@ SUBDIR+=	libshout
 SUBDIR+=	libsidplay
 SUBDIR+=	libsidplay2
 SUBDIR+=	libsndfile
+SUBDIR+=	libspiff
 SUBDIR+=	libtunepimp
 SUBDIR+=	libvisual
 SUBDIR+=	libvisual-bmp
@@ -271,6 +273,7 @@ SUBDIR+=	rip
 SUBDIR+=	rosegarden
 SUBDIR+=	rplay
 SUBDIR+=	rsynth
+SUBDIR+=	rtunes
 SUBDIR+=	shntool
 SUBDIR+=	shorten
 SUBDIR+=	sidplay

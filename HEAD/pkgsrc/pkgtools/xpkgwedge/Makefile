@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.71 2006/10/09 12:52:36 joerg Exp $
+# $NetBSD: Makefile,v 1.74 2007/12/16 12:43:50 tron Exp $
 
 DISTNAME=	xpkgwedge-1.16
 CATEGORIES=	pkgtools devel x11
@@ -8,6 +8,7 @@ DISTFILES=	# empty
 MAINTAINER=	jlam@pkgsrc.org
 HOMEPAGE=	ftp://ftp.NetBSD.org/pub/NetBSD/packages/pkgsrc/doc/pkgsrc.html
 COMMENT=	Allows X11 pkgs to be built and used outside of $${X11BASE}
+#LICENSE=	original-bsd
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
 PKG_DESTDIR_SUPPORT=	user-destdir
@@ -43,10 +44,12 @@ FILES_SUBST+=		FONT_PROGS=${FONT_PROGS:Q}
 FILES_SUBST+=		MAKE=${IMAKE_MAKE:Q}
 USE_TOOLS+=		${IMAKE_TOOLS}
 
-.if ${OPSYS} == "Darwin"
+.if !empty(MACHINE_PLATFORM:MDarwin-[0-8].*-*)
+APPLY_DARWIN_PATCH=	${TRUE}
 PLIST_SUBST+=		IS_DARWIN=
 USE_TOOLS+=		patch
 .else
+APPLY_DARWIN_PATCH=	${FALSE}
 PLIST_SUBST+=		IS_DARWIN="@comment "
 .endif
 
@@ -99,8 +102,10 @@ do-install:
 	${INSTALL_SCRIPT} ${WRKSRC}/pkgxmkmf ${DESTDIR}${PREFIX}/bin/pkgxmkmf
 	@case ${OPSYS} in \
 	Darwin) \
-	${INSTALL_DATA} ${X11BASE}/lib/X11/config/darwin.cf ${DESTDIR}${PREFIX}/lib/X11/config; \
-	cd ${DESTDIR}${PREFIX}/lib/X11/config && patch ${PATCH_STRIP} < ${FILESDIR}/darwin.cf.patch; \
+	if ${APPLY_DARWIN_PATCH}; then \
+	  ${INSTALL_DATA} ${X11BASE}/lib/X11/config/darwin.cf ${DESTDIR}${PREFIX}/lib/X11/config; \
+	  cd ${DESTDIR}${PREFIX}/lib/X11/config && patch ${PATCH_STRIP} < ${FILESDIR}/darwin.cf.patch; \
+	fi; \
 	;; \
 	IRIX) \
 	${INSTALL_DATA} ${X11BASE}/lib/X11/config/sgi.cf ${DESTDIR}${PREFIX}/lib/X11/config; \

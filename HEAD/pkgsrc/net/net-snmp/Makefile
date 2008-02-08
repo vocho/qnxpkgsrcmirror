@@ -1,9 +1,8 @@
-# $NetBSD: Makefile,v 1.63 2007/08/12 13:36:36 joerg Exp $
+# $NetBSD: Makefile,v 1.66 2007/11/23 21:29:17 adrianp Exp $
 
 DISTNAME=	net-snmp-5.4.1
 CATEGORIES=	net
-MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=net-snmp/} \
-		ftp://ftp.net-smnp.org/pub/sourceforge/net-snmp/
+MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=net-snmp/}
 
 MAINTAINER=	adam@NetBSD.org
 HOMEPAGE=	http://www.net-snmp.org/
@@ -77,6 +76,13 @@ CONFIGURE_ARGS+=	--with-mib-modules="smux host"
 .if !empty(MACHINE_PLATFORM:MDarwin-[567].*)
 CONFIGURE_ARGS+=	--with-out-mib-modules="ucd-snmp/diskio mibII"
 .endif
+.if !empty(MACHINE_PLATFORM:MDarwin-9.*)
+CONFIGURE_ARGS+=	--with-mib-modules="host ucd-snmp/diskio"
+CONFIGURE_ARGS+=	--with-out-mib-modules="mibII/icmp host/hr_swrun"
+CONFIGURE_ARGS+=	--enable-as-needed
+CONFIGURE_ARGS+=	--without-kmem-usage
+CONFIGURE_ARGS+=	--without-rpm
+.endif
 #
 # Using "dummy" values is technically not compliant with SNMP specs, but
 # otherwise, some tools, e.g. net/tcl-scotty, net/tkined, may ignore results
@@ -126,6 +132,8 @@ post-wrapper:
 post-install:
 	${INSTALL_DATA} ${WRKSRC}/EXAMPLE.conf	\
 		${PREFIX}/share/examples/net-snmp/EXAMPLE.conf
+	${INSTALL_SCRIPT} ${WRKSRC}/agent/snmp_perl.pl \
+		${PREFIX}/share/snmp/
 
 .include "../../lang/perl5/module.mk"
 .include "../../security/tcp_wrappers/buildlink3.mk"

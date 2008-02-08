@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.12 2005/12/29 06:22:12 jlam Exp $
+# $NetBSD: Makefile,v 1.14 2007/12/02 12:29:02 wiz Exp $
 #
 
 DISTNAME=	pdksh-5.2.14
@@ -7,9 +7,7 @@ CATEGORIES=	shells
 MASTER_SITES=	ftp://ftp.cs.mun.ca/pub/pdksh/ \
 		http://gd.tuwien.ac.at/utils/shells/pdksh/ \
 		ftp://ftp.lip6.fr/pub/unix/shells/pdksh/ \
-		ftp://ftp.demon.net/pub/mirrors/pdksh/ \
-		ftp://ftp.rge.com/pub/shells/pdksh/ \
-		ftp://pink.seudns.net/pub/mirrors/pdksh/
+		ftp://ftp.demon.net/pub/mirrors/pdksh/
 
 MAINTAINER=	schmonz@NetBSD.org
 HOMEPAGE=	http://web.cs.mun.ca/~michael/pdksh/

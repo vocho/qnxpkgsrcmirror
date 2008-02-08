@@ -1,10 +1,8 @@
-# $NetBSD: Makefile,v 1.5 2007/01/07 09:14:10 rillig Exp $
+# $NetBSD: Makefile,v 1.7 2007/12/02 12:21:18 wiz Exp $
 
 DISTNAME=		hackbot-2.15
 CATEGORIES=		security net
-MASTER_SITES=		http://ws.obit.nl/hackbot/ \
-			http://www.xs4all.nl/~mvberkum/hackbot/ \
-			http://webs.uolsinectis.com.ar/gbarosio/hackbot/
+MASTER_SITES=		http://www.xs4all.nl/~mvberkum/hackbot/
 EXTRACT_SUFX=		.tgz
 
 MAINTAINER=		nk@atki.net

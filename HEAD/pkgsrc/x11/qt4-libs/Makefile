@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.14 2007/10/13 12:02:14 adam Exp $
+# $NetBSD: Makefile,v 1.20 2007/12/17 22:19:43 adam Exp $
 
 .include "../../x11/qt4-libs/Makefile.common"
 
@@ -14,7 +14,9 @@ BUILDLINK_PASSTHRU_DIRS+= ${QTPREFIX}
 
 PLIST_SRC=		${WRKDIR}/PLIST ${PKGDIR}/PLIST
 
+# built as plugins
 CONFIGURE_ARGS+=	-no-sql-sqlite
+CONFIGURE_ARGS+=	-no-libtiff
 
 do-install:
 	${INSTALL_DATA_DIR} ${QTPREFIX}
@@ -34,8 +36,12 @@ do-install:
 .for lib in Qt3Support QtCore QtGui QtNetwork QtOpenGL QtSql QtSvg QtXml QtScript
 	${LIBTOOL} --mode=install ${INSTALL_LIB} ${WRKSRC}/lib/lib${lib}.la \
 		${QTPREFIX}/lib/
-	${INSTALL_DATA} ${WRKSRC}/lib/pkgconfig/${lib}.pc ${PREFIX}/lib/pkgconfig/
+	sed	-e "s:${WRKSRC}:${QTPREFIX}:g" \
+		-e "s:${QTPREFIX}/lib/lib\([A-Za-z3]*\)\.la:-l\1:g" \
+		${WRKSRC}/lib/pkgconfig/${lib}.pc > ${WRKDIR}/${lib}.pc
+	${INSTALL_DATA} ${WRKDIR}/${lib}.pc ${PREFIX}/lib/pkgconfig/
 .endfor
+	${INSTALL_DATA} ${WRKSRC}/tools/porting/src/q3porting.xml ${QTPREFIX}
 	${INSTALL_LIB_DIR} ${QTPREFIX}/plugins
 	${INSTALL_LIB_DIR} ${QTPREFIX}/plugins/accessible
 .for plug in qtaccessiblecompatwidgets qtaccessiblewidgets

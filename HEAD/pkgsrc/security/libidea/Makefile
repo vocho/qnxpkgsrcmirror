@@ -1,12 +1,11 @@
-# $NetBSD: Makefile,v 1.11 2006/03/04 21:30:34 jlam Exp $
+# $NetBSD: Makefile,v 1.13 2007/12/02 12:22:10 wiz Exp $
 #
 
 DISTNAME=	libidea-0.8.2b
 CATEGORIES=	security
 MASTER_SITES=	ftp://ftp.psy.uq.oz.au/pub/Crypto/libeay/ \
 		ftp://ftp.funet.fi/pub/mirrors/ftp.psy.uq.oz.au/libeay/ \
-		ftp://ftp.ntnu.no/pub/unix/security/ \
-		ftp://ftp.sunsite.org.uk/Mirrors/ftp.psy.uq.oz.au/pub/Crypto/libeay/
+		ftp://ftp.ntnu.no/pub/unix/security/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.media-crypt.com/pages/fidea.html
@@ -14,7 +13,7 @@ COMMENT=	IDEA block cipher library
 
 WRKSRC=		${WRKDIR}/idea
 CRYPTO=		YES
-LICENCE=	idea-license
+LICENSE=	idea-license
 RESTRICTED=	IDEA is a patented algorithm that requires proper licensing
 NO_SRC_ON_CDROM=${RESTRICTED}
 NO_BIN_ON_CDROM=${RESTRICTED}

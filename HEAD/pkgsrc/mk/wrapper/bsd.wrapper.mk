@@ -1,4 +1,4 @@
-# $NetBSD: bsd.wrapper.mk,v 1.72 2007/09/20 18:17:18 rillig Exp $
+# $NetBSD: bsd.wrapper.mk,v 1.75 2007/11/28 14:45:22 rillig Exp $
 #
 # Copyright (c) 2005 The NetBSD Foundation, Inc.
 # All rights reserved.
@@ -370,9 +370,11 @@ _WRAP_CACHE_BODY.IMAKE=	${WRAPPER_TMPDIR}/cache-body-solaris-imake
 .endif
 
 # Filter to scrunch shell scripts by removing comments and empty lines.
-_WRAP_SH_CRUNCH_FILTER=							\
-	${GREP} -v "^\#[^!]" | ${GREP} -v "^[ 	][ 	]*\#" |		\
-	${GREP} -v "^\#$$" | ${GREP} -v "^[ 	]*$$"
+_WRAP_SH_CRUNCH_FILTER= ${AWK} ' \
+		/^\#!/ { print } \
+		/^[[:space:]]*\#/ || NF == 0 { next } \
+		/.*/ { print } \
+		'
 
 _WRAP_SUBST_SED=							\
 	-e "s|@ABI@|${ABI:Q}|g"						\
@@ -624,7 +626,7 @@ ${_WRAP_BUILDCMD.${_wrappee_}}: ${WRAPPER_SRCDIR}/buildcmd
 .  if !target(${_WRAP_CACHE.${_wrappee_}})
 ${_WRAP_CACHE.${_wrappee_}}:
 	${RUN} ${MKDIR} ${.TARGET:H}
-	${RUN} echo "cachehit=no" > ${.TARGET}
+	${RUN} echo "cache_lookup() { cachehit=no; }" > ${.TARGET}
 .  endif
 
 .  if !target(${_WRAP_CACHE_BODY.${_wrappee_}})

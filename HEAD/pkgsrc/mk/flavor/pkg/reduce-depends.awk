@@ -1,6 +1,6 @@
 #!/usr/bin/awk -f
 #
-# $NetBSD: reduce-depends.awk,v 1.5 2007/09/27 11:11:32 rillig Exp $
+# $NetBSD: reduce-depends.awk,v 1.7 2007/11/22 09:54:41 rillig Exp $
 #
 # Copyright (c) 2006 The NetBSD Foundation, Inc.
 # All rights reserved.
@@ -77,6 +77,10 @@ BEGIN {
 	for (i = 1; i < ARGC; i++) {
 		pattern = ARGV[i];	sub(":.*", "", pattern)
 		dir = ARGV[i];		sub(".*:", "", dir)
+		if (pattern ":" dir != ARGV[i]) {
+			print "ERROR: [" PROGNAME "] invalid dependency pattern: " ARGV[i] | ERRCAT
+			exit 1
+		}
 		cmd = TEST " -d " dir
 		if (system(cmd) == 0) {
 			cmd = "cd " dir " && " PWD_CMD
@@ -108,6 +112,7 @@ BEGIN {
 	for (p = 0; p < P; p++) {
 		pkgpath = pkgpaths[p]
 		D = depends[pkgpath, 0];
+		match_all = 1;
 		for (d = 1; d <= D; d++) {
 			dep = depends[pkgpath, d]
 			if (dep ~ /[{]/ || \

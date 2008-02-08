@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.13 2006/05/11 11:19:44 smb Exp $
+# $NetBSD: Makefile,v 1.15 2007/12/20 20:37:21 jdolecek Exp $
 
 DISTNAME=	qca-1.0
 PKGREVISION=	3

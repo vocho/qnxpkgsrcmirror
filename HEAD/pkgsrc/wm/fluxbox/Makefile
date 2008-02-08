@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.44 2007/10/15 09:17:31 rillig Exp $
+# $NetBSD: Makefile,v 1.46 2007/11/04 15:34:08 rillig Exp $
 #
 
 DISTNAME=	fluxbox-1.0.0
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	wm x11
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=fluxbox/}
 EXTRACT_SUFX=	.tar.bz2
@@ -28,14 +28,10 @@ CONFIGURE_ARGS+=	--enable-xinerama
 
 .include "options.mk"
 
-SUBST_CLASSES+=		cmds
-SUBST_STAGE.cmds=	post-build
-SUBST_MESSAGE.cmds=	Fixing command names in data files.
-SUBST_SED.cmds=		-e 's|bsetroot|fbsetroot|g'
-SUBST_FILES.cmds=	data/README.style data/styles/Artwiz\
-                        data/styles/MerleyKay data/styles/Outcomes\
-		       	data/styles/Rampage data/styles/Results\
-		       	data/styles/Spiff
+.include "../../mk/compiler.mk"
+.if !empty(PKGSRC_COMPILER:Msunpro)
+CXXFLAGS+=		-template=no%extdef
+.endif
 
 BUILDLINK_DEPMETHOD.libXt?=	build
 

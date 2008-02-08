@@ -1,5 +1,5 @@
 #! @PERL@
-# $NetBSD: pkglint.pl,v 1.721 2007/10/13 08:55:48 rillig Exp $
+# $NetBSD: pkglint.pl,v 1.740 2007/12/19 12:34:08 rillig Exp $
 #
 
 # pkglint - static analyzer and checker for pkgsrc packages
@@ -1836,6 +1836,9 @@ my $seen_bsd_prefs_mk;		# Has bsd.prefs.mk already been included?
 my $pkgctx_vardef;		# { varname => line }
 my $pkgctx_varuse;		# { varname => line }
 my $pkgctx_bl3;			# buildlink3.mk name => line of inclusion
+my $pkgctx_plist_subst_cond;	# { varname => 1 } list of all variables
+				# that are used as conditionals (@comment
+				# or nothing) in PLISTs.
 my $seen_Makefile_common;	# Does the package have any .includes?
 
 # Context of the Makefile that is currently checked.
@@ -3247,12 +3250,14 @@ sub variable_needs_quoting($$$) {
 	my $type = get_variable_type($line, $varname);
 	my ($want_list, $have_list);
 
+	$opt_debug_trace and $line->log_debug("variable_needs_quoting($varname, " . $context->to_string() . ")");
+
 	use constant safe_types => array_to_hash(qw(
 		DistSuffix
-		Filemask FileMode Filename
+		FileMode Filename
 		Identifier
 		Option
-		Pathmask Pathname PkgName PkgOptionsVar PkgRevision
+		Pathname PkgName PkgOptionsVar PkgRevision
 		RelativePkgDir RelativePkgPath
 		URL UserGroupName
 		Varname Version
@@ -3267,10 +3272,10 @@ sub variable_needs_quoting($$$) {
 	# enumerations, are expected to not require the :Q operator.
 	if (ref($type->basic_type) eq "HASH" || exists(safe_types->{$type->basic_type})) {
 		if ($type->kind_of_list == LK_NONE) {
-			return doesnt_matter;
+			return false;
 
 		} elsif ($type->kind_of_list == LK_EXTERNAL && $context->extent != VUC_EXTENT_WORD_PART) {
-			return doesnt_matter;
+			return false;
 		}
 	}
 
@@ -3709,7 +3714,7 @@ sub checkline_rcsid_regex($$$) {
 
 	$opt_debug_trace and $line->log_debug("checkline_rcsid_regex(${prefix_regex}, ${prefix})");
 
-	if ($line->text !~ qr"^${prefix_regex}\$(${id})(?::[^\$]*|)\$$") {
+	if ($line->text !~ qr"^${prefix_regex}\$(${id})(?::[^\$]+|)\$$") {
 		$line->log_error("\"${prefix}\$${opt_rcsidstring}\$\" expected.");
 		return false;
 	}
@@ -4007,7 +4012,7 @@ sub checkline_mk_varuse($$$$) {
 		} elsif ($type->kind_of_list == LK_INTERNAL) {
 			# Fine.
 
-		} elsif ($needs_quoting == doesnt_matter) {
+		} elsif ($needs_quoting == doesnt_matter || $needs_quoting == false) {
 			# Fine, these variables are assumed to not
 			# contain special characters.
 
@@ -4054,9 +4059,12 @@ sub checkline_mk_varuse($$$$) {
 		if ($needs_quoting == false && $mod =~ qr":Q$") {
 			$line->log_warning("The :Q operator should not be used for \${${varname}} here.");
 			$line->explain_warning(
-"When a variable of type ShellWord appears in a context that expects",
-"a shell word, it does not need to have a :Q operator. Even when it",
-"is concatenated with another variable, it still stays _one_ word.",
+"Many variables in pkgsrc do not need the :Q operator, since they",
+"are not expected to contain white-space or other evil characters.",
+"",
+"Another case is when a variable of type ShellWord appears in a context",
+"that expects a shell word, it does not need to have a :Q operator. Even",
+"when it is concatenated with another variable, it still stays _one_ word.",
 "",
 "Example:",
 "\tWORD1=  Have\\ fun             # 1 word",
@@ -4173,7 +4181,7 @@ sub checkline_mk_shellword($$$) {
 		# reasonable to check the whole shell command
 		# recursively, instead of splitting off the first
 		# make(1) variable (see the elsif below).
-		if ($state == SWST_BACKT) {
+		if ($state == SWST_BACKT || $state == SWST_DQUOT_BACKT) {
 
 			# Scan for the end of the backticks, checking
 			# for single backslashes and removing one level
@@ -4185,19 +4193,29 @@ sub checkline_mk_shellword($$$) {
 			my $stripped = "";
 			while ($rest ne "") {
 				if ($rest =~ s/^\`//) {
-					last;
+					$state = ($state == SWST_BACKT) ? SWST_PLAIN : SWST_DQUOT;
+					goto end_of_backquotes;
 				} elsif ($rest =~ s/^\\([\\\`\$])//) {
 					$stripped .= $1;
 				} elsif ($rest =~ s/^(\\)//) {
 					$line->log_warning("Backslashes should be doubled inside backticks.");
 					$stripped .= $1;
+				} elsif ($state == SWST_DQUOT_BACKT && $rest =~ s/^"//) {
+					$line->log_warning("Double quotes inside backticks inside double quotes are error prone.");
+					$line->explain_warning(
+"According to the SUSv3, they produce undefined results.",
+"",
+"See the paragraph starting \"Within the backquoted ...\" in",
+"http://www.opengroup.org/onlinepubs/009695399/utilities/xcu_chap02.html");
 				} elsif ($rest =~ s/^([^\\\`]+)//) {
 					$stripped .= $1;
 				} else {
 					assert(false, "rest=$rest");
 				}
 			}
+			$line->log_error("Unfinished backquotes: rest=$rest");
 
+		end_of_backquotes:
 			# Check the resulting command.
 			checkline_mk_shelltext($line, $stripped);
 
@@ -4268,6 +4286,14 @@ sub checkline_mk_shellword($$$) {
 			}
 
 		} elsif ($state == SWST_PLAIN) {
+
+			if ($rest =~ qr"([\w_]+)=\"\`") {
+				$line->log_note("In the assignment to \"$1\", you don't need double quotes around backticks.");
+				$line->explain_note(
+"Assignments are a special context, where no double quotes are needed",
+"around backticks. In other contexts, the double quotes are necessary.");
+			}
+
 			if ($rest =~ s/^[!#\%&\(\)*+,\-.\/0-9:;<=>?\@A-Z\[\]^_a-z{|}~]+//) {
 			} elsif ($rest =~ s/^\'//) {
 				$state = SWST_SQUOT;
@@ -4317,6 +4343,8 @@ sub checkline_mk_shellword($$$) {
 		} elsif ($state == SWST_DQUOT) {
 			if ($rest =~ s/^\"//) {
 				$state = SWST_PLAIN;
+			} elsif ($rest =~ s/^\`//) {
+				$state = SWST_DQUOT_BACKT;
 			} elsif ($rest =~ s/^[^\$"\\\`]+//) {
 			} elsif ($rest =~ s/^\\(?:[\\\"\`]|\$\$)//) {
 			} elsif ($rest =~ s/^\$\$\{([0-9A-Za-z_]+)\}//
@@ -4534,7 +4562,7 @@ sub checkline_mk_shelltext($$) {
 					$line->log_warning("The \"${plain_tool}\" tool is used but not added to USE_TOOLS.");
 				}
 
-				if (defined($mkctx_target) && $mkctx_target =~ qr"^(?:pre|do|post)-") {
+				if (defined($mkctx_target) && $mkctx_target =~ qr"^(?:pre|do|post)-(?:extract|patch|wrapper|configure|build|install|package|clean)$") {
 					if (!exists(get_required_vartool_varnames()->{$vartool})) {
 						$opt_warn_extra and $line->log_note("You can write \"${plain_tool}\" instead of \"${shellword}\".");
 						$opt_warn_extra and $line->explain_note(
@@ -4947,29 +4975,34 @@ sub checkline_mk_vartype_basic($$$$$$$$) {
 		if ($value =~ qr"^(${regex_pkgbase})(<|=|>|<=|>=|!=)(${regex_pkgversion})$") {
 			my ($depbase, $op, $depversion) = ($1, $2, $3);
 
-		} elsif ($value =~ qr"^(${regex_pkgbase})-(\[.*\]\*|\d.*|\*)$") {
-			my ($depbase, $depversion) = ($1, $2);
+		} elsif ($value =~ qr"^(${regex_pkgbase})-(?:\[(.*)\]\*|(\d+(?:\.\d+)*(?:\.\*)?)(\{,nb\*\}|\*|)|(.*))?$") {
+			my ($depbase, $bracket, $version, $version_wildcard, $other) = ($1, $2, $3, $4, $5);
 
-			if ($depversion eq "*") {
+			if (defined($bracket)) {
+				if ($bracket ne "0-9") {
+					$line->log_warning("Only [0-9]* is allowed in the numeric part of a dependency.");
+				}
+
+			} elsif (defined($version) && defined($version_wildcard) && $version_wildcard ne "") {
+				# Great.
+
+			} elsif (defined($version)) {
+				$line->log_warning("Please append {,nb*} to the version number of this dependency.");
+				$line->explain_warning(
+"Usually, a dependency should stay valid when the PKGREVISION is",
+"increased, since those changes are most often editorial. In the",
+"current form, the dependency only matches if the PKGREVISION is",
+"undefined.");
+
+			} elsif ($other eq "*") {
 				$line->log_warning("Please use ${depbase}-[0-9]* instead of ${depbase}-*.");
 				$line->explain_warning(
 					"If you use a * alone, the package specification may match other",
 					"packages that have the same prefix, but a longer name. For example,",
 					"foo-* matches foo-1.2, but also foo-client-1.2 and foo-server-1.2.");
 
-			} elsif ($depversion =~ qr"^\[.*\]$") {
-				if ($depversion ne "[0-9]*") {
-					$line->log_warning("Only [0-9]* is allowed in the numeric part of a dependency.");
-				}
-
-			} elsif ($depversion !~ qr"\[" && $depversion !~ qr"\.\*$") {
-				$line->log_warning("Error-prone dependency pattern \"${depversion}\".");
-				$line->explain_warning(
-					"Instead of 3*, you should either write write 3{,nb*} or 3.* if you",
-					"meant that. Otherwise, maybe you meant \"package>=3\"?");
-
 			} else {
-				# Great.
+				$line->log_warning("Unknown dependency pattern \"${value}\".");
 			}
 
 		} elsif ($value =~ qr"\{") {
@@ -5724,6 +5757,12 @@ sub checkline_mk_varassign($$$$$) {
 			"append that variable with PLIST_SUBST+= \${MY_PLIST_SUBST}.");
 	}
 
+	# Mark the variable as PLIST condition. This is later used in
+	# checkfile_PLIST.
+	if (defined($pkgctx_plist_subst_cond) && $value =~ qr"(.+)=.*\@comment.*") {
+		$pkgctx_plist_subst_cond->{$1}++;
+	}
+
 	use constant op_to_use_time => {
 		":="	=> VUC_TIME_LOAD,
 		"!="	=> VUC_TIME_LOAD,
@@ -5742,6 +5781,15 @@ sub checkline_mk_varassign($$$$$) {
 	foreach my $used_var (@{$used_vars}) {
 		checkline_mk_varuse($line, $used_var, "", $vuc);
 	}
+}
+
+# The bmake parser is way too sloppy about syntax, so we need to check
+# that here.
+#
+sub checkline_mk_cond($$) {
+	my ($line, $cond) = @_;
+
+	$opt_debug_trace and $line->log_debug("checkline_mk_cond($cond)");
 }
 
 #
@@ -5939,6 +5987,8 @@ sub checklines_mk($) {
 	$mkctx_tools = {%{get_predefined_tool_names()}};
 	$mkctx_varuse = {};
 
+	determine_used_variables($lines);
+
 	foreach my $prefix (qw(pre do post)) {
 		foreach my $action (qw(fetch extract patch tools wrapper configure build test install package clean)) {
 			$allowed_targets->{"${prefix}-${action}"} = true;
@@ -6092,7 +6142,7 @@ sub checklines_mk($) {
 				}
 
 			} elsif ($directive eq "if" || $directive eq "elif") {
-				$opt_debug_unchecked and $line->log_debug("Unchecked conditional \"${args}\".");
+				checkline_mk_cond($line, $args);
 
 			} elsif ($directive eq "ifdef" || $directive eq "ifndef") {
 				if ($args =~ qr"\s") {
@@ -6786,15 +6836,17 @@ sub checkfile_package_Makefile($$$) {
 	checkperms($fname);
 
 	if (!exists($pkgctx_vardef->{"PLIST_SRC"})
+	    && !exists($pkgctx_vardef->{"GENERATE_PLIST"})
+	    && !exists($pkgctx_vardef->{"META_PACKAGE"})
 	    && defined($pkgdir)
 	    && !-f "${current_dir}/$pkgdir/PLIST"
 	    && !-f "${current_dir}/$pkgdir/PLIST.common") {
 		log_warning($fname, NO_LINE_NUMBER, "Neither PLIST nor PLIST.common exist, and PLIST_SRC is unset. Are you sure PLIST handling is ok?");
 	}
 
-	if (exists($pkgctx_vardef->{"NO_CHECKSUM"}) && is_emptydir("${current_dir}/${patchdir}")) {
+	if ((exists($pkgctx_vardef->{"NO_CHECKSUM"}) || $pkgctx_vardef->{"META_PACKAGE"}) && is_emptydir("${current_dir}/${patchdir}")) {
 		if (-f "${current_dir}/${distinfo_file}") {
-			log_warning("${current_dir}/${distinfo_file}", NO_LINE_NUMBER, "This file should not exist if NO_CHECKSUM is set.");
+			log_warning("${current_dir}/${distinfo_file}", NO_LINE_NUMBER, "This file should not exist if NO_CHECKSUM or META_PACKAGE is set.");
 		}
 	} else {
 		if (!-f "${current_dir}/${distinfo_file}") {
@@ -7283,7 +7335,7 @@ sub checkfile_patch($) {
 
 sub checkfile_PLIST($) {
 	my ($fname) = @_;
-	my ($lines, $last_file_seen, $all_files);
+	my ($lines, $last_file_seen);
 
 	$opt_debug_trace and log_debug($fname, NO_LINES, "checkfile_PLIST()");
 
@@ -7298,13 +7350,53 @@ sub checkfile_PLIST($) {
 	}
 	checkline_rcsid($lines->[0], "\@comment ");
 
+	if (@$lines == 1) {
+		$lines->[0]->log_warning("PLIST files shouldn't be empty.");
+		$lines->[0]->explain_warning(
+
+"One reason for empty PLISTs is that this is a newly created package",
+"and that the author didn't run \"bmake print-PLIST\" after installing",
+"the files.",
+"",
+"Another reason, common for Perl packages, is that the PLIST is",
+"automatically generated. Since there is no use of the empty PLIST file,",
+"it shouldn't be necessary. This should be fixed in the pkgsrc",
+"infrastructure.");
+	}
+
 	# Get the list of all files from the PLIST.
-	$all_files = {};
-	foreach my $line (@{$lines}) {
+	my $all_files = {};
+	my $all_dirs = {};
+	my $extra_lines = [];
+	if (basename($fname) eq "PLIST.common_end") {
+		my $common_lines = load_file(dirname($fname) . "/PLIST.common");
+		if ($common_lines) {
+			$extra_lines = $common_lines;
+		}
+	}
+
+	foreach my $line (@{$extra_lines}, @{$lines}) {
 		my $text = $line->text;
 
+		if ($text =~ qr"\$\{([\w_]+)\}(.*)") {
+			if (defined($pkgctx_plist_subst_cond) && exists($pkgctx_plist_subst_cond->{$1})) {
+				$opt_debug_misc and $line->log_debug("Removed PLIST_SUBST conditional $1.");
+				$text = $2;
+			}
+		}
+		
 		if ($text =~ qr"^[\w\$]") {
 			$all_files->{$text} = $line;
+			my $dir = $text;
+			while ($dir =~ s,/[^/]+$,,) {
+				$all_dirs->{$dir} = $line;
+			}
+		}
+		if ($text =~ qr"^\@exec \$\{MKDIR\} %D/(.*)$") {
+			my $dir = $1;
+			do {
+				$all_dirs->{$dir} = $line;
+			} while ($dir =~ s,/[^/]+$,,);
 		}
 	}
 
@@ -7344,6 +7436,14 @@ sub checkfile_PLIST($) {
 					my $s = join(" or ", map { "\"USE_DIRS+= $_\"" } @ids);
 					$line->log_warning("Please add $s to the package Makefile and remove this line.");
 				}
+				if (!exists($all_dirs->{$arg})) {
+					$line->log_warning("The PLIST does not contain files for \"$arg\".");
+					$line->explain_warning(
+"A package should only remove those directories that it created. When",
+"there are no files in the directory, it is unlikely that the package",
+"created the directory.");
+				}
+
 			} elsif ($cmd eq "imake-man") {
 				my (@args) = split(/\s+/, $arg);
 				if (@args != 3) {
@@ -7366,6 +7466,8 @@ sub checkfile_PLIST($) {
 				if (defined($last_file_seen)) {
 					if ($last_file_seen gt $text) {
 						$line->log_warning("${text} should be sorted before ${last_file_seen}.");
+					} elsif ($last_file_seen eq $text) {
+						$line->log_warning("Duplicate filename.");
 					}
 				}
 				$last_file_seen = $text;
@@ -7639,11 +7741,11 @@ sub checkdir_CVS($) {
 	return unless $cvs_entries;
 
 	foreach my $line (@$cvs_entries) {
-		my ($type, $fname, $mtime, $date, $empty, $tag, $undef) = my_split("/", $line->text);
+		my ($type, $fname, $mtime, $date, $keyword_mode, $tag, $undef) = my_split("/", $line->text);
 		next if ($type eq "D" && !defined($fname));
 		assert($type eq "" || $type eq "D", "Unknown line format: " . $line->text);
 		assert(defined($tag), "Unknown line format: " . $line->text);
-		assert(defined($empty) && $empty eq "", "Unknown line format: " . $line->text);
+		assert(defined($keyword_mode), "Unknown line format: " . $line->text);
 		assert(!defined($undef), "Unknown line format: " . $line->text);
 	}
 }
@@ -7895,6 +7997,7 @@ sub checkdir_package() {
 	$pkgctx_vardef = {%{get_userdefined_variables()}};
 	$pkgctx_varuse = {};
 	$pkgctx_bl3 = {};
+	$pkgctx_plist_subst_cond = {};
 	$seen_Makefile_common = false;
 
 	# we need to handle the Makefile first to get some variables
@@ -7964,6 +8067,7 @@ cleanup:
 	$pkgctx_vardef = undef;
 	$pkgctx_varuse = undef;
 	$pkgctx_bl3 = undef;
+	$pkgctx_plist_subst_cond = undef;
 	$seen_Makefile_common = undef;
 }
 

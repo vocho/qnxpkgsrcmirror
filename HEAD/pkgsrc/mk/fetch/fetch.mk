@@ -1,4 +1,4 @@
-# $NetBSD: fetch.mk,v 1.30 2007/09/06 20:54:53 joerg Exp $
+# $NetBSD: fetch.mk,v 1.32 2007/12/01 11:11:56 rillig Exp $
 
 _MASTER_SITE_BACKUP=	${MASTER_SITE_BACKUP:=${DIST_SUBDIR}${DIST_SUBDIR:D/}}
 _MASTER_SITE_OVERRIDE=	${MASTER_SITE_OVERRIDE:=${DIST_SUBDIR}${DIST_SUBDIR:D/}}
@@ -151,7 +151,7 @@ ${DISTDIR}/${_file_}: fetch-check-interactive do-fetch-file error-check
 ###
 .PHONY: fetch-check-interactive
 fetch-check-interactive: .USEBEFORE
-.if !empty(INTERACTIVE_STAGE:Mfetch) && defined(BATCH)
+.if !empty(INTERACTIVE_STAGE:Mfetch) && defined(BATCH) && !defined(FETCH_MESSAGE)
 	@${TEST} ! -f ${.TARGET} || exit 0;				\
 	${ERROR_MSG} "The fetch stage of this package requires user interaction to download"; \
 	${ERROR_MSG} "the distfiles.  Please fetch the distfiles manually and place them in:"; \
@@ -166,7 +166,6 @@ fetch-check-interactive: .USEBEFORE
 		${ERROR_MSG} "See the following URL for more details:";	\
 		${ERROR_MSG} "    "${HOMEPAGE:Q};			\
 	fi;								\
-	${TOUCH} ${_INTERACTIVE_COOKIE};				\
 	exit 1
 .elif defined(FETCH_MESSAGE) && !empty(FETCH_MESSAGE)
 	@${TEST} ! -f ${.TARGET} || exit 0;				\

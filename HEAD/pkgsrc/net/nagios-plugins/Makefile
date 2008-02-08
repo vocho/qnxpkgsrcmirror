@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.9 2007/03/30 05:52:37 grant Exp $
+# $NetBSD: Makefile,v 1.11 2007/11/29 10:03:19 rillig Exp $
 #
 
-PKGREVISION=	2
+PKGREVISION=	3
 CATEGORIES=	net sysutils
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
@@ -18,6 +18,8 @@ CONFIGURE_ARGS+= --without-pgsql --without-mysql \
 		--without-smbclient-command --without-snmpget-command \
 		--without-snmpgetnext-command --without-fping-command
 
+SPECIAL_PERMS+=	${PREFIX}/libexec/nagios/check_icmp ${REAL_ROOT_USER} ${NAGIOS_GROUP} 4550
+
 .if ${OPSYS} == "NetBSD"
 CONFIGURE_ARGS+=	--with-df-command="/bin/df -Pklt nokernfs,procfs,fdesc"
 .endif
@@ -27,6 +29,7 @@ CONFIGURE_ARGS+=	--with-df-command="/bin/df -Pklt nokernfs,procfs,fdesc"
 CPPFLAGS_LFS!=		getconf LFS_CFLAGS
 MAKE_ENV+=		CPPFLAGS_LFS=${CPPFLAGS_LFS:Q}
 .endif
+LIBS.SunOS+=	-lm
 
 .if !exists(/usr/bin/ssh)
 DEPENDS+=	{ssh{,6}-[0-9]*,openssh-[0-9]*}:../../security/openssh

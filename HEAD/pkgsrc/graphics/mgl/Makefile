@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.27 2007/10/07 12:59:13 kano Exp $
+# $NetBSD: Makefile,v 1.29 2007/12/05 13:37:22 obache Exp $
 #
 
 DISTNAME=	mgl2-alpha-020
@@ -13,7 +13,7 @@ COMMENT=	Graphics library for NEC Mobilegear/PocketBSD, NetBSD/hpcmips
 
 DEPENDS+=	mglfonts>=0.1:../../fonts/mglfonts
 
-USE_TOOLS+=	gmake
+USE_TOOLS+=	gmake flex
 
 MGLDOCS=	im.doc mgl1.doc shlib.doc
 MGL2DOCS=	AppConvert.doc Build.doc CALIBRATE.doc CHANGES.doc \
@@ -34,10 +34,10 @@ ONLY_FOR_PLATFORM=	*-*-arm *-*-i386 *-*-mipsel *-*-sh3el
 
 .include "../../mk/bsd.prefs.mk"
 
-pre-configure:
-	${SED} -e 's|@PREFIX@|${PREFIX}|g' < ${WRKSRC}/utils/mglcons.sh \
-		> ${WRKSRC}/utils/mglcons.sh.new
-	${MV} ${WRKSRC}/utils/mglcons.sh.new ${WRKSRC}/utils/mglcons.sh
+SUBST_CLASSES+=		prefix
+SUBST_STAGE.prefix=	pre-configure
+SUBST_FILES.prefix=	utils/mglcons.sh
+SUBST_VARS.prefix=	PREFIX
 
 post-configure:
 .if ${MACHINE_ARCH} == "arm" || ${MACHINE_ARCH} == "mipsel" || ${MACHINE_ARCH} == "sh3el"

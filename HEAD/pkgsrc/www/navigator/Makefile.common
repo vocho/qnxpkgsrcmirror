@@ -1,4 +1,4 @@
-# $NetBSD: Makefile.common,v 1.86 2007/07/29 05:19:57 jlam Exp $
+# $NetBSD: Makefile.common,v 1.89 2007/10/31 21:44:19 gdt Exp $
 #
 # Common include file for communicator and navigator packages
 
@@ -7,6 +7,7 @@ CATEGORIES=	www
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE?=	http://www.netscape.com/browsers/index.html
 
+LICENSE=	generic-nonlicense
 RESTRICTED=	No re-distribution without agreement from Netscape
 NO_SRC_ON_CDROM=	${RESTRICTED}
 NO_BIN_ON_CDROM=	${RESTRICTED}
@@ -65,9 +66,6 @@ DISTUNAME=	sparc-sun-solaris2.8
 DIST_DIR_NAME=	supported/sunos58
 WRKNAME=	sparc-sun-solaris2.8
 .  endif
-.  if !defined(NS_NO_FLASH)
-DEPENDS+=	ns-flash>4.0:../../multimedia/ns-flash
-.  endif
 
 .elif ${EMUL_PLATFORM} == "sunos-sparc"
 NS_VERS=	4.61
@@ -101,13 +99,9 @@ post-install:
 	    ${LOCALBASE} ${MOZILLA_HOME}/netscape
 
 .elif ${EMUL_PLATFORM} == "linux-i386"
-PKGREVISION=	1
 DISTUNAME=	x86-unknown-linux2.2
 DIST_DIR_NAME=	supported/linux22
 WRKNAME=	x86-unknown-linux2.2
-.  if !defined(NS_NO_FLASH)
-DEPENDS+=	ns-flash>4.0:../../multimedia/ns-flash
-.  endif
 .  if ${BINNAME} == "communicator"
 BUILD_DEPENDS=	binpatch>=1.0:../../pkgtools/binpatch
 

@@ -1,4 +1,4 @@
-# $NetBSD: replace.mk,v 1.200 2007/09/30 12:22:44 rillig Exp $
+# $NetBSD: replace.mk,v 1.203 2007/12/18 10:18:49 markd Exp $
 #
 # Copyright (c) 2005 The NetBSD Foundation, Inc.
 # All rights reserved.
@@ -283,6 +283,19 @@ TOOLS_PATH.bzcat=		${TOOLS_PREFIX.${_t_}}/bin/${_t_}
 .  endif
 .endfor
 
+.for _t_ in cmake cpack
+.  if !defined(TOOLS_IGNORE.${_t_}) && !empty(_USE_TOOLS:M${_t_})
+.    if !empty(PKGPATH:Mdevel/cmake)
+MAKEFLAGS+=			TOOLS_IGNORE.${_t_}=
+.    elif !empty(_TOOLS_USE_PKGSRC.${_t_}:M[yY][eE][sS])
+TOOLS_DEPENDS.${_t_}?=		cmake>=2.4.6nb3:../../devel/cmake
+TOOLS_CREATE+=			${_t_}
+TOOLS_FIND_PREFIX+=		TOOLS_PREFIX.${_t_}=cmake
+TOOLS_PATH.${_t_}=		${TOOLS_PREFIX.${_t_}}/bin/${_t_}
+.    endif
+.  endif
+.endfor
+
 .if !defined(TOOLS_IGNORE.csh) && !empty(_USE_TOOLS:Mcsh)
 .  if !empty(PKGPATH:Mshells/tcsh)
 MAKEFLAGS+=			TOOLS_IGNORE.csh=
@@ -403,35 +416,35 @@ TOOLS_PATH.gtar=		${TOOLS_PREFIX.gtar}/bin/${GNU_PROGRAM_PREFIX}tar
 .endif
 
 .if !defined(TOOLS_IGNORE.gunzip) && !empty(_USE_TOOLS:Mgunzip)
-.  if !empty(PKGPATH:Marchivers/gzip-base)
+.  if !empty(PKGPATH:Marchivers/gzip)
 MAKEFLAGS+=			TOOLS_IGNORE.gunzip=
 .  elif !empty(_TOOLS_USE_PKGSRC.gunzip:M[yY][eE][sS])
-TOOLS_DEPENDS.gunzip?=		gzip-base>=1.2.4b:../../archivers/gzip-base
+TOOLS_DEPENDS.gunzip?=		{gzip>=1.2.4b,gzip-base>=1.2.4b}:../../archivers/gzip
 TOOLS_CREATE+=			gunzip
-TOOLS_FIND_PREFIX+=		TOOLS_PREFIX.gunzip=gzip-base
+TOOLS_FIND_PREFIX+=		TOOLS_PREFIX.gunzip=gzip
 TOOLS_PATH.gunzip=		${TOOLS_PREFIX.gunzip}/bin/gunzip
 TOOLS_ARGS.gunzip=		-f
 .  endif
 .endif
 
 .if !defined(TOOLS_IGNORE.gzcat) && !empty(_USE_TOOLS:Mgzcat)
-.  if !empty(PKGPATH:Marchivers/gzip-base)
+.  if !empty(PKGPATH:Marchivers/gzip)
 MAKEFLAGS+=			TOOLS_IGNORE.gzcat=
 .  elif !empty(_TOOLS_USE_PKGSRC.gzcat:M[yY][eE][sS])
-TOOLS_DEPENDS.gzcat?=		gzip-base>=1.2.4b:../../archivers/gzip-base
+TOOLS_DEPENDS.gzcat?=		{gzip>=1.2.4b,gzip-base>=1.2.4b}:../../archivers/gzip
 TOOLS_CREATE+=			gzcat
-TOOLS_FIND_PREFIX+=		TOOLS_PREFIX.gzcat=gzip-base
+TOOLS_FIND_PREFIX+=		TOOLS_PREFIX.gzcat=gzip
 TOOLS_PATH.gzcat=		${TOOLS_PREFIX.gzcat}/bin/zcat
 .  endif
 .endif
 
 .if !defined(TOOLS_IGNORE.gzip) && !empty(_USE_TOOLS:Mgzip)
-.  if !empty(PKGPATH:Marchivers/gzip-base)
+.  if !empty(PKGPATH:Marchivers/gzip)
 MAKEFLAGS+=			TOOLS_IGNORE.gzip=
 .  elif !empty(_TOOLS_USE_PKGSRC.gzip:M[yY][eE][sS])
-TOOLS_DEPENDS.gzip?=		gzip-base>=1.2.4b:../../archivers/gzip-base
+TOOLS_DEPENDS.gzip?=		{gzip>=1.2.4b,gzip-base>=1.2.4b}:../../archivers/gzip
 TOOLS_CREATE+=			gzip
-TOOLS_FIND_PREFIX+=		TOOLS_PREFIX.gzip=gzip-base
+TOOLS_FIND_PREFIX+=		TOOLS_PREFIX.gzip=gzip
 TOOLS_PATH.gzip=		${TOOLS_PREFIX.gzip}/bin/gzip
 TOOLS_ARGS.gzip=		-nf ${GZIP}
 .  endif

@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.129 2007/10/20 10:36:14 markd Exp $
+# $NetBSD: Makefile,v 1.131 2007/11/30 21:55:01 wiz Exp $
 
 DISTNAME=	kdelibs-${_KDE_VERSION}
+PKGREVISION=	2
 CATEGORIES=	x11
 COMMENT=	Support libraries for the KDE integrated X11 desktop
 
@@ -68,10 +69,10 @@ PLIST_SUBST+=		KDED_WORKAROUND="@comment "
 .  else
 PLIST_SUBST+=		KDED_WORKAROUND=""
 .  endif
-PLIST_SUBST+=		NEED_ZONETAB=""
+# make sure zone.tab is installed
+DEPENDS+=		zonetab-[0-9]*:../../time/zonetab
 .else
 PLIST_SUBST+=		KDED_WORKAROUND=""
-PLIST_SUBST+=		NEED_ZONETAB="@comment "
 .endif
 
 .include "../../mk/krb5.buildlink3.mk"
@@ -79,7 +80,6 @@ CONFIGURE_ARGS+=	--with-gssapi=yes
 
 post-install:
 .if ${OPSYS} == "NetBSD"
-	${INSTALL_DATA} ${FILESDIR}/zone.tab ${PREFIX}/share
 .  if ${OS_VERSION:M1.5.[12]*} || ${OS_VERSION:M1.[0-4]*}
 	@${RM} ${PREFIX}/lib/kded.*
 .  endif

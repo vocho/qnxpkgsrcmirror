@@ -1,10 +1,10 @@
-# $NetBSD: options.mk,v 1.14 2007/10/08 15:06:07 hira Exp $
+# $NetBSD: options.mk,v 1.17 2007/12/18 22:24:29 hira Exp $
 
 PKG_OPTIONS_VAR=		PKG_OPTIONS.openoffice2
-PKG_SUPPORTED_OPTIONS=		cups gnome gtk2 kde
+PKG_SUPPORTED_OPTIONS=		cups gnome gtk2 kde nas ooo-external-libwpd
 PKG_OPTIONS_OPTIONAL_GROUPS=	browser
 PKG_OPTIONS_GROUP.browser=	firefox seamonkey # firefox-gtk1 seamonkey-gtk1
-# The list from solenv/inc/postset.mk:completelangiso.
+# The list from completelangiso in solenv/inc/postset.mk.
 OO_SUPPORTED_LANGUAGES=		af ar as-IN be-BY bg br bn bn-BD bn-IN bs ca \
 				cs cy da de dz el en-GB en-US en-ZA eo es et \
 				eu fa fi fr ga gl gu-IN he hi-IN hr hu it ja \
@@ -33,6 +33,7 @@ CONFIGURE_ARGS+=	--with-system-mozilla=firefox
 .elif !empty(PKG_OPTIONS:Mseamonkey)
 CONFIGURE_ARGS+=	--with-system-mozilla=seamonkey
 .include "../../www/seamonkey/buildlink3.mk"
+# The following browsers do not install *.pc files.
 #.elif !empty(PKG_OPTIONS:Mfirefox-gtk1)
 #CONFIGURE_ARGS+=	--with-system-mozilla=firefox
 #.include "../../www/firefox-gtk1/buildlink3.mk"
@@ -41,6 +42,11 @@ CONFIGURE_ARGS+=	--with-system-mozilla=seamonkey
 #.include "../../www/seamonkey-gtk1/buildlink3.mk"
 .else
 CONFIGURE_ARGS+=	--disable-mozilla
+.endif
+
+.if !empty(PKG_OPTIONS:Mooo-external-libwpd)
+CONFIGURE_ARGS+=	--with-system-libwpd
+.include "../../converters/libwpd/buildlink3.mk"
 .endif
 
 .if !empty(PKG_OPTIONS:Mcups)
@@ -61,12 +67,6 @@ CONFIGURE_ARGS+=	--disable-gnome-vfs --disable-evolution2
 
 .if !empty(PKG_OPTIONS:Mgtk2)
 CONFIGURE_ARGS+=	--enable-gtk
-# *.pc files are needed with NetBSD using native XFree86.
-.  if ${OPSYS} == "NetBSD" && defined(X11_TYPE) && !empty(X11_TYPE:Mnative)
-USE_BUILTIN.Xfixes=	no
-USE_BUILTIN.Xrandr=	no
-USE_BUILTIN.Xrender=	no
-.  endif
 .include "../../x11/gtk2/buildlink3.mk"
 .else
 CONFIGURE_ARGS+=	--disable-gtk
@@ -78,4 +78,13 @@ CONFIGURE_ARGS+=	--enable-kde --enable-kdeab
 .include "../../x11/kdelibs3/buildlink3.mk"
 .else
 CONFIGURE_ARGS+=	--disable-kde --disable-kdeab
+.endif
+
+.if !empty(PKG_OPTIONS:Mnas)
+CONFIGURE_ARGS+=	--with-system-nas
+# Build error with nas<=1.9.
+BUILDLINK_API_DEPENDS.nas+=	nas>=1.9nb1
+.include "../../audio/nas/buildlink3.mk"
+.else
+CONFIGURE_ARGS+=	--without-nas
 .endif

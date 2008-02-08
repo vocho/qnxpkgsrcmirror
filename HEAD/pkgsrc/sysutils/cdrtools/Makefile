@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.25 2007/09/30 13:49:11 wiz Exp $
+# $NetBSD: Makefile,v 1.27 2007/12/13 23:35:11 wiz Exp $
 
-DISTNAME=	cdrtools-2.01.01a35
-PKGNAME=	cdrtools-2.01.01.35
+DISTNAME=	cdrtools-2.01.01a36
+PKGNAME=	cdrtools-2.01.01.36
 CATEGORIES=	sysutils
 MASTER_SITES=	ftp://ftp.berlios.de/pub/cdrecord/alpha/
 EXTRACT_SUFX=	.tar.bz2
@@ -64,6 +64,12 @@ SUBST_FILES.fix+=	scgcheck/scgcheck.1
 SUBST_SED.fix=		-e "s,/etc/default/cdrecord,${CDRECORD_CONF},g"
 SUBST_MESSAGE.fix=	Fixing paths.
 
+SUBST_CLASSES+=		oss
+SUBST_STAGE.oss=	post-patch
+SUBST_FILES.oss=	cdda2wav/local.cnf.in
+SUBST_SED.oss=		-e "s,/dev/dsp,${DEVOSSSOUND},g"
+SUBST_MESSAGE.oss=	Fixing OSS sound device path.
+
 post-extract:
 	ln -s Defaults.freebsd ${WRKSRC}/DEFAULTS/Defaults.dragonfly
 	ln -s Defaults.freebsd ${WRKSRC}/DEFAULTS_ENG/Defaults.dragonfly
@@ -105,14 +111,14 @@ do-install:
 				${DESTDIR}${PREFIX}/${PKGMANDIR}/man8/$$f.8; \
 		done
 	${INSTALL_DATA} ${WRKSRC}/libsiconv/tables/[cik]* \
-		${PREFIX}/lib/siconv
-	${RM} ${PREFIX}/lib/siconv/*mk
+		${DESTDIR}${PREFIX}/lib/siconv
+	${RM} ${DESTDIR}${PREFIX}/lib/siconv/*mk
 	${INSTALL_DATA} ${WRKSRC}/cdda2wav/README* \
-		${PREFIX}/share/doc/cdrtools/cdda2wav
+		${DESTDIR}${PREFIX}/share/doc/cdrtools/cdda2wav
 	${INSTALL_DATA} ${WRKSRC}/cdrecord/README* \
-		${PREFIX}/share/doc/cdrtools/cdrecord
+		${DESTDIR}${PREFIX}/share/doc/cdrtools/cdrecord
 	${INSTALL_DATA} ${WRKSRC}/mkisofs/README* \
-		${PREFIX}/share/doc/cdrtools/mkisofs
+		${DESTDIR}${PREFIX}/share/doc/cdrtools/mkisofs
 
 .include "../../mk/oss.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

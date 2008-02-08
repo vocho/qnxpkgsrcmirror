@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.290 2007/09/20 00:02:40 wiz Exp $
+# $NetBSD: Makefile,v 1.292 2007/12/15 21:02:17 kristerw Exp $
 #
 
 COMMENT=	Miscellaneous utilities
@@ -53,6 +53,7 @@ SUBDIR+=	fep
 SUBDIR+=	figlet
 SUBDIR+=	figlet-fonts
 SUBDIR+=	firelib
+SUBDIR+=	gelemental
 SUBDIR+=	getopt
 SUBDIR+=	git
 SUBDIR+=	gkrellm-flynn
@@ -108,6 +109,7 @@ SUBDIR+=	koffice-l10n-es
 SUBDIR+=	koffice-l10n-et
 SUBDIR+=	koffice-l10n-fi
 SUBDIR+=	koffice-l10n-fr
+SUBDIR+=	koffice-l10n-pl
 SUBDIR+=	kp
 SUBDIR+=	latin-words-bin
 SUBDIR+=	less

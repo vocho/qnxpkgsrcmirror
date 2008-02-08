@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.120 2007/08/13 08:12:45 rillig Exp $
+# $NetBSD: Makefile,v 1.124 2007/11/22 21:05:21 drochner Exp $
 #
 
 COMMENT=	Editors
@@ -33,6 +33,7 @@ SUBDIR+=	gconf-editor
 SUBDIR+=	gedit
 SUBDIR+=	gice
 SUBDIR+=	gnuserv
+SUBDIR+=	gobby
 SUBDIR+=	gtranslator
 SUBDIR+=	heme
 SUBDIR+=	hexedit
@@ -45,8 +46,8 @@ SUBDIR+=	jove
 SUBDIR+=	kdissert
 SUBDIR+=	kile
 SUBDIR+=	leafpad
-SUBDIR+=	leim
 SUBDIR+=	leim20
+SUBDIR+=	leim21
 SUBDIR+=	lpe
 SUBDIR+=	lyx-qt
 SUBDIR+=	lyx-xforms
@@ -62,8 +63,10 @@ SUBDIR+=	nano
 SUBDIR+=	ne
 SUBDIR+=	nedit
 SUBDIR+=	ng
+SUBDIR+=	notecase
 SUBDIR+=	nvi
 SUBDIR+=	nvi-m17n
+SUBDIR+=	obby
 SUBDIR+=	pico
 SUBDIR+=	poedit
 SUBDIR+=	rox-edit
@@ -104,6 +107,7 @@ SUBDIR+=	wily
 SUBDIR+=	xcoral
 SUBDIR+=	xemacs
 SUBDIR+=	xemacs-current
+SUBDIR+=	xemacs-current-nox11
 SUBDIR+=	xemacs-nox11
 SUBDIR+=	xemacs-packages
 SUBDIR+=	xfce4-mousepad

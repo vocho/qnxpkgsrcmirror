@@ -1,4 +1,4 @@
-# $NetBSD: makevars.map,v 1.171 2007/10/13 08:57:09 rillig Exp $
+# $NetBSD: makevars.map,v 1.178 2007/12/21 12:36:59 rillig Exp $
 #
 
 # This file contains the guessed type of some variables, according to
@@ -61,7 +61,11 @@ ABI				{ 32 64 } [$user]
 PKG_DEVELOPER			Yes [$user]
 USE_ABI_DEPENDS			YesNo [$user]
 PKG_REGISTER_SHELLS		{ YES NO } [$user]
-PKGSRC_COMPILER			List of { ccc ccache distcc f2c icc ido gcc mipspro mipspro-ucode sunpro xlc } [$user]
+PKGSRC_COMPILER			List of { \
+					ccache ccc distcc f2c gcc hp icc \
+					ido gcc mipspro mipspro-ucode pcc \
+					sunpro xlc \
+				} [$user]
 PKGSRC_MESSAGE_RECIPIENTS	List of Mail_Address [$user]
 PKGSRC_SHOW_BUILD_DEFS		YesNo [$user]
 PKGSRC_SHOW_PATCH_ERRORMSG	YesNo [$user]
@@ -132,6 +136,7 @@ AS			ShellCommand [$system]
 AUTOCONF_REQD		List of Version [$package_list]
 AUTOMAKE_OVERRIDE	List of Pathmask
 AUTOMAKE_REQD		List of Version [$package_list]
+AUTO_MKDIRS		YesNo [$package]
 BATCH			Yes [$user]
 BDB185_DEFAULT		Unchecked []
 BDBBASE			Pathname [$system]
@@ -190,7 +195,7 @@ BUILTIN_PKG		Identifier [builtin.mk:psu]
 BUILTIN_PKG.*		PkgName [builtin.mk:psu]
 BUILTIN_FIND_FILES_VAR	List of Varname [builtin.mk:s]
 BUILTIN_FIND_FILES.*	List of Pathname [builtin.mk:s]
-BUILTIN_FIND_GREP.*	List of ShellWord [builtin.mk:s]
+BUILTIN_FIND_GREP.*	String [builtin.mk:s]
 BUILTIN_FIND_LIBS	List of Pathname [builtin.mk:s]
 BUILTIN_IMAKE_CHECK	List of Unchecked [builtin.mk:s]
 BUILTIN_IMAKE_CHECK.*	YesNo []
@@ -444,6 +449,7 @@ MASTER_SITE_XCONTRIB	List of URL [$system]
 MASTER_SITE_XEMACS	List of URL [$system]
 MESSAGE_SRC		List of Pathname [$package_list]
 MESSAGE_SUBST		List of ShellWord [c:a,m:a,o:a]
+META_PACKAGE		Yes [$package]
 MISSING_FEATURES	List of Identifier [$system]
 MYSQL_VERSIONS_ACCEPTED	List of { 40 41 50 } [m:s]
 MYSQL_VERSION_DEFAULT	Version [$user]
@@ -621,6 +627,7 @@ REQD_DIRS		List of Pathname [$package_list]
 REQD_DIRS_PERMS		List of ShellWord [$package_list]
 REQD_FILES		List of Pathname [$package_list]
 REQD_FILES_MODE		{ 0644 0640 0600 0400 } [$package]
+REQD_FILES_PERMS	List of ShellWord [$package_list]
 RESTRICTED		Message [$package]
 ROOT_USER		UserGroupName [$user]
 ROOT_GROUP		UserGroupName [$user]

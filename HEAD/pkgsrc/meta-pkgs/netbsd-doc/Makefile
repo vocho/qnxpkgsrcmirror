@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.14 2006/03/04 21:30:09 jlam Exp $
+# $NetBSD: Makefile,v 1.17 2007/12/19 12:27:29 rillig Exp $
 #
 
 DISTNAME=	netbsd-doc-1.2
@@ -19,12 +19,6 @@ DEPENDS+=	dsssl-docbook-modular>=1.54:../../textproc/dsssl-docbook-modular
 DEPENDS+=	html>=4.0:../../textproc/html
 DEPENDS+=	tidy>=20031002:../../www/tidy
 
-EXTRACT_ONLY=	# empty
-NO_CHECKSUM=	yes
-NO_CONFIGURE=	yes
-NO_BUILD=	yes
-NO_MTREE=	yes
-
-do-install:	# empty
+META_PACKAGE=	yes
 
 .include "../../mk/bsd.pkg.mk"

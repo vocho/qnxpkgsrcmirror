@@ -1,16 +1,16 @@
-# $NetBSD: Makefile,v 1.7 2006/12/27 13:37:41 joerg Exp $
+# $NetBSD: Makefile,v 1.11 2007/12/20 18:04:04 joerg Exp $
 
 DISTNAME=	fvwm-${FVWM_VER}
-#PKGREVISION=	1
+PKGREVISION=	1
 CATEGORIES=	x11 wm
 MASTER_SITES=	ftp://ftp.fvwm.org/pub/fvwm/version-2/ \
-		http://www.fvwm.org/generated/icon_download/ \
-		ftp://ftp.hpc.uh.edu/pub/fvwm/version-2/
+		http://www.fvwm.org/generated/icon_download/
 DISTFILES+=	fvwm-${FVWM_VER}.tar.gz fvwm_icons.tgz
 
 MAINTAINER=	martti@NetBSD.org
 HOMEPAGE=	http://www.fvwm.org/
 COMMENT=	Newer version of X11 Virtual window manager
+#LICENSE=	gnu-gpl-v2
 
 DEPENDS+=	xpmroot-2.*:../../x11/xpmroot
 
@@ -81,6 +81,7 @@ BUILDLINK_DEPMETHOD.libXt?=	build
 .include "../../devel/readline/buildlink3.mk"
 .include "../../x11/libSM/buildlink3.mk"
 .include "../../x11/libXext/buildlink3.mk"
+.include "../../x11/libXinerama/buildlink3.mk"
 .include "../../x11/libXpm/buildlink3.mk"
 .include "../../x11/libXt/buildlink3.mk"
 .include "../../x11/xextproto/buildlink3.mk"
