@@ -1,6 +1,0 @@
-$NetBSD: distinfo,v 1.9 2007/03/26 16:43:34 reed Exp $
-
-SHA1 (osh-20070324.tar.gz) = acd0747578430bd259949b270308ceb5e13a4b2a
-RMD160 (osh-20070324.tar.gz) = fc120073598cccd3bdfbbe2bed88d0a8329fef80
-Size (osh-20070324.tar.gz) = 77522 bytes
-SHA1 (patch-aa) = 38db4c0e207a0f2cf175b77d3339cd17a4db6362

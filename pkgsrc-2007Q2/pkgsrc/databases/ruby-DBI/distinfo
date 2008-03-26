@@ -1,5 +1,0 @@
-$NetBSD: distinfo,v 1.11 2007/03/17 15:52:33 taca Exp $
-
-SHA1 (dbi-0.1.1.tar.gz) = d9be8e5974f1b4a549a5459eff373a9d12ec8efd
-RMD160 (dbi-0.1.1.tar.gz) = 8b2d63cdfddf0244a36d8bb0574a257dc46faaad
-Size (dbi-0.1.1.tar.gz) = 155533 bytes

@@ -1,6 +1,0 @@
-$NetBSD: distinfo,v 1.2 2007/05/11 21:39:35 tonio Exp $
-
-SHA1 (dwm-4.0.tar.gz) = 2d5e50764b8926d72c9d89e46ec465bbc20dfb5c
-RMD160 (dwm-4.0.tar.gz) = 69573532c7274bb79e226830c74c1d47a5416318
-Size (dwm-4.0.tar.gz) = 18072 bytes
-SHA1 (patch-aa) = 79a3a1843ce347f3f0152065c7e391cd71bc4795
