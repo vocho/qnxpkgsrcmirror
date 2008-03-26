@@ -1,8 +1,0 @@
-$NetBSD: distinfo,v 1.3 2005/02/24 09:59:24 agc Exp $
-
-SHA1 (mailwrapper-19990412.tar.gz) = 8743e23bf2473557dda67684bae5b8879e5c8b45
-RMD160 (mailwrapper-19990412.tar.gz) = cafe34e6076e5c748ce43ecb81c3a96ed4d02e29
-Size (mailwrapper-19990412.tar.gz) = 6129 bytes
-SHA1 (patch-aa) = a43acf8f79682d5bee7d9f995b13fc31d34b5654
-SHA1 (patch-ab) = 7258bd817878c02031c214be15f9546ed188bc05
-SHA1 (patch-ad) = c377b78b2ba0ee2dad0ff6842299c9853297b921
