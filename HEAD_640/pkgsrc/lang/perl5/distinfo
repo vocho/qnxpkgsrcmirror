@@ -1,0 +1,28 @@
+$NetBSD: distinfo,v 1.43 2007/11/06 19:54:53 drochner Exp $
+
+SHA1 (perl-5.8.8.tar.bz2) = 4aab490040727ca4419098720eca2ba4367df539
+RMD160 (perl-5.8.8.tar.bz2) = e78f26d9b96e6db35f946ad4ff55e3a69385c71b
+Size (perl-5.8.8.tar.bz2) = 10123359 bytes
+SHA1 (patch-aa) = ca137eb19f27f2bdfe4047c5cce081f48bf8d7d2
+SHA1 (patch-ab) = e32427327192f023477b16f29bc55fdf4f057410
+SHA1 (patch-ad) = 0dcc63c15067bb8436df761d9a3e0dcdcedc7eac
+SHA1 (patch-ac) = 428e0757495b82a47ec092a71333fb3ec366f14f
+SHA1 (patch-ae) = 891e8d1cfbd69a63827239b4e04d84aac8fd795c
+SHA1 (patch-ah) = 39b1a46a0ee5e73b4707a3d947fe17016df9630a
+SHA1 (patch-am) = cf1687063d0c0542e811545aaaad291bad12d75e
+SHA1 (patch-an) = 987763c3098bf4356993dd6d8741962a1ff8190d
+SHA1 (patch-ap) = 178d6909a8aa6544b849c2b63530fcf1893b77ea
+SHA1 (patch-aq) = b9569d0cd74a06912e82498cd2bfba131c0b6f3b
+SHA1 (patch-ar) = 9d257ceeca337e3d477b80215560bbc290d19dd2
+SHA1 (patch-ba) = 27aefd5043c251380ac607df54fff882f689f237
+SHA1 (patch-ca) = bb878d104bc393751a5509c8094d8d9250b2312b
+SHA1 (patch-cb) = e04a960ef902d99ace8c02d04b10fde638265776
+SHA1 (patch-ce) = 6b1efab32c6bc28e0faf7522322e6d805eb21730
+SHA1 (patch-ch) = a0831869e23d4a66588e6e27eecedb08527c9498
+SHA1 (patch-ci) = fe943f07044efa457d163eb86974ea10bb356226
+SHA1 (patch-cj) = 3f40f1b166a054d55224c3e79d74516ca608b696
+SHA1 (patch-ck) = 28207b8186c9ad194a1edc696159915bc16d1097
+SHA1 (patch-cn) = b5e56787fb9ca10025e9061d7bfd2da549ee3fa3
+SHA1 (patch-da) = b25f30544dd679d95997cafb7e427a41f98884b1
+SHA1 (patch-ta) = ca0d1e4bc2dbbc4b86a087fed27cd1e7bbb2873f
+SHA1 (patch-zc) = 0c61b6028813e0f80bfe0760a1e74e3037d37cdd

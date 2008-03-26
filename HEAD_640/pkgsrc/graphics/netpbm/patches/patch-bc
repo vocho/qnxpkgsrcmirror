@@ -1,0 +1,14 @@
+$NetBSD$
+
+--- converter/other/pnmtotiffcmyk.c.orig	2006-01-05 12:04:57.000000000 -0500
++++ converter/other/pnmtotiffcmyk.c
+@@ -55,7 +55,9 @@ Software copyrights will soon need famil
+ 
+ */
+ 
++#ifndef __QNXNTO__
+ #define _XOPEN_SOURCE
++#endif
+ 
+ #include <string.h>
+ #include <math.h>

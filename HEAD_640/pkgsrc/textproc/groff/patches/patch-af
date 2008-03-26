@@ -1,0 +1,21 @@
+$NetBSD$
+
+--- doc/Makefile.sub.orig	2005-08-07 04:04:51.000000000 -0400
++++ doc/Makefile.sub
+@@ -42,11 +42,12 @@ groff_bin_dirs=\
+ FFLAG=-F$(top_builddir)/font -F$(top_srcdir)/font
+ TFLAG=-M$(top_builddir)/tmac -M$(top_srcdir)/tmac
+ 
++# The GROFF define below is patched to work around a problem
++# on 6.3.2 procnto (PR 44407). With a later procnto, this
++# patch should not be necessary.
+ GROFF=\
+-  GROFF_COMMAND_PREFIX=''; \
+-  export GROFF_COMMAND_PREFIX; \
+-  GROFF_BIN_PATH=$(GROFF_BIN_PATH); \
+-  export GROFF_BIN_PATH; \
++  env GROFF_COMMAND_PREFIX=''; \
++  PATH=/bin:/usr/bin:$(GROFF_BIN_PATH); \
+   sed -e "s;@VERSION@;$(version)$(revision);" $< \
+   | $(GROFFBIN) $(TFLAG) $(FFLAG) -Upet -ww
+ 

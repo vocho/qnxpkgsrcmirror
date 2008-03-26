@@ -1,0 +1,13 @@
+$NetBSD: patch-ab,v 1.4 2007/04/28 20:17:13 hubertf Exp $
+
+--- Makefile.orig	2007-02-19 21:51:12.000000000 +0100
++++ Makefile	2007-04-28 11:32:25.000000000 +0200
+@@ -35,7 +35,7 @@ VERSION := $(shell sh mk-version)
+ RELEASE_VERSION := $(shell cat VERSION)
+ 
+ CC=gcc
+-CFLAGS += -W -Wall -O3 -Wmissing-declarations -Wwrite-strings -g
++CFLAGS += -W -Wall -O3 -Wmissing-declarations -Wwrite-strings -g -DPKG_SYSCONFDIR=\"${PKG_SYSCONFDIR}\"
+ CPPFLAGS = -DVERSION=\"$(VERSION)\"
+ LDFLAGS = -g $(shell libgcrypt-config --libs)
+ CFLAGS +=  $(shell libgcrypt-config --cflags)

@@ -1,0 +1,12 @@
+$NetBSD: distinfo,v 1.11 2007/11/30 22:12:07 wiz Exp $
+
+SHA1 (pkg-config-0.22.tar.gz) = 3ec40bda9864d7aa3c912c6ae87a750fd8b6e420
+RMD160 (pkg-config-0.22.tar.gz) = f82754f9892469d2865cc5d2fd3c2ca4513dab5b
+Size (pkg-config-0.22.tar.gz) = 1006425 bytes
+SHA1 (patch-aa) = 86e1d0b7e86fe125482533f4f5d41e6b230031b5
+SHA1 (patch-ab) = 2298c2798be04669796bf990d9dbddbfc8ee1897
+SHA1 (patch-ac) = 53d90ba40f8aafe0eae9c898e122a95ce951d2e3
+SHA1 (patch-ad) = ad7805b2aa69e3c872fa35eb08a938fa3f8d323b
+SHA1 (patch-ae) = b924f64ee3c7ef9f3efe6d83b60bc0a6fbe1f26d
+SHA1 (patch-af) = 1186777da42151583594fd137e135ef6a77ee09f
+SHA1 (patch-ah) = 9b5e537f2c0606efa45078d02de53700f3d3439a

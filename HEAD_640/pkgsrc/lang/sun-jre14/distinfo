@@ -1,0 +1,5 @@
+$NetBSD: distinfo,v 1.23 2007/04/21 20:40:52 rillig Exp $
+
+SHA1 (j2re-1_4_2_14-linux-i586.bin) = 28704686d1200cc1830a03c48452731f04603888
+RMD160 (j2re-1_4_2_14-linux-i586.bin) = 7054f23ae3a4fd304dfbb7e9c73da8462507c720
+Size (j2re-1_4_2_14-linux-i586.bin) = 14373288 bytes

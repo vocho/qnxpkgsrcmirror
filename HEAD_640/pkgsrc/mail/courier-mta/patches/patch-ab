@@ -1,0 +1,17 @@
+$NetBSD: patch-ab,v 1.3 2007/10/15 15:37:14 jlam Exp $
+
+--- courier/configure.orig	Sat Sep 29 14:57:58 2007
++++ courier/configure
+@@ -22280,9 +22280,9 @@ done
+ 
+ if test "$testmode" = "0"
+ then
+-	INSTALL_PROGRAM='${INSTALL} -m 700'
+-	INSTALL_SCRIPT='${INSTALL} -m 700'
+-	INSTALL_DATA='${INSTALL} -m 600'
++	INSTALL_PROGRAM='${BSD_INSTALL_PROGRAM}'
++	INSTALL_SCRIPT='${BSD_INSTALL_SCRIPT}'
++	INSTALL_DATA='${BSD_INSTALL_DATA}'
+ fi
+ 
+ ac_ext=cpp

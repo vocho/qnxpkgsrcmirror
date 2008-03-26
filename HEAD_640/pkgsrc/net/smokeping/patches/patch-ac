@@ -1,0 +1,49 @@
+$NetBSD: patch-ac,v 1.6 2007/11/22 20:25:54 adrianp Exp $
+
+--- etc/config.dist.orig	2007-10-15 08:49:18.000000000 +0100
++++ etc/config.dist
+@@ -1,16 +1,16 @@
+ *** General ***
+ 
+-owner    = Peter Random
+-contact  = some@address.nowhere
+-mailhost = my.mail.host
+-sendmail = /usr/lib/sendmail
+-imgcache = /home/oetiker/public_html/smokeping-ms/cache
++owner    = Charlie Root
++contact  = root@localhost
++mailhost = smtp.mynet
++sendmail = /usr/sbin/sendmail
++imgcache = @SPDIR@/.simg
+ imgurl   = cache
+-datadir  = /tmp/smokeping-ms/data
+-piddir  = /tmp/smokeping-ms/var
+-cgiurl   = http://some.url/smokeping.cgi
+-smokemail = /home/oetiker/checkouts/smokeping/trunk/software/etc/smokemail.dist
+-tmail = /home/oetiker/checkouts/smokeping/trunk/software/etc/tmail.dist
++datadir  = @VARBASE@/db/smokeping
++piddir  = @VARBASE@/run
++cgiurl   = http://localhost/cgi-bin/smokeping.cgi
++smokemail = @PREFIX@/etc/smokeping/smokemail
++tmail = @PKG_SYSCONFDIR@/tmail
+ # specify this to get syslog logging
+ syslogfacility = local0
+ # each probe is now run in its own process
+@@ -44,7 +44,7 @@ AVERAGE  0.5 144   720
+ 
+ *** Presentation ***
+ 
+-template = /home/oetiker/checkouts/smokeping/trunk/software/etc/basepage.html.dist
++template = @PKG_SYSCONFDIR@/basepage.html
+ 
+ + charts
+ 
+@@ -96,7 +96,7 @@ unison_tolerance = 2
+ 
+ + FPing
+ 
+-binary = /usr/sbin/fping
++binary = @PREFIX@/sbin/fping
+ 
+ *** Slaves ***
+ secrets=/home/oetiker/checkouts/smokeping/trunk/software/etc/smokeping_secrets.dist

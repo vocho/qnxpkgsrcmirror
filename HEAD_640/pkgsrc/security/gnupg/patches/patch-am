@@ -1,0 +1,12 @@
+$NetBSD$
+
+--- util/cert.c.orig	2006-04-03 04:13:21.000000000 -0400
++++ util/cert.c
+@@ -27,6 +27,7 @@
+ #else
+ #include <netinet/in.h>
+ #include <arpa/nameser.h>
++#include <arpa/inet.h>
+ #include <resolv.h>
+ #endif
+ #include <string.h>

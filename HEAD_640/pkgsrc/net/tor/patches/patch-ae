@@ -1,0 +1,21 @@
+$NetBSD: patch-ae,v 1.4 2007/09/11 15:53:58 obache Exp $
+
+--- configure.orig	2007-08-30 21:01:38.000000000 +0000
++++ configure
+@@ -5356,6 +5356,8 @@ done
+ 
+ fi
+ 
++# these checks don't work, assume types are present
++if false; then
+ 
+ { echo "$as_me:$LINENO: checking for u_int64_t" >&5
+ echo $ECHO_N "checking for u_int64_t... $ECHO_C" >&6; }
+@@ -5609,6 +5611,7 @@ _ACEOF
+ 
+ fi
+ 
++fi
+ 
+ { echo "$as_me:$LINENO: checking for libevent directory" >&5
+ echo $ECHO_N "checking for libevent directory... $ECHO_C" >&6; }

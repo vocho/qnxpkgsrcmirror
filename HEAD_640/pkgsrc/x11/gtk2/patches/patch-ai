@@ -1,0 +1,26 @@
+$NetBSD$
+
+- obvious bugfix from someelse
+- add support for QNX
+
+--- configure.orig	2007-09-13 22:47:55.000000000 +0200
++++ configure
+@@ -4652,7 +4652,7 @@ fi
+ rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
+ 
+ 
+-if test "$OBJC" == "yes"; then
++if test "$OBJC" = "yes"; then
+   HAVE_OBJC_TRUE=
+   HAVE_OBJC_FALSE='#'
+ else
+@@ -5270,7 +5270,8 @@ newos6*)
+   ;;
+ 
+ nto-qnx*)
+-  lt_cv_deplibs_check_method=unknown
++  lt_cv_deplibs_check_method='match_pattern /lib[^/]+(\\.so|S\\.a)\$'
++  lt_cv_file_magic_cmd=/usr/bin/file
+   ;;
+ 
+ openbsd*)

@@ -1,0 +1,5 @@
+$NetBSD: distinfo,v 1.2 2007/06/08 08:37:17 wiz Exp $
+
+SHA1 (DBIx-DBSchema-0.31.tar.gz) = 1d47d46324fb904a0e5093b91788d1669de0c04d
+RMD160 (DBIx-DBSchema-0.31.tar.gz) = c1bcc5148fafeb9b334e58f5eda64559e916bbd8
+Size (DBIx-DBSchema-0.31.tar.gz) = 21182 bytes

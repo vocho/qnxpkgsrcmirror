@@ -1,0 +1,20 @@
+$NetBSD: patch-aa,v 1.6 2007/11/09 12:07:06 martti Exp $
+
+--- bin/Makefile.in.orig	2007-09-01 10:30:54.000000000 +0000
++++ bin/Makefile.in	2007-11-07 08:14:22.000000000 +0000
+@@ -728,14 +728,8 @@
+ 	_fvwm-perllib.1
+ 
+ install-exec-local:
+-	@rm -f $(DESTDIR)$(bindir)/xpmroot
+-	@$(LN_S) fvwm-root $(DESTDIR)$(bindir)/xpmroot || \
+-		echo "Minor warning: $(bindir)/xpmroot symlink was not created"
+-
+ install-data-local:
+-	@rm -f $(DESTDIR)$(mandir)/man1/xpmroot.1
+-	@$(LN_S) fvwm-root.1 $(DESTDIR)$(mandir)/man1/xpmroot.1 || \
+-		echo "Minor warning: $(mandir)/man1/xpmroot.1 symlink was not created"
++
+ # Tell versions [3.59,3.63) of GNU make to not export all variables.
+ # Otherwise a system limit (for SysV at least) may be exceeded.
+ .NOEXPORT:

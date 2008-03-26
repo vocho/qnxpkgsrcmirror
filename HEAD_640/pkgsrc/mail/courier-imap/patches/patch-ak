@@ -1,0 +1,12 @@
+$NetBSD: patch-ak,v 1.2 2007/10/15 15:37:21 jlam Exp $
+
+--- imap/mkimapdcert.in.orig	Sun Jul  1 15:54:59 2007
++++ imap/mkimapdcert.in
+@@ -30,7 +30,6 @@ cleanup() {
+ 	exit 1
+ }
+ 
+-cd @mydatadir@
+ dd if=@RANDOMV@ of=@mydatadir@/imapd.rand count=1 2>/dev/null
+ @OPENSSL@ req -new -x509 -days 365 -nodes \
+ 	-config @sysconfdir@/imapd.cnf -out @mydatadir@/imapd.pem -keyout @mydatadir@/imapd.pem || cleanup

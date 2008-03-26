@@ -1,0 +1,13 @@
+$NetBSD: patch-ag,v 1.4 2007/05/23 12:53:01 markd Exp $
+
+--- configure.orig	2007-05-14 23:23:31.000000000 +1200
++++ configure
+@@ -44241,7 +44241,7 @@ fi
+ { echo "$as_me:$LINENO: result: $ac_cv_lib_ossaudio__oss_ioctl" >&5
+ echo "${ECHO_T}$ac_cv_lib_ossaudio__oss_ioctl" >&6; }
+ if test $ac_cv_lib_ossaudio__oss_ioctl = yes; then
+-  LIBOSSAUDIO="-lossaudio"
++  LIBOSSAUDIO="${LIBOSSAUDIO}"
+ fi
+ 
+ 
