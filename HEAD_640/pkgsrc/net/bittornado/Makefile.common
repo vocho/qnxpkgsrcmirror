@@ -1,0 +1,17 @@
+# $NetBSD: Makefile.common,v 1.11 2007/09/21 18:52:06 veego Exp $
+#
+
+DISTNAME=		BitTornado-0.3.18
+CATEGORIES=		net
+MASTER_SITES=		http://download2.bittornado.com/download/
+
+MAINTAINER=		veego@NetBSD.org
+HOMEPAGE=		http://www.bittornado.com/
+COMMENT=		Experimental bittorrent client
+
+DISTINFO_FILE=		${.CURDIR}/../../net/bittornado/distinfo
+PATCHDIR=		${.CURDIR}/../../net/bittornado/patches
+
+WRKSRC=			${WRKDIR}/BitTornado-CVS
+
+PYTHON_VERSIONS_ACCEPTED=	24 23 22

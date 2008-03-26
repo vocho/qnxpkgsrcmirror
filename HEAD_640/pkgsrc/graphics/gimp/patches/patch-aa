@@ -1,0 +1,13 @@
+$NetBSD: patch-aa,v 1.19 2007/12/17 19:07:11 adam Exp $
+
+--- etc/Makefile.in.orig	2007-12-14 15:57:54.000000000 +0100
++++ etc/Makefile.in
+@@ -404,7 +404,7 @@ gimpdatadir = @gimpdatadir@
+ gimpdir = @gimpdir@
+ gimplocaledir = @gimplocaledir@
+ gimpplugindir = @gimpplugindir@
+-gimpsysconfdir = @gimpsysconfdir@
++gimpsysconfdir = $(prefix)/share/examples/gimp-2.0
+ host = @host@
+ host_alias = @host_alias@
+ host_cpu = @host_cpu@

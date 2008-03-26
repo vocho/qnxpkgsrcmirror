@@ -1,0 +1,114 @@
+$NetBSD: patch-ba,v 1.9 2007/11/17 16:28:09 hira Exp $
+
+--- config_office/configure.orig	2007-08-24 21:31:18.000000000 +0900
++++ config_office/configure	2007-11-13 10:30:55.000000000 +0900
+@@ -3010,11 +3010,11 @@
+ 		test_cups=no
+ 		_os=OSF1
+ 		;;
+-	netbsd)
++	*netbsd*)
+ 		test_gtk=yes
+ 		build_cairo=yes
+ 		test_kde=yes
+-		test_cups=no
++		test_cups=yes
+ 		PTHREAD_CFLAGS="-pthread"
+ 		PTHREAD_LIBS="-pthread -lpthread"
+ 		_os=NetBSD
+@@ -9544,7 +9544,7 @@
+          echo "JAVA_HOME was not explicitly informed with --with-jdk-home. the configure script" >> warn
+          echo "attempted to find JAVA_HOME automatically, but apparently it failed" >> warn
+          echo "in case JAVA_HOME is incorrectly set, some projects with not be built correctly" >> warn
+-         if test "$JDK" == "gcj"; then
++         if test "$JDK" = "gcj"; then
+              echo "e.g. install java-1.4.2-gcj-compat-devel and use --with-jdk-home=/usr/lib/jvm/java-1.4.2-gcj" >> warn
+          fi
+       fi
+@@ -12477,7 +12477,7 @@
+ if test -n "$with_system_libxslt" -o -n "$with_system_libs" && \
+    test "$with_system_libxslt" != "no"; then
+     if test -z "$with_system_libxml" -a -z "$with_system_libs" || \
+-      test "$with_system_libxml" == "no"; then
++      test "$with_system_libxml" = "no"; then
+       # somehow AC_MSG_WARN won't work...
+        echo "to prevent incompatibilities between internal libxml2 and libxslt, the office will be build with system-libxml"
+        echo "to prevent incompatibilities between internal libxml2 and libxslt, the office will be build with system-libxml" >> warn
+@@ -12487,7 +12487,7 @@
+ if test -n "$with_system_libxml" -o -n "$with_system_libs" && \
+    test "$with_system_libxml" != "no"; then
+     if test -z "$with_system_libxslt" -a -z "$with_system_libs" || \
+-      test "$with_system_libxslt" == "no"; then
++      test "$with_system_libxslt" = "no"; then
+       # somehow AC_MSG_WARN won't work...
+        echo "to prevent incompatibilities between internal libxslt and libxml2, the office will be build with system-libxslt"
+        echo "to prevent incompatibilities between internal libxslt and libxml2, the office will be build with system-libxslt" >> warn
+@@ -12970,13 +12970,13 @@
+ 
+ 
+    python_include=`$PYTHON -c "import distutils.sysconfig; print distutils.sysconfig.get_config_var('INCLUDEPY');"`
++   python_ldflags=`$PYTHON -c "import distutils.sysconfig; print distutils.sysconfig.get_config_var('LDFLAGS');"`
+    python_version=`$PYTHON -c "import distutils.sysconfig; print distutils.sysconfig.get_config_var('VERSION');"`
+    PYTHON_CFLAGS="-I$python_include"
+-
+    if test "$_os" = "Darwin"; then
+       PYTHON_LIBS="-framework Python"
+    else
+-      PYTHON_LIBS="-lpython$python_version"
++      PYTHON_LIBS="-lpython$python_version $python_ldflags"
+    fi
+ 
+       save_CPPFLAGS="$CPPFLAGS"
+@@ -13090,7 +13090,7 @@
+ echo "$as_me:$LINENO: result: $ac_cv_header_db_h" >&5
+ echo "${ECHO_T}$ac_cv_header_db_h" >&6
+ if test $ac_cv_header_db_h = yes; then
+-   DB_INCLUDES=/usr/include
++   DB_INCLUDES=${BLNK_PREFIX_db4}/include/db4
+ else
+ 
+              CFLAGS=-I/usr/include/db4
+@@ -13213,13 +13213,13 @@
+     #AC_CHECK_LIB(db, db_create, [],
+     #  [AC_MSG_ERROR([db library not installed or functional])], [])
+ 
+-echo "$as_me:$LINENO: checking for main in -ldb" >&5
+-echo $ECHO_N "checking for main in -ldb... $ECHO_C" >&6
++echo "$as_me:$LINENO: checking for main in -ldb4" >&5
++echo $ECHO_N "checking for main in -ldb4... $ECHO_C" >&6
+ if test "${ac_cv_lib_db_main+set}" = set; then
+   echo $ECHO_N "(cached) $ECHO_C" >&6
+ else
+   ac_check_lib_save_LIBS=$LIBS
+-LIBS="-ldb  $LIBS"
++LIBS="-ldb4  $LIBS"
+ cat >conftest.$ac_ext <<_ACEOF
+ /* confdefs.h.  */
+ _ACEOF
+@@ -13276,7 +13276,7 @@
+ #define HAVE_LIBDB 1
+ _ACEOF
+ 
+-  LIBS="-ldb $LIBS"
++  LIBS="-ldb4 $LIBS"
+ 
+ else
+   { { echo "$as_me:$LINENO: error: db not installed or functional" >&5
+@@ -18928,7 +18928,7 @@
+ echo "$as_me:$LINENO: result: $ac_cv_header_audio_audiolib_h" >&5
+ echo "${ECHO_T}$ac_cv_header_audio_audiolib_h" >&6
+ if test $ac_cv_header_audio_audiolib_h = yes; then
+-   NAS_INCLUDES=/usr/include
++   NAS_INCLUDES=${BLNK_PREFIX_nas}/include
+ else
+ 
+              CFLAGS=-I/usr/X11R6/include
+@@ -22818,7 +22818,7 @@
+     fi
+ 
+         KDE_CFLAGS="-I$qt_incdir -I$kde_incdir -DQT_CLEAN_NAMESPACE -DQT_THREAD_SUPPORT"
+-    KDE_LIBS="-L$kde_libdir -L$qt_libdir -lkdeui -lkdecore -lqt-mt"
++    KDE_LIBS="-L$kde_libdir -Wl,-R$kde_libdir -L$qt_libdir -Wl,-R$qt_libdir -lkdeui -lkdecore -lqt-mt"
+ fi
+ 
+ 

@@ -1,0 +1,15 @@
+$NetBSD$
+
+--- configure.in.orig	2007-09-23 23:25:27.000000000 -0400
++++ configure.in
+@@ -998,8 +998,8 @@ linux*)		LOCAL_LDFLAGS=-rdynamic		 # all
+ 		case "`uname -r`" in
+ 		2.[[456789]]*|3*)	AC_DEFINE(PGRP_PIPE) ;;
+ 		esac ;;
+-*qnx6*)		LOCAL_CFLAGS="-Dqnx -Dqnx6" LOCAL_LIBS="-lncurses" ;;
+-*qnx*)		LOCAL_CFLAGS="-Dqnx -F -3s" LOCAL_LDFLAGS="-3s" LOCAL_LIBS="-lunix -lncurses" ;;
++*qnx6*)		LOCAL_CFLAGS=LOCAL_LIBS="-lncurses" ;;
++*qnx*)		LOCAL_CFLAGS="-F -3s" LOCAL_LDFLAGS="-3s" LOCAL_LIBS="-lunix -lncurses" ;;
+ powerux*)	LOCAL_LIBS="-lgen" ;;
+ cygwin*)	LOCAL_CFLAGS=-DRECYCLES_PIDS ;;
+ opennt*|interix*) LOCAL_CFLAGS="-DNO_MAIN_ENV_ARG -DBROKEN_DIRENT_D_INO -D_POSIX_SOURCE" ;;

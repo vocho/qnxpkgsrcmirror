@@ -1,0 +1,14 @@
+$NetBSD$
+
+--- test/bench.c.orig	2007-06-29 02:07:34.000000000 -0400
++++ test/bench.c
+@@ -41,7 +41,9 @@
+ #include <sys/stat.h>
+ #include <sys/time.h>
+ #include <sys/socket.h>
++#ifdef HAVE_SYS_SIGNAL_H
+ #include <sys/signal.h>
++#endif
+ #include <sys/resource.h>
+ #include <fcntl.h>
+ #include <stdlib.h>

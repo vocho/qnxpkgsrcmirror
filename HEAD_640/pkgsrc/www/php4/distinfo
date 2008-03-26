@@ -1,0 +1,18 @@
+$NetBSD: distinfo,v 1.66 2007/08/01 01:40:54 taca Exp $
+
+SHA1 (php-4.4.7.tar.bz2) = a6e2d6b5c5aa4e82a718563dc8dbb4b83fc91b78
+RMD160 (php-4.4.7.tar.bz2) = 5eb44c4b7711111dcbc9117e21ad644e9e6562f3
+Size (php-4.4.7.tar.bz2) = 4543531 bytes
+SHA1 (patch-aa) = feb064407950d0fc732b7240e65cac84420d2407
+SHA1 (patch-ab) = 38a4bcd0d65b26c5d8e54e22b552f60831188469
+SHA1 (patch-ac) = 28288b1e79c14fb2b40eaefed0d6d2bff4775607
+SHA1 (patch-ad) = 9ca5d2f59bfeea77a98cd0e727546d11669114cd
+SHA1 (patch-ag) = 1ded1d7f4daac6806f41864c783f16d3403315e4
+SHA1 (patch-ah) = 0ac37bd35c4594cb58f1ea85ef811154b644a931
+SHA1 (patch-ai) = 0b9c1c9fb75a64026f2fb3cbd44cc19e0a1f186c
+SHA1 (patch-aj) = cc68ce876dc5998becbe2f1f74288b5da5bbaca3
+SHA1 (patch-ak) = 1f9fbe26c7329e1d18eec053499ee2d574b5b970
+SHA1 (patch-ap) = 2f852abd1e9d0f089add18b2eade2831253ad00e
+SHA1 (patch-at) = f8b3aebd61fe2d5b5a994e1d973424a1ed397f63
+SHA1 (patch-au) = f9798aa440e174f65dde574c4f3b28183b3d18bc
+SHA1 (patch-aw) = 2cdfd3c194c30f19a102bce66a68125ccfa59697

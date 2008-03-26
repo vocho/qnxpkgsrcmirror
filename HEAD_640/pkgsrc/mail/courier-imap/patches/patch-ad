@@ -1,0 +1,14 @@
+$NetBSD: patch-ad,v 1.8 2007/10/15 15:37:21 jlam Exp $
+
+--- configure.orig	Sat Sep 29 14:48:19 2007
++++ configure
+@@ -20490,9 +20490,6 @@ else
+ fi
+ 
+ 
+-INSTALL_DATA='${INSTALL} -m 0600'
+-INSTALL_SCRIPT='${INSTALL}'
+-
+ if ulimit -v 2>/dev/null
+ then
+ 	ULIMIT='ulimit -v'

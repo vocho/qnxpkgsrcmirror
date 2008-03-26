@@ -1,0 +1,14 @@
+$NetBSD$
+
+--- test/regress_http.c.orig	2007-08-16 00:50:57.000000000 -0400
++++ test/regress_http.c
+@@ -42,7 +42,9 @@
+ #include <sys/queue.h>
+ #ifndef WIN32
+ #include <sys/socket.h>
++#ifdef HAVE_SYS_SIGNAL_H
+ #include <sys/signal.h>
++#endif
+ #include <unistd.h>
+ #endif
+ #include <netdb.h>

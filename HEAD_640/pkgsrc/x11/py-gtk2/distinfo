@@ -1,0 +1,5 @@
+$NetBSD: distinfo,v 1.19 2007/10/31 20:51:43 drochner Exp $
+
+SHA1 (pygtk-2.12.0.tar.bz2) = 8248a620ef4147af07a708643926523024789d4e
+RMD160 (pygtk-2.12.0.tar.bz2) = d982a9752abcd214be975a3ead3946b3c8d1d474
+Size (pygtk-2.12.0.tar.bz2) = 2154621 bytes

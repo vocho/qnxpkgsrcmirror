@@ -1,0 +1,14 @@
+$NetBSD: patch-ae,v 1.9 2007/07/07 15:28:31 wiz Exp $
+
+--- doc/examples/Makefile.in.orig	2007-06-12 16:20:22.000000000 +0000
++++ doc/examples/Makefile.in
+@@ -704,7 +704,8 @@ index.html: examples.xml examples.xsl
+ 
+ install-data-local: 
+ 	$(mkinstalldirs) $(DESTDIR)$(HTML_DIR)
+-	-@INSTALL@ -m 0644 $(srcdir)/*.html $(srcdir)/*.c $(srcdir)/*.xml $(srcdir)/*.xsl $(srcdir)/*.res $(DESTDIR)$(HTML_DIR)
++	-@INSTALL@ -m 0644 $(srcdir)/*.c $(srcdir)/*.xml $(srcdir)/*.xsl $(srcdir)/*.res $(DESTDIR)$(HTML_DIR)
++	-@INSTALL@ -m 0644 $(srcdir)/*.html $(DESTDIR)$(HTML_DIR)
+ 
+ valgrind: 
+ 	$(MAKE) CHECKER='valgrind -q' tests

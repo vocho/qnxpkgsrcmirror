@@ -1,0 +1,13 @@
+$NetBSD: patch-ae,v 1.8 2007/11/17 21:20:50 adam Exp $
+
+--- configure.orig	2007-10-28 23:19:03.000000000 +0100
++++ configure
+@@ -25012,7 +25012,7 @@ if test "$gww_has_gettext" = "yes" >/dev
+ 
+  cat </dev/null >$ac_confdir/po/Makefile.in
+  echo 'prefix = @prefix@' >> $ac_confdir/po/Makefile.in
+- echo 'localedir = $(prefix)/share/locale' >> $ac_confdir/po/Makefile.in
++ echo 'localedir = ${PREFIX}/${PKGLOCALEDIR}/locale' >> $ac_confdir/po/Makefile.in
+  echo 'INSTALL = @INSTALL@' >> $ac_confdir/po/Makefile.in
+  echo 'INSTALL_DATA = @INSTALL_DATA@' >> $ac_confdir/po/Makefile.in
+  echo '' >> $ac_confdir/po/Makefile.in

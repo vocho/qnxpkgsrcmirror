@@ -1,0 +1,5 @@
+$NetBSD: distinfo,v 1.2 2007/11/26 00:00:33 wiz Exp $
+
+SHA1 (libconfig-1.2.tar.gz) = a7672dd5eff1fcd344c038b06ca6334848ea7def
+RMD160 (libconfig-1.2.tar.gz) = 55fd341ad0332fec67f515dfccfa82228b6cc53b
+Size (libconfig-1.2.tar.gz) = 505661 bytes

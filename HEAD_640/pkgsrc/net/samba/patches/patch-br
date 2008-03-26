@@ -1,0 +1,31 @@
+$NetBSD: patch-br,v 1.3 2007/10/28 07:28:49 taca Exp $
+
+--- lib/util.c.orig	2007-08-20 22:04:50.000000000 +0900
++++ lib/util.c
+@@ -2597,6 +2597,26 @@ char *lock_path(const char *name)
+ }
+ 
+ /*****************************************************************
++ A useful function for returning a path in the Samba state directory.
++*****************************************************************/  
++
++char *state_path(const char *name)
++{
++	static pstring fname;
++
++	pstrcpy(fname,lp_statedir());
++	trim_char(fname,'\0','/');
++	
++	if (!directory_exist(fname,NULL))
++		mkdir(fname,0755);
++	
++	pstrcat(fname,"/");
++	pstrcat(fname,name);
++
++	return fname;
++}
++
++/*****************************************************************
+  A useful function for returning a path in the Samba pid directory.
+ *****************************************************************/
+ 

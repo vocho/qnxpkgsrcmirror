@@ -1,0 +1,11 @@
+@comment $NetBSD: PLIST,v 1.7 2007/10/17 20:46:55 wiz Exp $
+include/theora/theora.h
+lib/libtheora.la
+lib/pkgconfig/theora.pc
+share/doc/${PKGNAME}/color.html
+share/doc/${PKGNAME}/doxygen-build.stamp
+share/doc/${PKGNAME}/draft-ietf-avt-rtp-theora-00.txt
+share/doc/${PKGNAME}/draft-ietf-avt-rtp-theora-00.xml
+share/doc/${PKGNAME}/vp3-format.txt
+@dirrm share/doc/${PKGNAME}
+@dirrm include/theora

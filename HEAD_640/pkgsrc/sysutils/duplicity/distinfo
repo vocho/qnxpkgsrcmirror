@@ -1,0 +1,6 @@
+$NetBSD: distinfo,v 1.4 2007/11/19 13:46:36 tron Exp $
+
+SHA1 (duplicity-0.4.3.tar.gz) = 57d44feee22e20d14772c80a4ce048d5a58cf4ad
+RMD160 (duplicity-0.4.3.tar.gz) = 2f8be650a42384ef5612a36968459358130a6909
+Size (duplicity-0.4.3.tar.gz) = 104581 bytes
+SHA1 (patch-aa) = 48866f297e2dcffd5da98b8298d6acf08821f7e8

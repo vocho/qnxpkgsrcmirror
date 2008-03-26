@@ -1,0 +1,22 @@
+$NetBSD: patch-aa,v 1.5 2007/11/08 03:56:58 obache Exp $
+
+--- threadutil/src/ThreadPool.c.orig	2007-11-05 13:38:41.000000000 +0000
++++ threadutil/src/ThreadPool.c
+@@ -98,7 +98,7 @@ SetPolicyType( PolicyType in )
+     return 0;
+ #elif defined(WIN32)
+      return sched_setscheduler( 0, in);
+-#elif defined(_POSIX_PRIORITY_SCHEDULING) && _POSIX_PRIORITY_SCHEDULING > 0
++#elif defined(_POSIX_PRIORITY_SCHEDULING) && _POSIX_PRIORITY_SCHEDULING >= 200112L
+      struct sched_param current;
+ 
+      sched_getparam( 0, &current );
+@@ -126,7 +126,7 @@ SetPolicyType( PolicyType in )
+ static int
+ SetPriority( ThreadPriority priority )
+ {
+-#if defined(_POSIX_PRIORITY_SCHEDULING) && _POSIX_PRIORITY_SCHEDULING > 0
++#if defined(_POSIX_PRIORITY_SCHEDULING) && _POSIX_PRIORITY_SCHEDULING >= 200112L
+     int currentPolicy;
+     int minPriority = 0;
+     int maxPriority = 0;

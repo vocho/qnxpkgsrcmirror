@@ -1,0 +1,13 @@
+$NetBSD$
+
+--- extern.h.orig	2005-07-15 06:20:00.000000000 -0400
++++ extern.h
+@@ -251,7 +251,7 @@ int sclose(struct sock *sp);
+ enum okay swrite(struct sock *sp, const char *data);
+ enum okay swrite1(struct sock *sp, const char *data, int sz, int use_buffer);
+ int sgetline(char **line, size_t *linesize, size_t *linelen, struct sock *sp);
+-enum okay sopen(const char *xserver, struct sock *sp, int use_ssl,
++enum okay nail_sopen(const char *xserver, struct sock *sp, int use_ssl,
+ 		const char *uhp, const char *portstr, int verbose);
+ /* getname.c */
+ char *getname(int uid);

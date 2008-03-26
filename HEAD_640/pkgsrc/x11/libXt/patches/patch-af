@@ -1,0 +1,77 @@
+$NetBSD$
+
+--- configure.orig	2007-01-28 07:31:11.000000000 +0100
++++ configure
+@@ -864,6 +864,8 @@ INSTALL_MAKESTRS_FALSE
+ XFILESEARCHPATHDEFAULT
+ appdefaultdir
+ STRINGSABIOPTIONS
++CROSS_COMPILING_TRUE
++CROSS_COMPILING_FALSE
+ RAWCPP
+ RAWCPPFLAGS
+ APP_MAN_SUFFIX
+@@ -20421,10 +20423,21 @@ case $host_os in
+ esac
+ 
+ 
++
++
++if  test $cross_compiling = yes ; then
++  CROSS_COMPILING_TRUE=
++  CROSS_COMPILING_FALSE='#'
++else
++  CROSS_COMPILING_TRUE='#'
++  CROSS_COMPILING_FALSE=
++fi
++
++
+ # Man page processing requirements
+ 
+ 
+-for ac_prog in cpp
++for ac_prog in cpp ucpp
+ do
+   # Extract the first word of "$ac_prog", so it can be a program name with args.
+ set dummy $ac_prog; ac_word=$2
+@@ -20850,6 +20863,13 @@ echo "$as_me: error: conditional \"INSTA
+ Usually this means the macro was only invoked conditionally." >&2;}
+    { (exit 1); exit 1; }; }
+ fi
++if test -z "${CROSS_COMPILING_TRUE}" && test -z "${CROSS_COMPILING_FALSE}"; then
++  { { echo "$as_me:$LINENO: error: conditional \"CROSS_COMPILING\" was never defined.
++Usually this means the macro was only invoked conditionally." >&5
++echo "$as_me: error: conditional \"CROSS_COMPILING\" was never defined.
++Usually this means the macro was only invoked conditionally." >&2;}
++   { (exit 1); exit 1; }; }
++fi
+ 
+ : ${CONFIG_STATUS=./config.status}
+ ac_clean_files_save=$ac_clean_files
+@@ -21225,6 +21245,8 @@ do
+   case $ac_option in
+   # Handling of the options.
+   -recheck | --recheck | --rechec | --reche | --rech | --rec | --re | --r)
++	: Avoid regenerating within pkgsrc
++	exit 0
+     ac_cs_recheck=: ;;
+   --version | --versio | --versi | --vers | --ver | --ve | --v | -V )
+     echo "$ac_cs_version"; exit ;;
+@@ -21525,6 +21547,8 @@ INSTALL_MAKESTRS_FALSE!$INSTALL_MAKESTRS
+ XFILESEARCHPATHDEFAULT!$XFILESEARCHPATHDEFAULT$ac_delim
+ appdefaultdir!$appdefaultdir$ac_delim
+ STRINGSABIOPTIONS!$STRINGSABIOPTIONS$ac_delim
++CROSS_COMPILING_TRUE!$CROSS_COMPILING_TRUE$ac_delim
++CROSS_COMPILING_FALSE!$CROSS_COMPILING_FALSE$ac_delim
+ RAWCPP!$RAWCPP$ac_delim
+ RAWCPPFLAGS!$RAWCPPFLAGS$ac_delim
+ APP_MAN_SUFFIX!$APP_MAN_SUFFIX$ac_delim
+@@ -21546,7 +21570,7 @@ LIBOBJS!$LIBOBJS$ac_delim
+ LTLIBOBJS!$LTLIBOBJS$ac_delim
+ _ACEOF
+ 
+-  if test `sed -n "s/.*$ac_delim\$/X/p" conf$$subs.sed | grep -c X` = 33; then
++  if test `sed -n "s/.*$ac_delim\$/X/p" conf$$subs.sed | grep -c X` = 35; then
+     break
+   elif $ac_last_try; then
+     { { echo "$as_me:$LINENO: error: could not make $CONFIG_STATUS" >&5

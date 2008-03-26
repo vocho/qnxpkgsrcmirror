@@ -1,0 +1,16 @@
+$NetBSD$
+
+QNX does not have a separate include file sys/shm.h
+
+--- src/mesa/drivers/x11/glxheader.h.orig	2005-07-16 02:56:20.000000000 +0200
++++ src/mesa/drivers/x11/glxheader.h
+@@ -47,7 +47,9 @@
+ # include <X11/Xutil.h>
+ # ifdef USE_XSHM  /* was SHM */
+ #  include <sys/ipc.h>
++#ifndef __QNXNTO__
+ #  include <sys/shm.h>
++#endif
+ #  include <X11/extensions/XShm.h>
+ # endif
+ # include <GL/glx.h>
