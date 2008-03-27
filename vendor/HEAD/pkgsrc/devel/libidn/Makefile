@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.46 2007/11/29 16:53:59 wiz Exp $
+# $NetBSD: Makefile,v 1.52 2008/03/22 19:43:54 agc Exp $
 
-DISTNAME=	libidn-1.2
+DISTNAME=	libidn-1.5
 CATEGORIES=	devel
 MASTER_SITES=	ftp://alpha.gnu.org/pub/gnu/libidn/ \
 		http://josefsson.org/libidn/releases/
@@ -18,10 +18,12 @@ USE_TOOLS+=		makeinfo pkg-config perl:build
 TEXINFO_REQD=		4.1
 GNU_CONFIGURE=		yes
 INFO_FILES=		yes
+CONFIGURE_ENV+=		EMACS=${FALSE}
+CONFIGURE_ARGS+=	--disable-csharp --disable-java
 
 PKGCONFIG_OVERRIDE+=	libidn.pc.in
 TEST_TARGET=		check
-#LICENSE=		GPL3 LGPL2
+#LICENSE=		gnu-gplv3 gnu-gplv2 gnu-lgplv21
 
 .include "../../converters/libiconv/buildlink3.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"

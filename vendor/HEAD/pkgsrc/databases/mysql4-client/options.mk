@@ -1,4 +1,4 @@
-# $NetBSD: options.mk,v 1.1 2007/07/09 22:27:35 adrianp Exp $
+# $NetBSD: options.mk,v 1.3 2008/03/26 13:22:00 wiz Exp $
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.mysql4-client
 

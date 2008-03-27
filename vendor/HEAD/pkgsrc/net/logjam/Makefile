@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.8 2007/09/21 13:04:12 wiz Exp $
+# $NetBSD: Makefile,v 1.11 2008/03/06 14:53:53 wiz Exp $
 #
 
 DISTNAME=	logjam-4.5.3
-PKGREVISION=	5
+PKGREVISION=	7
 CATEGORIES=	net
 MASTER_SITES=	http://logjam.danga.com/download/
 EXTRACT_SUFX=	.tar.bz2
 
-MAINTAINER=	rillig@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://logjam.danga.com/download/
 COMMENT=	GTK client for LiveJournal.com
 

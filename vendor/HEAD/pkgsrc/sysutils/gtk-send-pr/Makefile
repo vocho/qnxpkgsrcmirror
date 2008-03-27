@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.24 2006/12/08 14:21:20 obache Exp $
+# $NetBSD: Makefile,v 1.28 2008/01/21 12:47:19 obache Exp $
 #
 
-DISTNAME=		gtk-send-pr-0.4.8
+DISTNAME=		gtk-send-pr-0.4.9
+PKGREVISION=		1
 CATEGORIES=		sysutils
 MASTER_SITES=		http://download.berlios.de/gtk-send-pr/
 EXTRACT_SUFX=		.tar.bz2
@@ -13,6 +14,8 @@ COMMENT=		GTK+ based problem report tool
 USE_TOOLS+=		pkg-config
 
 CPPFLAGS.SunOS+=	-Dstrsep=strpbrk
+CPPFLAGS.IRIX+=		-Dstrsep=strpbrk
+LDFLAGS.IRIX+=		-lgen
 
 .include "../../mail/libesmtp/buildlink3.mk"
 .include "../../x11/gtk2/buildlink3.mk"

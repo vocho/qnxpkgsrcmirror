@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.34 2007/06/08 12:25:04 wiz Exp $
+# $NetBSD: Makefile,v 1.36 2008/01/12 11:55:02 wiz Exp $
 #
 
 DISTNAME=	dctc-0.85.4
-PKGREVISION=	4
+PKGREVISION=	5
 CATEGORIES=	net
-MASTER_SITES=	http://www.ac2i.tzo.com/dctc/ \
-		http://brainz.servebeer.com/dctc/
+MASTER_SITES=	http://ac2i.homelinux.com/dctc/ \
+		http://dc.tddm.se/clients/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.ac2i.tzo.com/dctc/
+HOMEPAGE=	http://ac2i.homelinux.com/dctc/
 COMMENT=	Direct Connect clone (Direct Connect Text Client)
 
 GNU_CONFIGURE=		YES

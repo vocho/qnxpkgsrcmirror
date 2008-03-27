@@ -1,6 +1,6 @@
-$NetBSD: distinfo,v 1.2 2007/04/11 17:58:33 drochner Exp $
+$NetBSD: distinfo,v 1.4 2008/03/12 21:36:53 drochner Exp $
 
-SHA1 (alacarte-0.11.3.tar.bz2) = 4e6e2e53dfe17f72b21bd65a3c2676452a151240
-RMD160 (alacarte-0.11.3.tar.bz2) = 5130bd619f049d1abcb93de6f3c706dfa688163a
-Size (alacarte-0.11.3.tar.bz2) = 217547 bytes
+SHA1 (alacarte-0.11.5.tar.bz2) = 33ed1de8d2297226f5b055eb223789574b005dcf
+RMD160 (alacarte-0.11.5.tar.bz2) = de4c66b0c0fb5e4b49be6de7ea83f73b159a6ad4
+Size (alacarte-0.11.5.tar.bz2) = 204512 bytes
 SHA1 (patch-aa) = c0907234bdb7cb3f7de02f5bbbc34aaab3a6d81c

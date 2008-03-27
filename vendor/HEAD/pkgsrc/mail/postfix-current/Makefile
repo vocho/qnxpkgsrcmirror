@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.87 2007/10/30 19:31:40 martti Exp $
+# $NetBSD: Makefile,v 1.97 2008/03/17 07:11:42 martti Exp $
 
-DISTNAME=	postfix-2.5-20071006
-#PKGREVISION=	1
+DISTNAME=	postfix-2.6-20080221
+PKGNAME=	postfix-2.6.20080221
 CATEGORIES=	mail
 MASTER_SITES=	ftp://ftp.porcupine.org/mirrors/postfix-release/experimental/
 DIST_SUBDIR=	postfix
@@ -12,6 +12,7 @@ COMMENT=	Postfix SMTP server and tools
 #LICENSE=	postfix-license
 
 CONFLICTS+=	courier-mta-[0-9]* fastforward>=0.51nb2 sendmail-[0-9]*
+CONFLICTS+=	postfix-2.6-[0-9]*
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
 
@@ -24,17 +25,18 @@ CHECK_HEADERS_SKIP+=	src/global/mail_params.h
 # merely a default, and may be changed by setting "queue_directory" in
 # ${PKG_SYSCONFDIR}/main.cf.
 #
+POSTFIX_DATA_DIR?=	${VARBASE}/db/postfix
 POSTFIX_QUEUE_DIR?=	${VARBASE}/spool/postfix
-BUILD_DEFS+=		VARBASE POSTFIX_QUEUE_DIR
+BUILD_DEFS+=		VARBASE POSTFIX_DATA_DIR POSTFIX_QUEUE_DIR
 
 # CCARGS is a list of options to pass to the preprocessor/compiler.
 # AUXLIBS is a list of options to pass to the linker.
 #
-CCARGS=		# empty
+CCARGS=		-DUSE_SASL_AUTH
 AUXLIBS=	${LDFLAGS}
-FIX_RPATH+=	AUXLIBS
 
 # Set some default paths to override ${WRKSRC}/src/global/mail_params.h.
+CCARGS+=	-DDEF_DATA_DIR=\"${POSTFIX_DATA_DIR}\"
 CCARGS+=	-DDEF_QUEUE_DIR=\"${POSTFIX_QUEUE_DIR}\"
 CCARGS+=	-DDEF_DAEMON_DIR=\"${LIBEXECDIR}\"
 CCARGS+=	-DDEF_COMMAND_DIR=\"${PREFIX}/sbin\"
@@ -53,6 +55,8 @@ SUBST_CLASSES+=		postfix
 SUBST_STAGE.postfix=	post-configure
 SUBST_FILES.postfix=	conf/main.cf src/global/mail_params.h
 SUBST_SED.postfix=	\
+	-e 's|^\(data_directory\) =.*|\1 = ${POSTFIX_DATA_DIR}|'
+SUBST_SED.postfix+=	\
 	-e 's|^\(queue_directory\) =.*|\1 = ${POSTFIX_QUEUE_DIR}|'
 SUBST_SED.postfix+=	\
 	-e 's|^\(command_directory\) =.*|\1 = ${PREFIX}/sbin|'
@@ -101,6 +105,7 @@ MAKE_ENV+=		AUXLIBS=${AUXLIBS:Q} CCARGS=${CCARGS:Q}
 
 RCD_SCRIPTS=		postfix
 OWN_DIRS+=		${POSTFIX_QUEUE_DIR} ${POSTFIX_QUEUE_DIR}/etc
+OWN_DIRS_PERMS+=	${POSTFIX_DATA_DIR} postfix postfix 0700
 MAKE_DIRS+=		${PKG_SYSCONFDIR}
 
 PKG_GROUPS?=		postfix maildrop
@@ -109,7 +114,7 @@ PKG_GECOS.postfix=	Postfix User
 PKG_HOME.postfix=	${POSTFIX_QUEUE_DIR}
 
 CONF_FILES=		# empty
-.for i in main.cf master.cf postfix-files
+.for i in main.cf master.cf
 CONF_FILES+=		${EXAMPLEDIR}/${i} ${PKG_SYSCONFDIR}/${i}
 .endfor
 CONF_FILES_PERMS=	# empty
@@ -117,10 +122,6 @@ CONF_FILES_PERMS=	# empty
 CONF_FILES_PERMS+=	${EXAMPLEDIR}/${i} ${PKG_SYSCONFDIR}/${i} \
 			${ROOT_USER} ${ROOT_GROUP} 755
 .endfor
-.if !empty(PKG_OPTIONS:Msasl) || !empty(PKG_OPTIONS:Mdovecot-sasl)
-MAKE_DIRS+=		${SASLLIBDIR}
-CONF_FILES+=		${EXAMPLEDIR}/smtpd.conf ${SASLLIBDIR}/smtpd.conf
-.endif
 
 MAKE_ENV+=		DEBUG= # empty
 

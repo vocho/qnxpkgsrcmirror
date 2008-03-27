@@ -1,10 +1,6 @@
-# $NetBSD: buildlink3.mk,v 1.5 2006/12/12 21:52:37 joerg Exp $
+# $NetBSD: buildlink3.mk,v 1.7 2008/01/07 13:59:36 tron Exp $
 
 .include "../../mk/bsd.fast.prefs.mk"
-
-.if ${X11_TYPE} == "xorg"
-.include "../../mk/x11.buildlink3.mk"
-.else
 
 BUILDLINK_DEPMETHOD.fixesproto?=	build
 
@@ -29,5 +25,3 @@ BUILDLINK_PKGSRCDIR.fixesproto?=	../../x11/fixesproto
 
 
 BUILDLINK_DEPTH:=     ${BUILDLINK_DEPTH:S/+$//}
-
-.endif

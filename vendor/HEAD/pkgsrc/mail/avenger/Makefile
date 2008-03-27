@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.2 2007/06/08 12:25:03 wiz Exp $
+# $NetBSD: Makefile,v 1.4 2008/03/04 11:02:25 rillig Exp $
 #
 
 DISTNAME=	avenger-0.7.7
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	mail
 MASTER_SITES=	http://www.mailavenger.org/dist/
 
-MAINTAINER=	rillig@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.mailavenger.org/dist/
 COMMENT=	SMTP server with filtering capabilities
 

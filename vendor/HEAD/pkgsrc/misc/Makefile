@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.292 2007/12/15 21:02:17 kristerw Exp $
+# $NetBSD: Makefile,v 1.302 2008/03/25 13:43:14 wiz Exp $
 #
 
 COMMENT=	Miscellaneous utilities
@@ -41,6 +41,7 @@ SUBDIR+=	dpkg
 SUBDIR+=	dt
 SUBDIR+=	dtach
 SUBDIR+=	dvorakng
+SUBDIR+=	dvtm
 SUBDIR+=	dync
 SUBDIR+=	easymenu
 SUBDIR+=	edict
@@ -67,9 +68,7 @@ SUBDIR+=	gnome-utils
 SUBDIR+=	gnome1-dirs
 SUBDIR+=	gnome2-dirs
 SUBDIR+=	gnuls
-SUBDIR+=	goffice
-SUBDIR+=	goffice0.2
-SUBDIR+=	goffice0.5
+SUBDIR+=	goffice0.6
 SUBDIR+=	gok
 SUBDIR+=	gone
 SUBDIR+=	gperiodic
@@ -117,10 +116,14 @@ SUBDIR+=	libcdio
 SUBDIR+=	libquantum
 SUBDIR+=	libutf
 SUBDIR+=	lile
+SUBDIR+=	linux-words
 SUBDIR+=	loco
 SUBDIR+=	logsurfer
 SUBDIR+=	lookup
 SUBDIR+=	lv
+SUBDIR+=	m17n-contrib
+SUBDIR+=	m17n-db
+SUBDIR+=	m17n-docs
 SUBDIR+=	mirmon
 SUBDIR+=	mmv
 SUBDIR+=	molden
@@ -130,8 +133,6 @@ SUBDIR+=	multitail
 SUBDIR+=	nxtvepg
 SUBDIR+=	open2300
 SUBDIR+=	open2300-mysql
-SUBDIR+=	openoffice
-SUBDIR+=	openoffice-bin
 SUBDIR+=	openoffice2
 SUBDIR+=	openoffice2-bin
 SUBDIR+=	orca
@@ -179,6 +180,7 @@ SUBDIR+=	rox-memo
 SUBDIR+=	rpm
 SUBDIR+=	ruby-daemons
 SUBDIR+=	ruby-gem_plugin
+SUBDIR+=	ruby-progressbar
 SUBDIR+=	rubygems
 SUBDIR+=	sch
 SUBDIR+=	sci

@@ -1,15 +1,16 @@
-# $NetBSD: Makefile,v 1.4 2006/12/20 04:56:53 reed Exp $
+# $NetBSD: Makefile,v 1.6 2008/03/15 18:16:51 joerg Exp $
 #
 
-DISTNAME=	moin-1.5.4
-PKGNAME=	${PYPKGPREFIX}-moin-1.5.4
-PKGREVISION=	1
+DISTNAME=	moin-1.6.1
+PKGNAME=	${PYPKGPREFIX}-moin-1.6.1
 CATEGORIES=	www python
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=moin/}
 
 MAINTAINER=	joerg@NetBSD.org
-HOMEPAGE=	http://moinmoin.wikiwikiweb.de/
+HOMEPAGE=	http://moinmo.in/
 COMMENT=	Python clone of WikiWiki
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 DEPENDS+=	${PYPKGPREFIX}-expat-[0-9]*:../../textproc/py-expat
 

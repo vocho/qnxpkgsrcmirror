@@ -1,15 +1,17 @@
-# $NetBSD: Makefile,v 1.48 2007/02/02 01:04:06 joerg Exp $
+# $NetBSD: Makefile,v 1.52 2008/02/09 23:49:27 tnn Exp $
 
 DISTNAME=	pvm3.4.5
 PKGNAME=	pvm-3.4.5
-PKGREVISION=	3
+PKGREVISION=	4
 CATEGORIES=	parallel
 MASTER_SITES=	http://www.netlib.org/pvm3/
 EXTRACT_SUFX=	.tgz
 
-MAINTAINER=	root@garbled.net
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.csm.ornl.gov/pvm/pvm_home.html
 COMMENT=	Parallel Virtual Machine libraries and environment
+
+USE_TOOLS+=	m4
 
 .include "../../mk/bsd.prefs.mk"
 BUILD_DEFS+=		PVM_SSH
@@ -26,6 +28,7 @@ WRKSRC=			${WRKDIR}/pvm3
 USE_LANGUAGES=		c fortran
 USE_LIBTOOL=		yes
 USE_TOOLS+=		gmake
+MAKE_JOBS_SAFE=		no
 
 PVM_ROOT=		${WRKSRC}
 MAKE_ENV+=		PVM_ROOT=${WRKSRC:Q}

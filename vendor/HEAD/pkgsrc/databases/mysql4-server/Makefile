@@ -1,11 +1,13 @@
-# $NetBSD: Makefile,v 1.33 2007/06/14 21:27:41 adrianp Exp $
+# $NetBSD: Makefile,v 1.38 2008/03/26 13:27:16 wiz Exp $
 
 PKGNAME=		${DISTNAME:S/-/-server-/}
 SVR4_PKGNAME=		mysqs
-PKGREVISION=		1
+PKGREVISION=		2
 COMMENT=		MySQL 4, a free SQL database (server)
 
 CONFLICTS=		{mysql-server-[0-9]*,mysql3-server-[0-9]*}
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 .include "../../databases/mysql4-client/Makefile.common"
 
@@ -36,12 +38,19 @@ FILES_SUBST+=		HOSTNAME_CMD=${HOSTNAME_CMD:Q} \
 MESSAGE_SUBST+=		MYSQL_DATADIR=${MYSQL_DATADIR} \
 			MYSQL_USER=${MYSQL_USER} MYSQL_GROUP=${MYSQL_GROUP}
 BUILD_DEFS+=		MYSQL_DATADIR
-BUILD_DIRS=		${WRKSRC} ${WRKSRC}/man
+BUILD_DIRS=		. man
+
+INSTALLATION_DIRS=	bin
 
 .include "../../databases/mysql4-client/buildlink3.mk"
-BUILDLINK_DEPMETHOD.readline=build
-.include "../../devel/readline/buildlink3.mk"
 .include "../../security/tcp_wrappers/buildlink3.mk"
+
+# We only need readline to placate the configure script.  None of the
+# binaries are actually linked against -lreadline, so make this only
+# a build-time dependency.
+#
+BUILDLINK_DEPMETHOD.readline=	build
+.include "../../devel/readline/buildlink3.mk"
 
 post-extract:
 	chmod -x ${WRKSRC}/mysql-test/mysql-test-run.pl
@@ -50,15 +59,19 @@ post-configure:
 	cd ${WRKSRC} && ${CP} -f config.h include/my_config.h
 
 post-build:
-	cd ${WRKSRC}/scripts && ${SETENV} ${MAKE_ENV} ${MAKE_PROGRAM}	\
-		${MAKE_FLAGS} mysqld_safe mysql_install_db mysqldumpslow
+	cd ${WRKSRC}/scripts && \
+	${BUILD_MAKE_CMD} mysqld_safe mysql_install_db mysqldumpslow
 
 post-install:
-	${INSTALL_SCRIPT} ${WRKSRC}/scripts/mysqld_safe ${PREFIX}/bin
-	${INSTALL_SCRIPT} ${WRKSRC}/scripts/mysql_install_db ${PREFIX}/bin
-	${INSTALL_SCRIPT} ${WRKSRC}/scripts/mysqldumpslow ${PREFIX}/bin
-	${INSTALL_SCRIPT} ${WRKSRC}/support-files/mysql.server ${PREFIX}/bin
+	${INSTALL_SCRIPT} ${WRKSRC}/scripts/mysqld_safe \
+		${DESTDIR}${PREFIX}/bin
+	${INSTALL_SCRIPT} ${WRKSRC}/scripts/mysql_install_db \
+		${DESTDIR}${PREFIX}/bin
+	${INSTALL_SCRIPT} ${WRKSRC}/scripts/mysqldumpslow \
+		${DESTDIR}${PREFIX}/bin
+	${INSTALL_SCRIPT} ${WRKSRC}/support-files/mysql.server \
+		${DESTDIR}${PREFIX}/bin
 	${INSTALL_SCRIPT} ${WRKSRC}/scripts/mysql_secure_installation.sh \
-		${PREFIX}/bin/mysql_secure_installation
+		${DESTDIR}${PREFIX}/bin/mysql_secure_installation
 
 .include "../../mk/bsd.pkg.mk"

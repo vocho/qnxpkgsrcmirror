@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.77 2007/11/12 00:15:45 wiz Exp $
+# $NetBSD: Makefile,v 1.80 2008/03/10 18:35:54 drochner Exp $
 
-DISTNAME=	curl-7.17.1
+DISTNAME=	curl-7.18.0
+PKGREVISION=	1
 CATEGORIES=	www
 MASTER_SITES=	http://curl.haxx.se/download/ \
 		ftp://ftp.sunet.se/pub/www/utilities/curl/
@@ -31,20 +32,23 @@ USE_TOOLS+=		perl
 .endif
 
 .include "options.mk"
-
-post-configure:
-	if ${GREP} '#define HAVE_SYS_SELECT_H 1' ${WRKSRC}/src/config.h \
-		>/dev/null; \
-	then \
-	    line='#include <sys/select.h>'; \
-	else \
-	    line='/* sys/select.h not included because it does not exist */'; \
-	fi; \
-	${SED} -e "s|__INCLUDE_SYS_SELECT_H__|$${line}|" \
-	       <${WRKSRC}/include/curl/multi.h \
-	       >${WRKSRC}/include/curl/multi.h.new; \
-	${MV} ${WRKSRC}/include/curl/multi.h.new \
-	      ${WRKSRC}/include/curl/multi.h
+#
+# XXXbjs CHANGES claims this is fixed.  I have left it here commented out
+#        in case this is not so.
+#
+#post-configure:
+#	if ${GREP} '#define HAVE_SYS_SELECT_H 1' ${WRKSRC}/src/config.h \
+#		>/dev/null; \
+#	then \
+#	    line='#include <sys/select.h>'; \
+#	else \
+#	    line='/* sys/select.h not included because it does not exist */'; \
+#	fi; \
+#	${SED} -e "s|__INCLUDE_SYS_SELECT_H__|$${line}|" \
+#	       <${WRKSRC}/include/curl/multi.h \
+#	       >${WRKSRC}/include/curl/multi.h.new; \
+#	${MV} ${WRKSRC}/include/curl/multi.h.new \
+#	      ${WRKSRC}/include/curl/multi.h
 
 post-install:
 	${INSTALL_DATA_DIR} ${DESTDIR}${PREFIX}/share/doc/curl

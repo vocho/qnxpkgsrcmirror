@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.42 2007/08/17 20:25:44 joerg Exp $
+# $NetBSD: Makefile,v 1.44 2008/03/26 06:21:46 wiz Exp $
 #
 
 COMMENT=	Collections of other packages
@@ -9,6 +9,7 @@ SUBDIR+=	fxtv-capture
 SUBDIR+=	gnome
 SUBDIR+=	gnome-base
 SUBDIR+=	gnome-devel
+SUBDIR+=	gnome-platform
 SUBDIR+=	gnuradio
 SUBDIR+=	gnustep
 SUBDIR+=	gtk2-extras
@@ -27,7 +28,6 @@ SUBDIR+=	pkg_developer
 SUBDIR+=	pkgsrc-guide-tools
 SUBDIR+=	ruby-gnome2
 SUBDIR+=	suse100
-SUBDIR+=	suse9
 SUBDIR+=	web-server
 SUBDIR+=	windowmaker-desktop
 SUBDIR+=	xfce4

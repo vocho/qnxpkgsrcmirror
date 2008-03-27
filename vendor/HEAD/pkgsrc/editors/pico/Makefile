@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.70 2007/03/21 19:39:08 jwise Exp $
+# $NetBSD: Makefile,v 1.73 2008/03/05 19:02:13 jlam Exp $
 #
 # NOTE:
 # When updating, it is necessary to change the shlib version, located in
@@ -8,7 +8,7 @@
 
 DISTNAME=	pine4.64
 PKGNAME=	pico-4.10
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	editors
 MASTER_SITES=	ftp://ftp.cac.washington.edu/pine/ \
 		ftp://ftp.fu-berlin.de/unix/mail/pine/
@@ -20,41 +20,40 @@ COMMENT=	Text editor (ships with Pine), and Pine's text editing lib
 
 LICENSE=	pine-license
 
+PKG_DESTDIR_SUPPORT=	user-destdir
+
 USE_LIBTOOL=		yes
 
 .include "../../mk/bsd.prefs.mk"
 
-.if ${OPSYS} == "Darwin"
-BUILDNAME=	osx
-LIBS+=		-lcurses
-.elif ${OPSYS} == "IRIX"
+OPSYSVARS+=		BUILDNAME
+BUILDNAME.Darwin=	osx
+.if ${OPSYS} == "IRIX"
 .  if ${OS_VERSION} >= 6.5
-BUILDNAME=	sg6
+BUILDNAME.IRIX=		sg6
 .  else
-BUILDNAME=	sgi
+BUILDNAME.IRIX=		sgi
 .  endif
-.elif ${OPSYS} == "Interix"
-BUILDNAME=	sfu
-.elif ${OPSYS} == "Linux"
-BUILDNAME=	lnx
-.elif ${OPSYS} == "SunOS"
-BUILDNAME=	so5
-.else
-BUILDNAME=	neb
 .endif
+BUILDNAME.Interix=	sfu
+BUILDNAME.Linux=	lnx
+BUILDNAME.SunOS=	so5
+BUILDNAME.NetBSD=	neb
+BUILDNAME.*=		neb
+
+# Let termcap.buildlink3.mk handle using the right termcap library.
+LIBS+=			${BUILDLINK_LDADD.termcap}
 
 MAKE_ENV+=	_STRIPFLAG_INSTALL=	# debug...
 
 INSTALLATION_DIRS=	bin lib ${PKGMANDIR}/man1
 
-pre-patch:
-.if ${OPSYS} == "Interix"
-	${CP} -f \
-		${WRKSRC}/pico/osdep/os-sol.h ${WRKSRC}/pico/osdep/os-sfu.h
+# Create the OS-dependent files for Interix from the Solaris ones.
+post-extract:
+	${CP} -f ${WRKSRC}/pico/osdep/os-sol.h ${WRKSRC}/pico/osdep/os-sfu.h
 	${SED} -e 's,read.pol,read.sel,' \
 		${WRKSRC}/pico/osdep/os-sv4.ic >${WRKSRC}/pico/osdep/os-sfu.ic
-.endif
-	${SED} -e 's,-ltermlib,-lcurses,g;s,sv4,sfu,g' \
+	${SED} -e 's,sv4,sfu,g' \
 		${WRKSRC}/pico/makefile.sv4 >${WRKSRC}/pico/makefile.sfu
 
 do-build:
@@ -65,13 +64,13 @@ do-build:
 
 do-install:
 	${LIBTOOL} --mode=install ${INSTALL_LIB} \
-		${WRKSRC}/pico/libpico.la ${PREFIX}/lib
+		${WRKSRC}/pico/libpico.la ${DESTDIR}${PREFIX}/lib
 	${LIBTOOL} --mode=install ${INSTALL_PROGRAM} \
-		${WRKSRC}/pico/pico ${WRKSRC}/pico/pilot ${PREFIX}/bin
-	${INSTALL_MAN} ${WRKSRC}/doc/pico.1 ${PREFIX}/${PKGMANDIR}/man1
-	${INSTALL_MAN} ${WRKSRC}/doc/pilot.1 ${PREFIX}/${PKGMANDIR}/man1
+		${WRKSRC}/pico/pico ${WRKSRC}/pico/pilot ${DESTDIR}${PREFIX}/bin
+	${INSTALL_MAN} ${WRKSRC}/doc/pico.1 ${DESTDIR}${PREFIX}/${PKGMANDIR}/man1
+	${INSTALL_MAN} ${WRKSRC}/doc/pilot.1 ${DESTDIR}${PREFIX}/${PKGMANDIR}/man1
 	${INSTALL_DATA_DIR} ${PREFIX}/include/pico
-	cd ${WRKSRC}/pico && ${INSTALL_DATA} *.h ${PREFIX}/include/pico
+	cd ${WRKSRC}/pico && ${INSTALL_DATA} *.h ${DESTDIR}${PREFIX}/include/pico
 
-.include "../../devel/ncurses/buildlink3.mk"
+.include "../../mk/termcap.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

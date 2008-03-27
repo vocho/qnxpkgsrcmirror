@@ -1,21 +1,21 @@
-# $NetBSD: Makefile,v 1.34 2007/12/02 13:04:07 wiz Exp $
+# $NetBSD: Makefile,v 1.37 2008/03/11 18:47:40 tnn Exp $
 
 DISTNAME=	db-3.3.11
 PKGNAME=	db3-3.11.2
-PKGREVISION=	3
+PKGREVISION=	4
 CATEGORIES=	databases
-MASTER_SITES=	ftp://sleepycat1.inetu.net/releases/ \
-		ftp://sleepycat2.inetu.net/releases/
+MASTER_SITES=	http://download.oracle.com/berkeley-db/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.oracle.com/database/berkeley-db.html
 COMMENT=	Sleepycat Software's Berkeley DB version 3
 
-PATCH_SITES=	http://www.sleepycat.com/update/3.3.11/
+PATCH_SITES=	http://www.oracle.com/technology/products/berkeley-db/db/update/3.3.11/
 PATCHFILES=	patch.3.3.11.1 patch.3.3.11.2
 PATCH_DIST_ARGS=-d ${WRKSRC}/.. --forward --quiet -p0
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 WRKSRC=			${WRKDIR}/${DISTNAME}/build_unix
 USE_LIBTOOL=		yes
@@ -34,12 +34,12 @@ CONFIGURE_ARGS+=	--enable-compat185
 
 .include "../../mk/bsd.prefs.mk"
 
-.if ${OPSYS} == "IRIX"
+.if !empty(MACHINE_PLATFORM:MIRIX-5.3*)
 CONFIGURE_ENV+=		ac_cv_header_inttypes_h=no
 .endif
 
 post-install:
-	${CHOWN} -R ${BINOWN}:${BINGRP} ${PREFIX}/share/doc/html/db3
+	${CHOWN} -R ${BINOWN}:${BINGRP} ${DESTDIR}${PREFIX}/share/doc/db3
 
 .include "../../mk/pthread.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

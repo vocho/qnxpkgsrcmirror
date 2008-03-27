@@ -1,13 +1,13 @@
-$NetBSD: patch-ac,v 1.8 2006/07/20 23:05:43 perry Exp $
+$NetBSD: patch-ac,v 1.11 2008/03/13 03:12:26 tnn Exp $
 
---- src/asmi386.h.orig	2006-07-20 18:23:37.000000000 -0400
-+++ src/asmi386.h
-@@ -231,7 +231,7 @@
+--- configure.orig	2007-12-13 00:56:58.000000000 +0100
++++ configure
+@@ -171,6 +171,8 @@ do
+   else
  
- #ifdef _MSC_VER
- #define DECLARE_FUNCTION(name)
--#elif defined(__svr4__) || defined(__ELF__) || defined(__NetBSD__) || defined(__FreeBSD__) || defined(__OpenBSD__) || defined(__DragonFly) || defined(__ROSE__) || defined(_SEQUENT_) || defined(DGUX) || defined(_SCO_COFF) || defined(_SCO_ELF)
-+#elif defined(__svr4__) || defined(__ELF__) || defined(__NetBSD__) || defined(__FreeBSD__) || defined(__OpenBSD__) || defined(__DragonFly__) || defined(__ROSE__) || defined(_SEQUENT_) || defined(DGUX) || defined(_SCO_COFF) || defined(_SCO_ELF)
- #define DECLARE_FUNCTION(name) .type C(name),@function
- #else
- #define DECLARE_FUNCTION(name)
+     case "$arg" in
++      --with-x | --x-includes=* | --x-libs=* | --x-libraries=*)
++        ;; # src/configure doesn't grok these options
+ 
+       --build | --buil | --bui | --bu)
+         do_config=1

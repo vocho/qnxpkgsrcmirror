@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.7 2006/07/11 00:19:20 joerg Exp $
+# $NetBSD: Makefile,v 1.9 2008/03/10 10:33:38 wiz Exp $
 
 DISTNAME=		mtl-2.1.2-21
+PKGNAME=		mtl-2.1.2.21
 CATEGORIES=		math devel
 MASTER_SITES=		http://www.osl.iu.edu/download/research/mtl/
 
@@ -11,6 +12,7 @@ COMMENT=		Matrix Template Library
 GNU_CONFIGURE=		yes
 NO_BUILD=		yes
 
+CONFLICTS+=		mtl-2.1.2-[0-9]*
 USE_LANGUAGES=		c c++
 
 post-install:

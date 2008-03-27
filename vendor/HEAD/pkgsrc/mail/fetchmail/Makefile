@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.163 2007/09/23 12:48:46 tron Exp $
+# $NetBSD: Makefile,v 1.165 2008/01/18 05:08:24 tnn Exp $
 
 DISTNAME=	fetchmail-6.3.8
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	mail
 MASTER_SITES=	http://download.berlios.de/fetchmail/	\
 		http://download2.berlios.de/fetchmail/
@@ -11,6 +11,7 @@ MAINTAINER=	frueauf@NetBSD.org
 HOMEPAGE=	http://fetchmail.berlios.de/
 COMMENT=	Batch mail retrieval/forwarding utility for pop2, pop3, apop, imap
 
+PKG_DESTDIR_SUPPORT=	user-destdir
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
 
 .include "../../mk/bsd.prefs.mk"
@@ -58,13 +59,13 @@ post-build:
 	done
 
 post-install:
-	${INSTALL_DATA_DIR} ${DOCDIR}
+	${INSTALL_DATA_DIR} ${DESTDIR}${DOCDIR}
 	cd ${WRKSRC}; for file in					\
 		FAQ NOTES FEATURES README COPYING			\
 		fetchmail-FAQ.html fetchmail-features.html		\
 		design-notes.html;					\
 	do								\
-		${INSTALL_DATA} $$file ${DOCDIR};			\
+		${INSTALL_DATA} $$file ${DESTDIR}${DOCDIR};		\
 	done
 
 .include "../../mk/bsd.pkg.mk"

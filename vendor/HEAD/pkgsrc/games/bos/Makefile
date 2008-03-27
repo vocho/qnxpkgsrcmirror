@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.7 2006/06/15 13:31:28 wiz Exp $
+# $NetBSD: Makefile,v 1.9 2008/03/04 06:59:03 jlam Exp $
 #
 
 DISTNAME=		bos_1_1
@@ -8,11 +8,12 @@ CATEGORIES=		games
 MASTER_SITES=		http://bos.seul.org/files/
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
-HOMEPAGE=		http://bos.seul.org/
+HOMEPAGE=		http://www.boswars.org/
 COMMENT=		Invasion - Battle of Survival (real-time strategy game)
 
 DEPENDS+=		stratagus>=2.1:../../games/stratagus
 
+PKG_DESTDIR_SUPPORT=	user-destdir
 INSTALLATION_DIRS=	bin
 
 do-build:
@@ -21,10 +22,10 @@ do-build:
 		${WRKSRC}/bos
 
 do-install:
-	${INSTALL_SCRIPT} ${WRKSRC}/bos ${PREFIX}/bin
-	${INSTALL_DATA_DIR} ${PREFIX}/share/bos
-	cd ${WRKSRC} && ${PAX} -pe -rw data ${PREFIX}/share/bos
-	${INSTALL_DATA_DIR} ${PREFIX}/share/doc/bos
-	${INSTALL_DATA} ${WRKSRC}/README.txt ${PREFIX}/share/doc/bos
+	${INSTALL_SCRIPT} ${WRKSRC}/bos ${DESTDIR}${PREFIX}/bin
+	${INSTALL_DATA_DIR} ${DESTDIR}${PREFIX}/share/bos
+	cd ${WRKSRC} && ${PAX} -pe -rw data ${DESTDIR}${PREFIX}/share/bos
+	${INSTALL_DATA_DIR} ${DESTDIR}${PREFIX}/share/doc/bos
+	${INSTALL_DATA} ${WRKSRC}/README.txt ${DESTDIR}${PREFIX}/share/doc/bos
 
 .include "../../mk/bsd.pkg.mk"

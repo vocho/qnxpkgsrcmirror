@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.7 2007/11/29 20:26:08 drochner Exp $
+# $NetBSD: Makefile,v 1.11 2008/03/06 14:53:55 wiz Exp $
 #
 
-DISTNAME=	gtkhtml-3.16.2
+DISTNAME=	gtkhtml-3.16.3
 PKGNAME=	${DISTNAME:S/gtkhtml/gtkhtml314/}
+PKGREVISION=	2
 CATEGORIES=	www gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gtkhtml/3.16/}
 EXTRACT_SUFX=	.tar.bz2
@@ -10,6 +11,8 @@ EXTRACT_SUFX=	.tar.bz2
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.gnome.org/
 COMMENT=	Lightweight HTML rendering/printing/editing engine
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=		yes
 USE_LIBTOOL=		yes

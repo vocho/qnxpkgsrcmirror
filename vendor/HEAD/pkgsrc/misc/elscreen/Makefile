@@ -1,10 +1,11 @@
-# $NetBSD: Makefile,v 1.12 2007/10/29 13:06:44 uebayasi Exp $
+# $NetBSD: Makefile,v 1.14 2008/03/04 19:21:11 jlam Exp $
 #
 
 DISTNAME=	elscreen-1.4.5
 PKGNAME=	${EMACS_PKGNAME_PREFIX}${DISTNAME}
 CATEGORIES=	misc
-MASTER_SITES=	ftp://ftp.morishima.net/pub/morishima.net/naoto/ElScreen/
+MASTER_SITES=	ftp://ftp.morishima.net/pub/morishima.net/naoto/ElScreen/ \
+		ftp://ftp.morishima.net/pub/morishima.net/naoto/ElScreen/old/
 DISTFILES=	${DISTNAME}.tar.gz \
 		elscreen-dired-0.1.0.tar.gz \
 		elscreen-dnd-0.0.0.tar.gz \
@@ -19,13 +20,15 @@ MAINTAINER=	uebayasi@NetBSD.org
 HOMEPAGE=	http://www.morishima.net/~naoto/software/elscreen/
 COMMENT=	Window manager within Emacs
 
+PKG_DESTDIR_SUPPORT=	user-destdir
+
 NO_BUILD=	yes
 
 do-install:
-	@${INSTALL_DATA_DIR} ${EMACS_LISPPREFIX}/elscreen
-	@${INSTALL_DATA_DIR} ${PREFIX}/share/doc/elscreen
-	@${INSTALL_DATA} ${WRKDIR}/*/*.el ${EMACS_LISPPREFIX}/elscreen
-	@${INSTALL_DATA} ${WRKSRC}/README ${PREFIX}/share/doc/elscreen
+	${INSTALL_DATA_DIR} ${DESTDIR}${EMACS_LISPPREFIX}/elscreen
+	${INSTALL_DATA_DIR} ${DESTDIR}${PREFIX}/share/doc/elscreen
+	${INSTALL_DATA} ${WRKDIR}/*/*.el ${DESTDIR}${EMACS_LISPPREFIX}/elscreen
+	${INSTALL_DATA} ${WRKSRC}/README ${DESTDIR}${PREFIX}/share/doc/elscreen
 
 .include "../../mk/emacs.mk"
 

@@ -1,13 +1,17 @@
-$NetBSD: patch-ao,v 1.9 2007/03/03 16:51:37 joerg Exp $
+$NetBSD: patch-ao,v 1.11 2008/03/11 15:46:57 joerg Exp $
 
---- cmd/dot/Makefile.in.orig	2007-03-03 16:07:40.000000000 +0100
-+++ cmd/dot/Makefile.in
-@@ -418,7 +418,7 @@ AM_CPPFLAGS = \
- man_MANS = dot.1 
- pdf_DATA = dot.pdf
- dot_SOURCES = dot.c
--dot_LDADD = $(top_builddir)/lib/gvc/libgvc.la
-+dot_LDADD = $(top_builddir)/lib/gvc/libgvc.la ${PTHREAD_LDFLAGS} ${PTHREAD_LIBS}
+--- plugin/neato_layout/Makefile.in.orig	2008-03-11 05:28:19.000000000 +0100
++++ plugin/neato_layout/Makefile.in
+@@ -387,8 +387,11 @@ libgvplugin_neato_layout_C_la_LIBADD = \
+ libgvplugin_neato_layout_la_LDFLAGS = -version-info @GVPLUGIN_VERSION_INFO@
+ libgvplugin_neato_layout_la_SOURCES = $(libgvplugin_neato_layout_C_la_SOURCES)
+ libgvplugin_neato_layout_la_LIBADD = $(libgvplugin_neato_layout_C_la_LIBADD) \
++	$(top_builddir)/lib/cdt/libcdt.la \
++	$(top_builddir)/lib/graph/libgraph.la \
+ 	$(top_builddir)/lib/gvc/libgvc.la \
+-	$(top_builddir)/lib/pathplan/libpathplan.la @IPSEPCOLA_LIBS@
++	$(top_builddir)/lib/pathplan/libpathplan.la @IPSEPCOLA_LIBS@ \
++	-lm
  
- # This automagic technique for building the list of builtins requires that the
- # symbols be in the binary image, but libtool makes it difficult
+ EXTRA_DIST = Makefile.old
+ all: all-am

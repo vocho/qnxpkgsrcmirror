@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.105 2007/12/02 12:31:16 wiz Exp $
+# $NetBSD: Makefile,v 1.107 2008/02/24 05:29:21 obache Exp $
 
-DISTNAME=		mod_ssl-2.8.28-1.3.37
-PKGNAME=		ap13-ssl-2.8.28
+DISTNAME=		mod_ssl-2.8.31-1.3.41
+PKGNAME=		ap13-ssl-2.8.31
 CATEGORIES=		www security
 MASTER_SITES=		http://www.modssl.org/source/ \
 			ftp://ftp.pca.dfn.de/pub/tools/net/mod_ssl/source/
@@ -22,7 +22,7 @@ CONFIGURE_ARGS+=	--with-ssl=${SSLBASE:Q}
 .include "../../mk/bsd.prefs.mk"
 
 .include "../../www/apache/buildlink3.mk"
-BUILDLINK_API_DEPENDS.apache+=	apache>=1.3.37
+BUILDLINK_API_DEPENDS.apache+=	apache>=1.3.41
 
 SSL_RPATH_LDFLAGS=	${LINKER_RPATH_FLAG} ${SSLBASE}/lib
 FIX_RPATH+=		SSL_RPATH_LDFLAGS

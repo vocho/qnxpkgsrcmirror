@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.24 2007/03/07 18:52:18 joerg Exp $
+# $NetBSD: Makefile,v 1.26 2008/03/13 16:45:33 wiz Exp $
 #
 
-DISTNAME=	source-highlight-2.5
+DISTNAME=	source-highlight-2.9
 SVR4_PKGNAME=	srchl
 CATEGORIES=	textproc
 MASTER_SITES=	${MASTER_SITE_GNU:=src-highlite/}
@@ -14,6 +14,7 @@ DEPENDS+=	exctags-[0-9]*:../../devel/exctags
 
 GNU_CONFIGURE=	YES
 USE_LANGUAGES=	c c++
+USE_LIBTOOL=	YES
 CONFIGURE_ENV+=	CTAGS=${LOCALBASE}/bin/exctags
 
 INFO_FILES=	YES
@@ -32,12 +33,6 @@ BUILDLINK_TRANSFORM+=	l:boost_regex:boost_regex-mt
 # We really need GNU sed not NetBSD's GNuish sed
 TOOLS_PLATFORM.gsed=	# empty
 .endif
-
-# Build is broken with input chroot
-#.ifdef SOURCE_HIGHLIGHT_INPUT_CHROOT
-#CONFIGURE_ARGS+=	--enable-input-chroot=${SOURCE_HIGHLIGHT_INPUT_CHROOT:Q}
-#BUILD_DEFS+=		SOURCE_HIGHLIGHT_INPUT_CHROOT
-#.endif
 
 .include "../../devel/boost-libs/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

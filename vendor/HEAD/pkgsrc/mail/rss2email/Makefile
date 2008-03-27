@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.16 2007/01/19 00:57:03 schmonz Exp $
+# $NetBSD: Makefile,v 1.19 2008/03/04 17:57:19 jlam Exp $
 #
 
-DISTNAME=		rss2email-2.60
+DISTNAME=		rss2email-2.62
 CATEGORIES=		mail
 MASTER_SITES=		${HOMEPAGE}
 EXTRACT_SUFX=		.py
@@ -13,10 +13,14 @@ COMMENT=		Get RSS feeds emailed to you
 DEPENDS+=		${PYPKGPREFIX}-feedparser-[0-9]*:../../textproc/py-feedparser
 DEPENDS+=		${PYPKGPREFIX}-html2text-[0-9]*:../../textproc/py-html2text
 
+PKG_DESTDIR_SUPPORT=	user-destdir
+
 WRKSRC=			${WRKDIR}
+
+USE_TOOLS+=		tr
 NO_BUILD=		yes
 PYTHON_PATCH_SCRIPTS=	*.py
-PYTHON_VERSIONS_ACCEPTED?=	24 23 22
+PYTHON_VERSIONS_ACCEPTED=	24 23 22
 
 SUBST_CLASSES+=		bin
 SUBST_STAGE.bin=	do-configure
@@ -30,18 +34,18 @@ EGDIR=			${PREFIX}/share/examples/rss2email
 INSTALLATION_DIRS=	bin ${PKGMANDIR}/man1
 
 do-extract:
-	${_PKG_SILENT}${_PKG_DEBUG}					\
-	${CP} ${DISTDIR}/${DISTFILES:Q} ${WRKSRC}/rss2email.py;		\
+	tr -d '\r' < ${DISTDIR}/${DISTNAME}${EXTRACT_SUFX}		\
+		> ${WRKSRC}/rss2email.py
 	cd ${FILESDIR} && cp config.py r2e r2e.1 ${WRKSRC}
 
 do-install:
-	cd ${WRKSRC} &&							\
-	${INSTALL_SCRIPT_DIR} ${SHAREDIR};				\
-	${INSTALL_SCRIPT} rss2email.py ${SHAREDIR};			\
-	${INSTALL_DATA_DIR} ${EGDIR};					\
-	${INSTALL_DATA} config.py ${EGDIR};				\
-	${INSTALL_MAN} r2e.1 ${PREFIX}/${PKGMANDIR}/man1;			\
-	${INSTALL_SCRIPT} r2e ${PREFIX}/bin
+	set -e; cd ${WRKSRC};						\
+	${INSTALL_SCRIPT_DIR} ${DESTDIR}${SHAREDIR};			\
+	${INSTALL_SCRIPT} rss2email.py ${DESTDIR}${SHAREDIR};		\
+	${INSTALL_DATA_DIR} ${DESTDIR}${EGDIR};				\
+	${INSTALL_DATA} config.py ${DESTDIR}${EGDIR};			\
+	${INSTALL_MAN} r2e.1 ${DESTDIR}${PREFIX}/${PKGMANDIR}/man1;	\
+	${INSTALL_SCRIPT} r2e ${DESTDIR}${PREFIX}/bin
 
 .include "../../lang/python/application.mk"
 .include "../../mk/bsd.pkg.mk"

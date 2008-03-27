@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.17 2006/04/17 13:46:49 wiz Exp $
+# $NetBSD: Makefile,v 1.19 2008/03/10 10:33:38 wiz Exp $
 #
 
 DISTNAME=	subtitleripper-0.3-1
+PKGNAME=	subtitleripper-0.3.1
 PKGREVISION=	5
 CATEGORIES=	textproc graphics
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=subtitleripper/}
@@ -9,13 +10,15 @@ EXTRACT_SUFX=	.tgz
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://sourceforge.net/projects/subtitleripper/
-COMMENT=	Sub title ripping program
+COMMENT=	Subtitle ripping program
 
 DEPENDS+=	gocr-[0-9]*:../../graphics/gocr
 
 USE_TOOLS+=		gmake
 WRKSRC=			${WRKDIR}/subtitleripper
 INSTALLATION_DIRS=	bin
+
+CONFLICTS+=	subtitleripper-0.3-[0-9]*
 
 do-install:
 	${SED} -e "s,@PREFIX@,${PREFIX}," <${WRKSRC}/pgm2txt >${WRKDIR}/pgm2txt

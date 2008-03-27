@@ -1,6 +1,6 @@
 #!@SH@ -e
 #
-# $Id: pkg_chk.sh,v 1.51 2007/09/20 08:18:13 abs Exp $
+# $Id: pkg_chk.sh,v 1.55 2008/02/24 21:58:13 abs Exp $
 #
 # TODO: Make -g check dependencies and tsort
 # TODO: Variation of -g which only lists top level packages
@@ -29,6 +29,12 @@ is_binary_available()
 	    return 1;
 	fi
     fi
+    }
+
+bin_pkg_info2pkgdb()
+    {
+    ${AWK} '/^PKGNAME=/ {sub("^PKGNAME=", ""); PKGNAME=$0} \
+            /^PKGPATH=/ {sub("^PKGPATH=", ""); printf("%s:%s ", $0, PKGNAME)}'
     }
 
 check_packages_installed()
@@ -161,7 +167,9 @@ extract_variables()
     # as well as AWK, GREP, SED, PKGCHK_TAGS and PKGCHK_NOTAGS
     #
 
-    if [ -z "$opt_b" -o -n "$opt_s" -o -d $PKGSRCDIR/pkgtools/pkg_chk ] ; then
+    if [ -n "$opt_g" ]; then
+        :
+    elif [ -z "$opt_b" -o -n "$opt_s" -o -d $PKGSRCDIR/pkgtools/pkg_chk ] ; then
 	cd $PKGSRCDIR/pkgtools/pkg_chk
 	extract_make_vars Makefile \
 		AWK GREP GZIP_CMD ID PACKAGES PKGCHK_CONF PKGCHK_NOTAGS \
@@ -179,7 +187,7 @@ extract_variables()
     fi
 
     # .tgz/.tbz to regexp
-    PKG_SUFX_RE=`echo $PKG_SUFX | sed 's/[.]/[.]/'`
+    PKG_SUFX_RE=`echo $PKG_SUFX | ${SED} 's/[.]/[.]/'`
 
     if [ ! -d $PKG_DBDIR ] ; then
 	fatal "Unable to access PKG_DBDIR ($PKG_DBDIR)"
@@ -231,6 +239,11 @@ generate_conf_from_installed()
     echo $(pkgdirs_from_installed) | tr ' ' '\n' >> $FILE
     }
 
+get_bin_pkg_info()
+    {
+    list_bin_pkgs | ${XARGS} ${PKG_INFO} -X
+    }
+
 get_build_ver()
     {
     if [ -n "$opt_b" -a -z "$opt_s" ] ; then
@@ -242,6 +255,11 @@ get_build_ver()
     rm -f $MY_TMPFILE
     ${MAKE} _BUILD_VERSION_FILE=$MY_TMPFILE $MY_TMPFILE
     cat $MY_TMPFILE
+    }
+
+list_bin_pkgs ()
+    {
+    ls -t $PACKAGES | grep "$PKG_SUFX_RE"'$' | ${SED} "s|^|$PACKAGES/|"
     }
 
 # Given a binary package filename as the first argumennt, return a list
@@ -281,7 +299,7 @@ list_packages()
 	for pkg in $pkglist ; do
 	    set -o noglob
 	    deplist="$(list_dependencies $PACKAGES/$pkg)"
-	    verbose "$pkg: dependencies - `echo $deplist`" 
+	    verbose "$pkg: dependencies - `echo $deplist`"
 	    if [ -n "$deplist" ] ; then
 		for depmatch in $deplist ; do
 		    dep=`${PKG_ADMIN} -b -d $PACKAGES lsbest "$depmatch"`
@@ -289,7 +307,7 @@ list_packages()
 			fatal_later "$depmatch: dependency missing for $pkg"
 		    else
 			pairlist="$pairlist$dep $pkg\n"
-			case $dep_cache in 
+			case $dep_cache in
 			    *" $dep "*)
 				# depmatch_cache is a quick cache of already
 				verbose "$pkg: $deplist - cached"
@@ -491,7 +509,7 @@ pkg_fetchlist()
     {
     PKGLIST=$@
     msg_progress Fetch
-    while [ $# != 0 ]; do 
+    while [ $# != 0 ]; do
 	pkg_fetch $1 $2
 	shift ; shift;
     done
@@ -595,7 +613,7 @@ usage()
 	echo
     fi
     echo 'Usage: pkg_chk [opts]
-	-a      Add all missing packages (implies -c)
+	-a      Add all missing packages
 	-B      Check the "Build version" of packages
 	-b      Use binary packages
 	-C conf Use pkgchk.conf file 'conf'
@@ -605,16 +623,16 @@ usage()
 	-h      This help
 	-k	Continue with further packages if errors are encountered
 	-L file Redirect output from commands run into file (should be fullpath)
-	-l	List binary packages including dependencies (implies -c)
+	-l	List binary packages including dependencies
 	-N	List installed packages for which a newer version is in TODO
 	-n	Display actions that would be taken, but do not perform them
 	-p	Display the list of pkgdirs that match the current tags
 	-P dir  Set PACKAGES dir (overrides any other setting)
 	-q	Do not display actions or take any action; only list packages
-	-r	Recursively remove mismatches (use with care) (implies -i)
+	-r	Recursively remove mismatches (use with care)
 	-s      Use source for building packages
 	-U tags Comma separated list of pkgchk.conf tags to unset ('*' for all)
-	-u      Update all mismatched packages (implies -i)
+	-u      Update all mismatched packages
 	-v      Verbose
 
 pkg_chk verifies installed packages against pkgsrc.
@@ -698,9 +716,6 @@ if [ $# != 0 ];then
     usage "Additional argument ($*) given"
 fi
 
-MY_TMPDIR=`mktemp -d ${TMPDIR-/tmp}/${0##*/}.XXXXXX`
-MY_TMPFILE=$MY_TMPDIR/tmp
-
 # Hide PKG_PATH to avoid breakage in 'make' calls
 saved_PKG_PATH=$PKG_PATH
 unset PKG_PATH || true
@@ -712,6 +727,7 @@ export GZIP_CMD
 test -n "$ID"         || ID="@ID@"
 test -n "$MAKE"       || MAKE="@MAKE@"
 test -n "$MAKECONF"   || MAKECONF="@MAKECONF@"
+test -n "$MKTEMP"     || MKTEMP="@MKTEMP@"
 test -n "$PKG_ADD"    || PKG_ADD="@PKG_ADD@"
 test -n "$PKG_ADMIN"  || PKG_ADMIN="@PKG_ADMIN@"
 test -n "$PKG_DBDIR"  || PKG_DBDIR="@PKG_DBDIR@"
@@ -720,6 +736,11 @@ test -n "$PKG_INFO"   || PKG_INFO="@PKG_INFO@"
 test -n "$SED"        || SED="@SED@"
 test -n "$SORT"	      || SORT="@SORT@"
 test -n "$TSORT"      || TSORT="@TSORT@"
+test -n "$XARGS"      || XARGS="@XARGS@"
+
+MY_TMPDIR=`${MKTEMP} -d ${TMPDIR-/tmp}/${0##*/}.XXXXXX`
+test -n "$MY_TMPDIR" || fatal "Couldn't create temporary directory."
+MY_TMPFILE=$MY_TMPDIR/tmp
 
 if [ -z "$MAKECONF" -o ! -f "$MAKECONF" ] ; then
     if [ -f @PREFIX@/etc/mk.conf ] ; then
@@ -746,7 +767,7 @@ else
 fi
 
 if [ -n "$opt_L" ] ; then
-    rm -f $opt_L
+    printf '' > $opt_L
 fi
 
 basedir=$(pwd)
@@ -773,7 +794,7 @@ if [ -n "$opt_N" ]; then
 		while read a
 		do
 			b=$(grep "o $a-[0-9]" $PKGSRCDIR/doc/TODO | \
-				sed -e "s/[ 	]*o //")
+				${SED} -e "s/[ 	]*o //")
 		if [ "$b" ]
 		then
 			echo $a: $b
@@ -795,12 +816,7 @@ if [ -n "$opt_b" -a -z "$opt_s" ] ; then
 	*)
 	    if [ -d "$PACKAGES" ] ; then
 		msg_progress Scan $PACKAGES
-		cd $PACKAGES
-		for f in `ls -t | grep "$PKG_SUFX_RE"'$'` ; do # Sort by time to pick up newest first
-		    PKGDIR=`${PKG_INFO} -. -B $PACKAGES/$f|${AWK} -F= '$1=="PKGPATH"{print $2}'`
-		    PKGNAME=`echo $f | ${SED} "s/$PKG_SUFX"'$//'`
-		    PKGDB="${PKGDB} $PKGDIR:$PKGNAME"
-		done
+		PKGDB=$(get_bin_pkg_info | bin_pkg_info2pkgdb)
 		PKGSRCDIR=NONE
 	    fi;;
     esac

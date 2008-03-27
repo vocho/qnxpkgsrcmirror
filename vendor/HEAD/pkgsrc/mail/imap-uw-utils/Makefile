@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.25 2007/01/07 09:13:58 rillig Exp $
+# $NetBSD: Makefile,v 1.27 2008/03/04 17:57:18 jlam Exp $
 
 DISTNAME=	imap-utils
 PKGNAME=	imap-uw-utils-20050108
+PKGREVISION=	1
 CATEGORIES=	mail
 MASTER_SITES=	ftp://ftp.cac.washington.edu/imap/
 EXTRACT_SUFX=	.tar.Z
@@ -13,6 +14,8 @@ COMMENT=	UW IMAP mailbox utilities
 DIST_SUBDIR=	${PKGNAME_NOREV}
 
 BUILDLINK_API_DEPENDS.imap-uw+=	imap-uw>=2004c1nb1
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 SRCDIRS=	icat ifrom
 
@@ -32,8 +35,9 @@ do-install:
 	@for prog in ${SRCDIRS}; do					\
 		${ECHO} "==> Installing $${prog}";			\
 		cd ${WRKSRC}/$${prog};					\
-		${INSTALL_PROGRAM} $${prog} ${PREFIX}/bin;		\
-		${INSTALL_MAN} $${prog}.1 ${PREFIX}/${PKGMANDIR}/man1;		\
+		${INSTALL_PROGRAM} $${prog} ${DESTDIR}${PREFIX}/bin;	\
+		${INSTALL_MAN} $${prog}.1				\
+			${DESTDIR}${PREFIX}/${PKGMANDIR}/man1;		\
 	done
 
 .include "../../mail/imap-uw/buildlink3.mk"

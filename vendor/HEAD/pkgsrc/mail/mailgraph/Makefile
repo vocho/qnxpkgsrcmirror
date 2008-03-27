@@ -1,10 +1,11 @@
-# $NetBSD: Makefile,v 1.13 2007/07/08 22:32:15 xtraeme Exp $
+# $NetBSD: Makefile,v 1.15 2008/03/17 11:43:06 obache Exp $
 #
 
 DISTNAME=	mailgraph-1.13
 #PKGREVISION=	1
 CATEGORIES=	mail
-MASTER_SITES=	http://mailgraph.schweikert.ch/pub/
+MASTER_SITES=	http://mailgraph.schweikert.ch/pub/	\
+		http://mailgraph.schweikert.ch/pub/old
 
 MAINTAINER=	kim@tac.nyc.ny.us
 HOMEPAGE=	http://mailgraph.schweikert.ch/
@@ -12,6 +13,8 @@ COMMENT=	RRDtool frontend for mail statistics
 
 DEPENDS+=	rrdtool>=1:../../databases/rrdtool
 DEPENDS+=	p5-File-Tail-[0-9]*:../../misc/p5-File-Tail
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=	perl:run
 
@@ -43,14 +46,15 @@ do-build:
 do-configure:
 
 do-install:
-	${INSTALL_DATA_DIR} ${PREFIX}/libexec/cgi-bin
-	${INSTALL_SCRIPT} \
-	    ${WRKSRC}/mailgraph.cgi ${PREFIX}/libexec/cgi-bin/mailgraph.cgi
-	${INSTALL_SCRIPT} \
-	    ${WRKSRC}/mailgraph.pl ${PREFIX}/sbin/mailgraph
-	${INSTALL_DATA_DIR} ${PREFIX}/share/doc/mailgraph
+	${INSTALL_DATA_DIR} ${DESTDIR}${PREFIX}/libexec/cgi-bin
+	${INSTALL_SCRIPT} ${WRKSRC}/mailgraph.cgi \
+		${DESTDIR}${PREFIX}/libexec/cgi-bin/mailgraph.cgi
+	${INSTALL_SCRIPT} ${WRKSRC}/mailgraph.pl \
+		${DESTDIR}${PREFIX}/sbin/mailgraph
+	${INSTALL_DATA_DIR} ${DESTDIR}${PREFIX}/share/doc/mailgraph
 .for i in CHANGES COPYING README
-	${INSTALL_DATA} ${WRKSRC}/${i} ${PREFIX}/share/doc/mailgraph/${i}
+	${INSTALL_DATA} ${WRKSRC}/${i} \
+		${DESTDIR}${PREFIX}/share/doc/mailgraph/${i}
 .endfor
 
 .include "../../mk/bsd.pkg.mk"

@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.15 2007/11/05 19:49:05 drochner Exp $
+# $NetBSD: Makefile,v 1.18 2008/03/06 14:53:54 wiz Exp $
 
-DISTNAME=	seahorse-2.20.1
-PKGNAME=	seahorse-gedit-2.20.1
+DISTNAME=	seahorse-2.20.3
+PKGNAME=	seahorse-gedit-2.20.3
+PKGREVISION=	2
 CATEGORIES=	security
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/seahorse/2.20/}
 EXTRACT_SUFX=	.tar.bz2
@@ -43,7 +44,7 @@ INSTALL_DIRS=	plugins/gedit
 .include "../../sysutils/gnome-vfs/buildlink3.mk"
 .include "../../editors/gedit/buildlink3.mk"
 .include "../../textproc/gnome-doc-utils/buildlink3.mk"
-.include "../../textproc/scrollkeeper/omf.mk"
+.include "../../mk/omf-scrollkeeper.mk"
 .include "../../x11/gtk2/buildlink3.mk"
 .include "../../x11/libSM/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

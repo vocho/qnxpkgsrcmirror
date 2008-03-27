@@ -1,4 +1,4 @@
-# $NetBSD: Makefile.common,v 1.37 2007/08/22 14:03:48 jlam Exp $
+# $NetBSD: Makefile.common,v 1.39 2008/01/21 01:39:02 tnn Exp $
 
 CATEGORIES=	lang java
 EXTRACT_SUFX=	.bin
@@ -8,12 +8,13 @@ HOMEPAGE=	http://java.sun.com/
 DOWNLOAD=	http://java.sun.com/j2se/1.4.2/download.html
 ARCHIVE=	http://java.sun.com/products/archive/index.html
 
-LICENSE=	jdk13-license
 RESTRICTED=	Redistribution of repackaged binaries not permitted
 NO_SRC_ON_CDROM=${RESTRICTED}
 NO_SRC_ON_FTP=	${RESTRICTED}
 NO_BIN_ON_CDROM=${RESTRICTED}
 NO_BIN_ON_FTP=	${RESTRICTED}
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 EMUL_PLATFORMS=		linux-i386
 
@@ -58,7 +59,7 @@ post-fetch:
 	fi
 
 do-install:
-	${INSTALL_PROGRAM_DIR} ${JAVA_HOME}
-	cd ${WRKSRC} && ${PAX} -rwp ma . ${JAVA_HOME}
+	${INSTALL_PROGRAM_DIR} ${DESTDIR}${JAVA_HOME}
+	cd ${WRKSRC} && ${PAX} -rwp ma . ${DESTDIR}${JAVA_HOME}
 
 .include "../../mk/java-env.mk"

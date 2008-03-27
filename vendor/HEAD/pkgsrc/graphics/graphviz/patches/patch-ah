@@ -1,13 +1,15 @@
-$NetBSD: patch-ah,v 1.8 2007/03/03 16:51:37 joerg Exp $
+$NetBSD: patch-ah,v 1.10 2008/03/11 15:46:57 joerg Exp $
 
---- lib/gvc/Makefile.in.orig	2007-02-26 23:34:57.000000000 +0000
-+++ lib/gvc/Makefile.in
-@@ -447,7 +447,7 @@ libgvc_la_LIBADD = $(libgvc_C_la_LIBADD)
- 	$(top_builddir)/lib/cdt/libcdt.la \
- 	$(top_builddir)/lib/graph/libgraph.la \
- 	$(top_builddir)/lib/pathplan/libpathplan.la \
--	@EXPAT_LIBS@ @Z_LIBS@
-+	@EXPAT_LIBS@ @Z_LIBS@ -lm
+--- plugin/core/Makefile.am.orig	2008-03-11 04:50:50.000000000 +0100
++++ plugin/core/Makefile.am
+@@ -25,7 +25,9 @@ libgvplugin_core_C_la_SOURCES = \
  
+ libgvplugin_core_la_LDFLAGS = -version-info @GVPLUGIN_VERSION_INFO@
+ libgvplugin_core_la_SOURCES = $(libgvplugin_core_C_la_SOURCES)
+-libgvplugin_core_la_LIBADD = $(top_builddir)/lib/gvc/libgvc.la
++libgvplugin_core_la_LIBADD = $(top_builddir)/lib/gvc/libgvc.la \
++    $(top_builddir)/lib/cgraph/libcgraph.la \
++    $(top_builddir)/lib/graph/libgraph.la
  
- #For use without plugins.
+ EXTRA_DIST = Makefile.old
+ 

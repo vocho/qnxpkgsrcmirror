@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.19 2007/09/21 13:03:49 wiz Exp $
+# $NetBSD: Makefile,v 1.22 2008/03/06 14:53:51 wiz Exp $
 #
 
 DISTNAME=		rawphoto-200410220928
 PKGNAME=		gimp-rawphoto-1.19
-PKGREVISION=		12
+PKGREVISION=		14
 CATEGORIES=		graphics
 MASTER_SITES=		#
 EXTRACT_SUFX=		.tgz
@@ -11,6 +11,8 @@ EXTRACT_SUFX=		.tgz
 MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://web.archive.org/web/20060207024636/http://ptj.rozeta.com.pl/Soft/RawPhoto
 COMMENT=		Digicam RAW file importer for GIMP
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 WRKSRC=			${WRKDIR}/rawphoto-200410220910/src
 BUILD_TARGET=		build
@@ -24,7 +26,7 @@ pre-build:
 
 do-install:
 	${INSTALL_PROGRAM} ${WRKSRC}/rawphoto \
-		${PREFIX}/lib/gimp/2.0/plug-ins
+		${DESTDIR}${PREFIX}/lib/gimp/2.0/plug-ins
 
 .include "../../graphics/gimp/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

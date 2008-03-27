@@ -1,4 +1,4 @@
-# $NetBSD: rubyversion.mk,v 1.36 2007/10/06 06:12:19 taca Exp $
+# $NetBSD: rubyversion.mk,v 1.39 2008/03/21 15:07:28 jlam Exp $
 #
 
 .if !defined(_RUBYVERSION_MK)
@@ -10,7 +10,7 @@ _RUBYVERSION_MK=	# defined
 RUBY18_VERSION=		1.8.6
 
 # patch
-RUBY18_PATCHLEVEL=	111
+RUBY18_PATCHLEVEL=	114
 
 # RUBY_VERSION_DEFAULT defines default version for Ruby related
 #	packages and user can define in mk.conf.  (1.6 or 1.8)
@@ -243,6 +243,7 @@ PLIST_SUBST+=		RUBY=${RUBY:Q} RUBY_VER=${RUBY_VER:Q} \
 			RUBY_VERSION=${RUBY_VERSION:Q} \
 			RUBY_VER_DIR=${RUBY_VER_DIR:Q} \
 			RUBY_DLEXT=${RUBY_DLEXT:Q} \
+			RUBY_ARCH=${RUBY_ARCH:Q} \
 			${PLIST_RUBY_DIRS:S,DIR="${PREFIX}/,DIR=",}
 
 #
@@ -269,10 +270,10 @@ PLIST_SRC+=		${PKGDIR}/PLIST.common_end
 
 RUBY_PLIST_COMMENT_CMD= \
 	${ECHO} "@comment The following lines are automatically generated"
-RUBY_PLIST_FILES_CMD= ( cd ${PREFIX}; \
+RUBY_PLIST_FILES_CMD= ( cd ${DESTDIR}${PREFIX}; \
 	${FIND} ${RUBY_DYNAMIC_DIRS} \( -type f -o -type l \) -print ) | \
 	${SORT} -u
-RUBY_PLIST_DIRS_CMD= ( cd ${PREFIX}; \
+RUBY_PLIST_DIRS_CMD= ( cd ${DESTDIR}${PREFIX}; \
 	${FIND} ${RUBY_DYNAMIC_DIRS} -type d -print ) | ${SORT} -ru | \
 	${SED} -e 's|^|@dirrm |'
 RUBY_GENERATE_PLIST =	( \

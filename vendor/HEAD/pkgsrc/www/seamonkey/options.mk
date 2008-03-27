@@ -1,11 +1,7 @@
-# $NetBSD: options.mk,v 1.8 2007/10/31 21:42:24 gdt Exp $
+# $NetBSD: options.mk,v 1.10 2008/03/02 15:24:07 abs Exp $
 
 PKG_OPTIONS_VAR		= PKG_OPTIONS.gecko
-PKG_SUPPORTED_OPTIONS	= debug
-
-.if ( ${MOZILLA_BIN} == "firefox-bin" || ${MOZILLA_BIN} == "thunderbird-bin" )
-PKG_SUPPORTED_OPTIONS  += official-mozilla-branding
-.endif
+PKG_SUPPORTED_OPTIONS	= debug official-mozilla-branding
 
 .if ( ${MOZILLA_BIN} == "firefox-bin" || ${MOZILLA_BIN} == "seamonkey-bin" || ${MOZILLA_BIN} == "thunderbird-bin" )
 PKG_SUPPORTED_OPTIONS  += mozilla-single-profile
@@ -29,7 +25,7 @@ CONFIGURE_ARGS+=	--enable-single-profile
 # Note that you cannot distribute builds with Official Branding
 # without permission of the Mozilla Foundation.
 # See http://www.mozilla.org/foundation/trademarks/
-.if !empty(PKG_OPTIONS:Mofficial-mozilla-branding)
+.if !empty(PKG_OPTIONS:Mofficial-mozilla-branding) && ${MOZILLA_BIN} != "seamonkey-bin"
 CONFIGURE_ARGS+=	--enable-official-branding
 # Mozilla prohibits distribution of packages with their trademarks.
 # It is an open question if this makes the package non-Free.  Mozilla

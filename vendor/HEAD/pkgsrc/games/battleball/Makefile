@@ -1,14 +1,16 @@
-# $NetBSD: Makefile,v 1.23 2007/02/02 17:43:02 joerg Exp $
+# $NetBSD: Makefile,v 1.26 2008/03/04 06:59:03 jlam Exp $
 
 DISTNAME=	battleball.21.src
 PKGNAME=	battleball-2.1
 PKGREVISION=	3
 CATEGORIES=	games x11
-MASTER_SITES=	http://linuxberg.prover.com.br/files/x11/entertain/
+MASTER_SITES=	#
 
-MAINTAINER=	root@garbled.net
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://web.archive.org/web/*/http://www.cs.utexas.edu/users/pahardin/bb.html
 COMMENT=	3d game of soccer, with tanks
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 WRKSRC=		${WRKDIR}/battleball-2.1-src
 USE_LANGUAGES=	c c++
@@ -24,7 +26,7 @@ do-configure:
 	${SED} ${SED_CMDS} < ${WRKSRC}/Makefile.orig > ${WRKSRC}/Makefile
 
 do-install:
-	${INSTALL_PROGRAM} ${WRKSRC}/battleball ${PREFIX}/bin/
+	${INSTALL_PROGRAM} ${WRKSRC}/battleball ${DESTDIR}${PREFIX}/bin/
 
 .include "../../x11/libX11/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

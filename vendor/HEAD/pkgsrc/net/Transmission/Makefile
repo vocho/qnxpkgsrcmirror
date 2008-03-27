@@ -1,26 +1,31 @@
-# $NetBSD: Makefile,v 1.18 2007/12/16 14:14:20 tnn Exp $
+# $NetBSD: Makefile,v 1.28 2008/03/08 20:59:58 tnn Exp $
 #
-DISTNAME=		transmission-0.96
-PKGNAME=		Transmission-0.96
+DISTNAME=		transmission-1.06
+PKGNAME=		Transmission-1.06
 CATEGORIES=		net
 MASTER_SITES=		http://download.m0k.org/transmission/files/
 EXTRACT_SUFX=		.tar.bz2
 
 MAINTAINER=		tnn@NetBSD.org
-HOMEPAGE=		http://transmission.m0k.org/
+HOMEPAGE=		http://www.transmissionbt.com/
 COMMENT=		Free, lightweight BitTorrent client
 
 PKG_DESTDIR_SUPPORT=	user-destdir
+USE_LIBTOOL=		yes
 USE_TOOLS+=		gmake pkg-config intltool msgfmt
 EXTRACT_USING=		gtar
 
 GNU_CONFIGURE=		yes
 LDFLAGS+=		${BUILDLINK_LDADD.getopt}
+# Tell libtool to link all internal libraries statically
+LDFLAGS+=		-static
 
 .include "../../mk/bsd.prefs.mk"
 .if !empty(OPSYS:M*BSD)
 CPPFLAGS+=		-DBSD
 .endif
+
+PLIST_SRC+=		${PKGDIR}/PLIST.common
 
 .include "options.mk"
 

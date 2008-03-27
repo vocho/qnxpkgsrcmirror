@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.178 2007/12/12 01:30:27 markd Exp $
+# $NetBSD: Makefile,v 1.181 2008/02/03 02:47:35 reed Exp $
 #
 
 COMMENT=	Desktop publishing
@@ -46,6 +46,8 @@ SUBDIR+=	gimp-print-ijs
 SUBDIR+=	gimp-print-lib
 SUBDIR+=	glabels
 SUBDIR+=	gtklp
+SUBDIR+=	gutenprint-lib
+SUBDIR+=	gutenprint51-lib
 SUBDIR+=	gv
 SUBDIR+=	hpijs
 SUBDIR+=	html2ps
@@ -99,6 +101,7 @@ SUBDIR+=	py-reportlab
 SUBDIR+=	py-reportlab-renderPM
 SUBDIR+=	rlpr
 SUBDIR+=	rtf2latex
+SUBDIR+=	rtf2latex2e
 SUBDIR+=	ruby-gnome2-gnomeprint
 SUBDIR+=	ruby-gnome2-poppler
 SUBDIR+=	scribus

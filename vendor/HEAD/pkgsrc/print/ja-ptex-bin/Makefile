@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.32 2006/12/27 13:37:39 joerg Exp $
+# $NetBSD: Makefile,v 1.34 2008/02/04 20:10:34 tnn Exp $
 
 DISTNAME=	ptex-src-${PTEX_VERS}
 PKGNAME=	ja-ptex-bin-${PTEX_VERS}
+PKGREVISION=	1
 CATEGORIES=	print japanese
 MASTER_SITES=	ftp://ftp.ascii.co.jp/pub/TeX/ascii-ptex/tetex/ \
 		ftp://ftp.ring.gr.jp/pub/text/TeX/ascii-ptex/tetex/
@@ -12,6 +13,8 @@ DISTFILES+=	mendexk${MENDEXK_VERS}${EXTRACT_SUFX}
 MAINTAINER=	kei@NetBSD.org
 HOMEPAGE=	http://www.ascii.co.jp/pb/ptex/
 COMMENT=	Publishing TeX (pTeX)
+
+USE_TOOLS+=	lex
 
 # XXX ${MAKE_VARIABLES} won't be extracted here.  strange...
 SITES.dvipsk-jpatch-p1.7a.tar.gz= \

@@ -1,30 +1,33 @@
-# $NetBSD: pyversion.mk,v 1.47 2007/08/24 07:14:28 rillig Exp $
+# $NetBSD: pyversion.mk,v 1.53 2008/03/15 16:43:25 joerg Exp $
 
 # This file determines which Python version is used as a dependency for
 # a package.
 #
-# The following variables may be set by the pkgsrc user in mk.conf:
+# === User-settable variables ===
 #
 # PYTHON_VERSION_DEFAULT
 #	The preferred Python version to use.
 #
-#	Possible values: 15 20 21 22 23 24
+#	Possible values: 15 20 21 22 23 24 25
 #	Default: 24
 #
-# The following variables may be set by a package before including this
-# file:
+# === Package-settable variables ===
 #
 # PYTHON_VERSIONS_ACCEPTED
 #	The Python versions that are acceptable for the package. The
-#	order of the entries matters.
+#	order of the entries matters, since earlier entries are
+#	preferred over later ones. If the package doesn't work with
+#	older Python versions but only with newer ones, please use
+#	PYTHON_VERSIONS_INCOMPATIBLE instead, since it will
+#	automatically include future versions.
 #
-#	Possible values: 24 23 22 21 20 15
+#	Possible values: 25 24 23 22 21 20 15
 #	Default: (all)
 #
 # PYTHON_VERSIONS_INCOMPATIBLE
 #	The Python versions that are NOT acceptable for the package.
 #
-#	Possible values: 15 20 21 22 23 24
+#	Possible values: 15 20 21 22 23 24 25
 #	Default: (depends on the platform)
 #
 # PYTHON_FOR_BUILD_ONLY
@@ -32,6 +35,20 @@
 #
 #	Possible values: (defined) (undefined)
 #	Default: (undefined)
+#
+# === Defined variables ===
+#
+# PYPKGPREFIX
+#	The prefix to use in PKGNAME for extensions which are meant
+#	to be installed for multiple Python versions.
+#
+#	Example: py24
+#
+# PYVERSSUFFIX
+#	The suffix to executables and in the library path, equal to
+#	sys.version[0:3].
+#
+#	Example: 2.4
 #
 # Keywords: python
 #
@@ -57,6 +74,7 @@ BUILDLINK_API_DEPENDS.python21?=		python21>=2.1
 BUILDLINK_API_DEPENDS.python22?=		python22>=2.2
 BUILDLINK_API_DEPENDS.python23?=		python23>=2.3
 BUILDLINK_API_DEPENDS.python24?=		python24>=2.4
+BUILDLINK_API_DEPENDS.python25?=		python25>=2.5.1
 
 # transform the list into individual variables
 .for pv in ${PYTHON_VERSIONS_ACCEPTED}
@@ -97,14 +115,13 @@ _PYTHON_VERSION?=	${pv}
 _PYTHON_VERSION=	none
 .endif
 
-#
-# set variables for the version we decided to use:
-#  PYVERSSUFFIX: suffix to executables and in library path,
-#                equal to sys.version[0:3]
-#  PYPKGPREFIX: prefix to use in PKGNAME for extensions which can install
-#               to multiple Python versions
-#
-.if ${_PYTHON_VERSION} == "24"
+.if ${_PYTHON_VERSION} == "25" && exists(../../wip/python25/Makefile)
+PYPKGSRCDIR=	../../wip/python25
+PYDEPENDENCY=	${BUILDLINK_API_DEPENDS.python25}:${PYPKGSRCDIR}
+PYPACKAGE=	python25
+PYVERSSUFFIX=	2.5
+PYPKGPREFIX=	py25
+.elif ${_PYTHON_VERSION} == "24"
 PYPKGSRCDIR=	../../lang/python24
 PYDEPENDENCY=	${BUILDLINK_API_DEPENDS.python24}:${PYPKGSRCDIR}
 PYPACKAGE=	python24
@@ -144,8 +161,7 @@ PYPKGPREFIX=	py15
 BUILD_DEPENDS+=	py15-distutils-[0-9]*:../../devel/py-distutils
 .endif
 .else
-# force an error
-PKG_SKIP_REASON+=   "No valid Python version"
+PKG_FAIL_REASON+=   "No valid Python version"
 .endif
 
 PTHREAD_OPTS+=	require

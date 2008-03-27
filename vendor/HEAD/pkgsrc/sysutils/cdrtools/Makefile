@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.27 2007/12/13 23:35:11 wiz Exp $
+# $NetBSD: Makefile,v 1.32 2008/03/07 19:38:58 wiz Exp $
 
-DISTNAME=	cdrtools-2.01.01a36
-PKGNAME=	cdrtools-2.01.01.36
+DISTNAME=	cdrtools-2.01.01a38
+PKGNAME=	cdrtools-2.01.01.38
 CATEGORIES=	sysutils
 MASTER_SITES=	ftp://ftp.berlios.de/pub/cdrecord/alpha/
 EXTRACT_SUFX=	.tar.bz2
@@ -81,6 +81,7 @@ do-configure:
 			ln -sf i386-$$suffix ${MACHINE}-$$suffix;	\
 		fi;							\
 	done
+	cd ${WRKSRC} && ${SETENV} ${CONFIGURE_ENV} ${MAKE_PROGRAM} config
 
 post-build:
 	cd ${WRKSRC};							\
@@ -119,6 +120,24 @@ do-install:
 		${DESTDIR}${PREFIX}/share/doc/cdrtools/cdrecord
 	${INSTALL_DATA} ${WRKSRC}/mkisofs/README* \
 		${DESTDIR}${PREFIX}/share/doc/cdrtools/mkisofs
+
+
+CONFIGURE_ENV+= librt=${NETBSDLIB.rt:U:Q}
+
+.if ${OPSYS} == "NetBSD"
+netbsd-posix-sched-check-cookie: netbsd-posix-sched-check
+###
+### Check for POSIX priority scheduling in NetBSD
+###
+
+.PHONY: netbsd-posix-sched-check
+netbsd-posix-sched-check:
+NETBSDLIB.rt!=\
+	if ( /sbin/sysctl -n kern.posix_sched >/dev/null 2>&1 ); then \
+	    lib=-lrt; \
+	fi || ${TRUE}; \
+	echo "$$lib"
+.endif
 
 .include "../../mk/oss.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

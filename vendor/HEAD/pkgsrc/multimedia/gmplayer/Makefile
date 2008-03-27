@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.65 2007/12/21 16:07:48 tron Exp $
+# $NetBSD: Makefile,v 1.69 2008/03/16 11:56:48 wiz Exp $
 
 #
 # NOTE: if you are updating both mplayer and gmplayer, you must ensure
@@ -9,7 +9,7 @@
 #
 
 PKGNAME=	gmplayer-${MPLAYER_PKG_VERSION}
-PKGREVISION=	1
+PKGREVISION=	4
 
 BROKEN_IN=		pkgsrc-2006Q4
 
@@ -22,12 +22,14 @@ SKIN_SITES=	http://www1.mplayerhq.hu/MPlayer/skins/		\
 		ftp://ftp.freebsd.org/pub/FreeBSD/ports/distfiles/mplayer/ \
 		${MASTER_SITE_LOCAL:=mplayer/}
 
+PKG_DESTDIR_SUPPORT=	user-destdir
+
 .include "../../multimedia/mplayer-share/Makefile.common"
 
 COMMENT=	Software only MPEG-1/2/4 video decoder with a GTK+ interface
 
 SKINS +=	AlienMind-1.2${EXTRACT_SUFX}			\
-		Blue-1.6${EXTRACT_SUFX}				\
+		Blue-1.7${EXTRACT_SUFX}				\
 		BlueHeart-1.5${EXTRACT_SUFX}			\
 		CornerMP-1.2${EXTRACT_SUFX}			\
 		CornerMP-aqua-1.4${EXTRACT_SUFX}		\
@@ -65,19 +67,19 @@ CONFIGURE_ARGS+=	--enable-gui --disable-mencoder \
 INSTALLATION_DIRS=	bin
 
 do-install:
-	${INSTALL_PROGRAM} ${WRKSRC}/mplayer ${PREFIX}/bin/gmplayer
-	${INSTALL_DATA_DIR} ${PREFIX}/share/mplayer/Skin
+	${INSTALL_PROGRAM} ${WRKSRC}/mplayer ${DESTDIR}${PREFIX}/bin/gmplayer
+	${INSTALL_DATA_DIR} ${DESTDIR}${PREFIX}/share/mplayer/Skin
 .for skin in ${SKINS}
 	@${ECHO_MSG} "Installing skin ${skin}..."
 	${BZCAT} ${DISTDIR}/${DIST_SUBDIR}/${skin} |	\
-	  ${GTAR} xCmf ${PREFIX}/share/mplayer/Skin -
+	  ${GTAR} xCmf ${DESTDIR}${PREFIX}/share/mplayer/Skin -
 .endfor
-	${CHMOD} -R a+r ${PREFIX}/share/mplayer/Skin
-	${CHMOD} a+rx ${PREFIX}/share/mplayer/Skin/*
-	${RM} -f ${PREFIX}/share/mplayer/Skin/default
-	${LN} -s Blue ${PREFIX}/share/mplayer/Skin/default
-	${RM} -rf ${PREFIX}/share/mplayer/Skin/Blue/.svn
-	${RM} -rf ${PREFIX}/share/mplayer/Skin/Blue/icons/.svn
+	${CHMOD} -R a+r ${DESTDIR}${PREFIX}/share/mplayer/Skin
+	${CHMOD} a+rx ${DESTDIR}${PREFIX}/share/mplayer/Skin/*
+	${RM} -f ${DESTDIR}${PREFIX}/share/mplayer/Skin/default
+	${LN} -s Blue ${DESTDIR}${PREFIX}/share/mplayer/Skin/default
+	${RM} -rf ${DESTDIR}${PREFIX}/share/mplayer/Skin/Blue/.svn
+	${RM} -rf ${DESTDIR}${PREFIX}/share/mplayer/Skin/Blue/icons/.svn
 
 .include "../../multimedia/libdvdnav/buildlink3.mk"
 .include "../../x11/gtk2/buildlink3.mk"
