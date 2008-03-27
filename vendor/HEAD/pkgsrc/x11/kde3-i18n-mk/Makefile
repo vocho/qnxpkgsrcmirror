@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.21 2007/10/20 10:53:16 markd Exp $
+# $NetBSD: Makefile,v 1.23 2008/02/20 10:36:06 markd Exp $
 
 DISTNAME=	kde-i18n-mk-${_KDE_VERSION}
 CATEGORIES=	x11

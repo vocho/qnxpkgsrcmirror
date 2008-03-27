@@ -1,4 +1,4 @@
-# $NetBSD: package.mk,v 1.12 2007/11/07 17:30:01 rillig Exp $
+# $NetBSD: package.mk,v 1.16 2008/01/23 14:07:07 rillig Exp $
 
 PKG_SUFX?=		.tgz
 PKGFILE?=		${PKGREPOSITORY}/${PKGNAME}${PKG_SUFX}
@@ -40,7 +40,13 @@ _PKG_ARGS_PACKAGE+=	-E
 
 ${PKGFILE}: ${_CONTENTS_TARGETS}
 	${RUN} ${MKDIR} ${.TARGET:H}
-	${RUN} ${PKG_CREATE} ${_PKG_ARGS_PACKAGE} ${.TARGET}
+	@${STEP_MSG} "Creating binary package ${.TARGET}"
+	${RUN} tmpname=${.TARGET:S,${PKG_SUFX}$,.tmp${PKG_SUFX},};	\
+	if ${PKG_CREATE} ${_PKG_ARGS_PACKAGE} "$$tmpname"; then		\
+		${MV} -f "$$tmpname" ${.TARGET};			\
+	else								\
+		exitcode=$$?; ${RM} -f "$$tmpname"; exit $$exitcode;	\
+	fi
 
 ######################################################################
 ### package-remove (PRIVATE)

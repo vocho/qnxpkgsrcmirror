@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.14 2007/05/30 07:58:29 martti Exp $
+@comment $NetBSD: PLIST,v 1.16 2008/02/18 17:46:22 ghen Exp $
 bin/mailq
 bin/newaliases
 libexec/postfix/anvil
@@ -14,6 +14,9 @@ libexec/postfix/nqmgr
 libexec/postfix/oqmgr
 libexec/postfix/pickup
 libexec/postfix/pipe
+libexec/postfix/post-install
+libexec/postfix/postfix-files
+libexec/postfix/postfix-script
 libexec/postfix/proxymap
 libexec/postfix/qmgr
 libexec/postfix/qmqpd
@@ -138,6 +141,7 @@ share/doc/postfix/SMTPD_ACCESS_README
 share/doc/postfix/SMTPD_POLICY_README
 share/doc/postfix/SMTPD_PROXY_README
 share/doc/postfix/STANDARD_CONFIGURATION_README
+share/doc/postfix/STRESS_README
 share/doc/postfix/TLS_LEGACY_README
 share/doc/postfix/TLS_README
 share/doc/postfix/TUNING_README
@@ -161,7 +165,6 @@ share/examples/postfix/main.cf.default
 share/examples/postfix/makedefs.out
 share/examples/postfix/master.cf
 share/examples/postfix/post-install
-share/examples/postfix/postfix-files
 share/examples/postfix/postfix-script
 share/examples/postfix/relocated
 ${SASL}share/examples/postfix/smtpd.conf

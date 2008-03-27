@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.111 2007/09/19 23:46:06 wiz Exp $
+# $NetBSD: Makefile,v 1.116 2008/03/12 20:52:29 wiz Exp $
 #
 
 COMMENT=	Multimedia utilities
@@ -7,15 +7,18 @@ SUBDIR+=	RealPlayerGold
 SUBDIR+=	acidrip
 SUBDIR+=	alevt
 SUBDIR+=	avidemux
+SUBDIR+=	bsdav
 SUBDIR+=	dirac
 SUBDIR+=	divxplayer
 SUBDIR+=	dumpmpeg
+SUBDIR+=	dvd-slideshow
 SUBDIR+=	dvdauthor
 SUBDIR+=	dvdbackup
 SUBDIR+=	dvdrip
 SUBDIR+=	dvdstyler
 SUBDIR+=	dvdview
 SUBDIR+=	ffmpeg
+SUBDIR+=	ffmpeg-devel
 SUBDIR+=	flashplayer
 SUBDIR+=	fxtv
 SUBDIR+=	ggrab
@@ -23,6 +26,7 @@ SUBDIR+=	gmencoder
 SUBDIR+=	gmplayer
 SUBDIR+=	gnash
 SUBDIR+=	gnome-media
+SUBDIR+=	goggles
 SUBDIR+=	gopchop
 SUBDIR+=	gst-plugins0.10-bad
 SUBDIR+=	gst-plugins0.10-base
@@ -34,6 +38,7 @@ SUBDIR+=	gst-plugins0.10-mpeg2dec
 SUBDIR+=	gst-plugins0.10-ogg
 SUBDIR+=	gst-plugins0.10-theora
 SUBDIR+=	gst-plugins0.10-ugly
+SUBDIR+=	gst-plugins0.10-x264
 SUBDIR+=	gst-plugins0.10-xvid
 SUBDIR+=	gst-plugins0.8
 SUBDIR+=	gst-plugins0.8-dvdnav

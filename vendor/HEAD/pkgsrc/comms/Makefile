@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.69 2007/08/13 08:12:43 rillig Exp $
+# $NetBSD: Makefile,v 1.72 2008/02/20 19:13:12 drochner Exp $
 #
 
 COMMENT=	Communication utilities
@@ -29,12 +29,18 @@ SUBDIR+=	kermit
 SUBDIR+=	kyopon
 SUBDIR+=	libmal
 SUBDIR+=	libopensync
+SUBDIR+=	libopensync-plugin-evolution2
+SUBDIR+=	libopensync-plugin-file
+SUBDIR+=	libopensync-plugin-kdepim
+SUBDIR+=	libopensync-plugin-syncml
+SUBDIR+=	libsyncml
 SUBDIR+=	linuxsms
 SUBDIR+=	lrzsz
 SUBDIR+=	malsync
 SUBDIR+=	mgetty+sendfax
 SUBDIR+=	minicom
 SUBDIR+=	modemd
+SUBDIR+=	msynctool
 SUBDIR+=	obexapp
 SUBDIR+=	obexftp
 SUBDIR+=	openobex

@@ -1,12 +1,9 @@
-# $NetBSD: Makefile.common,v 1.18 2007/02/22 19:26:29 wiz Exp $
+# $NetBSD: Makefile.common,v 1.20 2008/03/03 20:17:11 jlam Exp $
 #
 
 DISTNAME=	# empty
 CATEGORIES=	fonts
-MASTER_SITES=	ftp://ftp.riken.go.jp/pub/net/netscape/communicator/extras/fonts/windows/ \
-		ftp://ftp-au.netscape.com/pub/communicator/extras/fonts/windows/ \
-		ftp://ftp.netscape.com/pub/communicator/extras/fonts/windows/ \
-		ftp://ftp.tuwien.ac.at/infosys/browsers/netscape/netscape.com/communicator/extras/fonts/windows/
+MASTER_SITES=	ftp://ftp.netscape.com/pub/communicator/extras/fonts/windows/
 DISTFILES=	${FONT_FILE} ReadMe.htm
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
@@ -21,6 +18,8 @@ NO_SRC_ON_FTP=	${RESTRICTED}
 NO_BIN_ON_CDROM=${RESTRICTED}
 NO_BIN_ON_FTP=	${RESTRICTED}
 
+PKG_DESTDIR_SUPPORT=	user-destdir
+
 DIST_SUBDIR=	cyberbit-ttf
 
 EXTRACT_ONLY=		${FONT_FILE}
@@ -34,7 +33,7 @@ FONTS_DIRS.ttf=	${PREFIX}/lib/X11/fonts/TTF
 DOCDIR=		${PREFIX}/share/doc/html/cyberbit-ttf
 
 do-install:
-	${INSTALL_DATA_DIR} ${FONTS_DIRS.ttf}
-	${INSTALL_DATA} ${WRKDIR}/*.ttf ${FONTS_DIRS.ttf}
-	${INSTALL_DATA_DIR} ${DOCDIR}
-	${INSTALL_DATA} ${_DISTDIR}/ReadMe.htm ${DOCDIR}
+	${INSTALL_DATA_DIR} ${DESTDIR}${FONTS_DIRS.ttf}
+	${INSTALL_DATA} ${WRKDIR}/*.ttf ${DESTDIR}${FONTS_DIRS.ttf}
+	${INSTALL_DATA_DIR} ${DESTDIR}${DOCDIR}
+	${INSTALL_DATA} ${_DISTDIR}/ReadMe.htm ${DESTDIR}${DOCDIR}

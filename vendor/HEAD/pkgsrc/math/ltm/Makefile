@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.10 2007/12/02 22:30:35 rillig Exp $
+# $NetBSD: Makefile,v 1.12 2008/03/04 18:12:59 jlam Exp $
 #
 
 DISTNAME=		ltm-0.39
@@ -11,21 +11,22 @@ HOMEPAGE=		http://math.libtomcrypt.com/
 COMMENT=		Number theoretic multiple-precision integer library
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 WRKSRC=			${WRKDIR}/libtommath-0.39
 MAKE_FILE=		makefile
 BUILD_TARGET=		default
 USE_TOOLS+=		gmake
 
-INSTALLATION_DIRS_FROM_PLIST=yes
+AUTO_MKDIRS=		yes
 
 do-install:
-	${INSTALL_DATA} ${WRKSRC}/tommath.h ${PREFIX}/include
-	${INSTALL_DATA} ${WRKSRC}/tommath_class.h ${PREFIX}/include
-	${INSTALL_DATA} ${WRKSRC}/tommath_superclass.h ${PREFIX}/include
-	${INSTALL_LIB} ${WRKSRC}/libtommath.a ${PREFIX}/lib
-	${INSTALL_DATA} ${WRKSRC}/bn.pdf ${PREFIX}/share/doc/ltm
-	${INSTALL_DATA} ${WRKSRC}/poster.pdf ${PREFIX}/share/doc/ltm
-	${INSTALL_DATA} ${WRKSRC}/tommath.pdf ${PREFIX}/share/doc/ltm
+	${INSTALL_DATA} ${WRKSRC}/tommath.h ${DESTDIR}${PREFIX}/include
+	${INSTALL_DATA} ${WRKSRC}/tommath_class.h ${DESTDIR}${PREFIX}/include
+	${INSTALL_DATA} ${WRKSRC}/tommath_superclass.h ${DESTDIR}${PREFIX}/include
+	${INSTALL_LIB} ${WRKSRC}/libtommath.a ${DESTDIR}${PREFIX}/lib
+	${INSTALL_DATA} ${WRKSRC}/bn.pdf ${DESTDIR}${PREFIX}/share/doc/ltm
+	${INSTALL_DATA} ${WRKSRC}/poster.pdf ${DESTDIR}${PREFIX}/share/doc/ltm
+	${INSTALL_DATA} ${WRKSRC}/tommath.pdf ${DESTDIR}${PREFIX}/share/doc/ltm
 
 .include "../../mk/bsd.pkg.mk"

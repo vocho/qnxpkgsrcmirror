@@ -1,4 +1,4 @@
-# $NetBSD: unprivileged.mk,v 1.14 2007/10/20 06:57:17 dsainty Exp $
+# $NetBSD: unprivileged.mk,v 1.16 2008/03/04 06:45:33 jlam Exp $
 #
 # This file collects definitions that are useful when using pkgsrc as an
 # unprivileged (non-root) user. It is included automatically by the
@@ -44,6 +44,15 @@
 #
 # XXX: How can the user say that some of the packages shouldn't override
 # the user and group names?
+#
+# PRIVILEGED_STAGES
+#	A list of phases (not stages) that are run as the privileged
+#	user. Some packages, when installed with just-in-time-su, leave
+#	temporary files in the working directory, so the "clean" phase
+#	must have enough priviledges to clean them up.
+#
+#	Possible: clean
+#	Default: (undefined)
 #
 # === System-defined variables ===
 #
@@ -160,6 +169,15 @@ NONBINMODE=		644
 PKG_USERS_VARS?=	# empty
 PKG_GROUPS_VARS?=	# empty
 BUILD_DEFS+=		${PKG_USERS_VARS} ${PKG_GROUPS_VARS}
+
+.if defined(SETGIDGAME) && !empty(SETGIDGAME:M[yY][eE][sS])
+.  if defined(GAMES_USER)
+PKG_USERS_VARS+=	GAMES_USER
+.  endif
+.  if defined(GAMES_GROUP)
+PKG_GROUPS_VARS+=	GAMES_GROUP
+.  endif
+.endif
 
 # Override per-package custom users and groups, except for groups listed
 # in UNPRIVILEGED_GROUPS.

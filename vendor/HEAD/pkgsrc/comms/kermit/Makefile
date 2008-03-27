@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.69 2007/01/07 09:13:49 rillig Exp $
+# $NetBSD: Makefile,v 1.73 2008/03/03 05:33:32 jlam Exp $
 
 DISTNAME=	cku211
 PKGNAME=	kermit-8.0.211
-PKGREVISION=	1
+PKGREVISION=	3
 CATEGORIES=	comms
 MASTER_SITES=	ftp://kermit.columbia.edu/kermit/archives/
 
@@ -12,6 +12,8 @@ COMMENT=	Network and serial communication, file transfer, and scripting utility
 
 LICENSE=	kermit-license
 
+PKG_DESTDIR_SUPPORT=	user-destdir
+
 .include "../../mk/bsd.prefs.mk"
 
 WRKSRC=		${WRKDIR}
@@ -20,7 +22,6 @@ BUILD_DEFS+=	KFLAGS LIBS MANINSTALL
 MAKE_ENV+=	KFLAGS=${KFLAGS:Q} LIBS=${LIBS:Q}
 MAKE_ENV+=	SSLINC=${SSLINC:Q} SSLLIB=${SSLLIB:Q}
 MAKE_FILE=	makefile
-USE_TOOLS+=	nroff
 
 #KFLAGS+=	-DNODEBUG -DNOOLDMODEMS
 
@@ -28,39 +29,15 @@ USE_TOOLS+=	nroff
 SSLINC=		-I${WRKDIR}/.buildlink/include
 SSLLIB=		-L${WRKDIR}/.buildlink/lib ${COMPILER_RPATH_FLAG}${WRKDIR}/.buildlink/lib
 
-.if !empty(MANINSTALL:Mcatinstall)
-PLIST_SUBST+=	HAVE_CATPAGE=""
-.else
-PLIST_SUBST+=	HAVE_CATPAGE="@comment "
-.endif
-
-.if !empty(MANINSTALL:Mmaninstall)
-PLIST_SUBST+=	HAVE_MANPAGE=""
-.else
-PLIST_SUBST+=	HAVE_MANPAGE="@comment "
-.endif
-
 .include "options.mk"
 
-INSTALLATION_DIRS=	bin share/doc/kermit
+INSTALLATION_DIRS=	bin ${PKGMANDIR}/man1 share/doc/kermit
 
 do-install:
-	${INSTALL_PROGRAM} ${WRKSRC}/wermit ${PREFIX}/bin/kermit
-	${INSTALL_DATA} ${WRKSRC}/*.txt ${PREFIX}/share/doc/kermit
-	set -e; \
-	for OPT in ${MANINSTALL} broken-solaris-needs-this; do \
-	  case $$OPT in \
-	    catinstall) \
-		nroff -man ${WRKSRC}/ckuker.nr > ${WRKSRC}/kermit.0; \
-		${INSTALL_MAN_DIR} ${PREFIX}/${PKGMANDIR}/cat1; \
-		${INSTALL_MAN} ${WRKSRC}/kermit.0 ${PREFIX}/${PKGMANDIR}/cat1/kermit.0; \
-		;; \
-	    maninstall) \
-		${INSTALL_MAN_DIR} ${PREFIX}/${PKGMANDIR}/man1; \
-		${INSTALL_MAN} ${WRKSRC}/ckuker.nr ${PREFIX}/${PKGMANDIR}/man1/kermit.1; \
-		;; \
-	  esac; \
-	done
+	${INSTALL_PROGRAM} ${WRKSRC}/wermit ${DESTDIR}${PREFIX}/bin/kermit
+	${INSTALL_DATA} ${WRKSRC}/*.txt ${DESTDIR}${PREFIX}/share/doc/kermit
+	${INSTALL_MAN} ${WRKSRC}/ckuker.nr \
+		${DESTDIR}${PREFIX}/${PKGMANDIR}/man1/kermit.1; \
 
 .for p in NetBSD-1.3*
 .  if ${MACHINE_PLATFORM:M${p}} != ""

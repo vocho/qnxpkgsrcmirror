@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.14 2007/12/19 14:26:07 tron Exp $
+# $NetBSD: Makefile,v 1.18 2008/03/06 14:53:53 wiz Exp $
 
-DISTNAME=		wireshark-0.99.7
+DISTNAME=		wireshark-0.99.8
+PKGREVISION=		1
 CATEGORIES=		net
 MASTER_SITES=		http://www.wireshark.org/download/src/ \
 			${MASTER_SITE_SOURCEFORGE:=wireshark/}
@@ -19,10 +20,8 @@ USE_LIBTOOL=		YES
 SHLIBTOOL_OVERRIDE=	# empty
 
 GNU_CONFIGURE=		YES
-CONFIGURE_ARGS+=	--enable-gtk2
 CONFIGURE_ARGS+=	--enable-static=no
 CONFIGURE_ARGS+=	--enable-threads
-CONFIGURE_ARGS+=	--with-gtk-prefix=${BUILDLINK_PREFIX.gtk2}
 CONFIGURE_ARGS+=	--with-ssl=${SSLBASE:Q}
 CONFIGURE_ARGS+=	--with-net-snmp
 CONFIGURE_ARGS+=	--with-pcap=${BUILDLINK_PREFIX.libpcap}
@@ -32,6 +31,7 @@ CONFIGURE_ARGS+=	--with-pcre=${BUILDLINK_PREFIX.pcre}
 PTHREAD_OPTS+=		require
 
 .include "../../mk/bsd.prefs.mk"
+.include "options.mk"
 
 .if !empty(MACHINE_PLATFORM:MDarwin-[567].*-*)
 USE_BUILTIN.libpcap=	no
@@ -40,12 +40,6 @@ USE_BUILTIN.libpcap=	no
 # wireshark no longer builds with NetBSD 3.x provided zlib
 BUILDLINK_API_DEPENDS.zlib=zlib>=1.2.1
 
-SUBST_CLASSES+=		shell
-SUBST_STAGE.shell=	post-build
-SUBST_MESSAGE.shell=	Replacing @SHELL@ with a proper shell.
-SUBST_FILES.shell=	idl2wrs
-SUBST_SED.shell=	-e 's,@SHELL@,${SHELL},g'
-
 .include "../../devel/glib2/buildlink3.mk"
 .include "../../devel/pcre/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"
@@ -53,7 +47,6 @@ SUBST_SED.shell=	-e 's,@SHELL@,${SHELL},g'
 .include "../../net/net-snmp/buildlink3.mk"
 .include "../../security/gnutls/buildlink3.mk"
 .include "../../security/openssl/buildlink3.mk"
-.include "../../x11/gtk2/buildlink3.mk"
 
 .include "../../mk/pthread.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

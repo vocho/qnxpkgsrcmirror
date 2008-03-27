@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.295 2007/11/25 23:53:15 wiz Exp $
+# $NetBSD: Makefile,v 1.299 2008/03/15 01:15:18 wiz Exp $
 #
 
 COMMENT=	Games
@@ -88,7 +88,6 @@ SUBDIR+=	freeciv-client
 SUBDIR+=	freeciv-manual
 SUBDIR+=	freeciv-server
 SUBDIR+=	freeciv-share
-SUBDIR+=	freeciv-sounds
 SUBDIR+=	freedroid
 SUBDIR+=	freesci
 SUBDIR+=	frotz
@@ -96,6 +95,8 @@ SUBDIR+=	frozen-bubble
 SUBDIR+=	fruit
 SUBDIR+=	galaxa
 SUBDIR+=	gamazons
+SUBDIR+=	gate88
+SUBDIR+=	gbrainy
 SUBDIR+=	gcompris
 SUBDIR+=	gemdropx
 SUBDIR+=	genecys-client
@@ -196,6 +197,7 @@ SUBDIR+=	quake3server-ut
 SUBDIR+=	quake6
 SUBDIR+=	quakedata
 SUBDIR+=	quakeforge
+SUBDIR+=	quarry
 SUBDIR+=	rocksndiamonds
 SUBDIR+=	rocksndiamonds-levels
 SUBDIR+=	rollemup

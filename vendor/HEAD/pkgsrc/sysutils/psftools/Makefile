@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.1.1.1 2007/11/19 04:58:15 bjs Exp $
+# $NetBSD: Makefile,v 1.3 2008/02/17 17:58:53 bjs Exp $
 #
 
-DISTNAME=	psftools-1.0.5
+DISTNAME=	psftools-1.0.6
+PKGNAME=	${DISTNAME:S/-rc1//}
 CATEGORIES=	sysutils fonts
 MASTER_SITES=	http://www.seasip.info/Unix/PSF/
 

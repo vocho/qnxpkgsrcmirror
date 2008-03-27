@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.72 2007/10/16 23:49:00 tnn Exp $
+# $NetBSD: Makefile,v 1.75 2008/03/17 12:18:47 obache Exp $
 
 DISTNAME=	xv-3.10a
 PKGREVISION=	13
 CATEGORIES=	graphics x11
 MASTER_SITES=	ftp://ftp.cis.upenn.edu/pub/xv/
-DISTFILES=	${DISTNAME}${EXTRACT_SUFX} xv-3.10a-jumbo-patches-20070520.tar.gz
+DISTFILES=	${DEFAULT_DISTFILES} ${PATCHFILES}
 
 PATCHFILES=	xv-3.10a-jumbo-patches-20070520.tar.gz
 PATCH_SITES=	${MASTER_SITE_SOURCEFORGE:=png-mng/}
@@ -51,7 +51,7 @@ SUBST_STAGE.ccflags=	post-configure
 SUBST_MESSAGE.ccflags=	Fixing compiler flags for Solaris.
 .endif
 
-.if ${OPSYS} == "IRIX" || ${OPSYS} == "SunOS"
+.if ${OPSYS} == "SunOS" || !empty(MACHINE_PLATFORM:MIRIX-5*)
 CPPFLAGS+=	-DNEED_ALLOCA_H
 .endif
 

@@ -1,17 +1,18 @@
-# $NetBSD: Makefile,v 1.6 2007/12/09 20:56:40 wiz Exp $
+# $NetBSD: Makefile,v 1.8 2008/03/04 11:02:25 rillig Exp $
 #
 
 DISTNAME=		asciidoc-8.2.5
-PKGREVISION=		1
+PKGREVISION=		2
 CATEGORIES=		textproc
 MASTER_SITES=		${HOMEPAGE}	\
 			${MASTER_SITE_SOURCEFORGE:=asciidoc/}
 
-MAINTAINER=		rillig@NetBSD.org
+MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://www.methods.co.nz/asciidoc/
 COMMENT=		ASCII to formatted document converter
 
 DEPENDS+=		docbook-xsl-[0-9]*:../../textproc/docbook-xsl
+DEPENDS+=		getopt-[0-9]*:../../misc/getopt
 
 REPLACE_BASH+=		a2x
 USE_TOOLS+=		bash:run

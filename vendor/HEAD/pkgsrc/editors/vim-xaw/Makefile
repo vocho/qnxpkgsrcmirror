@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.45 2007/05/18 23:46:31 heinz Exp $
+# $NetBSD: Makefile,v 1.48 2008/03/11 10:55:03 martti Exp $
 
 PKGNAME=		vim-xaw-${VIM_VERSION}.${VIM_PATCHLEVEL}
 #PKGREVISION=		1
@@ -14,7 +14,7 @@ CONFLICTS+=		vim-[0-9]* vim-gtk-[0-9]* vim-gtk2-[0-9]*
 CONFLICTS+=		vim-motif-[0-9]* vim-kde-[0-9]*
 
 CONFIGURE_ARGS+=	--enable-gui=athena
-CONFIGURE_ARGS+=	--with-tlib=ncurses
+CONFIGURE_ARGS+=	--with-tlib=${BUILDLINK_LIBNAME.termcap}
 
 BUILD_TARGET=		vim
 INSTALL_TARGET=		installvimbin
@@ -37,16 +37,17 @@ CHECK_INTERPRETER_SKIP+=${PKGMANDIR}/man1/rgvim.1 ${PKGMANDIR}/man1/rgview.1
 
 post-install:
 .for f in gvim.1 gview.1 rgvim.1 rgview.1
-	${RM} -f ${DESTDIR:Q}${PREFIX:Q}/${PKGMANDIR}/man1/${f:Q}
-	${LN} -s vim.1 ${DESTDIR:Q}${PREFIX:Q}/${PKGMANDIR}/man1/${f:Q}
+	${RM} -f ${DESTDIR}${PREFIX}/${PKGMANDIR}/man1/${f}
+	${LN} -s vim.1 ${DESTDIR}${PREFIX}/${PKGMANDIR}/man1/${f}
 .endfor
 .for f in gvim gview rgvim rgview rvim rview
-	${RM} -f ${DESTDIR:Q}${PREFIX:Q}/bin/${f:Q}
-	${LN} -s vim ${DESTDIR:Q}${PREFIX:Q}/bin/${f:Q}
+	${RM} -f ${DESTDIR}${PREFIX}/bin/${f}
+	${LN} -s vim ${DESTDIR}${PREFIX}/bin/${f}
 .endfor
 
-.include "../../devel/ncurses/buildlink3.mk"
+.include "../../converters/libiconv/buildlink3.mk"
+.include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../x11/libXpm/buildlink3.mk"
 .include "../../mk/xaw.buildlink3.mk"
-
+.include "../../mk/termcap.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

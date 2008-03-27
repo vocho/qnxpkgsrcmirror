@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.19 2006/06/22 21:50:38 rillig Exp $
+# $NetBSD: Makefile,v 1.21 2008/03/03 00:51:44 jlam Exp $
 
 DISTNAME=		unixbench-4.1.0
 PKGNAME=		${DISTNAME:S/unix/byte/}
@@ -7,11 +7,11 @@ CATEGORIES=		benchmarks
 MASTER_SITES=		http://www.tux.org/pub/tux/benchmarks/System/unixbench/
 EXTRACT_SUFX=		.tgz
 
-MAINTAINER=		root@garbled.net
+MAINTAINER=		pkgsrc-users@NetBSD.org
 COMMENT=		BYTE Magazine's Public Domain benchmark for UNIX
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
-
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 BENCHMARK_ENV+=		BINDIR=${WRKSRC}/pgms
 BENCHMARK_ENV+=		SCRPDIR=${WRKSRC}/pgms
@@ -37,13 +37,13 @@ pre-install:
 	${FIND} ${WRKSRC} -name "*.orig" -print | ${XARGS} ${RM} -f
 
 do-install:
-	${INSTALL_DATA_DIR} ${PREFIX}/libexec/bytebench
-	${INSTALL_SCRIPT} ${WRKSRC}/pgms/* ${PREFIX}/libexec/bytebench
-	${INSTALL_DATA_DIR} ${PREFIX}/share/bytebench
-	${INSTALL_DATA} ${WRKSRC}/testdir/* ${PREFIX}/share/bytebench
-	${INSTALL_DATA_DIR} ${PREFIX}/share/doc/bytebench
-	${INSTALL_DATA} ${WRKSRC}/README ${PREFIX}/share/doc/bytebench
-	${INSTALL_SCRIPT} ${WRKSRC}/run-byte ${PREFIX}/bin
+	${INSTALL_DATA_DIR} ${DESTDIR}${PREFIX}/libexec/bytebench
+	${INSTALL_SCRIPT} ${WRKSRC}/pgms/* ${DESTDIR}${PREFIX}/libexec/bytebench
+	${INSTALL_DATA_DIR} ${DESTDIR}${PREFIX}/share/bytebench
+	${INSTALL_DATA} ${WRKSRC}/testdir/* ${DESTDIR}${PREFIX}/share/bytebench
+	${INSTALL_DATA_DIR} ${DESTDIR}${PREFIX}/share/doc/bytebench
+	${INSTALL_DATA} ${WRKSRC}/README ${DESTDIR}${PREFIX}/share/doc/bytebench
+	${INSTALL_SCRIPT} ${WRKSRC}/run-byte ${DESTDIR}${PREFIX}/bin
 
 benchmark:
 	@if [ `${ID} -u` != 0 ]; then					\

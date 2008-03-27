@@ -1,14 +1,15 @@
-# $NetBSD: Makefile,v 1.28 2007/09/16 13:32:48 obache Exp $
+# $NetBSD: Makefile,v 1.30 2008/03/04 15:39:09 jlam Exp $
 #
 
-DISTNAME=	dcraw-8.77
+DISTNAME=	dcraw-8.82
 CATEGORIES=	graphics
 MASTER_SITES=	http://www.cybercom.net/~dcoffin/dcraw/archive/
-DIST_SUBDIR=	${PKGNAME}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.cybercom.net/~dcoffin/dcraw/
 COMMENT=	Raw digital camera decoder
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_PKGLOCALEDIR=	yes
 WRKSRC=			${WRKDIR}/${PKGBASE}
@@ -52,13 +53,15 @@ do-build:
 	done;
 
 do-install:
-	${INSTALL_PROGRAM} ${WRKSRC}/dcraw ${PREFIX}/bin
-	${INSTALL_MAN} ${WRKSRC}/dcraw.1 ${PREFIX}/${PKGMANDIR}/man1
+	${INSTALL_PROGRAM} ${WRKSRC}/dcraw ${DESTDIR}${PREFIX}/bin
+	${INSTALL_MAN} ${WRKSRC}/dcraw.1 ${DESTDIR}${PREFIX}/${PKGMANDIR}/man1
 .for l in ${DCRAW_MANS}
-	${INSTALL_MAN} ${WRKSRC}/dcraw_${l}.1 ${PREFIX}/${PKGMANDIR}/${l}/man1/dcraw.1
+	${INSTALL_MAN} ${WRKSRC}/dcraw_${l}.1 \
+		${DESTDIR}${PREFIX}/${PKGMANDIR}/${l}/man1/dcraw.1
 .endfor
 .for l in ${DCRAW_LOCALES}
-	${INSTALL_DATA} ${WRKSRC}/dcraw_${l}.mo ${PREFIX}/${PKGLOCALEDIR}/locale/${l}/LC_MESSAGES/dcraw.mo
+	${INSTALL_DATA} ${WRKSRC}/dcraw_${l}.mo \
+		${DESTDIR}${PREFIX}/${PKGLOCALEDIR}/locale/${l}/LC_MESSAGES/dcraw.mo
 .endfor
 
 .include "../../devel/gettext-lib/buildlink3.mk"

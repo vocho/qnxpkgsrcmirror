@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.55 2007/11/18 08:37:04 adam Exp $
+# $NetBSD: Makefile,v 1.58 2008/03/02 15:50:20 adam Exp $
 
-DISTNAME=	gtkmm-2.12.3
+DISTNAME=	gtkmm-2.12.5
 CATEGORIES=	x11
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gtkmm/2.12/}
 EXTRACT_SUFX=	.tar.bz2
@@ -23,6 +23,7 @@ PKGCONFIG_OVERRIDE+=	gtk/gtkmm-2.4.pc.in
 PKGCONFIG_OVERRIDE+=	pango/pangomm-1.4.pc.in
 
 BUILDLINK_API_DEPENDS.glibmm+=	glibmm>=2.12.3
+BUILDLINK_API_DEPENDS.gtk2+=	gtk2+>=2.12.0
 
 .include "../../devel/glibmm/buildlink3.mk"
 .include "../../graphics/cairomm/buildlink3.mk"

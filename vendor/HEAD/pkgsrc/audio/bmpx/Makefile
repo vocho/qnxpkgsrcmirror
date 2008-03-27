@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.12 2007/11/01 22:49:14 tnn Exp $
+# $NetBSD: Makefile,v 1.15 2008/03/06 14:53:47 wiz Exp $
 #
 
 DISTNAME=	bmpx-0.40.13
-PKGREVISION=	1
+PKGREVISION=	4
 CATEGORIES=	audio
 MASTER_SITES=	http://files.beep-media-player.org/releases/0.40/
 EXTRACT_SUFX=	.tar.bz2

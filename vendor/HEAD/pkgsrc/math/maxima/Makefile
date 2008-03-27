@@ -1,7 +1,10 @@
-# $NetBSD: Makefile,v 1.12 2007/09/03 16:08:47 drochner Exp $
+# $NetBSD: Makefile,v 1.17 2008/01/28 12:08:49 reinoud Exp $
 #
 
-DISTNAME=		maxima-5.13.0
+DISTNAME=		maxima-5.14.0
+# On updates, please make sure editors/TeXmacs knows about the new
+# version number.
+# (if needed, patch plugins/maxima/bin/{maxima_detect,tm_maxima})
 CATEGORIES=		math
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=maxima/}
 
@@ -9,14 +12,18 @@ MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://maxima.sourceforge.net/
 COMMENT=		Computer algebra system
 
-DEPENDS+=		clisp-[0-9]*:../../lang/clisp
+# Note: lisp backend is depended and setup up for in options.mk
 DEPENDS+=		tk-[0-9]*:../../x11/tk
 
-GNU_CONFIGURE=		yes
-CONFIGURE_ARGS+=	--enable-clisp
-USE_TOOLS+=		perl
+PKG_DESTDIR_SUPPORT=	user-destdir
 
-INFO_FILES=		# PLIST
+GNU_CONFIGURE=		yes
+USE_TOOLS+=		perl
+REPLACE_SH=		doc/misc/grepforvariables.sh
+
+INFO_FILES=		yes
 TEST_TARGET=		check
+
+.include "options.mk"
 
 .include "../../mk/bsd.pkg.mk"

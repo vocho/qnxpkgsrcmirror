@@ -1,4 +1,4 @@
-$NetBSD: patch-bf,v 1.1 2006/10/08 13:29:06 rillig Exp $
+$NetBSD: patch-bf,v 1.3 2008/03/26 13:22:00 wiz Exp $
 
 --- bdb/dist/configure.orig	2006-10-08 15:25:31.000000000 +0200
 +++ bdb/dist/configure	2006-10-08 15:26:39.000000000 +0200

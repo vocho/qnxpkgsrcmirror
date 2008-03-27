@@ -1,5 +1,5 @@
-$NetBSD: distinfo,v 1.3 2007/12/03 05:54:15 obache Exp $
+$NetBSD: distinfo,v 1.5 2008/02/13 02:49:06 obache Exp $
 
-SHA1 (JSON-1.15.tar.gz) = 56347647085e9e49d6c66a3d7d573466513eedae
-RMD160 (JSON-1.15.tar.gz) = ba6f2fc4fa7bb93f52b2f731a971f8cf68d5881e
-Size (JSON-1.15.tar.gz) = 38395 bytes
+SHA1 (JSON-2.06.tar.gz) = 7a70c4f55cf2a9ebe3372c8acf227e3f78c36b72
+RMD160 (JSON-2.06.tar.gz) = bcdb0e1759d09f5e0beaaf80844a6b07753b4f84
+Size (JSON-2.06.tar.gz) = 62329 bytes

@@ -1,4 +1,4 @@
-# $NetBSD: mysql.buildlink3.mk,v 1.7 2007/09/10 07:18:32 rillig Exp $
+# $NetBSD: mysql.buildlink3.mk,v 1.9 2008/03/26 13:23:34 wiz Exp $
 #
 # This file is included by packages that require some version of the
 # MySQL database client.
@@ -45,10 +45,6 @@ _MYSQL_VERSION_50_INSTALLED=	yes
 
 .if exists(${LOCALBASE}/lib/mysql/libmysqlclient.so.14)
 _MYSQL_VERSION_41_INSTALLED=	yes
-.endif
-
-.if exists(${LOCALBASE}/lib/mysql/libmysqlclient.so.12)
-_MYSQL_VERSION_40_INSTALLED=	yes
 .endif
 
 # if a version is explicitely required, take it

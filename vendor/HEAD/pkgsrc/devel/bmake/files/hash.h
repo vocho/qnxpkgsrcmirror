@@ -1,4 +1,4 @@
-/*	$NetBSD: hash.h,v 1.1 2005/10/31 21:34:24 reed Exp $	*/
+/*	$NetBSD: hash.h,v 1.2 2008/03/09 19:54:29 joerg Exp $	*/
 
 /*
  * Copyright (c) 1988, 1989, 1990 The Regents of the University of California.

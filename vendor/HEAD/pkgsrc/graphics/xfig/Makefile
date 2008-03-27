@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.51 2007/02/02 14:55:03 joerg Exp $
+# $NetBSD: Makefile,v 1.53 2008/02/06 23:33:00 smb Exp $
 
 DISTNAME=	xfig.3.2.5-alpha5.full
 PKGNAME=	xfig-3.2.5alpha5
-PKGREVISION=	5
+PKGREVISION=	6
 CATEGORIES=	graphics
 MASTER_SITES=	ftp://epb.lbl.gov/xfig/alpha/
 
-MAINTAINER=	root@garbled.net
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.xfig.org/
 COMMENT=	CAD-like 2D drawing tool, good for colorful scale drawings & ISOs
 

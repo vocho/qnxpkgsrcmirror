@@ -1,4 +1,4 @@
-$NetBSD: patch-am,v 1.8 2007/05/23 08:11:51 martti Exp $
+$NetBSD: patch-am,v 1.10 2008/03/26 13:22:00 wiz Exp $
 
 --- scripts/mysqld_safe.sh.orig	2007-05-23 08:51:42.000000000 +0300
 +++ scripts/mysqld_safe.sh	2007-05-23 08:54:22.000000000 +0300

@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.28 2007/07/04 20:54:32 jlam Exp $
+# $NetBSD: Makefile,v 1.32 2008/03/24 18:40:18 adrianp Exp $
 #
 
-DISTNAME=	ircu2.10.12.10
+DISTNAME=	ircu2.10.12.12
 PKGNAME=	${DISTNAME:S/ircu2/ircu-2/}
+PKGREVISION=	1
 CATEGORIES=	chat
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=undernet-ircu/}
 
@@ -12,7 +13,10 @@ COMMENT=	Internet Relay Chat server customized for Undernet
 
 CONFLICTS+=	ircd-hybrid-[0-9]*
 
+PKG_DESTDIR_SUPPORT=	user-destdir
+
 GNU_CONFIGURE=	YES
+USE_TOOLS+=	lex
 
 CONFIGURE_ARGS+=	--bindir=${PREFIX}/sbin
 CONFIGURE_ARGS+=	--with-cpath=${PKG_SYSCONFDIR}/ircd.conf
@@ -58,18 +62,18 @@ PKG_SHELL.${IRCD_USER}=	${SH}
 INSTALLATION_DIRS=	${PKGMANDIR}/man8 sbin
 
 do-install:
-	${INSTALL_DATA_DIR} ${DOCDIR}
-	${INSTALL_DATA_DIR} ${EGDIR}
-	${INSTALL_PROGRAM} ${WRKSRC}/ircd/ircd ${PREFIX}/sbin
-	${INSTALL_PROGRAM} ${WRKSRC}/ircd/umkpasswd ${PREFIX}/bin
+	${INSTALL_DATA_DIR} ${DESTDIR}${DOCDIR}
+	${INSTALL_DATA_DIR} ${DESTDIR}${EGDIR}
+	${INSTALL_PROGRAM} ${WRKSRC}/ircd/ircd ${DESTDIR}${PREFIX}/sbin
+	${INSTALL_PROGRAM} ${WRKSRC}/ircd/umkpasswd ${DESTDIR}${PREFIX}/bin
 	${INSTALL_PROGRAM} ${WRKSRC}/ircd/convert-conf \
-		${PREFIX}/bin/uconvert-conf
-	${INSTALL_MAN} ${WRKSRC}/doc/ircd.8 ${PREFIX}/${PKGMANDIR}/man8
-	${INSTALL_DATA} ${WRKSRC}/doc/example.conf ${EGDIR}
-	${INSTALL_DATA} ${WRKSRC}/README ${DOCDIR}
-	${INSTALL_DATA} ${WRKSRC}/INSTALL ${DOCDIR}
-	${INSTALL_DATA} ${WRKSRC}/RELEASE.NOTES ${DOCDIR}
-	${INSTALL_DATA} ${WRKSRC}/doc/readme.* ${DOCDIR}
-	${INSTALL_DATA} ${WRKSRC}/doc/*.html ${DOCDIR}
+		${DESTDIR}${PREFIX}/bin/uconvert-conf
+	${INSTALL_MAN} ${WRKSRC}/doc/ircd.8 ${DESTDIR}${PREFIX}/${PKGMANDIR}/man8
+	${INSTALL_DATA} ${WRKSRC}/doc/example.conf ${DESTDIR}${EGDIR}
+	${INSTALL_DATA} ${WRKSRC}/README ${DESTDIR}${DOCDIR}
+	${INSTALL_DATA} ${WRKSRC}/INSTALL ${DESTDIR}${DOCDIR}
+	${INSTALL_DATA} ${WRKSRC}/RELEASE.NOTES ${DESTDIR}${DOCDIR}
+	${INSTALL_DATA} ${WRKSRC}/doc/readme.* ${DESTDIR}${DOCDIR}
+	${INSTALL_DATA} ${WRKSRC}/doc/*.html ${DESTDIR}${DOCDIR}
 
 .include "../../mk/bsd.pkg.mk"

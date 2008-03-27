@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.2 2007/12/13 02:54:49 taca Exp $
+# $NetBSD: Makefile,v 1.4 2008/01/03 12:25:02 adrianp Exp $
 #
 
 COMMENT=	ISC Dynamic Host Configuration Protocol (DHCP) Relay
 COMPONENT=	relay
+PKGREVISION=	2
 SUBDIR=		relay
 
 RCD_SCRIPTS=	isc_dhcrelay

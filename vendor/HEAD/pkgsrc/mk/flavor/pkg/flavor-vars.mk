@@ -1,4 +1,4 @@
-# $NetBSD: flavor-vars.mk,v 1.5 2007/12/16 01:49:08 adrianp Exp $
+# $NetBSD: flavor-vars.mk,v 1.7 2008/03/10 20:05:59 joerg Exp $
 #
 # This Makefile fragment is included indirectly by bsd.prefs.mk and
 # defines some variables which must be defined earlier than where
@@ -45,15 +45,19 @@ MAKEFLAGS+=		PKGTOOLS_VERSION=${PKGTOOLS_VERSION}
 # should pick the correct version to run.
 #
 .if defined(OPSYS) && ${OPSYS} != "NetBSD"
-AP?=	${PKG_TOOLS_BIN}/audit-packages
+AUDIT_PACKAGES?=	${PKG_TOOLS_BIN}/audit-packages
+DOWNLOAD_VULN_LIST?=	${PKG_TOOLS_BIN}/download-vulnerability-list
 .else
 .	if exists(${LOCALBASE}/sbin/audit-packages)
-AP?=		${LOCALBASE}/sbin/audit-packages
+AUDIT_PACKAGES?=	${LOCALBASE}/sbin/audit-packages
+DOWNLOAD_VULN_LIST?=	${LOCALBASE}/sbin/download-vulnerability-list
 .	else
 .		if exists(/usr/sbin/audit-packages)
-AP?=			/usr/sbin/audit-packages
+AUDIT_PACKAGES?=	/usr/sbin/audit-packages
+DOWNLOAD_VULN_LIST?=	/usr/sbin/download-vulnerability-list
 .		else
-AP?=			audit-packages
+AUDIT_PACKAGES?=	audit-packages
+DOWNLOAD_VULN_LIST?=	download-vulnerability-list
 .		endif
 .	endif
 .endif
@@ -82,7 +86,7 @@ LINKFARM?=	${LINKFARM_CMD}
 # "${PKG_INFO} -e pkgpattern" if the latter would return more than one
 # package name.
 #
-_PKG_BEST_EXISTS?=	${PKG_ADMIN} -b -d ${_PKG_DBDIR} -S lsbest
+_PKG_BEST_EXISTS?=	${PKG_INFO} -E
 
 # XXX Leave this here until all uses of this have been purged from the
 # XXX public parts of pkgsrc.

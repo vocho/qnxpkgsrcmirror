@@ -1,9 +1,10 @@
-# $NetBSD: Makefile,v 1.4 2007/12/07 19:12:07 bouyer Exp $
+# $NetBSD: Makefile,v 1.10 2008/03/08 13:59:39 bouyer Exp $
 #
 
-VERSION=		3.1.2
+VERSION=		3.1.3
 DISTNAME=		xen-${VERSION}-src
 PKGNAME=		xentools3-${VERSION}
+PKGREVISION=		2
 CATEGORIES=		sysutils
 MASTER_SITES=		${MASTER_SITE_LOCAL}
 EXTRACT_SUFX=		.tgz
@@ -24,7 +25,7 @@ CONFLICTS+=		libxen-[0-9]*
 CONFLICTS+=		xentools20-[0-9]*
 CONFLICTS=		xentools30-*
 
-WRKSRC=			${WRKDIR}/xen-${VERSION}-src/tools
+WRKSRC=			${WRKDIR}/xen-${VERSION}/tools
 CHECK_PORTABILITY_SKIP=	examples/* xm-test/ramdisk/make-release.sh
 
 EGDIR=			${PREFIX}/share/examples/xen
@@ -53,17 +54,16 @@ PYTHON_PATCH_SCRIPTS+=	misc/xend
 PYTHON_PATCH_SCRIPTS+=	misc/xensymoops
 PYTHON_PATCH_SCRIPTS+=	misc/xen-python-path
 PYTHON_PATCH_SCRIPTS+=	pygrub/src/pygrub
-PYTHON_PATCH_SCRIPTS+=	python/xen/util/bugtool.py
-PYTHON_PATCH_SCRIPTS+=	python/xen/xend/sxp.py
-PYTHON_PATCH_SCRIPTS+=	python/xen/util/pci.py
-PYTHON_PATCH_SCRIPTS+=	python/xen/xend/XendClient.py
-PYTHON_PATCH_SCRIPTS+=	python/xen/xend/arch.py
-PYTHON_PATCH_SCRIPTS+=	python/test.py
+PYTHON_PATCH_SCRIPTS+=	python/xen/util/*.py
+PYTHON_PATCH_SCRIPTS+=	python/xen/xend/*.py
+PYTHON_PATCH_SCRIPTS+=	python/xen/xm/*.py
+PYTHON_PATCH_SCRIPTS+=	python/xen/util/*.py
+PYTHON_PATCH_SCRIPTS+=	python/*.py
 PYTHON_PATCH_SCRIPTS+=	security/python/xensec_gen/cgi-bin/policy.cgi
-PYTHON_PATCH_SCRIPTS+=	security/python/xensec_gen/main.py
-PYTHON_PATCH_SCRIPTS+=	security/python/setup.py
-PYTHON_PATCH_SCRIPTS+=	security/xensec_gen.py
-PYTHON_PATCH_SCRIPTS+=	xenmon/xenmon.py
+PYTHON_PATCH_SCRIPTS+=	security/python/xensec_gen/*.py
+PYTHON_PATCH_SCRIPTS+=	security/python/*.py
+PYTHON_PATCH_SCRIPTS+=	security/*.py
+PYTHON_PATCH_SCRIPTS+=	xenmon/*.py
 PYTHON_PATCH_SCRIPTS+=	xentrace/xentrace_format
 
 SUBST_CLASSES+=		paths
@@ -103,6 +103,7 @@ SUBST_SED.conf=		-e "s,@XENDCONFDIR@,${PKG_SYSCONFDIR},g"
 SUBST_CLASSES+=		prefix
 SUBST_STAGE.prefix=	pre-configure
 SUBST_FILES.prefix=	python/xen/util/auxbin.py
+SUBST_FILES.prefix+=	python/xen/xend/osdep.py
 SUBST_FILES.prefix+=	misc/xen-python-path
 SUBST_SED.prefix=	-e "s,@PREFIX@,${PREFIX},g"
 
@@ -136,11 +137,13 @@ CONF_FILES_PERMS+=	${EGDIR}/${s} ${PKG_SYSCONFDIR}/scripts/${s}	\
 OWN_DIRS=		${PKG_SYSCONFDIR}/scripts /var/log/xen
 
 pre-build:
-	${MKDIR} ${WRKSRC}/libxc/xen/NetBSD
-	${TEST} -f ${WRKSRC}/libxc/xen/NetBSD/xenio.h || \
-		${CP} ${FILESDIR}/xenio.h ${WRKSRC}/libxc/xen/NetBSD
-	${TEST} -f ${WRKSRC}/libxc/xen/NetBSD/xenio3.h || \
-		${CP} ${FILESDIR}/xenio3.h ${WRKSRC}/libxc/xen/NetBSD
+.if !exists(/usr/include/xen/xenio.h)
+	${MKDIR} ${WRKSRC}/libxc/xen
+	${TEST} -f ${WRKSRC}/libxc/xen/xenio.h || \
+		${CP} ${FILESDIR}/xenio.h ${WRKSRC}/libxc/xen
+	${TEST} -f ${WRKSRC}/libxc/xen/xenio3.h || \
+		${CP} ${FILESDIR}/xenio3.h ${WRKSRC}/libxc/xen
+.endif
 	${CP} ${FILESDIR}/NetBSD.mk ${WRKSRC}/../config/
 	pod2man ${WRKSRC}/../docs/man/xend-config.sxp.pod.5  |\
 	    sed -e "s,@XENDCONFDIR@,${PKG_SYSCONFDIR},g" \
@@ -191,6 +194,7 @@ post-install:
 .include "../../textproc/py-xml/buildlink3.mk"
 #.include "../../devel/zlib/buildlink3.mk"
 #.include "../../www/curl/buildlink3.mk"
+.include "../../devel/py-curses/buildlink3.mk"
 .include "../../devel/ncurses/buildlink3.mk"
 
 .include "../../mk/bsd.pkg.mk"

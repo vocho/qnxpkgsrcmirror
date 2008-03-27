@@ -1,4 +1,4 @@
-# $NetBSD: bsd.pkg.readme.mk,v 1.15 2007/10/20 13:35:12 adrianp Exp $
+# $NetBSD: bsd.pkg.readme.mk,v 1.19 2008/03/15 16:27:42 joerg Exp $
 #
 # This Makefile fragment is included by bsd.pkg.mk and encapsulates the
 # code to produce README.html files in each package directory.
@@ -230,35 +230,19 @@ SED_HOMEPAGE_EXPR=	-e 's|%%HOMEPAGE%%|<p>This package has a home page at <a HREF
 SED_HOMEPAGE_EXPR=	-e 's|%%HOMEPAGE%%||'
 .endif
 
-# XXX: The code for the pkg_install<20070714 vulnerability checks are
-# XXX: broken.  It will not find vulnerabilities in any packages that
-# XXX: have complex names in the pkg-vulnerabilties file.
-# XXX: e.g. php{4,5}-perl and sun-{jdk,jre}15
-# XXX: Post pkg_install-20070714 only currently known vulnerabilities are
-# XXX: shown in the generated README.html files for packages.
-#
 .PHONY: show-vulnerabilities-html
 show-vulnerabilities-html:
-	${_PKG_SILENT}${_PKG_DEBUG}					\
-	if ${PKG_ADMIN} pmatch 'pkg_install<20070714' pkg_install-${PKGTOOLS_VERSION}; then \
-		if [ -f ${PKGVULNDIR}/pkg-vulnerabilities ]; then	\
-			${AWK} '/^${PKGBASE}[-<>=]+[0-9]/ { gsub("\<", "\\&lt;", $$1);	\
-				 gsub("\>", "\\&gt;", $$1);		\
-			 	printf("<LI><STRONG>%s has a %s exploit (see <a href=\"%s\">%s</a> for more details)</STRONG></LI>\n", $$1, $$2, $$3, $$3) }' \
-				${PKGVULNDIR}/pkg-vulnerabilities;	\
-		fi; 							\
-	else								\
-		_PKGVULNDIR=`audit-packages ${AUDIT_PACKAGES_FLAGS} -Q PKGVULNDIR`; \
-		if [ -f $$_PKGVULNDIR/pkg-vulnerabilities ]; then	\
-			audit-packages ${AUDIT_PACKAGES_FLAGS} -n ${PKGNAME} 2>&1| ${AWK} \
-				'{ printurl = $$8;			\
+	${RUN}					\
+	_PKGVULNDIR=`${AUDIT_PACKAGES} ${AUDIT_PACKAGES_FLAGS} -Q PKGVULNDIR`; \
+	if [ -f $$_PKGVULNDIR/pkg-vulnerabilities ]; then	\
+		${AUDIT_PACKAGES} ${AUDIT_PACKAGES_FLAGS} -n ${PKGNAME} 2>&1| ${AWK} \
+			'{ printurl = $$8;			\
 				gsub("\<", "\\&lt;", $$2);		\
-				gsub("\>", "\\&gt;", $$2);		\
-				gsub("\<", "\\&lt;", printurl);		\
-				gsub("\>", "\\&gt;", printurl);		\
-				gsub("\&", "\\&amp;", printurl);	\
-				printf("<LI><STRONG>%s has a %s exploit (see <a href=\"%s\">%s</a> for more details)</STRONG></LI>\n", $$2, $$5, $$8, printurl) }'; \
-		fi;							\
+			gsub("\>", "\\&gt;", $$2);		\
+			gsub("\<", "\\&lt;", printurl);		\
+			gsub("\>", "\\&gt;", printurl);		\
+			gsub("\&", "\\&amp;", printurl);	\
+			printf("<LI><STRONG>%s has a %s exploit (see <a href=\"%s\">%s</a> for more details)</STRONG></LI>\n", $$2, $$5, $$8, printurl) }'; \
 	fi
 
 # If PACKAGES is set to the default (../../packages), the current
@@ -281,14 +265,11 @@ README.html: .PRECIOUS
 		esac;							\
 		cd ${.CURDIR} ;						\
 	fi;								\
-	if ${PKG_ADMIN} pmatch 'pkg_install<20070714' pkg_install-${PKGTOOLS_VERSION}; then \
-		_PVDIR=${PKGVULNDIR};					\
-	else								\
-		_PVDIR=`audit-packages ${AUDIT_PACKAGES_FLAGS} -Q PKGVULNDIR`; \
-	fi; \
+	_PVDIR=`${AUDIT_PACKAGES} ${AUDIT_PACKAGES_FLAGS} -Q PKGVULNDIR`; \
 	${AWK} -f ../../mk/scripts/genreadme.awk \
 		builddependsfile=/dev/null \
 		dependsfile=/dev/null \
+		AUDIT_PACKAGES=${AUDIT_PACKAGES:Q} \
 		AWK=${AWK:Q} \
 		CMP=${CMP:Q} \
 		DISTDIR=${DISTDIR:Q} \

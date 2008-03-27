@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.418 2007/12/13 00:28:02 rhaen Exp $
+# $NetBSD: Makefile,v 1.422 2008/03/13 14:19:37 tonnerre Exp $
 #
 
 COMMENT=	System utilities
@@ -70,6 +70,7 @@ SUBDIR+=	dirvish
 SUBDIR+=	dmassage
 SUBDIR+=	dmesg2gif
 SUBDIR+=	dmidecode
+SUBDIR+=	dmsdos
 SUBDIR+=	dog
 SUBDIR+=	dptutil
 SUBDIR+=	duplicity
@@ -143,6 +144,7 @@ SUBDIR+=	libgtop
 SUBDIR+=	libirman
 SUBDIR+=	libnotify
 SUBDIR+=	libol
+SUBDIR+=	lilo
 SUBDIR+=	logfinder
 SUBDIR+=	logrot
 SUBDIR+=	lsof
@@ -200,6 +202,7 @@ SUBDIR+=	pscpug
 SUBDIR+=	psftools
 SUBDIR+=	psmisc
 SUBDIR+=	pstree
+SUBDIR+=	puppet
 SUBDIR+=	pv
 SUBDIR+=	pwgen
 SUBDIR+=	py-dbus
@@ -216,6 +219,7 @@ SUBDIR+=	roller
 SUBDIR+=	rox
 SUBDIR+=	rsnapshot
 SUBDIR+=	rtty
+SUBDIR+=	ruby-facter
 SUBDIR+=	ruby-quota
 SUBDIR+=	safetynet
 SUBDIR+=	same

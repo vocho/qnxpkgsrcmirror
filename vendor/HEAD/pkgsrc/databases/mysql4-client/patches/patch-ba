@@ -1,4 +1,4 @@
-$NetBSD: patch-ba,v 1.2 2007/05/23 08:11:50 martti Exp $
+$NetBSD: patch-ba,v 1.4 2008/03/26 13:22:00 wiz Exp $
 
 --- client/mysql.cc.orig	2006-11-03 04:15:47.000000000 +0200
 +++ client/mysql.cc	2007-05-23 08:25:23.000000000 +0300

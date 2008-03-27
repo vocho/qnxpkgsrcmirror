@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.88 2007/12/15 16:04:41 adam Exp $
+# $NetBSD: Makefile,v 1.91 2008/01/31 13:05:36 rillig Exp $
 
-DISTNAME=	exim-4.68
+DISTNAME=	exim-4.69
+PKGREVISION=	1
 CATEGORIES=	mail net
 MASTER_SITES=	ftp://ftp.exim.org/pub/exim/exim4/ \
 		ftp://ftp.csx.cam.ac.uk/pub/software/email/exim/exim4/ \
@@ -15,6 +16,7 @@ CONFLICTS+=	exim-exiscan-[0-9]*
 
 USE_TOOLS+=	perl:run
 INSTALLATION_DIRS+=	${PKGMANDIR}/man8
+BUILD_DEFS+=	VARBASE
 
 MAKE_ENV+=	SSLBASE=${SSLBASE:Q}
 MAKE_ENV+=	INST_CHOWN=${CHOWN:Q}

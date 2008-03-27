@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.13 2007/09/21 13:04:07 wiz Exp $
+# $NetBSD: Makefile,v 1.16 2008/03/06 14:53:52 wiz Exp $
 #
 
 DISTNAME=		gstreamer-0.8.11
 PKGNAME=		${DISTNAME:S/gstreamer/gstreamer0.8/}
-PKGREVISION=		10
+PKGREVISION=		11
 CATEGORIES=		multimedia
 MASTER_SITES=		${MASTER_SITE_GNOME:=sources/gstreamer/0.8/}
 EXTRACT_SUFX=		.tar.bz2
@@ -14,12 +14,12 @@ COMMENT=		Open source multimedia framework
 
 CONFLICTS+=		gstreamer-[0-9]*
 
-BUILD_DEPENDS+=		bison-[0-9]*:../../devel/bison
+USE_TOOLS+=		bison flex
 
 GNU_CONFIGURE=		yes
 USE_PKGLOCALEDIR=	yes
 USE_LIBTOOL=		yes
-USE_TOOLS+=		gmake perl pkg-config
+USE_TOOLS+=		gmake perl pkg-config flex
 
 CONFIGURE_ARGS+=	--disable-plugin-builddir
 CONFIGURE_ARGS+=	--localstatedir=${GST0.8_DBDIR}

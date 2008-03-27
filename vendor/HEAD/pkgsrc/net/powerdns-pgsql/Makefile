@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.3 2007/05/09 08:05:27 ghen Exp $
+# $NetBSD: Makefile,v 1.5 2008/03/13 17:38:48 joerg Exp $
 
 .include "../../net/powerdns/Makefile.backend"
 
 PKGNAME=		${DISTNAME:S/pdns/powerdns-pgsql/}
+PKGREVISION=		2
 COMMENT=		PostgreSQL backend module for PowerDNS
 
 CONFIGURE_ARGS+=	--with-dynmodules="gpgsql"

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.16 2007/12/14 07:20:51 bjs Exp $
+# $NetBSD: Makefile,v 1.18 2008/02/28 11:58:49 rillig Exp $
 #
 
 DISTNAME=	checkperms-1.10
@@ -11,10 +11,9 @@ COMMENT=	Check and correct file permissions
 #LICENSE=	modified-bsd
 
 PKG_DESTDIR_SUPPORT=	user-destdir
-INSTALLATION_DIRS_FROM_PLIST=	yes
+AUTO_MKDIRS=			yes
 
-# Don't use USE_BSD_MAKEFILE here to avoid the dependency on nroff.
-MAKE_ENV+=	${BSD_MAKE_ENV}
+USE_BSD_MAKEFILE=	yes
 
 .include "../../mk/bsd.prefs.mk"
 

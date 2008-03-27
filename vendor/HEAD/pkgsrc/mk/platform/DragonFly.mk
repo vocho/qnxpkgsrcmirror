@@ -1,4 +1,4 @@
-# $NetBSD: DragonFly.mk,v 1.34 2007/10/19 13:41:35 rillig Exp $
+# $NetBSD: DragonFly.mk,v 1.36 2008/03/04 06:45:34 jlam Exp $
 #
 # Variable definitions for the DragonFly operating system.
 
@@ -46,6 +46,8 @@ IMAKE_MANINSTALL?=	maninstall catinstall
 
 _OPSYS_EMULDIR.linux=	/compat/linux
 
+_OPSYS_SYSTEM_RPATH?=		/usr/lib:/usr/lib/gcc41:/usr/lib/gcc34
+
 .if exists(/usr/include/netinet6)
 _OPSYS_HAS_INET6=	yes	# IPv6 is standard
 .else
@@ -87,8 +89,10 @@ _OPSYS_MAX_CMDLEN_CMD=	/sbin/sysctl -n kern.argmax
 # Set the group and mode to meaningful values in that case (defaults to
 # BINOWN, BINGRP and BINMODE as per defaults/mk.conf).
 .if !(empty(SETGIDGAME:M[yY][eE][sS]))
-GAMEOWN=		games
-GAMEGRP=		games
+GAMES_USER=		games
+GAMES_GROUP=		games
+GAMEOWN=		${GAMES_USER}
+GAMEGRP=		${GAMES_GROUP}
 GAMEMODE=		2555
 GAMEDIRMODE=		0775
 .endif

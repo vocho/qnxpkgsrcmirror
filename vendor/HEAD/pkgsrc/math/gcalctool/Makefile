@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.65 2007/11/03 16:30:30 drochner Exp $
+# $NetBSD: Makefile,v 1.68 2008/03/06 14:53:51 wiz Exp $
 #
 
 DISTNAME=		gcalctool-5.20.2
+PKGREVISION=		1
 CATEGORIES=		math gnome
 MASTER_SITES=		${MASTER_SITE_GNOME:=sources/gcalctool/5.20/}
 EXTRACT_SUFX=		.tar.bz2
@@ -15,7 +16,7 @@ CONFIGURE_ENV+=		HAVE_YACC=yes
 
 USE_DIRS+=		gnome2-1.5
 USE_LIBTOOL=		yes
-USE_TOOLS+=		bison gmake intltool msgfmt pkg-config
+USE_TOOLS+=		bison gmake intltool flex msgfmt pkg-config
 USE_PKGLOCALEDIR=	yes
 
 GCONF_SCHEMAS=		gcalctool.schemas

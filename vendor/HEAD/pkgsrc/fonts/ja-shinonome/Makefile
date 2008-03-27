@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.18 2007/02/06 18:31:48 joerg Exp $
+# $NetBSD: Makefile,v 1.20 2008/01/22 17:09:54 tnn Exp $
 #
 
 DISTNAME=		shinonome-0.9.10-src
@@ -15,7 +15,7 @@ COMMENT=		12, 14, 16 dots bitmap fonts for Japanese, iso8859-1
 
 GNU_CONFIGURE=		YES
 USE_X11BASE=		YES
-USE_TOOLS+=		gawk gmake mkfontdir perl
+USE_TOOLS+=		gawk gmake mkfontdir perl gzip
 FONTS_DIRS.x11+=	${PREFIX}/lib/X11/fonts/local
 FONTDIR=		${PREFIX}/lib/X11/fonts/local
 FOUNDRY=		Misc
@@ -28,6 +28,7 @@ CONFIGURE_ARGS+=	--with-fontdir=${FONTDIR:Q}
 CONFIGURE_ARGS+=	--disable-progressbar
 CONFIGURE_ARGS+=	--with-foundry=${FOUNDRY:Q}
 
+INSTALLATION_DIRS=	lib/X11/fonts/local share/examples
 
 do-install:
 	cd ${WRKSRC}; \

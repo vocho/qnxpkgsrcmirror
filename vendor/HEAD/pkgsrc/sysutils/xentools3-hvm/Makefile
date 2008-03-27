@@ -1,9 +1,10 @@
-# $NetBSD: Makefile,v 1.3 2007/12/03 21:54:31 bouyer Exp $
+# $NetBSD: Makefile,v 1.5 2008/02/17 16:29:03 bouyer Exp $
 #
 
-VERSION=		3.1.2
+VERSION=		3.1.3
 DISTNAME=		xen-${VERSION}-src
 PKGNAME=		xentools3-hvm-${VERSION}
+PKGREVISION=		1
 CATEGORIES=		sysutils
 MASTER_SITES=		${MASTER_SITE_LOCAL}
 EXTRACT_SUFX=		.tgz
@@ -21,7 +22,7 @@ ONLY_FOR_PLATFORM+=	NetBSD-*-i386 NetBSD-*-x86_64
 
 CONFLICTS=		xentools30-*
 
-WRKSRC=			${WRKDIR}/xen-${VERSION}-src/tools
+WRKSRC=			${WRKDIR}/xen-${VERSION}/tools
 CHECK_PORTABILITY_SKIP+=	examples/* xm-test/ramdisk/make-release.sh
 
 EGDIR=			${PREFIX}/share/examples/xen
@@ -77,11 +78,13 @@ CONF_FILES_PERMS+=	${EGDIR}/qemu-ifup ${PKG_SYSCONFDIR}/scripts/qemu-ifup \
 OWN_DIRS=		${PKG_SYSCONFDIR}/scripts
 
 pre-build:
-	${MKDIR} ${WRKSRC}/libxc/xen/NetBSD
-	${TEST} -f ${WRKSRC}/libxc/xen/NetBSD/xenio.h || \
-	    ${CP} ${FILESDIR}/xenio.h ${WRKSRC}/libxc/xen/NetBSD
-	${TEST} -f ${WRKSRC}/libxc/xen/NetBSD/xenio3.h || \
-	    ${CP} ${FILESDIR}/xenio3.h ${WRKSRC}/libxc/xen/NetBSD
+.if !exists(/usr/include/xen/xenio.h)
+	${MKDIR} ${WRKSRC}/libxc/xen
+	${TEST} -f ${WRKSRC}/libxc/xen/xenio.h || \
+		${CP} ${FILESDIR}/xenio.h ${WRKSRC}/libxc/xen
+	${TEST} -f ${WRKSRC}/libxc/xen/xenio3.h || \
+		${CP} ${FILESDIR}/xenio3.h ${WRKSRC}/libxc/xen
+.endif
 	${CP} ${FILESDIR}/NetBSD.mk ${WRKSRC}/../config/
 .if ${MACHINE_ARCH} == "x86_64"
 	${MKDIR} ${WRKSRC}/libxc/machine

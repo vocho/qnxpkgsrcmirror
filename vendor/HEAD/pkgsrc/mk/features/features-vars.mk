@@ -1,4 +1,4 @@
-# $NetBSD: features-vars.mk,v 1.14 2007/11/29 08:53:14 rillig Exp $
+# $NetBSD: features-vars.mk,v 1.17 2008/02/21 14:08:48 tnn Exp $
 #
 # The platforms that are supported by pkgsrc differ in the amount of
 # functions they provide in the C library (libc). Functions that are
@@ -59,7 +59,7 @@
 #
 # Keywords: feature features asprintf vasprintf err errx warn warnx
 # Keywords: fts fts_open fts_read fts_set fts_close getopt_long
-# Keywords: getprogname setprogname glob regcomp snprintf vsnprintf
+# Keywords: getprogname setprogname glob regcomp setenv snprintf vsnprintf
 # Keywords: utimes libnbcompat nbcompat
 
 _VARGROUPS+=		features
@@ -104,7 +104,7 @@ MISSING_FEATURES+=	${_feature_}
 
 .for _feature_ in getopt_long
 .  if !empty(USE_FEATURES:M${_feature_})
-.    if !exists(/usr/include/getopt.h)
+.    if !exists(/usr/include/getopt.h) || ${OPSYS} == "IRIX"
 MISSING_FEATURES+=	${_feature_}
 .    endif
 .  endif
@@ -134,9 +134,17 @@ MISSING_FEATURES+=	${_feature_}
 .  endif
 .endfor
 
+.for _feature_ in setenv
+.  if !empty(USE_FEATURES:M${_feature_})
+.    if !empty(MACHINE_PLATFORM:MHPUX-11.11-hppa) # XXX too narrow?
+MISSING_FEATURES+=	${_feature_}
+.   endif
+.  endif
+.endfor
+
 .for _feature_ in snprintf vsnprintf
 .  if !empty(USE_FEATURES:M${_feature_})
-.    if ${OPSYS} == "IRIX"
+.    if ${OPSYS} == "IRIX" || !empty(MACHINE_PLATFORM:MHPUX-11.11-hppa)
 MISSING_FEATURES+=	${_feature_}
 .    endif
 .  endif

@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.25 2007/12/02 11:19:14 wiz Exp $
+# $NetBSD: Makefile,v 1.27 2008/03/11 18:47:40 tnn Exp $
 
 DISTNAME=	libesmtp-1.0.4
+PKGREVISION=	1
 CATEGORIES=	mail devel
 MASTER_SITES=	http://www.stafford.uklinux.net/libesmtp/
 EXTRACT_SUFX=	.tar.bz2
@@ -19,7 +20,7 @@ CONFIGURE_ARGS+=	--disable-isoc
 
 .include "../../mk/bsd.prefs.mk"
 
-.if ${OPSYS} == "IRIX"
+.if !empty(MACHINE_PLATFORM:MIRIX-5*)
 CONFIGURE_ARGS+=	--enable-emulate-getaddrinfo
 .endif
 

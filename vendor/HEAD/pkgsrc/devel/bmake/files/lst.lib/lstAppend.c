@@ -1,4 +1,4 @@
-/*	$NetBSD: lstAppend.c,v 1.1 2005/10/31 21:52:25 reed Exp $	*/
+/*	$NetBSD: lstAppend.c,v 1.2 2008/03/09 19:54:29 joerg Exp $	*/
 
 /*
  * Copyright (c) 1988, 1989, 1990, 1993
@@ -33,14 +33,14 @@
  */
 
 #ifndef MAKE_NATIVE
-static char rcsid[] = "$NetBSD: lstAppend.c,v 1.1 2005/10/31 21:52:25 reed Exp $";
+static char rcsid[] = "$NetBSD: lstAppend.c,v 1.2 2008/03/09 19:54:29 joerg Exp $";
 #else
 #include <sys/cdefs.h>
 #ifndef lint
 #if 0
 static char sccsid[] = "@(#)lstAppend.c	8.1 (Berkeley) 6/6/93";
 #else
-__RCSID("$NetBSD: lstAppend.c,v 1.1 2005/10/31 21:52:25 reed Exp $");
+__RCSID("$NetBSD: lstAppend.c,v 1.2 2008/03/09 19:54:29 joerg Exp $");
 #endif
 #endif /* not lint */
 #endif
@@ -54,7 +54,7 @@ __RCSID("$NetBSD: lstAppend.c,v 1.1 2005/10/31 21:52:25 reed Exp $");
 
 /*-
  *-----------------------------------------------------------------------
- * Lst_Append --
+ * Lst_InsertAfter --
  *	Create a new node and add it to the given list after the given node.
  *
  * Input:
@@ -74,7 +74,7 @@ __RCSID("$NetBSD: lstAppend.c,v 1.1 2005/10/31 21:52:25 reed Exp $");
  *-----------------------------------------------------------------------
  */
 ReturnStatus
-Lst_Append(Lst l, LstNode ln, ClientData d)
+Lst_InsertAfter(Lst l, LstNode ln, ClientData d)
 {
     List 	list;
     ListNode	lNode;
@@ -89,8 +89,8 @@ Lst_Append(Lst l, LstNode ln, ClientData d)
     }
     ok:
 
-    list = (List)l;
-    lNode = (ListNode)ln;
+    list = l;
+    lNode = ln;
 
     PAlloc (nLNode, ListNode);
     nLNode->datum = d;

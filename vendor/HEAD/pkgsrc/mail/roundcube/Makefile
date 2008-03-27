@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.6 2007/11/08 23:35:33 adrianp Exp $
+# $NetBSD: Makefile,v 1.8 2008/03/15 13:54:59 adrianp Exp $
 #
 
-DISTNAME=	roundcubemail-0.1-rc2
-PKGNAME=	roundcube-0.1rc2
+DISTNAME=	roundcubemail-0.1
+PKGNAME=	${DISTNAME:S/mail//}
 CATEGORIES=	mail
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=roundcubemail/}
 
@@ -37,9 +37,9 @@ OWN_DIRS_PERMS+=${VARBASE}/tmp/roundcube ${APACHE_USER} ${APACHE_GROUP} 0755
 CONF_FILES=	${EGDIR}/roundcube.conf ${PKG_SYSCONFDIR}/roundcube.conf
 CONF_FILES_PERMS+=	\
 	${EGDIR}/db.inc.php ${PKG_SYSCONFDIR}/roundcube/db.inc.php \
-		${APACHE_USER} ${APACHE_GROUP} 0440 \
+		${ROOT_USER} ${APACHE_GROUP} 0640 \
 	${EGDIR}/main.inc.php ${PKG_SYSCONFDIR}/roundcube/main.inc.php \
-		${APACHE_USER} ${APACHE_GROUP} 0440
+		${ROOT_USER} ${APACHE_GROUP} 0640
 
 SUBST_CLASSES+=		files
 SUBST_STAGE.files=	do-configure

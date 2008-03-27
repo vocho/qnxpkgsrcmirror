@@ -1,11 +1,10 @@
-# $NetBSD: Makefile,v 1.192 2007/10/07 20:49:57 dmcmahill Exp $
+# $NetBSD: Makefile,v 1.198 2008/02/23 05:26:01 obache Exp $
 #
 # This pkg does not compile in mod_ssl, only the `mod_ssl EAPI' (a set of
 # code hooks that allow mod_ssl to be compiled separately later, if desired).
 
-DISTNAME=		apache_1.3.37
+DISTNAME=		apache_1.3.41
 PKGNAME=		${DISTNAME:S/_/-/}
-PKGREVISION=		2
 CATEGORIES=		www
 MASTER_SITES=		${MASTER_SITE_APACHE:=httpd/} \
 			${MASTER_SITE_APACHE:=httpd/old/}
@@ -15,11 +14,13 @@ MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://httpd.apache.org/
 COMMENT=		Apache HTTP (Web) server
 
+PKG_DESTDIR_SUPPORT=	user-destdir
+
 NETBSD_LOGO=		sitedrivenby.gif
 SITES.${NETBSD_LOGO}=	http://www.NetBSD.org/images/logos/
 
-MODSSL_VERSION=		2.8.28
-MODSSL_DISTNAME=	mod_ssl-${MODSSL_VERSION}-1.3.37
+MODSSL_VERSION=		2.8.31
+MODSSL_DISTNAME=	mod_ssl-${MODSSL_VERSION}-1.3.41
 MODSSL_DIST=		${MODSSL_DISTNAME}.tar.gz
 MODSSL_SRC=		${WRKDIR}/${MODSSL_DISTNAME}
 SITES.${MODSSL_DIST}=	http://www.modssl.org/source/ \
@@ -40,12 +41,14 @@ CONFIGURE_ARGS+=	--enable-module=most				\
 			--disable-module=auth_dbm
 CONFIGURE_ARGS+=	--enable-rule=EAPI				\
 			--disable-module=ssl
+CONFIGURE_ARGS+=	--mandir=${PREFIX}/${PKGMANDIR}
 CONFIGURE_ARGS+=	--without-confadjust
 CONFIGURE_ARGS+=	--with-perl=${PERL5:Q}
 CONFIGURE_ARGS+=	--with-port=80
 CONFIGURE_ENV+=		OPTIM=${APACHE_CUSTOM_CFLAGS:Q}
 CONFIGURE_ENV+=		EAPI_MM="${BUILDLINK_PREFIX.libmm}"
 CONFIGURE_ENV+=		BINOWN=${BINOWN:Q} BINGRP=${BINGRP:Q}
+INSTALL_MAKE_FLAGS+=	root=${DESTDIR:Q}
 
 .include "../../mk/bsd.prefs.mk"
 
@@ -79,7 +82,7 @@ APACHE_SUEXEC_CONFIGURE_ARGS+=						\
 CONFIGURE_ARGS+=	--enable-suexec 				\
 			${APACHE_SUEXEC_CONFIGURE_ARGS:M--suexec-*}
 PLIST_SRC=		${PKGDIR}/PLIST.suexec
-BUILD_DEFS+=		APACHE_SUEXEC_CONFIGURE_ARGS
+BUILD_DEFS+=	 	APACHE_SUEXEC_DOCROOT
 .endif
 
 # Note that there is NO static compile module hook here.  This is intentional.
@@ -130,7 +133,7 @@ LINK_LIBGCC_LDFLAGS+=	-lgcc_s
 .  endif
 .endif
 
-BUILD_DEFS+=		APACHE_CUSTOM_CFLAGS
+BUILD_DEFS+=		APACHE_CUSTOM_CFLAGS APACHE_USER APACHE_GROUP
 
 EGDIR=		${PREFIX}/share/examples/httpd
 
@@ -178,7 +181,8 @@ SUBST_SED.db+=          -e 's,@DB_CFLAGS@,-I${BDB_BASE}/include,g'
 SUBST_SED.db+=          -e 's,@DB_CFLAGS@,,g'
 .endif
 
-REPLACE_PERL=		docs/cgi-examples/printenv
+REPLACE_PERL+=			cgi-bin/printenv
+CHECK_INTERPRETER_SKIP+=	lib/httpd/httpd.exp
 
 PKG_GROUPS=		${APACHE_GROUP}
 PKG_USERS=		${APACHE_USER}:${APACHE_GROUP}
@@ -206,7 +210,7 @@ pre-patch:
 		${MODSSL_SRC}/pkg.sslmod/sslmod.patch			\
 		${MODSSL_SRC}/pkg.sslsup/sslsup.patch			\
 		| ${PATCH} ${PATCH_ARGS}
-	cd ${WRKSRC} && ${TAIL} +160					\
+	cd ${WRKSRC} && ${TAIL} -n +160					\
 		${MODSSL_SRC}/pkg.ssldoc/ssldoc.patch			\
 		| ${PATCH} ${PATCH_ARGS}
 	${FIND} ${WRKSRC} -name '*.orig' -print | ${XARGS} ${RM} -f
@@ -222,16 +226,16 @@ pre-install:
 
 post-install:
 .if !defined(NOPIC)
-	cd ${PREFIX}/lib/httpd; ${MV} libproxy.so mod_proxy.so
+	cd ${DESTDIR}${PREFIX}/lib/httpd; ${MV} libproxy.so mod_proxy.so
 .endif
-	${INSTALL_DATA_DIR} ${PREFIX}/share/examples/httpd
+	${INSTALL_DATA_DIR} ${DESTDIR}${PREFIX}/share/examples/httpd
 	for file in httpd.conf magic mime.types; do			\
-		${INSTALL_DATA} ${PKG_SYSCONFDIR}/$${file}.default	\
-			${PREFIX}/share/examples/httpd;			\
-		${RM} -f ${PKG_SYSCONFDIR}/$${file}.default;		\
+		${INSTALL_DATA} ${DESTDIR}${PKG_SYSCONFDIR}/$${file}.default	\
+			${DESTDIR}${PREFIX}/share/examples/httpd;	\
+		${RM} -f ${DESTDIR}${PKG_SYSCONFDIR}/$${file}.default;	\
 	done
-	${INSTALL_DATA} ${DISTDIR}/sitedrivenby.gif ${PREFIX}/share/httpd/htdocs
-	${CHMOD} ${NONBINMODE} ${PREFIX}/libexec/cgi-bin/printenv \
-	  ${PREFIX}/libexec/cgi-bin/test-cgi
+	${INSTALL_DATA} ${DISTDIR}/sitedrivenby.gif ${DESTDIR}${PREFIX}/share/httpd/htdocs
+	${CHMOD} ${NONBINMODE} ${DESTDIR}${PREFIX}/libexec/cgi-bin/printenv \
+	  ${DESTDIR}${PREFIX}/libexec/cgi-bin/test-cgi
 
 .include "../../mk/bsd.pkg.mk"

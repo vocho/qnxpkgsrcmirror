@@ -1,12 +1,13 @@
-# $NetBSD: Makefile,v 1.4 2007/01/02 11:29:15 ghen Exp $
+# $NetBSD: Makefile,v 1.8 2008/02/24 20:15:05 ghen Exp $
 
 PKGNAME=		${DISTNAME:S/-/-client-/}
 COMMENT=		Lightweight Directory Access Protocol libraries and client programs
 
 CONFLICTS+=		openldap<2.3.23nb1
 
+PKG_DESTDIR_SUPPORT=	user-destdir
+
 CONFIGURE_ARGS+=	--disable-slapd
-CONFIGURE_ARGS+=	--disable-slurpd
 
 #BUILD_DIRS=		include libraries clients
 

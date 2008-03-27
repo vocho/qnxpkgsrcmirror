@@ -1,15 +1,17 @@
-# $NetBSD: Makefile,v 1.20 2006/07/22 04:46:14 rillig Exp $
+# $NetBSD: Makefile,v 1.24 2008/03/26 13:24:02 wiz Exp $
 #
 
 DISTNAME=		mysqlcc-0.9.4-src
 PKGNAME=		${DISTNAME:S/-src//}
-PKGREVISION=		8
+PKGREVISION=		9
 CATEGORIES=		databases
-MASTER_SITES=		${MASTER_SITE_MYSQL:=MySQLCC/}
+MASTER_SITES=		# ${MASTER_SITE_SOURCEFORGE:=mysqlcc/}
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
-HOMEPAGE=		http://www.mysql.com/
+HOMEPAGE=		http://mysqlcc.sourceforge.net/
 COMMENT=		MySQL Control Center
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_LANGUAGES=		c c++
 USE_PKGLOCALEDIR=	YES
@@ -31,7 +33,7 @@ pre-configure:
 	cd ${WRKSRC} && aclocal && autoconf
 
 do-install:
-	${INSTALL_PROGRAM} ${WRKSRC}/mysqlcc ${PREFIX}/bin/
+	${INSTALL_PROGRAM} ${WRKSRC}/mysqlcc ${DESTDIR}${PREFIX}/bin
 
 .include "../../security/openssl/buildlink3.mk"
 .include "../../x11/qt3-tools/buildlink3.mk"

@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.2 2007/12/16 14:27:35 tnn Exp $
+# $NetBSD: Makefile,v 1.4 2008/03/06 14:53:51 wiz Exp $
 #
 
 DISTNAME=		gimp-lqr-plugin-0.3.0-6
 PKGNAME=		gimp-liquid-rescale-0.3.0.6
+PKGREVISION=		2
 CATEGORIES=		graphics
 MASTER_SITES=		http://liquidrescale.wikidot.com/local--files/en:download-page/
 

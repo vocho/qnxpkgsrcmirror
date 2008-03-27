@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.14 2007/09/18 08:17:21 rillig Exp $
+# $NetBSD: Makefile,v 1.16 2008/02/19 17:21:42 weinem Exp $
 
 WEB_PREFIX?=	${.CURDIR}/../htdocs
 

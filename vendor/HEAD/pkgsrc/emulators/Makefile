@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.165 2007/09/07 22:56:23 wiz Exp $
+# $NetBSD: Makefile,v 1.170 2008/03/09 18:28:54 tnn Exp $
 #
 
 COMMENT=	Emulators for other operating systems
@@ -32,6 +32,8 @@ SUBDIR+=	compat20
 SUBDIR+=	compat20-extras
 SUBDIR+=	compat30
 SUBDIR+=	compat30-extras
+SUBDIR+=	compat40
+SUBDIR+=	compat40-extras
 #SUBDIR+=	compat_netbsd		# only contains Makefile fragments
 SUBDIR+=	cygwin_esound
 SUBDIR+=	cygwin_lib
@@ -41,6 +43,7 @@ SUBDIR+=	dega
 SUBDIR+=	dgen
 SUBDIR+=	dosbox
 SUBDIR+=	doscmd
+SUBDIR+=	dynamips
 SUBDIR+=	e-uae
 SUBDIR+=	fceu
 SUBDIR+=	fmsx
@@ -79,6 +82,8 @@ SUBDIR+=	netbsd32_compat20
 SUBDIR+=	netbsd32_compat20-extras
 SUBDIR+=	netbsd32_compat30
 SUBDIR+=	netbsd32_compat30-extras
+SUBDIR+=	netbsd32_compat40
+SUBDIR+=	netbsd32_compat40-extras
 SUBDIR+=	openmsx
 SUBDIR+=	or1ksim
 SUBDIR+=	osf1_lib
@@ -107,6 +112,7 @@ SUBDIR+=	suse100_32_gdk-pixbuf
 SUBDIR+=	suse100_32_glx
 SUBDIR+=	suse100_32_gtk
 SUBDIR+=	suse100_32_gtk2
+SUBDIR+=	suse100_32_krb5
 SUBDIR+=	suse100_32_libcups
 SUBDIR+=	suse100_32_libjpeg
 SUBDIR+=	suse100_32_libpng
@@ -131,6 +137,7 @@ SUBDIR+=	suse100_gdk-pixbuf
 SUBDIR+=	suse100_glx
 SUBDIR+=	suse100_gtk
 SUBDIR+=	suse100_gtk2
+SUBDIR+=	suse100_krb5
 SUBDIR+=	suse100_libcups
 SUBDIR+=	suse100_libjpeg
 SUBDIR+=	suse100_libpng
@@ -205,6 +212,7 @@ SUBDIR+=	xmame
 SUBDIR+=	xmess
 SUBDIR+=	xtrs
 SUBDIR+=	xyame
+SUBDIR+=	yabause
 SUBDIR+=	z26
 SUBDIR+=	zsnes
 

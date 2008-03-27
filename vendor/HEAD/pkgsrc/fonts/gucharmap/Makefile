@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.49 2007/09/21 13:03:41 wiz Exp $
+# $NetBSD: Makefile,v 1.52 2008/03/06 14:53:50 wiz Exp $
 #
 
-DISTNAME=	gucharmap-1.10.1
-PKGREVISION=	2
+DISTNAME=	gucharmap-1.10.2
+PKGREVISION=	1
 CATEGORIES=	fonts gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gucharmap/1.10/}
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://gucharmap.sourceforge.net/
+HOMEPAGE=	http://live.gnome.org/Gucharmap
 COMMENT=	Unicode/ISO10646 character map and font viewer
 
 USE_DIRS+=		gnome2-1.5
@@ -32,6 +32,7 @@ BUILDLINK_API_DEPENDS.libgnomeui+=	libgnomeui>=2.13.2
 .include "../../devel/pango/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../textproc/gnome-doc-utils/buildlink3.mk"
-.include "../../textproc/scrollkeeper/omf.mk"
+.include "../../mk/omf-scrollkeeper.mk"
+.include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../x11/gtk2/modules.mk"
 .include "../../mk/bsd.pkg.mk"

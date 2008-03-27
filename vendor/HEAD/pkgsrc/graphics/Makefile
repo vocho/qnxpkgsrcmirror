@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.475 2007/12/17 19:48:00 drochner Exp $
+# $NetBSD: Makefile,v 1.478 2008/03/16 00:13:46 wiz Exp $
 #
 
 COMMENT=	Graphics tools and libraries
@@ -64,6 +64,7 @@ SUBDIR+=	dx
 SUBDIR+=	dxsamples
 SUBDIR+=	eog
 SUBDIR+=	epeg
+SUBDIR+=	ewipe
 SUBDIR+=	exif
 SUBDIR+=	exifprobe
 SUBDIR+=	exiftags
@@ -164,6 +165,7 @@ SUBDIR+=	jpegpixi
 SUBDIR+=	kbarcode
 SUBDIR+=	kdegraphics3
 SUBDIR+=	kipi-plugins
+SUBDIR+=	kipi-plugins-calendar
 SUBDIR+=	koverartist
 SUBDIR+=	kphotoalbum
 SUBDIR+=	kphotobook
@@ -187,6 +189,7 @@ SUBDIR+=	libkdcraw
 SUBDIR+=	libkexif
 SUBDIR+=	libkexiv2
 SUBDIR+=	libkipi
+SUBDIR+=	libotf
 SUBDIR+=	librsvg
 SUBDIR+=	libscigraphica
 SUBDIR+=	libungif
