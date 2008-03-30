@@ -2,6 +2,8 @@
 
 .if defined(PKGSRC_COMPILER) && ${PKGSRC_COMPILER} == "qcc"
 CC=		qcc
+.else
+CC=             gcc
 .endif
 
 .if !defined(CPP) || ${CPP} == "cpp"
