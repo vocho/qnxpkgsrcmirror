@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.41 2007/02/19 11:19:48 rillig Exp $
+# $NetBSD: Makefile,v 1.47 2007/09/08 21:58:00 jlam Exp $
 #
 
 DISTNAME=	groff-1.19.2
@@ -10,13 +10,13 @@ MAINTAINER=	wiz@NetBSD.org
 HOMEPAGE=	http://www.gnu.org/software/groff/groff.html
 COMMENT=	GNU roff text processing suite
 
-CHECK_PERMS=            NO
+CHECK_PERMS=		NO
 
 USE_LANGUAGES=		c c++
 GNU_CONFIGURE=		YES
 CONFIGURE_ENV+=		PERLPATH=${PERL5:Q}
 USE_TOOLS+=		perl:run sed:run awk:run
-USE_FEATURES=           getopt_long
+USE_FEATURES=		getopt_long
 
 INFO_FILES=		YES
 
@@ -39,32 +39,19 @@ PLIST_SUBST+=	GNU_PREFIX=""
 .endif
 
 .if ${OPSYS} == "SunOS" || ${OPSYS} == "HPUX"
-PLIST_SUBST+=   GNU_PREFIX_TMAC="g"
+PLIST_SUBST+=	GNU_PREFIX_TMAC="g"
 .else
-PLIST_SUBST+=   GNU_PREFIX_TMAC=""
-.endif
-
-.if ${OPSYS} == "QNX"
-# The "pre-build", "post-build" is to work around bugs in 6.3.2 Heads
-# and procnto. With latest procnto and headers, you only need 
-# 	CFLAGS+= -D_NO_CPP_INLINES -D_HAS_GENERIC_TEMPLATES=0
-# to get this package compiled.
-CFLAGS+=-D_HAS_GENERIC_TEMPLATES=0
-USE_TOOLS+=             automake
-pre-configure:
-	cd ${WRKSRC} && aclocal && autoconf
-pre-build:
-	@ln -sfP $(WRKSRC)/font $(PREFIX)/share/groff/site-font
-	@ln -sfP $(WRKSRC)/tmac $(PREFIX)/share/groff/site-tmac
-post-build:
-	@rm $(PREFIX)/share/groff/site-font
-	@rm $(PREFIX)/share/groff/site-tmac
+PLIST_SUBST+=	GNU_PREFIX_TMAC=""
 .endif
 
 .if ${OPSYS} == "SunOS" || ${OPSYS} == "HPUX" || ${OPSYS} == "OSF1"
-PLIST_SUBST+=   GNU_PREFIX_AN_TMAC="g"
+PLIST_SUBST+=	GNU_PREFIX_AN_TMAC="g"
 .else
-PLIST_SUBST+=   GNU_PREFIX_AN_TMAC=""
+PLIST_SUBST+=	GNU_PREFIX_AN_TMAC=""
+.endif
+
+.if ${OPSYS} == "QNX"
+CPPFLAGS+=	-D_NO_CPP_INLINES -D_HAS_GENERIC_TEMPLATES=0
 .endif
 
 BUILD_DEFS+=	PAPERSIZE
