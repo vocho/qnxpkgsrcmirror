@@ -1,10 +1,10 @@
-# $NetBSD: builtin.mk,v 1.12 2007/01/17 03:11:18 rillig Exp $
+# $NetBSD: builtin.mk,v 1.23 2008/02/29 16:19:21 jlam Exp $
 
 BUILTIN_PKG:=	ncurses
 
-BUILTIN_FIND_LIBS:=		ncurses
+BUILTIN_FIND_LIBS:=		ncurses curses
 BUILTIN_FIND_FILES_VAR:=	H_NCURSES
-BUILTIN_FIND_FILES.H_NCURSES=	/usr/include/curses.h
+BUILTIN_FIND_FILES.H_NCURSES=	/usr/include/ncurses.h /usr/include/curses.h
 BUILTIN_FIND_GREP.H_NCURSES=	\#define[ 	]*NCURSES_VERSION
 
 .include "../../mk/buildlink3/bsd.builtin.mk"
@@ -17,7 +17,8 @@ BUILTIN_FIND_GREP.H_NCURSES=	\#define[ 	]*NCURSES_VERSION
 IS_BUILTIN.ncurses=	no
 .  if empty(H_NCURSES:M__nonexistent__) && \
       empty(H_NCURSES:M${LOCALBASE}/*) && \
-      !empty(BUILTIN_LIB_FOUND.ncurses:M[yY][eE][sS])
+      (!empty(BUILTIN_LIB_FOUND.ncurses:M[yY][eE][sS]) || \
+       !empty(BUILTIN_LIB_FOUND.curses:M[yY][eE][sS]))
 IS_BUILTIN.ncurses=	yes
 .  endif
 .endif
@@ -73,6 +74,7 @@ USE_BUILTIN.ncurses!=							\
 # XXX
 .    if ${OPSYS} == "NetBSD"
 USE_BUILTIN.ncurses=	yes
+H_NCURSES=		/usr/include/curses.h
 .    endif
 #
 # Some platforms don't have a curses implementation that can replace
@@ -98,6 +100,24 @@ USE_BUILTIN.ncurses=	no
 .  endif
 .endif
 
+# Define BUILTIN_LIBNAME.ncurses to be the base name of the built-in
+# ncurses library.
+#
+.if !empty(BUILTIN_LIB_FOUND.ncurses:M[yY][eE][sS])
+BUILTIN_LIBNAME.ncurses=	ncurses
+.elif !empty(BUILTIN_LIB_FOUND.curses:M[yY][eE][sS])
+BUILTIN_LIBNAME.ncurses=	curses
+.endif
+#
+# On Interix, there is a libncurses.a and a libcurses.so but strangely,
+# no libncurses.so.  We want to link against the shared library, so
+# turn "-lncurses" into "-lcurses".
+#
+.if (${OPSYS} == "Interix") && \
+    !empty(BUILTIN_LIB_FOUND.curses:M[yY][eE][sS])
+BUILTIN_LIBNAME.ncurses=	curses
+.endif
+
 ###
 ### The section below only applies if we are not including this file
 ### solely to determine whether a built-in implementation exists.
@@ -105,17 +125,12 @@ USE_BUILTIN.ncurses=	no
 CHECK_BUILTIN.ncurses?=	no
 .if !empty(CHECK_BUILTIN.ncurses:M[nN][oO])
 
-BUILDLINK_LDADD.ncurses=	-lncurses
 .  if !empty(USE_BUILTIN.ncurses:M[yY][eE][sS])
-.    if !empty(BUILTIN_LIB_FOUND.ncurses:M[nN][oO]) || (${OPSYS} == "Interix")
-BUILDLINK_LDADD.ncurses=	-lcurses
-BUILDLINK_FNAME_TRANSFORM.ncurses+=	-e "s|/curses\.h|/ncurses.h|g"
-BUILDLINK_TRANSFORM+=		l:ncurses:curses
-.    endif
-BUILDLINK_FILES.ncurses+=	include/curses.h
+BUILDLINK_LIBNAME.ncurses=	${BUILTIN_LIBNAME.ncurses}
+BUILDLINK_TRANSFORM+=		l:ncurses:${BUILTIN_LIBNAME.ncurses}
+BUILDLINK_TARGETS+=		buildlink-curses-ncurses-h
 BUILDLINK_TARGETS+=		buildlink-ncurses-extra-includes
 .  endif
-BUILDLINK_TARGETS+=		buildlink-ncurses-curses-h
 
 # A full ncurses implementation provides more headers than some curses
 # implementations.  Touch empty replacements for those headers so that
@@ -124,7 +139,7 @@ BUILDLINK_TARGETS+=		buildlink-ncurses-curses-h
 .  if !target(buildlink-ncurses-extra-includes)
 .PHONY: buildlink-ncurses-extra-includes
 buildlink-ncurses-extra-includes:
-	${_PKG_SILENT}${_PKG_DEBUG}					\
+	${RUN}								\
 	extra_includes="include/term.h";				\
 	for f in $$extra_includes; do					\
 		src=${BUILDLINK_PREFIX.ncurses:Q}"/$$f";		\
@@ -137,15 +152,15 @@ buildlink-ncurses-extra-includes:
 	done
 .  endif
 
-# Some packages expect <curses.h> to provide declarations for ncurses.
-.  if !target(buildlink-ncurses-curses-h)
-.PHONY: buildlink-ncurses-curses-h
-buildlink-ncurses-curses-h:
-	${_PKG_SILENT}${_PKG_DEBUG}					\
-	src=${BUILDLINK_PREFIX.ncurses:Q}"/include/ncurses.h";		\
-	dest=${BUILDLINK_DIR:Q}"/include/curses.h";			\
+.  if !target(buildlink-curses-ncurses-h)
+.PHONY: buildlink-curses-ncurses-h
+buildlink-curses-ncurses-h:
+	${RUN}								\
+	src=${H_NCURSES:Q};						\
+	dest=${BUILDLINK_DIR:Q}"/include/ncurses.h";			\
 	if ${TEST} ! -f "$$dest" -a -f "$$src"; then			\
-		${ECHO_BUILDLINK_MSG} "Linking curses.h -> ncurses.h.";	\
+		fname=`${BASENAME} $$src`;				\
+		${ECHO_BUILDLINK_MSG} "Linking $$fname -> ncurses.h.";	\
 		${MKDIR} `${DIRNAME} "$$dest"`;				\
 		${LN} -s "$$src" "$$dest";				\
 	fi

@@ -1,10 +1,10 @@
-# $NetBSD: options.mk,v 1.8 2007/09/21 14:12:19 jlam Exp $
+# $NetBSD: options.mk,v 1.10 2008/02/21 15:50:29 jlam Exp $
 
 # Global and legacy options
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.courier-mta
-PKG_SUPPORTED_OPTIONS=	courier-dsn courier-esmtp courier-local		\
-			courier-uucp inet6 ldap
+PKG_SUPPORTED_OPTIONS=	courier-dsn courier-esmtp courier-gnutls	\
+			courier-local courier-uucp inet6 ldap
 PKG_SUGGESTED_OPTIONS=	courier-dsn courier-esmtp courier-local inet6
 
 .include "../../mk/bsd.options.mk"
@@ -139,4 +139,23 @@ CONF_FILES_PERMS+=	${EGDIR}/ldapaliasrc.dist			\
 .else
 FILES_SUBST+=		COURIERLDAPALIASD=
 CONFIGURE_ARGS+=	--without-ldapaliasd
+.endif
+
+######################################################################
+###
+### Support using the GNU TLS tools for creating certificates; otherwise,
+### default to using OpenSSL.
+###
+SUBST_CLASSES+=		tls
+SUBST_FILES.tls=	courier/module.esmtp/mkesmtpdcert.in
+SUBST_STAGE.tls=	pre-configure
+COURIER_CERTTOOL=	${PREFIX}/bin/certtool
+COURIER_OPENSSL=	${PREFIX}/bin/openssl
+
+.if !empty(PKG_OPTIONS:Mcourier-gnutls)
+SUBST_SED.tls=		-e "s|@ssllib@|gnutls|g"
+.else
+USE_TOOLS+=		openssl:run
+COURIER_OPENSSL=	${TOOLS_OPENSSL}
+SUBST_SED.tls=		-e "s|@ssllib@|openssl|g"
 .endif

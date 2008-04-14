@@ -1,4 +1,4 @@
-# $NetBSD: bsd.options.mk,v 1.65 2007/10/28 11:29:06 tron Exp $
+# $NetBSD: bsd.options.mk,v 1.67 2008/02/18 14:30:40 obache Exp $
 #
 # This Makefile fragment provides boilerplate code for standard naming
 # conventions for handling per-package build options.

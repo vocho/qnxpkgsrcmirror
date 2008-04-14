@@ -1,19 +1,24 @@
-# $NetBSD: Makefile,v 1.7 2007/06/02 17:51:49 jmmv Exp $
+# $NetBSD: Makefile,v 1.10 2008/03/16 23:33:57 tnn Exp $
 #
 
 BOOST_PACKAGE=		python
 BOOST_COMMENT=		(Boost.Python binary library)
 BOOST_CONFIG=		installed
-PKGREVISION=		1
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 .include "../../meta-pkgs/boost/Makefile.common"
 
 BJAM_ARGS+=		--with-python
-BJAM_ARGS+=		-sPYTHON_ROOT=${PREFIX}
-BJAM_ARGS+=		-sPYTHON_VERSION=${PYVERSSUFFIX}
+MAKE_ENV+=		BOOST_BUILD_PATH=${WRKSRC}
 
 .include "../../devel/boost-jam/bjam.mk"
 .include "../../lang/python/application.mk"
+
+post-configure:
+	echo 'using python : ${PYVERSSUFFIX} :' \
+	    '${PREFIX}/bin/python${PYVERSSUFFIX} ;' \
+	    >${WRKSRC}/user-config.jam
 
 do-build: bjam-build
 

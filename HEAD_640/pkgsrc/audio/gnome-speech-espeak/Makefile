@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.2 2007/08/13 15:23:15 drochner Exp $
+# $NetBSD: Makefile,v 1.4 2008/02/28 20:54:56 drochner Exp $
 #
 
-DISTNAME=	gnome-speech-0.4.16
-PKGNAME=	gnome-speech-espeak-0.4.16
+DISTNAME=	gnome-speech-0.4.18
+PKGNAME=	gnome-speech-espeak-0.4.18
 CATEGORIES=	audio
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gnome-speech/0.4/}
 EXTRACT_SUFX=	.tar.bz2

@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.35 2007/11/02 00:41:04 uebayasi Exp $
+# $NetBSD: Makefile,v 1.37 2008/02/16 13:19:56 wiz Exp $
 
-DISTNAME=	t1lib-5.1.0
-PKGREVISION=	6
+DISTNAME=	t1lib-5.1.2
 CATEGORIES=	fonts devel graphics
 MASTER_SITES=	${MASTER_SITE_SUNSITE:=libs/graphics/}
 
@@ -49,4 +48,5 @@ post-install:
 	cd ${WRKSRC}/examples;						\
 	${PAX} -rw FontDataBase t1example1.c t1lib.config ${DESTDIR}${EGDIR}
 
+.include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

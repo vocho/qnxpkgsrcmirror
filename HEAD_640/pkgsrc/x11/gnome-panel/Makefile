@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.93 2007/12/16 12:05:46 drochner Exp $
+# $NetBSD: Makefile,v 1.95 2008/03/06 14:53:56 wiz Exp $
 #
 
-DISTNAME=		gnome-panel-2.20.2
+DISTNAME=		gnome-panel-2.20.3
 PKGREVISION=		1
 CATEGORIES=		x11 gnome
 MASTER_SITES=		${MASTER_SITE_GNOME:=sources/gnome-panel/2.20/}

@@ -1,5 +1,5 @@
 #!/bin/sh
-# $NetBSD: upload,v 1.41 2007/10/09 19:19:13 martti Exp $
+# $NetBSD: upload,v 1.43 2008/03/15 16:27:43 joerg Exp $
 
 #
 # Upload non-restricted binary pkgs to ftp server
@@ -150,11 +150,7 @@ MD5="digest md5";
 SHA1="digest sha1";
 
 _INFO_VER=`${PKG_INFO} -V`;
-if ${PKG_ADMIN} pmatch 'pkg_install<20070714' pkg_install-${_INFO_VER}; then
-	REQUIRED_PACKAGES="pkgtools/pkglint net/rsync security/audit-packages"
-else
-	REQUIRED_PACKAGES="pkgtools/pkglint net/rsync"
-fi
+REQUIRED_PACKAGES="pkgtools/lintpkgsrc net/rsync"
 
 opsys=`uname -s`
 case "$opsys" in
@@ -229,11 +225,11 @@ upload_vulnerable="$TMP"/upload_vulnerable
 
 # May be different than $USR_PKGSRC:
 echo "upload> Running ${BMAKE} to get the pkgsrc variables"
-pkgsrcdir=`cd pkgtools/pkglint ; ${BMAKE} show-var VARNAME=_PKGSRCDIR`
-packages=`cd pkgtools/pkglint ; ${BMAKE} show-var VARNAME=PACKAGES`
-distdir=`cd pkgtools/pkglint ; ${BMAKE} show-var VARNAME=DISTDIR`
-gzip_cmd=`cd pkgtools/pkglint; ${BMAKE} show-var VARNAME=GZIP_CMD USE_TOOLS=gzip`
-pkg_info=`cd pkgtools/pkglint && ${BMAKE} show-var VARNAME=PKG_INFO`
+pkgsrcdir=`cd pkgtools/lintpkgsrc ; ${BMAKE} show-var VARNAME=_PKGSRCDIR`
+packages=`cd pkgtools/lintpkgsrc ; ${BMAKE} show-var VARNAME=PACKAGES`
+distdir=`cd pkgtools/lintpkgsrc ; ${BMAKE} show-var VARNAME=DISTDIR`
+gzip_cmd=`cd pkgtools/lintpkgsrc; ${BMAKE} show-var VARNAME=GZIP_CMD USE_TOOLS=gzip`
+pkg_info=`cd pkgtools/lintpkgsrc && ${BMAKE} show-var VARNAME=PKG_INFO`
 
 # Pull in some pkgs needed
 for pkg in ${REQUIRED_PACKAGES}; do
@@ -243,15 +239,10 @@ done
 echo "upload> Making sure vulnerability-list is up-to-date:"
 if [ -z "$UPDATE_VULNERABILITY_LIST" -o "$UPDATE_VULNERABILITY_LIST" = "yes" ]
 then
-	if ${PKG_ADMIN} pmatch 'pkg_install<20070714' pkg_install-${_INFO_VER}
-	then
-		env PKGVULNDIR=${distdir} download-vulnerability-list
-	else
-		_PKGVULNDIR=`audit-packages ${AUDIT_PACKAGES_FLAGS} -Q PKGVULNDIR`
-		download-vulnerability-list ${DOWNLOAD_VULNERABILITY_LIST_FLAGS}
-		if [ "x${_PKGVULNDIR}" != "x${distdir}" ]; then
-			cp ${_PKGVULNDIR}/pkg-vulnerabilities ${distdir}
-		fi
+	_PKGVULNDIR=`audit-packages ${AUDIT_PACKAGES_FLAGS} -Q PKGVULNDIR`
+	download-vulnerability-list ${DOWNLOAD_VULNERABILITY_LIST_FLAGS}
+	if [ "x${_PKGVULNDIR}" != "x${distdir}" ]; then
+		cp ${_PKGVULNDIR}/pkg-vulnerabilities ${distdir}
 	fi
 	echo "        done."
 else
@@ -260,7 +251,7 @@ fi
 
 case $LINTPKGSRC_CACHE in
 yes|YES)
-	lintpkgsrc_cache="-I `cd pkgtools/pkglint ; ${BMAKE} show-var VARNAME=LINTPKGSRC_DB`"
+	lintpkgsrc_cache="-I `cd pkgtools/lintpkgsrc ; ${BMAKE} show-var VARNAME=LINTPKGSRC_DB`"
 	;;
 *)
 	lintpkgsrc_cache=''

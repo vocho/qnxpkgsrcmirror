@@ -1,11 +1,12 @@
-# $NetBSD: Makefile,v 1.2 2006/09/02 18:42:18 rillig Exp $
+# $NetBSD: Makefile,v 1.4 2008/03/04 11:02:24 rillig Exp $
 #
 
 DISTNAME=		ocaml-mysql-1.0.4
+PKGREVISION=		1
 CATEGORIES=		databases
 MASTER_SITES=		http://raevnos.pennmush.org/code/ocaml-mysql/
 
-MAINTAINER=		rillig@NetBSD.org
+MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://raevnos.pennmush.org/code/ocaml-mysql/
 COMMENT=		Ocaml library for MySQL database access
 

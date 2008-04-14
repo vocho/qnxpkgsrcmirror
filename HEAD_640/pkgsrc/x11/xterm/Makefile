@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.37 2007/11/23 14:23:34 bjs Exp $
+# $NetBSD: Makefile,v 1.40 2008/03/05 20:04:42 jlam Exp $
 
-DISTNAME=	xterm-229
+DISTNAME=	xterm-231
+PKGREVISION=	1
 CATEGORIES=	x11
 MASTER_SITES=	ftp://invisible-island.net/xterm/
 EXTRACT_SUFX=	.tgz
@@ -31,24 +32,6 @@ CONFIGURE_ARGS+= --enable-wide-chars
 CONFIGURE_ARGS+= --with-setuid
 .endif
 
-#.#if ${OPSYS} == "SunOS"
-#INSTALL_FILE=	${WRKDIR}/INSTALL
-#DEINSTALL_FILE=	${INSTALL_FILE}
-
-pre-build:
-	${MKDIR} ${INSTALL_FILE:H}
-	${SED} -e 's#@MV@#${MV}#g' \
-	  -e 's#@LOCALBASE@#${LOCALBASE}#g' \
-	  -e 's#@PREFIX@#${PREFIX}#g' \
-	  ${PKGDIR}/INSTALL.openwin >${INSTALL_FILE}
-
-pre-install:
-	${SH} ${INSTALL_FILE} ${PKGNAME} PRE-INSTALL
-
-post-install:
-	${SH} ${INSTALL_FILE} ${PKGNAME} POST-INSTALL
-#.endif
-
 .include "../../x11/libX11/buildlink3.mk"
 .include "../../x11/libXaw/buildlink3.mk"
 .include "../../x11/libXt/buildlink3.mk"
@@ -58,4 +41,5 @@ post-install:
 BUILDLINK_DEPMETHOD.libxkbfile?=	build
 .include "../../x11/libxkbfile/buildlink3.mk"
 
+.include "../../mk/termcap.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

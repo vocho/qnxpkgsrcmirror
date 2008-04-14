@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.35 2007/12/02 00:10:40 wiz Exp $
+# $NetBSD: Makefile,v 1.37 2008/02/27 18:52:16 jlam Exp $
 
-DISTNAME=	lua-5.1.2
+DISTNAME=	lua-5.1.3
 PKGREVISION=	1
 CATEGORIES=	lang
 MASTER_SITES=	ftp://ftp.tecgraf.puc-rio.br/pub/lua/ \
@@ -23,7 +23,7 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 USE_LIBTOOL=	yes
 USE_TOOLS+=	gmake
 MAKE_ENV+=	DLLIB=${BUILDLINK_LDADD.dl:Q}
-CFLAGS+=	-DLUA_ROOT=\"${PREFIX:Q}/\"
+CFLAGS+=	-DLUA_ROOT=\"${PREFIX}/\"
 
 DOCDIR=		${PREFIX}/share/doc/lua
 EGDIR=		${PREFIX}/share/examples/lua
@@ -51,7 +51,7 @@ PKGCONFIG_OVERRIDE=	${WRKSRC}/etc/lua.pc
 SUBST_CLASSES+=		pc-prefix
 SUBST_FILES.pc-prefix+=	${WRKSRC}/etc/lua.pc
 SUBST_SED.pc-prefix+=	-e "s,/usr/local,${PREFIX},"
-SUBST_STAGE.pc-prefix+=	post-build
+SUBST_STAGE.pc-prefix=	post-build
 
 post-install:
 	${INSTALL_DATA_DIR} ${DESTDIR}${DOCDIR}
@@ -76,7 +76,6 @@ post-install:
 	${INSTALL_DATA_DIR} ${DESTDIR}${PREFIX}/lib/pkgconfig
 	${INSTALL_DATA} ${WRKSRC}/etc/lua.pc ${DESTDIR}${PREFIX}/lib/pkgconfig
 
-.include "../../devel/ncurses/buildlink3.mk"
 .include "../../devel/readline/buildlink3.mk"
 .include "../../mk/dlopen.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.33 2007/11/30 21:55:08 wiz Exp $
+# $NetBSD: Makefile,v 1.36 2008/03/06 14:53:52 wiz Exp $
 
 DISTNAME=	kdeaccessibility-${_KDE_VERSION}
 PKGREVISION=	1

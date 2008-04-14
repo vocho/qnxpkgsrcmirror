@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.19 2007/03/21 22:31:12 wiz Exp $
+@comment $NetBSD: PLIST,v 1.21 2008/02/20 11:28:19 xtraeme Exp $
 include/gtksourceview-1.0/gtksourceview/gtksourcebuffer.h
 include/gtksourceview-1.0/gtksourceview/gtksourceiter.h
 include/gtksourceview-1.0/gtksourceview/gtksourcelanguage.h
@@ -147,7 +147,6 @@ share/locale/zh_CN/LC_MESSAGES/gtksourceview-1.0.mo
 share/locale/zh_HK/LC_MESSAGES/gtksourceview-1.0.mo
 share/locale/zh_TW/LC_MESSAGES/gtksourceview-1.0.mo
 @dirrm share/gtksourceview-1.0/language-specs
-@dirrm share/gtksourceview-1.0
 @dirrm share/gtk-doc/html/gtksourceview
 @dirrm include/gtksourceview-1.0/gtksourceview
 @dirrm include/gtksourceview-1.0

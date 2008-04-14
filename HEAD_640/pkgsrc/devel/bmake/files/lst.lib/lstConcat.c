@@ -1,4 +1,4 @@
-/*	$NetBSD: lstConcat.c,v 1.1 2005/10/31 21:52:25 reed Exp $	*/
+/*	$NetBSD: lstConcat.c,v 1.2 2008/03/09 19:54:29 joerg Exp $	*/
 
 /*
  * Copyright (c) 1988, 1989, 1990, 1993
@@ -33,14 +33,14 @@
  */
 
 #ifndef MAKE_NATIVE
-static char rcsid[] = "$NetBSD: lstConcat.c,v 1.1 2005/10/31 21:52:25 reed Exp $";
+static char rcsid[] = "$NetBSD: lstConcat.c,v 1.2 2008/03/09 19:54:29 joerg Exp $";
 #else
 #include <sys/cdefs.h>
 #ifndef lint
 #if 0
 static char sccsid[] = "@(#)lstConcat.c	8.1 (Berkeley) 6/6/93";
 #else
-__RCSID("$NetBSD: lstConcat.c,v 1.1 2005/10/31 21:52:25 reed Exp $");
+__RCSID("$NetBSD: lstConcat.c,v 1.2 2008/03/09 19:54:29 joerg Exp $");
 #endif
 #endif /* not lint */
 #endif
@@ -82,8 +82,8 @@ Lst_Concat(Lst l1, Lst l2, int flags)
     ListNode  	nln;    /* new LstNode */
     ListNode  	last;   /* the last element in the list. Keeps
 				 * bookkeeping until the end */
-    List 	list1 = (List)l1;
-    List 	list2 = (List)l2;
+    List 	list1 = l1;
+    List 	list2 = l2;
 
     if (!LstValid (l1) || !LstValid (l2)) {
 	return (FAILURE);

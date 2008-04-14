@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.69 2007/12/02 11:31:00 wiz Exp $
+# $NetBSD: Makefile,v 1.71 2008/03/11 10:16:42 tron Exp $
 
 DISTNAME=	rsync-2.6.9
 CATEGORIES=	net

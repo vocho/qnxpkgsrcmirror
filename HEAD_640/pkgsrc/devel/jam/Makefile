@@ -1,40 +1,47 @@
-# $NetBSD: Makefile,v 1.11 2007/03/24 06:20:30 schmonz Exp $
+# $NetBSD: Makefile,v 1.13 2008/03/10 00:09:23 tnn Exp $
 #
 
-DISTNAME=	jam-2.5
-PKGREVISION=	2
+PKGNAME=	jam-2.5.2
+DISTNAME=	ft${PKGNAME}
 CATEGORIES=	devel
-MASTER_SITES=	ftp://ftp.perforce.com/pub/jam/
-EXTRACT_SUFX=	.zip
+MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=freetype/}
+#MASTER_SITES=	ftp://ftp.perforce.com/pub/jam/
+EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	schmonz@NetBSD.org
-HOMEPAGE=	http://www.perforce.com/jam/jam.html
+HOMEPAGE=	http://freetype.sourceforge.net/jam/index.html
+#HOMEPAGE=	http://www.perforce.com/jam/jam.html
 COMMENT=	Program construction tool, like make(1)
 
 CONFLICTS=	acunia-jam-[0-9]*
 
-DIST_SUBDIR=	${PKGNAME_NOREV}nb1
-WRKSRC=		${WRKDIR}
-USE_TOOLS+=	yacc
+PKG_DESTDIR_SUPPORT=	user-destdir
+
+GNU_CONFIGURE=	yes
+
+USE_TOOLS+=	yacc gmake
 
 DOCDIR=		share/doc/${PKGBASE}
 HTMLDIR=	share/doc/html/${PKGBASE}
 
-INSTALLATION_DIRS=	bin
+INSTALLATION_DIRS=	bin ${DOCDIR} ${HTMLDIR}
 
 do-install:
 	for f in jam mkjambase; do \
-		${INSTALL_PROGRAM} ${WRKSRC}/bin.*/$${f} ${PREFIX}/bin; \
+		${INSTALL_PROGRAM} ${WRKSRC}/bin.*/$${f} \
+			${DESTDIR}${PREFIX}/bin; \
 	done
 
-	${INSTALL_DATA_DIR} ${PREFIX}/${DOCDIR}
+	${INSTALL_DATA_DIR} ${DESTDIR}${PREFIX}/${DOCDIR}
 	for f in Porting README RELNOTES; do \
-		${INSTALL_DATA} ${WRKSRC}/$${f} ${PREFIX}/${DOCDIR}; \
+		${INSTALL_DATA} ${WRKSRC}/$${f} \
+			${DESTDIR}${PREFIX}/${DOCDIR}; \
 	done
 
-	${INSTALL_DATA_DIR} ${PREFIX}/${HTMLDIR}
+	${INSTALL_DATA_DIR} ${DESTDIR}${PREFIX}/${HTMLDIR}
 	for f in *.html; do \
-		${INSTALL_DATA} ${WRKSRC}/$${f} ${PREFIX}/${HTMLDIR}; \
+		${INSTALL_DATA} ${WRKSRC}/$${f} \
+			${DESTDIR}${PREFIX}/${HTMLDIR}; \
 	done
 
 .include "../../mk/bsd.pkg.mk"

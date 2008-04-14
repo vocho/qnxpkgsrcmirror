@@ -1,9 +1,9 @@
-# $NetBSD: buildlink3.mk,v 1.23 2006/07/08 23:10:55 jlam Exp $
+# $NetBSD: buildlink3.mk,v 1.25 2008/03/21 14:52:15 kefren Exp $
 
 BUILDLINK_DEPTH:=	${BUILDLINK_DEPTH}+
 MONO_BUILDLINK3_MK:=	${MONO_BUILDLINK3_MK}+
 
-.if !empty(BUILDLINK_DEPTH:M+)
+.if ${BUILDLINK_DEPTH} == "+"
 BUILDLINK_DEPENDS+=	mono
 .endif
 
@@ -11,11 +11,12 @@ BUILDLINK_PACKAGES:=	${BUILDLINK_PACKAGES:Nmono}
 BUILDLINK_PACKAGES+=	mono
 BUILDLINK_ORDER:=	${BUILDLINK_ORDER} ${BUILDLINK_DEPTH}mono
 
-.if !empty(MONO_BUILDLINK3_MK:M+)
-BUILDLINK_API_DEPENDS.mono+=	mono>=1.1.12.1
-BUILDLINK_ABI_DEPENDS.mono?=	mono>=1.1.12.1nb2
+.if ${MONO_BUILDLINK3_MK} == "+"
+BUILDLINK_API_DEPENDS.mono+=	mono>=1.2.6
 BUILDLINK_PKGSRCDIR.mono?=	../../lang/mono
 .endif	# MONO_BUILDLINK3_MK
+
+ALL_ENV+=	MONO_SHARED_DIR=${WRKDIR:Q}
 
 .include "../../devel/glib2/buildlink3.mk"
 .include "../../textproc/icu/buildlink3.mk"

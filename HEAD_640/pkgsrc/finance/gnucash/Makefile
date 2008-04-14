@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.120 2007/11/29 13:49:11 wiz Exp $
+# $NetBSD: Makefile,v 1.126 2008/03/10 11:33:11 wiz Exp $
 #
 
-DISTNAME=		gnucash-2.2.1
-PKGREVISION=		3
+DISTNAME=		gnucash-2.2.4
+PKGREVISION=		1
 CATEGORIES=		finance
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=gnucash/}
 
@@ -10,7 +10,10 @@ MAINTAINER=		wiz@NetBSD.org
 HOMEPAGE=		http://www.gnucash.org/
 COMMENT=		Personal or business finance management program
 
-DEPENDS+=		guile-slib>=3.1.1:../../devel/guile-slib
+PKG_DESTDIR_SUPPORT=	user-destdir
+
+DEPENDS+=		guile-slib>=3.2.1:../../devel/guile-slib
+DEPENDS+=		guile-www>=2.21:../../devel/guile-www
 DEPENDS+=		p5-Finance-Quote-[0-9]*:../../finance/p5-Finance-Quote
 DEPENDS+=		p5-Date-Manip-[0-9]*:../../devel/p5-Date-Manip
 
@@ -55,9 +58,10 @@ BUILDLINK_API_DEPENDS.pango+=	pango>=1.8.0
 .include "../../devel/popt/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"
 .include "../../finance/libofx/buildlink3.mk"
+.include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../lang/guile/buildlink3.mk"
 .include "../../lang/perl5/buildlink3.mk"
-.include "../../misc/goffice/buildlink3.mk"
+.include "../../misc/goffice0.6/buildlink3.mk"
 BUILDLINK_API_DEPENDS.libgnomeprint+=	libgnomeprint>=2.10.0
 .include "../../print/libgnomeprint/buildlink3.mk"
 BUILDLINK_API_DEPENDS.libgnomeprintui+=	libgnomeprintui>=2.10.0

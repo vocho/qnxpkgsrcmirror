@@ -1,6 +1,6 @@
-# $NetBSD: modorder,v 1.1 2005/10/31 21:52:26 reed Exp $
+# $NetBSD: modorder,v 1.2 2008/03/09 19:54:29 joerg Exp $
 
-LIST=		one two three four five six seven eigth nine ten
+LIST=		one two three four five six seven eight nine ten
 LISTX=		${LIST:Ox}
 LISTSX:=	${LIST:Ox}
 TEST_RESULT= && echo Ok || echo Failed

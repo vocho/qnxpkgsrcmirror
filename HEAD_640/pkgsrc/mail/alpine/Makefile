@@ -1,15 +1,18 @@
-# $NetBSD: Makefile,v 1.8 2007/12/10 00:01:38 abs Exp $
+# $NetBSD: Makefile,v 1.13 2008/01/20 15:18:55 abs Exp $
 #
 
-DISTNAME=	alpine-0.999999
-PKGREVISION=	1
+DISTNAME=	alpine-1.00
+PKGREVISION=	3
 CATEGORIES=	mail
 MASTER_SITES=	ftp://ftp.cac.washington.edu/alpine/
+DIST_SUBDIR=	alpine
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	abs@NetBSD.org
 HOMEPAGE=	http://www.washington.edu/alpine/
 COMMENT=	Program for Internet News and E-mail
+
+.include "options.mk"
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
@@ -22,18 +25,8 @@ USE_LIBTOOL=	yes
 
 INSTALLATION_DIRS=	bin ${PKMANDIR}/man1
 
-PKG_OPTIONS_VAR=	PKG_OPTIONS.alpine
-PKG_SUPPORTED_OPTIONS=	pinepwd
-PKG_SUGGESTED_OPTIONS=	pinepwd
-
-.include "../../mk/bsd.options.mk"
-
-.if ${OPSYS} == "NetBSD"
+.if ${OPSYS} == "NetBSD" && empty(OS_VERSION:M4.99.*) && empty(OS_VERSION:M[5-9]*)
 CONFIGURE_ARGS+= --without-pthread
-.endif
-
-.if !empty(PKG_OPTIONS:Mpinepwd)
-CONFIGURE_ARGS+= --with-passfile=.pinepwd
 .endif
 
 do-install:

@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.1.1.1 2007/11/10 11:33:00 agc Exp $
+# $NetBSD: Makefile,v 1.4 2008/03/03 15:21:07 jlam Exp $
 
 DISTNAME=	cstore0.2
 PKGNAME=	cstore-0.2
+PKGREVISION=	1
 CATEGORIES=	databases
 MASTER_SITES=	http://db.lcs.mit.edu/projects/cstore/
 MASTER_SITES+=	http://db.csail.mit.edu/data/
@@ -10,6 +11,8 @@ DISTFILES=	${DISTNAME}${EXTRACT_SUFX} data4.tar.gz D6.data.ros.gz
 MAINTAINER=	agc@NetBSD.org
 HOMEPAGE=	http://db.lcs.mit.edu/projects/cstore/
 COMMENT=	Read-optimised column store relational DBMS
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=	gmake perl
 USE_LANGUAGES+=	c c++
@@ -51,7 +54,7 @@ DATAFILES+=	lshipdate.sorted.mini
 DATAFILES+=	lshipdate.sorted.tiny
 DATAFILES+=	supp.data
 
-INSTALLATION_DIRS_FROM_PLIST=	yes
+AUTO_MKDIRS=			yes
 
 post-extract:
 	cd ${WRKDIR} && mv ${DATAFILES} ${WRKSRC}/data
@@ -61,11 +64,12 @@ do-build:
 	cd ${WRKSRC}/src &&  ./cstoreqptest 0 createData.cnf global.cnf
 
 do-install:
-	${INSTALL_PROGRAM} ${WRKSRC}/src/cstoreqptest ${PREFIX}/bin/cstoreqp
-	${INSTALL_DATA_DIR} ${PREFIX}/cstore/data
-	cd ${WRKSRC}/data && pax -rwpe . ${PREFIX}/cstore/data
-	${INSTALL_DATA_DIR} ${PREFIX}/share/doc/cstore
-	cd ${WRKSRC}/doc && pax -rwpe . ${PREFIX}/share/doc/cstore
+	${INSTALL_PROGRAM} ${WRKSRC}/src/cstoreqptest \
+		${DESTDIR}${PREFIX}/bin/cstoreqp
+	${INSTALL_DATA_DIR} ${DESTDIR}${PREFIX}/cstore/data
+	cd ${WRKSRC}/data && pax -rwpe . ${DESTDIR}${PREFIX}/cstore/data
+	${INSTALL_DATA_DIR} ${DESTDIR}${PREFIX}/share/doc/cstore
+	cd ${WRKSRC}/doc && pax -rwpe . ${DESTDIR}${PREFIX}/share/doc/cstore
 
 .include "../../archivers/lzo/buildlink3.mk"
 .include "../../databases/db4/buildlink3.mk"

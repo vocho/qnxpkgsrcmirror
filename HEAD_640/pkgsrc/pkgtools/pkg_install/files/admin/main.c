@@ -1,4 +1,4 @@
-/*	$NetBSD: main.c,v 1.33 2007/12/10 10:34:42 tnn Exp $	*/
+/*	$NetBSD: main.c,v 1.40 2008/03/23 01:04:47 dsainty Exp $	*/
 
 #if HAVE_CONFIG_H
 #include "config.h"
@@ -8,11 +8,16 @@
 #include <sys/cdefs.h>
 #endif
 #ifndef lint
-__RCSID("$NetBSD: main.c,v 1.33 2007/12/10 10:34:42 tnn Exp $");
+__RCSID("$NetBSD: main.c,v 1.40 2008/03/23 01:04:47 dsainty Exp $");
 #endif
 
-/*
- * Copyright (c) 1999 Hubert Feyrer.  All rights reserved.
+/*-
+ * Copyright (c) 1999-2008 The NetBSD Foundation, Inc.
+ * All rights reserved.
+ *
+ * This code is derived from software contributed to The NetBSD Foundation
+ * by Hubert Feyrer <hubert@feyrer.de> and
+ * by Joerg Sonnenberger <joerg@NetBSD.org>.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -24,21 +29,23 @@ __RCSID("$NetBSD: main.c,v 1.33 2007/12/10 10:34:42 tnn Exp $");
  *    documentation and/or other materials provided with the distribution.
  * 3. All advertising materials mentioning features or use of this software
  *    must display the following acknowledgement:
- *      This product includes software developed by Hubert Feyrer for
- *	the NetBSD Project.
- * 4. The name of the author may not be used to endorse or promote products
- *    derived from this software without specific prior written permission.
+ *        This product includes software developed by the NetBSD
+ *        Foundation, Inc. and its contributors.
+ * 4. Neither the name of The NetBSD Foundation nor the names of its
+ *    contributors may be used to endorse or promote products derived
+ *    from this software without specific prior written permission.
  *
- * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR
- * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
- * IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT,
- * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
- * NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
- * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
- * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
- * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * THIS SOFTWARE IS PROVIDED BY THE NETBSD FOUNDATION, INC. AND CONTRIBUTORS
+ * ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
+ * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+ * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE FOUNDATION OR CONTRIBUTORS
+ * BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
  */
 
 #if HAVE_SYS_TYPES_H
@@ -72,25 +79,22 @@ __RCSID("$NetBSD: main.c,v 1.33 2007/12/10 10:34:42 tnn Exp $");
 #include <string.h>
 #endif
 
+#include "admin.h"
 #include "lib.h"
 
 #define DEFAULT_SFX	".t[bg]z"	/* default suffix for ls{all,best} */
 
-static const char Options[] = "K:SVbd:qs:";
+static const char Options[] = "C:K:SVbd:qs:v";
 
-int     filecnt;
-int     pkgcnt;
+int	quiet, verbose;
 
-static int	quiet;
-
-static int checkpattern_fn(const char *, void *);
 static void set_unset_variable(char **, Boolean);
 
 /* print usage message and exit */
-static void 
+void 
 usage(void)
 {
-	(void) fprintf(stderr, "usage: %s [-bqSV] [-d lsdir] [-K pkg_dbdir] [-s sfx] command args ...\n"
+	(void) fprintf(stderr, "usage: %s [-bqSvV] [-C config] [-d lsdir] [-K pkg_dbdir] [-s sfx] command args ...\n"
 	    "Where 'commands' and 'args' are:\n"
 	    " rebuild                     - rebuild pkgdb from +CONTENTS files\n"
 	    " rebuild-tree                - rebuild +REQUIRED_BY files from forward deps\n"
@@ -106,118 +110,14 @@ usage(void)
 	    " lsall /path/to/pkgpattern   - list all pkgs matching the pattern\n"
 	    " lsbest /path/to/pkgpattern  - list pkgs matching the pattern best\n"
 	    " dump                        - dump database\n"
-	    " pmatch pattern pkg          - returns true if pkg matches pattern, otherwise false\n",
+	    " pmatch pattern pkg          - returns true if pkg matches pattern, otherwise false\n"
+	    " fetch-pkg-vulnerabilities [-s] - fetch new vulnerability file\n"
+	    " check-pkg-vulnerabilities [-s] <file> - check syntax and checksums of the vulnerability file\n"
+	    " audit [-es] [-t type] ...\n"
+	    " audit-pkg [-es] [-t type] ...\n"
+	    " audit-batch [-es] [-t type] ...\n",
 	    getprogname());
 	exit(EXIT_FAILURE);
-}
-
-/*
- * Assumes CWD is in /var/db/pkg/<pkg>!
- */
-static void 
-check1pkg(const char *pkgdir)
-{
-	FILE   *f;
-	plist_t *p;
-	package_t Plist;
-	char   *PkgName, *dirp = NULL, *md5file;
-	char    file[MaxPathSize];
-	char    dir[MaxPathSize];
-
-	f = fopen(CONTENTS_FNAME, "r");
-	if (f == NULL)
-		err(EXIT_FAILURE, "can't open %s/%s/%s", _pkgdb_getPKGDB_DIR(), pkgdir, CONTENTS_FNAME);
-
-	Plist.head = Plist.tail = NULL;
-	read_plist(&Plist, f);
-	p = find_plist(&Plist, PLIST_NAME);
-	if (p == NULL)
-		errx(EXIT_FAILURE, "Package %s has no @name, aborting.",
-		    pkgdir);
-	PkgName = p->name;
-	for (p = Plist.head; p; p = p->next) {
-		switch (p->type) {
-		case PLIST_FILE:
-			if (dirp == NULL) {
-				warnx("dirp not initialized, please send-pr!");
-				abort();
-			}
-			
-			(void) snprintf(file, sizeof(file), "%s/%s", dirp, p->name);
-
-			if (isfile(file) || islinktodir(file)) {
-				if (p->next && p->next->type == PLIST_COMMENT) {
-					if (strncmp(p->next->name, CHECKSUM_HEADER, ChecksumHeaderLen) == 0) {
-						if ((md5file = MD5File(file, NULL)) != NULL) {
-							/* Mismatch? */
-#ifdef PKGDB_DEBUG
-							printf("%s: md5 should=<%s>, is=<%s>\n",
-							    file, p->next->name + ChecksumHeaderLen, md5file);
-#endif
-							if (strcmp(md5file, p->next->name + ChecksumHeaderLen) != 0)
-								printf("%s fails MD5 checksum\n", file);
-
-							free(md5file);
-						}
-					} else if (strncmp(p->next->name, SYMLINK_HEADER, SymlinkHeaderLen) == 0) {
-						char	buf[MaxPathSize + SymlinkHeaderLen];
-						int	cc;
-
-						(void) strlcpy(buf, SYMLINK_HEADER, sizeof(buf));
-						if ((cc = readlink(file, &buf[SymlinkHeaderLen],
-							  sizeof(buf) - SymlinkHeaderLen - 1)) < 0) {
-							warnx("can't readlink `%s'", file);
-						} else {
-							buf[SymlinkHeaderLen + cc] = 0x0;
-							if (strcmp(buf, p->next->name) != 0) {
-								printf("symlink (%s) is not same as recorded value, %s: %s\n",
-								    file, buf, p->next->name);
-							}
-						}
-					}
-				}
-				
-				filecnt++;
-			} else if (isbrokenlink(file)) {
-				warnx("%s: Symlink `%s' exists and is in %s but target does not exist!", PkgName, file, CONTENTS_FNAME);
-			} else {
-				warnx("%s: File `%s' is in %s but not on filesystem!", PkgName, file, CONTENTS_FNAME);
-			}
-			break;
-		case PLIST_CWD:
-			if (strcmp(p->name, ".") != 0)
-				dirp = p->name;
-			else {
-				(void) snprintf(dir, sizeof(dir), "%s/%s", _pkgdb_getPKGDB_DIR(), pkgdir);
-				dirp = dir;
-			}
-			break;
-		case PLIST_IGNORE:
-			p = p->next;
-			break;
-		case PLIST_SHOW_ALL:
-		case PLIST_SRC:
-		case PLIST_CMD:
-		case PLIST_CHMOD:
-		case PLIST_CHOWN:
-		case PLIST_CHGRP:
-		case PLIST_COMMENT:
-		case PLIST_NAME:
-		case PLIST_UNEXEC:
-		case PLIST_DISPLAY:
-		case PLIST_PKGDEP:
-		case PLIST_MTREE:
-		case PLIST_DIR_RM:
-		case PLIST_IGNORE_INST:
-		case PLIST_OPTION:
-		case PLIST_PKGCFL:
-		case PLIST_BLDDEP:
-			break;
-		}
-	}
-	free_plist(&Plist);
-	fclose(f);
-	pkgcnt++;
 }
 
 /*
@@ -227,20 +127,22 @@ check1pkg(const char *pkgdir)
  *	returns the number of files added to the database file.
  */
 static int
-add1pkg(const char *pkgdir)
+add_pkg(const char *pkgdir, void *vp)
 {
 	FILE	       *f;
 	plist_t	       *p;
 	package_t	Plist;
 	char 	       *contents;
-	const char	*PkgDBDir;
+	const char     *PkgDBDir;
 	char *PkgName, *dirp;
 	char 		file[MaxPathSize];
 	char		dir[MaxPathSize];
-	int		cnt = 0;
+	int		tmp, *cnt;
 
 	if (!pkgdb_open(ReadWrite))
 		err(EXIT_FAILURE, "cannot open pkgdb");
+
+	cnt = vp != NULL ? vp : &tmp;
 
 	PkgDBDir = _pkgdb_getPKGDB_DIR();
 	contents = pkgdb_pkg_file(pkgdir, CONTENTS_FNAME);
@@ -273,7 +175,7 @@ add1pkg(const char *pkgdir)
 				}
 			} else {
 				pkgdb_store(file, PkgName);
-				cnt++;
+				(*cnt)++;
 			}
 			break;
 		case PLIST_CWD:
@@ -311,7 +213,7 @@ add1pkg(const char *pkgdir)
 	fclose(f);
 	pkgdb_close();
 
-	return cnt;
+	return 0;
 }
 
 static void
@@ -326,10 +228,8 @@ delete1pkg(const char *pkgdir)
 static void 
 rebuild(void)
 {
-	DIR	       *dp;
-	struct dirent  *de;
-	const char     *PkgDBDir;
 	char		cachename[MaxPathSize];
+	int		pkgcnt, filecnt;
 
 	pkgcnt = 0;
 	filecnt = 0;
@@ -339,105 +239,14 @@ rebuild(void)
 		err(EXIT_FAILURE, "unlink %s", cachename);
 
 	setbuf(stdout, NULL);
-	PkgDBDir = _pkgdb_getPKGDB_DIR();
-	chdir(PkgDBDir);
-#ifdef PKGDB_DEBUG
-	printf("PkgDBDir='%s'\n", PkgDBDir);
-#endif
-	dp = opendir(".");
-	if (dp == NULL)
-		err(EXIT_FAILURE, "opendir failed");
-	while ((de = readdir(dp))) {
-		if (!(isdir(de->d_name) || islinktodir(de->d_name)))
-			continue;
 
-		if (strcmp(de->d_name, ".") == 0 ||
-		    strcmp(de->d_name, "..") == 0)
-			continue;
-
-#ifdef PKGDB_DEBUG
-		printf("%s\n", de->d_name);
-#else
-		if (!quiet) {
-			printf(".");
-		}
-#endif
-
-		filecnt += add1pkg(de->d_name);
-		pkgcnt++;
-	}
-	chdir("..");
-	closedir(dp);
+	iterate_pkg_db(add_pkg, &filecnt);
 
 	printf("\n");
 	printf("Stored %d file%s from %d package%s in %s.\n",
 	    filecnt, filecnt == 1 ? "" : "s",
 	    pkgcnt, pkgcnt == 1 ? "" : "s",
 	    cachename);
-}
-
-static void 
-checkall(void)
-{
-	DIR    *dp;
-	struct dirent *de;
-
-	pkgcnt = 0;
-	filecnt = 0;
-
-	setbuf(stdout, NULL);
-	chdir(_pkgdb_getPKGDB_DIR());
-
-	dp = opendir(".");
-	if (dp == NULL)
-		err(EXIT_FAILURE, "opendir failed");
-	while ((de = readdir(dp))) {
-		if (!(isdir(de->d_name) || islinktodir(de->d_name)))
-			continue;
-
-		if (strcmp(de->d_name, ".") == 0 ||
-		    strcmp(de->d_name, "..") == 0)
-			continue;
-
-		chdir(de->d_name);
-
-		check1pkg(de->d_name);
-		if (!quiet) {
-			printf(".");
-		}
-
-		chdir("..");
-	}
-	closedir(dp);
-	pkgdb_close();
-
-
-	printf("\n");
-	printf("Checked %d file%s from %d package%s.\n",
-	    filecnt, (filecnt == 1) ? "" : "s",
-	    pkgcnt, (pkgcnt == 1) ? "" : "s");
-}
-
-static int
-checkpattern_fn(const char *pkg, void *vp)
-{
-	int *got_match, rc;
-
-	rc = chdir(pkg);
-	if (rc == -1)
-		err(EXIT_FAILURE, "Cannot chdir to %s/%s", _pkgdb_getPKGDB_DIR(), pkg);
-
-	check1pkg(pkg);
-	if (!quiet) {
-		printf(".");
-	}
-
-	chdir("..");
-
-	got_match = vp;
-	*got_match = 1;
-
-	return 0;
 }
 
 static int
@@ -536,6 +345,7 @@ rebuild_tree(void)
 int 
 main(int argc, char *argv[])
 {
+	const char     *config_file = SYSCONFDIR"/pkg_install.conf";
 	Boolean		 use_default_sfx = TRUE;
 	Boolean 	 show_basename_only = FALSE;
 	char		 lsdir[MaxPathSize];
@@ -550,6 +360,10 @@ main(int argc, char *argv[])
 
 	while ((ch = getopt(argc, argv, Options)) != -1)
 		switch (ch) {
+		case 'C':
+			config_file = optarg;
+			break;
+
 		case 'K':
 			_pkgdb_setPKGDB_DIR(optarg);
 			break;
@@ -581,6 +395,10 @@ main(int argc, char *argv[])
 			use_default_sfx = FALSE;
 			break;
 
+		case 'v':
+			++verbose;
+			break;
+
 		default:
 			usage();
 			/* NOTREACHED */
@@ -592,6 +410,8 @@ main(int argc, char *argv[])
 	if (argc <= 0) {
 		usage();
 	}
+
+	pkg_install_config(config_file);
 
 	if (use_default_sfx)
 		(void) snprintf(sfx, sizeof(sfx), "%s", DEFAULT_SFX);
@@ -627,138 +447,59 @@ main(int argc, char *argv[])
 		printf("Done.\n");
 
 	} else if (strcasecmp(argv[0], "check") == 0) {
-
 		argv++;		/* "check" */
 
-		if (*argv != NULL) {
-			/* args specified */
-			int     rc;
+		check(argv);
 
-			filecnt = 0;
-
-			setbuf(stdout, NULL);
-
-			rc = chdir(_pkgdb_getPKGDB_DIR());
-			if (rc == -1)
-				err(EXIT_FAILURE, "Cannot chdir to %s", _pkgdb_getPKGDB_DIR());
-
-			while (*argv != NULL) {
-				int got_match;
-
-				got_match = 0;
-				if (match_installed_pkgs(*argv, checkpattern_fn, &got_match) == -1)
-					errx(EXIT_FAILURE, "Cannot process pkdbdb");
-				if (got_match == 0) {
-					char *pattern;
-
-					if (ispkgpattern(*argv))
-						errx(EXIT_FAILURE, "No matching pkg for %s.", *argv);
-
-					if (asprintf(&pattern, "%s-[0-9]*", *argv) == -1)
-						errx(EXIT_FAILURE, "asprintf failed");
-
-					if (match_installed_pkgs(pattern, checkpattern_fn, &got_match) == -1)
-						errx(EXIT_FAILURE, "Cannot process pkdbdb");
-
-					if (got_match == 0)
-						errx(EXIT_FAILURE, "cannot find package %s", *argv);
-					free(pattern);
-				}
-
-				argv++;
-			}
-
-			printf("\n");
-			printf("Checked %d file%s from %d package%s.\n",
-			    filecnt, (filecnt == 1) ? "" : "s",
-			    pkgcnt, (pkgcnt == 1) ? "" : "s");
-		} else {
-			checkall();
-		}
 		if (!quiet) {
 			printf("Done.\n");
 		}
 
 	} else if (strcasecmp(argv[0], "lsall") == 0) {
-		int saved_wd;
-
 		argv++;		/* "lsall" */
-
-		/* preserve cwd */
-		saved_wd=open(".", O_RDONLY);
-		if (saved_wd == -1)
-			err(EXIT_FAILURE, "Cannot save working dir");
 
 		while (*argv != NULL) {
 			/* args specified */
 			int     rc;
 			const char *basep, *dir;
-			char cwd[MaxPathSize];
 
 			dir = lsdirp ? lsdirp : dirname_of(*argv);
 			basep = basename_of(*argv);
 
-			fchdir(saved_wd);
-			rc = chdir(dir);
-			if (rc == -1)
-				err(EXIT_FAILURE, "Cannot chdir to %s", dir);
-
-			if (getcwd(cwd, sizeof(cwd)) == NULL)
-				err(EXIT_FAILURE, "getcwd");
-
 			if (show_basename_only)
-				rc = match_local_files(cwd, use_default_sfx, 1, basep, lsbasepattern, NULL);
+				rc = match_local_files(dir, use_default_sfx, 1, basep, lsbasepattern, NULL);
 			else
-				rc = match_local_files(cwd, use_default_sfx, 1, basep, lspattern, cwd);
+				rc = match_local_files(dir, use_default_sfx, 1, basep, lspattern, (void *)dir);
 			if (rc == -1)
 				errx(EXIT_FAILURE, "Error from match_local_files(\"%s\", \"%s\", ...)",
-				     cwd, basep);
+				     dir, basep);
 
 			argv++;
 		}
 
-		close(saved_wd);
-
 	} else if (strcasecmp(argv[0], "lsbest") == 0) {
-		int saved_wd;
-
 		argv++;		/* "lsbest" */
-
-		/* preserve cwd */
-		saved_wd=open(".", O_RDONLY);
-		if (saved_wd == -1)
-			err(EXIT_FAILURE, "Cannot save working dir");
 
 		while (*argv != NULL) {
 			/* args specified */
 			const char *basep, *dir;
-			char cwd[MaxPathSize];
 			char *p;
 
 			dir = lsdirp ? lsdirp : dirname_of(*argv);
 			basep = basename_of(*argv);
 
-			fchdir(saved_wd);
-			if (chdir(dir) == -1)
-				err(EXIT_FAILURE, "Cannot chdir to %s", dir);
-
-			if (getcwd(cwd, sizeof(cwd)) == NULL)
-				err(EXIT_FAILURE, "getcwd");
-
-			p = find_best_matching_file(cwd, basep, use_default_sfx, 1);
+			p = find_best_matching_file(dir, basep, use_default_sfx, 1);
 
 			if (p) {
 				if (show_basename_only)
 					printf("%s\n", p);
 				else
-					printf("%s/%s\n", cwd, p);
+					printf("%s/%s\n", dir, p);
 				free(p);
 			}
 			
 			argv++;
 		}
-
-		close(saved_wd);
 
 	} else if (strcasecmp(argv[0], "list") == 0 ||
 	    strcasecmp(argv[0], "dump") == 0) {
@@ -766,11 +507,8 @@ main(int argc, char *argv[])
 		pkgdb_dump();
 
 	} else if (strcasecmp(argv[0], "add") == 0) {
-		argv++;		/* "add" */
-		while (*argv != NULL) {
-			add1pkg(*argv);
-			argv++;
-		}
+		for (++argv; *argv != NULL; ++argv)
+			add_pkg(*argv, NULL);
 	} else if (strcasecmp(argv[0], "delete") == 0) {
 		argv++;		/* "delete" */
 		while (*argv != NULL) {
@@ -784,6 +522,19 @@ main(int argc, char *argv[])
 		argv++;		/* "unset" */
 		set_unset_variable(argv, TRUE);
 	}
+#ifndef BOOTSTRAP
+	else if (strcasecmp(argv[0], "fetch-pkg-vulnerabilities") == 0) {
+		fetch_pkg_vulnerabilities(--argc, ++argv);
+	} else if (strcasecmp(argv[0], "check-pkg-vulnerabilities") == 0) {
+		check_pkg_vulnerabilities(--argc, ++argv);
+	} else if (strcasecmp(argv[0], "audit") == 0) {
+		audit_pkgdb(--argc, ++argv);
+	} else if (strcasecmp(argv[0], "audit-pkg") == 0) {
+		audit_pkg(--argc, ++argv);
+	} else if (strcasecmp(argv[0], "audit-batch") == 0) {
+		audit_batch(--argc, ++argv);
+	}
+#endif
 #ifdef PKGDB_DEBUG
 	else if (strcasecmp(argv[0], "delkey") == 0) {
 		int     rc;

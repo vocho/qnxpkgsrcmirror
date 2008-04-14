@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.73 2007/11/21 05:27:49 obache Exp $
+# $NetBSD: Makefile,v 1.75 2008/01/18 05:08:22 tnn Exp $
 
 DISTNAME=	cyrus-imapd-2.2.13
-PKGREVISION=	4
+PKGREVISION=	5
 CATEGORIES=	mail
 MASTER_SITES=	ftp://ftp.andrew.cmu.edu/pub/cyrus-mail/ \
 		ftp://ftp.andrew.cmu.edu/pub/cyrus-mail/OLD-VERSIONS/imap/
@@ -47,7 +47,7 @@ CONFIGURE_ARGS+=	--without-zephyr
 CONFIGURE_ARGS+=	--without-ucdsnmp
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.cyrus-imapd
-PKG_SUPPORTED_OPTIONS=	gssapi kerberos kerberos4
+PKG_SUPPORTED_OPTIONS=	gssapi kerberos kerberos4 ldap
 .include "../../mk/bsd.options.mk"
 
 .if !empty(PKG_OPTIONS:Mkerberos)
@@ -72,6 +72,14 @@ COMERRBASE=		${KRB5BASE}
 .else
 CONFIGURE_ARGS+=	--without-krb
 CONFIGURE_ARGS+=	--disable-gssapi
+.endif
+
+.if !empty(PKG_OPTIONS:Mldap)
+CONFIGURE_ARGS+=	--with-ldap=${BUILDLINK_PREFIX.openldap-client}
+.  include "../../databases/openldap-client/buildlink3.mk"
+PLIST_SUBST+=		LDAP=
+.else
+PLIST_SUBST+=		LDAP="@comment "
 .endif
 
 .if exists(/usr/bin/compile_et)

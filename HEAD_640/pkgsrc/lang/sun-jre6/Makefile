@@ -1,16 +1,16 @@
-# $NetBSD: Makefile,v 1.6 2007/08/27 21:51:24 jlam Exp $
+# $NetBSD: Makefile,v 1.11 2008/03/12 14:26:33 adrianp Exp $
 
 # Note: Regen distinfo with PKG_DEFAULT_OPTIONS+=sun-jre-jce
+# Note: Update DOWNLOAD_NAME when you update the JRE version
 
-DISTNAME=	jre-6u1-linux-${DIST_ARCH}
-PKGNAME=	sun-jre6-6.0.1
-PKGREVISION=	2
+DISTNAME=	jre-6u5-linux-${DIST_ARCH}
+PKGNAME=	sun-jre6-6.0.5
 MASTER_SITES=	# empty
 
-DOWNLOAD_NAME=	Java Runtime Environment (JRE) 6u1
+DOWNLOAD_NAME=	Java Runtime Environment (JRE) 6u5
 SHORT_NAME=	JRE
 
-WRKSRC=		${WRKDIR}/jre1.6.0_01
+WRKSRC=		${WRKDIR}/jre1.6.0_05
 JAVA_WRAPPERS=	java javaws keytool orbd policytool rmid rmiregistry \
 		servertool tnameserv
 REQD_DIRS=	${JAVA_HOME}
@@ -20,6 +20,8 @@ REQD_DIRS+=	${JAVA_HOME}/lib/images
 REQD_DIRS+=	${JAVA_HOME}/lib/images/cursors
 REQD_DIRS+=	${JAVA_HOME}/lib/security
 CONF_FILES=	# empty
+
+LICENSE=	sun-jre6-license
 
 .include "../../lang/sun-jre6/Makefile.common"
 

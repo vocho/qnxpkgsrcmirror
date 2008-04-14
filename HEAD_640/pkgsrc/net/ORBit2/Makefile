@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.60 2007/10/31 19:48:32 drochner Exp $
+# $NetBSD: Makefile,v 1.62 2008/02/15 07:40:39 wiz Exp $
 #
 
-DISTNAME=		ORBit2-2.14.10
+DISTNAME=		ORBit2-2.14.12
 CATEGORIES=		net gnome
 MASTER_SITES=		${MASTER_SITE_GNOME:=sources/ORBit2/2.14/}
 EXTRACT_SUFX=		.tar.bz2
@@ -21,6 +21,7 @@ MAKE_JOBS_SAFE=		no
 USE_TOOLS+=		gmake pkg-config
 USE_LIBTOOL=		YES
 GNU_CONFIGURE=		YES
+# needs interaction
 #TEST_TARGET=		check
 
 CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR:Q}

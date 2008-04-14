@@ -1,19 +1,26 @@
-$NetBSD: patch-aa,v 1.3 2003/09/18 19:13:54 wiz Exp $
+$NetBSD: patch-aa,v 1.5 2008/03/11 02:18:22 tnn Exp $
 
---- src/Makefile.in.orig	2002-03-26 17:09:36.000000000 +0100
-+++ src/Makefile.in
-@@ -379,12 +379,12 @@ uninstall-am: uninstall-binPROGRAMS unin
+--- src/search.c.orig	2007-06-28 20:57:19.000000000 +0200
++++ src/search.c
+@@ -280,18 +280,18 @@ GEAcompile (char const *pattern, size_t 
+ #ifndef EGREP_PROGRAM
+ COMPILE_FCT(Gcompile)
+ {
+-  return GEAcompile (pattern, size,
++  GEAcompile (pattern, size,
+ 		     RE_SYNTAX_GREP | RE_HAT_LISTS_NOT_NEWLINE);
+ }
  
- egrep:
- 	echo '#!/bin/sh' >$@
--	echo 'exec grep -E $${1+"$$@"}' >>$@
-+	echo 'exec $(bindir)/'`echo grep|sed '$(transform)'`' -E $${1+"$$@"}' >>$@
- 	chmod a+x $@
+ COMPILE_FCT(Acompile)
+ {
+-  return GEAcompile (pattern, size, RE_SYNTAX_AWK);
++  GEAcompile (pattern, size, RE_SYNTAX_AWK);
+ }
  
- fgrep:
- 	echo '#!/bin/sh' >$@
--	echo 'exec grep -F $${1+"$$@"}' >>$@
-+	echo 'exec $(bindir)/'`echo grep|sed '$(transform)'`' -F $${1+"$$@"}' >>$@
- 	chmod a+x $@
- # Tell versions [3.59,3.63) of GNU make to not export all variables.
- # Otherwise a system limit (for SysV at least) may be exceeded.
+ COMPILE_FCT(Ecompile)
+ {
+-  return GEAcompile (pattern, size, RE_SYNTAX_POSIX_EGREP);
++  GEAcompile (pattern, size, RE_SYNTAX_POSIX_EGREP);
+ }
+ #endif /* !EGREP_PROGRAM */
+ 

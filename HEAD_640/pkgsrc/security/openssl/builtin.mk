@@ -1,4 +1,4 @@
-# $NetBSD: builtin.mk,v 1.22 2007/09/07 17:26:23 jlam Exp $
+# $NetBSD: builtin.mk,v 1.25 2008/01/17 06:42:47 tnn Exp $
 
 BUILTIN_PKG:=	openssl
 
@@ -125,10 +125,10 @@ USE_BUILTIN.openssl=	${IS_BUILTIN.openssl}
 .    if defined(BUILTIN_PKG.openssl) && \
         !empty(IS_BUILTIN.openssl:M[yY][eE][sS])
 USE_BUILTIN.openssl=	yes
-.      for _dep_ in ${BUILDLINK_API_DEPENDS.openssl}
+.      for dep_ in ${BUILDLINK_API_DEPENDS.openssl}
 .        if !empty(USE_BUILTIN.openssl:M[yY][eE][sS])
 USE_BUILTIN.openssl!=							\
-	if ${PKG_ADMIN} pmatch ${_dep_:Q} ${BUILTIN_PKG.openssl:Q}; then \
+	if ${PKG_ADMIN} pmatch ${dep_:Q} ${BUILTIN_PKG.openssl:Q}; then \
 		${ECHO} yes;						\
 	else								\
 		${ECHO} no;						\
@@ -136,7 +136,8 @@ USE_BUILTIN.openssl!=							\
 .        endif
 .      endfor
 .    endif
-.    if defined(USE_FEATURES.openssl)
+.    if !empty(IS_BUILTIN.openssl:M[yY][eE][sS]) && \
+	defined(USE_FEATURES.openssl)
 .      if !empty(USE_FEATURES.openssl:Mthreads) && \
 	  !empty(BUILTIN_OPENSSL_HAS_THREADS:M[nN][oO])
 USE_BUILTIN.openssl=	no
@@ -193,7 +194,7 @@ BUILDLINK_TARGETS+=	buildlink-openssl-des-h
 .    if !target(buildlink-openssl-des-h)
 .PHONY: buildlink-openssl-des-h
 buildlink-openssl-des-h:
-	${_PKG_SILENT}${_PKG_DEBUG}					\
+	${RUN}								\
 	bl_odes_h="${BUILDLINK_DIR}/include/openssl/des.h";		\
 	bl_odes_old_h="${BUILDLINK_DIR}/include/openssl/des_old.h";	\
 	odes_h="${BUILDLINK_PREFIX.openssl}/include/openssl/des.h";	\

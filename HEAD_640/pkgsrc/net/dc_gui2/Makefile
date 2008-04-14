@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.38 2007/09/21 13:04:11 wiz Exp $
+# $NetBSD: Makefile,v 1.41 2008/03/06 14:53:52 wiz Exp $
 #
 
 DISTNAME=	dc_gui2-0.75
-PKGREVISION=	21
+PKGREVISION=	23
 CATEGORIES=	net
-MASTER_SITES=	http://www.ac2i.tzo.com/dctc/ \
-		http://brainz.servebeer.com/dctc/
+MASTER_SITES=	http://ac2i.homelinux.com/dctc/ \
+		http://dc.tddm.se/clients/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.ac2i.tzo.com/dctc/
+HOMEPAGE=	http://ac2i.homelinux.com/dctc/
 COMMENT=	Graphical user interface for DCTC
 
 DEPENDS+=	dctc>=0.85.4:../../net/dctc

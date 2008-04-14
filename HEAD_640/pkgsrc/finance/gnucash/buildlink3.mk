@@ -1,4 +1,4 @@
-# $NetBSD: buildlink3.mk,v 1.6 2007/09/21 13:03:41 wiz Exp $
+# $NetBSD: buildlink3.mk,v 1.10 2008/03/07 22:53:24 wiz Exp $
 
 BUILDLINK_DEPTH:=	${BUILDLINK_DEPTH}+
 GNUCASH_BUILDLINK3_MK:=	${GNUCASH_BUILDLINK3_MK}+
@@ -13,8 +13,8 @@ BUILDLINK_ORDER:=	${BUILDLINK_ORDER} ${BUILDLINK_DEPTH}gnucash
 
 .if ${GNUCASH_BUILDLINK3_MK} == "+"
 BUILDLINK_API_DEPENDS.gnucash+=	gnucash>=2.1.0
-BUILDLINK_ABI_DEPENDS.gnucash?=	gnucash>=2.1.3
-BUILDLINK_PKGSRCDIR.gnucash?=	../../finance/gnucash-current
+BUILDLINK_ABI_DEPENDS.gnucash?=	gnucash>=2.2.3nb2
+BUILDLINK_PKGSRCDIR.gnucash?=	../../finance/gnucash
 .endif	# GNUCASH_BUILDLINK3_MK
 
 #.include "../../archivers/bzip2/buildlink3.mk"
@@ -29,7 +29,7 @@ BUILDLINK_PKGSRCDIR.gnucash?=	../../finance/gnucash-current
 #.include "../../finance/libofx/buildlink3.mk"
 #.include "../../lang/guile/buildlink3.mk"
 #.include "../../lang/perl5/buildlink3.mk"
-#.include "../../misc/goffice0.2/buildlink3.mk"
+#.include "../../misc/goffice0.6/buildlink3.mk"
 #.include "../../print/libgnomeprint/buildlink3.mk"
 #.include "../../print/libgnomeprintui/buildlink3.mk"
 #.include "../../textproc/libxml2/buildlink3.mk"

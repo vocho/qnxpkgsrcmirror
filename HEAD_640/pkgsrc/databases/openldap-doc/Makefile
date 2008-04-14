@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.8 2007/11/18 19:46:16 ghen Exp $
+# $NetBSD: Makefile,v 1.11 2008/02/24 20:15:06 ghen Exp $
 
-DISTNAME=		openldap-2.3.39
+DISTNAME=		openldap-2.4.8
 PKGNAME=		${DISTNAME:S/-/-doc-/}
 CATEGORIES=		databases
 MASTER_SITES=		ftp://ftp.openldap.org/pub/OpenLDAP/openldap-release/
@@ -24,28 +24,29 @@ MAINTAINER=		ghen@NetBSD.org
 HOMEPAGE=		http://www.openldap.org/
 COMMENT=		Lightweight Directory Access Protocol documentation
 
+PKG_DESTDIR_SUPPORT=	user-destdir
+
 DISTINFO_FILE=		${.CURDIR}/../../databases/openldap/distinfo
 
 NO_CONFIGURE=		yes
 NO_BUILD=		yes
 
 DOCDIR=			${PREFIX}/share/doc/openldap
-IMAGES=			config_dit.gif config_local.gif config_ref.gif
-IMAGES+=		config_repl.gif config_x500fe.gif config_x500ref.gif
-IMAGES+=		intro_dctree.gif intro_tree.gif replication.gif
+IMAGES=			config_dit.png config_local.png config_ref.png
+IMAGES+=		config_repl.gif intro_dctree.png intro_tree.png
 
 do-install:
-	${INSTALL_DATA_DIR} ${DOCDIR}
-	${INSTALL_DATA_DIR} ${DOCDIR}/admin
-	${INSTALL_DATA_DIR} ${DOCDIR}/images
-	${INSTALL_DATA} ${WRKSRC}/doc/guide/COPYRIGHT ${DOCDIR}/
-	${INSTALL_DATA} ${WRKSRC}/doc/guide/LICENSE ${DOCDIR}/
-	${INSTALL_DATA} ${WRKSRC}/doc/guide/README ${DOCDIR}/
-	${INSTALL_DATA} ${WRKSRC}/doc/guide/images/LDAPlogo.gif ${DOCDIR}/images/
-	${INSTALL_DATA} ${WRKSRC}/doc/guide/images/LDAPwww.gif ${DOCDIR}/images/
-	${INSTALL_DATA} ${WRKSRC}/doc/guide/admin/guide.html ${DOCDIR}/admin/
+	${INSTALL_DATA_DIR} ${DESTDIR}${DOCDIR}
+	${INSTALL_DATA_DIR} ${DESTDIR}${DOCDIR}/admin
+	${INSTALL_DATA_DIR} ${DESTDIR}${DOCDIR}/images
+	${INSTALL_DATA} ${WRKSRC}/doc/guide/COPYRIGHT ${DESTDIR}${DOCDIR}/
+	${INSTALL_DATA} ${WRKSRC}/doc/guide/LICENSE ${DESTDIR}${DOCDIR}/
+	${INSTALL_DATA} ${WRKSRC}/doc/guide/README ${DESTDIR}${DOCDIR}/
+	${INSTALL_DATA} ${WRKSRC}/doc/guide/images/LDAPlogo.gif ${DESTDIR}${DOCDIR}/images/
+	${INSTALL_DATA} ${WRKSRC}/doc/guide/images/LDAPwww.gif ${DESTDIR}${DOCDIR}/images/
+	${INSTALL_DATA} ${WRKSRC}/doc/guide/admin/guide.html ${DESTDIR}${DOCDIR}/admin/
 .for file in ${IMAGES}
-	${INSTALL_DATA} ${WRKSRC}/doc/guide/admin/${file} ${DOCDIR}/admin/
+	${INSTALL_DATA} ${WRKSRC}/doc/guide/admin/${file} ${DESTDIR}${DOCDIR}/admin/
 .endfor
 
 .include "../../mk/bsd.pkg.mk"

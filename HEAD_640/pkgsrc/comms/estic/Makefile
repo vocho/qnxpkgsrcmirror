@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.25 2007/01/30 20:04:15 joerg Exp $
+# $NetBSD: Makefile,v 1.27 2008/03/03 05:33:32 jlam Exp $
 
 DISTNAME=	estic-1.61
 PKGREVISION=	1
@@ -21,36 +21,35 @@ NO_BIN_ON_FTP=		${RESTRICTED}
 NO_SRC_ON_CDROM=	${RESTRICTED}
 NO_BIN_ON_CDROM=	${RESTRICTED}
 
+PKG_DESTDIR_SUPPORT=	user-destdir
+
 WRKSRC=		${WRKDIR}/${PKGNAME_NOREV:C/-.*//}
 
 USE_LANGUAGES=	c c++
+USE_TOOLS+=	patch unzip
 
 BUILD_TARGET=	depend all
 ESTICPATCH=	${DISTNAME}-patch-from-1.60${EXTRACT_SUFX}
-LIB_TARGET=	depend lib
-LIBSRC=		${WRKDIR}/spunk
 MAKE_FILE=	make/freebsd-x.mak
 
 INSTALLATION_DIRS=	bin
 
 post-extract:
-	${_PKG_SILENT}${_PKG_DEBUG}cd ${WRKSRC} && \
-	${LOCALBASE}/bin/unzip -p ${DISTDIR}/${ESTICPATCH} | \
-		${PATCH} -p0 ${PATCH_DIST_ARGS}
+	cd ${WRKSRC} && \
+	unzip -p ${DISTDIR}/${ESTICPATCH} \
+	| ${PATCH} -p0 ${PATCH_DIST_ARGS}
 
 pre-build:
-	${_PKG_SILENT}${_PKG_DEBUG}cd ${LIBSRC} && \
-	${SETENV} ${MAKE_ENV} ${MAKE_PROGRAM} ${MAKE_FLAGS} -f ${MAKE_FILE} \
-	  ${LIB_TARGET}
+	cd ${WRKDIR}/spunk && ${BUILD_MAKE_CMD} depend lib
 
 do-install:
-	${INSTALL_PROGRAM} ${WRKSRC}/xestic ${PREFIX}/bin
-	${INSTALL_DATA} ${WRKSRC}/estic.res ${PREFIX}/bin
-	${INSTALL_DATA_DIR} ${PREFIX}/share/doc/estic
-	${INSTALL_DATA} ${WRKSRC}/estic.doc ${PREFIX}/share/doc/estic
-	${INSTALL_DATA_DIR} ${PREFIX}/share/examples/estic
+	${INSTALL_PROGRAM} ${WRKSRC}/xestic ${DESTDIR}${PREFIX}/bin
+	${INSTALL_DATA} ${WRKSRC}/estic.res ${DESTDIR}${PREFIX}/bin
+	${INSTALL_DATA_DIR} ${DESTDIR}${PREFIX}/share/doc/estic
+	${INSTALL_DATA} ${WRKSRC}/estic.doc ${DESTDIR}${PREFIX}/share/doc/estic
+	${INSTALL_DATA_DIR} ${DESTDIR}${PREFIX}/share/examples/estic
 	cd ${WRKSRC}/samples && \
-	${INSTALL_DATA} * ${PREFIX}/share/examples/estic
+	${INSTALL_DATA} * ${DESTDIR}${PREFIX}/share/examples/estic
 
 .include "../../x11/libX11/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

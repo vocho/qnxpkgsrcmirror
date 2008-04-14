@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.19 2007/09/05 19:04:00 shannonjr Exp $
+# $NetBSD: Makefile,v 1.21 2008/03/06 14:53:53 wiz Exp $
 #
 
 DISTNAME=		libpreludedb-0.9.13
+PKGREVISION=		2
 CATEGORIES=		security
 MASTER_SITES=		http://www.prelude-ids.org/download/releases/ \
 			http://www.prelude-ids.org/download/releases/old/
@@ -15,7 +16,7 @@ COMMENT=		Provides an interface to the database used to store IDMEF alerts
 USE_PKGLOCALEDIR=	yes
 USE_LIBTOOL=		yes
 GNU_CONFIGURE=		yes
-USE_TOOLS+=		make
+USE_TOOLS+=		make perl:run
 CONFIGURE_ARGS+=	-enable-mysql
 CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR:Q}
 CONFIGURE_ARGS+=	--enable-python

@@ -1,5 +1,4 @@
-# $NetBSD: Makefile,v 1.162 2007/12/17 23:40:48 minskim Exp $
-#
+# $NetBSD: Makefile,v 1.165 2008/03/11 16:06:32 taca Exp $
 
 COMMENT=	Mathematics
 
@@ -69,7 +68,6 @@ SUBDIR+=	geg
 SUBDIR+=	genius
 SUBDIR+=	glpk
 SUBDIR+=	gnumeric
-SUBDIR+=	gnumeric-current
 SUBDIR+=	gp-autpgrp
 SUBDIR+=	gp-factint
 SUBDIR+=	gp-fplsa
@@ -142,7 +140,6 @@ SUBDIR+=	qalculate-units
 SUBDIR+=	qhull
 SUBDIR+=	quadpack
 SUBDIR+=	randlib
-SUBDIR+=	ruby-gsl
 SUBDIR+=	ruby-rb-gsl
 SUBDIR+=	sc
 SUBDIR+=	scilab

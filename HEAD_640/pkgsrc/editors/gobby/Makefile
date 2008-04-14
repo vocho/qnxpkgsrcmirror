@@ -1,11 +1,12 @@
-# $NetBSD: Makefile,v 1.3 2007/12/08 10:41:47 rillig Exp $
+# $NetBSD: Makefile,v 1.6 2008/03/06 14:53:49 wiz Exp $
 #
 
 DISTNAME=	gobby-0.4.5
+PKGREVISION=	2
 CATEGORIES=	editors
 MASTER_SITES=	http://releases.0x539.de/gobby/
 
-MAINTAINER=	rillig@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://gobby.0x539.de/
 COMMENT=	Collaborative Editor
 

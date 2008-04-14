@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.25 2006/07/06 20:51:25 adam Exp $
+# $NetBSD: Makefile,v 1.27 2008/03/22 08:48:17 adam Exp $
 
 DISTNAME=	pngcrush-1.6.4-nolib
 PKGNAME=	pngcrush-1.6.4
@@ -10,16 +10,18 @@ MAINTAINER=	rh@NetBSD.org
 HOMEPAGE=	http://pmt.sourceforge.net/pngcrush/index.html
 COMMENT=	Optimizer for PNG (Portable Network Graphics) files
 
+PKG_DESTDIR_SUPPORT=	user-destdir
+
 NO_CONFIGURE=		yes
 INSTALLATION_DIRS=	bin
 
 do-build:
 	cd ${WRKSRC} && ${CC} -DPNG_USE_LOCAL_ARRAYS \
 		${CFLAGS} `libpng-config --cflags` -o pngcrush pngcrush.c \
-		`libpng-config --ldflags` -lz
+		${LDFLAGS} `libpng-config --ldflags` -lz
 
 do-install:
-	${INSTALL_PROGRAM} ${WRKSRC}/pngcrush ${PREFIX}/bin
+	${INSTALL_PROGRAM} ${WRKSRC}/pngcrush ${DESTDIR}${PREFIX}/bin
 
 .include "../../graphics/png/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

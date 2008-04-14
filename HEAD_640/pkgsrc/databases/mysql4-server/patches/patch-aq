@@ -1,4 +1,4 @@
-$NetBSD: patch-aq,v 1.6 2007/05/23 08:11:51 martti Exp $
+$NetBSD: patch-aq,v 1.8 2008/03/26 13:22:00 wiz Exp $
 
 --- include/Makefile.in.orig	2006-11-03 04:18:30.000000000 +0200
 +++ include/Makefile.in	2007-05-23 08:54:47.000000000 +0300

@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.39 2007/11/25 17:18:22 wiz Exp $
+# $NetBSD: Makefile,v 1.41 2008/03/08 22:03:22 tnn Exp $
 
 DISTNAME=	gnustep-make-2.0.2
+PKGREVISION=	1
 CATEGORIES=	devel gnustep
 MASTER_SITES=	${MASTER_SITE_GNUSTEP:=core/}
 
@@ -17,7 +18,7 @@ USE_TOOLS+=		csh
 GNU_CONFIGURE=		yes
 CONFIGURE_ENV+=		INSTALL_PROGRAM=${INSTALL_SCRIPT:Q}
 CONFIGURE_ARGS+=	--disable-importing-config-file
-CONFIGURE_ARGS+=	--with-config-file=${PREFIX}/etc/GNUstep.conf
+CONFIGURE_ARGS+=	--with-config-file=${PKG_SYSCONFDIR}/GNUstep.conf
 MAKE_FILE=		GNUmakefile
 
 CONF_FILES+=		${PREFIX}/share/examples/GNUstep/GNUstep.conf \

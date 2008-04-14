@@ -1,4 +1,4 @@
-# $NetBSD: IRIX.mk,v 1.32 2007/10/19 13:41:35 rillig Exp $
+# $NetBSD: IRIX.mk,v 1.34 2008/03/04 06:45:34 jlam Exp $
 #
 # Variable definitions for the IRIX operating system.
 
@@ -72,7 +72,6 @@ _OPSYS_HAS_INET6=	no		# IPv6 is not standard
 _OPSYS_HAS_JAVA=	no		# Java is not standard
 _OPSYS_HAS_MANZ=	no		# no MANZ for gzipping of man pages
 _OPSYS_HAS_OSSAUDIO=	no		# libossaudio is available
-_OPSYS_NEEDS_XPKGWEDGE=	yes		# xpkgwedge is required for X11
 _OPSYS_PERL_REQD=			# no base version of perl required
 _OPSYS_PTHREAD_AUTO=	no		# -lpthread needed for pthreads
 _OPSYS_SHLIB_TYPE=	ELF		# shared lib type
@@ -116,8 +115,10 @@ _OPSYS_MAX_CMDLEN_CMD=	/usr/sbin/sysconf ARG_MAX
 # BINOWN, BINGRP and BINMODE as per defaults/mk.conf).
 # FIXME: Adjust to work on this system and enable the lines below.
 #.if !(empty(SETGIDGAME:M[yY][eE][sS]))
-#GAMEOWN=		games
-#GAMEGRP=		games
+#GAMES_USER=		games
+#GAMES_GROUP=		games
+#GAMEOWN=		${GAMES_USER}
+#GAMEGRP=		${GAMES_GROUP}
 #GAMEMODE=		2555
 #GAMEDIRMODE=		0775
 #.endif

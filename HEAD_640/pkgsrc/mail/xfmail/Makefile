@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.41 2006/12/15 20:32:58 joerg Exp $
+# $NetBSD: Makefile,v 1.43 2008/03/17 11:33:35 obache Exp $
 
 DISTNAME=		xfmail-1.5.5
 PKGREVISION=		1
 CATEGORIES=		mail x11
-MASTER_SITES=		ftp://xfmail.ufies.org/pub/xfmail/release/1.4.7/source/
+MASTER_SITES=		ftp://xfmail.ufies.org/pub/xfmail/release/1.5.5/source/
 EXTRACT_SUFX=		.tar.bz2
 
-MAINTAINER=		root@garbled.net
+MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://xfmail.slappy.org/
 COMMENT=		Xforms based mail application for Unix operating systems
 

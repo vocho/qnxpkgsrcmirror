@@ -1,6 +1,17 @@
-# $NetBSD: Darwin.mk,v 1.28 2007/12/16 12:36:28 tron Exp $
+# $NetBSD: Darwin.mk,v 1.31 2008/03/04 06:45:34 jlam Exp $
 #
 # Variable definitions for the Darwin operating system.
+
+# OS, Kernel, Xcode Version
+#
+# Codename	OS	Kernel	Xcode
+# Cheetah	10.0.x	1.3.1
+# Puma		10.1	1.4.1
+#		10.1.x	5.x.y
+# Jaguar	10.2.x	6.x.y
+# Panther	10.3.x	7.x.y
+# Tiger		10.4.x	8.x.y	2.x (gcc 4.0, 4.0.1 from 2.2)
+# Leopard	10.5.x	9.x.y	3.0
 
 .if !defined(CPP) || ${CPP} == "cpp"
 CPP=		${CC} -E ${CPP_PRECOMP_FLAGS}
@@ -24,7 +35,9 @@ IMAKEOPTS+=	-DInstallFlags=-c		# do not set user or group
 .endif
 
 .if !defined(PKGSRC_COMPILER) || !empty(PKGSRC_COMPILER:Mgcc)
-CPP_PRECOMP_FLAGS?=	-no-cpp-precomp	# use the GNU cpp, not the OS X cpp
+# Use the GNU cpp, not the OS X cpp, don't look in "/usr/local/include"
+# before "/usr/include".
+CPP_PRECOMP_FLAGS?=	-no-cpp-precomp	-isystem /usr/include
 .endif
 DEF_UMASK?=		0022
 DEFAULT_SERIAL_DEVICE?=	/dev/null
@@ -105,8 +118,10 @@ CONFIGURE_ENV+=		ac_cv_func_poll=no
 # BINOWN, BINGRP and BINMODE as per defaults/mk.conf).
 # FIXME: Adjust to work on this system and enable the lines below.
 #.if !(empty(SETGIDGAME:M[yY][eE][sS]))
-#GAMEOWN=		games
-#GAMEGRP=		games
+#GAMES_USER=		games
+#GAMES_GROUP=		games
+#GAMEOWN=		${GAMES_USER}
+#GAMEGRP=		${GAMES_GROUP}
 #GAMEMODE=		2555
 #GAMEDIRMODE=		0775
 #.endif

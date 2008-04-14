@@ -1,13 +1,15 @@
-$NetBSD$
+$NetBSD: patch-ad,v 1.8 2008/01/13 09:30:57 joerg Exp $
 
---- configure.orig	2006-07-19 15:10:15.000000000 -0400
-+++ configure
-@@ -21396,7 +21396,7 @@ LIBTOOL='$(SHELL) $(top_builddir)/libtoo
+Always export locale_alias as e.g. libintl expects it.
+
+--- libcharset/include/localcharset.h.build.in.orig	2008-01-12 18:20:07.000000000 +0100
++++ libcharset/include/localcharset.h.build.in
+@@ -20,7 +20,7 @@
+ #ifndef _LOCALCHARSET_H
+ #define _LOCALCHARSET_H
  
-   CFLAG_VISIBILITY=
-   HAVE_VISIBILITY=0
--  if test -n "$GCC"; then
-+  if test -n "$GCC" && ! echo $host_os | grep ^nto-qnx > /dev/null; then
-     { echo "$as_me:$LINENO: checking for simple visibility declarations" >&5
- echo $ECHO_N "checking for simple visibility declarations... $ECHO_C" >&6; }
-     if test "${gl_cv_cc_visibility+set}" = set; then
+-#if @HAVE_VISIBILITY@ && BUILDING_LIBCHARSET
++#if @HAVE_VISIBILITY@
+ #define LIBCHARSET_DLL_EXPORTED __attribute__((__visibility__("default")))
+ #else
+ #define LIBCHARSET_DLL_EXPORTED

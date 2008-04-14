@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.7 2007/06/02 17:51:48 jmmv Exp $
+# $NetBSD: Makefile,v 1.9 2008/02/05 23:01:14 heinz Exp $
 #
 
 BOOST_PACKAGE=		libs
@@ -6,10 +6,11 @@ BOOST_COMMENT=		(binary libraries)
 BOOST_CONFIG=		installed
 BOOST_INSTALL_LIBS=	yes
 
+PKG_DESTDIR_SUPPORT=	user-destdir
+
 .include "../../meta-pkgs/boost/Makefile.common"
 
 BJAM_ARGS+=		--without-python
-BJAM_ARGS+=		--without-serialization # Requires wide I/O
 
 .include "../../devel/boost-jam/bjam.mk"
 

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.12 2004/07/30 15:50:37 minskim Exp $
+# $NetBSD: Makefile,v 1.14 2008/03/03 00:51:44 jlam Exp $
 
 DISTNAME=		heapsort.c
 PKGNAME=		heapsort-1.0
@@ -6,10 +6,11 @@ CATEGORIES=		benchmarks
 MASTER_SITES=		ftp://ftp.nosc.mil/pub/aburto/heapsort/
 EXTRACT_SUFX=		#empty
 
-MAINTAINER=		root@garbled.net
+MAINTAINER=		pkgsrc-users@NetBSD.org
 COMMENT=		Benchmark program for variable sized arrays
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 WRKSRC=			${WRKDIR}
 
@@ -23,7 +24,7 @@ do-build:
 	(cd ${WRKSRC} ; ${CC} ${CFLAGS} -DUNIX -o heapsort heapsort.c -lm)
 
 do-install:
-	${INSTALL_PROGRAM} ${WRKSRC}/heapsort ${PREFIX}/bin
+	${INSTALL_PROGRAM} ${WRKSRC}/heapsort ${DESTDIR}${PREFIX}/bin
 
 benchmark:
 	-@${WRKSRC}/heapsort | tee ${WRKSRC}/heapsort.out

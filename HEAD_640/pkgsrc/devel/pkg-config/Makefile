@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.11 2007/11/30 22:12:07 wiz Exp $
+# $NetBSD: Makefile,v 1.13 2008/03/24 14:27:33 obache Exp $
 #
 
-DISTNAME=	pkg-config-0.22
+DISTNAME=	pkg-config-0.23
 CATEGORIES=	devel
 MASTER_SITES=	http://pkgconfig.freedesktop.org/releases/
 
@@ -28,6 +28,7 @@ CONFIGURE_ARGS+=	--cache-file=/dev/null
 
 .if ${OPSYS} == "NetBSD"
 CONFIGURE_ARGS+=	glib_cv_sane_realloc=yes glib_cv_uscore=no
+CONFIGURE_ARGS+=	glib_cv_rtldglobal_broken=no
 .endif
 
 # needed for fifth test case

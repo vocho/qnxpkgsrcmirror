@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.15 2006/10/17 21:45:14 rillig Exp $
+# $NetBSD: Makefile,v 1.17 2008/03/11 10:50:56 tron Exp $
 
 DISTNAME=	gqmpeg-skins-20030712
-PKGREVISION=	4
+PKGREVISION=	5
 CATEGORIES=	audio
 MASTER_SITES=	http://gqmpeg.sourceforge.net/skins/
 DISTFILES+=	\
@@ -80,6 +80,8 @@ COMMENT=	Skins for gqmpeg
 
 DEPENDS+=	gqmpeg-[0-9]*:../../audio/gqmpeg
 
+PKG_DESTDIR_SUPPORT=	user-destdir
+
 DIST_SUBDIR=	gqmpeg-skins
 WRKSRC=		${WRKDIR}
 NO_BUILD=	yes
@@ -91,14 +93,15 @@ INSTALLATION_DIRS=	share/gqmpeg/skins
 do-install:
 		for i in ${DISTFILES} ; do \
 			${ECHO} unpacking $$i ; \
-			${CAT} ${DISTDIR}/${DIST_SUBDIR}/$$i | ( cd ${PREFIX}/share/gqmpeg/skins ; \
+			${CAT} ${DISTDIR}/${DIST_SUBDIR}/$$i | ( cd ${DESTDIR}${PREFIX}/share/gqmpeg/skins ; \
 				    ${GTAR} -zxf - ) ; \
 		done
-		${FIND} ${PREFIX}/share/gqmpeg/skins -type d -print | \
+		${FIND} ${DESTDIR}${PREFIX}/share/gqmpeg/skins -type d -print | \
 		${XARGS} ${CHMOD} 755
-		${FIND} ${PREFIX}/share/gqmpeg/skins -type f -print | \
+		${FIND} ${DESTDIR}${PREFIX}/share/gqmpeg/skins -type f -print | \
 		${XARGS} ${CHMOD} 644
-		${FIND} ${PREFIX}/share/gqmpeg/skins -name "*~" -print | \
+		${FIND} ${DESTDIR}${PREFIX}/share/gqmpeg/skins -name "*~" -print | \
 		${XARGS} ${RM}
+		${CHOWN} -R ${BINOWN}:${BINGRP}  ${DESTDIR}${PREFIX}/share/gqmpeg/skins
 
 .include "../../mk/bsd.pkg.mk"

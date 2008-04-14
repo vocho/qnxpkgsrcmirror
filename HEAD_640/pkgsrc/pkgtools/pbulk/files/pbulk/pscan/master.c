@@ -1,4 +1,4 @@
-/* $NetBSD: master.c,v 1.4 2007/07/21 15:36:36 tnn Exp $ */
+/* $NetBSD: master.c,v 1.6 2008/01/27 14:01:23 joerg Exp $ */
 
 /*-
  * Copyright (c) 2007 Joerg Sonnenberger <joerg@NetBSD.org>.
@@ -54,7 +54,12 @@
 #include "pbulk.h"
 #include "pscan.h"
 
+static int clients_started;
 static LIST_HEAD(, scan_peer) active_peers, inactive_peers;
+static struct event listen_event;
+static int listen_event_socket;
+static struct event child_event;
+static pid_t child_pid;
 
 struct scan_peer {
 	LIST_ENTRY(scan_peer) peer_link;
@@ -147,16 +152,31 @@ send_job_path(void *arg)
 }
 
 static void
+shutdown_master(void)
+{
+	struct timeval tv;
+	struct scan_peer *peer;
+
+	event_del(&listen_event);
+	(void)close(listen_event_socket);
+	LIST_FOREACH(peer, &inactive_peers, peer_link)
+		(void)shutdown(peer->fd, SHUT_RDWR);
+	tv.tv_sec = 1;
+	tv.tv_usec = 0;
+	event_loopexit(&tv);
+}
+
+static void
 assign_job(struct scan_peer *peer)
 {
 	size_t job_len;
 	uint16_t net_job_len;
 
-	peer->job = get_job();
+	peer->job = clients_started ? get_job() : NULL;
 	if (peer->job == NULL) {
 		LIST_INSERT_HEAD(&inactive_peers, peer, peer_link);
-		if (LIST_EMPTY(&active_peers))
-			event_loopexit(NULL);
+		if (LIST_EMPTY(&active_peers) && clients_started)
+			shutdown_master();
 		return;
 	}
 
@@ -198,10 +218,34 @@ listen_handler(int sock, short event, void *arg)
 	assign_job(peer);
 }
 
+static void
+child_handler(int dummy, short event, void *arg)
+{
+	struct scan_peer *peer;
+	int status;
+
+	if (waitpid(child_pid, &status, WNOHANG) == -1) {
+		if (errno == ECHILD)
+			return;
+		err(1, "Could not wait for child");
+	}
+	if (status != 0)
+		err(1, "Start script failed");
+
+	clients_started = 1;
+	signal_del(&child_event);
+
+	while ((peer = LIST_FIRST(&inactive_peers)) != NULL) {
+		LIST_REMOVE(peer, peer_link);
+		assign_job(peer);
+		if (peer-> job == NULL)
+			break;
+	}
+}
+
 void
 master_mode(const char *master_port, const char *start_script)
 {
-	struct event listen_event;
 	struct sockaddr_in dst;
 	int fd;
 
@@ -225,23 +269,23 @@ master_mode(const char *master_port, const char *start_script)
 	if (listen(fd, 5) == -1)
 		err(1, "Could not listen on socket");
 
+	event_set(&listen_event, fd, EV_READ | EV_PERSIST, listen_handler, NULL);
+	event_add(&listen_event, NULL);
+	listen_event_socket = fd;
+
 	if (start_script) {
-		pid_t child;
-		int status;
-	
-		if ((child = vfork()) == 0) {
+		signal_set(&child_event, SIGCHLD, child_handler, NULL);
+		signal_add(&child_event, NULL);
+
+		if ((child_pid = vfork()) == 0) {
 			execlp(start_script, start_script, (char *)NULL);
 			_exit(255);
 		}
-		if (child == -1)
+		if (child_pid == -1)
 			err(1, "Could not fork start script");
-		waitpid(child, &status, 0);
-		if (status != 0)
-			err(1, "Start script failed");
+	} else {
+		clients_started = 1;
 	}
-
-	event_set(&listen_event, fd, EV_READ | EV_PERSIST, listen_handler, NULL);
-	event_add(&listen_event, NULL);
 
 	event_dispatch();
 

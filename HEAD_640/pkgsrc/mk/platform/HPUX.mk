@@ -1,8 +1,7 @@
-# $NetBSD: HPUX.mk,v 1.10 2007/10/19 13:41:35 rillig Exp $
+# $NetBSD: HPUX.mk,v 1.13 2008/01/16 03:16:40 tnn Exp $
 #
 # Variable definitions for the HP-UX operating system.
 
-CPP?=		/opt/langtools/lbin/cpp
 ECHO_N?=	/usr/bin/printf		# echo doesn't understand -n
 IMAKE_MAKE?=	${MAKE}			# program which gets invoked by imake
 PKGLOCALEDIR=	share
@@ -26,6 +25,15 @@ TOUCH_FLAGS?=				# touch doesn't understand -f
 ULIMIT_CMD_datasize?=	ulimit -d `ulimit -H -d`
 ULIMIT_CMD_stacksize?=	ulimit -s `ulimit -H -s`
 ULIMIT_CMD_memorysize?=	ulimit -m `ulimit -H -m`
+
+# native X11 on HP-UX is rather old and breaks many packages.
+# The modular X.org userland works rather well, apart from the server which
+# is unlikely to ever be supported due to proprietary graphics hardware.
+X11_TYPE?=		modular
+
+# Fix broken system headers by using pkgtools/posix_headers
+FIX_SYSTEM_HEADERS?=	yes
+
 # imake installs manpages in weird places
 # these values from /usr/X11R6/lib/X11/config/NetBSD.cf
 IMAKE_MAN_SOURCE_PATH=	man/cat

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.11 2004/07/30 15:50:37 minskim Exp $
+# $NetBSD: Makefile,v 1.13 2008/03/03 00:51:44 jlam Exp $
 
 DISTNAME=		flops
 PKGNAME=		flops-2.0
@@ -6,11 +6,12 @@ CATEGORIES=		benchmarks
 MASTER_SITES=		ftp://ftp.nosc.mil/pub/aburto/flops/
 DISTFILES=		${DISTNAME}.c ${DISTNAME}.doc
 
-MAINTAINER=		root@garbled.net
+MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://performance.netlib.org/performance/html/flops.html
 COMMENT=		Floating point benchmark to give your MFLOPS rating
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 WRKSRC=			${WRKDIR}
 
@@ -25,9 +26,9 @@ do-build:
 	(cd ${WRKSRC} ; ${CC} ${CFLAGS} -DUNIX -o flops flops.c -lm)
 
 do-install:
-	${INSTALL_PROGRAM} ${WRKSRC}/flops ${PREFIX}/bin
-	${INSTALL_DATA_DIR} ${PREFIX}/share/doc/flops
-	${INSTALL_DATA} ${WRKSRC}/flops.doc ${PREFIX}/share/doc/flops
+	${INSTALL_PROGRAM} ${WRKSRC}/flops ${DESTDIR}${PREFIX}/bin
+	${INSTALL_DATA_DIR} ${DESTDIR}${PREFIX}/share/doc/flops
+	${INSTALL_DATA} ${WRKSRC}/flops.doc ${DESTDIR}${PREFIX}/share/doc/flops
 
 benchmark:
 	-@${WRKSRC}/flops | tee ${WRKSRC}/flops.out

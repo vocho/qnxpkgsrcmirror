@@ -1,4 +1,4 @@
-# $NetBSD: replace.mk,v 1.203 2007/12/18 10:18:49 markd Exp $
+# $NetBSD: replace.mk,v 1.209 2008/02/29 00:23:09 tnn Exp $
 #
 # Copyright (c) 2005 The NetBSD Foundation, Inc.
 # All rights reserved.
@@ -282,6 +282,17 @@ TOOLS_PATH.bzcat=		${TOOLS_PREFIX.${_t_}}/bin/${_t_}
 .    endif
 .  endif
 .endfor
+
+.if !defined(TOOLS_IGNORE.chrpath) && !empty(_USE_TOOLS:Mchrpath)
+.  if !empty(PKGPATH:Mdevel/chrpath)
+MAKEFLAGS+=			TOOLS_IGNORE.chrpath=
+.  elif !empty(_TOOLS_USE_PKGSRC.chrpath:M[yY][eE][sS])
+TOOLS_DEPENDS.chrpath?=		chrpath>=0.13:../../devel/chrpath
+TOOLS_CREATE+=			chrpath
+TOOLS_FIND_PREFIX+=		TOOLS_PREFIX.chrpath=chrpath
+TOOLS_PATH.chrpath=		${TOOLS_PREFIX.chrpath}/bin/chrpath
+.  endif
+.endif
 
 .for _t_ in cmake cpack
 .  if !defined(TOOLS_IGNORE.${_t_}) && !empty(_USE_TOOLS:M${_t_})
@@ -895,14 +906,20 @@ _TOOLS.groff=	groff nroff soelim tbl
 .  if !defined(TOOLS_IGNORE.${_t_}) && !empty(_USE_TOOLS:M${_t_})
 .    if !empty(PKGPATH:Mtextproc/groff)
 MAKEFLAGS+=		TOOLS_IGNORE.${_t_}=
-.    elif !empty(_TOOLS_USE_PKGSRC.${_t_}:M[yY][eE][sS])
+.    else
+.      if defined(_TOOLS_USE_PKGSRC.groff) && \
+        !empty(_TOOLS_USE_PKGSRC.groff:M[yY][eE][sS])
+_TOOLS_USE_PKGSRC.${_t_}= yes
+.      endif
+.      if !empty(_TOOLS_USE_PKGSRC.${_t_}:M[yY][eE][sS])
 TOOLS_DEPENDS.${_t_}?=	groff>=1.19.2nb3:../../textproc/groff
 TOOLS_CREATE+=		${_t_}
 TOOLS_FIND_PREFIX+=	TOOLS_PREFIX.${_t_}=groff
-.      if ${OPSYS} == "SunOS"
+.        if ${OPSYS} == "SunOS" && "${_t_}" != "groff"
 TOOLS_PATH.${_t_}=	${TOOLS_PREFIX.${_t_}}/bin/g${_t_}
-.      else
+.        else
 TOOLS_PATH.${_t_}=	${TOOLS_PREFIX.${_t_}}/bin/${_t_}
+.        endif
 .      endif
 .    endif
 .  endif
@@ -1182,7 +1199,7 @@ TOOLS_PATH.xmkmf=	${TOOLS_PREFIX.xpkgwedge}/bin/pkgxmkmf
 
 # Compute the locations of the pkgsrc-supplied tools.
 FIND_PREFIX:=	${TOOLS_FIND_PREFIX}
-.include "${PKGSRCDIR}/mk/find-prefix.mk"
+.include "../find-prefix.mk"
 
 ######################################################################
 

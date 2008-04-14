@@ -1,4 +1,4 @@
-# $NetBSD: bsd.prefs.mk,v 1.273 2007/10/17 10:37:43 rillig Exp $
+# $NetBSD: bsd.prefs.mk,v 1.280 2008/02/21 04:23:58 tnn Exp $
 #
 # This file includes the mk.conf file, which contains the user settings.
 #
@@ -82,11 +82,6 @@ _OS_VERSION_CMD=	${UNAME} -r
 OS_VERSION=		${_OS_VERSION_CMD:sh}
 MAKEFLAGS+=		OS_VERSION=${OS_VERSION:Q}
 .endif
-.if !defined(LOWER_OS_VERSION)
-_LOWER_OS_VERSION_CMD=	echo ${OS_VERSION:Q} | tr 'A-Z' 'a-z'
-LOWER_OS_VERSION=	${_LOWER_OS_VERSION_CMD:sh}
-MAKEFLAGS+=		LOWER_OS_VERSION=${LOWER_OS_VERSION:Q}
-.endif
 
 # Preload these for architectures not in all variations of bsd.own.mk,
 # which do not match their GNU names exactly.
@@ -119,7 +114,6 @@ _OS_VERSION!=		/usr/bin/oslevel
 _OS_VERSION!=		echo `${UNAME} -v`.`${UNAME} -r`
 .  endif
 OS_VERSION=		${_OS_VERSION:C/\([0-9]*\.[0-9]*\).*/\1/}
-LOWER_OS_VERSION=	${OS_VERSION}
 LOWER_OPSYS_VERSUFFIX=	${_OS_VERSION}
 LOWER_OPSYS?=		aix
 LOWER_VENDOR?=		ibm
@@ -170,7 +164,6 @@ OS_VERSION=		3.1
 .  else
 OS_VERSION=		3.0
 .  endif
-LOWER_OS_VERSION=	${OS_VERSION}
 
 .elif !empty(OPSYS:MIRIX*)
 LOWER_ARCH!=		${UNAME} -p
@@ -180,13 +173,15 @@ LOWER_VENDOR?=		sgi
 
 .elif ${OPSYS} == "Linux"
 OS_VERSION:=		${OS_VERSION:C/-.*$//}
-LOWER_OS_VERSION:=	${LOWER_OS_VERSION_CMD:C/-.*$//}
 LOWER_OPSYS?=		linux
 MACHINE_ARCH:=          ${MACHINE_ARCH:C/i.86/i386/}
 MACHINE_ARCH:=		${MACHINE_ARCH:C/ppc/powerpc/}
 .  if !defined(LOWER_ARCH)
 LOWER_ARCH!=		${UNAME} -m | sed -e 's/i.86/i386/' -e 's/ppc/powerpc/'
 .  endif # !defined(LOWER_ARCH)
+.  if ${LOWER_ARCH} == "x86_64"
+MACHINE_ARCH=		x86_64
+.  endif
 .  if ${MACHINE_ARCH} == "unknown" || ${MACHINE_ARCH} == ""
 MACHINE_ARCH=		${LOWER_ARCH}
 MAKEFLAGS+=		LOWER_ARCH=${LOWER_ARCH:Q}
@@ -239,7 +234,7 @@ SPARC_TARGET_ARCH?=	sparcv7
 .  elif ${MACHINE_ARCH} == "sun4"
 MACHINE_ARCH=		sparc
 SPARC_TARGET_ARCH?=	sparcv7
-.  elif ${MACHINE_ARCH} == "i86pc"
+.  elif ${MACHINE_ARCH} == "i86pc" || ${MACHINE_ARCH} == "i86xpv"
 MACHINE_ARCH=		i386
 .  elif ${MACHINE_ARCH} == "unknown"
 .    if !defined(LOWER_ARCH)
@@ -252,12 +247,12 @@ LOWER_OPSYS?=		solaris
 LOWER_OPSYS_VERSUFFIX=	2
 
 .elif !defined(LOWER_OPSYS)
-LOWER_OPSYS!=		echo ${OPSYS} | tr A-Z a-z
+LOWER_OPSYS:=		${OPSYS:tl}
 .endif
 
 # Now commit the [LOWER_]OS_VERSION values computed above, eliding the :sh
-LOWER_OS_VERSION:=	${LOWER_OS_VERSION}
 OS_VERSION:=		${OS_VERSION}
+LOWER_OS_VERSION:=	${OS_VERSION:tl}
 
 MAKEFLAGS+=		LOWER_OPSYS=${LOWER_OPSYS:Q}
 
@@ -503,15 +498,20 @@ CROSSBASE?=	${LOCALBASE}/cross
 .if exists(${LOCALBASE}/lib/X11/config/xpkgwedge.def) || \
     exists(${X11BASE}/lib/X11/config/xpkgwedge.def)
 USE_XPKGWEDGE=  yes
-.elif defined(_OPSYS_NEEDS_XPKGWEDGE) && \
-    !empty(_OPSYS_NEEDS_XPKGWEDGE:M[yY][eE][sS])
-USE_XPKGWEDGE=	yes
 .elif ${PKG_INSTALLATION_TYPE} == "pkgviews"
 USE_XPKGWEDGE=		yes
 .elif ${X11_TYPE} == "modular"
 USE_XPKGWEDGE=	no
 .else
 USE_XPKGWEDGE?=	yes
+.endif
+
+.if defined(FIX_SYSTEM_HEADERS) && ${FIX_SYSTEM_HEADERS} == "yes" && \
+    empty(PKGPATH:Mpkgtools/*) && empty(PKGPATH:M*/nbsed) && \
+    empty(PKGPATH:M*/nawk) && empty(PKGPATH:M*/bmake) && \
+    empty(PKGPATH:M*/install-sh) && \
+    exists(../../pkgtools/posix_headers/buildlink3.mk)
+.  include "../../pkgtools/posix_headers/buildlink3.mk"
 .endif
 
 .if ${X11_TYPE} == "modular"
@@ -629,21 +629,21 @@ PREPEND_PATH+=		${X11BASE}/bin
 PREPEND_PATH+=		${LOCALBASE}/bin
 
 # Wrapper framework definitions
-.include "${PKGSRCDIR}/mk/wrapper/wrapper-defs.mk"
+.include "wrapper/wrapper-defs.mk"
 
 # Binary emulator framework definitions
 .if defined(EMUL_PLATFORMS) && !empty(EMUL_PLATFORMS)
-.  include "${PKGSRCDIR}/mk/emulator/emulator-vars.mk"
+.  include "emulator/emulator-vars.mk"
 .endif
 
 # System features framework
-.include "${PKGSRCDIR}/mk/features/features-vars.mk"
+.include "features/features-vars.mk"
 
 # Package system flavor definitions
-.include "${PKGSRCDIR}/mk/flavor/bsd.flavor-vars.mk"
+.include "flavor/bsd.flavor-vars.mk"
 
 # Make variable definitions cache
-.include "${PKGSRCDIR}/mk/bsd.makevars.mk"
+.include "bsd.makevars.mk"
 
 # If MAKECONF is defined, then pass it down to all recursive make
 # processes invoked by pkgsrc.

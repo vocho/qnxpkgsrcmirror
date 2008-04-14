@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.26 2007/11/03 13:23:53 wiz Exp $
+# $NetBSD: Makefile,v 1.28 2008/02/21 21:20:12 jlam Exp $
 #
 
 DISTNAME=	nvi-1.81.5
-PKGREVISION=	5
+PKGREVISION=	6
 CATEGORIES=	editors
 MASTER_SITES=	${HOMEPAGE}
 EXTRACT_SUFX=	.tar.bz2
@@ -11,9 +11,19 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.kotnet.org/~skimo/nvi/devel/
 COMMENT=	Berkeley nvi with additional features
 
+PKG_DESTDIR_SUPPORT=	user-destdir
+
 .include "options.mk"
 
-.include "../../mk/bsd.prefs.mk"
+WRKSRC=			${WRKDIR}/${DISTNAME}/build.unix
+USE_TOOLS+=		sh
+USE_LIBTOOL=		yes
+GNU_CONFIGURE=		yes
+
+CONFIGURE_SCRIPT=	../dist/configure
+CONFIGURE_ARGS+=	--with-db3=${BUILDLINK_PREFIX.db3}
+CONFIGURE_ARGS+=	--program-transform-name='s,^,n,'
+CONFIGURE_ENV+=		vi_cv_path_shell=${TOOLS_SH:Q}
 
 .if ${OPSYS} == "NetBSD"
 .  if !empty(OS_VERSION:M[2-9].*) || !empty(OS_VERSION:M1.6[A-Z]*)
@@ -29,14 +39,8 @@ CONFIGURE_ENV+=		vi_cv_sys5_pty=no
 LDFLAGS+=		-flat_namespace
 .endif
 
-WRKSRC=			${WRKDIR}/${DISTNAME}/build.unix
-GNU_CONFIGURE=		YES
-CONFIGURE_SCRIPT=	../dist/configure
-CONFIGURE_ARGS+=	--with-db3=${BUILDLINK_PREFIX.db3}
-CONFIGURE_ARGS+=	--program-transform-name='s,^,n,'
-CONFIGURE_ENV+=		vi_cv_path_shell=${TOOLS_SH:Q}
-USE_TOOLS+=		sh
-USE_LIBTOOL=		YES
-
+# We need exactly the db3 API.
+BUILDLINK_TRANSFORM+=	l:db:db3
 .include "../../databases/db3/buildlink3.mk"
+
 .include "../../mk/bsd.pkg.mk"

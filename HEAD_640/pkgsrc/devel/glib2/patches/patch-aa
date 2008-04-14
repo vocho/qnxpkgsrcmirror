@@ -1,6 +1,6 @@
-$NetBSD: patch-aa,v 1.38 2007/11/25 23:38:51 wiz Exp $
+$NetBSD: patch-aa,v 1.40 2008/02/13 19:30:00 drochner Exp $
 
---- configure.orig	2007-11-24 06:41:59.000000000 +0000
+--- configure.orig	2008-02-07 06:41:30.000000000 +0100
 +++ configure
 @@ -945,6 +945,7 @@ G_MODULE_PLUGIN_LIBS
  G_MODULE_LDFLAGS
@@ -236,7 +236,7 @@ $NetBSD: patch-aa,v 1.38 2007/11/25 23:38:51 wiz Exp $
  esac
  
  
-@@ -42232,6 +42216,7 @@ G_MODULE_PLUGIN_LIBS!$G_MODULE_PLUGIN_LI
+@@ -42228,6 +42212,7 @@ G_MODULE_PLUGIN_LIBS!$G_MODULE_PLUGIN_LI
  G_MODULE_LDFLAGS!$G_MODULE_LDFLAGS$ac_delim
  G_MODULE_HAVE_DLERROR!$G_MODULE_HAVE_DLERROR$ac_delim
  G_MODULE_BROKEN_RTLD_GLOBAL!$G_MODULE_BROKEN_RTLD_GLOBAL$ac_delim
@@ -244,7 +244,7 @@ $NetBSD: patch-aa,v 1.38 2007/11/25 23:38:51 wiz Exp $
  G_MODULE_NEED_USCORE!$G_MODULE_NEED_USCORE$ac_delim
  GLIB_DEBUG_FLAGS!$GLIB_DEBUG_FLAGS$ac_delim
  GSPAWN!$GSPAWN$ac_delim
-@@ -42249,7 +42234,6 @@ G_THREAD_LIBS_EXTRA!$G_THREAD_LIBS_EXTRA
+@@ -42245,7 +42230,6 @@ G_THREAD_LIBS_EXTRA!$G_THREAD_LIBS_EXTRA
  ENABLE_REGEX_TRUE!$ENABLE_REGEX_TRUE$ac_delim
  ENABLE_REGEX_FALSE!$ENABLE_REGEX_FALSE$ac_delim
  USE_SYSTEM_PCRE_TRUE!$USE_SYSTEM_PCRE_TRUE$ac_delim
@@ -252,7 +252,7 @@ $NetBSD: patch-aa,v 1.38 2007/11/25 23:38:51 wiz Exp $
  _ACEOF
  
    if test `sed -n "s/.*$ac_delim\$/X/p" conf$$subs.sed | grep -c X` = 97; then
-@@ -42291,6 +42275,7 @@ _ACEOF
+@@ -42287,6 +42271,7 @@ _ACEOF
  ac_delim='%!_!# '
  for ac_last_try in false false false false false :; do
    cat >conf$$subs.sed <<_ACEOF
@@ -260,7 +260,7 @@ $NetBSD: patch-aa,v 1.38 2007/11/25 23:38:51 wiz Exp $
  PCRE_CFLAGS!$PCRE_CFLAGS$ac_delim
  PCRE_LIBS!$PCRE_LIBS$ac_delim
  PCRE_REQUIRES!$PCRE_REQUIRES$ac_delim
-@@ -42314,7 +42299,7 @@ LIBOBJS!$LIBOBJS$ac_delim
+@@ -42310,7 +42295,7 @@ LIBOBJS!$LIBOBJS$ac_delim
  LTLIBOBJS!$LTLIBOBJS$ac_delim
  _ACEOF
  

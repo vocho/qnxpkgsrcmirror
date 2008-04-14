@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.94 2007/11/08 19:39:43 joerg Exp $
+# $NetBSD: Makefile,v 1.96 2008/03/15 22:16:41 markd Exp $
 
-DISTNAME=		R-2.6.0
-PKGREVISION=		1
+DISTNAME=		R-2.6.2
 CATEGORIES=		math
 MASTER_SITES=		${MASTER_SITE_R_CRAN:=base/R-2/}
 
@@ -14,6 +13,7 @@ NOT_FOR_PLATFORM=	NetBSD-1.[0-4]*-alpha NetBSD-1.5-alpha \
 			NetBSD-1.5.*-alpha NetBSD-1.5[A-U]-alpha
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 TEST_TARGET=		check
 USE_TOOLS+=		gmake gzip:run makeinfo perl:run sed unzip:run xmkmf
@@ -98,8 +98,5 @@ INSTALL_TEMPLATES+=	../../math/R/files/pkg-index.tmpl
 DEINSTALL_TEMPLATES+=	../../math/R/files/pkg-index.tmpl
 PRINT_PLIST_AWK+=	/^lib\/R\/doc\/html\/packages.html$$/ { next; }
 PRINT_PLIST_AWK+=	/^lib\/R\/doc\/html\/search\/index.txt$$/ { next; }
-
-post-install:
-	${CHOWN} -R ${SHAREOWN}:${SHAREGRP} ${PREFIX}/lib/R
 
 .include "../../mk/bsd.pkg.mk"

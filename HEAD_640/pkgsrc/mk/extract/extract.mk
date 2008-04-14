@@ -1,12 +1,15 @@
-# $NetBSD: extract.mk,v 1.21 2007/12/01 11:11:55 rillig Exp $
+# $NetBSD: extract.mk,v 1.26 2008/03/12 15:51:39 jlam Exp $
 #
 # The following variables may be set by the package Makefile and
 # specify how extraction happens:
 #
-# EXTRACT_DIR
+#    EXTRACT_DIR
 #	The directory into which the files are extracted.
 #
 #	Default value: ${WRKDIR}
+#
+#    EXTRACTOR is the the the environment and path used to execute the
+#	all-purpose extract script.
 #
 #    EXTRACT_CMD is a shell command list that extracts the contents of
 #	an archive named by the variable ${DOWNLOADED_DISTFILE} to the
@@ -103,8 +106,7 @@ extract-message:
 
 .PHONY: extract-dir
 extract-dir:
-	${_PKG_SILENT}${_PKG_DEBUG}					\
-	mkdir -p ${EXTRACT_DIR}
+	${RUN}${MKDIR} ${EXTRACT_DIR}
 
 ######################################################################
 ### extract-check-interactive (PRIVATE)
@@ -131,9 +133,9 @@ extract-check-interactive:
 ###
 .PHONY: extract-cookie
 extract-cookie:
-	${_PKG_SILENT}${_PKG_DEBUG}${TEST} ! -f ${_COOKIE.extract} || ${FALSE}
-	${_PKG_SILENT}${_PKG_DEBUG}${MKDIR} ${_COOKIE.extract:H}
-	${_PKG_SILENT}${_PKG_DEBUG}${ECHO} ${PKGNAME} > ${_COOKIE.extract}
+	${RUN}${TEST} ! -f ${_COOKIE.extract} || ${FALSE}
+	${RUN}${MKDIR} ${_COOKIE.extract:H}
+	${RUN}${ECHO} ${PKGNAME} > ${_COOKIE.extract}
 
 ######################################################################
 ### pre-extract, do-extract, post-extract (PUBLIC, override)
@@ -176,18 +178,23 @@ _EXTRACT_ENV+=	${TOOLS_UNZOO:D		UNZOO=${TOOLS_UNZOO:Q}}
 _EXTRACT_ENV+=	${EXTRACT_ENV}
 
 .if !empty(EXTRACT_USING:Mgtar)
-EXTRACT_OPTS+=	${TOOLS_GTAR:D	-t ${TOOLS_GTAR}}
+_EXTRACT_TAR=	${TOOLS_PATH.gtar}
 .elif !empty(EXTRACT_USING:Mnbtar)
-EXTRACT_OPTS+=	${TOOLS_TAR:D	-t ${TOOLS_TAR}}
+_EXTRACT_TAR=	${TOOLS_TAR}
+.elif !empty(EXTRACT_USING:Mpax)
+_EXTRACT_TAR=	${TOOLS_PAX}
 .else
-EXTRACT_OPTS+=	${TOOLS_PAX:D	-t ${TOOLS_PAX}}
+_EXTRACT_TAR=
 .endif
 
-EXTRACT_CMD_DEFAULT=							\
-	${SETENV} ${_EXTRACT_ENV}					\
-	${SH} ${PKGSRCDIR}/mk/extract/extract				\
-		${EXTRACT_OPTS}						\
-		${DOWNLOADED_DISTFILE} ${EXTRACT_ELEMENTS}
+.if !empty(_EXTRACT_TAR)
+EXTRACT_OPTS+=	-t ${_EXTRACT_TAR}
+.endif
+
+EXTRACTOR=		\
+	${SETENV} ${_EXTRACT_ENV} ${SH} ${PKGSRCDIR}/mk/extract/extract
+EXTRACT_CMD_DEFAULT=	\
+	${EXTRACTOR} ${EXTRACT_OPTS} ${DOWNLOADED_DISTFILE} ${EXTRACT_ELEMENTS}
 
 EXTRACT_CMD?=	${EXTRACT_CMD_DEFAULT}
 
@@ -195,9 +202,8 @@ DOWNLOADED_DISTFILE=	$${extract_file}
 
 .if !target(do-extract)
 do-extract: ${WRKDIR}
-.  for __file__ in ${EXTRACT_ONLY}
-	${_PKG_SILENT}${_PKG_DEBUG}					\
-	extract_file=${_DISTDIR:Q}/${__file__:Q}; export extract_file;	\
+.  for f in ${EXTRACT_ONLY}
+	${RUN} extract_file=${_DISTDIR:Q}/${f:Q}; export extract_file;	\
 	cd ${WRKDIR} && cd ${EXTRACT_DIR} && ${EXTRACT_CMD}
 .  endfor
 .endif

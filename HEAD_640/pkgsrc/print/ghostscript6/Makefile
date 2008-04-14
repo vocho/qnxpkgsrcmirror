@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.4 2007/12/02 13:04:14 wiz Exp $
+# $NetBSD: Makefile,v 1.6 2008/03/10 12:34:10 wiz Exp $
 
 DISTNAME=		ghostscript-${GS_VERS}
-PKGREVISION=		10
+PKGREVISION=		11
 GS_VERS=		6.01
 CATEGORIES=		print
 MASTER_SITES+=		${MASTER_SITE_SOURCEFORGE:=ghostscript/} \
@@ -23,7 +23,7 @@ CONFLICTS+=		hpijs-[0-9]*
 
 WRKSRC=			${WRKDIR}/gs${GS_VERS}
 USE_LANGUAGES=		c c++
-USE_TOOLS+=		gmake
+USE_TOOLS+=		gmake lex
 GNU_CONFIGURE=		yes
 
 REQD_DIRS+=		share/ghostscript

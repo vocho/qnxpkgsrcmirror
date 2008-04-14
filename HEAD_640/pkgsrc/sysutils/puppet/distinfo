@@ -1,0 +1,8 @@
+$NetBSD: distinfo,v 1.2 2008/03/13 20:05:09 tonnerre Exp $
+
+SHA1 (puppet-0.22.4.tgz) = afc6e64dcbfab251dd433c6e0de5015cbe0a37ec
+RMD160 (puppet-0.22.4.tgz) = c836292dc112e52d32bfdcd68d74799135e9c2e9
+Size (puppet-0.22.4.tgz) = 642077 bytes
+SHA1 (patch-aa) = 3573c5ad7852c3e03aab76a40188203069b58dbf
+SHA1 (patch-ab) = f14b5f3d595fa5f9d1e115f85d9dd030a711d7bc
+SHA1 (patch-ac) = 60ca77dd0dffcab2eba9c9a99c4094dca22c0fd1

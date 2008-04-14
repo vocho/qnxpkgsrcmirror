@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.10 2007/10/27 13:57:29 wiz Exp $
+# $NetBSD: Makefile,v 1.14 2008/01/21 19:09:42 smb Exp $
 
 .include "Makefile.common"
 
 PKGNAME=	claws-mail-${CLAWS_VERSION}
-PKGREVISION=	1
 
 MAINTAINER=	smb@NetBSD.org
 COMMENT=	X based e-mail and netnews client
+PKGREVISION=	4
 
 CONFLICTS+=	sylpheed-claws-[0-9]*
 
@@ -31,12 +31,12 @@ EGDIR=		${PREFIX}/share/examples/claws-mail
 CONF_FILES=	${EGDIR}/mime.types ${PKG_SYSCONFDIR}/mime.types
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.claws-mail
+PKG_SUPPORTED_OPTIONS=	claws-mail-jpilot ldap inet6
 PKG_SUGGESTED_OPTIONS=
-PKG_SUPPORTED_OPTIONS=	jpilot ldap inet6
 
 .include "../../mk/bsd.options.mk"
 
-.if !empty(PKG_OPTIONS:Mjpilot)
+.if !empty(PKG_OPTIONS:Mclaws-mail-jpilot)
 CONFIGURE_ARGS+=	--enable-jpilot
 .  include "../../comms/pilot-link-libs/buildlink3.mk"
 .  include "../../comms/jpilot/buildlink3.mk"
@@ -63,6 +63,7 @@ post-install:
 	${INSTALL_DATA_DIR} ${PREFIX}/share/claws-mail
 	${INSTALL_DATA} ${WRKSRC}/claws-mail*.png ${PREFIX}/share/claws-mail
 
+.include "../../databases/db4/buildlink3.mk"
 .include "../../converters/libiconv/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../security/openssl/buildlink3.mk"
