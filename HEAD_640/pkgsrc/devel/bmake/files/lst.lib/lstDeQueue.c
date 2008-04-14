@@ -1,4 +1,4 @@
-/*	$NetBSD: lstDeQueue.c,v 1.1 2005/10/31 21:52:25 reed Exp $	*/
+/*	$NetBSD: lstDeQueue.c,v 1.2 2008/03/09 19:54:29 joerg Exp $	*/
 
 /*
  * Copyright (c) 1988, 1989, 1990, 1993
@@ -33,14 +33,14 @@
  */
 
 #ifndef MAKE_NATIVE
-static char rcsid[] = "$NetBSD: lstDeQueue.c,v 1.1 2005/10/31 21:52:25 reed Exp $";
+static char rcsid[] = "$NetBSD: lstDeQueue.c,v 1.2 2008/03/09 19:54:29 joerg Exp $";
 #else
 #include <sys/cdefs.h>
 #ifndef lint
 #if 0
 static char sccsid[] = "@(#)lstDeQueue.c	8.1 (Berkeley) 6/6/93";
 #else
-__RCSID("$NetBSD: lstDeQueue.c,v 1.1 2005/10/31 21:52:25 reed Exp $");
+__RCSID("$NetBSD: lstDeQueue.c,v 1.2 2008/03/09 19:54:29 joerg Exp $");
 #endif
 #endif /* not lint */
 #endif
@@ -72,13 +72,13 @@ Lst_DeQueue(Lst l)
     ClientData	  rd;
     ListNode	tln;
 
-    tln = (ListNode) Lst_First(l);
+    tln = Lst_First(l);
     if (tln == NilListNode) {
 	return ((ClientData) NIL);
     }
 
     rd = tln->datum;
-    if (Lst_Remove(l, (LstNode)tln) == FAILURE) {
+    if (Lst_Remove(l, tln) == FAILURE) {
 	return ((ClientData) NIL);
     } else {
 	return (rd);

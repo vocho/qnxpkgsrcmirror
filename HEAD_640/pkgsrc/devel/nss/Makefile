@@ -1,15 +1,16 @@
-# $NetBSD: Makefile,v 1.25 2007/10/09 19:19:09 martti Exp $
+# $NetBSD: Makefile,v 1.30 2008/03/21 01:12:15 obache Exp $
 
 DISTNAME=		nss-3.11.5
 CATEGORIES=		security
-MASTER_SITES=		http://ftp.mozilla.org/pub/mozilla.org/security/nss/releases/NSS_3_11_5_RTM/src/ \
-			ftp://ftp.mozilla.org/pub/mozilla.org/security/nss/releases/NSS_3_11_5_RTM/src/
+MASTER_SITES=		${MASTER_SITE_MOZILLA_ALL:=security/nss/releases/NSS_3_11_5_RTM/src/}
 
 MAINTAINER=		mjl@luckie.org.nz
 HOMEPAGE=		http://www.mozilla.org/projects/security/pki/nss/
 COMMENT=		Libraries to support development of security-enabled applications
 
 BUILD_DEPENDS+=		zip>=2.3:../../archivers/zip
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 BUILD_DIRS=		mozilla/security/nss
 
@@ -18,6 +19,8 @@ DIST=			${WRKSRC}/mozilla/dist
 BUILD_TARGET=		nss_build_all
 MAKE_ENV+=		LD_LIBS="-L${BUILDLINK_PREFIX.nspr}/lib/nspr ${COMPILER_RPATH_FLAG}${BUILDLINK_PREFIX.nspr}/lib/nspr ${COMPILER_RPATH_FLAG}${LOCALBASE}/lib/nss"
 MAKE_ENV+=		LIBRUNPATH=${PREFIX}/lib BUILD_OPT=1
+
+INSTALLATION_DIRS=	include/nss lib/nss lib/pkgconfig
 
 MAKE_JOBS_SAFE=		no
 
@@ -32,7 +35,7 @@ SO_SUFFIX=		so.1.0
 .endif
 PLIST_SUBST+=		SO_SUFFIX=${SO_SUFFIX:Q}
 
-.if ${OPSYS} == "SunOS" && ${PKGSRC_COMPILER} == "gcc"
+.if ${OPSYS} == "SunOS" && !empty(PKGSRC_COMPILER:Mgcc)
 MAKEFLAGS+=	NS_USE_GCC=YES
 .endif
 
@@ -41,11 +44,9 @@ pre-configure:
 		${WRKSRC}/mozilla/security/coreconf/
 
 do-install:
-	${INSTALL_DATA_DIR} ${PREFIX}/include/nss
-	${INSTALL_DATA_DIR} ${PREFIX}/lib/nss
-	(cd ${DIST}/public && ${PAX} -Lrwpe . ${PREFIX}/include/nss/ )
+	(cd ${DIST}/public && ${PAX} -Lrwpe . ${DESTDIR}${PREFIX}/include/nss/ )
 	(cd ${DIST}/*_OPT.OBJ/lib && \
-		${PAX} -Lrwpe *.${SO_SUFFIX} ${PREFIX}/lib/nss/ )
+		${PAX} -Lrwpe *.${SO_SUFFIX} ${DESTDIR}${PREFIX}/lib/nss/ )
 	set -e; \
 	{ ${ECHO} "Name: NSS"; \
 	  ${ECHO} "Description: Mozilla Network Security Services"; \
@@ -54,7 +55,7 @@ do-install:
 	  ${ECHO} "Libs: -L${PREFIX}/lib/nss" \
 	      "${COMPILER_RPATH_FLAG}${PREFIX}/lib/nss" \
 	      "-lnss3 -lsmime3 -lssl3 -lsoftokn3 "${BUILDLINK_LIBS.pthread:Q}; \
-	} >${PREFIX}/lib/pkgconfig/nss.pc
+	} >${DESTDIR}${PREFIX}/lib/pkgconfig/nss.pc
 
 # The exact set of libfreebl* libs built and installed depends on the
 # operating system and platform.  For example, on solaris/sparc you might
@@ -70,10 +71,11 @@ do-install:
 PLIST_SRC=	${WRKDIR}/PLIST
 post-install:
 	${AWK} '/@comment libfreebl/ {exit} {print}' ${.CURDIR}/PLIST > ${PLIST_SRC}
-	ls ${PREFIX}/lib/nss/libfreebl*.${SO_SUFFIX} | ${SORT} | \
-		${SED} 's;${PREFIX}/;;g' >> ${PLIST_SRC}
+	ls ${DESTDIR}${PREFIX}/lib/nss/libfreebl*.${SO_SUFFIX} | ${SORT} | \
+		${SED} 's;${DESTDIR}${PREFIX}/;;g' >> ${PLIST_SRC}
 	${AWK} 'ok == 1 {print} /@comment libfreebl/ {ok=1}' ${.CURDIR}/PLIST >> ${PLIST_SRC}
-	cd ${PREFIX}/include/nss && ${CHMOD} ${SHAREMODE} nss/*.h dbm/*.h nss/*.api
+	cd ${DESTDIR}${PREFIX}/include/nss && \
+		${CHMOD} ${SHAREMODE} nss/*.h dbm/*.h nss/*.api
 
 BUILDLINK_API_DEPENDS.nspr+=	nspr>=4.4.1nb2
 

@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.26 2007/09/25 10:03:52 hira Exp $
+# $NetBSD: Makefile,v 1.29 2008/03/08 00:08:42 tnn Exp $
 
-DISTNAME=		flex-2.5.33
-PKGREVISION=		2
+DISTNAME=		flex-2.5.35
 CATEGORIES=		lang
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=flex/}
 
@@ -16,16 +15,15 @@ USE_TOOLS+=		bison gm4:run makeinfo
 MAKE_JOBS_SAFE=		no
 TEST_TARGET=		check
 INFO_FILES=		yes
-CPPFLAGS.IRIX+=		-DHAVE_ALLOCA_H		# bug #1675899
 LIBS.SunOS+=		-lm
 USE_PKGLOCALEDIR=	YES
 
 .include "../../mk/bsd.prefs.mk"
 
-.if !empty(PKGSRC_RUN_TEST:M[Yy][Ee][Ss])
+#.if !empty(PKGSRC_RUN_TEST:M[Yy][Ee][Ss])
 USE_LANGUAGES=		c c++
 USE_TOOLS+=		gmake	# bmake has problems with the test suite
-.endif
+#.endif
 
 post-install:
 	cd ${DESTDIR:Q}${PREFIX:Q}/bin && ln -s flex flex++

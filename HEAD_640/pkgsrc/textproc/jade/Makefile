@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.45 2007/01/24 19:45:09 wiz Exp $
+# $NetBSD: Makefile,v 1.47 2008/03/15 20:29:35 joerg Exp $
 
 DISTNAME=	jade-1.2.1
 PKGREVISION=	12
@@ -11,6 +11,8 @@ MAINTAINER=	rh@NetBSD.org
 HOMEPAGE=	http://www.jclark.com/jade/
 COMMENT=	Object-oriented SGML/XML parser toolkit and DSSSL engine
 
+PKG_DESTDIR_SUPPORT=	user-destdir
+
 PATCH_SITES=		${MASTER_SITE_LOCAL}
 PATCHFILES=		jade_1.2.1-18.diff.gz
 PATCH_DIST_STRIP=	-p1
@@ -18,7 +20,7 @@ PATCH_DIST_STRIP=	-p1
 CONFLICTS+=	sp-[0-9]*
 
 USE_LANGUAGES=		c c++
-USE_TOOLS+=		gmake
+USE_TOOLS+=		gmake m4
 GNU_CONFIGURE=		YES
 USE_LIBTOOL=		YES
 
@@ -29,6 +31,8 @@ CONFIGURE_ARGS+=	--enable-mif
 
 CXXFLAGS+=		${CFLAGS}
 
+INSTALLATION_DIRS=	include/sp lib share/doc/jade share/sgml/jade
+
 post-patch:
 	chmod -R +w ${WRKSRC}
 	find ${WRKSRC} -name '*.orig' -size 0c -type f -exec rm {} \;
@@ -37,18 +41,15 @@ post-patch:
 post-install:
 	set -e;								\
 	for prog in jade nsgmls sgmlnorm spam spent sx; do		\
-		${ECHO_MSG} "strip ${PREFIX}/bin/$${prog}";		\
-		strip "${PREFIX}/bin/$${prog}";				\
+		${ECHO_MSG} "strip ${DESTDIR}${PREFIX}/bin/$${prog}";		\
+		strip "${DESTDIR}${PREFIX}/bin/$${prog}";				\
 	done
-	${INSTALL_DATA_DIR} ${PREFIX}/include/sp
 	${INSTALL_DATA} ${WRKSRC}/include/*.cxx ${WRKSRC}/include/*.h \
-	  ${PREFIX}/include/sp
-	${INSTALL_DATA_DIR} ${PREFIX}/share/doc/jade
-	${INSTALL_DATA} ${WRKSRC}/jadedoc/*.htm ${PREFIX}/share/doc/jade
-	${INSTALL_DATA_DIR} ${PREFIX}/share/sgml/jade
-	${INSTALL_DATA} ${WRKSRC}/dsssl/* ${PREFIX}/share/sgml/jade
+	  ${DESTDIR}${PREFIX}/include/sp
+	${INSTALL_DATA} ${WRKSRC}/jadedoc/*.htm ${DESTDIR}${PREFIX}/share/doc/jade
+	${INSTALL_DATA} ${WRKSRC}/dsssl/* ${DESTDIR}${PREFIX}/share/sgml/jade
 # Installed by print/tex-jadetex
-	rm ${PREFIX}/share/sgml/jade/*jadetex.*
+	rm ${DESTDIR}${PREFIX}/share/sgml/jade/*jadetex.*
 
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../textproc/xmlcatmgr/catalogs.mk"

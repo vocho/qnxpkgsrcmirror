@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.7 2007/12/21 13:26:43 agc Exp $
+# $NetBSD: Makefile,v 1.9 2008/02/28 11:58:48 rillig Exp $
 
-DISTNAME=	netbsd-iscsi-20071221
+DISTNAME=	netbsd-iscsi-20080207
 PKGNAME=	${DISTNAME:C/-iscsi/-iscsi-target/}
 CATEGORIES=	devel
 MASTER_SITES=	http://www.alistaircrooks.co.uk/src/
@@ -14,7 +14,7 @@ CONFLICTS+=	netbsd-iscsi>0
 GNU_CONFIGURE=	yes
 CONFIGURE_DIRS=	src
 
-INSTALLATION_DIRS_FROM_PLIST=yes
+AUTO_MKDIRS=		yes
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 

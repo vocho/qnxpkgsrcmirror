@@ -1,4 +1,4 @@
-# $NetBSD: modules.mk,v 1.17 2006/05/03 02:11:00 minskim Exp $
+# $NetBSD: modules.mk,v 1.22 2008/03/12 03:18:47 jlam Exp $
 
 .if !defined(_RUBY_MODULE_MK)
 _RUBY_MODULE_MK=	# defined
@@ -60,7 +60,7 @@ do-install:	ruby-extconf-install
 ruby-extconf-install:
 .for d in ${RUBY_EXTCONF_SUBDIRS}
 	@${ECHO_MSG} "===>  Installing ${d}"
-	${_PKG_SILENT}${_PKG_DEBUG}cd ${WRKSRC}/${d}; ${SETENV} ${MAKE_ENV} ${MAKE} ${INSTALL_TARGET}
+	${_PKG_SILENT}${_PKG_DEBUG}cd ${WRKSRC}/${d}; ${SETENV} ${INSTALL_ENV} ${MAKE_ENV} ${MAKE} ${INSTALL_TARGET}
 .endfor
 .endif
 
@@ -105,10 +105,15 @@ ruby-setup-build:
 .if !target(do-install)
 do-install:	ruby-setup-install
 
+_RUBY_SETUP_INSTALLARGS=   ${INSTALL_TARGET}
+.if ${_USE_DESTDIR} != "no"
+_RUBY_SETUP_INSTALLARGS+=   --prefix=${DESTDIR:Q}
+.endif
+
 ruby-setup-install:
 	@${ECHO_MSG} "===>  Running ${RUBY_SETUP} to ${INSTALL_TARGET}"
 	${_PKG_SILENT}${_PKG_DEBUG}cd ${WRKSRC}; \
-	${SETENV} ${MAKE_ENV} ${RUBY} ${RUBY_SETUP} ${INSTALL_TARGET}
+	${SETENV} ${INSTALL_ENV} ${MAKE_ENV} ${RUBY} ${RUBY_SETUP} ${_RUBY_SETUP_INSTALLARGS}
 .endif
 
 #
@@ -129,13 +134,14 @@ do-install:	ruby-simple-install
 ruby-simple-install:
 	@${ECHO_MSG} "===>  Running ${RUBY_SIMPLE_INSTALL} to ${INSTALL_TARGET}"
 	${_PKG_SILENT}${_PKG_DEBUG}cd ${WRKSRC}; \
-	${SETENV} ${MAKE_ENV} ${RUBY} ${RUBY_SIMPLE_INSTALL} ${INSTALL_TARGET}
+	${SETENV} ${INSTALL_ENV} ${MAKE_ENV} ${RUBY} ${RUBY_SIMPLE_INSTALL} ${INSTALL_TARGET}
 .endif
 .endif # USE_RUBY_INSTALL
 
 .include "replace.mk"
 
 PRINT_PLIST_AWK+=	/^@dirrm lib\/ruby$$/ { next; }
+PRINT_PLIST_AWK+=	/^@dirrm lib\/ruby\/site_ruby$$/ { next; }
 PRINT_PLIST_AWK+=	/\.${RUBY_DLEXT}$$/ \
 			{ gsub(/${RUBY_DLEXT}$$/, "$${RUBY_DLEXT}") }
 PRINT_PLIST_AWK+=	/^@dirrm ${RUBY_SITEARCHLIBDIR:S|${PREFIX}/||:S|/|\\/|g}$$/ \

@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.36 2007/12/02 13:04:10 wiz Exp $
+# $NetBSD: Makefile,v 1.38 2008/01/10 07:47:29 martti Exp $
 
-DISTNAME=		clamsmtp-1.8
-PKGREVISION=		3
+DISTNAME=		clamsmtp-1.9
+#PKGREVISION=		1
 CATEGORIES=		mail
 MASTER_SITES=		http://memberwebs.com/stef/software/clamsmtp/
 
@@ -16,7 +16,7 @@ GNU_CONFIGURE=		yes
 RCD_SCRIPTS=		clamsmtpd
 
 MESSAGE_SUBST+=		HOMEPAGE=${HOMEPAGE}
-FILES_SUBST+=		CLAMAV_USER=${CLAMAV_USER:Q}
+FILES_SUBST+=		CLAMAV_USER=${CLAMAV_USER}
 
 # Doesn't work with GNU pth (missing required mutex features)
 PTHREAD_OPTS+=		require native
@@ -27,7 +27,7 @@ CONF_FILES=		${EGDIR}/clamsmtpd.conf \
 
 INSTALLATION_DIRS=	share/examples/${PKGBASE}
 
-PKG_USERS_VARS+=	CLAMAV_USER
+PKG_USERS_VARS=		CLAMAV_USER
 
 post-install:
 	${INSTALL_DATA} ${WRKSRC}/doc/clamsmtpd.conf ${EGDIR}

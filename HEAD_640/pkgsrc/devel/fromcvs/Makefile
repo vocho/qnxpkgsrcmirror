@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.9 2007/08/11 07:27:18 wiz Exp $
+# $NetBSD: Makefile,v 1.14 2008/03/25 15:14:13 wiz Exp $
 
-DISTNAME=	186299486bdc
+DISTNAME=	d2883bf3ced6
 # Last part of PKGNAME is changeset number
-PKGNAME=	fromcvs-0.0.0.105
+PKGNAME=	fromcvs-0.0.0.108
+PKGREVISION=	2
 CATEGORIES=	devel scm
 MASTER_SITES=	http://ww2.fs.ei.tum.de/~corecode/hg/fromcvs/archive/
 EXTRACT_SUFX=	.tar.bz2
@@ -17,6 +18,8 @@ DEPENDS+=	${RUBY_PKGPREFIX}-sqlite3>=1.2.1:../../databases/ruby-sqlite3
 
 LICENSE=        corecode-license
 
+PKG_DESTDIR_SUPPORT=	user-destdir
+
 WRKSRC=		${WRKDIR}/fromcvs-${DISTNAME}
 DIST_SUBDIR=	fromcvs
 
@@ -26,6 +29,8 @@ SUBST_MESSAGE.python+=	Fixing path to Python interpreter.
 SUBST_SED.python+=	-e "s!'python'!'${PYTHONBIN}'!"
 SUBST_STAGE.python+=	pre-build
 
+INSTALLATION_DIRS=	bin
+
 do-build:
 	${ECHO} "#!/bin/sh" > ${WRKSRC}/togit
 	${ECHO} "${RUBY} -I${PREFIX}/share/fromcvs ${PREFIX}/share/fromcvs/togit.rb \"\$$@\"" >> ${WRKSRC}/togit
@@ -33,16 +38,20 @@ do-build:
 	${ECHO} "${RUBY} -I${PREFIX}/share/fromcvs ${PREFIX}/share/fromcvs/tohg.rb \"\$$@\"" >> ${WRKSRC}/tohg
 
 do-install:
-	${INSTALL_DATA_DIR} ${PREFIX}/share/doc/fromcvs
-	${INSTALL_DATA} ${WRKSRC}/README ${PREFIX}/share/doc/fromcvs
-	${INSTALL_DATA_DIR} ${PREFIX}/share/fromcvs
-	${INSTALL_DATA_DIR} ${PREFIX}/share/fromcvs/commitset
-	${INSTALL_DATA} ${WRKSRC}/commitset/* \
-		${PREFIX}/share/fromcvs/commitset
-	${INSTALL_DATA} ${WRKSRC}/*.rb ${PREFIX}/share/fromcvs
-	${INSTALL_DATA} ${WRKSRC}/*.py ${PREFIX}/share/fromcvs
-	${INSTALL_SCRIPT} ${WRKSRC}/togit ${PREFIX}/bin
-	${INSTALL_SCRIPT} ${WRKSRC}/tohg ${PREFIX}/bin
+	${INSTALL_DATA_DIR} ${DESTDIR}${PREFIX}/share/doc/fromcvs
+	${INSTALL_DATA} ${WRKSRC}/README ${DESTDIR}${PREFIX}/share/doc/fromcvs
+	${INSTALL_DATA_DIR} ${DESTDIR}${PREFIX}/share/fromcvs
+	${INSTALL_DATA_DIR} ${DESTDIR}${PREFIX}/share/fromcvs/commitset
+	${INSTALL_DATA} ${WRKSRC}/commitset/commitset \
+		${DESTDIR}${PREFIX}/share/fromcvs/commitset
+	${INSTALL_DATA} ${WRKSRC}/commitset/commitset.cgi \
+		${DESTDIR}${PREFIX}/share/fromcvs/commitset
+	${INSTALL_DATA} ${WRKSRC}/commitset/commitset.rb \
+		${DESTDIR}${PREFIX}/share/fromcvs/commitset
+	${INSTALL_DATA} ${WRKSRC}/*.rb ${DESTDIR}${PREFIX}/share/fromcvs
+	${INSTALL_DATA} ${WRKSRC}/*.py ${DESTDIR}${PREFIX}/share/fromcvs
+	${INSTALL_SCRIPT} ${WRKSRC}/togit ${DESTDIR}${PREFIX}/bin
+	${INSTALL_SCRIPT} ${WRKSRC}/tohg ${DESTDIR}${PREFIX}/bin
 
 .include "../../lang/ruby/modules.mk"
 .include "../../lang/python/application.mk"

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.57 2007/12/21 17:02:53 joerg Exp $
+# $NetBSD: Makefile,v 1.59 2008/02/11 00:56:42 dbj Exp $
 
 .include "Makefile.common"
 
@@ -13,8 +13,10 @@ MAKE_JOBS_SAFE=		no
 ###
 
 # Stub libraries for functions missing from base system.
-.if !empty(MACHINE_PLATFORM:MDarwin-*-powerpc) || ${OPSYS} == "DragonFly" || \
-    ${OPSYS} == "NetBSD" || ${OPSYS} == "FreeBSD" || ${OPSYS} == "SunOS" || \
+.if !empty(MACHINE_PLATFORM:MDarwin-*-powerpc) || \
+    !empty(MACHINE_PLATFORM:MDarwin-9.*-i386) || \
+    ${OPSYS} == "DragonFly" || ${OPSYS} == "NetBSD" || \
+    ${OPSYS} == "FreeBSD" || ${OPSYS} == "SunOS" || \
     ${OPSYS} == "Linux"
 PLIST_SRC+=	${PKGDIR}/PLIST.stub
 .endif
@@ -24,7 +26,7 @@ PLIST_SRC+=	${PKGDIR}/PLIST.stub
     (${MACHINE_ARCH} == "sparc") || (${MACHINE_ARCH} == "x86_64")
 BUILD_TARGET+=	opt opt.opt
 PLIST_SRC+=	${PKGDIR}/PLIST.opt
-.  if empty(MACHINE_PLATFORM:MDarwin-*-*) && \
+.  if empty(MACHINE_PLATFORM:MDarwin-*-powerpc) && \
       empty(MACHINE_PLATFORM:MSunOS-*-i386) && \
       empty(MACHINE_PLATFORM:MNetBSD-*-x86_64) && \
       empty(MACHINE_PLATFORM:MNetBSD-*-sparc)
@@ -43,7 +45,7 @@ PLIST_SRC+=	${PKGDIR}/PLIST
 # to /usr/pkgsrc/devel/ocaml instead of ${WRKSRC}.  /bin/ksh, which
 # is what ${SH} is on SunOS, doesn't exhibit this behaviour.
 .if ${OPSYS} == "SunOS"
-INSTALL_MAKE_FLAGS+=	SHELL=${SH}
+INSTALL_MAKE_FLAGS+=	SHELL=${SH:Q}
 .endif
 
 .include "../../mk/bsd.pkg.mk"

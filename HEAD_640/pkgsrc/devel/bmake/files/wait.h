@@ -6,7 +6,7 @@
  */
 /*
  * RCSid:
- *	$Id: wait.h,v 1.1 2005/10/31 21:34:25 reed Exp $
+ *	$Id: wait.h,v 1.2 2008/03/09 19:54:29 joerg Exp $
  *
  *      @(#)Copyright (c) 1994, Simon J. Gerraty.
  *      

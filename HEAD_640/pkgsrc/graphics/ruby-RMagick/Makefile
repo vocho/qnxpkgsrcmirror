@@ -1,27 +1,27 @@
-# $NetBSD: Makefile,v 1.41 2007/11/26 03:21:30 obache Exp $
+# $NetBSD: Makefile,v 1.48 2008/02/14 08:44:57 obache Exp $
 
-DISTNAME=	RMagick-1.15.11
+DISTNAME=	RMagick-2.2.2
 PKGNAME=	${RUBY_PKGPREFIX}-${DISTNAME}
 CATEGORIES=	graphics ruby
-MASTER_SITES=	http://rubyforge.org/frs/download.php/28410/ \
-		http://raa.ruby-lang.org/cache/rmagick/
+MASTER_SITES=	http://rubyforge.org/frs/download.php/32266/
 
 MAINTAINER=	obache@NetBSD.org
 HOMEPAGE=	http://rmagick.rubyforge.org/
-COMMENT=	Ruby GraphicsMagick or ImageMagick extension
+COMMENT=	Ruby binding to ImageMagick
 
-.include "options.mk"
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 RUBY_HAS_ARCHLIB=	yes
-GNU_CONFIGURE=		yes
+USE_RUBY_SETUP=		yes
 
-CONFIGURE_ARGS+=	--with-doc-dir=${RUBY_DOCDIR}/RMagick
+CONFIGURE_ARGS+=	--doc-dir=${DESTDIR}${RUBY_DOCDIR}/RMagick
 USE_TOOLS+=	gs
 
 post-install:
-	${INSTALL_DATA_DIR} ${RUBY_EXAMPLESDIR}/RMagick
+	${INSTALL_DATA_DIR} ${DESTDIR}${RUBY_EXAMPLESDIR}/RMagick
 	cd ${WRKSRC}/examples && \
-		${PAX} -rw -pp -pm . ${RUBY_EXAMPLESDIR}/RMagick
+		${PAX} -rw -pp -pm . ${DESTDIR}${RUBY_EXAMPLESDIR}/RMagick
 
+.include "../../graphics/ImageMagick/buildlink3.mk"
 .include "../../lang/ruby/modules.mk"
 .include "../../mk/bsd.pkg.mk"

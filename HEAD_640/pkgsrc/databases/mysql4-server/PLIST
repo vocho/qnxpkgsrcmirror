@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.19 2007/05/23 08:11:50 martti Exp $
+@comment $NetBSD: PLIST,v 1.21 2008/03/26 13:22:00 wiz Exp $
 bin/comp_err
 bin/isamchk
 bin/isamlog

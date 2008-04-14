@@ -1,4 +1,4 @@
-#	$NetBSD: bsd.pkg.mk,v 1.1932 2007/12/19 12:32:06 rillig Exp $
+#	$NetBSD: bsd.pkg.mk,v 1.1940 2008/03/08 14:28:05 joerg Exp $
 #
 # This file is in the public domain.
 #
@@ -61,6 +61,7 @@ ACCEPTABLE_LICENSES=	${ACCEPTABLE_LICENCES}
 
 PKGBASE?=		${PKGNAME:C/-[^-]*$//}
 PKGVERSION?=		${PKGNAME:C/^.*-//}
+PKGVERSION?=		${PKGNAME:C/^.*-//}
 .if defined(PKGREVISION) && !empty(PKGREVISION) && (${PKGREVISION} != "0")
 .  if defined(PKGNAME)
 PKGNAME_NOREV:=		${PKGNAME}
@@ -73,6 +74,7 @@ PKGNAME_NOREV=		${DISTNAME}
 PKGNAME?=		${DISTNAME}
 PKGNAME_NOREV=		${PKGNAME}
 .endif
+PKGVERSION_NOREV=	${PKGNAME_NOREV:C/^.*-//}
 
 # A meta-package is a package that does not have any files and whose
 # only purpose is to depend on other packages, giving that collection
@@ -117,11 +119,9 @@ _INSTALL_UNSTRIPPED=	# set (flag used by platform/*.mk)
 ##### Non-overridable constants
 
 # Latest versions of tools required for correct pkgsrc operation.
-PKGTOOLS_REQD=		${_OPSYS_PKGTOOLS_REQD:U20051103}
-.if ${_USE_DESTDIR} == "user-destdir" && ${PKGTOOLS_REQD} < 20070802
-PKGTOOLS_REQD=	20070802
-.endif
-
+PKGTOOLS_REQD=		20070802
+# Versions of tools that are good enough to handle dependencies
+PKGTOOLS_BASE_REQD=	20051103
 
 ##### Transform USE_* into dependencies
 
@@ -149,12 +149,14 @@ PKG_FAIL_REASON+=	"This package doesn't support PKG_INSTALLATION_TYPE=${PKG_INST
 
 # Check that we are using up-to-date pkg_* tools with this file.
 .if !defined(NO_PKGTOOLS_REQD_CHECK)
-.  if ${PKGTOOLS_VERSION} < ${PKGTOOLS_REQD}
+.  if ${PKGTOOLS_VERSION} < ${PKGTOOLS_BASE_REQD}
 PKG_FAIL_REASON+='The package tools installed on this system are out of date.'
 PKG_FAIL_REASON+='The installed package tools are dated ${PKGTOOLS_VERSION:C|(....)(..)(..)|\1/\2/\3|} and you must'
 PKG_FAIL_REASON+='update them to at least ${PKGTOOLS_REQD:C|(....)(..)(..)|\1/\2/\3|} using the following command:'
 PKG_FAIL_REASON+=' '
 PKG_FAIL_REASON+='    (cd ${PKGSRCDIR}/pkgtools/pkg_install && ${MAKE} clean && ${MAKE} update)'
+.  elif ${PKGTOOLS_VERSION} < ${PKGTOOLS_REQD}
+BOOTSTRAP_DEPENDS+=	pkg_install>=${PKGTOOLS_REQD}:../../pkgtools/pkg_install
 .  endif
 .endif # !NO_PKGTOOLS_REQD_CHECK
 
@@ -234,11 +236,16 @@ ALL_ENV+=	PREFIX=${PREFIX}
 # This variable can be added to MAKE_ENV to ease installation of packages
 # that use BSD-style Makefiles.
 BSD_MAKE_ENV=	BINOWN=${BINOWN} BINGRP=${BINGRP}
+BSD_MAKE_ENV+=	GAMEOWN=${GAMEOWN} GAMEGRP=${GAMEGRP}
 BSD_MAKE_ENV+=	MANOWN=${MANOWN} MANGRP=${MANGRP}
+BSD_MAKE_ENV+=	SHAREOWN=${SHAREOWN} SHAREGRP=${SHAREGRP}
+BSD_MAKE_ENV+=	DOCOWN=${DOCOWN} DOCGRP=${DOCGRP}
+BSD_MAKE_ENV+=	BINMODE=${BINMODE} NONBINMODE=${NONBINMODE}
 BSD_MAKE_ENV+=	BINDIR=${PREFIX}/bin
 BSD_MAKE_ENV+=	INCSDIR=${PREFIX}/include
 BSD_MAKE_ENV+=	LIBDIR=${PREFIX}/lib
 BSD_MAKE_ENV+=	MANDIR=${PREFIX}/${PKGMANDIR}
+BSD_MAKE_ENV+=	STRIPFLAG=${_STRIPFLAG_INSTALL:Q}
 
 _BUILD_DEFS=		${BUILD_DEFS}
 _BUILD_DEFS+=		LOCALBASE
@@ -451,6 +458,15 @@ USE_LANGUAGES?=		# empty
 # named in PKGSRC_COMPILER.
 #
 .include "compiler.mk"
+
+#Fake up a home directory
+WRAPPER_TARGETS+=	fake-home
+FAKEHOMEDIR=		${WRKDIR}/.home
+ALL_ENV+=		HOME=${FAKEHOMEDIR}
+.PHONY: fake-home
+fake-home: ${FAKEHOMEDIR}
+${FAKEHOMEDIR}:
+	${RUN} ${MKDIR} ${.TARGET}
 
 .include "wrapper/bsd.wrapper.mk"
 
@@ -804,14 +820,14 @@ PKG_ERROR_HANDLER.${_class_}?=	{					\
 #
 .for _phase_ in ${_ALL_PHASES}
 ${_MAKEVARS_MK.${_phase_}}: ${WRKDIR}
-	${_PKG_SILENT}${_PKG_DEBUG}${RM} -f ${.TARGET}.tmp
+	${RUN}${RM} -f ${.TARGET}.tmp
 .  for _var_ in ${MAKEVARS:O:u}
 .    if defined(${_var_})
-	${_PKG_SILENT}${_PKG_DEBUG}					\
+	${RUN}					\
 	${ECHO} ${_var_}"=	"${${_var_}:Q} >> ${.TARGET}.tmp
 .    endif
 .  endfor
-	${_PKG_SILENT}${_PKG_DEBUG}					\
+	${RUN}					\
 	if ${TEST} -f ${.TARGET}.tmp; then				\
 		( ${ECHO} ".if !defined(_MAKEVARS_MK)";			\
 		  ${ECHO} "_MAKEVARS_MK=	defined";		\
@@ -822,7 +838,7 @@ ${_MAKEVARS_MK.${_phase_}}: ${WRKDIR}
 		) > ${.TARGET};						\
 		${RM} -f ${.TARGET}.tmp;				\
 	fi
-	${_PKG_SILENT}${_PKG_DEBUG}${TOUCH} ${TOUCH_FLAGS} ${.TARGET}
+	${RUN}${TOUCH} ${TOUCH_FLAGS} ${.TARGET}
 .endfor
 
 .if make(pbulk-index) || make(pbulk-index-item) || make(pbulk-save-wrkdir)

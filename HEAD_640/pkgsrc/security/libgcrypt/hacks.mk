@@ -1,4 +1,4 @@
-# $NetBSD: hacks.mk,v 1.2 2004/12/21 08:57:48 grant Exp $
+# $NetBSD: hacks.mk,v 1.4 2008/03/26 20:09:43 tron Exp $
 
 # config.h #defines socklen_t if it is not defined, but libgcrypt does
 # not propogate this to the installed gcrypt.h, so packages using it

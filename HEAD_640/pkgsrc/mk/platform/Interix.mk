@@ -1,4 +1,4 @@
-# $NetBSD: Interix.mk,v 1.54 2007/10/19 13:41:35 rillig Exp $
+# $NetBSD: Interix.mk,v 1.56 2008/03/04 06:45:34 jlam Exp $
 #
 # Variable definitions for the Interix operating system.
 
@@ -142,11 +142,6 @@ _PATCH_CAN_BACKUP=	yes	# native patch(1) can make backups
 _PATCH_BACKUP_ARG?=	-b -V simple -z	# switch to patch(1) for backup suffix
 _USE_RPATH=		yes	# add rpath to LDFLAGS
 
-# Ensure that USE_X11BASE programs get an xpkgwedge new enough to work.
-_OPSYS_NEEDS_XPKGWEDGE=	yes	# xpkgwedge is required for X11
-_XPKGWEDGE_DEPENDS=	xpkgwedge>=1.10:../../pkgtools/xpkgwedge
-BUILD_DEPENDS+=		${USE_X11BASE:D${_XPKGWEDGE_DEPENDS}}
-
 # flags passed to the linker to extract all symbols from static archives.
 # this is GNU ld.
 _OPSYS_WHOLE_ARCHIVE_FLAG=	-Wl,--whole-archive
@@ -175,8 +170,10 @@ _OPSYS_MAX_CMDLEN_CMD=	${ECHO} 262144
 # BINOWN, BINGRP and BINMODE as per defaults/mk.conf).
 # FIXME: Adjust to work on this system and enable the lines below.
 #.if !(empty(SETGIDGAME:M[yY][eE][sS]))
-#GAMEOWN=		games
-#GAMEGRP=		games
+#GAMES_USER=		games
+#GAMES_GROUP=		games
+#GAMEOWN=		${GAMES_USER}
+#GAMEGRP=		${GAMES_GROUP}
 #GAMEMODE=		2555
 #GAMEDIRMODE=		0775
 #.endif

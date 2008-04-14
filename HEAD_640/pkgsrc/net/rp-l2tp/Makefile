@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.9 2006/03/04 21:30:24 jlam Exp $
+# $NetBSD: Makefile,v 1.11 2008/03/11 09:16:38 rtr Exp $
 #
 
 DISTNAME=	rp-l2tp-0.3
@@ -15,6 +15,13 @@ NOT_FOR_PLATFORM+=	Interix-*-* # no userland protocol stack support
 GNU_CONFIGURE=	yes
 CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR:Q}
 USE_TOOLS+=		gmake
+
+LDFLAGS+=		${EXPORT_SYMBOLS_LDFLAGS}
+LDFLAGS.NetBSD+=	-lutil
+
+INSTALL_MAKE_FLAGS+=	RPM_INSTALL_ROOT=${DESTDIR:Q}
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 post-patch:
 	for f in l2tp.conf.5 l2tpd.8; do				\

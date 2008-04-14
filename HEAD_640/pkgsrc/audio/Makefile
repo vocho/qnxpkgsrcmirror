@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.366 2007/11/23 00:41:22 bjs Exp $
+# $NetBSD: Makefile,v 1.370 2008/03/16 09:27:37 bjs Exp $
 #
 
 COMMENT=	Audio tools
@@ -142,6 +142,7 @@ SUBDIR+=	id3lib
 SUBDIR+=	id3v2
 SUBDIR+=	ifp-line
 SUBDIR+=	jack
+SUBDIR+=	jack-devel
 SUBDIR+=	juke
 SUBDIR+=	kid3
 SUBDIR+=	kmp
@@ -165,6 +166,7 @@ SUBDIR+=	libid3tag
 SUBDIR+=	libmad
 SUBDIR+=	libmikmod
 SUBDIR+=	libmodplug
+SUBDIR+=	libmp3splt
 SUBDIR+=	libmpcdec
 SUBDIR+=	libmpd
 SUBDIR+=	libmusepack
@@ -214,6 +216,7 @@ SUBDIR+=	mp3check
 SUBDIR+=	mp3cut
 SUBDIR+=	mp3info
 SUBDIR+=	mp3splt
+SUBDIR+=	mp3splt-devel
 SUBDIR+=	mp3to
 SUBDIR+=	mpc
 SUBDIR+=	mpegaudio
@@ -280,6 +283,7 @@ SUBDIR+=	sidplay
 SUBDIR+=	sidplay2
 SUBDIR+=	snd
 SUBDIR+=	solfege
+SUBDIR+=	sonata
 SUBDIR+=	sound-juicer
 SUBDIR+=	sox
 SUBDIR+=	speex

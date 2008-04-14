@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.1.1.1 2007/07/12 20:05:28 drochner Exp $
+# $NetBSD: Makefile,v 1.3 2008/03/14 14:49:53 drochner Exp $
 #
 
-DISTNAME=	fgfs-base-0.9.10
+DISTNAME=	fgfs-base-1.0.0
 PKGNAME=	${DISTNAME:S/fgfs/flightgear/}
 CATEGORIES=	games
 MASTER_SITES=	ftp://ftp.flightgear.org/pub/fgfs/Shared/ \
@@ -16,6 +16,8 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	ftp://ftp.flightgear.org/pub/fgfs/Shared/
 COMMENT=	FlightGear Simulator (data files)
 
+PKG_DESTDIR_SUPPORT=	user-destdir
+
 WRKSRC=		${WRKDIR}/data
 NO_BUILD=	yes
 USE_LANGUAGES=	# empty
@@ -23,13 +25,11 @@ USE_LANGUAGES=	# empty
 FG_SHAREDIR=	${PREFIX}/share/FlightGear
 
 do-install:
-.if !exists(${FG_SHAREDIR})
-	${INSTALL_DATA_DIR} ${FG_SHAREDIR}
-.endif
-	(						    \
-	cd ${WRKSRC};					    \
-	${FIND} . -type f -name .\* -print|${XARGS} rm -f;  \
-	${PAX} -rwppm . ${FG_SHAREDIR};			    \
+	${INSTALL_DATA_DIR} ${DESTDIR}${FG_SHAREDIR}
+	(							\
+	cd ${WRKSRC};						\
+	${FIND} . -type f -name .\* -print|${XARGS} rm -f;	\
+	${PAX} -rwppm . ${DESTDIR}${FG_SHAREDIR};		\
 	)
 
 .include "../../mk/bsd.pkg.mk"

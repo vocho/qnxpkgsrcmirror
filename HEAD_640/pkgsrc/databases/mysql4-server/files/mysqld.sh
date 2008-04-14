@@ -1,6 +1,6 @@
 #!@RCD_SCRIPTS_SHELL@
 #
-# $NetBSD: mysqld.sh,v 1.4 2005/10/03 14:34:48 xtraeme Exp $
+# $NetBSD: mysqld.sh,v 1.6 2008/03/26 13:22:00 wiz Exp $
 #
 # PROVIDE: mysqld
 # REQUIRE: DAEMON LOGIN mountall

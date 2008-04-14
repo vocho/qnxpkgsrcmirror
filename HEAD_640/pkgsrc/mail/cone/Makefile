@@ -1,14 +1,15 @@
-# $NetBSD: Makefile,v 1.2 2007/11/19 20:28:57 jlam Exp $
+# $NetBSD: Makefile,v 1.5 2008/02/20 22:31:06 jlam Exp $
 
-DISTNAME=	cone-0.73
-PKGREVISION=	1
+DISTNAME=	cone-0.74
 CATEGORIES=	mail
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=courier/}
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	jlam@pkgsrc.org
 HOMEPAGE=	http://www.courier-mta.org/cone/
-COMMENT=	console newsreader and emailer
+COMMENT=	Console newsreader and emailer
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=		gmake perl true
 USE_LANGUAGES=		c c++
@@ -36,7 +37,5 @@ INSTALL_MAKE_FLAGS=	${MAKE_FLAGS} AM_MAKEFLAGS=${INSTALL_AM_MAKEFLAGS:Q}
 CONF_FILES=		${EGDIR}/cone.dist ${PKG_SYSCONFDIR}/cone
 
 .include "../../devel/gettext-lib/buildlink3.mk"
-.include "../../security/openssl/buildlink3.mk"
 .include "../../textproc/libxml2/buildlink3.mk"
-.include "../../mk/curses.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

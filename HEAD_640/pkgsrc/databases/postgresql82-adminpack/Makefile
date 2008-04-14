@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.2 2007/09/20 21:58:21 jlam Exp $
+# $NetBSD: Makefile,v 1.4 2008/01/18 05:06:30 tnn Exp $
 
 PKGNAME=	postgresql82-adminpack-${BASE_VERS}
 PKGREVISION=	1

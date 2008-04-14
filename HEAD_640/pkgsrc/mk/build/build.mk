@@ -1,4 +1,4 @@
-# $NetBSD: build.mk,v 1.15 2007/12/01 11:11:54 rillig Exp $
+# $NetBSD: build.mk,v 1.17 2008/02/13 09:01:20 rillig Exp $
 #
 # This file defines what happens in the build phase, excluding the
 # self-test, which is defined in test.mk.
@@ -35,6 +35,7 @@
 # See also:
 #	mk/build/test.mk
 #
+# Keywords: build make
 
 _VARGROUPS+=		build
 _USER_VARS.build=	MAKE_JOBS BUILD_ENV_SHELL
@@ -141,7 +142,7 @@ build-check-interactive:
 .if !target(do-build)
 do-build:
 .  for _dir_ in ${BUILD_DIRS}
-	${_PKG_SILENT}${_PKG_DEBUG}${_ULIMIT_CMD}			\
+	${RUN}${_ULIMIT_CMD}			\
 	cd ${WRKSRC} && cd ${_dir_} &&					\
 	${BUILD_MAKE_CMD} ${BUILD_TARGET}
 .  endfor
@@ -161,7 +162,7 @@ BUILD_ENV_SHELL?=	${SH}
 .if defined(_PKGSRC_BARRIER)
 build-env: .PHONY configure
 	@${STEP_MSG} "Entering the build environment for ${PKGNAME}"
-	${_PKG_SILENT}${_PKG_DEBUG}					\
+	${RUN}					\
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${BUILD_ENV_SHELL}
 .else
 build-env: barrier

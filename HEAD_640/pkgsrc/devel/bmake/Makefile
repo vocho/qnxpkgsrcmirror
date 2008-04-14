@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.38 2007/09/21 10:16:28 rillig Exp $
+# $NetBSD: Makefile,v 1.41 2008/03/09 19:54:28 joerg Exp $
 #
 
-DISTNAME=	bmake-20051105
-PKGREVISION=	4
+DISTNAME=	bmake-20080215
 CATEGORIES=	devel
 MASTER_SITES=	# empty
 DISTFILES=	# empty
@@ -10,15 +9,16 @@ DISTFILES=	# empty
 # distfile obtained from ftp://ftp.NetBSD.org/pub/NetBSD/misc/sjg/
 # source is kept in files/ for bootstrap purposes
 
-MAINTAINER=	sjg@NetBSD.org
+MAINTAINER=	joerg@NetBSD.org
 HOMEPAGE=	http://www.crufty.net/help/sjg/bmake.html
 COMMENT=	Portable (autoconf) version of NetBSD 'make' utility
 
 DEPENDS+=	bootstrap-mk-files-[0-9]*:../../pkgtools/bootstrap-mk-files
 
+PKG_DESTDIR_SUPPORT=	user-destdir
+
 WRKSRC=		${WRKDIR}/bmake
 NO_CHECKSUM=	yes
-NO_MTREE=	yes
 
 USE_FEATURES=	nbcompat
 
@@ -46,7 +46,7 @@ do-build:
 		${SETENV} ${MAKE_ENV} ${SH} ./bmake/boot-strap ${BOOTSTRAP_ARGS}
 
 do-install:
-	${INSTALL_PROGRAM} ${WRKDIR}/${OPSYS}/bmake ${PREFIX}/bin
-	${INSTALL_MAN} ${WRKSRC}/bmake.1 ${PREFIX}/${PKGMANDIR}/man1
+	${INSTALL_PROGRAM} ${WRKDIR}/${OPSYS}/bmake ${DESTDIR}${PREFIX}/bin
+	${INSTALL_MAN} ${WRKSRC}/bmake.1 ${DESTDIR}${PREFIX}/${PKGMANDIR}/man1
 
 .include "../../mk/bsd.pkg.mk"

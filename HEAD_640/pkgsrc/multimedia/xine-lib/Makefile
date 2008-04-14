@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.52 2007/06/15 18:20:04 drochner Exp $
+# $NetBSD: Makefile,v 1.56 2008/03/19 16:09:35 drochner Exp $
 
 .include "Makefile.common"
 
 COMMENT=		Multimedia player library
+PKGREVISION=		2
 
 BUILDLINK_API_DEPENDS.vcdimager+= vcdimager>=0.7.20nb1
 
@@ -38,8 +39,10 @@ CONFIGURE_ARGS+=	--disable-opengl
 .include "../../graphics/mng/buildlink3.mk"
 .include "../../graphics/png/buildlink3.mk"
 .include "../../misc/libcdio/buildlink3.mk"
+.include "../../multimedia/libtheora/buildlink3.mk"
 .include "../../sysutils/vcdimager-devel/buildlink3.mk"
 .include "../../x11/libXext/buildlink3.mk"
+.include "../../x11/libXt/buildlink3.mk"
 .include "../../x11/libXinerama/buildlink3.mk"
 .include "../../x11/libXv/buildlink3.mk"
 .include "../../x11/xextproto/buildlink3.mk"

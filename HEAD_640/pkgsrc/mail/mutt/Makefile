@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.151 2007/12/02 11:19:56 wiz Exp $
+# $NetBSD: Makefile,v 1.155 2008/02/22 00:36:12 gdt Exp $
 
 DISTNAME=		mutt-1.4.2.3
+PKGREVISION=		2
 CATEGORIES=		mail
 MASTER_SITES=		ftp://ftp.mutt.org/mutt/ \
 			ftp://gd.tuwien.ac.at/infosys/mail/mutt/ \
@@ -10,6 +11,7 @@ MAINTAINER=		tron@NetBSD.org
 HOMEPAGE=		http://www.mutt.org/
 COMMENT=		Text-based MIME mail client with PGP support
 
+PKG_DESTDIR_SUPPORT=	user-destdir
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
 
 .include "../../mk/bsd.prefs.mk"
@@ -19,12 +21,19 @@ USE_PKGLOCALEDIR=	yes
 USE_TOOLS+=		msgfmt
 
 GNU_CONFIGURE=		yes
-CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR:Q}			\
+CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR:Q}		\
 			--with-docdir=${PREFIX}/share/doc/mutt		\
 			--without-included-gettext			\
 			--enable-pop					\
 			--enable-imap
 MAKE_ENV+=		CHGRP=${CHGRP:Q}
+
+.if ${OPSYS} == "NetBSD" || ${OPSYS} == "DragonFly" || ${OPSYS} == "FreeBSD" || ${OPSYS} == "OpenBSD"
+# Force sendmail to /usr/sbin to avoid postfix's
+# ${LOCALBASE}/sbin/sendmail.  Should be enabled on all platforms which
+# support mailwrapper.
+CONFIGURE_ENV+=		SENDMAIL=/usr/sbin/sendmail
+.endif
 
 .if ${OPSYS} == "SunOS"
 CONFIGURE_ARGS+=	--without-wc-funcs
@@ -91,10 +100,10 @@ INSTALL_MAKE_FLAGS=	${MAKE_FLAGS} sysconfdir=${EGDIR}
 # process.
 #
 pre-install:
-	${INSTALL_DATA_DIR} ${EGDIR}
-	${INSTALL_DATA_DIR} ${DOCDIR}
-	${RM} -f ${DOCDIR}/samples
-	${LN} -sf ${EGDIR} ${DOCDIR}/samples
+	${INSTALL_DATA_DIR} ${DESTDIR}${EGDIR}
+	${INSTALL_DATA_DIR} ${DESTDIR}${DOCDIR}
+	${RM} -f ${DESTDIR}${DOCDIR}/samples
+	${LN} -sf ${DESTDIR}${EGDIR} ${DESTDIR}${DOCDIR}/samples
 
 post-install:
 .if (${PKG_INSTALLATION_TYPE} == "pkgviews")

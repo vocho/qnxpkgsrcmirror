@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.7 2007/04/01 01:58:38 obache Exp $
+# $NetBSD: Makefile,v 1.10 2008/02/15 13:33:20 obache Exp $
 #
 
 DISTNAME=		vnc2swf-0.5.0
-PKGREVISION=		1
+PKGREVISION=		2
 CATEGORIES=		graphics
 MASTER_SITES=		http://www.unixuser.org/~euske/vnc2swf/
 
@@ -10,7 +10,14 @@ MAINTAINER=		obache@NetBSD.org
 HOMEPAGE=		http://www.unixuser.org/~euske/vnc2swf/
 COMMENT=		Record vnc session as flash movie
 
+PKG_DESTDIR_SUPPORT=	user-destdir
+
+.include "../../mk/bsd.fast.prefs.mk"
+
 DEPENDS+=		x11vnc-[0-9]*:../../x11/x11vnc
+.if !exists(${X11BASE}/bin/xwininfo)
+DEPENDS+=		xwininfo-[0-9]*:../../x11/xwininfo
+.endif
 
 GNU_CONFIGURE=		yes
 USE_LANGUAGES=		c c++
@@ -26,15 +33,15 @@ SUBST_SED.x11base=	-e "s|/usr/X11R6|${PREFIX}|"
 SUBST_CLASSES+=		toolpath
 SUBST_STAGE.toolpath=	pre-configure
 SUBST_FILES.toolpath=	recordwin.sh
-SUBST_SED.toolpath=	-E -e "s|^(VNC2SWF=).*|\1${PREFIX}/bin/vnc2swf|" \
-			-e "s|^(X11VNC=).*|\1${PREFIX}/bin/x11vnc|" \
-			-e "s|^(XWININFO=).*|\1${X11BASE}/bin/xwininfo|" \
-			-e "s|^(AWK=).*|\1${AWK}|" \
+SUBST_SED.toolpath=	-e "s|VNC2SWF=vnc2swf|VNC2SWF=${PREFIX}/bin/vnc2swf|" \
+			-e "s|X11VNC=x11vnc|X11VNC=${PREFIX}/bin/x11vnc|" \
+			-e "s|XWININFO=xwininfo|XWININFO=${X11BASE}/bin/xwininfo|" \
+			-e "s|AWK=awk|AWK=${AWK}|" \
 			-e 's|-mouse|-localhost|'
 post-install:
-	${INSTALL_DATA} ${WRKSRC}/Vnc2Swf.ad ${PREFIX}/lib/X11/app-defaults/Vnc2Swf
+	${INSTALL_DATA} ${WRKSRC}/Vnc2Swf.ad ${DESTDIR}${PREFIX}/lib/X11/app-defaults/Vnc2Swf
 	cd ${WRKSRC}/docs && \
-	${PAX} -rw -pp -pm . ${PREFIX}/share/doc/html/vnc2swf
+	${PAX} -rw -pp -pm . ${DESTDIR}${PREFIX}/share/doc/html/vnc2swf
 
 .include "../../devel/zlib/buildlink3.mk"
 .include "../../x11/libXaw/buildlink3.mk"

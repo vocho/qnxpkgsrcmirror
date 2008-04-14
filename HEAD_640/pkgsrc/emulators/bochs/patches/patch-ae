@@ -1,13 +1,13 @@
-$NetBSD: patch-ae,v 1.5 2005/12/03 03:17:14 ben Exp $
+$NetBSD: patch-ae,v 1.7 2008/01/18 10:21:01 jmmv Exp $
 
---- iodev/eth_tuntap.cc.orig	2005-05-21 00:38:29.000000000 -0700
-+++ iodev/eth_tuntap.cc
-@@ -58,7 +58,7 @@
- #include <linux/if_tun.h>
- #else
- #include <net/if.h>
--#ifndef __APPLE__
-+#if !defined(__APPLE__) && !defined(__NetBSD__)
- #include <net/if_tap.h>
- #endif
- #endif
+--- main.cc.orig	2007-12-21 22:16:34.000000000 +0100
++++ main.cc
+@@ -600,7 +600,7 @@ int bx_init_main(int argc, char *argv[])
+     }
+     arg++;
+   }
+-#if BX_WITH_CARBON
++#if BROKEN_BX_WITH_CARBON
+   if(!getenv("BXSHARE"))
+   {
+     CFBundleRef mainBundle;

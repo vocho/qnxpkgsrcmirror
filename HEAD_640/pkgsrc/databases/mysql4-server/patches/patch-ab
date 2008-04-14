@@ -1,4 +1,4 @@
-$NetBSD: patch-ab,v 1.5 2007/05/23 08:11:50 martti Exp $
+$NetBSD: patch-ab,v 1.7 2008/03/26 13:22:00 wiz Exp $
 
 --- tests/Makefile.in.orig	2006-11-03 04:19:11.000000000 +0200
 +++ tests/Makefile.in	2007-05-23 08:52:31.000000000 +0300

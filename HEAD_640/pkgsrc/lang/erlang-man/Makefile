@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.2 2007/08/03 23:48:56 joerg Exp $
+# $NetBSD: Makefile,v 1.4 2008/01/04 14:10:06 ghen Exp $
 
-DISTNAME=		otp_doc_man_${DIST_VERSION}
+DISTNAME=		otp_doc_man_${DIST_VERSION_MAJOR}-${DIST_VERSION_MINOR}
 PKGNAME=		erlang-man-${ERLANG_VERSION}
 CATEGORIES=		lang
 MASTER_SITES=		http://www.erlang.org/download/
@@ -14,11 +14,13 @@ DIST_SUBDIR=		erlang
 # needs erlang installed for its directory structure
 DEPENDS+=		erlang-${ERLANG_VERSION}{,nb*}:../../lang/erlang
 
+PKG_DESTDIR_SUPPORT=	user-destdir
+
 NO_CONFIGURE=		yes
 NO_BUILD=		yes
 
 do-install:
-	cd ${WRKDIR} && ${PAX} -rw man ${PREFIX:Q}/lib/erlang/
+	cd ${WRKDIR} && pax -rw man ${DESTDIR}${PREFIX}/lib/erlang/
 
 .include "../../lang/erlang/Makefile.versions"
 

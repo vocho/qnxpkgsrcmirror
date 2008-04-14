@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.124 2007/11/22 21:05:21 drochner Exp $
+# $NetBSD: Makefile,v 1.127 2008/03/25 13:44:41 wiz Exp $
 #
 
 COMMENT=	Editors
@@ -51,6 +51,7 @@ SUBDIR+=	leim21
 SUBDIR+=	lpe
 SUBDIR+=	lyx-qt
 SUBDIR+=	lyx-xforms
+SUBDIR+=	lyx15
 SUBDIR+=	manedit
 SUBDIR+=	matlab-mode
 SUBDIR+=	mflteco
@@ -98,7 +99,6 @@ SUBDIR+=	vilearn
 SUBDIR+=	vim
 SUBDIR+=	vim-gtk
 SUBDIR+=	vim-gtk2
-SUBDIR+=	vim-kde
 SUBDIR+=	vim-lang
 SUBDIR+=	vim-motif
 SUBDIR+=	vim-share

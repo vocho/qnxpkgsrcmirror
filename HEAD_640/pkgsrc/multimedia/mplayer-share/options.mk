@@ -1,4 +1,4 @@
-# $NetBSD: options.mk,v 1.24 2007/12/21 17:41:12 drochner Exp $
+# $NetBSD: options.mk,v 1.31 2008/03/25 15:35:36 wiz Exp $
 
 .if defined(PKGNAME) && empty(PKGNAME:Mmplayer-share*)
 
@@ -14,10 +14,9 @@ PKG_OPTIONS_VAR=	PKG_OPTIONS.${PKGNAME:C/-[0-9].*//}
 
 # Options supported by both mplayer* or mencoder*.
 
+PKG_SUPPORTED_OPTIONS=	gif jpeg mad dts dv dvdread png theora vorbis x264 debug
 .if ${OSS_TYPE} != "none"
-PKG_SUPPORTED_OPTIONS=	gif jpeg mad dts dv dvdread oss png theora vorbis
-.else
-PKG_SUPPORTED_OPTIONS=	gif jpeg mad dts dv dvdread png theora vorbis
+PKG_SUPPORTED_OPTIONS+=	oss
 .endif
 
 # Set options based on the specific package being built.
@@ -41,11 +40,14 @@ PKG_SUPPORTED_OPTIONS+=	cdparanoia
 .elif ${OPSYS} == "SunOS"
 PKG_SUPPORTED_OPTIONS+=	mlib
 .endif
+.if ${OPSYS} == "Linux"
+PKG_SUPPORTED_OPTIONS+=	vidix
+.endif
 
 # Platform-specific options.
 .if ${MACHINE_ARCH} == "i386" || ${MACHINE_ARCH} == "x86_64" || \
     ${MACHINE_ARCH} == "powerpc"
-PKG_SUPPORTED_OPTIONS+= mplayer-runtime-cpudetection xvid
+PKG_SUPPORTED_OPTIONS+= mplayer-runtime-cpudetection
 .endif
 .if ${MACHINE_ARCH} == "i386"
 PKG_SUPPORTED_OPTIONS+= mplayer-default-cflags mplayer-win32
@@ -57,6 +59,10 @@ PKG_SUPPORTED_OPTIONS+=	mplayer-real
 .if ${MACHINE_ARCH} == "i386" || ${MACHINE_ARCH} == "x86_64"
 PKG_SUPPORTED_OPTIONS+=	mplayer-ssse3
 .endif
+.if ${MACHINE_ARCH} == "i386" || ${MACHINE_ARCH} == "x86_64" || \
+    ${MACHINE_ARCH} == "powerpc" || ${MACHINE_ARCH} == "sparc64"
+PKG_SUPPORTED_OPTIONS+= xvid
+.endif
 
 # -------------------------------------------------------------------------
 # Define PKG_SUGGESTED_OPTIONS.
@@ -65,11 +71,14 @@ PKG_SUPPORTED_OPTIONS+=	mplayer-ssse3
 .for _o_ in aalib arts cdparanoia dv dvdread esound gif jpeg \
 	    lame mad mplayer-menu mplayer-real \
 	    mplayer-default-cflags mplayer-runtime-cpudetection mplayer-win32 \
-	    nas oss png sdl theora vorbis xvid
+	    nas oss png sdl theora vorbis x264 xvid
 .  if !empty(PKG_SUPPORTED_OPTIONS:M${_o_})
 PKG_SUGGESTED_OPTIONS+=	${_o_}
 .  endif
 .endfor
+.if ${OPSYS} == "Linux"
+PKG_SUGGESTED_OPTIONS+=	vidix
+.endif
 
 # -------------------------------------------------------------------------
 # Handle extra libraries (part 1)
@@ -99,6 +108,10 @@ CONFIGURE_ARGS+=	--enable-cdparanoia
 .  include "../../audio/cdparanoia/buildlink3.mk"
 .else
 CONFIGURE_ARGS+=	--disable-cdparanoia
+.endif
+
+.if !empty(PKG_OPTIONS:Mdebug)
+CONFIGURE_ARGS+=	--enable-debug
 .endif
 
 .if !empty(PKG_OPTIONS:Mdts)
@@ -247,10 +260,22 @@ CONFIGURE_ARGS+=	--enable-theora
 CONFIGURE_ARGS+=	--disable-theora
 .endif
 
+# disable vidix if not in options
+.if empty(PKG_OPTIONS:Mvidix)
+CONFIGURE_ARGS+=	--disable-vidix-internal
+CONFIGURE_ARGS+=	--disable-vidix-external
+.endif
+
 .if !empty(PKG_OPTIONS:Mvorbis)
 CONFIGURE_ARGS+=	--enable-libvorbis
 .else
 CONFIGURE_ARGS+=	--disable-libvorbis
+.endif
+
+.if !empty(PKG_OPTIONS:Mx264)
+.  include "../../multimedia/x264-devel/buildlink3.mk"
+.else
+CONFIGURE_ARGS+=	--disable-x264
 .endif
 
 .if !empty(PKG_OPTIONS:Mxvid)
@@ -264,6 +289,7 @@ CONFIGURE_ARGS+=	--disable-xvid
 .if !empty(PKG_OPTIONS:Mmplayer-ssse3)
 # needs a recent assembler
 .include "../../devel/binutils/buildlink3.mk"
+.include "../../devel/binutils/override-as.mk"
 .else
 CONFIGURE_ARGS+=	--disable-ssse3
 .endif

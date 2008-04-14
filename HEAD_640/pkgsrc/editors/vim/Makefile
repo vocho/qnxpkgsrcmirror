@@ -1,9 +1,11 @@
-# $NetBSD: Makefile,v 1.65 2006/03/02 10:41:41 martti Exp $
+# $NetBSD: Makefile,v 1.69 2008/03/11 10:55:02 martti Exp $
 
 PKGNAME=		vim-${VIM_VERSION}.${VIM_PATCHLEVEL}
 #PKGREVISION=		1
 
 COMMENT=		Vim editor (vi clone) without GUI
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 .include		"../../editors/vim-share/Makefile.common"
 
@@ -13,7 +15,7 @@ CONFLICTS+=		vim-gtk-[0-9]* vim-gtk2-[0-9]* vim-motif-[0-9]*
 CONFLICTS+=		vim-xaw-[0-9]* vim-kde-[0-9]*
 
 CONFIGURE_ARGS+=	--enable-gui=no --without-x
-CONFIGURE_ARGS+=	--with-tlib=ncurses
+CONFIGURE_ARGS+=	--with-tlib=${BUILDLINK_LIBNAME.termcap}
 
 BUILD_TARGET=		vim
 INSTALL_TARGET=		installvimbin
@@ -21,10 +23,11 @@ TEST_TARGET=		check
 
 post-install:
 .for f in rvim rview
-	${RM} -f ${PREFIX:Q}/bin/${f:Q}
-	${LN} -s vim ${PREFIX:Q}/bin/${f:Q}
+	${RM} -f ${DESTDIR}${PREFIX}/bin/${f}
+	${LN} -s vim ${DESTDIR}${PREFIX}/bin/${f}
 .endfor
 
-.include "../../devel/ncurses/buildlink3.mk"
 .include "../../converters/libiconv/buildlink3.mk"
+.include "../../devel/gettext-lib/buildlink3.mk"
+.include "../../mk/termcap.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

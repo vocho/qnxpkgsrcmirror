@@ -1,4 +1,4 @@
-# $NetBSD: DEINSTALL,v 1.2 2004/07/21 17:55:13 jlam Exp $
+# $NetBSD: DEINSTALL,v 1.4 2008/03/26 13:22:00 wiz Exp $
 
 case ${STAGE} in
 POST-DEINSTALL)

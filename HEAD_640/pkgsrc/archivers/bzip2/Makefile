@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.45 2007/08/24 02:42:50 jlam Exp $
+# $NetBSD: Makefile,v 1.47 2008/03/26 19:06:06 adrianp Exp $
 #
 
-DISTNAME=	bzip2-1.0.4
+DISTNAME=	bzip2-1.0.5
 CATEGORIES=	archivers
-MASTER_SITES=	http://www.bzip.org/1.0.4/
+MASTER_SITES=	http://www.bzip.org/1.0.5/
 
 MAINTAINER=	joerg@NetBSD.org
 HOMEPAGE=	http://www.bzip.org/
@@ -15,6 +15,7 @@ EXTRACT_ONLY=	# empty
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
 PKG_DESTDIR_SUPPORT=	user-destdir
 
+MAKE_JOBS_SAFE=		no
 NO_CHECKSUM=		yes
 USE_LIBTOOL=		yes
 

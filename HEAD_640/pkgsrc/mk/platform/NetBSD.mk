@@ -1,4 +1,4 @@
-# $NetBSD: NetBSD.mk,v 1.27 2007/10/19 13:41:35 rillig Exp $
+# $NetBSD: NetBSD.mk,v 1.29 2008/03/04 06:45:34 jlam Exp $
 #
 # Variable definitions for the NetBSD operating system.
 
@@ -74,6 +74,8 @@ _OPSYS_EMULDIR.osf1=		/emul/osf1
 _OPSYS_EMULDIR.solaris=		/emul/svr4
 _OPSYS_EMULDIR.solaris32=	/emul/svr4_32
 _OPSYS_EMULDIR.sunos=		/emul/sunos
+
+_OPSYS_SYSTEM_RPATH?=		/usr/lib
 
 .if exists(/usr/include/netinet6)
 _OPSYS_HAS_INET6=	yes	# IPv6 is standard
@@ -151,8 +153,10 @@ _OPSYS_MAX_CMDLEN_CMD=	/sbin/sysctl -n kern.argmax
 # Set the group and mode to meaningful values in that case (defaults to
 # BINOWN, BINGRP and BINMODE as per defaults/mk.conf).
 .if !(empty(SETGIDGAME:M[yY][eE][sS]))
-GAMEOWN=		games
-GAMEGRP=		games
+GAMES_USER=		games
+GAMES_GROUP=		games
+GAMEOWN=		${GAMES_USER}
+GAMEGRP=		${GAMES_GROUP}
 GAMEMODE=		2555
 GAMEDIRMODE=		0775
 .endif

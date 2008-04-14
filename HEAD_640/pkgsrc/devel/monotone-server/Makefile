@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.36 2007/12/14 11:39:38 bjs Exp $
+# $NetBSD: Makefile,v 1.38 2008/03/03 17:45:36 jlam Exp $
 #
 
-DISTNAME=	monotone-server-0.38
+DISTNAME=	monotone-server-0.39
 CATEGORIES=	devel scm
 MASTER_SITES=	# empty
 DISTFILES=	# empty
@@ -10,7 +10,9 @@ MAINTAINER=	jmmv@NetBSD.org
 HOMEPAGE=	http://monotone.ca/
 COMMENT=	Simplifies the configuration of a dedicated Monotone server
 
-DEPENDS+=	monotone>=0.38:../../devel/monotone
+DEPENDS+=	monotone>=0.39:../../devel/monotone
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 EXTRACT_ONLY=	# empty
 NO_BUILD=	yes
@@ -70,12 +72,12 @@ do-extract:
 
 do-install:
 	${INSTALL_SCRIPT} ${WRKSRC}/monotone-server-init.sh \
-		${PREFIX}/sbin/monotone-server-init
-	${INSTALL_DATA_DIR} ${EXAMPLEDIR}
-	${INSTALL_DATA} ${WRKSRC}/hooks.conf ${EXAMPLEDIR}/hooks.conf
+		${DESTDIR}${PREFIX}/sbin/monotone-server-init
+	${INSTALL_DATA_DIR} ${DESTDIR}${EXAMPLEDIR}
+	${INSTALL_DATA} ${WRKSRC}/hooks.conf ${DESTDIR}${EXAMPLEDIR}/hooks.conf
 	${INSTALL_DATA} ${WRKSRC}/read-permissions \
-		${EXAMPLEDIR}/read-permissions
+		${DESTDIR}${EXAMPLEDIR}/read-permissions
 	${INSTALL_DATA} ${WRKSRC}/write-permissions \
-		${EXAMPLEDIR}/write-permissions
+		${DESTDIR}${EXAMPLEDIR}/write-permissions
 
 .include "../../mk/bsd.pkg.mk"

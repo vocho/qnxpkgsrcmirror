@@ -1,4 +1,4 @@
-# $NetBSD: check-wrkref.mk,v 1.15 2007/09/13 09:52:46 rillig Exp $
+# $NetBSD: check-wrkref.mk,v 1.18 2008/02/20 10:23:26 rillig Exp $
 #
 # This file checks that the installed files don't contain any strings
 # that point to the directory where the package had been built, to make
@@ -7,10 +7,11 @@
 #
 # User-settable variables:
 #
-# CHECK_WRKREF:
+# CHECK_WRKREF
 #	The list of directory names that must not appear in installed files.
 #
 #	* "tools" for the tool wrapper directory
+#	* "home" for FAKEHOMEDIR
 #	* "wrksrc" for WRKSRC
 #	* "work" for WRKDIR
 #	* "wrkobjdir" for WRKOBJDIR
@@ -27,7 +28,7 @@
 #
 # Package-settable variables:
 #
-# CHECK_WRKREF_SKIP:
+# CHECK_WRKREF_SKIP
 #	The list of filename patterns that should be excluded from this
 #	test, either absolute or relative to PREFIX.
 #
@@ -37,7 +38,7 @@ _USER_VARS.check-wrkref=	CHECK_WRKREF
 _PKG_VARS.check-wrkref=		CHECK_WRKREF_SKIP
 
 .if defined(PKG_DEVELOPER)
-CHECK_WRKREF?=		tools
+CHECK_WRKREF?=		tools home
 .endif
 CHECK_WRKREF?=		no
 CHECK_WRKREF_SKIP?=	# none
@@ -47,6 +48,7 @@ _CHECK_WRKREF_FILELIST_CMD?=	${PKG_FILELIST_CMD}
 _CHECK_WRKREF_DIR.no=		# none
 _CHECK_WRKREF_DIR.work=		${WRKDIR}
 _CHECK_WRKREF_DIR.tools=	${TOOLS_DIR}
+_CHECK_WRKREF_DIR.home=		${FAKEHOMEDIR}
 _CHECK_WRKREF_DIR.wrkobjdir=	${WRKOBJDIR}
 _CHECK_WRKREF_DIR.wrksrc=	${WRKSRC}
 _CHECK_WRKREF_DIR.pkgsrc=	${PKGSRCDIR}
@@ -56,7 +58,7 @@ _CHECK_WRKREF_DIRS=	# none
 .for d in ${CHECK_WRKREF}
 .  if !defined(_CHECK_WRKREF_DIR.${d})
 PKG_FAIL_REASON+=	"[check-wrkref.mk] Invalid value "${d:Q}" for CHECK_WRKREF."
-PKG_FAIL_REASON+=	"[check-wrkref.mk] Try one of { tools wrksrc work objwrkdir } instead."
+PKG_FAIL_REASON+=	"[check-wrkref.mk] Try one of { tools home wrksrc work objwrkdir } instead."
 .  else
 _CHECK_WRKREF_DIRS+=	${_CHECK_WRKREF_DIR.${d}}
 .  endif
@@ -69,7 +71,7 @@ privileged-install-hook: _check-wrkref
 _check-wrkref: error-check .PHONY
 	@${STEP_MSG} "Checking for work-directory references in ${PKGNAME}"
 	${RUN} rm -f ${ERROR_DIR}/${.TARGET}
-	${_PKG_SILENT}${_PKG_DEBUG}					\
+	${RUN}					\
 	exec 1>${ERROR_DIR}/${.TARGET};					\
 	cd ${DESTDIR}${PREFIX};						\
 	${_CHECK_WRKREF_FILELIST_CMD} | ${SORT} |			\

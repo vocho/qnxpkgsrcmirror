@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.211 2007/12/02 02:17:24 gdt Exp $
+# $NetBSD: Makefile,v 1.216 2008/03/14 01:13:36 taca Exp $
 
-DISTNAME=	postfix-2.4.6
+DISTNAME=	postfix-2.5.1
 PKGREVISION=	1
 CATEGORIES=	mail
 MASTER_SITES=	ftp://ftp.porcupine.org/mirrors/postfix-release/official/
@@ -24,17 +24,18 @@ CHECK_HEADERS_SKIP+=	src/global/mail_params.h
 # merely a default, and may be changed by setting "queue_directory" in
 # ${PKG_SYSCONFDIR}/main.cf.
 #
+POSTFIX_DATA_DIR?=	${VARBASE}/db/postfix
 POSTFIX_QUEUE_DIR?=	${VARBASE}/spool/postfix
-BUILD_DEFS+=		VARBASE POSTFIX_QUEUE_DIR
+BUILD_DEFS+=		VARBASE POSTFIX_DATA_DIR POSTFIX_QUEUE_DIR
 
 # CCARGS is a list of options to pass to the preprocessor/compiler.
 # AUXLIBS is a list of options to pass to the linker.
 #
-CCARGS=		# empty
+CCARGS=		-DUSE_SASL_AUTH
 AUXLIBS=	${LDFLAGS}
-FIX_RPATH+=	AUXLIBS
 
 # Set some default paths to override ${WRKSRC}/src/global/mail_params.h.
+CCARGS+=	-DDEF_DATA_DIR=\"${POSTFIX_DATA_DIR}\"
 CCARGS+=	-DDEF_QUEUE_DIR=\"${POSTFIX_QUEUE_DIR}\"
 CCARGS+=	-DDEF_DAEMON_DIR=\"${LIBEXECDIR}\"
 CCARGS+=	-DDEF_COMMAND_DIR=\"${PREFIX}/sbin\"
@@ -53,6 +54,8 @@ SUBST_CLASSES+=		postfix
 SUBST_STAGE.postfix=	post-configure
 SUBST_FILES.postfix=	conf/main.cf src/global/mail_params.h
 SUBST_SED.postfix=	\
+	-e 's|^\(data_directory\) =.*|\1 = ${POSTFIX_DATA_DIR}|'
+SUBST_SED.postfix+=	\
 	-e 's|^\(queue_directory\) =.*|\1 = ${POSTFIX_QUEUE_DIR}|'
 SUBST_SED.postfix+=	\
 	-e 's|^\(command_directory\) =.*|\1 = ${PREFIX}/sbin|'
@@ -101,6 +104,7 @@ MAKE_ENV+=		AUXLIBS=${AUXLIBS:Q} CCARGS=${CCARGS:Q}
 
 RCD_SCRIPTS=		postfix
 OWN_DIRS+=		${POSTFIX_QUEUE_DIR} ${POSTFIX_QUEUE_DIR}/etc
+OWN_DIRS_PERMS+=	${POSTFIX_DATA_DIR} postfix postfix 0700
 MAKE_DIRS+=		${PKG_SYSCONFDIR}
 
 PKG_GROUPS?=		postfix maildrop
@@ -117,10 +121,6 @@ CONF_FILES_PERMS=	# empty
 CONF_FILES_PERMS+=	${EXAMPLEDIR}/${i} ${PKG_SYSCONFDIR}/${i} \
 			${ROOT_USER} ${ROOT_GROUP} 755
 .endfor
-.if !empty(PKG_OPTIONS:Msasl)
-MAKE_DIRS+=		${SASLLIBDIR}
-CONF_FILES+=		${EXAMPLEDIR}/smtpd.conf ${SASLLIBDIR}/smtpd.conf
-.endif
 
 MAKE_ENV+=		DEBUG= # empty
 

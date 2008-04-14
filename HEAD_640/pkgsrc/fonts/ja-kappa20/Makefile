@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.12 2006/06/21 21:21:46 joerg Exp $
+# $NetBSD: Makefile,v 1.14 2008/03/03 20:17:12 jlam Exp $
 
 DISTNAME=		Kappa20-0.394
 PKGNAME=		ja-kappa20-0.394
@@ -11,11 +11,13 @@ MAINTAINER=		tech-pkg-ja@jp.NetBSD.org
 HOMEPAGE=		http://kappa.allnet.ne.jp/20dot.fonts/
 COMMENT=		20x20 dots X11 bitmap font for Japanese with several extra fonts
 
+PKG_DESTDIR_SUPPORT=	user-destdir
+
 USE_X11BASE=		YES
 FONTDIR=		${PREFIX}/lib/X11/fonts/local
 ALIAS_KAPPA=		${PREFIX}/share/examples/fonts.alias.Kappa20
 
-USE_TOOLS+=		mkfontdir
+USE_TOOLS+=		mkfontdir gzip
 
 FILES_SUBST+=		FONTDIR=${FONTDIR:Q}
 FILES_SUBST+=		ALIAS_KAPPA=${ALIAS_KAPPA:Q}
@@ -26,8 +28,9 @@ BUILD_TARGET=		default
 INSTALLATION_DIRS=	lib/X11/fonts/local share/doc share/examples
 
 do-install:
-	${INSTALL_DATA} ${WRKSRC}/README ${PREFIX}/share/doc/README.Kappa20; \
-	${INSTALL_DATA} ${WRKSRC}/pcf/fonts.alias ${ALIAS_KAPPA}; \
-	${INSTALL_DATA} ${WRKSRC}/pcf/*.pcf.* ${FONTDIR}
+	${INSTALL_DATA} ${WRKSRC}/README \
+		${DESTDIR}${PREFIX}/share/doc/README.Kappa20
+	${INSTALL_DATA} ${WRKSRC}/pcf/fonts.alias ${DESTDIR}${ALIAS_KAPPA}
+	${INSTALL_DATA} ${WRKSRC}/pcf/*.pcf.* ${DESTDIR}${FONTDIR}
 
 .include "../../mk/bsd.pkg.mk"

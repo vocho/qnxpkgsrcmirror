@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.340 2007/11/13 18:02:52 jlam Exp $
+# $NetBSD: Makefile,v 1.346 2008/03/25 13:44:21 wiz Exp $
 #
 
 COMMENT=	Electronic mail utilities
@@ -23,7 +23,6 @@ SUBDIR+=	claws-mail-attachwarner
 SUBDIR+=	claws-mail-attremover
 SUBDIR+=	claws-mail-bogofilter
 SUBDIR+=	claws-mail-cachesaver
-SUBDIR+=	claws-mail-clamav
 SUBDIR+=	claws-mail-dillo-viewer
 SUBDIR+=	claws-mail-fetchinfo
 SUBDIR+=	claws-mail-gtkhtml
@@ -40,8 +39,10 @@ SUBDIR+=	claws-mail-smime
 SUBDIR+=	claws-mail-spamassassin
 SUBDIR+=	claws-mail-spamreport
 SUBDIR+=	claws-mail-synce
+SUBDIR+=	claws-mail-tnef
 SUBDIR+=	claws-mail-trayicon
 SUBDIR+=	claws-mail-vcalendar
+SUBDIR+=	clawsker
 SUBDIR+=	columba
 SUBDIR+=	cone
 SUBDIR+=	coolmail
@@ -96,6 +97,7 @@ SUBDIR+=	grepmail
 SUBDIR+=	hypermail
 SUBDIR+=	ifile
 SUBDIR+=	ifile-procmail
+SUBDIR+=	im
 SUBDIR+=	imap-uw
 SUBDIR+=	imap-uw-utils
 SUBDIR+=	imapfilter
@@ -113,7 +115,9 @@ SUBDIR+=	libetpan
 SUBDIR+=	libmilter
 SUBDIR+=	libsieve
 SUBDIR+=	libspf-alt
+SUBDIR+=	libspf2
 SUBDIR+=	libsylph
+SUBDIR+=	libytnef
 SUBDIR+=	mail-notification
 SUBDIR+=	mailagent
 SUBDIR+=	mailcrypt
@@ -272,8 +276,6 @@ SUBDIR+=	teapop
 SUBDIR+=	thunderbird
 SUBDIR+=	thunderbird-bin-nightly
 SUBDIR+=	thunderbird-gtk1
-SUBDIR+=	thunderbird15
-SUBDIR+=	thunderbird15-gtk1
 SUBDIR+=	tmda
 SUBDIR+=	tnef
 SUBDIR+=	tnef2txt

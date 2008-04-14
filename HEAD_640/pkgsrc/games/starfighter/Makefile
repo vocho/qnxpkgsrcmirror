@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.15 2007/09/02 13:03:50 joerg Exp $
+# $NetBSD: Makefile,v 1.17 2008/03/10 10:33:38 wiz Exp $
 #
 
 DISTNAME=	starfighter-1.1-1
+PKGNAME=	starfighter-1.1.1
 PKGREVISION=	6
 CATEGORIES=	games
 MASTER_SITES=	ftp://ftp.NetBSD.org/pub/NetBSD/misc/xtraeme/
@@ -14,6 +15,8 @@ COMMENT=	Old school 2D shoot them up
 USE_TOOLS+=	gmake
 USE_LANGUAGES=	c++
 WRKSRC=		${WRKDIR}/${DISTNAME:S/-1$//}
+
+CONFLICTS+=	starfighter-1.1-[0-9]*
 
 MAKE_FILE=	makefile
 

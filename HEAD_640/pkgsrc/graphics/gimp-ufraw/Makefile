@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.43 2007/09/21 13:03:49 wiz Exp $
+# $NetBSD: Makefile,v 1.47 2008/03/06 14:53:51 wiz Exp $
 
-DISTNAME=		ufraw-0.12.1
+DISTNAME=		ufraw-0.13
 PKGNAME=		gimp-${DISTNAME}
 PKGREVISION=		3
 CATEGORIES=		graphics

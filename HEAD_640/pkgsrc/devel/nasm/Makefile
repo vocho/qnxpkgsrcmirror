@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.32 2007/02/22 19:26:22 wiz Exp $
+# $NetBSD: Makefile,v 1.35 2008/03/12 21:16:12 drochner Exp $
 
-DISTNAME=	nasm-0.98.39
-PKGREVISION=	3
+DISTNAME=	nasm-2.02
 CATEGORIES=	devel lang
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=nasm/}
 EXTRACT_SUFX=	.tar.bz2
@@ -17,16 +16,15 @@ USE_TOOLS+=		gmake makeinfo perl
 GCC_REQD+=		3.0
 GNU_CONFIGURE=		yes
 
-INFO_FILES=		# PLIST
+INFO_FILES=		yes
 BUILD_TARGET=		everything
 INSTALL_TARGET=		install_everything
 
 INSTALL_ENV+=	INSTALLROOT=${DESTDIR}
 
-MAKE_ENV+=	PERL5=${PERL5:Q}			\
-		INSTALL_DATA_DIR=${INSTALL_DATA_DIR:Q}
+MAKE_ENV+=	PERL5=${PERL5:Q}
 
-INSTALLATION_DIRS=	bin ${PKGINFODIR} ${PKGMANDIR}/man1 share/doc/html
+AUTO_MKDIRS=	yes
 
 .include "../../mk/compiler.mk"
 
