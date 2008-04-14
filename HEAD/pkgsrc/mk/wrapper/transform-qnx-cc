@@ -73,6 +73,8 @@ case $arg in
 -kPIC			) transform_to "-fPIC" ;;
 -mt			) transform_to "-threads" ;;
 
+# gcc throws a warning but exits with 0. qcc exits with 1.
+-R*			) transform_discard_with_warning ;;
 # Unknown options.
 -*			) transform_pass_with_warning ;;
 
