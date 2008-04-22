@@ -13,6 +13,7 @@ COMMENT=		Portable NetBSD rc.subr implementation for pkgsrc
 
 ONLY_FOR_PLATFORM=	Darwin-*-* FreeBSD-[0-4].*-* Interix-*-*
 ONLY_FOR_PLATFORM+=	Linux-*-* SunOS-*-*
+ONLY_FOR_PLATFORM+=	QNX-*-*
 
 NO_BUILD=		yes
 NO_CHECKSUM=		yes
