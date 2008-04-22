@@ -3,7 +3,7 @@
 .if defined(PKGSRC_COMPILER) && ${PKGSRC_COMPILER} == "qcc"
 CC=		qcc
 .else
-CC=             gcc
+CC=		gcc
 .endif
 
 .if !defined(CPP) || ${CPP} == "cpp"
@@ -19,6 +19,7 @@ TOUCH_FLAGS?=
 
 USERADD?=	/usr/sbin/passwd
 
+MOTIF_TYPE_DEFAULT?=  openmotif       # default 2.0 compatible libs type
 CPP_PRECOMP_FLAGS?=	# unset
 DEF_UMASK?=		0002
 EXPORT_SYMBOLS_LDFLAGS?=-Wl,-E	# add symbols to the dynamic symbol table
@@ -30,7 +31,7 @@ PKG_TOOLS_BIN?=		/usr/sbin
 .endif
 ROOT_CMD?=		${SU} - root -c
 ROOT_USER?=		root
-ROOT_GROUP?=	root
+ROOT_GROUP?=		root
 ULIMIT_CMD_datasize?=	ulimit -d `ulimit -H -d`
 ULIMIT_CMD_stacksize?=	ulimit -s `ulimit -H -s`
 ULIMIT_CMD_memorysize?=	ulimit -m `ulimit -H -m`
@@ -96,3 +97,4 @@ GAMEDIRMODE=		0775
 .endif
 
 PREFER.zlib?=		pkgsrc
+PREFER.bzip2?=		pkgsrc
