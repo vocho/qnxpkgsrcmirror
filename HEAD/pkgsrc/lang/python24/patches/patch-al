@@ -46,9 +46,9 @@ $NetBSD$
      Monterey*)
          RANLIB=:
          without_gcc=;;
-+        QNX*)
-+           LDFLAGS="$LDFLAGS -Wl,-E"
-+           ;;
++    QNX*)
++        LDFLAGS="$LDFLAGS -Wl,-E"
++        ;;
  	*)	without_gcc=no;;
  	esac
  fi;
@@ -888,9 +888,9 @@ $NetBSD$
  	   LINKCC="\$(srcdir)/Modules/makexp_aix Modules/python.exp $exp_extra \$(LIBRARY); $LINKCC";;
  	Monterey64*)
  	   LINKCC="$LINKCC -L/usr/lib/ia64l64";;
-+        QNX*)
-+           LINKCC="qcc"
-+           ;;
++  QNX*)
++     LINKCC="qcc"
++     ;;
  	esac
  fi
  echo "$as_me:$LINENO: result: $LINKCC" >&5
@@ -899,7 +899,7 @@ $NetBSD$
  	  INSTSONAME="$LDLIBRARY".$SOVERSION
            ;;
 -    Linux*|GNU*|NetBSD*|FreeBSD*|DragonFly*)
-+    Linux*|GNU*|NetBSD*|FreeBSD*|Interix*|DragonFly*)
++    Linux*|GNU*|NetBSD*|FreeBSD*|Interix*|DragonFly*|QNX*)
  	  LDLIBRARY='libpython$(VERSION).so'
  	  BLDLIBRARY='-L. -lpython$(VERSION)'
  	  RUNSHARED=LD_LIBRARY_PATH=`pwd`:${LD_LIBRARY_PATH}
@@ -915,11 +915,11 @@ $NetBSD$
  	  BLDLIBRARY='-L. -lpython$(VERSION)'
  	  RUNSHARED=DLL_PATH=`pwd`:${DLL_PATH:-/atheos/sys/libs:/atheos/autolnk/lib}
  	  ;;
-+    QNX*)
-+          LDLIBRARY='libpython.so.$(VERSION)'
-+          BLDLIBRARY='-L. -lpython'
-+          INSTSONAME="libpython.so"
-+          ;;
++	  #QNX*)
++	  #LDLIBRARY='libpython$(VERSION).so'
++	  #BLDLIBRARY='-L. -lpython$(VERSION)'
++	  #INSTSONAME="$LDLIBRARY".$SOVERSION
++	  #;;
    esac
  else # shared is disabled
    case $ac_sys_system in
@@ -927,7 +927,7 @@ $NetBSD$
  		BeOS*) LN="ln -s";;
  		CYGWIN*) LN="ln -s";;
  		atheos*) LN="ln -s";;
-+                QNX*) LN="ln -sf";;
++		QNX*) LN="ln -sf";;
  		*) LN=ln;;
  	esac
  fi
@@ -973,7 +973,7 @@ $NetBSD$
  	Monterey*) LDSHARED="cc -G -dy -Bdynamic -Bexport -L/usr/lib/ia64l64";;
  	CYGWIN*) LDSHARED="gcc -shared -Wl,--enable-auto-image-base";;
  	atheos*) LDSHARED="gcc -shared";;
-+        QNX*) LDSHARED="qcc -shared -Wl,-E";;
++	QNX*) LDSHARED="qcc -shared -Wl,-E";;
  	*)	LDSHARED="ld";;
  	esac
  fi
@@ -989,7 +989,7 @@ $NetBSD$
  		   *) CCSHARED="";;
  		   esac;;
  	atheos*) CCSHARED="-fPIC";;
-+        QNX*) CCSHARED="-shared";;
++	QNX*) CCSHARED="-shared";;
  	esac
  fi
  echo "$as_me:$LINENO: result: $CCSHARED" >&5
