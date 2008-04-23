@@ -135,6 +135,12 @@ PLIST_SUBST+=	NO_NISMODULE=
 .endif
 .endif
 
+.if ${OPSYS} == "QNX"
+PLIST_SUBST+=	NISMODULE="@comment "
+PLIST_SUBST+=	NO_NISMODULE="@comment "
+.endif
+
+
 .if defined(BUILDLINK_TRANSFORM)
 MAKE_ENV+=	PY_BDB_TRANSFORM=${BUILDLINK_TRANSFORM:Q}
 .endif

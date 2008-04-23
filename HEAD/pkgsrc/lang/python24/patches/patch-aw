@@ -1,0 +1,34 @@
+$NetBSD$
+
+workaround for incomplete definitions in termios.h in QNX
+
+--- Modules/termios.c.orig	2006-09-27 21:17:32.000000000 +0200
++++ Modules/termios.c
+@@ -698,8 +698,10 @@ static struct constant {
+ #ifdef TCFLSH
+ 	{"TCFLSH", TCFLSH},
+ #endif
+-#ifdef TCGETA
++#ifdef TCGETA 
++#if !defined(__QNXNTO__) // BEGIN of workaround for incomplete definition in termios.h
+ 	{"TCGETA", TCGETA},
++#endif                   // END of workaround for incomplete definition in termios.h
+ #endif
+ #ifdef TCGETS
+ 	{"TCGETS", TCGETS},
+@@ -710,6 +712,7 @@ static struct constant {
+ #ifdef TCSBRKP
+ 	{"TCSBRKP", TCSBRKP},
+ #endif
++#if !defined(__QNXNTO__) // BEGIN of workaround for incomplete definition in termios.h
+ #ifdef TCSETA
+ 	{"TCSETA", TCSETA},
+ #endif
+@@ -719,6 +722,7 @@ static struct constant {
+ #ifdef TCSETAW
+ 	{"TCSETAW", TCSETAW},
+ #endif
++#endif                   // END of workaround for incomplete definition in termios.h
+ #ifdef TCSETS
+ 	{"TCSETS", TCSETS},
+ #endif
