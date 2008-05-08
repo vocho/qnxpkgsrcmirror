@@ -28,6 +28,8 @@ MAKE_ENV+=	os=openbsd
 MAKE_ENV+=	os=solaris
 .elif ${OPSYS} == "Linux"
 MAKE_ENV+=	os=linux
+.elif ${OPSYS} == "QNX"
+MAKE_ENV+=	os=qnx
 .elif ${OPSYS} == "Darwin"
 .  if !empty(OS_VERSION:M6*)
 MAKE_ENV+=	os=jaguar
