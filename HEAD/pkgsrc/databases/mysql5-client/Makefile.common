@@ -35,7 +35,12 @@ MYSQL_EXTRA_CHARSET?=	all
 CONFIGURE_ARGS+=	--localstatedir=${MYSQL_DATADIR:Q}
 CONFIGURE_ARGS+=	--with-named-z-libs=z
 CONFIGURE_ARGS+=	--without-libwrap
+.if ${OPSYS} == "QNX"
+# QNX provides libnurses instead of libcurses
+CONFIGURE_ARGS+=	--with-named-curses-libs="-lncurses -ltermcap"
+.else
 CONFIGURE_ARGS+=	--with-named-curses-libs="-lcurses -ltermcap"
+.endif
 
 .if ${OPSYS} == "IRIX"
 CFLAGS+=		-DIRIX5 -DNEEDS_BSTRING_H
