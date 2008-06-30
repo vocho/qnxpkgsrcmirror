@@ -6,7 +6,7 @@ PKGNAME=	tex-${DISTNAME}
 CATEGORIES=	print graphics
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=pgf/}
 PKGREVISION=	1
-DEPENDS=	tex-xkeyval:../../print/tex-xkeyval
+DEPENDS=	tex-xkeyval>=2.5f:../../print/tex-xkeyval
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://pgf.sourceforge.net/
