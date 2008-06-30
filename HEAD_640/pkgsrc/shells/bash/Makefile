@@ -90,7 +90,7 @@ BUILDLINK_API_DEPENDS.readline+=	readline>=4.3
 # 2) did a local link so "/etc/photon/login/shells/bash" exist, this
 #    is what phlogin looking for start its "login shell".
 #    However, this is not necessary once PR#51431 is fixed.
-.if ${OPSYS} == "QNX"
+.if ${OPSYS} == "QNX" && ${UNPRIVILEGED} != "yes"
 post-install:
 	${INSTALL_MAN} ${WRKSRC}/doc/bash.1 ${DESTDIR}${PREFIX}/${PKGMANDIR}/man1
 	${INSTALL_MAN} ${WRKSRC}/doc/bashbug.1 ${DESTDIR}${PREFIX}/${PKGMANDIR}/man1
