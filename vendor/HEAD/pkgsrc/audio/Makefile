@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.370 2008/03/16 09:27:37 bjs Exp $
+# $NetBSD: Makefile,v 1.376 2008/06/21 20:51:24 bjs Exp $
 #
 
 COMMENT=	Audio tools
@@ -87,6 +87,7 @@ SUBDIR+=	fluidsynth
 SUBDIR+=	freealut
 SUBDIR+=	freepats
 SUBDIR+=	freezetag
+SUBDIR+=	gimmix
 SUBDIR+=	gkrellm-volume
 SUBDIR+=	gkrellm-xmms
 SUBDIR+=	glurp
@@ -110,6 +111,7 @@ SUBDIR+=	gst-plugins0.10-esound
 SUBDIR+=	gst-plugins0.10-faad
 SUBDIR+=	gst-plugins0.10-flac
 SUBDIR+=	gst-plugins0.10-fluendo-mp3
+SUBDIR+=	gst-plugins0.10-jack
 SUBDIR+=	gst-plugins0.10-libvisual
 SUBDIR+=	gst-plugins0.10-mad
 SUBDIR+=	gst-plugins0.10-musepack
@@ -207,6 +209,7 @@ SUBDIR+=	mikmod
 SUBDIR+=	mixer.app
 SUBDIR+=	mkcdtoc
 SUBDIR+=	moc
+SUBDIR+=	moc-devel
 SUBDIR+=	moss
 SUBDIR+=	mp32ogg
 SUBDIR+=	mp3_check
@@ -259,12 +262,14 @@ SUBDIR+=	py-cddb
 SUBDIR+=	py-daap
 SUBDIR+=	py-karaoke
 SUBDIR+=	py-mad
+SUBDIR+=	py-mpd
 SUBDIR+=	py-musicbrainz
 SUBDIR+=	py-musique
 SUBDIR+=	py-mutagen
 SUBDIR+=	py-ogg
 SUBDIR+=	py-vorbis
 SUBDIR+=	py-xmms
+SUBDIR+=	qjackctl
 SUBDIR+=	qsynth
 SUBDIR+=	qtplay
 SUBDIR+=	rexima
@@ -305,6 +310,7 @@ SUBDIR+=	tracker
 SUBDIR+=	tremor
 SUBDIR+=	tremor-tools
 SUBDIR+=	trm
+SUBDIR+=	tunapie
 SUBDIR+=	tunesbrowser
 SUBDIR+=	twolame
 SUBDIR+=	ubs

@@ -69,6 +69,9 @@ OOPPTTIIOONNSS
              Like aauuddiitt--ppkkgg, but read the package names or patterns one per
              line from the given files.
 
+     aauuddiitt--hhiissttoorryy [--tt _t_y_p_e] [_p_k_g_b_a_s_e] ...
+             Print all vulnerabilities for the given base package names.
+
      cchheecckk [_p_k_g _._._.]
              Use this command to check the files belonging to some or all of
              the packages installed on the local machine against the checksum
@@ -89,6 +92,10 @@ OOPPTTIIOONNSS
      cchheecckk--ppkkgg--vvuullnneerraabbiilliittiieess [--ss] _f_i_l_e
              Check format and hashes in the pkg-vulnerabilties file _f_i_l_e.  If
              --ss is given, also check the embedded signature.
+
+     ccoonnffiigg--vvaarr _v_a_r_i_a_b_l_e
+             Print the current value of _v_a_r_i_a_b_l_e as used after parsing the
+             configuration file.
 
      ddeelleettee _p_k_g _._._.
              For each listed package, remove all file entries in the package

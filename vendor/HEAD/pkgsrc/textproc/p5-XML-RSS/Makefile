@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.18 2007/10/27 12:34:41 wiz Exp $
+# $NetBSD: Makefile,v 1.21 2008/06/22 17:27:44 he Exp $
 
-DISTNAME=	XML-RSS-1.31
+DISTNAME=	XML-RSS-1.33
 PKGNAME=	p5-${DISTNAME}
 SVR4_PKGNAME=	p5xrs
 CATEGORIES=	textproc perl5
@@ -9,6 +9,8 @@ MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=XML/}
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://search.cpan.org/dist/XML-RSS/
 COMMENT=	XML-RSS helps to create and update RSS files
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 DEPENDS+=	p5-XML-Parser>=2.29:../../textproc/p5-XML-Parser
 DEPENDS+=	p5-Test-Manifest>=0.9:../../devel/p5-Test-Manifest

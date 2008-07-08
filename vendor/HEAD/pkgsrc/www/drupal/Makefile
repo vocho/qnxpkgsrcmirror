@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.27 2008/03/05 21:35:40 adrianp Exp $
+# $NetBSD: Makefile,v 1.29 2008/05/26 02:13:25 joerg Exp $
 
 DISTNAME=	drupal-5.7
 CATEGORIES=	www
@@ -7,6 +7,8 @@ MASTER_SITES=	http://drupal.org/files/projects/
 MAINTAINER=	adrianp@NetBSD.org
 HOMEPAGE=	http://drupal.org/
 COMMENT=	Open source content management system
+
+CONFLICTS+=	drupal-6.*{,nb*}
 
 DEPENDS+=	${APACHE_PKG_PREFIX}-${PHP_PKG_PREFIX}>=4.3.3:../../www/ap-php
 DEPENDS+=	${PHP_PKG_PREFIX}-gd>=4.3.3:../../graphics/php-gd
@@ -19,7 +21,7 @@ PKG_GROUPS_VARS+=	APACHE_GROUP
 PKG_USERS_VARS+=	APACHE_USER
 
 BUILD_DEFS+=		APACHE_USER APACHE_GROUP
-USE_TOOLS+=		perl:run
+USE_TOOLS+=		perl:run pax
 REPLACE_PERL=		scripts/code-style.pl
 
 OWN_DIRS+=		${DRUPAL}/sites/default
@@ -79,7 +81,7 @@ do-install:
 	${INSTALL_DATA} ${WRKSRC}/*.php ${DRUPAL}
 
 .	for i in ${PAX_DIRS}
-		cd ${WRKSRC}/${i} && ${PAX} -rw . ${DRUPAL}/${i}
+		cd ${WRKSRC}/${i} && pax -rw . ${DRUPAL}/${i}
 .	endfor
 
 	${CHOWN} ${APACHE_USER}:${APACHE_GROUP} ${DRUPAL}/files

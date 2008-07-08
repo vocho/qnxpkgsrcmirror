@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.14 2007/11/28 11:40:09 jnemeth Exp $
+# $NetBSD: Makefile,v 1.17 2008/06/13 11:32:28 drochner Exp $
 #
 
-DISTNAME=	dbus-glib-0.74
+DISTNAME=	dbus-glib-0.76
 CATEGORIES=	sysutils
 MASTER_SITES=	http://dbus.freedesktop.org/releases/dbus-glib/
 
-MAINTAINER=	jmmv@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.freedesktop.org/Software/dbus
 COMMENT=	GLib bindings for the D-BUS message bus system
 
@@ -39,7 +39,7 @@ CONFIGURE_ARGS+=	--enable-tests
 CONFIGURE_ARGS+=	--enable-verbose-mode
 .endif
 
-BUILDLINK_API_DEPENDS.dbus+=	dbus>=0.94
+BUILDLINK_API_DEPENDS.dbus+=	dbus>=1.1
 
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../devel/glib2/buildlink3.mk"

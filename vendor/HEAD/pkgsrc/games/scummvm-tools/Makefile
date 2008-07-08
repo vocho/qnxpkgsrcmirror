@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.3 2008/03/04 06:59:06 jlam Exp $
+# $NetBSD: Makefile,v 1.5 2008/05/25 13:16:11 dillo Exp $
 #
 
 DISTNAME=		scummvm-tools-0.9.0
@@ -6,7 +6,7 @@ CATEGORIES=		games
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=scummvm/}
 EXTRACT_SUFX=		.tar.bz2
 
-MAINTAINER=		dillo@NetBSD.org
+MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://scummvm.sourceforge.net/
 COMMENT=		Conversion and compression tools for ScummVM
 
@@ -20,6 +20,8 @@ DEPENDS+=	flac-[0-9]*:../../audio/flac
 DEPENDS+=	lame-[0-9]*:../../audio/lame
 DEPENDS+=	vorbis-tools-[0-9]*:../../audio/vorbis-tools
 
+INSTALLATION_DIRS=	bin share/doc/scummvm-tools
+
 do-install:
 	for f in compress_kyra compress_queen compress_saga \
         	compress_scumm_san compress_scumm_sou compress_scumm_bun \
@@ -30,7 +32,6 @@ do-install:
 	do \
 		${INSTALL_PROGRAM} ${WRKSRC}/$$f ${DESTDIR}${PREFIX}/bin; \
 	done
-	${INSTALL_DATA_DIR} ${DESTDIR}${PREFIX}/share/doc/scummvm-tools
 	${INSTALL_DATA} ${WRKSRC}/README ${DESTDIR}${PREFIX}/share/doc/scummvm-tools
 
 .include "../../devel/zlib/buildlink3.mk"

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.32 2008/03/06 14:53:48 wiz Exp $
+# $NetBSD: Makefile,v 1.34 2008/06/20 01:09:10 joerg Exp $
 #
 
 DISTNAME=		gramps-1.0.11
@@ -10,6 +10,8 @@ MAINTAINER=	drochner@NetBSD.org
 HOMEPAGE=	http://gramps-project.org/
 COMMENT=	Genealogical Research and Analysis Management Programming System
 
+PKG_DESTDIR_SUPPORT=	user-destdir
+
 DEPENDS+=	yelp>=2.2:../../misc/yelp
 
 USE_PKGLOCALEDIR=	yes
@@ -17,7 +19,7 @@ GNU_CONFIGURE=		yes
 USE_TOOLS+=		msgconv msgfmt pkg-config
 
 CONFIGURE_ENV+=		PYTHON=${PYTHONBIN:Q}
-PYTHON_VERSIONS_ACCEPTED=	24
+PYTHON_VERSIONS_ACCEPTED=	25 24
 
 MESSAGE_SUBST+=		PYPKGPREFIX=${PYPKGPREFIX}
 

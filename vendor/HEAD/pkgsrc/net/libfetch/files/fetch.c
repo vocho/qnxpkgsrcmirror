@@ -1,6 +1,7 @@
-/*	$NetBSD: fetch.c,v 1.1.1.1 2008/02/07 01:48:22 joerg Exp $	*/
+/*	$NetBSD: fetch.c,v 1.12 2008/04/26 22:42:49 tnn Exp $	*/
 /*-
  * Copyright (c) 1998-2004 Dag-Erling Coïdan Smørgrav
+ * Copyright (c) 2008 Joerg Sonnenberger <joerg@NetBSD.org>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -69,7 +70,7 @@ static struct fetcherr url_errlist[] = {
  * read-only stream connected to the document referenced by the URL.
  * Also fill out the struct url_stat.
  */
-FILE *
+fetchIO *
 fetchXGet(struct url *URL, struct url_stat *us, const char *flags)
 {
 	int direct;
@@ -95,7 +96,7 @@ fetchXGet(struct url *URL, struct url_stat *us, const char *flags)
  * Select the appropriate protocol for the URL scheme, and return a
  * read-only stream connected to the document referenced by the URL.
  */
-FILE *
+fetchIO *
 fetchGet(struct url *URL, const char *flags)
 {
 	return (fetchXGet(URL, NULL, flags));
@@ -105,7 +106,7 @@ fetchGet(struct url *URL, const char *flags)
  * Select the appropriate protocol for the URL scheme, and return a
  * write-only stream connected to the document referenced by the URL.
  */
-FILE *
+fetchIO *
 fetchPut(struct url *URL, const char *flags)
 {
 	int direct;
@@ -153,32 +154,33 @@ fetchStat(struct url *URL, struct url_stat *us, const char *flags)
  * Select the appropriate protocol for the URL scheme, and return a
  * list of files in the directory pointed to by the URL.
  */
-struct url_ent *
-fetchList(struct url *URL, const char *flags)
+int
+fetchList(struct url_list *ue, struct url *URL, const char *pattern,
+    const char *flags)
 {
 	int direct;
 
 	direct = CHECK_FLAG('d');
 	if (strcasecmp(URL->scheme, SCHEME_FILE) == 0)
-		return (fetchListFile(URL, flags));
+		return (fetchListFile(ue, URL, pattern, flags));
 	else if (strcasecmp(URL->scheme, SCHEME_FTP) == 0)
-		return (fetchListFTP(URL, flags));
+		return (fetchListFTP(ue, URL, pattern, flags));
 	else if (strcasecmp(URL->scheme, SCHEME_HTTP) == 0)
-		return (fetchListHTTP(URL, flags));
+		return (fetchListHTTP(ue, URL, pattern, flags));
 	else if (strcasecmp(URL->scheme, SCHEME_HTTPS) == 0)
-		return (fetchListHTTP(URL, flags));
+		return (fetchListHTTP(ue, URL, pattern, flags));
 	url_seterr(URL_BAD_SCHEME);
-	return (NULL);
+	return -1;
 }
 
 /*
  * Attempt to parse the given URL; if successful, call fetchXGet().
  */
-FILE *
+fetchIO *
 fetchXGetURL(const char *URL, struct url_stat *us, const char *flags)
 {
 	struct url *u;
-	FILE *f;
+	fetchIO *f;
 
 	if ((u = fetchParseURL(URL)) == NULL)
 		return (NULL);
@@ -192,7 +194,7 @@ fetchXGetURL(const char *URL, struct url_stat *us, const char *flags)
 /*
  * Attempt to parse the given URL; if successful, call fetchGet().
  */
-FILE *
+fetchIO *
 fetchGetURL(const char *URL, const char *flags)
 {
 	return (fetchXGetURL(URL, NULL, flags));
@@ -201,11 +203,11 @@ fetchGetURL(const char *URL, const char *flags)
 /*
  * Attempt to parse the given URL; if successful, call fetchPut().
  */
-FILE *
+fetchIO *
 fetchPutURL(const char *URL, const char *flags)
 {
 	struct url *u;
-	FILE *f;
+	fetchIO *f;
 
 	if ((u = fetchParseURL(URL)) == NULL)
 		return (NULL);
@@ -237,19 +239,20 @@ fetchStatURL(const char *URL, struct url_stat *us, const char *flags)
 /*
  * Attempt to parse the given URL; if successful, call fetchList().
  */
-struct url_ent *
-fetchListURL(const char *URL, const char *flags)
+int
+fetchListURL(struct url_list *ue, const char *URL, const char *pattern,
+    const char *flags)
 {
 	struct url *u;
-	struct url_ent *ue;
+	int rv;
 
 	if ((u = fetchParseURL(URL)) == NULL)
-		return (NULL);
+		return -1;
 
-	ue = fetchList(u, flags);
+	rv = fetchList(ue, u, pattern, flags);
 
 	fetchFreeURL(u);
-	return (ue);
+	return rv;
 }
 
 /*
@@ -294,6 +297,66 @@ fetchMakeURL(const char *scheme, const char *host, int port, const char *doc,
 	return (u);
 }
 
+int
+fetch_urlpath_safe(char x)
+{
+	if ((x >= '0' && x <= '9') || (x >= 'A' && x <= 'Z') ||
+	    (x >= 'a' && x <= 'z'))
+		return 1;
+
+	switch (x) {
+	case '$':
+	case '-':
+	case '_':
+	case '.':
+	case '+':
+	case '!':
+	case '*':
+	case '\'':
+	case '(':
+	case ')':
+	case ',':
+	/* The following are allowed in segment and path components: */
+	case '?':
+	case ':':
+	case '@':
+	case '&':
+	case '=':
+	case '/':
+	case ';':
+	/* If something is already quoted... */
+	case '%':
+		return 1;
+	default:
+		return 0;
+	}
+}
+
+/*
+ * Copy an existing URL.
+ */
+struct url *
+fetchCopyURL(const struct url *src)
+{
+	struct url *dst;
+	char *doc;
+
+	/* allocate struct url */
+	if ((dst = malloc(sizeof(*dst))) == NULL) {
+		fetch_syserr();
+		return (NULL);
+	}
+	if ((doc = strdup(src->doc)) == NULL) {
+		fetch_syserr();
+		free(dst);
+		return (NULL);
+	}
+	*dst = *src;
+	dst->doc = doc;
+
+	return dst;
+}
+
 /*
  * Split an URL into components. URL syntax is:
  * [method:/][/[user[:pwd]@]host[:port]/][document]
@@ -302,10 +365,10 @@ fetchMakeURL(const char *scheme, const char *host, int port, const char *doc,
 struct url *
 fetchParseURL(const char *URL)
 {
-	char *doc;
 	const char *p, *q;
 	struct url *u;
-	int i;
+	size_t i, count;
+	int pre_quoted;
 
 	/* allocate struct url */
 	if ((u = calloc(1, sizeof(*u))) == NULL) {
@@ -313,43 +376,80 @@ fetchParseURL(const char *URL)
 		return (NULL);
 	}
 
-	/* scheme name */
-	if ((p = strstr(URL, ":/"))) {
-		snprintf(u->scheme, URL_SCHEMELEN+1,
-		    "%.*s", (int)(p - URL), URL);
-		URL = ++p;
-		/*
-		 * Only one slash: no host, leave slash as part of document
-		 * Two slashes: host follows, strip slashes
-		 */
-		if (URL[1] == '/')
-			URL = (p += 2);
-	} else {
+	if (*URL == '/') {
+		pre_quoted = 0;
+		strcpy(u->scheme, SCHEME_FILE);
 		p = URL;
+		goto quote_doc;
 	}
-	if (!*URL || *URL == '/' || *URL == '.' ||
-	    (u->scheme[0] == '\0' &&
-		strchr(URL, '/') == NULL && strchr(URL, ':') == NULL))
-		goto nohost;
+	if (strncmp(URL, "file:", 5) == 0) {
+		pre_quoted = 1;
+		strcpy(u->scheme, SCHEME_FILE);
+		URL += 5;
+		if (URL[0] != '/' || URL[1] != '/' || URL[2] != '/') {
+			url_seterr(URL_MALFORMED);
+			goto ouch;
+		}
+		p = URL + 2;
+		goto quote_doc;
+	}
+	if (strncmp(URL, "http:", 5) == 0 ||
+	    strncmp(URL, "https:", 6) == 0) {
+		pre_quoted = 1;
+		if (URL[4] == ':') {
+			strcpy(u->scheme, SCHEME_HTTP);
+			URL += 5;
+		} else {
+			strcpy(u->scheme, SCHEME_HTTPS);
+			URL += 6;
+		}
 
+		if (URL[0] != '/' || URL[1] != '/') {
+			url_seterr(URL_MALFORMED);
+			goto ouch;
+		}
+		URL += 2;
+		p = URL;
+		goto find_hostname;
+	}
+	if (strncmp(URL, "ftp:", 4) == 0) {
+		pre_quoted = 1;
+		strcpy(u->scheme, SCHEME_FTP);
+		URL += 4;
+		if (URL[0] != '/' || URL[1] != '/') {
+			url_seterr(URL_MALFORMED);
+			goto ouch;
+		}
+		URL += 2;
+		p = URL;
+		goto find_user;			
+	}
+
+	url_seterr(URL_BAD_SCHEME);
+	goto ouch;
+
+find_user:
 	p = strpbrk(URL, "/@");
-	if (p && *p == '@') {
+	if (p != NULL && *p == '@') {
 		/* username */
-		for (q = URL, i = 0; (*q != ':') && (*q != '@'); q++)
+		for (q = URL, i = 0; (*q != ':') && (*q != '@'); q++) {
 			if (i < URL_USERLEN)
 				u->user[i++] = *q;
+		}
 
 		/* password */
-		if (*q == ':')
+		if (*q == ':') {
 			for (q++, i = 0; (*q != ':') && (*q != '@'); q++)
 				if (i < URL_PWDLEN)
 					u->pwd[i++] = *q;
+		}
 
 		p++;
 	} else {
 		p = URL;
 	}
 
+find_hostname:
 	/* hostname */
 #ifdef INET6
 	if (*p == '[' && (q = strchr(p + 1, ']')) != NULL &&
@@ -377,46 +477,40 @@ fetchParseURL(const char *URL)
 		p = q;
 	}
 
-nohost:
 	/* document */
 	if (!*p)
 		p = "/";
 
-	if (strcasecmp(u->scheme, SCHEME_HTTP) == 0 ||
-	    strcasecmp(u->scheme, SCHEME_HTTPS) == 0) {
-		const char hexnums[] = "0123456789abcdef";
+quote_doc:
+	count = 1;
+	for (i = 0; p[i] != '\0'; ++i) {
+		if ((!pre_quoted && p[i] == '%') ||
+		    !fetch_urlpath_safe(p[i]))
+			count += 3;
+		else
+			++count;
+	}
 
-		/* percent-escape whitespace. */
-		if ((doc = malloc(strlen(p) * 3 + 1)) == NULL) {
-			fetch_syserr();
-			goto ouch;
-		}
-		u->doc = doc;
-		while (*p != '\0') {
-			if (!isspace((unsigned char)*p)) {
-				*doc++ = *p++;
-			} else {
-				*doc++ = '%';
-				*doc++ = hexnums[((unsigned int)*p) >> 4];
-				*doc++ = hexnums[((unsigned int)*p) & 0xf];
-				p++;
-			}
-		}
-		*doc = '\0';
-	} else if ((u->doc = strdup(p)) == NULL) {
+	if ((u->doc = malloc(count)) == NULL) {
 		fetch_syserr();
 		goto ouch;
 	}
-
-	DEBUG(fprintf(stderr,
-		  "scheme:   [%s]\n"
-		  "user:     [%s]\n"
-		  "password: [%s]\n"
-		  "host:     [%s]\n"
-		  "port:     [%d]\n"
-		  "document: [%s]\n",
-		  u->scheme, u->user, u->pwd,
-		  u->host, u->port, u->doc));
+	for (i = 0; *p != '\0'; ++p) {
+		if ((!pre_quoted && *p == '%') ||
+		    !fetch_urlpath_safe(*p)) {
+			u->doc[i++] = '%';
+			if ((unsigned char)*p < 160)
+				u->doc[i++] = '0' + ((unsigned char)*p) / 16;
+			else
+				u->doc[i++] = 'a' - 10 + ((unsigned char)*p) / 16;
+			if ((unsigned char)*p % 16 < 16)
+				u->doc[i++] = '0' + ((unsigned char)*p) % 16;
+			else
+				u->doc[i++] = 'a' - 10 + ((unsigned char)*p) % 16;
+		} else
+			u->doc[i++] = *p;
+	}
+	u->doc[i] = '\0';
 
 	return (u);
 
@@ -433,4 +527,103 @@ fetchFreeURL(struct url *u)
 {
 	free(u->doc);
 	free(u);
+}
+
+static char
+xdigit2digit(char digit)
+{
+	digit = tolower((unsigned char)digit);
+	if (digit >= 'a' && digit <= 'f')
+		digit = digit - 'a' + 10;
+	else
+		digit = digit - '0';
+
+	return digit;
+}
+
+/*
+ * Unquote whole URL.
+ * Skips optional parts like query or fragment identifier.
+ */ 
+char *
+fetchUnquotePath(struct url *url)
+{
+	char *unquoted;
+	const char *iter;
+	size_t i;
+
+	if ((unquoted = malloc(strlen(url->doc) + 1)) == NULL)
+		return NULL;
+
+	for (i = 0, iter = url->doc; *iter != '\0'; ++iter) {
+		if (*iter == '#' || *iter == '?')
+			break;
+		if (iter[0] != '%' ||
+		    !isxdigit((unsigned char)iter[1]) ||
+		    !isxdigit((unsigned char)iter[2])) {
+			unquoted[i++] = *iter;
+			continue;
+		}
+		unquoted[i++] = xdigit2digit(iter[1]) * 16 +
+		    xdigit2digit(iter[2]);
+		iter += 2;
+	}
+	unquoted[i] = '\0';
+	return unquoted;
+}
+
+
+/*
+ * Extract the file name component of a URL.
+ */
+char *
+fetchUnquoteFilename(struct url *url)
+{
+	char *unquoted, *filename;
+	const char *last_slash;
+
+	if ((unquoted = fetchUnquotePath(url)) == NULL)
+		return NULL;
+
+	if ((last_slash = strrchr(unquoted, '/')) == NULL)
+		return unquoted;
+	filename = strdup(last_slash + 1);
+	free(unquoted);
+	return filename;
+}
+
+char *
+fetchStringifyURL(const struct url *url)
+{
+	size_t total;
+	char *doc;
+
+	/* scheme :// user : pwd @ host :port doc */
+	total = strlen(url->scheme) + 3 + strlen(url->user) + 1 +
+	    strlen(url->pwd) + 1 + strlen(url->host) + 6 + strlen(url->doc) + 1;
+	if ((doc = malloc(total)) == NULL)
+		return NULL;
+	if (url->port != 0)
+		snprintf(doc, total, "%s%s%s%s%s%s%s:%d%s",
+		    url->scheme,
+		    url->scheme[0] != '\0' ? "://" : "",
+		    url->user,
+		    url->pwd[0] != '\0' ? ":" : "",
+		    url->pwd,
+		    url->user[0] != '\0' || url->pwd[0] != '\0' ? "@" : "",
+		    url->host,
+		    (int)url->port,
+		    url->doc);
+	else {
+		snprintf(doc, total, "%s%s%s%s%s%s%s%s",
+		    url->scheme,
+		    url->scheme[0] != '\0' ? "://" : "",
+		    url->user,
+		    url->pwd[0] != '\0' ? ":" : "",
+		    url->pwd,
+		    url->user[0] != '\0' || url->pwd[0] != '\0' ? "@" : "",
+		    url->host,
+		    url->doc);
+	}
+	return doc;
 }

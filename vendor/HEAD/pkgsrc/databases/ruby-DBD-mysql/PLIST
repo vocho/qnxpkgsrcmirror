@@ -1,6 +1,3 @@
-@comment $NetBSD: PLIST,v 1.1.1.1 2003/09/10 16:46:12 taca Exp $
-${RUBY_DOCDIR}/dbi/dbd-mysql/HISTORY
-${RUBY_DOCDIR}/dbi/dbd-mysql/README
-${RUBY_SITELIBDIR}/DBD/Mysql/Mysql.rb
-@dirrm ${RUBY_DOCDIR}/dbi/dbd-mysql
-@dirrm ${RUBY_SITELIBDIR}/DBD/Mysql
+@comment $NetBSD: PLIST,v 1.3 2008/06/22 15:44:49 taca Exp $
+${RUBY_VENDORLIB}/DBD/Mysql/Mysql.rb
+@dirrm ${RUBY_VENDORLIB}/DBD/Mysql

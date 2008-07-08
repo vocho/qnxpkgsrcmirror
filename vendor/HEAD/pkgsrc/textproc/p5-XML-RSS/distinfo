@@ -1,5 +1,5 @@
-$NetBSD: distinfo,v 1.7 2007/10/27 12:34:41 wiz Exp $
+$NetBSD: distinfo,v 1.9 2008/06/22 17:27:44 he Exp $
 
-SHA1 (XML-RSS-1.31.tar.gz) = f7472e79605268fbe48b3209f5040b64834df8c6
-RMD160 (XML-RSS-1.31.tar.gz) = b27f9f6064be51628af69cc11c56ad549ffd76b2
-Size (XML-RSS-1.31.tar.gz) = 86827 bytes
+SHA1 (XML-RSS-1.33.tar.gz) = a2edc7bc8002354b84fa6e3449bea8d63cfd4840
+RMD160 (XML-RSS-1.33.tar.gz) = 2de095c126f0538672eee72a84820a55350356db
+Size (XML-RSS-1.33.tar.gz) = 88513 bytes

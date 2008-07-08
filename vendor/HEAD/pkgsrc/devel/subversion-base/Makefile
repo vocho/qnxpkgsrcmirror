@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.52 2008/03/08 20:56:37 gdt Exp $
+# $NetBSD: Makefile,v 1.54 2008/07/03 20:39:44 schmonz Exp $
 
 PKGNAME=	subversion-base-${SVNVER}
-PKGREVISION=	4
 COMMENT=	Version control system, base programs and libraries
+PKGREVISION=	1
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
 PKG_DESTDIR_SUPPORT=	user-destdir
@@ -35,14 +35,14 @@ DAV_RA=				serf
 .    include "../../www/serf/buildlink3.mk"
 .  else
 BUILDLINK_API_DEPENDS.neon+=	neon>=0.24.7
-DAV_RA=				dav
+DAV_RA=				neon
 .    include "../../www/neon/buildlink3.mk"
 .  endif
 .else
 .  include "../../devel/apr0/buildlink3.mk"
 BUILDLINK_API_DEPENDS.apr+=	apr>=0.9.5
 BUILDLINK_API_DEPENDS.neon+=	neon>=0.24.7
-DAV_RA=				dav
+DAV_RA=				neon
 .  include "../../www/neon/buildlink3.mk"
 .endif
 
@@ -50,6 +50,13 @@ DAV_RA=				dav
 PLIST_SRC=		${PKGDIR}/PLIST ${PKGDIR}/PLIST.bdb
 .else
 CONFIGURE_ARGS+=	--without-berkeley-db
+.endif
+
+.if !empty(PKG_OPTIONS:Msasl)
+.include "../../security/cyrus-sasl/buildlink3.mk"
+CONFIGURE_ARGS+=	--with-sasl=${BUILDLINK_PREFIX.cyrus-sasl}
+.else
+CONFIGURE_ARGS+=	--without-sasl
 .endif
 
 PLIST_SUBST+=		DAV_RA=${DAV_RA:Q}

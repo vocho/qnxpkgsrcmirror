@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.5 2008/03/04 17:25:36 tnn Exp $
+@comment $NetBSD: PLIST,v 1.8 2008/05/17 23:45:47 tnn Exp $
 bin/pidgin
 include/pidgin/eggtrayicon.h
 include/pidgin/gtkaccount.h
@@ -57,15 +57,18 @@ lib/pidgin/gtkbuddynote.la
 lib/pidgin/history.la
 lib/pidgin/iconaway.la
 lib/pidgin/markerline.la
+${PLIST.dbus}lib/pidgin/musicmessaging.la
 lib/pidgin/notify.la
 lib/pidgin/pidginrc.la
 lib/pidgin/relnot.la
+lib/pidgin/sendbutton.la
 lib/pidgin/spellchk.la
 lib/pidgin/ticker.la
 lib/pidgin/timestamp.la
 lib/pidgin/timestamp_format.la
 lib/pidgin/xmppconsole.la
 lib/pkgconfig/pidgin.pc
+share/applications/pidgin.desktop
 share/icons/hicolor/16x16/apps/pidgin.png
 share/icons/hicolor/22x22/apps/pidgin.png
 share/icons/hicolor/24x24/apps/pidgin.png
@@ -92,6 +95,7 @@ share/pixmaps/pidgin/arrow-right.xpm
 share/pixmaps/pidgin/arrow-up.xpm
 share/pixmaps/pidgin/buttons/edit.png
 share/pixmaps/pidgin/buttons/info.png
+${PLIST.dbus}share/pixmaps/pidgin/buttons/music.png
 share/pixmaps/pidgin/buttons/pause.png
 share/pixmaps/pidgin/dialogs/16/auth.png
 share/pixmaps/pidgin/dialogs/16/error.png
@@ -427,6 +431,8 @@ share/pixmaps/pidgin/status/48/log-out.png
 share/pixmaps/pidgin/status/48/offline.png
 share/pixmaps/pidgin/status/48/person.png
 share/pixmaps/pidgin/status/48/rtl/extended-away.png
+share/pixmaps/pidgin/status/48/rtl/login.png
+share/pixmaps/pidgin/status/48/rtl/logout.png
 share/pixmaps/pidgin/toolbar/16/change-bgcolor.png
 share/pixmaps/pidgin/toolbar/16/change-fgcolor.png
 share/pixmaps/pidgin/toolbar/16/emote-select.png

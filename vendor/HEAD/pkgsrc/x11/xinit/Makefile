@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.5 2008/03/15 16:39:32 joerg Exp $
+# $NetBSD: Makefile,v 1.11 2008/06/23 14:19:54 reed Exp $
 #
 
-DISTNAME=		xinit-1.0.7
-PKGREVISION=		2
+DISTNAME=		xinit-1.1.0
+PKGREVISION=		1
 CATEGORIES=		x11
-MASTER_SITES=		http://xorg.freedesktop.org/releases/individual/app/
+MASTER_SITES=		${MASTER_SITE_XORG:=app/}
 EXTRACT_SUFX=		.tar.bz2
 
 MAINTAINER=		joerg@NetBSD.org
@@ -14,7 +14,13 @@ COMMENT=		X init program
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=		yes
+CONFIGURE_ARGS+=	--with-xinit=${PREFIX}/bin/xinit
 USE_TOOLS+=		pkg-config xauth:run
+
+.include "../../mk/compiler.mk"
+.if !empty(PKGSRC_COMPILER:Mhp)
+CONFIGURE_ENV+=		ac_cv_path_RAWCPP="cc -E -Uunix -"
+.endif
 
 .include "../../x11/libX11/buildlink3.mk"
 

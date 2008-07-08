@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.3 2007/01/25 23:33:19 wiz Exp $
+# $NetBSD: Makefile,v 1.5 2008/06/12 02:14:14 joerg Exp $
 #
 
 DISTNAME=	mutagen-1.10
@@ -10,9 +10,10 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.sacredchao.net/quodlibet/wiki/Development/Mutagen
 COMMENT=	Audio metadata handling for Python
 
+PKG_DESTDIR_SUPPORT=	user-destdir
+
 USE_LANGUAGES=	# none
 PYDISTUTILSPKG=	yes
-PYTHON_VERSIONS_ACCEPTED=	24 23
 
 .include "../../lang/python/extension.mk"
 .include "../../mk/bsd.pkg.mk"

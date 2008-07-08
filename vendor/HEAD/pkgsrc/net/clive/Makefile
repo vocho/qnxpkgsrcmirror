@@ -1,22 +1,34 @@
-# $NetBSD: Makefile,v 1.2 2008/03/14 01:34:44 wiz Exp $
+# $NetBSD: Makefile,v 1.10 2008/06/21 15:53:55 wiz Exp $
 #
 
-DISTNAME=	clive-0.4.6
+DISTNAME=	clive-0.4.16
 CATEGORIES=	net multimedia www
-MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=clive/} \
-		http://dl.gna.org/clive/0.4/src/
+MASTER_SITES=	http://dl.gna.org/clive/0.4/src/ \
+		${MASTER_SITE_SOURCEFORGE:=clive/}
+EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	wiz@NetBSD.org
 HOMEPAGE=	http://clive.sourceforge.net/
 COMMENT=	Command line video extraction tool for user-uploaded video hosts
 
-DEPENDS+=	urlgrabber>=2.9.9:../../www/urlgrabber
-DEPENDS+=	${PYPKGPREFIX}-Tk-[0-9]*:../../x11/py-Tk
+PKG_DESTDIR_SUPPORT=	user-destdir
 
-USE_LANGUAGES=	# none
-PYTHON_VERSIONS_ACCEPTED=	24 23 22
-PYDISTUTILSPKG=			yes
+DEPENDS+=	${PYPKGPREFIX}-newt>=0.51:../../devel/py-newt
+DEPENDS+=	${PYPKGPREFIX}-feedparser>=4.1:../../textproc/py-feedparser
+DEPENDS+=	urlgrabber>=3.1.0:../../www/urlgrabber
+
+GNU_CONFIGURE=	yes
+CONFIGURE_ARGS+=	--without-urlgrabber
+CONFIGURE_ARGS+=	--without-feedparser
+CONFIGURE_ARGS+=	--without-newt
+USE_LANGUAGES=	c # configure script
 PY_PATCHPLIST=			yes
+
+REPLACE_INTERPRETER+=	env_python
+REPLACE.env_python.old=	/usr/bin/env python
+REPLACE.env_python.new= ${PYTHONBIN}
+REPLACE_FILES.env_python=	src/clive/feedparser/feedparser.py
+REPLACE_FILES.env_python+=	src/scripts/clive
 
 .include "../../lang/python/extension.mk"
 .include "../../mk/bsd.pkg.mk"

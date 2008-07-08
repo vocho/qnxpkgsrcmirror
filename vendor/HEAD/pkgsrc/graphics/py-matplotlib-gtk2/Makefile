@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.6 2008/03/15 16:51:25 joerg Exp $
+# $NetBSD: Makefile,v 1.8 2008/06/12 02:14:32 joerg Exp $
 #
 
 DISTNAME=		matplotlib-0.87.2
@@ -11,12 +11,14 @@ MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://matplotlib.sourceforge.net/
 COMMENT=		GTK frontend for matplotlib
 
+PKG_DESTDIR_SUPPORT=	user-destdir
+
 USE_TOOLS+=		pkg-config
 PY_PATCHPLIST=		yes
 PYDISTUTILSPKG=		yes
 USE_LANGUAGES=		c c++
 
-PYTHON_VERSIONS_ACCEPTED=	24
+PYTHON_VERSIONS_ACCEPTED=	25 24
 
 .include "../../lang/python/extension.mk"
 .include "../../graphics/py-matplotlib/buildlink3.mk"

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.65 2008/03/03 16:47:47 tron Exp $
+# $NetBSD: Makefile,v 1.72 2008/06/28 11:11:15 tron Exp $
 
 DISTNAME=	phpMyAdmin-${DIST_VERSION}-all-languages
 PKGNAME=	phpmyadmin-${DIST_VERSION:S/-//}
@@ -6,7 +6,7 @@ CATEGORIES=	databases www
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=phpmyadmin/}
 EXTRACT_SUFX=	.tar.bz2
 
-MAINTAINER=	tron@NetBSD.org
+OWNER=		tron@NetBSD.org
 HOMEPAGE=	http://www.phpmyadmin.net/
 COMMENT=	Set of PHP-scripts to adminstrate MySQL over the WWW
 
@@ -22,7 +22,7 @@ MESSAGE_SUBST+=	CONF_INC_PHP=${CONF_INC_PHP} PMCONFFILE=${PMCONFFILE:Q} \
 USE_TOOLS+=	perl:run
 
 CONF_INC_PHP=	${PREFIX}/share/phpmyadmin/config.inc.php
-DIST_VERSION=	2.11.5
+DIST_VERSION=	2.11.7
 DOC_FILES=	CREDITS ChangeLog \
 		Documentation.txt INSTALL LICENSE README \
 		RELEASE-DATE-${DIST_VERSION} TODO
@@ -70,7 +70,7 @@ do-install:
 
 	${INSTALL_DATA} ${WRKSRC}/*.php ${DESTDIR}${PMDIR}
 	${INSTALL_DATA} ${WRKSRC}/*.css ${DESTDIR}${PMDIR}
-	${MV} ${PREFIX}/share/phpmyadmin/config.sample.inc.php \
+	${MV} ${DESTDIR}${PREFIX}/share/phpmyadmin/config.sample.inc.php \
 	  ${DESTDIR}${EXDIR}/config.inc.php
 
 	${INSTALL_DATA} ${WRKSRC}/Documentation.html ${DESTDIR}${PMDIR}

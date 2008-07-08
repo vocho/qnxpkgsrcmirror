@@ -1,14 +1,16 @@
-# $NetBSD: Makefile,v 1.9 2007/07/25 17:13:58 he Exp $
+# $NetBSD: Makefile,v 1.11 2008/06/12 02:14:52 joerg Exp $
 #
 
 DISTNAME=		po4a-0.23
-PKGREVISION=		3
+PKGREVISION=		4
 CATEGORIES=		textproc
 MASTER_SITES=		http://alioth.debian.org/download.php/1317/
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://alioth.debian.org/projects/po4a/
 COMMENT=		Tool for using gettext where it was not intended to be used
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 DEPENDS+=		p5-gettext>=1.01:../../devel/p5-gettext
 DEPENDS+=		p5-SGMLS-[0-9]*:../../textproc/p5-SGMLS

@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.36 2008/02/26 13:57:51 joerg Exp $
+# $NetBSD: Makefile,v 1.42 2008/06/20 11:51:50 joerg Exp $
 
-DISTNAME=	pbulk-0.28
+DISTNAME=	pbulk-0.32
 CATEGORIES=	pkgtools
 MASTER_SITES=	# empty
 DISTFILES=	# empty
@@ -14,6 +14,8 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 WRKSRC=		${WRKDIR}/pbulk
 EXTRACT_ONLY=	# empty
 NO_CHECKSUM=	YES
+
+MAKE_JOBS_SAFE=	no
 
 USE_FEATURES=	nbcompat
 USE_TOOLS+=	awk:run bzip2:run digest:run gzip:run ident:run make:run \
@@ -34,13 +36,14 @@ SUBST_CLASSES+=		tools
 SUBST_STAGE.tools=	post-patch
 SUBST_MESSAGE.tools=	Fixing references to tools
 SUBST_FILES.tools=	pbulk.conf scripts/build scripts/build-client-start \
-	scripts/bulkbuild scripts/bulkbuild-rebuild scripts/client-clean \
+	scripts/bulkbuild scripts/bulkbuild-rebuild scripts/bulkbuild-restart \
+	scripts/client-clean \
 	scripts/pkg-build scripts/pkg-up-to-date scripts/pre-build \
 	scripts/report scripts/scan scripts/scan-client-start scripts/upload \
 	scripts/compute-packages.awk scripts/create-broken-graph.awk \
 	scripts/create-report-html.awk scripts/create-report-txt.awk \
 	scripts/create-report.awk
-SUBST_VARS.tools=	AWK BZIP2 DIGEST GZIP_CMD IDENT MAIL_CMD NEATO \
+SUBST_VARS.tools=	AWK BZIP2 CHOWN DIGEST GZIP_CMD IDENT MAIL_CMD NEATO \
 			PBULK_CONFIG PKG_ADD_CMD PKG_DELETE_CMD \
 			PKG_INFO_CMD PREFIX SED SH TAR TARGET_MAKE
 

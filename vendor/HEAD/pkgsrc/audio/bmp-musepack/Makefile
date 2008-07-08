@@ -1,15 +1,17 @@
-# $NetBSD: Makefile,v 1.11 2007/02/22 19:01:13 wiz Exp $
+# $NetBSD: Makefile,v 1.13 2008/06/16 13:35:02 obache Exp $
 #
 
 DISTNAME=		bmp-musepack-1.1
 PKGREVISION=		3
 CATEGORIES=		audio
-MASTER_SITES=		http://www.saunalahti.fi/grimmel/musepack.net/linux/plugins/
+MASTER_SITES=		http://files.musepack.net/linux/plugins/
 EXTRACT_SUFX=		.tar.bz2
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://www.musepack.net/
 COMMENT=		BMP plugin for Musepack (mpc) files
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_LANGUAGES=		c c++
 USE_TOOLS+=		pkg-config

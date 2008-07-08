@@ -1,14 +1,15 @@
-# $NetBSD: Makefile,v 1.24 2008/03/06 14:53:54 wiz Exp $
+# $NetBSD: Makefile,v 1.28 2008/06/20 01:09:34 joerg Exp $
 #
 
 DISTNAME=		prewikka-${VERSION}
 PKGNAME=		${PYPKGPREFIX}-prewikka-${VERSION}
-PKGREVISION=		1
 CATEGORIES=		security
 MASTER_SITES=		http://www.prelude-ids.org/download/releases/ \
 			http://www.prelude-ids.org/download/releases/old/
 
-VERSION=		0.9.13
+PKG_DESTDIR_SUPPORT=	user-destdir
+
+VERSION=		0.9.14
 
 CONFLICTS=		prewikka-[0-9]*
 
@@ -25,7 +26,6 @@ USE_TOOLS+=		msgfmt
 PYDISTUTILSPKG=		yes
 PYBINMODULE=		yes
 PYSETUP=		setup.py
-PYTHON_VERSIONS_ACCEPTED=	24 23
 PYTHON_PATCH_SCRIPTS=	scripts/prewikka-httpd
 PREWIKKA_USER?=		prewikka
 PREWIKKA_GROUP?=	prewikka
@@ -53,7 +53,7 @@ FILES_SUBST+=	PREWIKKA_USER=${PREWIKKA_USER:Q}
 
 MAKE_ENV+=	EXAMPLEDIR=share/examples/${PKGBASE}
 
-INSTALLATION_DIRS+=	${PREFIX}/share/examples/${PKGBASE}
+INSTALLATION_DIRS+=	share/examples/${PKGBASE} sbin
 CONF_FILES+=	${PREFIX}/share/examples/${PKGBASE}/prewikka.conf ${PKG_SYSCONFDIR}/prewikka.conf
 
 pre-patch:
@@ -63,7 +63,7 @@ post-build:
 	cd ${WRKSRC} && env ${MAKE_ENV} ${CC} ${CFLAGS} -o runPrewikka runPrewikka.c
 
 post-install:
-	${INSTALL_PROGRAM} ${WRKSRC}/runPrewikka ${PREFIX}/sbin/runPrewikka
+	${INSTALL_PROGRAM} ${WRKSRC}/runPrewikka ${DESTDIR}${PREFIX}/sbin/runPrewikka
 
 .include "../../lang/python/application.mk"
 .include "../../lang/python/extension.mk"

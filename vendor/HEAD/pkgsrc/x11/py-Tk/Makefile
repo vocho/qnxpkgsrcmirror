@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.39 2007/02/22 19:01:28 wiz Exp $
+# $NetBSD: Makefile,v 1.41 2008/06/12 02:14:57 joerg Exp $
 #
 
 PKGNAME=	${PYPKGPREFIX}-Tk-0
@@ -9,6 +9,7 @@ MAINTAINER=	tsarna@NetBSD.org
 HOMEPAGE=	http://wiki.python.org/moin/TkInter
 COMMENT=	Tkinter -- Python interface to Tcl/Tk
 
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 EXTRACT_ELEMENTS=	${PYSUBDIR}/Modules/_tkinter.c \
 			${PYSUBDIR}/Modules/tkappinit.c
@@ -22,7 +23,7 @@ PY_SETUP_SUBST+= TKRTPREFIX=${BUILDLINK_PREFIX.tk}
 PY_SETUP_SUBST+= X11PREFIX=${X11BASE}
 PY_SETUP_SUBST+= X11RTPREFIX=${X11BASE}
 
-PYTHON_VERSIONS_ACCEPTED=	24 23 22 21 20 15
+PYTHON_VERSIONS_ACCEPTED=	25 24 23 21 15
 
 # ignore errors due to missing files (EXTRACT_ELEMENTS!)
 do-patch:

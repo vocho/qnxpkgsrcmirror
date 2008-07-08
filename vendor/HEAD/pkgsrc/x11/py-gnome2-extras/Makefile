@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.25 2008/03/06 14:53:57 wiz Exp $
+# $NetBSD: Makefile,v 1.27 2008/05/30 12:29:00 wiz Exp $
 #
 
 DISTNAME=	gnome-python-extras-2.14.3
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME:S/gnome-python/gnome2/}
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	x11 python
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gnome-python-extras/2.14/}
 EXTRACT_SUFX=	.tar.bz2
@@ -12,6 +12,8 @@ MAINTAINER=	recht@NetBSD.org
 HOMEPAGE=	http://www.gnome.org/
 COMMENT=	Python binding for GNOME2
 
+PKG_DESTDIR_SUPPORT=	user-destdir
+
 PY_PATCHPLIST=	YES
 USE_LIBTOOL=	YES
 PKGCONFIG_OVERRIDE+=	gnome-python-extras-2.0.pc.in
@@ -19,7 +21,7 @@ GNU_CONFIGURE=	YES
 CONFIGURE_ENV+=	PYTHON=${PYTHONBIN:Q}
 USE_TOOLS+=		pkg-config gmake
 
-PYTHON_VERSIONS_ACCEPTED=	24
+PYTHON_VERSIONS_ACCEPTED=	25 24
 
 SUBST_CLASSES+=	ffhome
 SUBST_STAGE.ffhome=	pre-configure

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.15 2006/09/04 08:47:17 martti Exp $
+# $NetBSD: Makefile,v 1.17 2008/06/12 02:14:42 joerg Exp $
 
 DISTNAME=	LPRng_DOC-3.6.13
 PKGNAME=	LPRng-doc-3.6.13
@@ -10,15 +10,20 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.lprng.com/
 COMMENT=	LPRng documentation in dvi, text, html and ps formats
 
+PKG_DESTDIR_SUPPORT=	user-destdir
+
 EXTRACT_ONLY=	# empty
 NO_CONFIGURE=	yes
 NO_BUILD=	yes
 
+USE_TOOLS+=	pax
+
+INSTALLATION_DIRS=	share/doc/LPRng
+
 do-install:
-	${INSTALL_DATA_DIR} ${PREFIX:Q}/share/doc/LPRng
 	cd ${WRKDIR:Q} && \
-	    ${PAX} -O -zrf ${DISTDIR:Q}/${DISTNAME:Q}${EXTRACT_SUFX:Q}
+	    pax -O -zrf ${DISTDIR:Q}/${DISTNAME:Q}${EXTRACT_SUFX:Q}
 	cd ${WRKSRC:Q} && \
-	    ${PAX} -rw *.dvi *.gif *.html *.ps *.txt ${PREFIX:Q}/share/doc/LPRng
+	    pax -rw *.dvi *.gif *.html *.ps *.txt ${DESTDIR}${PREFIX}/share/doc/LPRng
 
 .include "../../mk/bsd.pkg.mk"

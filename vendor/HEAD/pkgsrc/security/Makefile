@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.315 2008/03/25 13:44:00 wiz Exp $
+# $NetBSD: Makefile,v 1.322 2008/06/26 21:01:25 peter Exp $
 #
 
 COMMENT=	Security tools
@@ -175,6 +175,7 @@ SUBDIR+=	p5-Digest-Hashcash
 SUBDIR+=	p5-Digest-MD2
 SUBDIR+=	p5-Digest-MD4
 SUBDIR+=	p5-Digest-MD5
+SUBDIR+=	p5-Digest-MD5-File
 SUBDIR+=	p5-Digest-Nilsimsa
 SUBDIR+=	p5-Digest-SHA
 SUBDIR+=	p5-Digest-SHA1
@@ -198,7 +199,6 @@ SUBDIR+=	pam-pwauth_suid
 SUBDIR+=	pam-radius
 SUBDIR+=	pcsc-lite
 SUBDIR+=	pcsc-tools
-SUBDIR+=	pflkm
 SUBDIR+=	pgp2
 SUBDIR+=	pgp5
 SUBDIR+=	pgpdump
@@ -229,6 +229,7 @@ SUBDIR+=	py-m2crypto
 SUBDIR+=	py-mcrypt
 SUBDIR+=	py-paramiko
 SUBDIR+=	py-prewikka
+SUBDIR+=	py-smbpasswd
 SUBDIR+=	py-tlslite
 SUBDIR+=	pyca
 SUBDIR+=	qca
@@ -241,6 +242,9 @@ SUBDIR+=	rats
 SUBDIR+=	rc5des
 SUBDIR+=	rid
 SUBDIR+=	rsaref
+SUBDIR+=	ruby-ezcrypto
+SUBDIR+=	ruby-net-sftp
+SUBDIR+=	ruby-net-ssh
 SUBDIR+=	ruby-password
 SUBDIR+=	ruby-tcpwrap
 SUBDIR+=	sbd
@@ -266,6 +270,7 @@ SUBDIR+=	ssldump
 SUBDIR+=	sslwrap
 SUBDIR+=	starttls
 SUBDIR+=	steghide
+SUBDIR+=	stegtunnel
 SUBDIR+=	stunnel
 SUBDIR+=	sudo
 SUBDIR+=	systrace-policies

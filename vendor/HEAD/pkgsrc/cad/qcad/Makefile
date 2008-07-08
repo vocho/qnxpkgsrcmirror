@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.46 2008/03/03 01:50:27 jlam Exp $
+# $NetBSD: Makefile,v 1.48 2008/05/25 21:42:20 joerg Exp $
 #
 
 DISTNAME=		qcad-2.0.5.0-1-community.src
@@ -14,7 +14,7 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 COMMENT=		2D CAD system
 
 GNU_CONFIGURE=		yes
-USE_TOOLS+=		autoconf gmake
+USE_TOOLS+=		autoconf gmake pax
 USE_LANGUAGES=		c c++
 
 CONFIGURE_DIRS=		fparser dxflib
@@ -55,9 +55,10 @@ pre-build:
 		${BUILD_MAKE_CMD} prepare;				\
 	done
 
+INSTALLATION_DIRS=	bin share/qcad
+
 do-install:
 	${INSTALL_PROGRAM} ${WRKSRC}/qcad/qcad ${DESTDIR}${PREFIX}/bin
-	${INSTALL_DATA_DIR} ${DESTDIR}${PREFIX}/share/qcad
 	cd ${WRKSRC}/qcad && umask 022 && \
 	pax -rwpm data fonts patterns qm ${DESTDIR}${PREFIX}/share/qcad
 

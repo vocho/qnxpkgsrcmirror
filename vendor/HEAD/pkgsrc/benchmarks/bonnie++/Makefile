@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.21 2008/01/19 09:16:17 wiz Exp $
+# $NetBSD: Makefile,v 1.23 2008/06/20 01:09:08 joerg Exp $
 #
 
-DISTNAME=	bonnie++-1.03a
-PKGREVISION=	3
+DISTNAME=	bonnie++-1.03c
 CATEGORIES=	benchmarks
 MASTER_SITES=	http://www.coker.com.au/bonnie++/
 EXTRACT_SUFX=	.tgz
@@ -12,17 +11,18 @@ HOMEPAGE=	http://www.coker.com.au/bonnie++/
 COMMENT=	Enhanced performance Test of Filesystem I/O
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_LANGUAGES=		c c++
 GNU_CONFIGURE=		YES
 USE_TOOLS+=		gmake perl:run tee
 REPLACE_PERL+=		bon_csv2txt.in bon_csv2html.in
 
-INSTALLATION_DIRS=	share/doc/bonnie++
+INSTALLATION_DIRS=	bin share/doc/bonnie++ ${PKGMANDIR}/man1 ${PKGMANDIR}/man8
 
 # todo: patch bonnie++.8 to point to correct path to readme.html
 post-install:
-	${INSTALL_DATA} ${WRKSRC}/readme.html ${PREFIX}/share/doc/bonnie++/
+	${INSTALL_DATA} ${WRKSRC}/readme.html ${DESTDIR}${PREFIX}/share/doc/bonnie++/
 
 .PHONY: benchmark
 benchmark: build

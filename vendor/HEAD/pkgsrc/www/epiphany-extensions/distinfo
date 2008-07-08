@@ -1,5 +1,5 @@
-$NetBSD: distinfo,v 1.22 2008/01/11 13:45:46 drochner Exp $
+$NetBSD: distinfo,v 1.24 2008/05/29 16:57:56 drochner Exp $
 
-SHA1 (epiphany-extensions-2.20.3.tar.bz2) = 201232b2d94576478dddc94daa49d19bc1487305
-RMD160 (epiphany-extensions-2.20.3.tar.bz2) = f3fac0a4cc17b3120f0414f0467ff36c24e77dd2
-Size (epiphany-extensions-2.20.3.tar.bz2) = 909040 bytes
+SHA1 (epiphany-extensions-2.22.2.tar.bz2) = 0dff50f48a14e01dc358fa484b218f6d6a7f5519
+RMD160 (epiphany-extensions-2.22.2.tar.bz2) = 586f26851a0fbc4c2664116a3e32596d3bd91188
+Size (epiphany-extensions-2.22.2.tar.bz2) = 947322 bytes

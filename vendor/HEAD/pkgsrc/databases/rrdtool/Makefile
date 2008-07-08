@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.62 2007/11/20 11:57:59 martti Exp $
+# $NetBSD: Makefile,v 1.67 2008/06/30 07:31:09 martti Exp $
 
-DISTNAME=	rrdtool-1.2.26
-#PKGREVISION=	1
+DISTNAME=	rrdtool-1.3.0
+PKGREVISION=	1
 CATEGORIES=	databases graphics net
 MASTER_SITES=	http://oss.oetiker.ch/rrdtool/pub/
 
@@ -9,6 +9,8 @@ MAINTAINER=	martti@NetBSD.org
 HOMEPAGE=	http://oss.oetiker.ch/rrdtool/
 COMMENT=	Data analysis tool generating graphical representations
 #LICENSE=	gnu-gpl-v2
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_LIBTOOL=		yes
 USE_TOOLS+=		gmake pkg-config perl
@@ -26,6 +28,8 @@ PERL5_PACKLIST+=	auto/RRDs/.packlist
 
 # rrdtool explicitly forbids any use of -ffast-math
 BUILDLINK_TRANSFORM+=	rm:-ffast-math
+# rrdtool wants libintl_gettext, which at least NetBSD's lib doesn't have
+USE_BUILTIN.gettext=	no
 
 SUBST_CLASSES+=		prefix
 SUBST_STAGE.prefix=	post-build
@@ -33,9 +37,15 @@ SUBST_MESSAGE.prefix=	Fixing $${prefix} in scripts.
 SUBST_FILES.prefix=	examples/cgi-demo.cgi
 SUBST_SED.prefix=	-e '1s,^\#! \$${prefix},\#! ${PREFIX},'
 
+.include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../graphics/freetype2/buildlink3.mk"
+.include "../../fonts/fontconfig/buildlink3.mk"
+.include "../../devel/pango/buildlink3.mk"
+.include "../../graphics/cairo/buildlink3.mk"
 .include "../../graphics/png/buildlink3.mk"
-.include "../../graphics/libart/buildlink3.mk"
+.include "../../textproc/libxml2/buildlink3.mk"
+.include "../../devel/glib2/buildlink3.mk"
+.include "../../x11/pixman/buildlink3.mk"
 .include "../../lang/perl5/module.mk"
 .include "../../mk/pthread.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

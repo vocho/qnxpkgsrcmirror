@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.2 2007/06/11 17:38:35 joerg Exp $
+# $NetBSD: Makefile,v 1.4 2008/06/12 00:18:10 joerg Exp $
 #
 
 DISTNAME=	PythonDaap-0.7
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
+PKGREVISION=	1
 CATEGORIES=	audio python
 MASTER_SITES=	http://jerakeen.org/files/
 
@@ -10,17 +11,9 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://jerakeen.org/PythonDaap/
 COMMENT=	Python binding for DAAP
 
-PYTHON_VERSIONS_ACCEPTED=	24 23
+PKG_DESTDIR_SUPPORT=	user-destdir
 
-PYSETUP=		setup.py
-PLIST_SUBST+=		PYSITELIB=${PYSITELIB:Q}
+PYDISTUTILSPKG=	yes
 
-do-build:
-	cd ${WRKSRC} && ${PYTHONBIN} ${PYSETUP} build
-
-do-install:
-	cd ${WRKSRC} && ${PYTHONBIN} ${PYSETUP} install
-
-.include "../../lang/python/application.mk"
-
+.include "../../lang/python/extension.mk"
 .include "../../mk/bsd.pkg.mk"

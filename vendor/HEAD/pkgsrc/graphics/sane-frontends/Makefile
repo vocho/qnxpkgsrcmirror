@@ -1,4 +1,6 @@
-# $NetBSD: Makefile,v 1.38 2007/10/28 11:07:12 wiz Exp $
+# $NetBSD: Makefile,v 1.40 2008/06/20 01:09:23 joerg Exp $
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 .include "../../graphics/sane-backends/Makefile.common"
 
@@ -6,7 +8,7 @@ DISTNAME=	sane-frontends-${SANE_VERSION}
 SANE_MICRO=	14
 PKGREVISION=	5
 
-COMMENT=	Frontends for access to scanners, digitals camera, frame grabbers etc
+COMMENT=	Frontends for access to scanners, digital cameras, frame grabbers etc
 
 BUILDLINK_API_DEPENDS.sane+=	sane-backends>=${SANE_VERSION}
 

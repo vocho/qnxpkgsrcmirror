@@ -1,10 +1,13 @@
-# $NetBSD: options.mk,v 1.1 2005/12/30 21:07:42 jlam Exp $
+# $NetBSD: options.mk,v 1.3 2008/05/08 13:28:39 jlam Exp $
 
 PKG_OPTIONS_VAR=		PKG_OPTIONS.freetds
-PKG_OPTIONS_OPTIONAL_GROUPS+=	odbc
+PKG_OPTIONS_OPTIONAL_GROUPS+=	odbc tls
 PKG_OPTIONS_GROUP.odbc=		iodbc #unixodbc
+PKG_OPTIONS_GROUP.tls=		gnutls openssl
 
 .include "../../mk/bsd.options.mk"
+
+PLIST_VARS+=			odbc
 
 ###
 ### Whether to build with iODBC to enable ODBC access to TDS servers.
@@ -14,7 +17,7 @@ ODBC_DRIVER=		yes
 .  include "../../databases/iodbc/buildlink3.mk"
 CONFIGURE_ARGS+=	--enable-odbc
 CONFIGURE_ARGS+=	--with-iodbc=${BUILDLINK_PREFIX.iodbc}
-PLIST_SUBST+=		ODBC=
+PLIST.odbc=		yes
 .endif
 
 ###
@@ -24,10 +27,29 @@ PLIST_SUBST+=		ODBC=
 .  include "../../databases/unixodbc/buildlink3.mk"
 CONFIGURE_ARGS+=	--enable-odbc
 CONFIGURE_ARGS+=	--with-unixodbc=${BUILDLINK_PREFIX.unixodbc}
-PLIST_SUBST+=		ODBC=
+PLIST.odbc=		yes
 .endif
 
 .if empty(PKG_OPTIONS:Miodbc) && empty(PKG_OPTIONS:Munixodbc)
 CONFIGURE_ARGS+=	--disable-odbc
-PLIST_SUBST+=		ODBC="@comment "
+.endif
+
+###
+### Use GNU TLS for TLSv1 encrypted session to MSSQL servers.
+###
+.if !empty(PKG_OPTIONS:Mgnutls)
+.include "../../security/gnutls/buildlink3.mk"
+CONFIGURE_ARGS+=	--with-gnutls
+.else
+CONFIGURE_ARGS+=	--without-gnutls
+.endif
+
+###
+### Use OpenSSL for TLSv1 encrypted session to MSSQL servers.
+###
+.if !empty(PKG_OPTIONS:Mopenssl)
+.include "../../security/openssl/buildlink3.mk"
+CONFIGURE_ARGS+=	--with-openssl=${BUILDLINK_PREFIX.openssl:Q}
+.else
+CONFIGURE_ARGS+=	--without-openssl
 .endif

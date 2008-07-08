@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.2 2008/01/15 19:31:18 reed Exp $
+# $NetBSD: Makefile,v 1.4 2008/06/08 14:35:42 bjs Exp $
 #
 
-DISTNAME=		rgb-1.0.1
+DISTNAME=		rgb-1.0.3
 CATEGORIES=		x11
-MASTER_SITES=		http://xorg.freedesktop.org/releases/individual/app/
+MASTER_SITES=		${MASTER_SITE_XORG:=app/}
 EXTRACT_SUFX=		.tar.bz2
 
 MAINTAINER=		joerg@NetBSD.org

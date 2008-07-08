@@ -1,12 +1,14 @@
-# $NetBSD: Makefile,v 1.8 2007/05/18 10:03:32 peter Exp $
+# $NetBSD: Makefile,v 1.12 2008/06/26 20:59:51 peter Exp $
 
-DISTNAME=	pftop-0.4
+DISTNAME=	pftop-0.7
 CATEGORIES=	sysutils net
 MASTER_SITES=	http://www.eee.metu.edu.tr/~canacar/
 
-MAINTAINER=	pkgsrc-users@NetBSD.org
+MAINTAINER=	peter@NetBSD.org
 HOMEPAGE=	http://www.eee.metu.edu.tr/~canacar/pftop/
 COMMENT=	Utility for real-time display of statistics for PF
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 NO_CONFIGURE=	yes
 
@@ -15,9 +17,13 @@ CFLAGS+=	-I${PREFIX}/include
 
 INSTALLATION_DIRS=	${PKGMANDIR}/man8 sbin
 
-do-install:
-	${INSTALL_PROGRAM} ${WRKSRC}/pftop ${PREFIX}/sbin
-	${INSTALL_MAN} ${WRKSRC}/pftop.8 ${PREFIX}/${PKGMANDIR}/man8
+post-patch:
+	@${ECHO} "#include <pcap.h>" > ${WRKSRC}/pcap-int.h
 
-.include "../../security/pflkm/buildlink3.mk"
+do-install:
+	${INSTALL_PROGRAM} ${WRKSRC}/pftop ${DESTDIR}${PREFIX}/sbin
+	${INSTALL_MAN} ${WRKSRC}/pftop.8 ${DESTDIR}${PREFIX}/${PKGMANDIR}/man8
+
+.include "../../net/libpcap/buildlink3.mk"
+.include "../../mk/pf.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

@@ -1,20 +1,19 @@
-# $NetBSD: Makefile,v 1.35 2006/04/06 06:21:41 reed Exp $
+# $NetBSD: Makefile,v 1.37 2008/06/20 01:09:11 joerg Exp $
 #
 
-DISTNAME=		DBD-mysql-3.0002
+DISTNAME=		DBD-mysql-4.006
 PKGNAME=		p5-${DISTNAME}
-PKGREVISION=		1
 SVR4_PKGNAME=		p5dmy
 CATEGORIES=		databases perl5
 MASTER_SITES=		${MASTER_SITE_PERL_CPAN:=DBD/}
 
 MAINTAINER=		bad@NetBSD.org
-HOMEPAGE=		http://www.mysql.com/
+HOMEPAGE=		http://dev.mysql.com/downloads/dbi.html
 COMMENT=		Perl DBI/DBD driver for MySQL databases
 
-DEPENDS+=		p5-Data-ShowTable>=3.3:../../devel/p5-Data-ShowTable
+PKG_DESTDIR_SUPPORT=	user-destdir
 
-BUILDLINK_API_DEPENDS.mysql-client?=	mysql-client>=3.23.49nb1
+DEPENDS+=		p5-Data-ShowTable>=3.3:../../devel/p5-Data-ShowTable
 
 PERL5_PACKLIST=		auto/DBD/mysql/.packlist
 

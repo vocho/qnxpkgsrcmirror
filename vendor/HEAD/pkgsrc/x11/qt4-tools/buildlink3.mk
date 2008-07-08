@@ -1,4 +1,4 @@
-# $NetBSD: buildlink3.mk,v 1.7 2006/07/08 23:11:16 jlam Exp $
+# $NetBSD: buildlink3.mk,v 1.9 2008/06/03 20:14:45 abs Exp $
 
 BUILDLINK_DEPTH:=		${BUILDLINK_DEPTH}+
 QT4_TOOLS_BUILDLINK3_MK:=	${QT4_TOOLS_BUILDLINK3_MK}+

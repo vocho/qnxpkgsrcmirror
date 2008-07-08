@@ -1,13 +1,12 @@
-# $NetBSD: Makefile,v 1.69 2008/03/06 14:53:49 wiz Exp $
+# $NetBSD: Makefile,v 1.71 2008/04/30 13:38:14 jmmv Exp $
 #
 
-DISTNAME=	libgnome-2.20.1.1
-PKGREVISION=	1
+DISTNAME=	libgnome-2.22.0
 CATEGORIES=	devel gnome
-MASTER_SITES=	${MASTER_SITE_GNOME:=sources/libgnome/2.20/}
+MASTER_SITES=	${MASTER_SITE_GNOME:=sources/libgnome/2.22/}
 EXTRACT_SUFX=	.tar.bz2
 
-MAINTAINER=	jmmv@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.gnome.org/
 COMMENT=	Core GNOME2 library (non-graphical)
 
@@ -39,7 +38,6 @@ CONF_FILES+=	${EGDIR}/sound/events/gtk-events-2.soundlist \
 GCONF_SCHEMAS=	desktop_gnome_accessibility_keyboard.schemas
 GCONF_SCHEMAS+=	desktop_gnome_accessibility_startup.schemas
 GCONF_SCHEMAS+=	desktop_gnome_applications_browser.schemas
-GCONF_SCHEMAS+=	desktop_gnome_applications_help_viewer.schemas
 GCONF_SCHEMAS+=	desktop_gnome_applications_terminal.schemas
 GCONF_SCHEMAS+=	desktop_gnome_applications_window_manager.schemas
 GCONF_SCHEMAS+=	desktop_gnome_background.schemas
@@ -53,6 +51,7 @@ GCONF_SCHEMAS+=	desktop_gnome_thumbnailers.schemas
 GCONF_SCHEMAS+=	desktop_gnome_typing_break.schemas
 GCONF_SCHEMAS+=	desktop_gnome_applications_at_mobility.schemas
 GCONF_SCHEMAS+=	desktop_gnome_applications_at_visual.schemas
+GCONF_SCHEMAS+=	desktop_gnome_applications_office.schemas
 
 BUILDLINK_API_DEPENDS.audiofile+=	libaudiofile>=0.2.3
 BUILDLINK_API_DEPENDS.glib2+=		glib2>=2.8.0
@@ -69,5 +68,4 @@ BUILDLINK_API_DEPENDS.libbonobo+=	libbonobo>=2.13.0
 .include "../../sysutils/gnome-vfs/buildlink3.mk"
 .include "../../textproc/libxml2/buildlink3.mk"
 .include "../../textproc/libxslt/buildlink3.mk"
-.include "../../mk/bdb.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

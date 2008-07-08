@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.18 2007/04/19 21:39:17 wiz Exp $
+# $NetBSD: Makefile,v 1.20 2008/04/30 13:38:17 jmmv Exp $
 #
 
-DISTNAME=	libxklavier-3.2
+DISTNAME=	libxklavier-3.5
 CATEGORIES=	x11
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=gswitchit/}
 
-MAINTAINER=	jmmv@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://freedesktop.org/Software/LibXklavier
 COMMENT=	High-level API for the X Keyboard Extension (XKB)
 

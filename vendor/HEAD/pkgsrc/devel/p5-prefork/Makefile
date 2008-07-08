@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.7 2006/11/03 11:54:00 obache Exp $
+# $NetBSD: Makefile,v 1.9 2008/06/12 02:14:27 joerg Exp $
 #
 
-DISTNAME=	prefork-1.01
+DISTNAME=	prefork-1.02
 PKGNAME=	p5-${DISTNAME}
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Net/ADAMK/}
@@ -11,6 +11,7 @@ HOMEPAGE=	http://search.cpan.org/dist/prefork/
 COMMENT=	Optimize module loading across forking and non-forking scenarios
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 PERL5_PACKLIST=		auto/prefork/.packlist
 

@@ -1,15 +1,16 @@
-# $NetBSD: Makefile,v 1.63 2008/03/06 14:53:51 wiz Exp $
+# $NetBSD: Makefile,v 1.68 2008/06/12 02:14:34 joerg Exp $
 #
 
-DISTNAME=	evolution-data-server-1.12.3
-PKGREVISION=	2
+DISTNAME=	evolution-data-server-2.22.2
 CATEGORIES=	mail gnome
-MASTER_SITES=	${MASTER_SITE_GNOME:=sources/evolution-data-server/1.12/}
+MASTER_SITES=	${MASTER_SITE_GNOME:=sources/evolution-data-server/2.22/}
 EXTRACT_SUFX=	.tar.bz2
 
-MAINTAINER=	jmmv@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.gnome.org/projects/evolution/
 COMMENT=	Evolution data server
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 BUILDLINK_API_DEPENDS.libsoup-devel+=	libsoup-devel>=2.2.3
 
@@ -45,6 +46,8 @@ CONFIGURE_ARGS+=	--with-nspr-libs=${BUILDLINK_PREFIX.nspr}/lib
 CONFIGURE_ARGS+=	--with-nss-includes=${BUILDLINK_PREFIX.nss}/include/nss/nss
 CONFIGURE_ARGS+=	--with-nss-libs=${BUILDLINK_PREFIX.nss}/lib
 CONFIGURE_ARGS+=	--with-openldap
+CONFIGURE_ARGS+=	--with-libdb=${LOCALBASE}
+BUILDLINK_TRANSFORM+=	l:db:db4
 
 .if !empty(PKG_OPTIONS:Minet6)
 CONFIGURE_ARGS+=	--enable-ipv6
@@ -72,6 +75,7 @@ DEPENDS+= zonetab-[0-9]*:../../time/zonetab
 
 .include "../../converters/libiconv/buildlink3.mk"
 .include "../../databases/openldap-client/buildlink3.mk"
+.include "../../databases/db4/buildlink3.mk"
 .include "../../devel/GConf/buildlink3.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../devel/glib2/buildlink3.mk"
@@ -81,7 +85,7 @@ DEPENDS+= zonetab-[0-9]*:../../time/zonetab
 .include "../../devel/libgnomeui/buildlink3.mk"
 .include "../../devel/nss/buildlink3.mk"
 .include "../../lang/python/application.mk"
-.include "../../net/libsoup-devel/buildlink3.mk"
+.include "../../net/libsoup24/buildlink3.mk"
 .include "../../net/ORBit2/buildlink3.mk"
 .include "../../sysutils/gnome-vfs/buildlink3.mk"
 .include "../../textproc/libxml2/buildlink3.mk"

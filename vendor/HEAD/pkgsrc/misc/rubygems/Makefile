@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.18 2008/03/18 03:47:07 jlam Exp $
+# $NetBSD: Makefile,v 1.21 2008/06/19 14:52:36 taca Exp $
 
-DISTNAME=	rubygems-1.0.1
+DISTNAME=	rubygems-1.1.1
 PKGREVISION=	2
 CATEGORIES=	misc ruby
-MASTER_SITES=	http://rubyforge.org/frs/download.php/29548/
+MASTER_SITES=	http://rubyforge.org/frs/download.php/35283/
 EXTRACT_SUFX=	.tgz
 
 MAINTAINER=	minskim@NetBSD.org
@@ -16,7 +16,7 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 
 NO_CONFIGURE=	yes
 NO_BUILD=	yes
-RUBY_REQD=	1.8.3
+RUBY_REQD=	1.8.7
 
 REPLACE_RUBY_DIRS=	bin
 REPLACE_RUBY_PAT=	[a-z]*
@@ -48,9 +48,9 @@ GENERATE_PLIST+=	\
 INSTALL_ENV+=		GEM_HOME=${DESTDIR}${GEM_HOME}
 
 INSTALL_TARGET=		install
-INSTALL_TARGET+=	--format-executable
+INSTALL_TARGET+=	--no-format-executable	# "bin/gem", not "bin/gem18"
 .if ${_USE_DESTDIR} != "no"
-INSTALL_TARGET+=	--buildroot=${DESTDIR:Q}
+INSTALL_TARGET+=	--install-root=${DESTDIR:Q}
 .endif
 
 # rubygem's setup.rb is not the typical setup.rb -- manually run the

@@ -1,14 +1,16 @@
-# $NetBSD: Makefile,v 1.128 2008/03/05 19:08:05 drochner Exp $
+# $NetBSD: Makefile,v 1.135 2008/06/12 02:14:34 joerg Exp $
 
-DISTNAME=		evolution-2.12.3
-PKGREVISION=		2
+DISTNAME=		evolution-2.22.2
+PKGREVISION=		1
 CATEGORIES=		mail time gnome
-MASTER_SITES=		${MASTER_SITE_GNOME:=sources/evolution/2.12/}
+MASTER_SITES=		${MASTER_SITE_GNOME:=sources/evolution/2.22/}
 EXTRACT_SUFX=		.tar.bz2
 
 MAINTAINER=		rh@NetBSD.org
 HOMEPAGE=		http://www.gnome.org/projects/evolution/
 COMMENT=		GNOME mailer, calendar, contact manager, and communications tool
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.evolution
 PKG_SUGGESTED_OPTIONS=	inet6 ssl
@@ -67,9 +69,10 @@ CONFIGURE_ARGS+=	--with-krb5
 CONFIGURE_ARGS+=	--without-krb5
 .endif
 
+PLIST_VARS+=		smime
 .if !empty(PKG_OPTIONS:Mssl)
 CONFIGURE_ARGS+=	--enable-nss=yes
-PLIST_SUBST+=		HAVE_SMIME=
+PLIST.smime=		yes
 PRINT_PLIST_AWK+=	/smime/ { print "$${HAVE_SMIME}" $$0; next; }
 # XXX Workaround for the following problem: addressbook/util/libeabutil.la
 # is compiled as a static library only which uses the NSS stuff.  When other
@@ -89,7 +92,6 @@ post-wrapper:
 	cd ${BUILDLINK_DIR}/lib/pkgconfig && ${LN} -s nss.pc mozilla-nss.pc
 .else
 CONFIGURE_ARGS+=	--disable-nss
-PLIST_SUBST+=		HAVE_SMIME="@comment "
 .endif
 
 PKGCONFIG_OVERRIDE=	evolution-plugin.pc.in
@@ -130,12 +132,12 @@ LDFLAGS+=	-lsemaphore
 .include "../../graphics/libgnomecanvas/buildlink3.mk"
 .include "../../mail/evolution-data-server/buildlink3.mk"
 .include "../../net/ORBit2/buildlink3.mk"
-.include "../../net/libsoup-devel/buildlink3.mk"
-.include "../../print/libgnomeprint/buildlink3.mk"
-.include "../../print/libgnomeprintui/buildlink3.mk"
+.include "../../net/libsoup24/buildlink3.mk"
+#.include "../../print/libgnomeprint/buildlink3.mk"
+#.include "../../print/libgnomeprintui/buildlink3.mk"
 .include "../../sysutils/dbus/buildlink3.mk"
 .include "../../sysutils/dbus-glib/buildlink3.mk"
-.include "../../sysutils/gnome-vfs/buildlink3.mk"
+#.include "../../sysutils/gnome-vfs/buildlink3.mk"
 .include "../../sysutils/libnotify/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../textproc/libxml2/buildlink3.mk"

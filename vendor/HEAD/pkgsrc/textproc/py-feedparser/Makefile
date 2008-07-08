@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.11 2006/02/05 23:11:06 joerg Exp $
+# $NetBSD: Makefile,v 1.13 2008/06/12 02:14:52 joerg Exp $
 #
 
 DISTNAME=		feedparser-4.1
@@ -12,10 +12,11 @@ MAINTAINER=		schmonz@NetBSD.org
 HOMEPAGE=		http://feedparser.org/
 COMMENT=		Parse RSS and Atom feeds in Python
 
+PKG_DESTDIR_SUPPORT=	user-destdir
+
 WRKSRC=			${WRKDIR}
 
 PYDISTUTILSPKG=		yes
-PYTHON_VERSIONS_ACCEPTED?=	24 23 22 21
 
 .include "../../lang/python/extension.mk"
 .include "../../mk/bsd.pkg.mk"

@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.29 2007/10/29 18:31:11 gdt Exp $
+# $NetBSD: Makefile,v 1.32 2008/07/04 16:30:53 gdt Exp $
 #
 
-DISTNAME=	trac-0.10.4
+DISTNAME=	trac-0.10.5
 CATEGORIES=	devel www
 MASTER_SITES=	http://ftp.edgewall.org/pub/trac/ \
 		ftp://ftp.edgewall.org/pub/trac/
@@ -35,7 +35,6 @@ DEPENDS+=	${PYPKGPREFIX}-psycopg2>=2:../../databases/py-psycopg2
 PYDISTUTILSPKG=	YES
 PY_PATCHPLIST=	YES
 PYTHON_PATCH_SCRIPTS=	contrib/*.py contrib/*-hook
-PYTHON_VERSIONS_ACCEPTED=	24 23
 
 EGDIR=		${PREFIX}/share/examples/trac
 

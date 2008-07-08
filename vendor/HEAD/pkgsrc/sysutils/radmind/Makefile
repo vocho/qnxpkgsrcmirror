@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.17 2008/01/18 05:09:45 tnn Exp $
+# $NetBSD: Makefile,v 1.20 2008/06/23 08:44:28 hauke Exp $
 #
 
-DISTNAME=	radmind-1.10.0
+DISTNAME=	radmind-1.11.1
 PKGREVISION=	1
 CATEGORIES=	sysutils
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=radmind/}
@@ -9,6 +9,8 @@ MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=radmind/}
 MAINTAINER=	hf@spg.tu-darmstadt.de
 HOMEPAGE=	http://rsug.itd.umich.edu/software/radmind/
 COMMENT=	Remote file administration and integrity tool
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=		yes
 CONFIGURE_ARGS+=	--with-openssl=${BUILDLINK_PREFIX.openssl}

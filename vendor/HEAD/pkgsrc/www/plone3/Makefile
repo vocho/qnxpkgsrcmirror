@@ -1,15 +1,17 @@
-# $NetBSD: Makefile,v 1.3 2008/02/19 14:12:47 taca Exp $
+# $NetBSD: Makefile,v 1.7 2008/06/12 02:14:56 joerg Exp $
 # FreeBSD: ports/www/plone/Makefile,v 1.25 2007/02/17 08:32:54 rafan Exp
 #
 
 DISTNAME=	Plone-${PLONE3_VERSION}
 PKGNAME=	${PLONE_PKG_PREFIX}-${PLONE3_VERSION}
 CATEGORIES=	www python
-MASTER_SITES=	http://launchpad.net/plone/3.0/3.0.6/+download/
+MASTER_SITES=	http://launchpad.net/plone/3.1/3.1.2/+download/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://plone.org/
 COMMENT=	User friendly CMS written on top of ZOPE
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 PLONE_VERSION=			3
 PYTHON_VERSIONS_ACCEPTED=	24
@@ -20,7 +22,7 @@ ZOPE_PRODUCT_VER=	${PLONE3_VERSION}
 ZOPE_BUILD_METHOD=	zope-force-build
 ZOPE_PRODUCT_SRCDIR=	${WRKSRC}/Products
 
-USE_TOOLS+=		msgfmt
+USE_TOOLS+=		msgfmt pax
 PRIVILEGED_STAGES+=	clean
 CONFLICTS=		zope25-BTreeFolder2-[0-9]* zope25-CMF-[0-9]* \
 			zope25-CMFPlone-[0-9]*
@@ -47,7 +49,7 @@ post-build:
 	${CAT} ${PKGDIR}/PLIST.common_end >> ${WRKDIR}/PLIST
 
 post-install:
-	cd ${WRKSRC}/lib; ${PAX} -rw . ${ZOPE_DIR}/lib
+	cd ${WRKSRC}/lib; pax -rw . ${DESTDIR}${ZOPE_DIR}/lib
 
 .include "../../www/plone/ploneversion.mk"
 .include "../../www/zope/replace.mk"

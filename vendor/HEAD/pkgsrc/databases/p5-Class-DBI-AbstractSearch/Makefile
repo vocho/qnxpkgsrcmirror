@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.5 2006/03/04 21:29:09 jlam Exp $
+# $NetBSD: Makefile,v 1.7 2008/06/20 15:40:27 he Exp $
 #
 
-DISTNAME=	Class-DBI-AbstractSearch-0.05
+DISTNAME=	Class-DBI-AbstractSearch-0.07
 PKGNAME=	p5-${DISTNAME}
 #SVR4_PKGNAME=	p5cdi
 PKGREVISION=	1
@@ -12,8 +12,10 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://search.cpan.org/dist/Class-DBI-AbstractSearch/
 COMMENT=	Abstract Class::DBI's SQL with SQL::Abstract
 
+PKG_DESTDIR_SUPPORT=	user-destdir
+
 DEPENDS+=	p5-Class-DBI>=0.9:../../databases/p5-Class-DBI
-DEPENDS+=	p5-SQL-Abstract>=1.1:../../databases/p5-SQL-Abstract
+DEPENDS+=	p5-SQL-Abstract-Limit>=0.1:../../databases/p5-SQL-Abstract-Limit
 
 PERL5_PACKLIST=	auto/Class/DBI/AbstractSearch/.packlist
 

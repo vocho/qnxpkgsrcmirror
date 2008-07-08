@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.1.1.1 2008/02/10 13:08:51 obache Exp $
+# $NetBSD: Makefile,v 1.3 2008/07/03 08:12:20 obache Exp $
 
 .include "../../textproc/migemo/Makefile.common"
 
 PKGNAME=		${RUBY_PKGPREFIX}-migemo-${MIGEMO_VERSION}
+PKGREVISION=		1
 
 COMMENT=		Japanese text search tool/library
 
@@ -13,7 +14,7 @@ DEPENDS+=		${RUBY_PKGPREFIX}-romkan-*:../../converters/ruby-romkan
 
 USE_TOOLS+=		autoconf213 automake14 aclocal
 GNU_CONFIGURE=		yes
-CONFIGURE_ARGS+=	--with-rubydir=${RUBY_SITELIBDIR}
+CONFIGURE_ARGS+=	--with-rubydir=${PREFIX}/${RUBY_VENDORLIB}
 
 REPLACE_RUBY=		migemo migemo-client migemo-grep migemo-server
 

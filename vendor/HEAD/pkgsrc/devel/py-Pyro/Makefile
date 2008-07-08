@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.8 2006/06/17 21:01:29 rillig Exp $
+# $NetBSD: Makefile,v 1.10 2008/06/12 02:14:28 joerg Exp $
 #
 
 DISTNAME=		Pyro-3.4
@@ -11,9 +11,10 @@ MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://pyro.sourceforge.net/
 COMMENT=		Distributed Object Technology system in Python
 
+PKG_DESTDIR_SUPPORT=	user-destdir
+
 PY_PATCHPLIST=		yes
 PYDISTUTILSPKG=		yes
-PYTHON_VERSIONS_ACCEPTED= 24 23 22
 PLIST_SUBST+=		PYVERSSUFFIX="-${PYVERSSUFFIX}"
 MAKE_ENV+=		PKGSRC="1"
 MAKE_ENV+=		PYVERSSUFFIX="-${PYVERSSUFFIX}"

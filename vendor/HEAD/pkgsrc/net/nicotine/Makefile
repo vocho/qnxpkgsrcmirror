@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.25 2008/03/15 16:52:34 joerg Exp $
+# $NetBSD: Makefile,v 1.27 2008/06/20 01:09:31 joerg Exp $
 #
 
 DISTNAME=	nicotine-1.0.8
@@ -11,9 +11,11 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://nicotine.thegraveyard.org/
 COMMENT=	Client for soulseek, a peer-to-peer network for music
 
+PKG_DESTDIR_SUPPORT=	user-destdir
+
 USE_PKGLOCALEDIR=	yes
 
-PYTHON_VERSIONS_ACCEPTED=	24
+PYTHON_VERSIONS_ACCEPTED=	25 24
 PY_PATCHPLIST=	yes
 PYDISTUTILSPKG=	yes
 

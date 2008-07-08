@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.10 2008/01/02 15:39:57 reed Exp $
+# $NetBSD: Makefile,v 1.14 2008/06/05 14:22:24 reed Exp $
 #
 
-DISTNAME=	ikiwiki_2.15
-PKGREVISION=	1
+DISTNAME=	ikiwiki_2.48
 PKGNAME=	${DISTNAME:S/_/-/}
+PKGREVISION=	1
 CATEGORIES=	www textproc
 MASTER_SITES=	${MASTER_SITE_DEBIAN:=pool/main/i/ikiwiki/}
 
@@ -12,7 +12,7 @@ HOMEPAGE=	http://ikiwiki.info/
 COMMENT=	Wiki compiler
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.ikiwiki
-PKG_SUPPORTED_OPTIONS=	imagemagick svn w3m
+PKG_SUPPORTED_OPTIONS=	amazon_s3 imagemagick svn w3m
 PKG_SUGGESTED_OPTIONS=	# none on by default
 
 .include "../../mk/bsd.prefs.mk"
@@ -37,6 +37,12 @@ DEPENDS+=	p5-XML-Feed-[0-9]*:../../textproc/p5-XML-Feed
 DEPENDS+=	p5-File-MimeInfo-[0-9]*:../../devel/p5-File-MimeInfo
 DEPENDS+=	p5-gettext-[0-9]*:../../devel/p5-gettext
 
+# for amazon_s3 plugin which injects wiki pages into Amazon S3
+# allowing ikiwiki to be used without a dedicated web server.
+.if !empty(PKG_OPTIONS:Mamazon_s3)
+DEPENDS+=	p5-Net-Amazon-S3-[0-9]*:../../net/p5-Net-Amazon-S3
+.endif
+
 # for img plugin
 .if !empty(PKG_OPTIONS:Mimagemagick)
 # the plugin uses the ImageMagick tools via PerlMagic
@@ -47,13 +53,13 @@ DEPENDS+=	p5-PerlMagick-[0-9]*:../../graphics/p5-PerlMagick
 DEPENDS+=	subversion-base-[0-9]*:../../devel/subversion-base
 .endif
 
+PLIST_VARS+=	w3m
 .if !empty(PKG_OPTIONS:Mw3m)
 DEPENDS+=	w3m-[0-9]*:../../www/w3m
-PLIST_SUBST+=	W3M=""
+PLIST.w3m=	yes
 SUBST_SED.makefile+=	-e 's,/lib/w3m/cgi-bin,/libexec/w3m/cgi-bin,'
 INSTALLATION_DIRS+=	share/doc/ikiwiki/w3mmode
 .else
-PLIST_SUBST+=	W3M="@comment "
 SUBST_SED.makefile+=	-e 's,^\(.*install .*/lib/w3m/cgi-bin\),\#\1,'
 .endif
 
@@ -66,14 +72,16 @@ USE_TOOLS=	gmake perl:run xgettext
 # TODO: check these
 REPLACE_PERL+=	IkiWiki.pm ikiwiki-w3m.cgi mdwn2man pm_filter
 REPLACE_PERL+=	ikiwiki.in ikiwiki-mass-rebuild ikiwiki-update-wikilist
+REPLACE_PERL+=	ikiwiki-transition
 REPLACE_PERL+=	t/*.t IkiWiki/*.pm IkiWiki/*/*.pm
 REPLACE_PERL+=	doc/ikiwiki.setup doc/w3mmode/ikiwiki.setup
-REPLACE_PERL+=	plugins/externaldemo
+#REPLACE_PERL+=	plugins/externaldemo	# not installed anymore
 
-REPLACE_PYTHON+=	plugins/rst
+# not installed anymore
+#REPLACE_PYTHON+=	plugins/rst
 # TODO: add an rst option
 # rst plugin (reStructuredText) needs the python-docutils module
-CHECK_INTERPRETER_SKIP+=	lib/ikiwiki/plugins/rst
+#CHECK_INTERPRETER_SKIP+=	lib/ikiwiki/plugins/rst
 
 SUBST_CLASSES+=	makefile
 SUBST_STAGE.makefile=	post-patch

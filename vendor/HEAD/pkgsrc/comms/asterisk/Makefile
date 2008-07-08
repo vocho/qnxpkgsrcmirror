@@ -1,14 +1,16 @@
-# $NetBSD: Makefile,v 1.49 2008/03/19 10:32:02 mjl Exp $
+# $NetBSD: Makefile,v 1.55 2008/06/19 08:14:29 wiz Exp $
 
-DISTNAME=	asterisk-1.2.27
-#PKGREVISION=	2
+DISTNAME=	asterisk-1.2.29
+PKGREVISION=	1
 CATEGORIES=	comms net audio
 MASTER_SITES=	http://ftp.digium.com/pub/asterisk/ \
 		http://ftp.digium.com/pub/asterisk/old-releases/
 
-MAINTAINER=	riz@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.asterisk.org/
 COMMENT=	The Asterisk Software PBX
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 .include "../../mk/bsd.prefs.mk"
 
@@ -17,6 +19,7 @@ REPLACE_BASH=		mkpkgconfig
 REPLACE_PERL+=		agi/agi-test.agi
 
 INSTALL_TARGET=		install samples
+INSTALLATION_DIRS=	lib/pkgconfig
 
 # Running as non-root will come later
 #ASTERISK_USER?= 	asterisk

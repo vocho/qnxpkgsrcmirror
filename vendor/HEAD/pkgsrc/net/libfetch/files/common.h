@@ -1,4 +1,4 @@
-/*	$NetBSD: common.h,v 1.3 2008/02/21 14:40:43 tnn Exp $	*/
+/*	$NetBSD: common.h,v 1.7 2008/04/24 07:55:00 joerg Exp $	*/
 /*-
  * Copyright (c) 1998-2004 Dag-Erling Coïdan Smørgrav
  * All rights reserved.
@@ -93,21 +93,18 @@ ssize_t		 fetch_write(conn_t *, const char *, size_t);
 ssize_t		 fetch_writev(conn_t *, struct iovec *, int);
 int		 fetch_putln(conn_t *, const char *, size_t);
 int		 fetch_close(conn_t *);
-int		 fetch_add_entry(struct url_ent **, int *, int *,
-		     const char *, struct url_stat *);
+int		 fetch_add_entry(struct url_list *, struct url *, const char *, int);
 int		 fetch_netrc_auth(struct url *url);
 int		 fetch_no_proxy_match(const char *);
+int		 fetch_urlpath_safe(char);
 
 #define ftp_seterr(n)	 fetch_seterr(ftp_errlist, n)
 #define http_seterr(n)	 fetch_seterr(http_errlist, n)
 #define netdb_seterr(n)	 fetch_seterr(netdb_errlist, n)
 #define url_seterr(n)	 fetch_seterr(url_errlist, n)
 
-#ifndef NDEBUG
-#define DEBUG(x) do { if (fetchDebug) { x; } } while (0)
-#else
-#define DEBUG(x) do { } while (0)
-#endif
+fetchIO		*fetchIO_unopen(void *, ssize_t (*)(void *, void *, size_t),
+    ssize_t (*)(void *, const void *, size_t), void (*)(void *));
 
 /*
  * I don't really like exporting http_request() and ftp_request(),
@@ -118,10 +115,11 @@ int		 fetch_no_proxy_match(const char *);
  * Note that _*_request() free purl, which is way ugly but saves us a
  * whole lot of trouble.
  */
-FILE		*http_request(struct url *, const char *,
+fetchIO		*http_request(struct url *, const char *,
 		     struct url_stat *, struct url *, const char *);
-FILE		*ftp_request(struct url *, const char *,
+fetchIO		*ftp_request(struct url *, const char *, const char *,
 		     struct url_stat *, struct url *, const char *);
+
 
 /*
  * Check whether a particular flag is set

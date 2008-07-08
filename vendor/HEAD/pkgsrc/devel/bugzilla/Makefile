@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.28 2008/03/03 17:45:34 jlam Exp $
+# $NetBSD: Makefile,v 1.31 2008/05/26 02:13:17 joerg Exp $
 #
 
-DISTNAME=	bugzilla-2.22.3
+DISTNAME=	bugzilla-2.22.4
 CATEGORIES=	www devel
 MASTER_SITES=	${MASTER_SITE_MOZILLA_ALL:=webtools/}
 
@@ -26,7 +26,7 @@ PKG_DESTDIR_SUPPORT=	destdir
 .include "../../mk/bsd.prefs.mk"
 .include "options.mk"
 
-USE_TOOLS+=	perl:run
+USE_TOOLS+=	pax perl:run
 NO_BUILD=	YES
 
 BZ_WEB_GROUP?=	${APACHE_GROUP}
@@ -103,7 +103,7 @@ do-install:
 	${INSTALL_DATA} ${WRKSRC}/docs/html/*.html ${DESTDIR}${BZDIR}/docs/html
 
 .for i in ${PAX_DIRS}
-	cd ${WRKSRC}/${i} && ${PAX} -rw . ${DESTDIR}${BZDIR}/${i}
+	cd ${WRKSRC}/${i} && pax -rw . ${DESTDIR}${BZDIR}/${i}
 	${FIND} ${DESTDIR}${BZDIR}/${i} -type f | ${XARGS} ${CHMOD} ${SHAREMODE}
 	${FIND} ${DESTDIR}${BZDIR}/${i} -type d | ${XARGS} ${CHMOD} ${PKGDIRMODE}
 	${CHOWN} -R ${SHAREOWN}:${SHAREGRP} ${DESTDIR}${BZDIR}/${i}

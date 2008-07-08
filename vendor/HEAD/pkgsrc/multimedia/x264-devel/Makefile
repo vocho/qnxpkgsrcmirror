@@ -1,11 +1,10 @@
-# $NetBSD: Makefile,v 1.10 2008/03/18 15:05:03 tron Exp $
-#
+# $NetBSD: Makefile,v 1.12 2008/04/09 18:33:37 tron Exp $
 
 SNAPSHOT_DATE=		20071218
 
 DISTNAME=		x264-snapshot-${SNAPSHOT_DATE}-2245
 PKGNAME=		x264-devel-${SNAPSHOT_DATE}
-PKGREVISION=		1
+PKGREVISION=		2
 CATEGORIES=		multimedia
 MASTER_SITES=		ftp://ftp.videolan.org/pub/videolan/x264/snapshots/
 EXTRACT_SUFX=		.tar.bz2
@@ -21,14 +20,6 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 .if ${MACHINE_ARCH} == "i386" || ${MACHINE_ARCH} == "x86_64"
 BUILD_DEPENDS+=	yasm>=0.4.0:../../devel/yasm
 .endif
-
-# Avoid linker warning under Mac OS X PPC.
-.if empty(MACHINE_PLATFORM:MDarwin-*-powerpc)
-DARWIN_PPC_LDFLAGS=
-.else
-DARWIN_PPC_LDFLAGS=	-Wl,-read_only_relocs -Wl,suppress
-.endif
-MAKE_ENV+=		DARWIN_PPC_LDFLAGS=${DARWIN_PPC_LDFLAGS:Q}
 
 USE_TOOLS+=		gmake
 USE_LIBTOOL=		yes
