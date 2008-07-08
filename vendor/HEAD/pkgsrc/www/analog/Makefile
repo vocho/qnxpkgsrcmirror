@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.56 2007/05/29 09:03:12 tron Exp $
+# $NetBSD: Makefile,v 1.58 2008/06/12 02:14:54 joerg Exp $
 
 DISTNAME=	analog-6.0
 PKGREVISION=	1
@@ -8,9 +8,11 @@ MASTER_SITES=	${HOMEPAGE} \
 		http://analog.org/loganalysis/ \
 		http://www.gekko.de/analog/
 
-MAINTAINER=	tron@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.analog.cx/
 COMMENT=	Extremely fast program for analysing WWW logfiles
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 WRKSRC=		${WRKDISTDIR}/src
 BUILD_TARGET=	analog
@@ -32,12 +34,12 @@ LIBS.SunOS+=	-lnsl -lsocket
 MAKE_ENV+=	LIBS=${LIBS:M*:Q}
 
 do-install:
-	${INSTALL_PROGRAM} ${WRKDISTDIR}/analog ${PREFIX}/bin
-	${INSTALL_DATA} ${WRKDISTDIR}/analog.man ${PREFIX}/${PKGMANDIR}/man1/analog.1
-	${INSTALL_DATA} ${WRKDISTDIR}/docs/* ${PREFIX}/share/doc/analog
-	${INSTALL_DATA} ${WRKDISTDIR}/images/* ${PREFIX}/lib/analog/images
-	${INSTALL_DATA} ${WRKDISTDIR}/lang/* ${PREFIX}/lib/analog/lang
+	${INSTALL_PROGRAM} ${WRKDISTDIR}/analog ${DESTDIR}${PREFIX}/bin
+	${INSTALL_DATA} ${WRKDISTDIR}/analog.man ${DESTDIR}${PREFIX}/${PKGMANDIR}/man1/analog.1
+	${INSTALL_DATA} ${WRKDISTDIR}/docs/* ${DESTDIR}${PREFIX}/share/doc/analog
+	${INSTALL_DATA} ${WRKDISTDIR}/images/* ${DESTDIR}${PREFIX}/lib/analog/images
+	${INSTALL_DATA} ${WRKDISTDIR}/lang/* ${DESTDIR}${PREFIX}/lib/analog/lang
 	${INSTALL_DATA} -m 644 ${WRKDISTDIR}/analog.cfg \
-		${PREFIX}/share/examples/analog.cfg
+		${DESTDIR}${PREFIX}/share/examples/analog.cfg
 
 .include "../../mk/bsd.pkg.mk"

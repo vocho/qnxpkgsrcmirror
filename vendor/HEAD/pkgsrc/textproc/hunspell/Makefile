@@ -1,15 +1,15 @@
-# $NetBSD: Makefile,v 1.5 2008/02/22 17:04:34 jlam Exp $
+# $NetBSD: Makefile,v 1.7 2008/04/18 12:01:05 joerg Exp $
 #
 
-DISTNAME=	hunspell-1.1.12-2
-PKGNAME=	${DISTNAME:C/-([0-9]+)$/.\1/}
-PKGREVISION=	2
+DISTNAME=	hunspell-1.2.2
 CATEGORIES=	textproc
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=hunspell/}
 
 MAINTAINER=	adam.hoka@gmail.com
 HOMEPAGE=	http://hunspell.sourceforge.net/
 COMMENT=	Improved spellchecker
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 WRKSRC=			${WRKDIR}/${DISTNAME:C/-[0-9]+$//}
 GNU_CONFIGURE=		yes

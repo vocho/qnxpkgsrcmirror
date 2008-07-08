@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.17 2008/03/03 17:45:37 jlam Exp $
+# $NetBSD: Makefile,v 1.19 2008/06/20 15:50:25 taca Exp $
 #
 
 DISTNAME=	${RUBY_DISTNAME}
@@ -12,12 +12,14 @@ COMMENT=	Ruby editing mode for Emacs
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
+DISTINFO_FILE=		${RUBY_DISTINFO_FILE}
 WRKSRC=			${RUBY_WRKSRC}/misc
 EXTRACT_ELEMENTS=	${RUBY_DISTNAME}/misc
 RUBY_VERSION=		${RUBY18_VERSION}
 RUBY_NOVERSION=		yes
 NO_CONFIGURE=		yes
-SRCS=			ruby-mode.el rubydb3x.el inf-ruby.el
+SRCS=			ruby-mode.el rubydb3x.el ruby-electric.el \
+			inf-ruby.el ruby-style.el
 
 PLIST_SUBST+=	SITE_LISP=${SITE_LISP:Q}
 

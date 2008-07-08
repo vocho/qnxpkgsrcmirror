@@ -1,10 +1,9 @@
-# $NetBSD: Makefile,v 1.87 2008/03/06 14:53:54 wiz Exp $
+# $NetBSD: Makefile,v 1.90 2008/05/29 11:25:28 drochner Exp $
 #
 
-DISTNAME=		nautilus-2.20.0
-PKGREVISION=		2
+DISTNAME=		nautilus-2.22.3
 CATEGORIES=		sysutils gnome
-MASTER_SITES=		${MASTER_SITE_GNOME:=sources/nautilus/2.20/}
+MASTER_SITES=		${MASTER_SITE_GNOME:=sources/nautilus/2.22/}
 EXTRACT_SUFX=		.tar.bz2
 
 MAINTAINER=		rh@NetBSD.org
@@ -23,15 +22,12 @@ CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR:Q}
 GCONF_SCHEMAS=		apps_nautilus_preferences.schemas
 
 BUILDLINK_API_DEPENDS.eel+=	eel>=2.15.91
-BUILDLINK_API_DEPENDS.esound+=	esound>=0.2.27
 BUILDLINK_API_DEPENDS.glib2+=	glib2>=2.6.0
-BUILDLINK_API_DEPENDS.gnome-vfs+=	gnome-vfs>=2.14.2
 BUILDLINK_API_DEPENDS.gtk2+=	gtk2+>=2.10.0
 BUILDLINK_API_DEPENDS.startup-notification+=	startup-notification>=0.8
 
 BUILDLINK_DEPMETHOD.libXt?=	build
 
-.include "../../audio/esound/buildlink3.mk"
 .include "../../databases/shared-mime-info/mimedb.mk"
 .include "../../devel/GConf/schemas.mk"
 .include "../../devel/eel/buildlink3.mk"
@@ -47,7 +43,6 @@ BUILDLINK_DEPMETHOD.libXt?=	build
 .include "../../graphics/libexif/buildlink3.mk"
 .include "../../graphics/librsvg/buildlink3.mk"
 .include "../../net/ORBit2/buildlink3.mk"
-.include "../../sysutils/gnome-vfs/buildlink3.mk"
 .include "../../textproc/libxml2/buildlink3.mk"
 .include "../../x11/gnome-desktop/buildlink3.mk"
 .include "../../x11/gtk2/buildlink3.mk"

@@ -1,14 +1,16 @@
-# $NetBSD: Makefile,v 1.95 2008/01/18 05:08:40 tnn Exp $
+# $NetBSD: Makefile,v 1.100 2008/06/21 22:13:22 adrianp Exp $
 
 DISTNAME=	bind-${BIND_VERSION}
 PKGNAME=	${DISTNAME:S/-P1/pl1/}
-PKGREVISION=	2
+PKGREVISION=	4
 CATEGORIES=	net
 MASTER_SITES=	ftp://ftp.isc.org/isc/bind9/${BIND_VERSION}/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.isc.org/sw/bind/
 COMMENT=	Version 9 of the Berkeley Internet Name Daemon, implementation of DNS
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 BIND_VERSION=	9.4.1-P1
 
@@ -18,6 +20,7 @@ BUILD_DEFS+=	IPV6_READY
 
 BUILD_DEFS+=	BIND_DIR VARBASE
 
+USE_TOOLS+=	pax
 USE_LIBTOOL=	yes
 
 GNU_CONFIGURE=	yes
@@ -45,33 +48,30 @@ FILES_SUBST+=	BIND_GROUP=${BIND_GROUP:Q} BIND_USER=${BIND_USER:Q} PAX=${PAX:Q}
 MESSAGE_SUBST+=	BIND_DIR=${BIND_DIR} BIND_USER=${BIND_USER}
 
 # include/isc/ipv6.h is installed on non-ipv6 platforms
+PLIST_VARS+=	inet6
 .if !empty(MISSING_FEATURES:Minet6)
-PLIST_SUBST+=	IPV6H=
-.else
-PLIST_SUBST+=	IPV6H="@comment "
+PLIST.inet6=	yes
 .endif
 
 PLIST_SRC=	${WRKDIR}/PLIST
 RCD_SCRIPTS=	lwresd named9
 
+INSTALLATION_DIRS=	share/doc/bind9/arm share/doc/bind9/draft \
+			share/doc/bind9/misc share/doc/bind9/rfc
+
 post-install:
-	${INSTALL_DATA_DIR} ${PREFIX}/share/doc/bind9
-	${INSTALL_DATA_DIR} ${PREFIX}/share/doc/bind9/arm
-	${INSTALL_DATA_DIR} ${PREFIX}/share/doc/bind9/draft
-	${INSTALL_DATA_DIR} ${PREFIX}/share/doc/bind9/misc
-	${INSTALL_DATA_DIR} ${PREFIX}/share/doc/bind9/rfc
-	${INSTALL_DATA} ${WRKSRC}/README ${PREFIX}/share/doc/bind9
-	set -e; cd ${WRKSRC}/doc && ${PAX} -rwppm			\
+	${INSTALL_DATA} ${WRKSRC}/README ${DESTDIR}${PREFIX}/share/doc/bind9
+	set -e; cd ${WRKSRC}/doc && pax -rwppm			\
 	  -s ',.*xsl.*,,' -s ',Makefile.*,,' -s ',.*\.pl,,'		\
-	  . ${PREFIX}/share/doc/bind9
-	${CHMOD} -R g-w ${PREFIX}/share/doc/bind9
-	${CHMOD} -x ${PREFIX}/share/doc/bind9/arm/Bv9ARM.pdf
+	  . ${DESTDIR}${PREFIX}/share/doc/bind9
+	${CHMOD} -R g-w ${DESTDIR}${PREFIX}/share/doc/bind9
+	${CHMOD} -x ${DESTDIR}${PREFIX}/share/doc/bind9/arm/Bv9ARM.pdf
 	${CP} ${PKGDIR}/PLIST ${PLIST_SRC}
-	(cd ${PREFIX}; ${FIND} share/doc/bind9 -type f -print ) >> ${PLIST_SRC}
-	(cd ${PREFIX}; ${FIND} share/doc/bind9 -type d -print ) | \
+	(cd ${DESTDIR}${PREFIX}; ${FIND} share/doc/bind9 -type f -print ) >> ${PLIST_SRC}
+	(cd ${DESTDIR}${PREFIX}; ${FIND} share/doc/bind9 -type d -print ) | \
 		${SED} -e 's/^/@dirrm /' | ${SORT} -r >> ${PLIST_SRC}
-	(cd ${PREFIX}; ${FIND} include/bind -type f -print ) >> ${PLIST_SRC}
-	(cd ${PREFIX}; ${FIND} include/bind -type d -print ) | \
+	(cd ${DESTDIR}${PREFIX}; ${FIND} include/bind -type f -print ) >> ${PLIST_SRC}
+	(cd ${DESTDIR}${PREFIX}; ${FIND} include/bind -type d -print ) | \
 		${SED} -e 's/^/@dirrm /' | ${SORT} -r >> ${PLIST_SRC}
 
 .include "../../mk/pthread.buildlink3.mk"

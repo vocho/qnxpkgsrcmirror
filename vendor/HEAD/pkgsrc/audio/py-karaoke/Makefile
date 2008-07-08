@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.5 2007/11/26 22:44:53 wiz Exp $
+# $NetBSD: Makefile,v 1.7 2008/06/12 02:14:14 joerg Exp $
 #
 
 DISTNAME=	pykaraoke-0.5.1
@@ -11,11 +11,13 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://pykaraoke.sourceforge.net/
 COMMENT=	Free Python-based karaoke player
 
+PKG_DESTDIR_SUPPORT=	user-destdir
+
 # for .kar files, untested for lack of files
 #DEPENDS+=	timidity-[0-9]*:../../audio/timidity
 
 USE_DIRS+=	xdg-1.4
-PYTHON_VERSIONS_ACCEPTED=	24
+PYTHON_VERSIONS_ACCEPTED=	25 24
 PYDISTUTILSPKG=	yes
 
 # supposedly needed, but I couldn't find out why

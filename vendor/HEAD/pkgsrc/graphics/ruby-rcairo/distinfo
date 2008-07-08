@@ -1,5 +1,5 @@
-$NetBSD: distinfo,v 1.3 2007/05/27 04:10:52 obache Exp $
+$NetBSD: distinfo,v 1.6 2008/04/29 17:36:32 jlam Exp $
 
-SHA1 (rcairo-1.5.0.tar.gz) = b71c94fa1598b5b32242c15033f1ce508b0fc0e5
-RMD160 (rcairo-1.5.0.tar.gz) = e309a494d6e0b2c0206a397b253abde146ab53dc
-Size (rcairo-1.5.0.tar.gz) = 63386 bytes
+SHA1 (cairo-1.6.1.gem) = 9166472bfbd8157b135a44ce90ccec5647ee94c8
+RMD160 (cairo-1.6.1.gem) = 948bd5c42020754c2409bfb305342e6d65455e8a
+Size (cairo-1.6.1.gem) = 183808 bytes

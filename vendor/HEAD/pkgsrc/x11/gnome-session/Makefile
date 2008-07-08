@@ -1,17 +1,18 @@
-# $NetBSD: Makefile,v 1.93 2008/03/06 14:53:56 wiz Exp $
+# $NetBSD: Makefile,v 1.100 2008/06/20 01:09:44 joerg Exp $
 #
 
-DISTNAME=		gnome-session-2.20.3
-PKGREVISION=		1
+DISTNAME=		gnome-session-2.22.2
 CATEGORIES=		x11 gnome
-MASTER_SITES=		${MASTER_SITE_GNOME:=sources/gnome-session/2.20/}
+MASTER_SITES=		${MASTER_SITE_GNOME:=sources/gnome-session/2.22/}
 SITES.gnome-splash-2.16.0.png=	${MASTER_SITE_LOCAL:=gnome-splash/}
 EXTRACT_SUFX=		.tar.bz2
 DISTFILES=		${DISTNAME}${EXTRACT_SUFX} gnome-splash-2.16.0.png
 
-MAINTAINER=		jmmv@NetBSD.org
+MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://www.gnome.org/
 COMMENT=		GNOME2 session management utilities
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 CONFLICTS+=		gnome-core<1.4.2nb4
 
@@ -29,16 +30,13 @@ CPPFLAGS+=		-DPKG_SYSCONFDIR="\"${PKG_SYSCONFDIR}\""
 
 GCONF_SCHEMAS=	gnome-session.schemas
 
-BUILDLINK_API_DEPENDS.esound+=	esound>=0.2.26
 BUILDLINK_API_DEPENDS.gnome-keyring+=	gnome-keyring>=0.5.1
 # Make sure we do not use old packages that rely on XDG_{CONFIG,DATA}_DIRS
 # in the environment being set.
 BUILDLINK_API_DEPENDS.glib2+=	glib2>=2.6.1
-BUILDLINK_API_DEPENDS.gnome-vfs2+=	gnome-vfs2>=2.8.3nb1
 
 BUILDLINK_DEPMETHOD.libXt?=	build
 
-.include "../../audio/esound/buildlink3.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../devel/GConf/schemas.mk"
 .include "../../devel/GConf-ui/buildlink3.mk"
@@ -49,6 +47,7 @@ BUILDLINK_DEPMETHOD.libXt?=	build
 .include "../../sysutils/dbus/buildlink3.mk"
 .include "../../sysutils/dbus-glib/buildlink3.mk"
 .include "../../sysutils/libnotify/buildlink3.mk"
+.include "../../sysutils/gnome-settings-daemon/buildlink3.mk"
 .include "../../x11/gnome-control-center/buildlink3.mk"
 .include "../../x11/gnome-desktop/buildlink3.mk"
 .include "../../x11/gtk2/buildlink3.mk"
@@ -65,6 +64,6 @@ post-extract:
 
 post-install:
 	${INSTALL_DATA} ${WRKSRC}/data/gnome-splash-orig.png \
-	    ${PREFIX}/share/pixmaps/splash/gnome-splash-orig.png
+	    ${DESTDIR}${PREFIX}/share/pixmaps/splash/gnome-splash-orig.png
 
 .include "../../mk/bsd.pkg.mk"

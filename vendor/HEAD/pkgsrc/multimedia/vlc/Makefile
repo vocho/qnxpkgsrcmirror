@@ -1,15 +1,18 @@
-# $NetBSD: Makefile,v 1.50 2008/03/26 02:32:17 tnn Exp $
+# $NetBSD: Makefile,v 1.57 2008/07/03 21:50:02 tonnerre Exp $
 #
 
 DISTNAME=		vlc-${VLC_VER}
+VLC_VER=		0.8.6f
+PKGREVISION=		2
 CATEGORIES=		multimedia
 MASTER_SITES=		http://download.videolan.org/pub/videolan/vlc/${VLC_VER}/
 EXTRACT_SUFX=		.tar.bz2
-PKGREVISION=		3
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://www.videolan.org/
 COMMENT=		VideoLAN Client
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_LIBTOOL=		yes
 USE_TOOLS+=		gmake perl pkg-config
@@ -18,8 +21,6 @@ GNU_CONFIGURE=		yes
 PTHREAD_OPTS+=		require
 USE_LANGUAGES=		c c++
 USE_DIRS+=		xdg-1.4
-
-VLC_VER=		0.8.6d
 
 .include "../../mk/bsd.prefs.mk"
 .include "options.mk"
@@ -44,23 +45,15 @@ CONFIGURE_ARGS+=	--enable-cddax
 CONFIGURE_ARGS+=	--enable-dvdread
 CONFIGURE_ARGS+=	--enable-flac
 
-INSTALLATION_DIRS+=	${PREFIX}/share/vlc/http/dialogs \
-			${PREFIX}/share/vlc/http/images \
-			${PREFIX}/share/vlc/http/js \
-			${PREFIX}/share/vlc/http/old \
-			${PREFIX}/share/vlc/http/old/admin \
-			${PREFIX}/share/vlc/http/old/vlm \
-			${PREFIX}/share/vlc/http/requests \
-			${PREFIX}/share/vlc/osdmenu/default \
-			${PREFIX}/share/vlc/osdmenu/default/selected \
-			${PREFIX}/share/vlc/osdmenu/default/selection \
-			${PREFIX}/share/vlc/osdmenu/default/volume \
-			${PREFIX}/share/vlc/osdmenu/dvd/selected \
-			${PREFIX}/share/vlc/osdmenu/dvd/volume \
-			${PREFIX}/share/vlc/osdmenu/dvd/unselect \
-			${PREFIX}/share/vlc/osdmenu/dvd/selection \
-			${PREFIX}/share/vlc/skins2 \
-			${PREFIX}/share/vlc/skins2/fonts
+INSTALLATION_DIRS+=	${PKGMANDIR}/man1 share/vlc/http/dialogs \
+	share/vlc/http/images share/vlc/http/js \
+	share/vlc/http/old share/vlc/http/old/admin \
+	share/vlc/http/old/vlm share/vlc/http/requests \
+	share/vlc/osdmenu/default share/vlc/osdmenu/default/selected \
+	share/vlc/osdmenu/default/selection share/vlc/osdmenu/default/volume \
+	share/vlc/osdmenu/dvd/selected share/vlc/osdmenu/dvd/volume \
+	share/vlc/osdmenu/dvd/unselect share/vlc/osdmenu/dvd/selection \
+	share/vlc/skins2 share/vlc/skins2/fonts
 
 pre-install:
 	${INSTALL_DATA} ${WRKSRC}/doc/vlc.1 ${DESTDIR}${PREFIX}/${PKGMANDIR}/man1
@@ -84,12 +77,16 @@ SUBST_SED.fnt=		-e "s,${ORIGFNT},${DEFAULT_FONT},"
 SUBST_FILES.fnt=	modules/misc/freetype.c
 SUBST_MESSAGE.fnt=	Fixing hardcoded paths.
 
-.if ${OPSYS} == "NetBSD"
-PLIST_SUBST+=		COND_CDDA="@comment "
-PLIST_SUBST+=		COND_VCD="@comment "
+PLIST_VARS+=		cdda vcd fb
+.if ${OPSYS} != "NetBSD"
+PLIST.cdda=		yes
+PLIST.vcd=		yes
+.endif
+.if ${OPSYS} == "Linux" && exists(/usr/include/linux/fb.h)
+CONFIGURE_ARGS+=	--enable-fb
+PLIST.fb=		yes
 .else
-PLIST_SUBST+=		COND_CDDA=""
-PLIST_SUBST+=		COND_VCD=""
+CONFIGURE_ARGS+=	--disable-fb
 .endif
 
 .if ${X11_TYPE} == "modular"

@@ -1,4 +1,4 @@
-# $NetBSD: tools.Linux.mk,v 1.42 2008/02/19 03:03:08 epg Exp $
+# $NetBSD: tools.Linux.mk,v 1.44 2008/05/17 18:34:50 tnn Exp $
 #
 # System-supplied tools for the Linux operating system.
 
@@ -20,6 +20,11 @@ TOOLS_PLATFORM.bzcat?=		/usr/bin/bzcat
 TOOLS_PLATFORM.bzcat?=		/bin/bzcat
 .elif exists(/usr/bin/bzip2)
 TOOLS_PLATFORM.bzcat?=		/usr/bin/bzip2 -cd
+.endif
+.if exists(/usr/bin/bzip2)
+TOOLS_PLATFORM.bzip2?=		/usr/bin/bzip2
+.elif exists(/bin/bzip2)
+TOOLS_PLATFORM.bzip2?=		/bin/bzip2
 .endif
 TOOLS_PLATFORM.cat?=		/bin/cat
 TOOLS_PLATFORM.chgrp?=		/bin/chgrp
@@ -165,7 +170,9 @@ TOOLS_PLATFORM.nroff?=		/usr/bin/nroff
 .if exists(/usr/bin/openssl)
 TOOLS_PLATFORM.openssl?=	/usr/bin/openssl
 .endif
+.if exists(/usr/bin/patch)
 TOOLS_PLATFORM.patch?=		/usr/bin/patch
+.endif
 .if exists(/usr/bin/printf)
 TOOLS_PLATFORM.printf?=		/usr/bin/printf
 .endif

@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.53 2008/03/08 17:36:53 adrianp Exp $
+# $NetBSD: Makefile,v 1.56 2008/06/17 21:25:38 adrianp Exp $
 
-DISTNAME=	horde-3.1.7
+DISTNAME=	horde-3.2.1
 CATEGORIES=	www
 MASTER_SITES=	http://ftp.horde.org/pub/horde/ \
 		ftp://ftp.horde.org/pub/horde/
@@ -9,7 +9,7 @@ MAINTAINER=	adrianp@NetBSD.org
 HOMEPAGE=	http://www.horde.org/
 COMMENT=	PHP application framework
 
-CONFLICTS+=	horde-2.*
+CONFLICTS+=	horde-2.*{,nb*}
 
 .include "../../lang/php/phpversion.mk"
 
@@ -28,6 +28,8 @@ DEPENDS+=	${PHP_PKG_PREFIX}-dom-[0-9]*:../../textproc/php5-dom
 .endif
 DEPENDS+=	${PHP_PKG_PREFIX}-zlib>=4.3.3:../../archivers/php-zlib
 
+USE_TOOLS+=	pax
+
 .include "../../mk/bsd.prefs.mk"
 
 DOCDIR=		${PREFIX}/share/doc/horde
@@ -44,11 +46,12 @@ REPLACE_INTERPRETER+=	php
 REPLACE.php.old=	.*/bin/php
 REPLACE.php.new=	${PREFIX}/bin/php
 REPLACE_FILES.php=	po/translation.php \
-			scripts/count_sessions.php \
-			scripts/create-symlinks.php \
-			scripts/remove_prefs.php \
 			scripts/upgrades/migrate_user_categories.php \
-			scripts/upgrades/move_history_out_of_datatree.php
+			scripts/upgrades/move_history_out_of_datatree.php \
+			scripts/alarms.php \
+			scripts/import_squirrelmail_prefs.php \
+			scripts/upgrades/convert_datatree_groups_to_sql.php \
+			scripts/upgrades/convert_datatree_perms_to_sql.php
 
 CONF_FILES+=		${EGDIR}/horde.conf ${PKG_SYSCONFDIR}/horde.conf
 CONF_FILES_PERMS+=	${HORDEDIR}/config/conf.php.dist \
@@ -127,7 +130,7 @@ do-install:
 .	endfor
 
 .	for d in ${PAXDIRS}
-		cd ${WRKSRC}/${d} && ${PAX} -rwpam . ${HORDEDIR}/${d}
+		cd ${WRKSRC}/${d} && pax -rwpam . ${HORDEDIR}/${d}
 .	endfor
 
 	${INSTALL_DATA} ${WRKSRC}/config/*.dist ${HORDEDIR}/config

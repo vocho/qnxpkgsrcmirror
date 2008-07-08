@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.1.1.1 2008/02/07 01:48:22 joerg Exp $
+# $NetBSD: Makefile,v 1.17 2008/05/09 00:39:06 joerg Exp $
 #
 
-DISTNAME=	libfetch-2.0
+DISTNAME=	libfetch-2.14
 CATEGORIES=	net
 MASTER_SITES=	# empty
 DISTFILES=	# empty
@@ -15,9 +15,14 @@ COMMENT=	Library to access HTTP/FTP server
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
+USE_FEATURES=		nbcompat
+
 USE_BSD_MAKEFILE=	yes
 
-INSTALLATION_DIRS=	lib ${PKGMANDIR}/cat3 ${PKGMANDIR}/man3
+INSTALLATION_DIRS=	include lib ${PKGMANDIR}/cat3 ${PKGMANDIR}/man3
+
+BUILD_TARGET=	depend all
+INSTALL_TARGET=	install includes
 
 do-extract:
 	${CP} -r ${FILESDIR} ${WRKSRC}

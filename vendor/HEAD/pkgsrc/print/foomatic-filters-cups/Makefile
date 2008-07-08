@@ -1,4 +1,6 @@
-# $NetBSD: Makefile,v 1.6 2007/10/25 22:01:03 jlam Exp $
+# $NetBSD: Makefile,v 1.8 2008/06/15 09:56:37 joerg Exp $
+
+META_PACKAGE=	yes
 
 .include "../../print/foomatic-filters/Makefile.common"
 
@@ -15,15 +17,9 @@ DEPENDS+=	foomatic-filters-${FOOMATIC_FILTERS_VERSION}{,nb[0-9]*}:../../print/fo
 
 EXTRACT_ONLY=	# empty
 WRKSRC=		${WRKDIR}
-NO_CHECKSUM=	yes
-NO_CONFIGURE=	yes
-PLIST_SRC=	# empty
 
 EVAL_PREFIX+=		CUPS_PREFIX=cups
 CUPS_FILTERDIR=		${CUPS_PREFIX:Q}/libexec/cups/filter
 FILES_SUBST+=		CUPS_FILTERDIR=${CUPS_FILTERDIR}
-
-do-build:	# empty
-do-install:	# empty
 
 .include "../../mk/bsd.pkg.mk"

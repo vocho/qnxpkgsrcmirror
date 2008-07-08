@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.5 2007/08/05 21:42:40 joerg Exp $
+# $NetBSD: Makefile,v 1.7 2008/05/24 21:45:18 tnn Exp $
 #
 
-DISTNAME=	xrandr-1.2.2
+DISTNAME=	xrandr-1.2.3
 CATEGORIES=	x11
-MASTER_SITES=	http://xorg.freedesktop.org/releases/individual/app/
+MASTER_SITES=	${MASTER_SITE_XORG:=app/}
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	joerg@NetBSD.org
@@ -16,6 +16,9 @@ GNU_CONFIGURE=	yes
 USE_TOOLS+=	pkg-config
 
 CONFIGURE_ENV+=		APP_MAN_SUFFIX=1
+
+# for fabs()
+LIBS+=		-lm
 
 BUILDLINK_API_DEPENDS.libXrandr+=	libXrandr>=1.2
 

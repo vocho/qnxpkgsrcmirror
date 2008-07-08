@@ -1,9 +1,8 @@
-# $NetBSD: Makefile,v 1.14 2007/12/21 03:38:06 taca Exp $
+# $NetBSD: Makefile,v 1.16 2008/07/04 17:33:00 obache Exp $
 #
 
-DISTNAME=	trac-0.10.4-ja-1
-PKGNAME=	ja-trac-0.10.4.1
-PKGREVISION=	1
+DISTNAME=	trac-0.10.5-ja-1
+PKGNAME=	ja-trac-0.10.5.1
 CATEGORIES=	www devel
 MASTER_SITES=	http://www.i-act.co.jp/project/products/downloads/
 EXTRACT_SUFX=	.zip
@@ -40,7 +39,6 @@ DEPENDS+=	${PYPKGPREFIX}-psycopg>=1.1.14:../../databases/py-psycopg2
 PYDISTUTILSPKG=	YES
 PY_PATCHPLIST=	YES
 PYTHON_PATCH_SCRIPTS=	contrib/*.py contrib/*-hook
-PYTHON_VERSIONS_ACCEPTED=	24 23
 
 OWN_DIRS+=	${PREFIX}/share/trac
 OWN_DIRS+=	${PREFIX}/share/trac/conf

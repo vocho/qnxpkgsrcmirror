@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.10 2006/06/02 23:37:24 joerg Exp $
+# $NetBSD: Makefile,v 1.12 2008/06/12 02:14:32 joerg Exp $
 #
 
 DISTNAME=	gnuplot-py-1.7
@@ -11,8 +11,9 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://gnuplot-py.sourceforge.net/
 COMMENT=	Python package that interfaces to gnuplot
 
+PKG_DESTDIR_SUPPORT=	user-destdir
+
 PYDISTUTILSPKG=	yes
-PYTHON_VERSIONS_ACCEPTED=	24 23 22
 
 .include "../../lang/python/extension.mk"
 .include "../../math/py-Numeric/buildlink3.mk"

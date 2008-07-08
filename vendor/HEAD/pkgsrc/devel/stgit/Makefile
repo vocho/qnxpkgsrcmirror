@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.6 2008/02/28 15:27:21 bjs Exp $
+# $NetBSD: Makefile,v 1.9 2008/04/25 20:39:09 joerg Exp $
 
-DISTNAME=	stgit-20080220
+DISTNAME=	stgit-0.14.2
 CATEGORIES=	devel
-MASTER_SITES=	http://homepage.ntlworld.com/cmarinas/stgit/snapshots/
+MASTER_SITES=	http://homepage.ntlworld.com/cmarinas/stgit/
 
-MAINTAINER=	pkgsrc-users@NetBSD.org
+MAINTAINER=	bjs@NetBSD.org
 HOMEPAGE=	http://www.procode.org/stgit/
 COMMENT=	Stacked GIT
 
@@ -20,7 +20,6 @@ USE_TOOLS+= 	bash:run perl gmake
 REPLACE_PERL=	Documentation/build-docdep.perl
 REPLACE_BASH= 	contrib/stg-*
 
-PYTHON_VERSIONS_ACCEPTED?=24 23
 PYTHON_PATCH_SCRIPTS=	*.py stgit/*.py stg
 PYDISTUTILSPKG=		yes
 PYSETUPINSTALLARGS=	--prefix=${PREFIX}

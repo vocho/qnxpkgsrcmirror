@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.20 2008/02/15 16:46:20 gdt Exp $
+# $NetBSD: Makefile,v 1.25 2008/06/20 01:09:12 joerg Exp $
 #
 
-DISTNAME=		bzr-1.2
+DISTNAME=		bzr-1.4
 CATEGORIES=		devel scm
 MASTER_SITES=		http://bazaar-vcs.org/releases/src/
 
@@ -18,7 +18,7 @@ PY_PATCHPLIST=		yes
 PYDISTUTILSPKG=		yes
 TEST_TARGET=		check
 
-PYTHON_VERSIONS_ACCEPTED=	24
+PYTHON_VERSIONS_ACCEPTED=	25 24
 PYTHON_PATCH_SCRIPTS=		bzr bzrlib/weave.py
 
 .include "../../mk/bsd.prefs.mk"
@@ -33,12 +33,13 @@ SUBST_STAGE.python=		post-extract
 SUBST_FILES.python+=		Makefile
 SUBST_SED.python+=		-e 's,=python,=${PYTHONBIN},'
 
+INSTALLATION_DIRS=	share/doc/bzr
+
 post-build:
 	cd ${WRKSRC} && ${PYTHONBIN} generate_docs.py man
 
 post-install:
-	${INSTALL_DATA_DIR} ${PREFIX}/share/doc/bzr
-	${INSTALL_DATA} ${WRKSRC}/doc/*.txt  ${PREFIX}/share/doc/bzr
+	${INSTALL_DATA} ${WRKSRC}/doc/*.txt ${DESTDIR}${PREFIX}/share/doc/bzr
 
 .include "../../lang/python/application.mk"
 .include "../../lang/python/extension.mk"

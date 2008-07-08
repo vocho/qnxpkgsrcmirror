@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.43 2007/02/04 15:26:34 joerg Exp $
+# $NetBSD: Makefile,v 1.45 2008/05/11 13:01:07 tonnerre Exp $
 #
 
 DISTNAME=	libggi-2.1.1.src
@@ -27,30 +27,27 @@ CONF_FILES=		${EGDIR}/libggi.conf ${PKG_SYSCONFDIR}/libggi.conf
 
 .include "../../mk/bsd.prefs.mk"
 
+PLIST_VARS+=		libvgl terminfo xf86dga
+
 .if ${OPSYS} == "NetBSD"
-.if !empty(OS_VERSION:M1.[56].*)
-PLIST_SUBST+=	COND_TERMINFO="@comment "
+.  if empty(OS_VERSION:M1.[56].*)
+PLIST.terminfo=		yes
+.  endif
 .else
-PLIST_SUBST+=	COND_TERMINFO=""
-.endif
-.else
-PLIST_SUBST+=	COND_TERMINFO=""
+PLIST.terminfo=		yes
 .endif
 
 .if ${OPSYS} == "DragonFly" || ${OPSYS} == "FreeBSD"
-PLIST_SUBST+=	COND_LIBVGL=""
-.else
-PLIST_SUBST+=	COND_LIBVGL="@comment "
+PLIST.libvgl=		yes
 .endif
 
 .if ${X11_TYPE} == "modular"
 .include "../../x11/libXxf86dga/buildlink3.mk"
 .include "../../x11/libXxf86vm/buildlink3.mk"
 PLIST_SUBST+=	COND_XF86DGA=""
+PLIST.xf86dga=		yes
 .elif exists(${X11BASE}/include/X11/extensions/xf86dga.h)
-PLIST_SUBST+=	COND_XF86DGA=""
-.else
-PLIST_SUBST+=	COND_XF86DGA="@comment "
+PLIST.xf86dga=		yes
 .endif
 
 BUILDLINK_DEPMETHOD.libXt?=	build

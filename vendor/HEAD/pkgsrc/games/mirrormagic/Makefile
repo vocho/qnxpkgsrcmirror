@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.27 2008/03/04 06:59:05 jlam Exp $
+# $NetBSD: Makefile,v 1.29 2008/05/26 02:13:19 joerg Exp $
 #
 
 DISTNAME=		mirrormagic-2.0.2
@@ -14,7 +14,7 @@ CONFLICTS=		mirrormagic-sdl-[1-9]*
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
-USE_TOOLS+=		gmake
+USE_TOOLS+=		gmake pax
 PLIST_SRC=		${WRKDIR}/PLIST PLIST
 
 # if you change SCORE_PATH, don't forget to change patch-aa, too
@@ -31,13 +31,12 @@ OWN_DIRS_PERMS+=	${SCORE_PATH}/scores/classic_mindbender		\
 
 SPECIAL_PERMS=		bin/mirrormagic ${SETGID_GAMES_PERMS}
 
-INSTALLATION_DIRS=	bin
+INSTALLATION_DIRS=	bin share/mirrormagic
 
 do-install:
-	${INSTALL_PROGRAM} ${WRKSRC}/mirrormagic ${PREFIX}/bin
-	${INSTALL_DATA_DIR} ${PREFIX}/share/mirrormagic
-	cd ${WRKSRC} && ${PAX} -rw graphics levels music sounds \
-		${PREFIX}/share/mirrormagic/
+	${INSTALL_PROGRAM} ${WRKSRC}/mirrormagic ${DESTDIR}${PREFIX}/bin
+	cd ${WRKSRC} && pax -rw graphics levels music sounds \
+		${DESTDIR}${PREFIX}/share/mirrormagic/
 
 	${RM} -f ${WRKDIR}/PLIST
 .for levdir in Classic_Games

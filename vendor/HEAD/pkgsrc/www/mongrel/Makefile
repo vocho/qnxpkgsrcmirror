@@ -1,51 +1,18 @@
-# $NetBSD: Makefile,v 1.4 2007/12/13 14:48:09 taca Exp $
+# $NetBSD: Makefile,v 1.8 2008/06/19 15:21:35 taca Exp $
 
-DISTNAME=	mongrel-1.0.1
+DISTNAME=	mongrel-1.1.4
+PKGREVISION=	1
 CATEGORIES=	www
-MASTER_SITES=	http://rubyforge.org/frs/download.php/16719/
-EXTRACT_SUFX=	.gem
 
 MAINTAINER=	minskim@NetBSD.org
 HOMEPAGE=	http://mongrel.rubyforge.org/
 COMMENT=	Fast HTTP library and server for Ruby
 
-BUILD_DEPENDS+=	rake-[0-9]*:../../devel/rake
-DEPENDS+=	${RUBY_PKGPREFIX}-daemons>=1.0.3:../../misc/ruby-daemons
-DEPENDS+=	${RUBY_PKGPREFIX}-fastthread>=1.0.0:../../devel/ruby-fastthread
-DEPENDS+=	${RUBY_PKGPREFIX}-gem_plugin>=0.2.2:../../misc/ruby-gem_plugin
-DEPENDS+=	rubygems-[0-9]*:../../misc/rubygems
+DEPENDS+=	${RUBY_PKGPREFIX}-daemons>=1.0.9:../../misc/ruby-daemons
+DEPENDS+=	${RUBY_PKGPREFIX}-gem_plugin>=0.2.3:../../misc/ruby-gem_plugin
 
-REPLACE_RUBY_DIRS=	${WRKSRC}/examples
-RUBY_HAS_ARCHLIB=	yes
+RUBY_REQD=	1.8.6.110
+GEM_BUILD=	gemspec
 
-PLIST_SRC=	${PKGDIR}/PLIST.common
-PLIST_SRC+=	${WRKDIR}/PLIST_DYNAMIC
-PLIST_SRC+=	${PKGDIR}/PLIST.common_end
-
-FIND_PREFIX:=	RAKE_PREFIX=rake
-.include "../../mk/find-prefix.mk"
-
-.include "../../lang/ruby/modules.mk"
-
-pre-configure:
-	${RM} -f ${WRKSRC}/bin/*.orig
-
-do-build:
-	cd ${WRKSRC} && ${RAKE_PREFIX}/bin/rake clean
-	cd ${WRKSRC} && ${RAKE_PREFIX}/bin/rake rerdoc
-	cd ${WRKSRC} && ${RAKE_PREFIX}/bin/rake package
-
-do-install:
-	${GEM} install ${WRKSRC}/pkg/${DISTNAME}.gem -l
-
-post-install:
-	${RM} -f ${WRKDIR}/PLIST_DYNAMIC
-.for rdocdir in lib/ruby/gems/1.8/doc/${DISTNAME}/rdoc			\
-		lib/ruby/gems/1.8/gems/${DISTNAME}/doc/rdoc
-	${FIND} ${PREFIX}/${rdocdir} -type f -print			\
-		| ${SORT} -r						\
-		| ${SED} 's;${PREFIX}/;;g'				\
-		>> ${WRKDIR}/PLIST_DYNAMIC
-.endfor
-
+.include "../../misc/rubygems/rubygem.mk"
 .include "../../mk/bsd.pkg.mk"

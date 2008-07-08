@@ -1,14 +1,17 @@
-# $NetBSD: Makefile,v 1.17 2008/03/06 14:53:54 wiz Exp $
+# $NetBSD: Makefile,v 1.19 2008/06/20 01:09:36 joerg Exp $
 
-DISTNAME=	gnome-vfsmm-2.20.0
-PKGREVISION=	1
+DISTNAME=	gnome-vfsmm-2.22.0
 CATEGORIES=	sysutils
-MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gnome-vfsmm/2.20/}
+MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gnome-vfsmm/2.22/}
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	adam@NetBSD.org
 HOMEPAGE=	http://gtkmm.sourceforge.net/
 COMMENT=	C++ bindings for gnome-vfs
+
+PKG_DESTDIR_SUPPORT=	user-destdir
+
+BUILD_DEPENDS+=		doxygen-[0-9]*:../../devel/doxygen
 
 USE_LANGUAGES=		c c++
 USE_LIBTOOL=		yes

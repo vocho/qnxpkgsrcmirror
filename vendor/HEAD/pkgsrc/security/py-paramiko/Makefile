@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.3 2007/12/14 13:35:04 bjs Exp $
+# $NetBSD: Makefile,v 1.6 2008/06/12 02:14:45 joerg Exp $
 #
 
-DISTNAME=		paramiko-1.7.1
+DISTNAME=		paramiko-1.7.3
 PKGNAME=		${PYPKGPREFIX}-${DISTNAME}
 CATEGORIES=		security
 MASTER_SITES=		http://www.lag.net/paramiko/download/
@@ -11,8 +11,12 @@ MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://www.lag.net/paramiko/
 COMMENT=		SSH2 protocol library
 
+PKG_DESTDIR_SUPPORT=	user-destdir
+
 PYDISTUTILSPKG=		yes
-PYTHON_VERSIONS_ACCEPTED= 23 24
+
+do-test:
+	(cd ${WRKSRC} && ${PYTHONBIN} test.py)
 
 .include "../../lang/python/extension.mk"
 .include "../../security/py-amkCrypto/buildlink3.mk"

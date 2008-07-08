@@ -1,14 +1,16 @@
-# $NetBSD: Makefile,v 1.3 2007/12/19 12:27:29 rillig Exp $
+# $NetBSD: Makefile,v 1.5 2008/06/15 09:51:59 joerg Exp $
 
 DISTNAME=	# empty
 PKGNAME=	modular-xorg-libs-1.0
 CATEGORIES=	meta-pkgs x11
-MASTER_SITES=	http://xorg.freedesktop.org/releases/individual/lib/
+MASTER_SITES=	${MASTER_SITE_XORG:=lib/}
 DISTFILES=	# empty
 
 MAINTAINER=	joerg@NetBSD.org
 HOMEPAGE=	http://xorg.freedesktop.org/
 COMMENT=	Modular Xorg library meta-package
+
+META_PACKAGE=	yes
 
 .include "../../x11/libFS/buildlink3.mk"
 .include "../../x11/libICE/buildlink3.mk"
@@ -46,7 +48,5 @@ COMMENT=	Modular Xorg library meta-package
 .include "../../x11/libdrm/buildlink3.mk"
 .include "../../x11/libxkbfile/buildlink3.mk"
 .include "../../x11/libxkbui/buildlink3.mk"
-
-META_PACKAGE=	yes
 
 .include "../../mk/bsd.pkg.mk"

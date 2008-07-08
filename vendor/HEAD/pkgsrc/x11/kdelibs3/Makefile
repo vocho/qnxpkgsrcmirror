@@ -1,16 +1,18 @@
-# $NetBSD: Makefile,v 1.135 2008/02/20 09:49:56 markd Exp $
+# $NetBSD: Makefile,v 1.138 2008/06/12 12:51:27 abs Exp $
 
 DISTNAME=	kdelibs-${_KDE_VERSION}
+PKGREVISION=	1
 CATEGORIES=	x11
 COMMENT=	Support libraries for the KDE integrated X11 desktop
 
-#PATCH_SITES=	ftp://ftp.kde.org/pub/kde/security_patches/ \
-#		http://mirrors.isc.org/pub/kde/security_patches/
-#PATCHFILES=	post-3.5.7-kdelibs-kdecore-2.diff
+PATCH_SITES=	ftp://ftp.kde.org/pub/kde/security_patches/ \
+		http://mirrors.isc.org/pub/kde/security_patches/
+PATCHFILES=	post-kde-3.5.5-kinit.diff
 
 .include "../../meta-pkgs/kde3/Makefile.kde3"
 
 CONFLICTS+=	koffice3<=1.1.1
+CONFLICTS=	kdelibs4-[0-9]*
 
 USE_TOOLS+=		iceauth:run perl:run pkg-config
 
@@ -63,16 +65,17 @@ SPECIAL_PERMS+=	${PREFIX}/bin/kpac_dhcp_helper	${SETUID_ROOT_PERMS}
 
 .include "options.mk"
 
+PLIST_VARS+=		kded
 .if ${OPSYS} == "NetBSD"
 .  if ${OS_VERSION:M1.5.[12]*} || ${OS_VERSION:M1.[0-4]*}
-PLIST_SUBST+=		KDED_WORKAROUND="@comment "
+#			nothing
 .  else
-PLIST_SUBST+=		KDED_WORKAROUND=""
+PLIST.kded=		yes
 .  endif
 # make sure zone.tab is installed
 DEPENDS+=		zonetab-[0-9]*:../../time/zonetab
 .else
-PLIST_SUBST+=		KDED_WORKAROUND=""
+PLIST.kded=		yes
 .endif
 
 .include "../../mk/krb5.buildlink3.mk"

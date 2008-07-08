@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.39 2008/03/04 06:59:03 jlam Exp $
+# $NetBSD: Makefile,v 1.41 2008/06/15 11:21:43 joerg Exp $
 
 DISTNAME=		battalion
 PKGNAME=		battalion-1.4
@@ -14,6 +14,7 @@ COMMENT=		Virtual reality 3D GL game for X11
 NOT_FOR_PLATFORM=	*-*-alpha	# relies on Mesa (gcc)
 
 PKG_DESTDIR_SUPPORT=	user-destdir
+SETGIDGAME=		yes
 
 WRKSRC=			${WRKDIR}/battalionSource
 EXTRACT_ONLY=		battalionSource1.4.tar.Z
@@ -25,7 +26,6 @@ USE_TOOLS+=		gtar
 MAKE_ENV+=	LIBFLAGS=-lcompat
 .endif
 
-SETGIDGAME=		yes
 SPECIAL_PERMS+=		bin/battalion ${SETGID_GAMES_PERMS}
 CONF_FILES_PERMS=	/dev/null /var/games/battalion_hiscore		\
 			${GAMES_USER} ${GAMES_GROUP} ${GAMEDATAMODE}
@@ -33,7 +33,7 @@ CONF_FILES_PERMS=	/dev/null /var/games/battalion_hiscore		\
 INSTALLATION_DIRS=	bin ${PKGMANDIR}/man6
 
 do-install:
-	${INSTALL_PROGRAM} ${WRKSRC}/battalion $${DESTDIR}{PREFIX}/bin
+	${INSTALL_PROGRAM} ${WRKSRC}/battalion ${DESTDIR}${PREFIX}/bin
 	cd ${WRKDIR} && \
 	    ${GZCAT} ${DISTDIR}/battalionSUN4.tar.gz | ${GTAR} xmf -
 	${INSTALL_DATA_DIR} ${DESTDIR}${PREFIX}/share/battalion/HELP

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.30 2006/03/04 21:29:26 jlam Exp $
+# $NetBSD: Makefile,v 1.32 2008/06/12 02:14:28 joerg Exp $
 #
 
 DISTNAME=	pilrc-3.2
@@ -10,6 +10,8 @@ MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=pilrc/}
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://pilrc.sourceforge.net/
 COMMENT=	Generate resources for PalmOS applications from textual description
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=	YES
 CONFIGURE_SCRIPT=unix/configure
@@ -27,20 +29,19 @@ PKG_SUGGESTED_OPTIONS=		gtk
 ###
 ### gtk -- Build the GTK+ UI
 ###
+PLIST_VARS+=	pilrcui
 .if !empty(PKG_OPTIONS:Mgtk)
 .  include "../../x11/gtk/buildlink3.mk"
-PLIST_SUBST+=	PILRCUI=
-CONFIGURE_ARGS+=--enable-pilrcui
-.else
-PLIST_SUBST+=	PILRCUI="@comment "
+PLIST.pilrcui=		yes
+CONFIGURE_ARGS+=	--enable-pilrcui
 .endif
 
+INSTALLATION_DIRS=	${DOCDIR}/images
+
 post-install:
-	${INSTALL_DATA_DIR} ${DOCDIR}
-	${INSTALL_DATA_DIR} ${DOCDIR}/images
 	cd ${WRKSRC}/doc &&						\
 		${INSTALL_DATA} archive.html download.html index.html	\
-		contrib.html history.html manual.html ${DOCDIR}
-	${INSTALL_DATA} ${WRKSRC}/doc/images/download.gif ${DOCDIR}/images
+		contrib.html history.html manual.html ${DESTDIR}${DOCDIR}
+	${INSTALL_DATA} ${WRKSRC}/doc/images/download.gif ${DESTDIR}${DOCDIR}/images
 
 .include "../../mk/bsd.pkg.mk"

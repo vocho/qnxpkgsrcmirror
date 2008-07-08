@@ -1,13 +1,15 @@
-# $NetBSD: Makefile,v 1.46 2007/12/19 12:27:27 rillig Exp $
+# $NetBSD: Makefile,v 1.49 2008/06/15 09:51:59 joerg Exp $
 
 DISTNAME=	gnome-base-2.18.1
 CATEGORIES=	meta-pkgs x11 gnome
 MASTER_SITES=	# empty
 DISTFILES=	# empty
 
-MAINTAINER=	jmmv@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.gnome.org/
 COMMENT=	Meta-package for basic components of the GNOME desktop
+
+META_PACKAGE=	yes
 
 # The dependencies listed here are in an order such as a package in a line
 # can be installed if all the packages listed above it are installed.
@@ -60,6 +62,7 @@ DEPENDS+=	gnome-desktop>=2.18.1:../../x11/gnome-desktop
 DEPENDS+=	gnome-menus>=2.18.0:../../sysutils/gnome-menus
 DEPENDS+=	eel>=2.18.0.1:../../devel/eel
 DEPENDS+=	nautilus>=2.18.1:../../sysutils/nautilus
+DEPENDS+=	gvfs>=0.2.3:../../sysutils/gvfs
 DEPENDS+=	metacity>=2.18.2:../../wm/metacity
 DEPENDS+=	gstreamer0.10>=0.10.12:../../multimedia/gstreamer0.10
 DEPENDS+=	gst-plugins0.10-base>=0.10.12:../../multimedia/gst-plugins0.10-base
@@ -76,7 +79,5 @@ DEPENDS+=	gnome-backgrounds>=2.15.92:../../graphics/gnome-backgrounds
 DEPENDS+=	vte>=0.16.1:../../x11/vte
 DEPENDS+=	gnome-terminal>=2.18.0:../../x11/gnome-terminal
 DEPENDS+=	gnome-session>=2.18.0:../../x11/gnome-session
-
-META_PACKAGE=	yes
 
 .include "../../mk/bsd.pkg.mk"

@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.16 2007/07/04 20:55:04 jlam Exp $
+# $NetBSD: Makefile,v 1.19 2008/06/20 01:09:41 joerg Exp $
 #
 
 DISTNAME=	geeklog-${VER}
 PKGNAME=	geeklog-${VER:C/(sr|-)/./g}
+PKGREVISION=	2
 CATEGORIES=	www
 MASTER_SITES=	http://www.geeklog.net/filemgmt/upload_dir/
 
@@ -10,8 +11,12 @@ MAINTAINER=	taca@NetBSD.org
 HOMEPAGE=	http://www.geeklog.net/
 COMMENT=	PHP/MySQL based application for managing dynamic web content
 
+PKG_DESTDIR_SUPPORT=	user-destdir
+
 DEPENDS+=	${APACHE_PKG_PREFIX}-${PHP_PKG_PREFIX}>=4.3.3:../../www/ap-php
 DEPENDS+=	${PHP_PKG_PREFIX}-mysql>=4.3.0:../../databases/php-mysql
+
+USE_TOOLS+=	pax:run
 
 VER=		1.4.1
 NO_BUILD=	YES
@@ -83,7 +88,7 @@ SUBST_SED.conf+=	-e '/^Alias/s,^,\#,'
 SUBST_STAGE.conf=	post-configure
 
 INSTALLATION_DIRS=	${GEEKLOG_BASE} ${GEEKLOG_PUB} ${GEEKLOG_TMPL}/images \
-			share/examples/geeklog
+			share/examples/geeklog ${GEEKLOG_DOCDIR}
 
 post-extract:
 	${CP} ${FILESDIR}/README ${FILESDIR}/createdb.php \
@@ -98,29 +103,28 @@ pre-install:
 		${FIND} pear -type f -exec ${CHMOD} 0644 {} \;
 
 do-install:
-	${INSTALL_DATA_DIR} ${GEEKLOG_DOCDIR}
-	${INSTALL_DATA} ${WRKDIR}/README ${GEEKLOG_DOCDIR}
+	${INSTALL_DATA} ${WRKDIR}/README ${DESTDIR}${GEEKLOG_DOCDIR}
 .for f in ${GEEKLOG_CONF_FILES}
-	${INSTALL_DATA_DIR} ${GEEKLOG_EXAMPLESDIR}/${f:H}
-	${INSTALL_DATA} ${WRKSRC}/${f} ${GEEKLOG_EXAMPLESDIR}/${f}
+	${INSTALL_DATA_DIR} ${DESTDIR}${GEEKLOG_EXAMPLESDIR}/${f:H}
+	${INSTALL_DATA} ${WRKSRC}/${f} ${DESTDIR}${GEEKLOG_EXAMPLESDIR}/${f}
 	${RM} ${WRKSRC}/${f}
 .endfor
-	${INSTALL_SCRIPT} ${WRKDIR}/createdb.php ${GEEKLOG_DIR}
-	${INSTALL_DATA} ${WRKDIR}/geeklog.conf ${GEEKLOG_EXAMPLESDIR}
+	${INSTALL_SCRIPT} ${WRKDIR}/createdb.php ${DESTDIR}${GEEKLOG_DIR}
+	${INSTALL_DATA} ${WRKDIR}/geeklog.conf ${DESTDIR}${GEEKLOG_EXAMPLESDIR}
 .for f in ${GEEKLOG_SYS}
-	cd ${WRKSRC}; ${PAX} -rw ${f} ${GEEKLOG_DIR}
+	cd ${WRKSRC}; pax -rw ${f} ${DESTDIR}${GEEKLOG_DIR}
 .endfor
 	cd ${WRKSRC}/public_html; \
-		${PAX} -rw admin ${GEEKLOG_DIR}; \
+		pax -rw admin ${DESTDIR}${GEEKLOG_DIR}; \
 		${RM} -rf admin
 .for d in ${GEEKLOG_TMPL_SUB}
 	cd ${WRKSRC}/public_html; \
 		if [ -d ${d} ]; then \
-			${PAX} -rw ${d} ${GEEKLOG_TMPL_DIR}; \
+			pax -rw ${d} ${DESTDIR}${GEEKLOG_TMPL_DIR}; \
 			${RM} -rf ${d}; \
 		fi
 .endfor
-	cd ${WRKSRC}/public_html; ${PAX} -rw . ${GEEKLOG_PUBDIR}
+	cd ${WRKSRC}/public_html; pax -rw . ${DESTDIR}${GEEKLOG_PUBDIR}
 
 .include "../../mk/apache.mk"
 .include "../../lang/php/phpversion.mk"

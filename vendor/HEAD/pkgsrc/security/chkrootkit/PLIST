@@ -1,9 +1,10 @@
-@comment $NetBSD: PLIST,v 1.2 2004/09/28 10:41:59 adrianp Exp $
-${WTMPX}bin/check_wtmpx
+@comment $NetBSD: PLIST,v 1.4 2008/06/02 12:23:04 obache Exp $
+${PLIST.wtmpx}bin/check_wtmpx
 bin/chkdirs
 bin/chklastlog
 bin/chkproc
 bin/chkrootkit
+bin/chkutmp
 bin/chkwtmp
 bin/ifpromisc
 bin/strings-static

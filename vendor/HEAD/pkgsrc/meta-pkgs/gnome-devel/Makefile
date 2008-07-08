@@ -1,13 +1,15 @@
-# $NetBSD: Makefile,v 1.27 2007/12/19 12:27:28 rillig Exp $
+# $NetBSD: Makefile,v 1.29 2008/06/15 09:51:59 joerg Exp $
 
 DISTNAME=	gnome-devel-2.16.0
 CATEGORIES=	meta-pkgs devel gnome
 MASTER_SITES=	# empty
 DISTFILES=	# empty
 
-MAINTAINER=	jmmv@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.gnome.org/
 COMMENT=	Meta-package for development utilities used in the GNOME desktop
+
+META_PACKAGE=	yes
 
 DEPENDS+=	autoconf>=2.60:../../devel/autoconf
 DEPENDS+=	autoconf213>=2.13nb1:../../devel/autoconf213
@@ -20,7 +22,5 @@ DEPENDS+=	gtk-doc>=1.7:../../textproc/gtk-doc
 DEPENDS+=	intltool>=0.35.0:../../textproc/intltool
 DEPENDS+=	libtool>=1.5.22:../../devel/libtool
 DEPENDS+=	pkg-config>=0.21:../../devel/pkg-config
-
-META_PACKAGE=	yes
 
 .include "../../mk/bsd.pkg.mk"

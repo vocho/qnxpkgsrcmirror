@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.26 2008/01/28 23:06:13 dmcmahill Exp $
+# $NetBSD: Makefile,v 1.28 2008/06/16 15:29:35 joerg Exp $
 #
 
 DISTNAME=	cdpack-1.8
@@ -9,6 +9,8 @@ DISTFILES=	# empty
 MAINTAINER=	dmcmahill@NetBSD.org
 HOMEPAGE=	http://www.NetBSD.org/
 COMMENT=	Utility to create multi-cd/dvd binary package collections
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 # for mkisofs
 DEPENDS+=	cdrtools-[0-9]*:../../sysutils/cdrtools
@@ -45,9 +47,9 @@ do-build:
 
 do-install:
 .for f in cdpack cddist
-	${INSTALL_SCRIPT} ${WRKSRC}/${f} ${PREFIX}/bin
-	${INSTALL_MAN} ${WRKSRC}/${f}.1 ${PREFIX}/${PKGMANDIR}/man1
+	${INSTALL_SCRIPT} ${WRKSRC}/${f} ${DESTDIR}${PREFIX}/bin
+	${INSTALL_MAN} ${WRKSRC}/${f}.1 ${DESTDIR}${PREFIX}/${PKGMANDIR}/man1
 .endfor
-	${INSTALL_SCRIPT} ${WRKSRC}/cdgen.awk ${PREFIX}/libexec
+	${INSTALL_SCRIPT} ${WRKSRC}/cdgen.awk ${DESTDIR}${PREFIX}/libexec
 
 .include "../../mk/bsd.pkg.mk"

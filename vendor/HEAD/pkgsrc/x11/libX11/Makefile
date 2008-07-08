@@ -1,9 +1,10 @@
-# $NetBSD: Makefile,v 1.9 2007/08/05 22:39:38 joerg Exp $
+# $NetBSD: Makefile,v 1.14 2008/05/24 21:45:15 tnn Exp $
 #
 
-DISTNAME=		libX11-1.1.3
+DISTNAME=		libX11-1.1.4
+PKGREVISION=		1
 CATEGORIES=		x11 devel
-MASTER_SITES=		http://xorg.freedesktop.org/releases/individual/lib/
+MASTER_SITES=		${MASTER_SITE_XORG:=lib/}
 EXTRACT_SUFX=		.tar.bz2
 
 MAINTAINER=		joerg@NetBSD.org
@@ -31,6 +32,13 @@ CONFIGURE_ARGS+=	--disable-malloc0returnsnull
 
 .if !empty(USE_CROSS_COMPILE:M[yY][eE][sS])
 MAKE_ENV+=	CC_FOR_BUILD=${NATIVE_CC:Q} CPPFLAGS_FOR_BUILD=-I${PREFIX}/include
+.endif
+
+CPPFLAGS.OSF1+=		-pthread # Required by compiler if including pthread.h
+
+.include "../../mk/compiler.mk"
+.if !empty(PKGSRC_COMPILER:Mhp)
+CONFIGURE_ENV+=		ac_cv_path_RAWCPP="cc -E -Uunix -"
 .endif
 
 .include "../../x11/bigreqsproto/buildlink3.mk"

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.17 2006/06/08 12:22:58 joerg Exp $
+# $NetBSD: Makefile,v 1.21 2008/06/12 02:14:32 joerg Exp $
 #
 
 DISTNAME=		matplotlib-0.87.2
@@ -11,6 +11,8 @@ MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://matplotlib.sourceforge.net/
 COMMENT=		Matlab-style plotting package for Python
 
+PKG_DESTDIR_SUPPORT=	user-destdir
+
 USE_LANGUAGES=		c c++
 USE_TOOLS+=		pkg-config
 PY_PATCHPLIST=		yes
@@ -18,12 +20,9 @@ PYDISTUTILSPKG=		yes
 
 .include "../../lang/python/extension.mk"
 
-PYTHON_VERSIONS_ACCEPTED=	24 23
-
+PLIST_VARS+=		subprocess
 .if ${PYPACKAGE} == "python22" || ${PYPACKAGE} == "python23"
-PLIST_SUBST+=		COND_SUBPROCESS=""
-.else
-PLIST_SUBST+=		COND_SUBPROCESS="@comment "
+PLIST.subprocess=	yes
 .endif
 
 .include "../../devel/zlib/buildlink3.mk"

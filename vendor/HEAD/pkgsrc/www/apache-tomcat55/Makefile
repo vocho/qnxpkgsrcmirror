@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.13 2008/03/12 20:41:48 adrianp Exp $
+# $NetBSD: Makefile,v 1.16 2008/06/20 01:09:40 joerg Exp $
 
 DISTNAME=	apache-tomcat-${TOMCAT_VERSION}
 CATEGORIES=	www java
@@ -9,11 +9,15 @@ MAINTAINER=	abs@NetBSD.org
 HOMEPAGE=	http://tomcat.apache.org/
 COMMENT=	The Apache Project's Java Servlet 2.4 and JSP 2.0 server
 
+PKG_DESTDIR_SUPPORT=	user-destdir
+
 TOMCAT_VERSION=	5.5.26
 
 USE_JAVA=	run
 # This needs java 1.5 or higher.
 USE_JAVA2=	1.5
+
+USE_TOOLS+=	pax
 
 TOMCAT_LIB=	${PREFIX}/tomcat
 CATALINA_DIR=	Catalina/localhost
@@ -25,7 +29,7 @@ EGDIR2=		${EGDIR}/${CATALINA_DIR}
 
 # Work around a bug in NetBSD 2.0's pax-as-tar (bin/27228)
 .if !empty(MACHINE_PLATFORM:MNetBSD-2.0*)
-EXTRACT_USING=	gtar
+EXTRACT_USING=	bsdtar
 .endif
 
 PKG_SYSCONFDIR.apache-tomcat=	${TOMCAT_LIB}/conf
@@ -58,22 +62,23 @@ FILES_SUBST+=	JAVA_HOME=${PKG_JAVA_HOME:Q} TOMCAT_LIB=${TOMCAT_LIB:Q}
 
 do-build:
 	@${MV} ${WRKSRC}/conf ${WRKDIR}
+
+INSTALLATION_DIRS+=	${EGDIR2} ${TOMCAT_LIB}
+
 do-install:
-	${INSTALL_DATA_DIR} ${EGDIR2}
 .for f in ${CFILES}
-	${INSTALL_DATA} ${WRKDIR}/conf/${f} ${EGDIR}
+	${INSTALL_DATA} ${WRKDIR}/conf/${f} ${DESTDIR}${EGDIR}
 .endfor
 .for f in ${CF2FILES}
-	${INSTALL_DATA} ${WRKDIR}/conf/${CATALINA_DIR}/${f} ${EGDIR2}
+	${INSTALL_DATA} ${WRKDIR}/conf/${CATALINA_DIR}/${f} ${DESTDIR}${EGDIR2}
 .endfor
-	${INSTALL_DATA_DIR} ${TOMCAT_LIB}
 	${RM} -rf ${WRKSRC}/temp/*
-	@cd ${WRKSRC} && ${PAX} -rw -pm . ${TOMCAT_LIB}
+	cd ${WRKSRC} && pax -rw -pm . ${DESTDIR}${TOMCAT_LIB}
 
-	${FIND} ${TOMCAT_LIB} -type f -name \*.bat -print | ${XARGS} ${RM} -f
-	${FIND} ${TOMCAT_LIB} -type d -print | ${XARGS} ${CHMOD} ${PKGDIRMODE}
-	${FIND} ${TOMCAT_LIB} -type f -print | ${XARGS} ${CHMOD} ${SHAREMODE}
-	${FIND} ${TOMCAT_LIB} -type f -name \*.sh -print | \
+	${FIND} ${DESTDIR}${TOMCAT_LIB} -type f -name \*.bat -print | ${XARGS} ${RM} -f
+	${FIND} ${DESTDIR}${TOMCAT_LIB} -type d -print | ${XARGS} ${CHMOD} ${PKGDIRMODE}
+	${FIND} ${DESTDIR}${TOMCAT_LIB} -type f -print | ${XARGS} ${CHMOD} ${SHAREMODE}
+	${FIND} ${DESTDIR}${TOMCAT_LIB} -type f -name \*.sh -print | \
 		${XARGS} ${CHMOD} ${BINMODE}
 
 .include "../../mk/java-vm.mk"

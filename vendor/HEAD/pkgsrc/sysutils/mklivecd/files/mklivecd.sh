@@ -1,12 +1,9 @@
 #!/bin/sh
 #
-# $NetBSD: mklivecd.sh,v 1.46 2007/07/03 15:45:06 xtraeme Exp $
+# $NetBSD: mklivecd.sh,v 1.49 2008/04/29 13:48:06 xtraeme Exp $
 #
-# Copyright (c) 2004-2007 Juan Romero Pardines.
+# Copyright (c) 2004-2008 Juan Romero Pardines.
 # All rights reserved.
-#
-# This code is derived from software contributed to The NetBSD Foundation
-# by Juan Romero Pardines.
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions
@@ -16,13 +13,6 @@
 # 2. Redistributions in binary form must reproduce the above copyright
 #    notice, this list of conditions and the following disclaimer in the
 #    documentation and/or other materials provided with the distribution.
-# 3. All advertising materials mentioning features or use of this software
-#    must display the following acknowledgement:
-#        This product includes software developed by the NetBSD
-#        Foundation, Inc. and its contributors.
-# 4. Neither the name of The NetBSD Foundation nor the names of its
-#    contributors may be used to endorse or promote products derived
-#    from this software without specific prior written permission.
 #
 # THIS SOFTWARE IS PROVIDED BY THE NETBSD FOUNDATION, INC. AND CONTRIBUTORS
 # ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
@@ -40,13 +30,19 @@
 #  mklivecd - Make your own NetBSD/x86 Live CD-ROM/DVD-ROM                #
 # ======================================================================== #
 
+#
+# Private stuff.
+#
 : ${progname:=$(basename $0)}
 : ${config_dir:=$HOME/.mklivecd}
 : ${pers_conffile:=personal_config}
 : ${tmp_file:=$(/usr/bin/mktemp /tmp/${progname}.XXXXXX)}
-: ${pkgsrc_mntstat:=$config_dir/pkgsrc_mount.stat}
-: ${pkgsrcdist_mntstat:=$config_dir/pkgsrcdist_mount.stat}
-: ${packages_mntstat:=$config_dir/packages_mount.stat}
+: ${pkgsrc_mntstat:=$config_dir/.pkgsrc_mount.stat}
+: ${pkgsrcdist_mntstat:=$config_dir/.pkgsrcdist_mount.stat}
+: ${packages_mntstat:=$config_dir/.packages_mount.stat}
+: ${kernel_stage_done:=$config_dir/.kernel_stage_done}
+: ${base_stage_done:=$config_dir/.base_stage_done}
+: ${chroot_stage_done:=$config_dir/.chroot_stage_done}
 
 #
 # Neeeded to disable GRUB on amd64.
@@ -187,7 +183,8 @@ bye()
 
 do_conf()
 {
-    BASE_VARS="SOURCEDIR PACKAGESDIR PKGSRCDIR PKGSRCDISTDIR SHAREDIR BASEDIR \
+    BASE_VARS="SOURCEDIR MOUNT_PACKAGES_DIR PACKAGESDIR MOUNT_PKGSRC_DIR \
+               PKGSRCDIR MOUNT_PKGSRCDIST_DIR PKGSRCDISTDIR SHAREDIR BASEDIR \
                WORKDIR ISODIR FETCH_SETS REMOTE_SETS_URL BASE_SETS_DIR \
                X11_SETS_DIR BASE_SETS X11_SETS CHROOT_SHELL"
 
@@ -206,8 +203,11 @@ do_conf()
 
     # Base directories/sets
     : ${SOURCEDIR:=/usr/src}
+    : ${MOUNT_PACKAGES_DIR:=no}
     : ${PACKAGESDIR:=/usr/pkgsrc/packages}
+    : ${MOUNT_PKGSRC_DIR:=no}
     : ${PKGSRCDIR:=/usr/pkgsrc}
+    : ${MOUNT_PKGSRCDIST_DIR:=no}
     : ${PKGSRCDISTDIR:=/usr/pkgsrc/distfiles}
     : ${SHAREDIR:=@PREFIX@/share/mklivecd}
     : ${BASEDIR:=$HOME/livecd}
@@ -471,7 +471,8 @@ do_cdlive()
     . $config_file
 
     YESNOVARS="FETCH_SETS ENABLE_X11 USE_GNU_GRUB \
-               VND_COMPRESSION BLANK_BEFORE_BURN PERSONAL_CONFIG"
+               VND_COMPRESSION BLANK_BEFORE_BURN PERSONAL_CONFIG \
+               MOUNT_PKGSRC_DIR MOUNT_PKGSRCDIST_DIR MOUNT_PACKAGES_DIR"
 
     for v in $YESNOVARS
     do
@@ -559,6 +560,8 @@ do_cdlive()
             copy_bootfiles
             do_build_kernels
         fi
+
+        touch $kernel_stage_done
 	;;
     fetch)
         #
@@ -566,8 +569,7 @@ do_cdlive()
         #
         if is_enabled FETCH_SETS; then
             if [ ! -d $BASE_SETS_DIR ]; then
-                showmsg "Couldn't find $BASE_SETS_DIR, exiting"
-                bye 1
+                mkdir -p $BASE_SETS_DIR
             fi 
             cd $BASE_SETS_DIR
             for f in ${BASE_SETS}
@@ -601,6 +603,11 @@ do_cdlive()
 
         ;;
     base)
+        if [ ! -f $kernel_stage_done ]; then
+            showmsg "The kernel target wasn't called, please do so."
+            bye 1
+        fi
+
         for F in ${BASE_SETS}
         do
             if [ ! -f $BASE_SETS_DIR/$F ]; then
@@ -672,7 +679,7 @@ do_cdlive()
 	cat > $ISODIR/etc/rc.d/root <<_EOF_
 #!/bin/sh
 #
-# \$NetBSD: mklivecd.sh,v 1.46 2007/07/03 15:45:06 xtraeme Exp $
+# \$NetBSD: mklivecd.sh,v 1.49 2008/04/29 13:48:06 xtraeme Exp $
 # 
 
 # PROVIDE: root
@@ -701,8 +708,14 @@ _EOF_
 	showmsgstring
 	showmsg "Target base finished."
 	[ -n "$verbose_mode" ] && showmsg "Next step: ${progname} chroot"
+        touch $base_stage_done
     ;;
     chroot)
+        if [ ! -f $base_stage_done ]; then
+            showmsg "The base target wasn't called, please do so."
+            bye 1
+        fi
+
         if [ ! -f $ISODIR/etc/profile ]; then 
             (					\
 	    echo "export PS1=\"$KERNEL_NAME> \"";	\
@@ -724,55 +737,61 @@ _EOF_
 
 	showmsg "Entering into the chroot!"
 
-	if [ -d $PKGSRCDIR ]; then
-	    if [ -f $pkgsrc_mntstat ]; then
-	        count=$(cat $pkgsrc_mntstat)
-		count=$(($count + 1))
-		echo $count > $pkgsrc_mntstat
-		echo "=> pkgsrc directory already mounted."
-            else
-                mount_null $PKGSRCDIR $ISODIR/usr/pkgsrc
-                if [ "$?" -eq 0 ]; then
-		    echo "=> pkgsrc directory ready."
-		    echo "1" > $pkgsrc_mntstat
+        if is_enabled MOUNT_PKGSRC_DIR; then
+	    if [ -d $PKGSRCDIR ]; then
+	        if [ -f $pkgsrc_mntstat ]; then
+	            count=$(cat $pkgsrc_mntstat)
+		    count=$(($count + 1))
+		    echo $count > $pkgsrc_mntstat
+		    echo "=> pkgsrc directory already mounted."
+                else
+                    mount_null $PKGSRCDIR $ISODIR/usr/pkgsrc
+                    if [ "$?" -eq 0 ]; then
+		        echo "=> pkgsrc directory ready."
+		        echo "1" > $pkgsrc_mntstat
+                    fi
                 fi
-            fi
-	else
-            showmsg "==> couldn't find $PKGSRCDIR."
-	fi
-		
-	if [ -d $PKGSRCDISTDIR ]; then
-	    if [ -f $pkgsrcdist_mntstat ]; then
-		count=$(cat $pkgsrcdist_mntstat)
-		count=$(($count +1))
-		echo $count > $pkgsrcdist_mntstat
-		echo "=> distfiles directory already mounted."
 	    else
-                mount_null $PKGSRCDISTDIR $ISODIR/usr/pkgsrc/distfiles
-                if [ "$?" -eq 0 ]; then
-		    echo "=> distfiles directory ready."
-		    echo "1" > $pkgsrcdist_mntstat
-                fi
-            fi
-	else
-            echo "==> couldn't find $PKGSRCDISTDIR."
-	fi
+                showmsg "==> couldn't find $PKGSRCDIR."
+	    fi
+        fi
 
-        if [ -d $PACKAGESDIR ]; then
-            if [ -f $packages_mntstat ]; then
-                count=$(cat $packages_mntstat)
-                count=$(($count + 1))
-                echo $count > $packages_mntstat
-                echo "=> packages directory already mounted."
-            else
-                mount_null $PACKAGESDIR $ISODIR/usr/pkgsrc/packages
-                if [ "$?" -eq 0 ]; then
-                    echo "=> packages directory ready."
-                    echo "1" > $packages_mntstat
+        if is_enabled MOUNT_PKGSRCDIST_DIR; then        
+	    if [ -d $PKGSRCDISTDIR ]; then
+	        if [ -f $pkgsrcdist_mntstat ]; then
+		    count=$(cat $pkgsrcdist_mntstat)
+		    count=$(($count +1))
+		    echo $count > $pkgsrcdist_mntstat
+		    echo "=> distfiles directory already mounted."
+	        else
+                    mount_null $PKGSRCDISTDIR $ISODIR/usr/pkgsrc/distfiles
+                    if [ "$?" -eq 0 ]; then
+		        echo "=> distfiles directory ready."
+		        echo "1" > $pkgsrcdist_mntstat
+                    fi
+                fi
+	    else
+                echo "==> couldn't find $PKGSRCDISTDIR."
+	    fi
+        fi
+
+        if is_enabled MOUNT_PACKAGES_DIR; then
+            if [ -d $PACKAGESDIR ]; then
+                if [ -f $packages_mntstat ]; then
+                    count=$(cat $packages_mntstat)
+                    count=$(($count + 1))
+                    echo $count > $packages_mntstat
+                    echo "=> packages directory already mounted."
+                else
+                    mount_null $PACKAGESDIR $ISODIR/usr/pkgsrc/packages
+                    if [ "$?" -eq 0 ]; then
+                        echo "=> packages directory ready."
+                        echo "1" > $packages_mntstat
                 fi
             fi
-        else
-            echo "==> couldn't find $PACKAGESDIR."
+                else
+                    echo "==> couldn't find $PACKAGESDIR."
+                fi
         fi
 
 	echo
@@ -877,68 +896,76 @@ _EOF_
         #
         # Unmount pkgsrc related directories.
         #
-	if [ ! -f $pkgsrcdist_mntstat ]; then
-	    showmsg "distfiles directory was not mounted before."
-	else
-	    cnt=$(cat $pkgsrcdist_mntstat)
-	    if [ "$cnt" -gt 1 ]; then
-                cnt=$(($cnt - 1))
-		echo $cnt > $pkgsrcdist_mntstat
-		[ -n "$verbose_mode" ] && \
-		    showmsg "distfiles directory still in use."
-            else
-                [ -n "$verbose_mode" ] && \
-		    echo "=> Unmounting distfiles directory."
-		umount -R $ISODIR/usr/pkgsrc/distfiles
-		if [ $? -eq 0 ]; then
-		    rm $pkgsrcdist_mntstat
-		else
-		    showmsg "Couldn't umount $PKGSRCDISTDIR."
-		fi
-            fi
-	fi
-
-        if [ ! -f $packages_mntstat ]; then
-            showmsg "packages directory was not mounted before."
-        else
-            cnt=$(cat $packages_mntstat)
-            if [ "$cnt" -gt 1 ]; then
-                cnt=$(($cnt - 1))
-                echo $cnt > $packages_mntstat
-                showmsg "pkgsrc directory still in use."
-            else
-                [ -n "$verbose_mode" ] && \
-                    echo "=> Unmounting packages directory."
-                umount -R $ISODIR/usr/pkgsrc/packages
-                if [ "$?" -eq 0 ]; then
-                    rm $packages_mntstat
+        if is_enabled MOUNT_PKGSRCDIST_DIR; then
+            if [ ! -f $pkgsrcdist_mntstat ]; then
+	        showmsg "distfiles directory was not mounted before."
+	    else
+	        cnt=$(cat $pkgsrcdist_mntstat)
+	        if [ "$cnt" -gt 1 ]; then
+                    cnt=$(($cnt - 1))
+		    echo $cnt > $pkgsrcdist_mntstat
+		    [ -n "$verbose_mode" ] && \
+		        showmsg "distfiles directory still in use."
                 else
-                    showmsg "Couldn't umount $PACKAGESDIR."
+                    [ -n "$verbose_mode" ] && \
+		        echo "=> Unmounting distfiles directory."
+		    umount -R $ISODIR/usr/pkgsrc/distfiles
+		    if [ $? -eq 0 ]; then
+		        rm $pkgsrcdist_mntstat
+		    else
+		        showmsg "Couldn't umount $PKGSRCDISTDIR."
+		    fi
+                fi
+	    fi
+        fi
+
+        if is_enabled MOUNT_PACKAGES_DIR; then
+            if [ ! -f $packages_mntstat ]; then
+                showmsg "packages directory was not mounted before."
+            else
+                cnt=$(cat $packages_mntstat)
+                if [ "$cnt" -gt 1 ]; then
+                    cnt=$(($cnt - 1))
+                    echo $cnt > $packages_mntstat
+                    showmsg "pkgsrc directory still in use."
+                else
+                    [ -n "$verbose_mode" ] && \
+                        echo "=> Unmounting packages directory."
+                    umount -R $ISODIR/usr/pkgsrc/packages
+                    if [ "$?" -eq 0 ]; then
+                        rm $packages_mntstat
+                    else
+                        showmsg "Couldn't umount $PACKAGESDIR."
+                    fi
                 fi
             fi
         fi
 
-	if [ ! -f $pkgsrc_mntstat ]; then
-	    showmsg "pkgsrc directory was not mounted before."
-	else
-	    cnt=$(cat $pkgsrc_mntstat)
-	    if [ "$cnt" -gt 1 ]; then
-	        cnt=$(($cnt - 1)) 
-		echo $cnt > $pkgsrc_mntstat 
-		showmsg "pkgsrc directory still in use."
+        if is_enabled MOUNT_PKGSRC_DIR; then
+	    if [ ! -f $pkgsrc_mntstat ]; then
+	        showmsg "pkgsrc directory was not mounted before."
 	    else
-		[ -n "$verbose_mode" ] && \
-	    	    echo "=> Unmounting pkgsrc directory."
-		umount -R $ISODIR/usr/pkgsrc
-		if [ $? -eq 0 ]; then
-		    rm $pkgsrc_mntstat
-		else
-		    showmsg "Couldn't umount $PKGSRCDIR."
-		fi
-            fi
-	fi
+	        cnt=$(cat $pkgsrc_mntstat)
+	        if [ "$cnt" -gt 1 ]; then
+	            cnt=$(($cnt - 1)) 
+		    echo $cnt > $pkgsrc_mntstat 
+		    showmsg "pkgsrc directory still in use."
+	        else
+		    [ -n "$verbose_mode" ] && \
+	    	        echo "=> Unmounting pkgsrc directory."
+		    umount -R $ISODIR/usr/pkgsrc
+		    if [ $? -eq 0 ]; then
+		        rm $pkgsrc_mntstat
+		    else
+		        showmsg "Couldn't umount $PKGSRCDIR."
+		    fi
+                fi
+	    fi
+        fi
 
 	[ -n "$verbose_mode" ] && showmsg "Size: $(du -sh $ISODIR)"
+
+        touch $chroot_stage_done
     ;;
     clean)
         if [ -f $pkgsrc_mntstat -o \
@@ -959,6 +986,11 @@ _EOF_
 	done
     ;;
     iso)
+        if [ ! -f $chroot_stage_done ]; then
+            showmsg "The chroot target wasn't called, please do do."
+            bye 1
+        fi
+
         if is_enabled VND_COMPRESSION; then
             cd $ISODIR
 
@@ -1047,6 +1079,10 @@ _EOF_
                     > /dev/null 2>&1
 		showmsgstring
             fi
+
+            rm -f $kernel_stage_done
+            rm -f $base_stage_done
+            rm -f $chroot_stage_done
 	}
 	if [ -f $BASEDIR/$IMAGE_NAME.iso ]; then
 	    echo "* Found $IMAGE_NAME.iso."

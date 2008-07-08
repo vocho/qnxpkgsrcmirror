@@ -1,13 +1,12 @@
-# $NetBSD: Makefile,v 1.11 2008/02/20 22:48:27 bouyer Exp $
+# $NetBSD: Makefile,v 1.14 2008/04/27 19:59:40 bouyer Exp $
 #
 
-VERSION=	3.1.3
-DISTNAME=	xen-${VERSION}-src
+VERSION=	3.1.4
+DISTNAME=	xen-${VERSION}
 PKGNAME=	xenkernel3-${VERSION}
-PKGREVISION=	1
 CATEGORIES=	sysutils
-MASTER_SITES=	${MASTER_SITE_LOCAL}
-EXTRACT_SUFX=	.tgz
+MASTER_SITES=	http://bits.xensource.com/oss-xen/release/${VERSION}/
+EXTRACT_SUFX=	.tar.gz
 
 MAINTAINER=	bouyer@NetBSD.org
 HOMEPAGE=	http://xen.org/
@@ -22,7 +21,6 @@ WRKSRC=		${WRKDIR}/xen-${VERSION}
 NO_CONFIGURE=	yes
 USE_TOOLS+=	gmake
 
-PYTHON_VERSIONS_ACCEPTED= 24 23
 PY_PATCHPLIST=		NO
 
 SUBST_CLASSES+=		py

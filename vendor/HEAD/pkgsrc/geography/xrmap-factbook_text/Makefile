@@ -1,9 +1,8 @@
-# $NetBSD: Makefile,v 1.6 2008/03/04 14:44:05 jlam Exp $
+# $NetBSD: Makefile,v 1.8 2008/05/26 02:13:20 joerg Exp $
 #
 
-DISTNAME=		factbook_text_2002
-PKGNAME=		xrmap-factbook_text-2002
-PKGREVISION=		1
+DISTNAME=		factbook_text_2006
+PKGNAME=		xrmap-factbook_text-2006
 CATEGORIES=		geography
 MASTER_SITES=		ftp://ftp.ac-grenoble.fr/ge/geosciences/xrmap/data/
 EXTRACT_SUFX=		.tar.bz2
@@ -16,11 +15,13 @@ DEPENDS+=		xrmap-base>=2.29:../../geography/xrmap-base
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
+USE_TOOLS+=	pax
+
 WRKSRC=			${WRKDIR}
 NO_BUILD=		yes
 INSTALLATION_DIRS=	share/rmap
 
 do-install:
-	cd ${WRKSRC} && ${PAX} -rw -pe factbook ${DESTDIR}${PREFIX}/share/rmap
+	cd ${WRKSRC} && pax -rw -pe factbook ${DESTDIR}${PREFIX}/share/rmap
 
 .include "../../mk/bsd.pkg.mk"

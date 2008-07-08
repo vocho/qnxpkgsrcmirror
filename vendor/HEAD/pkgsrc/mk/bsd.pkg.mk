@@ -1,4 +1,4 @@
-#	$NetBSD: bsd.pkg.mk,v 1.1940 2008/03/08 14:28:05 joerg Exp $
+#	$NetBSD: bsd.pkg.mk,v 1.1949 2008/06/14 08:32:33 dillo Exp $
 #
 # This file is in the public domain.
 #
@@ -21,6 +21,36 @@
 
 .include "misc/common.mk"
 
+############################################################################
+# Transform package Makefile variables and set defaults
+# This is the early set used directly or indirectly in
+# the phase variables.
+############################################################################
+
+##### PKGBASE, PKGNAME[_NOREV], PKGVERSION
+
+PKGBASE?=		${PKGNAME:C/-[^-]*$//}
+PKGVERSION?=		${PKGNAME:C/^.*-//}
+PKGVERSION?=		${PKGNAME:C/^.*-//}
+.if defined(PKGREVISION) && !empty(PKGREVISION) && (${PKGREVISION} != "0")
+.  if defined(PKGNAME)
+PKGNAME_NOREV:=		${PKGNAME}
+PKGNAME:=		${PKGNAME}nb${PKGREVISION}
+.  else
+PKGNAME?=		${DISTNAME}nb${PKGREVISION}
+PKGNAME_NOREV=		${DISTNAME}
+.  endif
+.else
+PKGNAME?=		${DISTNAME}
+PKGNAME_NOREV=		${PKGNAME}
+.endif
+PKGVERSION_NOREV=	${PKGNAME_NOREV:C/^.*-//}
+
+####
+
+############################################################################
+# Allow various phases to define the default variables
+############################################################################
 .if defined(EMUL_PLATFORMS) && !empty(EMUL_PLATFORMS)
 .  include "emulator/emulator.mk"
 .endif
@@ -57,44 +87,6 @@ LICENSE=		${LICENCE}
 ACCEPTABLE_LICENSES=	${ACCEPTABLE_LICENCES}
 .endif
 
-##### PKGBASE, PKGNAME[_NOREV], PKGVERSION
-
-PKGBASE?=		${PKGNAME:C/-[^-]*$//}
-PKGVERSION?=		${PKGNAME:C/^.*-//}
-PKGVERSION?=		${PKGNAME:C/^.*-//}
-.if defined(PKGREVISION) && !empty(PKGREVISION) && (${PKGREVISION} != "0")
-.  if defined(PKGNAME)
-PKGNAME_NOREV:=		${PKGNAME}
-PKGNAME:=		${PKGNAME}nb${PKGREVISION}
-.  else
-PKGNAME?=		${DISTNAME}nb${PKGREVISION}
-PKGNAME_NOREV=		${DISTNAME}
-.  endif
-.else
-PKGNAME?=		${DISTNAME}
-PKGNAME_NOREV=		${PKGNAME}
-.endif
-PKGVERSION_NOREV=	${PKGNAME_NOREV:C/^.*-//}
-
-# A meta-package is a package that does not have any files and whose
-# only purpose is to depend on other packages, giving that collection
-# a simple name.
-#
-# Keywords: meta meta-package META_PACKAGE
-#
-.if defined(META_PACKAGE)
-PKG_DESTDIR_SUPPORT=	user-destdir
-NO_CHECKSUM=		yes
-NO_CONFIGURE=		yes
-NO_BUILD=		yes
-DISTFILES=		# none
-PLIST_SRC=		# none
-do-patch:
-	@${DO_NADA}
-do-install:
-	@${DO_NADA}
-.endif
-
 ##### Others
 
 BUILD_DEPENDS?=		# empty
@@ -102,7 +94,11 @@ COMMENT?=		(no description)
 DEPENDS?=		# empty
 DESCR_SRC?=		${PKGDIR}/DESCR
 INTERACTIVE_STAGE?=	none
+.if defined(OWNER)
+MAINTAINER=${OWNER}
+.else
 MAINTAINER?=		pkgsrc-users@NetBSD.org
+.endif
 PKGWILDCARD?=		${PKGBASE}-[0-9]*
 SVR4_PKGNAME?=		${PKGNAME}
 WRKSRC?=		${WRKDIR}/${DISTNAME}
@@ -115,13 +111,6 @@ REAL_ROOT_GROUP?=	${ROOT_GROUP}
 .if (defined(INSTALL_UNSTRIPPED) && !empty(INSTALL_UNSTRIPPED:M[yY][eE][sS])) || defined(DEBUG_FLAGS)
 _INSTALL_UNSTRIPPED=	# set (flag used by platform/*.mk)
 .endif
-
-##### Non-overridable constants
-
-# Latest versions of tools required for correct pkgsrc operation.
-PKGTOOLS_REQD=		20070802
-# Versions of tools that are good enough to handle dependencies
-PKGTOOLS_BASE_REQD=	20051103
 
 ##### Transform USE_* into dependencies
 
@@ -146,19 +135,6 @@ PKG_FAIL_REASON+=	"PKG_INSTALLATION_TYPE must be \`\`pkgviews'' or \`\`overwrite
 .if empty(PKG_INSTALLATION_TYPES:M${PKG_INSTALLATION_TYPE})
 PKG_FAIL_REASON+=	"This package doesn't support PKG_INSTALLATION_TYPE=${PKG_INSTALLATION_TYPE}."
 .endif
-
-# Check that we are using up-to-date pkg_* tools with this file.
-.if !defined(NO_PKGTOOLS_REQD_CHECK)
-.  if ${PKGTOOLS_VERSION} < ${PKGTOOLS_BASE_REQD}
-PKG_FAIL_REASON+='The package tools installed on this system are out of date.'
-PKG_FAIL_REASON+='The installed package tools are dated ${PKGTOOLS_VERSION:C|(....)(..)(..)|\1/\2/\3|} and you must'
-PKG_FAIL_REASON+='update them to at least ${PKGTOOLS_REQD:C|(....)(..)(..)|\1/\2/\3|} using the following command:'
-PKG_FAIL_REASON+=' '
-PKG_FAIL_REASON+='    (cd ${PKGSRCDIR}/pkgtools/pkg_install && ${MAKE} clean && ${MAKE} update)'
-.  elif ${PKGTOOLS_VERSION} < ${PKGTOOLS_REQD}
-BOOTSTRAP_DEPENDS+=	pkg_install>=${PKGTOOLS_REQD}:../../pkgtools/pkg_install
-.  endif
-.endif # !NO_PKGTOOLS_REQD_CHECK
 
 .if defined(ALL_TARGET)
 PKG_FAIL_REASON+='ALL_TARGET is deprecated and must be replaced with BUILD_TARGET.'
@@ -251,6 +227,7 @@ _BUILD_DEFS=		${BUILD_DEFS}
 _BUILD_DEFS+=		LOCALBASE
 _BUILD_DEFS+=		PKGINFODIR
 _BUILD_DEFS+=		PKGMANDIR
+_BUILD_DEFS+=		_USE_DESTDIR
 
 # Store the result in the +BUILD_INFO file so we can query for the build
 # options using "pkg_info -Q PKG_OPTIONS <pkg>".
@@ -421,10 +398,8 @@ _BUILD_DEFS+=		PKG_SYSCONFBASEDIR PKG_SYSCONFDIR
 USE_TOOLS+=								\
 	[ awk basename cat chgrp chmod chown cmp cp cut dirname echo	\
 	egrep env false file find grep head hostname id install ln ls	\
-	mkdir mv pax printf pwd rm rmdir sed sh sort			\
+	mkdir mv printf pwd rm rmdir sed sh sort			\
 	tail test touch tr true	wc xargs
-
-USE_TOOLS+=	${NO_CHECKSUM:D:Udigest\:bootstrap}
 
 # bsd.wrapper.mk
 USE_TOOLS+=	expr
@@ -663,7 +638,7 @@ ${.CURDIR}/${WRKDIR_BASENAME}:
 _ROOT_CMD=	cd ${.CURDIR} &&					\
 		${SETENV} ${PKGSRC_MAKE_ENV}				\
 			PATH="$${PATH}:"${SU_CMD_PATH_APPEND:Q}		\
-		${MAKE} ${MAKEFLAGS}					\
+		${MAKE} ${MAKEFLAGS} _PKGSRC_BARRIER=yes		\
 			PKG_DEBUG_LEVEL=${PKG_DEBUG_LEVEL:Q}		\
 			su-${.TARGET} ${MAKEFLAGS.su-${.TARGET}}
 

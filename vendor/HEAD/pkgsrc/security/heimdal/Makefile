@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.68 2008/03/04 22:37:46 jlam Exp $
+# $NetBSD: Makefile,v 1.71 2008/05/14 18:01:26 jwise Exp $
 
 DISTNAME=	heimdal-1.1
 CATEGORIES=	security
 MASTER_SITES=	http://www.h5l.org/dist/src/
+PKGREVISION=	1
 
 MAINTAINER=	lha@NetBSD.org
 HOMEPAGE=	http://www.h5l.org/
@@ -52,10 +53,12 @@ CONFIGURE_ENV.SunOS+=	ac_cv_header_vis_h=no
 CONFIGURE_ARGS+=	--with-readline=${BUILDLINK_PREFIX.readline}
 CPPFLAGS+=		-I${BUILDLINK_PREFIX.readline}/include/readline
 
+PLIST_VARS+=		afskauth hcrypto
 .if ${OPSYS} == "IRIX"
-PLIST_SUBST+=		IF_IRIX=""
-.else
-PLIST_SUBST+=		IF_IRIX="@comment "
+PLIST.afskauth=		yes
+.endif
+.if ${MACHINE_PLATFORM:MNetBSD-[1-3]*} != ""
+PLIST.hcrypto=		yes
 .endif
 
 OWN_DIRS_PERMS=		${HEIMDAL_HDB_DIR} ${ROOT_USER} ${ROOT_GROUP} 0700

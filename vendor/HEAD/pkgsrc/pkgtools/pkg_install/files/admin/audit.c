@@ -1,4 +1,4 @@
-/*	$NetBSD: audit.c,v 1.4 2008/03/20 20:26:52 joerg Exp $	*/
+/*	$NetBSD: audit.c,v 1.8 2008/04/16 00:53:06 joerg Exp $	*/
 
 #if HAVE_CONFIG_H
 #include "config.h"
@@ -8,7 +8,7 @@
 #include <sys/cdefs.h>
 #endif
 #ifndef lint
-__RCSID("$NetBSD: audit.c,v 1.4 2008/03/20 20:26:52 joerg Exp $");
+__RCSID("$NetBSD: audit.c,v 1.8 2008/04/16 00:53:06 joerg Exp $");
 #endif
 
 /*-
@@ -46,9 +46,6 @@ __RCSID("$NetBSD: audit.c,v 1.4 2008/03/20 20:26:52 joerg Exp $");
 #if HAVE_SYS_STAT_H
 #include <sys/stat.h>
 #endif
-#if HAVE_SYS_WAIT_H
-#include <sys/wait.h>
-#endif
 #if HAVE_ERR_H
 #include <err.h>
 #endif
@@ -73,6 +70,8 @@ __RCSID("$NetBSD: audit.c,v 1.4 2008/03/20 20:26:52 joerg Exp $");
 #include <nbcompat/unistd.h>
 #endif
 
+#include <fetch.h>
+
 #include "admin.h"
 #include "lib.h"
 
@@ -90,7 +89,7 @@ parse_options(int argc, char **argv)
 	optreset = 1;
 	optind = 0;
 
-	while ((ch = getopt(argc, argv, "est")) != -1) {
+	while ((ch = getopt(argc, argv, "est:")) != -1) {
 		switch (ch) {
 		case 'e':
 			check_eol = 1;
@@ -109,34 +108,42 @@ parse_options(int argc, char **argv)
 }
 
 static int
-check_exact_pkg(const char *pkg)
+check_ignored_entry(size_t i)
 {
 	const char *iter, *next;
+	size_t entry_len, url_len;
+
+	if (ignore_advisories == NULL)
+		return 0;
+
+	url_len = strlen(pv->advisory[i]);
+
+	for (iter = ignore_advisories; *iter; iter = next) {
+		if ((next = strchr(iter, '\n')) == NULL) {
+			entry_len = strlen(iter);
+			next = iter + entry_len;
+		} else {
+			entry_len = next - iter;
+			++next;
+		}
+		if (url_len != entry_len)
+			continue;
+		if (strncmp(pv->advisory[i], iter, entry_len) == 0)
+			return 1;
+	}
+	return 0;
+}
+
+static int
+check_exact_pkg(const char *pkg)
+{
 	int ret;
 	size_t i;
 
 	ret = 0;
 	for (i = 0; i < pv->entries; ++i) {
-		if (ignore_advisories != NULL) {
-			size_t url_len = strlen(pv->advisory[i]);
-			size_t entry_len;
-
-			for (iter = ignore_advisories; *iter; iter = next) {
-				if ((next = strchr(iter, '\n')) == NULL) {
-					entry_len = strlen(iter);
-					next = iter + entry_len;
-				} else {
-					entry_len = next - iter;
-					++next;
-				}
-				if (url_len != entry_len)
-					continue;
-				if (!strncmp(pv->advisory[i], iter, entry_len))
-					break;
-			}
-			if (*iter != '\0')
-				continue;
-		}
+		if (check_ignored_entry(i))
+			continue;
 		if (limit_vul_types != NULL &&
 		    strcmp(limit_vul_types, pv->classification[i]))
 			continue;
@@ -326,107 +333,176 @@ void
 fetch_pkg_vulnerabilities(int argc, char **argv)
 {
 	struct pkg_vulnerabilities *pv_check;
-	const char *error;
-	pid_t child;
 	char *buf, *decompressed_input;
-	size_t buf_len, cur_len, decompressed_len;
-	ssize_t bytes_read;
-	int fd[2], status;
+	size_t buf_len, decompressed_len;
+	struct url_stat st;
+	fetchIO *f;
+	int fd;
 
 	parse_options(argc, argv);
 	if (argc != optind)
 		usage();
 
 	if (verbose >= 2)
-		fprintf(stderr, "ftp -o - %s\n", pkg_vulnerabilities_url);
+		fprintf(stderr, "Fetching %s\n", pkg_vulnerabilities_url);
 
-	if (pipe(fd) == -1)
-		err(EXIT_FAILURE, "cannot create FTP data pipe");
+	f = fetchXGetURL(pkg_vulnerabilities_url, &st, "");
+	if (f == NULL)
+		err(EXIT_FAILURE, "Could not fetch vulnerability file");
 
-	child = vfork();
-	if (child == -1)
-		err(EXIT_FAILURE, "cannot fork FTP process");
-	if (child == 0) {
-		close(fd[0]);
-		close(STDOUT_FILENO);
-		if (dup2(fd[1], STDOUT_FILENO) == -1) {
-			static const char err_msg[] =
-			    "cannot redirect stdout of FTP process\n";
-			write(STDERR_FILENO, err_msg, sizeof(err_msg) - 1);
-			_exit(255);
-		}
-		close(fd[1]);
-		execlp(fetch_cmd, fetch_cmd, "-o", "-",
-		    pkg_vulnerabilities_url, (char *)NULL);
-		_exit(255);
-	}
-	close(fd[1]);
+	if (st.size > SSIZE_MAX - 1)
+		err(EXIT_FAILURE, "pkg-vulnerabilities is too large");
 
-	cur_len = 0;
-	buf_len = 32768;
-	if ((buf = malloc(buf_len + 1)) == NULL) {
-		error = "malloc failed";
-		goto ftp_error;
-	}
+	buf_len = st.size;
+	if ((buf = malloc(buf_len + 1)) == NULL)
+		err(EXIT_FAILURE, "malloc failed");
 
-	while ((bytes_read = read(fd[0], buf + cur_len, buf_len - cur_len)) > 0) {
-		cur_len += bytes_read;
-		if (cur_len * 2 < buf_len)
-			continue;
-		if (cur_len >= SSIZE_MAX / 2) {
-			error = "pkg-vulnerabilies too large";
-			goto ftp_error;
-		}
-		buf_len *= 2;
-		if ((buf = realloc(buf, buf_len + 1)) == NULL) {
-			error = "realloc failed";
-			goto ftp_error;
-		}
-	}
+	if (fetchIO_read(f, buf, buf_len) != buf_len)
+		err(EXIT_FAILURE, "Failure during fetch of pkg-vulnerabilities");
+	buf[buf_len] = '\0';
 
-	if (bytes_read == -1) {
-		error = "read from FTP process failed";
-		goto ftp_error;
-	}
-
-	waitpid(child, &status, 0);
-	close(fd[0]);
-
-	if (status)
-		errx(EXIT_FAILURE,
-		    "Download of pkg-vulnerabilities from %s failed",
-		    pkg_vulnerabilities_url);
-
-	buf[cur_len] = '\0';
-
-	if (decompress_buffer(buf, cur_len, &decompressed_input,
+	if (decompress_buffer(buf, buf_len, &decompressed_input,
 	    &decompressed_len)) {
 		pv_check = parse_pkg_vulnerabilities(decompressed_input,
 		    decompressed_len, check_signature);
 		free(decompressed_input);
 	} else {
-		pv_check = parse_pkg_vulnerabilities(buf, cur_len,
+		pv_check = parse_pkg_vulnerabilities(buf, buf_len,
 		    check_signature);
 	}
 	free_pkg_vulnerabilities(pv_check);
 
-	fd[0] = open(pkg_vulnerabilities_file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	if (fd[0] == -1)
+	fd = open(pkg_vulnerabilities_file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	if (fd == -1)
 		err(EXIT_FAILURE, "Cannot create pkg-vulnerability file %s",
 		    pkg_vulnerabilities_file);
 
-	if (write(fd[0], buf, cur_len) != cur_len)
+	if (write(fd, buf, buf_len) != buf_len)
 		err(EXIT_FAILURE, "Cannot write pkg-vulnerability file");
-	if (close(fd[0]) == -1)
+	if (close(fd) == -1)
 		err(EXIT_FAILURE, "Cannot close pkg-vulnerability file after write");
 
 	free(buf);
 
 	exit(EXIT_SUCCESS);
+}
 
- ftp_error:
-	(void)kill(child, SIGTERM);
-	(void)close(fd[0]);
-	(void)waitpid(child, &status, 0);
-	err(EXIT_FAILURE, error);
+static int
+check_pkg_history_pattern(const char *pkg, const char *pattern)
+{
+	const char *delim, *end_base;
+
+	if ((delim = strchr(pattern, '*')) != NULL) {
+		if ((end_base = strrchr(pattern, '-')) == NULL)
+			errx(EXIT_FAILURE, "Missing - in wildcard pattern %s",
+			    pattern);
+		if ((delim = strchr(pattern, '>')) != NULL ||
+		    (delim = strchr(pattern, '<')) != NULL)
+			errx(EXIT_FAILURE,
+			    "Mixed relational and wildcard patterns in %s",
+			    pattern);
+	} else if ((delim = strchr(pattern, '>')) != NULL) {
+		end_base = delim;
+		if ((delim = strchr(pattern, '<')) != NULL && delim < end_base)
+			errx(EXIT_FAILURE, "Inverted operators in %s",
+			    pattern);
+	} else if ((delim = strchr(pattern, '<')) != NULL) {
+		end_base = delim;
+	} else if ((end_base = strrchr(pattern, '-')) == NULL) {
+		errx(EXIT_FAILURE, "Missing - in absolute pattern %s",
+		    pattern);
+	}
+
+	if (strncmp(pkg, pattern, end_base - pattern) != 0)
+		return 0;
+	if (pkg[end_base - pattern] != '\0')
+		return 0;
+
+	return 1;
+}
+
+static int
+check_pkg_history1(const char *pkg, const char *pattern)
+{
+	const char *open_brace, *close_brace, *inner_brace, *suffix, *iter;
+	size_t prefix_len, suffix_len, middle_len;
+	char *expanded_pkg;
+
+	open_brace = strchr(pattern, '{');
+	if (open_brace == NULL) {
+		if ((close_brace = strchr(pattern, '}')) != NULL)
+			errx(EXIT_FAILURE, "Unbalanced {} in pattern %s",
+			    pattern);
+		return check_pkg_history_pattern(pkg, pattern);
+	}
+	close_brace = strchr(open_brace, '}');
+	if (strchr(pattern, '}') != close_brace)
+		errx(EXIT_FAILURE, "Unbalanced {} in pattern %s",
+		    pattern);
+
+	while ((inner_brace = strchr(open_brace + 1, '{')) != NULL) {
+		if (inner_brace >= close_brace)
+			break;
+		open_brace = inner_brace;
+	}
+
+	expanded_pkg = malloc(strlen(pattern)); /* {} are going away... */
+	if (expanded_pkg == NULL)
+		err(EXIT_FAILURE, "malloc failed");
+
+	prefix_len = open_brace - pattern;
+	suffix = close_brace + 1;
+	suffix_len = strlen(suffix) + 1;
+	memcpy(expanded_pkg, pattern, prefix_len);
+
+	++open_brace;
+
+	do {
+		iter = strchr(open_brace, ',');
+		if (iter == NULL || iter > close_brace)
+			iter = close_brace;
+
+		middle_len = iter - open_brace;
+		memcpy(expanded_pkg + prefix_len, open_brace, middle_len);
+		memcpy(expanded_pkg + prefix_len + middle_len, suffix,
+		    suffix_len);
+		if (check_pkg_history1(pkg, expanded_pkg)) {
+			free(expanded_pkg);
+			return 1;
+		}
+		open_brace = iter + 1;
+	} while (iter < close_brace);
+
+	free(expanded_pkg);
+	return 0;
+}
+
+static void
+check_pkg_history(const char *pkg)
+{
+	size_t i;
+
+	for (i = 0; i < pv->entries; ++i) {
+		if (strcmp("eol", pv->classification[i]) == 0)
+			continue;
+		if (check_pkg_history1(pkg, pv->vulnerability[i]) == 0)
+			continue;
+
+		printf("%s %s %s\n", pv->vulnerability[i],
+		    pv->classification[i], pv->advisory[i]);
+	}
+}
+
+void
+audit_history(int argc, char **argv)
+{
+	parse_options(argc, argv);
+	argv += optind;
+
+	check_and_read_pkg_vulnerabilities();
+	for (; *argv != NULL; ++argv)
+		check_pkg_history(*argv);
+
+	free_pkg_vulnerabilities(pv);
+	exit(EXIT_SUCCESS);
 }

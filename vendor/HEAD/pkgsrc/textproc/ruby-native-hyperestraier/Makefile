@@ -1,9 +1,11 @@
-# $NetBSD: Makefile,v 1.1.1.1 2006/11/17 15:42:27 obache Exp $
+# $NetBSD: Makefile,v 1.3 2008/06/20 01:09:38 joerg Exp $
 #
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 .include "../../textproc/hyperestraier/Makefile.common"
 
 PKGNAME=	${RUBY_PKGPREFIX}-native-hyperestraier-1.0.0.${HYPERESTRAIER_VERSION}
+PKGREVISION=	1
 CATEGORIES=	textproc ruby
 
 COMMENT=	Ruby native interface of Hyper Estaier

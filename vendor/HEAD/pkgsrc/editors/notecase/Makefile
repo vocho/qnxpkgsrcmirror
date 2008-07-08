@@ -1,9 +1,8 @@
-# $NetBSD: Makefile,v 1.6 2008/03/06 14:53:50 wiz Exp $
+# $NetBSD: Makefile,v 1.8 2008/05/15 19:18:06 drochner Exp $
 #
 
-DISTNAME=	notecase-1.8.1_src
-PKGNAME=	notecase-1.8.1
-PKGREVISION=	1
+DISTNAME=	notecase-1.8.8_src
+PKGNAME=	notecase-1.8.8
 CATEGORIES=	editors
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=notecase/}
 
@@ -11,15 +10,14 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://notecase.sourceforge.net/
 COMMENT=	Hierarchical note manager
 
-WRKSRC=		${WRKDIR}/notecase-1.8.1
+WRKSRC=		${WRKDIR}/notecase-1.8.8
 USE_LANGUAGES=	c c++
 USE_TOOLS+=	gmake msgfmt pkg-config gsed
 TOOLS_PLATFORM.gsed= #empty, override nonsense in tools
 USE_DIRS+=	xdg-1.1
 
-pre-install:
-	${INSTALL_DATA_DIR} ${PREFIX}/share/doc/notecase
-	${INSTALL_DATA_DIR} ${PREFIX}/share/locale/fr_CA/LC_MESSAGES
+INSTALLATION_DIRS=	share/doc/notecase share/locale/fr_CA/LC_MESSAGES \
+			share/locale/no/LC_MESSAGES
 
 .include "../../x11/gtk2/buildlink3.mk"
 .include "../../sysutils/gnome-vfs/buildlink3.mk"

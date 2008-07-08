@@ -1,14 +1,16 @@
-# $NetBSD: Makefile,v 1.4 2008/03/14 14:49:53 drochner Exp $
+# $NetBSD: Makefile,v 1.6 2008/06/20 01:09:20 joerg Exp $
 #
 
 DISTNAME=		SimGear-1.0.0
 PKGNAME=		${DISTNAME:S/SimGear/simgear/}
 CATEGORIES=		devel
-MASTER_SITES=		ftp://ftp.de.simgear.org/pub/simgear/
+MASTER_SITES=		ftp://ftp.de.simgear.org/pub/simgear/Source/
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://www.simgear.org/
 COMMENT=		Simulator Construction Tools
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_PKGLOCALEDIR=	yes
 GNU_CONFIGURE=		yes

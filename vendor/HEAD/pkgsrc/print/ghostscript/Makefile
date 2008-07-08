@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.47 2008/03/10 12:34:10 wiz Exp $
+# $NetBSD: Makefile,v 1.49 2008/05/25 10:26:41 tnn Exp $
 
 DISTNAME=	ghostscript-8.62
 PKGREVISION=	2
@@ -22,6 +22,7 @@ USE_TOOLS+=		gmake perl:run lex pkg-config
 GNU_CONFIGURE=		yes
 #CONFIGURE_ARGS+=	--enable-debug
 MAKE_JOBS_SAFE=		no
+UNLIMIT_RESOURCES+=	datasize	# gsromfs1.c
 
 REPLACE_PERL+=		lib/fixmswrd.pl
 
@@ -43,6 +44,12 @@ SUBST_SED.resdir=	-e "s|/Resource/|${GS_RESOURCEDIR}/|g"
 
 .if ${OPSYS} == "HPUX"
 CONFIGURE_ENV+=		ac_cv_func_fopen64=no
+.endif
+
+# Interim IRIX build fix, the real problem is that fontconfig.pc doesn't
+# require linking against libiconv when it should do so.
+.if ${OPSYS} == "IRIX"
+BUILDLINK_TRANSFORM+=	l:fontconfig:fontconfig:iconv
 .endif
 
 post-extract:

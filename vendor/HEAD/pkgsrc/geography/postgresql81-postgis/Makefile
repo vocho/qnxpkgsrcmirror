@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.15 2008/02/16 01:29:00 gdt Exp $
+# $NetBSD: Makefile,v 1.17 2008/06/12 02:14:30 joerg Exp $
 
 DISTNAME=		postgis-${VERSION}
 VERSION=		1.3.2
@@ -11,6 +11,8 @@ MAINTAINER=		gdt@NetBSD.org
 HOMEPAGE=		http://postgis.refractions.net/
 COMMENT=		Spatial database capabilities for PostgreSQL
 
+PKG_DESTDIR_SUPPORT=	user-destdir
+
 # XXX Change to determine postgresql version dynamically.
 
 CONFLICTS=		postgis-[0-9]*
@@ -19,7 +21,7 @@ CONFLICTS=		postgis-[0-9]*
 MAKE_JOBS_SAFE=		no
 
 GNU_CONFIGURE=		YES
-USE_TOOLS+=		gmake lex perl
+USE_TOOLS+=		gmake lex pax perl
 USE_LANGUAGES=		c c++
 
 CONFIGURE_ARGS+=	--enable-rpath
@@ -37,18 +39,18 @@ SUBST_FILES.paths=	extras/template_gis/profile \
 SUBST_VARS.paths+=	PKG_SYSCONFDIR
 SUBST_STAGE.paths=	pre-configure
 
+INSTALLATION_DIRS=	${DOCDIR} ${HTMLDIR} ${PKGMANDIR}/man1
+
 # Install is manual because distribution fails if docbook prereqs are not
 # satisfied, rather than using the prebuilt versions which are actually
 # in the distfile.
 do-install:
-	cd ${WRKSRC} && ${GMAKE} install
-	${INSTALL_DATA_DIR} ${DOCDIR}
-	${INSTALL_DATA} ${BUILD_DIRS:Q}/README.postgis ${DOCDIR}
-	${INSTALL_DATA} ${BUILD_DIRS:Q}/doc/*.xml ${DOCDIR}
-	${INSTALL_DATA} ${BUILD_DIRS:Q}/doc/*.txt ${DOCDIR}
-	${INSTALL_DATA_DIR} ${HTMLDIR}
-	cd ${WRKSRC}/doc/html && ${PAX} -rw -pp *.html *.css ${HTMLDIR}
-	${INSTALL_MAN} ${BUILD_DIRS:Q}/doc/man/*.1 ${PREFIX}/${PKGMANDIR}/man1
+	cd ${WRKSRC} && ${GMAKE} install DESTDIR=${DESTDIR}
+	${INSTALL_DATA} ${BUILD_DIRS:Q}/README.postgis ${DESTDIR}${DOCDIR}
+	${INSTALL_DATA} ${BUILD_DIRS:Q}/doc/*.xml ${DESTDIR}${DOCDIR}
+	${INSTALL_DATA} ${BUILD_DIRS:Q}/doc/*.txt ${DESTDIR}${DOCDIR}
+	cd ${WRKSRC}/doc/html && pax -rw -pp *.html *.css ${DESTDIR}${HTMLDIR}
+	${INSTALL_MAN} ${BUILD_DIRS:Q}/doc/man/*.1 ${DESTDIR}${PREFIX}/${PKGMANDIR}/man1
 
 DEPENDS+=	postgresql81-server>=8.1:../../databases/postgresql81-server
 

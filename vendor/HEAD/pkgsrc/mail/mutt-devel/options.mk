@@ -1,4 +1,4 @@
-# $NetBSD: options.mk,v 1.28 2008/03/08 14:28:32 joerg Exp $
+# $NetBSD: options.mk,v 1.32 2008/05/25 14:30:42 joerg Exp $
 
 # Global and legacy options
 
@@ -6,7 +6,9 @@ PKG_OPTIONS_VAR=	PKG_OPTIONS.mutt
 PKG_OPTIONS_REQUIRED_GROUPS=	display
 PKG_OPTIONS_GROUP.display=	slang ncurses ncursesw curses
 PKG_SUPPORTED_OPTIONS=	debug gpgme idn ssl smime sasl
-PKG_SUPPORTED_OPTIONS+=	mutt-compressed-mbox mutt-hcache mutt-smtp
+PKG_SUPPORTED_OPTIONS+=	mutt-hcache mutt-smtp mutt-xlabel
+# Comment the following line out on updates.
+PKG_SUPPORTED_OPTIONS+=	mutt-compressed-mbox
 PKG_SUGGESTED_OPTIONS=	ssl smime curses
 
 .include "../../mk/bsd.options.mk"
@@ -68,15 +70,15 @@ CONFIGURE_ARGS+=	--without-ssl
 ###
 ### S/MIME
 ###
+PLIST_VARS+=		smime
 .if !empty(PKG_OPTIONS:Msmime)
 USE_TOOLS+=		perl:run
 REPLACE_PERL+=		*.pl */*.pl
 .  include "../../security/openssl/buildlink3.mk"
 CONFIGURE_ARGS+=	--enable-smime
-PLIST_SUBST+=		WITHSMIME=''
+PLIST.smime=		yes
 .else
 CONFIGURE_ARGS+=	--disable-smime
-PLIST_SUBST+=		WITHSMIME='@comment '
 .endif
 
 ###
@@ -99,13 +101,12 @@ CONFIGURE_ARGS+=	--disable-hcache
 
 ###
 ### Compressed mail boxes
-### Internal SMTP relay support
 ###
 .if !empty(PKG_OPTIONS:Mmutt-compressed-mbox)
-PATCH_SITES=           http://www.spinnaker.de/mutt/compressed/
-PATCHFILES+=           patch-${PKGVERSION_NOREV}.rr.compressed.1.gz
-PATCH_DIST_STRIP=      -p1
-CONFIGURE_ARGS+=       --enable-compressed
+PATCH_SITES=		http://www.spinnaker.de/mutt/compressed/
+PATCHFILES+=		patch-${PKGVERSION_NOREV}.rr.compressed.1.gz
+PATCH_DIST_STRIP=	-p1
+CONFIGURE_ARGS+=	--enable-compressed
 .endif
 
 ###
@@ -115,6 +116,15 @@ CONFIGURE_ARGS+=       --enable-compressed
 CONFIGURE_ARGS+=	--enable-smtp
 .else
 CONFIGURE_ARGS+=	--disable-smtp
+.endif
+
+###
+### X-Label header support
+###
+.if !empty(PKG_OPTIONS:Mmutt-xlabel)
+PATCH_SITES=		http://home.uchicago.edu/~dgc/sw/mutt/
+PATCHFILES+=		patch-1.5.14.dgc.xlabel_ext.9
+PATCH_DIST_STRIP=	-p1
 .endif
 
 ###

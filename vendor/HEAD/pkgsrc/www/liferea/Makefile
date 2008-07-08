@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.70 2008/03/10 13:00:01 drochner Exp $
+# $NetBSD: Makefile,v 1.75 2008/06/23 16:26:19 drochner Exp $
 
-DISTNAME=		liferea-1.4.13
+DISTNAME=		liferea-1.4.16b
 CATEGORIES=		www
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=liferea/}
 
@@ -23,6 +23,20 @@ PKG_OPTIONS_GROUP.renderer=	liferea-gtkhtml liferea-seamonkey liferea-firefox
 PKG_SUGGESTED_OPTIONS=	liferea-gtkhtml
 .include "../../mk/bsd.options.mk"
 
+PLIST_VARS+=	gtkhtml mozilla
+.if !empty(PKG_OPTIONS:Mliferea-gtkhtml)
+.include "../../www/libgtkhtml/buildlink3.mk"
+PLIST.gtkhtml=	yes
+.endif
+.if !empty(PKG_OPTIONS:Mliferea-firefox)
+.include "../../www/firefox/buildlink3.mk"
+PLIST.mozilla=	yes
+.endif
+.if !empty(PKG_OPTIONS:Mliferea-seamonkey)
+.include "../../www/firefox/buildlink3.mk"
+PLIST.mozilla=	yes
+.endif
+
 SHLIBTOOL_OVERRIDE=	# empty
 
 GCONF_SCHEMAS=		liferea.schemas
@@ -39,15 +53,6 @@ GCONF_SCHEMAS=		liferea.schemas
 .include "../../sysutils/libnotify/buildlink3.mk"
 .include "../../textproc/libxml2/buildlink3.mk"
 .include "../../textproc/libxslt/buildlink3.mk"
-.if !empty(PKG_OPTIONS:Mliferea-gtkhtml)
-.include "../../www/libgtkhtml/buildlink3.mk"
-.endif
-.if !empty(PKG_OPTIONS:Mliferea-firefox)
-.include "../../www/firefox/buildlink3.mk"
-.endif
-.if !empty(PKG_OPTIONS:Mliferea-seamonkey)
-.include "../../www/seamonkey/buildlink3.mk"
-.endif
 .include "../../x11/libSM/buildlink3.mk"
 .include "../../x11/gtk2/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

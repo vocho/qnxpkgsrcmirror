@@ -1,15 +1,16 @@
-# $NetBSD: Makefile,v 1.55 2008/03/06 14:53:56 wiz Exp $
+# $NetBSD: Makefile,v 1.59 2008/06/20 01:09:44 joerg Exp $
 #
 
-DISTNAME=		gnome-applets-2.20.1
-PKGREVISION=		1
+DISTNAME=		gnome-applets-2.22.2
 CATEGORIES=		x11 gnome
-MASTER_SITES=		${MASTER_SITE_GNOME:=sources/gnome-applets/2.20/}
+MASTER_SITES=		${MASTER_SITE_GNOME:=sources/gnome-applets/2.22/}
 EXTRACT_SUFX=		.tar.bz2
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://www.gnome.org/
 COMMENT=		GNOME2 panel applets
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 BUILD_DEPENDS+=		gst-plugins0.10-esound>=0.10.0:../../audio/gst-plugins0.10-esound
 BUILD_DEPENDS+=		gst-plugins0.10-oss>=0.10.0:../../audio/gst-plugins0.10-oss
@@ -27,7 +28,6 @@ PKG_SUPPORTED_OPTIONS=	inet6
 CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR:Q}
 
 PKGCONFIG_OVERRIDE+=	libgswitchit/gswitchit.pc.in
-PKGCONFIG_OVERRIDE+=	libgweather/gweather.pc.in
 
 EGDIR=			${PREFIX}/share/examples/gnome-applets
 
@@ -35,7 +35,6 @@ GCONF_SCHEMAS=		charpick.schemas
 GCONF_SCHEMAS+=	drivemount.schemas
 GCONF_SCHEMAS+=	geyes.schemas
 #GCONF_SCHEMAS+=	gswitchit.schemas
-GCONF_SCHEMAS+=	gweather.schemas
 GCONF_SCHEMAS+=	mixer.schemas
 GCONF_SCHEMAS+=	multiload.schemas
 GCONF_SCHEMAS+=	stickynotes.schemas
@@ -48,25 +47,25 @@ CONFIGURE_ARGS+=	--enable-ipv6
 CONFIGURE_ARGS+=	--disable-ipv6
 .endif
 
+PLIST_VARS+=		battstat
 .if ${OPSYS} == "Linux" || ${OPSYS} == "FreeBSD" || ${OPSYS} == "OpenBSD" || \
     (${OPSYS} == "NetBSD" && exists(/usr/include/machine/apmvar.h))
 GCONF_SCHEMAS+=	battstat.schemas
-PLIST_SUBST+=		BATTSTAT=
+PLIST.battstat=		yes
 CONF_FILES+=		${EGDIR}/sound/events/battstat_applet.soundlist \
 			${PKG_SYSCONFDIR}/sound/events/battstat_applet.soundlist
 .else
-PLIST_SUBST+=		BATTSTAT="@comment "
 CONFIGURE_ARGS+=	--disable-battstat
 .endif
 
-PRINT_PLIST_AWK+=	/[Bb]attstat/ { print "$${BATTSTAT}"$$0; next; }
-PRINT_PLIST_AWK+=	/examples/ { print "$${BATTSTAT}"$$0; next; }
+PRINT_PLIST_AWK+=	/[Bb]attstat/ { print "$${PLIST.battstat}"$$0; next; }
+PRINT_PLIST_AWK+=	/examples/ { print "$${PLIST.battstat}"$$0; next; }
 
+PLIST_VARS+=		cpufreq
 .if ${OPSYS} == "Linux" && exists(/usr/include/cpufreq.h)
 GCONF_SCHEMAS+=	cpufreq-applet.schemas
-PLIST_SUBST+=		CPUFREQ=
+PLIST.cpufreq=		yes
 .else
-PLIST_SUBST+=		CPUFREQ="@comment "
 CONFIGURE_ARGS+=	--disable-cpufreq
 .endif
 
@@ -114,6 +113,7 @@ PYTHON_PATCH_SCRIPTS+=	invest-applet/invest/invest-chart
 .include "../../lang/python/extension.mk"
 .include "../../x11/py-gnome2/buildlink3.mk"
 .include "../../x11/py-gnome2-desktop/buildlink3.mk"
+.include "../../devel/libgweather/buildlink3.mk"
 
 .include "../../mk/oss.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

@@ -1,14 +1,16 @@
-# $NetBSD: Makefile,v 1.3 2008/03/07 21:32:26 wiz Exp $
+# $NetBSD: Makefile,v 1.6 2008/06/20 01:09:26 joerg Exp $
 #
 
-DISTNAME=		goffice-0.6.2
-PKGNAME=		goffice0.6-0.6.2
+DISTNAME=		goffice-0.6.4
+PKGNAME=		goffice0.6-0.6.4
 CATEGORIES=		misc
 MASTER_SITES=		${MASTER_SITE_GNOME:=sources/goffice/0.6/}
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://www.gnome.org/
 COMMENT=		Library of document-centric objects and utilities
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 CONFLICTS+=		goffice<0.4.2nb1 goffice0.5<0.5.4
 
@@ -29,7 +31,6 @@ BUILDLINK_API_DEPENDS.glib2+=	glib2>=2.8.0
 .include "../../devel/libgsf/buildlink3.mk"
 BUILDLINK_API_DEPENDS.pango+=	pango>=1.8.1
 .include "../../devel/pango/buildlink3.mk"
-.include "../../devel/pcre/buildlink3.mk"
 .include "../../graphics/cairo/buildlink3.mk"
 BUILDLINK_API_DEPENDS.libart+=	libart>=2.3.11
 .include "../../graphics/libart/buildlink3.mk"

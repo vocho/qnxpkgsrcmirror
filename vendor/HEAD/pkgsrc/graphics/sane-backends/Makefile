@@ -1,7 +1,9 @@
-# $NetBSD: Makefile,v 1.36 2007/06/08 20:50:55 gdt Exp $
+# $NetBSD: Makefile,v 1.40 2008/06/20 01:09:23 joerg Exp $
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 .include "Makefile.common"
-COMMENT=	API for access to scanners, digitals camera, frame grabbers etc.
+COMMENT=	API for access to scanners, digital cameras, frame grabbers etc.
 
 DISTNAME=	sane-backends-${SANE_VERSION}
 DISTFILES=	${DISTNAME}${EXTRACT_SUFX}
@@ -20,24 +22,26 @@ CONFIGURE_ARGS+=	--with-docdir=${PREFIX}/share/doc/sane-${SANE_VERSION}
 
 .include "../../mk/bsd.prefs.mk"
 
+PLIST_VARS+=		pint sm3600
+
 .if (${OPSYS} == "SunOS")
-PLIST_SUBST+=	SANE_PINT="@comment "
-PLIST_SUBST+=	SANE_SM3600="@comment "
+# nothing
 .elif (${OPSYS} == "Linux") || (${OPSYS} == "DragonFly")
-PLIST_SUBST+=	SANE_PINT="@comment "
-PLIST_SUBST+=	SANE_SM3600=""
+PLIST.sm3600=		yes
 .else
-PLIST_SUBST+=	SANE_PINT=""
-PLIST_SUBST+=	SANE_SM3600=""
+PLIST.pint=		yes
+PLIST.sm3600=		yes
 .endif
 
 OWN_DIRS+=	${PKG_SYSCONFDIR}/sane.d
 EGDIR=		${PREFIX}/share/examples/sane
 .for f in abaton.conf agfafocus.conf apple.conf artec.conf \
 artec_eplus48u.conf avision.conf bh.conf canon.conf canon630u.conf \
-coolscan.conf coolscan2.conf dc210.conf dc240.conf dc25.conf dll.conf \
-dmc.conf epson.conf fujitsu.conf genesys.conf gt68xx.conf hp.conf \
-hp4200.conf hp5400.conf ibm.conf leo.conf lexmark.conf \
+cardscan.conf coolscan.conf coolscan2.conf \
+dc210.conf dc240.conf dc25.conf dll.conf dmc.conf \
+epson.conf epjitsu.conf epson2.conf fujitsu.conf \
+genesys.conf gt68xx.conf hp.conf hp3900.conf \
+hp4200.conf hp5400.conf hs2p.conf ibm.conf leo.conf lexmark.conf \
 ma1509.conf matsushita.conf \
 microtek.conf microtek2.conf mustek.conf mustek_usb.conf nec.conf \
 net.conf pie.conf plustek.conf plustek_pp.conf ricoh.conf s9036.conf \

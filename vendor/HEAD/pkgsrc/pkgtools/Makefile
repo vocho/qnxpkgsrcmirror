@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.87 2008/03/06 04:46:46 jlam Exp $
+# $NetBSD: Makefile,v 1.91 2008/06/06 08:30:31 wiz Exp $
 #
 
 COMMENT=	Tools for use in the packages collection
@@ -8,6 +8,7 @@ SUBDIR+=	binpatch
 SUBDIR+=	bootstrap-extras
 SUBDIR+=	bootstrap-mk-files
 SUBDIR+=	cdpack
+SUBDIR+=	compat_headers
 SUBDIR+=	createbuildlink
 SUBDIR+=	dfdisk
 SUBDIR+=	digest
@@ -25,6 +26,7 @@ SUBDIR+=	pkg_comp
 SUBDIR+=	pkg_filecheck
 SUBDIR+=	pkg_install
 SUBDIR+=	pkg_install-info
+SUBDIR+=	pkg_leaves
 SUBDIR+=	pkg_notify
 SUBDIR+=	pkg_regress
 SUBDIR+=	pkg_rolling-replace
@@ -39,7 +41,6 @@ SUBDIR+=	pkglint
 SUBDIR+=	pkgse
 SUBDIR+=	pkgsurvey
 SUBDIR+=	port2pkg
-SUBDIR+=	posix_headers
 #SUBDIR+=	prereq-readme	# Only used by the README.html generation
 SUBDIR+=	rc.subr
 SUBDIR+=	rcorder

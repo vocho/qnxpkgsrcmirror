@@ -1,33 +1,76 @@
-# $NetBSD: Makefile,v 1.14 2008/03/06 14:53:55 wiz Exp $
+# $NetBSD: Makefile,v 1.20 2008/05/26 17:22:37 hira Exp $
 #
 
-DISTNAME=	compiz-0.4.0
-PKGREVISION=	8
+DISTNAME=	compiz-0.6.2
+PKGREVISION=	2
 CATEGORIES=	wm x11
-MASTER_SITES=	http://xorg.freedesktop.org/releases/individual/app/
-EXTRACT_SUFX=	.tar.bz2
+MASTER_SITES=	${MASTER_SITE_XORG:=app/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://compiz.org/
 COMMENT=	Compositing window manager
 
 GNU_CONFIGURE=		yes
-USE_TOOLS+=		pkg-config msgfmt
+USE_TOOLS+=		intltool pkg-config msgfmt
 USE_PKGLOCALEDIR=	yes
 USE_LANGUAGES=		c c++
 USE_LIBTOOL=		yes
 
-GCONF_SCHEMAS+=	gwd.schemas
-GCONF_SCHEMAS+=	compiz.schemas
+COMPIZ_GCONF_SCHEMAS+=		compiz-annotate.schemas
+COMPIZ_GCONF_SCHEMAS+=		compiz-blur.schemas
+COMPIZ_GCONF_SCHEMAS+=		compiz-clone.schemas
+COMPIZ_GCONF_SCHEMAS+=		compiz-core.schemas
+COMPIZ_GCONF_SCHEMAS+=		compiz-cube.schemas
+COMPIZ_GCONF_SCHEMAS+=		compiz-dbus.schemas
+COMPIZ_GCONF_SCHEMAS+=		compiz-decoration.schemas
+COMPIZ_GCONF_SCHEMAS+=		compiz-fade.schemas
+COMPIZ_GCONF_SCHEMAS+=		compiz-fs.schemas
+COMPIZ_GCONF_SCHEMAS+=		compiz-gconf.schemas
+COMPIZ_GCONF_SCHEMAS+=		compiz-glib.schemas
+COMPIZ_GCONF_SCHEMAS+=		compiz-ini.schemas
+COMPIZ_GCONF_SCHEMAS+=		compiz-inotify.schemas
+COMPIZ_GCONF_SCHEMAS+=		compiz-minimize.schemas
+COMPIZ_GCONF_SCHEMAS+=		compiz-move.schemas
+COMPIZ_GCONF_SCHEMAS+=		compiz-place.schemas
+COMPIZ_GCONF_SCHEMAS+=		compiz-plane.schemas
+COMPIZ_GCONF_SCHEMAS+=		compiz-png.schemas
+COMPIZ_GCONF_SCHEMAS+=		compiz-regex.schemas
+COMPIZ_GCONF_SCHEMAS+=		compiz-resize.schemas
+COMPIZ_GCONF_SCHEMAS+=		compiz-rotate.schemas
+COMPIZ_GCONF_SCHEMAS+=		compiz-scale.schemas
+COMPIZ_GCONF_SCHEMAS+=		compiz-screenshot.schemas
+COMPIZ_GCONF_SCHEMAS+=		compiz-svg.schemas
+COMPIZ_GCONF_SCHEMAS+=		compiz-switcher.schemas
+COMPIZ_GCONF_SCHEMAS+=		compiz-video.schemas
+COMPIZ_GCONF_SCHEMAS+=		compiz-water.schemas
+COMPIZ_GCONF_SCHEMAS+=		compiz-wobbly.schemas
+COMPIZ_GCONF_SCHEMAS+=		compiz-zoom.schemas
+
+GCONF_SCHEMAS+=		gwd.schemas
+GCONF_SCHEMAS+=		${COMPIZ_GCONF_SCHEMAS}
+
 PKGCONFIG_OVERRIDE+=	compiz.pc.in
 PKGCONFIG_OVERRIDE+=	libdecoration/libdecoration.pc.in
 
 CONFIGURE_ARGS+=	--disable-inotify
 
 PKG_SUPPORTED_OPTIONS=	gnome kde
+PKG_SUGGESTED_OPTIONS=	gnome
 PKG_OPTIONS_VAR=	PKG_OPTIONS.compiz
 
+SUBST_CLASSES+=		paths
+SUBST_FILES.paths=	metadata/compiz-decoration.schemas
+SUBST_SED.paths=	-e 's,@PREFIX@,${PREFIX},g'
+SUBST_STAGE.paths=	post-patch
+
+post-install:
+.for schema in ${COMPIZ_GCONF_SCHEMAS}
+	${INSTALL_DATA} ${WRKSRC}/metadata/${schema} ${PREFIX}/share/gconf/schemas
+.endfor
+
 .include "../../mk/bsd.options.mk"
+
+PLIST_VARS+=		${PKG_SUPPORTED_OPTIONS}
 
 # this is as much as needed for the basic window decorator
 .include "../../graphics/cairo/buildlink3.mk"
@@ -36,20 +79,16 @@ PKG_OPTIONS_VAR=	PKG_OPTIONS.compiz
 
 .if !empty(PKG_OPTIONS:Mgnome)
 CONFIGURE_ARGS+=	--enable-librsvg
-PLIST_SUBST+=		GNOME=""
+PLIST.gnome=		yes
 .include "../../x11/gnome-control-center/buildlink3.mk"
 .include "../../wm/metacity/buildlink3.mk"
 .include "../../graphics/librsvg/buildlink3.mk"
-.else
-PLIST_SUBST+=		GNOME="@comment "
 .endif
 
 .if !empty(PKG_OPTIONS:Mkde)
-PLIST_SUBST+=		KDE=""
+PLIST.kde=		yes
 .include "../../x11/kdebase3/buildlink3.mk"
 .include "../../sysutils/dbus-qt3/buildlink3.mk"
-.else
-PLIST_SUBST+=		KDE="@comment "
 .endif
 
 # While we don't use threads, we link against libpthread because
@@ -57,14 +96,17 @@ PLIST_SUBST+=		KDE="@comment "
 .include "../../mk/pthread.buildlink3.mk"
 
 .include "../../devel/GConf/schemas.mk"
+.include "../../graphics/png/buildlink3.mk"
 .include "../../sysutils/dbus/buildlink3.mk"
 .include "../../sysutils/dbus-glib/buildlink3.mk"
-.include "../../graphics/png/buildlink3.mk"
+.include "../../textproc/libxslt/buildlink3.mk"
 .include "../../x11/libXcomposite/buildlink3.mk"
 .include "../../x11/libXfixes/buildlink3.mk"
 .include "../../x11/libXdamage/buildlink3.mk"
 .include "../../x11/libXrandr/buildlink3.mk"
 .include "../../x11/libXinerama/buildlink3.mk"
+.include "../../x11/libXxf86vm/buildlink3.mk"
+.include "../../x11/libdrm/buildlink3.mk"
 .include "../../x11/libICE/buildlink3.mk"
 .include "../../x11/libSM/buildlink3.mk"
 .include "../../x11/startup-notification/buildlink3.mk"

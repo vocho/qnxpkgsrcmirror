@@ -1,12 +1,11 @@
-# $NetBSD: Makefile,v 1.28 2008/03/06 14:53:51 wiz Exp $
+# $NetBSD: Makefile,v 1.33 2008/05/19 16:29:33 darcy Exp $
 
-DISTNAME=	librsvg-2.18.2
-PKGREVISION=	4
+DISTNAME=	librsvg-2.22.2
 CATEGORIES=	graphics gnome
-MASTER_SITES=	${MASTER_SITE_GNOME:=sources/librsvg/2.18/}
+MASTER_SITES=	${MASTER_SITE_GNOME:=sources/librsvg/2.22/}
 EXTRACT_SUFX=	.tar.bz2
 
-MAINTAINER=	jmmv@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://librsvg.sourceforge.net/
 COMMENT=	SVG library for GNOME2
 
@@ -18,6 +17,7 @@ MAKE_JOBS_SAFE=	NO
 USE_DIRS+=		xdg-1.1
 USE_LIBTOOL=		yes
 USE_TOOLS+=		pkg-config
+USE_LANGUAGES+=	c c++ fortran
 GNU_CONFIGURE=		yes
 
 PKGCONFIG_OVERRIDE=	librsvg-2.0.pc.in
@@ -31,11 +31,11 @@ CONFIGURE_ARGS+=	--disable-mozilla-plugin
 GTK2_LOADERS=		yes
 
 BUILDLINK_API_DEPENDS.cairo+=	cairo>=1.2.0
-BUILDLINK_API_DEPENDS.glib2+=	glib2>=2.11.0
+BUILDLINK_API_DEPENDS.glib2+=	glib2>=2.12.0
 BUILDLINK_API_DEPENDS.gtk2+=	gtk2+>=2.6.0
 
 post-install:
-	-rmdir -p ${PREFIX}/lib/mozilla/plugins
+	rmdir -p ${PREFIX}/lib/mozilla/plugins || ${TRUE}
 
 .include "../../devel/glib2/buildlink3.mk"
 .include "../../devel/libgsf/buildlink3.mk"
@@ -43,10 +43,7 @@ post-install:
 .include "../../graphics/cairo/buildlink3.mk"
 .include "../../graphics/freetype2/buildlink3.mk"
 .include "../../fonts/fontconfig/buildlink3.mk"
-.include "../../print/libgnomeprint/buildlink3.mk"
-.include "../../print/libgnomeprintui/buildlink3.mk"
 BUILDLINK_API_DEPENDS.libcroco+=	libcroco>=0.6.1
-.include "../../sysutils/gnome-vfs/buildlink3.mk"
 .include "../../textproc/libcroco/buildlink3.mk"
 .include "../../textproc/libxml2/buildlink3.mk"
 .include "../../x11/gtk2/modules.mk"

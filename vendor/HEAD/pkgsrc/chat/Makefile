@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.137 2008/03/10 08:59:10 martti Exp $
+# $NetBSD: Makefile,v 1.140 2008/06/24 13:36:30 smb Exp $
 #
 
 COMMENT=	Communication programs
@@ -6,6 +6,7 @@ COMMENT=	Communication programs
 SUBDIR+=	aim
 SUBDIR+=	amsn
 SUBDIR+=	anope
+SUBDIR+=	atheme
 SUBDIR+=	bitchbot
 SUBDIR+=	bitchx
 SUBDIR+=	bitlbee
@@ -18,7 +19,6 @@ SUBDIR+=	cgiirc
 SUBDIR+=	climm
 SUBDIR+=	dccserver
 SUBDIR+=	dircproxy
-SUBDIR+=	dircproxy-devel
 SUBDIR+=	eggdrop
 SUBDIR+=	ejabberd
 SUBDIR+=	ekg
@@ -76,7 +76,9 @@ SUBDIR+=	p5-Net-Jabber
 SUBDIR+=	p5-POE-Component-IRC
 SUBDIR+=	p5-POE-Filter-IRCD
 SUBDIR+=	pidgin
+SUBDIR+=	pidgin-facebookchat
 SUBDIR+=	pidgin-icb
+SUBDIR+=	pidgin-latex
 SUBDIR+=	pidgin-otr
 SUBDIR+=	pidgin-sametime
 SUBDIR+=	pidgin-silc

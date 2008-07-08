@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.15 2006/08/17 13:05:08 taca Exp $
+# $NetBSD: Makefile,v 1.17 2008/06/22 15:44:06 taca Exp $
 
 DISTNAME=	${RUBY_DBI_DISTNAME}
 PKGNAME=	${RUBY_PKGPREFIX}-DBI-${RUBY_DBI_VERSION}
@@ -12,25 +12,19 @@ COMMENT=	DBI for ruby
 USE_RUBY_SETUP=		yes
 CONFIGURE_ARGS+=	--with=dbi
 
-DOCS=		ChangeLog LICENSE
-DOCS_DBI=	DBD_SPEC DBI_SPEC \
-		html/ChangeLog.html html/DBD_SPEC.html html/DBI_SPEC.html \
-		html/index.html html/rubyStyle.css
+DOCS=		ChangeLog LICENSE README
 EXAMPLES=	examples/persistence.rb
 
-OWN_DIRS+=	${RUBY_SITELIBDIR}/DBD ${RUBY_SITEARCHLIBDIR}/DBD
+OWN_DIRS+=	${RUBY_VENDORLIB}/DBD ${RUBY_VENDORARCHLIB}/DBD
+
+INSTALLATION_DIRS=	${RUBY_DOC}/dbi ${RUBY_EG}/dbi
 
 post-install:
-	${INSTALL_DATA_DIR} ${RUBY_DOCDIR}/dbi/html
-.for file in ${DOCS}
-	${INSTALL_DATA} ${WRKSRC}/${file} ${RUBY_DOCDIR}/dbi/${file}
+.for f in ${DOCS}
+	${INSTALL_DATA} ${WRKSRC}/${f} ${DESTDIR}${PREFIX}/${RUBY_DOC}/dbi/${f}
 .endfor
-.for file in ${DOCS_DBI}
-	${INSTALL_DATA} ${WRKSRC}/doc/${file} ${RUBY_DOCDIR}/dbi/${file}
-.endfor
-	${INSTALL_DATA_DIR} ${RUBY_EXAMPLESDIR}/dbi
-.for file in ${EXAMPLES}
-	${INSTALL_DATA} ${WRKSRC}/${file} ${RUBY_EXAMPLESDIR}/dbi
+.for f in ${EXAMPLES}
+	${INSTALL_DATA} ${WRKSRC}/${f} ${DESTDIR}${PREFIX}/${RUBY_EG}/dbi
 .endfor
 
 .include "Makefile.common"

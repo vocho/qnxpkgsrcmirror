@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.22 2006/06/07 12:52:24 joerg Exp $
+# $NetBSD: Makefile,v 1.24 2008/06/12 02:14:42 joerg Exp $
 #
 
 DISTNAME=	SOAPpy-0.11.4
@@ -11,10 +11,10 @@ MAINTAINER=	recht@NetBSD.org
 HOMEPAGE=	http://pywebsvcs.sourceforge.net/
 COMMENT=	SOAP implementation
 
+PKG_DESTDIR_SUPPORT=	user-destdir
+
 PYDISTUTILSPKG=	YES
 PY_PATCHPLIST=	YES
-
-PYTHON_VERSIONS_ACCEPTED=	24 23 22
 
 .include "../../lang/python/extension.mk"
 .include "../../math/py-fpconst/buildlink3.mk"

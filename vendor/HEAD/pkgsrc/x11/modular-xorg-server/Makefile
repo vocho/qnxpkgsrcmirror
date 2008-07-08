@@ -1,16 +1,17 @@
-# $NetBSD: Makefile,v 1.26 2008/02/26 18:24:27 jlam Exp $
+# $NetBSD: Makefile,v 1.30 2008/06/20 13:34:40 joerg Exp $
 
 DISTNAME=	xorg-server-1.3.0.0
 PKGNAME=	modular-${DISTNAME}
-PKGREVISION=	6
+PKGREVISION=	9
 CATEGORIES=	x11
-MASTER_SITES=	http://xorg.freedesktop.org/releases/individual/xserver/
+MASTER_SITES=	${MASTER_SITE_XORG:=xserver/}
 EXTRACT_SUFX=	.tar.bz2
 
 SPECIAL_PERMS+=	bin/Xorg ${SETUID_ROOT_PERMS}
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 MAINTAINER=	joerg@NetBSD.org
+HOMEPAGE=	http://xorg.freedesktop.org/
 COMMENT=	Xorg X11 Server from modular X.org X11
 
 USE_LIBTOOL=		YES
@@ -20,6 +21,10 @@ USE_TOOLS+=		pkg-config
 USE_TOOLS+=		gmake
 CONFIGURE_ARGS+=	--localstatedir=${VARBASE}
 CONFIGURE_ARGS+=	--enable-dri
+# doesn't compile against printproto-1.0.4; enable again if newer version
+# does support it.
+CONFIGURE_ARGS+=	--disable-xprint
+PLIST_VARS+=		xprint
 
 CONFIGURE_ENV+=	APP_MAN_SUFFIX=1 FILE_MAN_SUFFIX=5
 
