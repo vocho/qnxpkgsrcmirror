@@ -1,4 +1,4 @@
-# $NetBSD: bsd.prefs.mk,v 1.280 2008/02/21 04:23:58 tnn Exp $
+# $NetBSD: bsd.prefs.mk,v 1.286 2008/06/22 16:25:32 tnn Exp $
 #
 # This file includes the mk.conf file, which contains the user settings.
 #
@@ -367,6 +367,27 @@ PKG_FAIL_REASON+=	"missing mk/platform/${OPSYS}.mk"
 
 PKGDIRMODE?=		755
 
+# A meta-package is a package that does not have any files and whose
+# only purpose is to depend on other packages, giving that collection
+# a simple name.
+#
+# This variable must be set before including bsd.prefs.mk directly or
+# indirectly.
+#
+# Keywords: meta meta-package META_PACKAGE
+#
+.if defined(META_PACKAGE)
+PKG_DESTDIR_SUPPORT=	user-destdir
+NO_CONFIGURE=		yes
+NO_BUILD=		yes
+DISTFILES=		# none
+PLIST_SRC=		# none
+do-patch:
+	@${DO_NADA}
+do-install:
+	@${DO_NADA}
+.endif
+
 # PKG_DESTDIR_SUPPORT can only be one of "destdir" or "user-destdir".
 USE_DESTDIR?=		no
 PKG_DESTDIR_SUPPORT?=	# empty
@@ -475,11 +496,6 @@ IPV6_READY=		YES
 IPV6_READY=		NO
 .endif
 
-# XXX
-# XXX Retain the following until USE_INET6 has been purged from pkgsrc-wip.
-# XXX
-USE_INET6?=		${IPV6_READY}
-
 LOCALBASE?=		/usr/pkg
 X11_TYPE?=		native
 .if !empty(X11_TYPE:Mnative)
@@ -507,11 +523,9 @@ USE_XPKGWEDGE?=	yes
 .endif
 
 .if defined(FIX_SYSTEM_HEADERS) && ${FIX_SYSTEM_HEADERS} == "yes" && \
-    empty(PKGPATH:Mpkgtools/*) && empty(PKGPATH:M*/nbsed) && \
-    empty(PKGPATH:M*/nawk) && empty(PKGPATH:M*/bmake) && \
-    empty(PKGPATH:M*/install-sh) && \
-    exists(../../pkgtools/posix_headers/buildlink3.mk)
-.  include "../../pkgtools/posix_headers/buildlink3.mk"
+    !defined(BOOTSTRAP_PKG) && \
+    exists(../../pkgtools/compat_headers/buildlink3.mk)
+.  include "../../pkgtools/compat_headers/buildlink3.mk"
 .endif
 
 .if ${X11_TYPE} == "modular"

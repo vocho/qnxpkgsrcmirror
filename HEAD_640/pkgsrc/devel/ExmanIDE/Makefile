@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.9 2006/04/22 09:22:07 rillig Exp $
+# $NetBSD: Makefile,v 1.12 2008/06/12 02:14:21 joerg Exp $
 
 DISTNAME=	ExmanIDE-0.9.4
 PKGREVISION=	4
@@ -9,13 +9,15 @@ MAINTAINER=	minskim@NetBSD.org
 HOMEPAGE=	http://exmanide.kldp.net/
 COMMENT=	Integrated development environment for Python
 
+PKG_DESTDIR_SUPPORT=	user-destdir
+
 DEPENDS+=	${PYPKGPREFIX}-wxWidgets>=2.6:../../x11/py-wxWidgets
+
+USE_TOOLS+=	pax
 
 WRKSRC=		${WRKDIR}/${PKGBASE}
 NO_CONFIGURE=	yes
 NO_BUILD=	yes
-
-PYTHON_VERSIONS_ACCEPTED?=	24 23
 
 SUBST_CLASSES+=		mod
 SUBST_MESSAGE.mod=	Fixing deprecated module names.
@@ -32,16 +34,15 @@ SUBST_SED.py=		-e 's,python \$$0\.pyw,${PYTHONBIN} ${PREFIX}/share/${PKGBASE}/Ex
 
 PYCOMPILEALL=	${BUILDLINK_PREFIX.${PYPACKAGE}}/${PYLIB}/compileall.py
 
-INSTALLATION_DIRS=	 bin
+INSTALLATION_DIRS=	 bin share/ExmanIDE
 
 do-install:
-	${INSTALL_SCRIPT} ${WRKSRC}/ExmanIDE ${PREFIX}/bin
-	${INSTALL_DATA_DIR} ${PREFIX}/share/${PKGBASE}
-	cd ${WRKSRC} && ${PAX} -rwppm '-s|.*/CVS.*$$||'	\
+	${INSTALL_SCRIPT} ${WRKSRC}/ExmanIDE ${DESTDIR}${PREFIX}/bin
+	cd ${WRKSRC} && pax -rwppm '-s|.*/CVS.*$$||'	\
 		'-s|.*/ExmanIDE$$||' '-s|.*/.xvpics.*$$||' \
-		. ${PREFIX}/share/${PKGBASE}
-	${PYTHONBIN} ${PYCOMPILEALL} ${PREFIX}/share/${PKGBASE}
-	${PYTHONBIN} -O ${PYCOMPILEALL} ${PREFIX}/share/${PKGBASE}
+		. ${DESTDIR}${PREFIX}/share/ExmanIDE
+	${PYTHONBIN} ${PYCOMPILEALL} ${DESTDIR}${PREFIX}/share/ExmanIDE
+	${PYTHONBIN} -O ${PYCOMPILEALL} ${DESTDIR}${PREFIX}/share/ExmanIDE
 
 .include "../../lang/python/application.mk"
 .include "../../mk/bsd.pkg.mk"

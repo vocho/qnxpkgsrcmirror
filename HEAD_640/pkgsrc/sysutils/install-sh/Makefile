@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.3 2007/07/12 18:32:50 jlam Exp $
+# $NetBSD: Makefile,v 1.5 2008/06/19 18:36:51 joerg Exp $
 
 DISTNAME=	install-sh-20070712
 CATEGORIES=	sysutils
@@ -8,6 +8,8 @@ DISTFILES=	# empty
 MAINTAINER=	pkgsrc-users@NetBSD.org
 COMMENT=	install script compatible with the BSD install program
 
+PKG_DESTDIR_SUPPORT=	user-destdir
+BOOTSTRAP_PKG=	yes
 USE_TOOLS+=	sed
 NO_CHECKSUM=	yes
 NO_MTREE=	yes
@@ -28,7 +30,7 @@ do-configure:
 	${SED}	-e "s|@DEFAULT_INSTALL_MODE@|"${PKGDIRMODE}"|g"		\
 		${WRKSRC}/install-sh.in > ${WRKSRC}/install-sh
 do-install:
-	${INSTALL_SCRIPT_DIR} ${PREFIX}/bin
-	${INSTALL_SCRIPT} ${WRKSRC}/install-sh ${PREFIX}/bin
+	${INSTALL_SCRIPT_DIR} ${DESTDIR}${PREFIX}/bin
+	${INSTALL_SCRIPT} ${WRKSRC}/install-sh ${DESTDIR}${PREFIX}/bin
 
 .include "../../mk/bsd.pkg.mk"

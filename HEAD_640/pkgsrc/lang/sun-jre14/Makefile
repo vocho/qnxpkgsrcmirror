@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.47 2008/03/05 21:50:22 tnn Exp $
+# $NetBSD: Makefile,v 1.49 2008/05/26 02:13:21 joerg Exp $
 
 # Note: Regen distinfo with PKG_DEFAULT_OPTIONS+=sun-jre-jce
 
@@ -9,6 +9,8 @@ MASTER_SITES=	# empty
 COMMENT=	Sun's Java(tm) 2 Runtime Environment 1.4.2
 
 SHORT=		JRE
+
+USE_TOOLS+=	pax
 
 WRKSRC=		${WRKDIR}/j2re1.4.2_17
 JAVA_WRAPPERS=	java keytool orbd policytool rmid rmiregistry \
@@ -42,9 +44,10 @@ PKG_SUPPORTED_OPTIONS=	sun-jre-jce
 
 .include "../../mk/bsd.options.mk"
 
+PLIST_VARS+=	jce
 .if !empty(PKG_OPTIONS:Msun-jre-jce)
 DISTFILES=	${DISTNAME}${EXTRACT_SUFX} jce_policy-1_4_2.zip
-PLIST_SUBST+=	SUN_JRE14_USE_JCE=""
+PLIST.jce=	yes
 
 END_MESSAGE=								\
 	""								\
@@ -53,8 +56,6 @@ END_MESSAGE=								\
 	""								\
 	"Under 'Other Downloads' / 'Java Cryptography Extension'"	\
 	"click 'Download' and choose the .zip file."
-.else
-PLIST_SUBST+=	SUN_JRE14_USE_JCE="@comment "
 .endif
 
 # Some of the binaries require libX11, so ensure that requirement is
@@ -96,7 +97,7 @@ do-configure:
 
 pre-install:
 .if !empty(PKG_OPTIONS:Msun-jre-jce)
-	cd ${WRKDIR}/jce ; ${PAX} -rw -pe -v . ${WRKSRC}/lib/security
+	cd ${WRKDIR}/jce ; pax -rw -pe -v . ${WRKSRC}/lib/security
 .endif
 
 .include "../../mk/bsd.pkg.mk"

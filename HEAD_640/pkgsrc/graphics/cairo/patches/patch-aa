@@ -1,22 +1,33 @@
-$NetBSD: patch-aa,v 1.10 2007/06/08 07:20:53 wiz Exp $
+$NetBSD: patch-aa,v 1.12 2008/05/14 15:26:14 obache Exp $
 
---- src/Makefile.in.orig	2007-05-01 20:25:14.000000000 +0000
+--- src/Makefile.in.orig	2008-04-11 21:33:41.000000000 +0000
 +++ src/Makefile.in
-@@ -244,7 +244,7 @@ CAIRO_CAN_TEST_PDF_SURFACE_FALSE = @CAIR
- CAIRO_CAN_TEST_PDF_SURFACE_TRUE = @CAIRO_CAN_TEST_PDF_SURFACE_TRUE@
- CAIRO_CAN_TEST_SVG_SURFACE_FALSE = @CAIRO_CAN_TEST_SVG_SURFACE_FALSE@
- CAIRO_CAN_TEST_SVG_SURFACE_TRUE = @CAIRO_CAN_TEST_SVG_SURFACE_TRUE@
+@@ -81,6 +81,7 @@ host_triplet = @host@
+ @CAIRO_HAS_FT_FONT_TRUE@am__append_45 = $(ft_headers)
+ @CAIRO_HAS_FT_FONT_TRUE@am__append_46 = $(ft_sources)
+ @CAIRO_HAS_FT_FONT_TRUE@am__append_47 = cairo-ft.pc
++@CAIRO_HAS_QUARTZ_FONT_TRUE@am__append_48 = cairo-quartz-font.pc
+ subdir = src
+ DIST_COMMON = $(am__cairoinclude_HEADERS_DIST) $(srcdir)/Makefile.am \
+ 	$(srcdir)/Makefile.in $(srcdir)/cairo.pc.in
+@@ -288,9 +289,9 @@ AUTOHEADER = @AUTOHEADER@
+ AUTOMAKE = @AUTOMAKE@
+ AWK = @AWK@
+ CAIROPERF_LIBS = @CAIROPERF_LIBS@
 -CAIRO_CFLAGS = @CAIRO_CFLAGS@
 +CAIRO_CFLAGS = @CAIRO_CFLAGS@ ${PTHREAD_CFLAGS}
- CAIRO_HAS_ATSUI_FONT_FALSE = @CAIRO_HAS_ATSUI_FONT_FALSE@
- CAIRO_HAS_ATSUI_FONT_TRUE = @CAIRO_HAS_ATSUI_FONT_TRUE@
- CAIRO_HAS_BEOS_SURFACE_FALSE = @CAIRO_HAS_BEOS_SURFACE_FALSE@
-@@ -282,7 +282,7 @@ CAIRO_HAS_XLIB_SURFACE_TRUE = @CAIRO_HAS
- CAIRO_HAS_XLIB_XRENDER_SURFACE_FALSE = @CAIRO_HAS_XLIB_XRENDER_SURFACE_FALSE@
- CAIRO_HAS_XLIB_XRENDER_SURFACE_TRUE = @CAIRO_HAS_XLIB_XRENDER_SURFACE_TRUE@
  CAIRO_LDADD = @CAIRO_LDADD@
 -CAIRO_LIBS = @CAIRO_LIBS@
 +CAIRO_LIBS = @CAIRO_LIBS@ ${PTHREAD_LDFLAGS} ${PTHREAD_LIBS}
  CAIRO_NONPKGCONFIG_CFLAGS = @CAIRO_NONPKGCONFIG_CFLAGS@
  CAIRO_NONPKGCONFIG_LIBS = @CAIRO_NONPKGCONFIG_LIBS@
  CAIRO_REQUIRES = @CAIRO_REQUIRES@
+@@ -456,7 +457,7 @@ backend_pkgconfigs = $(am__append_4) $(a
+ 	$(am__append_21) $(am__append_24) $(am__append_26) \
+ 	$(am__append_31) $(am__append_33) $(am__append_36) \
+ 	$(am__append_38) $(am__append_41) $(am__append_44) \
+-	$(am__append_47)
++	$(am__append_47) $(am__append_48)
+ cairo_base_headers = cairo.h
+ cairo_base_sources = \
+ 	cairo.c					\

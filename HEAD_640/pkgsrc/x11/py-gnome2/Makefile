@@ -1,11 +1,10 @@
-# $NetBSD: Makefile,v 1.52 2008/03/06 14:53:57 wiz Exp $
+# $NetBSD: Makefile,v 1.55 2008/06/23 17:21:21 drochner Exp $
 #
 
-DISTNAME=	gnome-python-2.20.1
+DISTNAME=	gnome-python-2.22.1
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME:S/gnome-python/gnome2/}
-PKGREVISION=	1
 CATEGORIES=	x11 python
-MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gnome-python/2.20/}
+MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gnome-python/2.22/}
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	recht@NetBSD.org
@@ -21,7 +20,7 @@ GNU_CONFIGURE=	YES
 CONFIGURE_ENV+=	PYTHON=${PYTHONBIN:Q}
 USE_TOOLS+=		pkg-config gmake
 
-PYTHON_VERSIONS_ACCEPTED=	24
+PYTHON_VERSIONS_ACCEPTED=	25 24
 
 .include "../../lang/python/extension.mk"
 .include "../../lang/python/application.mk"

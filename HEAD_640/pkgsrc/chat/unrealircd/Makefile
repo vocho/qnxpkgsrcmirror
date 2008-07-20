@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.22 2008/03/03 02:19:52 jlam Exp $
+# $NetBSD: Makefile,v 1.24 2008/06/13 23:15:33 adrianp Exp $
 
 DISTNAME=	Unreal3.2.7
 PKGNAME=	unrealircd-3.2.7
@@ -38,7 +38,6 @@ CONFIGURE_ENV+=		CARESLIBS='-lcares'
 CONFIGURE_ARGS+=	--with-dpath=${UIRCD_HOME:Q}
 CONFIGURE_ARGS+=	--with-spath=${PREFIX:Q}/sbin/ircd
 CONFIGURE_ARGS+=	--with-permissions=0660
-CONFIGURE_ARGS+=	--enable-dynamic-linking
 
 CONFIGURE_ARGS+=	--with-hostname=${UIRCD_HOST:Q}
 CONFIGURE_ARGS+=	--with-listen=${UIRCD_LISTEN:Q}
@@ -81,8 +80,8 @@ CONF_FILES_PERMS=	${IRCD_EG:Q}/example.conf \
 PKG_USERS_VARS+=	UIRCD_USER
 PKG_GROUPS_VARS+=	UIRCD_GROUP
 
-PKG_GROUPS=	${UIRCD_GROUP:Q}
-PKG_USERS=	${UIRCD_USER:Q}:${UIRCD_GROUP:Q}
+PKG_GROUPS=		${UIRCD_GROUP:Q}
+PKG_USERS=		${UIRCD_USER:Q}:${UIRCD_GROUP:Q}
 
 PKG_GECOS.${UIRCD_USER}=	UnrealIRCD user
 PKG_HOME.${UIRCD_USER}=		${UIRCD_HOME}
@@ -102,9 +101,20 @@ SUBST_SED.homedir=	-e "s|src/modules|${IRCD_SHARE}/modules|g"
 SUBST_SED.homedir+=	-e "s|include \"|include \"${IRCD_SHARE}/|g"
 SUBST_MESSAGE.homedir=	Fixing home directory of the IRC server.
 
+.if !empty(PKG_OPTIONS:Munrealircd-chroot)
+SUBST_CLASSES+=		chroot
+SUBST_STAGE.chroot=	pre-install
+SUBST_FILES.chroot=	${WRKDIR}/unrealircd
+SUBST_SED.chroot=	-e "s|unrealircd_user=|\#unrealircd_user=|g"
+SUBST_SED.chroot+=	-e "s|unrealircd_group=|\#unrealircd_group=|g"
+SUBST_MESSAGE.chroot=	Fixing chroot installation.
+.endif
+
 OWN_DIRS_PERMS+=	${UIRCD_HOME:Q} ${UIRCD_USER:Q} ${UIRCD_GROUP:Q} 0770
 OWN_DIRS_PERMS+=	${UIRCD_HOME:Q}/tmp ${UIRCD_USER:Q} \
 			${UIRCD_GROUP:Q} 0770
+INSTALLATION_DIRS=	sbin ${IRCD_DOCS} ${IRCD_EG} ${IRCD_SHARE}/aliases \
+			${IRCD_SHARE}/modules ${IRCD_SHARE}/networks
 
 .if ${OPSYS} == "Darwin"
 INSTALL_UNSTRIPPED=YES
@@ -121,14 +131,7 @@ post-build:
 .endif
 
 do-install:
-	${INSTALL_DATA_DIR} ${DESTDIR}${IRCD_SHARE}
-	${INSTALL_DATA_DIR} ${DESTDIR}${IRCD_SHARE:Q}/networks
-	${INSTALL_DATA_DIR} ${DESTDIR}${IRCD_SHARE:Q}/aliases
-	${INSTALL_DATA_DIR} ${DESTDIR}${IRCD_SHARE:Q}/modules
-	${INSTALL_DATA_DIR} ${DESTDIR}${IRCD_DOCS:Q}
-	${INSTALL_DATA_DIR} ${DESTDIR}${IRCD_EG:Q}
-
-	${INSTALL_PROGRAM} ${WRKSRC:Q}/src/ircd ${DESTDIR}${PREFIX:Q}/sbin
+	${INSTALL_PROGRAM} ${WRKSRC:Q}/src/ircd ${DESTDIR}${PREFIX}/sbin
 	${INSTALL_DATA} ${WRKSRC:Q}/networks/*.network \
 		${DESTDIR}${IRCD_SHARE:Q}/networks
 	${INSTALL_DATA} ${WRKSRC:Q}/networks/networks.ndx \

@@ -31,6 +31,7 @@ TOOLS_PLATFORM.fgrep?=		/usr/bin/fgrep
 TOOLS_PLATFORM.file?=		/usr/bin/file
 TOOLS_PLATFORM.find?=		/usr/bin/find
 TOOLS_PLATFORM.flex?=		${QNX_HOST}/usr/bin/flex
+TOOLS_PLATFORM.ftp?=		/usr/bin/ftp
 TOOLS_PLATFORM.gawk?=		/usr/bin/gawk
 TOOLS_PLATFORM.grep?=		/usr/bin/grep
 .if exists(/usr/bin/groff)

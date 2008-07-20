@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.3 2007/09/02 11:07:40 joerg Exp $
+# $NetBSD: Makefile,v 1.7 2008/06/17 14:06:42 gdt Exp $
 
-VERSION=	3.1.0
-PKGREVISION=	1
+VERSION=	3.2.0
 DISTNAME=	pidgin-otr-${VERSION}
 CATEGORIES=	chat security
 MASTER_SITES=	http://www.cypherpunks.ca/otr/
@@ -10,8 +9,14 @@ MAINTAINER=	gdt@NetBSD.org
 HOMEPAGE=	http://www.cypherpunks.ca/otr/
 COMMENT=	Plugin for pidgin to add OTR (Off-The-Record) encryption
 
+PKG_DESTDIR_SUPPORT=	user-destdir
+
 GNU_CONFIGURE=	yes
+INSTALLATION_DIRS=	share/doc/pidgin-otr
 USE_TOOLS+=	pkg-config perl intltool msgfmt
+
+post-install:
+	${INSTALL_DATA} ${WRKSRC}/README ${DESTDIR}${PREFIX}/share/doc/pidgin-otr/
 
 .include "../../chat/pidgin/buildlink3.mk"
 .include "../../chat/libotr/buildlink3.mk"

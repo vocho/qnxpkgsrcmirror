@@ -1,4 +1,4 @@
-# $NetBSD: flavor-vars.mk,v 1.7 2008/03/10 20:05:59 joerg Exp $
+# $NetBSD: flavor-vars.mk,v 1.9 2008/04/07 13:18:25 joerg Exp $
 #
 # This Makefile fragment is included indirectly by bsd.prefs.mk and
 # defines some variables which must be defined earlier than where
@@ -35,32 +35,22 @@ PKG_INFO_CMD?=		${PKG_TOOLS_BIN}/pkg_info
 PKG_VIEW_CMD?=		${PKG_TOOLS_BIN}/pkg_view
 LINKFARM_CMD?=		${PKG_TOOLS_BIN}/linkfarm
 
+# Latest versions of tools required for correct pkgsrc operation.
+PKGTOOLS_REQD=		20070813
+
 .if !defined(PKGTOOLS_VERSION)
 PKGTOOLS_VERSION!=	${PKG_INFO_CMD} -V 2>/dev/null || echo 20010302
 MAKEFLAGS+=		PKGTOOLS_VERSION=${PKGTOOLS_VERSION}
 .endif
 
-# audit-packages logic for its location depends on a variety of factors
-# including OS, pkg_install version and NetBSD version.  The following
-# should pick the correct version to run.
-#
-.if defined(OPSYS) && ${OPSYS} != "NetBSD"
+# Check that we are using up-to-date pkg_* tools with this file.
+.if !defined(NO_PKGTOOLS_REQD_CHECK) && ${PKGTOOLS_VERSION} < ${PKGTOOLS_REQD}
+BOOTSTRAP_DEPENDS+=	pkg_install>=${PKGTOOLS_REQD}:../../pkgtools/pkg_install
+_PKG_INSTALL_DEPENDS=	yes
+.endif
+
 AUDIT_PACKAGES?=	${PKG_TOOLS_BIN}/audit-packages
 DOWNLOAD_VULN_LIST?=	${PKG_TOOLS_BIN}/download-vulnerability-list
-.else
-.	if exists(${LOCALBASE}/sbin/audit-packages)
-AUDIT_PACKAGES?=	${LOCALBASE}/sbin/audit-packages
-DOWNLOAD_VULN_LIST?=	${LOCALBASE}/sbin/download-vulnerability-list
-.	else
-.		if exists(/usr/sbin/audit-packages)
-AUDIT_PACKAGES?=	/usr/sbin/audit-packages
-DOWNLOAD_VULN_LIST?=	/usr/sbin/download-vulnerability-list
-.		else
-AUDIT_PACKAGES?=	audit-packages
-DOWNLOAD_VULN_LIST?=	download-vulnerability-list
-.		endif
-.	endif
-.endif
 
 # The binary pkg_install tools all need to consistently to refer to the
 # correct package database directory.

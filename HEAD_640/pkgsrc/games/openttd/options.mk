@@ -1,4 +1,4 @@
-# $NetBSD: options.mk,v 1.2 2008/03/04 12:02:11 tnn Exp $
+# $NetBSD: options.mk,v 1.4 2008/04/12 22:43:01 jlam Exp $
 
 .include "../../mk/bsd.prefs.mk"
 
@@ -8,8 +8,10 @@ PKG_SUGGESTED_OPTIONS=	# empty
 
 .include "../../mk/bsd.options.mk"
 
+PLIST_VARS+=		ttd-data
+
 .if !empty(PKG_OPTIONS:Mttd-data)
-PLIST_SUBST+=		TTD_DATA=""
+PLIST.ttd-data=		yes
 LICENSE=		ttd-pseudolicense
 RESTRICTED=		No redistribution allowed
 NO_BIN_ON_CDROM=	${RESTRICTED}
@@ -24,9 +26,17 @@ GMFILES:=	${GMFILES:C/^/gm_tt/g:C/$/.gm/g}
 DISTFILES=	${DISTNAME}${EXTRACT_SUFX} \
 		  ${DATAFILES:C/^/ttd\//g} ${GMFILES:C/^/ttd\//g}
 
-post-extract:
+DATA_DIR=	${DESTDIR}${PREFIX}/share/openttd
+
+post-extract: post-extract-ttd-data
+post-extract-ttd-data: .PHONY
 	${RUN} for f in ${DATAFILES} ${GMFILES}; do \
 	  cp ${DISTDIR}/ttd/$$f ${WRKDIR}; done
-.else
-PLIST_SUBST+=	TTD_DATA="@comment "
+
+post-install: post-install-ttd-data
+post-install-ttd-data: .PHONY
+	${RUN} for f in ${DATAFILES}; do \
+	  ${INSTALL_DATA} ${WRKDIR}/$$f ${DATA_DIR}/data; done
+	${RUN} for f in ${GMFILES}; do \
+	  ${INSTALL_DATA} ${WRKDIR}/$$f ${DATA_DIR}/gm; done
 .endif

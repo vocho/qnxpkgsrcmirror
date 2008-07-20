@@ -66,7 +66,7 @@ struct option {
  */
 
 
-static const char *cpio_opts = "aBcdf:H:hijLlmopR:rtuvW:yz";
+static const char *cpio_opts = "AaBC:F:O:cdE:f:H:hijLlmopR:rtuvW:yZz";
 
 /*
  * On systems that lack getopt_long, long options can be specified
@@ -82,8 +82,10 @@ static const char *cpio_opts = "aBcdf:H:hijLlmopR:rtuvW:yz";
  * sorted, as the -W logic below relies on it.
  */
 static const struct option cpio_longopts[] = {
+	{ "file",		required_argument, NULL, 'F' },
 	{ "format",             required_argument, NULL, 'H' },
 	{ "help",		no_argument,	   NULL, 'h' },
+	{ "insecure",		no_argument,	   NULL, OPTION_INSECURE },
 	{ "owner",		required_argument, NULL, 'R' },
 	{ "quiet",		no_argument,	   NULL, OPTION_QUIET },
 	{ "verbose",            no_argument,       NULL, 'v' },
@@ -110,7 +112,7 @@ cpio_getopt(struct cpio *cpio)
 	opt = getopt_long(cpio->argc, cpio->argv, cpio_opts,
 	    cpio_longopts, &option_index);
 #else
-	opt = getopt(cpio->argc, cpio->argv, optstring);
+	opt = getopt(cpio->argc, cpio->argv, cpio_opts);
 #endif
 
 	/* Support long options through -W longopt=value */

@@ -1,6 +1,6 @@
 #! /bin/sh
 
-# $NetBSD: bootstrap,v 1.121 2008/03/06 04:45:58 jlam Exp $
+# $NetBSD: bootstrap,v 1.132 2008/06/19 18:36:51 joerg Exp $
 #
 #
 # Copyright (c) 2001-2002 Alistair G. Crooks.  All rights reserved.
@@ -70,6 +70,7 @@ usage="Usage: $0 "'
     [ --unprivileged | --ignore-user-check ]
     [ --preserve-path ]
     [ --compiler <compiler> ]
+    [ --abi [32|64] ]
     [ --mk-fragment <mk.conf> ]
     [ --binary-kit <tarball> ]
     [ --gzip-binary-kit <tarball> ]
@@ -163,6 +164,11 @@ EOF
 get_abi()
 {
 	abi_opsys=$@
+
+	if [ -n "$abi" ]; then
+		die "ERROR: $abi_opsys has special ABI handling, --abi not supported (yet)."
+	fi
+
 	case "$abi_opsys" in
 	IRIX)
 		if [ `uname -r` -ge 6 ]; then
@@ -369,6 +375,8 @@ while [ $# -gt 0 ]; do
 	--fetch-cmd)	fetch_cmd="$2"; shift ;;
 	--compiler=*)	compiler=`get_optarg "$1"` ;;
 	--compiler)	compiler="$2"; shift ;;
+	--abi=*)	abi=`get_optarg "$1"` ;;
+	--abi)		abi="$2"; shift ;;
 	--ignore-case-check) ignorecasecheck=yes ;;
 	--unprivileged | --ignore-user-check) unprivileged=yes ;;
 	--preserve-path) preserve_path=yes ;;
@@ -385,8 +393,10 @@ while [ $# -gt 0 ]; do
 			binary_gzip_kit=`get_optarg "$1"` ;;
 	--gzip-binary-kit)
 			binary_gzip_kit="$2"; shift ;;
-	--binary-macpkg)
+	--binary-macpkg=*)
 			binary_macpkg=`get_optarg "$1"` ;;
+	--binary-macpkg)
+			binary_macpkg="$2"; shift ;;
 	--full)		full=yes ;;
 	--quiet)	quiet=yes ;;
 	--help)		echo "$usage"; exit ;;
@@ -443,6 +453,17 @@ Darwin)
 	set_opsys=no
 	machine_arch=`uname -p`
 	CC="gcc -isystem /usr/include"; export CC
+	osrev=`uname -r`
+	macosx_version=`echo $osrev | awk -F . '{ print "10."$1-4; }'`
+	case "$macosx_version" in
+	10.[0-4])
+		packagemaker=/Developer/Tools/packagemaker
+		;;
+	*)
+		packagemaker=/Developer/usr/bin/packagemaker
+		;;
+	esac
+	unset osrev macosx_version
 	;;
 DragonFly)
 	root_group=wheel
@@ -547,14 +568,12 @@ SunOS)
 	if [ -d "/usr/xpg4/bin" ]; then
 		overpath="/usr/xpg4/bin:$overpath"
 	fi
-	if [ -x "/usr/xpg4/bin" ]; then
-		bmakexargs="$bmakexargs --with-defshell=/usr/xpg4/bin/sh"
-	fi
 	root_group=root
 	need_pax=yes
 	need_bsd_install=no
 	need_awk=yes
 	need_sed=yes
+	need_ksh=yes
 	set_opsys=no
 	whoamiprog=/usr/ucb/whoami
 	machine_arch=`uname -p | sed -e 's/i86pc/i386/'`
@@ -614,19 +633,21 @@ OSF1)
 	need_bsd_install=yes
 	need_awk=yes
 	need_sed=yes
+	need_ksh=yes
 	set_opsys=no
 	;;
 QNX)
 	root_group=root
 	need_pax=yes
 	need_bsd_install=yes
-#	need_awk=no
 	need_sed=yes
 	set_opsys=no
 	groupsprog="id -gn"
 	whoamiprog="id -un"
 	fetch_cmd="/usr/bin/ftp"
 	machine_arch=`uname -p | sed -e 's/x86/i386/'`
+# don't try to run nroff during bootstrap
+	BSTRAP_ENV="NROFF=true"
 	;;
 *)
 	echo "This platform ($opsys) is untried - good luck, and thanks for using pkgsrc"
@@ -655,6 +676,7 @@ yes)
 	need_awk=yes
 	need_sed=yes
 	need_ftp=yes
+	need_ksh=yes
 	;;
 esac
 
@@ -763,7 +785,7 @@ fi
 # make sure we're using a case-sensitive file system
 if [ $ignorecasecheck = "no" ]; then
 case "$opsys" in
-Darwin|Interix)
+Interix)
 	echo_msg "Testing file system case sensitivity"
 	for fs in "$prefix"; do
 		testdir="pkgsrc-REQUIRES-case-SENSITIVE-filesystem"
@@ -817,6 +839,10 @@ fi
 if [ "$compiler" != "" ]; then
 	echo "PKGSRC_COMPILER=	$compiler" >> ${TARGET_MKCONF}
 fi
+if [ -n "$SUNWSPROBASE" ]; then
+	echo "SUNWSPROBASE=		$SUNWSPROBASE" >> ${TARGET_MKCONF}
+fi
+echo "" >> ${TARGET_MKCONF}
 
 # enable unprivileged builds if not root
 if [ "$unprivileged" = "yes" ]; then
@@ -877,12 +903,33 @@ run_cmd "(cd ${pkgsrcdir}/pkgtools/bootstrap-mk-files/files && env CP=${cpprog} 
 ROOT_USER=${root_user} SED=${sedprog} SYSCONFDIR=${sysconfdir} \
 $shprog ./bootstrap.sh)"
 
-echo_msg "Bootstrapping bmake"
-copy_src $pkgsrcdir/devel/bmake/files bmake
-run_cmd "(cd $wrkdir/bmake && env CPPFLAGS='$CPPFLAGS -I../../libnbcompat' LDFLAGS='$LDFLAGS -L../../libnbcompat' LIBS='-lnbcompat' $bmakexenv $shprog ./boot-strap $configure_quiet_flags -q -o $opsys --prefix=$wrkdir --sysconfdir=$wrkdir --mksrc none --with-default-sys-path="$wrkdir/share/mk" $bmakexargs)"
-run_cmd "$install_sh -c -o $user -g $group -m 755 $wrkdir/bmake/$opsys/bmake $wrkdir/bin/bmake"
+bootstrap_bmake() {
+	echo_msg "Bootstrapping bmake"
+	copy_src $pkgsrcdir/devel/bmake/files bmake
+	run_cmd "(cd $wrkdir/bmake && env CPPFLAGS='$CPPFLAGS -I../../libnbcompat' LDFLAGS='$LDFLAGS -L../../libnbcompat' LIBS='-lnbcompat' $bmakexenv $shprog ./boot-strap $configure_quiet_flags -q -o $opsys --prefix=$wrkdir --sysconfdir=$wrkdir --mksrc none --with-default-sys-path="$wrkdir/share/mk" $bmakexargs)"
+	run_cmd "$install_sh -c -o $user -g $group -m 755 $wrkdir/bmake/$opsys/bmake $wrkdir/bin/bmake"
+}
+bootstrap_bmake
 
 bmake="$wrkdir/bin/bmake $make_quiet_flags"
+
+# bootstrap ksh if necessary
+case "$need_ksh" in
+yes)	echo_msg "Bootstrapping ksh"
+	copy_src $pkgsrcdir/shells/pdksh/files ksh
+	test -n "$CC" || CC=gcc	# default to gcc if no compiler is specified
+	run_cmd "(cd $wrkdir/ksh && env $BSTRAP_ENV $shprog ./configure $configure_quiet_flags --prefix=$prefix --mandir=$mandir --sysconfdir=$sysconfdir && $bmake)"
+	run_cmd "$install_sh -c -o $user -g $group -m 755 $wrkdir/ksh/ksh $wrkdir/bin/pdksh"
+	echo "TOOLS_PLATFORM.sh?=		$prefix/bin/pdksh" >> ${TARGET_MKCONF}
+	echo "TOOLS_PLATFORM.sh?=		$wrkdir/bin/pdksh" >> ${BOOTSTRAP_MKCONF}
+	echo "TOOLS_PLATFORM.ksh?=		$prefix/bin/pdksh" >> ${TARGET_MKCONF}
+	echo "TOOLS_PLATFORM.ksh?=		$wrkdir/bin/pdksh" >> ${BOOTSTRAP_MKCONF}
+# Now rebootstrap bmake for ksh
+	echo_msg "Rebootstrapping bmake for ksh"
+	bmakexargs="$bmakexargs --with-defshell=$wrkdir/bin/pdksh"
+	bootstrap_bmake
+	;;
+esac
 
 # bootstrap awk if necessary
 case "$need_awk" in
@@ -1012,17 +1059,24 @@ build_package() {
 	run_cmd "(cd $pkgsrcdir/$1 && $bmake -DPKG_PRESERVE MAKECONF=${BOOTSTRAP_MKCONF} install)"
 }
 
+#
+# Please make sure that the following packages and
+# only the following packages set BOOTSTRAP_PKG=yes.
+#
 echo_msg "Installing packages"
 build_package "pkgtools/bootstrap-mk-files"
+case "$need_bsd_install" in
+yes)	build_package "sysutils/install-sh";;
+esac
+case "$need_ksh" in
+yes)	build_package "shells/pdksh";;
+esac
 build_package "devel/bmake"
 case "$need_awk" in
 yes)	build_package "lang/nawk";;
 esac
 case "$need_sed" in
 yes)	build_package "textproc/nbsed" "LIBNBCOMPAT_STYLE=inplace";;
-esac
-case "$need_bsd_install" in
-yes)	build_package "sysutils/install-sh";;
 esac
 case "$need_extras" in
 yes)	build_package "pkgtools/bootstrap-extras";;

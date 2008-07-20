@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.32 2008/03/13 17:30:31 tnn Exp $
+# $NetBSD: Makefile,v 1.35 2008/06/27 13:19:27 obache Exp $
 #
 
-DISTNAME=	chicken-3.0.0
+DISTNAME=	chicken-3.2.0
 CATEGORIES=	lang
 MASTER_SITES=	http://chicken.wiki.br/releases/${PKGVERSION_NOREV}/
 
 MAINTAINER=	asau@inbox.ru #, airhead@users.sourceforge.net
-HOMEPAGE=	http://www.call-with-current-continuation.org/chicken.html
+HOMEPAGE=	http://www.call-with-current-continuation.org/
 COMMENT=	Scheme to C compiler, handling R5RS
 
 PKG_DESTDIR_SUPPORT=	user-destdir
@@ -24,7 +24,7 @@ BUILD_TARGET=		all chicken.info
 .include "../../mk/bsd.prefs.mk"
 
 # PLATFORM detection:
-.if !empty(OPSYS:M*BSD)
+.if !empty(OPSYS:M*BSD)  || ${OPSYS} == "DragonFly"
 PLATFORM=	bsd
 .elif ${OPSYS} == "Linux"
 PLATFORM=	linux

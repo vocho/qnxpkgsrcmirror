@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.6 2008/02/07 06:31:23 bjs Exp $
+# $NetBSD: Makefile,v 1.8 2008/06/03 06:10:16 bjs Exp $
 #
 
-DISTNAME=	xkeyboard-config-1.2
+DISTNAME=	xkeyboard-config-1.3
 CATEGORIES=	x11
 MASTER_SITES=	http://xlibs.freedesktop.org/xkbdesc/
 EXTRACT_SUFX=	.tar.bz2
@@ -15,9 +15,8 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 CONFLICTS+=		xkbdata-[0-9]*
 
 GNU_CONFIGURE=		yes
-USE_LANGUAGES=		# none
 USE_LIBTOOL=		yes
-USE_TOOLS+=		gmake intltool perl:build 
+USE_TOOLS+=		gmake intltool perl:build
 USE_TOOLS+=		msgfmt xgettext
 
 CONFIGURE_ARGS+=	--with-xkb-rules-symlink=xfree86,xorg
@@ -43,7 +42,7 @@ XKBCOMPDIR?=		${VARBASE}/db/xkb
 ### is the path to the xkbcomp binary we wish to use.
 ###
 XKBCOMPDIR_SYMLINK=	${XKBBASE}/compiled
-XKBCOMP=		${LOCALBASE}/bin/xkbcomp
+XKBCOMP=		${PREFIX}/bin/xkbcomp
 
 BUILD_DEFS+=		VARBASE
 BUILD_DEFS+=		XKBCOMPDIR
@@ -55,5 +54,8 @@ FILES_SUBST+=		XKBCOMPDIR=${XKBCOMPDIR:Q}
 FILES_SUBST+=		XKBCOMPDIR_SYMLINK=${XKBCOMPDIR_SYMLINK:Q}
 
 OWN_DIRS+=		${XKBCOMPDIR}
+
+BUILDLINK_DEPMETHOD.gettext=	build	# for the configure only
+.include "../../devel/gettext-lib/buildlink3.mk"
 
 .include "../../mk/bsd.pkg.mk"

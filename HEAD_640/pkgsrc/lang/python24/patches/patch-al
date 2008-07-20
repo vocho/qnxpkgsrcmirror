@@ -1,6 +1,6 @@
-$NetBSD$
+$NetBSD: patch-al,v 1.12 2007/06/08 14:16:16 wiz Exp $
 
---- configure.orig	2006-10-17 18:03:36.000000000 +0200
+--- configure.orig	2006-10-17 16:03:36.000000000 +0000
 +++ configure
 @@ -312,7 +312,7 @@ ac_includes_default="\
  # include <unistd.h>
@@ -31,27 +31,7 @@ $NetBSD$
    # On Solaris 2.6, sys/wait.h is inconsistent in the usage
    # of union __?sigval. Reported by Stuart Bishop.
    SunOS/5.6)
-@@ -1584,6 +1588,10 @@ case $ac_sys_system/$ac_sys_release in
-   Darwin/[789].*)
-     define_xopen_source=no
-     ;;
-+  QNX/6.*)
-+    define_xopen_source=no
-+    ;;
-+
- 
- esac
- 
-@@ -1740,264 +1748,15 @@ echo "$as_me: error: Unknown BeOS platfo
-     Monterey*)
-         RANLIB=:
-         without_gcc=;;
-+        QNX*)
-+           LDFLAGS="$LDFLAGS -Wl,-E"
-+           ;;
- 	*)	without_gcc=no;;
- 	esac
- fi;
+@@ -1746,258 +1750,6 @@ fi;
  echo "$as_me:$LINENO: result: $without_gcc" >&5
  echo "${ECHO_T}$without_gcc" >&6
  
@@ -310,7 +290,7 @@ $NetBSD$
  # If the user switches compilers, we can't believe the cache
  if test ! -z "$ac_cv_prog_CC" -a ! -z "$CC" -a "$CC" != "$ac_cv_prog_CC"
  then
-@@ -2828,117 +2587,473 @@ if { (eval echo "$as_me:$LINENO: \"$ac_c
+@@ -2828,117 +2580,473 @@ if { (eval echo "$as_me:$LINENO: \"$ac_c
     'extern "C" void exit (int);' \
     'void exit (int);'
  do
@@ -860,7 +840,7 @@ $NetBSD$
  # checks for UNIX variants that set C preprocessor variables
  
  ac_ext=c
-@@ -3341,22 +3456,7 @@ echo "$as_me:$LINENO: checking LINKCC" >
+@@ -3341,22 +3449,7 @@ echo "$as_me:$LINENO: checking LINKCC" >
  echo $ECHO_N "checking LINKCC... $ECHO_C" >&6
  if test -z "$LINKCC"
  then
@@ -884,17 +864,7 @@ $NetBSD$
  	case $ac_sys_system in
  	AIX*)
  	   exp_extra="\"\""
-@@ -3367,6 +3467,9 @@ then
- 	   LINKCC="\$(srcdir)/Modules/makexp_aix Modules/python.exp $exp_extra \$(LIBRARY); $LINKCC";;
- 	Monterey64*)
- 	   LINKCC="$LINKCC -L/usr/lib/ia64l64";;
-+        QNX*)
-+           LINKCC="qcc"
-+           ;;
- 	esac
- fi
- echo "$as_me:$LINENO: result: $LINKCC" >&5
-@@ -3483,15 +3586,10 @@ _ACEOF
+@@ -3483,15 +3576,10 @@ _ACEOF
  	  RUNSHARED=LD_LIBRARY_PATH=`pwd`:${LD_LIBRARY_PATH}
  	  INSTSONAME="$LDLIBRARY".$SOVERSION
            ;;
@@ -911,27 +881,7 @@ $NetBSD$
  	  INSTSONAME="$LDLIBRARY".$SOVERSION
  	  ;;
      hp*|HP*)
-@@ -3509,6 +3607,11 @@ _ACEOF
- 	  BLDLIBRARY='-L. -lpython$(VERSION)'
- 	  RUNSHARED=DLL_PATH=`pwd`:${DLL_PATH:-/atheos/sys/libs:/atheos/autolnk/lib}
- 	  ;;
-+    QNX*)
-+          LDLIBRARY='libpython.so.$(VERSION)'
-+          BLDLIBRARY='-L. -lpython'
-+          INSTSONAME="libpython.so"
-+          ;;
-   esac
- else # shared is disabled
-   case $ac_sys_system in
-@@ -3765,6 +3868,7 @@ if test -z "$LN" ; then
- 		BeOS*) LN="ln -s";;
- 		CYGWIN*) LN="ln -s";;
- 		atheos*) LN="ln -s";;
-+                QNX*) LN="ln -sf";;
- 		*) LN=ln;;
- 	esac
- fi
-@@ -3907,7 +4011,12 @@ echo "${ECHO_T}$ac_cv_no_strict_aliasing
+@@ -3907,7 +3995,12 @@ echo "${ECHO_T}$ac_cv_no_strict_aliasing
  	    ;;
  	# is there any other compiler on Darwin besides gcc?
  	Darwin*)
@@ -945,7 +895,7 @@ $NetBSD$
  	    if test "${enable_universalsdk}"; then
  		BASECFLAGS="-arch ppc -arch i386 -isysroot ${UNIVERSALSDK} ${BASECFLAGS}"
  	    fi
-@@ -10472,12 +10581,12 @@ then
+@@ -10472,12 +10565,12 @@ then
  				LDSHARED="$LDSHARED "'$(PYTHONFRAMEWORKPREFIX)/$(PYTHONFRAMEWORKDIR)/Versions/$(VERSION)/$(PYTHONFRAMEWORK)'
  			else
  				# No framework, use the Python app as bundle-loader
@@ -961,7 +911,7 @@ $NetBSD$
  	BSD/OS*/4*) LDSHARED="gcc -shared";;
  	FreeBSD*)
  		if [ "`$CC -dM -E - </dev/null | grep __ELF__`" != "" ]
-@@ -10501,6 +10610,7 @@ then
+@@ -10501,6 +10594,7 @@ then
  				esac
  		fi;;
  	NetBSD*|DragonFly*) LDSHARED="cc -shared ${LDFLAGS}";;
@@ -969,15 +919,7 @@ $NetBSD$
  	OpenUNIX*|UnixWare*)
  		if test "$GCC" = "yes"
  		then LDSHARED='$(CC) -shared'
-@@ -10510,6 +10620,7 @@ then
- 	Monterey*) LDSHARED="cc -G -dy -Bdynamic -Bexport -L/usr/lib/ia64l64";;
- 	CYGWIN*) LDSHARED="gcc -shared -Wl,--enable-auto-image-base";;
- 	atheos*) LDSHARED="gcc -shared";;
-+        QNX*) LDSHARED="qcc -shared -Wl,-E";;
- 	*)	LDSHARED="ld";;
- 	esac
- fi
-@@ -10534,6 +10645,7 @@ then
+@@ -10534,6 +10628,7 @@ then
  	Linux*|GNU*) CCSHARED="-fPIC";;
  	BSD/OS*/4*) CCSHARED="-fpic";;
  	FreeBSD*|NetBSD*|OpenBSD*|DragonFly*) CCSHARED="-fPIC";;
@@ -985,15 +927,7 @@ $NetBSD$
  	OpenUNIX*|UnixWare*)
  		if test "$GCC" = "yes"
  		then CCSHARED="-fPIC"
-@@ -10550,6 +10662,7 @@ then
- 		   *) CCSHARED="";;
- 		   esac;;
- 	atheos*) CCSHARED="-fPIC";;
-+        QNX*) CCSHARED="-shared";;
- 	esac
- fi
- echo "$as_me:$LINENO: result: $CCSHARED" >&5
-@@ -10591,6 +10704,7 @@ then
+@@ -10591,6 +10686,7 @@ then
  		then
  			LINKFORSHARED="-Wl,--export-dynamic"
  		fi;;
@@ -1001,16 +935,7 @@ $NetBSD$
  	SunOS/5*) case $CC in
  		  *gcc*)
  		    if $CC -Xlinker --help 2>&1 | grep export-dynamic >/dev/null
-@@ -21155,6 +21269,8 @@ do
- _ACEOF
- cat >>$CONFIG_STATUS <<\_ACEOF
-   -recheck | --recheck | --rechec | --reche | --rech | --rec | --re | --r)
-+	: Avoid regenerating within pkgsrc
-+	exit 0
-     ac_cs_recheck=: ;;
-   --version | --vers* | -V )
-     echo "$ac_cs_version"; exit 0 ;;
-@@ -21328,15 +21444,15 @@ s,@EXTRAPLATDIR@,$EXTRAPLATDIR,;t t
+@@ -21328,15 +21424,15 @@ s,@EXTRAPLATDIR@,$EXTRAPLATDIR,;t t
  s,@EXTRAMACHDEPPATH@,$EXTRAMACHDEPPATH,;t t
  s,@CONFIGURE_MACOSX_DEPLOYMENT_TARGET@,$CONFIGURE_MACOSX_DEPLOYMENT_TARGET,;t t
  s,@EXPORT_MACOSX_DEPLOYMENT_TARGET@,$EXPORT_MACOSX_DEPLOYMENT_TARGET,;t t

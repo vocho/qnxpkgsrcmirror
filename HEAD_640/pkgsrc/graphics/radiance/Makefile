@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.17 2007/05/28 20:35:38 heinz Exp $
+# $NetBSD: Makefile,v 1.20 2008/05/26 22:37:30 tnn Exp $
 #
 
 DISTNAME=	rad3R6P1
@@ -14,6 +14,9 @@ HOMEPAGE=	http://www.radiance-online.org/
 COMMENT=	Physically-based, image-generating, backward raytracer
 
 PKG_DESTDIR_SUPPORT=	user-destdir
+NOT_FOR_BULK_PLATFORM=	HPUX-*-*
+
+USE_TOOLS+=	pax
 
 WRKSRC=		${WRKDIR}/ray
 
@@ -32,21 +35,19 @@ PATCHEES=	makeall ./src/rt/Rmakefile ./src/util/Rmakefile		\
 
 .include "../../mk/bsd.prefs.mk"
 
+PLIST_VARS+=	gl
+
 .if ${OPSYS} == "NetBSD"
 PKGSRC_ARCH=	9
-PLIST_SUBST+=	USE_GL="@comment "
 .elif ${OPSYS} == "FreeBSD"
 PKGSRC_ARCH=	8
-PLIST_SUBST+=	USE_GL="@comment "
 .elif ${OPSYS} == "DragonFly"
 PKGSRC_ARCH=	12
-PLIST_SUBST+=	USE_GL="@comment "
 .elif ${OPSYS} == "Linux"
-PLIST_SUBST+=	USE_GL="@comment "
 PKGSRC_ARCH=	6
 .elif ${OPSYS} == "IRIX"
 PKGSRC_ARCH=	3
-PLIST_SUBST+=	USE_GL=""
+PLIST.gl=	yes
 .endif
 
 MAKE_ENV+=	MV=${MV:Q} RM=${RM:Q} CP=${CP:Q}			\
@@ -74,13 +75,13 @@ do-build:
 
 do-install:
 	${INSTALL_DATA_DIR} ${DESTDIRPREFIX:Q}/radiance
-	cd ${WRKSRC}/radiance && ${PAX} -rw -s '|.*/\.DS_Store||' . ${DESTDIRPREFIX:Q}/radiance/
+	cd ${WRKSRC}/radiance && pax -rw -s '|.*/\.DS_Store||' . ${DESTDIRPREFIX:Q}/radiance/
 	${INSTALL_DATA_DIR} ${DESTDIRPREFIX:Q}/radiance/obj
-	cd ${WRKSRC}/obj && ${PAX} -rw -s '|.*/\.DS_Store||' . ${DESTDIRPREFIX:Q}/radiance/obj/
+	cd ${WRKSRC}/obj && pax -rw -s '|.*/\.DS_Store||' . ${DESTDIRPREFIX:Q}/radiance/obj/
 	${INSTALL_DATA_DIR} ${DESTDIRPREFIX:Q}/radiance/lib
-	cd ${WRKSRC}/lib && ${PAX} -rw -s '|.*/\.DS_Store||' . ${DESTDIRPREFIX:Q}/radiance/lib/
+	cd ${WRKSRC}/lib && pax -rw -s '|.*/\.DS_Store||' . ${DESTDIRPREFIX:Q}/radiance/lib/
 	${INSTALL_DATA_DIR} ${DESTDIRPREFIX:Q}/radiance/man
-	cd ${WRKSRC}/doc/man && ${PAX} -rw -s '|.*/\.DS_Store||' . ${DESTDIRPREFIX:Q}/radiance/man/
+	cd ${WRKSRC}/doc/man && pax -rw -s '|.*/\.DS_Store||' . ${DESTDIRPREFIX:Q}/radiance/man/
 	${INSTALL_DATA_DIR} ${DESTDIRPREFIX:Q}/share/doc/radiance
 	${INSTALL_DATA} ${WRKSRC}/doc/pdf/*.pdf \
 		${DESTDIRPREFIX:Q}/share/doc/radiance/

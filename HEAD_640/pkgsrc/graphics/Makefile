@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.478 2008/03/16 00:13:46 wiz Exp $
+# $NetBSD: Makefile,v 1.483 2008/05/20 13:41:01 tnn Exp $
 #
 
 COMMENT=	Graphics tools and libraries
@@ -26,6 +26,7 @@ SUBDIR+=	SDLKit
 SUBDIR+=	SDL_image
 SUBDIR+=	TiffIO
 SUBDIR+=	aalib
+SUBDIR+=	agg
 SUBDIR+=	aqsis
 SUBDIR+=	artist
 SUBDIR+=	autotrace
@@ -189,6 +190,7 @@ SUBDIR+=	libkdcraw
 SUBDIR+=	libkexif
 SUBDIR+=	libkexiv2
 SUBDIR+=	libkipi
+SUBDIR+=	liblqr
 SUBDIR+=	libotf
 SUBDIR+=	librsvg
 SUBDIR+=	libscigraphica
@@ -286,6 +288,7 @@ SUBDIR+=	rayshade
 SUBDIR+=	refocus-it
 SUBDIR+=	resize_image
 SUBDIR+=	ruby-RMagick
+SUBDIR+=	ruby-color
 SUBDIR+=	ruby-gd
 SUBDIR+=	ruby-gnome2-gdkpixbuf
 SUBDIR+=	ruby-gnome2-gnomecanvas
@@ -293,6 +296,7 @@ SUBDIR+=	ruby-gnome2-libart
 SUBDIR+=	ruby-gnome2-rsvg
 SUBDIR+=	ruby-gnuplot
 SUBDIR+=	ruby-imlib2
+SUBDIR+=	ruby-mini-magick
 SUBDIR+=	ruby-opengl
 SUBDIR+=	ruby-rcairo
 SUBDIR+=	s10sh
@@ -304,7 +308,6 @@ SUBDIR+=	showimg
 SUBDIR+=	simage
 SUBDIR+=	skencil
 SUBDIR+=	snx101view
-SUBDIR+=	sodipodi
 SUBDIR+=	spcaview
 SUBDIR+=	tesseract
 SUBDIR+=	tgif

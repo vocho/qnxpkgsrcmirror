@@ -1,4 +1,4 @@
-/* $NetBSD: lib.h,v 1.40 2008/02/19 15:16:24 joerg Exp $ */
+/* $NetBSD: lib.h,v 1.44 2008/04/26 17:40:01 joerg Exp $ */
 
 /* from FreeBSD Id: lib.h,v 1.25 1997/10/08 07:48:03 charnier Exp */
 
@@ -329,8 +329,6 @@ Boolean	is_automatic_installed(const char *);
 int	mark_as_automatic_installed(const char *, int);
 
 /* String */
-char   *get_dash_string(char **);
-void    str_lowercase(unsigned char *);
 const char *basename_of(const char *);
 const char *dirname_of(const char *);
 const char *suffix_of(const char *);
@@ -384,6 +382,14 @@ int	unpackURL(const char *, const char *);
 int	ftp_cmd(const char *, const char *);
 int	ftp_start(const char *);
 void	ftp_stop(void);
+
+/* pkg_io.c: Local and remote archive handling */
+struct archive;
+
+struct archive *open_remote_archive(const char *, void **);
+void	close_remote_archive(void *);
+struct archive *open_local_archive(const char *, void **);
+void	close_local_archive(void *);
 
 /* Packing list */
 plist_t *new_plist_entry(void);

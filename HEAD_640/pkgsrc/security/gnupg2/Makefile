@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.19 2008/01/18 05:09:37 tnn Exp $
+# $NetBSD: Makefile,v 1.22 2008/06/20 01:09:33 joerg Exp $
 #
 
-DISTNAME=		gnupg-2.0.7
-PKGREVISION=		2
+DISTNAME=		gnupg-2.0.9
+#PKGREVISION=		3
 PKGNAME=		${DISTNAME:S/gnupg/gnupg2/}
 CATEGORIES=		security
 MASTER_SITES=		ftp://ftp.gnupg.org/gcrypt/gnupg/
@@ -10,14 +10,15 @@ EXTRACT_SUFX=		.tar.bz2
 DISTFILES=		${DISTNAME}${EXTRACT_SUFX}
 DISTFILES+=		pth-2.0.7.tar.gz
 SITES.pth-2.0.7.tar.gz=	${MASTER_SITE_GNU:=pth/}
-DISTFILES+=		libassuan-1.0.3.tar.bz2
-SITES.libassuan-1.0.3.tar.bz2=	ftp://ftp.gnupg.org/gcrypt/libassuan/
+DISTFILES+=		libassuan-1.0.4.tar.bz2
+SITES.libassuan-1.0.4.tar.bz2=	ftp://ftp.gnupg.org/gcrypt/libassuan/
 
 MAINTAINER=		shannonjr@NetBSD.org
 HOMEPAGE=		http://www.gnupg.org/
 COMMENT=		GNUpg with OpenPGP and S/MIME capabilities
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 # ../licommon/libcommon.a
 # reported upstream, should be fixed in 2.0.6
@@ -40,7 +41,7 @@ CONFIGURE_ARGS+=	--without-included-gettext
 CONFIGURE_ARGS+=	--with-pth-prefix=${WRKDIR}/pth
 CONFIGURE_ARGS+=	--with-libassuan-prefix=${WRKDIR}/libassuan
 CONFIGURE_ARGS+=	--with-pinentry-pgm=${BUILDLINK_PREFIX.pinentry}/bin/pinentry
-CONFIGURE_ARGS+=	--enable-maintainer-mode
+#CONFIGURE_ARGS+=	--enable-maintainer-mode
 CONFIGURE_ENV+=		gnupg_cv_pth_is_sane=yes
 
 TEST_TARGET=		check
@@ -55,9 +56,9 @@ pre-configure:
 	cd  ${WRKDIR}/pth-2.0.7 && \
 	./configure --prefix=${WRKDIR}/pth --enable-pthread --enable-static --disable-shared && \
 	${MAKE} install
-	cd  ${WRKDIR}/libassuan-1.0.3 && \
+	cd  ${WRKDIR}/libassuan-1.0.4 && \
 	${SETENV} ${CONFIGURE_ENV} ./autogen.sh && \
-	${SETENV} ${CONFIGURE_ENV} ./configure --enable-maintainer-mode --prefix=${WRKDIR}/libassuan --with-pth-prefix=${WRKDIR}/pth && \
+	${SETENV} ${CONFIGURE_ENV} ./configure --prefix=${WRKDIR}/libassuan --with-pth-prefix=${WRKDIR}/pth && \
 	${SETENV} ${PKGSRC_MAKE_ENV} ${MAKE} install
 	cd  ${WRKSRC} && ${SETENV} ${CONFIGURE_ENV} ./autogen.sh
 

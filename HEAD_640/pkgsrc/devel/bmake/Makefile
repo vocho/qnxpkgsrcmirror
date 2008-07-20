@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.41 2008/03/09 19:54:28 joerg Exp $
+# $NetBSD: Makefile,v 1.44 2008/06/19 18:36:51 joerg Exp $
 #
 
 DISTNAME=	bmake-20080215
+PKGREVISION=	1
 CATEGORIES=	devel
 MASTER_SITES=	# empty
 DISTFILES=	# empty
@@ -16,6 +17,7 @@ COMMENT=	Portable (autoconf) version of NetBSD 'make' utility
 DEPENDS+=	bootstrap-mk-files-[0-9]*:../../pkgtools/bootstrap-mk-files
 
 PKG_DESTDIR_SUPPORT=	user-destdir
+BOOTSTRAP_PKG=	yes
 
 WRKSRC=		${WRKDIR}/bmake
 NO_CHECKSUM=	yes
@@ -32,8 +34,9 @@ BOOTSTRAP_ARGS=		-q -o ${OPSYS} --prefix=${PREFIX} \
 
 .include "../../mk/bsd.prefs.mk"
 
-.if ${OPSYS} == "SunOS" && exists(/usr/xpg4/bin/sh)
-BOOTSTRAP_ARGS+=	--with-defshell=/usr/xpg4/bin/sh
+.if ${OPSYS} == "SunOS" || ${OPSYS} == "OSF1"
+DEPENDS+=		pdksh-[0-9]*:../../shells/pdksh
+BOOTSTRAP_ARGS+=	--with-defshell=${PREFIX}/bin/pdksh
 .endif
 
 do-extract:

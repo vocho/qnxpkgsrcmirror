@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.13 2008/03/04 06:59:03 jlam Exp $
+# $NetBSD: Makefile,v 1.15 2008/05/26 02:13:19 joerg Exp $
 #
 
 DISTNAME=	et-linux-2.56-2.x86
 PKGNAME=	et-2.56
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	games
 MASTER_SITES=	ftp://ftp.idsoftware.com/idstuff/et/linux/
 EXTRACT_SUFX=	.run
@@ -13,11 +13,11 @@ HOMEPAGE=	http://games.activision.com/games/wolfenstein/
 COMMENT=	Wolfenstein: Enemy Territory for Linux
 
 EMUL_PLATFORMS=		linux-i386
-EMUL_MODULES.linux=	base
+EMUL_MODULES.linux=	base glx
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
-USE_TOOLS+=	gtar
+USE_TOOLS+=	gtar pax
 EXTRACT_CMD=	${TAIL} +356 ${DOWNLOADED_DISTFILE} | ${GTAR} xzf - \
 		-C ${WRKSRC}
 
@@ -47,11 +47,11 @@ do-install:
 	${INSTALL_DATA} ${WRKSRC}/openurl.sh ${DESTDIR}${ETDIR}/
 	${INSTALL_DATA} ${WRKSRC}/v1.02_Readme.htm ${DESTDIR}${ETDIR}/
 	${INSTALL_DATA_DIR} ${DESTDIR}${ETDIR}/Docs
-	cd ${WRKSRC}/Docs && ${PAX} -rw -p am . ${DESTDIR}${ETDIR}/Docs
+	cd ${WRKSRC}/Docs && pax -rw -p am . ${DESTDIR}${ETDIR}/Docs
 	${INSTALL_DATA_DIR} ${DESTDIR}${ETDIR}/etmain
-	cd ${WRKSRC}/etmain && ${PAX} -rw -p am . ${DESTDIR}${ETDIR}/etmain
+	cd ${WRKSRC}/etmain && pax -rw -p am . ${DESTDIR}${ETDIR}/etmain
 	${INSTALL_DATA_DIR} ${DESTDIR}${ETDIR}/pb
-	cd ${WRKSRC}/pb && ${PAX} -rw -p am . ${DESTDIR}${ETDIR}/pb
+	cd ${WRKSRC}/pb && pax -rw -p am . ${DESTDIR}${ETDIR}/pb
 	${INSTALL_SCRIPT} ${WRKSRC}/bin/Linux/x86/et.x86 ${DESTDIR}${ETDIR}/
 	${INSTALL_SCRIPT} ${WRKSRC}/bin/Linux/x86/etded.x86 ${DESTDIR}${ETDIR}/
 	${INSTALL_SCRIPT} ${WRKDIR}/et ${DESTDIR}${PREFIX}/bin

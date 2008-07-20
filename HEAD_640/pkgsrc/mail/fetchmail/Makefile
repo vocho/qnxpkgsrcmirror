@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.165 2008/01/18 05:08:24 tnn Exp $
+# $NetBSD: Makefile,v 1.167 2008/06/19 11:29:49 obache Exp $
 
 DISTNAME=	fetchmail-6.3.8
-PKGREVISION=	2
+PKGREVISION=	3
 CATEGORIES=	mail
 MASTER_SITES=	http://download.berlios.de/fetchmail/	\
 		http://download2.berlios.de/fetchmail/
 EXTRACT_SUFX=	.tar.bz2
 
-MAINTAINER=	frueauf@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://fetchmail.berlios.de/
 COMMENT=	Batch mail retrieval/forwarding utility for pop2, pop3, apop, imap
 

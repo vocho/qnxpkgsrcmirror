@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.92 2007/09/11 16:59:54 abs Exp $
+# $NetBSD: Makefile,v 1.96 2008/06/22 12:40:13 kim Exp $
 #
 
 COMMENT=	Document format and character code converters
@@ -31,19 +31,23 @@ SUBDIR+=	libwpd
 SUBDIR+=	macfork
 SUBDIR+=	mpack
 SUBDIR+=	nkf
+SUBDIR+=	odt2txt
 SUBDIR+=	p5-Convert-BinHex
 SUBDIR+=	p5-Convert-TNEF
 SUBDIR+=	p5-Convert-UUlib
 SUBDIR+=	p5-JSON
 SUBDIR+=	p5-JSON-Any
 SUBDIR+=	p5-JSON-XS
+SUBDIR+=	p5-JSON-XS-VersionOneAndTwo
 SUBDIR+=	p5-Jcode
 SUBDIR+=	p5-MIME-Base32
 SUBDIR+=	p5-MIME-Base64
 SUBDIR+=	p5-MIME-Base64-URLSafe
 SUBDIR+=	p5-Text-Iconv
 SUBDIR+=	p5-Unicode-IMAPUtf7
+SUBDIR+=	p5-Unicode-Map
 SUBDIR+=	p5-Unicode-Map8
+SUBDIR+=	p5-Unicode-MapUTF8
 SUBDIR+=	p5-Unicode-String
 SUBDIR+=	p5-Unicode-UTF8simple
 SUBDIR+=	p5-chkjis
@@ -54,6 +58,7 @@ SUBDIR+=	py-cjkcodecs
 SUBDIR+=	py-jpCodecs
 SUBDIR+=	py-zhCodecs
 SUBDIR+=	qkc
+SUBDIR+=	qrencode
 SUBDIR+=	recode
 SUBDIR+=	rpm2cpio
 SUBDIR+=	rss2html

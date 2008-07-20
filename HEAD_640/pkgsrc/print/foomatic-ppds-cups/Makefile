@@ -1,4 +1,6 @@
-# $NetBSD: Makefile,v 1.7 2007/10/25 22:01:04 jlam Exp $
+# $NetBSD: Makefile,v 1.9 2008/06/15 09:56:37 joerg Exp $
+
+META_PACKAGE=	yes
 
 .include "../../print/foomatic-ppds/Makefile.common"
 
@@ -14,15 +16,9 @@ DEPENDS+=	foomatic-ppds-${FOOMATIC_PPDS_VERSION}{,nb[0-9]*}:../../print/foomatic
 
 EXTRACT_ONLY=	# empty
 WRKSRC=		${WRKDIR}
-NO_CHECKSUM=	yes
-NO_CONFIGURE=	yes
-PLIST_SRC=	# empty
 
 EVAL_PREFIX+=		CUPS_PREFIX=cups
 CUPS_DATADIR=		${CUPS_PREFIX:Q}/share/cups/model
 FILES_SUBST+=		CUPS_DATADIR=${CUPS_DATADIR}
-
-do-build:	# empty
-do-install:	# empty
 
 .include "../../mk/bsd.pkg.mk"

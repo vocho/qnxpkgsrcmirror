@@ -1,29 +1,18 @@
-# $NetBSD: Makefile,v 1.14 2008/01/27 16:46:46 taca Exp $
+# $NetBSD: Makefile,v 1.17 2008/06/22 16:09:32 taca Exp $
 
-DISTNAME=	tmail.${VERS}
-PKGNAME=	${RUBY_PKGPREFIX}-tmail-${VERS}
-CATEGORIES=	mail ruby
-MASTER_SITES=	http://rubyforge.org/frs/download.php/30630/
+DISTNAME=	tmail-1.2.3.1
+PKGNAME=	${RUBY_PKGPREFIX}-${DISTNAME}
+CATEGORIES=	mail
 
 MAINTAINER=	taca@NetBSD.org
 HOMEPAGE=	http://tmail.rubyforge.org/
 COMMENT=	Mail manipulating library for Ruby including MIME multipart support
 
-VERS=			1.2.1
-RUBY_HAS_ARCHLIB=	yes
-USE_RUBY_SETUP=		yes
-RUBY_SETUP=		script/setup
+GEM_BUILD=	gemspec
 
-WRKSRC=			${WRKDIR}/tmail-${VERS}
-INSTALLATION_DIRS=	${RUBY_DOCDIR}/tmail ${RUBY_EXAMPLESDIR}/tmail/data
-DOCS=			CHANGES LICENSE NOTES README
+# Add a directory that would be created if the setup.rb script was run.
+post-extract:
+	cd ${WRKSRC} && mkdir doc
 
-post-install:
-.for f in ${DOCS}
-	${INSTALL_DATA} ${WRKSRC}/${f} ${RUBY_DOCDIR}/tmail
-.endfor
-	${INSTALL_DATA} ${WRKSRC}/sample/*.rb ${RUBY_EXAMPLESDIR}/tmail
-	${INSTALL_DATA} ${WRKSRC}/sample/data/* ${RUBY_EXAMPLESDIR}/tmail/data
-
-.include "../../lang/ruby/modules.mk"
+.include "../../misc/rubygems/rubygem.mk"
 .include "../../mk/bsd.pkg.mk"

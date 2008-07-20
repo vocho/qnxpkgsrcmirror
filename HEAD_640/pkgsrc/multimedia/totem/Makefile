@@ -1,9 +1,10 @@
-# $NetBSD: Makefile,v 1.25 2008/03/06 14:53:52 wiz Exp $
+# $NetBSD: Makefile,v 1.27 2008/06/20 01:09:28 joerg Exp $
 #
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 .include "Makefile.common"
 
-PKGREVISION=	2
 COMMENT+=	(using GStreamer)
 
 CONFLICTS+=	totem-xine-[0-9]*

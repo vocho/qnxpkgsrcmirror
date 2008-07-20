@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.3 2007/03/09 20:26:39 joerg Exp $
+# $NetBSD: Makefile,v 1.5 2008/05/24 21:45:15 tnn Exp $
 #
 
 DISTNAME=		libXau-1.0.3
 CATEGORIES=		x11 devel
-MASTER_SITES=		http://xorg.freedesktop.org/releases/individual/lib/
+MASTER_SITES=		${MASTER_SITE_XORG:=lib/}
 EXTRACT_SUFX=		.tar.bz2
 
 MAINTAINER=		joerg@NetBSD.org
@@ -20,6 +20,8 @@ USE_TOOLS+=		pkg-config
 CONFIGURE_ENV+=		LIB_MAN_SUFFIX=3
 
 PKGCONFIG_OVERRIDE+=	xau.pc.in
+
+CPPFLAGS.OSF1+=		-pthread # Required by compiler if including pthread.h
 
 .include "../../x11/xproto/buildlink3.mk"
 

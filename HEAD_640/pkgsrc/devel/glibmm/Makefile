@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.26 2007/10/23 12:11:30 wiz Exp $
+# $NetBSD: Makefile,v 1.30 2008/06/23 16:44:47 drochner Exp $
 
-DISTNAME=	glibmm-2.14.2
+DISTNAME=	glibmm-2.16.3
 CATEGORIES=	devel
-MASTER_SITES=	${MASTER_SITE_GNOME:=sources/glibmm/2.14/}
+MASTER_SITES=	${MASTER_SITE_GNOME:=sources/glibmm/2.16/}
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	adam@NetBSD.org
-HOMEPAGE=	http://gtkmm.sourceforge.net/
+HOMEPAGE=	http://www.gtkmm.org/
 COMMENT=	C++ bindings for glib
 
 PKG_DESTDIR_SUPPORT=	user-destdir
@@ -15,10 +15,10 @@ USE_LANGUAGES=		c c++
 USE_LIBTOOL=		yes
 USE_PKGLOCALEDIR=	yes
 USE_TOOLS+=		gmake pkg-config perl:run
-PKGCONFIG_OVERRIDE+=	${WRKSRC:Q}/glib/glibmm-2.4.pc.in
+PKGCONFIG_OVERRIDE+=	${WRKSRC}/glib/glibmm-2.4.pc.in
 GNU_CONFIGURE=		yes
 
-BUILDLINK_API_DEPENDS.glib2+=	glib2>=2.8.0
+BUILDLINK_API_DEPENDS.glib2+=	glib2>=2.16.0
 
 .include "../../devel/glib2/buildlink3.mk"
 .include "../../devel/libsigc++/buildlink3.mk"

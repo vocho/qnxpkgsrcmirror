@@ -1,4 +1,4 @@
-/*	$NetBSD: build.c,v 1.5 2008/01/03 22:31:20 rillig Exp $	*/
+/*	$NetBSD: build.c,v 1.8 2008/04/23 16:58:07 joerg Exp $	*/
 
 #if HAVE_CONFIG_H
 #include "config.h"
@@ -11,7 +11,7 @@
 #if 0
 static const char *rcsid = "from FreeBSD Id: perform.c,v 1.38 1997/10/13 15:03:51 jkh Exp";
 #else
-__RCSID("$NetBSD: build.c,v 1.5 2008/01/03 22:31:20 rillig Exp $");
+__RCSID("$NetBSD: build.c,v 1.8 2008/04/23 16:58:07 joerg Exp $");
 #endif
 #endif
 
@@ -121,62 +121,71 @@ write_meta_file(struct memory_file *file, struct archive *archive)
 	archive_entry_free(entry);
 }
 
-LIST_HEAD(hardlink_list, hardlinked_entry);
-struct hardlink_list written_hardlinks;
-
-struct hardlinked_entry {
-	LIST_ENTRY(hardlinked_entry) link;
-	const char *existing_name;
-	nlink_t remaining_links;
-	dev_t existing_device;
-	ino_t existing_ino;
-};
-
 static void
-write_normal_file(const char *name, struct archive *archive, const char *owner, const char *group)
+write_entry(struct archive *archive, struct archive_entry *entry)
 {
 	char buf[16384];
+	const char *name;
+	int fd;
 	off_t len;
 	ssize_t buf_len;
-	struct hardlinked_entry *older_link;
-	struct archive_entry *entry;
+
+	if (archive_entry_pathname(entry) == NULL) {
+		warnx("entry with NULL path");
+		return;
+	}
+
+	if (archive_write_header(archive, entry)) {
+		errx(2, "cannot write to archive: %s",
+		    archive_error_string(archive));
+	}
+
+	/* Only regular files can have data. */
+	if (archive_entry_filetype(entry) != AE_IFREG ||
+	    archive_entry_size(entry) == 0) {
+		archive_entry_free(entry);
+		return;
+	}
+
+	name = archive_entry_pathname(entry);
+
+	if ((fd = open(name, O_RDONLY)) == -1)
+		err(2, "cannot open data file %s", name);
+
+	len = archive_entry_size(entry);
+
+	while (len > 0) {
+		buf_len = (len > sizeof(buf)) ? sizeof(buf) : (ssize_t)len;
+
+		if ((buf_len = read(fd, buf, buf_len)) == 0)
+			break;
+		else if (buf_len < 0)
+			err(2, "cannot read from %s", name);
+
+		archive_write_data(archive, buf, (size_t)buf_len);
+		len -= buf_len;
+	}
+
+	close(fd);
+
+	archive_entry_free(entry);
+}
+
+static void
+write_normal_file(const char *name, struct archive *archive,
+    struct archive_entry_linkresolver *resolver,
+    const char *owner, const char *group)
+{
+	char buf[16384];
+	ssize_t buf_len;
+	struct archive_entry *entry, *sparse_entry;
 	struct stat st;
-	int fd;
 
 	if (lstat(name, &st) == -1)
 		err(2, "lstat failed for file %s", name);
 
 	entry = archive_entry_new();
 	archive_entry_set_pathname(entry, name);
-
-	if (!S_ISDIR(st.st_mode) && st.st_nlink > 1) {
-		LIST_FOREACH(older_link, &written_hardlinks, link) {
-			if (st.st_dev == older_link->existing_device &&
-			    st.st_ino == older_link->existing_ino) {
-				archive_entry_copy_hardlink(entry,
-				    older_link->existing_name);
-				if (archive_write_header(archive, entry)) {
-					errx(2, "cannot write to archive: %s",
-					    archive_error_string(archive));
-				}
-
-				if (--older_link->remaining_links > 0)
-					return;
-				LIST_REMOVE(older_link, link);
-				free(older_link);
-				return;
-			}
-		}
-		/* Not yet linked */
-		if ((older_link = malloc(sizeof(*older_link))) == NULL)
-			err(2, "malloc failed");
-		older_link->existing_name = name;
-		older_link->remaining_links = st.st_nlink - 1;
-		older_link->existing_device = st.st_dev;
-		older_link->existing_ino = st.st_ino;
-		LIST_INSERT_HEAD(&written_hardlinks, older_link, link);
-	}
-
 	archive_entry_copy_stat(entry, &st);
 
 	if (owner != NULL) {
@@ -201,48 +210,20 @@ write_normal_file(const char *name, struct archive *archive, const char *owner, 
 		archive_entry_set_gname(entry, group_from_gid(st.st_gid, 1));
 	}
 
-	switch (st.st_mode & S_IFMT) {
-	case S_IFLNK:
+	if ((st.st_mode & S_IFMT) == S_IFLNK) {
 		buf_len = readlink(name, buf, sizeof buf);
 		if (buf_len < 0)
 			err(2, "cannot read symlink %s", name);
 		buf[buf_len] = '\0';
 		archive_entry_set_symlink(entry, buf);
-
-		if (archive_write_header(archive, entry))
-			errx(2, "cannot write to archive: %s", archive_error_string(archive));
-
-		break;
-
-	case S_IFREG:
-		fd = open(name, O_RDONLY);
-		if (fd == -1)
-			err(2, "cannot open data file %s", name);
-
-		len = st.st_size;
-
-		if (archive_write_header(archive, entry))
-			errx(2, "cannot write to archive: %s", archive_error_string(archive));
-
-		while (len > 0) {
-			if (len > sizeof(buf))
-				buf_len = sizeof(buf);
-			else
-				buf_len = (ssize_t)len;
-			if ((buf_len = read(fd, buf, buf_len)) <= 0)
-				break;
-			archive_write_data(archive, buf, (size_t)buf_len);
-			len -= buf_len;
-		}
-
-		close(fd);
-		break;
-
-	default:
-		errx(2, "PLIST entry neither symlink nor directory: %s", name);
 	}
 
-	archive_entry_free(entry);
+	archive_entry_linkify(resolver, &entry, &sparse_entry);
+
+	if (entry != NULL)
+		write_entry(archive, entry);
+	if (sparse_entry != NULL)
+		write_entry(archive, sparse_entry);
 }
 
 static void
@@ -252,10 +233,16 @@ make_dist(const char *pkg, const char *suffix, const package_t *plist)
 	const char *owner, *group;
 	const plist_t *p;
 	struct archive *archive;
+	struct archive_entry *entry, *sparse_entry;
+	struct archive_entry_linkresolver *resolver;
 	char *initial_cwd;
 	
 	archive = archive_write_new();
 	archive_write_set_format_pax_restricted(archive);
+	if ((resolver = archive_entry_linkresolver_new()) == NULL)
+		errx(2, "cannot create link resolver");
+	archive_entry_linkresolver_set_strategy(resolver,
+	    archive_format(archive));
 
 	if (strcmp(suffix, "tbz") == 0 || strcmp(suffix, "tar.bz2") == 0)
 		archive_write_set_compression_bzip2(archive);
@@ -309,7 +296,7 @@ make_dist(const char *pkg, const char *suffix, const package_t *plist)
 
 	for (p = plist->head; p; p = p->next) {
 		if (p->type == PLIST_FILE) {
-			write_normal_file(p->name, archive, owner, group);
+			write_normal_file(p->name, archive, resolver, owner, group);
 		} else if (p->type == PLIST_CWD || p->type == PLIST_SRC) {
 			
 			/* XXX let PLIST_SRC override PLIST_CWD */
@@ -332,12 +319,23 @@ make_dist(const char *pkg, const char *suffix, const package_t *plist)
 				group = DefaultGroup;
 		}
 	}
-	chdir(initial_cwd);
-	free(initial_cwd);
+
+	entry = NULL;
+	archive_entry_linkify(resolver, &entry, &sparse_entry);
+	while (entry != NULL) {
+		write_entry(archive, entry);
+		entry = NULL;
+		archive_entry_linkify(resolver, &entry, &sparse_entry);
+	}
+
+	archive_entry_linkresolver_free(resolver);
 
 	if (archive_write_close(archive))
 		errx(2, "cannot finish archive: %s", archive_error_string(archive));
 	archive_write_finish(archive);
+
+	chdir(initial_cwd);
+	free(initial_cwd);
 }
 
 static struct memory_file *

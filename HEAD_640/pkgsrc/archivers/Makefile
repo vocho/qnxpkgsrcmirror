@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.100 2007/11/08 19:27:43 joerg Exp $
+# $NetBSD: Makefile,v 1.104 2008/05/06 09:54:33 dillo Exp $
 #
 
 COMMENT=	Archivers
@@ -17,6 +17,7 @@ SUBDIR+=	cabextract
 SUBDIR+=	dact
 SUBDIR+=	dar
 SUBDIR+=	fastjar
+SUBDIR+=	fcrackzip
 SUBDIR+=	file-roller
 SUBDIR+=	freeze
 SUBDIR+=	gcpio
@@ -60,6 +61,7 @@ SUBDIR+=	ppmd
 SUBDIR+=	ppunpack
 SUBDIR+=	rar
 SUBDIR+=	rox-archive
+SUBDIR+=	ruby-archive-tar-minitar
 SUBDIR+=	ruby-zip
 SUBDIR+=	rzip
 SUBDIR+=	sarab
@@ -67,6 +69,7 @@ SUBDIR+=	squsq
 SUBDIR+=	star
 SUBDIR+=	stuffit
 SUBDIR+=	szip
+SUBDIR+=	torrentzip
 SUBDIR+=	unace
 SUBDIR+=	unace-bin
 SUBDIR+=	unalz

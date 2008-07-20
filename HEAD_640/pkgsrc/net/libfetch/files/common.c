@@ -1,6 +1,7 @@
-/*	$NetBSD: common.c,v 1.4 2008/02/07 16:30:49 joerg Exp $	*/
+/*	$NetBSD: common.c,v 1.13 2008/05/09 00:39:06 joerg Exp $	*/
 /*-
  * Copyright (c) 1998-2004 Dag-Erling Coïdan Smørgrav
+ * Copyright (c) 2008 Joerg Sonnenberger <joerg@NetBSD.org>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -45,6 +46,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <strings.h>
 #include <unistd.h>
 
 #include "fetch.h"
@@ -271,8 +273,6 @@ fetch_connect(const char *host, int port, int af, int verbose)
 	struct addrinfo hints, *res, *res0;
 	int sd, err;
 
-	DEBUG(fprintf(stderr, "---> %s:%d\n", host, port));
-
 	if (verbose)
 		fetch_info("looking up %s", host);
 
@@ -485,7 +485,6 @@ fetch_getln(conn_t *conn)
 	} while (c != '\n');
 
 	conn->buf[conn->buflen] = '\0';
-	DEBUG(fprintf(stderr, "<<< %s", conn->buf));
 	return (0);
 }
 
@@ -588,7 +587,6 @@ fetch_putln(conn_t *conn, const char *str, size_t len)
 	struct iovec iov[2];
 	int ret;
 
-	DEBUG(fprintf(stderr, ">>> %s\n", str));
 	iov[0].iov_base = DECONST(char *, str);
 	iov[0].iov_len = len;
 	iov[1].iov_base = DECONST(char *, ENDL);
@@ -623,35 +621,106 @@ fetch_close(conn_t *conn)
 /*** Directory-related utility functions *************************************/
 
 int
-fetch_add_entry(struct url_ent **p, int *size, int *len,
-    const char *name, struct url_stat *us)
+fetch_add_entry(struct url_list *ue, struct url *base, const char *name,
+    int pre_quoted)
 {
-	struct url_ent *tmp;
+	struct url *tmp;
+	char *tmp_name;
+	size_t base_doc_len, name_len, i;
+	unsigned char c;
 
-	if (*p == NULL) {
-		*size = 0;
-		*len = 0;
+	if (strchr(name, '/') != NULL ||
+	    strcmp(name, "..") == 0 ||
+	    strcmp(name, ".") == 0)
+		return 0;
+
+	if (strcmp(base->doc, "/") == 0)
+		base_doc_len = 0;
+	else
+		base_doc_len = strlen(base->doc);
+
+	name_len = 1;
+	for (i = 0; name[i] != '\0'; ++i) {
+		if ((!pre_quoted && name[i] == '%') ||
+		    !fetch_urlpath_safe(name[i]))
+			name_len += 3;
+		else
+			++name_len;
 	}
 
-	if (*len >= *size - 1) {
-		tmp = realloc(*p, (*size * 2 + 1) * sizeof(**p));
+	tmp_name = malloc( base_doc_len + name_len + 1);
+	if (tmp_name == NULL) {
+		errno = ENOMEM;
+		fetch_syserr();
+		return (-1);
+	}
+
+	if (ue->length + 1 >= ue->alloc_size) {
+		tmp = realloc(ue->urls, (ue->alloc_size * 2 + 1) * sizeof(*tmp));
 		if (tmp == NULL) {
+			free(tmp_name);
 			errno = ENOMEM;
 			fetch_syserr();
 			return (-1);
 		}
-		*size = (*size * 2 + 1);
-		*p = tmp;
+		ue->alloc_size = ue->alloc_size * 2 + 1;
+		ue->urls = tmp;
 	}
 
-	tmp = *p + *len;
-	snprintf(tmp->name, PATH_MAX, "%s", name);
-	memcpy(&tmp->stat, us, sizeof(*us));
+	tmp = ue->urls + ue->length;
+	strcpy(tmp->scheme, base->scheme);
+	strcpy(tmp->user, base->user);
+	strcpy(tmp->pwd, base->pwd);
+	strcpy(tmp->host, base->host);
+	tmp->port = base->port;
+	tmp->doc = tmp_name;
+	memcpy(tmp->doc, base->doc, base_doc_len);
+	tmp->doc[base_doc_len] = '/';
 
-	(*len)++;
-	(++tmp)->name[0] = 0;
+	for (i = base_doc_len + 1; *name != '\0'; ++name) {
+		if ((!pre_quoted && *name == '%') ||
+		    !fetch_urlpath_safe(*name)) {
+			tmp->doc[i++] = '%';
+			c = (unsigned char)*name / 16;
+			if (c < 10)
+				tmp->doc[i++] = '0' + c;
+			else
+				tmp->doc[i++] = 'a' - 10 + c;
+			c = (unsigned char)*name % 16;
+			if (c < 10)
+				tmp->doc[i++] = '0' + c;
+			else
+				tmp->doc[i++] = 'a' - 10 + c;
+		} else {
+			tmp->doc[i++] = *name;
+		}
+	}
+	tmp->doc[i] = '\0';
+
+	tmp->offset = 0;
+	tmp->length = 0;
+
+	++ue->length;
 
 	return (0);
+}
+
+void
+fetchInitURLList(struct url_list *ue)
+{
+	ue->length = ue->alloc_size = 0;
+	ue->urls = NULL;
+}
+
+void
+fetchFreeURLList(struct url_list *ue)
+{
+	size_t i;
+
+	for (i = 0; i < ue->length; ++i)
+		free(ue->urls[i].doc);
+	free(ue->urls);
+	ue->length = ue->alloc_size = 0;
 }
 
 
@@ -662,7 +731,7 @@ fetch_read_word(FILE *f)
 {
 	static char word[1024];
 
-	if (fscanf(f, " %1024s ", word) != 1)
+	if (fscanf(f, " %1023s ", word) != 1)
 		return (NULL);
 	return (word);
 }
@@ -699,14 +768,11 @@ fetch_netrc_auth(struct url *url)
 	if ((f = fopen(fn, "r")) == NULL)
 		return (-1);
 	while ((word = fetch_read_word(f)) != NULL) {
-		if (strcmp(word, "default") == 0) {
-			DEBUG(fetch_info("Using default .netrc settings"));
+		if (strcmp(word, "default") == 0)
 			break;
-		}
 		if (strcmp(word, "machine") == 0 &&
 		    (word = fetch_read_word(f)) != NULL &&
 		    strcasecmp(word, url->host) == 0) {
-			DEBUG(fetch_info("Using .netrc settings for %s", word));
 			break;
 		}
 	}
@@ -790,4 +856,55 @@ fetch_no_proxy_match(const char *host)
 	} while (*q);
 
 	return (0);
+}
+
+struct fetchIO {
+	void *io_cookie;
+	ssize_t (*io_read)(void *, void *, size_t);
+	ssize_t (*io_write)(void *, const void *, size_t);
+	void (*io_close)(void *);
+};
+
+void
+fetchIO_close(fetchIO *f)
+{
+	if (f->io_close != NULL)
+		(*f->io_close)(f->io_cookie);
+
+	free(f);
+}
+
+fetchIO *
+fetchIO_unopen(void *io_cookie, ssize_t (*io_read)(void *, void *, size_t),
+    ssize_t (*io_write)(void *, const void *, size_t),
+    void (*io_close)(void *))
+{
+	fetchIO *f;
+
+	f = malloc(sizeof(*f));
+	if (f == NULL)
+		return f;
+
+	f->io_cookie = io_cookie;
+	f->io_read = io_read;
+	f->io_write = io_write;
+	f->io_close = io_close;
+
+	return f;
+}
+
+ssize_t
+fetchIO_read(fetchIO *f, void *buf, size_t len)
+{
+	if (f->io_read == NULL)
+		return EBADF;
+	return (*f->io_read)(f->io_cookie, buf, len);
+}
+
+ssize_t
+fetchIO_write(fetchIO *f, const void *buf, size_t len)
+{
+	if (f->io_read == NULL)
+		return EBADF;
+	return (*f->io_write)(f->io_cookie, buf, len);
 }

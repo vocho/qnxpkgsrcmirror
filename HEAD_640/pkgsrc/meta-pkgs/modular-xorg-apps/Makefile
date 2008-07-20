@@ -1,16 +1,16 @@
-# $NetBSD: Makefile,v 1.10 2008/03/04 20:16:34 tnn Exp $
+# $NetBSD: Makefile,v 1.12 2008/06/15 09:51:59 joerg Exp $
 
 DISTNAME=	# empty
 PKGNAME=	modular-xorg-apps-1.5
 CATEGORIES=	meta-pkgs x11
-MASTER_SITES=	http://xorg.freedesktop.org/releases/individual/app/
+MASTER_SITES=	${MASTER_SITE_XORG:=app/}
 DISTFILES=	# empty
 
 MAINTAINER=	joerg@NetBSD.org
 HOMEPAGE=	http://xorg.freedesktop.org/
 COMMENT=	Modular Xorg application meta-package
 
-PKG_DESTDIR_SUPPORT=	user-destdir
+META_PACKAGE=	yes
 
 DEPENDS+=	xbiff-[0-9]*:../../mail/xbiff
 DEPENDS+=	twm-[0-9]*:../../wm/twm
@@ -62,7 +62,5 @@ DEPENDS+=	xvinfo-[0-9]*:../../x11/xvinfo
 DEPENDS+=	xwininfo-[0-9]*:../../x11/xwininfo
 DEPENDS+=	xwd-[0-9]*:../../x11/xwd
 DEPENDS+=	xwud-[0-9]*:../../x11/xwud
-
-META_PACKAGE=	yes
 
 .include "../../mk/bsd.pkg.mk"

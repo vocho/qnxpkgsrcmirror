@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.109 2008/03/11 15:52:51 taca Exp $
+# $NetBSD: Makefile,v 1.113 2008/06/30 15:53:41 taca Exp $
 #
 
-DISTNAME=		sudo-1.6.9p14
+DISTNAME=		sudo-1.6.9p17
 CATEGORIES=		security
 MASTER_SITES=		http://www.courtesan.com/sudo/dist/ \
 			ftp://ftp.courtesan.com/pub/sudo/ \
@@ -11,7 +11,7 @@ MASTER_SITES=		http://www.courtesan.com/sudo/dist/ \
 			http://netmirror.org/mirror/ftp.sudo.ws/ \
 			http://www.courtesan.com/sudo/dist/OLD/ \
 			http://www.courtesan.com/sudo/dist/beta/
-DIST_SUBDIR=		${DISTNAME}-200803090
+DIST_SUBDIR=		${DISTNAME}-200805130
 
 MAINTAINER=		kim@tac.nyc.ny.us
 HOMEPAGE=		http://www.courtesan.com/sudo/
@@ -42,7 +42,8 @@ CONFIGURE_ARGS+=	--with-nbsdops --disable-path-info
 
 DOCDIR=			share/doc/${PKGBASE}
 EGDIR=			share/examples/${PKGBASE}
-CONF_FILES_PERMS=	${EGDIR}/sudoers ${PKG_SYSCONFDIR}/sudoers 0 0 0440
+CONF_FILES_PERMS=	${EGDIR}/sudoers ${PKG_SYSCONFDIR}/sudoers \
+			${REAL_ROOT_USER} ${REAL_ROOT_GROUP} 0440
 SPECIAL_PERMS+=		bin/sudo ${SETUID_ROOT_PERMS}
 
 INSTALLATION_DIRS+=	${DOCDIR} ${EGDIR}

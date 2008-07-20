@@ -1,15 +1,16 @@
-# $NetBSD: Makefile,v 1.31 2008/03/06 14:53:50 wiz Exp $
+# $NetBSD: Makefile,v 1.34 2008/06/12 02:14:31 joerg Exp $
 #
 
-DISTNAME=	eog-2.20.4
-PKGREVISION=	2
+DISTNAME=	eog-2.22.2
 CATEGORIES=	graphics gnome
-MASTER_SITES=	${MASTER_SITE_GNOME:=sources/eog/2.20/}
+MASTER_SITES=	${MASTER_SITE_GNOME:=sources/eog/2.22/}
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.gnome.org/
 COMMENT=	Eye of GNOME: an image viewing and cataloging program
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=		YES
 USE_TOOLS+=		gmake intltool msgfmt pkg-config
@@ -38,8 +39,6 @@ BUILDLINK_API_DEPENDS.gnome-icon-theme+= gnome-icon-theme>=2.20.0
 .include "../../graphics/lcms/buildlink3.mk"
 .include "../../graphics/libart/buildlink3.mk"
 .include "../../graphics/libexif/buildlink3.mk"
-.include "../../print/libgnomeprint/buildlink3.mk"
-.include "../../print/libgnomeprintui/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
 BUILDLINK_API_DEPENDS.shared-mime-info+= shared-mime-info>=0.20
 .include "../../databases/shared-mime-info/buildlink3.mk"

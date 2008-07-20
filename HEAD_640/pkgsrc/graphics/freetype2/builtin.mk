@@ -1,4 +1,4 @@
-# $NetBSD: builtin.mk,v 1.9 2006/04/06 06:22:02 reed Exp $
+# $NetBSD: builtin.mk,v 1.11 2008/04/24 11:18:13 tron Exp $
 
 BUILTIN_PKG:=	freetype2
 

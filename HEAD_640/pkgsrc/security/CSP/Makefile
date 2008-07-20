@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.3 2008/01/18 05:09:36 tnn Exp $
+# $NetBSD: Makefile,v 1.5 2008/06/12 02:14:44 joerg Exp $
 #
 
 DISTNAME=	CSP-0.32
@@ -11,9 +11,13 @@ MAINTAINER=	cube@cubidou.net
 HOMEPAGE=	http://devel.it.su.se/pub/jsp/polopoly.jsp?d=1026&a=3290
 COMMENT=	Simple PKI Toolkit
 
+PKG_DESTDIR_SUPPORT=	user-destdir
+
 DEPENDS+=	p5-Date-Calc>=5.4:../../devel/p5-Date-Calc
 DEPENDS+=	p5-IPC-Run>=0.79:../../devel/p5-IPC-Run
 DEPENDS+=	p5-Term-Prompt>=1.03:../../devel/p5-Term-Prompt
+
+USE_TOOLS+=	pax
 
 CSPGUIDE=	cspguide.pdf
 SITES.${CSPGUIDE}=	http://devel.it.su.se/content/1/c4/32/90/
@@ -35,8 +39,8 @@ SUBST_SED.csp=		-e s,@@CSPHOME@@,${CSPHOME},	\
 SUBST_STAGE.csp=	post-patch
 
 post-install:
-	cd ${WRKSRC}/ca && ${FIND} . -type f | ${PAX} -rw ${CSPHOME}
-	${INSTALL_DATA} ${DISTDIR}/${CSPGUIDE} ${PREFIX}/share/doc/csp
+	cd ${WRKSRC}/ca && ${FIND} . -type f | pax -rw ${DESTDIR}${CSPHOME}
+	${INSTALL_DATA} ${DISTDIR}/${CSPGUIDE} ${DESTDIR}${PREFIX}/share/doc/csp
 
 .include "../../lang/perl5/module.mk"
 .include "../../security/openssl/buildlink3.mk"

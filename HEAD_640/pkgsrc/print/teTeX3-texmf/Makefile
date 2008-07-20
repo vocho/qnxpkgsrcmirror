@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.17 2007/05/30 00:26:22 minskim Exp $
+# $NetBSD: Makefile,v 1.19 2008/05/26 22:37:30 tnn Exp $
 #
 
 DISTNAME=	tetex-texmf-3.0
@@ -12,6 +12,7 @@ HOMEPAGE=	http://www.tug.org/tetex/
 COMMENT=	Machine-independent part of teTeX
 
 PKG_DESTDIR_SUPPORT=	user-destdir
+NOT_FOR_BULK_PLATFORM=	HPUX-*-*
 
 CONFLICTS+=	teTeX-share-[0-9]*
 
@@ -24,7 +25,7 @@ REPLACE_PERL+=	doc/generic/ruhyphen/reduce-patt doc/generic/ruhyphen/sorthyph
 CHECK_INTERPRETER_SKIP+=share/texmf-dist/doc/generic/ruhyphen/reduce-patt \
 			share/texmf-dist/doc/generic/ruhyphen/sorthyph
 REPLACE_SH+=	doc/latex/bibunits/bibtexall doc/latex/multibib/bibtexall
-USE_TOOLS+=	sh:run
+USE_TOOLS+=	sh:run pax
 
 INSTALLATION_DIRS=	share/texmf-dist
 

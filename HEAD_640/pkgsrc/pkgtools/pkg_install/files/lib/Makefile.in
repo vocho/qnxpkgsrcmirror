@@ -1,4 +1,4 @@
-# $NetBSD: Makefile.in,v 1.19 2008/03/10 12:14:32 wiz Exp $
+# $NetBSD: Makefile.in,v 1.23 2008/04/26 17:40:01 joerg Exp $
 
 srcdir=		@srcdir@
 
@@ -34,6 +34,8 @@ OBJS=	automatic.o conflicts.o decompress.o dewey.o fexec.o file.o \
 
 .if !empty(BOOTSTRAP)
 CPPFLAGS+=	-DBOOTSTRAP
+.else
+OBJS+=	pkg_io.o
 .endif
 
 all: $(LIB)

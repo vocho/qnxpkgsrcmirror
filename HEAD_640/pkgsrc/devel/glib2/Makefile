@@ -1,13 +1,14 @@
-# $NetBSD: Makefile,v 1.131 2008/02/21 20:53:54 tnn Exp $
+# $NetBSD: Makefile,v 1.141 2008/05/29 08:03:58 wiz Exp $
 
 # When updating glib2, please apply patch-ak to configure.in
 # Then run a matching version of autoconf to regen patch-aa.
-DISTNAME=		glib-2.14.6
+DISTNAME=		glib-2.16.3
 PKGNAME=		${DISTNAME:S/glib/glib2/}
+PKGREVISION=		3
 CATEGORIES=		devel
-MASTER_SITES=		ftp://ftp.gtk.org/pub/glib/2.14/ \
-			ftp://ftp.cs.umn.edu/pub/gimp/pub/glib/2.14/ \
-			${MASTER_SITE_GNOME:=sources/glib/2.14/}
+MASTER_SITES=		ftp://ftp.gtk.org/pub/glib/2.16/ \
+			ftp://ftp.cs.umn.edu/pub/gimp/pub/glib/2.16/ \
+			${MASTER_SITE_GNOME:=sources/glib/2.16/}
 EXTRACT_SUFX=		.tar.bz2
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
@@ -34,6 +35,8 @@ PKGCONFIG_OVERRIDE+=	gobject-2.0-uninstalled.pc.in
 PKGCONFIG_OVERRIDE+=	gobject-2.0.pc.in
 PKGCONFIG_OVERRIDE+=	gthread-2.0-uninstalled.pc.in
 PKGCONFIG_OVERRIDE+=	gthread-2.0.pc.in
+PKGCONFIG_OVERRIDE+=	gio-2.0.pc.in
+PKGCONFIG_OVERRIDE+=	gio-unix-2.0.pc.in
 
 GNU_CONFIGURE=		yes
 CONFIGURE_ENV+=		PKGLOCALEDIR=${PKGLOCALEDIR:Q}
@@ -50,6 +53,11 @@ CONFIGURE_ENV+=		F77=${FALSE:Q}
 CONFIGURE_ENV+=		PERL_PATH=${PERL5:Q}
 
 .include "../../mk/bsd.prefs.mk"
+
+.if ${OPSYS} == "NetBSD"
+# configure detects wrongly
+CONFIGURE_ENV+=		ac_cv_func_statfs=no
+.endif
 
 CPPFLAGS+=		-DPREFIX="\"${PREFIX}\""
 CPPFLAGS+=		-DPKGLOCALEDIR="\"${PKGLOCALEDIR}\""
@@ -82,9 +90,19 @@ PRINT_PLIST_AWK+=	/^@dirrm include\/glib$$/ \
 				{ print "@unexec $${RMDIR} %D/" $$2 \
 				  " 2>/dev/null || $${TRUE}"; next; }
 
+PLIST_VARS+=		fam
+
+# Overridden in options.mk.
+CONFIGURE_ARGS+=	--disable-fam
+
+.if ${OPSYS} != "HPUX" && ${OPSYS} != "OSF1"
+.include "options.mk"
+.endif
+
 .include "../../converters/libiconv/buildlink3.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../mk/dlopen.buildlink3.mk"
+
 .if !empty(MACHINE_PLATFORM:MIRIX-5*)
 CONFIGURE_ARGS+=	--disable-threads
 .else

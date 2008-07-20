@@ -1,16 +1,18 @@
-# $NetBSD: Makefile,v 1.34 2008/01/04 22:31:01 xtraeme Exp $
+# $NetBSD: Makefile,v 1.37 2008/06/18 21:30:15 minskim Exp $
 #
 
-DISTNAME=	gxemul-0.4.6.1
+DISTNAME=	gxemul-0.4.6.5
 CATEGORIES=	emulators
 MASTER_SITES=	http://gavare.se/gxemul/src/
 
-MAINTAINER=	xtraeme@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://gavare.se/gxemul/
 COMMENT=	Machine emulator
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
 PKG_DESTDIR_SUPPORT=	user-destdir
+
+USE_TOOLS+=	pax
 
 USE_LANGUAGES=	c
 HAS_CONFIGURE=	yes
@@ -24,7 +26,7 @@ do-install:
 .for f in README HISTORY TODO RELEASE.html LICENSE
 	${INSTALL_DATA} ${WRKSRC}/${f} ${DESTDIR}${PREFIX}/share/doc/${PKGBASE}
 .endfor
-	cd ${WRKSRC}/doc && ${PAX} -rwppm . ${DESTDIR}${PREFIX}/share/doc/${PKGBASE}
+	cd ${WRKSRC}/doc && pax -rwppm . ${DESTDIR}${PREFIX}/share/doc/${PKGBASE}
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.gxemul
 PKG_SUPPORTED_OPTIONS=	x11

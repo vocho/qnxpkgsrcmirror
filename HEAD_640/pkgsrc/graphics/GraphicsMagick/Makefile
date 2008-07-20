@@ -1,11 +1,10 @@
-# $NetBSD: Makefile,v 1.7 2008/02/24 02:58:40 obache Exp $
+# $NetBSD: Makefile,v 1.14 2008/07/02 00:39:23 obache Exp $
 #
 
-DISTNAME=	GraphicsMagick-1.1.11
+DISTNAME=	GraphicsMagick-1.2.4
 CATEGORIES=	graphics
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=graphicsmagick/} \
-		ftp://ftp.graphicsmagick.org/pub/GraphicsMagick/
-EXTRACT_SUFX=	.tar.bz2
+		ftp://ftp.graphicsmagick.org/pub/GraphicsMagick/1.2/
 
 MAINTAINER=	obache@NetBSD.org
 HOMEPAGE=	http://www.graphicsmagick.org/
@@ -16,14 +15,14 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 USE_LANGUAGES=	c c++
 USE_LIBTOOL=	yes
 USE_TOOLS+=	gmake pkg-config gs
-USE_FEATURES+=	vsnprintf		# optional but recommended for security
+USE_FEATURES=	vsnprintf		# optional but recommended for security
 GNU_CONFIGURE=	yes
 
 PKGCONFIG_OVERRIDE+=	magick/GraphicsMagick.pc.in \
 			wand/GraphicsMagickWand.pc.in \
 			Magick++/lib/GraphicsMagick++.pc.in
 
-CONFIGURE_ARGS+=--without-perl
+CONFIGURE_ARGS+=	--without-perl
 
 TEST_TARGET=	check
 
@@ -38,7 +37,10 @@ TEST_TARGET=	check
 .include "../../graphics/png/buildlink3.mk"
 .include "../../graphics/tiff/buildlink3.mk"
 .include "../../textproc/libxml2/buildlink3.mk"
+.include "../../x11/libSM/buildlink3.mk"
 .include "../../x11/libX11/buildlink3.mk"
+.include "../../x11/libXext/buildlink3.mk"
+.include "../../x11/xextproto/buildlink3.mk"
 .include "../../mk/dlopen.buildlink3.mk"
 .include "../../mk/pthread.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

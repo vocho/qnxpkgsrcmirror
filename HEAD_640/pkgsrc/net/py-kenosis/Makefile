@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.9 2006/06/07 12:53:48 joerg Exp $
+# $NetBSD: Makefile,v 1.11 2008/06/12 02:14:41 joerg Exp $
 #
 
 DISTNAME=		kenosis-0.941
@@ -11,7 +11,8 @@ MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://kenosis.sourceforge.net/
 COMMENT=		P2P RPC system
 
-PYTHON_VERSIONS_ACCEPTED= 23 24
+PKG_DESTDIR_SUPPORT=	user-destdir
+
 PYDISTUTILSPKG=		yes
 PYSETUP=		kenosis_setup.py
 

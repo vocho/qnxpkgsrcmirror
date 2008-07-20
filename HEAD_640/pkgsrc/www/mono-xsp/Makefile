@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.5 2008/02/18 17:06:32 xtraeme Exp $
+# $NetBSD: Makefile,v 1.8 2008/05/30 11:07:22 tnn Exp $
 
-DISTNAME=	xsp-${MONO_VERSION}
+DISTNAME=	xsp-1.9.1
 PKGNAME=	mono-${DISTNAME}
 CATEGORIES=	www
 MASTER_SITES=	http://go-mono.com/sources/xsp/
@@ -9,8 +9,6 @@ EXTRACT_SUFX=	.tar.bz2
 MAINTAINER=	kefren@NetBSD.org
 HOMEPAGE=	http://www.mono-project.com/ASP.NET
 COMMENT=	Standalone web server written in C\#
-
-.include "../../lang/mono/Makefile.version"
 
 GNU_CONFIGURE=	yes
 USE_TOOLS+=	gmake pkg-config

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.8 2006/08/22 15:33:40 joerg Exp $
+# $NetBSD: Makefile,v 1.11 2008/06/20 01:09:26 joerg Exp $
 #
 
 DISTNAME=		pyqt_memaid_0.2.4
@@ -12,11 +12,15 @@ MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://memaid.sourceforge.net/
 COMMENT=		MemAid flash card program (py-qt3 interface)
 
-PYTHON_VERSIONS_ACCEPTED=	24 23 22 21
+PKG_DESTDIR_SUPPORT=	user-destdir
+
+PYTHON_VERSIONS_ACCEPTED=	25 24 23 21
 
 USE_LANGUAGES=	c
 NO_BUILD=	yes
 PYDISTUTILSPKG=	yes
+
+INSTALLATION_DIRS=	share/doc/pyqt_memaid
 
 # Necessary for 0.2.4 because the files were created for an earlier
 # version of py-qt3, and don't work with the current pkgsrc version.
@@ -30,9 +34,8 @@ do-configure:
 
 # XXX: convert.py missing in distribution, should be installed too
 post-install:
-	${INSTALL_DATA_DIR} ${PREFIX}/share/doc/pyqt_memaid
 	${INSTALL_DATA} ${WRKSRC}/pyqt_memaid/docs/pyqt_memaid.html \
-		${PREFIX}/share/doc/pyqt_memaid
+		${DESTDIR}${PREFIX}/share/doc/pyqt_memaid
 
 .include "../../lang/python/application.mk"
 .include "../../lang/python/extension.mk"

@@ -23,7 +23,7 @@
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 #include "test.h"
-__FBSDID("$FreeBSD: src/lib/libarchive/test/test_entry.c,v 1.2 2007/07/06 15:43:11 kientzle Exp $");
+__FBSDID("$FreeBSD: src/lib/libarchive/test/test_entry.c,v 1.5 2008/03/14 23:19:46 kientzle Exp $");
 
 #include <locale.h>
 
@@ -52,6 +52,8 @@ DEFINE_TEST(test_entry)
 	const void *xval; /* For xattr tests. */
 	size_t xsize; /* For xattr tests. */
 	int c;
+	wchar_t wc;
+	long l;
 
 	assert((e = archive_entry_new()) != NULL);
 
@@ -122,8 +124,37 @@ DEFINE_TEST(test_entry)
 #else
 	skipping("archive_entry_ino()");
 #endif
+
 	/* link */
-	/* TODO: implement these tests. */
+	archive_entry_set_hardlink(e, "hardlinkname");
+	archive_entry_set_symlink(e, NULL);
+	archive_entry_set_link(e, "link");
+	assertEqualString(archive_entry_hardlink(e), "link");
+	assertEqualString(archive_entry_symlink(e), NULL);
+	archive_entry_copy_link(e, "link2");
+	assertEqualString(archive_entry_hardlink(e), "link2");
+	assertEqualString(archive_entry_symlink(e), NULL);
+	archive_entry_copy_link_w(e, L"link3");
+	assertEqualString(archive_entry_hardlink(e), "link3");
+	assertEqualString(archive_entry_symlink(e), NULL);
+	archive_entry_set_hardlink(e, NULL);
+	archive_entry_set_symlink(e, "symlink");
+	archive_entry_set_link(e, "link");
+	assertEqualString(archive_entry_hardlink(e), NULL);
+	assertEqualString(archive_entry_symlink(e), "link");
+	archive_entry_copy_link(e, "link2");
+	assertEqualString(archive_entry_hardlink(e), NULL);
+	assertEqualString(archive_entry_symlink(e), "link2");
+	archive_entry_copy_link_w(e, L"link3");
+	assertEqualString(archive_entry_hardlink(e), NULL);
+	assertEqualString(archive_entry_symlink(e), "link3");
+	/* Arbitrarily override symlink if both hardlink and symlink set. */
+	archive_entry_set_hardlink(e, "hardlink");
+	archive_entry_set_symlink(e, "symlink");
+	archive_entry_set_link(e, "link");
+	assertEqualString(archive_entry_hardlink(e), "hardlink");
+	assertEqualString(archive_entry_symlink(e), "link");
+
 	/* mode */
 	archive_entry_set_mode(e, 0123456);
 	assertEqualInt(archive_entry_mode(e), 0123456);
@@ -201,6 +232,11 @@ DEFINE_TEST(test_entry)
 	assertEqualString(archive_entry_fflags_text(e),
 	    "uappnd,nouchg,nodump,noopaque,uunlnk");
 	/* TODO: Test archive_entry_copy_fflags_text_w() */
+	/* Test archive_entry_copy_fflags_text() */
+	archive_entry_copy_fflags_text(e, "nouappnd, nouchg, dump,uunlnk");
+	archive_entry_fflags(e, &set, &clear);
+	assertEqualInt(16, set);
+	assertEqualInt(7, clear);
 #endif
 
 	/* See test_acl_basic.c for tests of ACL set/get consistency. */
@@ -215,10 +251,16 @@ DEFINE_TEST(test_entry)
 	assertEqualInt(1, archive_entry_xattr_count(e));
 	assertEqualInt(ARCHIVE_WARN,
 	    archive_entry_xattr_next(e, &xname, &xval, &xsize));
+	assertEqualString(xname, NULL);
+	assertEqualString(xval, NULL);
+	assertEqualInt(xsize, 0);
 	archive_entry_xattr_clear(e);
 	assertEqualInt(0, archive_entry_xattr_reset(e));
 	assertEqualInt(ARCHIVE_WARN,
 	    archive_entry_xattr_next(e, &xname, &xval, &xsize));
+	assertEqualString(xname, NULL);
+	assertEqualString(xval, NULL);
+	assertEqualInt(xsize, 0);
 	archive_entry_xattr_add_entry(e, "xattr1", "xattrvalue1", 12);
 	assertEqualInt(1, archive_entry_xattr_reset(e));
 	archive_entry_xattr_add_entry(e, "xattr2", "xattrvalue2", 12);
@@ -227,6 +269,9 @@ DEFINE_TEST(test_entry)
 	assertEqualInt(0, archive_entry_xattr_next(e, &xname, &xval, &xsize));
 	assertEqualInt(ARCHIVE_WARN,
 	    archive_entry_xattr_next(e, &xname, &xval, &xsize));
+	assertEqualString(xname, NULL);
+	assertEqualString(xval, NULL);
+	assertEqualInt(xsize, 0);
 
 
 	/*
@@ -350,6 +395,11 @@ DEFINE_TEST(test_entry)
 	assertEqualString(xname, "xattr1");
 	assertEqualString(xval, "xattrvalue");
 	assertEqualInt(xsize, 11);
+	assertEqualInt(ARCHIVE_WARN,
+	    archive_entry_xattr_next(e2, &xname, &xval, &xsize));
+	assertEqualString(xname, NULL);
+	assertEqualString(xval, NULL);
+	assertEqualInt(xsize, 0);
 #endif
 
 	/* Change the original */
@@ -455,6 +505,14 @@ DEFINE_TEST(test_entry)
 	assertEqualInt(tag, ARCHIVE_ENTRY_ACL_USER);
 	assertEqualInt(qual, 77);
 	assertEqualString(name, "user77");
+	assertEqualInt(1, archive_entry_acl_next(e2,
+			   ARCHIVE_ENTRY_ACL_TYPE_ACCESS,
+			   &type, &permset, &tag, &qual, &name));
+	assertEqualInt(type, 0);
+	assertEqualInt(permset, 0);
+	assertEqualInt(tag, 0);
+	assertEqualInt(qual, -1);
+	assertEqualString(name, NULL);
 #endif
 #if ARCHIVE_VERSION_STAMP < 1009000
 	skipping("xattr preserved in archive_entry copy");
@@ -675,8 +733,10 @@ DEFINE_TEST(test_entry)
 	/*
 	 * Exercise the character-conversion logic, if we can.
 	 */
-	failure("Can't exercise charset-conversion logic.");
-	if (assert(NULL != setlocale(LC_ALL, "de_DE.UTF-8"))) {
+	if (NULL == setlocale(LC_ALL, "de_DE.UTF-8")) {
+		skipping("Can't exercise charset-conversion logic without"
+			" a suitable locale.");
+	} else {
 		/* A filename that cannot be converted to wide characters. */
 		archive_entry_copy_pathname(e, "abc\314\214mno\374xyz");
 		failure("Converting invalid chars to Unicode should fail.");
@@ -703,6 +763,26 @@ DEFINE_TEST(test_entry)
 		archive_entry_copy_symlink(e, "abc\314\214mno\374xyz");
 		failure("Converting invalid chars to Unicode should fail.");
 		assert(NULL == archive_entry_symlink_w(e));
+	}
+
+	l = 0x12345678L;
+	wc = (wchar_t)l; /* Wide character too big for UTF-8. */
+	if (NULL == setlocale(LC_ALL, "C") || (long)wc != l) {
+		skipping("Testing charset conversion failure requires 32-bit wchar_t and support for \"C\" locale.");
+	} else {
+		/*
+		 * Build the string L"xxx\U12345678yyy\u5678zzz" without
+		 * using C99 \u#### syntax, which isn't uniformly
+		 * supported.  (GCC 3.4.6, for instance, defaults to
+		 * "c89 plus GNU extensions.")
+		 */
+		wcscpy(wbuff, L"xxxAyyyBzzz");
+		wbuff[3] = 0x12345678;
+		wbuff[7] = 0x5678;
+		/* A wide filename that cannot be converted to narrow. */
+		archive_entry_copy_pathname_w(e, wbuff);
+		failure("Converting wide characters from Unicode should fail.");
+		assertEqualString(NULL, archive_entry_pathname(e));
 	}
 
 	/* Release the experimental entry. */

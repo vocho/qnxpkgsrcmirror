@@ -1,6 +1,6 @@
-$NetBSD$
+$NetBSD: patch-af,v 1.8 2007/06/08 14:16:16 wiz Exp $
 
---- Makefile.pre.in.orig	2006-10-08 19:41:25.000000000 +0200
+--- Makefile.pre.in.orig	2006-10-08 17:41:25.000000000 +0000
 +++ Makefile.pre.in
 @@ -30,6 +30,7 @@ VPATH=		@srcdir@
  
@@ -41,7 +41,7 @@ $NetBSD$
  
  platform: $(BUILDPYTHON)
  	$(RUNSHARED) ./$(BUILDPYTHON) -E -c 'import sys ; from distutils.util import get_platform ; print get_platform()+"-"+sys.version[0:3]' >platform
-@@ -355,14 +355,25 @@ $(LIBRARY): $(LIBRARY_OBJS)
+@@ -355,14 +355,17 @@ $(LIBRARY): $(LIBRARY_OBJS)
  
  libpython$(VERSION).so: $(LIBRARY_OBJS)
  	if test $(INSTSONAME) != $(LDLIBRARY); then \
@@ -53,14 +53,6 @@ $NetBSD$
 +		$(LDSHARED) -o $@ $(LDFLAGS) $(LIBRARY_OBJS) $(SHLIBS) $(LIBC) $(LIBM); \
  	fi
  
-+libpython.so.$(VERSION): $(LIBRARY_OBJS)
-+	if test $(INSTSONAME) != $(LDLIBRARY); then \
-+		$(LDSHARED) -Wl,-h$(INSTSONAME) -o $(INSTSONAME) $(LDFLAGS) $(LIBRARY_OBJS) $(SHLIBS) $(LIBC) $(LIBM); \
-+		$(LN) -f $(INSTSONAME) $@; \
-+	else\
-+		$(LDSHARED) -o $@ $(LDFLAGS) $(LIBRARY_OBJS) $(SHLIBS) $(LIBC) $(LIBM); \
-+	fi	
-+
  libpython$(VERSION).sl: $(LIBRARY_OBJS)
 -	$(LDSHARED) -o $@ $(LIBRARY_OBJS) $(SHLIBS) $(LIBC) $(LIBM)
 +	$(LDSHARED) -o $@ $(LDFLAGS) $(LIBRARY_OBJS) $(LIBC) $(LIBM)
@@ -70,7 +62,7 @@ $NetBSD$
  
  # This rule is here for OPENSTEP/Rhapsody/MacOSX. It builds a temporary
  # minimal framework (not including the Lib directory and such) in the current
-@@ -450,8 +461,8 @@ Modules/getpath.o: $(srcdir)/Modules/get
+@@ -450,8 +453,8 @@ Modules/getpath.o: $(srcdir)/Modules/get
  		-DVPATH='"$(VPATH)"' \
  		-o $@ $(srcdir)/Modules/getpath.c
  
@@ -81,7 +73,7 @@ $NetBSD$
  
  
  $(GRAMMAR_H) $(GRAMMAR_C): $(PGEN) $(GRAMMAR_INPUT)
-@@ -533,7 +544,7 @@ PYTHON_HEADERS= \
+@@ -533,7 +536,7 @@ PYTHON_HEADERS= \
  		Include/weakrefobject.h \
  		pyconfig.h
  
@@ -90,7 +82,7 @@ $NetBSD$
  
  
  ######################################################################
-@@ -655,7 +666,19 @@ altbininstall:	$(BUILDPYTHON)
+@@ -655,7 +658,12 @@ altbininstall:	$(BUILDPYTHON)
  				(cd $(DESTDIR)$(LIBDIR); $(LN) -sf $(INSTSONAME) libpython$(VERSION)$(SO)); \
  			fi \
  		fi; \
@@ -99,19 +91,12 @@ $NetBSD$
 +		if test -f libpython2.4.2.dylib; then \
 +			$(INSTALL_SHARED) libpython2.4.2.dylib $(DESTDIR)$(LIBDIR)/libpython2.4.2.dylib; \
 +		else \
-+			if test -f libpython$(SO).$(VERSION); then \
-+				$(INSTALL_SHARED) libpython$(SO).$(VERSION) $(DESTDIR)$(LIBDIR)/$(INSTSONAME); \
-+				if test libpython$(SO).$(VERSION) != $(INSTSONAME); then \
-+					(cd $(DESTDIR)$(LIBDIR); $(LN) -sf $(INSTSONAME) libpython$(SO).$(VERSION)); \
-+				fi \
-+			else \
-+				true; \
-+			fi \
++			true; \
 +		fi \
  	fi
  
  # Install the manual page
-@@ -773,7 +796,7 @@ $(srcdir)/Lib/$(PLATDIR):
+@@ -773,7 +781,7 @@ $(srcdir)/Lib/$(PLATDIR):
  	export PYTHONPATH; PYTHONPATH="`pwd`/Lib"; \
  	export DYLD_FRAMEWORK_PATH; DYLD_FRAMEWORK_PATH="`pwd`"; \
  	export EXE; EXE="$(BUILDEXE)"; \
@@ -120,7 +105,7 @@ $NetBSD$
  
  # Install the include files
  INCLDIRSTOMAKE=$(INCLUDEDIR) $(CONFINCLUDEDIR) $(INCLUDEPY) $(CONFINCLUDEPY)
-@@ -818,7 +841,7 @@ libainstall:	all
+@@ -818,7 +826,7 @@ libainstall:	all
  		fi; \
  	fi
  	$(INSTALL_DATA) Modules/config.c $(DESTDIR)$(LIBPL)/config.c

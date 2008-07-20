@@ -1,4 +1,4 @@
-/*	$NetBSD: fetch.h,v 1.3 2008/02/07 17:10:35 joerg Exp $	*/
+/*	$NetBSD: fetch.h,v 1.11 2008/04/25 19:59:30 joerg Exp $	*/
 /*-
  * Copyright (c) 1998-2004 Dag-Erling Coïdan Smørgrav
  * All rights reserved.
@@ -43,6 +43,8 @@
 #define URL_USERLEN 256
 #define URL_PWDLEN 256
 
+typedef struct fetchIO fetchIO;
+
 struct url {
 	char		 scheme[URL_SCHEMELEN + 1];
 	char		 user[URL_USERLEN + 1];
@@ -60,9 +62,10 @@ struct url_stat {
 	time_t		 mtime;
 };
 
-struct url_ent {
-	char		 name[PATH_MAX];
-	struct url_stat	 stat;
+struct url_list {
+	size_t		 length;
+	size_t		 alloc_size;
+	struct url	*urls;
 };
 
 /* Recognized schemes */
@@ -96,44 +99,61 @@ struct url_ent {
 extern "C" {
 #endif
 
-/* FILE-specific functions */
-FILE		*fetchXGetFile(struct url *, struct url_stat *, const char *);
-FILE		*fetchGetFile(struct url *, const char *);
-FILE		*fetchPutFile(struct url *, const char *);
+void		fetchIO_close(fetchIO *);
+ssize_t		fetchIO_read(fetchIO *, void *, size_t);
+ssize_t		fetchIO_write(fetchIO *, const void *, size_t);
+
+/* fetchIO-specific functions */
+fetchIO		*fetchXGetFile(struct url *, struct url_stat *, const char *);
+fetchIO		*fetchGetFile(struct url *, const char *);
+fetchIO		*fetchPutFile(struct url *, const char *);
 int		 fetchStatFile(struct url *, struct url_stat *, const char *);
-struct url_ent	*fetchListFile(struct url *, const char *);
+int		 fetchListFile(struct url_list *, struct url *, const char *,
+		    const char *);
 
 /* HTTP-specific functions */
-FILE		*fetchXGetHTTP(struct url *, struct url_stat *, const char *);
-FILE		*fetchGetHTTP(struct url *, const char *);
-FILE		*fetchPutHTTP(struct url *, const char *);
+fetchIO		*fetchXGetHTTP(struct url *, struct url_stat *, const char *);
+fetchIO		*fetchGetHTTP(struct url *, const char *);
+fetchIO		*fetchPutHTTP(struct url *, const char *);
 int		 fetchStatHTTP(struct url *, struct url_stat *, const char *);
-struct url_ent	*fetchListHTTP(struct url *, const char *);
+int		 fetchListHTTP(struct url_list *, struct url *, const char *,
+		    const char *);
 
 /* FTP-specific functions */
-FILE		*fetchXGetFTP(struct url *, struct url_stat *, const char *);
-FILE		*fetchGetFTP(struct url *, const char *);
-FILE		*fetchPutFTP(struct url *, const char *);
+fetchIO		*fetchXGetFTP(struct url *, struct url_stat *, const char *);
+fetchIO		*fetchGetFTP(struct url *, const char *);
+fetchIO		*fetchPutFTP(struct url *, const char *);
 int		 fetchStatFTP(struct url *, struct url_stat *, const char *);
-struct url_ent	*fetchListFTP(struct url *, const char *);
+int		 fetchListFTP(struct url_list *, struct url *, const char *,
+		    const char *);
 
 /* Generic functions */
-FILE		*fetchXGetURL(const char *, struct url_stat *, const char *);
-FILE		*fetchGetURL(const char *, const char *);
-FILE		*fetchPutURL(const char *, const char *);
+fetchIO		*fetchXGetURL(const char *, struct url_stat *, const char *);
+fetchIO		*fetchGetURL(const char *, const char *);
+fetchIO		*fetchPutURL(const char *, const char *);
 int		 fetchStatURL(const char *, struct url_stat *, const char *);
-struct url_ent	*fetchListURL(const char *, const char *);
-FILE		*fetchXGet(struct url *, struct url_stat *, const char *);
-FILE		*fetchGet(struct url *, const char *);
-FILE		*fetchPut(struct url *, const char *);
+int		 fetchListURL(struct url_list *, const char *, const char *,
+		    const char *);
+fetchIO		*fetchXGet(struct url *, struct url_stat *, const char *);
+fetchIO		*fetchGet(struct url *, const char *);
+fetchIO		*fetchPut(struct url *, const char *);
 int		 fetchStat(struct url *, struct url_stat *, const char *);
-struct url_ent	*fetchList(struct url *, const char *);
+int		 fetchList(struct url_list *, struct url *, const char *,
+		    const char *);
 
 /* URL parsing */
 struct url	*fetchMakeURL(const char *, const char *, int,
 		     const char *, const char *, const char *);
 struct url	*fetchParseURL(const char *);
+struct url	*fetchCopyURL(const struct url *);
+char		*fetchStringifyURL(const struct url *);
 void		 fetchFreeURL(struct url *);
+
+/* URL listening */
+void		 fetchInitURLList(struct url_list *);
+void		 fetchFreeURLList(struct url_list *);
+char		*fetchUnquotePath(struct url *);
+char		*fetchUnquoteFilename(struct url *);
 
 /* Authentication */
 typedef int (*auth_t)(struct url *);

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.9 2006/10/04 20:44:19 wiz Exp $
+# $NetBSD: Makefile,v 1.11 2008/06/12 02:14:15 joerg Exp $
 
 DISTNAME=	pyxmms-2.02
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME:S/py//}
@@ -10,8 +10,9 @@ MAINTAINER=	minskim@NetBSD.org
 HOMEPAGE=	http://people.via.ecp.fr/~flo/index.en.xhtml\#PyXMMS_and_PyXMMS-remote
 COMMENT=	Python interface to XMMS
 
+PKG_DESTDIR_SUPPORT=	user-destdir
+
 PYDISTUTILSPKG=	yes
-PYTHON_VERSIONS_ACCEPTED=	24 23 22
 NO_CONFIGURE=	yes
 
 SUBST_CLASSES+=		paths

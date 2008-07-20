@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.74 2008/03/17 19:03:35 jlam Exp $
+# $NetBSD: Makefile,v 1.77 2008/06/06 17:14:01 dillo Exp $
 
 DISTNAME=	screen-4.0.3
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	misc shells
 MASTER_SITES=	ftp://ftp.uni-erlangen.de/pub/utilities/screen/ \
 		http://komquats.com/distfiles/ \
@@ -34,16 +34,14 @@ SUBST_SED.paths+=	-e 's,@PKG_SYSCONFDIR@,${PKG_SYSCONFDIR},g'
 SUBST_SED.paths+=	-e 's,@EXAMPLES@,${PREFIX}/share/examples/screen,g'
 SUBST_STAGE.paths=	post-patch
 
-.if ${OPSYS} == "QNX"
-LIBS+=-lsocket
-.endif
+LIBS.QNX+=	-lsocket
+CFLAGS.QNX+=	-D__NO_EXT_QNX
 
+PLIST_VARS+=		terminfo
 .if (${OPSYS} == "SunOS") && exists(/usr/5bin/tic)
 INSTALLATION_DIRS+=	share/lib/terminfo
-PLIST_SUBST+=	SCREEN_TERMINFO=
+PLIST.terminfo=		yes
 post-install: screen-terminfo
-.else
-PLIST_SUBST+=	SCREEN_TERMINFO="@comment "
 .endif
 
 .if empty(UNPRIVILEGED:M[Yy][Ee][Ss])
@@ -63,7 +61,7 @@ post-install:
 .PHONY: screen-terminfo
 screen-terminfo:
 	cd ${WRKSRC}/terminfo &&					\
-	${SETENV} TERMINFO=${PREFIX}/share/lib/terminfo			\
+	${SETENV} TERMINFO=${DESTDIR}${PREFIX}/share/lib/terminfo	\
 		/usr/5bin/tic screeninfo.src
 
 .include "../../mk/termcap.buildlink3.mk"

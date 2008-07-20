@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.57 2008/03/22 04:40:45 taca Exp $
+# $NetBSD: Makefile,v 1.59 2008/04/12 22:43:08 jlam Exp $
 
 DISTNAME=	netatalk-2.0.3
-PKGREVISION=	9
+PKGREVISION=	10
 CATEGORIES=	net print
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=netatalk/}
 EXTRACT_SUFX=	.tar.bz2
@@ -77,24 +77,24 @@ CONFIGURE_ARGS+=	--enable-cups
 CONFIGURE_ARGS+=	--disable-cups
 .endif
 
+PLIST_VARS+=		gssapi
 .if !empty(PKG_OPTIONS:Mkerberos)
 .include "../../mk/krb5.buildlink3.mk"
 CONFIGURE_ARGS+=	--with-gssapi --enable-krbV-uam
-CONFIGURE_ENV+=	GSSAPI_LIBS="-lkrb5 -lroken -lasn1 -lcrypto -lcom_err"
-PLIST_SUBST+=		GSSAPI=""
+CONFIGURE_ENV+=		GSSAPI_LIBS="-lkrb5 -lroken -lasn1 -lcrypto -lcom_err"
+PLIST.gssapi=		yes
 .else
 CONFIGURE_ARGS+=	--without-gssapi
-PLIST_SUBST+=		GSSAPI="@comment "
 .endif
 
+PLIST_VARS+=		pam
 .if !empty(PKG_OPTIONS:Mpam)
 .include "../../mk/pam.buildlink3.mk"
 CONFIGURE_ARGS+=	--with-pam
-PLIST_SUBST+=		PAM=""
+PLIST.pam=		yes
 MESSAGE_SRC+=		MESSAGE MESSAGE.pam
 .else
 CONFIGURE_ARGS+=	--without-pam
-PLIST_SUBST+=		PAM="@comment "
 .endif
 
 .if !empty(PKG_OPTIONS:Mslp)

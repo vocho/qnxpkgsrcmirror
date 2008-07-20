@@ -1,4 +1,4 @@
-# $NetBSD: depends.mk,v 1.41 2008/03/10 20:05:59 joerg Exp $
+# $NetBSD: depends.mk,v 1.43 2008/05/26 14:21:43 tron Exp $
 
 # This command prints out the dependency patterns for all full (run-time)
 # dependencies of the package.
@@ -122,7 +122,7 @@ _flavor-install-dependencies: .PHONY ${_DEPENDS_FILE}
 	exec 3<&0;							\
 	${CAT} ${_DEPENDS_FILE} | 					\
 	while read type pattern dir; do					\
-		${TEST} "$$type" = "bootstrap" && continue;		\
+		${TEST} "$$type" != "bootstrap" || continue;		\
 		${_DEPENDS_INSTALL_CMD} 0<&3;				\
 	done
 
@@ -130,6 +130,24 @@ _flavor-install-dependencies: .PHONY ${_DEPENDS_FILE}
 #	Targets after installing all dependencies.
 #
 _flavor-post-install-dependencies: .PHONY ${_RDEPENDS_FILE}
+
+######################################################################
+### pkg_install-depends (PUBLIC, pkgsrc/mk/depends/depends.mk)
+######################################################################
+### pkg_install-depends is a public target to install or update
+### pkg_install itself.
+###
+.PHONY: pkg_install-depends
+pkg_install-depends:
+	${RUN}if [ `${PKG_INFO_CMD} -V 2>/dev/null || echo 20010302` -lt ${PKGTOOLS_REQD} ]; then \
+	${PHASE_MSG} "Trying to handle out-dated pkg_install..."; \
+	cd ../../pkgtools/pkg_install && ${SETENV} ${PKGSRC_MAKE_ENV} \
+	    _PKGSRC_DEPS=", ${PKGNAME}${_PKGSRC_DEPS}" \
+	    ${MAKE} ${MAKEFLAGS} _AUTOMATIC=yes clean && \
+	cd ../../pkgtools/pkg_install && ${SETENV} ${PKGSRC_MAKE_ENV} \
+	    _PKGSRC_DEPS=", ${PKGNAME}${_PKGSRC_DEPS}" \
+	    ${MAKE} ${MAKEFLAGS} _AUTOMATIC=yes ${DEPENDS_TARGET:Q}; \
+	fi
 
 ######################################################################
 ### bootstrap-depends (PUBLIC, pkgsrc/mk/depends/depends.mk)
@@ -149,7 +167,7 @@ bootstrap-depends: ${_BOOTSTRAP_DEPENDS_TARGETS}
 _flavor-bootstrap-depends:
 	${RUN}${_LIST_DEPENDS_CMD.bootstrap} | 				\
 	while read type pattern dir; do					\
-		${TEST} "$$type" != "bootstrap" && continue;		\
+		${TEST} "$$type" = "bootstrap" || continue;		\
 		${_DEPENDS_INSTALL_CMD};				\
 	done
 

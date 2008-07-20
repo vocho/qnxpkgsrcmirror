@@ -1,14 +1,13 @@
 $NetBSD$
 
---- signal.c.orig	2007-08-02 11:23:05.000000000 -0400
-+++ signal.c
-@@ -120,7 +120,9 @@ evsignal_add(struct event *ev)
- 	memset(&sa, 0, sizeof(sa));
- 	sa.sa_handler = evsignal_handler;
- 	sigfillset(&sa.sa_mask);
-+#if HAVE_DECL_SA_RESTART
- 	sa.sa_flags |= SA_RESTART;
-+#endif
- 	/* catch signals if they happen quickly */
- 	evsignal_base = base;
+--- configure.orig	2008-04-05 17:05:55.000000000 -0400
++++ configure
+@@ -19933,7 +19933,7 @@ fi
  
+ 
+ 
+-for ac_header in fcntl.h stdarg.h inttypes.h stdint.h poll.h signal.h unistd.h sys/epoll.h sys/time.h sys/queue.h sys/event.h sys/param.h sys/ioctl.h sys/select.h sys/devpoll.h port.h netinet/in6.h sys/socket.h
++for ac_header in fcntl.h stdarg.h inttypes.h stdint.h poll.h signal.h sys/signal.h unistd.h sys/epoll.h sys/time.h sys/queue.h sys/event.h sys/param.h sys/ioctl.h sys/select.h sys/devpoll.h port.h netinet/in6.h sys/socket.h
+ do
+ as_ac_Header=`echo "ac_cv_header_$ac_header" | $as_tr_sh`
+ if { as_var=$as_ac_Header; eval "test \"\${$as_var+set}\" = set"; }; then

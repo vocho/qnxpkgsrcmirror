@@ -1,4 +1,4 @@
-/*	$NetBSD: main.c,v 1.40 2008/03/23 01:04:47 dsainty Exp $	*/
+/*	$NetBSD: main.c,v 1.43 2008/04/29 05:46:08 martin Exp $	*/
 
 #if HAVE_CONFIG_H
 #include "config.h"
@@ -8,7 +8,7 @@
 #include <sys/cdefs.h>
 #endif
 #ifndef lint
-__RCSID("$NetBSD: main.c,v 1.40 2008/03/23 01:04:47 dsainty Exp $");
+__RCSID("$NetBSD: main.c,v 1.43 2008/04/29 05:46:08 martin Exp $");
 #endif
 
 /*-
@@ -27,13 +27,6 @@ __RCSID("$NetBSD: main.c,v 1.40 2008/03/23 01:04:47 dsainty Exp $");
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in the
  *    documentation and/or other materials provided with the distribution.
- * 3. All advertising materials mentioning features or use of this software
- *    must display the following acknowledgement:
- *        This product includes software developed by the NetBSD
- *        Foundation, Inc. and its contributors.
- * 4. Neither the name of The NetBSD Foundation nor the names of its
- *    contributors may be used to endorse or promote products derived
- *    from this software without specific prior written permission.
  *
  * THIS SOFTWARE IS PROVIDED BY THE NETBSD FOUNDATION, INC. AND CONTRIBUTORS
  * ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
@@ -113,9 +106,11 @@ usage(void)
 	    " pmatch pattern pkg          - returns true if pkg matches pattern, otherwise false\n"
 	    " fetch-pkg-vulnerabilities [-s] - fetch new vulnerability file\n"
 	    " check-pkg-vulnerabilities [-s] <file> - check syntax and checksums of the vulnerability file\n"
-	    " audit [-es] [-t type] ...\n"
-	    " audit-pkg [-es] [-t type] ...\n"
-	    " audit-batch [-es] [-t type] ...\n",
+	    " audit [-es] [-t type] ...       - check installed packages for vulnerabilities\n"
+	    " audit-pkg [-es] [-t type] ...   - check listed packages for vulnerabilities\n"
+	    " audit-batch [-es] [-t type] ... - check packages in listed files for vulnerabilities\n"
+	    " audit-history [-t type] ...     - print all advisories for package names\n"
+	    " config-var name                 - print current value of the configuration variable\n",
 	    getprogname());
 	exit(EXIT_FAILURE);
 }
@@ -521,6 +516,11 @@ main(int argc, char *argv[])
 	} else if (strcasecmp(argv[0], "unset") == 0) {
 		argv++;		/* "unset" */
 		set_unset_variable(argv, TRUE);
+	} else if (strcasecmp(argv[0], "config-var") == 0) {
+		argv++;
+		if (argv == NULL || argv[1] != NULL)
+			errx(EXIT_FAILURE, "config-var takes exactly one argument");
+		pkg_install_show_variable(argv[0]);
 	}
 #ifndef BOOTSTRAP
 	else if (strcasecmp(argv[0], "fetch-pkg-vulnerabilities") == 0) {
@@ -533,6 +533,8 @@ main(int argc, char *argv[])
 		audit_pkg(--argc, ++argv);
 	} else if (strcasecmp(argv[0], "audit-batch") == 0) {
 		audit_batch(--argc, ++argv);
+	} else if (strcasecmp(argv[0], "audit-history") == 0) {
+		audit_history(--argc, ++argv);
 	}
 #endif
 #ifdef PKGDB_DEBUG

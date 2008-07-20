@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.61 2008/01/18 05:09:42 tnn Exp $
+# $NetBSD: Makefile,v 1.63 2008/05/29 00:44:30 schmonz Exp $
 
-DISTNAME=		stunnel-4.20
-PKGREVISION=		3
+DISTNAME=		stunnel-4.24
+PKGREVISION=		1
 CATEGORIES=		security
 MASTER_SITES=		ftp://ftp.fu-berlin.de/unix/security/stunnel/ \
 			ftp://stunnel.mirt.net/stunnel/ \
@@ -10,6 +10,8 @@ MASTER_SITES=		ftp://ftp.fu-berlin.de/unix/security/stunnel/ \
 MAINTAINER=		shaun@inerd.com
 HOMEPAGE=		http://www.stunnel.org/
 COMMENT=		Universal SSL tunnel
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_LIBTOOL=		yes
 GNU_CONFIGURE=		yes

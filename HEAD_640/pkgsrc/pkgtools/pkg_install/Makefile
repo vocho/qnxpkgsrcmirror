@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.148 2008/03/21 23:28:33 joerg Exp $
+# $NetBSD: Makefile,v 1.156 2008/06/22 22:08:05 joerg Exp $
 
 # Notes to package maintainers:
 #
@@ -17,6 +17,7 @@ COMMENT=		Package management and administration tools for pkgsrc
 #LICENSE=		modified-bsd
 
 PKG_DESTDIR_SUPPORT=	user-destdir
+BOOTSTRAP_PKG=	yes
 
 CONFLICTS+=		audit-packages-[0-9]*
 
@@ -26,7 +27,7 @@ CONFIGURE_ARGS+=	--with-pkgdbdir=${PKG_DBDIR:Q}
 CONFIGURE_ARGS+=	--with-ftp=${FETCH_CMD:Q}
 CONFIGURE_ARGS+=	--with-pax=${PAX:Q}
 CONFIGURE_ARGS+=	--with-tar=${TAR:Q}
-USE_TOOLS+=		pax:run tar:run gzcat:run
+USE_TOOLS+=		pax:run tar:run gzcat:run ftp:run
 
 # The following tools are needed by pkg_view and linkfarm.
 USE_TOOLS+=		chmod cmp cp env find grep ln mkdir rm rmdir	\
@@ -51,11 +52,19 @@ CHECK_PERMS=		no
 #
 # We also use the newly built pkg_{add,create,delete} since upgrading
 # from an older pkg_install might required features of the new program. 
+# Note that the definitions are only overriden for the phases that are
+# supposed to use them.  pkg_admin pmatch might be used when looking for
+# dependencies. If that is ever changed in a incompatible way, this has to
+# be rethought.
 #
 USE_NATIVE_GCC=		yes
+
+.if defined(_PKGSRC_BARRIER)
 PKG_ADD_CMD=		${WRKSRC}/add/pkg_add
 PKG_CREATE_CMD=		${WRKSRC}/create/pkg_create
 PKG_DELETE_CMD=		${WRKSRC}/delete/pkg_delete
+PKG_INFO_CMD=		${WRKSRC}/info/pkg_info
+.endif
 
 CPPFLAGS+=		-D_LARGEFILE_SOURCE -D_LARGE_FILES
 CPPFLAGS+=		-D_FILE_OFFSET_BITS=64
@@ -92,6 +101,9 @@ SUBST_MESSAGE.paths=	Fixing paths in scripts.
 SUBST_FILES.paths=	audit-packages/Makefile.in
 SUBST_SED.paths=	-e 's,_gzcat_,${GZCAT},g'
 
+# linkresolver interface appeared in libarchive 2.5.
+BUILDLINK_API_DEPENDS.libarchive+=	libarchive>=2.5
+
 .include "../../archivers/bzip2/builtin.mk"
 .include "../../archivers/libarchive/builtin.mk"
 .include "../../devel/zlib/builtin.mk"
@@ -104,6 +116,7 @@ USE_BUILTIN.libarchive=	no
 FILESDIR.bzip2?=	${.CURDIR}/../../archivers/bzip2/files
 FILESDIR.libarchive?=	${.CURDIR}/../../archivers/libarchive/files
 FILESDIR.zlib?=		${.CURDIR}/../../devel/zlib/files
+FILESDIR.libfetch?=	${.CURDIR}/../../net/libfetch/files
 
 .if empty(USE_BUILTIN.bzip2:M[yY][eE][sS])
 CPPFLAGS+=	-I${WRKDIR}/bzip2
@@ -117,6 +130,8 @@ LDFLAGS+=	-L${WRKDIR}/zlib
 CPPFLAGS+=	-I${WRKDIR}/libarchive/libarchive
 LDFLAGS+=	-L${WRKDIR}/libarchive/.libs
 .endif
+CPPFLAGS+=	-I${WRKDIR}/libfetch
+LDFLAGS+=	-L${WRKDIR}/libfetch
 
 do-extract:
 	@${CP} -R ${FILESDIR} ${WRKSRC}
@@ -129,6 +144,7 @@ do-extract:
 .if empty(USE_BUILTIN.libarchive:M[yY][eE][sS])
 	@${CP} -R ${FILESDIR.libarchive} ${WRKDIR}/libarchive
 .endif
+	@${CP} -R ${FILESDIR.libfetch} ${WRKDIR}/libfetch
 
 pre-configure:
 .if empty(USE_BUILTIN.bzip2:M[yY][eE][sS])
@@ -145,6 +161,10 @@ pre-configure:
 		--disable-dependency-tracking
 	cd ${WRKDIR}/libarchive && ${BUILD_MAKE_CMD}
 .endif
+	cd ${WRKDIR}/libfetch && ${SETENV} ${MAKE_ENV}			\
+		${MAKE_PROGRAM} ${MAKE_FLAGS} ${BUILD_MAKE_FLAGS}	\
+			-f ${MAKE_FILE} depend all
+
 
 # XXX Reverse the order that update does things since
 # XXX we need pkg_delete built before we can deinstall.

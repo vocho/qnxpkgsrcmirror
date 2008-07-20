@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.14 2006/03/04 21:30:23 jlam Exp $
+# $NetBSD: Makefile,v 1.16 2008/06/12 02:14:41 joerg Exp $
 #
 
 DISTNAME=	pymetar-0.12
@@ -11,9 +11,10 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.schwarzvogel.de/software-pymetar.shtml
 COMMENT=	Downloads weather reports
 
+PKG_DESTDIR_SUPPORT=	user-destdir
+
 PYDISTUTILSPKG=	yes
 PLIST_SUBST+=	PYVERSSUFFIX=${PYVERSSUFFIX:Q}
-PYTHON_VERSIONS_ACCEPTED=	23 24
 
 post-extract:
 	${MV} ${WRKSRC}/bin/weather.py ${WRKSRC}/bin/weather-${PYVERSSUFFIX}.py

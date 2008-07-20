@@ -88,11 +88,14 @@ DEFINE_TEST(test_option_c)
 
 	/* Use the cpio program to create an archive. */
 	close(filelist);
-	r = systemf("%s -oc --quiet <filelist >basic.out 2>basic.err", testprog);
-	assertEqualInt(r, 0);
-
+	r = systemf("%s -oc <filelist >basic.out 2>basic.err", testprog);
 	/* Verify that nothing went to stderr. */
-	assertEmptyFile("basic.err");
+	assertFileContents("1 block\n", 8, "basic.err");
+
+	/* Assert that the program finished. */
+	failure("%s -oc crashed", testprog);
+	if (!assertEqualInt(r, 0))
+		return;
 
 	/* Verify that stdout is a well-formed cpio file in "odc" format. */
 	p = slurpfile(&s, "basic.out");

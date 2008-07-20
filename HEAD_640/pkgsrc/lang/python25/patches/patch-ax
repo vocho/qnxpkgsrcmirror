@@ -1,0 +1,22 @@
+$NetBSD$
+
+--- Modules/_ctypes/malloc_closure.c.orig	2006-06-12 16:56:48.000000000 -0400
++++ Modules/_ctypes/malloc_closure.c
+@@ -40,12 +40,16 @@ static void more_core(void)
+ 	int count, i;
+ 
+ /* determine the pagesize */
+-#ifdef MS_WIN32
++#if defined(MS_WIN32)
+ 	if (!_pagesize) {
+ 		SYSTEM_INFO systeminfo;
+ 		GetSystemInfo(&systeminfo);
+ 		_pagesize = systeminfo.dwPageSize;
+ 	}
++#elif defined(__QNXNTO__)
++	if (!_pagesize) {
++		_pagesize = sysconf(_SC_PAGESIZE);
++	}
+ #else
+ 	if (!_pagesize) {
+ 		_pagesize = getpagesize();

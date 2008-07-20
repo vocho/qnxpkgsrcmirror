@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.12 2007/07/11 20:16:33 adrianp Exp $
+# $NetBSD: Makefile,v 1.14 2008/06/02 12:23:04 obache Exp $
 #
 
 DISTNAME=		chkrootkit-0.47
+PKGREVISION=		1
 CATEGORIES=		security
 MASTER_SITES=		ftp://ftp.pangeia.com.br/pub/seg/pac/
 
@@ -33,9 +34,10 @@ SUBST_SED.helper=	-e "s|./chklastlog|${PREFIX}/bin/chklastlog|g"	\
 
 .include "../../mk/compiler.mk"
 
+PLIST_VARS+=	wtmpx
 .if ${OPSYS} == "SunOS"
 PROGRAMS+=	check_wtmpx
-PLIST_SUBST+=	WTMPX=""
+PLIST.wtmpx=	yes
 CFLAGS+=	-DSOLARIS2
 LDFLAGS+=	-lsocket
 .  if empty(CC_VERSION:Mgcc-*)
@@ -44,7 +46,6 @@ MAKE_ENV+=	STATIC="-B static"
 MAKE_ENV+=	STATIC="-static"
 .  endif
 .else
-PLIST_SUBST+=	WTMPX="@comment "
 MAKE_ENV+=	STATIC="-static"
 .endif
 

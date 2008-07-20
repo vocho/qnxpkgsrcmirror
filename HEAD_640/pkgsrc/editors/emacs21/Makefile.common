@@ -1,9 +1,9 @@
-# $NetBSD: Makefile.common,v 1.2 2007/10/29 12:38:02 uebayasi Exp $
+# $NetBSD: Makefile.common,v 1.5 2008/06/03 22:17:00 markd Exp $
 
 DISTNAME=	emacs-${EMACSVERSION}a
 
 MASTER_SITES=	${MASTER_SITE_GNU:=emacs/}
-MAINTAINER=	markd@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.gnu.org/software/emacs/emacs.html
 
 CONFLICTS=	mule-[0-9]*
@@ -49,11 +49,11 @@ LDFLAGS+=	-Wl,-z,nocombreloc
 CPPFLAGS+=	-DDFLY_PRE_17_CRT
 .endif
 
+PLIST_VARS+=	fns.el
 .if ${OPSYS} == "Darwin"
-PLIST_SUBST+=	FNS_EL="@comment "
 PLIST_SUBST+=	DOCTAIL=""
 .else
-PLIST_SUBST+=	FNS_EL=""
+PLIST.fns.el=	yes
 PLIST_SUBST+=	DOCTAIL="-${EMACSVERSION}.1"
 .endif
 
@@ -83,7 +83,8 @@ post-extract:
 post-build:
 	cd ${WRKSRC}/lisp && \
 	   rm sort.elc && ${MAKE_PROGRAM} sort.elc && \
-	   rm mail/smtpmail.elc && ${MAKE_PROGRAM} mail/smtpmail.elc
+	   rm mail/smtpmail.elc && ${MAKE_PROGRAM} mail/smtpmail.elc && \
+	   rm fast-lock.elc && ${MAKE_PROGRAM} fast-lock.elc
 
 pre-install:
 	@${FIND} ${WRKSRC} -type f -name "*.orig" -print | ${XARGS} ${RM} -f

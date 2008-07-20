@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.14 2007/07/04 20:54:52 jlam Exp $
+# $NetBSD: Makefile,v 1.17 2008/06/20 01:09:31 joerg Exp $
 #
 
 DISTNAME=	pygopherd_2.0.9
@@ -10,6 +10,8 @@ MASTER_SITES=	http://gopher.quux.org:70/devel/gopher/Downloads/pygopherd/
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://gopher.quux.org:70/devel/gopher/pygopherd/
 COMMENT=	Gopher server
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 PYDISTUTILSPKG=	yes
 PY_PATCHPLIST=	yes
@@ -44,7 +46,7 @@ PYTHON_PATCH_SCRIPTS+=	pygopherd/gopherentryTest.py
 PYTHON_PATCH_SCRIPTS+=	pygopherd/initializationTest.py
 PYTHON_PATCH_SCRIPTS+=	pygopherd/testutil.py
 
-PYTHON_VERSIONS_ACCEPTED=	23 22
+PYTHON_VERSIONS_ACCEPTED=	23
 
 SUBST_CLASSES+=		man
 SUBST_STAGE.man=	post-patch
@@ -63,9 +65,9 @@ post-extract:
 
 post-install:
 	for egfile in ${EGFILES}; do \
-		${INSTALL_DATA} $$egfile ${EXAMPLEDIR}; \
+		${INSTALL_DATA} $$egfile ${DESTDIR}${EXAMPLEDIR}; \
 	done
-	${INSTALL_MAN} ${WRKSRC}/doc/pygopherd.8 ${PREFIX}/${PKGMANDIR}/man8
+	${INSTALL_MAN} ${WRKSRC}/doc/pygopherd.8 ${DESTDIR}${PREFIX}/${PKGMANDIR}/man8
 
 .include "../../lang/python/extension.mk"
 .include "../../mk/bsd.pkg.mk"

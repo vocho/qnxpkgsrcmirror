@@ -1,8 +1,8 @@
 $NetBSD$
 
---- src/osdep/unix/os_nto.c.orig	2001-04-10 17:59:16.000000000 -0400
+--- src/osdep/unix/os_nto.c.orig	2006-08-30 21:54:31.000000000 -0400
 +++ src/osdep/unix/os_nto.c
-@@ -30,7 +30,6 @@
+@@ -38,7 +38,6 @@
  #include <netdb.h>
  #include <ctype.h>
  #include <errno.h>
@@ -10,7 +10,7 @@ $NetBSD$
  #include <pwd.h>
  #include <shadow.h>
  #include <sys/select.h>
-@@ -38,6 +37,17 @@ extern int errno;		/* just in case */
+@@ -46,6 +45,17 @@ extern int errno;		/* just in case */
  
  #define DIR_SIZE(d) d->d_reclen
  
@@ -28,47 +28,27 @@ $NetBSD$
  #include "fs_unix.c"
  #include "ftl_unix.c"
  #include "nl_unix.c"
-@@ -66,3 +76,43 @@ struct direct *Readdir (DIR *dirp)
-   dc.d_reclen = sizeof (dc);
-   return &dc;
- }
-+
+@@ -56,21 +66,8 @@ extern int errno;		/* just in case */
+ #include "gethstid.c"
+ #include "flocksim.c"
+ #include "utime.c"
+-
+-/* QNX local readdir()
+- * Accepts: directory structure
+- * Returns: direct struct or NIL if failed
+- */
+-
+-#undef readdir
+ 
+-struct direct *Readdir (DIR *dirp)
 +int ustat(dev_t dev, struct ustat *us)
-+{
+ {
+-  static struct direct dc;
+-  struct dirent *de = readdir (dirp);
+-  if (!de) return NIL;		/* end of data */
+-  dc.d_fileno = 0;		/* could get from de->stat.st_ino */
+-  dc.d_namlen = strlen (strcpy (dc.d_name,de->d_name));
+-  dc.d_reclen = sizeof (dc);
+-  return &dc;
 +	return -1;
-+}
-+
-+#undef scandir
-+
-+int Scandir (char *dirname,struct direct ***namelist,select_t select,
-+	     compar_t compar)
-+{
-+  struct direct *p,*d,**names;
-+  int nitems;
-+  long nlmax;
-+  DIR *dirp = opendir (dirname);/* open directory and get status poop */
-+  if ((!dirp)) return -1;
-+  nlmax = 100;	/* guesstimate at number of files */
-+  names = (struct direct **) fs_get (nlmax * sizeof (struct direct *));
-+  nitems = 0;			/* initially none found */
-+  while (d = Readdir (dirp)) {	/* read directory item */
-+				/* matches select criterion? */
-+    if (select && !(*select) (d)) continue;
-+				/* get size of direct record for this file */
-+    p = (struct direct *) fs_get (DIR_SIZE (d));
-+    p->d_ino = d->d_ino;	/* copy the poop */
-+    strcpy (p->d_name,d->d_name);
-+    if (++nitems >= nlmax) {	/* if out of space, try bigger guesstimate */
-+      void *s = (void *) names;	/* stupid language */
-+      nlmax *= 2;		/* double it */
-+      fs_resize ((void **) &s,nlmax * sizeof (struct direct *));
-+      names = (struct direct **) s;
-+    }
-+    names[nitems - 1] = p;	/* store this file there */
-+  }
-+  closedir (dirp);		/* done with directory */
-+				/* sort if necessary */
-+  if (nitems && compar) qsort (names,nitems,sizeof (struct direct *),compar);
-+  *namelist = names;		/* return directory */
-+  return nitems;		/* and size */
-+}
+ }

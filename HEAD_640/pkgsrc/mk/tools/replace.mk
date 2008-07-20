@@ -1,4 +1,4 @@
-# $NetBSD: replace.mk,v 1.209 2008/02/29 00:23:09 tnn Exp $
+# $NetBSD: replace.mk,v 1.213 2008/05/25 16:55:32 joerg Exp $
 #
 # Copyright (c) 2005 The NetBSD Foundation, Inc.
 # All rights reserved.
@@ -258,6 +258,17 @@ TOOLS_CMD.bison-yacc=		${TOOLS_DIR}/bin/yacc
 TOOLS_VALUE_GNU.bison-yacc=	${TOOLS_CMDLINE.bison-yacc}
 .endif
 
+.if !defined(TOOLS_IGNORE.bsdtar) && !empty(_USE_TOOLS:Mbsdtar)
+.  if !empty(PKGPATH:Marchivers/bsdtar)
+MAKEFLAGS+=			TOOLS_IGNORE.bsdtar=
+.  elif !empty(_TOOLS_USE_PKGSRC.bsdtar:M[yY][eE][sS])
+TOOLS_DEPENDS.bsdtar?=		bsdtar-[0-9]*:../../archivers/bsdtar
+TOOLS_CREATE+=			bsdtar
+TOOLS_FIND_PREFIX+=		TOOLS_PREFIX.bsdtar=bsdtar
+TOOLS_PATH.bsdtar=		${TOOLS_PREFIX.bsdtar}/bin/bsdtar
+.  endif
+.endif
+
 .if !defined(TOOLS_IGNORE.byacc) && !empty(_USE_TOOLS:Mbyacc)
 .  if !empty(PKGPATH:Mdevel/byacc)
 MAKEFLAGS+=			TOOLS_IGNORE.byacc=
@@ -357,6 +368,16 @@ TOOLS_PATH.flex=		${TOOLS_PREFIX.flex}/bin/flex
 TOOLS_ALIASES.flex=		lex
 .endif
 
+.if !defined(TOOLS_IGNORE.ftp) && !empty(_USE_TOOLS:Mftp)
+.  if !empty(PKGPATH:Mnet/tnftp)
+MAKEFLAGS+=			TOOLS_IGNORE.ftp=
+.  elif !empty(_TOOLS_USE_PKGSRC.ftp:M[yY][eE][sS])
+TOOLS_DEPENDS.ftp?=		tnftp-[0-9]*:../../net/tnftp
+TOOLS_FIND_PREFIX+=		TOOLS_PREFIX.ftp=ftp
+TOOLS_PATH.ftp=			${TOOLS_PREFIX.ftp}/bin/ftp
+.  endif
+.endif
+
 .if !defined(TOOLS_IGNORE.gawk) && !empty(_USE_TOOLS:Mgawk)
 .  if !empty(PKGPATH:Mlang/gawk)
 MAKEFLAGS+=			TOOLS_IGNORE.gawk=
@@ -396,7 +417,7 @@ TOOLS_ALIASES.gm4=		m4
 .  if !empty(PKGPATH:Mdevel/gmake)
 MAKEFLAGS+=			TOOLS_IGNORE.gmake=
 .  elif !empty(_TOOLS_USE_PKGSRC.gmake:M[yY][eE][sS])
-TOOLS_DEPENDS.gmake?=		gmake>=3.78:../../devel/gmake
+TOOLS_DEPENDS.gmake?=		gmake>=3.81:../../devel/gmake
 TOOLS_CREATE+=			gmake
 TOOLS_FIND_PREFIX+=		TOOLS_PREFIX.gmake=gmake
 TOOLS_PATH.gmake=		${TOOLS_PREFIX.gmake}/bin/gmake
@@ -613,11 +634,7 @@ _PATCH_BACKUP_ARG?=		-b -V simple -z
 .  if !empty(PKGPATH:Marchivers/pax)
 MAKEFLAGS+=			TOOLS_IGNORE.pax=
 .  elif !empty(_TOOLS_USE_PKGSRC.pax:M[yY][eE][sS])
-#
-# This is installed by pkgsrc bootstrap, and is never registered, so
-# comment out the dependency on it.
-#
-#TOOLS_DEPENDS.pax?=		pax>=20040802:../../archivers/pax
+TOOLS_DEPENDS.pax?=		pax>=20040802:../../archivers/pax
 TOOLS_CREATE+=			pax
 TOOLS_FIND_PREFIX+=		TOOLS_PREFIX.pax=pax
 TOOLS_PATH.pax=			${TOOLS_PREFIX.pax}/bin/pax

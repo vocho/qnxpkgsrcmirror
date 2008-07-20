@@ -1,6 +1,8 @@
-/*	$NetBSD: http.c,v 1.8 2008/02/07 18:02:01 joerg Exp $	*/
+/*	$NetBSD: http.c,v 1.19 2008/05/06 17:37:30 joerg Exp $	*/
 /*-
  * Copyright (c) 2000-2004 Dag-Erling Coïdan Smørgrav
+ * Copyright (c) 2003 Thomas Klausner <wiz@NetBSD.org>
+ * Copyright (c) 2008 Joerg Sonnenberger <joerg@NetBSD.org>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -61,6 +63,16 @@
  * SUCH DAMAGE.
  */
 
+#ifdef __linux__
+/* Keep this down to Linux, it can create surprises else where. */
+#define _GNU_SOURCE
+#endif
+
+#if HAVE_CONFIG_H
+#include "config.h"
+#endif
+#include <nbcompat.h>
+
 #include <sys/types.h>
 #include <sys/socket.h>
 
@@ -69,9 +81,14 @@
 #include <locale.h>
 #include <netdb.h>
 #include <stdarg.h>
+#ifndef NETBSD
+#include <nbcompat/stdio.h>
+#else
 #include <stdio.h>
+#endif
 #include <stdlib.h>
 #include <string.h>
+#include <strings.h>
 #include <time.h>
 #include <unistd.h>
 
@@ -120,9 +137,6 @@ struct httpio
 	int		 eof;		/* end-of-file flag */
 	int		 error;		/* error flag */
 	size_t		 chunksize;	/* remaining size of current chunk */
-#ifndef NDEBUG
-	size_t		 total;
-#endif
 };
 
 /*
@@ -153,25 +167,13 @@ http_new_chunk(struct httpio *io)
 		}
 	}
 
-#ifndef NDEBUG
-	if (fetchDebug) {
-		io->total += io->chunksize;
-		if (io->chunksize == 0)
-			fprintf(stderr, "http_new_chunk(): end of last chunk\n");
-		else
-			fprintf(stderr, "http_new_chunk(): new chunk: %lu (%lu)\n",
-			    (unsigned long)io->chunksize,
-			    (unsigned long)io->total);
-	}
-#endif
-
 	return (io->chunksize);
 }
 
 /*
  * Grow the input buffer to at least len bytes
  */
-static inline int
+static int
 http_growbuf(struct httpio *io, size_t len)
 {
 	char *tmp;
@@ -245,11 +247,11 @@ http_fillbuf(struct httpio *io, size_t len)
 /*
  * Read function
  */
-static int
-http_readfn(void *v, char *buf, int len)
+static ssize_t
+http_readfn(void *v, void *buf, size_t len)
 {
 	struct httpio *io = (struct httpio *)v;
-	int l, pos;
+	size_t l, pos;
 
 	if (io->error)
 		return (-1);
@@ -264,7 +266,7 @@ http_readfn(void *v, char *buf, int len)
 		l = io->buflen - io->bufpos;
 		if (len < l)
 			l = len;
-		memcpy(buf + pos, io->buf + io->bufpos, l);
+		memcpy((char *)buf + pos, io->buf + io->bufpos, l);
 		io->bufpos += l;
 	}
 
@@ -276,8 +278,8 @@ http_readfn(void *v, char *buf, int len)
 /*
  * Write function
  */
-static int
-http_writefn(void *v, const char *buf, int len)
+static ssize_t
+http_writefn(void *v, const void *buf, size_t len)
 {
 	struct httpio *io = (struct httpio *)v;
 
@@ -287,27 +289,25 @@ http_writefn(void *v, const char *buf, int len)
 /*
  * Close function
  */
-static int
+static void
 http_closefn(void *v)
 {
 	struct httpio *io = (struct httpio *)v;
-	int r;
 
-	r = fetch_close(io->conn);
+	fetch_close(io->conn);
 	if (io->buf)
 		free(io->buf);
 	free(io);
-	return (r);
 }
 
 /*
  * Wrap a file descriptor up
  */
-static FILE *
+static fetchIO *
 http_funopen(conn_t *conn, int chunked)
 {
 	struct httpio *io;
-	FILE *f;
+	fetchIO *f;
 
 	if ((io = calloc(1, sizeof(*io))) == NULL) {
 		fetch_syserr();
@@ -315,7 +315,7 @@ http_funopen(conn_t *conn, int chunked)
 	}
 	io->conn = conn;
 	io->chunked = chunked;
-	f = funopen(io, http_readfn, http_writefn, NULL, http_closefn);
+	f = fetchIO_unopen(io, http_readfn, http_writefn, http_closefn);
 	if (f == NULL) {
 		fetch_syserr();
 		free(io);
@@ -486,10 +486,6 @@ http_parse_mtime(const char *p, time_t *mtime)
 	setlocale(LC_TIME, locale);
 	if (r == NULL)
 		return (-1);
-	DEBUG(fprintf(stderr, "last modified: [%04d-%02d-%02d "
-		  "%02d:%02d:%02d]\n",
-		  tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday,
-		  tm.tm_hour, tm.tm_min, tm.tm_sec));
 	*mtime = timegm(&tm);
 	return (0);
 }
@@ -506,8 +502,6 @@ http_parse_length(const char *p, off_t *length)
 		len = len * 10 + (*p - '0');
 	if (*p)
 		return (-1);
-	DEBUG(fprintf(stderr, "content length: [%lld]\n",
-	    (long long)len));
 	*length = len;
 	return (0);
 }
@@ -540,15 +534,10 @@ http_parse_range(const char *p, off_t *offset, off_t *length, off_t *size)
 		len = len * 10 + *p - '0';
 	if (*p || len < last - first + 1)
 		return (-1);
-	if (first == -1) {
-		DEBUG(fprintf(stderr, "content range: [*/%lld]\n",
-		    (long long)len));
+	if (first == -1)
 		*length = 0;
-	} else {
-		DEBUG(fprintf(stderr, "content range: [%lld-%lld/%lld]\n",
-		    (long long)first, (long long)last, (long long)len));
+	else
 		*length = last - first + 1;
-	}
 	*offset = first;
 	*size = len;
 	return (0);
@@ -624,8 +613,6 @@ http_basic_auth(conn_t *conn, const char *hdr, const char *usr, const char *pwd)
 	char *upw, *auth;
 	int r;
 
-	DEBUG(fprintf(stderr, "usr: [%s]\n", usr));
-	DEBUG(fprintf(stderr, "pwd: [%s]\n", pwd));
 	if (asprintf(&upw, "%s:%s", usr, pwd) == -1)
 		return (-1);
 	auth = http_base64(upw);
@@ -751,45 +738,6 @@ http_get_proxy(struct url * url, const char *flags)
 	return (NULL);
 }
 
-static void
-http_print_html(FILE *out, FILE *in)
-{
-	size_t len;
-	char *line, *p, *q;
-	int comment, tag;
-
-	comment = tag = 0;
-	while ((line = fgetln(in, &len)) != NULL) {
-		while (len && isspace((unsigned char)line[len - 1]))
-			--len;
-		for (p = q = line; q < line + len; ++q) {
-			if (comment && *q == '-') {
-				if (q + 2 < line + len &&
-				    strcmp(q, "-->") == 0) {
-					tag = comment = 0;
-					q += 2;
-				}
-			} else if (tag && !comment && *q == '>') {
-				p = q + 1;
-				tag = 0;
-			} else if (!tag && *q == '<') {
-				if (q > p)
-					fwrite(p, q - p, 1, out);
-				tag = 1;
-				if (q + 3 < line + len &&
-				    strcmp(q, "<!--") == 0) {
-					comment = 1;
-					q += 3;
-				}
-			}
-		}
-		if (!tag && q > p)
-			fwrite(p, q - p, 1, out);
-		fputc('\n', out);
-	}
-}
-
-
 /*****************************************************************************
  * Core
  */
@@ -800,7 +748,7 @@ http_print_html(FILE *out, FILE *in)
  * XXX This function is way too long, the do..while loop should be split
  * XXX off into a separate function.
  */
-FILE *
+fetchIO *
 http_request(struct url *URL, const char *op, struct url_stat *us,
     struct url *purl, const char *flags)
 {
@@ -811,7 +759,7 @@ http_request(struct url *URL, const char *op, struct url_stat *us,
 	off_t offset, clength, length, size;
 	time_t mtime;
 	const char *p;
-	FILE *f;
+	fetchIO *f;
 	hdr_t h;
 	char hbuf[URL_HOSTLEN + 7], *host;
 
@@ -849,9 +797,9 @@ http_request(struct url *URL, const char *op, struct url_stat *us,
 		/* were we redirected to an FTP URL? */
 		if (purl == NULL && strcmp(url->scheme, SCHEME_FTP) == 0) {
 			if (strcmp(op, "GET") == 0)
-				return (ftp_request(url, "RETR", us, purl, flags));
+				return (ftp_request(url, "RETR", NULL, us, purl, flags));
 			else if (strcmp(op, "HEAD") == 0)
-				return (ftp_request(url, "STAT", us, purl, flags));
+				return (ftp_request(url, "STAT", NULL, us, purl, flags));
 		}
 
 		/* connect to server or proxy */
@@ -1032,7 +980,6 @@ http_request(struct url *URL, const char *op, struct url_stat *us,
 					new = fetchParseURL(p);
 				if (new == NULL) {
 					/* XXX should set an error code */
-					DEBUG(fprintf(stderr, "failed to parse new URL\n"));
 					goto ouch;
 				}
 				if (!*new->user && !*new->pwd) {
@@ -1090,10 +1037,8 @@ http_request(struct url *URL, const char *op, struct url_stat *us,
 		need_auth = 0;
 		fetch_close(conn);
 		conn = NULL;
-		if (!new) {
-			DEBUG(fprintf(stderr, "redirect with no new location\n"));
+		if (!new)
 			break;
-		}
 		if (url != URL)
 			fetchFreeURL(url);
 		url = new;
@@ -1104,11 +1049,6 @@ http_request(struct url *URL, const char *op, struct url_stat *us,
 		http_seterr(e);
 		goto ouch;
 	}
-
-	DEBUG(fprintf(stderr, "offset %lld, length %lld,"
-		  " size %lld, clength %lld\n",
-		  (long long)offset, (long long)length,
-		  (long long)size, (long long)clength));
 
 	/* check for inconsistencies */
 	if (clength != -1 && length != -1 && clength != length) {
@@ -1142,7 +1082,7 @@ http_request(struct url *URL, const char *op, struct url_stat *us,
 	URL->offset = offset;
 	URL->length = clength;
 
-	/* wrap it up in a FILE */
+	/* wrap it up in a fetchIO */
 	if ((f = http_funopen(conn, chunked)) == NULL) {
 		fetch_syserr();
 		goto ouch;
@@ -1154,8 +1094,7 @@ http_request(struct url *URL, const char *op, struct url_stat *us,
 		fetchFreeURL(purl);
 
 	if (HTTP_ERROR(conn->err)) {
-		http_print_html(stderr, f);
-		fclose(f);
+		fetchIO_close(f);
 		f = NULL;
 	}
 
@@ -1179,7 +1118,7 @@ ouch:
 /*
  * Retrieve and stat a file by HTTP
  */
-FILE *
+fetchIO *
 fetchXGetHTTP(struct url *URL, struct url_stat *us, const char *flags)
 {
 	return (http_request(URL, "GET", us, http_get_proxy(URL, flags), flags));
@@ -1188,7 +1127,7 @@ fetchXGetHTTP(struct url *URL, struct url_stat *us, const char *flags)
 /*
  * Retrieve a file by HTTP
  */
-FILE *
+fetchIO *
 fetchGetHTTP(struct url *URL, const char *flags)
 {
 	return (fetchXGetHTTP(URL, NULL, flags));
@@ -1197,7 +1136,7 @@ fetchGetHTTP(struct url *URL, const char *flags)
 /*
  * Store a file by HTTP
  */
-FILE *
+fetchIO *
 fetchPutHTTP(struct url *URL, const char *flags)
 {
 	fprintf(stderr, "fetchPutHTTP(): not implemented\n");
@@ -1210,21 +1149,205 @@ fetchPutHTTP(struct url *URL, const char *flags)
 int
 fetchStatHTTP(struct url *URL, struct url_stat *us, const char *flags)
 {
-	FILE *f;
+	fetchIO *f;
 
 	f = http_request(URL, "HEAD", us, http_get_proxy(URL, flags), flags);
 	if (f == NULL)
 		return (-1);
-	fclose(f);
+	fetchIO_close(f);
 	return (0);
+}
+
+enum http_states {
+	ST_NONE,
+	ST_LT,
+	ST_LTA,
+	ST_TAGA,
+	ST_H,
+	ST_R,
+	ST_E,
+	ST_F,
+	ST_HREF,
+	ST_HREFQ,
+	ST_TAG,
+	ST_TAGAX,
+	ST_TAGAQ
+};
+
+struct index_parser {
+	struct url_list *ue;
+	struct url *url;
+	enum http_states state;
+};
+
+static size_t
+parse_index(struct index_parser *parser, const char *buf, size_t len)
+{
+	char *end_attr, p = *buf;
+
+	switch (parser->state) {
+	case ST_NONE:
+		/* Plain text, not in markup */
+		if (p == '<')
+			parser->state = ST_LT;
+		return 1;
+	case ST_LT:
+		/* In tag -- "<" already found */
+		if (p == '>')
+			parser->state = ST_NONE;
+		else if (p == 'a' || p == 'A')
+			parser->state = ST_LTA;
+		else if (!isspace((unsigned char)p))
+			parser->state = ST_TAG;
+		return 1;
+	case ST_LTA:
+		/* In tag -- "<a" already found */
+		if (p == '>')
+			parser->state = ST_NONE;
+		else if (p == '"')
+			parser->state = ST_TAGAQ;
+		else if (isspace((unsigned char)p))
+			parser->state = ST_TAGA;
+		else
+			parser->state = ST_TAG;
+		return 1;
+	case ST_TAG:
+		/* In tag, but not "<a" -- disregard */
+		if (p == '>')
+			parser->state = ST_NONE;
+		return 1;
+	case ST_TAGA:
+		/* In a-tag -- "<a " already found */
+		if (p == '>')
+			parser->state = ST_NONE;
+		else if (p == '"')
+			parser->state = ST_TAGAQ;
+		else if (p == 'h' || p == 'H')
+			parser->state = ST_H;
+		else if (!isspace((unsigned char)p))
+			parser->state = ST_TAGAX;
+		return 1;
+	case ST_TAGAX:
+		/* In unknown keyword in a-tag */
+		if (p == '>')
+			parser->state = ST_NONE;
+		else if (p == '"')
+			parser->state = ST_TAGAQ;
+		else if (isspace((unsigned char)p))
+			parser->state = ST_TAGA;
+		return 1;
+	case ST_TAGAQ:
+		/* In a-tag, unknown argument for keys. */
+		if (p == '>')
+			parser->state = ST_NONE;
+		else if (p == '"')
+			parser->state = ST_TAGA;
+		return 1;
+	case ST_H:
+		/* In a-tag -- "<a h" already found */
+		if (p == '>')
+			parser->state = ST_NONE;
+		else if (p == '"')
+			parser->state = ST_TAGAQ;
+		else if (p == 'r' || p == 'R')
+			parser->state = ST_R;
+		else if (isspace((unsigned char)p))
+			parser->state = ST_TAGA;
+		else
+			parser->state = ST_TAGAX;
+		return 1;
+	case ST_R:
+		/* In a-tag -- "<a hr" already found */
+		if (p == '>')
+			parser->state = ST_NONE;
+		else if (p == '"')
+			parser->state = ST_TAGAQ;
+		else if (p == 'e' || p == 'E')
+			parser->state = ST_E;
+		else if (isspace((unsigned char)p))
+			parser->state = ST_TAGA;
+		else
+			parser->state = ST_TAGAX;
+		return 1;
+	case ST_E:
+		/* In a-tag -- "<a hre" already found */
+		if (p == '>')
+			parser->state = ST_NONE;
+		else if (p == '"')
+			parser->state = ST_TAGAQ;
+		else if (p == 'f' || p == 'F')
+			parser->state = ST_F;
+		else if (isspace((unsigned char)p))
+			parser->state = ST_TAGA;
+		else
+			parser->state = ST_TAGAX;
+		return 1;
+	case ST_F:
+		/* In a-tag -- "<a href" already found */
+		if (p == '>')
+			parser->state = ST_NONE;
+		else if (p == '"')
+			parser->state = ST_TAGAQ;
+		else if (p == '=')
+			parser->state = ST_HREF;
+		else if (!isspace((unsigned char)p))
+			parser->state = ST_TAGAX;
+		return 1;
+	case ST_HREF:
+		/* In a-tag -- "<a href=" already found */
+		if (p == '>')
+			parser->state = ST_NONE;
+		else if (p == '"')
+			parser->state = ST_HREFQ;
+		else if (!isspace((unsigned char)p))
+			parser->state = ST_TAGA;
+		return 1;
+	case ST_HREFQ:
+		/* In href of the a-tag */
+		end_attr = memchr(buf, '"', len);
+		if (end_attr == NULL)
+			return 0;
+		*end_attr = '\0';
+		parser->state = ST_TAGA;
+		fetch_add_entry(parser->ue, parser->url, buf, 1);
+		return end_attr + 1 - buf;
+	}
+	abort();
 }
 
 /*
  * List a directory
  */
-struct url_ent *
-fetchListHTTP(struct url *url, const char *flags)
+int
+fetchListHTTP(struct url_list *ue, struct url *url, const char *pattern, const char *flags)
 {
-	fprintf(stderr, "fetchListHTTP(): not implemented\n");
-	return (NULL);
+	fetchIO *f;
+	char buf[2 * PATH_MAX];
+	size_t buf_len, processed, sum_processed;
+	ssize_t read_len;
+	struct index_parser state;
+
+	state.url = url;
+	state.state = ST_NONE;
+	state.ue = ue;
+
+	f = fetchGetHTTP(url, flags);
+	if (f == NULL)
+		return -1;
+
+	buf_len = 0;
+
+	while ((read_len = fetchIO_read(f, buf + buf_len, sizeof(buf) - buf_len)) > 0) {
+		buf_len += read_len;
+		sum_processed = 0;
+		do {
+			processed = parse_index(&state, buf + sum_processed, buf_len);
+			buf_len -= processed;
+			sum_processed += processed;
+		} while (processed != 0 && buf_len > 0);
+		memmove(buf, buf + sum_processed, buf_len);
+	}
+
+	fetchIO_close(f);
+	return read_len < 0 ? -1 : 0;
 }

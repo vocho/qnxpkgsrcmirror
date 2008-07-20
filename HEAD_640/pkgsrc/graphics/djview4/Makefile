@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.1.1.1 2007/11/22 21:02:00 drochner Exp $
+# $NetBSD: Makefile,v 1.3 2008/06/20 01:09:21 joerg Exp $
 #
 
 DISTNAME=	djview4-4.2-2
@@ -10,9 +10,12 @@ MAINTAINER=	matias@dotbsd.org
 HOMEPAGE=	http://djvu.sourceforge.net/
 COMMENT=	Portable DjVu viewer and browser plugin
 
+PKG_DESTDIR_SUPPORT=	user-destdir
+
 WRKSRC=		${WRKDIR}/djview4-4.2
 GNU_CONFIGURE=	yes
 USE_LANGUAGES=	c c++
+USE_TOOLS+=	pkg-config
 
 .include "../../graphics/djvulibre-lib/buildlink3.mk"
 .include "../../x11/qt4-libs/buildlink3.mk"

@@ -1,6 +1,6 @@
 $NetBSD: patch-ai,v 1.2 2005/11/08 12:58:47 joerg Exp $
 
---- os.h.orig	2002-01-08 15:42:33.000000000 +0000
+--- os.h.orig	2002-01-08 10:42:33.000000000 -0500
 +++ os.h
 @@ -62,9 +62,6 @@
  # undef exit
@@ -12,6 +12,15 @@ $NetBSD: patch-ai,v 1.2 2005/11/08 12:58:47 joerg Exp $
  #ifndef HAVE_STRERROR
  /* No macros, please */
  #undef strerror
+@@ -235,7 +232,7 @@ extern int errno;
+  * Joe Traister: On AIX4, programs like irc won't work if screen
+  * uses TIOCPKT (select fails to return on pty read).
+  */
+-#if defined(sgi) || defined(DGUX) || defined(_IBMR2)
++#if defined(sgi) || defined(DGUX) || defined(_IBMR2) || defined(__QNXNTO__)
+ # undef TIOCPKT
+ #endif
+ 
 @@ -260,9 +257,15 @@ extern int errno;
  #endif
  

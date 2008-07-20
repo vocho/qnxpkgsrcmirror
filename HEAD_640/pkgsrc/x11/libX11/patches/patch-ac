@@ -1,8 +1,8 @@
-$NetBSD$
+$NetBSD: patch-ac,v 1.4 2008/04/24 07:45:49 joerg Exp $
 
---- configure.orig	2007-08-01 20:36:36.000000000 +0200
+--- configure.orig	2008-03-06 15:48:42.000000000 -0500
 +++ configure
-@@ -926,6 +926,8 @@ XKB_FALSE
+@@ -927,6 +927,8 @@ XKB_FALSE
  XKBPROTO_CFLAGS
  XKBPROTO_LIBS
  XKBPROTO_REQUIRES
@@ -11,7 +11,7 @@ $NetBSD$
  LINT
  LINT_FLAGS
  LINT_TRUE
-@@ -4357,7 +4359,7 @@ newos6*)
+@@ -4389,7 +4391,7 @@ newos6*)
    ;;
  
  nto-qnx*)
@@ -20,8 +20,8 @@ $NetBSD$
    ;;
  
  openbsd*)
-@@ -7463,6 +7465,10 @@ echo $ECHO_N "checking for $compiler opt
-       lt_prog_compiler_static='-Bstatic'
+@@ -7342,6 +7344,10 @@ echo $ECHO_N "checking for $compiler opt
+       esac
        ;;
  
 +    nto-qnx*)
@@ -29,9 +29,9 @@ $NetBSD$
 +      ;;
 +
      *)
-       lt_prog_compiler_can_build_shared=no
+       lt_prog_compiler_pic='-fPIC'
        ;;
-@@ -7933,6 +7939,11 @@ _LT_EOF
+@@ -7966,6 +7972,11 @@ _LT_EOF
        hardcode_shlibpath_var=no
        ;;
  
@@ -43,7 +43,7 @@ $NetBSD$
      *)
        if $LD --help 2>&1 | grep ': supported targets:.* elf' > /dev/null; then
  	archive_cmds='$CC -shared $libobjs $deplibs $compiler_flags ${wl}-soname $wl$soname -o $lib'
-@@ -8625,6 +8636,13 @@ if test -z "$aix_libpath"; then aix_libp
+@@ -8658,6 +8669,13 @@ if test -z "$aix_libpath"; then aix_libp
        hardcode_shlibpath_var=no
        ;;
  
@@ -57,7 +57,7 @@ $NetBSD$
      *)
        ld_shlibs=no
        ;;
-@@ -9153,6 +9171,7 @@ nto-qnx*)
+@@ -9188,6 +9206,7 @@ nto-qnx*)
    need_lib_prefix=no
    need_version=no
    library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${release}${shared_ext}$major $libname${shared_ext}'
@@ -65,7 +65,7 @@ $NetBSD$
    soname_spec='${libname}${release}${shared_ext}$major'
    shlibpath_var=LD_LIBRARY_PATH
    shlibpath_overrides_runpath=yes
-@@ -13119,6 +13138,7 @@ nto-qnx*)
+@@ -13156,6 +13175,7 @@ nto-qnx*)
    need_lib_prefix=no
    need_version=no
    library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${release}${shared_ext}$major $libname${shared_ext}'
@@ -73,7 +73,7 @@ $NetBSD$
    soname_spec='${libname}${release}${shared_ext}$major'
    shlibpath_var=LD_LIBRARY_PATH
    shlibpath_overrides_runpath=yes
-@@ -15720,6 +15740,7 @@ nto-qnx*)
+@@ -15759,6 +15779,7 @@ nto-qnx*)
    need_lib_prefix=no
    need_version=no
    library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${release}${shared_ext}$major $libname${shared_ext}'
@@ -81,7 +81,7 @@ $NetBSD$
    soname_spec='${libname}${release}${shared_ext}$major'
    shlibpath_var=LD_LIBRARY_PATH
    shlibpath_overrides_runpath=yes
-@@ -18321,6 +18342,7 @@ nto-qnx*)
+@@ -18362,6 +18383,7 @@ nto-qnx*)
    need_lib_prefix=no
    need_version=no
    library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${release}${shared_ext}$major $libname${shared_ext}'
@@ -89,16 +89,111 @@ $NetBSD$
    soname_spec='${libname}${release}${shared_ext}$major'
    shlibpath_var=LD_LIBRARY_PATH
    shlibpath_overrides_runpath=yes
-@@ -20258,7 +20280,7 @@ fi
+@@ -22885,43 +22907,38 @@ esac
  
  
  
--for ac_prog in cpp
-+for ac_prog in cpp ucpp
- do
-   # Extract the first word of "$ac_prog", so it can be a program name with args.
- set dummy $ac_prog; ac_word=$2
-@@ -23423,6 +23445,15 @@ else
+-{ echo "$as_me:$LINENO: checking for pthread_self in -lc" >&5
+-echo $ECHO_N "checking for pthread_self in -lc... $ECHO_C" >&6; }
+-if test "${ac_cv_lib_c_pthread_self+set}" = set; then
++{ echo "$as_me:$LINENO: checking whether pthread_self is declared" >&5
++echo $ECHO_N "checking whether pthread_self is declared... $ECHO_C" >&6; }
++if test "${ac_cv_have_decl_pthread_self+set}" = set; then
+   echo $ECHO_N "(cached) $ECHO_C" >&6
+ else
+-  ac_check_lib_save_LIBS=$LIBS
+-LIBS="-lc  $LIBS"
+-cat >conftest.$ac_ext <<_ACEOF
++  cat >conftest.$ac_ext <<_ACEOF
+ /* confdefs.h.  */
+ _ACEOF
+ cat confdefs.h >>conftest.$ac_ext
+ cat >>conftest.$ac_ext <<_ACEOF
+ /* end confdefs.h.  */
++#include <pthread.h>
+ 
+-/* Override any GCC internal prototype to avoid an error.
+-   Use char because int might match the return type of a GCC
+-   builtin and then its argument prototype would still apply.  */
+-#ifdef __cplusplus
+-extern "C"
+-#endif
+-char pthread_self ();
+ int
+ main ()
+ {
+-return pthread_self ();
++#ifndef pthread_self
++  (void) pthread_self;
++#endif
++
+   ;
+   return 0;
+ }
+ _ACEOF
+-rm -f conftest.$ac_objext conftest$ac_exeext
+-if { (ac_try="$ac_link"
++rm -f conftest.$ac_objext
++if { (ac_try="$ac_compile"
+ case "(($ac_try" in
+   *\"* | *\`* | *\\*) ac_try_echo=\$ac_try;;
+   *) ac_try_echo=$ac_try;;
+ esac
+ eval "echo \"\$as_me:$LINENO: $ac_try_echo\"") >&5
+-  (eval "$ac_link") 2>conftest.er1
++  (eval "$ac_compile") 2>conftest.er1
+   ac_status=$?
+   grep -v '^ *+' conftest.er1 >conftest.err
+   rm -f conftest.er1
+@@ -22930,28 +22947,35 @@ eval "echo \"\$as_me:$LINENO: $ac_try_ec
+   (exit $ac_status); } && {
+ 	 test -z "$ac_c_werror_flag" ||
+ 	 test ! -s conftest.err
+-       } && test -s conftest$ac_exeext &&
+-       $as_test_x conftest$ac_exeext; then
+-  ac_cv_lib_c_pthread_self=yes
++       } && test -s conftest.$ac_objext; then
++  ac_cv_have_decl_pthread_self=yes
+ else
+   echo "$as_me: failed program was:" >&5
+ sed 's/^/| /' conftest.$ac_ext >&5
+ 
+-	ac_cv_lib_c_pthread_self=no
++	ac_cv_have_decl_pthread_self=no
+ fi
+ 
+-rm -f core conftest.err conftest.$ac_objext conftest_ipa8_conftest.oo \
+-      conftest$ac_exeext conftest.$ac_ext
+-LIBS=$ac_check_lib_save_LIBS
++rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
+ fi
+-{ echo "$as_me:$LINENO: result: $ac_cv_lib_c_pthread_self" >&5
+-echo "${ECHO_T}$ac_cv_lib_c_pthread_self" >&6; }
+-if test $ac_cv_lib_c_pthread_self = yes; then
+-  thrstubs="no"
++{ echo "$as_me:$LINENO: result: $ac_cv_have_decl_pthread_self" >&5
++echo "${ECHO_T}$ac_cv_have_decl_pthread_self" >&6; }
++if test $ac_cv_have_decl_pthread_self = yes; then
++
++cat >>confdefs.h <<_ACEOF
++#define HAVE_DECL_PTHREAD_SELF 1
++_ACEOF
++
++thrstubs="no"
+ else
+-  thrstubs="yes"
++  cat >>confdefs.h <<_ACEOF
++#define HAVE_DECL_PTHREAD_SELF 0
++_ACEOF
++
++thrstubs="yes"
+ fi
+ 
++
+  if test x$thrstubs = xyes; then
+   THRSTUBS_TRUE=
+   THRSTUBS_FALSE='#'
+@@ -23507,6 +23531,15 @@ else
  fi
  
  
@@ -114,7 +209,7 @@ $NetBSD$
  
  
  for ac_header in stdlib.h unistd.h
-@@ -24523,6 +24554,13 @@ echo "$as_me: error: conditional \"XKB\"
+@@ -24641,6 +24674,13 @@ echo "$as_me: error: conditional \"XKB\"
  Usually this means the macro was only invoked conditionally." >&2;}
     { (exit 1); exit 1; }; }
  fi
@@ -128,18 +223,16 @@ $NetBSD$
  if test -z "${LINT_TRUE}" && test -z "${LINT_FALSE}"; then
    { { echo "$as_me:$LINENO: error: conditional \"LINT\" was never defined.
  Usually this means the macro was only invoked conditionally." >&5
-@@ -24919,6 +24957,10 @@ do
+@@ -25044,6 +25084,8 @@ do
    case $ac_option in
    # Handling of the options.
    -recheck | --recheck | --rechec | --reche | --rech | --rec | --re | --r)
 +	: Avoid regenerating within pkgsrc
 +	exit 0
-+	: Avoid regenerating within pkgsrc
-+	exit 0
      ac_cs_recheck=: ;;
    --version | --versio | --versi | --vers | --ver | --ve | --v | -V )
      echo "$ac_cs_version"; exit ;;
-@@ -25339,6 +25381,8 @@ XKB_FALSE!$XKB_FALSE$ac_delim
+@@ -25466,6 +25508,8 @@ XKB_FALSE!$XKB_FALSE$ac_delim
  XKBPROTO_CFLAGS!$XKBPROTO_CFLAGS$ac_delim
  XKBPROTO_LIBS!$XKBPROTO_LIBS$ac_delim
  XKBPROTO_REQUIRES!$XKBPROTO_REQUIRES$ac_delim
@@ -148,12 +241,12 @@ $NetBSD$
  LINT!$LINT$ac_delim
  LINT_FLAGS!$LINT_FLAGS$ac_delim
  LINT_TRUE!$LINT_TRUE$ac_delim
-@@ -25360,7 +25404,7 @@ LIBOBJS!$LIBOBJS$ac_delim
+@@ -25490,7 +25534,7 @@ LIBOBJS!$LIBOBJS$ac_delim
  LTLIBOBJS!$LTLIBOBJS$ac_delim
  _ACEOF
  
--  if test `sed -n "s/.*$ac_delim\$/X/p" conf$$subs.sed | grep -c X` = 79; then
-+  if test `sed -n "s/.*$ac_delim\$/X/p" conf$$subs.sed | grep -c X` = 81; then
+-  if test `sed -n "s/.*$ac_delim\$/X/p" conf$$subs.sed | grep -c X` = 83; then
++  if test `sed -n "s/.*$ac_delim\$/X/p" conf$$subs.sed | grep -c X` = 85; then
      break
    elif $ac_last_try; then
      { { echo "$as_me:$LINENO: error: could not make $CONFIG_STATUS" >&5

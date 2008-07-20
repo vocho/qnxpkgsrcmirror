@@ -1,20 +1,20 @@
-# $NetBSD: Makefile,v 1.13 2008/01/20 15:18:55 abs Exp $
+# $NetBSD: Makefile,v 1.16 2008/07/05 23:52:46 abs Exp $
 #
 
-DISTNAME=	alpine-1.00
-PKGREVISION=	3
+DISTNAME=	alpine-1.10
+PKGREVISION=	1
 CATEGORIES=	mail
 MASTER_SITES=	ftp://ftp.cac.washington.edu/alpine/
-DIST_SUBDIR=	alpine
+DIST_SUBDIR=	alpine-1.10
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	abs@NetBSD.org
 HOMEPAGE=	http://www.washington.edu/alpine/
 COMMENT=	Program for Internet News and E-mail
 
-.include "options.mk"
-
 PKG_DESTDIR_SUPPORT=	user-destdir
+
+.include "options.mk"
 
 GNU_CONFIGURE=	yes
 CONFIGURE_ARGS+= --with-ssl-dir=${SSLBASE:Q}
@@ -23,7 +23,7 @@ CONFIGURE_ARGS+= --with-system-fixed-pinerc=${PKG_SYSCONFDIR}/pine.conf.fixed
 
 USE_LIBTOOL=	yes
 
-INSTALLATION_DIRS=	bin ${PKMANDIR}/man1
+INSTALLATION_DIRS=	bin ${PKGMANDIR}/man1
 
 .if ${OPSYS} == "NetBSD" && empty(OS_VERSION:M4.99.*) && empty(OS_VERSION:M[5-9]*)
 CONFIGURE_ARGS+= --without-pthread

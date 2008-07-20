@@ -1,17 +1,17 @@
-# $NetBSD: Makefile,v 1.58 2008/01/18 05:08:46 tnn Exp $
+# $NetBSD: Makefile,v 1.61 2008/06/20 01:09:31 joerg Exp $
 #
 
-DISTNAME=	nmap-4.20
-PKGREVISION=	1
+DISTNAME=	nmap-4.65
 CATEGORIES=	net security
-MASTER_SITES=	http://insecure.org/nmap/dist/
+MASTER_SITES=	http://download.insecure.org/nmap/dist/
 EXTRACT_SUFX=	.tar.bz2
 
-MAINTAINER=	salo@NetBSD.org
+MAINTAINER=	adrianp@NetBSD.org
 HOMEPAGE=	http://insecure.org/nmap/
 COMMENT=	Network/port scanner with OS detection
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 BUILDLINK_API_DEPENDS.libpcap=	libpcap>=0.9.4
 BUILDLINK_API_DEPENDS.libpcre=	libpcre>=6.7
@@ -20,11 +20,13 @@ GNU_CONFIGURE=		yes
 USE_LANGUAGES=		c c++
 USE_LIBTOOL=		yes
 USE_TOOLS+=		gmake
+PLIST_SRC=		${WRKDIR}/.PLIST_SRC
+
+.include "options.mk"
 
 CONFIGURE_ARGS+=	--with-libpcap=${BUILDLINK_PREFIX.libpcap}
 CONFIGURE_ARGS+=	--with-libpcre=${BUILDLINK_PREFIX.pcre}
 CONFIGURE_ARGS+=	--with-openssl=${BUILDLINK_PREFIX.openssl}
-CONFIGURE_ARGS+=	--without-nmapfe
 
 .include "../../mk/bsd.prefs.mk"
 
@@ -46,6 +48,9 @@ CFLAGS.SunOS+=	-D__FUNCTION__=__FILE__
 pre-build:
 	${ECHO} "# ignored" > ${WRKSRC}/makefile.dep
 .endif
+
+post-build:
+	${CP} ${PKGDIR}/PLIST ${WRKDIR}/.PLIST_SRC
 
 .include "../../devel/pcre/buildlink3.mk"
 .include "../../net/libpcap/buildlink3.mk"

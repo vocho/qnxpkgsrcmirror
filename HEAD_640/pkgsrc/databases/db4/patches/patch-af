@@ -1,0 +1,13 @@
+$NetBSD$
+
+--- os/os_handle.c.orig	2007-05-17 11:15:46.000000000 -0400
++++ os/os_handle.c
+@@ -52,7 +52,7 @@ __os_openhandle(dbenv, name, flags, mode
+ #ifdef HAVE_QNX
+ 	if (LF_ISSET(DB_OSO_REGION)) {
+ 		if ((ret =
+-		    __os_qnx_region_open(dbenv, name, oflags, mode, fhp)) != 0)
++		    __os_qnx_region_open(dbenv, name, flags, mode, fhp)) != 0)
+ 			goto err;
+ 		goto done;
+ 	}

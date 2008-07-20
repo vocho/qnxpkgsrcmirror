@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.10 2008/03/13 17:28:23 joerg Exp $
+# $NetBSD: Makefile,v 1.13 2008/07/03 20:06:21 joerg Exp $
 
-DISTNAME=	bootstrap-mk-files-20080310
+DISTNAME=	bootstrap-mk-files-20080703
 CATEGORIES=	pkgtools
 MASTER_SITES=	# empty
 DISTFILES=	# empty
@@ -14,6 +14,7 @@ COMMENT=	*.mk files for the bootstrap bmake utility
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 NO_PKGTOOLS_REQD_CHECK=	# defined
+BOOTSTRAP_PKG=	yes
 
 NO_CHECKSUM=	yes
 NO_MTREE=	yes

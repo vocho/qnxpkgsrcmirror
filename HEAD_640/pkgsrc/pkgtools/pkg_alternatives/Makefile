@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.12 2007/01/15 02:50:06 rillig Exp $
+# $NetBSD: Makefile,v 1.14 2008/06/13 07:13:57 abs Exp $
 #
 
 DISTNAME=	pkg_alternatives-1.4
@@ -10,6 +10,7 @@ MAINTAINER=	jmmv@NetBSD.org
 COMMENT=	Generic wrappers for programs with similar interfaces
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 EXTRACT_ONLY=		# empty
 NO_CHECKSUM=		YES
@@ -54,12 +55,13 @@ do-extract:
 
 do-install:
 	${INSTALL_SCRIPT} ${WRKSRC}/pkg_alternatives.sh \
-		${PREFIX}/sbin/pkg_alternatives
-	${INSTALL_MAN} ${WRKSRC}/pkg_alternatives.8 ${PREFIX}/${PKGMANDIR}/man8/
-	${INSTALL_DATA_DIR} ${DATADIR}
-	${INSTALL_DATA} ${WRKSRC}/wrapper.sh ${DATADIR}/
-	${INSTALL_DATA} ${WRKSRC}/wrapper.man ${DATADIR}/
-	${INSTALL_DATA_DIR} ${EGDIR}
-	${INSTALL_DATA} ${WRKSRC}/filter.conf ${EGDIR}/
+		${DESTDIR}${PREFIX}/sbin/pkg_alternatives
+	${INSTALL_MAN} ${WRKSRC}/pkg_alternatives.8 \
+		${DESTDIR}${PREFIX}/${PKGMANDIR}/man8/
+	${INSTALL_DATA_DIR} ${DESTDIR}${DATADIR}
+	${INSTALL_DATA} ${WRKSRC}/wrapper.sh ${DESTDIR}${DATADIR}/
+	${INSTALL_DATA} ${WRKSRC}/wrapper.man ${DESTDIR}${DATADIR}/
+	${INSTALL_DATA_DIR} ${DESTDIR}${EGDIR}
+	${INSTALL_DATA} ${WRKSRC}/filter.conf ${DESTDIR}${EGDIR}/
 
 .include "../../mk/bsd.pkg.mk"

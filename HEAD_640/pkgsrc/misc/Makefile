@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.302 2008/03/25 13:43:14 wiz Exp $
+# $NetBSD: Makefile,v 1.305 2008/04/17 12:45:04 joerg Exp $
 #
 
 COMMENT=	Miscellaneous utilities
@@ -178,9 +178,13 @@ SUBDIR+=	root-tail
 SUBDIR+=	routeplanner-cli
 SUBDIR+=	rox-memo
 SUBDIR+=	rpm
+SUBDIR+=	ruby-columnize
+SUBDIR+=	ruby-configuration
 SUBDIR+=	ruby-daemons
 SUBDIR+=	ruby-gem_plugin
+SUBDIR+=	ruby-launchy
 SUBDIR+=	ruby-progressbar
+SUBDIR+=	ruby-transaction-simple
 SUBDIR+=	rubygems
 SUBDIR+=	sch
 SUBDIR+=	sci
@@ -192,6 +196,7 @@ SUBDIR+=	stellarium
 SUBDIR+=	taskjuggler
 SUBDIR+=	tds
 SUBDIR+=	team
+SUBDIR+=	tellico
 SUBDIR+=	theme-dirs
 SUBDIR+=	ttyrec
 SUBDIR+=	udfclient

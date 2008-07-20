@@ -1,4 +1,4 @@
-# $NetBSD: buildlink3.mk,v 1.7 2008/03/04 17:25:36 tnn Exp $
+# $NetBSD: buildlink3.mk,v 1.9 2008/05/17 23:45:47 tnn Exp $
 
 BUILDLINK_DEPTH:=	${BUILDLINK_DEPTH}+
 PIDGIN_BUILDLINK3_MK:=	${PIDGIN_BUILDLINK3_MK}+
@@ -12,7 +12,7 @@ BUILDLINK_PACKAGES+=	pidgin
 BUILDLINK_ORDER:=	${BUILDLINK_ORDER} ${BUILDLINK_DEPTH}pidgin
 
 .if ${PIDGIN_BUILDLINK3_MK} == "+"
-BUILDLINK_API_DEPENDS.pidgin+=	pidgin>=2.4.0
+BUILDLINK_API_DEPENDS.pidgin+=	pidgin>=2.4.2
 BUILDLINK_PKGSRCDIR.pidgin?=	../../chat/pidgin
 .endif	# PIDGIN_BUILDLINK3_MK
 

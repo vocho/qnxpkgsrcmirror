@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.73 2007/12/19 12:27:27 rillig Exp $
+# $NetBSD: Makefile,v 1.75 2008/06/15 09:51:59 joerg Exp $
 
 DISTNAME=	gnome-2.18.1
 PKGREVISION=	1
@@ -6,9 +6,11 @@ CATEGORIES=	meta-pkgs x11 gnome
 MASTER_SITES=	# empty
 DISTFILES=	# empty
 
-MAINTAINER=	jmmv@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.gnome.org/
 COMMENT=	Meta-package for the GNU Network Object Model Environment
+
+META_PACKAGE=	yes
 
 .include "../../lang/python/pyversion.mk"
 
@@ -69,7 +71,5 @@ DEPENDS+=	${PYPKGPREFIX}-gnome2-desktop>=2.18.0:../../x11/py-gnome2-desktop
 DEPENDS+=	gnome-vfs-monikers>=2.15.3:../../sysutils/gnome-vfs-monikers
 #DEPENDS+=	orca-1.0.0.tar.bz2
 #DEPENDS+=	tomboy-0.4.0.tar.bz2
-
-META_PACKAGE=	yes
 
 .include "../../mk/bsd.pkg.mk"
