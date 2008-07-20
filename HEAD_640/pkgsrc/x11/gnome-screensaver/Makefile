@@ -1,14 +1,15 @@
-# $NetBSD: Makefile,v 1.26 2008/03/06 14:53:56 wiz Exp $
+# $NetBSD: Makefile,v 1.30 2008/06/20 01:09:44 joerg Exp $
 #
 
-DISTNAME=	gnome-screensaver-2.20.0
-PKGREVISION=	1
+DISTNAME=	gnome-screensaver-2.22.2
 CATEGORIES=	x11 gnome
-MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gnome-screensaver/2.20/}
+MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gnome-screensaver/2.22/}
 
-MAINTAINER=	jmmv@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://live.gnome.org/GnomeScreensaver/
 COMMENT=	Screen saver and locker for the GNOME desktop
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=		yes
 USE_DIRS+=		xdg-1.3
@@ -52,14 +53,16 @@ BUILDLINK_API_DEPENDS.gtk2+=		gtk2+>=2.8.0
 BUILDLINK_API_DEPENDS.libexif+=		libexif>=0.6.12
 BUILDLINK_API_DEPENDS.libglade+=	libglade>=2.5.0
 
+INSTALLATION_DIRS=	${EGDIR}/pam.d
+
 post-install:
-	${INSTALL_DATA_DIR} ${EGDIR}/pam.d
 	${INSTALL_DATA} ${FILESDIR}/pam-gnome-screensaver-NetBSD \
-		${EGDIR}/pam.d/gnome-screensaver-NetBSD
+	    ${DESTDIR}${EGDIR}/pam.d/gnome-screensaver-NetBSD
 	${INSTALL_DATA} ${WRKSRC}/data/gnome-screensaver \
-		${EGDIR}/pam.d/gnome-screensaver-Linux
+	    ${DESTDIR}${EGDIR}/pam.d/gnome-screensaver-Linux
+
 .if empty(PKG_OPTIONS:Mpam)
-	${CHMOD} 04555 ${PREFIX}/libexec/gnome-screensaver-dialog
+SPECIAL_PERMS+=	libexec/gnome-screensaver-dialog ${SETUID_ROOT_PERMS}
 .endif
 
 .include "../../devel/GConf/schemas.mk"
@@ -71,7 +74,7 @@ post-install:
 .include "../../sysutils/dbus-glib/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../sysutils/gnome-menus/buildlink3.mk"
-.include "../../sysutils/gnome-vfs/buildlink3.mk"
+.include "../../sysutils/libnotify/buildlink3.mk"
 .include "../../x11/gtk2/buildlink3.mk"
 .include "../../x11/libXScrnSaver/buildlink3.mk"
 .include "../../x11/libXmu/buildlink3.mk"

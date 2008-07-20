@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.18 2007/01/13 11:59:33 joerg Exp $
+# $NetBSD: Makefile,v 1.20 2008/06/12 02:14:58 joerg Exp $
 #
 
 DISTNAME=	wxPython-src-2.6.3.3
@@ -11,14 +11,14 @@ MAINTAINER=	tsarna@NetBSD.org
 HOMEPAGE=	http://wxpython.org/
 COMMENT=	Python bindings for wxWidgets
 
+PKG_DESTDIR_SUPPORT=	user-destdir
+
 WRKSRC=		${WRKDIR}/wxPython-src-2.6.3.3/wxPython
 USE_LANGUAGES=	c c++
 USE_TOOLS+=	gmake pkg-config
 
 # previous name of the package
 CONFLICTS+=	${PYPKGPREFIX}-wxWindows-[0-9]*
-
-PYTHON_VERSIONS_ACCEPTED=	24 23
 
 WXARG=	WXPORT=gtk2 \
 	WX_CONFIG=${BUILDLINK_PREFIX.wxGTK}/bin/wx-config \

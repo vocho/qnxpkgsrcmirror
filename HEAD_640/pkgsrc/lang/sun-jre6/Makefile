@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.11 2008/03/12 14:26:33 adrianp Exp $
+# $NetBSD: Makefile,v 1.13 2008/05/26 02:13:21 joerg Exp $
 
 # Note: Regen distinfo with PKG_DEFAULT_OPTIONS+=sun-jre-jce
 # Note: Update DOWNLOAD_NAME when you update the JRE version
@@ -9,6 +9,8 @@ MASTER_SITES=	# empty
 
 DOWNLOAD_NAME=	Java Runtime Environment (JRE) 6u5
 SHORT_NAME=	JRE
+
+USE_TOOLS+=	pax
 
 WRKSRC=		${WRKDIR}/jre1.6.0_05
 JAVA_WRAPPERS=	java javaws keytool orbd policytool rmid rmiregistry \
@@ -38,11 +40,10 @@ PKG_SUPPORTED_OPTIONS=	sun-jre-jce
 
 .include "../../mk/bsd.options.mk"
 
+PLIST_VARS+=	jce
 .if !empty(PKG_OPTIONS:Msun-jre-jce)
 DISTFILES=	${DISTNAME}${EXTRACT_SUFX} jce_policy-6.zip
-PLIST_SUBST+=	SUN_JRE6_USE_JCE=""
-.else
-PLIST_SUBST+=	SUN_JRE6_USE_JCE="@comment "
+PLIST.jce=	yes
 .endif
 
 # Some of the binaries require libX11, so ensure that requirement is
@@ -86,7 +87,7 @@ do-configure:
 
 pre-install:
 .if !empty(PKG_OPTIONS:Msun-jre-jce)
-	cd ${WRKDIR}/jce ; ${PAX} -rw -pe -v . ${WRKSRC}/lib/security
+	cd ${WRKDIR}/jce ; pax -rw -pe -v . ${WRKSRC}/lib/security
 .endif
 
 #

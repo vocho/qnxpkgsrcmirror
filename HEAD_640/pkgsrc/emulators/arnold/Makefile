@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.18 2008/03/03 19:21:37 jlam Exp $
+# $NetBSD: Makefile,v 1.21 2008/06/15 11:09:58 obache Exp $
 #
 
 DISTNAME=		arnsrc27012002
@@ -8,7 +8,7 @@ CATEGORIES=		emulators
 MASTER_SITES=		http://arnold.emuunlim.com/download/
 EXTRACT_SUFX=		.zip
 
-MAINTAINER=		dillo@NetBSD.org
+MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://arnold.emuunlim.com/
 COMMENT=		Amstrad CPC, Amstrad CPC+ and KC Compact emulator
 
@@ -28,9 +28,14 @@ SHAREDIR=		${PREFIX}/share/arnold
 MAKE_ENV+=		SHAREDIR=${SHAREDIR}
 AUTO_MKDIRS=		yes
 
+USE_TOOLS+=		pax
+
 do-install:
 	${INSTALL_PROGRAM} ${WRKSRC}/arnold ${DESTDIR}${PREFIX}/bin
 	cd ${WRKSRC}/roms && pax -wr * ${DESTDIR}${SHAREDIR}/roms/
+	cd ${DESTDIR}${SHAREDIR}/roms && \
+		${FIND} . -type f -print | ${XARGS} ${CHMOD} ${SHAREMODE} && \
+		${FIND} . -type d -print | ${XARGS} ${CHMOD} ${PKGDIRMODE}
 	cd ${WRKSRC} && ${INSTALL_DATA} readme.* \
 		${DESTDIR}${PREFIX}/share/doc/arnold
 

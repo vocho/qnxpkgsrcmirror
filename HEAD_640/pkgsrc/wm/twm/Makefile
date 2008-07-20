@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.1.1.1 2007/06/19 14:54:57 jlam Exp $
+# $NetBSD: Makefile,v 1.3 2008/05/24 21:45:14 tnn Exp $
 
-DISTNAME=	twm-1.0.3
+DISTNAME=	twm-1.0.4
 CATEGORIES=	x11 wm
-MASTER_SITES=	http://xorg.freedesktop.org/releases/individual/app/
+MASTER_SITES=	${MASTER_SITE_XORG:=app/}
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	pkgsrc-users@NetBSD.org

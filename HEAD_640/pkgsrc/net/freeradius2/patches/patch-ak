@@ -1,0 +1,15 @@
+$NetBSD: patch-ak,v 1.2 2008/06/20 20:57:39 adrianp Exp $
+
+--- raddb/radiusd.conf.in.orig	2008-05-30 10:18:43.000000000 +0100
++++ raddb/radiusd.conf.in
+@@ -160,8 +160,8 @@ pidfile = ${run_dir}/radiusd.pid
+ #  It will join all groups where "user" is a member.  This can allow
+ #  for some finer-grained access controls.
+ #
+-#user = radius
+-#group = radius
++user = @@RADIUS_USER@@
++group = @@RADIUS_GROUP@@
+ 
+ #  max_request_time: The maximum time (in seconds) to handle a request.
+ #

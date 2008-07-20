@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# $NetBSD: pkg_rolling-replace.sh,v 1.17 2008/02/17 10:47:47 apb Exp $
+# $NetBSD: pkg_rolling-replace.sh,v 1.19 2008/05/02 19:04:03 apb Exp $
 #<license>
 # Copyright (c) 2006 BBN Technologies Corp.  All rights reserved.
 #
@@ -65,13 +65,36 @@
 MAKE="@MAKE@"
 AWK="@AWK@"
 
-test -z "$MAKECONF" && MAKECONF="@MAKECONF@"
+if [ -z "$MAKECONF" ] ; then
+    for mkconf in "@MAKECONF@" "@PREFIX@/etc/mk.conf" /etc/mk.conf ; do
+	if [ -f "$mkconf" ] ; then
+	    MAKECONF="$mkconf"
+	    break
+	fi
+    done
+fi
+if [ -z "$MAKECONF" -o ! -f "$MAKECONF" ] ; then
+    MAKECONF=/dev/null
+fi
 test -f "$MAKECONF" && test -z "$PKGSRCDIR" && PKGSRCDIR="` \
     printf '.include "%s"\n_print_pkgsrcdir:\n\t@echo "${PKGSRCDIR}"\n' \
     "$MAKECONF" | "$MAKE" -f - BSD_PKG_MK=1 _print_pkgsrcdir`"
-test -z "$PKGSRCDIR" && PKGSRCDIR=/usr/pkgsrc
+if [ -z "$PKGSRCDIR" ] ; then
+    for dir in . .. ../.. /usr/pkgsrc ; do
+	if [ -f "${dir}/mk/bsd.pkg.mk" ]; then
+	    case "${dir}" in
+	    /*) PKGSRCDIR="${dir}" ;;
+	    *)  PKGSRCDIR="$( cd "${dir}" >/dev/null 2>&1 && pwd )" ;;
+	    esac
+	    break
+	fi
+    done
+fi
+test -z "$PKGSRCDIR" && echo >&2 "Please set PKGSRCDIR" && exit 1
 test -z "$PKG_CHK" && PKG_CHK="@PKG_CHK@"
 test -z "$PKG_INFO" && PKG_INFO="@PKG_INFO_CMD@"
+
+export PKGSRCDIR
 
 unset PKG_PATH || true  #or pkgsrc makefiles will complain
 
@@ -399,9 +422,10 @@ while [ -n "$REPLACE_TODO" ]; do
 	[ -z "$(${PKG_INFO} -Q rebuild $pkg)" ] || \
 	    abort "package $pkg is still requested to be rebuilt."
     fi
+    # If -r not given, make a binary package.
     if [ -z "$opt_r" ]; then
 	echo "${OPI} Packaging $(${PKG_INFO} -e $pkg)"
-	    cmd="${MAKE} package && ${MAKE} clean || fail=1"
+	    cmd="${MAKE} package || fail=1"
 	if [ -n "$opt_n" ]; then
 	    echo "${OPI} Would run: $cmd"
 	else
@@ -409,6 +433,11 @@ while [ -n "$REPLACE_TODO" ]; do
     	    [ -z "$fail" ] || abort "'make package' failed for package $pkg."
 	fi
     fi
+    # Clean
+    if [ -z "$opt_n" ]; then
+	${MAKE} clean || abort "'make clean' failed for package $pkg."
+    fi
+
     sleep 1
 
     # remove just-replaced package from all *_TODO lists

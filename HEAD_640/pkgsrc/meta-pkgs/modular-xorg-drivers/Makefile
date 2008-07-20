@@ -1,20 +1,24 @@
-# $NetBSD: Makefile,v 1.8 2008/01/29 13:58:35 abs Exp $
+# $NetBSD: Makefile,v 1.12 2008/06/15 09:51:59 joerg Exp $
 
 DISTNAME=	# empty
-PKGNAME=	modular-xorg-drivers-1.1
-PKGREVISION=	2
+PKGNAME=	modular-xorg-drivers-1.2
 CATEGORIES=	meta-pkgs drivers x11
-MASTER_SITES=	http://xorg.freedesktop.org/releases/individual/drivers
+MASTER_SITES=	${MASTER_SITE_XORG:=driver/}
 DISTFILES=	# empty
 
 MAINTAINER=	joerg@NetBSD.org
 HOMEPAGE=	http://xorg.freedesktop.org/
 COMMENT=	Modular Xorg driver meta-package
 
+META_PACKAGE=	yes
+
 .include "../../mk/bsd.prefs.mk"
 
 DEPENDS+=	xf86-input-keyboard-[0-9]*:../../x11/xf86-input-keyboard
 DEPENDS+=	xf86-input-mouse-[0-9]*:../../x11/xf86-input-mouse
+.if ${MACHINE_ARCH} == "i386" || ${MACHINE_ARCH} == "x86_64"
+DEPENDS+=	xf86-input-vmmouse-[0-9]*:../../x11/xf86-input-vmmouse
+.endif
 DEPENDS+=	xf86-input-void-[0-9]*:../../x11/xf86-input-void
 DEPENDS+=	xf86-video-apm-[0-9]*:../../x11/xf86-video-apm
 DEPENDS+=	xf86-video-ark-[0-9]*:../../x11/xf86-video-ark
@@ -46,11 +50,11 @@ DEPENDS+=	xf86-video-tseng-[0-9]*:../../x11/xf86-video-tseng
 DEPENDS+=	xf86-video-vesa-[0-9]*:../../x11/xf86-video-vesa
 DEPENDS+=	xf86-video-vga-[0-9]*:../../x11/xf86-video-vga
 DEPENDS+=	xf86-video-via-[0-9]*:../../x11/xf86-video-via
+.if ${MACHINE_ARCH} == "i386" || ${MACHINE_ARCH} == "x86_64"
 DEPENDS+=	xf86-video-vmware-[0-9]*:../../x11/xf86-video-vmware
+.endif
 .if ${OPSYS} == "NetBSD" || ${OPSYS} == "OpenBSD"
 DEPENDS+=	xf86-video-wsfb-[0-9]*:../../x11/xf86-video-wsfb
 .endif
-
-META_PACKAGE=	yes
 
 .include "../../mk/bsd.pkg.mk"

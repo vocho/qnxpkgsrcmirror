@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.59 2008/03/12 20:48:11 drochner Exp $
+# $NetBSD: Makefile,v 1.65 2008/06/23 16:15:43 joerg Exp $
 
-DISTNAME=	cairo-1.4.14
+DISTNAME=	cairo-1.6.4
+PKGREVISION=	2
 CATEGORIES=	graphics
 MASTER_SITES=	http://cairographics.org/releases/
 
@@ -9,6 +10,8 @@ HOMEPAGE=	http://cairographics.org/
 COMMENT=	Vector graphics library with cross-device output support
 
 PKG_DESTDIR_SUPPORT=	user-destdir
+
+MAKE_JOBS_SAFE=		no
 
 USE_LANGUAGES+=		c99
 USE_LIBTOOL=		yes
@@ -21,20 +24,21 @@ CONFIGURE_ARGS+=	--enable-glitz
 CONFIGURE_ARGS+=	--enable-pdf
 CONFIGURE_ARGS+=	--enable-ps
 
+PLIST_VARS+=		carbon
 .if exists(/System/Library/Frameworks/Carbon.framework)
 CONFIGURE_ARGS+=	--enable-quartz
-CONFIGURE_ARGS+=	--enable-atsui
-PLIST_SUBST+=		CARBON=
-.else
-PLIST_SUBST+=		CARBON="@comment "
+CONFIGURE_ARGS+=	--enable-quartz-font
+CONFIGURE_ARGS+=	--enable-quartz-image
+PLIST.carbon=		yes
 .endif
 
 .include "options.mk"
 
 BUILDLINK_API_DEPENDS.glitz+=	glitz>=0.5.1
+BUILDLINK_API_DEPENDS.pixman+=	pixman>=0.10.0
 
-# For snprintf()
-CPPFLAGS.SunOS+=		-D__EXTENSIONS__
+# For snprintf() and ctime_r()
+CPPFLAGS.SunOS+=		-D__EXTENSIONS__ -D_POSIX_PTHREAD_SEMANTICS
 
 TEST_TARGET=			check
 
@@ -44,4 +48,5 @@ TEST_TARGET=			check
 .include "../../graphics/glitz/buildlink3.mk"
 .include "../../graphics/png/buildlink3.mk"
 .include "../../mk/pthread.buildlink3.mk"
+.include "../../x11/pixman/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

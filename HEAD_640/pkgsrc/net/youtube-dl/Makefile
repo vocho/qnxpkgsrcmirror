@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.4 2008/03/09 22:38:19 tnn Exp $
+# $NetBSD: Makefile,v 1.6 2008/05/05 08:25:14 tnn Exp $
 #
 
 DISTNAME=	youtube-dl
-PKGNAME=	youtube-dl-20080308
+PKGNAME=	youtube-dl-20080420
 CATEGORIES=	net
 MASTER_SITES=	http://www.arrakis.es/~rggi3/youtube-dl/
 EXTRACT_SUFX=	# none
@@ -15,7 +15,7 @@ DIST_SUBDIR=	${PKGNAME_NOREV}
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_LANGUAGES=			# none
-PYTHON_VERSIONS_ACCEPTED=	24
+PYTHON_VERSIONS_ACCEPTED=	25 24
 WRKSRC=				${WRKDIR}
 
 INSTALLATION_DIRS=	bin

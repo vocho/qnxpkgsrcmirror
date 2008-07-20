@@ -1,8 +1,8 @@
-dnl $NetBSD: configure.ac,v 1.60 2008/03/21 23:28:08 joerg Exp $
+dnl $NetBSD: configure.ac,v 1.63 2008/05/19 12:52:57 joerg Exp $
 
 dnl Process this file with autoconf to produce a configure script.
 AC_PREREQ(2.52)
-AC_INIT([libnbcompat], [20070622], [grant@NetBSD.org])
+AC_INIT([libnbcompat], [20080519], [grant@NetBSD.org])
 AC_CONFIG_HEADER(nbcompat/config.h)
 AC_ARG_PROGRAM
 
@@ -235,6 +235,8 @@ AC_FUNC_STRERROR_R
 AC_FUNC_VFORK
 AC_FUNC_VPRINTF
 
+AC_CHECK_DECLS([snprintf, vasprintf], [], [], [#include <stdio.h>])
+
 AC_REPLACE_FUNCS([asprintf err fgetln fnmatch fparseln getenv isblank \
 	lchflags lchmod lchown lutimes mkdtemp mkstemp setenv setgroupent \
 	setpassent setprogname snprintf statvfs strdup strerror strlcat \
@@ -276,6 +278,8 @@ AC_CHECK_FUNC(fts_open, [:], [
 	])
 	AC_LIBOBJ(fts)
 ])
+
+AC_CHECK_FUNC(timegm, [:], [AC_LIBOBJ(timegm)])
 
 # Handle Darwin 7 having a poll() compatibility function.  Be
 # conservative -- if we don't find one of <poll.h> or <sys/poll.h>, then

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.21 2007/11/03 16:36:34 drochner Exp $
+# $NetBSD: Makefile,v 1.23 2008/06/20 01:09:22 joerg Exp $
 #
 
 DISTNAME=	gnome-backgrounds-2.20.0
@@ -6,9 +6,11 @@ CATEGORIES=	graphics gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gnome-backgrounds/2.20/}
 EXTRACT_SUFX=	.tar.bz2
 
-MAINTAINER=	jmmv@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.gnome.org/
 COMMENT=	Set of background images for the GNOME Desktop
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=		YES
 USE_DIRS+=		xdg-1.3

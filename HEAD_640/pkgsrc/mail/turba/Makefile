@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.25 2008/03/04 17:57:20 jlam Exp $
+# $NetBSD: Makefile,v 1.29 2008/06/17 21:29:59 adrianp Exp $
 
 DISTNAME=	turba-h3-${TURBAVER}
 PKGNAME=	turba-${TURBAVER}
@@ -10,7 +10,7 @@ MAINTAINER=	adrianp@NetBSD.org
 HOMEPAGE=	http://www.horde.org/turba/
 COMMENT=	Horde contact management application
 
-DEPENDS+=	horde>=3.0.0:../../www/horde
+DEPENDS+=	horde>=3.2:../../www/horde
 
 PKG_DESTDIR_SUPPORT=	destdir
 
@@ -20,9 +20,9 @@ DOCDIR=		${PREFIX}/share/doc/turba
 EGDIR=		${PREFIX}/share/examples/turba
 HORDEDIR=	${PREFIX}/share/horde
 TURBADIR=	${HORDEDIR}/turba
-TURBAVER=	2.1.7
+TURBAVER=	2.2.1
 PAXDIRS=	lib locale po scripts templates themes
-USE_TOOLS+=	perl:run
+USE_TOOLS+=	pax perl:run
 
 MESSAGE_SUBST+=	TURBADIR=${TURBADIR:Q}
 MESSAGE_SUBST+=	PKG_SYSCONFDIR=${PKG_SYSCONFDIR:Q}
@@ -44,7 +44,9 @@ REPLACE.php.old=	.*/bin/php
 REPLACE.php.new=	${PREFIX}/bin/php
 REPLACE_FILES.php=	scripts/import_vcards.php \
 			scripts/upgrades/create_default_histories.php \
-			scripts/upgrades/public_to_horde_share.php
+			scripts/upgrades/public_to_horde_share.php \
+			scripts/import_squirrelmail_abook.php \
+			scripts/upgrades/2.1_to_2.2_sql_schema.php
 
 CONF_FILES=		${EGDIR}/turba.conf ${PKG_SYSCONFDIR}/turba.conf
 CONF_FILES_PERMS+=	${TURBADIR}/config/sources.php.dist \
@@ -87,7 +89,7 @@ do-install:
 .	endfor
 
 .	for d in ${PAXDIRS}
-		cd ${WRKSRC}/${d:Q} && ${PAX} -rwpma . \
+		cd ${WRKSRC}/${d:Q} && pax -rwpma . \
 			${DESTDIR}${TURBADIR}/${d:Q}
 .	endfor
 
@@ -98,8 +100,8 @@ do-install:
 	${XARGS} ${CHMOD} ${PKGDIRMODE}
 	${FIND} ${DESTDIR}${TURBADIR} -type f -print | \
 	${XARGS} ${CHMOD} ${SHAREMODE}
-	${CHOWN} ${APACHE_USER}:${SHAREGRP} ${TURBADIR}/config
-	${CHMOD} 0750 ${TURBADIR}/config
+	${CHOWN} ${APACHE_USER}:${SHAREGRP} ${DESTDIR}${TURBADIR}/config
+	${CHMOD} 0750 ${DESTDIR}${TURBADIR}/config
 
 .include "../../lang/php/phpversion.mk"
 .include "../../mk/bsd.pkg.mk"

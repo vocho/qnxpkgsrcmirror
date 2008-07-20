@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.18 2007/09/07 22:12:12 jlam Exp $
+# $NetBSD: Makefile,v 1.20 2008/06/20 01:09:20 joerg Exp $
 
 DISTNAME=		quakeforge-0.5.5
 PKGREVISION=		7
@@ -8,6 +8,8 @@ MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=quake/}
 MAINTAINER=		snj@NetBSD.org
 HOMEPAGE=		http://www.quakeforge.net/
 COMMENT=		Improved Quake engine
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 CONFIGURE_ARGS+=	--with-cpp="${CPP} %d %i %o"
 CONFIGURE_ARGS+=	--disable-ogg
@@ -34,10 +36,9 @@ CONFIGURE_ARGS+=	--with-ipv6
 CONFIGURE_ARGS+=	--without-ipv6
 .endif
 
+PLIST_VARS+=		sunaudio
 .if ${OPSYS} == "NetBSD" || ${OPSYS} == "SunOS"
-PLIST_SUBST+=		COND_SUN=""
-.else
-PLIST_SUBST+=		COND_SUN="@comment "
+PLIST.sunaudio=		yes
 .endif
 
 INSTALLATION_DIRS=	include/QF/GL include/QF/plugin include/QF/ruamoko/gui

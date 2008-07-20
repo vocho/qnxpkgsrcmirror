@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.1.1.1 2008/03/14 14:24:22 drochner Exp $
+# $NetBSD: Makefile,v 1.5 2008/06/23 16:51:46 drochner Exp $
 #
 
-DISTNAME=	sonata-1.4.2
+DISTNAME=	sonata-1.5.2
 CATEGORIES=	audio
 MASTER_SITES=	http://download.berlios.de/sonata/
 EXTRACT_SUFX=	.tar.bz2
@@ -10,9 +10,11 @@ MAINTAINER=	jfranz@bsdprojects.net
 HOMEPAGE=	http://sonata.berlios.de/
 COMMENT=	Elegant GTK2 client for the Music Player Daemon
 
+PKG_DESTDIR_SUPPORT=	user-destdir
+
 DEPENDS+=	musicpd>0:../../audio/musicpd
 
-PYTHON_VERSIONS_ACCEPTED=	24
+PYTHON_VERSIONS_ACCEPTED=	25 24
 PY_PATCHPLIST=	yes
 PYDISTUTILSPKG=	yes
 USE_DIRS+=	xdg-1.4
@@ -28,5 +30,6 @@ BUILDLINK_ABI_DEPENDS.pygtk2+= ${PYPKGPREFIX}-gtk2>=2.12.1nb1
 .include "../../x11/py-gtk2/buildlink3.mk"
 .include "../../net/py-soappy/buildlink3.mk"
 .include "../../textproc/py-elementtree/buildlink3.mk"
+.include "../../audio/py-mpd/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../mk/bsd.pkg.mk"

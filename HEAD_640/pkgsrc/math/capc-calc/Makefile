@@ -1,19 +1,26 @@
-# $NetBSD: Makefile,v 1.33 2007/09/18 19:40:19 drochner Exp $
+# $NetBSD: Makefile,v 1.37 2008/06/20 01:09:24 joerg Exp $
 #
 
-DISTNAME=	calc-2.12.2
+DISTNAME=	calc-2.12.3.3
 PKGNAME=	capc-${DISTNAME:S/t/./}
 CATEGORIES=	math
 MASTER_SITES=	http://www.isthe.com/chongo/src/calc/ \
 		http://prdownloads.sourceforge.net/calc/
+EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.isthe.com/chongo/tech/comp/calc/
 COMMENT=	C arbitrary precision calculator
 
+PKG_DESTDIR_SUPPORT=	user-destdir
+
+MAKE_JOBS_SAFE=	no
+
 USE_TOOLS+=	gmake
 BUILD_TARGET=	calc-static-only
 MAKE_ENV+=	BLD_TYPE=calc-static-only target=pkgsrc
+
+INSTALL_MAKE_FLAGS+=	T=${DESTDIR}
 
 TEST_TARGET=	check
 

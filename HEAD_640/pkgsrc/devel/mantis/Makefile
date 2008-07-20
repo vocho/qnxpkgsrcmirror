@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.29 2008/03/03 17:45:36 jlam Exp $
+# $NetBSD: Makefile,v 1.32 2008/06/21 15:17:00 adrianp Exp $
 
-DISTNAME=	mantis-1.0.8
+DISTNAME=	mantis-1.1.2
 CATEGORIES=	devel www
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=mantisbt/}
 
@@ -14,6 +14,8 @@ DEPENDS+=	${PHP_PKG_PREFIX}-mysql>=4.0.6:../../databases/php-mysql
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 NO_BUILD=	YES
+
+USE_TOOLS+=	pax
 
 .include "../../mk/bsd.prefs.mk"
 
@@ -35,8 +37,7 @@ MESSAGE_SUBST+=		PKG_SYSCONFDIR=${PKG_SYSCONFDIR:Q}
 MANTIS_HOME=		${PREFIX}/share/mantis
 EGDIR=			${PREFIX}/share/examples/mantis
 CONF_FILES+=		${EGDIR}/mantis.conf ${PKG_SYSCONFDIR}/mantis.conf
-CONF_FILES_PERMS+=	${EGDIR}/config_inc.php \
-			${MANTIS_HOME}/config_inc.php \
+CONF_FILES_PERMS+=	${EGDIR}/config_inc.php ${MANTIS_HOME}/config_inc.php \
 			${APACHE_USER} ${SHAREGRP} 0400
 MANTIS_EG=		config_inc.php mantis.conf mantis_offline.php.sample
 
@@ -64,7 +65,7 @@ do-install:
 .	endfor
 
 	cd ${WRKSRC} && ${FIND} . -name .cvsignore -print | ${XARGS} ${RM}
-	cd ${WRKSRC} && ${PAX} -rwpppm . ${DESTDIR}${MANTIS_HOME}
+	cd ${WRKSRC} && pax -rwpppm . ${DESTDIR}${MANTIS_HOME}
 
 	cd ${DESTDIR}${MANTIS_HOME} && \
 		${FIND} . -type f | ${XARGS} ${CHMOD} ${SHAREMODE}

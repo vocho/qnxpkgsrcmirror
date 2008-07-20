@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.7 2008/01/25 18:55:02 joerg Exp $
+# $NetBSD: Makefile,v 1.9 2008/06/01 14:36:37 tnn Exp $
 #
 
 DISTNAME=		xorg-cf-files-1.0.2
-PKGREVISION=		5
+PKGREVISION=		6
 CATEGORIES=		x11 devel
-MASTER_SITES=		http://xorg.freedesktop.org/releases/individual/util/
+MASTER_SITES=		${MASTER_SITE_XORG:=util/}
 EXTRACT_SUFX=		.tar.bz2
 
 MAINTAINER=		joerg@NetBSD.org
-HOMEPAGE=		http://xorg.freedesktop.org/releases/individual/util/
+HOMEPAGE=		http://xorg.freedesktop.org/
 COMMENT=		Xorg imake rules
 
 PKG_DESTDIR_SUPPORT=	user-destdir

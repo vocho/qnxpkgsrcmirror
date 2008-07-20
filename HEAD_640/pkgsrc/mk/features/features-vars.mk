@@ -1,8 +1,8 @@
-# $NetBSD: features-vars.mk,v 1.17 2008/02/21 14:08:48 tnn Exp $
+# $NetBSD: features-vars.mk,v 1.19 2008/06/14 08:55:58 joerg Exp $
 #
 # The platforms that are supported by pkgsrc differ in the amount of
 # functions they provide in the C library (libc). Functions that are
-# typically available on NetBSD are provided in the libnbcomat package.
+# typically available on NetBSD are provided in the libnbcompat package.
 #
 # This file defines a set of "features" that some packages require.
 # Whenever a package makes use of them, it should list the features in
@@ -104,7 +104,7 @@ MISSING_FEATURES+=	${_feature_}
 
 .for _feature_ in getopt_long
 .  if !empty(USE_FEATURES:M${_feature_})
-.    if !exists(/usr/include/getopt.h) || ${OPSYS} == "IRIX"
+.    if !exists(/usr/include/getopt.h) || ${OPSYS} == "IRIX" || ${OPSYS} == "OSF1"
 MISSING_FEATURES+=	${_feature_}
 .    endif
 .  endif

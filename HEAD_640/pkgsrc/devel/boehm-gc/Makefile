@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.60 2008/03/03 16:27:41 tnn Exp $
+# $NetBSD: Makefile,v 1.62 2008/05/22 11:45:25 wiz Exp $
 
-DISTNAME=	gc-7.0
+DISTNAME=	gc-7.1
 PKGNAME=	${DISTNAME:S/gc/boehm-gc/}
 PKGREVISION=	1
 CATEGORIES=	devel
@@ -18,6 +18,7 @@ USE_LANGUAGES=		c c++
 USE_LIBTOOL=		YES
 GNU_CONFIGURE=		YES
 CONFIGURE_ARGS+=	--enable-cplusplus
+CONFIGURE_ARGS+=	--datadir=${PREFIX}/share/doc
 INSTALLATION_DIRS=	${PKGMANDIR}/man3
 
 MAKE_ENV+=		COPTS=${CFLAGS:M*:Q}
@@ -37,13 +38,6 @@ EXTRACT_ELEMENTS=	-u
 .if ${MACHINE_ARCH} == "mipsel"
 CFLAGS+=		-D__MIPSEL__
 .endif
-
-post-extract:
-	${MV} ${WRKSRC}/doc/gc.man ${WRKSRC}/doc/gc.man.in
-
-pre-build:
-	${SED}	-e "s|@PREFIX@|${PREFIX}|g"				\
-		${WRKSRC}/doc/gc.man.in > ${WRKSRC}/doc/gc.man
 
 post-install:
 	${INSTALL_MAN} ${WRKSRC}/doc/gc.man ${DESTDIR}${PREFIX}/${PKGMANDIR}/man3/gc.3

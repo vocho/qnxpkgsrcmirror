@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.346 2008/03/25 13:44:21 wiz Exp $
+# $NetBSD: Makefile,v 1.351 2008/06/29 11:41:41 tnn Exp $
 #
 
 COMMENT=	Electronic mail utilities
@@ -169,9 +169,12 @@ SUBDIR+=	p5-Email-Send
 SUBDIR+=	p5-Email-Simple
 SUBDIR+=	p5-Email-Simple-Creator
 SUBDIR+=	p5-Email-Valid
+SUBDIR+=	p5-Email-Valid-Loose
 SUBDIR+=	p5-GMail-IMAPD
 SUBDIR+=	p5-IMAP-Admin
 SUBDIR+=	p5-IMAP-Client
+SUBDIR+=	p5-MIME-Charset
+SUBDIR+=	p5-MIME-EncWords
 SUBDIR+=	p5-MIME-Lite
 SUBDIR+=	p5-MIME-Lite-HTML
 SUBDIR+=	p5-MIME-Types
@@ -199,6 +202,7 @@ SUBDIR+=	p5-Sendmail-PMilter
 SUBDIR+=	p5-URI-imap
 SUBDIR+=	p5-User-Identity
 SUBDIR+=	p5-razor-agents
+SUBDIR+=	pear-Auth_SASL
 SUBDIR+=	pear-Mail
 SUBDIR+=	pear-Mail_Mime
 SUBDIR+=	perdition
@@ -247,6 +251,8 @@ SUBDIR+=	rmail-mime
 SUBDIR+=	roundcube
 SUBDIR+=	rss2email
 SUBDIR+=	ruby-actionmailer
+SUBDIR+=	ruby-mailfactory
+SUBDIR+=	ruby-mime-types
 SUBDIR+=	ruby-tmail
 SUBDIR+=	safecat
 SUBDIR+=	sendmail
@@ -269,7 +275,6 @@ SUBDIR+=	squirrelmail-locales
 SUBDIR+=	sqwebmail
 SUBDIR+=	ssmtp
 SUBDIR+=	sylpheed
-SUBDIR+=	sylpheed-devel
 SUBDIR+=	sympa
 SUBDIR+=	t-prot
 SUBDIR+=	teapop

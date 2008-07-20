@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.10 2007/01/07 09:14:06 rillig Exp $
+# $NetBSD: Makefile,v 1.12 2008/06/20 01:09:31 joerg Exp $
 #
 # qadsl is now GNU Alive (wip/alive)
 
@@ -10,6 +10,8 @@ MASTER_SITES=	${MASTER_SITE_LOCAL}
 MAINTAINER=	pkgsrc-users@NetBSD.org
 COMMENT=	Login software for Swedish Telia ADSL/Comhem cable Internet users
 
+PKG_DESTDIR_SUPPORT=	user-destdir
+
 LIBS.SunOS+=	-lnsl -lsocket
 
 MANCOMPRESSED=	yes
@@ -20,9 +22,9 @@ MAKE_ENV+=	PKG_SYSCONFDIR=${PKG_SYSCONFDIR:Q}
 INSTALLATION_DIRS=	${PKGMANDIR}/man8 sbin share/examples
 
 do-install:
-	${INSTALL_PROGRAM} ${WRKSRC}/qadsl ${PREFIX}/sbin
+	${INSTALL_PROGRAM} ${WRKSRC}/qadsl ${DESTDIR}${PREFIX}/sbin
 	${INSTALL_DATA} ${WRKSRC}/qadsl.conf \
-		${PREFIX}/share/examples/qadsl.conf.sample
-	${INSTALL_MAN} ${WRKSRC}/qadsl.8.gz ${PREFIX}/${PKGMANDIR}/man8
+		${DESTDIR}${PREFIX}/share/examples/qadsl.conf.sample
+	${INSTALL_MAN} ${WRKSRC}/qadsl.8.gz ${DESTDIR}${PREFIX}/${PKGMANDIR}/man8
 
 .include "../../mk/bsd.pkg.mk"

@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.14 2006/02/05 23:11:28 joerg Exp $
+# $NetBSD: Makefile,v 1.16 2008/06/19 15:05:15 taca Exp $
 
 DISTNAME=	tag104
 PKGNAME=	${RUBY_PKGPREFIX}-tag-1.0.4
-PKGREVISION=	2
+PKGREVISION=	3
 CATEGORIES=	www ruby
 MASTER_SITES=	http://www.moonwolf.com/ruby/archive/
 EXTRACT_SUFX=	.tar.bz2
@@ -11,22 +11,19 @@ MAINTAINER=	taca@NetBSD.org
 HOMEPAGE=	http://www.moonwolf.com/ruby/tag.html
 COMMENT=	Ruby Simple HTML Tag library for CGI
 
-# The distfile cannot be extracted with some tar (e.g. NetBSD 2.0)
-# or some pax (e.g. NetBSD 1.6).  Force use of gtar instead.
-#
-EXTRACT_USING=	gtar
+EXTRACT_USING=	bsdtar
 
 WRKSRC=		${WRKDIR}
 NO_CONFIGURE=	yes
+
+INSTALLATION_DIRS=	${RUBY_VENDORLIB} ${RUBY_DOC}/tag/ja
 
 do-build:
 	@cd ${WRKSRC}; ${RUBY_RD} tag.rb > tag.html
 
 do-install:
-	${INSTALL_DATA_DIR} ${RUBY_SITELIBDIR}
-	${INSTALL_DATA} ${WRKSRC}/tag.rb ${RUBY_SITELIBDIR}
-	${INSTALL_DATA_DIR} ${RUBY_DOCDIR}/tag/ja
-	${INSTALL_DATA} ${WRKSRC}/tag.html ${RUBY_DOCDIR}/tag/ja
+	${INSTALL_DATA} ${WRKSRC}/tag.rb ${DESTDIR}${PREFIX}/${RUBY_VENDORLIB}
+	${INSTALL_DATA} ${WRKSRC}/tag.html ${DESTDIR}${PREFIX}/${RUBY_DOC}/tag/ja
 
 .include "../../lang/ruby/modules.mk"
 .include "../../textproc/ruby-rdtool/buildlink3.mk"

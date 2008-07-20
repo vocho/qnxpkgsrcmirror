@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.22 2008/03/06 14:53:53 wiz Exp $
+# $NetBSD: Makefile,v 1.24 2008/06/16 15:33:11 joerg Exp $
 #
 
-DISTNAME=		prelude-lml-0.9.10.1
-PKGREVISION=		3
+DISTNAME=		prelude-lml-0.9.12.2
 CATEGORIES=		security
 MASTER_SITES=		http://www.prelude-ids.org/download/releases/ \
 			http://www.prelude-ids.org/download/releases/old/
@@ -33,6 +32,8 @@ PRELUDE_GROUP?=		_prelude
 BUILD_DEFS+=		VARBASE
 PRELUDE_LML_PID_DIR=	${VARBASE}/run/prelude-lml
 PRELUDE_HOME=		${VARBASE}/prelude-lml
+
+INSTALLATION_DIRS=	sbin
 
 PKG_GROUPS=		${PRELUDE_GROUP}
 PKG_USERS=		${PRELUDE_USER}:${PRELUDE_GROUP}

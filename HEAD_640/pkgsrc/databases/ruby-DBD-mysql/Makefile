@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.15 2007/02/22 19:26:19 wiz Exp $
+# $NetBSD: Makefile,v 1.17 2008/06/22 15:44:49 taca Exp $
 
 DISTNAME=	${RUBY_DBI_DISTNAME}
 PKGNAME=	${RUBY_PKGPREFIX}-DBD-mysql-${RUBY_DBI_VERSION}
@@ -9,21 +9,12 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	${RUBY_DBI_HOMEPAGE}
 COMMENT=	DBD/mysql for ruby
 
-DISTINFO_FILE=	${.CURDIR}/../ruby-DBI/distinfo
-PATCHDIR=	${.CURDIR}/../ruby-DBI/patches
+DEPENDS+= ${RUBY_PKGPREFIX}-DBI>=${RUBY_DBI_VERSION}:../../databases/ruby-DBI
+
 USE_RUBY_SETUP=		yes
 CONFIGURE_ARGS+=	--with=dbd_mysql
 
-DEPENDS+= ${RUBY_PKGPREFIX}-DBI>=${RUBY_DBI_VERSION}:../../databases/ruby-DBI
-
 DOCS=		HISTORY README
-
-post-install:
-	${INSTALL_DATA_DIR} ${RUBY_DOCDIR}/dbi/dbd-mysql
-.for FILE in ${DOCS}
-	${INSTALL_DATA} ${WRKSRC}/doc/dbd/mysql/${FILE} \
-		${RUBY_DOCDIR}/dbi/dbd-mysql
-.endfor
 
 .include "../../databases/ruby-DBI/Makefile.common"
 .include "../../lang/ruby/modules.mk"

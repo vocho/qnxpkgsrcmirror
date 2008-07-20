@@ -1,10 +1,11 @@
 #!@SH@ -e
 #
-# $Id: pkg_chk.sh,v 1.55 2008/02/24 21:58:13 abs Exp $
+# $Id: pkg_chk.sh,v 1.60 2008/07/05 22:56:40 abs Exp $
 #
 # TODO: Make -g check dependencies and tsort
-# TODO: Variation of -g which only lists top level packages
-# TODO: List top level packages installed but not in config
+# TODO: Make -g list user-installed packages first, followed by commented
+#	out automatically installed packages
+# TODO: List user-installed packages that are not in config
 
 PATH=${PATH}:/usr/sbin:/usr/bin
 
@@ -158,9 +159,21 @@ extract_pkg_vars()
 
 extract_variables()
     {
-    extract_mk_var PKGSRCDIR /usr/pkgsrc
-    if [ ! -d $PKGSRCDIR -a -z "$opt_b" ] ; then
-	fatal "Unable to locate PKGSRCDIR ($PKGSRCDIR)"
+    extract_mk_var PKGSRCDIR ''
+    extract_mk_var LOCALBASE ''
+    if [ -z "$PKGSRCDIR" ] ; then
+	for dir in $LOCALBASE/pkgsrc /usr/pkgsrc . .. ../.. ; do
+	    if [ -f "${dir}/mk/bsd.pkg.mk" ]; then
+		case "${dir}" in
+		/*) PKGSRCDIR="${dir}" ;;
+		*)  PKGSRCDIR="$( cd "${dir}" >/dev/null 2>&1 && pwd )" ;;
+		esac
+		break
+	    fi
+	done
+    fi
+    if [ ! -d $PKGSRCDIR -a \( -z "$opt_b" -o -n "$opt_s" \) ] ; then
+	fatal "Unable to locate PKGSRCDIR (${PKGSRCDIR:-not set})"
     fi
 
     # Now we have PKGSRCDIR, use it to determine PACKAGES, and PKGCHK_CONF
@@ -241,6 +254,14 @@ generate_conf_from_installed()
 
 get_bin_pkg_info()
     {
+    summary_file=$PACKAGES/$SUMMARY_FILE
+    if [ -f $summary_file ] ; then
+	if [ -z "$(find $PACKAGES -type f -newer $summary_file -name '*.t[bg]z')" ] ; then
+	    zcat $summary_file
+	    return;
+	fi
+	echo "*** Ignoring $SUMMARY_FILE as PACKAGES contains newer files" >&2
+    fi
     list_bin_pkgs | ${XARGS} ${PKG_INFO} -X
     }
 
@@ -524,6 +545,7 @@ pkg_install()
     FAIL=
     if [ -d $PKG_DBDIR/$PKGNAME ];then
 	msg "$PKGNAME installed in previous stage"
+	run_cmd_su "${PKG_ADMIN} unset automatic $PKGNAME"
     elif [ -n "$opt_b" ] && is_binary_available $PKGNAME; then
 	if [ -n "$saved_PKG_PATH" ] ; then
 	    export PKG_PATH=$saved_PKG_PATH
@@ -742,14 +764,16 @@ MY_TMPDIR=`${MKTEMP} -d ${TMPDIR-/tmp}/${0##*/}.XXXXXX`
 test -n "$MY_TMPDIR" || fatal "Couldn't create temporary directory."
 MY_TMPFILE=$MY_TMPDIR/tmp
 
+if [ -z "$MAKECONF" ] ; then
+    for mkconf in "@MAKECONF@" "@PREFIX@/etc/mk.conf" /etc/mk.conf ; do
+	if [ -f "$mkconf" ] ; then
+	    MAKECONF="$mkconf"
+	    break
+	fi
+    done
+fi
 if [ -z "$MAKECONF" -o ! -f "$MAKECONF" ] ; then
-    if [ -f @PREFIX@/etc/mk.conf ] ; then
-	MAKECONF=@PREFIX@/etc/mk.conf
-    elif [ -f /etc/mk.conf ] ; then
-	MAKECONF=/etc/mk.conf
-    else
-	MAKECONF=/dev/null
-    fi
+    MAKECONF=/dev/null
 fi
 verbose_var MAKECONF
 
@@ -899,8 +923,8 @@ if [ -n "$opt_u" -a -z "$FAIL_DONE" -a -f $PKGCHK_UPDATE_CONF ] ; then
     run_cmd "rm -f $PKGCHK_UPDATE_CONF"
 fi
 
-[ -n "$MISS_DONE" ] &&		msg "Missing:$MISS_DONE"
-[ -n "$INSTALL_DONE" ] &&	msg "Installed:$INSTALL_DONE"
+[ -z "$MISS_DONE" ] ||		msg "Missing:$MISS_DONE"
+[ -z "$INSTALL_DONE" ] ||	msg "Installed:$INSTALL_DONE"
 
 if [ -n "$FAIL_DONE" ] ; then
    msg "Failed:$FAIL_DONE"

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.14 2007/01/13 17:51:06 joerg Exp $
+# $NetBSD: Makefile,v 1.16 2008/06/20 01:09:40 joerg Exp $
 #
 
 DISTNAME=	OroboROX-0.9.8
@@ -12,6 +12,8 @@ MAINTAINER=	rxg@NetBSD.org
 HOMEPAGE=	http://roxos.sunsite.dk/dev-contrib/guido/
 COMMENT=	The lightweight Window Manager for the ROX Desktop
 
+PKG_DESTDIR_SUPPORT=	user-destdir
+
 DEPENDS+=	rox-lib>=2.0.2nb2:../../devel/rox-lib
 
 WRKSRC=		${WRKDIR}/OroboROX
@@ -19,7 +21,7 @@ DIST_SUBDIR=	rox
 
 PLATFORM=	${OPSYS}-${MACHINE_ARCH}
 
-USE_TOOLS+=		autoconf pkg-config
+USE_TOOLS+=		autoconf pax pkg-config
 GNU_CONFIGURE=		yes
 CONFIGURE_ARGS+=	--enable-xft --with-platform=${PLATFORM:Q}
 
@@ -73,7 +75,7 @@ post-build:
 
 do-install:
 	${INSTALL_PROGRAM} ${WRKSRC:Q}/${PLATFORM:Q}/OroboROX ${PREFIX:Q}/libexec/rox
-	cd ${WRKSRC:Q} && ${PAX} -rw	\
+	cd ${WRKSRC:Q} && pax -rw	\
 		-s ',^\./${PLATFORM}$$,,' -s ',^\./${PLATFORM}/.*,,'	\
 		-s ',^\./src$$,,' -s ',^\./src/.*,,'	\
 		. ${PREFIX:Q}/share/rox/OroboROX

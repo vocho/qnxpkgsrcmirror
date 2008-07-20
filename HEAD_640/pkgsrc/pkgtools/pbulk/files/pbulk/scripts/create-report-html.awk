@@ -1,7 +1,7 @@
 #!@AWK@ -f
-# $NetBSD: create-report-html.awk,v 1.9 2008/03/01 19:04:37 rillig Exp $
+# $NetBSD: create-report-html.awk,v 1.11 2008/06/11 19:27:03 joerg Exp $
 #
-# Copyright (c) 2007 Joerg Sonnenberger <joerg@NetBSD.org>.
+# Copyright (c) 2007, 2008 Joerg Sonnenberger <joerg@NetBSD.org>.
 # All rights reserved.
 #
 # This code was developed as part of Google's Summer of Code 2007 program.
@@ -53,11 +53,49 @@ function print_failed_log_line(PKGNAME, PHASE, VAR) {
 		print "<td>&nbsp;</td>" > html_report
 }
 
+function print_pre_fail_reason(PKGNAME, chars, in_quote, in_sep, i) {
+	split(pre_fail_reason[PKGNAME], chars, "")
+	in_quote = 0
+	in_sep = 0
+	for (i = 1; i < length(chars); ++i) {
+		if (chars[i] == "\"") {
+			in_quote = 1 - in_quote
+			continue
+		}
+		if (in_quote == 0 && chars[i] == " ") {
+			if (!in_sep)
+				printf "<br />" > html_report
+			in_sep = 1
+			continue
+		}
+		in_sep = 0
+
+		if (chars[i] == "\\") {
+			++i
+			if (chars[i] == "n")
+				printf " " > html_report
+			else if (chars[i] == "t")
+				printf " " > html_report
+			else if (chars[i] == "<")
+				printf "&lt;" > html_report
+			else if (chars[i] == ">")
+				printf "&gt;" > html_report
+			else if (chars[i] == "&")
+				printf "&amp;" > html_report
+			else
+				printf "%s", chars[i] > html_report
+			continue
+		}
+		printf "%s", chars[i] > html_report
+	}
+	printf "\n" > html_report
+}
+
 function print_failed(PKGNAME, cmd, has_pre_clean, has_depends,
     has_checksum,has_configure, has_build, has_install, has_package,
-    has_clean, has_deinstall) {
-	cmd = "ls " log_dir "/" PKGNAME " 2>/dev/null"
+    has_clean, has_deinstall, last_error) {
 	if (status[PKGNAME] == "failed") {
+		cmd = "ls " log_dir "/" PKGNAME " 2>/dev/null"
 		while ((cmd | getline) > 0) {
 			if ($0 == "pre-clean.log")
 				has_pre_clean = 1
@@ -79,9 +117,31 @@ function print_failed(PKGNAME, cmd, has_pre_clean, has_depends,
 				has_deinstall = 1
 		}
 		close(cmd)
+
+		if (has_deinstall)
+			last_error = "deinstall.log"
+		else if (has_clean)
+			last_error = "clean.log"
+		else if (has_package)
+			last_error = "package.log"
+		else if (has_install)
+			last_error = "install.log"
+		else if (has_build)
+			last_error = "build.log"
+		else if (has_configure)
+			last_error = "configure.log"
+		else if (has_checksum)
+			last_error = "checksum.log"
+		else if (has_depends)
+			last_error = "depends.log"
+		else if (has_pre_clean)
+			last_error = "pre-clean.log"
 	}
 	print "<tr class=\"" status[PKGNAME] "\">" > html_report
-	print "<td>" location[PKGNAME] "</td>" > html_report
+	if (last_error)
+		print "<td><a href=\"../" PKGNAME "/" last_error "\"> " location[PKGNAME] "</a></td>" > html_report
+	else
+		print "<td>" location[PKGNAME] "</td>" > html_report
 	print "<td>" PKGNAME "</td>" > html_report
 	if (depth[PKGNAME] == 0)
 		print "<td>&nbsp;</td>" > html_report
@@ -99,6 +159,51 @@ function print_failed(PKGNAME, cmd, has_pre_clean, has_depends,
 	print_failed_log_line(PKGNAME, "clean", has_clean)
 	print_failed_log_line(PKGNAME, "deinstall", has_deinstall)
 	print "</tr>" > html_report
+	if (status[PKGNAME] == "indirect-failed") {
+		print "<tr class=\"" status[PKGNAME] "\">" > html_report
+		printf "<td>&nbsp;</td>" > html_report
+		printf "<td colspan=\"13\"> Failed: " > html_report
+		printf "%s", failed_pkgs[PKGNAME] > html_report
+		print "</td>" > html_report
+		print "</tr>" > html_report
+	}
+	if (status[PKGNAME] == "prefailed") {
+		print "<tr class=\"" status[PKGNAME] "\">" > html_report
+		printf "<td>&nbsp;</td>" > html_report
+		printf "<td colspan=\"13\">" > html_report
+		print_pre_fail_reason(PKGNAME)
+		print "</td>" > html_report
+		print "</tr>" > html_report
+	}
+}
+
+function compute_direct_failure(CUR, dep, cur_dep, cur_depends, found, i) {
+	if (failed_pkgs[CUR] != "")
+		return
+	split(depends[CUR], cur_depends, "[ \t]+")
+	for (dep in cur_depends) {
+		cur_dep = cur_depends[dep]
+		if (status[cur_dep] == "failed") {
+			failed_pkgs[CUR] = failed_pkgs[CUR] " " cur_dep
+		} else if (status[cur_dep] == "indirect-failed") {
+			compute_direct_failure(cur_dep)
+			failed_pkgs[CUR] = failed_pkgs[cur_dep] " " failed_pkgs[CUR]
+		}
+	}
+	split(failed_pkgs[CUR], cur_depends, "[ \t]+")
+	failed_pkgs[CUR] = ""
+	for (dep in cur_depends) {
+		cur_dep = cur_depends[dep]
+		found[cur_dep] = 1
+	}
+	i = 0
+	for (dep in found) {
+		if (++i == 10) {
+			failed_pkgs[CUR] = failed_pkgs[CUR] " ..."
+			break;
+		}
+		failed_pkgs[CUR] = failed_pkgs[CUR] " " dep
+	}
 }
 
 BEGIN {
@@ -136,9 +241,12 @@ BEGIN {
 			location[cur] = substr($0, 14)
 		else if ($0 ~ "^PKG_DEPTH=")
 			depth[cur] = substr($0, 11) - 1
-		else if ($0 ~ "^BUILD_STATUS=") {
+		else if ($0 ~ "^BUILD_STATUS=")
 			status[cur] = substr($0, 14)
-		}
+		else if ($0 ~ "^PKG_FAIL_REASON=")
+			pre_fail_reason[cur] = substr($0, 17)
+		else if ($0 ~ "^DEPENDS=")
+			depends[cur] = substr($0, 9)
 	}
 	close(report_file)
 
@@ -149,9 +257,10 @@ BEGIN {
 			++pkgs_failed
 		else if (status[pkg] == "prefailed")
 			++pkgs_prefailed
-		else if (status[pkg] == "indirect-failed")
+		else if (status[pkg] == "indirect-failed") {
+			compute_direct_failure(pkg)
 			++pkgs_indirect_failed
-		else if (status[pkg] == "indirect-prefailed")
+		} else if (status[pkg] == "indirect-prefailed")
 			++pkgs_indirect_prefailed
 	}
 

@@ -1,8 +1,8 @@
-$NetBSD: patch-ab,v 1.5 2007/01/26 11:40:36 dillo Exp $
+$NetBSD: patch-ab,v 1.7 2008/05/20 11:43:59 wiz Exp $
 
---- src/Makefile.in.orig	2007-01-25 15:18:34.000000000 +0000
+--- src/Makefile.in.orig	2008-05-04 19:38:30.000000000 +0200
 +++ src/Makefile.in
-@@ -1231,6 +1231,14 @@ distclean-compile:
+@@ -1266,6 +1266,14 @@ distclean-compile:
  @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
  @am__fastdepCC_FALSE@	$(COMPILE) -c -o $@ `$(CYGPATH_W) '$<'`
  

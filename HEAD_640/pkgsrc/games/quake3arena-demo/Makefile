@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.32 2008/03/04 06:59:05 jlam Exp $
+# $NetBSD: Makefile,v 1.34 2008/05/26 02:13:19 joerg Exp $
 
 DISTNAME=	linuxq3ademo-1_11-6_x86_gz
 PKGREVISION=	3
@@ -19,7 +19,7 @@ EMUL_MODULES.linux=	base x11 glx
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
-USE_TOOLS+=	gtar
+USE_TOOLS+=	gtar pax
 EXTRACT_CMD=	${SED} '1,/^END_OF_STUB$$/d' ${DOWNLOADED_DISTFILE} |	\
 		${GTAR} xzf -
 
@@ -31,7 +31,7 @@ WRKSRC=		${WRKDIR}
 LIBDIR=		${PREFIX}/lib/lokigames/${BINNAME}
 SHAREDIR=	${PREFIX}/share/doc/lokigames
 
-INSTALLATION_DIRS=	bin
+INSTALLATION_DIRS=	bin ${LIBDIR} ${SHAREDIR}
 
 do-build:
 	${SED} -e 's#@@PREFIX@@#${PREFIX}#g' \
@@ -41,8 +41,6 @@ do-build:
 
 # The executable must be in the same directory as the data.
 do-install:
-	${INSTALL_PROGRAM_DIR} ${DESTDIR}${LIBDIR}
-	${INSTALL_DATA_DIR} ${DESTDIR}${SHAREDIR}
 	${INSTALL_SCRIPT} ${WRKDIR}/${BINNAME}.sh ${DESTDIR}${PREFIX}/bin/${BINNAME}
 	${INSTALL_PROGRAM} ${WRKSRC}/bin/x86/glibc-2.1/${DISTBINNAME} \
 		${DESTDIR}${LIBDIR}/${BINNAME}
@@ -53,8 +51,8 @@ do-install:
 	${LN} -s ${LIBDIR}/libMesaVoodooGL.so.3.2 \
 		${DESTDIR}${LIBDIR}/libMesaVoodooGL.so
 	${INSTALL_DATA} ${WRKSRC}/README ${DESTDIR}${SHAREDIR}/${BINNAME}-README
-	cd ${WRKSRC} && ${PAX} -rw demoq3 icon.bmp icon.xpm ${DESTDIR}${LIBDIR}
-	cd ${WRKSRC} && ${PAX} -rw Help ${DESTDIR}${SHAREDIR}
-	${MV} ${SHAREDIR}/Help ${DESTDIR}${SHAREDIR}/quake3arena-Help
+	cd ${WRKSRC} && pax -rw demoq3 icon.bmp icon.xpm ${DESTDIR}${LIBDIR}
+	cd ${WRKSRC} && pax -rw Help ${DESTDIR}${SHAREDIR}
+	${MV} ${DESTDIR}${SHAREDIR}/Help ${DESTDIR}${SHAREDIR}/quake3arena-Help
 
 .include "../../mk/bsd.pkg.mk"

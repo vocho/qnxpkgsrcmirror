@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.181 2008/02/03 02:47:35 reed Exp $
+# $NetBSD: Makefile,v 1.185 2008/06/19 16:27:10 reed Exp $
 #
 
 COMMENT=	Desktop publishing
@@ -12,6 +12,7 @@ SUBDIR+=	abcm2ps
 SUBDIR+=	acroread
 SUBDIR+=	acroread5
 SUBDIR+=	acroread7
+SUBDIR+=	acroread8
 SUBDIR+=	adobeps-win
 SUBDIR+=	advi
 SUBDIR+=	apsfilter
@@ -83,6 +84,7 @@ SUBDIR+=	papersize
 SUBDIR+=	pcps
 SUBDIR+=	pdfjam
 SUBDIR+=	pdflib
+SUBDIR+=	pdflib-lite
 SUBDIR+=	php-pdflib
 SUBDIR+=	pnm2ppa
 SUBDIR+=	poppler
@@ -104,6 +106,7 @@ SUBDIR+=	rtf2latex
 SUBDIR+=	rtf2latex2e
 SUBDIR+=	ruby-gnome2-gnomeprint
 SUBDIR+=	ruby-gnome2-poppler
+SUBDIR+=	ruby-pdf-writer
 SUBDIR+=	scribus
 SUBDIR+=	scribus-doc
 SUBDIR+=	stylewriter
@@ -126,6 +129,7 @@ SUBDIR+=	tex-foiltex
 SUBDIR+=	tex-glossaries
 SUBDIR+=	tex-hlatex
 SUBDIR+=	tex-hugelatex
+SUBDIR+=	tex-ifxetex
 SUBDIR+=	tex-igo
 SUBDIR+=	tex-jadetex
 SUBDIR+=	tex-memhangul-ucs

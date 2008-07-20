@@ -1,4 +1,4 @@
-$NetBSD: distinfo,v 1.8 2007/10/09 12:14:04 rillig Exp $
+$NetBSD: distinfo,v 1.10 2008/06/20 11:22:17 joerg Exp $
 
 SHA1 (IglooFTP-0.6.1.src.tar.gz) = ab56bc6c15dc81525b8e987ae5fc15e562f92eed
 RMD160 (IglooFTP-0.6.1.src.tar.gz) = 7f0971ec857542d96a09dffc9db8a3544df38fae

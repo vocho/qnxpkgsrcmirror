@@ -1,13 +1,15 @@
-# $NetBSD: Makefile,v 1.9 2007/09/21 13:04:21 wiz Exp $
+# $NetBSD: Makefile,v 1.11 2008/06/20 01:09:36 joerg Exp $
 #
 
 DISTNAME=	notification-daemon-0.3.7
 CATEGORIES=	sysutils gnome
 MASTER_SITES=	http://www.galago-project.org/files/releases/source/notification-daemon/
 
-MAINTAINER=	jmmv@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.galago-project.org/
 COMMENT=	Shows notification messages on the desktop
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=	yes
 USE_LIBTOOL=	yes

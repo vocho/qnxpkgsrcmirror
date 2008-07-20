@@ -1,14 +1,20 @@
-$NetBSD: patch-ad,v 1.7 2007/10/02 15:59:23 taca Exp $
+$NetBSD: patch-ad,v 1.9 2008/07/03 21:06:10 tonnerre Exp $
 
---- eval.c.orig	2007-09-23 09:01:50.000000000 +0900
-+++ eval.c
-@@ -11944,7 +11944,9 @@ rb_thread_start_0(fn, arg, th)
- #ifdef _THREAD_SAFE
- 	pthread_create(&time_thread, 0, thread_timer, 0);
-         time_thread_alive_p = 1;
-+#ifndef __DragonFly__
-         pthread_atfork(0, 0, rb_child_atfork);
-+#endif
- #else
- 	rb_thread_start_timer();
- #endif
+Avoid memory size integer overflow memory exhaustion DoS in filling
+arrays (SN-2008-02).
+
+--- array.c.orig	2008-07-03 22:56:32.000000000 +0200
++++ array.c
+@@ -2416,10 +2416,10 @@ rb_ary_fill(argc, argv, ary)
+ 	break;
+     }
+     rb_ary_modify(ary);
+-    end = beg + len;
+-    if (end < 0) {
++    if (beg >= ARY_MAX_SIZE || len > ARY_MAX_SIZE - beg) {
+ 	rb_raise(rb_eArgError, "argument too big");
+     }
++    end = beg + len;
+     if (end > RARRAY(ary)->len) {
+ 	if (end >= RARRAY(ary)->aux.capa) {
+ 	    REALLOC_N(RARRAY(ary)->ptr, VALUE, end);

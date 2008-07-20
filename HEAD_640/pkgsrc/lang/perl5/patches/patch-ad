@@ -1,26 +1,17 @@
-$NetBSD$
+$NetBSD: patch-ad,v 1.11 2008/06/01 22:04:07 he Exp $
 
---- hints/qnx.sh.orig	2002-04-23 11:46:15.000000000 -0400
-+++ hints/qnx.sh
-@@ -241,9 +241,20 @@ else
-   # Somewhere in the build, something tries to throw a gcc
-   # option to $cc if it knows it invokes gcc. Our cc doesn't
-   # recognize that option, so we're better off setting cc=gcc.
--  cc='gcc'
- 
-   # If we use perl's malloc, it dies with an invalid sbrk.
-   # This is probably worth tracking down someday.
-   usemymalloc='false'
- fi
-+
-+cat > UU/pkgsrc.cbu <<'EOCBU'
-+# This script UU/pkgsrc.cbu will get 'called-back' by Configure to set
-+# linker options after all other call-back scripts have been invoked.
-+ldflags="-Wl,-R/usr/pkg/lib $ldflags"
-+lddlflags="-Wl,-R/usr/pkg/lib $lddlflags"
-+EOCBU
-+
-+# Set pkgsrc defaults for library and header search paths.
-+locincpth="/usr/pkg/include"
-+loclibpth="/usr/pkg/lib"
-+glibpth="/usr/lib"
+Fix for
+http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-1927
+from
+http://bugs.debian.org/cgi-bin/bugreport.cgi?msg=26;filename=27_fix_regcomp_utf8;att=1;bug=454792
+
+--- embed.fnc.orig	2006-01-31 15:40:27.000000000 +0100
++++ embed.fnc
+@@ -1168,6 +1168,7 @@ Es	|void	|reguni		|NN const struct RExC_
+ Es	|regnode*|regclass	|NN struct RExC_state_t *state
+ ERs	|I32	|regcurly	|NN const char *
+ Es	|regnode*|reg_node	|NN struct RExC_state_t *state|U8 op
++Es	|UV	|reg_recode	|const char value|NULLOK SV **encp
+ Es	|regnode*|regpiece	|NN struct RExC_state_t *state|NN I32 *flagp
+ Es	|void	|reginsert	|NN struct RExC_state_t *state|U8 op|NN regnode *opnd
+ Es	|void	|regoptail	|NN struct RExC_state_t *state|NN regnode *p|NN regnode *val

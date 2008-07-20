@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.155 2008/02/22 00:36:12 gdt Exp $
+# $NetBSD: Makefile,v 1.158 2008/05/25 20:49:39 tron Exp $
 
 DISTNAME=		mutt-1.4.2.3
 PKGREVISION=		2
@@ -7,7 +7,7 @@ MASTER_SITES=		ftp://ftp.mutt.org/mutt/ \
 			ftp://gd.tuwien.ac.at/infosys/mail/mutt/ \
 			ftp://ftp.fu-berlin.de/unix/mail/mutt/
 
-MAINTAINER=		tron@NetBSD.org
+OWNER=			tron@NetBSD.org
 HOMEPAGE=		http://www.mutt.org/
 COMMENT=		Text-based MIME mail client with PGP support
 
@@ -86,10 +86,9 @@ FILES_SUBST+=		DOCDIR=${DOCDIR:Q}
 
 INSTALL_MAKE_FLAGS+=	${MAKE_FLAGS} sysconfdir=${EGDIR:Q}
 
+PLIST_VARS+=		dotlock
 .if exists(${WRKSRC}/mutt_dotlock)
-PLIST_SUBST+=		MUTT_DOTLOCK=
-.else
-PLIST_SUBST+=		MUTT_DOTLOCK="@comment "
+PLIST.dotlock=		yes
 .endif
 INSTALL_MAKE_FLAGS=	${MAKE_FLAGS} sysconfdir=${EGDIR}
 

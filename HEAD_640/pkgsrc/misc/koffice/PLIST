@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.26 2007/06/08 12:50:14 markd Exp $
+@comment $NetBSD: PLIST,v 1.28 2008/05/06 23:50:42 markd Exp $
 bin/karbon
 bin/kchart
 bin/kexi
@@ -332,8 +332,8 @@ lib/kde3/karbon_whirlpinchplugin.la
 lib/kde3/karbon_zoomtoolplugin.la
 lib/kde3/kchart.la
 lib/kde3/kexi.la
-${HAVE_MYSQL}lib/kde3/kexidb_mysqldriver.la
-${HAVE_PGSQL}lib/kde3/kexidb_pqxxsqldriver.la
+${PLIST.mysql}lib/kde3/kexidb_mysqldriver.la
+${PLIST.pgsql}lib/kde3/kexidb_pqxxsqldriver.la
 lib/kde3/kexidb_sqlite2driver.la
 lib/kde3/kexidb_sqlite3driver.la
 lib/kde3/kexihandler_csv_importexport.la
@@ -343,8 +343,8 @@ lib/kde3/kexihandler_query.la
 lib/kde3/kexihandler_relation.la
 lib/kde3/kexihandler_script.la
 lib/kde3/kexihandler_table.la
-${HAVE_MYSQL}lib/kde3/keximigrate_mysql.la
-${HAVE_PGSQL}lib/kde3/keximigrate_pqxx.la
+${PLIST.mysql}lib/kde3/keximigrate_mysql.la
+${PLIST.pgsql}lib/kde3/keximigrate_pqxx.la
 lib/kde3/kfile_abiword.la
 lib/kde3/kfile_gnumeric.la
 lib/kde3/kfile_koffice.la
@@ -504,8 +504,6 @@ lib/kde3/libkprkword.la
 lib/kde3/libkrita_openexr_export.la
 lib/kde3/libkrita_openexr_import.la
 lib/kde3/libkrita_raw_import.la
-lib/kde3/libkritagmagickexport.la
-lib/kde3/libkritagmagickimport.la
 lib/kde3/libkritajpegexport.la
 lib/kde3/libkritajpegimport.la
 lib/kde3/libkritapart.la
@@ -525,7 +523,7 @@ lib/kde3/libkugarpart.la
 lib/kde3/libkwordkword1dot3import.la
 lib/kde3/libkwordlatexexport.la
 lib/kde3/libkwordpart.la
-${HAVE_WV2}lib/kde3/libmswordimport.la
+${PLIST.wv2}lib/kde3/libmswordimport.la
 lib/kde3/libmswriteexport.la
 lib/kde3/libmswriteimport.la
 lib/kde3/libolefilter.la
@@ -548,7 +546,7 @@ lib/kde3/libwmfimport.la
 lib/kde3/libwmlexport.la
 lib/kde3/libwmlimport.la
 lib/kde3/libwpexport.la
-${HAVE_WPD}lib/kde3/libwpimport.la
+${PLIST.libwpd}lib/kde3/libwpimport.la
 lib/kde3/libxsltexport.la
 lib/kde3/libxsltimport.la
 lib/kde3/straight_connector.la
@@ -1595,7 +1593,6 @@ share/icons/hicolor/scalable/apps/koshell.svgz
 share/icons/locolor/16x16/apps/kudesigner.png
 share/icons/locolor/32x32/apps/kudesigner.png
 share/kde/applnk/.hidden/krita_jpeg.desktop
-share/kde/applnk/.hidden/krita_magick.desktop
 share/kde/applnk/.hidden/krita_openexr.desktop
 share/kde/applnk/.hidden/krita_pdf.desktop
 share/kde/applnk/.hidden/krita_png.desktop
@@ -4628,12 +4625,12 @@ share/kde/services/kexi/kexiqueryhandler.desktop
 share/kde/services/kexi/kexirelationhandler.desktop
 share/kde/services/kexi/kexiscripthandler.desktop
 share/kde/services/kexi/kexitablehandler.desktop
-${HAVE_MYSQL}share/kde/services/kexidb_mysqldriver.desktop
-${HAVE_PGSQL}share/kde/services/kexidb_pqxxsqldriver.desktop
+${PLIST.mysql}share/kde/services/kexidb_mysqldriver.desktop
+${PLIST.pgsql}share/kde/services/kexidb_pqxxsqldriver.desktop
 share/kde/services/kexidb_sqlite2driver.desktop
 share/kde/services/kexidb_sqlite3driver.desktop
-${HAVE_MYSQL}share/kde/services/keximigrate_mysql.desktop
-${HAVE_PGSQL}share/kde/services/keximigrate_pqxx.desktop
+${PLIST.mysql}share/kde/services/keximigrate_mysql.desktop
+${PLIST.pgsql}share/kde/services/keximigrate_pqxx.desktop
 share/kde/services/kfile_abiword.desktop
 share/kde/services/kfile_gnumeric.desktop
 share/kde/services/kfile_koffice.desktop
@@ -4674,8 +4671,6 @@ share/kde/services/krita_gray_u16_plugin.desktop
 share/kde/services/krita_jpeg_export.desktop
 share/kde/services/krita_jpeg_import.desktop
 share/kde/services/krita_lms_f32_plugin.desktop
-share/kde/services/krita_magick_export.desktop
-share/kde/services/krita_magick_import.desktop
 share/kde/services/krita_openexr_export.desktop
 share/kde/services/krita_openexr_import.desktop
 share/kde/services/krita_pdf_import.desktop
@@ -4777,7 +4772,7 @@ share/kde/services/kword_html_export.desktop
 share/kde/services/kword_html_import.desktop
 share/kde/services/kword_kword1dot3_import.desktop
 share/kde/services/kword_latex_export.desktop
-${HAVE_WV2}share/kde/services/kword_msword_import.desktop
+${PLIST.wv2}share/kde/services/kword_msword_import.desktop
 share/kde/services/kword_mswrite_export.desktop
 share/kde/services/kword_mswrite_import.desktop
 share/kde/services/kword_oowriter_export.desktop
@@ -4790,7 +4785,7 @@ share/kde/services/kword_rtf_import.desktop
 share/kde/services/kword_wml_export.desktop
 share/kde/services/kword_wml_import.desktop
 share/kde/services/kword_wp_export.desktop
-${HAVE_WPD}share/kde/services/kword_wp_import.desktop
+${PLIST.libwpd}share/kde/services/kword_wp_import.desktop
 share/kde/services/kwordpart.desktop
 share/kde/services/kwserialletter_classic.desktop
 share/kde/services/kwserialletter_qtsqldb_power.desktop

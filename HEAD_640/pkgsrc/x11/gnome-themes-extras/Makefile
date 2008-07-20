@@ -1,23 +1,20 @@
-# $NetBSD: Makefile,v 1.35 2008/03/06 14:53:56 wiz Exp $
+# $NetBSD: Makefile,v 1.38 2008/06/20 01:09:44 joerg Exp $
 #
 
-DISTNAME=	gnome-themes-extras-0.8.1
-PKGREVISION=	15
+DISTNAME=	gnome-themes-extras-2.22.0
 CATEGORIES=	x11 gnome
-MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gnome-themes-extras/0.8/}
+MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gnome-themes-extras/2.22/}
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.gnome.org/
 COMMENT=	Collection of metathemes for the GNOME desktop environment
 
+PKG_DESTDIR_SUPPORT=	user-destdir
+
 .include "../../mk/bsd.prefs.mk"
-# NetBSD's pax-as-tar truncates filenames
-.if ${OPSYS} == "DragonFly"
-# and so does older GNU tar
-TOOLS_PLATFORM.gtar=	/usr/bin/bsdtar
-.endif
-EXTRACT_USING=		gtar
+
+EXTRACT_USING=		bsdtar
 
 USE_DIRS+=		xdg-1.1
 USE_PKGLOCALEDIR=	yes
@@ -30,6 +27,8 @@ BUILDLINK_TRANSFORM+=	rm:-DGTK_DISABLE_DEPRECATED
 
 BUILDLINK_API_DEPENDS.librsvg+=	librsvg>=2.12.6
 
+.include "../../graphics/gnome-icon-theme/buildlink3.mk"
+.include "../../graphics/icon-naming-utils/buildlink3.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../devel/libgnomeui/buildlink3.mk"
 .include "../../graphics/librsvg/buildlink3.mk"

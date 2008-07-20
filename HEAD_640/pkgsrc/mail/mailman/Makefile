@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.48 2007/07/04 20:54:44 jlam Exp $
+# $NetBSD: Makefile,v 1.52 2008/06/29 07:47:03 kim Exp $
 
-DISTNAME=	mailman-2.1.9
+DISTNAME=	mailman-2.1.10
 CATEGORIES=	mail www
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=mailman/}
 EXTRACT_SUFX=	.tgz
@@ -64,12 +64,8 @@ RCD_SCRIPTS=		mailman
 INSTALL_TEMPLATES+=	${FILESDIR}/INSTALL
 DEINSTALL_TEMPLATES+=	${FILESDIR}/DEINSTALL
 
-PYTHON_VERSIONS_ACCEPTED= 24 23 22 21
 PYTHON_PATCH_SCRIPTS+=	Mailman/Archiver/pipermail.py
 PYTHON_PATCH_SCRIPTS+=	Mailman/Post.py
-PYTHON_PATCH_SCRIPTS+=	admin/bin/faq2ht.py
-PYTHON_PATCH_SCRIPTS+=	admin/bin/mm2do
-PYTHON_PATCH_SCRIPTS+=	admin/www/reset_pw.py
 PYTHON_PATCH_SCRIPTS+=	bin/msgfmt.py
 
 CONFIGURE_ARGS+=	--with-cgi-gid=${MAILMAN_CGIGROUP:Q}
@@ -98,6 +94,9 @@ SUBST_STAGE.paths=	post-patch
 
 PYCOMPILEALL=	${BUILDLINK_PREFIX.${PYPACKAGE}}/${PYLIB}/compileall.py
 
+# mailman depends a lot on it and will bitch if changed.
+CHECK_PERMS=	no
+
 post-extract:
 	${CP} ${FILESDIR}/mailman.conf.dist ${WRKDIR}/mailman.conf.dist
 
@@ -113,7 +112,7 @@ post-install:
 	cd ${WRKSRC} && for i in [A-IN-U]*; do \
 		${INSTALL_DATA} $$i ${DOCDIR}/; \
 	done
-	cd ${WRKSRC}/admin/www && for i in \
+	cd ${WRKSRC}/doc && for i in \
 	    mailman-*.ps mailman-*.pdf mailman-*.txt; do \
 		${INSTALL_DATA} $$i ${DOCDIR}/; \
 	done
@@ -122,7 +121,6 @@ post-install:
 	${CHOWN} -R root:${MAILMAN_GROUP} ${EXECDIR}
 	${CHMOD} -R g+w ${EXECDIR}
 	${CHMOD} g+s ${EXECDIR}/cgi-bin/*
-	${RM} -f ${EXECDIR}/Mailman/mm_cfg.pyc
 	${PYTHONBIN} ${PYCOMPILEALL} ${PREFIX}/lib/mailman/bin ${PREFIX}/lib/mailman/cron ${PREFIX}/lib/mailman/scripts
 
 .include "../../lang/python/application.mk"

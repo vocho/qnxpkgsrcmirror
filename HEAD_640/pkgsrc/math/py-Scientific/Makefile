@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.28 2006/06/02 23:33:30 joerg Exp $
+# $NetBSD: Makefile,v 1.30 2008/06/12 02:14:36 joerg Exp $
 
 DISTNAME=	ScientificPython-2.4.5
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME:S/Python//}
@@ -11,9 +11,9 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://starship.python.net/crew/hinsen/scientific.html
 COMMENT=	Python modules for scientific computing
 
-CONFLICTS+=	py-Scientific-*
+PKG_DESTDIR_SUPPORT=	user-destdir
 
-PYTHON_VERSIONS_ACCEPTED=	24 23 22
+CONFLICTS+=	py-Scientific-*
 
 PYDISTUTILSPKG=	yes
 PYBINMODULE=	yes
@@ -24,13 +24,15 @@ EVAL_PREFIX+=	NETCDFPREFIX=netcdf MPICHPREFIX=mpich
 PLIST_SUBST+=	PYVERSSUFFIX=${PYVERSSUFFIX:Q}
 PLIST_SUBST+=	OSVER=${OS_VERSION:C/^(.).*/\1/}
 
+INSTALLATION_DIRS=	bin
+
 post-build:
 	@(cd ${WRKSRC}/Src/MPI && ${SETENV} CFLAGS="${CFLAGS}" \
 	  LDFLAGS="${LDFLAGS} ${PTHREAD_LDFLAGS} ${PTHREAD_LIBS}" ${PYTHONBIN} compile.py)
 
 post-install:
 	${INSTALL_PROGRAM} ${WRKSRC}/Src/MPI/mpipython \
-		${PREFIX}/bin/mpipython${PYVERSSUFFIX}
+		${DESTDIR}${PREFIX}/bin/mpipython${PYVERSSUFFIX}
 
 .include "../../devel/netcdf/buildlink3.mk"
 .include "../../lang/python/extension.mk"

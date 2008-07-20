@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.46 2008/03/02 00:55:15 jlam Exp $
+# $NetBSD: Makefile,v 1.50 2008/06/21 17:17:51 joerg Exp $
 #
 
 DISTNAME=	Gauche-0.8.13
 CATEGORIES=	lang
+PKGREVISION=	1
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=gauche/}
 EXTRACT_SUFX=	.tgz
 
@@ -13,6 +14,7 @@ COMMENT=	R5RS Scheme implementation aimed to be a handy tool for daily works
 DEPENDS+=		slib-[0-9]*:../../devel/slib
 
 PKG_DESTDIR_SUPPORT=	user-destdir
+NOT_FOR_BULK_PLATFORM=	HPUX-*-*
 
 .include "options.mk"
 
@@ -23,6 +25,7 @@ GNU_CONFIGURE=		yes
 CONFIGURE_ARGS+=	--with-slib=${SLIB_PREFIX}/share/slib
 CONFIGURE_ARGS+=	--enable-threads=pthreads
 CONFIGURE_ARGS+=	--with-iconv=${BUILDLINK_PREFIX.iconv}
+MAKEVARS+=		DESTDIR
 
 CHECK_BUILTIN.iconv:=	no
 .include "../../converters/libiconv/builtin.mk"

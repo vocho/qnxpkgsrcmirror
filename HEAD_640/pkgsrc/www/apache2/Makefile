@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.121 2008/01/21 14:37:22 taca Exp $
+# $NetBSD: Makefile,v 1.124 2008/06/22 23:01:19 he Exp $
 
 .include "Makefile.common"
 
 PKGNAME=	apache-${APACHE_VERSION}
+PKGREVISION=	1
 CATEGORIES=	www
 
 HOMEPAGE=	http://httpd.apache.org/
@@ -13,7 +14,7 @@ CONFLICTS=	apache-*ssl-[0-9]* apache6-[0-9]*
 BUILD_DEFS+=	IPV6_READY
 BUILD_DEFS+=	VARBASE
 
-USE_TOOLS+=		perl perl:run pkg-config
+USE_TOOLS+=		pax perl perl:run pkg-config
 USE_LIBTOOL=		yes
 GNU_CONFIGURE=		yes
 CONFIGURE_ARGS+=	--enable-layout=NetBSD
@@ -46,11 +47,8 @@ APACHE_MODULES?=	${DFLT_APACHE_MODULES}
 APACHE_MPM?=		prefork
 CONFIGURE_ARGS+=	--with-mpm=${APACHE_MPM:Q}
 BUILD_DEFS+=		APACHE_MPM
-.for mpm in prefork worker
-PLIST_SUBST.${mpm}?=		MPM_COMMENT.${mpm}="@comment "
-PLIST_SUBST+=			${PLIST_SUBST.${mpm}}
-.endfor
-PLIST_SUBST.${APACHE_MPM}=	MPM_COMMENT.${APACHE_MPM}=
+PLIST_VARS+=		mpm-prefork mpm-worker
+PLIST.${APACHE_MPM}=	yes
 
 CONFIGURE_ARGS+=	--disable-access
 CONFIGURE_ARGS+=	--disable-auth
@@ -219,7 +217,7 @@ post-install:
 	done
 
 	${INSTALL_DATA_DIR} ${PREFIX}/share/httpd/manual
-	cd ${WRKSRC}/docs/manual && ${PAX} -rw . ${PREFIX}/share/httpd/manual
+	cd ${WRKSRC}/docs/manual && pax -rw . ${PREFIX}/share/httpd/manual
 
 	${INSTALL_SCRIPT} ${WRKDIR}/mkcert ${PREFIX}/sbin
 

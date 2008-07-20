@@ -1,15 +1,16 @@
-# $NetBSD: Makefile,v 1.6 2008/03/06 14:53:56 wiz Exp $
+# $NetBSD: Makefile,v 1.12 2008/06/20 01:09:44 joerg Exp $
 #
 
-DISTNAME=	gnome-control-center-2.20.3
-PKGREVISION=	2
+DISTNAME=	gnome-control-center-2.22.2.1
 CATEGORIES=	x11 gnome
-MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gnome-control-center/2.20/}
+MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gnome-control-center/2.22/}
 EXTRACT_SUFX=	.tar.bz2
 
-MAINTAINER=	jmmv@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.gnome.org/
 COMMENT=	GNOME2 configuration utility
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=		yes
 USE_DIRS+=		gnome2-1.6
@@ -19,24 +20,21 @@ USE_LIBTOOL=		yes
 
 CONFLICTS+=		gnome2-control-center-[0-9]* control-center-[0-9]*
 
-CONFIGURE_ARGS+=	--disable-alsa
 CONFIGURE_ARGS+=	--disable-hal
-CONFIGURE_ARGS+=	--with-gstreamer=0.10
 
 CPPFLAGS+=		-DDBUS_API_SUBJECT_TO_CHANGE
 
-PKGCONFIG_OVERRIDE+=	gnome-settings-daemon/gnome-settings-daemon.pc.in
+#PKGCONFIG_OVERRIDE+=	gnome-settings-daemon/gnome-settings-daemon.pc.in
 PKGCONFIG_OVERRIDE+=	libwindow-settings/gnome-window-settings-2.0.pc.in
 
 INSTALL_MAKE_FLAGS+=	${MAKE_FLAGS}
 INSTALL_MAKE_FLAGS+=	vfsmoduleconfdir=${PREFIX}/share/examples/${PKGBASE}
 INSTALL_MAKE_FLAGS+=	menudir=${PREFIX}/share/examples/${PKGBASE}
+INSTALL_MAKE_FLAGS+=	autostartdir=${PREFIX}/share/applications
 
-GCONF_SCHEMAS=	apps_gnome_settings_daemon_default_editor.schemas
-GCONF_SCHEMAS+=	apps_gnome_settings_daemon_keybindings.schemas
-GCONF_SCHEMAS+=	apps_gnome_settings_daemon_screensaver.schemas
+INSTALLATION_DIRS=	${EGDIR}
+
 GCONF_SCHEMAS+=	control-center.schemas
-GCONF_SCHEMAS+=	desktop_gnome_font_rendering.schemas
 GCONF_SCHEMAS+=	themus.schemas
 GCONF_SCHEMAS+=	fontilus.schemas
 
@@ -58,11 +56,10 @@ PKG_OPTIONS_VAR=	PKG_OPTIONS.gnome-control-center
 PKG_SUPPORTED_OPTIONS=	evolution
 PKG_SUGGESTED_OPTIONS=	evolution
 .include "../../mk/bsd.options.mk"
+PLIST_VARS+=		evolution
 .if !empty(PKG_OPTIONS:Mevolution)
 CONFIGURE_ARGS+=	--enable-aboutme
-PLIST_SUBST+=		EVOLUTION=""
-.else
-PLIST_SUBST+=		EVOLUTION="@comment "
+PLIST.evolution=	yes
 .endif
 
 .include "../../audio/esound/buildlink3.mk"
@@ -102,12 +99,12 @@ PLIST_SUBST+=		EVOLUTION="@comment "
 .include "../../x11/libxklavier/buildlink3.mk"
 .include "../../x11/libgnomekbd/buildlink3.mk"
 .include "../../databases/shared-mime-info/mimedb.mk"
+.include "../../sysutils/gnome-settings-daemon/buildlink3.mk"
 
 post-install:
-	${INSTALL_DATA_DIR} ${EGDIR}
 	${INSTALL_DATA} ${WRKSRC}/vfs-methods/themus/theme-method.conf \
-		${EGDIR}
+	    ${DESTDIR}${EGDIR}
 	${INSTALL_DATA} ${WRKSRC}/vfs-methods/fontilus/font-method.conf \
-		${EGDIR}
+	    ${DESTDIR}${EGDIR}
 
 .include "../../mk/bsd.pkg.mk"

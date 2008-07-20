@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.11 2008/02/06 07:17:00 bjs Exp $
+# $NetBSD: Makefile,v 1.14 2008/06/21 15:08:48 drochner Exp $
 
-DISTNAME=		duplicity-0.4.9
+DISTNAME=		duplicity-0.4.11
 CATEGORIES=		sysutils net
 MASTER_SITES=		http://savannah.nongnu.org/download/duplicity/
 
@@ -12,7 +12,7 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 
 BUILDLINK_API_DEPENDS.librsync+=	librsync>=0.9.6
 PYDISTUTILSPKG=		yes
-PYTHON_VERSIONS_ACCEPTED= 24
+PYTHON_VERSIONS_ACCEPTED= 25 24
 
 .include "../../devel/py-pexpect/buildlink3.mk"
 .include "../../devel/librsync/buildlink3.mk"

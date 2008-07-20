@@ -1,0 +1,14 @@
+$NetBSD$
+
+--- config.h.in.orig	2008-04-05 17:06:51.000000000 -0400
++++ config.h.in
+@@ -144,6 +144,9 @@
+ /* Define to 1 if you have the <sys/select.h> header file. */
+ #undef HAVE_SYS_SELECT_H
+ 
++/* Define to 1 if you have the <sys/signal.h> header file. */
++#undef HAVE_SYS_SIGNAL_H
++
+ /* Define to 1 if you have the <sys/socket.h> header file. */
+ #undef HAVE_SYS_SOCKET_H
+ 

@@ -1,5 +1,7 @@
-# $NetBSD: Makefile,v 1.7 2008/01/09 03:55:11 smb Exp $
+# $NetBSD: Makefile,v 1.10 2008/06/15 09:51:59 joerg Exp $
 #
+META_PACKAGE=	yes
+
 .include "../../mail/claws-mail/Makefile.vers"
 
 DISTNAME=	claws-mail-pgp-${CLAWS_VERSION}
@@ -9,10 +11,8 @@ MASTER_SITES=	# none
 MAINTAINER=	smb@NetBSD.org
 COMMENT=	Metapackage for the PGP plug-in for Claws-mail
 
-DEPENDS+=	claws-mail-pgpcore-3.2.0{,nb[0-9]*}:../../mail/claws-mail-pgpcore
-DEPENDS+=	claws-mail-pgpmime-3.2.0{,nb[0-9]*}:../../mail/claws-mail-pgpmime
-DEPENDS+=	claws-mail-pgpinline-3.2.0{,nb[0-9]*}:../../mail/claws-mail-pgpinline
-
-META_PACKAGE=	yes
+DEPENDS+=	claws-mail-pgpcore-3.4.0{,nb[0-9]*}:../../mail/claws-mail-pgpcore
+DEPENDS+=	claws-mail-pgpmime-3.4.0{,nb[0-9]*}:../../mail/claws-mail-pgpmime
+DEPENDS+=	claws-mail-pgpinline-3.4.0{,nb[0-9]*}:../../mail/claws-mail-pgpinline
 
 .include "../../mk/bsd.pkg.mk"

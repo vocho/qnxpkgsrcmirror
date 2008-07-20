@@ -1,15 +1,16 @@
-# $NetBSD: Makefile,v 1.95 2008/03/06 14:53:56 wiz Exp $
+# $NetBSD: Makefile,v 1.99 2008/06/20 01:09:44 joerg Exp $
 #
 
-DISTNAME=		gnome-panel-2.20.3
-PKGREVISION=		1
+DISTNAME=		gnome-panel-2.22.2
 CATEGORIES=		x11 gnome
-MASTER_SITES=		${MASTER_SITE_GNOME:=sources/gnome-panel/2.20/}
+MASTER_SITES=		${MASTER_SITE_GNOME:=sources/gnome-panel/2.22/}
 EXTRACT_SUFX=		.tar.bz2
 
 MAINTAINER=		drochner@NetBSD.org
 HOMEPAGE=		http://www.gnome.org/
 COMMENT=		GNOME2 panel application
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=		YES
 USE_DIRS+=		gnome2-1.5
@@ -31,7 +32,6 @@ GCONF_SCHEMAS+=	workspace-switcher.schemas
 GCONF_SCHEMAS+=	window-list.schemas
 GCONF_ENTRIES=		panel-default-setup.entries
 
-BUILDLINK_API_DEPENDS.gnome-vfs+=	gnome-vfs>=2.14.2
 BUILDLINK_API_DEPENDS.gtk2+=		gtk2+>=2.12.0
 BUILDLINK_API_DEPENDS.libglade+=	libglade>=2.5.0
 BUILDLINK_API_DEPENDS.libgnome+=	libgnome>=2.13.0
@@ -51,16 +51,17 @@ BUILDLINK_DEPMETHOD.libXt?=	build
 .include "../../devel/libgnome/buildlink3.mk"
 .include "../../devel/libgnomeui/buildlink3.mk"
 .include "../../devel/libwnck/buildlink3.mk"
+.include "../../devel/libgweather/buildlink3.mk"
 .include "../../devel/pango/buildlink3.mk"
 .include "../../graphics/cairo/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
+.include "../../graphics/librsvg/buildlink3.mk"
 .if !empty(PKG_OPTIONS:Mevolution)
 .include "../../mail/evolution-data-server/buildlink3.mk"
 .endif
 .include "../../net/ORBit2/buildlink3.mk"
 .include "../../sysutils/dbus-glib/buildlink3.mk"
 .include "../../sysutils/gnome-menus/buildlink3.mk"
-.include "../../sysutils/gnome-vfs/buildlink3.mk"
 .include "../../textproc/gnome-doc-utils/buildlink3.mk"
 .include "../../mk/omf-scrollkeeper.mk"
 .include "../../x11/gnome-desktop/buildlink3.mk"

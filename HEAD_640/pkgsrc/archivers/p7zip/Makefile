@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.38 2008/03/02 03:48:36 jlam Exp $
+# $NetBSD: Makefile,v 1.42 2008/06/23 16:50:24 adam Exp $
 
-DISTNAME=	p7zip_4.57_src_all
-PKGNAME=	p7zip-4.57
+DISTNAME=	p7zip_4.58_src_all
+PKGNAME=	p7zip-4.58
 CATEGORIES=	archivers
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=p7zip/}
 EXTRACT_SUFX=	.tar.bz2
@@ -18,21 +18,20 @@ MAKE_FILE=		makefile
 MAKE_JOBS_SAFE=		no # missing header when compiling sfx
 NO_CONFIGURE=		yes
 PTHREAD_OPTS+=		require
+PLIST_VARS=		dll
 
 # compiles, but does not recognize any archives as supported
 DYNAMIC_7Z=		NO
 .if !empty(DYNAMIC_7Z:MYES)
 BUILD_TARGET=		all2
-PLIST_SUBST+=		DYNAMIC_7Z=""
-.else
-PLIST_SUBST+=		DYNAMIC_7Z="@comment "
+PLIST.dll=		yes
 .endif
 
 WRKSRC=			${WRKDIR}/${PKGNAME_NOREV:S/-/_/}
 
 GCC_REQD+=		3.0
 
-INSTALLATION_DIRS=	bin
+INSTALLATION_DIRS=	bin ${PKGMANDIR}/man1
 .if !empty(DYNAMIC_7Z:MYES)
 INSTALLATION_DIRS+=	lib/7z
 INSTALLATION_DIRS+=	lib/7z/Codecs
@@ -60,7 +59,7 @@ do-install:
 	${INSTALL_LIB} ${WRKSRC}/bin/Formats/* \
 		${DESTDIR}${PREFIX}/lib/7z/Formats
 .else
-	ln -s 7za ${PREFIX}/bin/7z
+	ln -s 7za ${DESTDIR}${PREFIX}/bin/7z
 .endif
 	${INSTALL_DATA} ${WRKSRC}/README \
 		${DESTDIR}${PREFIX}/share/doc/p7zip

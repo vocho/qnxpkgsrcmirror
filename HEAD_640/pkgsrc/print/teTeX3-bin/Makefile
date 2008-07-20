@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.26 2008/01/18 05:08:55 tnn Exp $
+# $NetBSD: Makefile,v 1.27 2008/05/05 22:48:22 tonnerre Exp $
 
 DISTNAME=	tetex-src-3.0
 PKGNAME=	${DISTNAME:C/tetex/teTeX/:C/src/bin/}
-PKGREVISION=	15
+PKGREVISION=	16
 CATEGORIES=	print
 MASTER_SITES=	${MASTER_SITE_TEX_CTAN:=systems/unix/teTeX/3.0/distrib/}
 
@@ -48,6 +48,8 @@ INSTALL_MAKE_FLAGS+=	prefix=${DESTDIR}${PREFIX}
 INSTALL_MAKE_FLAGS+=	texmf=${DESTDIR}${PREFIX}/share/texmf
 INSTALL_MAKE_FLAGS+=	infodir=${DESTDIR}${PREFIX}/${PKGINFODIR}
 INSTALL_MAKE_FLAGS+=	mandir=${DESTDIR}${PREFIX}/${PKGMANDIR}
+
+CFLAGS.QNX+= -D__NO_EXT_QNX
 
 .include "../../print/teTeX3-bin/Makefile.common"
 .include "../../x11/libXp/buildlink3.mk"

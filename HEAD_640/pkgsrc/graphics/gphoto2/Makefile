@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.39 2007/06/14 23:58:31 obache Exp $
+# $NetBSD: Makefile,v 1.42 2008/06/14 21:26:49 heinz Exp $
 
-DISTNAME=	gphoto2-2.3.1
-PKGREVISION=	1
+DISTNAME=	gphoto2-2.4.1
 CATEGORIES=	graphics
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=gphoto/}
 EXTRACT_SUFX=	.tar.bz2
@@ -10,7 +9,9 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://gphoto.sourceforge.net/proj/gphoto2/
 COMMENT=	Digital camera access command line client
 
-CONFLICTS=	gphoto-[0-9]*
+PKG_DESTDIR_SUPPORT=	user-destdir
+
+CONFLICTS=		gphoto-[0-9]*
 
 USE_TOOLS+=		pkg-config
 USE_LIBTOOL=		yes

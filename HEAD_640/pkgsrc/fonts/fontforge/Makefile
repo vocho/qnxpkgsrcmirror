@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.44 2008/03/09 10:02:43 adam Exp $
+# $NetBSD: Makefile,v 1.49 2008/06/23 11:38:50 drochner Exp $
 
 DISTNAME=	fontforge_full-${VERSION}
 PKGNAME=	fontforge-${VERSION}
+PKGREVISION=	1
 CATEGORIES=	fonts editors
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=fontforge/}
 EXTRACT_SUFX=	.tar.bz2
@@ -10,17 +11,20 @@ MAINTAINER=	adam@NetBSD.org
 HOMEPAGE=	http://fontforge.sourceforge.net/
 COMMENT=	Postscript font editor
 
-VERSION=	20080302
+VERSION=	20080607
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 MAKE_ENV+=	PKGLOCALEDIR=${PKGLOCALEDIR}
 
 USE_LIBTOOL=		yes
+USE_LANGUAGES+=		c c++ fortran
 USE_PKGLOCALEDIR=	yes
 USE_TOOLS+=		gmake msgfmt
 GNU_CONFIGURE=		yes
 CONFIGURE_ARGS+=	--without-freetype-src
+CONFIGURE_ARGS+=	--without-python
+CONFIGURE_ENV+=		LOCALBASE=${LOCALBASE}
 WRKSRC=			${WRKDIR}/${PKGNAME_NOREV}
 
 # checks for X11/Intrinsic.h

@@ -1,9 +1,10 @@
-# $NetBSD: Makefile,v 1.50 2008/02/27 14:16:50 jmmv Exp $
+# $NetBSD: Makefile,v 1.54 2008/05/25 21:42:21 joerg Exp $
 #
 
-DISTNAME=	monotone-0.39
+DISTNAME=	monotone-0.40
+PKGREVISION=	1
 CATEGORIES=	devel scm
-MASTER_SITES=	http://monotone.ca/downloads/0.39/
+MASTER_SITES=	http://monotone.ca/downloads/0.40/
 
 MAINTAINER=	jmmv@NetBSD.org
 HOMEPAGE=	http://monotone.ca/
@@ -15,7 +16,7 @@ GCC_REQD+=		3.0
 GNU_CONFIGURE=		yes
 INFO_FILES=		yes
 UNLIMIT_RESOURCES+=	datasize
-USE_TOOLS+=		gmake makeinfo
+USE_TOOLS+=		gmake makeinfo pax
 USE_LANGUAGES=		c c++
 USE_PKGLOCALEDIR=	yes
 

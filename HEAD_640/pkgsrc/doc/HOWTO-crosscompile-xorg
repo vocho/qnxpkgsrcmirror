@@ -1,4 +1,4 @@
-$NetBSD: HOWTO-crosscompile-xorg,v 1.2 2008/01/15 17:15:41 joerg Exp $
+$NetBSD: HOWTO-crosscompile-xorg,v 1.4 2008/04/25 11:46:07 ghen Exp $
 
 How to cross-compile modular Xorg on NetBSD
 -------------------------------------------
@@ -7,7 +7,7 @@ How to cross-compile modular Xorg on NetBSD
 installed in /usr/pkg (or whatever prefix you want to use for the
 cross-compiled packages).
 
-(b) You have run buil.sh release for the desired platform. Remember
+(b) You have run build.sh release for the desired platform. Remember
 where you wrote the tools to and where the destdir is.
 
 (c) You have to add the following options to your mk.conf:
@@ -26,4 +26,4 @@ cross-compile infrastructure. The third option tells it to use modular
 Xorg. The other four options specify the target platform and the correct
 path names and activate cross compiling.
 
-(c) Just run make package e.g. in meta-pkgs/modular-xorg-apps now.
+(d) Just run make package e.g. in meta-pkgs/modular-xorg-apps now.

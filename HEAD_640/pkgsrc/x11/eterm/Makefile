@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.51 2007/01/14 11:07:34 joerg Exp $
+# $NetBSD: Makefile,v 1.54 2008/06/12 02:14:57 joerg Exp $
 
 DISTNAME=	Eterm-0.9.4
 PKGNAME=	${DISTNAME:S/^E/e/}
+PKGREVISION=	1
 CATEGORIES=	x11
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=eterm/} \
 		ftp://ftp.dti.ad.jp/pub/X/Eterm/
@@ -10,6 +11,8 @@ DISTFILES=	${ETERM_SRCS} ${PIXMAP_FILES}
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.eterm.org/
 COMMENT=	Enlightened terminal emulator for the X Window System
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 SITES.Eterm-bg-scale-1.tar.gz=	${MASTER_SITE_BACKUP}
 SITES.Eterm-bg-scale-2.tar.gz=	${MASTER_SITE_BACKUP}
@@ -20,7 +23,7 @@ ETERM_SRCS=		${DISTNAME}${EXTRACT_SUFX}
 PIXMAP_FILES=		Eterm-bg-scale-1.tar.gz Eterm-bg-scale-2.tar.gz \
 			Eterm-bg-tile.tar.gz
 
-USE_TOOLS+=		perl:run
+USE_TOOLS+=		perl:run pax
 USE_LIBTOOL=		YES
 GNU_CONFIGURE=		YES
 CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR:Q}
@@ -48,7 +51,7 @@ post-extract:
 	set -e; \
 	cd ${WRKDIR} && \
 	for f in ${PIXMAP_FILES}; do \
-		${PAX} -O -zrf ${DISTDIR}/"$$f"; \
+		pax -O -zrf ${DISTDIR}/"$$f"; \
 	done
 
 .include "../../devel/libast/buildlink3.mk"

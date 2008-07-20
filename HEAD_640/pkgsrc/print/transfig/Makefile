@@ -1,14 +1,15 @@
-# $NetBSD: Makefile,v 1.33 2008/01/19 09:16:26 wiz Exp $
+# $NetBSD: Makefile,v 1.35 2008/06/20 01:09:33 joerg Exp $
 
-DISTNAME=	transfig.3.2.5_alpha7
-PKGNAME=	transfig-3.2.5alpha7
-PKGREVISION=	2
+DISTNAME=	transfig.3.2.5
+PKGNAME=	transfig-3.2.5
 CATEGORIES=	graphics print
 MASTER_SITES=	ftp://epb.lbl.gov/xfig/alpha/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.xfig.org/
 COMMENT=	TeX document creation tool utilizing portable graphics
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_IMAKE=		yes
 
@@ -25,6 +26,9 @@ USE_TOOLS+=		gmake
 .endif
 
 MAKE_ENV+=		ICONVLIBS="${BUILDLINK_LDADD.iconv}"
+
+# fig2ps2tex needs csh which might not be present on eg. Linux
+CHECK_INTERPRETER_SKIP=	bin/fig2ps2tex
 
 .include "../../graphics/png/buildlink3.mk"
 .include "../../converters/libiconv/buildlink3.mk"

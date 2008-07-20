@@ -1,15 +1,16 @@
-# $NetBSD: Makefile,v 1.18 2008/03/06 14:53:53 wiz Exp $
+# $NetBSD: Makefile,v 1.24 2008/07/02 10:33:57 tron Exp $
 
-DISTNAME=		wireshark-0.99.8
-PKGREVISION=		1
+DISTNAME=		wireshark-1.0.1
 CATEGORIES=		net
 MASTER_SITES=		http://www.wireshark.org/download/src/ \
 			${MASTER_SITE_SOURCEFORGE:=wireshark/}
 EXTRACT_SUFX=		.tar.bz2
 
-MAINTAINER=		tron@NetBSD.org
+OWNER=			tron@NetBSD.org
 HOMEPAGE=		http://www.wireshark.org/
 COMMENT=		Network protocol analyzer
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 CONFLICTS+=		ethereal-[0-9]*
 
@@ -23,7 +24,6 @@ GNU_CONFIGURE=		YES
 CONFIGURE_ARGS+=	--enable-static=no
 CONFIGURE_ARGS+=	--enable-threads
 CONFIGURE_ARGS+=	--with-ssl=${SSLBASE:Q}
-CONFIGURE_ARGS+=	--with-net-snmp
 CONFIGURE_ARGS+=	--with-pcap=${BUILDLINK_PREFIX.libpcap}
 CONFIGURE_ARGS+=	--with-zlib=${BUILDLINK_PREFIX.zlib}
 CONFIGURE_ARGS+=	--with-pcre=${BUILDLINK_PREFIX.pcre}
@@ -44,7 +44,7 @@ BUILDLINK_API_DEPENDS.zlib=zlib>=1.2.1
 .include "../../devel/pcre/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"
 .include "../../net/libpcap/buildlink3.mk"
-.include "../../net/net-snmp/buildlink3.mk"
+.include "../../devel/libsmi/buildlink3.mk"
 .include "../../security/gnutls/buildlink3.mk"
 .include "../../security/openssl/buildlink3.mk"
 

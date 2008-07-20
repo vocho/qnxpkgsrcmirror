@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.76 2008/02/19 22:15:23 schmonz Exp $
+# $NetBSD: Makefile,v 1.78 2008/04/25 20:39:10 joerg Exp $
 
-DISTNAME=	getmail-4.8.0
+DISTNAME=	getmail-4.8.1
 CATEGORIES=	mail
 MASTER_SITES=	${HOMEPAGE}old-versions/
 
@@ -10,7 +10,6 @@ COMMENT=	Secure, flexible, reliable, easy-to-use fetchmail replacement
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
-PYTHON_VERSIONS_ACCEPTED?=	24 23
 PYTHON_PATCH_SCRIPTS=		*.py getmailcore/*.py
 PYDISTUTILSPKG=			yes
 
