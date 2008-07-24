@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.156 2008/06/22 22:08:05 joerg Exp $
+# $NetBSD: Makefile,v 1.158 2008/07/14 14:56:50 joerg Exp $
 
 # Notes to package maintainers:
 #

@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.53 2007/10/27 12:31:15 rillig Exp $
+# $NetBSD: Makefile,v 1.57 2008/07/22 20:44:04 tnn Exp $
 
-PKGVER=		2.2.3
-DISTNAME=	openMotif-${PKGVER}
-PKGNAME=	openmotif-${PKGVER}
-PKGREVISION=	3
+PKGVER=		2.3.1
+DISTNAME=	openmotif-${PKGVER}
+#PKGREVISION=	3
 CATEGORIES=	x11
-MASTER_SITES=	http://ftp.motifzone.com/src/
+MASTER_SITES=	http://ftp.ics.com/openmotif/2.3/2.3.1/
+MASTER_SITES+=	ftp://ftp.ics.com/openmotif/2.3/2.3.1/
 
 MAINTAINER=		joerg@NetBSD.org
 HOMEPAGE=		http://www.opengroup.org/openmotif/
@@ -39,7 +39,7 @@ NO_BIN_ON_CDROM=	${RESTRICTED}
 CONFLICTS+=		lesstif-[0-9]*
 
 USE_LIBTOOL=		yes
-USE_TOOLS+=		flex gmake tbl
+USE_TOOLS+=		flex gmake tbl pkg-config
 GNU_CONFIGURE=		yes
 MAKE_JOBS_SAFE=		no # PR 37233
 
@@ -105,5 +105,6 @@ post-build:
 .include "../../x11/libXmu/buildlink3.mk"
 .include "../../x11/libXp/buildlink3.mk"
 .include "../../x11/libXext/buildlink3.mk"
+.include "../../x11/libXft/buildlink3.mk"
 .include "../../x11/xbitmaps/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

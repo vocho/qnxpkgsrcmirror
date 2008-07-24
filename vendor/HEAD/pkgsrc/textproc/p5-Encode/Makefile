@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.3 2008/06/20 01:09:38 joerg Exp $
+# $NetBSD: Makefile,v 1.5 2008/07/22 13:39:18 rhaen Exp $
 
-DISTNAME=	Encode-2.18
+DISTNAME=	Encode-2.26
 PKGNAME=	p5-${DISTNAME}
 CATEGORIES=	textproc perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Encode/}
 
-MAINTAINER=	kuli0020@umn.edu
+MAINTAINER=	rhaen@NetBSD.org
 HOMEPAGE=	http://search.cpan.org/~dankogai/Encode/
 COMMENT=	Provides interfaces between strings and the rest of the system
 

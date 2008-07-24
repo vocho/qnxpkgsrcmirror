@@ -1,6 +1,7 @@
-@comment $NetBSD: PLIST,v 1.5 2008/05/20 18:14:45 tnn Exp $
+@comment $NetBSD: PLIST,v 1.8 2008/07/18 19:08:43 smb Exp $
 bin/claws-mail
 bin/sylpheed-claws
+etc/claws-mail/mime.types
 include/claws-mail/account.h
 include/claws-mail/action.h
 include/claws-mail/adbookbase.h
@@ -22,6 +23,7 @@ include/claws-mail/addritem.h
 include/claws-mail/addrquery.h
 include/claws-mail/addrselect.h
 include/claws-mail/alertpanel.h
+include/claws-mail/autofaces.h
 include/claws-mail/browseldap.h
 include/claws-mail/codeconv.h
 include/claws-mail/common/base64.h
@@ -231,31 +233,19 @@ share/doc/claws-mail/manual/pl/claws-mail-manual.ps
 share/doc/claws-mail/manual/pl/claws-mail-manual.txt
 share/examples/claws-mail/mime.types
 share/icons/hicolor/48x48/apps/claws-mail.png
-share/locale/bg/LC_MESSAGES/claws-mail.mo
 share/locale/ca/LC_MESSAGES/claws-mail.mo
-share/locale/cs/LC_MESSAGES/claws-mail.mo
 share/locale/de/LC_MESSAGES/claws-mail.mo
-share/locale/el/LC_MESSAGES/claws-mail.mo
 share/locale/en_GB/LC_MESSAGES/claws-mail.mo
 share/locale/es/LC_MESSAGES/claws-mail.mo
 share/locale/fi/LC_MESSAGES/claws-mail.mo
 share/locale/fr/LC_MESSAGES/claws-mail.mo
-share/locale/he/LC_MESSAGES/claws-mail.mo
-share/locale/hr/LC_MESSAGES/claws-mail.mo
 share/locale/hu/LC_MESSAGES/claws-mail.mo
 share/locale/it/LC_MESSAGES/claws-mail.mo
-share/locale/ja/LC_MESSAGES/claws-mail.mo
-share/locale/ko/LC_MESSAGES/claws-mail.mo
-share/locale/nb/LC_MESSAGES/claws-mail.mo
-share/locale/nl/LC_MESSAGES/claws-mail.mo
 share/locale/pl/LC_MESSAGES/claws-mail.mo
 share/locale/pt_BR/LC_MESSAGES/claws-mail.mo
-share/locale/ru/LC_MESSAGES/claws-mail.mo
 share/locale/sk/LC_MESSAGES/claws-mail.mo
 share/locale/sr/LC_MESSAGES/claws-mail.mo
-share/locale/sv/LC_MESSAGES/claws-mail.mo
 share/locale/zh_CN/LC_MESSAGES/claws-mail.mo
-share/locale/zh_TW/LC_MESSAGES/claws-mail.mo
 @comment in hicolor-icon-theme: @dirrm share/icons/hicolor/48x48/apps
 @comment in hicolor-icon-theme: @dirrm share/icons/hicolor
 @dirrm share/examples/claws-mail
@@ -271,4 +261,3 @@ share/locale/zh_TW/LC_MESSAGES/claws-mail.mo
 @dirrm include/claws-mail/etpan
 @dirrm include/claws-mail/common
 @dirrm include/claws-mail
-@dirrm lib/claws-mail
