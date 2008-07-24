@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.16 2008/05/21 14:02:44 wiz Exp $
+# $NetBSD: Makefile,v 1.18 2008/07/18 19:08:43 smb Exp $
 
 .include "Makefile.common"
+PKGREVISION=1
 
 PKGNAME=	claws-mail-${CLAWS_VERSION}
-PKGREVISION=	1
 
 MAINTAINER=	smb@NetBSD.org
 COMMENT=	X based e-mail and netnews client
@@ -62,6 +62,11 @@ post-install:
 	${INSTALL_DATA} ${FILESDIR}/mime.types ${EGDIR}
 	${INSTALL_DATA_DIR} ${PREFIX}/share/claws-mail
 	${INSTALL_DATA} ${WRKSRC}/claws-mail*.png ${PREFIX}/share/claws-mail
+.if exists(files/shred.${OPSYS})
+	${INSTALL_SCRIPT} files/shred.${OPSYS} ${PREFIX}/bin/claws-mail-shred
+PLIST_SRC=	PLIST
+PLIST_SRC+=	PLIST.shred
+.endif
 
 .include "../../databases/db4/buildlink3.mk"
 .include "../../converters/libiconv/buildlink3.mk"

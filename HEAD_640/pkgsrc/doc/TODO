@@ -1,4 +1,4 @@
-$NetBSD: TODO,v 1.7372 2008/07/08 01:20:55 obache Exp $
+$NetBSD: TODO,v 1.7425 2008/07/24 10:40:59 rhaen Exp $
 
 Suggested new packages
 ======================
@@ -8,6 +8,13 @@ Suggested new packages
 
 	any complete, polished packages in pkgsrc-wip (ditto)
 	http://pkgsrc-wip.sourceforge.net/
+
+	bacula-rescue
+	Scripts used to help create rescue boot cd's for bare metal
+	restores with bacula.  Scripts exist for linux, solaris, and
+	FreeBSD.  Hopefully the FreeBSD one could be adapted to create
+	a NetBSD one or perhaps it could be turned into a *BSD script.
+	http://www.bacula.org/
 
 	resin
 	Fast JSP server. (I will import this when we have a native
@@ -334,6 +341,10 @@ Suggested new packages
 	http://search.cpan.org/CPAN/authors/id/C/CT/CTHOM/Net-Twitter-1.10.tar.gz
 	Twitter support module for Perl.
 
+	filezilla client
+	http://filezilla-project.org
+	Featureful FTP, FTPS and SFTP client	
+
 Suggested package updates
 =========================
 
@@ -388,7 +399,7 @@ Suggested package updates
 	o a2ps-4.14
 	o aap-0.144
 	o abcm2ps-5.8.1
-	o abcmidi-20080614
+	o abcmidi-20080702
 	o abiword-2.6.2
 	o acme-091
 	o acr-0.5.2
@@ -424,6 +435,7 @@ Suggested package updates
 	o ap2-chroot-0.5
 	o ap2-python-3.3.1
 	o ap2-transform-0.6.0
+	o apache-ant-1.7.1
 	o apache-ant15-1.7.0
 	o apache-tomcat55-6.0.14
 	o apr-1.3.2
@@ -431,23 +443,23 @@ Suggested package updates
 	o aqsis-1.2
 	o aranym-0.9.6
 	o argtable-2.9
-	o aria2-0.14.0
 	o arla-0.90
 	o arnold-20040104
 	o arping-2.06
 	o asapm-3.1
 	o asc-2.1.0
-	o aspell-danish-13.7
-	o aspell-faroese-0.2.31
+	o aspell-danish-1.6.15
+	o aspell-faroese-0.2.33
 	o aspell-norwegian-2.0.10
 	o aspell-ukrainian-1.3.3
-	o ast-ksh-20080202 [pkg/37854]
-	o asterisk-1.4.21
+	o ast-ksh-20080624 [pkg/37854]
+	o asterisk-1.4.21.1
 	o astyle-1.15.3
 	o aterm-1.0.1
 	o auctex-11.85
 	o autoconvert-0.3.16
 	o avcheck-0.91
+	o avidemux-2.4.2
 	o avl-2.0.2a
 	o avr-binutils-2.17
 	o avr-libc-1.4.5
@@ -457,6 +469,7 @@ Suggested package updates
 	o baci-20040415
 	o bacula-2.2.6 [pkg/37396]
 	o bacula-2.2.8 [pkg/38572]
+	o bacula-2.4.1
 	o bacula-doc-2.0.3
 	o balance-3.42
 	o balsa-2.4.16
@@ -472,7 +485,6 @@ Suggested package updates
 	o bind-9.4.2
 	o binutils-2.18
 	o bioperl-1.5.0
-	o bitlbee-1.2.1
 	o bittorrent-5.0.5
 	o blender-2.46
 	o blur6ex-0.3.462
@@ -484,6 +496,7 @@ Suggested package updates
 	o boson-0.13
 	o botan-1.6.4
 	o btpd-0.13 [pkg/38144]
+	o byacc-20070509
 	o bzflag-2.0.10
 	o bzr-1.5
 	o c4-1.10 [schmonz]
@@ -495,11 +508,11 @@ Suggested package updates
 	o cdif-1.19
 	o cdlabelgen-4.0.0
 	o cdrkit-1.1.7.1
-	o cdrtools-2.01.01.42
+	o cdrtools-2.01.01.43
 	o cfitsio-3.030
 	o cflow-1.2
 	o cgdb-0.6.4
-	o cgicc-3.2.6
+	o cgicc-3.2.7
 	o chemtool-1.6.11
 	o cherokee-0.7.0
 	o chicken-3.3.0
@@ -508,18 +521,19 @@ Suggested package updates
 	o cint-5.16
 	o cjk-lyx-1.4.4
 	o classpath-0.97.2
-	o claws-mail-3.5.0
 	o clawsker-0.5.0
 	o clearsilver-0.10.5
 	o clearsilver-base-0.10.5
-	o clisp-2.45
-	o clive-0.4.17
+	o clive-0.4.18
 	o cmake-2.6.0
 	o cocoon-2.1.10
 	o colorize-0.3.4
 	o compiz-0.7.6
 	o connect-1.96
 	o cook-2.31
+	o courier-0.60.0
+	o courier-authlib-0.61.0
+	o courier-imap-4.4.0
 	o cpio-2.9
 	o cpmtools-2.6
 	o cppunit-1.12.0
@@ -555,24 +569,23 @@ Suggested package updates
 	o dircproxy-devel-1.2.0.2
 	o djvulibre-lib-4.1.2
 	o djvulibre-tools-4.1.2
-	o dnsmasq-2.41 [pkg/38186]
-	o dnsmasq-2.42
 	o dnstop-20070307
 	o dnstracer-1.9
 	o drraw-2.2a5
-	o drscheme-4.0.1
+	o drscheme-4.0.2
 	o dvdstyler-1.6.2
 	o dvipng-1.11
 	o dwm-5.0.1
 	o eagle-4.16
 	o easymenu-0.7.2p1
+	o easytag-current-2.1.6
 	o ec-fonts-mftraced-1.0.12
 	o eclipse-3.2.0
 	o ede-1.2
 	o edonkeyclc-1.0.2 [replaces net/edonkey2k]
 	o eggdrop-1.6.19
 	o egtk-0.3.6.2
-	o electric-8.06
+	o electric-8.07
 	o electricfence-2.4.16
 	o elf-0.5.4p1
 	o elfsh-0.65 [pkg/33959]
@@ -586,11 +599,13 @@ Suggested package updates
 	o enlightenment-0.16.8.12
 	o enscript-1.6.4
 	o epic4-2.6
+	o epiphany-2.22.3
 	o epsg-6.14
 	o epstool-3.08
-	o eric3-4.1.4 [now called eric4]
-	o erlang-12b2
+	o eric3-4.1.6 [now called eric4]
+	o erlang-12b3
 	o esh-0.8.5
+	o esound-0.2.39
 	o et-2.60
 	o etach-1.4.1
 	o eukleides-1.0.3
@@ -609,7 +624,6 @@ Suggested package updates
 	o fillets-ng-0.7.4
 	o fillets-ng-data-0.7.4
 	o findutils-4.4.0
-	o firefox-3.0
 	o fisg-0.3.12
 	o flashplayer-0.4.13
 	o flightgear-1.0.0 [pkg/38160]
@@ -630,11 +644,11 @@ Suggested package updates
 	o frozen-bubble-2.1.0
 	o ftplibpp-2.0.2
 	o fugu-1.2.3
-	o fuse-ntfs-3g-1.2531
+	o fuse-ntfs-3g-1.2712
 	o fvwm2-themes-0.7.0
+	o gail-1.22.3
 	o gap-4r4p9
 	o gated-3.6
-	o gcalctool-5.22.3
 	o gcc-4.3.1
 	o gcc-ssp-3.4.4
 	o gcin-1.4.1
@@ -646,8 +660,10 @@ Suggested package updates
 	o gdeskcal-1.01
 	o gdsreader-0.3.2
 	o geany-0.14
+	o geeklog-1.5.0
 	o generator-cbiere-0.35r3
 	o genius-1.0.3
+	o gentoo-0.11.57
 	o gettext-0.17
 	o gfract-0.33
 	o ggiterm-0.7.1
@@ -660,13 +676,18 @@ Suggested package updates
 	o gkrellm-snmp-1.0
 	o gkrellm-xmms-2.1.22
 	o glchess-1.0.5
-	o glibmm-2.16.3
+	o glib2-2.16.5
+	o glibmm-2.16.4
 	o global-5.6
-	o gmime-2.2.21
+	o glpk-4.29
+	o gmime-2.2.22
 	o gnet1-1.1.9
 	o gnetman-20050429
 	o gnome-2.22.1
 	o gnome-build-0.2.4
+	o gnome-games-2.22.3
+	o gnome-keyring-2.22.3
+	o gnome-mag-0.15.1
 	o gnome-pilot-2.0.16
 	o gnome-speech-0.4.20
 	o gnome-terminal-2.22.3
@@ -676,30 +697,29 @@ Suggested package updates
 	o gnustep-1.16.1
 	o gnustep-examples-1.2.0
 	o gnustep-objc-1.4.0
-	o gnutls-2.4.0
+	o gnutls-2.4.1
 	o gob2-2.0.15
 	o gobo-eiffel-3.3 [does not work with smarteiffel-2.0; perhaps 2.1?]
 	o gocr-0.43
 	o goffice-0.7.0
 	o gogo-3.11p1
 	o golem-0.0.6
-	o gossip-0.29
+	o gossip-0.30
 	o gourmet-0.13.3
 	o gpaint-0.3.3
 	o gperiodic-2.0.10
+	o gphoto-2.4.2
 	o gplcver-2.12a
 	o gpredict-0.9.0
 	o gpsdrive-2.09
-	o grace-5.1.22 [pkg/38884]
 	o gramofile-1.6P
 	o granulate-0.2
 	o graphviz-2.20.2
 	o gri-2.12.8
+	o gsasl-0.2.27
 	o gsharutils-4.7
 	o gsm-1.0.12
 	o gss-0.0.22
-	o gst-plugins0.10-base-0.10.20
-	o gstreamer0.10-0.10.20
 	o gtexinfo-4.12
 	o gtick-0.4.2
 	o gtk-gnutella-0.96.5 [pkg/39040]
@@ -710,10 +730,9 @@ Suggested package updates
 	o gtodo-0.16.0rc2
 	o gtodo-applet-0.16.2
 	o gtranscript-0.2.0
-	o gucharmap-2.22.3
+	o guile-gnome-2.16.1
 	o guile-gtk-2.0
-	o gv-3.6.4
-	o gvfs-0.2.5
+	o gv-3.6.5
 	o gworkspace-0.8.6
 	o hackbot-2.21
 	o hanzim-1.8
@@ -721,11 +740,10 @@ Suggested package updates
 	o hatari-1.0.1
 	o hdf-4.2r2
 	o hercules-3.04.1
-	o herrie-2.0.1
 	o hesiod-3.1.0
 	o hexedit-1.2.12
 	o heyu-2.3.0
-	o highlight-2.6.10
+	o highlight-2.6.11
 	o hobbitmon-4.0.4 [pkg/30484]
 	o honeyd-1.5c
 	o host-20070128
@@ -735,10 +753,10 @@ Suggested package updates
 	o htmldoc-1.8.27
 	o htop-0.8
 	o http_load-20060312
-	o httping-1.2.8
+	o httping-1.2.9
 	o httptunnel-3.3
 	o hydrogen-0.9.3 [pkg/37424]
-	o hylafax-5.2.5
+	o hylafax-5.2.6
 	o ical-2.3.2
 	o icdprog-0.5
 	o icecast-2.3.2 [ready and waiting for MAINTAINER response -- kim@]
@@ -748,7 +766,7 @@ Suggested package updates
 	o ifile-1.3.8
 	o ifp-line-0.3 [pkg/38038]
 	o ike-2.0.1 [pkg/37032]
-	o ikiwiki-2.51
+	o ikiwiki-2.53
 	o imap-uw-2007b
 	o imapproxy-1.2.5 [see http://horde.org/imapproxy/ -> www.imapproxy.org]
 	o imapsync-1.255
@@ -761,11 +779,12 @@ Suggested package updates
 	o irrd-2.3.4 [pkg/36813|38002]
 	o irrtoolset-nox11-4.8.4
 	o iselect-1.4.0
+	o iso-codes-3.1
 	o ispell-gaeilge-4.1
 	o ispell-german-20071211
 	o ispell-slovak-0.3.2
 	o ispman-1.2
-	o ivtools-1.2.5
+	o ivtools-1.2.6
 	o ja-gawk-3.1.5
 	o ja-grep-2.5.1a
 	o ja-trac-0.11.1
@@ -778,6 +797,7 @@ Suggested package updates
 	o jdb-1.14
 	o jgrasp-183
 	o jhead-2.82
+	o john-1.7.3.1
 	o jools-1.0
 	o jpilot-1.6.0
 	o jwhois-4.0 [pkg/38500]
@@ -802,7 +822,6 @@ Suggested package updates
 	o lapack-20070226
 	o latd-1.21
 	o latex2rtf-1.9.19
-	o lavaps-2.7
 	o lcab-1.0b12
 	o lcc-4.2
 	o ldapsdk-6.0.2
@@ -812,21 +831,16 @@ Suggested package updates
 	o lftp-3.7.3
 	o libFoundation-1.1.3
 	o libSM-1.1.0
-	o libXfont-1.3.3
-	o libXft-2.1.13
-	o libXrandr-1.2.3
-	o libXxf86vm-1.0.2
 	o libast-0.7
 	o libcares-1.5.2
 	o libchewing-0.3.0
 	o libdca-0.0.5 [pkg/38167]
 	o libdiscid-0.1.1
 	o libdockapp-0.6.1
-	o libdrm-2.3.1
 	o libdvbpsi-0.1.6
 	o libevent-1.4.4 [pkg/39069]
 	o libenevt-1.4.5
-	o libextractor-0.5.20a
+	o libextractor-0.5.20c
 	o libflash-0.4.13
 	o libgda-3.1.4
 	o libggi-2.2.2
@@ -839,18 +853,23 @@ Suggested package updates
 	o libgnomedb-3.1.2
 	o libgnomemm-2.22.0
 	o libgnomeuimm-2.22.0
+	o libgphoto2-2.4.2
 	o libgtop-2.22.2
+	o libgtop2-2.22.3
 	o libhangul-0.0.8
 	o libhydrogen-0.9.2
 	o libltdl-2.2.4
 	o liblzo-2.02
 	o libmatheval-1.1.6
+	o libmpeg2-0.5.1
 	o libmusicbrainz-3.0.1
 	o libnasl-2.3.1
 	o libnids-1.21
 	o libntlm-1.0
+	o liboil-0.3.15
 	o libole2-2.2.8
 	o libopensync-0.35
+	o libprelude-0.9.18
 	o libpreludedb-0.9.14
 	o libshout-2.2.2
 	o libssh-0.2
@@ -861,7 +880,6 @@ Suggested package updates
 	o libtool-base-2.2.4
 	o libxklavier-3.6
 	o lincvs-2.0.0 [now called CrossVC]
-	o links-gui-2.1.0.37
 	o linuxsms-0.77
 	o lmms-0.2.1
 	o loudmouth-1.4.0
@@ -887,8 +905,9 @@ Suggested package updates
 	o mapserver-5.0.0
 	o maradns-1.2.12.09
 	o matchbox-panel-0.9.3
+	o mathomatic-14.0.7
 	o mcrypt-2.6.6
-	o meld-1.2
+	o mercury-0.13.1
 	o mergeant-0.67
 	o mesure-0.7.2
 	o metakit-lib-2.4.9.6
@@ -899,13 +918,15 @@ Suggested package updates
 	o mirmon-1.37
 	o mk-files-20061230
 	o mknmz-wwwoffle-0.7.2
+	o mksh-35b
 	o mkvtoolnix-2.2.0
 	o mlterm-2.9.4
 	o mlview-0.9.0
 	o mmg-2.0.2
-	o modular-xorg-server-1.4.2
+	o modular-xorg-server-1.4.99.905
 	o moon-buggy-1.0.51
 	o most-4.10.2
+	o mowgli-0.7.0
 	o mp3blaster-3.2.3
 	o mpeg4ip-1.6.1
 	o mpg123-1.4.3
@@ -922,7 +943,6 @@ Suggested package updates
 	o mysql-5.1.23
 	o mysql-5.2.3
 	o mysqlcc-0.9.8
-	o nagios-3.0.3
 	o nap-1.5.3
 	o nas-1.9.1
 	o nasm-2.03.01
@@ -934,8 +954,7 @@ Suggested package updates
 	o nelma-3.1
 	o neon-0.28.2
 	o nessus-3.2.0
-	o net6-1.3.7 [pkg/38995]
-	o netcdf-3.6.2
+	o netcdf-4.0
 	o netperf-2.4.4
 	o netpipe-3.6.2
 	o netramet-50
@@ -970,37 +989,26 @@ Suggested package updates
 	o openafs-1.4.7
 	o opencobol-1.0
 	o openh323-1.19.1
-	o openldap-2.4.10
-	o openldap-client-2.4.10
-	o openoffice-2.4.1
 	o openmortal-0.7.1
 	o openmotif-2.3.0 [pkg/38038]
-	o openssl-0.9.8h
+	o openssh-5.1.1
 	o openttd-0.6.1
-	o opera-9.50
-	o orca-2.22.2
+	o opera-9.51
+	o orca-2.22.3
 	o oregano-0.60.0
 	o oroborus-2.0.18
-	o osh-20080629
 	o oto-0.5
 	o otpCalc-0.97
-	o p5-Apache-ASP-2.59
-	o p5-Apache-AuthCookieDBI-2.02
 	o p5-Apache-SSI-2.17
 	o p5-Asterisk-0.09
 	o p5-Authen-PAM-0.17
 	o p5-Authen-SASL-Cyrus-0.13
-	o p5-Config-General-2.38
-	o p5-Curses-1.15
 	o p5-DBD-Sybase-1.07
 	o p5-DBD-mysql-4.007
-	o p5-Data-FormValidator-4.50
+	o p5-DateTime-TimeZone-0.78
+	o p5-File-Remove-1.42
+	o p5-FileHandle-Unget-0.1622
 	o p5-Filter-1.33
-	o p5-Font-TTF-0.40
-	o p5-GMail-IMAPD-0.94
-	o p5-Graph-0.20105
-	o p5-HTML-Prototype-1.48
-	o p5-HTML-Prototype-Useful-0.05
 	o p5-HTML-Table-2.05
 	o p5-HTTP-Proxy-0.20
 	o p5-HTTP-Request-Form-0.952
@@ -1008,15 +1016,16 @@ Suggested package updates
 	o p5-HTTP-Server-Simple-Static-0.05
 	o p5-HTTPD-User-Manage-1.62
 	o p5-IMAP-Admin-1.6.4
+	o p5-IO-Socket-SSL-1.14
 	o p5-MARC-1.38
-	o p5-Mail-IMAPClient-3.08
+	o p5-MIME-tools-5.427
 	o p5-Math-Random-0.69
 	o p5-Net-Gnats-0.05
 	o p5-Net-ICQ2000-0.2.2
 	o p5-PAR-0.90
 	o p5-PV-1.5
 	o p5-Perl-Tidy-20071205
-	o p5-RRDTool-OO-0.17
+	o p5-Pod-Tests-1.19
 	o p5-Regexp-Common-2.122
 	o p5-SVN-Mirror-0.73
 	o p5-SWF-File-0.42
@@ -1025,10 +1034,13 @@ Suggested package updates
 	o p5-Set-IntSpan-1.10
 	o p5-Set-Scalar-1.20
 	o p5-Term-Size-0.203
+	o p5-Test-ClassAPI-1.05
 	o p5-Test-Harness-2.64
 	o p5-Test-Unit-0.25
+	o p5-Text-Markdown-1.0.20
 	o p5-Text-Tabs+Wrap-2006.1117
-	o p5-XML-RAI-1.04
+	o p5-glib2-1.183
+	o p5-gtk2-1.183
 	o p5-ispman-1.2
 	o p5-libwww-5.813
 	o p5-sybperl-2.18
@@ -1037,8 +1049,10 @@ Suggested package updates
 	o pari-2.3.3 [pkg/38116]
 	o pari-galdata-2.2 [pkg/38117]
 	o parrot-0.5.2
+	o patchutils-0.3.0
 	o pcal-4.8
 	o pciutils-2.2.9
+	o pcmanfm-0.5
 	o pdmenu-1.2.87
 	o pear-1.6.2
 	o pear-DB-1.7.10
@@ -1061,7 +1075,6 @@ Suggested package updates
 	o php4-filepro-5.2.1
 	o php4-xslt-5.2.1
 	o php4-yp-5.2.1
-	o phpmyadmin-2.11.7
 	o phppgadmin-4.2
 	o phylip-3.65
 	o picp-0.6.8
@@ -1070,7 +1083,6 @@ Suggested package updates
 	o pinfo-0.6.9
 	o pioneers-0.12.2
 	o pircbot-1.4.4
-	o pixman-0.11.6
 	o pkg_select-20051209
 	o planner-0.14.3
 	o ploticus-2.40
@@ -1080,7 +1092,6 @@ Suggested package updates
 	o plptools-1.0.3
 	o pmccabe-2.3.1
 	o pngcheck-2.3.0
-	o pngcrush-1.6.6
 	o po4a-0.29
 	o poedit-1.4.1
 	o polsms-2.1.0
@@ -1091,7 +1102,7 @@ Suggested package updates
 	o postgresql81-postgis-1.3.3
 	o powermanga-0.90
 	o pptp-1.7.1 [pkg/38038]
-	o prelude-manager-0.9.13
+	o prelude-manager-0.9.14
 	o profit-2.5.3
 	o projclock-0.9
 	o proxsmtp-1.6
@@ -1113,7 +1124,7 @@ Suggested package updates
 	o py-ZODB-3.2.10
 	o py-ZopeInterface-3.3.0
 	o py-bdb-xml-2.1.8
-	o py-bsddb3-4.7.0
+	o py-bsddb3-4.7.1
 	o py-checker-0.8.17
 	o py-clearsilver-0.10.5
 	o py-curl-7.16.4
@@ -1124,7 +1135,6 @@ Suggested package updates
 	o py-gnutls-0.2.1
 	o py-gstreamer0.10-0.10.12
 	o py-imagingtk-1.1.6
-	o py-karaoke-0.6
 	o py-kenosis-0.96
 	o py-ldap-2.3.4
 	o py-libxml2-2.6.32
@@ -1132,7 +1142,7 @@ Suggested package updates
 	o py-m2crypto-0.18.2
 	o py-mad-0.6
 	o py-metakit-2.4.9.6
-	o py-moin-1.7.0
+	o py-moin-1.7.1
 	o py-musicbrainz-0.4.1
 	o py-mutagen-1.11
 	o py-mysqldb-1.2.2 [pkg/38090]
@@ -1165,9 +1175,8 @@ Suggested package updates
 	o qvplay-0.95
 	o qwspritefield-1.7
 	o radiance-3.7.2
-	o raine-0.50.6
+	o raine-0.50.14
 	o randread-0.2
-	o randrproto-1.2.2
 	o rapidsvn-0.9.6
 	o raptor-1.4.18
 	o rat-4.2.25
@@ -1178,7 +1187,7 @@ Suggested package updates
 	o remind-3.1.5
 	o replex-0.1.6.8
 	o resize_image-0.7
-	o rhythmbox-0.11.5
+	o rhythmbox-0.11.6
 	o rio500-0.8.1
 	o ripmime-1.4.0.7
 	o robodoc-4.99.6
@@ -1190,18 +1199,20 @@ Suggested package updates
 	o rox-session-0.29
 	o roxirc-2.0
 	o rp-l2tp-0.4
-	o rp-pppoe-3.9
+	o rp-pppoe-3.10
 	o rpm-5.1.4
-	o rt3-3.6.7
+	o rt3-3.8.0
 	o rtcw-1.41.3
 	o rtty-4.0 [at ftp://ftp.isc.org/isc/rtty/]
+	o ruby-RMagick-2.5.2
 	o ruby-clearsilver-0.10.5
 	o ruby-rbtree-0.3.0
 	o rudiments-0.30
 	o rxvt-unicode-9.05 [pkg/38988]
 	o sablecc-3.2
+	o samba-3.0.31
+	o samba-3.2.0
 	o sarg-2.2.5
-	o sather-1.2.3
 	o scamper-20070201
 	o scapy-1.1.1
 	o scew-0.4.0
@@ -1217,7 +1228,7 @@ Suggested package updates
 	o sessreg-1.0.4
 	o sge-6.1.2
 	o shared-mime-info-0.40
-	o sharity-3.3
+	o sharity-3.4
 	o sharity-light-1.3
 	o shc-3.8
 	o shmux-1.0.1
@@ -1229,7 +1240,7 @@ Suggested package updates
 	o simh-3.7.3 [pkg/38406]
 	o simulavr-0.1.2.2
 	o sipcalc-1.1.4
-	o sitecopy-0.16.3
+	o sitecopy-0.16.5
 	o sitescooper-3.1.2
 	o sj3-lib-2.0.1.21 [http://code.google.com/p/sj3/]
 	o sjeng-11.2
@@ -1243,13 +1254,14 @@ Suggested package updates
 	o smlnj-110.67
 	o smokeping-2.3.6
 	o smtpfeed-1.20
+	o snd-9.11
 	o snes9x-1.51
-	o snobol-1.1
 	o socat-1.6.0.1
 	o solfege-3.10.4 [schmonz]
 	o sope-4.5.9
 	o sound-juicer-2.16.4 [needs nautilus-cd-burner>=2.15.3]
 	o sound-juicer-2.22.0
+	o source-highlight-2.10
 	o spcaview-20060501
 	o spim-7.3
 	o sqlite3-ruby-1.2.2
@@ -1267,6 +1279,7 @@ Suggested package updates
 	o streamripper-1.63.0
 	o subtitleripper-0.3.4
 	o sunbird-0.5 [ghen]
+	o surfraw-2.2.2
 	o suse_base-11.0
 	o swfdec-0.7.2
 	o swi-prolog-5.6.31
@@ -1275,7 +1288,7 @@ Suggested package updates
 	o systrace-1.6e
 	o tacacs-4.0.4.14
 	o taskjuggler-2.4.1
-	o tcl-8.5.2
+	o tcl-8.5.3
 	o tcl83-8.3.5
 	o tcpdpriv-0.9
 	o tcpdstat-0.9
@@ -1286,7 +1299,7 @@ Suggested package updates
 	o tct-1.16
 	o tdir-1.67
 	o tds-1.6.2
-	o tea-17.6.0
+	o tea-18.0.0
 	o ted-2.17
 	o ted-en-us-2.17
 	o tex-musixtex-113 [pkg/34758]
@@ -1295,7 +1308,7 @@ Suggested package updates
 	o tig-0.11
 	o tile-0.7.4
 	o tinyproxy-1.7.0
-	o tk-8.5.2
+	o tk-8.5.3
 	o tk83-8.3.5
 	o tkcvs-8.1
 	o tkgate-1.8.7
@@ -1303,6 +1316,7 @@ Suggested package updates
 	o tkpasman-2.2b
 	o tn5250-0.17.3 [at http://tn5250.sourceforge.net/]
 	o tob-0.26
+	o top-3.8beta1
 	o tpasm-1.2
 	o tpb-0.6.4
 	o trac-0.11
@@ -1310,10 +1324,11 @@ Suggested package updates
 	o tripwire-2.3.1 [see also pkg/22362]
 	o tsclient-0.140
 	o ttf2pk-1.5.20050518
-	o tuxpaint-0.9.19
+	o tuxpaint-0.9.20
 	o twelf-1.5r1
 	o twolame-0.3.12
 	o txt2html-2.51
+	o uae-0.8.28
 	o ubs-0.20
 	o ucarp-1.4
 	o ucblogo-5.5
@@ -1328,6 +1343,7 @@ Suggested package updates
 	o vifm-0.4
 	o vino-2.22.1
 	o visual-regexp-3.1
+	o vlgothic-ttf-20080624 [pkg/39137]
 	o vm-8.0.7.522 [pkg/37707]
 	o vmips-1.3.2
 	o vmware-5.5
@@ -1343,22 +1359,23 @@ Suggested package updates
 	o wbm-cyrus-imapd-1.6.2
 	o wcalc-2.3.1
 	o webmin-1.420
+	o websvn-2.0
 	o weewm-0.01
-	o wget-1.11.4
 	o windowlab-1.34
-	o wine-1.1.0
+	o wine-1.1.1
+	o wireshark-1.0.1
 	o wml-2.0.11
 	o wmnd-0.4.13
 	o wmweather-2.4.4
-	o worker-2.16.3
+	o worker-2.16.5
 	o wpa_gui-0.5.7
 	o wpi-firmware-1.14.2
 	o wwwoffle-2.9d
 	o wxGTK-2.8.8
-	o wxRemind-79
+	o wxRemind-86
 	o wyrd-1.4.4
 	o x11perf-1.5
-	o x264-devel-20080628
+	o x264-devel-20080719
 	o xanalyser-1.30
 	o xbindkeys-1.8.2
 	o xbindkeys-tk-1.8.0
@@ -1380,7 +1397,6 @@ Suggested package updates
 	o xf86-video-apm-1.2.0
 	o xf86-video-ark-0.7.0
 	o xf86-video-ast-0.85.0
-	o xf86-video-ati-6.9.0
 	o xf86-video-chips-1.2.0
 	o xf86-video-cirrus-1.2.1
 	o xf86-video-glint-1.2.1
@@ -1399,7 +1415,8 @@ Suggested package updates
 	o xf86-video-trident-1.3.0
 	o xf86-video-tseng-1.2.0
 	o xf86-video-vesa-2.0.0
-	o xf86-video-vmware-10.16.2
+	o xf86-video-vmware-10.16.3
+	o xfe-1.19.1
 	o xfstt-1.7
 	o xhippo-3.5
 	o xisp-2.7p4
@@ -1408,7 +1425,6 @@ Suggested package updates
 	o xli-2006.11.10
 	o xlog-1.7
 	o xm7-1020s
-	o xmahjongg-3.70
 	o xmbdfed-4.6
 	o xmcd-3.3.0
 	o xmlsec1-1.2.11
@@ -1434,13 +1450,14 @@ Suggested package updates
 	o xrmap-base-2.33.1
 	o xrn-9.02
 	o xsane-0.99.5
+	o xscreensaver-5.06
 	o xskat-4.0
 	o xsoldier-1.4
 	o xtraceroute-0.9.1
 	o xtrans-1.2.1
 	o xtu-1.3
 	o xtux-20030306
-	o xvidcap-1.1.6
+	o xvidcap-1.1.7
 	o xview-3.2.1.4.21.8
 	o xwd-1.0.2
 	o xwininfo-1.0.4

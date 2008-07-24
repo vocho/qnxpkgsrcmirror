@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.322 2008/06/26 21:01:25 peter Exp $
+# $NetBSD: Makefile,v 1.324 2008/07/21 12:17:52 shannonjr Exp $
 #
 
 COMMENT=	Security tools
@@ -149,6 +149,7 @@ SUBDIR+=	p5-Crypt-DES_EDE3
 SUBDIR+=	p5-Crypt-DH
 SUBDIR+=	p5-Crypt-DSA
 SUBDIR+=	p5-Crypt-GeneratePassword
+SUBDIR+=	p5-Crypt-GPG
 SUBDIR+=	p5-Crypt-IDEA
 SUBDIR+=	p5-Crypt-OpenPGP
 SUBDIR+=	p5-Crypt-OpenSSL-Bignum
@@ -209,6 +210,7 @@ SUBDIR+=	pinentry
 SUBDIR+=	pinepgp
 SUBDIR+=	pks
 SUBDIR+=	portsentry
+SUBDIR+=	prelude-correlator
 SUBDIR+=	prelude-lml
 SUBDIR+=	prelude-manager
 SUBDIR+=	prelude-pflogger

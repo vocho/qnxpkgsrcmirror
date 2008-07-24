@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.252 2008/06/23 02:01:53 taca Exp $
+# $NetBSD: Makefile,v 1.257 2008/07/16 20:49:51 abs Exp $
 #
 
 COMMENT=	Databases
@@ -33,6 +33,7 @@ SUBDIR+=	java-qdbm
 SUBDIR+=	jdb
 SUBDIR+=	jdbc-postgresql81
 SUBDIR+=	jdbc-postgresql82
+SUBDIR+=	jdbc-postgresql83
 SUBDIR+=	kmysqladmin
 SUBDIR+=	krecipes
 SUBDIR+=	lbdb
@@ -66,6 +67,10 @@ SUBDIR+=	p5-AddressBook
 SUBDIR+=	p5-Apache-DBI
 SUBDIR+=	p5-BerkeleyDB
 SUBDIR+=	p5-CDB_File
+SUBDIR+=	p5-Catalyst-Model-DBIC-Schema
+SUBDIR+=	p5-Catalyst-Model-RDBO
+SUBDIR+=	p5-CatalystX-CRUD
+SUBDIR+=	p5-CatalystX-CRUD-Model-RDBO
 SUBDIR+=	p5-Class-DBI
 SUBDIR+=	p5-Class-DBI-AbstractSearch
 SUBDIR+=	p5-Class-DBI-Pg
@@ -83,6 +88,12 @@ SUBDIR+=	p5-DBI
 SUBDIR+=	p5-DBI-Shell
 SUBDIR+=	p5-DBIWrapper
 SUBDIR+=	p5-DBIx-Abstract
+SUBDIR+=	p5-DBIx-Class
+SUBDIR+=	p5-DBIx-Class-DigestColumns
+SUBDIR+=	p5-DBIx-Class-Loader
+SUBDIR+=	p5-DBIx-Class-Schema-Loader
+SUBDIR+=	p5-DBIx-Class-UUIDColumns
+SUBDIR+=	p5-DBIx-Class-Validation
 SUBDIR+=	p5-DBIx-ContextualFetch
 SUBDIR+=	p5-DBIx-DBSchema
 SUBDIR+=	p5-DBIx-Datasource
@@ -99,10 +110,15 @@ SUBDIR+=	p5-Net-MySQL
 SUBDIR+=	p5-Palm
 SUBDIR+=	p5-Rose-DB
 SUBDIR+=	p5-Rose-DB-Object
+SUBDIR+=	p5-Rose-DBx-Garden
+SUBDIR+=	p5-Rose-DBx-Garden-Catalyst
+SUBDIR+=	p5-Rose-DBx-TestDB
 SUBDIR+=	p5-SQL-Abstract
 SUBDIR+=	p5-SQL-Abstract-Limit
 SUBDIR+=	p5-SQL-ReservedWords
 SUBDIR+=	p5-SQL-Statement
+SUBDIR+=	p5-SQL-Translator
+SUBDIR+=	p5-Sort-SQL
 SUBDIR+=	p5-gdbm
 SUBDIR+=	p5-perl-ldap
 SUBDIR+=	p5-postgresql

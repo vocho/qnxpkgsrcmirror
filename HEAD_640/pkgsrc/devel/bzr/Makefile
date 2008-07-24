@@ -1,13 +1,15 @@
-# $NetBSD: Makefile,v 1.25 2008/06/20 01:09:12 joerg Exp $
+# $NetBSD: Makefile,v 1.27 2008/07/20 09:02:51 epg Exp $
 #
 
-DISTNAME=		bzr-1.4
+DISTNAME=		bzr-1.5
 CATEGORIES=		devel scm
 MASTER_SITES=		http://bazaar-vcs.org/releases/src/
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://bazaar-vcs.org/
 COMMENT=		Bazaar open source distributed version control system
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 DEPENDS+=		${PYPKGPREFIX}-expat>=0:../../textproc/py-expat
 BUILD_DEPENDS+=		${PYPKGPREFIX}-docutils>=0:../../textproc/py-docutils

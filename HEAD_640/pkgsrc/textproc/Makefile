@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.412 2008/05/30 12:10:51 abs Exp $
+# $NetBSD: Makefile,v 1.420 2008/07/21 19:20:39 joerg Exp $
 #
 
 COMMENT=	Text processing utilities (does not include desktop publishing)
@@ -99,10 +99,21 @@ SUBDIR+=	html2text
 SUBDIR+=	html2wml
 SUBDIR+=	hugs-HaXml
 SUBDIR+=	hunspell
+SUBDIR+=	hunspell-af_ZA
+SUBDIR+=	hunspell-bg_BG
+SUBDIR+=	hunspell-ca_ES
+SUBDIR+=	hunspell-cs_CZ
+SUBDIR+=	hunspell-da_DK
 SUBDIR+=	hunspell-de
 SUBDIR+=	hunspell-en_GB
 SUBDIR+=	hunspell-en_US
+SUBDIR+=	hunspell-es_ES
+SUBDIR+=	hunspell-es_MX
+SUBDIR+=	hunspell-fo_FO
+SUBDIR+=	hunspell-fr_FR
 SUBDIR+=	hunspell-hu_HU
+SUBDIR+=	hunspell-id_ID
+SUBDIR+=	hunspell-sv_SE
 SUBDIR+=	hyperestraier
 SUBDIR+=	icu
 SUBDIR+=	intltool
@@ -178,6 +189,7 @@ SUBDIR+=	p5-Encode-Detect
 SUBDIR+=	p5-Feed-Find
 SUBDIR+=	p5-File-ReadBackwards
 SUBDIR+=	p5-Filter
+SUBDIR+=	p5-FormValidator-Simple
 SUBDIR+=	p5-Lingua-EN-Inflect
 SUBDIR+=	p5-Lingua-EN-Inflect-Number
 SUBDIR+=	p5-Lingua-EN-Numbers-Ordinate
@@ -244,6 +256,7 @@ SUBDIR+=	p5-XML-Checker
 SUBDIR+=	p5-XML-Clean
 SUBDIR+=	p5-XML-DOM
 SUBDIR+=	p5-XML-Dumper
+SUBDIR+=	p5-XML-Elemental
 SUBDIR+=	p5-XML-Encoding
 SUBDIR+=	p5-XML-Feed
 SUBDIR+=	p5-XML-Filter-BufferText
@@ -290,6 +303,8 @@ SUBDIR+=	p5-libxml
 SUBDIR+=	p5-mecab
 SUBDIR+=	p5-native-hyperestraier
 SUBDIR+=	par
+SUBDIR+=	pear-Console_Table
+SUBDIR+=	pear-File_Find
 SUBDIR+=	php-json
 SUBDIR+=	php-pspell
 SUBDIR+=	php-wddx
