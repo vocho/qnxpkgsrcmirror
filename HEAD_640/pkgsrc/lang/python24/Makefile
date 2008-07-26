@@ -156,6 +156,10 @@ post-build:
 post-install:
 	${LN} -fs ${DESTDIR}${PREFIX}/lib/libpython2.4.2.dylib	\
 		${DESTDIR}${PREFIX}/lib/libpython2.4.dylib
+.elif ${OPSYS} == "QNX"
+# python wants a large stack
+post-build:
+	ldrel -S2M -L ${WRKSRC}/python
 .endif
 
 .if ${OPSYS} == "HPUX"
