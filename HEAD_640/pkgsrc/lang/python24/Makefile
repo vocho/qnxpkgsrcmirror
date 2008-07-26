@@ -121,7 +121,9 @@ MAKE_ENV+=	PY_BDB_LIBDIRS=${BDBBASE}/lib
 LIBS+=		${BDB_LIBS}
 PLIST.bsddb=	yes
 PLIST.dll=	yes
-.if ${OPSYS} != "NetBSD" || exists(/usr/bin/ypcat)
+.if ${OPSYS} == "QNX"
+# nothing
+.elif ${OPSYS} != "NetBSD" || exists(/usr/bin/ypcat)
 PLIST.nis=	yes
 .else
 PLIST.no-nis=	yes
