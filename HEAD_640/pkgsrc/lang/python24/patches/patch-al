@@ -1,6 +1,6 @@
 $NetBSD: patch-al,v 1.12 2007/06/08 14:16:16 wiz Exp $
 
---- configure.orig	2006-10-17 16:03:36.000000000 +0000
+--- configure.orig	2006-10-17 12:03:36.000000000 -0400
 +++ configure
 @@ -312,7 +312,7 @@ ac_includes_default="\
  # include <unistd.h>
@@ -22,7 +22,23 @@ $NetBSD: patch-al,v 1.12 2007/06/08 14:16:16 wiz Exp $
    --with-suffix=.exe      set executable suffix
    --with-pydebug          build with Py_DEBUG defined
    --with-libs='lib1 ...'  link against additional libs
-@@ -1548,6 +1550,8 @@ case $ac_sys_system/$ac_sys_release in
+@@ -1393,6 +1395,15 @@ cat >>confdefs.h <<\_ACEOF
+ _ACEOF
+ 
+ 
++# The later defininition of _XOPEN_SOURCE and _POSIX_C_SOURCE disables
++# certain features on QNX, so we need _QNX_SOURCE to re-enable
++# them.
++
++cat >>confdefs.h <<\_ACEOF
++#define _QNX_SOURCE 1
++_ACEOF
++
++
+ define_xopen_source=yes
+ 
+ # Arguments passed to configure.
+@@ -1548,6 +1559,8 @@ case $ac_sys_system/$ac_sys_release in
    # Reconfirmed for OpenBSD 3.3 by Zachary Hamm, for 3.4 by Jason Ish.
    OpenBSD/2.* | OpenBSD/3.[0123456789] | OpenBSD/4.[0])
      define_xopen_source=no;;
@@ -31,7 +47,7 @@ $NetBSD: patch-al,v 1.12 2007/06/08 14:16:16 wiz Exp $
    # On Solaris 2.6, sys/wait.h is inconsistent in the usage
    # of union __?sigval. Reported by Stuart Bishop.
    SunOS/5.6)
-@@ -1746,258 +1750,6 @@ fi;
+@@ -1746,258 +1759,6 @@ fi;
  echo "$as_me:$LINENO: result: $without_gcc" >&5
  echo "${ECHO_T}$without_gcc" >&6
  
@@ -290,7 +306,7 @@ $NetBSD: patch-al,v 1.12 2007/06/08 14:16:16 wiz Exp $
  # If the user switches compilers, we can't believe the cache
  if test ! -z "$ac_cv_prog_CC" -a ! -z "$CC" -a "$CC" != "$ac_cv_prog_CC"
  then
-@@ -2828,117 +2580,473 @@ if { (eval echo "$as_me:$LINENO: \"$ac_c
+@@ -2828,117 +2589,473 @@ if { (eval echo "$as_me:$LINENO: \"$ac_c
     'extern "C" void exit (int);' \
     'void exit (int);'
  do
@@ -840,7 +856,7 @@ $NetBSD: patch-al,v 1.12 2007/06/08 14:16:16 wiz Exp $
  # checks for UNIX variants that set C preprocessor variables
  
  ac_ext=c
-@@ -3341,22 +3449,7 @@ echo "$as_me:$LINENO: checking LINKCC" >
+@@ -3341,22 +3458,7 @@ echo "$as_me:$LINENO: checking LINKCC" >
  echo $ECHO_N "checking LINKCC... $ECHO_C" >&6
  if test -z "$LINKCC"
  then
@@ -864,12 +880,12 @@ $NetBSD: patch-al,v 1.12 2007/06/08 14:16:16 wiz Exp $
  	case $ac_sys_system in
  	AIX*)
  	   exp_extra="\"\""
-@@ -3483,15 +3576,10 @@ _ACEOF
+@@ -3483,15 +3585,10 @@ _ACEOF
  	  RUNSHARED=LD_LIBRARY_PATH=`pwd`:${LD_LIBRARY_PATH}
  	  INSTSONAME="$LDLIBRARY".$SOVERSION
            ;;
 -    Linux*|GNU*|NetBSD*|FreeBSD*|DragonFly*)
-+    Linux*|GNU*|NetBSD*|FreeBSD*|Interix*|DragonFly*)
++    Linux*|GNU*|NetBSD*|FreeBSD*|Interix*|DragonFly*|QNX*)
  	  LDLIBRARY='libpython$(VERSION).so'
  	  BLDLIBRARY='-L. -lpython$(VERSION)'
  	  RUNSHARED=LD_LIBRARY_PATH=`pwd`:${LD_LIBRARY_PATH}
@@ -881,7 +897,7 @@ $NetBSD: patch-al,v 1.12 2007/06/08 14:16:16 wiz Exp $
  	  INSTSONAME="$LDLIBRARY".$SOVERSION
  	  ;;
      hp*|HP*)
-@@ -3907,7 +3995,12 @@ echo "${ECHO_T}$ac_cv_no_strict_aliasing
+@@ -3907,7 +4004,12 @@ echo "${ECHO_T}$ac_cv_no_strict_aliasing
  	    ;;
  	# is there any other compiler on Darwin besides gcc?
  	Darwin*)
@@ -895,7 +911,7 @@ $NetBSD: patch-al,v 1.12 2007/06/08 14:16:16 wiz Exp $
  	    if test "${enable_universalsdk}"; then
  		BASECFLAGS="-arch ppc -arch i386 -isysroot ${UNIVERSALSDK} ${BASECFLAGS}"
  	    fi
-@@ -10472,12 +10565,12 @@ then
+@@ -10472,12 +10574,12 @@ then
  				LDSHARED="$LDSHARED "'$(PYTHONFRAMEWORKPREFIX)/$(PYTHONFRAMEWORKDIR)/Versions/$(VERSION)/$(PYTHONFRAMEWORK)'
  			else
  				# No framework, use the Python app as bundle-loader
@@ -911,23 +927,33 @@ $NetBSD: patch-al,v 1.12 2007/06/08 14:16:16 wiz Exp $
  	BSD/OS*/4*) LDSHARED="gcc -shared";;
  	FreeBSD*)
  		if [ "`$CC -dM -E - </dev/null | grep __ELF__`" != "" ]
-@@ -10501,6 +10594,7 @@ then
+@@ -10500,7 +10602,8 @@ then
+ 				   ;;
  				esac
  		fi;;
- 	NetBSD*|DragonFly*) LDSHARED="cc -shared ${LDFLAGS}";;
+-	NetBSD*|DragonFly*) LDSHARED="cc -shared ${LDFLAGS}";;
++	NetBSD*|DragonFly*|QNX*) LDSHARED="cc -shared ${LDFLAGS}";;
 +	Interix*) LDSHARED='$(CC) -shared'" ${LDFLAGS}";; # XXX tv needs image-base hack
  	OpenUNIX*|UnixWare*)
  		if test "$GCC" = "yes"
  		then LDSHARED='$(CC) -shared'
-@@ -10534,6 +10628,7 @@ then
+@@ -10533,7 +10636,8 @@ then
+ 		 fi;;
  	Linux*|GNU*) CCSHARED="-fPIC";;
  	BSD/OS*/4*) CCSHARED="-fpic";;
- 	FreeBSD*|NetBSD*|OpenBSD*|DragonFly*) CCSHARED="-fPIC";;
+-	FreeBSD*|NetBSD*|OpenBSD*|DragonFly*) CCSHARED="-fPIC";;
++	FreeBSD*|NetBSD*|OpenBSD*|DragonFly*|QNX*) CCSHARED="-fPIC";;
 +	Interix*) CCSHARED="";;
  	OpenUNIX*|UnixWare*)
  		if test "$GCC" = "yes"
  		then CCSHARED="-fPIC"
-@@ -10591,6 +10686,7 @@ then
+@@ -10586,11 +10690,12 @@ then
+ 	OpenUNIX*|UnixWare*) LINKFORSHARED="-Wl,-Bexport";;
+ 	SCO_SV*) LINKFORSHARED="-Wl,-Bexport";;
+ 	ReliantUNIX*) LINKFORSHARED="-W1 -Blargedynsym";;
+-	FreeBSD*|NetBSD*|OpenBSD*|DragonFly*)
++	FreeBSD*|NetBSD*|OpenBSD*|DragonFly*|QNX*)
+ 		if [ "`$CC -dM -E - </dev/null | grep __ELF__`" != "" ]
  		then
  			LINKFORSHARED="-Wl,--export-dynamic"
  		fi;;
@@ -935,7 +961,7 @@ $NetBSD: patch-al,v 1.12 2007/06/08 14:16:16 wiz Exp $
  	SunOS/5*) case $CC in
  		  *gcc*)
  		    if $CC -Xlinker --help 2>&1 | grep export-dynamic >/dev/null
-@@ -21328,15 +21424,15 @@ s,@EXTRAPLATDIR@,$EXTRAPLATDIR,;t t
+@@ -21328,15 +21433,15 @@ s,@EXTRAPLATDIR@,$EXTRAPLATDIR,;t t
  s,@EXTRAMACHDEPPATH@,$EXTRAMACHDEPPATH,;t t
  s,@CONFIGURE_MACOSX_DEPLOYMENT_TARGET@,$CONFIGURE_MACOSX_DEPLOYMENT_TARGET,;t t
  s,@EXPORT_MACOSX_DEPLOYMENT_TARGET@,$EXPORT_MACOSX_DEPLOYMENT_TARGET,;t t
