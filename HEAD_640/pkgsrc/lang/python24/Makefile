@@ -162,9 +162,7 @@ post-install:
 # python wants a large stack
 post-build:
 	ldrel -S2M -L ${WRKSRC}/python
-.endif
-
-.if ${OPSYS} == "HPUX"
+.elif ${OPSYS} == "HPUX"
 post-install:
 	${LN} -fs ${DESTDIR}${PREFIX}/lib/libpython2.4.sl \
 		${DESTDIR}${PREFIX}/lib/libpython2.4.sl.1.0
