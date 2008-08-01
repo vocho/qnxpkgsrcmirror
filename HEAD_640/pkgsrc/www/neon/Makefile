@@ -24,6 +24,8 @@ CONFIGURE_ARGS+=	--with-ssl=yes
 PKGCONFIG_OVERRIDE=	neon.pc.in
 TEST_TARGET=		check
 
+LIBS.QNX+=		-lsocket
+
 .include "options.mk"
 
 .include "../../devel/gettext-lib/buildlink3.mk"
@@ -31,7 +33,3 @@ TEST_TARGET=		check
 .include "../../security/openssl/buildlink3.mk"
 .include "../../textproc/expat/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"
-
-.if ${OPSYS} == "QNX"
-LIBS+=-lsocket
-.endif

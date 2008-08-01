@@ -16,9 +16,7 @@ GNU_CONFIGURE=		YES
 USE_LIBTOOL=		YES
 PTHREAD_OPTS+=		require
 
+LIBS.QNX+=		-lm
+
 .include "../../mk/pthread.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"
-
-.if ${OPSYS} == "QNX"
-LIBS+=			-lm
-.endif
