@@ -212,6 +212,9 @@ CONFIGURE_ARGS+=	${AP_CFG_ARGS.${ap_mod}}
 .  endif
 .endfor
 
+# don't bring in mcheck() which is an __EXT_QNX as it conflicts.
+CFLAGS.QNX+=	-D__NO_EXT_QNX
+
 post-extract:
 	${TOUCH} ${WRKSRC}/build/libtool
 	${ECHO} "" >> ${WRKSRC}/docs/conf/extra/httpd-languages.conf.in
@@ -268,8 +271,3 @@ post-install:
 	${TEST} ! -f ${PREFIX}/sbin/suexec || ${CHMOD} -w ${PREFIX}/sbin/suexec
 
 .include "../../mk/bsd.pkg.mk"
-
-.if ${OPSYS} == "QNX"
-# don't bring in mcheck() which is an __EXT_QNX as it conflicts.
-CFLAGS+=-D_POSIX_C_SOURCE=200112
-.endif
