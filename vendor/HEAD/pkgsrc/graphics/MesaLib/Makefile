@@ -1,16 +1,23 @@
-# $NetBSD: Makefile,v 1.64 2008/07/16 06:34:00 bjs Exp $
+# $NetBSD: Makefile,v 1.68 2008/08/06 02:33:22 dsainty Exp $
 
 PKGNAME=	MesaLib-${MESA_PKGVERSION}
-PKGREVISION=	4
 COMMENT=	Graphics library similar to SGI's OpenGL
+PKGREVISION=	2
 
 MESA_HEADERS=	gl.h gl_mangle.h glext.h glx.h glxext.h	\
 		glx_mangle.h osmesa.h xmesa.h xmesa_x.h	\
  		xmesa_xf86.h
 
+MESA_HEADERS+=	internal/dri_interface.h internal/sarea.h
+
 PKG_DESTDIR_SUPPORT=	user-destdir
 
-BUILD_DEFS+=		MESA_HZ MESA_EXECMEM_HEAPSIZE
+BUILD_DEFS+=		MESA_HZ
+###
+### XXX Older versions of xf86driproto installed dri_interface.h, which
+###	is now installed by Mesa.
+###
+BUILDLINK_API_DEPENDS.driproto+=	xf86driproto>=2.0.4
 
 .include "../../mk/bsd.prefs.mk"
 
@@ -22,7 +29,7 @@ CFLAGS.NetBSD+=	-D_NETBSD_SOURCE
 CFLAGS+=	-D__GLX_ALIGN64
 .endif
 
-.if !empty(MACHINE_ARCH:Mi386)
+.if !empty(MACHINE_ARCH:Mi386) || !empty(MACHINE_ARCH:Mx86_64)
 ###
 ### This is taken from <sys/arch/i386/include/npx.h>.  If we don't override
 ### it, the FPU control word will be restored to 0x037f.
@@ -43,29 +50,38 @@ CFLAGS.FreeBSD+=	-DDEFAULT_x86_FPU=0x1272
 .endif
 
 CFLAGS.FreeBSD+=	-DUSE_NATIVE_LIBM_FUNCS
-CFLAGS.FreeBSD+=	-DUSE_SSE_SYSCTL_DETECTION
-
 CFLAGS.Linux+=		-DUSE_NATIVE_LIBM_FUNCS
-
 CFLAGS.NetBSD+=		-DUSE_NATIVE_LIBM_FUNCS
-CFLAGS.NetBSD+=		-DUSE_SSE_SYSCTL_DETECTION
-
 CFLAGS.DragonFly+=	-DUSE_NATIVE_LIBM_FUNCS
-CFLAGS.DragonFly+=	-DUSE_SSE_SYSCTL_DETECTION
 
 PLIST_VARS=		dri nodri
 
 .include "../../graphics/Mesa/Makefile.lib"
 .include "options.mk"
-.include "../../mk/pthread.buildlink3.mk"
 
 .if !empty(MACHINE_PLATFORM:MNetBSD-[12].*)
+##
+## NetBSD 2.x and earlier require pthread stubs
+##
 .  include "../../devel/pthread-stublib/buildlink3.mk"
-PTHREAD_STUBLIB= "-L${PREFIX}/lib -Wl,-R${PREFIX}/lib -lpthstub"
+PTHREAD_STUBLIB= -L${PREFIX}/lib -Wl,-R${PREFIX}/lib -lpthstub
+.elif !empty(MACHINE_PLATFORM:MNetBSD-*)
+##
+## NetBSD 3.x and later have pthread stubs in libc
+##
+PTHREAD_STUBLIB=
 .else
-PTHREAD_STUBLIB= # provided by libc
+##
+## Other platforms may or may not have stubs provided by libc, but pulling in
+## threading support via the pthread.buildlink3.mk definitions will provide
+## all the necessary interfaces.  This matches the standard configuration for
+## most platforms as they appear in "${WRKSRC}/configs", and is necessary
+## for successful linking with libGL under many platforms.
+##
+.include "../../mk/pthread.buildlink3.mk"
+PTHREAD_STUBLIB= ${PTHREAD_LDFLAGS} ${PTHREAD_LIBS}
 .endif
-PKGSRC_MAKE_ENV+=	PTHREAD_STUBLIB=${PTHREAD_STUBLIB}
+PKGSRC_MAKE_ENV+=	PTHREAD_STUBLIB=${PTHREAD_STUBLIB:Q}
 
 .if !empty(USE_CROSS_COMPILE:M[yY][eE][sS])
 MAKE_ENV+=	CROSS_COMPILING=yes
@@ -80,6 +96,9 @@ post-extract:
 	for fn in ${RM_PATCH_BACKUP_DIRS}; do \
 		${RM} -f ${WRKSRC}/$${fn}/*.orig; \
 	done
+
+pre-install:
+	${INSTALL_DATA_DIR} ${DESTDIR}${PREFIX}/include/GL/internal
 
 pre-build:
 	cd ${WRKSRC} && ${RM} -fr src/glu src/glut progs

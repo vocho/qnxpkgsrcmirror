@@ -1,0 +1,15 @@
+$NetBSD: patch-ao,v 1.1 2008/07/31 03:58:05 bjs Exp $
+
+We want to make sure there's no garbage in the output buffer, otherwise
+untoward stuff can happen.
+
+--- drivers/oss/oss_driver.c.orig	2008-07-27 08:50:33.000000000 -0400
++++ drivers/oss/oss_driver.c
+@@ -1042,6 +1042,7 @@ static void *io_thread (void *param)
+ 			pthread_mutex_lock(&driver->mutex_out);
+ 			memcpy(localbuf, driver->outdevbuf, 
+ 				driver->outdevbufsize);
++			memset(driver->outdevbuf, 0x00, driver->outdevbufsize);
+ 			pthread_mutex_unlock(&driver->mutex_out);
+ 
+ 			io_res = write(driver->outfd, localbuf, 
