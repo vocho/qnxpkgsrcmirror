@@ -1,11 +1,10 @@
-# $NetBSD: Makefile,v 1.56 2008/05/26 14:39:24 tron Exp $
+# $NetBSD: Makefile,v 1.59 2008/08/15 17:25:31 tron Exp $
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 .include "Makefile.common"
 
-PKGREVISION=	3
-
+PKGREVISION=	2
 OWNER=		tron@NetBSD.org
 COMMENT=	X11 (X Window System) IRC client, using the GTK2 toolkit
 
@@ -19,7 +18,6 @@ GCONF_SCHEMAS=		apps_xchat_url_handler.schemas
 CONFIGURE_ARGS+=	--enable-tcl=no
 CONFIGURE_ARGS+=	--disable-perl
 CONFIGURE_ARGS+=	--disable-python
-CONFIGURE_ARGS+=	--enable-xft
 
 LDFLAGS.IRIX+=		-lX11
 
@@ -36,6 +34,7 @@ INSTALL_UNSTRIPPED=	YES
 
 .if empty(PKG_BUILD_OPTIONS.gtk2:Mquartz)
 LDFLAGS.Darwin+=	-lX11
+CONFIGURE_ARGS+=	--enable-xft
 .else
 CONFIGURE_ARGS+=	--disable-xlib
 .endif

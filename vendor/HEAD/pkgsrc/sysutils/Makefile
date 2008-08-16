@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.434 2008/07/21 22:26:27 agc Exp $
+# $NetBSD: Makefile,v 1.438 2008/08/09 05:45:50 obache Exp $
 #
 
 COMMENT=	System utilities
@@ -62,6 +62,7 @@ SUBDIR+=	dbus-glib
 SUBDIR+=	dbus-qt3
 SUBDIR+=	dd_rescue
 SUBDIR+=	dd_rhelp
+SUBDIR+=	ddrescue
 SUBDIR+=	depot
 SUBDIR+=	desktop-file-utils
 SUBDIR+=	detox
@@ -121,6 +122,7 @@ SUBDIR+=	gnometoaster
 SUBDIR+=	gpart
 SUBDIR+=	grub
 SUBDIR+=	grun
+SUBDIR+=	gst-plugins0.10-gio
 SUBDIR+=	gst-plugins0.10-gnomevfs
 SUBDIR+=	gst-plugins0.8-gnomevfs
 SUBDIR+=	gtk-send-pr
@@ -195,6 +197,7 @@ SUBDIR+=	p5-GTop
 SUBDIR+=	p5-Lchown
 SUBDIR+=	p5-Parse-Syslog
 SUBDIR+=	p5-Sys-CpuLoad
+SUBDIR+=	p5-Sys-Filesystem
 SUBDIR+=	p5-Sys-Hostname-Long
 SUBDIR+=	p5-Unix-ConfigFile
 SUBDIR+=	p5-Unix-Syslog
@@ -347,10 +350,12 @@ SUBDIR+=	xen12
 SUBDIR+=	xenconsole
 SUBDIR+=	xenkernel20
 SUBDIR+=	xenkernel3
+SUBDIR+=	xenkernel33
 SUBDIR+=	xentools12
 SUBDIR+=	xentools20
 SUBDIR+=	xentools3
 SUBDIR+=	xentools3-hvm
+SUBDIR+=	xentools33
 SUBDIR+=	xenvstat
 SUBDIR+=	xfce4-appfinder
 SUBDIR+=	xfce4-battery-plugin

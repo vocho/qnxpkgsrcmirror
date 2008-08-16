@@ -106,6 +106,7 @@ finger			Enable finger support.
 firefox			Use firefox as gecko rendering engine.
 flac			Enable FLAC support.
 freeradius-simul-use	Enable Simultaneous-Use.
+freetype		Enable freetype support.
 ftp			Enable File Transport Protocol (FTP) support.
 gdbm			Use the GNU gdbm database library.
 gdk-pixbuf		Use gdk-pixbuf as imaging library.
@@ -189,6 +190,7 @@ lprng-priv-ports	Connections must be made from privileged ports.
 lprng-suid		Install LPRng executables setuid root.
 m68060-optimized	Optimize for m68060 (only).
 mad			Enable usage of the mad library to play MP3 files.
+maintainer-zts		Enable the Zend Thread Safety option for PHP
 memtesplus-iso		Build a .iso file for memtest+
 memtesplus-serialconsole	Enable use of serial console for memtest+
 mex			Enable matlab mex support (Linux and Solaris only).
@@ -228,6 +230,7 @@ nox11			Do not link against x11 libraries.
 nspluginwrapper		Enable running non native netscape compatible plugins
 ocamlduce		Enable OcamlDuce support.
 ogg			Enable Ogg support.
+oniguruma		Support regular expressions via the oniguruma library.
 online-tests		Requiring Internet connectivity for "make test".
 openal			Enable OpenAL support.
 opengl			Use OpenGL as display library.

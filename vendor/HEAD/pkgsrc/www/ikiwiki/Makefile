@@ -1,9 +1,8 @@
-# $NetBSD: Makefile,v 1.14 2008/06/05 14:22:24 reed Exp $
+# $NetBSD: Makefile,v 1.17 2008/08/01 18:41:08 schmonz Exp $
 #
 
-DISTNAME=	ikiwiki_2.48
+DISTNAME=	ikiwiki_2.56
 PKGNAME=	${DISTNAME:S/_/-/}
-PKGREVISION=	1
 CATEGORIES=	www textproc
 MASTER_SITES=	${MASTER_SITE_DEBIAN:=pool/main/i/ikiwiki/}
 
@@ -67,7 +66,7 @@ INSTALLATION_DIRS+=	share/doc/ikiwiki
 WRKSRC=		${WRKDIR}/ikiwiki
 PERL5_PACKLIST=	auto/IkiWiki/.packlist
 USE_LANGUAGES=	# none
-USE_TOOLS=	gmake perl:run xgettext
+USE_TOOLS+=	gmake perl:run xgettext
 
 # TODO: check these
 REPLACE_PERL+=	IkiWiki.pm ikiwiki-w3m.cgi mdwn2man pm_filter

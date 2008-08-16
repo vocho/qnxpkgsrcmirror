@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.1.1.1 2008/04/10 16:09:44 drochner Exp $
+# $NetBSD: Makefile,v 1.3 2008/08/14 14:43:34 mjl Exp $
 
 DISTNAME=	libsoup-2.4.1
 PKGNAME=	libsoup24-2.4.1
