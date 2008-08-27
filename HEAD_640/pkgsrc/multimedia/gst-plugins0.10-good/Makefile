@@ -1,12 +1,14 @@
-# $NetBSD: Makefile,v 1.13 2008/05/14 18:28:36 drochner Exp $
+# $NetBSD: Makefile,v 1.15 2008/08/06 18:17:24 drochner Exp $
 #
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 .include "Makefile.common"
 
 COMMENT+=		good plugins
 
 # some plugins were moved from bad to good
-CONFLICTS+=		gst-plugins0.10-bad<0.10.6
+CONFLICTS+=		gst-plugins0.10-bad<0.10.8
 
 CONFIGURE_ARGS+=	--enable-gconf
 CONFIGURE_ARGS+=	--enable-gconftool
@@ -24,7 +26,7 @@ TEST_TARGET=		check-torture
 
 post-install:
 	${INSTALL_DATA} ${WRKSRC}/gconf/gstreamer-0.10.schemas \
-		${GCONF_SCHEMAS_DIR}
+		${DESTDIR}${GCONF_SCHEMAS_DIR}
 
 .include "../../devel/GConf/schemas.mk"
 .include "../../devel/zlib/buildlink3.mk"

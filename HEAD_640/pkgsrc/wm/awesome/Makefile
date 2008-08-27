@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.7 2008/07/15 14:31:12 ahoka Exp $
+# $NetBSD: Makefile,v 1.9 2008/08/13 13:20:14 ahoka Exp $
 #
 
-DISTNAME=		awesome-2.3.2
+DISTNAME=		awesome-2.3.3
 CATEGORIES=		wm
 MASTER_SITES=		http://awesome.naquadah.org/download/
 
-MAINTAINER=		adam.hoka@gmail.com
+MAINTAINER=		ahoka@NetBSD.org
 HOMEPAGE=		http://awesome.naquadah.org/
 COMMENT=		Tiling window manager based on dwm
 
