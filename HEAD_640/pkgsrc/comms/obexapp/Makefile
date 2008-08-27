@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.12 2008/07/14 07:01:01 plunky Exp $
+# $NetBSD: Makefile,v 1.15 2008/07/28 20:13:50 plunky Exp $
 #
 
 DISTNAME=	obexapp-1.4.9
@@ -11,8 +11,13 @@ COMMENT=	Obex application to transfer objects to mobile equipment
 
 ONLY_FOR_PLATFORM=	FreeBSD-*-* NetBSD-[4-9].*-*
 
+PKG_DESTDIR_SUPPORT=	user-destdir
+
 BUILD_DEFS+=		VARBASE
 
+INSTALLATION_DIRS+=	bin
+INSTALLATION_DIRS+=	${PKGMANDIR}/cat1
+INSTALLATION_DIRS+=	${PKGMANDIR}/man1
 OWN_DIRS+=		${VARBASE}/spool/obex
 
 RCD_SCRIPTS+=		obexapp
@@ -26,6 +31,7 @@ SUBST_SED.paths+=	-e "s|/var|${VARBASE}|"
 
 # Sigh, this needs the GNU libiconv.
 USE_GNU_ICONV=		yes
+USE_BSD_MAKEFILE=	yes
 
 # because the directory name conflicts with the rc.d script
 post-extract:

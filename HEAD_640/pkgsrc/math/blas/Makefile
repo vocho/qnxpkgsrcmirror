@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.24 2008/03/07 07:14:24 jlam Exp $
+# $NetBSD: Makefile,v 1.26 2008/08/12 21:32:26 markd Exp $
 #
 
 DISTNAME=	blas
 PKGNAME=	blas-1.1
+PKGREVISION=	1
 CATEGORIES=	math
 MASTER_SITES=	ftp://ftp.netlib.org/blas/
 EXTRACT_SUFX=	.tgz

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.562 2008/07/23 10:27:12 joerg Exp $
+# $NetBSD: Makefile,v 1.566 2008/08/13 09:12:58 joerg Exp $
 #
 
 COMMENT=	Packages related to the World Wide Web
@@ -56,6 +56,7 @@ SUBDIR+=	ap2-suphp
 SUBDIR+=	ap2-transform
 SUBDIR+=	ap2-wsgi
 SUBDIR+=	ap2-xslt2
+SUBDIR+=	ap22-authnz-external
 SUBDIR+=	apache
 SUBDIR+=	apache-tomcat55
 SUBDIR+=	apache2
@@ -263,7 +264,6 @@ SUBDIR+=	p5-Catalyst-View-TT
 SUBDIR+=	p5-CatalystX-CRUD-Controller-RHTMLO
 SUBDIR+=	p5-FCGI
 SUBDIR+=	p5-FCGI-ProcManager
-SUBDIR+=	p5-Handel
 SUBDIR+=	p5-HTML-Clean
 SUBDIR+=	p5-HTML-Element-Extended
 SUBDIR+=	p5-HTML-FillInForm
@@ -304,6 +304,7 @@ SUBDIR+=	p5-HTTP-Server-Simple-Kwiki
 SUBDIR+=	p5-HTTP-Server-Simple-Mason
 SUBDIR+=	p5-HTTP-Server-Simple-Static
 SUBDIR+=	p5-HTTPD-User-Manage
+SUBDIR+=	p5-Handel
 SUBDIR+=	p5-I18N-AcceptLanguage
 SUBDIR+=	p5-Jemplate
 SUBDIR+=	p5-Kwiki
@@ -382,6 +383,7 @@ SUBDIR+=	py-curl
 SUBDIR+=	py-django
 SUBDIR+=	py-django-devel
 SUBDIR+=	py-flup
+SUBDIR+=	py-genshi
 SUBDIR+=	py-jonpy
 SUBDIR+=	py-moin
 SUBDIR+=	py-nevow
@@ -500,7 +502,6 @@ SUBDIR+=	zope25-Squishdot
 SUBDIR+=	zope25-StripoGram
 SUBDIR+=	zope25-TinyTablePlus
 SUBDIR+=	zope25-XMLWidgets
-SUBDIR+=	zope25-ZMySQLDA
 SUBDIR+=	zope25-ZNavigator
 SUBDIR+=	zope25-ZPhotoSlides
 SUBDIR+=	zope25-ZPsycopgDA

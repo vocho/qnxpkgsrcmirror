@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.257 2008/06/03 19:37:35 wiz Exp $
+# $NetBSD: Makefile,v 1.259 2008/08/12 19:59:29 tnn Exp $
 #
 
 COMMENT=	Programming languages
@@ -25,6 +25,7 @@ SUBDIR+=	coq
 SUBDIR+=	cu-prolog
 SUBDIR+=	drscheme
 SUBDIR+=	eag
+SUBDIR+=	ecl
 SUBDIR+=	eieio
 SUBDIR+=	elisp-manual
 SUBDIR+=	elk
@@ -129,7 +130,6 @@ SUBDIR+=	py25-html-docs
 SUBDIR+=	python15
 SUBDIR+=	python21
 SUBDIR+=	python23
-SUBDIR+=	python23-nth
 SUBDIR+=	python24
 SUBDIR+=	python25
 SUBDIR+=	rexx-imc

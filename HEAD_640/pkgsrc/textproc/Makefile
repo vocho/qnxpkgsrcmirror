@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.420 2008/07/21 19:20:39 joerg Exp $
+# $NetBSD: Makefile,v 1.425 2008/08/09 17:35:37 ahoka Exp $
 #
 
 COMMENT=	Text processing utilities (does not include desktop publishing)
@@ -175,6 +175,7 @@ SUBDIR+=	nbsed
 SUBDIR+=	ndtpd
 SUBDIR+=	nxml-mode
 SUBDIR+=	o3read
+SUBDIR+=	oniguruma
 SUBDIR+=	openjade
 SUBDIR+=	opensp
 SUBDIR+=	p5-CAM-PDF
@@ -209,6 +210,7 @@ SUBDIR+=	p5-Pod-Tests
 SUBDIR+=	p5-Pod-Tree
 SUBDIR+=	p5-Regexp-Common
 SUBDIR+=	p5-SGMLS
+SUBDIR+=	p5-Search-Xapian
 SUBDIR+=	p5-String-Approx
 SUBDIR+=	p5-String-CRC32
 SUBDIR+=	p5-String-ShellQuote
@@ -224,6 +226,7 @@ SUBDIR+=	p5-Text-Context-EitherSide
 SUBDIR+=	p5-Text-DelimMatch
 SUBDIR+=	p5-Text-Diff
 SUBDIR+=	p5-Text-Diff-HTML
+SUBDIR+=	p5-Text-Diff-Parser
 SUBDIR+=	p5-Text-Emoticon
 SUBDIR+=	p5-Text-Emoticon-MSN
 SUBDIR+=	p5-Text-Format
@@ -244,6 +247,7 @@ SUBDIR+=	p5-Text-Template
 SUBDIR+=	p5-Text-Textile
 SUBDIR+=	p5-Text-Unaccent
 SUBDIR+=	p5-Text-WikiFormat
+SUBDIR+=	p5-Text-WikiCreole
 SUBDIR+=	p5-Text-WrapI18N
 SUBDIR+=	p5-Text-Wrapper
 SUBDIR+=	p5-Text-vCard
@@ -335,6 +339,7 @@ SUBDIR+=	py-libxml2
 SUBDIR+=	py-libxslt
 SUBDIR+=	py-markdown
 SUBDIR+=	py-mecab
+SUBDIR+=	py-pygments
 SUBDIR+=	py-textile
 SUBDIR+=	py-xml
 SUBDIR+=	py-yaml
@@ -418,6 +423,8 @@ SUBDIR+=	wdiff
 SUBDIR+=	writer2latex
 SUBDIR+=	xalan-c
 SUBDIR+=	xalan-j
+SUBDIR+=	xapian
+SUBDIR+=	xapian-omega
 SUBDIR+=	xerces-c
 SUBDIR+=	xerces-j
 SUBDIR+=	xfce4-dict-plugin
