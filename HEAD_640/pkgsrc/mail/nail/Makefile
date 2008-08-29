@@ -17,6 +17,8 @@ MAKE_ENV+=	"SYSCONFDIR=${PKG_SYSCONFDIR}"
 PKG_OPTIONS_VAR=	PKG_OPTIONS.nail
 PKG_SUPPORTED_OPTIONS=	inet6
 
+CFLAGS.QNX=	-D__NO_EXT_PCDOS
+
 .include "../../mk/bsd.options.mk"
 
 .if !empty(PKG_OPTIONS:Minet6)
