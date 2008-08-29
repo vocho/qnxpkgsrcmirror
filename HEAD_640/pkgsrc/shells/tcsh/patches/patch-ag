@@ -2,15 +2,16 @@ $NetBSD$
 
 --- ed.h.orig	2006-08-23 11:03:13.000000000 -0400
 +++ ed.h
-@@ -43,6 +43,11 @@
- # define NT_NUM_KEYS	256
- #endif /* WINNT_NATIVE */
+@@ -189,8 +189,12 @@ EXTERN char T_HasMeta;		/* true if we ha
  
-+#ifdef __QNXNTO__
-+#undef min
-+#undef max
+ /* note the extra characters in the Strchr() call in this macro */
+ #define isword(c)	(Isalpha(c)||Isdigit(c)||Strchr(word_chars,c))
++#ifndef min
+ #define min(x,y)	(((x)<(y))?(x):(y))
 +#endif
-+
- /****************************************************************************/
- /* stuff for the different states returned by the character editor routines */
- /****************************************************************************/
++#ifndef max
+ #define max(x,y)	(((x)>(y))?(x):(y))
++#endif
+ 
+ #define MODE_INSERT	0
+ #define MODE_REPLACE	1

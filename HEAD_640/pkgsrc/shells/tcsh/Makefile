@@ -23,6 +23,8 @@ INSTALL_TARGET=	install install.man
 NLSDIR=		share/nls
 PLIST_SRC=	${WRKDIR}/PLIST-src
 
+CFLAGS.QNX+=	-D__NO_EXT_PCDOS
+
 .include "../../mk/bsd.prefs.mk"
 
 .if ${OPSYS} == "SunOS"
