@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.88 2008/06/23 09:10:53 spz Exp $
+# $NetBSD: Makefile,v 1.91 2008/09/03 21:33:29 spz Exp $
 
-DISTNAME=		inn-2.4.4
+DISTNAME=		inn-2.4.5
 CATEGORIES=		news
 MASTER_SITES=		ftp://ftp.isc.org/isc/inn/ \
 			ftp://ftp.fu-berlin.de/unix/news/inn/
@@ -17,9 +17,23 @@ BUILD_DEFS+=		INN_DATA_DIR
 FILES_SUBST+=		INN_DATA_DIR=${INN_DATA_DIR:Q}
 
 BUILD_DEFS+=		INN_PATHBIN
-FILES_SUBST+=		INN_PATHBIN=${INN_PATHBIN:Q}
+FILES_SUBST+=		INN_PATHBIN=${PREFIX}/${INN_PATHBIN:Q}
 
 MESSAGE_SUBST+=		INN_PATHBIN=${INN_PATHBIN:Q}
+
+PLIST_SUBST+=		INN_PATHBIN=${INN_PATHBIN:Q}
+
+SUBST_CLASSES+=		BADPATHBIN
+SUBST_STAGE.BADPATHBIN=	post-patch
+SUBST_MESSAGE.BADPATHBIN=	"fixing up unfortunate pathbin paths"
+SUBST_FILES.BADPATHBIN= Makefile.global.in \
+			samples/inn.conf.in samples/newsfeeds.in \
+			scripts/innshellvars.in scripts/innshellvars.pl.in \
+			scripts/innshellvars.tcl.in backends/news2mail.in \
+			control/controlbatch.in control/controlchan.in
+SUBST_SED.BADPATHBIN=	-e 's,@prefix@/bin,${PREFIX}/${INN_PATHBIN:Q},g' \
+			-e 's,$$(PATHNEWS)/bin,${PREFIX}/${INN_PATHBIN:Q},g'
+
 
 GNU_CONFIGURE=		YES
 GNU_CONFIGURE_PREFIX=	${INN_PREFIX}
@@ -29,8 +43,8 @@ CONFIGURE_ARGS+=	--enable-setgid-inews 				\
 			--with-openssl=${SSLBASE:Q}			\
 			--with-etc-dir=${PREFIX}/etc/inn 		\
 			--with-doc-dir=${PREFIX}/share/doc/inn	 	\
-			--with-control-dir=${INN_PATHBIN}/control \
-			--with-filter-dir=${INN_PATHBIN}/filter	\
+			--with-control-dir=${PREFIX}/${INN_PATHBIN}/control \
+			--with-filter-dir=${PREFIX}/${INN_PATHBIN}/filter \
 			--with-tmp-dir=${INN_DATA_DIR}/tmp		\
 			--with-db-dir=${INN_DATA_DIR}/db 		\
 			--with-log-dir=${INN_DATA_DIR}/log 		\
@@ -107,21 +121,6 @@ GCC_REQD+=		2.95.3
 
 .include "options.mk"
 
-post-patch:
-	${RM} -f ${WRKSRC}/samples/inn.conf.in.orig_dist
-	${SED} -e "s#^PATHBIN.*#PATHBIN	= ${INN_PATHBIN}#"	\
-		${WRKSRC}/Makefile.global.in			\
-		> ${WRKSRC}/Makefile.global.in.patch;		\
-	${MV} ${WRKSRC}/Makefile.global.in.patch		\
-		${WRKSRC}/Makefile.global.in;			\
-	for FILE in innshellvars.in innshellvars.pl.in innshellvars.tcl.in ; do \
-		${SED} -e "s#@prefix@/bin/innconfval #${INN_PATHBIN}/innconfval #" \
-			${WRKSRC}/scripts/$$FILE			\
-			> ${WRKSRC}/scripts/$$FILE.patch ;		\
-		${MV} ${WRKSRC}/scripts/$$FILE.patch			\
-			${WRKSRC}/scripts/$$FILE ;			\
-	done
-
 pre-install:
 	${INSTALL_DATA_DIR} ${EXAMPLEDIR}
 	for FILE in `ls -1 ${WRKSRC}/samples/* |			\
@@ -141,10 +140,10 @@ pre-install:
 
 post-install:
 	for FILE in cnfsstat ctlinnd inndstart makehistory ; do		\
-		${LN} -s ${INN_PATHBIN}/$$FILE ${PREFIX}/sbin/$$FILE ; \
+		${LN} -s ${PREFIX}/${INN_PATHBIN}/$$FILE ${PREFIX}/sbin/$$FILE ; \
 	done
-	${LN} -s ${INN_PATHBIN}/inews ${PREFIX}/bin/inews
-	${LN} -s ${INN_PATHBIN}/rnews ${PREFIX}/bin/rnews
+	${LN} -s ${PREFIX}/${INN_PATHBIN}/inews ${PREFIX}/bin/inews
+	${LN} -s ${PREFIX}/${INN_PATHBIN}/rnews ${PREFIX}/bin/rnews
 	for FILE in libinn.a libstorage.a libinnhist.a ; do		\
 		${CHMOD} 644 ${PREFIX}/lib/$$FILE ;			\
 	done

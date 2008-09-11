@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.483 2008/05/20 13:41:01 tnn Exp $
+# $NetBSD: Makefile,v 1.490 2008/09/09 11:53:17 jmcneill Exp $
 #
 
 COMMENT=	Graphics tools and libraries
@@ -31,6 +31,7 @@ SUBDIR+=	aqsis
 SUBDIR+=	artist
 SUBDIR+=	autotrace
 SUBDIR+=	aview
+SUBDIR+=	babl
 SUBDIR+=	barcode
 SUBDIR+=	bktr2jpeg
 SUBDIR+=	blender
@@ -45,6 +46,7 @@ SUBDIR+=	cambevao
 SUBDIR+=	camediaplay
 SUBDIR+=	camlimages
 SUBDIR+=	cdlabelgen
+SUBDIR+=	cheese
 SUBDIR+=	cinepaint
 SUBDIR+=	claraocr
 SUBDIR+=	cnxtview
@@ -139,6 +141,7 @@ SUBDIR+=	gst-plugins0.8-png
 SUBDIR+=	gthumb
 SUBDIR+=	gtkam
 SUBDIR+=	gtkglext
+SUBDIR+=	gtkimageview
 SUBDIR+=	gtksee
 SUBDIR+=	guile-cairo
 SUBDIR+=	gwenview
@@ -195,6 +198,7 @@ SUBDIR+=	libotf
 SUBDIR+=	librsvg
 SUBDIR+=	libscigraphica
 SUBDIR+=	libungif
+SUBDIR+=	libv4l
 SUBDIR+=	libvideogfx
 SUBDIR+=	libwmf
 SUBDIR+=	ljpeg
@@ -316,11 +320,14 @@ SUBDIR+=	tkpiechart
 SUBDIR+=	tuxpaint
 SUBDIR+=	tuxpaint-config
 SUBDIR+=	tuxpaint-stamps
+SUBDIR+=	ucview
+SUBDIR+=	unicap
 SUBDIR+=	urt
 SUBDIR+=	vcg
 SUBDIR+=	veusz
 SUBDIR+=	vid
 SUBDIR+=	viewfax
+SUBDIR+=	vigra
 SUBDIR+=	vnc2swf
 SUBDIR+=	vp
 SUBDIR+=	vtk

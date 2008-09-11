@@ -17,6 +17,7 @@ aterm-greek		Enable Greek keyboard support.
 aterm-kanji		Enable kanji support.
 aterm-xterm-scroll	Use xterm-scrollbar instead of a NeXT-like one.
 atheme-large-net	Enable support for large networks (i.e. > 2000 users)
+bacula-static		Enable building of statically linked versions of the Bacula daemons
 batch			Enable batch mode support.
 bdb			Enable Berkeley DB support.
 bittorrent		Enable bittorrent support
@@ -76,6 +77,7 @@ dts			Enable DTS Coherent Acoustics support.
 dv			Enable usage of the libdv library.
 dvdread			Enable reproduction of DVDs.
 eb			Enable EB dictionary library support.
+ecl			Use Embeddable Common Lisp.
 efnet			Enable tweaks to support EFNet.
 elinks-exmode		Enable vi-like command entry.
 elinks-fastmem		Allow direct use of system memory allocation functions.
@@ -97,11 +99,13 @@ exim-lookup-whoson	Lookup in whoson dynamic IP address.
 exim-old-demime		Use deprecated "demime" condition in the DATA ACL.
 expat			Use the expat library for XML parsing.
 ezmlm-althash		Patch to hash subscriber list case-insensitively.
+faac			Enable AAC decoding support using faac.
 faad			Enable AAC decoding support using faad2.
 fam			Support using File Alteration Monitor (FAM).
 fastcgi			Use FastCGI as the CGI manager.
 fd-small		Build smaller misc/fd package.
 ffmpeg			Enable ffmpeg support.
+fftw			Use the fftw library for Discrete Fourier Transforms.
 finger			Enable finger support.
 firefox			Use firefox as gecko rendering engine.
 flac			Enable FLAC support.
@@ -126,6 +130,7 @@ graphicsmagick		Use GraphicsMagick as imaging library.
 groff-docs		Install documentation images.
 gstreamer		Enable gstreamer support.
 gtk			Enable support for GTK.
+gtk2			Enable support for GTK2.
 gtkspell		Enable gtkspell support.	
 gzip			Enable compression using gzip
 halfops			Halfops are similar to plain ops, but can't kick/deop plain ops.
@@ -172,6 +177,39 @@ kqueue			Enable support for kernel event notification mechanism
 lablgtk			Use lablgtk.
 lablgtk1		Use lablgtk1 (GTK1).
 lame			Use the lame encoder to create MP3 files.
+lang-af			Add Afrikaans language support.
+lang-bg			Add Bulgarian language support.
+lang-ca			Add Catalan language support.
+lang-cs			Add Czech language support.
+lang-da			Add Danish language support.
+lang-de			Add German language support.
+lang-el			Add Greek language support.
+lang-es			Add Spanish language support.
+lang-fa			Add Persian language support.
+lang-fi			Add Finnish language support.
+lang-fr			Add French language support.
+lang-gu			Add Gujarati language support.
+lang-he			Add Hebrew language support.
+lang-hu			Add Hungarian language support.
+lang-is			Add Icelandic language support.
+lang-it			Add Italian language support.
+lang-ja			Add Japanese language support.
+lang-lt			Add Lithuanian language support.
+lang-lv			Add Latvian language support.
+lang-nl			Add Dutch language support.
+lang-no			Add Norwegian language support.
+lang-pl			Add Polish language support.
+lang-pt			Add Portuguese language support.
+lang-pt-br		Add Brazilian Portuguese language support.
+lang-ro			Add Romanian language support.
+lang-ru			Add Russian language support.
+lang-sk			Add Slovak language support.
+lang-sq			Add Albanian language support.
+lang-sr			Add Serbian language support.
+lang-sv			Add Swedish language support.
+lang-uk			Add Ukrainian language support.
+lang-zh-cn		Add Chinese Simplified language support.
+lang-zh-tw		Add Chinese Traditional language support.
 lcms			Enable Light Color Management System support.
 ldap			Enable LDAP support.
 libao			Enable libao support.
@@ -188,6 +226,8 @@ liferea-seamonkey	Use Seamonkey to render HTML.
 links-zlib		Enable zlib support for the links WWW browser.
 lprng-priv-ports	Connections must be made from privileged ports.
 lprng-suid		Install LPRng executables setuid root.
+lua			Enable Lua support.
+lzw			Enable LZW (De)compression support
 m68060-optimized	Optimize for m68060 (only).
 mad			Enable usage of the mad library to play MP3 files.
 maintainer-zts		Enable the Zend Thread Safety option for PHP
@@ -196,7 +236,7 @@ memtesplus-serialconsole	Enable use of serial console for memtest+
 mex			Enable matlab mex support (Linux and Solaris only).
 mikmod			Enable MikMod sound library.
 mitshm			Enable MIT-SHM X extension support.
-mjpegtools-simd		Enable MMX/3DNOW/SSE/Altivec support.
+simd			Enable MMX/3DNOW/SSE/Altivec support.
 mlib			Enable usage of medialib (SunOS only).
 mmx			Enable MMX support (i386 only).
 modperl1		Use modperl 1.x as the CGI manager (with Apache 1.x).
@@ -310,6 +350,7 @@ syncdir			Force synchronous link() and related syscalls.
 syslog			Enable syslog support.
 syslogng-spoof		Spoof the original source address of forwarded packets
 theora			Use the theora codecs.
+threads			Enable threads support.
 tin-use-inn-spool	Use the INN spool directories.
 tls			Enable TLS support.
 trn-inn			Use INN as NNTP client.

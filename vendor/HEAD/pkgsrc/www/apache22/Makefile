@@ -1,13 +1,15 @@
-# $NetBSD: Makefile,v 1.28 2008/08/09 22:16:44 tron Exp $
+# $NetBSD: Makefile,v 1.31 2008/09/06 20:54:34 wiz Exp $
 
 .include "Makefile.common"
 
 PKGNAME=	apache-${APACHE_VERSION}
-PKGREVISION=	1
+PKGREVISION=	3
 CATEGORIES=	www
 
 HOMEPAGE=	http://httpd.apache.org/
 COMMENT=	Apache HTTP (Web) server, version 2
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 CONFLICTS=	apache-{,*ssl}-[0-9]* apache6-[0-9]*
 
@@ -100,7 +102,12 @@ DFLT_APACHE_MODULES+=	ldap authnz_ldap
 # APACHE_MODULES are the modules that are linked statically into the
 # apache httpd executable.
 #
+.if ${APACHE_MODULES} == "all-shared"
+CONFIGURE_ARGS+=	--enable-mods-shared=all
+PLIST_SRC+=		${PKGDIR}/PLIST.all-shared
+.else
 CONFIGURE_ARGS+=	--enable-modules=${APACHE_MODULES:Q}
+.endif
 BUILD_DEFS+=		APACHE_MODULES
 
 APACHE_USER?=		www
@@ -178,7 +185,7 @@ SUBST_SED.confs+=	-e 's|^\(Group[	 ]\).*|\1${APACHE_GROUP}|g'
 # so we fix after install to reference the installed path
 SUBST_CLASSES+=		abs_srcdir
 SUBST_STAGE.abs_srcdir=	post-install
-SUBST_FILES.abs_srcdir=	${PREFIX}/share/httpd/build/config_vars.mk
+SUBST_FILES.abs_srcdir=	${DESTDIR}${PREFIX}/share/httpd/build/config_vars.mk
 SUBST_SED.abs_srcdir=	-e 's|^\(abs_srcdir =\) .*|\1 ${PREFIX}/share/httpd|'
 SUBST_MESSAGE.abs_srcdir=	Fixing abs_srcdir
 
@@ -198,6 +205,11 @@ AP_DEPENDS.deflate=	../../devel/zlib/buildlink3.mk
 AP_CFG_ARGS.ssl=	--with-ssl=${BUILDLINK_PREFIX.openssl}
 AP_CFG_ARGS.deflate=	--with-z=${BUILDLINK_PREFIX.zlib}
 
+.if ${APACHE_MODULES} == "all-shared"
+.include "${AP_DEPENDS.ssl}"
+.include "${AP_DEPENDS.deflate}"
+CONFIGURE_ARGS+=	${AP_CFG_ARGS.ssl} ${AP_CFG_ARGS.deflate}
+.else
 .for ap_mod in ${APACHE_MODULES}
 .  if defined(AP_DEPENDS.${ap_mod}) && !empty(AP_DEPENDS.${ap_mod})
 .    for ap_depend in ${AP_DEPENDS.${ap_mod}}
@@ -212,6 +224,7 @@ DEPENDS+=		${ap_depend}
 CONFIGURE_ARGS+=	${AP_CFG_ARGS.${ap_mod}}
 .  endif
 .endfor
+.endif
 
 post-extract:
 	${TOUCH} ${WRKSRC}/build/libtool
@@ -221,13 +234,12 @@ post-build:
 	${SED} "s#@PKG_SYSCONFDIR@#${PKG_SYSCONFDIR}#g"			\
 		< ${FILESDIR}/mkcert.sh > ${WRKDIR}/mkcert
 
-pre-install:
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV}				\
-		${MAKE_PROGRAM} install-conf sysconfdir="${EGDIR}"
+INSTALL_TARGET=		install-conf install
+INSTALL_MAKE_FLAGS+=	sysconfdir="${EGDIR}"
 
 post-install:
-	${LN} -sf ${LOCALBASE}/libexec/apr/libtool ${PREFIX}/share/httpd/build
-	cd ${EGDIR} &&							\
+	${LN} -sf ${LOCALBASE}/libexec/apr/libtool ${DESTDIR}${PREFIX}/share/httpd/build
+	cd ${DESTDIR}${EGDIR} &&					\
 	for file in							\
 		httpd.conf						\
 		extra/httpd-ssl.conf;					\
@@ -246,26 +258,26 @@ post-install:
 		${MV} -f $${file}.new $${file};				\
 	done
 
-	${LN} -sf ${SBINDIR}/envvars-std ${SBINDIR}/envvars
+	${LN} -sf ${SBINDIR}/envvars-std ${DESTDIR}${SBINDIR}/envvars
 
-	${INSTALL_SCRIPT} ${WRKDIR}/mkcert ${PREFIX}/sbin
+	${INSTALL_SCRIPT} ${WRKDIR}/mkcert ${DESTDIR}${PREFIX}/sbin
 
 	for file in ${FIX_PERMS}; do \
-		${CHOWN} ${BINOWN}:${BINGRP} ${PREFIX}/sbin/$$file && \
-		${CHMOD} ${BINMODE} ${PREFIX}/sbin/$$file; \
+		${CHOWN} ${BINOWN}:${BINGRP} ${DESTDIR}${PREFIX}/sbin/$$file && \
+		${CHMOD} ${BINMODE} ${DESTDIR}${PREFIX}/sbin/$$file; \
 	done
 
-	${CHOWN} -R ${BINOWN}:${BINGRP} ${PREFIX}/share/httpd
-	${CHOWN} -R ${BINOWN}:${BINGRP} ${PREFIX}/include/httpd
-	${CHOWN} -R ${BINOWN}:${BINGRP} ${PREFIX}/lib/httpd
-	${CHOWN} ${BINOWN}:${BINGRP} ${PREFIX}/libexec/cgi-bin/test-cgi
-	${CHOWN} ${BINOWN}:${BINGRP} ${PREFIX}/libexec/cgi-bin/printenv
+	${CHOWN} -R ${BINOWN}:${BINGRP} ${DESTDIR}${PREFIX}/share/httpd
+	${CHOWN} -R ${BINOWN}:${BINGRP} ${DESTDIR}${PREFIX}/include/httpd
+	${CHOWN} -R ${BINOWN}:${BINGRP} ${DESTDIR}${PREFIX}/lib/httpd
+	${CHOWN} ${BINOWN}:${BINGRP} ${DESTDIR}${PREFIX}/libexec/cgi-bin/test-cgi
+	${CHOWN} ${BINOWN}:${BINGRP} ${DESTDIR}${PREFIX}/libexec/cgi-bin/printenv
 
 	for file in ${FIX_MAN_PERMS}; do \
-		${CHOWN} ${MANOWN}:${MANGRP} ${PREFIX}/${PKGMANDIR}/$$file; \
+		${CHOWN} ${MANOWN}:${MANGRP} ${DESTDIR}${PREFIX}/${PKGMANDIR}/$$file; \
 	done
 
-	${CHMOD} -x ${PREFIX}/sbin/envvars-std
-	${TEST} ! -f ${PREFIX}/sbin/suexec || ${CHMOD} -w ${PREFIX}/sbin/suexec
+	${CHMOD} -x ${DESTDIR}${PREFIX}/sbin/envvars-std
+	${TEST} ! -f ${DESTDIR}${PREFIX}/sbin/suexec || ${CHMOD} -w ${DESTDIR}${PREFIX}/sbin/suexec
 
 .include "../../mk/bsd.pkg.mk"

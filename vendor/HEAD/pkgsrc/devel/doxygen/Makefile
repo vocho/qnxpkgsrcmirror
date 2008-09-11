@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.61 2008/06/24 23:59:48 seb Exp $
+# $NetBSD: Makefile,v 1.63 2008/08/19 16:35:25 tron Exp $
 
 DISTNAME=	doxygen-1.5.6.src
 PKGNAME=	doxygen-1.5.6
