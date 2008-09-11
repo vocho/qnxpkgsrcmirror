@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.43 2008/08/01 23:14:47 bjs Exp $
+# $NetBSD: Makefile,v 1.46 2008/09/09 11:11:29 abs Exp $
 
 DISTNAME=	xterm-236
+PKGREVISION=	1
 CATEGORIES=	x11
 MASTER_SITES=	ftp://invisible-island.net/xterm/ \
 		http://www.sfr-fresh.com/unix/misc/
@@ -50,11 +51,13 @@ BUILDLINK_DEPMETHOD.libxkbfile?=	build
 .include "../../x11/libxkbfile/buildlink3.mk"
 
 post-install:
-	 ${INSTALL_DATA_DIR} ${DESTDIR}${PREFIX}/share/applications && \
-	 ${INSTALL_DATA} ${WRKSRC}/xterm.desktop \
+	${INSTALL_DATA_DIR} ${DESTDIR}${PREFIX}/share/applications && \
+	${INSTALL_DATA} ${WRKSRC}/xterm.desktop \
 		${DESTDIR}${PREFIX}/share/applications && \
-	 ${INSTALL_DATA} ${WRKSRC}/uxterm.desktop \
+	${INSTALL_DATA} ${WRKSRC}/uxterm.desktop \
 		${DESTDIR}${PREFIX}/share/applications
+	cd ${DESTDIR}${PREFIX}/${PKGMANDIR}/man1 && tbl xterm.1 \
+		> xterm.1.tbl && mv xterm.1.tbl xterm.1
 
 .include "options.mk"
 

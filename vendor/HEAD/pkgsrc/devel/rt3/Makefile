@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.33 2008/07/23 18:00:55 seb Exp $
+# $NetBSD: Makefile,v 1.35 2008/08/24 14:05:16 tonnerre Exp $
 
-DISTNAME=		rt-3.6.6
-PKGREVISION=		4
+DISTNAME=		rt-3.8.1
+PKGREVISION=		1
 CATEGORIES=		devel
 MASTER_SITES=		http://download.bestpractical.com/pub/rt/release/
 
@@ -12,6 +12,7 @@ COMMENT=		Industrial-grade ticketing system
 .include "options.mk"
 
 USE_TOOLS+=	perl:run
+USE_LANGUAGES+=	c
 
 # Core dependencies:
 DEPENDS+=	p5-Digest-[0-9]*:../../security/p5-Digest
@@ -19,31 +20,36 @@ DEPENDS+=	p5-Digest-MD5>=2.27:../../security/p5-Digest-MD5
 DEPENDS+=	p5-DBI>=1.37:../../databases/p5-DBI
 DEPENDS+=	p5-Class-ReturnValue>=0.40:../../devel/p5-Class-ReturnValue
 DEPENDS+=	p5-TimeDate-[0-9]*:../../time/p5-TimeDate
-DEPENDS+=	p5-DBIx-SearchBuilder>=1.50:../../databases/p5-DBIx-SearchBuilder
+DEPENDS+=	p5-DBIx-SearchBuilder>=1.54:../../databases/p5-DBIx-SearchBuilder
 DEPENDS+=	p5-Text-Template>=1.43:../../textproc/p5-Text-Template
 DEPENDS+=	p5-HTML-Parser>=3.35:../../www/p5-HTML-Parser
 DEPENDS+=	p5-HTML-Scrubber>=0.08:../../www/p5-HTML-Scrubber
+DEPENDS+=	p5-HTTP-Server-Simple>=0.34:../../www/p5-HTTP-Server-Simple
+DEPENDS+=	p5-HTTP-Server-Simple-Mason>=0.09:../../www/p5-HTTP-Server-Simple-Mason
 DEPENDS+=	p5-Log-Dispatch>=2.0:../../devel/p5-Log-Dispatch
 DEPENDS+=	p5-Locale-Maketext>=1.06:../../misc/p5-Locale-Maketext
 DEPENDS+=	p5-Locale-Maketext-Lexicon>=0.32:../../misc/p5-Locale-Maketext-Lexicon
 DEPENDS+=	p5-Locale-Maketext-Fuzzy>=0.02:../../misc/p5-Locale-Maketext-Fuzzy
 DEPENDS+=	p5-MIME-tools>=5.411.1:../../mail/p5-MIME-tools
 DEPENDS+=	p5-MailTools>=1.57:../../mail/p5-MailTools
+DEPENDS+=	p5-Email-Address-[0-9]*:../../mail/p5-Email-Address
 DEPENDS+=	p5-Net>=1.15:../../net/p5-Net
+DEPENDS+=	p5-Net-Server-[0-9]*:../../net/p5-Net-Server
 DEPENDS+=	p5-Text-Wrapper>=1.0:../../textproc/p5-Text-Wrapper
 DEPENDS+=	p5-Time>=101.062101:../../time/p5-Time
 DEPENDS+=	p5-Text-Autoformat>=1.04:../../textproc/p5-Text-Autoformat
 DEPENDS+=	p5-Text-Quoted>=2.02:../../textproc/p5-Text-Quoted
 DEPENDS+=	p5-Tree-Simple>=1.04:../../devel/p5-Tree-Simple
 DEPENDS+=	p5-Regexp-Common>=2.113:../../textproc/p5-Regexp-Common
-DEPENDS+=	p5-Module-Versions-Report>=1.03:../../devel/p5-Module-Versions-Report
+DEPENDS+=	p5-Module-Versions-Report>=1.05:../../devel/p5-Module-Versions-Report
 DEPENDS+=	p5-Cache-Simple-TimedExpiry-[0-9]*:../../devel/p5-Cache-Simple-TimedExpiry
 DEPENDS+=	p5-UNIVERSAL-require>=0.11:../../devel/p5-UNIVERSAL-require
 DEPENDS+=	p5-Calendar-Simple>=1.00:../../time/p5-Calendar-Simple
 DEPENDS+=	p5-CSS-Squish>=0.07:../../www/p5-CSS-Squish
+DEPENDS+=	p5-File-ShareDir>=1.00:../../devel/p5-File-ShareDir
 
 # Mason dependencies:
-DEPENDS+=	p5-HTML-Mason>=1.31:../../www/p5-HTML-Mason
+DEPENDS+=	p5-HTML-Mason>=1.36:../../www/p5-HTML-Mason
 DEPENDS+=	p5-Apache-Session>=1.53:../../www/p5-Apache-Session
 DEPENDS+=	p5-XML-RSS>=1.05:../../textproc/p5-XML-RSS
 DEPENDS+=	p5-GD-[0-9]*:../../graphics/p5-GD
@@ -51,12 +57,24 @@ DEPENDS+=	p5-GDGraph-[0-9]*:../../graphics/p5-GDGraph
 DEPENDS+=	p5-GDTextUtil-[0-9]*:../../graphics/p5-GDTextUtil
 DEPENDS+=	p5-Text-WikiFormat>=0.76:../../textproc/p5-Text-WikiFormat
 DEPENDS+=	p5-Module-Refresh>=0.03:../../devel/p5-Module-Refresh
+DEPENDS+=	p5-Encode>=2.13:../../textproc/p5-Encode
 
 # Mailgate dependencies:
 DEPENDS+=	p5-HTML-Tree>=3.18:../../www/p5-HTML-Tree
 DEPENDS+=	p5-HTML-Format>=2.03:../../www/p5-HTML-Format
 DEPENDS+=	p5-libwww>=5.76:../../www/p5-libwww
 DEPENDS+=	p5-Term-ReadKey>=2.21:../../devel/p5-Term-ReadKey
+
+# Dashboard dependencies:
+DEPENDS+=	p5-MIME-Types-[0-9]*:../../mail/p5-MIME-Types
+DEPENDS+=	p5-HTML-RewriteAttributes>=0.02:../../www/p5-HTML-RewriteAttributes
+
+# ICAL dependencies:
+DEPENDS+=	p5-Data-ICal-[0-9]*:../../time/p5-Data-ICal
+
+# GPG dependencies:
+DEPENDS+=	p5-PerlIO-eol-[0-9]*:../../devel/p5-PerlIO-eol
+DEPENDS+=	p5-GnuPG-Interface-[0-9]*:../../security/p5-GnuPG-Interface
 
 # Front-end dependencies:
 .if !empty(PKG_OPTIONS:Mmodperl1)
@@ -66,6 +84,7 @@ DEPENDS+=	p5-Apache-DBI>=0.92:../../databases/p5-Apache-DBI
 DEPENDS+=	p5-Apache-DBI>=0.92:../../databases/p5-Apache-DBI
 .elif !empty(PKG_OPTIONS:Mfastcgi)
 DEPENDS+=	p5-FCGI>=0.67:../../www/p5-FCGI
+DEPENDS+=	p5-CGI>=3.38:../../www/p5-CGI
 .endif
 PLIST_VARS+=	speedycgi
 .if !empty(PKG_OPTIONS:Mspeedycgi)

@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.10 2008/05/24 21:45:18 tnn Exp $
+# $NetBSD: Makefile,v 1.12 2008/09/09 13:59:13 dsainty Exp $
 #
 
-DISTNAME=		xtrans-1.2
+DISTNAME=		xtrans-1.2.1
 PKGREVISION=		1
 CATEGORIES=		x11 net
 MASTER_SITES=		${MASTER_SITE_XORG:=lib/}

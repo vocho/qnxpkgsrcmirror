@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.19 2008/07/19 13:36:51 drochner Exp $
+# $NetBSD: Makefile,v 1.21 2008/08/31 13:12:23 drochner Exp $
 #
 
-DISTNAME=	mercurial-1.0.1
-PKGREVISION=	1
+DISTNAME=	mercurial-1.0.2
 CATEGORIES=	devel scm
 MASTER_SITES=	http://www.selenic.com/mercurial/release/
 
@@ -20,8 +19,6 @@ PYDISTUTILSPKG=	yes
 USE_TOOLS+=	gmake
 
 INSTALLATION_DIRS=	bin ${PKGMANDIR}/man1 ${PKGMANDIR}/man5
-
-MAKE_ENV+=	PYTHONBIN=${PYTHONBIN:Q}
 
 post-install:
 	${INSTALL_DATA} ${WRKSRC}/doc/*.1  ${DESTDIR}${PREFIX}/${PKGMANDIR}/man1

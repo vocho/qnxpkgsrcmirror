@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.355 2008/07/29 16:14:35 taca Exp $
+# $NetBSD: Makefile,v 1.361 2008/09/08 22:12:14 abs Exp $
 #
 
 COMMENT=	Electronic mail utilities
@@ -68,6 +68,7 @@ SUBDIR+=	dspam
 SUBDIR+=	elm
 SUBDIR+=	elm-me
 SUBDIR+=	elmo
+SUBDIR+=	enma
 SUBDIR+=	esmtp
 SUBDIR+=	etach
 SUBDIR+=	etpan
@@ -118,6 +119,7 @@ SUBDIR+=	libspf-alt
 SUBDIR+=	libspf2
 SUBDIR+=	libsylph
 SUBDIR+=	libytnef
+SUBDIR+=	lua-OSBF
 SUBDIR+=	mail-notification
 SUBDIR+=	mailagent
 SUBDIR+=	mailcrypt
@@ -159,6 +161,9 @@ SUBDIR+=	p5-Email-Abstract
 SUBDIR+=	p5-Email-Address
 SUBDIR+=	p5-Email-Date
 SUBDIR+=	p5-Email-Date-Format
+SUBDIR+=	p5-Email-Folder
+SUBDIR+=	p5-Email-FolderType
+SUBDIR+=	p5-Email-LocalDelivery
 SUBDIR+=	p5-Email-MIME
 SUBDIR+=	p5-Email-MIME-Attachment-Stripper
 SUBDIR+=	p5-Email-MIME-ContentType
@@ -187,6 +192,7 @@ SUBDIR+=	p5-Mail-ClamAV
 SUBDIR+=	p5-Mail-DKIM
 SUBDIR+=	p5-Mail-Ezmlm
 SUBDIR+=	p5-Mail-IMAPClient
+SUBDIR+=	p5-Mail-IMAPClient2
 SUBDIR+=	p5-Mail-ListDetector
 SUBDIR+=	p5-Mail-Mbox-MessageParser
 SUBDIR+=	p5-Mail-Milter

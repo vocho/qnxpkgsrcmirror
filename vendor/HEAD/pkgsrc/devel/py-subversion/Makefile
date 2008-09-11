@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.28 2008/06/19 22:33:25 epg Exp $
+# $NetBSD: Makefile,v 1.30 2008/09/06 20:54:32 wiz Exp $
 
 PKGNAME=	${PYPKGPREFIX}-subversion-${SVNVER}
+PKGREVISION=	1
 COMMENT=	Python bindings and tools for Subversion
 
 PKG_DESTDIR_SUPPORT=	user-destdir
@@ -22,7 +23,7 @@ MAKE_ENV+=		EXTRA_CPPFLAGS=${BUILDLINK_CPPFLAGS:Q}
 MAKE_FLAGS+=		swig_pydir=${LOCALBASE}/${PYSITELIB}/libsvn \
 			swig_pydir_extra=${LOCALBASE}/${PYSITELIB}/svn
 
-TEST_TARGET=		all svnserveautocheck check-swig-py
+TEST_TARGET=		all check check-swig-py
 
 INSTALLATION_DIRS=	${SVNEXAMPLES}/python ${SVNEXAMPLES}/hook-scripts
 

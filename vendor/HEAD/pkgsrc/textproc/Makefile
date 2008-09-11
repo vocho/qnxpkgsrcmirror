@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.425 2008/08/09 17:35:37 ahoka Exp $
+# $NetBSD: Makefile,v 1.431 2008/09/07 16:27:15 seb Exp $
 #
 
 COMMENT=	Text processing utilities (does not include desktop publishing)
@@ -191,6 +191,7 @@ SUBDIR+=	p5-Feed-Find
 SUBDIR+=	p5-File-ReadBackwards
 SUBDIR+=	p5-Filter
 SUBDIR+=	p5-FormValidator-Simple
+SUBDIR+=	p5-Kwalify
 SUBDIR+=	p5-Lingua-EN-Inflect
 SUBDIR+=	p5-Lingua-EN-Inflect-Number
 SUBDIR+=	p5-Lingua-EN-Numbers-Ordinate
@@ -202,6 +203,7 @@ SUBDIR+=	p5-Number-Format
 SUBDIR+=	p5-PDF
 SUBDIR+=	p5-PDF-API2
 SUBDIR+=	p5-PDF-Create
+SUBDIR+=	p5-PPI-HTML
 SUBDIR+=	p5-Pod-Coverage
 SUBDIR+=	p5-Pod-Escapes
 SUBDIR+=	p5-Pod-POM
@@ -213,7 +215,9 @@ SUBDIR+=	p5-SGMLS
 SUBDIR+=	p5-Search-Xapian
 SUBDIR+=	p5-String-Approx
 SUBDIR+=	p5-String-CRC32
+SUBDIR+=	p5-String-Koremutake
 SUBDIR+=	p5-String-ShellQuote
+SUBDIR+=	p5-Template-Declare
 SUBDIR+=	p5-Template-Plugin-Number-Format
 SUBDIR+=	p5-Text-Autoformat
 SUBDIR+=	p5-Text-Balanced
@@ -376,6 +380,8 @@ SUBDIR+=	ruby-maruku
 SUBDIR+=	ruby-mecab
 SUBDIR+=	ruby-native-hyperestraier
 SUBDIR+=	ruby-nqxml
+SUBDIR+=	ruby-oniguruma
+SUBDIR+=	ruby-plist
 SUBDIR+=	ruby-pure-hyperestraier
 SUBDIR+=	ruby-rdtool
 SUBDIR+=	ruby-redcloth
@@ -385,6 +391,8 @@ SUBDIR+=	ruby-sary
 SUBDIR+=	ruby-simple-rss
 SUBDIR+=	ruby-suikyo
 SUBDIR+=	ruby-syntax
+SUBDIR+=	ruby-textpow
+SUBDIR+=	ruby-ultraviolet
 SUBDIR+=	ruby-will-paginate
 SUBDIR+=	ruby-xmlparser
 SUBDIR+=	ruby-xmlscan
@@ -411,6 +419,7 @@ SUBDIR+=	tex-xmltex
 SUBDIR+=	tex2page
 SUBDIR+=	texi2html
 SUBDIR+=	texi2roff
+SUBDIR+=	tokyodystopia
 SUBDIR+=	trang
 SUBDIR+=	troffcvt
 SUBDIR+=	unroff

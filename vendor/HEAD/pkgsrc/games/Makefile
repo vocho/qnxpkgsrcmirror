@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.305 2008/06/23 17:01:05 drochner Exp $
+# $NetBSD: Makefile,v 1.307 2008/09/09 12:47:48 kefren Exp $
 #
 
 COMMENT=	Games
@@ -24,7 +24,6 @@ SUBDIR+=	battalion
 SUBDIR+=	battleball
 SUBDIR+=	billardgl
 SUBDIR+=	blindmine
-SUBDIR+=	blobwars
 SUBDIR+=	blokus
 SUBDIR+=	bluemoon
 SUBDIR+=	bomberclone
@@ -223,7 +222,6 @@ SUBDIR+=	sl
 SUBDIR+=	spaceracer
 SUBDIR+=	spellcast
 SUBDIR+=	spider
-SUBDIR+=	starfighter
 SUBDIR+=	stratagus
 SUBDIR+=	sudoku-cli
 SUBDIR+=	svb
@@ -236,6 +234,7 @@ SUBDIR+=	tileworld
 SUBDIR+=	tscp
 SUBDIR+=	tuxmath
 SUBDIR+=	tuxracer
+SUBDIR+=	ufoai
 SUBDIR+=	urban
 SUBDIR+=	velena
 SUBDIR+=	vms-empire

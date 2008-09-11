@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.168 2008/07/26 20:10:05 he Exp $
+# $NetBSD: Makefile,v 1.170 2008/08/28 20:13:18 ahoka Exp $
 
 COMMENT=	Mathematics
 
@@ -101,6 +101,7 @@ SUBDIR+=	octave
 SUBDIR+=	octave-current
 SUBDIR+=	octave-forge
 SUBDIR+=	odepack
+SUBDIR+=	openaxiom
 SUBDIR+=	orpie
 SUBDIR+=	otter
 SUBDIR+=	p5-Math-Base85
@@ -131,6 +132,7 @@ SUBDIR+=	py-Scientific-doc
 SUBDIR+=	py-ephem
 SUBDIR+=	py-fpconst
 SUBDIR+=	py-numarray
+SUBDIR+=	py-networkx
 SUBDIR+=	py-pytables
 SUBDIR+=	py-rpy
 SUBDIR+=	py-sympy

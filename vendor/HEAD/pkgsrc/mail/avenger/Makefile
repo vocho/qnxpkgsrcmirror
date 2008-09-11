@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.5 2008/06/12 02:14:33 joerg Exp $
+# $NetBSD: Makefile,v 1.7 2008/09/08 10:16:06 shannonjr Exp $
 #
 
-DISTNAME=	avenger-0.7.7
-PKGREVISION=	2
+DISTNAME=	avenger-0.7.9
 CATEGORIES=	mail
 MASTER_SITES=	http://www.mailavenger.org/dist/
 
