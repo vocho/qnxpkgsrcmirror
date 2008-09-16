@@ -1,8 +1,8 @@
 $NetBSD: patch-at,v 1.10 2008/06/28 22:51:21 tron Exp $
 
---- configure.orig	2008-05-28 15:15:44.000000000 +0100
-+++ configure	2008-06-28 14:02:26.000000000 +0100
-@@ -667,6 +667,7 @@
+--- configure.orig	2008-08-25 17:16:26.000000000 -0400
++++ configure
+@@ -667,6 +667,7 @@ target_vendor
  target_os
  configdir
  lockdir
@@ -10,7 +10,7 @@ $NetBSD: patch-at,v 1.10 2008/06/28 22:51:21 tron Exp $
  piddir
  logfilebase
  privatedir
-@@ -1396,6 +1397,7 @@
+@@ -1396,6 +1397,7 @@ Optional Packages:
    --with-privatedir=DIR   Where to put smbpasswd ($ac_default_prefix/private)
    --with-rootsbindir=DIR  Which directory to use for root sbin ($ac_default_prefix/sbin)
    --with-lockdir=DIR      Where to put lock files ($ac_default_prefix/var/locks)
@@ -18,7 +18,7 @@ $NetBSD: patch-at,v 1.10 2008/06/28 22:51:21 tron Exp $
    --with-piddir=DIR       Where to put pid files ($ac_default_prefix/var/locks)
    --with-swatdir=DIR      Where to put SWAT files ($ac_default_prefix/swat)
    --with-configdir=DIR    Where to put configuration files ($libdir)
-@@ -2137,6 +2139,7 @@
+@@ -2137,6 +2139,7 @@ fi
  
  rootsbindir="\${SBINDIR}"
  lockdir="\${VARDIR}/locks"
@@ -26,7 +26,7 @@ $NetBSD: patch-at,v 1.10 2008/06/28 22:51:21 tron Exp $
  piddir="\${VARDIR}/locks"
  test "${mandir}" || mandir="\${prefix}/man"
  logfilebase="\${VARDIR}"
-@@ -2151,7 +2154,8 @@
+@@ -2151,7 +2154,8 @@ swatdir="\${prefix}/swat"
  if test "${with_fhs+set}" = set; then
    withval=$with_fhs;  case "$withval" in
    yes)
@@ -36,7 +36,7 @@ $NetBSD: patch-at,v 1.10 2008/06/28 22:51:21 tron Exp $
      piddir="\${VARDIR}/run"
      mandir="\${prefix}/share/man"
      logfilebase="\${VARDIR}/log/samba"
-@@ -2225,6 +2229,26 @@
+@@ -2225,6 +2229,26 @@ fi
  
  
  #################################################
@@ -63,7 +63,7 @@ $NetBSD: patch-at,v 1.10 2008/06/28 22:51:21 tron Exp $
  # set pid directory location
  
  # Check whether --with-piddir was given.
-@@ -2462,6 +2486,7 @@
+@@ -2462,6 +2486,7 @@ fi
  
  
  
@@ -71,7 +71,76 @@ $NetBSD: patch-at,v 1.10 2008/06/28 22:51:21 tron Exp $
  ## check for --enable-debug first before checking CFLAGS before
  ## so that we don't mix -O and -g
  # Check whether --enable-debug was given.
-@@ -31343,7 +31368,8 @@
+@@ -5939,6 +5964,68 @@ _ACEOF
+ 
+ fi
+ 
++{ echo "$as_me:$LINENO: checking for uint" >&5
++echo $ECHO_N "checking for uint... $ECHO_C" >&6; }
++if test "${ac_cv_type_uint+set}" = set; then
++  echo $ECHO_N "(cached) $ECHO_C" >&6
++else
++  cat >conftest.$ac_ext <<_ACEOF
++/* confdefs.h.  */
++_ACEOF
++cat confdefs.h >>conftest.$ac_ext
++cat >>conftest.$ac_ext <<_ACEOF
++/* end confdefs.h.  */
++$ac_includes_default
++typedef uint ac__type_new_;
++int
++main ()
++{
++if ((ac__type_new_ *) 0)
++  return 0;
++if (sizeof (ac__type_new_))
++  return 0;
++  ;
++  return 0;
++}
++_ACEOF
++rm -f conftest.$ac_objext
++if { (ac_try="$ac_compile"
++case "(($ac_try" in
++  *\"* | *\`* | *\\*) ac_try_echo=\$ac_try;;
++  *) ac_try_echo=$ac_try;;
++esac
++eval "echo \"\$as_me:$LINENO: $ac_try_echo\"") >&5
++  (eval "$ac_compile") 2>conftest.er1
++  ac_status=$?
++  grep -v '^ *+' conftest.er1 >conftest.err
++  rm -f conftest.er1
++  cat conftest.err >&5
++  echo "$as_me:$LINENO: \$? = $ac_status" >&5
++  (exit $ac_status); } && {
++	 test -z "$ac_c_werror_flag" ||
++	 test ! -s conftest.err
++       } && test -s conftest.$ac_objext; then
++  ac_cv_type_uint=yes
++else
++  echo "$as_me: failed program was:" >&5
++sed 's/^/| /' conftest.$ac_ext >&5
++
++	ac_cv_type_uint=no
++fi
++
++rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
++fi
++{ echo "$as_me:$LINENO: result: $ac_cv_type_uint" >&5
++echo "${ECHO_T}$ac_cv_type_uint" >&6; }
++if test $ac_cv_type_uint = yes; then
++  :
++else
++
++cat >>confdefs.h <<_ACEOF
++#define uint unsigned int
++_ACEOF
++
++fi
+ { echo "$as_me:$LINENO: checking for int8_t" >&5
+ echo $ECHO_N "checking for int8_t... $ECHO_C" >&6; }
+ if test "${ac_cv_type_int8_t+set}" = set; then
+@@ -31343,7 +31430,8 @@ done
  
  
  
@@ -81,7 +150,24 @@ $NetBSD: patch-at,v 1.10 2008/06/28 22:51:21 tron Exp $
  do
  as_ac_var=`echo "ac_cv_func_$ac_func" | $as_tr_sh`
  { echo "$as_me:$LINENO: checking for $ac_func" >&5
-@@ -46876,6 +46902,75 @@
+@@ -39776,6 +39864,16 @@ _ACEOF
+ 
+ 			;;
+ 		*qnx*)
++			BLDSHARED="true"
++			LDSHFLAGS="-shared"
++			DYNEXP="-Wl,--export-dynamic"
++			SONAMEFLAG="-Wl,-soname,"
++			PICFLAG="-fPIC -DPIC"
++
++cat >>confdefs.h <<\_ACEOF
++#define STAT_ST_BLOCKSIZE 512
++_ACEOF
++
+ cat >>confdefs.h <<\_ACEOF
+ #define QNX 1
+ _ACEOF
+@@ -46878,6 +46976,75 @@ _ACEOF
  fi
  
  if test $iface = no; then
@@ -157,7 +243,7 @@ $NetBSD: patch-at,v 1.10 2008/06/28 22:51:21 tron Exp $
  { echo "$as_me:$LINENO: checking for iface ifconf" >&5
  echo $ECHO_N "checking for iface ifconf... $ECHO_C" >&6; }
  if test "${samba_cv_HAVE_IFACE_IFCONF+set}" = set; then
-@@ -50251,9 +50346,9 @@
+@@ -50253,9 +50420,9 @@ LIBS="-lcrypto $KRB5_LIBS  $LIBS"
  
  
  
@@ -170,7 +256,7 @@ $NetBSD: patch-at,v 1.10 2008/06/28 22:51:21 tron Exp $
    echo $ECHO_N "(cached) $ECHO_C" >&6
  else
    cat >conftest.$ac_ext <<_ACEOF
-@@ -50269,11 +50364,11 @@
+@@ -50271,11 +50438,11 @@ cat >>conftest.$ac_ext <<_ACEOF
  #ifdef __cplusplus
  extern "C"
  #endif
@@ -184,7 +270,7 @@ $NetBSD: patch-at,v 1.10 2008/06/28 22:51:21 tron Exp $
    ;
    return 0;
  }
-@@ -50296,13 +50391,13 @@
+@@ -50298,13 +50465,13 @@ eval "echo \"\$as_me:$LINENO: $ac_try_ec
  	 test ! -s conftest.err
         } && test -s conftest$ac_exeext &&
         $as_test_x conftest$ac_exeext; then
@@ -200,7 +286,7 @@ $NetBSD: patch-at,v 1.10 2008/06/28 22:51:21 tron Exp $
  		  ac_cv_lib_ext_crypto=no
  fi
  
-@@ -50310,11 +50405,11 @@
+@@ -50312,11 +50479,11 @@ rm -f core conftest.err conftest.$ac_obj
        conftest$ac_exeext conftest.$ac_ext
  
  fi
@@ -216,7 +302,7 @@ $NetBSD: patch-at,v 1.10 2008/06/28 22:51:21 tron Exp $
  _ACEOF
  
  fi
-@@ -63338,31 +63433,39 @@
+@@ -63340,31 +63507,39 @@ case "$host_os" in
  		NSSSONAMEVERSIONSUFFIX=".2"
  		WINBIND_NSS_EXTRA_OBJS="nsswitch/winbind_nss_linux.o"
  		;;
@@ -278,7 +364,16 @@ $NetBSD: patch-at,v 1.10 2008/06/28 22:51:21 tron Exp $
  		;;
  	*irix*)
  		# IRIX has differently named shared libraries
-@@ -67891,6 +67994,7 @@
+@@ -67685,6 +67860,8 @@ do
+   case $ac_option in
+   # Handling of the options.
+   -recheck | --recheck | --rechec | --reche | --rech | --rec | --re | --r)
++	: Avoid regenerating within pkgsrc
++	exit 0
+     ac_cs_recheck=: ;;
+   --version | --versio | --versi | --vers | --ver | --ve | --v | -V )
+     echo "$ac_cs_version"; exit ;;
+@@ -67893,6 +68070,7 @@ target_vendor!$target_vendor$ac_delim
  target_os!$target_os$ac_delim
  configdir!$configdir$ac_delim
  lockdir!$lockdir$ac_delim
@@ -286,7 +381,7 @@ $NetBSD: patch-at,v 1.10 2008/06/28 22:51:21 tron Exp $
  piddir!$piddir$ac_delim
  logfilebase!$logfilebase$ac_delim
  privatedir!$privatedir$ac_delim
-@@ -67934,7 +68038,6 @@
+@@ -67936,7 +68114,6 @@ IDMAP_LIBS!$IDMAP_LIBS$ac_delim
  KRB5_LIBS!$KRB5_LIBS$ac_delim
  UUID_LIBS!$UUID_LIBS$ac_delim
  LDAP_LIBS!$LDAP_LIBS$ac_delim
@@ -294,7 +389,7 @@ $NetBSD: patch-at,v 1.10 2008/06/28 22:51:21 tron Exp $
  _ACEOF
  
    if test `sed -n "s/.*$ac_delim\$/X/p" conf$$subs.sed | grep -c X` = 97; then
-@@ -67976,6 +68079,7 @@
+@@ -67978,6 +68155,7 @@ _ACEOF
  ac_delim='%!_!# '
  for ac_last_try in false false false false false :; do
    cat >conf$$subs.sed <<_ACEOF
@@ -302,7 +397,7 @@ $NetBSD: patch-at,v 1.10 2008/06/28 22:51:21 tron Exp $
  INSTALL_PAM_MODULES!$INSTALL_PAM_MODULES$ac_delim
  UNINSTALL_PAM_MODULES!$UNINSTALL_PAM_MODULES$ac_delim
  NSS_MODULES!$NSS_MODULES$ac_delim
-@@ -68060,7 +68164,7 @@
+@@ -68062,7 +68240,7 @@ SMBD_LIBS!$SMBD_LIBS$ac_delim
  LTLIBOBJS!$LTLIBOBJS$ac_delim
  _ACEOF
  
