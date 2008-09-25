@@ -61,6 +61,8 @@ MESSAGE_SRC=		${.CURDIR}/MESSAGE ${.CURDIR}/MESSAGE.kqueue
 CPPFLAGS.Darwin+=	-DNDEBUG
 LDFLAGS.SunOS+=		-lsocket -lnsl
 
+LIBS.QNX+=	-lsocket -lrpc -lnbutil
+
 .if ${OPSYS} == "SunOS"
 
 SUBST_CLASSES+=		sunfix
