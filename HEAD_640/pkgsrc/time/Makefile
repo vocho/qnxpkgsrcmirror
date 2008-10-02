@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.72 2008/07/30 14:00:14 schmonz Exp $
+# $NetBSD: Makefile,v 1.76 2008/09/10 16:50:08 seb Exp $
 #
 
 COMMENT=	Clocks, calendars, daily planners and other time related applications
@@ -51,6 +51,7 @@ SUBDIR+=	p5-DateTime-Format-Pg
 SUBDIR+=	p5-DateTime-Format-Strptime
 SUBDIR+=	p5-DateTime-Format-W3CDTF
 SUBDIR+=	p5-DateTime-Locale
+SUBDIR+=	p5-DateTime-Precise
 SUBDIR+=	p5-DateTime-Set
 SUBDIR+=	p5-DateTime-TimeZone
 SUBDIR+=	p5-Rose-DateTime
@@ -58,6 +59,7 @@ SUBDIR+=	p5-Schedule-Cron-Events
 SUBDIR+=	p5-Time
 SUBDIR+=	p5-Time-Clock
 SUBDIR+=	p5-Time-Duration
+SUBDIR+=	p5-Time-Duration-Parse
 SUBDIR+=	p5-Time-Format
 SUBDIR+=	p5-Time-HiRes
 SUBDIR+=	p5-Time-Interval
@@ -65,6 +67,7 @@ SUBDIR+=	p5-Time-Local
 SUBDIR+=	p5-Time-Period
 SUBDIR+=	p5-Time-Piece
 SUBDIR+=	p5-Time-TAI64
+SUBDIR+=	p5-Time-Warp
 SUBDIR+=	p5-TimeDate
 SUBDIR+=	pcal
 SUBDIR+=	pclock
@@ -86,6 +89,7 @@ SUBDIR+=	saytime
 SUBDIR+=	sunbird
 SUBDIR+=	sunclock
 SUBDIR+=	swisswatch
+SUBDIR+=	tdl
 SUBDIR+=	titrax
 SUBDIR+=	vixie-cron
 SUBDIR+=	wmcalclock

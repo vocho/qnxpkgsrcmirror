@@ -1,21 +1,33 @@
-# $NetBSD: Makefile,v 1.11 2008/06/12 02:14:20 joerg Exp $
+# $NetBSD: Makefile,v 1.16 2008/09/10 12:40:58 wiz Exp $
 
-DISTNAME=	pysqlite-2.3.5
-PKGNAME=	${PYPKGPREFIX}-sqlite2-2.3.5
+DISTNAME=	pysqlite-2.5.0
+PKGNAME=	${PYPKGPREFIX}-sqlite2-2.5.0
+PKGREVISION=	1
 CATEGORIES=	databases python
-MASTER_SITES=	http://initd.org/pub/software/pysqlite/releases/2.3/2.3.5/
+MASTER_SITES=	http://oss.itsystementwicklung.de/download/pysqlite/2.5/2.5.0/
 
 MAINTAINER=	tsarna@NetBSD.org
-HOMEPAGE=	http://initd.org/tracker/pysqlite
+HOMEPAGE=	http://pysqlite.org/
 COMMENT=	SQLite database adapter for Python
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 PYDISTUTILSPKG=	yes
 
+.include "../../lang/python/extension.mk"
+
+.if defined(PYPACKAGE) && \
+    (${PYPACKAGE} == "python23" || ${PYPACKAGE} == "python24")
+pre-configure:
+	rm ${WRKSRC}/pysqlite2/test/py25tests.py
+.else
+PLIST.python25=	yes
+.endif
+
+PLIST_VARS+=	python25
+
 do-postinstall-test: .PHONY
 	${PYTHONBIN} -c "from pysqlite2 import test;test.test()"
 
 .include "../../databases/sqlite3/buildlink3.mk"
-.include "../../lang/python/extension.mk"
 .include "../../mk/bsd.pkg.mk"

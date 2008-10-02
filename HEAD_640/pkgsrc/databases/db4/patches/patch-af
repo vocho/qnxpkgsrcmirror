@@ -1,13 +1,16 @@
 $NetBSD$
 
---- os/os_handle.c.orig	2007-05-17 11:15:46.000000000 -0400
-+++ os/os_handle.c
-@@ -52,7 +52,7 @@ __os_openhandle(dbenv, name, flags, mode
- #ifdef HAVE_QNX
- 	if (LF_ISSET(DB_OSO_REGION)) {
- 		if ((ret =
--		    __os_qnx_region_open(dbenv, name, oflags, mode, fhp)) != 0)
-+		    __os_qnx_region_open(dbenv, name, flags, mode, fhp)) != 0)
- 			goto err;
- 		goto done;
- 	}
+--- dbinc/mutex.h.orig	2008-01-08 15:58:18.000000000 -0500
++++ dbinc/mutex.h
+@@ -83,6 +83,11 @@ extern "C" {
+ #define	__mutex_unlock(a, b)		__db_fcntl_mutex_unlock(a, b)
+ #define	__mutex_destroy(a, b)		__db_fcntl_mutex_destroy(a, b)
+ #else
++#ifdef __QNXNTO__
++/* These should be reserved right ? */
++#undef __mutex_lock
++#undef __mutex_unlock
++#endif
+ #define	__mutex_init(a, b, c)		__db_tas_mutex_init(a, b, c)
+ #define	__mutex_lock(a, b)		__db_tas_mutex_lock(a, b)
+ #define	__mutex_unlock(a, b)		__db_tas_mutex_unlock(a, b)

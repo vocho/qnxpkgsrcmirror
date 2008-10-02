@@ -1,4 +1,4 @@
-# $NetBSD: options.mk,v 1.31 2008/03/25 15:35:36 wiz Exp $
+# $NetBSD: options.mk,v 1.33 2008/09/09 01:11:53 jmcneill Exp $
 
 .if defined(PKGNAME) && empty(PKGNAME:Mmplayer-share*)
 
@@ -31,7 +31,7 @@ PKG_SUPPORTED_OPTIONS+=	aalib esound ggi mplayer-menu nas sdl
 PKG_SUPPORTED_OPTIONS+=	arts
 .  endif
 .elif !empty(PKGNAME:M*mencoder*)
-PKG_SUPPORTED_OPTIONS+=	lame
+PKG_SUPPORTED_OPTIONS+=	faac lame
 .endif
 
 # OS-specific options.
@@ -42,6 +42,11 @@ PKG_SUPPORTED_OPTIONS+=	mlib
 .endif
 .if ${OPSYS} == "Linux"
 PKG_SUPPORTED_OPTIONS+=	vidix
+.endif
+
+.if ${OPSYS} == "NetBSD" && exists(/usr/include/sys/videoio.h)
+PKG_SUPPORTED_OPTIONS+=	v4l2
+PKG_SUGGESTED_OPTIONS+=	v4l2
 .endif
 
 # Platform-specific options.
@@ -142,6 +147,11 @@ CONFIGURE_ARGS+=	--enable-esd
 CONFIGURE_ARGS+=	--disable-esd
 .endif
 
+.if !empty(PKG_OPTIONS:Mfaac)
+.  include "../../audio/faac/buildlink3.mk"
+.else
+CONFIGURE_ARGS+=	--disable-faac
+.endif
 
 .if empty(PKG_OPTIONS:Mfaad) && empty(PKG_OPTIONS:Mmplayer-internal-faad)
 CONFIGURE_ARGS+=	--disable-faad-external
@@ -258,6 +268,12 @@ CONFIGURE_ARGS+=	--enable-theora
 .  include "../../multimedia/libtheora/buildlink3.mk"
 .else
 CONFIGURE_ARGS+=	--disable-theora
+.endif
+
+.if !empty(PKG_OPTIONS:Mv4l2)
+CONFIGURE_ARGS+=	--enable-tv-v4l2
+.else
+CONFIGURE_ARGS+=	--disable-tv-v4l2
 .endif
 
 # disable vidix if not in options

@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.50 2008/08/10 05:02:23 obache Exp $
+# $NetBSD: Makefile,v 1.52 2008/08/28 20:05:24 tron Exp $
 
-DISTNAME=	mtr-0.72
-PKGREVISION=	1
+DISTNAME=	mtr-0.74
 CATEGORIES=	net
 MASTER_SITES=	ftp://ftp.bitwizard.nl/mtr/
 
@@ -24,6 +23,12 @@ INSTALLATION_DIRS=	${PKGMANDIR}/man8 sbin share/doc/mtr
 BUILDLINK_TRANSFORM+=	l:termcap:ncurses
 
 SPECIAL_PERMS=	sbin/mtr ${SETUID_ROOT_PERMS}
+
+# Remove hard-coded compiler option that GCC 3.x doesn't support.
+.include "../../mk/compiler.mk"
+.if !empty(CC_VERSION:Mgcc-3.*)
+BUILDLINK_TRANSFORM+=	rm:-Wno-pointer-sign
+.endif
 
 do-install:
 	${INSTALL_PROGRAM} ${WRKSRC}/mtr ${DESTDIR}${PREFIX}/sbin

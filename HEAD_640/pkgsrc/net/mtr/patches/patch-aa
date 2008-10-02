@@ -1,21 +1,36 @@
-$NetBSD: patch-aa,v 1.7 2006/10/03 19:15:20 wiz Exp $
+$NetBSD: patch-aa,v 1.9 2008/08/29 08:32:41 tonnerre Exp $
 
---- configure.orig	2006-09-29 19:41:56.000000000 +0000
+--- configure.orig	2008-08-19 20:11:50.000000000 +0200
 +++ configure
-@@ -7204,6 +7204,7 @@ _ACEOF
-   LIBS="-lresolv $LIBS"
+@@ -6176,7 +6176,7 @@ fi
+ done
  
- else
-+  LIBS="$ac_check_lib_save_LIBS"
  
- echo "$as_me:$LINENO: checking for __res_mkquery in -lresolv" >&5
- echo $ECHO_N "checking for __res_mkquery in -lresolv... $ECHO_C" >&6
-@@ -7287,8 +7288,6 @@ fi
+-for ac_header in sys/xti.h
++for ac_header in socket.h sys/socket.h sys/xti.h
+ do
+ as_ac_Header=`echo "ac_cv_header_$ac_header" | $as_tr_sh`
+ if { as_var=$as_ac_Header; eval "test \"\${$as_var+set}\" = set"; }; then
+@@ -7834,7 +7834,12 @@ cat >>conftest.$ac_ext <<_ACEOF
+ /* end confdefs.h.  */
  
- fi
- 
--LIBS="$LIBS -lresolv"
+ #include <netinet/in.h>
 -
- echo "$as_me:$LINENO: checking for herror" >&5
- echo $ECHO_N "checking for herror... $ECHO_C" >&6
- if test "${ac_cv_func_herror+set}" = set; then
++#ifdef HAVE_SOCKET_H
++#include <socket.h>
++#endif
++#ifdef HAVE_SYS_SOCKET_H
++#include <sys/socket.h>
++#endif
+ 
+ typedef socklen_t ac__type_new_;
+ int
+@@ -8570,6 +8575,8 @@ do
+   case $ac_option in
+   # Handling of the options.
+   -recheck | --recheck | --rechec | --reche | --rech | --rec | --re | --r)
++	: Avoid regenerating within pkgsrc
++	exit 0
+     ac_cs_recheck=: ;;
+   --version | --versio | --versi | --vers | --ver | --ve | --v | -V )
+     echo "$ac_cs_version"; exit ;;

@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.50 2008/08/07 18:21:40 drochner Exp $
+# $NetBSD: Makefile,v 1.52 2008/09/05 15:50:03 tron Exp $
 
 DISTNAME=	ghostscript-8.63
+PKGREVISION=	1
 CATEGORIES=	print
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=ghostscript/}
 EXTRACT_SUFX=	.tar.bz2
@@ -22,6 +23,10 @@ GNU_CONFIGURE=		yes
 #CONFIGURE_ARGS+=	--enable-debug
 MAKE_JOBS_SAFE=		no
 UNLIMIT_RESOURCES+=	datasize	# gsromfs1.c
+
+BUILD_TARGET=		so
+INSTALL_TARGET=		soinstall
+CONFIGURE_ARGS+=	-with-omni=no	# otherwise pulls in libstdc++
 
 REPLACE_PERL+=		lib/fixmswrd.pl
 
@@ -53,6 +58,10 @@ SUBST_SED.resdir=	-e "s|/Resource/|${GS_RESOURCEDIR}/|g"
 CONFIGURE_ENV+=		ac_cv_func_fopen64=no
 .endif
 
+.if ${OPSYS} == "NetBSD"
+CFLAGS+=		-fPIC
+.endif
+
 # Interim IRIX build fix, the real problem is that fontconfig.pc doesn't
 # require linking against libiconv when it should do so.
 .if ${OPSYS} == "IRIX"
@@ -65,6 +74,9 @@ post-extract:
 #	${MV} ${WRKSRC}/jasper ${WRKSRC}/jasper.dontuse
 	${MV} ${WRKSRC}/libpng ${WRKSRC}/libpng.dontuse
 #	${MV} ${WRKSRC}/zlib ${WRKSRC}/zlib.dontuse
+
+post-install:
+	${LN} -sf gsc ${DESTDIR}${PREFIX}/bin/gs
 
 .include "options.mk"
 

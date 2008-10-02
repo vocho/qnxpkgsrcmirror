@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.20 2008/07/30 15:22:02 apb Exp $
+# $NetBSD: Makefile,v 1.23 2008/09/06 20:54:32 wiz Exp $
 
-DISTNAME=	cvs2svn-2.0.1
+DISTNAME=	cvs2svn-2.1.1
 PKGREVISION=	1
 CATEGORIES=	devel scm
-MASTER_SITES=	http://cvs2svn.tigris.org/files/documents/1462/39919/
+MASTER_SITES=	http://cvs2svn.tigris.org/files/documents/1462/42521/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://cvs2svn.tigris.org/
@@ -14,7 +14,10 @@ DEPENDS+=	subversion-base-[0-9]*:../../devel/subversion-base
 CONFLICTS+=	py*-subversion<1.0.1
 
 PYDISTUTILSPKG=			yes
-PYTHON_PATCH_SCRIPTS=		run-tests.py
+PYTHON_PATCH_SCRIPTS=		run-tests.py cvs2svn_rcsparse/run-tests.py \
+	cvs2svn_rcsparse/parse_rcs_file.py
+USE_TOOLS+=			gtar
+EXTRACT_USING=			gtar
 
 # XXX cvs2svn depends on sort(1) with '-T' option. A dependency and a patch
 # to resort on GNU sort from coreutils may be required.

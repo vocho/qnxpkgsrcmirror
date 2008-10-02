@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.37 2008/08/12 21:07:05 wiz Exp $
+# $NetBSD: Makefile,v 1.43 2008/09/06 23:44:39 wiz Exp $
 
-DISTNAME=	cdrtools-2.01.01a45
-PKGNAME=	cdrtools-2.01.01.45
+DISTNAME=	cdrtools-2.01.01a48
+PKGNAME=	cdrtools-2.01.01.48
 CATEGORIES=	sysutils
 MASTER_SITES=	ftp://ftp.berlios.de/pub/cdrecord/alpha/
 EXTRACT_SUFX=	.tar.bz2
@@ -17,6 +17,7 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 
 .include "../../mk/bsd.prefs.mk"
 
+MAKE_JOBS_SAFE=	no
 WRKSRC=		${WRKDIR}/cdrtools-2.01.01
 USE_TOOLS+=	gm4 gmake tbl
 
@@ -30,6 +31,9 @@ MAKE_ENV+=	MAKEPROG="gmake"
 MAKE_ENV+=	COPTX=${CFLAGS:Q}
 MAKE_ENV+=	LDOPTX=${LDFLAGS:Q}
 MAKE_ENV+=	INS_BASE=${PREFIX:Q}
+# do we want to compile shared libraries?
+# needs changes in the install target and PLIST
+#MAKE_ENV+=	LINKMODE=dynamic
 
 # if we're using a gcc which is named gcc, we need to set CCOM=gcc
 # in MAKE_ENV so the make infrastructure picks the right options.
@@ -69,10 +73,6 @@ SUBST_STAGE.oss=	post-patch
 SUBST_FILES.oss=	cdda2wav/local.cnf.in
 SUBST_SED.oss=		-e "s,/dev/dsp,${DEVOSSSOUND},g"
 SUBST_MESSAGE.oss=	Fixing OSS sound device path.
-
-post-extract:
-	ln -s Defaults.freebsd ${WRKSRC}/DEFAULTS/Defaults.dragonfly
-	ln -s Defaults.freebsd ${WRKSRC}/DEFAULTS_ENG/Defaults.dragonfly
 
 do-configure:
 	cd ${WRKSRC}/RULES;						\
