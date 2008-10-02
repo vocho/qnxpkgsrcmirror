@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.2 2007/01/10 10:39:18 drochner Exp $
+@comment $NetBSD: PLIST,v 1.5 2008/09/10 10:47:31 joerg Exp $
 ${PYSITELIB}/pysqlite2/__init__.py
 ${PYSITELIB}/pysqlite2/__init__.pyc
 ${PYSITELIB}/pysqlite2/__init__.pyo
@@ -6,18 +6,27 @@ ${PYSITELIB}/pysqlite2/_sqlite.so
 ${PYSITELIB}/pysqlite2/dbapi2.py
 ${PYSITELIB}/pysqlite2/dbapi2.pyc
 ${PYSITELIB}/pysqlite2/dbapi2.pyo
+${PYSITELIB}/pysqlite2/dump.py
+${PYSITELIB}/pysqlite2/dump.pyc
+${PYSITELIB}/pysqlite2/dump.pyo
 ${PYSITELIB}/pysqlite2/test/__init__.py
 ${PYSITELIB}/pysqlite2/test/__init__.pyc
 ${PYSITELIB}/pysqlite2/test/__init__.pyo
 ${PYSITELIB}/pysqlite2/test/dbapi.py
 ${PYSITELIB}/pysqlite2/test/dbapi.pyc
 ${PYSITELIB}/pysqlite2/test/dbapi.pyo
+${PYSITELIB}/pysqlite2/test/dump.py
+${PYSITELIB}/pysqlite2/test/dump.pyc
+${PYSITELIB}/pysqlite2/test/dump.pyo
 ${PYSITELIB}/pysqlite2/test/factory.py
 ${PYSITELIB}/pysqlite2/test/factory.pyc
 ${PYSITELIB}/pysqlite2/test/factory.pyo
 ${PYSITELIB}/pysqlite2/test/hooks.py
 ${PYSITELIB}/pysqlite2/test/hooks.pyc
 ${PYSITELIB}/pysqlite2/test/hooks.pyo
+${PLIST.python25}${PYSITELIB}/pysqlite2/test/py25tests.py
+${PLIST.python25}${PYSITELIB}/pysqlite2/test/py25tests.pyc
+${PLIST.python25}${PYSITELIB}/pysqlite2/test/py25tests.pyo
 ${PYSITELIB}/pysqlite2/test/regression.py
 ${PYSITELIB}/pysqlite2/test/regression.pyc
 ${PYSITELIB}/pysqlite2/test/regression.pyo

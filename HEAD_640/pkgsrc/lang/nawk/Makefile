@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.32 2008/06/19 18:36:51 joerg Exp $
+# $NetBSD: Makefile,v 1.35 2008/09/08 13:47:55 joerg Exp $
 
 DISTNAME=	nawk-20050424
+PKGREVISION=	3
 CATEGORIES=	lang
 MASTER_SITES=	# empty
 DISTFILES=	# empty

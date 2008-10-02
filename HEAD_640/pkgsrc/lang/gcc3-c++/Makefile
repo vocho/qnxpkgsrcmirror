@@ -1,7 +1,9 @@
-# $NetBSD: Makefile,v 1.18 2006/12/07 11:24:28 markd Exp $
+# $NetBSD: Makefile,v 1.20 2008/09/07 05:19:33 dholland Exp $
 
 PKGNAME=	gcc3${GCC3_PKGMODIF}-c++-${GCC_VERSION}
 COMMENT=	GNU Compiler Collection, v3 - C++ compiler
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 INSTLIBS=	libstdc++-v3/libsupc++/libsupc++.la			\
 		libstdc++-v3/src/libstdc++.la
@@ -18,17 +20,18 @@ do-build:
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${GMAKE} all-target-libstdc++-v3
 
 post-build:
-	@${SED} ${FILES_SUBST_SED} ${FILESDIR}/gcc3.mk > ${WRKDIR}/gcc3.mk
+	${SED} ${FILES_SUBST_SED} ${FILESDIR}/gcc3.mk > ${WRKDIR}/gcc3.mk
 
 do-install:
-	${INSTALL_PROGRAM_DIR} ${GCC_ARCHDIR}
-	${INSTALL_PROGRAM} ${WRKSRC}/gcc/cc1plus ${GCC_ARCHDIR}
-	cd ${WRKSRC}/gcc && ${SETENV} ${MAKE_ENV} ${GMAKE} \
+	${INSTALL_PROGRAM_DIR} ${DESTDIR}${GCC_ARCHDIR}
+	${INSTALL_PROGRAM} ${WRKSRC}/gcc/cc1plus ${DESTDIR}${GCC_ARCHDIR}
+	cd ${WRKSRC}/gcc && ${SETENV} ${MAKE_ENV} ${INSTALL_ENV} ${GMAKE} \
 		c++.install-common c++.install-man
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${GMAKE} \
+	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${INSTALL_ENV} ${GMAKE} \
 		install-target-libstdc++-v3
 
 post-install:
-	${INSTALL_DATA} ${WRKDIR}/gcc3.mk ${GCC_PREFIX}/mk/c++.mk
+	${INSTALL_DATA_DIR} ${DESTDIR:Q}${GCC_PREFIX}/mk
+	${INSTALL_DATA} ${WRKDIR}/gcc3.mk ${DESTDIR:Q}${GCC_PREFIX}/mk/c++.mk
 
 .include "../../mk/bsd.pkg.mk"

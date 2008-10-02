@@ -1,12 +1,11 @@
-# $NetBSD: Makefile,v 1.4 2008/08/15 20:12:52 cegger Exp $
+# $NetBSD: Makefile,v 1.8 2008/08/22 17:04:11 cegger Exp $
 #
 
-VERSION=		3.3-18331
+VERSION=		3.3.0
 DISTNAME=		xen-${VERSION}
 PKGNAME=		xentools33-${VERSION}
 CATEGORIES=		sysutils
-#MASTER_SITES=	http://bits.xensource.com/oss-xen/release/${VERSION}/
-MASTER_SITES=		http://www.netbsd.org/~cegger/
+MASTER_SITES=	http://bits.xensource.com/oss-xen/release/${VERSION}/
 EXTRACT_SUFX=		.tar.gz
 
 MAINTAINER=		cegger@NetBSD.org
@@ -145,7 +144,7 @@ CONF_FILES_PERMS+=	${EGDIR}/${s} ${PKG_SYSCONFDIR}/scripts/${s}	\
 OWN_DIRS=		${PKG_SYSCONFDIR}/scripts /var/log/xen
 
 pre-build:
-	rm ${WRKSRC}/check/check_x11_devel
+	rm -f ${WRKSRC}/check/check_x11_devel
 .if ${MACHINE_ARCH} == "x86_64"
 	${MKDIR} ${WRKSRC}/include/machine
 	${TEST} -f ${WRKSRC}/include/machine/int_types.h || \

@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.47 2008/06/13 11:20:14 hira Exp $
+# $NetBSD: Makefile,v 1.49 2008/09/06 20:54:33 wiz Exp $
 #
 
 OO_VER=			2.4.1
+PKGREVISION=		2
 DISTNAME=		openoffice-${OO_VER}
 PKGNAME=		openoffice2-${OO_VER}
 CATEGORIES=		misc

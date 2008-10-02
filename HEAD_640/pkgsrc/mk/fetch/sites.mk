@@ -1,4 +1,4 @@
-# $NetBSD: sites.mk,v 1.43 2008/06/18 18:40:36 heinz Exp $
+# $NetBSD: sites.mk,v 1.48 2008/08/25 02:40:33 obache Exp $
 #
 # This Makefile fragment defines read-only MASTER_SITE_* variables
 # representing some well-known master distribution sites for software.
@@ -80,7 +80,6 @@ MASTER_SITE_GNOME+=     \
 
 MASTER_SITE_KDE+=	\
 	ftp://ftp.kde.org/pub/kde/stable/ \
-	http://ftp.scarlet.be/pub/kde/stable/ \
 	ftp://www.t.ring.gr.jp/pub/X/kde/stable/ \
 	http://www.t.ring.gr.jp/archives/X/kde/stable/ \
 	ftp://ftp.kddlabs.co.jp/pub/X/kde/stable/ \
@@ -132,8 +131,7 @@ MASTER_SITE_SUSE+=	\
 
 MASTER_SITE_MOZILLA_ALL+=   \
 	http://ftp.mozilla.org/pub/mozilla.org/ \
-	ftp://ftp.mozilla.org/pub/mozilla.org/ \
-	ftp://ftp.belnet.be/mirror/ftp.mozilla.org/
+	ftp://ftp.mozilla.org/pub/mozilla.org/
 
 MASTER_SITE_MOZILLA+=	\
 	http://ftp.mozilla.org/pub/mozilla.org/ \
@@ -141,21 +139,30 @@ MASTER_SITE_MOZILLA+=	\
 	http://releases.mozilla.org/pub/mozilla.org/ \
 	ftp://releases.mozilla.org/pub/mozilla.org/ \
 	http://mozilla.isc.org/pub/mozilla.org/ \
-	ftp://mozilla.isc.org/pub/mozilla.org/ \
 	http://mozilla.ussg.indiana.edu/pub/mozilla.org/ \
-	ftp://mozilla.ussg.indiana.edu/pub/mozilla.org/ \
-	http://mozilla.osuosl.org/pub/mozilla.org/ \
-	ftp://ftp.osuosl.org/pub/mozilla.org/ \
-	http://mozilla.cs.utah.edu/pub/mozilla.org/ \
-	ftp://mozilla.cs.utah.edu/pub/mozilla.org/ \
 	http://mozilla.mirrors.tds.net/pub/mozilla.org/ \
-	ftp://mozilla.mirrors.tds.net/pub/mozilla.org/ \
-	ftp://ftp.scarlet.be/pub/mozilla.org/ \
-	http://ftp.scarlet.be/pub/mozilla.org/ \
-	ftp://ftp.uni-erlangen.de/pub/mozilla.org/ \
-	http://ftp.uni-erlangen.de/pub/mozilla.org/ \
+	http://pv-mirror02.mozilla.org/pub/mozilla.org/ \
+	http://pv-mirror01.mozilla.org/pub/mozilla.org/ \
+	http://mozilla.mirrors.easynews.com/mozilla/ \
+	http://mozilla-east.superbhosting.net/ \
+	http://www.gtlib.gatech.edu/pub/mozilla.org/ \
+	http://mirror.cc.vt.edu/pub/mozilla/ \
+	http://kyoto-mz-dl.sinet.ad.jp/pub/mozilla.org/ \
+	http://ftp.twaren.net/Unix/Mozilla/ \
+	http://mozilla.mtk.nao.ac.jp/pub/mozilla.org/ \
+	http://mozilla.ftp.iij.ad.jp/pub/mozilla/mozilla.org/ \
+	http://mirror.internode.on.net/pub/mozilla/ \
+	http://mirror.waia.asn.au/pub/mozilla/ \
+	http://ftp.snt.utwente.nl/pub/software/mozilla.org/ \
+	http://mozmirror01.true.nl/pub/mozilla.org/ \
+	http://www.mirrorservice.org/sites/releases.mozilla.org/pub/mozilla.org/ \
+	http://laotzu.acc.umu.se/pub/mozilla.org/ \
+	http://rebecka.jiddernet.se/ \
 	http://sunsite.rediris.es/pub/mozilla.org/ \
-	ftp://sunsite.rediris.es/pub/mozilla.org/
+	http://mirror.yandex.ru/mozilla/ \
+	http://ftp.df.lth.se/mozilla/ \
+	http://mozilla.c3sl.ufpr.br/releases/ \
+	http://mozilla.mirror.pop-sc.rnp.br/mirror/mozilla.org/ \
 
 MASTER_SITE_XEMACS+=    \
 	ftp://ftp.xemacs.org/pub/xemacs/ \
@@ -192,19 +199,133 @@ MASTER_SITE_APACHE+=    \
 	ftp://ftp.twaren.net/Unix/Web/apache/
 
 MASTER_SITE_MYSQL+=	\
-	ftp://ftp.fi.muni.cz/pub/mysql/Downloads/	\
-	http://mysql.mirrors.cybercity.dk/Downloads/	\
-	ftp://ftp.gwdg.de/pub/misc/mysql/Downloads/	\
-	http://mirrors.ntua.gr/MySQL/Downloads/		\
-	ftp://ftp.ntua.gr/pub/databases/mysql/Downloads/	\
-	ftp://ftp.rhnet.is/pub/mysql/Downloads/	\
-	ftp://mirror.widexs.nl/pub/mysql/Downloads/	\
-	ftp://mirror.switch.ch/mirror/mysql/Downloads/	\
-	ftp://mirror.services.wisc.edu/mirrors/mysql/Downloads/	\
-	ftp://ftp.orst.edu/pub/mysql/Downloads/	\
-	http://mysql.mirrors.pair.com/Downloads/	\
-	ftp://ftp.linorg.usp.br/mysql/Downloads/	\
-	http://download.softagency.net/MySQL/Downloads/
+	http://mysql.skynet.be/Downloads/ \
+	ftp://ftp.mysql.skynet.be/pub/ftp.mysql.com/Downloads/ \
+	http://mysql.easynet.be/Downloads/ \
+	ftp://ftp.easynet.be/mysql/Downloads/ \
+	http://mysql.mirror.kangaroot.net/Downloads/ \
+	ftp://mysql.mirror.kangaroot.net/pub/mysql/Downloads/ \
+	http://mysql.blic.net/Downloads/ \
+	http://mysql.online.bg/Downloads/ \
+	ftp://mysql.online.bg/Downloads/ \
+	http://mysql.linux.cz/Downloads/ \
+	ftp://ftp.fi.muni.cz/pub/mysql/Downloads/ \
+	http://mirrors.dotsrc.org/mysql/Downloads/ \
+	ftp://mirrors.dotsrc.org/mysql/Downloads/ \
+	http://mysql.mirrors.webname.dk/Downloads/ \
+	http://mysql.borsen.dk/Downloads/ \
+	http://mysql.tonnikala.org/Downloads/ \
+	http://mir2.ovh.net/ftp.mysql.com/Downloads/ \
+	ftp://mir1.ovh.net/ftp.mysql.com/Downloads/ \
+	http://mirrors.ircam.fr/pub/mysql/Downloads/ \
+	ftp://mirrors.ircam.fr/pub/mysql/Downloads/ \
+	ftp://ftp.inria.fr/pub/MySQL/Downloads/ \
+	http://ftp.gwdg.de/pub/misc/mysql/Downloads/ \
+	ftp://ftp.gwdg.de/pub/misc/mysql/Downloads/ \
+	http://sunsite.informatik.rwth-aachen.de/mysql/Downloads/ \
+	ftp://sunsite.informatik.rwth-aachen.de/pub/mirror/www.mysql.com/Downloads/ \
+	ftp://ftp.fu-berlin.de/unix/databases/mysql/Downloads/ \
+	http://ftp.ntua.gr/pub/databases/mysql/Downloads/ \
+	ftp://ftp.ntua.gr/pub/databases/mysql/Downloads/ \
+	http://ftp.uoi.gr/pub/databases/mysql/Downloads/ \
+	ftp://ftp.uoi.gr/pub/databases/mysql/Downloads/ \
+	http://mysql.mirrors.crysys.hit.bme.hu/Downloads/ \
+	ftp://ftp.crysys.hu/pub/mysql/Downloads/ \
+	http://mysql.rhnet.is/Downloads/ \
+	ftp://ftp.rhnet.is/pub/mysql/Downloads/ \
+	http://ftp.heanet.ie/mirrors/www.mysql.com/Downloads/ \
+	ftp://ftp.heanet.ie/mirrors/www.mysql.com/Downloads/ \
+	http://na.mirror.garr.it/mirrors/MySQL/Downloads/ \
+	ftp://na.mirror.garr.it/mirrors/MySQL/Downloads/ \
+	http://mysql.php.lv/Downloads/ \
+	http://mysql.bst.lt/Downloads/ \
+	http://mysql.mirrors.webazilla.nl/Downloads/ \
+	http://mysql.proserve.nl/Downloads/ \
+	ftp://mysql.proserve.nl/pub/mysql/Downloads/Downloads/ \
+	http://ftp.tpnet.pl/vol/d3/ftp.mysql.com/Downloads/ \
+	ftp://ftp.tpnet.pl/d3/ftp.mysql.com/Downloads/ \
+	http://mysql.nfsi.pt/Downloads/ \
+	ftp://ftp.nfsi.pt/pub/mysql/Downloads/ \
+	http://mirrors.xservers.ro/mysql/Downloads/ \
+	ftp://ftp.roedu.net/pub/mirrors/ftp.mysql.com/Downloads/ \
+	ftp://mirrors.fibernet.ro/1/MySQL/Downloads/ \
+	http://ftp.astral.ro/mirrors/mysql.com/Downloads/ \
+	ftp://ftp.astral.ro/mirrors/mysql.com/Downloads/ \
+	http://mysql.mix.su/Downloads/ \
+	ftp://mysql.mix.su/Downloads/ \
+	http://mirrors.paknet.org/mysql/Downloads/ \
+	http://www.wsection.com/mysql/Downloads/ \
+	http://mirrors.bevc.net/mysql/Downloads/ \
+	ftp://ftp.bevc.net/mirrors/mysql/Downloads/ \
+	http://mysql.rediris.es/Downloads/ \
+	ftp://ftp.rediris.es/mirror/mysql/Downloads/ \
+	http://ftp.sunet.se/pub/unix/databases/relational/mysql/Downloads/ \
+	ftp://ftp.sunet.se/pub/unix/databases/relational/mysql/Downloads/ \
+	http://mysql.dataphone.se/Downloads/ \
+	ftp://mirror2.dataphone.se/pub/mysql/Downloads/ \
+	ftp://ftp.solnet.ch/mirror/mysql/Downloads/ \
+	http://mirror.switch.ch/ftp/mirror/mysql/Downloads/ \
+	ftp://mirror.switch.ch/mirror/mysql/Downloads/ \
+	http://ftp.itu.edu.tr/Mirror/Mysql/Downloads/ \
+	ftp://ftp.itu.edu.tr/Mirror/Mysql/Downloads/ \
+	http://mysql.infocom.ua/Downloads/ \
+	http://mirrors.dedipower.com/www.mysql.com/Downloads/ \
+	http://mirrors.ukfast.co.uk/sites/ftp.mysql.com/Downloads/ \
+	ftp://mirrors.ukfast.co.uk/ftp.mysql.com/Downloads/ \
+	http://www.mirrorservice.org/sites/ftp.mysql.com/Downloads/ \
+	ftp://ftp.mirrorservice.org/sites/ftp.mysql.com/Downloads/ \
+	http://mysql.serenitynet.com/Downloads/ \
+	ftp://ftp.mysql.serenitynet.com/Downloads/ \
+	http://mysql.mirror.rafal.ca/Downloads/ \
+	ftp://mysql.mirror.rafal.ca/pub/mysql/Downloads/ \
+	http://mirror.csclub.uwaterloo.ca/mysql/Downloads/ \
+	ftp://mirror.csclub.uwaterloo.ca/mysql/Downloads/ \
+	http://mirror.trouble-free.net/mysql_mirror/Downloads/ \
+	http://mysql.llarian.net/Downloads/ \
+	ftp://mysql.llarian.net/pub/mysqlDownloads/ \
+	http://mysql.mirrors.hoobly.com/Downloads/ \
+	http://mysql.osuosl.org/Downloads/ \
+	ftp://ftp.osuosl.org/pub/mysql/Downloads/ \
+	http://mysql.mirror.redwire.net/Downloads/ \
+	ftp://mysql.mirror.redwire.net/pub/mysql/Downloads/ \
+	http://mirror.x10.com/mirror/mysql/Downloads/ \
+	ftp://mirror.x10.com/mysql/Downloads/ \
+	ftp://mirror.anl.gov/pub/mysql/Downloads/ \
+	http://mysql.mirrors.pair.com/Downloads/ \
+	http://mirror.services.wisc.edu/mysql/Downloads/ \
+	ftp://mirror.services.wisc.edu/mirrors/mysql/Downloads/ \
+	http://mirrors.24-7-solutions.net/pub/mysql/Downloads/ \
+	ftp://mirrors.24-7-solutions.net/pub/mysql/Downloads/ \
+	http://mysql.he.net/Downloads/ \
+	http://mysql.localhost.net.ar/Downloads/ \
+	http://mysql.patan.com.ar/Downloads/ \
+	http://mysql.cce.usp.br/Downloads/ \
+	ftp://mysql.cce.usp.br/mysqlDownloads/ \
+	http://mysql.mirrors.adc.am/Downloads/ \
+	http://mysql.mirrors.arminco.com/Downloads/ \
+	http://mysql.spd.co.il/Downloads/ \
+	http://mirror.mirimar.net/mysql/Downloads/ \
+	http://ftp.iij.ad.jp/pub/db/mysql/Downloads/ \
+	ftp://ftp.iij.ad.jp/pub/db/mysql/Downloads/ \
+	http://mirror.pakistani.org/mysql/Downloads/ \
+	ftp://mirror.pakistani.org/pub/mysql/Downloads/ \
+	http://mysql.byungsoo.net/Downloads/ \
+	ftp://mysql.byungsoo.net/pub/mysql/Downloads/ \
+	http://mysql.oss.eznetsols.org/Downloads/ \
+	ftp://ftp.oss.eznetsols.org/mysql/Downloads/ \
+	http://mysql.cs.pu.edu.tw/Downloads/ \
+	ftp://ftp.cs.pu.edu.tw/Unix/mysql/Downloads/ \
+	http://mysql.isu.edu.tw/Downloads/ \
+	http://mysql.ntu.edu.tw/Downloads/ \
+	ftp://ftp.ntu.edu.tw/pub/MySQL/Downloads/ \
+	http://mysql.cdpa.nsysu.edu.tw/Downloads/ \
+	ftp://mysql.cdpa.nsysu.edu.tw/Unix/Database/MySQL/Downloads/ \
+	http://mirror-fpt-telecom.fpt.net/mysql/Downloads/ \
+	ftp://mirror-fpt-telecom.fpt.net/mirror/mysql/Downloads/ \
+	http://mysql.mirror.ac.za/Downloads/ \
+	ftp://mysql.mirror.ac.za/Downloads/ \
+	http://mysql.inspire.net.nz/Downloads/ \
+	ftp://mysql.inspire.net.nz/mysql/Downloads/ \
 
 MASTER_SITE_DEBIAN+= \
 	http://ftp.debian.org/debian/ \
@@ -289,183 +410,330 @@ MASTER_SITE_IFARCHIVE+= \
 	http://ifarchive.heanet.ie/if-archive/ \
 	http://ifarchive.giga.or.at/if-archive/
 
-### PGSQL list was last updated on 20080109
+### PGSQL list was last updated on 20080823
 MASTER_SITE_PGSQL+=	\
 	ftp://ftp.ar.postgresql.org/pub/mirrors/postgresql/ \
+	ftp://ftp2.au.postgresql.org/pub/postgresql/ \
+	http://ftp.at.postgresql.org/db/www.postgresql.org/pub/ \
 	ftp://ftp.at.postgresql.org/db/www.postgresql.org/pub/ \
-	ftp://ftp.au.postgresql.org/pub/postgresql/ \
-	ftp://ftp.ba.postgresql.org/pub/postgresql/ \
+	http://ftp.be.postgresql.org/postgresql/ \
 	ftp://ftp.be.postgresql.org/postgresql/ \
-	ftp://ftp.ch.postgresql.org/mirror/postgresql/ \
-	ftp://ftp.cl.postgresql.org/postgresql/ \
+	http://ftp2.be.postgresql.org/ \
+	ftp://ftp2.be.postgresql.org/pub/postgresql/ \
+	ftp://ftp.ba.postgresql.org/pub/postgresql/ \
+	http://ftp2.br.postgresql.org/postgresql/ \
+	ftp://ftp2.br.postgresql.org/postgresql/ \
+	ftp://ftp3.bg.postgresql.org/postgresql/ \
+	ftp://ftp5.ca.postgresql.org/mirrors/postgresql/ \
 	ftp://ftp.cn.postgresql.org/pub/postgresql/ \
+	http://ftp.cz.postgresql.org/ \
 	ftp://ftp.cz.postgresql.org/pgsql/ \
-	ftp://ftp.de.postgresql.org/mirror/postgresql/ \
+	http://ftp2.cz.postgresql.org/pub/postgresql/ \
+	ftp://ftp2.cz.postgresql.org/pub/postgresql/ \
+	http://ftp.dk.postgresql.org/postgresql/ \
 	ftp://ftp.dk.postgresql.org/postgresql/ \
+	http://ftp.ee.postgresql.org/pub/postgresql/ \
 	ftp://ftp.ee.postgresql.org/pub/postgresql/ \
 	ftp://ftp.fi.postgresql.org/pub/postgresql/ \
+	http://ftp3.fr.postgresql.org/pub/postgresql/ \
+	ftp://ftp3.fr.postgresql.org/pub/postgresql/ \
+	http://ftp4.fr.postgresql.org/pub/mirrors/postgresql/ \
+	ftp://ftp4.fr.postgresql.org/pub/mirrors/postgresql/ \
 	ftp://ftp.fr.postgresql.org/ \
-	ftp://ftp.gr.postgresql.org/pub/databases/postgresql/ \
-	ftp://ftp.hk.postgresql.org/postgresql/ \
-	ftp://ftp.ie.postgresql.org/mirrors/ftp.postgresql.org/pub/ \
-	ftp://ftp.il.postgresql.org/ftp.postgresql.org/ \
-	ftp://ftp.is.postgresql.org/pub/postgresql/ \
-	ftp://ftp.jp.postgresql.org/ \
-	ftp://ftp.kr.postgresql.org/postgresql/ \
-	ftp://ftp.lt.postgresql.org/ \
-	ftp://ftp.lv.postgresql.org/mirrors/ftp.postgresql.org/ \
-	ftp://ftp.my.postgresql.org/pub/postgresql/ \
-	ftp://ftp.nl.postgresql.org:21/pub/mirror/postgresql/ \
-	ftp://ftp.no.postgresql.org/pub/databases/postgresql/ \
-	ftp://ftp.nz.postgresql.org/postgresql/ \
-	ftp://ftp.pt.postgresql.org/pub/postgresql/ \
-	ftp://ftp.ru.postgresql.org/pub/mirrors/pgsql/ \
-	ftp://ftp.se.postgresql.org/pub/databases/relational/postgresql/ \
-	ftp://ftp.si.postgresql.org/pub/mirrors/postgresql/ \
-	ftp://ftp.tr.postgresql.org/pub/PostgreSQL/ \
-	ftp://ftp.tw.postgresql.org/pub/postgresql/ \
-	ftp://ftp.ua.postgresql.org/pub/mirrors/postgresql.org/ \
-	ftp://ftp.za.postgresql.org/mirror/ftp.postgresql.org/ \
+	http://ftp.de.postgresql.org/mirror/postgresql/ \
+	ftp://ftp.de.postgresql.org/mirror/postgresql/ \
+	http://ftp3.de.postgresql.org/pub/Mirrors/ftp.postgresql.org/ \
+	ftp://ftp3.de.postgresql.org/pub/Mirrors/ftp.postgresql.org/ \
+	http://ftp8.de.postgresql.org/pub/misc/pgsql/ \
+	ftp://ftp8.de.postgresql.org/pub/misc/pgsql/ \
+	ftp://ftp7.de.postgresql.org/pub/ftp.postgresql.org/ \
+	ftp://ftp9.de.postgresql.org/unix/databases/postgresql/ \
 	ftp://ftp10.de.postgresql.org/pub/mirror/postgresql/ \
+	http://ftp.gr.postgresql.org/pub/databases/postgresql/ \
+	ftp://ftp.gr.postgresql.org/pub/databases/postgresql/ \
+	http://ftp2.gr.postgresql.org/pub/databases/postgresql/ \
+	ftp://ftp2.gr.postgresql.org/pub/databases/postgresql/ \
+	http://ftp3.gr.postgresql.org/mirrors/postgresql/ \
+	ftp://ftp3.gr.postgresql.org/mirrors/postgresql/ \
+	ftp://ftp.is.postgresql.org/pub/postgresql/ \
+	http://ftp9.id.postgresql.org/ \
+	ftp://ftp9.id.postgresql.org/postgresql/ \
+	http://ftp.ie.postgresql.org/mirrors/ftp.postgresql.org/pub/ \
+	ftp://ftp.ie.postgresql.org/mirrors/ftp.postgresql.org/pub/ \
+	http://ftp2.ie.postgresql.org/mirrors/ftp.postgresql.org/ \
+	ftp://ftp2.ie.postgresql.org/mirrors/ftp.postgresql.org/ \
+	ftp://ftp.il.postgresql.org/ftp.postgresql.org/ \
+	http://ftp2.it.postgresql.org/mirrors/postgres/ \
+	ftp://ftp2.it.postgresql.org/mirrors/postgres/ \
+	http://ftp7.it.postgresql.org/pub/unix/postgres/ \
+	ftp://ftp7.it.postgresql.org/pub/unix/postgres/ \
+	ftp://ftp6.it.postgresql.org/pub/PostgreSQL/ \
+	http://ftp2.jp.postgresql.org/pub/postgresql/ \
+	http://ftp2.jp.postgresql.org/pub/postgresql/ \
+	ftp://ftp2.jp.postgresql.org/pub/postgresql/ \
+	http://ftp3.jp.postgresql.org/pub/db/postgresql/ \
+	ftp://ftp3.jp.postgresql.org/pub/db/postgresql/ \
+	ftp://ftp.kr.postgresql.org/postgresql/ \
+	ftp://ftp2.kr.postgresql.org/pub/postgresql/ \
+	http://ftp2.lv.postgresql.org/ \
+	ftp://ftp2.lv.postgresql.org/postgresql/ \
+	ftp://ftp.lv.postgresql.org/mirrors/ftp.postgresql.org/ \
+	http://ftp2.lt.postgresql.org/pub/PostgreSQL/ \
+	ftp://ftp2.lt.postgresql.org/pub/PostgreSQL/ \
+	ftp://ftp.lt.postgresql.org/ \
+	ftp://ftp.my.postgresql.org/pub/postgresql/ \
+	http://ftp2.nl.postgresql.org/ \
+	ftp://ftp2.nl.postgresql.org/mirror/postgresql/ \
+	http://ftp4.nl.postgresql.org/ \
+	ftp://ftp4.nl.postgresql.org/postgresql.zeelandnet.nl/ \
+	ftp://ftp.nl.postgresql.org:21/pub/mirror/postgresql/ \
+	ftp://ftp.nz.postgresql.org/postgresql/ \
+	ftp://ftp.no.postgresql.org/pub/databases/postgresql/ \
+	http://ftp6.pl.postgresql.org/pub/postgresql/ \
+	ftp://ftp6.pl.postgresql.org/pub/postgresql/ \
+	http://ftp8.pl.postgresql.org/pub/postgresql/ \
+	ftp://ftp8.pl.postgresql.org/pub/postgresql/ \
+	http://ftp9.pl.postgresql.org/pub/mirrors/ftp.postgresql.org/ \
+	ftp://ftp9.pl.postgresql.org/pub/mirrors/ftp.postgresql.org/ \
+	ftp://ftp7.pl.postgresql.org/pub/mirror/ftp.postgresql.org/ \
+	http://ftp.pt.postgresql.org/pub/postgresql/ \
+	ftp://ftp.pt.postgresql.org/pub/postgresql/ \
+	http://ftp6.ro.postgresql.org/pub/mirrors/ftp.postgresql.org/ \
+	ftp://ftp6.ro.postgresql.org/pub/mirrors/ftp.postgresql.org/ \
+	ftp://ftp7.ro.postgresql.org/1/PostgreSQL/ \
+	ftp://ftp.ru.postgresql.org/pub/mirrors/pgsql/ \
+	ftp://ftp2.ru.postgresql.org/pub/databases/postgresql/ \
+	ftp://ftp3.ru.postgresql.org/pub/mirror/postgresql/pub/ \
+	ftp://ftp2.sk.postgresql.org/pub/postgresql/ \
+	ftp://ftp.si.postgresql.org/pub/mirrors/postgresql/ \
+	ftp://ftp.za.postgresql.org/mirror/ftp.postgresql.org/ \
+	http://ftp5.es.postgresql.org/mirror/postgresql/ \
+	ftp://ftp5.es.postgresql.org/mirror/postgresql/ \
+	http://ftp.se.postgresql.org/pub/databases/relational/postgresql/ \
+	ftp://ftp.se.postgresql.org/pub/databases/relational/postgresql/ \
+	http://ftp2.ch.postgresql.org/pub/mirrors/postgresql/ \
+	ftp://ftp2.ch.postgresql.org/pub/mirrors/postgresql/ \
+	ftp://ftp.ch.postgresql.org/mirror/postgresql/ \
+	http://ftp3.tw.postgresql.org/postgresql/ \
+	ftp://ftp3.tw.postgresql.org/postgresql/ \
+	http://ftp4.tw.postgresql.org/pub/postgresql/ \
+	ftp://ftp4.tw.postgresql.org/pub/postgresql/ \
+	ftp://ftp.tw.postgresql.org/pub/postgresql/ \
+	ftp://ftp.tr.postgresql.org/pub/PostgreSQL/ \
+	http://ftp7.us.postgresql.org/pub/postgresql/ \
+	ftp://ftp7.us.postgresql.org/pub/postgresql/ \
+	http://ftp9.us.postgresql.org/pub/mirrors/postgresql/ \
+	ftp://ftp9.us.postgresql.org/pub/mirrors/postgresql/ \
+	ftp://ftp5.us.postgresql.org/pub/PostgreSQL/ \
 	ftp://ftp10.us.postgresql.org/pub/postgresql/ \
 	ftp://ftp11.us.postgresql.org/pub/mirrors/postgresql/ \
-	ftp://ftp12.us.postgresql.org/postgresql/ \
-	ftp://ftp2.au.postgresql.org/pub/postgresql/ \
-	ftp://ftp2.be.postgresql.org/pub/postgresql/ \
-	ftp://ftp2.br.postgresql.org/postgresql/ \
-	ftp://ftp2.ch.postgresql.org/pub/mirrors/postgresql/ \
-	ftp://ftp2.cz.postgresql.org/pub/postgresql/ \
-	ftp://ftp2.gr.postgresql.org/pub/databases/postgresql/ \
-	ftp://ftp2.ie.postgresql.org/mirrors/ftp.postgresql.org/ \
-	ftp://ftp2.it.postgresql.org/mirrors/postgres/ \
-	ftp://ftp2.jp.postgresql.org/pub/postgresql/ \
-	ftp://ftp2.kr.postgresql.org/pub/postgresql/ \
-	ftp://ftp2.lv.postgresql.org/postgresql/ \
-	ftp://ftp2.nl.postgresql.org/mirror/postgresql/ \
-	ftp://ftp2.sk.postgresql.org/pub/postgresql/ \
-	ftp://ftp2.uk.postgresql.org/sites/ftp.postgresql.org/ \
-	ftp://ftp3.de.postgresql.org/pub/Mirrors/ftp.postgresql.org/ \
-	ftp://ftp3.fr.postgresql.org/pub/postgresql/ \
-	ftp://ftp3.jp.postgresql.org/pub/db/postgresql/ \
-	ftp://ftp3.ru.postgresql.org/pub/mirror/postgresql/pub/ \
-	ftp://ftp3.tw.postgresql.org/pub/Unix/Database/postgresql/ \
-	ftp://ftp4.fr.postgresql.org/pub/mirrors/postgresql/ \
-	ftp://ftp4.nl.postgresql.org/postgresql.zeelandnet.nl/ \
-	ftp://ftp4.tw.postgresql.org/pub/postgresql/ \
-	ftp://ftp4.us.postgresql.org/pub/postgresql/ \
-	ftp://ftp5.ca.postgresql.org/mirrors/postgresql/ \
-	ftp://ftp5.es.postgresql.org/mirror/postgresql/ \
-	ftp://ftp5.us.postgresql.org/pub/PostgreSQL/ \
-	ftp://ftp6.it.postgresql.org/pub/PostgreSQL/ \
-	ftp://ftp6.pl.postgresql.org/pub/postgresql/ \
-	ftp://ftp6.ro.postgresql.org/pub/mirrors/ftp.postgresql.org/ \
-	ftp://ftp7.de.postgresql.org/pub/ftp.postgresql.org/ \
-	ftp://ftp7.it.postgresql.org/pub/unix/postgres/ \
-	ftp://ftp7.pl.postgresql.org/pub/mirror/ftp.postgresql.org/ \
-	ftp://ftp7.ro.postgresql.org/1/PostgreSQL/ \
-	ftp://ftp7.ru.postgresql.org/pub/postgresql/ \
-	ftp://ftp7.tr.postgresql.org/pub/postgresql/ \
-	ftp://ftp7.us.postgresql.org/pub/postgresql/ \
-	ftp://ftp8.de.postgresql.org/pub/misc/pgsql/ \
-	ftp://ftp8.pl.postgresql.org/pub/postgresql/ \
-	ftp://ftp8.us.postgresql.org/postgresql/ \
-	ftp://ftp9.de.postgresql.org/unix/databases/postgresql/ \
-	ftp://ftp9.id.postgresql.org/postgresql/ \
-	ftp://ftp9.pl.postgresql.org/pub/mirrors/ftp.postgresql.org/ \
-	ftp://ftp9.us.postgresql.org/pub/mirrors/postgresql/ \
-	http://ftp.at.postgresql.org/db/www.postgresql.org/pub/ \
-	http://ftp.be.postgresql.org/postgresql/ \
-	http://ftp.cz.postgresql.org/ \
-	http://ftp.de.postgresql.org/mirror/postgresql/ \
-	http://ftp.dk.postgresql.org/postgresql/ \
-	http://ftp.ee.postgresql.org/pub/postgresql/ \
-	http://ftp.gr.postgresql.org/pub/databases/postgresql/ \
-	http://ftp.ie.postgresql.org/mirrors/ftp.postgresql.org/pub/ \
-	http://ftp.pt.postgresql.org/pub/postgresql/ \
-	http://ftp.se.postgresql.org/pub/databases/relational/postgresql/ \
-	http://ftp2.au.postgresql.org/pub/postgresql/ \
-	http://ftp2.be.postgresql.org/ \
-	http://ftp2.br.postgresql.org/postgresql/ \
-	http://ftp2.ch.postgresql.org/pub/mirrors/postgresql/ \
-	http://ftp2.cz.postgresql.org/pub/postgresql/ \
-	http://ftp2.gr.postgresql.org/pub/databases/postgresql/ \
-	http://ftp2.ie.postgresql.org/mirrors/ftp.postgresql.org/ \
-	http://ftp2.it.postgresql.org/mirrors/postgres/ \
-	http://ftp2.jp.postgresql.org/pub/postgresql/ \
-	http://ftp2.lv.postgresql.org/ \
-	http://ftp2.nl.postgresql.org/ \
+	ftp://ftp2.ua.postgresql.org/pub/postgresql/ \
+	ftp://ftp3.ua.postgresql.org/pub/mirrors/postgresql/ \
 	http://ftp2.uk.postgresql.org/sites/ftp.postgresql.org/ \
-	http://ftp3.de.postgresql.org/pub/Mirrors/ftp.postgresql.org/ \
-	http://ftp3.fr.postgresql.org/pub/postgresql/ \
-	http://ftp3.jp.postgresql.org/pub/db/postgresql/ \
-	http://ftp4.fr.postgresql.org/pub/mirrors/postgresql/ \
-	http://ftp4.nl.postgresql.org/ \
-	http://ftp4.tw.postgresql.org/ \
-	http://ftp5.es.postgresql.org/mirror/postgresql/ \
-	http://ftp6.pl.postgresql.org/pub/postgresql/ \
-	http://ftp6.ro.postgresql.org/pub/mirrors/ftp.postgresql.org/ \
-	http://ftp7.it.postgresql.org/pub/unix/postgres/ \
-	http://ftp7.ru.postgresql.org/pub/postgresql/ \
-	http://ftp7.us.postgresql.org/pub/postgresql/ \
-	http://ftp8.de.postgresql.org/pub/misc/pgsql/ \
-	http://ftp8.pl.postgresql.org/pub/postgresql/ \
-	http://ftp8.us.postgresql.org/postgresql/ \
-	http://ftp9.id.postgresql.org/ \
-	http://ftp9.pl.postgresql.org/pub/mirrors/ftp.postgresql.org/ \
-	http://ftp9.us.postgresql.org/pub/mirrors/postgresql/
+	ftp://ftp2.uk.postgresql.org/sites/ftp.postgresql.org/ \
+	ftp://ftp.vn.postgresql.org/mirror/postgresql/
 
 MASTER_SITE_GENTOO+= \
-	http://distro.ibiblio.org/pub/linux/distributions/gentoo/ \
-	http://csociety-ftp.ecn.purdue.edu/pub/gentoo/ \
-	http://gentoo.mirrors.pair.com/ \
+	http://distfiles.gentoo.org/ \
+	ftp://gentoo.arcticnetwork.ca/pub/gentoo/ \
+	http://gentoo.arcticnetwork.ca/source/ \
+	ftp://mirrors.tera-byte.com/pub/gento/ \
+	http://gentoo.mirrors.tera-byte.com/ \
+	ftp://mirror.csclub.uwaterloo.ca/gentoo-distfiles/ \
+	http://mirror.csclub.uwaterloo.ca/gentoo-distfiles/ \
+	http://mirror.mcs.anl.gov/pub/gentoo/ \
+	ftp://mirror.mcs.anl.gov/pub/gentoo/ \
+	http://gentoo.binarycompass.org/ \
+	ftp://gentoo.chem.wisc.edu/gentoo/ \
 	http://gentoo.chem.wisc.edu/gentoo/ \
-	http://adelie.polymtl.ca/ \
-	http://mirrors.tds.net/gentoo/ \
-	http://ftp.belnet.be/mirror/rsync.gentoo.org/gentoo/ \
-	http://ftp.easynet.nl/mirror/gentoo/ \
-	http://ftp.snt.utwente.nl/pub/os/linux/gentoo/ \
-	http://trumpetti.atm.tut.fi/gentoo/ \
-	http://ds.thn.htu.se/linux/gentoo/ \
-	http://sunsite.cnlab-switch.ch/ftp/mirror/gentoo/ \
-	http://linux.rz.ruhr-uni-bochum.de/download/gentoo-mirror/ \
-	http://mirrors.sec.informatik.tu-darmstadt.de/gentoo/ \
-	http://ftp.uni-erlangen.de/pub/mirrors/gentoo/ \
-	http://darkstar.ist.utl.pt/gentoo/ \
-	http://ftp.caliu.info/pub/gentoo/ \
-	http://gentoo.inode.at/ \
-	http://ftp.rhnet.is/pub/gentoo/ \
-	http://gentoo.mirror.sdv.fr/ \
-	http://public.planetmirror.com/pub/gentoo/ \
-	http://ftp.gentoo.or.kr/ \
-	http://mirror.gentoo.gr.jp/ \
-	http://gentoo.gg3.net/ \
-	http://gentoo.kems.net/ \
-	ftp://ftp.gtlib.cc.gatech.edu/pub/gentoo/ \
-	ftp://csociety-ftp.ecn.purdue.edu/pub/gentoo/ \
-	ftp://mirror.iawnet.sandia.gov/pub/gentoo/ \
-	ftp://ftp.ussg.iu.edu/pub/linux/gentoo/ \
-	ftp://ftp.ucsb.edu/pub/mirrors/linux/gentoo/ \
+	http://mirrors.cs.wmich.edu/gento/ \
+	http://mirror.datapipe.net/gento/ \
+	ftp://mirror.datapipe.net/gento/ \
+	http://gentoo.mirrors.easynews.com/linux/gentoo/ \
+	http://mirror.fslutd.org/linux/distributions/gentoo/ \
+	ftp://mirror.fslutd.org/linux/distributions/gentoo/ \
+	ftp://ftp.gtlib.gatech.edu/pub/gento/ \
+	http://www.gtlib.gatech.edu/pub/gento/ \
+	http://gentoo.mirrors.hoobly.com/ \
+	ftp://distro.ibiblio.org/pub/linux/distributions/gentoo/ \
+	http://distro.ibiblio.org/pub/linux/distributions/gentoo/ \
+	ftp://ftp.ussg.iu.edu/pub/linux/gento/ \
+	ftp://lug.mtu.edu/gentoo/ \
+	http://lug.mtu.edu/gentoo/ \
+	http://gentoo.netnitco.net/ \
+	ftp://gentoo.netnitco.net/pub/mirrors/gentoo/source/ \
+	http://open-systems.ufl.edu/mirrors/gento/ \
+	http://gentoo.osuosl.org/ \
+	http://gentoo.mirrors.pair.com/ \
 	ftp://gentoo.mirrors.pair.com/ \
-	ftp://mirrors.tds.net/gentoo/ \
-	ftp://ftp.belnet.be/mirror/rsync.gentoo.org/gentoo/ \
-	ftp://ftp.easynet.nl/mirror/gentoo/ \
-	ftp://ftp.snt.utwente.nl/pub/os/linux/gentoo/ \
-	ftp://trumpetti.atm.tut.fi/gentoo/ \
-	ftp://sunsite.cnlab-switch.ch/mirror/gentoo/ \
-	ftp://ftp.join.uni-muenster.de/pub/linux/distributions/gentoo/ \
-	ftp://ftp6.uni-muenster.de/pub/linux/distributions/gentoo/ \
-	ftp://ftp.tu-clausthal.de/pub/linux/gentoo/ \
-	ftp://sunsite.informatik.rwth-aachen.de/pub/Linux/gentoo/ \
-	ftp://linux.rz.ruhr-uni-bochum.de/gentoo-mirror/ \
-	ftp://ftp.uni-erlangen.de/pub/mirrors/gentoo/ \
-	ftp://darkstar.ist.utl.pt/pub/gentoo/ \
-	ftp://ftp.caliu.info/pub/gentoo/ \
+	ftp://mirror.iawnet.sandia.gov/pub/gentoo/ \
+	http://gentoo.llarian.net/ \
+	ftp://gentoo.llarian.net/pub/gento/ \
+	http://gentoo.mirrors.tds.net/gento/ \
+	ftp://gentoo.mirrors.tds.net/gento/ \
+	ftp://ftp.ucsb.edu/pub/mirrors/linux/gentoo/ \
+	http://ftp.ucsb.edu/pub/mirrors/linux/gentoo/ \
+	http://cudlug.cudenver.edu/gentoo/ \
+	http://gentoo.cites.uiuc.edu/pub/gentoo/ \
+	ftp://gentoo.cites.uiuc.edu/pub/gentoo/ \
+	http://mirror.usu.edu/mirrors/gentoo/ \
+	ftp://ftp.wallawalla.edu/pub/mirrors/ftp.gentoo.or/ \
+	http://gentoo.localhost.net.ar/ \
+	ftp://mirrors.localhost.net.ar/pub/mirrors/gento/ \
+	http://www.las.ic.unicamp.br/pub/gentoo/ \
+	ftp://ftp.las.ic.unicamp.br/pub/gentoo/ \
+	http://gentoo.inode.at/ \
 	ftp://gentoo.inode.at/source/ \
-	ftp://ftp.rhnet.is/pub/gentoo/ \
+	http://gd.tuwien.ac.at/opsys/linux/gentoo/ \
+	ftp://gd.tuwien.ac.at/opsys/linux/gentoo/ \
+	http://mirror.bih.net.ba/gentoo/ \
+	ftp://mirror.bih.net.ba/gentoo/ \
+	http://distfiles.gentoo.bg/ \
+	http://ftp.gentoo.bg/ \
+	http://mirrors.ludost.net/gentoo/ \
+	ftp://mirrors.ludost.net/gentoo/ \
+	http://gentoo.supp.name/ \
+	http://ftp.fi.muni.cz/pub/linux/gentoo/ \
+	ftp://ftp.fi.muni.cz/pub/linux/gentoo/ \
+	http://gentoo.mirror.dkm.cz/pub/gentoo/ \
+	ftp://gentoo.mirror.dkm.cz/pub/gentoo/ \
+	http://gentoo.mirror.web4u.cz/ \
+	ftp://gentoo.mirror.web4u.cz/ \
+	http://mirror.uni-c.dk/pub/gentoo/ \
+	ftp://ftp.klid.dk/gentoo/ \
+	http://ftp.klid.dk/ftp/gentoo/ \
+	http://ftp.linux.ee/pub/gentoo/distfiles/ \
+	ftp://ftp.linux.ee/pub/gentoo/distfiles/ \
+	http://trumpetti.atm.tut.fi/gentoo/ \
+	ftp://trumpetti.atm.tut.fi/gentoo/ \
+	ftp://ftp.first-world.info/ \
+	http://ftp.first-world.info/ \
+	ftp://ftp.free.fr/mirrors/ftp.gentoo.org/ \
+	ftp://gentoo.imj.fr/pub/gentoo/ \
+	http://mirror.ovh.net/gentoo-distfiles/ \
+	ftp://mirror.ovh.net/gentoo-distfiles/ \
+	ftp://de-mirror.org/distro/gentoo/ \
+	http://de-mirror.org/distro/gentoo/ \
+	ftp://ftp.wh2.tu-dresden.de/pub/mirrors/gento/ \
+	ftp://ftp.gentoo.mesh-solutions.com/gentoo/ \
+	http://gentoo.mneisen.org/ \
+	http://linux.rz.ruhr-uni-bochum.de/download/gentoo-mirror/ \
+	ftp://linux.rz.ruhr-uni-bochum.de/gentoo-mirror/ \
+	ftp://sunsite.informatik.rwth-aachen.de/pub/Linux/gento/ \
+	http://mirrors.sec.informatik.tu-darmstadt.de/gentoo/ \
+	ftp://pandemonium.tiscali.de/pub/gentoo/ \
+	ftp://ftp.tu-clausthal.de/pub/linux/gentoo/ \
+	http://ftp.uni-erlangen.de/pub/mirrors/gento/ \
+	ftp://ftp.uni-erlangen.de/pub/mirrors/gento/ \
+	http://ftp6.uni-erlangen.de/pub/mirrors/gento/ \
+	ftp://ftp6.uni-erlangen.de/pub/mirrors/gento/ \
+	ftp://ftp.join.uni-muenster.de/pub/linux/distributions/gento/ \
+	http://ftp-stud.fht-esslingen.de/pub/Mirrors/gentoo/ \
+	ftp://ftp-stud.fht-esslingen.de/pub/Mirrors/gentoo/ \
+	ftp://ftp.ipv6.uni-muenster.de/pub/linux/distributions/gento/ \
+	ftp://ftp6.uni-muenster.de/pub/linux/distributions/gento/ \
 	ftp://files.gentoo.gr/ \
-	ftp://ftp.planetmirror.com/pub/gentoo/ \
-	ftp://ftp.ecc.u-tokyo.ac.jp/GENTOO/ \
-	ftp://gentoo.kems.net/pub/mirrors/gentoo/
+	http://files.gentoo.gr/ \
+	ftp://ftp.ntua.gr/pub/linux/gentoo/ \
+	http://ftp.ntua.gr/pub/linux/gentoo/ \
+	ftp://ftp.cc.uoc.gr/mirrors/linux/gentoo/ \
+	http://ftp.cc.uoc.gr/mirrors/linux/gentoo/ \
+	ftp://ftp.uoi.gr/mirror/OS/gentoo/ \
+	http://ftp.uoi.gr/mirror/OS/gentoo/ \
+	http://gentoo.inf.elte.hu/ \
+	ftp://gentoo.inf.elte.hu/ \
+	http://ftp.rhnet.is/pub/gentoo/ \
+	ftp://ftp.rhnet.is/pub/gentoo/ \
+	http://ftp.heanet.ie/pub/gentoo/ \
+	ftp://ftp.heanet.ie/pub/gentoo/ \
+	http://mirror.hamakor.org.il/pub/mirrors/gentoo/ \
+	ftp://ftp.unina.it/pub/linux/distributions/gento/ \
+	http://gentoo.tups.lv/source/ \
+	http://mirror.muntinternet.net/pub/gentoo/ \
+	ftp://mirror.muntinternet.net/pub/gentoo/ \
+	http://gentoo.tiscali.nl/ \
+	ftp://gentoo.tiscali.nl/pub/mirror/gentoo/ \
+	http://ftp.snt.utwente.nl/pub/os/linux/gento/ \
+	ftp://ftp.snt.utwente.nl/pub/os/linux/gento/ \
+	http://ftp.snt.ipv6.utwente.nl/pub/os/linux/gentoo/ \
+	ftp://ftp.snt.ipv6.utwente.nl/pub/os/linux/gentoo/ \
+	http://mirror.gentoo.no/ \
+	http://gentoo.zie.pg.gda.pl/ \
+	ftp://mirror.icis.pcz.pl/gentoo/ \
+	http://gentoo.prz.rzeszow.pl/ \
+	http://gentoo.po.opole.pl/ \
+	ftp://gentoo.po.opole.pl/ \
+	http://ftp.vectranet.pl/gentoo/ \
+	ftp://ftp.vectranet.pl/gentoo/ \
+	http://gentoo.mirror.pw.edu.pl/ \
+	http://darkstar.ist.utl.pt/gentoo/ \
+	ftp://darkstar.ist.utl.pt/pub/gentoo/ \
+	ftp://ftp.rnl.ist.utl.pt/pub/gentoo/ \
+	ftp://cesium.di.uminho.pt/pub/gentoo/ \
+	http://cesium.di.uminho.pt/pub/gentoo/ \
+	ftp://ftp.dei.uc.pt/pub/linux/gentoo/ \
+	http://ftp.dei.uc.pt/pub/linux/gentoo/ \
+	http://mirrors.evolva.ro/gentoo/ \
+	ftp://mirrors.evolva.ro/gentoo/ \
+	http://ftp.roedu.net/pub/mirrors/gentoo.org/ \
+	ftp://ftp.roedu.net/pub/mirrors/gentoo.org/ \
+	ftp://ftp.romnet.org/gentoo/ \
+	http://ftp.romnet.org/gentoo/ \
+	http://mirrors.xservers.ro/gentoo/ \
+	http://mirror.yandex.ru/gentoo-distfiles/ \
+	ftp://mirror.yandex.ru/gentoo-distfiles/ \
+	http://gentoo.ynet.sk/pu/ \
+	http://gentoo-euetib.upc.es/mirror/gentoo/ \
+	http://ftp.udc.es/gentoo/ \
+	ftp://ftp.udc.es/gentoo/ \
+	ftp://ftp.ds.karen.hj.se/gentoo/ \
+	http://ftp.ds.karen.hj.se/gentoo/ \
+	ftp://ftp.ing.umu.se/linux/gentoo/ \
+	http://ftp.ing.umu.se/linux/gentoo/ \
+	ftp://mirror.mdfnet.se/gento/ \
+	http://mirror.mdfnet.se/mirror/gento/ \
+	http://mirror.switch.ch/ftp/mirror/gentoo/ \
+	ftp://mirror.switch.ch/mirror/gentoo/ \
+	http://ftp.ankara.edu.tr/gentoo/ \
+	ftp://ftp.ankara.edu.tr/gentoo/ \
+	ftp://mirror.bytemark.co.uk/gentoo/ \
+	http://mirror.bytemark.co.uk/gentoo/ \
+	http://mirror.qubenet.net/mirror/gentoo/ \
+	ftp://mirror.qubenet.net/mirror/gentoo/ \
+	http://www.mirrorservice.org/sites/www.ibiblio.org/gentoo/ \
+	ftp://ftp.mirrorservice.org/sites/www.ibiblio.org/gentoo/ \
+	http://gentoo.virginmedia.com/ \
+	ftp://gentoo.virginmedia.com/sites/gento/ \
+	http://mirror.pacific.net.au/linux/Gento/ \
+	ftp://mirror.pacific.net.au/linux/Gento/ \
+	ftp://ftp.swin.edu.au/gento/ \
+	http://ftp.swin.edu.au/gento/ \
+	http://gentoo.channelx.biz/ \
+	http://gentoo.gg3.net/ \
+	ftp://gg3.net/pub/linux/gentoo/ \
+	http://ftp.iij.ad.jp/pub/linux/gentoo/ \
+	ftp://ftp.iij.ad.jp/pub/linux/gentoo/ \
+	http://ftp.jaist.ac.jp/pub/Linux/Gentoo/ \
+	ftp://ftp.jaist.ac.jp/pub/Linux/Gentoo/ \
+	ftp://ftp.ecc.u-tokyo.ac.jp/GENTO/ \
+	http://ftp.daum.net/gentoo/ \
+	ftp://ftp.daum.net/gentoo/ \
+	http://ftp.kaist.ac.kr/pub/gentoo/ \
+	ftp://ftp.kaist.ac.kr/gentoo/ \
+	http://ftp.lecl.net/pub/gentoo/ \
+	ftp://ftp.lecl.net/pub/gentoo/ \
+	http://ftp.twaren.net/Linux/Gentoo/ \
+	ftp://ftp.twaren.net/Linux/Gentoo/ \
+	ftp://ftp.ncnu.edu.tw/Linux/Gentoo/ \
+	http://ftp.ncnu.edu.tw/Linux/Gentoo/ \
+	ftp://gentoo.cs.nctu.edu.tw/gentoo/ \
+	http://gentoo.cs.nctu.edu.tw/gentoo/ \
+	ftp://ftp.cs.pu.edu.tw/Linux/Gentoo/ \
+	http://ftp.cs.pu.edu.tw/Linux/Gentoo/ \
+	http://mirrors.64hosting.com/pub/mirrors/gentoo/ \
+	ftp://mirrors.64hosting.com/pub/mirrors/gentoo/ \
+	http://gentoo.kems.net/ \
+	ftp://gentoo.kems.net/mirrors/gento/
 
 MASTER_SITE_XORG+= \
 	http://xorg.freedesktop.org/releases/individual/ \

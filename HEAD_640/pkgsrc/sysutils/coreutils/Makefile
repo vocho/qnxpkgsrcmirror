@@ -28,6 +28,8 @@ PLIST_VARS+=		hostid
 PLIST.hostid=		yes
 .endif
 
+LIBS.QNX+=	-lnbutil
+
 #CONFIGURE_ARGS+=	--enable-install-program=su
 #.if ${OPSYS} == "NetBSD" ||  ${OPSYS} == "FreeBSD" || \
 #  ${OPSYS} == "OpenBSD"

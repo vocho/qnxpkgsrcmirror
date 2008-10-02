@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.305 2008/04/17 12:45:04 joerg Exp $
+# $NetBSD: Makefile,v 1.309 2008/09/08 08:42:02 he Exp $
 #
 
 COMMENT=	Miscellaneous utilities
@@ -98,7 +98,6 @@ SUBDIR+=	kdeedu3
 SUBDIR+=	kdepim3
 SUBDIR+=	kdeutils3
 SUBDIR+=	kdrill
-SUBDIR+=	kmemaid
 SUBDIR+=	kodos
 SUBDIR+=	koffice
 SUBDIR+=	koffice-l10n-da
@@ -126,6 +125,7 @@ SUBDIR+=	m17n-db
 SUBDIR+=	m17n-docs
 SUBDIR+=	mirmon
 SUBDIR+=	mmv
+SUBDIR+=	mnemosyne
 SUBDIR+=	molden
 SUBDIR+=	most
 SUBDIR+=	mtail
@@ -146,6 +146,7 @@ SUBDIR+=	p5-ControlX10-CM17
 SUBDIR+=	p5-File-MMagic
 SUBDIR+=	p5-File-Tail
 SUBDIR+=	p5-Geo-Coordinates-UTM
+SUBDIR+=	p5-Geo-Mercator
 SUBDIR+=	p5-Geo-Weather
 SUBDIR+=	p5-Geography-Countries
 SUBDIR+=	p5-I18N-LangTags
@@ -154,6 +155,7 @@ SUBDIR+=	p5-Locale-Maketext
 SUBDIR+=	p5-Locale-Maketext-Fuzzy
 SUBDIR+=	p5-Locale-Maketext-Lexicon
 SUBDIR+=	p5-Locale-Maketext-Simple
+SUBDIR+=	p5-Locale-US
 SUBDIR+=	p5-Locale-libintl
 SUBDIR+=	p5-Mac-Macbinary
 SUBDIR+=	p5-Msgcat
@@ -168,7 +170,6 @@ SUBDIR+=	ppower
 SUBDIR+=	proj
 SUBDIR+=	proj-doc
 SUBDIR+=	pty-redir
-SUBDIR+=	pyqt_memaid
 SUBDIR+=	qbrew
 SUBDIR+=	qterm
 SUBDIR+=	reed
@@ -197,6 +198,7 @@ SUBDIR+=	taskjuggler
 SUBDIR+=	tds
 SUBDIR+=	team
 SUBDIR+=	tellico
+SUBDIR+=	teseq
 SUBDIR+=	theme-dirs
 SUBDIR+=	ttyrec
 SUBDIR+=	udfclient
