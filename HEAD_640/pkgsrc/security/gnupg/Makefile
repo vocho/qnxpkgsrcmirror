@@ -42,13 +42,6 @@ CONFIGURE_ARGS+=	--disable-gnupg-iconv
 CONFIGURE_ARGS+=	--disable-asm
 .endif
 
-.if ${OPSYS} == "QNX"
-CONFIGURE_ARGS+=	--with-mailprog=/usr/pkg/libexec/sendmail/sendmail
-USE_TOOLS+=             automake
-pre-configure:
-	cd ${WRKSRC} && aclocal -I ${WRKSRC}/m4 && autoconf
-.endif
-
 # XXX: still needed?
 .if ${OPSYS} == "FreeBSD"
 SUBST_CLASSES+=	    fixme
