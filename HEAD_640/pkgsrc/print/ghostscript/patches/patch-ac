@@ -1,19 +1,14 @@
 $NetBSD$
 
---- contrib/opvp/gdevopvp.c.orig	2007-09-25 09:31:24.000000000 -0400
+--- contrib/opvp/gdevopvp.c.orig	2008-06-25 12:18:57.000000000 -0400
 +++ contrib/opvp/gdevopvp.c
-@@ -25,9 +25,14 @@
- #include	<stdlib.h>
- #include	<unistd.h>
- #include	<string.h>
-+#ifdef __QNXNTO__
-+#include	<strings.h>	/* str[n]casecmp */
-+#endif
- #include	<locale.h>
- #include	<iconv.h>
+@@ -26,7 +26,9 @@
+ #include <string.h>
+ #include <locale.h>
+ #include <iconv.h>
 +#ifndef __QNXNTO__
- #include	<langinfo.h>
+ #include <langinfo.h>
 +#endif
- #include	<dlfcn.h>
- #include	<sys/types.h>
- #include	<sys/stat.h>
+ #include <dlfcn.h>
+ #include <sys/types.h>
+ #include <sys/stat.h>

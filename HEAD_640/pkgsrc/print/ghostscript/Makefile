@@ -34,12 +34,7 @@ GS_RESOURCEDIR=		${PREFIX}/share/ghostscript/Resource
 
 .include "../../mk/bsd.prefs.mk"
 
-.if ${OPSYS} == "QNX"
-# configure script seems to tickle some ksh quoting bug
-USE_TOOLS+=		bash
-CONFIG_SHELL=		${LOCALBASE}/bin/bash
-WRAPPER_SHELL=		${LOCALBASE}/bin/bash
-.endif
+LIBS.QNX+=	-lsocket
 
 
 .if defined(PAPERSIZE) && (${PAPERSIZE} == "A4" || ${PAPERSIZE} == "a4")
