@@ -231,7 +231,7 @@ buildlink-openssl-des-h:
 .  if defined(PKG_SYSCONFDIR.openssl)
 SSLDIR=	${PKG_SYSCONFDIR.openssl}
 .  elif !empty(USE_BUILTIN.openssl:M[yY][eE][sS])
-.    if ${OPSYS} == "NetBSD"
+.    if ${OPSYS} == "NetBSD" || ${OPSYS} == "QNX"
 SSLDIR=	/etc/openssl
 .    else
 SSLDIR=	/etc/ssl 		# most likely place
