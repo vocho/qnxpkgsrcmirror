@@ -1,4 +1,4 @@
-/*	$NetBSD: audit.c,v 1.8 2008/04/16 00:53:06 joerg Exp $	*/
+/*	$NetBSD: audit.c,v 1.10 2008/10/02 20:46:56 joerg Exp $	*/
 
 #if HAVE_CONFIG_H
 #include "config.h"
@@ -8,7 +8,7 @@
 #include <sys/cdefs.h>
 #endif
 #ifndef lint
-__RCSID("$NetBSD: audit.c,v 1.8 2008/04/16 00:53:06 joerg Exp $");
+__RCSID("$NetBSD: audit.c,v 1.10 2008/10/02 20:46:56 joerg Exp $");
 #endif
 
 /*-
@@ -87,7 +87,14 @@ parse_options(int argc, char **argv)
 	int ch;
 
 	optreset = 1;
-	optind = 0;
+	/*
+	 * optind == 0 is interpreted as partial reset request
+	 * by GNU getopt, so compensate against this and cleanup
+	 * at the end.
+	 */
+	optind = 1;
+	++argc;
+	--argv;
 
 	while ((ch = getopt(argc, argv, "est:")) != -1) {
 		switch (ch) {
@@ -105,6 +112,8 @@ parse_options(int argc, char **argv)
 			/* NOTREACHED */
 		}
 	}
+
+	--optind; /* See above comment. */
 }
 
 static int
@@ -245,11 +254,11 @@ check_and_read_pkg_vulnerabilities(void)
 		if (now < 0)
 			warnx("pkg-vulnerabilities is from the future");
 		else if (now > 86400 * 7)
-			warnx("pkg-vulnerabilities is out of day (%d days old)",
-			    now / 86400);
+			warnx("pkg-vulnerabilities is out of day (%ld days old)",
+			    (long)(now / 86400));
 		else if (verbose >= 2)
-			warnx("pkg-vulnerabilities is %d day%s old",
-			    now / 86400, now / 86400 == 1 ? "" : "s");
+			warnx("pkg-vulnerabilities is %ld day%s old",
+			    (long)(now / 86400), now / 86400 == 1 ? "" : "s");
 	}
 
 	pv = read_pkg_vulnerabilities(pkg_vulnerabilities_file, 0, check_signature);
@@ -348,17 +357,20 @@ fetch_pkg_vulnerabilities(int argc, char **argv)
 
 	f = fetchXGetURL(pkg_vulnerabilities_url, &st, "");
 	if (f == NULL)
-		err(EXIT_FAILURE, "Could not fetch vulnerability file");
+		errx(EXIT_FAILURE, "Could not fetch vulnerability file: %s",
+		    fetchLastErrString);
 
 	if (st.size > SSIZE_MAX - 1)
-		err(EXIT_FAILURE, "pkg-vulnerabilities is too large");
+		errx(EXIT_FAILURE, "pkg-vulnerabilities is too large");
 
 	buf_len = st.size;
 	if ((buf = malloc(buf_len + 1)) == NULL)
 		err(EXIT_FAILURE, "malloc failed");
 
 	if (fetchIO_read(f, buf, buf_len) != buf_len)
-		err(EXIT_FAILURE, "Failure during fetch of pkg-vulnerabilities");
+		errx(EXIT_FAILURE,
+		    "Failure during fetch of pkg-vulnerabilities: %s",
+		    fetchLastErrString);
 	buf[buf_len] = '\0';
 
 	if (decompress_buffer(buf, buf_len, &decompressed_input,

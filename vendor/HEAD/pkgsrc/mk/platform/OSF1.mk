@@ -1,4 +1,4 @@
-# $NetBSD: OSF1.mk,v 1.23 2008/05/20 21:13:15 tnn Exp $
+# $NetBSD: OSF1.mk,v 1.25 2008/09/22 17:11:02 ahoka Exp $
 #
 # Variable definitions for the OSF1 operating system.
 

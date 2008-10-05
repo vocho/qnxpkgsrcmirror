@@ -1,4 +1,4 @@
-# $NetBSD: Interix.mk,v 1.56 2008/03/04 06:45:34 jlam Exp $
+# $NetBSD: Interix.mk,v 1.58 2008/09/22 17:11:02 ahoka Exp $
 #
 # Variable definitions for the Interix operating system.
 
