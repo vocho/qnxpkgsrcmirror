@@ -1,17 +1,19 @@
-# $NetBSD: Makefile,v 1.19 2008/06/12 02:14:39 joerg Exp $
+# $NetBSD: Makefile,v 1.21 2008/09/12 14:36:29 he Exp $
 #
 
-DISTNAME=	Net-Daemon-0.39
+DISTNAME=	Net-Daemon-0.43
 PKGNAME=	p5-${DISTNAME}
 SVR4_PKGNAME=	p5nda
 CATEGORIES=	net perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Net/}
 
-MAINTAINER=	eric@cirr.com
-HOMEPAGE=	http://search.cpan.org/~jwied/Net-Daemon/
+MAINTAINER=	pkgsrc-users@NetBSD.org
+HOMEPAGE=	http://search.cpan.org/dist/Net-Daemon/
 COMMENT=	Perl5 module for writing networking daemons
 
 PKG_DESTDIR_SUPPORT=	user-destdir
+
+WRKSRC=		${WRKDIR}/Net-Daemon/
 
 PERL5_PACKLIST=		auto/Net/Daemon/.packlist
 
