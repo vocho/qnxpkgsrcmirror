@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.170 2008/08/28 20:13:18 ahoka Exp $
+# $NetBSD: Makefile,v 1.172 2008/09/14 12:29:56 ahoka Exp $
 
 COMMENT=	Mathematics
 
@@ -61,6 +61,7 @@ SUBDIR+=	fftw
 SUBDIR+=	fftw2
 SUBDIR+=	fftwf
 SUBDIR+=	fgmp
+SUBDIR+=	fricas
 SUBDIR+=	galculator
 SUBDIR+=	gap
 SUBDIR+=	gcalctool
@@ -131,8 +132,8 @@ SUBDIR+=	py-Scientific
 SUBDIR+=	py-Scientific-doc
 SUBDIR+=	py-ephem
 SUBDIR+=	py-fpconst
-SUBDIR+=	py-numarray
 SUBDIR+=	py-networkx
+SUBDIR+=	py-numarray
 SUBDIR+=	py-pytables
 SUBDIR+=	py-rpy
 SUBDIR+=	py-sympy

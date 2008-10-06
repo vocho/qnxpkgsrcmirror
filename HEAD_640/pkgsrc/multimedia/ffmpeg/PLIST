@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.8 2008/09/08 17:57:02 ahoka Exp $
+@comment $NetBSD: PLIST,v 1.10 2008/09/15 21:24:00 sborrill Exp $
 bin/ffmpeg
 bin/ffserver
 ${PLIST.sdl}bin/ffplay

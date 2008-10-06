@@ -1,4 +1,4 @@
-# $NetBSD: rubygem.mk,v 1.37 2008/05/25 21:42:22 joerg Exp $
+# $NetBSD: rubygem.mk,v 1.39 2008/09/15 08:42:37 taca Exp $
 #
 # This Makefile fragment is intended to be included by packages that build
 # and install Ruby gems.
@@ -59,8 +59,14 @@
 #	The path to the rubygems ``gem'' script.
 #
 
+PRIVILEGED_STAGES+=	clean
+
 # By default, assume that gems are capable of user-destdir installation.
 PKG_DESTDIR_SUPPORT?=	user-destdir
+
+# replace interpeter bin default
+REPLACE_RUBY_DIRS?=	bin
+REPLACE_RUBY_PAT?=	*
 
 # Include this early in case some of its target are needed
 .include "../../lang/ruby/modules.mk"
@@ -172,18 +178,9 @@ GEM_CLEANBUILD?=	ext/*
 PKG_FAIL_REASON=	"GEM_CLEANBUILD must be relative to "${GEM_LIBDIR:Q}"."
 .endif
 
-_GEM_BUILD_TARGETS=	_gem-${GEM_BUILD}-build
-_GEM_BUILD_TARGETS+=	_gem-build-install-root
-_GEM_BUILD_TARGETS+=	_gem-build-install-root-check
-.if !empty(GEM_CLEANBUILD)
-_GEM_BUILD_TARGETS+=	_gem-build-cleanbuild
-.endif
-
-.ORDER: ${_GEM_BUILD_TARGETS}
-
 .PHONY: gem-build
 do-build: gem-build
-gem-build: ${_GEM_BUILD_TARGETS}
+gem-build: _gem-${GEM_BUILD}-build
 
 .PHONY: _gem-gemspec-build
 _gem-gemspec-build:
@@ -262,10 +259,20 @@ RUBYGEM_GENERATE_PLIST=	\
 	  ${FIND} ${GEM_DOCDIR:S|${PREFIX}/||} -type d -print | \
 		${SORT} -r | ${SED} -e "s,^,@dirrm ," );
 
+_GEM_INSTALL_TARGETS=	_gem-build-install-root
+_GEM_INSTALL_TARGETS+=	_gem-build-install-root-check
+.if !empty(GEM_CLEANBUILD)
+_GEM_INSTALL_TARGETS+=	_gem-build-cleanbuild
+.endif
+_GEM_INSTALL_TARGETS+=	_gem-install
+
+.ORDER: ${_GEM_INSTALL_TARGETS}
+
 USE_TOOLS+=	pax
 
-.PHONY: gem-install
-do-install: gem-install
-gem-install:
+do-install: ${_GEM_INSTALL_TARGETS}
+
+.PHONY: _gem-install
+_gem-install:
 	${RUN} cd ${_RUBYGEM_INSTALL_ROOT}${PREFIX} && \
 		pax -rwpe . ${DESTDIR}${PREFIX}

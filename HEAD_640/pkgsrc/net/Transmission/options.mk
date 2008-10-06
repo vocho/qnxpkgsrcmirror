@@ -1,4 +1,4 @@
-# $NetBSD: options.mk,v 1.7 2008/06/19 08:15:48 tnn Exp $
+# $NetBSD: options.mk,v 1.9 2008/09/22 20:21:04 joerg Exp $
 
 .include "../../mk/bsd.prefs.mk"
 
@@ -12,6 +12,7 @@ PKG_SUGGESTED_OPTIONS=	gtk
 . include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 . include "../../sysutils/libnotify/buildlink3.mk"
 . include "../../x11/gtk2/buildlink3.mk"
+. include "../../sysutils/desktop-file-utils/desktopdb.mk"
 CONFIGURE_ARGS+=	--with-gtk
 USE_DIRS+=		xdg-1.1
 PLIST_SRC+=		${PKGDIR}/PLIST.gtk
@@ -22,7 +23,7 @@ pre-configure:
 .endif
 
 .if !empty(PKG_OPTIONS:Mwxwidgets)
-. include "../../x11/wxGTK/buildlink3.mk"
+. include "../../x11/wxGTK26/buildlink3.mk"
 CONFIGURE_ARGS+=	--with-wx
 USE_LANGUAGES+=		c c++
 .  if empty(PKG_OPTIONS:Mgtk)

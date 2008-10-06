@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.120 2008/09/08 19:21:17 ahoka Exp $
+# $NetBSD: Makefile,v 1.123 2008/09/17 00:21:48 obache Exp $
 #
 
 COMMENT=	Multimedia utilities
@@ -45,6 +45,7 @@ SUBDIR+=	gst-plugins0.8-dvdread
 SUBDIR+=	gst-plugins0.8-mpeg2dec
 SUBDIR+=	gst-plugins0.8-ogg
 SUBDIR+=	gst-plugins0.8-theora
+SUBDIR+=	gst-plugins0.10-v4l2
 SUBDIR+=	gst-plugins0.8-xvid
 SUBDIR+=	gstreamer0.10
 SUBDIR+=	gstreamer0.8
@@ -99,6 +100,7 @@ SUBDIR+=	py-ming
 SUBDIR+=	realplayer-codecs
 SUBDIR+=	regionset
 SUBDIR+=	replex
+SUBDIR+=	ruby-gnome2-gstreamer
 SUBDIR+=	ruby-ming
 SUBDIR+=	smpeg
 SUBDIR+=	smpeg-xmms
@@ -110,6 +112,7 @@ SUBDIR+=	totem-nautilus
 SUBDIR+=	totem-pl-parser
 SUBDIR+=	totem-xine
 SUBDIR+=	transcode
+SUBDIR+=	tvtime
 SUBDIR+=	vlc
 SUBDIR+=	vlc08
 SUBDIR+=	vls

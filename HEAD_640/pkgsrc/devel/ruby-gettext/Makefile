@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.6 2008/04/10 07:19:41 obache Exp $
+# $NetBSD: Makefile,v 1.8 2008/09/15 18:09:29 taca Exp $
 
-DISTNAME=	gettext-1.90.0
+DISTNAME=	gettext-1.93.0
 PKGNAME=	${RUBY_PKGPREFIX}-${DISTNAME}
 CATEGORIES=	devel
 

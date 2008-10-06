@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.578 2008/09/10 23:28:09 seb Exp $
+# $NetBSD: Makefile,v 1.585 2008/09/21 15:14:39 joerg Exp $
 #
 
 COMMENT=	Packages related to the World Wide Web
@@ -265,6 +265,7 @@ SUBDIR+=	p5-Catalyst-Plugin-StackTrace
 SUBDIR+=	p5-Catalyst-Plugin-Static-Simple
 SUBDIR+=	p5-Catalyst-Runtime
 SUBDIR+=	p5-Catalyst-View-JSON
+SUBDIR+=	p5-Catalyst-View-Jemplate
 SUBDIR+=	p5-Catalyst-View-TT
 SUBDIR+=	p5-CatalystX-CRUD-Controller-RHTMLO
 SUBDIR+=	p5-FCGI
@@ -390,10 +391,10 @@ SUBDIR+=	plone3
 SUBDIR+=	pound
 SUBDIR+=	privoxy
 SUBDIR+=	py-HTMLgen
+SUBDIR+=	py-beautifulsoup
 SUBDIR+=	py-clearsilver
 SUBDIR+=	py-curl
 SUBDIR+=	py-django
-SUBDIR+=	py-django-devel
 SUBDIR+=	py-flup
 SUBDIR+=	py-genshi
 SUBDIR+=	py-jonpy
@@ -414,6 +415,8 @@ SUBDIR+=	ruby-borges
 SUBDIR+=	ruby-clearsilver
 SUBDIR+=	ruby-cssmin
 SUBDIR+=	ruby-fcgi
+SUBDIR+=	ruby-gnome2-gtkhtml2
+SUBDIR+=	ruby-gnome2-gtkmozembed
 SUBDIR+=	ruby-htmlsplit
 SUBDIR+=	ruby-jsmin
 SUBDIR+=	ruby-mechanize
@@ -436,7 +439,10 @@ SUBDIR+=	snarf
 SUBDIR+=	snownews
 SUBDIR+=	sope
 SUBDIR+=	spfc
-SUBDIR+=	squid
+#SUBDIR+=	squid		# only contains Makefile fragments
+SUBDIR+=	squid26
+SUBDIR+=	squid27
+SUBDIR+=	squid30
 SUBDIR+=	squidGuard
 SUBDIR+=	squidpurge
 SUBDIR+=	squirm
@@ -455,6 +461,10 @@ SUBDIR+=	thy
 SUBDIR+=	tidy
 SUBDIR+=	tinyproxy
 SUBDIR+=	trac
+SUBDIR+=	typo3
+SUBDIR+=	typolight
+SUBDIR+=	typolight-example
+SUBDIR+=	typolight-translations
 SUBDIR+=	urlget
 SUBDIR+=	urlgrabber
 SUBDIR+=	varnish

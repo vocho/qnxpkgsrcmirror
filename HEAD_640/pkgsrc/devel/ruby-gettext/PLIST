@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.3 2008/04/04 15:17:08 jlam Exp $
+@comment $NetBSD: PLIST,v 1.5 2008/09/15 18:09:29 taca Exp $
 bin/rgettext
 bin/rmsgfmt
 bin/rmsgmerge
@@ -11,6 +11,8 @@ ${GEM_LIBDIR}/Rakefile
 ${GEM_LIBDIR}/bin/rgettext
 ${GEM_LIBDIR}/bin/rmsgfmt
 ${GEM_LIBDIR}/bin/rmsgmerge
+${GEM_LIBDIR}/data/locale/bg/LC_MESSAGES/rails.mo
+${GEM_LIBDIR}/data/locale/bg/LC_MESSAGES/rgettext.mo
 ${GEM_LIBDIR}/data/locale/bs/LC_MESSAGES/rails.mo
 ${GEM_LIBDIR}/data/locale/bs/LC_MESSAGES/rgettext.mo
 ${GEM_LIBDIR}/data/locale/ca/LC_MESSAGES/rails.mo
@@ -26,6 +28,7 @@ ${GEM_LIBDIR}/data/locale/eo/LC_MESSAGES/rgettext.mo
 ${GEM_LIBDIR}/data/locale/es/LC_MESSAGES/rails.mo
 ${GEM_LIBDIR}/data/locale/es/LC_MESSAGES/rgettext.mo
 ${GEM_LIBDIR}/data/locale/et/LC_MESSAGES/rails.mo
+${GEM_LIBDIR}/data/locale/et/LC_MESSAGES/rgettext.mo
 ${GEM_LIBDIR}/data/locale/fr/LC_MESSAGES/rails.mo
 ${GEM_LIBDIR}/data/locale/fr/LC_MESSAGES/rgettext.mo
 ${GEM_LIBDIR}/data/locale/hr/LC_MESSAGES/rails.mo
@@ -38,6 +41,8 @@ ${GEM_LIBDIR}/data/locale/ja/LC_MESSAGES/rails.mo
 ${GEM_LIBDIR}/data/locale/ja/LC_MESSAGES/rgettext.mo
 ${GEM_LIBDIR}/data/locale/ko/LC_MESSAGES/rails.mo
 ${GEM_LIBDIR}/data/locale/ko/LC_MESSAGES/rgettext.mo
+${GEM_LIBDIR}/data/locale/lv/LC_MESSAGES/rails.mo
+${GEM_LIBDIR}/data/locale/lv/LC_MESSAGES/rgettext.mo
 ${GEM_LIBDIR}/data/locale/nb/LC_MESSAGES/rails.mo
 ${GEM_LIBDIR}/data/locale/nb/LC_MESSAGES/rgettext.mo
 ${GEM_LIBDIR}/data/locale/nl/LC_MESSAGES/rails.mo
@@ -46,6 +51,8 @@ ${GEM_LIBDIR}/data/locale/pt_BR/LC_MESSAGES/rails.mo
 ${GEM_LIBDIR}/data/locale/pt_BR/LC_MESSAGES/rgettext.mo
 ${GEM_LIBDIR}/data/locale/ru/LC_MESSAGES/rails.mo
 ${GEM_LIBDIR}/data/locale/ru/LC_MESSAGES/rgettext.mo
+${GEM_LIBDIR}/data/locale/sr/LC_MESSAGES/rails.mo
+${GEM_LIBDIR}/data/locale/sr/LC_MESSAGES/rgettext.mo
 ${GEM_LIBDIR}/data/locale/sv/LC_MESSAGES/rgettext.mo
 ${GEM_LIBDIR}/data/locale/ua/LC_MESSAGES/rails.mo
 ${GEM_LIBDIR}/data/locale/ua/LC_MESSAGES/rgettext.mo
@@ -55,6 +62,8 @@ ${GEM_LIBDIR}/data/locale/zh/LC_MESSAGES/rails.mo
 ${GEM_LIBDIR}/data/locale/zh/LC_MESSAGES/rgettext.mo
 ${GEM_LIBDIR}/data/locale/zh_TW/LC_MESSAGES/rails.mo
 ${GEM_LIBDIR}/data/locale/zh_TW/LC_MESSAGES/rgettext.mo
+${GEM_LIBDIR}/doc/classes/ActionView/Helpers/FormBuilder.html
+${GEM_LIBDIR}/doc/classes/ActionView/TemplateFinder.html
 ${GEM_LIBDIR}/doc/classes/ActiveRecord/Base.html
 ${GEM_LIBDIR}/doc/classes/ActiveRecord/ConnectionAdapters/Column.html
 ${GEM_LIBDIR}/doc/classes/ActiveRecord/Migration.html
@@ -82,7 +91,9 @@ ${GEM_LIBDIR}/doc/classes/Locale/SystemCGI.html
 ${GEM_LIBDIR}/doc/classes/Locale/SystemJRuby.html
 ${GEM_LIBDIR}/doc/classes/Locale/SystemPosix.html
 ${GEM_LIBDIR}/doc/classes/Locale/SystemWin32.html
+${GEM_LIBDIR}/doc/classes/Locale/SystemWin32Table.html
 ${GEM_LIBDIR}/doc/classes/MOFile.html
+${GEM_LIBDIR}/doc/classes/MOFile/HeaderRev1.html
 ${GEM_LIBDIR}/doc/classes/MOFile/InvalidFormat.html
 ${GEM_LIBDIR}/doc/classes/Module.html
 ${GEM_LIBDIR}/doc/classes/String.html
@@ -154,6 +165,8 @@ ${GEM_LIBDIR}/lib/locale/object.rb
 ${GEM_LIBDIR}/lib/locale/posix.rb
 ${GEM_LIBDIR}/lib/locale/win32.rb
 ${GEM_LIBDIR}/lib/locale/win32_table.rb
+${GEM_LIBDIR}/po/bg/rails.po
+${GEM_LIBDIR}/po/bg/rgettext.po
 ${GEM_LIBDIR}/po/bs/rails.po
 ${GEM_LIBDIR}/po/bs/rgettext.po
 ${GEM_LIBDIR}/po/ca/rails.po
@@ -169,6 +182,7 @@ ${GEM_LIBDIR}/po/eo/rgettext.po
 ${GEM_LIBDIR}/po/es/rails.po
 ${GEM_LIBDIR}/po/es/rgettext.po
 ${GEM_LIBDIR}/po/et/rails.po
+${GEM_LIBDIR}/po/et/rgettext.po
 ${GEM_LIBDIR}/po/fr/rails.po
 ${GEM_LIBDIR}/po/fr/rgettext.po
 ${GEM_LIBDIR}/po/hr/rails.po
@@ -179,6 +193,8 @@ ${GEM_LIBDIR}/po/it/rails.po
 ${GEM_LIBDIR}/po/it/rgettext.po
 ${GEM_LIBDIR}/po/ja/rails.po
 ${GEM_LIBDIR}/po/ja/rgettext.po
+${GEM_LIBDIR}/po/lv/rails.po
+${GEM_LIBDIR}/po/lv/rgettext.po
 ${GEM_LIBDIR}/po/ko/rails.po
 ${GEM_LIBDIR}/po/ko/rgettext.po
 ${GEM_LIBDIR}/po/nb/rails.po
@@ -191,6 +207,8 @@ ${GEM_LIBDIR}/po/rails.pot
 ${GEM_LIBDIR}/po/rgettext.pot
 ${GEM_LIBDIR}/po/ru/rails.po
 ${GEM_LIBDIR}/po/ru/rgettext.po
+${GEM_LIBDIR}/po/sr/rails.po
+${GEM_LIBDIR}/po/sr/rgettext.po
 ${GEM_LIBDIR}/po/sv/rgettext.po
 ${GEM_LIBDIR}/po/ua/rails.po
 ${GEM_LIBDIR}/po/ua/rgettext.po
@@ -213,6 +231,10 @@ ${GEM_LIBDIR}/samples/cgi/helloerb2.cgi
 ${GEM_LIBDIR}/samples/cgi/hellolib.rb
 ${GEM_LIBDIR}/samples/cgi/http.rb
 ${GEM_LIBDIR}/samples/cgi/index.cgi
+${GEM_LIBDIR}/samples/cgi/locale/bg/LC_MESSAGES/helloerb1.mo
+${GEM_LIBDIR}/samples/cgi/locale/bg/LC_MESSAGES/helloerb2.mo
+${GEM_LIBDIR}/samples/cgi/locale/bg/LC_MESSAGES/hellolib.mo
+${GEM_LIBDIR}/samples/cgi/locale/bg/LC_MESSAGES/main.mo
 ${GEM_LIBDIR}/samples/cgi/locale/bs/LC_MESSAGES/helloerb1.mo
 ${GEM_LIBDIR}/samples/cgi/locale/bs/LC_MESSAGES/helloerb2.mo
 ${GEM_LIBDIR}/samples/cgi/locale/bs/LC_MESSAGES/hellolib.mo
@@ -265,6 +287,10 @@ ${GEM_LIBDIR}/samples/cgi/locale/ko/LC_MESSAGES/helloerb1.mo
 ${GEM_LIBDIR}/samples/cgi/locale/ko/LC_MESSAGES/helloerb2.mo
 ${GEM_LIBDIR}/samples/cgi/locale/ko/LC_MESSAGES/hellolib.mo
 ${GEM_LIBDIR}/samples/cgi/locale/ko/LC_MESSAGES/main.mo
+${GEM_LIBDIR}/samples/cgi/locale/lv/LC_MESSAGES/helloerb1.mo
+${GEM_LIBDIR}/samples/cgi/locale/lv/LC_MESSAGES/helloerb2.mo
+${GEM_LIBDIR}/samples/cgi/locale/lv/LC_MESSAGES/hellolib.mo
+${GEM_LIBDIR}/samples/cgi/locale/lv/LC_MESSAGES/main.mo
 ${GEM_LIBDIR}/samples/cgi/locale/nb/LC_MESSAGES/helloerb1.mo
 ${GEM_LIBDIR}/samples/cgi/locale/nb/LC_MESSAGES/helloerb2.mo
 ${GEM_LIBDIR}/samples/cgi/locale/nb/LC_MESSAGES/hellolib.mo
@@ -281,6 +307,10 @@ ${GEM_LIBDIR}/samples/cgi/locale/ru/LC_MESSAGES/helloerb1.mo
 ${GEM_LIBDIR}/samples/cgi/locale/ru/LC_MESSAGES/helloerb2.mo
 ${GEM_LIBDIR}/samples/cgi/locale/ru/LC_MESSAGES/hellolib.mo
 ${GEM_LIBDIR}/samples/cgi/locale/ru/LC_MESSAGES/main.mo
+${GEM_LIBDIR}/samples/cgi/locale/sr/LC_MESSAGES/helloerb1.mo
+${GEM_LIBDIR}/samples/cgi/locale/sr/LC_MESSAGES/helloerb2.mo
+${GEM_LIBDIR}/samples/cgi/locale/sr/LC_MESSAGES/hellolib.mo
+${GEM_LIBDIR}/samples/cgi/locale/sr/LC_MESSAGES/main.mo
 ${GEM_LIBDIR}/samples/cgi/locale/ua/LC_MESSAGES/helloerb1.mo
 ${GEM_LIBDIR}/samples/cgi/locale/ua/LC_MESSAGES/helloerb2.mo
 ${GEM_LIBDIR}/samples/cgi/locale/ua/LC_MESSAGES/hellolib.mo
@@ -298,6 +328,10 @@ ${GEM_LIBDIR}/samples/cgi/locale/zh_TW/LC_MESSAGES/helloerb2.mo
 ${GEM_LIBDIR}/samples/cgi/locale/zh_TW/LC_MESSAGES/hellolib.mo
 ${GEM_LIBDIR}/samples/cgi/locale/zh_TW/LC_MESSAGES/main.mo
 ${GEM_LIBDIR}/samples/cgi/other.rhtml
+${GEM_LIBDIR}/samples/cgi/po/bg/helloerb1.po
+${GEM_LIBDIR}/samples/cgi/po/bg/helloerb2.po
+${GEM_LIBDIR}/samples/cgi/po/bg/hellolib.po
+${GEM_LIBDIR}/samples/cgi/po/bg/main.po
 ${GEM_LIBDIR}/samples/cgi/po/bs/helloerb1.po
 ${GEM_LIBDIR}/samples/cgi/po/bs/helloerb2.po
 ${GEM_LIBDIR}/samples/cgi/po/bs/hellolib.po
@@ -353,6 +387,10 @@ ${GEM_LIBDIR}/samples/cgi/po/ko/helloerb1.po
 ${GEM_LIBDIR}/samples/cgi/po/ko/helloerb2.po
 ${GEM_LIBDIR}/samples/cgi/po/ko/hellolib.po
 ${GEM_LIBDIR}/samples/cgi/po/ko/main.po
+${GEM_LIBDIR}/samples/cgi/po/lv/helloerb1.po
+${GEM_LIBDIR}/samples/cgi/po/lv/helloerb2.po
+${GEM_LIBDIR}/samples/cgi/po/lv/hellolib.po
+${GEM_LIBDIR}/samples/cgi/po/lv/main.po
 ${GEM_LIBDIR}/samples/cgi/po/main.pot
 ${GEM_LIBDIR}/samples/cgi/po/nb/helloerb1.po
 ${GEM_LIBDIR}/samples/cgi/po/nb/helloerb2.po
@@ -370,6 +408,10 @@ ${GEM_LIBDIR}/samples/cgi/po/ru/helloerb1.po
 ${GEM_LIBDIR}/samples/cgi/po/ru/helloerb2.po
 ${GEM_LIBDIR}/samples/cgi/po/ru/hellolib.po
 ${GEM_LIBDIR}/samples/cgi/po/ru/main.po
+${GEM_LIBDIR}/samples/cgi/po/sr/helloerb1.po
+${GEM_LIBDIR}/samples/cgi/po/sr/helloerb2.po
+${GEM_LIBDIR}/samples/cgi/po/sr/hellolib.po
+${GEM_LIBDIR}/samples/cgi/po/sr/main.po
 ${GEM_LIBDIR}/samples/cgi/po/ua/helloerb1.po
 ${GEM_LIBDIR}/samples/cgi/po/ua/helloerb2.po
 ${GEM_LIBDIR}/samples/cgi/po/ua/hellolib.po
@@ -396,6 +438,13 @@ ${GEM_LIBDIR}/samples/helloglade2.rb
 ${GEM_LIBDIR}/samples/hellogtk.rb
 ${GEM_LIBDIR}/samples/hellogtk2.rb
 ${GEM_LIBDIR}/samples/hellotk.rb
+${GEM_LIBDIR}/samples/locale/bg/LC_MESSAGES/hello.mo
+${GEM_LIBDIR}/samples/locale/bg/LC_MESSAGES/hello2.mo
+${GEM_LIBDIR}/samples/locale/bg/LC_MESSAGES/hello_noop.mo
+${GEM_LIBDIR}/samples/locale/bg/LC_MESSAGES/hello_plural.mo
+${GEM_LIBDIR}/samples/locale/bg/LC_MESSAGES/helloglade2.mo
+${GEM_LIBDIR}/samples/locale/bg/LC_MESSAGES/hellogtk.mo
+${GEM_LIBDIR}/samples/locale/bg/LC_MESSAGES/hellotk.mo
 ${GEM_LIBDIR}/samples/locale/bs/LC_MESSAGES/hello.mo
 ${GEM_LIBDIR}/samples/locale/bs/LC_MESSAGES/hello2.mo
 ${GEM_LIBDIR}/samples/locale/bs/LC_MESSAGES/hello_noop.mo
@@ -487,6 +536,13 @@ ${GEM_LIBDIR}/samples/locale/ko/LC_MESSAGES/hello_plural.mo
 ${GEM_LIBDIR}/samples/locale/ko/LC_MESSAGES/helloglade2.mo
 ${GEM_LIBDIR}/samples/locale/ko/LC_MESSAGES/hellogtk.mo
 ${GEM_LIBDIR}/samples/locale/ko/LC_MESSAGES/hellotk.mo
+${GEM_LIBDIR}/samples/locale/lv/LC_MESSAGES/hello.mo
+${GEM_LIBDIR}/samples/locale/lv/LC_MESSAGES/hello2.mo
+${GEM_LIBDIR}/samples/locale/lv/LC_MESSAGES/hello_noop.mo
+${GEM_LIBDIR}/samples/locale/lv/LC_MESSAGES/hello_plural.mo
+${GEM_LIBDIR}/samples/locale/lv/LC_MESSAGES/helloglade2.mo
+${GEM_LIBDIR}/samples/locale/lv/LC_MESSAGES/hellogtk.mo
+${GEM_LIBDIR}/samples/locale/lv/LC_MESSAGES/hellotk.mo
 ${GEM_LIBDIR}/samples/locale/nb/LC_MESSAGES/hello.mo
 ${GEM_LIBDIR}/samples/locale/nb/LC_MESSAGES/hello2.mo
 ${GEM_LIBDIR}/samples/locale/nb/LC_MESSAGES/hello_noop.mo
@@ -515,6 +571,13 @@ ${GEM_LIBDIR}/samples/locale/ru/LC_MESSAGES/hello_plural.mo
 ${GEM_LIBDIR}/samples/locale/ru/LC_MESSAGES/helloglade2.mo
 ${GEM_LIBDIR}/samples/locale/ru/LC_MESSAGES/hellogtk.mo
 ${GEM_LIBDIR}/samples/locale/ru/LC_MESSAGES/hellotk.mo
+${GEM_LIBDIR}/samples/locale/sr/LC_MESSAGES/hello.mo
+${GEM_LIBDIR}/samples/locale/sr/LC_MESSAGES/hello2.mo
+${GEM_LIBDIR}/samples/locale/sr/LC_MESSAGES/hello_noop.mo
+${GEM_LIBDIR}/samples/locale/sr/LC_MESSAGES/hello_plural.mo
+${GEM_LIBDIR}/samples/locale/sr/LC_MESSAGES/helloglade2.mo
+${GEM_LIBDIR}/samples/locale/sr/LC_MESSAGES/hellogtk.mo
+${GEM_LIBDIR}/samples/locale/sr/LC_MESSAGES/hellotk.mo
 ${GEM_LIBDIR}/samples/locale/sv/LC_MESSAGES/hello.mo
 ${GEM_LIBDIR}/samples/locale/sv/LC_MESSAGES/hello2.mo
 ${GEM_LIBDIR}/samples/locale/sv/LC_MESSAGES/hello_noop.mo
@@ -551,6 +614,13 @@ ${GEM_LIBDIR}/samples/locale/zh_TW/LC_MESSAGES/helloglade2.mo
 ${GEM_LIBDIR}/samples/locale/zh_TW/LC_MESSAGES/hellogtk.mo
 ${GEM_LIBDIR}/samples/locale/zh_TW/LC_MESSAGES/hellotk.mo
 ${GEM_LIBDIR}/samples/makemo.rb
+${GEM_LIBDIR}/samples/po/bg/hello.po
+${GEM_LIBDIR}/samples/po/bg/hello2.po
+${GEM_LIBDIR}/samples/po/bg/hello_noop.po
+${GEM_LIBDIR}/samples/po/bg/hello_plural.po
+${GEM_LIBDIR}/samples/po/bg/helloglade2.po
+${GEM_LIBDIR}/samples/po/bg/hellogtk.po
+${GEM_LIBDIR}/samples/po/bg/hellotk.po
 ${GEM_LIBDIR}/samples/po/bs/hello.po
 ${GEM_LIBDIR}/samples/po/bs/hello2.po
 ${GEM_LIBDIR}/samples/po/bs/hello_noop.po
@@ -649,6 +719,13 @@ ${GEM_LIBDIR}/samples/po/ko/hello_plural.po
 ${GEM_LIBDIR}/samples/po/ko/helloglade2.po
 ${GEM_LIBDIR}/samples/po/ko/hellogtk.po
 ${GEM_LIBDIR}/samples/po/ko/hellotk.po
+${GEM_LIBDIR}/samples/po/lv/hello.po
+${GEM_LIBDIR}/samples/po/lv/hello2.po
+${GEM_LIBDIR}/samples/po/lv/hello_noop.po
+${GEM_LIBDIR}/samples/po/lv/hello_plural.po
+${GEM_LIBDIR}/samples/po/lv/helloglade2.po
+${GEM_LIBDIR}/samples/po/lv/hellogtk.po
+${GEM_LIBDIR}/samples/po/lv/hellotk.po
 ${GEM_LIBDIR}/samples/po/nb/hello.po
 ${GEM_LIBDIR}/samples/po/nb/hello2.po
 ${GEM_LIBDIR}/samples/po/nb/hello_noop.po
@@ -677,6 +754,13 @@ ${GEM_LIBDIR}/samples/po/ru/hello_plural.po
 ${GEM_LIBDIR}/samples/po/ru/helloglade2.po
 ${GEM_LIBDIR}/samples/po/ru/hellogtk.po
 ${GEM_LIBDIR}/samples/po/ru/hellotk.po
+${GEM_LIBDIR}/samples/po/sr/hello.po
+${GEM_LIBDIR}/samples/po/sr/hello2.po
+${GEM_LIBDIR}/samples/po/sr/hello_noop.po
+${GEM_LIBDIR}/samples/po/sr/hello_plural.po
+${GEM_LIBDIR}/samples/po/sr/helloglade2.po
+${GEM_LIBDIR}/samples/po/sr/hellogtk.po
+${GEM_LIBDIR}/samples/po/sr/hellotk.po
 ${GEM_LIBDIR}/samples/po/sv/hello.po
 ${GEM_LIBDIR}/samples/po/sv/hello2.po
 ${GEM_LIBDIR}/samples/po/sv/hello_noop.po
@@ -736,6 +820,7 @@ ${GEM_LIBDIR}/samples/rails/config/routes.rb
 ${GEM_LIBDIR}/samples/rails/db/migrate/001_create_articles.rb
 ${GEM_LIBDIR}/samples/rails/db/schema.rb
 ${GEM_LIBDIR}/samples/rails/lib/tasks/gettext.rake
+${GEM_LIBDIR}/samples/rails/locale/bg/LC_MESSAGES/blog.mo
 ${GEM_LIBDIR}/samples/rails/locale/bs/LC_MESSAGES/blog.mo
 ${GEM_LIBDIR}/samples/rails/locale/ca/LC_MESSAGES/blog.mo
 ${GEM_LIBDIR}/samples/rails/locale/cs/LC_MESSAGES/blog.mo
@@ -750,15 +835,18 @@ ${GEM_LIBDIR}/samples/rails/locale/hu/LC_MESSAGES/blog.mo
 ${GEM_LIBDIR}/samples/rails/locale/it/LC_MESSAGES/blog.mo
 ${GEM_LIBDIR}/samples/rails/locale/ja/LC_MESSAGES/blog.mo
 ${GEM_LIBDIR}/samples/rails/locale/ko/LC_MESSAGES/blog.mo
+${GEM_LIBDIR}/samples/rails/locale/lv/LC_MESSAGES/blog.mo
 ${GEM_LIBDIR}/samples/rails/locale/nb/LC_MESSAGES/blog.mo
 ${GEM_LIBDIR}/samples/rails/locale/nl/LC_MESSAGES/blog.mo
 ${GEM_LIBDIR}/samples/rails/locale/pt_BR/LC_MESSAGES/blog.mo
 ${GEM_LIBDIR}/samples/rails/locale/ru/LC_MESSAGES/blog.mo
+${GEM_LIBDIR}/samples/rails/locale/sr/LC_MESSAGES/blog.mo
 ${GEM_LIBDIR}/samples/rails/locale/ua/LC_MESSAGES/blog.mo
 ${GEM_LIBDIR}/samples/rails/locale/vi/LC_MESSAGES/blog.mo
 ${GEM_LIBDIR}/samples/rails/locale/zh/LC_MESSAGES/blog.mo
 ${GEM_LIBDIR}/samples/rails/locale/zh_TW/LC_MESSAGES/blog.mo
 ${GEM_LIBDIR}/samples/rails/po/blog.pot
+${GEM_LIBDIR}/samples/rails/po/bg/blog.po
 ${GEM_LIBDIR}/samples/rails/po/bs/blog.po
 ${GEM_LIBDIR}/samples/rails/po/ca/blog.po
 ${GEM_LIBDIR}/samples/rails/po/cs/blog.po
@@ -773,10 +861,12 @@ ${GEM_LIBDIR}/samples/rails/po/hu/blog.po
 ${GEM_LIBDIR}/samples/rails/po/it/blog.po
 ${GEM_LIBDIR}/samples/rails/po/ja/blog.po
 ${GEM_LIBDIR}/samples/rails/po/ko/blog.po
+${GEM_LIBDIR}/samples/rails/po/lv/blog.po
 ${GEM_LIBDIR}/samples/rails/po/nb/blog.po
 ${GEM_LIBDIR}/samples/rails/po/nl/blog.po
 ${GEM_LIBDIR}/samples/rails/po/pt_BR/blog.po
 ${GEM_LIBDIR}/samples/rails/po/ru/blog.po
+${GEM_LIBDIR}/samples/rails/po/sr/blog.po
 ${GEM_LIBDIR}/samples/rails/po/ua/blog.po
 ${GEM_LIBDIR}/samples/rails/po/vi/blog.po
 ${GEM_LIBDIR}/samples/rails/po/zh/blog.po
@@ -819,6 +909,7 @@ ${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/README
 ${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/Rakefile
 ${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/init.rb
 ${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/lib/gettext_plugin.rb
+${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/locale/bg/LC_MESSAGES/gettext_plugin.mo
 ${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/locale/bs/LC_MESSAGES/gettext_plugin.mo
 ${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/locale/ca/LC_MESSAGES/gettext_plugin.mo
 ${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/locale/cs/LC_MESSAGES/gettext_plugin.mo
@@ -832,14 +923,17 @@ ${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/locale/hu/LC_MESSAGES/gettext
 ${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/locale/it/LC_MESSAGES/gettext_plugin.mo
 ${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/locale/ja/LC_MESSAGES/gettext_plugin.mo
 ${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/locale/ko/LC_MESSAGES/gettext_plugin.mo
+${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/locale/lv/LC_MESSAGES/gettext_plugin.mo
 ${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/locale/nb/LC_MESSAGES/gettext_plugin.mo
 ${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/locale/nl/LC_MESSAGES/gettext_plugin.mo
 ${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/locale/pt_BR/LC_MESSAGES/gettext_plugin.mo
 ${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/locale/ru/LC_MESSAGES/gettext_plugin.mo
+${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/locale/sr/LC_MESSAGES/gettext_plugin.mo
 ${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/locale/ua/LC_MESSAGES/gettext_plugin.mo
 ${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/locale/vi/LC_MESSAGES/gettext_plugin.mo
 ${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/locale/zh/LC_MESSAGES/gettext_plugin.mo
 ${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/locale/zh_TW/LC_MESSAGES/gettext_plugin.mo
+${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/po/bg/gettext_plugin.po
 ${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/po/bs/gettext_plugin.po
 ${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/po/ca/gettext_plugin.po
 ${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/po/cs/gettext_plugin.po
@@ -853,12 +947,14 @@ ${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/po/hr/gettext_plugin.po
 ${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/po/hu/gettext_plugin.po
 ${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/po/it/gettext_plugin.po
 ${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/po/ja/gettext_plugin.po
+${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/po/lv/gettext_plugin.po
 ${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/po/ko/gettext_plugin.po
 ${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/po/nb/gettext_plugin.po
 ${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/po/nl/gettext_plugin.po
 ${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/po/pt_BR/gettext_plugin.po
 ${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/po/ru/gettext_plugin.po
 ${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/po/ua/gettext_plugin.po
+${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/po/sr/gettext_plugin.po
 ${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/po/vi/gettext_plugin.po
 ${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/po/zh/gettext_plugin.po
 ${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/po/zh_TW/gettext_plugin.po
@@ -872,10 +968,13 @@ ${GEM_LIBDIR}/test/db/mysql.sql
 ${GEM_LIBDIR}/test/fixtures/book.rb
 ${GEM_LIBDIR}/test/fixtures/developer.rb
 ${GEM_LIBDIR}/test/fixtures/developers.yml
+${GEM_LIBDIR}/test/fixtures/inept_wizard.rb
+${GEM_LIBDIR}/test/fixtures/people.yml
 ${GEM_LIBDIR}/test/fixtures/reply.rb
 ${GEM_LIBDIR}/test/fixtures/topic.rb
 ${GEM_LIBDIR}/test/fixtures/topics.yml
 ${GEM_LIBDIR}/test/fixtures/user.rb
+${GEM_LIBDIR}/test/fixtures/wizard.rb
 ${GEM_LIBDIR}/test/locale/cr/LC_MESSAGES/plural.mo
 ${GEM_LIBDIR}/test/locale/da/LC_MESSAGES/plural.mo
 ${GEM_LIBDIR}/test/locale/da/LC_MESSAGES/plural_error.mo
@@ -891,7 +990,9 @@ ${GEM_LIBDIR}/test/locale/ja/LC_MESSAGES/plural_error.mo
 ${GEM_LIBDIR}/test/locale/ja/LC_MESSAGES/test1.mo
 ${GEM_LIBDIR}/test/locale/ja/LC_MESSAGES/test2.mo
 ${GEM_LIBDIR}/test/locale/ja/LC_MESSAGES/test6.mo
+${GEM_LIBDIR}/test/locale/ja/LC_MESSAGES/test_npgettext.mo
 ${GEM_LIBDIR}/test/locale/ja/LC_MESSAGES/test_nsgettext.mo
+${GEM_LIBDIR}/test/locale/ja/LC_MESSAGES/test_pgettext.mo
 ${GEM_LIBDIR}/test/locale/ja/LC_MESSAGES/test_rubyparser.mo
 ${GEM_LIBDIR}/test/locale/ja/LC_MESSAGES/test_sgettext.mo
 ${GEM_LIBDIR}/test/locale/la/LC_MESSAGES/plural.mo
@@ -915,7 +1016,9 @@ ${GEM_LIBDIR}/test/po/ja/plural_error.po
 ${GEM_LIBDIR}/test/po/ja/test1.po
 ${GEM_LIBDIR}/test/po/ja/test2.po
 ${GEM_LIBDIR}/test/po/ja/test6.po
+${GEM_LIBDIR}/test/po/ja/test_npgettext.po
 ${GEM_LIBDIR}/test/po/ja/test_nsgettext.po
+${GEM_LIBDIR}/test/po/ja/test_pgettext.po
 ${GEM_LIBDIR}/test/po/ja/test_rubyparser.po
 ${GEM_LIBDIR}/test/po/ja/test_sgettext.po
 ${GEM_LIBDIR}/test/po/la/plural.po
@@ -936,6 +1039,7 @@ ${GEM_LIBDIR}/test/rails/app/models/article.rb
 ${GEM_LIBDIR}/test/rails/app/models/mailer.rb
 ${GEM_LIBDIR}/test/rails/app/models/user.rb
 ${GEM_LIBDIR}/test/rails/app/views/articles/_form.html.erb
+${GEM_LIBDIR}/test/rails/app/views/articles/_form_fr.html.erb
 ${GEM_LIBDIR}/test/rails/app/views/articles/active_form_error.html.erb
 ${GEM_LIBDIR}/test/rails/app/views/articles/change_title_error_messages_for.html.erb
 ${GEM_LIBDIR}/test/rails/app/views/articles/edit.html.erb
@@ -961,9 +1065,6 @@ ${GEM_LIBDIR}/test/rails/config/environments/production.rb
 ${GEM_LIBDIR}/test/rails/config/environments/test.rb
 ${GEM_LIBDIR}/test/rails/config/routes.rb
 ${GEM_LIBDIR}/test/rails/db/schema.rb
-${GEM_LIBDIR}/test/rails/locale/ja/LC_MESSAGES/rails_test.mo
-${GEM_LIBDIR}/test/rails/log/development.log
-${GEM_LIBDIR}/test/rails/log/test.log
 ${GEM_LIBDIR}/test/rails/po/ja/rails_test.po
 ${GEM_LIBDIR}/test/rails/po/rails_test.pot
 ${GEM_LIBDIR}/test/rails/public/404.html
@@ -1013,6 +1114,7 @@ ${GEM_LIBDIR}/test/rails/test/result/fr/custom_error_message.html
 ${GEM_LIBDIR}/test/rails/test/result/fr/custom_error_message_with_plural.html
 ${GEM_LIBDIR}/test/rails/test/result/fr/list.html
 ${GEM_LIBDIR}/test/rails/test/result/fr/multipart.html
+${GEM_LIBDIR}/test/rails/test/result/fr/new.html
 ${GEM_LIBDIR}/test/rails/test/result/fr/singlepart.html
 ${GEM_LIBDIR}/test/rails/test/result/ja/create_error.html
 ${GEM_LIBDIR}/test/rails/test/result/ja/custom_error_message.html
@@ -1032,6 +1134,7 @@ ${GEM_LIBDIR}/test/test_cgi.rb
 ${GEM_LIBDIR}/test/test_erb.rhtml
 ${GEM_LIBDIR}/test/test_erb.rxml
 ${GEM_LIBDIR}/test/test_gettext.rb
+${GEM_LIBDIR}/test/test_gettext_toplevel.rb
 ${GEM_LIBDIR}/test/test_gladeparser.glade
 ${GEM_LIBDIR}/test/test_java.sh
 ${GEM_LIBDIR}/test/test_locale.rb
@@ -1046,7 +1149,9 @@ ${GEM_LIBDIR}/test/testlib/erb.rxml
 ${GEM_LIBDIR}/test/testlib/gettext.rb
 ${GEM_LIBDIR}/test/testlib/gladeparser.glade
 ${GEM_LIBDIR}/test/testlib/ngettext.rb
+${GEM_LIBDIR}/test/testlib/npgettext.rb
 ${GEM_LIBDIR}/test/testlib/nsgettext.rb
+${GEM_LIBDIR}/test/testlib/pgettext.rb
 ${GEM_LIBDIR}/test/testlib/sgettext.rb
 ${GEM_LIBDIR}/test/testlib/testlib1.rb
 ${GEM_LIBDIR}/test/testlib/testlib2.rb
@@ -1074,10 +1179,6 @@ ${GEM_HOME}/specifications/gettext-${PKGVERSION}.gemspec
 @dirrm ${GEM_LIBDIR}/test/rails/public
 @dirrm ${GEM_LIBDIR}/test/rails/po/ja
 @dirrm ${GEM_LIBDIR}/test/rails/po
-@dirrm ${GEM_LIBDIR}/test/rails/log
-@dirrm ${GEM_LIBDIR}/test/rails/locale/ja/LC_MESSAGES
-@dirrm ${GEM_LIBDIR}/test/rails/locale/ja
-@dirrm ${GEM_LIBDIR}/test/rails/locale
 @dirrm ${GEM_LIBDIR}/test/rails/db
 @dirrm ${GEM_LIBDIR}/test/rails/config/environments
 @dirrm ${GEM_LIBDIR}/test/rails/config
@@ -1128,10 +1229,12 @@ ${GEM_HOME}/specifications/gettext-${PKGVERSION}.gemspec
 @dirrm ${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/po/zh
 @dirrm ${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/po/vi
 @dirrm ${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/po/ua
+@dirrm ${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/po/sr
 @dirrm ${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/po/ru
 @dirrm ${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/po/pt_BR
 @dirrm ${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/po/nl
 @dirrm ${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/po/nb
+@dirrm ${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/po/lv
 @dirrm ${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/po/ko
 @dirrm ${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/po/ja
 @dirrm ${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/po/it
@@ -1145,6 +1248,7 @@ ${GEM_HOME}/specifications/gettext-${PKGVERSION}.gemspec
 @dirrm ${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/po/cs
 @dirrm ${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/po/ca
 @dirrm ${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/po/bs
+@dirrm ${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/po/bg
 @dirrm ${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/po
 @dirrm ${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/locale/zh_TW/LC_MESSAGES
 @dirrm ${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/locale/zh_TW
@@ -1154,6 +1258,8 @@ ${GEM_HOME}/specifications/gettext-${PKGVERSION}.gemspec
 @dirrm ${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/locale/vi
 @dirrm ${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/locale/ua/LC_MESSAGES
 @dirrm ${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/locale/ua
+@dirrm ${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/locale/sr/LC_MESSAGES
+@dirrm ${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/locale/sr
 @dirrm ${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/locale/ru/LC_MESSAGES
 @dirrm ${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/locale/ru
 @dirrm ${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/locale/pt_BR/LC_MESSAGES
@@ -1162,6 +1268,8 @@ ${GEM_HOME}/specifications/gettext-${PKGVERSION}.gemspec
 @dirrm ${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/locale/nl
 @dirrm ${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/locale/nb/LC_MESSAGES
 @dirrm ${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/locale/nb
+@dirrm ${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/locale/lv/LC_MESSAGES
+@dirrm ${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/locale/lv
 @dirrm ${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/locale/ko/LC_MESSAGES
 @dirrm ${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/locale/ko
 @dirrm ${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/locale/ja/LC_MESSAGES
@@ -1188,6 +1296,8 @@ ${GEM_HOME}/specifications/gettext-${PKGVERSION}.gemspec
 @dirrm ${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/locale/ca
 @dirrm ${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/locale/bs/LC_MESSAGES
 @dirrm ${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/locale/bs
+@dirrm ${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/locale/bg/LC_MESSAGES
+@dirrm ${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/locale/bg
 @dirrm ${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/locale
 @dirrm ${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext/lib
 @dirrm ${GEM_LIBDIR}/samples/rails/vendor/plugins/gettext
@@ -1208,10 +1318,12 @@ ${GEM_HOME}/specifications/gettext-${PKGVERSION}.gemspec
 @dirrm ${GEM_LIBDIR}/samples/rails/po/zh
 @dirrm ${GEM_LIBDIR}/samples/rails/po/vi
 @dirrm ${GEM_LIBDIR}/samples/rails/po/ua
+@dirrm ${GEM_LIBDIR}/samples/rails/po/sr
 @dirrm ${GEM_LIBDIR}/samples/rails/po/ru
 @dirrm ${GEM_LIBDIR}/samples/rails/po/pt_BR
 @dirrm ${GEM_LIBDIR}/samples/rails/po/nl
 @dirrm ${GEM_LIBDIR}/samples/rails/po/nb
+@dirrm ${GEM_LIBDIR}/samples/rails/po/lv
 @dirrm ${GEM_LIBDIR}/samples/rails/po/ko
 @dirrm ${GEM_LIBDIR}/samples/rails/po/ja
 @dirrm ${GEM_LIBDIR}/samples/rails/po/it
@@ -1226,6 +1338,7 @@ ${GEM_HOME}/specifications/gettext-${PKGVERSION}.gemspec
 @dirrm ${GEM_LIBDIR}/samples/rails/po/cs
 @dirrm ${GEM_LIBDIR}/samples/rails/po/ca
 @dirrm ${GEM_LIBDIR}/samples/rails/po/bs
+@dirrm ${GEM_LIBDIR}/samples/rails/po/bg
 @dirrm ${GEM_LIBDIR}/samples/rails/po
 @dirrm ${GEM_LIBDIR}/samples/rails/locale/zh_TW/LC_MESSAGES
 @dirrm ${GEM_LIBDIR}/samples/rails/locale/zh_TW
@@ -1235,6 +1348,8 @@ ${GEM_HOME}/specifications/gettext-${PKGVERSION}.gemspec
 @dirrm ${GEM_LIBDIR}/samples/rails/locale/vi
 @dirrm ${GEM_LIBDIR}/samples/rails/locale/ua/LC_MESSAGES
 @dirrm ${GEM_LIBDIR}/samples/rails/locale/ua
+@dirrm ${GEM_LIBDIR}/samples/rails/locale/sr/LC_MESSAGES
+@dirrm ${GEM_LIBDIR}/samples/rails/locale/sr
 @dirrm ${GEM_LIBDIR}/samples/rails/locale/ru/LC_MESSAGES
 @dirrm ${GEM_LIBDIR}/samples/rails/locale/ru
 @dirrm ${GEM_LIBDIR}/samples/rails/locale/pt_BR/LC_MESSAGES
@@ -1243,6 +1358,8 @@ ${GEM_HOME}/specifications/gettext-${PKGVERSION}.gemspec
 @dirrm ${GEM_LIBDIR}/samples/rails/locale/nl
 @dirrm ${GEM_LIBDIR}/samples/rails/locale/nb/LC_MESSAGES
 @dirrm ${GEM_LIBDIR}/samples/rails/locale/nb
+@dirrm ${GEM_LIBDIR}/samples/rails/locale/lv/LC_MESSAGES
+@dirrm ${GEM_LIBDIR}/samples/rails/locale/lv
 @dirrm ${GEM_LIBDIR}/samples/rails/locale/ko/LC_MESSAGES
 @dirrm ${GEM_LIBDIR}/samples/rails/locale/ko
 @dirrm ${GEM_LIBDIR}/samples/rails/locale/ja/LC_MESSAGES
@@ -1271,6 +1388,8 @@ ${GEM_HOME}/specifications/gettext-${PKGVERSION}.gemspec
 @dirrm ${GEM_LIBDIR}/samples/rails/locale/ca
 @dirrm ${GEM_LIBDIR}/samples/rails/locale/bs/LC_MESSAGES
 @dirrm ${GEM_LIBDIR}/samples/rails/locale/bs
+@dirrm ${GEM_LIBDIR}/samples/rails/locale/bg/LC_MESSAGES
+@dirrm ${GEM_LIBDIR}/samples/rails/locale/bg
 @dirrm ${GEM_LIBDIR}/samples/rails/locale
 @dirrm ${GEM_LIBDIR}/samples/rails/lib/tasks
 @dirrm ${GEM_LIBDIR}/samples/rails/lib
@@ -1292,10 +1411,12 @@ ${GEM_HOME}/specifications/gettext-${PKGVERSION}.gemspec
 @dirrm ${GEM_LIBDIR}/samples/po/vi
 @dirrm ${GEM_LIBDIR}/samples/po/ua
 @dirrm ${GEM_LIBDIR}/samples/po/sv
+@dirrm ${GEM_LIBDIR}/samples/po/sr
 @dirrm ${GEM_LIBDIR}/samples/po/ru
 @dirrm ${GEM_LIBDIR}/samples/po/pt_BR
 @dirrm ${GEM_LIBDIR}/samples/po/nl
 @dirrm ${GEM_LIBDIR}/samples/po/nb
+@dirrm ${GEM_LIBDIR}/samples/po/lv
 @dirrm ${GEM_LIBDIR}/samples/po/ko
 @dirrm ${GEM_LIBDIR}/samples/po/ja
 @dirrm ${GEM_LIBDIR}/samples/po/it
@@ -1309,6 +1430,7 @@ ${GEM_HOME}/specifications/gettext-${PKGVERSION}.gemspec
 @dirrm ${GEM_LIBDIR}/samples/po/cs
 @dirrm ${GEM_LIBDIR}/samples/po/ca
 @dirrm ${GEM_LIBDIR}/samples/po/bs
+@dirrm ${GEM_LIBDIR}/samples/po/bg
 @dirrm ${GEM_LIBDIR}/samples/po
 @dirrm ${GEM_LIBDIR}/samples/locale/zh_TW/LC_MESSAGES
 @dirrm ${GEM_LIBDIR}/samples/locale/zh_TW
@@ -1318,6 +1440,8 @@ ${GEM_HOME}/specifications/gettext-${PKGVERSION}.gemspec
 @dirrm ${GEM_LIBDIR}/samples/locale/vi
 @dirrm ${GEM_LIBDIR}/samples/locale/ua/LC_MESSAGES
 @dirrm ${GEM_LIBDIR}/samples/locale/ua
+@dirrm ${GEM_LIBDIR}/samples/locale/sr/LC_MESSAGES
+@dirrm ${GEM_LIBDIR}/samples/locale/sr
 @dirrm ${GEM_LIBDIR}/samples/locale/sv/LC_MESSAGES
 @dirrm ${GEM_LIBDIR}/samples/locale/sv
 @dirrm ${GEM_LIBDIR}/samples/locale/ru/LC_MESSAGES
@@ -1328,6 +1452,8 @@ ${GEM_HOME}/specifications/gettext-${PKGVERSION}.gemspec
 @dirrm ${GEM_LIBDIR}/samples/locale/nl
 @dirrm ${GEM_LIBDIR}/samples/locale/nb/LC_MESSAGES
 @dirrm ${GEM_LIBDIR}/samples/locale/nb
+@dirrm ${GEM_LIBDIR}/samples/locale/lv/LC_MESSAGES
+@dirrm ${GEM_LIBDIR}/samples/locale/lv
 @dirrm ${GEM_LIBDIR}/samples/locale/ko/LC_MESSAGES
 @dirrm ${GEM_LIBDIR}/samples/locale/ko
 @dirrm ${GEM_LIBDIR}/samples/locale/ja/LC_MESSAGES
@@ -1354,15 +1480,19 @@ ${GEM_HOME}/specifications/gettext-${PKGVERSION}.gemspec
 @dirrm ${GEM_LIBDIR}/samples/locale/ca
 @dirrm ${GEM_LIBDIR}/samples/locale/bs/LC_MESSAGES
 @dirrm ${GEM_LIBDIR}/samples/locale/bs
+@dirrm ${GEM_LIBDIR}/samples/locale/bg/LC_MESSAGES
+@dirrm ${GEM_LIBDIR}/samples/locale/bg
 @dirrm ${GEM_LIBDIR}/samples/locale
 @dirrm ${GEM_LIBDIR}/samples/cgi/po/zh_TW
 @dirrm ${GEM_LIBDIR}/samples/cgi/po/zh
 @dirrm ${GEM_LIBDIR}/samples/cgi/po/vi
 @dirrm ${GEM_LIBDIR}/samples/cgi/po/ua
+@dirrm ${GEM_LIBDIR}/samples/cgi/po/sr
 @dirrm ${GEM_LIBDIR}/samples/cgi/po/ru
 @dirrm ${GEM_LIBDIR}/samples/cgi/po/pt_BR
 @dirrm ${GEM_LIBDIR}/samples/cgi/po/nl
 @dirrm ${GEM_LIBDIR}/samples/cgi/po/nb
+@dirrm ${GEM_LIBDIR}/samples/cgi/po/lv
 @dirrm ${GEM_LIBDIR}/samples/cgi/po/ko
 @dirrm ${GEM_LIBDIR}/samples/cgi/po/ja
 @dirrm ${GEM_LIBDIR}/samples/cgi/po/it
@@ -1376,6 +1506,7 @@ ${GEM_HOME}/specifications/gettext-${PKGVERSION}.gemspec
 @dirrm ${GEM_LIBDIR}/samples/cgi/po/cs
 @dirrm ${GEM_LIBDIR}/samples/cgi/po/ca
 @dirrm ${GEM_LIBDIR}/samples/cgi/po/bs
+@dirrm ${GEM_LIBDIR}/samples/cgi/po/bg
 @dirrm ${GEM_LIBDIR}/samples/cgi/po
 @dirrm ${GEM_LIBDIR}/samples/cgi/locale/zh_TW/LC_MESSAGES
 @dirrm ${GEM_LIBDIR}/samples/cgi/locale/zh_TW
@@ -1385,6 +1516,8 @@ ${GEM_HOME}/specifications/gettext-${PKGVERSION}.gemspec
 @dirrm ${GEM_LIBDIR}/samples/cgi/locale/vi
 @dirrm ${GEM_LIBDIR}/samples/cgi/locale/ua/LC_MESSAGES
 @dirrm ${GEM_LIBDIR}/samples/cgi/locale/ua
+@dirrm ${GEM_LIBDIR}/samples/cgi/locale/sr/LC_MESSAGES
+@dirrm ${GEM_LIBDIR}/samples/cgi/locale/sr
 @dirrm ${GEM_LIBDIR}/samples/cgi/locale/ru/LC_MESSAGES
 @dirrm ${GEM_LIBDIR}/samples/cgi/locale/ru
 @dirrm ${GEM_LIBDIR}/samples/cgi/locale/pt_BR/LC_MESSAGES
@@ -1393,6 +1526,8 @@ ${GEM_HOME}/specifications/gettext-${PKGVERSION}.gemspec
 @dirrm ${GEM_LIBDIR}/samples/cgi/locale/nl
 @dirrm ${GEM_LIBDIR}/samples/cgi/locale/nb/LC_MESSAGES
 @dirrm ${GEM_LIBDIR}/samples/cgi/locale/nb
+@dirrm ${GEM_LIBDIR}/samples/cgi/locale/lv/LC_MESSAGES
+@dirrm ${GEM_LIBDIR}/samples/cgi/locale/lv
 @dirrm ${GEM_LIBDIR}/samples/cgi/locale/ko/LC_MESSAGES
 @dirrm ${GEM_LIBDIR}/samples/cgi/locale/ko
 @dirrm ${GEM_LIBDIR}/samples/cgi/locale/ja/LC_MESSAGES
@@ -1419,6 +1554,8 @@ ${GEM_HOME}/specifications/gettext-${PKGVERSION}.gemspec
 @dirrm ${GEM_LIBDIR}/samples/cgi/locale/ca
 @dirrm ${GEM_LIBDIR}/samples/cgi/locale/bs/LC_MESSAGES
 @dirrm ${GEM_LIBDIR}/samples/cgi/locale/bs
+@dirrm ${GEM_LIBDIR}/samples/cgi/locale/bg/LC_MESSAGES
+@dirrm ${GEM_LIBDIR}/samples/cgi/locale/bg
 @dirrm ${GEM_LIBDIR}/samples/cgi/locale
 @dirrm ${GEM_LIBDIR}/samples/cgi
 @dirrm ${GEM_LIBDIR}/samples
@@ -1427,10 +1564,12 @@ ${GEM_HOME}/specifications/gettext-${PKGVERSION}.gemspec
 @dirrm ${GEM_LIBDIR}/po/vi
 @dirrm ${GEM_LIBDIR}/po/ua
 @dirrm ${GEM_LIBDIR}/po/sv
+@dirrm ${GEM_LIBDIR}/po/sr
 @dirrm ${GEM_LIBDIR}/po/ru
 @dirrm ${GEM_LIBDIR}/po/pt_BR
 @dirrm ${GEM_LIBDIR}/po/nl
 @dirrm ${GEM_LIBDIR}/po/nb
+@dirrm ${GEM_LIBDIR}/po/lv
 @dirrm ${GEM_LIBDIR}/po/ko
 @dirrm ${GEM_LIBDIR}/po/ja
 @dirrm ${GEM_LIBDIR}/po/it
@@ -1445,6 +1584,7 @@ ${GEM_HOME}/specifications/gettext-${PKGVERSION}.gemspec
 @dirrm ${GEM_LIBDIR}/po/cs
 @dirrm ${GEM_LIBDIR}/po/ca
 @dirrm ${GEM_LIBDIR}/po/bs
+@dirrm ${GEM_LIBDIR}/po/bg
 @dirrm ${GEM_LIBDIR}/po
 @dirrm ${GEM_LIBDIR}/lib/locale
 @dirrm ${GEM_LIBDIR}/lib/gettext/parser
@@ -1461,6 +1601,8 @@ ${GEM_HOME}/specifications/gettext-${PKGVERSION}.gemspec
 @dirrm ${GEM_LIBDIR}/doc/classes/GetText
 @dirrm ${GEM_LIBDIR}/doc/classes/ActiveRecord/ConnectionAdapters
 @dirrm ${GEM_LIBDIR}/doc/classes/ActiveRecord
+@dirrm ${GEM_LIBDIR}/doc/classes/ActionView/Helpers
+@dirrm ${GEM_LIBDIR}/doc/classes/ActionView
 @dirrm ${GEM_LIBDIR}/doc/classes
 @dirrm ${GEM_LIBDIR}/doc
 @dirrm ${GEM_LIBDIR}/data/locale/zh_TW/LC_MESSAGES
@@ -1473,6 +1615,8 @@ ${GEM_HOME}/specifications/gettext-${PKGVERSION}.gemspec
 @dirrm ${GEM_LIBDIR}/data/locale/ua
 @dirrm ${GEM_LIBDIR}/data/locale/sv/LC_MESSAGES
 @dirrm ${GEM_LIBDIR}/data/locale/sv
+@dirrm ${GEM_LIBDIR}/data/locale/sr/LC_MESSAGES
+@dirrm ${GEM_LIBDIR}/data/locale/sr
 @dirrm ${GEM_LIBDIR}/data/locale/ru/LC_MESSAGES
 @dirrm ${GEM_LIBDIR}/data/locale/ru
 @dirrm ${GEM_LIBDIR}/data/locale/pt_BR/LC_MESSAGES
@@ -1481,6 +1625,8 @@ ${GEM_HOME}/specifications/gettext-${PKGVERSION}.gemspec
 @dirrm ${GEM_LIBDIR}/data/locale/nl
 @dirrm ${GEM_LIBDIR}/data/locale/nb/LC_MESSAGES
 @dirrm ${GEM_LIBDIR}/data/locale/nb
+@dirrm ${GEM_LIBDIR}/data/locale/lv/LC_MESSAGES
+@dirrm ${GEM_LIBDIR}/data/locale/lv
 @dirrm ${GEM_LIBDIR}/data/locale/ko/LC_MESSAGES
 @dirrm ${GEM_LIBDIR}/data/locale/ko
 @dirrm ${GEM_LIBDIR}/data/locale/ja/LC_MESSAGES
@@ -1509,6 +1655,8 @@ ${GEM_HOME}/specifications/gettext-${PKGVERSION}.gemspec
 @dirrm ${GEM_LIBDIR}/data/locale/ca
 @dirrm ${GEM_LIBDIR}/data/locale/bs/LC_MESSAGES
 @dirrm ${GEM_LIBDIR}/data/locale/bs
+@dirrm ${GEM_LIBDIR}/data/locale/bg/LC_MESSAGES
+@dirrm ${GEM_LIBDIR}/data/locale/bg
 @dirrm ${GEM_LIBDIR}/data/locale
 @dirrm ${GEM_LIBDIR}/data
 @dirrm ${GEM_LIBDIR}/bin
