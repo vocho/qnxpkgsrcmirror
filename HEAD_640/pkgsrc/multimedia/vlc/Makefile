@@ -1,9 +1,10 @@
-# $NetBSD: Makefile,v 1.58 2008/09/08 18:58:24 ahoka Exp $
+# $NetBSD: Makefile,v 1.61 2008/10/02 17:49:00 ahoka Exp $
 #
 
-DISTNAME=		vlc-0.9.1
+DISTNAME=		vlc-0.9.2
+PKGREVISION=		1
 CATEGORIES=		multimedia
-MASTER_SITES=		http://download.videolan.org/pub/videolan/vlc/0.9.1/
+MASTER_SITES=		http://download.videolan.org/pub/videolan/vlc/0.9.2/
 EXTRACT_SUFX=		.tar.bz2
 
 MAINTAINER=		ahoka@NetBSD.org
@@ -19,12 +20,17 @@ GNU_CONFIGURE=		yes
 PTHREAD_OPTS+=		require
 USE_LANGUAGES=		c99 c++
 USE_DIRS+=		xdg-1.4
+PLIST_VARS+=		x86simd altivec v4l2 vcd cdda
 
 .include "../../mk/bsd.prefs.mk"
 .include "options.mk"
 
 .if ${OPSYS} == "NetBSD"
 CONFIGURE_ARGS+=	--disable-vcd
+.else
+PLIST.vcd=		yes
+# This may need a closer look.
+PLIST.cdda=		yes
 .endif
 
 BUILDLINK_API_DEPENDS.zlib+=		zlib>=1.2.0
@@ -41,6 +47,24 @@ CONFIGURE_ARGS+=	--enable-cddax \
 			--enable-live555 \
 			--enable-snapshot
 
+# Build optimalized modules
+.if ${MACHINE_ARCH} == "i386" || ${MACHINE_ARCH} == "x86_64"
+PLIST.x86simd=		yes
+CONFIGURE_ARGS+=	--enable-mmx \
+			--enable-sse
+.endif
+.if ${MACHINE_ARCH} == "powerpc"
+PLIST.altivec=		yes
+CONFIGURE_ARGS+=	--enable-altivec
+.endif
+
+# Enable when cleanly builds
+.if exists(/usr/include/linux/videodev2.h) # || exists(/usr/include/sys/videoio.h)
+CONFIGURE_ARGS+=	--enable-v4l2
+PLIST.v4l2=		yes
+.else
+CONFIGURE_ARGS+=	--disable-v4l2
+.endif
 
 INSTALLATION_DIRS+=	${PREFIX}/share/vlc/http/dialogs \
 			${PREFIX}/share/vlc/http/images \
@@ -59,6 +83,9 @@ INSTALLATION_DIRS+=	${PREFIX}/share/vlc/http/dialogs \
 			${PREFIX}/share/vlc/osdmenu/dvd/selection \
 			${PREFIX}/share/vlc/skins2 \
 			${PREFIX}/share/vlc/skins2/fonts
+
+pre-configure:
+	cd ${WRKSRC} && autoconf
 
 pre-install:
 	${INSTALL_DATA} ${WRKSRC}/doc/vlc.1 ${DESTDIR}${PREFIX}/${PKGMANDIR}/man1

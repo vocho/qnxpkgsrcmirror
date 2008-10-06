@@ -1,10 +1,8 @@
-# $NetBSD: Makefile,v 1.328 2008/08/24 09:10:52 obache Exp $
+# $NetBSD: Makefile,v 1.330 2008/09/16 20:00:35 gdt Exp $
 #
 
 COMMENT=	Security tools
 
-SUBDIR+=	AiCA
-SUBDIR+=	AiSSLtelnet
 SUBDIR+=	Bastille
 SUBDIR+=	CSP
 SUBDIR+=	CoolKey
@@ -137,6 +135,7 @@ SUBDIR+=	openssh
 SUBDIR+=	openssl
 SUBDIR+=	otpCalc
 SUBDIR+=	p0f
+SUBDIR+=	p5-Authen-CAS-Client
 SUBDIR+=	p5-Authen-PAM
 SUBDIR+=	p5-Authen-SASL
 SUBDIR+=	p5-Authen-SASL-Cyrus
@@ -260,7 +259,6 @@ SUBDIR+=	secpanel
 SUBDIR+=	sfs
 SUBDIR+=	sign
 SUBDIR+=	skey
-SUBDIR+=	smimemsg
 SUBDIR+=	smtpd
 SUBDIR+=	sniff
 SUBDIR+=	snortsnarf

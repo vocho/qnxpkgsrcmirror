@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.723 2008/09/10 01:12:31 joerg Exp $
+# $NetBSD: Makefile,v 1.728 2008/09/22 23:52:02 jmcneill Exp $
 #
 
 COMMENT=	Networking tools
@@ -95,6 +95,7 @@ SUBDIR+=	dynipclient
 SUBDIR+=	echoping
 SUBDIR+=	ed2k-gtk-gui
 SUBDIR+=	edonkey2k
+SUBDIR+=	ekiga
 SUBDIR+=	entropy
 SUBDIR+=	etherape
 SUBDIR+=	ettercap
@@ -321,7 +322,9 @@ SUBDIR+=	p5-Net-IPv4Addr
 SUBDIR+=	p5-Net-IPv6Addr
 SUBDIR+=	p5-Net-IRC
 SUBDIR+=	p5-Net-Ident
+SUBDIR+=	p5-Net-Jifty
 SUBDIR+=	p5-Net-LDAP-Server
+SUBDIR+=	p5-Net-LibIDN
 SUBDIR+=	p5-Net-Libdnet
 SUBDIR+=	p5-Net-NBName
 SUBDIR+=	p5-Net-OpenID-Consumer
@@ -340,6 +343,7 @@ SUBDIR+=	p5-Net-Write
 SUBDIR+=	p5-Net-XMPP
 SUBDIR+=	p5-Net-XWhois
 SUBDIR+=	p5-Net-Z3950
+SUBDIR+=	p5-Net-Z3950-ZOOM
 SUBDIR+=	p5-Net-eBay
 SUBDIR+=	p5-NetAddr-IP
 SUBDIR+=	p5-NetPacket

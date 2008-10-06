@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.1.1.1 2005/08/07 11:27:29 wiz Exp $
+@comment $NetBSD: PLIST,v 1.2 2008/09/22 19:54:27 joerg Exp $
 bin/wx24-config
 bin/wxgtk${GTKVER}-2.4-config
 include/wx/accel.h

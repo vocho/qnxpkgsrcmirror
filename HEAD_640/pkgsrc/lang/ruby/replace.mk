@@ -1,4 +1,4 @@
-# $NetBSD: replace.mk,v 1.9 2008/03/17 20:57:04 jlam Exp $
+# $NetBSD: replace.mk,v 1.12 2008/09/22 16:42:06 minskim Exp $
 #
 
 .if !defined(_RUBY_REPLACE_MK)
@@ -36,11 +36,20 @@ _REPLACE_RUBY_PAT+= -o -name "${f}"
 _REPLACE_RUBY_FIND_ARGS=\( ${_REPLACE_RUBY_PAT:S/-o//1} \)
 
 replace-ruby-dirs:
-	${RUN} cd ${WRKSRC} && ${FIND} ${REPLACE_RUBY_DIRS} \
-	    -type f ${_REPLACE_RUBY_FIND_ARGS} -print | \
+	${RUN} cd ${WRKSRC} && \
+	    for d in ${REPLACE_RUBY_DIRS}; do \
+		if [ -d $$d ]; then \
+		    dirs="$$dirs $$d"; \
+		fi; \
+	    done; \
+	    if [ -z "$$dirs" ]; then \
+		exit 0; \
+	    fi; \
+	    ${FIND} $$dirs \
+		-type f ${_REPLACE_RUBY_FIND_ARGS} -print | \
 	    while read f; do \
-		${SED}	-e '1s| *[a-z0-9_/\.-][a-z0-9_/\.-]*/env *||g' \
-			-e '1s| *[a-z0-9_/\.-]*ruby|${RUBY}|' $$f > $$f.tmp; \
+		${SED}	-e '1s|^#! *[a-z0-9_/\.-][a-z0-9_/\.-]*/env *|#!|g' \
+			-e '1s|^#! *[a-z0-9_/\.-]*ruby|#!${RUBY}|' $$f > $$f.tmp; \
 		if ${CMP} -s $$f $$f.tmp; then \
 			${RM} $$f.tmp; \
 		else \
