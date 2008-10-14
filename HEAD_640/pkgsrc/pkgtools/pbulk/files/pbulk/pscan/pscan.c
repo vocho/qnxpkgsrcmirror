@@ -51,6 +51,7 @@
 int verbosity;
 
 static const char *bmake_path;
+static const char *bmake_cmd;
 static const char *output_file;
 static const char *pkgsrc_tree;
 
@@ -121,6 +122,12 @@ main(int argc, char **argv)
 		usage();
 	}
 
+	bmake_cmd = strrchr(bmake_path, '/');
+	if (bmake_cmd == NULL)
+		bmake_cmd = bmake_path;
+	else
+		++bmake_cmd;
+
 	if (client_port) {
 		if (limited_scan != 0 || argc != 1)
 			usage();
@@ -154,7 +161,7 @@ char *
 scan_pkglocation(const char *pkg_location)
 {
 	const char * extract_pbulk_index[] = {
-		bmake_path,
+		bmake_cmd,
 		"pbulk-index",
 		NULL
 	};
@@ -187,7 +194,7 @@ static void
 find_full_tree(void)
 {
 	const char * extract_subdir[] = {
-		bmake_path,
+		bmake_cmd,
 		"show-subdir-var",
 		"VARNAME=SUBDIR",
 		NULL
