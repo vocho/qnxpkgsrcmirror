@@ -12,5 +12,5 @@ if [ "${config_version}" != "@PBULK_CONFIG_VERSION@" ]; then
 fi
 
 for client in ${scan_clients}; do
-	ssh $client "${pscan_prepare} && ${pscan} -c ${master_port_scan} -M ${make} ${pkgsrc}" &
+	ssh $client "${pscan_prepare} && env PATH=\$PATH:${prefix}/bin ${pscan} -c ${master_port_scan} -M ${make} ${pkgsrc}" &
 done
