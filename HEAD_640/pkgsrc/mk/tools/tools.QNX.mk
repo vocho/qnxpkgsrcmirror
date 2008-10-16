@@ -39,7 +39,7 @@ TOOLS_PLATFORM.groff?=		/usr/bin/groff
 .endif
 TOOLS_PLATFORM.gunzip?=		/bin/gunzip -f
 TOOLS_PLATFORM.gzcat?=		/bin/gzip -dc
-TOOLS_PLATFORM.gzip?=		/usr/bin/gzip -nf ${GZIP}
+TOOLS_PLATFORM.gzip?=		/bin/gzip -nf ${GZIP}
 TOOLS_PLATFORM.head?=		/usr/bin/head
 TOOLS_PLATFORM.hostname?=	/bin/hostname
 TOOLS_PLATFORM.id?=		/usr/bin/id
