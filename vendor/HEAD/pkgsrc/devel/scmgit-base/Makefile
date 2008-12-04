@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.12 2008/09/21 02:00:37 minskim Exp $
+# $NetBSD: Makefile,v 1.15 2008/10/19 19:18:09 he Exp $
 #
 
 .include "../../devel/scmgit/Makefile.common"
 
 PKGNAME=		scmgit-base-${GIT_VERSION}
-PKGREVISION=		1
+PKGREVISION=		3
 COMMENT=		GIT Tree History Storage Tool (base package)
 
 PKG_DESTDIR_SUPPORT=	user-destdir
@@ -80,7 +80,7 @@ SUBST_MESSAGE.fix-paths=Fixing hard-coded pathnames
 SUBST_STAGE.fix-paths=	pre-build
 SUBST_VARS.fix-paths=	PREFIX
 
-#.include "../../mk/emacs.mk" # XXX TODO (see patch-ad)
+#.include "../../editors/emacs/modules.mk" # XXX TODO (see patch-ad)
 
 .include "options.mk"
 .include "../../lang/perl5/module.mk"

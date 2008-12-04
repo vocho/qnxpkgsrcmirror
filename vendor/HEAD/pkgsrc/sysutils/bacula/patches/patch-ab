@@ -1,26 +1,22 @@
-$NetBSD: patch-ab,v 1.1 2008/07/13 15:26:36 tonnerre Exp $
+$NetBSD: patch-ab,v 1.3 2008/11/28 13:47:51 adam Exp $
 
---- src/cats/make_catalog_backup.in.orig	2007-04-24 17:36:15.000000000 +0200
-+++ src/cats/make_catalog_backup.in
-@@ -8,7 +8,11 @@
- #  $2 is the user name with which to access the database
- #     (default = bacula).
- #  $3 is the password with which to access the database or "" if no password
--#     (default "")
-+#     (default ""). WARNING!!! Passing the password via the command line is 
-+#     insecure and should not be used since any user can display the command 
-+#     line arguments and the environment using ps.  Please consult your
-+#     MySQL or PostgreSQL manual for secure methods of specifying the
-+#     password.
- #  $4 is the host on which the database is located
- #     (default "")
- #
-@@ -31,7 +35,7 @@ else
-     else
-       MYSQLHOST=""
-     fi
--    ${BINDIR}/mysqldump -u $2$MYSQLPASSWORD$MYSQLHOST -f --opt $1 >$1.sql
-+    ${BINDIR}/mysqldump -u ${2}${MYSQLPASSWORD}${MYSQLHOST} -f --opt $1 >$1.sql
-   else			      
-     if test xpostgresql = x@DB_TYPE@ ; then
-       if test $# -gt 2; then
+--- src/lib/crypto.c.orig	2008-11-28 13:50:13.000000000 +0100
++++ src/lib/crypto.c
+@@ -1099,7 +1099,7 @@ CRYPTO_SESSION *crypto_session_new (cryp
+       /* Encrypt the session key */
+       ekey = (unsigned char *)malloc(EVP_PKEY_size(keypair->pubkey));
+ 
+-      if ((ekey_len = EVP_PKEY_encrypt(ekey, cs->session_key, cs->session_key_len, keypair->pubkey)) <= 0) {
++      if ((ekey_len = EVP_PKEY_encrypt_old(ekey, cs->session_key, cs->session_key_len, keypair->pubkey)) <= 0) {
+          /* OpenSSL failure */
+          RecipientInfo_free(ri);
+          crypto_session_free(cs);
+@@ -1222,7 +1222,7 @@ crypto_error_t crypto_session_decode(con
+             /* Decrypt the session key */
+             /* Allocate sufficient space for the largest possible decrypted data */
+             cs->session_key = (unsigned char *)malloc(EVP_PKEY_size(keypair->privkey));
+-            cs->session_key_len = EVP_PKEY_decrypt(cs->session_key, M_ASN1_STRING_data(ri->encryptedKey),
++            cs->session_key_len = EVP_PKEY_decrypt_old(cs->session_key, M_ASN1_STRING_data(ri->encryptedKey),
+                                   M_ASN1_STRING_length(ri->encryptedKey), keypair->privkey);
+ 
+             if (cs->session_key_len <= 0) {

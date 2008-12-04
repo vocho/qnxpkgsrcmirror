@@ -1,11 +1,12 @@
-$NetBSD: distinfo,v 1.46 2008/09/27 23:11:37 tonnerre Exp $
+$NetBSD: distinfo,v 1.50 2008/11/15 23:02:09 wiz Exp $
 
-SHA1 (gnutls-2.4.1.tar.bz2) = 7a439542e6344d5ccf11a29431a0600e7fe1c735
-RMD160 (gnutls-2.4.1.tar.bz2) = 4e21a82047add916b8ccce8aa82c36b2c9bcff90
-Size (gnutls-2.4.1.tar.bz2) = 4940118 bytes
-SHA1 (patch-aa) = b2024cb515196e64efcdbba227f05db9eb07c236
-SHA1 (patch-ab) = d30748128877d2ec5942d2b852f23a05d36102d0
-SHA1 (patch-ac) = 21f2ab373a888aadeb66d58b70e54bab4c3be7eb
-SHA1 (patch-ad) = 720d096d95a4d76aedaa13606ad4bee7872da5b0
+SHA1 (gnutls-2.6.2.tar.bz2) = 2c7701b61c86d5cec8305f8741bc18bc64f33b31
+RMD160 (gnutls-2.6.2.tar.bz2) = 10a37efe6bd90add75e338ca98eb09cc4ab69dc7
+Size (gnutls-2.6.2.tar.bz2) = 5113586 bytes
+SHA1 (patch-aa) = 8e9ea317342d584fb6f931f96458cc3d7d747ca0
+SHA1 (patch-ab) = 17605f0d3b1895c1c63c8dabc21bdebf95eb7785
 SHA1 (patch-ae) = f505476ce0477dc547e8698d205d6ba26fe85f48
 SHA1 (patch-af) = bd4701640dfef5bfdce87d620befd93098b0dff3
+SHA1 (patch-ag) = 39298bf6cbff77d880654067e797a9a4cb868b9b
+SHA1 (patch-ah) = 889b69c23b4b0584fddd08a6827b10b78fc8f018
+SHA1 (patch-ai) = 2c5c181ec6de9622cac66c2d5fe2cc8f3f89fbe8

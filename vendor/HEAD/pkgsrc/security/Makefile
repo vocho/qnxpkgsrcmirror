@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.330 2008/09/16 20:00:35 gdt Exp $
+# $NetBSD: Makefile,v 1.336 2008/11/22 03:36:20 jmcneill Exp $
 #
 
 COMMENT=	Security tools
@@ -137,6 +137,7 @@ SUBDIR+=	otpCalc
 SUBDIR+=	p0f
 SUBDIR+=	p5-Authen-CAS-Client
 SUBDIR+=	p5-Authen-PAM
+SUBDIR+=	p5-Authen-PluggableCaptcha
 SUBDIR+=	p5-Authen-SASL
 SUBDIR+=	p5-Authen-SASL-Cyrus
 SUBDIR+=	p5-Crypt-Blowfish
@@ -147,6 +148,7 @@ SUBDIR+=	p5-Crypt-DES
 SUBDIR+=	p5-Crypt-DES_EDE3
 SUBDIR+=	p5-Crypt-DH
 SUBDIR+=	p5-Crypt-DSA
+SUBDIR+=	p5-Crypt-Eksblowfish
 SUBDIR+=	p5-Crypt-GPG
 SUBDIR+=	p5-Crypt-GeneratePassword
 SUBDIR+=	p5-Crypt-IDEA
@@ -192,6 +194,7 @@ SUBDIR+=	p5-SHA
 SUBDIR+=	p5-String-Random
 SUBDIR+=	p5-Tie-EncryptedHash
 SUBDIR+=	p5-pcsc
+SUBDIR+=	pakchois
 SUBDIR+=	pakemon
 SUBDIR+=	pam-af
 SUBDIR+=	pam-dbm
@@ -210,6 +213,8 @@ SUBDIR+=	php-mhash
 SUBDIR+=	pinentry
 SUBDIR+=	pinepgp
 SUBDIR+=	pks
+SUBDIR+=	policykit
+SUBDIR+=	policykit-gnome
 SUBDIR+=	portsentry
 SUBDIR+=	prelude-correlator
 SUBDIR+=	prelude-lml
@@ -223,6 +228,7 @@ SUBDIR+=	pwsafe
 SUBDIR+=	py-OpenSSL
 SUBDIR+=	py-SSLCrypto
 SUBDIR+=	py-amkCrypto
+SUBDIR+=	py-asn1
 SUBDIR+=	py-crack
 SUBDIR+=	py-cryptkit
 SUBDIR+=	py-denyhosts
@@ -253,8 +259,7 @@ SUBDIR+=	ruby-tcpwrap
 SUBDIR+=	sbd
 SUBDIR+=	scanssh
 SUBDIR+=	seahorse
-SUBDIR+=	seahorse-gedit
-SUBDIR+=	seahorse-nautilus
+SUBDIR+=	seahorse-plugins
 SUBDIR+=	secpanel
 SUBDIR+=	sfs
 SUBDIR+=	sign

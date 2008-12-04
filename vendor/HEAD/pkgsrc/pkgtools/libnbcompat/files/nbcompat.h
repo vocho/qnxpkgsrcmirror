@@ -1,4 +1,4 @@
-/*	$NetBSD: nbcompat.h,v 1.40 2008/05/19 12:52:57 joerg Exp $	*/
+/*	$NetBSD: nbcompat.h,v 1.42 2008/10/19 21:02:07 joerg Exp $	*/
 
 /*-
  * Copyright (c) 2003 The NetBSD Foundation, Inc.
@@ -27,12 +27,11 @@
  */
 
 #include <nbcompat/nbconfig.h>
-#include <nbcompat/nbtypes.h>
 
 #include <nbcompat/cdefs.h>
+#include <nbcompat/types.h>
 #include <nbcompat/limits.h>
 #include <nbcompat/endian.h>
-#include <nbcompat/types.h>
 #include <nbcompat/param.h>
 
 #if HAVE_ERRNO_H

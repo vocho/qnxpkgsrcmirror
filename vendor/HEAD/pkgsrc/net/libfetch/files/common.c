@@ -1,4 +1,4 @@
-/*	$NetBSD: common.c,v 1.13 2008/05/09 00:39:06 joerg Exp $	*/
+/*	$NetBSD: common.c,v 1.16 2008/10/07 15:50:00 joerg Exp $	*/
 /*-
  * Copyright (c) 1998-2004 Dag-Erling Coïdan Smørgrav
  * Copyright (c) 2008 Joerg Sonnenberger <joerg@NetBSD.org>
@@ -30,17 +30,31 @@
  * $FreeBSD: common.c,v 1.53 2007/12/19 00:26:36 des Exp $
  */
 
+#if HAVE_CONFIG_H
+#include "config.h"
+#endif
+#ifndef NETBSD
+#include <nbcompat.h>
+#endif
+
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <sys/time.h>
 #include <sys/uio.h>
 
+#include <arpa/inet.h>
 #include <netinet/in.h>
 
 #include <ctype.h>
 #include <errno.h>
+#if defined(HAVE_INTTYPES_H) || defined(NETBSD)
 #include <inttypes.h>
+#endif
+#ifndef NETBSD
+#include <nbcompat/netdb.h>
+#else
 #include <netdb.h>
+#endif
 #include <pwd.h>
 #include <stdarg.h>
 #include <stdlib.h>
@@ -220,6 +234,8 @@ fetch_reopen(int sd)
 	/* allocate and fill connection structure */
 	if ((conn = calloc(1, sizeof(*conn))) == NULL)
 		return (NULL);
+	conn->next_buf = NULL;
+	conn->next_len = 0;
 	conn->sd = sd;
 	++conn->ref;
 	return (conn);
@@ -245,13 +261,13 @@ int
 fetch_bind(int sd, int af, const char *addr)
 {
 	struct addrinfo hints, *res, *res0;
-	int err;
+	int error;
 
 	memset(&hints, 0, sizeof(hints));
 	hints.ai_family = af;
 	hints.ai_socktype = SOCK_STREAM;
 	hints.ai_protocol = 0;
-	if ((err = getaddrinfo(addr, NULL, &hints, &res0)) != 0)
+	if ((error = getaddrinfo(addr, NULL, &hints, &res0)) != 0)
 		return (-1);
 	for (res = res0; res; res = res->ai_next)
 		if (bind(sd, res->ai_addr, res->ai_addrlen) == 0)
@@ -270,7 +286,7 @@ fetch_connect(const char *host, int port, int af, int verbose)
 	char pbuf[10];
 	const char *bindaddr;
 	struct addrinfo hints, *res, *res0;
-	int sd, err;
+	int sd, error;
 
 	if (verbose)
 		fetch_info("looking up %s", host);
@@ -281,8 +297,8 @@ fetch_connect(const char *host, int port, int af, int verbose)
 	hints.ai_family = af;
 	hints.ai_socktype = SOCK_STREAM;
 	hints.ai_protocol = 0;
-	if ((err = getaddrinfo(host, pbuf, &hints, &res0)) != 0) {
-		netdb_seterr(err);
+	if ((error = getaddrinfo(host, pbuf, &hints, &res0)) != 0) {
+		netdb_seterr(error);
 		return (NULL);
 	}
 	bindaddr = getenv("FETCH_BIND_ADDRESS");
@@ -385,8 +401,20 @@ fetch_read(conn_t *conn, char *buf, size_t len)
 {
 	struct timeval now, timeout, waittv;
 	fd_set readfds;
-	ssize_t rlen, total;
+	ssize_t rlen;
 	int r;
+
+	if (len == 0)
+		return 0;
+
+	if (conn->next_len != 0) {
+		if (conn->next_len < len)
+			len = conn->next_len;
+		memmove(buf, conn->next_buf, len);
+		conn->next_len -= len;
+		conn->next_buf += len;
+		return len;
+	}
 
 	if (fetchTimeout) {
 		FD_ZERO(&readfds);
@@ -394,8 +422,7 @@ fetch_read(conn_t *conn, char *buf, size_t len)
 		timeout.tv_sec += fetchTimeout;
 	}
 
-	total = 0;
-	while (len > 0) {
+	for (;;) {
 		while (fetchTimeout && !FD_ISSET(conn->sd, &readfds)) {
 			FD_SET(conn->sd, &readfds);
 			gettimeofday(&now, NULL);
@@ -425,18 +452,13 @@ fetch_read(conn_t *conn, char *buf, size_t len)
 		else
 #endif
 			rlen = read(conn->sd, buf, len);
-		if (rlen == 0)
+		if (rlen >= 0)
 			break;
-		if (rlen < 0) {
-			if (errno == EINTR && fetchRestartCalls)
-				continue;
+	
+		if (errno != EINTR || !fetchRestartCalls)
 			return (-1);
-		}
-		len -= rlen;
-		buf += rlen;
-		total += rlen;
 	}
-	return (total);
+	return (rlen);
 }
 
 
@@ -448,13 +470,12 @@ fetch_read(conn_t *conn, char *buf, size_t len)
 int
 fetch_getln(conn_t *conn)
 {
-	char *tmp;
+	char *tmp, *next;
 	size_t tmpsize;
 	ssize_t len;
-	char c;
 
 	if (conn->buf == NULL) {
-		if ((conn->buf = malloc(MIN_BUF_SIZE)) == NULL) {
+		if ((conn->buf = malloc(MIN_BUF_SIZE + 1)) == NULL) {
 			errno = ENOMEM;
 			return (-1);
 		}
@@ -463,15 +484,19 @@ fetch_getln(conn_t *conn)
 
 	conn->buf[0] = '\0';
 	conn->buflen = 0;
+	next = NULL;
 
 	do {
-		len = fetch_read(conn, &c, 1);
+		len = fetch_read(conn, conn->buf + conn->buflen,
+		    conn->bufsize - conn->buflen);
 		if (len == -1)
 			return (-1);
 		if (len == 0)
 			break;
-		conn->buf[conn->buflen++] = c;
-		if (conn->buflen == conn->bufsize) {
+		next = memchr(conn->buf + conn->buflen, '\n', len);
+		conn->buflen += len;
+		if (conn->buflen == conn->bufsize &&
+		    (next == NULL || next[1] == '\0')) {
 			tmp = conn->buf;
 			tmpsize = conn->bufsize * 2 + 1;
 			if ((tmp = realloc(tmp, tmpsize)) == NULL) {
@@ -481,8 +506,13 @@ fetch_getln(conn_t *conn)
 			conn->buf = tmp;
 			conn->bufsize = tmpsize;
 		}
-	} while (c != '\n');
+	} while (next == NULL);
 
+	if (next != NULL) {
+		conn->next_buf = next + 1;
+		conn->next_len = conn->buflen - (conn->next_buf - conn->buf);
+		conn->buflen = next - conn->buf;
+	}
 	conn->buf[conn->buflen] = '\0';
 	return (0);
 }

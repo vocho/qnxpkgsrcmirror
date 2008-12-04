@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.81 2007/12/11 05:27:05 bjs Exp $
+# $NetBSD: Makefile,v 1.83 2008/11/16 17:03:00 adrianp Exp $
 
 .include "Makefile.common"
-PKGREVISION=	2
 
 COMMENT=	CRT screen handling and optimization package
 
@@ -26,6 +25,8 @@ SUBST_SED.ti+=		-e '/^screen.linux|/,/^$$/d'
 SUBST_SED.ti+=		-e '/^screen-w|/,/^$$/d'
 SUBST_SED.ti+=		-e '/^screen-16color/,/^$$/d'
 SUBST_SED.ti+=		-e '/^screen-256color/,/^$$/d'
+SUBST_SED.ti+=		-e '/^screen.mlterm/,/^$$/d'
+SUBST_SED.ti+=		-e '/^screen.rxvt/,/^$$/d'
 .endif
 
 post-configure:

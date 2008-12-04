@@ -1,14 +1,17 @@
-# $NetBSD: Makefile,v 1.57 2008/06/13 11:03:48 drochner Exp $
+# $NetBSD: Makefile,v 1.60 2008/10/25 12:23:09 obache Exp $
 #
 
-DISTNAME=	vte-0.16.14
+DISTNAME=	vte-0.17.4
+PKGREVISION=	1
 CATEGORIES=	x11
-MASTER_SITES=	${MASTER_SITE_GNOME:=sources/vte/0.16/}
+MASTER_SITES=	${MASTER_SITE_GNOME:=sources/vte/0.17/}
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.gnome.org/
 COMMENT=	Terminal widget with improved accessibility and I18N support
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_DIRS+=		gnome2-1.2
 USE_PKGLOCALEDIR=	yes
@@ -37,5 +40,4 @@ BUILDLINK_DEPMETHOD.libXt?=	build
 .include "../../x11/libX11/buildlink3.mk"
 .include "../../x11/libXft/buildlink3.mk"
 .include "../../x11/libXt/buildlink3.mk"
-.include "../../x11/libzvt/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

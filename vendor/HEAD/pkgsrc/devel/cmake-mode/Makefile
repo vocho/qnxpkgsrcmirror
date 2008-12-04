@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.2 2008/03/03 17:45:34 jlam Exp $
+# $NetBSD: Makefile,v 1.4 2008/11/10 16:08:04 wiz Exp $
 #
 
 DISTNAME=	cmake-mode
-PKGNAME=	cmake-mode-20060923
+PKGNAME=	cmake-mode-20080606
 CATEGORIES=	devel
 MASTER_SITES=	http://www.cmake.org/CMakeDocs/
 EXTRACT_SUFX=	.el
@@ -25,5 +25,5 @@ do-install:
 	${INSTALL_DATA_DIR} ${DESTDIR}${EMACS_LISPPREFIX}
 	${INSTALL_DATA} ${WRKSRC}/cmake-mode.* ${DESTDIR}${EMACS_LISPPREFIX}
 
-.include "../../mk/emacs.mk"
+.include "../../editors/emacs/modules.mk"
 .include "../../mk/bsd.pkg.mk"

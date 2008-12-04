@@ -1,17 +1,19 @@
-# $NetBSD: Makefile,v 1.9 2008/03/04 15:55:13 jlam Exp $
+# $NetBSD: Makefile,v 1.12 2008/11/28 01:56:05 obache Exp $
 #
 
 DISTNAME=	IIIMECF-0.6
 PKGNAME=	${EMACS_PKGNAME_PREFIX}iiimecf-0.6
 PKGREVISION=	1
 CATEGORIES=	japanese inputmethod
-MASTER_SITES=	ftp://ftp.m17n.org/pub/mule/IIIM/
+MASTER_SITES=	http://unit.aist.go.jp/itri/itri-gist/ftp.m17n.org/pub/mule/IIIM/
 
 MAINTAINER=	uebayasi@NetBSD.org
 #HOMEPAGE=
 COMMENT=	Emacs Lisp library for IIIM Protocol
 
 PKG_DESTDIR_SUPPORT=	user-destdir
+
+EMACS_BUILDLINK=# defined
 
 do-build:
 	@cd ${WRKSRC} && \
@@ -23,7 +25,7 @@ do-install:
 		${INSTALL_DATA} $$f ${DESTDIR}${EMACS_LISPPREFIX}/iiimecf; \
 	done
 
-.include "../../mk/emacs.mk"
+.include "../../editors/emacs/modules.mk"
 
 .include "../../editors/mule-ucs/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

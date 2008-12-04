@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.16 2008/08/15 02:39:25 obache Exp $
+# $NetBSD: Makefile,v 1.18 2008/11/10 17:21:36 wiz Exp $
 
 DISTNAME=	kinput2-v3
 PKGNAME=	kinput2-3.0
-PKGREVISION=	2
+PKGREVISION=	3
 CATEGORIES=	japanese inputmethod
 MASTER_SITES=	ftp://ftp.sra.co.jp/pub/x11/kinput2/version-3/
 
@@ -11,6 +11,7 @@ COMMENT=	Input server of Japanese text
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
+MAKE_JOBS_SAFE=	NO
 USE_IMAKE=	YES
 
 PLIST_SRC=	${PKGDIR}/PLIST-common

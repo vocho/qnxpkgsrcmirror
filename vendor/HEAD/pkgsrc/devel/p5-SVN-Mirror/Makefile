@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.21 2008/07/27 20:45:06 he Exp $
+# $NetBSD: Makefile,v 1.23 2008/11/17 22:05:14 he Exp $
 
-DISTNAME=	SVN-Mirror-0.74
+DISTNAME=	SVN-Mirror-0.75
 PKGNAME=	p5-${DISTNAME}
 CATEGORIES=	devel perl5 scm
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=OurNet/CLKAO/}
@@ -19,6 +19,7 @@ DEPENDS+=	p5-Data-UUID>=0.11:../../devel/p5-Data-UUID
 DEPENDS+=	p5-SVN-Simple>=0.27:../../devel/p5-SVN-Simple
 DEPENDS+=	p5-File-chdir>=0.06:../../devel/p5-File-chdir
 DEPENDS+=	p5-Class-Accessor>=0.25:../../devel/p5-Class-Accessor
+DEPENDS+=	p5-TimeDate>0:../../time/p5-TimeDate
 
 PERL5_PACKLIST=		auto/SVN/Mirror/.packlist
 

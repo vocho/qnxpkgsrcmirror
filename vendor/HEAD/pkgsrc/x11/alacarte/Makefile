@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.11 2008/06/12 02:14:57 joerg Exp $
+# $NetBSD: Makefile,v 1.14 2008/11/19 03:39:57 hasso Exp $
 #
 
-DISTNAME=	alacarte-0.11.5
+DISTNAME=	alacarte-0.11.6
 CATEGORIES=	x11
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/alacarte/0.11/}
 EXTRACT_SUFX=	.tar.bz2
@@ -16,7 +16,7 @@ GNU_CONFIGURE=	yes
 USE_TOOLS+=	intltool perl pkg-config gmake msgfmt
 USE_DIRS+=	xdg-1.1
 
-PYTHON_VERSIONS_ACCEPTED=	25 24
+PYTHON_VERSIONS_ACCEPTED=	24 25
 PY_PATCHPLIST=	yes
 
 SUBST_CLASSES+=	paths

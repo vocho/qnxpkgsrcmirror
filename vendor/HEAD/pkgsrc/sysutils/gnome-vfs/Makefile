@@ -1,4 +1,6 @@
-# $NetBSD: Makefile,v 1.70 2008/08/15 01:41:42 dsainty Exp $
+# $NetBSD: Makefile,v 1.72 2008/12/01 14:41:52 wiz Exp $
+
+PKGREVISION=		1
 
 PKGCONFIG_OVERRIDE=	gnome-vfs-2.0.pc.in
 PKGCONFIG_OVERRIDE+=	gnome-vfs-module-2.0.pc.in
@@ -22,6 +24,7 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 MAKE_JOBS_SAFE=		no
 
 .include "Makefile.common"
+.include "options.mk"
 
 CONFIGURE_ARGS+=	--enable-fam
 

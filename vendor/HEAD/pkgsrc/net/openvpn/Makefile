@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.25 2008/02/20 04:24:17 jlam Exp $
+# $NetBSD: Makefile,v 1.27 2008/11/23 15:16:42 wiz Exp $
 #
 
-DISTNAME=	openvpn-2.1_rc7
-PKGNAME=	openvpn-2.1rc7
+DISTNAME=	openvpn-2.1_rc13
+PKGNAME=	${DISTNAME:S/_//}
 PKGREVISION=	1
 CATEGORIES=	net
 MASTER_SITES=	http://openvpn.net/release/ \
@@ -23,7 +23,6 @@ TEST_TARGET=		check
 
 PKG_SYSCONFSUBDIR=	openvpn
 DATADIR=		${PREFIX}/share/${PKGBASE}
-DOCDIR=			${PREFIX}/share/doc/${PKGBASE}
 EGDIR=			${PREFIX}/share/examples/${PKGBASE}
 EASYRSADIR=		${DATADIR}/easy-rsa
 RCD_SCRIPTS=		openvpn
@@ -38,8 +37,7 @@ CONFIGURE_ARGS+=	--disable-dependency-tracking
 #CONFIGURE_ARGS+=	--enable-pthread
 
 INSTALLATION_DIRS=	${DATADIR}/easy-rsa	${EGDIR}/config		\
-			${DOCDIR}		${EGDIR}/keys		\
-						${EGDIR}/scripts
+			${EGDIR}/keys		${EGDIR}/scripts
 
 .include "../../mk/bsd.prefs.mk"
 
@@ -74,8 +72,6 @@ post-install:
 		*)	${INSTALL_SCRIPT} $$file ${DESTDIR}${EASYRSADIR:Q} ;;	\
 		esac;							\
 	done
-	${INSTALL_DATA} ${WRKSRC:Q}/management/management-notes.txt	\
-		${DESTDIR}${DOCDIR:Q}
 	cd ${WRKSRC:Q}/sample-config-files; for file in *; do		\
 		${INSTALL_DATA} $$file ${DESTDIR}${EGDIR:Q}/config;	\
 	done

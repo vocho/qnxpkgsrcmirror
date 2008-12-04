@@ -8,6 +8,7 @@ anthy			Use Anthy as Japanese conversion program.
 anthy-2ch-dict		Include the 2ch dictionary.
 anthy-okinawa-dict	Include the okinawa dictionary.
 ao			Enable the platform-independent 'ao' audio library.
+apache			Enable support for apache web server
 apache-shared-modules	Build all modules as shared for apache22.
 ares			Use the ares library for asynchronous name resolution.
 aria2-metalink		Enable Metalink support.
@@ -23,6 +24,7 @@ batch			Enable batch mode support.
 bdb			Enable Berkeley DB support.
 bittorrent		Enable bittorrent support
 blender-exppython	Enable the Experimental Python support.
+boehm-gc		Use Boehm's garbage collector for memory allocation.
 bozohttpd-do-htpasswd	Enable .htpasswd file processing in bozohttpd.
 bugzilla-charts		Enable generation of charts.
 bugzilla-imagemagick	Compress .BMPs to save space.
@@ -40,6 +42,7 @@ cgi			Enable CGI support
 clamav			Enable ClamAV support.
 claws-mail-jpilot	Add jpilot support
 clisp			Common/C Lisp
+compface		Enable compface support.
 coqide			Enable ide support for coq.
 courier-dsn		Delivery Status Notification (DNS) mail delivery.
 courier-esmtp		ESMTP mail delivery.
@@ -88,6 +91,7 @@ emacs-xaw3d		Emacs should use Xaw3D for the scrollbar.
 enchant-zemberek	Add spell checking support for Turkish.
 epoll			Enable support for epoll I/O event notification facility
 esound			Enable support for the Enlightment Sound Daemon.
+evolution-data-server	Enable support for evolution-data-server.
 exim-build-eximon	Also build the X based exim queue monitoring tool.
 exim-content-scan	Call virus and spam scanning direct from ACLs.
 exim-lookup-dnsdb	Use DNS for lookups (as general database facility).
@@ -199,6 +203,7 @@ lang-it			Add Italian language support.
 lang-ja			Add Japanese language support.
 lang-lt			Add Lithuanian language support.
 lang-lv			Add Latvian language support.
+lang-nb			Add Norwegian Bokmal (book language) language support.
 lang-nl			Add Dutch language support.
 lang-no			Add Norwegian language support.
 lang-pl			Add Polish language support.
@@ -210,6 +215,7 @@ lang-sk			Add Slovak language support.
 lang-sq			Add Albanian language support.
 lang-sr			Add Serbian language support.
 lang-sv			Add Swedish language support.
+lang-tr			Add Turkish language support.
 lang-uk			Add Ukrainian language support.
 lang-uk-ua		Add Ukrainian/UKRAINE language support.
 lang-zh-cn		Add Chinese Simplified language support.
@@ -219,12 +225,12 @@ ldap			Enable LDAP support.
 libao			Enable libao support.
 libgpod			Enable libgpod support.
 libiconv-cp932		Add supplemental support for CP932
-libmodplug		Use libmodplug for MOD and MOD-like music formats.
 libmtp			Enable MTP via libmtp support.
 libofx			Enable OFX support.
 libspiff		Use libspiff for XML shareable playlist support.
 libssh2 	 	Use libssh2 for SSHv2 protocol support.
 libwww-aliases		Install aliases for p5-libwww (e.g. HEAD, GET etc.)
+libxml2			Use the libxml2 library for XML support.
 liferea-firefox		Use Firefox to render HTML.
 liferea-gtkhtml		Use libgtkhtml2 to render HTML.
 liferea-seamonkey	Use Seamonkey to render HTML.
@@ -279,6 +285,7 @@ oniguruma		Support regular expressions via the oniguruma library.
 online-tests		Requiring Internet connectivity for "make test".
 openal			Enable OpenAL support.
 opengl			Use OpenGL as display library.
+opengrok-build		Enable building of OpenGrok from source
 openldap		Enable OpenLDAP support.
 oracle			Enable Oracle support.
 oss			Enable support for the Open Sound System audio library.
@@ -374,6 +381,7 @@ tin-use-inn-spool	Use the INN spool directories.
 tls			Enable TLS support.
 trn-inn			Use INN as NNTP client.
 trn-nntpclnt		Use nntpclnt as NNTP client.
+typolight-liveupdate	Allow using TYPOlight Live Update service.
 ucspi-ssl-perl		Enable Perl support in ucspi-ssl.
 ucspi-tcp-nodefaultrbl	Remove the (nonexistent) default RBL from rblsmtpd.
 uim			Enable UIM support.
@@ -419,6 +427,7 @@ xterm-256color		Enable 256 color support.
 xterm-88color		Enable 88 color support.
 xterm-luit		Enable locale <> UTF encoding translation.
 xvid			Enable usage of XVid codecs.
+zaptel			Enable usage of Zaptel drivers.
 zenmap			Enable nmap GUI frontend
 ziplinks		Compress data before transmitting it between servers.
 zlib			Enable support for zlib compression

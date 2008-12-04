@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.38 2008/09/14 06:15:35 tsutsui Exp $
+# $NetBSD: Makefile,v 1.40 2008/11/14 06:42:34 minskim Exp $
 #
 
-DISTNAME=	gxemul-0.4.6.5
-PKGREVISION=	1
+DISTNAME=	gxemul-0.4.6.6
 CATEGORIES=	emulators
 MASTER_SITES=	http://gavare.se/gxemul/src/
 

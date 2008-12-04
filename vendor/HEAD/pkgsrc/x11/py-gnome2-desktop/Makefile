@@ -1,11 +1,10 @@
-# $NetBSD: Makefile,v 1.21 2008/09/06 20:54:34 wiz Exp $
+# $NetBSD: Makefile,v 1.24 2008/11/18 12:46:52 drochner Exp $
 #
 
-DISTNAME=	gnome-python-desktop-2.22.0
+DISTNAME=	gnome-python-desktop-2.24.0
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME:S/-python/2/}
-PKGREVISION=	1
 CATEGORIES=	sysutils gnome
-MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gnome-python-desktop/2.22/}
+MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gnome-python-desktop/2.24/}
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
@@ -23,13 +22,14 @@ DEPENDS+=	bug-buddy>=2.16:../../net/bug-buddy
 
 PKGCONFIG_OVERRIDE+=	gnome-python-desktop-2.0.pc.in
 
-PYTHON_VERSIONS_ACCEPTED=	25 24
+PYTHON_VERSIONS_ACCEPTED=	24 25
 
 # XXX not yet, needs hal
 PLIST_VARS+=	nautilusburn
 #.include "../../sysutils/nautilus-cd-burner/buildlink3.mk"
 
 CONFIGURE_ARGS+=	--disable-evolution
+CONFIGURE_ARGS+=	--disable-evolution_ecal
 
 .include "../../graphics/py-cairo/buildlink3.mk"
 .include "../../graphics/librsvg/buildlink3.mk"

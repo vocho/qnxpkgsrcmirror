@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.35 2008/07/15 11:20:12 drochner Exp $
+# $NetBSD: Makefile,v 1.38 2008/12/02 11:39:30 wiz Exp $
 #
 
-DISTNAME=	eog-2.22.3
+DISTNAME=	eog-2.24.2
 CATEGORIES=	graphics gnome
-MASTER_SITES=	${MASTER_SITE_GNOME:=sources/eog/2.22/}
+MASTER_SITES=	${MASTER_SITE_GNOME:=sources/eog/2.24/}
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
@@ -29,6 +29,7 @@ BUILDLINK_DEPMETHOD.libXt?=	build
 .include "../../devel/glib2/buildlink3.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../devel/eel/buildlink3.mk"
+.include "../../devel/exempi/buildlink3.mk"
 .include "../../devel/libglade/buildlink3.mk"
 .include "../../devel/libgnomeui/buildlink3.mk"
 .include "../../devel/pango/buildlink3.mk"

@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.145 2008/09/06 11:07:20 obache Exp $
+# $NetBSD: Makefile,v 1.150 2008/12/01 13:25:47 wiz Exp $
 
 # When updating glib2, please apply patch-ak to configure.in
 # Then run a matching version of autoconf to regen patch-aa.
-DISTNAME=		glib-2.18.0
+DISTNAME=		glib-2.18.3
+PKGREVISION=		1
 PKGNAME=		${DISTNAME:S/glib/glib2/}
 CATEGORIES=		devel
 MASTER_SITES=		ftp://ftp.gtk.org/pub/glib/2.18/ \
@@ -43,11 +44,6 @@ CONFIGURE_ARGS+=	--includedir=${PREFIX}/include/glib
 CONFIGURE_ARGS+=	${CONFIGURE_ARGS.${ICONV_TYPE}-iconv}
 CONFIGURE_ARGS.gnu-iconv+=	--with-libiconv=gnu
 CONFIGURE_ARGS+=	--with-pcre=system
-# need pcre utf8 + unicode-properties
-BUILDLINK_API_DEPENDS.pcre+= pcre>=7.4nb1
-
-# Avoid an ICE in gcc2 on sparc64
-CONFIGURE_ENV+=		F77=${FALSE:Q}
 
 CONFIGURE_ENV+=		PERL_PATH=${PERL5:Q}
 
@@ -63,7 +59,6 @@ CPPFLAGS+=		-DPKGLOCALEDIR="\"${PKGLOCALEDIR}\""
 CPPFLAGS+=		-DPKG_SYSCONFDIR="\"${PKG_SYSCONFDIR}\""
 
 .if ${OPSYS} == "FreeBSD"
-
 SUBST_CLASSES+=		thr
 SUBST_STAGE.thr=	post-patch
 SUBST_FILES.thr=	gthread/Makefile.in
@@ -91,9 +86,6 @@ PRINT_PLIST_AWK+=	/^@dirrm include\/glib$$/ \
 
 PLIST_VARS+=		fam
 
-# Overridden in options.mk.
-CONFIGURE_ARGS+=	--disable-fam
-
 .if ${OPSYS} != "HPUX" && ${OPSYS} != "OSF1"
 .include "options.mk"
 .endif
@@ -107,6 +99,8 @@ CONFIGURE_ARGS+=	--disable-threads
 .else
 .include "../../mk/pthread.buildlink3.mk"
 .endif
+# need pcre utf8 + unicode-properties
+BUILDLINK_API_DEPENDS.pcre+= pcre>=7.4nb1
 .include "../../devel/pcre/buildlink3.mk"
 
 .include "../../mk/bsd.pkg.mk"

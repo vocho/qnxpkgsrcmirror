@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.3 2008/09/24 16:14:49 ghen Exp $
+# $NetBSD: Makefile,v 1.5 2008/11/20 13:11:19 tron Exp $
 
 MOZILLA=		firefox
 MOZ_VER=		3.0.2

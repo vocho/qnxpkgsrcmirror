@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.3 2008/07/21 09:17:27 rhaen Exp $
+# $NetBSD: Makefile,v 1.5 2008/11/08 19:56:28 rhaen Exp $
 
-DISTNAME=		CGI-Application-Plugin-ValidateRM-2.2
+DISTNAME=		CGI-Application-Plugin-ValidateRM-2.3
 PKGNAME=		p5-${DISTNAME}
 CATEGORIES=		www perl5
 MASTER_SITES=		${MASTER_SITE_PERL_CPAN:=CGI/}
 
-MAINTAINER=		rtaen@NetBSD.org
+MAINTAINER=		rhaen@NetBSD.org
 HOMEPAGE=		http://search.cpan.org/dist/CGI-Application-Plugin-ValidateRM/
 COMMENT=		Help validate CGI::Application run modes using Data::FormValidator
 

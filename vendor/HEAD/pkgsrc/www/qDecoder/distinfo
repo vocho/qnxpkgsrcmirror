@@ -1,7 +1,8 @@
-$NetBSD: distinfo,v 1.4 2006/06/10 19:43:24 minskim Exp $
+$NetBSD: distinfo,v 1.6 2008/11/27 21:15:36 minskim Exp $
 
-SHA1 (qDecoder-7.0.1.tar.Z) = a5c8f76e6a62405628f0b75a9e536b8ba4539f96
-RMD160 (qDecoder-7.0.1.tar.Z) = f8e4dfc7d531c749ee51eebbbfe864a66b05e3a2
-Size (qDecoder-7.0.1.tar.Z) = 993825 bytes
-SHA1 (patch-aa) = 4824679d8d4d6b0efc5e2138d703fb56dcc8dcb3
-SHA1 (patch-ab) = 47b2c521b57ab6ae94119cca4337818e44f46c6f
+SHA1 (qDecoder-9.0.1.tar.gz) = 45cd8c6c8f73e92c0c77ec2ffa8bc8f80402213e
+RMD160 (qDecoder-9.0.1.tar.gz) = 765fb180e80ad55d0a379529af5c46fffd246db5
+Size (qDecoder-9.0.1.tar.gz) = 266821 bytes
+SHA1 (patch-aa) = 2427aa0f30240a451c0c607e50df5f36e4c5b721
+SHA1 (patch-ab) = 4cc1889cd730bba9b4350cc49b738a7f534bc5ea
+SHA1 (patch-ac) = 127491d4e7cc90371e23d0c93b63ea514676e712

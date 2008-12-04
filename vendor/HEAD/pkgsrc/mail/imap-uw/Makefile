@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.124 2008/05/26 22:01:07 tron Exp $
+# $NetBSD: Makefile,v 1.128 2008/12/01 11:03:50 obache Exp $
 #
 # ATTENTION:
 # The Kerberos support in this software is known to be problematic. If you
@@ -9,14 +9,14 @@
 # The most common reason to install this package is as a prerequisite for pine.
 # If you upgrade this package, you *must* test mail/pine with the new version.
 
-DISTNAME=	imap-2006j2
+DISTNAME=	imap-2007d
 PKGNAME=	${DISTNAME:S/-/-uw-/}
-PKGREVISION=	6
+PKGREVISION=	2
 CATEGORIES=	mail
 MASTER_SITES=	ftp://ftp.cac.washington.edu/imap/
 EXTRACT_SUFX=	.tar.Z
 
-MAINTAINER=	jwise@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.washington.edu/imap/
 COMMENT=	University of Washington's IMAP, POP2, and POP3 servers
 
@@ -28,6 +28,8 @@ LTINSTALL_PROGRAM=	${SETENV} ${MAKE_ENV} ${LIBTOOL} --mode=install ${INSTALL_PRO
 LTINSTALL_LIB=		${SETENV} ${MAKE_ENV} ${LIBTOOL} --mode=install ${INSTALL_LIB}
 
 WRKSRC=		${WRKDIR}/${DISTNAME:S/2$//}
+
+MAKE_JOBS_SAFE=	no
 
 .include "../../mk/bsd.prefs.mk"
 
@@ -56,9 +58,6 @@ BUILD_TARGET.IRIX=	sgi
 .endif
 BUILD_TARGET.OSF1=	osf
 BUILD_TARGET.OpenBSD=	bso
-.if ${OPSYS} == NetBSD && exists(/usr/include/security/pam_appl.h)
-BUILD_TARGET.NetBSD=	nep
-.endif
 BUILD_TARGET.*=		neb
 MESSAGE_SRC=		${PKGDIR}/MESSAGE
 
@@ -71,8 +70,8 @@ BUILD_DEFS+=			IMAP_UW_CCLIENT_MBOX_FMT IMAP_UW_MAILSPOOLHOME
 
 CCLIENT_LIB=		libc-client.la
 CCLIENT_PICLIB=		libc-client_pic.a
-CCLIENT_MAJOR=		4
-CCLIENT_MINOR=		4
+CCLIENT_MAJOR=		5
+CCLIENT_MINOR=		0
 MAKE_ENV+=		CCLIENT_MAJOR=${CCLIENT_MAJOR:Q}
 MAKE_ENV+=		CCLIENT_MINOR=${CCLIENT_MINOR:Q}
 

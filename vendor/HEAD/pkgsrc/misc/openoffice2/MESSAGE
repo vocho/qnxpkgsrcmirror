@@ -1,7 +1,7 @@
 ===========================================================================
-$NetBSD: MESSAGE,v 1.1 2007/04/21 05:40:27 hira Exp $
+$NetBSD: MESSAGE,v 1.3 2008/11/19 01:54:25 hira Exp $
 
-  OpenOffice has now been installed in ${PREFIX}/${OO_RELEASE}.
+  OpenOffice has now been installed in ${OO_PREFIX}.
 
   Before using this package for the first time, each user has to run
   a setup program, which is automatically invoked at the first start.

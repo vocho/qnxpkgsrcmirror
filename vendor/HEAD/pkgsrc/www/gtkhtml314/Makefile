@@ -1,10 +1,13 @@
-# $NetBSD: Makefile,v 1.15 2008/07/15 10:38:32 drochner Exp $
+# $NetBSD: Makefile,v 1.19 2008/11/24 16:10:05 wiz Exp $
+#
+# PKGNAME derives from the supported API (still from
+# release 3.14). See also PLIST.
 #
 
-DISTNAME=	gtkhtml-3.18.3
+DISTNAME=	gtkhtml-3.24.2
 PKGNAME=	${DISTNAME:S/gtkhtml/gtkhtml314/}
 CATEGORIES=	www gnome
-MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gtkhtml/3.18/}
+MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gtkhtml/3.24/}
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
@@ -18,9 +21,17 @@ USE_LIBTOOL=		yes
 USE_PKGLOCALEDIR=	yes
 USE_TOOLS+=		gmake intltool msgfmt pkg-config
 
-PKGCONFIG_OVERRIDE+=	src/libgtkhtml.pc.in
+PKGCONFIG_OVERRIDE+=	components/editor/gtkhtml-editor.pc.in
+PKGCONFIG_OVERRIDE+=	gtkhtml/libgtkhtml.pc.in
 
-.include "../../devel/gail/buildlink3.mk"
+# The gettext version in pkgsrc cannot handle the .po files, so
+# we strip out usage of the newer features (context and fuzzy matches)
+post-patch:
+	for f in ${WRKSRC}/po/*.po ; do \
+	    mv $$f $$f.original ; \
+	    ${AWK} -f ${FILESDIR}/msgfmtstrip $$f.original > $$f ; \
+	done
+
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../devel/libbonobo/buildlink3.mk"
 .include "../../devel/libbonoboui/buildlink3.mk"
@@ -30,5 +41,7 @@ PKGCONFIG_OVERRIDE+=	src/libgtkhtml.pc.in
 .include "../../graphics/gnome-icon-theme/buildlink3.mk"
 .include "../../net/ORBit2/buildlink3.mk"
 .include "../../net/libsoup24/buildlink3.mk"
+.include "../../textproc/enchant/buildlink3.mk"
+.include "../../textproc/iso-codes/buildlink3.mk"
 .include "../../x11/gtk2/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

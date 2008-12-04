@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.566 2008/09/30 13:07:35 joerg Exp $
+# $NetBSD: Makefile,v 1.572 2008/11/03 04:46:06 obache Exp $
 #
 
 COMMENT=	Packages to support the X window system
@@ -32,6 +32,7 @@ SUBDIR+=	devilspie
 SUBDIR+=	dfm
 SUBDIR+=	dmenu
 SUBDIR+=	docker
+SUBDIR+=	driconf
 SUBDIR+=	dtx11session
 SUBDIR+=	dxpc
 SUBDIR+=	ede
@@ -220,7 +221,6 @@ SUBDIR+=	libxfce4util
 SUBDIR+=	libxkbfile
 SUBDIR+=	libxkbui
 SUBDIR+=	libxklavier
-SUBDIR+=	libzvt
 SUBDIR+=	listres
 SUBDIR+=	luit
 SUBDIR+=	matchbox-common
@@ -261,7 +261,7 @@ SUBDIR+=	py-gtk2
 SUBDIR+=	py-qt3-base
 SUBDIR+=	py-qt3-modules
 SUBDIR+=	py-qt3-qscintilla
-SUBDIR+=	py-qt3-sip
+SUBDIR+=	py-sip
 SUBDIR+=	py-wxWidgets
 SUBDIR+=	qt3
 SUBDIR+=	qt3-docs
@@ -292,6 +292,7 @@ SUBDIR+=	rox-wallpaper
 SUBDIR+=	ruby-gnome2-gnome
 SUBDIR+=	ruby-gnome2-gtk
 SUBDIR+=	ruby-gnome2-gtksourceview
+SUBDIR+=	ruby-gnome2-gtksourceview2
 SUBDIR+=	ruby-gnome2-panelapplet
 SUBDIR+=	ruby-gnome2-vte
 SUBDIR+=	ruby-gtk
@@ -365,6 +366,7 @@ SUBDIR+=	xdialog
 SUBDIR+=	xdm
 SUBDIR+=	xdm3d
 SUBDIR+=	xdpyinfo
+SUBDIR+=	xdriinfo
 SUBDIR+=	xearth
 SUBDIR+=	xephem
 SUBDIR+=	xev

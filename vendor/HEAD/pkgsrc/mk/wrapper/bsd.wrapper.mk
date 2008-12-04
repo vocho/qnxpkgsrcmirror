@@ -1,4 +1,4 @@
-# $NetBSD: bsd.wrapper.mk,v 1.76 2008/02/19 17:36:51 tnn Exp $
+# $NetBSD: bsd.wrapper.mk,v 1.80 2008/11/27 18:00:06 joerg Exp $
 #
 # Copyright (c) 2005 The NetBSD Foundation, Inc.
 # All rights reserved.
@@ -139,6 +139,11 @@ WRAPPEES+=	IMAKE
 .endif
 WRAPPEES+=	LD
 
+.if !empty(PKGSRC_COMPILER:Mxlc) && ${OPSYS} == "AIX"
+CC_R?=		${_XLC_DIR}/bin/cc_r
+WRAPPEES+=	CC_R
+.endif
+
 _WRAPPEE_UNIQUE_CMDS=	# empty
 .for _wrappee_ in ${WRAPPEES}
 _WRAPPEES+=		${_wrappee_}
@@ -230,12 +235,6 @@ _WRAP_SKIP_TRANSFORM.${_wrappee_}?=	${_WRAP_SKIP_TRANSFORM}
 _WRAP_TYPE.${_wrappee_}?=		${_wrappee_}
 .endfor	# _WRAPPEES
 
-.if !empty(PKGSRC_COMPILER:Maix-xlc)
-_WRAP_CMD_SINK.CC=	${WRAPPER_TMPDIR}/cmd-sink-aix-xlc
-_WRAP_CMD_SINK.CXX=	${_WRAP_CMD_SINK.CC}
-_WRAP_CMD_SINK.LD=	${_WRAP_CMD_SINK.CC}
-.endif
-
 .if !empty(PKGSRC_COMPILER:Micc)
 .  if !empty(CC_VERSION:M8.1) || !empty(CC_VERSION:M9.0)
 _WRAP_CMD_SINK.CC=	${WRAPPER_TMPDIR}/cmd-sink-icc81-cc
@@ -287,12 +286,20 @@ _WRAP_TRANSFORM.CPP=	${_WRAP_TRANSFORM.CC}
 .endif
 
 .if !empty(PKGSRC_COMPILER:Mxlc)
+.  if ${OPSYS} == "AIX"
+_WRAP_CMD_SINK.CC=	${WRAPPER_TMPDIR}/cmd-sink-aix-xlc
+_WRAP_CMD_SINK.CC_R=	${WRAPPER_TMPDIR}/cmd-sink-aix-xlc
+_WRAP_CMD_SINK.CXX=	${_WRAP_CMD_SINK.CC}
+.  elif ${OPSYS} == "Darwin"
 _WRAP_CMD_SINK.CC=	${WRAPPER_TMPDIR}/cmd-sink-darwin-xlc
 _WRAP_CMD_SINK.CXX=	${_WRAP_CMD_SINK.CC}
 _WRAP_CACHE_BODY.CC=	${WRAPPER_TMPDIR}/cache-body-xlc-cc
 _WRAP_TRANSFORM.CC=	${WRAPPER_TMPDIR}/transform-xlc-cc
 _WRAP_CACHE_BODY.CXX=	${_WRAP_CACHE_BODY.CC}
 _WRAP_TRANSFORM.CXX=	${_WRAP_TRANSFORM.CC}
+.  else
+PKG_FAIL_REASON+=	"xlc unsupported on ${OPSYS}"
+.  endif
 .endif
 
 .if !empty(PKGSRC_COMPILER:Mccc)
@@ -340,13 +347,15 @@ _WRAP_CMD_SINK.CC=	${WRAPPER_TMPDIR}/cmd-sink-hpux-cc
 _WRAP_CMD_SINK.CXX=	${_WRAP_CMD_SINK.CC}
 _WRAP_CMD_SINK.LD=	${WRAPPER_TMPDIR}/cmd-sink-hpux-ld
 .elif ${OPSYS} == "AIX"
-_WRAP_CMD_SINK.CC=	${WRAPPER_TMPDIR}/cmd-sink-aix-cc
-_WRAP_CMD_SINK.CXX=	${_WRAP_CMD_SINK.CC}
+_WRAP_CMD_SINK.CC?=	${WRAPPER_TMPDIR}/cmd-sink-aix-cc
+_WRAP_CMD_SINK.CXX?=	${_WRAP_CMD_SINK.CC}
 _WRAP_CMD_SINK.LD=	${WRAPPER_TMPDIR}/cmd-sink-aix-ld
-_WRAP_CACHE_BODY.CC=	${WRAPPER_TMPDIR}/cache-body-aix-cc
-_WRAP_TRANSFORM.CC=	${WRAPPER_TMPDIR}/transform-aix-cc
-_WRAP_CACHE_BODY.CXX=	${_WRAP_CACHE_BODY.CC}
-_WRAP_TRANSFORM.CXX=	${_WRAP_TRANSFORM.CC}
+_WRAP_CACHE_BODY.CC?=	${WRAPPER_TMPDIR}/cache-body-aix-cc
+_WRAP_CACHE_BODY.CC_R?=	${WRAPPER_TMPDIR}/cache-body-aix-cc
+_WRAP_TRANSFORM.CC?=	${WRAPPER_TMPDIR}/transform-aix-cc
+_WRAP_TRANSFORM.CC_R?=	${WRAPPER_TMPDIR}/transform-aix-cc
+_WRAP_CACHE_BODY.CXX?=	${_WRAP_CACHE_BODY.CC}
+_WRAP_TRANSFORM.CXX?=	${_WRAP_TRANSFORM.CC}
 .elif ${OPSYS} == "IRIX"
 _WRAP_CMD_SINK.CC=	${WRAPPER_TMPDIR}/cmd-sink-irix-cc
 _WRAP_CMD_SINK.CXX=	${_WRAP_CMD_SINK.CC}
