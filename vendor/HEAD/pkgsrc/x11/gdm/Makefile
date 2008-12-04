@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.143 2008/07/16 20:13:29 drochner Exp $
+# $NetBSD: Makefile,v 1.149 2008/11/26 00:52:40 jmcneill Exp $
 #
 
 DISTNAME=	gdm-2.20.7
+PKGREVISION=	4
 CATEGORIES=	x11 gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gdm/2.20/}
 EXTRACT_SUFX=	.tar.bz2
@@ -14,17 +15,14 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 
 DEPENDS+=	zenity>=2.16.0:../../x11/zenity
 
-BUILDLINK_API_DEPENDS.libart+=	libart>=2.3.11
-
 USE_DIRS+=		gnome2-1.5
 USE_PKGLOCALEDIR=	YES
 GNU_CONFIGURE=		YES
 USE_LIBTOOL=		YES
 USE_TOOLS+=		gmake intltool msgfmt pkg-config
+BUILD_DEFS+=		VARBASE
 
-PKG_OPTIONS_VAR=	PKG_OPTIONS.gdm
-PKG_SUPPORTED_OPTIONS=	inet6 pam
-.include "../../mk/bsd.options.mk"
+.include "options.mk"
 
 CONFIGURE_ARGS+=	--localstatedir=${VARBASE:Q}
 CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR:Q}
@@ -73,6 +71,9 @@ SUBST_FILES.desktop+=	config/gdm.conf.in
 SUBST_SED.desktop=	-e 's/^_//g'
 SUBST_SED.desktop+=	-e 's|^User=gdm$$|User=${GDMOWN}|g'
 SUBST_SED.desktop+=	-e 's|^Group=gdm$$|Group=${GDMGRP}|g'
+SUBST_SED.desktop+=	-e 's|^\#GtkTheme=.*$$|GtkTheme=Clearlooks|g'
+SUBST_SED.desktop+=	-e 's|^\#FirstVT=.*$$|FirstVT=5|g'
+SUBST_SED.desktop+=	-e 's|^\#VTAllocation=.*$$|VTAllocation=true|g'
 .if ${OPSYS} == "NetBSD"
 SUBST_SED.desktop+=	-e 's|^\#Logo=.*$$|Logo=${PREFIX}/share/pixmaps/NetBSD.xpm|g'
 .endif
@@ -81,6 +82,12 @@ SUBST_SED.desktop+=	-e 's|^\#RebootCommand=.*$$|RebootCommand=/sbin/shutdown -r 
 SUBST_SED.desktop+=	-e 's|^\#HaltCommand=.*$$|HaltCommand=/sbin/shutdown -p now|g'
 .endif
 
+SUBST_CLASSES+=		gdmsetup
+SUBST_MESSAGE.gdmsetup=	Patching gdmsetup theme installer to use ${ROOT_USER}:${ROOT_GROUP}
+SUBST_STAGE.gdmsetup=	post-patch
+SUBST_FILES.gdmsetup=	gui/gdmsetup.c
+SUBST_SED.gdmsetup=	-e 's/root:root/${ROOT_USER}:${ROOT_GROUP}/g'
+
 .if ${OPSYS} == "SunOS"
 CFLAGS+=	-DSunOS
 GDMOWN=		daemon
@@ -88,12 +95,6 @@ GDMGRP=		other
 .else
 GDMOWN=		daemon
 GDMGRP=		daemon
-.endif
-
-.if !empty(PKG_OPTIONS:Minet6)
-CONFIGURE_ARGS+=	--enable-ipv6
-.else
-CONFIGURE_ARGS+=	--disable-ipv6
 .endif
 
 # The following forces the X server to start on the 5th virtual terminal.
@@ -114,19 +115,6 @@ CONFIGURE_ARGS+=	--disable-ipv6
 CONFIGURE_ARGS+=	X_SERVER_ARGS="vt05"
 .endif
 
-PLIST_VARS+=		pam
-.if !empty(PKG_OPTIONS:Mpam)
-.  include "../../mk/pam.buildlink3.mk"
-CONFIGURE_ARGS+=	--enable-authentication-scheme=pam
-.  if ${PAM_TYPE} == "linux-pam"
-PLIST.pam=		yes
-.  endif
-.elif exists(/etc/shadow)
-CONFIGURE_ARGS+=	--enable-authentication-scheme=shadow
-.else
-CONFIGURE_ARGS+=	--enable-authentication-scheme=crypt
-.endif
-
 PLIST_VARS+=		dmx
 .if exists(${X11BASE}/include/X11/extensions/dmxext.h)
 PLIST.dmx=		yes
@@ -144,6 +132,7 @@ PRINT_PLIST_AWK+=	/gdmopen/ { print "$${GDMOPEN}" $$0; next }
 .include "../../devel/libglade/buildlink3.mk"
 .include "../../devel/pango/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
+BUILDLINK_API_DEPENDS.libart+=	libart>=2.3.11
 .include "../../graphics/libart/buildlink3.mk"
 .include "../../graphics/libgnomecanvas/buildlink3.mk"
 .include "../../graphics/librsvg/buildlink3.mk"

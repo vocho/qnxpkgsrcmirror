@@ -1,33 +1,37 @@
-# $NetBSD: Makefile,v 1.46 2008/08/01 23:29:14 bjs Exp $
+# $NetBSD: Makefile,v 1.54 2008/11/29 08:57:47 wiz Exp $
 #
 
 COMMENT=	Collections of other packages
 
 SUBDIR+=	boost
+SUBDIR+=	c++-gnome-bindings
 SUBDIR+=	compiz-fusion
 SUBDIR+=	courier
 SUBDIR+=	fxtv-capture
 SUBDIR+=	gnome
-SUBDIR+=	gnome-base
-SUBDIR+=	gnome-devel
+SUBDIR+=	gnome-admin
+SUBDIR+=	gnome-devtools
+SUBDIR+=	gnome-mobile
 SUBDIR+=	gnome-platform
 SUBDIR+=	gnuradio
 SUBDIR+=	gnustep
 SUBDIR+=	gstreamer0.10-plugins
-SUBDIR+=	gtk2-extras
 SUBDIR+=	kde3
 SUBDIR+=	matchbox
 SUBDIR+=	modular-xorg-apps
 SUBDIR+=	modular-xorg-drivers
 SUBDIR+=	modular-xorg-fonts
 SUBDIR+=	modular-xorg-libs
+SUBDIR+=	mono-gnome-bindings
 SUBDIR+=	netbsd-doc
 SUBDIR+=	netbsd-doc-print
 SUBDIR+=	netbsd-www
+SUBDIR+=	p5-gnome-bindings
 SUBDIR+=	php4-extensions
 SUBDIR+=	php5-extensions
 SUBDIR+=	pkg_developer
 SUBDIR+=	pkgsrc-guide-tools
+SUBDIR+=	py-gnome-bindings
 SUBDIR+=	ruby-gnome2
 SUBDIR+=	suse100
 SUBDIR+=	web-server

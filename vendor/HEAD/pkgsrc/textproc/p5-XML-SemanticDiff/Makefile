@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.3 2008/07/18 14:56:01 rhaen Exp $
+# $NetBSD: Makefile,v 1.5 2008/11/28 14:44:25 he Exp $
 #
 
-DISTNAME=	XML-SemanticDiff-0.97
+DISTNAME=	XML-SemanticDiff-0.99
 PKGNAME=	p5-${DISTNAME}
 CATEGORIES=	textproc
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=XML/}
@@ -17,6 +17,7 @@ DEPENDS+=	p5-XML-Parser-[0-9]*:../../textproc/p5-XML-Parser
 DEPENDS+=	p5-Encode-[0-9]*:../../textproc/p5-Encode
 
 PERL5_PACKLIST=	auto/XML/SemanticDiff/.packlist
+PERL5_MODULE_TYPE=	Module::Build
 
 .include "../../lang/perl5/module.mk"
 .include "../../mk/bsd.pkg.mk"

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.14 2008/03/04 19:21:11 jlam Exp $
+# $NetBSD: Makefile,v 1.16 2008/10/13 08:07:02 uebayasi Exp $
 #
 
 DISTNAME=	elscreen-1.4.5
@@ -24,13 +24,15 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 
 NO_BUILD=	yes
 
+EMACS_BUILDLINK=# defined
+
 do-install:
 	${INSTALL_DATA_DIR} ${DESTDIR}${EMACS_LISPPREFIX}/elscreen
 	${INSTALL_DATA_DIR} ${DESTDIR}${PREFIX}/share/doc/elscreen
 	${INSTALL_DATA} ${WRKDIR}/*/*.el ${DESTDIR}${EMACS_LISPPREFIX}/elscreen
 	${INSTALL_DATA} ${WRKSRC}/README ${DESTDIR}${PREFIX}/share/doc/elscreen
 
-.include "../../mk/emacs.mk"
+.include "../../editors/emacs/modules.mk"
 
 .include "../../devel/apel/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

@@ -1,36 +1,23 @@
-# $NetBSD: Makefile,v 1.17 2008/04/23 12:26:47 tron Exp $
+# $NetBSD: Makefile,v 1.22 2008/11/05 14:55:23 wiz Exp $
 #
 
-DISTNAME=	libtheora-1.0beta3
-CATEGORIES=	multimedia
-MASTER_SITES=	http://downloads.xiph.org/releases/theora/
-EXTRACT_SUFX=	.tar.bz2
+.include "Makefile.common"
 
-MAINTAINER=	wiz@NetBSD.org
-HOMEPAGE=	http://www.theora.org/
-COMMENT=	Video codec for Ogg multimedia streaming
+PKGREVISION=		1
 
-PKG_DESTDIR_SUPPORT=	user-destdir
-
-GNU_CONFIGURE=		YES
 PKGCONFIG_OVERRIDE=	theora.pc.in theoradec.pc.in theoraenc.pc.in
 USE_LIBTOOL=		YES
 TEST_TARGET=		check
 
-CONFIGURE_ARGS+=	--disable-examples
-CONFIGURE_ARGS+=	HAVE_DOXYGEN=false
-# disable player
-CONFIGURE_ENV+=		ac_cv_path_SDL_CONFIG=no
-CONFIGURE_ENV+=		ac_cv_prog_HAVE_DOXYGEN=no
-CONFIGURE_ENV+=		ac_cv_prog_HAVE_PDFLATEX=no
+# disable doxygen, see libtheora-docs package
+CONFIGURE_ENV+=		HAVE_DOXYGEN=no
 
-.include "../../mk/bsd.prefs.mk"
-
-.if !empty(MACHINE_PLATFORM:MDarwin-[9].*-i386)
-CONFIGURE_ARGS+=	--disable-asm
-.endif
+# avoid installing docs
+do-install:
+	cd ${WRKSRC} && ${MAKE_ENV} ${MAKE} install-pkgconfigDATA
+	cd ${WRKSRC}/include && ${MAKE_ENV} ${MAKE} install
+	cd ${WRKSRC}/lib && ${MAKE_ENV} ${MAKE} install
 
 .include "../../audio/libvorbis/buildlink3.mk"
 .include "../../multimedia/libogg/buildlink3.mk"
-
 .include "../../mk/bsd.pkg.mk"

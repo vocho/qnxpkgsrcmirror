@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.140 2008/06/24 13:36:30 smb Exp $
+# $NetBSD: Makefile,v 1.142 2008/11/18 18:03:09 joerg Exp $
 #
 
 COMMENT=	Communication programs
@@ -23,6 +23,7 @@ SUBDIR+=	eggdrop
 SUBDIR+=	ejabberd
 SUBDIR+=	ekg
 SUBDIR+=	emech
+SUBDIR+=	empathy
 SUBDIR+=	epic4
 SUBDIR+=	epic4-doc
 SUBDIR+=	finch
@@ -57,6 +58,7 @@ SUBDIR+=	konversation
 SUBDIR+=	libirc
 SUBDIR+=	libotr
 SUBDIR+=	libpurple
+SUBDIR+=	libtelepathy
 SUBDIR+=	libtlen
 SUBDIR+=	licq-core
 SUBDIR+=	licq-gui-console
@@ -87,12 +89,17 @@ SUBDIR+=	psi
 SUBDIR+=	quirc
 SUBDIR+=	riece
 SUBDIR+=	roxirc
+SUBDIR+=	ruby-net-irc
 SUBDIR+=	scrollz
 SUBDIR+=	silc-client
 SUBDIR+=	silc-client-icb
 SUBDIR+=	silc-server
 SUBDIR+=	sirc
 SUBDIR+=	smirk
+SUBDIR+=	telepathy-gabble
+SUBDIR+=	telepathy-glib
+SUBDIR+=	telepathy-idle
+SUBDIR+=	telepathy-mission-control
 SUBDIR+=	tik
 SUBDIR+=	tirc
 SUBDIR+=	tkabber

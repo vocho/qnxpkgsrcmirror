@@ -1,10 +1,12 @@
-# $NetBSD: Makefile,v 1.26 2008/05/26 12:15:14 joerg Exp $
+# $NetBSD: Makefile,v 1.29 2008/11/27 13:11:17 obache Exp $
 
 DISTNAME=	intlfonts-1.2.1
 PKGREVISION=	5
 CATEGORIES=	fonts x11
 MASTER_SITES=	${MASTER_SITE_GNU:=intlfonts/intlfonts-1.2.1-split/}
-DISTFILES=	${FONT_SETS:S/$/${EXTRACT_SUFX}/} ${MISC_FILES}
+DISTFILES=	${FONT_SETS:=${EXTRACT_SUFX}} ${MISC_FILES}
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 COMMENT=	Free X11 fonts (BDF format) for all characters that Emacs can handle
@@ -40,20 +42,23 @@ MISC_FILES=	README.split
 
 DIST_SUBDIR=	${PKGNAME_NOREV}
 EXTRACT_SUFX=	.tar.gz
-EXTRACT_ONLY=	${FONT_SETS:S/$/${EXTRACT_SUFX}/}
+EXTRACT_ONLY=	${FONT_SETS:=${EXTRACT_SUFX}}
 
 GNU_CONFIGURE=	yes
-CONFIGURE_ARGS+=--with-fontdir=${PREFIX}/lib/X11/fonts/intlfonts \
+CONFIGURE_ARGS+=--with-fontdir=${FONTS_DIR} \
 		--enable-compress=gzip
+INSTALL_MAKE_FLAGS+=	fontdir=${DESTDIR}${FONTS_DIR}
 
-FONTS_DIRS.x11+=	${PREFIX}/lib/X11/fonts/intlfonts
-FONTS_DIRS.x11+=	${PREFIX}/lib/X11/fonts/intlfonts/bdf
-FONTS_DIRS.type1+=	${PREFIX}/lib/X11/fonts/intlfonts/Type1
-FONTS_DIRS.ttf+=	${PREFIX}/lib/X11/fonts/intlfonts/TrueType
-REQD_DIRS+=		${PREFIX}/lib/X11/fonts/intlfonts
-REQD_DIRS+=		${PREFIX}/lib/X11/fonts/intlfonts/bdf
-REQD_DIRS+=		${PREFIX}/lib/X11/fonts/intlfonts/Type1
-REQD_DIRS+=		${PREFIX}/lib/X11/fonts/intlfonts/TrueType
+FONTS_DIR=	${PREFIX}/lib/X11/fonts/intlfonts
+
+FONTS_DIRS.x11+=	${FONTS_DIR}
+FONTS_DIRS.x11+=	${FONTS_DIR}/bdf
+FONTS_DIRS.type1+=	${FONTS_DIR}/Type1
+FONTS_DIRS.ttf+=	${FONTS_DIR}/TrueType
+REQD_DIRS+=		${FONTS_DIR}
+REQD_DIRS+=		${FONTS_DIR}/bdf
+REQD_DIRS+=		${FONTS_DIR}/Type1
+REQD_DIRS+=		${FONTS_DIR}/TrueType
 
 .include "../../mk/bsd.prefs.mk"
 

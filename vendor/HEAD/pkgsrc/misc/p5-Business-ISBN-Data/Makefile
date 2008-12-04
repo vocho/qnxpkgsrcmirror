@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.10 2008/07/17 06:43:14 rhaen Exp $
+# $NetBSD: Makefile,v 1.12 2008/11/11 09:11:05 rhaen Exp $
 #
 
-DISTNAME=		Business-ISBN-Data-1.17
+DISTNAME=		Business-ISBN-Data-20081020
 PKGNAME=		p5-${DISTNAME}
 SVR4_PKGNAME=	p5bid
 CATEGORIES=		misc perl5

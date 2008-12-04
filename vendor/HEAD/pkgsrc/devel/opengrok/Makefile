@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.5 2008/04/20 16:08:20 adrianp Exp $
+# $NetBSD: Makefile,v 1.10 2008/11/06 23:18:34 adrianp Exp $
 #
 
-DISTNAME=	opengrok-0.6.1
+DISTNAME=	opengrok-0.7
+PKGREVISION=	1
 CATEGORIES=	devel
 MASTER_SITES=	http://www.opensolaris.org/os/project/opengrok/files/
 
@@ -10,16 +11,19 @@ HOMEPAGE=	http://www.opensolaris.org/os/project/opengrok/files/
 COMMENT=	Fast and usable source code search and cross reference engine
 
 DEPENDS+=	exctags-[0-9]*:../../devel/exctags
-DEPENDS+=	apache-tomcat>=5.5:../../www/apache-tomcat55
-DEPENDS+=	jflex-[0-9]*:../../devel/jflex
 DEPENDS+=	unzip-[0-9]*:../../archivers/unzip
 DEPENDS+=	zip-[0-9]*:../../archivers/zip
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
+.include "options.mk"
+
+.if empty(PKG_OPTIONS:Mopengrok-build)
 NO_BUILD=	YES
+.endif
+
 USE_JAVA=	run
-USE_JAVA2=	1.5
+USE_JAVA2=	yes
 
 CONF_FILES=	${PREFIX}/share/examples/opengrok/paths.tsv \
 		${PREFIX}/share/opengrok/paths.tsv
@@ -32,7 +36,17 @@ SUBST_SED.run+=		-e "s|java|${PKG_JAVA_HOME}/bin/java|g"
 SUBST_SED.run+=		-e "s|@PREFIX@|${PREFIX}|g"
 SUBST_MESSAGE.run=	Fixing hardcoded paths.
 
-.include "options.mk"
+pre-build:
+	${CP} ${PREFIX}/lib/java/JFlex.jar ${WRKSRC}/lib
+
+do-build:
+	cd ${WRKSRC} && ${PREFIX}/bin/ant
+
+post-build:
+	${RM} -f ${WRKSRC}/lib/*.jar
+	${CP} ${WRKSRC}/dist/lib/*.jar ${WRKSRC}/lib
+	${CP} ${WRKSRC}/dist/opengrok.jar ${WRKSRC}
+	${CP} ${WRKSRC}/dist/source.war ${WRKSRC}
 
 do-install:
 	${INSTALL_DATA_DIR} ${DESTDIR}${PREFIX}/share/opengrok

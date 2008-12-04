@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.29 2008/01/19 09:16:25 wiz Exp $
+# $NetBSD: Makefile,v 1.31 2008/11/18 11:13:06 adam Exp $
 
-DISTNAME=	fftw-3.1.2
+DISTNAME=	fftw-3.2
 CATEGORIES=	math
 MASTER_SITES=	ftp://ftp.fftw.org/pub/fftw/ \
 		http://www.fftw.org/

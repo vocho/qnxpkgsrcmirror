@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.88 2008/06/22 22:41:01 heinz Exp $
+# $NetBSD: Makefile,v 1.90 2008/11/14 22:51:52 joerg Exp $
 
 DISTNAME=	Mail-SpamAssassin-3.2.5
 PKGNAME=	spamassassin-3.2.5
+PKGREVISION=	1
 SVR4_PKGNAME=	sa
 CATEGORIES=	mail perl5
 MASTER_SITES=	${MASTER_SITE_APACHE:=spamassassin/source/}
@@ -12,7 +13,7 @@ COMMENT=	Mail filter to identify spam
 
 #LICENSE=	apache-2.0
 
-PKG_DESTDIR_SUPPORT=	destdir
+PKG_DESTDIR_SUPPORT=	user-destdir
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
 
 .include "../../mk/bsd.prefs.mk"
@@ -103,7 +104,7 @@ SA_DOCFILES+=		sql/bayes_pg.sql sql/userpref_mysql.sql
 SA_DOCFILES+=		sql/userpref_pg.sql
 
 OWN_DIRS+=		${VARBASE}/spamassassin
-OWN_DIRS_PERMS+=	${PKG_SYSCONFDIR}/sa-update-keys ${SHAREOWN} ${SHAREGRP} 0700
+OWN_DIRS_PERMS+=	${PKG_SYSCONFDIR}/sa-update-keys ${REAL_ROOT_USER} ${REAL_ROOT_GROUP} 0700
 
 SUBST_CLASSES+=		sa2
 SUBST_STAGE.sa2=	pre-configure

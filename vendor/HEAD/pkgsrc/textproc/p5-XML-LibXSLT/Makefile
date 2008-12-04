@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.15 2008/06/12 02:14:50 joerg Exp $
+# $NetBSD: Makefile,v 1.17 2008/11/10 16:49:49 wiz Exp $
 #
 
-DISTNAME=	XML-LibXSLT-1.66
+DISTNAME=	XML-LibXSLT-1.68
 PKGNAME=	p5-${DISTNAME}
 SVR4_PKGNAME=	p5xlt
 CATEGORIES=	textproc perl5

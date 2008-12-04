@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.381 2008/09/16 16:07:31 wiz Exp $
+# $NetBSD: Makefile,v 1.386 2008/11/14 01:26:14 jmcneill Exp $
 #
 
 COMMENT=	Audio tools
@@ -14,6 +14,8 @@ SUBDIR+=	amp
 SUBDIR+=	ampache
 SUBDIR+=	applerecords
 SUBDIR+=	arts
+SUBDIR+=	audacious
+SUBDIR+=	audacious-plugins
 SUBDIR+=	audacity
 SUBDIR+=	aumix
 SUBDIR+=	aumix-gtk
@@ -156,9 +158,11 @@ SUBDIR+=	libao
 SUBDIR+=	libao-arts
 SUBDIR+=	libao-esound
 SUBDIR+=	libao-macosx
+SUBDIR+=	libao-nas
 SUBDIR+=	libao-oss
 SUBDIR+=	libao-sun
 SUBDIR+=	libaudiofile
+SUBDIR+=	libcanberra
 SUBDIR+=	libcdaudio
 SUBDIR+=	libcddb
 SUBDIR+=	libdca
@@ -221,7 +225,6 @@ SUBDIR+=	mp3check
 SUBDIR+=	mp3cut
 SUBDIR+=	mp3info
 SUBDIR+=	mp3splt
-SUBDIR+=	mp3splt-devel
 SUBDIR+=	mp3to
 SUBDIR+=	mpc
 SUBDIR+=	mpegaudio
@@ -291,6 +294,7 @@ SUBDIR+=	snd
 SUBDIR+=	solfege
 SUBDIR+=	sonata
 SUBDIR+=	sound-juicer
+SUBDIR+=	sound-theme-freedesktop
 SUBDIR+=	sox
 SUBDIR+=	speex
 SUBDIR+=	spiralloops

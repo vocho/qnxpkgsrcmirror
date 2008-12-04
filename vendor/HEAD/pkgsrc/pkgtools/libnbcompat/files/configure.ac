@@ -1,4 +1,4 @@
-dnl $NetBSD: configure.ac,v 1.65 2008/09/12 13:47:26 joerg Exp $
+dnl $NetBSD: configure.ac,v 1.70 2008/11/08 21:35:58 joerg Exp $
 
 dnl Process this file with autoconf to produce a configure script.
 AC_PREREQ(2.52)
@@ -32,17 +32,14 @@ dnl Checks for header files.
 AC_HEADER_STDC
 AC_HEADER_TIME
 
-dnl Used by bits.c to check for sizes of integer types
-AC_CHECK_HEADERS([inttypes.h sys/types.h sys/bitypes.h bind/bitypes.h \
-	netinet/in6_machtypes.h])
-
 AC_CHECK_HEADERS([alloca.h assert.h ctype.h dirent.h err.h errno.h fcntl.h \
-	fnmatch.h fts.h grp.h libutil.h limits.h machine/endian.h ndir.h \
-	paths.h pwd.h signal.h stdarg.h stddef.h stdint.h stdio.h stdlib.h \
-	string.h sys/byteorder.h sys/cdefs.h sys/dir.h sys/endian.h \
-	sys/file.h sys/mkdev.h sys/ndir.h sys/param.h sys/stat.h \
+	fnmatch.h fts.h grp.h inttypes.h libutil.h limits.h \
+	machine/endian.h ndir.h netdb.h paths.h pwd.h signal.h \
+	stdarg.h stddef.h stdint.h stdio.h \
+	stdlib.h string.h sys/byteorder.h sys/cdefs.h sys/dir.h sys/endian.h \
+	sys/file.h sys/mkdev.h sys/ndir.h sys/param.h sys/socket.h sys/stat.h \
 	sys/statfs.h sys/statvfs.h sys/time.h sys/ttycom.h sys/types.h \
-	sys/uio.h sys/vfs.h termcap.h time.h tzfile.h unistd.h \
+	sys/uio.h sys/vfs.h sysexits.h termcap.h time.h tzfile.h unistd.h \
 	util.h utime.h
 ])
 AC_CHECK_HEADERS([sys/mount.h], [:], [:], [
@@ -135,6 +132,10 @@ AC_CHECK_FUNC(SHA512_File, [:], [
 	AC_LIBOBJ(sha2hl)
 ])
 
+AC_ARG_ENABLE([db],
+	[AS_HELP_STRING([--enable-db], [include DB implementation])])
+AC_SUBST(WITH_DB, $enable_db)
+
 AC_ARG_ENABLE([bsd-getopt],
 	[AS_HELP_STRING([--enable-bsd-getopt],
 			[force use of BSDish getopt implementation])])
@@ -199,7 +200,15 @@ dnl Checks for typedefs, structures, and compiler characteristics.
 AC_C___ATTRIBUTE__
 AC_TYPE_SIZE_T
 AC_TYPE_UINTPTR_T
-AC_CHECK_TYPES([long long, long double, int8_t, int16_t, int32_t, int64_t, u_int8_t, u_int16_t, u_int32_t, u_int64_t, uint8_t, uint16_t, uint32_t, uint64_t],[],[],
+AC_TYPE_INT8_T
+AC_TYPE_INT16_T
+AC_TYPE_INT32_T
+AC_TYPE_INT64_T
+AC_TYPE_UINT8_T
+AC_TYPE_UINT16_T
+AC_TYPE_UINT32_T
+AC_TYPE_UINT64_T
+AC_CHECK_TYPES([long long, long double],[],[],
 [#if STDC_HEADERS
 #include <stdlib.h>
 #include <stddef.h>
@@ -239,21 +248,58 @@ AC_CHECK_DECLS([snprintf, vasprintf], [], [], [#include <stdio.h>])
 
 AC_REPLACE_FUNCS([asprintf err fgetln fnmatch fparseln getenv isblank \
 	lchflags lchmod lchown lutimes mkdtemp mkstemp setenv setgroupent \
-	setpassent setprogname snprintf statvfs strdup strerror strlcat \
-	strlcpy strmode strsep strtoll unsetenv usleep utimes warn
+	setpassent setprogname shquote snprintf statvfs strdup strerror \
+	strlcat strlcpy strmode strsep strtoll unsetenv usleep utimes warn
 ])
 
-AC_CHECK_FUNCS([getenv setenv unsetenv], [:], [
+AC_CHECK_LIB(socket, socket)
+AC_CHECK_LIB(nsl, gethostbyname)
+
+need_getaddrinfo=no
+AC_CHECK_TYPES([socklen_t], [], [], [[#ifdef HAVE_SYS_TYPES_H
+# include <sys/types.h>
+#endif
+
+#include <sys/socket.h>
+]])
+AC_CHECK_TYPES([struct addrinfo], [], [], [[#include <netdb.h>]])
+AC_CHECK_TYPES([struct in6_addr], [], [], [[#ifdef HAVE_SYS_TYPES_H
+# include <sys/types.h>
+#endif
+#include <netinet/in.h>
+]])
+AC_CHECK_TYPES([struct sockaddr_in6], [], [], [[#ifdef HAVE_SYS_TYPES_H
+# include <sys/types.h>
+#endif
+#include <netinet/in.h>
+]])
+AC_CHECK_TYPES([struct sockaddr_storage], [], [], [[#ifdef HAVE_SYS_TYPES_H
+# include <sys/types.h>
+#endif
+#include <sys/socket.h>
+]])
+dnl Assume that freeaddrinfo is only missing if getaddrinfo is also missing
+AC_CHECK_FUNCS([getnameinfo gai_strerror getaddrinfo], [:],
+    [need_getaddrinfo=yes])
+if test $need_getaddrinfo = yes; then
+	AC_LIBOBJ(getaddrinfo)
+fi
+
+need_findenv=no
+AC_CHECK_FUNCS([getenv setenv unsetenv], [:], [need_findenv=yes])
+if test $need_findenv = yes; then
 	AC_LIBOBJ(findenv)
-	break
-])
+fi
 
-AC_CHECK_FUNCS([mkdtemp mkstemp], [:], [
+need_gettemp=no
+AC_CHECK_FUNCS([mkdtemp mkstemp], [:], [ need_gettemp=yes ])
+if test $need_gettemp = yes; then
 	AC_LIBOBJ(gettemp)
-	break
-])
+fi
 
 AC_CHECK_FUNCS([bcopy bzero memset memcpy setlocale])
+
+need_setmode=no
 AC_CHECK_FUNCS([getmode setmode], [:], [need_setmode=yes])
 
 if test $need_setmode = yes; then

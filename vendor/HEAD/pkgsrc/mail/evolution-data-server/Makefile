@@ -1,10 +1,9 @@
-# $NetBSD: Makefile,v 1.70 2008/09/06 20:54:33 wiz Exp $
+# $NetBSD: Makefile,v 1.75 2008/11/24 16:36:09 wiz Exp $
 #
 
-DISTNAME=	evolution-data-server-2.22.3
-PKGREVISION=	1
+DISTNAME=	evolution-data-server-2.24.2
 CATEGORIES=	mail gnome
-MASTER_SITES=	${MASTER_SITE_GNOME:=sources/evolution-data-server/2.22/}
+MASTER_SITES=	${MASTER_SITE_GNOME:=sources/evolution-data-server/2.24/}
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
@@ -12,8 +11,6 @@ HOMEPAGE=	http://www.gnome.org/projects/evolution/
 COMMENT=	Evolution data server
 
 PKG_DESTDIR_SUPPORT=	user-destdir
-
-BUILDLINK_API_DEPENDS.libsoup-devel+=	libsoup-devel>=2.2.3
 
 GNU_CONFIGURE=		YES
 USE_DIRS+=		xdg-1.1
@@ -77,6 +74,7 @@ DEPENDS+= zonetab-[0-9]*:../../time/zonetab
 .include "../../converters/libiconv/buildlink3.mk"
 .include "../../databases/openldap-client/buildlink3.mk"
 .include "../../databases/db4/buildlink3.mk"
+.include "../../databases/sqlite3/buildlink3.mk"
 .include "../../devel/GConf/buildlink3.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../devel/glib2/buildlink3.mk"

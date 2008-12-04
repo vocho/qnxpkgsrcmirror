@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.20 2008/08/14 20:39:25 wiz Exp $
+# $NetBSD: Makefile,v 1.22 2008/10/24 21:08:01 wiz Exp $
 #
 
-DISTNAME=	gmime-2.2.22
+DISTNAME=	gmime-2.2.23
 CATEGORIES=	mail
 MASTER_SITES=	http://spruce.sourceforge.net/gmime/sources/v2.2/
 
@@ -10,6 +10,8 @@ HOMEPAGE=	http://spruce.sourceforge.net/gmime/
 COMMENT=	Library for the creation and parsing of MIME messages
 
 PKG_DESTDIR_SUPPORT=	user-destdir
+
+CONFLICTS=	gmime24-[0-9]*
 
 USE_PKGLOCALEDIR=	yes
 USE_LIBTOOL=		yes

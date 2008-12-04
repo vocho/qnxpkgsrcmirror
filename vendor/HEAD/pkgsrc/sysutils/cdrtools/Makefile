@@ -1,16 +1,17 @@
-# $NetBSD: Makefile,v 1.43 2008/09/06 23:44:39 wiz Exp $
+# $NetBSD: Makefile,v 1.48 2008/12/02 13:03:22 obache Exp $
 
-DISTNAME=	cdrtools-2.01.01a48
-PKGNAME=	cdrtools-2.01.01.48
+DISTNAME=	cdrtools-2.01.01a53
+PKGNAME=	${DISTNAME:S/a/./}
 CATEGORIES=	sysutils
-MASTER_SITES=	ftp://ftp.berlios.de/pub/cdrecord/alpha/
+MASTER_SITES=	ftp://ftp.berlios.de/pub/cdrecord/alpha/ \
+		http://ftp.berlios.de/pub/cdrecord/alpha/
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://cdrecord.berlios.de/old/private/cdrecord.html
 COMMENT=	Software for creating ISO9660 images and writing CDs/CD-RWs
 
-CONFLICTS=	mkisofs-[0-9]* cdrtools-ossdvd-[0-9]* cdrecord-[0-9]*
+CONFLICTS=	mkisofs-[0-9]* cdrtools-ossdvd-[0-9]* cdrecord-[0-9]* cdrkit-[0-9]*
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
 PKG_DESTDIR_SUPPORT=	user-destdir

@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.35 2008/04/29 11:45:55 wiz Exp $
+# $NetBSD: Makefile,v 1.38 2008/11/24 15:36:03 adam Exp $
 
-DISTNAME=	libtasn1-1.4
+DISTNAME=	libtasn1-1.7
 CATEGORIES=	security devel
-MASTER_SITES=	http://josefsson.org/gnutls/releases/libtasn1/ \
+MASTER_SITES=	${MASTER_SITE_GNU:=gnutls/} \
 		ftp://ftp.gnutls.org/pub/gnutls/libtasn1/ \
 		ftp://ftp.gnupg.org/gcrypt/alpha/gnutls/libtasn1/
 
@@ -17,14 +17,13 @@ USE_TOOLS+=		makeinfo
 USE_LIBTOOL=		yes
 GNU_CONFIGURE=		yes
 TEST_TARGET=		check
-INFO_FILES=		# PLIST
+INFO_FILES=		yes
 #LICENSE=		gnu-lgpl-v2.1 and gnu-gpl-3.0
 
 .include "../../mk/bsd.prefs.mk"
 
 # Darwin has no prototype for getopt_long and no declaration for
-# struct option, so ignore getopt_long() even though the test
-# succeeds.
+# struct option, so ignore getopt_long() even though the test succeeds.
 .if ${OPSYS} == "Darwin"
 CONFIGURE_ENV+=		ac_cv_func_getopt_long=no
 CFLAGS+=	-fno-common

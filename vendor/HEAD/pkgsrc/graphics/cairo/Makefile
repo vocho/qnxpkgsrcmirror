@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.66 2008/08/25 15:36:18 joerg Exp $
+# $NetBSD: Makefile,v 1.72 2008/11/26 15:55:32 drochner Exp $
 
-DISTNAME=	cairo-1.6.4
-PKGREVISION=	3
+DISTNAME=	cairo-1.8.4
+PKGREVISION=	1
 CATEGORIES=	graphics
 MASTER_SITES=	http://cairographics.org/releases/
 
@@ -34,9 +34,6 @@ PLIST.carbon=		yes
 
 .include "options.mk"
 
-BUILDLINK_API_DEPENDS.glitz+=	glitz>=0.5.1
-BUILDLINK_API_DEPENDS.pixman+=	pixman>=0.10.0
-
 # For snprintf() and ctime_r()
 CPPFLAGS.SunOS+=		-D__EXTENSIONS__ -D_POSIX_PTHREAD_SEMANTICS
 
@@ -44,9 +41,15 @@ TEST_TARGET=			check
 
 .include "../../devel/zlib/buildlink3.mk"
 .include "../../fonts/fontconfig/buildlink3.mk"
+BUILDLINK_API_DEPENDS.freetype2+=	freetype2>=2.1.9
 .include "../../graphics/freetype2/buildlink3.mk"
+BUILDLINK_API_DEPENDS.glitz+=	glitz>=0.5.1
 .include "../../graphics/glitz/buildlink3.mk"
 .include "../../graphics/png/buildlink3.mk"
-.include "../../mk/pthread.buildlink3.mk"
+# include?
+#.include "../../print/libspectre/buildlink3.mk"
+BUILDLINK_API_DEPENDS.pixman+=	pixman>=0.12.0
 .include "../../x11/pixman/buildlink3.mk"
+
+.include "../../mk/pthread.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

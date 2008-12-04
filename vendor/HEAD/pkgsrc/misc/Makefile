@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.309 2008/09/08 08:42:02 he Exp $
+# $NetBSD: Makefile,v 1.315 2008/11/22 13:07:59 jmcneill Exp $
 #
 
 COMMENT=	Miscellaneous utilities
@@ -14,7 +14,6 @@ SUBDIR+=	basket
 SUBDIR+=	bbappconf
 SUBDIR+=	bbdb
 SUBDIR+=	bbweather
-SUBDIR+=	bidwatcher
 SUBDIR+=	blccc
 SUBDIR+=	bottlerocket
 SUBDIR+=	brs
@@ -54,6 +53,7 @@ SUBDIR+=	fep
 SUBDIR+=	figlet
 SUBDIR+=	figlet-fonts
 SUBDIR+=	firelib
+SUBDIR+=	gaupol
 SUBDIR+=	gelemental
 SUBDIR+=	getopt
 SUBDIR+=	git
@@ -90,6 +90,7 @@ SUBDIR+=	kanjipad
 SUBDIR+=	kchm
 SUBDIR+=	kchmviewer
 SUBDIR+=	kde3-dirs
+SUBDIR+=	kde4-dirs
 SUBDIR+=	kdeaccessibility3
 SUBDIR+=	kdeaddons3
 SUBDIR+=	kdeadmin3
@@ -135,6 +136,7 @@ SUBDIR+=	open2300
 SUBDIR+=	open2300-mysql
 SUBDIR+=	openoffice2
 SUBDIR+=	openoffice2-bin
+SUBDIR+=	openoffice3
 SUBDIR+=	orca
 SUBDIR+=	p5-Array-PrintCols
 SUBDIR+=	p5-Business-CreditCard
@@ -144,6 +146,7 @@ SUBDIR+=	p5-Business-UPS
 SUBDIR+=	p5-ControlX10-CM11
 SUBDIR+=	p5-ControlX10-CM17
 SUBDIR+=	p5-File-MMagic
+SUBDIR+=	p5-File-MMagic-XS
 SUBDIR+=	p5-File-Tail
 SUBDIR+=	p5-Geo-Coordinates-UTM
 SUBDIR+=	p5-Geo-Mercator
@@ -204,6 +207,7 @@ SUBDIR+=	ttyrec
 SUBDIR+=	udfclient
 SUBDIR+=	ukpostcodes
 SUBDIR+=	uptimec
+SUBDIR+=	usbids
 SUBDIR+=	utftools
 SUBDIR+=	vera
 SUBDIR+=	vfu

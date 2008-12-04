@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.29 2008/02/01 11:59:03 rhaen Exp $
+# $NetBSD: Makefile,v 1.31 2008/11/05 15:48:44 wiz Exp $
 
-DISTNAME=		Archive-Tar-1.38
+DISTNAME=		Archive-Tar-1.40
 PKGNAME=		p5-${DISTNAME}
 SVR4_PKGNAME=		p5tar
 CATEGORIES=		archivers perl5
@@ -11,6 +11,7 @@ HOMEPAGE=		http://search.cpan.org/dist/Archive-Tar/
 COMMENT=		Perl5 module interface to manipulate tar files
 
 DEPENDS+=		p5-IO-Zlib>=1.01:../../devel/p5-IO-Zlib
+DEPENDS+=		p5-IO-Compress-Bzip2-[0-9]*:../../devel/p5-IO-Compress-Bzip2
 DEPENDS+=		p5-IO-String-[0-9]*:../../devel/p5-IO-String
 DEPENDS+=		p5-Text-Diff-[0-9]*:../../textproc/p5-Text-Diff
 

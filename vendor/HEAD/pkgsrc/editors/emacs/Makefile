@@ -1,15 +1,16 @@
-# $NetBSD: Makefile,v 1.114 2008/09/25 14:02:09 wiz Exp $
+# $NetBSD: Makefile,v 1.118 2008/11/10 17:21:34 wiz Exp $
 
 PKGNAME?=	${DISTNAME}
 COMMENT?=	GNU editing macros (editor)
 
-DISTNAME=	emacs-22.1
-PKGREVISION=	6
+DISTNAME=	emacs-22.3
+PKGREVISION=	1
 CATEGORIES=	editors
 MASTER_SITES=	${MASTER_SITE_GNU:=emacs/}
 
 MAINTAINER=	markd@NetBSD.org
 HOMEPAGE=	http://www.gnu.org/software/emacs/emacs.html
+#LICENSE=	gnu-gpl-v3
 
 CONFLICTS+=	elisp-manual-[0-9]*
 CONFLICTS+=	emacs-[0-9]*
@@ -59,13 +60,6 @@ CPPFLAGS+=		-DDFLY_PRE_17_CRT
 post-extract:
 	cp ${FILESDIR}/site-init.el ${WRKSRC}/lisp
 	cp ${FILESDIR}/dragonfly.h ${WRKSRC}/src/s
-
-# for patch-ac
-post-build:
-	(cd ${WRKSRC}/lisp; ${MAKE_PROGRAM} files.elc)
-	(cd ${WRKSRC}/lisp; ${MAKE_PROGRAM} obsolete/fast-lock.elc)
-	touch ${WRKSRC}/etc/DOC
-	touch ${WRKSRC}/src/emacs
 
 .include "../../mk/oss.buildlink3.mk"
 .include "../../mk/termcap.buildlink3.mk"

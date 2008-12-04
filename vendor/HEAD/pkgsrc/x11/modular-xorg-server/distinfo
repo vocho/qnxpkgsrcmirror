@@ -1,5 +1,8 @@
-$NetBSD: distinfo,v 1.25 2008/09/23 11:23:56 joerg Exp $
+$NetBSD: distinfo,v 1.28 2008/10/29 22:20:28 bjs Exp $
 
+SHA1 (Mesa-7.0.4-xorg-server_GL) = 6aed65e64c7a684a5d707334a4b4fe7711966380
+RMD160 (Mesa-7.0.4-xorg-server_GL) = 2028532d79f5bba1d09ae787a1799fc4b206a5d7
+Size (Mesa-7.0.4-xorg-server_GL) = 34729 bytes
 SHA1 (MesaLib-7.0.4.tar.bz2) = 7e2ecbe89d245510d2681d04e959aee6adc205c5
 RMD160 (MesaLib-7.0.4.tar.bz2) = 0394bb9e00ea13f2399bc5895d4264221bbc03ac
 Size (MesaLib-7.0.4.tar.bz2) = 3414357 bytes

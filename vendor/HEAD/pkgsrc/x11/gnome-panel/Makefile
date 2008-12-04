@@ -1,10 +1,9 @@
-# $NetBSD: Makefile,v 1.100 2008/09/06 20:54:34 wiz Exp $
+# $NetBSD: Makefile,v 1.104 2008/12/02 15:59:25 wiz Exp $
 #
 
-DISTNAME=		gnome-panel-2.22.2
-PKGREVISION=		1
+DISTNAME=		gnome-panel-2.24.2
 CATEGORIES=		x11 gnome
-MASTER_SITES=		${MASTER_SITE_GNOME:=sources/gnome-panel/2.22/}
+MASTER_SITES=		${MASTER_SITE_GNOME:=sources/gnome-panel/2.24/}
 EXTRACT_SUFX=		.tar.bz2
 
 MAINTAINER=		drochner@NetBSD.org
@@ -12,6 +11,10 @@ HOMEPAGE=		http://www.gnome.org/
 COMMENT=		GNOME2 panel application
 
 PKG_DESTDIR_SUPPORT=	user-destdir
+
+EGDIR=		${PREFIX}/share/examples/gnome-panel
+CONF_FILES+=	${PREFIX}/share/examples/gnome-panel/org.gnome.ClockApplet.Mechanism.conf \
+		${PKG_SYSCONFDIR}/dbus-1/system.d/org.gnome.ClockApplet.Mechanism.conf
 
 GNU_CONFIGURE=		YES
 USE_DIRS+=		gnome2-1.5
@@ -38,9 +41,17 @@ BUILDLINK_API_DEPENDS.libglade+=	libglade>=2.5.0
 BUILDLINK_API_DEPENDS.libgnome+=	libgnome>=2.13.0
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.gnome-panel
-PKG_SUPPORTED_OPTIONS=	evolution
-PKG_SUGGESTED_OPTIONS=	evolution
+PKG_SUPPORTED_OPTIONS=	evolution hal
+PKG_SUGGESTED_OPTIONS=	evolution hal
+PLIST_VARS+=		hal
 .include "../../mk/bsd.options.mk"
+
+.if !empty(PKG_OPTIONS:Mhal)
+.include "../../security/policykit/buildlink3.mk"
+.include "../../security/policykit-gnome/buildlink3.mk"
+.include "../../sysutils/hal/buildlink3.mk"
+PLIST.hal=		yes
+.endif
 
 BUILDLINK_DEPMETHOD.libXt?=	build
 
@@ -52,6 +63,7 @@ BUILDLINK_DEPMETHOD.libXt?=	build
 .include "../../devel/libgnome/buildlink3.mk"
 .include "../../devel/libgnomeui/buildlink3.mk"
 .include "../../devel/libwnck/buildlink3.mk"
+BUILDLINK_API_DEPENDS.libgweather+=	libgweather>=2.24.1
 .include "../../devel/libgweather/buildlink3.mk"
 .include "../../devel/pango/buildlink3.mk"
 .include "../../graphics/cairo/buildlink3.mk"

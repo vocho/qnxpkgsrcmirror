@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.2 2008/06/12 02:14:26 joerg Exp $
+# $NetBSD: Makefile,v 1.4 2008/12/01 22:19:42 tonnerre Exp $
 #
 
-VERS=		0.07
+VERS=		0.11
 DISTNAME=	Term-ReadPassword-${VERS}
 PKGNAME=	p5-Term-ReadPassword-${VERS}
 SVR4_PKGNAME=	p5trk
