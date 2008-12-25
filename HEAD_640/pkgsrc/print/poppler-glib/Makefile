@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.15 2007/11/28 20:51:33 drochner Exp $
+# $NetBSD: Makefile,v 1.17 2008/11/20 14:28:22 dillo Exp $
 #
 
 .include "../../print/poppler/Makefile.common"
@@ -6,6 +6,7 @@
 PKGNAME=		poppler-glib-${POPPLER_VERS}
 
 COMMENT=		PDF rendering library (GLib wrapper)
+MAINTAINER=		reed@reedmedia.net
 
 CONFLICTS+=		poppler<0.4.5nb1
 
@@ -24,9 +25,8 @@ CONFIGURE_ARGS+=	--disable-poppler-qt
 CONFIGURE_ARGS+=	--disable-gtk-test
 CONFIGURE_ARGS+=	--disable-utils
 
-BUILD_DIRS=		${WRKSRC}/goo ${WRKSRC}/fofi ${WRKSRC}/poppler \
-			${WRKSRC}/glib
-INSTALL_DIRS=		${WRKSRC}/glib
+BUILD_DIRS=		goo fofi poppler glib
+INSTALL_DIRS=		glib
 
 INSTALLATION_DIRS+=	lib/pkgconfig
 

@@ -1,9 +1,10 @@
-# $NetBSD: Makefile,v 1.97 2008/09/11 21:24:01 jnemeth Exp $
+# $NetBSD: Makefile,v 1.99 2008/11/24 02:12:46 minskim Exp $
 #
 
 COMMENT=	Document format and character code converters
 
 SUBDIR+=	2vcard
+SUBDIR+=	TECkit
 SUBDIR+=	ack
 SUBDIR+=	autoconvert
 SUBDIR+=	base64
@@ -54,6 +55,7 @@ SUBDIR+=	p5-chkjis
 SUBDIR+=	p5-nkf
 SUBDIR+=	php-iconv
 SUBDIR+=	psiconv
+SUBDIR+=	py-chardet
 SUBDIR+=	py-cjkcodecs
 SUBDIR+=	py-jpCodecs
 SUBDIR+=	py-simplejson

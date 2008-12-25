@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.172 2008/09/14 12:29:56 ahoka Exp $
+# $NetBSD: Makefile,v 1.177 2008/11/07 16:00:25 jwise Exp $
 
 COMMENT=	Mathematics
 
@@ -15,6 +15,7 @@ SUBDIR+=	R-Rcmdr
 SUBDIR+=	R-abind
 SUBDIR+=	R-akima
 SUBDIR+=	R-chron
+SUBDIR+=	R-circular
 SUBDIR+=	R-clim.pact
 SUBDIR+=	R-combinat
 SUBDIR+=	R-date
@@ -33,6 +34,7 @@ SUBDIR+=	R-ncdf
 SUBDIR+=	R-pixmap
 SUBDIR+=	R-sgeostat
 SUBDIR+=	R-shapefiles
+SUBDIR+=	R-sp
 SUBDIR+=	R-statmod
 SUBDIR+=	R-wle
 SUBDIR+=	abs
@@ -99,13 +101,15 @@ SUBDIR+=	newmat
 SUBDIR+=	nickle
 SUBDIR+=	ntl
 SUBDIR+=	octave
-SUBDIR+=	octave-current
 SUBDIR+=	octave-forge
 SUBDIR+=	odepack
 SUBDIR+=	openaxiom
 SUBDIR+=	orpie
 SUBDIR+=	otter
+SUBDIR+=	p5-Excel-Template
+SUBDIR+=	p5-Excel-Template-Plus
 SUBDIR+=	p5-Math-Base85
+SUBDIR+=	p5-Math-BaseCnv
 SUBDIR+=	p5-Math-Bezier
 SUBDIR+=	p5-Math-BigInteger
 SUBDIR+=	p5-Math-FFT

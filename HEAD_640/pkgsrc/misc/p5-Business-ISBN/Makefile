@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.19 2008/07/17 06:51:52 rhaen Exp $
+# $NetBSD: Makefile,v 1.21 2008/11/11 09:14:19 rhaen Exp $
 #
 
-DISTNAME=		Business-ISBN-2.03
+DISTNAME=		Business-ISBN-2.04
 PKGNAME=		p5-${DISTNAME}
 SVR4_PKGNAME=	p5bui
 CATEGORIES=		misc perl5
@@ -12,7 +12,7 @@ HOMEPAGE=		http://search.cpan.org/dist/Business-ISBN/
 COMMENT=		Perl5 module to work with International Standard Book Numbers (ISBNs)
 
 PKG_DESTDIR_SUPPORT=	user-destdir
-DEPENDS+=		p5-Business-ISBN-Data>=1.15:../../misc/p5-Business-ISBN-Data
+DEPENDS+=		p5-Business-ISBN-Data>=20081020:../../misc/p5-Business-ISBN-Data
 
 PERL5_PACKLIST=		auto/Business/ISBN/.packlist
 

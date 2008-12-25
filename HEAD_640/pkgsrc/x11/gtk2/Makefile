@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.160 2008/07/14 03:57:59 tnn Exp $
+# $NetBSD: Makefile,v 1.164 2008/11/06 09:54:38 wiz Exp $
 
-DISTNAME=		gtk+-2.12.11
+DISTNAME=		gtk+-2.14.4
 PKGNAME=		${DISTNAME:S/gtk/gtk2/}
 CATEGORIES=		x11
-MASTER_SITES=		ftp://ftp.gtk.org/pub/gtk/2.12/ \
-			${MASTER_SITE_GNOME:=sources/gtk+/2.12/}
+MASTER_SITES=		ftp://ftp.gtk.org/pub/gtk/2.14/ \
+			${MASTER_SITE_GNOME:=sources/gtk+/2.14/}
 EXTRACT_SUFX=		.tar.bz2
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
@@ -14,10 +14,7 @@ COMMENT=		GIMP Toolkit v2 - libraries for building X11 user interfaces
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 CONFLICTS=		gtk2-engines<2.6.0
-
-BUILDLINK_API_DEPENDS.cairo+=	cairo>=1.2.0
-BUILDLINK_API_DEPENDS.glib2+=	glib2>=2.13.5
-BUILDLINK_API_DEPENDS.pango+=	pango>=1.17.3
+CONFLICTS+=		gail-[0-9]*
 
 USE_DIRS+=		xdg-1.1
 USE_PKGLOCALEDIR=	yes
@@ -89,11 +86,16 @@ pre-install:
 	${ECHO} >>${BUILDLINK_DIR}/bin/which "exit 0"
 	${CHMOD} +x ${BUILDLINK_DIR}/bin/which
 
+.include "../../databases/shared-mime-info/buildlink3.mk"
+BUILDLINK_API_DEPENDS.atk+=	atk>=1.13.0
 .include "../../devel/atk/buildlink3.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"
+BUILDLINK_API_DEPENDS.glib2+=	glib2>=2.17.6
 .include "../../devel/glib2/buildlink3.mk"
+BUILDLINK_API_DEPENDS.pango+=	pango>=1.20.0
 .include "../../devel/pango/buildlink3.mk"
 .include "../../fonts/fontconfig/buildlink3.mk"
+BUILDLINK_API_DEPENDS.cairo+=	cairo>=1.6.0
 .include "../../graphics/cairo/buildlink3.mk"
 .include "../../graphics/freetype2/buildlink3.mk"
 .include "../../graphics/jpeg/buildlink3.mk"

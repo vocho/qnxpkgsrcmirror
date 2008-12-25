@@ -1,11 +1,13 @@
-# $NetBSD: Makefile,v 1.61 2008/10/02 17:49:00 ahoka Exp $
+# $NetBSD: Makefile,v 1.65 2008/11/08 19:00:15 ahoka Exp $
 #
 
-DISTNAME=		vlc-0.9.2
-PKGREVISION=		1
+DISTNAME=		vlc-${VLC_VERSION}
 CATEGORIES=		multimedia
-MASTER_SITES=		http://download.videolan.org/pub/videolan/vlc/0.9.2/
+MASTER_SITES=		http://download.videolan.org/pub/videolan/vlc/${VLC_VERSION}/
 EXTRACT_SUFX=		.tar.bz2
+
+VLC_VERSION=		0.9.6
+PKGREVISION=		1
 
 MAINTAINER=		ahoka@NetBSD.org
 HOMEPAGE=		http://videolan.org/
@@ -14,7 +16,8 @@ COMMENT=		VLC media player and streaming server
 CONFLICTS=		vlc07-[0-9]* vlc08-[0-9]*
 
 USE_LIBTOOL=		yes
-USE_TOOLS+=		gmake perl pkg-config autoconf
+USE_TOOLS+=		gmake perl pkg-config \
+			aclocal autoconf automake autoheader
 USE_PKGLOCALEDIR=	yes
 GNU_CONFIGURE=		yes
 PTHREAD_OPTS+=		require
@@ -37,15 +40,13 @@ BUILDLINK_API_DEPENDS.zlib+=		zlib>=1.2.0
 BUILDLINK_API_DEPENDS.vcdimager+=	vcdimager>=0.7.20nb1
 
 CONFIGURE_ARGS+=	--disable-speex # needs unstable 1.1.x branch
-CONFIGURE_ARGS+=	--disable-gnomevfs
 CONFIGURE_ARGS+=	--disable-smb
 
 CONFIGURE_ARGS+=	--enable-cddax \
 			--enable-dvdread \
 			--enable-flac \
-			--enable-lame \
 			--enable-live555 \
-			--enable-snapshot
+			--enable-theora
 
 # Build optimalized modules
 .if ${MACHINE_ARCH} == "i386" || ${MACHINE_ARCH} == "x86_64"
@@ -85,7 +86,7 @@ INSTALLATION_DIRS+=	${PREFIX}/share/vlc/http/dialogs \
 			${PREFIX}/share/vlc/skins2/fonts
 
 pre-configure:
-	cd ${WRKSRC} && autoconf
+	cd ${WRKSRC} && autoreconf
 
 pre-install:
 	${INSTALL_DATA} ${WRKSRC}/doc/vlc.1 ${DESTDIR}${PREFIX}/${PKGMANDIR}/man1
@@ -123,7 +124,6 @@ CHECK_WRKREF_SKIP=	lib/libvlccore.a \
 
 .include "../../audio/libmpcdec/buildlink3.mk"
 .include "../../audio/flac/buildlink3.mk"
-.include "../../audio/lame/buildlink3.mk"
 .include "../../audio/libmad/buildlink3.mk"
 .include "../../audio/libvorbis/buildlink3.mk"
 .include "../../audio/liba52/buildlink3.mk"
@@ -134,6 +134,7 @@ CHECK_WRKREF_SKIP=	lib/libvlccore.a \
 .include "../../audio/libcddb/buildlink3.mk"
 .include "../../misc/libcdio/buildlink3.mk"
 
+.include "../../graphics/jpeg/buildlink3.mk"
 .include "../../net/liblive/buildlink3.mk"
 .include "../../converters/fribidi/buildlink3.mk"
 .include "../../devel/libebml/buildlink3.mk"
@@ -152,6 +153,7 @@ CHECK_WRKREF_SKIP=	lib/libvlccore.a \
 .include "../../multimedia/libmatroska/buildlink3.mk"
 .include "../../multimedia/libmpeg2/buildlink3.mk"
 .include "../../multimedia/libogg/buildlink3.mk"
+.include "../../multimedia/libtheora/buildlink3.mk"
 .include "../../multimedia/x264-devel/buildlink3.mk"
 
 .include "../../mk/oss.buildlink3.mk"

@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.18 2008/09/06 20:54:34 wiz Exp $
+# $NetBSD: Makefile,v 1.20 2008/10/30 14:52:14 bad Exp $
 #
 
 DISTNAME=	${PKGNAME_NOREV}-src
 PKGNAME=	hydra-5.4
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	security
 MASTER_SITES=	http://freeworld.thc.org/releases/
 
@@ -41,7 +41,6 @@ INSTALLATION_DIRS=	bin
 
 .include "../../security/openssl/buildlink3.mk"
 .include "../../security/libssh/buildlink3.mk"
-.include "../../devel/apr0/buildlink3.mk"
 
 pre-build:
 	${CP} ${PKGDIR}/PLIST ${WRKDIR}/.PLIST_SRC

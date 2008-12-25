@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.21 2008/07/20 21:58:31 he Exp $
+# $NetBSD: Makefile,v 1.23 2008/11/17 23:08:42 he Exp $
 #
 
-DISTNAME=	IMAP-Admin-1.6.4
+DISTNAME=	IMAP-Admin-1.6.6
 PKGNAME=	p5-${DISTNAME}
 SVR4_PKGNAME=	p5iad
 CATEGORIES=	mail perl5

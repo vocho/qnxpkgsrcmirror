@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.13 2008/09/06 20:54:34 wiz Exp $
+# $NetBSD: Makefile,v 1.19 2008/11/27 18:14:46 jmcneill Exp $
 #
 
-DISTNAME=	gnome-control-center-2.22.2.1
-PKGREVISION=	1
+DISTNAME=	gnome-control-center-2.24.0.1
+PKGREVISION=	3
 CATEGORIES=	x11 gnome
-MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gnome-control-center/2.22/}
+MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gnome-control-center/2.24/}
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
@@ -21,8 +21,6 @@ USE_LIBTOOL=		yes
 
 CONFLICTS+=		gnome2-control-center-[0-9]* control-center-[0-9]*
 
-CONFIGURE_ARGS+=	--disable-hal
-
 CPPFLAGS+=		-DDBUS_API_SUBJECT_TO_CHANGE
 
 #PKGCONFIG_OVERRIDE+=	gnome-settings-daemon/gnome-settings-daemon.pc.in
@@ -36,14 +34,8 @@ INSTALL_MAKE_FLAGS+=	autostartdir=${PREFIX}/share/applications
 INSTALLATION_DIRS=	${EGDIR}
 
 GCONF_SCHEMAS+=	control-center.schemas
-GCONF_SCHEMAS+=	themus.schemas
-GCONF_SCHEMAS+=	fontilus.schemas
 
 EGDIR=			${PREFIX}/share/examples/gnome-control-center
-CONF_FILES=		${EGDIR}/theme-method.conf \
-			${PKG_SYSCONFDIR}/gnome-vfs-2.0/modules/theme-method.conf
-CONF_FILES+=		${EGDIR}/font-method.conf \
-			${PKG_SYSCONFDIR}/gnome-vfs-2.0/modules/font-method.conf
 CONF_FILES+=		${EGDIR}/gnomecc.menu \
 			${PKG_SYSCONFDIR}/xdg/menus/gnomecc.menu
 
@@ -51,19 +43,37 @@ BUILDLINK_API_DEPENDS.glib2=	glib2>=2.8.0
 BUILDLINK_API_DEPENDS.gstreamer0.10=		gstreamer0.10>=0.10.1.2
 BUILDLINK_API_DEPENDS.gst-plugins0.10-base=	gst-plugins0.10-base>=0.10.1.2
 BUILDLINK_API_DEPENDS.gtk2+=	gtk2+>=2.8.12
+BUILDLINK_API_DEPENDS.libxklavier=	libxklavier>=3.6
 BUILDLINK_API_DEPENDS.Xft2+=	Xft2>=2.1.2
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.gnome-control-center
-PKG_SUPPORTED_OPTIONS=	evolution
-PKG_SUGGESTED_OPTIONS=	evolution
+PKG_SUPPORTED_OPTIONS=	evolution hal
+PKG_SUGGESTED_OPTIONS=	evolution hal
 .include "../../mk/bsd.options.mk"
 PLIST_VARS+=		evolution
 .if !empty(PKG_OPTIONS:Mevolution)
 CONFIGURE_ARGS+=	--enable-aboutme
 PLIST.evolution=	yes
 .endif
+.if !empty(PKG_OPTIONS:Mhal)
+CONFIGURE_ARGS+=	--enable-hal
+.else
+CONFIGURE_ARGS+=	--disable-hal
+.endif
+
+
+_TOOLS_USE_MSGFMT_SH=	yes
+
+# The gettext version in pkgsrc cannot handle the .po files, so
+# we strip out usage of the newer features (context and fuzzy matches)
+post-patch:
+	for f in ${WRKSRC}/po/*.po ; do \
+	    mv $$f $$f.original ; \
+	    ${AWK} -f ${FILESDIR}/msgfmtstrip $$f.original > $$f ; \
+	done
 
 .include "../../audio/esound/buildlink3.mk"
+.include "../../audio/libcanberra/buildlink3.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../devel/GConf/schemas.mk"
 .include "../../devel/glib2/buildlink3.mk"
@@ -79,12 +89,18 @@ PLIST.evolution=	yes
 .endif
 .include "../../multimedia/gstreamer0.10/buildlink3.mk"
 .include "../../multimedia/gst-plugins0.10-base/buildlink3.mk"
+.if !empty(PKG_OPTIONS:Mhal)
+DEPENDS+=	gst-plugins0.10-hal>=0.10.11:../../multimedia/gst-plugins0.10-hal
+.endif
 .include "../../net/ORBit2/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../sysutils/dbus/buildlink3.mk"
 .include "../../sysutils/dbus-glib/buildlink3.mk"
 .include "../../sysutils/gnome-menus/buildlink3.mk"
 .include "../../sysutils/gnome-vfs/buildlink3.mk"
+.if !empty(PKG_OPTIONS:Mhal)
+.include "../../sysutils/hal/buildlink3.mk"
+.endif
 .include "../../sysutils/nautilus/buildlink3.mk"
 .include "../../textproc/gnome-doc-utils/buildlink3.mk"
 .include "../../textproc/libxml2/buildlink3.mk"
@@ -101,11 +117,5 @@ PLIST.evolution=	yes
 .include "../../x11/libgnomekbd/buildlink3.mk"
 .include "../../databases/shared-mime-info/mimedb.mk"
 .include "../../sysutils/gnome-settings-daemon/buildlink3.mk"
-
-post-install:
-	${INSTALL_DATA} ${WRKSRC}/vfs-methods/themus/theme-method.conf \
-	    ${DESTDIR}${EGDIR}
-	${INSTALL_DATA} ${WRKSRC}/vfs-methods/fontilus/font-method.conf \
-	    ${DESTDIR}${EGDIR}
 
 .include "../../mk/bsd.pkg.mk"

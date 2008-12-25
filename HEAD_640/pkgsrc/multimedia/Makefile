@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.123 2008/09/17 00:21:48 obache Exp $
+# $NetBSD: Makefile,v 1.131 2008/11/27 17:52:06 jmcneill Exp $
 #
 
 COMMENT=	Multimedia utilities
@@ -33,10 +33,12 @@ SUBDIR+=	gst-plugins0.10-dvdread
 SUBDIR+=	gst-plugins0.10-ffmpeg
 SUBDIR+=	gst-plugins0.10-gnonlin
 SUBDIR+=	gst-plugins0.10-good
+SUBDIR+=	gst-plugins0.10-hal
 SUBDIR+=	gst-plugins0.10-mpeg2dec
 SUBDIR+=	gst-plugins0.10-ogg
 SUBDIR+=	gst-plugins0.10-theora
 SUBDIR+=	gst-plugins0.10-ugly
+SUBDIR+=	gst-plugins0.10-v4l2
 SUBDIR+=	gst-plugins0.10-x264
 SUBDIR+=	gst-plugins0.10-xvid
 SUBDIR+=	gst-plugins0.8
@@ -45,7 +47,6 @@ SUBDIR+=	gst-plugins0.8-dvdread
 SUBDIR+=	gst-plugins0.8-mpeg2dec
 SUBDIR+=	gst-plugins0.8-ogg
 SUBDIR+=	gst-plugins0.8-theora
-SUBDIR+=	gst-plugins0.10-v4l2
 SUBDIR+=	gst-plugins0.8-xvid
 SUBDIR+=	gstreamer0.10
 SUBDIR+=	gstreamer0.8
@@ -71,6 +72,7 @@ SUBDIR+=	libmpeg3
 SUBDIR+=	libnms
 SUBDIR+=	libogg
 SUBDIR+=	libtheora
+SUBDIR+=	libtheora-docs
 SUBDIR+=	lsdvd
 SUBDIR+=	mediatomb
 SUBDIR+=	mencoder
@@ -93,8 +95,10 @@ SUBDIR+=	ogle
 SUBDIR+=	ogle_gui
 SUBDIR+=	ogmtools
 SUBDIR+=	openquicktime
+SUBDIR+=	p5-GStreamer
 SUBDIR+=	p5-xmltv
 SUBDIR+=	php-ming
+SUBDIR+=	phonon
 SUBDIR+=	py-gstreamer0.10
 SUBDIR+=	py-ming
 SUBDIR+=	realplayer-codecs
@@ -106,7 +110,8 @@ SUBDIR+=	smpeg
 SUBDIR+=	smpeg-xmms
 SUBDIR+=	subtitleeditor
 SUBDIR+=	swfdec
-SUBDIR+=	swfdec-gtk2
+SUBDIR+=	swfdec-gnome
+SUBDIR+=	swfdec-mozilla
 SUBDIR+=	totem
 SUBDIR+=	totem-nautilus
 SUBDIR+=	totem-pl-parser

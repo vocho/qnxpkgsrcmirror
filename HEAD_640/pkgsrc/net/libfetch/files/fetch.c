@@ -1,4 +1,4 @@
-/*	$NetBSD: fetch.c,v 1.12 2008/04/26 22:42:49 tnn Exp $	*/
+/*	$NetBSD: fetch.c,v 1.15 2008/11/04 16:14:24 joerg Exp $	*/
 /*-
  * Copyright (c) 1998-2004 Dag-Erling Coïdan Smørgrav
  * Copyright (c) 2008 Joerg Sonnenberger <joerg@NetBSD.org>
@@ -29,6 +29,13 @@
  *
  * $FreeBSD: fetch.c,v 1.41 2007/12/19 00:26:36 des Exp $
  */
+
+#if HAVE_CONFIG_H
+#include "config.h"
+#endif
+#ifndef NETBSD
+#include <nbcompat.h>
+#endif
 
 #include <ctype.h>
 #include <errno.h>
@@ -411,7 +418,7 @@ fetchParseURL(const char *URL)
 		}
 		URL += 2;
 		p = URL;
-		goto find_hostname;
+		goto find_user;
 	}
 	if (strncmp(URL, "ftp:", 4) == 0) {
 		pre_quoted = 1;
@@ -440,7 +447,7 @@ find_user:
 
 		/* password */
 		if (*q == ':') {
-			for (q++, i = 0; (*q != ':') && (*q != '@'); q++)
+			for (q++, i = 0; (*q != '@'); q++)
 				if (i < URL_PWDLEN)
 					u->pwd[i++] = *q;
 		}
@@ -450,7 +457,6 @@ find_user:
 		p = URL;
 	}
 
-find_hostname:
 	/* hostname */
 #ifdef INET6
 	if (*p == '[' && (q = strchr(p + 1, ']')) != NULL &&
@@ -504,7 +510,7 @@ quote_doc:
 				u->doc[i++] = '0' + ((unsigned char)*p) / 16;
 			else
 				u->doc[i++] = 'a' - 10 + ((unsigned char)*p) / 16;
-			if ((unsigned char)*p % 16 < 16)
+			if ((unsigned char)*p % 16 < 10)
 				u->doc[i++] = '0' + ((unsigned char)*p) % 16;
 			else
 				u->doc[i++] = 'a' - 10 + ((unsigned char)*p) % 16;

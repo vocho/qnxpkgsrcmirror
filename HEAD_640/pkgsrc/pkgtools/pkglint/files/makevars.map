@@ -1,4 +1,4 @@
-# $NetBSD: makevars.map,v 1.184 2008/08/31 21:03:16 rillig Exp $
+# $NetBSD: makevars.map,v 1.187 2008/11/18 08:04:35 rillig Exp $
 #
 
 # This file contains the guessed type of some variables, according to
@@ -223,6 +223,7 @@ CHECK_PORTABILITY_SKIP	List of Pathmask [$package_list]
 CHECK_SHLIBS		YesNo [m:s]
 CHECK_SHLIBS_SUPPORTED	YesNo [m:s]
 CHECK_WRKREF_SKIP	List of Pathmask [$package_list]
+CMAKE_ARG_PATH		Pathname [$package]
 COMMENT			Comment [m:as,c:as]
 COMPILER_RPATH_FLAG	{ -Wl,-rpath } [$system]
 CONFIGURE_ARGS		List of ShellWord [$package_list]
@@ -260,7 +261,7 @@ DEVOSSSOUND		Pathname [$system]
 DISTFILES		List of Filename [$package_list]
 DISTINFO_FILE		RelativePkgPath [$package]
 DISTNAME		Filename [$package]
-DIST_SUBDIR		Filename [$package]
+DIST_SUBDIR		Pathname [$package]
 DJB_BUILD_ARGS		List of ShellWord
 DJB_BUILD_TARGETS	List of Identifier
 DJB_CONFIG_CMDS		List of ShellWord [o:s]
@@ -593,6 +594,8 @@ PKG_UID			Integer [m:s]
 PKG_USERS		List of ShellWord [m:as]
 PKG_USERS_VARS		List of Varname [$package]
 PKG_USE_KERBEROS	Yes [m:s,c:s]
+#PLIST.*		# has special handling code
+PLIST_VARS		List of Identifier [$package_list]
 PLIST_SRC		List of RelativePkgPath [$package_list]
 PLIST_SUBST		List of ShellWord [$package_list]
 PLIST_TYPE		{ dynamic static }
@@ -683,7 +686,7 @@ USE_CROSSBASE		Yes [m:s]
 USE_DIRS		List of {					\
 				gnome1-1.0 gnome1-1.5			\
 				gnome2-1.3 gnome2-1.5 gnome2-1.6	\
-				kde3-1.0				\
+				kde3-1.0 kde4-1.0			\
 				texmf-1.0 texmf-1.1 texmf-1.2		\
 				texmf-1.3 texmf-1.4 			\
 				theme-1.0 theme-1.1			\

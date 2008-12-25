@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.34 2008/01/18 05:09:39 tnn Exp $
+# $NetBSD: Makefile,v 1.36 2008/10/13 22:32:54 bad Exp $
 
 .include	"../../security/nessus/Makefile.common"
 
@@ -15,10 +15,9 @@ COMMENT=	Plugins for the Nessus Network Security Scanner
 
 DEPENDS+=	nmap>=2.0:../../net/nmap
 
-WRKSRC=		${WRKDIR}/nessus-plugins
-GNU_CONFIGURE=	yes
-USE_TOOLS+=	cat gzip
-
+WRKSRC=			${WRKDIR}/nessus-plugins
+GNU_CONFIGURE=		yes
+USE_TOOLS+=		cat gzip
 CONFIGURE_ARGS+=	--localstatedir=${VARBASE:Q}
 CONFIGURE_ENV+=		CAT=${TOOLS_CAT:Q} GZIP=${TOOLS_GZIP_CMD:Q} \
 			ac_cv_path_MAKE=${MAKE:Q}

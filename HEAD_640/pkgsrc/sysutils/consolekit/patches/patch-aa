@@ -1,0 +1,32 @@
+$NetBSD: patch-aa,v 1.2 2008/11/25 13:40:05 hasso Exp $
+
+--- configure.ac.orig	2008-07-31 03:35:53 +0300
++++ configure.ac	2008-11-25 14:57:21 +0200
+@@ -190,12 +190,20 @@ case "$host" in
+         *-*-solaris*)
+         CK_BACKEND="solaris"
+         ;;
++        *-*-netbsd*)
++        CK_BACKEND="netbsd"
++        ;;
++        *-*-dragonfly*)
++        CK_BACKEND="freebsd"
++        KVM_LIBS="-lkvm"
++        ;;
+ esac
+ 
+ AC_SUBST(KVM_LIBS)
+ 
+ AM_CONDITIONAL(CK_COMPILE_LINUX, test x$CK_BACKEND = xlinux, [Compiling for Linux])
+ AM_CONDITIONAL(CK_COMPILE_FREEBSD, test x$CK_BACKEND = xfreebsd, [Compiling for FreeBSD])
++AM_CONDITIONAL(CK_COMPILE_NETBSD, test x$CK_BACKEND = xnetbsd, [Compiling for NetBSD])
+ AM_CONDITIONAL(CK_COMPILE_SOLARIS, test x$CK_BACKEND = xsolaris, [Compiling for Solaris])
+ AC_SUBST(CK_BACKEND)
+ 
+@@ -441,4 +449,4 @@ if test x${have_polkit} = xno -a x${msg_
+    echo "         a huge SECURITY HOLE. I repeat: YOU NEED TO EDIT THE FILE"
+    echo "         ConsoleKit.conf to match your distro/site to avoid NASTY SECURITY HOLES."
+    echo ""
+-fi
+\ No newline at end of file
++fi

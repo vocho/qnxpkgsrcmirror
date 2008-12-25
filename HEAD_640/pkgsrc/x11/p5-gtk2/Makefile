@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.25 2008/06/12 02:14:57 joerg Exp $
+# $NetBSD: Makefile,v 1.27 2008/10/19 19:19:24 he Exp $
 
 DISTNAME=	Gtk2-${DIST_VER}
 PKGNAME=	p5-gtk2-${DIST_VER}
+PKGREVISION=	1
 CATEGORIES=	x11 perl5
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=gtk2-perl/}
 
@@ -10,6 +11,8 @@ HOMEPAGE=	http://gtk2-perl.sourceforge.net/
 COMMENT=	Perl bindings for GTK+ 2.0
 
 PKG_DESTDIR_SUPPORT=	user-destdir
+
+MAKE_JOBS_SAFE=		no
 
 DEPENDS+=	p5-ExtUtils-Depends>=0.300:../../devel/p5-ExtUtils-Depends
 DEPENDS+=	p5-ExtUtils-PkgConfig>=1.03:../../devel/p5-ExtUtils-PkgConfig

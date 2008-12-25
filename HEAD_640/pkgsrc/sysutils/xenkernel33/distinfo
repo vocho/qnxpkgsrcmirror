@@ -1,4 +1,4 @@
-$NetBSD: distinfo,v 1.5 2008/08/22 17:03:30 cegger Exp $
+$NetBSD: distinfo,v 1.7 2008/10/14 11:31:54 joerg Exp $
 
 SHA1 (xen-3.3.0.tar.gz) = b6365864eeb5125e0f66a056c4c72816e1789358
 RMD160 (xen-3.3.0.tar.gz) = c98c08617e302ef4004d17cb0ba161d0ed7af59c

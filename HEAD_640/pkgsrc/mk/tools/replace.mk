@@ -1,4 +1,4 @@
-# $NetBSD: replace.mk,v 1.213 2008/05/25 16:55:32 joerg Exp $
+# $NetBSD: replace.mk,v 1.215 2008/11/15 20:20:44 minskim Exp $
 #
 # Copyright (c) 2005 The NetBSD Foundation, Inc.
 # All rights reserved.
@@ -329,6 +329,16 @@ TOOLS_PATH.csh=			${TOOLS_PREFIX.csh}/bin/tcsh
 .  endif
 .endif
 
+.if !defined(TOOLS_IGNORE.fetch) && !empty(_USE_TOOLS:Mfetch)
+.  if !empty(PKGPATH:Mnet/fetch)
+MAKEFLAGS+=			TOOLS_IGNORE.fetch=
+.  elif !empty(_TOOLS_USE_PKGSRC.fetch:M[yY][eE][sS])
+TOOLS_DEPENDS.fetch?=		fetch-[0-9]*:../../net/fetch
+TOOLS_FIND_PREFIX+=		TOOLS_PREFIX.fetch=fetch
+TOOLS_PATH.fetch=		${TOOLS_PREFIX.fetch}/bin/fetch
+.  endif
+.endif
+
 .if !defined(TOOLS_IGNORE.file) && !empty(_USE_TOOLS:Mfile)
 .  if !empty(PKGPATH:Msysutils/file)
 MAKEFLAGS+=			TOOLS_IGNORE.file=
@@ -544,6 +554,17 @@ TOOLS_DEPENDS.lha?=		lha>=114.9:../../archivers/lha
 TOOLS_CREATE+=			lha
 TOOLS_FIND_PREFIX+=		TOOLS_PREFIX.lha=lha
 TOOLS_PATH.lha=			${TOOLS_PREFIX.lha}/bin/lha
+.  endif
+.endif
+
+.if !defined(TOOLS_IGNORE.lzcat) && !empty(_USE_TOOLS:Mlzcat)
+.  if !empty(PKGPATH:Marchivers/lzma-utils)
+MAKEFLAGS+=			TOOLS_IGNORE.lzcat=
+.  elif !empty(_TOOLS_USE_PKGSRC.lzcat:M[yY][eE][sS])
+TOOLS_DEPENDS.lzcat?=		lzma-utils>=4.32.7:../../archivers/lzma-utils
+TOOLS_CREATE+=			lzcat
+TOOLS_FIND_PREFIX+=		TOOLS_PREFIX.lzcat=lzcat
+TOOLS_PATH.lzcat=		${TOOLS_PREFIX.lzcat}/bin/lzcat
 .  endif
 .endif
 

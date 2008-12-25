@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.8 2008/05/26 02:13:23 joerg Exp $
+# $NetBSD: Makefile,v 1.10 2008/10/25 15:59:27 adrianp Exp $
 
-DISTNAME=	modsecurity-apache_2.1.4
+DISTNAME=	modsecurity-apache_2.5.7
 PKGNAME=	${APACHE_PKG_PREFIX}-${DISTNAME:S/apache_//}
+PKGREVISION=	1
 CATEGORIES=	www security
 MASTER_SITES=	http://www.modsecurity.org/download/
 
@@ -9,46 +10,36 @@ MAINTAINER=	adrianp@NetBSD.org
 HOMEPAGE=	http://www.modsecurity.org/
 COMMENT=	Intrusion detection and prevention engine for web applications
 
+PKG_APACHE_ACCEPTED=	apache2 apache22
+
 .include "../../mk/apache.mk"
 .include "options.mk"
 
-USE_TOOLS+=	pax
+GNU_CONFIGURE=		YES
+USE_TOOLS+=		pax
+WRKSRC=			${WRKDIR}/${DISTNAME}/apache2
+USE_LANGUAGES+=		c++ c
 
-PKG_APACHE_ACCEPTED=	apache2
-BUILD_DIRS=		apache2
-EGDIR=			${PREFIX}/share/examples/ap-security
+CONFIGURE_ARGS+=	--with-apxs=${PREFIX}/sbin/apxs
+CONFIGURE_ARGS+=	--with-pcre=${PREFIX}
+CONFIGURE_ARGS+=	--with-apr=${PREFIX}
+CONFIGURE_ARGS+=	--with-apu=${PREFIX}
+CONFIGURE_ARGS+=        --with-libxml=${PREFIX}
+
+EGDIR=			${PREFIX}/share/examples/ap-modsecurity
 CONF_FILES=		${EGDIR}/modsecurity.conf-minimal \
 			${PKG_SYSCONFDIR}/httpd/modsecurity.conf
-MESSAGE_SRC+=		${WRKDIR}/.MESSAGE_SRC
 
 BUILDLINK_API_DEPENDS.apache+=	apache>=2.0.59nb2
 
-SUBST_CLASSES=		make
-SUBST_STAGE.make=	post-patch
-SUBST_FILES.make=	apache2/Makefile
-SUBST_SED.make=		-e "s|@PREFIX@|${PREFIX}|g"
-SUBST_MESSAGE.make=	Fixing Makefiles.
-
-.if !empty(PKG_OPTIONS:Mxml)
-SUBST_SED.make+=	-e "s|@XMLINC@|-I${BUILDLINK_PREFIX.libxml2}/include/libxml2|g"
-SUBST_SED.make+=	-e "s|@XMLDEFS@|-DWITH_LIBXML2|g"
-.else
-SUBST_SED.make+=	-e "s|@XMLINC@||g"
-SUBST_SED.make+=	-e "s|@XMLDEFS@||g"
-.endif
-
-post-build:
-	${CP} ${PKGDIR:Q}/MESSAGE ${WRKDIR:Q}/.MESSAGE_SRC
-.if !empty(PKG_OPTIONS:Mxml)
-	${CP} ${PKGDIR:Q}/MESSAGE.xml ${WRKDIR:Q}/.MESSAGE_SRC.xml
-.endif
-
 post-install:
 	${INSTALL_DATA_DIR} ${EGDIR}
-	${INSTALL_DATA_DIR} ${PREFIX}/share/doc/ap-security
+	${INSTALL_DATA_DIR} ${PREFIX}/share/doc/ap-imodsecurity
 
-	${INSTALL_DATA} ${WRKSRC}/modsecurity.conf-minimal ${EGDIR}
-	cd ${WRKSRC}/doc && pax -rw . ${PREFIX}/share/doc/ap-security
+	${INSTALL_DATA} ${WRKDIR}/${DISTNAME}/modsecurity.conf-minimal ${EGDIR}
+	cd ${WRKDIR}/${DISTNAME}/doc && \
+		pax -rw . ${PREFIX}/share/doc/ap-modsecurity
 
+.include "../../textproc/libxml2/buildlink3.mk"
 .include "../../devel/pcre/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

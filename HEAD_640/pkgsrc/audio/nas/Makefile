@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.79 2007/12/02 08:32:23 rillig Exp $
+# $NetBSD: Makefile,v 1.82 2008/11/10 17:21:33 wiz Exp $
 
-DISTNAME=	nas-1.9.src
+DISTNAME=	nas-1.9.1.src
 PKGNAME=	${DISTNAME:S/.src//}
 PKGREVISION=	1
 CATEGORIES=	audio
@@ -76,6 +76,7 @@ post-install:
 PLIST_SRC=	${PKGDIR}/PLIST.clients
 
 .if ${OPSYS} != "Darwin" && ${OPSYS} != "Interix"
+RCD_SCRIPTS=	nasd
 PLIST_SRC+=	${PKGDIR}/PLIST.server
 EGDIR=		${PREFIX}/share/examples/nas
 CONF_FILES=	${EGDIR}/nasd.conf.eg ${PKG_SYSCONFDIR}/nasd.conf
@@ -83,7 +84,6 @@ CONF_FILES=	${EGDIR}/nasd.conf.eg ${PKG_SYSCONFDIR}/nasd.conf
 .  if ${OPSYS} == "NetBSD" || ${OPSYS} == "FreeBSD" || ${OPSYS} == "OpenBSD" || \
       ${OPSYS} == "DragonFly" || ${OPSYS} == "Linux" || ${OPSYS} == "UnixWare"
 .  include "../../mk/oss.buildlink3.mk"
-PLIST_SRC+=	${PKGDIR}/PLIST.voxware
 .  endif
 .endif
 

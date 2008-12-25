@@ -1,4 +1,4 @@
-/*	$NetBSD: ftp.c,v 1.22 2008/04/25 16:25:25 joerg Exp $	*/
+/*	$NetBSD: ftp.c,v 1.25 2008/12/02 16:59:03 joerg Exp $	*/
 /*-
  * Copyright (c) 1998-2004 Dag-Erling Coïdan Smørgrav
  * Copyright (c) 2008 Joerg Sonnenberger <joerg@NetBSD.org>
@@ -57,24 +57,36 @@
  *
  */
 
+#ifdef __linux__
+/* Keep this down to Linux, it can create surprises else where. */
+#define _GNU_SOURCE
+#endif
+
 #if HAVE_CONFIG_H
 #include "config.h"
 #endif
+#ifndef NETBSD
 #include <nbcompat.h>
+#endif
 
 #include <sys/types.h>
 #include <sys/socket.h>
+
+#include <arpa/inet.h>
 #include <netinet/in.h>
 
 #include <ctype.h>
 #include <errno.h>
 #include <fcntl.h>
+#if defined(HAVE_INTTYPES_H) || defined(NETBSD)
 #include <inttypes.h>
-#include <netdb.h>
+#endif
 #include <stdarg.h>
 #ifndef NETBSD
+#include <nbcompat/netdb.h>
 #include <nbcompat/stdio.h>
 #else
+#include <netdb.h>
 #include <stdio.h>
 #endif
 #include <stdlib.h>
@@ -623,7 +635,7 @@ ftp_transfer(conn_t *conn, const char *oper, const char *file, const char *op_ar
 
 	/* check flags */
 	low = CHECK_FLAG('l');
-	pasv = CHECK_FLAG('p');
+	pasv = !CHECK_FLAG('a');
 	verbose = CHECK_FLAG('v');
 
 	/* passive mode */
@@ -644,6 +656,8 @@ ftp_transfer(conn_t *conn, const char *oper, const char *file, const char *op_ar
 		goto sysouch;
 	if (sa.ss_family == AF_INET6)
 		unmappedaddr((struct sockaddr_in6 *)&sa, &l);
+
+retry_mode:
 
 	/* open data socket */
 	if ((sd = socket(sa.ss_family, SOCK_STREAM, IPPROTO_TCP)) == -1) {
@@ -717,6 +731,14 @@ ftp_transfer(conn_t *conn, const char *oper, const char *file, const char *op_ar
 				goto ouch;
 			}
 			break;
+		case FTP_SYNTAX_ERROR:
+			if (verbose)
+				fetch_info("passive mode failed");
+			/* Close socket and retry with passive mode. */
+			pasv = 0;
+			close(sd);
+			sd = -1;
+			goto retry_mode;
 		}
 
 		/* seek to required offset */

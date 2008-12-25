@@ -1,10 +1,9 @@
-# $NetBSD: Makefile,v 1.102 2008/09/06 20:54:34 wiz Exp $
+# $NetBSD: Makefile,v 1.109 2008/12/02 16:16:19 wiz Exp $
 #
 
-DISTNAME=		gnome-session-2.22.3
-PKGREVISION=		1
+DISTNAME=		gnome-session-2.24.2
 CATEGORIES=		x11 gnome
-MASTER_SITES=		${MASTER_SITE_GNOME:=sources/gnome-session/2.22/}
+MASTER_SITES=		${MASTER_SITE_GNOME:=sources/gnome-session/2.24/}
 SITES.gnome-splash-2.16.0.png=	${MASTER_SITE_LOCAL:=gnome-splash/}
 EXTRACT_SUFX=		.tar.bz2
 DISTFILES=		${DISTNAME}${EXTRACT_SUFX} gnome-splash-2.16.0.png
@@ -16,6 +15,8 @@ COMMENT=		GNOME2 session management utilities
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 CONFLICTS+=		gnome-core<1.4.2nb4
+
+BUILD_DEPENDS+=	xmlto-[0-9]*:../../textproc/xmlto
 
 EXTRACT_ONLY=		${DISTNAME}${EXTRACT_SUFX}
 GNU_CONFIGURE=		yes
@@ -45,6 +46,8 @@ BUILDLINK_DEPMETHOD.libXt?=	build
 .include "../../devel/libgnomeui/buildlink3.mk"
 .include "../../devel/pango/buildlink3.mk"
 .include "../../security/gnome-keyring/buildlink3.mk"
+.include "../../security/policykit/buildlink3.mk"
+.include "../../security/policykit-gnome/buildlink3.mk"
 .include "../../sysutils/dbus/buildlink3.mk"
 .include "../../sysutils/dbus-glib/buildlink3.mk"
 .include "../../sysutils/libnotify/buildlink3.mk"

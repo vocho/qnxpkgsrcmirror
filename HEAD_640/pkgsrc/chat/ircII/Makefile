@@ -1,9 +1,10 @@
-# $NetBSD: Makefile,v 1.49 2008/01/04 20:00:32 heinz Exp $
+# $NetBSD: Makefile,v 1.51 2008/11/17 08:09:19 dsainty Exp $
 
 DISTNAME=		ircii-${VERS}
 PKGNAME=		ircII-${VERS}
 CATEGORIES=		chat
-MASTER_SITES=		ftp://ircii.warped.com/pub/ircII/
+MASTER_SITES=		ftp://ircii.warped.com/pub/ircII/ \
+			http://ircii.warped.com/pub/ircII/
 EXTRACT_SUFX=		.tar.bz2
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
@@ -15,7 +16,7 @@ CONFLICTS=		blackened-[0-9]*
 PKG_DESTDIR_SUPPORT=	user-destdir
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
 
-VERS=			20060725
+VERS=			20080314
 PLIST_SUBST+=	VERS=${VERS:Q}
 
 .include "../../mk/bsd.prefs.mk"

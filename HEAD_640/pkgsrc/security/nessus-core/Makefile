@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.33 2008/07/01 21:27:38 bad Exp $
+# $NetBSD: Makefile,v 1.35 2008/10/13 22:32:54 bad Exp $
 
 .include 	"../../security/nessus/Makefile.common"
 
 DISTNAME=	nessus-core-${VERS}
-PKGREVISION=	2
+PKGREVISION=	1
 
 COMMENT=	Core module of the Nessus Network Security Scanner
 
@@ -24,7 +24,7 @@ RCD_SCRIPTS=	nessusd
 PKG_SYSCONFSUBDIR?=	nessus
 
 OWN_DIRS_PERMS+=	${VARBASE}/nessus ${ROOT_USER} ${ROOT_GROUP} 0700
-OWN_DIRS_PERMS+=	${PKG_SYSCONFDIR} ${ROOT_USER} ${ROOT_GROUP} 0700
+OWN_DIRS_PERMS+=	${PKG_SYSCONFDIR} ${ROOT_USER} ${ROOT_GROUP} 0755
 
 OWN_DIRS+=	${PREFIX}/lib/nessus		\
 		${PREFIX}/lib/nessus/reports	\

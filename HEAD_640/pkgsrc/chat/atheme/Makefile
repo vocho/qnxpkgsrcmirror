@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.1.1.1 2008/06/16 10:38:27 adrianp Exp $
+# $NetBSD: Makefile,v 1.3 2008/11/10 12:09:02 wiz Exp $
 #
 
 DISTNAME=	atheme-services-3.0.4
 PKGNAME=	${DISTNAME:S/-services//}
+PKGREVISION=	1
 CATEGORIES=	chat
 MASTER_SITES=	http://distfiles.atheme.org/
 EXTRACT_SUFX=	.tbz2
@@ -77,5 +78,5 @@ post-install:
 		${INSTALL_DATA} ${WRKSRC}/${i} ${PREFIX}/share/doc/atheme/
 .	endfor
 
-.include "../../devel/mowgli/buildlink3.mk"
+.include "../../devel/libmowgli/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

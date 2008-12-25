@@ -1,11 +1,13 @@
-# $NetBSD: Makefile,v 1.361 2008/09/08 22:12:14 abs Exp $
+# $NetBSD: Makefile,v 1.369 2008/11/25 18:29:36 abs Exp $
 #
 
 COMMENT=	Electronic mail utilities
 
 SUBDIR+=	GNUMail
+SUBDIR+=	OSBF-lua
 SUBDIR+=	Pantomime
 SUBDIR+=	YoSucker
+SUBDIR+=	akonadi
 SUBDIR+=	alpine
 SUBDIR+=	anomy-sanitizer
 SUBDIR+=	archivemail
@@ -75,6 +77,7 @@ SUBDIR+=	etpan
 SUBDIR+=	evolution
 SUBDIR+=	evolution-data-server
 SUBDIR+=	evolution-exchange
+SUBDIR+=	evolution-sharp
 SUBDIR+=	exim
 SUBDIR+=	exim-html
 SUBDIR+=	exim3
@@ -92,9 +95,11 @@ SUBDIR+=	fromto
 SUBDIR+=	getmail
 SUBDIR+=	gld
 SUBDIR+=	gmime
+SUBDIR+=	gmime24
 SUBDIR+=	gnus
 SUBDIR+=	greetdelay
 SUBDIR+=	grepmail
+SUBDIR+=	heirloom-mailx
 SUBDIR+=	hypermail
 SUBDIR+=	ifile
 SUBDIR+=	ifile-procmail
@@ -119,7 +124,6 @@ SUBDIR+=	libspf-alt
 SUBDIR+=	libspf2
 SUBDIR+=	libsylph
 SUBDIR+=	libytnef
-SUBDIR+=	lua-OSBF
 SUBDIR+=	mail-notification
 SUBDIR+=	mailagent
 SUBDIR+=	mailcrypt
@@ -148,7 +152,6 @@ SUBDIR+=	msmtp
 SUBDIR+=	mush
 SUBDIR+=	mutt
 SUBDIR+=	mutt-devel
-SUBDIR+=	nail
 SUBDIR+=	netbiff
 SUBDIR+=	newmail
 SUBDIR+=	newspipe
@@ -175,6 +178,7 @@ SUBDIR+=	p5-Email-Reply
 SUBDIR+=	p5-Email-Send
 SUBDIR+=	p5-Email-Simple
 SUBDIR+=	p5-Email-Simple-Creator
+SUBDIR+=	p5-Email-Stuff
 SUBDIR+=	p5-Email-Valid
 SUBDIR+=	p5-Email-Valid-Loose
 SUBDIR+=	p5-GMail-IMAPD
@@ -204,6 +208,7 @@ SUBDIR+=	p5-Mail-Sendmail
 SUBDIR+=	p5-Mail-Webmail-Gmail
 SUBDIR+=	p5-MailTools
 SUBDIR+=	p5-Net-LMTP
+SUBDIR+=	p5-Net-ManageSieve
 SUBDIR+=	p5-Net-SMTP_auth
 SUBDIR+=	p5-Sendmail-AccessDB
 SUBDIR+=	p5-Sendmail-PMilter
