@@ -1,5 +1,5 @@
 #     Id: BSD.local.dist,v 1.30 1997/08/01 13:16:39 phk Exp
-#	$NetBSD: common-dirs.mtree,v 1.4 2008/08/18 20:16:21 joerg Exp $
+#	$NetBSD: common-dirs.mtree,v 1.13 2008/11/24 13:39:01 wiz Exp $
 #
 
 /set type=dir uname=root gname=wheel mode=0755
@@ -538,6 +538,10 @@
                 LC_MESSAGES
                 ..
             ..
+            ast
+                LC_MESSAGES
+                ..
+            ..
             az
                 LC_MESSAGES
                 ..
@@ -586,6 +590,10 @@
                 LC_MESSAGES
                 ..
             ..
+            ca@valencia
+                LC_MESSAGES
+                ..
+            ..
             cs
                 LC_MESSAGES
                 ..
@@ -603,6 +611,10 @@
                 ..
             ..
             de_AT
+                LC_MESSAGES
+                ..
+            ..
+            de_CH
                 LC_MESSAGES
                 ..
             ..
@@ -842,6 +854,10 @@
                 LC_MESSAGES
                 ..
             ..
+            io
+                LC_MESSAGES
+                ..
+            ..
             is
                 LC_MESSAGES
                 ..
@@ -890,6 +906,10 @@
                 LC_MESSAGES
                 ..
             ..
+            ks
+                LC_MESSAGES
+                ..
+            ..
             ku
                 LC_MESSAGES
                 ..
@@ -899,6 +919,10 @@
                 ..
             ..
             ky
+                LC_MESSAGES
+                ..
+            ..
+            la
                 LC_MESSAGES
                 ..
             ..
@@ -915,6 +939,10 @@
                 ..
             ..
             lv
+                LC_MESSAGES
+                ..
+            ..
+            mai
                 LC_MESSAGES
                 ..
             ..
@@ -1110,7 +1138,7 @@
                 LC_MESSAGES
                 ..
             ..
-            sr@Latn
+            sr@latin
                 LC_MESSAGES
                 ..
             ..
@@ -1154,6 +1182,10 @@
                 LC_MESSAGES
                 ..
             ..
+            th_TH
+                LC_MESSAGES
+                ..
+            ..
             ti
                 LC_MESSAGES
                 ..
@@ -1190,6 +1222,10 @@
                 LC_MESSAGES
                 ..
             ..
+            ur_PK
+                LC_MESSAGES
+                ..
+            ..
             uz
                 LC_MESSAGES
                 ..
@@ -1199,6 +1235,10 @@
                 ..
             ..
             uz@Cyrl
+                LC_MESSAGES
+                ..
+            ..
+            uz@cyrillic
                 LC_MESSAGES
                 ..
             ..

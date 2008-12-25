@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.10 2008/06/12 02:14:28 joerg Exp $
+# $NetBSD: Makefile,v 1.12 2008/11/18 12:42:32 drochner Exp $
 #
 
-DISTNAME=		pygame-1.7.1release
-PKGNAME=		${PYPKGPREFIX}-game-1.7.1
-PKGREVISION=		4
+DISTNAME=		pygame-1.8.1release
+PKGNAME=		${PYPKGPREFIX}-game-1.8.1
+PKGREVISION=		1
 CATEGORIES=		devel
 MASTER_SITES=		http://pygame.org/ftp/
 
@@ -15,6 +15,10 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 
 PY_PATCHPLIST=		yes
 PYDISTUTILSPKG=		yes
+
+# XXX
+post-extract:
+	${CHMOD} go+r ${WRKSRC}/lib/*
 
 .include "../../audio/SDL_mixer/buildlink3.mk"
 .include "../../devel/SDL_ttf/buildlink3.mk"

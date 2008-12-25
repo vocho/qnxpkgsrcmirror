@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.2 2008/04/05 04:45:22 obache Exp $
+# $NetBSD: Makefile,v 1.4 2008/11/12 12:25:27 obache Exp $
 
-DISTNAME=		dictem-0.82
+DISTNAME=		dictem-1.0.0
 PKGNAME=		${EMACS_PKGNAME_PREFIX}${DISTNAME}
-#PKGREVISION=		1
 CATEGORIES=		textproc editors
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=dictem/} \
                         http://www.mova.org/~cheusov/pub/dictem/
@@ -34,5 +33,5 @@ do-install:
 	cd ${WRKSRC} && ${INSTALL_DATA} ${DOCS}				\
 			${DESTDIR}${PREFIX}/share/doc/${PKGBASE}
 
-.include "../../mk/emacs.mk"
+.include "../../editors/emacs/modules.mk"
 .include "../../mk/bsd.pkg.mk"

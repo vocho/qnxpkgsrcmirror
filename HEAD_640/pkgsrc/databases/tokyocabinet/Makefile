@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.2 2008/09/05 07:15:25 obache Exp $
+# $NetBSD: Makefile,v 1.12 2008/11/25 11:16:05 obache Exp $
 #
 
-DISTNAME=	tokyocabinet-1.3.8
+DISTNAME=	tokyocabinet-1.3.21
 CATEGORIES=	databases
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=tokyocabinet/}
 
@@ -13,6 +13,7 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=	yes
 USE_TOOLS+=	gmake pkg-config
+USE_LANGUAGES=	c99
 
 PKGCONFIG_OVERRIDE+=	tokyocabinet.pc.in
 

@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.22 2008/09/07 11:24:27 wiz Exp $
+# $NetBSD: Makefile,v 1.24 2008/10/19 19:17:43 he Exp $
 #
 
-DISTNAME=	BerkeleyDB-0.34
+DISTNAME=	BerkeleyDB-0.36
 PKGNAME=	p5-${DISTNAME}
 PKGREVISION=	1
 SVR4_PKGNAME=	p5bdb

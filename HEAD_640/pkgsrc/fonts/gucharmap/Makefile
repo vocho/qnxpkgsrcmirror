@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.55 2008/07/15 10:21:41 drochner Exp $
+# $NetBSD: Makefile,v 1.58 2008/12/02 16:56:58 wiz Exp $
 #
 
-DISTNAME=	gucharmap-2.22.3
+DISTNAME=	gucharmap-2.24.2
 CATEGORIES=	fonts gnome
-MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gucharmap/2.22/}
+MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gucharmap/2.24/}
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
@@ -18,7 +18,7 @@ USE_PKGLOCALEDIR=	yes
 USE_LIBTOOL=		yes
 GNU_CONFIGURE=		yes
 
-PKGCONFIG_OVERRIDE+=	gucharmap.pc.in
+PKGCONFIG_OVERRIDE+=	gucharmap-2.pc.in
 
 GTK2_IMMODULES=		yes
 

@@ -1,7 +1,7 @@
-@comment $NetBSD: PLIST.sq,v 1.2 2008/09/23 06:52:12 taca Exp $
+@comment $NetBSD: PLIST.sq,v 1.4 2008/11/07 15:16:02 taca Exp $
 ${TL_WEBDIR}/system/modules/backend/languages/sq/.htaccess
-${TL_WEBDIR}/system/modules/backend/languages/sq/default.php
 ${TL_WEBDIR}/system/modules/backend/languages/sq/countries.php
+${TL_WEBDIR}/system/modules/backend/languages/sq/default.php
 ${TL_WEBDIR}/system/modules/backend/languages/sq/explain.php
 ${TL_WEBDIR}/system/modules/backend/languages/sq/languages.php
 ${TL_WEBDIR}/system/modules/backend/languages/sq/modules.php
@@ -21,10 +21,10 @@ ${TL_WEBDIR}/system/modules/backend/languages/sq/tl_page.php
 ${TL_WEBDIR}/system/modules/backend/languages/sq/tl_settings.php
 ${TL_WEBDIR}/system/modules/backend/languages/sq/tl_style.php
 ${TL_WEBDIR}/system/modules/backend/languages/sq/tl_style_sheet.php
+${TL_WEBDIR}/system/modules/backend/languages/sq/tl_task.php
 ${TL_WEBDIR}/system/modules/backend/languages/sq/tl_undo.php
 ${TL_WEBDIR}/system/modules/backend/languages/sq/tl_user.php
 ${TL_WEBDIR}/system/modules/backend/languages/sq/tl_user_group.php
-${TL_WEBDIR}/system/modules/backend/languages/sq/tl_task.php
 ${TL_WEBDIR}/system/modules/calendar/languages/sq/.htaccess
 ${TL_WEBDIR}/system/modules/calendar/languages/sq/default.php
 ${TL_WEBDIR}/system/modules/calendar/languages/sq/modules.php
@@ -45,6 +45,12 @@ ${TL_WEBDIR}/system/modules/dfGallery/languages/sq/.htaccess
 ${TL_WEBDIR}/system/modules/dfGallery/languages/sq/default.php
 ${TL_WEBDIR}/system/modules/dfGallery/languages/sq/modules.php
 ${TL_WEBDIR}/system/modules/dfGallery/languages/sq/tl_content.php
+${TL_WEBDIR}/system/modules/faq/languages/sq/.htaccess
+${TL_WEBDIR}/system/modules/faq/languages/sq/default.php
+${TL_WEBDIR}/system/modules/faq/languages/sq/modules.php
+${TL_WEBDIR}/system/modules/faq/languages/sq/tl_faq.php
+${TL_WEBDIR}/system/modules/faq/languages/sq/tl_faq_category.php
+${TL_WEBDIR}/system/modules/faq/languages/sq/tl_module.php
 ${TL_WEBDIR}/system/modules/frontend/languages/sq/.htaccess
 ${TL_WEBDIR}/system/modules/frontend/languages/sq/default.php
 ${TL_WEBDIR}/system/modules/frontend/languages/sq/modules.php
@@ -64,11 +70,11 @@ ${TL_WEBDIR}/system/modules/news/languages/sq/tl_user_group.php
 ${TL_WEBDIR}/system/modules/newsletter/languages/sq/.htaccess
 ${TL_WEBDIR}/system/modules/newsletter/languages/sq/default.php
 ${TL_WEBDIR}/system/modules/newsletter/languages/sq/modules.php
+${TL_WEBDIR}/system/modules/newsletter/languages/sq/tl_member.php
 ${TL_WEBDIR}/system/modules/newsletter/languages/sq/tl_module.php
 ${TL_WEBDIR}/system/modules/newsletter/languages/sq/tl_newsletter.php
 ${TL_WEBDIR}/system/modules/newsletter/languages/sq/tl_newsletter_channel.php
 ${TL_WEBDIR}/system/modules/newsletter/languages/sq/tl_newsletter_recipients.php
-${TL_WEBDIR}/system/modules/newsletter/languages/sq/tl_member.php
 ${TL_WEBDIR}/system/modules/newsletter/languages/sq/tl_user.php
 ${TL_WEBDIR}/system/modules/newsletter/languages/sq/tl_user_group.php
 ${TL_WEBDIR}/system/modules/pun_bridge/languages/sq/.htaccess
@@ -91,6 +97,7 @@ ${TL_WEBDIR}/system/modules/tpl_editor/languages/sq/tl_templates.php
 @dirrm ${TL_WEBDIR}/system/modules/news/languages/sq
 @dirrm ${TL_WEBDIR}/system/modules/listing/languages/sq
 @dirrm ${TL_WEBDIR}/system/modules/frontend/languages/sq
+@dirrm ${TL_WEBDIR}/system/modules/faq/languages/sq
 @dirrm ${TL_WEBDIR}/system/modules/dfGallery/languages/sq
 @dirrm ${TL_WEBDIR}/system/modules/development/languages/sq
 @dirrm ${TL_WEBDIR}/system/modules/comments/languages/sq

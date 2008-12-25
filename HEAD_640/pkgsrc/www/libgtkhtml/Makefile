@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.47 2008/04/30 13:38:16 jmmv Exp $
+# $NetBSD: Makefile,v 1.49 2008/10/20 07:21:32 wiz Exp $
 #
 
 DISTNAME=	libgtkhtml-2.6.3
-PKGREVISION=	10
+PKGREVISION=	11
 CATEGORIES=	www devel gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/libgtkhtml/2.6/}
 EXTRACT_SUFX=	.tar.bz2
@@ -19,8 +19,8 @@ USE_LIBTOOL=		yes
 
 PKGCONFIG_OVERRIDE=	libgtkhtml-2.0.pc.in
 
-.include "../../devel/gail/buildlink3.mk"
 .include "../../textproc/libxml2/buildlink3.mk"
+BUILDLINK_API_DEPENDS.gtk2+=	gtk2+>=2.14.0
 .include "../../x11/gtk2/buildlink3.mk"
 .include "../../mk/pthread.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

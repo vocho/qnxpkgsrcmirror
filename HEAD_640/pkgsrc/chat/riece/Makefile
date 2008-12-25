@@ -1,23 +1,27 @@
-# $NetBSD: Makefile,v 1.13 2007/10/29 04:38:47 uebayasi Exp $
+# $NetBSD: Makefile,v 1.16 2008/10/11 09:31:54 uebayasi Exp $
 #
 
-DISTNAME=	riece-4.0.0
+DISTNAME=	riece-5.0.0
 PKGNAME=	${EMACS_PKGNAME_PREFIX}${DISTNAME}
 CATEGORIES=	chat japanese
-MASTER_SITES=	http://savannah.nongnu.org/download/riece/
+MASTER_SITES=	http://download.savannah.gnu.org/releases/riece/
 
 MAINTAINER=	uebayasi@NetBSD.org
 HOMEPAGE=	http://www.nongnu.org/riece/
 COMMENT=	IRC client for Emacs
 
+PKG_DESTDIR_SUPPORT=	user-destdir
+INSTALLATION_DIRS=	${EMACS_LISPPREFIX:C|^${PREFIX}/||}/riece \
+			${EMACS_INFOPREFIX:C|^${PREFIX}/||}
+
 EMACS_VERSIONS_ACCEPTED= \
-		emacs22 emacs22nox emacs21 emacs21nox xemacs214
+		emacs22 emacs22nox emacs21 emacs21nox xemacs215 xemacs215nox xemacs214 xemacs214nox
+EMACS_MODULES=	base
 
 WRKSRC=		${WRKDIR}/${DISTNAME:C|[^0-9]$||}
 
 GNU_CONFIGURE=	YES
 INFO_FILES=	# PLIST
-EMACS_MODULES=	base
 
 # --with-emacs=... or --with-xemacs=...
 CONFIGURE_ARGS+=	--with-${EMACS_FLAVOR}=${EMACS_BIN:Q}
@@ -27,6 +31,15 @@ CONFIGURE_ARGS+=	${CONFIGURE_ARGS.${EMACS_FLAVOR}}
 CONFIGURE_ARGS.emacs=	--with-lispdir=${EMACS_LISPPREFIX:Q}
 CONFIGURE_ARGS.xemacs=	--with-packagedir=${EMACS_LISPPREFIX:C|/lisp\$||}
 
-.include "../../mk/emacs.mk"
+do-install: plist
+	${INSTALL_DATA} ${WRKSRC}/doc/*.info ${DESTDIR}${EMACS_INFOPREFIX}
+	cd ${WRKSRC}/lisp;						\
+	grep -v '^@' ${PLIST} | grep '/site-lisp/riece/' |		\
+	while read file; do						\
+		file=$$( basename $$file );				\
+		${INSTALL_DATA} $$file ${DESTDIR}${EMACS_LISPPREFIX}/riece; \
+	done
+
+.include "../../editors/emacs/modules.mk"
 
 .include "../../mk/bsd.pkg.mk"

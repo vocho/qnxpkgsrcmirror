@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.63 2006/12/07 14:21:33 rillig Exp $
+# $NetBSD: Makefile,v 1.67 2008/11/11 13:00:26 tron Exp $
 
-DISTNAME=		bison-2.3
+DISTNAME=		bison-2.4
+PKGREVISION=		3
 CATEGORIES=		devel
 MASTER_SITES=		${MASTER_SITE_GNU:=bison/}
 EXTRACT_SUFX=		.tar.bz2
@@ -15,12 +16,27 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 GNU_CONFIGURE=		YES
 USE_LANGUAGES=		c c++
 USE_PKGLOCALEDIR=	yes
-USE_TOOLS+=		gm4:run msgfmt
+USE_TOOLS+=		grep gm4:run msgfmt
 INFO_FILES=		# PLIST
 
 CONFIGURE_ENV+=		gt_cv_func_gnugettext1_libintl=yes
 
 TEST_TARGET=		check
+
+# Avoid rebuilding manpage
+pre-build:
+	${TOUCH} ${WRKSRC}/doc/bison.1
+
+# "bison" wants a recent version of "gettext" which at least NetBSD doesn't
+# provide. Figure out whether it will install the locale files or not.
+PLIST_SRC=	${WRKDIR}/PLIST
+
+post-configure:
+	if grep -q '^POSUB = po$$' ${WRKSRC}/Makefile; then		\
+	  ${CP} ${PKGDIR}/PLIST ${PLIST_SRC};				\
+	else								\
+	  ${GREP} -v '^share/locale/' ${PKGDIR}/PLIST >${PLIST_SRC};	\
+	fi
 
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

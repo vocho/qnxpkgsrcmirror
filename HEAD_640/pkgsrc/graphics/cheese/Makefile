@@ -1,12 +1,23 @@
-# $NetBSD: Makefile,v 1.3 2008/09/16 10:36:31 jmcneill Exp $
+# $NetBSD: Makefile,v 1.7 2008/12/02 11:47:09 wiz Exp $
 
-DISTNAME=	cheese-2.22.3
+DISTNAME=	cheese-2.24.2
 CATEGORIES=	graphics
-MASTER_SITES=	${MASTER_SITE_GNOME:=sources/cheese/2.22/}
+MASTER_SITES=	${MASTER_SITE_GNOME:=sources/cheese/2.24/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.gnome.org/projects/cheese/
 COMMENT=	Use your webcam to take photos and videos
+
+BUILD_DEPENDS+=	gettext-m4-[0-9]*:../../devel/gettext-m4
+DEPENDS+= gst-plugins0.10-theora>=0.10.1:../../multimedia/gst-plugins0.10-theora
+DEPENDS+= gst-plugins0.10-ogg>=0.10.1:../../multimedia/gst-plugins0.10-ogg
+DEPENDS+= gst-plugins0.10-vorbis>=0.10.1:../../audio/gst-plugins0.10-vorbis
+
+.include "../../mk/bsd.prefs.mk"
+
+.if !empty(MACHINE_PLATFORM:MNetBSD-[5-9]*) || !empty(MACHINE_PLATFORM:MLinux)
+DEPENDS+= gst-plugins0.10-v4l2>=0.10.10:../../multimedia/gst-plugins0.10-v4l2
+.endif
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
@@ -35,10 +46,6 @@ pre-configure:
 .include "../../mail/evolution-data-server/buildlink3.mk"
 .include "../../multimedia/gst-plugins0.10-base/buildlink3.mk"
 .include "../../multimedia/gst-plugins0.10-good/buildlink3.mk"
-DEPENDS+= gst-plugins0.10-theora>=0.10.1:../../multimedia/gst-plugins0.10-theora
-DEPENDS+= gst-plugins0.10-ogg>=0.10.1:../../multimedia/gst-plugins0.10-ogg
-DEPENDS+= gst-plugins0.10-vorbis>=0.10.1:../../audio/gst-plugins0.10-vorbis
-DEPENDS+= gst-plugins0.10-v4l2>=0.10.10:../../multimedia/gst-plugins0.10-v4l2
 .include "../../multimedia/gstreamer0.10/buildlink3.mk"
 .include "../../sysutils/dbus/buildlink3.mk"
 .include "../../sysutils/dbus-glib/buildlink3.mk"

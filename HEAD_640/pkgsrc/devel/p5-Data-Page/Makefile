@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.1.1.1 2008/07/14 09:24:06 abs Exp $
+# $NetBSD: Makefile,v 1.3 2008/10/30 21:58:24 he Exp $
 
-DISTNAME=	Data-Page-2.00
+DISTNAME=	Data-Page-2.01
 PKGNAME=	p5-${DISTNAME}
 CATEGORIES=	databases perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Data/}

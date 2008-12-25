@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.13 2008/05/25 13:16:10 dillo Exp $
+# $NetBSD: Makefile,v 1.15 2008/10/11 19:25:53 uwe Exp $
 #
 
 DISTNAME=	ilisp-20021222
 PKGNAME=	${EMACS_PKGNAME_PREFIX}emacs-${DISTNAME}
-PKGREVISION=	3
+PKGREVISION=	4
 CATEGORIES=	devel
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=ilisp/}
 
@@ -36,5 +36,5 @@ do-install:
 	${INSTALL_DATA} ${WRKSRC}/extra/*.el ${DESTDIR}${SITELISP}/extra
 	${INSTALL_DATA} ${WRKSRC}/extra/*.elc ${DESTDIR}${SITELISP}/extra
 
-.include "../../mk/emacs.mk"
+.include "../../editors/emacs/modules.mk"
 .include "../../mk/bsd.pkg.mk"

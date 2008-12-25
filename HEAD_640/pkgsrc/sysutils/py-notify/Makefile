@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.5 2008/04/25 20:18:21 tnn Exp $
+# $NetBSD: Makefile,v 1.7 2008/11/18 12:46:52 drochner Exp $
 #
 
 DISTNAME=	notify-python-0.1.1
@@ -20,7 +20,7 @@ USE_LIBTOOL=	yes
 USE_TOOLS+=	pkg-config
 
 PKGCONFIG_OVERRIDE+=	notify-python-0.1.1/notify-python.pc.in
-PYTHON_VERSIONS_ACCEPTED=	25 24
+PYTHON_VERSIONS_ACCEPTED=	24 25
 PY_PATCHPLIST=	yes
 
 .include "../../lang/python/extension.mk"

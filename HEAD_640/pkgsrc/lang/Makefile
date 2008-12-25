@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.259 2008/08/12 19:59:29 tnn Exp $
+# $NetBSD: Makefile,v 1.264 2008/11/29 18:13:28 snj Exp $
 #
 
 COMMENT=	Programming languages
@@ -22,6 +22,7 @@ SUBDIR+=	classpath
 SUBDIR+=	classpath-gui
 SUBDIR+=	clisp
 SUBDIR+=	coq
+SUBDIR+=	cparser
 SUBDIR+=	cu-prolog
 SUBDIR+=	drscheme
 SUBDIR+=	eag
@@ -29,6 +30,7 @@ SUBDIR+=	ecl
 SUBDIR+=	eieio
 SUBDIR+=	elisp-manual
 SUBDIR+=	elk
+SUBDIR+=	embryo
 SUBDIR+=	erlang
 SUBDIR+=	erlang-doc
 SUBDIR+=	erlang-man
@@ -90,6 +92,7 @@ SUBDIR+=	mercury
 SUBDIR+=	minischeme
 SUBDIR+=	mit-scheme-bin
 SUBDIR+=	mono
+SUBDIR+=	mono-basic
 SUBDIR+=	monodoc
 SUBDIR+=	moscow_ml
 SUBDIR+=	mpd
@@ -127,7 +130,6 @@ SUBDIR+=	py23-html-docs
 SUBDIR+=	py24-html-docs
 SUBDIR+=	py25-html-docs
 #SUBDIR+=	python		# only contains Makefile fragments
-SUBDIR+=	python15
 SUBDIR+=	python21
 SUBDIR+=	python23
 SUBDIR+=	python24
@@ -145,6 +147,7 @@ SUBDIR+=	sather
 SUBDIR+=	sbcl
 SUBDIR+=	scheme48
 SUBDIR+=	scm
+SUBDIR+=	see
 SUBDIR+=	sigscheme
 SUBDIR+=	siod
 SUBDIR+=	smalltalk

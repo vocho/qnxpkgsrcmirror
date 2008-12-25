@@ -1,4 +1,4 @@
-/*	$NetBSD: common.h,v 1.8 2008/07/27 13:51:27 joerg Exp $	*/
+/*	$NetBSD: common.h,v 1.10 2008/10/06 23:37:56 joerg Exp $	*/
 /*-
  * Copyright (c) 1998-2004 Dag-Erling Coïdan Smørgrav
  * All rights reserved.
@@ -57,6 +57,8 @@ struct fetchconn {
 	char		*buf;		/* buffer */
 	size_t		 bufsize;	/* buffer size */
 	size_t		 buflen;	/* length of buffer contents */
+	char		*next_buf;	/* pending buffer, e.g. after getln */
+	size_t		 next_len;	/* size of pending buffer */
 	int		 err;		/* last protocol reply code */
 #ifdef WITH_SSL
 	SSL		*ssl;		/* SSL handle */

@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.18 2008/08/21 15:22:45 joerg Exp $
+# $NetBSD: Makefile,v 1.23 2008/11/04 16:14:24 joerg Exp $
 #
 
-DISTNAME=	libfetch-2.15
+DISTNAME=	libfetch-2.20
 CATEGORIES=	net
 MASTER_SITES=	# empty
 DISTFILES=	# empty
@@ -29,5 +29,4 @@ do-extract:
 
 .include "options.mk"
 
-.include "../../security/openssl/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"
