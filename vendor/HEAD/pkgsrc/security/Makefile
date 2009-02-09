@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.336 2008/11/22 03:36:20 jmcneill Exp $
+# $NetBSD: Makefile,v 1.340 2009/01/09 19:34:44 rillig Exp $
 #
 
 COMMENT=	Security tools
@@ -133,6 +133,11 @@ SUBDIR+=	opencdk
 SUBDIR+=	openpam
 SUBDIR+=	openssh
 SUBDIR+=	openssl
+SUBDIR+=	openvas-client
+SUBDIR+=	openvas-libnasl
+SUBDIR+=	openvas-libraries
+SUBDIR+=	openvas-plugins
+SUBDIR+=	openvas-server
 SUBDIR+=	otpCalc
 SUBDIR+=	p0f
 SUBDIR+=	p5-Authen-CAS-Client
@@ -190,6 +195,7 @@ SUBDIR+=	p5-Net-DNS-SEC
 SUBDIR+=	p5-Net-DNS-SEC-Maint-Key
 SUBDIR+=	p5-Net-SSH
 SUBDIR+=	p5-Net-SSLeay
+SUBDIR+=	p5-OpenSSL
 SUBDIR+=	p5-SHA
 SUBDIR+=	p5-String-Random
 SUBDIR+=	p5-Tie-EncryptedHash
@@ -275,6 +281,7 @@ SUBDIR+=	ssh-ip-tunnel
 SUBDIR+=	ssh2
 SUBDIR+=	sshfp
 SUBDIR+=	ssldump
+SUBDIR+=	sslproxy
 SUBDIR+=	sslwrap
 SUBDIR+=	starttls
 SUBDIR+=	steghide

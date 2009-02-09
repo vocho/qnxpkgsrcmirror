@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.455 2008/12/01 14:06:17 wiz Exp $
+# $NetBSD: Makefile,v 1.457 2008/12/17 11:57:35 obache Exp $
 #
 
 COMMENT=	System utilities
@@ -91,6 +91,7 @@ SUBDIR+=	fam
 SUBDIR+=	fastfs
 SUBDIR+=	fatback
 SUBDIR+=	fdgw
+SUBDIR+=	fdupes
 SUBDIR+=	file
 SUBDIR+=	filelight
 SUBDIR+=	findutils
@@ -382,6 +383,7 @@ SUBDIR+=	xfce4-netload-plugin
 SUBDIR+=	xfce4-quicklauncher-plugin
 SUBDIR+=	xfce4-systemload-plugin
 SUBDIR+=	xfce4-thunar
+SUBDIR+=	xfce4-volman
 SUBDIR+=	xfce4-xarchiver
 SUBDIR+=	xfce4-xkb-plugin
 SUBDIR+=	xfe

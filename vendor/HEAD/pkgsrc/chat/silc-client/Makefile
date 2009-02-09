@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.50 2008/10/19 19:17:41 he Exp $
+# $NetBSD: Makefile,v 1.52 2009/01/12 07:15:50 tonnerre Exp $
 #
 
 DISTNAME=		${SILC_CLIENT_DISTNAME}

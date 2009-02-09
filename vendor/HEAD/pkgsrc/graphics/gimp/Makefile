@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.176 2008/08/30 11:11:50 adam Exp $
+# $NetBSD: Makefile,v 1.178 2009/01/26 15:22:03 drochner Exp $
 
-DISTNAME=	gimp-2.4.7
+DISTNAME=	gimp-2.6.4
 CATEGORIES=	graphics
-MASTER_SITES=	ftp://ftp.gimp.org/pub/gimp/v2.4/ \
-		${MASTER_SITE_GNU:=gimp/v2.4/} \
-		ftp://ftp.gwdg.de/pub/misc/grafik/gimp/gimp/v2.4/
+MASTER_SITES=	ftp://ftp.gimp.org/pub/gimp/v2.6/ \
+		${MASTER_SITE_GNU:=gimp/v2.6/} \
+		ftp://ftp.gwdg.de/pub/misc/grafik/gimp/gimp/v2.6/
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	adam@NetBSD.org
@@ -55,10 +55,21 @@ PLIST.twain=		yes
 
 .include "options.mk"
 
+# The gettext version in pkgsrc cannot handle the .po files, so
+# we strip out usage of the newer features (context and fuzzy matches)
+post-patch:
+	for f in ${WRKSRC}/po/*.po ${WRKSRC}/po-libgimp/*.po ${WRKSRC}/po-plug-ins/*.po; do \
+		mv $$f $$f.original ; \
+		${AWK} -f ${FILESDIR}/msgfmtstrip $$f.original > $$f ; \
+	done
+
+.include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../databases/shared-mime-info/mimedb.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../fonts/fontconfig/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
+.include "../../graphics/babl/buildlink3.mk"
+.include "../../graphics/gegl/buildlink3.mk"
 .include "../../graphics/jpeg/buildlink3.mk"
 .include "../../graphics/lcms/buildlink3.mk"
 .include "../../graphics/libart/buildlink3.mk"

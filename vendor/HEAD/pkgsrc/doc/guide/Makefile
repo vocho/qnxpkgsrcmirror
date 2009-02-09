@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.32 2007/10/12 01:29:10 dmcmahill Exp $
+# $NetBSD: Makefile,v 1.34 2009/01/09 11:11:40 rillig Exp $
 #
 
 DISTNAME=		pkgsrc-guide-${PKGVERSION}
@@ -6,7 +6,7 @@ CATEGORIES=		# empty
 MASTER_SITES=		${MASTER_SITE_LOCAL}
 DISTFILES=		htdocs-share-20071010.tar.gz
 
-MAINTAINER=		packages@NetBSD.org
+MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://www.NetBSD.org/docs/pkgsrc/
 COMMENT=		The pkgsrc guide
 
@@ -17,6 +17,7 @@ PKGVERSION!=		date '+%Y%m%d'
 DIST_SUBDIR=		${PKGBASE}
 NO_MTREE=		yes
 USE_LANGUAGES=		# empty
+MAKE_ENV+=		SED=${SED:Q}
 
 PLIST_SRC=		${WRKDIR}/PLIST_DYNAMIC
 DOCDIR=			${PREFIX}/share/doc/pkgsrc

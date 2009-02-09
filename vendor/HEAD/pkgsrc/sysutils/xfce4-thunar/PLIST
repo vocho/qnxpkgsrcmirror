@@ -1,7 +1,6 @@
-@comment $NetBSD: PLIST,v 1.2 2007/12/07 19:43:22 martti Exp $
+@comment $NetBSD: PLIST,v 1.4 2008/12/19 23:54:47 hira Exp $
 bin/Thunar
 bin/thunar
-etc/xdg/Thunar/uca.xml
 include/thunar-vfs-1/thunar-vfs/thunar-vfs-config.h
 include/thunar-vfs-1/thunar-vfs/thunar-vfs-enum-types.h
 include/thunar-vfs-1/thunar-vfs/thunar-vfs-info.h
@@ -247,6 +246,7 @@ share/doc/Thunar/html/zh_TW/support.html
 share/doc/Thunar/html/zh_TW/the-file-manager-window.html
 share/doc/Thunar/html/zh_TW/using-removable-media.html
 share/doc/Thunar/html/zh_TW/working-with-files-and-folders.html
+share/examples/Thunar/uca.xml
 share/gtk-doc/html/thunar-vfs/ThunarVfsGroup.html
 share/gtk-doc/html/thunar-vfs/ThunarVfsJob.html
 share/gtk-doc/html/thunar-vfs/ThunarVfsMimeAction.html
@@ -324,6 +324,7 @@ share/locale/ar/LC_MESSAGES/Thunar.mo
 share/locale/be/LC_MESSAGES/Thunar.mo
 share/locale/ca/LC_MESSAGES/Thunar.mo
 share/locale/cs/LC_MESSAGES/Thunar.mo
+share/locale/da/LC_MESSAGES/Thunar.mo
 share/locale/de/LC_MESSAGES/Thunar.mo
 share/locale/dz/LC_MESSAGES/Thunar.mo
 share/locale/el/LC_MESSAGES/Thunar.mo
@@ -337,15 +338,18 @@ share/locale/fr/LC_MESSAGES/Thunar.mo
 share/locale/gl/LC_MESSAGES/Thunar.mo
 share/locale/he/LC_MESSAGES/Thunar.mo
 share/locale/hu/LC_MESSAGES/Thunar.mo
+share/locale/id/LC_MESSAGES/Thunar.mo
 share/locale/it/LC_MESSAGES/Thunar.mo
 share/locale/ja/LC_MESSAGES/Thunar.mo
 share/locale/ka/LC_MESSAGES/Thunar.mo
 share/locale/ko/LC_MESSAGES/Thunar.mo
+share/locale/ku/LC_MESSAGES/Thunar.mo
 share/locale/lt/LC_MESSAGES/Thunar.mo
 share/locale/lv/LC_MESSAGES/Thunar.mo
 share/locale/mk/LC_MESSAGES/Thunar.mo
 share/locale/nb_NO/LC_MESSAGES/Thunar.mo
 share/locale/nl/LC_MESSAGES/Thunar.mo
+share/locale/nn_NO/LC_MESSAGES/Thunar.mo
 share/locale/pa/LC_MESSAGES/Thunar.mo
 share/locale/pl/LC_MESSAGES/Thunar.mo
 share/locale/pt_BR/LC_MESSAGES/Thunar.mo
@@ -365,6 +369,7 @@ share/pixmaps/Thunar/Thunar-fallback-icon.png
 share/thumbnailers/thunar-vfs-font-thumbnailer-1.desktop
 share/xfce4/panel-plugins/thunar-tpa.desktop
 @dirrm share/pixmaps/Thunar
+@dirrm share/examples/Thunar
 @dirrm share/doc/Thunar/html/zh_TW/images
 @dirrm share/doc/Thunar/html/zh_TW
 @dirrm share/doc/Thunar/html/ru/images
@@ -392,4 +397,3 @@ share/xfce4/panel-plugins/thunar-tpa.desktop
 @dirrm include/thunarx-1
 @dirrm include/thunar-vfs-1/thunar-vfs
 @dirrm include/thunar-vfs-1
-@dirrm etc/xdg/Thunar

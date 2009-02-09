@@ -1,8 +1,8 @@
-# $NetBSD: options.mk,v 1.4 2008/05/17 23:45:47 tnn Exp $
+# $NetBSD: options.mk,v 1.6 2008/12/21 14:08:39 ahoka Exp $
 
 PKG_OPTIONS_VAR=		PKG_OPTIONS.pidgin
 PKG_SUPPORTED_OPTIONS+=		dbus debug gstreamer gtkspell
-PKG_SUGGESTED_OPTIONS+=		gtkspell
+PKG_SUGGESTED_OPTIONS+=		gtkspell dbus gstreamer
 
 .include "../../mk/bsd.options.mk"
 

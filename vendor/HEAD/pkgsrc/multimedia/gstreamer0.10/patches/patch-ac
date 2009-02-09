@@ -1,8 +1,8 @@
-$NetBSD: patch-ac,v 1.5 2008/04/10 11:54:40 drochner Exp $
+$NetBSD: patch-ac,v 1.7 2009/01/26 10:34:48 drochner Exp $
 
---- configure.orig	2008-03-21 00:11:16.000000000 +0100
+--- configure.orig	2009-01-19 21:36:01.000000000 +0100
 +++ configure
-@@ -31016,7 +31016,7 @@ rm -f core conftest.err conftest.$ac_obj
+@@ -23587,7 +23587,7 @@ rm -f core conftest.err conftest.$ac_obj
  echo "${ECHO_T}$flag_ok" >&6; }
  
  

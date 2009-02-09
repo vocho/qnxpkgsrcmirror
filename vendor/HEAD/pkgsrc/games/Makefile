@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.313 2008/11/24 18:16:33 snj Exp $
+# $NetBSD: Makefile,v 1.317 2009/01/31 03:06:17 ahoka Exp $
 #
 
 COMMENT=	Games
@@ -7,6 +7,7 @@ SUBDIR+=	0verkill
 SUBDIR+=	4stAttack
 SUBDIR+=	InterLOGIC
 SUBDIR+=	KoboDeluxe
+SUBDIR+=	LostPixels
 SUBDIR+=	REminiscence
 SUBDIR+=	abuse
 SUBDIR+=	adom
@@ -128,6 +129,7 @@ SUBDIR+=	hugo
 SUBDIR+=	icbm3d
 SUBDIR+=	icebreaker
 SUBDIR+=	imaze
+SUBDIR+=	ioquake3
 SUBDIR+=	ivan
 SUBDIR+=	jetpack
 SUBDIR+=	jools
@@ -180,6 +182,7 @@ SUBDIR+=	orbital_eunuchs_sniper
 SUBDIR+=	pag
 SUBDIR+=	pioneers
 SUBDIR+=	plib
+SUBDIR+=	pokerth
 SUBDIR+=	polyglot
 SUBDIR+=	powermanga
 SUBDIR+=	powwow
@@ -222,6 +225,7 @@ SUBDIR+=	sl
 SUBDIR+=	spaceracer
 SUBDIR+=	spellcast
 SUBDIR+=	spider
+SUBDIR+=	stegavorto
 SUBDIR+=	stratagus
 SUBDIR+=	sudoku-cli
 SUBDIR+=	svb

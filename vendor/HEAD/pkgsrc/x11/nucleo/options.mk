@@ -1,3 +1,6 @@
+# $NetBSD: options.mk,v 1.3 2008/12/21 12:45:50 obache Exp $
+#
+
 PKG_OPTIONS_VAR=	PKG_OPTIONS.nucleo
 PKG_SUPPORTED_OPTIONS=	gnutls # qt4
 PKG_SUGGESTED_OPTIONS=	gnutls
@@ -21,5 +24,4 @@ PLIST.gnutls=		yes
 .  include "../../security/gnutls/buildlink3.mk"
 .else
 CONFIGURE_ARGS+=	--without-gnutls
-PLIST.gnutls=		no
 .endif

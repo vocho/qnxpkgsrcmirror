@@ -1,10 +1,9 @@
-# $NetBSD: Makefile,v 1.58 2008/11/24 09:27:29 jnemeth Exp $
+# $NetBSD: Makefile,v 1.61 2009/01/26 13:15:49 jnemeth Exp $
 
-DISTNAME=	asterisk-1.2.30
-PKGREVISION=	1
+DISTNAME=	asterisk-1.2.31
 CATEGORIES=	comms net audio
-MASTER_SITES=	http://ftp.digium.com/pub/asterisk/ \
-		http://ftp.digium.com/pub/asterisk/old-releases/
+MASTER_SITES=	http://downloads.digium.com/pub/asterisk/releases/ \
+		http://downloads.digium.com/pub/asterisk/old-releases/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.asterisk.org/
@@ -43,7 +42,7 @@ ASTCONFPATH?=		${ASTETCDIR}/asterisk.conf
 ASTBINDIR?=		${PREFIX}/bin
 ASTSBINDIR?=		${PREFIX}/sbin
 ASTVARRUNDIR?=		${VARBASE}/run
-ASTMANDIR?=		${PREFIX}/man
+ASTMANDIR?=		${PREFIX}/${PKGMANDIR}
 ASTEXAMPLEDIR?=		${PREFIX}/share/examples/asterisk
 
 # Override default paths in Makefile
@@ -69,6 +68,8 @@ SUBST_SED.asterisk+=	-e 's|^ *\(ASTEXAMPLEDIR\)=.*|\1 = ${ASTEXAMPLEDIR}|'
 RCD_SCRIPTS=		asterisk
 OWN_DIRS+=		${ASTSPOOLDIR} ${ASTLOGDIR} ${ASTVARRUNDIR}
 OWN_DIRS+=		${ASTLOGDIR}/cdr-csv
+# XXX: should be in ${VARBASE}
+OWN_DIRS+=		${ASTVARLIBDIR}/sounds/priv-callerintros
 
 CONF_FILES=		# empty
 .for f in asterisk.conf extensions.conf
@@ -102,5 +103,6 @@ post-patch:
 .include "../../devel/ncurses/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"
 .include "../../security/openssl/buildlink3.mk"
+.include "../../www/curl/buildlink3.mk"
 .include "../../mk/pthread.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

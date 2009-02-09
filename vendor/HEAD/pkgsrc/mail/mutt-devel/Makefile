@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.70 2008/11/29 21:31:58 joerg Exp $
+# $NetBSD: Makefile,v 1.73 2009/02/05 13:45:28 tonio Exp $
 
-DISTNAME=		mutt-1.5.18
+DISTNAME=		mutt-1.5.19
 PKGREVISION=		2
 CATEGORIES=		mail
 MUTT_SITES=		ftp://ftp.mutt.org/mutt/ \
@@ -25,9 +25,9 @@ GNU_CONFIGURE=		yes
 CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR:Q}		\
 			--with-docdir=${PREFIX}/share/doc/mutt		\
 			--without-included-gettext			\
+			--enable-external-dotlock			\
 			--enable-pop					\
 			--enable-imap
-MAKE_ENV+=		CHGRP=${CHGRP:Q} CHMOD=${CHMOD:Q}
 
 .if ${OPSYS} == "NetBSD" || ${OPSYS} == "DragonFly" || ${OPSYS} == "FreeBSD" || ${OPSYS} == "OpenBSD"
 # Force sendmail to /usr/sbin to avoid postfix's
@@ -63,12 +63,7 @@ SUBST_FILES.paths=	doc/Muttrc
 SUBST_VARS.paths+=	DOCDIR PREFIX
 SUBST_STAGE.paths+=	pre-configure
 
-# Define WRKSRC explicitly so we can use its value below.
-WRKSRC=			${WRKDIR}/${DISTNAME}
-PLIST_VARS+=		dotlock
-.if exists(${WRKSRC}/mutt_dotlock)
-PLIST.dotlock=		yes
-.endif
+SPECIAL_PERMS+=	bin/mutt_dotlock ${REAL_ROOT_USER} mail 2551
 INSTALL_MAKE_FLAGS=	${MAKE_FLAGS} sysconfdir=${EGDIR}
 
 .include "../../converters/libiconv/buildlink3.mk"

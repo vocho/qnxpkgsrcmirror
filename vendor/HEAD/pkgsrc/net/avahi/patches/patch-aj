@@ -1,0 +1,22 @@
+$NetBSD: patch-aj,v 1.2 2009/02/04 07:07:18 dbj Exp $
+
+--- configure.ac.orig	2008-06-23 16:17:27.000000000 -0700
++++ configure.ac	2009-02-03 22:23:51.000000000 -0800
+@@ -266,7 +266,7 @@ with_distro=`echo ${with_distro} | tr '[
+ case $with_distro in
+     debian|gentoo|archlinux|suse|fedora|mandriva|darwin|freebsd|slackware|none)
+      ;;
+-    netbsd)
++    netbsd|dragonfly)
+      AC_MSG_WARN([Your distribution (${with_distro}) is supported but no init script exist yet! (patches welcome)])
+      ;;
+     linux)
+@@ -348,7 +348,7 @@ AC_HEADER_SYS_WAIT
+  # Solaris stuff
+  AC_SEARCH_LIBS([inet_ntop],[nsl])
+  AC_SEARCH_LIBS([recv],[socket])
+- AC_CHECK_DECL([CMSG_SPACE],,CFLAGS="$CFLAGS -D_XOPEN_SOURCE=500 -D__EXTENSIONS__")
++ AC_CHECK_DECL([CMSG_SPACE],,CFLAGS="$CFLAGS -D_XOPEN_SOURCE=500 -D__EXTENSIONS__",[#include<sys/socket.h>])
+ 
+ # Checks for library functions.
+ AC_FUNC_MEMCMP

@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.67 2008/08/15 12:52:57 wiz Exp $
+# $NetBSD: Makefile,v 1.69 2009/01/12 12:33:39 wiz Exp $
 
 DISTNAME=		amarok-${VERSION}
 VERSION=		1.4.10
+PKGREVISION=		1
 CATEGORIES=		audio kde
 MASTER_SITES=		${MASTER_SITE_KDE:=amarok/${VERSION}/src/}
 EXTRACT_SUFX=		.tar.bz2
@@ -24,7 +25,7 @@ CONFIGURE_ARGS+=	--without-nmm
 CONFIGURE_ARGS+=	--without-mas
 CONFIGURE_ARGS+=	--without-helix
 CONFIGURE_ARGS+=	--with-mp4v2
-CONFIGURE_ARGS+=	--with-mp4v2-dir=${LOCALBASE}
+CONFIGURE_ARGS+=	--with-mp4v2-dir=${BUILDLINK_PREFIX.libmp4v2}
 
 LIBS+=			${LIBOSSAUDIO}
 

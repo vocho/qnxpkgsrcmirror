@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.143 2008/11/14 18:27:00 joerg Exp $
+# $NetBSD: Makefile,v 1.148 2009/01/18 11:10:50 tnn Exp $
 
 DISTNAME=	perl-5.10.0
 CATEGORIES=	lang devel perl5
-PKGREVISION=	2
+PKGREVISION=	5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:S,/modules/by-module/$,/src/,}
 DISTFILES+=	${DISTNAME}${EXTRACT_SUFX}
 
@@ -170,6 +170,7 @@ LIBSWANTED.Linux=	m crypt dl nsl
 LIBSWANTED.NetBSD=	m crypt
 LIBSWANTED.OpenBSD=	m crypt
 LIBSWANTED.SunOS=	m crypt dl socket nsl
+LIBSWANTED.AIX=		m crypt dl socket nsl bind c
 LIBSWANTED=		${LIBSWANTED.${OPSYS}}
 
 # Nail down the directories in which the system libraries may be found.
@@ -183,6 +184,7 @@ SYSLIBPATH.Interix=	/usr/lib
 SYSLIBPATH.NetBSD=	/usr/lib
 SYSLIBPATH.OpenBSD=	/usr/lib
 SYSLIBPATH.SunOS=	/usr/lib
+SYSLIBPATH.AIX=		/usr/lib
 SYSLIBPATH=		${SYSLIBPATH.${OPSYS}}
 
 # Nail down the directories in which headers and libraries of
@@ -197,8 +199,19 @@ LOCINCPATH=		${LOCALBASE}/include
 #
 .if ${OBJECT_FMT} == "a.out"
 LOCLIBRPATHFLAGS=	${LOCLIBPATH:S/^/${LINKER_RPATH_FLAG} /g}
-.elif ${OBJECT_FMT} == "ELF" || ${OBJECT_FMT} == "XCOFF"
+.elif ${OBJECT_FMT} == "ELF"
 LOCLIBRPATHFLAGS=	${LOCLIBPATH:S/^/${COMPILER_RPATH_FLAG}/g}
+.elif ${OBJECT_FMT} == "XCOFF"
+LOCLIBRPATHFLAGS=	${LOCLIBPATH:S/^/${COMPILER_RPATH_FLAG}/g}
+.  if !empty(PKG_OPTIONS:Mthreads)
+LOCLIBRPATHFLAGS+=
+	${COMPILER_RPATH_FLAG}${PERL5_PRIVLIB}/${MACHINE_ARCH}-${LOWER_OPSYS}-thread-multi-64all/CORE \
+	${COMPILER_RPATH_FLAG}${PERL5_PRIVLIB}/${MACHINE_ARCH}-${LOWER_OPSYS}-thread-multi/CORE
+.  else
+LOCLIBRPATHFLAGS+=
+	${COMPILER_RPATH_FLAG}${PERL5_PRIVLIB}/${MACHINE_ARCH}-${LOWER_OPSYS}-multi-64all/CORE \
+	${COMPILER_RPATH_FLAG}${PERL5_PRIVLIB}/${MACHINE_ARCH}-${LOWER_OPSYS}-multi/CORE
+.  endif
 .else
 LOCLIBRPATHFLAGS=	# empty
 .endif
@@ -270,6 +283,8 @@ SUBST_SED.rm=	-e "s!^rm_try='/.*/\.tools/bin/rm -f!rm_try='/bin/rm -f!"
 REPLACE_PERL+=		lib/Class/ISA.pm
 REPLACE_PERL+=		lib/File/DosGlob.pm
 REPLACE_PERL+=		lib/version.pm
+REPLACE_PERL+=		lib/Math/BigFloat/Trace.pm
+REPLACE_PERL+=		lib/Math/BigInt/Trace.pm
 
 # And replace a perl interpreter during the pre-install stage
 # I think this may be a bootstrap script, so can't use REPLACE_PERL
@@ -278,6 +293,17 @@ SUBST_CLASSES+=		miniperl
 SUBST_STAGE.miniperl=	pre-install
 SUBST_FILES.miniperl=	lib/ExtUtils/xsubpp
 SUBST_SED.miniperl=	-e "1s:\#!./miniperl:\#!${PERL5}:"
+
+.if ${PKGSRC_COMPILER} == "xlc"
+SUBST_CLASSES+=		cpprun
+SUBST_STAGE.cpprun=	pre-install
+SUBST_FILES.cpprun=	lib/Config_heavy.pl
+.if !empty(PKG_OPTIONS:Mthreads)
+SUBST_SED.cpprun=	-e "s/cpprun=''/cpprun='cc_r -E'/"
+.else
+SUBST_SED.cpprun=	-e "s/cpprun=''/cpprun='cc -E'/"
+.endif
+.endif
 
 # Some platforms may want the directory mode not to be 0755.  This
 # is, unfortunately, hardcoded in quite a few places in Perl, so

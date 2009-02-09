@@ -1,4 +1,4 @@
-# $NetBSD: Makefile.common,v 1.48 2008/07/25 09:14:48 ghen Exp $
+# $NetBSD: Makefile.common,v 1.54 2008/12/30 01:55:22 uebayasi Exp $
 
 DISTNAME=	zsh-${ZSH_VERSION}
 CATEGORIES=	shells
@@ -32,61 +32,76 @@ PKG_INSTALLATION_TYPES=	overwrite pkgviews
 
 BUILD_DEFS+=	ZSH_STATIC
 MAKE_JOBS_SAFE=	no
+INSTALL_TARGET=	install install.info
+PKG_SHELL=	bin/zsh
+PLIST_VARS=	dynamic terminfo
 
-.if defined(ZSH_STATIC) && !empty(ZSH_STATIC:M[Yy][Ee][Ss])
-CONFIGURE_ARGS+=	--disable-dynamic
+################################################################################
 
-NETBSD_SHLINKER=	/libexec/ld.elf_so
-NETBSD_SHLIBDIR=	/lib
+_ZSH_OPSYS.OpenBSD=		ldflags tcsetpgrp   -
+_ZSH_OPSYS.Linux=		ldflags tcsetpgrp   terminfo
+_ZSH_OPSYS.IRIX=		ldflags tcsetpgrp   -
+_ZSH_OPSYS.Interix=		ldflags notcsetpgrp -
+_ZSH_OPSYS.DragonFly=		ldflags tcsetpgrp   terminfo
+_ZSH_OPSYS.FreeBSD=		ldflags tcsetpgrp   terminfo
+_ZSH_OPSYS.SunOS=		-       tcsetpgrp   -
 
-.  if ${OPSYS} == "NetBSD" && \
-      defined(OBJECT_FMT) && ${OBJECT_FMT} == "ELF" && \
-      defined(MKDYNAMICROOT) && ${MKDYNAMICROOT} != "no" && \
-      defined(NETBSD_SHLINKER) && exists(${NETBSD_SHLINKER}) && \
-      defined(NETBSD_SHLIBDIR) && exists(${NETBSD_SHLIBDIR})
-#
-# Built a dynamically linked "zsh" binary on NetBSD systems which use
-# dynamically linked binaries on the root filesystem. The binary will
-# only depend on the run-time link-editor and shared libraries on the
-# root filesystem. We use "-rpath" below by purpose because the
-# buildlink 3 framework won't filter it out.
-#
-BUILDLINK_PASSTHRU_RPATHDIRS+=	${NETBSD_SHLIBDIR}
+_ZSH_OPSYS.${OPSYS}?=		ldflags tcsetpgrp   -
 
-LDFLAGS+=	-Wl,-dynamic-linker=${NETBSD_SHLINKER} -Wl,-R${NETBSD_SHLIBDIR}
-.  else
-LDFLAGS+=	-static
-.  endif
-.else
-.  if ${OPSYS} == "SunOS"
-PLIST_SRC=	${PKGDIR}/PLIST.dynamic ${PKGDIR}/PLIST
-.  else
-LDFLAGS+=	${COMPILER_RPATH_FLAG}${PREFIX}/lib/zsh
+################################################################################
 
-.    if ${OPSYS} == "Linux" || ${OPSYS} == "IRIX" || ${OPSYS} == "OpenBSD"
-PLIST_SRC+=	${PKGDIR}/PLIST.terminfo
-.    elif ${OPSYS} == "Interix" || ${OPSYS} == "DragonFly" || \
-	${OPSYS} == "FreeBSD"
-PLIST_SRC+=	${PKGDIR}/PLIST.terminfo ${PKGDIR}/PLIST.shlibs
-.    else
-PLIST_SRC+=	${PKGDIR}/PLIST.shlibs
-.    endif
+### static
 
-PLIST_SRC+=	${PKGDIR}/PLIST.dynamic ${PKGDIR}/PLIST
-.  endif
+_ZSH_LINKAGE.static.CONFIGURE_ARGS=	--disable-dynamic
+_ZSH_LINKAGE.static.BUILDLINK_PASSTHRU_RPATHDIRS?=
+_ZSH_LINKAGE.static.LDFLAGS?=		-static
+
+### dynamic
+
+_ZSH_DYNAMIC_VARS.ldflags=	${COMPILER_RPATH_FLAG}${PREFIX}/lib/zsh
+
+_ZSH_LINKAGE.dynamic.CONFIGURE_ARGS=
+_ZSH_LINKAGE.dynamic.BUILDLINK_PASSTHRU_RPATHDIRS=
+# XXXUEBAYASI old make(1) has problems to handle :?true_str:false_str
+#_ZSH_LINKAGE.dynamic.LDFLAGS= \
+#	${_ZSH_OPSYS.${OPSYS}:Mldflags:?${_ZSH_DYNAMIC_VARS.ldflags}:}
+.if !empty(_ZSH_OPSYS.${OPSYS}:Mldflags)
+_ZSH_LINKAGE.dynamic.LDFLAGS=	${_ZSH_DYNAMIC_VARS.ldflags}
 .endif
 
-.if ${OPSYS} == "Interix"
-CONFIGURE_ARGS+=--without-tcsetpgrp
-.else
-CONFIGURE_ARGS+=--with-tcsetpgrp
+### tcsetpgrp
+
+_ZSH_OPSYS_VARS.tcsetpgrp=	--with-tcsetpgrp
+_ZSH_OPSYS_VARS.notcsetpgrp=	--without-tcsetpgrp
+
+### terminfo (ncurses)
+.if !empty(_ZSH_OPSYS.${OPSYS}:Mterminfo)
+PLIST.terminfo=	yes
 .endif
+
+################################################################################
+
+# XXXUEBAYASI old make(1) has problems to handle :?true_str:false_str
+#_ZSH_LINKAGE=	${ZSH_STATIC:M[Yy][Ee][Ss]:?static:dynamic}	# static / dynamic
+ZSH_STATIC?=	no
+.if !empty(ZSH_STATIC:M[Yy][Ee][Ss])
+_ZSH_LINKAGE=	static
+.else
+_ZSH_LINKAGE=	dynamic
+.endif
+
+CONFIGURE_ARGS+=		${_ZSH_LINKAGE.${_ZSH_LINKAGE}.CONFIGURE_ARGS} \
+				${_ZSH_OPSYS_VARS.${_ZSH_OPSYS.${OPSYS}:Mtcsetpgrp}} \
+				${_ZSH_OPSYS_VARS.${_ZSH_OPSYS.${OPSYS}:Mnotcsetpgrp}}
+BUILDLINK_PASSTHRU_RPATHDIRS+=	${_ZSH_LINKAGE.${_ZSH_LINKAGE}.BUILDLINK_PASSTHRU_RPATHDIRS}
+LDFLAGS+=			${_ZSH_LINKAGE.${_ZSH_LINKAGE}.LDFLAGS}
+.if ${_ZSH_LINKAGE} == dynamic
+PLIST.dynamic=	yes
+.endif
+
+################################################################################
 
 .undef MANZ
-
-PKG_SHELL=	bin/zsh
-
-INSTALL_TARGET=	install install.info
 
 pre-install:
 	@cd ${WRKSRC}/Completion; ${FIND} . -name \*.orig -exec ${RM} \{\} \;

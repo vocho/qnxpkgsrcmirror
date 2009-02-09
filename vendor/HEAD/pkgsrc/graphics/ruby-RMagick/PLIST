@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.15 2008/09/29 14:28:45 taca Exp $
+@comment $NetBSD: PLIST,v 1.17 2009/01/17 01:49:06 obache Exp $
 ${GEM_HOME}/cache/rmagick-${PKGVERSION}.gem
 ${GEM_LIBDIR}/.require_paths
 ${GEM_LIBDIR}/ChangeLog
@@ -239,6 +239,7 @@ ${GEM_LIBDIR}/doc/ex/skewx.rb
 ${GEM_LIBDIR}/doc/ex/skewy.rb
 ${GEM_LIBDIR}/doc/ex/smile.rb
 ${GEM_LIBDIR}/doc/ex/solarize.rb
+${GEM_LIBDIR}/doc/ex/sparse_color.rb
 ${GEM_LIBDIR}/doc/ex/splice.rb
 ${GEM_LIBDIR}/doc/ex/spread.rb
 ${GEM_LIBDIR}/doc/ex/stegano.rb
@@ -319,13 +320,18 @@ ${GEM_LIBDIR}/examples/thumbnail.rb
 ${GEM_LIBDIR}/examples/vignette.rb
 ${GEM_LIBDIR}/ext/RMagick/MANIFEST
 ${GEM_LIBDIR}/ext/RMagick/extconf.rb
+${GEM_LIBDIR}/ext/RMagick/rmagick.c
 ${GEM_LIBDIR}/ext/RMagick/rmagick.h
 ${GEM_LIBDIR}/ext/RMagick/rmdraw.c
+${GEM_LIBDIR}/ext/RMagick/rmenum.c
 ${GEM_LIBDIR}/ext/RMagick/rmfill.c
 ${GEM_LIBDIR}/ext/RMagick/rmilist.c
 ${GEM_LIBDIR}/ext/RMagick/rmimage.c
 ${GEM_LIBDIR}/ext/RMagick/rminfo.c
 ${GEM_LIBDIR}/ext/RMagick/rmmain.c
+${GEM_LIBDIR}/ext/RMagick/rmmontage.c
+${GEM_LIBDIR}/ext/RMagick/rmpixel.c
+${GEM_LIBDIR}/ext/RMagick/rmstruct.c
 ${GEM_LIBDIR}/ext/RMagick/rmutil.c
 ${GEM_LIBDIR}/lib/RMagick.rb
 ${GEM_LIBDIR}/lib/RMagick2.${RUBY_DLEXT}
