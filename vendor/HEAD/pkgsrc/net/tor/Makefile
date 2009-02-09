@@ -1,14 +1,15 @@
-# $NetBSD: Makefile,v 1.57 2008/10/16 21:52:16 wiz Exp $
+# $NetBSD: Makefile,v 1.61 2009/01/22 12:50:57 drochner Exp $
 #
 
-DISTNAME=		tor-0.2.0.31
-PKGREVISION=		1
+DISTNAME=		tor-0.2.0.33
 CATEGORIES=		net security
 MASTER_SITES=		http://www.torproject.org/dist/
 
-MAINTAINER=		athaba@inode.at
+MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://www.torproject.org/
 COMMENT=		Anonymizing overlay network for TCP
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 .include "../../mk/bsd.prefs.mk"
 
@@ -55,12 +56,11 @@ CFLAGS+=		-c99
 .endif
 
 post-install:
-	${INSTALL_DATA_DIR} ${PREFIX}/share/examples/tor
+	${INSTALL_DATA_DIR} ${DESTDIR}${PREFIX}/share/examples/tor
 	${INSTALL_DATA} ${WRKSRC}/src/config/torrc.sample		\
-		${PREFIX}/share/examples/tor/torrc.sample
+		${DESTDIR}${PREFIX}/share/examples/tor/torrc.sample
 	${INSTALL_DATA} ${WRKSRC}/contrib/tor-tsocks.conf		\
-		${PREFIX}/share/examples/tor/tor-tsocks.conf
-	-${RMDIR} ${PREFIX}/etc/tor/tor
+		${DESTDIR}${PREFIX}/share/examples/tor/tor-tsocks.conf
 
 BUILDLINK_API_DEPENDS.libevent+= libevent>=1.2
 .include "../../devel/libevent/buildlink3.mk"

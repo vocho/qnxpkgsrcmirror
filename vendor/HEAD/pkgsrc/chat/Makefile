@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.142 2008/11/18 18:03:09 joerg Exp $
+# $NetBSD: Makefile,v 1.147 2009/01/16 14:29:06 jmcneill Exp $
 #
 
 COMMENT=	Communication programs
@@ -17,6 +17,7 @@ SUBDIR+=	centericq
 SUBDIR+=	centerim
 SUBDIR+=	cgiirc
 SUBDIR+=	climm
+SUBDIR+=	ctrlproxy
 SUBDIR+=	dccserver
 SUBDIR+=	dircproxy
 SUBDIR+=	eggdrop
@@ -42,6 +43,7 @@ SUBDIR+=	icbirc
 SUBDIR+=	icqlib
 SUBDIR+=	iip
 SUBDIR+=	inspircd
+SUBDIR+=	inspircd12
 SUBDIR+=	ircII
 SUBDIR+=	ircd-hybrid
 SUBDIR+=	irchat-pj
@@ -56,6 +58,7 @@ SUBDIR+=	kadu
 SUBDIR+=	kmess
 SUBDIR+=	konversation
 SUBDIR+=	libirc
+SUBDIR+=	libmsn
 SUBDIR+=	libotr
 SUBDIR+=	libpurple
 SUBDIR+=	libtelepathy
@@ -65,6 +68,7 @@ SUBDIR+=	licq-gui-console
 SUBDIR+=	licq-gui-qt
 SUBDIR+=	loudmouth
 SUBDIR+=	meanwhile
+SUBDIR+=	msn-pecan
 SUBDIR+=	msnre
 SUBDIR+=	mu-conference
 SUBDIR+=	naim
@@ -81,6 +85,7 @@ SUBDIR+=	pidgin
 SUBDIR+=	pidgin-facebookchat
 SUBDIR+=	pidgin-icb
 SUBDIR+=	pidgin-latex
+SUBDIR+=	pidgin-libnotify
 SUBDIR+=	pidgin-otr
 SUBDIR+=	pidgin-sametime
 SUBDIR+=	pidgin-silc

@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.14 2008/09/16 19:54:21 abs Exp $
+@comment $NetBSD: PLIST,v 1.16 2008/12/22 18:47:44 jmcneill Exp $
 include/libpurple/account.h
 include/libpurple/accountopt.h
 include/libpurple/blist.h
@@ -58,6 +58,7 @@ lib/purple-2/buddynote.la
 lib/purple-2/idle.la
 lib/purple-2/joinpart.la
 lib/purple-2/libaim.la
+${PLIST.avahi}lib/purple-2/libbonjour.la
 lib/purple-2/libgg.la
 lib/purple-2/libicq.la
 lib/purple-2/libirc.la
@@ -76,7 +77,6 @@ lib/purple-2/newline.la
 lib/purple-2/offlinemsg.la
 lib/purple-2/psychic.la
 lib/purple-2/ssl-gnutls.la
-lib/purple-2/ssl-nss.la
 lib/purple-2/ssl.la
 lib/purple-2/statenotify.la
 share/aclocal/purple.m4
@@ -122,6 +122,7 @@ share/locale/ku/LC_MESSAGES/pidgin.mo
 share/locale/lo/LC_MESSAGES/pidgin.mo
 share/locale/lt/LC_MESSAGES/pidgin.mo
 share/locale/mk/LC_MESSAGES/pidgin.mo
+share/locale/mn/LC_MESSAGES/pidgin.mo
 share/locale/my_MM/LC_MESSAGES/pidgin.mo
 share/locale/nb/LC_MESSAGES/pidgin.mo
 share/locale/ne/LC_MESSAGES/pidgin.mo
@@ -157,6 +158,7 @@ share/purple/ca-certs/CAcert_Class3.pem
 share/purple/ca-certs/CAcert_Root.pem
 share/purple/ca-certs/Equifax_Secure_CA.pem
 share/purple/ca-certs/GTE_CyberTrust_Global_Root.pem
+share/purple/ca-certs/Microsoft_Internet_Authority.pem
 share/purple/ca-certs/Microsoft_Secure_Server_Authority.pem
 share/purple/ca-certs/StartCom_Free_SSL_CA.pem
 share/purple/ca-certs/VeriSign_Class_3_Public_Primary_Certification_Authority_-_G5.pem

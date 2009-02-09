@@ -1,4 +1,4 @@
-# $NetBSD: cmd-sink-aix-xlc,v 1.6 2008/11/27 18:01:17 joerg Exp $
+# $NetBSD: cmd-sink-aix-xlc,v 1.10 2009/01/15 16:55:33 joerg Exp $
 #
 # Copyright (c) 2004 The NetBSD Foundation, Inc.
 # All rights reserved.
@@ -43,11 +43,11 @@ while ! queue_is_empty cmdbuf; do
 	case $arg in
 	-blibpath:*)
 		orig_blibpath=${arg#-blibpath:}
-		$debug_log $wrapperlog "    (cmd-sink-aix-ld) drop: $dir [setting orig_blibpath]"
+		$debug_log $wrapperlog "    (cmd-sink-aix-xlc) drop: $dir [setting orig_blibpath]"
 		;;
 	-Wl,-blibpath:*)
 		orig_blibpath=${arg#-Wl,-blibpath:}
-		$debug_log $wrapperlog "    (cmd-sink-aix-ld) drop: $dir [setting orig_blibpath]"
+		$debug_log $wrapperlog "    (cmd-sink-aix-xlc) drop: $dir [setting orig_blibpath]"
 		;;
 	##############################################################
 	# AIX xlC doesn't support -Wl,-rpath,* but accumulate them
@@ -69,6 +69,27 @@ while ! queue_is_empty cmdbuf; do
 		esac
 		$debug_log $wrapperlog "    (cmd-sink-aix-xlc) drop: $dir [adding to blibpath]"
 		;;
+	# GCC and xlC allow -rpath directly, so keep this behavior.
+	-rpath)
+		pop_queue cmdbuf dir
+		case $blibpath in
+		"")	blibpath="$dir" ;;
+		*)	blibpath="$blibpath:$dir" ;;
+		esac
+		$debug_log $wrapperlog "    (cmd-sink-aix-xlc) drop: $dir [adding to blibpath]"
+		;;
+	-shared)
+		arg="-bshared"
+		. $buildcmd
+		;;
+	-Wl,-soname*)
+		arg=-brtl
+		. $buildcmd
+		arg=-Wl,-G
+		. $buildcmd
+		arg=-Wl,-bexpall
+		. $buildcmd
+		;;
 	*)
 		. $buildcmd
 		;;
@@ -76,7 +97,7 @@ while ! queue_is_empty cmdbuf; do
 done
 
 # AIX xlc uses -blibpath to set the runtime library search path.
-arg="-Wl,-blibpath:/usr/usr/lib:/lib"
+arg="-Wl,-blibpath:/usr/lib:/lib"
 if $test -n "$orig_blibpath"; then
 	arg="$arg:$orig_blibpath"
 fi

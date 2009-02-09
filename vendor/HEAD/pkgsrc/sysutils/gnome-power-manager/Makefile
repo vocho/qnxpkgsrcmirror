@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.2 2008/12/01 14:22:36 wiz Exp $
+# $NetBSD: Makefile,v 1.4 2009/01/17 12:53:26 wiz Exp $
 #
 
-DISTNAME=	gnome-power-manager-2.24.2
+DISTNAME=	gnome-power-manager-2.24.3
 CATEGORIES=	sysutils gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gnome-power-manager/2.24/}
 EXTRACT_SUFX=	.tar.bz2
@@ -20,6 +20,7 @@ USE_LIBTOOL=		YES
 
 CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR:Q}
 CONFIGURE_ARGS+=	--enable-policykit
+CONFIGURE_ENV+=		ac_cv_path_DOCBOOK2MAN=no
 
 GCONF_SCHEMAS+=		gnome-power-manager.schemas
 

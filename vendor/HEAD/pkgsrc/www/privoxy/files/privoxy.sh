@@ -1,6 +1,6 @@
 #!@RCD_SCRIPTS_SHELL@
 #
-# $NetBSD: privoxy.sh,v 1.3 2003/07/12 15:11:39 salo Exp $
+# $NetBSD: privoxy.sh,v 1.5 2009/02/04 21:20:39 drochner Exp $
 #
 
 # PROVIDE: privoxy

@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.12 2008/11/17 21:49:49 darcy Exp $
+# $NetBSD: Makefile,v 1.14 2008/12/19 12:12:53 darcy Exp $
 #
 
 DISTNAME=	generate-2.6
+PKGREVISION=	1
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
 CATEGORIES=	devel python
 MASTER_SITES=	ftp://ftp.druid.net/pub/distrib/
@@ -18,6 +19,7 @@ MAKE_ENV+=		BINDIR=${DESTDIR}${PREFIX}/bin
 USE_TOOLS+=		gmake
 
 LIBS.SunOS+=	-lnsl -lsocket
+LIBS.QNX=		-lsocket
 
 PYDISTUTILSPKG=	yes
 PYBINMODULE=	yes

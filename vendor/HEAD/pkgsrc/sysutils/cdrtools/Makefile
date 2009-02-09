@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.48 2008/12/02 13:03:22 obache Exp $
+# $NetBSD: Makefile,v 1.50 2009/01/07 23:23:13 wiz Exp $
 
-DISTNAME=	cdrtools-2.01.01a53
+DISTNAME=	cdrtools-2.01.01a55
 PKGNAME=	${DISTNAME:S/a/./}
 CATEGORIES=	sysutils
 MASTER_SITES=	ftp://ftp.berlios.de/pub/cdrecord/alpha/ \
@@ -9,7 +9,7 @@ EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://cdrecord.berlios.de/old/private/cdrecord.html
-COMMENT=	Software for creating ISO9660 images and writing CDs/CD-RWs
+COMMENT=	Software for creating ISO9660 images and writing CD/DVD/Blu-ray
 
 CONFLICTS=	mkisofs-[0-9]* cdrtools-ossdvd-[0-9]* cdrecord-[0-9]* cdrkit-[0-9]*
 
@@ -53,10 +53,13 @@ MESSAGE_SUBST+=	PKGNAME_NOREV=${PKGNAME_NOREV:Q}
 MESSAGE_SUBST+=	CDRECORD_CONF=${CDRECORD_CONF:Q}
 .endif
 
+CONF_FILES+=		share/examples/cdrtools/cdrecord ${CDRECORD_CONF}
+
 INSTALLATION_DIRS=	bin lib/siconv ${PKGMANDIR}/man1 ${PKGMANDIR}/man8 \
 			share/doc/cdrtools/cdda2wav \
 			share/doc/cdrtools/cdrecord \
-			share/doc/cdrtools/mkisofs
+			share/doc/cdrtools/mkisofs \
+			share/examples/cdrtools
 
 SUBST_CLASSES+=		fix
 SUBST_STAGE.fix=	post-patch
@@ -121,6 +124,8 @@ do-install:
 		${DESTDIR}${PREFIX}/share/doc/cdrtools/cdrecord
 	${INSTALL_DATA} ${WRKSRC}/mkisofs/README* \
 		${DESTDIR}${PREFIX}/share/doc/cdrtools/mkisofs
+	${INSTALL_DATA} ${WRKSRC}/cdrecord/cdrecord.dfl \
+		${DESTDIR}${PREFIX}/share/examples/cdrtools/cdrecord
 
 
 CONFIGURE_ENV+= librt=${NETBSDLIB.rt:U:Q}

@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.59 2008/10/12 12:00:52 adrianp Exp $
+# $NetBSD: Makefile,v 1.62 2009/01/30 22:22:26 adrianp Exp $
 
-DISTNAME=	horde-3.3
+DISTNAME=	horde-3.3.3
 CATEGORIES=	www
 MASTER_SITES=	http://ftp.horde.org/pub/horde/ \
 		ftp://ftp.horde.org/pub/horde/
@@ -29,6 +29,7 @@ DEPENDS+=	${PHP_PKG_PREFIX}-dom-[0-9]*:../../textproc/php5-dom
 DEPENDS+=	${PHP_PKG_PREFIX}-zlib>=4.3.3:../../archivers/php-zlib
 DEPENDS+=	${PHP_PKG_PREFIX}-pear-Console_Table-[0-9]*:../../textproc/pear-Console_Table
 DEPENDS+=	${PHP_PKG_PREFIX}-pear-File_Find-[0-9]*:../../textproc/pear-File_Find
+DEPENDS+=	${PHP_PKG_PREFIX}-pear-HTTP_Request-[0-9]*:../../www/pear-HTTP_Request
 
 USE_TOOLS+=	pax
 
@@ -54,7 +55,9 @@ REPLACE_FILES.php=	po/translation.php \
 			scripts/alarms.php \
 			scripts/import_squirrelmail_prefs.php \
 			scripts/upgrades/convert_datatree_groups_to_sql.php \
-			scripts/upgrades/convert_datatree_perms_to_sql.php
+			scripts/upgrades/convert_datatree_perms_to_sql.php \
+			scripts/import_squirrelmail_file_prefs.php \
+			scripts/import_squirrelmail_sql_prefs.php
 
 CONF_FILES+=		${EGDIR}/horde.conf ${PKG_SYSCONFDIR}/horde.conf
 CONF_FILES_PERMS+=	${HORDEDIR}/config/conf.php.dist \

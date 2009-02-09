@@ -1,9 +1,8 @@
-# $NetBSD: Makefile,v 1.19 2008/11/24 11:53:12 hira Exp $
+# $NetBSD: Makefile,v 1.23 2009/01/31 22:10:37 bad Exp $
 #
 
-OO_VER=			3.0.0
-PKGREVISION=		7
-OO_TAG=			OOO300_m9
+OO_VER=			3.0.1
+OO_TAG=			OOO300_m15
 DISTNAME=		openoffice-${OO_VER}
 PKGNAME=		openoffice3-${OO_VER}
 CATEGORIES=		misc
@@ -43,6 +42,7 @@ CONFLICTS+=		openoffice-[0-9]*
 CONFLICTS+=		openoffice2-[0-9]*
 CONFLICTS+=		openoffice-bin-[0-9]*
 CONFLICTS+=		openoffice2-bin-[0-9]*
+CONFLICTS+=		openoffice3-bin-[0-9]*
 CONFLICTS+=		openoffice-linux-[0-9]*
 
 USE_DIRS+=		xdg-1.1
@@ -140,7 +140,9 @@ PLIST_SUBST+=		OO_UNXNAME=${OO_UNXNAME}
 PLIST_SUBST+=		OO_ICON_PREFIX=openofficeorg3
 MESSAGE_SUBST+=		OO_PREFIX=${OO_PREFIX}
 INSTALLATION_DIRS=	bin lib/${OO_RELEASE} share/applications	\
-			lib/${OO_RELEASE}/extensions
+			lib/${OO_RELEASE}/extensions			\
+			share/application-registry share/mime-info	\
+			share/mime/packages
 
 OO_UNXNAME=	openoffice.org3
 OO_PKGPATH=	${WRKSRC}/instsetoo_native/${OPENOFFICE_OUTPATH}.pro/OpenOffice/portable/install
@@ -169,7 +171,7 @@ do-install:
 		done;						\
 	done
 	cd ${DESTDIR}${OO_PREFIX}/${OO_UNXNAME}/basis-link/program &&	\
-	chmod ${SHAREMODE} hid.lst testtoolrc
+	chmod ${SHAREMODE} gengalrc hid.lst testtoolrc
 	for f in ${OO_PROGRAMS}; do					\
 		ln -sf ${DESTDIR}${OO_PREFIX}/${OO_UNXNAME}/program/$$f	\
 			${DESTDIR}${PREFIX}/bin/$$f;			\

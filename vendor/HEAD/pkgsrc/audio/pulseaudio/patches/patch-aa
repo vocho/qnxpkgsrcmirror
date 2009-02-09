@@ -1,0 +1,179 @@
+$NetBSD: patch-aa,v 1.5 2009/01/19 14:19:00 jmcneill Exp $
+
+--- src/utils/padsp.c.orig	2009-01-12 18:10:34.000000000 -0500
++++ src/utils/padsp.c	2009-01-19 08:09:05.000000000 -0500
+@@ -59,6 +59,10 @@
+ # define SIOCINQ FIONREAD
+ #endif
+ 
++#if !defined(SNDCTL_DSP_GETODELAY)
++# define SNDCTL_DSP_GETODELAY _IOR ('P', 23, int)
++#endif
++
+ /* make sure gcc doesn't redefine open and friends as macros */
+ #undef open
+ #undef open64
+@@ -114,7 +118,11 @@ static pthread_mutex_t func_mutex = PTHR
+ 
+ static PA_LLIST_HEAD(fd_info, fd_infos) = NULL;
+ 
++#ifdef __NetBSD__
++static int (*_ioctl)(int, u_long, void *) = NULL;
++#else
+ static int (*_ioctl)(int, int, void*) = NULL;
++#endif
+ static int (*_close)(int) = NULL;
+ static int (*_open)(const char *, int, mode_t) = NULL;
+ static FILE* (*_fopen)(const char *path, const char *mode) = NULL;
+@@ -140,6 +148,15 @@ static inline fnptr dlsym_fn(void *handl
+     return (fnptr) (long) dlsym(handle, symbol);
+ }
+ 
++#ifdef __NetBSD__
++#define LOAD_IOCTL_FUNC() \
++do { \
++    pthread_mutex_lock(&func_mutex); \
++    if (!_ioctl)  \
++        _ioctl = (int (*)(int, u_long, void*)) dlsym_fn(RTLD_NEXT, "ioctl"); \
++    pthread_mutex_unlock(&func_mutex); \
++} while(0)
++#else
+ #define LOAD_IOCTL_FUNC() \
+ do { \
+     pthread_mutex_lock(&func_mutex); \
+@@ -147,6 +164,7 @@ do { \
+         _ioctl = (int (*)(int, int, void*)) dlsym_fn(RTLD_NEXT, "ioctl"); \
+     pthread_mutex_unlock(&func_mutex); \
+ } while(0)
++#endif
+ 
+ #define LOAD_OPEN_FUNC() \
+ do { \
+@@ -180,11 +198,16 @@ do { \
+     pthread_mutex_unlock(&func_mutex); \
+ } while(0)
+ 
++#ifdef __NetBSD__
++#define STAT_FUNC "__stat30"
++#else
++#define STAT_FUNC "stat"
++#endif
+ #define LOAD_STAT_FUNC() \
+ do { \
+     pthread_mutex_lock(&func_mutex); \
+     if (!_stat) \
+-        _stat = (int (*)(const char *, struct stat *)) dlsym_fn(RTLD_NEXT, "stat"); \
++        _stat = (int (*)(const char *, struct stat *)) dlsym_fn(RTLD_NEXT, STAT_FUNC); \
+     pthread_mutex_unlock(&func_mutex); \
+ } while(0)
+ 
+@@ -1452,7 +1475,8 @@ static int real_open(const char *filenam
+         return _open(filename, flags, mode);
+     }
+ 
+-    if (filename && dsp_cloak_enable() && (strcmp(filename, "/dev/dsp") == 0 || strcmp(filename, "/dev/adsp") == 0))
++    if (filename && dsp_cloak_enable() && (strcmp(filename, "/dev/dsp") == 0 || strcmp(filename, "/dev/adsp") == 0 ||
++      strcmp(filename, "/dev/sound") == 0 || strcmp(filename, "/dev/audio") == 0))
+         r = dsp_open(flags, &_errno);
+     else if (filename && mixer_cloak_enable() && strcmp(filename, "/dev/mixer") == 0)
+         r = mixer_open(flags, &_errno);
+@@ -2313,19 +2337,27 @@ fail:
+ 
+ #ifdef sun
+ int ioctl(int fd, int request, ...) {
++#elif defined(__NetBSD__)
++int ioctl(int fd, u_long request, void *_argp) {
+ #else
+ int ioctl(int fd, unsigned long request, ...) {
+ #endif
+     fd_info *i;
++#ifndef __NetBSD__
+     va_list args;
++#endif
+     void *argp;
+     int r, _errno = 0;
+ 
+     debug(DEBUG_LEVEL_VERBOSE, __FILE__": ioctl()\n");
+ 
++#ifdef __NetBSD__
++    argp = _argp;
++#else
+     va_start(args, request);
+     argp = va_arg(args, void *);
+     va_end(args);
++#endif
+ 
+     if (!function_enter()) {
+         LOAD_IOCTL_FUNC();
+@@ -2384,6 +2416,8 @@ int access(const char *pathname, int mod
+     if (!pathname ||
+         (strcmp(pathname, "/dev/dsp") != 0 &&
+          strcmp(pathname, "/dev/adsp") != 0 &&
++	 strcmp(pathname, "/dev/sound") != 0 &&
++	 strcmp(pathname, "/dev/audio") != 0 &&
+          strcmp(pathname, "/dev/sndstat") != 0 &&
+          strcmp(pathname, "/dev/mixer") != 0 )) {
+         LOAD_ACCESS_FUNC();
+@@ -2412,6 +2446,8 @@ int stat(const char *pathname, struct st
+     if (!pathname ||
+         !buf ||
+         ( strcmp(pathname, "/dev/dsp") != 0 &&
++	  strcmp(pathname, "/dev/sound") != 0 &&
++	  strcmp(pathname, "/dev/audio") != 0 &&
+           strcmp(pathname, "/dev/adsp") != 0 &&
+           strcmp(pathname, "/dev/sndstat") != 0 &&
+           strcmp(pathname, "/dev/mixer") != 0 )) {
+@@ -2469,6 +2505,8 @@ int stat64(const char *pathname, struct 
+     if (!pathname ||
+         !buf ||
+         ( strcmp(pathname, "/dev/dsp") != 0 &&
++	  strcmp(pathname, "/dev/sound") != 0 &&
++	  strcmp(pathname, "/dev/audio") != 0 &&
+           strcmp(pathname, "/dev/adsp") != 0 &&
+           strcmp(pathname, "/dev/sndstat") != 0 &&
+           strcmp(pathname, "/dev/mixer") != 0 )) {
+@@ -2514,6 +2552,8 @@ int open64(const char *filename, int fla
+ 
+     if (!filename ||
+         ( strcmp(filename, "/dev/dsp") != 0 &&
++	  strcmp(filename, "/dev/sound") != 0 &&
++	  strcmp(filename, "/dev/audio") != 0 &&
+           strcmp(filename, "/dev/adsp") != 0 &&
+           strcmp(filename, "/dev/sndstat") != 0 &&
+           strcmp(filename, "/dev/mixer") != 0 )) {
+@@ -2534,6 +2574,8 @@ int __xstat(int ver, const char *pathnam
+     if (!pathname ||
+         !buf ||
+         ( strcmp(pathname, "/dev/dsp") != 0 &&
++	  strcmp(pathname, "/dev/sound") != 0 &&
++	  strcmp(pathname, "/dev/audio") != 0 &&
+           strcmp(pathname, "/dev/adsp") != 0 &&
+           strcmp(pathname, "/dev/sndstat") != 0 &&
+           strcmp(pathname, "/dev/mixer") != 0 )) {
+@@ -2557,6 +2599,8 @@ int __xstat64(int ver, const char *pathn
+     if (!pathname ||
+         !buf ||
+         ( strcmp(pathname, "/dev/dsp") != 0 &&
++	  strcmp(pathname, "/dev/sound") != 0 &&
++	  strcmp(pathname, "/dev/audio") != 0 &&
+           strcmp(pathname, "/dev/adsp") != 0 &&
+           strcmp(pathname, "/dev/sndstat") != 0 &&
+           strcmp(pathname, "/dev/mixer") != 0 )) {
+@@ -2586,6 +2630,8 @@ FILE* fopen(const char *filename, const 
+     if (!filename ||
+         !mode ||
+         ( strcmp(filename, "/dev/dsp") != 0 &&
++	  strcmp(filename, "/dev/sound") != 0 &&
++	  strcmp(filename, "/dev/audio") != 0 &&
+           strcmp(filename, "/dev/adsp") != 0 &&
+           strcmp(filename, "/dev/sndstat") != 0 &&
+           strcmp(filename, "/dev/mixer") != 0 )) {
+@@ -2629,6 +2675,8 @@ FILE *fopen64(const char *filename, cons
+     if (!filename ||
+         !mode ||
+         ( strcmp(filename, "/dev/dsp") != 0 &&
++	  strcmp(filename, "/dev/sound") != 0 &&
++	  strcmp(filename, "/dev/audio") != 0 &&
+           strcmp(filename, "/dev/adsp") != 0 &&
+           strcmp(filename, "/dev/sndstat") != 0 &&
+           strcmp(filename, "/dev/mixer") != 0 )) {
