@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.572 2008/11/03 04:46:06 obache Exp $
+# $NetBSD: Makefile,v 1.579 2009/01/08 15:47:23 wiz Exp $
 #
 
 COMMENT=	Packages to support the X window system
@@ -215,6 +215,7 @@ SUBDIR+=	libdrm
 SUBDIR+=	libgnomekbd
 SUBDIR+=	liblbxutil
 SUBDIR+=	liboldXrandr
+SUBDIR+=	libunique
 SUBDIR+=	libxfce4gui
 SUBDIR+=	libxfce4mcs
 SUBDIR+=	libxfce4util
@@ -243,6 +244,7 @@ SUBDIR+=	ocaml-graphics
 SUBDIR+=	oneko
 SUBDIR+=	openbsd-input-ws
 SUBDIR+=	openmotif
+SUBDIR+=	p5-Clipboard
 SUBDIR+=	p5-Gtk2-Ex-FormFactory
 SUBDIR+=	p5-Tk
 SUBDIR+=	p5-X11-Protocol
@@ -258,11 +260,15 @@ SUBDIR+=	py-gnome2
 SUBDIR+=	py-gnome2-desktop
 SUBDIR+=	py-gnome2-extras
 SUBDIR+=	py-gtk2
+SUBDIR+=	py-gtksourceview
+SUBDIR+=	py-kiwi
 SUBDIR+=	py-qt3-base
 SUBDIR+=	py-qt3-modules
 SUBDIR+=	py-qt3-qscintilla
+SUBDIR+=	py-qt4
 SUBDIR+=	py-sip
 SUBDIR+=	py-wxWidgets
+SUBDIR+=	qgtkstyle
 SUBDIR+=	qt3
 SUBDIR+=	qt3-docs
 SUBDIR+=	qt3-libs

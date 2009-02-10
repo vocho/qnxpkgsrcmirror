@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.12 2008/08/10 16:05:28 joerg Exp $
+# $NetBSD: Makefile,v 1.16 2009/01/04 22:19:23 wiz Exp $
 #
 
-DISTNAME=		comix-3.6.4
-PKGREVISION=		2
+DISTNAME=		comix-4.0.2
 CATEGORIES=		graphics python
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=comix/}
 
@@ -13,6 +12,12 @@ COMMENT=		Image viewer specifically designed to handle comic books
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 DEPENDS+=		unrar-[0-9]*:../../archivers/unrar
+.include "../../lang/python/extension.mk"
+.if ${PYPKGPREFIX} == "py24"
+.include "../../databases/py-sqlite2/buildlink3.mk"
+.else
+DEPENDS+=		${PYPKGPREFIX}-sqlite3-[0-9]*:../../databases/py-sqlite3
+.endif
 
 USE_DIRS+=		xdg-1.3
 MANCOMPRESSED=		yes
@@ -23,17 +28,19 @@ SUBST_MESSAGE.install-path=	Fixing man page installation path.
 SUBST_FILES.install-path=	install.py
 SUBST_SED.install-path=		-e "s,share/man/man,${PKGMANDIR}/man,g"
 
-PYTHON_PATCH_SCRIPTS=		comix mime/comicthumb
+PYTHON_PATCH_SCRIPTS=		src/comix.py mime/comicthumb
 
 do-build:
 
 do-install:
-	cd ${WRKSRC} && ${PYTHONBIN} install.py install --installdir ${DESTDIR}${PREFIX}
+	cd ${WRKSRC} && ${PYTHONBIN} install.py install --dir ${DESTDIR}${PREFIX}
 
-.include "../../databases/shared-mime-info/buildlink3.mk"
+.include "../../databases/shared-mime-info/mimedb.mk"
 .include "../../devel/GConf/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
+BUILDLINK_API_DEPENDS.pyimaging+=	${PYPKGPREFIX}-imaging>=1.1.5
 .include "../../graphics/py-imaging/buildlink3.mk"
 .include "../../lang/python/application.mk"
+BUILDLINK_API_DEPENDS.pygtk2+=	${PYPKGPREFIX}-gtk2>=2.12
 .include "../../x11/py-gtk2/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

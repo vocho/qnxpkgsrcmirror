@@ -1,30 +1,25 @@
-# $NetBSD: Makefile,v 1.34 2008/09/24 03:03:45 obache Exp $
+# $NetBSD: Makefile,v 1.36 2009/01/23 13:40:32 obache Exp $
 #
 
-DISTNAME=		uim-1.5.1
-CATEGORIES=		inputmethod
-MASTER_SITES=		http://uim.googlecode.com/files/
-EXTRACT_SUFX=		.tar.bz2
+.include "../../inputmethod/uim/Makefile.common"
 
-MAINTAINER=		VEG03617@nifty.com
-HOMEPAGE=		http://code.google.com/p/uim/
 COMMENT=		Multilingual input method library
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_DIRS+=		xdg-1.1
 USE_LIBTOOL=		YES
-USE_NCURSES=		YES	# clear_screen, clr_eos
 USE_PKGLOCALEDIR=	YES
 USE_TOOLS+=		gmake intltool pkg-config msgfmt
 USE_LANGUAGES=		c c++
 PKGCONFIG_OVERRIDE+=	${WRKSRC}/uim.pc.in
 GNU_CONFIGURE=		YES
-GTK2_IMMODULES=		YES
 CONFIGURE_ARGS+=	--disable-emacs
 CONFIGURE_ARGS+=	--with-libgcroots=installed
 
 .include "options.mk"
+
+# XXXUEBAYASI why is readline a must?
 
 PLIST_VARS+=		editline
 CHECK_BUILTIN.readline:=	yes
@@ -56,6 +51,4 @@ post-install:
 .include "../../converters/libiconv/buildlink3.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../devel/libgcroots/buildlink3.mk"
-.include "../../devel/ncurses/buildlink3.mk"
-.include "../../x11/libX11/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

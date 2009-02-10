@@ -867,9 +867,11 @@ open_temp(HTAB *hashp)
 	char *envtmp;
 	char namestr[PATH_MAX];
 
+#if HAVE_ISSETUGID
 	if (issetugid())
 		envtmp = NULL;
 	else
+#endif
 		envtmp = getenv("TMPDIR");
 
 	if (-1 == snprintf(namestr, sizeof(namestr), "%s/_hashXXXXXX",

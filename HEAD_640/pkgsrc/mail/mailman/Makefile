@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.54 2008/09/21 18:30:00 martti Exp $
+# $NetBSD: Makefile,v 1.56 2008/12/30 01:39:25 markd Exp $
 
-DISTNAME=	mailman-2.1.10
-PKGREVISION=	2
+DISTNAME=	mailman-2.1.11
 CATEGORIES=	mail www
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=mailman/}
 EXTRACT_SUFX=	.tgz
@@ -83,6 +82,9 @@ CONFIGURE_ARGS+=	--without-permcheck
 # Put in externally invalid defaults (MESSAGE directs how to fix it)
 CONFIGURE_ARGS+=	--with-mailhost=localhost
 CONFIGURE_ARGS+=	--with-urlhost=localhost
+
+# dont create egg-info files in pythonlib
+INSTALL_ENV+=		PKGSRC_PYTHON_NO_EGG=defined
 
 BUILD_DEFS+=		MAILMAN_DATADIR
 BUILD_DEFS+=		MAILMAN_CGIEXT

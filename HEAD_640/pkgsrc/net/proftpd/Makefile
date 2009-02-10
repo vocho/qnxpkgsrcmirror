@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.50 2008/11/21 08:00:36 martti Exp $
+# $NetBSD: Makefile,v 1.53 2009/01/11 22:47:54 shattered Exp $
 
 DISTNAME=		proftpd-1.3.2rc3
-#PKGREVISION=		1
+PKGREVISION=		1
 CATEGORIES=		net
 MASTER_SITES=		ftp://ftp.proftpd.org/distrib/source/ \
 			ftp://ftp.servus.at/ProFTPD/distrib/source/ \
 			ftp://ftp.fsn.hu/pub/proftpd/distrib/source/
 EXTRACT_SUFX=		.tar.bz2
 
-MAINTAINER=		martti@NetBSD.org
+MAINTAINER=		kim@tac.nyc.ny.us
 HOMEPAGE=		http://www.proftpd.org/
 COMMENT=		FTP server with Apache like configuration
 #LICENSE=		gnu-gpl-v2
@@ -31,6 +31,7 @@ CONFIGURE_ENV+=		install_user=${ROOT_USER} install_group=${ROOT_GROUP}
 BUILD_DEFS+=		VARBASE
 
 RCD_SCRIPTS=		proftpd
+REPLACE_PERL+=		contrib/ftpasswd
 
 CONF_FILES=		${PREFIX}/share/examples/proftpd/basic.conf \
 			${PKG_SYSCONFDIR}/proftpd.conf
@@ -48,6 +49,12 @@ PLIST_SRC+=		${PKGDIR}/PLIST
 
 .include "options.mk"
 
+post-patch:
+	cd ${WRKSRC}/contrib \
+	&& ${CP} -p mod_wrap.c mod_wrap.c.orig \
+	&& ${SED} -e '/^...\$$Libraries: /s/ -lnsl\$$$$/$$/' \
+	    mod_wrap.c.orig > mod_wrap.c
+
 post-install:
 .for i in NEWS README README.IPv6 README.LDAP README.PAM README.capabilities \
           README.classes README.controls README.facl README.modules
@@ -57,6 +64,8 @@ post-install:
 	${INSTALL_DATA} ${WRKSRC}/doc/${i} ${DESTDIR}${PREFIX}/share/doc/proftpd
 .endfor
 	${INSTALL_DATA} ${WRKSRC}/sample-configurations/*.conf \
+		${DESTDIR}${PREFIX}/share/examples/proftpd
+	${INSTALL_SCRIPT} ${WRKSRC}/contrib/ftpasswd \
 		${DESTDIR}${PREFIX}/share/examples/proftpd
 
 .include "../../devel/gettext-lib/buildlink3.mk"

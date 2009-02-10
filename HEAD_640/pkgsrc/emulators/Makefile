@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.172 2008/11/21 17:42:36 adam Exp $
+# $NetBSD: Makefile,v 1.176 2009/01/18 16:05:25 wiz Exp $
 #
 
 COMMENT=	Emulators for other operating systems
@@ -50,6 +50,7 @@ SUBDIR+=	fmsx
 SUBDIR+=	freebsd_lib
 SUBDIR+=	fuse
 SUBDIR+=	fuse-utils
+SUBDIR+=	gambatte
 SUBDIR+=	gcube
 SUBDIR+=	generator
 SUBDIR+=	generator-cbiere
@@ -61,6 +62,7 @@ SUBDIR+=	gpsim-devel
 SUBDIR+=	gpsim-oscilloscope
 SUBDIR+=	gpsim-ptyusart
 SUBDIR+=	gxemul
+SUBDIR+=	handy_sdl
 SUBDIR+=	hatari
 SUBDIR+=	hercules
 SUBDIR+=	hercules-images
@@ -74,6 +76,7 @@ SUBDIR+=	makeppf
 SUBDIR+=	mednafen
 SUBDIR+=	minivmac
 SUBDIR+=	mmix
+SUBDIR+=	nestopia
 SUBDIR+=	netbsd32_compat15
 SUBDIR+=	netbsd32_compat15-extras
 SUBDIR+=	netbsd32_compat16
@@ -94,11 +97,14 @@ SUBDIR+=	peace
 SUBDIR+=	pearpc
 SUBDIR+=	qemu
 SUBDIR+=	raine
+SUBDIR+=	sdlmame
+SUBDIR+=	sdlmess
 SUBDIR+=	simh
 SUBDIR+=	simulavr
 SUBDIR+=	ski
 SUBDIR+=	sms_sdl
 SUBDIR+=	snes9x
+SUBDIR+=	snes9x-gtk
 SUBDIR+=	spim
 SUBDIR+=	stella
 SUBDIR+=	suse100_32_alsa
@@ -171,6 +177,7 @@ SUBDIR+=	wine-devel
 SUBDIR+=	x48
 SUBDIR+=	xbeeb
 SUBDIR+=	xcopilot
+SUBDIR+=	xhomer
 SUBDIR+=	xm7
 SUBDIR+=	xmame
 SUBDIR+=	xmess

@@ -1,10 +1,12 @@
-@comment $NetBSD: PLIST,v 1.1.1.1 2008/10/16 21:53:57 adam Exp $
+@comment $NetBSD: PLIST,v 1.5 2009/02/03 06:21:40 adam Exp $
 bin/gegl
 include/gegl-0.0/gegl-buffer.h
 include/gegl-0.0/gegl-chant.h
 include/gegl-0.0/gegl-color.h
 include/gegl-0.0/gegl-curve.h
+include/gegl-0.0/gegl-matrix.h
 include/gegl-0.0/gegl-paramspecs.h
+include/gegl-0.0/gegl-path.h
 include/gegl-0.0/gegl-plugin.h
 include/gegl-0.0/gegl-simd.h
 include/gegl-0.0/gegl-utils.h
@@ -50,7 +52,6 @@ lib/gegl-0.0/dst-over.la
 lib/gegl-0.0/dst.la
 lib/gegl-0.0/exclusion.la
 lib/gegl-0.0/exr-load.la
-lib/gegl-0.0/fill.la
 lib/gegl-0.0/fractal-explorer.la
 lib/gegl-0.0/gamma.la
 lib/gegl-0.0/gaussian-blur.la
@@ -75,6 +76,7 @@ lib/gegl-0.0/opacity.la
 lib/gegl-0.0/open-buffer.la
 lib/gegl-0.0/over.la
 lib/gegl-0.0/overlay.la
+lib/gegl-0.0/path.la
 lib/gegl-0.0/pixbuf.la
 lib/gegl-0.0/plus.la
 lib/gegl-0.0/png-load.la
@@ -97,7 +99,7 @@ lib/gegl-0.0/stress.la
 lib/gegl-0.0/stretch-contrast.la
 lib/gegl-0.0/subtract.la
 lib/gegl-0.0/svg-huerotate.la
-lib/gegl-0.0/svg-load.la
+${PLIST.svg}lib/gegl-0.0/svg-load.la
 lib/gegl-0.0/svg-luminancetoalpha.la
 lib/gegl-0.0/svg-matrix.la
 lib/gegl-0.0/svg-multiply.la

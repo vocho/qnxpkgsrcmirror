@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.286 2008/11/25 14:38:25 abs Exp $
+# $NetBSD: Makefile,v 1.291 2009/02/05 13:57:58 jnemeth Exp $
 #
 
 COMMENT=	Databases
@@ -46,6 +46,7 @@ SUBDIR+=	libgnomedb
 SUBDIR+=	libpqxx
 SUBDIR+=	libpqxx-doc
 SUBDIR+=	lua-sqlite
+SUBDIR+=	lua-tokyocabinet
 SUBDIR+=	luma
 SUBDIR+=	mergeant
 SUBDIR+=	metakit-lib
@@ -62,7 +63,9 @@ SUBDIR+=	odbc-postgresql
 SUBDIR+=	openldap
 SUBDIR+=	openldap-client
 SUBDIR+=	openldap-doc
+SUBDIR+=	openldap-nops
 SUBDIR+=	openldap-server
+SUBDIR+=	openldap-smbk5pwd
 SUBDIR+=	oraedit
 SUBDIR+=	p5-AddressBook
 SUBDIR+=	p5-Apache-DBI
@@ -78,6 +81,7 @@ SUBDIR+=	p5-Class-DBI-AbstractSearch
 SUBDIR+=	p5-Class-DBI-Pg
 SUBDIR+=	p5-DBD-CSV
 SUBDIR+=	p5-DBD-Google
+SUBDIR+=	p5-DBD-Mock
 SUBDIR+=	p5-DBD-Oracle
 SUBDIR+=	p5-DBD-PgPP
 SUBDIR+=	p5-DBD-SQLite
@@ -124,6 +128,7 @@ SUBDIR+=	p5-Net-MySQL
 SUBDIR+=	p5-Palm
 SUBDIR+=	p5-Rose-DB
 SUBDIR+=	p5-Rose-DB-Object
+SUBDIR+=	p5-Rose-DBx-AutoReconnect
 SUBDIR+=	p5-Rose-DBx-Garden
 SUBDIR+=	p5-Rose-DBx-Garden-Catalyst
 SUBDIR+=	p5-Rose-DBx-Object-MoreHelpers

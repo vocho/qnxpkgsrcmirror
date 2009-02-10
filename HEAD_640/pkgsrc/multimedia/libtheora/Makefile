@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.22 2008/11/05 14:55:23 wiz Exp $
+# $NetBSD: Makefile,v 1.24 2009/01/27 21:55:04 sketch Exp $
 #
 
 .include "Makefile.common"
@@ -10,7 +10,18 @@ USE_LIBTOOL=		YES
 TEST_TARGET=		check
 
 # disable doxygen, see libtheora-docs package
+# also, disable transfig, and *tex.
+
 CONFIGURE_ENV+=		HAVE_DOXYGEN=no
+CONFIGURE_ENV+=		HAVE_TRANSFIG=no
+CONFIGURE_ENV+=		HAVE_BIBTEX=no
+CONFIGURE_ENV+=		HAVE_PDFLATEX=no
+
+.include "../../mk/compiler.mk"
+
+.if !empty(PKGSRC_COMPILER:Msunpro)
+CONFIGURE_ARGS+=	--disable-asm
+.endif
 
 # avoid installing docs
 do-install:

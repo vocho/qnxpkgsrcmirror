@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.3 2008/11/13 15:11:58 ghen Exp $
+@comment $NetBSD: PLIST,v 1.7 2008/12/21 15:53:26 jmcneill Exp $
 bin/${MOZILLA}
 @comment begin PROGRAMS
 lib/${MOZILLA}/${MOZILLA_BIN}
@@ -21,6 +21,7 @@ lib/${MOZILLA}/components/libbrowsercomps.${SO_SUFFIX}
 lib/${MOZILLA}/components/libbrowserdirprovider.${SO_SUFFIX}
 lib/${MOZILLA}/components/libimgicon.${SO_SUFFIX}
 @comment libfreebl
+${JEMALLOC}lib/${MOZILLA}/libjemalloc.${SO_SUFFIX}
 lib/${MOZILLA}/libmozjs.${SO_SUFFIX}
 lib/${MOZILLA}/libnspr4.${SO_SUFFIX}
 lib/${MOZILLA}/libnss3.${SO_SUFFIX}
@@ -31,7 +32,6 @@ lib/${MOZILLA}/libplc4.${SO_SUFFIX}
 lib/${MOZILLA}/libplds4.${SO_SUFFIX}
 lib/${MOZILLA}/libsmime3.${SO_SUFFIX}
 lib/${MOZILLA}/libsoftokn3.${SO_SUFFIX}
-lib/${MOZILLA}/libsqlite3.${SO_SUFFIX}
 lib/${MOZILLA}/libssl3.${SO_SUFFIX}
 lib/${MOZILLA}/libxpcom.${SO_SUFFIX}
 lib/${MOZILLA}/libxul.${SO_SUFFIX}
@@ -74,10 +74,12 @@ lib/${MOZILLA}/components/FeedConverter.js
 lib/${MOZILLA}/components/FeedProcessor.js
 lib/${MOZILLA}/components/FeedWriter.js
 lib/${MOZILLA}/components/WebContentConverter.js
+lib/${MOZILLA}/components/aboutRights.js
 lib/${MOZILLA}/components/aboutRobots.js
 lib/${MOZILLA}/components/fuelApplication.js
 lib/${MOZILLA}/components/jsconsole-clhandler.js
 lib/${MOZILLA}/components/nsAddonRepository.js
+lib/${MOZILLA}/components/nsBadCertHandler.js
 lib/${MOZILLA}/components/nsBlocklistService.js
 lib/${MOZILLA}/components/nsBrowserContentHandler.js
 lib/${MOZILLA}/components/nsBrowserGlue.js
@@ -1260,7 +1262,6 @@ include/${MOZILLA}/zipwriter/nsIZipWriter.h
 include/${MOZILLA}/morkreader/nsMorkReader.h
 include/${MOZILLA}/cookie/nsICookieAcceptDialog.h
 include/${MOZILLA}/cookie/nsICookiePromptService.h
-include/${MOZILLA}/sqlite3/sqlite3.h
 include/${MOZILLA}/rdf/rdfIDataSource.h
 include/${MOZILLA}/rdf/rdfITripleVisitor.h
 include/${MOZILLA}/rdf/rdfISerializer.h
@@ -2632,6 +2633,8 @@ include/${MOZILLA}/browserplaces/nsIPlacesImportExportService.h
 include/${MOZILLA}/browserplaces/nsIPlacesTransactionsService.h
 include/${MOZILLA}/fuel/fuelIApplication.h
 @comment end INCLUDE
+share/applications/${MOZILLA}.desktop
+share/pixmaps/${MOZILLA}.png
 @exec env LD_LIBRARY_PATH=%D/lib/${MOZILLA} MOZILLA_FIVE_HOME=%D/lib/${MOZILLA} %D/lib/${MOZILLA}/regxpcom
 @unexec ${RM} %D/lib/${MOZILLA}/components/compreg.dat
 @unexec ${RM} %D/lib/${MOZILLA}/components/xpti.dat

@@ -135,6 +135,7 @@ AC_CHECK_FUNC(SHA512_File, [:], [
 AC_ARG_ENABLE([db],
 	[AS_HELP_STRING([--enable-db], [include DB implementation])])
 AC_SUBST(WITH_DB, $enable_db)
+AC_CHECK_FUNCS(issetugid)
 
 AC_ARG_ENABLE([bsd-getopt],
 	[AS_HELP_STRING([--enable-bsd-getopt],

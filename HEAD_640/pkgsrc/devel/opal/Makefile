@@ -1,14 +1,13 @@
-# $NetBSD: Makefile,v 1.3 2008/10/29 21:02:02 cube Exp $
+# $NetBSD: Makefile,v 1.7 2009/02/02 06:35:44 obache Exp $
 #
 
-DISTNAME=		opal-3.4.2
-PKGREVISION=		1
+DISTNAME=		opal-3.4.4
 CATEGORIES=		devel net comms
 MASTER_SITES=		${MASTER_SITE_GNOME:=sources/opal/3.4/}
 EXTRACT_SUFX=		.tar.bz2
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
-HOMEPAGE=		http://www.ekiga.net/
+HOMEPAGE=		http://www.opalvoip.org/
 COMMENT=		Open Phone Abstraction Library
 
 OPALLIBDIR=		${DISTNAME}
@@ -42,7 +41,6 @@ post-install:
 	${INSTALL_DATA} ${WRKSRC}/version.h ${DESTDIR}${PREFIX}/share/opal
 
 .include "../../devel/ptlib/buildlink3.mk"
-.include "../../databases/openldap-client/buildlink3.mk"
 .include "../../multimedia/ffmpeg/buildlink3.mk"
 .include "../../multimedia/x264-devel/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

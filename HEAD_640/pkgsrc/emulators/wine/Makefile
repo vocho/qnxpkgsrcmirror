@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.148 2008/10/18 11:55:27 adam Exp $
+# $NetBSD: Makefile,v 1.150 2008/12/16 13:27:30 jmcneill Exp $
 
 DISTNAME=	wine-1.0.1
+PKGREVISION=	1
 CATEGORIES=	emulators
 MASTER_SITES=	http://ibiblio.org/pub/linux/system/emulators/wine/ \
 		${MASTER_SITE_SOURCEFORGE:=wine/}
@@ -34,7 +35,19 @@ REPLACE_PERL+=		tools/winemaker tools/winedump/function_grep.pl
 #
 CONFIGURE_ENV+=		X_LIBS=${LDFLAGS:M*:Q}
 CONFIGURE_ENV+=		CFLAGS=${CFLAGS:M*:Q}\ -DDEVOSSAUDIO="\"${DEVOSSAUDIO}\""
+CONFIGURE_ENV+=		LDD=${LDD}
 LIBS+=			${LDFLAGS}
+
+# If we're doing a 32-bit build, make sure that the appropriate
+# multilib options are passed through as these values are used
+# with winegcc (which wrapper doesn't handle).
+.include "../../mk/bsd.prefs.mk"
+.if !empty(MACHINE_ARCH:Mi386)
+CONFIGURE_ENV+=		ac_cv_prog_CC=${CC}\ -m32
+CONFIGURE_ENV+=		ac_cv_prog_CXX=${CXX}\ -m32
+CONFIGURE_ENV+=		ac_cv_prog_AS=${AS}\ --32
+CONFIGURE_ENV+=		ac_cv_prog_LD=${LD}\ -m\ elf_i386
+.endif
 
 .include "options.mk"
 

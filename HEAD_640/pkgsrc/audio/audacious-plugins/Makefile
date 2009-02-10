@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.3 2008/11/10 12:06:06 wiz Exp $
+# $NetBSD: Makefile,v 1.5 2008/12/18 22:42:36 jmcneill Exp $
 #
 
 DISTNAME=		audacious-plugins-1.5.1
+PKGREVISION=		1
 CATEGORIES=		audio
 MASTER_SITES=		http://distfiles.atheme.org/
 EXTRACT_SUFX=		.tgz
@@ -11,7 +12,7 @@ HOMEPAGE=		http://audacious-media-player.org/
 COMMENT=		Plugins for Audacious media player
 
 GNU_CONFIGURE=		yes
-USE_TOOLS+=		gmake intltool pkg-config
+USE_TOOLS+=		gmake intltool pkg-config msgfmt
 USE_LIBTOOL=		yes
 
 # This should avoid an error like: libstdc++.so.6: Undefined PLT symbol "_Unwind_GetIP" on NetBSD i386 and maybe amd64, with gcc4 at least.

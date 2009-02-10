@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.65 2008/11/08 19:00:15 ahoka Exp $
+# $NetBSD: Makefile,v 1.72 2009/01/28 12:56:42 jmcneill Exp $
 #
 
 DISTNAME=		vlc-${VLC_VERSION}
+PKGREVISION=		3
 CATEGORIES=		multimedia
 MASTER_SITES=		http://download.videolan.org/pub/videolan/vlc/${VLC_VERSION}/
 EXTRACT_SUFX=		.tar.bz2
 
-VLC_VERSION=		0.9.6
-PKGREVISION=		1
+VLC_VERSION=		0.9.8a
 
 MAINTAINER=		ahoka@NetBSD.org
 HOMEPAGE=		http://videolan.org/
@@ -95,7 +95,8 @@ pre-install:
 # Let's use dejavu-ttf as it has nice unicode support
 #
 ORIGFNT=		/usr/share/fonts/truetype/freefont/FreeSerifBold.ttf
-DEFAULT_FONT?=		${X11BASE}/lib/X11/fonts/TTF/DejaVuSans.ttf
+DEFAULT_FONT?=		${LOCALBASE}/lib/X11/fonts/TTF/DejaVuSans.ttf
+DEPENDS+=		dejavu-ttf>=2.26:../../fonts/dejavu-ttf
 
 SUBST_CLASSES+=		oss
 SUBST_STAGE.oss=	post-patch
@@ -114,6 +115,8 @@ SUBST_STAGE.fnt=	post-patch
 SUBST_SED.fnt=		-e "s,${ORIGFNT},${DEFAULT_FONT},"
 SUBST_FILES.fnt=	modules/misc/freetype.c
 SUBST_MESSAGE.fnt=	Fixing hardcoded paths.
+
+REPLACE_SH+=		vlc-config.in.in
 
 # VLC embeds the build environment info to help debuging
 #

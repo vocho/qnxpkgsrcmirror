@@ -1,4 +1,4 @@
-# $NetBSD: buildlink3.mk,v 1.3 2007/12/07 19:43:22 martti Exp $
+# $NetBSD: buildlink3.mk,v 1.6 2008/12/19 23:54:47 hira Exp $
 
 BUILDLINK_DEPTH:=		${BUILDLINK_DEPTH}+
 XFCE4_THUNAR_BUILDLINK3_MK:=	${XFCE4_THUNAR_BUILDLINK3_MK}+
@@ -12,9 +12,16 @@ BUILDLINK_PACKAGES+=	xfce4-thunar
 BUILDLINK_ORDER:=	${BUILDLINK_ORDER} ${BUILDLINK_DEPTH}xfce4-thunar
 
 .if ${XFCE4_THUNAR_BUILDLINK3_MK} == "+"
-BUILDLINK_API_DEPENDS.xfce4-thunar+=	xfce4-thunar>=0.9.0
+BUILDLINK_API_DEPENDS.xfce4-thunar+=	xfce4-thunar>=0.9.3nb2
 BUILDLINK_PKGSRCDIR.xfce4-thunar?=	../../sysutils/xfce4-thunar
 .endif	# XFCE4_THUNAR_BUILDLINK3_MK
+
+pkgbase := xfce4-thunar
+.include "../../mk/pkg-build-options.mk"
+
+.if !empty(PKG_BUILD_OPTIONS.xfce4-thunar:Mhal)
+.include "../../sysutils/hal/buildlink3.mk"
+.endif
 
 .include "../../devel/GConf/buildlink3.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"

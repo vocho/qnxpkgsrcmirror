@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.5 2008/11/26 08:22:24 hasso Exp $
+# $NetBSD: Makefile,v 1.8 2009/01/20 10:08:17 sketch Exp $
 #
 
 POLICYKIT_VER=		0.9
@@ -30,8 +30,12 @@ BUILD_DEFS+=		PKG_SYSCONFBASE
 GNU_CONFIGURE=		YES
 USE_DIRS+=		xdg-1.4
 USE_PKGLOCALEDIR=	YES
-USE_TOOLS+=		gmake intltool msgfmt perl pkg-config
+USE_TOOLS+=		gmake intltool msgfmt perl pkg-config autoconf
 USE_LIBTOOL=		YES
+
+USE_LANGUAGES=		c99
+
+AUTOCONF_REQD=		2.59
 
 POLICYKIT_USER?=	polkit
 POLICYKIT_GROUP?=	polkit
@@ -51,6 +55,13 @@ CONFIGURE_ARGS+=	--with-polkit-group=${POLICYKIT_GROUP}
 post-install:
 	${INSTALL_DATA} ${FILESDIR}/PolicyKit.conf.NetBSD ${DESTDIR}${EGDIR}/PolicyKit.conf
 .endif
+
+.if ${OPSYS} == "Darwin"
+BUILDLINK_TRANSFORM+=	rm:-Wl,--as-needed
+.endif
+
+pre-configure:
+	cd ${WRKSRC} && autoconf
 
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../textproc/libxml2/buildlink3.mk"

@@ -1,4 +1,4 @@
-# $NetBSD: buildlink3.mk,v 1.1 2008/09/17 00:21:49 obache Exp $
+# $NetBSD: buildlink3.mk,v 1.3 2009/01/19 04:01:52 obache Exp $
 
 BUILDLINK_DEPTH:=			${BUILDLINK_DEPTH}+
 RUBY_GNOME2_GLIB_BUILDLINK3_MK:=	${RUBY_GNOME2_GLIB_BUILDLINK3_MK}+
@@ -17,5 +17,6 @@ BUILDLINK_PKGSRCDIR.ruby-gnome2-glib?=		../../devel/ruby-gnome2-glib
 .endif	# RUBY_GNOME2_GLIB_BUILDLINK3_MK
 
 .include "../../devel/glib2/buildlink3.mk"
+.include "../../lang/ruby/buildlink3.mk"
 
 BUILDLINK_DEPTH:=			${BUILDLINK_DEPTH:S/+$//}

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.82 2008/08/24 02:08:32 ahoka Exp $
+# $NetBSD: Makefile,v 1.84 2009/01/08 12:23:30 obache Exp $
 
 DISTNAME=		opera-${OPERA_PKG_VERSION:S/u/pl/}
 #PKGREVISION=		1
@@ -11,7 +11,7 @@ MASTER_SITES+=		ftp://opera.nsc.no/pub/nsc.no/mirrors/operasoftware/${OPERA_DIR}
 MASTER_SITES+=		ftp://ftp.opera.com/pub/opera/${OPERA_DIR}/
 DISTFILES=		opera-${OPERA_DIST_VERSION}${OPERA_ARCH}${EXTRACT_SUFX}
 
-MAINTAINER=		jdolecek@NetBSD.org
+MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://www.opera.com/
 COMMENT=		Small, fast and customizable WWW client
 
@@ -21,6 +21,8 @@ EMUL_PLATFORMS=		freebsd-i386
 EMUL_PLATFORMS+=	linux-i386
 EMUL_PLATFORMS+=	solaris-sparc
 
+#PKG_DESTDIR_SUPPORT=	user-destdir
+
 .include "../../mk/bsd.prefs.mk"
 
 USE_LANGUAGES=		# empty
@@ -28,9 +30,9 @@ BUILD_DIRS=		# empty
 
 OPERA_LANG=		en
 OPERA_VER_DATE=		20080630
-OPERA_PKG_BUILD=	2091
-OPERA_PKG_VERSION=	9.52
-OPERA_PKG_VERSION_DIR=	952
+OPERA_PKG_BUILD=	2474
+OPERA_PKG_VERSION=	9.63
+OPERA_PKG_VERSION_DIR=	963
 
 INSTALLATION_DIRS=	bin ${PKGMANDIR}/man1
 
