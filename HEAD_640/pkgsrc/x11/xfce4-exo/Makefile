@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.4 2008/07/18 14:20:56 obache Exp $
+# $NetBSD: Makefile,v 1.6 2008/12/18 16:38:08 hira Exp $
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
@@ -8,11 +8,18 @@ XFCE4_VERSION=	0.3.4
 
 DISTNAME=	exo-${XFCE4_VERSION}
 PKGNAME=	xfce4-exo-${XFCE4_VERSION}
-PKGREVISION=	1
+PKGREVISION=	3
 CATEGORIES=	x11
 COMMENT=	Xfce extension library
 
 DEPENDS+=	p5-URI>=0:../../www/p5-URI
+
+PKG_SYSCONFSUBDIR=	xdg/xfce4
+EGDIR=			${XFCE4_EGBASE}
+CONF_FILES=		${EGDIR:Q}/helpers.rc ${PKG_SYSCONFDIR:Q}/helpers.rc
+OWN_DIRS+=		${EGDIR}
+
+.include "options.mk"
 
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../x11/xfce4-mcs-plugins/buildlink3.mk"

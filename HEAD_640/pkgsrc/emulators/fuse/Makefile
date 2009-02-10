@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.26 2008/06/12 02:14:29 joerg Exp $
+# $NetBSD: Makefile,v 1.29 2009/01/15 11:49:30 adam Exp $
 
-DISTNAME=	fuse-0.9.0
+DISTNAME=	fuse-0.10.0.2
 CATEGORIES=	emulators
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=fuse-emulator/}
 
@@ -12,7 +12,8 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=		perl pkg-config
 GNU_CONFIGURE=		yes
-LIBS+=	${LIBOSSAUDIO}
+
+LIBS+=			${LIBOSSAUDIO}
 
 .include "options.mk"
 

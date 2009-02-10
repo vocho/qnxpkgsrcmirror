@@ -1,5 +1,5 @@
-$NetBSD: distinfo,v 1.13 2008/11/24 16:10:05 wiz Exp $
+$NetBSD: distinfo,v 1.15 2009/02/06 17:31:34 drochner Exp $
 
-SHA1 (gtkhtml-3.24.2.tar.bz2) = 428da22a6cf0b7c87d994da5891554390b76473b
-RMD160 (gtkhtml-3.24.2.tar.bz2) = 25ac1d406acf8258bb6e965fcdd4083452fc459a
-Size (gtkhtml-3.24.2.tar.bz2) = 1438665 bytes
+SHA1 (gtkhtml-3.24.4.tar.bz2) = 9b066f17b9a049ba537ab5b0ada91c95319b46eb
+RMD160 (gtkhtml-3.24.4.tar.bz2) = 240df6714c64c42f2cbedd646a1eda0f462b938c
+Size (gtkhtml-3.24.4.tar.bz2) = 1441024 bytes

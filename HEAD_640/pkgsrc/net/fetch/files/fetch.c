@@ -36,6 +36,7 @@
 #if HAVE_SYS_PARAM_H
 #include <sys/param.h>
 #endif
+#include <sys/ioctl.h>
 #if HAVE_SYS_SOCKET_H
 #include <sys/socket.h>
 #endif
@@ -83,12 +84,9 @@
 int	 A_flag;	/*    -A: do not follow 302 redirects */
 int	 a_flag;	/*    -a: auto retry */
 off_t	 B_size;	/*    -B: buffer size */
-int	 b_flag;	/*!   -b: workaround TCP bug */
-char    *c_dirname;	/*    -c: remote directory */
 int	 d_flag;	/*    -d: direct connection */
 int	 F_flag;	/*    -F: restart without checking mtime  */
-char	*f_filename;	/*    -f: file to fetch */
-char	*h_hostname;	/*    -h: host to fetch from */
+int	 i_flag;	/*    -i: fetch file if modified */
 int	 l_flag;	/*    -l: link rather than copy file: URLs */
 int	 m_flag;	/* -[Mm]: mirror mode */
 char	*N_filename;	/*    -N: netrc file name */
@@ -103,7 +101,6 @@ int	 r_flag;	/*    -r: restart previously interrupted transfer */
 off_t	 S_size;        /*    -S: require size to match */
 int	 s_flag;        /*    -s: show size, don't fetch */
 long	 T_secs = 120;	/*    -T: transfer timeout in seconds */
-int	 t_flag;	/*!   -t: workaround TCP bug */
 int	 U_flag;	/*    -U: do not use high ports */
 int	 v_level = 1;	/*    -v: verbosity level */
 int	 v_tty;		/*        stdout is a tty */
@@ -111,9 +108,9 @@ pid_t	 pgrp;		/*        our process group */
 long	 w_secs;	/*    -w: retry delay */
 int	 family = PF_UNSPEC;	/* -[46]: address family to use */
 
-int	 sigalrm;	/* SIGALRM received */
-int	 siginfo;	/* SIGINFO received */
-int	 sigint;	/* SIGINT received */
+volatile int	 sigalrm;	/* SIGALRM received */
+volatile int	 siginfo;	/* SIGINFO received */
+volatile int	 sigint;	/* SIGINT received */
 
 long	 ftp_timeout;	/* default timeout for FTP transfers */
 long	 http_timeout;	/* default timeout for HTTP transfers */
@@ -128,12 +125,14 @@ sig_handler(int sig)
 {
 	switch (sig) {
 	case SIGALRM:
+		fetchRestartCalls = 0;
 		sigalrm = 1;
 		break;
 	case SIGINFO:
 		siginfo = 1;
 		break;
 	case SIGINT:
+		fetchRestartCalls = 0;
 		sigint = 1;
 		break;
 	}
@@ -392,6 +391,17 @@ fetch(char *URL, const char *path)
 		break;
 	}
 
+	/* Protocol independent flags */
+	if (i_flag) {
+		if (stat(path, &sb) == 0) {
+			url->last_modified = sb.st_mtime;
+			strcat(flags, "i");
+		} else if (errno != ENOENT) {
+			warn("%s: stat()", path);
+			goto failure;
+		}
+	}
+
 	/* FTP specific flags */
 	if (strcmp(url->scheme, SCHEME_FTP) == 0) {
 		if (d_flag)
@@ -473,6 +483,12 @@ fetch(char *URL, const char *path)
 		alarm(0);
 	if (sigalrm || sigint)
 		goto signal;
+	if (f == NULL && i_flag && fetchLastErrCode == FETCH_UNCHANGED) {
+		/* URL was not modified, return OK. */
+		printf("%s: not modified\n", URL);
+		r = 0;
+		goto done;
+	}
 	if (f == NULL) {
 		warnx("%s: %s", URL, fetchLastErrString);
 		goto failure;
@@ -600,7 +616,7 @@ fetch(char *URL, const char *path)
 
 				fd = mkstemp(tmppath);
 				if (fd == -1) {
-					warn("%s: mkstemp failed");
+					warn("%s: mkstemp failed", tmppath);
 					goto failure;
 				}
 				fchown(fd, sb.st_uid, sb.st_gid);
@@ -637,19 +653,24 @@ fetch(char *URL, const char *path)
 		else
 			size = B_size;
 		if (siginfo) {
-			stat_end(&xs);
+			stat_display(&xs, 1);
 			siginfo = 0;
 		}
 		if ((size = fetchIO_read(f, buf, B_size)) == 0)
 			break;
+		if (size == -1 && errno == EINTR)
+			continue;
+		if (size == -1)
+			break;
 		stat_update(&xs, count += size);
-		for (ptr = buf; size > 0; ptr += wr, size -= wr)
+		for (ptr = buf; size > 0; ptr += wr, size -= wr) {
 			if ((wr = fwrite(ptr, 1, size, of)) < size) {
 				if (ferror(of) && errno == EINTR && !sigint)
 					clearerr(of);
 				else
 					break;
 			}
+		}
 		if (size != 0)
 			break;
 	}
@@ -679,6 +700,8 @@ fetch(char *URL, const char *path)
 	}
 
 	/* timed out or interrupted? */
+	if (fetchLastErrCode == FETCH_TIMEOUT)
+		sigalrm = 1;
 	if (sigalrm)
 		warnx("transfer timed out");
 	if (sigint) {
@@ -690,12 +713,10 @@ fetch(char *URL, const char *path)
 	if (f == NULL)
 		goto failure;
 
-	if (!sigalrm) {
+	if (!sigalrm && ferror(of)) {
 		/* check the status of our files */
-		if (ferror(of))
-			warn("%s", path);
-		if (ferror(of))
-			goto failure;
+		warn("writing to %s failed", path);
+		goto failure;
 	}
 
 	/* did the transfer complete normally? */
@@ -746,7 +767,7 @@ static void
 usage(void)
 {
 	fprintf(stderr, "%s\n%s\n%s\n",
-	    "usage: fetch [-146AFMPRUadlmnpqrsv] [-N netrc] [-o outputfile]",
+	    "usage: fetch [-146AFMPRUadilmnpqrsv] [-N netrc] [-o outputfile]",
 	    "             [-S bytes] [-B bytes] [-T seconds] [-w seconds]",
 	    "             [-h host -f file [-c dir] | URL ...]");
 }
@@ -765,7 +786,7 @@ main(int argc, char *argv[])
 	int c, e, r;
 
 	while ((c = getopt(argc, argv,
-	    "146AaB:bc:dFf:Hh:lMmN:no:qRrS:sT:tUvw:")) != -1)
+	    "146AaB:dFilMmN:no:qRrS:sT:Uvw:")) != -1)
 		switch (c) {
 		case '1':
 			once_flag = 1;
@@ -787,28 +808,14 @@ main(int argc, char *argv[])
 			if (*optarg == '\0' || *end != '\0')
 				errx(1, "invalid buffer size (%s)", optarg);
 			break;
-		case 'b':
-			warnx("warning: the -b option is deprecated");
-			b_flag = 1;
-			break;
-		case 'c':
-			c_dirname = optarg;
-			break;
 		case 'd':
 			d_flag = 1;
 			break;
 		case 'F':
 			F_flag = 1;
 			break;
-		case 'f':
-			f_filename = optarg;
-			break;
-		case 'H':
-			warnx("the -H option is now implicit, "
-			    "use -U to disable");
-			break;
-		case 'h':
-			h_hostname = optarg;
+		case 'i':
+			i_flag = 1;
 			break;
 		case 'l':
 			l_flag = 1;
@@ -855,10 +862,6 @@ main(int argc, char *argv[])
 			if (*optarg == '\0' || *end != '\0')
 				errx(1, "invalid timeout (%s)", optarg);
 			break;
-		case 't':
-			t_flag = 1;
-			warnx("warning: the -t option is deprecated");
-			break;
 		case 'U':
 			U_flag = 1;
 			break;
@@ -878,20 +881,6 @@ main(int argc, char *argv[])
 
 	argc -= optind;
 	argv += optind;
-
-	if (h_hostname || f_filename || c_dirname) {
-		if (!h_hostname || !f_filename || argc) {
-			usage();
-			exit(EX_USAGE);
-		}
-		/* XXX this is a hack. */
-		if (strcspn(h_hostname, "@:/") != strlen(h_hostname))
-			errx(1, "invalid hostname");
-		if (asprintf(argv, "ftp://%s/%s/%s", h_hostname,
-		    c_dirname ? c_dirname : "", f_filename) == -1)
-			errx(1, "%s", strerror(ENOMEM));
-		argc++;
-	}
 
 	if (!argc) {
 		usage();
@@ -927,12 +916,15 @@ main(int argc, char *argv[])
 	sigaction(SIGALRM, &sa, NULL);
 	sa.sa_flags = SA_RESETHAND;
 	sigaction(SIGINT, &sa, NULL);
-	fetchRestartCalls = 0;
 
 	/* output file */
 	if (o_flag) {
 		if (strcmp(o_filename, "-") == 0) {
 			o_stdout = 1;
+			if (i_flag) {
+				warnx("-i and -o - are incompatible, dropping -i");
+				i_flag = 0;
+			}
 		} else if (stat(o_filename, &sb) == -1) {
 			if (errno == ENOENT) {
 				if (argc > 1)

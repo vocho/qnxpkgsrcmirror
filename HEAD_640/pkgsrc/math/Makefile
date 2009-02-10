@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.177 2008/11/07 16:00:25 jwise Exp $
+# $NetBSD: Makefile,v 1.183 2009/02/01 16:54:35 seb Exp $
 
 COMMENT=	Mathematics
 
@@ -54,6 +54,7 @@ SUBDIR+=	dcdflib.f
 SUBDIR+=	dfftpack
 SUBDIR+=	dieharder
 SUBDIR+=	djbfft
+SUBDIR+=	eigen2
 SUBDIR+=	eispack
 SUBDIR+=	ess
 SUBDIR+=	eukleides
@@ -124,7 +125,10 @@ SUBDIR+=	p5-Number-Latin
 SUBDIR+=	p5-Set-Crontab
 SUBDIR+=	p5-Set-Infinite
 SUBDIR+=	p5-Spreadsheet-ParseExcel
+SUBDIR+=	p5-Spreadsheet-Read
+SUBDIR+=	p5-Spreadsheet-ReadSXC
 SUBDIR+=	p5-Spreadsheet-WriteExcel
+SUBDIR+=	p5-Spreadsheet-XLSX
 SUBDIR+=	pari
 SUBDIR+=	pari-galdata
 SUBDIR+=	pear-Numbers_Roman
@@ -138,8 +142,10 @@ SUBDIR+=	py-ephem
 SUBDIR+=	py-fpconst
 SUBDIR+=	py-networkx
 SUBDIR+=	py-numarray
+SUBDIR+=	py-numpy
 SUBDIR+=	py-pytables
 SUBDIR+=	py-rpy
+SUBDIR+=	py-scipy
 SUBDIR+=	py-sympy
 SUBDIR+=	qalculate
 SUBDIR+=	qalculate-bases
@@ -158,6 +164,7 @@ SUBDIR+=	snns
 SUBDIR+=	statist
 SUBDIR+=	superlu
 SUBDIR+=	tasp-vsipl
+SUBDIR+=	texdrive
 SUBDIR+=	tochnog
 SUBDIR+=	udunits
 SUBDIR+=	units

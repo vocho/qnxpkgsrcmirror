@@ -1,5 +1,5 @@
 #! @PERL@
-# $NetBSD: pkglint.pl,v 1.792 2008/12/02 09:00:28 rillig Exp $
+# $NetBSD: pkglint.pl,v 1.799 2009/01/26 16:14:45 rillig Exp $
 #
 
 # pkglint - static analyzer and checker for pkgsrc packages
@@ -1443,10 +1443,13 @@ my $seen_bsd_prefs_mk;		# Has bsd.prefs.mk already been included?
 
 my $pkgctx_vardef;		# { varname => line }
 my $pkgctx_varuse;		# { varname => line }
-my $pkgctx_bl3;			# buildlink3.mk name => line of inclusion
+my $pkgctx_bl3;			# { buildlink3.mk name => line } (contains
+				# only buildlink3.mk files that are directly
+				# included)
 my $pkgctx_plist_subst_cond;	# { varname => 1 } list of all variables
 				# that are used as conditionals (@comment
 				# or nothing) in PLISTs.
+my $pkgctx_included;		# { fname => line }
 my $seen_Makefile_common;	# Does the package have any .includes?
 
 # Context of the Makefile that is currently checked.
@@ -3336,7 +3339,7 @@ sub load_package_Makefile($$) {
 
 	$opt_debug_trace and log_debug($fname, NO_LINES, "load_package_Makefile()");
 
-	if (!readmakefile($fname, $lines = [], $all_lines = [], {})) {
+	if (!readmakefile($fname, $lines = [], $all_lines = [], $pkgctx_included = {})) {
 		log_error($fname, NO_LINE_NUMBER, "Cannot be read.");
 		return false;
 	}
@@ -3650,7 +3653,13 @@ sub checkline_relative_pkgdir($$) {
 	checkline_relative_path($line, $path, true);
 	$path = resolve_relative_path($path, false);
 
-	if ($path !~ m"^(?:\./)?\.\./\.\./[^/]+/[^/]+$") {
+	if ($path =~ m"^(?:\./)?\.\./\.\./([^/]+/[^/]+)$") {
+		my $otherpkgpath = $1;
+		if (! -f "$cwd_pkgsrcdir/$otherpkgpath/Makefile") {
+			$line->log_error("There is no package in $otherpkgpath.");
+		}
+
+	} else {
 		$line->log_warning("\"${path}\" is not a valid relative package directory.");
 		$line->explain_warning(
 "A relative pathname always starts with \"../../\", followed",
@@ -5071,8 +5080,8 @@ sub checkline_mk_vartype_basic($$$$$$$$) {
 				$line->explain_warning(
 "This option is not documented in the mk/defaults/options.description",
 "file. If this is not a typo, please think of a brief but precise",
-"description and ask on the tech-pkg\@NetBSD.org for inclusion in the",
-"database.");
+"description and either update that file yourself or ask on the",
+"tech-pkg\@NetBSD.org mailing list.");
 			}
 
 		} elsif ($value_novar =~ m"^-?([a-z][-0-9a-z_]*)$") {
@@ -6790,6 +6799,10 @@ sub checkfile_package_Makefile($$) {
 
 	checkperms($fname);
 
+	if (!exists($pkgctx_vardef->{"PKG_DESTDIR_SUPPORT"}) && !exists($pkgctx_vardef->{"META_PACKAGE"})) {
+		log_warning($fname, NO_LINE_NUMBER, "This package has not set PKG_DESTDIR_SUPPORT.");
+	}
+
 	if (!exists($pkgctx_vardef->{"PLIST_SRC"})
 	    && !exists($pkgctx_vardef->{"GENERATE_PLIST"})
 	    && !exists($pkgctx_vardef->{"META_PACKAGE"})
@@ -6876,6 +6889,10 @@ sub checkfile_package_Makefile($$) {
 		: (undef, undef, undef, undef);
 	if (defined($effective_pkgname_line)) {
 		$opt_debug_misc and $effective_pkgname_line->log_debug("Effective name=${effective_pkgname} base=${effective_pkgbase} version=${effective_pkgversion}.");
+		# XXX: too many false positives
+		if (false && $pkgpath =~ m"/([^/]+)$" && $effective_pkgbase ne $1) {
+			$effective_pkgname_line->log_warning("Mismatch between PKGNAME ($effective_pkgname) and package directory ($1).");
+		}
 	}
 
 	checkpackage_possible_downgrade();
@@ -7079,6 +7096,7 @@ sub checkfile_patch($) {
 	};
 
 	my $transitions =
+		# [ from state, regex, to state, action ]
 		[   [PST_START, re_patch_rcsid, PST_CENTER, sub() {
 			checkline_rcsid($line, "");
 		}], [PST_START, undef, PST_CENTER, sub() {
@@ -7420,6 +7438,9 @@ sub checkfile_PLIST($) {
 "created the directory.");
 				}
 
+				if ($pkgpath ne "graphics/hicolor-icon-theme" && $arg =~ m"^share/icons/hicolor(?:$|/)") {
+					$line->log_error("Please .include \"../../graphics/hicolor-icon-theme/buildlink3.mk\" and remove this line.");
+				}
 			} elsif ($cmd eq "imake-man") {
 				my (@args) = split(/\s+/, $arg);
 				if (@args != 3) {
@@ -7552,6 +7573,12 @@ sub checkfile_PLIST($) {
 					$opt_warn_extra and $line->log_warning("Manual page missing for sbin/${binname}.");
 				}
 
+			} elsif ($text =~ m"^share/applications/.*\.desktop$") {
+				my $f = "../../sysutils/desktop-file-utils/desktopdb.mk";
+				if (defined($pkgctx_included) && !exists($pkgctx_included->{$f})) {
+					$line->log_warning("Packages that install a .desktop entry should .include \"$f\".");
+				}
+
 			} elsif ($dirname eq "share/aclocal" && $basename =~ m"\.m4$") {
 				# Fine.
 
@@ -7566,6 +7593,9 @@ sub checkfile_PLIST($) {
 
 			} elsif (defined($effective_pkgbase) && $text =~ m"^share/\Q${effective_pkgbase}\E/") {
 				# Fine.
+
+			} elsif ($pkgpath ne "graphics/hicolor-icon-theme" && $text =~ m"^share/icons/hicolor/icon-theme\.cache") {
+				$line->log_error("Please .include \"../../graphics/hicolor-icon-theme/buildlink3.mk\" and remove this line.");
 
 			} elsif ($text =~ m"^share/info/") {
 				$line->log_warning("Info pages should be installed into info/, not share/info/.");
@@ -7982,6 +8012,7 @@ sub checkdir_package() {
 	$pkgctx_varuse = {};
 	$pkgctx_bl3 = {};
 	$pkgctx_plist_subst_cond = {};
+	$pkgctx_included = {};
 	$seen_Makefile_common = false;
 
 	# we need to handle the Makefile first to get some variables
@@ -8052,6 +8083,7 @@ cleanup:
 	$pkgctx_varuse = undef;
 	$pkgctx_bl3 = undef;
 	$pkgctx_plist_subst_cond = undef;
+	$pkgctx_included = undef;
 	$seen_Makefile_common = undef;
 }
 

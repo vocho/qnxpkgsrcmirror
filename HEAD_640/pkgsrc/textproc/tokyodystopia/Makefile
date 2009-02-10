@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.3 2008/10/23 05:13:00 obache Exp $
+# $NetBSD: Makefile,v 1.6 2009/01/04 11:02:43 obache Exp $
 #
 
-DISTNAME=	tokyodystopia-0.9.8
+DISTNAME=	tokyodystopia-0.9.9
 CATEGORIES=	textproc
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=tokyocabinet/}
 

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.24 2008/06/20 01:09:25 joerg Exp $
+# $NetBSD: Makefile,v 1.26 2009/01/04 18:01:00 wiz Exp $
 
 DISTNAME=	qalculate-gtk-0.9.6
 PKGREVISION=	1
@@ -7,7 +7,7 @@ MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=qalculate/}
 
 MAINTAINER=	adam@NetBSD.org
 HOMEPAGE=	http://qalculate.sourceforge.net/
-COMMENT=	Qalculate is a modern multi-purpose desktop calculator
+COMMENT=	Modern multi-purpose desktop calculator (GNOME version)
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
@@ -25,5 +25,5 @@ pre-configure:
 .include "../../devel/libglade/buildlink3.mk"
 .include "../../devel/libgnomeui/buildlink3.mk"
 .include "../../math/qalculate/buildlink3.mk"
-.include "../../textproc/scrollkeeper/omf.mk"
+.include "../../textproc/rarian/omf.mk"
 .include "../../mk/bsd.pkg.mk"

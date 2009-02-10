@@ -1,16 +1,11 @@
-# $NetBSD: DEINSTALL,v 1.1 2006/10/12 13:38:35 joerg Exp $
-
-TEXMF_CNF=@PKG_TEXMFPREFIX@/web2c/texmf.cnf
+# $NetBSD: DEINSTALL,v 1.3 2009/01/11 09:13:00 minskim Exp $
 
 case ${STAGE} in
 DEINSTALL)
-	${AWK} '\
-BEGIN { do_print=1; } \
-/^%%% BEGIN hugelatex$/ { do_print=0; } \
-{ if (do_print) print $0; } \
-/^%%% END hugelatex$/ { do_print=1; }' ${TEXMF_CNF} > ${TEXMF_CNF}.tmp &&
-	${MV} ${TEXMF_CNF}.tmp ${TEXMF_CNF}
-	${RM} @PKG_TEXMFPREFIX@/web2c/hugelatex.fmt
-	${RM} @PKG_TEXMFPREFIX@/web2c/hugelatex.log
+	${RM} @VARBASE@/lib/texmf/web2c/hugelatex.fmt
+	${RM} @VARBASE@/lib/texmf/web2c/hugelatex.log
+	@MKTEXLSR@ @VARBASE@/lib/texmf
+	;;
+*)
 	;;
 esac

@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.75 2008/11/24 16:36:09 wiz Exp $
+# $NetBSD: Makefile,v 1.79 2009/02/06 17:27:10 drochner Exp $
 #
 
-DISTNAME=	evolution-data-server-2.24.2
+DISTNAME=	evolution-data-server-2.24.4.1
 CATEGORIES=	mail gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/evolution-data-server/2.24/}
 EXTRACT_SUFX=	.tar.bz2
@@ -37,6 +37,10 @@ LIBS+=		-lsemaphore
 
 .if ${OPSYS} == "Darwin"
 CPPFLAGS+=	-DBIND_8_COMPAT
+.endif
+
+.if !empty(PKGSRC_COMPILER:Msunpro)
+CFLAGS.SunOS+=	-D__FUNCTION__=__func__
 .endif
 
 CONFIGURE_ARGS+=	--with-nspr-includes=${BUILDLINK_PREFIX.nspr}/include/nspr

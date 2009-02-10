@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.32 2008/07/14 12:56:18 joerg Exp $
+# $NetBSD: Makefile,v 1.34 2009/01/08 10:04:29 wiz Exp $
 #
 
-DISTNAME=	lablgtk-2.10.1
-PKGREVISION=	1
+DISTNAME=	lablgtk-2.12.0
 CATEGORIES=	x11
 MASTER_SITES=	http://wwwfun.kurims.kyoto-u.ac.jp/soft/olabl/dist/
 
@@ -19,21 +18,21 @@ BUILD_TARGET=		world
 
 BUILDLINK_DEPMETHOD.ocaml=	full
 
-CONFLICTS=	lablgtk2-2.*
+CONFLICTS=	lablgtk2-2.*{,nb*}
 
 .include "../../mk/bsd.prefs.mk"
 
 # Stub libraries for functions missing from base system.
 PLIST_VARS+=	stubs
-.if !empty(MACHINE_PLATFORM:MDarwin-*-powerpc) || \
-    ${OPSYS} == "DragonFly" || ${OPSYS} == "NetBSD" || \
-    ${OPSYS} == "FreeBSD" || ${OPSYS} == "SunOS"
+
+.if ${OPSYS} == "Darwin" || ${OPSYS} == "DragonFly" || \
+    ${OPSYS} == "NetBSD" || ${OPSYS} == "FreeBSD" || \
+    ${OPSYS} == "SunOS"
 PLIST.stubs=	yes
 .endif
 
 .include "options.mk"
 
 .include "../../lang/ocaml/buildlink3.mk"
-.include "../../textproc/gtkspell/buildlink3.mk"
 .include "../../x11/gtk2/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

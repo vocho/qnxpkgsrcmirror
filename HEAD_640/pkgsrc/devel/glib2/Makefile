@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.150 2008/12/01 13:25:47 wiz Exp $
+# $NetBSD: Makefile,v 1.154 2009/01/25 16:56:20 drochner Exp $
 
 # When updating glib2, please apply patch-ak to configure.in
 # Then run a matching version of autoconf to regen patch-aa.
-DISTNAME=		glib-2.18.3
-PKGREVISION=		1
+DISTNAME=		glib-2.18.4
 PKGNAME=		${DISTNAME:S/glib/glib2/}
+PKGREVISION=		1
 CATEGORIES=		devel
 MASTER_SITES=		ftp://ftp.gtk.org/pub/glib/2.18/ \
 			ftp://ftp.cs.umn.edu/pub/gimp/pub/glib/2.18/ \
@@ -73,6 +73,11 @@ SUBST_MESSAGE.thr=	Fixing libgthread.
 
 .if !empty(MACHINE_PLATFORM:MDarwin-[56].*-*)
 CONFIGURE_ENV+=		gt_cv_c_wchar_t=no
+.endif
+
+# Workaround for Bug#562310
+.if ${OPSYS} == "Darwin" || ${OPSYS} == "SunOS"
+TOOLS_NOOP+=		gtkdoc-rebase
 .endif
 
 .if ${OPSYS} == "HPUX"

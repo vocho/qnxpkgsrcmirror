@@ -1,13 +1,12 @@
-# $NetBSD: Makefile,v 1.2 2008/10/19 19:19:17 he Exp $
+# $NetBSD: Makefile,v 1.5 2009/01/13 00:02:22 he Exp $
 
-DISTNAME=	Rose-HTML-Objects-0.554
+DISTNAME=	Rose-HTML-Objects-0.601
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	1
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Rose/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/perldoc?Rose::HTML::Objects
+HOMEPAGE=	http://search.cpan.org/dist/Rose-HTML-Objects/
 COMMENT=	Object-oriented interfaces for HTML
 
 DEPENDS+=	p5-DateTime>=0.20:../../time/p5-DateTime
@@ -18,9 +17,11 @@ DEPENDS+=	p5-HTML-Parser>=0:../../www/p5-HTML-Parser
 DEPENDS+=	p5-Image-Size>=0:../../graphics/p5-Image-Size
 DEPENDS+=	p5-URI>=0:../../www/p5-URI
 DEPENDS+=	p5-Scalar-List-Utils>=0:../../devel/p5-Scalar-List-Utils
-DEPENDS+=	p5-Rose-Object>=0.82:../../devel/p5-Rose-Object
+DEPENDS+=	p5-Rose-Object>=0.85.4:../../devel/p5-Rose-Object
 DEPENDS+=	p5-Rose-DateTime>=0.532:../../time/p5-Rose-DateTime
 DEPENDS+=	p5-Rose-URI>=0.021:../../www/p5-Rose-URI
+# For tests:
+BUILD_DEPENDS+=	p5-Test-Memory-Cycle>=0:../../devel/p5-Test-Memory-Cycle
 
 USE_LANGUAGES=	# empty
 PERL5_PACKLIST=		auto/Rose/HTML/Objects/.packlist

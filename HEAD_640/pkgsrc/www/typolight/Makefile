@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.4 2008/11/06 11:23:14 taca Exp $
+# $NetBSD: Makefile,v 1.11 2009/01/25 04:46:06 taca Exp $
 #
 
 DISTNAME=	typolight-${TL_VERSION}
@@ -9,18 +9,20 @@ MAINTAINER=	taca@NetBSD.org
 HOMEPAGE=	http://www.typolight.org/
 COMMENT=	Powerful web content management system (CMS)
 
-DEPENDS+=	${PHP_PKG_PREFIX}-gd>=5.1.0:../../graphics/gd
+DEPENDS+=	${PHP_PKG_PREFIX}-gd>=5.1.0:../../graphics/php-gd
 DEPENDS+=	${PHP_PKG_PREFIX}-mbstring>=5.1.0:../../misc/php-mbstring
 DEPENDS+=	${PHP_PKG_PREFIX}-mysql>=5.1.0:../../databases/php-mysql
 DEPENDS+=	${PHP_PKG_PREFIX}-mcrypt>=5.1.0:../../security/php-mcrypt
 DEPENDS+=	${PHP_PKG_PREFIX}-soap>=5.1.0:../../net/php5-soap
+
+PKG_DESTDIR_SUPPORT=	destdir
 
 PHP_VERSIONS_ACCEPTED=	5
 
 USE_TOOLS=	pax
 NO_BUILD=	yes
 
-EG_DATA=	basic.css news.xml print.css system/config tl_files
+EG_DATA=	${WWW_EG_FILES} system/config tl_files
 EG_FILES=	system/config/config.php system/config/countries.php \
 		system/config/dcaconfig.php system/config/languages.php \
 		system/config/tcpdf.php system/config/timezones.php \
@@ -31,7 +33,7 @@ TMPL_FILES=	tl_files/tiny_templates/index.html \
 		tl_files/xBrowser_style_sheets/xElements.css \
 		tl_files/xBrowser_style_sheets/xForm.css \
 		tl_files/xBrowser_style_sheets/xNavigation.css
-WWW_EG_FILES=	basic.css news.xml print.css
+WWW_EG_FILES=	basic.css print.css robots.txt
 
 CONF_FILES_PERMS+=	${TL_EGDIR}/system/config/localconfig.php \
 			${TL_WEBDIR}/system/config/localconfig.php \
@@ -49,7 +51,8 @@ REQD_FILES+=		${TL_EGDIR}/${f} ${TL_WEBDIR}/${f}
 .endfor
 
 .for f in ${WWW_EG_FILES}
-CONF_FILES_PERMS+=	${TL_EGDIR}/${f} ${TL_WEBDIR}/${f} www www 0644
+CONF_FILES_PERMS+=	${TL_EGDIR}/${f} ${TL_WEBDIR}/${f} \
+			${APACHE_USER} ${APACHE_GROUP} 0644
 .endfor
 
 SUBST_CLASSES+=		conf
@@ -60,7 +63,7 @@ SUBST_STAGE.conf=	post-configure
 
 WWW_FILES=	._htaccess CHANGELOG.txt INSTALL.txt LICENSE.txt \
 		cron.php flash.php index.php \
-		plugins robots.txt templates typolight
+		plugins templates typolight
 WWW_SYSFILES=	config/.htaccess constants.php drivers functions.php \
 		html iefixes.css initialize.php interface.php libraries \
 		logs/.htaccess mbstring.php modules themes tmp/.htaccess \
@@ -69,9 +72,11 @@ WWW_SYSFILES=	config/.htaccess constants.php drivers functions.php \
 INSTALLATION_DIRS+=	${TL_DOCDIR} ${TL_EGDIR} ${TL_WEBDIR}/system/config
 OWN_DIRS_PERMS+= \
 		${TL_WEBDIR} ${BINOWN} ${APACHE_GROUP} 0775 \
+		${TL_WEBDIR}/plugins ${BINOWN} ${APACHE_GROUP} 0775 \
 		${TL_WEBDIR}/system ${BINOWN} ${APACHE_GROUP} 0775 \
 		${TL_WEBDIR}/system/drivers ${BINOWN} ${APACHE_GROUP} 0775 \
 		${TL_WEBDIR}/system/html ${BINOWN} ${APACHE_GROUP} 0770 \
+		${TL_WEBDIR}/system/libraries ${BINOWN} ${APACHE_GROUP} 0775 \
 		${TL_WEBDIR}/system/logs ${BINOWN} ${APACHE_GROUP} 0770 \
 		${TL_WEBDIR}/system/modules ${BINOWN} ${APACHE_GROUP} 0775 \
 		${TL_WEBDIR}/system/themes ${BINOWN} ${APACHE_GROUP} 0775 \
@@ -91,8 +96,7 @@ PKG_USERS_VARS+=	APACHE_USER
 pre-configure:
 	${CP} ${FILESDIR}/typolight.conf ${WRKDIR}
 	cd ${WRKSRC}; ${RM} -rf music_academy.css \
-		templates/example_website.sql tl_files/music_academy; \
-		${CP} /dev/null news.xml
+		templates/example_website.sql tl_files/music_academy
 
 do-install:
 	cd ${WRKSRC}; pax -rw -pm ${WWW_FILES} ${DESTDIR}${PREFIX}/${TL_WEBDIR}

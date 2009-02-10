@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.15 2008/12/01 02:02:33 jmcneill Exp $
-#
+# $NetBSD: Makefile,v 1.33 2009/01/25 16:20:36 tron Exp $
 
 DISTNAME=		hal-0.5.11
-PKGREVISION=		11
+PKGREVISION=		20
 CATEGORIES=		sysutils
 MASTER_SITES=		http://hal.freedesktop.org/releases/
 EXTRACT_SUFX=		.tar.bz2
@@ -11,7 +10,8 @@ MAINTAINER=		jmcneill@NetBSD.org
 HOMEPAGE=		http://hal.freedesktop.org/
 COMMENT=		FreeDesktop hardware abstraction layer
 
-BUILD_DEFS+=		VARBASE
+BUILD_DEFS+=		VARBASE PKG_SYSCONFBASE
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=		YES
 USE_DIRS+=		xdg-1.4
@@ -25,8 +25,9 @@ SPECIAL_PERMS+=		${VARBASE}/cache/hald ${HAL_USER} ${HAL_GROUP} 0644
 
 EGDIR=			${PREFIX}/share/examples/hal
 
-CONF_FILES=		${EGDIR}/hal.conf ${PREFIX}/etc/dbus-1/system.d/hal.conf
+CONF_FILES=		${EGDIR}/hal.conf ${PKG_SYSCONFBASE}/dbus-1/system.d/hal.conf
 
+CONFIGURE_ARGS+=        --sysconfdir=${PKG_SYSCONFBASE}
 CONFIGURE_ARGS+=	--localstatedir=${VARBASE}
 CONFIGURE_ARGS+=	--with-pci-ids=${PREFIX}/share/pciids
 CONFIGURE_ARGS+=	--with-usb-ids=${PREFIX}/share/usbids
@@ -34,24 +35,34 @@ CONFIGURE_ARGS+=	--with-usb-ids=${PREFIX}/share/usbids
 .include "../../mk/bsd.prefs.mk"
 
 .if ${OPSYS} == "FreeBSD" || ${OPSYS} == "DragonFly"
+.include "../../devel/libvolume_id/buildlink3.mk"
 CONFIGURE_ARGS+=	--with-eject=/usr/sbin/cdcontrol
 CONFIGURE_ARGS+=	--with-backend=freebsd
 PLIST_SRC=		PLIST.FreeBSD PLIST
-.endif
 
-.if !empty(MACHINE_PLATFORM:MNetBSD-[5-9]*)
+.elif !empty(MACHINE_PLATFORM:MNetBSD-[5-9]*)
+.include "../../devel/libvolume_id/buildlink3.mk"
 CONFIGURE_ARGS+=	--with-backend=netbsd
-PLIST_SRC=		PLIST.NetBSD PLIST
 HAL_GROUP=		operator
-.elif ${OPSYS} == "NetBSD"
-# Pull in the dummy backend for older NetBSD
-CONFIGURE_ARGS+=	--with-backend=dummy
-.endif
 
-.if ${OPSYS} == "Linux"
+.elif ${OPSYS} == "Linux"
 .include "../../devel/libusb/buildlink3.mk"
+.include "../../devel/libvolume_id/buildlink3.mk"
 .include "../../sysutils/pciutils/buildlink3.mk"
 CONFIGURE_ARGS+=	--with-backend=linux
+CONF_FILES+=		${EGDIR}/90-hal.rules \
+			${PKG_SYSCONFBASE}/udev/rules.d/90-hal.rules
+
+.else	# Unsupported systems
+# Pull in the dummy backend
+CONFIGURE_ARGS+=	--with-backend=dummy
+PLIST_SRC=		PLIST
+.endif
+
+CFLAGS.SunOS+=		-Du_int32_t=uint32_t
+
+.if ${OPSYS} == "Darwin"
+BUILDLINK_TRANSFORM+=	rm:-Wl,--as-needed
 .endif
 
 REPLACE_INTERPRETER+=	bash
@@ -65,6 +76,7 @@ HAL_USER?=		haldaemon
 HAL_GROUP?=		haldaemon
 CONFIGURE_ARGS+=	--with-hal-user=${HAL_USER}
 CONFIGURE_ARGS+=	--with-hal-group=${HAL_GROUP}
+CONFIGURE_ARGS+=	--disable-pmu
 
 RCD_SCRIPTS=		hal
 
@@ -86,11 +98,11 @@ pre-configure:
 
 .include "../../devel/GConf/schemas.mk"
 .include "../../devel/glib2/buildlink3.mk"
-.include "../../devel/libvolume_id/buildlink3.mk"
 .include "../../misc/pciids/buildlink3.mk"
 .include "../../misc/usbids/buildlink3.mk"
 .include "../../security/policykit/buildlink3.mk"
 .include "../../sysutils/dbus/buildlink3.mk"
 .include "../../sysutils/dbus-glib/buildlink3.mk"
 .include "../../sysutils/hal-info/buildlink3.mk"
+.include "../../textproc/expat/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

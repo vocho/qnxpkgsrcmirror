@@ -1,4 +1,4 @@
-# $NetBSD: replace.mk,v 1.215 2008/11/15 20:20:44 minskim Exp $
+# $NetBSD: replace.mk,v 1.218 2009/02/05 18:44:43 joerg Exp $
 #
 # Copyright (c) 2005 The NetBSD Foundation, Inc.
 # All rights reserved.
@@ -580,13 +580,13 @@ TOOLS_PATH.m4=			${TOOLS_PREFIX.m4}/bin/gm4
 .endif
 
 .if !defined(TOOLS_IGNORE.mail) && !empty(_USE_TOOLS:Mmail)
-.  if !empty(PKGPATH:Mmail/nail)
+.  if !empty(PKGPATH:Mmail/heirloom-mailx)
 MAKEFLAGS+=			TOOLS_IGNORE.mail=
 .  elif !empty(_TOOLS_USE_PKGSRC.mail:M[yY][eE][sS])
-TOOLS_DEPENDS.mail?=		nail>=11.22:../../mail/nail
+TOOLS_DEPENDS.mail?=		heirloom-mailx-[0-9]*:../../mail/heirloom-mailx
 TOOLS_CREATE+=			mail
-TOOLS_FIND_PREFIX+=		TOOLS_PREFIX.mail=nail
-TOOLS_PATH.mail=		${TOOLS_PREFIX.mail}/bin/nail
+TOOLS_FIND_PREFIX+=		TOOLS_PREFIX.mail=heirloom-mailx
+TOOLS_PATH.mail=		${TOOLS_PREFIX.mail}/bin/mailx
 .  endif
 .endif
 
@@ -746,11 +746,7 @@ TOOLS_PATH.shlock=		${TOOLS_PREFIX.shlock}/bin/shlock
 .  if !empty(PKGPATH:Marchivers/pax)
 MAKEFLAGS+=			TOOLS_IGNORE.tar=
 .  elif !empty(_TOOLS_USE_PKGSRC.tar:M[yY][eE][sS])
-#
-# This is installed by pkgsrc bootstrap, and is never registered, so
-# comment out the dependency on it.
-#
-#TOOLS_DEPENDS.tar?=		pax>=20040802:../../archivers/pax
+TOOLS_DEPENDS.tar?=		pax>=20040802:../../archivers/pax
 TOOLS_CREATE+=			tar
 TOOLS_FIND_PREFIX+=		TOOLS_PREFIX.tar=pax
 TOOLS_PATH.tar=			${TOOLS_PREFIX.tar}/bin/tar
@@ -1249,7 +1245,8 @@ FIND_PREFIX:=	${TOOLS_FIND_PREFIX}
 #####
 .    if defined(_TOOLS_DEPMETHOD.${_t_}) && defined(TOOLS_DEPENDS.${_t_})
 .      for _dep_ in ${TOOLS_DEPENDS.${_t_}}
-.        if empty(${_TOOLS_DEPMETHOD.${_t_}}:C/\:.*$//:M${_dep_:C/\:.*$//})
+_dep_test := ${_dep_:C/\:.*$//}
+.        if empty(${_TOOLS_DEPMETHOD.${_t_}}:C/\:.*$//:M${_dep_test})
 ${_TOOLS_DEPMETHOD.${_t_}}+=	${_dep_}
 .        endif
 .      endfor

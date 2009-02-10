@@ -394,9 +394,11 @@ tmp(void)
 	char *envtmp;
 	char path[PATH_MAX];
 
+#if HAVE_ISSETUGID
 	if (issetugid())
 		envtmp = NULL;
 	else
+#endif
 		envtmp = getenv("TMPDIR");
 
 	len = snprintf(path,

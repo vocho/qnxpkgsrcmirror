@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.49 2008/11/10 23:43:39 wiz Exp $
+# $NetBSD: Makefile,v 1.53 2009/01/29 16:56:52 joerg Exp $
 #
 
 DISTNAME=	avidemux_2.4.3
 PKGNAME=	${DISTNAME:S/_/-/}
+PKGREVISION=	3
 CATEGORIES=	multimedia
 MASTER_SITES=	http://download.berlios.de/avidemux/
 
@@ -18,6 +19,7 @@ USE_LIBTOOL=		yes
 USE_PKGLOCALEDIR=	yes
 USE_TOOLS+=		msgfmt pkg-config
 USE_CMAKE=		yes
+USE_DIRS+=		xdg-1.4
 
 CMAKE_ARGS+=		-DNO_ARTS=1
 
@@ -29,6 +31,16 @@ SUBST_FILES.audio=	avidemux/ADM_audiodevice/ADM_deviceoss.cpp
 SUBST_SED.audio=	-e "s|\\/dev\\/dsp|${DEVOSSAUDIO}|g"
 SUBST_MESSAGE.audio=	Fixing hardcoded audio device.
 
+INSTALLATION_DIRS=	share/applications share/icons/hicolor/64x64/apps
+
+post-install:
+	${INSTALL_DATA} ${WRKSRC}/avidemux2.desktop \
+	    ${DESTDIR}${PREFIX}/share/applications/avidemux2.desktop
+	${INSTALL_DATA} ${WRKSRC}/avidemux_icon.png \
+	    ${DESTDIR}${PREFIX}/share/icons/hicolor/64x64/apps/avidemux.png
+
+.include "options.mk"
+
 .include "../../audio/faac/buildlink3.mk"
 .include "../../audio/faad2/buildlink3.mk"
 .include "../../audio/lame/buildlink3.mk"
@@ -39,6 +51,7 @@ SUBST_MESSAGE.audio=	Fixing hardcoded audio device.
 .include "../../devel/SDL/buildlink3.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../graphics/freetype2/buildlink3.mk"
+.include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../lang/spidermonkey/buildlink3.mk"
 .include "../../multimedia/xvidcore/buildlink3.mk"
 .include "../../multimedia/x264-devel/buildlink3.mk"

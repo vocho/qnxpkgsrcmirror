@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.12 2008/12/02 16:42:17 wiz Exp $
+# $NetBSD: Makefile,v 1.17 2009/01/14 13:40:46 wiz Exp $
 #
 
-DISTNAME=		gnome-terminal-2.24.2
+DISTNAME=		gnome-terminal-2.24.3
 CATEGORIES=		x11 gnome
 MASTER_SITES=		${MASTER_SITE_GNOME:=sources/gnome-terminal/2.24/}
 EXTRACT_SUFX=		.tar.bz2
@@ -25,6 +25,10 @@ CONFIGURE_ENV+=		ac_cv_path_GTK_BUILDER_CONVERT="${PYTHONBIN} ${BUILDLINK_PREFIX
 GCONF_SCHEMAS=	gnome-terminal.schemas
 
 PYTHON_FOR_BUILD_ONLY=	YES
+.include "../../lang/python/pyversion.mk"
+.if ${PYPKGPREFIX} == "py24" || ${PYPKGPREFIX} == "py23" || ${PYPKGPREFIX} == "py21"
+BUILD_DEPENDS+=		${PYPKGPREFIX}-expat-[0-9]*:../../textproc/py-expat
+.endif
 
 BUILDLINK_API_DEPENDS.GConf+=	GConf>=2.14.0
 .include "../../devel/GConf/schemas.mk"

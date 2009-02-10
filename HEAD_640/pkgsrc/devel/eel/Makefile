@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.46 2008/12/02 14:58:06 wiz Exp $
+# $NetBSD: Makefile,v 1.48 2009/01/27 20:31:29 drochner Exp $
 
 DISTNAME=	eel-2.24.1
 CATEGORIES=	devel gnome
