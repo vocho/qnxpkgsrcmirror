@@ -33,11 +33,9 @@ if type getopts >/dev/null 2>&1; then
 	getoptcmd='getopts ${opts} opt && opt=-${opt}'
 	optargcmd=':'
 	optremcmd='shift $((${OPTIND} -1))'
-	echo "Here 1"
 else
-	echo "Here 2"
 	type getopt >/dev/null 2>&1 ||
-	    bomb "/bin/sh shell is too old; try ksh or bash"
+	    echo "/bin/sh shell is too old; try ksh or bash" && exit 1
 
 	# Use old-style getopt(1) (doesn't handle whitespace in args).
 	#
