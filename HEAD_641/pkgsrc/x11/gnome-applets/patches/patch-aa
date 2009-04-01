@@ -1,0 +1,13 @@
+$NetBSD: patch-aa,v 1.8 2008/10/27 04:23:01 wiz Exp $
+
+--- battstat/sounds/Makefile.in.orig	2008-09-25 23:51:38.000000000 +0000
++++ battstat/sounds/Makefile.in
+@@ -306,7 +306,7 @@ sysconfdir = @sysconfdir@
+ target_alias = @target_alias@
+ top_builddir = @top_builddir@
+ top_srcdir = @top_srcdir@
+-soundlistdir = $(sysconfdir)/sound/events
++soundlistdir = $(datadir)/examples/gnome-applets/sound/events
+ soundlist_in_files = battstat_applet.soundlist.in
+ soundlist_DATA = $(soundlist_in_files:.soundlist.in=.soundlist)
+ EXTRA_DIST = $(soundlist_DATA) $(soundlist_in_files)

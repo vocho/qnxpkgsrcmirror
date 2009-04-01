@@ -1,0 +1,36 @@
+@comment $NetBSD: PLIST,v 1.2 2008/12/19 23:12:46 tnn Exp $
+bin/ecl
+bin/ecl-config
+include/ecl/bytecodes.h
+include/ecl/config.h
+include/ecl/configpre.h
+include/ecl/cs.h
+include/ecl/ecl-cmp.h
+include/ecl/ecl-inl.h
+include/ecl/ecl.h
+include/ecl/eval.h
+include/ecl/external.h
+include/ecl/internal.h
+include/ecl/number.h
+include/ecl/object.h
+include/ecl/page.h
+include/ecl/stacks.h
+include/ecl/unify.h
+lib/${PKGNAME}/BUILD-STAMP
+lib/${PKGNAME}/asdf.fas
+lib/${PKGNAME}/cmp.fas
+lib/${PKGNAME}/defsystem.fas
+lib/${PKGNAME}/dpp
+lib/${PKGNAME}/ecl_min
+lib/${PKGNAME}/help.doc
+lib/${PKGNAME}/profile.fas
+lib/${PKGNAME}/rt.fas
+lib/${PKGNAME}/serve-event.fas
+lib/${PKGNAME}/sockets.fas
+lib/${PKGNAME}/sysfun.lsp
+lib/libecl.so
+lib/libecl.so.8
+lib/libecl.so.8.12
+lib/libecl.so.${PKGVERSION}
+@dirrm lib/${PKGNAME}
+@dirrm include/ecl

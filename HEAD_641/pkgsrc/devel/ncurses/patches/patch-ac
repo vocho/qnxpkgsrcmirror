@@ -1,0 +1,26 @@
+$NetBSD: patch-ac,v 1.16 2008/11/05 16:12:38 wiz Exp $
+
+--- configure.orig	2008-10-26 00:04:38.000000000 +0000
++++ configure
+@@ -2663,7 +2663,7 @@ if test "$cross_compiling" = yes ; then
+   LDCONFIG=:
+ else
+ case "$cf_cv_system_name" in #(vi
+-freebsd*) #(vi
++dragonfly*|freebsd*) #(vi
+   test -z "$LDCONFIG" && LDCONFIG="/sbin/ldconfig -R"
+   ;;
+ *) LDPATH=$PATH:/sbin:/usr/sbin
+@@ -8516,12 +8516,7 @@ case ".$MANPAGE_RENAMES" in #(vi
+ .no) #(vi
+   ;;
+ .|.yes)
+-  # Debian 'man' program?
+-  if test -f /etc/debian_version ; then
+-    MANPAGE_RENAMES=`cd $srcdir && pwd`/man/man_db.renames
+-  else
+     MANPAGE_RENAMES=no
+-  fi
+   ;;
+ esac
+ 

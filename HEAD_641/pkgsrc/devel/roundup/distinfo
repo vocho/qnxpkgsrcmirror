@@ -1,0 +1,5 @@
+$NetBSD: distinfo,v 1.24 2008/09/28 02:47:46 tonnerre Exp $
+
+SHA1 (roundup-1.4.6.tar.gz) = 5691718bc2454a11a39129518919da259fa4422b
+RMD160 (roundup-1.4.6.tar.gz) = 3b15b8e6a85dd6346ddc4faee6a5387b44ffc377
+Size (roundup-1.4.6.tar.gz) = 1370687 bytes

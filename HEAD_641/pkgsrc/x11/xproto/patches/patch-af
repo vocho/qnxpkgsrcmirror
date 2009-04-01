@@ -1,0 +1,22 @@
+$NetBSD$
+
+--- Xos.h.orig	2008-05-21 19:57:34.000000000 -0400
++++ Xos.h
+@@ -227,11 +227,13 @@ struct timeval {
+     (t)->tv_usec = _gtodtmp.millitm * 1000; \
+ }
+ #elif defined(_SEQUENT_) || defined(Lynx)
++#elif defined(__QNX__)
++  #if !defined(__QNXNTO__)
++    typedef unsigned long fd_mask;
++    /* Make sure we get 256 bit select masks */
++    #define FD_SETSIZE 256
++  #endif
+ #include <time.h>
+-#elif defined (__QNX__)
+-typedef unsigned long fd_mask;
+-/* Make sure we get 256 bit select masks */
+-#define FD_SETSIZE 256
+ #include <sys/select.h>
+ #include <sys/time.h>
+ #include <time.h>

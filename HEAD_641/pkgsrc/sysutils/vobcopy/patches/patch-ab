@@ -1,0 +1,13 @@
+$NetBSD: patch-ab,v 1.6 2008/07/13 16:14:00 tonnerre Exp $
+
+--- dvd.c.orig	2008-02-19 06:27:04.000000000 +0100
++++ dvd.c
+@@ -166,7 +166,7 @@ int get_device( char *path, char *device
+        if( !strcmp( path, buf.f_mntonname ) )
+          {
+            mounted = TRUE;
+-#if defined(__FreeBSD__) && (__FreeBSD_Version > 500000)
++#if defined(__DragonFly__) || (defined(__FreeBSD__) && (__FreeBSD_Version > 500000))
+           strcpy(device, buf.f_mntfromname);
+ #else
+ 	   strcpy(device, "/dev/r");

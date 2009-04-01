@@ -1,0 +1,38 @@
+$NetBSD: patch-ak,v 1.7 2008/10/25 16:38:09 wiz Exp $
+
+--- configure.orig	2008-10-20 03:32:45.000000000 +0000
++++ configure
+@@ -28706,6 +28706,7 @@ cat >>conftest.$ac_ext <<_ACEOF
+ 		#include <sys/socket.h>
+ 		#include <netinet/in.h>
+ 		#include <netdb.h>
++		#include <stddef.h>
+ 
+ 
+ int
+@@ -31566,13 +31567,13 @@ EVO_MARSHAL_RULE=$srcdir/marshal.mk
+ 
+ 
+ 	PTHREAD_LIB=""
+-	{ $as_echo "$as_me:$LINENO: checking for pthread_create in -lpthread" >&5
+-$as_echo_n "checking for pthread_create in -lpthread... " >&6; }
++	{ $as_echo "$as_me:$LINENO: checking for pthread_create in ${PTHREAD_LIB}" >&5
++$as_echo_n "checking for pthread_create in ${PTHREAD_LIB}... " >&6; }
+ if test "${ac_cv_lib_pthread_pthread_create+set}" = set; then
+   $as_echo_n "(cached) " >&6
+ else
+   ac_check_lib_save_LIBS=$LIBS
+-LIBS="-lpthread  $LIBS"
++LIBS="${PTHREAD_LIB}  $LIBS"
+ cat >conftest.$ac_ext <<_ACEOF
+ /* confdefs.h.  */
+ _ACEOF
+@@ -31632,7 +31633,7 @@ fi
+ { $as_echo "$as_me:$LINENO: result: $ac_cv_lib_pthread_pthread_create" >&5
+ $as_echo "$ac_cv_lib_pthread_pthread_create" >&6; }
+ if test $ac_cv_lib_pthread_pthread_create = yes; then
+-  PTHREAD_LIB="-lpthread"
++  PTHREAD_LIB="${PTHREAD_LIB}"
+ else
+   { $as_echo "$as_me:$LINENO: checking for pthread_create in -lpthreads" >&5
+ $as_echo_n "checking for pthread_create in -lpthreads... " >&6; }

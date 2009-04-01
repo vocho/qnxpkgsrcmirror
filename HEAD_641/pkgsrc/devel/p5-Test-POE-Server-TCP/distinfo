@@ -1,0 +1,5 @@
+$NetBSD: distinfo,v 1.2 2009/01/21 00:20:46 he Exp $
+
+SHA1 (Test-POE-Server-TCP-0.16.tar.gz) = 92237d758389df85053ba3a0a0b691f786043efb
+RMD160 (Test-POE-Server-TCP-0.16.tar.gz) = b0a025d74d8b4b4a53a43d1dfa5a9b4f11849f55
+Size (Test-POE-Server-TCP-0.16.tar.gz) = 29258 bytes

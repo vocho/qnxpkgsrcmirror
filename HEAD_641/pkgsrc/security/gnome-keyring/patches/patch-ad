@@ -1,0 +1,12 @@
+$NetBSD: patch-ad,v 1.5 2008/07/14 17:20:35 drochner Exp $
+
+--- common/gkr-unix-credentials.c.orig	2008-06-30 17:27:42.000000000 +0200
++++ common/gkr-unix-credentials.c
+@@ -126,7 +126,6 @@ gkr_unix_credentials_read (int sock, pid
+ 		cred = (struct sockcred *) CMSG_DATA (&cmsg.hdr);
+ 		*pid = 0;
+ 		*uid = cred->sc_euid;
+-		set_local_creds(sock, 0);
+ #elif defined(HAVE_GETPEEREID) /* OpenBSD */
+ 		uid_t euid;
+ 		gid_t egid;

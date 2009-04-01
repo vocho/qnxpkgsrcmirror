@@ -1,0 +1,9 @@
+@comment $NetBSD: PLIST,v 1.3 2008/10/29 20:50:16 christos Exp $
+bin/file
+include/magic.h
+lib/libmagic.la
+man/man1/file.1
+man/man3/libmagic.3
+man/man5/magic.5
+share/file/magic.mgc
+@dirrm share/file

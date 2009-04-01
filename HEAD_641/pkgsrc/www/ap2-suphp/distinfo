@@ -1,0 +1,6 @@
+$NetBSD: distinfo,v 1.4 2008/05/17 02:37:24 obache Exp $
+
+SHA1 (suphp-0.6.3.tar.gz) = 53588e8631cdc708da4d3d199e1b7218b9f4c87e
+RMD160 (suphp-0.6.3.tar.gz) = 6fe03b3eb704b6feaa991bb0099288c8d4b31cb3
+Size (suphp-0.6.3.tar.gz) = 377176 bytes
+SHA1 (patch-aa) = 7cad8ced11f0c9945af85077a30e1788a624bad1

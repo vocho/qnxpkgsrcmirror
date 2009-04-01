@@ -1,0 +1,21 @@
+@comment $NetBSD: PLIST,v 1.2 2008/06/19 15:19:45 taca Exp $
+bin/krubyinit
+bin/qtrubyinit
+bin/rbkconfig_compiler
+bin/rbkdeapi
+bin/rbkdesh
+bin/rbqtapi
+bin/rbqtsh
+bin/rbuic
+include/smoke.h
+lib/libsmokekde.la
+lib/libsmokeqt.la
+${RUBY_VENDORLIB}/KDE/korundum.rb
+${RUBY_VENDORLIB}/Korundum.rb
+${RUBY_VENDORLIB}/Qt.rb
+${RUBY_VENDORLIB}/Qt/qtruby.rb
+${RUBY_VENDORARCHLIB}/korundum.la
+${RUBY_VENDORARCHLIB}/qtruby.la
+${RUBY_VENDORARCHLIB}/qui.la
+@dirrm ${RUBY_VENDORLIB}/Qt
+@dirrm ${RUBY_VENDORLIB}/KDE

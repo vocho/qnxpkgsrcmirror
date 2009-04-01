@@ -1,0 +1,8 @@
+$NetBSD: distinfo,v 1.4 2008/06/22 13:36:59 peter Exp $
+
+SHA1 (pfstat-2.3.tar.gz) = 83be99fd5a7c997fc89c0858d27d471f7f9126c7
+RMD160 (pfstat-2.3.tar.gz) = 0048005aa114d49a8e1adefc8789c7aeb704f7ad
+Size (pfstat-2.3.tar.gz) = 18332 bytes
+SHA1 (patch-aa) = 72bf1f5806846833b20cacaec368744f25899e94
+SHA1 (patch-ab) = 24ab0271e0302e03f3b00feb9e4b20f97f932435
+SHA1 (patch-ac) = 451e8a66d108dab39277f7d8d93150150f822879

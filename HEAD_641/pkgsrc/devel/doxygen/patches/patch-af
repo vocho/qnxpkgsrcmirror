@@ -1,0 +1,12 @@
+$NetBSD: patch-af,v 1.3 2008/11/11 00:44:12 wiz Exp $
+
+--- doc/Makefile.in.orig	2008-01-01 10:39:53.000000000 +0000
++++ doc/Makefile.in
+@@ -31,6 +31,6 @@ clean: 
+ language: language.doc 
+ 
+ language.doc: $(wildcard ../src/translator*.h) maintainers.txt language.tpl translator.py
+-	python translator.py
++	@PYTHONBIN@ translator.py
+ 
+ FORCE:

@@ -1,0 +1,14 @@
+$NetBSD: patch-ab,v 1.2 2008/11/07 21:12:12 snj Exp $
+
+--- src/makefile.orig	2008-10-23 19:08:29.000000000 -0700
++++ src/makefile	2008-11-07 11:56:04.000000000 -0800
+@@ -10,9 +10,7 @@
+ # Add -DCONFIG_FILE_PATH=\"/your/path/.highlightrc\" if you want to define a
+ # custom path to the highlight configuration file (default: $HOME/.highlightrc)
+ 
+-CXX=c++
+ 
+-CFLAGS:=-O2 ${CFLAGS}
+ 
+ # Do not strip by default (Mac OS X lazy pointer issues)
+ # Add -static to avoid linking with shared libs (can cause trouble when highlight

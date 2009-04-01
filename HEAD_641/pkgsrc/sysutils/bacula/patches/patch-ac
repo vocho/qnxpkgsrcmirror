@@ -1,0 +1,29 @@
+$NetBSD: patch-ac,v 1.3 2008/11/21 14:09:31 adam Exp $
+
+--- src/console/Makefile.in.orig	2007-05-27 11:34:40.000000000 +0200
++++ src/console/Makefile.in
+@@ -87,19 +87,19 @@ install: all
+ 	fi
+ 	$(INSTALL_PROGRAM) bconsole $(DESTDIR)$(sbindir)/bconsole
+ 	@srcconf=bconsole.conf; \
+-	if  test -f ${DESTDIR}${sysconfdir}/$$srcconf; then \
++	if  test -f ${DESTDIR}%%EXAMPLESDIR%%/$$srcconf; then \
+ 	   destconf=$$srcconf.new; \
+ 	   echo "  ==> Found existing $$srcconf, installing new conf file as $$destconf"; \
+ 	else \
+ 	   destconf=$$srcconf; \
+-	   if  test -f ${DESTDIR}${sysconfdir}/console.conf; then \
++	   if  test -f ${DESTDIR}%%EXAMPLESDIR%%/console.conf; then \
+ 	      echo "Existing console.conf moved to bconsole.conf"; \
+-	      @$(MV) ${DESTDIR}${sysconfdir}/console.conf ${DESTDIR}${sysconfdir}/bconsole.conf; \
++	      @$(MV) ${DESTDIR}%%EXAMPLESDIR%%/console.conf ${DESTDIR}%%EXAMPLESDIR%%/bconsole.conf; \
+ 	      destconf=$$srcconf.new; \
+ 	   fi; \
+ 	fi; \
+-	echo "${INSTALL_CONFIG} $$srcconf ${DESTDIR}${sysconfdir}/$$destconf"; \
+-	${INSTALL_CONFIG} $$srcconf ${DESTDIR}${sysconfdir}/$$destconf
++	echo "${INSTALL_CONFIG} $$srcconf ${DESTDIR}%%EXAMPLESDIR%%/$$destconf"; \
++	${INSTALL_CONFIG} $$srcconf ${DESTDIR}%%EXAMPLESDIR%%/$$destconf
+ 	if test -f static-bconsole; then \
+ 	   $(INSTALL_PROGRAM) static-bconsole $(DESTDIR)$(sbindir)/static-bconsole; \
+ 	fi

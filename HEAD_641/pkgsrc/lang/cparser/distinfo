@@ -1,0 +1,7 @@
+$NetBSD: distinfo,v 1.2 2008/12/17 16:59:19 joerg Exp $
+
+SHA1 (cparser-0.9.7.tar.bz2) = 2a34788f5233f8ebe8cb226eea2e1a12a0eaf72b
+RMD160 (cparser-0.9.7.tar.bz2) = 540281d2d01a3fd9bd9422c783ee36f97de8830c
+Size (cparser-0.9.7.tar.bz2) = 187966 bytes
+SHA1 (patch-aa) = 169811b929b3e129882e4befb6eaf136a96a1107
+SHA1 (patch-ac) = 8565aae449d78bb8e2f1fbc7f265c462d4fc2138

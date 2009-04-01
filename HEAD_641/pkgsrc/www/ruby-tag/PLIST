@@ -1,0 +1,5 @@
+@comment $NetBSD: PLIST,v 1.2 2008/06/19 15:05:15 taca Exp $
+${RUBY_VENDORLIB}/tag.rb
+${RUBY_DOC}/tag/ja/tag.html
+@dirrm ${RUBY_DOC}/tag/ja
+@dirrm ${RUBY_DOC}/tag

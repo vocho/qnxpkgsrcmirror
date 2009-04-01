@@ -1,0 +1,13 @@
+$NetBSD: patch-ad,v 1.2 2008/05/29 11:28:46 drochner Exp $
+
+--- configure.orig	1974-05-18 09:35:11.000000000 +0100
++++ configure
+@@ -25729,7 +25729,7 @@ if test `eval 'as_val=${'$as_ac_Header'}
+   cat >>confdefs.h <<_ACEOF
+ #define `$as_echo "HAVE_$ac_header" | $as_tr_cpp` 1
+ _ACEOF
+- XF86MISC_LIBS="-lXxf86misc"
++ XF86MISC_LIBS="-lXxf86misc -lXext"
+ fi
+ 
+ done

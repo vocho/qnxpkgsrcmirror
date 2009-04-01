@@ -1,0 +1,13 @@
+$NetBSD: patch-aa,v 1.9 2008/05/02 08:49:50 adam Exp $
+
+--- configure.orig	2008-03-29 17:23:19.000000000 +0100
++++ configure
+@@ -10715,7 +10715,7 @@ fi
+ 
+ 
+ GSL_CFLAGS="-I$includedir"
+-GSL_LIBS="-L$libdir -lgsl"
++GSL_LIBS="-Wl,-R$libdir -L$libdir -lgsl"
+ 
+ 
+ 

@@ -1,0 +1,23 @@
+$NetBSD: patch-af,v 1.11 2008/09/06 11:07:20 obache Exp $
+
+--- glib/libcharset/Makefile.in.orig	2008-09-02 19:29:43.000000000 +0000
++++ glib/libcharset/Makefile.in
+@@ -601,18 +601,6 @@ test-report perf-report full-report:	${T
+ # run make test as part of make check
+ check-local: test
+ install-exec-local: all-local
+-	$(mkinstalldirs) $(DESTDIR)$(libdir)
+-	if test -f $(charset_alias); then \
+-	  sed -f ref-add.sed $(charset_alias) > $(charset_tmp) ; \
+-	  $(INSTALL_DATA) $(charset_tmp) $(charset_alias) ; \
+-	  rm -f $(charset_tmp) ; \
+-	else \
+-	  if test @GLIBC21@ = no; then \
+-	    sed -f ref-add.sed charset.alias > $(charset_tmp) ; \
+-	    $(INSTALL_DATA) $(charset_tmp) $(charset_alias) ; \
+-	    rm -f $(charset_tmp) ; \
+-	  fi ; \
+-	fi
+ 
+ uninstall-local: all-local
+ 	if test -f $(charset_alias); then \

@@ -1,0 +1,34 @@
+$NetBSD: patch-ab,v 1.12 2009/01/27 19:50:33 tonio Exp $
+
+--- Makefile.in.orig	2009-01-05 20:24:13.000000000 +0100
++++ Makefile.in
+@@ -163,7 +163,7 @@ DATADIRNAME = @DATADIRNAME@
+ DBX = @DBX@
+ DEBUGGER = @DEBUGGER@
+ DEFS = -DPKGDATADIR=\"$(pkgdatadir)\" -DSYSCONFDIR=\"$(sysconfdir)\" \
+-	-DBINDIR=\"$(bindir)\" -DMUTTLOCALEDIR=\"$(datadir)/locale\" \
++	-DBINDIR=\"$(bindir)\" -DMUTTLOCALEDIR=\"$(localedir)\" \
+ 	-DHAVE_CONFIG_H=1
+ 
+ DEPDIR = @DEPDIR@
+@@ -272,7 +272,7 @@ infodir = @infodir@
+ install_sh = @install_sh@
+ libdir = @libdir@
+ libexecdir = @libexecdir@
+-localedir = @localedir@
++localedir = $(prefix)/share/locale
+ localstatedir = @localstatedir@
+ mandir = @mandir@
+ mkdir_p = @mkdir_p@
+@@ -1063,11 +1063,6 @@ install-exec-hook:
+ 		rm -f $(DESTDIR)$(bindir)/mutt.dotlock ;		\
+ 		ln -sf $(DESTDIR)$(bindir)/mutt_dotlock $(DESTDIR)$(bindir)/mutt.dotlock ; \
+ 	fi
+-	if test -f $(DESTDIR)$(bindir)/mutt_dotlock && test x@DOTLOCK_GROUP@ != x ; then \
+-		chgrp @DOTLOCK_GROUP@ $(DESTDIR)$(bindir)/mutt_dotlock && \
+-		chmod @DOTLOCK_PERMISSION@ $(DESTDIR)$(bindir)/mutt_dotlock || \
+-		{ echo "Can't fix mutt_dotlock's permissions!" >&2 ; exit 1 ; } \
+-	fi
+ 
+ install-data-local:
+ 	$(srcdir)/mkinstalldirs $(DESTDIR)$(sysconfdir)

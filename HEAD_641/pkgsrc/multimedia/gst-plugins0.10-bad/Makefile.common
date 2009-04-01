@@ -1,0 +1,42 @@
+# $NetBSD: Makefile.common,v 1.8 2009/01/26 10:42:02 drochner Exp $
+#
+# used by audio/gst-plugins0.10-dts/Makefile
+# used by audio/gst-plugins0.10-faad/Makefile
+# used by audio/gst-plugins0.10-jack/Makefile
+# used by audio/gst-plugins0.10-musepack/Makefile
+# used by audio/gst-plugins0.10-spc/Makefile
+# used by multimedia/gst-plugins0.10-x264/Makefile
+# used by multimedia/gst-plugins0.10-xvid/Makefile
+
+GST_PLUGINS0.10_TYPE=	bad
+GST_PLUGINS0.10_VER=	0.10.10
+
+# Disable all drivers and features by default.
+.for driver in	amrwb \
+		cdaudio \
+		dfbvideosink \
+		divx \
+		tsdec \
+		faac \
+		faad \
+		glsink \
+		gsmenc gsmdec \
+		ivorbisdec \
+		libmms \
+		musepack \
+		musicbrainz \
+		neonhttpsrc \
+		sdlvideosink sdlaudiosink \
+		soundtouch \
+		swfdec \
+		theoraexpdec \
+		v4l2src \
+		xvid
+CONFIGURE_ARGS+=	--disable-${driver}
+.endfor
+
+BUILDLINK_API_DEPENDS.gstreamer0.10+=	gstreamer0.10>=0.10.21
+BUILDLINK_API_DEPENDS.gst-plugins0.10-base+=	gst-plugins0.10-base>=0.10.20
+
+.include "../../multimedia/gst-plugins0.10-base/plugins.mk"
+.include "../../multimedia/gst-plugins0.10-base/buildlink3.mk"

@@ -1,0 +1,16 @@
+$NetBSD: patch-ab,v 1.4 2008/12/26 20:23:45 hasso Exp $
+
+--- src/gpart.c.orig	2001-02-07 20:08:08 +0200
++++ src/gpart.c	2008-12-25 21:31:22 +0200
+@@ -300,9 +300,10 @@ static char *get_part_type(int type)
+ 		{ 0x8E, "Linux LVM physical volume" },
+ 		{ 0x93, "Amoeba filesystem" },
+ 		{ 0x94, "Amoeba bad block table" },
+-		{ 0xA5, "FreeBSD/NetBSD/386BSD" },
++		{ 0xA5, "FreeBSD/DragonFly/386BSD or old NetBSD" },
+ 		{ 0xA6, "OpenBSD" },
+ 		{ 0xA7, "NEXTSTEP" },
++		{ 0xA9, "NetBSD" },
+ 		{ 0xB7, "BSDI BSD/386 filesystem" },
+ 		{ 0xB8, "BSDI BSD/386 swap" },
+ 		{ 0xC7, "Syrinx" },

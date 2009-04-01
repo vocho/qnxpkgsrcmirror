@@ -1,0 +1,15 @@
+$NetBSD$
+
+--- converter/other/pamtosvg/pamtosvg.c.orig	2006-03-03 02:31:14.000000000 -0500
++++ converter/other/pamtosvg/pamtosvg.c
+@@ -15,6 +15,10 @@
+ #include "output-svg.h"
+ #include "bitmap.h"
+ 
++#ifdef __QNXNTO__
++typedef unsigned int uint;
++#endif
++
+ #define dot_printer_max_column 50
+ #define dot_printer_char '|'
+ 

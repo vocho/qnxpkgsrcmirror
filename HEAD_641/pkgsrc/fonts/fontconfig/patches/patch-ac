@@ -1,0 +1,24 @@
+$NetBSD: patch-ac,v 1.9 2008/06/21 18:47:44 wiz Exp $
+
+--- conf.d/Makefile.in.orig	2008-06-01 02:30:57.000000000 +0000
++++ conf.d/Makefile.in
+@@ -236,7 +236,7 @@ program_transform_name = @program_transf
+ psdir = @psdir@
+ sbindir = @sbindir@
+ sharedstatedir = @sharedstatedir@
+-sysconfdir = @sysconfdir@
++sysconfdir = $(prefix)/share/examples/fontconfig
+ target_alias = @target_alias@
+ DOC_FILES = \
+ 	README
+@@ -288,8 +288,8 @@ CONF_LINKS = \
+ 
+ EXTRA_DIST = $(CONF_FILES) $(DOC_FILES)
+ configdir = $(CONFDIR)
+-confavaildir = $(configdir)/conf.avail
+-confddir = $(configdir)/conf.d
++confavaildir = $(sysconfdir)/conf.avail
++confddir = $(sysconfdir)/conf.d
+ confavail_DATA = $(CONF_FILES)
+ confd_DATA = $(DOC_FILES)
+ all: all-am

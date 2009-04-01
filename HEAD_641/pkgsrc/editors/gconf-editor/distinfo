@@ -1,0 +1,5 @@
+$NetBSD: distinfo,v 1.18 2008/10/29 02:21:24 wiz Exp $
+
+SHA1 (gconf-editor-2.24.1.tar.bz2) = cc19e19add4f509d75553e5d03609f7529cc29a4
+RMD160 (gconf-editor-2.24.1.tar.bz2) = ee8607b951548a16fdb6705c3efa95e5349fb0e1
+Size (gconf-editor-2.24.1.tar.bz2) = 1142041 bytes

@@ -1,0 +1,33 @@
+$NetBSD: patch-ac,v 1.10 2009/01/22 07:27:28 jmmv Exp $
+
+--- vl.c.orig	2008-01-06 20:38:42.000000000 +0100
++++ vl.c
+@@ -61,7 +61,7 @@
+ #include <arpa/inet.h>
+ #ifdef _BSD
+ #include <sys/stat.h>
+-#ifndef __APPLE__
++#ifndef _BSD
+ #include <libutil.h>
+ #endif
+ #elif defined (__GLIBC__) && defined (__FreeBSD_kernel__)
+@@ -2385,6 +2385,9 @@ static int pp_hw_mode(ParallelCharDriver
+ 
+ static int pp_ioctl(CharDriverState *chr, int cmd, void *arg)
+ {
++#ifdef __NetBSD__
++    return ENOTSUP;
++#endif
+     ParallelCharDriver *drv = chr->opaque;
+     int fd = drv->fd;
+     uint8_t b;
+@@ -2473,6 +2476,9 @@ static void pp_close(CharDriverState *ch
+ 
+ static CharDriverState *qemu_chr_open_pp(const char *filename)
+ {
++#ifdef __NetBSD__
++    return ENOTSUP;
++#endif
+     CharDriverState *chr;
+     ParallelCharDriver *drv;
+     int fd;

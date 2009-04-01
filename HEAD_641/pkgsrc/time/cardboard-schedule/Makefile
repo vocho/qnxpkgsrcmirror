@@ -1,0 +1,60 @@
+# $NetBSD: Makefile,v 1.25 2008/09/12 18:43:51 gdt Exp $
+#
+
+DISTNAME=	cs113ins
+PKGNAME=	cardboard-schedule-1.13
+PKGREVISION=	1
+CATEGORIES=	time x11
+MASTER_SITES=	http://cardboard.nu/downloads/
+EXTRACT_SUFX=	.exe
+
+MAINTAINER=	pkgsrc-users@NetBSD.org
+HOMEPAGE=	http://cardboard.nu/docs/software.html
+COMMENT=	Project and resource management software implemented in Java/Swing
+
+PKG_DESTDIR_SUPPORT=	user-destdir
+
+USE_X11BASE=	yes
+
+LICENSE=	cardboard-schedule-license
+RESTRICTED=	Distribution permitted only of unmodified distfile at no charge.
+NO_BIN_ON_FTP=		${RESTRICTED}
+NO_SRC_ON_CDROM=	${RESTRICTED}
+NO_BIN_ON_CDROM=	${RESTRICTED}
+
+USE_TOOLS+=	pax gtar unzip
+
+WRKSRC=		${WRKDIR}
+EXTRACT_CMD=	cd ${WRKDIR:Q} && {					\
+			${UNZIP_CMD} -x ${DOWNLOADED_DISTFILE}		\
+			|| ${TEST} -f InstallerData/Installer.zip;	\
+		}
+NO_BUILD=	yes
+
+CSFILES=	cs/images/Logo2.gif \
+		cs/images/Logo.gif \
+		stage/cs.jar \
+		stage/readme.txt \
+		stage/jhbasic.jar \
+		stage/license.txt \
+		stage/CsHelp.jar
+
+INSTALLATION_DIRS=	bin lib/cardboard-schedule
+
+SUBST_CLASSES+=		cs
+SUBST_STAGE.cs=		do-configure
+SUBST_FILES.cs=		csched.sh
+SUBST_SED.cs+=		-e 's,@PREFIX@,${PREFIX},g'
+SUBST_SED.cs+=		-e 's,@LOCALBASE@,${LOCALBASE},g'
+SUBST_SED.cs+=		-e 's,@JAVA_HOME@,${PKG_JAVA_HOME},g'
+
+post-extract:
+	cd ${WRKDIR} && ${UNZIP_CMD} -x InstallerData/Installer.zip
+	${CP} ${FILESDIR:Q}/csched.sh ${WRKDIR:Q}
+
+do-install:
+	cd ${WRKDIR}/C:/projects && pax -rw ${CSFILES} ${DESTDIR}${PREFIX}/lib/cardboard-schedule
+	${INSTALL_SCRIPT} ${WRKDIR:Q}/csched.sh ${DESTDIR}${PREFIX}/bin/csched
+
+.include "../../mk/java-vm.mk"
+.include "../../mk/bsd.pkg.mk"

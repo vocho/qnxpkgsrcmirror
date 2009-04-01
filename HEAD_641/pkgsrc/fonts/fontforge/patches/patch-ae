@@ -1,0 +1,42 @@
+$NetBSD: patch-ae,v 1.19 2009/01/03 19:45:29 adam Exp $
+
+--- configure.orig	2008-12-15 20:38:07.000000000 +0100
++++ configure
+@@ -21815,8 +21815,8 @@ if test $ac_cv_file__usr_include_libxml2
+   CFLAGS="$CFLAGS -I/usr/include/libxml2/"
+ else
+ 
+- { echo "$as_me:$LINENO: checking for /usr/local/include/libxml2/libxml" >&5
+-echo $ECHO_N "checking for /usr/local/include/libxml2/libxml... $ECHO_C" >&6; }
++ { echo "$as_me:$LINENO: checking for ${PREFIX}/include/libxml2/libxml" >&5
++echo $ECHO_N "checking for ${PREFIX}/include/libxml2/libxml... $ECHO_C" >&6; }
+ if test "${ac_cv_file__usr_local_include_libxml2_libxml+set}" = set; then
+   echo $ECHO_N "(cached) $ECHO_C" >&6
+ else
+@@ -21824,7 +21824,7 @@ else
+   { { echo "$as_me:$LINENO: error: cannot check for file existence when cross compiling" >&5
+ echo "$as_me: error: cannot check for file existence when cross compiling" >&2;}
+    { (exit 1); exit 1; }; }
+-if test -r "/usr/local/include/libxml2/libxml"; then
++if test -r "${PREFIX}/include/libxml2/libxml"; then
+   ac_cv_file__usr_local_include_libxml2_libxml=yes
+ else
+   ac_cv_file__usr_local_include_libxml2_libxml=no
+@@ -21833,7 +21833,7 @@ fi
+ { echo "$as_me:$LINENO: result: $ac_cv_file__usr_local_include_libxml2_libxml" >&5
+ echo "${ECHO_T}$ac_cv_file__usr_local_include_libxml2_libxml" >&6; }
+ if test $ac_cv_file__usr_local_include_libxml2_libxml = yes; then
+-  CFLAGS="$CFLAGS -I/usr/local/include -I/usr/local/include/libxml2/"
++  CFLAGS="$CFLAGS -I${PREFIX}/include -I${PREFIX}/include/libxml2/"
+ else
+   cat >>confdefs.h <<\_ACEOF
+ #define _NO_LIBXML 1
+@@ -26606,7 +26606,7 @@ if test "$gww_has_gettext" = "yes" >/dev
+ 
+  cat </dev/null >$ac_confdir/po/Makefile.in
+  echo 'prefix = @prefix@' >> $ac_confdir/po/Makefile.in
+- echo 'localedir = $(prefix)/share/locale' >> $ac_confdir/po/Makefile.in
++ echo 'localedir = ${PREFIX}/${PKGLOCALEDIR}/locale' >> $ac_confdir/po/Makefile.in
+  echo 'INSTALL = @INSTALL@' >> $ac_confdir/po/Makefile.in
+  echo 'INSTALL_DATA = @INSTALL_DATA@' >> $ac_confdir/po/Makefile.in
+  echo '' >> $ac_confdir/po/Makefile.in

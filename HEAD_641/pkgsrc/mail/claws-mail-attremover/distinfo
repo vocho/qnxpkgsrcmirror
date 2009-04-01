@@ -1,0 +1,5 @@
+$NetBSD: distinfo,v 1.5 2009/01/11 03:11:37 smb Exp $
+
+SHA1 (att_remover-1.0.10.tar.gz) = 01831d838bf81cf353f4b9587046343b5de0294c
+RMD160 (att_remover-1.0.10.tar.gz) = 8fb29e8adbd9834156aa99da025d81d9af2b0d35
+Size (att_remover-1.0.10.tar.gz) = 327977 bytes

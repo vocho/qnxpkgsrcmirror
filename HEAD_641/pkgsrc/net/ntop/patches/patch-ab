@@ -1,0 +1,31 @@
+$NetBSD: patch-ab,v 1.14 2009/01/09 08:53:26 dbj Exp $
+
+--- configure.in.orig	2008-10-02 12:54:15.000000000 +0200
++++ configure.in
+@@ -428,6 +428,15 @@ case "${target}:${CC}" in
+         echo "* This appears to be ${DEFINEOS} (release not checked)"
+       ;;
+ 
++    *-*-netbsd*:* )
++	DEFINEOS="NETBSD"
++        echo "* This appears to be ${DEFINEOS}"
++      ;;
++    *-*-openbsd*:* )
++	DEFINEOS="OPENBSD"
++        echo "* This appears to be ${DEFINEOS}"
++      ;;
++
+     * )
+         echo "* ${target} is an unknown/unsupported OS"
+         echo "*"
+@@ -573,8 +582,8 @@ dnl> user defined directory passed as op
+ dnl>
+ if test ".${PCAP_ROOT}" != .; then
+   if test -d $PCAP_ROOT &&
+-     test -r $PCAP_ROOT/libpcap.a &&
+-     test -r $PCAP_ROOT/pcap.h; then
++     test -r $PCAP_ROOT/lib/libpcap.a -o -r $PCAP_ROOT/lib/libpcap.dylib &&
++     test -r $PCAP_ROOT/include/pcap.h; then
+        PCAP_ROOT=`cd ${PCAP_ROOT} && pwd`
+        CORELIBS="${CORELIBS} -L$PCAP_ROOT -lpcap"
+        INCS="${INCS} -I$PCAP_ROOT"

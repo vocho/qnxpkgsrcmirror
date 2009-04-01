@@ -1,0 +1,5 @@
+$NetBSD: distinfo,v 1.2 2008/08/12 20:15:11 tnn Exp $
+
+SHA1 (unfs3-0.9.21.tar.gz) = d6495df6fd41eb212c99c3579d54e99577cd69e6
+RMD160 (unfs3-0.9.21.tar.gz) = 3ad27d095345048980a4bc3a6f40030f440044d0
+Size (unfs3-0.9.21.tar.gz) = 168528 bytes

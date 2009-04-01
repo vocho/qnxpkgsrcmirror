@@ -1,0 +1,13 @@
+$NetBSD: patch-ac,v 1.2 2008/07/24 12:55:20 markd Exp $
+
+--- tools/designer/src/designer/designer.pro.orig	2008-04-28 15:11:20.000000000 +0200
++++ tools/designer/src/designer/designer.pro
+@@ -13,7 +13,7 @@ INCLUDEPATH += \
+     ../lib/uilib \
+     extra
+ 
+-LIBS += -L../../lib \
++LIBS += \
+     -L../../../../lib \
+     -lQtDesignerComponents \
+     -lQtDesigner

@@ -1,0 +1,88 @@
+# $NetBSD: Makefile.common,v 1.121 2009/02/06 06:28:53 martti Exp $
+
+# used by editors/vim/Makefile
+# used by editors/vim-gtk/Makefile
+# used by editors/vim-gtk2/Makefile
+# used by editors/vim-lang/Makefile
+# used by editors/vim-motif/Makefile
+# used by editors/vim-xaw/Makefile
+
+.include "../../editors/vim-share/version.mk"
+
+DISTNAME=		vim-${VIM_VERSION}
+DISTFILES=		vim-${VIM_VERSION}${EXTRACT_SUFX}
+DISTFILES+=		vim-${VIM_VERSION}-extra.tar.gz
+DISTFILES+=		vim-${VIM_VERSION}-lang.tar.gz
+CATEGORIES=		editors
+MASTER_SITES=		ftp://ftp.vim.org/pub/editors/vim/unix/
+MASTER_SITES+=		ftp://ftp.fu-berlin.de/misc/editors/vim/unix/
+DIST_SUBDIR=		vim${VIM_VERSION}
+EXTRACT_SUFX=		.tar.bz2
+
+SITES.vim-${VIM_VERSION}-extra.tar.gz=	ftp://ftp.vim.org/pub/editors/vim/extra/
+SITES.vim-${VIM_VERSION}-extra.tar.gz+=	ftp://ftp.fu-berlin.de/misc/editors/vim/extra/
+SITES.vim-${VIM_VERSION}-lang.tar.gz=	ftp://ftp.vim.org/pub/editors/vim/extra/
+SITES.vim-${VIM_VERSION}-lang.tar.gz+=	ftp://ftp.fu-berlin.de/misc/editors/vim/extra/
+
+PATCH_SITES=		ftp://ftp.vim.org/pub/editors/vim/patches/${VIM_VERSION}/
+PATCH_SITES+=		ftp://ftp.fu-berlin.de/misc/editors/vim/patches/${VIM_VERSION}/
+
+PATCHFILES+=		7.2.001-100.gz
+PATCHFILES+=		7.2.101 7.2.102
+
+MAINTAINER=		martti@NetBSD.org
+HOMEPAGE=		http://www.vim.org/
+LICENSE=		vim-license
+
+CONFLICTS+=		vim-kde-[0-9]*
+
+WRKSRC=			${WRKDIR}/${VIM_SUBDIR}/src
+GNU_CONFIGURE=		yes
+MAKE_JOBS_SAFE=		no	# At least on Solaris
+
+# http://www.netbsd.org/cgi-bin/query-pr-single.pl?number=38710
+CHECK_INTERPRETER_SKIP=	share/vim/vim72/tools/vim132
+
+.include "../../mk/bsd.prefs.mk"
+
+CONFIGURE_ARGS+=	--with-modified-by="${MAINTAINER}"
+
+# See "configure --help" extra options. These might affect the installed
+# files (and PLIST might not include all files) so use at your own risk!
+CONFIGURE_ARGS+=	${VIM_EXTRA_OPTS}
+CONFIGURE_ARGS+=	--enable-multibyte
+
+PATCH_ARGS=		-d ${WRKDIR}/${VIM_SUBDIR} --forward --quiet \
+				-E ${PATCH_STRIP:Q}
+PATCH_DIST_ARGS=	-d ${WRKDIR}/${VIM_SUBDIR} --forward --quiet \
+				-E ${PATCH_DIST_STRIP:Q}
+PATCHDIR=		${.CURDIR}/../../editors/vim-share/patches
+DISTINFO_FILE?=		${.CURDIR}/../../editors/vim-share/distinfo
+
+.if ${OPSYS} == "Darwin" && exists(/Developer/Headers/FlatCarbon)
+BUILDLINK_PASSTHRU_DIRS+=	/Developer/Headers/FlatCarbon
+.endif
+
+.if empty(PKGNAME:Mvim-share*)
+ALTERNATIVES_SRC=	${.CURDIR}/../../editors/vim-share/ALTERNATIVES
+.else
+ALTERNATIVES_SRC=
+.endif
+
+PKG_SUPPORTED_OPTIONS+=	cscope ruby
+PKG_OPTIONS_VAR=	PKG_OPTIONS.vim
+
+.include "../../mk/bsd.options.mk"
+
+.if !empty(PKG_OPTIONS:Mcscope)
+DEPENDS+=		cscope-[0-9]*:../../devel/cscope
+CONFIGURE_ARGS+=	--enable-cscope
+.endif
+
+.if !empty(PKG_OPTIONS:Mruby)
+.include "../../lang/ruby/buildlink3.mk"
+CONFIGURE_ARGS+=	--enable-rubyinterp
+.endif
+
+post-patch:
+	find ${WRKDIR} -name '*.orig_dist' -exec rm -f {} \;

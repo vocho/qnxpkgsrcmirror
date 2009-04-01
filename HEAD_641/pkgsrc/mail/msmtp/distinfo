@@ -1,0 +1,5 @@
+$NetBSD: distinfo,v 1.16 2009/01/06 12:08:01 obache Exp $
+
+SHA1 (msmtp-1.4.17.tar.bz2) = 6b7fa1d9c9eee249b571b3f7720ebd779f94f4de
+RMD160 (msmtp-1.4.17.tar.bz2) = 749cf22bcbde90dd298f0c96ee0f9e41f93767b6
+Size (msmtp-1.4.17.tar.bz2) = 766293 bytes

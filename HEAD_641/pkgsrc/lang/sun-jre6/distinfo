@@ -1,0 +1,5 @@
+$NetBSD: distinfo,v 1.7 2009/02/08 00:23:20 christos Exp $
+
+SHA1 (jre-6u12-linux-i586.bin) = ba18ad256624ea5c255b0353d929fc3b324bcb2a
+RMD160 (jre-6u12-linux-i586.bin) = 8bb69c580f2cedab9a50f76645bebcee05402dec
+Size (jre-6u12-linux-i586.bin) = 20168773 bytes

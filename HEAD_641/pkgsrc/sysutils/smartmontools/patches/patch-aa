@@ -1,0 +1,32 @@
+$NetBSD: patch-aa,v 1.5 2008/05/17 13:07:54 obache Exp $
+
+--- Makefile.in.orig	2008-03-10 10:44:13.000000000 +0000
++++ Makefile.in
+@@ -87,7 +87,7 @@ CONFIG_HEADER = config.h
+ CONFIG_CLEAN_FILES =
+ am__installdirs = "$(DESTDIR)$(sbindir)" "$(DESTDIR)$(man5dir)" \
+ 	"$(DESTDIR)$(man8dir)" "$(DESTDIR)$(docsdir)" \
+-	"$(DESTDIR)$(initddir)" "$(DESTDIR)$(sysconfdir)"
++	"$(DESTDIR)$(sysconfdir)"
+ sbinPROGRAMS_INSTALL = $(INSTALL_PROGRAM)
+ PROGRAMS = $(sbin_PROGRAMS)
+ am__smartctl_SOURCES_DIST = smartctl.cpp smartctl.h atacmdnames.cpp \
+@@ -347,8 +347,7 @@ docs_DATA = AUTHORS     \
+             NEWS        \
+             README      \
+             TODO        \
+-            WARNINGS    \
+-            smartd.conf
++            WARNINGS
+ 
+ sysconf_DATA = smartd.conf$(smartd_suffix)
+ EXTRA_DIST = smartmontools.spec                    \
+@@ -1115,7 +1114,7 @@ info: info-recursive
+ 
+ info-am:
+ 
+-install-data-am: install-docsDATA install-initdDATA install-man
++install-data-am: install-docsDATA install-man
+ 
+ install-dvi: install-dvi-recursive
+ 

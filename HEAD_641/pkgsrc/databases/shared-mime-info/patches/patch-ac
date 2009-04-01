@@ -1,0 +1,13 @@
+$NetBSD: patch-ac,v 1.6 2008/10/16 13:50:44 drochner Exp $
+
+--- Makefile.in.orig	2008-07-23 12:44:50.000000000 +0200
++++ Makefile.in
+@@ -954,8 +954,6 @@ uninstall-hook:
+ 	rm -f "$(DESTDIR)$(datadir)/mime/treemagic"
+ 	rm -f "$(DESTDIR)$(datadir)/mime/types"
+ 
+-all: check
+-
+ check:
+ 	@if test -n $(XMLLINT) ; then \
+ 		xmllint --noout --valid $(srcdir)/freedesktop.org.xml;	\

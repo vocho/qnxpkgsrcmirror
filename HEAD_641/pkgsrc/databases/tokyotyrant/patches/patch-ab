@@ -1,0 +1,38 @@
+$NetBSD: patch-ab,v 1.4 2009/02/03 13:57:56 obache Exp $
+
+Avoid to break pkgsrc's tools.
+
+--- configure.orig	2008-12-27 09:46:51.000000000 +0000
++++ configure
+@@ -1745,13 +1745,9 @@ MYLDLIBPATHENV="LD_LIBRARY_PATH"
+ MYPOSTCMD="true"
+ 
+ # Building paths
+-pathtmp="$PATH"
+-PATH="$HOME/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin"
+-PATH="$PATH:/usr/ccs/bin:/usr/ucb:/usr/xpg4/bin:/usr/xpg6/bin:$pathtmp"
+ CPATH="$HOME/include:/usr/local/include:$CPATH"
+ LIBRARY_PATH="$HOME/lib:/usr/local/lib:$LIBRARY_PATH"
+ LD_LIBRARY_PATH="$HOME/lib:/usr/local/lib:$LD_LIBRARY_PATH"
+-PKG_CONFIG_PATH="$HOME/lib/pkgconfig:/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH"
+ export PATH CPATH LIBRARY_PATH LD_LIBRARY_PATH PKG_CONFIG_PATH
+ if type pkg-config > /dev/null 2>&1
+ then
+@@ -4427,7 +4423,7 @@ _ACEOF
+ 
+ fi
+ 
+-if test "$enable_lua" == "yes"
++if test "$enable_lua" = "yes"
+ then
+ 
+ { echo "$as_me:$LINENO: checking for main in -llua" >&5
+@@ -5294,7 +5290,7 @@ echo "$as_me: error: tcutil.h is require
+ fi
+ 
+ 
+-if test "$enable_lua" == "yes"
++if test "$enable_lua" = "yes"
+ then
+   if test "${ac_cv_header_lua_h+set}" = set; then
+   { echo "$as_me:$LINENO: checking for lua.h" >&5

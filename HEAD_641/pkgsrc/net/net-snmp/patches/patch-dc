@@ -1,0 +1,22 @@
+$NetBSD: patch-dc,v 1.5 2008/09/08 12:58:09 adam Exp $
+
+--- include/net-snmp/net-snmp-config.h.in.orig	2008-07-28 13:41:40.000000000 +0200
++++ include/net-snmp/net-snmp-config.h.in
+@@ -1463,6 +1463,7 @@
+ #define NETSNMP_HPUX11ID 14
+ #define NETSNMP_AIXID 15
+ #define NETSNMP_MACOSXID 16
++#define NETSNMP_DRAGONFLYID 17
+ #define NETSNMP_UNKNOWNID 255
+ 
+ #ifdef hpux9
+@@ -1492,6 +1493,9 @@
+ #if defined(__FreeBSD__)
+ #define NETSNMP_OSTYPE NETSNMP_FREEBSDID
+ #endif
++#if defined(__DragonFly__)
++#define OSTYPE DRAGONFLYID
++#endif
+ #if defined(irix6) || defined(irix5)
+ #define NETSNMP_OSTYPE NETSNMP_IRIXID
+ #endif

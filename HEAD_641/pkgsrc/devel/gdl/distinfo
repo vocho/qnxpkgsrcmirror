@@ -1,0 +1,5 @@
+$NetBSD: distinfo,v 1.4 2008/10/27 02:17:12 wiz Exp $
+
+SHA1 (gdl-2.24.0.tar.bz2) = dd7b9fd951e7d6011edc9cd002ce6b06be3ccb1d
+RMD160 (gdl-2.24.0.tar.bz2) = f11399a2a00d671c6a5d4e472d29c5026329469f
+Size (gdl-2.24.0.tar.bz2) = 551420 bytes

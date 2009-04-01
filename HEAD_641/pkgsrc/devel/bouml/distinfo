@@ -1,0 +1,7 @@
+$NetBSD: distinfo,v 1.3 2008/09/01 12:24:54 tonnerre Exp $
+
+SHA1 (bouml_4.5.tar.gz) = 26f1a08b03073f29319af019b17fff37f7b85b0c
+RMD160 (bouml_4.5.tar.gz) = 0a92b9e9a31f9bfb30b327e8ff80e9bec34887e6
+Size (bouml_4.5.tar.gz) = 4637097 bytes
+SHA1 (patch-aa) = 03fa79dc89b9dcb30dcfb9b9511f7afe8e7fcdce
+SHA1 (patch-ab) = 272bf0fefc0c846b39db167731f76a3d33585523

@@ -1,0 +1,5 @@
+$NetBSD: distinfo,v 1.6 2008/05/07 04:15:56 bjs Exp $
+
+SHA1 (monotone-viz-1.0.1-nolablgtk.tar.gz) = 68bce1e401fe7f0212152969ea1268026e1dcc7c
+RMD160 (monotone-viz-1.0.1-nolablgtk.tar.gz) = 21e0a5d946d1b73cb05322a00d2cd236d5d2b42f
+Size (monotone-viz-1.0.1-nolablgtk.tar.gz) = 97972 bytes

@@ -1,0 +1,27 @@
+$NetBSD: distinfo,v 1.30 2009/01/04 20:02:12 wiz Exp $
+
+SHA1 (Mesa-7.0.4-xorg-server_GL) = 6aed65e64c7a684a5d707334a4b4fe7711966380
+RMD160 (Mesa-7.0.4-xorg-server_GL) = 2028532d79f5bba1d09ae787a1799fc4b206a5d7
+Size (Mesa-7.0.4-xorg-server_GL) = 34729 bytes
+SHA1 (MesaLib-7.0.4.tar.bz2) = 7e2ecbe89d245510d2681d04e959aee6adc205c5
+RMD160 (MesaLib-7.0.4.tar.bz2) = 0394bb9e00ea13f2399bc5895d4264221bbc03ac
+Size (MesaLib-7.0.4.tar.bz2) = 3414357 bytes
+SHA1 (xorg-server-1.4.2-20080917.patch.gz) = e8fced0a6ada867d6bfdedda22a8bf178fa48977
+RMD160 (xorg-server-1.4.2-20080917.patch.gz) = 2463fa939dc9340e79c03356fa47310343d9e10c
+Size (xorg-server-1.4.2-20080917.patch.gz) = 28955 bytes
+SHA1 (xorg-server-1.4.2.tar.bz2) = 385348721ecb6da4bc51a2b7ee5784de6be0a8b6
+RMD160 (xorg-server-1.4.2.tar.bz2) = 6f12b28d7e4186dfbdec3c9116c65e6831ed2e54
+Size (xorg-server-1.4.2.tar.bz2) = 6216638 bytes
+SHA1 (patch-aa) = 05ded41f5d114b2d21bce2629999ea5758ae7e87
+SHA1 (patch-ab) = 20b62798fd6f4ea173f827a5e122cf95f4673983
+SHA1 (patch-ac) = 0e7d01cbdd692b75256318a0309551f6e5d2f5ec
+SHA1 (patch-ad) = 57f9b5413d0c48ac12343f9d75879a46bd334931
+SHA1 (patch-ae) = 814f46c830384292683b38261386d113897b66d1
+SHA1 (patch-af) = 722d4679d3386c9a02e1c45a1aa355658ccc2908
+SHA1 (patch-ah) = b92699ae5913459799b8b870664786b3583e292d
+SHA1 (patch-sa) = 5586e998e2239b6851291b5f79b2e6009c78b174
+SHA1 (patch-sb) = b769780b446e4f10bc99ccd3373d666daf44f863
+SHA1 (patch-sc) = 33c4d4731e3732032f84946fc17e28d0cba389a6
+SHA1 (patch-sd) = ac8f5bc3bca8c21e91d7206a5b2cb400c54f7414
+SHA1 (patch-se) = 22b20c734b7fcf59d75227aeb1fa703465582568
+SHA1 (patch-xkb) = 4bd5f8d86cf3ad2f351cf8407221cf79812ed8e6

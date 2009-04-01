@@ -1,0 +1,18 @@
+@comment $NetBSD: PLIST,v 1.6 2008/08/08 14:32:38 obache Exp $
+bin/pekwm
+man/man1/pekwm.1
+share/examples/pekwm/autoproperties
+share/examples/pekwm/config
+share/examples/pekwm/keys
+share/examples/pekwm/menu
+share/examples/pekwm/mouse
+share/examples/pekwm/start
+share/examples/pekwm/vars
+share/pekwm/scripts/pekwm_themeset.sh
+share/pekwm/scripts/pekwm_ws_menu.sh
+share/pekwm/themes/default/theme
+@dirrm share/pekwm/themes/default
+@dirrm share/pekwm/themes
+@dirrm share/pekwm/scripts
+@dirrm share/pekwm
+@dirrm share/examples/pekwm

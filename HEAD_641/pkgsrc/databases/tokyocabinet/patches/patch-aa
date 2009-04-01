@@ -1,0 +1,63 @@
+$NetBSD: patch-aa,v 1.7 2009/02/05 15:36:34 obache Exp $
+
+--- configure.orig	2009-01-30 06:43:48.000000000 +0000
++++ configure
+@@ -1744,19 +1744,16 @@ MYDOCUMENTFILES="COPYING ChangeLog THANK
+ MYPCFILES="tokyocabinet.pc"
+ 
+ # Building flags
+-MYCFLAGS="-std=c99 -Wall -fPIC -fsigned-char -O2"
+-MYCPPFLAGS="-I. -I\$(INCLUDEDIR) -I$HOME/include -I/usr/local/include"
++MYCFLAGS="-std=c99 -Wall -fPIC -fsigned-char"
++MYCPPFLAGS="-I. -I\$(INCLUDEDIR)"
+ MYCPPFLAGS="$MYCPPFLAGS -DNDEBUG -D_GNU_SOURCE=1 -D_REENTRANT"
+-MYLDFLAGS="-L. -L\$(LIBDIR) -L$HOME/lib -L/usr/local/lib"
++MYLDFLAGS="-L. -L\$(LIBDIR)"
+ MYCMDLDFLAGS=""
+ MYRUNPATH="\$(LIBDIR)"
+ MYLDLIBPATHENV="LD_LIBRARY_PATH"
+ MYPOSTCMD="true"
+ 
+ # Building paths
+-pathtmp="$PATH"
+-PATH="$HOME/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin"
+-PATH="$PATH:/usr/ccs/bin:/usr/ucb:/usr/xpg4/bin:/usr/xpg6/bin:$pathtmp"
+ CPATH="$HOME/include:/usr/local/include:$CPATH"
+ LIBRARY_PATH="$HOME/lib:/usr/local/lib:$LIBRARY_PATH"
+ LD_LIBRARY_PATH="$HOME/lib:/usr/local/lib:$LD_LIBRARY_PATH"
+@@ -4186,7 +4183,7 @@ _ACEOF
+ fi
+ 
+ fi
+-if test "$enable_exlzma" == "yes"
++if test "$enable_exlzma" = "yes"
+ then
+ 
+ { echo "$as_me:$LINENO: checking for main in -llzma" >&5
+@@ -4254,7 +4251,7 @@ _ACEOF
+ fi
+ 
+ fi
+-if test "$enable_exlzo" == "yes"
++if test "$enable_exlzo" = "yes"
+ then
+ 
+ { echo "$as_me:$LINENO: checking for main in -llzo2" >&5
+@@ -5599,7 +5596,7 @@ fi
+ 
+ 
+ fi
+-if test "$enable_exlzma" == "yes"
++if test "$enable_exlzma" = "yes"
+ then
+   if test "${ac_cv_header_lzmalib_h+set}" = set; then
+   { echo "$as_me:$LINENO: checking for lzmalib.h" >&5
+@@ -5736,7 +5733,7 @@ fi
+ 
+ 
+ fi
+-if test "$enable_exlzo" == "yes"
++if test "$enable_exlzo" = "yes"
+ then
+   if test "${ac_cv_header_lzo_lzo1x_h+set}" = set; then
+   { echo "$as_me:$LINENO: checking for lzo/lzo1x.h" >&5

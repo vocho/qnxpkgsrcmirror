@@ -1,0 +1,50 @@
+$NetBSD: patch-ac,v 1.3 2008/12/17 18:14:01 joerg Exp $
+
+--- Makefile.in.orig	2008-11-18 14:30:41.000000000 +0100
++++ Makefile.in
+@@ -72,12 +72,11 @@ UNITTEST_SRC=$(patsubst $(srcdir)/%,%, \
+ 	testcode/readhex.c testcode/ldns-testpkts.c smallapp/worker_cb.c \
+ 	$(COMMON_SRC)
+ UNITTEST_OBJ=$(addprefix $(BUILD),$(UNITTEST_SRC:.c=.lo)) $(COMPAT_OBJ)
+-DAEMON_SRC=$(patsubst $(srcdir)/%,%, $(wildcard $(srcdir)/daemon/*.c)) \
+-	$(COMMON_SRC)
++DAEMON_SRC=$(patsubst $(srcdir)/%,%, $(wildcard $(srcdir)/daemon/*.c))
+ DAEMON_OBJ=$(addprefix $(BUILD),$(DAEMON_SRC:.c=.lo)) $(COMPAT_OBJ)
+-CHECKCONF_SRC=smallapp/unbound-checkconf.c smallapp/worker_cb.c $(COMMON_SRC)
++CHECKCONF_SRC=smallapp/unbound-checkconf.c smallapp/worker_cb.c
+ CHECKCONF_OBJ=$(addprefix $(BUILD),$(CHECKCONF_SRC:.c=.lo)) $(COMPAT_OBJ)
+-CONTROL_SRC=smallapp/unbound-control.c smallapp/worker_cb.c $(COMMON_SRC)
++CONTROL_SRC=smallapp/unbound-control.c smallapp/worker_cb.c
+ CONTROL_OBJ=$(addprefix $(BUILD),$(CONTROL_SRC:.c=.lo)) $(COMPAT_OBJ)
+ HOST_SRC=smallapp/unbound-host.c
+ HOST_OBJ=$(addprefix $(BUILD),$(HOST_SRC:.c=.lo)) $(COMPAT_OBJ)
+@@ -153,21 +152,21 @@ else
+ ldnslib=
+ endif
+ 
+-unbound:	$(DAEMON_OBJ) $(ldnslib)
++unbound:	$(DAEMON_OBJ) $(ldnslib) libunbound.la
+ 	$(INFO) Link $@
+-	$Q$(LINK) -o $@ $(sort $(DAEMON_OBJ)) -lssl $(LIBS)
++	$Q$(LINK) -o $@ $(sort $(DAEMON_OBJ)) libunbound.la -lssl $(LIBS)
+ 
+-unbound-checkconf:	$(CHECKCONF_OBJ) $(ldnslib)
++unbound-checkconf:	$(CHECKCONF_OBJ) $(ldnslib) libunbound.la
+ 	$(INFO) Link $@
+-	$Q$(LINK) -o $@ $(sort $(CHECKCONF_OBJ)) $(LIBS)
++	$Q$(LINK) -o $@ $(sort $(CHECKCONF_OBJ)) libunbound.la $(LIBS)
+ 
+-unbound-control:	$(CONTROL_OBJ) $(ldnslib)
++unbound-control:	$(CONTROL_OBJ) $(ldnslib) libunbound.la
+ 	$(INFO) Link $@
+-	$Q$(LINK) -o $@ $(sort $(CONTROL_OBJ)) -lssl $(LIBS)
++	$Q$(LINK) -o $@ $(sort $(CONTROL_OBJ)) libunbound.la -lssl $(LIBS)
+ 
+-unbound-host:	$(HOST_OBJ) libunbound.la $(ldnslib)
++unbound-host:	$(HOST_OBJ) libunbound.la $(ldnslib) libunbound.la
+ 	$(INFO) Link $@
+-	$Q$(LINK) -o $@ $(sort $(HOST_OBJ)) -L. -L.libs -lunbound $(LIBS)
++	$Q$(LINK) -o $@ $(sort $(HOST_OBJ)) libunbound.la $(LIBS)
+ 
+ unittest:	$(UNITTEST_OBJ) $(ldnslib)
+ 	$(INFO) Link $@

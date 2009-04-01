@@ -1,0 +1,28 @@
+# $NetBSD: Makefile.common,v 1.48 2009/01/07 07:24:57 wiz Exp $
+# used by www/links/Makefile
+
+DISTNAME=	links-2.2
+CATEGORIES=	www
+MASTER_SITES=	http://links.twibright.com/download/
+EXTRACT_SUFX=  .tar.bz2
+
+MAINTAINER=	wiz@NetBSD.org
+HOMEPAGE=	http://links.twibright.com/
+
+PKG_INSTALLATION_TYPES=	overwrite pkgviews
+PKG_DESTDIR_SUPPORT=	user-destdir
+
+GNU_CONFIGURE=		YES
+CONFIGURE_ARGS+=	--enable-javascript
+
+PLIST_SRC=		${.CURDIR}/../../www/links/PLIST
+PATCHDIR=		${.CURDIR}/../../www/links/patches
+DISTINFO_FILE=		${.CURDIR}/../../www/links/distinfo
+
+.include "options.mk"
+
+post-install:
+	${INSTALL_DATA_DIR} ${DESTDIR}${PREFIX}/share/doc/links
+	${INSTALL_DATA} ${WRKSRC}/KEYS ${DESTDIR}${PREFIX}/share/doc/links
+
+.include "../../security/openssl/buildlink3.mk"

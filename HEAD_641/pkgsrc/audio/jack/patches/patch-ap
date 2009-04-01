@@ -1,0 +1,13 @@
+$NetBSD: patch-ap,v 1.2 2008/11/16 11:22:55 bjs Exp $
+
+--- jack/types.h.orig	2008-11-11 17:36:38.000000000 -0500
++++ jack/types.h
+@@ -23,7 +23,7 @@
+ 
+ #include <inttypes.h>
+ 
+-typedef int32_t jack_shmsize_t;
++typedef size_t jack_shmsize_t;
+ 
+ /**
+  * Type used to represent sample frame counts.

@@ -1,0 +1,20 @@
+# $NetBSD: Makefile.common,v 1.32 2008/10/10 11:34:50 adam Exp $
+#
+# Common Makefile for:
+#  * nessus-core
+#  * nessus-libraries
+#  * nessus-plugins
+#  * libnasl
+
+VERS=		2.2.11
+
+CATEGORIES=	security x11 net
+MASTER_SITES=	http://www.nessus.org/download/
+
+MAINTAINER=	pkgsrc-users@NetBSD.org
+HOMEPAGE=	http://www.nessus.org/
+
+FETCH_MESSAGE+=	"Please download ${DISTFILES:Q}"
+FETCH_MESSAGE+=	"manually from ${MASTER_SITES:Q}"
+
+MAKE_JOBS_SAFE=	no

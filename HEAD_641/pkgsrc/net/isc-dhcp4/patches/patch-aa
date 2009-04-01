@@ -1,0 +1,18 @@
+$NetBSD: patch-aa,v 1.2 2009/01/04 00:56:32 adrianp Exp $
+
+--- server/Makefile.in.orig	2008-12-05 20:14:57.000000000 +0000
++++ server/Makefile.in
+@@ -360,13 +360,6 @@ uninstall-man8:
+ 	done
+ install-dist_sysconfDATA: $(dist_sysconf_DATA)
+ 	@$(NORMAL_INSTALL)
+-	test -z "$(sysconfdir)" || $(mkdir_p) "$(DESTDIR)$(sysconfdir)"
+-	@list='$(dist_sysconf_DATA)'; for p in $$list; do \
+-	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
+-	  f=$(am__strip_dir) \
+-	  echo " $(dist_sysconfDATA_INSTALL) '$$d$$p' '$(DESTDIR)$(sysconfdir)/$$f'"; \
+-	  $(dist_sysconfDATA_INSTALL) "$$d$$p" "$(DESTDIR)$(sysconfdir)/$$f"; \
+-	done
+ 
+ uninstall-dist_sysconfDATA:
+ 	@$(NORMAL_UNINSTALL)

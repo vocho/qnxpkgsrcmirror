@@ -1,0 +1,40 @@
+$NetBSD: patch-ai,v 1.16 2008/11/30 22:25:01 ahoka Exp $
+
+--- glib/gmain.c.orig	2008-11-24 06:45:23.000000000 +0100
++++ glib/gmain.c
+@@ -2720,13 +2720,13 @@ g_main_context_iterate (GMainContext *co
+     {
+       gboolean got_ownership;
+       
++      LOCK_CONTEXT (context);
++
+       g_return_val_if_fail (g_thread_supported (), FALSE);
+ 
+       if (!block)
+ 	return FALSE;
+ 
+-      LOCK_CONTEXT (context);
+-      
+       if (!context->cond)
+ 	context->cond = g_cond_new ();
+           
+@@ -2736,7 +2736,6 @@ g_main_context_iterate (GMainContext *co
+ 
+       if (!got_ownership)
+ 	{
+-	  UNLOCK_CONTEXT (context);
+ 	  return FALSE;
+ 	}
+     }
+@@ -4039,7 +4038,11 @@ g_child_watch_source_init_multi_threaded
+  
+   action.sa_handler = g_child_watch_signal_handler;
+   sigemptyset (&action.sa_mask);
++#ifdef SA_RESTART
+   action.sa_flags = SA_RESTART | SA_NOCLDSTOP;
++#else /* QNX */
++  action.sa_flags = SA_NOCLDSTOP;
++#endif
+   sigaction (SIGCHLD, &action, NULL);
+ }
+ 

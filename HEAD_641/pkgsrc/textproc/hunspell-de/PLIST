@@ -1,0 +1,14 @@
+@comment $NetBSD: PLIST,v 1.2 2008/11/11 14:17:34 wiz Exp $
+share/hunspell/de_AT.aff
+share/hunspell/de_AT.dic
+share/hunspell/de_AT_small.aff
+share/hunspell/de_AT_small.dic
+share/hunspell/de_CH.aff
+share/hunspell/de_CH.dic
+share/hunspell/de_CH_small.aff
+share/hunspell/de_CH_small.dic
+share/hunspell/de_DE.aff
+share/hunspell/de_DE.dic
+share/hunspell/de_DE_small.aff
+share/hunspell/de_DE_small.dic
+@unexec ${RMDIR} %D/share/hunspell 2>/dev/null || ${TRUE}
