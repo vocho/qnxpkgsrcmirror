@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.96 2008/03/26 21:20:34 adrianp Exp $
+# $NetBSD: Makefile,v 1.98 2009/03/05 10:46:23 wiz Exp $
 
 DISTNAME=	gnupg-1.4.9
 CATEGORIES=	security

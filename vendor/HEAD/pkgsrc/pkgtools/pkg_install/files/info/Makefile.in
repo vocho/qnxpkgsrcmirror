@@ -1,4 +1,4 @@
-# $NetBSD: Makefile.in,v 1.17 2009/02/02 12:35:01 joerg Exp $
+# $NetBSD: Makefile.in,v 1.19 2009/02/14 03:02:58 obache Exp $
 
 srcdir=		@srcdir@
 
@@ -12,11 +12,15 @@ man1dir=	$(mandir)/man1
 cat1dir=	$(mandir)/cat1
 
 BOOTSTRAP=	@bootstrap@
+SSL_SUPPORT=	@ssl_support@
 
 CC=		@CC@
 CCLD=		$(CC)
 .if empty(BOOTSTRAP)
 LIBS=		-linstall -larchive -lfetch -lbz2 -lz @LIBS@
+.if !empty(SSL_SUPPORT)
+LIBS+=		-lcrypto
+.endif
 CPPFLAGS=	@CPPFLAGS@ -I. -I$(srcdir) -I../lib
 .else
 LIBS=		-linstall @LIBS@

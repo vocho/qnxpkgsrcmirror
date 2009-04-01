@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.14 2008/12/19 12:12:53 darcy Exp $
+# $NetBSD: Makefile,v 1.16 2009/03/18 18:38:00 darcy Exp $
 #
 
 DISTNAME=	generate-2.6
@@ -8,7 +8,7 @@ CATEGORIES=	devel python
 MASTER_SITES=	ftp://ftp.druid.net/pub/distrib/
 EXTRACT_SUFX=	.tgz
 
-MAINTAINER=	darcy@NetBSD.org
+OWNER=		darcy@NetBSD.org
 HOMEPAGE=	http://www.druid.net/darcy/readme-generate.html
 COMMENT=	Python interface to Generate
 
@@ -22,7 +22,6 @@ LIBS.SunOS+=	-lnsl -lsocket
 LIBS.QNX=		-lsocket
 
 PYDISTUTILSPKG=	yes
-PYBINMODULE=	yes
 
 .include "../../lang/python/extension.mk"
 .include "../../mk/bsd.pkg.mk"

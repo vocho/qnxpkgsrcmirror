@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.15 2009/01/18 12:31:07 ahoka Exp $
+# $NetBSD: Makefile,v 1.17 2009/03/08 15:56:44 wiz Exp $
 #
 
 DISTNAME=		meld-1.2.1
+PKGREVISION=		1
 CATEGORIES=		devel
 MASTER_SITES=		${MASTER_SITE_GNOME:=sources/meld/1.2/}
 EXTRACT_SUFX=		.tar.bz2
@@ -34,5 +35,5 @@ post-install:
 	${RMDIR} ${DESTDIR}${PREFIX}/share/doc/meld
 
 .include "../../lang/python/application.mk"
-.include "../../textproc/rarian/omf.mk"
+.include "../../mk/omf-scrollkeeper.mk"
 .include "../../mk/bsd.pkg.mk"

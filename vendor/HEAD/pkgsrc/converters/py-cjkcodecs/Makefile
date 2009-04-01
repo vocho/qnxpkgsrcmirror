@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.11 2008/11/23 23:37:18 snj Exp $
+# $NetBSD: Makefile,v 1.13 2009/03/05 18:51:27 joerg Exp $
 #
 
 DISTNAME=	cjkcodecs-1.1.1
@@ -14,8 +14,7 @@ COMMENT=	Python Unicode codecs for Chinese, Japanese, and Korean encodings
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 PYDISTUTILSPKG=	yes
-PYBINMODULE=	yes
-PYTHON_VERSIONS_ACCEPTED= 23 21 # included in python>=2.4
+PYTHON_VERSIONS_ACCEPTED= 23 # included in python>=2.4
 
 post-install:
 	@strip ${PREFIX}/${PYSITELIB}/cjkcodecs/*.so

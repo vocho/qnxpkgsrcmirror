@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.44 2008/03/12 09:48:18 wiz Exp $
+# $NetBSD: Makefile,v 1.46 2009/03/04 09:30:50 imil Exp $
 #
 
 COMMENT=	Shells
@@ -8,9 +8,11 @@ SUBDIR+=	bash
 SUBDIR+=	bash-completion
 SUBDIR+=	bash2
 SUBDIR+=	bash2-doc
+SUBDIR+=	bash3
 SUBDIR+=	eltclsh
 SUBDIR+=	es
 SUBDIR+=	esh
+SUBDIR+=	lshell
 SUBDIR+=	mksh
 SUBDIR+=	mudsh
 SUBDIR+=	nologinmsg

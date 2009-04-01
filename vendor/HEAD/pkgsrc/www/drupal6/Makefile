@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.11 2009/01/15 20:09:44 adrianp Exp $
+# $NetBSD: Makefile,v 1.13 2009/02/28 16:11:20 adrianp Exp $
 
-DISTNAME=	drupal-6.9
+DISTNAME=	drupal-6.10
 CATEGORIES=	www
 MASTER_SITES=	http://drupal.org/files/projects/
 
@@ -37,7 +37,7 @@ CONF_FILES+=	${PREFIX}/share/examples/drupal/default.profile \
 		${DRUPAL}/profiles/default/default.profile
 
 CONF_FILES_PERMS+=	${PREFIX}/share/examples/drupal/default.settings.php \
-			${DRUPAL}/sites/default/default.settings.php \
+			${DRUPAL}/sites/default/settings.php \
 			${WWW_USER} ${WWW_GROUP} 0640
 
 SUBST_CLASSES+=		conf
@@ -80,6 +80,8 @@ do-install:
 		${PREFIX}/share/examples/drupal/drupal.conf
 	${INSTALL_DATA} ${WRKSRC}/sites/default/default.settings.php \
 		${PREFIX}/share/examples/drupal/default.settings.php
+	${INSTALL_DATA} ${WRKSRC}/sites/default/default.settings.php \
+		${PREFIX}/share/examples/drupal/settings.php
 	${INSTALL_DATA} ${WRKSRC}/profiles/default/default.profile \
 		${PREFIX}/share/examples/drupal/default.profile
 	${INSTALL_DATA} ${WRKSRC}/*.php ${DRUPAL}

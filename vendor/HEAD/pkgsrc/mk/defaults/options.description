@@ -42,6 +42,7 @@ catalog-sqlite		Store Bacula catalog in SQLite database.
 catalog-sqlite3		Store Bacula catalog in SQLite 3 database.
 cdparanoia		Use cdparanoia to rip CDDA media.
 cgi			Enable CGI support
+cjk			Enable Chinese/Japanese/Korean support.
 clamav			Enable ClamAV support.
 claws-mail-jpilot	Add jpilot support
 clisp			Common/C Lisp
@@ -59,6 +60,7 @@ cvsgraph		Enable cvsgraph support.
 dar-int32		Use 32-bit integers for file lengths in Dar.
 dar-int64		Use 64-bit integers for file lengths in Dar.
 darwin			Build and/or run on Darwin and Mac OS X.
+db2			Enable db2 support.
 db4			Enable db4 support.
 dbh			Enable DBH support.
 dbus			Enable dbus (desktop bus) support.
@@ -186,10 +188,12 @@ ispell			Add spell checking support using ispell.
 jasper			Enable JPEG 2000 support using the jasper library.
 java			Enable Java support.
 javascript		Enable Javascript support.
+jdbc-mysql31		Enable MySQL JDBC driver.
+jdbc-mysql5		Enable MySQL JDBC driver.
 jpeg			Enable JPEG support.
 jwhois-enable-cache	Enable cache support.
 kde			Enable KDE support.
-kde4			Enable support for KDE 4.
+kde4			Enable support for KDE 4 (needs pkgsrc-wip).
 kerberos		Enable Kerberos support.
 kerberos4		Enable Kerberos4 support.
 kermit-suid-uucp	Install kermit setuid uucp.
@@ -310,7 +314,8 @@ openldap		Enable OpenLDAP support.
 oracle			Enable Oracle support.
 oss			Enable support for the Open Sound System audio library.
 osx-addressbook		Enable support for the Mac OS X Address Book.
-otr				Enable Off-the-record encrypted messaging
+otr			Enable Off-the-record encrypted messaging
+p0f			Enable support for passive OS fingerprinting.
 pam			Enable PAM support.
 pcb-motif		Use Motif for the gui instead of GTK for cad/pcb.
 pcre			Enable Perl-compatible regular expressions.
@@ -319,6 +324,7 @@ pgsql			Enable PostgreSQL support.
 pinepwd			Enable $HOME/.pinepwd stored IMAP password file.
 pinfo-native-curses	Use NetBSD native curses rather than ncurses.
 png			Enable PNG support.
+postfix-milter		Build the milter with support for the Postfix MTA.
 postfix-stress		Enable Postfix stress-adaptive behaviour.
 prime			Use Prime for Kana-to-Kanji conversion.
 proftpd-readme		Enable mod_readme.
@@ -350,6 +356,7 @@ scapy-pyx		Add in py-X support
 scmgit-gui		Build the GUI in Tcl/Tk.
 sdl			Use SDL as display library.
 seamonkey		Use seamonkey as gecko rendering engine.
+sendmail-milter		Build the milter with support for the Sendmail MTA.
 sendmail-socketmap	Enable Sendmail SOCKETMAP support.
 serialconsole		Enable use of serial console
 sieve			Enable sieve support.
@@ -357,6 +364,7 @@ simd			Enable MMX/3DNOW/SSE/Altivec support.
 sj3			Use SJ3 for Kana-to-Kanji conversion.
 skey			Enable S/Key support.
 slang			Enable S-Lang support.
+slp			Enable Service Location Protocol support.
 small-net		Tune for a smaller networks.
 smime			Enable S/MIME support.
 smokeping-speedycgi	Enable SpeedyCGI.
@@ -367,6 +375,7 @@ snort-flexresp2		NEW Flexible Responses on hostile connection attempts
 snort-prelude		Enable prelude support.
 socks4			Enable Socks4 support.
 socks5			Enable Socks5 support.
+spamassassin		Enable SpamAssassin support.
 spamassassin-perl-warnings	Enable Perl warnings at run-time.
 spamassassin-taint-checks	Enable Perl taint checks to improve security.
 spamassassin-test-awl-sql	Enable tests of the SQL module for the automatic whitelist.
@@ -395,11 +404,13 @@ starttls		Enable TLS support.
 streamtuner-local	Enable local metadata support
 streamtuner-xiph	Enable the Xiph plugin	
 sun-jre-jce		Use unlimited strength cryptography extension.
+suhosin			Enable suhosin security enhancements for PHP.
 svg			Enable SVG support.
 svn			Enable subversion support
 syncdir			Force synchronous link() and related syscalls.
 syslog			Enable syslog support.
 syslogng-spoof		Spoof the original source address of forwarded packets
+tcpwrappers		Enable tcpwrappers support.
 theora			Use the theora codecs.
 threads			Enable threads support.
 tin-use-inn-spool	Use the INN spool directories.

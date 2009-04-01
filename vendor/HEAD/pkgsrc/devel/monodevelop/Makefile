@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.16 2009/01/19 22:45:40 kefren Exp $
+# $NetBSD: Makefile,v 1.18 2009/03/25 22:37:12 he Exp $
 
-DISTNAME=	monodevelop-1.9.1
-CATEGORIES=	devel
+DISTNAME=	monodevelop-1.9.2
 PKGREVISION=	1
+CATEGORIES=	devel
 MASTER_SITES=	http://go-mono.com/sources/monodevelop/
 EXTRACT_SUFX=	.tar.bz2
 
@@ -11,12 +11,13 @@ HOMEPAGE=	http://www.monodevelop.com/
 COMMENT=	IDE for C\# and other .NET languages
 
 GNU_CONFIGURE=	yes
-USE_TOOLS+=	gmake perl:run pkg-config bash
+USE_TOOLS+=	gmake perl:run pkg-config bash:run
 EXTRACT_USING=	gtar
 MAKE_JOBS_SAFE=	no
 
 USE_DIRS+=	xdg-1.4
 
+REPLACE_BASH+=	mdtool.in
 REPLACE_BASH+=	monodevelop.in
 REPLACE_BASH+=	src/addins/MonoDevelop.Autotools/templates/configure.template
 REPLACE_BASH+=	contrib/extract_makefile_variable.sh

@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.21 2009/02/06 17:31:34 drochner Exp $
+# $NetBSD: Makefile,v 1.24 2009/03/22 19:01:41 wiz Exp $
 #
 # PKGNAME derives from the supported API (still from
 # release 3.14). See also PLIST.
 #
 
-DISTNAME=	gtkhtml-3.24.4
+DISTNAME=	gtkhtml-3.26.0
 PKGNAME=	${DISTNAME:S/gtkhtml/gtkhtml314/}
 CATEGORIES=	www gnome
-MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gtkhtml/3.24/}
+MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gtkhtml/3.26/}
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
@@ -23,14 +23,6 @@ USE_TOOLS+=		gmake intltool msgfmt pkg-config
 
 PKGCONFIG_OVERRIDE+=	components/editor/gtkhtml-editor.pc.in
 PKGCONFIG_OVERRIDE+=	gtkhtml/libgtkhtml.pc.in
-
-# The gettext version in pkgsrc cannot handle the .po files, so
-# we strip out usage of the newer features (context and fuzzy matches)
-post-patch:
-	for f in ${WRKSRC}/po/*.po ; do \
-	    mv $$f $$f.original ; \
-	    ${AWK} -f ${FILESDIR}/msgfmtstrip $$f.original > $$f ; \
-	done
 
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../devel/libbonobo/buildlink3.mk"

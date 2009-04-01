@@ -1,4 +1,4 @@
-/*	$NetBSD: show.c,v 1.23 2009/02/02 12:35:01 joerg Exp $	*/
+/*	$NetBSD: show.c,v 1.25 2009/03/02 17:13:49 joerg Exp $	*/
 
 #if HAVE_CONFIG_H
 #include "config.h"
@@ -7,7 +7,7 @@
 #if HAVE_SYS_CDEFS_H
 #include <sys/cdefs.h>
 #endif
-__RCSID("$NetBSD: show.c,v 1.23 2009/02/02 12:35:01 joerg Exp $");
+__RCSID("$NetBSD: show.c,v 1.25 2009/03/02 17:13:49 joerg Exp $");
 
 /*
  * FreeBSD install - a package for the installation and maintainance
@@ -366,7 +366,10 @@ show_summary(struct pkg_meta *meta, package_t *plist, const char *binpkgfile)
 	print_string_as_var("COMMENT", meta->meta_comment);
 	print_string_as_var("SIZE_PKG", meta->meta_size_pkg);
 
-	var_copy_list(meta->meta_build_info, bi_vars);
+	if (meta->meta_build_info)
+		var_copy_list(meta->meta_build_info, bi_vars);
+	else
+		warnx("Build information missing");
 
 	if (binpkgfile != NULL && stat(binpkgfile, &st) == 0) {
 	    const char *base;
@@ -401,4 +404,22 @@ print_string_as_var(const char *var, const char *str)
 		printf("%s=%s\n", var, str);
 
 	return 0;
+}
+
+void
+show_list(lpkg_head_t *pkghead, const char *title)
+{
+	lpkg_t *lpp;
+
+	if (!Quiet)
+		printf("%s%s", InfoPrefix, title);
+
+	while ((lpp = TAILQ_FIRST(pkghead)) != NULL) {
+		TAILQ_REMOVE(pkghead, lpp, lp_link);
+		puts(lpp->lp_name);
+		free_lpkg(lpp);
+	}
+
+	if (!Quiet)
+		printf("\n");
 }

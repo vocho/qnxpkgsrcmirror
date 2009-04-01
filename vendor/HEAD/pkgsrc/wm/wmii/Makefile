@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.18 2008/05/16 09:06:03 ghen Exp $
+# $NetBSD: Makefile,v 1.20 2009/03/29 09:07:37 wiz Exp $
 
 DISTNAME=		wmii-3.6
-PKGREVISION=		2
+PKGREVISION=		4
 CATEGORIES=		wm
 MASTER_SITES=		http://www.suckless.org/download/
 
@@ -9,7 +9,9 @@ MAINTAINER=		ghen@NetBSD.org
 HOMEPAGE=		http://wmii.suckless.org/
 COMMENT=		Modular and keyboard-friendly window manager
 
-DEPENDS+=		dmenu>=3.6:../../x11/dmenu
+DEPENDS+=		dmenu>=3.7:../../x11/dmenu
+
+USE_TOOLS+=		tbl
 
 NO_CONFIGURE=		yes
 
@@ -28,6 +30,10 @@ CONF_FILES_MODE=	0755
 .for f in ${EGFILES}
 CONF_FILES+=		${EGDIR}/${f} ${PKG_SYSCONFDIR}/${f}
 .endfor
+
+post-build:
+	mv ${WRKSRC}/man/wmii.1 ${WRKSRC}/man/wmii.tbl
+	${TBL} ${WRKSRC}/man/wmii.tbl > ${WRKSRC}/man/wmii.1
 
 .include "../../devel/libixp/buildlink3.mk"
 .include "../../x11/xextproto/buildlink3.mk"

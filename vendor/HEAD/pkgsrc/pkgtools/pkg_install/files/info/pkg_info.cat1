@@ -4,7 +4,7 @@ NNAAMMEE
      ppkkgg__iinnffoo -- a utility for displaying information on software packages
 
 SSYYNNOOPPSSIISS
-     ppkkgg__iinnffoo [--BBbbccDDddFFffhhIIiikkLLmmNNnnppqqRRSSssVVvvXX] [--ee _p_a_c_k_a_g_e] [--EE _p_a_c_k_a_g_e]
+     ppkkgg__iinnffoo [--BBbbccDDddFFffhhIIiikkLLmmNNnnppqqrrRRSSssVVvvXX] [--ee _p_a_c_k_a_g_e] [--EE _p_a_c_k_a_g_e]
               [--KK _p_k_g___d_b_d_i_r] [--ll _p_r_e_f_i_x] _p_k_g_-_n_a_m_e _._._.
      ppkkgg__iinnffoo [--aa | --uu] [flags]
      ppkkgg__iinnffoo [--QQ _v_a_r_i_a_b_l_e] _p_k_g_-_n_a_m_e _._._.
@@ -107,6 +107,8 @@ DDEESSCCRRIIPPTTIIOONN
 
      --RR      For each package, show the packages that require it.
 
+     --rr      For each package, recursively show the packages that require it.
+
      --SS      Show the size of this package and all the packages it requires,
              in bytes.
 
@@ -171,25 +173,6 @@ EENNVVIIRROONNMMEENNTT
                 the package database directory.  The default package database
                 directory is _/_v_a_r_/_d_b_/_p_k_g.
 
-     PKG_PATH   This can be used to specify a semicolon-separated list of
-                paths and URLs to search for package files.  If PKG_PATH is
-                used, the suffix _._t_g_z is automatically appended to the
-                _p_k_g_-_n_a_m_e, whereas searching in the current directory uses
-                _p_k_g_-_n_a_m_e literally.
-
-     PKG_TMPDIR, TMPDIR
-                These are tried in turn (if set) as candidate directories in
-                which to create a ``staging area'' for any files extracted by
-                ppkkgg__iinnffoo from package files.  If neither PKG_TMPDIR nor TMPDIR
-                yields a suitable scratch directory, _/_v_a_r_/_t_m_p, _/_t_m_p, and
-                _/_u_s_r_/_t_m_p are tried in turn.  Note that _/_u_s_r_/_t_m_p may be cre-
-                ated, if it doesn't already exist.
-
-                Since ppkkgg__iinnffoo requires very little information to be
-                extracted from any package files examined, it is unlikely that
-                these environment variables would ever need to be used to work
-                around limited available space in the default locations.
-
 SSEEEE AALLSSOO
      pkg_add(1), pkg_admin(1), pkg_create(1), pkg_delete(1), mktemp(3),
      pkgsrc(7), mtree(8)
@@ -203,4 +186,4 @@ AAUUTTHHOORRSS
              NetBSD wildcard dependency processing, pkgdb, depends displaying,
              pkg size display etc.
 
-NetBSD 4.0                       March 2, 2007                      NetBSD 4.0
+NetBSD 5.0                       March 2, 2009                      NetBSD 5.0

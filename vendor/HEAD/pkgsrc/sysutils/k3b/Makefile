@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.25 2008/10/15 07:44:57 markd Exp $
+# $NetBSD: Makefile,v 1.27 2009/02/21 13:22:43 wiz Exp $
 #
 
 DISTNAME=		k3b-1.0.5
+PKGREVISION=		1
 CATEGORIES=		sysutils
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=k3b/}
 EXTRACT_SUFX=		.tar.bz2
@@ -9,6 +10,8 @@ EXTRACT_SUFX=		.tar.bz2
 MAINTAINER=		markd@NetBSD.org
 HOMEPAGE=		http://www.k3b.org/
 COMMENT=		DVD and CD authoring program
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 DEPENDS+=		cdrdao-[0-9]*:../../sysutils/cdrdao
 DEPENDS+=		{cdrtools,cdrtools-ossdvd}-[0-9]*:../../sysutils/cdrtools
@@ -20,8 +23,6 @@ USE_LIBTOOL=		yes
 
 ONLY_FOR_PLATFORM=	FreeBSD-*-* Linux-*-* NetBSD-*-* DragonFly-*-*
 
-BUILDLINK_DEPMETHOD.libXt?=	build
-
 .include "../../meta-pkgs/kde3/kde3.mk"
 .include "../../audio/flac/buildlink3.mk"
 .include "../../audio/lame/buildlink3.mk"
@@ -31,7 +32,4 @@ BUILDLINK_DEPMETHOD.libXt?=	build
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../x11/kdebase3/buildlink3.mk"
 .include "../../x11/kdelibs3/buildlink3.mk"
-.include "../../x11/libSM/buildlink3.mk"
-.include "../../x11/libX11/buildlink3.mk"
-.include "../../x11/libXt/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.8 2009/01/20 10:08:17 sketch Exp $
+# $NetBSD: Makefile,v 1.11 2009/03/18 13:30:45 jmcneill Exp $
 #
 
 POLICYKIT_VER=		0.9
 DISTNAME=		PolicyKit-${POLICYKIT_VER}
 PKGNAME=		policykit-${POLICYKIT_VER}
-PKGREVISION=		3
+PKGREVISION=		4
 CATEGORIES=		security
 MASTER_SITES=		http://hal.freedesktop.org/releases/
 
-MAINTAINER=		jmcneill@NetBSD.org
+MAINTAINER=		netbsd-desktop@NetBSD.org
 HOMEPAGE=		http://hal.freedesktop.org/
 COMMENT=		Framework for managing admin policies and privileges
 
@@ -49,6 +49,14 @@ CONFIGURE_ARGS+=	--localstatedir=${VARBASE}
 CONFIGURE_ARGS+=	--with-polkit-user=${POLICYKIT_USER}
 CONFIGURE_ARGS+=	--with-polkit-group=${POLICYKIT_GROUP}
 
+OWN_DIRS_PERMS+=	${VARBASE}/lib/PolicyKit \
+				${ROOT_USER} ${POLICYKIT_GROUP} 0770
+OWN_DIRS_PERMS+=	${VARBASE}/lib/PolicyKit-public \
+				${POLICYKIT_USER} ${ROOT_GROUP} 0755
+OWN_DIRS_PERMS+=	${VARBASE}/lib/misc ${ROOT_USER} ${ROOT_GROUP} 0755
+CONF_FILES_PERMS+=	/dev/null ${VARBASE}/lib/misc/PolicyKit.reload \
+				${POLICYKIT_USER} ${POLICYKIT_GROUP} 0664
+
 .include "../../mk/bsd.prefs.mk"
 
 .if ${OPSYS} == "NetBSD" || ${OPSYS} == "DragonFly"
@@ -56,9 +64,7 @@ post-install:
 	${INSTALL_DATA} ${FILESDIR}/PolicyKit.conf.NetBSD ${DESTDIR}${EGDIR}/PolicyKit.conf
 .endif
 
-.if ${OPSYS} == "Darwin"
 BUILDLINK_TRANSFORM+=	rm:-Wl,--as-needed
-.endif
 
 pre-configure:
 	cd ${WRKSRC} && autoconf

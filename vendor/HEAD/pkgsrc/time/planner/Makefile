@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.11 2009/01/04 18:01:01 wiz Exp $
+# $NetBSD: Makefile,v 1.13 2009/03/08 15:56:47 wiz Exp $
 #
 
 DISTNAME=	planner-0.14.3
@@ -17,6 +17,7 @@ USE_DIRS+=		gnome2-1.5
 USE_PKGLOCALEDIR=	yes
 USE_TOOLS+=		gmake intltool msgfmt pkg-config
 USE_LIBTOOL=		yes
+MAKE_JOBS_SAFE=		no
 
 PKGCONFIG_OVERRIDE=	libplanner-1.pc.in
 
@@ -36,7 +37,7 @@ GCONF_SCHEMAS=		planner.schemas
 .include "../../sysutils/gnome-vfs/buildlink3.mk"
 .include "../../textproc/libxml2/buildlink3.mk"
 .include "../../textproc/libxslt/buildlink3.mk"
-.include "../../textproc/rarian/omf.mk"
+.include "../../mk/omf-scrollkeeper.mk"
 .include "../../x11/gtk2/buildlink3.mk"
 
 .include "../../mk/bsd.pkg.mk"

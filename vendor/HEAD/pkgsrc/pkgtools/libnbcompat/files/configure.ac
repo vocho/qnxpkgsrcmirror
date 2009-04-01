@@ -1,4 +1,4 @@
-dnl $NetBSD: configure.ac,v 1.70 2008/11/08 21:35:58 joerg Exp $
+dnl $NetBSD: configure.ac,v 1.72 2009/03/22 22:33:13 joerg Exp $
 
 dnl Process this file with autoconf to produce a configure script.
 AC_PREREQ(2.52)
@@ -135,6 +135,7 @@ AC_CHECK_FUNC(SHA512_File, [:], [
 AC_ARG_ENABLE([db],
 	[AS_HELP_STRING([--enable-db], [include DB implementation])])
 AC_SUBST(WITH_DB, $enable_db)
+AC_CHECK_FUNCS(issetugid)
 
 AC_ARG_ENABLE([bsd-getopt],
 	[AS_HELP_STRING([--enable-bsd-getopt],
@@ -147,27 +148,17 @@ AC_CHECK_DECLS([optind, optreset], [:], [:], [
 ])
 
 
-pkg_use_nbcompat_getopt_long=yes
 AC_CHECK_HEADERS([getopt.h], [
 	AC_MSG_TRY_COMPILE([for struct option], pkg_cv_have_struct_option,
 		[ #include <getopt.h> ], [ struct option X; ],
-		[pkg_use_nbcompat_getopt_long=no],
-		[pkg_use_nbcompat_getopt_long=yes])
+		[:],
+		[AC_LIBOBJ(getopt_long)])
 ])
 
 if test "$enable_bsd_getopt" = yes; then
 	if test "$ac_cv_have_decl_optreset" = no; then
-		pkg_use_nbcompat_getopt_long=yes
+		AC_LIBOBJ(getopt)
 	fi
-fi
-
-if test $pkg_use_nbcompat_getopt_long = yes; then
-	AC_DEFINE(HAVE_NBCOMPAT_GETOPT_LONG)
-	AH_TEMPLATE([HAVE_NBCOMPAT_GETOPT_LONG], [
-		Define to 1 if the `getopt_long' function is
-		built into the library.
-	])
-	AC_LIBOBJ(getopt_long)
 fi
 
 dnl Check that this vis.h has *vis()-related functions because Solaris'

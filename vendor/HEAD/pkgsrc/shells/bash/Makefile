@@ -1,22 +1,17 @@
-# $NetBSD: Makefile,v 1.40 2008/12/20 21:08:02 christos Exp $
+# $NetBSD: Makefile,v 1.43 2009/03/31 11:14:42 hasso Exp $
 
-DISTNAME=	bash-3.2
-PKGNAME=	bash-3.2.48
+BASH_VERSION=		4.0
+BASH_PATCHLEVEL=	10
+
+DISTNAME=	bash-${BASH_VERSION}
+PKGNAME=	bash-${BASH_VERSION}.${BASH_PATCHLEVEL}
 CATEGORIES=	shells
 MASTER_SITES=	${MASTER_SITE_GNU:=bash/} \
 		ftp://ftp.cwru.edu/pub/bash/
 
-PATCH_SITES=	${MASTER_SITES:=bash-3.2-patches/}
-PATCHFILES=	bash32-001 bash32-002 bash32-003 bash32-004 bash32-005
-PATCHFILES+=	bash32-006 bash32-007 bash32-008 bash32-009 bash32-010
-PATCHFILES+=	bash32-011 bash32-012 bash32-013 bash32-014 bash32-015
-PATCHFILES+=	bash32-016 bash32-017 bash32-018 bash32-019 bash32-020
-PATCHFILES+=	bash32-021 bash32-022 bash32-023 bash32-024 bash32-025
-PATCHFILES+=	bash32-026 bash32-027 bash32-028 bash32-029 bash32-030
-PATCHFILES+=	bash32-031 bash32-032 bash32-033 bash32-034 bash32-035
-PATCHFILES+=	bash32-036 bash32-037 bash32-038 bash32-039 bash32-040
-PATCHFILES+=	bash32-041 bash32-042 bash32-043 bash32-044 bash32-045
-PATCHFILES+=	bash32-046 bash32-047 bash32-048
+PATCH_SITES=	${MASTER_SITES:=bash-4.0-patches/}
+PATCHFILES+=	bash40-001 bash40-002 bash40-003 bash40-004 bash40-005
+PATCHFILES+=	bash40-006 bash40-007 bash40-008 bash40-009 bash40-010
 
 MAINTAINER=	wiz@NetBSD.org
 HOMEPAGE=	http://www.gnu.org/software/bash/bash.html
@@ -27,7 +22,7 @@ CONFLICTS=	static-bash-[0-9]*
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
 PKG_DESTDIR_SUPPORT=	user-destdir
 
-USE_TOOLS+=		makeinfo yacc
+USE_TOOLS+=		makeinfo bison
 USE_PKGLOCALEDIR=	yes
 TEXINFO_REQD=		4.1
 GNU_CONFIGURE=		yes
@@ -73,17 +68,12 @@ BUILDLINK_DEPMETHOD.gettext=	build
 BUILDLINK_DEPMETHOD.readline=	build
 .endif
 
-# the code has problems with older versions of yacc
-.if !empty(MACHINE_PLATFORM:MIRIX-5*)
-USE_TOOLS+=	bison
-.endif
-
 # Use "readline" package on Darwin to avoid link erros.
 .if ${OPSYS} == "Darwin"
 CONFIGURE_ARGS+=		--with-installed-readline
 
 USE_GNU_READLINE=		yes
-BUILDLINK_API_DEPENDS.readline+=	readline>=4.3
+BUILDLINK_API_DEPENDS.readline+=	readline>=6.0
 
 .include "../../devel/readline/buildlink3.mk"
 .endif

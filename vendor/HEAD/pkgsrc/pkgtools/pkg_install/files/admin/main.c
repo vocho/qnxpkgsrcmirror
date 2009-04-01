@@ -1,4 +1,4 @@
-/*	$NetBSD: main.c,v 1.46 2009/02/02 12:35:00 joerg Exp $	*/
+/*	$NetBSD: main.c,v 1.48 2009/03/08 14:50:36 joerg Exp $	*/
 
 #if HAVE_CONFIG_H
 #include "config.h"
@@ -7,7 +7,7 @@
 #if HAVE_SYS_CDEFS_H
 #include <sys/cdefs.h>
 #endif
-__RCSID("$NetBSD: main.c,v 1.46 2009/02/02 12:35:00 joerg Exp $");
+__RCSID("$NetBSD: main.c,v 1.48 2009/03/08 14:50:36 joerg Exp $");
 
 /*-
  * Copyright (c) 1999-2008 The NetBSD Foundation, Inc.
@@ -70,6 +70,10 @@ __RCSID("$NetBSD: main.c,v 1.46 2009/02/02 12:35:00 joerg Exp $");
 #endif
 #if HAVE_STRING_H
 #include <string.h>
+#endif
+
+#ifndef BOOTSTRAP
+#include <archive.h>
 #endif
 
 #include "admin.h"
@@ -533,26 +537,22 @@ main(int argc, char *argv[])
 	} else if (strcasecmp(argv[0], "audit-history") == 0) {
 		audit_history(--argc, ++argv);
 	} else if (strcasecmp(argv[0], "check-signature") == 0) {
-#ifdef HAVE_SSL
 		struct archive *pkg;
-		void *cookie;
 		int rc;
 
 		rc = 0;
 		for (--argc, ++argv; argc > 0; --argc, ++argv) {
-			pkg = open_archive(*argv, &cookie);
+			pkg = open_archive(*argv);
 			if (pkg == NULL) {
 				warnx("%s could not be opened", *argv);
 				continue;
 			}
-			if (pkg_full_signature_check(pkg))
+			if (pkg_full_signature_check(&pkg))
 				rc = 1;
-			close_archive(pkg);
+			if (!pkg)
+				archive_read_finish(pkg);
 		}
 		return rc;
-#else
-		errx(EXIT_FAILURE, "OpenSSL support is not included");
-#endif
 	} else if (strcasecmp(argv[0], "x509-sign-package") == 0) {
 #ifdef HAVE_SSL
 		--argc;
