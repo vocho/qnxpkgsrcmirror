@@ -1,22 +1,13 @@
-# $NetBSD: buildlink3.mk,v 1.16 2008/03/01 03:09:35 jlam Exp $
+# $NetBSD: buildlink3.mk,v 1.18 2009/03/20 19:24:22 joerg Exp $
 
-BUILDLINK_DEPTH:=		${BUILDLINK_DEPTH}+
-LIBSLANG_BUILDLINK3_MK:=	${LIBSLANG_BUILDLINK3_MK}+
+BUILDLINK_TREE+=	libslang
 
-.include "../../mk/bsd.fast.prefs.mk"
+.if !defined(LIBSLANG_BUILDLINK3_MK)
+LIBSLANG_BUILDLINK3_MK:=
 
-.if !empty(BUILDLINK_DEPTH:M+)
-BUILDLINK_DEPENDS+=	libslang
-.endif
-
-BUILDLINK_PACKAGES:=	${BUILDLINK_PACKAGES:Nlibslang}
-BUILDLINK_PACKAGES+=	libslang
-BUILDLINK_ORDER:=	${BUILDLINK_ORDER} ${BUILDLINK_DEPTH}libslang
-
-.if !empty(LIBSLANG_BUILDLINK3_MK:M+)
 BUILDLINK_API_DEPENDS.libslang+=	libslang>=1.4.9nb1
 BUILDLINK_ABI_DEPENDS.libslang+=	libslang>=1.4.9nb4
 BUILDLINK_PKGSRCDIR.libslang?=	../../devel/libslang
-.endif	# LIBSLANG_BUILDLINK3_MK
+.endif # LIBSLANG_BUILDLINK3_MK
 
-BUILDLINK_DEPTH:=		${BUILDLINK_DEPTH:S/+$//}
+BUILDLINK_TREE+=	-libslang

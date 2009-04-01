@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.56 2009/01/04 18:01:00 wiz Exp $
+# $NetBSD: Makefile,v 1.58 2009/03/08 15:56:47 wiz Exp $
 #
 
 DISTNAME=	lilypond-2.10.33
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	print
 MASTER_SITES=	http://lilypond.org/download/sources/v2.10/
 
@@ -46,6 +46,6 @@ DEPENDS+=	potrace>=1.8:../../graphics/potrace
 .include "../../fonts/mftrace/buildlink3.mk"
 .include "../../lang/guile/buildlink3.mk"
 .include "../../lang/python/application.mk"
-.include "../../textproc/rarian/omf.mk"
+.include "../../mk/omf-scrollkeeper.mk"
 .include "../../mk/tex.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

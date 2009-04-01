@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.4 2009/02/07 19:11:04 joerg Exp $
+# $NetBSD: Makefile,v 1.7 2009/03/22 20:50:10 wiz Exp $
 #
 
-DISTNAME=		hal-info-20081219
+DISTNAME=		hal-info-20090309
 CATEGORIES=		sysutils
 MASTER_SITES=		http://hal.freedesktop.org/releases/
 
-MAINTAINER=		jmcneill@NetBSD.org
+MAINTAINER=		netbsd-desktop@NetBSD.org
 HOMEPAGE=		http://hal.freedesktop.org/
 COMMENT=		FreeDesktop hardware abstraction layer (info subpackage)
 

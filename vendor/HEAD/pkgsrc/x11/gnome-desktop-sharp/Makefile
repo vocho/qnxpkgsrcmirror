@@ -1,9 +1,10 @@
-# $NetBSD: Makefile,v 1.4 2008/10/24 20:59:54 wiz Exp $
+# $NetBSD: Makefile,v 1.6 2009/03/25 22:37:15 he Exp $
 #
 
-DISTNAME=	gnome-desktop-sharp-2.24.0
+DISTNAME=	gnome-desktop-sharp-2.26.0
+PKGREVISION=	1
 CATEGORIES=	x11
-MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gnome-desktop-sharp/2.24/}
+MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gnome-desktop-sharp/2.26/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.mono-project.com/GtkSharp

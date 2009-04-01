@@ -1,4 +1,4 @@
-/*	$NetBSD: perform.c,v 1.75 2009/02/03 19:47:37 joerg Exp $	*/
+/*	$NetBSD: perform.c,v 1.84 2009/03/08 14:50:36 joerg Exp $	*/
 #if HAVE_CONFIG_H
 #include "config.h"
 #endif
@@ -6,7 +6,7 @@
 #if HAVE_SYS_CDEFS_H
 #include <sys/cdefs.h>
 #endif
-__RCSID("$NetBSD: perform.c,v 1.75 2009/02/03 19:47:37 joerg Exp $");
+__RCSID("$NetBSD: perform.c,v 1.84 2009/03/08 14:50:36 joerg Exp $");
 
 /*-
  * Copyright (c) 2003 Grant Beattie <grant@NetBSD.org>
@@ -123,7 +123,7 @@ static const struct pkg_meta_desc {
 	{ 0, NULL, 0 },
 };
 
-static int pkg_do(const char *, int);
+static int pkg_do(const char *, int, int);
 
 static int
 mkdir_p(const char *path)
@@ -357,6 +357,7 @@ check_already_installed(struct pkg_task *pkg)
 		warnx("package `%s' already recorded as installed",
 		      pkg->pkgname);
 	}
+	close(fd);
 	return 0;
 
 }
@@ -458,7 +459,7 @@ read_buildinfo(struct pkg_task *pkg)
 
 	data = pkg->meta_data.meta_build_info;
 
-	for (; *data != '\0'; data = next_line) {
+	for (; data != NULL && *data != '\0'; data = next_line) {
 		if ((eol = strchr(data, '\n')) == NULL) {
 			eol = data + strlen(data);
 			next_line = eol;
@@ -549,6 +550,7 @@ write_meta_data(struct pkg_task *pkg)
 				warn("Can't write meta data file: %s",
 				    filename);
 				free(filename);
+				close(fd);
 				return -1;
 			}
 			len -= ret;
@@ -771,12 +773,13 @@ pkg_register_depends(struct pkg_task *pkg)
 		required_by = pkgdb_pkg_file(pkg->dependencies[i], REQUIRED_BY_FNAME);
 
 		fd = open(required_by, O_WRONLY | O_APPEND | O_CREAT, 0644);
-		if (fd == -1)
+		if (fd == -1) {
 			warn("can't open dependency file '%s',"
 			    "registration is incomplete!", required_by);
-		else if (write(fd, text, text_len) != text_len)
+		} else if (write(fd, text, text_len) != text_len) {
 			warn("can't write to dependency file `%s'", required_by);
-		else if (close(fd) == -1)
+			close(fd);
+		} else if (close(fd) == -1)
 			warn("cannot close file %s", required_by);
 
 		free(required_by);
@@ -890,9 +893,30 @@ run_install_script(struct pkg_task *pkg, const char *argument)
 	return ret;
 }
 
+struct find_conflict_data {
+	const char *pkg;
+	const char *old_pkg;
+	const char *pattern;
+};
+
+static int
+check_explicit_conflict_iter(const char *cur_pkg, void *cookie)
+{
+	struct find_conflict_data *data = cookie;
+
+	if (data->old_pkg && strcmp(data->old_pkg, cur_pkg) == 0)
+		return 0;
+
+	warnx("Package `%s' conflicts with `%s', and `%s' is installed.",
+	    data->pkg, data->pattern, cur_pkg);
+
+	return 1;
+}
+
 static int
 check_explicit_conflict(struct pkg_task *pkg)
 {
+	struct find_conflict_data data;
 	char *installed, *installed_pattern;
 	plist_t *p;
 	int status;
@@ -903,15 +927,14 @@ check_explicit_conflict(struct pkg_task *pkg)
 		if (p->type == PLIST_IGNORE) {
 			p = p->next;
 			continue;
-		} else if (p->type != PLIST_PKGCFL)
-			continue;
-		installed = find_best_matching_installed_pkg(p->name);
-		if (installed) {
-			warnx("Package `%s' conflicts with `%s', and `%s' is installed.",
-			    pkg->pkgname, p->name, installed);
-			free(installed);
-			status = -1;
 		}
+		if (p->type != PLIST_PKGCFL)
+			continue;
+		data.pkg = pkg->pkgname;
+		data.old_pkg = pkg->other_version;
+		data.pattern = p->name;
+		status |= match_installed_pkgs(p->name,
+		    check_explicit_conflict_iter, &data);
 	}
 
 	if (some_installed_package_conflicts_with(pkg->pkgname,
@@ -920,7 +943,7 @@ check_explicit_conflict(struct pkg_task *pkg)
 			installed, installed_pattern, pkg->pkgname);
 		free(installed);
 		free(installed_pattern);
-		status = -1;
+		status |= -1;
 	}
 
 	return status;
@@ -1004,7 +1027,7 @@ check_dependencies(struct pkg_task *pkg)
 				    p->name);
 				continue;
 			}
-			if (pkg_do(p->name, 1)) {
+			if (pkg_do(p->name, 1, 0)) {
 				warnx("Can't install dependency %s", p->name);
 				status = -1;
 				break;
@@ -1091,8 +1114,7 @@ start_replacing(struct pkg_task *pkg)
 	if (preserve_meta_data_file(pkg, REQUIRED_BY_FNAME))
 		return -1;
 
-	if (pkg->meta_data.meta_preserve == NULL &&
-	    preserve_meta_data_file(pkg, PRESERVE_FNAME))
+	if (preserve_meta_data_file(pkg, PRESERVE_FNAME))
 		return -1;
 
 	if (pkg->meta_data.meta_installed_info == NULL &&
@@ -1132,7 +1154,7 @@ static int check_input(const char *line, size_t len)
 }
 
 static int
-check_signature(struct pkg_task *pkg, void *signature_cookie, int invalid_sig)
+check_signature(struct pkg_task *pkg, int invalid_sig)
 {
 	char *line;
 	size_t len;
@@ -1219,29 +1241,26 @@ check_vulnerable(struct pkg_task *pkg)
  * Install a single package.
  */
 static int
-pkg_do(const char *pkgpath, int mark_automatic)
+pkg_do(const char *pkgpath, int mark_automatic, int top_level)
 {
 	int status, invalid_sig;
-	void *archive_cookie;
-	void *signature_cookie;
 	struct pkg_task *pkg;
 
 	pkg = xcalloc(1, sizeof(*pkg));
 
 	status = -1;
 
-	if ((pkg->archive = find_archive(pkgpath, &archive_cookie)) == NULL) {
+	pkg->archive = find_archive(pkgpath, top_level);
+	if (pkg->archive == NULL) {
 		warnx("no pkg found for '%s', sorry.", pkgpath);
 		goto clean_find_archive;
 	}
 
-#ifdef HAVE_SSL
 	invalid_sig = pkg_verify_signature(&pkg->archive, &pkg->entry,
-	    &pkg->pkgname, &signature_cookie);
-#else
-	invalid_sig = 1;
-	signature_cookie = NULL;
-#endif
+	    &pkg->pkgname);
+
+	if (pkg->archive == NULL)
+		goto clean_memory;
 
 	if (read_meta_data(pkg))
 		goto clean_memory;
@@ -1250,7 +1269,7 @@ pkg_do(const char *pkgpath, int mark_automatic)
 	if (pkg_parse_plist(pkg))
 		goto clean_memory;
 
-	if (check_signature(pkg, &signature_cookie, invalid_sig))
+	if (check_signature(pkg, invalid_sig))
 		goto clean_memory;
 
 	if (check_vulnerable(pkg))
@@ -1394,15 +1413,10 @@ clean_memory:
 	free_buildinfo(pkg);
 	free_plist(&pkg->plist);
 	free_meta_data(pkg);
-	if (pkg->archive) {
-		archive_read_close(pkg->archive);
-		close_archive(archive_cookie);
-	}
+	if (pkg->archive)
+		archive_read_finish(pkg->archive);
 	free(pkg->other_version);
 	free(pkg->pkgname);
-#ifdef HAVE_SSL
-	pkg_free_signature(signature_cookie);
-#endif
 clean_find_archive:
 	free(pkg);
 	return status;
@@ -1411,25 +1425,15 @@ clean_find_archive:
 int
 pkg_perform(lpkg_head_t *pkgs)
 {
-	int     oldcwd, errors = 0;
+	int     errors = 0;
 	lpkg_t *lpp;
 
-	if ((oldcwd = open(".", O_RDONLY, 0)) == -1)
-		err(EXIT_FAILURE, "unable to open cwd");
-
 	while ((lpp = TAILQ_FIRST(pkgs)) != NULL) {
-		path_prepend_from_pkgname(lpp->lp_name);
-		if (pkg_do(lpp->lp_name, Automatic))
+		if (pkg_do(lpp->lp_name, Automatic, 1))
 			++errors;
-		path_prepend_clear();
 		TAILQ_REMOVE(pkgs, lpp, lp_link);
 		free_lpkg(lpp);
-
-		if (fchdir(oldcwd) == -1)
-			err(EXIT_FAILURE, "unable to restore cwd");
 	}
-
-	close(oldcwd);
 
 	return errors;
 }

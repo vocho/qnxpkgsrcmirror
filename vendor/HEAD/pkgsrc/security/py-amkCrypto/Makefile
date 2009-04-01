@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.22 2008/05/08 18:59:38 joerg Exp $
+# $NetBSD: Makefile,v 1.24 2009/03/05 18:51:31 joerg Exp $
 #
 
 DISTNAME=	pycrypto-2.0.1
 PKGNAME=	${PYPKGPREFIX}-amkCrypto-2.0.1
-PKGREVISION=	2
+PKGREVISION=	3
 CATEGORIES=	security python
 MASTER_SITES=	http://www.amk.ca/files/python/crypto/
 
@@ -13,7 +13,6 @@ COMMENT=	Cryptographic and hash functions for Python
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
-PYBINMODULE=	yes
 PYDISTUTILSPKG=	yes
 
 .include "../../security/openssl/buildlink3.mk"

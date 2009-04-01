@@ -1,13 +1,15 @@
-# $NetBSD: Makefile,v 1.88 2009/01/14 11:34:15 wiz Exp $
+# $NetBSD: Makefile,v 1.91 2009/03/22 19:01:38 wiz Exp $
 
-DISTNAME=		gnome-games-2.24.3
+DISTNAME=		gnome-games-2.26.0
 CATEGORIES=		games gnome
-MASTER_SITES=		${MASTER_SITE_GNOME:=sources/gnome-games/2.24/}
+MASTER_SITES=		${MASTER_SITE_GNOME:=sources/gnome-games/2.26/}
 EXTRACT_SUFX=		.tar.bz2
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://www.gnome.org/
 COMMENT=		GNOME2 games collection
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 CONFLICTS=		xbill-[0-9]*
 
@@ -45,26 +47,25 @@ PYTHON_PATCH_SCRIPTS+=	glchess/src/glchess.in.in
 PYTHON_PATCH_SCRIPTS+=	gnome-sudoku/src/gnome-sudoku.in.in
 PY_PATCHPLIST=		yes
 
-BUILDLINK_API_DEPENDS.glib2+=	glib2>=2.6.3
-BUILDLINK_API_DEPENDS.gtk2+=	gtk2+>=2.8.0
-BUILDLINK_API_DEPENDS.libgnome+=	libgnome>=2.10.0
-BUILDLINK_API_DEPENDS.librsvg+=	librsvg>=2.12.6
-
 .include "../../devel/GConf/schemas.mk"
 .include "../../devel/GConf-ui/buildlink3.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"
+BUILDLINK_API_DEPENDS.glib2+=	glib2>=2.6.3
 .include "../../devel/glib2/buildlink3.mk"
 .include "../../devel/libglade/buildlink3.mk"
+BUILDLINK_API_DEPENDS.libgnome+=	libgnome>=2.10.0
 .include "../../devel/libgnome/buildlink3.mk"
 .include "../../devel/libgnomeui/buildlink3.mk"
 .include "../../games/ggz-client-libs/buildlink3.mk"
 .include "../../graphics/cairo/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
+BUILDLINK_API_DEPENDS.librsvg+=	librsvg>=2.12.6
 .include "../../graphics/librsvg/buildlink3.mk"
 .include "../../lang/guile/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../mk/omf-scrollkeeper.mk"
 .include "../../textproc/gnome-doc-utils/buildlink3.mk"
+BUILDLINK_API_DEPENDS.gtk2+=	gtk2+>=2.8.0
 .include "../../x11/gtk2/buildlink3.mk"
 .include "../../lang/python/application.mk"
 .include "../../lang/python/extension.mk"

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.14 2008/12/19 12:12:53 darcy Exp $
+# $NetBSD: Makefile,v 1.16 2009/03/18 18:38:00 darcy Exp $
 #
 
 DISTNAME=	generate-2.6
@@ -7,9 +7,11 @@ CATEGORIES=	devel
 MASTER_SITES=	ftp://ftp.druid.net/pub/distrib/
 EXTRACT_SUFX=	.tgz
 
-MAINTAINER=	darcy@NetBSD.org
+OWNER=		darcy@NetBSD.org
 HOMEPAGE=	http://www.druid.net/darcy/readme-generate.html
 COMMENT=	Simple text pre-processor
+
+PKG_DESTDIR_SUPPORT=    user-destdir
 
 MAKE_ENV+=	${BSD_MAKE_ENV} LIBS=${LIBS:Q}
 USE_TOOLS+=	gmake

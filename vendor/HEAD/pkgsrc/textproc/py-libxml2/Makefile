@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.31 2008/10/16 13:32:49 drochner Exp $
+# $NetBSD: Makefile,v 1.33 2009/03/05 18:51:32 joerg Exp $
 
-DISTNAME=	libxml2-2.7.2
+DISTNAME=	libxml2-2.7.3
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
 CATEGORIES=	textproc python
 MASTER_SITES=	ftp://xmlsoft.org/libxml2/
@@ -14,7 +14,6 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 
 WRKSRC=		${WRKDIR}/${DISTNAME}/python
 PYDISTUTILSPKG=	YES
-PYBINMODULE=	YES
 NO_CONFIGURE=	YES
 
 SUBST_CLASSES+=		setup

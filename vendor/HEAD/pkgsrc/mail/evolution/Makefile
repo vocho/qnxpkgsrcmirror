@@ -1,9 +1,8 @@
-# $NetBSD: Makefile,v 1.143 2009/01/25 17:07:36 drochner Exp $
+# $NetBSD: Makefile,v 1.148 2009/03/22 19:01:39 wiz Exp $
 
-DISTNAME=		evolution-2.24.3
-PKGREVISION=		1
+DISTNAME=		evolution-2.26.0
 CATEGORIES=		mail time gnome
-MASTER_SITES=		${MASTER_SITE_GNOME:=sources/evolution/2.24/}
+MASTER_SITES=		${MASTER_SITE_GNOME:=sources/evolution/2.26/}
 EXTRACT_SUFX=		.tar.bz2
 
 MAINTAINER=		rh@NetBSD.org
@@ -51,14 +50,6 @@ GCONF_SCHEMAS+=	evolution-mail.schemas
 BUILDLINK_TRANSFORM+=	rm:-DG_DISABLE_DEPRECATED
 BUILDLINK_TRANSFORM+=	rm:-DGTK_DISABLE_DEPRECATED
 
-# The gettext version in pkgsrc cannot handle the .po files, so
-# we strip out usage of the newer features (context and fuzzy matches)
-post-patch:
-	for f in ${WRKSRC}/po/*.po ; do \
-	    mv $$f $$f.original ; \
-	    ${AWK} -f ${FILESDIR}/msgfmtstrip $$f.original > $$f ; \
-	done
-
 .if !exists(/usr/include/semaphore.h)
 LDFLAGS+=	-lsemaphore
 .include "../../devel/pthread-sem/buildlink3.mk"
@@ -78,10 +69,11 @@ BUILDLINK_API_DEPENDS.libbonoboui+=	libbonoboui>=2.4.2
 .include "../../devel/libgnome/buildlink3.mk"
 BUILDLINK_API_DEPENDS.gnome-icon-theme+=	gnome-icon-theme>=2.19.91
 .include "../../devel/libgnomeui/buildlink3.mk"
+.include "../../devel/libgweather/buildlink3.mk"
 .include "../../graphics/gnome-icon-theme/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../graphics/libgnomecanvas/buildlink3.mk"
-BUILDLINK_API_DEPENDS.evolution-data-server+=	evolution-data-server>=2.23.91
+BUILDLINK_API_DEPENDS.evolution-data-server+=	evolution-data-server>=2.24.3
 .include "../../mail/evolution-data-server/buildlink3.mk"
 .include "../../net/ORBit2/buildlink3.mk"
 .include "../../net/libsoup24/buildlink3.mk"

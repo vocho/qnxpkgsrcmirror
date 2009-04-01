@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.265 2009/01/19 22:38:08 kefren Exp $
+# $NetBSD: Makefile,v 1.269 2009/03/20 22:12:03 asau Exp $
 #
 
 COMMENT=	Programming languages
@@ -104,6 +104,7 @@ SUBDIR+=	ocamlduce
 SUBDIR+=	onyx
 SUBDIR+=	oo2c
 SUBDIR+=	opencobol
+SUBDIR+=	openjdk7-bin
 SUBDIR+=	ossp-js
 SUBDIR+=	p2c
 SUBDIR+=	parrot
@@ -118,18 +119,17 @@ SUBDIR+=	pnet
 SUBDIR+=	pnetC
 SUBDIR+=	pnetlib
 SUBDIR+=	pnetlib-nox11
+SUBDIR+=	polyml
 SUBDIR+=	py-basicproperty
 SUBDIR+=	py-funge
 SUBDIR+=	py-html-docs
 SUBDIR+=	py-psyco
 SUBDIR+=	py-pyrex
-SUBDIR+=	py21-html-docs
 SUBDIR+=	py22-html-docs
 SUBDIR+=	py23-html-docs
 SUBDIR+=	py24-html-docs
 SUBDIR+=	py25-html-docs
 #SUBDIR+=	python		# only contains Makefile fragments
-SUBDIR+=	python21
 SUBDIR+=	python23
 SUBDIR+=	python24
 SUBDIR+=	python25
@@ -181,6 +181,7 @@ SUBDIR+=	twelf
 SUBDIR+=	ucblogo
 SUBDIR+=	umb-scheme
 SUBDIR+=	utilisp
+SUBDIR+=	vala
 SUBDIR+=	vscm
 SUBDIR+=	vslisp
 SUBDIR+=	wsbasic

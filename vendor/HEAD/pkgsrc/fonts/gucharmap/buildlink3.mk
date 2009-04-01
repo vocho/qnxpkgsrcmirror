@@ -1,25 +1,15 @@
-# $NetBSD: buildlink3.mk,v 1.21 2008/10/27 14:37:30 wiz Exp $
+# $NetBSD: buildlink3.mk,v 1.23 2009/03/20 19:24:34 joerg Exp $
 
-BUILDLINK_DEPTH:=		${BUILDLINK_DEPTH}+
-GUCHARMAP_BUILDLINK3_MK:=	${GUCHARMAP_BUILDLINK3_MK}+
+BUILDLINK_TREE+=	gucharmap
 
-.if !empty(BUILDLINK_DEPTH:M+)
-BUILDLINK_DEPENDS+=	gucharmap
-.endif
+.if !defined(GUCHARMAP_BUILDLINK3_MK)
+GUCHARMAP_BUILDLINK3_MK:=
 
-BUILDLINK_PACKAGES:=	${BUILDLINK_PACKAGES:Ngucharmap}
-BUILDLINK_PACKAGES+=	gucharmap
-BUILDLINK_ORDER:=	${BUILDLINK_ORDER} ${BUILDLINK_DEPTH}gucharmap
-
-.if !empty(GUCHARMAP_BUILDLINK3_MK:M+)
 BUILDLINK_API_DEPENDS.gucharmap+=	gucharmap>=2.24.1
 BUILDLINK_PKGSRCDIR.gucharmap?=	../../fonts/gucharmap
-.endif	# GUCHARMAP_BUILDLINK3_MK
 
 .include "../../devel/gettext-lib/buildlink3.mk"
-.include "../../devel/libgnome/buildlink3.mk"
-.include "../../devel/libgnomeui/buildlink3.mk"
-.include "../../devel/pango/buildlink3.mk"
 .include "../../x11/gtk2/buildlink3.mk"
+.endif # GUCHARMAP_BUILDLINK3_MK
 
-BUILDLINK_DEPTH:=		${BUILDLINK_DEPTH:S/+$//}
+BUILDLINK_TREE+=	-gucharmap

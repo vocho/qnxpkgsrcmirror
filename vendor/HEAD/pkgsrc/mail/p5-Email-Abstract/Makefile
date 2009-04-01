@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.10 2008/12/10 16:58:26 rhaen Exp $
+# $NetBSD: Makefile,v 1.12 2009/03/21 23:28:39 sno Exp $
 
-DISTNAME=		Email-Abstract-3.000
+DISTNAME=		Email-Abstract-3.001
 PKGNAME=		p5-${DISTNAME}
 SVR4_PKGNAME=		p5ema
 CATEGORIES=		mail perl5
@@ -13,7 +13,7 @@ COMMENT=		Perl5 module for writing representation-independent mail handling code
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 DEPENDS+=		p5-Email-Simple>=1.91:../../mail/p5-Email-Simple
-DEPENDS+=		p5-Module-Pluggable>=1.5:../../devel/p5-Module-Pluggable
+DEPENDS+=		{perl>5.10,p5-Module-Pluggable>=1.5}:../../devel/p5-Module-Pluggable
 
 PERL5_PACKLIST=		auto/Email/Abstract/.packlist
 

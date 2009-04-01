@@ -1,4 +1,4 @@
-<!-- $NetBSD: fixes.xml,v 1.95 2009/01/04 18:00:59 wiz Exp $ -->
+<!-- $NetBSD: fixes.xml,v 1.97 2009/03/08 15:55:32 wiz Exp $ -->
 
 <chapter id="fixes"> <?dbhtml filename="fixes.html"?>
 <title>Making your package work</title>
@@ -1363,10 +1363,7 @@ ${INSTALL_DATA_DIR} ${PREFIX}/dir2
       incorrect; fix them.</para></listitem>
 
       <listitem><para>If files are installed with special owner/group
-      either use @owner/@group in the <filename>PLIST</filename>
-      (preferred) or use <varname>SPECIAL_PERMS</varname>
-      (discouraged). Note that @owner/@group are sticky during
-      install, keep this in mind.</para></listitem>
+      use <varname>SPECIAL_PERMS</varname>.</para></listitem>
 
       <listitem><para>In general, packages should support
       <varname>UNPRIVILEGED</varname> to be able to use
@@ -1581,17 +1578,17 @@ PERL5_PACKLIST= ${PERL5_SITEARCH}/auto/Pg/.packlist
 
 
   <sect2 id="scrollkeeper-data-files">
-    <title>Packages installing scrollkeeper data files</title>
+    <title>Packages installing scrollkeeper/rarian data files</title>
 
     <para>If a package installs <filename>.omf</filename> files, used by
-    scrollkeeper, you need to take some extra steps to make sure they
+    scrollkeeper/rarian, you need to take some extra steps to make sure they
     get registered in the database:</para>
 
     <orderedlist>
       <listitem>
 	<para>Include
-	<filename>../../textproc/rarian/omf.mk</filename>
-	instead of its <filename>buildlink3.mk</filename> file.  This
+	<filename>../../mk/omf-scrollkeeper.mk</filename>
+	instead of rarian's <filename>buildlink3.mk</filename> file.  This
 	takes care of rebuilding the scrollkeeper database at
 	installation and deinstallation time, and disallows any access
 	to it directly from the package.</para>
@@ -1605,7 +1602,8 @@ PERL5_PACKLIST= ${PERL5_SITEARCH}/auto/Pg/.packlist
 
       <listitem>
 	<para>Remove the <filename>share/omf</filename> directory from
-	the PLIST.  It will be handled by scrollkeeper.</para>
+	the PLIST.  It will be handled by rarian. (<command>make
+	print-PLIST</command> does this automatically.)</para>
       </listitem>
     </orderedlist>
   </sect2>

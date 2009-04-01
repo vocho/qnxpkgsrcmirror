@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.17 2007/10/22 08:04:08 ghen Exp $
+# $NetBSD: Makefile,v 1.19 2009/03/19 15:09:46 ghen Exp $
 
 MOZILLA=		seamonkey-gtk1
 

@@ -1,22 +1,15 @@
-# $NetBSD: buildlink3.mk,v 1.6 2006/07/08 23:10:55 jlam Exp $
+# $NetBSD: buildlink3.mk,v 1.8 2009/03/25 23:01:48 he Exp $
 
-BUILDLINK_DEPTH:=	${BUILDLINK_DEPTH}+
-PARROT_BUILDLINK3_MK:=	${PARROT_BUILDLINK3_MK}+
+BUILDLINK_TREE+=	parrot
 
-.if !empty(BUILDLINK_DEPTH:M+)
-BUILDLINK_DEPENDS+=	parrot
-.endif
+.if !defined(PARROT_BUILDLINK3_MK)
+PARROT_BUILDLINK3_MK:=
 
-BUILDLINK_PACKAGES:=	${BUILDLINK_PACKAGES:Nparrot}
-BUILDLINK_PACKAGES+=	parrot
-BUILDLINK_ORDER:=	${BUILDLINK_ORDER} ${BUILDLINK_DEPTH}parrot
-
-.if !empty(PARROT_BUILDLINK3_MK:M+)
 BUILDLINK_API_DEPENDS.parrot+=		parrot>=0.4.0
-BUILDLINK_ABI_DEPENDS.parrot?=		parrot>=0.4.1nb1
+BUILDLINK_ABI_DEPENDS.parrot?=		parrot>=1.0.0
 BUILDLINK_PKGSRCDIR.parrot?=		../../lang/parrot
-.endif	# PARROT_BUILDLINK3_MK
 
 .include "../../textproc/icu/buildlink3.mk"
+.endif # PARROT_BUILDLINK3_MK
 
-BUILDLINK_DEPTH:=	${BUILDLINK_DEPTH:S/+$//}
+BUILDLINK_TREE+=	-parrot

@@ -1,4 +1,4 @@
-# $NetBSD: pyversion.mk,v 1.62 2009/01/23 18:02:32 joerg Exp $
+# $NetBSD: pyversion.mk,v 1.67 2009/03/21 06:24:48 snj Exp $
 
 # This file determines which Python version is used as a dependency for
 # a package.
@@ -8,8 +8,8 @@
 # PYTHON_VERSION_DEFAULT
 #	The preferred Python version to use.
 #
-#	Possible values: 21 23 24 25
-#	Default: 24
+#	Possible values: 23 24 25
+#	Default: 25
 #
 # === Package-settable variables ===
 #
@@ -18,13 +18,13 @@
 #	order of the entries matters, since earlier entries are
 #	preferred over later ones.
 #
-#	Possible values: 25 24 23 21
+#	Possible values: 25 24 23
 #	Default: 25 24 23
 #
 # PYTHON_VERSIONS_INCOMPATIBLE
 #	The Python versions that are NOT acceptable for the package.
 #
-#	Possible values: 21 23 24 25
+#	Possible values: 23 24 25
 #	Default: (depends on the platform)
 #
 # PYTHON_FOR_BUILD_ONLY
@@ -53,20 +53,25 @@
 .if !defined(PYTHON_PYVERSION_MK)
 PYTHON_PYVERSION_MK=	defined
 
+# derive a python version from the package name if possible
+# optionally handled quoted package names
+.if defined(PKGNAME_REQD) && !empty(PKGNAME_REQD:Mpy[0-9][0-9]-*) || \
+    defined(PKGNAME_REQD) && !empty(PKGNAME_REQD:M*-py[0-9][0-9]-*)
+PYTHON_VERSION_REQD?= ${PKGNAME_REQD:C/(^.*-|^)py([0-9][0-9])-.*/\2/}
+.elif defined(PKGNAME_OLD) && !empty(PKGNAME_OLD:Mpy[0-9][0-9]-*) || \
+      defined(PKGNAME_OLD) && !empty(PKGNAME_OLD:M*-py[0-9][0-9]-*)
+PYTHON_VERSION_REQD?= ${PKGNAME_OLD:C/(^.*-|^)py([0-9][0-9])-.*/\2/}
+.endif
+
 .include "../../mk/bsd.prefs.mk"
 
 BUILD_DEFS+=		PYTHON_VERSION_DEFAULT
 BUILD_DEFS_EFFECTS+=	PYPACKAGE
 
-PYTHON_VERSION_DEFAULT?=		24
+PYTHON_VERSION_DEFAULT?=		25
 PYTHON_VERSIONS_ACCEPTED?=		25 24 23
 PYTHON_VERSIONS_INCOMPATIBLE?=		# empty by default
 
-.if ${OPSYS} == "Darwin"
-PYTHON_VERSIONS_INCOMPATIBLE+=		21
-.endif
-
-BUILDLINK_API_DEPENDS.python21?=		python21>=2.1
 BUILDLINK_API_DEPENDS.python23?=		python23>=2.3
 BUILDLINK_API_DEPENDS.python24?=		python24>=2.4
 BUILDLINK_API_DEPENDS.python25?=		python25>=2.5.1
@@ -129,12 +134,6 @@ PYDEPENDENCY=	${BUILDLINK_API_DEPENDS.python23}:${PYPKGSRCDIR}
 PYPACKAGE=	python23
 PYVERSSUFFIX=	2.3
 PYPKGPREFIX=	py23
-.elif ${_PYTHON_VERSION} == "21"
-PYPKGSRCDIR=	../../lang/python21
-PYPACKAGE=	python21
-PYDEPENDENCY=	${BUILDLINK_API_DEPENDS.python21}:${PYPKGSRCDIR}
-PYVERSSUFFIX=	2.1
-PYPKGPREFIX=	py21
 .else
 PKG_FAIL_REASON+=   "No valid Python version"
 .endif

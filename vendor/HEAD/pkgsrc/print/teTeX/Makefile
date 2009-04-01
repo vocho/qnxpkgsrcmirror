@@ -1,29 +1,22 @@
-# $NetBSD: Makefile,v 1.46 2009/01/24 18:38:59 minskim Exp $
-#
+# $NetBSD: Makefile,v 1.49 2009/02/23 20:14:19 minskim Exp $
 
 DISTNAME=	teTeX-3.0
-PKGREVISION=	1
+PKGREVISION=	3
 CATEGORIES=	print meta-pkgs
 MASTER_SITES=	# empty
-DISTFILES=	# empty
 
 MAINTAINER=	kei@NetBSD.org
 HOMEPAGE=	http://www.tug.org/tetex/
 COMMENT=	Thomas Esser's TeX distribution for UNIX compatible systems
 
-PKG_DESTDIR_SUPPORT=	user-destdir
-
+DEPENDS+=	dvipsk-[0-9]*:../../print/dvipsk
+DEPENDS+=	teTeX-bin-[0-9]*:../../print/teTeX3-bin
+DEPENDS+=	teTeX-texmf-[0-9]*:../../print/teTeX3-texmf
 DEPENDS+=	texi2html>=1.52:../../textproc/texi2html
+DEPENDS+=	xdvik-[0-9]*:../../print/xdvik
 
 CONFLICTS+=	teTeX2-[0-9]*
 
-EXTRACT_ONLY=	# empty
-NO_CHECKSUM=	yes
-NO_CONFIGURE=	yes
-NO_BUILD=	yes
-PLIST_SRC=	# empty
+META_PACKAGE=	yes
 
-do-install:	# do nothing
-
-.include "../../mk/tex.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

@@ -1,20 +1,14 @@
-# $NetBSD: buildlink3.mk,v 1.9 2006/07/09 09:27:52 xtraeme Exp $
+# $NetBSD: buildlink3.mk,v 1.11 2009/03/20 19:24:03 joerg Exp $
 
-BUILDLINK_DEPTH:=		${BUILDLINK_DEPTH}+
-OPENOBEX_BUILDLINK3_MK:=	${OPENOBEX_BUILDLINK3_MK}+
+BUILDLINK_TREE+=	openobex
 
-.if ${BUILDLINK_DEPTH} == "+"
-BUILDLINK_DEPENDS+=	openobex
-.endif
+.if !defined(OPENOBEX_BUILDLINK3_MK)
+OPENOBEX_BUILDLINK3_MK:=
 
-BUILDLINK_PACKAGES:=	${BUILDLINK_PACKAGES:Nopenobex}
-BUILDLINK_PACKAGES+=	openobex
-
-.if ${OPENOBEX_BUILDLINK3_MK} == "+"
 BUILDLINK_API_DEPENDS.openobex+=	openobex>=1.3
 BUILDLINK_PKGSRCDIR.openobex?=	../../comms/openobex
-.endif	# OPENOBEX_BUILDLINK3_MK
 
 .include "../../devel/libusb/buildlink3.mk"
+.endif # OPENOBEX_BUILDLINK3_MK
 
-BUILDLINK_DEPTH:=		${BUILDLINK_DEPTH:S/+$//}
+BUILDLINK_TREE+=	-openobex
