@@ -51,7 +51,7 @@ PLIST.gtar=		yes
 .endif
 
 # don't include rmt if gtar won't build it
-.if ${OPSYS} != "Interix"
+.if ${OPSYS} != "Interix" && ${OPSYS} != "QNX"
 PLIST.rmt=		yes
 .endif
 
