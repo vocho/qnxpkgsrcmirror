@@ -1,0 +1,16 @@
+$NetBSD$
+
+--- /usr/src/HEAD/pkgsrc/math/py-Numeric/work/Numeric-24.2/Src/umathmodule.c.orig	2005-04-20 20:48:47.000000000 +0200
++++ /usr/src/HEAD/pkgsrc/math/py-Numeric/work/Numeric-24.2/Src/umathmodule.c
+@@ -1,9 +1,10 @@
+ 
++#include <math.h>
++#include <stdio.h>
+ #include "Python.h"
+ #include "Numeric/arrayobject.h"
+ #include "Numeric/ufuncobject.h"
+ #include "abstract.h"
+-#include <math.h>
+ 
+ #ifndef CHAR_BIT
+ #define CHAR_BIT 8

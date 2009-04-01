@@ -1,0 +1,158 @@
+$NetBSD: patch-aa,v 1.43 2006/11/08 01:49:22 taca Exp $
+
+--- configure.orig	2008-04-03 06:01:50.000000000 -0400
++++ configure
+@@ -5617,6 +5617,9 @@ if test "${with_rpath+set}" = set; then
+ fi
+ 
+ 
++# pkgsrc handles any rpath settings this package needs
++need_dash_r=
++
+ # Allow user to specify flags
+ 
+ # Check whether --with-cflags was given.
+@@ -5761,6 +5764,7 @@ for ac_header in \
+ 	maillock.h \
+ 	ndir.h \
+ 	net/if_tun.h \
++	net/tun/if_tun.h \
+ 	netdb.h \
+ 	netgroup.h \
+ 	pam/pam_appl.h \
+@@ -7463,6 +7467,36 @@ _ACEOF
+ 		;;
+ 	esac
+ 	;;
++*-*-interix3)
++        cat >>confdefs.h <<\_ACEOF
++#define HAVE_INTERIX 1
++_ACEOF
++
++        cat >>confdefs.h <<\_ACEOF
++#define DISABLE_FD_PASSING 1
++_ACEOF
++
++        cat >>confdefs.h <<\_ACEOF
++#define DISABLE_SHADOW 1
++_ACEOF
++
++        cat >>confdefs.h <<\_ACEOF
++#define IP_TOS_IS_BROKEN 1
++_ACEOF
++
++        cat >>confdefs.h <<\_ACEOF
++#define MISSING_HOWMANY 1
++_ACEOF
++
++        cat >>confdefs.h <<\_ACEOF
++#define NO_IPPORT_RESERVED_CONCEPT 1
++_ACEOF
++
++        cat >>confdefs.h <<\_ACEOF
++#define USE_PIPES 1
++_ACEOF
++
++       ;;
+ *-*-irix5*)
+ 	PATH="$PATH:/usr/etc"
+ 
+@@ -8004,7 +8038,7 @@ cat >>confdefs.h <<\_ACEOF
+ _ACEOF
+ 
+ 	;;
+-*-*-freebsd*)
++*-*-freebsd*|*-*-dragonfly*)
+ 	check_for_libcrypt_later=1
+ 
+ cat >>confdefs.h <<\_ACEOF
+@@ -9058,19 +9092,10 @@ _ACEOF
+ 
+ 
+ cat >>confdefs.h <<\_ACEOF
+-#define MISSING_NFDBITS 1
+-_ACEOF
+-
+-
+-cat >>confdefs.h <<\_ACEOF
+ #define MISSING_HOWMANY 1
+ _ACEOF
+ 
+ 
+-cat >>confdefs.h <<\_ACEOF
+-#define MISSING_FD_MASK 1
+-_ACEOF
+-
+ 	cat >>confdefs.h <<\_ACEOF
+ #define DISABLE_LASTLOG 1
+ _ACEOF
+@@ -28514,14 +28539,21 @@ fi
+ rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
+ if test -z "$conf_utmpx_location"; then
+ 	if test x"$system_utmpx_path" = x"no" ; then
+-		cat >>confdefs.h <<\_ACEOF
++		for f in /var/run/utmpx; do
++			if test -f $f ; then
++				conf_utmpx_location=$f
++			fi
++		done
++		if test -z "$conf_utmpx_location"; then
++			cat >>confdefs.h <<\_ACEOF
+ #define DISABLE_UTMPX 1
+ _ACEOF
++		fi
+ 
+ 	fi
+-else
+-
+-cat >>confdefs.h <<_ACEOF
++fi
++if test -n "$conf_utmpx_location"; then
++	cat >>confdefs.h <<_ACEOF
+ #define CONF_UTMPX_FILE "$conf_utmpx_location"
+ _ACEOF
+ 
+@@ -28585,14 +28617,20 @@ fi
+ rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
+ if test -z "$conf_wtmpx_location"; then
+ 	if test x"$system_wtmpx_path" = x"no" ; then
+-		cat >>confdefs.h <<\_ACEOF
++		for f in /var/log/wtmpx; do
++			if test -f $f ; then
++				conf_wtmpx_location=$f
++			fi
++		done
++		if test -z "$conf_wtmpx_location"; then
++			cat >>confdefs.h <<\_ACEOF
+ #define DISABLE_WTMPX 1
+ _ACEOF
+-
++		fi
+ 	fi
+-else
+-
+-cat >>confdefs.h <<_ACEOF
++fi
++if test -n "$conf_wtmpx_location"; then
++	cat >>confdefs.h <<_ACEOF
+ #define CONF_WTMPX_FILE "$conf_wtmpx_location"
+ _ACEOF
+ 
+@@ -29090,6 +29128,8 @@ do
+   case $ac_option in
+   # Handling of the options.
+   -recheck | --recheck | --rechec | --reche | --rech | --rec | --re | --r)
++	: Avoid regenerating within pkgsrc
++	exit 0
+     ac_cs_recheck=: ;;
+   --version | --versio | --versi | --vers | --ver | --ve | --v | -V )
+     echo "$ac_cs_version"; exit ;;
+@@ -29835,7 +29875,7 @@ echo "OpenSSH has been configured with t
+ echo "                     User binaries: $B"
+ echo "                   System binaries: $C"
+ echo "               Configuration files: $D"
+-echo "                   Askpass program: $E"
++echo "                   Askpass program: ${ASKPASS_PROGRAM}"
+ echo "                      Manual pages: $F"
+ echo "                          PID file: $G"
+ echo "  Privilege separation chroot path: $H"

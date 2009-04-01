@@ -1,0 +1,40 @@
+$NetBSD: patch-aa,v 1.11 2008/12/22 18:47:44 jmcneill Exp $
+
+--- configure.orig	2008-08-31 05:38:17.000000000 +0100
++++ configure
+@@ -29014,7 +29020,7 @@ if test "${ac_cv_lib_panelw_update_panel
+   echo $ECHO_N "(cached) $ECHO_C" >&6
+ else
+   ac_check_lib_save_LIBS=$LIBS
+-LIBS="-lpanelw  $LIBS"
++LIBS="-lpanelw -lncursesw $LIBS"
+ cat >conftest.$ac_ext <<_ACEOF
+ /* confdefs.h.  */
+ _ACEOF
+@@ -29070,7 +29076,7 @@ fi
+ { echo "$as_me:$LINENO: result: $ac_cv_lib_panelw_update_panels" >&5
+ echo "${ECHO_T}$ac_cv_lib_panelw_update_panels" >&6; }
+ if test $ac_cv_lib_panelw_update_panels = yes; then
+-  GNT_LIBS="$GNT_LIBS -lpanelw"
++  GNT_LIBS="$GNT_LIBS -lpanelw -lncursesw"
+ else
+   enable_consoleui=no
+ fi
+@@ -29368,7 +29374,7 @@ if test "${ac_cv_lib_panel_update_panels
+   echo $ECHO_N "(cached) $ECHO_C" >&6
+ else
+   ac_check_lib_save_LIBS=$LIBS
+-LIBS="-lpanel  $LIBS"
++LIBS="-lpanel -lncurses $LIBS"
+ cat >conftest.$ac_ext <<_ACEOF
+ /* confdefs.h.  */
+ _ACEOF
+@@ -29424,7 +29430,7 @@ fi
+ { echo "$as_me:$LINENO: result: $ac_cv_lib_panel_update_panels" >&5
+ echo "${ECHO_T}$ac_cv_lib_panel_update_panels" >&6; }
+ if test $ac_cv_lib_panel_update_panels = yes; then
+-  GNT_LIBS="$GNT_LIBS -lpanel"
++  GNT_LIBS="$GNT_LIBS -lpanel -lncurses"
+ else
+   enable_consoleui=no
+ fi

@@ -1,0 +1,5 @@
+$NetBSD: distinfo,v 1.6 2008/07/13 23:31:51 bjs Exp $
+
+SHA1 (libXrandr-1.2.3.tar.bz2) = f03628694f932e93ecd0ae6c8aa1daef10db0ca4
+RMD160 (libXrandr-1.2.3.tar.bz2) = 56911f90cbb7e7550f26dbcb5271b3a6788118df
+Size (libXrandr-1.2.3.tar.bz2) = 251814 bytes

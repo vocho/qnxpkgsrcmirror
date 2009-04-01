@@ -1,0 +1,5 @@
+$NetBSD: distinfo,v 1.11 2008/11/05 23:18:48 he Exp $
+
+SHA1 (Devel-StackTrace-1.20.tar.gz) = 9184d0316254100a5f038c5c1ca5e8faeaa542b9
+RMD160 (Devel-StackTrace-1.20.tar.gz) = 4edd38801281edc42b2c400c948bfca83c0f3ec7
+Size (Devel-StackTrace-1.20.tar.gz) = 19685 bytes

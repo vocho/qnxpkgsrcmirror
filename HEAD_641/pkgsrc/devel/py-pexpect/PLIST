@@ -1,0 +1,19 @@
+@comment $NetBSD: PLIST,v 1.3 2008/04/25 20:31:10 tnn Exp $
+${PYSITELIB}/ANSI.py
+${PYSITELIB}/ANSI.pyc
+${PYSITELIB}/ANSI.pyo
+${PYSITELIB}/FSM.py
+${PYSITELIB}/FSM.pyc
+${PYSITELIB}/FSM.pyo
+${PYSITELIB}/fdpexpect.py
+${PYSITELIB}/fdpexpect.pyc
+${PYSITELIB}/fdpexpect.pyo
+${PYSITELIB}/pexpect.py
+${PYSITELIB}/pexpect.pyc
+${PYSITELIB}/pexpect.pyo
+${PYSITELIB}/pxssh.py
+${PYSITELIB}/pxssh.pyc
+${PYSITELIB}/pxssh.pyo
+${PYSITELIB}/screen.py
+${PYSITELIB}/screen.pyc
+${PYSITELIB}/screen.pyo

@@ -1,0 +1,16 @@
+$NetBSD$
+
+--- dbinc/mutex.h.orig	2008-01-08 15:58:18.000000000 -0500
++++ dbinc/mutex.h
+@@ -83,6 +83,11 @@ extern "C" {
+ #define	__mutex_unlock(a, b)		__db_fcntl_mutex_unlock(a, b)
+ #define	__mutex_destroy(a, b)		__db_fcntl_mutex_destroy(a, b)
+ #else
++#ifdef __QNXNTO__
++/* These should be reserved right ? */
++#undef __mutex_lock
++#undef __mutex_unlock
++#endif
+ #define	__mutex_init(a, b, c)		__db_tas_mutex_init(a, b, c)
+ #define	__mutex_lock(a, b)		__db_tas_mutex_lock(a, b)
+ #define	__mutex_unlock(a, b)		__db_tas_mutex_unlock(a, b)

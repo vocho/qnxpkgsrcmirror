@@ -1,0 +1,26 @@
+$NetBSD: patch-aa,v 1.3 2008/11/12 13:13:59 martti Exp $
+
+Modified for pkgsrc
+
+--- src/Makefile.in.orig	2008-08-27 12:37:52.000000000 +0300
++++ src/Makefile.in
+@@ -58,15 +58,15 @@ BEAMS = $(SOURCES:.erl=.beam)
+ 
+ DESTDIR =
+ 
+-EJABBERDDIR = $(DESTDIR)@localstatedir@/lib/ejabberd
++EJABBERDDIR = $(DESTDIR)@prefix@/lib/erlang/lib/@DISTNAME@
+ BEAMDIR = $(EJABBERDDIR)/ebin
+-SPOOLDIR = $(EJABBERDDIR)/db
++SPOOLDIR = @EJABBERD_VARDIR@/spool/ejabberd/db/$NODE
+ PRIVDIR = $(EJABBERDDIR)/priv
+ SODIR = $(PRIVDIR)/lib
+ PBINDIR = $(PRIVDIR)/bin
+ MSGSDIR = $(PRIVDIR)/msgs
+-LOGDIR = $(DESTDIR)@localstatedir@/log/ejabberd
+-ETCDIR = $(DESTDIR)@sysconfdir@/ejabberd
++LOGDIR = $(DESTDIR)/@JABBERD_LOGDIR@
++ETCDIR = $(DESTDIR)@prefix@/share/examples/ejabberd
+ SBINDIR = $(DESTDIR)@sbindir@
+ 
+ ifeq ($(shell uname),Darwin)

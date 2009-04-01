@@ -1,0 +1,13 @@
+$NetBSD: patch-aa,v 1.2 2008/05/27 21:22:02 tonnerre Exp $
+
+--- plugins/check_radius.c.orig	2007-12-10 08:52:00.000000000 +0100
++++ plugins/check_radius.c
+@@ -77,7 +77,7 @@ char *username = NULL;
+ char *password = NULL;
+ char *nasid = NULL;
+ char *expect = NULL;
+-char *config_file = NULL;
++char *config_file = "@SYSCONFDIR@/radiusclient-ng/radiusclient.conf";
+ unsigned short port = PW_AUTH_UDP_PORT;
+ int retries = 1;
+ int verbose = FALSE;

@@ -1,0 +1,43 @@
+$NetBSD: patch-aa,v 1.8 2006/03/03 22:30:56 wiz Exp $
+
+--- mDNSPosix/Makefile.orig	2006-02-20 16:40:36.000000000 -0500
++++ mDNSPosix/Makefile
+@@ -275,6 +275,7 @@ CFLAGS_OS = -DNOT_HAVE_DAEMON -DNOT_HAVE
+ CC = gcc
+ LD = gcc -shared
+ LIBFLAGS = -lsocket -lnsl -lresolv
++SYSTEMLIBS = -lsocket -lnsl
+ JAVACFLAGS_OS += -I$(JDK)/include/solaris
+ ifneq ($(DEBUG),1)
+ STRIP = strip
+@@ -293,6 +294,13 @@ CFLAGS_OS =
+ LDCONFIG = ldconfig
+ else
+ 
++ifeq ($(os),qnx)
++CC = gcc
++LD = gcc -shared
++LIBFLAGS = -lsocket
++COMPILER_RPATH_FLAG = -L
++else
++
+ ifeq ($(os),freebsd)
+ # If not already defined, set LOCALBASE to /usr/local
+ # FreeBSD requires the startup script to end in ".sh"
+@@ -347,6 +355,7 @@ endif
+ endif
+ endif
+ endif
++endif
+ 
+ NSSLIBNAME  := libnss_mdns
+ NSSVERSION  := 0.2
+@@ -617,7 +626,7 @@ $(BUILDDIR)/mDNSNetMonitor:          $(S
+ 	$(CC) $+ -o $@ $(LIBFLAGS)
+ 
+ $(BUILDDIR)/dnsextd:                 $(SPECIALOBJ) $(OBJDIR)/dnsextd.c.threadsafe.o
+-	$(CC) $+ -o $@ $(LIBFLAGS) -lpthread
++	$(CC) $+ -o $@ $(LIBFLAGS) ${COMPILER_RPATH_FLAG}${PTHREADBASE}/lib ${PTHREAD_LDFLAGS} ${PTHREAD_LIBS} ${EXTRA_LIBS}
+ 
+ #############################################################################
+ 

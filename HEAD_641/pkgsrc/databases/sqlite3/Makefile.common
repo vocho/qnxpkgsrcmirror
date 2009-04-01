@@ -1,0 +1,24 @@
+# $NetBSD: Makefile.common,v 1.32 2009/01/17 07:34:29 adam Exp $
+
+# used by databases/sqlite3-tcl/Makefile
+
+DISTNAME=	sqlite-3.6.10
+PKGNAME=	${DISTNAME:S/-/3-/}
+CATEGORIES=	databases
+MASTER_SITES=	http://www.hwaci.com/sw/sqlite/ \
+		http://www.sqlite.org/
+
+MAINTAINER=	pkgsrc-users@NetBSD.org
+HOMEPAGE=	http://www.sqlite.org/
+COMMENT=	SQL Database Engine in a C Library
+
+#LICENSE=	public-domain
+
+DISTINFO_FILE=	${.CURDIR}/../../databases/sqlite3/distinfo
+PATCHDIR=	${.CURDIR}/../../databases/sqlite3/patches
+
+GNU_CONFIGURE=		yes
+USE_TOOLS+=		gmake
+USE_LIBTOOL=		yes
+
+PKGCONFIG_OVERRIDE+=	sqlite3.pc.in

@@ -1,0 +1,70 @@
+# $NetBSD: Makefile,v 1.74 2008/12/08 04:55:18 jnemeth Exp $
+#
+
+COMMENT=	Communication utilities
+
+SUBDIR+=	asterisk
+SUBDIR+=	asterisk-sounds-de-x9media
+SUBDIR+=	asterisk-sounds-extra
+SUBDIR+=	asterisk-sounds-native
+SUBDIR+=	binkd
+SUBDIR+=	birda
+SUBDIR+=	bthfp
+SUBDIR+=	conserver
+SUBDIR+=	conserver8
+SUBDIR+=	dl-ezkit
+SUBDIR+=	efax
+SUBDIR+=	efax-gtk
+SUBDIR+=	estic
+SUBDIR+=	fidogate
+SUBDIR+=	gkermit
+SUBDIR+=	gnome-pilot
+SUBDIR+=	gscmxx
+SUBDIR+=	gsmlib
+SUBDIR+=	hylafax
+SUBDIR+=	jpilot
+SUBDIR+=	jpilot-syncmal
+SUBDIR+=	kermit
+SUBDIR+=	kyopon
+SUBDIR+=	libmal
+SUBDIR+=	libopensync
+SUBDIR+=	libopensync-plugin-evolution2
+SUBDIR+=	libopensync-plugin-file
+SUBDIR+=	libopensync-plugin-kdepim
+SUBDIR+=	libopensync-plugin-syncml
+SUBDIR+=	libsyncml
+SUBDIR+=	lrzsz
+SUBDIR+=	malsync
+SUBDIR+=	mgetty+sendfax
+SUBDIR+=	minicom
+SUBDIR+=	modemd
+SUBDIR+=	msynctool
+SUBDIR+=	obexapp
+SUBDIR+=	obexftp
+SUBDIR+=	op_panel
+SUBDIR+=	openobex
+SUBDIR+=	p5-Asterisk
+SUBDIR+=	p5-Device-Gsm
+SUBDIR+=	p5-Device-Modem
+SUBDIR+=	p5-Device-SerialPort
+SUBDIR+=	p5-pilot-link
+SUBDIR+=	pilot-link
+SUBDIR+=	pilot-link-libs
+SUBDIR+=	pilotmgr
+SUBDIR+=	plp
+SUBDIR+=	plptools
+SUBDIR+=	qpage
+SUBDIR+=	ruby-termios
+SUBDIR+=	scmxx
+SUBDIR+=	snooper
+SUBDIR+=	synce-dccm
+SUBDIR+=	synce-librapi2
+SUBDIR+=	synce-libsynce
+SUBDIR+=	synce-rra
+SUBDIR+=	synce-serial
+SUBDIR+=	tkhylafax
+SUBDIR+=	xisp
+SUBDIR+=	xtel
+SUBDIR+=	zaptel-netbsd
+
+.include "../mk/misc/category.mk"

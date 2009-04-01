@@ -1,0 +1,5 @@
+$NetBSD: distinfo,v 1.4 2008/12/18 01:13:03 he Exp $
+
+SHA1 (DBD-Oracle-1.22.tar.gz) = 23df4d0bdf4bc4da21dadc31aaa7dba443a7e9ce
+RMD160 (DBD-Oracle-1.22.tar.gz) = a23804d9f803b245a9e22e050952cd0750da2e19
+Size (DBD-Oracle-1.22.tar.gz) = 424624 bytes

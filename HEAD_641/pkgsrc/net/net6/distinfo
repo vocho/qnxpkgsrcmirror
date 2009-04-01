@@ -1,0 +1,5 @@
+$NetBSD: distinfo,v 1.2 2008/07/12 15:11:40 obache Exp $
+
+SHA1 (net6-1.3.7.tar.gz) = c7d225d94bd45a7eb6a2739e5a6b31c7c2d672c6
+RMD160 (net6-1.3.7.tar.gz) = 0a8e906af33e6ee1d80efd91360085669cce4d96
+Size (net6-1.3.7.tar.gz) = 448850 bytes

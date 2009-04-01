@@ -1,0 +1,13 @@
+$NetBSD$
+
+--- converter/other/cameratopam/foveon.c.orig	2007-05-01 12:16:44.000000000 -0400
++++ converter/other/cameratopam/foveon.c
+@@ -1,6 +1,8 @@
+ /* This code is licensed to the public by its copyright owners under GPL. */
+ 
++#ifndef __QNXNTO__
+ #define _XOPEN_SOURCE   /* get M_PI */
++#endif
+ 
+ #include <stdio.h>
+ #include <assert.h>

@@ -1,0 +1,5 @@
+$NetBSD: distinfo,v 1.4 2009/01/20 22:41:03 drochner Exp $
+
+SHA1 (libmpd-0.17.0.tar.gz) = b15146683d620217d57e32042e238747e4b32cc1
+RMD160 (libmpd-0.17.0.tar.gz) = dfafa5df777c4f6c3f63184f9672316fe1f74358
+Size (libmpd-0.17.0.tar.gz) = 358418 bytes

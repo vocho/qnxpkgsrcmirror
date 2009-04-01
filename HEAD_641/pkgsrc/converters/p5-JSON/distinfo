@@ -1,0 +1,5 @@
+$NetBSD: distinfo,v 1.7 2008/08/12 09:17:28 obache Exp $
+
+SHA1 (JSON-2.12.tar.gz) = 9e6789adfb6ad109097eb1082d7db18c84edfe5c
+RMD160 (JSON-2.12.tar.gz) = ca4526470a9f879a51fd18f373862d1d1c1d9c61
+Size (JSON-2.12.tar.gz) = 67580 bytes

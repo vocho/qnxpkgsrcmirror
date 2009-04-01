@@ -1,0 +1,27 @@
+$NetBSD: patch-aa,v 1.8 2009/01/26 10:39:01 drochner Exp $
+
+--- configure.orig	2009-01-19 22:24:28.000000000 +0100
++++ configure
+@@ -23004,7 +23004,7 @@ rm -f core conftest.err conftest.$ac_obj
+ echo "${ECHO_T}$flag_ok" >&6; }
+ 
+ 
+-        if test "x$ERROR_CFLAGS" == "x"
++        if test "x$ERROR_CFLAGS" = "x"
+     then
+ 
+   { echo "$as_me:$LINENO: checking to see if compiler understands -errwarn=%all" >&5
+@@ -28179,11 +28179,11 @@ echo "${ECHO_T}yes" >&6; }
+ fi
+ 
+ 
+-    if test x$HAVE_LIBVISUAL == xyes; then
++    if test x$HAVE_LIBVISUAL = xyes; then
+       LIBVIS_PLUGINSDIR="`$PKG_CONFIG --variable=pluginsbasedir libvisual-0.2`"
+     fi
+   else
+-    if test x$HAVE_LIBVISUAL == xyes; then
++    if test x$HAVE_LIBVISUAL = xyes; then
+       LIBVIS_PLUGINSDIR="`$PKG_CONFIG --variable=pluginsbasedir libvisual-0.4`"
+     fi
+   fi

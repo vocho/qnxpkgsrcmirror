@@ -1,0 +1,22 @@
+# $NetBSD: buildlink3.mk,v 1.11 2008/10/28 11:30:42 wiz Exp $
+
+BUILDLINK_DEPTH:=	${BUILDLINK_DEPTH}+
+GNUCASH_BUILDLINK3_MK:=	${GNUCASH_BUILDLINK3_MK}+
+
+.if ${BUILDLINK_DEPTH} == "+"
+BUILDLINK_DEPENDS+=	gnucash
+.endif
+
+BUILDLINK_PACKAGES:=	${BUILDLINK_PACKAGES:Ngnucash}
+BUILDLINK_PACKAGES+=	gnucash
+BUILDLINK_ORDER:=	${BUILDLINK_ORDER} ${BUILDLINK_DEPTH}gnucash
+
+.if ${GNUCASH_BUILDLINK3_MK} == "+"
+BUILDLINK_API_DEPENDS.gnucash+=	gnucash>=2.1.0
+BUILDLINK_ABI_DEPENDS.gnucash?=	gnucash>=2.2.3nb2
+BUILDLINK_PKGSRCDIR.gnucash?=	../../finance/gnucash
+.endif	# GNUCASH_BUILDLINK3_MK
+
+.include "../../devel/glib2/buildlink3.mk"
+
+BUILDLINK_DEPTH:=	${BUILDLINK_DEPTH:S/+$//}

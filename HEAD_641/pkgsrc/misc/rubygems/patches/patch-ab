@@ -1,0 +1,38 @@
+$NetBSD: patch-ab,v 1.8 2008/09/15 08:43:44 taca Exp $
+
+--- lib/rubygems/dependency_installer.rb.orig	2008-06-21 04:55:40.000000000 +0900
++++ lib/rubygems/dependency_installer.rb
+@@ -37,6 +37,7 @@ class Gem::DependencyInstaller
+   # :format_executable:: See Gem::Installer#initialize.
+   # :ignore_dependencies:: Don't install any dependencies.
+   # :install_dir:: See Gem::Installer#install.
++  # :install_root: See Gem::Installer#install.
+   # :security_policy:: See Gem::Installer::new and Gem::Security.
+   # :wrappers:: See Gem::Installer::new
+ 
+@@ -56,10 +57,15 @@ class Gem::DependencyInstaller
+     @installed_gems = []
+ 
+     @install_dir = options[:install_dir] || Gem.dir
+-    @cache_dir = options[:cache_dir] || @install_dir
++    @install_root = options[:install_root]
++    install_dir = @install_dir
++    unless @install_root.nil? or @install_root == ""
++      install_dir = File.join(@install_root, @install_dir)
++    end
++    @cache_dir = options[:cache_dir] || install_dir
+ 
+     if options[:install_dir] then
+-      spec_dir = File.join @install_dir, 'specifications'
++      spec_dir = File.join install_dir, 'specifications'
+       @source_index = Gem::SourceIndex.from_gems_in spec_dir
+     else
+       @source_index = Gem.source_index
+@@ -237,6 +243,7 @@ class Gem::DependencyInstaller
+                                 :format_executable => @format_executable,
+                                 :ignore_dependencies => @ignore_dependencies,
+                                 :install_dir => @install_dir,
++                                :install_root => @install_root,
+                                 :security_policy => @security_policy,
+                                 :wrappers => @wrappers,
+                                 :bin_dir => @bin_dir,

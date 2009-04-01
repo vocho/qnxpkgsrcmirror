@@ -1,0 +1,5 @@
+$NetBSD: distinfo,v 1.47 2008/12/17 17:05:52 ghen Exp $
+
+SHA1 (firefox/releases/2.0.0.19/linux-i686/en-US/firefox-2.0.0.19.tar.gz) = a0aa99f5e29eb442bd81751e4aaad3920eeae6f1
+RMD160 (firefox/releases/2.0.0.19/linux-i686/en-US/firefox-2.0.0.19.tar.gz) = d6c56000f343fd5aadaf2807c46398710572f9eb
+Size (firefox/releases/2.0.0.19/linux-i686/en-US/firefox-2.0.0.19.tar.gz) = 9711461 bytes

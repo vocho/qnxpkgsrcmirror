@@ -1,0 +1,5 @@
+$NetBSD: distinfo,v 1.14 2008/09/15 05:38:29 minskim Exp $
+
+SHA1 (activerecord-2.1.1.gem) = c4305f6a293ef18a1272effae17cae6f4557fa71
+RMD160 (activerecord-2.1.1.gem) = f5dc337d0406f9dedba8c78380b3b701b576e645
+Size (activerecord-2.1.1.gem) = 476160 bytes

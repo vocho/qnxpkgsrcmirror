@@ -1,0 +1,16 @@
+$NetBSD: patch-ba,v 1.6 2009/01/30 19:39:04 adam Exp $
+
+--- configure.orig	2009-01-30 17:54:01.000000000 +0100
++++ configure
+@@ -17950,6 +17950,11 @@ MAIN_BINARY="wine-pthread"
+ 
+         EXTRA_BINARIES="wine-pthread"
+  ;;
++      netbsd*)
++        MAIN_BINARY="wine-kthread"
++
++        EXTRA_BINARIES="wine-pthread"
++ ;;
+     esac
+     ;;
+ esac

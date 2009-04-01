@@ -1,0 +1,15 @@
+===========================================================================
+$NetBSD: MESSAGE,v 1.3 2008/04/27 17:06:40 bouyer Exp $
+
+Run ${SYMPA_BIN}/sympa_wizard.pl -c sympa.conf
+and ${SYMPA_BIN}/sympa_wizard.pl -c wwsympa.conf
+to create default configuration files in ${PKG_SYSCONFDIR}.
+
+Then re-run ${SYMPA_BIN}/sympa_wizard.pl
+for interactive configuration.
+
+If you are upgrading from a previous version please consult
+${PREFIX}/share/doc/sympa/NEWS
+for incompatible changes, and run '${SYMPA_BIN}/sympa.pl --upgrade'
+
+===========================================================================

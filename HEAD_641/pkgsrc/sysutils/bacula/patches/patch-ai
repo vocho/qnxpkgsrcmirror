@@ -1,0 +1,22 @@
+$NetBSD: patch-ai,v 1.4 2008/11/21 14:09:31 adam Exp $
+
+--- src/tray-monitor/Makefile.in.orig	2007-08-16 10:44:39.000000000 +0200
++++ src/tray-monitor/Makefile.in
+@@ -69,14 +69,14 @@ devclean: realclean
+ install: all
+ 	$(INSTALL_PROGRAM) bacula-tray-monitor $(DESTDIR)$(sbindir)/bacula-tray-monitor
+ 	@srcconf=tray-monitor.conf; \
+-	if  test -f ${DESTDIR}${sysconfdir}/$$srcconf; then \
++	if  test -f ${DESTDIR}%%EXAMPLESDIR%%/$$srcconf; then \
+ 	   destconf=$$srcconf.new; \
+ 	   echo "  ==> Found existing $$srcconf, installing new conf file as $$destconf"; \
+ 	else \
+ 	   destconf=$$srcconf; \
+ 	fi; \
+-	echo "${INSTALL_CONFIG} $$srcconf ${DESTDIR}${sysconfdir}/$$destconf"; \
+-	${INSTALL_CONFIG} $$srcconf ${DESTDIR}${sysconfdir}/$$destconf
++	echo "${INSTALL_CONFIG} $$srcconf ${DESTDIR}%%EXAMPLESDIR%%/$$destconf"; \
++	${INSTALL_CONFIG} $$srcconf ${DESTDIR}%%EXAMPLESDIR%%/$$destconf
+ 
+ uninstall:
+ 	(cd $(DESTDIR)$(sbindir); $(RMF) bacula-tray-monitor)

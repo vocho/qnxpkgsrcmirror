@@ -1,0 +1,13 @@
+$NetBSD$
+
+--- hints/qnx.sh.orig	2007-12-18 05:47:07.000000000 -0500
++++ hints/qnx.sh
+@@ -242,7 +242,7 @@ if [ "$osname" = "qnx" ]; then
+ else
+   # $^O eq nto
+ 
+-  ccflags='-DDLOPEN_WONT_DO_RELATIVE_PATHS'
++  ccflags='-DDLOPEN_WONT_DO_RELATIVE_PATHS -U__STRICT_ANSI__'
+ 
+   # Options required to get dynamic linking to work
+   lddlflags='-shared'

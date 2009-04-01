@@ -1,0 +1,40 @@
+$NetBSD: patch-bl,v 1.3 2008/09/15 16:30:57 ahoka Exp $
+
+--- source/libs/comm/cl_ssl_framework.c.orig	Fri Jun 15 12:34:16 2007
++++ source/libs/comm/cl_ssl_framework.c	Fri May 30 11:17:47 2008
+@@ -1025,7 +1025,7 @@
+    {
+       char* func_name = NULL;
+       int had_errors = 0;
+-#if defined(FREEBSD) || defined(DARWIN)
++#if defined(NETBSD) || defined(FREEBSD) || defined(DARWIN)
+       void* cl_com_ssl_crypto_handle_saved = NULL;
+ #endif
+ 
+@@ -1047,7 +1047,7 @@
+       cl_com_ssl_crypto_handle = dlopen ("libssl.dylib", RTLD_NOW | RTLD_GLOBAL );
+ #endif /* RTLD_NODELETE */
+ 
+-#elif defined(FREEBSD)
++#elif defined(NETBSD) || defined(FREEBSD)
+ #ifdef RTLD_NODELETE
+       cl_com_ssl_crypto_handle = dlopen ("libssl.so", RTLD_LAZY | RTLD_GLOBAL | RTLD_NODELETE);
+ #else
+@@ -1076,7 +1076,7 @@
+          return CL_RETVAL_SSL_DLOPEN_SSL_LIB_FAILED;
+       }
+       
+-#if defined(FREEBSD) || defined(DARWIN)
++#if defined(NETBSD) || defined(FREEBSD) || defined(DARWIN)
+       cl_com_ssl_crypto_handle_saved = cl_com_ssl_crypto_handle;
+       cl_com_ssl_crypto_handle = RTLD_DEFAULT;
+ #endif
+@@ -1784,7 +1784,7 @@
+          return CL_RETVAL_SSL_CANT_LOAD_ALL_FUNCTIONS;
+       }
+ 
+-#if defined(FREEBSD)
++#if defined(FREEBSD) || defined(NETBSD)
+       cl_com_ssl_crypto_handle = cl_com_ssl_crypto_handle_saved;
+ #endif
+ 

@@ -1,0 +1,13 @@
+$NetBSD: patch-ac,v 1.4 2009/01/19 20:15:49 abs Exp $
+
+--- installer/index.php.orig	2008-12-07 11:10:49.000000000 +0000
++++ installer/index.php
+@@ -4,7 +4,7 @@ ini_set('error_reporting', E_ALL&~E_NOTI
+ ini_set('display_errors', 1);
+ 
+ define('INSTALL_PATH', realpath(dirname(__FILE__) . '/../').'/');
+-define('RCMAIL_CONFIG_DIR', INSTALL_PATH . 'config');
++define('RCMAIL_CONFIG_DIR', '@PKG_SYSCONFDIR@');
+ 
+ $include_path  = INSTALL_PATH . 'program/lib' . PATH_SEPARATOR;
+ $include_path .= INSTALL_PATH . 'program' . PATH_SEPARATOR;

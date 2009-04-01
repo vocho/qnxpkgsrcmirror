@@ -1,0 +1,6 @@
+$NetBSD: distinfo,v 1.4 2009/01/27 11:35:10 markd Exp $
+
+SHA1 (soprano-2.2.tar.bz2) = c71cefa3bfdd72712d52985a3144d0c35e3a5a32
+RMD160 (soprano-2.2.tar.bz2) = fb111b143b40d14e8bc07e7802eade494959168a
+Size (soprano-2.2.tar.bz2) = 1847479 bytes
+SHA1 (patch-aa) = 6329b5787e2abb402e0c4f723b98dba925578bce

@@ -1,0 +1,5 @@
+$NetBSD: distinfo,v 1.5 2008/09/28 13:55:44 tonnerre Exp $
+
+SHA1 (php-apc/apc-3.0.19.tgz) = 58d90ab757e606c878be3449a738016a08061dfd
+RMD160 (php-apc/apc-3.0.19.tgz) = 79c00d0e44eee268e8fc8ec8b66f1c4f5239320d
+Size (php-apc/apc-3.0.19.tgz) = 115735 bytes

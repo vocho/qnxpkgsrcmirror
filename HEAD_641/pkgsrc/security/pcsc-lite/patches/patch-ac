@@ -1,0 +1,12 @@
+$NetBSD: patch-ac,v 1.2 2008/08/08 21:25:49 shannonjr Exp $
+
+--- Makefile.am.orig	2008-05-21 09:58:30 +0300
++++ Makefile.am	2008-08-07 22:20:34 +0300
+@@ -1,6 +1,6 @@
+ AUTOMAKE_OPTIONS = dist-bzip2
+ 
+-SUBDIRS = m4 src etc doc
++SUBDIRS = m4 src doc
+ 
+ ACLOCAL_AMFLAGS = -I m4
+ 

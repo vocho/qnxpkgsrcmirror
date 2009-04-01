@@ -1,0 +1,5 @@
+$NetBSD: distinfo,v 1.2 2008/12/17 16:52:35 joerg Exp $
+
+SHA1 (libfirm-1.15.0.tar.bz2) = 39fe688de42b6dae51b7413e52a2b4097c93187b
+RMD160 (libfirm-1.15.0.tar.bz2) = b62b00daffcceb018a7c516fb53f9411fa433bd0
+Size (libfirm-1.15.0.tar.bz2) = 1527744 bytes

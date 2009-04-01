@@ -1,0 +1,28 @@
+$NetBSD: patch-ae,v 1.3 2008/09/10 13:32:47 taca Exp $
+
+--- draw.c.orig	2008-01-25 00:43:17.000000000 +0900
++++ draw.c
+@@ -5243,7 +5243,7 @@ xft_draw_fragment(state, p, len, registr
+ 	static char prefix[3][20] = { "\033$B", "\033$A", "\033$(C"};
+ 	char buf16[1024], *p16;
+ 	char out16[1024], *o16;
+-	int ileft, oleft;
++	size_t ileft, oleft;
+ #ifdef HAVE_ICONV
+ 	static iconv_t icv[3];
+ #endif
+@@ -5471,12 +5471,12 @@ xft_setfont(xfontarg, csize, registry)
+ 		    XFT_FAMILY, XftTypeString, font,
+ 		    XFT_ENCODING, XftTypeString, registry,
+ 		    XFT_STYLE, XftTypeString, style,
+-		    XFT_PIXEL_SIZE, XftTypeDouble, (float)csize, 0);
++		    XFT_PIXEL_SIZE, XftTypeDouble, (double)csize, NULL);
+ 	} else {
+ 		xftfont = XftFontOpen(display, screen,
+ 		    XFT_FAMILY, XftTypeString, font,
+ 		    XFT_ENCODING, XftTypeString, registry,
+-		    XFT_PIXEL_SIZE, XftTypeDouble, (float)csize, 0);
++		    XFT_PIXEL_SIZE, XftTypeDouble, (double)csize, NULL);
+ 	}
+ 	if (xftfont == 0) {
+ 		free(xfont);

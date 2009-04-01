@@ -1,0 +1,18 @@
+$NetBSD: distinfo,v 1.26 2008/07/14 23:01:32 christos Exp $
+
+SHA1 (openmotif-2.3.1.tar.gz) = 7132493712111e6846deda241137f28a957b5878
+RMD160 (openmotif-2.3.1.tar.gz) = 8fe6f41a8b75636d9211d34cae96d47a7ed10ade
+Size (openmotif-2.3.1.tar.gz) = 5932681 bytes
+SHA1 (patch-aa) = bbd5e51128e565d36d4b88260ba634bf6a7df61c
+SHA1 (patch-ac) = 1c14d22f888859b15365bcba7edba78a1114c6ac
+SHA1 (patch-ad) = 9ce8f34493a39dfe51260543726c1b5df7e6c4e4
+SHA1 (patch-ae) = 00ffe019ea7a6950ed673f5a7907196b22a45f4e
+SHA1 (patch-af) = d52e01e8b27b77e62274c5daef56399dee77c0f3
+SHA1 (patch-ah) = 8b895129f5b055d0f91d9e15e014759b358d3363
+SHA1 (patch-aj) = 28dd5d30ebbb7a4ea6da03a4befd026a7dd01cef
+SHA1 (patch-ak) = 56e41891f92aabc31cb2fad0a68d3e6040a7c866
+SHA1 (patch-az) = 2b389987baa5a278f93efe35528d94c8defcd48f
+SHA1 (patch-bc) = 3e02a245bb4d442b30200d6da2725ef84986d52e
+SHA1 (patch-bj) = 87abfdc6593d3b4ba3c7a76c84c54522ad7a044b
+SHA1 (patch-bl) = 905bec86af6d8d139faa2ca185adf3e8b58c1dea
+SHA1 (patch-bm) = 0e1aaf8b9a474a43e1382caa09b2ac9050f3505c

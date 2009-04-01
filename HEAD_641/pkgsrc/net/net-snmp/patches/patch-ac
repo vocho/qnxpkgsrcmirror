@@ -1,0 +1,136 @@
+$NetBSD: patch-ac,v 1.7 2008/09/08 12:58:09 adam Exp $
+
+--- configure.in.orig	2008-09-05 11:27:25.000000000 +0200
++++ configure.in
+@@ -2697,6 +2697,8 @@ AC_CHECK_LIB(kstat, kstat_lookup,
+         AC_DEFINE(HAVE_LIBKSTAT, 1, [Define to 1 if you have the `kstat' library (-lkstat).])
+         LNETSNMPLIBS="${LNETSNMPLIBS} -lkstat")
+ 
++AC_CHECK_LIB(des, des_cbc_encrypt)
++
+ # Check for libraries that the agent needs
+ # saving old libraries
+ NONAGENTLIBS=$LIBS
+@@ -3425,6 +3427,12 @@ AC_CHECK_HEADERS(netinet/ip6.h netinet6/
+ #if HAVE_NETINET_IP6_H
+ #include <netinet/ip6.h>
+ #endif
++#if HAVE_NET_IF_H
++#include <net/if.h>
++#endif
++#if HAVE_NET_ROUTE_H
++#include <net/route.h>
++#endif
+ ]])
+ # DYNAMIC MODULE SUPPORT
+ AC_CHECK_HEADERS(dlfcn.h)
+@@ -3864,8 +3872,10 @@ AC_CHECK_STRUCT_FOR([
+ #include <sys/types.h>
+ #ifdef IFNET_NEEDS_KERNEL
+ #define KERNEL
++#if !defined(__DragonFly__)
+ #define _KERNEL
+ #endif
++#endif
+ #include <sys/socket.h>
+ ], sockaddr, sa_len, no)
+ 
+@@ -3876,8 +3886,10 @@ AC_CHECK_STRUCT_FOR([
+ #include <sys/types.h>
+ #ifdef IFNET_NEEDS_KERNEL
+ #define KERNEL
++#if !defined(__DragonFly__)
+ #define _KERNEL
+ #endif
++#endif
+ #include <sys/socket.h>
+ ], sockaddr, sa_union.sa_generic.sa_family2, no)
+ 
+@@ -3912,8 +3924,10 @@ AC_CHECK_STRUCT_FOR([
+ #include <sys/types.h>
+ #ifdef IFNET_NEEDS_KERNEL
+ #define KERNEL
++#if !defined(__DragonFly__)
+ #define _KERNEL
+ #endif
++#endif
+ #include <sys/socket.h>
+ #undef KERNEL
+ #undef _KERNEL
+@@ -3932,8 +3946,10 @@ AC_TRY_COMPILE([
+ #include <sys/types.h>
+ #ifdef IFNET_NEEDS_KERNEL
+ #define KERNEL
++#if !defined(__DragonFly__)
+ #define _KERNEL
+ #endif
++#endif
+ #include <sys/socket.h>
+ #undef KERNEL
+ #undef _KERNEL
+@@ -3958,8 +3974,10 @@ AC_TRY_COMPILE([
+ #include <sys/types.h>
+ #ifdef IFNET_NEEDS_KERNEL
+ #define KERNEL
++#if !defined(__DragonFly__)
+ #define _KERNEL
+ #endif
++#endif
+ #include <sys/socket.h>
+ #undef KERNEL
+ #undef _KERNEL
+@@ -4017,8 +4035,10 @@ AC_TRY_COMPILE([
+ #include <sys/types.h>
+ #ifdef IFNET_NEEDS_KERNEL
+ #define KERNEL
++#if !defined(__DragonFly__)
+ #define _KERNEL
+ #endif
++#endif
+ #include <sys/socket.h>
+ #undef KERNEL
+ #undef _KERNEL
+@@ -4057,8 +4077,10 @@ AC_CHECK_STRUCT_FOR([
+ #include <sys/types.h>
+ #ifdef IFNET_NEEDS_KERNEL
+ #define KERNEL
++#if !defined(__DragonFly__)
+ #define _KERNEL
+ #endif
++#endif
+ #include <sys/socket.h>
+ #undef KERNEL
+ #undef _KERNEL
+@@ -4072,8 +4094,10 @@ AC_CHECK_STRUCT_FOR([
+ #include <sys/types.h>
+ #ifdef IFNET_NEEDS_KERNEL
+ #define KERNEL
++#if !defined(__DragonFly__)
+ #define _KERNEL
+ #endif
++#endif
+ #include <sys/socket.h>
+ #undef KERNEL
+ #undef _KERNEL
+@@ -4087,8 +4111,10 @@ AC_CHECK_STRUCT_FOR([
+ #include <sys/types.h>
+ #ifdef IFNET_NEEDS_KERNEL
+ #define KERNEL
++#if !defined(__DragonFly__)
+ #define _KERNEL
+ #endif
++#endif
+ #include <sys/socket.h>
+ #undef KERNEL
+ #undef _KERNEL
+@@ -4102,8 +4128,10 @@ AC_CHECK_STRUCT_FOR([
+ #include <sys/types.h>
+ #ifdef IFNET_NEEDS_KERNEL
+ #define KERNEL
++#if !defined(__DragonFly__)
+ #define _KERNEL
+ #endif
++#endif
+ #include <sys/socket.h>
+ #undef KERNEL
+ #undef _KERNEL
