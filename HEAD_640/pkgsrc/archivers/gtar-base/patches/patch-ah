@@ -6,7 +6,7 @@ $NetBSD: patch-ah,v 1.5 2009/01/20 00:33:56 tnn Exp $
     long int.  It also assumes that signed integer overflow silently
     wraps around, but there's no portable way to check for that at
     compile-time.  */
-+#ifdef __NetBSD__
++#if defined(__NetBSD__) || defined(__QNXNTO__)
 +#warning this might break with 64-bit time_t on 32-bit hosts
 +#else
  verify (TYPE_IS_INTEGER (time_t));
