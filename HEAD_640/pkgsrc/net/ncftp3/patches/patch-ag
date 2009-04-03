@@ -1,0 +1,14 @@
+$NetBSD$
+
+--- ncftp/syshdrs.h.orig	2004-01-06 22:41:11.000000000 +0100
++++ ncftp/syshdrs.h
+@@ -116,6 +116,9 @@
+ #	define write_return_t int
+ #	define write_size_t unsigned int
+ #else	/* UNIX */
++#       if defined(__QNXNTO__)
++#               include <stdlib.h>
++#       endif
+ #	if defined(HAVE_CONFIG_H)
+ #		include <config.h>
+ #	endif

@@ -1,0 +1,14 @@
+$NetBSD$
+
+--- ncftp/gl_getline.c.orig	2005-01-01 20:12:24.000000000 +0100
++++ ncftp/gl_getline.c
+@@ -86,6 +86,9 @@ static const char copyright[] = "gl_getl
+ 		return ConsoleInfo.wAttributes;
+ 	}
+ #else
++#       if defined(__QNXNTO__)
++#               include <stdlib.h>
++#       endif
+ #	if defined(HAVE_CONFIG_H)
+ #		include <config.h>
+ #	else

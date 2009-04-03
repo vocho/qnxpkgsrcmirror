@@ -12,6 +12,8 @@ COMMENT=	FTP replacement with advanced user interface
 WRKSRC=		${WRKDIR}/${DISTNAME:S/-src//}
 GNU_CONFIGURE=	yes
 
+USE_TOOLS+=perl
+
 post-patch:
 	@${MV} ${WRKSRC}/ncftp/pref.h ${WRKSRC}/ncftp/pref.h.in
 	@${SED} -e "s:/etc/ncftp.firewall:${PREFIX}/etc/ncftp.firewall:" \
