@@ -1,0 +1,14 @@
+$NetBSD$
+
+--- sio/syshdrs.h.orig	2005-03-25 02:13:56.000000000 +0100
++++ sio/syshdrs.h
+@@ -58,6 +58,9 @@
+ #	define NO_SIGNALS 1
+ #	define NO_UNIX_DOMAIN_SOCKETS 1
+ #else /* ---------------------------- UNIX ---------------------------- */
++#       if defined(__QNXNTO__)
++#               include <stdlib.h>
++#       endif
+ #	if defined(HAVE_CONFIG_H)
+ #		include <config.h>
+ #	endif

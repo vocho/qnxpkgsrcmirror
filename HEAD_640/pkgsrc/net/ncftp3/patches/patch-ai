@@ -1,0 +1,14 @@
+$NetBSD$
+
+--- sh_util/syshdrs.h.orig	2002-03-27 11:37:56.000000000 +0100
++++ sh_util/syshdrs.h
+@@ -122,6 +122,9 @@
+ #		define __T(x)      x
+ #	endif
+ #else	/* UNIX */
++#       if defined(__QNXNTO__)
++#               include <stdlib.h>
++#       endif
+ #	if defined(HAVE_CONFIG_H)
+ #		include <config.h>
+ #	endif

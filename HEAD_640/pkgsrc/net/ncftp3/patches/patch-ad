@@ -1,0 +1,14 @@
+$NetBSD$
+
+--- vis/syshdrs.h.orig	2004-01-07 07:07:37.000000000 +0100
++++ vis/syshdrs.h
+@@ -5,6 +5,9 @@
+  * 
+  */
+ 
++#       if defined(__QNXNTO__)
++#               include <stdlib.h>
++#       endif
+ #ifdef HAVE_CONFIG_H
+ #	include <config.h>
+ #endif

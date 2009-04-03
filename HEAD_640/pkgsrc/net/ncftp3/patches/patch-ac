@@ -1,0 +1,14 @@
+$NetBSD$
+
+--- Strn/syshdrs.h.orig	2004-01-07 07:07:05.000000000 +0100
++++ Strn/syshdrs.h
+@@ -28,6 +28,9 @@
+ #	define strncasecmp strnicmp
+ #	define HAVE_STRDUP 1
+ #else /* ---------------------------- UNIX ---------------------------- */
++#       if defined(__QNXNTO__)
++#               include <stdlib.h>
++#       endif
+ #	if defined(HAVE_CONFIG_H)
+ #		include <config.h>
+ #	endif

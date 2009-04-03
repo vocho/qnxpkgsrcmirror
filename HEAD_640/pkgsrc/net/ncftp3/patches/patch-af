@@ -1,0 +1,14 @@
+$NetBSD$
+
+--- libncftp/syshdrs.h.orig	2005-01-01 22:32:01.000000000 +0100
++++ libncftp/syshdrs.h
+@@ -93,6 +93,9 @@
+ #	define NO_SIGNALS 1
+ #	define USE_SIO 1
+ #else /* ---------------------------- UNIX ---------------------------- */
++#       if defined(__QNXNTO__)
++#               include <stdlib.h>
++#       endif
+ #	if defined(HAVE_CONFIG_H)
+ #		include <config.h>
+ #	endif
