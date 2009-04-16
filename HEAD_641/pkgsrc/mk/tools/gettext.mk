@@ -1,4 +1,4 @@
-# $NetBSD: gettext.mk,v 1.8 2007/06/15 17:11:33 joerg Exp $
+# $NetBSD: gettext.mk,v 1.12 2009/03/22 18:10:27 joerg Exp $
 #
 # Copyright (c) 2006 The NetBSD Foundation, Inc.
 # All rights reserved.
@@ -59,6 +59,9 @@ MAKEFLAGS+=		TOOLS_IGNORE.msgfmt=
 .    if defined(TOOLS_PLATFORM.msgfmt) && !empty(TOOLS_PLATFORM.msgfmt)
 _TOOLS_USE_PKGSRC.msgfmt?=	no
 #
+# MSGFMT_STRIP_MSGID_PLURAL: Yes for msgfmt < 0.10.36
+# MSGFMT_STRIP_MSGCTXT: Yes for msgfmt < 0.15
+#
 # Determine if the platform-supplied msgfmt is new enough to support
 # the msgid_plural statement.  We need at least 0.10.36 for GNU msgfmt.
 #
@@ -68,18 +71,36 @@ _TOOLS_USE_PKGSRC.msgfmt?=	no
 .      if !defined(_TOOLS_USE_MSGFMT_SH)
 _TOOLS_VERSION.msgfmt!=		${TOOLS_PLATFORM.msgfmt} --version |	\
 				${AWK} '{ print $$4; exit }'
-_TOOLS_USE_MSGFMT_SH!=							\
+.          if !defined(MSGFMT_STRIP_MSGID_PLURAL)
+MSGFMT_STRIP_MSGID_PLURAL!=						\
 	if ${PKG_ADMIN} pmatch "gettext>0.10.35"			\
 			gettext-${_TOOLS_VERSION.msgfmt:Q}; then	\
 		${ECHO} no;						\
 	else								\
 		${ECHO} yes;						\
 	fi
+.          endif
 .      endif
-MAKEVARS+=	_TOOLS_USE_MSGFMT_SH
+.          if !defined(MSGFMT_STRIP_MSGCTXT)
+MSGFMT_STRIP_MSGCTXT!=							\
+	if ${PKG_ADMIN} pmatch "gettext>=0.15"				\
+			gettext-${_TOOLS_VERSION.msgfmt:Q}; then	\
+		${ECHO} no;						\
+	else								\
+		${ECHO} yes;						\
+	fi
+.          endif
 .    else
 _TOOLS_USE_PKGSRC.msgfmt=	yes
 .    endif
+MSGFMT_STRIP_MSGID_PLURAL?=	no
+MSGFMT_STRIP_MSGCTXT?=		yes # pkgsrc version is too old
+.if ${MSGFMT_STRIP_MSGID_PLURAL} == "yes" || ${MSGFMT_STRIP_MSGCTXT} == "yes"
+_TOOLS_USE_MSGFMT_SH=		yes
+.else
+_TOOLS_USE_MSGFMT_SH=		no
+.endif
+MAKEVARS+=	_TOOLS_USE_MSGFMT_SH
 
 # If we're not using the builtin gettext implementation, then we should
 # definitely be using the pkgsrc version of msgfmt (gettext-tools).
@@ -96,13 +117,16 @@ TOOLS_CREATE+=		msgfmt
 TOOLS_DEPENDS.msgfmt?=	${_TOOLS_DEP.gettext-tools}:../../devel/gettext-tools
 TOOLS_FIND_PREFIX+=	TOOLS_PREFIX.msgfmt=${TOOLS_DEPENDS.msgfmt:C/:.*//}
 TOOLS_PATH.msgfmt=	${TOOLS_PREFIX.msgfmt}/bin/msgfmt
-.    elif defined(_TOOLS_USE_MSGFMT_SH) && \
-          !empty(_TOOLS_USE_MSGFMT_SH:M[yY][eE][sS])
+.    endif
+
+.    if !empty(_TOOLS_USE_MSGFMT_SH:M[yY][eE][sS])
 USE_TOOLS+=		awk sh
-TOOLS_PATH.msgfmt=	${PKGSRCDIR}/mk/tools/msgfmt.sh
 TOOLS_SCRIPT.msgfmt=	AWK=${TOOLS_AWK:Q} CAT=${TOOLS_CAT:Q}		\
-			MSGFMT=${TOOLS_PLATFORM.msgfmt:Q}		\
-			${TOOLS_SH} ${TOOLS_PATH.msgfmt} "$$@"
+			MSGFMT=${TOOLS_PATH.msgfmt:Q}		\
+			PKGSRCDIR=${PKGSRCDIR:Q}			\
+		        MSGFMT_STRIP_MSGID_PLURAL=${MSGFMT_STRIP_MSGID_PLURAL} \
+			MSGFMT_STRIP_MSGCTXT=${MSGFMT_STRIP_MSGCTXT} \
+			${TOOLS_SH} ${PKGSRCDIR}/mk/tools/msgfmt.sh "$$@"
 .    endif
 .  endif
 .endif

@@ -1,9 +1,8 @@
-# $NetBSD: Makefile,v 1.24 2008/06/12 02:14:42 joerg Exp $
+# $NetBSD: Makefile,v 1.26 2009/02/11 21:21:55 joerg Exp $
 #
 
-DISTNAME=	SOAPpy-0.11.4
+DISTNAME=	SOAPpy-0.11.6
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
-PKGREVISION=	4
 CATEGORIES=	net python
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=pywebsvcs/}
 

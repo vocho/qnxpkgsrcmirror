@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.23 2008/10/19 19:18:44 he Exp $
+# $NetBSD: Makefile,v 1.25 2009/03/05 18:51:31 joerg Exp $
 #
 
 DISTNAME=		libpreludedb-0.9.15
-PKGREVISION=		1
+PKGREVISION=		2
 CATEGORIES=		security
 MASTER_SITES=		http://www.prelude-ids.com/download/releases/libpreludedb/
 
@@ -23,7 +23,6 @@ CONFIGURE_ENV+=		PYTHON=${PYTHONBIN:Q}
 CONFIGURE_ARGS+=	--with-mysql=${BUILDLINK_PREFIX.mysql-client}
 CONFIGURE_ARGS+=	--with-pgsql=no
 LDFLAGS+=		${BUILDLINK_LDFLAGS.mysql-client}
-PYBINMODULE=		yes
 PY_PATCHPLIST=		yes
 
 post-install:

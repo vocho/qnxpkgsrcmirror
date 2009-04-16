@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.36 2009/01/24 20:55:05 adam Exp $
+@comment $NetBSD: PLIST,v 1.38 2009/03/17 15:41:41 adam Exp $
 bin/gimp
 bin/gimp-2.6
 bin/gimp-console
@@ -302,7 +302,7 @@ lib/gimp/2.0/plug-ins/file-psp
 lib/gimp/2.0/plug-ins/file-raw
 lib/gimp/2.0/plug-ins/file-sgi
 lib/gimp/2.0/plug-ins/file-sunras
-lib/gimp/2.0/plug-ins/file-svg
+${PLIST.svg}lib/gimp/2.0/plug-ins/file-svg
 lib/gimp/2.0/plug-ins/file-tga
 lib/gimp/2.0/plug-ins/file-tiff-load
 lib/gimp/2.0/plug-ins/file-tiff-save
@@ -1891,7 +1891,6 @@ share/locale/pt/LC_MESSAGES/gimp20-python.mo
 share/locale/pt/LC_MESSAGES/gimp20-script-fu.mo
 share/locale/pt/LC_MESSAGES/gimp20-std-plug-ins.mo
 share/locale/pt/LC_MESSAGES/gimp20-tips.mo
-share/locale/pt/LC_MESSAGES/gimp20.mo
 share/locale/pt_BR/LC_MESSAGES/gimp20-libgimp.mo
 share/locale/pt_BR/LC_MESSAGES/gimp20-python.mo
 share/locale/pt_BR/LC_MESSAGES/gimp20-script-fu.mo

@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.7 2009/01/19 21:42:09 epg Exp $
+# $NetBSD: Makefile,v 1.11 2009/03/18 06:06:12 epg Exp $
 
 DISTNAME=	bzr-svn-${VER}
 #PKGREVISION=	1
 CATEGORIES=	devel scm
-MASTER_SITES=	http://launchpad.net/bzr-svn/0.4/${VER}/+download/
+MASTER_SITES=	http://launchpad.net/bzr-svn/0.5/${VER}/+download/
 MASTER_SITES+=	http://samba.org/~jelmer/bzr/
-VER=		0.4.17
+VER=		0.5.3
 
 MAINTAINER=	epg@NetBSD.org
 HOMEPAGE=	http://bazaar-vcs.org/BzrForeignBranches/Subversion
@@ -14,18 +14,17 @@ COMMENT=	Foreign Subversion repositoriy support for Bazaar
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 DEPENDS+=	${SQLITE_DEP}
-DEPENDS+=	bzr>=1.10{,nb[0-9]*}:../../devel/bzr
+DEPENDS+=	bzr>=1.11{,nb[0-9]*}:../../devel/bzr
+DEPENDS+=	${PYPKGPREFIX}-subvertpy>=0.6.1:../../devel/py-subvertpy
 
 # for make test
 USE_TOOLS+=	gmake
 
-MAKE_ENV+=	SVN_PREFIX=${BUILDLINK_PREFIX.subversion-base}
 PYDISTUTILSPKG=	yes
 # NOTE: This must run in a UTF-8 locale, e.g. LC_TYPE=en_US.utf8 make test
 TEST_TARGET=	check-verbose
 
 .include "../../devel/bzr/plugin.mk"
-.include "../../devel/subversion-base/buildlink3.mk"
 .include "../../lang/python/extension.mk"
 .include "../../mk/bsd.pkg.mk"
 

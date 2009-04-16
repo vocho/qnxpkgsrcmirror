@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.39 2008/10/19 19:18:31 he Exp $
+# $NetBSD: Makefile,v 1.41 2009/03/07 15:34:40 seb Exp $
 
-DISTNAME=		Net-DNS-0.63
-PKGNAME=		p5-${DISTNAME}
+DISTNAME=		Net-DNS-0.65
 PKGREVISION=		1
+PKGNAME=		p5-${DISTNAME}
 SVR4_PKGNAME=		p5ndn
 CATEGORIES=		net perl5
 MASTER_SITES=		${MASTER_SITE_PERL_CPAN:=Net/}		\
@@ -28,14 +28,17 @@ PKG_SUGGESTED_OPTIONS=	inet6
 .include "../../mk/bsd.options.mk"
 
 .if !empty(PKG_OPTIONS:Minet6)
-DEPENDS+=		p5-INET6>=2.01:../../net/p5-INET6
+DEPENDS+=		p5-IO-Socket-INET6>=2.01:../../net/p5-IO-Socket-INET6
 DEPENDS+=		p5-Socket6-[0-9]*:../../net/p5-Socket6
+MAKE_PARAMS+=		--IPv6-tests
+.else
+MAKE_PARAMS+=		--no-IPv6-tests
 .endif
 
 .if !empty(PKG_OPTIONS:Monline-tests)
-MAKE_PARAMS=		--online-tests
+MAKE_PARAMS+=		--online-tests
 .else
-MAKE_PARAMS=		--noonline-tests
+MAKE_PARAMS+=		--no-online-tests
 .endif
 
 USE_LANGUAGES=		c

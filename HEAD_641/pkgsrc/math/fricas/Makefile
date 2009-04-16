@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.3 2009/01/27 15:54:23 asau Exp $
+# $NetBSD: Makefile,v 1.6 2009/03/08 17:17:02 asau Exp $
 
 PKGNAME=		fricas-1.0.5
-DISTNAME=		${PKGNAME}-full
+DISTNAME=		${PKGNAME_NOREV}-full
+PKGREVISION=		1
 CATEGORIES=		math
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=fricas/}
 EXTRACT_SUFX=		.tar.bz2
@@ -29,5 +30,12 @@ MAKE_JOBS_SAFE=		no
 .if !empty(PKG_OPTIONS:Mclisp)
 INSTALL_UNSTRIPPED=	yes	# don't strip AXIOMsys, it breaks FFI
 .endif
+
+# Fix BSD Family pattern:
+SUBST_CLASSES+=			dragonfly
+SUBST_STAGE.dragonfly=		post-patch
+SUBST_MESSAGE.dragonfly=	Fixing BSD Family pattern
+SUBST_FILES.dragonfly=		configure
+SUBST_SED.dragonfly=		-e 's/\*bsd\*)/*bsd*|*dragonfly*)/'
 
 .include "../../mk/bsd.pkg.mk"

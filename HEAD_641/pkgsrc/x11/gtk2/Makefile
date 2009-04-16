@@ -1,10 +1,11 @@
-# $NetBSD: Makefile,v 1.166 2009/01/12 11:19:22 wiz Exp $
+# $NetBSD: Makefile,v 1.171 2009/03/25 09:32:48 markd Exp $
 
-DISTNAME=		gtk+-2.14.7
+DISTNAME=		gtk+-2.16.0
+PKGREVISION=		3
 PKGNAME=		${DISTNAME:S/gtk/gtk2/}
 CATEGORIES=		x11
-MASTER_SITES=		ftp://ftp.gtk.org/pub/gtk/2.14/ \
-			${MASTER_SITE_GNOME:=sources/gtk+/2.14/}
+MASTER_SITES=		ftp://ftp.gtk.org/pub/gtk/2.16/ \
+			${MASTER_SITE_GNOME:=sources/gtk+/2.16/}
 EXTRACT_SUFX=		.tar.bz2
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
@@ -55,6 +56,13 @@ SUBST_MESSAGE.pthread=	Fixing pthread flags.
 SUBST_SED.pthread=	-e 's,__PTHREAD_FLAGS__,${BUILDLINK_LDFLAGS.pthread},g'
 SUBST_FILES.pthread=	gdk-pixbuf/Makefile.in
 
+PYTHON_PATCH_SCRIPTS=	gtk/gtk-builder-convert
+# gtk-builder-convert uses minidom from xml.dom, which needs expat
+.include "../../lang/python/pyversion.mk"
+.if ${PYPKGPREFIX} == "py24" || ${PYPKGPREFIX} == "py23"
+DEPENDS+=		${PYPKGPREFIX}-expat-[0-9]*:../../textproc/py-expat
+.endif
+
 .include "options.mk"
 
 # We remove the module databases during post-install since we create them
@@ -80,7 +88,7 @@ _BUILDING_GTK2=	yes
 BUILDLINK_API_DEPENDS.atk+=	atk>=1.13.0
 .include "../../devel/atk/buildlink3.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"
-BUILDLINK_API_DEPENDS.glib2+=	glib2>=2.17.6
+BUILDLINK_API_DEPENDS.glib2+=	glib2>=2.19.7
 .include "../../devel/glib2/buildlink3.mk"
 BUILDLINK_API_DEPENDS.pango+=	pango>=1.20.0
 .include "../../devel/pango/buildlink3.mk"
@@ -91,5 +99,6 @@ BUILDLINK_API_DEPENDS.cairo+=	cairo>=1.6.0
 .include "../../graphics/jpeg/buildlink3.mk"
 .include "../../graphics/png/buildlink3.mk"
 .include "../../graphics/tiff/buildlink3.mk"
+.include "../../lang/python/application.mk"
 
 .include "../../mk/bsd.pkg.mk"

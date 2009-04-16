@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.19 2008/09/15 02:45:21 taca Exp $
+# $NetBSD: Makefile,v 1.21 2009/02/24 16:16:55 wiz Exp $
 
 DISTNAME=	0431bbe66219
 # Last part of PKGNAME is changeset number
 PKGNAME=	fromcvs-0.0.0.124
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	devel scm
 MASTER_SITES=	http://ww2.fs.ei.tum.de/~corecode/hg/fromcvs/archive/
 EXTRACT_SUFX=	.tar.bz2
 
-MAINTAINER=	wiz@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://ww2.fs.ei.tum.de/~corecode/hg/fromcvs/
 COMMENT=	CVS repository conversion tool
 

@@ -1,4 +1,4 @@
-# $NetBSD: makevars.map,v 1.189 2009/01/04 20:28:51 wiz Exp $
+# $NetBSD: makevars.map,v 1.193 2009/03/25 14:12:04 rillig Exp $
 #
 
 # This file contains the guessed type of some variables, according to
@@ -160,6 +160,7 @@ BUILDLINK_CFLAGS	List of CFlag [$system]
 BUILDLINK_CFLAGS.*	List of CFlag [$bl_list]
 BUILDLINK_CPPFLAGS	List of CFlag [$system]
 BUILDLINK_CPPFLAGS.*	List of CFlag [$bl_list]
+BUILDLINK_CONTENTS_FILTER.*	ShellCommand [b:s]
 BUILDLINK_DEPENDS	InternalList of Identifier [b:a]
 BUILDLINK_DEPMETHOD.*	List of BuildlinkDepmethod [b:ad,m:as,c:a,*.mk:a]
 # ^^ FIXME: b:d may lead to unexpected behavior.
@@ -184,6 +185,7 @@ BUILDLINK_RPATHDIRS.*	List of Pathname [b:a]
 BUILDLINK_TARGETS	List of Identifier []
 BUILDLINK_FNAME_TRANSFORM.*	SedCommands [m:a,builtin.mk:a,h:a,b:a]
 BUILDLINK_TRANSFORM	List of WrapperTransform [*:a]
+BUILDLINK_TREE		List of Identifier [b:a]
 BUILD_DEFS		List of Varname [m:a,c:a,o:a]
 BUILD_DEPENDS		InternalList of DependencyWithPath [c:a,m:a,o:a,*.mk:a]
 BUILD_DIRS		List of WrksrcSubdirectory [$package_list]
@@ -402,6 +404,7 @@ LIBTOOL			ShellCommand [$system]
 LIBTOOL_OVERRIDE	List of Pathmask [m:as]
 LICENCE			License [m:s,c:s,o:s]
 LICENSE			License [m:s,c:s,o:s]
+LICENSE_FILE		Pathname [$package]
 LINKER_RPATH_FLAG	ShellWord [$system]
 LOWER_OPSYS		Identifier [$system]
 LTCONFIG_OVERRIDE	List of Pathmask [m:as,c:a]
@@ -611,7 +614,7 @@ PTHREAD_LIBS		List of LdFlag [$system]
 PTHREAD_OPTS		List of { native optional require } [m:as,c:a,b:a]
 PTHREAD_TYPE		Identifier [$system]
 # ^^ or "native" or "none".
-PYPKGPREFIX		{ py15 py20 py21 py22 py23 py24 } [*:pu, pyversion.mk:s, *:]
+PYPKGPREFIX		{ py23 py24 py25 } [*:pu, pyversion.mk:s, *:]
 PYTHON_FOR_BUILD_ONLY	Yes [$package]
 PYTHON_PATCH_SCRIPTS	List of Pathmask [$package_list]
 PYTHON_VERSIONS_ACCEPTED List of Version [$package]

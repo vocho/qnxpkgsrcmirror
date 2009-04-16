@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.2 2008/11/29 21:17:20 snj Exp $
+# $NetBSD: Makefile,v 1.4 2009/02/09 22:56:24 joerg Exp $
 
 DISTNAME=	PySolFC-1.1
 PKGNAME=	${DISTNAME:tl}
+PKGREVISION=	1
 CATEGORIES=	games python
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=pysolfc/}
 EXTRACT_SUFX=	.tar.bz2
@@ -11,8 +12,6 @@ HOMEPAGE=	http://pysolfc.sourceforge.net/
 COMMENT=	Over 1000 solitaire games
 
 PKG_DESTDIR_SUPPORT=	user-destdir
-
-PYTHON_VERSIONS_INCOMPATIBLE=	21
 
 PYDISTUTILSPKG=	yes
 

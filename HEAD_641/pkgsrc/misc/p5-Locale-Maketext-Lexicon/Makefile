@@ -1,13 +1,12 @@
-# $NetBSD: Makefile,v 1.17 2008/10/19 19:18:30 he Exp $
+# $NetBSD: Makefile,v 1.19 2009/03/24 13:35:47 darcy Exp $
 #
 
-DISTNAME=		Locale-Maketext-Lexicon-0.66
+DISTNAME=		Locale-Maketext-Lexicon-0.77
 PKGNAME=		p5-${DISTNAME}
-PKGREVISION=		1
 CATEGORIES=		misc perl5
 MASTER_SITES=		${MASTER_SITE_PERL_CPAN:=Locale/}
 
-MAINTAINER=		dieter.NetBSD@pandora.be
+MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://search.cpan.org/dist/Locale-Maketext-Lexicon/
 COMMENT=		Use other catalog formats in Maketext
 

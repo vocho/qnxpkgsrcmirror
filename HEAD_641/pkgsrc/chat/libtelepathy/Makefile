@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.1.1.1 2008/11/14 22:58:06 wiz Exp $
+# $NetBSD: Makefile,v 1.3 2009/04/01 16:20:41 roy Exp $
 #
 
 DISTNAME=	libtelepathy-0.3.3
+PKGREVISION=	1
 CATEGORIES=	chat
 MASTER_SITES=	http://telepathy.freedesktop.org/releases/libtelepathy/
 
@@ -14,6 +15,9 @@ USE_LIBTOOL=	yes
 USE_TOOLS+=	gmake pkg-config
 
 PKGCONFIG_OVERRIDE+=	libtelepathy.pc.in
+
+.include "../../lang/python/pyversion.mk"
+CONFIGURE_ENV+=		ac_cv_prog_PYTHON=${PYTHONBIN}
 
 .include "../../chat/telepathy-glib/buildlink3.mk"
 BUILDLINK_API_DEPENDS.glib2+=	glib2>=2.10.0

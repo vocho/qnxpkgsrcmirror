@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.9 2009/01/26 10:42:02 drochner Exp $
+@comment $NetBSD: PLIST,v 1.11 2009/03/09 16:02:08 drochner Exp $
 lib/gstreamer-0.10/libgstaacparse.la
 lib/gstreamer-0.10/libgstaiffparse.la
 lib/gstreamer-0.10/libgstamrparse.la

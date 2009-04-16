@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.200 2009/02/01 06:07:25 minskim Exp $
+# $NetBSD: Makefile,v 1.206 2009/03/06 17:54:54 minskim Exp $
 #
 
 COMMENT=	Desktop publishing
@@ -27,6 +27,7 @@ SUBDIR+=	cnprint
 SUBDIR+=	cups
 SUBDIR+=	dvidvi
 SUBDIR+=	dvipdfmx
+SUBDIR+=	dvipsk
 SUBDIR+=	enscript
 SUBDIR+=	epdfview
 SUBDIR+=	epstool
@@ -123,8 +124,11 @@ SUBDIR+=	tex-IEEEtran
 SUBDIR+=	tex-abc
 SUBDIR+=	tex-algorithm2e
 SUBDIR+=	tex-bagpipetex
+SUBDIR+=	tex-bin-dvipsk
+SUBDIR+=	tex-bin-kpathsea
 SUBDIR+=	tex-bin-tetex
 SUBDIR+=	tex-bin-texlive
+SUBDIR+=	tex-bin-xdvi
 SUBDIR+=	tex-chemarrow
 SUBDIR+=	tex-cooking
 SUBDIR+=	tex-dhucs
@@ -135,6 +139,7 @@ SUBDIR+=	tex-foiltex
 SUBDIR+=	tex-glossaries
 SUBDIR+=	tex-hlatex
 SUBDIR+=	tex-hugelatex
+SUBDIR+=	tex-hyphen-base
 SUBDIR+=	tex-ifxetex
 SUBDIR+=	tex-igo
 SUBDIR+=	tex-jadetex
@@ -152,6 +157,7 @@ SUBDIR+=	texlive-tetex
 SUBDIR+=	texmf-dirs
 SUBDIR+=	transfig
 SUBDIR+=	web2c
+SUBDIR+=	xdvik
 SUBDIR+=	xfce4-print
 SUBDIR+=	xpdf
 SUBDIR+=	xpdf-arabic

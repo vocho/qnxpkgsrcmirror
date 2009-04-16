@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.7 2008/05/24 21:45:15 tnn Exp $
+# $NetBSD: Makefile,v 1.9 2009/02/27 16:00:01 tnn Exp $
 #
 
-DISTNAME=		libXext-1.0.4
+DISTNAME=		libXext-1.0.5
+PKGREVISION=		1
 CATEGORIES=		x11 devel
 MASTER_SITES=		${MASTER_SITE_XORG:=lib/}
 EXTRACT_SUFX=		.tar.bz2
@@ -30,7 +31,9 @@ CONFIGURE_ARGS+=	--disable-malloc0returnsnull
 CONFIGURE_ENV+=		ac_cv_path_RAWCPP="cc -E -Uunix -"
 .endif
 
+BUILDLINK_API_DEPENDS.libX11+=	libX11>=1.2
 .include "../../x11/libX11/buildlink3.mk"
+BUILDLINK_API_DEPENDS.xextproto+=	xextproto>=7.0.5
 .include "../../x11/xextproto/buildlink3.mk"
 .include "../../x11/xproto/buildlink3.mk"
 

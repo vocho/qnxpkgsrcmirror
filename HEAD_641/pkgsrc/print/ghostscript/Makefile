@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.55 2008/12/11 09:18:20 wiz Exp $
+# $NetBSD: Makefile,v 1.60 2009/03/25 10:42:13 drochner Exp $
 
-DISTNAME=	ghostscript-8.63
+DISTNAME=	ghostscript-8.64
 PKGREVISION=	1
 CATEGORIES=	print
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=ghostscript/}
@@ -30,7 +30,7 @@ CONFIGURE_ARGS+=	-with-omni=no	# otherwise pulls in libstdc++
 
 REPLACE_PERL+=		lib/fixmswrd.pl
 
-GS_RESOURCEDIR=		${PREFIX}/share/ghostscript/Resource
+GS_RESOURCEDIR=		${PREFIX}/share/ghostscript/${PKGVERSION}/Resource
 
 .include "../../mk/bsd.prefs.mk"
 
@@ -46,7 +46,7 @@ REQD_DIRS+=		share/ghostscript
 SUBST_CLASSES+=		resdir
 SUBST_STAGE.resdir=	post-extract
 SUBST_MESSAGE.resdir=	Fixing resource directory path
-SUBST_FILES.resdir=	lib/gs_res.ps
+SUBST_FILES.resdir=	Resource/Init/gs_res.ps
 SUBST_SED.resdir=	-e "s|/Resource/|${GS_RESOURCEDIR}/|g"
 
 .if ${OPSYS} == "HPUX"
@@ -70,18 +70,27 @@ CFLAGS.SunOS=		-fPIC
 BUILDLINK_TRANSFORM+=	l:fontconfig:fontconfig:iconv
 .endif
 
+CONFIGURE_ENV+=	LPLIBDIR=${LOCALBASE}/lib
+
+# XXX Sun Studio Compiler does not like DOS linebreaks
+# should be fixed in next ghostscript release
+DELDOSCR= ${WRKSRC}/jasper/src/libjasper/jpc/jpc_qmfb.c
+
 post-extract:
 	${MKDIR} ${WRKSRC}/bin
 	${MKDIR} ${WRKSRC}/obj
 #	${MV} ${WRKSRC}/jasper ${WRKSRC}/jasper.dontuse
 	${MV} ${WRKSRC}/libpng ${WRKSRC}/libpng.dontuse
 #	${MV} ${WRKSRC}/zlib ${WRKSRC}/zlib.dontuse
+	${TR} -d '\015' <${DELDOSCR} >${DELDOSCR}.tmp \
+		&& ${MV} ${DELDOSCR}.tmp ${DELDOSCR}
 
 post-install:
 	${LN} -sf gsc ${DESTDIR}${PREFIX}/bin/gs
 
 .include "options.mk"
 
+.include "../../print/libpaper/buildlink3.mk"
 .include "../../graphics/png/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"
 # pkgsrc jasper is too new

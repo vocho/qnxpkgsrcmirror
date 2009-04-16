@@ -34,8 +34,8 @@ TOOLS_PLATFORM.flex?=		${QNX_HOST}/usr/bin/flex
 TOOLS_PLATFORM.ftp?=		/usr/bin/ftp
 TOOLS_PLATFORM.gawk?=		/usr/bin/gawk
 TOOLS_PLATFORM.grep?=		/usr/bin/grep
-.if exists(/usr/bin/groff)
-TOOLS_PLATFORM.groff?=		/usr/bin/groff
+.if exists(${QNX_HOST}/usr/bin/groff)
+TOOLS_PLATFORM.groff?=		${QNX_HOST}/usr/bin/groff
 .endif
 TOOLS_PLATFORM.gunzip?=		/bin/gunzip -f
 TOOLS_PLATFORM.gzcat?=		/bin/gzip -dc
@@ -73,14 +73,13 @@ TOOLS_PLATFORM.mtree?=		/usr/sbin/mtree
 .endif
 TOOLS_PLATFORM.mv?=		/bin/mv
 TOOLS_PLATFORM.nice?=		/usr/bin/nice
-.if exists(/usr/bin/nroff)
-TOOLS_PLATFORM.nroff?=		/usr/bin/nroff
+.if exists(${QNX_HOST}/usr/bin/nroff)
+TOOLS_PLATFORM.nroff?=		${QNX_HOST}/usr/bin/nroff
 .endif
 .if exists(/usr/bin/openssl)
 TOOLS_PLATFORM.openssl?=	/usr/bin/openssl
 .endif
 TOOLS_PLATFORM.patch?=		/usr/bin/patch
-TOOLS_PLATFORM.pax?=		/bin/pax
 TOOLS_PLATFORM.printf?=		/usr/bin/printf
 TOOLS_PLATFORM.pwd?=		/bin/pwd
 TOOLS_PLATFORM.rm?=		/bin/rm

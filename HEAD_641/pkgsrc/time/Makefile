@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.81 2009/01/19 18:05:34 abs Exp $
+# $NetBSD: Makefile,v 1.92 2009/03/05 03:20:03 smb Exp $
 #
 
 COMMENT=	Clocks, calendars, daily planners and other time related applications
@@ -28,6 +28,7 @@ SUBDIR+=	grdc
 SUBDIR+=	gtodo
 SUBDIR+=	gtodo-applet
 SUBDIR+=	hamster-applet
+SUBDIR+=	hebcal
 SUBDIR+=	ical
 SUBDIR+=	jday
 SUBDIR+=	kronolith
@@ -39,17 +40,24 @@ SUBDIR+=	ocaml-calendar
 SUBDIR+=	p5-Calendar-Simple
 SUBDIR+=	p5-Data-ICal
 SUBDIR+=	p5-Data-ICal-DateTime
+SUBDIR+=	p5-Date-Calc
 SUBDIR+=	p5-DateTime
 SUBDIR+=	p5-DateTime-Calendar-Discordian
 SUBDIR+=	p5-DateTime-Event-Cron
 SUBDIR+=	p5-DateTime-Event-ICal
+SUBDIR+=	p5-DateTime-Event-Random
 SUBDIR+=	p5-DateTime-Event-Recurrence
 SUBDIR+=	p5-DateTime-Format-Builder
+SUBDIR+=	p5-DateTime-Format-DateManip
+SUBDIR+=	p5-DateTime-Format-DateParse
 SUBDIR+=	p5-DateTime-Format-Epoch
+SUBDIR+=	p5-DateTime-Format-Flexible
+SUBDIR+=	p5-DateTime-Format-HTTP
 SUBDIR+=	p5-DateTime-Format-ICal
 SUBDIR+=	p5-DateTime-Format-ISO8601
 SUBDIR+=	p5-DateTime-Format-Mail
 SUBDIR+=	p5-DateTime-Format-MySQL
+SUBDIR+=	p5-DateTime-Format-Natural
 SUBDIR+=	p5-DateTime-Format-Pg
 SUBDIR+=	p5-DateTime-Format-Strptime
 SUBDIR+=	p5-DateTime-Format-W3CDTF
@@ -57,6 +65,8 @@ SUBDIR+=	p5-DateTime-Locale
 SUBDIR+=	p5-DateTime-Precise
 SUBDIR+=	p5-DateTime-Set
 SUBDIR+=	p5-DateTime-TimeZone
+SUBDIR+=	p5-DateTimeX-Easy
+SUBDIR+=	p5-MooseX-Types-DateTime
 SUBDIR+=	p5-Rose-DateTime
 SUBDIR+=	p5-Schedule-Cron-Events
 SUBDIR+=	p5-Time
@@ -97,7 +107,7 @@ SUBDIR+=	swisswatch
 SUBDIR+=	tdl
 SUBDIR+=	titrax
 SUBDIR+=	vixie-cron
-SUBDIR+=	wmcalclock
+SUBDIR+=	wmCalClock
 SUBDIR+=	wmclockmon
 SUBDIR+=	wmfishtime
 SUBDIR+=	wmmoonclock

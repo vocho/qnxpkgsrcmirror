@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.53 2009/01/11 22:47:54 shattered Exp $
+# $NetBSD: Makefile,v 1.55 2009/02/09 11:57:48 tron Exp $
 
-DISTNAME=		proftpd-1.3.2rc3
+DISTNAME=		proftpd-1.3.2
 PKGREVISION=		1
 CATEGORIES=		net
 MASTER_SITES=		ftp://ftp.proftpd.org/distrib/source/ \
@@ -42,6 +42,7 @@ SUBST_STAGE.man=	pre-configure
 SUBST_FILES.man=	utils/ftpcount.1.in utils/ftptop.1.in utils/ftpwho.1.in
 SUBST_SED.man=		-e s,@LOCALSTATEDIR@/run/proftpd,${VARBASE}/run,
 
+INSTALLATION_DIRS+=	lib/proftpd
 INSTALLATION_DIRS+=	share/doc/proftpd
 INSTALLATION_DIRS+=	share/examples/proftpd
 

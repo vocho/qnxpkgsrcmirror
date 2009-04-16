@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.317 2009/01/31 03:06:17 ahoka Exp $
+# $NetBSD: Makefile,v 1.320 2009/03/22 12:02:05 bad Exp $
 #
 
 COMMENT=	Games
@@ -19,7 +19,6 @@ SUBDIR+=	anise
 SUBDIR+=	aop
 SUBDIR+=	asc
 SUBDIR+=	atomix
-SUBDIR+=	baduki
 SUBDIR+=	bastet
 SUBDIR+=	battalion
 SUBDIR+=	battleball
@@ -109,6 +108,7 @@ SUBDIR+=	glaxium
 SUBDIR+=	glickomania
 SUBDIR+=	gltron
 SUBDIR+=	gnome-games
+SUBDIR+=	gnome-games-extra-data
 SUBDIR+=	gnome-mastermind
 SUBDIR+=	gnuchess
 SUBDIR+=	gnuchess-book
@@ -242,6 +242,7 @@ SUBDIR+=	ufoai
 SUBDIR+=	urban
 SUBDIR+=	velena
 SUBDIR+=	vms-empire
+SUBDIR+=	warzone2100
 SUBDIR+=	wesnoth
 SUBDIR+=	wormux
 SUBDIR+=	wormz

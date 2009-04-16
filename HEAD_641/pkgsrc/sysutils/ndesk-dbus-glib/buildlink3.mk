@@ -1,21 +1,15 @@
-# $NetBSD: buildlink3.mk,v 1.1.1.1 2008/04/25 15:49:30 kefren Exp $
+# $NetBSD: buildlink3.mk,v 1.3 2009/03/25 22:37:14 he Exp $
 
-BUILDLINK_DEPTH:=		${BUILDLINK_DEPTH}+
-NDESK_DBUS_GLIB_BUILDLINK3_MK:=	${NDESK_DBUS_GLIB_BUILDLINK3_MK}+
+BUILDLINK_TREE+=	ndesk-dbus-glib
 
-.if ${BUILDLINK_DEPTH} == "+"
-BUILDLINK_DEPENDS+=	ndesk-dbus-glib
-.endif
+.if !defined(NDESK_DBUS_GLIB_BUILDLINK3_MK)
+NDESK_DBUS_GLIB_BUILDLINK3_MK:=
 
-BUILDLINK_PACKAGES:=	${BUILDLINK_PACKAGES:Nndesk-dbus-glib}
-BUILDLINK_PACKAGES+=	ndesk-dbus-glib
-BUILDLINK_ORDER:=	${BUILDLINK_ORDER} ${BUILDLINK_DEPTH}ndesk-dbus-glib
-
-.if ${NDESK_DBUS_GLIB_BUILDLINK3_MK} == "+"
 BUILDLINK_API_DEPENDS.ndesk-dbus-glib+=	ndesk-dbus-glib>=0.4.1
+BUILDLINK_ABI_DEPENDS.ndesk-dbus-glib?=	ndesk-dbus-glib>=0.4.1nb1
 BUILDLINK_PKGSRCDIR.ndesk-dbus-glib?=	../../sysutils/ndesk-dbus-glib
-.endif	# NDESK_DBUS_GLIB_BUILDLINK3_MK
 
 .include "../../lang/mono/buildlink3.mk"
+.endif # NDESK_DBUS_GLIB_BUILDLINK3_MK
 
-BUILDLINK_DEPTH:=		${BUILDLINK_DEPTH:S/+$//}
+BUILDLINK_TREE+=	-ndesk-dbus-glib
