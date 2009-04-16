@@ -23,7 +23,7 @@ TOOLS_PLATFORM.diff?=		/usr/bin/diff
 TOOLS_PLATFORM.diff3?=		/usr/bin/diff3
 TOOLS_PLATFORM.dirname?=	/usr/bin/dirname
 TOOLS_PLATFORM.echo?=		echo			# shell builtin
-TOOLS_PLATFORM.egrep?=		/usr/bin/grep -E	# PR 63063
+TOOLS_PLATFORM.egrep?=		/usr/bin/egrep
 TOOLS_PLATFORM.env?=		/usr/bin/env
 TOOLS_PLATFORM.expr?=		/usr/bin/expr
 TOOLS_PLATFORM.false?=		false			# shell builtin
@@ -93,8 +93,8 @@ TOOLS_PLATFORM.sh?=		/bin/sh
 TOOLS_PLATFORM.shlock?=		/usr/bin/shlock
 .endif
 TOOLS_PLATFORM.sleep?=		/usr/bin/sleep
-.if exists(/usr/bin/soelim)
-TOOLS_PLATFORM.soelim?=		/usr/bin/soelim
+.if exists(${QNX_HOST}/usr/bin/soelim)
+TOOLS_PLATFORM.soelim?=		${QNX_HOST}/usr/bin/soelim
 .endif
 TOOLS_PLATFORM.sort?=		/usr/bin/sort
 .if exists(${QNX_HOST}/usr/bin/strip)
@@ -102,8 +102,8 @@ TOOLS_PLATFORM.strip?=		${QNX_HOST}/usr/bin/strip
 .endif
 TOOLS_PLATFORM.tail?=		/usr/bin/tail
 TOOLS_PLATFORM.tar?=		/usr/bin/tar
-.if exists(/usr/bin/tbl)
-TOOLS_PLATFORM.tbl?=		/usr/bin/tbl
+.if exists(${QNX_HOST}/usr/bin/tbl)
+TOOLS_PLATFORM.tbl?=		${QNX_HOST}/usr/bin/tbl
 .endif
 TOOLS_PLATFORM.tee?=		/usr/bin/tee
 TOOLS_PLATFORM.test?=		test			# shell builtin
