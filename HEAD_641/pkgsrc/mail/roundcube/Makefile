@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.14 2009/01/19 20:15:49 abs Exp $
+# $NetBSD: Makefile,v 1.19 2009/03/20 10:50:02 adrianp Exp $
 #
 
 DISTNAME=	roundcubemail-${RCVERSION}-dep
 PKGNAME=	${DISTNAME:S/mail-${RCVERSION}-dep/-${VERSION}/}
+PKGREVISION=	1
 CATEGORIES=	mail
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=roundcubemail/}
 
@@ -13,17 +14,26 @@ COMMENT=	Browser-based multilingual IMAP client
 USE_TOOLS+=	pax
 USE_LANGUAGES=	# none
 NO_BUILD=	yes
-RCVERSION=	0.2-stable
+RCVERSION=	0.2.1
 VERSION=	${RCVERSION:S/-//}
+
+PKG_DESTDIR_SUPPORT=  	user-destdir
+INSTALLATION_DIRS=	${RCDIR}/program ${RCDIR}/skins ${EGDIR}/SQL ${DOCDIR}
+INSTALLATION_DIRS+=	${RCDIR}/bin
 
 .include "../../mk/bsd.prefs.mk"
 .include "../../lang/php/phpversion.mk"
 
-DEPENDS+=	php5-dom-5.2.*:../../textproc/php5-dom
 DEPENDS+=	${PHP_PKG_PREFIX}-pear-Net_SMTP>=1.2.10:../../net/pear-Net_SMTP
 DEPENDS+=	${PHP_PKG_PREFIX}-pear-Mail_Mime>=1.3:../../mail/pear-Mail_Mime
 DEPENDS+=	${PHP_PKG_PREFIX}-pear-MDB2>=2.4.1:../../databases/pear-MDB2
 DEPENDS+=	${PHP_PKG_PREFIX}-pear-Auth_SASL-[0-9]*:../../mail/pear-Auth_SASL
+
+.if ${PKG_PHP_VERSION} == "4"
+DEPENDS+=	${PHP_PKG_PREFIX}-domxml>=4.3.3:../../textproc/php4-domxml
+.elif ${PKG_PHP_VERSION} == "5"
+DEPENDS+=	${PHP_PKG_PREFIX}-dom-[0-9]*:../../textproc/php5-dom
+.endif
 
 PKG_SYSCONFSUBDIR?=	roundcube
 
@@ -74,8 +84,17 @@ REPLACE.php.old=	.*/bin/php
 REPLACE.php.new=	${PREFIX}/bin/php
 REPLACE_FILES.php=	bin/*.sh
 
-INSTALLATION_DIRS=	${RCDIR}/program ${RCDIR}/skins ${EGDIR}/SQL ${DOCDIR}
-INSTALLATION_DIRS+=	${RCDIR}/bin
+EMPTY_DIRS=	plugins/cleanup plugins/emotions/images \
+		plugins/emotions/jscripts plugins/media/images \
+		plugins/media/jscripts plugins/nonbreaking/images \
+		plugins/nonbreaking/langs plugins/searchreplace/images \
+		plugins/searchreplace/jscripts plugins/spellchecker/images \
+		plugins/spellchecker/langs plugins/table/images \
+		plugins/table/jscripts plugins/visualchars/images \
+		plugins/visualchars/langs themes/advanced/css \
+		themes/advanced/docs/en/images themes/advanced/images/xp \
+		themes/advanced/jscripts themes/advanced/docs/en \
+		themes/advanced/images themes/advanced/docs
 
 .include "../../mk/apache.mk"
 .include "options.mk"
@@ -85,33 +104,37 @@ post-extract:
 
 pre-install:
 	${FIND} ${WRKSRC} -name "*.orig" -print | ${XARGS} ${RM} -f
-.	for i in 1 2 3
-	${FIND} ${WRKSRC}/program/js/tiny_mce -type d -empty | ${XARGS} ${RMDIR}
+
+.	for d in ${EMPTY_DIRS}
+		cd ${WRKSRC}/program/js/tiny_mce && rmdir ${d}
 .	endfor
 
 do-install:
-	${INSTALL_DATA} ${WRKSRC}/roundcube.conf ${EGDIR}/roundcube.conf
-	${INSTALL_DATA} ${WRKSRC}/INSTALL ${DOCDIR}
-	${INSTALL_DATA} ${WRKSRC}/LICENSE ${DOCDIR}
-	${INSTALL_DATA} ${WRKSRC}/README ${DOCDIR}
-	${INSTALL_DATA} ${WRKSRC}/UPGRADING ${DOCDIR}
+	${INSTALL_DATA} ${WRKSRC}/roundcube.conf \
+		${DESTDIR}${EGDIR}/roundcube.conf
+	${INSTALL_DATA} ${WRKSRC}/INSTALL ${DESTDIR}${DOCDIR}
+	${INSTALL_DATA} ${WRKSRC}/LICENSE ${DESTDIR}${DOCDIR}
+	${INSTALL_DATA} ${WRKSRC}/README ${DESTDIR}${DOCDIR}
+	${INSTALL_DATA} ${WRKSRC}/UPGRADING ${DESTDIR}${DOCDIR}
 
-	${INSTALL_DATA} ${WRKSRC}/SQL/*.sql ${EGDIR}/SQL/
+	${INSTALL_DATA} ${WRKSRC}/SQL/*.sql ${DESTDIR}${EGDIR}/SQL/
 
-	${INSTALL_DATA} ${WRKSRC}/.htaccess ${RCDIR}/
-	${INSTALL_DATA} ${WRKSRC}/index.php ${RCDIR}/
-	${INSTALL_DATA} ${WRKSRC}/robots.txt ${RCDIR}/
+	${INSTALL_DATA} ${WRKSRC}/.htaccess ${DESTDIR}${RCDIR}/
+	${INSTALL_DATA} ${WRKSRC}/index.php ${DESTDIR}${RCDIR}/
+	${INSTALL_DATA} ${WRKSRC}/robots.txt ${DESTDIR}${RCDIR}/
 
 	${INSTALL_DATA} ${WRKSRC}/config/db.inc.php.dist \
-		${EGDIR}/db.inc.php.dist
+		${DESTDIR}${EGDIR}/db.inc.php.dist
 	${INSTALL_DATA} ${WRKSRC}/config/main.inc.php.dist \
-		${EGDIR}/main.inc.php.dist
+		${DESTDIR}${EGDIR}/main.inc.php.dist
 
 .	for i in ${PAX_DIRS}
-		cd ${WRKSRC}/${i} && pax -rw . ${RCDIR}/${i}
-		${FIND} ${RCDIR}/${i} -type f | ${XARGS} ${CHMOD} ${SHAREMODE}
-		${FIND} ${RCDIR}/${i} -type d | ${XARGS} ${CHMOD} ${PKGDIRMODE}
-		${CHOWN} -R ${SHAREOWN}:${SHAREGRP} ${RCDIR}/${i}
+		cd ${WRKSRC}/${i} && ${PAX} -rw . ${DESTDIR}${RCDIR}/${i}
+		${FIND} ${DESTDIR}${RCDIR}/${i} -type f | \
+			${XARGS} ${CHMOD} ${SHAREMODE}
+		${FIND} ${DESTDIR}${RCDIR}/${i} -type d | \
+			${XARGS} ${CHMOD} ${PKGDIRMODE}
+		${CHOWN} -R ${SHAREOWN}:${SHAREGRP} ${DESTDIR}${RCDIR}/${i}
 .	endfor
 
 .include "../../mk/bsd.pkg.mk"

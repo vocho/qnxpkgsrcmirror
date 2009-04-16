@@ -1,5 +1,5 @@
 ===========================================================================
-$NetBSD: MESSAGE,v 1.4 2008/12/20 23:38:56 jmcneill Exp $
+$NetBSD: MESSAGE,v 1.6 2009/03/17 14:46:39 jmcneill Exp $
 
 In order to get the GNOME Desktop running properly, you need to follow
 these manual steps:

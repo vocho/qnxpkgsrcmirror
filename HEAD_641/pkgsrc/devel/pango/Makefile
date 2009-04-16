@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.123 2009/01/05 20:30:43 wiz Exp $
+# $NetBSD: Makefile,v 1.125 2009/03/18 13:26:03 drochner Exp $
 
-DISTNAME=		pango-1.22.4
+DISTNAME=		pango-1.24.0
 CATEGORIES=		devel fonts
-MASTER_SITES=		${MASTER_SITE_GNOME:=sources/pango/1.22/}
+MASTER_SITES=		${MASTER_SITE_GNOME:=sources/pango/1.24/}
 EXTRACT_SUFX=		.tar.bz2
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
@@ -31,7 +31,6 @@ PKGCONFIG_OVERRIDE+=	pangoxft-uninstalled.pc.in
 PKGCONFIG_OVERRIDE+=	pangoxft.pc.in
 
 CONFIGURE_ARGS+=	--sysconfdir=${PREFIX}/libdata
-CONFIGURE_ARGS+=	--with-qt=no
 
 # Avoid an ICE in gcc2 on sparc64
 CONFIGURE_ENV+=		F77=${FALSE:Q}

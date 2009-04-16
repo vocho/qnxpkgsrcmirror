@@ -1,6 +1,6 @@
 #!@SH@ -e
 #
-# $Id: pkg_chk.sh,v 1.61 2008/12/20 09:50:59 abs Exp $
+# $Id: pkg_chk.sh,v 1.63 2009/03/25 00:00:52 abs Exp $
 #
 # TODO: Make -g check dependencies and tsort
 # TODO: Make -g list user-installed packages first, followed by commented
@@ -172,30 +172,30 @@ extract_variables()
 	    fi
 	done
     fi
-    if [ ! -d "$PKGSRCDIR" -a \( -z "$opt_b" -o -n "$opt_s" \) ] ; then
-	fatal "Unable to locate PKGSRCDIR (${PKGSRCDIR:-not set})"
-    fi
 
-    # Now we have PKGSRCDIR, use it to determine PACKAGES, and PKGCHK_CONF
-    # as well as AWK, GREP, SED, PKGCHK_TAGS and PKGCHK_NOTAGS
-    #
-
-    if [ -n "$opt_g" ]; then
-        :
-    elif [ -z "$opt_b" -o -n "$opt_s" -o -d $PKGSRCDIR/pkgtools/pkg_chk ] ; then
-	cd $PKGSRCDIR/pkgtools/pkg_chk
-	extract_make_vars Makefile \
-		AWK GREP GZIP_CMD ID PACKAGES PKGCHK_CONF PKGCHK_NOTAGS \
-		PKGCHK_TAGS PKGCHK_UPDATE_CONF PKG_ADD PKG_DBDIR PKG_DELETE \
-		PKG_ADMIN PKG_INFO PKG_SUFX SED SORT SU_CMD TSORT
-	if [ -z "$PACKAGES" ];then
-	    PACKAGES=$PKGSRCDIR/packages
+    if [ -z "$opt_g" ]; then
+	# Now we have PKGSRCDIR, use it to determine PACKAGES, and PKGCHK_CONF
+	# as well as AWK, GREP, SED, PKGCHK_TAGS and PKGCHK_NOTAGS
+	#
+	if [ ! -d "$PKGSRCDIR" -a \( -z "$opt_b" -o -n "$opt_s" \) ] ; then
+	    fatal "Unable to locate PKGSRCDIR (${PKGSRCDIR:-not set})"
 	fi
-    elif [ $MAKECONF != /dev/null ] ; then
-	extract_make_vars $MAKECONF PACKAGES PKGCHK_CONF PKGCHK_UPDATE_CONF \
-			PKGCHK_TAGS PKGCHK_NOTAGS PKG_SUFX
-	if [ -z "$PACKAGES" ] ; then
-	    PACKAGES=`pwd`
+	if [ -z "$opt_b" -o -n "$opt_s" -o -d $PKGSRCDIR/pkgtools/pkg_chk ] ;
+	    then
+	    cd $PKGSRCDIR/pkgtools/pkg_chk
+	    extract_make_vars Makefile \
+		    AWK GREP GZIP_CMD ID PACKAGES PKGCHK_CONF PKGCHK_NOTAGS \
+		    PKGCHK_TAGS PKGCHK_UPDATE_CONF PKG_ADD PKG_DBDIR \
+		    PKG_DELETE PKG_ADMIN PKG_INFO PKG_SUFX SED SORT SU_CMD TSORT
+	    if [ -z "$PACKAGES" ];then
+		PACKAGES=$PKGSRCDIR/packages
+	    fi
+	elif [ $MAKECONF != /dev/null ] ; then
+	    extract_make_vars $MAKECONF PACKAGES PKGCHK_CONF \
+			PKGCHK_UPDATE_CONF PKGCHK_TAGS PKGCHK_NOTAGS PKG_SUFX
+	    if [ -z "$PACKAGES" ] ; then
+		PACKAGES=`pwd`
+	    fi
 	fi
     fi
 
@@ -257,22 +257,24 @@ get_bin_pkg_info()
     summary_file=$PACKAGES/$SUMMARY_FILE
     if [ -f $summary_file ] ; then
 	if [ -z "$(find $PACKAGES -type f -newer $summary_file -name '*.t[bg]z')" ] ; then
+	    msg_progress Reading $summary_file
 	    zcat $summary_file
 	    return;
 	fi
 	echo "*** Ignoring $SUMMARY_FILE as PACKAGES contains newer files" >&2
     fi
+    msg_progress Scan $PACKAGES
     list_bin_pkgs | ${XARGS} ${PKG_INFO} -X
     }
 
 get_build_ver()
     {
     if [ -n "$opt_b" -a -z "$opt_s" ] ; then
-	${PKG_INFO} -. -q -b $PACKAGES/$PKGNAME$PKG_SUFX | ${GREP} .
+	${PKG_INFO} -q -b $PACKAGES/$PKGNAME$PKG_SUFX | ${GREP} .
 	return
     fi
-    # Unfortunately pkgsrc always outputs to a file, but it does helpfully
-    # allows # us to specify the name
+    # Unfortunately pkgsrc always outputs to a file, but it does
+    # helpfully allows us to specify the name
     rm -f $MY_TMPFILE
     ${MAKE} _BUILD_VERSION_FILE=$MY_TMPFILE $MY_TMPFILE
     cat $MY_TMPFILE
@@ -289,7 +291,7 @@ list_bin_pkgs ()
 #
 list_dependencies()
     {
-    ${PKG_INFO} -. -q -n $1 | ${GREP} .. || true
+    ${PKG_INFO} -q -n $1 | ${GREP} .. || true
     }
 
 # Pass a list of pkgdirs, outputs a tsorted list including any dependencies
@@ -839,7 +841,6 @@ if [ -n "$opt_b" -a -z "$opt_s" ] ; then
 	    fi;;
 	*)
 	    if [ -d "$PACKAGES" ] ; then
-		msg_progress Scan $PACKAGES
 		PKGDB=$(get_bin_pkg_info | bin_pkg_info2pkgdb)
 		PKGSRCDIR=NONE
 	    fi;;

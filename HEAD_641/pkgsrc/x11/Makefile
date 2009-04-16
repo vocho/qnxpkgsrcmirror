@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.579 2009/01/08 15:47:23 wiz Exp $
+# $NetBSD: Makefile,v 1.581 2009/03/16 08:39:23 jmcneill Exp $
 #
 
 COMMENT=	Packages to support the X window system
@@ -84,6 +84,7 @@ SUBDIR+=	gtk2+extra
 SUBDIR+=	gtk2-chtheme
 SUBDIR+=	gtk2-engines
 SUBDIR+=	gtk2-engines-bluecurve
+SUBDIR+=	gtk2-engines-murrine
 SUBDIR+=	gtk2-theme-switch
 SUBDIR+=	gtkglarea
 SUBDIR+=	gtkmm
@@ -246,6 +247,7 @@ SUBDIR+=	openbsd-input-ws
 SUBDIR+=	openmotif
 SUBDIR+=	p5-Clipboard
 SUBDIR+=	p5-Gtk2-Ex-FormFactory
+SUBDIR+=	p5-Gtk2-GladeXML
 SUBDIR+=	p5-Tk
 SUBDIR+=	p5-X11-Protocol
 SUBDIR+=	p5-gtk

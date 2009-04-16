@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.9 2008/06/12 02:14:37 joerg Exp $
+# $NetBSD: Makefile,v 1.11 2009/02/22 11:08:20 adrianp Exp $
 
 MODNAME=		mbstring
 CATEGORIES+=		misc

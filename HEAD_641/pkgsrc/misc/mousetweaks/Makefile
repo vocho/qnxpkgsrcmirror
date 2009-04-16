@@ -1,13 +1,15 @@
-# $NetBSD: Makefile,v 1.3 2009/01/13 16:10:01 wiz Exp $
+# $NetBSD: Makefile,v 1.6 2009/03/17 23:20:11 jmcneill Exp $
 #
 
-DISTNAME=	mousetweaks-2.24.3
+DISTNAME=	mousetweaks-2.26.0
 CATEGORIES=	misc
-MASTER_SITES=	${MASTER_SITE_GNOME:=sources/mousetweaks/2.24/}
+MASTER_SITES=	${MASTER_SITE_GNOME:=sources/mousetweaks/2.26/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://live.gnome.org/Mousetweaks/Home
 COMMENT=	Mouse accessibility software
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=	yes
 CONFIGURE_ENV+=	GCONF_SCHEMA_FILE_DIR=${PREFIX}/share/gconf/schemas/
@@ -16,7 +18,7 @@ MAKE_ENV+=	GCONF_SCHEMA_FILE_DIR=${PREFIX}/share/gconf/schemas/
 GCONF_SCHEMAS+=	mousetweaks.schemas
 GCONF_SCHEMAS+=	pointer-capture-applet.schemas
 
-USE_TOOLS+=	gmake intltool pkg-config
+USE_TOOLS+=	gmake intltool msgfmt pkg-config
 USE_DIRS+=	gnome2-1.6
 
 BUILDLINK_API_DEPENDS.GConf+=	GConf>=2.16.0
@@ -26,7 +28,7 @@ BUILDLINK_API_DEPENDS.libglade+=	libglade>=2.4.0
 .include "../../devel/libglade/buildlink3.mk"
 .include "../../sysutils/dbus-glib/buildlink3.mk"
 .include "../../textproc/gnome-doc-utils/buildlink3.mk"
-.include "../../textproc/rarian/omf.mk"
+.include "../../mk/omf-scrollkeeper.mk"
 .include "../../x11/libXcursor/buildlink3.mk"
 .include "../../x11/libXfixes/buildlink3.mk"
 .include "../../x11/libXtst/buildlink3.mk"

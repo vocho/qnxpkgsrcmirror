@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.33 2009/01/29 09:37:54 joerg Exp $
+# $NetBSD: Makefile,v 1.35 2009/03/05 18:51:31 joerg Exp $
 #
 
 DISTNAME=	ReportLab_2_2
@@ -13,7 +13,8 @@ COMMENT=	Powerful PDF-generating toolkit for Python
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
-PYBINMODULE=	yes
+PYTHON_VERSIONS_ACCEPTED=	25 24
+
 PYDISTUTILSPKG=	yes
 
 .include "../../graphics/freetype2/buildlink3.mk"

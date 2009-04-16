@@ -1,35 +1,26 @@
-# $NetBSD: Makefile,v 1.2 2009/02/07 22:57:02 roy Exp $
+# $NetBSD: Makefile,v 1.7 2009/03/19 09:57:50 roy Exp $
 #
 
-DISTNAME=		openresolv-2.0.1
+DISTNAME=		openresolv-3.1.1
 CATEGORIES=		net
 MASTER_SITES=		ftp://roy.marples.name/pub/openresolv/
 MASTER_SITES+=		http://roy.aydogan.net/openresolv/
 EXTRACT_SUFX=		.tar.bz2
 
-MAINTAINER=		roy@marples.name
+MAINTAINER=		roy@NetBSD.org
 HOMEPAGE=		http://roy.marples.name/projects/openresolv/
 COMMENT=		Framework for managing /etc/resolv.conf
 
 USE_LANGUAGES=		# none
 
 PKG_DESTDIR_SUPPORT=	user-destdir
-PKG_SYSCONFSUBDIR=	resolvconf
-EGDIR=			${PREFIX}/share/examples/resolvconf
 
+EGDIR=			${PREFIX}/share/examples/resolvconf
 MAKE_ENV+=		MANDIR=${PREFIX}/${PKGMANDIR} \
 			SYSCONFDIR=${PKG_SYSCONFDIR}
 INSTALL_MAKE_FLAGS+=	SYSCONFDIR=${EGDIR}
 
-OWN_DIRS=		${PKG_SYSCONFDIR}/update.d
-OWN_DIRS+=		${PKG_SYSCONFDIR}/resolv.conf.d
-CONF_FILES=		${EGDIR}/resolv.conf.d/head \
-			${PKG_SYSCONFDIR}/resolv.conf.d/head
-
-CONF_FILES_PERMS=
-.for s in libc dnsmasq named
-CONF_FILES_PERMS+=	${EGDIR}/update.d/${s} ${PKG_SYSCONFDIR}/update.d/${s} \
-			${REAL_ROOT_USER} ${REAL_ROOT_GROUP} 0755
-.endfor
+CONF_FILES=		${EGDIR}/resolvconf.conf \
+			${PKG_SYSCONFDIR}/resolvconf.conf
 
 .include "../../mk/bsd.pkg.mk"

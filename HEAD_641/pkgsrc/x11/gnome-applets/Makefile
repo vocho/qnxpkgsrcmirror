@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.68 2009/01/15 12:18:34 wiz Exp $
+# $NetBSD: Makefile,v 1.71 2009/03/19 19:24:23 drochner Exp $
 #
 
-DISTNAME=		gnome-applets-2.24.3.1
+DISTNAME=		gnome-applets-2.26.0
 CATEGORIES=		x11 gnome
-MASTER_SITES=		${MASTER_SITE_GNOME:=sources/gnome-applets/2.24/}
+MASTER_SITES=		${MASTER_SITE_GNOME:=sources/gnome-applets/2.26/}
 EXTRACT_SUFX=		.tar.bz2
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
@@ -24,6 +24,10 @@ USE_LIBTOOL=		yes
 .include "options.mk"
 
 CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR:Q}
+# obsolete; replaced by PA mixer in gnome-media>=2.26
+CONFIGURE_ARGS+=	--enable-mixer-applet
+# obsolete; replaced by gnome-power-manager>=2.24
+CONFIGURE_ARGS+=	--disable-cpufreq
 
 EGDIR=			${PREFIX}/share/examples/gnome-applets
 
@@ -51,16 +55,6 @@ CONFIGURE_ARGS+=	--disable-battstat
 PRINT_PLIST_AWK+=	/[Bb]attstat/ { print "$${PLIST.battstat}"$$0; next; }
 PRINT_PLIST_AWK+=	/examples/ { print "$${PLIST.battstat}"$$0; next; }
 
-PLIST_VARS+=		cpufreq
-.if ${OPSYS} == "Linux" && exists(/usr/include/cpufreq.h)
-GCONF_SCHEMAS+=	cpufreq-applet.schemas
-PLIST.cpufreq=		yes
-.else
-CONFIGURE_ARGS+=	--disable-cpufreq
-.endif
-
-PRINT_PLIST_AWK+=	/[Cc][Pp][Uu][Ff]req/ { print "$${CPUFREQ}"$$0; next; }
-
 .include "../../devel/GConf/schemas.mk"
 
 PY_PATCHPLIST=	yes
@@ -70,8 +64,6 @@ PYTHON_PATCH_SCRIPTS+=	invest-applet/invest/invest-chart
 .include "../../devel/gettext-lib/buildlink3.mk"
 BUILDLINK_API_DEPENDS.glib2+=			glib2>=2.18.0
 .include "../../devel/glib2/buildlink3.mk"
-.include "../../devel/libgnome/buildlink3.mk"
-.include "../../devel/libgnomeui/buildlink3.mk"
 BUILDLINK_API_DEPENDS.libgweather+=	libgweather>=2.22.1
 .include "../../devel/libgweather/buildlink3.mk"
 .include "../../devel/libwnck/buildlink3.mk"

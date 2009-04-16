@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.24 2009/01/07 21:50:29 wiz Exp $
+# $NetBSD: Makefile,v 1.29 2009/03/22 09:40:01 wiz Exp $
 #
 
-DISTNAME=	mercurial-1.1.2
+DISTNAME=	mercurial-1.2.1
 CATEGORIES=	devel scm
 MASTER_SITES=	http://www.selenic.com/mercurial/release/
 
@@ -16,7 +16,7 @@ BUILD_DEPENDS+=	asciidoc-[0-9]*:../../textproc/asciidoc
 
 PY_PATCHPLIST=	yes
 PYDISTUTILSPKG=	yes
-USE_TOOLS+=	gmake
+USE_TOOLS+=	gmake msgfmt
 
 INSTALLATION_DIRS=	bin ${PKGMANDIR}/man1 ${PKGMANDIR}/man5
 

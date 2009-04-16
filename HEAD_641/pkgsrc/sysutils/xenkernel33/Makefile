@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.8 2009/01/13 13:48:33 cegger Exp $
+# $NetBSD: Makefile,v 1.10 2009/02/18 20:31:29 cegger Exp $
 #
 
 VERSION=	3.3.1
@@ -16,7 +16,6 @@ COMMENT=	Xen 3.3.1 Kernel
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 ONLY_FOR_PLATFORM=	Linux-2.6*-i386 Linux-2.6*-x86_64
-ONLY_FOR_PLATFORM+=	NetBSD-4.99.*-x86_64 NetBSD-4.99.*-i386
 ONLY_FOR_PLATFORM+=	NetBSD-[5-9].*-x86_64 NetBSD-[5-9].*-i386
 
 CONFLICTS=	xenkernel30-* xentools30-*

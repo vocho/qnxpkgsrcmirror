@@ -1,4 +1,4 @@
-# $NetBSD: fetch-list.mk,v 1.9 2006/07/27 21:46:46 jlam Exp $
+# $NetBSD: fetch-list.mk,v 1.13 2009/03/06 10:54:42 tnn Exp $
 
 ######################################################################
 ### fetch-list (PUBLIC)
@@ -59,7 +59,7 @@ fetch-list-recursive:
 ###
 .PHONY: fetch-list-one-pkg
 fetch-list-one-pkg:
-.if !empty(_ALLFILES)
+.if !empty(_ALLFILES) && empty(INTERACTIVE_STAGE:Mfetch)
 	@${ECHO}
 	@${ECHO} '#'
 	@location=`${PWD_CMD} | ${AWK} -F / '{ print $$(NF-1) "/" $$NF }'`; \
@@ -80,11 +80,11 @@ fetch-list-one-pkg:
 		${ECHO} 'unsorted_sites="$${unsorted_sites} ${_MASTER_SITE_BACKUP}"'; \
 		${ECHO} sites='"'${_ORDERED_SITES:Q}'"';		\
 		${ECHO} "${MKDIR} ${_DISTDIR}";				\
-		${ECHO} 'cd ${_DISTDIR} && [ -f ${fetchfile} -o -f ${fetchfile:T} ] ||'; \
+		${ECHO} 'cd ${_DISTDIR} && { [ -f ${fetchfile} -o -f ${fetchfile:T} ] ||'; \
 		${ECHO}	'for site in $$sites; do';			\
-		${ECHO} '	${FETCH_CMD} ${FETCH_BEFORE_ARGS} "$${site}${fetchfile:T}" ${FETCH_AFTER_ARGS} && break ||'; \
+		${ECHO} '	${_FETCH_CMD.${FETCH_USING}} ${_FETCH_BEFORE_ARGS.${FETCH_USING}} "$${site}${fetchfile:T}" ${_FETCH_AFTER_ARGS.${FETCH_USING}} && break ||'; \
 		${ECHO} '	${ECHO} ${fetchfile:T} not fetched';	\
-		${ECHO}	done;						\
+		${ECHO}	'done; }';					\
 		${ECHO} ')';						\
 	fi)
 .    else
@@ -98,11 +98,11 @@ fetch-list-one-pkg:
 		${ECHO} 'unsorted_sites="${SITES.${fetchfile:T:S/=/--/}} ${_MASTER_SITE_BACKUP}"'; \
 		${ECHO} sites='"'${_ORDERED_SITES:Q}'"';		\
 		${ECHO} "${MKDIR} ${_DISTDIR}";				\
-		${ECHO} 'cd ${_DISTDIR} && [ -f ${fetchfile} -o -f ${fetchfile:T} ] ||'; \
+		${ECHO} 'cd ${_DISTDIR} && { [ -f ${fetchfile} -o -f ${fetchfile:T} ] ||'; \
 		${ECHO}	'for site in $$sites; do';			\
-		${ECHO} '	${FETCH_CMD} ${FETCH_BEFORE_ARGS} "$${site}${fetchfile:T}" ${FETCH_AFTER_ARGS} && break ||'; \
+		${ECHO} '	${_FETCH_CMD.${FETCH_USING}} ${_FETCH_BEFORE_ARGS.${FETCH_USING}} "$${site}${fetchfile:T}" ${_FETCH_AFTER_ARGS.${FETCH_USING}} && break ||'; \
 		${ECHO} '	${ECHO} ${fetchfile:T} not fetched';	\
-		${ECHO}	done;						\
+		${ECHO}	'done; }';					\
 	fi)
 .    endif
 .  endfor

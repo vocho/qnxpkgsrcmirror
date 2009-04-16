@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.11 2009/01/29 16:54:17 joerg Exp $
+# $NetBSD: Makefile,v 1.13 2009/03/14 13:45:38 adrianp Exp $
 
-DISTNAME=	modsecurity-apache_2.5.7
+DISTNAME=	modsecurity-apache_2.5.9
 PKGNAME=	${APACHE_PKG_PREFIX}-${DISTNAME:S/apache_//}
-PKGREVISION=	1
 CATEGORIES=	www security
 MASTER_SITES=	http://www.modsecurity.org/download/
 
@@ -23,9 +22,13 @@ USE_LANGUAGES+=		c++ c
 
 CONFIGURE_ARGS+=	--with-apxs=${PREFIX}/sbin/apxs
 CONFIGURE_ARGS+=	--with-pcre=${PREFIX}
-CONFIGURE_ARGS+=	--with-apr=${PREFIX}
-CONFIGURE_ARGS+=	--with-apu=${PREFIX}
 CONFIGURE_ARGS+=        --with-libxml=${PREFIX}
+
+SUBST_CLASSES+=		config
+SUBST_STAGE.config=	post-patch
+SUBST_FILES.config=	configure
+SUBST_SED.config=       -e "s|@@PREFIX@@|${PREFIX}|g"
+SUBST_MESSAGE.config=   Fixing configuration files.
 
 EGDIR=			${PREFIX}/share/examples/ap-modsecurity
 CONF_FILES=		${EGDIR}/modsecurity.conf-minimal \
@@ -35,7 +38,7 @@ BUILDLINK_API_DEPENDS.apache+=	apache>=2.0.59nb2
 
 post-install:
 	${INSTALL_DATA_DIR} ${EGDIR}
-	${INSTALL_DATA_DIR} ${PREFIX}/share/doc/ap-imodsecurity
+	${INSTALL_DATA_DIR} ${PREFIX}/share/doc/ap-modsecurity
 
 	${INSTALL_DATA} ${WRKDIR}/${DISTNAME}/modsecurity.conf-minimal ${EGDIR}
 	cd ${WRKDIR}/${DISTNAME}/doc && \

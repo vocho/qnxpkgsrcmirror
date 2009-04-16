@@ -1,31 +1,21 @@
 $NetBSD$
 
---- variables.c.orig	2007-09-23 23:25:29.000000000 -0400
-+++ variables.c
-@@ -24,9 +24,9 @@
- #include "posixstat.h"
- #include "posixtime.h"
- 
--#if defined (qnx)
--#  if defined (qnx6)
--#    include <sy/netmgr.h>
-+#ifdef __QNX__
-+#  ifdef __QNXNTO__
-+#    include <sys/netmgr.h>
- #  else
- #    include <sys/vc.h>
- #  endif /* !qnx6 */
-@@ -387,11 +387,11 @@ initialize_shell_variables (env, privmod
-   set_auto_export (temp_var);	/* XXX */
- #endif
- 
--#if defined (qnx)
-+#ifdef __QNX__
-   /* set node id -- don't import it from the environment */
-   {
-     char node_name[22];
--#  if defined (qnx6)
-+#  ifdef __QNXNTO__
-     netmgr_ndtostr(ND2S_LOCAL_STR, ND_LOCAL_NODE, node_name, sizeof(node_name));
- #  else
-     qnx_nidtostr (getnid (), node_name, sizeof (node_name));
+--- lib/sh/fpurge.c.orig	2008-08-12 10:52:35.000000000 -0500
++++ lib/sh/fpurge.c
+@@ -115,6 +115,16 @@ fpurge (FILE *fp)
+     fp->__bufpos = fp->__bufread;
+ #  endif
+   return 0;
++# elif defined __QNX__              /* QNX */
++  fp->_Rback = fp->_Back + sizeof (fp->_Back);
++  fp->_Rsave = NULL;
++  if (fp->_Mode & 0x2000 /* _MWRITE */)
++    /* fp->_Buf <= fp->_Next <= fp->_Wend */
++    fp->_Next = fp->_Buf;
++  else
++    /* fp->_Buf <= fp->_Next <= fp->_Rend */
++    fp->_Rend = fp->_Next;
++  return 0;
+ # else
+  #error "Please port gnulib fpurge.c to your platform! Look at the definitions of fflush, setvbuf and ungetc on your system, then report this to bug-gnulib."
+ # endif

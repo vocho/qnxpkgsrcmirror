@@ -1,0 +1,13 @@
+$NetBSD$
+
+--- tests/summary.c.orig	2009-01-19 05:40:09.000000000 -0500
++++ tests/summary.c
+@@ -7,7 +7,7 @@ main()
+ 	exit(1);
+ #endif
+ 
+-#if !(defined(HAVE_IFACE_IFCONF) || defined(HAVE_IFACE_IFREQ) || defined(HAVE_IFACE_AIX))
++#if !(defined(HAVE_IFACE_IFCONF) || defined(HAVE_IFACE_IFREQ) || defined(HAVE_IFACE_AIX) || defined(HAVE_IFACE_IFADDRS))
+ 	printf("WARNING: No automated network interface determination\n");
+ #endif
+ 

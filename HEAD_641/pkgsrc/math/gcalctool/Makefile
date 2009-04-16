@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.77 2009/02/05 21:40:36 drochner Exp $
+# $NetBSD: Makefile,v 1.79 2009/03/22 19:01:39 wiz Exp $
 #
 
-DISTNAME=		gcalctool-5.24.3.1
+DISTNAME=		gcalctool-5.26.0
 CATEGORIES=		math gnome
-MASTER_SITES=		${MASTER_SITE_GNOME:=sources/gcalctool/5.24/}
+MASTER_SITES=		${MASTER_SITE_GNOME:=sources/gcalctool/5.26/}
 EXTRACT_SUFX=		.tar.bz2
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
@@ -22,8 +22,6 @@ USE_PKGLOCALEDIR=	yes
 
 GCONF_SCHEMAS=		gcalctool.schemas
 
-BUILDLINK_API_DEPENDS.gtk2+=	gtk2+>=2.6.0
-
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../devel/GConf/schemas.mk"
 .include "../../devel/atk/buildlink3.mk"
@@ -33,5 +31,6 @@ BUILDLINK_API_DEPENDS.gtk2+=	gtk2+>=2.6.0
 .include "../../devel/libgnomeui/buildlink3.mk"
 .include "../../textproc/gnome-doc-utils/buildlink3.mk"
 .include "../../mk/omf-scrollkeeper.mk"
+BUILDLINK_API_DEPENDS.gtk2+=	gtk2+>=2.6.0
 .include "../../x11/gtk2/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

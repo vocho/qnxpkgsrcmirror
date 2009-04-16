@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.13 2008/07/28 18:50:48 plunky Exp $
+# $NetBSD: Makefile,v 1.15 2009/03/05 17:44:00 plunky Exp $
 
 # Package version reflects icecc version, with PKGREVISION incremented
 # for any tool updates, according to the authors scheme.
 DISTNAME=		icecc-2.9
-PKGREVISION=		5
+PKGREVISION=		6
 CATEGORIES=		wm
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=icecc/}
 DISTFILES=		icecc-2.9.tar.bz2		\
@@ -24,6 +24,8 @@ HOMEPAGE=		http://icecc.sourceforge.net/
 COMMENT=		IceWM Control Centre
 
 DEPENDS+=		vim-{gtk,gtk2,kde,motif,xaw}>=6.3.0:../../editors/vim-xaw
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_LANGUAGES=		c c++
 USE_LIBTOOL=		yes

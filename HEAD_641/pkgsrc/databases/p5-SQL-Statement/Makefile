@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.24 2009/01/19 22:54:24 he Exp $
+# $NetBSD: Makefile,v 1.27 2009/03/10 17:38:24 sno Exp $
 #
 
-DISTNAME=	SQL-Statement-1.17
+DISTNAME=	SQL-Statement-1.20
 PKGNAME=	p5-${DISTNAME}
 SVR4_PKGNAME=	p5sqs
 CATEGORIES=	databases perl5
@@ -13,7 +13,14 @@ COMMENT=	Small, abstract SQL engine
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
+DEPENDS+=	p5-Test-Simple>=0.86:../../devel/p5-Test-Simple
+DEPENDS+=	p5-Params-Util>=0.35:../../devel/p5-Params-Util
+DEPENDS+=	p5-Clone>=0.30:../../devel/p5-Clone
+
 PERL5_PACKLIST=		auto/SQL/Statement/.packlist
+
+pre-configure:
+	cd ${WRKSRC} && find `pwd` -name "*.orig" -type f | xargs rm
 
 .include "../../lang/perl5/module.mk"
 .include "../../mk/bsd.pkg.mk"

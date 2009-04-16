@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.34 2009/01/14 10:31:37 wiz Exp $
+# $NetBSD: Makefile,v 1.36 2009/03/18 01:51:36 jmcneill Exp $
 #
 
-DISTNAME=	deskbar-applet-2.24.3
+DISTNAME=	deskbar-applet-2.26.0
 CATEGORIES=	misc gnome
-MASTER_SITES=	${MASTER_SITE_GNOME:=sources/deskbar-applet/2.24/}
+MASTER_SITES=	${MASTER_SITE_GNOME:=sources/deskbar-applet/2.26/}
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	drochner@NetBSD.org
@@ -22,7 +22,7 @@ PKGCONFIG_OVERRIDE=	data/deskbar-applet.pc
 
 GCONF_SCHEMAS=		deskbar-applet.schemas
 
-PYTHON_VERSIONS_ACCEPTED=	24 25
+PYTHON_VERSIONS_ACCEPTED=	25 24
 PYTHON_PATCH_SCRIPTS=		deskbar/deskbar-applet.py
 PY_PATCHPLIST=			yes
 

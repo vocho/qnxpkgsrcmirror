@@ -187,6 +187,7 @@ builds)</a></span></dt>
 <dd><dl>
 <dt><span class="sect2"><a href="#creating.perl-module">10.1.1. Perl modules</a></span></dt>
 <dt><span class="sect2"><a href="#creating.kde-app">10.1.2. KDE applications</a></span></dt>
+<dt><span class="sect2"><a href="#creating.python-module">10.1.3. Python modules and programs</a></span></dt>
 </dl></dd>
 <dt><span class="sect1"><a href="#creating.examples">10.2. Examples</a></span></dt>
 <dd><dl><dt><span class="sect2"><a href="#creating.nvu">10.2.1. How the www/nvu package came into pkgsrc</a></span></dt></dl></dd>
@@ -365,7 +366,7 @@ builds)</a></span></dt>
 <dt><span class="sect2"><a href="#faq.info-files">19.6.7. Packages installing info files</a></span></dt>
 <dt><span class="sect2"><a href="#manpages">19.6.8. Packages installing man pages</a></span></dt>
 <dt><span class="sect2"><a href="#gconf-data-files">19.6.9. Packages installing GConf data files</a></span></dt>
-<dt><span class="sect2"><a href="#scrollkeeper-data-files">19.6.10. Packages installing scrollkeeper data files</a></span></dt>
+<dt><span class="sect2"><a href="#scrollkeeper-data-files">19.6.10. Packages installing scrollkeeper/rarian data files</a></span></dt>
 <dt><span class="sect2"><a href="#x11-fonts">19.6.11. Packages installing X11 fonts</a></span></dt>
 <dt><span class="sect2"><a href="#gtk2-modules">19.6.12. Packages installing GTK2 modules</a></span></dt>
 <dt><span class="sect2"><a href="#sgml-xml-data">19.6.13. Packages installing SGML or XML data</a></span></dt>
@@ -2234,6 +2235,53 @@ works.</p>
     <code class="literal">package-install</code> will ask again.</p>
 <p>With basic DESTDIR support, <strong class="userinput"><code>make
     clean</code></strong> needs to be run as root.</p>
+<p>Considering the <code class="filename">foo/bar</code> package,
+    DESTDIR full support can be tested using the following commands
+
+</p>
+<pre class="programlisting">
+<code class="prompt">$</code> id
+uid=1000(myusername) gid=100(users) groups=100(users),0(wheel)
+<code class="prompt">$</code> mkdir $HOME/packages
+<code class="prompt">$</code> cd $PKGSRCDIR/foo/bar
+</pre>
+<p>
+
+    Verify <code class="varname">DESTDIR</code> full support, no root privileges
+    should be needed
+
+</p>
+<pre class="programlisting">
+<code class="prompt">$</code> make USE_DESTDIR=full install
+</pre>
+<p>
+
+    Create a package without root privileges
+
+</p>
+<pre class="programlisting">
+<code class="prompt">$</code> make USE_DESTDIR=full PACKAGES=$HOME/packages package
+</pre>
+<p>
+
+    For the following command, you must be able to gain root
+    privileges using <a class="citerefentry" href="http://netbsd.gw.com/cgi-bin/man-cgi?su+1+NetBSD-current"><span class="citerefentry"><span class="refentrytitle">su</span>(1)</span></a>
+
+</p>
+<pre class="programlisting">
+<code class="prompt">$</code> make USE_DESTDIR=full PACKAGES=$HOME/packages package-install
+</pre>
+<p>
+
+    Then, as a simple user
+
+</p>
+<pre class="programlisting">
+<code class="prompt">$</code> make clean
+</pre>
+<p>
+
+    </p>
 </div>
 <div class="sect1" lang="en">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
@@ -2291,10 +2339,12 @@ works.</p>
 CFLAGS+=        -your -flags
 </pre>
 <p>Using <code class="varname">CFLAGS=</code> (i.e. without the
-	&#8220;<span class="quote">+</span>&#8221;) may lead to problems with packages that need
-	to add their own flags.  Also, you may want to take a look at
-	the <a href="ftp://ftp.NetBSD.org/pub/pkgsrc/current/pkgsrc/devel/cpuflags/README.html" target="_top"><code class="filename">devel/cpuflags</code></a> package if
-	you're interested in optimization for the current CPU.</p>
+	&#8220;<span class="quote">+</span>&#8221;) may lead to problems with packages that
+	need to add their own flags.  You may want to take a look
+	at the <a href="ftp://ftp.NetBSD.org/pub/pkgsrc/current/pkgsrc/devel/cpuflags/README.html" target="_top"><code class="filename">devel/cpuflags</code></a>
+	package if you're interested in optimization for the current
+	CPU.  Setting <code class="varname">USE_CPUFLAGS</code> to yes in
+	<a class="link" href="#mk.conf"><code class="filename">mk.conf</code></a> will cause pkgsrc to automatically use cpuflags.</p>
 </div>
 <div class="sect2" lang="en">
 <div class="titlepage"><div><div><h3 class="title">
@@ -2959,7 +3009,7 @@ nbftp% <strong class="userinput"><code>chmod 755 .</code></strong>
 <div class="sect2" lang="en">
 <div class="titlepage"><div><div><h3 class="title">
 <a name="bulk.pbulk.prepare"></a>7.4.1. Preparation</h3></div></div></div>
-<p>First, you need to create a pkgsrc installation for the pbulk infrastructure. No matter on which platform you are (even on NetBSD), you should bootstrap into its own directory. Let's take the directory <code class="filename">/usr/pbulk-outer</code> or <code class="filename">$HOME/pbulk-outer</code> for it. This installation will be bootstrapped and all the tools that are required for the bulk build will be installed there.</p>
+<p>First, you need to create a pkgsrc installation for the pbulk infrastructure. No matter on which platform you are (even on NetBSD), you should bootstrap into its own directory. Let's take the directory <code class="filename">/usr/pbulk</code> or <code class="filename">$HOME/pbulk</code> for it. This installation will be bootstrapped and all the tools that are required for the bulk build will be installed there.</p>
 <pre class="screen">
 $ <strong class="userinput"><code>cd /usr/pkgsrc</code></strong>
 $ <strong class="userinput"><code>./bootstrap/bootstrap --prefix=/usr/pbulk --varbase=/usr/pbulk/var --workdir=/tmp/pbulk-bootstrap</code></strong>
@@ -3278,9 +3328,11 @@ with each package.</p>
       methods: multiple CD-ROMs and network FTP/HTTP connections.</p></li>
 <li><p><a href="ftp://ftp.NetBSD.org/pub/pkgsrc/current/pkgsrc/pkgtools/xpkgwedge/README.html" target="_top"><code class="filename">pkgtools/xpkgwedge</code></a>: Put X11
       packages someplace else (enabled by default).</p></li>
-<li><p><a href="ftp://ftp.NetBSD.org/pub/pkgsrc/current/pkgsrc/devel/cpuflags/README.html" target="_top"><code class="filename">devel/cpuflags</code></a>: Determine the
-      best compiler flags to optimise code for your current CPU and
-      compiler.</p></li>
+<li><p><a href="ftp://ftp.NetBSD.org/pub/pkgsrc/current/pkgsrc/devel/cpuflags/README.html" target="_top"><code class="filename">devel/cpuflags</code></a>: Determine
+      the best compiler flags to optimise code for your current
+      CPU and compiler. Setting <code class="varname">USE_CPUFLAGS</code> to
+      yes in <a class="link" href="#mk.conf"><code class="filename">mk.conf</code></a> will cause pkgsrc to automatically use
+      cpuflags. </p></li>
 </ul></div>
 <p>Utilities for keeping track of installed packages, being up to date,
 etc:</p>
@@ -3351,18 +3403,18 @@ enable this feature by adding the option
 distfile is found, pkgsrc will try to resume it.</p>
 <p>You can also
 use a different program than the default <a class="citerefentry" href="http://netbsd.gw.com/cgi-bin/man-cgi?ftp+1+NetBSD-current"><span class="citerefentry"><span class="refentrytitle">ftp</span>(1)</span></a> by changing the
-<code class="varname">FETCH_CMD</code> variable.  Don't forget to set
-<code class="varname">FETCH_RESUME_ARGS</code> and
-<code class="varname">FETCH_OUTPUT_ARGS</code> if you are not using default
-values.</p>
+<code class="varname">FETCH_USING</code> variable.  You can specify the program by
+using of ftp, fetch, wget or curl.  Alternatively, fetching can be disabled
+by using the value manual.  A value of custom disables the system defaults
+and dependency tracking for the fetch program.  In that case you have to
+provide <code class="varname">FETCH_CMD</code>, <code class="varname">FETCH_BEFORE_ARGS</code>,
+<code class="varname">FETCH_RESUME_ARGS</code>, <code class="varname">FETCH_OUTPUT_ARGS</code>,
+<code class="varname">FETCH_AFTER_ARGS</code>.</p>
 <p>For example, if you want to use
-<code class="filename">wget</code> to resume downloads, you'll have to use something
+<code class="filename">wget</code> to download, you'll have to use something
 like:</p>
 <pre class="programlisting">
-FETCH_CMD=             wget
-FETCH_BEFORE_ARGS=     --passive-ftp
-FETCH_RESUME_ARGS=     -c
-FETCH_OUTPUT_ARGS=     -O -nc
+FETCH_USING=	wget
 </pre>
 </div>
 <div class="sect1" lang="en">
@@ -3623,6 +3675,7 @@ anymore, you can remove that file and run <span class="command"><strong>cvs -q u
 <dd><dl>
 <dt><span class="sect2"><a href="#creating.perl-module">10.1.1. Perl modules</a></span></dt>
 <dt><span class="sect2"><a href="#creating.kde-app">10.1.2. KDE applications</a></span></dt>
+<dt><span class="sect2"><a href="#creating.python-module">10.1.3. Python modules and programs</a></span></dt>
 </dl></dd>
 <dt><span class="sect1"><a href="#creating.examples">10.2. Examples</a></span></dt>
 <dd><dl><dt><span class="sect2"><a href="#creating.nvu">10.2.1. How the www/nvu package came into pkgsrc</a></span></dt></dl></dd>
@@ -3801,7 +3854,7 @@ anymore, you can remove that file and run <span class="command"><strong>cvs -q u
 <dt><span class="sect2"><a href="#faq.info-files">19.6.7. Packages installing info files</a></span></dt>
 <dt><span class="sect2"><a href="#manpages">19.6.8. Packages installing man pages</a></span></dt>
 <dt><span class="sect2"><a href="#gconf-data-files">19.6.9. Packages installing GConf data files</a></span></dt>
-<dt><span class="sect2"><a href="#scrollkeeper-data-files">19.6.10. Packages installing scrollkeeper data files</a></span></dt>
+<dt><span class="sect2"><a href="#scrollkeeper-data-files">19.6.10. Packages installing scrollkeeper/rarian data files</a></span></dt>
 <dt><span class="sect2"><a href="#x11-fonts">19.6.11. Packages installing X11 fonts</a></span></dt>
 <dt><span class="sect2"><a href="#gtk2-modules">19.6.12. Packages installing GTK2 modules</a></span></dt>
 <dt><span class="sect2"><a href="#sgml-xml-data">19.6.13. Packages installing SGML or XML data</a></span></dt>
@@ -3847,6 +3900,7 @@ anymore, you can remove that file and run <span class="command"><strong>cvs -q u
 <dd><dl>
 <dt><span class="sect2"><a href="#creating.perl-module">10.1.1. Perl modules</a></span></dt>
 <dt><span class="sect2"><a href="#creating.kde-app">10.1.2. KDE applications</a></span></dt>
+<dt><span class="sect2"><a href="#creating.python-module">10.1.3. Python modules and programs</a></span></dt>
 </dl></dd>
 <dt><span class="sect1"><a href="#creating.examples">10.2. Examples</a></span></dt>
 <dd><dl><dt><span class="sect2"><a href="#creating.nvu">10.2.1. How the www/nvu package came into pkgsrc</a></span></dt></dl></dd>
@@ -3950,6 +4004,54 @@ package from the set of installed files.</p></li>
 <p>KDE applications should always include
 <code class="filename">meta-pkgs/kde3/kde3.mk</code>, which contains numerous
 settings that are typical of KDE packages.</p>
+</div>
+<div class="sect2" lang="en">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="creating.python-module"></a>10.1.3. Python modules and programs</h3></div></div></div>
+<p>Python modules and programs packages are easily created using a
+set of predefined variables.</p>
+<p>Most Python packages use either &#8220;<span class="quote">distutils</span>&#8221; or
+easy-setup (&#8220;<span class="quote">eggs</span>&#8221;).
+If the software uses &#8220;<span class="quote">distutils</span>&#8221;, set the
+<code class="varname">PYDISTUTILSPKG</code> variable to &#8220;<span class="quote">yes</span>&#8221; so
+pkgsrc will make use of this framework.
+&#8220;<span class="quote">distutils</span>&#8221; uses a script called <code class="filename">setup.py</code>,
+if the &#8220;<span class="quote">distutils</span>&#8221; driver is not called
+<code class="filename">setup.py</code>, set the <code class="varname">PYSETUP</code> variable
+to the name of the script.</p>
+<p>
+If the default Python versions are not supported by the software, set the
+<code class="varname">PYTHON_VERSIONS_ACCEPTED</code> variable to the Python versions
+the software is known to work with, from the most recent to the older
+one, e.g.
+</p>
+<pre class="programlisting">
+PYTHON_VERSIONS_ACCEPTED=       25 24 23
+</pre>
+<p>
+If the packaged software is a Python module, include
+&#8220;<span class="quote"><code class="filename">../../lang/python/extension.mk</code></span>&#8221;.
+In this case, the package directory should be called
+&#8220;<span class="quote">py-software</span>&#8221; and <code class="varname">PKGNAME</code> should be set to
+&#8220;<span class="quote">${PYPKGPREFIX}-${DISTNAME}</span>&#8221;, e.g.
+</p>
+<pre class="programlisting">
+DISTNAME=   foopymodule-1.2.10
+PKGNAME=    ${PYPKGPREFIX}-${DISTNAME}
+</pre>
+<p>If it is an application, also include
+&#8220;<span class="quote"><code class="filename">../../lang/python/application.mk</code></span>&#8221;
+before &#8220;<span class="quote">extension.mk</span>&#8221;.</p>
+<p>If the packaged software, either it is an application or a module, is
+egg-aware, you only need to include
+&#8220;<span class="quote"><code class="filename">../../lang/python/egg.mk</code></span>&#8221;.</p>
+<p>In order to correctly set the path to the Python interpreter, use the
+<code class="varname">REPLACE_PYTHON</code> variable and set it to the list of files
+that must be corrected. For example :
+</p>
+<pre class="programlisting">
+REPLACE_PYTHON=   ${WRKSRC}/*.py
+</pre>
 </div>
 </div>
 <div class="sect1" lang="en">
@@ -4666,7 +4768,7 @@ MESSAGE_SUBST+=  SOMEVAR="somevalue"
 	    <code class="varname">X11BASE</code>,
 	    <code class="varname">PKG_SYSCONFDIR</code>,
 	    <code class="varname">ROOT_GROUP</code>, and
-	    <code class="varname">ROOT_GROUP</code>.</p>
+	    <code class="varname">ROOT_USER</code>.</p>
 <p>You can display a different or additional files by
 	    setting the <code class="varname">MESSAGE_SRC</code> variable.  Its
 	    default is <code class="filename">MESSAGE</code>, if the file
@@ -5205,6 +5307,33 @@ PLIST_SUBST+=   SOMEVAR="somevalue"
 <p>This replaces all occurrences of &#8220;<span class="quote">${SOMEVAR}</span>&#8221;
     in the <code class="filename">PLIST</code> with
     &#8220;<span class="quote">somevalue</span>&#8221;.</p>
+<p>The <code class="varname">PLIST_VARS</code> can be used to simplify
+    the common case of conditionally including some
+    <code class="filename">PLIST</code> entries. It can be done by adding
+    <code class="literal"><code class="varname">PLIST_VARS</code>+=foo</code> and
+    setting the coresponding <code class="varname">PLIST.foo</code> variable
+    to <code class="literal">yes</code>, if the entry should be included.
+    This will substitute &#8220;<span class="quote"><code class="varname">${PLIST.foo}</code></span>&#8221;
+    in the <code class="filename">PLIST</code> with either
+    &#8220;<span class="quote"><code class="literal">""</code></span>&#8221; or
+    &#8220;<span class="quote"><code class="literal">"@comment "</code></span>&#8221;.
+    For example, in <code class="filename">Makefile</code>:</p>
+<pre class="programlisting">
+PLIST_VARS+=	foo
+.if <em class="replaceable"><code>condition</code></em>
+PLIST.foo=	yes
+.else
+    </pre>
+<p>And then in <code class="filename">PLIST</code>:</p>
+<pre class="programlisting">
+@comment $NetBSD$
+bin/bar
+man/man1/bar.1
+${PLIST.foo}bin/foo
+${PLIST.foo}man/man1/foo.1
+${PLIST.foo}share/bar/foo.data
+${PLIST.foo}@dirrm share/bar
+    </pre>
 </div>
 <div class="sect1" lang="en">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
@@ -5971,7 +6100,9 @@ following:</p>
     <code class="filename">${PKG_SYSCONFBASE}</code>.</p></li>
 </ol></div>
 <p>It is worth mentioning that <code class="filename">${PKG_SYSCONFDIR}</code> is
-automatically added to <code class="filename">OWN_DIRS</code>.  See <a class="xref" href="#dirs-outside-prefix" title="15.1.1. Directory manipulation">Section 15.1.1, &#8220;Directory manipulation&#8221;</a> what this means.</p>
+automatically added to <code class="filename">OWN_DIRS</code>.  See <a class="xref" href="#dirs-outside-prefix" title="15.1.1. Directory manipulation">Section 15.1.1, &#8220;Directory manipulation&#8221;</a> what this means.  This does not apply to
+subdirectories of <code class="filename">${PKG_SYSCONFDIR}</code>, they still have to
+be created with OWN_DIRS or MAKE_DIRS.</p>
 </div>
 <div class="sect2" lang="en">
 <div class="titlepage"><div><div><h3 class="title">
@@ -6741,6 +6872,9 @@ ${FETCH_CMD} ${FETCH_BEFORE_ARGS} ${site}${file} ${FETCH_AFTER_ARGS}
       <code class="varname">MASTER_SORT_RANDOM</code>, and
       <code class="varname">MASTER_SORT_AWK</code> or
       <code class="varname">MASTER_SORT_REGEX</code>.</p>
+<p> The specific command and arguments used depend on the
+      <code class="varname">FETCH_USING</code> parameter. The example above is
+      for <code class="literal">FETCH_USING=custom</code>.</p>
 <p>The distfiles mirror run by the NetBSD Foundation uses the
       <span class="emphasis"><em>mirror-distfiles</em></span> target to mirror the
       distfiles, if they are freely distributable.  Packages setting
@@ -7527,7 +7661,7 @@ TOOLS_PLATFORM.true?=           true                    # shell builtin
 <tbody>
 <tr class="question">
 <td align="left" valign="top">
-<a name="tools.new"></a><a name="id364453"></a><p><b>18.4.1.</b></p>
+<a name="tools.new"></a><a name="id1168230286379"></a><p><b>18.4.1.</b></p>
 </td>
 <td align="left" valign="top"><p>How do I add a new tool?</p></td>
 </tr>
@@ -7537,7 +7671,7 @@ TOOLS_PLATFORM.true?=           true                    # shell builtin
 </tr>
 <tr class="question">
 <td align="left" valign="top">
-<a name="tools.listall"></a><a name="id364465"></a><p><b>18.4.2.</b></p>
+<a name="tools.listall"></a><a name="id1168230286388"></a><p><b>18.4.2.</b></p>
 </td>
 <td align="left" valign="top"><p>How do I get a list of all available
 	tools?</p></td>
@@ -7548,7 +7682,7 @@ TOOLS_PLATFORM.true?=           true                    # shell builtin
 </tr>
 <tr class="question">
 <td align="left" valign="top">
-<a name="tools.used"></a><a name="id364476"></a><p><b>18.4.3.</b></p>
+<a name="tools.used"></a><a name="id1168230286396"></a><p><b>18.4.3.</b></p>
 </td>
 <td align="left" valign="top"><p>How can I get a list of all the tools that a
 	package is using while being built? I want to know whether it
@@ -7621,7 +7755,7 @@ TOOLS_PLATFORM.true?=           true                    # shell builtin
 <dt><span class="sect2"><a href="#faq.info-files">19.6.7. Packages installing info files</a></span></dt>
 <dt><span class="sect2"><a href="#manpages">19.6.8. Packages installing man pages</a></span></dt>
 <dt><span class="sect2"><a href="#gconf-data-files">19.6.9. Packages installing GConf data files</a></span></dt>
-<dt><span class="sect2"><a href="#scrollkeeper-data-files">19.6.10. Packages installing scrollkeeper data files</a></span></dt>
+<dt><span class="sect2"><a href="#scrollkeeper-data-files">19.6.10. Packages installing scrollkeeper/rarian data files</a></span></dt>
 <dt><span class="sect2"><a href="#x11-fonts">19.6.11. Packages installing X11 fonts</a></span></dt>
 <dt><span class="sect2"><a href="#gtk2-modules">19.6.12. Packages installing GTK2 modules</a></span></dt>
 <dt><span class="sect2"><a href="#sgml-xml-data">19.6.13. Packages installing SGML or XML data</a></span></dt>
@@ -8814,10 +8948,7 @@ ${INSTALL_DATA_DIR} ${PREFIX}/dir2
       automatically. Many manual rules and pre/post-install often are
       incorrect; fix them.</p></li>
 <li><p>If files are installed with special owner/group
-      either use @owner/@group in the <code class="filename">PLIST</code>
-      (preferred) or use <code class="varname">SPECIAL_PERMS</code>
-      (discouraged). Note that @owner/@group are sticky during
-      install, keep this in mind.</p></li>
+      use <code class="varname">SPECIAL_PERMS</code>.</p></li>
 <li><p>In general, packages should support
       <code class="varname">UNPRIVILEGED</code> to be able to use
       DESTDIR.</p></li>
@@ -8994,14 +9125,14 @@ PERL5_PACKLIST= ${PERL5_SITEARCH}/auto/Pg/.packlist
 </div>
 <div class="sect2" lang="en">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="scrollkeeper-data-files"></a>19.6.10. Packages installing scrollkeeper data files</h3></div></div></div>
+<a name="scrollkeeper-data-files"></a>19.6.10. Packages installing scrollkeeper/rarian data files</h3></div></div></div>
 <p>If a package installs <code class="filename">.omf</code> files, used by
-    scrollkeeper, you need to take some extra steps to make sure they
+    scrollkeeper/rarian, you need to take some extra steps to make sure they
     get registered in the database:</p>
 <div class="orderedlist"><ol type="1">
 <li><p>Include
-	<code class="filename">../../textproc/scrollkeeper/omf.mk</code>
-	instead of its <code class="filename">buildlink3.mk</code> file.  This
+	<code class="filename">../../mk/omf-scrollkeeper.mk</code>
+	instead of rarian's <code class="filename">buildlink3.mk</code> file.  This
 	takes care of rebuilding the scrollkeeper database at
 	installation and deinstallation time, and disallows any access
 	to it directly from the package.</p></li>
@@ -9009,7 +9140,8 @@ PERL5_PACKLIST= ${PERL5_SITEARCH}/auto/Pg/.packlist
 	<code class="filename">libdata/scrollkeeper</code> directory, as they
 	will be handled automatically.</p></li>
 <li><p>Remove the <code class="filename">share/omf</code> directory from
-	the PLIST.  It will be handled by scrollkeeper.</p></li>
+	the PLIST.  It will be handled by rarian. (<span class="command"><strong>make
+	print-PLIST</strong></span> does this automatically.)</p></li>
 </ol></div>
 </div>
 <div class="sect2" lang="en">
@@ -9562,7 +9694,7 @@ do?</a>
 <tbody>
 <tr class="question">
 <td align="left" valign="top">
-<a name="devfaq.makeflags"></a><a name="id369298"></a><p><b>22.1.</b></p>
+<a name="devfaq.makeflags"></a><a name="id1168230291165"></a><p><b>22.1.</b></p>
 </td>
 <td align="left" valign="top"><p>What is the difference between
 	<code class="varname">MAKEFLAGS</code>, <code class="varname">.MAKEFLAGS</code> and
@@ -9578,7 +9710,7 @@ do?</a>
 </tr>
 <tr class="question">
 <td align="left" valign="top">
-<a name="devfaq.make"></a><a name="id369338"></a><p><b>22.2.</b></p>
+<a name="devfaq.make"></a><a name="id1168230291198"></a><p><b>22.2.</b></p>
 </td>
 <td align="left" valign="top"><p>What is the difference between
 	<code class="varname">MAKE</code>, <code class="varname">GMAKE</code> and
@@ -9596,7 +9728,7 @@ do?</a>
 </tr>
 <tr class="question">
 <td align="left" valign="top">
-<a name="devfaq.cc"></a><a name="id369382"></a><p><b>22.3.</b></p>
+<a name="devfaq.cc"></a><a name="id1168230291236"></a><p><b>22.3.</b></p>
 </td>
 <td align="left" valign="top"><p>What is the difference between
 	<code class="varname">CC</code>, <code class="varname">PKG_CC</code> and
@@ -9614,7 +9746,7 @@ do?</a>
 </tr>
 <tr class="question">
 <td align="left" valign="top">
-<a name="devfaq.bl3flags"></a><a name="id369424"></a><p><b>22.4.</b></p>
+<a name="devfaq.bl3flags"></a><a name="id1168230291270"></a><p><b>22.4.</b></p>
 </td>
 <td align="left" valign="top"><p>What is the difference between
 	<code class="varname">BUILDLINK_LDFLAGS</code>,
@@ -9627,7 +9759,7 @@ do?</a>
 </tr>
 <tr class="question">
 <td align="left" valign="top">
-<a name="devfaq.bl3prefix"></a><a name="id369447"></a><p><b>22.5.</b></p>
+<a name="devfaq.bl3prefix"></a><a name="id1168230291289"></a><p><b>22.5.</b></p>
 </td>
 <td align="left" valign="top"><p>Why does <span class="command"><strong>make show-var
 	VARNAME=BUILDLINK_PREFIX.<em class="replaceable"><code>foo</code></em></strong></span>
@@ -9643,7 +9775,7 @@ do?</a>
 </tr>
 <tr class="question">
 <td align="left" valign="top">
-<a name="devfaq.master_sites"></a><a name="id369481"></a><p><b>22.6.</b></p>
+<a name="devfaq.master_sites"></a><a name="id1168230291315"></a><p><b>22.6.</b></p>
 </td>
 <td align="left" valign="top"><p>What does
 	<code class="literal">${MASTER_SITE_SOURCEFORGE:=package/}</code> mean? I
@@ -9667,7 +9799,7 @@ do?</a>
 </tr>
 <tr class="question">
 <td align="left" valign="top">
-<a name="devfaq.mailinglists"></a><a name="id369566"></a><p><b>22.7.</b></p>
+<a name="devfaq.mailinglists"></a><a name="id1168230291450"></a><p><b>22.7.</b></p>
 </td>
 <td align="left" valign="top"><p>Which mailing lists are there for package
 	developers?</p></td>
@@ -9692,7 +9824,7 @@ do?</a>
 </tr>
 <tr class="question">
 <td align="left" valign="top">
-<a name="devfaq.documentation"></a><a name="id369609"></a><p><b>22.8.</b></p>
+<a name="devfaq.documentation"></a><a name="id1168230291481"></a><p><b>22.8.</b></p>
 </td>
 <td align="left" valign="top"><p>Where is the pkgsrc
 	documentation?</p></td>
@@ -9740,7 +9872,7 @@ do?</a>
 </tr>
 <tr class="question">
 <td align="left" valign="top">
-<a name="devfaq.too-much-time"></a><a name="id369686"></a><p><b>22.9.</b></p>
+<a name="devfaq.too-much-time"></a><a name="id1168230291536"></a><p><b>22.9.</b></p>
 </td>
 <td align="left" valign="top"><p>I have a little time to kill.  What shall I
 do?</p></td>
@@ -9923,7 +10055,7 @@ solution is given.  After applying the solution be sure to
 <tbody>
 <tr>
 <td>Installs OMF files under <code class="filename">share/omf</code>.</td>
-<td>See <a class="xref" href="#scrollkeeper-data-files" title="19.6.10. Packages installing scrollkeeper data files">Section 19.6.10, &#8220;Packages installing scrollkeeper data files&#8221;</a>.</td>
+<td>See <a class="xref" href="#scrollkeeper-data-files" title="19.6.10. Packages installing scrollkeeper/rarian data files">Section 19.6.10, &#8220;Packages installing scrollkeeper/rarian data files&#8221;</a>.</td>
 </tr>
 <tr>
 <td>Installs icons under the

@@ -7,7 +7,19 @@ $NetBSD$
    # $^O eq nto
  
 -  ccflags='-DDLOPEN_WONT_DO_RELATIVE_PATHS'
-+  ccflags='-DDLOPEN_WONT_DO_RELATIVE_PATHS -U__STRICT_ANSI__'
++  ccflags='-U__STRICT_ANSI__'
  
    # Options required to get dynamic linking to work
    lddlflags='-shared'
+@@ -260,6 +260,9 @@ else
+   # This is probably worth tracking down someday.
+   usemymalloc='false'
+ 
+-  # crypt isn't detected in the C library even though it's there.
+-  d_crypt='define'
++  libswanted=`echo " $libswanted "| sed 's/ malloc / /'`
++
++  # Some routines are only in our static libc.
++  # eg crypt() getlogin() getlogin_r()
++  usenm=false
+ fi

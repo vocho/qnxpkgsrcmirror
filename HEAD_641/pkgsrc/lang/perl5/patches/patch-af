@@ -1,0 +1,12 @@
+$NetBSD$
+
+--- lib/Module/Build.pm.orig	2007-12-18 05:47:07.000000000 -0500
++++ lib/Module/Build.pm
+@@ -49,6 +49,7 @@ my %OSTYPES = qw(
+ 		 cygwin    Unix
+ 		 os2       Unix
+ 		 interix   Unix
++		 nto       Unix
+ 		 
+ 		 dos       Windows
+ 		 MSWin32   Windows

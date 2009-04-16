@@ -1,10 +1,9 @@
-# $NetBSD: Makefile,v 1.20 2008/12/20 01:08:57 jmcneill Exp $
+# $NetBSD: Makefile,v 1.23 2009/03/22 19:01:41 wiz Exp $
 #
 
-DISTNAME=	gnome-control-center-2.24.0.1
-PKGREVISION=	3
+DISTNAME=	gnome-control-center-2.26.0
 CATEGORIES=	x11 gnome
-MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gnome-control-center/2.24/}
+MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gnome-control-center/2.26/}
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
@@ -34,6 +33,7 @@ INSTALL_MAKE_FLAGS+=	autostartdir=${PREFIX}/share/applications
 INSTALLATION_DIRS=	${EGDIR}
 
 GCONF_SCHEMAS+=	control-center.schemas
+GCONF_SCHEMAS+=	fontilus.schemas
 
 EGDIR=			${PREFIX}/share/examples/gnome-control-center
 CONF_FILES+=		${EGDIR}/gnomecc.menu \
@@ -47,30 +47,16 @@ BUILDLINK_API_DEPENDS.libxklavier=	libxklavier>=3.6
 BUILDLINK_API_DEPENDS.Xft2+=	Xft2>=2.1.2
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.gnome-control-center
-PKG_SUPPORTED_OPTIONS=	evolution hal
-PKG_SUGGESTED_OPTIONS=	evolution hal
+PKG_SUPPORTED_OPTIONS=	evolution
+PKG_SUGGESTED_OPTIONS=	evolution
 .include "../../mk/bsd.options.mk"
 PLIST_VARS+=		evolution
 .if !empty(PKG_OPTIONS:Mevolution)
 CONFIGURE_ARGS+=	--enable-aboutme
 PLIST.evolution=	yes
 .endif
-.if !empty(PKG_OPTIONS:Mhal)
-CONFIGURE_ARGS+=	--enable-hal
-.else
-CONFIGURE_ARGS+=	--disable-hal
-.endif
-
 
 _TOOLS_USE_MSGFMT_SH=	yes
-
-# The gettext version in pkgsrc cannot handle the .po files, so
-# we strip out usage of the newer features (context and fuzzy matches)
-post-patch:
-	for f in ${WRKSRC}/po/*.po ; do \
-	    mv $$f $$f.original ; \
-	    ${AWK} -f ${FILESDIR}/msgfmtstrip $$f.original > $$f ; \
-	done
 
 .include "../../audio/libcanberra/buildlink3.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"
@@ -88,18 +74,16 @@ post-patch:
 .endif
 .include "../../multimedia/gstreamer0.10/buildlink3.mk"
 .include "../../multimedia/gst-plugins0.10-base/buildlink3.mk"
-.if !empty(PKG_OPTIONS:Mhal)
 DEPENDS+=	gst-plugins0.10-hal>=0.10.11:../../multimedia/gst-plugins0.10-hal
-.endif
 .include "../../net/ORBit2/buildlink3.mk"
+.include "../../security/policykit/buildlink3.mk"
+.include "../../security/policykit-gnome/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../sysutils/dbus/buildlink3.mk"
 .include "../../sysutils/dbus-glib/buildlink3.mk"
 .include "../../sysutils/gnome-menus/buildlink3.mk"
 .include "../../sysutils/gnome-vfs/buildlink3.mk"
-.if !empty(PKG_OPTIONS:Mhal)
 .include "../../sysutils/hal/buildlink3.mk"
-.endif
 .include "../../sysutils/nautilus/buildlink3.mk"
 .include "../../textproc/gnome-doc-utils/buildlink3.mk"
 .include "../../textproc/libxml2/buildlink3.mk"

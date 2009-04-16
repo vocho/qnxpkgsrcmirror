@@ -1,4 +1,4 @@
-/* $NetBSD: lib.h,v 1.46 2009/02/02 12:35:01 joerg Exp $ */
+/* $NetBSD: lib.h,v 1.50 2009/03/08 14:50:37 joerg Exp $ */
 
 /* from FreeBSD Id: lib.h,v 1.25 1997/10/08 07:48:03 charnier Exp */
 
@@ -63,8 +63,6 @@
 #if HAVE_UNISTD_H
 #include <unistd.h>
 #endif
-
-#include "path.h"
 
 /* Macros */
 #define SUCCESS	(0)
@@ -308,7 +306,7 @@ Boolean isempty(const char *);
 int     URLlength(const char *);
 Boolean make_preserve_name(char *, size_t, char *, char *);
 void    remove_files(const char *, const char *);
-int     delete_hierarchy(char *, Boolean, Boolean);
+int     delete_hierarchy(const char *, Boolean, Boolean);
 int     format_cmd(char *, size_t, const char *, const char *, const char *);
 
 int	recursive_remove(const char *, int);
@@ -317,9 +315,9 @@ int	recursive_remove(const char *, int);
 struct archive;
 struct archive_entry;
 
-struct archive *open_archive(const char *, void **);
-void	close_archive(void *);
-struct archive *find_archive(const char *, void **);
+struct archive *open_archive(const char *);
+struct archive *find_archive(const char *, int);
+void	process_pkg_path(void);
 
 /* Packing list */
 plist_t *new_plist_entry(void);
@@ -376,12 +374,10 @@ void pkg_install_config(void);
 /* Print configuration variable */
 void pkg_install_show_variable(const char *);
 
-#ifdef HAVE_SSL
 /* Package signature creation and validation */
-int pkg_verify_signature(struct archive **, struct archive_entry **, char **,
-    void **);
-int pkg_full_signature_check(struct archive *);
-void pkg_free_signature(void *);
+int pkg_verify_signature(struct archive **, struct archive_entry **, char **);
+int pkg_full_signature_check(struct archive **);
+#ifdef HAVE_SSL
 void pkg_sign_x509(const char *, const char *, const char *, const char *);
 #endif
 
@@ -416,6 +412,7 @@ extern const char *certs_packages;
 extern const char *certs_pkg_vulnerabilities;
 extern const char *check_vulnerabilities;
 extern const char *config_file;
+extern const char *config_pkg_path;
 extern const char *verified_installation;
 extern const char *gpg_cmd;
 extern const char *gpg_keyring_pkgvuln;

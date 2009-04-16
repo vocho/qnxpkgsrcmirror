@@ -1,9 +1,10 @@
-# $NetBSD: Makefile,v 1.6 2009/01/13 03:23:51 jmcneill Exp $
+# $NetBSD: Makefile,v 1.9 2009/03/22 19:01:40 wiz Exp $
 #
 
-DISTNAME=		ekiga-3.0.2
+DISTNAME=		ekiga-3.2.0
+PKGREVISION=		1
 CATEGORIES=		net comms
-MASTER_SITES=		${MASTER_SITE_GNOME:=sources/ekiga/3.0/}
+MASTER_SITES=		${MASTER_SITE_GNOME:=sources/ekiga/3.2/}
 EXTRACT_SUFX=		.tar.bz2
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
@@ -14,26 +15,22 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_DIRS+=		gnome2-1.5
 USE_TOOLS+=		gmake intltool msgfmt pkg-config
+USE_TOOLS+=		autoconf
 USE_PKGLOCALEDIR=	yes
 
 CONFIGURE_ARGS+=	--with-ldap-dir=${BUILDLINK_PREFIX.openldap-client:Q}
+CONFIGURE_ARGS+=	--enable-gstreamer
 
-PKG_OPTIONS_VAR=        PKG_OPTIONS.ekiga
-PKG_SUPPORTED_OPTIONS+= avahi
-PKG_SUGGESTED_OPTIONS+= avahi
-.include "../../mk/bsd.options.mk"
-
-.if !empty(PKG_OPTIONS:Mavahi)
-.include "../../net/avahi/buildlink3.mk"
-.else
-CONFIGURE_ARGS+=	--disable-avahi
-.endif
+.include "options.mk"
 
 GCONF_SCHEMAS=		ekiga.schemas
 
 GNU_CONFIGURE=		yes
 USE_LIBTOOL=		yes
 USE_LANGUAGES=		c c++
+
+pre-configure:
+	cd ${WRKSRC} && autoconf
 
 .include "../../audio/esound/buildlink3.mk"
 .include "../../databases/openldap-client/buildlink3.mk"
@@ -49,11 +46,14 @@ USE_LANGUAGES=		c c++
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../graphics/libv4l/buildlink3.mk"
 .include "../../mail/evolution-data-server/buildlink3.mk"
+.include "../../multimedia/gstreamer0.10/buildlink3.mk"
+.include "../../multimedia/gst-plugins0.10-base/buildlink3.mk"
+.include "../../security/cyrus-sasl/buildlink3.mk"
 .include "../../sysutils/dbus-glib/buildlink3.mk"
 .include "../../sysutils/dbus/buildlink3.mk"
+.include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../sysutils/libnotify/buildlink3.mk"
 .include "../../textproc/gnome-doc-utils/buildlink3.mk"
 .include "../../x11/gtk2/buildlink3.mk"
 .include "../../x11/libXv/buildlink3.mk"
-
 .include "../../mk/bsd.pkg.mk"

@@ -1,5 +1,5 @@
-$NetBSD: distinfo,v 1.17 2008/01/15 23:42:25 wiz Exp $
+$NetBSD: distinfo,v 1.19 2009/03/22 18:17:15 gdt Exp $
 
-SHA1 (lcms-1.17.tar.gz) = 083eb02890048f843803a5974914e54b5e034493
-RMD160 (lcms-1.17.tar.gz) = 1ad67295b53a82e4813294cbcdfccf8a5bdb1bbd
-Size (lcms-1.17.tar.gz) = 898816 bytes
+SHA1 (lcms-1.18.tar.gz) = 7001badb14b2e9cb89e2637bdc56f23ebff2d40e
+RMD160 (lcms-1.18.tar.gz) = 76c37ac029f733bbb9a850234e62bfd2a4a04bf4
+Size (lcms-1.18.tar.gz) = 915536 bytes

@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.33 2009/01/25 16:20:36 tron Exp $
+# $NetBSD: Makefile,v 1.39 2009/03/18 13:30:45 jmcneill Exp $
 
 DISTNAME=		hal-0.5.11
-PKGREVISION=		20
+PKGREVISION=		23
 CATEGORIES=		sysutils
 MASTER_SITES=		http://hal.freedesktop.org/releases/
 EXTRACT_SUFX=		.tar.bz2
 
-MAINTAINER=		jmcneill@NetBSD.org
+MAINTAINER=		netbsd-desktop@NetBSD.org
 HOMEPAGE=		http://hal.freedesktop.org/
 COMMENT=		FreeDesktop hardware abstraction layer
 
@@ -20,7 +20,8 @@ USE_TOOLS+=		gmake intltool msgfmt perl pkg-config
 USE_TOOLS+=		autoconf automake autoreconf
 USE_LIBTOOL=		YES
 
-MAKE_DIRS=		${VARBASE}/cache/hald
+MAKE_DIRS+=		/media
+MAKE_DIRS+=		${VARBASE}/cache/hald
 SPECIAL_PERMS+=		${VARBASE}/cache/hald ${HAL_USER} ${HAL_GROUP} 0644
 
 EGDIR=			${PREFIX}/share/examples/hal
@@ -88,6 +89,8 @@ PKG_HOME.haldaemon=	${VARBASE}/run/hal
 
 FILES_SUBST+=		HAL_USER=${HAL_USER}
 FILES_SUBST+=		HAL_GROUP=${HAL_GROUP}
+
+PLIST_SUBST+=		PKG_SYSCONFDIR=${PKG_SYSCONFDIR}
 
 post-extract:
 	${CP} -r ${FILESDIR}/hald-netbsd ${WRKSRC}/hald/netbsd
