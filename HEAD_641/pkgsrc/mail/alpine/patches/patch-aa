@@ -1,0 +1,31 @@
+$NetBSD$
+
+--- imap/src/osdep/unix/os_nto.c.orig	2008-06-04 13:18:34.000000000 -0500
++++ imap/src/osdep/unix/os_nto.c
+@@ -56,21 +56,12 @@ extern int errno;		/* just in case */
+ #include "gethstid.c"
+ #include "flocksim.c"
+ #include "utime.c"
+-
+-/* QNX local readdir()
+- * Accepts: directory structure
+- * Returns: direct struct or NIL if failed
+- */
+ 
+-#undef readdir
+ 
+-struct direct *Readdir (DIR *dirp)
++int
++ustat(dev_t dev, struct ustat *ub)
+ {
+-  static struct direct dc;
+-  struct dirent *de = readdir (dirp);
+-  if (!de) return NIL;		/* end of data */
+-  dc.d_fileno = 0;		/* could get from de->stat.st_ino */
+-  dc.d_namlen = strlen (strcpy (dc.d_name,de->d_name));
+-  dc.d_reclen = sizeof (dc);
+-  return &dc;
++	/* fstatvfs() should have been tried before this */
++	errno = ENOSYS;
++	return -1;
+ }

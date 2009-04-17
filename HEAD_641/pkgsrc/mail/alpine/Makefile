@@ -33,5 +33,8 @@ do-install:
 	${INSTALL_PROGRAM} ${WRKSRC}/alpine/alpine ${DESTDIR}${PREFIX}/bin/alpine
 	${INSTALL_MAN} ${WRKSRC}/doc/alpine.1 ${DESTDIR}${PREFIX}/${PKGMANDIR}/man1/alpine.1
 
+.if ${OPSYS} == "QNX"
+.include "../../devel/sysexits/buildlink3.mk"
+.endif
 .include "../../security/openssl/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"
