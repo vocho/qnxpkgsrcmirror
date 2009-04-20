@@ -628,8 +628,6 @@ QNX)
 	whoamiprog="id -un"
 	fetch_cmd="/usr/bin/ftp"
 	machine_arch=`uname -p | sed -e 's/x86/i386/'`
-# don't try to run nroff during bootstrap
-	BSTRAP_ENV="NROFF=true"
 	;;
 *)
 	echo "This platform ($opsys) is untried - good luck, and thanks for using pkgsrc"
