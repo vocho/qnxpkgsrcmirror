@@ -233,9 +233,6 @@ CONFIGURE_ARGS+=	${AP_CFG_ARGS.${ap_mod}}
 .endfor
 .endif
 
-# don't bring in mcheck() which is an __EXT_QNX as it conflicts.
-CFLAGS.QNX+=	-D__NO_EXT_QNX
-
 post-extract:
 	${TOUCH} ${WRKSRC}/build/libtool
 	${ECHO} "" >> ${WRKSRC}/docs/conf/extra/httpd-languages.conf.in
