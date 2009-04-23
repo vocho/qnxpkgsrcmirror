@@ -84,6 +84,8 @@ TOOLS_NOOP+=		gtkdoc-rebase
 CONFIGURE_ENV+=		ac_cv_func_mmap_fixed_mapped=yes
 .endif
 
+LIBS.QNX+=	-lnbutil
+
 # Handle directories shared with devel/glib.
 PRINT_PLIST_AWK+=	/^@dirrm include\/glib$$/ \
 				{ print "@unexec $${RMDIR} %D/" $$2 \

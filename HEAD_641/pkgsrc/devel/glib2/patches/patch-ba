@@ -21,15 +21,20 @@ $NetBSD: patch-ba,v 1.6 2009/03/15 13:32:31 jmcneill Exp $
  G_DEFINE_TYPE (GUnixMountMonitor, g_unix_mount_monitor, G_TYPE_OBJECT);
  
  #define MOUNT_POLL_INTERVAL 4000
-@@ -173,6 +178,7 @@ G_DEFINE_TYPE (GUnixMountMonitor, g_unix
+@@ -173,7 +178,12 @@ G_DEFINE_TYPE (GUnixMountMonitor, g_unix
  #endif
  
  #if defined(HAVE_GETMNTINFO) && defined(HAVE_FSTAB_H) && defined(HAVE_SYS_MOUNT_H)
 +#include <sys/param.h>
++#ifndef __QNXNTO__
  #include <sys/ucred.h>
++#else
++#include <nbutil.h>
++#endif
  #include <sys/mount.h>
  #include <fstab.h>
-@@ -223,20 +229,28 @@ g_unix_is_mount_path_system_internal (co
+ #ifdef HAVE_SYS_SYSCTL_H
+@@ -223,20 +233,28 @@ g_unix_is_mount_path_system_internal (co
      "/",              /* we already have "Filesystem root" in Nautilus */ 
      "/bin",
      "/boot",
@@ -58,7 +63,7 @@ $NetBSD: patch-ba,v 1.6 2009/03/15 13:32:31 jmcneill Exp $
      "/var",
      "/var/log/audit", /* https://bugzilla.redhat.com/show_bug.cgi?id=333041 */
      "/var/tmp",       /* https://bugzilla.redhat.com/show_bug.cgi?id=335241 */
-@@ -570,7 +584,11 @@ get_mtab_monitor_file (void)
+@@ -570,7 +588,11 @@ get_mtab_monitor_file (void)
  static GList *
  _g_get_unix_mounts (void)
  {
@@ -70,7 +75,7 @@ $NetBSD: patch-ba,v 1.6 2009/03/15 13:32:31 jmcneill Exp $
    int num_mounts, i;
    GUnixMountEntry *mount_entry;
    GList *return_list;
-@@ -587,8 +605,18 @@ _g_get_unix_mounts (void)
+@@ -587,8 +609,18 @@ _g_get_unix_mounts (void)
        
        mount_entry->mount_path = g_strdup (mntent[i].f_mntonname);
        mount_entry->device_path = g_strdup (mntent[i].f_mntfromname);
@@ -79,7 +84,7 @@ $NetBSD: patch-ba,v 1.6 2009/03/15 13:32:31 jmcneill Exp $
 +#else
        mount_entry->filesystem_type = g_strdup (mntent[i].f_fstypename);
 +#endif
-+#if defined(__NetBSD__)
++#if defined(__NetBSD__) || defined(__QNXNTO__)
 +      if (mntent[i].f_flag & MNT_RDONLY)
 +#elif defined(__digital__)
 +      if (mntent[i].f_flags & M_RDONLY)
@@ -89,7 +94,7 @@ $NetBSD: patch-ba,v 1.6 2009/03/15 13:32:31 jmcneill Exp $
  	mount_entry->is_read_only = TRUE;
  
        mount_entry->is_system_internal =
-@@ -1056,6 +1084,10 @@ get_mounts_timestamp (void)
+@@ -1056,6 +1088,10 @@ get_mounts_timestamp (void)
        if (stat (monitor_file, &buf) == 0)
  	return (guint64)buf.st_mtime;
      }
@@ -100,7 +105,7 @@ $NetBSD: patch-ba,v 1.6 2009/03/15 13:32:31 jmcneill Exp $
    return 0;
  }
  
-@@ -1196,6 +1228,13 @@ g_unix_mount_monitor_finalize (GObject *
+@@ -1196,6 +1232,13 @@ g_unix_mount_monitor_finalize (GObject *
        g_object_unref (monitor->mtab_monitor);
      }
  
@@ -114,7 +119,7 @@ $NetBSD: patch-ba,v 1.6 2009/03/15 13:32:31 jmcneill Exp $
    the_mount_monitor = NULL;
  
    G_OBJECT_CLASS (g_unix_mount_monitor_parent_class)->finalize (object);
-@@ -1276,6 +1315,51 @@ mtab_file_changed (GFileMonitor      *mo
+@@ -1276,6 +1319,51 @@ mtab_file_changed (GFileMonitor      *mo
    g_signal_emit (mount_monitor, signals[MOUNTS_CHANGED], 0);
  }
  
@@ -166,7 +171,7 @@ $NetBSD: patch-ba,v 1.6 2009/03/15 13:32:31 jmcneill Exp $
  static void
  g_unix_mount_monitor_init (GUnixMountMonitor *monitor)
  {
-@@ -1298,6 +1382,12 @@ g_unix_mount_monitor_init (GUnixMountMon
+@@ -1298,6 +1386,12 @@ g_unix_mount_monitor_init (GUnixMountMon
        
        g_signal_connect (monitor->mtab_monitor, "changed", (GCallback)mtab_file_changed, monitor);
      }
