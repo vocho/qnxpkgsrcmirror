@@ -57,7 +57,8 @@ TOOLS_PLATFORM.grep=    # empty
 # any are set to 'C' later libiconv_open ("UTF-8", "C")
 # fails as "C" isn't supported therein.  The latter two are
 # set to "C" by bsd.pkg.mk.
-MAKE_ENV=	LC_ALL=ASCII .endif
+MAKE_ENV=	LC_ALL=ASCII
+.endif
 
 CPPFLAGS+=		-DPREFIX="\"${PREFIX}\""
 
