@@ -44,6 +44,21 @@ BUILD_DIRS=		. demos/gtk-demo
 
 .include "../../mk/bsd.prefs.mk"
 
+.if ${OPSYS} == "QNX"
+# We need GNU grep for -o option
+GREP=grep
+TOOLS_PLATFORM.grep=    # empty
+
+# At some point in the build the gtk-update-icon-cache
+# script execs the gtk-update-icon-cache executable which
+# delves into glib2. When HAVE_LANGINFO_CODESET isn't set
+# _g_locale_charset_raw() goes to getenv() and pulls out
+# 'LC_ALL', 'LC_CTYPE' and then 'LANG' in that order.  If
+# any are set to 'C' later libiconv_open ("UTF-8", "C")
+# fails as "C" isn't supported therein.  The latter two are
+# set to "C" by bsd.pkg.mk.
+MAKE_ENV=	LC_ALL=ASCII .endif
+
 CPPFLAGS+=		-DPREFIX="\"${PREFIX}\""
 
 PRINT_PLIST_AWK+=	/^@dirrm share\/themes\/Default$$/ \
