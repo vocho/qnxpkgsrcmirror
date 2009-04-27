@@ -58,6 +58,7 @@ TOOLS_PLATFORM.m4?=		/usr/bin/m4
 .if exists(/usr/bin/mail)
 TOOLS_PLATFORM.mail?=		/usr/bin/mail
 .endif
+TOOLS_PLATFORM.gmake?=           ${QNX_HOST}/usr/bin/make
 .if exists(/usr/bin/makeinfo)
 TOOLS_PLATFORM.makeinfo?=	/usr/bin/makeinfo
 .endif
