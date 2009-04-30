@@ -1,0 +1,14 @@
+$NetBSD$
+
+--- include/virtdir.h.orig	2008-02-07 05:09:44.000000000 -0500
++++ include/virtdir.h
+@@ -31,7 +31,9 @@
+ #include <sys/types.h>
+ #include <sys/stat.h>
+ 
++#ifndef __QNXNTO__
+ #include <fuse.h>
++#endif
+ 
+ #include "defs.h"
+ 

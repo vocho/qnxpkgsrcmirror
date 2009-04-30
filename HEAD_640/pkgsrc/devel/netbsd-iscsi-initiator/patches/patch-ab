@@ -1,0 +1,474 @@
+$NetBSD$
+
+--- src/iscsifs.c.orig	2008-02-07 05:09:44.000000000 -0500
++++ src/iscsifs.c
+@@ -32,7 +32,16 @@
+ #include <err.h>
+ #include <errno.h>
+ #include <fcntl.h>
++#ifndef __QNXNTO__
+ #include <fuse.h>
++#else
++#include <dirent.h>
++#include <stddef.h>
++#include <sys/dispatch.h>
++#include <sys/iofunc.h>
++#include <sys/iomsg.h>
++#include <arpa/inet.h>
++#endif
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <string.h>
+@@ -323,6 +332,7 @@ targetop(uint32_t t, uint64_t offset, ui
+ }
+ 
+ 
++#if !defined(__QNXNTO__)
+ /****************************************************************************/
+ 
+ /* perform the stat operation */
+@@ -442,8 +452,8 @@ iscsifs_write(const char *path, const ch
+ 	   struct fuse_file_info * fi)
+ {
+ 	virt_dirent_t	*ep;
+-        uint64_t	 target;   
+-        sti_t		*p;
++	uint64_t	 target;   
++	sti_t		*p;
+ 
+ 	if ((ep = virtdir_find(&iscsi, path, strlen(path))) == NULL) {
+ 		return -ENOENT;
+@@ -492,6 +502,336 @@ static struct fuse_operations iscsiops =
+ 	.write = iscsifs_write,
+ 	.statfs = iscsifs_statfs
+ };
++#else
++
++static dispatch_t             *dpp;
++static resmgr_connect_funcs_t  iscsifs_connect;
++static resmgr_io_funcs_t       iscsifs_io;
++static iofunc_attr_t           iscsifs_attr;
++static char                   *iscsifs_path;
++#define _ISCSIFS_PATH          "/fs/iscsi"
++typedef struct iscsifs_ocb {
++	iofunc_ocb_t               iocb;
++	virt_dirent_t	          *ep;
++	VIRTDIR		              *dirp;
++	char                      *ibuf;
++	char                      *obuf;
++	char                      *path;
++} iscsifs_ocb_t;
++
++static int iscsifs_readlink(resmgr_context_t *ctp, io_readlink_t *msg, RESMGR_HANDLE_T *handle, void *reserved)
++{
++	virt_dirent_t	*ep;
++	uint8_t          eflag;
++	char            *path;
++
++	if ((path = alloca(msg->connect.path_len + 1)) == NULL) {
++		return _RESMGR_ERRNO(errno);
++	}
++	
++	sprintf(path, "/%s", msg->connect.path);
++	
++	if ((ep = virtdir_find(&iscsi, path, msg->connect.path_len)) == NULL) {
++		return -ENOENT;
++	}
++
++	if (ep->tgt == NULL) {
++		return -ENOENT;
++	}
++	
++	eflag = msg->connect.eflag;
++	
++	memset(&msg->link_reply, 0, sizeof(msg->link_reply));
++	msg->link_reply.file_type = _FTYPE_NAME;
++	msg->link_reply.eflag = eflag;
++	msg->link_reply.umask = _S_IFNAM;
++	msg->link_reply.path_len = strlen(ep->tgt) + 1;
++	
++	SETIOV(&ctp->iov[0], &msg->link_reply, sizeof(msg->link_reply));
++	SETIOV(&ctp->iov[1], ep->tgt, msg->link_reply.path_len);
++	
++	return _RESMGR_NPARTS(2);
++}
++
++static int iscsifs_open(resmgr_context_t *ctp, io_open_t *msg, RESMGR_HANDLE_T *handle, void *extra)
++{
++	virt_dirent_t	          *ep = NULL;
++	VIRTDIR		              *dirp;
++	iofunc_attr_t             *attr = handle;
++	int                        ret;
++	iscsifs_ocb_t             *ocb;
++	char                      *path;
++	
++	iofunc_attr_lock(attr);
++	
++	if ((path = alloca(msg->connect.path_len + 1)) == NULL) {
++		iofunc_attr_unlock(attr);
++		return _RESMGR_ERRNO(errno);
++	}
++	
++	sprintf(path, "/%s", msg->connect.path);
++		
++	if (msg->connect.path_len <= 1 ) {
++		ep = virtdir_find(&iscsi, path, msg->connect.path_len);
++		dirp = openvirtdir(&iscsi, "/");
++	} else {
++		ep = virtdir_find(&iscsi, path, msg->connect.path_len);
++		dirp = openvirtdir(&iscsi, path);
++	}
++
++#if 0
++	if ((ret = iofunc_open(ctp, msg, attr, 0, 0)) != EOK) {
++		iofunc_attr_unlock(attr);
++		return ret;
++	}
++#endif
++	
++	if ((ocb = calloc(sizeof(*ocb), 1)) == NULL) {
++		iofunc_attr_unlock(attr);
++		return errno;
++	}
++	
++	if (ep && strcmp(strrchr(ep->name, '/') + 1, "storage") == 0) {
++		if ((ocb->ibuf = malloc(SGsize)) == NULL) {
++			free(ocb);
++			iofunc_attr_unlock(attr);
++			return ENOMEM;
++		}
++		if ((ocb->obuf = malloc(SGsize)) == NULL) {
++			free(ocb->ibuf);
++			free(ocb);
++			iofunc_attr_unlock(attr);
++			return ENOMEM;
++		}
++	}
++	
++	if ((ret = iofunc_ocb_attach(ctp, msg, (iofunc_ocb_t *)ocb, attr, 0)) != EOK) {
++		if (ocb->ibuf)
++		  free(ocb->ibuf);
++		if (ocb->obuf)
++		  free(ocb->obuf);
++		free(ocb);
++		iofunc_attr_unlock(attr);
++		return ret;
++	}
++	
++	ocb->ep = ep;
++	ocb->dirp = dirp;
++	
++	iofunc_attr_unlock(attr);
++	return EOK;
++}
++
++static int iscsifs_read(resmgr_context_t *ctp, io_read_t *msg, RESMGR_OCB_T *o) 
++{
++	iscsifs_ocb_t *ocb = (iscsifs_ocb_t *)o;
++	uint64_t target;
++	sti_t *p;
++	char *fname;
++	uint32_t rsize, nbytes, off;
++	char buf[sizeof(struct dirent) + FILENAME_MAX];
++	struct dirent *d;
++	virt_dirent_t *dp;
++	struct _xtype_offset *moff;
++	off64_t offset;
++
++	// support pread()
++	if (msg->i.xtype == _IO_XTYPE_OFFSET) {
++		moff = (struct _xtype_offset *)(&msg->i + 1);
++		offset = moff->offset;
++	} else {
++		offset = ocb->iocb.offset;
++	}
++	
++	// reading the storage file
++	if (ocb->ep && ocb->ep->type == 'f') {
++		// if ep && is "storage", allow to read the data
++		if ((fname = strrchr(ocb->ep->name, '/')) == NULL) {
++			fname = ocb->ep->name;
++		} else {
++			fname++;
++		}
++		
++		if (strcmp(fname, "storage") != 0) 
++		  return EPERM;
++		
++		p = (sti_t *)ocb->ep->tgt;
++		target = p->target;
++		
++		nbytes = msg->i.nbytes;
++		off = 0;
++		while (nbytes) {
++			rsize = min(nbytes, SGsize);
++			if (targetop(target, offset, rsize, rsize, ocb->ibuf, 0) < 0) {
++				return EPERM;
++			}
++			resmgr_msgwrite(ctp, ocb->ibuf, rsize, off);
++			off += rsize;
++			nbytes -= rsize;
++			if (msg->i.xtype != _IO_XTYPE_OFFSET) {
++				ocb->iocb.offset += rsize;
++			}
++		}
++		
++		_IO_SET_READ_NBYTES(ctp, msg->i.nbytes);
++		return EOK;
++	}
++	
++	// reading a directory here
++	if (!ocb->dirp) {
++		return ENOTDIR;
++	}
++	
++	d = (struct dirent *)buf;
++	off = 0;
++	while ((dp = readvirtdir(ocb->dirp)) != NULL) {
++		memset(d, 0, sizeof *d);
++		d->d_ino = dp->ino;
++		d->d_namelen = snprintf(d->d_name, FILENAME_MAX, "%s", dp->d_name);
++		d->d_reclen = (offsetof(struct dirent, d_name) + d->d_namelen + 8) & ~7;
++		resmgr_msgwrite(ctp, d, d->d_reclen, off);
++		off += d->d_reclen;
++	}
++	_IO_SET_READ_NBYTES(ctp, off);
++	return EOK;
++}
++
++static int iscsifs_write(resmgr_context_t *ctp, io_write_t *msg, RESMGR_OCB_T *o)
++{
++	iscsifs_ocb_t *ocb = (iscsifs_ocb_t *)o;
++	uint64_t target;
++	sti_t *p;
++	char *fname;
++	uint32_t rsize, nbytes, off;
++	char *datap;
++	struct _xtype_offset *moff;
++	off64_t offset;
++
++	// if ep && is "storage", allow to read the data
++	if (!ocb->ep) {
++		return EPERM;
++	}
++	
++	if ((fname = strrchr(ocb->ep->name, '/')) == NULL) {
++		fname = ocb->ep->name;
++	} else {
++		fname++;
++	}
++	
++	if (strcmp(fname, "storage") != 0) 
++	  return EPERM;
++
++	// support pwrite()
++	if (msg->i.xtype == _IO_XTYPE_OFFSET) {
++		moff = (struct _xtype_offset *)(&msg->i + 1);
++		offset = moff->offset;
++		datap = (char *)(moff + 1);
++		off = sizeof(msg->i) + sizeof(*moff);
++	} else {
++		offset = ocb->iocb.offset;
++		datap = (char *)(&msg->i + 1);
++		off = sizeof(msg->i);
++	}
++	
++	p = (sti_t *)ocb->ep->tgt;
++	target = p->target;
++
++	nbytes = msg->i.nbytes;
++	
++	// fast path -- everything received
++	if (nbytes <= ctp->size - off) {
++		
++		if (targetop(target, offset, nbytes, nbytes, datap, 1) < 0) {
++			return EPERM;
++		}
++		if (msg->i.xtype != _IO_XTYPE_OFFSET) {
++			ocb->iocb.offset += nbytes;
++		}
++	} else {
++		// slow path
++		while (nbytes) {
++			rsize = min(nbytes, SGsize);
++			if ((rsize = resmgr_msgread(ctp, ocb->obuf, rsize, off)) == -1) {
++				return EPERM;
++			}
++			
++			if (targetop(target, offset, rsize, rsize, ocb->obuf, 1) < 0) {
++				return EPERM;
++			}
++			
++			off += rsize;
++			nbytes -= rsize;
++			offset += rsize;
++			if (msg->i.xtype != _IO_XTYPE_OFFSET) {
++				ocb->iocb.offset += rsize;
++			}
++		}
++	}
++
++	_IO_SET_WRITE_NBYTES(ctp, msg->i.nbytes);
++	return EOK;
++}
++
++static int iscsifs_stat(resmgr_context_t *ctp, io_stat_t *msg, RESMGR_OCB_T *o)
++{
++	iscsifs_ocb_t *ocb = (iscsifs_ocb_t *)o;
++	struct stat *st = &msg->o;
++	sti_t *p;
++
++	// root directory 
++	if (!ocb->ep) {
++		memcpy(st, &iscsi.dir, sizeof(*st));
++		st->st_ino = ocb->iocb.attr->inode;
++		return _RESMGR_PTR(ctp, st, sizeof(*st));
++	}
++	
++	switch(ocb->ep->type) {
++	case 'b':
++		(void) memcpy(st, &iscsi.file, sizeof(*st));
++		st->st_mode = (S_IFBLK | 0644);
++		break;
++	case 'c':
++		(void) memcpy(st, &iscsi.file, sizeof(*st));
++		st->st_mode = (S_IFCHR | 0644);
++		break;
++	case 'd':
++		(void) memcpy(st, &iscsi.dir, sizeof(*st));
++		break;
++	case 'f':
++		(void) memcpy(st, &iscsi.file, sizeof(*st));
++		p = (sti_t *) ocb->ep->tgt;
++		st->st_size = p->st.st_size;
++		break;
++	case 'l':
++		(void) memcpy(st, &iscsi.lnk, sizeof(*st));
++		st->st_size = ocb->ep->tgtlen;
++		break;
++	default:
++		warn("unknown directory type `%c'", ocb->ep->type);
++		return -ENOENT;
++	}
++	st->st_ino = ocb->ep->ino;
++	
++	return _RESMGR_PTR(ctp, st, sizeof(*st));
++}
++
++static int iscsifs_close(resmgr_context_t *do_not_use1, void *do_not_use2, RESMGR_OCB_T *o)
++{
++	iscsifs_ocb_t *ocb = (iscsifs_ocb_t *)o;
++
++	if (ocb->dirp)
++	  closevirtdir(ocb->dirp);
++
++	if (ocb->ibuf)
++	  free(ocb->ibuf);
++	if (ocb->obuf)
++	  free(ocb->obuf);
++	
++	free(ocb);
++	return EOK;
++}
++
++#endif /* __QNXNTO__ */
+ 
+ int 
+ main(int argc, char **argv)
+@@ -589,6 +929,7 @@ main(int argc, char **argv)
+ 			(void) fprintf(stderr, "%s: unknown option `%c'", *argv, i);
+ 		}
+ 	}
++
+ 	if (user == NULL) {
+ 		iscsi_trace_error(__FILE__, __LINE__, "user must be specified with -u");
+ 		exit(EXIT_FAILURE);
+@@ -611,15 +952,15 @@ main(int argc, char **argv)
+ 	}
+ 
+ 
+-        if (discover) {
++	if (discover) {
+ 		printf("Targets available from host %s:\n",host);
+ 		for (i = 0; i < all_targets.c ; i+= 2) {
+ 			printf("%s at %s\n", all_targets.v[i],
+-				all_targets.v[i+1]);
++				   all_targets.v[i+1]);
+ 		}
+-
+-                exit(EXIT_SUCCESS);
+-        }
++		
++		exit(EXIT_SUCCESS);
++	}
+ 
+ 	if (all_targets.c/2 > CONFIG_INITIATOR_NUM_TARGETS) {
+ 		(void) fprintf(stderr, "CONFIG_INITIATOR_NUM_TARGETS in initiator.h is too small.  %d targets available, only %d configurable.\n", all_targets.c/2, CONFIG_INITIATOR_NUM_TARGETS);
+@@ -627,8 +968,36 @@ main(int argc, char **argv)
+ 		all_targets.c = CONFIG_INITIATOR_NUM_TARGETS;
+ 	}
+ 
+-
+ 	sti.st.st_ino = 0x15c51;
++	
++#if defined(__QNXNTO__)
++	if ((iscsifs_path = getenv("ISCSIFS_PATH")) == NULL || *iscsifs_path != '/') {
++		iscsifs_path = _ISCSIFS_PATH;
++	}
++
++	if ((dpp = dispatch_create()) == NULL) {
++		iscsi_trace_error(__FILE__, __LINE__, "can't create dispatcher: %d\n", errno);
++		exit(EXIT_FAILURE);
++	}
++	
++	iofunc_attr_init(&iscsifs_attr, S_IFDIR | 0644, 0, 0);
++	iofunc_func_init(_RESMGR_CONNECT_NFUNCS, &iscsifs_connect, _RESMGR_IO_NFUNCS, &iscsifs_io);
++
++	iscsifs_connect.open = iscsifs_open;
++	iscsifs_connect.readlink = iscsifs_readlink;
++	iscsifs_io.read = iscsifs_read;
++	iscsifs_io.write = iscsifs_write;
++	iscsifs_io.close_ocb = iscsifs_close;
++	iscsifs_io.stat = iscsifs_stat;
++	iscsifs_io.lseek = iofunc_lseek_default;
++	
++	if (resmgr_attach(dpp, 0, iscsifs_path, _FTYPE_ANY, _RESMGR_FLAG_DIR, 
++					  &iscsifs_connect, &iscsifs_io, &iscsifs_attr) == -1)
++	{
++		iscsi_trace_error(__FILE__, __LINE__, "can't attach resmgr: %d\n", errno);
++		exit(EXIT_FAILURE);
++	}
++#endif
+ 
+ 	for (i = 0 ; i < all_targets.c / 2 ; i++) {
+ 
+@@ -697,5 +1066,29 @@ main(int argc, char **argv)
+ 
+ 		tv.c += 1;
+ 	}
++	
++#ifndef __QNXNTO__
+ 	return fuse_main(argc - optind, argv + optind, &iscsiops, NULL);
++#else
++	{
++		resmgr_context_t *ctp;
++		
++		if ((ctp = resmgr_context_alloc(dpp)) == NULL) {
++			iscsi_trace_error(__FILE__, __LINE__, "can't allocate resmgr context: %d\n", errno);
++			exit(EXIT_FAILURE);
++		}
++		
++		while (1) {
++			if ((ctp = resmgr_block(ctp)) == NULL) {
++				if (errno == EINTR) 
++				  continue;
++				iscsi_trace_error(__FILE__, __LINE__, "can't allocate resmgr context: %d\n", errno);
++				exit(EXIT_FAILURE);
++			}
++			resmgr_handler(ctp);
++		}
++	}
++	
++	return 0;
++#endif
+ }

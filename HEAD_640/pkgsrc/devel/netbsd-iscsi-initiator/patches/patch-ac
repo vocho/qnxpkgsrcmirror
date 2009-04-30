@@ -1,0 +1,14 @@
+$NetBSD$
+
+--- src/virtdir.c.orig	2008-02-07 05:09:44.000000000 -0500
++++ src/virtdir.c
+@@ -30,7 +30,9 @@
+ 
+ #define FUSE_USE_VERSION	26
+ 
++#if !defined(__QNXNTO__)
+ #include <fuse.h>
++#endif
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <unistd.h>
