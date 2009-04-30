@@ -1,8 +1,8 @@
 $NetBSD: patch-aa,v 1.2 2007/12/18 11:38:44 agc Exp $
 
---- src/Makefile.in.orig	2006-06-03 00:39:22.000000000 +0000
+--- src/Makefile.in.orig	2008-02-07 04:25:13.000000000 -0500
 +++ src/Makefile.in
-@@ -16,9 +16,9 @@
+@@ -16,15 +16,18 @@ MANDIR=$(prefix)/man
  SYSCONFDIR=@sysconfdir@
  
  CC= @CC@
@@ -15,3 +15,21 @@ $NetBSD: patch-aa,v 1.2 2007/12/18 11:38:44 agc Exp $
  GCC_CFLAGS= -Wall -Wstrict-prototypes -fno-strict-aliasing -fno-common -Wno-trigraphs
  COMMON_CFLAGS += -DCONFIG_ISCSI_DEBUG -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE
  COMMON_CFLAGS += -DHAVE_CONFIG_H
+ COMMON_CFLAGS += -I${INCDIR}
+ CFLAGS= @CFLAGS@ ${GCC_CFLAGS} ${COMMON_CFLAGS} -I${INCLUDE} ${PTHREAD_FLAGS}
+ LIBS= @LIBS@
++.if $(OPSYS) != "QNX"
++LIBS+= -lfuse
++.endif
+ 
+ INSTALL= @INSTALL@
+ PREFIX= @prefix@
+@@ -58,7 +61,7 @@ osd: osd-target.c osd.c $(USER_TARGET_OB
+ #
+ 
+ iscsifs: iscsifs.o iscsi.o util.o initiator.o parameters.o conffile.o virtdir.o md5c.o md5hl.o
+-	$(CC) iscsifs.o iscsi.o util.o initiator.o parameters.o md5c.o md5hl.o conffile.o virtdir.o -o iscsifs ${PTHREAD_LDFLAGS} ${PTHREAD_LIBS} -L${LIBDIR} -Wl,-R${LIBDIR} ${LIBS} -lfuse
++	$(CC) iscsifs.o iscsi.o util.o initiator.o parameters.o md5c.o md5hl.o conffile.o virtdir.o -o iscsifs ${PTHREAD_LDFLAGS} ${PTHREAD_LIBS} -L${LIBDIR} -Wl,-R${LIBDIR} ${LIBS}
+ 
+ #
+ # Dependencies

@@ -21,7 +21,15 @@ do-install:
 	${INSTALL_PROGRAM} ${WRKSRC}/src/iscsifs ${DESTDIR}${PREFIX}/sbin/iscsifs
 	${INSTALL_MAN} ${WRKSRC}/src/iscsifs.8 ${DESTDIR}${PREFIX}/${PKGMANDIR}/man8/iscsifs.8
 
+.include "../../mk/bsd.prefs.mk"
+.if $(OPSYS) != "QNX"
 .include "../../mk/fuse.buildlink3.mk"
+.else
+MAKEFLAGS +=    PTHREAD_FLAGS=
+MAKEFLAGS +=    PTHREAD_LDFLAGS=
+MAKEFLAGS +=    PTHREAD_LIBS=
+.endif
+
 .include "../../mk/pthread.buildlink3.mk"
 
 .include "../../mk/bsd.pkg.mk"
