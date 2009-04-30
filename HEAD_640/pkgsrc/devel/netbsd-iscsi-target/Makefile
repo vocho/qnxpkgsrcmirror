@@ -24,6 +24,13 @@ do-install:
 	${INSTALL_MAN} ${WRKSRC}/src/iscsi-target.8 ${DESTDIR}${PREFIX}/${PKGMANDIR}/man8/iscsi-target.8
 	${INSTALL_MAN} ${WRKSRC}/src/targets.5 ${DESTDIR}${PREFIX}/${PKGMANDIR}/man5/targets.5
 
+
 .include "../../mk/pthread.buildlink3.mk"
 
 .include "../../mk/bsd.pkg.mk"
+
+.if $(OPSYS) == "QNX"
+MAKEFLAGS +=	PTHREAD_FLAGS=
+MAKEFLAGS +=	PTHREAD_LDFLAGS= 
+MAKEFLAGS +=	PTHREAD_LIBS= 
+.endif
