@@ -11,7 +11,7 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 
 DEPENDS+=		vim-share-${VIM_VERSION}.${VIM_PATCHLEVEL}{,nb*}:../../editors/vim-share
 CONFLICTS+=		vim-[0-9]* vim-gtk2-[0-9]* vim-motif-[0-9]*
-CONFLICTS+=		vim-xaw-[0-9]* vim-kde-[0-9]*
+CONFLICTS+=		vim-xaw-[0-9]* vim-kde-[0-9]* vim-photon-[0-9]*
 
 CONFIGURE_ARGS+=	--enable-gui=gtk
 CONFIGURE_ARGS+=	--with-tlib=${BUILDLINK_LIBNAME.termcap}
