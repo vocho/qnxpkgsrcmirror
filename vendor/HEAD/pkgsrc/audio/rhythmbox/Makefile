@@ -1,10 +1,9 @@
-# $NetBSD: Makefile,v 1.61 2009/03/08 15:56:43 wiz Exp $
+# $NetBSD: Makefile,v 1.64 2009/05/26 20:26:58 wiz Exp $
 #
 
-DISTNAME=	rhythmbox-0.11.6
-PKGREVISION=	1
+DISTNAME=	rhythmbox-0.12.1
 CATEGORIES=	audio gnome
-MASTER_SITES=	${MASTER_SITE_GNOME:=sources/rhythmbox/0.11/}
+MASTER_SITES=	${MASTER_SITE_GNOME:=sources/rhythmbox/0.12/}
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
@@ -13,12 +12,7 @@ COMMENT=	Music management application for GNOME
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
-PKG_OPTIONS_VAR=	rhythmbox
-PKG_SUPPORTED_OPTIONS=	hal
-PKG_SUGGESTED_OPTIONS=	hal
-PLIST_VARS+=		${PKG_SUPPORTED_OPTIONS}
-
-.include "../../mk/bsd.options.mk"
+.include "options.mk"
 
 GNU_CONFIGURE=		YES
 USE_DIRS+=		gnome2-1.5
@@ -26,40 +20,30 @@ USE_TOOLS+=		gmake intltool msgfmt pkg-config
 USE_LIBTOOL=		YES
 USE_PKGLOCALEDIR=	YES
 
-CONFIGURE_ARGS+=	--disable-python
+CONFIGURE_ARGS+=	--disable-browser-plugin
 CONFIGURE_ARGS+=	--with-html-dir=${PREFIX}/share/doc
-.if !empty(PKG_OPTIONS:Mhal)
-CONFIGURE_ARGS+=	--with-ipod
-.include "../../audio/libgpod/buildlink3.mk"
-# needs a newer libmtp
-#CONFIGURE_ARGS+=	--with-mtp
-#.include "../../devel/libmtp/buildlink3.mk"
-CONFIGURE_ARGS+=	--with-hal
-PLIST.hal=		yes
-.include "../../sysutils/hal/buildlink3.mk"
-.else
-CONFIGURE_ARGS+=	--without-hal
-.endif
 
 GCONF_SCHEMAS=		rhythmbox.schemas
 
-BUILDLINK_API_DEPENDS.gtk2+=		gtk2+>=2.6.0
-BUILDLINK_API_DEPENDS.musicbrainz+=	musicbrainz>=2.1.0
-BUILDLINK_API_DEPENDS.totem+=		{totem,totem-xine}>=1.1.5
+# for DAAP
+.include "../../net/avahi/buildlink3.mk"
 
+.include "../../lang/python/application.mk"
+.include "../../x11/py-gtk2/buildlink3.mk"
+.include "../../multimedia/py-gstreamer0.10/buildlink3.mk"
+BUILDLINK_API_DEPENDS.musicbrainz+=	musicbrainz>=2.1.0
 .include "../../audio/musicbrainz/buildlink3.mk"
 .include "../../devel/GConf/schemas.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../devel/glib2/buildlink3.mk"
 .include "../../devel/libglade/buildlink3.mk"
-.include "../../devel/libgnomeui/buildlink3.mk"
 .include "../../devel/libsexy/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../multimedia/gnome-media/buildlink3.mk"
 .include "../../multimedia/gstreamer0.10/buildlink3.mk"
 .include "../../multimedia/gst-plugins0.10-base/buildlink3.mk"
+BUILDLINK_API_DEPENDS.totem+=		{totem,totem-xine}>=1.1.5
 .include "../../multimedia/totem-pl-parser/buildlink3.mk"
-.include "../../net/howl/buildlink3.mk"
 .include "../../net/libsoup24/buildlink3.mk"
 .include "../../sysutils/dbus-glib/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
@@ -68,5 +52,7 @@ BUILDLINK_API_DEPENDS.totem+=		{totem,totem-xine}>=1.1.5
 .include "../../sysutils/libnotify/buildlink3.mk"
 .include "../../textproc/gnome-doc-utils/buildlink3.mk"
 .include "../../mk/omf-scrollkeeper.mk"
+BUILDLINK_API_DEPENDS.gtk2+=		gtk2+>=2.14.0
 .include "../../x11/gtk2/buildlink3.mk"
+.include "../../x11/libSM/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

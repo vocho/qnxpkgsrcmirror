@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.160 2009/03/04 19:47:20 joerg Exp $
+# $NetBSD: Makefile,v 1.163 2009/05/19 08:59:29 wiz Exp $
 
 # Notes to package maintainers:
 #
@@ -14,7 +14,7 @@ DISTFILES=		# empty
 MAINTAINER=		joerg@NetBSD.org
 HOMEPAGE=		http://www.pkgsrc.org/
 COMMENT=		Package management and administration tools for pkgsrc
-#LICENSE=		modified-bsd
+LICENSE=		modified-bsd
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 BOOTSTRAP_PKG=	yes
@@ -31,8 +31,6 @@ NBCOMPAT_CONFIGURE_ARGS+=	--enable-bsd-getopt --enable-db
 
 SKIP_AUDIT_PACKAGES=	yes
 NO_PKGTOOLS_REQD_CHECK=	yes
-NO_CHECKSUM=		yes
-NO_MTREE=		yes
 PKG_PRESERVE=		yes
 CHECK_PERMS=		no
 

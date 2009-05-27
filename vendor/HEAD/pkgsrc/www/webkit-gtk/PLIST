@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.3 2009/03/18 03:13:12 snj Exp $
+@comment $NetBSD: PLIST,v 1.6 2009/05/20 03:28:48 snj Exp $
 bin/jsc
 include/webkit-1.0/JavaScriptCore/JSBase.h
 include/webkit-1.0/JavaScriptCore/JSContextRef.h
@@ -14,6 +14,7 @@ include/webkit-1.0/webkit/webkit.h
 include/webkit-1.0/webkit/webkitdefines.h
 include/webkit-1.0/webkit/webkitdownload.h
 include/webkit-1.0/webkit/webkitenumtypes.h
+include/webkit-1.0/webkit/webkiterror.h
 include/webkit-1.0/webkit/webkitnetworkrequest.h
 include/webkit-1.0/webkit/webkitsoupauthdialog.h
 include/webkit-1.0/webkit/webkitversion.h
@@ -28,6 +29,12 @@ include/webkit-1.0/webkit/webkitwebview.h
 include/webkit-1.0/webkit/webkitwebwindowfeatures.h
 lib/libwebkit-1.0.la
 lib/pkgconfig/webkit-1.0.pc
+share/locale/de/LC_MESSAGES/webkit.mo
+share/locale/it/LC_MESSAGES/webkit.mo
+share/locale/pt_BR/LC_MESSAGES/webkit.mo
+share/locale/ru/LC_MESSAGES/webkit.mo
+share/locale/sv/LC_MESSAGES/webkit.mo
+share/webkit-1.0/resources/error.html
 share/webkit-1.0/webinspector/Images/back.png
 share/webkit-1.0/webinspector/Images/checker.png
 share/webkit-1.0/webinspector/Images/clearConsoleButtons.png
@@ -141,9 +148,11 @@ share/webkit-1.0/webinspector/Images/userInputResultIcon.png
 share/webkit-1.0/webinspector/Images/warningIcon.png
 share/webkit-1.0/webinspector/Images/warningMediumIcon.png
 share/webkit-1.0/webinspector/Images/warningsErrors.png
+share/webkit-1.0/webinspector/localizedStrings.js
+@dirrm share/webkit-1.0/webinspector/Images
+@dirrm share/webkit-1.0/webinspector
+@dirrm share/webkit-1.0/resources
+@dirrm share/webkit-1.0
 @dirrm include/webkit-1.0/webkit
 @dirrm include/webkit-1.0/JavaScriptCore
 @dirrm include/webkit-1.0
-@dirrm share/webkit-1.0/webinspector/Images
-@dirrm share/webkit-1.0/webinspector
-@dirrm share/webkit-1.0

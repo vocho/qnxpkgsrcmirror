@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.347 2009/03/07 02:17:08 jnemeth Exp $
+# $NetBSD: Makefile,v 1.350 2009/05/17 10:38:46 seb Exp $
 #
 
 COMMENT=	Security tools
@@ -129,6 +129,7 @@ SUBDIR+=	nessus
 SUBDIR+=	nessus-core
 SUBDIR+=	nessus-libraries
 SUBDIR+=	nessus-plugins
+SUBDIR+=	netpgp
 SUBDIR+=	netramet
 SUBDIR+=	nfsbug
 SUBDIR+=	nikto
@@ -200,6 +201,7 @@ SUBDIR+=	p5-IO-Socket-SSL
 SUBDIR+=	p5-Module-Signature
 SUBDIR+=	p5-Net-DNS-SEC
 SUBDIR+=	p5-Net-DNS-SEC-Maint-Key
+SUBDIR+=	p5-Net-OpenSSH
 SUBDIR+=	p5-Net-SSH
 SUBDIR+=	p5-Net-SSLeay
 SUBDIR+=	p5-OpenSSL
@@ -307,6 +309,7 @@ SUBDIR+=	tct
 SUBDIR+=	tkpasman
 SUBDIR+=	tripwire
 SUBDIR+=	uvscan
+SUBDIR+=	xml-security-c
 SUBDIR+=	xmlsec1
 SUBDIR+=	yafic
 SUBDIR+=	zebedee

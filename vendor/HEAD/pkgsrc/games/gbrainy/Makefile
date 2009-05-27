@@ -1,14 +1,16 @@
-# $NetBSD: Makefile,v 1.11 2009/03/25 22:37:12 he Exp $
+# $NetBSD: Makefile,v 1.14 2009/05/19 08:59:15 wiz Exp $
 #
 
-DISTNAME=	gbrainy-1.01
-PKGREVISION=	1
+DISTNAME=	gbrainy-1.1
+# 1.1 is newer than 1.01 -- remove next line on update
+PKGNAME=	${DISTNAME}0
 CATEGORIES=	games
 MASTER_SITES=	http://www.softcatala.org/~jmas/gbrainy/
 
 MAINTAINER=	wiz@NetBSD.org
 HOMEPAGE=	http://live.gnome.org/gbrainy
 COMMENT=	Brain teaser game and trainer
+LICENSE=	gnu-gpl-v2
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
@@ -16,12 +18,13 @@ GNU_CONFIGURE=	yes
 USE_DIRS+=	xdg-1.4
 USE_LIBTOOL=	yes
 USE_LANGUAGES=	c
-USE_TOOLS+=	intltool pkg-config bash:run
+USE_TOOLS+=	intltool pkg-config bash:run msgfmt
 
 BUILDLINK_API_DEPENDS.cairo+=	cairo>=1.2.0
 
 REPLACE_BASH=	src/gbrainy.in
 
+.include "../../devel/mono-addins/buildlink3.mk"
 .include "../../graphics/cairo/buildlink3.mk"
 .include "../../graphics/librsvg/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"

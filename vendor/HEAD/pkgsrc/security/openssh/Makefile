@@ -1,17 +1,20 @@
-# $NetBSD: Makefile,v 1.190 2008/09/16 12:53:08 taca Exp $
+# $NetBSD: Makefile,v 1.192 2009/05/21 03:22:29 taca Exp $
 
-DISTNAME=		openssh-5.1p1
-PKGNAME=		openssh-5.1.1
+DISTNAME=		openssh-5.2p1
+PKGNAME=		openssh-5.2.1
 SVR4_PKGNAME=		ossh
 CATEGORIES=		security
 MASTER_SITES=		ftp://ftp.openssh.com/pub/OpenBSD/OpenSSH/portable/ \
-			ftp://ftp.stealth.net/pub/mirrors/ftp.openssh.com/pub/OpenBSD/OpenSSH/portable/ \
-			http://public.planetmirror.com.au/pub/OpenBSD/OpenSSH/portable/ \
+			ftp://ftp3.usa.openbsd.org/pub/OpenBSD/OpenSSH/portable/ \
 			ftp://gd.tuwien.ac.at/opsys/OpenBSD/OpenSSH/portable/ \
-			ftp://ftp.openssh.com/pub/OpenBSD/OpenSSH/portable/old/
+			ftp://openbsd.informatik.uni-erlangen.de/pub/OpenBSD/OpenSSH/portable/ \
+			ftp://ftp.freenet.de/pub/ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/ \
+			ftp://ftp.jaist.ac.jp/pub/OpenBSD/OpenSSH/portable/ \
+			ftp://ftp.belnet.be/packages/openbsd/OpenSSH/portable/ \
+			ftp://mirror.pacific.net.au/OpenBSD/OpenSSH/portable/
 # Don't delete the last entry -- it's there if the pkgsrc version is not
 # up-to-date and the mirrors already removed the old distfile.
-DIST_SUBDIR=		${PKGBASE}-5.1.1-20080916
+DIST_SUBDIR=		${PKGBASE}-5.2.1-20090521
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://www.openssh.com/

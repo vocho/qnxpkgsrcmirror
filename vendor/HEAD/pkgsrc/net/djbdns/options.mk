@@ -1,7 +1,12 @@
-# $NetBSD: options.mk,v 1.11 2009/01/19 10:27:31 sketch Exp $
+# $NetBSD: options.mk,v 1.14 2009/05/03 11:28:41 wiz Exp $
 
-PKG_OPTIONS_VAR=	PKG_OPTIONS.djbdns
-PKG_SUPPORTED_OPTIONS+=	inet6 djbdns-cachestats djbdns-ignoreip2 djbdns-tinydns64
+PKG_OPTIONS_VAR=		PKG_OPTIONS.djbdns
+PKG_SUPPORTED_OPTIONS+=		inet6 djbdns-cachestats djbdns-ignoreip2
+PKG_SUPPORTED_OPTIONS+=		djbdns-tinydns64
+PKG_OPTIONS_OPTIONAL_GROUPS=	qmerge
+PKG_OPTIONS_GROUP.qmerge=	djbdns-qmerge1 djbdns-qmerge2
+PKG_SUGGESTED_OPTIONS+=		djbdns-qmerge2
+
 
 .if ${MACHINE_ARCH} == "sparc64" || \
 	${MACHINE_ARCH} == "alpha" || \
@@ -32,7 +37,28 @@ PATCHFILES+=			${IGNOREIP2_PATCH}
 SITES.${IGNOREIP2_PATCH}=	http://www.tinydns.org/
 .endif
 
+.if !empty(PKG_OPTIONS:Mdjbdns-qmerge1)
+DNSCACHE_MERGE_PATCH=	0001-dnscache-merge-similar-outgoing-queries.patch
+DNSCACHE_SOA_PATCH=	0002-dnscache-cache-soa-records.patch
+PATCHFILES+=		${DNSCACHE_MERGE_PATCH} ${DNSCACHE_SOA_PATCH}
+PATCH_DIST_STRIP.${DNSCACHE_MERGE_PATCH}=	-p1
+PATCH_DIST_STRIP.${DNSCACHE_SOA_PATCH}=		-p1
+SITES.${DNSCACHE_MERGE_PATCH}=	http://www.your.org/dnscache/
+SITES.${DNSCACHE_SOA_PATCH}=	http://www.your.org/dnscache/
+.endif
+
+.if !empty(PKG_OPTIONS:Mdjbdns-qmerge2)
+USE_TOOLS+=			patch
+post-patch: patch-qmerge2
+.PHONY: patch-qmerge2
+patch-qmerge2:
+	cd ${WRKSRC} && ${PATCH} ${PATCH_ARGS} < ${FILESDIR}/patch-qmerge2
+.endif
+
 .if !empty(PKG_OPTIONS:Mdjbdns-tinydns64)
-post-patch:
-	@cd ${WRKSRC} && ${PATCH} ${PATCH_ARGS} < ${FILESDIR}/patch-tinydns64
+USE_TOOLS+=			patch
+post-patch: patch-tinydns64
+.PHONY: patch-tinydns64
+patch-tinydns64:
+	cd ${WRKSRC} && ${PATCH} ${PATCH_ARGS} < ${FILESDIR}/patch-tinydns64
 .endif

@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.125 2009/03/18 13:26:03 drochner Exp $
+# $NetBSD: Makefile,v 1.130 2009/05/26 16:55:23 wiz Exp $
 
-DISTNAME=		pango-1.24.0
+DISTNAME=		pango-1.24.2
 CATEGORIES=		devel fonts
 MASTER_SITES=		${MASTER_SITE_GNOME:=sources/pango/1.24/}
 EXTRACT_SUFX=		.tar.bz2
@@ -8,6 +8,7 @@ EXTRACT_SUFX=		.tar.bz2
 MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://www.pango.org/
 COMMENT=		Library for layout and rendering of text
+LICENSE=		gnu-lgpl-v2
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
 PKG_DESTDIR_SUPPORT=	user-destdir
@@ -32,9 +33,6 @@ PKGCONFIG_OVERRIDE+=	pangoxft.pc.in
 
 CONFIGURE_ARGS+=	--sysconfdir=${PREFIX}/libdata
 
-# Avoid an ICE in gcc2 on sparc64
-CONFIGURE_ENV+=		F77=${FALSE:Q}
-
 CHECK_FILES_SKIP+=	${PREFIX}/libdata/pango/pango.modules
 
 PLIST_VARS+=		carbon
@@ -42,12 +40,15 @@ PLIST_VARS+=		carbon
 .include "options.mk"
 
 BUILDLINK_API_DEPENDS.glib2+=	glib2>=2.17.3
-BUILDLINK_API_DEPENDS.cairo+=	cairo>=1.8.0
-BUILDLINK_API_DEPENDS.Xft2+=	Xft2>=2.1.7nb3
-
 .include "../../devel/glib2/buildlink3.mk"
+# XXX: later maybe add an option for libthai to provide pango-thai-lang.la?
+#.include "../../devel/libthai/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"
+BUILDLINK_API_DEPENDS.cairo+=	cairo>=1.8.0
 .include "../../graphics/cairo/buildlink3.mk"
+BUILDLINK_API_DEPENDS.fontconfig+=	fontconfig>=2.5.0
 .include "../../fonts/fontconfig/buildlink3.mk"
+BUILDLINK_API_DEPENDS.Xft2+=	Xft2>=2.1.7nb3
 .include "../../graphics/freetype2/buildlink3.mk"
+.include "../../textproc/gtk-doc/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

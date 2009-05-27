@@ -1,37 +1,15 @@
-# $NetBSD: Makefile,v 1.3 2009/02/18 17:52:22 minskim Exp $
-# TeX Live Revision 12157
+# $NetBSD: Makefile,v 1.7 2009/05/14 04:44:33 minskim Exp $
+# TeX Live Revision 12897
 
 DISTNAME=	bin-tetex
-PKGNAME=	tex-${DISTNAME}-3.0.12157
-PKGREVISION=	1
-CATEGORIES=	print
-MASTER_SITES=	${MASTER_SITE_TEX_CTAN:=systems/texlive/tlnet/2008/archive/}
-DIST_SUBDIR=	${PKGNAME_NOREV}
-EXTRACT_SUFX=	.tar.lzma
+PKGNAME=	tex-${DISTNAME}-3.0.12897
 
 MAINTAINER=	minskim@NetBSD.org
-HOMEPAGE=	http://www.tug.org/texlive/
 COMMENT=	Supplementary files for updmap
-
-PKG_DESTDIR_SUPPORT=	user-destdir
-
-USE_TOOLS+=	pax
-
-NO_CONFIGURE=	yes
-NO_BUILD=	yes
-WRKSRC=		${WRKDIR}
 
 TEX_TEXMF_DIRS+=	${PREFIX}/share/texmf
 
-.include "../../print/kpathsea/texmf.mk"
+TEXLIVE_IGNORE_PATTERNS=	texmf/web2c/updmap.cfg
 
-post-extract:
-	${RM} -f ${WRKSRC}/texmf/web2c/updmap.cfg
-	${FIND} ${WRKSRC}/texmf* -type d -exec ${CHMOD} ${PKGDIRMODE} {} \;
-	${FIND} ${WRKSRC}/texmf* -type f -exec ${CHMOD} ${SHAREMODE} {} \;
-
-do-install:
-	cd ${WRKSRC} && \
-		pax -rwpm -s ',.*\.orig$$,,' texmf* ${DESTDIR}${PREFIX}/share
-
+.include "../../print/texlive/module.mk"
 .include "../../mk/bsd.pkg.mk"

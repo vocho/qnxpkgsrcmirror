@@ -1,7 +1,7 @@
 /*
  * $OpenBSD: inp.c,v 1.34 2006/03/11 19:41:30 otto Exp $
  * $DragonFly: src/usr.bin/patch/inp.c,v 1.6 2007/09/29 23:11:10 swildner Exp $
- * $NetBSD: inp.c,v 1.2 2008/09/16 11:59:29 joerg Exp $
+ * $NetBSD: inp.c,v 1.4 2009/05/11 22:43:50 joerg Exp $
  */
 
 /*
@@ -55,6 +55,10 @@
 #include "util.h"
 #include "pch.h"
 #include "inp.h"
+
+#ifndef MAP_FAILED
+#define	MAP_FAILED (void *)(-1)
+#endif
 
 
 /* Input-file-with-indexable-lines abstract type */
@@ -170,7 +174,7 @@ plan_a(const char *filename)
 		if (check_only)
 			return true;
 		makedirs(filename, true);
-		close(creat(filename, 0666));
+		close(open(filename, O_CREAT | O_TRUNC | O_WRONLY, 0666));
 		statfailed = stat(filename, &filestat);
 	}
 	if (statfailed && check_only)

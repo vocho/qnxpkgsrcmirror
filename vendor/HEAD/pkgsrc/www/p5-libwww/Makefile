@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.67 2009/02/22 15:50:25 wiz Exp $
+# $NetBSD: Makefile,v 1.69 2009/04/29 07:39:37 sno Exp $
 
-DISTNAME=	libwww-perl-5.825
+DISTNAME=	libwww-perl-5.826
 PKGNAME=	p5-${DISTNAME:S/-perl-/-/}
 SVR4_PKGNAME=	p5lww
 CATEGORIES=	www perl5
@@ -13,14 +13,15 @@ COMMENT=	Perl5 library for WWW access
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
 PKG_DESTDIR_SUPPORT=	user-destdir
 
-DEPENDS+=	p5-Compress-Zlib>=1.10:../../devel/p5-Compress-Zlib
+DEPENDS+=	p5-IO-Compress>=2.017:../../devel/p5-IO-Compress
 DEPENDS+=	p5-Crypt-SSLeay>=0:../../security/p5-Crypt-SSLeay
+DEPENDS+=	{perl>=5.10,p5-Digest-MD5-[0-9]*}:../../security/p5-Digest-MD5
 DEPENDS+=	p5-HTML-Parser>=3.33:../../www/p5-HTML-Parser
+DEPENDS+=	p5-HTML-Tagset-[0-9]*:../../www/p5-HTML-Tagset
 DEPENDS+=	p5-IO-Socket-SSL-[0-9]*:../../security/p5-IO-Socket-SSL
 DEPENDS+=	p5-MIME-Base64>=2.1:../../converters/p5-MIME-Base64
 DEPENDS+=	p5-Net>=1.09:../../net/p5-Net		# for Net::FTP>=2.58
 DEPENDS+=	p5-URI>=1.10:../../www/p5-URI
-DEPENDS+=	p5-Digest-MD5-[0-9]*:../../security/p5-Digest-MD5
 
 USE_LANGUAGES=		# empty
 

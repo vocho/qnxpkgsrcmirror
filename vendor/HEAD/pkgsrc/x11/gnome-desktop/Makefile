@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.90 2009/03/17 16:22:57 drochner Exp $
+# $NetBSD: Makefile,v 1.93 2009/05/26 18:34:50 drochner Exp $
 #
 
-DISTNAME=		gnome-desktop-2.26.0
+DISTNAME=		gnome-desktop-2.26.2
 CATEGORIES=		x11 gnome
 MASTER_SITES=		${MASTER_SITE_GNOME:=sources/gnome-desktop/2.26/}
 EXTRACT_SUFX=		.tar.bz2
@@ -35,7 +35,7 @@ post-install:
 .endfor
 
 .include "../../devel/GConf/buildlink3.mk"
-BUILDLINK_API_DEPENDS.glib2+=	glib2>=2.15.4
+BUILDLINK_API_DEPENDS.glib2+=	glib2>=2.19.1
 .include "../../devel/glib2/buildlink3.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../textproc/gnome-doc-utils/buildlink3.mk"

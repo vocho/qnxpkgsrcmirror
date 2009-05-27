@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.50 2009/01/09 08:53:26 dbj Exp $
+# $NetBSD: Makefile,v 1.53 2009/05/25 09:03:14 adam Exp $
 
-DISTNAME=	ntop-3.3.8
+DISTNAME=	ntop-3.3.10
 CATEGORIES=	net
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=ntop/}
 
@@ -16,11 +16,7 @@ USE_TOOLS+=		aclocal autoconf autoheader automake gawk gmake
 GNU_CONFIGURE=		yes
 CONFIGURE_ARGS+=	--localstatedir=${VARBASE}
 CONFIGURE_ARGS+=	--sysconfdir=${PREFIX}/share/ntop
-CONFIGURE_ARGS+=	--with-gd-root=${BUILDLINK_PREFIX.gd}
 CONFIGURE_ARGS+=	--with-gdbm-root=${BUILDLINK_PREFIX.gdbm}
-CONFIGURE_ARGS+=	--with-gdchart-root=${BUILDLINK_PREFIX.gdchart}
-CONFIGURE_ARGS+=	--with-localedir=${PREFIX}/${PKGLOCALEDIR}
-CONFIGURE_ARGS+=	--with-libpng-root=${BUILDLINK_PREFIX.png}
 CONFIGURE_ARGS+=	--with-ossl-root=${BUILDLINK_PREFIX.openssl}
 CONFIGURE_ARGS+=	--with-pcap-root=${BUILDLINK_PREFIX.libpcap}
 CONFIGURE_ARGS+=	--with-zlib-root=${BUILDLINK_PREFIX.zlib}
@@ -38,10 +34,8 @@ CONFIGURE_ARGS+=	--disable-mt
 .if ${OPSYS} == "Darwin"
 # This package uses "-flat_namespace -undefined suppress" and exports
 # symbols from the executable that get stripped unless we set this:
-
 INSTALL_UNSTRIPPED=	YES
 .endif
-
 
 pre-configure:
 	set -e; cd ${WRKSRC}; \
@@ -51,8 +45,8 @@ pre-configure:
 .include "../../databases/gdbm/buildlink3.mk"
 .include "../../databases/rrdtool/buildlink3.mk"
 .include "../../devel/pcre/buildlink3.mk"
-.include "../../graphics/gdchart/buildlink3.mk"
-.include "../../graphics/png/buildlink3.mk"
+.include "../../lang/lua/buildlink3.mk"
+.include "../../net/GeoIP/buildlink3.mk"
 .include "../../net/libpcap/buildlink3.mk"
 .include "../../security/openssl/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

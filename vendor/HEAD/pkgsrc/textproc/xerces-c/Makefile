@@ -1,14 +1,17 @@
-# $NetBSD: Makefile,v 1.35 2009/01/18 10:22:47 obache Exp $
+# $NetBSD: Makefile,v 1.37 2009/05/22 17:59:41 zafer Exp $
 #
 
-DISTNAME=	xerces-c-src_2_7_0
+DISTNAME=	xerces-c-src_2_8_0
 PKGNAME=	${DISTNAME:S/-src_/-/:S/_/./g}
-PKGREVISION=	2
 CATEGORIES=	textproc
-MASTER_SITES=	http://apache.rmplc.co.uk/xml/xerces-c/source/
+MASTER_SITES=	http://www.apache.org/dist/xerces/c/2/sources/ \
+				http://apache.speedbone.de/xerces/c/2/sources/ \
+				ftp://ftp.riken.jp/net/apache/xerces/c/2/sources/
+				
+				
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://xml.apache.org/xerces-c/
+HOMEPAGE=	http://xerces.apache.org/xerces-c/
 COMMENT=	Validating C++ XML parser with DOM and SAX support
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews

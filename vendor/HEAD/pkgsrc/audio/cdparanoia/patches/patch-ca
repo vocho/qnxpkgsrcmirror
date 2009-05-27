@@ -1,4 +1,4 @@
-$NetBSD: patch-ca,v 1.5 2006/09/03 17:13:30 ben Exp $
+$NetBSD: patch-ca,v 1.7 2009/05/19 00:36:06 dholland Exp $
 
 --- interface/Makefile.in.orig	1999-12-13 20:27:59.000000000 -0800
 +++ interface/Makefile.in

@@ -1,0 +1,24 @@
+$NetBSD: patch-aa,v 1.8 2009/05/26 12:27:12 he Exp $
+
+Extend which ports we accept to deal with.
+
+--- configure.orig	2008-12-19 17:12:45.000000000 +0100
++++ configure
+@@ -21017,7 +21017,7 @@ case "$host" in
+   mips-sgi-irix5.* | mips-sgi-irix6.*)
+ 	TARGET=MIPS; TARGETDIR=mips
+ 	;;
+-  mips*-*-linux*)
++  mips*-*-linux* | mips*-*-netbsd*)
+ 	TARGET=MIPS; TARGETDIR=mips
+ 	;;
+ 
+@@ -21033,7 +21033,7 @@ case "$host" in
+   powerpc-*-aix* | rs6000-*-aix*)
+ 	TARGET=POWERPC_AIX; TARGETDIR=powerpc
+ 	;;
+-  powerpc-*-freebsd*)
++  powerpc-*-freebsd* | powerpc-*-netbsd*)
+ 	TARGET=POWERPC_FREEBSD; TARGETDIR=powerpc
+ 	;;
+   powerpc*-*-rtems*)

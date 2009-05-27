@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.13 2008/11/17 11:52:51 martti Exp $
+# $NetBSD: Makefile,v 1.15 2009/05/20 00:58:29 wiz Exp $
 
 DISTNAME=	fvwm-${FVWM_VER}
-PKGREVISION=	2
+PKGREVISION=	3
 CATEGORIES=	x11 wm
 MASTER_SITES=	ftp://ftp.fvwm.org/pub/fvwm/version-2/ \
 		http://www.fvwm.org/generated/icon_download/
@@ -10,7 +10,7 @@ DISTFILES+=	fvwm-${FVWM_VER}.tar.gz fvwm_icons.tgz
 MAINTAINER=	martti@NetBSD.org
 HOMEPAGE=	http://www.fvwm.org/
 COMMENT=	Newer version of X11 Virtual window manager
-#LICENSE=	gnu-gpl-v2
+LICENSE=	gnu-gpl-v2
 
 DEPENDS+=	xpmroot-2.*:../../x11/xpmroot
 

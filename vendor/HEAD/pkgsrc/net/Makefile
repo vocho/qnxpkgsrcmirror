@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.772 2009/03/25 18:26:13 he Exp $
+# $NetBSD: Makefile,v 1.774 2009/04/21 14:19:21 roy Exp $
 #
 
 COMMENT=	Networking tools
@@ -148,6 +148,7 @@ SUBDIR+=	gsnmp
 SUBDIR+=	gst-plugins0.10-soup
 SUBDIR+=	gt-itm
 SUBDIR+=	gtk-gnutella
+SUBDIR+=	gtk-vnc
 SUBDIR+=	gtk_wicontrol
 SUBDIR+=	hesiod
 SUBDIR+=	hf6to4
@@ -326,12 +327,12 @@ SUBDIR+=	p5-Net-Dev-MIBLoadOrder
 SUBDIR+=	p5-Net-FTPSSL
 SUBDIR+=	p5-Net-Gnats
 SUBDIR+=	p5-Net-Google
-SUBDIR+=	p5-Net-Interface
 SUBDIR+=	p5-Net-IP
 SUBDIR+=	p5-Net-IPv4Addr
 SUBDIR+=	p5-Net-IPv6Addr
 SUBDIR+=	p5-Net-IRC
 SUBDIR+=	p5-Net-Ident
+SUBDIR+=	p5-Net-Interface
 SUBDIR+=	p5-Net-Jifty
 SUBDIR+=	p5-Net-LDAP-Server
 SUBDIR+=	p5-Net-LibIDN
@@ -403,6 +404,7 @@ SUBDIR+=	powerdns
 SUBDIR+=	powerdns-ldap
 SUBDIR+=	powerdns-mysql
 SUBDIR+=	powerdns-pgsql
+SUBDIR+=	powerdns-recursor
 SUBDIR+=	powerdns-sqlite
 SUBDIR+=	pppd
 SUBDIR+=	pptp
@@ -536,6 +538,7 @@ SUBDIR+=	userppp
 SUBDIR+=	uucp
 SUBDIR+=	vcheck
 SUBDIR+=	vde
+SUBDIR+=	vinagre
 SUBDIR+=	vino
 SUBDIR+=	vnc
 SUBDIR+=	vncviewer
