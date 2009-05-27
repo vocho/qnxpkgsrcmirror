@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.13 2009/01/26 10:44:26 drochner Exp $
+# $NetBSD: Makefile,v 1.15 2009/04/11 16:53:36 reed Exp $
 #
 
 DISTNAME=		gst-python-0.10.14
+PKGNAME=		${PYPKGPREFIX}-${DISTNAME:S/gst-python/gstreamer0.10/}
 CATEGORIES=		multimedia
 MASTER_SITES=		http://gstreamer.freedesktop.org/src/gst-python/
 EXTRACT_SUFX=		.tar.bz2
@@ -11,6 +12,8 @@ HOMEPAGE=		http://gstreamer.freedesktop.org/
 COMMENT=		Python bindings for gstreamer0.10
 
 PKG_DESTDIR_SUPPORT=	user-destdir
+
+CONFLICTS=		gst-python-[0-9]*
 
 USE_PKGLOCALEDIR=	yes
 USE_LIBTOOL=		yes
@@ -22,6 +25,7 @@ PY_PATCHPLIST=		yes
 PKGCONFIG_OVERRIDE+=	pkgconfig/gst-python.pc.in
 
 .include "../../multimedia/gstreamer0.10/buildlink3.mk"
+BUILDLINK_API_DEPENDS.gst-plugins0.10-base+=	gst-plugins0.10-base>=0.10.22
 .include "../../multimedia/gst-plugins0.10-base/buildlink3.mk"
 .include "../../lang/python/application.mk"
 .include "../../lang/python/extension.mk"

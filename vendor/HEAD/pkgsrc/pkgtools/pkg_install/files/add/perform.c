@@ -1,4 +1,4 @@
-/*	$NetBSD: perform.c,v 1.84 2009/03/08 14:50:36 joerg Exp $	*/
+/*	$NetBSD: perform.c,v 1.86 2009/04/24 14:00:25 joerg Exp $	*/
 #if HAVE_CONFIG_H
 #include "config.h"
 #endif
@@ -6,7 +6,7 @@
 #if HAVE_SYS_CDEFS_H
 #include <sys/cdefs.h>
 #endif
-__RCSID("$NetBSD: perform.c,v 1.84 2009/03/08 14:50:36 joerg Exp $");
+__RCSID("$NetBSD: perform.c,v 1.86 2009/04/24 14:00:25 joerg Exp $");
 
 /*-
  * Copyright (c) 2003 Grant Beattie <grant@NetBSD.org>
@@ -666,6 +666,13 @@ extract_files(struct pkg_task *pkg)
 				printf("%s", p->name);
 			break;
 
+		case PLIST_PKGDIR:
+			fullpath = xasprintf("%s/%s", pkg->prefix, p->name);
+			mkdir_p(fullpath);
+			free(fullpath);
+			add_pkgdir(pkg->pkgname, pkg->prefix, p->name);
+			continue;
+
 		case PLIST_CMD:
 			if (format_cmd(cmd, sizeof(cmd), p->name, pkg->prefix, last_file))
 				return -1;
@@ -762,9 +769,6 @@ pkg_register_depends(struct pkg_task *pkg)
 
 	if (Fake)
 		return;
-
-	if (pkg->other_version != NULL)
-		return; /* XXX It's using the old dependencies. */
 
 	text = xasprintf("%s\n", pkg->pkgname);
 	text_len = strlen(text);
@@ -1389,7 +1393,7 @@ nuke_pkg:
 			    pkg->other_version, pkg->pkgname);
 			warnx("Remember to run pkg_admin rebuild-tree after fixing this.");
 		}
-		delete_package(FALSE, FALSE, &pkg->plist, FALSE, Destdir);
+		delete_package(FALSE, &pkg->plist, FALSE, Destdir);
 	}
 
 nuke_pkgdb:

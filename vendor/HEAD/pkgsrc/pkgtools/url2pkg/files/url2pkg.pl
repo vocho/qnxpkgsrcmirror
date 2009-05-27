@@ -1,5 +1,5 @@
 #! @PERL@
-# $NetBSD: url2pkg.pl,v 1.11 2008/12/01 13:48:34 wiz Exp $
+# $NetBSD: url2pkg.pl,v 1.13 2009/05/19 15:17:27 wiz Exp $
 #
 
 use strict;
@@ -109,8 +109,6 @@ sub magic_configure() {
 sub magic_gconf2_schemas() {
 	my @gconf2_files = grep(/schemas(?:\.in.*)$/, @wrksrc_files);
 	if (@gconf2_files) {
-		push(@build_vars, ["CONFIGURE_ENV+", "GCONF_SCHEMA_FILE_DIR=\${PREFIX}/share/gconf/schemas/"]);
-		push(@build_vars, ["MAKE_ENV+", "GCONF_SCHEMA_FILE_DIR=\${PREFIX}/share/gconf/schemas/"]);
 		foreach my $f (@gconf2_files) {
 			if ($f =~ qr"(.*schemas)") {
 				push(@extra_vars, ["GCONF_SCHEMAS+", $1]);
@@ -286,7 +284,8 @@ sub generate_initial_package($) {
 	print_section(*MF, [
 		["MAINTAINER", get_maintainer()],
 		["HOMEPAGE", $homepage],
-		["COMMENT", "SHORT_DESCRIPTION_OF_THE_PACKAGE"]
+		["COMMENT", "SHORT_DESCRIPTION_OF_THE_PACKAGE"],
+		["LICENSE", "LICENSE"],
 	]);
 	print MF ("# url2pkg-marker (please do not remove this line.)\n");
 	print MF (".include \"../../mk/bsd.pkg.mk\"\n");

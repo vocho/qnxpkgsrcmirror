@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.15 2009/03/16 13:06:40 jmcneill Exp $
+# $NetBSD: Makefile,v 1.18 2009/05/26 18:39:38 drochner Exp $
 #
 
-DISTNAME=	gvfs-1.2.0
+DISTNAME=	gvfs-1.2.3
 CATEGORIES=	sysutils
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gvfs/1.2/}
 EXTRACT_SUFX=	.tar.bz2
@@ -18,6 +18,7 @@ USE_TOOLS+=	intltool gmake pkg-config msgfmt
 CONFIGURE_ARGS+=	--with-samba-includes=${LOCALBASE}/include
 CONFIGURE_ARGS+=	--with-samba-libs=${LOCALBASE}/lib/samba
 CONFIGURE_ARGS+=	--enable-http
+CONFIGURE_ARGS+=	--disable-bash-completion
 
 .include "../../mk/bsd.prefs.mk"
 

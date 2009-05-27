@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.77 2008/11/16 08:58:08 dholland Exp $
+# $NetBSD: Makefile,v 1.79 2009/05/18 22:18:42 abs Exp $
 
 DISTNAME=	gd-2.0.35
 PKGREVISION=	1
@@ -11,6 +11,8 @@ HOMEPAGE=	http://www.libgd.org/
 COMMENT=	Graphics library for the dynamic creation of images
 
 PKG_DESTDIR_SUPPORT=	user-destdir
+
+.include "options.mk"
 
 # fails in test not finding libgd.a
 MAKE_JOBS_SAFE=		no

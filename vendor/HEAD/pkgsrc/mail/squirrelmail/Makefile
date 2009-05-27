@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.101 2008/12/04 07:18:46 martti Exp $
+# $NetBSD: Makefile,v 1.107 2009/05/22 08:50:19 taca Exp $
 
-DISTNAME=	squirrelmail-1.4.17
-#PKGREVISION=	1
+DISTNAME=	squirrelmail-1.4.19
+PKGREVISION=	1
 CATEGORIES=	mail www
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=squirrelmail/}
 EXTRACT_SUFX=	.tar.bz2
@@ -9,7 +9,7 @@ EXTRACT_SUFX=	.tar.bz2
 MAINTAINER=	martti@NetBSD.org
 HOMEPAGE=	http://www.squirrelmail.org/
 COMMENT=	PHP webmail package
-#LICENSE=	gnu-gpl-v2
+LICENSE=	gnu-gpl-v2
 
 CONFLICTS=	sq-attachment-handlers-[0-9]*
 CONFLICTS+=	sq-squirrelspell-[0-9]*
@@ -27,6 +27,7 @@ PKG_GROUPS_VARS+=	APACHE_GROUP
 PKG_USERS_VARS+=	APACHE_USER
 BUILD_DEFS+=		VARBASE
 
+.include "../../mk/bsd.prefs.mk"
 .include "options.mk"
 
 PKG_SYSCONFSUBDIR?=	httpd
@@ -74,9 +75,6 @@ post-extract:
 pre-configure:
 	find ${WRKSRC} \( -name '*.orig*' -o -name '.cvsignore' \) \
 		-exec rm -f {} \;
-# currently, we use iso_2022_jp.php in squirrelmail-decode package.
-#
-	rm -f ${WRKSRC}/functions/decode/iso_2022_jp.php
 
 do-install:
 	${INSTALL_DATA} ${WRKDIR}/squirrelmail.conf.dist ${EGDIR}/squirrelmail.conf

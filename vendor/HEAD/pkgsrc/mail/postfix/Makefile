@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.221 2009/01/05 10:25:33 martti Exp $
+# $NetBSD: Makefile,v 1.227 2009/05/20 07:46:09 martti Exp $
 
-DISTNAME=	postfix-2.5.6
+DISTNAME=	postfix-2.6.1
 #PKGREVISION=	1
 CATEGORIES=	mail
 MASTER_SITES=	ftp://ftp.porcupine.org/mirrors/postfix-release/official/
@@ -12,7 +12,7 @@ DIST_SUBDIR=	postfix
 MAINTAINER=	martti@NetBSD.org
 HOMEPAGE=	http://www.postfix.org/
 COMMENT=	Postfix SMTP server and tools
-#LICENSE=	postfix-license
+LICENSE=	postfix-license
 
 CONFLICTS+=	courier-mta-[0-9]* fastforward>=0.51nb2 sendmail-[0-9]*
 
@@ -22,6 +22,9 @@ USE_TOOLS+=	perl
 CHECK_HEADERS_SKIP+=	src/global/mail_params.h
 
 .include "../../mk/bsd.prefs.mk"
+
+SPECIAL_PERMS+=	sbin/postdrop postfix maildrop 2555
+SPECIAL_PERMS+=	sbin/postqueue postfix maildrop 2555
 
 # POSTFIX_QUEUE_DIR is the default queue directory for Postfix.  This is
 # merely a default, and may be changed by setting "queue_directory" in
@@ -116,7 +119,7 @@ PKG_GECOS.postfix=	Postfix User
 PKG_HOME.postfix=	${POSTFIX_QUEUE_DIR}
 
 CONF_FILES=		# empty
-.for i in main.cf master.cf postfix-files
+.for i in main.cf master.cf
 CONF_FILES+=		${EXAMPLEDIR}/${i} ${PKG_SYSCONFDIR}/${i}
 .endfor
 CONF_FILES_PERMS=	# empty

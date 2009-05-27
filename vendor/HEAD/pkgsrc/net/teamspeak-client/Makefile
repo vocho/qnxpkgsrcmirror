@@ -1,21 +1,20 @@
-# $NetBSD: Makefile,v 1.7 2009/02/10 12:07:21 abs Exp $
+# $NetBSD: Makefile,v 1.9 2009/05/19 08:59:28 wiz Exp $
 
 PKGNAME=		teamspeak-client-2.0.32.60
 DISTNAME=		ts2_client_rc2_2032
 CATEGORIES=		net audio
-MASTER_SITES=		ftp://ftp.freenet.de/pub/4players/teamspeak.org/releases/ \
-			ftp://213.202.254.114/teamspeak/releases/
+MASTER_SITES=		ftp://ftp.freenet.de/pub/4players/teamspeak.org/releases/ 
 EXTRACT_SUFX=		.tar.bz2
 
 MAINTAINER=		abs@NetBSD.org
 HOMEPAGE=		http://www.goteamspeak.com/
 COMMENT=		Teamspeak group VoIP client
+LICENSE=		teamspeak-license-200700213
 
 RESTRICTED=		Redistribution to third parties is expressly prohibited
 NO_SRC_ON_CDROM=	${RESTRICTED}
 NO_BIN_ON_FTP=		${RESTRICTED}
 NO_BIN_ON_CDROM=	${RESTRICTED}
-LICENSE=		teamspeak-license-200700213
 
 EMUL_PLATFORMS=		linux-i386
 EMUL_MODULES.linux=	base jpeg x11

@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.1.1.1 2008/10/22 11:40:55 obache Exp $
+# $NetBSD: Makefile,v 1.3 2009/05/14 09:31:22 obache Exp $
 
-DISTNAME=		net-irc-0.0.5
+DISTNAME=		net-irc-0.0.7
 PKGNAME=		${RUBY_PKGPREFIX}-${DISTNAME}
 CATEGORIES=		chat
 

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.186 2009/03/12 22:31:41 jnemeth Exp $
+# $NetBSD: Makefile,v 1.188 2009/04/21 17:48:22 schmonz Exp $
 
 COMMENT=	Mathematics
 
@@ -121,6 +121,8 @@ SUBDIR+=	p5-Math-MatrixReal
 SUBDIR+=	p5-Math-Pari
 SUBDIR+=	p5-Math-Random
 SUBDIR+=	p5-Math-Random-MT-Perl
+SUBDIR+=	p5-Math-Round
+SUBDIR+=	p5-Math-VecStat
 SUBDIR+=	p5-Number-Compare
 SUBDIR+=	p5-Number-Latin
 SUBDIR+=	p5-Roman
@@ -131,6 +133,7 @@ SUBDIR+=	p5-Spreadsheet-Read
 SUBDIR+=	p5-Spreadsheet-ReadSXC
 SUBDIR+=	p5-Spreadsheet-WriteExcel
 SUBDIR+=	p5-Spreadsheet-XLSX
+SUBDIR+=	p5-Statistics-Descriptive
 SUBDIR+=	pari
 SUBDIR+=	pari-galdata
 SUBDIR+=	pear-Numbers_Roman

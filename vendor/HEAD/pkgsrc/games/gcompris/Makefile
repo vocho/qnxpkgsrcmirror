@@ -1,13 +1,14 @@
-# $NetBSD: Makefile,v 1.11 2009/02/09 22:56:24 joerg Exp $
+# $NetBSD: Makefile,v 1.13 2009/05/19 08:59:15 wiz Exp $
 
 DISTNAME=	gcompris-8.4.4
-PKGREVISION=	2
+PKGREVISION=	3
 CATEGORIES=	games
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=gcompris/}
 
 MAINTAINER=	reed@reedmedia.net
 HOMEPAGE=	http://gcompris.net/
 COMMENT=	Educational games for children
+LICENSE=	gnu-gpl-v3
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
@@ -19,7 +20,6 @@ USE_LIBTOOL=		YES
 CHECK_PORTABILITY_SKIP+= macosx/build-gtk.sh
 USE_DIRS+=	xdg-1.1 gnome2-1.5
 INFO_FILES=	yes
-#LICENSE=	gnu-gplv3
 
 DEPENDS+=	gnuchess-[0-9]*:../../games/gnuchess
 
@@ -32,6 +32,9 @@ PKG_OPTIONS_VAR=	PKG_OPTIONS.gcompris
 CONFIGURE_ARGS+=	--enable-gnet
 .include "../../net/gnet/buildlink3.mk"
 .endif
+
+post-extract:
+	${CHMOD} -R go-w ${WRKSRC}
 
 .include "../../converters/libiconv/buildlink3.mk"
 .include "../../databases/py-sqlite2/buildlink3.mk"

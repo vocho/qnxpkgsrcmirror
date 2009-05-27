@@ -1,20 +1,19 @@
-# $NetBSD: Makefile,v 1.72 2009/02/01 21:39:43 shattered Exp $
+# $NetBSD: Makefile,v 1.74 2009/05/20 00:58:26 wiz Exp $
 
 DISTNAME=	heimdal-1.1
+PKGREVISION=	3
 CATEGORIES=	security
 MASTER_SITES=	http://www.h5l.org/dist/src/
-PKGREVISION=	2
 
 MAINTAINER=	lha@NetBSD.org
 HOMEPAGE=	http://www.h5l.org/
 COMMENT=	Kerberos 5 implementation
+LICENSE=	modified-bsd
 
 CONFLICTS+=	arla-[0-9]*
 CONFLICTS+=	mit-krb5-[0-9]*
 CONFLICTS+=	openafs-[0-9]*
 CONFLICTS+=	gss-[0-9]*
-
-#LICENSE=	modified-bsd
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 

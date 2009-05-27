@@ -1,14 +1,18 @@
-# $NetBSD: Makefile,v 1.27 2008/06/12 02:14:29 joerg Exp $
+# $NetBSD: Makefile,v 1.30 2009/05/20 01:09:12 wiz Exp $
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 .include "../../editors/abiword/Makefile.common"
 
-PKGNAME=	abiword-plugins-${ABIWORD_VERSION}
-PKGREVISION=	5
+DISTNAME=	abiword-plugins-${ABIWORD_VERSION}
+PKGREVISION=	1
+
 COMMENT=	Plugins enhancing Abiword's capabilities
 
-WRKSRC=		${WRKDIR}/${DISTNAME}/abiword-plugins
+DISTFILES=	${DEFAULT_DISTFILES}
+DISTFILES+=	abiword-2.6.8.tar.gz
+
+#WRKSRC=		${WRKDIR}/${DISTNAME}/abiword-plugins
 
 BUILD_DEPENDS+=	abiword-${ABIWORD_VERSION}{,nb*}:../../editors/abiword
 
@@ -49,6 +53,8 @@ CONFIGURE_ARGS+=	--enable-wml
 CONFIGURE_ARGS+=	--enable-wordperfect
 CONFIGURE_ARGS+=	--enable-xhtml
 CONFIGURE_ARGS+=	--enable-xsl-fo
+
+CONFIGURE_ARGS+=	--with-abiword=${WRKDIR}/abiword-2.6.8
 
 .include "../../converters/libwpd/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

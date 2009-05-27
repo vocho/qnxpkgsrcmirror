@@ -68,6 +68,8 @@ debug			Enable debugging facilities in the package.
 deliver-suid		Install deliver executable setuid root.
 djbdns-cachestats	Patch to add stats for cache hits/misses.
 djbdns-ignoreip2	Patch to treat certain responses as NXDOMAIN.
+djbdns-qmerge1		Initial patches to address dnscache poisoning weakness.
+djbdns-qmerge2		Newer patches to address dnscache poisoning weakness.
 djbdns-tinydns64	Patch to fix tinydns-data on 64-bit platforms.
 djbfft-pentium		Optimize for Pentium{,MMX} processors.
 djbfft-ppro		Optimize for Pentium{Pro,II,III} processors.
@@ -127,6 +129,7 @@ freeradius-simul-use	Enable Simultaneous-Use.
 freetype		Enable freetype support.
 ftp			Enable File Transfer Protocol (FTP) support.
 gdal			Use the GDAL library.
+gdb6-tui		Build the tui application.
 gdbm			Use the GNU gdbm database library.
 gdk-pixbuf		Use gdk-pixbuf as imaging library.
 geoip			Enable IP-to-country-lookup using the GeoIP C library.
@@ -161,6 +164,8 @@ i586-optimized		Optimize for i586 (only).
 icu			Enable icu support.
 idea			Enable support for the IDEA cryptographic algorithm (possible license+patent problems).
 idn			Internationalized Domain Names (IDN) support.
+ikiwiki-amazon-s3	Enable publishing rendered pages to Amazon S3 servers.
+ikiwiki-search		Enable full-text search using xapian.
 imagemagick		Use ImageMagick as imaging library.
 imap			Enable imap support.
 imapuw-cleartextpwd	Allow cleartext passwords over non-encrypted connections.
@@ -258,6 +263,7 @@ liferea-gtkhtml		Use libgtkhtml2 to render HTML.
 liferea-seamonkey	Use Seamonkey to render HTML.
 links			Use and enable support for the links browser.
 links-zlib		Enable zlib support for the links WWW browser.
+live			Enable live555 support.
 lprng-priv-ports	Connections must be made from privileged ports.
 lprng-suid		Install LPRng executables setuid root.
 lua			Enable Lua support.
@@ -289,6 +295,8 @@ mplayer-win32		Enable usage of Win32 DLLs (codecs).
 mrtg-snmpv3		Enable SNMPv3 support.
 mutt-compressed-mbox    Enable compressed mailbox support in mutt.
 mutt-hcache		Enable header caching in mutt.
+mutt-sidebar		Enable the mutt mailbox sidebar patch.
+mutt-smtp		Enable smpt support in mutt.
 mysql			Enable MySQL support.
 nas			Enable usage of the Network Audio System.
 ncurses			Enable ncurses support.

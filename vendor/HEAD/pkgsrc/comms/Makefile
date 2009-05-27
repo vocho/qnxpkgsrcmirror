@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.75 2009/02/27 17:45:05 drochner Exp $
+# $NetBSD: Makefile,v 1.77 2009/05/26 22:04:18 wiz Exp $
 #
 
 COMMENT=	Communication utilities
@@ -17,6 +17,7 @@ SUBDIR+=	efax
 SUBDIR+=	efax-gtk
 SUBDIR+=	estic
 SUBDIR+=	fidogate
+SUBDIR+=	gammu
 SUBDIR+=	gkermit
 SUBDIR+=	gnome-pilot
 SUBDIR+=	gscmxx
@@ -54,6 +55,7 @@ SUBDIR+=	pilot-link-libs
 SUBDIR+=	pilotmgr
 SUBDIR+=	plp
 SUBDIR+=	plptools
+SUBDIR+=	py-gammu
 SUBDIR+=	qpage
 SUBDIR+=	ruby-termios
 SUBDIR+=	scmxx

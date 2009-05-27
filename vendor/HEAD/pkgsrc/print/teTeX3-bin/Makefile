@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.40 2009/03/06 20:41:03 minskim Exp $
+# $NetBSD: Makefile,v 1.47 2009/04/30 01:01:40 minskim Exp $
 
 DISTNAME=	tetex-src-3.0
 PKGNAME=	${DISTNAME:C/tetex/teTeX/:C/src/bin/}
-PKGREVISION=	26
+PKGREVISION=	33
 CATEGORIES=	print
 MASTER_SITES=	${MASTER_SITE_TEX_CTAN:=systems/unix/teTeX/3.0/distrib/}
 
@@ -12,8 +12,14 @@ COMMENT=	TeX distribution for UNIX compatible systems - binaries
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
-DEPENDS+=	teTeX-texmf>=3.0nb10:../../print/teTeX3-texmf
+DEPENDS+=	makeindexk-[0-9]*:../../textproc/makeindexk
+DEPENDS+=	teTeX-texmf>=3.0nb14:../../print/teTeX3-texmf
 DEPENDS+=	tex-bin-kpathsea-[0-9]*:../../print/tex-bin-kpathsea
+DEPENDS+=	tex-bin-latex-[0-9]*:../../print/tex-bin-latex
+DEPENDS+=	tex-bin-metafont-[0-9]*:../../fonts/tex-bin-metafont
+DEPENDS+=	tex-bin-tex-[0-9]*:../../print/tex-bin-tex
+DEPENDS+=	tex-pdftex-[0-9]*:../../print/tex-pdftex
+DEPENDS+=	web2c>=7.5.7nb2:../../print/web2c
 
 # games/omega previously installed an omega executable too
 CONFLICTS+=	omega<0.90.4nb1
@@ -25,12 +31,23 @@ USE_TOOLS+=	bison lex
 USE_LIBTOOL=	yes
 
 CONFIGURE_ARGS+=	--without-texinfo --without-texi2html
+CONFIGURE_ARGS+=	--without-dvipdfm --without-dvipng
 CONFIGURE_ARGS+=	--without-dvipsk --without-odvipsk
+CONFIGURE_ARGS+=	--without-dviljk --without-makeindexk
+CONFIGURE_ARGS+=	--without-etex --without-omega --without-aleph \
+			--without-pdftex --without-pdfetex --without-pdfxtex
 CONFIGURE_ARGS+=	--without-xdvik --without-oxdvik
 
 MAKE_ENV+=		KPATHSEA_PREFIX=${BUILDLINK_PREFIX.kpathsea}
 MAKE_FLAGS+=		LIBTOOL=${LIBTOOL:Q}
 MAKE_FLAGS+=		vartexfonts=${VARBASE:Q}/lib/texmf/fonts
+
+SUBST_CLASSES+=		web2c
+SUBST_MESSAGE.web2c=	Disabling web2c.
+SUBST_STAGE.web2c=	pre-configure
+SUBST_FILES.web2c=	Makefile.in texk/Makefile.in
+SUBST_SED.web2c=	-e 's,^programs = web2c,programs =,' \
+			-e 's,^@FMU@,,'
 
 BUILD_DEFS+=		VARBASE
 LOWER_PAPERSIZE_cmd=	${ECHO} ${PAPERSIZE} | ${TR} '[A-Z]' '[a-z]'
@@ -48,7 +65,7 @@ INSTALL_MAKE_FLAGS+=	texmf=${DESTDIR}${PREFIX}/share/texmf
 INSTALL_MAKE_FLAGS+=	infodir=${DESTDIR}${PREFIX}/${PKGINFODIR}
 INSTALL_MAKE_FLAGS+=	mandir=${DESTDIR}${PREFIX}/${PKGMANDIR}
 
-INSTALLATION_DIRS+=	share/texmf/fmtutil
+INSTALLATION_DIRS+=	info share/texmf/fmtutil
 
 TEX_TEXMF_DIRS=	${PREFIX}/share/texmf
 
@@ -61,5 +78,16 @@ TEX_FORMAT_NAMES+=	tetex
 
 post-extract:
 	${RM} -rf ${WRKSRC}/texk/kpathsea
+
+post-install:
+.for f in a2ping e2pall epstopdf
+	${INSTALL_SCRIPT} ${WRKSRC}/texk/tetex/${f} ${DESTDIR}${PREFIX}/bin
+.endfor
+	${LN} -sf mpost ${DESTDIR}${PREFIX}/bin/metafun
+	${LN} -sf omega ${DESTDIR}${PREFIX}/bin/lambda
+	${LN} -sf aleph ${DESTDIR}${PREFIX}/bin/lamed
+	${LN} -sf pdftex ${DESTDIR}${PREFIX}/bin/mptopdf
+	${INSTALL_DATA} ${FILESDIR}/format.tetex.cnf \
+		${DESTDIR}${PREFIX}/share/texmf/fmtutil
 
 .include "../../mk/bsd.pkg.mk"

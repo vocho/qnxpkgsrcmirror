@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.27 2009/03/16 14:05:04 jmcneill Exp $
+@comment $NetBSD: PLIST,v 1.29 2009/05/19 21:46:23 wiz Exp $
 bin/nautilus
 bin/nautilus-autorun-software
 bin/nautilus-connect-server
@@ -70,6 +70,7 @@ share/locale/br/LC_MESSAGES/nautilus.mo
 share/locale/bs/LC_MESSAGES/nautilus.mo
 share/locale/ca/LC_MESSAGES/nautilus.mo
 share/locale/ca@valencia/LC_MESSAGES/nautilus.mo
+share/locale/crh/LC_MESSAGES/nautilus.mo
 share/locale/cs/LC_MESSAGES/nautilus.mo
 share/locale/cy/LC_MESSAGES/nautilus.mo
 share/locale/da/LC_MESSAGES/nautilus.mo
@@ -237,8 +238,6 @@ share/pixmaps/nautilus/thumbnail_frame.png
 @comment in xdg-dirs: @dirrm share/applications
 @unexec ${MKDIR} %D/lib/nautilus/extensions-2.0 2>/dev/null || ${TRUE}
 @dirrm lib/nautilus/extensions-2.0
-@unexec ${MKDIR} %D/lib/nautilus/extensions-1.0 2>/dev/null || ${TRUE}
-@dirrm lib/nautilus/extensions-1.0
 @dirrm lib/nautilus
 @dirrm include/nautilus/libnautilus-extension
 @dirrm include/nautilus

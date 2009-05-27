@@ -1,22 +1,20 @@
-# $NetBSD: Makefile,v 1.19 2008/05/26 02:13:16 joerg Exp $
+# $NetBSD: Makefile,v 1.21 2009/05/19 08:59:04 wiz Exp $
 
 DISTNAME=	us2-980812
 PKGNAME=	mbrolavox-${DISTNAME}
 PKGREVISION=	2
 CATEGORIES=	audio
-MASTER_SITES=	ftp://tcts.fpms.ac.be/pub/mbrola/VOICES/us2/ \
-		http://www.festvox.org/mbrola/dba/us2/
+MASTER_SITES=	http://tcts.fpms.ac.be/synthesis/mbrola/dba/us2/
 EXTRACT_SUFX=	.zip
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://tcts.fpms.ac.be/synthesis/mbrola/
 COMMENT=	American English male voice for MBROLA
+LICENSE=	no-commercial-use
 
 DEPENDS+=	mbrola-301h{,nb[0-9]*}:../../audio/mbrola
 
 USE_TOOLS+=	pax
-
-LICENSE=	no-commercial-use
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 

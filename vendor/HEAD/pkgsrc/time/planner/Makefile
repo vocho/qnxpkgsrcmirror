@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.13 2009/03/08 15:56:47 wiz Exp $
+# $NetBSD: Makefile,v 1.16 2009/05/13 01:00:49 dsainty Exp $
 #
 
-DISTNAME=	planner-0.14.3
+DISTNAME=	planner-0.14.4
 CATEGORIES=	time x11 gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/planner/0.14/}
 EXTRACT_SUFX=	.tar.bz2
@@ -9,6 +9,7 @@ EXTRACT_SUFX=	.tar.bz2
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://live.gnome.org/Planner
 COMMENT=	Project management tool for the GNOME desktop
+LICENSE=	gnu-gpl-v2 # OR any later version
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
@@ -31,6 +32,7 @@ GCONF_SCHEMAS=		planner.schemas
 .include "../../devel/libbonoboui/buildlink3.mk"
 .include "../../devel/libglade/buildlink3.mk"
 .include "../../devel/libgnomeui/buildlink3.mk"
+.include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../graphics/libgnomecanvas/buildlink3.mk"
 .include "../../print/libgnomeprintui/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"

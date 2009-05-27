@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.518 2009/03/05 22:46:23 snj Exp $
+# $NetBSD: Makefile,v 1.524 2009/05/14 13:55:54 he Exp $
 #
 
 COMMENT=	Graphics tools and libraries
@@ -48,6 +48,7 @@ SUBDIR+=	camlimages
 SUBDIR+=	cdlabelgen
 SUBDIR+=	cheese
 SUBDIR+=	cinepaint
+SUBDIR+=	circos
 SUBDIR+=	claraocr
 SUBDIR+=	clutter
 SUBDIR+=	clutter-box2d
@@ -123,6 +124,7 @@ SUBDIR+=	gif320
 SUBDIR+=	gifsicle
 SUBDIR+=	giftrans
 SUBDIR+=	gimageview
+SUBDIR+=	gimmage
 SUBDIR+=	gimp
 SUBDIR+=	gimp-color-manager
 SUBDIR+=	gimp-docs
@@ -152,6 +154,7 @@ SUBDIR+=	gnuplot
 SUBDIR+=	gnuplot-nox11
 SUBDIR+=	gocr
 SUBDIR+=	goocanvas
+SUBDIR+=	goocanvasmm
 SUBDIR+=	gphoto
 SUBDIR+=	gphoto2
 SUBDIR+=	gqview
@@ -253,6 +256,7 @@ SUBDIR+=	p5-GD-Graph-sparklines
 SUBDIR+=	p5-GD-SVG
 SUBDIR+=	p5-GD-SecurityImage
 SUBDIR+=	p5-GDGraph
+SUBDIR+=	p5-GDGraph-boxplot
 SUBDIR+=	p5-GDGraph3d
 SUBDIR+=	p5-GDTextUtil
 SUBDIR+=	p5-GIFgraph
@@ -307,11 +311,13 @@ SUBDIR+=	py-clutter
 SUBDIR+=	py-gd
 SUBDIR+=	py-gdchart
 SUBDIR+=	py-gnuplot
+SUBDIR+=	py-goocanvas
 SUBDIR+=	py-gtkglext
 SUBDIR+=	py-imaging
 SUBDIR+=	py-imagingtk
 SUBDIR+=	py-matplotlib
 SUBDIR+=	py-matplotlib-gtk2
+SUBDIR+=	py-matplotlib-tk
 SUBDIR+=	py-piddle
 SUBDIR+=	qcamview
 SUBDIR+=	qimageblitz

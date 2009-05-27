@@ -1,13 +1,14 @@
-# $NetBSD: Makefile,v 1.49 2008/12/17 17:01:15 ghen Exp $
+# $NetBSD: Makefile,v 1.51 2009/05/23 09:06:44 tron Exp $
 
-DISTNAME=	cscope-15.6
-PKGREVISION=	2
+DISTNAME=	cscope-15.7a
 CATEGORIES=	devel
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=cscope/}
+EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://cscope.sourceforge.net/
 COMMENT=	Interactive C program browser
+LICENSE=	original-bsd
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 

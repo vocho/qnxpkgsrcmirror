@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.114 2008/10/20 20:32:58 ghen Exp $
+# $NetBSD: Makefile,v 1.125 2009/04/30 05:07:10 minskim Exp $
 #
 
 COMMENT=	Fonts
@@ -134,9 +134,25 @@ SUBDIR+=	sgi-fonts
 SUBDIR+=	t1lib
 SUBDIR+=	t1utils
 SUBDIR+=	terminus-font
+SUBDIR+=	tex-amsfonts
+SUBDIR+=	tex-amsfonts-doc
+SUBDIR+=	tex-bin-metafont
+SUBDIR+=	tex-cm
+SUBDIR+=	tex-cmex
+SUBDIR+=	tex-glyphlist
+SUBDIR+=	tex-latex-fonts
+SUBDIR+=	tex-marvosym
+SUBDIR+=	tex-marvosym-doc
+SUBDIR+=	tex-metafont
+SUBDIR+=	tex-psnfss
+SUBDIR+=	tex-psnfss-doc
+SUBDIR+=	tex-symbol
+SUBDIR+=	tex-tipa
+SUBDIR+=	tex-tipa-doc
 SUBDIR+=	tex-uhc-fonts-base
 SUBDIR+=	tex-uhc-fonts-extra
 SUBDIR+=	tex-unttf
+SUBDIR+=	tex-zapfding
 SUBDIR+=	thaixfonts
 SUBDIR+=	ttf2pk
 SUBDIR+=	ttf2pt1
