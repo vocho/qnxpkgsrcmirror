@@ -1,15 +1,19 @@
-# $NetBSD: Makefile,v 1.15 2008/04/09 16:18:39 jlam Exp $
+# $NetBSD: Makefile,v 1.17 2009/05/19 08:59:10 wiz Exp $
 
-DISTNAME=	libstatgrab-0.12
-PKGREVISION=	3
+DISTNAME=	libstatgrab-0.16
 CATEGORIES=	devel
 MASTER_SITES=	ftp://ftp.uk.i-scream.org/pub/i-scream/libstatgrab/ \
 		ftp://ftp.i-scream.org/pub/i-scream/libstatgrab/ \
-		http://ftp.i-scream.org/pub/i-scream/libstatgrab/
+		http://ftp.i-scream.org/pub/i-scream/libstatgrab/ \
+		http://ftp.uk.i-scream.org/pub/i-scream/libstatgrab/ \
+		http://dl.ambiweb.de/mirrors/ftp.i-scream.org/libstatgrab/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.i-scream.org/libstatgrab/
 COMMENT=	Provides a useful interface to system statistics
+LICENSE=	gnu-gpl-v2
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 .include "options.mk"
 

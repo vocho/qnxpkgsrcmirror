@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.37 2009/02/04 21:30:53 drochner Exp $
+# $NetBSD: Makefile,v 1.39 2009/04/07 14:02:06 mjl Exp $
 #
 
 DISTNAME=	${PKGNAME_NOREV}-stable-src
-PKGNAME=	privoxy-3.0.10
+PKGNAME=	privoxy-3.0.12
 CATEGORIES=	www
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=ijbswa/}
 
-MAINTAINER=	kim@tac.nyc.ny.us
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.privoxy.org/
 COMMENT=	Web proxy with advanced filtering capabilities
 
@@ -47,7 +47,7 @@ CONFIGURE_ARGS+=	--with-group=${PRIVOXY_GROUP:Q}
 USER_GROUP=		${PRIVOXY_USER} ${PRIVOXY_GROUP}
 
 .for i in \
-    config trust default.action standard.action user.action default.filter
+    config trust default.action user.action default.filter match-all.action
 CONF_FILES_PERMS+=	${EGDIR}/${i} ${PKG_SYSCONFDIR}/${i} ${USER_GROUP} 0660
 .endfor
 
@@ -61,7 +61,7 @@ SUBST_SED.paths+=	-e 's,@PKG_SYSCONFDIR@,${PKG_SYSCONFDIR},g'
 SUBST_STAGE.paths=	post-patch
 
 pre-configure:
-	@cd ${WRKSRC} && autoheader && autoconf
+	cd ${WRKSRC} && autoheader && autoconf
 
 post-install:
 	${CHOWN} -R ${ROOT_USER}:${ROOT_GROUP} ${EGDIR}

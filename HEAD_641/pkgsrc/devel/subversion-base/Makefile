@@ -1,11 +1,15 @@
-# $NetBSD: Makefile,v 1.57 2008/10/14 06:23:43 epg Exp $
+# $NetBSD: Makefile,v 1.62 2009/05/21 16:11:41 abs Exp $
 
 PKGNAME=	subversion-base-${SVNVER}
-#PKGREVISION=	1
+PKGREVISION=	3
 COMMENT=	Version control system, base programs and libraries
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
 PKG_DESTDIR_SUPPORT=	user-destdir
+
+# on at least solaris, configure fails to figure out
+# that you need -lintl
+BROKEN_GETTEXT_DETECTION=	yes
 
 .include "../../devel/subversion/Makefile.common"
 
@@ -19,10 +23,6 @@ BUILD_DEFS+=		${APU_OPTIONS}
 
 USE_TOOLS+=		msgfmt
 
-# on at least solaris, configure fails to figure out
-# that you need -lintl
-BROKEN_GETTEXT_DETECTION=	yes
-
 CONFIGURE_ARGS+=	--disable-neon-version-check
 CONFIGURE_ARGS+=	--without-apache
 CONFIGURE_ARGS+=	--without-apxs
@@ -34,14 +34,14 @@ CONFIGURE_ARGS+=	--without-apxs
 DAV_RA=				serf
 .    include "../../www/serf/buildlink3.mk"
 .  else
-BUILDLINK_API_DEPENDS.neon+=	neon>=0.24.7
+BUILDLINK_API_DEPENDS.neon+=	neon>=0.25.0
 DAV_RA=				neon
 .    include "../../www/neon/buildlink3.mk"
 .  endif
 .else
 .  include "../../devel/apr0/buildlink3.mk"
 BUILDLINK_API_DEPENDS.apr+=	apr>=0.9.5
-BUILDLINK_API_DEPENDS.neon+=	neon>=0.24.7
+BUILDLINK_API_DEPENDS.neon+=	neon>=0.25.0
 DAV_RA=				neon
 .  include "../../www/neon/buildlink3.mk"
 .endif

@@ -1,17 +1,14 @@
 $NetBSD$
 
---- Modules/_ctypes/ctypes.h.orig	2007-07-13 13:33:13.000000000 -0400
-+++ Modules/_ctypes/ctypes.h
-@@ -7,8 +7,12 @@ typedef int Py_ssize_t;
- #endif
+--- pyconfig.h.in.orig	2008-09-07 01:42:43.000000000 -0500
++++ pyconfig.h.in
+@@ -931,6 +931,9 @@
+ /* Define on NetBSD to activate all library features */
+ #undef _NETBSD_SOURCE
  
- #ifndef MS_WIN32
-+#ifndef max
- #define max(a, b) ((a) > (b) ? (a) : (b))
-+#endif
-+#ifndef min
- #define min(a, b) ((a) < (b) ? (a) : (b))
-+#endif
++/* Define on QNX to activate all library features */
++#undef _QNX_SOURCE
++
+ /* Define _OSF_SOURCE to get the makedev macro. */
+ #undef _OSF_SOURCE
  
- #define PARAMFLAG_FIN 0x1
- #define PARAMFLAG_FOUT 0x2

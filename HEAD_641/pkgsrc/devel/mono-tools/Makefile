@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.10 2009/03/25 22:37:12 he Exp $
+# $NetBSD: Makefile,v 1.13 2009/05/04 18:42:26 hasso Exp $
 
-DISTNAME=	mono-tools-2.2
-PKGREVISION=	1
+DISTNAME=	mono-tools-2.4
 CATEGORIES=	devel
 MASTER_SITES=	http://ftp.novell.com/pub/mono/sources/mono-tools/
 EXTRACT_SUFX=	.tar.bz2
@@ -16,14 +15,15 @@ PKGCONFIG_OVERRIDE+=	create-native-map/lib/pkgconfig/create-native-map.pc.in
 PKGCONFIG_OVERRIDE+=	gendarme/framework/gendarme-framework.pc.in
 
 GNU_CONFIGURE=		yes
-USE_TOOLS+=		pkg-config gmake
+USE_TOOLS+=		pkg-config gmake msgfmt
 
 MAKE_JOBS_SAFE=		no
 
 CONFIGURE_ARGS+=	--mandir=${PKGMANDIR}
 
-.include "../../sysutils/desktop-file-utils/desktopdb.mk"
+.include "../../graphics/libgdiplus/buildlink3.mk"
 .include "../../lang/mono/buildlink3.mk"
+.include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../x11/gnome-sharp/buildlink3.mk"
 .include "../../x11/gnome-desktop-sharp/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

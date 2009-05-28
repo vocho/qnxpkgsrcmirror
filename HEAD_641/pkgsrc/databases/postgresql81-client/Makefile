@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.9 2008/06/20 08:27:57 adam Exp $
+# $NetBSD: Makefile,v 1.11 2009/05/20 00:58:11 wiz Exp $
 
 PKGNAME=	postgresql81-client-${BASE_VERS}
+PKGREVISION=	1
 COMMENT=	PostgreSQL database client programs
 
 PKG_DESTDIR_SUPPORT=	user-destdir
@@ -73,9 +74,9 @@ post-wrapper:
 .endif
 
 pre-build:
-	${_PKG_SILENT}${_PKG_DEBUG}${_ULIMIT_CMD}			\
+	${RUN} ${_ULIMIT_CMD}						\
 	cd ${WRKSRC}/src/backend &&					\
-	env ${MAKE_ENV} ${MAKE_PROGRAM} ${BUILD_MAKE_FLAGS}	\
+	env ${MAKE_ENV} ${MAKE_PROGRAM} ${BUILD_MAKE_FLAGS}		\
 		../../src/include/parser/parse.h			\
 		../../src/include/utils/fmgroids.h
 
@@ -84,7 +85,7 @@ post-install:
 		FAQ* KNOWN_BUGS MISSING_FEATURES README.* TODO		\
 		bug.template;						\
 	do								\
-		${INSTALL_DATA} $$file ${DESTDIR}${PG_DOC_DIR}/$$file;		\
+		${INSTALL_DATA} $$file ${DESTDIR}${PG_DOC_DIR}/$$file;	\
         done
 	cp -R ${WRKSRC}/doc/TODO.detail ${DESTDIR}${PG_DOC_DIR}
 	chown -R ${DOCOWN}:${DOCGRP} ${DESTDIR}${PG_DOC_DIR}/TODO.detail

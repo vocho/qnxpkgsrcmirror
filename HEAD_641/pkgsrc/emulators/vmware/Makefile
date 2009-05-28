@@ -1,25 +1,17 @@
-# $NetBSD: Makefile,v 1.20 2008/03/03 19:21:38 jlam Exp $
+# $NetBSD: Makefile,v 1.22 2009/05/21 10:44:57 zafer Exp $
 
 DISTNAME=	VMware-2.0.4-1142
 PKGNAME=	vmware-2.0.4
 PKGREVISION=	1
 CATEGORIES=	emulators
-MASTER_SITES=	http://www4.vmware.com/software/ \
-		http://www.vmware.com/download1/software/ \
-		ftp://download1.vmware.com/pub/software/ \
-		http://vmware-svca.www.conxion.com/software/ \
-		http://vmware-chil.www.conxion.com/software/ \
-		http://vmware-heva.www.conxion.com/software/ \
-		ftp://vmware.wespe.de/pub/software/ \
-		ftp://mirror.aarnet.edu.au/pub/vmware/software/
+MASTER_SITES=	${MASTER_SITE_BACKUP}	
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.vmware.com/
 COMMENT=	VMware 2.x emulator
+LICENSE=	vmware-license
 
 DEPENDS+=	vmware-module-1.*:../../emulators/vmware-module
-
-LICENSE=	vmware-license
 
 EMUL_PLATFORMS=		linux-i386
 EMUL_MODULES.linux=	vmware

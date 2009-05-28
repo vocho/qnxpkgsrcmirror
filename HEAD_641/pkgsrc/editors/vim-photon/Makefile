@@ -6,6 +6,8 @@ COMMENT=		Vim editor (vi clone) with photon GUI
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
+ONLY_FOR_PLATFORM=	QNX-*-*
+
 .include		"../../editors/vim-share/Makefile.common"
 
 DEPENDS+=		vim-share-${VIM_VERSION}.${VIM_PATCHLEVEL}{,nb*}:../../editors/vim-share

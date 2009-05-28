@@ -1,13 +1,14 @@
-# $NetBSD: Makefile,v 1.15 2009/03/21 05:46:54 obache Exp $
+# $NetBSD: Makefile,v 1.19 2009/05/24 12:42:44 obache Exp $
 #
 
-DISTNAME=	tokyotyrant-1.1.18
+DISTNAME=	tokyotyrant-1.1.27
 CATEGORIES=	databases net
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=tokyocabinet/}
 
 MAINTAINER=	obache@NetBSD.org
 HOMEPAGE=	http://tokyocabinet.sourceforge.net/
 COMMENT=	Network interface of Tokyo Cabinet
+LICENSE=	gnu-lgpl-v2.1
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
@@ -20,7 +21,7 @@ TEST_TARGET=	check
 
 .include "options.mk"
 
-BUILDLINK_API_DEPENDS.tokyocabinet+=	tokyocabinet>=1.4.10
+BUILDLINK_API_DEPENDS.tokyocabinet+=	tokyocabinet>=1.4.21
 .include "../../databases/tokyocabinet/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"
 PTHREAD_AUTO_VARS=	yes

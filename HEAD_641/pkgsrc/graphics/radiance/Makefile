@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.22 2009/03/17 21:40:46 darcy Exp $
+# $NetBSD: Makefile,v 1.24 2009/05/19 08:59:18 wiz Exp $
 #
 
 DISTNAME=	rad3R6P1
 PKGNAME=	radiance-3.6.1
-PKGREVISION=	3
+PKGREVISION=	4
 CATEGORIES=	graphics
 MASTER_SITES=	http://www.radiance-online.org/software/non-cvs/	\
 		http://www.radiance-online.org/software/
@@ -12,6 +12,7 @@ DISTFILES+=	${DISTNAME}${EXTRACT_SUFX} ${DISTNAME}supp${EXTRACT_SUFX}
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.radiance-online.org/
 COMMENT=	Physically-based, image-generating, backward raytracer
+LICENSE=	radiance-license
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 NOT_FOR_BULK_PLATFORM=	HPUX-*-*
@@ -19,8 +20,6 @@ NOT_FOR_BULK_PLATFORM=	HPUX-*-*
 USE_TOOLS+=	pax
 
 WRKSRC=		${WRKDIR}/ray
-
-LICENSE=	radiance-license
 
 PATCHEES=	makeall ./src/rt/Rmakefile ./src/util/Rmakefile		\
 		./src/ot/Rmakefile ./src/meta/Rmakefile 		\
@@ -70,8 +69,8 @@ do-configure:
 	${RM} ${WRKSRC}/lib/.gdb_history
 
 do-build:
-	cd ${WRKSRC} && ${MAKE_ENV} csh ./makeall install
-	@${RM} -f ${WRKSRC}/radiance/bin/wish*
+	cd ${WRKSRC} && ${MAKE_ENV} ${SH} ./makeall install
+	${RM} -f ${WRKSRC}/radiance/bin/wish*
 
 do-install:
 	${INSTALL_DATA_DIR} ${DESTDIRPREFIX:Q}/radiance

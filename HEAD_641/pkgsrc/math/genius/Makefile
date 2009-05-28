@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.18 2009/03/08 15:56:46 wiz Exp $
+# $NetBSD: Makefile,v 1.20 2009/05/20 00:58:21 wiz Exp $
 #
 
-DISTNAME=		genius-1.0.3
+DISTNAME=		genius-1.0.6
+PKGREVISION=		1
 CATEGORIES=		math
 MASTER_SITES=		http://ftp.5z.com/pub/genius/
 
@@ -23,15 +24,14 @@ do-test:
 
 .include "../../databases/shared-mime-info/mimedb.mk"
 .include "../../devel/gmp/buildlink3.mk"
-.include "../../devel/libgnome/buildlink3.mk"
-.include "../../devel/libgnomeui/buildlink3.mk"
 .include "../../devel/libglade/buildlink3.mk"
 .include "../../devel/readline/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../math/mpfr/buildlink3.mk"
 .include "../../mk/omf-scrollkeeper.mk"
+.include "../../sysutils/gnome-vfs/buildlink3.mk"
 .include "../../x11/gtk2/buildlink3.mk"
-.include "../../x11/gtksourceview/buildlink3.mk"
+.include "../../x11/gtksourceview2/buildlink3.mk"
 .include "../../x11/vte/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../mk/bsd.pkg.mk"

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.320 2009/03/22 12:02:05 bad Exp $
+# $NetBSD: Makefile,v 1.322 2009/04/11 18:01:52 snj Exp $
 #
 
 COMMENT=	Games
@@ -175,6 +175,7 @@ SUBDIR+=	netris
 SUBDIR+=	neverball
 SUBDIR+=	newvox
 SUBDIR+=	nighthawk
+SUBDIR+=	ninvaders
 SUBDIR+=	omega
 SUBDIR+=	openmortal
 SUBDIR+=	openttd
@@ -286,6 +287,7 @@ SUBDIR+=	xscavenger
 SUBDIR+=	xscorch
 SUBDIR+=	xscrabble
 SUBDIR+=	xskat
+SUBDIR+=	xsokoban
 SUBDIR+=	xsoldier
 SUBDIR+=	xtris
 SUBDIR+=	xtux

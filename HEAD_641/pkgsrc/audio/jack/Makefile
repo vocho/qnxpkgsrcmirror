@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.13 2008/11/16 11:55:19 bjs Exp $
+# $NetBSD: Makefile,v 1.15 2009/05/20 00:58:05 wiz Exp $
 #
 
 DISTNAME=	jack-audio-connection-kit-${JACK_VERSION}
 PKGNAME=	jack-${JACK_VERSION}
+PKGREVISION=	1
 CATEGORIES=	audio
 MASTER_SITES=	${MASTER_SITE_LOCAL}
 EXTRACT_SUFX=	.tar.bz2
@@ -35,6 +36,7 @@ CONFIGURE_ARGS+=	--enable-resize
 CONFIGURE_ARGS+=	--enable-timestamps
 
 CFLAGS.NetBSD+=		-D_NETBSD_SOURCE
+CFLAGS.Linux+=		-D_GNU_SOURCE
 
 CONFIGURE_ENV+=		ac_cv_header_readline_chardefs_h=yes
 

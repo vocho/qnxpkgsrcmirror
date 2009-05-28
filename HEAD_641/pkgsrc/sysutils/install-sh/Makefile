@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.5 2008/06/19 18:36:51 joerg Exp $
+# $NetBSD: Makefile,v 1.7 2009/04/09 00:48:16 joerg Exp $
 
 DISTNAME=	install-sh-20070712
 CATEGORIES=	sysutils
@@ -11,8 +11,6 @@ COMMENT=	install script compatible with the BSD install program
 PKG_DESTDIR_SUPPORT=	user-destdir
 BOOTSTRAP_PKG=	yes
 USE_TOOLS+=	sed
-NO_CHECKSUM=	yes
-NO_MTREE=	yes
 NO_BUILD=	yes
 
 # Use the install script to perform installation to avoid bootstrapping

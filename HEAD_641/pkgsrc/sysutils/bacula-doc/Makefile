@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.18 2009/01/06 11:29:26 adam Exp $
+# $NetBSD: Makefile,v 1.20 2009/05/20 01:09:12 wiz Exp $
 
-DISTNAME=		bacula-docs-2.4.4
+DISTNAME=		bacula-docs-3.0.1
 PKGNAME=		${DISTNAME:S/docs/doc/}
+PKGREVISION=		1
 CATEGORIES=		sysutils
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=bacula/}
 EXTRACT_SUFX=		.tar.bz2
@@ -17,12 +18,22 @@ NO_BUILD=		yes
 
 DOCDIR=			share/doc/bacula
 
-INSTALLATION_DIRS=	${DOCDIR} ${DOCDIR}/manual
+INSTALLATION_DIRS=	${DOCDIR}
+INSTALLATION_DIRS+=	${DOCDIR}/catalog
+INSTALLATION_DIRS+=	${DOCDIR}/concepts
+INSTALLATION_DIRS+=	${DOCDIR}/console
+INSTALLATION_DIRS+=	${DOCDIR}/developers
+INSTALLATION_DIRS+=	${DOCDIR}/install
+INSTALLATION_DIRS+=	${DOCDIR}/problems
+INSTALLATION_DIRS+=	${DOCDIR}/utility
 
 do-install:
-	${INSTALL_DATA} ${WRKSRC}/manual/bacula/*.html ${DESTDIR}${PREFIX}/${DOCDIR}/manual/
-	${INSTALL_DATA} ${WRKSRC}/manual/bacula/bacula.css  ${DESTDIR}${PREFIX}/${DOCDIR}/manual/
-	${INSTALL_DATA} ${WRKSRC}/manual/bacula/*.png  ${DESTDIR}${PREFIX}/${DOCDIR}/manual/
-	${INSTALL_DATA} ${WRKSRC}/manual/bacula.pdf  ${DESTDIR}${PREFIX}/${DOCDIR}/manual.pdf
+	${INSTALL_DATA} ${WRKSRC}/manuals/en/catalog/catalog/* ${DESTDIR}${PREFIX}/${DOCDIR}/catalog/
+	${INSTALL_DATA} ${WRKSRC}/manuals/en/concepts/concepts/* ${DESTDIR}${PREFIX}/${DOCDIR}/concepts/
+	${INSTALL_DATA} ${WRKSRC}/manuals/en/console/console/* ${DESTDIR}${PREFIX}/${DOCDIR}/console/
+	${INSTALL_DATA} ${WRKSRC}/manuals/en/developers/developers/* ${DESTDIR}${PREFIX}/${DOCDIR}/developers/
+	${INSTALL_DATA} ${WRKSRC}/manuals/en/install/install/* ${DESTDIR}${PREFIX}/${DOCDIR}/install/
+	${INSTALL_DATA} ${WRKSRC}/manuals/en/problems/problems/* ${DESTDIR}${PREFIX}/${DOCDIR}/problems/
+	${INSTALL_DATA} ${WRKSRC}/manuals/en/utility/utility/* ${DESTDIR}${PREFIX}/${DOCDIR}/utility/
 
 .include "../../mk/bsd.pkg.mk"

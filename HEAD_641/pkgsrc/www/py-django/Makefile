@@ -1,15 +1,17 @@
-# $NetBSD: Makefile,v 1.15 2009/01/29 09:35:54 joerg Exp $
+# $NetBSD: Makefile,v 1.17 2009/05/02 16:21:46 reed Exp $
 
 DJANGOVERS=	1.0.2
 DISTNAME=	Django-${DJANGOVERS}-final
 PKGNAME=	${PYPKGPREFIX}-django-${DJANGOVERS}
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	www python
 MASTER_SITES=	http://media.djangoproject.com/releases/${DJANGOVERS}/
 
 MAINTAINER=	joerg@NetBSD.org
 HOMEPAGE=	http://www.djangoproject.com/
 COMMENT=	Django, a high-level Python Web framework
+
+PREV_PKGPATH=	www/py-django-devel
 
 PYDISTUTILSPKG=	# yes
 PYTHON_VERSIONS_ACCEPTED=	25 24
@@ -21,7 +23,7 @@ DEPENDS+=	${PYPKGPREFIX}-flup-[0-9]*:../../www/py-flup
 
 .include "options.mk"
 
-post-extract:
+pre-configure:
 	rm -r ${WRKSRC}/django/db/backends/oracle
 .if empty(PKG_OPTIONS:Mmysql)
 	rm -r ${WRKSRC}/django/db/backends/mysql

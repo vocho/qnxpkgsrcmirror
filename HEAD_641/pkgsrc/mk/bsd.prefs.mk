@@ -1,4 +1,4 @@
-# $NetBSD: bsd.prefs.mk,v 1.288 2008/10/05 21:36:34 cube Exp $
+# $NetBSD: bsd.prefs.mk,v 1.294 2009/05/23 23:48:44 joerg Exp $
 #
 # This file includes the mk.conf file, which contains the user settings.
 #
@@ -382,6 +382,8 @@ NO_CONFIGURE=		yes
 NO_BUILD=		yes
 DISTFILES=		# none
 PLIST_SRC=		# none
+CHECK_PERMS=		no
+USE_LANGUAGES=		# empty
 do-patch:
 	@${DO_NADA}
 do-install:
@@ -392,18 +394,26 @@ do-install:
 USE_DESTDIR?=		no
 PKG_DESTDIR_SUPPORT?=	# empty
 
-.if empty(PKG_DESTDIR_SUPPORT) || (empty(USE_DESTDIR:M[Yy][Ee][Ss]) && empty(USE_DESTDIR:M[Ff][Uu][Ll][Ll]))
+.if !empty(USE_DESTDIR:M[Ff][Uu][Ll][Ll])
+WARNINGS+=	"USE_DESTDIR=full is deprecated, just use USE_DESTDIR=yes"
+USE_DESTDIR:=		yes
+.endif
+
+.if empty(PKG_DESTDIR_SUPPORT) || empty(USE_DESTDIR:M[Yy][Ee][Ss])
+.  if empty(USE_DESTDIR:M[Yy][Ee][Ss]) && empty(USE_DESTDIR:M[Nn][Oo])
+PKG_FAIL_REASON+=	"USE_DESTDIR must be either \`\`yes'' or \`\`no''"
+.  endif
 _USE_DESTDIR=		no
 .elif ${PKG_DESTDIR_SUPPORT} == "user-destdir"
-.  if !empty(USE_DESTDIR:M[Ff][Uu][Ll][Ll])
 _USE_DESTDIR=		user-destdir
-.  else
-_USE_DESTDIR=		destdir
-.  endif
 .elif ${PKG_DESTDIR_SUPPORT} == "destdir"
 _USE_DESTDIR=		destdir
 .else
 PKG_FAIL_REASON+=	"PKG_DESTDIR_SUPPORT must be \`\`destdir'' or \`\`user-destdir''."
+.endif
+
+.if defined(PKG_DEVELOPER) && empty(PKG_DESTDIR_SUPPORT)
+WARNINGS+=	"[bsd.prefs.mk] The package ${PKGNAME} misses DESTDIR support."
 .endif
 
 # When using staged installation, everything gets installed into

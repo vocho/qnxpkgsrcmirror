@@ -1,17 +1,10 @@
-$NetBSD: distinfo,v 1.6 2009/02/04 12:21:27 taca Exp $
+$NetBSD: distinfo,v 1.8 2009/05/08 13:39:09 taca Exp $
 
-SHA1 (squid-3.0.STABLE13.tar.bz2) = 3c3bfaef1b5130c3cc85939b4acab3d039703266
-RMD160 (squid-3.0.STABLE13.tar.bz2) = 359bdd2fcc3e396cee8eb9a58618308d5679175f
-Size (squid-3.0.STABLE13.tar.bz2) = 1809543 bytes
-SHA1 (patch-aa) = 633751bc8a6915b73b8e129f4111db269a014c79
-SHA1 (patch-ab) = 83064bb50089496154a4d6ac9b29e42af7b97357
-SHA1 (patch-ac) = 1a5c6a9be4c1555fdcf880f10f4ce8592286dcd6
-SHA1 (patch-ad) = 4761de2f2e25d9ae243847623a69d31edac4f4a1
-SHA1 (patch-ae) = 11ef61a2154bd6841ee438531de7faf02d36709d
-SHA1 (patch-af) = fb7c26472abd4ab5368bcc79d64110a88568bcd4
-SHA1 (patch-ag) = f9a83f8011b6ceab7a1ef17f6db0c4c65975be29
-SHA1 (patch-ah) = 6590ac8377b5ceebd5930b7ac3a0f11bb716ea46
-SHA1 (patch-ai) = ff9fd6979c9c13b57f10fb30bd25f39b7b99029c
-SHA1 (patch-aj) = 5c68b5b6e9f916e78d6953ba8a0d2b42441940c1
-SHA1 (patch-ak) = 8cb0aaa7ea9d2241096cf82cf3640eea060ae85c
-SHA1 (patch-al) = cd8eca5a945de8901d84beb432c3be59a6814e9c
+SHA1 (squid-3.0.STABLE15.tar.bz2) = f01697bee0af0084db62b87b0646298775f53c28
+RMD160 (squid-3.0.STABLE15.tar.bz2) = e8e54377672de849cfd7c5bd687ff0c97f68c961
+Size (squid-3.0.STABLE15.tar.bz2) = 1782217 bytes
+SHA1 (patch-ad) = 5e126ffb1427f986484c3c32baf5ae3da409262d
+SHA1 (patch-ae) = bc38307f8039a7bc63f1e1572df30d20ee161b8a
+SHA1 (patch-ah) = ab3b9add2a8836a5d5307645eb547d732e6496d0
+SHA1 (patch-aj) = 08ec1ecb59733c27e88dacfbc81b1b84da3eddab
+SHA1 (patch-al) = 871e16d2cbec55822121ca70c77bd2bd7c909325

@@ -1,13 +1,14 @@
-# $NetBSD: Makefile,v 1.3 2008/06/20 01:09:43 joerg Exp $
+# $NetBSD: Makefile,v 1.5 2009/05/19 08:59:38 wiz Exp $
 #
 
-DISTNAME=	varnish-1.0.2
+DISTNAME=	varnish-2.0.4
 CATEGORIES=	www
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=varnish/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://varnish-cache.org/
 COMMENT=	High-performace HTTP accelerator
+LICENSE=	modified-bsd
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 

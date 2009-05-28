@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.24 2009/03/22 19:57:08 wiz Exp $
+# $NetBSD: Makefile,v 1.26 2009/05/26 18:49:04 drochner Exp $
 
-DISTNAME=		libgtop-2.26.0
+DISTNAME=		libgtop-2.26.1
 CATEGORIES=		sysutils gnome
 MASTER_SITES=		${MASTER_SITE_GNOME:=sources/libgtop/2.26/}
 EXTRACT_SUFX=		.tar.bz2

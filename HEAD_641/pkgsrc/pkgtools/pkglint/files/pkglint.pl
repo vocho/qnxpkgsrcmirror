@@ -1,5 +1,5 @@
 #! @PERL@
-# $NetBSD: pkglint.pl,v 1.806 2009/03/25 16:33:25 wiz Exp $
+# $NetBSD: pkglint.pl,v 1.812 2009/05/26 21:40:42 rillig Exp $
 #
 
 # pkglint - static analyzer and checker for pkgsrc packages
@@ -50,7 +50,6 @@ BEGIN {
 	@EXPORT_OK = qw(
 		assert
 		false true dont_know doesnt_matter
-		min max
 		array_to_hash normalize_pathname print_table
 	);
 }
@@ -74,18 +73,6 @@ sub assert($$) {
 		}
 		exit(1);
 	}
-}
-
-sub min($$) {
-	my ($a, $b) = @_;
-
-	return ($a < $b) ? $a : $b;
-}
-
-sub max($$) {
-	my ($a, $b) = @_;
-
-	return ($a > $b) ? $a : $b;
 }
 
 # Prints the C<$table> on the C<$out> stream. The C<$table> shall be an
@@ -292,8 +279,8 @@ sub new($$) {
 	return $self;
 }
 
-sub string($)		{ return shift(@_)->[STRING]; }
-sub n($)		{ return shift(@_)->[N]; }
+sub string($)		{ return shift()->[STRING]; }
+sub n($)		{ return shift()->[N]; }
 
 sub has($$) {
 	my ($self, $n) = @_;
@@ -356,11 +343,11 @@ sub new($$$$) {
 	return $self;
 }
 
-sub fname($)		{ return shift(@_)->[FNAME]; }
-sub lines($)		{ return shift(@_)->[LINES]; }
-sub text($)		{ return shift(@_)->[TEXT]; }
-# Note: physlines is _not_ a usual getter method.
-sub is_changed($)	{ return shift(@_)->[CHANGED]; }
+sub fname($)		{ return shift()->[FNAME]; }
+sub lines($)		{ return shift()->[LINES]; }
+sub text($)		{ return shift()->[TEXT]; }
+# Note: physlines is _not_ a simple getter method.
+sub is_changed($)	{ return shift()->[CHANGED]; }
 
 # querying, getting and setting the extra values.
 sub has($$) {
@@ -401,7 +388,6 @@ sub physlines($) {
 # Only for PkgLint::String support
 sub substring($$$$) {
 	my ($self, $line, $start, $end) = @_;
-	my ($text, $physlines);
 
 	return substr($self->[PHYSLINES]->[$line]->[1], $start, $end);
 }
@@ -732,10 +718,10 @@ sub new($$$) {
 	return $self;
 }
 
-sub kind_of_list($)	{ return shift(@_)->[KIND_OF_LIST]; }
-sub basic_type($)	{ return shift(@_)->[BASIC_TYPE]; }
+sub kind_of_list($)	{ return shift()->[KIND_OF_LIST]; }
+sub basic_type($)	{ return shift()->[BASIC_TYPE]; }
 # no getter method for acls
-sub is_guessed($)	{ return shift(@_)->[IS_GUESSED]; }
+sub is_guessed($)	{ return shift()->[IS_GUESSED]; }
 
 sub perms($$) {
 	my ($self, $fname) = @_;
@@ -849,10 +835,10 @@ sub new_from_pool($$$$$) {
 	return $pool->{$key};
 }
 
-sub time($)		{ return shift(@_)->[TIME]; }
-sub type($)		{ return shift(@_)->[TYPE]; }
-sub shellword($)	{ return shift(@_)->[SHELLWORD]; }
-sub extent($)		{ return shift(@_)->[EXTENT]; }
+sub time($)		{ return shift()->[TIME]; }
+sub type($)		{ return shift()->[TYPE]; }
+sub shellword($)	{ return shift()->[SHELLWORD]; }
+sub extent($)		{ return shift()->[EXTENT]; }
 
 sub to_string($) {
 	my ($self) = @_;
@@ -892,14 +878,14 @@ sub new($) {
 	return $self;
 }
 
-sub subst_class($)		{ return shift(@_)->[SUBST_CLASS]; }
-sub subst_stage($)		{ return shift(@_)->[SUBST_STAGE]; }
-sub subst_message($)		{ return shift(@_)->[SUBST_MESSAGE]; }
-sub subst_files($)		{ return shift(@_)->[SUBST_FILES]; }
-sub subst_sed($)		{ return shift(@_)->[SUBST_SED]; }
-sub subst_vars($)		{ return shift(@_)->[SUBST_VARS]; }
-sub subst_filter_cmd($)		{ return shift(@_)->[SUBST_FILTER_CMD]; }
-sub subst_id($)			{ return shift(@_)->[SUBST_ID]; }
+sub subst_class($)		{ return shift()->[SUBST_CLASS]; }
+sub subst_stage($)		{ return shift()->[SUBST_STAGE]; }
+sub subst_message($)		{ return shift()->[SUBST_MESSAGE]; }
+sub subst_files($)		{ return shift()->[SUBST_FILES]; }
+sub subst_sed($)		{ return shift()->[SUBST_SED]; }
+sub subst_vars($)		{ return shift()->[SUBST_VARS]; }
+sub subst_filter_cmd($)		{ return shift()->[SUBST_FILTER_CMD]; }
+sub subst_id($)			{ return shift()->[SUBST_ID]; }
 
 sub init($) {
 	my ($self) = @_;
@@ -1066,15 +1052,6 @@ package CVS_Entry;
 #==========================================================================
 # A CVS_Entry represents one line from a CVS/Entries file.
 #==========================================================================
-
-BEGIN {
-	import PkgLint::Util qw(
-		false true
-	);
-	import PkgLint::Logging qw(
-		log_warning
-	);
-}
 
 use enum qw(FNAME REVISION MTIME TAG);
 
@@ -1700,6 +1677,23 @@ sub parse_acls($$) {
 	return $acls;
 }
 
+my $get_vartypes_basictypes_result = undef;
+sub get_vartypes_basictypes() {
+	if (defined($get_vartypes_basictypes_result)) {
+		return $get_vartypes_basictypes_result;
+	}
+
+	my $lines = load_file($0);
+	my $types = {};
+	assert($lines, "Couldn't load pkglint.pl from $0");
+	foreach my $line (@$lines) {
+		if ($line->text =~ m"^\s+\} elsif \(\$type eq \"(\w+)\"\) \{$") {
+			$types->{$1} = 1;
+		}
+	}
+	return ($get_vartypes_basictypes_result = $types);
+}
+
 my $get_vartypes_map_result = undef;
 sub get_vartypes_map() {
 	my ($fname, $vartypes);
@@ -1717,12 +1711,13 @@ sub get_vartypes_map() {
 		$"x;
 
 	use constant re_vartypedef => qr"^
-		([\w\d_.]+?)				# variable name
-		(\*|\.\*|) \s+				# parameterized?
-		(?:(InternalList|List) \s+ of \s+)?	# kind of list
-		(?:([\w\d_]+) | \{\s*([\w\d_+,\-.\s]+?)\s*\}) # basic type
-		(?:\s+ \[ ([^\]]*) \])?			# optional ACL
-		(?:\s*\#.*)?				# optional comment
+		([\w\d_.]+?)				# $1 = variable name
+		(\*|\.\*|) \s+				# $2 = parameterized?
+		(?:(InternalList|List) \s+ of \s+)?	# $3 ?= kind of list
+		(?:([\w\d_]+)				# $4 ?= basic type
+		  | \{\s*([\w\d_+,\-.\s]+?)\s*\})	# $5 ?= enumeration values
+		(?:\s+ \[ ([^\]]*) \])?			# $6 ?= optional ACL
+		(?:\s*\#.*)?				# $7 ?= optional comment
 		$"x;
 
 	$fname = conf_datadir."/makevars.map";
@@ -1743,6 +1738,13 @@ sub get_vartypes_map() {
 				my $kind_of_list = !defined($kind_of_list_text) ? LK_NONE
 				    : ($kind_of_list_text eq "List") ? LK_EXTERNAL
 				    : LK_INTERNAL;
+
+				if (defined($typename) && !exists(get_vartypes_basictypes()->{$typename})) {
+					$line->log_fatal("Unknown basic type \"$typename\" for variable $varname. "
+						. "Valid basic types are "
+						. join(", ", sort keys %{get_vartypes_basictypes()})
+						. ".");
+				}
 
 				my $basic_type = defined($enums)
 				    ? array_to_hash(split(qr"\s+", $enums))
@@ -2177,21 +2179,21 @@ sub load_doc_CHANGES($) {
 	my ($fname) = @_;
 	my $lines = load_file($fname) or die;
 
-	my @changes = ();
+	my $changes = {}; # { pkgpath -> @changes }
 	foreach my $line (@$lines) {
 		my $text = $line->text;
 		next unless $text =~ m"^\t[A-Z]";
 
 		if ($text =~ m"^\t(Updated) (\S+) to (\S+) \[(\S+) (\d\d\d\d-\d\d-\d\d)\]$") {
-			push(@changes, PkgLint::Change->new($line, $1, $2, $3, $4, $5));
+			push(@{$changes->{$2}}, PkgLint::Change->new($line, $1, $2, $3, $4, $5));
 		} elsif ($text =~ m"^\t(Added) (\S+) version (\S+) \[(\S+) (\d\d\d\d-\d\d-\d\d)\]$") {
-			push(@changes, PkgLint::Change->new($line, $1, $2, $3, $4, $5));
+			push(@{$changes->{$2}}, PkgLint::Change->new($line, $1, $2, $3, $4, $5));
 		} elsif ($text =~ m"^\t(Removed) (\S+) (?:successor (\S+) )?\[(\S+) (\d\d\d\d-\d\d-\d\d)\]$") {
-			push(@changes, PkgLint::Change->new($line, $1, $2, undef, $3, $4));
+			push(@{$changes->{$2}}, PkgLint::Change->new($line, $1, $2, undef, $3, $4));
 		} elsif ($text =~ m"^\t(Downgraded) (\S+) to (\S+) \[(\S+) (\d\d\d\d-\d\d-\d\d)\]$") {
-			push(@changes, PkgLint::Change->new($line, $1, $2, $3, $4, $5));
+			push(@{$changes->{$2}}, PkgLint::Change->new($line, $1, $2, $3, $4, $5));
 		} elsif ($text =~ m"^\t(Renamed|Moved) (\S+) to (\S+) \[(\S+) (\d\d\d\d-\d\d-\d\d)\]$") {
-			push(@changes, PkgLint::Change->new($line, $1, $2, $3, $4, $5));
+			push(@{$changes->{$2}}, PkgLint::Change->new($line, $1, $2, $3, $4, $5));
 		} else {
 			$line->log_warning("Unknown doc/CHANGES line: " . $line->text);
 			$line->explain_warning(
@@ -2199,10 +2201,10 @@ sub load_doc_CHANGES($) {
 "established by mk/misc/developer.mk?");
 		}
 	}
-	return \@changes;
+	return $changes;
 }
 
-my $get_doc_CHANGES_docs = undef; # [ $fname, undef or $lines ]
+my $get_doc_CHANGES_docs = undef; # [ $fname, undef or { pkgpath -> @changes } ]
 sub get_doc_CHANGES($) {
 	my ($pkgpath) = @_;
 
@@ -2231,7 +2233,7 @@ sub get_doc_CHANGES($) {
 			$doc->[1] = load_doc_CHANGES("${cwd_pkgsrcdir}/doc/$doc->[0]");
 		}
 
-		foreach my $change (@{$doc->[1]}) {
+		foreach my $change (@{$doc->[1]->{$pkgpath}}) {
 			next unless $pkgpath eq $change->pkgpath;
 			push(@result, $change);
 		}
@@ -2894,7 +2896,7 @@ sub get_variable_type($$) {
 		: ($varname =~ m"FILES$") ? PkgLint::Type->new(LK_EXTERNAL, "Pathmask", allow_runtime, GUESSED)
 		: ($varname =~ m"FILE$") ? PkgLint::Type->new(LK_NONE, "Pathname", allow_runtime, GUESSED)
 		: ($varname =~ m"PATH$") ? PkgLint::Type->new(LK_NONE, "Pathlist", allow_runtime, GUESSED)
-		: ($varname =~ m"PATHS$") ? PkgLint::Type->new(LK_EXTERNAL, "List of Pathname", allow_runtime, GUESSED)
+		: ($varname =~ m"PATHS$") ? PkgLint::Type->new(LK_EXTERNAL, "Pathname", allow_runtime, GUESSED)
 		: ($varname =~ m"_USER$") ? PkgLint::Type->new(LK_NONE, "UserGroupName", allow_all, GUESSED)
 		: ($varname =~ m"_GROUP$") ? PkgLint::Type->new(LK_NONE, "UserGroupName", allow_all, GUESSED)
 		: ($varname =~ m"_ENV$") ? PkgLint::Type->new(LK_EXTERNAL, "ShellWord", allow_runtime, GUESSED)
@@ -4375,7 +4377,7 @@ sub checkline_mk_shelltext($$) {
 
 	$set_e_mode = false;
 
-	if ($rest =~ s/^\s*([-@]*)(\$\{_PKG_SILENT\}\$\{_PKG_DEBUG\}|\${RUN}|)//) {
+	if ($rest =~ s/^\s*([-@]*)(\$\{_PKG_SILENT\}\$\{_PKG_DEBUG\}|\$\{RUN\}|)//) {
 		my ($hidden, $macro) = ($1, $2);
 
 		if ($hidden !~ m"\@") {
@@ -4383,6 +4385,9 @@ sub checkline_mk_shelltext($$) {
 
 		} elsif (defined($mkctx_target) && $mkctx_target =~ m"^(?:show-.*|.*-message)$") {
 			# In some targets commands may be hidden.
+
+		} elsif ($rest =~ m"^#") {
+			# Shell comments may be hidden, as they have no side effects
 
 		} elsif ($rest =~ $regex_shellword) {
 			my ($cmd) = ($1);
@@ -5158,6 +5163,9 @@ sub checkline_mk_vartype_basic($$$$$$$$) {
 		if ($value eq $value_novar && $value !~ regex_pkgname) {
 			$line->log_warning("\"${value}\" is not a valid package name. A valid package name has the form packagename-version, where version consists only of digits, letters and dots.");
 		}
+
+	} elsif ($type eq "PkgPath") {
+		checkline_relative_pkgdir($line, "$cur_pkgsrcdir/$value");
 
 	} elsif ($type eq "PkgOptionsVar") {
 		checkline_mk_vartype_basic($line, $varname, "Varname", $op, $value, $comment, false, $is_guessed);
@@ -6378,6 +6386,12 @@ sub checklines_buildlink3_mk_pre2009($$) {
 		lines_log_warning($lines, $lineno, "Expected BUILDLINK_TREE line.");
 		return;
 	}
+	$lines->[$lineno - 1]->log_warning("Please switch to the new buildlink3.mk format.");
+	$lines->[$lineno - 1]->explain_warning(
+"The format for buildlink3.mk files has changed in 2009Q1. You can",
+"generate a new-style buildlink3.mk file with the createbuildlink>=3.14",
+"package and then adjust the variable's values manually.");
+
 	if (($m = expect($lines, \$lineno, qr"^(.*)_BUILDLINK3_MK:=\t*\$\{\1_BUILDLINK3_MK\}\+$"))) {
 		$bl_PKGBASE_line = $lines->[$lineno - 1];
 		$bl_PKGBASE = $m->text(1);

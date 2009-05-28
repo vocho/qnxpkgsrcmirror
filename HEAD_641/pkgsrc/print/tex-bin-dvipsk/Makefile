@@ -1,36 +1,30 @@
-# $NetBSD: Makefile,v 1.2 2009/02/26 16:58:56 minskim Exp $
-# TeX Live Revision 12172
+# $NetBSD: Makefile,v 1.6 2009/04/27 15:18:47 minskim Exp $
+# TeX Live Revision 12785
 
 DISTNAME=	bin-dvipsk
-PKGNAME=	tex-${DISTNAME}-2008.12172
-CATEGORIES=	print
-MASTER_SITES=	${MASTER_SITE_TEX_CTAN:=systems/texlive/tlnet/2008/archive/}
-DIST_SUBDIR=	${PKGNAME_NOREV}
-EXTRACT_SUFX=	.tar.lzma
+PKGNAME=	tex-${DISTNAME}-2008.12785
+PKGREVISION=	1
 
 MAINTAINER=	minskim@NetBSD.org
-HOMEPAGE=	http://www.tug.org/texlive/
 COMMENT=	Supplementary files for dvipsk
 
-PKG_DESTDIR_SUPPORT=	user-destdir
+USE_TOOLS+=	perl:run
+REPLACE_PERL=	bin/pkfix
 
-USE_TOOLS+=	pax
-
-NO_CONFIGURE=	yes
-NO_BUILD=	yes
-WRKSRC=		${WRKDIR}
+INSTALLATION_DIRS+=	bin
 
 TEX_TEXMF_DIRS+=	${PREFIX}/share/texmf
 
-.include "../../print/kpathsea/texmf.mk"
+TEXLIVE_IGNORE_PATTERNS=	texmf/dvips/base
+
+.include "../../print/texlive/module.mk"
 
 post-extract:
-	${RM} -rf ${WRKSRC}/texmf/dvips/base
-	${FIND} ${WRKSRC}/texmf* -type d -exec ${CHMOD} ${PKGDIRMODE} {} \;
-	${FIND} ${WRKSRC}/texmf* -type f -exec ${CHMOD} ${SHAREMODE} {} \;
+	${MKDIR} ${WRKSRC}/bin
+	${MV} ${WRKSRC}/texmf/scripts/pkfix/pkfix.pl ${WRKSRC}/bin/pkfix
+	${RM} -rf ${WRKSRC}/texmf/scripts
 
-do-install:
-	cd ${WRKSRC} && \
-		pax -rwpm -s ',.*\.orig$$,,' texmf* ${DESTDIR}${PREFIX}/share
+post-install:
+	${INSTALL_SCRIPT} ${WRKSRC}/bin/pkfix ${DESTDIR}${PREFIX}/bin
 
 .include "../../mk/bsd.pkg.mk"

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.146 2009/01/29 06:40:50 ghen Exp $
+# $NetBSD: Makefile,v 1.148 2009/05/26 21:41:06 rillig Exp $
 
 DISTNAME=	kdebase-${_KDE_VERSION}
 PKGREVISION=	2
@@ -8,6 +8,8 @@ COMMENT=	Base modules for the KDE 3 integrated X11 desktop
 #PATCH_SITES=	ftp://ftp.kde.org/pub/kde/security_patches/ \
 #		http://mirrors.isc.org/pub/kde/security_patches/
 #PATCHFILES=	post-3.5.7-kdebase-konqueror-2.diff post-3.5.7-kdebase-kdm.diff
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 .include "../../meta-pkgs/kde3/Makefile.kde3"
 
@@ -71,7 +73,7 @@ LIBS.NetBSD+=		${EXPORT_SYMBOLS_LDFLAGS}
 
 PLIST_SRC=		${WRKDIR}/PLIST.Xdpms
 
-_KDE3_EXTRA_INCLUDES=	${LOCALBASE}/include:${X11BASE}/include:${BUILDLINK_PREFIX.freetype2}/include/freetype2
+_KDE3_EXTRA_INCLUDES=	${PREFIX}/include:${X11BASE}/include:${BUILDLINK_PREFIX.freetype2}/include/freetype2
 
 # Don't execute kappfinder_install at install-time.  This causes random
 # applications to be found which causes random .desktop files to be created
@@ -122,36 +124,44 @@ SUBST_SED.varlock=	-e s:/var/lock:/var/spool/lock:
 .endif
 .endif
 
-SUBST_CLASSES+=		htdig paths xkb
+SUBST_CLASSES+=		htdig
 SUBST_STAGE.htdig=	post-patch
 SUBST_MESSAGE.htdig=	Fix htdig paths.
 SUBST_FILES.htdig=	khelpcenter/searchhandlers/khc_htsearch.pl
 SUBST_SED.htdig=	-e s:/srv/www/cgi-bin:${PREFIX}/libexec/cgi-bin:
 
+SUBST_CLASSES+=		paths
 SUBST_FILES.paths=	kcontrol/kdm/main.cpp kioslave/info/kde-info2html.conf
 SUBST_SED.paths=	-e 's,@PKG_SYSCONFDIR@,${PKG_SYSCONFDIR},g'
-SUBST_SED.paths+=	-e 's,@LOCALBASE@,${LOCALBASE},g'
+SUBST_SED.paths+=	-e 's,@LOCALBASE@,${PREFIX},g'
 SUBST_STAGE.paths=	post-patch
 
+SUBST_CLASSES+=		xkb
 SUBST_FILES.xkb=	kxkb/x11helper.cpp
 SUBST_SED.xkb=		-e 's:XLIBDIR:"${X11BASE}/lib/X11/", "${X11BASE}/share/X11/", XLIBDIR:'
 SUBST_STAGE.xkb=	post-patch
+
+# genkdmconf wont install faces if using destdir so do it ourselves
+INSTALLATION_DIRS+= share/kde/apps/kdm/faces share/kde/templates/.source/emptydir
 
 pre-configure:
 	cd ${WRKSRC}/ksysguard/ksysguardd && rm -f DragonFly && ln -s FreeBSD DragonFly
 
 post-install:
-	${INSTALL_DATA_DIR} ${PREFIX}/share/kde/templates/.source/emptydir
-	${INSTALL_DATA} ${DISTDIR}/NetBSD-flag-1.0.png ${PREFIX}/${ICONDIR}/NetBSD-flag.png
-	${INSTALL_DATA} ${DISTDIR}/Daemon.png ${PREFIX}/${ICONDIR}
+	${INSTALL_DATA} ${WRKSRC}/kdm/kfrontend/pics/default1.png \
+		${DESTDIR}${PREFIX}/share/kde/apps/kdm/faces/.default.face.icon
+	${INSTALL_DATA} ${WRKSRC}/kdm/kfrontend/pics/root1.png \
+		${DESTDIR}${PREFIX}/share/kde/apps/kdm/faces/root.face.icon
+	${INSTALL_DATA} ${DISTDIR}/NetBSD-flag-1.0.png ${DESTDIR}${PREFIX}/${ICONDIR}/NetBSD-flag.png
+	${INSTALL_DATA} ${DISTDIR}/Daemon.png ${DESTDIR}${PREFIX}/${ICONDIR}
 	${INSTALL_DATA} ${DISTDIR}/Daemon.README			\
-		${PREFIX}/share/doc/kde/HTML/en/kdm
+		${DESTDIR}${PREFIX}/share/doc/kde/HTML/en/kdm
 
 	@# The global desktop template files need to be user-writeable, or
 	@# else users won't be able to alter them after copying them to
 	@# their local directories.
 	@#
-	${CHMOD} u+w ${PREFIX}/share/kde/templates/.source/*
+	${CHMOD} u+w ${DESTDIR}${PREFIX}/share/kde/templates/.source/*
 
 	@# On some systems, the Xdpms routines aren't available in a shared
 	@# library, and some libraries aren't created as a result.
@@ -161,7 +171,7 @@ post-install:
 		lib/kde3/libkcm_screensaver.so				\
 	  ";								\
 	  for file in $${files}; do					\
-		if [ -f ${PREFIX}/$${file} ]; then			\
+		if [ -f ${DESTDIR}${PREFIX}/$${file} ]; then		\
 			${ECHO} "$${file}";				\
 		fi;							\
 	  done;								\
@@ -169,7 +179,7 @@ post-install:
 
 .if ${OPSYS} == "NetBSD"
 	@# NetBSD Advertisement O:-)
-	cd ${PREFIX}/share/kde/config/kdm;				\
+	cd ${DESTDIR}${PREFIX}/share/kde/config/kdm;			\
 	${SED} -e 's|^\(LogoPixmap\)=.*|\1=${PREFIX}/${ICONDIR}/NetBSD-flag.png|' \
 		kdmrc > ${WRKDIR}/kdmrc.ad;				\
 	${CP} -f ${WRKDIR}/kdmrc.ad kdmrc
@@ -187,6 +197,7 @@ CONFIGURE_ENV+= kde_cv_path_fontconfig_config='NONE'
 .endif
 
 .include "../../meta-pkgs/kde3/kde3.mk"
+.include "../../sysutils/desktop-file-utils/desktopdb.mk"
 
 .include "../../databases/openldap-client/buildlink3.mk"
 .if ${OPSYS} != "SunOS"

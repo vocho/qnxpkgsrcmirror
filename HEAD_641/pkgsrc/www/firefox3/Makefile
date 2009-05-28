@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.26 2009/03/28 16:51:45 tnn Exp $
+# $NetBSD: Makefile,v 1.31 2009/04/28 09:14:25 tnn Exp $
 
 MOZILLA=		firefox3	# allow coexisting with firefox2
 COMMENT=		Lightweight gecko-based web browser
@@ -18,7 +18,7 @@ BUILDLINK_API_DEPENDS.cairo+=	cairo>=1.6.4
 .include "../../www/firefox/Makefile-firefox.common"
 
 MAINTAINER=		tnn@NetBSD.org
-MOZ_VER=		3.0.8
+MOZ_VER=		3.0.10
 
 XPTCFILES:=		${XPTCFILES:C,^,../../firefox3/files/,}
 DESCR_SRC=		${.CURDIR}/../../www/firefox/DESCR
@@ -114,5 +114,5 @@ CONFIGURE_ENV+=		PYTHON=${PYTHONBIN:Q}
 CONFIGURE_ARGS+=	--enable-system-sqlite
 BUILDLINK_API_DEPENDS.sqlite3+= sqlite3>=3.5.9
 .include "../../databases/sqlite3/buildlink3.mk"
-
+.include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../mk/bsd.pkg.mk"
