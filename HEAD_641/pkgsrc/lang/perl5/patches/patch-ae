@@ -1,20 +1,25 @@
 $NetBSD$
 
---- lib/Cwd.pm.orig	2007-12-18 05:47:07.000000000 -0500
-+++ lib/Cwd.pm
-@@ -248,6 +248,7 @@ my %METHOD_MAP =
-     abs_path		=> 'fast_abs_path',
-    },
+--- hints/qnx.sh.orig	2007-12-18 05:47:07.000000000 -0500
++++ hints/qnx.sh
+@@ -242,7 +242,7 @@ if [ "$osname" = "qnx" ]; then
+ else
+   # $^O eq nto
  
-+   # QNX4.  QNX6 has a $os of 'nto'.
-    qnx =>
-    {
-     cwd			=> '_qnx_cwd',
-@@ -286,7 +287,6 @@ my %METHOD_MAP =
-   );
+-  ccflags='-DDLOPEN_WONT_DO_RELATIVE_PATHS'
++  ccflags='-U__STRICT_ANSI__'
  
- $METHOD_MAP{NT} = $METHOD_MAP{MSWin32};
--$METHOD_MAP{nto} = $METHOD_MAP{qnx};
+   # Options required to get dynamic linking to work
+   lddlflags='-shared'
+@@ -260,6 +260,9 @@ else
+   # This is probably worth tracking down someday.
+   usemymalloc='false'
  
- 
- # Find the pwd command in the expected locations.  We assume these
+-  # crypt isn't detected in the C library even though it's there.
+-  d_crypt='define'
++  libswanted=`echo " $libswanted "| sed 's/ malloc / /'`
++
++  # Some routines are only in our static libc.
++  # eg crypt() getlogin() getlogin_r()
++  usenm=false
+ fi

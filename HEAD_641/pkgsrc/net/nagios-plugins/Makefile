@@ -1,9 +1,10 @@
-# $NetBSD: Makefile,v 1.17 2009/03/24 19:54:54 bouyer Exp $
+# $NetBSD: Makefile,v 1.19 2009/05/26 13:32:29 gdt Exp $
 #
 
 CATEGORIES=	net sysutils
+PKGREVISION=	1
 
-MAINTAINER=	tonnerre@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://sourceforge.net/projects/nagiosplug/
 COMMENT=	Nagios plugins
 
@@ -12,6 +13,8 @@ COMMENT=	Nagios plugins
 .include "../../mk/bsd.prefs.mk"
 
 USE_TOOLS+=	perl:run
+
+PKG_GROUPS+=	NAGIOS_GROUP
 
 CONFIGURE_ARGS+= --without-pgsql --without-mysql \
 		--without-smbclient-command --without-snmpget-command \

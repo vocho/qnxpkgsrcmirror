@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.469 2009/03/29 08:49:29 martti Exp $
+# $NetBSD: Makefile,v 1.472 2009/05/17 20:09:35 seb Exp $
 #
 
 COMMENT=	System utilities
@@ -24,6 +24,7 @@ SUBDIR+=	bacula
 SUBDIR+=	bacula-clientonly
 SUBDIR+=	bacula-doc
 SUBDIR+=	bacula-gnome-console
+SUBDIR+=	bacula-qt-console
 SUBDIR+=	bacula-tray-monitor
 SUBDIR+=	bacula-wx-console
 SUBDIR+=	bbsload
@@ -212,6 +213,7 @@ SUBDIR+=	p5-Filesys-Statvfs
 SUBDIR+=	p5-GTop
 SUBDIR+=	p5-Lchown
 SUBDIR+=	p5-Parse-Syslog
+SUBDIR+=	p5-SSH-Batch
 SUBDIR+=	p5-Sys-CpuLoad
 SUBDIR+=	p5-Sys-Filesystem
 SUBDIR+=	p5-Sys-Hostname-Long
@@ -253,6 +255,7 @@ SUBDIR+=	ruby-directory-watcher
 SUBDIR+=	ruby-facter
 SUBDIR+=	ruby-gnome2-gnomevfs
 SUBDIR+=	ruby-quota
+SUBDIR+=	ruby-rb-appscript
 SUBDIR+=	safetynet
 SUBDIR+=	same
 SUBDIR+=	sarah

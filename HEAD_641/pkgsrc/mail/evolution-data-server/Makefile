@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.84 2009/03/22 00:03:10 wiz Exp $
+# $NetBSD: Makefile,v 1.88 2009/05/19 08:59:21 wiz Exp $
 #
 
-DISTNAME=	evolution-data-server-2.26.0
+DISTNAME=	evolution-data-server-2.26.1.1
 CATEGORIES=	mail gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/evolution-data-server/2.26/}
 EXTRACT_SUFX=	.tar.bz2
@@ -9,6 +9,7 @@ EXTRACT_SUFX=	.tar.bz2
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.gnome.org/projects/evolution/
 COMMENT=	Evolution data server
+LICENSE=	gnu-lgpl-v2
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
@@ -87,6 +88,7 @@ BUILDLINK_TRANSFORM+=	rm:-ldl
 .include "../../net/libsoup24/buildlink3.mk"
 .include "../../net/ORBit2/buildlink3.mk"
 .include "../../sysutils/gnome-vfs/buildlink3.mk"
+.include "../../textproc/gtk-doc/buildlink3.mk"
 .include "../../textproc/libxml2/buildlink3.mk"
 BUILDLINK_API_DEPENDS.libical+=	libical>=0.43
 .include "../../time/libical/buildlink3.mk"

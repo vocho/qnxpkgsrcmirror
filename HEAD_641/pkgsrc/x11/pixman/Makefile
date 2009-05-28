@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.21 2008/10/15 00:56:45 bjs Exp $
+# $NetBSD: Makefile,v 1.24 2009/05/17 11:01:11 sno Exp $
 #
 
-DISTNAME=	pixman-0.12.0
+DISTNAME=	pixman-0.15.2
 CATEGORIES=	x11
 MASTER_SITES=	${MASTER_SITE_XORG:=lib/}
 EXTRACT_SUFX=	.tar.bz2
@@ -40,5 +40,6 @@ PIXMAN_SYMFILE=	${WRKDIR}/pixman.sym
 
 post-extract:
 	${CP} ${FILESDIR}/pixman.sym ${WRKDIR}
+	${CP} ${FILESDIR}/solaris-hwcap.mapfile ${WRKSRC}/pixman
 
 .include "../../mk/bsd.pkg.mk"

@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.103 2009/01/05 10:25:39 martti Exp $
+# $NetBSD: Makefile,v 1.106 2009/05/20 07:45:40 martti Exp $
 
-DISTNAME=	postfix-2.6-20081205
-PKGNAME=	postfix-2.6.20081205
+DISTNAME=	postfix-2.7-20090519
+PKGNAME=	postfix-2.7.20090519
 CATEGORIES=	mail
 MASTER_SITES=	ftp://ftp.porcupine.org/mirrors/postfix-release/experimental/
 MASTER_SITES+=	http://postfix.it-austria.net/releases/experimental/
@@ -12,7 +12,7 @@ DIST_SUBDIR=	postfix
 MAINTAINER=	martti@NetBSD.org
 HOMEPAGE=	http://www.postfix.org/
 COMMENT=	Postfix SMTP server and tools
-#LICENSE=	postfix-license
+LICENSE=	postfix-license
 
 CONFLICTS+=	courier-mta-[0-9]* fastforward>=0.51nb2 sendmail-[0-9]*
 CONFLICTS+=	postfix-2.6-[0-9]*
@@ -23,6 +23,9 @@ USE_TOOLS+=	perl
 CHECK_HEADERS_SKIP+=	src/global/mail_params.h
 
 .include "../../mk/bsd.prefs.mk"
+
+SPECIAL_PERMS+=	sbin/postdrop postfix maildrop 2555
+SPECIAL_PERMS+=	sbin/postqueue postfix maildrop 2555
 
 # POSTFIX_QUEUE_DIR is the default queue directory for Postfix.  This is
 # merely a default, and may be changed by setting "queue_directory" in

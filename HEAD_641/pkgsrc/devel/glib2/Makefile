@@ -1,19 +1,18 @@
-# $NetBSD: Makefile,v 1.156 2009/03/15 21:48:05 jmcneill Exp $
+# $NetBSD: Makefile,v 1.160 2009/05/26 16:55:23 wiz Exp $
 
 # When updating glib2, please apply patch-ak to configure.in
 # Then run a matching version of autoconf to regen patch-aa.
-DISTNAME=		glib-2.20.0
+DISTNAME=		glib-2.20.2
 PKGNAME=		${DISTNAME:S/glib/glib2/}
-PKGREVISION=		1
 CATEGORIES=		devel
 MASTER_SITES=		ftp://ftp.gtk.org/pub/glib/2.20/ \
-			ftp://ftp.cs.umn.edu/pub/gimp/pub/glib/2.20/ \
 			${MASTER_SITE_GNOME:=sources/glib/2.20/}
 EXTRACT_SUFX=		.tar.bz2
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://developer.gnome.org/doc/API/2.0/glib/glib.html
 COMMENT=		Some useful routines for C programming (glib2)
+LICENSE=		gnu-lgpl-v2
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
 PKG_DESTDIR_SUPPORT=	user-destdir
@@ -110,4 +109,5 @@ CONFIGURE_ARGS+=	--disable-threads
 BUILDLINK_API_DEPENDS.pcre+= pcre>=7.4nb1
 .include "../../devel/pcre/buildlink3.mk"
 
+.include "../../textproc/gtk-doc/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

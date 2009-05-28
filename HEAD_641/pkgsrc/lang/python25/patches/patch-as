@@ -1,14 +1,14 @@
 $NetBSD$
 
---- pyconfig.h.in.orig	2008-01-30 17:54:27.000000000 -0500
-+++ pyconfig.h.in
-@@ -934,6 +934,9 @@
- /* Define on NetBSD to activate all library features */
- #undef _NETBSD_SOURCE
+--- Modules/termios.c.orig	2006-01-19 01:09:39.000000000 -0500
++++ Modules/termios.c
+@@ -10,6 +10,9 @@
+ #define CTRL(c) ((c)&037)
+ #endif
  
-+/* Define on QNX to activate all library features */
-+#undef _QNX_SOURCE
-+
- /* Define _OSF_SOURCE to get the makedev macro. */
- #undef _OSF_SOURCE
- 
++#ifdef __QNXNTO__
++#include <sys/termio.h>
++#endif
+ #include <termios.h>
+ #ifdef __osf__
+ /* On OSF, sys/ioctl.h requires that struct termio already be defined,

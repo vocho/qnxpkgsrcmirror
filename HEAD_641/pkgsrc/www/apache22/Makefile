@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.39 2009/02/25 15:39:38 tron Exp $
+# $NetBSD: Makefile,v 1.44 2009/05/22 10:41:24 tron Exp $
 
 DISTNAME=	httpd-2.2.11
-PKGREVISION=	2
+PKGREVISION=	3
 PKGNAME=	${DISTNAME:S/httpd/apache/}
 CATEGORIES=	www
 MASTER_SITES=	${MASTER_SITE_APACHE:=httpd/} \
@@ -10,7 +10,8 @@ EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	tron@NetBSD.org
 HOMEPAGE=	http://httpd.apache.org/
-COMMENT=	Apache HTTP (Web) server, version 2
+COMMENT=	Apache HTTP (Web) server, version 2.2
+LICENSE=	apache-2.0
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
@@ -98,25 +99,16 @@ DFLT_APACHE_MODULES+=	cgid dav_lock proxy_ajp proxy_balancer
 
 PLIST_SRC+=		${PKGDIR}/PLIST
 
-# LDAP support
-.if !empty(PKG_BUILD_OPTIONS.apr-util:Mldap)
-DFLT_APACHE_MODULES+=	ldap authnz_ldap
-.endif
-
 .include "options.mk"
 
-# APACHE_MODULES are the modules that are linked statically into the
-# apache httpd executable.
-#
-#.if ${APACHE_MODULES} == "all-shared"
-.if !empty(PKG_OPTIONS:Mapache-shared-modules)
-# XXX ldap and suexec?
-CONFIGURE_ARGS+=	--enable-mods-shared=${DFLT_APACHE_MODULES:Q}
-PLIST_SRC+=		${PKGDIR}/PLIST.all-shared
-.else
-CONFIGURE_ARGS+=	--enable-modules=${APACHE_MODULES:Q}
+# LDAP support
+PLIST_VARS+=		ldap
+.if !empty(PKG_BUILD_OPTIONS.apr-util:Mldap)
+DFLT_APACHE_MODULES+=	ldap authnz_ldap
+.  if !empty(PKG_OPTIONS:Mapache-shared-modules)
+PLIST.ldap=		yes
+.  endif
 .endif
-BUILD_DEFS+=		APACHE_MODULES
 
 APACHE_USER?=		www
 APACHE_GROUP?=		www

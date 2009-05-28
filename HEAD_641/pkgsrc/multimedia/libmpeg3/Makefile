@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.14 2009/01/29 17:53:49 abs Exp $
+# $NetBSD: Makefile,v 1.16 2009/05/26 08:49:27 obache Exp $
 #
 
 DISTNAME=	libmpeg3-1.8-src

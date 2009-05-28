@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.18 2009/03/25 22:37:12 he Exp $
+# $NetBSD: Makefile,v 1.21 2009/05/04 11:19:13 hasso Exp $
 
-DISTNAME=	monodevelop-1.9.2
-PKGREVISION=	1
+DISTNAME=	monodevelop-2.0
 CATEGORIES=	devel
+PKGREVISION=	1
 MASTER_SITES=	http://go-mono.com/sources/monodevelop/
 EXTRACT_SUFX=	.tar.bz2
 
@@ -11,7 +11,7 @@ HOMEPAGE=	http://www.monodevelop.com/
 COMMENT=	IDE for C\# and other .NET languages
 
 GNU_CONFIGURE=	yes
-USE_TOOLS+=	gmake perl:run pkg-config bash:run
+USE_TOOLS+=	gmake perl:run pkg-config bash:run msgfmt
 EXTRACT_USING=	gtar
 MAKE_JOBS_SAFE=	no
 

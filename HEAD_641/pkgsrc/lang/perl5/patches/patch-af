@@ -1,12 +1,20 @@
 $NetBSD$
 
---- lib/Module/Build.pm.orig	2007-12-18 05:47:07.000000000 -0500
-+++ lib/Module/Build.pm
-@@ -49,6 +49,7 @@ my %OSTYPES = qw(
- 		 cygwin    Unix
- 		 os2       Unix
- 		 interix   Unix
-+		 nto       Unix
- 		 
- 		 dos       Windows
- 		 MSWin32   Windows
+--- lib/Cwd.pm.orig	2007-12-18 05:47:07.000000000 -0500
++++ lib/Cwd.pm
+@@ -248,6 +248,7 @@ my %METHOD_MAP =
+     abs_path		=> 'fast_abs_path',
+    },
+ 
++   # QNX4.  QNX6 has a $os of 'nto'.
+    qnx =>
+    {
+     cwd			=> '_qnx_cwd',
+@@ -286,7 +287,6 @@ my %METHOD_MAP =
+   );
+ 
+ $METHOD_MAP{NT} = $METHOD_MAP{MSWin32};
+-$METHOD_MAP{nto} = $METHOD_MAP{qnx};
+ 
+ 
+ # Find the pwd command in the expected locations.  We assume these

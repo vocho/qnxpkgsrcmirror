@@ -1,0 +1,12 @@
+$NetBSD$
+
+--- Build.sh.orig	2009-04-07 13:41:56.000000000 -0500
++++ Build.sh
+@@ -355,6 +355,7 @@ PW32*)
+ 	;;
+ QNX)
+ 	oldish_ed=no-stderr-ed		# oldish /bin/ed is broken
++	CPPFLAGS="$CPPFLAGS -D__NO_EXT_QNX"
+ 	: ${HAVE_SETLOCALE_CTYPE=0}
+ 	;;
+ SunOS)

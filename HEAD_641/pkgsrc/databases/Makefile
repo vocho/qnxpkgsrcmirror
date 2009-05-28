@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.295 2009/03/23 00:52:33 joerg Exp $
+# $NetBSD: Makefile,v 1.299 2009/05/24 12:43:45 obache Exp $
 #
 
 COMMENT=	Databases
@@ -31,6 +31,7 @@ SUBDIR+=	iodbc
 SUBDIR+=	ipa_sdb
 SUBDIR+=	java-db3
 SUBDIR+=	java-qdbm
+SUBDIR+=	java-tokyocabinet
 SUBDIR+=	jdb
 SUBDIR+=	jdbc-mysql31
 SUBDIR+=	jdbc-mysql5
@@ -82,9 +83,12 @@ SUBDIR+=	p5-CatalystX-CRUD-ModelAdapter-DBIC
 SUBDIR+=	p5-Class-DBI
 SUBDIR+=	p5-Class-DBI-AbstractSearch
 SUBDIR+=	p5-Class-DBI-Pg
+SUBDIR+=	p5-Class-DBI-Plugin
+SUBDIR+=	p5-Class-DBI-Plugin-DeepAbstractSearch
 SUBDIR+=	p5-DBD-CSV
 SUBDIR+=	p5-DBD-Google
 SUBDIR+=	p5-DBD-Mock
+SUBDIR+=	p5-DBD-ODBC
 SUBDIR+=	p5-DBD-Oracle
 SUBDIR+=	p5-DBD-PgPP
 SUBDIR+=	p5-DBD-SQLite
@@ -263,7 +267,6 @@ SUBDIR+=	sqlite
 SUBDIR+=	sqlite3
 SUBDIR+=	sqlite3-tcl
 SUBDIR+=	sqlitebrowser
-SUBDIR+=	sqlitemanager
 SUBDIR+=	sqlrelay
 SUBDIR+=	sqlsharpgtk
 SUBDIR+=	sqsh

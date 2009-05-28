@@ -1,19 +1,22 @@
-# $NetBSD: Makefile,v 1.4 2009/01/07 22:40:14 wiz Exp $
+# $NetBSD: Makefile,v 1.7 2009/05/01 23:38:38 schmonz Exp $
 #
 
-DISTNAME=		xapian-omega-1.0.10
+DISTNAME=		xapian-omega-1.0.12
 CATEGORIES=		textproc
-MASTER_SITES=		http://oligarchy.co.uk/xapian/1.0.10/
+MASTER_SITES=		http://oligarchy.co.uk/xapian/1.0.12/
 
 MAINTAINER=		schmonz@NetBSD.org
 HOMEPAGE=		http://xapian.org/docs/omega/overview.html
 COMMENT=		Search engine application for websites using Xapian
+LICENSE=		gnu-gpl-v2
 
 GNU_CONFIGURE=		yes
 CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR:Q}
 USE_LIBTOOL=		yes
 USE_LANGUAGES=		c c++
 USE_TOOLS+=		perl:run
+
+TEST_TARGET=		check
 
 REPLACE_PERL=		dbi2omega htdig2omega mbox2omega
 
@@ -40,4 +43,5 @@ INSTALL_MAKE_FLAGS+=	${MAKE_FLAGS} sysconfdir=${EGDIR:Q}
 BUILD_DEFS+=		VARBASE
 
 .include "../../textproc/xapian/buildlink3.mk"
+.include "../../devel/zlib/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

@@ -1,10 +1,11 @@
-# $NetBSD: license.mk,v 1.11 2009/03/25 13:50:44 rillig Exp $
-#
-# Note: This file is in draft state and not yet included in default
-# pkgsrc operations.
+# $NetBSD: license.mk,v 1.22 2009/05/26 12:19:12 he Exp $
 #
 # This file handles everything about the LICENSE variable. It is
 # included automatically by bsd.pkg.mk.
+#
+# XXX There should be one place to set the default list and for users
+# to set the ACCEPTABLE_LICENSES list, used by both source builds and
+# binary installs#
 #
 # XXX: Some of this content arguably belongs in the pkgsrc guide
 # instead.
@@ -12,12 +13,12 @@
 # === User-settable variables ===
 #
 # ACCEPTABLE_LICENSES
-#	If a package declares a license and that license is not a
-#	member of the list defined by this variable, pkgsrc will
-#	refuse to build the package.
 #
-#	XXX: pkg_install should also check LICENSE and decline to
-#	install if it is not in ACCEPTABLE_LICENSES.
+#	If a package declares a license and that license is not a
+#	member of the list defined by this variable, pkgsrc will not
+#	build the package and instead print an error message.
+#	(pkg_install has code to behave the same way, but it is not
+#	yet turned on.)
 #
 #	XXX: Perhaps there should be some mechanism to prevent running
 #	programs that are part of packages that declare LICENSEs that
@@ -32,6 +33,7 @@
 # === Package-settable variables ===
 #
 # LICENSE
+#
 #	The license of the package.
 #
 #	Sometimes licensing is other than a single text file.  See
@@ -39,12 +41,8 @@
 #	licensing (a choice) or where multiple licenses apply
 #	simultaneously.
 # 
-#	Every package should specify its license.  (Prior to July 2007,
+#	Every package should specify its license.  (Prior to early 2009,
 #	Open Source and Free software did not have license tags.)
-#
-# 	As of 2008-01, we are adding #LICENSE=; until this file is
-#	included from bsd.pkg.mk such tags will cause failure because
-#	DEFAULT_ACCEPTABLE_LICENSES is not yet implemented.
 #
 #	Licenses are collected in the licenses/ subdirectory of
 #	pkgsrc.  For open source license, we generally use the same
@@ -68,11 +66,21 @@
 #	ACCEPTABLE_LICENSES; the point is to have a default that very
 #	few people want to shrink.)
 #
+#	Licenses not formally approved as Free or Open Source may be
+#	added if they have terms that would obviously be approved if
+#	the effort were made.  Such license names will have a comment
+#	near them in the assignment to DEFAULT_ACCEPTABLE_LICENSES.
+#
+#	The pkg_install sources also have a
+#	DEFAULT_ACCEPTABLE_LICENSES list, and that should be updated
+#	to match the list here.  See
+#	pkgsrc/pkgtools/pkg_install/files/lib/license.c
+#
 # === See also ===
 #
 #	../doc/TODO, section "Licenses of packages"
 #
-# Keywords: licence
+# Keywords: licence license
 #
 
 # This list is not complete.  Free and Open Source licenses should be
@@ -83,26 +91,27 @@
 
 # XXX open-font-license should perhaps be changed to open-font
 
-# XXX Surely we will encounter licenses that clearly are Free, but
-# which have not been formally approved.  These licenses, if added,
-# should be somehow marked.
-
 DEFAULT_ACCEPTABLE_LICENSES= \
 	public-domain \
-	gnu-gpl-v2 gnu-lgpl-v2 \
+	gnu-fdl-v1.1 gnu-fdl-v1.2 gnu-fdl-v1.3 \
+	gnu-gpl-v2 gnu-lgpl-v2 gnu-lgpl-v2.1 \
 	gnu-gpl-v3 gnu-lgpl-v3 \
 	original-bsd modified-bsd \
-	x11 \
-	apache-2.0 \
+	x11 mit \
+	apache-1.1 apache-2.0 \
+	artistic artistic-2.0 \
 	cddl-1.0 \
+	cpl-1.0 \
 	open-font-license
 
+##### Variant spellings
+
+.if defined(ACCEPTABLE_LICENCES) && !defined(ACCEPTABLE_LICENSES)
+ACCEPTABLE_LICENSES=	${ACCEPTABLE_LICENCES}
+.endif
+
 .if !defined(LICENSE)
-# XXX Revisit date.
-.  if defined(AFTER_2007Q3)
-LICENSE?=		unknown
-PKG_FAIL_REASON+=	"[license.mk] Every package must define a LICENSE."
-.  else
+.  if defined(PKG_DEVELOPER)
 WARNINGS+=		"[license.mk] Every package should define a LICENSE."
 .  endif
 
@@ -116,9 +125,16 @@ _ACCEPTABLE=	yes
 .  endif
 
 .  if !defined(_ACCEPTABLE)
+.    if defined(MAKECONF)
+_MAKECONF?=	${MAKECONF}
+.    elif ${OPSYS} == "NetBSD" && ${MAKE} != "${PREFIX}/bin/bmake"
+_MAKECONF?=	/etc/mk.conf
+.    else
+_MAKECONF?=	${PREFIX}/etc/mk.conf
+.    endif
 PKG_FAIL_REASON+= "${PKGNAME} has an unacceptable license: ${LICENSE}." \
 	 "    To view the license, enter \"${MAKE} show-license\"." \
-	 "    To indicate acceptance, add this line to your mk.conf:" \
+	 "    To indicate acceptance, add this line to ${_MAKECONF}:" \
 	 "    ACCEPTABLE_LICENSES+=${LICENSE}"
 .  endif
 .endif

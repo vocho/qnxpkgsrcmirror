@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.39 2008/08/08 15:00:53 joerg Exp $
+# $NetBSD: Makefile,v 1.41 2009/04/12 07:19:22 minskim Exp $
 
 DISTNAME=	docbook-4.4
-PKGREVISION=	2
+PKGREVISION=	3
 CATEGORIES=	textproc
 MASTER_SITES=		http://www.oasis-open.org/docbook/sgml/4.4/
 SITES.docbook-4.3.zip=	http://www.oasis-open.org/docbook/sgml/4.3/
@@ -25,17 +25,16 @@ BUILD_DEPENDS+=	unzip-[0-9]*:../../archivers/unzip
 DEPENDS+=	iso8879>=1986:../../textproc/iso8879
 
 WRKSRC=		${WRKDIR}
-NO_MTREE=	yes
 USE_LANGUAGES=	# none
 USE_TOOLS+=	unzip
 EXTRACT_ONLY=	# nothing
 
 INSTDIR=	${DESTDIR}${PREFIX}/share/sgml/docbook
-ISOCAT=		${DESTDIR}${PREFIX}/share/sgml/iso8879/catalog
+ISOCAT=		${PREFIX}/share/sgml/iso8879/catalog
 
 SGML_CATALOGS=
 .for ver in 2.4.1 3.0 3.1 4.0 4.1 4.2 4.3 4.4
-SGML_CATALOGS+=	${INSTDIR}/${ver}/catalog
+SGML_CATALOGS+=	${PREFIX}/share/sgml/docbook/${ver}/catalog
 .endfor
 
 do-build:

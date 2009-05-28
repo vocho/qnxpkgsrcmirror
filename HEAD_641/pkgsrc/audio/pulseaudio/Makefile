@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.19 2009/02/21 13:22:43 wiz Exp $
+# $NetBSD: Makefile,v 1.22 2009/05/04 16:20:48 tron Exp $
 
 # NOTE: Please send a copy of any patches that are not pkgsrc-specific
 # to <pulseaudio-discuss@mail.0pointer.de>
 
 DISTNAME=	pulseaudio-0.9.14
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	audio
 MASTER_SITES=	http://0pointer.de/lennart/projects/pulseaudio/
 
@@ -59,7 +59,7 @@ SUBST_SED.padsp=	-e 's@libpulsedsp\.so@${PREFIX}/lib/&@'
 CONFIGURE_ENV+=		cc_cv_tls___thread=no
 .endif
 
-PLIST_VARS+=		hal oss
+PLIST_VARS+=		evdev hal oss
 
 .if ${OPSYS} == "Darwin"
 BUILDLINK_TRANSFORM+=	rm:-Wl,-version-script=./map-file
@@ -86,6 +86,11 @@ CONFIGURE_ARGS+=	--disable-netbsd-atomic-ops
 .include "../../devel/libatomic_ops/buildlink3.mk"
 .endif
 
+# Build module-mmkbd-evdev.so under Linux
+.if ${OPSYS} == "Linux" && exists(/usr/include/linux/input.h)
+PLIST.evdev=           yes
+.endif
+
 .include "options.mk"
 
 pre-configure:
@@ -101,6 +106,9 @@ pre-configure:
 .include "../../devel/liboil/buildlink3.mk"
 .include "../../security/policykit/buildlink3.mk"
 .include "../../sysutils/dbus/buildlink3.mk"
+.if ${OPSYS} != "Darwin"
+.include "../../sysutils/consolekit/buildlink3.mk"
+.endif
 .include "../../sysutils/hal/buildlink3.mk"
 .include "../../x11/libICE/buildlink3.mk"
 .include "../../x11/libSM/buildlink3.mk"

@@ -1,8 +1,8 @@
-# $NetBSD: Makefile.common,v 1.33 2009/02/18 19:13:04 adam Exp $
+# $NetBSD: Makefile.common,v 1.39 2009/05/21 11:44:42 adam Exp $
 
 # used by databases/sqlite3-tcl/Makefile
 
-DISTNAME=	sqlite-3.6.11
+DISTNAME=	sqlite-3.6.14.1
 PKGNAME=	${DISTNAME:S/-/3-/}
 CATEGORIES=	databases
 MASTER_SITES=	http://www.hwaci.com/sw/sqlite/ \
@@ -11,8 +11,7 @@ MASTER_SITES=	http://www.hwaci.com/sw/sqlite/ \
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.sqlite.org/
 COMMENT=	SQL Database Engine in a C Library
-
-#LICENSE=	public-domain
+LICENSE=	public-domain
 
 DISTINFO_FILE=	${.CURDIR}/../../databases/sqlite3/distinfo
 PATCHDIR=	${.CURDIR}/../../databases/sqlite3/patches
@@ -22,3 +21,10 @@ USE_TOOLS+=		gmake
 USE_LIBTOOL=		yes
 
 PKGCONFIG_OVERRIDE+=	sqlite3.pc.in
+
+# XXX remove in future releases, if fixed
+SUBST_CLASSES+=		fixver
+SUBST_STAGE.fixver=	post-patch
+SUBST_MESSAGE.fixver=	Fixing version in configure script.
+SUBST_FILES.fixver=	configure
+SUBST_SED.fixver=	-e 's,3.6.13,${PKGVERSION_NOREV},g'

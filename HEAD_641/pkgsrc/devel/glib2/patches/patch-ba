@@ -1,6 +1,8 @@
-$NetBSD: patch-ba,v 1.6 2009/03/15 13:32:31 jmcneill Exp $
+$NetBSD: patch-ba,v 1.7 2009/05/20 13:07:36 wiz Exp $
 
---- gio/gunixmounts.c.orig	2009-03-13 00:09:53.000000000 -0400
+http://bugzilla.gnome.org/show_bug.cgi?id=583330
+
+--- gio/gunixmounts.c.orig	2009-03-31 18:04:20.000000000 -0500
 +++ gio/gunixmounts.c
 @@ -136,6 +136,9 @@ struct _GUnixMountMonitor {
  

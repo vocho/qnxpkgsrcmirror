@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.1.1.1 2008/12/14 11:04:35 obache Exp $
+# $NetBSD: Makefile,v 1.3 2009/05/19 08:59:16 wiz Exp $
 #
 
 DISTNAME=	clutter-cairo-0.8.2
@@ -8,6 +8,7 @@ MASTER_SITES=	http://www.clutter-project.org/sources/clutter-cairo/0.8/
 MAINTAINER=	obache@NetBSD.org
 HOMEPAGE=	http://www.clutter-project.org/
 COMMENT=	Clutter Cairo integrarion library
+LICENSE=	gnu-lgpl-v2.1
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 

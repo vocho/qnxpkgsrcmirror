@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.92 2009/03/05 03:20:03 smb Exp $
+# $NetBSD: Makefile,v 1.95 2009/05/19 09:20:15 wiz Exp $
 #
 
 COMMENT=	Clocks, calendars, daily planners and other time related applications
@@ -15,6 +15,7 @@ SUBDIR+=	catclock
 SUBDIR+=	dclock
 SUBDIR+=	devtodo
 SUBDIR+=	emiclock
+SUBDIR+=	etm
 SUBDIR+=	evolution-webcal
 SUBDIR+=	gcal
 SUBDIR+=	gchore
@@ -69,6 +70,7 @@ SUBDIR+=	p5-DateTimeX-Easy
 SUBDIR+=	p5-MooseX-Types-DateTime
 SUBDIR+=	p5-Rose-DateTime
 SUBDIR+=	p5-Schedule-Cron-Events
+SUBDIR+=	p5-Test-MockTime
 SUBDIR+=	p5-Time
 SUBDIR+=	p5-Time-Clock
 SUBDIR+=	p5-Time-Duration
@@ -94,6 +96,7 @@ SUBDIR+=	polclock
 SUBDIR+=	projclock
 SUBDIR+=	ptimetracker
 SUBDIR+=	py-dateutil
+SUBDIR+=	py-icalendar
 SUBDIR+=	py-mxDateTime
 SUBDIR+=	py-pytz
 SUBDIR+=	rclock

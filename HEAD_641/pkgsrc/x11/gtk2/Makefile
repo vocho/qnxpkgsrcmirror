@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.171 2009/03/25 09:32:48 markd Exp $
+# $NetBSD: Makefile,v 1.173 2009/05/02 16:21:46 reed Exp $
 
-DISTNAME=		gtk+-2.16.0
-PKGREVISION=		3
+DISTNAME=		gtk+-2.16.1
 PKGNAME=		${DISTNAME:S/gtk/gtk2/}
 CATEGORIES=		x11
 MASTER_SITES=		ftp://ftp.gtk.org/pub/gtk/2.16/ \
@@ -16,6 +15,8 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 
 CONFLICTS=		gtk2-engines<2.6.0
 CONFLICTS+=		gail-[0-9]*
+
+SUPERSEDES=		gail-[0-9]*
 
 USE_DIRS+=		xdg-1.1
 USE_PKGLOCALEDIR=	yes
