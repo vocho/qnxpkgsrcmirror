@@ -51,13 +51,20 @@ PLIST.gtar=		yes
 .endif
 
 # don't include rmt if gtar won't build it
-.if ${OPSYS} != "Interix"
+.if ${OPSYS} != "Interix" && ${OPSYS} != "QNX"
 PLIST.rmt=		yes
 .endif
 
 # XXX see similar hack in coreutils.
 .if ${OPSYS} != "Linux"
 CONFIGURE_ENV+=		gt_cv_func_gnugettext3_libintl=yes
+.endif
+
+.if ${OPSYS} == "QNX"
+# Gack.  Maybe QNX8 will have a signed time_t
+post-patch:
+	${CP} ${FILESDIR}/qnx-inc.h ${WRKSRC}
+CFLAGS.QNX+=	-include qnx-inc.h
 .endif
 
 post-install:
