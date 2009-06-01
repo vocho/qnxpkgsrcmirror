@@ -89,6 +89,10 @@ BUILDLINK_API_DEPENDS.xf86driproto+=	xf86driproto>=2.0.4
 post-extract: dri-post-extract
 	${CP} ${FILESDIR}/modeline2c.awk ${WRKSRC}/hw/xfree86/common
 	${RM} -f ${WRKSRC}/Mesa-${MESA_VERSION}/docs/README.MINGW32.orig
+	$(CP) -r $(FILESDIR)/nto ${WRKSRC}/hw/xfree86/os-support/
+
+pre-configure:
+	cd ${WRKSRC} && /usr/pkg/bin/autoreconf
 
 .include "options.mk"
 
@@ -133,5 +137,8 @@ post-extract: dri-post-extract
 .include "../../x11/xineramaproto/buildlink3.mk"
 .include "../../x11/xproto/buildlink3.mk"
 .include "../../x11/xtrans/buildlink3.mk"
+.if ${OPSYS} == "QNX"
+.include "../../qnx6/s5ipc/buildlink3.mk"
+.endif
 
 .include "../../mk/bsd.pkg.mk"

@@ -3,7 +3,7 @@ $NetBSD: patch-ah,v 1.2 2008/09/18 20:56:01 bjs Exp $
 This patch provides a black background by default--a little
 nicer, no?
 
---- dix/window.c.orig	2008-06-10 13:57:18.000000000 -0400
+--- dix/window.c.orig	2008-06-10 17:57:18.000000000 +0000
 +++ dix/window.c
 @@ -138,8 +138,12 @@ Equipment Corporation.
   *
