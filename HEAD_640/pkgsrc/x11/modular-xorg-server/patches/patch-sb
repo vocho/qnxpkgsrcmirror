@@ -2,9 +2,9 @@ $NetBSD: patch-sb,v 1.1 2007/08/16 20:10:16 joerg Exp $
 
 Temporary disable Sbus suport.
 
---- hw/xfree86/common/xf86Configure.c.orig	2007-08-16 20:03:27.000000000 +0200
+--- hw/xfree86/common/xf86Configure.c.orig	2008-06-10 17:57:19.000000000 +0000
 +++ hw/xfree86/common/xf86Configure.c
-@@ -213,7 +213,7 @@ xf86AddBusDeviceToConfigure(const char *
+@@ -210,7 +210,7 @@ xf86AddBusDeviceToConfigure(const char *
  	NewDevice.GDev.identifier = "ISA Adapter";
  	NewDevice.GDev.busID = "ISA";
  	break;

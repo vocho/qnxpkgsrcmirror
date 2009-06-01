@@ -1,0 +1,42 @@
+$NetBSD$
+
+--- configure.ac.orig	2008-06-11 14:26:34.000000000 +0000
++++ configure.ac
+@@ -302,6 +302,8 @@ case $host_cpu in
+ 		*netbsd*)	AC_DEFINE(USE_I386_IOPL)
+ 				SYS_LIBS=-li386
+ 				;;
++		*nto-qnx*)	SYS_LIBS=-ls5ipc
++				;;
+ 		*openbsd*)	AC_DEFINE(USE_I386_IOPL) 
+ 				SYS_LIBS=-li386
+ 				;;
+@@ -1045,6 +1047,9 @@ case $host_os in
+        openbsd*)
+        LD_EXPORT_SYMBOLS_FLAG="-Wl,--export-dynamic"
+        ;;
++       nto-qnx*)
++       LD_EXPORT_SYMBOLS_FLAG="-Wl,-E"
++       ;;
+ esac
+ AC_SUBST([LD_EXPORT_SYMBOLS_FLAG])
+ 
+@@ -1394,6 +1399,10 @@ return 0;}
+ 			;;
+ 		esac
+ 		;;
++	  nto-qnx*)
++		XORG_OS="qnx"
++		XORG_OS_SUBDIR="nto"
++		;;
+ 	  openbsd*)
+ 	  	XORG_OS="openbsd"
+ 		XORG_OS_SUBDIR="bsd"
+@@ -2049,6 +2058,7 @@ hw/xfree86/os-support/bsd/Makefile
+ hw/xfree86/os-support/bus/Makefile
+ hw/xfree86/os-support/hurd/Makefile
+ hw/xfree86/os-support/misc/Makefile
++hw/xfree86/os-support/nto/Makefile
+ hw/xfree86/os-support/linux/Makefile
+ hw/xfree86/os-support/lynxos/Makefile
+ hw/xfree86/os-support/sco/Makefile
