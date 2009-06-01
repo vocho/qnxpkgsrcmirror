@@ -20,6 +20,9 @@ USE_TOOLS+=	gmake pkg-config
 ###
 CFLAGS+=	-DTERMINATE_FALLBACK=0
 
+pre-configure:
+		cd ${WRKSRC}; /usr/pkg/bin/automake; /usr/pkg/bin/autoreconf
+
 .include "../../x11/inputproto/buildlink3.mk"
 .include "../../x11/randrproto/buildlink3.mk"
 .include "../../x11/modular-xorg-server/buildlink3.mk"
