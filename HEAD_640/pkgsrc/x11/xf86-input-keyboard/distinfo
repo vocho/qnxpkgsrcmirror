@@ -3,5 +3,9 @@ $NetBSD: distinfo,v 1.4 2008/05/30 10:52:05 wiz Exp $
 SHA1 (xf86-input-keyboard-1.3.1.tar.bz2) = 4e5cd4d32b456cb87b14dca4d78845911a3e1148
 RMD160 (xf86-input-keyboard-1.3.1.tar.bz2) = cccf96251364d79b434212f9ff1fcfd53359fe65
 Size (xf86-input-keyboard-1.3.1.tar.bz2) = 265170 bytes
-SHA1 (patch-aa) = 78756a648ba8d2550eda9795e81fd45d8ab0835f
-SHA1 (patch-ab) = 3e6d25832b10d86588dd458d81356001bb93f860
+SHA1 (patch-aa) = 4b4a23fc0a3e5c489c280b56c4cb2d73b1c2d309
+SHA1 (patch-ab) = fb981aa1dfaaa4c053350a98bdbabdd60c786b60
+SHA1 (patch-ac) = c253741c3f1e58d145a2017c96097d51d19c3919
+SHA1 (patch-ad) = 2fba9ca7966dfbda8266f569d41261fae744aeb6
+SHA1 (patch-ae) = a9f8d7e49bdb12fb922da695e77323c3cc3280f4
+SHA1 (patch-af) = a41d50fda1748af1fa1b18e3011b8ea2ae2147a7
