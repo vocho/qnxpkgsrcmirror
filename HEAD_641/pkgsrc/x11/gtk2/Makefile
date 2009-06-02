@@ -46,7 +46,7 @@ BUILD_DIRS=		. demos/gtk-demo
 .include "../../mk/bsd.prefs.mk"
 
 .if ${OPSYS} == "QNX"
-# We need GNU grep for -o option
+# We need GNU grep for -o option.  PR 68717.
 GREP=grep
 TOOLS_PLATFORM.grep=    # empty
 
