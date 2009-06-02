@@ -42,7 +42,7 @@ PYCOMPILEALL=	${BUILDLINK_PREFIX.${PYPACKAGE}}/${PYLIB}/compileall.py
 .include "../../mk/bsd.prefs.mk"
 
 .if ${OPSYS} == "QNX"
-# We need GNU grep for \< \> handling
+# We need GNU grep for \< \> handling.  PR 68717.
 GREP=grep
 TOOLS_PLATFORM.grep=    # empty
 .endif
