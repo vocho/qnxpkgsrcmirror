@@ -2,10 +2,16 @@ $NetBSD$
 
 --- Build.sh.orig	2009-04-07 13:41:56.000000000 -0500
 +++ Build.sh
-@@ -355,6 +355,7 @@ PW32*)
+@@ -354,7 +354,12 @@ PW32*)
+ 	: ${HAVE_SETLOCALE_CTYPE=0}
  	;;
  QNX)
- 	oldish_ed=no-stderr-ed		# oldish /bin/ed is broken
+-	oldish_ed=no-stderr-ed		# oldish /bin/ed is broken
++	case "`uname -r`" in
++	6.[0123].*|6.4.[01])
++		oldish_ed=no-stderr-ed		# oldish /bin/ed is broken
++		;;
++	esac
 +	CPPFLAGS="$CPPFLAGS -D__NO_EXT_QNX"
  	: ${HAVE_SETLOCALE_CTYPE=0}
  	;;
