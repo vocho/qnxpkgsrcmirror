@@ -40,16 +40,6 @@
 
 #include <sys/dcmd_input.h>
 
-/* These are for FreeBSD and DragonFly */
-#define DEFAULT_MOUSE_DEVI		"/dev/devi/mouse0"
-#define DEFAULT_MOUSE_HID		"/dev/io-hid/io-hid"
-
-static const char *mouseDevs[] = {
-	DEFAULT_MOUSE_DEVI,
-	DEFAULT_MOUSE_HID,
-	NULL
-};
-
 static int
 SupportedInterfaces(void)
 {
@@ -58,7 +48,6 @@ SupportedInterfaces(void)
 
 /* Names of protocols that are handled internally here. */
 static const char *internalNames[] = {
-	"devi",
 	"hid",
 	NULL
 };
@@ -83,7 +72,7 @@ CheckProtocol(const char *protocol)
 static const char *
 DefaultProtocol(void)
 {
-	return "devi";
+	return "hid";
 }
 
 static const char *
@@ -91,11 +80,11 @@ SetupAuto(InputInfoPtr pInfo, int *protoPara)
 {
     xf86MsgVerb(X_INFO, 3, "%s: SetupAuto: protocol is %s\n",
 		pInfo->name, "wsmouse");
-    return "devi";
+    return "hid";
 }
 
 static void
-deviReadInput(InputInfoPtr pInfo)
+hidReadInput(InputInfoPtr pInfo)
 {
     MouseDevPtr pMse;
     struct _mouse_packet mpkt;
@@ -125,14 +114,17 @@ deviReadInput(InputInfoPtr pInfo)
 	  buttons |= 1;
 	else
 	  buttons &= ~1;
+
+	/* dy is in opposed direction */
+	mpkt.dy = -mpkt.dy;
 	
 	pMse->PostEvent(pInfo, buttons, mpkt.dx, mpkt.dy, mpkt.dz, 0);
     return;
 }
 
-/* This function is called when the protocol is "devi". */
+/* This function is called when the protocol is "hid". */
 static Bool
-deviPreInit(InputInfoPtr pInfo, const char *protocol, int flags)
+hidPreInit(InputInfoPtr pInfo, const char *protocol, int flags)
 {
     MouseDevPtr pMse = pInfo->private;
     char *devname;
@@ -159,93 +151,20 @@ deviPreInit(InputInfoPtr pInfo, const char *protocol, int flags)
     pMse->CommonOptions(pInfo);
 
     /* Setup the local procs. */
-    pInfo->read_input = deviReadInput;
+    pInfo->read_input = hidReadInput;
     pInfo->flags |= XI86_CONFIGURED;
 	
     return TRUE;
-}
-
-/* This function is called when the protocol is "hid". */
-static Bool
-hidPreInit(InputInfoPtr pInfo, const char *protocol, int flags)
-{
-#if 0
-    MouseDevPtr pMse = pInfo->private;
-	client_ctrl_t   *pClientCtrl;
-	client_report_t *pClientReport;
-	hidd_device_ident_t interest = { 
-		  HIDD_CONNECT_WILDCARD,
-		  HIDD_CONNECT_WILDCARD,
-		  HIDD_CONNECT_WILDCARD, 
-	};
-	hidd_funcs_t funcs = {
-		  _HIDDI_NFUNCS, 
-		  hid_insertion, 
-		  hid_removal,
-		  hid_report,
-		  hid_async_report,
-		  NULL
-	};
-	hidd_connect_parm_t parm = {
-		  NULL, 
-		  HID_VERSION, 
-		  HIDD_VERSION, 0, 0, 0, 0,
-	};
-
-    pClientCtrl = xalloc(sizeof(client_ctrl_t));
-    if (pClientCtrl == NULL) {
-		xf86Msg(X_ERROR, "%s: cannot allocate ClientCtrl\n", pInfo->name);
-		return FALSE;
-    }
-
-    pMse->protocol = protocol;
-    xf86Msg(X_CONFIG, "%s: Protocol: %s\n", pInfo->name, protocol);
-
-    /* Collect the options, and process the common options. */
-    xf86CollectInputOptions(pInfo, NULL, NULL);
-    xf86ProcessCommonOptions(pInfo, pInfo->options);
-
-    /* Connect */
-	if (pInfo->options[OPT_DEVICE])
-	  param.path = pInfo->options[OPT_DEVICE];
-	param.funcs = &funcs;
-	param.device_ident = &interest;
-	
-	if (hidd_connect(&param, &pClientCtrl->connection) != EOK) {
-		xf86Msg(X_ERROR, "%s: cannot connect\n", pInfo->name);
-		xfree(pClientCtrl);
-		xfree(pMse);
-	}
-
-    /* Private structure */
-    pMse->mousePriv = pUsbMse;
-
-    /* Process common mouse options (like Emulate3Buttons, etc). */
-    pMse->CommonOptions(pInfo);
-
-# if 0
-    /* Setup the local procs. */
-    pInfo->device_control = usbMouseProc;
-    pInfo->read_input = usbReadInput;
-#endif
-	
-    pInfo->flags |= XI86_CONFIGURED;
-    return TRUE;
-#endif
-	return FALSE;
 }
 
 static Bool
 ntoMousePreInit(InputInfoPtr pInfo, const char *protocol, int flags)
 {
     /* The protocol is guaranteed to be one of the internalNames[] */
-    if (xf86NameCmp(protocol, "devi") == 0) {
-	return deviPreInit(pInfo, protocol, flags);
-    }
     if (xf86NameCmp(protocol, "hid") == 0) {
-	return hidPreInit(pInfo, protocol, flags);
+		return hidPreInit(pInfo, protocol, flags);
     }
-    return TRUE;
+    return FALSE;
 }    
 
 _X_EXPORT OSMouseInfoPtr
