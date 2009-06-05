@@ -21,7 +21,6 @@ USE_LIBTOOL=		yes
 USE_TOOLS+=		tbl
 GNU_CONFIGURE=		yes
 CONFIGURE_ARGS+=	--with-libtool
-CONFIGURE_ARGS+=	--enable-bsdpad
 CONFIGURE_ARGS+=	--enable-overwrite
 CONFIGURE_ARGS+=	--with-cxx-binding
 CONFIGURE_ARGS+=	--without-ada
@@ -34,6 +33,11 @@ CONFIGURE_ARGS+=	--with-terminfo-dirs=${PREFIX}/${TERMINFODIR}
 MAKE_JOBS_SAFE=		no
 
 .include "../../mk/bsd.prefs.mk"
+
+.if ${OPSYS} != "QNX"
+CONFIGURE_ARGS+=	--enable-bsdpad
+.endif
+
 .if !defined(TOOLS_TBL)
 # This means that groff needs to be built to get tbl(1).
 # We can only build groff if there is a builtin implementation of curses,
