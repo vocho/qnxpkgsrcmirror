@@ -1,4 +1,4 @@
-$NetBSD: patch-ap,v 1.3 2009/05/17 16:03:08 plunky Exp $
+$NetBSD: patch-ap,v 1.4 2009/06/11 08:13:05 wiz Exp $
 
 --- src/osdep/unix/unix.c.orig	2008-06-04 13:39:54.000000000 -0500
 +++ src/osdep/unix/unix.c
