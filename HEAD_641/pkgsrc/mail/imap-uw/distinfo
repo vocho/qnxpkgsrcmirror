@@ -1,4 +1,4 @@
-$NetBSD: distinfo,v 1.36 2009/05/17 16:03:08 plunky Exp $
+$NetBSD: distinfo,v 1.37 2009/06/11 08:13:05 wiz Exp $
 
 SHA1 (imap-2007e.tar.Z) = 24c63cad8d0e74aa76e4341fcfa54d24f23a8c70
 RMD160 (imap-2007e.tar.Z) = 7d6af203419975f763d7ec17b6a4544c94490b50
