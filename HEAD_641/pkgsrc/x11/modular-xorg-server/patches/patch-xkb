@@ -24,9 +24,9 @@ X.Org Bug 14373 <http://bugs.freedesktop.org/show_bug.cgi?id=14373>
 
 diff --git a/xkb/xkbUtils.c b/xkb/xkbUtils.c
 index 486446a..7e9f8d0 100644
---- xkb/xkbUtils.c
+--- xkb/xkbUtils.c.orig	2008-06-10 13:57:20.000000000 -0400
 +++ xkb/xkbUtils.c
-@@ -504,6 +504,40 @@ CARD8			keysPerMod[XkbNumModifiers];
+@@ -473,6 +473,40 @@ CARD8			keysPerMod[XkbNumModifiers];
  		if (groupWidth>2)
  		    nOut= groupWidth;
  	    }
@@ -67,7 +67,7 @@ index 486446a..7e9f8d0 100644
  	    pXKB+= XkbKeyGroupsWidth(xkb,key);
  	    nOut+= 2;
  	    if (nGroups>1) {
-@@ -525,11 +559,6 @@ CARD8			keysPerMod[XkbNumModifiers];
+@@ -494,11 +528,6 @@ CARD8			keysPerMod[XkbNumModifiers];
  		}
  		pXKB+= XkbKeyGroupsWidth(xkb,key);
  	    }
@@ -79,6 +79,3 @@ index 486446a..7e9f8d0 100644
  	}
  	if (keyc->modifierMap[key]!=0) {
  	    register unsigned bit,i,mask;
--- 
-1.5.4.3
-

@@ -2,7 +2,7 @@ $NetBSD: patch-sd,v 1.1 2007/08/16 20:10:17 joerg Exp $
 
 Temporary disable Sbus suport.
 
---- hw/xfree86/common/xf86Bus.c.orig	2007-08-16 20:10:40.000000000 +0200
+--- hw/xfree86/common/xf86Bus.c.orig	2008-06-10 13:57:19.000000000 -0400
 +++ hw/xfree86/common/xf86Bus.c
 @@ -113,7 +113,7 @@ void
  xf86BusProbe(void)
@@ -13,7 +13,7 @@ Temporary disable Sbus suport.
      xf86SbusProbe();
  #endif
  }
-@@ -2373,7 +2373,7 @@ xf86PostProbe(void)
+@@ -2382,7 +2382,7 @@ xf86PostProbe(void)
  
      if (fbSlotClaimed) {
          if (pciSlotClaimed || isaSlotClaimed 

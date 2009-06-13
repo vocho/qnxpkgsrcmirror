@@ -1,0 +1,22 @@
+$NetBSD$
+
+--- os/io.c.orig	2008-06-10 13:57:20.000000000 -0400
++++ os/io.c
+@@ -99,6 +99,9 @@ static void SkipRequests(xReqPtr req, Cl
+  * systems are broken and return EWOULDBLOCK when they should return EAGAIN
+  */
+ #ifndef WIN32
++#if defined(__QNXNTO__)
++#define ETEST(err) (err == EAGAIN || err == EWOULDBLOCK || err == EINTR)
++#else
+ #if defined(EAGAIN) && defined(EWOULDBLOCK)
+ #define ETEST(err) (err == EAGAIN || err == EWOULDBLOCK)
+ #else
+@@ -108,6 +111,7 @@ static void SkipRequests(xReqPtr req, Cl
+ #define ETEST(err) (err == EWOULDBLOCK)
+ #endif
+ #endif
++#endif
+ #else /* WIN32 The socket errorcodes differ from the normal errors*/
+ #define ETEST(err) (err == EAGAIN || err == WSAEWOULDBLOCK)
+ #endif
