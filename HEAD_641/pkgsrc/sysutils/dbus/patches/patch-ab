@@ -1,7 +1,7 @@
 $NetBSD: patch-ab,v 1.17 2009/01/09 21:47:32 he Exp $
 
---- dbus/dbus-sysdeps-unix.c.orig	2008-12-18 22:35:53 +0200
-+++ dbus/dbus-sysdeps-unix.c	2009-01-09 13:49:43 +0200
+--- dbus/dbus-sysdeps-unix.c.orig	2008-12-18 15:35:53.000000000 -0500
++++ dbus/dbus-sysdeps-unix.c
 @@ -23,6 +23,7 @@
   */
  
