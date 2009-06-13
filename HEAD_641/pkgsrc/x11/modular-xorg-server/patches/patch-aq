@@ -1,0 +1,16 @@
+$NetBSD$
+
+--- os/utils.c.orig	2008-06-10 13:57:20.000000000 -0400
++++ os/utils.c
+@@ -325,7 +325,11 @@ OsSignal(sig, handler)
+ 
+ static Bool StillLocking = FALSE;
+ static char LockFile[PATH_MAX];
++#ifdef __QNXNTO__
++static Bool nolock = TRUE;
++#else
+ static Bool nolock = FALSE;
++#endif
+ 
+ /*
+  * LockServer --

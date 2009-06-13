@@ -9,7 +9,7 @@ date: 2009/02/19 20:02:02;  author: macallan;  state: Exp;  lines: +13 -0
 Actually use scanline image writes to upload images if available
 ----------------------------
 
---- hw/xfree86/xaa/xaaInitAccel.c.orig	2009-03-14 11:23:10.000000000 +0200
+--- hw/xfree86/xaa/xaaInitAccel.c.orig	2009-06-02 12:03:12.000000000 -0400
 +++ hw/xfree86/xaa/xaaInitAccel.c
 @@ -821,6 +821,19 @@ XAAInitAccel(ScreenPtr pScreen, XAAInfoR
  	infoRec->FillImageWriteRectsFlags = infoRec->ImageWriteFlags;     

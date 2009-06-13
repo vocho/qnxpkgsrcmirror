@@ -21,7 +21,7 @@ SPECIAL_PERMS+=		bin/Xorg ${SETUID_ROOT_PERMS}
 
 GNU_CONFIGURE=	yes
 USE_LIBTOOL=	yes
-USE_TOOLS+=	gmake pkg-config
+USE_TOOLS+=	gmake pkg-config autoconf
 
 PKGCONFIG_OVERRIDE+=	xorg-server.pc.in
 SHLIBTOOL_OVERRIDE=	# empty
@@ -89,6 +89,10 @@ BUILDLINK_API_DEPENDS.xf86driproto+=	xf86driproto>=2.0.4
 post-extract: dri-post-extract
 	${CP} ${FILESDIR}/modeline2c.awk ${WRKSRC}/hw/xfree86/common
 	${RM} -f ${WRKSRC}/Mesa-${MESA_VERSION}/docs/README.MINGW32.orig
+	${CP} -r ${FILESDIR}/nto ${WRKSRC}/hw/xfree86/os-support/
+
+pre-configure:
+	cd $(WRKSRC) && /usr/pkg/bin/autoreconf
 
 .include "options.mk"
 

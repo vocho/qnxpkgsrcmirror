@@ -23,7 +23,7 @@ Set the mouse event protocol version. (untested, but head will be broken
 unless I add this).
 ----------------------------
 
---- hw/xfree86/os-support/bsd/bsd_mouse.c.orig	2009-03-12 19:22:51.000000000 +0200
+--- hw/xfree86/os-support/bsd/bsd_mouse.c.orig	2008-06-10 13:57:19.000000000 -0400
 +++ hw/xfree86/os-support/bsd/bsd_mouse.c
 @@ -55,12 +55,15 @@
  
@@ -41,7 +41,7 @@ unless I add this).
  #define HID_USAGE2(p,u) (((p) << 16) | u)
  
  /* The UMS mices have middle button as number 3 */
-@@ -340,6 +343,25 @@
+@@ -340,6 +343,25 @@ FindDevice(InputInfoPtr pInfo, const cha
  }
  #endif
  
@@ -67,7 +67,7 @@ unless I add this).
  #if defined(__OpenBSD__) && defined(WSCONS_SUPPORT)
  
  /* Only support wsmouse configuration for now */
-@@ -430,6 +452,11 @@
+@@ -430,6 +452,11 @@ wsconsReadInput(InputInfoPtr pInfo)
  	    dz = event->value;
  	    break;
  #endif
@@ -79,7 +79,7 @@ unless I add this).
  	default:
  	    xf86Msg(X_WARNING, "%s: bad wsmouse event type=%d\n", pInfo->name,
  		    event->type);
-@@ -491,6 +518,7 @@
+@@ -491,6 +518,7 @@ typedef struct _UsbMseRec {
      hid_item_t loc_x;		/* x locator item */
      hid_item_t loc_y;		/* y locator item */
      hid_item_t loc_z;		/* z (wheel) locator item */
@@ -87,7 +87,7 @@ unless I add this).
      hid_item_t loc_btn[MSE_MAXBUTTONS]; /* buttons locator items */
     unsigned char *buffer;
  } UsbMseRec, *UsbMsePtr;
-@@ -610,6 +638,7 @@
+@@ -610,6 +638,7 @@ usbReadInput(InputInfoPtr pInfo)
      dx = hid_get_data(pBuf, &pUsbMse->loc_x);
      dy = hid_get_data(pBuf, &pUsbMse->loc_y);
      dz = hid_get_data(pBuf, &pUsbMse->loc_z);
@@ -95,7 +95,7 @@ unless I add this).
  
      buttons = 0;
      for (n = 0; n < pMse->buttons; n++) {
-@@ -701,6 +730,9 @@
+@@ -701,6 +730,9 @@ usbPreInit(InputInfoPtr pInfo, const cha
      if (hid_locate(reportDesc, HID_USAGE2(HUP_GENERIC_DESKTOP, HUG_WHEEL),
  		   hid_input, &pUsbMse->loc_z, pUsbMse->iid) < 0) {
      }
@@ -105,7 +105,7 @@ unless I add this).
  #else
      if (hid_locate(reportDesc, HID_USAGE2(HUP_GENERIC_DESKTOP, HUG_X),
  		   hid_input, &pUsbMse->loc_x) < 0) {
-@@ -713,6 +745,9 @@
+@@ -713,6 +745,9 @@ usbPreInit(InputInfoPtr pInfo, const cha
      if (hid_locate(reportDesc, HID_USAGE2(HUP_GENERIC_DESKTOP, HUG_WHEEL),
  		   hid_input, &pUsbMse->loc_z) < 0) {
      }
@@ -115,7 +115,7 @@ unless I add this).
  #endif
      /* Probe for number of buttons */
      for (i = 1; i <= MSE_MAXBUTTONS; i++) {
-@@ -783,6 +818,9 @@
+@@ -783,6 +818,9 @@ xf86OSMouseInit(int flags)
      p->SetupAuto = SetupAuto;
      p->SetMiscRes = SetMouseRes;
  #endif

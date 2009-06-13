@@ -2,9 +2,9 @@ $NetBSD: patch-sc,v 1.1 2007/08/16 20:10:16 joerg Exp $
 
 Temporary disable Sbus suport.
 
---- hw/xfree86/loader/xf86sym.c.orig	2007-08-16 20:07:02.000000000 +0200
+--- hw/xfree86/loader/xf86sym.c.orig	2009-06-02 12:03:12.000000000 -0400
 +++ hw/xfree86/loader/xf86sym.c
-@@ -510,7 +510,7 @@ _X_HIDDEN void *xfree86LookupTab[] = {
+@@ -499,7 +499,7 @@ _X_HIDDEN void *xfree86LookupTab[] = {
      SYMFUNC(xf86AddModuleInfo)
      SYMFUNC(xf86DeleteModuleInfo)
  
