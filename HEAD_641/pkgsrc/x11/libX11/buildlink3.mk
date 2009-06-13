@@ -22,6 +22,9 @@ X11_LDFLAGS+=	-L${BUILDLINK_PREFIX.libX11}/lib
 .include "../../x11/libXau/buildlink3.mk"
 .include "../../x11/libXdmcp/buildlink3.mk"
 .include "../../x11/xproto/buildlink3.mk"
+.if ${OPSYS} == "QNX"
+.include "../../qnx6/s5ipc/buildlink3.mk"
+.endif
 .endif # LIBX11_BUILDLINK3_MK
 
 BUILDLINK_TREE+=	-libX11
