@@ -1,8 +1,18 @@
 $NetBSD: patch-aa,v 1.3 2007/08/15 14:56:24 joerg Exp $
 
---- configure.orig	2007-08-15 16:53:26.000000000 +0200
+--- configure.orig	2009-01-09 21:40:51.000000000 -0500
 +++ configure
-@@ -21361,16 +21361,8 @@ echo $ECHO_N "checking for $XORG_SGML_PA
+@@ -20651,6 +20651,9 @@ case $host_os in
+   freebsd*|kfreebsd*-gnu|dragonfly*|netbsd*|openbsd*)
+     OS_MOUSE_NAME=bsd
+     ;;
++  nto-qnx*)
++    OS_MOUSE_NAME=nto
++    ;;
+   solaris*)
+     OS_MOUSE_NAME=sun
+     ;;
+@@ -20835,16 +20838,8 @@ echo $ECHO_N "checking for $XORG_SGML_PA
  if { as_var=$as_ac_File; eval "test \"\${$as_var+set}\" = set"; }; then
    echo $ECHO_N "(cached) $ECHO_C" >&6
  else
@@ -19,3 +29,14 @@ $NetBSD: patch-aa,v 1.3 2007/08/15 14:56:24 joerg Exp $
  ac_res=`eval echo '${'$as_ac_File'}'`
  	       { echo "$as_me:$LINENO: result: $ac_res" >&5
  echo "${ECHO_T}$ac_res" >&6; }
+@@ -21531,6 +21526,10 @@ do
+   case $ac_option in
+   # Handling of the options.
+   -recheck | --recheck | --rechec | --reche | --rech | --rec | --re | --r)
++	: Avoid regenerating within pkgsrc
++	exit 0
++	: Avoid regenerating within pkgsrc
++	exit 0
+     ac_cs_recheck=: ;;
+   --version | --versio | --versi | --vers | --ver | --ve | --v | -V )
+     echo "$ac_cs_version"; exit ;;

@@ -23,8 +23,8 @@ Set the mouse event protocol version. (untested, but head will be broken
 unless I add this).
 ----------------------------
 
---- src/bsd_mouse.c.orig	2009-05-19 15:12:28 +0300
-+++ src/bsd_mouse.c	2009-05-19 15:13:13 +0300
+--- src/bsd_mouse.c.orig	2008-11-26 23:11:36.000000000 -0500
++++ src/bsd_mouse.c
 @@ -53,12 +53,15 @@
  
  #define HUP_GENERIC_DESKTOP     0x0001
