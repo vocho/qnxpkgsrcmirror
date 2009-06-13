@@ -50,5 +50,9 @@ CONFIGURE_ENV+=		ac_cv_path_RAWCPP="cc -E -Uunix -"
 .include "../../x11/xf86bigfontproto/buildlink3.mk"
 .include "../../x11/xproto/buildlink3.mk"
 .include "../../x11/xtrans/buildlink3.mk"
+.if ${OPSYS} == "QNX"
+CONFIGURE_ARGS+=		LIBS="-ls5ipc"
+.include "../../qnx6/s5ipc/buildlink3.mk"
+.endif
 
 .include "../../mk/bsd.pkg.mk"
