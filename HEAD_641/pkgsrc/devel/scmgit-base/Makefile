@@ -79,6 +79,11 @@ SUBST_MESSAGE.fix-paths=Fixing hard-coded pathnames
 SUBST_STAGE.fix-paths=	pre-build
 SUBST_VARS.fix-paths=	PREFIX
 
+.if ${OPSYS} == "QNX"
+post-patch:
+	${CP} ${FILESDIR}/qnxnto.c ${FILESDIR}/qnxnto.h ${WRKSRC}/compat/
+.endif
+
 #.include "../../editors/emacs/modules.mk" # XXX TODO (see patch-ad)
 
 .include "options.mk"

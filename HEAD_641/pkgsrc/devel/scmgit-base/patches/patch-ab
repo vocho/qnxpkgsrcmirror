@@ -1,13 +1,23 @@
 $NetBSD: patch-ab,v 1.4 2008/08/20 03:04:20 bjs Exp $
 
---- git-compat-util.h.orig	2008-08-17 16:43:06.000000000 -0400
+--- git-compat-util.h.orig	2009-05-04 11:27:58.000000000 -0500
 +++ git-compat-util.h
 @@ -39,7 +39,7 @@
  /* Approximation of the length of the decimal representation of this type. */
  #define decimal_length(x)	((int)(sizeof(x) * 2.56 + 0.5) + 1)
  
 -#if !defined(__APPLE__) && !defined(__FreeBSD__)  && !defined(__USLC__) && !defined(_M_UNIX)
-+#if !defined(__APPLE__) && !defined(__FreeBSD__)  && !defined(__USLC__) && !defined(_M_UNIX) && !defined(__sun)
++#if !defined(__APPLE__) && !defined(__FreeBSD__)  && !defined(__USLC__) && !defined(_M_UNIX) && !defined(__sun) && !defined(__QNXNTO__)
  #define _XOPEN_SOURCE 600 /* glibc2 and AIX 5.3L need 500, OpenBSD needs 600 for S_ISLNK() */
  #define _XOPEN_SOURCE_EXTENDED 1 /* AIX 5.3L needs this */
  #endif
+@@ -90,6 +90,9 @@
+ #undef _ALL_SOURCE /* AIX 5.3L defines a struct list with _ALL_SOURCE. */
+ #include <grp.h>
+ #define _ALL_SOURCE 1
++#if defined(__QNXNTO__)
++#include "compat/qnxnto.h"
++#endif
+ #endif
+ #else 	/* __MINGW32__ */
+ /* pull in Windows compatibility stuff */
