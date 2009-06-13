@@ -6,7 +6,7 @@ $NetBSD: patch-ac,v 1.2 2008/07/16 06:41:17 bjs Exp $
  #define _XF86DRM_H_
  
  #include <stdarg.h>
-+#if @ATOMIC_OPS_CHECK@
++#if 0
 +#include <sys/atomic.h>
 +#else
  #include <sys/types.h>
@@ -19,7 +19,7 @@ $NetBSD: patch-ac,v 1.2 2008/07/16 06:41:17 bjs Exp $
  #define DRM_LOCK_CONT  0x40000000U /**< Hardware lock is contended */
  
 -#if defined(__GNUC__) && (__GNUC__ >= 2)
-+#if @ATOMIC_OPS_CHECK@ /* configured by pkgsrc */
++#if 0 /* configured by pkgsrc */
 +
 +#define DRM_CAS(lock, old, new, __ret)	\
 + (__ret = atomic_cas_uint(&__drm_dummy_lock(lock), (old), (new)) != (old));
