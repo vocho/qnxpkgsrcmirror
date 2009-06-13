@@ -14,7 +14,13 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_LIBTOOL=	YES
 GNU_CONFIGURE=	YES
-USE_TOOLS+=	gmake pkg-config
+USE_TOOLS+=	gmake pkg-config automake autoconf
+
+BUILD_DEPENDS+=	autoconf>=2.63:../../devel/autoconf
+BUILD_DEPENDS+=	automake>=1.10.2:../../devel/automake
+
+pre-configure:
+	cd ${WRKSRC} && /usr/pkg/bin/autoreconf
 
 .include "../../x11/inputproto/buildlink3.mk"
 .include "../../x11/randrproto/buildlink3.mk"
