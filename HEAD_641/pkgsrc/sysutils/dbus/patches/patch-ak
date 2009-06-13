@@ -1,8 +1,8 @@
 $NetBSD: patch-ak,v 1.1 2008/09/24 11:37:31 taca Exp $
 
---- dbus/Makefile.in.orig	2008-08-07 04:43:39.000000000 +0900
+--- dbus/Makefile.in.orig	2008-12-18 15:47:13.000000000 -0500
 +++ dbus/Makefile.in
-@@ -310,7 +310,7 @@ top_builddir = @top_builddir@
+@@ -313,7 +313,7 @@ top_builddir = @top_builddir@
  top_srcdir = @top_srcdir@
  configdir = $(sysconfdir)/dbus-1
  INCLUDES = -I$(top_builddir) -I$(top_srcdir) $(DBUS_CLIENT_CFLAGS) @PIC_CFLAGS@ -DDBUS_COMPILATION	\
