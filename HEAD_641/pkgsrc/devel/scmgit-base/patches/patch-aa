@@ -1,6 +1,6 @@
 $NetBSD: patch-aa,v 1.7 2009/05/05 06:21:16 minskim Exp $
 
---- Makefile.orig	2009-03-04 08:18:50.000000000 +0000
+--- Makefile.orig	2009-05-04 11:27:58.000000000 -0500
 +++ Makefile
 @@ -230,12 +230,8 @@ GITWEB_SITE_FOOTER =
  
@@ -15,7 +15,7 @@ $NetBSD: patch-aa,v 1.7 2009/05/05 06:21:16 minskim Exp $
  RPMBUILD = rpmbuild
  TCL_PATH = tclsh
  TCLTK_PATH = wish
-@@ -659,9 +655,10 @@ ifeq ($(uname_S),Darwin)
+@@ -657,9 +653,10 @@ ifeq ($(uname_S),Darwin)
  	THREADED_DELTA_SEARCH = YesPlease
  endif
  ifeq ($(uname_S),SunOS)
@@ -27,7 +27,7 @@ $NetBSD: patch-aa,v 1.7 2009/05/05 06:21:16 minskim Exp $
  	NO_STRCASESTR = YesPlease
  	NO_MEMMEM = YesPlease
  	NO_HSTRERROR = YesPlease
-@@ -679,8 +676,6 @@ ifeq ($(uname_S),SunOS)
+@@ -677,8 +674,6 @@ ifeq ($(uname_S),SunOS)
  		NO_C99_FORMAT = YesPlease
  		NO_STRTOUMAX = YesPlease
  	endif
@@ -36,7 +36,7 @@ $NetBSD: patch-aa,v 1.7 2009/05/05 06:21:16 minskim Exp $
  	BASIC_CFLAGS += -D__EXTENSIONS__
  endif
  ifeq ($(uname_O),Cygwin)
-@@ -722,9 +717,7 @@ ifeq ($(uname_S),OpenBSD)
+@@ -720,9 +715,7 @@ ifeq ($(uname_S),OpenBSD)
  	THREADED_DELTA_SEARCH = YesPlease
  endif
  ifeq ($(uname_S),NetBSD)
@@ -47,7 +47,18 @@ $NetBSD: patch-aa,v 1.7 2009/05/05 06:21:16 minskim Exp $
  	BASIC_CFLAGS += -I/usr/pkg/include
  	BASIC_LDFLAGS += -L/usr/pkg/lib $(CC_LD_DYNPATH)/usr/pkg/lib
  	THREADED_DELTA_SEARCH = YesPlease
-@@ -1116,7 +1109,7 @@ SHELL_PATH_SQ = $(subst ','\'',$(SHELL_P
+@@ -826,6 +819,10 @@ ifeq ($(uname_S),Darwin)
+ 	endif
+ 	PTHREAD_LIBS =
+ endif
++ifneq (,$(findstring QNX,$(uname_S)))
++	COMPAT_OBJS += compat/qnxnto.o
++	PTHREAD_LIBS =
++endif
+ 
+ ifndef CC_LD_DYNPATH
+ 	ifdef NO_R_TO_GCC_LINKER
+@@ -1114,7 +1111,7 @@ SHELL_PATH_SQ = $(subst ','\'',$(SHELL_P
  PERL_PATH_SQ = $(subst ','\'',$(PERL_PATH))
  TCLTK_PATH_SQ = $(subst ','\'',$(TCLTK_PATH))
  
@@ -56,7 +67,7 @@ $NetBSD: patch-aa,v 1.7 2009/05/05 06:21:16 minskim Exp $
  
  BASIC_CFLAGS += -DSHA1_HEADER='$(SHA1_HEADER_SQ)' \
  	$(COMPAT_CFLAGS)
-@@ -1452,10 +1445,10 @@ gitexec_instdir_SQ = $(subst ','\'',$(gi
+@@ -1450,10 +1447,10 @@ gitexec_instdir_SQ = $(subst ','\'',$(gi
  export gitexec_instdir
  
  install: all
