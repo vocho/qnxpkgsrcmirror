@@ -1,0 +1,1 @@
+Resource manager to help duplicate the stdin/out/err, useful for pkg_add.
