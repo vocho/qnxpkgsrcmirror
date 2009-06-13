@@ -21,6 +21,10 @@ USE_TOOLS+=		pkg-config xauth:run
 CONFIGURE_ENV+=		ac_cv_path_RAWCPP="cc -E -Uunix -"
 .endif
 
+.if ${OPSYS} == "QNX"
+CFLAGS+=		-D_POSIX_SOURCE=1
+.endif
+
 .include "../../x11/libX11/buildlink3.mk"
 
 .include "../../mk/bsd.pkg.mk"
