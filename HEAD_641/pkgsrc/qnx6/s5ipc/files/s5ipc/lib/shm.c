@@ -145,12 +145,12 @@ void *shmat(int shmid, const void *shmaddr, int shmflag)
 	msg.i.flag = shmflag;
 	
 	if (_shm_send(&msg, sizeof msg.i, &msg, sizeof msg.o) == -1) {
-		return NULL;
+		return (void *)-1;
 	}
 		
 	sprintf(buf, "/dev/ipc/shm/%d", shmid);
 	if ((shmfd = shm_open(buf, (shmflag & SHM_RDONLY) ? O_RDONLY : O_RDWR, 0)) == -1) {
-		return NULL;
+		return (void *)-1;
 	}
 	
 	/* make sure params make sense */
@@ -166,13 +166,13 @@ void *shmat(int shmid, const void *shmaddr, int shmflag)
 			shmaddr = (void *)((unsigned)shmaddr & ~(SHMLBA - 1));
 		} else if (((unsigned)shmaddr & (SHMLBA-1)) == 0) {
 			errno = EINVAL;
-			return NULL;
+			return (void *)-1;
 		}
 	}
 	
 	if ((addr = mmap((void *)shmaddr, msg.o.size, proto, flags, shmfd, 0)) == MAP_FAILED) {
 		close(shmfd);
-		return NULL;
+		return (void *)-1;
 	}
 
 	if (_shmfd_store(shmfd, shmid, addr) == -1) {
@@ -185,7 +185,7 @@ void *shmat(int shmid, const void *shmaddr, int shmflag)
 		dmsg.i.hdr.subtype = _SHMMGR_DETACH;
 		dmsg.i.shmid = shmid;
 		_shm_send(&dmsg, sizeof dmsg.i, 0, 0);
-		return NULL;
+		return (void *)-1;
 	}
 
 	return addr;
