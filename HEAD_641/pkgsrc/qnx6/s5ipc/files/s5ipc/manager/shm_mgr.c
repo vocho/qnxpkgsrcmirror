@@ -153,8 +153,10 @@ static int msg_get(resmgr_context_t *ctp, shmmgr_get_t *msgget, struct _client_i
 
 	// set up the sd
 	memset(sd, 0, sizeof(*sd));
-	sd->shmds.shm_perm.cuid = sd->shmds.shm_perm.uid = info->cred.ruid;
-	sd->shmds.shm_perm.cgid = sd->shmds.shm_perm.gid = info->cred.rgid;
+	sd->shmds.shm_perm.cuid = info->cred.euid;
+	sd->shmds.shm_perm.cgid = info->cred.egid;
+	sd->shmds.shm_perm.uid  = info->cred.ruid;
+	sd->shmds.shm_perm.gid  = info->cred.rgid;
 	sd->shmds.shm_perm.mode = (msgget->i.flag & S_IPERMS) | SHMSEG_ALLOCATED;
 	sd->shmds.shm_segsz     = msgget->i.size;
 	sd->shmds.shm_cpid      = info->pid;
