@@ -34,6 +34,8 @@ MAKE_FLAGS+=	SENDMAIL=/usr/lib/sendmail
 MAKE_FLAGS+=	SENDMAIL=/usr/sbin/sendmail
 .endif
 
+CFLAGS.QNX+=	-D__NO_EXT_PCDOS
+
 .include "options.mk"
 
 SUBST_CLASSES+=		sysconf
