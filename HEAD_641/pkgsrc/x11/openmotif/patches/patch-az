@@ -1,7 +1,16 @@
 $NetBSD: patch-az,v 1.2 2005/12/12 19:55:41 joerg Exp $
 
---- lib/Xm/Scale.c.orig	2005-12-02 18:31:33.000000000 +0100
+--- lib/Xm/Scale.c.orig	2007-09-27 10:36:21.000000000 -0500
 +++ lib/Xm/Scale.c
+@@ -51,7 +51,7 @@ static char rcsid[] = "$TOG: Scale.c /ma
+ 
+ #include <stdio.h>
+ #include <limits.h>
+-#ifndef CSRG_BASED
++#if !defined(CSRG_BASED) && !defined(__QNXNTO__)
+ /*
+  * Modification by Integrated Computer Solutions, Inc.  May 2000
+  *
 @@ -87,6 +87,9 @@ static char rcsid[] = "$TOG: Scale.c /ma
  extern "C" { /* some 'locale.h' do not have prototypes (sun) */
  #endif
