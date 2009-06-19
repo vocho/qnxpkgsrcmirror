@@ -1,0 +1,32 @@
+$NetBSD$
+
+--- Xarch.h.orig	2007-03-05 07:21:50.000000000 -0500
++++ Xarch.h
+@@ -81,6 +81,8 @@
+ #include <bsd/in_systm.h>
+ #include <bsd/ip.h>
+ #endif
++#elif defined(__QNXNTO__)
++#include <sys/param.h>
+ #endif
+ 
+ #ifndef BYTE_ORDER
+@@ -88,17 +90,10 @@
+ #define BIG_ENDIAN    4321
+ 
+ #if defined(__QNX__) && !defined(__QNXNTO__)
++/* QNX4 */
+ #define BYTE_ORDER LITTLE_ENDIAN
+ #endif
+ 
+-#if defined(__QNXNTO__)
+-#if defined(i386) || defined(__i386__) || defined(__x86__)
+-#define BYTE_ORDER LITTLE_ENDIAN
+-#else
+-#define BYTE_ORDER BIG_ENDIAN
+-#endif
+-#endif
+-
+ #ifdef Lynx
+ #if defined(i386) || defined(__i386__) || defined(__x86__)
+ #define BYTE_ORDER LITTLE_ENDIAN
