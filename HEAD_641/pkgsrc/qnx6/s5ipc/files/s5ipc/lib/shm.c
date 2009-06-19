@@ -81,8 +81,8 @@ static int _shm_send(void *smsg, int ssize, void *rmsg, int rsize)
 	int status = -1;
 	int coid = shmmgr_coid;
 
-	if (coid == -1 || ((status = MsgSend(coid, smsg, ssize, rmsg, rsize)) != 0
-					   && (errno == EBADF) || (errno == ENOSYS)))
+	if (coid == -1 || ((status = MsgSend(coid, smsg, ssize, rmsg, rsize)) == -1
+					   && (errno == EBADF || errno == ENOSYS)))
 	{
 		if (coid >= 0) {
 			shmmgr_coid = -1;
