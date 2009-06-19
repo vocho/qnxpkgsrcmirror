@@ -54,6 +54,9 @@ SUBST_SED.man_rename+=		-e 's: Shell.3: XShell.3:g'
 
 .if ${OPSYS} == "NetBSD"
 CONFIGURE_ENV+=		ac_cv_func_setpgrp_void=no
+.elif ${OPSYS} == "QNX"
+# our libfl is missing
+TOOLS_PLATFORM.flex=
 .endif
 
 .if !empty(USE_CROSS_COMPILE:M[yY][eE][sS])
