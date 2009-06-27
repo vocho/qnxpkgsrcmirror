@@ -23,6 +23,11 @@ PKG_SUPPORTED_OPTIONS=	pam
 CONFIGURE_ARGS+=	--enable-pam
 .endif
 
+.if ${OPSYS} == "QNX"
+CONFIGURE_ARGS+= --disable-lastlog
+LIBS+=	-lsocket
+.endif
+
 MAKEFLAGS+=	ROOT_USER=${ROOT_USER:Q} ROOT_GROUP=${ROOT_GROUP:Q}
 
 SUBST_CLASSES+=		config
