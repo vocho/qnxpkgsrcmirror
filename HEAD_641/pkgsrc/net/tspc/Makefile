@@ -19,6 +19,7 @@ ONLY_FOR_PLATFORM+=	FreeBSD-*-*
 ONLY_FOR_PLATFORM+=	Linux-*-*
 ONLY_FOR_PLATFORM+=	Darwin-*-*
 ONLY_FOR_PLATFORM+=	SunOS-*-*
+ONLY_FOR_PLATFORM+=	QNX-*-*
 
 AUTO_MKDIRS=		yes
 
@@ -41,6 +42,11 @@ CONF_FILES_MODE=	0600
 RCD_SCRIPTS=		tspc
 
 PLIST_SUBST+=		TARGET=${TARGET:Q}
+
+post-extract:
+	${CP} -r ${FILESDIR}/Mk ${WRKSRC}/
+	${CP} -r ${FILESDIR}/platform ${WRKSRC}/
+	${CP} -r ${FILESDIR}/template ${WRKSRC}/
 
 do-install:
 	${INSTALL_PROGRAM} ${WRKSRC}/bin/tspc ${DESTDIR}${PREFIX}/sbin/
