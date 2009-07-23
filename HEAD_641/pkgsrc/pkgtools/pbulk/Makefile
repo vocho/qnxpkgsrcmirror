@@ -72,4 +72,9 @@ MAKE_ENV+=	LDADD=${LDADD:Q}
 CPPFLAGS+=	-D_GNU_SOURCE
 .endif
 
+.if ${OPSYS} == "QNX"
+LDADD+=		-lsocket
+MAKE_ENV+=	LDADD=${LDADD:Q}
+.endif
+
 .include "../../mk/bsd.pkg.mk"
