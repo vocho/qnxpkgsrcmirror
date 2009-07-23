@@ -12,6 +12,15 @@ $NetBSD: patch-ai,v 1.2 2005/11/08 12:58:47 joerg Exp $
  #ifndef HAVE_STRERROR
  /* No macros, please */
  #undef strerror
+@@ -131,7 +128,7 @@ extern int errno;
+ # define ftruncate(fd, s) chsize(fd, s)
+ #endif
+ 
+-#ifdef SYSV
++#if defined(SYSV) && !defined(__QNXNTO__)
+ # define index strchr
+ # define rindex strrchr
+ # define bzero(poi,len) memset(poi,0,len)
 @@ -235,7 +232,7 @@ extern int errno;
   * Joe Traister: On AIX4, programs like irc won't work if screen
   * uses TIOCPKT (select fails to return on pty read).
