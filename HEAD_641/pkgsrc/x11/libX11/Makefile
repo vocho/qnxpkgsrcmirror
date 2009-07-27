@@ -29,6 +29,8 @@ PKGCONFIG_OVERRIDE+=	x11.pc.in
 CONFIGURE_ARGS+=	--disable-malloc0returnsnull
 .endif
 
+LIBS.QNX+=		-ls5ipc
+
 .if !empty(USE_CROSS_COMPILE:M[yY][eE][sS])
 MAKE_ENV+=	CC_FOR_BUILD=${NATIVE_CC:Q} CPPFLAGS_FOR_BUILD=-I${PREFIX}/include
 .endif
@@ -51,8 +53,7 @@ CONFIGURE_ENV+=		ac_cv_path_RAWCPP="cc -E -Uunix -"
 .include "../../x11/xproto/buildlink3.mk"
 .include "../../x11/xtrans/buildlink3.mk"
 .if ${OPSYS} == "QNX"
-CONFIGURE_ARGS+=		LIBS="-ls5ipc"
-.include "../../qnx6/s5ipc/buildlink3.mk"
+.include "../../sysutils/s5ipc/buildlink3.mk"
 .endif
 
 .include "../../mk/bsd.pkg.mk"
