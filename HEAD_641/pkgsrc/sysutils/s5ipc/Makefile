@@ -1,8 +1,9 @@
 # 
 #
 
-DISTNAME=	s5ipc-0.1
-CATEGORIES=	qnx6
+DISTNAME=	s5ipc
+PKGNAME=	s5ipc-0.1
+CATEGORIES=	sysutils
 MASTER_SITES=	# none
 DISTFILES=	# none
 
