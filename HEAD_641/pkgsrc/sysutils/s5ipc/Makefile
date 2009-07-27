@@ -10,6 +10,8 @@ MAINTAINER=	xtang@qnx.com
 HOMEPAGE=	# none
 COMMENT=	Library and QNX Resource Manager to support SysV ipc
 
+ONLY_FOR_PLATFORM=	QNX-*-*
+
 #PKG_INSTALLATION_TYPES=	overwrite pkgviews
 #PKG_DESTDIR_SUPPORT=	user-destdir
 
