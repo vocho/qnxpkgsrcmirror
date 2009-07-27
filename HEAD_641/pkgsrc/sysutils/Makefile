@@ -256,6 +256,7 @@ SUBDIR+=	ruby-facter
 SUBDIR+=	ruby-gnome2-gnomevfs
 SUBDIR+=	ruby-quota
 SUBDIR+=	ruby-rb-appscript
+SUBDIR+=	s5ipc
 SUBDIR+=	safetynet
 SUBDIR+=	same
 SUBDIR+=	sarah
