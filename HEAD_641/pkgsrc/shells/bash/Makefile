@@ -60,6 +60,10 @@ PKG_SUPPORTED_OPTIONS=	static
 
 .include "../../mk/bsd.options.mk"
 
+.if exists(${.CURDIR}/../../shells/bash/PLIST.${OPSYS})
+PLIST_SRC+=     ${.CURDIR}/../../shells/bash/PLIST.${OPSYS}
+.endif
+
 ##
 ## Static link
 ##
@@ -79,20 +83,18 @@ BUILDLINK_API_DEPENDS.readline+=	readline>=6.0
 .include "../../devel/readline/buildlink3.mk"
 .endif
 
-# QNX need to do more work in post-install
-# 1) copy the /etc/profile.d/qnxsdk.sh to /etc/profile.d/qnxsdk.bash
-#    this is so login will source /etc/profile which will in turn 
-#    source /etc/profile.d/qnxsdk.$(SHELL)
-.if ${OPSYS} == "QNX" && ${UNPRIVILEGED} != "yes"
-post-install:
-	${INSTALL_MAN} ${WRKSRC}/doc/bash.1 ${DESTDIR}${PREFIX}/${PKGMANDIR}/man1
-	${INSTALL_MAN} ${WRKSRC}/doc/bashbug.1 ${DESTDIR}${PREFIX}/${PKGMANDIR}/man1
-	@cp /etc/profile.d/qnxsdk.sh /etc/profile.d/qnxsdk.bash
-.else
-post-install:
-	${INSTALL_MAN} ${WRKSRC}/doc/bash.1 ${DESTDIR}${PREFIX}/${PKGMANDIR}/man1
-	${INSTALL_MAN} ${WRKSRC}/doc/bashbug.1 ${DESTDIR}${PREFIX}/${PKGMANDIR}/man1
+.if ${OPSYS} == "QNX"
+EGDIR=		${PREFIX}/share/examples/profile.d
+CONF_FILES_PERMS=     ${EGDIR}/qnxsdk.bash /etc/profile.d/qnxsdk.bash ${ROOT_USER} ${ROOT_GROUP} 0755
+pre-install:
+	${INSTALL_DATA_DIR} ${EGDIR}
+	${INSTALL_DATA} ${FILESDIR}/qnxsdk.bash ${EGDIR}
 .endif
+	
+
+post-install:
+	${INSTALL_MAN} ${WRKSRC}/doc/bash.1 ${DESTDIR}${PREFIX}/${PKGMANDIR}/man1
+	${INSTALL_MAN} ${WRKSRC}/doc/bashbug.1 ${DESTDIR}${PREFIX}/${PKGMANDIR}/man1
 
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"
