@@ -26,4 +26,7 @@ do-extract:
 
 .include "../../mk/bsd.prefs.mk"
 
+# for bulk builds
+MAKE_ENV+=	MAKEFLAGS=-I${QNX_TARGET}/usr/include
+
 .include "../../mk/bsd.pkg.mk"
