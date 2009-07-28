@@ -14,7 +14,7 @@ COMMENT=	Library and QNX Resource Manager to support SysV ipc
 ONLY_FOR_PLATFORM=	QNX-*-*
 
 #PKG_INSTALLATION_TYPES=	overwrite pkgviews
-#PKG_DESTDIR_SUPPORT=	user-destdir
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 NO_CHECKSUM=	yes
 USE_LANGUAGES=	# none
