@@ -60,6 +60,7 @@ PKG_SUPPORTED_OPTIONS=	static
 
 .include "../../mk/bsd.options.mk"
 
+PLIST_SRC=     ${.CURDIR}/../../shells/bash/PLIST
 .if exists(${.CURDIR}/../../shells/bash/PLIST.${OPSYS})
 PLIST_SRC+=     ${.CURDIR}/../../shells/bash/PLIST.${OPSYS}
 .endif
