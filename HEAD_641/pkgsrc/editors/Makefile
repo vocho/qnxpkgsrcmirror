@@ -104,6 +104,7 @@ SUBDIR+=	vim-gtk
 SUBDIR+=	vim-gtk2
 SUBDIR+=	vim-lang
 SUBDIR+=	vim-motif
+SUBDIR+=	vim-photon
 SUBDIR+=	vim-share
 SUBDIR+=	vim-xaw
 SUBDIR+=	wily
