@@ -5,7 +5,6 @@ CC=		qcc
 .else
 CC=		gcc
 .endif
-
 ECHO_N?=	${ECHO} -n
 IMAKE_MAKE?=	${MAKE}		# program which gets invoked by imake
 PKGLOCALEDIR?=	share
@@ -90,8 +89,10 @@ _OPSYS_MAX_CMDLEN_CMD=	/usr/bin/getconf ARG_MAX
 # Set the group and mode to meaningful values in that case (defaults to
 # BINOWN, BINGRP and BINMODE as per defaults/mk.conf).
 .if !(empty(SETGIDGAME:M[yY][eE][sS]))
-GAMEOWN=		games
-GAMEGRP=		games
+GAMES_USER=		games
+GAMES_GROUP=		games
+GAMEOWN=		${GAMES_USER}
+GAMEGRP=		${GAMES_GROUP}
 GAMEMODE=		2555
 GAMEDIRMODE=		0775
 .endif
