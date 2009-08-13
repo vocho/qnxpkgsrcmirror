@@ -1,7 +1,16 @@
 $NetBSD: patch-af,v 1.13 2009/03/10 18:30:44 apb Exp $
 
---- configure.orig	2008-10-31 17:53:45.000000000 +0200
+--- configure.orig	2008-10-31 11:53:45.000000000 -0400
 +++ configure
+@@ -12524,7 +12524,7 @@ if test -z "$aix_libpath"; then aix_libp
+   freebsd-elf*)
+     archive_cmds_need_lc_CXX=no
+     ;;
+-  freebsd* | dragonfly*)
++  freebsd* | dragonfly* | nto-qnx*)
+     # FreeBSD 3 and later use GNU C++ and GNU ld with standard ELF
+     # conventions
+     ld_shlibs_CXX=yes
 @@ -27854,6 +27854,81 @@ _ACEOF
  fi
  
@@ -97,7 +106,187 @@ $NetBSD: patch-af,v 1.13 2009/03/10 18:30:44 apb Exp $
  
  
  #include <$ac_header>
-@@ -42849,8 +42930,10 @@ cat >>conftest.$ac_ext <<_ACEOF
+@@ -40872,6 +40953,179 @@ fi
+ done
+ 
+ 
++# freebsd2 checks, QNX finds getfsstat() in -lnbutil
++echo "$as_me:$LINENO: checking for getfsstat" >&5
++echo $ECHO_N "checking for getfsstat... $ECHO_C" >&6
++if test "${ac_cv_func_getfsstat+set}" = set; then
++  echo $ECHO_N "(cached) $ECHO_C" >&6
++else
++  cat >conftest.$ac_ext <<_ACEOF
++/* confdefs.h.  */
++_ACEOF
++cat confdefs.h >>conftest.$ac_ext
++cat >>conftest.$ac_ext <<_ACEOF
++/* end confdefs.h.  */
++/* Define getfsstat to an innocuous variant, in case <limits.h> declares getfsstat.
++   For example, HP-UX 11i <limits.h> declares gettimeofday.  */
++#define getfsstat innocuous_getfsstat
++
++/* System header to define __stub macros and hopefully few prototypes,
++    which can conflict with char getfsstat (); below.
++    Prefer <limits.h> to <assert.h> if __STDC__ is defined, since
++    <limits.h> exists even on freestanding compilers.  */
++
++#ifdef __STDC__
++# include <limits.h>
++#else
++# include <assert.h>
++#endif
++
++#undef getfsstat
++
++/* Override any gcc2 internal prototype to avoid an error.  */
++#ifdef __cplusplus
++extern "C"
++{
++#endif
++/* We use char because int might match the return type of a gcc2
++   builtin and then its argument prototype would still apply.  */
++char getfsstat ();
++/* The GNU C library defines this for functions which it implements
++    to always fail with ENOSYS.  Some functions are actually named
++    something starting with __ and the normal name is an alias.  */
++#if defined (__stub_getfsstat) || defined (__stub___getfsstat)
++choke me
++#else
++char (*f) () = getfsstat;
++#endif
++#ifdef __cplusplus
++}
++#endif
++
++int
++main ()
++{
++return f != getfsstat;
++  ;
++  return 0;
++}
++_ACEOF
++rm -f conftest.$ac_objext conftest$ac_exeext
++if { (eval echo "$as_me:$LINENO: \"$ac_link\"") >&5
++  (eval $ac_link) 2>conftest.er1
++  ac_status=$?
++  grep -v '^ *+' conftest.er1 >conftest.err
++  rm -f conftest.er1
++  cat conftest.err >&5
++  echo "$as_me:$LINENO: \$? = $ac_status" >&5
++  (exit $ac_status); } &&
++	 { ac_try='test -z "$ac_c_werror_flag"
++			 || test ! -s conftest.err'
++  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
++  (eval $ac_try) 2>&5
++  ac_status=$?
++  echo "$as_me:$LINENO: \$? = $ac_status" >&5
++  (exit $ac_status); }; } &&
++	 { ac_try='test -s conftest$ac_exeext'
++  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
++  (eval $ac_try) 2>&5
++  ac_status=$?
++  echo "$as_me:$LINENO: \$? = $ac_status" >&5
++  (exit $ac_status); }; }; then
++  ac_cv_func_getfsstat=yes
++else
++  echo "$as_me: failed program was:" >&5
++sed 's/^/| /' conftest.$ac_ext >&5
++
++ac_cv_func_getfsstat=no
++fi
++rm -f conftest.err conftest.$ac_objext \
++      conftest$ac_exeext conftest.$ac_ext
++fi
++echo "$as_me:$LINENO: result: $ac_cv_func_getfsstat" >&5
++echo "${ECHO_T}$ac_cv_func_getfsstat" >&6
++if test $ac_cv_func_getfsstat = yes; then
++  cat >>confdefs.h <<\_ACEOF
++#define HAVE_GETFSSTAT 1
++_ACEOF
++
++else
++  echo "$as_me:$LINENO: checking for getfsstat in -lnbutil" >&5
++echo $ECHO_N "checking for getfsstat in -lnbutil... $ECHO_C" >&6
++if test "${ac_cv_lib_nbutil_getfsstat+set}" = set; then
++  echo $ECHO_N "(cached) $ECHO_C" >&6
++else
++  ac_check_lib_save_LIBS=$LIBS
++LIBS="-lnbutil  $LIBS"
++cat >conftest.$ac_ext <<_ACEOF
++/* confdefs.h.  */
++_ACEOF
++cat confdefs.h >>conftest.$ac_ext
++cat >>conftest.$ac_ext <<_ACEOF
++/* end confdefs.h.  */
++
++/* Override any gcc2 internal prototype to avoid an error.  */
++#ifdef __cplusplus
++extern "C"
++#endif
++/* We use char because int might match the return type of a gcc2
++   builtin and then its argument prototype would still apply.  */
++char getfsstat ();
++int
++main ()
++{
++getfsstat ();
++  ;
++  return 0;
++}
++_ACEOF
++rm -f conftest.$ac_objext conftest$ac_exeext
++if { (eval echo "$as_me:$LINENO: \"$ac_link\"") >&5
++  (eval $ac_link) 2>conftest.er1
++  ac_status=$?
++  grep -v '^ *+' conftest.er1 >conftest.err
++  rm -f conftest.er1
++  cat conftest.err >&5
++  echo "$as_me:$LINENO: \$? = $ac_status" >&5
++  (exit $ac_status); } &&
++	 { ac_try='test -z "$ac_c_werror_flag"
++			 || test ! -s conftest.err'
++  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
++  (eval $ac_try) 2>&5
++  ac_status=$?
++  echo "$as_me:$LINENO: \$? = $ac_status" >&5
++  (exit $ac_status); }; } &&
++	 { ac_try='test -s conftest$ac_exeext'
++  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
++  (eval $ac_try) 2>&5
++  ac_status=$?
++  echo "$as_me:$LINENO: \$? = $ac_status" >&5
++  (exit $ac_status); }; }; then
++  ac_cv_lib_nbutil_getfsstat=yes
++else
++  echo "$as_me: failed program was:" >&5
++sed 's/^/| /' conftest.$ac_ext >&5
++
++ac_cv_lib_nbutil_getfsstat=no
++fi
++rm -f conftest.err conftest.$ac_objext \
++      conftest$ac_exeext conftest.$ac_ext
++LIBS=$ac_check_lib_save_LIBS
++fi
++echo "$as_me:$LINENO: result: $ac_cv_lib_nbutil_getfsstat" >&5
++echo "${ECHO_T}$ac_cv_lib_nbutil_getfsstat" >&6
++if test $ac_cv_lib_nbutil_getfsstat = yes; then
++  cat >>confdefs.h <<\_ACEOF
++#define HAVE_GETFSSTAT 1
++_ACEOF
++  cat >>confdefs.h <<\_ACEOF
++#define HAVE_LIBNBUTIL 1
++_ACEOF
++
++AGENTLIBS="-lnbutil ${AGENTLIBS}"
++fi
++
++fi
+ for ac_func in usleep
+ do
+ as_ac_var=`echo "ac_cv_func_$ac_func" | $as_tr_sh`
+@@ -42849,8 +43103,10 @@ cat >>conftest.$ac_ext <<_ACEOF
  #include <sys/types.h>
  #ifdef IFNET_NEEDS_KERNEL
  #define KERNEL
@@ -108,7 +297,7 @@ $NetBSD: patch-af,v 1.13 2009/03/10 18:30:44 apb Exp $
  #include <sys/socket.h>
  
  
-@@ -42947,8 +43030,10 @@ cat >>conftest.$ac_ext <<_ACEOF
+@@ -42947,8 +43203,10 @@ cat >>conftest.$ac_ext <<_ACEOF
  #include <sys/types.h>
  #ifdef IFNET_NEEDS_KERNEL
  #define KERNEL
@@ -119,7 +308,7 @@ $NetBSD: patch-af,v 1.13 2009/03/10 18:30:44 apb Exp $
  #include <sys/socket.h>
  
  
-@@ -43241,8 +43326,10 @@ cat >>conftest.$ac_ext <<_ACEOF
+@@ -43241,8 +43499,10 @@ cat >>conftest.$ac_ext <<_ACEOF
  #include <sys/types.h>
  #ifdef IFNET_NEEDS_KERNEL
  #define KERNEL
@@ -130,7 +319,7 @@ $NetBSD: patch-af,v 1.13 2009/03/10 18:30:44 apb Exp $
  #include <sys/socket.h>
  #undef KERNEL
  #undef _KERNEL
-@@ -43330,8 +43417,10 @@ cat >>conftest.$ac_ext <<_ACEOF
+@@ -43330,8 +43590,10 @@ cat >>conftest.$ac_ext <<_ACEOF
  #include <sys/types.h>
  #ifdef IFNET_NEEDS_KERNEL
  #define KERNEL
@@ -141,7 +330,7 @@ $NetBSD: patch-af,v 1.13 2009/03/10 18:30:44 apb Exp $
  #include <sys/socket.h>
  #undef KERNEL
  #undef _KERNEL
-@@ -43399,8 +43488,10 @@ cat >>conftest.$ac_ext <<_ACEOF
+@@ -43399,8 +43661,10 @@ cat >>conftest.$ac_ext <<_ACEOF
  #include <sys/types.h>
  #ifdef IFNET_NEEDS_KERNEL
  #define KERNEL
@@ -152,7 +341,7 @@ $NetBSD: patch-af,v 1.13 2009/03/10 18:30:44 apb Exp $
  #include <sys/socket.h>
  #undef KERNEL
  #undef _KERNEL
-@@ -43539,8 +43630,10 @@ cat >>conftest.$ac_ext <<_ACEOF
+@@ -43539,8 +43803,10 @@ cat >>conftest.$ac_ext <<_ACEOF
  #include <sys/types.h>
  #ifdef IFNET_NEEDS_KERNEL
  #define KERNEL
@@ -163,7 +352,7 @@ $NetBSD: patch-af,v 1.13 2009/03/10 18:30:44 apb Exp $
  #include <sys/socket.h>
  #undef KERNEL
  #undef _KERNEL
-@@ -43772,8 +43865,10 @@ cat >>conftest.$ac_ext <<_ACEOF
+@@ -43772,8 +44038,10 @@ cat >>conftest.$ac_ext <<_ACEOF
  #include <sys/types.h>
  #ifdef IFNET_NEEDS_KERNEL
  #define KERNEL
@@ -174,7 +363,7 @@ $NetBSD: patch-af,v 1.13 2009/03/10 18:30:44 apb Exp $
  #include <sys/socket.h>
  #undef KERNEL
  #undef _KERNEL
-@@ -43873,8 +43968,10 @@ cat >>conftest.$ac_ext <<_ACEOF
+@@ -43873,8 +44141,10 @@ cat >>conftest.$ac_ext <<_ACEOF
  #include <sys/types.h>
  #ifdef IFNET_NEEDS_KERNEL
  #define KERNEL
@@ -185,7 +374,7 @@ $NetBSD: patch-af,v 1.13 2009/03/10 18:30:44 apb Exp $
  #include <sys/socket.h>
  #undef KERNEL
  #undef _KERNEL
-@@ -43974,8 +44071,10 @@ cat >>conftest.$ac_ext <<_ACEOF
+@@ -43974,8 +44244,10 @@ cat >>conftest.$ac_ext <<_ACEOF
  #include <sys/types.h>
  #ifdef IFNET_NEEDS_KERNEL
  #define KERNEL
@@ -196,7 +385,7 @@ $NetBSD: patch-af,v 1.13 2009/03/10 18:30:44 apb Exp $
  #include <sys/socket.h>
  #undef KERNEL
  #undef _KERNEL
-@@ -44075,8 +44174,10 @@ cat >>conftest.$ac_ext <<_ACEOF
+@@ -44075,8 +44347,10 @@ cat >>conftest.$ac_ext <<_ACEOF
  #include <sys/types.h>
  #ifdef IFNET_NEEDS_KERNEL
  #define KERNEL
@@ -207,7 +396,7 @@ $NetBSD: patch-af,v 1.13 2009/03/10 18:30:44 apb Exp $
  #include <sys/socket.h>
  #undef KERNEL
  #undef _KERNEL
-@@ -45730,6 +45831,143 @@ fi
+@@ -45730,6 +46004,143 @@ fi
  
  
  ac_safe_struct=`echo "ifnet" | sed 'y%./+-%__p_%'`

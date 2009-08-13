@@ -1,0 +1,22 @@
+$NetBSD$
+
+--- apps/snmpnetstat/inet6.c.orig	2006-09-14 20:48:50.000000000 -0400
++++ apps/snmpnetstat/inet6.c
+@@ -493,7 +493,16 @@ inet6name(const unsigned char *in6)
+ 		if (IN6_IS_ADDR_LINKLOCAL(in6p) ||
+ 		    IN6_IS_ADDR_MC_LINKLOCAL(in6p)) {
+ 			sin6.sin6_scope_id =
+-			    ntohs(*(u_int16_t *)&in6p->s6_addr[2]);
++			    ntohs(*
++
++#if defined(HAVE_U_INT16_T)
++				(u_int16_t *)
++#elif defined(HAVE_UINT16_T)
++				(uint16_t *)
++#else
++#error uint16
++#endif
++				&in6p->s6_addr[2]);
+ 			sin6.sin6_addr.s6_addr[2] = 0;
+ 			sin6.sin6_addr.s6_addr[3] = 0;
+ 		}
