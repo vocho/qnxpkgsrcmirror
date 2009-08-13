@@ -27,6 +27,8 @@ TEST_TARGET=		test
 
 .include "../../mk/bsd.prefs.mk"
 
+LIBS.QNX+= -lsocket
+
 .if ${OPSYS} == "DragonFly"
 MAKE_ENV+=	MIB_SYSTEM_LIBS=-lkinfo
 .endif
@@ -84,6 +86,10 @@ CONFIGURE_ARGS+=	--enable-as-needed
 CONFIGURE_ARGS+=	--without-kmem-usage
 CONFIGURE_ARGS+=	--without-rpm
 .endif
+.if ${OPSYS} == "QNX"
+CONFIGURE_ARGS+=	--with-mib-modules="smux host"
+CONFIGURE_ARGS+=	--with-out-mib-modules="host/hr_swrun"
+.endif
 #
 # Using "dummy" values is technically not compliant with SNMP specs, but
 # otherwise, some tools, e.g. net/tcl-scotty, net/tkined, may ignore results
@@ -122,6 +128,8 @@ INSTALLATION_DIRS+=	share/examples/net-snmp
 post-extract:
 .if ${OPSYS} == "DragonFly"
 	cp ${FILESDIR}/cpu_dragonfly.c ${WRKSRC}/agent/mibgroup/hardware/cpu/cpu_nlist.c
+.elif ${OPSYS} == "QNX"
+	cp ${FILESDIR}/nto-qnx6.h ${WRKSRC}/include/net-snmp/system/nto-qnx6.h
 .endif
 
 post-wrapper:
