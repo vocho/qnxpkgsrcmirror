@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.4 2009/03/22 20:50:10 wiz Exp $
+@comment $NetBSD: PLIST,v 1.6 2009/06/14 21:28:47 joerg Exp $
 share/hal/fdi/information/10freedesktop/10-battery.fdi
 share/hal/fdi/information/10freedesktop/10-camera-ptp.fdi
 share/hal/fdi/information/10freedesktop/10-cd-dvd-burner.fdi
@@ -48,13 +48,5 @@ share/hal/fdi/information/10freedesktop/30-keymap-module-thinkpad-acpi.fdi
 share/hal/fdi/information/10freedesktop/99-video-quirk-default.fdi
 share/hal/fdi/preprobe/10osvendor/10-ide-drives.fdi
 share/hal/fdi/preprobe/10osvendor/20-broken-usb-sticks.fdi
-@exec ${MKDIR} %D/share/hal/fdi/preprobe/20thirdparty
-@dirrm share/hal/fdi/preprobe/20thirdparty
-@dirrm share/hal/fdi/preprobe/10osvendor
-@dirrm share/hal/fdi/preprobe
-@exec ${MKDIR} %D/share/hal/fdi/information/20thirdparty
-@dirrm share/hal/fdi/information/20thirdparty
-@dirrm share/hal/fdi/information/10freedesktop
-@dirrm share/hal/fdi/information
-@dirrm share/hal/fdi
-@dirrm share/hal
+@pkgdir share/hal/fdi/preprobe/20thirdparty
+@pkgdir share/hal/fdi/information/20thirdparty

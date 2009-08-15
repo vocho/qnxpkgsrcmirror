@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.95 2009/05/19 09:20:15 wiz Exp $
+# $NetBSD: Makefile,v 1.102 2009/08/08 06:22:34 tnn Exp $
 #
 
 COMMENT=	Clocks, calendars, daily planners and other time related applications
@@ -41,9 +41,9 @@ SUBDIR+=	ocaml-calendar
 SUBDIR+=	p5-Calendar-Simple
 SUBDIR+=	p5-Data-ICal
 SUBDIR+=	p5-Data-ICal-DateTime
-SUBDIR+=	p5-Date-Calc
 SUBDIR+=	p5-DateTime
 SUBDIR+=	p5-DateTime-Calendar-Discordian
+SUBDIR+=	p5-DateTime-Calendar-Mayan
 SUBDIR+=	p5-DateTime-Event-Cron
 SUBDIR+=	p5-DateTime-Event-ICal
 SUBDIR+=	p5-DateTime-Event-Random
@@ -60,6 +60,7 @@ SUBDIR+=	p5-DateTime-Format-Mail
 SUBDIR+=	p5-DateTime-Format-MySQL
 SUBDIR+=	p5-DateTime-Format-Natural
 SUBDIR+=	p5-DateTime-Format-Pg
+SUBDIR+=	p5-DateTime-Format-SQLite
 SUBDIR+=	p5-DateTime-Format-Strptime
 SUBDIR+=	p5-DateTime-Format-W3CDTF
 SUBDIR+=	p5-DateTime-Locale
@@ -70,12 +71,13 @@ SUBDIR+=	p5-DateTimeX-Easy
 SUBDIR+=	p5-MooseX-Types-DateTime
 SUBDIR+=	p5-Rose-DateTime
 SUBDIR+=	p5-Schedule-Cron-Events
+SUBDIR+=	p5-Template-Plugin-DateTime
 SUBDIR+=	p5-Test-MockTime
-SUBDIR+=	p5-Time
 SUBDIR+=	p5-Time-Clock
 SUBDIR+=	p5-Time-Duration
 SUBDIR+=	p5-Time-Duration-Parse
 SUBDIR+=	p5-Time-Format
+SUBDIR+=	p5-Time-Format_XS
 SUBDIR+=	p5-Time-HiRes
 SUBDIR+=	p5-Time-Interval
 SUBDIR+=	p5-Time-Local
@@ -98,6 +100,7 @@ SUBDIR+=	ptimetracker
 SUBDIR+=	py-dateutil
 SUBDIR+=	py-icalendar
 SUBDIR+=	py-mxDateTime
+SUBDIR+=	py-parsedatetime
 SUBDIR+=	py-pytz
 SUBDIR+=	rclock
 SUBDIR+=	remind

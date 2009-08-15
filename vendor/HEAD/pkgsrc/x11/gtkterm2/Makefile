@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.13 2008/07/14 12:56:15 joerg Exp $
+# $NetBSD: Makefile,v 1.15 2009/06/11 08:10:26 wiz Exp $
 
 DISTNAME=	gtkterm2-0.2.3
-PKGREVISION=	4
+PKGREVISION=	6
 CATEGORIES=	x11
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=gtkterm/}
 

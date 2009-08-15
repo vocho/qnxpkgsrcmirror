@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.2 2008/12/19 22:09:55 markd Exp $
+# $NetBSD: Makefile,v 1.4 2009/07/25 12:08:26 markd Exp $
 #
 
-DISTNAME=	numpy-1.1.0
-PKGNAME=	${PYPKGPREFIX}-numpy-1.1.0
+DISTNAME=	numpy-1.3.0
+PKGNAME=	${PYPKGPREFIX}-numpy-1.3.0
 CATEGORIES=	math python
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=numpy/}
 
@@ -13,7 +13,6 @@ COMMENT=	Array processing for numbers, strings, records, and objects
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 PYDISTUTILSPKG=	yes
-PYTHON_VERSIONS_ACCEPTED=	25 24 23
 USE_LANGUAGES+=	c fortran
 PLIST_SUBST+=	PYVERSSUFFIX=${PYVERSSUFFIX}
 MAKE_ENV+=	ATLAS=None

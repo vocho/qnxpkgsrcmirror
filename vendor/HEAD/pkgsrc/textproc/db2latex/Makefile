@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.14 2008/05/26 02:13:24 joerg Exp $
+# $NetBSD: Makefile,v 1.17 2009/07/28 16:27:11 minskim Exp $
 
 DISTNAME=	db2latex-xsl-0.8pre1
 PKGNAME=	${DISTNAME:S/xsl-//}
-PKGREVISION=	5
+PKGREVISION=	6
 CATEGORIES=	textproc
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=db2latex/}
 
@@ -11,6 +11,7 @@ HOMEPAGE=	http://db2latex.sourceforge.net/
 COMMENT=	Set of XSLT stylesheets converting DocBook to LaTeX2e
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 NO_CONFIGURE=	yes
 NO_BUILD=	yes
@@ -31,12 +32,12 @@ post-extract:
 pre-install:
 	${FIND} ${WRKSRC} -name \*.orig -exec ${RM} {} \;
 
+INSTALLATION_DIRS=	${DOCDIR} ${XSLDIR}
+
 do-install:
-	${INSTALL_DATA_DIR} ${DOCDIR}
-	${INSTALL_DATA_DIR} ${XSLDIR}
-	cd ${WRKSRC}/doc && pax -rwpm . ${DOCDIR}
+	cd ${WRKSRC}/doc && pax -rwpm . ${DESTDIR}${DOCDIR}
 	cd ${WRKSRC} && pax -rwpm AUTHOR COPYING COPYRIGHT README \
-		TODO VERSION ${DOCDIR}
-	cd ${WRKSRC}/xsl && pax -rwpm . ${XSLDIR}
+		TODO VERSION ${DESTDIR}${DOCDIR}
+	cd ${WRKSRC}/xsl && pax -rwpm . ${DESTDIR}${XSLDIR}
 
 .include "../../mk/bsd.pkg.mk"

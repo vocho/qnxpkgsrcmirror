@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.40 2009/05/19 08:59:18 wiz Exp $
+# $NetBSD: Makefile,v 1.42 2009/08/11 14:35:15 drochner Exp $
 
 DISTNAME=	pstoedit-3.45
+PKGREVISION=	1
 CATEGORIES=	converters graphics print
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=pstoedit/}
 
@@ -19,6 +20,8 @@ NO_SRC_ON_CDROM=	${RESTRICTED}
 NO_BIN_ON_CDROM=	${RESTRICTED}
 
 PKG_DESTDIR_SUPPORT=	user-destdir
+
+MAKE_JOBS_SAFE=		no
 
 USE_TOOLS+=	gs:run
 

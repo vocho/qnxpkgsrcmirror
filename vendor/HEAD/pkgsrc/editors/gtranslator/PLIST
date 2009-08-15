@@ -1,8 +1,8 @@
-@comment $NetBSD: PLIST,v 1.4 2007/05/12 13:46:20 wiz Exp $
+@comment $NetBSD: PLIST,v 1.6 2009/06/14 17:50:23 joerg Exp $
 bin/gtranslator
 bin/pozilla.sh
-man/man1/gtranslator.1.gz
-man/man1/pozilla.sh.1.gz
+man/man1/gtranslator.1
+man/man1/pozilla.sh.1
 share/applications/gtranslator.desktop
 share/gnome/help/gtranslator/C/figures/mainwindow.png
 share/gnome/help/gtranslator/C/figures/prefs.png
@@ -95,12 +95,3 @@ share/pixmaps/gtranslator/fuzzy.png
 share/pixmaps/gtranslator/fuzzy_small.png
 share/pixmaps/gtranslator/untranslated.png
 share/pixmaps/gtranslator/untranslated_small.png
-@dirrm share/gnome/help/gtranslator/C/figures
-@dirrm share/gnome/help/gtranslator/C
-@dirrm share/gnome/help/gtranslator
-@dirrm share/pixmaps/gtranslator
-@dirrm share/omf/gtranslator
-@dirrm share/gtranslator/scripts
-@dirrm share/gtranslator/dtd
-@dirrm share/gtranslator/colorschemes
-@dirrm share/gtranslator

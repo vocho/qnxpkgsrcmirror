@@ -1,9 +1,8 @@
-# $NetBSD: options.mk,v 1.2 2009/04/22 02:33:06 schmonz Exp $
+# $NetBSD: options.mk,v 1.5 2009/08/12 21:14:35 schmonz Exp $
 
 PKG_OPTIONS_VAR=		PKG_OPTIONS.ikiwiki
 PKG_SUPPORTED_OPTIONS=		ikiwiki-amazon-s3 ikiwiki-search
 PKG_SUPPORTED_OPTIONS+=		imagemagick python svn w3m
-PKG_OPTIONS_LEGACY_OPTS+=	amazon_s3:ikiwiki-amazon-s3
 
 .include "../../mk/bsd.options.mk"
 
@@ -23,11 +22,15 @@ DEPENDS+=	p5-PerlMagick-[0-9]*:../../graphics/p5-PerlMagick
 .endif
 
 .if !empty(PKG_OPTIONS:Mpython)
-REPLACE_PYTHON+=plugins/proxy.py plugins/rst
 DEPENDS+=	${PYPKGPREFIX}-docutils-[0-9]*:../../textproc/py-docutils
 .include "../../lang/python/application.mk"
 .else
-CHECK_INTERPRETER_SKIP+=	lib/ikiwiki/plugins/*
+CHECK_INTERPRETER_SKIP+=lib/ikiwiki/plugins/*
+# and no python dependency, so let's not use a system python by mistake
+REPLACE_INTERPRETER+=	python
+REPLACE.python.old=	.*python[^[:space:]]*
+REPLACE.python.new=	${LOCALBASE}/bin/python
+REPLACE_FILES.python=	${REPLACE_PYTHON}
 .endif
 
 .if !empty(PKG_OPTIONS:Msvn)
@@ -38,7 +41,6 @@ PLIST_VARS+=		w3m
 .if !empty(PKG_OPTIONS:Mw3m)
 DEPENDS+=		w3m-[0-9]*:../../www/w3m
 PLIST.w3m=		yes
-SUBST_SED.makefile+=	-e 's,/lib/w3m/cgi-bin,/libexec/w3m/cgi-bin,'
 INSTALLATION_DIRS+=	share/doc/${PKGBASE}/w3mmode
 post-install:
 	${INSTALL_DATA} ${WRKSRC}/html/w3mmode.html \
@@ -46,5 +48,8 @@ post-install:
 	${INSTALL_DATA} ${WRKSRC}/doc/w3mmode/ikiwiki.setup \
 		${PREFIX}/share/doc/${PKGBASE}/w3mmode/ikiwiki.setup
 .else
-SUBST_SED.makefile+=	-e 's,^\(.*install .*W3M_CGI_BIN\),\#\1,'
+SUBST_CLASSES+=		w3m
+SUBST_STAGE.w3m=	post-patch
+SUBST_FILES.w3m=	Makefile.PL
+SUBST_SED.w3m+=		-e 's,^\(.*install .*W3M_CGI_BIN\),\#\1,'
 .endif

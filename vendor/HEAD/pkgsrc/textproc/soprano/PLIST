@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.3 2009/01/27 11:35:10 markd Exp $
+@comment $NetBSD: PLIST,v 1.6 2009/07/25 11:52:55 markd Exp $
 bin/onto2vocabularyclass
 bin/sopranocmd
 bin/sopranod
@@ -23,6 +23,7 @@ include/Soprano/Error/Locator
 include/Soprano/Error/ParserError
 include/Soprano/FilterModel
 include/Soprano/Global
+include/Soprano/Graph
 include/Soprano/Index/CLuceneIndex
 include/Soprano/Index/IndexFilterModel
 include/Soprano/Index/QueryHit
@@ -35,8 +36,10 @@ include/Soprano/Inference/StandardRuleSet
 include/Soprano/Inference/StatementPattern
 include/Soprano/Iterator
 include/Soprano/IteratorBackend
+include/Soprano/LanguageTag
 include/Soprano/LiteralValue
 include/Soprano/Model
+include/Soprano/NRLModel
 include/Soprano/Node
 include/Soprano/NodeIterator
 include/Soprano/Parser
@@ -88,6 +91,7 @@ include/soprano/dummymodel.h
 include/soprano/error.h
 include/soprano/filtermodel.h
 include/soprano/global.h
+include/soprano/graph.h
 include/soprano/indexfiltermodel.h
 include/soprano/indexqueryhit.h
 include/soprano/inferencemodel.h
@@ -96,6 +100,7 @@ include/soprano/inferenceruleparser.h
 include/soprano/inferenceruleset.h
 include/soprano/iterator.h
 include/soprano/iteratorbackend.h
+include/soprano/languagetag.h
 include/soprano/literalvalue.h
 include/soprano/localsocketclient.h
 include/soprano/locator.h
@@ -106,6 +111,7 @@ include/soprano/node.h
 include/soprano/nodeiterator.h
 include/soprano/nodepattern.h
 include/soprano/nrl.h
+include/soprano/nrlmodel.h
 include/soprano/owl.h
 include/soprano/parser.h
 include/soprano/plugin.h
@@ -124,6 +130,7 @@ include/soprano/simplenodeiterator.h
 include/soprano/simplestatementiterator.h
 include/soprano/soprano.h
 include/soprano/soprano_export.h
+include/soprano/sopranomacros.h
 include/soprano/sopranotypes.h
 include/soprano/sparqlmodel.h
 include/soprano/statement.h
@@ -137,13 +144,13 @@ include/soprano/xesam.h
 include/soprano/xsd.h
 lib/libsoprano.so
 lib/libsoprano.so.4
-lib/libsoprano.so.4.1.0
+lib/libsoprano.so.4.2.0
 lib/libsopranoclient.so
 lib/libsopranoclient.so.1
-lib/libsopranoclient.so.1.0.0
+lib/libsopranoclient.so.1.1.0
 lib/libsopranoindex.so
 lib/libsopranoindex.so.1
-lib/libsopranoindex.so.1.0.0
+lib/libsopranoindex.so.1.1.0
 lib/libsopranoserver.so
 lib/libsopranoserver.so.1
 lib/libsopranoserver.so.1.0.0
@@ -158,6 +165,7 @@ share/dbus-1/interfaces/org.soprano.NodeIterator.xml
 share/dbus-1/interfaces/org.soprano.QueryResultIterator.xml
 share/dbus-1/interfaces/org.soprano.Server.xml
 share/dbus-1/interfaces/org.soprano.StatementIterator.xml
+share/kde/apps/cmake/modules/SopranoAddOntology.cmake
 share/soprano/plugins/nquadparser.desktop
 share/soprano/plugins/nquadserializer.desktop
 share/soprano/plugins/raptorparser.desktop
@@ -165,17 +173,3 @@ share/soprano/plugins/raptorserializer.desktop
 share/soprano/plugins/redlandbackend.desktop
 share/soprano/rules/nrl.rules
 share/soprano/rules/rdfs.rules
-@dirrm share/soprano/rules
-@dirrm share/soprano/plugins
-@dirrm share/soprano
-@dirrm lib/soprano
-@dirrm include/soprano
-@dirrm include/Soprano/Vocabulary
-@dirrm include/Soprano/Util
-@dirrm include/Soprano/Server
-@dirrm include/Soprano/Query
-@dirrm include/Soprano/Inference
-@dirrm include/Soprano/Index
-@dirrm include/Soprano/Error
-@dirrm include/Soprano/Client
-@dirrm include/Soprano

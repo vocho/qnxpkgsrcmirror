@@ -1,4 +1,4 @@
-$NetBSD: distinfo,v 1.26 2009/03/19 11:32:45 drochner Exp $
+$NetBSD: distinfo,v 1.28 2009/07/03 16:05:28 drochner Exp $
 
 SHA1 (gnome-vfs-2.24.1.tar.bz2) = 0e7b548ffe7b9eddaef3a43cdda47de538715f8b
 RMD160 (gnome-vfs-2.24.1.tar.bz2) = e4c6f99b67496a456596b7040aff859ca49a8998

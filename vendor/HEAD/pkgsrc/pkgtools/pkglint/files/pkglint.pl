@@ -1,5 +1,5 @@
 #! @PERL@
-# $NetBSD: pkglint.pl,v 1.812 2009/05/26 21:40:42 rillig Exp $
+# $NetBSD: pkglint.pl,v 1.819 2009/07/26 21:03:19 rillig Exp $
 #
 
 # pkglint - static analyzer and checker for pkgsrc packages
@@ -1374,6 +1374,7 @@ my $regex_shellword		=  qr"\s*(
 	|	\$[/\@<^]		# special make(1) variables
 	|	\$\$[0-9A-Z_a-z]+	# shell variable
 	|	\$\$[\#?@]		# special shell variables
+	|	\$\$\$\$		# the special pid shell variable
 	|	\$\$\{[0-9A-Z_a-z]+\}	# shell variable in braces
 	|	\$\$\(			# POSIX-style backticks replacement
 	|	[^\(\)'\"\\\s;&\|<>\`\$] # non-special character
@@ -2351,27 +2352,6 @@ sub load_shared_dirs() {
 	$load_shared_dirs_dir_to_id = $dir_to_id;
 }
 
-# Given a directory name, returns a list of possible identifiers to be
-# used in USE_DIRS.
-sub get_shared_dir_ids($$) {
-	my ($line, $dir) = @_;
-	my @ids;
-
-	$opt_debug_trace and $line->log_debug("get_shared_dir_ids(\"$dir\")");
-
-	load_shared_dirs();
-	my $varname = $load_shared_dirs_dir_to_varname->{$dir};
-	return () unless $varname;
-	#print "varname=$varname\n";
-	foreach my $dir2 (@{$load_shared_dirs_varname_to_dirs->{$varname}}) {
-		#print "dir2=$dir2\n";
-		my $id = $load_shared_dirs_dir_to_id->{$dir2};
-		#print "id=$id\n";
-		push(@ids, $id);
-	}
-	return @ids;
-}
-
 #
 # Miscellaneous functions
 #
@@ -2562,6 +2542,34 @@ sub relative_path($$) {
 	}
 }
 
+sub resolve_variable_rec1($$);
+sub resolve_variable_rec2($$);
+
+sub resolve_variable_rec1($$) {
+	my ($varname, $visited) = @_;
+	$opt_debug_trace and log_debug(NO_FILE, NO_LINES, "resolve_variable_rec1($varname)");
+
+	if (!exists($visited->{$varname})) {
+		$visited->{$varname} = true;
+		if (defined($pkgctx_vardef) && exists($pkgctx_vardef->{$varname})) {
+			return resolve_variable_rec2($pkgctx_vardef->{$varname}->get("value"), $visited);
+		}
+		if (defined($mkctx_vardef) && exists($mkctx_vardef->{$varname})) {
+			return resolve_variable_rec2($mkctx_vardef->{$varname}->get("value"), $visited);
+		}
+	}
+	return "\${$varname}";
+}
+
+sub resolve_variable_rec2($$) {
+	my ($string, $visited) = @_;
+	$opt_debug_trace and log_debug(NO_FILE, NO_LINES, "resolve_variable_rec2(\"$string\")");
+
+	my $expanded = $string;
+	$expanded =~ s/\$\{(\w+)\}/resolve_variable_rec1($1, $visited)/eg;
+	return $expanded;
+}
+
 sub expand_variable($) {
 	my ($varname) = @_;
 
@@ -2571,7 +2579,11 @@ sub expand_variable($) {
 
 	$value = resolve_relative_path($value, true);
 	if ($value =~ regex_unresolved) {
-		$opt_debug_misc and log_debug(NO_FILE, NO_LINES, "[expand_variable] The variable ${varname} could not be resolved completely. Its value is \"${value}\".");
+		$opt_debug_misc and log_debug(NO_FILE, NO_LINES, "[expand_variable] Trying harder to resolve variable references in ${varname}=\"${value}\".");
+		$value = resolve_variable_rec2($value, {});
+		if ($value =~ regex_unresolved) {
+			$opt_debug_misc and log_debug(NO_FILE, NO_LINES, "[expand_variable] Failed to resolve ${varname}=\"${value}\".");
+		}
 	}
 	return $value;
 }
@@ -2703,6 +2715,21 @@ sub var_is_used($) {
 		return $pkgctx_varuse->{$varcanon} if exists($pkgctx_varuse->{$varcanon});
 	}
 	return false;
+}
+
+sub def_var($$) {
+	my ($line, $varname) = @_;
+	my $varcanon = varname_canon($varname);
+
+	if (defined($mkctx_vardef)) {
+		$mkctx_vardef->{$varname} = $line;
+		$mkctx_vardef->{$varcanon} = $line;
+	}
+
+	if (defined($pkgctx_vardef)) {
+		$pkgctx_vardef->{$varname} = $line;
+		$pkgctx_vardef->{$varcanon} = $line;
+	}
 }
 
 sub var_is_defined($) {
@@ -4178,7 +4205,8 @@ sub checkline_mk_shellword($$$) {
 				$state = SWST_BACKT;
 			} elsif ($rest =~ s/^\\(?:[ !"#'\(\)*;?\\^{|}]|\$\$)//) {
 			} elsif ($rest =~ s/^\$\$([0-9A-Z_a-z]+|\#)//
-			    || $rest =~ s/^\$\$\{([0-9A-Z_a-z]+|\#)\}//) {
+			    || $rest =~ s/^\$\$\{([0-9A-Z_a-z]+|\#)\}//
+			    || $rest =~ s/^\$\$(\$)\$//) {
 				my ($shvarname) = ($1);
 				if ($opt_warn_quoting && $check_quoting) {
 					$line->log_warning("Unquoted shell variable \"${shvarname}\".");
@@ -4482,6 +4510,11 @@ sub checkline_mk_shelltext($$) {
 
 			} elsif ($shellword =~ m"^\$\{([\w_]+)\}$" && defined($type = get_variable_type($line, $1)) && $type->basic_type eq "ShellCommand") {
 				checkline_mk_shellcmd_use($line, $shellword);
+
+			} elsif ($shellword =~ m"^\$\{(\w+)\}$" && defined($pkgctx_vardef) && exists($pkgctx_vardef->{$1})) {
+				# When the package author has explicitly
+				# defined a command variable, assume it
+				# to be valid.
 
 			} elsif ($shellword =~ m"^(?:\(|\)|:|;|;;|&&|\|\||\{|\}|break|case|cd|continue|do|done|elif|else|esac|eval|exec|exit|export|fi|for|if|read|set|shift|then|umask|unset|while)$") {
 				# Shell builtins are fine.
@@ -4955,10 +4988,6 @@ sub checkline_mk_vartype_basic($$$$$$$$) {
 			} elsif ($pkg eq "gmake") {
 				$line->log_warning("Please use USE_TOOLS+=gmake instead of this dependency.");
 
-			} elsif ($pkg =~ m"^([-a-zA-Z0-9]+)-dirs[-><=]+(.*)$") {
-				my ($dirs, $version) = ($1, $2);
-
-				$line->log_warning("Please use USE_DIRS+=${dirs}-${version} instead of this dependency.");
 			}
 
 		} elsif ($value =~ m":\.\./[^/]+$") {
@@ -4978,6 +5007,30 @@ sub checkline_mk_vartype_basic($$$$$$$$) {
 		if ($value eq ".tar.gz") {
 			$line->log_note("${varname} is \".tar.gz\" by default, so this definition may be redundant.");
 		}
+
+	} elsif ($type eq "EmulPlatform") {
+		if ($value =~ m"^(\w+)-(\w+)$") {
+			my ($opsys, $arch) = ($1, $2);
+
+			if ($opsys !~ m"^(?:bsdos|darwin|dragonfly|freebsd|hpux|interix|irix|linux|netbsd|openbsd|osf1|sunos)$") {
+				$line->log_warning("Unknown operating system: ${opsys}");
+			}
+			# no check for $os_version
+			if ($arch !~ m"^(?:i386|alpha|amd64|arc|arm|arm32|cobalt|convex|dreamcast|hpcmips|hpcsh|hppa|ia64|m68k|m88k|mips|mips64|mipsel|mipseb|mipsn32|ns32k|pc532|pmax|powerpc|rs6000|s390|sparc|sparc64|vax|x86_64)$") {
+				$line->log_warning("Unknown hardware architecture: ${arch}");
+			}
+
+		} else {
+			$line->log_warning("\"${value}\" is not a valid emulation platform.");
+			$line->explain_warning(
+"An emulation platform has the form <OPSYS>-<MACHINE_ARCH>.",
+"OPSYS is the lower-case name of the operating system, and MACHINE_ARCH",
+"is the hardware architecture.",
+"",
+"Examples: linux-i386, irix-mipsel.");
+		}
+
+
 
 	} elsif ($type eq "Filename") {
 		if ($value_novar =~ m"/") {
@@ -5838,6 +5891,7 @@ sub checklines_package_Makefile_varorder($) {
 		[ "Legal issues", optional,
 			[
 				[ "LICENSE", once ],
+				[ "LICENSE_FILE", optional ],
 				[ "RESTRICTED", optional ],
 				[ "NO_BIN_ON_CDROM", optional ],
 				[ "NO_BIN_ON_FTP", optional ],
@@ -6012,6 +6066,12 @@ sub checklines_mk($) {
 			foreach my $svar (split(/\s+/, $line->get("value"))) {
 				use_var($svar, varname_canon($svar));
 				$opt_debug_misc and $line->log_debug("varuse $svar");
+			}
+
+		} elsif ($varcanon eq "OPSYSVARS") {
+			foreach my $osvar (split(/\s+/, $line->get("value"))) {
+				use_var($line, "$osvar.*");
+				def_var($line, $osvar);
 			}
 		}
 	}
@@ -7616,7 +7676,7 @@ sub checkfile_PLIST($) {
 			if ($cmd eq "unexec" && $arg =~ m"^(rmdir|\$\{RMDIR\} \%D/)(.*)") {
 				my ($rmdir, $rest) = ($1, $2);
 				if ($rest !~ m"(?:true|\$\{TRUE\})") {
-					$line->log_warning("Please use \"\@dirrm\" instead of \"\@unexec rmdir\".");
+					$line->log_warning("Please remove this line. It is no longer necessary.");
 				}
 
 			} elsif (($cmd eq "exec" || $cmd eq "unexec")) {
@@ -7631,23 +7691,13 @@ sub checkfile_PLIST($) {
 				# nothing to do
 
 			} elsif ($cmd eq "dirrm") {
-				my @ids = get_shared_dir_ids($line, $arg);
-				if (@ids == 0) {
-					# Nothing to do
-				} elsif (@ids == 1) {
-					$line->log_warning("Please add \"USE_DIRS+= $ids[0]\" to the package Makefile and remove this line.");
-				} else {
-					my $s = join(" or ", map { "\"USE_DIRS+= $_\"" } @ids);
-					$line->log_warning("Please add $s to the package Makefile and remove this line.");
-				}
-				if (!exists($all_dirs->{$arg})) {
-					$line->log_warning("The PLIST does not contain files for \"$arg\".");
-					$line->explain_warning(
-"A package should only remove those directories that it created. When",
-"there are no files in the directory, it is unlikely that the package",
-"created the directory.");
-				}
+				$line->log_warning("\@dirrm is obsolete. Please remove this line.");
+				$line->explain_warning(
+"Directories are removed automatically when they are empty.",
+"When a package needs an empty directory, it can use the \@pkgdir",
+"command in the PLIST");
 
+				# XXX: this check should be made independent of dirrm
 				if ($pkgpath ne "graphics/hicolor-icon-theme" && $arg =~ m"^share/icons/hicolor(?:$|/)") {
 					$line->log_error("Please .include \"../../graphics/hicolor-icon-theme/buildlink3.mk\" and remove this line.");
 				}
@@ -7660,6 +7710,9 @@ sub checkfile_PLIST($) {
 						warn_about_PLIST_imake_mannewsuffix($line);
 					}
 				}
+
+			} elsif ($cmd eq "pkgdir") {
+				# TODO: What can we check here?
 
 			} else {
 				$line->log_warning("Unknown PLIST directive \"\@$cmd\".");
@@ -7801,7 +7854,6 @@ sub checkfile_PLIST($) {
 				if (defined($pkgctx_included) && !exists($pkgctx_included->{$f})) {
 					$line->log_warning("Packages that install a .desktop entry should .include \"$f\".");
 				}
-				# TODO: check that USE_DIRS contains any xdg-*
 
 			} elsif ($dirname eq "share/aclocal" && $basename =~ m"\.m4$") {
 				# Fine.

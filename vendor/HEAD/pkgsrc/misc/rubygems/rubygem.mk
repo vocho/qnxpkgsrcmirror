@@ -1,4 +1,4 @@
-# $NetBSD: rubygem.mk,v 1.40 2009/04/07 07:35:44 minskim Exp $
+# $NetBSD: rubygem.mk,v 1.44 2009/06/14 22:34:19 minskim Exp $
 #
 # This Makefile fragment is intended to be included by packages that build
 # and install Ruby gems.
@@ -103,6 +103,7 @@ EXTRACT_ONLY?=	# empty
 
 # Base directory for Gems
 GEM_HOME=	${PREFIX}/lib/ruby/gems/${RUBY_VER_DIR}
+MAKE_ENV+=	GEM_PATH=${GEM_HOME}
 
 # Directory for the Gem to install
 GEM_NAME?=	${DISTNAME}
@@ -134,14 +135,11 @@ PLIST_SUBST+=		GEM_DOCDIR=${GEM_DOCDIR:S|^${PREFIX}/||}
 # print-PLIST support
 PRINT_PLIST_AWK+=	/${GEM_NAME:S/./[.]/g}[.](gem|gemspec)$$/ \
 			{ gsub(/${PKGVERSION_NOREV:S|/|\\/|g}[.]gem/, "$${PKGVERSION}.gem"); }
-PRINT_PLIST_AWK+=	/^(@dirrm )?${GEM_LIBDIR:S|${PREFIX}/||:S|/|\\/|g}/ \
+PRINT_PLIST_AWK+=	/^${GEM_LIBDIR:S|${PREFIX}/||:S|/|\\/|g}/ \
 			{ gsub(/${GEM_LIBDIR:S|${PREFIX}/||:S|/|\\/|g}/, "$${GEM_LIBDIR}"); print; next; }
-PRINT_PLIST_AWK+=	/^(@dirrm )?${GEM_DOCDIR:S|${PREFIX}/||:S|/|\\/|g}/ \
+PRINT_PLIST_AWK+=	/^${GEM_DOCDIR:S|${PREFIX}/||:S|/|\\/|g}/ \
 			{ next; }
-PRINT_PLIST_AWK+=	/^@dirrm ${GEM_HOME:S|${PREFIX}/||:S|/|\\/|g}(\/(gems|cache|doc|specifications))?$$/ \
-			{ next; }
-PRINT_PLIST_AWK+=	/^@dirrm lib\/ruby\/gems$$/ { next; }
-PRINT_PLIST_AWK+=	/^(@dirrm )?${GEM_HOME:S|${PREFIX}/||:S|/|\\/|g}/ \
+PRINT_PLIST_AWK+=	/^${GEM_HOME:S|${PREFIX}/||:S|/|\\/|g}/ \
 			{ gsub(/${GEM_HOME:S|${PREFIX}/||:S|/|\\/|g}/, "$${GEM_HOME}"); print; next; }
 
 ###
@@ -186,7 +184,7 @@ gem-build: _gem-${GEM_BUILD}-build
 _gem-gemspec-build:
 	${RUN} cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} \
 		${RUBYGEM} build ${GEM_SPECFILE}
-	${RUN} test -f ${WRKSRC}/${GEM_NAME}.gem || \
+	${RUN} ${TEST} -f ${WRKSRC}/${GEM_NAME}.gem || \
 		${FAIL_MSG} "Build of ${GEM_NAME}.gem failed."
 
 BUILD_TARGET?=	gem
@@ -205,6 +203,7 @@ _RUBYGEM_INSTALL_ROOT=	${WRKDIR}/.inst
 _RUBYGEM_OPTIONS=	--no-update-sources	# don't cache the gem index
 _RUBYGEM_OPTIONS+=	--install-dir ${GEM_HOME}
 _RUBYGEM_OPTIONS+=	--install-root ${_RUBYGEM_INSTALL_ROOT}
+_RUBYGEM_OPTIONS+=	--ignore-dependencies
 _RUBYGEM_OPTIONS+=	--local ${WRKSRC}/${GEM_NAME}.gem
 _RUBYGEM_OPTIONS+=	-- --build-args ${CONFIGURE_ARGS}
 
@@ -219,7 +218,7 @@ _gem-build-install-root:
 # 
 .PHONY: _gem-build-install-root-check
 _gem-build-install-root-check:
-	${RUN} test -f ${_RUBYGEM_INSTALL_ROOT}${GEM_CACHEDIR}/${GEM_NAME}.gem || \
+	${RUN} ${TEST} -f ${_RUBYGEM_INSTALL_ROOT}${GEM_CACHEDIR}/${GEM_NAME}.gem || \
 		${FAIL_MSG} "Installing ${GEM_NAME}.gem into installation root failed."
 
 .if !empty(GEM_CLEANBUILD)
@@ -235,10 +234,10 @@ _gem-build-cleanbuild:
 		esac;							\
 		[ ! -e ${WRKSRC:Q}"/$$file" ] || continue;		\
 		if [ -d "$$file" ]; then				\
-			echo "rmdir "${GEM_LIBDIR:T}"/$$file";		\
+			${ECHO} "rmdir "${GEM_LIBDIR:T}"/$$file";	\
 			rmdir $$file;					\
 		else							\
-			echo "rm "${GEM_LIBDIR:T}"/$$file";		\
+			${ECHO} "rm "${GEM_LIBDIR:T}"/$$file";		\
 			rm -f $$file;					\
 		fi;							\
 	done
@@ -255,9 +254,7 @@ RUBYGEM_GENERATE_PLIST=	\
 	${ECHO} "@comment The following lines are automatically generated." && \
 	( cd ${_RUBYGEM_INSTALL_ROOT}${PREFIX} && \
 	  ${FIND} ${GEM_DOCDIR:S|${PREFIX}/||} \! -type d -print | \
-		${SORT} && \
-	  ${FIND} ${GEM_DOCDIR:S|${PREFIX}/||} -type d -print | \
-		${SORT} -r | ${SED} -e "s,^,@dirrm ," );
+		${SORT} );
 
 _GEM_INSTALL_TARGETS=	_gem-build-install-root
 _GEM_INSTALL_TARGETS+=	_gem-build-install-root-check

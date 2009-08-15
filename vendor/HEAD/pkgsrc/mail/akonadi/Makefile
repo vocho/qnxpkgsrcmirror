@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.7 2009/05/06 11:08:17 markd Exp $
+# $NetBSD: Makefile,v 1.10 2009/08/04 21:15:52 markd Exp $
 
-DISTNAME=	akonadi-1.1.2
+DISTNAME=	akonadi-1.2.0
 CATEGORIES=	mail
 MASTER_SITES=	http://download.akonadi-project.org/
 EXTRACT_SUFX=	.tar.bz2
@@ -8,6 +8,7 @@ EXTRACT_SUFX=	.tar.bz2
 MAINTAINER=	markd@NetBSD.org
 HOMEPAGE=	http://pim.kde.org/akonadi/
 COMMENT=	The KDE PIM Storage Service
+LICENSE=	gnu-lgpl-v2.1
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
@@ -18,7 +19,6 @@ BUILD_DEPENDS+=	libxslt-[0-9]*:../../textproc/libxslt
 DEPENDS+=	mysql-server-[0-9]*:../../databases/mysql5-server
 DEPENDS+=	qt4-mysql-[0-9]*:../../x11/qt4-mysql
 
-USE_DIRS+=	kde4-1.0
 USE_TOOLS+=	pkg-config
 USE_LANGUAGES=	c c++
 USE_CMAKE=	yes
@@ -39,6 +39,7 @@ SUBST_SED.mysql=	-e "s:MYSQLD_EXECUTABLE mysqld:MYSQLD_EXECUTABLE mysqld ${PREFI
 
 .include "../../databases/shared-mime-info/buildlink3.mk"
 .include "../../devel/boost-libs/buildlink3.mk"
+.include "../../textproc/soprano/buildlink3.mk"
 .include "../../x11/qt4-libs/buildlink3.mk"
 .include "../../x11/qt4-tools/buildlink3.mk"
 .include "../../x11/qt4-qdbus/buildlink3.mk"

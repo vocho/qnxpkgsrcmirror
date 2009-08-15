@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.151 2009/04/07 11:40:20 drochner Exp $
+# $NetBSD: Makefile,v 1.153 2009/08/04 08:14:39 abs Exp $
 #
 
 DISTNAME=	gdm-2.20.10
@@ -14,7 +14,6 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 
 DEPENDS+=	zenity>=2.16.0:../../x11/zenity
 
-USE_DIRS+=		gnome2-1.5
 USE_PKGLOCALEDIR=	YES
 GNU_CONFIGURE=		YES
 USE_LIBTOOL=		YES
@@ -132,6 +131,7 @@ PRINT_PLIST_AWK+=	/gdmopen/ { print "$${GDMOPEN}" $$0; next }
 .include "../../devel/glib2/buildlink3.mk"
 .include "../../devel/libglade/buildlink3.mk"
 .include "../../devel/pango/buildlink3.mk"
+.include "../../devel/popt/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 BUILDLINK_API_DEPENDS.libart+=	libart>=2.3.11
 .include "../../graphics/libart/buildlink3.mk"

@@ -1,4 +1,4 @@
-# $NetBSD: options.mk,v 1.12 2009/05/15 09:43:55 tnn Exp $
+# $NetBSD: options.mk,v 1.14 2009/08/10 12:14:50 tnn Exp $
 
 .include "../../mk/bsd.prefs.mk"
 
@@ -14,7 +14,6 @@ PKG_SUGGESTED_OPTIONS=	gtk
 . include "../../x11/gtk2/buildlink3.mk"
 . include "../../sysutils/desktop-file-utils/desktopdb.mk"
 CONFIGURE_ARGS+=	--with-gtk
-USE_DIRS+=		xdg-1.1
 PLIST_SRC+=		${PKGDIR}/PLIST.gtk
 .else
 CONFIGURE_ARGS+=	--without-gtk
@@ -23,9 +22,9 @@ pre-configure:
 .endif
 
 .if !empty(PKG_OPTIONS:Mqt)
-. if empty(PKG_OPTIONS:Mgtk)
+.  if empty(PKG_OPTIONS:Mgtk)
 PKG_FAIL_REASON=	"qt needs gtk option (for now)"
-. endif
+.  endif
 USE_LANGUAGES+=		c c++
 PLIST_SRC+=		${PKGDIR}/PLIST.qt
 MAKE_ENV+=		QTDIR=${QTDIR}

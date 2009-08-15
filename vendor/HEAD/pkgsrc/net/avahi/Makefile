@@ -1,18 +1,17 @@
-# $NetBSD: Makefile,v 1.11 2009/03/08 10:08:16 wiz Exp $
+# $NetBSD: Makefile,v 1.13 2009/07/22 09:01:40 wiz Exp $
 
-DISTNAME=		avahi-0.6.24
-PKGREVISION=		1
+DISTNAME=		avahi-0.6.25
 CATEGORIES=		net
 MASTER_SITES=		http://avahi.org/download/
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://avahi.org/
 COMMENT=		Facilitate service discovery on a local network
+LICENSE=		gnu-lgpl-v2.1
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=		YES
-USE_DIRS+=		xdg-1.4
 USE_LIBTOOL=		YES
 USE_PKGINSTALL=		YES
 USE_PKGLOCALEDIR=	YES

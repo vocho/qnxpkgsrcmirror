@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.3 2009/03/01 18:13:50 minskim Exp $
+# $NetBSD: Makefile,v 1.5 2009/07/27 08:59:36 minskim Exp $
 
 DISTNAME=	xdvik-22.84.14
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	print
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=xdvi/}
 
@@ -60,6 +60,9 @@ XDVI_PAPERSIZE=	a4
 .include "../../x11/libXp/buildlink3.mk"
 .include "../../x11/libXpm/buildlink3.mk"
 .include "../../mk/xaw.buildlink3.mk"
+
+post-extract:
+	${RM} ${WRKSRC}/texmf/XDvi
 
 post-build:
 	${MKDIR} -p ${WRKSRC}/texmf/xdvi

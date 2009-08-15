@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.23 2009/02/15 09:43:38 wiz Exp $
+# $NetBSD: Makefile,v 1.25 2009/07/22 09:01:18 wiz Exp $
 #
 
 DISTNAME=	gtkpod-0.99.14
+PKGREVISION=	1
 CATEGORIES=	audio
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=gtkpod/}
 
@@ -11,7 +12,6 @@ COMMENT=	GUI for iPod using GTK2
 
 GNU_CONFIGURE=		yes
 
-USE_DIRS=		xdg-1.4
 USE_LIBTOOL=		yes
 USE_PKGLOCALEDIR=	yes
 USE_TOOLS+=		intltool gmake lex msgfmt perl:run pkg-config
@@ -21,7 +21,8 @@ REPLACE_PERL+=		scripts/mab2vcard
 REPLACE_INTERPRETER+=	bash
 REPLACE.bash.old=	.*/bin/bash
 REPLACE.bash.new=	${PREFIX}/bin/bash
-REPLACE_FILES.bash=	scripts/sync-knotes.sh
+REPLACE_FILES.bash=	scripts/sync-knotes.sh scripts/sync-evolution.sh \
+			scripts/sync-ldif.sh
 
 REPLACE_PYTHON+=	scripts/sync-palm-jppy.py
 .include "../../lang/python/application.mk"
@@ -30,8 +31,6 @@ DEPENDS+=		bash>=3.2.9:../../shells/bash
 
 BUILDLINK_API_DEPENDS.gtk2+=	gtk2+>=2.4.0
 BUILDLINK_API_DEPENDS.libgpod+=	libgpod>=0.4.2
-
-USE_DIRS+=		xdg-1.4
 
 .include "options.mk"
 

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.1.1.1 2009/03/21 18:06:16 ahoka Exp $
+# $NetBSD: Makefile,v 1.3 2009/08/09 19:36:52 wiz Exp $
 #
 
 DISTNAME=	valide-0.4.0
@@ -6,13 +6,12 @@ CATEGORIES=	devel
 MASTER_SITES=	http://valide.googlecode.com/files/
 
 MAINTAINER=	ahoka@NetBSD.org
-HOMEPAGE=	http://valide.googlecode.com/files/
+HOMEPAGE=	http://www.valaide.org/
 COMMENT=	IDE for the Vala programming language
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=	pkg-config msgfmt intltool
-USE_DIRS+=	xdg-1.4
 
 PYTHON_FOR_BUILD_ONLY=	yes
 REPLACE_PYTHON+=	wscript waf \

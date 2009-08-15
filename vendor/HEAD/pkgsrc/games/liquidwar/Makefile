@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.6 2008/07/14 12:56:04 joerg Exp $
+# $NetBSD: Makefile,v 1.8 2009/07/22 09:01:29 wiz Exp $
 #
 
 DISTNAME=	liquidwar-5.6.4
@@ -11,10 +11,10 @@ COMMENT=	Unique multiplayer wargame
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
-USE_DIRS+=	gnome2-1.5
 USE_TOOLS+=	gmake
 GNU_CONFIGURE=	YES
 
+CONFIGURE_ARGS+=	--disable-doc-ps --disable-doc-pdf
 #CONFIGURE_ARGS+=	--enable-debug
 
 .include "../../devel/allegro/buildlink3.mk"

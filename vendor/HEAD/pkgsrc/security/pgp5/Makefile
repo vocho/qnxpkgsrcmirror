@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.34 2009/05/19 08:59:32 wiz Exp $
+# $NetBSD: Makefile,v 1.36 2009/07/16 23:07:31 zafer Exp $
 #
 
 DISTNAME=	pgp50i-unix-src
@@ -6,9 +6,7 @@ PKGNAME=	pgp5-5.0i
 CATEGORIES=	security
 MASTER_SITES=	ftp://ftp.pgpi.com/pub/pgp/5.0/unix/ \
 		ftp://ftp.au.pgpi.com/pub/pgp/5.0/unix/ \
-		ftp://ftp.ifi.uio.no/pub/pgp/5.0/unix/ \
-		ftp://ftp.tuwien.ac.at/privacy/pgp/5.0/unix/ \
-		http://ftp.tuwien.ac.at/privacy/pgp/5.0/unix/
+		ftp://ftp.ifi.uio.no/pub/pgp/5.0/unix/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.pgpi.org/
@@ -17,6 +15,8 @@ COMMENT=	Public-key encryption and digital signature utilities (v5)
 LICENSE=	idea-license
 
 PKG_DESTDIR_SUPPORT=	user-destdir
+
+MAKE_JOBS_SAFE=		no
 
 USE_TOOLS+=	perl
 

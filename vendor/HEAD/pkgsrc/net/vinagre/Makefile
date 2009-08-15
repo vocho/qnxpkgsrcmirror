@@ -1,18 +1,18 @@
-# $NetBSD: Makefile,v 1.2 2009/05/02 09:20:54 hasso Exp $
+# $NetBSD: Makefile,v 1.4 2009/07/22 09:01:42 wiz Exp $
 #
 
-DISTNAME=	vinagre-2.26.0
+DISTNAME=	vinagre-2.26.2
 CATEGORIES=	x11
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/vinagre/2.26/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://projects.gnome.org/vinagre/
 COMMENT=	VNC client for GNOME
+LICENSE=	gnu-gpl-v3
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=	yes
-USE_DIRS=	xdg-1.4 gnome2-1.6
 USE_LIBTOOL=	yes
 USE_TOOLS+=	gmake intltool pkg-config msgfmt
 

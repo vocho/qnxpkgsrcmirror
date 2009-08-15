@@ -1,4 +1,4 @@
-.\" $NetBSD: pkg_add.1,v 1.36 2009/04/10 04:03:11 reed Exp $
+.\" $NetBSD: pkg_add.1,v 1.38 2009/08/06 18:14:15 wiz Exp $
 .\"
 .\" FreeBSD install - a package for the installation and maintenance
 .\" of non-core utilities.
@@ -17,7 +17,7 @@
 .\"
 .\"     @(#)pkg_add.1
 .\"
-.Dd April 10, 2009
+.Dd August 6, 2009
 .Dt PKG_ADD 1
 .Os
 .Sh NAME
@@ -498,7 +498,9 @@ The following variables change the behavior of
 .Nm
 and are described in
 .Xr pkg_install.conf 5 :
-.Bl -tag -width CERTIFICATE_ANCHOR_PKGS
+.Bl -tag -compact -offset indent -width CERTIFICATE_ANCHOR_PKGS
+.It Ev CHECK_LICENSE
+.It Ev CHECK_VULNERABILITIES
 .It Ev CERTIFICATE_ANCHOR_PKGS
 .It Ev CERTIFICATE_CHAIN
 .It Ev VERIFIED_INSTALLATION

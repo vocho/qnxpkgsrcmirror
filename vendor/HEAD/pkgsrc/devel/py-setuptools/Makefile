@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.9 2009/04/22 23:05:57 wiz Exp $
+# $NetBSD: Makefile,v 1.11 2009/07/08 13:55:59 joerg Exp $
 #
 
 EGG_VERSION=		0.6c9
 DISTNAME=		setuptools-${EGG_VERSION}-py2.4.egg
 PKGNAME=		${PYPKGPREFIX}-setuptools-${EGG_VERSION}
 CATEGORIES=		devel python
-MASTER_SITES=		http://cheeseshop.python.org/packages/2.4/s/setuptools/
+MASTER_SITES=		http://pypi.python.org/packages/2.4/s/setuptools/
 EXTRACT_SUFX=		# empty
 
 MAINTAINER=		joerg@NetBSD.org
@@ -20,7 +20,6 @@ USE_TOOLS+=		unzip pax
 PY_PATCHPLIST=	yes
 PLIST_SUBST+=	EGG_NAME=${EGG_NAME}
 PLIST_SUBST+=	PYVERSSUFFIX=${PYVERSSUFFIX} PYPKGPREFIX=${PYPKGPREFIX}
-PYCOMPILEALL=	${BUILDLINK_PREFIX.${PYPACKAGE}}/${PYLIB}/compileall.py
 
 CHECK_FILES_SKIP+=	${PREFIX}/${PYSITELIB}/easy-install.pth
 
@@ -47,8 +46,8 @@ do-build:
 	${SED} -e 's,@PYTHON@,${PYTHONBIN},' \
 	       -e 's,@PKGVERSION@,${EGG_VERSION},' \
 	       ${FILESDIR}/easy_install.py > ${WRKDIR}/easy_install.py
-	${PYTHONBIN} ${PYCOMPILEALL} -f -d ${TARGET_NAME} ${WRKSRC}
-	${PYTHONBIN} -O ${PYCOMPILEALL} -f -d ${TARGET_NAME} ${WRKSRC}
+	${PY_COMPILE_ALL} -f -d ${TARGET_NAME} ${WRKSRC}
+	${PY_COMPILE_O_ALL} -f -d ${TARGET_NAME} ${WRKSRC}
 
 do-install:
 	${INSTALL_SCRIPT} ${WRKDIR}/easy_install.py \

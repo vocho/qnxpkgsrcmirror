@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.11 2009/05/27 16:21:30 wiz Exp $
+# $NetBSD: Makefile,v 1.13 2009/08/08 16:15:19 wiz Exp $
 #
 
-DISTNAME=	etm-274
+DISTNAME=	etm-290
 CATEGORIES=	time
 MASTER_SITES=	http://www.duke.edu/~dgraham/ETM/
 

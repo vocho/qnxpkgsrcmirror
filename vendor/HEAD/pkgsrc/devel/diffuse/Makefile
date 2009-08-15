@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.10 2009/05/19 08:59:08 wiz Exp $
+# $NetBSD: Makefile,v 1.12 2009/08/06 21:52:07 wiz Exp $
 #
 
-DISTNAME=	diffuse-0.3.3
+DISTNAME=	diffuse-0.3.4
 CATEGORIES=	devel
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=diffuse/}
 EXTRACT_SUFX=	.tar.bz2
@@ -14,12 +14,11 @@ LICENSE=	gnu-gpl-v2
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_LANGUAGES=	# none
-USE_DIRS=	xdg-1.4 gnome2-1.6
 
 CONF_FILES+=	${PREFIX}/share/examples/diffuse/diffuserc \
 		${PKG_SYSCONFDIR}/diffuserc
 
-PYTHON_VERSIONS_ACCEPTED=	25 24
+PYTHON_VERSIONS_ACCEPTED=	26 25 24
 
 do-build:
 	# nothing

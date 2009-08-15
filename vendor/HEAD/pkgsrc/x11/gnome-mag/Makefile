@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.49 2009/05/19 08:59:38 wiz Exp $
+# $NetBSD: Makefile,v 1.52 2009/08/08 16:30:48 wiz Exp $
 #
 
-DISTNAME=		gnome-mag-0.15.6
+DISTNAME=		gnome-mag-0.15.8
 CATEGORIES=		x11 gnome
 MASTER_SITES=		${MASTER_SITE_GNOME:=sources/gnome-mag/0.15/}
 EXTRACT_SUFX=		.tar.bz2
@@ -13,7 +13,6 @@ LICENSE=		gnu-lgpl-v2
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
-USE_DIRS+=		gnome2-1.5
 USE_TOOLS+=		gmake intltool msgfmt pkg-config
 USE_PKGLOCALEDIR=	yes
 USE_LIBTOOL=		yes

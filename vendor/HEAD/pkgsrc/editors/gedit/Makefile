@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.95 2009/05/20 10:01:03 wiz Exp $
+# $NetBSD: Makefile,v 1.97 2009/07/22 09:01:24 wiz Exp $
 #
 
-DISTNAME=		gedit-2.26.2
+DISTNAME=		gedit-2.26.3
 CATEGORIES=		editors gnome
 MASTER_SITES=		${MASTER_SITE_GNOME:=sources/gedit/2.26/}
 EXTRACT_SUFX=		.tar.bz2
@@ -13,7 +13,6 @@ LICENSE=		gnu-gpl-v2
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
-USE_DIRS+=		gnome2-1.5
 USE_PKGLOCALEDIR=	YES
 USE_TOOLS+=		gmake intltool msgfmt perl pkg-config
 USE_LIBTOOL=		YES

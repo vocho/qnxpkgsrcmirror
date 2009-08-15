@@ -1,4 +1,4 @@
-# $NetBSD: pyversion.mk,v 1.70 2009/04/19 15:14:19 snj Exp $
+# $NetBSD: pyversion.mk,v 1.73 2009/07/08 13:55:59 joerg Exp $
 
 # This file determines which Python version is used as a dependency for
 # a package.
@@ -156,6 +156,10 @@ BUILDLINK_DEPMETHOD.python?=	build
 .endif
 
 PYTHONBIN=	${LOCALBASE}/bin/python${PYVERSSUFFIX}
+PY_COMPILE_ALL= \
+	${PYTHONBIN} ${PREFIX}/lib/python${PYVERSSUFFIX}/compileall.py -q
+PY_COMPILE_O_ALL= \
+	${PYTHONBIN} -O ${PREFIX}/lib/python${PYVERSSUFFIX}/compileall.py -q
 
 .if exists(${PYTHONBIN})
 PYINC!=	${PYTHONBIN} -c "import distutils.sysconfig; \
@@ -165,17 +169,13 @@ PYLIB!=	${PYTHONBIN} -c "import distutils.sysconfig; \
 PYSITELIB!=	${PYTHONBIN} -c "import distutils.sysconfig; \
 	print distutils.sysconfig.get_python_lib(0, 0, \"\")" || ${ECHO} ""
 
-PRINT_PLIST_AWK+=	/^@dirrm ${PYINC:S|/|\\/|g}$$/ { next; }
-PRINT_PLIST_AWK+=	/^@dirrm ${PYSITELIB:S|/|\\/|g}$$/ { next; }
-PRINT_PLIST_AWK+=	/^@dirrm ${PYLIB:S|/|\\/|g}$$/ { next; }
-
-PRINT_PLIST_AWK+=	/^(@dirrm )?${PYINC:S|/|\\/|g}/ \
+PRINT_PLIST_AWK+=	/^${PYINC:S|/|\\/|g}/ \
 			{ gsub(/${PYINC:S|/|\\/|g}/, "$${PYINC}"); \
 				print; next; }
-PRINT_PLIST_AWK+=	/^(@dirrm )?${PYSITELIB:S|/|\\/|g}/ \
+PRINT_PLIST_AWK+=	/^${PYSITELIB:S|/|\\/|g}/ \
 			{ gsub(/${PYSITELIB:S|/|\\/|g}/, "$${PYSITELIB}"); \
 				print; next; }
-PRINT_PLIST_AWK+=	/^(@dirrm )?${PYLIB:S|/|\\/|g}/ \
+PRINT_PLIST_AWK+=	/^${PYLIB:S|/|\\/|g}/ \
 			{ gsub(/${PYLIB:S|/|\\/|g}/, "$${PYLIB}"); \
 				print; next; }
 .endif

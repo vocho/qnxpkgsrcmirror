@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.2 2008/12/19 21:38:31 markd Exp $
+@comment $NetBSD: PLIST,v 1.4 2009/07/25 12:30:37 markd Exp $
 bin/akonadi_control
 bin/akonadictl
 bin/akonadiserver
@@ -8,6 +8,8 @@ include/akonadi/private/imapset_p.h
 include/akonadi/private/notificationmessage_p.h
 include/akonadi/private/protocol_p.h
 include/akonadi/private/xdgbasedirs_p.h
+lib/cmake/Akonadi/AkonadiConfig.cmake
+lib/cmake/Akonadi/AkonadiConfigVersion.cmake
 lib/libakonadiprivate.so
 lib/libakonadiprivate.so.1
 lib/libakonadiprivate.so.${PKGVERSION}
@@ -31,8 +33,3 @@ share/dbus-1/interfaces/org.freedesktop.Akonadi.Tracer.xml
 share/dbus-1/interfaces/org.freedesktop.Akonadi.TracerNotification.xml
 share/dbus-1/services/org.freedesktop.Akonadi.Control.service
 share/mime/packages/akonadi-mime.xml
-@comment in dbus: @dirrm share/dbus-1/services
-@comment in kde: @dirrm share/dbus-1/interfaces
-@dirrm share/config/akonadi
-@dirrm include/akonadi/private
-@dirrm include/akonadi

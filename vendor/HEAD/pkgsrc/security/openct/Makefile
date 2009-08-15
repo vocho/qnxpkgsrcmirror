@@ -1,12 +1,13 @@
-# $NetBSD: Makefile,v 1.2 2009/05/08 08:55:56 hasso Exp $
+# $NetBSD: Makefile,v 1.4 2009/08/03 18:44:23 hasso Exp $
 
-DISTNAME=		openct-0.6.16
+DISTNAME=		openct-0.6.17
 CATEGORIES=		security
 MASTER_SITES=		http://www.opensc-project.org/files/openct/
 
 MAINTAINER=		hasso@NetBSD.org
 HOMEPAGE=		http://www.opensc-project.org/openct/
 COMMENT=		Smart Card Reader drivers and middleware
+LICENSE=		gnu-lgpl-v2.1
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 

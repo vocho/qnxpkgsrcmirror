@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.110 2009/03/09 16:56:48 sno Exp $
+# $NetBSD: Makefile,v 1.114 2009/07/15 08:37:45 wiz Exp $
 #
 
 COMMENT=	Archivers
@@ -37,6 +37,7 @@ SUBDIR+=	libarchive
 SUBDIR+=	libcomprex
 SUBDIR+=	liblzo
 SUBDIR+=	libzip
+SUBDIR+=	lzip
 SUBDIR+=	lzma
 SUBDIR+=	lzma-utils
 SUBDIR+=	lzmalib
@@ -62,6 +63,7 @@ SUBDIR+=	pdbar
 SUBDIR+=	php-bz2
 SUBDIR+=	php-zip
 SUBDIR+=	php-zlib
+SUBDIR+=	pigz
 SUBDIR+=	ppmd
 SUBDIR+=	ppunpack
 SUBDIR+=	rar
@@ -89,6 +91,7 @@ SUBDIR+=	upx
 SUBDIR+=	xbin
 SUBDIR+=	xmill
 SUBDIR+=	xpk
+SUBDIR+=	xz
 SUBDIR+=	zip
 SUBDIR+=	zip1
 SUBDIR+=	zoo

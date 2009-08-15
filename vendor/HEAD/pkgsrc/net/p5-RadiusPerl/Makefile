@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.2 2009/03/21 22:27:53 adrianp Exp $
+# $NetBSD: Makefile,v 1.4 2009/07/17 18:00:19 adrianp Exp $
 #
 
 DISTNAME=	RadiusPerl-0.13
@@ -6,12 +6,13 @@ PKGNAME=	p5-${DISTNAME}
 CATEGORIES=	net
 MASTER_SITES=	http://search.cpan.org/CPAN/authors/id/M/MA/MANOWAR/
 
-MAINTAINER=	adrianp@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://search.cpan.org/CPAN/authors/id/M/MA/MANOWAR/
 COMMENT=	Provide simple Radius client facilities
+LICENSE=	artistic
 
-DEPENDS+=	p5-Digest-MD5>=2.20:../../security/p5-Digest-MD5
-DEPENDS+=	p5-IO>=1.12:../../devel/p5-IO
+PKG_DESTDIR_SUPPORT=	user-destdir
+
 DEPENDS+=	p5-Data-HexDump>=0.02:../../textproc/p5-Data-HexDump
 
 WRKSRC=		${WRKDIR}/Authen-Radius-0.13

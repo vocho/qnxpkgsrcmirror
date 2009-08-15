@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.58 2009/03/25 22:30:19 he Exp $
+# $NetBSD: Makefile,v 1.60 2009/08/05 17:01:17 drochner Exp $
 #
 
-DISTNAME=	icu4c-4_0_1-src
-PKGNAME=	icu-4.0.1
+DISTNAME=	icu4c-4_2_1-src
+PKGNAME=	icu-4.2.1
 CATEGORIES=	textproc
-MASTER_SITES=	http://download.icu-project.org/files/icu4c/4.0.1/
+MASTER_SITES=	http://download.icu-project.org/files/icu4c/4.2.1/
 EXTRACT_SUFX=	.tgz
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
@@ -53,10 +53,13 @@ PLIST_SUBST+=		MH_NAME=mh-unknown
 .endif
 
 .if ${OPSYS} == "Darwin"
-SO_SUFFIX=dylib
+SO_EXT=
+SO_SUFFIX=.dylib
+INSTALL_UNSTRIPPED=     yes
 .else
-SO_SUFFIX=so
+SO_EXT=.so
+SO_SUFFIX=
 .endif
-PLIST_SUBST+=	SO_SUFFIX=${SO_SUFFIX}
+PLIST_SUBST+=	SO_SUFFIX=${SO_SUFFIX} SO_EXT=${SO_EXT}
 
 .include "../../mk/bsd.pkg.mk"

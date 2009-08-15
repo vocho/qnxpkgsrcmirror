@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.20 2009/05/19 08:59:39 wiz Exp $
+# $NetBSD: Makefile,v 1.22 2009/07/22 09:01:55 wiz Exp $
 #
 
-DISTNAME=	x11vnc-0.9.7
+DISTNAME=	x11vnc-0.9.8
 CATEGORIES=	x11 net
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=libvncserver/}
 
@@ -12,7 +12,6 @@ LICENSE=	gnu-gpl-v2
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
-USE_DIRS+=	xdg-1.1
 
 GNU_CONFIGURE=	yes
 

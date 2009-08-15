@@ -1,9 +1,10 @@
-# $NetBSD: Makefile,v 1.270 2009/04/19 14:43:30 wiz Exp $
+# $NetBSD: Makefile,v 1.272 2009/07/26 21:21:29 rillig Exp $
 #
 
 COMMENT=	Programming languages
 
 SUBDIR+=	Cg-compiler
+SUBDIR+=	LuaJIT
 SUBDIR+=	STk
 SUBDIR+=	SmartEiffel
 SUBDIR+=	a60
@@ -115,6 +116,7 @@ SUBDIR+=	perl5
 SUBDIR+=	pforth
 #SUBDIR+=	php		# only contains Makefile fragments
 SUBDIR+=	php5
+SUBDIR+=	php5-perl
 SUBDIR+=	pnet
 SUBDIR+=	pnetC
 SUBDIR+=	pnetlib

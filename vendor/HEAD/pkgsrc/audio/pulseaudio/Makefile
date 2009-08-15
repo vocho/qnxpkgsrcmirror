@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.22 2009/05/04 16:20:48 tron Exp $
+# $NetBSD: Makefile,v 1.26 2009/07/28 12:52:40 tnn Exp $
 
 # NOTE: Please send a copy of any patches that are not pkgsrc-specific
 # to <pulseaudio-discuss@mail.0pointer.de>
 
 DISTNAME=	pulseaudio-0.9.14
-PKGREVISION=	2
+PKGREVISION=	3
 CATEGORIES=	audio
 MASTER_SITES=	http://0pointer.de/lennart/projects/pulseaudio/
 
@@ -18,7 +18,8 @@ GNU_CONFIGURE=	yes
 USE_LIBTOOL=	yes
 USE_TOOLS+=	pkg-config gmake m4 msgfmt intltool perl \
 		autoconf automake autoreconf
-USE_DIRS+=	xdg-1.4
+
+AUTOCONF_REQD=	2.62
 
 PKGCONFIG_OVERRIDE+=	libpulse-browse.pc.in
 PKGCONFIG_OVERRIDE+=	libpulse-mainloop-glib.pc.in
@@ -46,6 +47,8 @@ CONFIGURE_ARGS+=	--with-system-group=${PULSE_GROUP}
 CONFIGURE_ARGS+=	--with-realtime-group=${PULSE_GROUP_REALTIME}
 CONFIGURE_ARGS+=	--with-access-group=${PULSE_GROUP_ACCESS}
 MAKE_ENV+=		EGDIR=${EGDIR}
+
+SPECIAL_PERMS+=		bin/pulseaudio ${SETUID_ROOT_PERMS}
 
 SUBST_CLASSES+=		padsp
 SUBST_MESSAGE.padsp=	Fixing LD_PRELOAD paths

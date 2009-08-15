@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.30 2008/11/26 13:17:15 obache Exp $
+# $NetBSD: Makefile,v 1.32 2009/08/06 01:44:48 minskim Exp $
 
 DISTNAME=	flim-1.14.9
 PKGNAME=	${EMACS_PKGNAME_PREFIX}${DISTNAME}
+PKGREVISION=	1
 CATEGORIES=	devel
 MASTER_SITES=	http://www.kanji.zinbun.kyoto-u.ac.jp/~tomo/comp/emacsen/lisp/flim/flim-1.14/
 
@@ -28,8 +29,9 @@ BUILD_TARGET.emacs=	elc
 BUILD_TARGET.xemacs=	package
 INSTALL_TARGET.emacs=	install
 INSTALL_TARGET.xemacs=	install-package
-MAKEFLAGS.emacs+=
-MAKEFLAGS.xemacs+=	PACKAGEDIR=${EMACS_LISPPREFIX:C|/lisp$||}
+MAKEFLAGS.emacs+=	EMACS=${EMACS_BIN}
+MAKEFLAGS.xemacs+=	XEMACS=${EMACS_BIN} \
+			PACKAGEDIR=${EMACS_LISPPREFIX:C|/lisp$||}
 
 EMACS_MODULES=	base
 EMACS_BUILDLINK=# defined

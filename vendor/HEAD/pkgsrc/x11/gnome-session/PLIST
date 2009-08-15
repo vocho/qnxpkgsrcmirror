@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.30 2009/04/17 18:09:09 drochner Exp $
+@comment $NetBSD: PLIST,v 1.32 2009/07/09 18:02:55 drochner Exp $
 bin/gnome-session
 bin/gnome-session-properties
 bin/gnome-session-save
@@ -37,6 +37,7 @@ share/locale/bn/LC_MESSAGES/gnome-session-2.0.mo
 share/locale/bn_IN/LC_MESSAGES/gnome-session-2.0.mo
 share/locale/bs/LC_MESSAGES/gnome-session-2.0.mo
 share/locale/ca/LC_MESSAGES/gnome-session-2.0.mo
+share/locale/ca@valencia/LC_MESSAGES/gnome-session-2.0.mo
 share/locale/crh/LC_MESSAGES/gnome-session-2.0.mo
 share/locale/cs/LC_MESSAGES/gnome-session-2.0.mo
 share/locale/cy/LC_MESSAGES/gnome-session-2.0.mo
@@ -121,19 +122,3 @@ share/locale/zh_TW/LC_MESSAGES/gnome-session-2.0.mo
 share/locale/zu/LC_MESSAGES/gnome-session-2.0.mo
 share/pixmaps/splash/gnome-splash-orig.png
 share/pixmaps/splash/gnome-splash.png
-@dirrm share/pixmaps/splash
-@comment in xdg-dirs: @dirrm share/pixmaps
-@comment in hicolor-icon-theme: @dirrm share/icons/hicolor/scalable/apps
-@comment in hicolor-icon-theme: @dirrm share/icons/hicolor/32x32/apps
-@comment in hicolor-icon-theme: @dirrm share/icons/hicolor/24x24/apps
-@comment in hicolor-icon-theme: @dirrm share/icons/hicolor/22x22/apps
-@comment in hicolor-icon-theme: @dirrm share/icons/hicolor/16x16/apps
-@comment in hicolor-icon-theme: @dirrm share/icons/hicolor
-@comment in libcanberra: @dirrm share/gnome/autostart
-@dirrm share/gnome-session
-@comment in GConf: @dirrm share/gconf/schemas
-@dirrm share/doc/gnome-session/dbus
-@dirrm share/doc/gnome-session
-@comment in xdg-dirs: @dirrm share/applications
-@dirrm lib/gnome-session/helpers
-@dirrm lib/gnome-session

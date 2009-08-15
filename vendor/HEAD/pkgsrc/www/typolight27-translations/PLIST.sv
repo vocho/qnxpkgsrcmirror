@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST.sv,v 1.2 2009/05/07 15:10:01 taca Exp $
+@comment $NetBSD: PLIST.sv,v 1.4 2009/07/02 15:28:30 taca Exp $
 ${TL_WEBDIR}/system/modules/backend/languages/sv/.htaccess
 ${TL_WEBDIR}/system/modules/backend/languages/sv/countries.php
 ${TL_WEBDIR}/system/modules/backend/languages/sv/default.php
@@ -56,7 +56,6 @@ ${TL_WEBDIR}/system/modules/glossary/languages/sv/tl_glossary.php
 ${TL_WEBDIR}/system/modules/glossary/languages/sv/tl_glossary_term.php
 ${TL_WEBDIR}/system/modules/glossary/languages/sv/tl_module.php
 ${TL_WEBDIR}/system/modules/listing/languages/sv/.htaccess
-${TL_WEBDIR}/system/modules/listing/languages/sv/default.php
 ${TL_WEBDIR}/system/modules/listing/languages/sv/modules.php
 ${TL_WEBDIR}/system/modules/listing/languages/sv/tl_module.php
 ${TL_WEBDIR}/system/modules/memberlist/languages/sv/.htaccess
@@ -101,19 +100,3 @@ ${TL_WEBDIR}/system/modules/rss_reader/languages/sv/tl_module.php
 ${TL_WEBDIR}/system/modules/tpl_editor/languages/sv/.htaccess
 ${TL_WEBDIR}/system/modules/tpl_editor/languages/sv/modules.php
 ${TL_WEBDIR}/system/modules/tpl_editor/languages/sv/tl_templates.php
-@dirrm ${TL_WEBDIR}/system/modules/tpl_editor/languages/sv
-@dirrm ${TL_WEBDIR}/system/modules/rss_reader/languages/sv
-@dirrm ${TL_WEBDIR}/system/modules/rep_client/languages/sv
-@dirrm ${TL_WEBDIR}/system/modules/rep_base/languages/sv
-@dirrm ${TL_WEBDIR}/system/modules/registration/languages/sv
-@dirrm ${TL_WEBDIR}/system/modules/newsletter/languages/sv
-@dirrm ${TL_WEBDIR}/system/modules/news/languages/sv
-@dirrm ${TL_WEBDIR}/system/modules/memberlist/languages/sv
-@dirrm ${TL_WEBDIR}/system/modules/listing/languages/sv
-@dirrm ${TL_WEBDIR}/system/modules/glossary/languages/sv
-@dirrm ${TL_WEBDIR}/system/modules/frontend/languages/sv
-@dirrm ${TL_WEBDIR}/system/modules/faq/languages/sv
-@dirrm ${TL_WEBDIR}/system/modules/dfGallery/languages/sv
-@dirrm ${TL_WEBDIR}/system/modules/comments/languages/sv
-@dirrm ${TL_WEBDIR}/system/modules/calendar/languages/sv
-@dirrm ${TL_WEBDIR}/system/modules/backend/languages/sv

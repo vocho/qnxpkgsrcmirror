@@ -1,4 +1,4 @@
-/*	$NetBSD: perform.c,v 1.56 2009/04/22 19:18:06 joerg Exp $	*/
+/*	$NetBSD: perform.c,v 1.59 2009/08/02 17:56:45 joerg Exp $	*/
 
 #if HAVE_CONFIG_H
 #include "config.h"
@@ -13,7 +13,7 @@
 #if HAVE_SYS_WAIT_H
 #include <sys/wait.h>
 #endif
-__RCSID("$NetBSD: perform.c,v 1.56 2009/04/22 19:18:06 joerg Exp $");
+__RCSID("$NetBSD: perform.c,v 1.59 2009/08/02 17:56:45 joerg Exp $");
 
 /*-
  * Copyright (c) 2008 Joerg Sonnenberger <joerg@NetBSD.org>.
@@ -232,7 +232,7 @@ has_entry:
 	}
 
 	meta->is_installed = 0;
-	if (found_required != 0 && r != ARCHIVE_OK && r != ARCHIVE_EOF) {
+	if (found_required != 0 || (r != ARCHIVE_OK && r != ARCHIVE_EOF)) {
 		free_pkg_meta(meta);
 		meta = NULL;
 	}
@@ -287,11 +287,14 @@ read_meta_data_from_pkgdb(const char *pkg)
 }
 
 static void
-build_full_reqby(lpkg_head_t *reqby, struct pkg_meta *meta)
+build_full_reqby(lpkg_head_t *reqby, struct pkg_meta *meta, int limit)
 {
 	char *iter, *eol, *next;
 	lpkg_t *lpp;
 	struct pkg_meta *meta_dep;
+
+	if (limit == 65536)
+		errx(1, "Cycle in the dependency tree, bailing out");
 
 	if (meta->is_installed == 0 || meta->meta_required_by == NULL)
 		return;
@@ -305,7 +308,7 @@ build_full_reqby(lpkg_head_t *reqby, struct pkg_meta *meta)
 		if (iter == eol)
 			continue;
 		TAILQ_FOREACH(lpp, reqby, lp_link) {
-			if (strlen(lpp->lp_name) != eol - iter)
+			if (strlen(lpp->lp_name) + iter != eol)
 				continue;
 			if (memcmp(lpp->lp_name, iter, eol - iter) == 0)
 				break;
@@ -316,12 +319,14 @@ build_full_reqby(lpkg_head_t *reqby, struct pkg_meta *meta)
 		lpp = alloc_lpkg(iter);
 		if (next != eol)
 			*eol = '\n';
-		TAILQ_INSERT_TAIL(reqby, lpp, lp_link);
+
 		meta_dep = read_meta_data_from_pkgdb(lpp->lp_name);
 		if (meta_dep == NULL)
 			continue;
-		build_full_reqby(reqby, meta_dep);
+		build_full_reqby(reqby, meta_dep, limit + 1);
 		free_pkg_meta(meta_dep);
+
+		TAILQ_INSERT_HEAD(reqby, lpp, lp_link);
 	}
 }
 
@@ -438,7 +443,7 @@ pkg_do(const char *pkg)
 		if ((Flags & SHOW_FULL_REQBY) && meta->is_installed) {
 			lpkg_head_t reqby;
 			TAILQ_INIT(&reqby);
-			build_full_reqby(&reqby, meta);
+			build_full_reqby(&reqby, meta, 0);
 			show_list(&reqby, "Full required by list:\n");
 		}
 		if (Flags & SHOW_DESC) {
@@ -591,12 +596,6 @@ CheckForBestPkg(const char *pkgname)
 	return 0;
 }
 
-void
-cleanup(int sig)
-{
-	exit(1);
-}
-
 static int
 perform_single_pkg(const char *pkg, void *cookie)
 {
@@ -612,8 +611,6 @@ int
 pkg_perform(lpkg_head_t *pkghead)
 {
 	int     err_cnt = 0;
-
-	signal(SIGINT, cleanup);
 
 	TAILQ_INIT(&files);
 
@@ -645,7 +642,6 @@ pkg_perform(lpkg_head_t *pkghead)
 	if (Flags & SHOW_BUILD_VERSION)
 		desired_meta_data |= LOAD_BUILD_VERSION;
 
-
 	if (Which != WHICH_LIST) {
 		if (File2Pkg) {
 			/* Show all files with the package they belong to */
@@ -659,7 +655,7 @@ pkg_perform(lpkg_head_t *pkghead)
 		/* Show info on individual pkg(s) */
 		lpkg_t *lpp;
 
-		while ((lpp = TAILQ_FIRST(pkghead))) {
+		while ((lpp = TAILQ_FIRST(pkghead)) != NULL) {
 			TAILQ_REMOVE(pkghead, lpp, lp_link);
 			err_cnt += pkg_do(lpp->lp_name);
 			free_lpkg(lpp);

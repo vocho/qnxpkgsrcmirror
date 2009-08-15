@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.2 2009/02/09 18:41:54 joerg Exp $
+# $NetBSD: Makefile,v 1.4 2009/08/09 21:42:54 wiz Exp $
 
 DISTNAME=	pycups-${VERSION}
 PKGNAME=	${PYPKGPREFIX}-cups-${VERSION}
-VERSION=	1.9.44
+VERSION=	1.9.46
 CATEGORIES=	print python
 MASTER_SITES=	http://cyberelk.net/tim/data/pycups/
 EXTRACT_SUFX=	.tar.bz2
@@ -14,7 +14,7 @@ COMMENT=	Python bindings for the CUPS API
 PKG_DESTDIR_SUPPORT=	user-destdir
 CFLAGS+=	-DVERSION=\"${VERSION}\"
 
-PYTHON_VERSIONS_ACCEPTED=	25 24
+PYTHON_VERSIONS_ACCEPTED=	26 25 24
 
 PYDISTUTILSPKG=	yes
 

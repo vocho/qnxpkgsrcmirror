@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.94 2009/03/15 19:15:45 jmcneill Exp $
+# $NetBSD: Makefile,v 1.97 2009/08/06 11:03:49 tnn Exp $
 #
 
-DISTNAME=	epiphany-2.26.0
+DISTNAME=	epiphany-2.26.3
+PKGREVISION=	1
 CATEGORIES=	www gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/epiphany/2.26/}
 EXTRACT_SUFX=	.tar.bz2
@@ -13,7 +14,6 @@ COMMENT=	The web browser for the GNOME Desktop
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=		YES
-USE_DIRS+=		gnome2-1.5
 USE_TOOLS+=		gmake intltool msgfmt pkg-config
 USE_LIBTOOL=		YES
 USE_PKGLOCALEDIR=	YES
@@ -39,6 +39,7 @@ BUILDLINK_API_DEPENDS.libgnome+=	libgnome>=2.14.0
 .include "../../devel/libgnome/buildlink3.mk"
 BUILDLINK_API_DEPENDS.libgnomeui+=	libgnomeui>=2.14.0
 .include "../../devel/libgnomeui/buildlink3.mk"
+.include "../../devel/xulrunner/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../net/ORBit2/buildlink3.mk"
 .include "../../sysutils/dbus/buildlink3.mk"

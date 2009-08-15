@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.9 2008/11/02 15:05:11 cube Exp $
+# $NetBSD: Makefile,v 1.14 2009/08/07 10:39:23 tron Exp $
 
-DISTNAME=	apr-util-1.3.4
-PKGREVISION=	1
+DISTNAME=	apr-util-1.3.9
 CATEGORIES=	devel
 MASTER_SITES=	${MASTER_SITE_APACHE:=apr/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://apr.apache.org/
 COMMENT=	Apache Portable Runtime utilities
+LICENSE=	apache-2.0
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
@@ -19,6 +19,7 @@ GNU_CONFIGURE=	yes
 CONFIGURE_ARGS+=	--with-apr=${BUILDLINK_PREFIX.apr}/bin/apr-1-config
 CONFIGURE_ARGS+=	--with-expat=${BUILDLINK_PREFIX.expat}
 CONFIGURE_ARGS+=	--without-gdbm
+CONFIGURE_ARGS+=	--without-sqlite2
 PKGCONFIG_OVERRIDE+=	apr-util.pc.in
 
 MAKE_ENV+=	WRAPPER_DIR=${WRAPPER_DIR:Q}

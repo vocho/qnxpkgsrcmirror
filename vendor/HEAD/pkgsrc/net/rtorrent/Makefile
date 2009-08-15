@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.31 2009/05/19 08:59:28 wiz Exp $
+# $NetBSD: Makefile,v 1.33 2009/07/09 10:42:29 tron Exp $
 
-DISTNAME=	rtorrent-0.8.2
+DISTNAME=	rtorrent-0.8.4
 CATEGORIES=	net
 MASTER_SITES=	${HOMEPAGE:=downloads/}
 
@@ -13,7 +13,7 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_LANGUAGES=		c c++
 USE_LIBTOOL=		yes
-USE_NCURSES=		yes
+USE_NCURSES=		chgat
 USE_TOOLS+=		gmake pkg-config
 GNU_CONFIGURE=		yes
 GCC_REQD+=		3.3

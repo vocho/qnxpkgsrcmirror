@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.5 2009/04/07 11:23:51 drochner Exp $
+# $NetBSD: Makefile,v 1.7 2009/08/05 17:25:27 drochner Exp $
 #
 
-DISTNAME=	gtklp-1.2.6
+DISTNAME=	gtklp-1.2.7
 CATEGORIES=	print
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=gtklp/}
 EXTRACT_SUFX=	.src.tar.gz
@@ -15,7 +15,7 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 GNU_CONFIGURE=		yes
 USE_LIBTOOL=		yes
 USE_PKGLOCALEDIR=	yes
-USE_TOOLS+=		pkg-config
+USE_TOOLS+=		pkg-config msgfmt
 MAKE_FLAGS+=		install_sh=${WRKSRC}/install-sh
 
 .include "../../devel/glib2/buildlink3.mk"

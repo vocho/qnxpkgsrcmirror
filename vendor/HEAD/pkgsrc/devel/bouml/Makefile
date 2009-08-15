@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.4 2008/09/01 12:24:54 tonnerre Exp $
+# $NetBSD: Makefile,v 1.6 2009/07/27 05:15:53 obache Exp $
 #
 
 DISTNAME=		bouml_${BOUMLVERSION}
@@ -6,7 +6,7 @@ PKGNAME=		bouml-${BOUMLVERSION}
 CATEGORIES=		devel
 MASTER_SITES=		http://bouml.free.fr/
 
-MAINTAINER=		kcf@users.sourceforge.net
+MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://bouml.free.fr/
 COMMENT=		UML modeling tool, generates C++, JAVA, and IDL
 
@@ -18,7 +18,6 @@ USE_LIBTOOL=		YES
 USE_TOOLS+=		gmake pax
 USE_LANGUAGES=		c++
 BUILD_TARGET=		compile
-USE_DIRS+=		xdg-1.3
 
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../x11/qt3-tools/buildlink3.mk"

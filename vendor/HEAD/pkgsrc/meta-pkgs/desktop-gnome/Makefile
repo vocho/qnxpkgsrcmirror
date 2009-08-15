@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.1.1.1 2009/02/23 17:52:25 ahoka Exp $
+# $NetBSD: Makefile,v 1.3 2009/08/05 13:57:03 tnn Exp $
 #
 
-DISTNAME=	desktop-gnome-0.1
+DISTNAME=	desktop-gnome-0.3
 CATEGORIES=	meta-pkgs x11 gnome
 MASTER_SITES=	# empty
 
@@ -13,8 +13,9 @@ META_PACKAGE=	yes
 
 # implements http://wiki.netbsd.se/Desktop_Phase_1
 #
+DEPENDS+=	pkgin-[0-9]*:../../pkgtools/pkgin
 DEPENDS+=	cups-[0-9]*:../../print/cups
-DEPENDS+=	firefox3-[0-9]*:../../www/firefox3
+DEPENDS+=	firefox-[0-9]*:../../www/firefox
 DEPENDS+=	gnome-[0-9]*:../../meta-pkgs/gnome
 DEPENDS+=	gimp-[0-9]*:../../graphics/gimp
 DEPENDS+=	notification-daemon-[0-9]*:../../sysutils/notification-daemon

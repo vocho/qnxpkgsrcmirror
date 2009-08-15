@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.8 2008/12/18 17:28:17 bjs Exp $
+# $NetBSD: Makefile,v 1.10 2009/08/11 12:46:41 drochner Exp $
 # FreeBSD Id: ports/multimedia/dvd-slideshow/Makefile,v 1.12 2007/09/23 04:42:06 edwin Exp
 
 DISTNAME=	dvd-slideshow-0.7.5
-PKGREVISION=	6
+PKGREVISION=	7
 CATEGORIES=	multimedia
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=dvd-slideshow/}
 
@@ -18,6 +18,7 @@ DEPENDS+=	vorbis-tools-[0-9]*:../../audio/vorbis-tools
 DEPENDS+=	sox-[0-9]*:../../audio/sox
 DEPENDS+=	dvdauthor-[0-9]*:../../multimedia/dvdauthor
 DEPENDS+=	dvd+rw-tools-[0-9]*:../../sysutils/dvd+rw-tools
+DEPENDS+=	ImageMagick-[0-9]*:../../graphics/ImageMagick
 
 USE_X11BASE=	yes
 USE_TOOLS+=	bash:run
@@ -66,7 +67,6 @@ do-install:
 	${INSTALL_DATA} ${WRKSRC}/doc/${file} ${DESTDIR}${PREFIX}/share/doc/dvd-slideshow
 .endfor
 
-.include "../../graphics/ImageMagick/buildlink3.mk"
 .include "../../multimedia/mjpegtools/buildlink3.mk"
 .include "../../multimedia/ffmpeg/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

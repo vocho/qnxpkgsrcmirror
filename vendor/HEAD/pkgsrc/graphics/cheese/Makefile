@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.13 2009/05/20 15:37:38 wiz Exp $
+# $NetBSD: Makefile,v 1.15 2009/08/08 16:06:20 wiz Exp $
 
-DISTNAME=	cheese-2.26.2
+DISTNAME=	cheese-2.26.3
 CATEGORIES=	graphics
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/cheese/2.26/}
 
@@ -23,7 +23,6 @@ DEPENDS+= gst-plugins0.10-v4l2>=0.10.10:../../multimedia/gst-plugins0.10-v4l2
 .endif
 
 GNU_CONFIGURE=		yes
-USE_DIRS+=		gnome2-1.5
 USE_TOOLS+=		pkg-config perl intltool gmake msgfmt
 USE_TOOLS+=		autoconf automake autoreconf
 USE_LIBTOOL=		yes

@@ -1,9 +1,12 @@
-@comment $NetBSD: PLIST,v 1.1.1.1 2008/12/28 12:32:15 jmcneill Exp $
+@comment $NetBSD: PLIST,v 1.3 2009/06/14 18:08:03 joerg Exp $
 bin/ffmpegthumbnailer
+include/libffmpegthumbnailer/filmstripfilter.h
+include/libffmpegthumbnailer/histogram.h
+include/libffmpegthumbnailer/ifilter.h
 include/libffmpegthumbnailer/imagetypes.h
+include/libffmpegthumbnailer/videoframe.h
 include/libffmpegthumbnailer/videothumbnailer.h
 include/libffmpegthumbnailer/videothumbnailerc.h
 lib/libffmpegthumbnailer.la
 lib/pkgconfig/libffmpegthumbnailer.pc
 man/man1/ffmpegthumbnailer.1
-@dirrm include/libffmpegthumbnailer

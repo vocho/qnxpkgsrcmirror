@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.1.1.1 2009/01/31 03:04:37 ahoka Exp $
+# $NetBSD: Makefile,v 1.3 2009/07/22 09:01:29 wiz Exp $
 #
 
-DISTNAME=	PokerTH-0.6.3-2-src
-PKGNAME=        pokerth-0.6.3.2
+DISTNAME=	PokerTH-0.7.1-src
+PKGNAME=        pokerth-0.7.1
 CATEGORIES=	games
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=pokerth/}
 EXTRACT_SUFX=	.tar.bz2
@@ -14,7 +14,6 @@ COMMENT=        Texas Holdem poker with online play
 USE_TOOLS=	gmake
 USE_LIBTOOL=	yes
 USE_LANGUAGES=	c c++
-USE_DIRS+=	xdg-1.4
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 INSTALLATION_DIRS=	bin lib ${PKGMANDIR}/man1 share/pokerth \
