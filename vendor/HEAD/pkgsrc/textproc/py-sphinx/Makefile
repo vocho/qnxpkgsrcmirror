@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.2 2009/02/02 09:44:44 markd Exp $
+# $NetBSD: Makefile,v 1.4 2009/08/05 10:43:12 markd Exp $
 #
 
-DISTNAME=	Sphinx-0.5.1
-PKGREVISION=	1
+DISTNAME=	Sphinx-0.6.2
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME:tl}
 CATEGORIES=	textproc python
 MASTER_SITES=	http://pypi.python.org/packages/source/S/Sphinx/
@@ -10,11 +9,12 @@ MASTER_SITES=	http://pypi.python.org/packages/source/S/Sphinx/
 MAINTAINER=	markd@NetBSD.org
 HOMEPAGE=	http://sphinx.pocoo.org/
 COMMENT=	Python documentation generator
+LICENSE=	modified-bsd
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 DEPENDS+=	${PYPKGPREFIX}-docutils>=0.4:../../textproc/py-docutils
-DEPENDS+=	${PYPKGPREFIX}-jinja>=1.1:../../textproc/py-jinja
+DEPENDS+=	${PYPKGPREFIX}-jinja2>=2.1:../../textproc/py-jinja2
 DEPENDS+=	${PYPKGPREFIX}-pygments>=0.8:../../textproc/py-pygments
 
 .include "../../lang/python/egg.mk"

@@ -1,5 +1,6 @@
-@comment $NetBSD: PLIST,v 1.7 2007/10/21 23:41:59 minskim Exp $
+@comment $NetBSD: PLIST,v 1.9 2009/07/22 21:14:24 wiz Exp $
 bin/yasm
+bin/ytasm
 include/libyasm-stdint.h
 include/libyasm.h
 include/libyasm/arch.h
@@ -35,4 +36,3 @@ man/man7/yasm_arch.7
 man/man7/yasm_dbgfmts.7
 man/man7/yasm_objfmts.7
 man/man7/yasm_parsers.7
-@dirrm include/libyasm

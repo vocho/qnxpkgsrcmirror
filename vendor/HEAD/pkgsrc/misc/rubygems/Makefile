@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.23 2009/04/07 07:35:44 minskim Exp $
+# $NetBSD: Makefile,v 1.28 2009/07/24 06:38:53 minskim Exp $
 
-DISTNAME=	rubygems-1.3.1
+DISTNAME=	rubygems-1.3.5
 CATEGORIES=	misc ruby
-MASTER_SITES=	http://rubyforge.org/frs/download.php/45905/
+MASTER_SITES=	http://rubyforge.org/frs/download.php/60718/
 EXTRACT_SUFX=	.tgz
 
 MAINTAINER=	minskim@NetBSD.org
@@ -40,24 +40,23 @@ SUBST_MESSAGE.conf=	Fixing configuration files.
 # Generate a dynamic PLIST for the rubygems documentation directory.
 GENERATE_PLIST+=	\
 	${ECHO} "@comment The following lines are automatically generated." && \
-	( cd ${DESTDIR}${PREFIX} && \
+	cd ${DESTDIR}${PREFIX} && \
 	  ${FIND} ${GEM_DOCDIR:S|${PREFIX}/||} \! -type d -print | \
-		${SORT} && \
-	  ${FIND} ${GEM_DOCDIR:S|${PREFIX}/||} -type d -print | \
-		${SORT} -r | ${SED} -e "s,^,@dirrm ," );
+		${SORT};
 
 .include "../../lang/ruby/modules.mk"
 
 # Force the Gem repository to be under ${DESTDIR}.  This is harmless
-# because this packages depends on no other gems.
+# because this package depends on no other gems.
 #
 INSTALL_ENV+=		GEM_HOME=${DESTDIR}${GEM_HOME}
+INSTALL_ENV+=		GEM_PATH=${DESTDIR}${GEM_HOME}
 
 INSTALL_TARGET=		install
 INSTALL_TARGET+=	--vendor
 INSTALL_TARGET+=	--no-format-executable	# "bin/gem", not "bin/gem18"
 .if ${_USE_DESTDIR} != "no"
-INSTALL_TARGET+=	--destdir=${DESTDIR:Q}${PREFIX:Q}
+INSTALL_TARGET+=	--destdir=${DESTDIR:Q}
 .endif
 
 # rubygem's setup.rb is not the typical setup.rb -- manually run the

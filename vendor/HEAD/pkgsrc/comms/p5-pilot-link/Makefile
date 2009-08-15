@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.41 2009/05/20 00:58:09 wiz Exp $
+# $NetBSD: Makefile,v 1.43 2009/08/09 08:36:34 wiz Exp $
 #
 
 PKG_DESTDIR_SUPPORT=	user-destdir
@@ -6,9 +6,10 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 .include "../../comms/pilot-link/Makefile.common"
 
 PKGNAME=		p5-${DISTNAME}
-PKGREVISION=		3
 
 COMMENT=		Perl bindings for pilot-link
+
+MAKE_JOBS_SAFE=		no
 
 BUILDLINK_API_DEPENDS.pilot-link-libs=	pilot-link-libs>=${PILOT_LINK_VERS}
 
@@ -22,9 +23,9 @@ PERL5_LDFLAGS=		-lpisock
 
 REPLACE_PERL+=		bindings/Perl/h2xs-pilot-link src/pilot-ietf2datebook.pl
 
-INSTALL_DIRS=		${WRKSRC}/bindings
+INSTALL_DIRS=		bindings
 INSTALLATION_DIRS=	bin
-BUILD_DIRS+=		${WRKSRC}/src
+BUILD_DIRS+=		src
 BUILD_DIRS+=		${INSTALL_DIRS}
 
 SUBST_CLASSES+=		progs

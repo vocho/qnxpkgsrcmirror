@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.40 2009/05/13 21:32:37 wiz Exp $
+# $NetBSD: Makefile,v 1.42 2009/07/22 09:01:48 wiz Exp $
 #
 
 DISTNAME=	gnome-doc-utils-0.16.1
@@ -17,7 +17,6 @@ DEPENDS+=	${PYPKGPREFIX}-libxslt>=1.1.12:../../textproc/py-libxslt
 DEPENDS+=	docbook-xml-[0-9]*:../../textproc/docbook-xml
 
 USE_TOOLS+=		intltool pkg-config gmake gawk msgfmt
-USE_DIRS+=		gnome2-1.5
 GNU_CONFIGURE=		YES
 TEST_TARGET=		check
 USE_PKGLOCALEDIR=	YES
@@ -37,10 +36,8 @@ BUILDLINK_API_DEPENDS.libxml2+=	libxml2>=2.6.12
 BUILDLINK_DEPMETHOD.libxslt=	build
 BUILDLINK_DEPMETHOD.libxml2=	build
 
-PYCOMPILEALL=	${BUILDLINK_PREFIX.${PYPACKAGE}}/${PYLIB}/compileall.py
-
 post-install:
-	${PYTHONBIN} ${PYCOMPILEALL} ${DESTDIR}${PREFIX}/share/xml2po
+	${PY_COMPILE_ALL} ${DESTDIR}${PREFIX}/share/xml2po
 
 .include "../../lang/python/application.mk"
 .include "../../textproc/libxml2/buildlink3.mk"

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.181 2009/03/22 19:01:39 wiz Exp $
+# $NetBSD: Makefile,v 1.183 2009/07/22 09:01:32 wiz Exp $
 
 DISTNAME=	gimp-2.6.6
 CATEGORIES=	graphics
@@ -22,13 +22,16 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 USE_LIBTOOL=		yes
 USE_PKGLOCALEDIR=	yes
 USE_TOOLS+=		gmake intltool msgfmt pkg-config
-USE_DIRS+=		xdg-1.1
 
 PKG_SYSCONFSUBDIR=	gimp/2.0
 
 PKGCONFIG_OVERRIDE=	gimp.pc.in
 
 .include "../../mk/bsd.prefs.mk"
+
+# Workaround for Upstream Bug#562310.
+# for more detail, see also PR#41475.
+TOOLS_NOOP+=		gtkdoc-rebase
 
 BUILDLINK_API_DEPENDS.fontconfig+=	fontconfig>=2.2.0
 BUILDLINK_API_DEPENDS.lcms+=		lcms>=1.12

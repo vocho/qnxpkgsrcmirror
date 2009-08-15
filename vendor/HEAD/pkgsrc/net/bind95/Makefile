@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.8 2009/03/23 14:43:13 tron Exp $
+# $NetBSD: Makefile,v 1.11 2009/07/29 00:24:03 reed Exp $
 
 DISTNAME=	bind-${BIND_VERSION}
-PKGNAME=	${DISTNAME:S/-P2/pl2/}
+PKGNAME=	${DISTNAME:S/-P/pl/}
 CATEGORIES=	net
 MASTER_SITES=	ftp://ftp.isc.org/isc/bind9/${BIND_VERSION}/ \
 		http://ftp.belnet.be/pub/mirror/ftp.isc.org/isc/bind9/${BIND_VERSION}/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.isc.org/sw/bind/
+HOMEPAGE=	http://www.isc.org/software/bind
 COMMENT=	Version 9 of the Berkeley Internet Name Daemon, implementation of DNS
 
 CONFLICTS+=	bind<9.5.0
@@ -15,7 +15,7 @@ CONFLICTS+=	bind>=9.6.0
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
-BIND_VERSION=	9.5.1-P2
+BIND_VERSION=	9.5.1-P3
 
 # IPv6 ready, automatically detected
 .include "../../mk/bsd.prefs.mk"
@@ -71,11 +71,7 @@ post-install:
 	${CHMOD} -x ${DESTDIR}${PREFIX}/share/doc/bind9/arm/Bv9ARM.pdf
 	${CP} ${PKGDIR}/PLIST ${PLIST_SRC}
 	(cd ${DESTDIR}${PREFIX}; ${FIND} share/doc/bind9 -type f -print ) >> ${PLIST_SRC}
-	(cd ${DESTDIR}${PREFIX}; ${FIND} share/doc/bind9 -type d -print ) | \
-		${SED} -e 's/^/@dirrm /' | ${SORT} -r >> ${PLIST_SRC}
 	(cd ${DESTDIR}${PREFIX}; ${FIND} include/bind -type f -print ) >> ${PLIST_SRC}
-	(cd ${DESTDIR}${PREFIX}; ${FIND} include/bind -type d -print ) | \
-		${SED} -e 's/^/@dirrm /' | ${SORT} -r >> ${PLIST_SRC}
 
 .include "../../mk/pthread.buildlink3.mk"
 .include "../../security/openssl/buildlink3.mk"

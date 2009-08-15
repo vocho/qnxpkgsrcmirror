@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.35 2008/08/24 14:05:16 tonnerre Exp $
+# $NetBSD: Makefile,v 1.38 2009/07/29 05:25:33 spz Exp $
 
-DISTNAME=		rt-3.8.1
+DISTNAME=		rt-3.8.4
 PKGREVISION=		1
 CATEGORIES=		devel
 MASTER_SITES=		http://download.bestpractical.com/pub/rt/release/
@@ -8,6 +8,9 @@ MASTER_SITES=		http://download.bestpractical.com/pub/rt/release/
 MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://bestpractical.com/rt/
 COMMENT=		Industrial-grade ticketing system
+LICENSE=		gnu-gpl-v2
+
+PKG_DESTDIR_SUPPORT=	destdir
 
 .include "options.mk"
 
@@ -36,7 +39,7 @@ DEPENDS+=	p5-Email-Address-[0-9]*:../../mail/p5-Email-Address
 DEPENDS+=	p5-Net>=1.15:../../net/p5-Net
 DEPENDS+=	p5-Net-Server-[0-9]*:../../net/p5-Net-Server
 DEPENDS+=	p5-Text-Wrapper>=1.0:../../textproc/p5-Text-Wrapper
-DEPENDS+=	p5-Time>=101.062101:../../time/p5-Time
+DEPENDS+=	p5-Time-modules>=101.062101:../../time/p5-Time-modules
 DEPENDS+=	p5-Text-Autoformat>=1.04:../../textproc/p5-Text-Autoformat
 DEPENDS+=	p5-Text-Quoted>=2.02:../../textproc/p5-Text-Quoted
 DEPENDS+=	p5-Tree-Simple>=1.04:../../devel/p5-Tree-Simple
@@ -96,7 +99,7 @@ MAKE_FLAGS+=	RT_SPEEDYCGI_HANDLER=""
 .PHONY: rm-speedycgi
 post-install: rm-speedycgi
 rm-speedycgi:
-	rm -f ${PREFIX}/bin/mason_handler.scgi
+	rm -f ${DESTDIR}${PREFIX}/bin/mason_handler.scgi
 .endif
 
 # Back-end dependencies

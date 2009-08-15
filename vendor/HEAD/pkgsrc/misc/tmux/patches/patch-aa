@@ -1,30 +1,16 @@
-$NetBSD: patch-aa,v 1.3 2009/05/27 06:11:23 minskim Exp $
+$NetBSD: patch-aa,v 1.6 2009/07/08 20:59:11 hasso Exp $
 
---- Makefile.orig	2009-04-27 17:38:18.000000000 +0200
+--- Makefile.orig	2009-07-04 00:42:13.000000000 +0100
 +++ Makefile
-@@ -81,6 +81,12 @@ LDFLAGS+= -pg
- .endif
- LIBS+= -lutil -lncurses
+@@ -56,7 +56,7 @@ clean-all:	clean
+ 		rm -f config.h config.mk
  
-+# Darwin
-+.if ${OS} == "Darwin"
-+SRCS+= compat/strtonum.c compat/vis.c
-+CFLAGS+= -DNO_SETPROCTITLE -DNO_STRTONUM -DNO_QUEUE_H -DNO_TREE_H
-+.endif
-+
- # FreeBSD and DragonFly
- .if ${OS} == "FreeBSD" || ${OS} == "DragonFly"
- INCDIRS+= -Icompat
-@@ -91,10 +97,10 @@ LIBS+= -lcrypt
- 
- # NetBSD
- .if ${OS} == "NetBSD"
--INCDIRS= -Icompat
-+INCDIRS+= -Icompat
- SRCS+= compat/strtonum.c compat/vis.c
- LIBS+= -lcrypt
--CFLAGS+=-DNO_STRTONUM
-+CFLAGS+=-DNO_STRTONUM -DNO_QUEUE_H -DNO_TREE_H
- .endif
- 
- OBJS= ${SRCS:S/.c/.o/:S/.y/.o/}
+ install:	all
+-		${INSTALLDIR} ${DESTDIR}${PREFIX}/bin
+-		${INSTALLBIN} tmux ${DESTDIR}${PREFIX}/bin/
+-		${INSTALLDIR} ${DESTDIR}${PREFIX}/man/man1
+-		${INSTALLMAN} tmux.1 ${DESTDIR}${PREFIX}/man/man1/
++		${BSD_INSTALL_PROGRAM_DIR} ${DESTDIR}${PREFIX}/bin
++		${BSD_INSTALL_PROGRAM} tmux ${DESTDIR}${PREFIX}/bin/
++		${BSD_INSTALL_MAN_DIR} ${DESTDIR}${PREFIX}/man/man1
++		${BSD_INSTALL_MAN} tmux.1 ${DESTDIR}${PREFIX}/man/man1/

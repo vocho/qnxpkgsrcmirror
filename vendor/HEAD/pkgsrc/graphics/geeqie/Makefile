@@ -1,19 +1,25 @@
-# $NetBSD: Makefile,v 1.2 2009/03/09 12:18:28 hasso Exp $
+# $NetBSD: Makefile,v 1.6 2009/08/05 00:18:04 wiz Exp $
 #
 
-DISTNAME=	geeqie-1.0alpha3
+DISTNAME=	geeqie-1.0beta2
+PKGREVISION=	1
 CATEGORIES=	graphics
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=geeqie/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://geeqie.sourceforge.net/
 COMMENT=	Image viewer
+LICENSE=	gnu-gpl-v2
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=		yes
 USE_PKGLOCALEDIR=	yes
 USE_LANGUAGES=		c c++
-USE_TOOLS=		pkg-config gmake msgfmt
-USE_DIRS+=		xdg-1.1
+USE_TOOLS=		bash:run gmake intltool msgfmt pkg-config
+REPLACE_BASH=		plugins/rotate/geeqie-rotate
+REPLACE_BASH+=		plugins/ufraw/geeqie-ufraw
+REPLACE_BASH+=		plugins/import/geeqie-import
 
 .include "../../graphics/exiv2/buildlink3.mk"
 .include "../../graphics/lcms/buildlink3.mk"

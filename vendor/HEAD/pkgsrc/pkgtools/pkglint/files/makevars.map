@@ -1,4 +1,4 @@
-# $NetBSD: makevars.map,v 1.194 2009/04/09 00:55:12 joerg Exp $
+# $NetBSD: makevars.map,v 1.196 2009/07/22 09:13:49 wiz Exp $
 #
 
 # This file contains the guessed type of some variables, according to
@@ -306,6 +306,21 @@ EMACS_VERSIONS_ACCEPTED	List of { emacs22 emacs22nox emacs21 emacs21nox emacs20 
 EMACS_VERSION_MAJOR	Integer [$system]
 EMACS_VERSION_MINOR	Integer [$system]
 EMACS_VERSION_REQD	List of { emacs22 emacs22nox emacs21 emacs21nox emacs20 xemacs215 xemacs214 } [m:as]
+EMULDIR			Pathname [$system]
+EMULSUBDIR		Pathname [$system]
+OPSYS_EMULDIR		Pathname [$system]
+EMULSUBDIRSLASH		Pathname [$system]
+EMUL_ARCH		{ i386 none } [$system]
+EMUL_DISTRO		Identifier [$system]
+EMUL_IS_NATIVE		Yes [$system]
+EMUL_MODULES.*		List of Identifier [$package]
+EMUL_OPSYS		{ linux } [$system]
+EMUL_PKG_FMT		{ plain rpm } [$package]
+EMUL_PLATFORM		EmulPlatform [$user]
+EMUL_PLATFORMS		List of EmulPlatform [$package]
+EMUL_PREFER		List of EmulPlatform [$user]
+EMUL_REQD		InternalList of Dependency [$package]
+EMUL_TYPE.*		{ native builtin suse suse-9.1 suse-9.x suse-10.0 suse-10.x } [$user]
 ERROR_CAT		ShellCommand [$system]
 ERROR_MSG		ShellCommand [$system]
 EVAL_PREFIX		InternalList of ShellWord [m:a,c:a]
@@ -686,16 +701,6 @@ USE_BSD_MAKEFILE	Yes [$package]
 USE_BUILTIN.*		YesNo_Indirectly [builtin.mk:s]
 USE_CMAKE		Yes [$package]
 USE_CROSSBASE		Yes [m:s]
-USE_DIRS		List of {					\
-				gnome1-1.0 gnome1-1.5			\
-				gnome2-1.3 gnome2-1.5 gnome2-1.6	\
-				kde3-1.0 kde4-1.0			\
-				texmf-1.0 texmf-1.1 texmf-1.2		\
-				texmf-1.3 texmf-1.4 			\
-				theme-1.0 theme-1.1			\
-				xdg-1.1 xdg-1.2 xdg-1.3 xdg-1.4		\
-				xorg-1.0				\
-			} [m:a,c:a]
 USE_FEATURES		List of Identifier [$package]
 USE_GNU_CONFIGURE_HOST	YesNo [$package]
 USE_GNU_ICONV		Yes [m:s,c:s,o:s]

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.1.1.1 2009/05/10 14:50:50 hasso Exp $
+# $NetBSD: Makefile,v 1.4 2009/07/08 18:09:25 hasso Exp $
 
 DISTNAME=		xsd-3.2.0+dep
 EXTRACT_SUFX=		.tar.bz2
@@ -9,10 +9,11 @@ MASTER_SITES=		http://www.codesynthesis.com/download/xsd/3.2/
 MAINTAINER=		hasso@NetBSD.org
 HOMEPAGE=		http://www.codesynthesis.com/products/xsd/
 COMMENT=		W3C XML Schema to C++ data binding compiler
+LICENSE=		gnu-gpl-v2
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
-USE_TOOLS+=		gmake gm4
+USE_TOOLS+=		bash gmake gm4
 USE_LANGUAGES+=		c++
 
 SUBST_CLASSES+=		boost
@@ -30,7 +31,7 @@ SUBST_SED.rpath=	-e 's|cxx_rpath[ ]*:=[ ]*n|cxx_rpath := y|g'
 
 do-build:
 	# XXX: rapth needs a better hack. TODO: add optimization
-	cd ${WRKSRC} && LDFLAGS="-rpath ${PREFIX}/lib" ./build.sh
+	cd ${WRKSRC} && LDFLAGS="-Wl,-rpath ${PREFIX}/lib" ./build.sh
 
 do-install:
 	cd ${WRKSRC} && MAKEFLAGS="install_prefix=${DESTDIR}${PREFIX} \

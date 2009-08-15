@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.31 2009/04/28 09:14:25 tnn Exp $
+# $NetBSD: Makefile,v 1.35 2009/08/04 21:28:41 tnn Exp $
 
 MOZILLA=		firefox3	# allow coexisting with firefox2
-COMMENT=		Lightweight gecko-based web browser
+COMMENT=		Web browser with support for extensions
 
 MOZILLA_USE_GTK2=	# yes
 MOZILLA_USE_XFT=	YES
@@ -18,7 +18,7 @@ BUILDLINK_API_DEPENDS.cairo+=	cairo>=1.6.4
 .include "../../www/firefox/Makefile-firefox.common"
 
 MAINTAINER=		tnn@NetBSD.org
-MOZ_VER=		3.0.10
+MOZ_VER=		3.0.13
 
 XPTCFILES:=		${XPTCFILES:C,^,../../firefox3/files/,}
 DESCR_SRC=		${.CURDIR}/../../www/firefox/DESCR

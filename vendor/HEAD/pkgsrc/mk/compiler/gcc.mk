@@ -1,4 +1,4 @@
-# $NetBSD: gcc.mk,v 1.96 2009/03/17 21:28:10 rillig Exp $
+# $NetBSD: gcc.mk,v 1.99 2009/07/28 06:55:24 rillig Exp $
 #
 # This is the compiler definition for the GNU Compiler Collection.
 #
@@ -39,7 +39,6 @@ _SYS_VARS.gcc=	CC_VERSION CC_VERSION_STRING LANGUAGES.gcc
 _DEF_VARS.gcc=	\
 	CCPATH CPPPATH CXXPATH \
 	F77PATH FCPATH \
-	GCC_USE_SYMLINKS \
 	IMAKEOPTS \
 	LDFLAGS \
 	PKG_CC PKG_CPP PKG_CXX PKG_FC \
@@ -49,7 +48,7 @@ _DEF_VARS.gcc=	\
 	_GCC_FC _GCC_LDFLAGS _GCC_LIBDIRS _GCC_PKG \
 	_GCC_PKGBASE _GCC_PKGSRCDIR _GCC_PKG_SATISFIES_DEP \
 	_GCC_PREFIX _GCC_REQD _GCC_STRICTEST_REQD _GCC_SUBPREFIX \
-	_GCC_TEST_DEPENDS _GCC_USE_F2C _GCC_VARS _GCC_VERSION \
+	_GCC_TEST_DEPENDS _GCC_NEEDS_A_FORTRAN _GCC_VARS _GCC_VERSION \
 	_GCC_VERSION_STRING \
 	_IGNORE_GCC _IGNORE_GCC3CXX _IGNORE_GCC3F77 _IGNORE_GCC3OBJC \
 	_IS_BUILTIN_GCC \
@@ -101,8 +100,12 @@ MAKEFLAGS+=	_CC=${_CC:Q}
 .endif
 
 .if !defined(_GCC_VERSION)
+# FIXME: ALL_ENV is not set at this point, so LC_ALL must be set
+# explicitly. In the show-all and show-var targets, it appears
+# nevertheless because "References to undefined variables are not
+# expanded" when using the := operator.
 _GCC_VERSION_STRING!=	\
-	( ${SETENV} ${ALL_ENV} ${_CC} -v 2>&1 | ${GREP} 'gcc version' ) 2>/dev/null || ${ECHO} 0
+	( ${SETENV} ${ALL_ENV} LC_ALL=C ${_CC} -v 2>&1 | ${GREP} 'gcc version' ) 2>/dev/null || ${ECHO} 0
 .  if !empty(_GCC_VERSION_STRING:Megcs*)
 _GCC_VERSION=	2.8.1		# egcs is considered to be gcc-2.8.1.
 .  elif !empty(_GCC_VERSION_STRING:Mgcc*)
@@ -481,14 +484,12 @@ PREPEND_PATH+=	${_GCC_DIR}/bin
 .  endfor
 .endif
 
-# Create compiler driver scripts in ${WRKDIR}.
-GCC_USE_SYMLINKS?=	no
 .for _var_ in ${_GCC_VARS}
 .  if !target(${_GCC_${_var_}})
 override-tools: ${_GCC_${_var_}}
 ${_GCC_${_var_}}:
 	${RUN}${MKDIR} ${.TARGET:H}
-.    if !empty(GCC_USE_SYMLINKS:Myes)
+.    if !empty(COMPILER_USE_SYMLINKS:M[Yy][Ee][Ss])
 	${RUN}${RM} -f ${.TARGET}
 	${RUN}${LN} -s ${_GCCBINDIR}/${.TARGET:T} ${.TARGET}
 .    else
@@ -508,20 +509,22 @@ ${_GCC_${_var_}}:
 .endfor
 
 # On older NetBSD systems and where the Fortran compiler doesn't exist,
-# force the use of f2c-f77.
+# force the use of f2c-f77 or some other fortran.
 #
-_GCC_USE_F2C=	no
+PKGSRC_FORTRAN?=f2c
+
+_GCC_NEEDS_A_FORTRAN=	no
 .if !exists(${FCPATH})
-_GCC_USE_F2C=	yes
+_GCC_NEEDS_A_FORTRAN=	yes
 .else
 .  for _pattern_ in 0.* 1.[0-4] 1.[0-4].*
 .    if !empty(MACHINE_PLATFORM:MNetBSD-${_pattern_}-*)
-_GCC_USE_F2C=	yes
+_GCC_NEEDS_A_FORTRAN=	yes
 .    endif
 .  endfor
 .endif
-.if !empty(_GCC_USE_F2C:M[yY][eE][sS])
-.  include "../../mk/compiler/f2c.mk"
+.if !empty(_GCC_NEEDS_A_FORTRAN:M[yY][eE][sS])
+.  include "../../mk/compiler/${PKGSRC_FORTRAN}.mk"
 .endif
 
 .endif	# COMPILER_GCC_MK

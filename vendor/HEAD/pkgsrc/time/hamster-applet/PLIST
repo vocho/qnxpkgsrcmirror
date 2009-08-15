@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.2 2009/03/22 19:38:38 wiz Exp $
+@comment $NetBSD: PLIST,v 1.4 2009/08/08 23:57:39 wiz Exp $
 lib/bonobo/servers/Hamster_Applet.server
 lib/hamster-applet/hamster-applet
 ${PYSITELIB}/hamster/Configuration.py
@@ -80,6 +80,7 @@ share/locale/as/LC_MESSAGES/hamster-applet.mo
 share/locale/bg/LC_MESSAGES/hamster-applet.mo
 share/locale/bn_IN/LC_MESSAGES/hamster-applet.mo
 share/locale/ca/LC_MESSAGES/hamster-applet.mo
+share/locale/ca@valencia/LC_MESSAGES/hamster-applet.mo
 share/locale/cs/LC_MESSAGES/hamster-applet.mo
 share/locale/da/LC_MESSAGES/hamster-applet.mo
 share/locale/de/LC_MESSAGES/hamster-applet.mo
@@ -123,26 +124,8 @@ share/locale/ta/LC_MESSAGES/hamster-applet.mo
 share/locale/te/LC_MESSAGES/hamster-applet.mo
 share/locale/th/LC_MESSAGES/hamster-applet.mo
 share/locale/tr/LC_MESSAGES/hamster-applet.mo
+share/locale/uk/LC_MESSAGES/hamster-applet.mo
 share/locale/vi/LC_MESSAGES/hamster-applet.mo
 share/locale/zh_CN/LC_MESSAGES/hamster-applet.mo
 share/locale/zh_HK/LC_MESSAGES/hamster-applet.mo
 share/locale/zh_TW/LC_MESSAGES/hamster-applet.mo
-@comment in hicolor-icon-theme: @dirrm share/icons/hicolor/scalable/apps
-@comment in hicolor-icon-theme: @dirrm share/icons/hicolor/scalable
-@comment in hicolor-icon-theme: @dirrm share/icons/hicolor/48x48/apps
-@comment in hicolor-icon-theme: @dirrm share/icons/hicolor/48x48
-@comment in hicolor-icon-theme: @dirrm share/icons/hicolor/32x32/apps
-@comment in hicolor-icon-theme: @dirrm share/icons/hicolor/32x32
-@comment in hicolor-icon-theme: @dirrm share/icons/hicolor/22x22/apps
-@comment in hicolor-icon-theme: @dirrm share/icons/hicolor/22x22
-@comment in hicolor-icon-theme: @dirrm share/icons/hicolor/16x16/apps
-@comment in hicolor-icon-theme: @dirrm share/icons/hicolor/16x16
-@comment in hicolor-icon-theme: @dirrm share/icons/hicolor
-@comment in xdg-dirs: @dirrm share/icons
-@dirrm share/hamster-applet/art
-@dirrm share/hamster-applet
-@comment in GConf: @dirrm share/gconf/schemas
-@dirrm ${PYSITELIB}/hamster/keybinder
-@dirrm ${PYSITELIB}/hamster
-@dirrm lib/hamster-applet
-@comment in libbonobo: @dirrm lib/bonobo/servers

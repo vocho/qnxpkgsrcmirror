@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.13 2008/07/14 04:05:33 tnn Exp $
+# $NetBSD: Makefile,v 1.16 2009/07/18 10:19:08 wiz Exp $
 
 DISTNAME=	# empty
-PKGNAME=	modular-xorg-drivers-1.3
+PKGNAME=	modular-xorg-drivers-1.4
 CATEGORIES=	meta-pkgs drivers x11
 MASTER_SITES=	${MASTER_SITE_XORG:=driver/}
 DISTFILES=	# empty
@@ -26,11 +26,11 @@ DEPENDS+=	xf86-video-ast-[0-9]*:../../x11/xf86-video-ast
 DEPENDS+=	xf86-video-ati-[0-9]*:../../x11/xf86-video-ati
 DEPENDS+=	xf86-video-chips-[0-9]*:../../x11/xf86-video-chips
 DEPENDS+=	xf86-video-cirrus-[0-9]*:../../x11/xf86-video-cirrus
-DEPENDS+=	xf86-video-cyrix-[0-9]*:../../x11/xf86-video-cyrix
+#DEPENDS+=	xf86-video-cyrix-[0-9]*:../../x11/xf86-video-cyrix
 DEPENDS+=	xf86-video-glint-[0-9]*:../../x11/xf86-video-glint
 DEPENDS+=	xf86-video-i128-[0-9]*:../../x11/xf86-video-i128
 DEPENDS+=	xf86-video-i740-[0-9]*:../../x11/xf86-video-i740
-DEPENDS+=	xf86-video-imstt-[0-9]*:../../x11/xf86-video-imstt
+#DEPENDS+=	xf86-video-imstt-[0-9]*:../../x11/xf86-video-imstt
 DEPENDS+=	xf86-video-intel-[0-9]*:../../x11/xf86-video-intel
 DEPENDS+=	xf86-video-mach64-[0-9]*:../../x11/xf86-video-mach64
 DEPENDS+=	xf86-video-mga-[0-9]*:../../x11/xf86-video-mga
@@ -51,7 +51,6 @@ DEPENDS+=	xf86-video-trident-[0-9]*:../../x11/xf86-video-trident
 DEPENDS+=	xf86-video-tseng-[0-9]*:../../x11/xf86-video-tseng
 DEPENDS+=	xf86-video-vesa-[0-9]*:../../x11/xf86-video-vesa
 DEPENDS+=	xf86-video-vga-[0-9]*:../../x11/xf86-video-vga
-DEPENDS+=	xf86-video-via-[0-9]*:../../x11/xf86-video-via
 .if ${MACHINE_ARCH} == "i386" || ${MACHINE_ARCH} == "x86_64"
 DEPENDS+=	xf86-video-vmware-[0-9]*:../../x11/xf86-video-vmware
 .endif

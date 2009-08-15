@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.588 2009/05/19 06:49:29 hasso Exp $
+# $NetBSD: Makefile,v 1.594 2009/08/08 06:29:10 tnn Exp $
 #
 
 COMMENT=	Packages to support the X window system
@@ -249,7 +249,6 @@ SUBDIR+=	openbsd-input-ws
 SUBDIR+=	openmotif
 SUBDIR+=	p5-Clipboard
 SUBDIR+=	p5-Gtk2-Ex-FormFactory
-SUBDIR+=	p5-Gtk2-GladeXML
 SUBDIR+=	p5-Tk
 SUBDIR+=	p5-X11-Protocol
 SUBDIR+=	p5-gtk
@@ -273,7 +272,6 @@ SUBDIR+=	py-qt4
 SUBDIR+=	py-sip
 SUBDIR+=	py-wxWidgets
 SUBDIR+=	py-xcbgen
-SUBDIR+=	qgtkstyle
 SUBDIR+=	qt3
 SUBDIR+=	qt3-docs
 SUBDIR+=	qt3-libs
@@ -315,6 +313,7 @@ SUBDIR+=	scrnsaverproto
 SUBDIR+=	sessreg
 SUBDIR+=	setxkbmap
 SUBDIR+=	slock
+SUBDIR+=	space_dapp
 SUBDIR+=	speyes
 SUBDIR+=	ssystem
 SUBDIR+=	stalonetray
@@ -424,7 +423,6 @@ SUBDIR+=	xf86-video-trident
 SUBDIR+=	xf86-video-tseng
 SUBDIR+=	xf86-video-vesa
 SUBDIR+=	xf86-video-vga
-SUBDIR+=	xf86-video-via
 SUBDIR+=	xf86-video-vmware
 SUBDIR+=	xf86-video-wsfb
 SUBDIR+=	xf86bigfontproto

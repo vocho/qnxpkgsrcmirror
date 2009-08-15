@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.4 2008/03/04 16:38:12 jlam Exp $
+# $NetBSD: Makefile,v 1.6 2009/07/22 09:30:39 wiz Exp $
 
 DISTNAME=	ruby-doc-stdlib-0.10.1
 CATEGORIES=	lang ruby
@@ -24,11 +24,7 @@ do-install:
 		${XARGS} ${CHMOD} ${PKGDIRMODE}
 	${FIND} ${DESTDIR}${PREFIX}/${DOCDIR} -type f -print |		\
 		${XARGS} ${CHMOD} ${SHAREMODE}
-	${CAT} ${PKGDIR}/PLIST.pre >${PLIST_SRC}
 	cd ${DESTDIR}${PREFIX} &&					\
 		${FIND} ${DOCDIR} -type f -print >> ${PLIST_SRC}
-	cd ${DESTDIR}${PREFIX} &&					\
-		${FIND} -d ${DOCDIR} -type d -print |			\
-		${SED} -e "s/^/@dirrm /" >>${PLIST_SRC}
 
 .include "../../mk/bsd.pkg.mk"

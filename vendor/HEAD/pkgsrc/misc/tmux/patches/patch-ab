@@ -1,0 +1,46 @@
+$NetBSD: patch-ab,v 1.4 2009/07/08 20:59:11 hasso Exp $
+
+--- configure.orig	2009-07-08 23:25:25 +0300
++++ configure	2009-07-08 23:27:03 +0300
+@@ -157,7 +157,7 @@ SRCS+= osdep-darwin.c \
+ EOF
+ 	;;
+ # ------------------------------------------------------------------------------
+-    FreeBSD|DragonFly)
++    FreeBSD)
+ 	cat <<EOF >>$CONFIG_H
+ #define HAVE_ASPRINTF
+ #define HAVE_DAEMON
+@@ -180,6 +180,32 @@ SRCS+= osdep-freebsd.c \
+ LIBS+= -lcrypt -lutil
+ EOF
+ 	;;
++
++# ------------------------------------------------------------------------------
++    DragonFly)
++	cat <<EOF >>$CONFIG_H
++#define HAVE_ASPRINTF
++#define HAVE_DAEMON
++#define HAVE_FGETLN
++#define HAVE_FORKPTY
++#define HAVE_GETOPT
++#define HAVE_LIBUTIL_H
++#define HAVE_PATHS_H
++#define HAVE_POLL
++#define HAVE_PROGNAME
++#define HAVE_SETPROCTITLE
++#define HAVE_STRCASESTR
++#define HAVE_STRLCAT
++#define HAVE_STRLCPY
++#define HAVE_STRTONUM
++EOF
++	cat <<EOF >>$CONFIG_MK
++SRCS+= osdep-unknown.c \
++	compat/vis.c
++LIBS+= -lcrypt -lutil
++EOF
++	;;
++
+ # ------------------------------------------------------------------------------
+     NetBSD)
+ 	cat <<EOF >>$CONFIG_H

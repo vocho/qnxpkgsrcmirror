@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.159 2009/02/27 16:51:36 wiz Exp $
+# $NetBSD: Makefile,v 1.162 2009/07/18 03:04:41 smb Exp $
 
 DISTNAME=	netpbm-10.34
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	graphics
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=netpbm/}
 EXTRACT_SUFX=	.tgz
@@ -13,8 +13,7 @@ COMMENT=	Toolkit for conversion of images between different formats
 MAKE_JOBS_SAFE=	no
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
-# PLIST generation in post-install below is broken for destdir
-#PKG_DESTDIR_SUPPORT=	user-destdir
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=	bash:run gmake lex pax perl
 USE_FEATURES=	snprintf
@@ -92,11 +91,6 @@ post-install:
 	${MV} misc share/netpbm && 				\
 	${CHOWN} -R ${BINOWN}:${BINGRP} . &&			\
 	${FIND} * \! -type d -print | ${SORT} >${PLIST_SRC} &&	\
-	${FIND} * -type d -print | 				\
-	while read DIR; do					\
-		${TEST} -d "${DESTDIR}${PREFIX}/$${DIR}" ||	\
-			${ECHO} "@dirrm $${DIR}";		\
-	done >>${PLIST_SRC} &&					\
 	pax -rwpppm . ${DESTDIR}${PREFIX}
 	${RM} -fr ${STAGEDIR}
 	${FIND} ${DESTDIR}${PREFIX}/share/doc/netpbm -type f -print |	\

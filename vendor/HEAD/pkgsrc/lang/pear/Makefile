@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.8 2008/12/20 14:42:50 adrianp Exp $
+# $NetBSD: Makefile,v 1.10 2009/07/17 18:00:16 adrianp Exp $
 #
 
 DISTNAME=	PEAR-1.5.4
@@ -8,7 +8,7 @@ CATEGORIES=	lang
 MASTER_SITES=	http://download.pear.php.net/package/
 EXTRACT_SUFX=	.tgz
 
-MAINTAINER=	adrianp@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://pear.php.net/
 COMMENT=	PEAR Base System for PHP
 
@@ -87,11 +87,11 @@ do-build:
 	${CP} ${WRKSRC}/PEAR.php ${BUNDLE}
 
 do-install:
-	${INSTALL_DATA_DIR} ${PREFIX}/share/examples/pear
-	${PREFIX}/bin/php ${WRKSRC}/install/go-pear.php local
-	${INSTALL_SCRIPT} ${WRKSRC}/pear.sh ${PREFIX}/bin/pear
+	${INSTALL_DATA_DIR} ${DESTDIR}${PREFIX}/share/examples/pear
+	${PREFIX}/bin/php ${DESTDIR}${WRKSRC}/install/go-pear.php local
+	${INSTALL_SCRIPT} ${WRKSRC}/pear.sh ${DESTDIR}${PREFIX}/bin/pear
 	${INSTALL_DATA} ${WRKSRC}/pear.conf \
-		${PREFIX}/share/examples/pear/pear.conf
+		${DESTDIR}${PREFIX}/share/examples/pear/pear.conf
 
 .include "${PHPPKGSRCDIR}/buildlink3.mk"
 

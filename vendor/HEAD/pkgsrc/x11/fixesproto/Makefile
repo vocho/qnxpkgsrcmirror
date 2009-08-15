@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.6 2008/05/24 21:45:14 tnn Exp $
+# $NetBSD: Makefile,v 1.8 2009/07/23 22:26:05 wiz Exp $
 #
 
 DISTNAME=		fixesproto-4.0

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.41 2009/03/18 13:28:49 drochner Exp $
+# $NetBSD: Makefile,v 1.43 2009/08/11 15:24:27 drochner Exp $
 
 DISTNAME=	kipi-plugins-0.1.7
 PKGREVISION=	2

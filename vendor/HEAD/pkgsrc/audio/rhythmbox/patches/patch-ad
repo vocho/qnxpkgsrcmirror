@@ -1,15 +1,13 @@
-$NetBSD: patch-ad,v 1.6 2009/05/26 20:23:50 wiz Exp $
+$NetBSD: patch-ad,v 1.8 2009/08/02 12:10:39 drochner Exp $
 
-http://bugzilla.gnome.org/show_bug.cgi?id=583938
-
---- configure.orig	2009-04-28 09:40:11.000000000 +0200
-+++ configure
-@@ -20242,7 +20242,7 @@ $as_echo "$as_me: error: HAL support exp
-    { (exit 1); exit 1; }; }
-   fi
+--- plugins/coherence/upnp_coherence/MediaPlayer.py.orig	2009-07-31 15:50:21.000000000 +0200
++++ plugins/coherence/upnp_coherence/MediaPlayer.py
+@@ -260,7 +260,7 @@ class RhythmboxPlayer(log.Loggable):
  
--  if test "x$enable_hal" == "xyes"; then
-+  if test "x$enable_hal" = "xyes"; then
+                 if duration is not None:
+                     h,m,s = duration.split(':')
+-                    seconds = int(h)*3600 + int(m)*60 + int(s)
++                    seconds = int(h)*3600 + int(m)*60 + int(round(float(s)))
+                     self.info("%r %r:%r:%r %r", duration, h, m , s, seconds)
+                     self.shell.props.db.set(self.entry, rhythmdb.PROP_DURATION, seconds)
  
- cat >>confdefs.h <<\_ACEOF
- #define HAVE_HAL 1

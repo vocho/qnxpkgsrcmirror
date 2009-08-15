@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.85 2009/04/28 10:31:58 hasso Exp $
+# $NetBSD: Makefile,v 1.91 2009/08/12 02:31:19 obache Exp $
 
 DISTNAME=	mono-${MONO_VERSION}
 PKGREVISION=	1
@@ -16,7 +16,7 @@ BUILD_DEPENDS+=	p5-XML-Parser-[0-9]*:../../textproc/p5-XML-Parser
 
 CONFLICTS=	pnet-[0-9]*
 
-MONO_VERSION=		2.4
+MONO_VERSION=		2.4.2.2
 ALL_ENV+=		MONO_SHARED_DIR=${WRKDIR:Q}
 
 USE_TOOLS+=		bison gmake gtar perl:run pkg-config bash:run msgfmt
@@ -126,6 +126,12 @@ SUBST_STAGE.fix-cfgdir=		post-patch
 SUBST_MESSAGE.fix-cfgdir=	Fixing configuration files install dir
 SUBST_FILES.fix-cfgdir=		mcs/tools/mconfig/Makefile
 SUBST_SED.fix-cfgdir=		-e 's,$$(sysconfdir)/mono,${EGDIR},g'
+
+SUBST_CLASSES+=			fix-libx11
+SUBST_STAGE.fix-libx11=		pre-configure
+SUBST_MESSAGE.fix-libx11=	Fixing libX11 search path configuration
+SUBST_FILES.fix-libx11=		configure
+SUBST_SED.fix-libx11=		-e 's,@X11BASE@,${X11BASE},g'
 
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../devel/glib2/buildlink3.mk"

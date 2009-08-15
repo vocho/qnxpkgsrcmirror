@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.102 2009/05/19 08:59:29 wiz Exp $
+# $NetBSD: Makefile,v 1.104 2009/06/15 12:42:15 tron Exp $
 #
 # NOTE:	If you update this package, then you'll likely need to also update
 #	the x11-links dependency in buildlink3.mk to the correct version,
@@ -21,9 +21,8 @@ WRKSRC=			${WRKDIR}
 USE_LANGUAGES=		# empty
 USE_TOOLS+=		pax
 
-PLIST_SRC.dirs=		${WRKDIR}/.PLIST_SRC.dirs
 PLIST_SRC.files=	${WRKDIR}/.PLIST_SRC.files
-PLIST_SRC=		${.CURDIR}/PLIST ${PLIST_SRC.files} ${PLIST_SRC.dirs}
+PLIST_SRC=		${.CURDIR}/PLIST ${PLIST_SRC.files}
 
 .include "../../mk/bsd.prefs.mk"
 
@@ -83,10 +82,6 @@ do-build:
 				>> ${PLIST_SRC.files};			\
 		fi;							\
 	done
-	${RM} -f ${PLIST_SRC.dirs}
-	{ cd ${WRKSRC}; ${FIND} ${X11_LINKS_SUBDIR} -type d -print |	\
-	  ${SORT} -ur | ${SED} -e "s|^|@dirrm |";			\
-	} > ${PLIST_SRC.dirs}
 
 do-install:
 	${INSTALL_DATA_DIR} ${DESTDIR:Q}${X11_LINKS_DIR:Q}

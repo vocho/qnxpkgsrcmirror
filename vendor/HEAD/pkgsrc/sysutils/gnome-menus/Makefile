@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.45 2009/04/17 17:59:33 drochner Exp $
+# $NetBSD: Makefile,v 1.47 2009/07/22 09:01:46 wiz Exp $
 #
 
-DISTNAME=	gnome-menus-2.26.1
+DISTNAME=	gnome-menus-2.26.2
 CATEGORIES=	sysutils gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gnome-menus/2.26/}
 EXTRACT_SUFX=	.tar.bz2
@@ -13,7 +13,6 @@ COMMENT=	Implementation of the desktop menu specification for GNOME
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=		yes
-USE_DIRS+=		xdg-1.2
 USE_TOOLS+=		gmake intltool msgfmt pkg-config
 USE_LIBTOOL=		yes
 USE_PKGLOCALEDIR=	yes

@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.4 2009/01/27 11:35:10 markd Exp $
+# $NetBSD: Makefile,v 1.6 2009/07/25 11:52:55 markd Exp $
 
-DISTNAME=	soprano-2.2
+DISTNAME=	soprano-2.3.0
+PKGREVISION=	1
 CATEGORIES=	textproc
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=soprano/}
 EXTRACT_SUFX=	.tar.bz2
@@ -8,6 +9,7 @@ EXTRACT_SUFX=	.tar.bz2
 MAINTAINER=	markd@NetBSD.org
 HOMEPAGE=	http://soprano.sourceforge.net/
 COMMENT=	QT based RDF framework
+LICENSE=	gnu-lgpl-v2
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 

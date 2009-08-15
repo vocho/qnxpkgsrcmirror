@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.32 2008/12/21 11:00:37 wiz Exp $
+# $NetBSD: Makefile,v 1.34 2009/07/22 09:01:42 wiz Exp $
 
 DISTNAME=	vino-2.24.1
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	net gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/vino/2.24/}
 EXTRACT_SUFX=	.tar.bz2
@@ -12,7 +12,6 @@ COMMENT=	VNC server for GNOME
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
-USE_DIRS+=		gnome2-1.5
 USE_LIBTOOL=		yes
 USE_PKGLOCALEDIR=	yes
 USE_TOOLS+=		gmake intltool msgfmt perl pkg-config
@@ -36,6 +35,7 @@ GCONF_SCHEMAS=		vino-server.schemas
 .include "../../net/ORBit2/buildlink3.mk"
 .include "../../security/gnome-keyring/buildlink3.mk"
 .include "../../security/gnutls/buildlink3.mk"
+.include "../../security/gnutls/libgnutls-config.mk"
 .include "../../sysutils/libnotify/buildlink3.mk"
 .include "../../x11/gtk2/buildlink3.mk"
 .include "../../mk/pthread.buildlink3.mk"

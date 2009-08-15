@@ -1,11 +1,10 @@
-# $NetBSD: Makefile,v 1.27 2009/02/11 07:46:15 markd Exp $
+# $NetBSD: Makefile,v 1.31 2009/07/07 16:36:05 drochner Exp $
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 .include "../../x11/qt4-libs/Makefile.common"
 
 PKGNAME=	qt4-libs-${QTVERSION}
-PKGREVISION=	3
 COMMENT=	C++ X GUI toolkit
 
 BUILD_TARGET=		sub-src
@@ -37,12 +36,12 @@ do-install:
 .endfor
 	${LIBTOOL} --mode=install ${INSTALL_PROGRAM} ${WRKSRC}/bin/uic3 \
 	    ${DESTDIR}${QTPREFIX}/bin
-.for incl in corelib gui network opengl qt3support sql svg xml script testlib 3rdparty/webkit/WebCore
+.for incl in corelib gui network opengl qt3support script scripttools sql svg xml script testlib 3rdparty/webkit/WebCore
 	cd ${WRKSRC}/src/${incl} && env ${MAKE_ENV} ${INSTALL_ENV} \
 		${MAKE_PROGRAM} ${INSTALL_TARGET}
 .endfor
 	cd ${DESTDIR}${PREFIX} && find qt4/include -type f -print > ${WRKDIR}/PLIST
-.for lib in Qt3Support QtCore QtGui QtNetwork QtOpenGL QtSql QtSvg QtXml QtScript QtTest QtWebKit
+.for lib in Qt3Support QtCore QtGui QtNetwork QtOpenGL QtSql QtSvg QtXml QtScript QtScriptTools QtTest QtWebKit
 	${LIBTOOL} --mode=install ${INSTALL_LIB} ${WRKSRC}/lib/lib${lib}.la \
 		${DESTDIR}${QTPREFIX}/lib/
 	sed	-e "s:${WRKSRC}:${QTPREFIX}:g" \

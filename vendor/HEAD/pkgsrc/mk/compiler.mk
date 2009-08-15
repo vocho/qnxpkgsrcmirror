@@ -1,4 +1,4 @@
-# $NetBSD: compiler.mk,v 1.68 2008/10/20 20:44:49 wiz Exp $
+# $NetBSD: compiler.mk,v 1.70 2009/07/08 21:17:16 markd Exp $
 #
 # This Makefile fragment implements handling for supported C/C++/Fortran
 # compilers.
@@ -36,6 +36,12 @@
 #	Force using the appropriate version of GCC from pkgsrc based on
 #	GCC_REQD instead of the native compiler.
 #
+#	This should be disabled only for debugging.
+#
+# COMPILER_USE_SYMLINKS
+#	If set to yes, use symlinks for the compiler drivers, otherwise
+#	shell scripts are created.  The default is yes.
+#
 # The following variables may be set by a package:
 #
 # GCC_REQD
@@ -72,7 +78,7 @@
 BSD_COMPILER_MK=	defined
 
 _VARGROUPS+=		compiler
-_USER_VARS.compiler=	PKGSRC_COMPILER USE_PKGSRC_GCC ABI
+_USER_VARS.compiler=	PKGSRC_COMPILER USE_PKGSRC_GCC ABI COMPILER_USE_SYMLINKS
 _PKG_VARS.compiler=	USE_LANGUAGES GCC_REQD NOT_FOR_COMPILER ONLY_FOR_COMPILER
 _SYS_VARS.compiler=	CC_VERSION
 
@@ -86,6 +92,8 @@ USE_LANGUAGES?=	c
 USE_LANGUAGES+=	c
 .endif
 
+COMPILER_USE_SYMLINKS?=	yes
+
 # For environments where there is an external gcc too, but pkgsrc
 # should use the pkgsrc one for consistency.
 #
@@ -94,7 +102,7 @@ _USE_PKGSRC_GCC=	yes
 .endif
 
 _COMPILERS=		ccc gcc icc ido mipspro mipspro-ucode sunpro xlc hp pcc
-_PSEUDO_COMPILERS=	ccache distcc f2c
+_PSEUDO_COMPILERS=	ccache distcc f2c g95
 
 .if defined(NOT_FOR_COMPILER) && !empty(NOT_FOR_COMPILER)
 .  for _compiler_ in ${_COMPILERS}

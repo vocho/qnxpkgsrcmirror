@@ -1,5 +1,5 @@
-$NetBSD: distinfo,v 1.4 2009/01/11 21:06:26 he Exp $
+$NetBSD: distinfo,v 1.6 2009/07/19 10:39:54 sno Exp $
 
-SHA1 (WWW-Amazon-Wishlist-1.601.tar.gz) = ba43a417eb06aabdb5d20defc64701f14f4a3e9a
-RMD160 (WWW-Amazon-Wishlist-1.601.tar.gz) = 2bd101d8fa6797d66809c83f5affae5523fdc4fe
-Size (WWW-Amazon-Wishlist-1.601.tar.gz) = 21642 bytes
+SHA1 (WWW-Amazon-Wishlist-2.001.tar.gz) = f27b4bfaef1253c7653d257f8f1d5aefaa14cffb
+RMD160 (WWW-Amazon-Wishlist-2.001.tar.gz) = b4fd29fb8acc31c411c30974394a379fce423c46
+Size (WWW-Amazon-Wishlist-2.001.tar.gz) = 23353 bytes

@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.173 2009/05/02 16:21:46 reed Exp $
+# $NetBSD: Makefile,v 1.182 2009/07/22 09:01:54 wiz Exp $
 
-DISTNAME=		gtk+-2.16.1
+DISTNAME=		gtk+-2.16.5
 PKGNAME=		${DISTNAME:S/gtk/gtk2/}
 CATEGORIES=		x11
 MASTER_SITES=		ftp://ftp.gtk.org/pub/gtk/2.16/ \
@@ -10,6 +10,7 @@ EXTRACT_SUFX=		.tar.bz2
 MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://www.gtk.org/
 COMMENT=		GIMP Toolkit v2 - libraries for building X11 user interfaces
+LICENSE=		gnu-lgpl-v2.1
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
@@ -18,7 +19,6 @@ CONFLICTS+=		gail-[0-9]*
 
 SUPERSEDES=		gail-[0-9]*
 
-USE_DIRS+=		xdg-1.1
 USE_PKGLOCALEDIR=	yes
 USE_TOOLS+=		gmake msgfmt perl pkg-config
 USE_LANGUAGES=		c c++
@@ -27,6 +27,8 @@ PTHREAD_AUTO_VARS=	yes
 
 GNU_CONFIGURE=		 yes
 CONFIGURE_ARGS+=	--sysconfdir=${PREFIX}/libdata
+# Work around build problems, disable unstable PAPI, PR #41608:
+CONFIGURE_ARGS+=	--disable-papi
 MAKE_ENV+=		PKGLOCALEDIR=${PKGLOCALEDIR:Q}
 TEST_TARGET=		check
 
@@ -46,10 +48,6 @@ BUILD_DIRS=		. demos/gtk-demo
 .include "../../mk/bsd.prefs.mk"
 
 CPPFLAGS+=		-DPREFIX="\"${PREFIX}\""
-
-PRINT_PLIST_AWK+=	/^@dirrm share\/themes\/Default$$/ \
-				{ print "@unexec $${RMDIR} %D/" $$2 \
-				  " 2>/dev/null || $${TRUE}"; next; }
 
 SUBST_CLASSES+=		pthread
 SUBST_STAGE.pthread=	pre-configure

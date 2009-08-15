@@ -1,9 +1,8 @@
-# $NetBSD: Makefile,v 1.7 2009/02/13 02:05:26 epg Exp $
+# $NetBSD: Makefile,v 1.12 2009/07/29 19:47:24 drochner Exp $
 #
 
 PKGNAME=		${PYPKGPREFIX}-qt4-${PYQT_VERSION}
-PKGREVISION=		1
-PYQT_VERSION=		4.4.4
+PYQT_VERSION=		4.5.4
 CATEGORIES=		x11 python
 MASTER_SITES=		http://www.riverbankcomputing.com/static/Downloads/PyQt4/
 
@@ -25,9 +24,17 @@ CONFIGURE_ARGS+=	--confirm-license
 
 INSTALL_ENV+=		INSTALL_ROOT=${DESTDIR:Q}
 
-PYTHON_VERSIONS_ACCEPTED=	25 24
+PYTHON_VERSIONS_ACCEPTED=	26 25 24
 PY_PATCHPLIST=			yes
 PLIST_SUBST+=			PYVERSSUFFIX=${PYVERSSUFFIX:Q}
+
+# This is a hack. CPPFLAGS and CXXFLAGS from the environment are ignored,
+# however, so I don't know a better way to fix it.
+SUBST_CLASSES+=			PIC
+SUBST_STAGE.PIC=		post-configure
+SUBST_FILES.PIC=		qpy/QtCore/Makefile qpy/QtGui/Makefile
+SUBST_SED.PIC=			-e "s/CXXFLAGS      =/CXXFLAGS      = -fPIC/"
+SUBST_MESSAGE.PIC=		Adding -fPIC to CXXFLAGS.
 
 #SUBST_CLASSES+=		pyversfx
 #SUBST_STAGE.pyversfx=	pre-configure
@@ -48,14 +55,13 @@ PLIST_SRC+=		${PKGDIR}/PLIST.X11
 .if ${PYPKGPREFIX} == "py24"
 PLIST_SRC+=		${PKGDIR}/PLIST.elementtree
 .endif
-PLIST_SRC+=		${PKGDIR}/PLIST.common_end
 
 CONFIGURE_ARGS+=	--verbose
 do-configure:
 	(cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} \
 		${PYTHONBIN} configure.py ${CONFIGURE_ARGS})
 
-BUILDLINK_API_DEPENDS.py-sip+=	${PYPKGPREFIX}-sip>=4.7.9
+BUILDLINK_API_DEPENDS.py-sip+=	${PYPKGPREFIX}-sip>=4.8.1
 .include "../../x11/py-sip/buildlink3.mk"
 .include "../../sysutils/dbus/buildlink3.mk"
 .include "../../sysutils/py-dbus/buildlink3.mk"

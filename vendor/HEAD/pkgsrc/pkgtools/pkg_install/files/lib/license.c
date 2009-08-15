@@ -1,4 +1,4 @@
-/*	$NetBSD: license.c,v 1.2 2009/05/18 10:01:37 wiz Exp $	*/
+/*	$NetBSD: license.c,v 1.9 2009/08/02 17:56:45 joerg Exp $	*/
 
 /*-
  * Copyright (c) 2009 Joerg Sonnenberger <joerg@NetBSD.org>.
@@ -51,12 +51,14 @@ const char *default_acceptable_licenses =
     "gnu-gpl-v2 gnu-lgpl-v2 gnu-lgpl-v2.1 "
     "gnu-gpl-v3 gnu-lgpl-v3 "
     "original-bsd modified-bsd "
-    "x11 "
+    "x11 mit miros "
     "apache-1.1 apache-2.0 "
     "artistic artistic-2.0 "
     "cddl-1.0 "
     "cpl-1.0 "
-    "open-font-license ";
+    "open-font-license "
+    "mpl-1.0 mpl-1.1 "
+    "zpl";
 
 #ifdef DEBUG
 static size_t hash_collisions;
@@ -64,7 +66,8 @@ static size_t hash_collisions;
 
 static char **license_hash[HASH_SIZE];
 static const char license_spaces[] = " \t\n";
-static const char license_chars[] = "abcdefghijklmnopqrstuvwxyz0123456789_-.";
+static const char license_chars[] =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_-.";
 
 static size_t
 hash_license(const char *license, size_t len)
@@ -156,14 +159,16 @@ acceptable_license(const char *license)
 	size_t len;
 
 	len = strlen(license);
-	if (strspn(license, license_chars) != len)
+	if (strspn(license, license_chars) != len) {
+		warnx("Invalid character in license name at position %zu", len);
 		return -1;
+	}
 
 	return acceptable_license_internal(license, len);
 }
 
 static int
-acceptable_pkg_license_internal(const char **licensep, int toplevel)
+acceptable_pkg_license_internal(const char **licensep, int toplevel, const char *start)
 {
 	const char *license = *licensep;
 	int need_parenthesis, is_true = 0;
@@ -182,7 +187,7 @@ acceptable_pkg_license_internal(const char **licensep, int toplevel)
 
 	for (;;) {
 		if (*license == '(') {
-			switch (acceptable_pkg_license_internal(&license, 0)) {
+			switch (acceptable_pkg_license_internal(&license, 0, start)) {
 			case -1:
 				return -1;
 			case 0:
@@ -196,8 +201,10 @@ acceptable_pkg_license_internal(const char **licensep, int toplevel)
 			license += strspn(license, license_spaces);
 		} else {
 			len = strspn(license, license_chars);
-			if (len == 0)
+			if (len == 0) {
+				warnx("Invalid character in license name at position %zu", license - start + 1);
 				return -1;
+			}
 
 			if (acceptable_license_internal(license, len)) {
 				if (expr_type != 2)
@@ -209,44 +216,55 @@ acceptable_pkg_license_internal(const char **licensep, int toplevel)
 			license += len;
 
 			len = strspn(license, license_spaces);
-			if (len == 0 && *license && *license  != ')')
+			if (len == 0 && *license && *license  != ')') {
+				warnx("Missing space at position %zu", license - start + 1);
 				return -1;
+			}
 			license += len;
 		}
 
 		if (*license == ')') {
-			if (!need_parenthesis)
+			if (!need_parenthesis) {
+				warnx("Missing open parenthesis at position %zu", license - start + 1);
 				return -1;
+			}
 			*licensep = license + 1;
 			return is_true;
 		}
 		if (*license == '\0') {
-			if (need_parenthesis)
+			if (need_parenthesis) {
+				warnx("Unbalanced parenthesis at position %zu", license - start + 1);
 				return -1;
+			}
 			*licensep = license;
 			return is_true;
 		}
 
 		if (strncmp(license, "AND", 3) == 0) {
-			if (expr_type == 1)
+			if (expr_type == 1) {
+				warnx("Invalid operator in OR expression at position %zu", license - start + 1);
 				return -1;
+			}
 			expr_type = 2;
 			license += 3;
 		} else if (strncmp(license, "OR", 2) == 0) {
-			if (expr_type == 2)
+			if (expr_type == 2) {
+				warnx("Invalid operator in AND expression at position %zu", license - start + 1);
 				return -1;
+			}
 			expr_type = 1;
 			license += 2;
 		} else {
+			warnx("Invalid operator at position %zu", license - start + 1);
 			return -1;
 		}
 		len = strspn(license, license_spaces);
-		if (len == 0 && *license != '(')
+		if (len == 0 && *license != '(') {
+			warnx("Missing space at position %zu", license - start + 1);
 			return -1;
+		}
 		license += len;
 	}
-
-	return is_true;
 }
 
 int
@@ -254,12 +272,14 @@ acceptable_pkg_license(const char *license)
 {
 	int ret;
 
-	ret = acceptable_pkg_license_internal(&license, 1);
+	ret = acceptable_pkg_license_internal(&license, 1, license);
 	if (ret == -1)
 		return -1;
 	license += strspn(license, license_spaces);
-	if (*license)
+	if (*license) {
+		warnx("Trailing garbage in license specification");
 		return -1;
+	}
 	return ret;
 }
 

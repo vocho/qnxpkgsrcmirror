@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.67 2009/05/26 16:55:23 wiz Exp $
+# $NetBSD: Makefile,v 1.69 2009/07/10 12:12:25 tron Exp $
 #
 
 DISTNAME=		atk-1.26.0
@@ -9,6 +9,7 @@ EXTRACT_SUFX=		.tar.bz2
 MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://developer.gnome.org/projects/gap/
 COMMENT=		Set of interfaces for accessibility
+LICENSE=		gnu-lgpl-v2
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
 PKG_DESTDIR_SUPPORT=	user-destdir
@@ -29,9 +30,12 @@ SUBST_MESSAGE.loc=	Fixing invalid use of AM_GLIB_DEFINE_LOCALEDIR.
 SUBST_FILES.loc=	configure
 SUBST_SED.loc=		-e 's,^\(\#define ATK_LOCALEDIR\).*,\1 "${PREFIX}/${PKGLOCALEDIR}/locale",'
 
+# Workaround for Upstream Bug#562310.
+# for more detail, see also PR#41475.
+TOOLS_NOOP+=	gtkdoc-rebase
+
 .include "../../devel/gettext-lib/buildlink3.mk"
 BUILDLINK_API_DEPENDS.glib2+=	glib2>=2.5.7
 .include "../../devel/glib2/buildlink3.mk"
-.include "../../textproc/gtk-doc/buildlink3.mk"
 
 .include "../../mk/bsd.pkg.mk"

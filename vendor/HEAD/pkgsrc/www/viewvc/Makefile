@@ -1,14 +1,15 @@
-# $NetBSD: Makefile,v 1.8 2009/02/09 22:56:28 joerg Exp $
+# $NetBSD: Makefile,v 1.10 2009/08/15 08:33:13 adrianp Exp $
 #
 
-DISTNAME=	viewvc-1.0.7
-PKGREVISION=	2
+DISTNAME=	viewvc-1.0.9
 CATEGORIES=	devel www
-MASTER_SITES=	http://viewvc.tigris.org/files/documents/3330/44050/
+MASTER_SITES=	http://viewvc.tigris.org/files/documents/3330/46487/
 
 MAINTAINER=	adrianp@NetBSD.org
 HOMEPAGE=	http://www.viewvc.org/
 COMMENT=	Viewing the content of CVS/SVN repositories with a Webbrowser
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 PYTHON_PATCH_SCRIPTS=	viewvc-install bin/* bin/cgi/*.cgi lib/*.py
 
@@ -47,16 +48,23 @@ SUBST_SED.conf+=	-e "s|@RCS_PREFIX@|/usr|g"
 
 CHECK_PORTABILITY_SKIP=	tools/make-release
 
+INSTALLATION_DIRS=	share/examples/viewvc
+
 do-install:
 	(cd ${WRKSRC} && \
 		${PYTHONBIN} \
-		viewvc-install --prefix=${PREFIX}/${VIEWVCDIR} --destdir="")
+		viewvc-install --prefix=${PREFIX}/${VIEWVCDIR} --destdir=${DESTDIR})
 
-	${INSTALL_DATA_DIR} ${PREFIX}/share/examples/viewvc
 	${INSTALL_DATA} ${WRKSRC}/viewvc.conf.dist \
-		${PREFIX}/share/examples/viewvc/viewvc.conf
+		${DESTDIR}${PREFIX}/share/examples/viewvc/viewvc.conf
 	${INSTALL_DATA} ${WRKSRC}/cvsgraph.conf.dist \
-		${PREFIX}/share/examples/viewvc/cvsgraph.conf
+		${DESTDIR}${PREFIX}/share/examples/viewvc/cvsgraph.conf
+
+post-install:
+	${CHMOD} ${SHAREMODE} \
+		${DESTDIR}/${PREFIX}/share/viewvc/bin/mod_python/.htaccess
+	${CHMOD} ${SHAREMODE} \
+		${DESTDIR}/${PREFIX}/share/viewvc/bin/mod_python/*.py
 
 .include "../../lang/python/application.mk"
 .include "../../mk/bsd.pkg.mk"

@@ -1,4 +1,4 @@
-# $NetBSD: hp.mk,v 1.5 2008/02/07 20:59:05 rillig Exp $
+# $NetBSD: hp.mk,v 1.7 2009/06/02 22:32:49 joerg Exp $
 #
 # This is the compiler definition for the HP-UX C/aC++ compilers.
 #
@@ -72,15 +72,20 @@ PREPEND_PATH+=	${_HP_DIR}/bin
 override-tools: ${_HP_${_var_}}
 ${_HP_${_var_}}:
 	${RUN}${MKDIR} ${.TARGET:H}
+.    if !empty(COMPILER_USE_SYMLINKS:M[Yy][Ee][Ss])
+	${RUN}${RM} -f ${.TARGET}
+	${RUN}${LN} -s ${${_var_}PATH} ${.TARGET}
+.    else
 	${RUN}					\
 	(${ECHO} '#!${TOOLS_SHELL}';					\
 	 ${ECHO} 'exec ${${_var_}PATH} "$$@"';			\
 	) > ${.TARGET}
 	${RUN}${CHMOD} +x ${.TARGET}
+.    endif
 .    for _alias_ in ${_ALIASES.${_var_}:S/^/${.TARGET:H}\//}
 	${RUN}					\
 	if [ ! -x "${_alias_}" ]; then					\
-		${LN} -f ${.TARGET} ${_alias_};				\
+		${LN} -f -s ${.TARGET} ${_alias_};			\
 	fi
 .    endfor
 .  endif

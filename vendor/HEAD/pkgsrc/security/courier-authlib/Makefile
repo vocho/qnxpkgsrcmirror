@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.30 2009/05/19 08:59:30 wiz Exp $
+# $NetBSD: Makefile,v 1.33 2009/07/02 12:23:44 obache Exp $
 
 .include "Makefile.common"
 
-DISTNAME=	courier-authlib-0.61.0
+DISTNAME=	courier-authlib-0.62.2
 CATEGORIES=	security
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=courier/}
 EXTRACT_SUFX=	.tar.bz2
@@ -86,12 +86,7 @@ CONF_FILES_PERMS+=	${EGDIR}/${file}.dist ${PKG_SYSCONFDIR}/${file} \
 GENERATE_PLIST+=	${TEST} -f ${DESTDIR}${PREFIX}/${file} &&	\
 			${ECHO} "${file}";
 .endfor
-.if !empty(AUTHLIB_PLIST:M${AUTHEXAMPLEDIR}/*)
-GENERATE_PLIST+=	${ECHO} "@dirrm ${AUTHEXAMPLEDIR}";
-.endif
-GENERATE_PLIST+=	${ECHO} "@dirrm ${AUTHDOCDIR}";
-GENERATE_PLIST+=	${ECHO} "@dirrm ${AUTHLIBEXECDIR}";
-GENERATE_PLIST+=	${ECHO} "@dirrm ${AUTHLIBDIR}";
+GENERATE_PLIST+=	${TRUE};
 
 INSTALLATION_DIRS=	bin sbin
 

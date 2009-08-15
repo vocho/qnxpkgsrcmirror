@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.472 2009/05/17 20:09:35 seb Exp $
+# $NetBSD: Makefile,v 1.476 2009/07/26 18:25:01 drochner Exp $
 #
 
 COMMENT=	System utilities
@@ -11,6 +11,7 @@ SUBDIR+=	acpidump
 SUBDIR+=	adjustkernel
 SUBDIR+=	adtool
 SUBDIR+=	afbinit
+SUBDIR+=	agedu
 SUBDIR+=	amanda
 SUBDIR+=	amanda-client
 SUBDIR+=	amanda-common
@@ -34,8 +35,10 @@ SUBDIR+=	bkpupsd
 SUBDIR+=	boxbackup-client
 SUBDIR+=	boxbackup-server
 SUBDIR+=	brasero
+SUBDIR+=	brasero-nautilus
 SUBDIR+=	bsign
 SUBDIR+=	btpin-qt
+SUBDIR+=	bubblemon
 SUBDIR+=	burn
 SUBDIR+=	capistrano
 SUBDIR+=	ccd2iso
@@ -112,6 +115,7 @@ SUBDIR+=	gkrellm
 SUBDIR+=	gkrellm-est
 SUBDIR+=	gkrellm-server
 SUBDIR+=	gkrellm-share
+SUBDIR+=	gnome-commander
 SUBDIR+=	gnome-device-manager
 SUBDIR+=	gnome-menus
 SUBDIR+=	gnome-mount
