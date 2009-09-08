@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.2 2009/01/28 13:02:49 tron Exp $
+# $NetBSD: Makefile,v 1.4 2009/06/13 08:05:05 wiz Exp $
 
 DISTNAME=	babl-${BABL_VERSION}
 CATEGORIES=	graphics

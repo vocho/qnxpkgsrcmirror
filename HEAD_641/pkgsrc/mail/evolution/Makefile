@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.148 2009/03/22 19:01:39 wiz Exp $
+# $NetBSD: Makefile,v 1.151 2009/07/22 09:01:34 wiz Exp $
 
-DISTNAME=		evolution-2.26.0
+DISTNAME=		evolution-2.26.3
 CATEGORIES=		mail time gnome
 MASTER_SITES=		${MASTER_SITE_GNOME:=sources/evolution/2.26/}
 EXTRACT_SUFX=		.tar.bz2
@@ -8,13 +8,13 @@ EXTRACT_SUFX=		.tar.bz2
 MAINTAINER=		rh@NetBSD.org
 HOMEPAGE=		http://www.gnome.org/projects/evolution/
 COMMENT=		GNOME mailer, calendar, contact manager, and communications tool
+#LICENSE=		modified-bsd AND gnu-lgpl-v2.1 AND gnu-lgpl-v3 AND perhaps more
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 .include "options.mk"
 
 GNU_CONFIGURE=		YES
-USE_DIRS+=		gnome2-1.5
 USE_TOOLS+=		bison gmake intltool msgfmt pkg-config
 USE_LIBTOOL=		YES
 USE_PKGLOCALEDIR=	YES

@@ -1,9 +1,11 @@
-# $NetBSD: Makefile,v 1.1.1.1 2009/05/26 17:38:55 drochner Exp $
+# $NetBSD: Makefile,v 1.8 2009/08/12 02:31:23 obache Exp $
 
-DISTNAME=		liferea-1.6.0-rc1
-PKGNAME=		liferea-1.6.0rc1
+DISTNAME=		liferea-1.6.0
+PKGREVISION=		2
 CATEGORIES=		www
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=liferea/}
+#MASTER_SITE_SFNEW=	http://downloads.sourceforge.net/project/
+#MASTER_SITES= ${MASTER_SITE_SFNEW:S,$,liferea/Liferea%20Stable/1.6.0/,}
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://liferea.sourceforge.net/
@@ -11,7 +13,6 @@ COMMENT=		Simple FeedReader clone for reading RSS/RDF feeds
 
 GNU_CONFIGURE=		yes
 PKG_DESTDIR_SUPPORT=	user-destdir
-USE_DIRS+=		xdg-1.1
 USE_TOOLS+=		gmake pkg-config msgfmt perl intltool
 USE_LIBTOOL=		yes
 USE_PKGLOCALEDIR=	yes
@@ -28,7 +29,6 @@ GCONF_SCHEMAS=		liferea.schemas
 .include "../../devel/glib2/buildlink3.mk"
 .include "../../devel/libglade/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
-.include "../../security/gnutls/buildlink3.mk"
 .include "../../sysutils/dbus-glib/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../sysutils/libnotify/buildlink3.mk"

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.52 2009/05/22 19:52:02 tnn Exp $
+# $NetBSD: Makefile,v 1.54 2009/08/05 17:10:37 drochner Exp $
 
 DISTNAME=	xterm-243
 CATEGORIES=	x11
@@ -13,16 +13,13 @@ COMMENT=	Latest terminal emulator for the X Window System
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=		yes
-USE_DIRS+=		xdg-1.4
 USE_TOOLS+=		tbl
 
 WRKSRC=			${WRKDIR}/${PKGNAME_NOREV}
 
 CONFIGURE_ARGS+=	--enable-88-color
 CONFIGURE_ARGS+=	--enable-256-color
-CONFIGURE_ARGS+=	--enable-luit
 CONFIGURE_ARGS+=	--enable-paste64
-CONFIGURE_ARGS+=	--enable-mini-luit
 CONFIGURE_ARGS+=	--enable-readline-mouse
 CONFIGURE_ARGS+=	--enable-toolbar	# Resource disabled by default
 

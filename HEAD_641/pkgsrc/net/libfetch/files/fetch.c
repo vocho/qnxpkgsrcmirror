@@ -1,4 +1,4 @@
-/*	$NetBSD: fetch.c,v 1.18 2009/02/05 23:29:14 joerg Exp $	*/
+/*	$NetBSD: fetch.c,v 1.19 2009/08/11 20:48:06 joerg Exp $	*/
 /*-
  * Copyright (c) 1998-2004 Dag-Erling Coïdan Smørgrav
  * Copyright (c) 2008 Joerg Sonnenberger <joerg@NetBSD.org>
@@ -81,9 +81,7 @@ static struct fetcherr url_errlist[] = {
 fetchIO *
 fetchXGet(struct url *URL, struct url_stat *us, const char *flags)
 {
-	int direct;
 
-	direct = CHECK_FLAG('d');
 	if (us != NULL) {
 		us->size = -1;
 		us->atime = us->mtime = 0;
@@ -117,9 +115,7 @@ fetchGet(struct url *URL, const char *flags)
 fetchIO *
 fetchPut(struct url *URL, const char *flags)
 {
-	int direct;
 
-	direct = CHECK_FLAG('d');
 	if (strcasecmp(URL->scheme, SCHEME_FILE) == 0)
 		return (fetchPutFile(URL, flags));
 	else if (strcasecmp(URL->scheme, SCHEME_FTP) == 0)
@@ -139,9 +135,7 @@ fetchPut(struct url *URL, const char *flags)
 int
 fetchStat(struct url *URL, struct url_stat *us, const char *flags)
 {
-	int direct;
 
-	direct = CHECK_FLAG('d');
 	if (us != NULL) {
 		us->size = -1;
 		us->atime = us->mtime = 0;
@@ -166,9 +160,7 @@ int
 fetchList(struct url_list *ue, struct url *URL, const char *pattern,
     const char *flags)
 {
-	int direct;
 
-	direct = CHECK_FLAG('d');
 	if (strcasecmp(URL->scheme, SCHEME_FILE) == 0)
 		return (fetchListFile(ue, URL, pattern, flags));
 	else if (strcasecmp(URL->scheme, SCHEME_FTP) == 0)

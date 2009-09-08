@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.111 2009/05/26 18:37:27 drochner Exp $
+# $NetBSD: Makefile,v 1.113 2009/07/22 09:01:52 wiz Exp $
 #
 
-DISTNAME=		gnome-panel-2.26.2
+DISTNAME=		gnome-panel-2.26.3
 CATEGORIES=		x11 gnome
 MASTER_SITES=		${MASTER_SITE_GNOME:=sources/gnome-panel/2.26/}
 EXTRACT_SUFX=		.tar.bz2
@@ -17,7 +17,6 @@ CONF_FILES+=	${PREFIX}/share/examples/gnome-panel/org.gnome.ClockApplet.Mechanis
 		${PKG_SYSCONFDIR}/dbus-1/system.d/org.gnome.ClockApplet.Mechanism.conf
 
 GNU_CONFIGURE=		YES
-USE_DIRS+=		gnome2-1.5
 USE_TOOLS+=		gmake intltool msgfmt perl:run pkg-config
 USE_PKGLOCALEDIR=	YES
 USE_LIBTOOL=		YES

@@ -1,12 +1,7 @@
-@comment $NetBSD: PLIST,v 1.24 2008/10/24 16:46:40 wiz Exp $
+@comment $NetBSD: PLIST,v 1.26 2009/08/02 10:52:06 drochner Exp $
 bin/gsf
 bin/gsf-office-thumbnailer
 bin/gsf-vba-dump
-include/libgsf-1/gsf-gnome/gsf-input-bonobo.h
-include/libgsf-1/gsf-gnome/gsf-input-gnomevfs.h
-include/libgsf-1/gsf-gnome/gsf-output-bonobo.h
-include/libgsf-1/gsf-gnome/gsf-output-gnomevfs.h
-include/libgsf-1/gsf-gnome/gsf-shared-bonobo-stream.h
 include/libgsf-1/gsf/gsf-blob.h
 include/libgsf-1/gsf/gsf-clip-data.h
 include/libgsf-1/gsf/gsf-doc-meta-data.h
@@ -56,9 +51,7 @@ include/libgsf-1/gsf/gsf-timestamp.h
 include/libgsf-1/gsf/gsf-utils.h
 include/libgsf-1/gsf/gsf.h
 lib/libgsf-1.la
-lib/libgsf-gnome-1.la
 lib/pkgconfig/libgsf-1.pc
-lib/pkgconfig/libgsf-gnome-1.pc
 man/man1/gsf-office-thumbnailer.1
 man/man1/gsf-vba-dump.1
 man/man1/gsf.1
@@ -108,8 +101,3 @@ share/locale/oc/LC_MESSAGES/libgsf.mo
 share/locale/sv/LC_MESSAGES/libgsf.mo
 share/locale/zh_HK/LC_MESSAGES/libgsf.mo
 share/locale/zh_TW/LC_MESSAGES/libgsf.mo
-@dirrm share/gtk-doc/html/gsf
-@comment in GConf: @dirrm share/gconf/schemas
-@dirrm include/libgsf-1/gsf-gnome
-@dirrm include/libgsf-1/gsf
-@dirrm include/libgsf-1

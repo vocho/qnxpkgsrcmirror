@@ -83,6 +83,7 @@ TOOLS_PLATFORM.openssl?=	/usr/bin/openssl
 TOOLS_PLATFORM.patch?=		/usr/bin/patch
 TOOLS_PLATFORM.printf?=		/usr/bin/printf
 TOOLS_PLATFORM.pwd?=		/bin/pwd
+TOOLS_PLATFORM.readelf?=	${QNX_HOST}/usr/bin/readelf
 TOOLS_PLATFORM.rm?=		/bin/rm
 TOOLS_PLATFORM.rmdir?=		/usr/bin/rmdir
 .if exists(/usr/bin/sdiff)

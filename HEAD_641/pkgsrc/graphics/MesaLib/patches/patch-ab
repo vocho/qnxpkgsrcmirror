@@ -1,6 +1,6 @@
-$NetBSD: patch-ab,v 1.16 2008/07/27 00:03:42 bjs Exp $
+$NetBSD: patch-ab,v 1.18 2009/08/08 08:25:51 wiz Exp $
 
---- src/glu/sgi/Makefile.orig	2008-07-18 10:39:12.000000000 -0400
+--- src/glu/sgi/Makefile.orig	2008-08-25 14:46:42.000000000 +0000
 +++ src/glu/sgi/Makefile
 @@ -8,7 +8,8 @@ include $(TOP)/configs/current
  
@@ -27,21 +27,30 @@ $NetBSD: patch-ab,v 1.16 2008/07/27 00:03:42 bjs Exp $
  
  
  ##### TARGETS #####
-@@ -136,11 +139,12 @@ $(TOP)/$(LIB_DIR):
+@@ -134,14 +137,19 @@ default:
+ $(TOP)/$(LIB_DIR):
+ 	-mkdir $(TOP)/$(LIB_DIR)
  
- # Make the library:
- $(TOP)/$(LIB_DIR)/$(GLU_LIB_NAME): $(OBJECTS)
--	$(TOP)/bin/mklib -o $(GLU_LIB) -linker '$(CXX)' -ldflags '$(LDFLAGS)' \
+-# Make the library:
+-$(TOP)/$(LIB_DIR)/$(GLU_LIB_NAME): $(OBJECTS)
+-	$(MKLIB) -o $(GLU_LIB) -linker '$(CXX)' -ldflags '$(LDFLAGS)' \
 -		-major $(GLU_MAJOR) -minor $(GLU_MINOR) -patch $(GLU_TINY) \
 -		-cplusplus $(MKLIB_OPTIONS) -install $(TOP)/$(LIB_DIR) \
--		-exports glu.exports \
+-		-exports glu.exports -id $(INSTALL_LIB_DIR)/lib$(GLU_LIB).$(GLU_MAJOR).dylib \
 -		$(GLU_LIB_DEPS) $(OBJECTS)
++# Make the exports file with the mangled or unmangled names per $CFLAGS
++glu.exports: glu.exports.in
++	$(CC) -E -I $(TOP)/include/GL $(CFLAGS) $< | \
++		awk '/^[^#]+/ {print}' > $@
++
+ 
++# Make the library:
++$(TOP)/$(LIB_DIR)/$(GLU_LIB_NAME): $(OBJECTS) glu.exports
 +	$(LIBTOOL) --mode=link $(CXX) \
 +		-o $(TOP)/$(LIB_DIR)/$(GLU_LIB_NAME:.so=.la) $(LDFLAGS) \
 +		-rpath $(PREFIX)/lib $(GLU_LIB_DEPS) $(OBJECTS:.o=.lo) \
 +		-version-info $(GLU_MAJOR):$(GLU_MINOR):$(GLU_TINY) \
-+		-export-symbols glu.sym
-+
- 
++		-export-symbols glu.exports
  
  clean:
+ 	-rm -f *.o */*.o */*/*.o

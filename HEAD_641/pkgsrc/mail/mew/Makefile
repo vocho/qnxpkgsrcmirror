@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.75 2008/10/11 09:31:57 uebayasi Exp $
+# $NetBSD: Makefile,v 1.78 2009/08/14 17:21:20 minskim Exp $
 
-DISTNAME=	mew-5.2
-PKGREVISION=	1
+DISTNAME=	mew-6.2
 PKGNAME=	${EMACS_PKGNAME_PREFIX}${DISTNAME}
+PKGREVISION=	1
 CATEGORIES=	mail
 MASTER_SITES=	http://www.mew.org/Release/
 
@@ -17,9 +17,9 @@ CONFLICTS+=	mew-xemacs-[0-9]* incm-[0-9]*
 
 INFO_FILES=	yes
 
-HAS_CONFIGURE=	yes
+GNU_CONFIGURE=	yes
 
-EMACS_VERSIONS_ACCEPTED=	emacs22 emacs22nox emacs21 emacs21nox emacs20 xemacs214 xemacs215
+EMACS_VERSIONS_ACCEPTED=	emacs23 emacs23nox emacs22 emacs22nox emacs21 emacs21nox
 EMACS_MODULES+=			base
 
 MEW_CONTRIB_DIR=${EMACS_LISPPREFIX}/mew/contrib

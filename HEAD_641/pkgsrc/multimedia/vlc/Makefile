@@ -1,12 +1,13 @@
-# $NetBSD: Makefile,v 1.75 2009/04/25 18:20:47 tnn Exp $
+# $NetBSD: Makefile,v 1.80 2009/08/09 12:18:17 kefren Exp $
 #
 
 DISTNAME=		vlc-${VLC_VERSION}
 CATEGORIES=		multimedia
+PKGREVISION=		1
 MASTER_SITES=		http://download.videolan.org/pub/videolan/vlc/${VLC_VERSION}/
 EXTRACT_SUFX=		.tar.bz2
 
-VLC_VERSION=		0.9.9
+VLC_VERSION=		1.0.0
 
 MAINTAINER=		ahoka@NetBSD.org
 HOMEPAGE=		http://videolan.org/
@@ -22,7 +23,6 @@ USE_PKGLOCALEDIR=	yes
 GNU_CONFIGURE=		yes
 PTHREAD_OPTS+=		require
 USE_LANGUAGES=		c99 c++
-USE_DIRS+=		xdg-1.4
 PLIST_VARS+=		x86simd altivec v4l2 vcd cdda
 
 .include "../../mk/bsd.prefs.mk"
@@ -94,19 +94,17 @@ DEFAULT_FONT?=		${PREFIX}/lib/X11/fonts/TTF/DejaVuSans.ttf
 DEPENDS+=		dejavu-ttf>=2.26:../../fonts/dejavu-ttf
 
 SUBST_CLASSES+=		oss
-SUBST_STAGE.oss=	post-patch
+SUBST_STAGE.oss=	pre-configure
 SUBST_SED.oss=		-e "s,/dev/dsp,${DEVOSSAUDIO},g"
-SUBST_FILES.oss+=	modules/access/v4l.c
-SUBST_FILES.oss+=	modules/access/v4l2/v4l2.c
+SUBST_FILES.oss+=	modules/access/oss.c
 SUBST_FILES.oss+=	modules/audio_output/oss.c
 SUBST_FILES.oss+=	modules/gui/pda/pda_interface.c
 SUBST_FILES.oss+=	modules/gui/pda/pda.glade
-SUBST_FILES.oss+=	test/libvlc/media_list.c
 SUBST_FILES.oss+=	po/*.po
 SUBST_MESSAGE.oss=	Fixing hardcoded audio device.
 
 SUBST_CLASSES+=		fnt
-SUBST_STAGE.fnt=	post-patch
+SUBST_STAGE.fnt=	pre-configure
 SUBST_SED.fnt=		-e "s,${ORIGFNT},${DEFAULT_FONT},"
 SUBST_FILES.fnt=	modules/misc/freetype.c
 SUBST_MESSAGE.fnt=	Fixing hardcoded paths.
@@ -117,8 +115,8 @@ REPLACE_SH+=		vlc-config.in.in
 #
 CHECK_WRKREF_SKIP=	lib/libvlccore.a \
 			lib/libvlccore.so \
-			lib/libvlccore.so.0 \
-			lib/libvlccore.so.0.1.0
+			lib/libvlccore.so.2 \
+			lib/libvlccore.so.2.0.0
 
 .include "../../audio/libmpcdec/buildlink3.mk"
 .include "../../audio/flac/buildlink3.mk"

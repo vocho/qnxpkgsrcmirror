@@ -1,4 +1,4 @@
-$NetBSD: distinfo,v 1.15 2009/05/17 17:34:01 plunky Exp $
+$NetBSD: distinfo,v 1.16 2009/08/06 20:01:50 plunky Exp $
 
 SHA1 (alpine-2.00/alpine-2.00.tar.bz2) = dcbd3c5419954f484ccf706feaba31ce48cdebc4
 RMD160 (alpine-2.00/alpine-2.00.tar.bz2) = 9e67704b23b3973d8b878e65ad9e6f5026c10d13
@@ -12,9 +12,10 @@ Size (alpine-2.00/maildir.patch.gz) = 32100 bytes
 SHA1 (alpine-2.00/searchheader.patch.gz) = 1c8dfaefa9a9ed502da454b5d1334c94bc1873c4
 RMD160 (alpine-2.00/searchheader.patch.gz) = cc1b2c3cf4cbceaf62e1c0378f5edf6bee619581
 Size (alpine-2.00/searchheader.patch.gz) = 1708 bytes
-SHA1 (patch-aa) = c306613a297d61591d577b6968a31fc85b03f852
-SHA1 (patch-ab) = df23e44d31bc0b64c3eab09254cfc295450d548a
+SHA1 (patch-aa) = 6b64e00e73a43b3ddaa4c0ff5e4a89810180de23
+SHA1 (patch-ab) = f0983d8c0123b06a2970eb2736b04afad1502450
 SHA1 (patch-ac) = bdb9d4e0581b60c7a83a9c1eeb1071c634313bb3
 SHA1 (patch-ad) = 5892eba0dbb15ab1393914aee2a1955f0559b852
 SHA1 (patch-ae) = 35c672e37cfd19ebf21331c49da81a145923d6f5
 SHA1 (patch-af) = 35bdfb94a841e390333a567b63a55433d2962d04
+SHA1 (patch-ag) = 34a2073dba89f6b4b15cee7aa4c66ec9b61ea3f9

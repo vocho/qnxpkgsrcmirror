@@ -51,9 +51,9 @@ CONFIG_HEADER = $(top_builddir)/include/do-not-use-config.h \
 CONFIG_CLEAN_FILES =
 LTLIBRARIES = $(noinst_LTLIBRARIES)
 libnto_la_LIBADD =
-am__libnto_la_SOURCES_DIST = $(srcdir)/../shared/libc_wrapper.c \
+am__libnto_la_SOURCES_DIST = \
 	$(srcdir)/../shared/posix_tty.c $(srcdir)/../shared/sigio.c \
-	$(srcdir)/../shared/stdPci.c $(srcdir)/../shared/vidmem.c \
+	$(srcdir)/../shared/vidmem.c \
 	bsd_VTsw.c nto_init.c nto_mouse.c bsd_bell.c alpha_video.c \
 	bsd_ev56.c bsd_axp.c $(srcdir)/../shared/xf86Axp.c arm_video.c \
 	i386_video.c ppc_video.c \
@@ -74,7 +74,7 @@ am__objects_3 = pm_noop.lo
 @FREEBSD_KLDLOAD_FALSE@am__objects_4 = kmod_noop.lo
 @FREEBSD_KLDLOAD_TRUE@am__objects_4 = bsd_kmod.lo
 am__objects_5 = stdResource.lo
-am_libnto_la_OBJECTS = libc_wrapper.lo posix_tty.lo sigio.lo stdPci.lo \
+am_libnto_la_OBJECTS = posix_tty.lo sigio.lo \
 	vidmem.lo bsd_VTsw.lo nto_init.lo nto_mouse.lo bsd_bell.lo \
 	$(am__objects_1) $(am__objects_2) $(am__objects_3) \
 	$(am__objects_4) $(am__objects_5)
@@ -413,10 +413,8 @@ RES_SOURCES = $(srcdir)/../shared/stdResource.c
 AM_CFLAGS = -DUSESTDRES $(XORG_CFLAGS) $(DIX_CFLAGS)
 INCLUDES = $(XORG_INCS)
 libnto_la_SOURCES = \
-	$(srcdir)/../shared/libc_wrapper.c \
 	$(srcdir)/../shared/posix_tty.c \
 	$(srcdir)/../shared/sigio.c \
-	$(srcdir)/../shared/stdPci.c \
 	$(srcdir)/../shared/vidmem.c \
 	bsd_VTsw.c \
 	nto_init.c \
@@ -511,13 +509,11 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/i386_video.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ioperm_noop.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/kmod_noop.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libc_wrapper.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/lnx_agp.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pm_noop.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/posix_tty.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ppc_video.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/sigio.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/stdPci.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/stdResource.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/vidmem.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xf86Axp.Plo@am__quote@
@@ -543,13 +539,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(LTCOMPILE) -c -o $@ $<
 
-libc_wrapper.lo: $(srcdir)/../shared/libc_wrapper.c
-@am__fastdepCC_TRUE@	$(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libc_wrapper.lo -MD -MP -MF $(DEPDIR)/libc_wrapper.Tpo -c -o libc_wrapper.lo `test -f '$(srcdir)/../shared/libc_wrapper.c' || echo '$(srcdir)/'`$(srcdir)/../shared/libc_wrapper.c
-@am__fastdepCC_TRUE@	mv -f $(DEPDIR)/libc_wrapper.Tpo $(DEPDIR)/libc_wrapper.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='$(srcdir)/../shared/libc_wrapper.c' object='libc_wrapper.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libc_wrapper.lo `test -f '$(srcdir)/../shared/libc_wrapper.c' || echo '$(srcdir)/'`$(srcdir)/../shared/libc_wrapper.c
-
 posix_tty.lo: $(srcdir)/../shared/posix_tty.c
 @am__fastdepCC_TRUE@	$(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT posix_tty.lo -MD -MP -MF $(DEPDIR)/posix_tty.Tpo -c -o posix_tty.lo `test -f '$(srcdir)/../shared/posix_tty.c' || echo '$(srcdir)/'`$(srcdir)/../shared/posix_tty.c
 @am__fastdepCC_TRUE@	mv -f $(DEPDIR)/posix_tty.Tpo $(DEPDIR)/posix_tty.Plo
@@ -563,13 +552,6 @@ sigio.lo: $(srcdir)/../shared/sigio.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	source='$(srcdir)/../shared/sigio.c' object='sigio.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o sigio.lo `test -f '$(srcdir)/../shared/sigio.c' || echo '$(srcdir)/'`$(srcdir)/../shared/sigio.c
-
-stdPci.lo: $(srcdir)/../shared/stdPci.c
-@am__fastdepCC_TRUE@	$(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT stdPci.lo -MD -MP -MF $(DEPDIR)/stdPci.Tpo -c -o stdPci.lo `test -f '$(srcdir)/../shared/stdPci.c' || echo '$(srcdir)/'`$(srcdir)/../shared/stdPci.c
-@am__fastdepCC_TRUE@	mv -f $(DEPDIR)/stdPci.Tpo $(DEPDIR)/stdPci.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='$(srcdir)/../shared/stdPci.c' object='stdPci.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o stdPci.lo `test -f '$(srcdir)/../shared/stdPci.c' || echo '$(srcdir)/'`$(srcdir)/../shared/stdPci.c
 
 vidmem.lo: $(srcdir)/../shared/vidmem.c
 @am__fastdepCC_TRUE@	$(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT vidmem.lo -MD -MP -MF $(DEPDIR)/vidmem.Tpo -c -o vidmem.lo `test -f '$(srcdir)/../shared/vidmem.c' || echo '$(srcdir)/'`$(srcdir)/../shared/vidmem.c

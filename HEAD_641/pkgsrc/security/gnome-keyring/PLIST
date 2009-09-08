@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.18 2009/04/16 19:35:29 drochner Exp $
+@comment $NetBSD: PLIST,v 1.20 2009/07/09 17:59:25 drochner Exp $
 bin/gnome-keyring
 bin/gnome-keyring-daemon
 include/gcr/gcr-certificate-basics-widget.h
@@ -103,6 +103,7 @@ share/locale/bn/LC_MESSAGES/gnome-keyring.mo
 share/locale/bn_IN/LC_MESSAGES/gnome-keyring.mo
 share/locale/bs/LC_MESSAGES/gnome-keyring.mo
 share/locale/ca/LC_MESSAGES/gnome-keyring.mo
+share/locale/ca@valencia/LC_MESSAGES/gnome-keyring.mo
 share/locale/cs/LC_MESSAGES/gnome-keyring.mo
 share/locale/cy/LC_MESSAGES/gnome-keyring.mo
 share/locale/da/LC_MESSAGES/gnome-keyring.mo
@@ -169,16 +170,3 @@ share/locale/xh/LC_MESSAGES/gnome-keyring.mo
 share/locale/zh_CN/LC_MESSAGES/gnome-keyring.mo
 share/locale/zh_HK/LC_MESSAGES/gnome-keyring.mo
 share/locale/zh_TW/LC_MESSAGES/gnome-keyring.mo
-@dirrm share/gtk-doc/html/gp11
-@dirrm share/gtk-doc/html/gnome-keyring
-@dirrm share/gtk-doc/html/gcr
-@dirrm share/gcr/ui
-@comment in GConf: @dirrm share/gconf/schemas
-@comment in dbus: @dirrm share/dbus-1/services
-@dirrm lib/security
-@dirrm lib/gnome-keyring/standalone
-@dirrm lib/gnome-keyring/devel
-@dirrm lib/gnome-keyring
-@dirrm include/gp11
-@dirrm include/gnome-keyring-1
-@dirrm include/gcr

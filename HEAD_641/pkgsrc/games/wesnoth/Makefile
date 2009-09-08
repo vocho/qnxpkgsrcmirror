@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.51 2009/05/19 08:59:15 wiz Exp $
+# $NetBSD: Makefile,v 1.54 2009/07/22 09:01:30 wiz Exp $
 
-DISTNAME=	wesnoth-1.6
+DISTNAME=	wesnoth-1.6.4
 CATEGORIES=	games
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=wesnoth/}
 EXTRACT_SUFX=	.tar.bz2
@@ -15,7 +15,6 @@ BUILD_DEPENDS+=	libxslt-[0-9]*:../../textproc/libxslt
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 CONFIGURE_ARGS+=	--with-boost=${BUILDLINK_PREFIX.boost-libs}
-USE_DIRS=		xdg-1.4
 USE_LIBTOOL=		yes
 USE_TOOLS+=		pkg-config
 USE_LANGUAGES=		c c++

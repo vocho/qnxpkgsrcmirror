@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.12 2008/08/12 14:39:12 joerg Exp $
+# $NetBSD: Makefile,v 1.14 2009/06/30 00:07:21 joerg Exp $
 #
 
 DISTNAME=	mrt-2.2.2a-Aug11
@@ -10,6 +10,8 @@ MASTER_SITES=	ftp://ftp.merit.edu/net-research/mrt/
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.mrtd.net/
 COMMENT=	Multi-threaded Routing Toolkit
+
+MAKE_JOBS_SAFE=		no
 
 WRKSRC=		${WRKDIR}/mrt/src
 GNU_CONFIGURE=	yes
@@ -28,7 +30,5 @@ post-install:
 		${DESTDIR}${PREFIX}/share/examples/mrt
 	(cd ${DESTDIR}${PREFIX}; ${FIND} share/examples/mrt -type f -print \
 		>> ${PLIST_SRC})
-	(cd ${DESTDIR}${PREFIX}; ${FIND} share/examples/mrt -type d -print | \
-		${SORT} -r | ${SED} -e "s/^/@dirrm /" >>${PLIST_SRC})
 
 .include "../../mk/bsd.pkg.mk"

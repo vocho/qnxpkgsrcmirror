@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.5 2009/02/24 15:14:01 wiz Exp $
+# $NetBSD: Makefile,v 1.7 2009/07/22 09:01:46 wiz Exp $
 #
 
 DISTNAME=	gnome-power-manager-2.24.4
@@ -15,7 +15,6 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 BUILD_DEPENDS+=	xmlto-[0-9]*:../../textproc/xmlto
 
 GNU_CONFIGURE=		YES
-USE_DIRS+=		gnome2-1.5
 USE_PKGLOCALEDIR=	YES
 USE_TOOLS+=		gmake intltool msgfmt perl pkg-config
 USE_LIBTOOL=		YES
@@ -25,6 +24,12 @@ CONFIGURE_ARGS+=	--enable-policykit
 CONFIGURE_ENV+=		ac_cv_path_DOCBOOK2MAN=no
 
 GCONF_SCHEMAS+=		gnome-power-manager.schemas
+
+.include "../../mk/bsd.prefs.mk"
+
+.if ${OPSYS} == "FreeBSD" || ${OPSYS} == "DragonFly"
+BUILDLINK_TRANSFORM+=   rm:-lresolv
+.endif
 
 .include "../../devel/GConf/schemas.mk"
 .include "../../devel/libgnomeui/buildlink3.mk"

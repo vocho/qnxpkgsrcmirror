@@ -18,7 +18,7 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 ONLY_FOR_PLATFORM=	FreeBSD-*-i386 NetBSD-*-i386 OpenBSD-*-i386
 ONLY_FOR_PLATFORM+=	FreeBSD-*-x86_64 NetBSD-*-x86_64 OpenBSD-*-x86_64
 ONLY_FOR_PLATFORM+=	DragonFly-*-i386 DragonFly-*-x86_64
-ONLY_FOR_PLATFORM+=	Linux-*-* SunOS-*-*
+ONLY_FOR_PLATFORM+=	Linux-*-* SunOS-*-* QNX-*-*
 
 GNU_CONFIGURE=	yes
 USE_LIBTOOL=	yes

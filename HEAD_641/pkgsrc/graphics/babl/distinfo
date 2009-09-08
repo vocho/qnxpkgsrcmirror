@@ -1,4 +1,4 @@
-$NetBSD: distinfo,v 1.2 2009/01/28 13:02:49 tron Exp $
+$NetBSD: distinfo,v 1.4 2009/06/13 08:05:05 wiz Exp $
 
 SHA1 (babl-0.0.22.tar.bz2) = 9de50fb5833f41691f50f6e735d6422aad52ea94
 RMD160 (babl-0.0.22.tar.bz2) = a10c07e70f1fe8944a969bba46484acf410c2583

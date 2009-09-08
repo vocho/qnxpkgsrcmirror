@@ -1,15 +1,15 @@
-# $NetBSD: Makefile,v 1.48 2008/10/24 16:56:55 wiz Exp $
+# $NetBSD: Makefile,v 1.53 2009/08/12 02:31:20 obache Exp $
 
-DISTNAME=		devhelp-0.21
+DISTNAME=		devhelp-0.23
+PKGREVISION=		2
 CATEGORIES=		devel x11
-MASTER_SITES=		${MASTER_SITE_GNOME:=sources/devhelp/0.21/}
+MASTER_SITES=		${MASTER_SITE_GNOME:=sources/devhelp/0.23/}
 EXTRACT_SUFX=		.tar.bz2
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://developer.imendio.com/projects/devhelp
 COMMENT=		Documentation viewer based on GNOME2
 
-USE_DIRS+=		gnome2-1.5
 USE_TOOLS+=		gmake intltool msgfmt perl pkg-config
 USE_LIBTOOL=		yes
 USE_PKGLOCALEDIR=	yes
@@ -20,8 +20,6 @@ GNU_CONFIGURE=		yes
 PKGCONFIG_OVERRIDE+=	libdevhelp-1.0.pc.in
 GCONF_SCHEMAS=		devhelp.schemas
 
-.include "options.mk"
-
 .include "../../devel/GConf/schemas.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../devel/glib2/buildlink3.mk"
@@ -29,7 +27,7 @@ GCONF_SCHEMAS=		devhelp.schemas
 .include "../../devel/libwnck/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
-.include "../../www/seamonkey/gecko-depends.mk"
+.include "../../www/webkit-gtk/buildlink3.mk"
 .include "../../x11/gtk2/buildlink3.mk"
 
 post-install:

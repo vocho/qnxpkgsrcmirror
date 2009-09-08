@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.11 2009/05/05 06:21:16 minskim Exp $
+@comment $NetBSD: PLIST,v 1.15 2009/08/07 02:39:51 minskim Exp $
 bin/git
 bin/git-cvsserver
 bin/git-receive-pack
@@ -6,6 +6,7 @@ bin/git-shell
 bin/git-upload-archive
 bin/git-upload-pack
 ${PLIST.gui}bin/gitk
+libexec/git-core/git
 libexec/git-core/git-add
 libexec/git-core/git-add--interactive
 libexec/git-core/git-am
@@ -14,6 +15,7 @@ libexec/git-core/git-apply
 libexec/git-core/git-archimport
 libexec/git-core/git-archive
 libexec/git-core/git-bisect
+libexec/git-core/git-bisect--helper
 libexec/git-core/git-blame
 libexec/git-core/git-branch
 libexec/git-core/git-bundle
@@ -40,6 +42,8 @@ libexec/git-core/git-diff
 libexec/git-core/git-diff-files
 libexec/git-core/git-diff-index
 libexec/git-core/git-diff-tree
+libexec/git-core/git-difftool
+libexec/git-core/git-difftool--helper
 libexec/git-core/git-fast-export
 libexec/git-core/git-fast-import
 libexec/git-core/git-fetch
@@ -84,6 +88,7 @@ libexec/git-core/git-merge-resolve
 libexec/git-core/git-merge-subtree
 libexec/git-core/git-merge-tree
 libexec/git-core/git-mergetool
+libexec/git-core/git-mergetool--lib
 libexec/git-core/git-mktag
 libexec/git-core/git-mktree
 libexec/git-core/git-mv
@@ -215,22 +220,6 @@ ${PLIST.gui}share/git-gui/lib/win32_shortcut.js
 ${PLIST.gui}share/gitk/lib/msgs/de.msg
 ${PLIST.gui}share/gitk/lib/msgs/es.msg
 ${PLIST.gui}share/gitk/lib/msgs/it.msg
+${PLIST.gui}share/gitk/lib/msgs/ru.msg
 ${PLIST.gui}share/gitk/lib/msgs/sv.msg
-@dirrm share/examples/scmgit/templates/hooks
-@dirrm share/examples/scmgit/templates/info
-@exec ${MKDIR} %D/share/examples/scmgit/templates/branches
-@dirrm share/examples/scmgit/templates/branches
-@dirrm share/examples/scmgit/templates
-@dirrm share/examples/scmgit
-${PLIST.gui}@dirrm share/gitk/lib/msgs
-${PLIST.gui}@dirrm share/gitk/lib
-${PLIST.gui}@dirrm share/gitk
-${PLIST.gui}@dirrm share/git-gui/lib/msgs
-${PLIST.macosx}@dirrm share/git-gui/lib/Git Gui.app/Contents/Resources/Scripts
-${PLIST.macosx}@dirrm share/git-gui/lib/Git Gui.app/Contents/Resources
-${PLIST.macosx}@dirrm share/git-gui/lib/Git Gui.app/Contents/MacOS
-${PLIST.macosx}@dirrm share/git-gui/lib/Git Gui.app/Contents
-${PLIST.macosx}@dirrm share/git-gui/lib/Git Gui.app
-${PLIST.gui}@dirrm share/git-gui/lib
-${PLIST.gui}@dirrm share/git-gui
-@dirrm libexec/git-core
+@pkgdir share/examples/scmgit/templates/branches

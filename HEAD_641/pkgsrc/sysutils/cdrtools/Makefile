@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.54 2009/04/16 16:44:02 joerg Exp $
+# $NetBSD: Makefile,v 1.57 2009/08/08 09:36:59 wiz Exp $
 
-DISTNAME=	cdrtools-2.01.01a59-pre2
+DISTNAME=	cdrtools-2.01.01a62
 PKGNAME=	${DISTNAME:S/a/alpha/:S/-pre/pre/}
-PKGREVISION=	1
 CATEGORIES=	sysutils
 MASTER_SITES=	ftp://ftp.berlios.de/pub/cdrecord/alpha/ \
 		http://ftp.berlios.de/pub/cdrecord/alpha/
@@ -11,6 +10,7 @@ EXTRACT_SUFX=	.tar.bz2
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://cdrecord.berlios.de/old/private/cdrecord.html
 COMMENT=	Software for creating ISO9660 images and writing CD/DVD/Blu-ray
+#LICENSE=	CDDL.Schily.txt AND gnu-gpl-v2 AND gnu-lgpl-v2.1
 
 CONFLICTS=	mkisofs-[0-9]* cdrtools-ossdvd-[0-9]* cdrecord-[0-9]* cdrkit-[0-9]*
 

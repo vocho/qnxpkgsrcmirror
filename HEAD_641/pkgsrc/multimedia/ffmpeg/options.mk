@@ -1,17 +1,14 @@
-# $NetBSD: options.mk,v 1.11 2008/09/15 21:24:00 sborrill Exp $
+# $NetBSD: options.mk,v 1.14 2009/08/05 11:22:17 ahoka Exp $
 
 # Global and legacy options
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.ffmpeg
-PKG_SUPPORTED_OPTIONS=	sdl theora xvid faad faac x264
-PKG_SUGGESTED_OPTIONS=	faac theora xvid x264
+PKG_SUPPORTED_OPTIONS=	theora xvid faad faac x264
+PKG_SUGGESTED_OPTIONS=	theora xvid x264
 #PKG_OPTIONS_OPTIONAL_GROUPS=	aac-decoder
 #PKG_OPTIONS_GROUP.aac-decoder=	faad faac
 
 .include "../../mk/bsd.options.mk"
-.include "../../mk/bsd.prefs.mk"
-
-PLIST_VARS+=	sdl swscale
 
 ###
 ### faad option
@@ -22,28 +19,17 @@ CONFIGURE_ARGS+=  --enable-libfaad
 .include "../../audio/faad2/buildlink3.mk"
 .endif
 
-
 ###
 ### faac option
 ###
 
 .if !empty(PKG_OPTIONS:Mfaac)
-CONFIGURE_ARGS+=  --enable-libfaac
+RESTRICTED=		This software may require the payment of patent royalties
+NO_BIN_ON_CDROM=	${RESTRICTED}
+NO_BIN_ON_FTP=		${RESTRICTED}
+CONFIGURE_ARGS+=	--enable-libfaac \
+			--enable-nonfree
 .include "../../audio/faac/buildlink3.mk"
-.endif
-
-###
-### SDL support
-###
-### You can build the frontend with SDL support enabled
-###
-
-.if !empty(PKG_OPTIONS:Msdl)
-CONFIGURE_ARGS+=	--enable-ffplay
-PLIST.sdl=		yes
-.include "../../devel/SDL/buildlink3.mk"
-.else
-CONFIGURE_ARGS+=	--disable-ffplay
 .endif
 
 ###

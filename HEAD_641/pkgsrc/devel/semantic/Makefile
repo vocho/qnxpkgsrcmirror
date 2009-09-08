@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.26 2008/10/13 08:07:02 uebayasi Exp $
+# $NetBSD: Makefile,v 1.28 2009/08/06 01:44:51 minskim Exp $
 #
 
 DISTNAME=	semantic-1.4.4
 PKGNAME=	${EMACS_PKGNAME_PREFIX}${DISTNAME}
+PKGREVISION=	1
 CATEGORIES=	devel
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=cedet/}
 
@@ -18,7 +19,7 @@ NO_CONFIGURE=	yes
 USE_TOOLS+=	gmake
 INFO_FILES=	yes
 
-MAKE_ENV+=	EMACS=${EMACS_FLAVOR:Q}
+MAKE_FLAGS+=	EMACS=${EMACS_BIN}
 
 # XXX cd ${WRKSRC}; ${MAKE} -V semantic_LISP
 SRCS=	semantic.el semantic-util.el semantic-bnf.el semantic-ctxt.el

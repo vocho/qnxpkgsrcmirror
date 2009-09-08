@@ -1,13 +1,15 @@
-# $NetBSD: Makefile,v 1.1.1.1 2009/04/06 11:31:02 adrianp Exp $
+# $NetBSD: Makefile,v 1.5 2009/08/12 20:21:10 adrianp Exp $
 
 DISTNAME=		wordpress-${VERSION}
-VERSION=		2.7.1
+VERSION=		2.8.4
 CATEGORIES=		www
 MASTER_SITES=		http://wordpress.org/
 
 MAINTAINER=		adrianp@NetBSD.org
 HOMEPAGE=		http://wordpress.org/
 COMMENT=		Blogging tool written in php
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=		pax
 
@@ -16,7 +18,6 @@ USE_TOOLS+=		pax
 .include "options.mk"
 
 NO_BUILD=		yes
-PKG_DESTDIR_SUPPORT=	user-destdir
 WRKSRC=			${WRKDIR}/wordpress
 
 WWW_USER?=              ${APACHE_USER}

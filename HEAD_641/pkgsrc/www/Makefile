@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.648 2009/05/26 17:40:11 drochner Exp $
+# $NetBSD: Makefile,v 1.654 2009/08/09 13:32:55 sno Exp $
 #
 
 COMMENT=	Packages related to the World Wide Web
@@ -109,6 +109,7 @@ SUBDIR+=	drupal6
 SUBDIR+=	drupal6-translations
 SUBDIR+=	elinks
 SUBDIR+=	emacs-w3m
+SUBDIR+=	emacs-w3m-snapshot
 SUBDIR+=	epiphany
 SUBDIR+=	epiphany-extensions
 SUBDIR+=	erubis
@@ -213,6 +214,7 @@ SUBDIR+=	ns-remote
 SUBDIR+=	nspluginwrapper
 SUBDIR+=	nvu
 SUBDIR+=	ocsigen
+SUBDIR+=	opengoo
 SUBDIR+=	opera
 SUBDIR+=	opera-acroread
 SUBDIR+=	opera-acroread5
@@ -231,6 +233,7 @@ SUBDIR+=	p5-Apache-SSI
 SUBDIR+=	p5-Apache-Session
 SUBDIR+=	p5-Apache-Session-Wrapper
 SUBDIR+=	p5-Apache-Test
+SUBDIR+=	p5-Apache2-AuthCASSimple
 SUBDIR+=	p5-Apache2-AuthCookie
 SUBDIR+=	p5-Apache2-AuthCookieDBI
 SUBDIR+=	p5-App-Nopaste
@@ -289,6 +292,8 @@ SUBDIR+=	p5-Catalyst-View-TT
 SUBDIR+=	p5-CatalystX-CRUD-Controller-RHTMLO
 SUBDIR+=	p5-CatalystX-CRUD-View-Excel
 SUBDIR+=	p5-CatalystX-CRUD-YUI
+SUBDIR+=	p5-CatalystX-Component-Traits
+SUBDIR+=	p5-CatalystX-LeakChecker
 SUBDIR+=	p5-FCGI
 SUBDIR+=	p5-FCGI-ProcManager
 SUBDIR+=	p5-HTML-Clean
@@ -320,6 +325,7 @@ SUBDIR+=	p5-HTML-Tiny
 SUBDIR+=	p5-HTML-TokeParser-Simple
 SUBDIR+=	p5-HTML-Tree
 SUBDIR+=	p5-HTML-WikiConverter
+SUBDIR+=	p5-HTML-WikiConverter-DokuWiki
 SUBDIR+=	p5-HTMLObject
 SUBDIR+=	p5-HTTP-Async
 SUBDIR+=	p5-HTTP-Body

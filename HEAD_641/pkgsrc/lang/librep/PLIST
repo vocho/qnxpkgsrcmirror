@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.10 2009/04/16 18:08:32 tnn Exp $
+@comment $NetBSD: PLIST,v 1.12 2009/07/14 10:01:28 tnn Exp $
 bin/rep
 bin/rep-config
 bin/rep-remote
@@ -12,10 +12,6 @@ include/rep_subrs.h
 info/librep.info
 lib/librep.la
 lib/pkgconfig/librep.pc
-libexec/rep/${MACHINE_GNU_PLATFORM}/install-aliases
-libexec/rep/${MACHINE_GNU_PLATFORM}/libtool
-libexec/rep/${MACHINE_GNU_PLATFORM}/rep_config.h
-libexec/rep/${MACHINE_GNU_PLATFORM}/rules.mk
 libexec/rep/${PKGVERSION}/${MACHINE_GNU_PLATFORM}/doc-strings
 libexec/rep/${PKGVERSION}/${MACHINE_GNU_PLATFORM}/emulate-gnu-tar
 libexec/rep/${PKGVERSION}/${MACHINE_GNU_PLATFORM}/gdbm.la
@@ -31,10 +27,15 @@ libexec/rep/${PKGVERSION}/${MACHINE_GNU_PLATFORM}/rep/io/sockets.la
 libexec/rep/${PKGVERSION}/${MACHINE_GNU_PLATFORM}/rep/io/timers.la
 libexec/rep/${PKGVERSION}/${MACHINE_GNU_PLATFORM}/rep/lang/record-profile.la
 libexec/rep/${PKGVERSION}/${MACHINE_GNU_PLATFORM}/rep/util/md5.la
+libexec/rep/${PKGVERSION}/${MACHINE_GNU_PLATFORM}/rep/util/utf8.la
 libexec/rep/${PKGVERSION}/${MACHINE_GNU_PLATFORM}/rep/vm/safe-interpreter.la
 libexec/rep/${PKGVERSION}/${MACHINE_GNU_PLATFORM}/sdbm.la
 libexec/rep/${PKGVERSION}/${MACHINE_GNU_PLATFORM}/tables.la
 libexec/rep/${PKGVERSION}/${MACHINE_GNU_PLATFORM}/timers.la
+libexec/rep/${MACHINE_GNU_PLATFORM}/install-aliases
+libexec/rep/${MACHINE_GNU_PLATFORM}/libtool
+libexec/rep/${MACHINE_GNU_PLATFORM}/rep_config.h
+libexec/rep/${MACHINE_GNU_PLATFORM}/rules.mk
 share/emacs/site-lisp/rep-debugger.el
 share/rep/${PKGVERSION}/lisp/cgi-get.jl
 share/rep/${PKGVERSION}/lisp/cgi-get.jlc
@@ -195,12 +196,8 @@ share/rep/${PKGVERSION}/lisp/rep/vm/compiler/no-lang.jl
 share/rep/${PKGVERSION}/lisp/rep/vm/compiler/no-lang.jlc
 share/rep/${PKGVERSION}/lisp/rep/vm/compiler/rep.jl
 share/rep/${PKGVERSION}/lisp/rep/vm/compiler/rep.jlc
-share/rep/${PKGVERSION}/lisp/rep/vm/compiler/scheme.jl
-share/rep/${PKGVERSION}/lisp/rep/vm/compiler/scheme.jlc
 share/rep/${PKGVERSION}/lisp/rep/vm/compiler/src.jl
 share/rep/${PKGVERSION}/lisp/rep/vm/compiler/src.jlc
-share/rep/${PKGVERSION}/lisp/rep/vm/compiler/unscheme.jl
-share/rep/${PKGVERSION}/lisp/rep/vm/compiler/unscheme.jlc
 share/rep/${PKGVERSION}/lisp/rep/vm/compiler/utils.jl
 share/rep/${PKGVERSION}/lisp/rep/vm/compiler/utils.jlc
 share/rep/${PKGVERSION}/lisp/rep/vm/disassembler.jl
@@ -219,61 +216,5 @@ share/rep/${PKGVERSION}/lisp/rep/xml/reader.jl
 share/rep/${PKGVERSION}/lisp/rep/xml/reader.jlc
 share/rep/${PKGVERSION}/lisp/ring.jl
 share/rep/${PKGVERSION}/lisp/ring.jlc
-share/rep/${PKGVERSION}/lisp/scheme.jl
-share/rep/${PKGVERSION}/lisp/scheme.jlc
-share/rep/${PKGVERSION}/lisp/scheme/data.jl
-share/rep/${PKGVERSION}/lisp/scheme/data.jlc
-share/rep/${PKGVERSION}/lisp/scheme/misc.jl
-share/rep/${PKGVERSION}/lisp/scheme/misc.jlc
-share/rep/${PKGVERSION}/lisp/scheme/syntax-funs.jl
-share/rep/${PKGVERSION}/lisp/scheme/syntax-funs.jlc
-share/rep/${PKGVERSION}/lisp/scheme/syntax.jl
-share/rep/${PKGVERSION}/lisp/scheme/syntax.jlc
-share/rep/${PKGVERSION}/lisp/scheme/utils.jl
-share/rep/${PKGVERSION}/lisp/scheme/utils.jlc
 share/rep/${PKGVERSION}/lisp/symbol-table.jl
 share/rep/${PKGVERSION}/lisp/symbol-table.jlc
-share/rep/${PKGVERSION}/lisp/unscheme.jl
-share/rep/${PKGVERSION}/lisp/unscheme.jlc
-share/rep/${PKGVERSION}/lisp/unscheme/data.jl
-share/rep/${PKGVERSION}/lisp/unscheme/data.jlc
-share/rep/${PKGVERSION}/lisp/unscheme/misc.jl
-share/rep/${PKGVERSION}/lisp/unscheme/misc.jlc
-share/rep/${PKGVERSION}/lisp/unscheme/syntax-funs.jl
-share/rep/${PKGVERSION}/lisp/unscheme/syntax-funs.jlc
-share/rep/${PKGVERSION}/lisp/unscheme/syntax.jl
-share/rep/${PKGVERSION}/lisp/unscheme/syntax.jlc
-@dirrm share/rep/${PKGVERSION}/lisp/unscheme
-@dirrm share/rep/${PKGVERSION}/lisp/scheme
-@dirrm share/rep/${PKGVERSION}/lisp/rep/xml
-@dirrm share/rep/${PKGVERSION}/lisp/rep/www
-@dirrm share/rep/${PKGVERSION}/lisp/rep/vm/compiler
-@dirrm share/rep/${PKGVERSION}/lisp/rep/vm
-@dirrm share/rep/${PKGVERSION}/lisp/rep/util
-@dirrm share/rep/${PKGVERSION}/lisp/rep/threads
-@dirrm share/rep/${PKGVERSION}/lisp/rep/test
-@dirrm share/rep/${PKGVERSION}/lisp/rep/system
-@dirrm share/rep/${PKGVERSION}/lisp/rep/net
-@dirrm share/rep/${PKGVERSION}/lisp/rep/mail
-@dirrm share/rep/${PKGVERSION}/lisp/rep/lang
-@dirrm share/rep/${PKGVERSION}/lisp/rep/io/file-handlers/remote
-@dirrm share/rep/${PKGVERSION}/lisp/rep/io/file-handlers
-@dirrm share/rep/${PKGVERSION}/lisp/rep/io
-@dirrm share/rep/${PKGVERSION}/lisp/rep/i18n
-@dirrm share/rep/${PKGVERSION}/lisp/rep/data
-@dirrm share/rep/${PKGVERSION}/lisp/rep
-@dirrm share/rep/${PKGVERSION}/lisp
-@dirrm share/rep/${PKGVERSION}
-@dirrm share/rep
-@dirrm libexec/rep/${MACHINE_GNU_PLATFORM}
-@dirrm libexec/rep/${PKGVERSION}/${MACHINE_GNU_PLATFORM}/rep/vm
-@dirrm libexec/rep/${PKGVERSION}/${MACHINE_GNU_PLATFORM}/rep/util
-@dirrm libexec/rep/${PKGVERSION}/${MACHINE_GNU_PLATFORM}/rep/lang
-@dirrm libexec/rep/${PKGVERSION}/${MACHINE_GNU_PLATFORM}/rep/io/db
-@dirrm libexec/rep/${PKGVERSION}/${MACHINE_GNU_PLATFORM}/rep/io
-@dirrm libexec/rep/${PKGVERSION}/${MACHINE_GNU_PLATFORM}/rep/i18n
-@dirrm libexec/rep/${PKGVERSION}/${MACHINE_GNU_PLATFORM}/rep/data
-@dirrm libexec/rep/${PKGVERSION}/${MACHINE_GNU_PLATFORM}/rep
-@dirrm libexec/rep/${PKGVERSION}/${MACHINE_GNU_PLATFORM}
-@dirrm libexec/rep/${PKGVERSION}
-@dirrm libexec/rep

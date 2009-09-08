@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.2 2009/01/16 22:25:04 tonio Exp $
+@comment $NetBSD: PLIST,v 1.4 2009/06/14 18:09:21 joerg Exp $
 bin/avahi-browse
 bin/avahi-browse-domains
 bin/avahi-discover-standalone
@@ -115,18 +115,9 @@ share/locale/it/LC_MESSAGES/avahi.mo
 share/locale/ms/LC_MESSAGES/avahi.mo
 share/locale/pl/LC_MESSAGES/avahi.mo
 share/locale/pt_BR/LC_MESSAGES/avahi.mo
+share/locale/ro/LC_MESSAGES/avahi.mo
 share/locale/ru/LC_MESSAGES/avahi.mo
 share/locale/sr/LC_MESSAGES/avahi.mo
 share/locale/sr@latin/LC_MESSAGES/avahi.mo
 share/locale/sv/LC_MESSAGES/avahi.mo
 share/locale/zh_CN/LC_MESSAGES/avahi.mo
-@dirrm share/doc/avahi
-@dirrm share/avahi/introspection
-@comment in xdg-dirs: @dirrm share/applications
-@dirrm include/avahi-ui
-@dirrm include/avahi-gobject
-@dirrm include/avahi-glib
-@dirrm include/avahi-core
-@dirrm include/avahi-common
-@dirrm include/avahi-client
-@comment in dbus: @dirrm etc/dbus-1/system.d

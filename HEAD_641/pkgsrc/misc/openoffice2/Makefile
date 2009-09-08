@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.68 2009/04/16 21:42:43 wiz Exp $
+# $NetBSD: Makefile,v 1.71 2009/08/12 02:31:21 obache Exp $
 #
 
 OO_VER=			2.4.2
 DISTNAME=		openoffice-${OO_VER}
 PKGNAME=		openoffice2-${OO_VER}
-PKGREVISION=		9
+PKGREVISION=		10
 CATEGORIES=		misc
 MASTER_SITES=		${MASTER_SITE_OPENOFFICE:=stable/${OO_VER}/}
 DIST_SUBDIR=		${DISTNAME}
@@ -37,7 +37,6 @@ CONFIGURE_DIRS=		config_office
 GCC_REQD+=		3.4
 USE_LANGUAGES+=		c c++
 
-USE_DIRS+=		xdg-1.1
 USE_TOOLS+=		bash gmake imake perl pkg-config tar
 PTHREAD_OPTS+=		require
 PTHREAD_AUTO_VARS=	yes
@@ -177,9 +176,7 @@ do-install:
 post-install:
 	cd ${DESTDIR}${PREFIX} &&				\
 	find lib/${OO_RELEASE} \! -type d -print |		\
-	sort > ${WRKDIR}/PLIST &&				\
-	find lib/${OO_RELEASE} -type d -print | sort -r |	\
-	awk '{print("@dirrm "$$1)}' >> ${WRKDIR}/PLIST
+	sort > ${WRKDIR}/PLIST
 
 # OS specific Makefile
 .if exists(Makefile.${OPSYS})

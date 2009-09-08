@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.4 2009/04/12 07:33:35 minskim Exp $
+# $NetBSD: Makefile,v 1.8 2009/07/26 10:10:18 minskim Exp $
 
 DISTNAME=	texlive-20080816-source
 PKGNAME=	web2c-7.5.7
-PKGREVISION=	2
+PKGREVISION=	5
 CATEGORIES=	print
 MASTER_SITES=	${MASTER_SITE_TEX_CTAN:=systems/texlive/Source/}
 EXTRACT_SUFX=	.tar.lzma
@@ -40,6 +40,7 @@ USE_LIBTOOL=	yes
 USE_TOOLS+=	gmake lex perl yacc
 WRKSRC=		${WRKDIR}/${DISTNAME}/texk/web2c
 
+CONFIGURE_ARGS+=	--without-luatex
 CONFIGURE_ARGS+=	--without-xetex
 CONFIGURE_ARGS+=	--with-mf-nowin
 CONFIGURE_ARGS+=	--with-system-pnglib \
@@ -57,12 +58,9 @@ INSTALL_DIRS=	${WRKDIR}/${DISTNAME}/texk/web2c
 
 MAKE_ENV+=	KPATHSEA_PREFIX=${BUILDLINK_PREFIX.kpathsea}
 MAKE_FLAGS+=	LIBTOOL=${LIBTOOL:Q}
-MAKE_FLAGS+=	ZZIPLIBSRCDIR="" \
-		ZZIPLIBDEP=${BUILDLINK_PREFIX.zziplib}/lib/libzzip.la
 
 CFLAGS.QNX+=	-D__NO_EXT_QNX
 
-.include "../../archivers/zziplib/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"
 .include "../../graphics/png/buildlink3.mk"
 .include "../../print/kpathsea/buildlink3.mk"

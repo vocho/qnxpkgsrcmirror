@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.6 2009/05/04 01:37:43 hasso Exp $
+# $NetBSD: Makefile,v 1.9 2009/08/12 02:31:21 obache Exp $
 #
 
 DISTNAME=	f-spot-0.5.0.3
-PKGREVISION=	1
+PKGREVISION=	3
 CATEGORIES=	graphics
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/f-spot/0.5/}
 EXTRACT_SUFX=	.tar.bz2
@@ -14,7 +14,6 @@ COMMENT=	Full-featured personal photo management application
 GNU_CONFIGURE=	yes
 USE_LIBTOOL=	yes
 USE_TOOLS+=	gmake intltool pkg-config bash:run msgfmt
-USE_DIRS+=	gnome2-1.6
 
 MAKE_JOBS_SAFE=	no
 

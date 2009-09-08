@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.97 2009/05/20 00:58:16 wiz Exp $
+# $NetBSD: Makefile,v 1.101 2009/07/28 18:52:07 drochner Exp $
 
-DISTNAME=		gnome-games-2.26.2
+DISTNAME=		gnome-games-2.26.3
 PKGREVISION=		1
 CATEGORIES=		games gnome
 MASTER_SITES=		${MASTER_SITE_GNOME:=sources/gnome-games/2.26/}
@@ -16,7 +16,6 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 CONFLICTS=		xbill-[0-9]*
 SUPERSEDES=		glchess-[0-9]*
 
-USE_DIRS+=		gnome2-1.5
 USE_PKGLOCALEDIR=	yes
 USE_TOOLS+=		gmake intltool msgfmt pkg-config
 USE_CONFIG_WRAPPER=	yes
@@ -28,6 +27,9 @@ CONFIGURE_ENV+=		PKGLOCALEDIR=${PKGLOCALEDIR:Q}
 CONFIGURE_ENV+=		ac_cv_path_MSGFMT=msgfmt
 CONFIGURE_ARGS+=	--localstatedir=${VARBASE:Q}
 CONFIGURE_ARGS+=	--without-ggz-server
+
+# Needs devel/check
+CONFIGURE_ARGS=		--disable-tests
 
 FILES_SUBST+=		INSTALL=${INSTALL:Q}
 
@@ -61,6 +63,7 @@ BUILDLINK_API_DEPENDS.libgnome+=	libgnome>=2.10.0
 .include "../../devel/libgnome/buildlink3.mk"
 .include "../../devel/libgnomeui/buildlink3.mk"
 .include "../../games/ggz-client-libs/buildlink3.mk"
+.include "../../games/ggz-client-libs/ggz-client.mk"
 .include "../../graphics/cairo/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 BUILDLINK_API_DEPENDS.librsvg+=	librsvg>=2.12.6

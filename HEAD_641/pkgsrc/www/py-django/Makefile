@@ -1,9 +1,8 @@
-# $NetBSD: Makefile,v 1.17 2009/05/02 16:21:46 reed Exp $
+# $NetBSD: Makefile,v 1.19 2009/07/29 11:02:08 joerg Exp $
 
-DJANGOVERS=	1.0.2
-DISTNAME=	Django-${DJANGOVERS}-final
+DJANGOVERS=	1.0.3
+DISTNAME=	Django-${DJANGOVERS}
 PKGNAME=	${PYPKGPREFIX}-django-${DJANGOVERS}
-PKGREVISION=	2
 CATEGORIES=	www python
 MASTER_SITES=	http://media.djangoproject.com/releases/${DJANGOVERS}/
 
@@ -18,6 +17,8 @@ PYTHON_VERSIONS_ACCEPTED=	25 24
 PLIST_SUBST+=	PYVERSSUFFIX=${PYVERSSUFFIX:Q}
 
 PKG_DESTDIR_SUPPORT=	user-destdir
+
+USE_LANGUAGES=	# empty
 
 DEPENDS+=	${PYPKGPREFIX}-flup-[0-9]*:../../www/py-flup
 

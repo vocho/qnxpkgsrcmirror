@@ -1,9 +1,9 @@
-$NetBSD: distinfo,v 1.3 2009/04/19 09:49:12 hasso Exp $
+$NetBSD: distinfo,v 1.6 2009/07/25 22:26:12 wiz Exp $
 
-SHA1 (sdlmame0130.zip) = af6d050265467285b30b606f0a406d9a2837d5b6
-RMD160 (sdlmame0130.zip) = f7aadad2d9ead6fd83b5cf73d80c28491b24c0ae
-Size (sdlmame0130.zip) = 17681979 bytes
-SHA1 (patch-aa) = 38c0eb8560fcc4d5721d6461c2966785d1e8abc7
+SHA1 (sdlmame0133.zip) = 083d4ac915ad3c91729335f92661904a42d9d886
+RMD160 (sdlmame0133.zip) = dea54228e0cfc574251caa17ca292d6b35688b87
+Size (sdlmame0133.zip) = 17983288 bytes
+SHA1 (patch-aa) = 426d88bb1a50a8665d14bdea1e96c42aefa33443
 SHA1 (patch-ab) = c49551959d68aaad754121ce8dc874b936f3b4de
-SHA1 (patch-ae) = dbcf17c973733727a6e1cc7a18f879d2b90d7184
-SHA1 (patch-ah) = 6a8e0307a58114cfe59d066a4e5e6210895dcc9a
+SHA1 (patch-ae) = d110f0338d224823d959c8a2b57026321a3f0a38
+SHA1 (patch-ah) = f2dbfc44e30857fd9b52ed5d107b5190d5e5f6da

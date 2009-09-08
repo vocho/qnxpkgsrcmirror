@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.79 2009/05/20 00:58:22 wiz Exp $
+# $NetBSD: Makefile,v 1.82 2009/07/23 13:43:25 asau Exp $
 
 DISTNAME=	octave-${OCTAVE_VER}
-PKGREVISION=	1
 CATEGORIES=	math
 MASTER_SITES=	ftp://ftp.octave.org/pub/octave/
 EXTRACT_SUFX=	.tar.bz2
@@ -14,7 +13,7 @@ BUILD_DEPENDS+=	bison>=1.875:../../devel/bison
 BUILD_DEPENDS+=	gperf>=2.7:../../devel/gperf
 DEPENDS+=	gnuplot>=3.7:../../graphics/gnuplot
 
-OCTAVE_VER=	3.0.5
+OCTAVE_VER=	3.2.2
 CONFLICTS+=	octave-2.*
 
 .if (${MACHINE_ARCH} == "arm32")
@@ -25,9 +24,8 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_GNU_READLINE=	yes
 USE_LIBTOOL=		yes
-USE_TOOLS+=		gmake makeinfo perl gsed
+USE_TOOLS+=		gmake makeinfo perl gsed pkg-config
 GNU_CONFIGURE=		yes
-USE_DIRS+=		xdg-1.1
 
 GCC_REQD+=		3.0
 USE_LANGUAGES=		c c++ fortran
@@ -54,6 +52,9 @@ OCTAVE_DOC=	faq/Octave-FAQ.ps  liboctave/liboctave.ps \
 
 INSTALLATION_DIRS+=	share/octave/${OCTAVE_VER}/doc
 UNWRAP_FILES+=		mkoctfile octave-bug src/oct-conf.h
+
+# Doesn't work yet, needs to sort out libtool shared libraries handling:
+#TEST_TARGET=	check
 
 post-extract:
 	find ${WRKSRC}/doc -type f -name '*.info*' -print | xargs rm -f
@@ -92,5 +93,7 @@ post-install:
 .include "../../math/lapack/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../www/curl/buildlink3.mk"
+
+.include "../../x11/libX11/buildlink3.mk"
 
 .include "../../mk/bsd.pkg.mk"

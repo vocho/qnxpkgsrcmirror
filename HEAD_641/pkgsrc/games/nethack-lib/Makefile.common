@@ -1,4 +1,4 @@
-# $NetBSD: Makefile.common,v 1.24 2007/12/02 08:32:24 rillig Exp $
+# $NetBSD: Makefile.common,v 1.26 2009/08/04 13:58:57 joerg Exp $
 #
 
 NETHACK_BASEVER=	3.4.3
@@ -14,7 +14,9 @@ EXTRACT_SUFX=		.tgz
 MAINTAINER=		pooka@NetBSD.org
 HOMEPAGE=		http://www.nethack.org/
 
-.if !defined(NO_BUILD)  # following stuff not needed for nethack meta pkg
+MAKE_JOBS_SAFE=		no
+
+.if !defined(META_PACKAGE)
 
 WRKSRC=			${WRKDIR}/nethack-${NETHACK_BASEVER}
 HAS_CONFIGURE=		yes

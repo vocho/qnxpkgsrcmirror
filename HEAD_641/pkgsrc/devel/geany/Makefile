@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.10 2008/11/24 09:37:15 rillig Exp $
+# $NetBSD: Makefile,v 1.12 2009/07/22 09:01:23 wiz Exp $
 
-DISTNAME=	geany-0.15
+DISTNAME=	geany-0.17
 CATEGORIES=	devel
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=geany/}
 
@@ -15,7 +15,6 @@ USE_LIBTOOL=		yes
 USE_PKGLOCALEDIR=	yes
 USE_TOOLS+=		pkg-config msgfmt gmake perl:run intltool
 USE_LANGUAGES=		c c++
-USE_DIRS+=		xdg-1.1
 
 CONFIGURE_ARGS+=	--enable-plugins
 CONFIGURE_ARGS+=	--enable-vte
@@ -32,6 +31,7 @@ BUILDLINK_TRANSFORM+=	rm:-lstdc++
 CONFIGURE_ARGS+=	CC=gcc
 .endif
 
-.include "../../x11/gtk2/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
+.include "../../sysutils/desktop-file-utils/desktopdb.mk"
+.include "../../x11/gtk2/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

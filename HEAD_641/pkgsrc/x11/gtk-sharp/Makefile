@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.12 2009/05/02 16:21:46 reed Exp $
+# $NetBSD: Makefile,v 1.14 2009/08/12 02:31:23 obache Exp $
 #
 
-DISTNAME=		gtk-sharp-2.12.8
+DISTNAME=		gtk-sharp-2.12.9
 PKGREVISION=		1
 CATEGORIES=		x11
 MASTER_SITES=		${MASTER_SITE_GNOME:=sources/gtk-sharp/2.12/}
@@ -10,6 +10,7 @@ EXTRACT_SUFX=		.tar.bz2
 MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://www.mono-project.com/GtkSharp
 COMMENT=		C\# bindings for GTK
+LICENSE=		gnu-lgpl-v2.1
 
 PREV_PKGPATH=		x11/gtk2-sharp
 

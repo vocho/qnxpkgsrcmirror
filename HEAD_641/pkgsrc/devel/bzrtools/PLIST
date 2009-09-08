@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.3 2009/05/16 15:20:22 epg Exp $
+@comment $NetBSD: PLIST,v 1.6 2009/07/02 06:10:30 epg Exp $
 ${PYSITELIB}/bzrlib/plugins/bzrtools/__init__.py
 ${PYSITELIB}/bzrlib/plugins/bzrtools/__init__.pyc
 ${PYSITELIB}/bzrlib/plugins/bzrtools/__init__.pyo
@@ -47,6 +47,9 @@ ${PYSITELIB}/bzrlib/plugins/bzrtools/hunk_selector.pyo
 ${PYSITELIB}/bzrlib/plugins/bzrtools/link_tree.py
 ${PYSITELIB}/bzrlib/plugins/bzrtools/link_tree.pyc
 ${PYSITELIB}/bzrlib/plugins/bzrtools/link_tree.pyo
+${PYSITELIB}/bzrlib/plugins/bzrtools/mirror.py
+${PYSITELIB}/bzrlib/plugins/bzrtools/mirror.pyc
+${PYSITELIB}/bzrlib/plugins/bzrtools/mirror.pyo
 ${PYSITELIB}/bzrlib/plugins/bzrtools/patch.py
 ${PYSITELIB}/bzrlib/plugins/bzrtools/patch.pyc
 ${PYSITELIB}/bzrlib/plugins/bzrtools/patch.pyo
@@ -95,9 +98,15 @@ ${PYSITELIB}/bzrlib/plugins/bzrtools/tests/test_conflict_diff.pyo
 ${PYSITELIB}/bzrlib/plugins/bzrtools/tests/test_dotgraph.py
 ${PYSITELIB}/bzrlib/plugins/bzrtools/tests/test_dotgraph.pyc
 ${PYSITELIB}/bzrlib/plugins/bzrtools/tests/test_dotgraph.pyo
+${PYSITELIB}/bzrlib/plugins/bzrtools/tests/test_fetch_ghosts.py
+${PYSITELIB}/bzrlib/plugins/bzrtools/tests/test_fetch_ghosts.pyc
+${PYSITELIB}/bzrlib/plugins/bzrtools/tests/test_fetch_ghosts.pyo
 ${PYSITELIB}/bzrlib/plugins/bzrtools/tests/test_link_tree.py
 ${PYSITELIB}/bzrlib/plugins/bzrtools/tests/test_link_tree.pyc
 ${PYSITELIB}/bzrlib/plugins/bzrtools/tests/test_link_tree.pyo
+${PYSITELIB}/bzrlib/plugins/bzrtools/tests/test_mirror.py
+${PYSITELIB}/bzrlib/plugins/bzrtools/tests/test_mirror.pyc
+${PYSITELIB}/bzrlib/plugins/bzrtools/tests/test_mirror.pyo
 ${PYSITELIB}/bzrlib/plugins/bzrtools/tests/test_patch.py
 ${PYSITELIB}/bzrlib/plugins/bzrtools/tests/test_patch.pyc
 ${PYSITELIB}/bzrlib/plugins/bzrtools/tests/test_patch.pyo
@@ -119,7 +128,3 @@ ${PYSITELIB}/bzrlib/plugins/bzrtools/version.pyo
 ${PYSITELIB}/bzrlib/plugins/bzrtools/zap.py
 ${PYSITELIB}/bzrlib/plugins/bzrtools/zap.pyc
 ${PYSITELIB}/bzrlib/plugins/bzrtools/zap.pyo
-@dirrm ${PYSITELIB}/bzrlib/plugins/bzrtools/tests
-@dirrm ${PYSITELIB}/bzrlib/plugins/bzrtools
-@comment in bzr: @dirrm ${PYSITELIB}/bzrlib/plugins
-@comment in bzr: @dirrm ${PYSITELIB}/bzrlib

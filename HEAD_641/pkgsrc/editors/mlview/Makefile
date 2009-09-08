@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.33 2009/03/24 16:22:57 abs Exp $
+# $NetBSD: Makefile,v 1.36 2009/07/22 09:01:25 wiz Exp $
 #
 
 DISTNAME=	mlview-0.9.0
+PKGREVISION=	2
 CATEGORIES=	editors gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/mlview/0.9/}
 EXTRACT_SUFX=	.tar.bz2
@@ -13,7 +14,6 @@ COMMENT=	XML editor for the GNOME environment
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=		yes
-USE_DIRS+=		xdg-1.1
 USE_TOOLS+=		gmake intltool msgfmt pkg-config
 USE_LIBTOOL=		yes
 USE_LANGUAGES+=		c c++

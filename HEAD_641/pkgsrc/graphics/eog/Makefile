@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.48 2009/05/19 11:15:57 wiz Exp $
+# $NetBSD: Makefile,v 1.50 2009/07/22 09:01:31 wiz Exp $
 #
 
-DISTNAME=	eog-2.26.2
+DISTNAME=	eog-2.26.3
 CATEGORIES=	graphics gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/eog/2.26/}
 EXTRACT_SUFX=	.tar.bz2
@@ -15,7 +15,6 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=		YES
 USE_TOOLS+=		gmake intltool msgfmt pkg-config
-USE_DIRS+=		gnome2-1.5
 USE_PKGLOCALEDIR=	YES
 USE_LIBTOOL=		yes
 

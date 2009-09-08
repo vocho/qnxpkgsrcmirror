@@ -1,7 +1,10 @@
-@comment $NetBSD: PLIST,v 1.10 2007/12/09 10:55:30 drochner Exp $
+@comment $NetBSD: PLIST,v 1.14 2009/08/11 11:16:37 drochner Exp $
 bin/faad
-include/faad2/faad2-config.h
 include/faad2/faad.h
+include/faad2/faad2-config.h
+include/faad2/mp4ff_int_types.h
+include/faad2/mp4ff.h
 include/faad2/neaacdec.h
 lib/libfaad.la
-@dirrm include/faad2
+lib/libmp4ff.la
+man/man1/faad.1

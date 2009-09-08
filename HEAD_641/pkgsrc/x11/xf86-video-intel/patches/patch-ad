@@ -1,8 +1,8 @@
-$NetBSD: patch-ad,v 1.1 2008/03/20 17:00:38 joerg Exp $
+$NetBSD: patch-ad,v 1.3 2009/08/10 06:17:21 wiz Exp $
 
---- src/i830_xaa.c.orig	2008-03-19 23:27:58.000000000 +0100
+--- src/i830_xaa.c.orig	2009-05-13 00:12:11.000000000 +0000
 +++ src/i830_xaa.c
-@@ -654,8 +654,7 @@ I830SubsequentColorExpandScanline(ScrnIn
+@@ -614,8 +614,7 @@ I830SubsequentColorExpandScanline(ScrnIn
      pI830->BR[9] += pScrn->displayWidth * pI830->cpp;
      I830GetNextScanlineColorExpandBuffer(pScrn);
  

@@ -1,13 +1,10 @@
-# $NetBSD: Makefile,v 1.32 2007/11/12 20:05:38 heinz Exp $
+# $NetBSD: Makefile,v 1.34 2009/06/14 22:58:07 joerg Exp $
 
 DISTNAME=	nc110
 PKGNAME=	netcat-1.10
 PKGREVISION=	2
 CATEGORIES=	net
-MASTER_SITES=	ftp://coast.cs.purdue.edu/pub/tools/unix/netutils/netcat/ \
-		ftp://zippy.telcom.arizona.edu/pub/mirrors/avian.org/hacks/ \
-		ftp://ftp.sterling.com/mirrors/avian.org/src/hacks/ \
-		ftp://avian.org/src/hacks/
+MASTER_SITES=	ftp://coast.cs.purdue.edu/pub/tools/unix/netutils/netcat/
 EXTRACT_SUFX=	.tgz
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
@@ -58,7 +55,6 @@ do-install:
 	    ${INSTALL_DATA} $$i ${DESTDIR:Q}${PREFIX:Q}/${EXAMPLE_DIR};	\
 	    ${ECHO} ${EXAMPLE_DIR}/$$i >> PLIST.data;			\
 	done;								\
-	${ECHO} "@dirrm ${EXAMPLE_DIR}" >> PLIST.data;			\
 	)
 	${INSTALL_MAN} ${FILESDIR}/nc.1 \
 		${DESTDIR:Q}${PREFIX:Q}/${PKGMANDIR}/man1/nc.1
