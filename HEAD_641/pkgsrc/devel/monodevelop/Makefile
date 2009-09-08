@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.21 2009/05/04 11:19:13 hasso Exp $
+# $NetBSD: Makefile,v 1.24 2009/08/12 02:31:20 obache Exp $
 
 DISTNAME=	monodevelop-2.0
+PKGREVISION=	2
 CATEGORIES=	devel
-PKGREVISION=	1
-MASTER_SITES=	http://go-mono.com/sources/monodevelop/
+MASTER_SITES=	http://ftp.novell.com/pub/mono/sources/monodevelop/
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	kefren@NetBSD.org
-HOMEPAGE=	http://www.monodevelop.com/
+HOMEPAGE=	http://monodevelop.com/
 COMMENT=	IDE for C\# and other .NET languages
 
 GNU_CONFIGURE=	yes
@@ -15,7 +15,6 @@ USE_TOOLS+=	gmake perl:run pkg-config bash:run msgfmt
 EXTRACT_USING=	gtar
 MAKE_JOBS_SAFE=	no
 
-USE_DIRS+=	xdg-1.4
 
 REPLACE_BASH+=	mdtool.in
 REPLACE_BASH+=	monodevelop.in

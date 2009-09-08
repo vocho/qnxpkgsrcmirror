@@ -1,12 +1,21 @@
-$NetBSD: patch-aa,v 1.5 2008/09/15 08:43:44 taca Exp $
+$NetBSD: patch-aa,v 1.7 2009/06/12 23:02:57 minskim Exp $
 
---- lib/rubygems/commands/install_command.rb.orig	2008-06-21 05:05:41.000000000 +0900
-+++ lib/rubygems/commands/install_command.rb
-@@ -59,6 +59,7 @@ class Gem::Commands::InstallCommand < Ge
-       :format_executable => options[:format_executable],
-       :ignore_dependencies => options[:ignore_dependencies],
-       :install_dir => options[:install_dir],
-+      :install_root => options[:install_root],
-       :security_policy => options[:security_policy],
-       :wrappers => options[:wrappers],
-       :bin_dir => options[:bin_dir],
+--- lib/rubygems/specification.rb.orig	2009-05-19 17:41:16.000000000 -0700
++++ lib/rubygems/specification.rb
+@@ -812,12 +812,12 @@ class Gem::Specification
+     end
+ 
+     @files.delete_if            do |file| File.directory? file end
+-    @test_files.delete_if       do |file| File.directory? file end
+-    @executables.delete_if      do |file|
++    @test_files and @test_files.delete_if       do |file| File.directory? file end
++    @executables and @executables.delete_if      do |file|
+       File.directory? File.join(bindir, file)
+     end
+-    @extra_rdoc_files.delete_if do |file| File.directory? file end
+-    @extensions.delete_if       do |file| File.directory? file end
++    @extra_rdoc_files and @extra_rdoc_files.delete_if do |file| File.directory? file end
++    @extensions and @extensions.delete_if       do |file| File.directory? file end
+ 
+     non_files = files.select do |file|
+       !File.file? file

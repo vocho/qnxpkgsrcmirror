@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.24 2008/09/06 20:54:34 wiz Exp $
+# $NetBSD: Makefile,v 1.26 2009/07/22 09:01:49 wiz Exp $
 #
 
 DISTNAME=	gtodo-applet-0.1
 PKGREVISION=	16
 CATEGORIES=	time gnome
-MASTER_SITES=	http://download.qballcow.nl/programs/gtodo/
+MASTER_SITES=	# http://download.qballcow.nl/programs/gtodo/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://qballcow.nl/index.php?s=4
@@ -16,7 +16,6 @@ DEPENDS+=		gtodo>=0.14:../../time/gtodo
 
 USE_TOOLS+=		pkg-config
 GNU_CONFIGURE=		YES
-USE_DIRS+=		gnome2-1.5
 USE_LIBTOOL=		YES
 
 .include "../../devel/GConf/schemas.mk"

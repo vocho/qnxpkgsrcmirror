@@ -1,14 +1,16 @@
-# $NetBSD: Makefile,v 1.7 2009/05/01 23:38:38 schmonz Exp $
+# $NetBSD: Makefile,v 1.10 2009/07/23 19:27:21 schmonz Exp $
 #
 
-DISTNAME=		xapian-omega-1.0.12
+DISTNAME=		xapian-omega-1.0.14
 CATEGORIES=		textproc
-MASTER_SITES=		http://oligarchy.co.uk/xapian/1.0.12/
+MASTER_SITES=		http://oligarchy.co.uk/xapian/1.0.14/
 
 MAINTAINER=		schmonz@NetBSD.org
 HOMEPAGE=		http://xapian.org/docs/omega/overview.html
 COMMENT=		Search engine application for websites using Xapian
 LICENSE=		gnu-gpl-v2
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=		yes
 CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR:Q}

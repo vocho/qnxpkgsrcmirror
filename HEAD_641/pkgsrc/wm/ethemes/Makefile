@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.17 2007/02/01 23:12:22 joerg Exp $
+# $NetBSD: Makefile,v 1.19 2009/07/15 20:57:47 joerg Exp $
 
 DISTNAME=	ethemes-0.1
 PKGREVISION=	3
@@ -9,6 +9,8 @@ DISTFILES=	${E_THEMES}
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://e.themes.org/
 COMMENT=	Themes for the window manager Enlightenment
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 DEPENDS+=	enlightenment>=0.16.2:../../wm/enlightenment
 
@@ -40,12 +42,12 @@ E_THEMES?=	Absolute_E-DR16-199911060830.etheme \
 do-install:
 .for FILE in ${E_THEMES}
 	NAME=`echo ${FILE} | ${SED} -e s/-DR16.*//` ; \
-	${INSTALL_DATA_DIR} ${PREFIX}/${E_DATADIR}/$$NAME ; \
-	${GTAR} -C ${PREFIX}/${E_DATADIR}/$$NAME \
+	${INSTALL_DATA_DIR} ${DESTDIR}${PREFIX}/${E_DATADIR}/$$NAME ; \
+	${GTAR} -C ${DESTDIR}${PREFIX}/${E_DATADIR}/$$NAME \
 		-xzf ${DISTDIR}/${DIST_SUBDIR}/${FILE}
 .endfor
 .for DIR in Absolute_E ApplePlatinum FinalE
-	cd ${PREFIX}/${E_DATADIR}/${DIR} \
+	cd ${DESTDIR}${PREFIX}/${E_DATADIR}/${DIR} \
 		&& ${CHMOD} go+rx `${FIND} . -type d -print` \
 		&& ${CHMOD} go+r `${FIND} . -type f -print`
 .endfor

@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.70 2009/05/19 08:59:38 wiz Exp $
+# $NetBSD: Makefile,v 1.73 2009/07/22 09:01:53 wiz Exp $
 #
 
-DISTNAME=		gnome-themes-2.26.1
+DISTNAME=		gnome-themes-2.26.3.1
 CATEGORIES=		x11
 MASTER_SITES=		${MASTER_SITE_GNOME:=sources/gnome-themes/2.26/}
 EXTRACT_SUFX=		.tar.bz2
@@ -15,7 +15,6 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 
 CONFLICTS+=		clearlooks-metacity-[0-9]*
 
-USE_DIRS+=		gnome2-1.5 theme-1.0 xdg-1.4
 USE_TOOLS+=		gmake intltool msgfmt pkg-config
 USE_LIBTOOL=		yes
 USE_PKGLOCALEDIR=	yes

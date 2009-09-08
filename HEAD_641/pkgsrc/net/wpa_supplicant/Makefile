@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.4 2009/05/11 22:47:04 roy Exp $
+# $NetBSD: Makefile,v 1.6 2009/08/10 23:03:20 dsainty Exp $
 #
 
 DISTNAME=	wpa_supplicant-0.6.9
@@ -24,13 +24,18 @@ PKG_SUGGESTED_OPTIONS=	dbus
 
 .include "../../mk/bsd.options.mk"
 
+.if !empty(PKG_OPTIONS:Mdbus)
+USE_TOOLS+=	pkg-config
+.endif
+
 .if ${OPSYS} == "NetBSD" || ${OPSYS} == "FreeBSD"
 CPPFLAGS+=	-DNEW_FREEBSD_MLME_ASSOC
 .endif
 
 post-extract:
 	${CP} ${FILESDIR}/defconfig ${WRKSRC}/wpa_supplicant/.config
-	${CAT} ${FILESDIR}/defconfig.${OPSYS} >> ${WRKSRC}/wpa_supplicant/.config
+	[ ! -e ${FILESDIR}/defconfig.${OPSYS} ] || \
+		${CAT} ${FILESDIR}/defconfig.${OPSYS} >> ${WRKSRC}/wpa_supplicant/.config
 .if !empty(PKG_OPTIONS:Mdbus)
 	${ECHO} CONFIG_CTRL_IFACE_DBUS=y >> ${WRKSRC}/wpa_supplicant/.config
 .endif

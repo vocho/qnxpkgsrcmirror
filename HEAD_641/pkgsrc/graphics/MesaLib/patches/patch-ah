@@ -1,42 +1,21 @@
-$NetBSD: patch-ah,v 1.8 2008/04/24 07:40:24 bjs Exp $
+$NetBSD: patch-ah,v 1.10 2009/06/10 17:28:07 wiz Exp $
 
---- src/mesa/drivers/dri/glcore/Makefile.orig	2007-09-28 20:43:28.000000000 -0400
-+++ src/mesa/drivers/dri/glcore/Makefile
-@@ -36,7 +36,7 @@ INCLUDE_DIRS = \
- MESA_MODULES = $(TOP)/src/mesa/libmesa.a
- 
- # Libraries that the driver shared lib depends on
--LIB_DEPS = -lm -lpthread -lc
-+LIB_DEPS = -lm -lc
- # LIB_DEPS = -lGL -lm -lpthread -lc
- 
- 
-@@ -49,10 +49,12 @@ OBJECTS = $(C_SOURCES:.c=.o) \
- ##### RULES #####
- 
- .c.o:
--	$(CC) -c $(INCLUDE_DIRS) $(CFLAGS) $(DEFINES) $< -o $@
-+	$(LIBTOOL) --mode=compile --tag=CC \
-+		$(CC) -c -prefer-pic $(INCLUDE_DIRS) $(CFLAGS) $(DEFINES) $< -o $(@:.o=.lo)
- 
- .S.o:
--	$(CC) -c $(INCLUDE_DIRS) $(CFLAGS) $(DEFINES)  $< -o $@
-+	$(LIBTOOL) --mode=compile --tag=CC \
-+		$(CC) -c -prefer-pic $(INCLUDE_DIRS) $(CFLAGS) $(DEFINES) $< -o $(@:.o=.lo)
+--- src/mesa/drivers/dri/Makefile.orig	2009-03-13 03:28:49.000000000 +0000
++++ src/mesa/drivers/dri/Makefile
+@@ -38,11 +38,11 @@ install: dri.pc
+ 			(cd $$dir && $(MAKE) install) || exit 1 ; \
+ 		fi \
+ 	done
+-	$(INSTALL) -d $(DESTDIR)$(INSTALL_INC_DIR)/GL/internal
+-	$(INSTALL) -m 0644 $(TOP)/include/GL/internal/dri_interface.h \
+-	  $(DESTDIR)$(INSTALL_INC_DIR)/GL/internal
+-	$(INSTALL) -d $(DESTDIR)$(INSTALL_LIB_DIR)/pkgconfig
+-	$(INSTALL) -m 0644 dri.pc $(DESTDIR)$(INSTALL_LIB_DIR)/pkgconfig
++	$(BSD_INSTALL_DATA_DIR) $(DESTDIR)$(INSTALL_DIR)/include/GL/internal
++	$(BSD_INSTALL_LIB_DIR) $(DESTDIR)$(INSTALL_DIR)/lib
++	$(BSD_INSTALL_DATA_DIR) $(DESTDIR)$(INSTALL_DIR)/lib/pkgconfig
++	$(BSD_INSTALL_DATA) $(TOP)/include/GL/internal/dri_interface.h $(DESTDIR)$(INSTALL_DIR)/include/GL/internal
++	$(BSD_INSTALL_DATA) dri.pc $(DESTDIR)$(INSTALL_DIR)/lib/pkgconfig
  
  
- ##### TARGETS #####
-@@ -61,9 +63,10 @@ default: depend $(TOP)/$(LIB_DIR)/$(LIBN
- 
- 
- $(TOP)/$(LIB_DIR)/$(LIBNAME): $(OBJECTS) $(MESA_MODULES) $(WINOBJ) Makefile
--	CC="$(CC)" CXX="$(CXX)" $(TOP)/bin/mklib -o $(LIBNAME) -noprefix \
--		-ldflags '$(LDFLAGS)' -install $(TOP)/$(LIB_DIR) \
--		$(OBJECTS) $(WINLIB) $(LIB_DEPS) $(WINOBJ) $(MESA_MODULES)
-+	$(LIBTOOL) --mode=link $(CC) -o $(TOP)/$(LIB_DIR)/$(LIB_NAME:.so=.la) \
-+		$(LDFLAGS) $(OBJECTS:.o=.lo) $(WINLIB) $(LIB_DEPS) \
-+		$(WINOBJ:.o=.lo) $(MESA_MODULES:.a=.la) -rpath $(PREFIX)/lib \
-+		-module -avoid-version
- 
- 
- depend: $(C_SOURCES) $(ASM_SOURCES)
+ clean:

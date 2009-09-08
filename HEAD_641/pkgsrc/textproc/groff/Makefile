@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.50 2009/02/24 20:41:45 wiz Exp $
+# $NetBSD: Makefile,v 1.52 2009/08/14 15:41:18 wiz Exp $
 #
 
 DISTNAME=	groff-1.20.1
+PKGREVISION=	1
 CATEGORIES=	textproc
 MASTER_SITES=	${MASTER_SITE_GNU:=groff/}
 
@@ -10,6 +11,7 @@ HOMEPAGE=	http://www.gnu.org/software/groff/groff.html
 COMMENT=	GNU roff text processing suite
 
 CHECK_PERMS=		NO
+MAKE_JOBS_SAFE=		NO
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 INSTALLATION_DIRS=	share/groff/site-tmac
@@ -36,22 +38,46 @@ PLIST_SRC+=		PLIST
 
 .include "../../mk/bsd.prefs.mk"
 
-.if ${OPSYS} == "SunOS"
+#
+# Groff installs its own man and ms macros as mgan and mgs if the
+# configure script thinks replacing the system ones is not safe. Since
+# this depends heavily on exactly what the system macros are, each
+# vendor OS is likely to be different and possibly differ by version.
+#
+# It also installs wrappers around the system macros for a variety of
+# other traditional macro packages, if those macros don't have an FSF
+# copyright.
+#
+# It also defaults to installing some of its own tools with a 'g'
+# prefix on some platforms.
+#
+
+.if ${OPSYS} == "HPUX"
+PLIST_SUBST+=	GNU_PREFIX=""
+PLIST_SUBST+=	GNU_PREFIX_TMAC_WRAPPER="g"
+PLIST_SUBST+=	GNU_PREFIX_AN_TMAC="g"
+PLIST_SUBST+=	GNU_PREFIX_S_TMAC="g"
+
+.elif ${OPSYS} == "OSF1"
+PLIST_SUBST+=	GNU_PREFIX=""
+PLIST_SUBST+=	GNU_PREFIX_TMAC_WRAPPER="g"
+PLIST_SUBST+=	GNU_PREFIX_AN_TMAC="g"
+PLIST_SUBST+=	GNU_PREFIX_S_TMAC="g"
+
+.elif ${OPSYS} == "SunOS"
+# According to PR 35295, on (at least) Solaris 10 for x86 you get
+# an.tmac and not gan.tmac. If this turns out not to be true for
+# earlier/other Solaris revs we'll need more conditionals in here.
 PLIST_SUBST+=	GNU_PREFIX="g"
+PLIST_SUBST+=	GNU_PREFIX_TMAC_WRAPPER="g"
+PLIST_SUBST+=	GNU_PREFIX_AN_TMAC=""
+PLIST_SUBST+=	GNU_PREFIX_S_TMAC="g"
+
 .else
 PLIST_SUBST+=	GNU_PREFIX=""
-.endif
-
-.if ${OPSYS} == "SunOS" || ${OPSYS} == "HPUX"
-PLIST_SUBST+=	GNU_PREFIX_TMAC="g"
-.else
-PLIST_SUBST+=	GNU_PREFIX_TMAC=""
-.endif
-
-.if ${OPSYS} == "SunOS" || ${OPSYS} == "HPUX" || ${OPSYS} == "OSF1"
-PLIST_SUBST+=	GNU_PREFIX_AN_TMAC="g"
-.else
+PLIST_SUBST+=	GNU_PREFIX_TMAC_WRAPPER=""
 PLIST_SUBST+=	GNU_PREFIX_AN_TMAC=""
+PLIST_SUBST+=	GNU_PREFIX_S_TMAC=""
 .endif
 
 CPPFLAGS.QNX+=	-D_NO_CPP_INLINES -D_HAS_GENERIC_TEMPLATES=0

@@ -1,14 +1,13 @@
-# $NetBSD: buildlink3.mk,v 1.18 2009/03/20 19:25:36 joerg Exp $
+# $NetBSD: buildlink3.mk,v 1.20 2009/08/06 13:09:28 tnn Exp $
 
 BUILDLINK_TREE+=	firefox
 
 .if !defined(FIREFOX_BUILDLINK3_MK)
 FIREFOX_BUILDLINK3_MK:=
 
-BUILDLINK_API_DEPENDS.firefox+=	firefox>=2.0
-BUILDLINK_API_DEPENDS.firefox+=	firefox<=2.99
-BUILDLINK_ABI_DEPENDS.firefox+=	firefox>=2.0.0.3nb1
+BUILDLINK_API_DEPENDS.firefox+=	firefox>=3.5.2
 BUILDLINK_PKGSRCDIR.firefox?=	../../www/firefox
-.endif # FIREFOX_BUILDLINK3_MK
+
+.endif	# FIREFOX_BUILDLINK3_MK
 
 BUILDLINK_TREE+=	-firefox

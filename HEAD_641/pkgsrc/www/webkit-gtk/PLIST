@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.6 2009/05/20 03:28:48 snj Exp $
+@comment $NetBSD: PLIST,v 1.9 2009/07/24 18:37:31 drochner Exp $
 bin/jsc
 include/webkit-1.0/JavaScriptCore/JSBase.h
 include/webkit-1.0/JavaScriptCore/JSContextRef.h
@@ -34,6 +34,12 @@ share/locale/it/LC_MESSAGES/webkit.mo
 share/locale/pt_BR/LC_MESSAGES/webkit.mo
 share/locale/ru/LC_MESSAGES/webkit.mo
 share/locale/sv/LC_MESSAGES/webkit.mo
+share/webkit-1.0/images/deleteButton.png
+share/webkit-1.0/images/missingImage.png
+share/webkit-1.0/images/nullPlugin.png
+share/webkit-1.0/images/panIcon.png
+share/webkit-1.0/images/textAreaResizeCorner.png
+share/webkit-1.0/images/urlIcon.png
 share/webkit-1.0/resources/error.html
 share/webkit-1.0/webinspector/Images/back.png
 share/webkit-1.0/webinspector/Images/checker.png
@@ -85,6 +91,7 @@ share/webkit-1.0/webinspector/Images/profileIcon.png
 share/webkit-1.0/webinspector/Images/profileSmallIcon.png
 share/webkit-1.0/webinspector/Images/profilesIcon.png
 share/webkit-1.0/webinspector/Images/profilesSilhouette.png
+share/webkit-1.0/webinspector/Images/radioDot.png
 share/webkit-1.0/webinspector/Images/recordButtons.png
 share/webkit-1.0/webinspector/Images/reloadButtons.png
 share/webkit-1.0/webinspector/Images/resourceCSSIcon.png
@@ -149,10 +156,3 @@ share/webkit-1.0/webinspector/Images/warningIcon.png
 share/webkit-1.0/webinspector/Images/warningMediumIcon.png
 share/webkit-1.0/webinspector/Images/warningsErrors.png
 share/webkit-1.0/webinspector/localizedStrings.js
-@dirrm share/webkit-1.0/webinspector/Images
-@dirrm share/webkit-1.0/webinspector
-@dirrm share/webkit-1.0/resources
-@dirrm share/webkit-1.0
-@dirrm include/webkit-1.0/webkit
-@dirrm include/webkit-1.0/JavaScriptCore
-@dirrm include/webkit-1.0

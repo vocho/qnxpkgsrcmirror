@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.1.1.1 2009/01/03 22:12:42 minskim Exp $
+@comment $NetBSD: PLIST,v 1.4 2009/06/14 21:16:22 joerg Exp $
 bin/kpseaccess
 bin/kpsereadlink
 bin/kpsestat
@@ -39,6 +39,7 @@ include/kpathsea/kpathsea.h
 include/kpathsea/lib.h
 include/kpathsea/line.h
 include/kpathsea/magstep.h
+include/kpathsea/mingw32.h
 include/kpathsea/paths.h
 include/kpathsea/pathsearch.h
 include/kpathsea/proginit.h
@@ -75,10 +76,4 @@ share/texmf/web2c/mktexnam
 share/texmf/web2c/mktexnam.opt
 share/texmf/web2c/mktexupd
 share/texmf/web2c/texmf.cnf
-@dirrm share/texmf/web2c
-@exec ${MKDIR} %D/share/texmf-dist
-@dirrm share/texmf-dist
-@dirrm share/texmf
-@exec ${MKDIR} %D/share/doc/texmf
-@dirrm share/doc/texmf
-@dirrm include/kpathsea
+@pkgdir share/texmf-dist

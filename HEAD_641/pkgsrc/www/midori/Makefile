@@ -1,17 +1,17 @@
-# $NetBSD: Makefile,v 1.9 2009/05/13 18:41:31 snj Exp $
+# $NetBSD: Makefile,v 1.15 2009/08/12 02:31:23 obache Exp $
 
-DISTNAME=	midori-0.1.6
+DISTNAME=	midori-0.1.9
+PKGREVISION=	2
 CATEGORIES=	www
-MASTER_SITES=	http://goodies.xfce.org/releases/midori/
+MASTER_SITES=	http://archive.xfce.org/src/apps/midori/0.1/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.twotoasts.de/media/midori/
+HOMEPAGE=	http://www.twotoasts.de/index.php?/pages/midori_summary.html
 COMMENT=	Lightweight web browser using WebKit
 EXTRACT_SUFX=	.tar.bz2
 
 HAS_CONFIGURE=	yes
 USE_LIBTOOL=	yes
-USE_DIRS+=	xdg-1.4
 USE_TOOLS+=	gmake intltool msgfmt pkg-config
 
 PKG_DESTDIR_SUPPORT=	user-destdir
@@ -39,7 +39,8 @@ SUBST_STAGE.marshal=	pre-configure
 SUBST_MESSAGE.marshal=	Gross hack (part one) in progress
 SUBST_FILES.marshal=	midori/midori-locationaction.c midori/midori-panel.c
 SUBST_FILES.marshal+=	midori/midori-view.c midori/midori-searchaction.c
-SUBST_FILES.marshal+=	katze/katze-array.c
+SUBST_FILES.marshal+=	midori/midori-browser.c
+SUBST_FILES.marshal+=	katze/katze-array.c katze/katze-arrayaction.c
 SUBST_SED.marshal=	-e 's/"marshal/"marshallocal/'
 SUBST_STAGE.marshal2=	pre-configure
 SUBST_MESSAGE.marshal2=	Gross hack (part two) in progress
@@ -61,5 +62,6 @@ BUILDLINK_API_DEPENDS.libsoup24+=libsoup24>=2.26.0
 .include "../../textproc/libxml2/buildlink3.mk"
 .include "../../www/webkit-gtk/buildlink3.mk"
 .include "../../x11/libunique/buildlink3.mk"
+.include "../../sysutils/libnotify/buildlink3.mk"
 .include "../../x11/gtk2/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

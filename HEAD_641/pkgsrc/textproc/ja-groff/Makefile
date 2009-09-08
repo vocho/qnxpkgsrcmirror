@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.11 2006/10/24 06:59:38 rillig Exp $
+# $NetBSD: Makefile,v 1.13 2009/07/07 17:38:43 joerg Exp $
 
 DISTNAME=	groff-1.10
 PKGNAME=	ja-groff-0.99
@@ -15,12 +15,18 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.gnu.org/software/groff/groff.html
 COMMENT=	Japanese enhancement of GNU groff
 
+PKG_DESTDIR_SUPPORT=	user-destdir
+
+MAKE_JOBS_SAFE=		no
+
 USE_TOOLS+=	gmake perl:run
 USE_LANGUAGES=	c c++
 GNU_CONFIGURE=	yes
 CONFIGURE_HAS_MANDIR=	no
 #CONFIGURE_ENV+= CXXFLAGS="-fno-rtti -fno-exceptions -O"
-MAKE_FLAGS+=	manroot=${PREFIX}/${PKGMANDIR}
+MAKE_FLAGS+=	manroot=${DESTDIR}${PREFIX}/${PKGMANDIR}
+INSTALL_MAKE_FLAGS+=	bindir=${DESTDIR}${PREFIX}/bin \
+			datadir=${DESTDIR}${PREFIX}/share
 
 REPLACE_PERL=	grog/grog.pl
 REPLACE_PERL+=	afmtodit/afmtodit.pl

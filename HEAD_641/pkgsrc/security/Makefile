@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.350 2009/05/17 10:38:46 seb Exp $
+# $NetBSD: Makefile,v 1.354 2009/08/09 05:53:28 agc Exp $
 #
 
 COMMENT=	Security tools
@@ -255,6 +255,7 @@ SUBDIR+=	py-gnutls
 SUBDIR+=	py-lasso
 SUBDIR+=	py-m2crypto
 SUBDIR+=	py-mcrypt
+SUBDIR+=	py-openid
 SUBDIR+=	py-paramiko
 SUBDIR+=	py-prewikka
 SUBDIR+=	py-smbpasswd
@@ -296,6 +297,7 @@ SUBDIR+=	sshfp
 SUBDIR+=	ssldump
 SUBDIR+=	sslproxy
 SUBDIR+=	sslwrap
+SUBDIR+=	ssss
 SUBDIR+=	starttls
 SUBDIR+=	steghide
 SUBDIR+=	stegtunnel

@@ -2388,15 +2388,15 @@ $NetBSD$
  
 -{ echo "$as_me:$LINENO: checking for grep that handles long lines and -e" >&5
 -echo $ECHO_N "checking for grep that handles long lines and -e... $ECHO_C" >&6; }
-+{ $as_echo "$as_me:$LINENO: checking for grep that handles long lines and -e" >&5
-+$as_echo_n "checking for grep that handles long lines and -e... " >&6; }
- if test "${ac_cv_path_GREP+set}" = set; then
+-if test "${ac_cv_path_GREP+set}" = set; then
 -  echo $ECHO_N "(cached) $ECHO_C" >&6
 -else
 -  # Extract the first word of "grep ggrep" to use in msg output
 -if test -z "$GREP"; then
 -set dummy grep ggrep; ac_prog_name=$2
--if test "${ac_cv_path_GREP+set}" = set; then
++{ $as_echo "$as_me:$LINENO: checking for grep that handles long lines and -e" >&5
++$as_echo_n "checking for grep that handles long lines and -e... " >&6; }
+ if test "${ac_cv_path_GREP+set}" = set; then
 -  echo $ECHO_N "(cached) $ECHO_C" >&6
 +  $as_echo_n "(cached) " >&6
  else
@@ -5476,7 +5476,7 @@ $NetBSD$
  
    case $host_os in
    cygwin* | mingw* | pw32*)
-@@ -8678,6 +8816,17 @@ EOF
+@@ -8678,8 +8816,19 @@ EOF
        fi
        ;;
  
@@ -5492,8 +5492,11 @@ $NetBSD$
 +      ;;
 +
      netbsd*)
-       if echo __ELF__ | $CC -E - | grep __ELF__ >/dev/null; then
+-      if echo __ELF__ | $CC -E - | grep __ELF__ >/dev/null; then
++      if echo __ELF__ | $CC -E - | grep __ELF__ >/dev/null && echo __G95__ | $CC -cpp -E - | grep __G95__ >/dev/null; then
  	archive_cmds='$LD -Bshareable $libobjs $deplibs $linker_flags -o $lib'
+ 	wlarc=
+       else
 @@ -8743,6 +8892,11 @@ _LT_EOF
        hardcode_shlibpath_var=no
        ;;
@@ -7413,7 +7416,7 @@ $NetBSD$
  
    case $host_os in
    cygwin* | mingw* | pw32*)
-@@ -15338,6 +15689,17 @@ EOF
+@@ -15338,8 +15689,19 @@ EOF
        fi
        ;;
  
@@ -7429,8 +7432,11 @@ $NetBSD$
 +      ;;
 +
      netbsd*)
-       if echo __ELF__ | $CC -E - | grep __ELF__ >/dev/null; then
+-      if echo __ELF__ | $CC -E - | grep __ELF__ >/dev/null; then
++      if echo __ELF__ | $CC -E - | grep __ELF__ >/dev/null && echo __G95__ | $CC -cpp -E - | grep __G95__ >/dev/null; then
  	archive_cmds_F77='$LD -Bshareable $libobjs $deplibs $linker_flags -o $lib'
+ 	wlarc=
+       else
 @@ -15403,6 +15765,11 @@ _LT_EOF
        hardcode_shlibpath_var_F77=no
        ;;
@@ -8028,7 +8034,7 @@ $NetBSD$
  
    case $host_os in
    cygwin* | mingw* | pw32*)
-@@ -17943,6 +18386,17 @@ EOF
+@@ -17943,8 +18386,19 @@ EOF
        fi
        ;;
  
@@ -8044,8 +8050,11 @@ $NetBSD$
 +      ;;
 +
      netbsd*)
-       if echo __ELF__ | $CC -E - | grep __ELF__ >/dev/null; then
+-      if echo __ELF__ | $CC -E - | grep __ELF__ >/dev/null; then
++      if echo __ELF__ | $CC -E - | grep __ELF__ >/dev/null && echo __G95__ | $CC -cpp -E - | grep __G95__ >/dev/null; then
  	archive_cmds_GCJ='$LD -Bshareable $libobjs $deplibs $linker_flags -o $lib'
+ 	wlarc=
+       else
 @@ -18008,6 +18462,11 @@ _LT_EOF
        hardcode_shlibpath_var_GCJ=no
        ;;

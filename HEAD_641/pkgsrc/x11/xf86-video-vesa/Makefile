@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.6 2008/09/18 20:57:52 bjs Exp $
+# $NetBSD: Makefile,v 1.9 2009/08/09 23:00:39 wiz Exp $
 #
 
-DISTNAME=	xf86-video-vesa-2.0.0
-PKGREVISION=	1
+DISTNAME=	xf86-video-vesa-2.2.1
 CATEGORIES=	x11
 MASTER_SITES=	${MASTER_SITE_XORG:=driver/}
 EXTRACT_SUFX=	.tar.bz2

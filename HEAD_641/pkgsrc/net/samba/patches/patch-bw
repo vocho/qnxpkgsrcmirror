@@ -1,8 +1,8 @@
 $NetBSD: patch-bw,v 1.5 2007/12/21 17:32:27 drochner Exp $
 
---- include/config.h.in.orig	2009-01-19 06:00:10.000000000 -0500
+--- include/config.h.in.orig	2009-06-22 17:02:36.000000000 -0400
 +++ include/config.h.in
-@@ -321,9 +321,6 @@
+@@ -324,9 +324,6 @@
  /* Define to 1 if you have the `delproplist' function. */
  #undef HAVE_DELPROPLIST
  
@@ -12,7 +12,7 @@ $NetBSD: patch-bw,v 1.5 2007/12/21 17:32:27 drochner Exp $
  /* Whether the 'dev64_t' type is available */
  #undef HAVE_DEV64_T
  
-@@ -388,6 +385,9 @@
+@@ -391,6 +388,9 @@
  /* Whether the EncryptedData struct has a etype property */
  #undef HAVE_ETYPE_IN_ENCRYPTEDDATA
  
@@ -22,7 +22,7 @@ $NetBSD: patch-bw,v 1.5 2007/12/21 17:32:27 drochner Exp $
  /* Define to 1 if you have the <execinfo.h> header file. */
  #undef HAVE_EXECINFO_H
  
-@@ -661,6 +661,9 @@
+@@ -664,6 +664,9 @@
  /* Whether iface AIX is available */
  #undef HAVE_IFACE_AIX
  
@@ -32,7 +32,7 @@ $NetBSD: patch-bw,v 1.5 2007/12/21 17:32:27 drochner Exp $
  /* Whether iface ifconf is available */
  #undef HAVE_IFACE_IFCONF
  
-@@ -2798,6 +2801,9 @@
+@@ -2813,6 +2816,9 @@
  /* Define to `unsigned int' if <sys/types.h> does not define. */
  #undef uint_t
  

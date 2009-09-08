@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.22 2009/04/07 10:38:54 drochner Exp $
+# $NetBSD: Makefile,v 1.28 2009/08/13 09:32:14 apb Exp $
 #
 
-DISTNAME=		sound-juicer-2.26.0
+DISTNAME=		sound-juicer-2.26.1
+PKGREVISION=		3
 CATEGORIES=		audio
 MASTER_SITES=		http://www.burtonini.com/computing/ \
 			${MASTER_SITE_GNOME:=sources/sound-juicer/2.26/}
@@ -14,7 +15,6 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_PKGLOCALEDIR=	yes
 GNU_CONFIGURE=		yes
-USE_DIRS=		xdg-1.4 gnome2-1.6
 USE_TOOLS+=		gmake pkg-config intltool msgfmt
 USE_LANGUAGES=		c c++
 
@@ -29,8 +29,9 @@ DEPENDS+=	gst-plugins0.10-vorbis>=0.10.22:../../audio/gst-plugins0.10-vorbis
 DEPENDS+=	gst-plugins0.10-gio>=0.10.21:../../sysutils/gst-plugins0.10-gio
 
 .include "../../audio/libcanberra/buildlink3.mk"
-.include "../../audio/musicbrainz/buildlink3.mk"
+.include "../../audio/libmusicbrainz/buildlink3.mk"
 .include "../../audio/taglib/buildlink3.mk"
+.include "../../databases/db4/buildlink3.mk"
 .include "../../devel/GConf/schemas.mk"
 BUILDLINK_API_DEPENDS.glib2+=	glib2>=2.14.0
 .include "../../devel/glib2/buildlink3.mk"
@@ -44,7 +45,6 @@ BUILDLINK_API_DEPENDS.gstreamer0.10+=	gstreamer0.10>=0.10.15
 .include "../../multimedia/gst-plugins0.10-base/buildlink3.mk"
 .include "../../multimedia/gnome-media/buildlink3.mk"
 .include "../../sysutils/brasero/buildlink3.mk"
-.include "../../sysutils/hal/buildlink3.mk"
 .include "../../sysutils/dbus-glib/buildlink3.mk"
 .include "../../mk/omf-scrollkeeper.mk"
 .include "../../textproc/gnome-doc-utils/buildlink3.mk"

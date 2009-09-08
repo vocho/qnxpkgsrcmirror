@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.31 2009/05/19 08:59:27 wiz Exp $
+# $NetBSD: Makefile,v 1.34 2009/07/09 10:42:28 tron Exp $
 
-DISTNAME=	libtorrent-0.12.2
+DISTNAME=	libtorrent-0.12.4
 CATEGORIES=	net
 MASTER_SITES=	${HOMEPAGE:=downloads/}
 
@@ -17,6 +17,12 @@ USE_TOOLS+=		gmake pkg-config
 GNU_CONFIGURE=		yes
 CONFIGURE_ARGS+=	--disable-debug
 GCC_REQD+=		3.3
+
+.include "../../mk/bsd.prefs.mk"
+
+.if !empty(OPSYS:M*BSD) || ${OPSYS} == "DragonFly" || ${OPSYS} == "Darwin"
+CONFIGURE_ARGS+=	--with-kqueue
+.endif
 
 .include "../../mk/compiler.mk"
 

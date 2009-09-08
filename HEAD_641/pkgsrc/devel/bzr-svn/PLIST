@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.5 2009/05/16 15:21:04 epg Exp $
+@comment $NetBSD: PLIST,v 1.8 2009/07/02 06:10:30 epg Exp $
 ${PYSITELIB}/bzrlib/plugins/svn/__init__.py
 ${PYSITELIB}/bzrlib/plugins/svn/__init__.pyc
 ${PYSITELIB}/bzrlib/plugins/svn/__init__.pyo
@@ -17,6 +17,12 @@ ${PYSITELIB}/bzrlib/plugins/svn/branchprops.pyo
 ${PYSITELIB}/bzrlib/plugins/svn/cache/__init__.py
 ${PYSITELIB}/bzrlib/plugins/svn/cache/__init__.pyc
 ${PYSITELIB}/bzrlib/plugins/svn/cache/__init__.pyo
+${PYSITELIB}/bzrlib/plugins/svn/cache/sqlitecache.py
+${PYSITELIB}/bzrlib/plugins/svn/cache/sqlitecache.pyc
+${PYSITELIB}/bzrlib/plugins/svn/cache/sqlitecache.pyo
+${PYSITELIB}/bzrlib/plugins/svn/cache/tdbcache.py
+${PYSITELIB}/bzrlib/plugins/svn/cache/tdbcache.pyc
+${PYSITELIB}/bzrlib/plugins/svn/cache/tdbcache.pyo
 ${PYSITELIB}/bzrlib/plugins/svn/changes.py
 ${PYSITELIB}/bzrlib/plugins/svn/changes.pyc
 ${PYSITELIB}/bzrlib/plugins/svn/changes.pyo
@@ -41,18 +47,6 @@ ${PYSITELIB}/bzrlib/plugins/svn/fetch.pyo
 ${PYSITELIB}/bzrlib/plugins/svn/fileids.py
 ${PYSITELIB}/bzrlib/plugins/svn/fileids.pyc
 ${PYSITELIB}/bzrlib/plugins/svn/fileids.pyo
-${PYSITELIB}/bzrlib/plugins/svn/foreign/__init__.py
-${PYSITELIB}/bzrlib/plugins/svn/foreign/__init__.pyc
-${PYSITELIB}/bzrlib/plugins/svn/foreign/__init__.pyo
-${PYSITELIB}/bzrlib/plugins/svn/foreign/test_versionedfiles.py
-${PYSITELIB}/bzrlib/plugins/svn/foreign/test_versionedfiles.pyc
-${PYSITELIB}/bzrlib/plugins/svn/foreign/test_versionedfiles.pyo
-${PYSITELIB}/bzrlib/plugins/svn/foreign/upgrade.py
-${PYSITELIB}/bzrlib/plugins/svn/foreign/upgrade.pyc
-${PYSITELIB}/bzrlib/plugins/svn/foreign/upgrade.pyo
-${PYSITELIB}/bzrlib/plugins/svn/foreign/versionedfiles.py
-${PYSITELIB}/bzrlib/plugins/svn/foreign/versionedfiles.pyc
-${PYSITELIB}/bzrlib/plugins/svn/foreign/versionedfiles.pyo
 ${PYSITELIB}/bzrlib/plugins/svn/format.py
 ${PYSITELIB}/bzrlib/plugins/svn/format.pyc
 ${PYSITELIB}/bzrlib/plugins/svn/format.pyo
@@ -104,6 +98,9 @@ ${PYSITELIB}/bzrlib/plugins/svn/push.pyo
 ${PYSITELIB}/bzrlib/plugins/svn/pycompat.py
 ${PYSITELIB}/bzrlib/plugins/svn/pycompat.pyc
 ${PYSITELIB}/bzrlib/plugins/svn/pycompat.pyo
+${PYSITELIB}/bzrlib/plugins/svn/reconcile.py
+${PYSITELIB}/bzrlib/plugins/svn/reconcile.pyc
+${PYSITELIB}/bzrlib/plugins/svn/reconcile.pyo
 ${PYSITELIB}/bzrlib/plugins/svn/remote.py
 ${PYSITELIB}/bzrlib/plugins/svn/remote.pyc
 ${PYSITELIB}/bzrlib/plugins/svn/remote.pyo
@@ -158,6 +155,9 @@ ${PYSITELIB}/bzrlib/plugins/svn/tests/test_branch.pyo
 ${PYSITELIB}/bzrlib/plugins/svn/tests/test_branchprops.py
 ${PYSITELIB}/bzrlib/plugins/svn/tests/test_branchprops.pyc
 ${PYSITELIB}/bzrlib/plugins/svn/tests/test_branchprops.pyo
+${PYSITELIB}/bzrlib/plugins/svn/tests/test_cache.py
+${PYSITELIB}/bzrlib/plugins/svn/tests/test_cache.pyc
+${PYSITELIB}/bzrlib/plugins/svn/tests/test_cache.pyo
 ${PYSITELIB}/bzrlib/plugins/svn/tests/test_changes.py
 ${PYSITELIB}/bzrlib/plugins/svn/tests/test_changes.pyc
 ${PYSITELIB}/bzrlib/plugins/svn/tests/test_changes.pyo
@@ -206,9 +206,6 @@ ${PYSITELIB}/bzrlib/plugins/svn/tests/test_radir.pyo
 ${PYSITELIB}/bzrlib/plugins/svn/tests/test_repository.py
 ${PYSITELIB}/bzrlib/plugins/svn/tests/test_repository.pyc
 ${PYSITELIB}/bzrlib/plugins/svn/tests/test_repository.pyo
-${PYSITELIB}/bzrlib/plugins/svn/tests/test_revids.py
-${PYSITELIB}/bzrlib/plugins/svn/tests/test_revids.pyc
-${PYSITELIB}/bzrlib/plugins/svn/tests/test_revids.pyo
 ${PYSITELIB}/bzrlib/plugins/svn/tests/test_revmeta.py
 ${PYSITELIB}/bzrlib/plugins/svn/tests/test_revmeta.pyc
 ${PYSITELIB}/bzrlib/plugins/svn/tests/test_revmeta.pyo
@@ -239,9 +236,6 @@ ${PYSITELIB}/bzrlib/plugins/svn/transport.pyo
 ${PYSITELIB}/bzrlib/plugins/svn/tree.py
 ${PYSITELIB}/bzrlib/plugins/svn/tree.pyc
 ${PYSITELIB}/bzrlib/plugins/svn/tree.pyo
-${PYSITELIB}/bzrlib/plugins/svn/upgrade.py
-${PYSITELIB}/bzrlib/plugins/svn/upgrade.pyc
-${PYSITELIB}/bzrlib/plugins/svn/upgrade.pyo
 ${PYSITELIB}/bzrlib/plugins/svn/util.py
 ${PYSITELIB}/bzrlib/plugins/svn/util.pyc
 ${PYSITELIB}/bzrlib/plugins/svn/util.pyo
@@ -254,13 +248,3 @@ ${PYSITELIB}/bzrlib/plugins/svn/wiki.pyo
 ${PYSITELIB}/bzrlib/plugins/svn/workingtree.py
 ${PYSITELIB}/bzrlib/plugins/svn/workingtree.pyc
 ${PYSITELIB}/bzrlib/plugins/svn/workingtree.pyo
-@dirrm ${PYSITELIB}/bzrlib/plugins/svn/tests/mapping_implementations
-@dirrm ${PYSITELIB}/bzrlib/plugins/svn/tests/mapping3
-@dirrm ${PYSITELIB}/bzrlib/plugins/svn/tests
-@dirrm ${PYSITELIB}/bzrlib/plugins/svn/mapping3
-@dirrm ${PYSITELIB}/bzrlib/plugins/svn/layout
-@dirrm ${PYSITELIB}/bzrlib/plugins/svn/foreign
-@dirrm ${PYSITELIB}/bzrlib/plugins/svn/cache
-@dirrm ${PYSITELIB}/bzrlib/plugins/svn
-@comment in bzr: @dirrm ${PYSITELIB}/bzrlib/plugins
-@comment in bzr: @dirrm ${PYSITELIB}/bzrlib

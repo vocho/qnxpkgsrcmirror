@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.93 2009/05/26 18:34:50 drochner Exp $
+# $NetBSD: Makefile,v 1.95 2009/07/22 09:01:52 wiz Exp $
 #
 
-DISTNAME=		gnome-desktop-2.26.2
+DISTNAME=		gnome-desktop-2.26.3
 CATEGORIES=		x11 gnome
 MASTER_SITES=		${MASTER_SITE_GNOME:=sources/gnome-desktop/2.26/}
 EXTRACT_SUFX=		.tar.bz2
@@ -13,7 +13,6 @@ COMMENT=		Common GNOME2 desktop files and libgnome-desktop library
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=		yes
-USE_DIRS+=		gnome2-1.5
 USE_PKGLOCALEDIR=	yes
 USE_TOOLS+=		gmake intltool msgfmt perl:run pkg-config
 USE_TOOLS+=		automake autoconf aclocal autoreconf m4

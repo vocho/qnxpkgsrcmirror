@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.19 2009/03/26 23:12:22 wiz Exp $
+# $NetBSD: Makefile,v 1.21 2009/08/14 15:16:47 wiz Exp $
 #
 
 DISTNAME=	bmpx-0.40.14
@@ -15,7 +15,6 @@ DEPENDS+=	zip-[0-9]*:../../archivers/zip
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=		yes
-USE_DIRS+=		xdg-1.2 kde3-1.0
 USE_LANGUAGES=		c c++
 USE_TOOLS+=		gmake intltool msgfmt pkg-config
 USE_LIBTOOL=		yes
@@ -55,6 +54,9 @@ BUILDLINK_API_DEPENDS.gst-plugins0.10-base+=	gst-plugins0.10-base>=0.10.9
 .include "../../multimedia/gst-plugins0.10-base/buildlink3.mk"
 BUILDLINK_API_DEPENDS.gstreamer0.10+=		gstreamer0.10>=0.10.11
 .include "../../multimedia/gstreamer0.10/buildlink3.mk"
+BUILDLINK_API_DEPENDS.dbus+=	dbus>=0.93
+.include "../../sysutils/dbus/buildlink3.mk"
+.include "../../sysutils/dbus-glib/buildlink3.mk"
 .include "../../x11/libSM/buildlink3.mk"
 .include "../../x11/libX11/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

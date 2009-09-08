@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.9 2009/03/25 22:37:14 he Exp $
+# $NetBSD: Makefile,v 1.12 2009/08/12 02:31:22 obache Exp $
 
 DISTNAME=	open-vm-tools-2008.08.08-109361
 PKGNAME=	open-vm-tools-2008.08.08.109361
-PKGREVISION=	3
+PKGREVISION=	4
 CATEGORIES=	sysutils
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=open-vm-tools/}
 
@@ -12,11 +12,12 @@ COMMENT=	Open source VMware tools
 
 ONLY_FOR_PLATFORM=	NetBSD-*-i386 NetBSD-*-x86_64
 
+PKG_DESTDIR_SUPPORT=	user-destdir
+
 GNU_CONFIGURE=	yes
 USE_LANGUAGES+=	c c++
 USE_LIBTOOL=	yes
 USE_TOOLS+=	pkg-config
-USE_DIRS+=	xdg-1.4
 
 PLIST_SRC=	PLIST.common
 

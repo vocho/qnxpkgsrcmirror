@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.74 2009/05/20 00:58:26 wiz Exp $
+# $NetBSD: Makefile,v 1.76 2009/06/30 00:07:22 joerg Exp $
 
 DISTNAME=	heimdal-1.1
 PKGREVISION=	3
@@ -16,6 +16,8 @@ CONFLICTS+=	openafs-[0-9]*
 CONFLICTS+=	gss-[0-9]*
 
 PKG_DESTDIR_SUPPORT=	user-destdir
+
+MAKE_JOBS_SAFE=		no
 
 USE_LIBTOOL=		yes
 USE_TOOLS+=		bison flex
@@ -71,8 +73,7 @@ INFO_FILES=		yes
 #
 GENERATE_PLIST+=	\
 	( cd ${WRKSRC}/lib/roken && ${BUILD_MAKE_CMD} print-xheaders |	\
-	  ${XARGS} -n 1 | ${SED} -e "s,^,include/krb5/roken/," );	\
-	${ECHO} "@dirrm include/krb5";
+	  ${XARGS} -n 1 | ${SED} -e "s,^,include/krb5/roken/," );
 
 .include "../../devel/readline/buildlink3.mk"
 .include "../../security/openssl/buildlink3.mk"

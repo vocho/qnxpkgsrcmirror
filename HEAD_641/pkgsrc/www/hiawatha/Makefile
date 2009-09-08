@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.22 2009/05/13 07:53:49 hasso Exp $
+# $NetBSD: Makefile,v 1.24 2009/07/15 20:58:57 joerg Exp $
 #
 
 DISTNAME=	hiawatha
@@ -13,6 +13,8 @@ DISTFILES=	${DISTNAME}${EXTRACT_SUFX} \
 MAINTAINER=	jwise@NetBSD.org
 HOMEPAGE=	http://www.pault.com/pault/downloads/
 COMMENT=	Barebones HTTP server with XML and XSLT support (and more)
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 DEPENDS+=	saxon-[0-9]*:../../textproc/saxon
 
@@ -40,20 +42,18 @@ post-extract:
 		< ${FILESDIR}/hiawatha.cfg > ${WRKDIR}/hiawatha.cfg
 	${CHMOD} -R go-w ${WRKSRC}
 
+INSTALLATION_DIRS=	lib/java/hiawatha ${EGDIR}/WEBROOT/images
+
 do-install:
-	${INSTALL_DATA_DIR} ${PREFIX}/lib/java/hiawatha
-	${INSTALL_DATA} ${WRKSRC}/hiawatha.jar ${PREFIX}/lib/java/hiawatha
-	${INSTALL_DATA} ${WRKSRC}/xsls.jar ${PREFIX}/lib/java/hiawatha
-	${INSTALL_DATA_DIR} ${EGDIR}
-	${INSTALL_DATA} ${WRKSRC}/simple.cfg ${EGDIR}
-	${INSTALL_DATA} ${WRKSRC}/SeeAlso/pault_com.cfg ${EGDIR}
-	${INSTALL_DATA} ${WRKDIR}/hiawatha.cfg ${EGDIR}
-	cd ${WRKSRC} && pax -s '/^WEBROOT/pault.com/' -rw WEBROOT ${EGDIR}
-	${INSTALL_DATA_DIR} ${EGDIR}/WEBROOT
-	${INSTALL_DATA} ${FILESDIR}/index.xml ${EGDIR}/WEBROOT
-	${INSTALL_DATA} ${FILESDIR}/index.xsl ${EGDIR}/WEBROOT
-	${INSTALL_DATA_DIR} ${EGDIR}/WEBROOT/images
-	${INSTALL_DATA} ${DISTDIR}/sitedrivenby.gif ${EGDIR}/WEBROOT/images
+	${INSTALL_DATA} ${WRKSRC}/hiawatha.jar ${DESTDIR}${PREFIX}/lib/java/hiawatha
+	${INSTALL_DATA} ${WRKSRC}/xsls.jar ${DESTDIR}${PREFIX}/lib/java/hiawatha
+	${INSTALL_DATA} ${WRKSRC}/simple.cfg ${DESTDIR}${EGDIR}
+	${INSTALL_DATA} ${WRKSRC}/SeeAlso/pault_com.cfg ${DESTDIR}${EGDIR}
+	${INSTALL_DATA} ${WRKDIR}/hiawatha.cfg ${DESTDIR}${EGDIR}
+	cd ${WRKSRC} && pax -s '/^WEBROOT/pault.com/' -rw WEBROOT ${DESTDIR}${EGDIR}
+	${INSTALL_DATA} ${FILESDIR}/index.xml ${DESTDIR}${EGDIR}/WEBROOT
+	${INSTALL_DATA} ${FILESDIR}/index.xsl ${DESTDIR}${EGDIR}/WEBROOT
+	${INSTALL_DATA} ${DISTDIR}/sitedrivenby.gif ${DESTDIR}${EGDIR}/WEBROOT/images
 
 .include "../../mk/java-vm.mk"
 .include "../../mk/bsd.pkg.mk"

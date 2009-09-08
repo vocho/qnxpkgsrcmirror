@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.124 2008/11/18 18:25:50 chuck Exp $
+# $NetBSD: Makefile,v 1.125 2009/07/22 09:01:53 wiz Exp $
 
 DISTNAME=		gtk+-1.2.10
 PKGREVISION=		9
@@ -15,7 +15,6 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 
 .include "../../mk/bsd.prefs.mk"
 
-USE_DIRS+=		xdg-1.1
 USE_X11BASE=		yes
 USE_TOOLS+=		gmake msgfmt perl
 USE_PKGLOCALEDIR=	yes
@@ -53,7 +52,9 @@ pre-configure:
 	@cd ${WRKSRC};							\
 	files="gtk-config.in docs/gtk-config.1.in gdk.pc.in gtk+.pc.in gtk/gtkfeatures.h.in"; \
 	for file in $${files}; do					\
+		ls -l $${file};			\
 		${MV} -f $${file} $${file}.fixme;			\
+		ls -l $${file}.fixme;			\
 		${SED}	-e "s|@GTK_MAJOR_VERSION@|${GTK_MAJOR_VERSION}|g" \
 			-e "s|@GTK_MINOR_VERSION@|${GTK_MINOR_VERSION}|g" \
 			-e "s|@GTK_MICRO_VERSION@|${GTK_MICRO_VERSION}|g" \

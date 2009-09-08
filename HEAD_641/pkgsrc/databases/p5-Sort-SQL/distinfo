@@ -1,5 +1,5 @@
-$NetBSD: distinfo,v 1.1.1.1 2008/07/14 09:34:26 abs Exp $
+$NetBSD: distinfo,v 1.3 2009/06/15 22:01:16 sno Exp $
 
-SHA1 (Sort-SQL-0.03.tar.gz) = 772d332efe46a52da05361db54d396cd56d847a9
-RMD160 (Sort-SQL-0.03.tar.gz) = 6825dd4e6d71b14d86f8e124887d2ef9e0833ee2
-Size (Sort-SQL-0.03.tar.gz) = 2971 bytes
+SHA1 (Sort-SQL-0.06.tar.gz) = 2bc10974154cc64642f8ce35155531a94832e17f
+RMD160 (Sort-SQL-0.06.tar.gz) = a8641613f0c1f5717ce877133f90e19e584a6766
+Size (Sort-SQL-0.06.tar.gz) = 3234 bytes

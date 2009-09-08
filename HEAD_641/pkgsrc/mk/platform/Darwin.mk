@@ -1,4 +1,4 @@
-# $NetBSD: Darwin.mk,v 1.37 2009/05/06 10:28:01 tron Exp $
+# $NetBSD: Darwin.mk,v 1.40 2009/07/26 05:32:43 agc Exp $
 #
 # Variable definitions for the Darwin operating system.
 
@@ -38,6 +38,10 @@ IMAKEOPTS+=	-DInstallFlags=-c		# do not set user or group
 # Use the GNU cpp, not the OS X cpp, don't look in "/usr/local/include"
 # before "/usr/include".
 CPP_PRECOMP_FLAGS?=	-no-cpp-precomp	-isystem /usr/include
+# don't symlink to /usr/bin/gcc since the latter is a wrapper that tries
+# evoke the real (architecture-dependent) gcc binary in the same place
+# which fails when called via a symlink from a different directory
+COMPILER_USE_SYMLINKS?=	no
 .endif
 DEF_UMASK?=		0022
 DEFAULT_SERIAL_DEVICE?=	/dev/null
@@ -96,6 +100,8 @@ _USE_RPATH=		no	# don't add rpath to LDFLAGS
 _OPSYS_WHOLE_ARCHIVE_FLAG=	-Wl,--whole-archive
 _OPSYS_NO_WHOLE_ARCHIVE_FLAG=	-Wl,--no-whole-archive
 
+_OPSYS_CAN_CHECK_SHLIBS=	no # can't use readelf in check/bsd.check-vars.mk
+
 _STRIPFLAG_CC?=		${_INSTALL_UNSTRIPPED:D:U-Wl,-x} # cc(1) option to strip
 _STRIPFLAG_INSTALL?=	${_INSTALL_UNSTRIPPED:D:U-s}	# install(1) option to strip
 
@@ -113,7 +119,7 @@ CONFIGURE_ENV+=		ac_cv_func_poll=no
 .endif
 
 # Use "/bin/ksh" for buildlink3 wrapper script to improve build performance.
-.if exists(/bin/ksh)
+.if empty(OS_VERSION:M[0-8].*) && exists(/bin/ksh)
 WRAPPER_BIN_SH?=	/bin/ksh
 .endif
 

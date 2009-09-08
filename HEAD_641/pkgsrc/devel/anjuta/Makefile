@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.66 2008/12/04 17:32:09 wiz Exp $
+# $NetBSD: Makefile,v 1.69 2009/08/04 11:13:11 drochner Exp $
 
 DISTNAME=	anjuta-2.24.2
+PKGREVISION=	2
 CATEGORIES=	devel
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/anjuta/2.24/}
 #MASTER_SITES+=	${MASTER_SITE_SOURCEFORGE:=anjuta/}
@@ -21,7 +22,6 @@ DEPENDS+=	yelp>=2.4.2:../../misc/yelp
 
 BUILD_DEPENDS+=		p5-XML-Parser-[0-9]*:../../textproc/p5-XML-Parser
 
-USE_DIRS+=		gnome2-1.5
 USE_LANGUAGES=		c c++
 USE_LIBTOOL=		yes
 USE_PKGLOCALEDIR=	yes
@@ -31,6 +31,8 @@ GNU_CONFIGURE=		yes
 
 CONFIGURE_ARGS+=	--disable-plugin-valgrind
 CONFIGURE_ARGS+=	--enable-plugin-scintilla
+# pkgsrc devhelp is currently API incompatible
+CONFIGURE_ARGS+=	--disable-plugin-devhelp
 
 SUBST_CLASSES+=		unused
 SUBST_STAGE.unused=	pre-configure
@@ -61,7 +63,7 @@ GCONF_SCHEMAS+=	anjuta.schemas
 
 BUILDLINK_API_DEPENDS.gtk2+=	gtk2+>=2.12.0
 
-.include "../../devel/devhelp/buildlink3.mk"
+#.include "../../devel/devhelp/buildlink3.mk"
 .include "../../devel/gdl/buildlink3.mk"
 .include "../../devel/glade3/buildlink3.mk"
 .include "../../devel/gnome-build/buildlink3.mk"

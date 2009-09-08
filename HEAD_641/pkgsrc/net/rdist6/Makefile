@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.17 2007/03/15 20:43:24 joerg Exp $
+# $NetBSD: Makefile,v 1.19 2009/07/15 10:00:59 joerg Exp $
 #
 
 DISTNAME=	freerdist-0.92
@@ -20,12 +20,10 @@ MAKE_ENV+=	RDIST6_NAME=${RDIST6_NAME:Q}
 
 CONFLICTS=	rdist6-[0-9]*
 
+PKG_DESTDIR_SUPPORT=	user-destdir
+
 post-extract:
 	${CP} ${FILESDIR}/os-dragonfly.h ${WRKSRC}/config
 	${ECHO} LIB_SYS=-lcompat > ${WRKSRC}/config/mf.dragonfly
-
-post-install:
-	@strip ${PREFIX}/bin/${RDIST6_NAME}
-	@strip ${PREFIX}/bin/rdistd
 
 .include "../../mk/bsd.pkg.mk"

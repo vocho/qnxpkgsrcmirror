@@ -53,6 +53,7 @@ IMAKE_GAMEMAN_DIR=	${IMAKE_MAN_SOURCE_PATH}6
 IMAKE_MISCMAN_DIR=	${IMAKE_MAN_SOURCE_PATH}7
 IMAKE_MANINSTALL?=	maninstall catinstall
 
+_OPSYS_SYSTEM_RPATH?=	/lib:/usr/lib	# STANDARD_LIBRARY_PATH
 .if exists(/usr/include/netinet6)
 _OPSYS_HAS_INET6=	yes	# IPv6 is standard
 .else
@@ -79,6 +80,7 @@ _STRIPFLAG_INSTALL?=	${_INSTALL_UNSTRIPPED:D:U-s}	# install(1) option to strip
 DEFAULT_SERIAL_DEVICE?=	/dev/ser1
 SERIAL_DEVICES?=	/dev/ser1 \
 			/dev/ser2
+_OPSYS_CAN_CHECK_SHLIBS=	yes # use readelf in check/bsd.check-vars.mk
 
 # check for maximum command line length and set it in configure's environment,
 # to avoid a test required by the libtool script that takes forever.

@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST.linux-x86_64,v 1.6 2008/08/15 15:06:35 he Exp $
+@comment $NetBSD: PLIST.linux-x86_64,v 1.10 2009/07/24 00:12:16 obache Exp $
 bin/sun15-java
 bin/sun15-javaws
 bin/sun15-keytool
@@ -140,11 +140,15 @@ java/sun-1.5/lib/oblique-fonts/fonts.dir
 java/sun-1.5/lib/psfont.properties.ja.default
 java/sun-1.5/lib/psfontj2d.properties.default
 java/sun-1.5/lib/rt.jar
+${PLIST.jce}java/sun-1.5/lib/security/COPYRIGHT.html
+${PLIST.jce}java/sun-1.5/lib/security/README.txt
 java/sun-1.5/lib/security/US_export_policy.jar
 java/sun-1.5/lib/security/cacerts
 java/sun-1.5/lib/security/java.policy
 java/sun-1.5/lib/security/java.security.default
 java/sun-1.5/lib/security/local_policy.jar
+java/sun-1.5/lib/servicetag/jdk_header.png
+java/sun-1.5/lib/servicetag/registration.xml
 java/sun-1.5/lib/sound.properties.default
 java/sun-1.5/lib/zi/Africa/Abidjan
 java/sun-1.5/lib/zi/Africa/Accra
@@ -209,6 +213,7 @@ java/sun-1.5/lib/zi/America/Argentina/Jujuy
 java/sun-1.5/lib/zi/America/Argentina/La_Rioja
 java/sun-1.5/lib/zi/America/Argentina/Mendoza
 java/sun-1.5/lib/zi/America/Argentina/Rio_Gallegos
+java/sun-1.5/lib/zi/America/Argentina/Salta
 java/sun-1.5/lib/zi/America/Argentina/San_Juan
 java/sun-1.5/lib/zi/America/Argentina/San_Luis
 java/sun-1.5/lib/zi/America/Argentina/Tucuman
@@ -309,6 +314,7 @@ java/sun-1.5/lib/zi/America/Recife
 java/sun-1.5/lib/zi/America/Regina
 java/sun-1.5/lib/zi/America/Resolute
 java/sun-1.5/lib/zi/America/Rio_Branco
+java/sun-1.5/lib/zi/America/Santarem
 java/sun-1.5/lib/zi/America/Santiago
 java/sun-1.5/lib/zi/America/Santo_Domingo
 java/sun-1.5/lib/zi/America/Sao_Paulo
@@ -374,7 +380,7 @@ java/sun-1.5/lib/zi/Asia/Kabul
 java/sun-1.5/lib/zi/Asia/Kamchatka
 java/sun-1.5/lib/zi/Asia/Karachi
 java/sun-1.5/lib/zi/Asia/Kashgar
-java/sun-1.5/lib/zi/Asia/Katmandu
+java/sun-1.5/lib/zi/Asia/Kathmandu
 java/sun-1.5/lib/zi/Asia/Kolkata
 java/sun-1.5/lib/zi/Asia/Krasnoyarsk
 java/sun-1.5/lib/zi/Asia/Kuala_Lumpur
@@ -613,45 +619,4 @@ java/sun-1.5/man/man1/rmiregistry.1
 java/sun-1.5/man/man1/servertool.1
 java/sun-1.5/man/man1/tnameserv.1
 java/sun-1.5/man/man1/unpack200.1
-@dirrm java/sun-1.5/man/man1
-@dirrm java/sun-1.5/man/ja_JP.eucJP/man1
-@dirrm java/sun-1.5/man/ja_JP.eucJP
-@dirrm java/sun-1.5/man
-@dirrm java/sun-1.5/lib/zi/SystemV
-@dirrm java/sun-1.5/lib/zi/Pacific
-@dirrm java/sun-1.5/lib/zi/Indian
-@dirrm java/sun-1.5/lib/zi/Europe
-@dirrm java/sun-1.5/lib/zi/Etc
-@dirrm java/sun-1.5/lib/zi/Australia
-@dirrm java/sun-1.5/lib/zi/Atlantic
-@dirrm java/sun-1.5/lib/zi/Asia
-@dirrm java/sun-1.5/lib/zi/Antarctica
-@dirrm java/sun-1.5/lib/zi/America/North_Dakota
-@dirrm java/sun-1.5/lib/zi/America/Kentucky
-@dirrm java/sun-1.5/lib/zi/America/Indiana
-@dirrm java/sun-1.5/lib/zi/America/Argentina
-@dirrm java/sun-1.5/lib/zi/America
-@dirrm java/sun-1.5/lib/zi/Africa
-@dirrm java/sun-1.5/lib/zi
-@dirrm java/sun-1.5/lib/security
-@dirrm java/sun-1.5/lib/oblique-fonts
-@dirrm java/sun-1.5/lib/management
-@dirrm java/sun-1.5/lib/images/cursors
-@dirrm java/sun-1.5/lib/images
-@dirrm java/sun-1.5/lib/im
-@dirrm java/sun-1.5/lib/fonts
-@dirrm java/sun-1.5/lib/ext
-@dirrm java/sun-1.5/lib/cmm
-@dirrm java/sun-1.5/lib/audio
-@exec ${MKDIR} %D/java/sun-1.5/lib/applet
-@dirrm java/sun-1.5/lib/applet
-@dirrm java/sun-1.5/lib/amd64/xawt
-@dirrm java/sun-1.5/lib/amd64/server
-@dirrm java/sun-1.5/lib/amd64/native_threads
-@dirrm java/sun-1.5/lib/amd64/motif21
-@dirrm java/sun-1.5/lib/amd64/headless
-@dirrm java/sun-1.5/lib/amd64
-@dirrm java/sun-1.5/lib
-@dirrm java/sun-1.5/bin
-@dirrm java/sun-1.5/.systemPrefs
-@dirrm java/sun-1.5
+@pkgdir java/sun-1.5/lib/applet

@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.32 2009/05/23 08:12:08 tron Exp $
+# $NetBSD: Makefile,v 1.35 2009/07/21 20:39:41 tron Exp $
 
-DISTNAME=		wireshark-1.0.8
+DISTNAME=		wireshark-1.2.1
 CATEGORIES=		net
 MASTER_SITES=		http://www.wireshark.org/download/src/ \
 			${MASTER_SITE_SOURCEFORGE:=wireshark/}
@@ -20,6 +20,7 @@ USE_TOOLS+=		gmake perl pkg-config
 
 USE_LIBTOOL=		YES
 SHLIBTOOL_OVERRIDE=	# empty
+CHECK_PORTABILITY_SKIP+= packaging/macosx/*/*
 
 GNU_CONFIGURE=		YES
 CONFIGURE_ARGS+=	--enable-static=no

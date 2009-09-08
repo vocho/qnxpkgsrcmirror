@@ -1,19 +1,21 @@
-# $NetBSD: Makefile,v 1.8 2009/01/27 04:05:50 jmcneill Exp $
+# $NetBSD: Makefile,v 1.12 2009/07/23 12:36:56 wiz Exp $
 
 DISTNAME=	mediatomb-0.11.0
-PKGREVISION=	5
+PKGREVISION=	6
 CATEGORIES=	multimedia
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=mediatomb/}
 
 MAINTAINER=	agc@NetBSD.org
 HOMEPAGE=	http://mediatomb.cc/
 COMMENT=	UPnP MediaServer with a web user interface
+LICENSE=	gnu-gpl-v2
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=	yes
 
 USE_LANGUAGES+=	c c++
 USE_TOOLS+=	pkg-config automake autoconf autoreconf
-USE_DIRS+=	xdg-1.4
 
 RCD_SCRIPTS=	mediatomb
 
@@ -42,6 +44,8 @@ SUBST_FILES.config=	config.xml mediatomb.desktop
 SUBST_VARS.config=	MEDIATOMB_HOME PREFIX OPSYS
 SUBST_STAGE.config=	post-patch
 
+INSTALLATION_DIRS+=	share/applications share/examples/mediatomb
+
 post-extract:
 	${CP} ${FILESDIR}/config.xml.in ${WRKSRC}/config.xml
 	${CP} ${FILESDIR}/mediatomb.desktop.in ${WRKSRC}/mediatomb.desktop
@@ -50,9 +54,9 @@ pre-configure:
 	cd ${WRKSRC} && autoreconf -i
 
 post-install:
-	${INSTALL_DATA_DIR} ${EGDIR}
-	${INSTALL_DATA} ${WRKSRC}/config.xml ${EGDIR}/config.xml
-	${INSTALL_DATA} ${WRKSRC}/mediatomb.desktop ${PREFIX}/share/applications/mediatomb.desktop
+	${INSTALL_DATA} ${WRKSRC}/config.xml ${DESTDIR}${EGDIR}/config.xml
+	${INSTALL_DATA} ${WRKSRC}/mediatomb.desktop \
+		${DESTDIR}${PREFIX}/share/applications/mediatomb.desktop
 
 PREFER.bind=	pkgsrc	# we need the package for the lwres lib
 

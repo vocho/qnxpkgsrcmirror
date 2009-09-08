@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.21 2009/05/19 14:45:59 wiz Exp $
+# $NetBSD: Makefile,v 1.25 2009/07/22 09:01:53 wiz Exp $
 #
 
-DISTNAME=		gnome-terminal-2.26.2
+DISTNAME=		gnome-terminal-2.26.3.1
 CATEGORIES=		x11 gnome
 MASTER_SITES=		${MASTER_SITE_GNOME:=sources/gnome-terminal/2.26/}
 EXTRACT_SUFX=		.tar.bz2
@@ -15,7 +15,6 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 CONFLICTS=		gnome-core-[0-9]* gnome2-terminal-[0-9]*
 
 GNU_CONFIGURE=		YES
-USE_DIRS+=		gnome2-1.5
 USE_PKGLOCALEDIR=	YES
 USE_TOOLS+=		gmake intltool msgfmt perl pkg-config
 USE_LIBTOOL=		YES

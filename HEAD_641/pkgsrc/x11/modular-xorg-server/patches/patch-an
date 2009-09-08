@@ -1,42 +1,16 @@
 $NetBSD$
 
---- configure.ac.orig	2008-06-11 10:26:34.000000000 -0400
-+++ configure.ac
-@@ -305,6 +305,8 @@ case $host_cpu in
- 		*openbsd*)	AC_DEFINE(USE_I386_IOPL) 
- 				SYS_LIBS=-li386
- 				;;
-+		*nto-qnx*)	SYS_LIBS=-ls5ipc
-+				;;
- 	esac
-         ;;
-   powerpc*)
-@@ -1045,6 +1047,9 @@ case $host_os in
-        openbsd*)
-        LD_EXPORT_SYMBOLS_FLAG="-Wl,--export-dynamic"
-        ;;
-+       nto-qnx*)
-+       LD_EXPORT_SYMBOLS_FLAG="-Wl,-E"
-+       ;;
- esac
- AC_SUBST([LD_EXPORT_SYMBOLS_FLAG])
+--- os/utils.c.orig	2009-07-07 13:48:58.000000000 -0400
++++ os/utils.c
+@@ -253,7 +253,11 @@ OsSignal(sig, handler)
  
-@@ -1394,6 +1399,10 @@ return 0;}
- 			;;
- 		esac
- 		;;
-+          nto-qnx*)
-+		XORG_OS="qnx"
-+		XORG_OS_SUBDIR="nto"
-+		;;
- 	  openbsd*)
- 	  	XORG_OS="openbsd"
- 		XORG_OS_SUBDIR="bsd"
-@@ -2049,6 +2058,7 @@ hw/xfree86/os-support/bsd/Makefile
- hw/xfree86/os-support/bus/Makefile
- hw/xfree86/os-support/hurd/Makefile
- hw/xfree86/os-support/misc/Makefile
-+hw/xfree86/os-support/nto/Makefile
- hw/xfree86/os-support/linux/Makefile
- hw/xfree86/os-support/lynxos/Makefile
- hw/xfree86/os-support/sco/Makefile
+ static Bool StillLocking = FALSE;
+ static char LockFile[PATH_MAX];
++#ifndef __QNXNTO__
+ static Bool nolock = FALSE;
++#else
++static Bool nolock = TRUE;
++#endif
+ 
+ /*
+  * LockServer --

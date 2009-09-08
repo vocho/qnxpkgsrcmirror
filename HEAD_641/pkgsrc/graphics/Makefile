@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.524 2009/05/14 13:55:54 he Exp $
+# $NetBSD: Makefile,v 1.527 2009/08/03 23:52:11 minskim Exp $
 #
 
 COMMENT=	Graphics tools and libraries
@@ -94,6 +94,7 @@ SUBDIR+=	exif
 SUBDIR+=	exifprobe
 SUBDIR+=	exiftags
 SUBDIR+=	exiv2
+SUBDIR+=	exiv2-organize
 SUBDIR+=	f-spot
 SUBDIR+=	f4l
 SUBDIR+=	fbm
@@ -203,6 +204,7 @@ SUBDIR+=	kphotoalbum
 SUBDIR+=	kphotobook
 SUBDIR+=	kphotools
 SUBDIR+=	lcms
+SUBDIR+=	lensfun
 SUBDIR+=	lib3ds
 SUBDIR+=	libart
 SUBDIR+=	libcaca
@@ -361,6 +363,8 @@ SUBDIR+=	skencil
 SUBDIR+=	snx101view
 SUBDIR+=	spcaview
 SUBDIR+=	tesseract
+SUBDIR+=	tex-a2ping
+SUBDIR+=	tex-a2ping-doc
 SUBDIR+=	tgif
 SUBDIR+=	tiff
 SUBDIR+=	tkpiechart

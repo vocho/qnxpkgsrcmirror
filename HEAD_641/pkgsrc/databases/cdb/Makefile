@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.19 2006/01/07 06:45:45 schmonz Exp $
+# $NetBSD: Makefile,v 1.21 2009/07/23 12:43:18 schmonz Exp $
 
 DISTNAME=		cdb-0.75
 CATEGORIES=		databases
@@ -7,18 +7,25 @@ MASTER_SITES=		http://cr.yp.to/cdb/
 MAINTAINER=		schmonz@NetBSD.org
 HOMEPAGE=		http://cr.yp.to/cdb.html
 COMMENT=		Creates and reads constant databases
+LICENSE=		public-domain
+
+PKG_INSTALLATION_TYPES=	overwrite pkgviews
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 CONFLICTS+=		tinycdb-[0-9]*
 
 DJB_RESTRICTED=		YES
 
-PKG_INSTALLATION_TYPES=	overwrite pkgviews
-
 INSTALLATION_DIRS=	bin include lib
 
-post-install:
-	${INSTALL_DATA} ${WRKSRC}/cdb.h ${PREFIX}/include
-	${INSTALL_DATA} ${WRKSRC}/cdb.a ${PREFIX}/lib/libcdb.a
+do-install:
+	for prog in cdbdump cdbget cdbmake cdbstats cdbtest; do \
+	${INSTALL_PROGRAM} ${WRKSRC}/$$prog ${DESTDIR}${PREFIX}/bin; \
+	done
+	${INSTALL_SCRIPT} ${WRKSRC}/cdbmake-12 ${DESTDIR}${PREFIX}/bin
+	${INSTALL_SCRIPT} ${WRKSRC}/cdbmake-sv ${DESTDIR}${PREFIX}/bin
+	${INSTALL_DATA} ${WRKSRC}/cdb.h ${DESTDIR}${PREFIX}/include
+	${INSTALL_DATA} ${WRKSRC}/cdb.a ${DESTDIR}${PREFIX}/lib/libcdb.a
 
 .include "../../mk/djbware.mk"
 .include "../../mk/bsd.pkg.mk"

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.38 2008/10/19 19:19:02 he Exp $
+# $NetBSD: Makefile,v 1.40 2009/08/03 15:18:03 joerg Exp $
 #
 
 DISTNAME=	Apache-Gallery-0.9.1
@@ -11,6 +11,9 @@ MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Apache/}
 MAINTAINER=	kim@tac.nyc.ny.us
 HOMEPAGE=	http://apachegallery.dk/
 COMMENT=	Perl5/Apache module for handling image directories
+LICENSE=	artistic
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 DEPENDS+=	p5-CGI>=2.93:../../www/p5-CGI
 DEPENDS+=	p5-URI>=1.23:../../www/p5-URI
@@ -85,22 +88,18 @@ post-build:
 	    done; \
 	done
 
+INSTALLATION_DIRS=	${AG_SHAREDIR}/htdocs ${AG_SHAREDIR}/templates \
+			${AG_DOCDIR} ${AG_EGDIR}
+
 post-install:
-	${INSTALL_DATA_DIR} ${AG_SHAREDIR}
-	@set +x; \
-	for i in htdocs templates; \
-	do \
-	    ${INSTALL_DATA_DIR} ${AG_SHAREDIR}/$$i; \
-	    cd ${WRKSRC}/$$i && pax -rw . ${AG_SHAREDIR}/$$i; \
-	done; \
-	${INSTALL_DATA_DIR} ${AG_DOCDIR}; \
-	for i in Changes INSTALL LICENSE README UPGRADE; \
-	do \
-	    ${INSTALL_DATA} ${WRKSRC}/$$i ${AG_DOCDIR}; \
-	done
-	${CHOWN} -R ${SHAREOWN}:${SHAREGRP} ${AG_SHAREDIR}; \
-	${INSTALL_DATA_DIR} ${AG_EGDIR}
-	${INSTALL_DATA} ${WRKSRC}/${AG}.conf ${AG_EGDIR}
+	cd ${WRKSRC}/htdocs && pax -rw . ${DESTDIR}${AG_SHAREDIR}/htdocs
+	cd ${WRKSRC}/templates && pax -rw . ${DESTDIR}${AG_SHAREDIR}/templates
+	${INSTALL_DATA} ${WRKSRC}/Changes ${DESTDIR}${AG_DOCDIR}
+	${INSTALL_DATA} ${WRKSRC}/INSTALL ${DESTDIR}${AG_DOCDIR}
+	${INSTALL_DATA} ${WRKSRC}/LICENSE ${DESTDIR}${AG_DOCDIR}
+	${INSTALL_DATA} ${WRKSRC}/README ${DESTDIR}${AG_DOCDIR}
+	${INSTALL_DATA} ${WRKSRC}/UPGRADE ${DESTDIR}${AG_DOCDIR}
+	${INSTALL_DATA} ${WRKSRC}/${AG}.conf ${DESTDIR}${AG_EGDIR}
 
 .include "../../graphics/imlib2/buildlink3.mk"
 .include "../../lang/perl5/module.mk"

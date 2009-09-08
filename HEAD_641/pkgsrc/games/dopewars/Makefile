@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.38 2008/01/19 09:16:21 wiz Exp $
+# $NetBSD: Makefile,v 1.40 2009/07/22 09:01:27 wiz Exp $
 
 DISTNAME=	dopewars-1.5.12
 CATEGORIES=	games
@@ -8,7 +8,8 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://dopewars.sourceforge.net/
 COMMENT=	Make a fortune dealing drugs on the streets of New York
 
-USE_DIRS+=		xdg-1.1
+PKG_DESTDIR_SUPPORT=	destdir
+
 USE_LIBTOOL=		yes
 USE_PKGLOCALEDIR=	yes
 USE_TOOLS+=		gmake pkg-config

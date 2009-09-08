@@ -5360,7 +5360,7 @@ $NetBSD$
  
    case $host_os in
    cygwin* | mingw* | pw32*)
-@@ -8545,6 +8690,17 @@ EOF
+@@ -8545,8 +8690,19 @@ EOF
        fi
        ;;
  
@@ -5376,8 +5376,11 @@ $NetBSD$
 +      ;;
 +
      netbsd*)
-       if echo __ELF__ | $CC -E - | grep __ELF__ >/dev/null; then
+-      if echo __ELF__ | $CC -E - | grep __ELF__ >/dev/null; then
++      if echo __ELF__ | $CC -E - | grep __ELF__ >/dev/null && echo __G95__ | $CC -cpp -E - | grep __G95__ >/dev/null; then
  	archive_cmds='$LD -Bshareable $libobjs $deplibs $linker_flags -o $lib'
+ 	wlarc=
+       else
 @@ -8610,6 +8766,11 @@ _LT_EOF
        hardcode_shlibpath_var=no
        ;;
@@ -7297,7 +7300,7 @@ $NetBSD$
  
    case $host_os in
    cygwin* | mingw* | pw32*)
-@@ -15205,6 +15563,17 @@ EOF
+@@ -15205,8 +15563,19 @@ EOF
        fi
        ;;
  
@@ -7313,8 +7316,11 @@ $NetBSD$
 +      ;;
 +
      netbsd*)
-       if echo __ELF__ | $CC -E - | grep __ELF__ >/dev/null; then
+-      if echo __ELF__ | $CC -E - | grep __ELF__ >/dev/null; then
++      if echo __ELF__ | $CC -E - | grep __ELF__ >/dev/null && echo __G95__ | $CC -cpp -E - | grep __G95__ >/dev/null; then
  	archive_cmds_F77='$LD -Bshareable $libobjs $deplibs $linker_flags -o $lib'
+ 	wlarc=
+       else
 @@ -15270,6 +15639,11 @@ _LT_EOF
        hardcode_shlibpath_var_F77=no
        ;;
@@ -7912,7 +7918,7 @@ $NetBSD$
  
    case $host_os in
    cygwin* | mingw* | pw32*)
-@@ -17810,6 +18260,17 @@ EOF
+@@ -17810,8 +18260,19 @@ EOF
        fi
        ;;
  
@@ -7928,8 +7934,11 @@ $NetBSD$
 +      ;;
 +
      netbsd*)
-       if echo __ELF__ | $CC -E - | grep __ELF__ >/dev/null; then
+-      if echo __ELF__ | $CC -E - | grep __ELF__ >/dev/null; then
++      if echo __ELF__ | $CC -E - | grep __ELF__ >/dev/null && echo __G95__ | $CC -cpp -E - | grep __G95__ >/dev/null; then
  	archive_cmds_GCJ='$LD -Bshareable $libobjs $deplibs $linker_flags -o $lib'
+ 	wlarc=
+       else
 @@ -17875,6 +18336,11 @@ _LT_EOF
        hardcode_shlibpath_var_GCJ=no
        ;;

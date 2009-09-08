@@ -3,6 +3,16 @@ abook			Enable abook support.
 acl			Enable POSIX ACL support.
 ads			Enable Windows's Active Directory support.
 agg			Enable agg support.
+amule-alc		Build aMule LinkCreator GUI version. 
+amule-alcc		Build aMule LinkCreator for console.
+amule-cas		Build C aMule Statistics.
+amule-cmd		Build aMule command line client.
+amule-daemon		Build aMule daemon version.
+amule-ed2k		Bulid aMule ed2k links handler.
+amule-gui		Build aMule remote GUI.
+amule-monolithic	Build monolithic aMule app.
+amule-webserver		Build aMule WebServer.
+amule-wxcas		Build aMule GUI Statistics.
 anope-dbencryption	Enable database encryption.
 anthy			Use Anthy as Japanese conversion program.
 anthy-2ch-dict		Include the 2ch dictionary.
@@ -23,6 +33,7 @@ avahi-howl		Enable howl compatibility in avahi.
 bacula-static		Enable building of statically linked versions of the Bacula daemons
 batch			Enable batch mode support.
 bdb			Enable Berkeley DB support.
+bind-dig-sigchase	Enable dig(1) option +sigchase for DNSSEC signature chasing.
 bind-xml-statistics-server	Enable building in the statistics server in bind95 and later.
 bittorrent		Enable bittorrent support
 blender-exppython	Enable the Experimental Python support.
@@ -208,6 +219,7 @@ lablgtk			Use lablgtk.
 lablgtk1		Use lablgtk1 (GTK1).
 lame			Use the lame encoder to create MP3 files.
 lang-af			Add Afrikaans language support.
+lang-be			Add Belarusian language support.
 lang-bg			Add Bulgarian language support.
 lang-ca			Add Catalan language support.
 lang-cs			Add Czech language support.
@@ -271,6 +283,7 @@ lynx			Use and enable support for the lynx browser.
 lzw			Enable LZW (De)compression support
 m17nlib			Enable the m17n library support.
 m68060-optimized	Optimize for m68060 (only).
+mac			Enable Monkey's Audio Codec support.
 mad			Enable usage of the mad library to play MP3 files.
 maintainer-zts		Enable the Zend Thread Safety option for PHP
 mex			Enable matlab mex support (Linux and Solaris only).
@@ -284,6 +297,7 @@ modplug			Use for decoding mod-like music formats.
 motif			Enable motif support.
 mozilla			Use mozilla as gecko rendering engine.
 mozilla-jemalloc	Enable building with Mozilla'a jemalloc
+mozilla-jit		Enable nanojit javascript acceleration
 mozilla-single-profile	Enable single profiles on mozilla browsers
 mpcdec			Enable the portable Musepack decoder library.
 mpeg4ip			Enable mpeg4ip support.
@@ -293,6 +307,7 @@ mplayer-real		Enable usage of Real codecs.
 mplayer-runtime-cpudetection	Enable CPU detection at run time.
 mplayer-win32		Enable usage of Win32 DLLs (codecs).
 mrtg-snmpv3		Enable SNMPv3 support.
+mstats			Enable memory statistics
 mutt-compressed-mbox    Enable compressed mailbox support in mutt.
 mutt-hcache		Enable header caching in mutt.
 mutt-sidebar		Enable the mutt mailbox sidebar patch.
@@ -301,6 +316,7 @@ mysql			Enable MySQL support.
 nas			Enable usage of the Network Audio System.
 ncurses			Enable ncurses support.
 ncursesw		Enable wide character ncurses support.
+nextstep		Enable Cocoa or GNUstep support.
 nfdump-ftconv		Build the flow-tools to nfdump converter
 nfdump-nfprofile	Build the netflow profiler
 nfdump-sflow		Build sflow collector sfcpad
@@ -352,6 +368,7 @@ qpopper-servermode	Enable server mode.
 qt			Enable support for QT.
 quartz			Enable Quartz support on Mac OS X.	
 rsaref			Use RSAREF library.
+ruby			Enable Ruby support.
 ruby-build-ri-db	Build and install database for Ruby's ri utility.
 samplerate		Enable libsamplerate support.
 sane			Enable support for SANE scanners.
@@ -411,8 +428,8 @@ ssl			Enable SSL support.
 starttls		Enable TLS support.
 streamtuner-local	Enable local metadata support
 streamtuner-xiph	Enable the Xiph plugin	
-sun-jre-jce		Use unlimited strength cryptography extension.
 suhosin			Enable suhosin security enhancements for PHP.
+sun-jre-jce		Use unlimited strength cryptography extension.
 svg			Enable SVG support.
 svn			Enable subversion support
 syncdir			Force synchronous link() and related syscalls.
@@ -428,6 +445,7 @@ trn-nntpclnt		Use nntpclnt as NNTP client.
 typolight-liveupdate	Allow using TYPOlight Live Update service.
 ucspi-ssl-perl		Enable Perl support in ucspi-ssl.
 ucspi-tcp-nodefaultrbl	Remove the (nonexistent) default RBL from rblsmtpd.
+uds			Enable support for Unix domain sockets.
 uim			Enable UIM support.
 uim-fep			Enable UIM FEP support.
 unixodbc		Enable ODBC support via unixODBC.
@@ -444,6 +462,7 @@ unrealircd-showlistmodes	Show the modes a channel has set in the /list output.
 unrealircd-shunnotices	Notify a user when they are no longer shunned.
 unrealircd-topicisnuhost	/topic command to show the nick!user@host of the person who set the topic.
 unrealircd-ziplinks	Compress data before transmitting it between servers.
+upnp			Enable support for UPnP.
 uucp			Enable support for uucp.
 vflib			Enable support for Japanese vector font library.
 via-padlock		Enable support for the VIA PadLock Security Engine.
@@ -466,9 +485,9 @@ x11			Enable X11 support.
 xapian-flint-backend	Enable "Flint" format Xapian database support.
 xapian-quartz-backend	Enable "Quartz" format Xapian database support.
 xaw			Enable Xaw support.
-xim			Enable X Input Method support.
 xblast-mini		Use a 480x392 window instead a 960x784 window in xblast
 xft2			Enable Xft support.
+xim			Enable X Input Method support.
 xlockmore-allow-root	Allow root to get access.
 xlockmore-dpms		Use DPMS.
 xml			Enable XML support.

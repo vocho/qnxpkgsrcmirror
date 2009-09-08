@@ -87,6 +87,15 @@ post-extract:
 
 post-install:
 	${LN} -sf gsc ${DESTDIR}${PREFIX}/bin/gs
+	${RM} -f ${DESTDIR}${PREFIX}/share/ghostscript/8.64/LICENSE
+	${RM} -f ${DESTDIR}${PREFIX}/share/ghostscript/8.64/Makefile
+	${RM} -f ${DESTDIR}${PREFIX}/share/ghostscript/8.64/Makefile.in
+	${RM} -f ${DESTDIR}${PREFIX}/share/ghostscript/8.64/autogen.sh
+	${RM} -f ${DESTDIR}${PREFIX}/share/ghostscript/8.64/config.log
+	${RM} -f ${DESTDIR}${PREFIX}/share/ghostscript/8.64/config.status
+	${RM} -f ${DESTDIR}${PREFIX}/share/ghostscript/8.64/configure
+	${RM} -f ${DESTDIR}${PREFIX}/share/ghostscript/8.64/configure.ac
+	${RM} -f ${DESTDIR}${PREFIX}/share/ghostscript/8.64/configure.orig
 
 .include "options.mk"
 

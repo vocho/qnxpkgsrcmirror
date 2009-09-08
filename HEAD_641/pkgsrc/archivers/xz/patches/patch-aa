@@ -1,0 +1,20 @@
+$NetBSD$
+
+--- src/xz/process.h.orig	2009-02-04 16:07:58.000000000 -0500
++++ src/xz/process.h
+@@ -17,6 +17,9 @@
+ //
+ ///////////////////////////////////////////////////////////////////////////////
+ 
++#ifndef _XZ_PROCESS_H
++#define _XZ_PROCESS_H
++
+ enum operation_mode {
+ 	MODE_COMPRESS,
+ 	MODE_DECOMPRESS,
+@@ -63,3 +66,5 @@ extern void coder_set_compression_settin
+ extern void process_init(void);
+ 
+ extern void process_file(const char *filename);
++
++#endif

@@ -1,16 +1,19 @@
-# $NetBSD: Makefile,v 1.4 2009/03/09 13:37:08 hasso Exp $
+# $NetBSD: Makefile,v 1.6 2009/08/05 00:06:07 wiz Exp $
 #
 
 DISTNAME=	pspvc-install-0.3
 PSPVCVER=	pspvc-0.3
 PKGNAME=	${PSPVCVER}
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	multimedia
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=pspvc/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://pspvc.sf.net/
 COMMENT=	PSP video converter
+
+PKG_DESTDIR_SUPPORT=	user-destdir
+INSTALLATION_DIRS=	share/applications share/pspvc/bin
 
 USE_LANGUAGES=	c
 USE_TOOLS=	pkg-config gmake msgfmt
@@ -21,9 +24,10 @@ post-extract:
 	${TAR} -C ${WRKDIR} -zxf ${WRKDIR}/${DISTNAME}/archives/${PSPVCVER}.tar.gz
 
 post-install:
-	${INSTALL_DATA} ${WRKDIR}/${DISTNAME}/archives/pspvc.desktop ${PREFIX}/share/applications
-	${INSTALL_DATA_DIR} ${PREFIX}/share/pspvc/bin
-	${LN} -s ${PREFIX}/bin/ffmpeg ${PREFIX}/share/pspvc/bin/ffmpeg
+	${INSTALL_DATA} ${WRKDIR}/${DISTNAME}/archives/pspvc.desktop \
+		${DESTDIR}${PREFIX}/share/applications
+	${LN} -s ${PREFIX}/bin/ffmpeg \
+		${DESTDIR}${PREFIX}/share/pspvc/bin/ffmpeg
 
 .include "../../multimedia/ffmpeg/buildlink3.mk"
 .include "../../x11/gtk2/buildlink3.mk"

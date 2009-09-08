@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.16 2009/02/24 20:41:45 wiz Exp $
+@comment $NetBSD: PLIST,v 1.19 2009/08/01 19:13:15 dholland Exp $
 bin/addftinfo
 bin/afmtodit
 bin/${GNU_PREFIX}eqn
@@ -445,7 +445,7 @@ share/groff/${PKGVERSION}/tmac/latin5.tmac
 share/groff/${PKGVERSION}/tmac/latin9.tmac
 share/groff/${PKGVERSION}/tmac/lbp.tmac
 share/groff/${PKGVERSION}/tmac/lj4.tmac
-share/groff/${PKGVERSION}/tmac/${GNU_PREFIX_TMAC}m.tmac
+share/groff/${PKGVERSION}/tmac/${GNU_PREFIX_TMAC_WRAPPER}m.tmac
 share/groff/${PKGVERSION}/tmac/man.tmac
 share/groff/${PKGVERSION}/tmac/mandoc.tmac
 share/groff/${PKGVERSION}/tmac/mdoc.tmac
@@ -454,7 +454,7 @@ share/groff/${PKGVERSION}/tmac/mdoc/doc-ditroff
 share/groff/${PKGVERSION}/tmac/mdoc/doc-nroff
 share/groff/${PKGVERSION}/tmac/mdoc/doc-syms
 share/groff/${PKGVERSION}/tmac/me.tmac
-share/groff/${PKGVERSION}/tmac/${GNU_PREFIX_TMAC}mm.tmac
+share/groff/${PKGVERSION}/tmac/${GNU_PREFIX_TMAC_WRAPPER}mm.tmac
 share/groff/${PKGVERSION}/tmac/mm/0.MT
 share/groff/${PKGVERSION}/tmac/mm/4.MT
 share/groff/${PKGVERSION}/tmac/mm/5.MT
@@ -462,10 +462,10 @@ share/groff/${PKGVERSION}/tmac/mm/locale
 share/groff/${PKGVERSION}/tmac/mm/ms.cov
 share/groff/${PKGVERSION}/tmac/mm/se_locale
 share/groff/${PKGVERSION}/tmac/mm/se_ms.cov
-share/groff/${PKGVERSION}/tmac/${GNU_PREFIX_TMAC}mmse.tmac
+share/groff/${PKGVERSION}/tmac/${GNU_PREFIX_TMAC_WRAPPER}mmse.tmac
 share/groff/${PKGVERSION}/tmac/mom.tmac
 share/groff/${PKGVERSION}/tmac/ms.tmac
-share/groff/${PKGVERSION}/tmac/${GNU_PREFIX_TMAC}mse.tmac
+share/groff/${PKGVERSION}/tmac/${GNU_PREFIX_TMAC_WRAPPER}mse.tmac
 share/groff/${PKGVERSION}/tmac/om.tmac
 share/groff/${PKGVERSION}/tmac/papersize.tmac
 share/groff/${PKGVERSION}/tmac/pdfmark.tmac
@@ -474,7 +474,7 @@ share/groff/${PKGVERSION}/tmac/ps.tmac
 share/groff/${PKGVERSION}/tmac/psatk.tmac
 share/groff/${PKGVERSION}/tmac/psold.tmac
 share/groff/${PKGVERSION}/tmac/pspic.tmac
-share/groff/${PKGVERSION}/tmac/${GNU_PREFIX_AN_TMAC}s.tmac
+share/groff/${PKGVERSION}/tmac/${GNU_PREFIX_S_TMAC}s.tmac
 share/groff/${PKGVERSION}/tmac/safer.tmac
 share/groff/${PKGVERSION}/tmac/spdf.tmac
 share/groff/${PKGVERSION}/tmac/sv.tmac
@@ -489,36 +489,5 @@ share/groff/${PKGVERSION}/tmac/www.tmac
 share/groff/current
 share/groff/site-tmac/man.local
 share/groff/site-tmac/mdoc.local
-@dirrm share/groff/site-tmac
-@exec ${MKDIR} %D/share/groff/site-font
-@dirrm share/groff/site-font
-@dirrm share/groff/${PKGVERSION}/tmac/mm
-@dirrm share/groff/${PKGVERSION}/tmac/mdoc
-@dirrm share/groff/${PKGVERSION}/tmac
-@dirrm share/groff/${PKGVERSION}/oldfont/devps
-@dirrm share/groff/${PKGVERSION}/oldfont
-@dirrm share/groff/${PKGVERSION}/font/devutf8
-@dirrm share/groff/${PKGVERSION}/font/devps/generate
-@dirrm share/groff/${PKGVERSION}/font/devps
-@dirrm share/groff/${PKGVERSION}/font/devlj4/generate
-@dirrm share/groff/${PKGVERSION}/font/devlj4
-@dirrm share/groff/${PKGVERSION}/font/devlbp
-@dirrm share/groff/${PKGVERSION}/font/devlatin1
-@dirrm share/groff/${PKGVERSION}/font/devhtml
-@dirrm share/groff/${PKGVERSION}/font/devdvi/generate
-@dirrm share/groff/${PKGVERSION}/font/devdvi
-@dirrm share/groff/${PKGVERSION}/font/devascii
-@dirrm share/groff/${PKGVERSION}/font
-@dirrm share/groff/${PKGVERSION}
-@dirrm share/groff
-@dirrm share/doc/groff/${PKGVERSION}/html/mom
-@dirrm share/doc/groff/${PKGVERSION}/html
-@dirrm share/doc/groff/${PKGVERSION}/examples/mom
-@dirrm share/doc/groff/${PKGVERSION}/examples/hdtbl
-@dirrm share/doc/groff/${PKGVERSION}/examples
-@dirrm share/doc/groff/${PKGVERSION}
-@dirrm share/doc/groff
-@exec ${MKDIR} %D/lib/groff/site-tmac
-@dirrm lib/groff/site-tmac
-@dirrm lib/groff/groffer
-@dirrm lib/groff
+@pkgdir share/groff/site-font
+@pkgdir lib/groff/site-tmac

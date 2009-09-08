@@ -1,6 +1,6 @@
 #! /bin/sh
 
-# $NetBSD: bootstrap,v 1.144 2009/04/23 00:15:53 minskim Exp $
+# $NetBSD: bootstrap,v 1.150 2009/08/01 20:19:37 dholland Exp $
 #
 #
 # Copyright (c) 2001-2002 Alistair G. Crooks.  All rights reserved.
@@ -284,7 +284,8 @@ mkdir_p_early()
 {
 	[ -d "$1" ] && return 0	
 	mkdir -p "$1" 2> /dev/null && return 0
-	mkdir_p_early `basename "$1"`
+	parent=`dirname "$1"`
+	mkdir_p_early "$parent"
 	if [ ! -d "$1" ] && mkdir "$1"; then
 		echo_msg "mkdir $1 exited with status $?"
 		die "aborted."
@@ -337,6 +338,11 @@ if [ "$dash_echo_test" = "@" ]; then
 	  echo "ERROR: Please select another shell by setting the environment"
 	  echo "ERROR: variable SH."
 	} 1>&2
+	exit 1;
+fi
+
+if [ -n "$PKG_PATH" ]; then
+	echo "ERROR: Please unset PKG_PATH before running bootstrap." 1>&2
 	exit 1;
 fi
 
@@ -502,6 +508,9 @@ HPUX)
 IRIX*)
 	if [ -d "/usr/freeware/bin" ]; then
 		overpath="/usr/freeware/bin:$overpath"
+	fi
+	if [ -d "/usr/bsd" ]; then
+		overpath="/usr/bsd:$overpath"
 	fi
 	if [ -d "/usr/bsd/bin" ]; then
 		overpath="/usr/bsd/bin:$overpath"

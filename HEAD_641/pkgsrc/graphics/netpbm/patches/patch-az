@@ -1,11 +1,15 @@
 $NetBSD$
 
---- converter/other/cameratopam/util.c.orig	2005-04-11 12:13:07.000000000 -0400
-+++ converter/other/cameratopam/util.c
-@@ -1,4 +1,6 @@
-+#ifndef __QNXNTO__
- #define _XOPEN_SOURCE   /* Make sure unistd.h contains swab() */
-+#endif
- #include <unistd.h>
- #include <stdio.h>
+--- pm_config.in.h.orig	2006-06-17 15:58:23.000000000 -0400
++++ pm_config.in.h
+@@ -53,6 +53,10 @@
+ #define POSIX_IS_IMPLIED
+ #endif
  
++#ifdef __QNXNTO__
++typedef unsigned int uint;
++#endif
++
+ 
+ /* CONFIGURE: If you have an X11-style rgb color names file, define its
+ ** path here.  This is used by PPM to parse color names into rgb values.

@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.16 2009/05/13 01:00:49 dsainty Exp $
+# $NetBSD: Makefile,v 1.18 2009/08/05 17:14:47 drochner Exp $
 #
 
 DISTNAME=	planner-0.14.4
+PKGREVISION=	1
 CATEGORIES=	time x11 gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/planner/0.14/}
 EXTRACT_SUFX=	.tar.bz2
@@ -14,7 +15,6 @@ LICENSE=	gnu-gpl-v2 # OR any later version
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=		yes
-USE_DIRS+=		gnome2-1.5
 USE_PKGLOCALEDIR=	yes
 USE_TOOLS+=		gmake intltool msgfmt pkg-config
 USE_LIBTOOL=		yes

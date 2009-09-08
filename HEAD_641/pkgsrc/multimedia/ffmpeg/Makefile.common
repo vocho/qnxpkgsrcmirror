@@ -1,0 +1,57 @@
+# $NetBSD: Makefile.common,v 1.3 2009/06/18 16:36:50 agc Exp $
+# used by multimedia/ffplay/Makefile
+
+DISTNAME=	ffmpeg-${DISTVERSION:S/-//g}
+CATEGORIES=	multimedia
+MASTER_SITES=	ftp://ftp.netbsd.org/pub/NetBSD/misc/ahoka/dist/
+EXTRACT_SUFX=	.tar.bz2
+
+DISTVERSION=	2009-06-11
+PREV_PKGPATH=	multimedia/ffmpeg-devel
+WRKSRC=		${WRKDIR}/ffmpeg-export-${DISTVERSION}
+PATCHDIR=	${.CURDIR}/../../multimedia/ffmpeg/patches
+
+HAS_CONFIGURE=	YES
+USE_LIBTOOL=	YES
+USE_TOOLS+=	gmake texi2html pod2man
+
+BUILD_DEPENDS+=	yasm>=0.7.2:../../devel/yasm
+
+REPLACE_PERL+=	doc/texi2pod.pl
+
+SUBST_CLASSES+=		conf
+SUBST_STAGE.conf=	post-patch
+SUBST_FILES.conf=	ffserver.c
+SUBST_SED.conf=		-e 's,/etc/ffserver.conf,${PKG_SYSCONFDIR}/ffserver.conf,g'
+SUBST_MESSAGE.conf=	Fixing configuration path.
+
+PLIST_SRC+=	${PKGDIR}/PLIST
+
+MAKE_ENV+=	EXTRA_LIBS=${LIBGETOPT:Q}
+# LOCALBASE=${LOCALBASE:Q}
+
+# Let's not put garbage into /tmp
+CONFIGURE_ENV+=		TMPDIR=${WRKSRC:Q}/tmp
+
+CONFIGURE_ARGS+=	--mandir=${PREFIX}/${PKGMANDIR} \
+			--cc=${CC:Q} \
+			--prefix=${PREFIX:Q} \
+			--disable-debug \
+			--disable-stripping \
+			--enable-shared \
+			--enable-runtime-cpudetect \
+			--enable-pthreads \
+			--enable-gpl
+
+# No posix_memalign() in NetBSD 4.0 and earlier
+#
+.if !empty(MACHINE_PLATFORM:MNetBSD-[1-4].*-*)
+CONFIGURE_ARGS+=	--enable-memalign-hack
+.endif
+
+pre-configure:
+	mkdir ${WRKSRC}/tmp
+
+.include "../../mk/pthread.buildlink3.mk"
+.include "../../devel/libgetopt/buildlink3.mk"
+.include "../../mk/bsd.pkg.mk"

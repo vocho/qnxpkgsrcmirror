@@ -1,17 +1,17 @@
-$NetBSD$
+$NetBSD: patch-ac,v 1.8 2009/08/05 11:41:12 hasso Exp $
 
---- sendlib.c.orig	2009-01-03 18:27:11.000000000 -0500
-+++ sendlib.c
-@@ -1465,7 +1465,12 @@ char *mutt_make_date (char *s, size_t le
-   struct tm *l = localtime (&t);
-   time_t tz = mutt_local_tz (t);
+--- config.h.in.orig	2009-08-02 09:34:54 +0300
++++ config.h.in	2009-08-02 09:36:37 +0300
+@@ -442,6 +442,12 @@
+ /* Define to 1 if you have the `__argz_stringify' function. */
+ #undef HAVE___ARGZ_STRINGIFY
  
-+#ifndef __QNXNTO__
-   tz /= 60;
-+#else
-+  /* Our time_t is unsigned. */
-+  tz = (int)tz / 60;
-+#endif
- 
-   snprintf (s, len,  "Date: %s, %d %s %d %02d:%02d:%02d %+03d%02d\n",
- 	    Weekdays[l->tm_wday], l->tm_mday, Months[l->tm_mon],
++/* Define to 1 if you have the `mvchgat' function. */
++#undef HAVE_MVCHGAT
++
++/* Define to 1 if you have the `mvwchgat' function. */
++#undef HAVE_MVWCHGAT
++
+ /* Is mail spooled to the user's home directory? If defined, MAILPATH should
+    be set to the filename of the spool mailbox relative the the home
+    directory. use: configure --with-homespool=FILE */

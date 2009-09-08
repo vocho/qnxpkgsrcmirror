@@ -25,6 +25,7 @@
  * authorization from the copyright holder(s) and author(s).
  */
 
+#if 0 
 #ifdef HAVE_XORG_CONFIG_H
 #include <xorg-config.h>
 #endif
@@ -185,3 +186,4 @@ xf86OSMouseInit(int flags)
     p->PreInit = ntoMousePreInit;
     return p;
 }
+#endif
