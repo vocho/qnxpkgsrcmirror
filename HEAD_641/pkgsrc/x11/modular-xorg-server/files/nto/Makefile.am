@@ -1,9 +1,15 @@
-noinst_LTLIBRARIES = libbsd.la
+noinst_LTLIBRARIES = libnto.la
 
-# FIXME: Add USB mouse support?
-
-# FIXME: APM support.
+# APM support.
+if BSD_KQUEUE_APM
+APM_SOURCES = $(srcdir)/bsd_kqueue_apm.c
+else 
+if BSD_APM
+APM_SOURCES = $(srcdir)/bsd_apm.c
+else
 APM_SOURCES = $(srcdir)/../shared/pm_noop.c
+endif
+endif
 
 if FREEBSD_KLDLOAD
 KMOD_SOURCES = bsd_kmod.c
@@ -53,14 +59,13 @@ AM_CFLAGS = -DUSESTDRES $(XORG_CFLAGS) $(DIX_CFLAGS)
 
 INCLUDES = $(XORG_INCS)
 
-libbsd_la_SOURCES = \
+libnto_la_SOURCES = \
 	$(srcdir)/../shared/posix_tty.c \
 	$(srcdir)/../shared/sigio.c \
 	$(srcdir)/../shared/vidmem.c \
 	bsd_VTsw.c \
-	bsd_init.c \
-	bsd_mouse.c \
-	bsd_bell.c \
+	nto_init.c \
+	nto_bell.c \
 	$(ARCH_SOURCES) \
 	$(AGP_SOURCES) \
 	$(APM_SOURCES) \
@@ -71,16 +76,4 @@ libbsd_la_SOURCES = \
 
 # FIXME: Add these files to the build as needed
 EXTRA_DIST = \
-	bsd_apm.c \
-	bsd_jstk.c \
-	bsd_kqueue_apm.c \
-	bsdResource.c \
-	memrange.h \
-	libusb/data.c \
-	libusb/descr.c \
-	libusb/parse.c \
-	libusb/usage.c \
-	libusb/usb.3 \
-	libusb/usb.h \
-	libusb/usb_hid_usages \
-	libusb/usbvar.h
+	memrange.h

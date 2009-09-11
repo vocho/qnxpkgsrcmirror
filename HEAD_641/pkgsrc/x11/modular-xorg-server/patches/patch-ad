@@ -1,0 +1,14 @@
+$NetBSD$
+
+--- hw/xfree86/common/xf86Events.c.orig	2009-07-07 17:48:58.000000000 +0000
++++ hw/xfree86/common/xf86Events.c
+@@ -53,6 +53,9 @@
+ #include <xorg-config.h>
+ #endif
+ 
++#ifdef __QNXNTO__
++#include <errno.h>
++#endif
+ #include <X11/X.h>
+ #include <X11/Xpoll.h>
+ #include <X11/Xproto.h>
