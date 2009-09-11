@@ -2,9 +2,19 @@ $NetBSD: patch-sb,v 1.2 2009/06/07 11:23:47 wiz Exp $
 
 Temporary disable Sbus suport.
 
---- hw/xfree86/common/xf86Configure.c.orig	2009-03-21 01:57:50 +0200
-+++ hw/xfree86/common/xf86Configure.c	2009-05-19 14:36:57 +0300
-@@ -115,7 +115,7 @@ xf86AddBusDeviceToConfigure(const char *
+--- hw/xfree86/common/xf86Configure.c.orig	2009-07-07 17:48:58.000000000 +0000
++++ hw/xfree86/common/xf86Configure.c
+@@ -53,6 +53,9 @@
+ #include "xf86Bus.h"
+ #include "xf86Sbus.h"
+ #endif
++#if defined(__QNXNTO__)
++#include <errno.h>
++#endif
+ #include "globals.h"
+ 
+ typedef struct _DevToConfig {
+@@ -115,7 +118,7 @@ xf86AddBusDeviceToConfigure(const char *
  		return NULL;
  	isPrimary = xf86IsPrimaryPci(pVideo);
  	break;

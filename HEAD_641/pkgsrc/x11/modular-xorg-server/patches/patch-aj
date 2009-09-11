@@ -9,7 +9,7 @@ date: 2009/02/19 20:02:02;  author: macallan;  state: Exp;  lines: +104 -0
 Actually use scanline image writes to upload images if available
 ----------------------------
 
---- hw/xfree86/xaa/xaaFillRect.c.orig	2008-06-06 12:03:10.000000000 +0200
+--- hw/xfree86/xaa/xaaFillRect.c.orig	2009-07-07 17:48:58.000000000 +0000
 +++ hw/xfree86/xaa/xaaFillRect.c
 @@ -779,6 +779,110 @@ XAAFillCacheExpandRects(
      with reading past the edge of the pattern otherwise */

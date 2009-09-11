@@ -1,7 +1,7 @@
 $NetBSD: patch-ab,v 1.8 2009/06/07 11:23:47 wiz Exp $
 
---- hw/xfree86/xorgconf.cpp.orig	2009-05-19 13:58:11 +0300
-+++ hw/xfree86/xorgconf.cpp	2009-05-19 14:08:12 +0300
+--- hw/xfree86/xorgconf.cpp.orig	2009-07-07 17:48:58.000000000 +0000
++++ hw/xfree86/xorgconf.cpp
 @@ -602,3 +602,10 @@ Section "ServerLayout"
      InputDevice "Keyboard1" "CoreKeyboard"
  EndSection

@@ -1,7 +1,7 @@
 $NetBSD: patch-sa,v 1.2 2009/06/07 11:23:47 wiz Exp $
 
---- hw/xfree86/common/compiler.h.orig	2009-05-19 14:25:30 +0300
-+++ hw/xfree86/common/compiler.h	2009-05-19 14:26:04 +0300
+--- hw/xfree86/common/compiler.h.orig	2009-07-07 17:48:58.000000000 +0000
++++ hw/xfree86/common/compiler.h
 @@ -531,7 +531,7 @@ inl(unsigned short port)
     return ret;
  }

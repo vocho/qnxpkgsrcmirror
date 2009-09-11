@@ -27,11 +27,19 @@
 #include <xorg-config.h>
 #endif
 
+#if defined (SYSCONS_SUPPORT)
+#include <sys/kbio.h>
+#endif
+
 #include <termios.h>
 
 #include "xf86.h"
 #include "xf86Priv.h"
 #include "xf86_OSlib.h"
+
+#ifdef WSCONS_SUPPORT
+#define KBD_FD(i) ((i).kbdFd != -1 ? (i).kbdFd : (i).consoleFd)
+#endif
 
 _X_EXPORT void
 xf86OSRingBell(int loudness, int pitch, int duration)
