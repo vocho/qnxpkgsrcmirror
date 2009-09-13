@@ -32,7 +32,7 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
-subdir = hw/xfree86/os-support/bsd
+subdir = hw/xfree86/os-support/nto
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/acinclude.m4 \
@@ -49,8 +49,8 @@ CONFIG_HEADER = $(top_builddir)/include/do-not-use-config.h \
 	$(top_builddir)/include/kdrive-config.h
 CONFIG_CLEAN_FILES =
 LTLIBRARIES = $(noinst_LTLIBRARIES)
-libbsd_la_LIBADD =
-am__libbsd_la_SOURCES_DIST = $(srcdir)/../shared/posix_tty.c \
+libnto_la_LIBADD =
+am__libnto_la_SOURCES_DIST = $(srcdir)/../shared/posix_tty.c \
 	$(srcdir)/../shared/sigio.c $(srcdir)/../shared/vidmem.c \
 	bsd_VTsw.c nto_init.c nto_bell.c alpha_video.c bsd_ev56.c \
 	bsd_axp.c $(srcdir)/../shared/xf86Axp.c arm_video.c \
@@ -75,10 +75,10 @@ am__libbsd_la_SOURCES_DIST = $(srcdir)/../shared/posix_tty.c \
 @FREEBSD_KLDLOAD_FALSE@am__objects_4 = kmod_noop.lo
 @FREEBSD_KLDLOAD_TRUE@am__objects_4 = bsd_kmod.lo
 am__objects_5 = stdResource.lo
-am_libbsd_la_OBJECTS = posix_tty.lo sigio.lo vidmem.lo bsd_VTsw.lo \
+am_libnto_la_OBJECTS = posix_tty.lo sigio.lo vidmem.lo bsd_VTsw.lo \
 	nto_init.lo nto_bell.lo $(am__objects_1) $(am__objects_2) \
 	$(am__objects_3) $(am__objects_4) $(am__objects_5)
-libbsd_la_OBJECTS = $(am_libbsd_la_OBJECTS)
+libnto_la_OBJECTS = $(am_libnto_la_OBJECTS)
 DEFAULT_INCLUDES = -I.@am__isrc@ -I$(top_builddir)/include
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
@@ -88,8 +88,8 @@ CCLD = $(CC)
 LINK = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
 	--mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) \
 	$(LDFLAGS) -o $@
-SOURCES = $(libbsd_la_SOURCES)
-DIST_SOURCES = $(am__libbsd_la_SOURCES_DIST)
+SOURCES = $(libnto_la_SOURCES)
+DIST_SOURCES = $(am__libnto_la_SOURCES_DIST)
 ETAGS = etags
 CTAGS = ctags
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
@@ -370,7 +370,7 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-noinst_LTLIBRARIES = libbsd.la
+noinst_LTLIBRARIES = libnto.la
 @BSD_APM_FALSE@@BSD_KQUEUE_APM_FALSE@APM_SOURCES = $(srcdir)/../shared/pm_noop.c
 @BSD_APM_TRUE@@BSD_KQUEUE_APM_FALSE@APM_SOURCES = $(srcdir)/bsd_apm.c
 
@@ -404,7 +404,7 @@ RES_SOURCES = $(srcdir)/../shared/stdResource.c
 # FIXME: NetBSD Aperture defines (configure.ac)
 AM_CFLAGS = -DUSESTDRES $(XORG_CFLAGS) $(DIX_CFLAGS)
 INCLUDES = $(XORG_INCS)
-libbsd_la_SOURCES = \
+libnto_la_SOURCES = \
 	$(srcdir)/../shared/posix_tty.c \
 	$(srcdir)/../shared/sigio.c \
 	$(srcdir)/../shared/vidmem.c \
@@ -437,9 +437,9 @@ $(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.am  $(am__confi
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign  hw/xfree86/os-support/bsd/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign  hw/xfree86/os-support/nto/Makefile'; \
 	cd $(top_srcdir) && \
-	  $(AUTOMAKE) --foreign  hw/xfree86/os-support/bsd/Makefile
+	  $(AUTOMAKE) --foreign  hw/xfree86/os-support/nto/Makefile
 .PRECIOUS: Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
@@ -466,8 +466,8 @@ clean-noinstLTLIBRARIES:
 	  echo "rm -f \"$${dir}/so_locations\""; \
 	  rm -f "$${dir}/so_locations"; \
 	done
-libbsd.la: $(libbsd_la_OBJECTS) $(libbsd_la_DEPENDENCIES) 
-	$(LINK)  $(libbsd_la_OBJECTS) $(libbsd_la_LIBADD) $(LIBS)
+libnto.la: $(libnto_la_OBJECTS) $(libnto_la_DEPENDENCIES) 
+	$(LINK)  $(libnto_la_OBJECTS) $(libnto_la_LIBADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
