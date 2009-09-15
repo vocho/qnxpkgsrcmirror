@@ -1,6 +1,6 @@
 $NetBSD: patch-ac,v 1.5 2009/05/25 20:11:05 drochner Exp $
 
---- src/netbsd_pci.c.orig	2008-12-20 04:21:22.000000000 +0100
+--- src/netbsd_pci.c.orig	2008-12-19 22:21:22.000000000 -0500
 +++ src/netbsd_pci.c
 @@ -20,12 +20,15 @@
  #include <sys/mman.h>
