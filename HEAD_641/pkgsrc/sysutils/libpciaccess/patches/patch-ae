@@ -1,0 +1,13 @@
+$NetBSD$
+
+--- src/common_init.c.orig	2008-10-15 18:35:53.000000000 -0400
++++ src/common_init.c
+@@ -62,6 +62,8 @@ pci_system_init( void )
+     err = pci_system_openbsd_create();
+ #elif defined(__sun)
+     err = pci_system_solx_devfs_create();
++#elif defined(__QNXNTO__)
++    err = pci_system_nto_create();
+ #endif
+ 
+     return err;
