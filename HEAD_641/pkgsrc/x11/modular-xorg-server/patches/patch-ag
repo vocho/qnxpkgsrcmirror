@@ -1,6 +1,6 @@
 $NetBSD$
 
---- hw/xfree86/os-support/xf86_OSlib.h.orig	2008-11-14 21:27:05.000000000 +0000
+--- hw/xfree86/os-support/xf86_OSlib.h.orig	2008-11-14 16:27:05.000000000 -0500
 +++ hw/xfree86/os-support/xf86_OSlib.h
 @@ -399,6 +399,28 @@
  /* __FreeBSD_kernel__ || __NetBSD__ || __OpenBSD__ || __bsdi__ */
