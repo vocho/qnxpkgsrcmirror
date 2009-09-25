@@ -61,4 +61,8 @@ post-extract:
 	${CP} ${FILESDIR}/strip_fopt.sh ${WRKSRC}/ && \
 	${CHMOD} +x ${WRKSRC}/strip_fopt.sh
 
+.if ${OPSYS} == "QNX"
+.include "../../devel/libgetopt/buildlink3.mk"
+.endif
+
 .include "../../mk/bsd.pkg.mk"

@@ -50,6 +50,8 @@ int	optind = 1;		/* index into parent argv vector */
 int	optopt = '?';		/* character checked for validity */
 int	optreset;		/* reset getopt */
 char    *optarg;		/* argument associated with option */
+#elif defined(__QNXNTO__)
+int	optreset;		/* reset getopt */
 #endif
 
 #ifdef __weak_alias
