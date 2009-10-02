@@ -14,6 +14,7 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 
 LIBS+=			-lnet -lpcap
 LIBS.SunOS+=		-lsocket -lnsl
+LIBS.QNX+=		-lsocket
 INSTALLATION_DIRS=	bin ${PKGMANDIR}/man8
 CPPFLAGS+=		-I${LOCALBASE}/include/libnet11
 
