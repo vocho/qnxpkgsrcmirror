@@ -53,5 +53,7 @@ post-install:
 
 	${INSTALL_SCRIPT} ${WRKSRC}/libnet-config \
 		${PREFIX}/bin/libnet11-config
-
+.include "../../mk/bsd.prefs.mk"
+LIBS.QNX+= -lsocket
 .include "../../mk/bsd.pkg.mk"
+
