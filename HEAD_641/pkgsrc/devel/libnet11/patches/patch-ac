@@ -1,0 +1,13 @@
+$NetBSD$
+
+--- include/libnet/libnet-types.h.orig	2004-01-03 15:31:00.000000000 -0500
++++ include/libnet/libnet-types.h
+@@ -33,7 +33,7 @@
+ #define __LIBNET_TYPES_H
+ 
+ /* Solaris has messed up POSIX nomenclature for these */
+-#if (__sun__ && __svr4__)
++#if (__sun__ && __svr4__) || defined(__QNXNTO__)
+ typedef uint8_t  u_int8_t;
+ typedef uint16_t u_int16_t;
+ typedef uint32_t u_int32_t;
