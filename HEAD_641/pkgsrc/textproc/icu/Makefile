@@ -32,7 +32,7 @@ CONFIGURE_ARGS+=	--disable-threads
 
 .include "../../mk/compiler.mk"
 
-.if ${OPSYS} == "FreeBSD" || ${OPSYS} == "NetBSD" || ${OPSYS} == "OpenBSD" || ${OPSYS} == "DragonFly"
+.if ${OPSYS} == "FreeBSD" || ${OPSYS} == "NetBSD" || ${OPSYS} == "OpenBSD" || ${OPSYS} == "DragonFly" || ${OPSYS} == "QNX"
 PLIST_SUBST+=		MH_NAME=mh-bsd-gcc
 .elif ${OPSYS} == "Linux"
 PLIST_SUBST+=		MH_NAME=mh-linux
@@ -60,6 +60,9 @@ INSTALL_UNSTRIPPED=     yes
 SO_EXT=.so
 SO_SUFFIX=
 .endif
+
+CFLAGS.QNX+= -U__STRICT_ANSI__ # It's not 1999
+
 PLIST_SUBST+=	SO_SUFFIX=${SO_SUFFIX} SO_EXT=${SO_EXT}
 
 .include "../../mk/bsd.pkg.mk"
