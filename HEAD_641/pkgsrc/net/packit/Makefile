@@ -19,4 +19,8 @@ CONFIGURE_ARGS+=	--with-libpcap-libraries=${BUILDLINK_PREFIX.libpcap}/lib
 
 .include "../../devel/libnet11/buildlink3.mk"
 .include "../../net/libpcap/buildlink3.mk"
+.include "../../mk/bsd.prefs.mk"
+CFLAGS.QNX+= -Du_int8_t=uint8_t -Du_int16_t=uint16_t -Du_int32_t=uint32_t -Du_int64_t=uint64_t
+LIBS.QNX+= -lsocket
 .include "../../mk/bsd.pkg.mk"
+

@@ -54,6 +54,9 @@ post-install:
 	${INSTALL_SCRIPT} ${WRKSRC}/libnet-config \
 		${PREFIX}/bin/libnet11-config
 .include "../../mk/bsd.prefs.mk"
-LIBS.QNX+= -lsocket
+# It looks like u_int* are typedef'd in include/libnet/libnet-types.h
+# for solaris.  This gets this package building but causes others that
+# have libnet as a dependency grief.
+CFLAGS.QNX+= -Du_int8_t=uint8_t -Du_int16_t=uint16_t -Du_int32_t=uint32_t -Du_int64_t=uint64_t
 .include "../../mk/bsd.pkg.mk"
 
