@@ -1,4 +1,4 @@
-<!-- $NetBSD: ftp-layout.xml,v 1.11 2007/10/24 09:14:42 rillig Exp $ -->
+<!-- $NetBSD: ftp-layout.xml,v 1.13 2009/10/11 20:50:48 rillig Exp $ -->
 
 <appendix id="ftp-layout">
 <title>Directory layout of the pkgsrc FTP server</title>
@@ -13,17 +13,6 @@
 	are. This directory contains some subdirectories, which are
 	explained below.</para>
 
-<sect1 id="ftp-bootstrap">
-<title><filename>bootstrap-pkgsrc</filename>: Bootstrap kits</title>
-
-	<para>This directory used to contain binary packages of the
-	package management tools for various platforms. For those
-	package collections that need them, they are now stored near the
-	binary packages, so you should look <link
-	linkend="ftp-packages">in the <filename>packages</filename>
-	directory</link>.</para>
-
-</sect1>
 <sect1 id="ftp-distfiles">
 <title><filename>distfiles</filename>: The distributed source files</title>
 
@@ -33,12 +22,6 @@
 	and are used when the distributed files have names that don't
 	explicitly contain a version number or are otherwise too generic
 	(for example <filename>release.tar.gz</filename>).</para>
-
-</sect1>
-<sect1 id="ftp-iso">
-<title><filename>iso</filename>: Currently empty</title>
-
-	<para>This directory is currently not in use.</para>
 
 </sect1>
 <sect1 id="ftp-misc">
@@ -79,7 +62,7 @@
 	<literal>4.99.x</literal>.</para></listitem>
 
 	<listitem><para><varname>TAG</varname> is either
-	<literal>200<replaceable>x</replaceable>Q<replaceable>y</replaceable></literal>
+	<literal>20<replaceable>xx</replaceable>Q<replaceable>y</replaceable></literal>
 	for a stable branch, or <literal>head</literal> for packages
 	built from the HEAD branch. The latter should only be used when
 	the packages are updated on a regular basis. Otherwise the date
@@ -115,7 +98,7 @@
 </sect1>
 <sect1 id="ftp-source">
 <title><filename>current</filename>,
-<filename>pkgsrc-200<replaceable>x</replaceable>Q<replaceable>y</replaceable></filename>:
+<filename>pkgsrc-20<replaceable>xx</replaceable>Q<replaceable>y</replaceable></filename>:
 source packages</title>
 
 	<para>These directories contain the <quote>real</quote> pkgsrc,
@@ -129,7 +112,7 @@ source packages</title>
 
 	<para>In the directories for the quarterly branches, there is an
 	additional file called
-	<filename>pkgsrc-200<replaceable>x</replaceable>Q<replaceable>y</replaceable>.tar.gz</filename>,
+	<filename>pkgsrc-20<replaceable>xx</replaceable>Q<replaceable>y</replaceable>.tar.gz</filename>,
 	which contains the state of pkgsrc when it was branched.</para>
 
 </sect1>

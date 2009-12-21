@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.192 2009/07/08 19:37:27 tron Exp $
+# $NetBSD: Makefile,v 1.196 2009/10/04 16:58:38 taca Exp $
 
 .include "Makefile.mirrors"
 
@@ -13,7 +13,7 @@ HOMEPAGE=		http://www.samba.org/
 COMMENT=		SMB/CIFS protocol server suite
 LICENSE=		gnu-gpl-v2
 
-VERSION=		3.0.35
+VERSION=		3.0.37
 CONFLICTS+=		ja-samba-[0-9]* pam-smbpass-[0-9]* tdb-[0-9]*	\
 			winbind-[0-9]*
 MAKE_JOBS_SAFE=		NO
@@ -58,7 +58,6 @@ CONFIGURE_ARGS+=	--localstatedir=${SAMBA_VARDIR:Q}
 
 CONFIGURE_ARGS+=	--with-mandir=${PREFIX:Q}/${PKGMANDIR:Q}
 CONFIGURE_ARGS+=	--with-swatdir=${PREFIX:Q}/share/samba/swat
-CONFIGURE_ARGS+=	--with-included-popt
 
 .include "../../converters/libiconv/buildlink3.mk"
 CONFIGURE_ARGS+=	--with-libiconv=${BUILDLINK_PREFIX.iconv}
@@ -170,4 +169,5 @@ post-install: install-samba-lib-symlinks
 	${CHMOD} ${SHAREMODE} ${DESTDIR}${PREFIX}/include/libmsrpc.h \
 		${DESTDIR}${PREFIX}/include/libsmbclient.h
 
+.include "../../devel/popt/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

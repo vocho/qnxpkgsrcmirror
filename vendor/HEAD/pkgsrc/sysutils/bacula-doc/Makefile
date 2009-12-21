@@ -1,15 +1,14 @@
-# $NetBSD: Makefile,v 1.20 2009/05/20 01:09:12 wiz Exp $
+# $NetBSD: Makefile,v 1.22 2009/10/28 09:30:22 adam Exp $
 
-DISTNAME=		bacula-docs-3.0.1
-PKGNAME=		${DISTNAME:S/docs/doc/}
-PKGREVISION=		1
-CATEGORIES=		sysutils
-MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=bacula/}
-EXTRACT_SUFX=		.tar.bz2
+DISTNAME=	bacula-docs-3.0.3
+PKGNAME=	${DISTNAME:S/docs/doc/}
+CATEGORIES=	sysutils
+MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=bacula/}
+EXTRACT_SUFX=	.tar.bz2
 
-MAINTAINER=		pkgsrc-users@NetBSD.org
-HOMEPAGE=		http://www.bacula.org/
-COMMENT=		Documentation for Bacula - The Network Backup Solution
+MAINTAINER=	pkgsrc-users@NetBSD.org
+HOMEPAGE=	http://www.bacula.org/
+COMMENT=	Documentation for Bacula - The Network Backup Solution
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 

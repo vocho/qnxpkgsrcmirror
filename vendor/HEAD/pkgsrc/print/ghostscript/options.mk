@@ -1,7 +1,7 @@
-# $NetBSD: options.mk,v 1.8 2008/09/03 21:31:12 markd Exp $
+# $NetBSD: options.mk,v 1.10 2009/11/01 23:57:29 gdt Exp $
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.ghostscript
-PKG_SUPPORTED_OPTIONS=	x11 cups fontconfig
+PKG_SUPPORTED_OPTIONS=	x11 cups debug fontconfig
 PKG_SUGGESTED_OPTIONS=	x11 fontconfig
 
 .include "../../mk/bsd.options.mk"
@@ -32,8 +32,13 @@ SUBST_FILES.cupsetc=	cups/cups.mak
 SUBST_SED.cupsetc=	-e 's|$$(CUPSSERVERROOT)|${CUPS_EGDIR}|g'
 
 .include "../../print/cups/buildlink3.mk"
+.include "../../graphics/jpeg/buildlink3.mk"
 .else
 CONFIGURE_ARGS+=	--disable-cups
+.endif
+
+.if !empty(PKG_OPTIONS:Mdebug)
+CONFIGURE_ARGS+=	--enable-debug
 .endif
 
 .if !empty(PKG_OPTIONS:Mfontconfig)

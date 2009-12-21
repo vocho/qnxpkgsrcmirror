@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.90 2009/06/09 18:31:35 wiz Exp $
+# $NetBSD: Makefile,v 1.93 2009/11/15 20:09:48 drochner Exp $
 
-DISTNAME=	curl-7.19.5
+DISTNAME=	curl-7.19.7
 CATEGORIES=	www
 MASTER_SITES=	http://curl.haxx.se/download/ \
 		ftp://ftp.sunet.se/pub/www/utilities/curl/
@@ -21,6 +21,7 @@ BUILD_DEFS+=	IPV6_READY
 USE_LIBTOOL=		yes
 GNU_CONFIGURE=		yes
 CONFIGURE_ARGS+=	--with-ssl=${BUILDLINK_PREFIX.openssl}
+CONFIGURE_ARGS+=	--with-ca-path=${SSLCERTS}
 CONFIGURE_ARGS+=	--with-zlib=${BUILDLINK_PREFIX.zlib}
 
 .include "../../mk/bsd.prefs.mk"

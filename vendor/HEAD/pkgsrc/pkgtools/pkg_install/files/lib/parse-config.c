@@ -1,4 +1,4 @@
-/*	$NetBSD: parse-config.c,v 1.6 2009/08/06 16:53:34 joerg Exp $	*/
+/*	$NetBSD: parse-config.c,v 1.12 2009/10/21 17:10:36 joerg Exp $	*/
 
 #if HAVE_CONFIG_H
 #include "config.h"
@@ -7,10 +7,10 @@
 #if HAVE_SYS_CDEFS_H
 #include <sys/cdefs.h>
 #endif
-__RCSID("$NetBSD: parse-config.c,v 1.6 2009/08/06 16:53:34 joerg Exp $");
+__RCSID("$NetBSD: parse-config.c,v 1.12 2009/10/21 17:10:36 joerg Exp $");
 
 /*-
- * Copyright (c) 2008 Joerg Sonnenberger <joerg@NetBSD.org>.
+ * Copyright (c) 2008, 2009 Joerg Sonnenberger <joerg@NetBSD.org>.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -41,6 +41,7 @@ __RCSID("$NetBSD: parse-config.c,v 1.6 2009/08/06 16:53:34 joerg Exp $");
 #if HAVE_ERR_H
 #include <err.h>
 #endif
+#include <errno.h>
 #if HAVE_STRING_H
 #include <string.h>
 #endif
@@ -53,6 +54,7 @@ char fetch_flags[10] = ""; /* Workaround Mac OS X linker issues with BSS */
 static const char *active_ftp;
 static const char *verbose_netio;
 static const char *ignore_proxy;
+const char *cache_index = "yes";
 const char *cert_chain_file;
 const char *certs_packages;
 const char *certs_pkg_vulnerabilities;
@@ -69,7 +71,7 @@ const char *pkg_vulnerabilities_dir;
 const char *pkg_vulnerabilities_file;
 const char *pkg_vulnerabilities_url;
 const char *ignore_advisories = NULL;
-const char tnf_vulnerability_base[] = "ftp://ftp.NetBSD.org/pub/NetBSD/packages/vulns";
+const char tnf_vulnerability_base[] = "http://ftp.NetBSD.org/pub/NetBSD/packages/vulns";
 const char *acceptable_licenses = NULL;
 
 static struct config_variable {
@@ -78,6 +80,7 @@ static struct config_variable {
 } config_variables[] = {
 	{ "ACCEPTABLE_LICENSES", &acceptable_licenses },
 	{ "ACTIVE_FTP", &active_ftp },
+	{ "CACHE_INDEX", &cache_index },
 	{ "CERTIFICATE_ANCHOR_PKGS", &certs_packages },
 	{ "CERTIFICATE_ANCHOR_PKGVULN", &certs_pkg_vulnerabilities },
 	{ "CERTIFICATE_CHAIN", &cert_chain_file },
@@ -96,20 +99,65 @@ static struct config_variable {
 	{ "PKGVULNURL", &pkg_vulnerabilities_url },
 	{ "VERBOSE_NETIO", &verbose_netio },
 	{ "VERIFIED_INSTALLATION", &verified_installation },
+	{ NULL, NULL }, /* For use by pkg_install_show_variable */
 	{ NULL, NULL }
 };
+
+char *config_tmp_variables[sizeof config_variables/sizeof config_variables[0]];
+
+static void
+parse_pkg_install_conf(void)
+{
+	struct config_variable *var;
+	FILE *fp;
+	char *line, *value;
+	size_t len, var_len, i;
+
+	fp = fopen(config_file, "r");
+	if (!fp) {
+		if (errno != ENOENT)
+			warn("Can't open '%s' for reading", config_file);
+		return;
+	}
+
+	while ((line = fgetln(fp, &len)) != (char *) NULL) {
+		if (line[len - 1] == '\n')
+			--len;
+		for (i = 0; (var = &config_variables[i])->name != NULL; ++i) {
+			var_len = strlen(var->name);
+			if (strncmp(var->name, line, var_len) != 0)
+				continue;
+			if (line[var_len] != '=')
+				continue;
+			line += var_len + 1;
+			len -= var_len + 1;
+			if (config_tmp_variables[i])
+				value = xasprintf("%s\n%.*s",
+				    config_tmp_variables[i], (int)len, line);
+			else
+				value = xasprintf("%.*s", (int)len, line);
+			free(config_tmp_variables[i]);
+			config_tmp_variables[i] = value;
+			break;
+		}
+	}
+
+	for (i = 0; (var = &config_variables[i])->name != NULL; ++i) {
+		if (config_tmp_variables[i] == NULL)
+			continue;
+		*var->var = config_tmp_variables[i];
+		config_tmp_variables[i] = NULL;
+	}
+
+	fclose(fp);
+}
 
 void
 pkg_install_config(void)
 {
+	int do_cache_index;
 	char *value;
-	struct config_variable *var;
-
-	for (var = config_variables; var->name != NULL; ++var) {
-		value = var_get(config_file, var->name);
-		if (value != NULL)
-			*var->var = value;
-	}
+	parse_pkg_install_conf();
 
 	if (pkg_vulnerabilities_dir == NULL)
 		pkg_vulnerabilities_dir = _pkgdb_getPKGDB_DIR();
@@ -131,9 +179,19 @@ pkg_install_config(void)
 	if ((value = getenv("PKG_PATH")) != NULL)
 		config_pkg_path = value;
 
-	snprintf(fetch_flags, sizeof(fetch_flags), "%s%s%s",
+	if (strcasecmp(cache_index, "yes") == 0)
+		do_cache_index = 1;
+	else {
+		if (strcasecmp(cache_index, "no"))
+			warnx("Invalid value for configuration option "
+			    "CACHE_INDEX");
+		do_cache_index = 0;
+	}
+
+	snprintf(fetch_flags, sizeof(fetch_flags), "%s%s%s%s",
+	    (do_cache_index) ? "c" : "",
 	    (verbose_netio && *verbose_netio) ? "v" : "",
-	    (active_ftp && *active_ftp) ? "" : "p",
+	    (active_ftp && *active_ftp) ? "a" : "",
 	    (ignore_proxy && *ignore_proxy) ? "d" : "");
 }
 
@@ -141,11 +199,19 @@ void
 pkg_install_show_variable(const char *var_name)
 {
 	struct config_variable *var;
+	const char *tmp_value = NULL;
 
 	for (var = config_variables; var->name != NULL; ++var) {
-		if (strcmp(var->name, var_name) != 0)
-			continue;
-		if (*var->var != NULL)
-			puts(*var->var);
+		if (strcmp(var->name, var_name) == 0)
+			break;
 	}
+	if (var->name == NULL) {
+		var->name = var_name;
+		var->var = &tmp_value;
+	}
+
+	pkg_install_config();
+
+	if (*var->var != NULL)
+		puts(*var->var);
 }

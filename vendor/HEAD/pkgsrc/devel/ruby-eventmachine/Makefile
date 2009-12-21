@@ -1,12 +1,14 @@
-# $NetBSD: Makefile,v 1.2 2008/09/15 09:08:19 taca Exp $
+# $NetBSD: Makefile,v 1.4 2009/12/10 19:26:22 fhajny Exp $
 
-DISTNAME=	eventmachine-0.12.0
+DISTNAME=	eventmachine-0.12.10
 PKGNAME=	${RUBY_PKGPREFIX}-${DISTNAME}
+PKGREVISION=	1
 CATEGORIES=	devel
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://rubyeventmachine.com/
 COMMENT=	Ruby event-driven I/O using the Reactor pattern
+LICENSE=	ruby-license
 
 USE_LANGUAGES=	c c++
 GEM_BUILD=	gemspec

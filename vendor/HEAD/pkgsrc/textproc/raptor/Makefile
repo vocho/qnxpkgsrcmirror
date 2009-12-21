@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.22 2009/07/23 09:23:28 markd Exp $
+# $NetBSD: Makefile,v 1.24 2009/12/15 13:49:16 wiz Exp $
 #
 
-DISTNAME=	raptor-1.4.19
+DISTNAME=	raptor-1.4.20
 CATEGORIES=	textproc
 MASTER_SITES=	http://download.librdf.org/source/
 
@@ -19,6 +19,10 @@ PKGCONFIG_OVERRIDE+=	raptor.pc.in
 CONFIGURE_ARGS+=	--with-html-dir=${PREFIX}/share/doc
 
 TEST_TARGET=		check
+
+# Workaround for Upstream Bug#562310.
+# for more detail, see also PR#41475.
+TOOLS_NOOP+=	gtkdoc-rebase
 
 .include "../../devel/glib2/buildlink3.mk"
 .include "../../textproc/libxml2/buildlink3.mk"

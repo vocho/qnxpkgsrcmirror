@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.15 2008/01/18 05:10:06 tnn Exp $
+# $NetBSD: Makefile,v 1.17 2009/12/17 19:11:39 abs Exp $
 #
 
 DISTNAME=		kkbswitch-1.4.3
-PKGREVISION=		7
+PKGREVISION=		8
 CATEGORIES=		kde x11
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=kkbswitch/}
 
@@ -16,8 +16,7 @@ USE_LIBTOOL=		YES
 GNU_CONFIGURE=		YES
 
 CONFIGURE_ARGS+=	--disable-ru-ua-layout
-
-BUILDLINK_DEPMETHOD.libXt?=	build
+PKG_DESTDIR_SUPPORT= 	user-destdir
 
 .include "../../meta-pkgs/kde3/kde3.mk"
 .include "../../x11/kdelibs3/buildlink3.mk"

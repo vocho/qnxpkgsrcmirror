@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.29 2009/05/25 15:59:21 drochner Exp $
+# $NetBSD: Makefile,v 1.32 2009/10/22 09:42:51 drochner Exp $
 #
 
-DISTNAME=		gstreamer-0.10.23
+DISTNAME=		gstreamer-0.10.25
 PKGNAME=		${DISTNAME:S/gstreamer/gstreamer0.10/}
 CATEGORIES=		multimedia gnome
 MASTER_SITES=		http://gstreamer.freedesktop.org/src/gstreamer/
@@ -57,6 +57,8 @@ PLIST_VARS+=	gstcheck
 .include "../../devel/check/buildlink3.mk"
 PLIST.gstcheck=	yes
 TEST_TARGET=	check-torture
+.else
+CONFIGURE_ARGS+= --disable-check
 .endif
 
 .include "../../devel/glib2/buildlink3.mk"

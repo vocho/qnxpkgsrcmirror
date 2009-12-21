@@ -1,13 +1,14 @@
-# $NetBSD: Makefile,v 1.8 2009/07/20 03:01:09 obache Exp $
+# $NetBSD: Makefile,v 1.11 2009/12/19 12:56:45 obache Exp $
 #
 
 DISTNAME=	tokyocabinet-lua-1.8
+PKGREVISION=	1
 PKGNAME=	${LUA_PKGPREFIX}-${DISTNAME:S/-lua-/-/}
 CATEGORIES=	databases
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=tokyocabinet/}
 
 MAINTAINER=	obache@NetBSD.org
-HOMEPAGE=	http://tokyocabinet.sourceforge.net/luadoc/
+HOMEPAGE=	http://1978th.net/tokyocabinet/luadoc/
 COMMENT=	Lua binding of Tokyo Cabinet
 LICENSE=	gnu-lgpl-v2.1
 
@@ -29,6 +30,8 @@ REPLACE.lua.new=	${LUADIR}/bin/lua
 REPLACE_FILES.lua=	*.lua
 
 INSTALLATION_DIRS+=	share/tokyocabinet/doc/lua
+
+MAKE_ENV+=	INCLUDEDIR=${BUILDLINK_PREFIX.tokyocabinet}/include
 
 post-extract:
 	${CHMOD} -R go-w ${WRKSRC}

@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.32 2009/06/18 11:10:55 adam Exp $
-
-PKGREVISION=		1
+# $NetBSD: Makefile,v 1.34 2009/11/09 12:26:08 joerg Exp $
 
 CONFLICTS+=		bacula-client-[0-9]* bacula-clientonly-[0-9]*
+PKGREVISION=		1
 
 PKG_DESTDIR_SUPPORT=	destdir
 

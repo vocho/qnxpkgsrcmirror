@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.56 2009/02/17 13:02:20 joerg Exp $
+# $NetBSD: Makefile,v 1.60 2009/12/15 20:17:33 drochner Exp $
 #
 
-DISTNAME=	gpgme-1.1.4
+DISTNAME=	gpgme-1.1.8
 PKGREVISION=	2
 CATEGORIES=	security
 MASTER_SITES=	ftp://ftp.gnupg.org/gcrypt/gpgme/
@@ -14,6 +14,7 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 
 PKG_OPTIONS_VAR=        PKG_OPTIONS.gpgme
 PKG_SUPPORTED_OPTIONS=	gpgsm
+PKG_SUGGESTED_OPTIONS=	gpgsm
 .include "../../mk/bsd.options.mk"
 .if empty(PKG_OPTIONS:Mgpgsm)
 DEPENDS+=		gnupg>=1.4.2:../../security/gnupg
@@ -25,7 +26,7 @@ PTHREAD_OPTS+=		require
 INFO_FILES=		YES
 
 SUBST_CLASSES+=		pthread
-SUBST_FILES.pthread=	gpgme/gpgme-config.in
+SUBST_FILES.pthread=	src/gpgme-config.in
 SUBST_SED.pthread+=	-e 's,@PTHREAD_LIBS@,${PTHREAD_LDFLAGS} ${PTHREAD_LIBS},g'
 SUBST_SED.pthread+=	-e 's,@PTHREAD_CFLAGS@,${PTHREAD_CFLAGS},g'
 SUBST_STAGE.pthread=	post-patch
@@ -62,8 +63,10 @@ BUILDLINK_API_DEPENDS.librfuncs+=	librfuncs>=1.0.7nb1
 .  include "../../security/gnupg2/buildlink3.mk"
 CONFIGURE_ARGS+=	--with-gpgsm=${BUILDLINK_PREFIX.gnupg2}/bin/gpgsm
 CONFIGURE_ARGS+=	--with-gpg=${BUILDLINK_PREFIX.gnupg2}/bin/gpg2
+REPLACE_SH+=		tests/gpg/pinentry
 .else
 CONFIGURE_ARGS+=	--without-gpgsm
+CONFIGURE_ARGS+=	--without-gpgconf
 .endif
 
 .include "../../mk/bsd.prefs.mk"

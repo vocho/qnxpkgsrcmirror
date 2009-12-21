@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.74 2009/05/17 12:55:52 sno Exp $
+# $NetBSD: Makefile,v 1.78 2009/12/15 21:48:01 joerg Exp $
 
-DISTNAME=	graphviz-2.22.2
+DISTNAME=	graphviz-2.24.0
+PKGREVISION=	1
 CATEGORIES=	graphics
 MASTER_SITES=	http://www.graphviz.org/pub/graphviz/stable/SOURCES/
 
@@ -15,6 +16,8 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 DEPENDS+= ghostscript-fonts>=6.0:../../fonts/ghostscript-fonts
 
 CHECK_FILES_SKIP=	${PREFIX}/lib/graphviz/config6
+
+PRIVILEGED_STAGES+=	clean
 
 USE_LANGUAGES=		c c++
 USE_LIBTOOL=		yes

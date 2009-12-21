@@ -1,17 +1,24 @@
-# $NetBSD: Makefile,v 1.10 2009/05/20 00:58:11 wiz Exp $
+# $NetBSD: Makefile,v 1.13 2009/12/16 19:26:50 drochner Exp $
+
+DISTNAME=	sqlite-3_6_21-tea
+PKGNAME=	${DISTNAME:S/sqlite/sqlite3-tcl/:S/-tea//:S/_/./g}
+CATEGORIES=	databases
+MASTER_SITES=	http://www.hwaci.com/sw/sqlite/ \
+		http://www.sqlite.org/
+
+MAINTAINER=	pkgsrc-users@NetBSD.org
+HOMEPAGE=	http://www.sqlite.org/
+COMMENT=	SQL Database Engine in a C Library (TCL extension)
+LICENSE=	public-domain
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
-.include "../../databases/sqlite3/Makefile.common"
-
-PKGNAME:=		${PKGNAME:S/-/-tcl-/}
-PKGREVISION=		1
+GNU_CONFIGURE=		yes
+USE_TOOLS+=		gmake
 
 CONFIGURE_ARGS+=	--with-tcl=${BUILDLINK_PREFIX.tcl}/lib
 
-BUILD_TARGET=		libtclsqlite3.la
-INSTALL_TARGET=		tcl_install
-TEST_TARGET=		test
+PLIST_SUBST+=		TCL_TRIM_DOTS=${PKGVERSION_NOREV:S/.//g}
 
 BUILDLINK_API_DEPENDS.sqlite3+=	sqlite3>=3.6.10
 

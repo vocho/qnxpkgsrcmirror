@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.6 2009/06/14 17:43:19 joerg Exp $
+@comment $NetBSD: PLIST,v 1.8 2009/10/29 15:50:17 ghen Exp $
 libexec/slapd
 sbin/slapacl
 sbin/slapadd
@@ -7,6 +7,7 @@ sbin/slapcat
 sbin/slapdn
 sbin/slapindex
 sbin/slappasswd
+sbin/slapschema
 sbin/slaptest
 share/examples/openldap/DB_CONFIG
 share/examples/openldap/schema/README
@@ -22,7 +23,6 @@ share/examples/openldap/schema/inetorgperson.ldif
 share/examples/openldap/schema/inetorgperson.schema
 share/examples/openldap/schema/java.schema
 share/examples/openldap/schema/misc.schema
-share/examples/openldap/schema/nadf.schema
 share/examples/openldap/schema/nis.ldif
 share/examples/openldap/schema/nis.schema
 share/examples/openldap/schema/openldap.ldif

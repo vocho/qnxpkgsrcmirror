@@ -1,9 +1,8 @@
-# $NetBSD: Makefile,v 1.53 2009/06/08 09:32:16 tron Exp $
+# $NetBSD: Makefile,v 1.56 2009/12/15 11:08:38 wiz Exp $
 
-DISTNAME=	libsndfile-1.0.20
-PKGREVISION=	1
+DISTNAME=	libsndfile-1.0.21
 CATEGORIES=	audio
-MASTER_SITES=	http://www.mega-nerd.com/libsndfile/
+MASTER_SITES=	http://www.mega-nerd.com/libsndfile/files/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.mega-nerd.com/libsndfile/
@@ -15,7 +14,7 @@ PKG_INSTALLATION_TYPES=	overwrite pkgviews
 
 USE_LANGUAGES=		c c++
 USE_LIBTOOL=		yes
-USE_TOOLS+=		pkg-config
+USE_TOOLS+=		gmake pkg-config
 PKGCONFIG_OVERRIDE=	sndfile.pc.in
 GNU_CONFIGURE=		yes
 
@@ -36,6 +35,10 @@ CONFIGURE_ENV+=		ac_cv_c_struct_hack=yes
 
 .if ${OPSYS} == "Darwin"
 BUILDLINK_PASSTHRU_DIRS+=	/Developer
+.endif
+
+.if !empty(PKGSRC_COMPILER:Msunpro)
+CXXFLAGS+=		-features=extensions
 .endif
 
 .include "../../audio/flac/buildlink3.mk"

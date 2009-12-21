@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.7 2009/02/12 20:55:07 drochner Exp $
+# $NetBSD: Makefile,v 1.11 2009/11/14 07:11:04 wiz Exp $
 #
 
 .include "../../print/poppler/Makefile.common"
@@ -9,7 +9,7 @@ COMMENT=		PDF utilities (from poppler)
 MAINTAINER=		reed@reedmedia.net
 
 CONFLICTS+=		poppler-0.5.1 poppler-0.5.1nb1 poppler-0.5.1nb2
-CONFLICTS+=		xpdf-[0-9]*
+CONFLICTS+=		xpdf<3.02pl4nb1
 
 GNU_CONFIGURE=		yes
 USE_TOOLS+=		gmake
@@ -44,4 +44,5 @@ PTHREAD_STUBLIB=	# provided by libc
 .endif
 MAKE_ENV+=		PTHREAD_STUBLIB=${PTHREAD_STUBLIB}
 
+.include "../../graphics/png/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

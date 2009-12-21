@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.53 2007/06/05 06:02:46 wiz Exp $
+# $NetBSD: Makefile,v 1.57 2009/11/01 18:55:12 wiz Exp $
 
-DISTNAME=	zip232
-PKGNAME=	zip-2.32
+DISTNAME=	zip30
+PKGNAME=	zip-3.0
+PKGREVISION=	2
 CATEGORIES=	archivers
 MASTER_SITES=	ftp://ftp.info-zip.org/pub/infozip/src/
 EXTRACT_SUFX=	.tgz
@@ -14,12 +15,12 @@ PKG_INSTALLATION_TYPES=	overwrite pkgviews
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 MAKE_FILE=	unix/Makefile
-WRKSRC=		${WRKDIR}/${PKGNAME_NOREV}
 
 .include "../../mk/bsd.prefs.mk"
 
 MAKE_FLAGS+=	LOCAL_ZIP=${CFLAGS:M*:Q}
 MAKE_FLAGS+=	LFLAGS1=${_STRIPFLAG_CC:Q}
+MAKE_FLAGS+=	-DUNICODE_SUPPORT
 .if ${OPSYS} == "NetBSD" && ${MACHINE_ARCH} == "powerpc"
 CFLAGS+=	-O0
 .endif
@@ -31,6 +32,10 @@ BUILD_TARGET=	generic_gcc
 .else
 BUILD_TARGET=	generic
 CFLAGS+=	-O
+.endif
+
+.if !empty(PKGSRC_COMPILER:Msunpro)
+MAKE_FLAGS+=	DISABLE_ASM=YES
 .endif
 
 .if ${OPSYS} == "Linux"
@@ -48,4 +53,5 @@ do-install:
 	${LN} -f -s zip.1 ${DESTDIR}${PREFIX}/${PKGMANDIR}/man1/zipnote.1
 	${LN} -f -s zip.1 ${DESTDIR}${PREFIX}/${PKGMANDIR}/man1/zipsplit.1
 
+.include "../../archivers/bzip2/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

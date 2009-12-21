@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.12 2009/06/11 06:55:28 hasso Exp $
+# $NetBSD: Makefile,v 1.14 2009/09/11 07:29:42 hasso Exp $
 
-DISTNAME=	xf86-video-ati-6.12.2
-PKGREVISION=	1
+DISTNAME=	xf86-video-ati-6.12.4
 CATEGORIES=	x11
 MASTER_SITES=	${MASTER_SITE_XORG:=driver/}
 EXTRACT_SUFX=	.tar.bz2

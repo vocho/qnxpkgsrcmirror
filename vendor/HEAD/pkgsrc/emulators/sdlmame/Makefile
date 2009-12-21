@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.5 2009/07/25 22:26:12 wiz Exp $
+# $NetBSD: Makefile,v 1.8 2009/11/13 14:45:25 wiz Exp $
 #
 
 # Don't update to 0.XXXuN, those are development snapshots.
-DISTNAME=		sdlmame0133
+DISTNAME=		sdlmame0135
 PKGNAME=		${DISTNAME:S/0/-0./}
 
 COMMENT=		Multiple Arcade Machine Emulator, SDL port

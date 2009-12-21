@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.183 2009/07/22 09:01:32 wiz Exp $
+# $NetBSD: Makefile,v 1.188 2009/12/16 19:16:49 drochner Exp $
 
-DISTNAME=	gimp-2.6.6
+DISTNAME=	gimp-2.6.8
 CATEGORIES=	graphics
 MASTER_SITES=	ftp://ftp.gimp.org/pub/gimp/v2.6/ \
 		${MASTER_SITE_GNU:=gimp/v2.6/} \
@@ -40,6 +40,7 @@ GNU_CONFIGURE=		yes
 CONFIGURE_ARGS+=	--disable-perl
 CONFIGURE_ARGS+=	--disable-python
 CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR}
+CONFIGURE_ARGS+=	--without-linux-input
 
 UNLIMIT_RESOURCES+=	datasize
 

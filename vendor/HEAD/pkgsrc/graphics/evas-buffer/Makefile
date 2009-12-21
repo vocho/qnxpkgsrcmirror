@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.2 2009/06/07 21:12:11 joerg Exp $
+# $NetBSD: Makefile,v 1.4 2009/09/11 22:31:00 joerg Exp $
 
 PKGNAME=	${DISTNAME:S/evas/evas-buffer/}
 

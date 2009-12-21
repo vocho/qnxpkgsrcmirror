@@ -1,9 +1,8 @@
-# $NetBSD: Makefile,v 1.60 2009/06/30 00:42:01 joerg Exp $
+# $NetBSD: Makefile,v 1.62 2009/12/08 20:25:30 joerg Exp $
 
 PKGVER=		2.3.1
 DISTNAME=	openmotif-${PKGVER}
-#PKGREVISION=	3
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	x11
 MASTER_SITES=	http://ftp.ics.com/openmotif/2.3/2.3.1/
 MASTER_SITES+=	ftp://ftp.ics.com/openmotif/2.3/2.3.1/
@@ -52,9 +51,18 @@ SUBST_SED.man_rename=		-e 's: Core.3: XCore.3:g'
 SUBST_SED.man_rename+=		-e 's: Object.3: XObject.3:g'
 SUBST_SED.man_rename+=		-e 's: Shell.3: XShell.3:g'
 
+CONFIGURE_ARGS+= \
+		--enable-jpeg --enable-png \
+		--with-libjpeg-includes=${BUILDLINK_PREFIX.jpeg}/include \
+		--with-libjpeg-lib=${BUILDLINK_PREFIX.jpeg}/lib \
+		--with-libpng-includes=${BUILDLINK_PREFIX.png}/include \
+		--with-libpng-lib=${BUILDLINK_PREFIX.png}/lib
+
 .if ${OPSYS} == "NetBSD"
 CONFIGURE_ENV+=		ac_cv_func_setpgrp_void=no
 .endif
+CONFIGURE_ARGS+=	--enable-xft
+CFLAGS.SunOS+=		-D_POSIX_PTHREAD_SEMANTICS
 
 .if !empty(USE_CROSS_COMPILE:M[yY][eE][sS])
 MAKE_FLAGS+=	CROSS_COMPILING=yes CC_FOR_BUILD=${NATIVE_CC:Q} \
@@ -100,7 +108,8 @@ post-build:
 		${MV} -f $${manpage}.tblized $${manpage};		\
 	done
 
-.include "../../x11/xextproto/buildlink3.mk"
+.include "../../graphics/jpeg/buildlink3.mk"
+.include "../../graphics/png/buildlink3.mk"
 .include "../../x11/libX11/buildlink3.mk"
 .include "../../x11/libXaw/buildlink3.mk"
 .include "../../x11/libXmu/buildlink3.mk"
@@ -108,4 +117,5 @@ post-build:
 .include "../../x11/libXext/buildlink3.mk"
 .include "../../x11/libXft/buildlink3.mk"
 .include "../../x11/xbitmaps/buildlink3.mk"
+.include "../../x11/xextproto/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

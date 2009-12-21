@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.5 2009/05/31 09:00:48 obache Exp $
+# $NetBSD: Makefile,v 1.7 2009/10/12 03:09:32 obache Exp $
 #
 
 PKGNAME=		${RUBY_PKGPREFIX}-gnome2-poppler-${VERSION}
@@ -15,8 +15,6 @@ USE_TOOLS+=		pkg-config
 
 do-test:
 	${RUN} cd ${WRKSRC}/poppler/test; ${SETENV} ${TEST_ENV} ${RUBY} run-test.rb
-
-BUILDLINK_API_DEPENDS.poppler-glib+=	poppler-glib>=0.6.0
 
 .include "../../graphics/ruby-rcairo/buildlink3.mk"
 BUILDLINK_API_DEPENDS.poppler-glib+=     poppler-glib>=0.8.0

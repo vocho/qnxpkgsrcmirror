@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.17 2009/07/22 09:29:57 wiz Exp $
+# $NetBSD: Makefile,v 1.22 2009/12/20 23:58:27 tnn Exp $
 
 DISTNAME=	Python-2.5.4
 PKGNAME=	python25-2.5.4
-PKGREVISION=	1
+PKGREVISION=	3
 CATEGORIES=	lang python
 MASTER_SITES=	http://www.python.org/ftp/python/2.5.4/
 EXTRACT_SUFX=	.tar.bz2
@@ -103,6 +103,10 @@ PLIST.oss=	yes
 # Make sure python modules can link correctly
 .if ${OPSYS} == "Darwin"
 INSTALL_UNSTRIPPED=	yes
+
+.  if empty(OS_VERSION:M[1-9].*)
+CFLAGS+=		-D_DARWIN_C_SOURCE
+.  endif
 .endif
 
 PLIST_VARS+=	bsddb dll nis no-nis
@@ -117,7 +121,6 @@ PLIST.nis=	yes
 MAKE_ENV+=	PY_BDB_TYPE=${BDB_TYPE}
 MAKE_ENV+=	PY_BDB_INCDIRS=${BUILDLINK_INCDIRS.${BDB_TYPE}:S,^,${BDBBASE}/,:Q}
 MAKE_ENV+=	PY_BDB_LIBDIRS=${BDBBASE}/lib
-LIBS+=		${BDB_LIBS}
 PLIST.bsddb=	yes
 PLIST.dll=	yes
 .  if ${OPSYS} != "NetBSD" || exists(/usr/bin/ypcat)
@@ -125,6 +128,11 @@ PLIST.nis=	yes
 .  else
 PLIST.no-nis=	yes
 .  endif
+.endif
+
+.if ${OPSYS} == "OSF1"
+# configure complains about buggy getaddrinfo()
+CONFIGURE_ARGS+=	--disable-ipv6
 .endif
 
 .if defined(BUILDLINK_TRANSFORM)

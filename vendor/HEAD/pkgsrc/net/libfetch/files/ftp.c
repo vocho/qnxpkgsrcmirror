@@ -1,4 +1,4 @@
-/*	$NetBSD: ftp.c,v 1.28 2009/08/06 14:02:38 tnn Exp $	*/
+/*	$NetBSD: ftp.c,v 1.30 2009/10/15 12:36:57 joerg Exp $	*/
 /*-
  * Copyright (c) 1998-2004 Dag-Erling Coïdan Smørgrav
  * Copyright (c) 2008, 2009 Joerg Sonnenberger <joerg@NetBSD.org>
@@ -584,10 +584,13 @@ ftp_closefn(void *v)
 	}
 	fetch_close(io->dconn);
 	io->dir = -1;
+	io->dconn->is_active = 0;
 	io->dconn = NULL;
 	r = ftp_chkerr(io->cconn);
-	if (io->cconn == cached_connection && io->cconn->ref == 1)
+	if (io->cconn == cached_connection && io->cconn->ref == 1) {
+		free(cached_host.doc);
 		cached_connection = NULL;
+	}
 	fetch_close(io->cconn);
 	free(io);
 	return;
@@ -607,6 +610,7 @@ ftp_setup(conn_t *cconn, conn_t *dconn, int mode)
 	io->dconn = dconn;
 	io->dir = mode;
 	io->eof = io->err = 0;
+	io->cconn->is_active = 1;
 	f = fetchIO_unopen(io, ftp_readfn, ftp_writefn, ftp_closefn);
 	if (f == NULL)
 		free(io);
@@ -1036,8 +1040,11 @@ static void
 ftp_disconnect(conn_t *conn)
 {
 	(void)ftp_cmd(conn, "QUIT");
-	if (conn == cached_connection && conn->ref == 1)
+	if (conn == cached_connection && conn->ref == 1) {
+		free(cached_host.doc);
+		cached_host.doc = NULL;
 		cached_connection = NULL;
+	}
 	fetch_close(conn);
 }
 
@@ -1048,6 +1055,7 @@ static int
 ftp_isconnected(struct url *url)
 {
 	return (cached_connection
+	    && (cached_connection->is_active == 0)
 	    && (strcmp(url->host, cached_host.host) == 0)
 	    && (strcmp(url->user, cached_host.user) == 0)
 	    && (strcmp(url->pwd, cached_host.pwd) == 0)
@@ -1060,6 +1068,7 @@ ftp_isconnected(struct url *url)
 static conn_t *
 ftp_cached_connect(struct url *url, struct url *purl, const char *flags)
 {
+	char *doc;
 	conn_t *conn;
 	int e;
 
@@ -1077,10 +1086,14 @@ ftp_cached_connect(struct url *url, struct url *purl, const char *flags)
 	/* connect to server */
 	if ((conn = ftp_connect(url, purl, flags)) == NULL)
 		return (NULL);
-	if (cached_connection)
-		ftp_disconnect(cached_connection);
-	cached_connection = fetch_ref(conn);
-	memcpy(&cached_host, url, sizeof(*url));
+	doc = strdup(url->doc);
+	if (doc != NULL) {
+		if (cached_connection)
+			ftp_disconnect(cached_connection);
+		cached_connection = fetch_ref(conn);
+		memcpy(&cached_host, url, sizeof(*url));
+		cached_host.doc = doc;
+	}
 	return (conn);
 }
 
@@ -1173,14 +1186,17 @@ ftp_request(struct url *url, const char *op, const char *op_arg,
 
 	if (if_modified_since && url->last_modified > 0 &&
 	    url->last_modified >= us->mtime) {
+		free(path);
 		fetchLastErrCode = FETCH_UNCHANGED;
 		snprintf(fetchLastErrString, MAXERRSTRING, "Unchanged");
 		return NULL;
 	}
 
 	/* just a stat */
-	if (strcmp(op, "STAT") == 0)
+	if (strcmp(op, "STAT") == 0) {
+		free(path);
 		return fetchIO_unopen(NULL, NULL, NULL, NULL);
+	}
 	if (strcmp(op, "STOR") == 0 || strcmp(op, "APPE") == 0)
 		oflag = O_WRONLY;
 	else
@@ -1245,6 +1261,7 @@ fetchListFTP(struct url_list *ue, struct url *url, const char *pattern, const ch
 	char buf[2 * PATH_MAX], *eol, *eos;
 	ssize_t len;
 	size_t cur_off;
+	int ret;
 
 	/* XXX What about proxies? */
 	if (pattern == NULL || strcmp(pattern, "*") == 0)
@@ -1254,6 +1271,8 @@ fetchListFTP(struct url_list *ue, struct url *url, const char *pattern, const ch
 		return -1;
 
 	cur_off = 0;
+	ret = 0;
+
 	while ((len = fetchIO_read(f, buf + cur_off, sizeof(buf) - cur_off)) > 0) {
 		cur_off += len;
 		while ((eol = memchr(buf, '\n', cur_off)) != NULL) {
@@ -1265,11 +1284,15 @@ fetchListFTP(struct url_list *ue, struct url *url, const char *pattern, const ch
 				else
 					eos = eol;
 				*eos = '\0';
-				fetch_add_entry(ue, url, buf, 0);
+				ret = fetch_add_entry(ue, url, buf, 0);
+				if (ret)
+					break;
 				cur_off -= eol - buf + 1;
 				memmove(buf, eol + 1, cur_off);
 			}
 		}
+		if (ret)
+			break;
 	}
 	if (cur_off != 0 || len < 0) {
 		/* Not RFC conform, bail out. */
@@ -1277,5 +1300,5 @@ fetchListFTP(struct url_list *ue, struct url *url, const char *pattern, const ch
 		return -1;
 	}
 	fetchIO_close(f);
-	return 0;
+	return ret;
 }

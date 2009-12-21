@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.1.1.1 2009/07/29 23:12:20 seb Exp $
+# $NetBSD: Makefile,v 1.4 2009/11/10 11:52:09 seb Exp $
 #
 
-DISTNAME=	MooseX-Types-Structured-0.16
+DISTNAME=	MooseX-Types-Structured-0.19
 PKGNAME=	p5-${DISTNAME}
+#PKGREVISION=	1
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=MooseX/}
 
@@ -11,19 +12,22 @@ HOMEPAGE=	http://search.cpan.org/dist/MooseX-Types-Structured/
 COMMENT=	Perl 5 module providing structured type constraints for Moose
 LICENSE=	${PERL5_LICENSE}
 
-DEPENDS+=	p5-Devel-PartialDump>=0.07:../../devel/p5-Devel-PartialDump
+DEPENDS+=	p5-Devel-PartialDump>=0.10:../../devel/p5-Devel-PartialDump
 DEPENDS+=	p5-Moose>=0.63:../../devel/p5-Moose
 DEPENDS+=	p5-MooseX-Types>=0.08:../../devel/p5-MooseX-Types
 DEPENDS+=	p5-Sub-Exporter>=0.982:../../devel/p5-Sub-Exporter
 
 # For test target
+BUILD_DEPENDS+=	p5-MooseX-Types-DateTime-[0-9]*:../../time/p5-MooseX-Types-DateTime
+BUILD_DEPENDS+=	p5-Test-Exception>=0.27:../../devel/p5-Test-Exception
 BUILD_DEPENDS+=	p5-Test-Pod-[0-9]*:../../devel/p5-Test-Pod
 BUILD_DEPENDS+=	p5-Test-Pod-Coverage-[0-9]*:../../devel/p5-Test-Pod-Coverage
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_LANGUAGES=	# empty
-PERL5_MODULE_TYPE=	Module::Install
+#PERL5_MODULE_TYPE=	Module::Install
+MAKE_PARAMS=	--skipdeps
 PERL5_PACKLIST=	auto/MooseX/Types/Structured/.packlist
 
 .include "../../lang/perl5/module.mk"

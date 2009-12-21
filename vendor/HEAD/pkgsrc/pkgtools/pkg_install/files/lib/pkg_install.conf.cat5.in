@@ -21,6 +21,10 @@ DDEESSCCRRIIPPTTIIOONN
      ACTIVE_FTP
              Force the use of active FTP.
 
+     CACHE_INDEX
+             Cache directory listenings in memory.  This avoids retransfers of
+             the large directory index for HTTP and is enabled by default.
+
      CERTIFICATE_ANCHOR_PKGS
              Path to the file containing the certificates used for validating
              binary packages.  A package is trusted when a certificate chain
@@ -111,7 +115,7 @@ DDEESSCCRRIIPPTTIIOONN
              when running
                    ppkkgg__aaddmmiinn ffeettcchh--ppkkgg--vvuullnneerraabbiilliittiieess
              The default is
-             _f_t_p_:_/_/_f_t_p_._N_e_t_B_S_D_._o_r_g_/_p_u_b_/_N_e_t_B_S_D_/_p_a_c_k_a_g_e_s_/_v_u_l_n_s_/_p_k_g_-_v_u_l_n_e_r_a_b_i_l_i_t_i_e_s_._g_z
+             _h_t_t_p_:_/_/_f_t_p_._N_e_t_B_S_D_._o_r_g_/_p_u_b_/_N_e_t_B_S_D_/_p_a_c_k_a_g_e_s_/_v_u_l_n_s_/_p_k_g_-_v_u_l_n_e_r_a_b_i_l_i_t_i_e_s_._g_z
              _N_o_t_e: Usually, only the compression type should be changed.  Cur-
              rently supported are uncompressed files and files compressed by
              bzip2(1) (_._b_z_2) or gzip(1) (_._g_z).
@@ -142,4 +146,4 @@ FFIILLEESS
 SSEEEE AALLSSOO
      pkg_add(1), pkg_admin(1)
 
-NetBSD 5.0                      August 6, 2009                      NetBSD 5.0
+NetBSD 5.0                     October 15, 2009                     NetBSD 5.0

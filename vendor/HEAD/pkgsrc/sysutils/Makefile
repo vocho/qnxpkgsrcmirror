@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.476 2009/07/26 18:25:01 drochner Exp $
+# $NetBSD: Makefile,v 1.480 2009/12/10 17:32:20 abs Exp $
 #
 
 COMMENT=	System utilities
@@ -71,11 +71,13 @@ SUBDIR+=	ddrescue
 SUBDIR+=	depot
 SUBDIR+=	desktop-file-utils
 SUBDIR+=	detox
+SUBDIR+=	devkitd
 SUBDIR+=	dirsize
 SUBDIR+=	dirvish
 SUBDIR+=	diskscrub
 SUBDIR+=	dmassage
 SUBDIR+=	dmesg2gif
+SUBDIR+=	dmg2img
 SUBDIR+=	dmidecode
 SUBDIR+=	dmsdos
 SUBDIR+=	dog
@@ -161,6 +163,7 @@ SUBDIR+=	kdirstat
 SUBDIR+=	krusader
 SUBDIR+=	lambd
 SUBDIR+=	lavaps
+SUBDIR+=	libdevkit-gobject
 SUBDIR+=	libgamin
 SUBDIR+=	libgksu
 SUBDIR+=	libgtop
@@ -200,6 +203,7 @@ SUBDIR+=	nautilus-cd-burner
 SUBDIR+=	nautilus-sendto
 SUBDIR+=	ndesk-dbus
 SUBDIR+=	ndesk-dbus-glib
+SUBDIR+=	neb-wipe
 SUBDIR+=	news
 SUBDIR+=	notification-daemon
 SUBDIR+=	nrg2iso
@@ -374,11 +378,9 @@ SUBDIR+=	xbatt
 SUBDIR+=	xbattbar
 SUBDIR+=	xcdroast
 SUBDIR+=	xdu
-SUBDIR+=	xen12
 SUBDIR+=	xenkernel20
 SUBDIR+=	xenkernel3
 SUBDIR+=	xenkernel33
-SUBDIR+=	xentools12
 SUBDIR+=	xentools20
 SUBDIR+=	xentools3
 SUBDIR+=	xentools3-hvm

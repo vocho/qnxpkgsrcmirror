@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.2 2009/07/30 16:44:07 hasso Exp $
+# $NetBSD: Makefile,v 1.6 2009/12/16 17:30:30 drochner Exp $
 #
 
-DISTNAME=		gnome-commander-1.2.8
+DISTNAME=		gnome-commander-1.2.8.4
 CATEGORIES=		sysutils
 MASTER_SITES=		${MASTER_SITE_GNOME:=sources/gnome-commander/1.2/}
 EXTRACT_SUFX=		.tar.bz2
 
 MAINTAINER=		pkgsrc@blackmouse.biz
 HOMEPAGE=		http://www.nongnu.org/gcmd/
-COMMENT=		GNOME Commander is a fast and powerful graphical filemanager
+COMMENT=	GNOME Commander is a fast and powerful graphical filemanager
 
 USE_LANGUAGES=		c c++
 USE_PKGLOCALEDIR=	yes

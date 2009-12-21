@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.323 2009/07/20 14:59:29 wiz Exp $
+# $NetBSD: Makefile,v 1.328 2009/12/16 23:57:37 joerg Exp $
 #
 
 COMMENT=	Games
@@ -36,6 +36,7 @@ SUBDIR+=	ccgo
 SUBDIR+=	cgoban
 SUBDIR+=	cgoban-java
 SUBDIR+=	chest
+SUBDIR+=	chromium-bsu
 SUBDIR+=	circuslinux
 SUBDIR+=	civctp-demo
 SUBDIR+=	cmatrix
@@ -63,6 +64,7 @@ SUBDIR+=	digger
 SUBDIR+=	dipmap
 SUBDIR+=	dopewars
 SUBDIR+=	duckmaze
+SUBDIR+=	dungeon
 SUBDIR+=	eboard
 SUBDIR+=	enigma
 SUBDIR+=	et
@@ -134,9 +136,12 @@ SUBDIR+=	ivan
 SUBDIR+=	jetpack
 SUBDIR+=	jools
 SUBDIR+=	kajaani-kombat
+SUBDIR+=	kanatest
 SUBDIR+=	kapooka
 SUBDIR+=	kdegames3
+SUBDIR+=	kdegames4
 SUBDIR+=	kdetoys3
+SUBDIR+=	kdetoys4
 SUBDIR+=	ketm
 SUBDIR+=	knightcap
 SUBDIR+=	knightcap-brain
@@ -207,6 +212,7 @@ SUBDIR+=	quake6
 SUBDIR+=	quakedata
 SUBDIR+=	quakeforge
 SUBDIR+=	quarry
+SUBDIR+=	rftg
 SUBDIR+=	rocksndiamonds
 SUBDIR+=	rocksndiamonds-levels
 SUBDIR+=	rollemup

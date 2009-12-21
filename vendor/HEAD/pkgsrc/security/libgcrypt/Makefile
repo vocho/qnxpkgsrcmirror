@@ -1,16 +1,18 @@
-# $NetBSD: Makefile,v 1.44 2009/05/19 08:59:31 wiz Exp $
+# $NetBSD: Makefile,v 1.46 2009/12/18 18:54:24 drochner Exp $
 
-DISTNAME=	libgcrypt-1.4.4
+DISTNAME=	libgcrypt-1.4.5
 CATEGORIES=	security
 MASTER_SITES=	ftp://ftp.gnupg.org/gcrypt/libgcrypt/ \
 		http://gd.tuwien.ac.at/privacy/gnupg/libgcrypt/
 EXTRACT_SUFX=	.tar.bz2
+# don't remove this -- see options.mk
+DISTFILES=	${DISTNAME}${EXTRACT_SUFX}
+DIST_SUBDIR=	${PKGNAME_NOREV}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://directory.fsf.org/security/libgcrypt.html
 COMMENT=	GNU cryptographic library
-#LICENSE=	gnu-gpl-v2 gnu-lgpl-v21
-
+LICENSE=	gnu-gpl-v2 AND gnu-lgpl-v2.1
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
 PKG_DESTDIR_SUPPORT=	user-destdir

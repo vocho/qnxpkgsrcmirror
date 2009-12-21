@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.7 2009/02/21 21:16:54 wiz Exp $
+# $NetBSD: Makefile,v 1.9 2009/10/21 19:18:31 drochner Exp $
 #
 
 PKG_DESTDIR_SUPPORT=	user-destdir
@@ -6,6 +6,7 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 .include "../../multimedia/totem/Makefile.common"
 
 PKGNAME=	${DISTNAME:S/totem/totem-nautilus/}
+
 # override Makefile.common
 PLIST_SRC=      ${.CURDIR}/PLIST
 GCONF_SCHEMAS=	# none
@@ -26,4 +27,5 @@ BUILDLINK_API_DEPENDS.shared-mime-info+=	shared-mime-info>=0.22
 .include "../../multimedia/gst-plugins0.10-good/buildlink3.mk"
 .include "../../multimedia/gstreamer0.10/buildlink3.mk"
 .include "../../sysutils/nautilus/buildlink3.mk"
+.include "../../x11/libunique/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.31 2007/11/11 23:56:53 wiz Exp $
+# $NetBSD: Makefile,v 1.33 2009/12/11 02:11:52 asau Exp $
 
 DISTNAME=		xmgr-4.1.2
-PKGREVISION=		4
+PKGREVISION=		5
 CATEGORIES=		math
 MASTER_SITES=		ftp://plasma-gate.weizmann.ac.il/pub/xmgr4/src/ \
 			ftp://plasma-gate.weizmann.ac.il/pub/xmgr4/src/old/
@@ -11,6 +11,8 @@ HOMEPAGE=		http://plasma-gate.weizmann.ac.il/Xmgr/
 COMMENT=		Powerful XY plotting tool for workstations or X-terminals using X
 
 BUILD_DEPENDS+=		bison-[0-9]*:../../devel/bison
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_X11BASE=		YES
 USE_LANGUAGES=		c fortran

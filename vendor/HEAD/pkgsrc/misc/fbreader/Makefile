@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.2 2009/07/22 09:01:36 wiz Exp $
+# $NetBSD: Makefile,v 1.5 2009/10/31 03:20:35 wiz Exp $
 #
 
-DISTNAME=	fbreader-sources-0.10.1
+DISTNAME=	fbreader-sources-0.10.7
 PKGNAME=	${DISTNAME:S/-sources//}
 CATEGORIES=	misc
 MASTER_SITES=	http://www.fbreader.org/
@@ -10,6 +10,9 @@ EXTRACT_SUFX=	.tgz
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.fbreader.org/
 COMMENT=	Ebook reader software
+LICENSE=	gnu-gpl-v2 AND modified-bsd
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 WRKSRC=		${WRKDIR}/${PKGNAME_NOREV}
 USE_LANGUAGES=	c c++

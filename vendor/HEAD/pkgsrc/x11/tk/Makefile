@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.62 2008/08/06 04:09:12 dsainty Exp $
+# $NetBSD: Makefile,v 1.64 2009/09/12 18:12:13 snj Exp $
 
 DISTNAME=	tk${TK_VERSION}-src
 PKGNAME=	tk-${TK_VERSION}
@@ -6,7 +6,7 @@ PKGREVISION=	1
 CATEGORIES=	x11 lang
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=tcl/}
 
-MAINTAINER=	jwise@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.tcl.tk/
 COMMENT=	Graphical toolkit for TCL
 
@@ -26,6 +26,8 @@ CONFIGURE_ARGS+=	--enable-threads
 CONFIGURE_ENV+=		LIB_RUNTIME_DIR=${PREFIX}/lib
 MAKE_ENV+=		TOUCH=${TOUCH:Q}
 PTHREAD_OPTS+=		require
+
+PRIVILEGED_STAGES+=	clean
 
 TEST_TARGET=		test
 

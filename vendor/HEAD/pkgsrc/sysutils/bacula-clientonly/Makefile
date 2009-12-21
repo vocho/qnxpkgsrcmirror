@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.14 2009/06/18 11:10:55 adam Exp $
+# $NetBSD: Makefile,v 1.16 2009/11/09 12:26:08 joerg Exp $
 
 PKGNAME=		${DISTNAME:S/-/-clientonly-/}
 PKGREVISION=		1

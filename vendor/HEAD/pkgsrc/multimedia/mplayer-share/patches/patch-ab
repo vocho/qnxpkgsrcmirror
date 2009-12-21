@@ -1,16 +1,13 @@
-$NetBSD: patch-ab,v 1.6 2006/06/13 17:25:00 drochner Exp $
+$NetBSD: patch-ab,v 1.8 2009/11/07 18:43:37 hasso Exp $
 
---- loader/win32.c.orig	2006-06-11 20:35:46.000000000 +0200
-+++ loader/win32.c
-@@ -451,8 +451,10 @@ static int my_release(void* memory)
+--- libdvdread4/bswap.h.orig
++++ libdvdread4/bswap.h
+@@ -61,7 +61,7 @@
+ #define B2N_32(x) x = swap32(x)
+ #define B2N_64(x) x = swap64(x)
  
-     if (last_alloc)
- 	pthread_mutex_unlock(&memmut);
--    else
-+    else {
-+	pthread_mutex_unlock(&memmut);
- 	pthread_mutex_destroy(&memmut);
-+    }
- 
-     //if (alccnt < 40000) printf("MY_RELEASE: %p\t%ld    (%d)\n", header, header->size, alccnt);
- #else
+-#elif defined(__FreeBSD__) && __FreeBSD_version >= 470000
++#elif (defined(__FreeBSD__) && __FreeBSD_version >= 470000) || defined(__DragonFly__)
+ #include <sys/endian.h>
+ #define B2N_16(x) x = be16toh(x)
+ #define B2N_32(x) x = be32toh(x)

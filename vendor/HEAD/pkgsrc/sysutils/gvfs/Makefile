@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.18 2009/05/26 18:39:38 drochner Exp $
+# $NetBSD: Makefile,v 1.23 2009/12/16 17:06:34 drochner Exp $
 #
 
-DISTNAME=	gvfs-1.2.3
+DISTNAME=	gvfs-1.4.3
 CATEGORIES=	sysutils
-MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gvfs/1.2/}
+MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gvfs/1.4/}
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
@@ -15,16 +15,14 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 GNU_CONFIGURE=	yes
 USE_LIBTOOL=	yes
 USE_TOOLS+=	intltool gmake pkg-config msgfmt
-CONFIGURE_ARGS+=	--with-samba-includes=${LOCALBASE}/include
-CONFIGURE_ARGS+=	--with-samba-libs=${LOCALBASE}/lib/samba
 CONFIGURE_ARGS+=	--enable-http
 CONFIGURE_ARGS+=	--disable-bash-completion
 
 .include "../../mk/bsd.prefs.mk"
 
 PKG_OPTIONS_VAR=        PKG_OPTIONS.gvfs
-PKG_SUPPORTED_OPTIONS+= avahi hal fuse
-PKG_SUGGESTED_OPTIONS+= avahi hal
+PKG_SUPPORTED_OPTIONS+= avahi hal fuse samba
+PKG_SUGGESTED_OPTIONS+= avahi hal samba
 PLIST_VARS+=		${PKG_SUPPORTED_OPTIONS}
 
 # XXX fuse.bl3.mk will fail if we include it and fuse is not available
@@ -40,6 +38,15 @@ CONFIGURE_ARGS+=	--enable-avahi
 PLIST.avahi=		yes
 .else
 CONFIGURE_ARGS+=	--disable-avahi
+.endif
+
+.if !empty(PKG_OPTIONS:Msamba)
+CONFIGURE_ARGS+=	--with-samba-includes=${LOCALBASE}/include
+CONFIGURE_ARGS+=	--with-samba-libs=${LOCALBASE}/lib/samba
+.include "../../net/samba/buildlink3.mk"
+PLIST.samba=		yes
+.else
+CONFIGURE_ARGS+=	--disable-samba
 .endif
 
 .if !empty(PKG_OPTIONS:Mhal)
@@ -65,7 +72,6 @@ BUILDLINK_API_DEPENDS.glib2+=	glib2>=2.17.6
 .include "../../devel/glib2/buildlink3.mk"
 .include "../../sysutils/dbus/buildlink3.mk"
 .include "../../archivers/libarchive/buildlink3.mk"
-.include "../../net/samba/buildlink3.mk"
 BUILDLINK_API_DEPENDS.libsoup24+=	libsoup24>=2.25.1
 .include "../../net/libsoup24/buildlink3.mk"
 .include "../../textproc/libxml2/buildlink3.mk"

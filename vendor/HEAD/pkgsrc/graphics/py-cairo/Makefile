@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.20 2009/07/22 12:55:20 wiz Exp $
+# $NetBSD: Makefile,v 1.22 2009/08/31 08:04:32 wiz Exp $
 #
 
-DISTNAME=		pycairo-1.8.6
+DISTNAME=		pycairo-1.8.8
 PKGNAME=		${PYPKGPREFIX}-${DISTNAME:S/py//}
 CATEGORIES=		graphics
 MASTER_SITES=		http://cairographics.org/releases/
@@ -20,7 +20,7 @@ GNU_CONFIGURE=		yes
 CONFIGURE_ENV+=		PYTHON=${PYTHONBIN:Q}
 
 PKGCONFIG_OVERRIDE+=	pycairo.pc.in
-PYTHON_VERSIONS_ACCEPTED= 26 25 24
+PYTHON_VERSIONS_ACCEPTED= 26 25
 PY_PATCHPLIST=		yes
 
 .include "../../mk/compiler.mk"
@@ -29,9 +29,8 @@ PY_PATCHPLIST=		yes
 BUILDLINK_TRANSFORM+=	rm:-std=c99
 .endif
 
-BUILDLINK_API_DEPENDS.cairo+=	cairo>=1.8.4nb1
-
 .include "../../lang/python/extension.mk"
 .include "../../math/py-Numeric/buildlink3.mk"
+BUILDLINK_API_DEPENDS.cairo+=	cairo>=1.8.8
 .include "../../graphics/cairo/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

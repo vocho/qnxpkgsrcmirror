@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.164 2009/07/09 17:33:54 drochner Exp $
+# $NetBSD: Makefile,v 1.168 2009/12/08 07:34:29 obache Exp $
 
 # When updating glib2, please apply patch-ak to configure.in
 # Then run a matching version of autoconf to regen patch-aa.
-DISTNAME=		glib-2.20.4
+DISTNAME=		glib-2.22.3
 PKGNAME=		${DISTNAME:S/glib/glib2/}
 CATEGORIES=		devel
-MASTER_SITES=		ftp://ftp.gtk.org/pub/glib/2.20/ \
-			${MASTER_SITE_GNOME:=sources/glib/2.20/}
+MASTER_SITES=		ftp://ftp.gtk.org/pub/glib/2.22/ \
+			${MASTER_SITE_GNOME:=sources/glib/2.22/}
 EXTRACT_SUFX=		.tar.bz2
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
@@ -73,10 +73,6 @@ SUBST_MESSAGE.thr=	Fixing libgthread.
 .if !empty(MACHINE_PLATFORM:MDarwin-[56].*-*)
 CONFIGURE_ENV+=		gt_cv_c_wchar_t=no
 .endif
-
-# Workaround for Upstream Bug#562310.
-# for more detail, see also PR#41475.
-TOOLS_NOOP+=		gtkdoc-rebase
 
 .if ${OPSYS} == "HPUX"
 CONFIGURE_ENV+=		ac_cv_func_mmap_fixed_mapped=yes

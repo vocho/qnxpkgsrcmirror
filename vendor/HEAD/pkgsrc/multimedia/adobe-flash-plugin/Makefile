@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.3 2009/05/19 08:59:25 wiz Exp $
+# $NetBSD: Makefile,v 1.5 2009/10/28 18:12:08 tnn Exp $
 
 CATEGORIES=	multimedia www
 MASTER_SITES=	http://download.macromedia.com/pub/labs/flashplayer10/
+MASTER_SITES+=	ftp://www.dvo.ru/pub/Gentoo/distfiles/
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://www.adobe.com/
@@ -28,9 +29,9 @@ EMUL_REQD=		suse>=10.0
 
 .include "../../mk/bsd.prefs.mk"
 
-.if ${EMUL_PLATFORM} == "linux-i386"
 # Defaults so lintpkgsrc is happy
 FLASH_VERS=		10.0.0.525
+.if ${EMUL_PLATFORM} == "linux-i386"
 DISTUNAME=		linux
 DISTNAME=		flashplayer10_install_${DISTUNAME}_070208
 WRKNAME=		install_flash_player_10_${DISTUNAME}

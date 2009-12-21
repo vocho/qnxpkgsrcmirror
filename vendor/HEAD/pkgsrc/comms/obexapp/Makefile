@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.21 2009/05/20 00:58:09 wiz Exp $
+# $NetBSD: Makefile,v 1.24 2009/12/01 11:18:48 drochner Exp $
 #
 
-DISTNAME=	obexapp-1.4.11
+DISTNAME=	obexapp-1.4.12
 PKGREVISION=	1
 CATEGORIES=	comms
-MASTER_SITES=	http://www.geocities.com/m_evmenkin/
+MASTER_SITES=	http://people.freebsd.org/~emax/obexapp/
 
 MAINTAINER=	plunky@rya-online.net
-HOMEPAGE=	http://www.geocities.com/m_evmenkin/
+HOMEPAGE=	http://people.freebsd.org/~emax/obexapp/
 COMMENT=	Obex application to transfer objects to mobile equipment
 LICENSE=	modified-bsd
 
@@ -31,8 +31,6 @@ SUBST_SED.paths+=	-e "s|/usr/local/man|${PREFIX}|"
 SUBST_SED.paths+=	-e "s|/usr/local|${PREFIX}|"
 SUBST_SED.paths+=	-e "s|/var|${VARBASE}|"
 
-# Sigh, this needs the GNU libiconv.
-USE_GNU_ICONV=		yes
 USE_BSD_MAKEFILE=	yes
 
 .include "../../mk/bsd.prefs.mk"

@@ -1,10 +1,11 @@
-# $NetBSD: Makefile,v 1.1.1.1 2009/07/30 23:02:58 seb Exp $
+# $NetBSD: Makefile,v 1.9 2009/10/17 14:59:03 sno Exp $
 #
 
-DISTNAME=	MooseX-Method-Signatures-0.16
+DISTNAME=	MooseX-Method-Signatures-0.29
 PKGNAME=	p5-${DISTNAME}
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=MooseX/}
+MASTER_SITES+=	${MASTER_SITE_PERL_CPAN:=../../authors/id/F/FL/FLORA/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://search.cpan.org/dist/MooseX-Method-Signatures/
@@ -13,12 +14,13 @@ LICENSE=	${PERL5_LICENSE}
 
 DEPENDS+=	p5-B-Hooks-EndOfScope>=0.07:../../devel/p5-B-Hooks-EndOfScope
 DEPENDS+=	p5-Context-Preserve-[0-9]*:../../devel/p5-Context-Preserve
-DEPENDS+=	p5-Devel-Declare>=0.003004:../../devel/p5-Devel-Declare
-DEPENDS+=	p5-Moose>=0.63:../../devel/p5-Moose
+DEPENDS+=	p5-Devel-Declare>=0.005011:../../devel/p5-Devel-Declare
+DEPENDS+=	p5-Moose>=0.89:../../devel/p5-Moose
+DEPENDS+=	p5-MooseX-LazyRequire>=0.04:../../devel/p5-MooseX-LazyRequire
 DEPENDS+=	p5-MooseX-Meta-TypeConstraint-ForceCoercion-[0-9]*:../../devel/p5-MooseX-Meta-TypeConstraint-ForceCoercion
-DEPENDS+=	p5-MooseX-Types>=0.09:../../devel/p5-MooseX-Types
+DEPENDS+=	p5-MooseX-Types>=0.19:../../devel/p5-MooseX-Types
 DEPENDS+=	p5-MooseX-Types-Structured>=0.12:../../devel/p5-MooseX-Types-Structured
-DEPENDS+=	p5-Parse-Method-Signatures>=1.003004:../../devel/p5-Parse-Method-Signatures
+DEPENDS+=	p5-Parse-Method-Signatures>=1.003011:../../devel/p5-Parse-Method-Signatures
 DEPENDS+=	p5-Sub-Name-[0-9]*:../../devel/p5-Sub-Name
 DEPENDS+=	p5-Task-Weaken-[0-9]*:../../devel/p5-Task-Weaken
 DEPENDS+=	p5-Text-Balanced-[0-9]*:../../textproc/p5-Text-Balanced
@@ -26,6 +28,7 @@ DEPENDS+=	p5-aliased-[0-9]*:../../devel/p5-aliased
 DEPENDS+=	p5-namespace-clean-[0-9]*:../../devel/p5-namespace-clean
 
 BUILD_DEPENDS+=	p5-Test-Exception-[0-9]*:../../devel/p5-Test-Exception
+BUILD_DEPENDS+=	p5-Test-Simple>=0.88:../../devel/p5-Test-Simple
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 

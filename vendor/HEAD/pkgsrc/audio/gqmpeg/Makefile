@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.95 2009/07/22 09:01:18 wiz Exp $
+# $NetBSD: Makefile,v 1.97 2009/12/03 16:41:40 joerg Exp $
 
 DISTNAME=		gqmpeg-0.20.0
-PKGREVISION=		11
+PKGREVISION=		12
 CATEGORIES=		audio
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=gqmpeg/}
 
@@ -23,6 +23,8 @@ GNU_CONFIGURE=		YES
 
 CONFIGURE_ARGS+=	--without-included-gettext
 CONFIGURE_ENV+=		GNOME_DATADIR=${PREFIX}/share
+
+MAKE_ENV+=		builddir=.
 
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../graphics/gdk-pixbuf/buildlink3.mk"

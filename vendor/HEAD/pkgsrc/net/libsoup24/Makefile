@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.15 2009/07/09 17:47:07 drochner Exp $
+# $NetBSD: Makefile,v 1.20 2009/12/16 19:02:26 drochner Exp $
 
-DISTNAME=	libsoup-2.26.3
+DISTNAME=	libsoup-2.28.2
 PKGNAME=	${DISTNAME:S/libsoup/libsoup24/}
 CATEGORIES=	net gnome
-MASTER_SITES=	${MASTER_SITE_GNOME:=sources/libsoup/2.26/}
+MASTER_SITES=	${MASTER_SITE_GNOME:=sources/libsoup/2.28/}
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	recht@NetBSD.org
@@ -20,10 +20,14 @@ GNU_CONFIGURE=		yes
 PKGCONFIG_OVERRIDE+=	libsoup-2.4.pc.in
 PKGCONFIG_OVERRIDE+=	libsoup-gnome-2.4.pc.in
 
+TEST_TARGET=	check
+
 .include "../../databases/sqlite3/buildlink3.mk"
 .include "../../devel/GConf/buildlink3.mk"
-BUILDLINK_API_DEPENDS.glib2+=	glib2>=2.15.3
+BUILDLINK_API_DEPENDS.glib2+=	glib2>=2.21.3
 .include "../../devel/glib2/buildlink3.mk"
+.include "../../security/gnome-keyring/buildlink3.mk"
+BUILDLINK_API_DEPENDS.gnutls+=	gnutls>=2.1.7
 .include "../../security/gnutls/buildlink3.mk"
 .include "../../textproc/gtk-doc/buildlink3.mk"
 .include "../../textproc/libxml2/buildlink3.mk"

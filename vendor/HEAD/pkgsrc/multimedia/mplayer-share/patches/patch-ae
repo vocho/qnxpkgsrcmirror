@@ -1,13 +1,16 @@
-$NetBSD: patch-ae,v 1.8 2007/12/21 11:31:15 tron Exp $
+$NetBSD: patch-ae,v 1.10 2009/10/19 00:13:07 ahoka Exp $
 
---- libvo/aclib.c.orig	2007-10-07 20:49:28.000000000 +0100
-+++ libvo/aclib.c	2007-12-20 21:37:53.000000000 +0000
-@@ -18,7 +18,7 @@
+--- libvo/aclib.c.orig	2009-04-08 22:21:21.000000000 +0200
++++ libvo/aclib.c
+@@ -28,6 +28,11 @@
+ #include "fastmemcpy.h"
+ #undef memcpy
+ 
++#if ARCH_X86 && defined(__APPLE__)
++#undef ARCH_X86
++#define ARCH_X86 0
++#endif
++
+ #define BLOCK_SIZE 4096
+ #define CONFUSION_FACTOR 0
  //Feel free to fine-tune the above 2, it might be possible to get some speedup with them :)
- 
- //#define STATISTICS
--#ifdef ARCH_X86
-+#if defined(ARCH_X86) && !defined(__APPLE__)
- #define CAN_COMPILE_X86_ASM
- #endif
- 

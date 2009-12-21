@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.41 2008/12/19 12:28:38 adam Exp $
+# $NetBSD: Makefile,v 1.43 2009/08/26 19:57:17 sno Exp $
 
-DISTNAME=	efax-gtk-3.0.18.src
-PKGNAME=	efax-gtk-3.0.18
+DISTNAME=	efax-gtk-3.0.20.src
+PKGNAME=	efax-gtk-3.0.20
+PKGREVISION=	1
 CATEGORIES=	comms
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=efax-gtk/}
 EXTRACT_SUFX=	.tgz
@@ -22,5 +23,6 @@ EGDIR=			${PREFIX}/share/examples
 CONF_FILES=		${EGDIR}/efax-gtkrc ${PKG_SYSCONFDIR}/efax-gtkrc
 
 .include "../../graphics/tiff/buildlink3.mk"
+.include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../x11/gtkmm/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

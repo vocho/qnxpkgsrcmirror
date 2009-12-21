@@ -1,10 +1,11 @@
-# $NetBSD: Makefile,v 1.61 2009/01/22 01:00:33 he Exp $
+# $NetBSD: Makefile,v 1.64 2009/11/19 03:18:58 minskim Exp $
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 .include "Makefile.common"
 
 CONFIGURE_ARGS+=	-no-tk
+CONFIGURE_ARGS+=	-cc ${CC}
 CONFIGURE_ENV+=		disable_x11=yes
 
 BUILD_TARGET=		world
@@ -17,6 +18,7 @@ MAKE_JOBS_SAFE=		no
 # Stub libraries for functions missing from base system.
 .if !empty(MACHINE_PLATFORM:MDarwin-*-powerpc) || \
     !empty(MACHINE_PLATFORM:MDarwin-9.*-i386) || \
+    !empty(MACHINE_PLATFORM:MDarwin-10.*-x86_64) || \
     ${OPSYS} == "DragonFly" || ${OPSYS} == "NetBSD" || \
     ${OPSYS} == "FreeBSD" || ${OPSYS} == "SunOS" || \
     ${OPSYS} == "Linux"
@@ -32,6 +34,7 @@ PLIST_SRC+=	${PKGDIR}/PLIST.opt
       empty(MACHINE_PLATFORM:MSunOS-*-i386) && \
       empty(MACHINE_PLATFORM:MNetBSD-*-powerpc) && \
       empty(MACHINE_PLATFORM:MNetBSD-*-x86_64) && \
+      empty(MACHINE_PLATFORM:MFreeBSD-*-x86_64) && \
       empty(MACHINE_PLATFORM:MNetBSD-*-sparc)
 PLIST_SRC+=	${PKGDIR}/PLIST.prof
 .  endif

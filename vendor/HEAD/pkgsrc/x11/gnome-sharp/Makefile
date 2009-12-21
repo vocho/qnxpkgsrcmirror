@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.13 2009/08/12 02:31:20 obache Exp $
+# $NetBSD: Makefile,v 1.16 2009/10/30 11:04:29 drochner Exp $
 #
 
 DISTNAME=	gnome-sharp-2.24.1
-PKGREVISION=	2
+PKGREVISION=	5
 CATEGORIES=	x11
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gnome-sharp/2.24/}
 
@@ -17,6 +17,15 @@ USE_PKGLOCALEDIR=	yes
 USE_LIBTOOL=		yes
 USE_TOOLS+=		gmake pkg-config
 MAKE_JOBS_SAFE=		no
+
+.include "../../mk/bsd.prefs.mk"
+.if ${OPSYS} == NetBSD
+.if !empty(OS_VERSION:M5.99.*) || !empty(OS_VERSION:M[6789].*)
+CONFIGURE_ENV+=		EXTRACSDEFINES=-define:TIMET_IS_64BITS
+.else
+CONFIGURE_ENV+=		EXTRACSDEFINES=-define:TIMET_IS_32BITS
+.endif
+.endif
 
 PKGCONFIG_OVERRIDE+=	art/art-sharp-2.0.pc.in
 PKGCONFIG_OVERRIDE+=	gconf/GConf/gconf-sharp-2.0.pc.in

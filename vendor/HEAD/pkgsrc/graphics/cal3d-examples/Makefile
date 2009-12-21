@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.16 2009/01/24 08:33:26 obache Exp $
+# $NetBSD: Makefile,v 1.19 2009/08/30 05:21:20 hasso Exp $
 #
 
 PKGNAME=		cal3d-examples-${CAL3D_VERSION}
@@ -11,22 +11,24 @@ DISTFILES=		TheCallyDemo-0.9.1b.zip \
 
 COMMENT=	Tools and demos for cal3d library
 
+PKG_DESTDIR_SUPPORT=	user-destdir
+
 USE_TOOLS+=		automake pax
 
 CONFIGURE_ARGS+=	--with-cal3d=${PREFIX:Q}
 CONFIGURE_ARGS+=	--with-glut=${BUILDLINK_PREFIX.glut:Q}
-CONFIGURE_DIRS=		${WRKSRC}/examples/cally \
-			${WRKSRC}/examples/miniviewer_gl \
-			${WRKSRC}/tools/converter
+CONFIGURE_DIRS=		examples/cally \
+			examples/miniviewer_gl \
+			tools/converter
 CFLAGS+=		-DCAL3D_DATADIR='"${DATADIR}/"'
 LDFLAGS+=		-L${X11BASE}/lib
 LIBS+=			-lm -lGL -lX11 -lGLU -lXi -lXmu
-BUILD_DIRS=		${WRKSRC}/examples/cally \
-			${WRKSRC}/examples/miniviewer_gl \
-			${WRKSRC}/tools/converter
+BUILD_DIRS=		examples/cally \
+			examples/miniviewer_gl \
+			tools/converter
 
-DATADIR=		${PREFIX}/share/cal3d-examples/data
-WRKDATADIR=		${WRKDIR}/thecallydemo-0.9.1b/data
+DATADIR=		${DESTDIR}${PREFIX}/share/cal3d-examples/data
+WRKDATADIR=		${WRKDIR}/TheCallyDemo-0.9.1b/data
 PATCHDATA=		cally.cfg paladin.cfg skeleton.cfg
 
 pre-configure:

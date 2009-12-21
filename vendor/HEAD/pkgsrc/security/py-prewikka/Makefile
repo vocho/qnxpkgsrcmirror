@@ -1,16 +1,15 @@
-# $NetBSD: Makefile,v 1.30 2009/03/05 18:51:31 joerg Exp $
+# $NetBSD: Makefile,v 1.32 2009/10/02 10:25:53 hasso Exp $
 #
 
 DISTNAME=		prewikka-${VERSION}
 PKGNAME=		${PYPKGPREFIX}-prewikka-${VERSION}
-PKGREVISION=		1
 CATEGORIES=		security
-MASTER_SITES=		http://www.prelude-ids.org/download/releases/ \
+MASTER_SITES=		http://www.prelude-ids.org/download/releases/prewikka/ \
 			http://www.prelude-ids.org/download/releases/old/
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
-VERSION=		0.9.14
+VERSION=		0.9.17.1
 
 CONFLICTS=		prewikka-[0-9]*
 
@@ -68,6 +67,6 @@ post-install:
 .include "../../lang/python/application.mk"
 .include "../../lang/python/extension.mk"
 BUILDLINK_API_DEPENDS.libpreludedb+=	libpreludedb>=0.9.9
-.include "../../security/libpreludedb/buildlink3.mk"
-.include "../../security/libprelude/buildlink3.mk"
+.include "../../security/libpreludedb-python/buildlink3.mk"
+.include "../../security/libprelude-python/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

@@ -1,10 +1,11 @@
-# $NetBSD: Makefile,v 1.62 2009/07/26 03:02:27 obache Exp $
+# $NetBSD: Makefile,v 1.67 2009/12/15 21:48:02 joerg Exp $
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 .include "../../graphics/ImageMagick/Makefile.common"
 
 PKGNAME=	p5-PerlMagick-${DISTVERSION}
+PKGREVISION=	1
 
 SVR4_PKGNAME=	p5pma
 
@@ -30,7 +31,7 @@ BUILD_DIRS=		${PERL5_CONFIGURE_DIRS}
 
 post-configure: perl5-configure
 
-BUILDLINK_API_DEPENDS.ImageMagick+=         ImageMagick>=${DISTVERSION}
+BUILDLINK_API_DEPENDS.ImageMagick+=	ImageMagick>=${DISTVERSION}
 .include "../../graphics/ImageMagick/buildlink3.mk"
 .include "../../lang/perl5/module.mk"
 .include "../../mk/bsd.pkg.mk"

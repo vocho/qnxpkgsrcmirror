@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.3 2009/05/19 08:59:16 wiz Exp $
+# $NetBSD: Makefile,v 1.5 2009/10/26 08:48:05 obache Exp $
 #
 
-DISTNAME=	clutter-box2d-0.8.2
+DISTNAME=	clutter-box2d-0.10.0
 CATEGORIES=	graphics
-MASTER_SITES=	http://www.clutter-project.org/sources/clutter-box2d/0.8/
+MASTER_SITES=	http://www.clutter-project.org/sources/clutter-box2d/0.10/
 
 MAINTAINER=	obache@NetBSD.org
 HOMEPAGE=	http://www.clutter-project.org/

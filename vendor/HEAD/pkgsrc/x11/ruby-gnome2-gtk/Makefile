@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.14 2008/10/28 13:43:58 obache Exp $
+# $NetBSD: Makefile,v 1.16 2009/10/12 03:09:33 obache Exp $
 #
 
 PKGNAME=		${RUBY_PKGPREFIX}-gnome2-gtk-${VERSION}
@@ -19,7 +19,7 @@ USE_TOOLS+=		pkg-config
 do-test:
 	${RUN} cd ${WRKSRC}/gtk/test; ${SETENV} ${TEST_ENV} ${RUBY} run-test.rb
 
-BUILDLINK_API_DEPENDS.ruby-gnome2-glib+=${RUBY_PKGPREFIX}-gnome2-glib>=${VERSION}
+BUILDLINK_API_DEPENDS.ruby-gnome2-glib+=	${RUBY_PKGPREFIX}-gnome2-glib>=${VERSION}
 .include "../../devel/ruby-gnome2-glib/buildlink3.mk"
 BUILDLINK_API_DEPENDS.ruby-gnome2-pango+=	${RUBY_PKGPREFIX}-gnome2-pango>=${VERSION}
 .include "../../devel/ruby-gnome2-pango/buildlink3.mk"
