@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.7 2009/07/08 16:43:13 joerg Exp $
+# $NetBSD: Makefile,v 1.9 2009/09/23 09:54:45 tron Exp $
 #
 
 DISTNAME=	wikipediafs-0.3
@@ -13,7 +13,6 @@ COMMENT=	FUSE filesystem for accessing the wikipedia
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
-PYTHON_VERSIONS_ACCEPTED=	25 24
 
 PYDISTUTILSPKG=		yes
 PY_PATCHLIST=		yes

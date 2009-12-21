@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.35 2009/07/22 13:29:11 wiz Exp $
+# $NetBSD: Makefile,v 1.37 2009/11/05 13:01:37 tnn Exp $
 
-DISTNAME=	glibmm-2.20.1
+DISTNAME=	glibmm-2.22.1
+PKGREVISION=	1
 CATEGORIES=	devel
-MASTER_SITES=	${MASTER_SITE_GNOME:=sources/glibmm/2.20/}
+MASTER_SITES=	${MASTER_SITE_GNOME:=sources/glibmm/2.22/}
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	adam@NetBSD.org
@@ -18,6 +19,7 @@ USE_PKGLOCALEDIR=	yes
 USE_TOOLS+=		gmake pkg-config perl:run
 PKGCONFIG_OVERRIDE+=	${WRKSRC}/glib/glibmm-2.4.pc.in
 GNU_CONFIGURE=		yes
+EXTRACT_USING=		bsdtar # added for pkg/42258
 
 BUILDLINK_API_DEPENDS.glib2+=	glib2>=2.20.0
 

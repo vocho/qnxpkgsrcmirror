@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.31 2009/07/22 09:01:18 wiz Exp $
+# $NetBSD: Makefile,v 1.34 2009/10/24 15:13:38 zafer Exp $
 #
 
-DISTNAME=		gmpc-0.18.0
+DISTNAME=		gmpc-0.19.1
 CATEGORIES=		audio
-MASTER_SITES=		http://download.sarine.nl/Programs/gmpc/0.18.0/ \
+MASTER_SITES=		http://download.sarine.nl/Programs/gmpc/0.19.1/ \
 			${MASTER_SITE_SOURCEFORGE:=musicpd/}
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
@@ -24,7 +24,7 @@ PKGCONFIG_OVERRIDE=	data/gmpc.pc.in
 CONFIGURE_ARGS+=	--enable-system-libsexy
 CONFIGURE_ARGS+=	--with-curl=${BUILDLINK_PREFIX.curl}
 
-BUILDLINK_API_DEPENDS.libmpd+=	libmpd>=0.17.1
+BUILDLINK_API_DEPENDS.libmpd+=	libmpd>=0.19.0
 .include "../../audio/libmpd/buildlink3.mk"
 .include "../../devel/gob2/buildlink3.mk"
 .include "../../devel/glib2/buildlink3.mk"

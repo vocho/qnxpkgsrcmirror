@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.22 2009/05/19 08:59:22 wiz Exp $
+# $NetBSD: Makefile,v 1.24 2009/09/14 07:08:52 taca Exp $
 
-DISTNAME=	msmtp-1.4.17
+DISTNAME=	msmtp-1.4.18
 CATEGORIES=	mail
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=msmtp/}
 EXTRACT_SUFX=	.tar.bz2

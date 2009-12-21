@@ -1,6 +1,6 @@
 #!@RCD_SCRIPTS_SHELL@
 #
-# $NetBSD: milter-greylist.sh,v 1.4 2009/03/08 15:54:26 tron Exp $
+# $NetBSD: milter-greylist.sh,v 1.6 2009/09/22 15:57:50 tron Exp $
 #
 
 # PROVIDE: milter-greylist

@@ -1,11 +1,12 @@
-# $NetBSD: Makefile,v 1.27 2008/11/08 21:06:46 bjs Exp $
+# $NetBSD: Makefile,v 1.29 2009/12/07 00:01:54 wiz Exp $
 #
 
 DISTNAME=	speex-1.2rc1
+PKGREVISION=	1
 CATEGORIES=	audio
 MASTER_SITES=	http://downloads.us.xiph.org/releases/speex/
 
-MAINTAINER=	wiz@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.speex.org/
 COMMENT=	Open-source, patent-free voice codec
 
@@ -14,7 +15,7 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 USE_LIBTOOL=		YES
 GNU_CONFIGURE=		YES
 PKGCONFIG_OVERRIDE=	speex.pc.in
-PKGCONFIG_OVERRIDE=	speexdsp.pc.in
+PKGCONFIG_OVERRIDE+=	speexdsp.pc.in
 USE_TOOLS+=		pkg-config
 
 # previous versions of the package were called Speex

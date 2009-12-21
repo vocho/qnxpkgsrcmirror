@@ -1,4 +1,4 @@
-# $NetBSD: Makefile.common,v 1.14 2009/08/12 12:20:04 markd Exp $
+# $NetBSD: Makefile.common,v 1.16 2009/11/10 20:15:40 markd Exp $
 #
 # This Makefile fragment is included at the top of package Makefiles for
 # GNU Radio distributed packages (they all share common configure and build
@@ -19,6 +19,11 @@ GNU_CONFIGURE=	yes
 USE_LANGUAGES=	c c++
 USE_TOOLS+=	gmake automake autoconf pkg-config
 
+MAKE_JOBS_SAFE=	no
+
+DISTINFO_FILE=		${.CURDIR}/../../meta-pkgs/gnuradio/distinfo
+PATCHDIR=		${.CURDIR}/../../meta-pkgs/gnuradio/patches
+
 BUILD_DEPENDS+=doxygen>=1.5.1:../../devel/doxygen
 
 PY_PATCHPLIST=	yes
@@ -28,7 +33,8 @@ PKG_SYSCONFSUBDIR=gnuradio/conf.d
 
 CONFIGURE_ARGS+=        --sysconfdir=${PREFIX}/share/examples
 CONFIGURE_ARGS+=        --disable-all-components
-CONFIGURE_ARGS+=	--with-boost-thread=mt
+CONFIGURE_ARGS+=	--with-boost-thread=boost_thread
+CONFIGURE_ARGS+=	--with-boost-program-options=boost_program_options
 
 pre-configure:
 .if  empty(PKGNAME:Mgnuradio-howto-*)

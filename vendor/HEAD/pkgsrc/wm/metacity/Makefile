@@ -1,9 +1,10 @@
-# $NetBSD: Makefile,v 1.81 2009/07/22 09:01:50 wiz Exp $
+# $NetBSD: Makefile,v 1.84 2009/12/15 22:14:28 joerg Exp $
 #
 
-DISTNAME=	metacity-2.26.0
+DISTNAME=	metacity-2.28.0
+PKGREVISION=	1
 CATEGORIES=	wm x11 gnome
-MASTER_SITES=	${MASTER_SITE_GNOME:=sources/metacity/2.26/}
+MASTER_SITES=	${MASTER_SITE_GNOME:=sources/metacity/2.28/}
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
@@ -39,6 +40,7 @@ BUILDLINK_API_DEPENDS.startup-notification+=	startup-notification>=0.7
 
 BUILDLINK_DEPMETHOD.libXt?=	build
 
+.include "../../audio/libcanberra/buildlink3.mk"
 .include "../../devel/GConf/schemas.mk"
 .include "../../devel/glib2/buildlink3.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"

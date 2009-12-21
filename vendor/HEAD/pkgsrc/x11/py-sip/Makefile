@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.6 2009/07/29 19:44:51 drochner Exp $
+# $NetBSD: Makefile,v 1.11 2009/11/24 17:17:35 drochner Exp $
 #
 
-DISTNAME=	sip-4.8.2
+DISTNAME=	sip-4.9.3
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
 CATEGORIES=	x11 devel python
 MASTER_SITES=	http://www.riverbankcomputing.com/static/Downloads/sip4/
@@ -14,7 +14,6 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 
 CONFLICTS+=	${PYPKGPREFIX}-qt2-sip-* ${PYPKGPREFIX}-qt3-sip-*
 
-PYTHON_VERSIONS_ACCEPTED=	26 25 24 23
 
 USE_LIBTOOL=	yes
 USE_TOOLS+=	gmake

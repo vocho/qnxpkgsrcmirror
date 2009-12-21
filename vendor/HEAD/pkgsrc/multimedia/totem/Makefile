@@ -1,9 +1,11 @@
-# $NetBSD: Makefile,v 1.34 2009/04/07 10:26:58 drochner Exp $
+# $NetBSD: Makefile,v 1.38 2009/10/25 13:25:51 wiz Exp $
 #
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 .include "Makefile.common"
+
+DEPENDS+=	gst-plugins0.10-soup-[0-9]*:../../net/gst-plugins0.10-soup
 
 COMMENT+=	(using GStreamer)
 
@@ -16,4 +18,7 @@ BUILDLINK_API_DEPENDS.gst-plugins0.10-base+=	gst-plugins0.10-base>=0.10.7
 .include "../../multimedia/gst-plugins0.10-base/buildlink3.mk"
 .include "../../multimedia/gst-plugins0.10-good/buildlink3.mk"
 .include "../../multimedia/gstreamer0.10/buildlink3.mk"
+.include "../../x11/libunique/buildlink3.mk"
+.include "../../x11/libSM/buildlink3.mk"
+.include "../../net/libgdata/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

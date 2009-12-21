@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.12 2009/07/29 19:47:24 drochner Exp $
+# $NetBSD: Makefile,v 1.17 2009/11/24 17:32:31 drochner Exp $
 #
 
 PKGNAME=		${PYPKGPREFIX}-qt4-${PYQT_VERSION}
-PYQT_VERSION=		4.5.4
+PYQT_VERSION=		4.6.2
 CATEGORIES=		x11 python
 MASTER_SITES=		http://www.riverbankcomputing.com/static/Downloads/PyQt4/
 
@@ -24,7 +24,6 @@ CONFIGURE_ARGS+=	--confirm-license
 
 INSTALL_ENV+=		INSTALL_ROOT=${DESTDIR:Q}
 
-PYTHON_VERSIONS_ACCEPTED=	26 25 24
 PY_PATCHPLIST=			yes
 PLIST_SUBST+=			PYVERSSUFFIX=${PYVERSSUFFIX:Q}
 
@@ -61,7 +60,6 @@ do-configure:
 	(cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} \
 		${PYTHONBIN} configure.py ${CONFIGURE_ARGS})
 
-BUILDLINK_API_DEPENDS.py-sip+=	${PYPKGPREFIX}-sip>=4.8.1
 .include "../../x11/py-sip/buildlink3.mk"
 .include "../../sysutils/dbus/buildlink3.mk"
 .include "../../sysutils/py-dbus/buildlink3.mk"

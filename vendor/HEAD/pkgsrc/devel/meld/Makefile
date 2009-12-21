@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.20 2009/07/22 09:01:23 wiz Exp $
+# $NetBSD: Makefile,v 1.22 2009/09/07 19:02:13 joerg Exp $
 #
 
-DISTNAME=		meld-1.3.0
+DISTNAME=		meld-1.3.1
 CATEGORIES=		devel
 MASTER_SITES=		${MASTER_SITE_GNOME:=sources/meld/1.3/}
 EXTRACT_SUFX=		.tar.bz2
@@ -22,7 +22,6 @@ MAKE_FLAGS+=			localedir=${PREFIX}/${PKGLOCALEDIR}/locale
 MAKE_FLAGS+=			PYTHON=${PYTHONBIN}
 MAKE_FILE=			GNUmakefile
 PYTHON_PATCH_SCRIPTS=		meld
-PYTHON_VERSIONS_INCOMPATIBLE=	23
 
 # remove unnecessarily created empty dir
 post-install:

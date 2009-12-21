@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.57 2008/10/08 09:35:27 wiz Exp $
+# $NetBSD: Makefile,v 1.59 2009/09/02 13:32:56 joerg Exp $
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
@@ -11,7 +11,7 @@ GCC_REQD+=		3.4
 .include "../../x11/qt3-libs/Makefile.common"
 
 PKGNAME=	qt3-tools-${QTVERSION}
-PKGREVISION=	3
+PKGREVISION=	4
 COMMENT=	QT GUI (WYSIWYG) builder and other tools
 
 DEPENDS+=	libtool-base-[0-9]*:../../devel/libtool-base
@@ -31,16 +31,16 @@ USE_TOOLS+=		pax
 do-install:
 	for bin in assistant designer linguist lrelease lupdate qm2ts	\
 	    qmake qtconfig uic; do					\
-		${LIBTOOL} ${INSTALL_PROGRAM} ${WRKSRC}/bin/$$bin	\
+		${LIBTOOL} --mode=install ${INSTALL_PROGRAM} ${WRKSRC}/bin/$$bin	\
 		    ${DESTDIR}${QTPREFIX}/bin;				\
 	done
 	for lib in libeditor.la libqassistantclient.la libqui.la; do	\
-		${LIBTOOL} ${INSTALL_PROGRAM} ${WRKSRC}/lib/$$lib	\
+		${LIBTOOL} --mode=install ${INSTALL_PROGRAM} ${WRKSRC}/lib/$$lib	\
 		    ${DESTDIR}${QTPREFIX}/lib;				\
 	done
 	for plugin in libwizards.la libcppeditor.la libdlgplugin.la	\
 	    librcplugin.la libkdevdlgplugin.la; do			\
-		${LIBTOOL} ${INSTALL_PROGRAM}				\
+		${LIBTOOL} --mode=install ${INSTALL_PROGRAM}				\
 		    ${WRKSRC}/plugins/designer/$$plugin			\
 		    ${DESTDIR}${QTPREFIX}/plugins/designer;		\
 	done

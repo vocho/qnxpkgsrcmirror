@@ -1,9 +1,10 @@
-# $NetBSD: Makefile,v 1.93 2009/07/22 09:01:36 wiz Exp $
+# $NetBSD: Makefile,v 1.96 2009/12/15 21:58:38 joerg Exp $
 #
 
-DISTNAME=		gnome-utils-2.26.0
+DISTNAME=		gnome-utils-2.28.1
+PKGREVISION=		1
 CATEGORIES=		misc gnome
-MASTER_SITES=		${MASTER_SITE_GNOME:=sources/gnome-utils/2.26/}
+MASTER_SITES=		${MASTER_SITE_GNOME:=sources/gnome-utils/2.28/}
 EXTRACT_SUFX=		.tar.bz2
 
 MAINTAINER=		rh@NetBSD.org
@@ -51,14 +52,9 @@ BUILDLINK_DEPMETHOD.libXt?=	build
 .include "../../devel/GConf-ui/buildlink3.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../devel/glib2/buildlink3.mk"
-.include "../../devel/libglade/buildlink3.mk"
-.include "../../devel/libgnome/buildlink3.mk"
-.include "../../devel/libgnomeui/buildlink3.mk"
 .include "../../devel/pango/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../graphics/libgnomecanvas/buildlink3.mk"
-.include "../../print/libgnomeprintui/buildlink3.mk"
-.include "../../sysutils/gnome-vfs/buildlink3.mk"
 .include "../../sysutils/libgtop/buildlink3.mk"
 .include "../../textproc/gnome-doc-utils/buildlink3.mk"
 .include "../../mk/omf-scrollkeeper.mk"
@@ -69,4 +65,6 @@ BUILDLINK_DEPMETHOD.libXt?=	build
 .include "../../x11/libXmu/buildlink3.mk"
 .include "../../x11/libXt/buildlink3.mk"
 .include "../../mk/curses.buildlink3.mk"
+.include "../../audio/libcanberra/buildlink3.mk"
+.include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../mk/bsd.pkg.mk"

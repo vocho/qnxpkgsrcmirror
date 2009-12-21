@@ -1,0 +1,8 @@
+$NetBSD: distinfo,v 1.2 2009/10/14 12:41:04 adam Exp $
+
+SHA1 (hugin-2009.2.0.tar.gz) = aaf41867a7face95ec0b8ae753299da75448ed5c
+RMD160 (hugin-2009.2.0.tar.gz) = 78626de90a1fe77c55509a40722a94dcb61789fa
+Size (hugin-2009.2.0.tar.gz) = 11159002 bytes
+SHA1 (patch-aa) = 2d68f6ddccc542e95bc0b0f48f2f5d7f0907887d
+SHA1 (patch-ab) = 59d06a24f38652da24271d1966639aaef3d14e60
+SHA1 (patch-ac) = 67200485442d31ae6a4aa0242fc1169cec2c49f1

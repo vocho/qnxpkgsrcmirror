@@ -1,12 +1,13 @@
-# $NetBSD: Makefile,v 1.31 2008/12/03 08:33:07 wiz Exp $
+# $NetBSD: Makefile,v 1.35 2009/11/15 21:09:50 wiz Exp $
 
-DISTNAME=	SDL_image-1.2.7
+DISTNAME=	SDL_image-1.2.10
 CATEGORIES=	graphics devel
 MASTER_SITES=	http://www.libsdl.org/projects/SDL_image/release/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.libsdl.org/projects/SDL_image/
 COMMENT=	Load images as SDL surfaces
+LICENSE=	gnu-lgpl-v2.1
 
 CONFLICTS=		SDL-image-[0-9]*
 
@@ -18,6 +19,7 @@ GNU_CONFIGURE=		YES
 CONFIGURE_ARGS+=	--enable-tif
 
 INSTALLATION_DIRS=	bin
+PKGCONFIG_OVERRIDE=	SDL_image.pc.in
 
 post-install:
 	${LIBTOOL} --mode=install ${INSTALL_PROGRAM} ${WRKSRC}/showimage \

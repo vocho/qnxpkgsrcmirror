@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.3 2009/08/12 12:43:09 obache Exp $
+# $NetBSD: Makefile,v 1.5 2009/10/12 03:09:31 obache Exp $
 #
 
 PKGNAME=		${RUBY_PKGPREFIX}-gnome2-libglade-${VERSION}
@@ -15,7 +15,7 @@ USE_TOOLS+=		pkg-config
 .include "../../x11/gtk2/buildlink3.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../devel/libglade/buildlink3.mk"
-BUILDLINK_API_DEPENDS.ruby-gnome2-glib+=	${RUBY_PKGPREFIX}-gnome2-glib>=${VERSION}
+BUILDLINK_API_DEPENDS.ruby-gnome2-glib+=	${RUBY_PKGPREFIX}-gnome2-glib-${VERSION}{,nb*}
 BUILDLINK_DEPMETHOD.ruby-gnome2-glib=	build
 .include "../../devel/ruby-gnome2-glib/buildlink3.mk"
 .include "../../meta-pkgs/ruby-gnome2/Makefile.common"

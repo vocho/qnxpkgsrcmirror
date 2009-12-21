@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.58 2009/07/22 09:01:29 wiz Exp $
+# $NetBSD: Makefile,v 1.60 2009/12/07 23:57:31 wiz Exp $
 
-DISTNAME=	scummvm-0.13.1
+DISTNAME=	scummvm-1.0.0
 CATEGORIES=	games
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=scummvm/}
 EXTRACT_SUFX=	.tar.bz2
@@ -8,6 +8,7 @@ EXTRACT_SUFX=	.tar.bz2
 MAINTAINER=	adam@NetBSD.org
 HOMEPAGE=	http://scummvm.sourceforge.net/
 COMMENT=	LucasArts Script Creation Utility for Maniac Mansion
+LICENSE=	gnu-gpl-v2
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 

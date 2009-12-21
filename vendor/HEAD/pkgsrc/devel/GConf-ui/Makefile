@@ -1,5 +1,7 @@
-# $NetBSD: Makefile,v 1.4 2009/05/18 08:26:49 wiz Exp $
+# $NetBSD: Makefile,v 1.7 2009/11/02 17:28:55 joerg Exp $
 #
+
+MAKE_JOBS_SAFE=	no
 
 .include "../../devel/GConf/Makefile.common"
 
@@ -8,6 +10,7 @@ PKGNAME=	${DISTNAME:S/GConf/GConf-ui/}
 BUILDLINK_API_DEPENDS.GConf+=	GConf>=${GCONF_VERSION}
 
 CONFIGURE_ARGS+=	--enable-gtk
+CONFIGURE_ARGS+=	--disable-defaults-service
 
 BUILD_DIRS=	gconf
 BUILD_TARGET=	gconfmarshal.h gconfmarshal.c GConfX.h gconf-sanity-check-2
@@ -19,6 +22,6 @@ do-install:
 		${DESTDIR}${PREFIX}/libexec
 
 .include "../../devel/GConf/buildlink3.mk"
-.include "../../security/policykit/buildlink3.mk"
+#.include "../../security/policykit/buildlink3.mk"
 .include "../../x11/gtk2/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

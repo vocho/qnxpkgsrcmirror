@@ -1,6 +1,7 @@
-$NetBSD: distinfo,v 1.3 2006/04/28 14:30:58 joerg Exp $
+$NetBSD: distinfo,v 1.6 2009/12/15 10:29:35 tnn Exp $
 
-SHA1 (DevIL-1.6.6.tar.gz) = 946883351dcd72d00618887f1faa01d173317903
-RMD160 (DevIL-1.6.6.tar.gz) = f609c71397c143517b045f764c549528f7cb5e84
-Size (DevIL-1.6.6.tar.gz) = 787878 bytes
-SHA1 (patch-aa) = 1cc5f64f053b7b229156a6283604cf47aff47c6e
+SHA1 (DevIL-1.7.8.tar.gz) = bc27e3e830ba666a3af03548789700d10561fcb1
+RMD160 (DevIL-1.7.8.tar.gz) = a3cdb14fcca5e75ada240a53cbdc3e749a759da5
+Size (DevIL-1.7.8.tar.gz) = 2051993 bytes
+SHA1 (patch-aa) = 2784234ee79ada44f04219c5f49d5ea2c9e6bf4c
+SHA1 (patch-ab) = 995f402fa98cbfe96d43b98f6c409e484a53bf09

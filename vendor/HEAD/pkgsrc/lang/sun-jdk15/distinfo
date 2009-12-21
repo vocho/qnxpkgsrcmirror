@@ -1,8 +1,8 @@
-$NetBSD: distinfo,v 1.20 2009/07/23 17:18:43 abs Exp $
+$NetBSD: distinfo,v 1.22 2009/11/22 19:48:06 abs Exp $
 
-SHA1 (jdk-1_5_0_19-linux-amd64.bin) = c1be7d7958f91fcc8b54b7eca47a8c6b8a7c7fc1
-RMD160 (jdk-1_5_0_19-linux-amd64.bin) = dbb4da115aca1032c2be5b8145d382598d5099aa
-Size (jdk-1_5_0_19-linux-amd64.bin) = 44133016 bytes
-SHA1 (jdk-1_5_0_19-linux-i586.bin) = dc61ef7b19ef87d1f916807b9682eb34191bdea5
-RMD160 (jdk-1_5_0_19-linux-i586.bin) = aa4eacca5d3ca9756c539590ca4a20122d2e88b7
-Size (jdk-1_5_0_19-linux-i586.bin) = 49732779 bytes
+SHA1 (jdk-1_5_0_22-linux-amd64.bin) = 5f408caed110ac6133db443f47a45a4f1c31a3d6
+RMD160 (jdk-1_5_0_22-linux-amd64.bin) = ce82d04ba90ad4118e3bb85a5c8c38f2b10a5d02
+Size (jdk-1_5_0_22-linux-amd64.bin) = 44191305 bytes
+SHA1 (jdk-1_5_0_22-linux-i586.bin) = d52ffd92e938311fb39b71bbc27d793463d9aea0
+RMD160 (jdk-1_5_0_22-linux-i586.bin) = a029673e0bca08a84047596413ca9f7b0ab4652a
+Size (jdk-1_5_0_22-linux-i586.bin) = 49760685 bytes

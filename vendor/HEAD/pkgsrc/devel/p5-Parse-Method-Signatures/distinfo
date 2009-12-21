@@ -1,5 +1,5 @@
-$NetBSD: distinfo,v 1.2 2009/08/09 09:38:02 sno Exp $
+$NetBSD: distinfo,v 1.4 2009/09/14 06:41:58 sno Exp $
 
-SHA1 (Parse-Method-Signatures-1.003010.tar.gz) = b25bf79154cb5da73e9b4172d33fa41f6d9fe278
-RMD160 (Parse-Method-Signatures-1.003010.tar.gz) = a8d7058e2f404e39abddb691248ca507f80ffd68
-Size (Parse-Method-Signatures-1.003010.tar.gz) = 30901 bytes
+SHA1 (Parse-Method-Signatures-1.003012.tar.gz) = aca54be228542e0e04a7fd1fb8c6464526c1c123
+RMD160 (Parse-Method-Signatures-1.003012.tar.gz) = 61024930a5c5f9c8c0b046e4270e412b9a42b4a7
+Size (Parse-Method-Signatures-1.003012.tar.gz) = 37925 bytes

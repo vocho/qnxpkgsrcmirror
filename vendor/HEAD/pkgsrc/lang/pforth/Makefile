@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.20 2008/03/04 16:38:12 jlam Exp $
+# $NetBSD: Makefile,v 1.22 2009/08/29 18:53:57 wiz Exp $
 
 DISTNAME=		pfthpc21
 PKGNAME=		pforth-21
-PKGREVISION=		1
+PKGREVISION=		2
 CATEGORIES=		lang
 MASTER_SITES=		http://www.softsynth.com/pforth/
 EXTRACT_SUFX=		.zip
@@ -16,7 +16,6 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 WRKSRC=			${WRKDIR}
 USE_LANGUAGES=		c++
 USE_TOOLS+=		gmake
-MAKE_FILE=		${WRKSRC}/makefile
 
 NOT_FOR_PLATFORM=	*-*-alpha  #segfaults when running ./pforth during build
 
@@ -35,7 +34,7 @@ do-install:
 	${INSTALL_DATA_DIR} ${DESTDIR}${PREFIX}/lib/pforth
 	${INSTALL_DATA} ${WRKSRC}/pforth.dic ${DESTDIR}${PREFIX}/lib/pforth
 	${INSTALL_DATA_DIR} ${DESTDIR}${PREFIX}/share/doc/pforth
-	${INSTALL_DATA} ${WRKSRC}/readme.txt ${WRKSRC}/docs/* 		\
+	${INSTALL_DATA} ${WRKSRC}/README.txt ${WRKSRC}/docs/* 		\
 		${DESTDIR}${PREFIX}/share/doc/pforth/
 	${INSTALL_DATA_DIR} ${DESTDIR}${PREFIX}/share/pforth
 	${INSTALL_DATA} ${WRKSRC}/*.fth ${DESTDIR}${PREFIX}/share/pforth/

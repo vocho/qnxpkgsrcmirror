@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.153 2009/06/11 10:35:07 sno Exp $
+# $NetBSD: Makefile,v 1.156 2009/12/14 12:24:46 seb Exp $
 
 .include "license.mk"
 
-DISTNAME=	perl-5.10.0
+DISTNAME=	perl-5.10.1
 CATEGORIES=	lang devel perl5
-PKGREVISION=	6
-MASTER_SITES=	${MASTER_SITE_PERL_CPAN:S,/modules/by-module/$,/src/,}
+#PKGREVISION=	1
+MASTER_SITES=	${MASTER_SITE_PERL_CPAN:S,/modules/by-module/$,/src/5.0/,}
 DISTFILES+=	${DISTNAME}${EXTRACT_SUFX}
 
 MAINTAINER=	jlam@pkgsrc.org
@@ -75,7 +75,6 @@ CONFIGURE_ARGS+=	-Doptimize=${CFLAGS:M*:Q}
 CONFIGURE_ARGS+=	-Ui_malloc
 CONFIGURE_ARGS+=	-Uinstallusrbinperl
 MAKE_ENV+=		LC_ALL="C"
-MAKE_JOBS_SAFE=		no
 
 TEST_TARGET=		test
 

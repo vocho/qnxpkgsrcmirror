@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.16 2007/02/19 20:02:18 joerg Exp $
+# $NetBSD: Makefile,v 1.18 2009/12/12 22:10:21 asau Exp $
 #
 
 DISTNAME=	vista
@@ -12,6 +12,10 @@ HOMEPAGE=	http://forrest.psych.unc.edu/research/
 COMMENT=	Visual statistics system
 
 DEPENDS+=	xlispstat>=3.52.9:../../math/xlispstat
+
+PKG_DESTDIR_SUPPORT=	user-destdir
+
+MAKE_JOBS_SAFE=	no
 
 WRKSRC=		${WRKDIR}/vista-5.0.5
 USE_X11BASE=	yes

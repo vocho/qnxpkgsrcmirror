@@ -36,7 +36,9 @@
 #if HAVE_SYS_PARAM_H
 #include <sys/param.h>
 #endif
+#if HAVE_SYS_IOCTL_H
 #include <sys/ioctl.h>
+#endif
 #if HAVE_SYS_SOCKET_H
 #include <sys/socket.h>
 #endif
@@ -109,7 +111,9 @@ long	 w_secs;	/*    -w: retry delay */
 int	 family = PF_UNSPEC;	/* -[46]: address family to use */
 
 volatile int	 sigalrm;	/* SIGALRM received */
+#ifdef SIGINFO
 volatile int	 siginfo;	/* SIGINFO received */
+#endif
 volatile int	 sigint;	/* SIGINT received */
 
 long	 ftp_timeout;	/* default timeout for FTP transfers */
@@ -128,9 +132,11 @@ sig_handler(int sig)
 		fetchRestartCalls = 0;
 		sigalrm = 1;
 		break;
+#ifdef SIGINFO
 	case SIGINFO:
 		siginfo = 1;
 		break;
+#endif
 	case SIGINT:
 		fetchRestartCalls = 0;
 		sigint = 1;
@@ -217,10 +223,12 @@ stat_display(struct xferstat *xs, int force)
 	struct timeval now;
 	int ctty_pgrp;
 
+#ifdef TIOCGPGRP
 	/* check if we're the foreground process */
 	if (ioctl(STDERR_FILENO, TIOCGPGRP, &ctty_pgrp) == -1 ||
 	    (pid_t)ctty_pgrp != pgrp)
 		return;
+#endif
 
 	gettimeofday(&now, NULL);
 	if (!force && now.tv_sec <= xs->last.tv_sec)
@@ -229,12 +237,16 @@ stat_display(struct xferstat *xs, int force)
 
 	fprintf(stderr, "\r%-46.46s", xs->name);
 	if (xs->size <= 0) {
+#if HAVE_SETPROCTITLE
 		setproctitle("%s [%s]", xs->name, stat_bytes(xs->rcvd));
+#endif
 		fprintf(stderr, "        %s", stat_bytes(xs->rcvd));
 	} else {
+#if HAVE_SETPROCTITLE
 		setproctitle("%s [%d%% of %s]", xs->name,
 		    (int)((100.0 * xs->rcvd) / xs->size),
 		    stat_bytes(xs->size));
+#endif
 		fprintf(stderr, "%3d%% of %s",
 		    (int)((100.0 * xs->rcvd) / xs->size),
 		    stat_bytes(xs->size));
@@ -290,14 +302,60 @@ stat_end(struct xferstat *xs)
 	}
 }
 
+#if HAVE_TERMIOS_H && !defined(PREFER_GETPASS)
+static int
+read_password(const char *prompt, char *buf, size_t buf_len)
+{
+	struct termios tios;
+	tcflag_t saved_flags;
+	int nopwd;
+
+	fprintf(stderr, prompt);
+	if (tcgetattr(STDIN_FILENO, &tios) != 0)
+		return (fgets(buf, buf_len, stdin) == NULL);
+
+	saved_flags = tios.c_lflag;
+	tios.c_lflag &= ~ECHO;
+	tios.c_lflag |= ECHONL|ICANON;
+	tcsetattr(STDIN_FILENO, TCSAFLUSH|TCSASOFT, &tios);
+	nopwd = (fgets(buf, buf_len, stdin) == NULL);
+	tios.c_lflag = saved_flags;
+	tcsetattr(STDIN_FILENO, TCSANOW|TCSASOFT, &tios);
+
+	return nopwd;
+}
+#elif HAVE_GETPASSPHRASE || HAVE_GETPASS
+static int
+read_password(const char *prompt, char *buf, size_t buf_len)
+{
+	char *pass;
+
+#if HAVE_GETPASSPHRASE && !defined(PREFER_GETPASS)
+	pass = getpassphrase(prompt);
+#else
+	pass = getpass(prompt);
+#endif
+	if (pass == NULL || strlen(pass) >= buf_len)
+		return 1;
+	strcpy(buf, pass);
+	return 0;
+}
+#else
+static int
+read_password(const char *prompt, char *buf, size_t buf_len)
+{
+
+	fprintf(stderr, prompt);
+	return (fgets(buf, buf_len, stdin) == NULL);
+}
+#endif
+
 /*
  * Ask the user for authentication details
  */
 static int
 query_auth(struct url *URL)
 {
-	struct termios tios;
-	tcflag_t saved_flags;
 	int i, nopwd;
 
 	fprintf(stderr, "Authentication required for <%s://%s:%d/>!\n",
@@ -310,18 +368,8 @@ query_auth(struct url *URL)
 		if (URL->user[i] == '\r' || URL->user[i] == '\n')
 			URL->user[i] = '\0';
 
-	fprintf(stderr, "Password: ");
-	if (tcgetattr(STDIN_FILENO, &tios) == 0) {
-		saved_flags = tios.c_lflag;
-		tios.c_lflag &= ~ECHO;
-		tios.c_lflag |= ECHONL|ICANON;
-		tcsetattr(STDIN_FILENO, TCSAFLUSH|TCSASOFT, &tios);
-		nopwd = (fgets(URL->pwd, sizeof URL->pwd, stdin) == NULL);
-		tios.c_lflag = saved_flags;
-		tcsetattr(STDIN_FILENO, TCSANOW|TCSASOFT, &tios);
-	} else {
-		nopwd = (fgets(URL->pwd, sizeof URL->pwd, stdin) == NULL);
-	}
+	nopwd = read_password("Password: ",  URL->pwd, sizeof(URL->pwd));
+
 	if (nopwd)
 		return (-1);
 	for (i = strlen(URL->pwd); i >= 0; --i)
@@ -643,20 +691,25 @@ fetch(char *URL, const char *path)
 	/* start the counter */
 	stat_start(&xs, path, us.size, count);
 
-	sigalrm = siginfo = sigint = 0;
+	sigalrm = sigint = 0;
 
 	/* suck in the data */
+#ifdef SIGINFO
+	siginfo = 0;
 	signal(SIGINFO, sig_handler);
+#endif
 	while (!sigint) {
 		if (us.size != -1 && us.size - count < B_size &&
 		    us.size - count >= 0)
 			size = us.size - count;
 		else
 			size = B_size;
+#ifdef SIGINFO
 		if (siginfo) {
 			stat_display(&xs, 1);
 			siginfo = 0;
 		}
+#endif
 		if ((ssize = fetchIO_read(f, buf, B_size)) == 0)
 			break;
 		if (ssize == -1 && errno == EINTR)
@@ -678,7 +731,9 @@ fetch(char *URL, const char *path)
 	}
 	if (!sigalrm)
 		sigalrm = 0;
+#ifdef SIGINFO
 	signal(SIGINFO, SIG_DFL);
+#endif
 
 	stat_end(&xs);
 

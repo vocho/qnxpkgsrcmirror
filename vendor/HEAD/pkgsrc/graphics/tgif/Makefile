@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.55 2008/06/20 01:09:23 joerg Exp $
+# $NetBSD: Makefile,v 1.57 2009/12/11 21:47:42 drochner Exp $
 #
 
-DISTNAME=		tgif-4.1.45
+DISTNAME=		tgif-4.2.2
 CATEGORIES=		graphics
 MASTER_SITES=		ftp://bourbon.usc.edu/pub/tgif/free-of-charge/
 

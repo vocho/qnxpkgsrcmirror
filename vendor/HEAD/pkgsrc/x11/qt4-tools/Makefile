@@ -1,12 +1,11 @@
-# $NetBSD: Makefile,v 1.24 2009/07/27 19:57:51 drochner Exp $
+# $NetBSD: Makefile,v 1.27 2009/10/17 23:32:52 wiz Exp $
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 .include "../../x11/qt4-libs/Makefile.common"
 
-PKGREVISION=	1
-
 PKGNAME=	qt4-tools-${QTVERSION}
+PKGREVISION=	1
 COMMENT=	QT GUI (WYSIWYG) builder and other tools
 
 DEPENDS+=	libtool-base-[0-9]*:../../devel/libtool-base
@@ -41,7 +40,7 @@ do-install:
 	${INSTALL_PROGRAM} ${WRKSRC}/tools/qdoc3/qdoc3 \
 		${DESTDIR}${QTPREFIX}/tools/qdoc3/
 	cd ${WRKSRC}/tools/assistant/lib && env ${MAKE_ENV} ${INSTALL_ENV} \
-		${MAKE_PROGRAM} install_flat_headers install_targ_headers
+		${MAKE_PROGRAM} install_flat_headers install_targ_headers install_class_headers
 	cd ${WRKSRC}/tools/assistant/compat/lib && env ${MAKE_ENV} ${INSTALL_ENV} \
 		${MAKE_PROGRAM} install_assistant_headers
 	cd ${WRKSRC}/tools/designer/src/lib && env ${MAKE_ENV} ${INSTALL_ENV} \

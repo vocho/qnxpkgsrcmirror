@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.3 2009/06/29 20:28:35 joerg Exp $
+# $NetBSD: Makefile,v 1.5 2009/09/11 22:31:01 joerg Exp $
 
 PKGNAME=	${DISTNAME:S/evas/evas-sdl-16/}
 
@@ -11,8 +11,9 @@ EVAS_ENGINES=	sdl
 CONFIGURE_ARGS+=	--enable-software-sdl
 
 BUILD_DIRS=	src/modules/engines/software_16_sdl
-MAKE_FLAGS+=	module_la_LIBADD="\$${EINA_LIBS} ${BUILDLINK_PREFIX.evas}/lib/libevas.la \$${evas_engine_software_sdl_libs}" \
-		module_la_DEPENDENCIES=
+MAKE_FLAGS+=	module_la_LIBADD="\$${EINA_LIBS} ${BUILDLINK_PREFIX.evas}/lib/libevas.la \$${SDL_LIBS}" \
+		module_la_DEPENDENCIES= \
+		module_la_LDFLAGS=-no-undefined\ -module\ -avoid-version
 
 INSTALLATION_DIRS+=	lib/pkgconfig
 

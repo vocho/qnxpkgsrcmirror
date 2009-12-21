@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.2 2009/06/09 21:31:04 minskim Exp $
+# $NetBSD: Makefile,v 1.5 2009/09/20 19:16:49 minskim Exp $
 
 DISTNAME=	texlive-20080816-source
 PKGNAME=	texlive-tetex-2008
-PKGREVISION=	1
+PKGREVISION=	4
 CATEGORIES=	print
 MASTER_SITES=	${MASTER_SITE_TEX_CTAN:=systems/texlive/Source/}
 EXTRACT_SUFX=	.tar.lzma
@@ -34,14 +34,21 @@ CONF_FILES+=	${PREFIX}/share/texmf/web2c/updmap.cfg \
 		${PKG_SYSCONFDIR}/web2c/updmap.cfg
 FILES_SUBST+=	UPDMAP_SYS=${PREFIX}/bin/updmap-sys
 
-FIND_PREFIX:=	DIALOG_PREFIX=dialog
-.include "../../mk/find-prefix.mk"
-
 SUBST_CLASSES+=		paths
-SUBST_MESSAGE.paths=	Setting a path to dialog.
+SUBST_MESSAGE.paths=	Setting paths to commands.
 SUBST_STAGE.paths=	pre-configure
-SUBST_FILES.paths=	texconfig-dialog
-SUBST_SED.paths=	-e 's,@DIALOG_PREFIX@,${DIALOG_PREFIX},g'
+SUBST_FILES.paths=	fmtutil fmtutil-sys kpsetool kpsewhere \
+			tcfmgr texconfig texconfig-dialog texconfig-sys \
+			texlinks updmap updmap-sys
+SUBST_SED.paths=	-e 's,@DIALOG@,${LOCALBASE}/bin/dialog,g' \
+			-e 's,@FMTUTIL@,${PREFIX}/bin/fmtutil,g' \
+			-e 's,@FMTUTIL_SYS@,${PREFIX}/bin/fmtutil-sys,g' \
+			-e 's,@KPSEWHICH@,${LOCALBASE}/bin/kpsewhich,g' \
+			-e 's,@LOCALBASE@,${LOCALBASE},g' \
+			-e 's,@TEXCONFIG@,${PREFIX}/bin/texconfig,g' \
+			-e 's,@TEXLINKS@,${PREFIX}/bin/texlinks,g' \
+			-e 's,@UPDMAP@,${PREFIX}/bin/updmap,g' \
+			-e 's,@UPDMAP_SYS@,${PREFIX}/bin/updmap-sys,g'
 
 INSTALL_MAKE_FLAGS+=	prefix=${DESTDIR}${PREFIX} \
 			mandir=${DESTDIR}${PREFIX}/${PKGMANDIR}

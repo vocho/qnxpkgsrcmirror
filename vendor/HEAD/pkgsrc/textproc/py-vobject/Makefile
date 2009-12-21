@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.5 2009/02/27 00:05:02 kleink Exp $
+# $NetBSD: Makefile,v 1.7 2009/09/23 09:54:46 tron Exp $
 #
 
 DISTNAME=	vobject-0.8.1c
@@ -15,7 +15,6 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 
 DEPENDS+=	${PYPKGPREFIX}-dateutil>=1.1:../../time/py-dateutil
 
-PYTHON_VERSIONS_ACCEPTED=	25 24
 
 PYDISTUTILSPKG=	yes
 PY_PATCHPLIST=	yes

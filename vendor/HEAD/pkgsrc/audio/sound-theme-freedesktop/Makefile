@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.3 2009/07/22 09:01:20 wiz Exp $
+# $NetBSD: Makefile,v 1.5 2009/11/29 18:51:06 joerg Exp $
 #
 
-DISTNAME=	sound-theme-freedesktop-0.2
+DISTNAME=	sound-theme-freedesktop-0.7
 CATEGORIES=	audio
-MASTER_SITES=	http://people.freedesktop.org/~mccann/dist/
+MASTER_SITES=	http://cgit.freedesktop.org/sound-theme-freedesktop/snapshot/
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
@@ -13,6 +13,14 @@ COMMENT=	Set of audio files for FreeDesktop
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=	yes
-USE_TOOLS+=	gmake intltool msgfmt
+USE_TOOLS+=	gmake intltool msgfmt autoconf automake
 
+BUILD_DEPENDS+=	gettext-m4-[0-9]*:../../devel/gettext-m4
+
+pre-configure:
+	(cd ${WRKSRC} && autoreconf -i)
+
+BUILDLINK_DEPMETHOD.glib2=	build
+
+.include "../../devel/glib2/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

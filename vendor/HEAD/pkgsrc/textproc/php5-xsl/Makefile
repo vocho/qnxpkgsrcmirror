@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.10 2009/07/10 19:54:54 jdolecek Exp $
+# $NetBSD: Makefile,v 1.12 2009/10/09 03:06:51 taca Exp $
 
 MODNAME=		xsl
 PKGREVISION=		1

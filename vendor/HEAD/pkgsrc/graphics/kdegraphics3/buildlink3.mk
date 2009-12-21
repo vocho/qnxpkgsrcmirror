@@ -1,4 +1,4 @@
-# $NetBSD: buildlink3.mk,v 1.18 2009/05/20 00:58:18 wiz Exp $
+# $NetBSD: buildlink3.mk,v 1.20 2009/12/15 21:48:01 joerg Exp $
 
 BUILDLINK_TREE+=	kdegraphics
 
@@ -6,7 +6,7 @@ BUILDLINK_TREE+=	kdegraphics
 KDEGRAPHICS_BUILDLINK3_MK:=
 
 BUILDLINK_API_DEPENDS.kdegraphics+=	kdegraphics>=3.5.0nb2
-BUILDLINK_ABI_DEPENDS.kdegraphics?=	kdegraphics>=3.5.10nb1
+BUILDLINK_ABI_DEPENDS.kdegraphics?=	kdegraphics>=3.5.10nb4
 BUILDLINK_PKGSRCDIR.kdegraphics?=	../../graphics/kdegraphics3
 
 .include "../../converters/fribidi/buildlink3.mk"

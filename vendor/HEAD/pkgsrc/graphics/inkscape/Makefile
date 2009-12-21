@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.42 2009/07/22 09:01:33 wiz Exp $
+# $NetBSD: Makefile,v 1.46 2009/11/29 20:51:51 tnn Exp $
 
-DISTNAME=	inkscape-0.46
-PKGREVISION=	4
+DISTNAME=	inkscape-0.47
 CATEGORIES=	graphics
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=inkscape/}
 EXTRACT_SUFX=	.tar.bz2
@@ -16,6 +15,7 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 BUILD_DEPENDS+=		libiconv-[0-9]*:../../converters/libiconv
 .endif
 
+EXTRACT_USING=		bsdtar
 GCC_REQD+=		3.0
 USE_LANGUAGES=		c c++
 USE_LIBTOOL=		yes
@@ -33,6 +33,19 @@ BUILDLINK_API_DEPENDS.poppler+=		poppler>=0.5.9
 
 UNLIMIT_RESOURCES=	datasize
 
+PKG_OPTIONS_VAR= PKG_OPTIONS.inkscape
+PKG_SUPPORTED_OPTIONS= gnome
+PKG_SUGGESTED_OPTIONS= gnome
+
+.include "../../mk/bsd.options.mk"
+
+# gnome-vfs support for the inkscape file open window.
+.if !empty(PKG_OPTIONS:Mgnome)
+CONFIGURE_ARGS+= --with-gnome-vfs
+.include "../../sysutils/gnome-vfs/buildlink3.mk"
+.endif
+
+BUILDLINK_API_DEPENDS.poppler-includes+= poppler-includes>=0.12.2
 .include "../../devel/boehm-gc/buildlink3.mk"
 .include "../../devel/boost-libs/buildlink3.mk"
 .include "../../devel/pango/buildlink3.mk"
@@ -40,10 +53,10 @@ UNLIMIT_RESOURCES=	datasize
 .include "../../graphics/lcms/buildlink3.mk"
 .include "../../graphics/libart/buildlink3.mk"
 .include "../../graphics/png/buildlink3.mk"
+.include "../../math/gsl/buildlink3.mk"
 .include "../../print/poppler-glib/buildlink3.mk"
 .include "../../print/poppler-includes/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
-.include "../../sysutils/gnome-vfs/buildlink3.mk"
 .include "../../textproc/gtkspell/buildlink3.mk"
 .include "../../textproc/libxml2/buildlink3.mk"
 .include "../../textproc/libxslt/buildlink3.mk"

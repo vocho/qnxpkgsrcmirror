@@ -1,4 +1,4 @@
-# $NetBSD: install.mk,v 1.52 2008/11/18 22:03:56 rillig Exp $
+# $NetBSD: install.mk,v 1.57 2009/10/06 13:34:53 joerg Exp $
 #
 # This file provides the code for the "install" phase.
 #
@@ -26,6 +26,11 @@
 # INSTALL_UNSTRIPPED
 #	If "yes", all binaries and shared libraries are installed
 #	unstripped. Otherwise they are stripped while being installed.
+#	This option is not supported by all packages.
+#
+# STRIP_DEBUG
+#	If set to "yes", call ${STRI} -g to remove debug information
+#	from all files. The symbol tables are still preserved.
 #
 # Keywords: strip unstripped
 #
@@ -183,6 +188,9 @@ _INSTALL_ALL_TARGETS+=		pre-install
 _INSTALL_ALL_TARGETS+=		do-install
 _INSTALL_ALL_TARGETS+=		post-install
 _INSTALL_ALL_TARGETS+=		plist
+.if !empty(STRIP_DEBUG:M[Yy][Ee][Ss])
+_INSTALL_ALL_TARGETS+=		install-strip-debug
+.endif
 _INSTALL_ALL_TARGETS+=		install-doc-handling
 _INSTALL_ALL_TARGETS+=		install-script-data
 .if empty(CHECK_FILES:M[nN][oO]) && !empty(CHECK_FILES_SUPPORTED:M[Yy][Ee][Ss])
@@ -325,6 +333,27 @@ post-install:
 .endif
 
 ######################################################################
+### install-strip-debug (PRIVATE)
+######################################################################
+### install-strip-debug tries to strip debug information from
+### the files in PLIST.
+###
+.PHONY: install-strip-debug
+install-strip-debug: plist
+	@${STEP_MSG} "Automatic stripping of debug information"
+	${RUN}${CAT} ${_PLIST_NOKEYWORDS} \
+	| ${SED} -e 's|^|${DESTDIR}${PREFIX}/|' \
+	| while read f; do \
+		tmp_f="$${f}.XXX"; \
+		if ${STRIP} -g -o "$${tmp_f}" "$${f}" 2> /dev/null; then \
+			[ ! -f "$${f}" ] || \
+			    ${MV} "$${tmp_f}" "$${f}"; \
+		else \
+			${RM} -f "$${tmp_f}"; \
+		fi \
+	done
+
+######################################################################
 ### install-doc-handling (PRIVATE)
 ######################################################################
 ### install-doc-handling does automatic document (de)compression based
@@ -346,8 +375,7 @@ _DOC_COMPRESS=								\
 install-doc-handling: plist
 	@${STEP_MSG} "Automatic manual page handling"
 	${RUN} \
-	${CAT} ${PLIST} \
-	| ${GREP} -v "^@" \
+	${CAT} ${_PLIST_NOKEYWORDS} \
 	| ${EGREP} ${_PLIST_REGEXP.man:Q} \
 	| ${_DOC_COMPRESS}
 

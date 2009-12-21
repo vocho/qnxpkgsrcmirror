@@ -1,21 +1,24 @@
-# $NetBSD: Makefile,v 1.29 2007/11/26 08:27:24 plunky Exp $
+# $NetBSD: Makefile,v 1.34 2009/10/23 02:43:52 schmonz Exp $
 
-DISTNAME=		nullmailer-1.03
+DISTNAME=		nullmailer-1.05
 CATEGORIES=		mail
 MASTER_SITES=		${HOMEPAGE:Q}
+DIST_SUBDIR=		${PKGNAME_NOREV}
 
 MAINTAINER=		schmonz@NetBSD.org
 HOMEPAGE=		http://untroubled.org/nullmailer/
 COMMENT=		Simple relay-only mail transport agent
 
+LICENSE=		gnu-gpl-v2
+
+PKG_DESTDIR_SUPPORT=	destdir
+
 USE_LANGUAGES=		c c++
 GNU_CONFIGURE=		yes
-CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR:Q}
+CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR}
 CONFIGURE_ARGS+=	--localstatedir=${VARBASE}/spool
 CONFIGURE_ARGS+=	--bindir=${PREFIX}/libexec/nullmailer
 CONFIGURE_ARGS+=	--sbindir=${PREFIX}/libexec/nullmailer
-
-INSTALL_TARGET=		install install-data-local install-root
 
 .include "../../mk/bsd.prefs.mk"
 
@@ -23,15 +26,15 @@ NULLMAILER_GROUP?=	nullmail
 NULLMAILER_USER?=	nullmail
 PKG_GROUPS=		${NULLMAILER_GROUP}
 PKG_USERS=		${NULLMAILER_USER}:${NULLMAILER_GROUP}
-PKG_GROUPS_VARS+=	NULLMAILER_GROUP
-PKG_USERS_VARS+=	NULLMAILER_USER
+PKG_GROUPS_VARS=	NULLMAILER_GROUP
+PKG_USERS_VARS=		NULLMAILER_USER
 
-MAKE_ENV+=		NULLMAILER_GROUP=${NULLMAILER_GROUP:Q}
-MAKE_ENV+=		NULLMAILER_USER=${NULLMAILER_USER:Q}
+MAKE_ENV+=		NULLMAILER_GROUP=${NULLMAILER_GROUP}
+MAKE_ENV+=		NULLMAILER_USER=${NULLMAILER_USER}
 
-FILES_SUBST+=		VARBASE=${VARBASE:Q}				\
-			NULLMAILER_GROUP=${NULLMAILER_GROUP:Q}		\
-			NULLMAILER_USER=${NULLMAILER_USER:Q}
+FILES_SUBST+=		VARBASE=${VARBASE}				\
+			NULLMAILER_GROUP=${NULLMAILER_GROUP}		\
+			NULLMAILER_USER=${NULLMAILER_USER}
 
 RCD_SCRIPTS=		nullmailer
 
@@ -46,7 +49,7 @@ SPECIAL_PERMS+=		libexec/nullmailer/nullmailer-queue		\
 			${NULLMAILER_USER} ${NULLMAILER_GROUP} 4555
 
 SUBST_CLASSES+=		paths
-SUBST_FILES.paths=	${WRKDIR}/mailer.conf
+SUBST_FILES.paths=	${WRKDIR}/mailer.conf ${WRKDIR}/nullmailer-daemon
 SUBST_FILES.paths+=	doc/nullmailer-send.8 doc/nullmailer-queue.8
 SUBST_SED.paths+=	-e 's,@PREFIX@,${PREFIX},g'
 SUBST_SED.paths+=	-e 's,@VARBASE@,${VARBASE},g'
@@ -58,11 +61,14 @@ BUILD_DEFS+=		VARBASE
 
 post-extract:
 	${CP} ${FILESDIR}/mailer.conf ${WRKDIR}/mailer.conf
+	${CP} ${FILESDIR}/nullmailer-daemon ${WRKDIR}/nullmailer-daemon
 
 post-install:
 	cd ${WRKSRC} && ${INSTALL_DATA} AUTHORS BUGS COPYING ChangeLog	\
-		HOWTO NEWS README TODO ${PREFIX}/share/doc/nullmailer
+		HOWTO NEWS README TODO ${DESTDIR}${PREFIX}/share/doc/nullmailer
 	${INSTALL_DATA} ${WRKDIR}/mailer.conf				\
-		${PREFIX}/share/examples/nullmailer/
+		${DESTDIR}${PREFIX}/share/examples/nullmailer/
+	${INSTALL_SCRIPT} ${WRKDIR}/nullmailer-daemon			\
+		${DESTDIR}${PREFIX}/libexec/nullmailer/
 
 .include "../../mk/bsd.pkg.mk"

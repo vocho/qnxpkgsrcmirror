@@ -1,9 +1,54 @@
-# $NetBSD: Makefile,v 1.45 2009/01/05 03:45:17 dbj Exp $
+# $NetBSD: Makefile,v 1.51 2009/12/20 12:27:57 jmmv Exp $
 
-DISTNAME=	f2c-20001205
-PKGREVISION=	11
+DISTNAME=	f2c-20090411	# see notes below
+PKGREVISION=	2
 CATEGORIES=	lang
 MASTER_SITES=	${MASTER_SITE_LOCAL}
+
+MAINTAINER=	dmcmahill@NetBSD.org
+HOMEPAGE=	http://www.netlib.org/f2c/index.html
+COMMENT=	Fortran to C compiler including a script to emulate f77
+
+PKG_DESTDIR_SUPPORT=	user-destdir
+
+CONFLICTS=	egcs-current-19980608
+
+WRKSRC=		${WRKDIR}/f2c
+
+BUILD_DIRS=	src
+USE_BSD_MAKEFILE=	yes
+USE_TOOLS+=		yacc
+INSTALLATION_DIRS=	bin share/doc/f2c ${PKGMANDIR}/man1 ${PKGMANDIR}/cat1
+
+.include "../../mk/bsd.prefs.mk"
+
+# XXX(jmmv): This is a very ugly workaround.  CPP should probably default to
+# /usr/bin/cpp in OS X.
+.if ${OPSYS} == "Darwin"
+F2C_F77_CPP=	/usr/bin/cpp
+.else
+F2C_F77_CPP=	${CPP}
+.endif
+
+post-extract:
+	@${CP} ${FILESDIR:Q}/f2c.mk ${WRKSRC}/src/Makefile
+	@mv ${WRKSRC}/src/.depend  ${WRKSRC}/src/depend.orig
+	@mv ${WRKSRC}/src/f2c.1 ${WRKSRC}/src/f2c.1.orig
+
+# Handle f2c-f77 script:
+post-build:
+	${SED} -e 's;@PREFIX@;${PREFIX};g' \
+	  -e 's;@CC@;${CC};g' -e 's;@CPP@;${F2C_F77_CPP};g' \
+	  -e "s;@SHELL@;${TOOLS_PLATFORM.sh:Q};g" \
+	 ${FILESDIR}/f2c-f77.in > ${WRKSRC}/f2c-f77
+
+post-install:
+	${INSTALL_SCRIPT} ${WRKSRC}/f2c-f77 ${DESTDIR}${PREFIX}/bin
+	${INSTALL_DATA} ${WRKSRC}/f2c.1t ${DESTDIR}${PREFIX}/${PKGMANDIR}/man1/f2c.1
+	${INSTALL_DATA} ${WRKSRC}/f2c.1  ${DESTDIR}${PREFIX}/${PKGMANDIR}/cat1/f2c.0
+.for f in changes f2c.ps f2c.pdf
+	${INSTALL_DATA} ${WRKSRC}/$f ${DESTDIR}${PREFIX}/share/doc/f2c/$f
+.endfor
 
 # Note.  the distfile is kept locally because it is
 # created "on the fly" by the real master site with
@@ -18,58 +63,5 @@ MASTER_SITES=	${MASTER_SITE_LOCAL}
 #
 #   mv f2c.tar f2c-yyyymmdd.tar
 #   gzip --best f2c-yyyymmdd.tar
-MAINTAINER=	dmcmahill@NetBSD.org
-HOMEPAGE=	http://www.netlib.org/f2c/index.html
-COMMENT=	Fortran to C compiler including a script to emulate f77
-
-PKG_DESTDIR_SUPPORT=	user-destdir
-
-# Many failures - this is *very* far from safe.
-MAKE_JOBS_SAFE=		no
-
-CONFLICTS=	egcs-current-19980608
-
-F2CMAJOR=	0
-F2CMINOR=	0
-MAKE_ENV+=	F2CMAJOR=${F2CMAJOR:Q} F2CMINOR=${F2CMINOR:Q}
-MAKE_ENV+=	LIBOWN=${LIBOWN:Q} LIBGRP=${LIBGRP:Q}
-MAKE_ENV+=	AWK=${AWK:Q}
-MAKE_ENV+=	ECHO=${ECHO:Q}
-MAKE_ENV+=	F2C_F77_IN=${FILESDIR:Q}/f2c-f77.in
-MAKE_ENV+=	SCRIPT_SHELL=${TOOLS_PLATFORM.sh:Q}
-WRKSRC=		${WRKDIR}/f2c
-USE_LIBTOOL=	yes
-USE_TOOLS+=	gunzip
-
-INSTALLATION_DIRS=	${PKGMANDIR}/man1 ${PKGMANDIR}/cat1
-
-# work around a problem gunzipping 00lastchange.gz with
-# some versions of zlib found on NetBSD and also Gentoo
-post-extract:
-	@${RM} ${WRKSRC}/index.html
-	@for f in ${WRKSRC}/*.gz ; do \
-		if ${TEST} "$$f" = "${WRKSRC}/00lastchange.gz" ; then \
-			${ECHO} "Skipping $$f" ; \
-		else \
-			${GUNZIP_CMD} $$f ; \
-		fi ; \
-	done
-	@mv ${WRKSRC}/libf77 ${WRKSRC}/libf77.sh
-	@mv ${WRKSRC}/libi77 ${WRKSRC}/libi77.sh
-	@cd ${WRKSRC} ; ${SH} libf77.sh ; ${SH} libi77.sh
-	@${RM} ${WRKSRC}/src/index.html
-	@mv ${WRKSRC}/src/.depend  ${WRKSRC}/src/depend.orig
-	@${GUNZIP_CMD} ${WRKSRC}/src/*.gz
-
-do-configure:
-	@cd ${WRKSRC} && ${CC} -o chktypes chktypes.c
-	${WRKSRC}/chktypes -v
-	@${CP} -f ${WRKSRC}/libF77/signal1.h0 ${WRKSRC}/libF77/signal1.h
-	@${CP} -f ${WRKSRC}/f2c.h ${WRKSRC}/libF77/f2c.h
-	@${CP} -f ${WRKSRC}/f2c.h ${WRKSRC}/libI77/f2c.h
-
-.include "../../mk/bsd.prefs.mk"
-MAKE_ENV+=	MACHINE_ARCH=${MACHINE_ARCH:Q}
-
 
 .include "../../mk/bsd.pkg.mk"

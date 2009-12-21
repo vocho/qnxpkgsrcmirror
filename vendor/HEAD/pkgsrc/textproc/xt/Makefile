@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.20 2008/06/12 02:14:52 joerg Exp $
+# $NetBSD: Makefile,v 1.22 2009/10/08 22:41:46 wiz Exp $
 #
 
 DISTNAME=	xt
@@ -8,7 +8,7 @@ CATEGORIES=	textproc www
 MASTER_SITES=	ftp://ftp.jclark.com/pub/xml/
 EXTRACT_SUFX=	.zip
 
-MAINTAINER=	jwise@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.jclark.com/xml/
 COMMENT=	James Clark's Java implementation of XSLT
 
@@ -16,16 +16,12 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 
 DEPENDS+=	XP-[0-9]*:../../textproc/xp
 
-EXTRACT_ONLY=	# empty
 USE_JAVA=	run
 USE_TOOLS+=	unzip pax
 NO_CONFIGURE=	yes
 NO_BUILD=	yes
 
 INSTALLATION_DIRS=	lib/java share/doc/java/xt share/examples/java/xt
-
-post-extract:
-	cd ${WRKDIR} && unzip -x ${DISTDIR}/${DISTNAME}${EXTRACT_SUFX}
 
 do-install:
 	${INSTALL_DATA} ${WRKDIR}/xt.jar ${DESTDIR}${PREFIX}/lib/java

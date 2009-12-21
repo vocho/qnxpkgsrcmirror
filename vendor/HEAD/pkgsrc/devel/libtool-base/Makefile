@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.87 2009/07/08 21:01:44 markd Exp $
+# $NetBSD: Makefile,v 1.91 2009/12/20 12:32:55 jmmv Exp $
 
 ###########################################################################
 ###########################################################################
@@ -26,7 +26,7 @@
 .include "../../devel/libtool/Makefile.common"
 
 PKGNAME=	${DISTNAME:S/-/-base-/}
-PKGREVISION=	2
+PKGREVISION=	3
 SVR4_PKGNAME=	ltoob
 
 COMMENT=	Generic shared library support script (the script itself)
@@ -35,6 +35,8 @@ CONFLICTS+=	libtool<=1.3.5nb11
 
 TEST_TARGET=	check
 PLIST_VARS+=	shlibtool
+
+OVERRIDE_DIRDEPTH.install-sh=	1
 
 .if ${OPSYS} == "AIX"
 
@@ -64,7 +66,7 @@ BUILD_SHLIBTOOL?=	YES
 # and Fortran compilers.
 #
 USE_LANGUAGES=		c c++ fortran
-CONFIGURE_ARGS+=	--with-tags=CXX,F77,GCJ
+CONFIGURE_ARGS+=	--disable-ltdl-install
 
 USE_TOOLS+=		echo
 

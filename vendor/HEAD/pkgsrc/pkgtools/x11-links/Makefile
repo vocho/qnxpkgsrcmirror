@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.104 2009/06/15 12:42:15 tron Exp $
+# $NetBSD: Makefile,v 1.106 2009/09/27 18:44:27 tnn Exp $
 #
 # NOTE:	If you update this package, then you'll likely need to also update
 #	the x11-links dependency in buildlink3.mk to the correct version,
 #	usually the most recent.
 
-DISTNAME=	x11-links-0.43
+DISTNAME=	x11-links-0.44
 CATEGORIES=	pkgtools x11
 MASTER_SITES=	# empty
 DISTFILES=	# empty
@@ -26,8 +26,17 @@ PLIST_SRC=		${.CURDIR}/PLIST ${PLIST_SRC.files}
 
 .include "../../mk/bsd.prefs.mk"
 
-.if !exists(${X11BASE}/include/X11/X.h)
-PKG_FAIL_REASON+=	"${PKGNAME} requires X headers to be installed"
+.if ${X11_TYPE} == "modular"
+PKG_FAIL_REASON+=	"${PKGNAME} should only be used with X11_TYPE=native."
+.elif !exists(${X11BASE}/include/X11/X.h)
+PKG_FAIL_REASON+=	"pkgsrc has been configured to use a system provided X11 installation"
+PKG_FAIL_REASON+=	"but one could not be found. Possible solutions:"
+PKG_FAIL_REASON+=	""
+PKG_FAIL_REASON+=	"	*) install X headers and libraries in X11BASE (currently ${X11BASE})"
+PKG_FAIL_REASON+=	"	*) set X11_TYPE=modular in mk.conf to use X11 from pkgsrc"
+PKG_FAIL_REASON+=	""
+PKG_FAIL_REASON+=	"Please note that changing the value of X11_TYPE in existing"
+PKG_FAIL_REASON+=	"pkgsrc installations is not supported!"
 .endif
 
 .if ${OPSYS} == "IRIX"
@@ -36,7 +45,8 @@ PKG_FAIL_REASON+=	"${PKGNAME} requires X headers to be installed"
 .  include "xdec.mk"
 .elif !empty(X11BASE:M*openwin)
 .  include "openwin.mk"
-.elif exists(${X11BASE}/lib/X11/config/xorgversion.def)
+.elif exists(${X11BASE}/lib/X11/config/xorgversion.def) || \
+      exists(${X11BASE}/lib/pkgconfig/xorg-server.pc)
 .  include "xorg.mk"
 .else
 .  include "xfree.mk"

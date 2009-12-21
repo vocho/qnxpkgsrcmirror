@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.32 2008/01/19 09:16:23 wiz Exp $
+# $NetBSD: Makefile,v 1.34 2009/11/15 01:29:33 dholland Exp $
 
 DISTNAME=		xgalaga-2.0.34
 PKGREVISION=		4
@@ -7,6 +7,8 @@ MASTER_SITES=		${MASTER_SITE_LOCAL}
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
 COMMENT=		Very fast true-to-the-original port of galaga for X11
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 NO_SRC_ON_FTP=		"already in MASTER_SITE_LOCAL"
 
@@ -17,10 +19,17 @@ SETGIDGAME=		yes
 MAKE_ENV+=		GAMEOWN=${GAMEOWN:Q} GAMEGRP=${GAMEGRP:Q} \
 			GAMEMODE=${GAMEMODE:Q} GAMEDATAMODE=${GAMEDATAMODE:Q}
 
+.include "../../mk/bsd.prefs.mk"
+
+.if ${X11_TYPE} == "modular"
+CONFIGURE_ARGS+=	--x-includes=${PREFIX}/include
+CONFIGURE_ARGS+=	--x-libraries=${PREFIX}/lib
+.endif
+
 INSTALLATION_DIRS=	libexec
 
 post-install:
-	${INSTALL_MAN} ${WRKSRC}/README ${PREFIX}/share/xgalaga/README
+	${INSTALL_MAN} ${WRKSRC}/README ${DESTDIR}${PREFIX}/share/xgalaga/README
 
 .include "../../x11/libXmu/buildlink3.mk"
 .include "../../x11/libXpm/buildlink3.mk"

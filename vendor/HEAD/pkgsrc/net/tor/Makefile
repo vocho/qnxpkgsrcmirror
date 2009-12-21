@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.64 2009/07/09 11:52:31 obache Exp $
+# $NetBSD: Makefile,v 1.67 2009/11/15 04:24:51 snj Exp $
 #
 
-DISTNAME=		tor-0.2.0.35
+DISTNAME=		tor-0.2.1.20
 CATEGORIES=		net security
 MASTER_SITES=		http://www.torproject.org/dist/
 
@@ -40,8 +40,6 @@ USER_GROUP=		${TOR_USER} ${TOR_GROUP}
 
 OWN_DIRS_PERMS+=	${PKG_HOME} ${USER_GROUP} 0700
 
-AUTO_MKDIRS=		yes
-
 CONFIGURE_ARGS+=	--localstatedir=${VARBASE:Q}
 
 CONF_FILES+=		${PREFIX}/share/examples/tor/tor-tsocks.conf 	\
@@ -52,17 +50,13 @@ CONF_FILES+=		${PREFIX}/share/examples/tor/torrc.sample 	\
 FILES_SUBST+=		PKG_HOME=${PKG_HOME:Q}
 FILES_SUBST+=		TOR_USER=${TOR_USER:Q} TOR_GROUP=${TOR_GROUP:Q}
 
+INSTALL_MAKE_FLAGS+=	sysconfdir=${PREFIX}/share/examples
+
 CHECK_PORTABILITY_SKIP+=contrib/*
 
 .if !empty(PKGSRC_COMPILER:Mmipspro)
 CFLAGS+=		-c99
 .endif
-
-post-install:
-	${INSTALL_DATA} ${WRKSRC}/src/config/torrc.sample		\
-		${DESTDIR}${PREFIX}/share/examples/tor/torrc.sample
-	${INSTALL_DATA} ${WRKSRC}/contrib/tor-tsocks.conf		\
-		${DESTDIR}${PREFIX}/share/examples/tor/tor-tsocks.conf
 
 BUILDLINK_API_DEPENDS.libevent+= libevent>=1.2
 .include "../../devel/libevent/buildlink3.mk"

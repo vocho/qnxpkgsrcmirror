@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.15 2009/08/11 15:10:14 taca Exp $
+# $NetBSD: Makefile,v 1.17 2009/09/11 18:47:55 tnn Exp $
 #
 
 DISTNAME=	nbitools-R6.3
@@ -12,6 +12,8 @@ HOMEPAGE=	http://www.kitebird.com/imake-book/
 COMMENT=	imake and tools derived from NetBSD-current/xsrc
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
+PKG_DESTDIR_SUPPORT=	destdir
+NOT_FOR_UNPRIVILEGED=	yes
 
 BUILD_TARGET=	World
 MAKE_ENV+=	GCCCMD=gcc

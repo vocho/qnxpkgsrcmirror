@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.4 2009/08/12 02:31:22 obache Exp $
+# $NetBSD: Makefile,v 1.6 2009/11/12 01:15:31 dsainty Exp $
 #
 
 DISTNAME=	OdfAddinForOffice-src-3.0
@@ -27,7 +27,7 @@ BUILD_DIRS+=	source/Word/Converter
 BUILD_DIRS+=	source/Presentation/Converter
 BUILD_DIRS+=	source/Spreadsheet/Converter
 BUILD_DIRS+=	source/AdditionalTools/zlib123/contrib/minizip
-BUILD_DIRS+=	source/shell/odfconverter
+BUILD_DIRS+=	source/Shell/OdfConverter
 
 MAKE_JOBS_SAFE=	no
 
@@ -39,14 +39,15 @@ INSTALLATION_DIRS=	bin share/doc/OdfConverter
 # case-sensitive filesystem.
 #
 FILE_CASE_FIXES=	${BUILD_DIRS}
-FILE_CASE_FIXES+=	source/shell/odfconverter/OdfCommandLineException.cs
-FILE_CASE_FIXES+=	source/shell/odfconverter/OdfConverter.cs
-FILE_CASE_FIXES+=	source/shell/odfconverter/OoxValidator.cs
-FILE_CASE_FIXES+=	source/shell/odfconverter/OdfValidator.cs
+FILE_CASE_FIXES+=	source/Shell/OdfConverter/OdfCommandLineException.cs
+FILE_CASE_FIXES+=	source/Shell/OdfConverter/OdfConverter.cs
+FILE_CASE_FIXES+=	source/Shell/OdfConverter/OoxValidator.cs
+FILE_CASE_FIXES+=	source/Shell/OdfConverter/OdfValidator.cs
 post-extract:
 	cd ${WRKDIR} && mv "odf-converter-r5224/trunk" ${DISTNAME:Q}
 	set -e; \
-	find "${WRKSRC}" -name '[Mm][Aa][Kk][Ee][Ff][Ii][Ll][Ee]' -print | \
+	find "${WRKSRC}" -name Makefile -o \
+	    -name '[Mm][Aa][Kk][Ee][Ff][Ii][Ll][Ee]' -print | \
 	  while read file; do \
 	    dir=`dirname "$$file"`; mv "$$file" "$$dir/Makefile"; done
 	set -e; files=""; \
@@ -66,9 +67,9 @@ post-extract:
 	done
 
 do-install:
-	${INSTALL_PROGRAM} ${WRKSRC}/source/shell/odfconverter/OdfConverter \
+	${INSTALL_PROGRAM} ${WRKSRC}/source/Shell/OdfConverter/OdfConverter \
 		${DESTDIR}${PREFIX}/bin/
-	${INSTALL_DATA} ${WRKSRC}/source/shell/odfconverter/readme.txt \
+	${INSTALL_DATA} ${WRKSRC}/source/Shell/OdfConverter/README.TXT \
 		${DESTDIR}${PREFIX}/share/doc/OdfConverter/README.TXT
 
 .include "../../lang/mono/buildlink3.mk"

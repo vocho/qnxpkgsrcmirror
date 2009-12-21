@@ -1,23 +1,23 @@
-# $NetBSD: options.mk,v 1.8 2009/07/22 19:38:34 wiz Exp $
+# $NetBSD: options.mk,v 1.11 2009/09/13 14:11:11 wiz Exp $
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.graphviz
-PKG_SUPPORTED_OPTIONS=	gd x11 pangocairo gtk rsvg swig guile lua ocaml tcl perl
-PKG_SUGGESTED_OPTIONS=	gd x11 pangocairo gtk rsvg swig lua tcl perl
-# Explanation of consquence of options, to help those trying to slim down:
-#   swig: build-time only, needed for any of the languages.  Silently
-#     forces off language options.
-#   ocaml lua tcl perl: extension language support
-#   x11: Omits all linking with x11.  Silently forces off pangocairo, gtk
-#     and rsvg.
-#   pangocairo: TODO.  Silently forces off gtk.
-#   gtk: TODO
-#   rsvg: Omitting loses svg support.  librsvg has large dependencies
-#     including some Gnome libs.
-#   gd: TODO (seems small)
+PKG_SUPPORTED_OPTIONS=	gd ghostscript gtk guile lua ocaml pangocairo rsvg tcl x11 perl
+PKG_SUGGESTED_OPTIONS=	gd gtk lua pangocairo perl tcl x11
+# Explanation of consequence of options, to help those trying to slim down:
+#   guile ocaml lua tcl perl: extension language support
+#   x11: Omits all linking with x11, which means x11 graphics supports as
+#     well as x11 frontend support.
+#   pangocairo: basic ps/pdf support.
+#   gtk: basic graphic format support (in addition to gd, which isn't
+#     maintained anymore)
+#   rsvg: Omitting loses svg support. librsvg has large dependencies
+#     including some GNOME libs.
+#   gd: basic graphic format support, especially gif
+#   ghostscript: provides better ps/pdf-support, plus eps
 
 .include "../../mk/bsd.options.mk"
 
-PLIST_VARS+=		gd x11 pangocairo rsvg gtk guile lua ocaml tcl perl
+PLIST_VARS+=		gd ghostscript gtk guile lua ocaml pangocairo perl rsvg tcl x11
 
 .if !empty(PKG_OPTIONS:Mx11)
 .include "../../x11/libXp/buildlink3.mk"
@@ -25,46 +25,80 @@ PLIST_VARS+=		gd x11 pangocairo rsvg gtk guile lua ocaml tcl perl
 CONFIGURE_ENV+=		X11PREFIX=${X11PREFIX} X11BASE=${X11BASE}
 PLIST.x11=		yes
 
-.if !empty(PKG_OPTIONS:Mpangocairo)
-.include "../../devel/pango/buildlink3.mk"
-.include "../../graphics/cairo/buildlink3.mk"
+.  if !empty(PKG_OPTIONS:Mpangocairo)
+.  include "../../devel/pango/buildlink3.mk"
+.  include "../../graphics/cairo/buildlink3.mk"
 PLIST.pangocairo=	yes
 
-.if !empty(PKG_OPTIONS:Mgtk)
-.include "../../x11/gtk2/buildlink3.mk"
+.    if !empty(PKG_OPTIONS:Mghostscript)
+.    include "../../print/ghostscript/buildlink3.mk"
+PLIST.ghostscript=	yes
+.    else
+CONFIGURE_ARGS+=	--without-ghostscript
+.    endif
+
+.    if !empty(PKG_OPTIONS:Mgtk)
+.    include "../../x11/gtk2/buildlink3.mk"
 PLIST.gtk=		yes
-.else
+.    else
 CONFIGURE_ARGS+=	--without-gdk-pixbuf
 CONFIGURE_ARGS+=	--without-gtk
 CONFIGURE_ARGS+=	--without-gnomeui
-.endif
+.    endif
 
-.if !empty(PKG_OPTIONS:Mrsvg)
-.include "../../graphics/librsvg/buildlink3.mk"
+.    if !empty(PKG_OPTIONS:Mrsvg)
+.    include "../../graphics/librsvg/buildlink3.mk"
 PLIST.rsvg=		yes
-.else
+.    else
 CONFIGURE_ARGS+=	--without-rsvg
-.endif
+.    endif
 
-.else
+.  else
+# + x11, -pangocairo
 CONFIGURE_ARGS+=	--without-pangocairo
 
+.    if !empty(PKG_OPTIONS:Mghostscript)
+PKG_FAIL_REASON+=	"option ghostscript needs option pangocairo"
+.    endif
+CONFIGURE_ARGS+=	--without-ghostscript
+
+.    if !empty(PKG_OPTIONS:Mgtk)
+PKG_FAIL_REASON+=	"option gtk needs option pangocairo"
+.    endif
 CONFIGURE_ARGS+=	--without-gdk-pixbuf
 CONFIGURE_ARGS+=	--without-gtk
 CONFIGURE_ARGS+=	--without-gnomeui
 
+.    if !empty(PKG_OPTIONS:Mrsvg)
+PKG_FAIL_REASON+=	"option rsvg needs option pangocairo"
+.    endif
 CONFIGURE_ARGS+=	--without-rsvg
-.endif
+.  endif
 
 .else
+# - x11
 CONFIGURE_ARGS+=	--without-x
 
+.  if !empty(PKG_OPTIONS:Mpangocairo)
+PKG_FAIL_REASON+=	"option pangocairo needs option x11"
+.  endif
 CONFIGURE_ARGS+=	--without-pangocairo
 
+.  if !empty(PKG_OPTIONS:Mghostscript)
+PKG_FAIL_REASON+=	"option ghostscript needs option pangocairo and x11"
+.  endif
+CONFIGURE_ARGS+=	--without-ghostscript
+
+.  if !empty(PKG_OPTIONS:Mgtk)
+PKG_FAIL_REASON+=	"option gtk needs option pangocairo and x11"
+.  endif
 CONFIGURE_ARGS+=	--without-gdk-pixbuf
 CONFIGURE_ARGS+=	--without-gtk
 CONFIGURE_ARGS+=	--without-gnomeui
 
+.  if !empty(PKG_OPTIONS:Mrsvg)
+PKG_FAIL_REASON+=	"option rsvg needs option pangocairo and x11"
+.  endif
 CONFIGURE_ARGS+=	--without-rsvg
 .endif
 
@@ -73,12 +107,13 @@ CONFIGURE_ARGS+=	--without-rsvg
 PLIST.gd=		yes
 .else
 CONFIGURE_ARGS+=	--without-libgd
+CONFIGURE_ARGS+=	--without-mylibgd
 .endif
 
-.if !empty(PKG_OPTIONS:Mswig)
-.include "../../devel/swig/buildlink3.mk"
+USING_SWIG=	no
 
 .if !empty(PKG_OPTIONS:Mlua)
+USING_SWIG=	yes
 .include "../../lang/lua/buildlink3.mk"
 PLIST.lua=		yes
 .else
@@ -86,6 +121,7 @@ CONFIGURE_ARGS+=	--disable-lua
 .endif
 
 .if !empty(PKG_OPTIONS:Mocaml)
+USING_SWIG=	yes
 .include "../../lang/ocaml/buildlink3.mk"
 PLIST.ocaml=		yes
 .else
@@ -93,6 +129,7 @@ CONFIGURE_ARGS+=	--disable-ocaml
 .endif
 
 .if !empty(PKG_OPTIONS:Mtcl)
+USING_SWIG=	yes
 .include "../../x11/tk/buildlink3.mk"
 CONFIGURE_ENV+=		TCLCONFIG=${TCLCONFIG_SH:Q}
 CONFIGURE_ENV+=		TKCONFIG=${TKCONFIG_SH:Q}
@@ -102,6 +139,7 @@ CONFIGURE_ARGS+=	--disable-tcl
 .endif
 
 .if !empty(PKG_OPTIONS:Mguile)
+USING_SWIG=	yes
 .include "../../lang/guile/buildlink3.mk"
 CONFIGURE_ARGS+=	--enable-guile
 PLIST.guile=		yes
@@ -110,6 +148,7 @@ CONFIGURE_ARGS+=	--disable-guile
 .endif
 
 .if !empty(PKG_OPTIONS:Mperl)
+USING_SWIG=	yes
 .include "../../lang/perl5/buildlink3.mk"
 CONFIGURE_ARGS+=	--enable-perl
 PLIST.perl=		yes
@@ -118,11 +157,8 @@ USE_TOOLS+=perl
 CONFIGURE_ARGS+=	--disable-perl
 .endif
 
+.if !empty(USING_SWIG:Myes)
+.include "../../devel/swig/buildlink3.mk"
 .else
 CONFIGURE_ARGS+=	--disable-swig
-CONFIGURE_ARGS+=	--disable-tcl
-CONFIGURE_ARGS+=	--disable-ocaml
-CONFIGURE_ARGS+=	--disable-lua
-CONFIGURE_ARGS+=	--disable-guile
-CONFIGURE_ARGS+=	--disable-perl
 .endif
