@@ -1,14 +1,28 @@
 $NetBSD: patch-ax,v 1.1 2009/06/13 11:55:51 hasso Exp $
 
---- src/3rdparty/webkit/JavaScriptCore/runtime/Collector.cpp.orig	2009-04-22 02:57:38 +0300
-+++ src/3rdparty/webkit/JavaScriptCore/runtime/Collector.cpp	2009-05-01 19:45:48 +0300
-@@ -76,9 +76,7 @@ extern int *__libc_stack_end;
+--- src/3rdparty/webkit/JavaScriptCore/runtime/Collector.cpp.orig	2009-06-20 00:57:54.000000000 -0400
++++ src/3rdparty/webkit/JavaScriptCore/runtime/Collector.cpp
+@@ -76,10 +76,12 @@ extern int *__libc_stack_end;
  #include <thread.h>
  #endif
  
 -#if PLATFORM(OPENBSD)
- #include <pthread.h>
--#endif
+-#include <pthread.h>
++#if PLATFORM(QNXNTO)
++#include <sys/storage.h>
+ #endif
  
++#include <pthread.h>
++
  #if HAVE(PTHREAD_NP_H)
  #include <pthread_np.h>
+ #endif
+@@ -560,6 +562,8 @@ static inline void* currentThreadStackBa
+         stackBase = (void*)info.iBase;
+     }
+     return (void*)stackBase;
++#elif PLATFORM(QNXNTO)
++    return __tls()->__stackaddr;
+ #else
+ #error Need a way to get the stack base on this platform
+ #endif

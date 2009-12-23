@@ -1,0 +1,13 @@
+$NetBSD$
+
+--- src/qt3support/other/q3process_unix.cpp.orig	2009-06-20 00:57:58.000000000 -0400
++++ src/qt3support/other/q3process_unix.cpp
+@@ -248,7 +248,7 @@ int qnx6SocketPairReplacement (int socke
+ 	if (errno != EINPROGRESS) { BAILOUT };
+ 
+     // Accept connection
+-    socketFD[0] = accept(tmpSocket, (struct sockaddr *)NULL, (size_t *)NULL);
++    socketFD[0] = accept(tmpSocket, (struct sockaddr *)NULL, (QT_SOCKLEN_T *)NULL);
+     if(socketFD[0] == -1) { BAILOUT };
+ 
+     // We're done

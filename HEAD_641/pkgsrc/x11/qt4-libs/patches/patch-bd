@@ -1,0 +1,22 @@
+$NetBSD$
+
+--- src/3rdparty/webkit/WebCore/bridge/npapi.h.orig	2009-06-20 00:57:55.000000000 -0400
++++ src/3rdparty/webkit/WebCore/bridge/npapi.h
+@@ -128,6 +128,8 @@ typedef unsigned int uint32;
+ #else /* __LP64__ */
+ typedef unsigned long uint32;
+ #endif /* __LP64__ */
++#elif defined(__QNXNTO__)
++typedef _UINT32 uint32;
+ #endif
+ 
+ #ifndef _INT16
+@@ -142,6 +144,8 @@ typedef int int32;
+ #else /* __LP64__ */
+ typedef long int32;
+ #endif /* __LP64__ */
++#elif defined(__QNXNTO__)
++typedef _INT32 int32;
+ #endif
+ 
+ #ifndef FALSE
