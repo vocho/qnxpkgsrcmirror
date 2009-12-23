@@ -1,8 +1,19 @@
 $NetBSD: patch-aq,v 1.4 2009/06/13 11:55:51 hasso Exp $
 
---- configure.orig	2009-04-22 01:57:35.000000000 +0200
+--- configure.orig	2009-06-20 06:57:50.000000000 +0200
 +++ configure
-@@ -2745,7 +2745,7 @@ elif [ "$CFG_PRECOMPILE" = "yes" ] && [ 
+@@ -2364,6 +2364,10 @@ if [ -z "$PLATFORM" ]; then
+      UNIX_SV:*)
+         PLATFORM=unixware-g++
+         ;;
++
++     QNX:*)
++        PLATFORM=qnx-g++
++        ;;
+      *)
+         if [ "$OPT_HELP" != "yes" ]; then
+             echo
+@@ -2759,7 +2763,7 @@ elif [ "$CFG_PRECOMPILE" = "yes" ] && [ 
  fi
  
  #auto-detect DWARF2 on the mac
@@ -11,7 +22,7 @@ $NetBSD: patch-aq,v 1.4 2009/06/13 11:55:51 hasso Exp $
      if "$mactests/dwarf2.test" "$TEST_COMPILER" "$OPT_VERBOSE" "$mactests" ; then
          CFG_MAC_DWARF2=no
      else
-@@ -2754,7 +2754,7 @@ if [ "$PLATFORM_MAC" = "yes" ] && [ "$CF
+@@ -2768,7 +2772,7 @@ if [ "$PLATFORM_MAC" = "yes" ] && [ "$CF
  fi
  
  # auto-detect support for -Xarch on the mac
@@ -20,7 +31,7 @@ $NetBSD: patch-aq,v 1.4 2009/06/13 11:55:51 hasso Exp $
      if "$mactests/xarch.test" "$TEST_COMPILER" "$OPT_VERBOSE" "$mactests" ; then
          CFG_MAC_XARCH=no
      else
-@@ -5504,18 +5504,18 @@ fi
+@@ -5521,18 +5525,18 @@ fi
  
  # Set the default arch. Select 32-bit/carbon if nothing else has 
  # been specified on the configure line.
@@ -43,7 +54,7 @@ $NetBSD: patch-aq,v 1.4 2009/06/13 11:55:51 hasso Exp $
  fi
  
  # enable cocoa and/or carbon on Mac
-@@ -6445,7 +6445,7 @@ QMakeVar set sql-plugins "$SQL_PLUGINS"
+@@ -6463,7 +6467,7 @@ QMakeVar set sql-plugins "$SQL_PLUGINS"
  [ "$CFG_EXCEPTIONS" = "no" ] && QCONFIG_FLAGS="$QCONFIG_FLAGS QT_NO_EXCEPTIONS"
  [ "$CFG_IPV6" = "no" ]       && QCONFIG_FLAGS="$QCONFIG_FLAGS QT_NO_IPV6"
  [ "$CFG_SXE" = "no" ]        && QCONFIG_FLAGS="$QCONFIG_FLAGS QT_NO_SXE"
@@ -52,7 +63,7 @@ $NetBSD: patch-aq,v 1.4 2009/06/13 11:55:51 hasso Exp $
  
  if [ "$PLATFORM_QWS" != "yes" ]; then
      [ "$CFG_GRAPHICS_SYSTEM" = "raster" ] && QCONFIG_FLAGS="$QCONFIG_FLAGS QT_GRAPHICSSYSTEM_RASTER"
-@@ -6762,7 +6762,7 @@ EOF
+@@ -6780,7 +6784,7 @@ EOF
  *) ;;
  esac
  

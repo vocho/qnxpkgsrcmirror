@@ -83,6 +83,9 @@ SUBST_SED.socklen=	-e 's/QT_SOCKLEN_T.*/QT_SOCKLEN_T socklen_t/'
 .include "../../x11/libXft/buildlink3.mk"
 .include "../../x11/libXmu/buildlink3.mk"
 .include "../../x11/libXrandr/buildlink3.mk"
+.if ${OPSYS} == "QNX"
+.include "../../sysutils/s5ipc/buildlink3.mk"
+.endif
 
 .include "../../mk/pthread.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

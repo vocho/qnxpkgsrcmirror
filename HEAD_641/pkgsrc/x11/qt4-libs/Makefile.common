@@ -66,6 +66,7 @@ CONFIGURE_ARGS+=	-platform solaris-cc
 .    endif
 .  endif
 SYS_LIBS=		-lresolv -lsocket -lnsl -lrt
+SUBLIBS=		-lsocket
 .elif ${OPSYS} == "Interix"
 CONFIGURE_ARGS+=	-platform interix-g++
 CFLAGS+=		-I/usr/local/include/bind
@@ -79,6 +80,10 @@ QMAKE_RANLIB=		${RANLIB}
 .  if exists(/usr/lib/libresolv.dylib)
 LDFLAGS+=		-lresolv
 .  endif
+.elif ${OPSYS} == "QNX"
+SYS_LIBS=		-lsocket
+CFLAGS+=		-DQT_NO_SYSTEMSEMAPHORE
+LDFLAGS+=		-lsocket
 .endif
 
 QMAKE_RANLIB?=		${TRUE}
@@ -121,6 +126,9 @@ pre-configure:
 		-e 's:@COMPILER_RPATH_FLAG@:${COMPILER_RPATH_FLAG:Q}:g' \
 		-e 's:@QMAKE_RANLIB@:${QMAKE_RANLIB:Q}:g' \
 		${FILESDIR}/qmake.conf > ${WRKSRC}/qmake.conf
+.if ${OPSYS} == "QNX"
+	cp -c ${FILESDIR}/qnx-g++/qplatformdefs.h ${WRKSRC}/mkspecs/qnx-g++/qplatformdefs.h
+.endif
 	for dir in ${WRKSRC}/mkspecs/*; do \
 		cp ${WRKSRC}/qmake.conf $${dir}; \
 		rm -f $${dir}/*.orig; \

@@ -1,0 +1,18 @@
+$NetBSD$
+
+--- src/3rdparty/webkit/JavaScriptCore/wtf/Platform.h.orig	2009-06-20 00:57:54.000000000 -0400
++++ src/3rdparty/webkit/JavaScriptCore/wtf/Platform.h
+@@ -72,6 +72,13 @@
+ #define WTF_PLATFORM_OPENBSD 1
+ #endif
+ 
++/* PLATFORM(QNXNTO) */
++/* Operating system level dependencies for QNXNTO that */
++/* should be used regardless of operating environment */
++#ifdef __QNXNTO__
++#define WTF_PLATFORM_QNXNTO 1
++#endif
++
+ /* PLATFORM(SOLARIS) */
+ /* Operating system level dependencies for Solaris that should be used */
+ /* regardless of operating environment */

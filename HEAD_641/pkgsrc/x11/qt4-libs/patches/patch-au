@@ -1,0 +1,16 @@
+$NetBSD$
+
+--- qmake/generators/win32/msvc_objectmodel.cpp.orig	2009-06-20 00:57:53.000000000 -0400
++++ qmake/generators/win32/msvc_objectmodel.cpp
+@@ -46,6 +46,11 @@
+ 
+ QT_BEGIN_NAMESPACE
+ 
++#ifdef __QNXNTO__
++/* _Files conflicts with version in <stdio.h> */
++#define _Files _FILES_qt
++#endif
++
+ // XML Tags ---------------------------------------------------------
+ const char _Configuration[]                     = "Configuration";
+ const char _Configurations[]                    = "Configurations";
