@@ -1,0 +1,11 @@
+@comment $NetBSD: PLIST,v 1.6 2009/06/14 17:48:38 joerg Exp $
+bin/cpuflags
+man/man1/cpuflags.1
+share/cpuflags/subr_FreeBSD
+share/cpuflags/subr_Linux
+share/cpuflags/subr_NetBSD
+share/cpuflags/subr_SunOS
+share/cpuflags/subr_gcc
+share/cpuflags/subr_x86
+share/mk/cpuflags.mk
+share/mk/optimize_gcc.mk

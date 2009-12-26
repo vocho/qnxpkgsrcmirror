@@ -1,0 +1,35 @@
+$NetBSD: patch-sb,v 1.2 2009/06/07 11:23:47 wiz Exp $
+
+Temporary disable Sbus suport.
+
+--- hw/xfree86/common/xf86Configure.c.orig	2009-07-07 13:48:58.000000000 -0400
++++ hw/xfree86/common/xf86Configure.c
+@@ -53,6 +53,9 @@
+ #include "xf86Bus.h"
+ #include "xf86Sbus.h"
+ #endif
++#if defined(__QNXNTO__)
++#include <errno.h>
++#endif
+ #include "globals.h"
+ 
+ typedef struct _DevToConfig {
+@@ -82,6 +85,9 @@ static char *DFLT_MOUSE_PROTO = "auto";
+ #elif defined(linux)
+ static char DFLT_MOUSE_DEV[] = "/dev/input/mice";
+ static char DFLT_MOUSE_PROTO[] = "auto";
++#elif defined(__QNXNTO__)
++static char DFLT_MOUSE_DEV[] = "/dev/devi/mouse0";
++static char DFLT_MOUSE_PROTO[] = "hid";
+ #else
+ static char *DFLT_MOUSE_DEV = "/dev/mouse";
+ static char *DFLT_MOUSE_PROTO = "auto";
+@@ -115,7 +121,7 @@ xf86AddBusDeviceToConfigure(const char *
+ 		return NULL;
+ 	isPrimary = xf86IsPrimaryPci(pVideo);
+ 	break;
+-#if (defined(__sparc__) || defined(__sparc)) && !defined(__OpenBSD__)
++#if (defined(__sparc__) || defined(__sparc)) && !defined(__OpenBSD__) && !defined(__NetBSD__)
+     case BUS_SBUS:
+ 	for (i = 0;  i < nDevToConfig;  i++)
+ 	    if (DevToConfig[i].sVideo &&

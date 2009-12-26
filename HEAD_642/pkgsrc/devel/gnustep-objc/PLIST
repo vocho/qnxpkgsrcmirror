@@ -1,0 +1,15 @@
+@comment $NetBSD: PLIST,v 1.4 2009/06/14 17:48:46 joerg Exp $
+include/objc/NXConstStr.h
+include/objc/Object.h
+include/objc/Protocol.h
+include/objc/encoding.h
+include/objc/hash.h
+include/objc/objc-api.h
+include/objc/objc-decls.h
+include/objc/objc-list.h
+include/objc/objc.h
+include/objc/sarray.h
+include/objc/thr.h
+include/objc/typedstream.h
+lib/libobjc.so
+lib/libobjc.so.${PKGVERSION}

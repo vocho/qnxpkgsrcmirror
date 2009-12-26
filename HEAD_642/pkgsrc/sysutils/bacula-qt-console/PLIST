@@ -1,0 +1,15 @@
+@comment $NetBSD: PLIST,v 1.2 2009/06/14 18:16:01 joerg Exp $
+bin/bat
+share/doc/bacula/html/clients.html
+share/doc/bacula/html/console.html
+share/doc/bacula/html/filesets.html
+share/doc/bacula/html/index.html
+share/doc/bacula/html/joblist.html
+share/doc/bacula/html/jobplot.html
+share/doc/bacula/html/jobs.html
+share/doc/bacula/html/mail-message-new.png
+share/doc/bacula/html/media.html
+share/doc/bacula/html/restore.html
+share/doc/bacula/html/status.png
+share/doc/bacula/html/storage.html
+share/examples/bacula/bat.conf

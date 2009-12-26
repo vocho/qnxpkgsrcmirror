@@ -1,0 +1,5 @@
+$NetBSD: distinfo,v 1.10 2008/05/26 14:50:19 wiz Exp $
+
+SHA1 (autogen-5.9.5.tar.bz2) = b83961796a060f91ed30584eaffacd046368ba28
+RMD160 (autogen-5.9.5.tar.bz2) = 17f5fc8288f03663d27a7031e65173311d6bab92
+Size (autogen-5.9.5.tar.bz2) = 1007798 bytes

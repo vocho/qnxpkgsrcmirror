@@ -1,0 +1,9 @@
+@comment $NetBSD: PLIST,v 1.4 2009/06/14 17:50:25 joerg Exp $
+bin/nc
+bin/nedit
+man/man1/nedit.1
+man/man1/nedit-nc.1
+share/doc/nedit/NEdit.ad
+share/doc/nedit/README
+share/doc/nedit/ReleaseNotes
+share/doc/nedit/faq.txt

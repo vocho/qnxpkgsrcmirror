@@ -1,0 +1,30 @@
+$NetBSD: patch-aq,v 1.4 2009/08/09 20:05:37 tonnerre Exp $
+
+--- /dev/null	2009-07-25 19:31:04.000000000 +0200
++++ mvchgat.c	2009-07-25 19:30:48.000000000 +0200
+@@ -0,0 +1,25 @@
++#ifdef HAVE_CONFIG_H
++#include "config.h"
++#endif
++
++#include "mutt.h"
++#include "mutt_curses.h"
++
++#ifndef HAVE_MVWCHGAT
++int
++mvwchgat(WINDOW *win, int y, int x, int count, attr_t attr, short color,
++	const void *opts)
++{
++	wmove(win, y, x);
++	return wattr_set(win, attr, color, opts);
++}
++#endif
++
++#ifndef HAVE_MVCHGAT
++int
++mvchgat(int y, int x, int count, attr_t attr, short color,
++	const void *opts)
++{
++	return mvwchgat(stdscr, y, x, count, attr, color, opts);
++}
++#endif

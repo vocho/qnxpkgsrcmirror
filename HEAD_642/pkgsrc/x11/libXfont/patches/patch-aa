@@ -1,0 +1,13 @@
+$NetBSD$
+
+--- src/fc/fslibos.h.orig	2009-02-18 13:40:51.000000000 -0500
++++ src/fc/fslibos.h
+@@ -64,7 +64,7 @@ from The Open Group.
+ # endif
+ #endif
+ #ifndef OPEN_MAX
+-#if defined(SVR4) 
++#if defined(SVR4) || defined(__QNXNTO__)
+ #define OPEN_MAX 256
+ #else
+ #include <sys/param.h>

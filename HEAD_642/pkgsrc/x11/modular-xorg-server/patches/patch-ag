@@ -1,0 +1,33 @@
+$NetBSD$
+
+--- hw/xfree86/os-support/xf86_OSlib.h.orig	2008-11-14 16:27:05.000000000 -0500
++++ hw/xfree86/os-support/xf86_OSlib.h
+@@ -399,6 +399,28 @@
+ /* __FreeBSD_kernel__ || __NetBSD__ || __OpenBSD__ || __bsdi__ */
+ 
+ /**************************************************************************/
++/* QNX/Neutrino                                                           */
++/**************************************************************************/
++/* This is the Neutrino code for for NTO2.0 and GCC */
++#if defined(__QNXNTO__)
++#include <signal.h>
++#include <errno.h>
++#include <sys/stat.h>
++#include <termios.h>
++#include <ioctl.h>
++#include <sys/param.h>
++#include <sys/select.h>
++
++  /* keyboard types */
++# define KB_84                   1
++# define KB_101                  2
++# define KB_OTHER                3
++
++# define POSIX_TTY
++
++#endif
++
++/**************************************************************************/
+ /* IRIX                                                                   */
+ /**************************************************************************/
+ 

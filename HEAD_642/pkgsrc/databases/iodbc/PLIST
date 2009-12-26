@@ -1,0 +1,26 @@
+@comment $NetBSD: PLIST,v 1.4 2009/06/14 17:43:16 joerg Exp $
+bin/iodbc-config
+bin/iodbctest
+bin/iodbctestw
+include/iodbcext.h
+include/iodbcinst.h
+include/iodbcunix.h
+include/isql.h
+include/isqlext.h
+include/isqltypes.h
+include/odbcinst.h
+include/sql.h
+include/sqlext.h
+include/sqltypes.h
+include/sqlucode.h
+lib/libiodbc.la
+lib/libiodbcinst.la
+lib/libodbc.a
+lib/libodbc.so
+lib/pkgconfig/libiodbc.pc
+man/man1/iodbc-config.1
+man/man1/iodbctest.1
+man/man1/iodbctestw.1
+share/examples/iodbc/Makefile
+share/examples/iodbc/iodbctest.c
+share/examples/iodbc/odbc.ini

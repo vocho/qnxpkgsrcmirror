@@ -1,0 +1,5 @@
+$NetBSD: distinfo,v 1.5 2009/05/30 00:44:59 obache Exp $
+
+SHA1 (libmpd-0.18.0.tar.gz) = 8b4199975d56579437f2381a5549b1e037ea652d
+RMD160 (libmpd-0.18.0.tar.gz) = 8e5d85d2ee7231f6006b9b6cf46dab657a41b1bf
+Size (libmpd-0.18.0.tar.gz) = 355904 bytes

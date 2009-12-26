@@ -1,0 +1,30 @@
+$NetBSD: distinfo,v 1.72 2009/05/21 03:22:29 taca Exp $
+
+SHA1 (openssh-5.2.1-20090521/openssh-5.2p1-hpn13v6.diff.gz) = 9683d5feb3f7e302ef836901af5366df6c425815
+RMD160 (openssh-5.2.1-20090521/openssh-5.2p1-hpn13v6.diff.gz) = d647d3b0547e4d698c616f5ed6643b3ddbcced95
+Size (openssh-5.2.1-20090521/openssh-5.2p1-hpn13v6.diff.gz) = 33540 bytes
+SHA1 (openssh-5.2.1-20090521/openssh-5.2p1.tar.gz) = 8273a0237db98179fbdc412207ff8eb14ff3d6de
+RMD160 (openssh-5.2.1-20090521/openssh-5.2p1.tar.gz) = 7c53f342034b16e9faa9f5a09ef46390420722eb
+Size (openssh-5.2.1-20090521/openssh-5.2p1.tar.gz) = 1016612 bytes
+SHA1 (patch-aa) = da16ed24d7144fed35b479b99b718a33102bb1f2
+SHA1 (patch-ab) = 00e7e50a35e8b3bcfa53b239b520a12498c8dca0
+SHA1 (patch-ac) = ba97b23c6527311256b335c58175da9e9a3616e4
+SHA1 (patch-ad) = 254e11c5f56a72bf0b30bb8860e45156b3a0adf2
+SHA1 (patch-ae) = 9585221f9e49b4ebea31c374066d70e11aa804a1
+SHA1 (patch-af) = ca3224af0b648803404776a8c12ed678db4f8ff6
+SHA1 (patch-ag) = b5cb0400d3cda9cb6d60dc729e54b1ffc34ec9e2
+SHA1 (patch-ah) = fa5175734678e95d05dcdcebadeb79df3ecef760
+SHA1 (patch-ai) = becad6262e5daeef2a6db14097a8971c40088403
+SHA1 (patch-aj) = 5c89b4a7da59f05c50c16083aa6dd6e465cd0305
+SHA1 (patch-ak) = 550eae0b47dc220dac2439f57b39b7e4319057c5
+SHA1 (patch-al) = a3906a9b6a9a15b948b8bab3a85454f2515400bd
+SHA1 (patch-am) = 4893a8a059d611d35c1fb9ff03b598c590e0355e
+SHA1 (patch-an) = 5b41d9493028dd4dce4a73ea78e43f3a073108e5
+SHA1 (patch-ao) = 6b64be9b230ddb634b9b5fdab22c4944ae605153
+SHA1 (patch-ap) = 041059e25d2331aace0eaa5a6c3032afb3d565b4
+SHA1 (patch-aq) = 1a7d8a4c5e70a0c6211247ba583534ed8ce317d0
+SHA1 (patch-ar) = a1099e0175a2b14f3b19db04261891179b1e3299
+SHA1 (patch-as) = 3d9da803a82cc6e5f0c704bcc8c70e8332e043b5
+SHA1 (patch-au) = 6cfdfc531e2267017a15e66ea48c7ecfa2a3926f
+SHA1 (patch-av) = 06126d8f83398aa9df8a56792ad55bc769dd2550
+SHA1 (patch-aw) = 532f2aebcb93cae5e0dd26a5faa1593a7d3a3c51

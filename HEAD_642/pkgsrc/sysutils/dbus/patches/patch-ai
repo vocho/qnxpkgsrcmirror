@@ -1,0 +1,13 @@
+$NetBSD: patch-ai,v 1.2 2008/06/19 01:56:44 bjs Exp $
+
+--- config.h.in.orig	2008-12-18 15:47:41.000000000 -0500
++++ config.h.in
+@@ -89,6 +89,8 @@
+    for 486, else 0 */
+ #undef DBUS_USE_ATOMIC_INT_486_COND
+ 
++#undef HAVE_NETBSD_ATOMIC_OPS
++
+ /* A 'va_copy' style function */
+ #undef DBUS_VA_COPY
+ 

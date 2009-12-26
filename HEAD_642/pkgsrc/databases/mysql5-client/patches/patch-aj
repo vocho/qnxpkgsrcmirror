@@ -1,0 +1,21 @@
+$NetBSD: patch-aj,v 1.3 2008/09/18 11:50:44 taca Exp $
+
+--- client/mysqladmin.cc.orig	2008-08-04 15:19:04.000000000 +0300
++++ client/mysqladmin.cc	2008-09-16 12:18:37.000000000 +0300
+@@ -331,8 +331,14 @@
+   if (tty_password)
+     opt_password = get_tty_password(NullS);
+ 
+-  VOID(signal(SIGINT,endprog));			/* Here if abort */
+-  VOID(signal(SIGTERM,endprog));		/* Here if abort */
++#ifdef IRIX5
++#define _MYSQL_END_TYPE (void (*)(...))
++#else
++#define _MYSQL_END_TYPE
++#endif
++
++  VOID(signal(SIGINT,_MYSQL_END_TYPE endprog)); /* Here if abort */
++  VOID(signal(SIGTERM,_MYSQL_END_TYPE endprog));/* Here if abort */
+ 
+   if (opt_compress)
+     mysql_options(&mysql,MYSQL_OPT_COMPRESS,NullS);

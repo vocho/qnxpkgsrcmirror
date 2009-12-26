@@ -1,0 +1,11 @@
+@comment $NetBSD: PLIST,v 1.2 2009/06/14 17:48:51 joerg Exp $
+include/libdaemon/daemon.h
+include/libdaemon/dexec.h
+include/libdaemon/dfork.h
+include/libdaemon/dlog.h
+include/libdaemon/dnonblock.h
+include/libdaemon/dpid.h
+include/libdaemon/dsignal.h
+lib/libdaemon.la
+lib/pkgconfig/libdaemon.pc
+share/doc/libdaemon/README

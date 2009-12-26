@@ -1,0 +1,6 @@
+@comment $NetBSD: PLIST,v 1.2 2009/06/14 18:03:30 joerg Exp $
+bin/embryo_cc
+include/Embryo.h
+lib/libembryo.la
+lib/pkgconfig/embryo.pc
+share/embryo/include/default.inc

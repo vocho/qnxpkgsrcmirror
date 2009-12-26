@@ -1,0 +1,17 @@
+# $NetBSD: Makefile.common,v 1.6 2009/03/24 19:54:54 bouyer Exp $
+#
+
+PLUGINSVERSION=	1.4.13
+DISTNAME=	nagios-plugins-${PLUGINSVERSION}
+MASTER_SITES?=	${MASTER_SITE_SOURCEFORGE:=nagiosplug/}
+
+.include "../../net/nagios-base/Makefile.common"
+.include "../../mk/bsd.prefs.mk"
+
+.if ${OPSYS} == "DragonFly"
+CONFIGURE_ARGS+=	fu_cv_sys_stat_statvfs=no
+.endif
+
+
+CONFIGURE_ARGS+=	--with-nagios-user=${NAGIOS_USER:Q}
+CONFIGURE_ARGS+=	--with-nagios-group=${NAGIOS_GROUP:Q}

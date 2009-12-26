@@ -1,0 +1,30 @@
+$NetBSD: patch-configure,v 1.6 2009/06/14 11:27:01 ahoka Exp $
+
+--- configure.orig	2009-06-10 22:50:53.000000000 +0200
++++ configure
+@@ -1632,6 +1632,8 @@ case $target_os in
+     freebsd)
+         disable need_memalign
+         ;;
++    dragonfly)
++        ;;
+     bsd/os)
+         osextralibs="-lpoll -lgnugetopt"
+         strip="strip -d"
+@@ -1996,10 +1998,13 @@ enabled vis && add_cflags -mcpu=ultraspa
+ 
+ # ---
+ # big/little-endian test
+-check_cc <<EOF || die "endian test failed"
+-unsigned int endian = 'B' << 24 | 'I' << 16 | 'G' << 8 | 'E';
++check_exec <<EOF || enable bigendian
++int main()
++{
++ long one = 1;
++ return !(*((char *)(&one)));
++}
+ EOF
+-od -A n -t x1 $TMPO | grep -q '42 *49 *47 *45' && enable bigendian
+ 
+ # ---
+ # check availability of some header files

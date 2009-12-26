@@ -1,0 +1,6 @@
+@comment $NetBSD: PLIST,v 1.4 2009/06/14 22:00:37 joerg Exp $
+man/man8/tinyproxy.8
+sbin/tinyproxy
+share/doc/tinyproxy/filter-howto.txt
+share/examples/rc.d/tinyproxy
+share/examples/tinyproxy/tinyproxy.conf.default

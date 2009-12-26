@@ -1,0 +1,8 @@
+@comment $NetBSD: PLIST,v 1.4 2009/06/14 18:09:37 joerg Exp $
+libexec/resolvconf/dnsmasq
+libexec/resolvconf/libc
+libexec/resolvconf/named
+man/man5/resolvconf.conf.5
+man/man8/resolvconf.8
+sbin/resolvconf
+share/examples/resolvconf/resolvconf.conf

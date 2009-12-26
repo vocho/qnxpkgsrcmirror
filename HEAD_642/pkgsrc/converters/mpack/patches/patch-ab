@@ -1,0 +1,49 @@
+$NetBSD: patch-ab,v 1.7 2009/02/15 20:12:18 dholland Exp $
+
+--- unixos.c.orig	2003-07-21 16:54:05.000000000 -0400
++++ unixos.c	2009-02-15 14:56:48.000000000 -0500
+@@ -23,9 +23,11 @@
+  * SOFTWARE.
+  */
+ #include <stdio.h>
++#include <stdlib.h>
+ #include <ctype.h>
+ #include <string.h>
+ #include <errno.h>
++#include <time.h>
+ #include <sys/types.h>
+ #include <sys/param.h>
+ #include <netdb.h>
+@@ -38,10 +40,6 @@
+ #define MAXHOSTNAMELEN 64
+ #endif
+ 
+-extern int errno;
+-extern char *malloc();
+-extern char *getenv();
+-
+ int overwrite_files = 0;
+ int didchat;
+ 
+@@ -76,7 +74,7 @@ char *os_genid(void)
+     }
+ 
+     result = malloc(25+strlen(hostname));
+-    sprintf(result, "%d.%d@%s", pid, curtime++, hostname);
++    sprintf(result, "%d.%lld@%s", pid, (long long) curtime++, hostname);
+     return result;
+ }
+ 
+@@ -90,7 +88,11 @@ char *os_idtodir(char *id)
+ 	strcpy(buf, getenv("TMPDIR"));
+     }
+     else {
+-	strcpy(buf, "/usr/tmp");
++#if defined(P_tmpdir)
++	strcpy(buf, P_tmpdir);
++#else
++	strcpy(buf, "/var/tmp");
++#endif
+     }
+     strcat(buf, "/m-prts-");
+     p = getenv("USER");

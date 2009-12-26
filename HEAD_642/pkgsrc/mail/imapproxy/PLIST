@@ -1,0 +1,10 @@
+@comment $NetBSD: PLIST,v 1.2 2009/06/14 18:04:35 joerg Exp $
+bin/imapproxy
+share/doc/imapproxy/BUGS
+share/doc/imapproxy/COPYING
+share/doc/imapproxy/ChangeLog
+share/doc/imapproxy/FAQ
+share/doc/imapproxy/INSTALL
+share/doc/imapproxy/README
+share/doc/imapproxy/THANKS
+share/doc/imapproxy/TODO

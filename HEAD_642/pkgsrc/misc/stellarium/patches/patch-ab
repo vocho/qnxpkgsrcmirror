@@ -1,0 +1,13 @@
+$NetBSD: patch-ab,v 1.2 2008/10/26 14:03:37 adam Exp $
+
+--- doc/CMakeLists.txt.orig	2008-10-26 14:40:24.000000000 +0100
++++ doc/CMakeLists.txt
+@@ -20,7 +20,7 @@ ADD_CUSTOM_COMMAND(
+   DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/stellarium.1
+ )
+ 
+-INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/stellarium.1 DESTINATION share/man/man1)
++INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/stellarium.1 DESTINATION man/man1)
+ 
+ ENDIF(UNIX AND NOT WIN32)
+ 

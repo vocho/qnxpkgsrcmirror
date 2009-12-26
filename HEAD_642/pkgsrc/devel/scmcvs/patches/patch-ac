@@ -1,0 +1,31 @@
+$NetBSD: patch-ac,v 1.3 2009/04/25 11:41:59 sno Exp $
+
+--- src/Makefile.in.orig	2008-05-07 20:12:32.000000000 +0000
++++ src/Makefile.in	2009-04-16 06:42:20.000000000 +0000
+@@ -82,7 +82,7 @@
+ 	version.$(OBJEXT) vers_ts.$(OBJEXT) watch.$(OBJEXT) \
+ 	wrapper.$(OBJEXT) zlib.$(OBJEXT)
+ cvs_OBJECTS = $(am_cvs_OBJECTS)
+-cvs_DEPENDENCIES = ../diff/libdiff.a ../lib/libcvs.a ../zlib/libz.a
++cvs_DEPENDENCIES = ../diff/libdiff.a ../lib/libcvs.a
+ binSCRIPT_INSTALL = $(INSTALL_SCRIPT)
+ SCRIPTS = $(bin_SCRIPTS)
+ DEFAULT_INCLUDES = -I. -I$(top_builddir)@am__isrc@
+@@ -206,7 +206,7 @@
+ # some namespace hackery going on that maybe shouldn't be.  Long term fix is to
+ # try and remove naming ocnflicts and fix Automake to allow particular includes
+ # to be attached only to particular object files.  Short term fix is either or.
+-INCLUDES = -I$(top_srcdir)/lib -I$(top_srcdir)/diff -I$(top_srcdir)/zlib $(includeopt)
++INCLUDES = -I$(top_srcdir)/lib -I$(top_srcdir)/diff $(includeopt)
+ bin_SCRIPTS = cvsbug
+ 
+ # The cvs executable
+@@ -285,7 +285,7 @@
+ cvs_LDADD = \
+ 	../diff/libdiff.a \
+ 	../lib/libcvs.a \
+-	../zlib/libz.a
++	-lz
+ 
+ 
+ # extra clean targets

@@ -1,0 +1,5 @@
+$NetBSD: distinfo,v 1.4 2009/08/09 08:44:49 wiz Exp $
+
+SHA1 (tomboy-0.14.3.tar.gz) = bc825272a1a05e1d46fe1d3c5486e96d3c46a43c
+RMD160 (tomboy-0.14.3.tar.gz) = 0f201a7717752cc8c0cf46bb54734b0e06577c83
+Size (tomboy-0.14.3.tar.gz) = 6171808 bytes

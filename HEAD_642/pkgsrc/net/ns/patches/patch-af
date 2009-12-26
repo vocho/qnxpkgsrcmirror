@@ -1,0 +1,40 @@
+$NetBSD: patch-af,v 1.8 2008/09/18 04:48:12 minskim Exp $
+
+--- configure.orig	2008-03-31 19:00:25.000000000 -0700
++++ configure
+@@ -5836,7 +5836,7 @@ powerpc-apple-darwin*)
+ esac
+ 
+ 
+-xlibdirs="\
++xlibdirs="${X11LIBDIR} \
+ 	/usr/openwin/lib \
+ 	/usr/X11R6/lib \
+ 	/usr/lib/X11R6 \
+@@ -5851,7 +5851,7 @@ xlibdirs="\
+ 	/Developer/SDKs/MacOSX10.4u.sdk/usr/X11R6/lib \
+ 	/import/X11R4/usr/lib"
+ 
+-xincdirs="\
++xincdirs="${X11INCDIR} \
+ 	/usr/openwin/include \
+ 	/usr/X11R6/include \
+ 	/usr/include/X11R6 \
+@@ -6906,7 +6906,7 @@ fi
+ 
+ 
+ 
+-for ac_header in arpa/inet.h fenv.h netinet/in.h string.h strings.h time.h unistd.h net/ethernet.h
++for ac_header in arpa/inet.h fenv.h netinet/in.h string.h strings.h time.h unistd.h net/if.h net/ethernet.h netinet/if_ether.h sys/socket.h
+ do
+ as_ac_Header=`echo "ac_cv_header_$ac_header" | $as_tr_sh`
+ if eval "test \"\${$as_ac_Header+set}\" = set"; then
+@@ -11052,6 +11052,8 @@ do
+ _ACEOF
+ cat >>$CONFIG_STATUS <<\_ACEOF
+   -recheck | --recheck | --rechec | --reche | --rech | --rec | --re | --r)
++	: Avoid regenerating within pkgsrc
++	exit 0
+     ac_cs_recheck=: ;;
+   --version | --vers* | -V )
+     echo "$ac_cs_version"; exit 0 ;;

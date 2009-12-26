@@ -1,0 +1,29 @@
+$NetBSD: patch-af,v 1.4 2009/05/05 06:21:16 minskim Exp $
+
+--- Documentation/Makefile.orig	2009-03-04 08:18:50.000000000 +0000
++++ Documentation/Makefile
+@@ -94,16 +94,16 @@ pdf: user-manual.pdf
+ install: install-man
+ 
+ install-man: man
+-	$(INSTALL) -d -m 755 $(DESTDIR)$(man1dir)
+-	$(INSTALL) -d -m 755 $(DESTDIR)$(man5dir)
+-	$(INSTALL) -d -m 755 $(DESTDIR)$(man7dir)
+-	$(INSTALL) -m 644 $(DOC_MAN1) $(DESTDIR)$(man1dir)
+-	$(INSTALL) -m 644 $(DOC_MAN5) $(DESTDIR)$(man5dir)
+-	$(INSTALL) -m 644 $(DOC_MAN7) $(DESTDIR)$(man7dir)
++	$(BSD_INSTALL_MAN_DIR) $(DESTDIR)$(man1dir)
++	$(BSD_INSTALL_MAN_DIR) $(DESTDIR)$(man5dir)
++	$(BSD_INSTALL_MAN_DIR) $(DESTDIR)$(man7dir)
++	$(BSD_INSTALL_MAN) $(DOC_MAN1) $(DESTDIR)$(man1dir)
++	$(BSD_INSTALL_MAN) $(DOC_MAN5) $(DESTDIR)$(man5dir)
++	$(BSD_INSTALL_MAN) $(DOC_MAN7) $(DESTDIR)$(man7dir)
+ 
+ install-info: info
+-	$(INSTALL) -d -m 755 $(DESTDIR)$(infodir)
+-	$(INSTALL) -m 644 git.info gitman.info $(DESTDIR)$(infodir)
++	$(BSD_INSTALL_DATA_DIR) $(DESTDIR)$(infodir)
++	$(BSD_INSTALL_DATA) git.info gitman.info $(DESTDIR)$(infodir)
+ 	if test -r $(DESTDIR)$(infodir)/dir; then \
+ 	  $(INSTALL_INFO) --info-dir=$(DESTDIR)$(infodir) git.info ;\
+ 	  $(INSTALL_INFO) --info-dir=$(DESTDIR)$(infodir) gitman.info ;\

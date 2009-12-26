@@ -1,0 +1,24 @@
+$NetBSD: patch-ab,v 1.5 2008/06/15 14:09:03 peter Exp $
+
+--- cache.c.old	2008-06-14 17:43:59.000000000 +0200
++++ cache.c	2008-06-15 01:15:37.000000000 +0200
+@@ -23,7 +23,11 @@
+ #include <netinet/in.h>
+ 
+ #include <netinet/tcp_fsm.h>
++#ifdef __DragonFly__
++#include <net/pf/pfvar.h>
++#else
+ #include <net/pfvar.h>
++#endif /* !__DragonFly__ */
+ #include <arpa/inet.h>
+ 
+ #include <stdio.h>
+@@ -40,6 +44,7 @@
+ 
+ /* initialize the tree and queue */
+ RB_HEAD(sc_tree, sc_ent) sctree;
++RB_PROTOTYPE(sc_tree, sc_ent, tlink, sc_cmp);
+ TAILQ_HEAD(sc_queue, sc_ent) scq1, scq2, scq_free;
+ RB_GENERATE(sc_tree, sc_ent, tlink, sc_cmp);
+ 

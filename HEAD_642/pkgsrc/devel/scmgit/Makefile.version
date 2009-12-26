@@ -1,0 +1,3 @@
+# $NetBSD: Makefile.version,v 1.10 2009/08/07 02:39:51 minskim Exp $
+#
+GIT_VERSION=	1.6.4

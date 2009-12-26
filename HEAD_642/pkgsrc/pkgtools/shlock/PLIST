@@ -1,0 +1,3 @@
+@comment $NetBSD: PLIST,v 1.2 2008/05/29 17:03:54 tnn Exp $
+bin/shlock
+man/man1/shlock.1

@@ -1,0 +1,26 @@
+$NetBSD: patch-aa,v 1.2 2008/06/12 02:14:44 joerg Exp $
+
+--- Makefile.orig	2006-11-07 00:26:58.000000000 +0000
++++ Makefile
+@@ -102,16 +102,16 @@ DISTTOOLMAN = pam_af_tool.8
+ LIBMAN = $(LIBDIR)/$(DISTLIBMAN)
+ TOOLMAN = $(TOOLDIR)/$(DISTTOOLMAN)
+ 
+-SECUREDIR = /lib/security
+-SBINDIR = /sbin
+-MANDIR = /share/man
+-DESTDIR = /usr/local
++SECUREDIR = ${PREFIX}/lib/security
++SBINDIR = ${PREFIX}/sbin
++MANDIR = ${PREFIX}/$(PKGMANDIR)
++#DESTDIR = /usr/local
+ 
+ LIB_OBJS = $(LIBDIR)/pam_af.o $(LIBDIR)/subr.o
+ TOOL_OBJS = $(TOOLDIR)/pam_af_tool.o $(TOOLDIR)/subr.o
+ 
+ all:
+-	if [ "`$(UNAME)`" = "FreeBSD" ]; then \
++	if [ "`$(UNAME)`" = "FreeBSD" -o "`$(UNAME)`" = "NetBSD" -o "`$(UNAME)`" = "OpenBSD" -o "`$(UNAME)`" = "DragonFly" ]; then \
+ 		$(MAKE) CFLAGS="$(CFLAGS) $(CFLAGS_GCC) $(CFLAGS_BSD)" \
+ 			LD=ld LDFLAGS="$(LDFLAGS_BSD) $(SHLDFLAGS_GCC)" \
+ 			$(LIBBIN); \

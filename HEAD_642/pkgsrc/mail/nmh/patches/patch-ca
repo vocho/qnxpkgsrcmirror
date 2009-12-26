@@ -1,0 +1,59 @@
+$NetBSD: patch-ca,v 1.6 2008/08/08 23:41:22 epg Exp $
+
+Use ${INSTALL_SCRIPT} to install scripts
+Install configuration files as <conf-file>.dist
+
+--- etc/Makefile.in.orig	2006-03-04 22:14:18.000000000 +0000
++++ etc/Makefile.in	2008-08-08 21:22:09.000000000 +0000
+@@ -15,6 +15,7 @@
+ bindir      = @bindir@
+ libdir      = @libdir@
+ etcdir      = @sysconfdir@
++egdir       = @prefix@/share/examples/nmh
+ 
+ MTS         = @MTS@
+ mailspool   = @mailspool@
+@@ -92,7 +93,7 @@
+ 	done
+ 
+ install-etc-files:
+-	$(top_srcdir)/mkinstalldirs $(DESTDIR)$(etcdir)
++	$(top_srcdir)/mkinstalldirs $(DESTDIR)$(egdir)
+ 	INSTALL_FILES="$(GENERATED_ETC_FILES)"; \
+ 	for file in $(STATIC_FILES); do \
+ 	  INSTALL_FILES="$$INSTALL_FILES $(srcdir)/$$file"; \
+@@ -100,11 +101,11 @@
+ 	for path in $$INSTALL_FILES; do \
+ 	  file=`basename $$path`; \
+ 	  echo "Installing $$file..."; \
+-	  if [ -f $(DESTDIR)$(etcdir)/$$file ]; then \
+-	    mv $(DESTDIR)$(etcdir)/$$file $(DESTDIR)$(etcdir)/$$file.prev; \
+-	    $(INSTALL_DATA) $$path $(DESTDIR)$(etcdir)/$$file; \
+-	    if diff $(DESTDIR)$(etcdir)/$$file.prev $(DESTDIR)$(etcdir)/$$file; then \
+-	      rm $(DESTDIR)$(etcdir)/$$file.prev; \
++	  if [ -f $(DESTDIR)$(egdir)/$$file ]; then \
++	    mv $(DESTDIR)$(egdir)/$$file $(DESTDIR)$(egdir)/$$file.prev; \
++	    $(INSTALL_DATA) $$path $(DESTDIR)$(egdir)/$$file; \
++	    if diff $(DESTDIR)$(egdir)/$$file.prev $(DESTDIR)$(egdir)/$$file; then \
++	      rm $(DESTDIR)$(egdir)/$$file.prev; \
+ 	    else \
+ 	      echo; \
+ 	      echo "  Previous version of $$file saved as $$file.prev due\c";\
+@@ -114,7 +115,7 @@
+ 	      echo; \
+ 	    fi; \
+ 	  else \
+-	    $(INSTALL_DATA) $$path $(DESTDIR)$(etcdir)/$$file; \
++	    $(INSTALL_DATA) $$path $(DESTDIR)$(egdir)/$$file; \
+ 	  fi; \
+ 	done
+ 
+@@ -127,7 +128,7 @@
+ 
+ uninstall-etc-files:
+ 	for file in $(STATIC_FILES) $(GENERATED_ETC_FILES); do \
+-	  rm -f $(DESTDIR)$(etcdir)/$$file; \
++	  rm -f $(DESTDIR)$(egdir)/$$file; \
+ 	done
+ 
+ # ========== DEPENDENCIES FOR CLEANUP ==========

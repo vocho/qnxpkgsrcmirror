@@ -1,0 +1,5 @@
+$NetBSD: distinfo,v 1.4 2008/10/15 16:22:02 smb Exp $
+
+SHA1 (cachesaver-0.10.8.tar.gz) = 98f0a4620939bcf2884a9b5bdec36d47bb21701c
+RMD160 (cachesaver-0.10.8.tar.gz) = 828fd5f99cca11359442322a3c61e366789a9fa4
+Size (cachesaver-0.10.8.tar.gz) = 333902 bytes

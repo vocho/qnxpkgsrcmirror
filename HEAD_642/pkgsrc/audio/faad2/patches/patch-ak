@@ -1,0 +1,22 @@
+$NetBSD: patch-ak,v 1.5 2009/08/10 00:01:56 tnn Exp $
+
+--- configure.in.orig	2009-02-05 01:51:03.000000000 +0100
++++ configure.in
+@@ -9,7 +9,7 @@ dnl - mpeg4ip plugin (requires mpeg4ip's
+ 
+ AC_INIT
+ AC_CONFIG_AUX_DIR(.)
+-AM_INIT_AUTOMAKE(faad2, 2.7.0)
++AM_INIT_AUTOMAKE(faad2, 2.7.0, do-not-define-PACKAGE-or-VERSION)
+ 
+ AC_PROG_LIBTOOL
+ AC_SUBST(LIBTOOL_DEPS)
+@@ -163,6 +163,8 @@ AC_CONFIG_FILES(plugins/xmms/src/Makefil
+ AC_CONFIG_FILES(plugins/mpeg4ip/Makefile)
+ AC_CONFIG_FILES(faad2.spec)
+ AC_CONFIG_FILES(frontend/Makefile)
++AC_CONFIG_FILES(include/Makefile)
+ AC_CONFIG_FILES(Makefile)
+ 
+ AC_OUTPUT
++cp config.h faad2-config.h

@@ -1,0 +1,13 @@
+$NetBSD: patch-aa,v 1.2 2008/10/26 14:03:37 adam Exp $
+
+--- src/modules/ConstellationMgr.cpp.orig	2008-10-26 14:25:08.000000000 +0100
++++ src/modules/ConstellationMgr.cpp
+@@ -402,7 +402,7 @@ void ConstellationMgr::loadLinesAndArt(c
+ 				{
+ 					texturePath = StelApp::getInstance().getFileMgr().findFile(QString("textures/")+texfile);
+ 				}
+-				catch(exception& e2)
++				catch (std::exception& e2)
+ 				{
+ 					qWarning() << "ERROR: could not find texture, " << texfile << ": " << e2.what();
+ 				}

@@ -1,0 +1,12 @@
+Squid 3.1 represents a new feature release above 3.0.
+This version is however still in release candidate testing cycle.
+
+The most important of these new features are:
+* New Version Numbering System
+* Minimal squid.conf improvements
+* Native IPv6 Support
+* Error Page Localization
+* Connection Pinning (for NTLM Auth Passthrough)
+* Quality of Service (QoS) Flow support
+* SSL Bump (for HTTPS Filtering and Adaptation)
+* eCAP Adaptation Module support

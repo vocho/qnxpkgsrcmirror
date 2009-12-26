@@ -1,0 +1,21 @@
+$NetBSD: patch-aa,v 1.5 2009/06/03 06:58:55 adam Exp $
+
+--- misc/Makefile.in.orig	2009-02-23 22:23:35.000000000 +0100
++++ misc/Makefile.in
+@@ -41,7 +41,7 @@ DEFS=   	@DEFS@
+ OPT=		@OPT@
+ CFLAGS=		$(OPT) $(DEFS)
+ PACKAGEDIR=	$(prefix)/Mailman
+-DATADIR=	$(var_prefix)/data
++DATADIR=	$(prefix)/support
+ ICONDIR=	$(prefix)/icons
+ SCRIPTSDIR=	$(prefix)/scripts
+ 
+@@ -99,6 +99,7 @@ install-packages:
+ 	do \
+ 	    gunzip -c $(srcdir)/$$p.tar.gz | (cd $(PKGDIR) ; tar xf -); \
+ 	    (cd $(PKGDIR)/$$p ; umask 02 ; PYTHONPATH=$(PYTHONLIBDIR) $(PYTHON) $(SETUPCMD)); \
++	    rm -rf $(PKGDIR)/$$p; \
+ 	done
+ 
+ finish:

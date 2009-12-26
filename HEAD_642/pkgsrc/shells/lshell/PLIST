@@ -1,0 +1,10 @@
+@comment $NetBSD: PLIST,v 1.2 2009/06/14 18:14:21 joerg Exp $
+bin/lshell
+${PYSITELIB}/lshell.py
+${PYSITELIB}/lshell.pyc
+${PYSITELIB}/lshell.pyo
+man/man1/lshell.1
+share/doc/lshell/CHANGES
+share/doc/lshell/COPYING
+share/doc/lshell/README
+share/examples/lshell/lshell.conf

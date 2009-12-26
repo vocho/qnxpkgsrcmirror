@@ -1,0 +1,13 @@
+$NetBSD$
+
+--- io/ufile.c.orig	2009-07-01 14:50:48.000000000 -0400
++++ io/ufile.c
+@@ -19,7 +19,7 @@
+ */
+ 
+ /* define for fileno.  */
+-#ifndef _XOPEN_SOURCE
++#if !defined(_XOPEN_SOURCE) && !defined(__QNXNTO__)
+ #if __STDC_VERSION__ >= 199901L
+ /* It is invalid to compile an XPG3, XPG4, XPG4v2 or XPG5 application using c99 */
+ #define _XOPEN_SOURCE 600

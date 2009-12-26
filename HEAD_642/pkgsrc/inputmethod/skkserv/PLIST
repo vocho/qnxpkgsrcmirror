@@ -1,0 +1,10 @@
+@comment $NetBSD: PLIST,v 1.4 2009/06/14 18:01:32 joerg Exp $
+bin/skkdic-expr
+bin/skkdic-sort
+bin/skkdic-count
+libexec/skkserv
+share/examples/rc.d/skkserv
+share/skk/SKK-JISYO.L
+share/skk/README.skkserv
+share/skk/README.1st.jisyo-tools
+share/skk/README.jisyo-tools

@@ -1,0 +1,15 @@
+$NetBSD: patch-aa,v 1.2 2009/07/07 17:56:40 drochner Exp $
+
+--- setup.py.orig	2008-12-02 03:41:07.000000000 +0100
++++ setup.py
+@@ -206,8 +206,8 @@ if __name__ == "__main__":
+           author_email="quodlibet@lists.sacredchao.net",
+           license="GNU GPL v2",
+           packages=["mutagen"],
+-          data_files=data_files,
+-          scripts=glob.glob("tools/m*[!~]"),
++#          data_files=data_files,
++#          scripts=glob.glob("tools/m*[!~]"),
+           long_description="""\
+ Mutagen is a Python module to handle audio metadata. It supports ASF,
+ FLAC, M4A, Monkey's Audio, MP3, Musepack, Ogg FLAC, Ogg Speex, Ogg

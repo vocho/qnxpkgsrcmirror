@@ -1,0 +1,13 @@
+@comment $NetBSD: PLIST,v 1.2 2009/06/14 17:28:17 joerg Exp $
+bin/minitar
+${GEM_HOME}/cache/archive-tar-minitar-${PKGVERSION}.gem
+${GEM_LIBDIR}/ChangeLog
+${GEM_LIBDIR}/Install
+${GEM_LIBDIR}/README
+${GEM_LIBDIR}/Rakefile
+${GEM_LIBDIR}/bin/minitar
+${GEM_LIBDIR}/lib/archive/tar/minitar.rb
+${GEM_LIBDIR}/lib/archive/tar/minitar/command.rb
+${GEM_LIBDIR}/tests/tc_tar.rb
+${GEM_LIBDIR}/tests/testall.rb
+${GEM_HOME}/specifications/archive-tar-minitar-${PKGVERSION}.gemspec

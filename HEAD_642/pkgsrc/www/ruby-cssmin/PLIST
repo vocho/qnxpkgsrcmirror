@@ -1,0 +1,6 @@
+@comment $NetBSD: PLIST,v 1.2 2009/06/14 22:00:33 joerg Exp $
+${GEM_HOME}/cache/cssmin-${PKGVERSION}.gem
+${GEM_LIBDIR}/HISTORY
+${GEM_LIBDIR}/LICENSE
+${GEM_LIBDIR}/lib/cssmin.rb
+${GEM_HOME}/specifications/cssmin-${PKGVERSION}.gemspec

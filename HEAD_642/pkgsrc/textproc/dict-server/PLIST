@@ -1,0 +1,17 @@
+@comment $NetBSD: PLIST,v 1.7 2009/06/14 21:36:30 joerg Exp $
+bin/dictfmt
+bin/dictfmt_index2suffix
+bin/dictfmt_index2word
+bin/dictfmt_plugin
+bin/dictfmt_virtual
+bin/dictunformat
+bin/dictzip
+man/man1/dictfmt.1
+man/man1/dictfmt_index2suffix.1
+man/man1/dictfmt_index2word.1
+man/man1/dictunformat.1
+man/man1/dictzip.1
+man/man8/dictd.8
+sbin/dictd
+share/examples/dict-server/dictd.conf
+@pkgdir share/dictd

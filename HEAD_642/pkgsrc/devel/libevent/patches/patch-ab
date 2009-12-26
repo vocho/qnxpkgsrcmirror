@@ -1,0 +1,14 @@
+$NetBSD$
+
+--- http.c.orig	2008-03-02 22:37:21.000000000 -0500
++++ http.c
+@@ -67,6 +67,9 @@
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <string.h>
++#ifdef __QNXNTO__
++#include <strings.h> /* strncasecmp */
++#endif
+ #ifndef WIN32
+ #include <syslog.h>
+ #endif

@@ -1,0 +1,6 @@
+$NetBSD: distinfo,v 1.6 2009/03/10 17:43:19 sno Exp $
+
+SHA1 (Parse-RecDescent-1.96.0.tar.gz) = 9588b31e1e3f79361be185b66dfdf975295cc417
+RMD160 (Parse-RecDescent-1.96.0.tar.gz) = c204d3adcbbad29e098c44aafdf0a74de7621a96
+Size (Parse-RecDescent-1.96.0.tar.gz) = 152818 bytes
+SHA1 (patch-aa) = f772dbb05983e068b1a312963c226067088227ec

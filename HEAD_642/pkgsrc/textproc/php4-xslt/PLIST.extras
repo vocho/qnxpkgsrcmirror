@@ -1,0 +1,2 @@
+@comment $NetBSD: PLIST.extras,v 1.2 2009/06/14 18:17:23 joerg Exp $
+share/doc/${PKGBASE}/README.XSLT-BACKENDS

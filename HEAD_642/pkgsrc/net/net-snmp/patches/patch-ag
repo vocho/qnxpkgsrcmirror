@@ -1,0 +1,65 @@
+$NetBSD: patch-ag,v 1.10 2007/02/05 12:06:16 adam Exp $
+
+--- agent/mibgroup/host/hr_storage.c.orig	2008-06-05 17:11:53.000000000 -0400
++++ agent/mibgroup/host/hr_storage.c
+@@ -12,6 +12,9 @@
+ #endif
+ 
+ #include <sys/types.h>
++#if HAVE_LIBNBUTIL
++#include <nbutil.h>
++#endif
+ #if HAVE_SYS_PARAM_H
+ #include <sys/param.h>
+ #endif
+@@ -75,6 +78,13 @@
+ #endif
+ #endif                          /* vm/vm.h */
+ #endif                          /* sys/vm.h */
++#if HAVE_SYS_POOL_H
++#if defined(MBPOOL_SYMBOL) && defined(MCLPOOL_SYMBOL)
++#define __POOL_EXPOSE
++#include <sys/pool.h>
++#else
++#undef HAVE_SYS_POOL_H
++#endif
+ #if defined(HAVE_UVM_UVM_PARAM_H) && defined(HAVE_UVM_UVM_EXTERN_H)
+ #include <uvm/uvm_param.h>
+ #include <uvm/uvm_extern.h>
+@@ -82,20 +92,13 @@
+ #include <vm/vm_param.h>
+ #include <vm/vm_extern.h>
+ #endif
++#endif
+ #if HAVE_KVM_H
+ #include <kvm.h>
+ #endif
+ #if HAVE_FCNTL_H
+ #include <fcntl.h>
+ #endif
+-#if HAVE_SYS_POOL_H
+-#if defined(MBPOOL_SYMBOL) && defined(MCLPOOL_SYMBOL)
+-#define __POOL_EXPOSE
+-#include <sys/pool.h>
+-#else
+-#undef HAVE_SYS_POOL_H
+-#endif
+-#endif
+ #if HAVE_SYS_MBUF_H
+ #include <sys/mbuf.h>
+ #endif
+@@ -215,6 +218,14 @@ extern int      fscount;
+ #define HRFS_mount	mnt_dir
+ #define HRFS_HAS_FRSIZE STRUCT_STATVFS_HAS_F_FRSIZE
+ 
++#elif defined(HAVE_GETFSSTAT) && defined(__QNXNTO__)
++
++extern struct statfs *HRFS_entry;
++extern int      fscount;
++#define HRFS_statfs	statvfs
++#define HRFS_mount	f_mntonname
++#define HRFS_HAS_FRSIZE STRUCT_STATVFS_HAS_F_FRSIZE
++
+ #elif defined(HAVE_GETFSSTAT)
+ 
+ extern struct statfs *HRFS_entry;

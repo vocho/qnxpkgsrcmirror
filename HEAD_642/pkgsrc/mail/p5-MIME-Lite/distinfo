@@ -1,0 +1,6 @@
+$NetBSD: distinfo,v 1.5 2009/02/22 12:31:13 he Exp $
+
+SHA1 (MIME-Lite-3.024.tar.gz) = 1b653931a0ecdbbdce32884ecf0d7df11e13fc7d
+RMD160 (MIME-Lite-3.024.tar.gz) = bba4cf28d02a5ba96d2c5be57f6b716df089145a
+Size (MIME-Lite-3.024.tar.gz) = 63253 bytes
+SHA1 (patch-aa) = c9f87c66a6456dd0b7f490d5d88bf6382f53d4ab

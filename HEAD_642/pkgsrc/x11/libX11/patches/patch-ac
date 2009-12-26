@@ -1,0 +1,165 @@
+$NetBSD: patch-ac,v 1.9 2009/07/18 10:20:51 wiz Exp $
+
+_POSIX_THREAD_SAFE_FUNCTIONS is not used on NetBSD.  Instead,
+let's use _REENTRANT.
+
+--- configure.orig	2009-07-10 04:08:41.000000000 +0000
++++ configure
+@@ -812,6 +812,8 @@ LINT_FALSE
+ LINT_TRUE
+ LINT_FLAGS
+ LINT
++CROSS_COMPILING_FALSE
++CROSS_COMPILING_TRUE
+ XKBPROTO_REQUIRES
+ XKBPROTO_LIBS
+ XKBPROTO_CFLAGS
+@@ -15467,44 +15469,39 @@ _ACEOF
+ 	;;
+ esac
+ 
+-{ $as_echo "$as_me:$LINENO: checking for pthread_self in -lc" >&5
+-$as_echo_n "checking for pthread_self in -lc... " >&6; }
+-if test "${ac_cv_lib_c_pthread_self+set}" = set; then
++{ $as_echo "$as_me:$LINENO: checking whether pthread_self is declared" >&5
++$as_echo_n "checking whether pthread_self is declared... " >&6; }
++if test "${ac_cv_have_decl_pthread_self+set}" = set; then
+   $as_echo_n "(cached) " >&6
+ else
+-  ac_check_lib_save_LIBS=$LIBS
+-LIBS="-lc  $LIBS"
+-cat >conftest.$ac_ext <<_ACEOF
++  cat >conftest.$ac_ext <<_ACEOF
+ /* confdefs.h.  */
+ _ACEOF
+ cat confdefs.h >>conftest.$ac_ext
+ cat >>conftest.$ac_ext <<_ACEOF
+ /* end confdefs.h.  */
++#include <pthread.h>
+ 
+-/* Override any GCC internal prototype to avoid an error.
+-   Use char because int might match the return type of a GCC
+-   builtin and then its argument prototype would still apply.  */
+-#ifdef __cplusplus
+-extern "C"
+-#endif
+-char pthread_self ();
+ int
+ main ()
+ {
+-return pthread_self ();
++#ifndef pthread_self
++  (void) pthread_self;
++#endif
++
+   ;
+   return 0;
+ }
+ _ACEOF
+-rm -f conftest.$ac_objext conftest$ac_exeext
+-if { (ac_try="$ac_link"
++rm -f conftest.$ac_objext
++if { (ac_try="$ac_compile"
+ case "(($ac_try" in
+   *\"* | *\`* | *\\*) ac_try_echo=\$ac_try;;
+   *) ac_try_echo=$ac_try;;
+ esac
+ eval ac_try_echo="\"\$as_me:$LINENO: $ac_try_echo\""
+ $as_echo "$ac_try_echo") >&5
+-  (eval "$ac_link") 2>conftest.er1
++  (eval "$ac_compile") 2>conftest.er1
+   ac_status=$?
+   grep -v '^ *+' conftest.er1 >conftest.err
+   rm -f conftest.er1
+@@ -15513,31 +15510,35 @@ $as_echo "$ac_try_echo") >&5
+   (exit $ac_status); } && {
+ 	 test -z "$ac_c_werror_flag" ||
+ 	 test ! -s conftest.err
+-       } && test -s conftest$ac_exeext && {
+-	 test "$cross_compiling" = yes ||
+-	 $as_test_x conftest$ac_exeext
+-       }; then
+-  ac_cv_lib_c_pthread_self=yes
++       } && test -s conftest.$ac_objext; then
++  ac_cv_have_decl_pthread_self=yes
+ else
+   $as_echo "$as_me: failed program was:" >&5
+ sed 's/^/| /' conftest.$ac_ext >&5
+ 
+-	ac_cv_lib_c_pthread_self=no
++	ac_cv_have_decl_pthread_self=no
+ fi
+ 
+-rm -rf conftest.dSYM
+-rm -f core conftest.err conftest.$ac_objext conftest_ipa8_conftest.oo \
+-      conftest$ac_exeext conftest.$ac_ext
+-LIBS=$ac_check_lib_save_LIBS
++rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
+ fi
+-{ $as_echo "$as_me:$LINENO: result: $ac_cv_lib_c_pthread_self" >&5
+-$as_echo "$ac_cv_lib_c_pthread_self" >&6; }
+-if test "x$ac_cv_lib_c_pthread_self" = x""yes; then
+-  thrstubs="no"
++{ $as_echo "$as_me:$LINENO: result: $ac_cv_have_decl_pthread_self" >&5
++$as_echo "$ac_cv_have_decl_pthread_self" >&6; }
++if test "x$ac_cv_have_decl_pthread_self" = x""yes; then
++
++cat >>confdefs.h <<_ACEOF
++#define HAVE_DECL_PTHREAD_SELF 1
++_ACEOF
++
++thrstubs="no"
+ else
+-  thrstubs="yes"
++  cat >>confdefs.h <<_ACEOF
++#define HAVE_DECL_PTHREAD_SELF 0
++_ACEOF
++
++thrstubs="yes"
+ fi
+ 
++
+  if test x$thrstubs = xyes; then
+   THRSTUBS_TRUE=
+   THRSTUBS_FALSE='#'
+@@ -15552,8 +15553,8 @@ if test x$xthreads = xyes ; then
+     linux*|openbsd*|gnu*|k*bsd*-gnu)
+         XTHREADLIB=-lpthread ;;
+     netbsd*)
+-	XTHREAD_CFLAGS="-D_POSIX_THREAD_SAFE_FUNCTIONS"
+-	XTHREADLIB="-lpthread" ;;
++	XTHREAD_CFLAGS="-D_REENTRANT"
++	XTHREADLIB="-pthread" ;;
+     freebsd*)
+         XTHREAD_CFLAGS="-D_THREAD_SAFE"
+         XTHREADLIB="-pthread" ;;
+@@ -16082,6 +16083,15 @@ else
+ fi
+ 
+ 
++ if  test $cross_compiling = yes ; then
++  CROSS_COMPILING_TRUE=
++  CROSS_COMPILING_FALSE='#'
++else
++  CROSS_COMPILING_TRUE='#'
++  CROSS_COMPILING_FALSE=
++fi
++
++
+ 
+ 
+ for ac_header in stdlib.h unistd.h
+@@ -17206,6 +17216,13 @@ $as_echo "$as_me: error: conditional \"X
+ Usually this means the macro was only invoked conditionally." >&2;}
+    { (exit 1); exit 1; }; }
+ fi
++if test -z "${CROSS_COMPILING_TRUE}" && test -z "${CROSS_COMPILING_FALSE}"; then
++  { { $as_echo "$as_me:$LINENO: error: conditional \"CROSS_COMPILING\" was never defined.
++Usually this means the macro was only invoked conditionally." >&5
++$as_echo "$as_me: error: conditional \"CROSS_COMPILING\" was never defined.
++Usually this means the macro was only invoked conditionally." >&2;}
++   { (exit 1); exit 1; }; }
++fi
+ if test -z "${LINT_TRUE}" && test -z "${LINT_FALSE}"; then
+   { { $as_echo "$as_me:$LINENO: error: conditional \"LINT\" was never defined.
+ Usually this means the macro was only invoked conditionally." >&5

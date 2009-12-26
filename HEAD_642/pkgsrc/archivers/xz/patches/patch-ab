@@ -1,0 +1,16 @@
+$NetBSD$
+
+--- src/xz/message.c.orig	2009-02-05 00:49:42.000000000 -0500
++++ src/xz/message.c
+@@ -211,7 +211,11 @@ message_init(const char *given_argv0)
+ 	// doesn't require any quick action, we set SA_RESTART.
+ 	struct sigaction sa;
+ 	sigemptyset(&sa.sa_mask);
++#ifdef SA_RESTART
+ 	sa.sa_flags = SA_RESTART;
++#else
++	sa.sa_flags = 0;
++#endif
+ 	sa.sa_handler = &progress_signal_handler;
+ 	if (sigaction(SIGALRM, &sa, NULL))
+ 		message_signal_handler();

@@ -1,0 +1,9 @@
+@comment $NetBSD: PLIST,v 1.4 2009/06/14 18:28:44 joerg Exp $
+libexec/telepathy-gabble
+man/man8/telepathy-gabble.8
+share/dbus-1/services/org.freedesktop.Telepathy.ConnectionManager.gabble.service
+share/doc/telepathy-gabble/muc-bytestream.html
+share/doc/telepathy-gabble/olpc.html
+share/doc/telepathy-gabble/si-multiple.html
+share/doc/telepathy-gabble/tubes.html
+share/telepathy/managers/gabble.manager

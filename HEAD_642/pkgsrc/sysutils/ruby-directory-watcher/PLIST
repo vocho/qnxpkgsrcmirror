@@ -1,0 +1,14 @@
+@comment $NetBSD: PLIST,v 1.2 2009/06/14 18:16:13 joerg Exp $
+${GEM_HOME}/cache/directory_watcher-${PKGVERSION}.gem
+${GEM_LIBDIR}/History.txt
+${GEM_LIBDIR}/Manifest.txt
+${GEM_LIBDIR}/README.txt
+${GEM_LIBDIR}/Rakefile
+${GEM_LIBDIR}/lib/directory_watcher.rb
+${GEM_LIBDIR}/tasks/annotations.rake
+${GEM_LIBDIR}/tasks/doc.rake
+${GEM_LIBDIR}/tasks/gem.rake
+${GEM_LIBDIR}/tasks/manifest.rake
+${GEM_LIBDIR}/tasks/rubyforge.rake
+${GEM_LIBDIR}/tasks/setup.rb
+${GEM_HOME}/specifications/directory_watcher-${PKGVERSION}.gemspec

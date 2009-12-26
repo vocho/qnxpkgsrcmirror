@@ -1,0 +1,40 @@
+$NetBSD: patch-aa,v 1.7 2009/02/21 16:44:29 wiz Exp $
+
+Include pthread.h as thread stubs might be macros like on NetBSD.
+
+Define conditional for cross-compiling support.
+
+Also, don't look for keysmydef.h, as this could break cross
+builds (from GIT).
+
+--- configure.ac.orig	2009-02-17 14:38:52.000000000 +0000
++++ configure.ac
+@@ -215,7 +215,7 @@ xyes)
+ 	;;
+ esac
+ 
+-AC_CHECK_LIB(c, pthread_self, [thrstubs="no"], [thrstubs="yes"])
++AC_CHECK_DECLS([pthread_self], [thrstubs="no"], [thrstubs="yes"], [[#include <pthread.h>]])
+ AM_CONDITIONAL(THRSTUBS, test x$thrstubs = xyes)
+ 
+ dnl XXX incomplete, please fill this in
+@@ -224,8 +224,8 @@ if test x$xthreads = xyes ; then
+     linux*|openbsd*|gnu*|k*bsd*-gnu)
+         XTHREADLIB=-lpthread ;;
+     netbsd*)
+-	XTHREAD_CFLAGS="-D_POSIX_THREAD_SAFE_FUNCTIONS"
+-	XTHREADLIB="-lpthread" ;;
++	XTHREAD_CFLAGS="-D_REENTRANT"
++	XTHREADLIB="-pthread" ;;
+     freebsd*)
+         XTHREAD_CFLAGS="-D_THREAD_SAFE"
+         XTHREADLIB="-pthread" ;;
+@@ -340,6 +340,8 @@ else
+ fi
+ AC_SUBST(XKBPROTO_REQUIRES)
+ 
++AM_CONDITIONAL(CROSS_COMPILING, [ test $cross_compiling = yes ])
++
+ AC_FUNC_MMAP()
+ composecache_default=$ac_cv_func_mmap_fixed_mapped
+ AC_CHECK_FUNC(nl_langinfo, , [composecache_default=no])

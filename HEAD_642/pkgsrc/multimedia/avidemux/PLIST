@@ -1,0 +1,18 @@
+@comment $NetBSD: PLIST,v 1.8 2009/01/27 00:56:41 jmcneill Exp $
+bin/avidemux2_cli
+bin/avidemux2_gtk
+share/applications/avidemux2.desktop
+share/icons/hicolor/64x64/apps/avidemux.png
+share/locale/ca/LC_MESSAGES/avidemux.mo
+share/locale/cs/LC_MESSAGES/avidemux.mo
+share/locale/de/LC_MESSAGES/avidemux.mo
+share/locale/el/LC_MESSAGES/avidemux.mo
+share/locale/es/LC_MESSAGES/avidemux.mo
+share/locale/fr/LC_MESSAGES/avidemux.mo
+share/locale/it/LC_MESSAGES/avidemux.mo
+share/locale/ja/LC_MESSAGES/avidemux.mo
+share/locale/pt_BR/LC_MESSAGES/avidemux.mo
+share/locale/ru/LC_MESSAGES/avidemux.mo
+share/locale/sr/LC_MESSAGES/avidemux.mo
+share/locale/sr@latin/LC_MESSAGES/avidemux.mo
+share/locale/tr/LC_MESSAGES/avidemux.mo

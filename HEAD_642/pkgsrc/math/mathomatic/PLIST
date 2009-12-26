@@ -1,0 +1,17 @@
+@comment $NetBSD: PLIST,v 1.13 2009/06/14 18:05:45 joerg Exp $
+bin/mathomatic
+man/man1/mathomatic.1
+share/doc/mathomatic/README.txt
+share/doc/mathomatic/am.html
+share/doc/mathomatic/doc.css
+share/doc/mathomatic/favicon.ico
+share/doc/mathomatic/greenfade.png
+share/doc/mathomatic/index.html
+share/doc/mathomatic/led_circle_green.png
+share/doc/mathomatic/manual.html
+share/doc/mathomatic/matho-pascal.1.html
+share/doc/mathomatic/matho-primes.1.html
+share/doc/mathomatic/matho-sumsq.1.html
+share/doc/mathomatic/mathomatic.1.html
+share/doc/mathomatic/mathomatic16x16.png
+share/doc/mathomatic/open_book_nae_02.png

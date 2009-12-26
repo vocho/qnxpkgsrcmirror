@@ -1,0 +1,11 @@
+$NetBSD: distinfo,v 1.39 2009/06/11 08:09:28 wiz Exp $
+
+SHA1 (vte-0.20.5.tar.bz2) = 8e3a471183258d5f0ca807465e5b86bb29a3d110
+RMD160 (vte-0.20.5.tar.bz2) = 88e2067a67eea8a6f067d4a5851c0222fde7d468
+Size (vte-0.20.5.tar.bz2) = 1328766 bytes
+SHA1 (patch-aa) = 6b722ecbbd9face7152feca39f1d323870d2a69a
+SHA1 (patch-ab) = 217a8722d09b1854e869c49af69731ffed92f61c
+SHA1 (patch-ac) = 3b357bf9d1bca93c24f5b09dae1adec82323be0d
+SHA1 (patch-af) = 69ea7e022f6c495c3c9af681d05644b9d70e7bdc
+SHA1 (patch-ah) = 28cee2661439d7d6f1959ebf3c7d1b7b3fe0a764
+SHA1 (patch-ai) = f2fe5969be0af12c8b4c88622ebe3dcb13f79fee

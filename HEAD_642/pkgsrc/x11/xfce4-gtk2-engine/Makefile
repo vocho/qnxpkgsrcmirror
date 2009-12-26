@@ -1,0 +1,16 @@
+# $NetBSD: Makefile,v 1.11 2009/07/22 09:01:55 wiz Exp $
+
+PKG_DESTDIR_SUPPORT=	user-destdir
+
+.include "../../meta-pkgs/xfce4/Makefile.common"
+
+XFCE4_VERSION=	2.4.3
+
+DISTNAME=	gtk-xfce-engine-${XFCE4_VERSION}
+PKGNAME=	xfce4-gtk2-engine-${XFCE4_VERSION}
+CATEGORIES=	x11
+COMMENT=	Xfce GTK2 themes
+
+
+.include "../../x11/gtk2/buildlink3.mk"
+.include "../../mk/bsd.pkg.mk"

@@ -1,0 +1,13 @@
+$NetBSD: patch-ab,v 1.2 2008/12/17 02:19:59 christos Exp $
+
+--- tcl/tclGlob.c.orig	2008-12-16 20:18:00.000000000 -0500
++++ tcl/tclGlob.c	2008-12-16 20:18:01.000000000 -0500
+@@ -40,8 +40,6 @@
+  * grows dynamically to be as big as needed.
+  */
+ 
+-extern int errno;
+-
+ typedef struct {
+     char *result;		/* Pointer to result area. */
+     int totalSpace;		/* Total number of characters allocated

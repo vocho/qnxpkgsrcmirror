@@ -1,0 +1,12 @@
+$NetBSD: patch-aa,v 1.2 2009/08/03 13:57:14 joerg Exp $
+
+--- unionfs.c	2007/03/10 00:31:50	1.1
++++ unionfs.c	2007/03/10 00:33:02
+@@ -10,6 +10,7 @@
+ #endif
+ 
+ #include <fuse.h>
++#include <fuse_opt.h>
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <string.h>

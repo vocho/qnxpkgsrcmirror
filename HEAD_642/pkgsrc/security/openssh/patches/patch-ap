@@ -1,0 +1,13 @@
+$NetBSD: patch-ap,v 1.10 2009/05/21 03:22:29 taca Exp $
+
+--- ssh.c.orig	2009-02-14 14:28:21.000000000 +0900
++++ ssh.c
+@@ -702,7 +702,7 @@ main(int ac, char **av)
+ 	if (ssh_connect(host, &hostaddr, options.port,
+ 	    options.address_family, options.connection_attempts, &timeout_ms,
+ 	    options.tcp_keep_alive, 
+-#ifdef HAVE_CYGWIN
++#if defined(HAVE_CYGWIN) || defined(HAVE_INTERIX)
+ 	    options.use_privileged_port,
+ #else
+ 	    original_effective_uid == 0 && options.use_privileged_port,

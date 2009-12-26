@@ -1,0 +1,17 @@
+@comment $NetBSD: PLIST,v 1.2 2009/06/14 17:49:03 joerg Exp $
+${PYSITELIB}/lex.py
+${PYSITELIB}/lex.pyc
+${PYSITELIB}/lex.pyo
+${PYSITELIB}/yacc.py
+${PYSITELIB}/yacc.pyc
+${PYSITELIB}/yacc.pyo
+share/doc/ply/README
+share/doc/ply/ply.html
+share/examples/ply/ansic/README
+share/examples/ply/ansic/clex.py
+share/examples/ply/ansic/cparse.py
+share/examples/ply/calc/calc.py
+share/examples/ply/classcalc/calc.py
+share/examples/ply/hedit/hedit.py
+share/examples/ply/optcalc/README
+share/examples/ply/optcalc/calc.py

@@ -1,0 +1,13 @@
+$NetBSD$
+
+--- aclocal.m4.orig	2008-06-05 17:04:34.000000000 -0400
++++ aclocal.m4
+@@ -3221,7 +3221,7 @@ case $host_os in
+   freebsd-elf*)
+     _LT_AC_TAGVAR(archive_cmds_need_lc, $1)=no
+     ;;
+-  freebsd* | dragonfly*)
++  freebsd* | dragonfly* | nto-qnx*)
+     # FreeBSD 3 and later use GNU C++ and GNU ld with standard ELF
+     # conventions
+     _LT_AC_TAGVAR(ld_shlibs, $1)=yes

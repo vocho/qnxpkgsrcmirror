@@ -1,0 +1,8 @@
+@comment $NetBSD: PLIST,v 1.3 2009/06/14 17:50:21 joerg Exp $
+bin/biew
+share/biew/biew.hlp
+share/biew/assembly.skn
+share/biew/golded.skn
+share/biew/insight.skn
+share/biew/standard.skn
+share/doc/biew/biew_en.txt

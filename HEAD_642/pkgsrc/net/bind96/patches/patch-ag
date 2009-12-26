@@ -1,0 +1,15 @@
+$NetBSD: patch-ag,v 1.2 2009/07/26 09:07:58 obache Exp $
+
+--- lib/dns/rbt.c.orig	2009-01-18 23:47:40.000000000 +0000
++++ lib/dns/rbt.c
+@@ -167,6 +167,10 @@ Name(dns_rbtnode_t *node) {
+ static void dns_rbt_printnodename(dns_rbtnode_t *node);
+ #endif
+ 
++#if !defined(inline) && defined(__powerpc__)
++#define	inline	/**/
++#endif
++
+ static inline dns_rbtnode_t *
+ find_up(dns_rbtnode_t *node) {
+ 	dns_rbtnode_t *root;

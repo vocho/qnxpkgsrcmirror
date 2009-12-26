@@ -1,0 +1,542 @@
+$NetBSD: patch-af,v 1.13 2009/03/10 18:30:44 apb Exp $
+
+--- configure.orig	2008-10-31 11:53:45.000000000 -0400
++++ configure
+@@ -12524,7 +12524,7 @@ if test -z "$aix_libpath"; then aix_libp
+   freebsd-elf*)
+     archive_cmds_need_lc_CXX=no
+     ;;
+-  freebsd* | dragonfly*)
++  freebsd* | dragonfly* | nto-qnx*)
+     # FreeBSD 3 and later use GNU C++ and GNU ld with standard ELF
+     # conventions
+     ld_shlibs_CXX=yes
+@@ -27854,6 +27854,81 @@ _ACEOF
+ fi
+ 
+ 
++
++echo "$as_me:$LINENO: checking for des_cbc_encrypt in -ldes" >&5
++echo $ECHO_N "checking for des_cbc_encrypt in -ldes... $ECHO_C" >&6
++if test "${ac_cv_lib_des_des_cbc_encrypt+set}" = set; then
++  echo $ECHO_N "(cached) $ECHO_C" >&6
++else
++  ac_check_lib_save_LIBS=$LIBS
++LIBS="-ldes  $LIBS"
++cat >conftest.$ac_ext <<_ACEOF
++/* confdefs.h.  */
++_ACEOF
++cat confdefs.h >>conftest.$ac_ext
++cat >>conftest.$ac_ext <<_ACEOF
++/* end confdefs.h.  */
++
++/* Override any gcc2 internal prototype to avoid an error.  */
++#ifdef __cplusplus
++extern "C"
++#endif
++/* We use char because int might match the return type of a gcc2
++   builtin and then its argument prototype would still apply.  */
++char des_cbc_encrypt ();
++int
++main ()
++{
++des_cbc_encrypt ();
++  ;
++  return 0;
++}
++_ACEOF
++rm -f conftest.$ac_objext conftest$ac_exeext
++if { (eval echo "$as_me:$LINENO: \"$ac_link\"") >&5
++  (eval $ac_link) 2>conftest.er1
++  ac_status=$?
++  grep -v '^ *+' conftest.er1 >conftest.err
++  rm -f conftest.er1
++  cat conftest.err >&5
++  echo "$as_me:$LINENO: \$? = $ac_status" >&5
++  (exit $ac_status); } &&
++	 { ac_try='test -z "$ac_c_werror_flag"
++			 || test ! -s conftest.err'
++  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
++  (eval $ac_try) 2>&5
++  ac_status=$?
++  echo "$as_me:$LINENO: \$? = $ac_status" >&5
++  (exit $ac_status); }; } &&
++	 { ac_try='test -s conftest$ac_exeext'
++  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
++  (eval $ac_try) 2>&5
++  ac_status=$?
++  echo "$as_me:$LINENO: \$? = $ac_status" >&5
++  (exit $ac_status); }; }; then
++  ac_cv_lib_des_des_cbc_encrypt=yes
++else
++  echo "$as_me: failed program was:" >&5
++sed 's/^/| /' conftest.$ac_ext >&5
++
++ac_cv_lib_des_des_cbc_encrypt=no
++fi
++rm -f conftest.err conftest.$ac_objext \
++      conftest$ac_exeext conftest.$ac_ext
++LIBS=$ac_check_lib_save_LIBS
++fi
++echo "$as_me:$LINENO: result: $ac_cv_lib_des_des_cbc_encrypt" >&5
++echo "${ECHO_T}$ac_cv_lib_des_des_cbc_encrypt" >&6
++if test $ac_cv_lib_des_des_cbc_encrypt = yes; then
++  cat >>confdefs.h <<_ACEOF
++#define HAVE_LIBDES 1
++_ACEOF
++
++  LIBS="-ldes $LIBS"
++
++fi
++
++
+ # Check for libraries that the agent needs
+ # saving old libraries
+ NONAGENTLIBS=$LIBS
+@@ -36844,6 +36919,12 @@ cat >>conftest.$ac_ext <<_ACEOF
+ #if HAVE_NETINET_IP6_H
+ #include <netinet/ip6.h>
+ #endif
++#if HAVE_NET_IF_H
++#include <net/if.h>
++#endif
++#if HAVE_NET_ROUTE_H
++#include <net/route.h>
++#endif
+ 
+ 
+ #include <$ac_header>
+@@ -40872,6 +40953,179 @@ fi
+ done
+ 
+ 
++# freebsd2 checks, QNX finds getfsstat() in -lnbutil
++echo "$as_me:$LINENO: checking for getfsstat" >&5
++echo $ECHO_N "checking for getfsstat... $ECHO_C" >&6
++if test "${ac_cv_func_getfsstat+set}" = set; then
++  echo $ECHO_N "(cached) $ECHO_C" >&6
++else
++  cat >conftest.$ac_ext <<_ACEOF
++/* confdefs.h.  */
++_ACEOF
++cat confdefs.h >>conftest.$ac_ext
++cat >>conftest.$ac_ext <<_ACEOF
++/* end confdefs.h.  */
++/* Define getfsstat to an innocuous variant, in case <limits.h> declares getfsstat.
++   For example, HP-UX 11i <limits.h> declares gettimeofday.  */
++#define getfsstat innocuous_getfsstat
++
++/* System header to define __stub macros and hopefully few prototypes,
++    which can conflict with char getfsstat (); below.
++    Prefer <limits.h> to <assert.h> if __STDC__ is defined, since
++    <limits.h> exists even on freestanding compilers.  */
++
++#ifdef __STDC__
++# include <limits.h>
++#else
++# include <assert.h>
++#endif
++
++#undef getfsstat
++
++/* Override any gcc2 internal prototype to avoid an error.  */
++#ifdef __cplusplus
++extern "C"
++{
++#endif
++/* We use char because int might match the return type of a gcc2
++   builtin and then its argument prototype would still apply.  */
++char getfsstat ();
++/* The GNU C library defines this for functions which it implements
++    to always fail with ENOSYS.  Some functions are actually named
++    something starting with __ and the normal name is an alias.  */
++#if defined (__stub_getfsstat) || defined (__stub___getfsstat)
++choke me
++#else
++char (*f) () = getfsstat;
++#endif
++#ifdef __cplusplus
++}
++#endif
++
++int
++main ()
++{
++return f != getfsstat;
++  ;
++  return 0;
++}
++_ACEOF
++rm -f conftest.$ac_objext conftest$ac_exeext
++if { (eval echo "$as_me:$LINENO: \"$ac_link\"") >&5
++  (eval $ac_link) 2>conftest.er1
++  ac_status=$?
++  grep -v '^ *+' conftest.er1 >conftest.err
++  rm -f conftest.er1
++  cat conftest.err >&5
++  echo "$as_me:$LINENO: \$? = $ac_status" >&5
++  (exit $ac_status); } &&
++	 { ac_try='test -z "$ac_c_werror_flag"
++			 || test ! -s conftest.err'
++  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
++  (eval $ac_try) 2>&5
++  ac_status=$?
++  echo "$as_me:$LINENO: \$? = $ac_status" >&5
++  (exit $ac_status); }; } &&
++	 { ac_try='test -s conftest$ac_exeext'
++  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
++  (eval $ac_try) 2>&5
++  ac_status=$?
++  echo "$as_me:$LINENO: \$? = $ac_status" >&5
++  (exit $ac_status); }; }; then
++  ac_cv_func_getfsstat=yes
++else
++  echo "$as_me: failed program was:" >&5
++sed 's/^/| /' conftest.$ac_ext >&5
++
++ac_cv_func_getfsstat=no
++fi
++rm -f conftest.err conftest.$ac_objext \
++      conftest$ac_exeext conftest.$ac_ext
++fi
++echo "$as_me:$LINENO: result: $ac_cv_func_getfsstat" >&5
++echo "${ECHO_T}$ac_cv_func_getfsstat" >&6
++if test $ac_cv_func_getfsstat = yes; then
++  cat >>confdefs.h <<\_ACEOF
++#define HAVE_GETFSSTAT 1
++_ACEOF
++
++else
++  echo "$as_me:$LINENO: checking for getfsstat in -lnbutil" >&5
++echo $ECHO_N "checking for getfsstat in -lnbutil... $ECHO_C" >&6
++if test "${ac_cv_lib_nbutil_getfsstat+set}" = set; then
++  echo $ECHO_N "(cached) $ECHO_C" >&6
++else
++  ac_check_lib_save_LIBS=$LIBS
++LIBS="-lnbutil  $LIBS"
++cat >conftest.$ac_ext <<_ACEOF
++/* confdefs.h.  */
++_ACEOF
++cat confdefs.h >>conftest.$ac_ext
++cat >>conftest.$ac_ext <<_ACEOF
++/* end confdefs.h.  */
++
++/* Override any gcc2 internal prototype to avoid an error.  */
++#ifdef __cplusplus
++extern "C"
++#endif
++/* We use char because int might match the return type of a gcc2
++   builtin and then its argument prototype would still apply.  */
++char getfsstat ();
++int
++main ()
++{
++getfsstat ();
++  ;
++  return 0;
++}
++_ACEOF
++rm -f conftest.$ac_objext conftest$ac_exeext
++if { (eval echo "$as_me:$LINENO: \"$ac_link\"") >&5
++  (eval $ac_link) 2>conftest.er1
++  ac_status=$?
++  grep -v '^ *+' conftest.er1 >conftest.err
++  rm -f conftest.er1
++  cat conftest.err >&5
++  echo "$as_me:$LINENO: \$? = $ac_status" >&5
++  (exit $ac_status); } &&
++	 { ac_try='test -z "$ac_c_werror_flag"
++			 || test ! -s conftest.err'
++  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
++  (eval $ac_try) 2>&5
++  ac_status=$?
++  echo "$as_me:$LINENO: \$? = $ac_status" >&5
++  (exit $ac_status); }; } &&
++	 { ac_try='test -s conftest$ac_exeext'
++  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
++  (eval $ac_try) 2>&5
++  ac_status=$?
++  echo "$as_me:$LINENO: \$? = $ac_status" >&5
++  (exit $ac_status); }; }; then
++  ac_cv_lib_nbutil_getfsstat=yes
++else
++  echo "$as_me: failed program was:" >&5
++sed 's/^/| /' conftest.$ac_ext >&5
++
++ac_cv_lib_nbutil_getfsstat=no
++fi
++rm -f conftest.err conftest.$ac_objext \
++      conftest$ac_exeext conftest.$ac_ext
++LIBS=$ac_check_lib_save_LIBS
++fi
++echo "$as_me:$LINENO: result: $ac_cv_lib_nbutil_getfsstat" >&5
++echo "${ECHO_T}$ac_cv_lib_nbutil_getfsstat" >&6
++if test $ac_cv_lib_nbutil_getfsstat = yes; then
++  cat >>confdefs.h <<\_ACEOF
++#define HAVE_GETFSSTAT 1
++_ACEOF
++  cat >>confdefs.h <<\_ACEOF
++#define HAVE_LIBNBUTIL 1
++_ACEOF
++
++AGENTLIBS="-lnbutil ${AGENTLIBS}"
++fi
++
++fi
+ for ac_func in usleep
+ do
+ as_ac_var=`echo "ac_cv_func_$ac_func" | $as_tr_sh`
+@@ -42849,8 +43103,10 @@ cat >>conftest.$ac_ext <<_ACEOF
+ #include <sys/types.h>
+ #ifdef IFNET_NEEDS_KERNEL
+ #define KERNEL
++#if !defined(__DragonFly__)
+ #define _KERNEL
+ #endif
++#endif
+ #include <sys/socket.h>
+ 
+ 
+@@ -42947,8 +43203,10 @@ cat >>conftest.$ac_ext <<_ACEOF
+ #include <sys/types.h>
+ #ifdef IFNET_NEEDS_KERNEL
+ #define KERNEL
++#if !defined(__DragonFly__)
+ #define _KERNEL
+ #endif
++#endif
+ #include <sys/socket.h>
+ 
+ 
+@@ -43241,8 +43499,10 @@ cat >>conftest.$ac_ext <<_ACEOF
+ #include <sys/types.h>
+ #ifdef IFNET_NEEDS_KERNEL
+ #define KERNEL
++#if !defined(__DragonFly__)
+ #define _KERNEL
+ #endif
++#endif
+ #include <sys/socket.h>
+ #undef KERNEL
+ #undef _KERNEL
+@@ -43330,8 +43590,10 @@ cat >>conftest.$ac_ext <<_ACEOF
+ #include <sys/types.h>
+ #ifdef IFNET_NEEDS_KERNEL
+ #define KERNEL
++#if !defined(__DragonFly__)
+ #define _KERNEL
+ #endif
++#endif
+ #include <sys/socket.h>
+ #undef KERNEL
+ #undef _KERNEL
+@@ -43399,8 +43661,10 @@ cat >>conftest.$ac_ext <<_ACEOF
+ #include <sys/types.h>
+ #ifdef IFNET_NEEDS_KERNEL
+ #define KERNEL
++#if !defined(__DragonFly__)
+ #define _KERNEL
+ #endif
++#endif
+ #include <sys/socket.h>
+ #undef KERNEL
+ #undef _KERNEL
+@@ -43539,8 +43803,10 @@ cat >>conftest.$ac_ext <<_ACEOF
+ #include <sys/types.h>
+ #ifdef IFNET_NEEDS_KERNEL
+ #define KERNEL
++#if !defined(__DragonFly__)
+ #define _KERNEL
+ #endif
++#endif
+ #include <sys/socket.h>
+ #undef KERNEL
+ #undef _KERNEL
+@@ -43772,8 +44038,10 @@ cat >>conftest.$ac_ext <<_ACEOF
+ #include <sys/types.h>
+ #ifdef IFNET_NEEDS_KERNEL
+ #define KERNEL
++#if !defined(__DragonFly__)
+ #define _KERNEL
+ #endif
++#endif
+ #include <sys/socket.h>
+ #undef KERNEL
+ #undef _KERNEL
+@@ -43873,8 +44141,10 @@ cat >>conftest.$ac_ext <<_ACEOF
+ #include <sys/types.h>
+ #ifdef IFNET_NEEDS_KERNEL
+ #define KERNEL
++#if !defined(__DragonFly__)
+ #define _KERNEL
+ #endif
++#endif
+ #include <sys/socket.h>
+ #undef KERNEL
+ #undef _KERNEL
+@@ -43974,8 +44244,10 @@ cat >>conftest.$ac_ext <<_ACEOF
+ #include <sys/types.h>
+ #ifdef IFNET_NEEDS_KERNEL
+ #define KERNEL
++#if !defined(__DragonFly__)
+ #define _KERNEL
+ #endif
++#endif
+ #include <sys/socket.h>
+ #undef KERNEL
+ #undef _KERNEL
+@@ -44075,8 +44347,10 @@ cat >>conftest.$ac_ext <<_ACEOF
+ #include <sys/types.h>
+ #ifdef IFNET_NEEDS_KERNEL
+ #define KERNEL
++#if !defined(__DragonFly__)
+ #define _KERNEL
+ #endif
++#endif
+ #include <sys/socket.h>
+ #undef KERNEL
+ #undef _KERNEL
+@@ -45730,6 +46004,143 @@ fi
+ 
+ 
+ ac_safe_struct=`echo "ifnet" | sed 'y%./+-%__p_%'`
++ac_safe_member=`echo "if_lastchange.tv_nsec" | sed 'y%./+-%__p_%'`
++ac_safe_all="ac_cv_struct_${ac_safe_struct}_has_${ac_safe_member}"
++  ac_uc_define=STRUCT_`echo "${ac_safe_struct}_HAS_${ac_safe_member}" | sed 'y%abcdefghijklmnopqrstuvwxyz./-%ABCDEFGHIJKLMNOPQRSTUVWXYZ___%'`
++
++echo "$as_me:$LINENO: checking for ifnet.if_lastchange.tv_nsec" >&5
++echo $ECHO_N "checking for ifnet.if_lastchange.tv_nsec... $ECHO_C" >&6
++if eval "test \"\${$ac_safe_all+set}\" = set"; then
++  echo $ECHO_N "(cached) $ECHO_C" >&6
++else
++
++if test "x" = "x"; then
++  defineit="= 0"
++elif test "x" = "xno"; then
++  defineit=""
++else
++  defineit=""
++fi
++cat >conftest.$ac_ext <<_ACEOF
++/* confdefs.h.  */
++_ACEOF
++cat confdefs.h >>conftest.$ac_ext
++cat >>conftest.$ac_ext <<_ACEOF
++/* end confdefs.h.  */
++
++
++#ifdef IFNET_NEEDS_KERNEL
++#define _KERNEL 1
++#endif
++#include <sys/types.h>
++#include <sys/socket.h>
++#ifdef HAVE_SYS_TIME_H
++#include <sys/time.h>
++#endif
++#include <net/if.h>
++#ifdef HAVE_NET_IF_VAR_H
++#include <net/if_var.h>
++#endif
++#ifdef HAVE_SYS_QUEUE_H
++#include <sys/queue.h>
++#endif
++#ifdef linux
++struct ifnet {
++	char	*if_name;		/* name, e.g. "en" or "lo" */
++	short	if_unit;		/* sub-unit for lower level driver */
++	short	if_mtu;			/* maximum transmission unit */
++	short	if_flags;		/* up/down, broadcast, etc. */
++	int	if_metric;		/* routing metric (external only) */
++	char    if_hwaddr [6];		/* ethernet address */
++	int	if_type;		/* interface type: 1=generic,
++					   28=slip, ether=6, loopback=24 */
++	int	if_speed;		/* interface speed: in bits/sec */
++
++	struct sockaddr if_addr;	/* interface's address */
++	struct sockaddr ifu_broadaddr;	/* broadcast address */
++	struct sockaddr ia_subnetmask; 	/* interface's mask */
++
++	struct	ifqueue {
++		int	ifq_len;
++		int	ifq_drops;
++	} if_snd;			/* output queue */
++	int	if_ibytes;		/* octets received on interface */
++	int	if_ipackets;		/* packets received on interface */
++	int	if_ierrors;		/* input errors on interface */
++        int     if_iqdrops;             /* input queue overruns */
++	int	if_obytes;		/* octets sent on interface */
++	int	if_opackets;		/* packets sent on interface */
++	int	if_oerrors;		/* output errors on interface */
++	int	if_collisions;		/* collisions on csma interfaces */
++/* end statistics */
++	struct	ifnet *if_next;
++};
++#endif
++
++
++int
++main ()
++{
++
++struct ifnet testit;
++testit.if_lastchange.tv_nsec $defineit;
++
++  ;
++  return 0;
++}
++_ACEOF
++rm -f conftest.$ac_objext
++if { (eval echo "$as_me:$LINENO: \"$ac_compile\"") >&5
++  (eval $ac_compile) 2>conftest.er1
++  ac_status=$?
++  grep -v '^ *+' conftest.er1 >conftest.err
++  rm -f conftest.er1
++  cat conftest.err >&5
++  echo "$as_me:$LINENO: \$? = $ac_status" >&5
++  (exit $ac_status); } &&
++	 { ac_try='test -z "$ac_c_werror_flag"
++			 || test ! -s conftest.err'
++  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
++  (eval $ac_try) 2>&5
++  ac_status=$?
++  echo "$as_me:$LINENO: \$? = $ac_status" >&5
++  (exit $ac_status); }; } &&
++	 { ac_try='test -s conftest.$ac_objext'
++  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
++  (eval $ac_try) 2>&5
++  ac_status=$?
++  echo "$as_me:$LINENO: \$? = $ac_status" >&5
++  (exit $ac_status); }; }; then
++  eval "${ac_safe_all}=yes"
++else
++  echo "$as_me: failed program was:" >&5
++sed 's/^/| /' conftest.$ac_ext >&5
++
++eval "${ac_safe_all}=no"
++fi
++rm -f conftest.err conftest.$ac_objext conftest.$ac_ext
++
++fi
++
++
++if eval "test \"x$`echo ${ac_safe_all}`\" = \"xyes\""; then
++  echo "$as_me:$LINENO: result: yes" >&5
++echo "${ECHO_T}yes" >&6
++  cat >>confdefs.h <<_ACEOF
++#define $ac_uc_define 1
++_ACEOF
++
++else
++  echo "$as_me:$LINENO: result: no" >&5
++echo "${ECHO_T}no" >&6
++fi
++
++
++
++
++
++
++ac_safe_struct=`echo "ifnet" | sed 'y%./+-%__p_%'`
+ ac_safe_member=`echo "if_obytes" | sed 'y%./+-%__p_%'`
+ ac_safe_all="ac_cv_struct_${ac_safe_struct}_has_${ac_safe_member}"
+   ac_uc_define=STRUCT_`echo "${ac_safe_struct}_HAS_${ac_safe_member}" | sed 'y%abcdefghijklmnopqrstuvwxyz./-%ABCDEFGHIJKLMNOPQRSTUVWXYZ___%'`

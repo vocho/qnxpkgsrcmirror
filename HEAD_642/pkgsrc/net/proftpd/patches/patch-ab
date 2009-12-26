@@ -1,0 +1,24 @@
+$NetBSD: patch-ab,v 1.9 2008/11/21 08:00:36 martti Exp $
+
+Make this pkgsrc friendly.
+
+--- configure.orig	2008-11-19 05:54:50.000000000 +0200
++++ configure	2008-11-21 09:55:06.000000000 +0200
+@@ -37222,7 +37222,7 @@
+ 
+ 
+ cat >>confdefs.h <<_ACEOF
+-#define PR_RUN_DIR "`eval echo "${localstatedir}/proftpd"`"
++#define PR_RUN_DIR "`eval echo "${localstatedir}/run"`"
+ _ACEOF
+ 
+ cat >>confdefs.h <<_ACEOF
+@@ -37230,7 +37230,7 @@
+ _ACEOF
+ 
+ cat >>confdefs.h <<_ACEOF
+-#define PR_PID_FILE_PATH "`eval echo "${localstatedir}/proftpd.pid"`"
++#define PR_PID_FILE_PATH "`eval echo "${localstatedir}/run/proftpd.pid"`"
+ _ACEOF
+ 
+ 
