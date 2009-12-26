@@ -1,0 +1,40 @@
+# $NetBSD: Makefile,v 1.28 2009/07/09 18:29:51 drochner Exp $
+#
+# PKGNAME derives from the supported API (still from
+# release 3.14). See also PLIST.
+#
+
+DISTNAME=	gtkhtml-3.26.3
+PKGNAME=	${DISTNAME:S/gtkhtml/gtkhtml314/}
+CATEGORIES=	www gnome
+MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gtkhtml/3.26/}
+EXTRACT_SUFX=	.tar.bz2
+
+MAINTAINER=	pkgsrc-users@NetBSD.org
+HOMEPAGE=	http://www.gnome.org/
+COMMENT=	Lightweight HTML rendering/printing/editing engine
+#LICENSE=	gnu-gpl-v2 AND gnu-lgpl-v2
+
+PKG_DESTDIR_SUPPORT=	user-destdir
+
+GNU_CONFIGURE=		yes
+USE_LIBTOOL=		yes
+USE_PKGLOCALEDIR=	yes
+USE_TOOLS+=		gmake intltool msgfmt pkg-config
+
+PKGCONFIG_OVERRIDE+=	components/editor/gtkhtml-editor.pc.in
+PKGCONFIG_OVERRIDE+=	gtkhtml/libgtkhtml.pc.in
+
+.include "../../devel/gettext-lib/buildlink3.mk"
+.include "../../devel/libbonobo/buildlink3.mk"
+.include "../../devel/libbonoboui/buildlink3.mk"
+.include "../../devel/libglade/buildlink3.mk"
+.include "../../devel/libgnomeui/buildlink3.mk"
+.include "../../devel/pango/buildlink3.mk"
+.include "../../graphics/gnome-icon-theme/buildlink3.mk"
+.include "../../net/ORBit2/buildlink3.mk"
+.include "../../net/libsoup24/buildlink3.mk"
+.include "../../textproc/enchant/buildlink3.mk"
+.include "../../textproc/iso-codes/buildlink3.mk"
+.include "../../x11/gtk2/buildlink3.mk"
+.include "../../mk/bsd.pkg.mk"

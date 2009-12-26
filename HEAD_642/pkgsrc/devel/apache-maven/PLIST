@@ -1,0 +1,9 @@
+@comment $NetBSD: PLIST,v 1.3 2009/06/14 18:48:08 joerg Exp $
+bin/mvn
+etc/maven/m2.conf
+etc/maven/settings.xml
+lib/java/maven/boot/classworlds-1.1.jar
+lib/java/maven/maven-${PKGVERSION}-uber.jar
+share/doc/java/maven/LICENSE.txt
+share/doc/java/maven/NOTICE.txt
+share/doc/java/maven/README.txt

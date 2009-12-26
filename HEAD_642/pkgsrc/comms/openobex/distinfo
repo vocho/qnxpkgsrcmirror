@@ -1,0 +1,6 @@
+$NetBSD: distinfo,v 1.6 2009/08/07 12:18:33 plunky Exp $
+
+SHA1 (openobex-1.5.tar.gz) = ff5fc07287d67fa73ec55998f76ed73787a2ddb1
+RMD160 (openobex-1.5.tar.gz) = 9c57faabd6e63ff809e27ab90ed5db788802c45c
+Size (openobex-1.5.tar.gz) = 400876 bytes
+SHA1 (patch-ag) = 3276e9836c02e2e7fc56ba819e08c647369b1cff

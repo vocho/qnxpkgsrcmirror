@@ -1,0 +1,5 @@
+$NetBSD: distinfo,v 1.8 2009/04/24 06:46:30 sno Exp $
+
+SHA1 (CGI-Session-4.41.tar.gz) = 9f86a62b759801d985959cb70ab3f5874511e03f
+RMD160 (CGI-Session-4.41.tar.gz) = ea2807f16a85ffc49b8fcca369302e8f638fbd6c
+Size (CGI-Session-4.41.tar.gz) = 69645 bytes

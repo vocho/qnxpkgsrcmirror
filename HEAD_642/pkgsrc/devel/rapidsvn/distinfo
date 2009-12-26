@@ -1,0 +1,5 @@
+$NetBSD: distinfo,v 1.15 2009/08/07 14:00:49 joerg Exp $
+
+SHA1 (rapidsvn-0.10.0-1.tar.gz) = bbac1027bcbf3130d4946fae874ee1177af764be
+RMD160 (rapidsvn-0.10.0-1.tar.gz) = 238244d31c03485fb24c2b0fb3ada2b8ea9e5316
+Size (rapidsvn-0.10.0-1.tar.gz) = 1243876 bytes

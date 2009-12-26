@@ -1,0 +1,12 @@
+@comment $NetBSD: PLIST,v 1.2 2009/06/14 18:07:29 joerg Exp $
+${GEM_HOME}/cache/columnize-${PKGVERSION}.gem
+${GEM_LIBDIR}/AUTHORS
+${GEM_LIBDIR}/COPYING
+${GEM_LIBDIR}/ChangeLog
+${GEM_LIBDIR}/NEWS
+${GEM_LIBDIR}/README
+${GEM_LIBDIR}/Rakefile
+${GEM_LIBDIR}/VERSION
+${GEM_LIBDIR}/lib/columnize.rb
+${GEM_LIBDIR}/test/test-columnize.rb
+${GEM_HOME}/specifications/columnize-${PKGVERSION}.gemspec

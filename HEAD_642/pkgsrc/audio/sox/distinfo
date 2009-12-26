@@ -1,0 +1,5 @@
+$NetBSD: distinfo,v 1.18 2008/04/27 08:19:54 wiz Exp $
+
+SHA1 (sox-14.0.1.tar.gz) = b4b07e9905728209d3c97b9fb0fc65e75b4c45a1
+RMD160 (sox-14.0.1.tar.gz) = b614c3006e9490876c299d768009656704ecfbc8
+Size (sox-14.0.1.tar.gz) = 859538 bytes

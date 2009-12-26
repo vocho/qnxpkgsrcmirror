@@ -1,0 +1,44 @@
+# $NetBSD: Makefile.common,v 1.5 2009/07/14 22:16:25 joerg Exp $
+
+DISTNAME=	evas-0.9.9.061
+CATEGORIES=	graphics
+MASTER_SITES=	http://download.enlightenment.org/snapshots/2009-06-14/
+
+MAINTAINER=	yazzy@yazzy.org
+HOMEPAGE=	http://enlightenment.org/
+
+PKG_DESTDIR_SUPPORT=	user-destdir
+
+DISTINFO_FILE=	${.CURDIR}/../../graphics/evas/distinfo
+PATCHDIR=	${.CURDIR}/../../graphics/evas/patches
+
+GNU_CONFIGURE=	yes
+USE_LIBTOOL=	yes
+USE_TOOLS+=	gmake pkg-config
+
+.for mod in software-ddraw software-16-ddraw direct3d software-16-wince \
+	software-x11 software-16-x11 software-xcb directfb sdl \
+	sdl-primitive fb buffer software-qtopia gl-x11 quartz gl-glew \
+	xrender-x11 xrender-xcb glitz-x11
+.  if defined(EVAS_ENGINES) && !empty(EVAS_ENGINES:M${mod})
+CONFIGURE_ARGS+=	--enable-${mod}
+.  else
+CONFIGURE_ARGS+=	--disable-${mod}
+.  endif
+.endfor
+
+.for mod in gif png jpeg eet edb tiff xpm svg pmaps
+.  if defined(EVAS_IMAGE_LOADERS) && !empty(EVAS_IMAGE_LOADERS:M${mod})
+CONFIGURE_ARGS+=	--enable-image-loader-${mod}
+.  else
+CONFIGURE_ARGS+=	--disable-image-loader-${mod}
+.  endif
+.endfor
+
+.include "../../mk/bsd.prefs.mk"
+
+.if !empty(MACHINE_PLATFORM:M*-powerpc)
+CONFIGURE_ARGS+=	--enable-cpu-altivec
+.endif
+
+PLIST_SUBST=	MODULE_ARCH=${LOWER_OPSYS}${APPEND_ELF}${LOWER_OPSYS_VERSUFFIX}-${LOWER_ARCH}-ver-svn-02

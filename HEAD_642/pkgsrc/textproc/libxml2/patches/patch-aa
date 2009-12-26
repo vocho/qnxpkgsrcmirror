@@ -1,0 +1,13 @@
+$NetBSD: patch-aa,v 1.23 2008/09/06 14:58:34 wiz Exp $
+
+--- Makefile.in.orig	2008-08-30 16:50:47.000000000 +0200
++++ Makefile.in
+@@ -657,7 +657,7 @@ pkgconfig_DATA = libxml-2.0.pc
+ #
+ BASE_DIR = $(datadir)/doc
+ DOC_MODULE = libxml2-$(VERSION)
+-EXAMPLES_DIR = $(BASE_DIR)/$(DOC_MODULE)/examples
++EXAMPLES_DIR = $(datadir)/examples/libxml2
+ 
+ #
+ # Coverage support, largely borrowed from libvirt

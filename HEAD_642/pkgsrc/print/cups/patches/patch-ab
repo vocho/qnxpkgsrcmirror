@@ -1,0 +1,35 @@
+$NetBSD: patch-ab,v 1.19 2009/05/14 01:19:12 christos Exp $
+
+--- Makefile.orig	2009-03-12 17:34:21.000000000 -0400
++++ Makefile	2009-05-13 20:57:09.000000000 -0400
+@@ -22,7 +22,7 @@
+ DIRS	=	cups backend berkeley cgi-bin filter locale man monitor \
+ 		notifier scheduler systemv test \
+ 		$(PHPDIR) \
+-		conf data doc $(FONTS) ppd templates
++		data doc $(FONTS) ppd templates
+ 
+ 
+ #
+@@ -107,7 +107,9 @@
+ # Install object and target files...
+ #
+ 
+-install:	installhdrs
++install:	installcups installconf
++
++installcups:	installhdrs
+ 	for dir in $(DIRS); do\
+ 		echo Installing in $$dir... ;\
+ 		(cd $$dir; $(MAKE) $(MFLAGS) install) || exit 1;\
+@@ -115,6 +117,10 @@
+ 	echo Installing cups-config script...
+ 	$(INSTALL_DIR) -m 755 $(BINDIR)
+ 	$(INSTALL_SCRIPT) cups-config $(BINDIR)/cups-config
++
++installconf:
++	echo Installing in conf...
++	(cd conf; $(MAKE) $(MFLAGS) install)
+ 	if test "x$(INITDIR)" != x; then \
+ 		echo Installing init scripts...; \
+ 		$(INSTALL_DIR) -m 755 $(BUILDROOT)$(INITDIR)/init.d; \

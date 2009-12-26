@@ -1,0 +1,11 @@
+@comment $NetBSD: PLIST,v 1.3 2009/06/14 17:48:48 joerg Exp $
+bin/sow
+${GEM_HOME}/cache/hoe-${PKGVERSION}.gem
+${GEM_LIBDIR}/History.txt
+${GEM_LIBDIR}/Manifest.txt
+${GEM_LIBDIR}/README.txt
+${GEM_LIBDIR}/Rakefile
+${GEM_LIBDIR}/bin/sow
+${GEM_LIBDIR}/lib/hoe.rb
+${GEM_LIBDIR}/test/test_hoe.rb
+${GEM_HOME}/specifications/hoe-${PKGVERSION}.gemspec

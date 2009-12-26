@@ -1,0 +1,23 @@
+@comment $NetBSD: PLIST,v 1.2 2009/06/14 18:17:27 joerg Exp $
+${GEM_HOME}/cache/builder-${PKGVERSION}.gem
+${GEM_LIBDIR}/CHANGES
+${GEM_LIBDIR}/README
+${GEM_LIBDIR}/Rakefile
+${GEM_LIBDIR}/doc/releases/builder-1.2.4.rdoc
+${GEM_LIBDIR}/doc/releases/builder-2.0.0.rdoc
+${GEM_LIBDIR}/doc/releases/builder-2.1.1.rdoc
+${GEM_LIBDIR}/lib/blankslate.rb
+${GEM_LIBDIR}/lib/builder.rb
+${GEM_LIBDIR}/lib/builder/blankslate.rb
+${GEM_LIBDIR}/lib/builder/xchar.rb
+${GEM_LIBDIR}/lib/builder/xmlbase.rb
+${GEM_LIBDIR}/lib/builder/xmlevents.rb
+${GEM_LIBDIR}/lib/builder/xmlmarkup.rb
+${GEM_LIBDIR}/scripts/publish.rb
+${GEM_LIBDIR}/test/performance.rb
+${GEM_LIBDIR}/test/preload.rb
+${GEM_LIBDIR}/test/test_xchar.rb
+${GEM_LIBDIR}/test/testblankslate.rb
+${GEM_LIBDIR}/test/testeventbuilder.rb
+${GEM_LIBDIR}/test/testmarkupbuilder.rb
+${GEM_HOME}/specifications/builder-${PKGVERSION}.gemspec

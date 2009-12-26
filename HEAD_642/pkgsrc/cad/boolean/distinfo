@@ -1,0 +1,7 @@
+$NetBSD: distinfo,v 1.15 2009/08/14 19:09:48 joerg Exp $
+
+SHA1 (boolean_6_99.tgz) = 03e8dc7c9aa2886b0d5663669248c507524c5b22
+RMD160 (boolean_6_99.tgz) = 7977bb140169fa15a7dde9709ba1867e763b7b9c
+Size (boolean_6_99.tgz) = 4270460 bytes
+SHA1 (patch-aa) = f2c2d15bc27941d172babbb7add4ddbeddb211df
+SHA1 (patch-ab) = d9c45fc98a82edba6e59ba1c774b73992152b072

@@ -1,0 +1,67 @@
+$NetBSD: patch-aa,v 1.4 2009/03/10 11:13:09 gson Exp $
+
+--- Makefile.orig	2007-03-14 04:34:20.000000000 +0200
++++ Makefile
+@@ -184,6 +184,13 @@ LDFLAGS     = -shared -soname=$(SONAME) 
+ OTHER_FLAGS = -Wall
+ endif
+ 
++ifeq ($(OS), NETBSD)
++OTHER_FLAGS = -Wall
++TARGETDIR   = .
++# The following is a lie; we do build dynamic libraries
++STATIC_ONLY = yes
++endif
++
+ ifeq ($(OS), OPENBSD)
+ SFLAGS      = -fPIC
+ LDFLAGS     = -shared -soname=$(SONAME) -lc
+@@ -273,15 +280,15 @@ endif
+ 
+ CFLAGS      += $(DEFINES) $(OTHER_FLAGS) $(EXTRA_CFLAGS)
+ 
+-OBJS        = $(TARGETDIR)/sched.o \
+-              $(TARGETDIR)/stk.o   \
+-              $(TARGETDIR)/sync.o  \
+-              $(TARGETDIR)/key.o   \
+-              $(TARGETDIR)/io.o    \
+-              $(TARGETDIR)/event.o
++OBJS        = $(TARGETDIR)/sched.lo \
++              $(TARGETDIR)/stk.lo   \
++              $(TARGETDIR)/sync.lo  \
++              $(TARGETDIR)/key.lo   \
++              $(TARGETDIR)/io.lo    \
++              $(TARGETDIR)/event.lo
+ OBJS        += $(EXTRA_OBJS)
+ HEADER      = $(TARGETDIR)/st.h
+-SLIBRARY    = $(TARGETDIR)/libst.a
++SLIBRARY    = $(TARGETDIR)/libst.la
+ DLIBRARY    = $(TARGETDIR)/libst.$(DSO_SUFFIX).$(VERSION)
+ EXAMPLES    = examples
+ 
+@@ -332,8 +339,7 @@ $(TARGETDIR):
+ 	if [ ! -d $(TARGETDIR) ]; then mkdir $(TARGETDIR); fi
+ 
+ $(SLIBRARY): $(OBJS)
+-	$(AR) $(ARFLAGS) $@ $(OBJS)
+-	$(RANLIB) $@
++	${LIBTOOL} --mode=link ${CC} -o $@ ${OBJS} -rpath ${PREFIX}/lib -version-info 1:4
+ 	rm -f obj; $(LN) $(LNFLAGS) $(TARGETDIR) obj
+ 
+ $(DLIBRARY): $(OBJS:%.o=%-pic.o)
+@@ -349,11 +355,11 @@ $(HEADER): public.h
+ 	rm -f $@
+ 	cp public.h $@
+ 
+-$(TARGETDIR)/md.o: md.S
+-	$(CC) $(CFLAGS) -c $< -o $@
++$(TARGETDIR)/md.lo: md.S
++	$(LIBTOOL) --mode=compile $(CC) $(CFLAGS) -c $< -o $@
+ 
+-$(TARGETDIR)/%.o: %.c common.h md.h
+-	$(CC) $(CFLAGS) -c $< -o $@
++$(TARGETDIR)/%.lo: %.c common.h md.h
++	$(LIBTOOL) --mode=compile $(CC) $(CFLAGS) -c $< -o $@
+ 
+ examples::
+ 	@cd $@; $(MAKE) CC="$(CC)" CFLAGS="$(CFLAGS)" OS="$(OS)" TARGETDIR="$(TARGETDIR)"

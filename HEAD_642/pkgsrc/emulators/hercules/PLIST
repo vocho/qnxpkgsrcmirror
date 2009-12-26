@@ -1,0 +1,23 @@
+@comment $NetBSD: PLIST,v 1.2 2009/06/14 17:51:05 joerg Exp $
+bin/hercules
+bin/hercifc
+bin/dasdinit
+bin/dasdisup
+bin/dasdload
+bin/dasdls
+bin/dasdpdsu
+bin/tapecopy
+bin/tapelist
+bin/tapemap
+bin/tapesplit
+bin/cckd2ckd
+bin/cckdcdsk
+bin/ckd2cckd
+bin/cckdcomp
+bin/hetget
+bin/hetinit
+bin/hetmap
+bin/hetupd
+bin/dasdlist
+share/examples/hercules/hercules.cnf
+share/examples/hercules/zzsa.cnf

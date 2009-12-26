@@ -1,0 +1,15 @@
+@comment $NetBSD: PLIST,v 1.3 2009/06/14 17:32:23 joerg Exp $
+bin/timidity
+lib/timidity/bitmaps/back.xbm
+lib/timidity/bitmaps/fwrd.xbm
+lib/timidity/bitmaps/next.xbm
+lib/timidity/bitmaps/pause.xbm
+lib/timidity/bitmaps/play.xbm
+lib/timidity/bitmaps/prev.xbm
+lib/timidity/bitmaps/quit.xbm
+lib/timidity/bitmaps/random.xbm
+lib/timidity/bitmaps/repeat.xbm
+lib/timidity/bitmaps/stop.xbm
+lib/timidity/bitmaps/timidity.xbm
+man/man1/timidity.1
+man/man5/timidity.cfg.5

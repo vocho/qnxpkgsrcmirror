@@ -1,0 +1,12 @@
+$NetBSD: patch-aa,v 1.8 2009/06/03 19:52:33 hasso Exp $
+
+--- scripts/auxiliar/build-profile.sh.orig
++++ scripts/auxiliar/build-profile.sh
+@@ -1,6 +1,6 @@
+ #!/bin/sh
+ 
+-if test "$1" == "--fresh"; then
++if test "$1" = "--fresh"; then
+   fresh=yes
+ fi
+ 

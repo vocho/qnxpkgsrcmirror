@@ -1,0 +1,30 @@
+$NetBSD: patch-aa,v 1.13 2009/01/08 16:25:45 wiz Exp $
+
+--- configure.orig	2008-11-10 16:23:17.000000000 +0100
++++ configure
+@@ -31645,7 +31645,7 @@ echo "${ECHO_T}yes" >&6; }
+         GSSAPI_LIBS=`$GSSAPI_ROOT/bin/krb5-config --libs gssapi`
+      elif test "$GSSAPI_ROOT" != "yes"; then
+         GSSAPI_INCS="-I$GSSAPI_ROOT/include"
+-        GSSAPI_LIBS="-lgssapi"
++        GSSAPI_LIBS="-lgssapi -lkrb5"
+      fi
+   fi
+ 
+@@ -32192,13 +32192,13 @@ _ACEOF
+         LIBS="$LIBS $gss_libs"
+      elif test "$GSSAPI_ROOT" != "yes"; then
+         LDFLAGS="$LDFLAGS -L$GSSAPI_ROOT/lib$libsuff"
+-        LIBS="$LIBS -lgssapi"
++        LIBS="$LIBS -lgssapi -lkrb5"
+      else
+-        LIBS="$LIBS -lgssapi"
++        LIBS="$LIBS -lgssapi -lkrb5"
+      fi
+   else
+      LDFLAGS="$LDFLAGS $GSSAPI_LIB_DIR"
+-     LIBS="$LIBS -lgssapi"
++     LIBS="$LIBS -lgssapi -lkrb5"
+   fi
+ else
+   CPPFLAGS="$save_CPPFLAGS"

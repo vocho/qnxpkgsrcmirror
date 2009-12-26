@@ -1,0 +1,20 @@
+$NetBSD: patch-aa,v 1.6 2009/08/06 19:14:52 zafer Exp $
+
+--- src/Makefile.orig	2009-08-06 20:58:11.000000000 +0200
++++ src/Makefile
+@@ -15,11 +15,11 @@ SED = sed
+ PERL = perl
+ NULL = /dev/null
+ CPPFLAGS = -E
+-CFLAGS = -c -Wall -O2 -fomit-frame-pointer
++CFLAGS = -c
+ ASFLAGS = -c
+-LDFLAGS = -s
+-OPT_NORMAL = -funroll-loops
+-OPT_INLINE = -finline-functions
++LDFLAGS += -s
++OPT_NORMAL =
++OPT_INLINE =
+ 
+ JOHN_OBJS_MINIMAL = \
+ 	DES_fmt.o DES_std.o DES_bs.o \

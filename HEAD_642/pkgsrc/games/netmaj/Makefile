@@ -1,0 +1,35 @@
+# $NetBSD: Makefile,v 1.15 2008/10/26 22:48:43 dholland Exp $
+#
+
+DISTNAME=		netmaj-2.0.7
+PKGREVISION=		3
+CATEGORIES=		games
+MASTER_SITES=		http://www.sfc.wide.ad.jp/~kusune/netmaj/files/
+
+MAINTAINER=		kei@NetBSD.org
+HOMEPAGE=		http://www.sfc.wide.ad.jp/~kusune/netmaj/
+COMMENT=		Mahjongg game with network and 1-4 player(s) support
+
+PKG_DESTDIR_SUPPORT=	user-destdir
+
+WRKSRC=			${WRKDIR}/netmaj
+USE_TOOLS+=		perl:run
+HAS_CONFIGURE=		yes
+CONFIGURE_ENV+=		OPSYS=${OPSYS:Q}
+CONFIGURE_ENV+=		CURSES_LIBS=${BUILDLINK_LDADD.ncursesw:Q}
+
+INSTALL_MAKE_FLAGS+=	PERL=${PERL5:Q}
+INSTALL_TARGET=		install install-pf
+DOCDIR=			${PREFIX}/share/doc/netmaj
+
+pre-configure:
+	cp ${FILESDIR}/configure.sh ${WRKSRC}/configure
+	chmod +x ${WRKSRC}/configure
+	chmod -x ${WRKSRC}/auto.pf
+
+post-install:
+	${INSTALL_DATA_DIR} ${DESTDIR}${DOCDIR}
+	${INSTALL_DATA} ${WRKSRC}/html/* ${DESTDIR}${DOCDIR}
+
+.include "../../devel/ncursesw/buildlink3.mk"
+.include "../../mk/bsd.pkg.mk"

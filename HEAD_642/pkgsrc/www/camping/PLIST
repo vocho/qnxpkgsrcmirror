@@ -1,0 +1,23 @@
+@comment $NetBSD: PLIST,v 1.2 2009/06/14 22:00:19 joerg Exp $
+bin/camping
+${GEM_HOME}/cache/camping-${PKGVERSION}.gem
+${GEM_LIBDIR}/CHANGELOG
+${GEM_LIBDIR}/COPYING
+${GEM_LIBDIR}/README
+${GEM_LIBDIR}/Rakefile
+${GEM_LIBDIR}/bin/camping
+${GEM_LIBDIR}/doc/camping.1.gz
+${GEM_LIBDIR}/examples/blog.rb
+${GEM_LIBDIR}/examples/campsh.rb
+${GEM_LIBDIR}/examples/tepee.rb
+${GEM_LIBDIR}/extras/Camping.gif
+${GEM_LIBDIR}/extras/flipbook_rdoc.rb
+${GEM_LIBDIR}/extras/permalink.gif
+${GEM_LIBDIR}/lib/camping-unabridged.rb
+${GEM_LIBDIR}/lib/camping.rb
+${GEM_LIBDIR}/lib/camping/db.rb
+${GEM_LIBDIR}/lib/camping/fastcgi.rb
+${GEM_LIBDIR}/lib/camping/reloader.rb
+${GEM_LIBDIR}/lib/camping/session.rb
+${GEM_LIBDIR}/lib/camping/webrick.rb
+${GEM_HOME}/specifications/camping-${PKGVERSION}.gemspec

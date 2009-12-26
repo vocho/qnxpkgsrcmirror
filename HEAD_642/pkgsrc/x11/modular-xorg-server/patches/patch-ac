@@ -1,0 +1,13 @@
+$NetBSD$
+
+--- os/osdep.h.orig	2009-07-07 13:48:58.000000000 -0400
++++ os/osdep.h
+@@ -75,7 +75,7 @@ SOFTWARE.
+ #if defined(NOFILE) && !defined(NOFILES_MAX)
+ #define OPEN_MAX NOFILE
+ #else
+-#if !defined(WIN32)
++#if !defined(WIN32) && !defined(__QNXNTO__)
+ #define OPEN_MAX NOFILES_MAX
+ #else
+ #define OPEN_MAX 256

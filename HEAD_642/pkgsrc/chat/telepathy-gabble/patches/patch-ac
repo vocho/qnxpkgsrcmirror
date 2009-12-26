@@ -1,0 +1,13 @@
+$NetBSD: patch-ac,v 1.2 2009/03/14 18:53:21 hasso Exp $
+
+--- lib/gibber/gibber-util.h.orig	2009-02-19 19:25:00 +0200
++++ lib/gibber/gibber-util.h	2009-03-14 18:58:53 +0200
+@@ -21,6 +21,8 @@
+ #define __GIBBER_UTIL_H__
+ 
+ #include <netdb.h>
++#include <netinet/in.h>
++#include <sys/socket.h>
+ 
+ #include <glib.h>
+ 

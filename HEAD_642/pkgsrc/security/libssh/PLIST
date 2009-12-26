@@ -1,0 +1,9 @@
+@comment $NetBSD: PLIST,v 1.3 2009/06/14 18:13:32 joerg Exp $
+include/libssh/config.h
+include/libssh/crypto.h
+include/libssh/libssh.h
+include/libssh/server.h
+include/libssh/sftp.h
+lib/libssh.so
+share/doc/libssh/API.html
+share/doc/libssh/README

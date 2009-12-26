@@ -1,0 +1,10 @@
+$NetBSD: distinfo,v 1.9 2009/01/16 02:37:11 asau Exp $
+
+SHA1 (snobol4-1.2.tar.gz) = 651191778e049255886165b88b6c7c8c80ed9ae6
+RMD160 (snobol4-1.2.tar.gz) = b53b6cfe985f402143b91e0c7cdd1b7316700b7e
+Size (snobol4-1.2.tar.gz) = 658128 bytes
+SHA1 (vanilla.zip) = e0d3aa420192738c1b3d59a022860683fba99504
+RMD160 (vanilla.zip) = a728aef1a1606dadeed7fde0c5826f46c342ac12
+Size (vanilla.zip) = 212373 bytes
+SHA1 (patch-aa) = 02b759eb25bd46678d96eb281247ae326822d8f4
+SHA1 (patch-ab) = f9d5017a5f65fbafa8c483ea84ec9ec6ff2a4169

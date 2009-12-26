@@ -1,0 +1,26 @@
+@comment $NetBSD: PLIST,v 1.4 2009/06/14 18:16:16 joerg Exp $
+share/examples/webmin/cluster-cron/config
+share/webmin/cluster-cron/CHANGELOG
+share/webmin/cluster-cron/cluster-cron-lib.pl
+share/webmin/cluster-cron/cron.pl
+share/webmin/cluster-cron/delete.cgi
+share/webmin/cluster-cron/delete_jobs.cgi
+share/webmin/cluster-cron/edit.cgi
+share/webmin/cluster-cron/exec.cgi
+share/webmin/cluster-cron/help/intro.de.html
+share/webmin/cluster-cron/help/intro.html
+share/webmin/cluster-cron/images/icon.gif
+share/webmin/cluster-cron/images/smallicon.gif
+share/webmin/cluster-cron/index.cgi
+share/webmin/cluster-cron/lang/ca
+share/webmin/cluster-cron/lang/cz
+share/webmin/cluster-cron/lang/de
+share/webmin/cluster-cron/lang/en
+share/webmin/cluster-cron/lang/es
+share/webmin/cluster-cron/lang/fr
+share/webmin/cluster-cron/lang/hr
+share/webmin/cluster-cron/lang/nl
+share/webmin/cluster-cron/log_parser.pl
+share/webmin/cluster-cron/module.info
+share/webmin/cluster-cron/save.cgi
+share/webmin/cluster-cron/uninstall.pl

@@ -1,0 +1,9 @@
+@comment $NetBSD: PLIST.linux-i386,v 1.3 2009/06/14 17:28:17 joerg Exp $
+bin/rar
+lib/default.sfx
+share/doc/rar/license.txt
+share/doc/rar/rar.txt
+share/doc/rar/rarfiles.lst
+share/doc/rar/readme.txt
+share/doc/rar/technote.txt
+share/doc/rar/whatsnew.txt

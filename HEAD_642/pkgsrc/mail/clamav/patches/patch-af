@@ -1,0 +1,22 @@
+$NetBSD: patch-af,v 1.9 2009/04/09 08:00:10 martti Exp $
+
+--- database/Makefile.in.orig	2009-04-07 20:56:26.000000000 +0300
++++ database/Makefile.in	2009-04-09 09:06:36.000000000 +0300
+@@ -401,17 +401,6 @@
+ 	$(mkinstalldirs) $(DESTDIR)$(DBINST);\
+ 	test -f $(DESTDIR)$(DBINST)/main.cvd || test -f $(DESTDIR)$(DBINST)/main.cld || $(INSTALL_DATA) $(srcdir)/main.cvd $(DESTDIR)$(DBINST);\
+ 	test -f $(DESTDIR)$(DBINST)/daily.cvd || test -f $(DESTDIR)$(DBINST)/daily.cld || $(INSTALL_DATA) $(srcdir)/daily.cvd $(DESTDIR)$(DBINST);\
+-	if test `id|sed -e 's/^.[^(]*(\([^)]*\)).*/\1/'` = "root" && test -n "${CLAMAVUSER}" && test -n "${CLAMAVGROUP}"; then \
+-	    chmod 775 $(DESTDIR)$(DBINST); \
+-	    chown ${CLAMAVUSER} $(DESTDIR)$(DBINST); \
+-	    chgrp ${CLAMAVGROUP} $(DESTDIR)$(DBINST); \
+-	    if test -f $(DESTDIR)$(DBINST)/main.cvd; then chmod 664 $(DESTDIR)$(DBINST)/main.cvd; fi;\
+-	    if test -f $(DESTDIR)$(DBINST)/main.cvd; then chown ${CLAMAVUSER} $(DESTDIR)$(DBINST)/main.cvd; fi;\
+-	    if test -f $(DESTDIR)$(DBINST)/main.cvd; then chgrp ${CLAMAVGROUP} $(DESTDIR)$(DBINST)/main.cvd; fi;\
+-	    if test -f $(DESTDIR)$(DBINST)/daily.cvd; then chmod 664 $(DESTDIR)$(DBINST)/daily.cvd; fi;\
+-	    if test -f $(DESTDIR)$(DBINST)/daily.cvd; then chown ${CLAMAVUSER} $(DESTDIR)$(DBINST)/daily.cvd; fi;\
+-	    if test -f $(DESTDIR)$(DBINST)/daily.cvd; then chgrp ${CLAMAVGROUP} $(DESTDIR)$(DBINST)/daily.cvd; fi;\
+-	fi
+ # Tell versions [3.59,3.63) of GNU make to not export all variables.
+ # Otherwise a system limit (for SysV at least) may be exceeded.
+ .NOEXPORT:

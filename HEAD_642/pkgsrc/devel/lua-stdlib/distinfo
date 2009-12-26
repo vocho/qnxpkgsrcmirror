@@ -1,0 +1,5 @@
+$NetBSD: distinfo,v 1.2 2009/08/12 17:17:42 minskim Exp $
+
+SHA1 (stdlib-11.tar.gz) = 3588c2c7fa35972079e16ac169208c3802a09973
+RMD160 (stdlib-11.tar.gz) = fac54e53dc3f31d5e1cd4372ad8a6ec15122e1db
+Size (stdlib-11.tar.gz) = 31052 bytes

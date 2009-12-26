@@ -1,0 +1,7 @@
+@comment $NetBSD: PLIST,v 1.5 2009/06/14 18:36:20 joerg Exp $
+lib/libpsqlodbc.a
+lib/libpsqlodbc.so
+lib/libpsqlodbc.so.0
+lib/libpsqlodbc.so.0.27
+share/postgresql/odbc.sql
+share/postgresql/odbc-drop.sql

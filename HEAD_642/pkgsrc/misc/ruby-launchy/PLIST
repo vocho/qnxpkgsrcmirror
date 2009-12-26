@@ -1,0 +1,20 @@
+@comment $NetBSD: PLIST,v 1.2 2009/06/14 18:07:30 joerg Exp $
+bin/launchy
+${GEM_HOME}/cache/launchy-${PKGVERSION}.gem
+${GEM_LIBDIR}/CHANGES
+${GEM_LIBDIR}/LICENSE
+${GEM_LIBDIR}/README
+${GEM_LIBDIR}/bin/launchy
+${GEM_LIBDIR}/lib/launchy.rb
+${GEM_LIBDIR}/lib/launchy/application.rb
+${GEM_LIBDIR}/lib/launchy/browser.rb
+${GEM_LIBDIR}/lib/launchy/command_line.rb
+${GEM_LIBDIR}/lib/launchy/gemspec.rb
+${GEM_LIBDIR}/lib/launchy/specification.rb
+${GEM_LIBDIR}/lib/launchy/version.rb
+${GEM_LIBDIR}/spec/application_spec.rb
+${GEM_LIBDIR}/spec/browser_spec.rb
+${GEM_LIBDIR}/spec/launchy_spec.rb
+${GEM_LIBDIR}/spec/spec_helper.rb
+${GEM_LIBDIR}/spec/version_spec.rb
+${GEM_HOME}/specifications/launchy-${PKGVERSION}.gemspec

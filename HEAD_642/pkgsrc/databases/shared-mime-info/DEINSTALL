@@ -1,0 +1,12 @@
+# $NetBSD: DEINSTALL,v 1.3 2008/10/31 14:02:18 wiz Exp $
+
+MIMEDB_PATH="@MIMEDB_PATH@"
+
+case ${STAGE} in
+POST-DEINSTALL)
+	(cd ${MIMEDB_PATH} && \
+	 ${LS} . | ${GREP} -v '^packages$' | ${XARGS} ${RM} -rf)
+	${RMDIR} ${MIMEDB_PATH}/packages || ${TRUE}
+	${RMDIR} ${MIMEDB_PATH} || ${TRUE}
+	;;
+esac

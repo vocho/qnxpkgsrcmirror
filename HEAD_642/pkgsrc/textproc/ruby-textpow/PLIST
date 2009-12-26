@@ -1,0 +1,17 @@
+@comment $NetBSD: PLIST,v 1.2 2009/06/14 18:17:30 joerg Exp $
+bin/plist2syntax
+bin/plist2yaml
+${GEM_HOME}/cache/textpow-${PKGVERSION}.gem
+${GEM_LIBDIR}/History.txt
+${GEM_LIBDIR}/Manifest.txt
+${GEM_LIBDIR}/README.txt
+${GEM_LIBDIR}/Rakefile
+${GEM_LIBDIR}/bin/plist2syntax
+${GEM_LIBDIR}/bin/plist2yaml
+${GEM_LIBDIR}/lib/textpow.rb
+${GEM_LIBDIR}/lib/textpow/debug_processor.rb
+${GEM_LIBDIR}/lib/textpow/score_manager.rb
+${GEM_LIBDIR}/lib/textpow/syntax.rb
+${GEM_LIBDIR}/mm/manual.mm
+${GEM_LIBDIR}/test/test_textpow.rb
+${GEM_HOME}/specifications/textpow-${PKGVERSION}.gemspec

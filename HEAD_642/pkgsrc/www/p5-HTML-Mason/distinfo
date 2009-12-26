@@ -1,0 +1,5 @@
+$NetBSD: distinfo,v 1.13 2009/05/17 19:56:58 sno Exp $
+
+SHA1 (HTML-Mason-1.42.tar.gz) = 9cb559b30652d2e87cffe73b89a5d13d4207d81f
+RMD160 (HTML-Mason-1.42.tar.gz) = f6130bf11cdaa8b6f995c38cef0a6956924fa00f
+Size (HTML-Mason-1.42.tar.gz) = 396910 bytes

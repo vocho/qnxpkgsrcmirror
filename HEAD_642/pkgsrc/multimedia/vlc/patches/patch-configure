@@ -1,0 +1,13 @@
+$NetBSD: patch-configure,v 1.3 2009/07/07 16:17:47 tnn Exp $
+
+--- configure.ac.orig	2009-06-20 16:08:32.000000000 +0200
++++ configure.ac
+@@ -2490,7 +2490,7 @@ then
+   fi
+ 
+   CPPFLAGS="${CPPFLAGS_save} ${CPPFLAGS_v4l2}"
+-  AC_CHECK_HEADERS(linux/videodev2.h, [
++  AC_CHECK_HEADERS(linux/videodev2.h sys/videoio.h, [
+     VLC_ADD_PLUGIN([v4l2])
+   ],[])
+   CPPFLAGS="${CPPFLAGS_save}"

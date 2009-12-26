@@ -1,0 +1,87 @@
+# $NetBSD: Makefile.squid,v 1.14 2009/07/27 11:29:08 taca Exp $
+#
+# used by www/squid27/Makefile
+# used by www/squid30/Makefile
+# used by www/squid31/Makefile
+
+.include "Makefile.common"
+
+SQUID_MASTER_SITES=	ftp://ftp.squid-cache.org/pub/squid/ \
+			http://ftp.nluug.nl/internet/squid/
+
+DOCDIR=		share/doc/squid
+EGDIR=		share/examples/squid
+BUILD_DEFS+=	LOGDIR VARBASE
+
+#
+MAKE_ENV+=	INSTALL_SCRIPT=${INSTALL_SCRIPT:Q}
+MAKE_ENV+=	PKG_PREFIX=${PREFIX:Q} VARBASE=${VARBASE:Q}
+
+CONFIGURE_ARGS=	--sysconfdir=${PKG_SYSCONFDIR:Q} \
+		--localstatedir=${SQUID_DATADIR:Q} \
+		--datarootdir=${PREFIX}/share/squid \
+		--enable-auth=basic,digest,ntlm \
+		--enable-cachemgr-hostname=localhost \
+		--enable-delay-pools \
+		--enable-icmp \
+		--enable-removal-policies=lru,heap \
+		--enable-poll \
+		--enable-underscores \
+		--enable-storeio=${SQUID_BACKENDS:Q} \
+		--with-aio
+
+#
+PLIST_SRC=	${WRKDIR}/PLIST
+
+MESSAGE_SRC=		../squid/MESSAGE
+RCD_SCRIPTS=		squid
+RCD_SCRIPT_SRC.squid?=	../squid/files/squid.sh
+
+CONFS=		cachemgr.conf mime.conf squid.conf msntauth.conf
+.for f in ${CONFS}
+CONF_FILES+=	${PREFIX}/${EGDIR}/${f} ${PKG_SYSCONFDIR}/${f}
+.endfor
+OWN_DIRS=	${SQUID_DATADIR}
+OWN_DIRS_PERMS+= \
+		${SQUID_DATADIR}/cache ${SQUID_USER} ${SQUID_GROUP} 0750 \
+		${SQUID_DATADIR}/logs ${SQUID_USER} ${SQUID_GROUP} 0750
+
+DOCFILES=	ChangeLog RELEASENOTES.html doc/debug-sections.txt
+READMES=	README.FreeBSD README.NetBSD README.OpenBSD README.Solaris
+EGFILES=	src/mime.conf.default src/squid.conf.default \
+		helpers/basic_auth/MSNT/msntauth.conf.default \
+		tools/cachemgr.conf
+
+SUBST_CLASSES+=		confs
+SUBST_STAGE.confs=	pre-configure
+SUBST_FILES.confs=	src/cf.data.pre
+SUBST_SED.confs=	-e "s/@USER@/${SQUID_USER}/"
+SUBST_MESSAGE.confs=	Fixing configuration files.
+
+CHECK_PORTABILITY_SKIP+=	icons/icons.shar
+
+INSTALL_TARGET=		install install-pinger
+INSTALLATION_DIRS=	bin libexec ${PKGMANDIR}/man8 sbin \
+			share/squid share/squid/errors share/squid/icons \
+			${DOCDIR} ${EGDIR}
+
+POST_INSTALL_EXTRA?=
+
+post-install: ${POST_INSTALL_EXTRA}
+	for f in ${EGFILES}; do \
+		${INSTALL_DATA}	${WRKSRC}/$$f \
+			${DESTDIR}${PREFIX}/${EGDIR}/`basename $$f .default`; \
+	done
+	for f in ${DOCFILES}; do \
+		${INSTALL_DATA} ${WRKSRC}/$$f \
+			${DESTDIR}${PREFIX}/${DOCDIR}; \
+	done
+	for f in ${READMES}; do \
+		${INSTALL_DATA} ${PKGDIR}/../squid/files/$$f \
+			${DESTDIR}${PREFIX}/${DOCDIR}; \
+	done
+	${CHMOD} -w ${DESTDIR}${PREFIX}/libexec/pinger
+	${CP} ${PKGDIR}/PLIST ${PLIST_SRC}
+	(${FIND} ${DESTDIR}${PREFIX}/share/squid/errors \! -type d -print; \
+	 ${FIND} ${DESTDIR}${PREFIX}/share/squid/icons \! -type d -print) | \
+	${SED} -e 's#^${DESTDIR}${PREFIX}/##' | ${SORT} >>${PLIST_SRC}

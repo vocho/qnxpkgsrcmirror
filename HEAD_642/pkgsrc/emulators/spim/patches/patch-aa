@@ -1,0 +1,39 @@
+$NetBSD: patch-aa,v 1.6 2009/03/22 19:55:42 markd Exp $
+
+--- xspim/Imakefile.orig	2006-08-29 14:23:19.000000000 +1200
++++ xspim/Imakefile
+@@ -33,13 +33,13 @@
+ #
+ 
+ # Full path for the directory that will hold the executable files:
+-BIN_DIR = /usr/local/bin
++# BIN_DIR = /usr/local/bin
+ 
+ # Full path for the directory that will hold the exception handler:
+-EXCEPTION_DIR = /usr/local/lib
++EXCEPTION_DIR = $(PREFIX)/share/spim
+ 
+ # Full path for the directory that will hold the man files:
+-MAN_DIR = /usr/man/mann
++# MAN_DIR = /usr/man/mann
+ 
+ 
+ # If you have flex, use it instead of lex.  If you use flex, define this
+@@ -112,7 +112,7 @@ force:  configuration
+ configuration:
+ 	./Configure
+ 
+-InstallProgram(xspim,$(BIN_DIR))
++InstallProgram(xspim,$(BINDIR))
+ InstallNonExec($(CPU_DIR)/exceptions.s,$(EXCEPTION_DIR))
+ #InstallManPage($(DOC_DIR)/xspim,$(MAN_DIR))
+ 
+@@ -147,7 +147,7 @@ very-clean: clean
+ 	rm -f configuration
+ 
+ makedepend: y.tab.c
+-	makedepend -w10 -I. -I$(CPU_DIR) $(CPU_DIR)\*.c *.c
++	makedepend -w10 -I$(X11BASE)/include -I. -I$(CPU_DIR) $(CPU_DIR)\*.c *.c
+ 
+ #
+ # DO NOT DELETE THIS LINE -- make depend depends on it.

@@ -1,0 +1,16 @@
+$NetBSD: patch-ag,v 1.5 2008/05/18 01:48:09 tnn Exp $
+
+--- src/extract.c.orig	2007-08-26 10:56:55.000000000 +0200
++++ src/extract.c
+@@ -186,7 +186,11 @@ set_mode (char const *file_name,
+       mode = cur_info->st_mode ^ invert_permissions;
+     }
+ 
++#if (defined (__NetBSD__) && NetBSD > 199706 && !defined(NetBSD1_2))
++  if (lchmod (file_name, mode) != 0)
++#else
+   if (chmod (file_name, mode) != 0)
++#endif
+     chmod_error_details (file_name, mode);
+ }
+ 

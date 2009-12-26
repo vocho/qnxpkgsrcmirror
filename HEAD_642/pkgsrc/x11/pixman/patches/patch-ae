@@ -1,0 +1,21 @@
+$NetBSD: patch-ae,v 1.9 2009/06/06 22:28:41 wiz Exp $
+
+--- configure.orig	2009-05-31 02:06:44.000000000 +0000
++++ configure
+@@ -11833,6 +11833,7 @@ fi
+ 
+ 
+ have_gcc4=no
++if false; then
+ { $as_echo "$as_me:$LINENO: checking for -fvisibility" >&5
+ $as_echo_n "checking for -fvisibility... " >&6; }
+ cat >conftest.$ac_ext <<_ACEOF
+@@ -11871,7 +11872,7 @@ sed 's/^/| /' conftest.$ac_ext >&5
+ fi
+ 
+ rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
+-
++fi
+ if test "x$have_gcc4" = "xyes"; then
+    CFLAGS="$CFLAGS -fvisibility=hidden"
+ fi

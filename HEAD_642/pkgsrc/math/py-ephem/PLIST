@@ -1,0 +1,3 @@
+@comment $NetBSD: PLIST,v 1.2 2009/06/14 18:05:47 joerg Exp $
+${PYSITELIB}/ephem.so
+share/doc/${PKGNAME}/pyephem-manual.html

@@ -1,0 +1,8 @@
+@comment $NetBSD: PLIST,v 1.4 2009/06/14 17:49:05 joerg Exp $
+${PYSITELIB}/pyfann/__init__.py
+${PYSITELIB}/pyfann/__init__.pyc
+${PYSITELIB}/pyfann/__init__.pyo
+${PYSITELIB}/pyfann/_libfann.so
+${PYSITELIB}/pyfann/libfann.py
+${PYSITELIB}/pyfann/libfann.pyc
+${PYSITELIB}/pyfann/libfann.pyo

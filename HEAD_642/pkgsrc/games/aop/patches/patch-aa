@@ -1,0 +1,19 @@
+$NetBSD: patch-aa,v 1.2 2008/06/12 02:14:30 joerg Exp $
+
+--- Makefile.orig	2005-04-25 23:27:12.000000000 +0200
++++ Makefile	2005-04-25 23:30:38.000000000 +0200
+@@ -4,10 +4,10 @@
+ aop: aop.c
+ 
+ install: aop
+-	install -d /usr/local/bin
+-	install -d /usr/local/share/aop
+-	install -m 755 aop /usr/local/bin/aop
+-	install -m 644 aop-level-*.txt /usr/local/share/aop/
++	${BSD_INSTALL_PROGRAM_DIR} ${DESTDIR}${PREFIX}/bin
++	${BSD_INSTALL_DATA_DIR} ${DESTDIR}${PREFIX}/share/aop
++	${BSD_INSTALL_PROGRAM} aop ${DESTDIR}${PREFIX}/bin/aop
++	${BSD_INSTALL_DATA} aop-level-*.txt ${DESTDIR}${PREFIX}/share/aop/
+ 
+ clean:
+ 	rm -f aop core* *~

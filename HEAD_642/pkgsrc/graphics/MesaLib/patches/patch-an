@@ -1,0 +1,14 @@
+$NetBSD$
+
+--- src/mesa/drivers/x11/glxheader.h.orig	2009-01-22 12:38:34.000000000 -0500
++++ src/mesa/drivers/x11/glxheader.h
+@@ -45,7 +45,9 @@
+ # include <X11/Xutil.h>
+ # ifdef USE_XSHM  /* was SHM */
+ #  include <sys/ipc.h>
++#ifndef __QNXNTO__
+ #  include <sys/shm.h>
++#endif
+ #  include <X11/extensions/XShm.h>
+ # endif
+ # include <GL/glx.h>

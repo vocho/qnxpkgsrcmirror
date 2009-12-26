@@ -1,0 +1,19 @@
+$NetBSD: patch-ak,v 1.13 2009/05/17 12:55:52 sno Exp $
+
+--- plugin/gd/Makefile.in.orig	2009-03-13 18:19:20.000000000 +0000
++++ plugin/gd/Makefile.in	2009-04-25 18:15:00.000000000 +0000
+@@ -410,12 +410,14 @@
+ @WITH_MYLIBGD_FALSE@libgvplugin_gd_la_LIBADD =  \
+ @WITH_MYLIBGD_FALSE@	$(top_builddir)/lib/gvc/libgvc.la \
+ @WITH_MYLIBGD_FALSE@	$(top_builddir)/lib/$(GRAPH)/lib$(GRAPH).la \
++@WITH_MYLIBGD_FALSE@	$(top_builddir)/lib/pathplan/libpathplan.la \
+ @WITH_MYLIBGD_FALSE@	$(top_builddir)/lib/cdt/libcdt.la \
+ @WITH_MYLIBGD_FALSE@	@GD_LIBS@ @MATH_LIBS@ $(am__append_3)
+ @WITH_MYLIBGD_TRUE@libgvplugin_gd_la_LIBADD =  \
+ @WITH_MYLIBGD_TRUE@	$(top_builddir)/lib/gd/libgvgd_C.la \
+ @WITH_MYLIBGD_TRUE@	$(top_builddir)/lib/gvc/libgvc.la \
+ @WITH_MYLIBGD_TRUE@	$(top_builddir)/lib/$(GRAPH)/lib$(GRAPH).la \
++@WITH_MYLIBGD_TRUE@	$(top_builddir)/lib/pathplan/libpathplan.la \
+ @WITH_MYLIBGD_TRUE@	$(top_builddir)/lib/cdt/libcdt.la \
+ @WITH_MYLIBGD_TRUE@	@ICONV_LIBS@ @FONTCONFIG_LIBS@ \
+ @WITH_MYLIBGD_TRUE@	@FREETYPE2_LIBS@ @JPEG_LIBS@ @PNG_LIBS@ \

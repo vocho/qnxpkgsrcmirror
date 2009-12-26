@@ -1,0 +1,25 @@
+$NetBSD: patch-aa,v 1.13 2009/06/08 10:16:22 hasso Exp $
+
+Do not install by default Perl scripts; they are installed via
+${INSTALL_SCRIPT} if the user set the "perl" option.
+
+--- src/Makefile.in.orig	2009-05-15 09:25:52 +0300
++++ src/Makefile.in	2009-06-08 12:21:53 +0300
+@@ -893,7 +893,7 @@ top_builddir = @top_builddir@
+ top_srcdir = @top_srcdir@
+ pkgverlibdir = $(pkglibdir)/$(VERSION)
+ bin_SCRIPTS = lftpget
+-pkgdata_SCRIPTS = import-ncftp import-netscape verify-file convert-netscape-cookies
++pkgdata_SCRIPTS = import-ncftp import-netscape
+ noinst_SCRIPTS = ftpget
+ EXTRA_DIST = $(pkgdata_SCRIPTS) $(bin_SCRIPTS) $(noinst_SCRIPTS)
+ lftp_SOURCES = lftp.cc complete.h complete.cc lftp_rl.c lftp_rl.h
+@@ -1416,7 +1416,7 @@ all-am: Makefile $(LTLIBRARIES) $(PROGRA
+ install-binPROGRAMS: install-libLTLIBRARIES
+ 
+ installdirs:
+-	for dir in "$(DESTDIR)$(libdir)" "$(DESTDIR)$(pkgverlibdir)" "$(DESTDIR)$(bindir)" "$(DESTDIR)$(bindir)" "$(DESTDIR)$(pkgdatadir)"; do \
++	for dir in "$(DESTDIR)$(libdir)" "$(DESTDIR)$(bindir)" "$(DESTDIR)$(pkgdatadir)"; do \
+ 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
+ 	done
+ install: install-am

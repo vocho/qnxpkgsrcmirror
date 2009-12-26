@@ -1,0 +1,56 @@
+$NetBSD: README.MacOSX,v 1.6 2008/05/09 18:39:54 agc Exp $
+
+Please read "README.Darwin" as well, as everything there also applies
+to Mac OS X.
+
+
+File systems
+
+Previously, pkgsrc needed to be installed on a case-insensitive file
+system.  Starting in 2007, this restriction has been relaxed, and
+pkgsrc will work on case-insensitive as well as case sensitive file
+systems.
+
+
+Developer tools:
+
+If you haven't already, you will need to install the Mac OS X Developer
+Tools package. Depending on the version of OS X you are running, you
+may have this on CD. If not, you can download it from Apple's
+Developer Connection. (You will need to register for a free ADC
+account.) See http://developer.apple.com/macosx/ for details.
+
+Note for MacOS X 1.4 (Tiger) you will need to download xcode 2.5
+if you intend to use gcc 4.  gcc 4.0.0 bundled with xcode 2.0 on
+the desktop installation dvds builds broken pkg_install tools.
+
+If you plan to build packages that use the X11 Window System, you will
+also need to make sure you have X11 installed. OS X 10.3 (Panther)
+includes X11 and X11 SDK packages on CD. If you are using an older
+version of OS X, you can install the XFree86 packages instead, from
+www.xfree86.org.
+
+Experimental support for IBM's XL C/C++ compiler is present (tested
+with version 6.0). To use it, set:
+
+PKGSRC_COMPILER=xlc
+
+in mk.conf. XL C uses the Apple provided libtool to create shared
+libraries, however, we must force it to call libtool with the full
+path to avoid calling the pkgsrc provided GNU libtool with arguments
+that it does not understand.
+
+edit the template configuration file /opt/ibmcmp/vac/6.0/etc/vac.base.cfg
+and set:
+
+libtool = /usr/bin/libtool
+
+then run:
+
+/opt/ibmcmp/vacpp/6.0/bin/vacpp_configure -gcc /usr -install -force
+
+as root to install the configuration.
+
+to bootstrap with xlc, you need to make sure CFLAGS contains "-ma":
+
+env CC=/opt/ibmcmp/vacpp/6.0/bin/xlc CFLAGS=-ma ./bootstrap

@@ -1,0 +1,105 @@
+$NetBSD: patch-ab,v 1.4 2009/03/24 19:54:54 bouyer Exp $
+
+--- configure.orig	2008-09-25 10:33:24.000000000 +0200
++++ configure	2009-03-23 12:39:57.000000000 +0100
+@@ -1268,7 +1268,7 @@
+ pdfdir='${docdir}'
+ psdir='${docdir}'
+ libdir='${exec_prefix}/lib'
+-localedir='${datarootdir}/locale'
++localedir='${datarootdir}/nagios/locale'
+ mandir='${datarootdir}/man'
+ 
+ ac_prev=
+@@ -22225,7 +22225,7 @@
+ 
+ fi
+ 
+-if test "$ac_cv_lib_radiusclient_rc_read_config" = "yes"; then
++if false; then
+   EXTRAS="$EXTRAS check_radius"
+ 	RADIUSLIBS="-lradiusclient"
+ 
+@@ -22380,7 +22380,7 @@
+ 
+ fi
+ 
+-if test "$ac_cv_lib_ldap_main" = "yes"; then
++if false; then
+   LDAPLIBS="-lldap -llber"\
+   LDAPINCLUDE="-I/usr/include/ldap"
+ 
+@@ -26397,7 +26397,7 @@
+ 	then
+ 		{ echo "$as_me:$LINENO: checking for nslookup syntax" >&5
+ echo $ECHO_N "checking for nslookup syntax... $ECHO_C" >&6; }
+-		if $PATH_TO_NSLOOKUP -sil 127.0.0.1 2>&1 | grep "Invalid option: sil" >/dev/null
++		if $PATH_TO_NSLOOKUP -sil 127.0.0.1 2>&1 | fgrep "Invalid option: sil" >/dev/null
+ 		then
+ 			ac_cv_nslookup_command="$PATH_TO_NSLOOKUP"
+ 			{ echo "$as_me:$LINENO: result: $ac_cv_nslookup_command" >&5
+@@ -26620,7 +26620,7 @@
+ fi
+ 
+ 
+-if test -x "$PATH_TO_LMSTAT"
++if false
+ then
+ 
+ cat >>confdefs.h <<_ACEOF
+@@ -26791,7 +26791,7 @@
+   withval=$with_snmpget_command; PATH_TO_SNMPGET=$withval
+ fi
+ 
+-if test -n "$PATH_TO_SNMPGET"
++if test -n "$PATH_TO_SNMPGET" -a "$PATH_TO_SNMPGET" != "no"
+ then
+ 
+ cat >>confdefs.h <<_ACEOF
+@@ -26850,7 +26850,7 @@
+   withval=$with_snmpgetnext_command; PATH_TO_SNMPGETNEXT=$withval
+ fi
+ 
+-if test -n "$PATH_TO_SNMPGETNEXT"
++if test -n "$PATH_TO_SNMPGETNEXT" -a "$PATH_TO_SNMPGETNEXT" != "no"
+ then
+ 
+ cat >>confdefs.h <<_ACEOF
+@@ -26859,7 +26859,7 @@
+ 
+ fi
+ 
+-if ( $PERL -M"Net::SNMP 3.6" -e 'exit' 2>/dev/null  )
++if false
+ then
+ 	{ echo "$as_me:$LINENO: checking for Net::SNMP perl module" >&5
+ echo $ECHO_N "checking for Net::SNMP perl module... $ECHO_C" >&6; }
+@@ -27026,7 +27026,7 @@
+   withval=$with_fping_command; PATH_TO_FPING=$withval
+ fi
+ 
+-if test -n "$PATH_TO_FPING"
++if test -n "$PATH_TO_FPING" -a "$PATH_TO_FPING" != "no"
+ then
+ 
+ cat >>confdefs.h <<_ACEOF
+@@ -28242,7 +28242,7 @@
+ fi
+ 
+ 
+-if test -f plugins/check_nt.c ; then
++if false ; then
+   EXTRAS="$EXTRAS check_nt"
+ elif test -f ../plugins/check_nt.c ; then
+   EXTRAS="$EXTRAS check_nt"
+@@ -47646,6 +47646,10 @@
+   case $ac_option in
+   # Handling of the options.
+   -recheck | --recheck | --rechec | --reche | --rech | --rec | --re | --r)
++	: Avoid regenerating within pkgsrc
++	exit 0
++	: Avoid regenerating within pkgsrc
++	exit 0
+     ac_cs_recheck=: ;;
+   --version | --versio | --versi | --vers | --ver | --ve | --v | -V )
+     echo "$ac_cs_version"; exit ;;

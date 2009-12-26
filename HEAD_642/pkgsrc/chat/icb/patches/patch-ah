@@ -1,0 +1,12 @@
+$NetBSD: patch-ah,v 1.3 2008/12/17 02:19:59 christos Exp $
+
+--- icb/history.c.orig	1995-02-24 16:20:23.000000000 -0500
++++ icb/history.c	2008-12-16 20:18:00.000000000 -0500
+@@ -19,7 +19,6 @@
+ histput(nick)
+ char *nick;
+ {
+-	char *malloc();
+ 	STRLIST *sp;
+ 
+ 	/* hunt for user within list */

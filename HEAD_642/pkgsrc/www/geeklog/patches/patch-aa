@@ -1,0 +1,19 @@
+$NetBSD: patch-aa,v 1.3 2009/05/26 14:19:29 taca Exp $
+
+--- emailgeeklogstories.orig	2008-12-14 18:57:36.000000000 +0900
++++ emailgeeklogstories
+@@ -1,4 +1,4 @@
+-#!/usr/local/bin/php -q 
++#!@PREFIX@/bin/php -q
+ <?php
+ // This code snippet is responsible for emailing Geeklog stories to users 
+ // for the topics they select.
+@@ -9,7 +9,7 @@
+ // flags for this file.
+ 
+ // Change this path to point to your lib-common.php file
+-include('/path/to/geeklog/lib-common.php');
++include('@PREFIX@/@GEEKLOG_PUB@/lib-common.php');
+ 
+ COM_emailUserTopics();
+ ?>

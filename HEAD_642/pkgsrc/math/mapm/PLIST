@@ -1,0 +1,7 @@
+@comment $NetBSD: PLIST,v 1.2 2009/06/14 18:05:45 joerg Exp $
+bin/mapm-calc
+include/m_apm.h
+lib/libmapm.a
+share/doc/mapm/README
+share/doc/mapm/algorithms.used
+share/doc/mapm/function.ref

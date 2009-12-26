@@ -1,0 +1,42 @@
+$NetBSD: patch-ae,v 1.10 2009/04/28 10:31:58 hasso Exp $
+
+--- libgc/configure.orig	2009-01-09 07:56:17 -0800
++++ libgc/configure	2009-03-03 15:25:59 -0800
+@@ -4604,7 +4604,27 @@
+ _ACEOF
+ 
+ 	;;
+-     *-*-aix*)
++	 *-*-netbsd*)
++	cat >>confdefs.h <<\_ACEOF
++#define GC_NETBSD_THREADS 1
++_ACEOF
++
++	cat >>confdefs.h <<\_ACEOF
++#define _REENTRANT 1
++_ACEOF
++
++	cat >>confdefs.h <<\_ACEOF
++#define THREAD_LOCAL_ALLOC 1
++_ACEOF
++
++		if test "${enable_parallel_mark}" = yes; then
++			cat >>confdefs.h <<\_ACEOF
++#define PARALLEL_MARK 1
++_ACEOF
++
++		fi
++	;;
++	*-*-aix*)
+ 	cat >>confdefs.h <<\_ACEOF
+ #define GC_AIX_THREADS 1
+ _ACEOF
+@@ -4637,7 +4657,7 @@
+ 
+ 	THREADDLLIBS="-lpthread -lrt"
+ 	;;
+-      *-*-freebsd*)
++      *-*-freebsd* | *-*-*dragonfly*)
+ 	cat >>confdefs.h <<\_ACEOF
+ #define GC_FREEBSD_THREADS 1
+ _ACEOF

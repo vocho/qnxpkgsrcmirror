@@ -1,0 +1,5 @@
+$NetBSD: distinfo,v 1.8 2009/06/10 22:00:28 minskim Exp $
+
+SHA1 (tzinfo-0.3.13.gem) = c23cd8f7e24a68a75141cc4a37bd6e014e1cfd9e
+RMD160 (tzinfo-0.3.13.gem) = e5895fdf39fc14cba6f46c8e8d1c8672ae205fec
+Size (tzinfo-0.3.13.gem) = 299520 bytes

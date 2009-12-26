@@ -1,0 +1,28 @@
+$NetBSD: patch-ab,v 1.4 2008/07/16 06:41:17 bjs Exp $
+
+--- libdrm/xf86drm.c.orig	2008-07-01 03:51:40.000000000 -0400
++++ libdrm/xf86drm.c
+@@ -62,7 +62,7 @@
+ #endif
+ 
+ #ifdef __NetBSD__
+-#define DRM_MAJOR 34
++#define DRM_MAJOR 180
+ #endif
+ 
+ # ifdef __OpenBSD__
+@@ -81,9 +81,14 @@
+  * This definition needs to be changed on some systems if dev_t is a structure.
+  * If there is a header file we can get it from, there would be best.
+  */
++#if !defined(__QNXNTO__)
+ #ifndef makedev
+ #define makedev(x,y)    ((dev_t)(((x) << 8) | (y)))
+ #endif
++#else
++#undef  makedev
++#define makedev(x,y)    ((dev_t)(((x) << 8) | (y)))
++#endif
+ 
+ #define DRM_MSG_VERBOSITY 3
+ 

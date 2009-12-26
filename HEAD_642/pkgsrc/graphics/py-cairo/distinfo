@@ -1,0 +1,8 @@
+$NetBSD: distinfo,v 1.11 2009/07/22 12:55:20 wiz Exp $
+
+SHA1 (pycairo-1.8.6.tar.gz) = 228772017a11f0fbf2db63559649cd3c7d9f7996
+RMD160 (pycairo-1.8.6.tar.gz) = 8281a55d2a1cf98e7d9d8c86ed9e687e0e410513
+Size (pycairo-1.8.6.tar.gz) = 538013 bytes
+SHA1 (patch-aa) = 37c49d908bd008d0fb15614e3de5bcbcc8acc449
+SHA1 (patch-ab) = fdb6a547d43d48110efdd0cfbcfa5571c27df419
+SHA1 (patch-ac) = 0021fa070a132c0580a3e93a3685b21aeaf31e3a

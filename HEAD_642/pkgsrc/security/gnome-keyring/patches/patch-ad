@@ -1,0 +1,12 @@
+$NetBSD: patch-ad,v 1.6 2009/03/15 18:14:24 jmcneill Exp $
+
+--- egg/egg-unix-credentials.c.orig	2009-01-17 18:08:46.000000000 -0500
++++ egg/egg-unix-credentials.c
+@@ -130,7 +130,6 @@ egg_unix_credentials_read (int sock, pid
+ 		cred = (struct sockcred *) CMSG_DATA (&cmsg.hdr);
+ 		*pid = 0;
+ 		*uid = cred->sc_euid;
+-		set_local_creds(sock, 0);
+ #elif defined(HAVE_GETPEEREID) /* OpenBSD */
+ 		uid_t euid;
+ 		gid_t egid;

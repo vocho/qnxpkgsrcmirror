@@ -1,0 +1,25 @@
+$NetBSD: distinfo,v 1.37 2009/08/01 11:06:23 hasso Exp $
+
+SHA1 (xorg-server-1.6.3.tar.bz2) = 1f28e8723e110e5c1a1adf3bc89325a81a526184
+RMD160 (xorg-server-1.6.3.tar.bz2) = 5b9ddfeb9fb7082ef600e368ada8abbb006fe418
+Size (xorg-server-1.6.3.tar.bz2) = 4651487 bytes
+SHA1 (patch-aa) = 1009857388969caab962c44227ca9c16f90066dd
+SHA1 (patch-ab) = db87e31e5769c9464dc077b3b9c6faff09fa3095
+SHA1 (patch-ac) = db59db91c363a5ad054aafc77a808c2a83b455c9
+SHA1 (patch-ad) = e52f4208d4ac892e52fa92b00249e32fe5e40f9d
+SHA1 (patch-ae) = 3c6fb3cdd6a09fd02671e03a8caab30b65255eba
+SHA1 (patch-af) = c1ede4638b5634b4647948062ff25df7c3168b03
+SHA1 (patch-ag) = da2eedbddc5205ea7a309c5f60cff3520f7380a2
+SHA1 (patch-ah) = 0f129145b92da1255babb75d2f5457282890e847
+SHA1 (patch-ai) = 8b7fc4f77febb8aba3101f4f4281433611964d8d
+SHA1 (patch-aj) = de30b8c6fc0bf984ec550d0b7337ae139d47a178
+SHA1 (patch-ak) = 2e02a424bb5b7cba9ab4970c3519a193e393d254
+SHA1 (patch-al) = 8d50db68cb28bd9dd213b722209700f9dd8eeb00
+SHA1 (patch-am) = e4c370cf6b36ea91417378bcd455611bbf4bb9d3
+SHA1 (patch-an) = e2789c0773b8a42397beb5f011ced492de7a753a
+SHA1 (patch-ao) = 1fa460de3e0fb3a26721b52dd0dd3925f0724b28
+SHA1 (patch-sa) = 21e0f37ca6b9889dc5fca72517577a698ac3f189
+SHA1 (patch-sb) = f9cb9f3272574d70d949250dfe2d117e3f6a55e7
+SHA1 (patch-sc) = 815186051e80bfca78968e994c73918ac0c412fd
+SHA1 (patch-sd) = 074b806b58f5ffb4a7418164deff2d96160aa61d
+SHA1 (patch-se) = c11b61ec7ad37221fd96fbf9d835894e27297705

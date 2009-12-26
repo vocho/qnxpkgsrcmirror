@@ -1,0 +1,22 @@
+$NetBSD: patch-ab,v 1.2 2008/07/30 08:49:18 obache Exp $
+
+--- configure.orig	2008-04-02 17:18:43.000000000 +0000
++++ configure
+@@ -33772,7 +33772,7 @@ if test "${ac_cv_lib_tunepimp_tr_GetPUID
+   echo $ECHO_N "(cached) $ECHO_C" >&6
+ else
+   ac_check_lib_save_LIBS=$LIBS
+-LIBS="-ltunepimp  $LIBS"
++LIBS="-ltunepimp $PTHREAD_LDFLAGS $PTHREAD_LIBS $LIBS"
+ cat >conftest.$ac_ext <<_ACEOF
+ /* confdefs.h.  */
+ _ACEOF
+@@ -33840,7 +33840,7 @@ if test "${ac_cv_lib_tunepimp_tp_SetFile
+   echo $ECHO_N "(cached) $ECHO_C" >&6
+ else
+   ac_check_lib_save_LIBS=$LIBS
+-LIBS="-ltunepimp  $LIBS"
++LIBS="-ltunepimp $PTHREAD_LDFLAGS $PTHREAD_LIBS  $LIBS"
+ cat >conftest.$ac_ext <<_ACEOF
+ /* confdefs.h.  */
+ _ACEOF

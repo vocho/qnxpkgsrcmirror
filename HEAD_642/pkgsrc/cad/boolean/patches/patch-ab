@@ -1,0 +1,16 @@
+$NetBSD: patch-ab,v 1.5 2009/08/14 19:09:49 joerg Exp $
+
+--- bin/FindwxWidgets.cmake.orig	2009-08-14 18:59:11.000000000 +0200
++++ bin/FindwxWidgets.cmake
+@@ -137,9 +137,9 @@ SET( wxWidgets_UCD "" )
+ SET( wxWidgets_DBG "" )
+ 
+ OPTION( wxWidgets_USE_MONOLITHIC "Use wxWidgets build as monolithic library" OFF)
+-OPTION( wxWidgets_USE_DEBUG  "Use Debug versions of wxWidgets libraries" ON)
++OPTION( wxWidgets_USE_DEBUG  "Use Debug versions of wxWidgets libraries" OFF)
+ OPTION( wxWidgets_USE_UNICODE "Use Unicode versions of wxWidgets libraries" OFF)
+-OPTION( wxWidgets_USE_SHARED "Use shared versions (.so) of wxWidgets libraries" OFF)
++OPTION( wxWidgets_USE_SHARED "Use shared versions (.so) of wxWidgets libraries" ON)
+ OPTION( wxWidgets_USE_UNIV "Use Universal versions (.so) of wxWidgets libraries" OFF)
+ 
+ IF( wxWidgets_USE_UNIV )

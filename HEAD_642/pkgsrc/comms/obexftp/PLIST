@@ -1,0 +1,15 @@
+@comment $NetBSD: PLIST,v 1.4 2009/06/14 17:38:41 joerg Exp $
+bin/obexftp
+bin/obexftpd
+include/bfb/bfb.h
+include/bfb/bfb_io.h
+include/multicobex/multi_cobex.h
+include/obexftp/client.h
+include/obexftp/obexftp.h
+include/obexftp/object.h
+include/obexftp/uuid.h
+lib/libbfb.la
+lib/libmulticobex.la
+lib/libobexftp.la
+man/man1/obexftp.1
+man/man1/obexftpd.1

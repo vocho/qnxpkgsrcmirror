@@ -1,0 +1,14 @@
+$NetBSD$
+
+--- tests/drmstat.c.orig	2008-07-01 03:50:43.000000000 -0400
++++ tests/drmstat.c
+@@ -34,7 +34,9 @@
+ #include <sys/types.h>
+ #include <sys/time.h>
+ #include <sys/mman.h>
++#if !defined(__QNXNTO__)
+ #include <getopt.h>
++#endif
+ #include <strings.h>
+ #include <errno.h>
+ #include <signal.h>

@@ -1,0 +1,28 @@
+# $NetBSD: Makefile.common,v 1.59 2009/07/23 09:52:29 tron Exp $
+
+DISTNAME=	xchat-2.8.6
+CATEGORIES=	chat
+MASTER_SITES=	http://xchat.org/files/source/2.8/
+EXTRACT_SUFX=	.tar.bz2
+
+HOMEPAGE=	http://xchat.org/
+LICENSE=	gnu-gpl-v2 
+
+PATCH_SITES=		http://xchat.org/files/source/2.8/patches/
+PATCHFILES=		xc286-smallfixes.diff
+PATCH_DIST_STRIP=	-p1
+
+DISTINFO_FILE=	${.CURDIR}/../../chat/xchat/distinfo
+PATCHDIR?=	${.CURDIR}/../../chat/xchat/patches
+
+GNU_CONFIGURE=	YES
+USE_LIBTOOL=	YES
+USE_TOOLS+=	gmake pkg-config
+
+.include "../../mk/bsd.prefs.mk"
+
+.if ${OPSYS} == "Darwin"
+CONFIGURE_ARGS+=        --disable-mmx
+.endif
+
+.include "../../devel/glib2/buildlink3.mk"

@@ -1,0 +1,14 @@
+@comment $NetBSD: PLIST,v 1.5 2009/06/14 18:08:10 joerg Exp $
+${RUBY_VENDORARCHLIB}/ming/mingc.${RUBY_DLEXT}
+${RUBY_VENDORLIB}/ming/ming.rb
+${RUBY_EG}/ming/README.examples
+${RUBY_EG}/ming/action.rb
+${RUBY_EG}/ming/drag.rb
+${RUBY_EG}/ming/gradient.rb
+${RUBY_EG}/ming/gradientxform.rb
+${RUBY_EG}/ming/hello.rb
+${RUBY_EG}/ming/keypress.rb
+${RUBY_EG}/ming/mousetrack.rb
+${RUBY_EG}/ming/movieclip.rb
+${RUBY_EG}/ming/newbutton.rb
+${RUBY_EG}/ming/shape.rb

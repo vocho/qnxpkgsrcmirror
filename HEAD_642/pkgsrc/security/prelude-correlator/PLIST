@@ -1,0 +1,13 @@
+@comment $NetBSD: PLIST,v 1.2 2009/06/14 18:13:36 joerg Exp $
+bin/prelude-correlator
+sbin/run-prelude-correlator
+include/prelude-correlator/prelude-correlator.h
+lib/prelude-correlator/lua.la
+share/examples/prelude-correlator/prelude-correlator.conf
+share/examples/rc.d/preludecorrelator
+share/examples/prelude-correlator/lua-rules/brute-force.lua
+share/examples/prelude-correlator/lua-rules/business-hour.lua
+share/examples/prelude-correlator/lua-rules/firewall.lua
+share/examples/prelude-correlator/lua-rules/scan.lua
+share/examples/prelude-correlator/lua-rules/worm.lua
+share/prelude-correlator/lua/lib.lua

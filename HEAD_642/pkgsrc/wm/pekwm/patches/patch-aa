@@ -1,0 +1,13 @@
+$NetBSD: patch-aa,v 1.5 2009/02/20 12:27:03 obache Exp $
+
+--- data/Makefile.in.orig	2009-01-26 17:59:45.000000000 +0000
++++ data/Makefile.in
+@@ -182,7 +182,7 @@ AUTOMAKE_OPTIONS = foreign
+ SUBDIRS = themes scripts
+ CLEANFILES = config menu
+ EXTRA_DIST = autoproperties config.in keys menu.in mouse start vars
+-cfgdatadir = $(sysconfdir)/pekwm
++cfgdatadir = $(prefix)/share/examples/@PACKAGE@
+ cfgdata_DATA = autoproperties config keys menu mouse start vars
+ all: all-recursive
+ 

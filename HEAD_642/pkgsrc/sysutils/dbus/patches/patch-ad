@@ -1,0 +1,51 @@
+$NetBSD: patch-ad,v 1.5 2009/01/07 19:11:36 wiz Exp $
+
+for openlog(), already reported upstream
+
+--- dbus/dbus-sysdeps-util-unix.c.orig	2008-12-18 15:39:04.000000000 -0500
++++ dbus/dbus-sysdeps-util-unix.c
+@@ -43,6 +43,7 @@
+ #include <sys/socket.h>
+ #include <dirent.h>
+ #include <sys/un.h>
++#include <syslog.h>
+ #ifdef HAVE_LIBAUDIT
+ #include <sys/prctl.h>
+ #include <sys/capability.h>
+@@ -691,6 +692,10 @@ _dbus_directory_open (const DBusString *
+   return iter;
+ }
+ 
++#if defined(__QNXNTO__)
++#include <limits.h>
++#endif
++
+ /* Calculate the required buffer size (in bytes) for directory
+  * entries read from the given directory handle.  Return -1 if this
+  * this cannot be done. 
+@@ -703,6 +708,9 @@ static dbus_bool_t
+ dirent_buf_size(DIR * dirp, size_t *size)
+ {
+  long name_max;
++#if defined(__QNXNTO__)
++	name_max = PATH_MAX;
++#else
+ #   if defined(HAVE_FPATHCONF) && defined(_PC_NAME_MAX)
+ #      if defined(HAVE_DIRFD)
+           name_max = fpathconf(dirfd(dirp), _PC_NAME_MAX);
+@@ -726,6 +734,8 @@ dirent_buf_size(DIR * dirp, size_t *size
+ #           error "buffer size for readdir_r cannot be determined"
+ #       endif
+ #   endif
++#endif /* __QNXNTO__ */
++
+   if (size)
+     *size = (size_t)offsetof(struct dirent, d_name) + name_max + 1;
+   else
+@@ -1227,4 +1237,4 @@ fail:
+   _dbus_string_free (&cmdline);
+   _dbus_string_free (&path);
+   return FALSE;
+-}
+\ No newline at end of file
++}

@@ -1,0 +1,11 @@
+@comment $NetBSD: PLIST,v 1.4 2009/06/14 18:04:28 joerg Exp $
+include/claws-mail/plugins/archive/archiver.h
+include/claws-mail/plugins/archive/archiver_prefs.h
+lib/claws-mail/plugins/archive.la
+share/locale/ca/LC_MESSAGES/archive.mo
+share/locale/es/LC_MESSAGES/archive.mo
+share/locale/fr/LC_MESSAGES/archive.mo
+share/locale/hu/LC_MESSAGES/archive.mo
+share/locale/pt_BR/LC_MESSAGES/archive.mo
+share/locale/cs/LC_MESSAGES/archive.mo
+share/locale/ru/LC_MESSAGES/archive.mo

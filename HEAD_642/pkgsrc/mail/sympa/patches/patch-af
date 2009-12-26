@@ -1,0 +1,13 @@
+$NetBSD: patch-af,v 1.2 2008/04/27 17:06:40 bouyer Exp $
+
+--- src/Language.pm.orig	2008-04-27 17:43:28.000000000 +0200
++++ src/Language.pm	2008-04-27 17:43:47.000000000 +0200
+@@ -162,7 +162,7 @@
+     ## Set Locale::Messages context
+     my $locale_dashless = $locale.'.utf-8';
+     $locale_dashless =~ s/-//g;
+-    foreach my $type (&POSIX::LC_ALL, &POSIX::LC_TIME) {
++    foreach my $type (&POSIX::LC_CTYPE) {
+ 	my $success;
+ 	foreach my $try ($locale.'.utf-8',
+ 			 $locale.'.UTF-8',  ## UpperCase required for FreeBSD

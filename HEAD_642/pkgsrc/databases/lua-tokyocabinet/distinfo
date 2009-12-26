@@ -1,0 +1,7 @@
+$NetBSD: distinfo,v 1.5 2009/07/20 03:01:09 obache Exp $
+
+SHA1 (tokyocabinet-lua-1.8.tar.gz) = b9323b66b6313f696121f6f9016b225bbb237636
+RMD160 (tokyocabinet-lua-1.8.tar.gz) = 8e303ddf1bafef4cd38ad74a49cb8742077ffcec
+Size (tokyocabinet-lua-1.8.tar.gz) = 106755 bytes
+SHA1 (patch-aa) = a02449c57d232192058c5673fbd3910220db856f
+SHA1 (patch-ab) = ec6133090c43ff09978049194adfab98fa6a0af0

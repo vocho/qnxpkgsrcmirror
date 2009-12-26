@@ -1,0 +1,13 @@
+$NetBSD: patch-ab,v 1.2 2008/12/20 19:16:27 rillig Exp $
+
+--- ./configure.orig	2008-11-14 13:49:21.000000000 +0100
++++ ./configure	2008-12-19 21:23:35.000000000 +0100
+@@ -26682,7 +26682,7 @@
+ 
+   else
+ 
+-  for stp_ac_arg in -O6 -O3 -O2 -O1 -O ; do
++  for stp_ac_arg in -O2 -O1 -O ; do
+     stp_ac_save_CFLAGS="${CFLAGS}"
+ 
+   { echo "$as_me:$LINENO: checking if ${CC} supports ${stp_ac_arg}" >&5

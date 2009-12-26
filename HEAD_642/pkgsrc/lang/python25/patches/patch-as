@@ -1,0 +1,14 @@
+$NetBSD$
+
+--- Modules/termios.c.orig	2006-01-19 01:09:39.000000000 -0500
++++ Modules/termios.c
+@@ -10,6 +10,9 @@
+ #define CTRL(c) ((c)&037)
+ #endif
+ 
++#ifdef __QNXNTO__
++#include <sys/termio.h>
++#endif
+ #include <termios.h>
+ #ifdef __osf__
+ /* On OSF, sys/ioctl.h requires that struct termio already be defined,

@@ -1,0 +1,6 @@
+$NetBSD: distinfo,v 1.2 2009/01/08 01:09:14 jmcneill Exp $
+
+SHA1 (ucview-0.22.tar.gz) = 4ed3471ebb5cb600ede01d8bb7e5a0aad9fd292e
+RMD160 (ucview-0.22.tar.gz) = d741bd9dfa1df114b75d26b1d5b9790ff9d3057a
+Size (ucview-0.22.tar.gz) = 527712 bytes
+SHA1 (patch-aa) = 89d146b187a384125632539fdfa3583ca5202d92

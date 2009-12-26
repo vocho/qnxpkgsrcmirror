@@ -1,0 +1,22 @@
+--- Makefile.PL.orig	2009-02-26 12:09:45.000000000 +0000
++++ Makefile.PL	2009-02-28 00:05:41.000000000 +0000
+@@ -47,15 +47,10 @@
+ 		"disable-tld" => \$disable_tld
+ 	);
+ 
+-	if ($libdir)
+-	{
+-		$Params{LIBS} = "-L$libdir -lidn";
+-	}
+-	else
+-	{
+-		$Params{LIBS} = $Config{ldflags} . ' -lidn';
+-	}
+-
++	$Params{LIBS} = $Config{ldflags};
++	$Params{LIBS} .= " -L$libdir" if ($libdir);
++	$Params{LIBS} .= " -lidn";
++	
+ 	if ($incdir)
+ 	{
+ 		$Params{INC} = "-I$incdir";

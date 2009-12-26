@@ -1,0 +1,5 @@
+$NetBSD: distinfo,v 1.7 2009/07/08 07:56:40 sno Exp $
+
+SHA1 (JSON-Any-1.21.tar.gz) = eb83329f2cb1df980eb238393af1508c2e609fdc
+RMD160 (JSON-Any-1.21.tar.gz) = c18e59dc6dd41dcbeaa86b9655e6709b8bb1e954
+Size (JSON-Any-1.21.tar.gz) = 30046 bytes

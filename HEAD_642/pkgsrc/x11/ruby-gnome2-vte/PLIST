@@ -1,0 +1,4 @@
+@comment $NetBSD: PLIST,v 1.2 2009/08/12 12:43:11 obache Exp $
+lib/pkgconfig/vte-ruby.pc
+${RUBY_VENDORLIB}/vte.rb
+${RUBY_VENDORARCHLIB}/vte.${RUBY_DLEXT}

@@ -1,0 +1,24 @@
+# $NetBSD: Makefile.common,v 1.6 2008/10/01 10:03:11 taca Exp $
+#
+# used by www/ap-fastcgi/Makefile
+# used by www/ap2-fastcgi/Makefile
+#
+DISTNAME=	mod_fastcgi-2.4.6
+CATEGORIES=	www
+MASTER_SITES=	http://www.fastcgi.com/dist/
+
+MAINTAINER=	pkgsrc-users@NetBSD.org
+HOMEPAGE=	http://www.fastcgi.com/
+COMMENT=	New, improved CGI-like interface module for Apache
+
+DISTINFO_FILE=	${.CURDIR}/../../www/ap-fastcgi/distinfo
+PATCHDIR=	${.CURDIR}/../../www/ap-fastcgi/patches
+PLIST_SRC=	${.CURDIR}/../../www/ap-fastcgi/PLIST
+MESSAGE_SRC=	${.CURDIR}/../../www/ap-fastcgi/MESSAGE
+
+PLIST_SUBST+=	APACHE_MANUAL=${APACHE_MANUAL:Q}
+MESSAGE_SUBST+=	APACHE_MANUAL=${APACHE_MANUAL:Q}
+
+post-install:
+	${INSTALL_DATA} ${WRKSRC}/docs/mod_fastcgi.html	\
+		${PREFIX}/share/httpd/${APACHE_MANUAL}/mod/

@@ -1,0 +1,61 @@
+$NetBSD: patch-ab,v 1.5 2009/06/02 17:10:53 drochner Exp $
+
+--- configure.orig	2009-05-28 19:13:31.000000000 +0200
++++ configure
+@@ -3802,7 +3802,7 @@ SHARED_EXTENSION=""
+ STATIC_EXTENSION=""
+ OBJECT_EXTENSION=""
+ case "$target_os" in
+-     *bsd*|linux*|beos|irix*|solaris*)
++     *bsd*|linux*|beos|irix*|solaris*|dragonfly*)
+ 	echo "$as_me:$LINENO: result: .so .a .o" >&5
+ echo "${ECHO_T}.so .a .o" >&6
+ 	STATIC_EXTENSION="a"
+@@ -3853,7 +3853,7 @@ echo "${ECHO_T}ok" >&6
+ 	SPECIFIC_LDFLAGS="-Wl,-soname,libxvidcore.\$(SHARED_EXTENSION).\$(API_MAJOR) -shared -Wl,--version-script=libxvidcore.ld -lc -lm"
+ 	SPECIFIC_CFLAGS="-fPIC"
+ 	;;
+-     *bsd*|irix*)
++     *bsd*|dragonfly*|irix*)
+ 	echo "$as_me:$LINENO: result: ok" >&5
+ echo "${ECHO_T}ok" >&6
+ 	STATIC_LIB="libxvidcore.\$(STATIC_EXTENSION)"
+@@ -3876,13 +3876,13 @@ echo "${ECHO_T}ok" >&6
+ 	   echo "$as_me:$LINENO: result: dylib options" >&5
+ echo "${ECHO_T}dylib options" >&6
+ 	   SHARED_LIB="libxvidcore.\$(API_MAJOR).\$(SHARED_EXTENSION)"
+-	   SPECIFIC_LDFLAGS="-Wl,-read_only_relocs,suppress -dynamiclib -flat_namespace -compatibility_version \$(API_MAJOR) -current_version \$(API_MAJOR).\$(API_MINOR) -install_name \$(libdir)/\$(SHARED_LIB)"
++	   SPECIFIC_LDFLAGS="-Wl,-read_only_relocs,suppress -dynamiclib -flat_namespace -compatibility_version \$(API_MAJOR) -current_version \$(API_MAJOR).\$(API_MINOR) -install_name \$(libdir)/\$(SHARED_LIB) -Wl,-read_only_relocs -Wl,warning"
+ 	else
+ 	   echo "$as_me:$LINENO: result: module options" >&5
+ echo "${ECHO_T}module options" >&6
+  	   PRE_SHARED_LIB="libxvidcore.\$(SHARED_EXTENSION)-temp.o"
+ 	   SHARED_LIB="libxvidcore.\$(SHARED_EXTENSION).\$(API_MAJOR)"
+-	   SPECIFIC_LDFLAGS="-r -keep_private_externs -nostdlib && \$(CC) \$(LDFLAGS) \$(PRE_SHARED_LIB) -o libxvidcore.\$(SHARED_EXTENSION).\$(API_MAJOR) -bundle -flat_namespace -undefined suppress"
++	   SPECIFIC_LDFLAGS="-r -keep_private_externs -nostdlib && \$(CC) \$(LDFLAGS) \$(PRE_SHARED_LIB) -o libxvidcore.\$(SHARED_EXTENSION).\$(API_MAJOR) -bundle -flat_namespace -undefined suppress -Wl,-read_only_relocs -Wl,warning"
+ 	fi
+ 	;;
+      beos)
+@@ -4075,7 +4075,7 @@ echo "$as_me: WARNING: nasm version is t
+        echo "$as_me:$LINENO: checking for asm object format" >&5
+ echo $ECHO_N "checking for asm object format... $ECHO_C" >&6
+        case "$target_os" in
+-           *bsd*|linux*|beos|irix*|solaris*)
++           *bsd*|linux*|beos|irix*|solaris*|dragonfly*)
+                if test "$ARCHITECTURE" = "X86_64" ; then
+                    echo "$as_me:$LINENO: result: elf64" >&5
+ echo "${ECHO_T}elf64" >&6
+@@ -4108,6 +4108,13 @@ echo "${ECHO_T}macho" >&6
+                PREFIX="-DPREFIX"
+                MARK_FUNCS=""
+                ;;
++           darwin*|rhapsody*)
++               echo "$as_me:$LINENO: result: macho" >&5
++echo "${ECHO_T}macho" >&6
++               MARK_FUNCS=""
++               NASM_FORMAT="macho"
++               PREFIX="-DPREFIX"
++               ;;
+        esac
+ 
+        AS="$chosen_asm_prog"

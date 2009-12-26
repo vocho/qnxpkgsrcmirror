@@ -1,0 +1,22 @@
+$NetBSD: patch-aa,v 1.21 2008/10/17 07:31:58 adam Exp $
+
+--- tools/Makefile.in.orig	2008-09-20 22:32:29.000000000 +0200
++++ tools/Makefile.in
+@@ -167,7 +167,7 @@ target_alias = @target_alias@
+ EXTRA_DIST = ca.html ca.pl importCA.html importCA.sh script.sh \
+ 	stunnel.spec stunnel.cnf stunnel.nsi stunnel.conf
+ 
+-confdir = $(sysconfdir)/stunnel
++confdir = $(datadir)/examples/stunnel
+ conf_DATA = stunnel.conf-sample
+ examplesdir = $(docdir)/examples
+ examples_DATA = ca.html ca.pl importCA.html importCA.sh script.sh \
+@@ -337,7 +337,7 @@ info: info-am
+ 
+ info-am:
+ 
+-install-data-am: install-confDATA install-data-local \
++install-data-am: install-confDATA \
+ 	install-examplesDATA
+ 
+ install-exec-am:

@@ -1,0 +1,13 @@
+$NetBSD: distinfo,v 1.9 2008/07/27 16:47:46 dholland Exp $
+
+SHA1 (lavaps-2.7.tar.gz) = 5fb788359e22f80842423f211d42d8ebe2c58236
+RMD160 (lavaps-2.7.tar.gz) = 286530bca67f9d324c0edfc2def6d6b2a6f24255
+Size (lavaps-2.7.tar.gz) = 399332 bytes
+SHA1 (patch-aa) = 8a159ee81f0a3261214a71e38f97e1e20e703f57
+SHA1 (patch-ab) = 2bfc2059afab1a8a4fa16aa91ba6d2f9425c573d
+SHA1 (patch-ac) = 8d6f43933eecc72cc75ffec1489cbf316a21c5fe
+SHA1 (patch-ad) = 520a4cc7bbafcca8cab50d0f92aed2a333e4da72
+SHA1 (patch-ae) = 82b0d0161eeef941f868b20282b9a7743be89461
+SHA1 (patch-af) = de66e431cdf61697d16df1f6e21d5f65390b845f
+SHA1 (patch-ag) = 59a691ec3ef98b2becae78f5ec05586ec400698e
+SHA1 (patch-ah) = a2f8439e44674438cde037c41cbcc14897f42f86
