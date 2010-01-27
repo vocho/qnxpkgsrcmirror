@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.141 2009/06/16 16:09:36 hasso Exp $
+# $NetBSD: Makefile,v 1.146 2009/12/13 19:43:51 markd Exp $
 
 DISTNAME=	kdelibs-${_KDE_VERSION}
-PKGREVISION=	1
+PKGREVISION=	5
 CATEGORIES=	x11
 COMMENT=	Support libraries for the KDE integrated X11 desktop
 
@@ -18,8 +18,8 @@ MAKE_DIRS+=		${PKG_SYSCONFDIR}/xdg/menus
 CONF_FILES+=		${PREFIX}/share/examples/kdelibs3/applications.menu \
 			${PKG_SYSCONFDIR}/xdg/menus/applications.menu
 
-CONFIGURE_ARGS+=	--with-ssl-dir="${BUILDLINK_PREFIX.openssl}"
 CONFIGURE_ARGS+=	--with-distribution="NetBSD pkgsrc"
+CONFIGURE_ARGS+=	--with-ssl-dir="${BUILDLINK_PREFIX.openssl}"
 
 SGML_CATALOGS=		${PREFIX}/share/kde/apps/ksgmltools2/customization/catalog
 SGML_CATALOGS+=		${PREFIX}/share/kde/apps/ksgmltools2/docbook/xml-dtd-4.1.2/docbook.cat

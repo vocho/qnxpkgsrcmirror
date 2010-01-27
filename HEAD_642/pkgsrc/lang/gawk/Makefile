@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.41 2009/08/12 18:07:15 abs Exp $
+# $NetBSD: Makefile,v 1.43 2009/12/20 23:03:15 tnn Exp $
 
 DISTNAME=	gawk-3.1.7
 CATEGORIES=	lang
@@ -25,6 +25,7 @@ INFO_FILES=		yes
 MAKE_ENV+=		PKGLOCALEDIR=${PKGLOCALEDIR:Q}
 
 LDFLAGS.IRIX+=		-lgen
+CPPFLAGS.OSF1+=		-D_OSF_SOURCE
 
 .include "../../mk/bsd.prefs.mk"
 
@@ -35,6 +36,10 @@ PKG_SUPPORTED_OPTIONS=	portals
 
 .if !empty(PKG_OPTIONS:Mportals)
 CONFIGURE_ARGS+=	--enable-portals
+.endif
+
+.if !empty(MACHINE_PLATFORM:MDarwin-*-x86_64)
+CFLAGS+=	-Dvm_region=vm_region_64
 .endif
 
 BUILDLINK_API_DEPENDS.gettext+=	gettext-lib>=0.10.36

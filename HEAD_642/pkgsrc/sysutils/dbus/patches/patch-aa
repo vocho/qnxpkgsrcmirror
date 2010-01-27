@@ -1,6 +1,6 @@
 $NetBSD: patch-aa,v 1.10 2009/01/07 19:11:36 wiz Exp $
 
---- bus/Makefile.in.orig	2008-12-18 15:47:13.000000000 -0500
+--- bus/Makefile.in.orig	2008-12-18 21:47:13.000000000 +0100
 +++ bus/Makefile.in
 @@ -415,9 +415,10 @@ target_vendor = @target_vendor@
  top_build_prefix = @top_build_prefix@

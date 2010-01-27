@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.2 2009/08/06 13:11:18 obache Exp $
+@comment $NetBSD: PLIST,v 1.4 2009/10/04 15:37:31 zafer Exp $
 bin/filezilla
 bin/fzputtygen
 bin/fzsftp
@@ -33,6 +33,7 @@ share/filezilla/resources/16x16/refresh.png
 share/filezilla/resources/16x16/remotetreeview.png
 share/filezilla/resources/16x16/server.png
 share/filezilla/resources/16x16/sitemanager.png
+share/filezilla/resources/16x16/symlink.png
 share/filezilla/resources/16x16/synchronize.png
 share/filezilla/resources/16x16/unknown.png
 share/filezilla/resources/16x16/upload.png
@@ -415,6 +416,7 @@ share/locale/fr/LC_MESSAGES/filezilla.mo
 share/locale/fr_CA/LC_MESSAGES/filezilla.mo
 share/locale/gl_ES/LC_MESSAGES/filezilla.mo
 share/locale/he_IL/LC_MESSAGES/filezilla.mo
+share/locale/hr/LC_MESSAGES/filezilla.mo
 share/locale/hu_HU/LC_MESSAGES/filezilla.mo
 share/locale/id_ID/LC_MESSAGES/filezilla.mo
 share/locale/it/LC_MESSAGES/filezilla.mo

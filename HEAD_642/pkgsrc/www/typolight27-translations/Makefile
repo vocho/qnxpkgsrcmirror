@@ -1,32 +1,36 @@
-# $NetBSD: Makefile,v 1.21 2009/08/11 13:09:21 taca Exp $
+# $NetBSD: Makefile,v 1.37 2009/12/11 16:15:32 taca Exp $
 #
 
 DISTNAME=	typolight${TL_VER}-translations-${VERS}
 CATEGORIES=	www
-MASTER_SITES=	http://www.typolight.org/download.html?file=tl_files/languages/ja/
+MASTER_SITES=	# defined for each distfiles
 DISTFILES=	${TL_DISTFILES}
 EXTRACT_DIR=	${WRKSRC}
 
 MAINTAINER=	taca@NetBSD.org
-HOMEPAGE=	http://www.typolight.org/download-translations.html
+HOMEPAGE=	http://www.typolight.org/download.html
 COMMENT=	Language files for TYPOlight CMS
+LICENSE=	gnu-lgpl-v2.1
 
 DEPENDS+=	typolight${TL_VER}>=${TL_PKGVER}:../../www/typolight${TL_VER}
 
 # Use time stamp of latest translation.
-VERS=		20090810
+VERS=		20091210
 USE_TOOLS=	pax
 NO_BUILD=	yes
 NO_CONFIGURE=	yes
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
+SEPARATED_MODULES=	development pun_bridge
+
 .include "options.mk"
 
 pre-install:
 	${FIND} ${WRKSRC} -name "*.orig*" -exec ${RM} -f {} \;
-	cd ${WRKSRC}; \
-		${RM} -fr system/modules/development system/modules/pun_bridge
+.for d in ${SEPARATED_MODULES}
+	${RM} -fr ${WRKSRC}/system/modules/${d}
+.endfor
 
 do-install:
 	cd ${WRKSRC}; pax -rw . ${DESTDIR}${PREFIX}/${TL_WEBDIR}

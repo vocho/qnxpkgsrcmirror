@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.47 2009/07/22 09:29:57 wiz Exp $
+# $NetBSD: Makefile,v 1.50 2009/09/12 17:47:17 drochner Exp $
 
 DISTNAME=	Python-2.4.5
 PKGNAME=	python24-2.4.5
-PKGREVISION=	3
+PKGREVISION=	5
 CATEGORIES=	lang python
 MASTER_SITES=	http://www.python.org/ftp/python/2.4.5/
 EXTRACT_SUFX=	.tar.bz2
@@ -117,7 +117,6 @@ PLIST.nis=	yes
 MAKE_ENV+=	PY_BDB_TYPE=${BDB_TYPE:Q}
 MAKE_ENV+=	PY_BDB_INCDIRS=${BDBBASE}/${BUILDLINK_INCDIRS.${BDB_TYPE}}
 MAKE_ENV+=	PY_BDB_LIBDIRS=${BDBBASE}/lib
-LIBS+=		${BDB_LIBS}
 PLIST.bsddb=	yes
 PLIST.dll=	yes
 .if ${OPSYS} == "QNX"

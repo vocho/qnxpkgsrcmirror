@@ -1,13 +1,14 @@
-# $NetBSD: Makefile,v 1.57 2009/08/08 09:36:59 wiz Exp $
+# $NetBSD: Makefile,v 1.67 2009/12/10 09:00:29 wiz Exp $
 
-DISTNAME=	cdrtools-2.01.01a62
+DISTNAME=	cdrtools-2.01.01a69
 PKGNAME=	${DISTNAME:S/a/alpha/:S/-pre/pre/}
+PKGREVISION=	1
 CATEGORIES=	sysutils
 MASTER_SITES=	ftp://ftp.berlios.de/pub/cdrecord/alpha/ \
 		http://ftp.berlios.de/pub/cdrecord/alpha/
 EXTRACT_SUFX=	.tar.bz2
 
-MAINTAINER=	pkgsrc-users@NetBSD.org
+MAINTAINER=	wiz@NetBSD.org
 HOMEPAGE=	http://cdrecord.berlios.de/old/private/cdrecord.html
 COMMENT=	Software for creating ISO9660 images and writing CD/DVD/Blu-ray
 #LICENSE=	CDDL.Schily.txt AND gnu-gpl-v2 AND gnu-lgpl-v2.1
@@ -23,9 +24,8 @@ MAKE_JOBS_SAFE=	no
 WRKSRC=		${WRKDIR}/cdrtools-2.01.01
 USE_TOOLS+=	gm4 gmake tbl
 
-.if ${LOCALBASE} != "/opt/schily"
-BUILDLINK_TRANSFORM+=	rmdir:/opt/schily
-.endif
+CFLAGS.NetBSD+=	-DUSE_GETRAWPARTITION
+LDFLAGS.NetBSD+=	-lutil
 
 # avoid picking up a bad ${ARCH} during the build
 MAKE_ENV+=	ARCH=""
@@ -66,7 +66,7 @@ SUBST_CLASSES+=		fix
 SUBST_STAGE.fix=	post-patch
 SUBST_FILES.fix=	btcflash/btcflash.1
 SUBST_FILES.fix+=	cdrecord/cdrecord.1
-SUBST_FILES.fix+=	cdrecord/defaults.c
+SUBST_FILES.fix+=	libcdrdeflt/cdrdeflt.c
 SUBST_FILES.fix+=	mkisofs/diag/isoinfo.8
 SUBST_FILES.fix+=	readcd/readcd.1
 SUBST_FILES.fix+=	scgcheck/scgcheck.1
@@ -79,13 +79,19 @@ SUBST_FILES.oss=	cdda2wav/local.cnf.in
 SUBST_SED.oss=		-e "s,/dev/dsp,${DEVOSSSOUND},g"
 SUBST_MESSAGE.oss=	Fixing OSS sound device path.
 
+SUBST_CLASSES+=		ins_base
+SUBST_STAGE.ins_base=	pre-configure
+SUBST_FILES.ins_base=	DEFAULTS/Defaults.*
+SUBST_SED.ins_base=		-e "/^INS_BASE=/d"
+SUBST_MESSAGE.ins_base=	Fixing INS_BASE.
+
 do-configure:
 	cd ${WRKSRC}/RULES;						\
 	for suffix in netbsd-cc.rul netbsd-gcc.rul; do			\
 		if [ ! -f ${MACHINE}-$$suffix ]; then			\
 			ln -sf i386-$$suffix ${MACHINE}-$$suffix;	\
 		fi;							\
-	done
+	done;								\
 	cd ${WRKSRC} && ${SETENV} ${CONFIGURE_ENV} ${MAKE_PROGRAM} config
 
 post-build:
@@ -127,24 +133,6 @@ do-install:
 		${DESTDIR}${PREFIX}/share/doc/cdrtools/mkisofs
 	${INSTALL_DATA} ${WRKSRC}/cdrecord/cdrecord.dfl \
 		${DESTDIR}${PREFIX}/share/examples/cdrtools/cdrecord
-
-
-CONFIGURE_ENV+= librt=${NETBSDLIB.rt:U:Q}
-
-.if ${OPSYS} == "NetBSD"
-netbsd-posix-sched-check-cookie: netbsd-posix-sched-check
-###
-### Check for POSIX priority scheduling in NetBSD
-###
-
-.PHONY: netbsd-posix-sched-check
-netbsd-posix-sched-check:
-NETBSDLIB.rt!=\
-	if ( /sbin/sysctl -n kern.posix_sched >/dev/null 2>&1 ); then \
-	    lib=-lrt; \
-	fi || ${TRUE}; \
-	echo "$$lib"
-.endif
 
 .include "../../mk/oss.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

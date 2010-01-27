@@ -1,4 +1,4 @@
-# $NetBSD: modules.mk,v 1.9 2009/08/05 22:14:28 minskim Exp $
+# $NetBSD: modules.mk,v 1.12 2009/09/07 06:51:19 minskim Exp $
 #
 # This Makefile fragment handles Emacs Lisp Packages (== ELPs).
 #
@@ -338,12 +338,12 @@ PRINT_PLIST_AWK+=	{ gsub(/${EMACS_LISPPREFIX:S|${PREFIX}/||:S|/|\\/|g}/, \
 
 .if defined(EMACS_BUILDLINK)
 _EMACS_DIR=	${BUILDLINK_DIR}/share/emacs
-.  if defined(_EMACS_VERSION_MICRO)
-ALL_ENV+=	EMACSLOADPATH=${_EMACS_DIR}/${_EMACS_VERSION_MAJOR}.${_EMACS_VERSION_MINOR}.${_EMACS_VERSION_MICRO}/lisp:${_EMACS_DIR}/site-lisp
-.  else
-ALL_ENV+=	EMACSLOADPATH=${_EMACS_DIR}/${_EMACS_VERSION_MAJOR}.${_EMACS_VERSION_MINOR}/lisp:${_EMACS_DIR}/site-lisp
-.  endif
-
+_EMACS_VERSION_DIR!=	\
+	(${PKG_INFO} -e emacs || ${ECHO} "") |				\
+	${SED} -e 's/emacs-//' |					\
+	${SED} -e 's/\.[0-9]\{8,\}//' |					\
+	${SED} -e 's/nb.*//'
+ALL_ENV+=	EMACSLOADPATH=${_EMACS_DIR}/${_EMACS_VERSION_DIR}/lisp:${_EMACS_DIR}/site-lisp
 .include	"${_EMACS_PKGDIR}/buildlink3.mk"
 .endif
 

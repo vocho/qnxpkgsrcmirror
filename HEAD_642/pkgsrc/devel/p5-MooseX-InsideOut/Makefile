@@ -1,15 +1,16 @@
-# $NetBSD: Makefile,v 1.2 2009/04/27 22:56:54 seb Exp $
+# $NetBSD: Makefile,v 1.4 2009/09/24 06:50:13 sno Exp $
 #
 
-DISTNAME=	MooseX-InsideOut-0.103
+DISTNAME=	MooseX-InsideOut-0.104
 PKGNAME=	p5-${DISTNAME}
+PKGREVISION=	1
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=MooseX/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://search.cpan.org/dist/MooseX-InsideOut/
 COMMENT=	Perl 5 module providing inside-out objects with Moose
-#LICENSE=	artistic OR gnu-gpl-v2
+LICENSE=	${PERL5_LICENSE}
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 

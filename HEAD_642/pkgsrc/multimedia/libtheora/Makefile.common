@@ -1,15 +1,16 @@
-# $NetBSD: Makefile.common,v 1.2 2008/11/10 00:46:33 abs Exp $
+# $NetBSD: Makefile.common,v 1.4 2009/12/07 00:03:00 wiz Exp $
 #
 # used by multimedia/libtheora-docs/Makefile
 
-DISTNAME=	libtheora-1.0
+DISTNAME=	libtheora-1.1.1
 CATEGORIES=	multimedia
 MASTER_SITES=	http://downloads.xiph.org/releases/theora/
 EXTRACT_SUFX=	.tar.bz2
 
-MAINTAINER=	wiz@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.theora.org/
 COMMENT=	Video codec for Ogg multimedia streaming
+LICENSE=	modified-bsd
 
 # PKG_DESTDIR_SUPPORT=	user-destdir
 

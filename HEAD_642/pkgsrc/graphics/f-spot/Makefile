@@ -1,15 +1,17 @@
-# $NetBSD: Makefile,v 1.9 2009/08/12 02:31:21 obache Exp $
+# $NetBSD: Makefile,v 1.16 2009/12/15 21:48:00 joerg Exp $
 #
 
-DISTNAME=	f-spot-0.5.0.3
-PKGREVISION=	3
+DISTNAME=	f-spot-0.6.1.5
+PKGREVISION=	1
 CATEGORIES=	graphics
-MASTER_SITES=	${MASTER_SITE_GNOME:=sources/f-spot/0.5/}
+MASTER_SITES=	${MASTER_SITE_GNOME:=sources/f-spot/0.6/}
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://f-spot.org/
 COMMENT=	Full-featured personal photo management application
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=	yes
 USE_LIBTOOL=	yes
@@ -41,4 +43,5 @@ REPLACE_BASH+=	tools/f-spot-import
 .include "../../x11/gtk-sharp/buildlink3.mk"
 .include "../../sysutils/ndesk-dbus/buildlink3.mk"
 .include "../../sysutils/ndesk-dbus-glib/buildlink3.mk"
+.include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../mk/bsd.pkg.mk"

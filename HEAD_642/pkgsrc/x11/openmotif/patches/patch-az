@@ -1,6 +1,6 @@
 $NetBSD: patch-az,v 1.2 2005/12/12 19:55:41 joerg Exp $
 
---- lib/Xm/Scale.c.orig	2007-09-27 10:36:21.000000000 -0500
+--- lib/Xm/Scale.c.orig	2007-09-27 15:36:21.000000000 +0000
 +++ lib/Xm/Scale.c
 @@ -51,7 +51,7 @@ static char rcsid[] = "$TOG: Scale.c /ma
  

@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.68 2009/02/25 03:07:42 minskim Exp $
+# $NetBSD: Makefile,v 1.73 2009/09/27 01:30:38 minskim Exp $
 
-DISTNAME=	doxygen-1.5.8.src
+DISTNAME=	doxygen-1.6.1.src
 PKGNAME=	${DISTNAME:S/.src//}
 PKGREVISION=	1
 CATEGORIES=	devel
@@ -10,8 +10,10 @@ MASTER_SITES=	ftp://ftp.stack.nl/pub/users/dimitri/ \
 MAINTAINER=	recht@NetBSD.org
 HOMEPAGE=	http://www.doxygen.org/
 COMMENT=	Documentation system for C++, Java, IDL and C
+LICENSE=	gnu-gpl-v2
 
 DEPENDS+=	dvipsk-[0-9]*:../../print/dvipsk
+DEPENDS+=	texlive-pdftools-[0-9]*:../../print/texlive-pdftools
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
@@ -32,16 +34,26 @@ MAKE_FLAGS+=		MAN1DIR=${PKGMANDIR}/man1
 
 PLIST_VARS+=		ci cs
 
-SUBST_CLASSES+=		pybin
-SUBST_STAGE.pybin=	pre-configure
-SUBST_FILES.pybin=	doc/Makefile.in
-SUBST_SED.pybin=	-e "s|@PYTHONBIN@|${PYTHONBIN}|g"
+SUBST_CLASSES+=		path
+SUBST_STAGE.path=	pre-configure
+SUBST_FILES.path=	doc/Makefile.in
+SUBST_SED.path=		-e "s|@EPSTOPDF@|${LOCALBASE}/bin/epstopdf|g" \
+			-e "s|@PYTHONBIN@|${PYTHONBIN}|g"
 
 SUBST_CLASSES+=		perlbin
 SUBST_STAGE.perlbin=	pre-configure
 SUBST_MESSAGE.perlbin=	Fixing hardcoded path to the Perl interpreter
 SUBST_FILES.perlbin=	examples/tag.cfg
 SUBST_SED.perlbin=	-e 's,^PERL_PATH.*,PERL_PATH = ${PERL5},'
+
+SUBST_CLASSES+=		epstopdf
+SUBST_STAGE.epstopdf=	pre-configure
+SUBST_MESSAGE.epstopdf=	Fixing path to epstopdf
+SUBST_FILES.epstopdf=	src/diagram.cpp src/docparser.cpp src/dot.cpp \
+			src/msc.cpp
+SUBST_SED.epstopdf=	-e 's,"epstopdf","${LOCALBASE}/bin/epstopdf",g'
+
+PRIVILEGED_STAGES+=	clean
 
 INSTALL_TARGET=		install install_docs
 

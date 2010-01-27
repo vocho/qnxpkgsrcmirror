@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.75 2009/06/25 17:37:11 drochner Exp $
+# $NetBSD: Makefile,v 1.77 2009/11/12 00:13:26 drochner Exp $
 
-PKGREVISION=	1
+PKGREVISION=		1
 
 PKGCONFIG_OVERRIDE=	gnome-vfs-2.0.pc.in
 PKGCONFIG_OVERRIDE+=	gnome-vfs-module-2.0.pc.in
@@ -27,6 +27,7 @@ MAKE_JOBS_SAFE=		no
 .include "options.mk"
 
 CONFLICTS+=		gnome-vfs2-[0-9]*
+CONFLICTS+=		gnome-vfs-dns-sd-[0-9]*
 
 .include "../../devel/GConf/schemas.mk"
 

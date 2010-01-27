@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.19 2009/07/22 09:01:18 wiz Exp $
+# $NetBSD: Makefile,v 1.22 2009/12/03 16:26:47 joerg Exp $
 
 DISTNAME=		gqmpeg-0.91.1
-PKGREVISION=		6
+PKGREVISION=		7
 CATEGORIES=		audio
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=gqmpeg/}
 
@@ -21,6 +21,8 @@ GNU_CONFIGURE=		YES
 
 CONFIGURE_ARGS+=	--without-included-gettext
 CONFIGURE_ENV+=		GNOME_DATADIR=${PREFIX}/share
+
+MAKE_ENV+=		builddir=.
 
 .include "options.mk"
 

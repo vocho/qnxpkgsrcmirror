@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.3 2009/06/07 21:12:12 joerg Exp $
+# $NetBSD: Makefile,v 1.5 2009/09/11 22:31:01 joerg Exp $
 
 PKGNAME=	${DISTNAME:S/evas/evas-software-x11/}
 
 COMMENT=	Evas software X11 engine
 
-EVAS_ENGINES=	software-x11
+EVAS_ENGINES=	software-xlib
 
 .include "../../graphics/evas/Makefile.common"
 

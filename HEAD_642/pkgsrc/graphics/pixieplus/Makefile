@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.34 2009/08/11 14:38:27 drochner Exp $
+# $NetBSD: Makefile,v 1.38 2009/12/15 21:48:02 joerg Exp $
 #
 
 DISTNAME=	pixieplus-0.5.4
-PKGREVISION=	19
+PKGREVISION=	22
 CATEGORIES=	graphics
 MASTER_SITES=	http://people.fruitsalad.org/avleeuwen/distfiles/pixieplus/
 
@@ -16,6 +16,10 @@ USE_TOOLS+=	gmake
 USE_LANGUAGES=	c c++
 USE_LIBTOOL=	YES
 GNU_CONFIGURE=	YES
+
+.include "../../mk/bsd.prefs.mk"
+
+CPPFLAGS+=	-I${BUILDLINK_PREFIX.ImageMagick}/include/ImageMagick
 
 .include "../../meta-pkgs/kde3/kde3.mk"
 .include "../../graphics/ImageMagick/buildlink3.mk"

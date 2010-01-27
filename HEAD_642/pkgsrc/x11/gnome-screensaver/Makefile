@@ -1,14 +1,16 @@
-# $NetBSD: Makefile,v 1.35 2009/07/22 09:01:52 wiz Exp $
+# $NetBSD: Makefile,v 1.39 2009/11/18 08:12:12 wiz Exp $
 #
 
-DISTNAME=	gnome-screensaver-2.26.1
+DISTNAME=	gnome-screensaver-2.28.0
+PKGREVISION=	1
 CATEGORIES=	x11 gnome
-MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gnome-screensaver/2.26/}
+MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gnome-screensaver/2.28/}
+EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://live.gnome.org/GnomeScreensaver/
 COMMENT=	Screen saver and locker for the GNOME desktop
-#LICENSE=	gnu-gpl-v2 AND gnu-lgpl-v2
+#LICENSE=	gnu-gpl-v2 AND gnu-lgpl-v2 AND others
 
 BUILD_DEPENDS+=	xmlto-[0-9]*:../../textproc/xmlto
 
@@ -36,18 +38,28 @@ CONF_FILES=		${EGDIR}/xdg/menus/gnome-screensavers.menu \
 
 INSTALLATION_DIRS=	${EGDIR}/pam.d
 
+SUBST_CLASSES+=		flavour
+SUBST_STAGE.flavour=	pre-install
+SUBST_FILES.flavour=	savers/netbsd-floaters.desktop.in
+SUBST_SED.flavour=	-e "s|@PREFIX@|${PREFIX}|g"
+SUBST_MESSAGE.flavour=	Preparing NetBSD flavoured screensaver
+
+post-extract:
+	cp ${FILESDIR}/netbsd-floaters.desktop.in ${WRKSRC}/savers/
+
 post-install:
 	${INSTALL_DATA} ${FILESDIR}/pam-gnome-screensaver-NetBSD \
 	    ${DESTDIR}${EGDIR}/pam.d/gnome-screensaver-NetBSD
 	${INSTALL_DATA} ${WRKSRC}/data/gnome-screensaver \
 	    ${DESTDIR}${EGDIR}/pam.d/gnome-screensaver-Linux
+	${INSTALL_DATA} ${FILESDIR}/NetBSD-screensaver.svg \
+	    ${DESTDIR}${PREFIX}/share/pixmaps/
+	${INSTALL_DATA} ${WRKSRC}/savers/netbsd-floaters.desktop.in \
+	    ${DESTDIR}${PREFIX}/share/applications/screensavers/netbsd-floaters.desktop
 
 .include "../../devel/GConf/schemas.mk"
 BUILDLINK_API_DEPENDS.glib2+=		glib2>=2.8.0
 .include "../../devel/glib2/buildlink3.mk"
-BUILDLINK_API_DEPENDS.libglade+=	libglade>=2.5.0
-.include "../../devel/libglade/buildlink3.mk"
-.include "../../devel/libgnomeui/buildlink3.mk"
 .include "../../graphics/MesaLib/buildlink3.mk"
 BUILDLINK_API_DEPENDS.libexif+=		libexif>=0.6.12
 .include "../../graphics/libexif/buildlink3.mk"

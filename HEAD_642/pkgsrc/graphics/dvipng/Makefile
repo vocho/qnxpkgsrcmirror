@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.5 2009/08/03 18:45:36 minskim Exp $
-#
+# $NetBSD: Makefile,v 1.8 2009/10/14 07:22:46 tron Exp $
 
 DISTNAME=	dvipng-1.11
-PKGREVISION=	3
+PKGREVISION=	4
 CATEGORIES=	graphics
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=dvipng/}
 
@@ -17,6 +16,13 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 GNU_CONFIGURE=		yes
 INFO_FILES=		yes
 USE_TOOLS+=		makeinfo
+
+.include "../../mk/bsd.prefs.mk"
+
+# DragonFly has stripped makeinfo in the base - without texi2dvi.
+.if ${OPSYS} == "DragonFly"
+BUILD_DEPENDS+=		gtexinfo-[0-9]*:../../devel/gtexinfo
+.endif
 
 .include "../../fonts/t1lib/buildlink3.mk"
 .include "../../graphics/gd/buildlink3.mk"

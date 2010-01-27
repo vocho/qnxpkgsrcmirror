@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.41 2009/05/20 00:58:16 wiz Exp $
+# $NetBSD: Makefile,v 1.43 2009/12/15 15:05:20 joerg Exp $
 
 DISTNAME=	asc-source-1.16.4.0
 PKGNAME=	${DISTNAME:S/-source//}
-PKGREVISION=	2
+PKGREVISION=	3
 CATEGORIES=	games
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=asc-hq/}
 EXTRACT_SUFX=	.tar.bz2
@@ -27,6 +27,8 @@ USE_TOOLS+=		gmake perl:build pkg-config
 REPLACE_PERL=		checkfordata.pl
 GNU_CONFIGURE=		yes
 CPPFLAGS.NetBSD+=	-D_UNICODE_BROKEN_
+
+MAKE_ENV+=		top_src_dir=.
 
 # ../weaponguide.cpp:1205: virtual memory exhausted
 UNLIMIT_RESOURCES=	datasize

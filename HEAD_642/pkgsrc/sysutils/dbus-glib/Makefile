@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.19 2009/02/24 15:41:29 wiz Exp $
+# $NetBSD: Makefile,v 1.21 2009/09/18 14:51:56 sketch Exp $
 #
 
-DISTNAME=	dbus-glib-0.80
+DISTNAME=	dbus-glib-0.82
 CATEGORIES=	sysutils
 MASTER_SITES=	http://dbus.freedesktop.org/releases/dbus-glib/
 
@@ -17,6 +17,10 @@ USE_TOOLS+=		gmake msgfmt pkg-config
 USE_LIBTOOL=		YES
 
 PKGCONFIG_OVERRIDE=	dbus-glib-1.pc.in
+
+# Workaround for Upstream Bug#562310.
+# for more detail, see also PR#41475.
+TOOLS_NOOP+=		gtkdoc-rebase
 
 CONFIGURE_ARGS+=	--disable-ansi
 CONFIGURE_ARGS+=	--disable-asserts

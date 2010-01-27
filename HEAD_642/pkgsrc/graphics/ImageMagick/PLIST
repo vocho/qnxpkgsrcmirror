@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.63 2009/06/14 20:05:40 joerg Exp $
+@comment $NetBSD: PLIST,v 1.65 2009/10/28 11:07:59 adam Exp $
 bin/Magick++-config
 bin/Magick-config
 bin/MagickCore-config
@@ -35,6 +35,7 @@ include/ImageMagick/magick/animate.h
 include/ImageMagick/magick/annotate.h
 include/ImageMagick/magick/api.h
 include/ImageMagick/magick/artifact.h
+include/ImageMagick/magick/attribute.h
 include/ImageMagick/magick/blob.h
 include/ImageMagick/magick/cache-view.h
 include/ImageMagick/magick/cache.h
@@ -42,6 +43,7 @@ include/ImageMagick/magick/cipher.h
 include/ImageMagick/magick/client.h
 include/ImageMagick/magick/coder.h
 include/ImageMagick/magick/color.h
+include/ImageMagick/magick/colormap.h
 include/ImageMagick/magick/colorspace.h
 include/ImageMagick/magick/compare.h
 include/ImageMagick/magick/composite.h
@@ -57,10 +59,12 @@ include/ImageMagick/magick/draw.h
 include/ImageMagick/magick/effect.h
 include/ImageMagick/magick/enhance.h
 include/ImageMagick/magick/exception.h
+include/ImageMagick/magick/fourier.h
 include/ImageMagick/magick/fx.h
 include/ImageMagick/magick/gem.h
 include/ImageMagick/magick/geometry.h
 include/ImageMagick/magick/hashmap.h
+include/ImageMagick/magick/histogram.h
 include/ImageMagick/magick/identify.h
 include/ImageMagick/magick/image.h
 include/ImageMagick/magick/layer.h
@@ -974,11 +978,13 @@ share/doc/ImageMagick-${IM_MAJOR_VER}/www/api/MagickWand/wand_8h.html
 share/doc/ImageMagick-${IM_MAJOR_VER}/www/api/MagickWand/wandtest_8c.html
 share/doc/ImageMagick-${IM_MAJOR_VER}/www/api/animate.html
 share/doc/ImageMagick-${IM_MAJOR_VER}/www/api/annotate.html
+share/doc/ImageMagick-${IM_MAJOR_VER}/www/api/attribute.html
 share/doc/ImageMagick-${IM_MAJOR_VER}/www/api/blob.html
 share/doc/ImageMagick-${IM_MAJOR_VER}/www/api/cache-view.html
 share/doc/ImageMagick-${IM_MAJOR_VER}/www/api/cache.html
 share/doc/ImageMagick-${IM_MAJOR_VER}/www/api/cipher.html
 share/doc/ImageMagick-${IM_MAJOR_VER}/www/api/color.html
+share/doc/ImageMagick-${IM_MAJOR_VER}/www/api/colormap.html
 share/doc/ImageMagick-${IM_MAJOR_VER}/www/api/colorspace.html
 share/doc/ImageMagick-${IM_MAJOR_VER}/www/api/compare.html
 share/doc/ImageMagick-${IM_MAJOR_VER}/www/api/composite.html
@@ -994,6 +1000,7 @@ share/doc/ImageMagick-${IM_MAJOR_VER}/www/api/enhance.html
 share/doc/ImageMagick-${IM_MAJOR_VER}/www/api/exception.html
 share/doc/ImageMagick-${IM_MAJOR_VER}/www/api/fx.html
 share/doc/ImageMagick-${IM_MAJOR_VER}/www/api/image.html
+share/doc/ImageMagick-${IM_MAJOR_VER}/www/api/histogram.html
 share/doc/ImageMagick-${IM_MAJOR_VER}/www/api/layer.html
 share/doc/ImageMagick-${IM_MAJOR_VER}/www/api/list.html
 share/doc/ImageMagick-${IM_MAJOR_VER}/www/api/magick-deprecate.html
@@ -1038,6 +1045,7 @@ share/doc/ImageMagick-${IM_MAJOR_VER}/www/display.html
 share/doc/ImageMagick-${IM_MAJOR_VER}/www/download.html
 share/doc/ImageMagick-${IM_MAJOR_VER}/www/escape.html
 share/doc/ImageMagick-${IM_MAJOR_VER}/www/examples.html
+share/doc/ImageMagick-${IM_MAJOR_VER}/www/exception.html
 share/doc/ImageMagick-${IM_MAJOR_VER}/www/formats.html
 share/doc/ImageMagick-${IM_MAJOR_VER}/www/fx.html
 share/doc/ImageMagick-${IM_MAJOR_VER}/www/high-dynamic-range.html

@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.42 2009/08/14 19:09:48 joerg Exp $
+# $NetBSD: Makefile,v 1.44 2009/08/26 19:57:13 sno Exp $
 #
 
 DISTNAME=	boolean_6_99
 PKGNAME=	boolean-6.99
+PKGREVISION=	1
 CATEGORIES=	cad graphics
 MASTER_SITES=	http://boolean.klaasholwerda.nl/download/boolzip/
 EXTRACT_SUFX=	.tgz
@@ -14,8 +15,6 @@ COMMENT=	GDSII viewer/editor + (boolean) operations on sets of 2d polygons
 PKG_DESTDIR_SUPPORT=	destdir
 
 WRKSRC=		${WRKDIR}/boolean
-# avoid lowercasing files
-EXTRACT_OPTS_ZIP=	-aqo
 
 GCC_REQD+=	3.0
 USE_TOOLS+=	gmake pax pkg-config tar

@@ -1,4 +1,4 @@
-/*	$NetBSD: common.c,v 1.19 2009/08/11 20:48:06 joerg Exp $	*/
+/*	$NetBSD: common.c,v 1.21 2009/10/15 12:36:57 joerg Exp $	*/
 /*-
  * Copyright (c) 1998-2004 Dag-Erling Coïdan Smørgrav
  * Copyright (c) 2008 Joerg Sonnenberger <joerg@NetBSD.org>
@@ -238,6 +238,7 @@ fetch_reopen(int sd)
 	conn->next_buf = NULL;
 	conn->next_len = 0;
 	conn->sd = sd;
+	conn->is_active = 0;
 	++conn->ref;
 	return (conn);
 }
@@ -476,18 +477,22 @@ fetch_getln(conn_t *conn)
 	ssize_t len;
 
 	if (conn->buf == NULL) {
-		if ((conn->buf = malloc(MIN_BUF_SIZE + 1)) == NULL) {
+		if ((conn->buf = malloc(MIN_BUF_SIZE)) == NULL) {
 			errno = ENOMEM;
 			return (-1);
 		}
 		conn->bufsize = MIN_BUF_SIZE;
 	}
 
-	conn->buf[0] = '\0';
 	conn->buflen = 0;
 	next = NULL;
 
 	do {
+		/*
+		 * conn->bufsize != conn->buflen at this point,
+		 * so the buffer can be NUL-terminated below for
+		 * the case of len == 0.
+		 */
 		len = fetch_read(conn, conn->buf + conn->buflen,
 		    conn->bufsize - conn->buflen);
 		if (len == -1)
@@ -496,10 +501,13 @@ fetch_getln(conn_t *conn)
 			break;
 		next = memchr(conn->buf + conn->buflen, '\n', len);
 		conn->buflen += len;
-		if (conn->buflen == conn->bufsize &&
-		    (next == NULL || next[1] == '\0')) {
+		if (conn->buflen == conn->bufsize && next == NULL) {
 			tmp = conn->buf;
-			tmpsize = conn->bufsize * 2 + 1;
+			tmpsize = conn->bufsize * 2;
+			if (tmpsize < conn->bufsize) {
+				errno = ENOMEM;
+				return (-1);
+			}
 			if ((tmp = realloc(tmp, tmpsize)) == NULL) {
 				errno = ENOMEM;
 				return (-1);
@@ -510,11 +518,14 @@ fetch_getln(conn_t *conn)
 	} while (next == NULL);
 
 	if (next != NULL) {
+		*next = '\0';
 		conn->next_buf = next + 1;
 		conn->next_len = conn->buflen - (conn->next_buf - conn->buf);
 		conn->buflen = next - conn->buf;
+	} else {
+		conn->buf[conn->buflen] = '\0';
+		conn->next_len = 0;
 	}
-	conn->buf[conn->buflen] = '\0';
 	return (0);
 }
 
@@ -741,6 +752,40 @@ fetchInitURLList(struct url_list *ue)
 {
 	ue->length = ue->alloc_size = 0;
 	ue->urls = NULL;
+}
+
+int
+fetchAppendURLList(struct url_list *dst, const struct url_list *src)
+{
+	size_t i, j, len;
+
+	len = dst->length + src->length;
+	if (len > dst->alloc_size) {
+		struct url *tmp;
+
+		tmp = realloc(dst->urls, len * sizeof(*tmp));
+		if (tmp == NULL) {
+			errno = ENOMEM;
+			fetch_syserr();
+			return (-1);
+		}
+		dst->alloc_size = len;
+		dst->urls = tmp;
+	}
+
+	for (i = 0, j = dst->length; i < src->length; ++i, ++j) {
+		dst->urls[j] = src->urls[i];
+		dst->urls[j].doc = strdup(src->urls[i].doc);
+		if (dst->urls[j].doc == NULL) {
+			while (i-- > 0)
+				free(dst->urls[j].doc);
+			fetch_syserr();
+			return -1;
+		}
+	}
+	dst->length = len;
+
+	return 0;
 }
 
 void

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.8 2008/09/17 00:21:49 obache Exp $
+# $NetBSD: Makefile,v 1.10 2009/10/12 03:09:32 obache Exp $
 #
 
 PKGNAME=		${RUBY_PKGPREFIX}-gnome2-libart-${VERSION}

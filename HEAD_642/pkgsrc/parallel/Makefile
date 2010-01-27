@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.11 2007/08/13 08:12:48 rillig Exp $
+# $NetBSD: Makefile,v 1.15 2009/12/12 23:32:10 asau Exp $
 #
 
 COMMENT=	Applications dealing with parallelism in computing
@@ -7,10 +7,10 @@ SUBDIR+=	GridSim
 SUBDIR+=	clusterit
 SUBDIR+=	dqs
 SUBDIR+=	ganglia-monitor-core
-SUBDIR+=	glunix
 SUBDIR+=	linda
 SUBDIR+=	mpi-ch
-SUBDIR+=	openpbs
+SUBDIR+=	openmpi
+SUBDIR+=	openpa
 SUBDIR+=	p5-Parallel-Pvm
 SUBDIR+=	pvm3
 SUBDIR+=	sge

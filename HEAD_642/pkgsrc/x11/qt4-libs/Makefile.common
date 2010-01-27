@@ -1,4 +1,4 @@
-# $NetBSD: Makefile.common,v 1.15 2009/07/22 09:41:07 wiz Exp $
+# $NetBSD: Makefile.common,v 1.17 2009/10/23 15:47:09 tnn Exp $
 # used by x11/qt4-libs/Makefile
 # used by x11/qt4-docs/Makefile
 
@@ -6,7 +6,7 @@ DISTNAME=	qt-x11-opensource-src-${QTVERSION}
 CATEGORIES=	x11
 MASTER_SITES=	http://get.qtsoftware.com/qt/source/ \
 		ftp://ftp.qtsoftware.com/qt/source/
-EXTRACT_SUFX=	.tar.bz2
+#EXTRACT_SUFX=	.tar.bz2
 
 .include "../../x11/qt4/Makefile.common"
 
@@ -66,7 +66,6 @@ CONFIGURE_ARGS+=	-platform solaris-cc
 .    endif
 .  endif
 SYS_LIBS=		-lresolv -lsocket -lnsl -lrt
-SUBLIBS=		-lsocket
 .elif ${OPSYS} == "Interix"
 CONFIGURE_ARGS+=	-platform interix-g++
 CFLAGS+=		-I/usr/local/include/bind
@@ -84,6 +83,8 @@ LDFLAGS+=		-lresolv
 SYS_LIBS=		-lsocket
 CFLAGS+=		-DQT_NO_SYSTEMSEMAPHORE
 LDFLAGS+=		-lsocket
+.elif ${OPSYS} == "Linux"
+LDFLAGS+=		-ldl
 .endif
 
 QMAKE_RANLIB?=		${TRUE}

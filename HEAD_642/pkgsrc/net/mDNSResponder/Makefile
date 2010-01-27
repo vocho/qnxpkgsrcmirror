@@ -1,13 +1,15 @@
-# $NetBSD: Makefile,v 1.25 2008/12/09 05:07:49 obache Exp $
+# $NetBSD: Makefile,v 1.27 2009/10/18 20:12:57 zafer Exp $
 
 DISTNAME=	mDNSResponder-108
 PKGREVISION=	1
 CATEGORIES=	net
-MASTER_SITES=	http://www.opensource.apple.com/darwinsource/tarballs/other/
+MASTER_SITES=	http://www.opensource.apple.com/tarballs/mDNSResponder/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://developer.apple.com/opensource/internet/bonjour.html
 COMMENT=	Apple's mDNS responder
+
+MAKE_JOBS_SAFE=	no
 
 USE_TOOLS+=	gmake
 BUILD_DIRS=	mDNSPosix

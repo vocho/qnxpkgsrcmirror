@@ -1,19 +1,18 @@
-$NetBSD: patch-aq,v 1.4 2009/06/13 11:55:51 hasso Exp $
+$NetBSD: patch-aq,v 1.5 2009/10/11 09:14:52 adam Exp $
 
---- configure.orig	2009-06-20 06:57:50.000000000 +0200
+--- configure.orig	2009-09-29 11:01:31.000000000 +0000
 +++ configure
-@@ -2364,6 +2364,10 @@ if [ -z "$PLATFORM" ]; then
+@@ -2403,6 +2403,9 @@ if [ -z "$PLATFORM" ]; then
       UNIX_SV:*)
          PLATFORM=unixware-g++
          ;;
-+
 +     QNX:*)
 +        PLATFORM=qnx-g++
 +        ;;
       *)
          if [ "$OPT_HELP" != "yes" ]; then
              echo
-@@ -2759,7 +2763,7 @@ elif [ "$CFG_PRECOMPILE" = "yes" ] && [ 
+@@ -2798,7 +2801,7 @@ elif [ "$CFG_PRECOMPILE" = "yes" ] && [ 
  fi
  
  #auto-detect DWARF2 on the mac
@@ -22,7 +21,7 @@ $NetBSD: patch-aq,v 1.4 2009/06/13 11:55:51 hasso Exp $
      if "$mactests/dwarf2.test" "$TEST_COMPILER" "$OPT_VERBOSE" "$mactests" ; then
          CFG_MAC_DWARF2=no
      else
-@@ -2768,7 +2772,7 @@ if [ "$PLATFORM_MAC" = "yes" ] && [ "$CF
+@@ -2807,7 +2810,7 @@ if [ "$PLATFORM_MAC" = "yes" ] && [ "$CF
  fi
  
  # auto-detect support for -Xarch on the mac
@@ -31,7 +30,7 @@ $NetBSD: patch-aq,v 1.4 2009/06/13 11:55:51 hasso Exp $
      if "$mactests/xarch.test" "$TEST_COMPILER" "$OPT_VERBOSE" "$mactests" ; then
          CFG_MAC_XARCH=no
      else
-@@ -5521,18 +5525,18 @@ fi
+@@ -5587,18 +5590,18 @@ fi
  
  # Set the default arch. Select 32-bit/carbon if nothing else has 
  # been specified on the configure line.
@@ -54,7 +53,7 @@ $NetBSD: patch-aq,v 1.4 2009/06/13 11:55:51 hasso Exp $
  fi
  
  # enable cocoa and/or carbon on Mac
-@@ -6463,7 +6467,7 @@ QMakeVar set sql-plugins "$SQL_PLUGINS"
+@@ -6538,7 +6541,7 @@ QMakeVar set sql-plugins "$SQL_PLUGINS"
  [ "$CFG_EXCEPTIONS" = "no" ] && QCONFIG_FLAGS="$QCONFIG_FLAGS QT_NO_EXCEPTIONS"
  [ "$CFG_IPV6" = "no" ]       && QCONFIG_FLAGS="$QCONFIG_FLAGS QT_NO_IPV6"
  [ "$CFG_SXE" = "no" ]        && QCONFIG_FLAGS="$QCONFIG_FLAGS QT_NO_SXE"
@@ -63,7 +62,7 @@ $NetBSD: patch-aq,v 1.4 2009/06/13 11:55:51 hasso Exp $
  
  if [ "$PLATFORM_QWS" != "yes" ]; then
      [ "$CFG_GRAPHICS_SYSTEM" = "raster" ] && QCONFIG_FLAGS="$QCONFIG_FLAGS QT_GRAPHICSSYSTEM_RASTER"
-@@ -6780,7 +6784,7 @@ EOF
+@@ -6856,7 +6859,7 @@ EOF
  *) ;;
  esac
  

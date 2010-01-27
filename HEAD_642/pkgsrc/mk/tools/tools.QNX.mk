@@ -11,6 +11,7 @@ TOOLS_PLATFORM.bison-yacc?=     ${QNX_HOST}/usr/bin/bison -y
 .if exists(/usr/bin/bzcat)
 TOOLS_PLATFORM.bzcat?=		/usr/bin/bzcat
 .endif
+TOOLS_PLATFORM.bzip2?=		/usr/bin/bzip2
 TOOLS_PLATFORM.cat?=		/bin/cat
 TOOLS_PLATFORM.chgrp?=		/bin/chgrp
 TOOLS_PLATFORM.chmod?=		/bin/chmod
@@ -83,7 +84,11 @@ TOOLS_PLATFORM.openssl?=	/usr/bin/openssl
 TOOLS_PLATFORM.patch?=		/usr/bin/patch
 TOOLS_PLATFORM.printf?=		/usr/bin/printf
 TOOLS_PLATFORM.pwd?=		/bin/pwd
+.if empty(USE_CROSS_COMPILE:M[yY][eE][sS])
 TOOLS_PLATFORM.readelf?=	${QNX_HOST}/usr/bin/readelf
+.else
+TOOLS_PLATFORM.readelf?=	${QNX_HOST}/usr/bin/nto${MACHINE_GNU_PLATFORM}-readelf
+.endif
 TOOLS_PLATFORM.rm?=		/bin/rm
 TOOLS_PLATFORM.rmdir?=		/usr/bin/rmdir
 .if exists(/usr/bin/sdiff)
@@ -99,9 +104,12 @@ TOOLS_PLATFORM.sleep?=		/usr/bin/sleep
 TOOLS_PLATFORM.soelim?=		${QNX_HOST}/usr/bin/soelim
 .endif
 TOOLS_PLATFORM.sort?=		/usr/bin/sort
-.if exists(${QNX_HOST}/usr/bin/strip)
+.if empty(USE_CROSS_COMPILE:M[yY][eE][sS])
 TOOLS_PLATFORM.strip?=		${QNX_HOST}/usr/bin/strip
+.else
+TOOLS_PLATFORM.strip?=		${QNX_HOST}/usr/bin/nto${MACHINE_GNU_PLATFORM}-strip
 .endif
+
 TOOLS_PLATFORM.tail?=		/usr/bin/tail
 TOOLS_PLATFORM.tar?=		/usr/bin/tar
 .if exists(${QNX_HOST}/usr/bin/tbl)
@@ -117,9 +125,9 @@ TOOLS_PLATFORM.tsort?=		/usr/bin/tsort
 .endif
 TOOLS_PLATFORM.wc?=		/usr/bin/wc
 TOOLS_PLATFORM.xargs?=		/usr/bin/xargs
+TOOLS_PLATFORM.unzip?=		/usr/bin/unzip
+TOOLS_PLATFORM.xargs?=		/usr/bin/xargs
 .if exists(/usr/bin/xgettext)
 TOOLS_PLATFORM.xgettext?=	/usr/bin/xgettext
 .endif
-.if exists(/usr/bin/yacc)
-TOOLS_PLATFORM.yacc?=		/usr/bin/yacc
-.endif
+TOOLS_PLATFORM.yacc?=		${QNX_HOST}/usr/bin/bison -y

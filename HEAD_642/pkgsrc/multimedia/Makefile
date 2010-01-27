@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.150 2009/06/19 00:06:56 jnemeth Exp $
+# $NetBSD: Makefile,v 1.159 2009/11/27 08:39:08 wiz Exp $
 #
 
 COMMENT=	Multimedia utilities
@@ -9,8 +9,10 @@ SUBDIR+=	adobe-flash-plugin
 SUBDIR+=	alevt
 SUBDIR+=	avidemux
 SUBDIR+=	bsdav
+SUBDIR+=	ccxstream
 SUBDIR+=	cfourcc
 SUBDIR+=	clutter-gst
+SUBDIR+=	clutter08-gst
 SUBDIR+=	dirac
 SUBDIR+=	divxplayer
 SUBDIR+=	dumpmpeg
@@ -20,6 +22,7 @@ SUBDIR+=	dvdbackup
 SUBDIR+=	dvdrip
 SUBDIR+=	dvdstyler
 SUBDIR+=	dvdview
+SUBDIR+=	farsight2
 SUBDIR+=	ffmpeg
 SUBDIR+=	ffmpegthumbnailer
 SUBDIR+=	ffplay
@@ -55,6 +58,7 @@ SUBDIR+=	gxine
 SUBDIR+=	handbrake
 SUBDIR+=	kaffeine
 SUBDIR+=	kdemultimedia3
+SUBDIR+=	kdemultimedia4
 SUBDIR+=	kmplayer
 SUBDIR+=	libassetml
 SUBDIR+=	libdv
@@ -83,15 +87,12 @@ SUBDIR+=	ming
 SUBDIR+=	mjpegtools
 SUBDIR+=	mkv2mp4
 SUBDIR+=	mkvtoolnix
-SUBDIR+=	mmg
 SUBDIR+=	mpeg-lib
 SUBDIR+=	mpeg4ip
 SUBDIR+=	mpeg_encode
 SUBDIR+=	mpeg_play
 SUBDIR+=	mplayer
-SUBDIR+=	mplayer-plugin-firefox
-SUBDIR+=	mplayer-plugin-seamonkey
-SUBDIR+=	mplayer-plugin-seamonkey-gtk1
+SUBDIR+=	mplayer-plugin
 SUBDIR+=	mplayer-share
 SUBDIR+=	ns-flash
 SUBDIR+=	ogle
@@ -121,7 +122,6 @@ SUBDIR+=	totem
 SUBDIR+=	totem-browser-plugin
 SUBDIR+=	totem-nautilus
 SUBDIR+=	totem-pl-parser
-SUBDIR+=	totem-xine
 SUBDIR+=	transcode
 SUBDIR+=	tstools
 SUBDIR+=	tvtime

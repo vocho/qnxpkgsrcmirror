@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.1.1.1 2008/12/16 12:26:20 obache Exp $
+# $NetBSD: Makefile,v 1.3 2009/10/26 08:37:27 obache Exp $
 #
 
 PKGNAME=		${RUBY_PKGPREFIX}-clutter-core-${VERSION}
 COMMENT=		Ruby binding for Clutter Core library
+PKGREVISION=		2
 CATEGORIES=		graphics
 
 PKG_DESTDIR_SUPPORT=	user-destdir
@@ -13,5 +14,5 @@ USE_TOOLS+=		pkg-config
 
 .include "../../devel/ruby-gnome2-glib/buildlink3.mk"
 .include "../../devel/glib2/buildlink3.mk"
-.include "../../graphics/clutter/buildlink3.mk"
+.include "../../graphics/clutter08/buildlink3.mk"
 .include "../../graphics/ruby-clutter/Makefile.common"

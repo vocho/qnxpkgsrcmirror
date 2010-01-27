@@ -1,28 +1,29 @@
-# $NetBSD: Makefile,v 1.67 2009/06/01 13:48:36 reed Exp $
+# $NetBSD: Makefile,v 1.71 2009/11/15 22:31:51 wiz Exp $
 
 DISTNAME=	xpdf-3.02
-PKGNAME=	xpdf-3.02pl3
+PKGNAME=	xpdf-3.02pl4
+PKGREVISION=	1
 CATEGORIES=	print
 MASTER_SITES=	ftp://ftp.foolabs.com/pub/xpdf/ \
 		${MASTER_SITE_SUNSITE:=apps/graphics/viewers/X/xpdf/} \
 		http://gd.tuwien.ac.at/publishing/xpdf/
 PATCH_SITES=	${MASTER_SITES}
-PATCHFILES=	xpdf-3.02pl1.patch xpdf-3.02pl2.patch xpdf-3.02pl3.patch
+PATCHFILES=	xpdf-3.02pl1.patch xpdf-3.02pl2.patch xpdf-3.02pl3.patch xpdf-3.02pl4.patch
 PATCH_DIST_STRIP=	-p1
-PKGREVISION=	1
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.foolabs.com/xpdf/
 COMMENT=	Display tool for PDF files
+LICENSE=	gnu-gpl-v2
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 MAKE_JOBS_SAFE=	no
 
 DEPENDS+=	ghostscript-fonts-[0-9]*:../../fonts/ghostscript-fonts
+DEPENDS+=	poppler-utils-[0-9]*:../../print/poppler-utils
 
 CONFLICTS=	xpdf-crypto-[0-9]*
-CONFLICTS+=	poppler-utils-[0-9]*
 
 USE_LANGUAGES=		c c++
 GNU_CONFIGURE=		yes
@@ -42,8 +43,8 @@ EGDIR=			${PREFIX}/share/examples/xpdf
 CONF_FILES=		${EGDIR}/xpdfrc ${PKG_SYSCONFDIR}/xpdfrc
 
 SUBST_CLASSES+=		paths
-SUBST_FILES.paths=	doc/pdffonts.1 doc/pdfimages.1 doc/pdfinfo.1
-SUBST_FILES.paths+=	doc/pdftoppm.1 doc/pdftops.1 doc/pdftotext.1
+#SUBST_FILES.paths=	doc/pdffonts.1 doc/pdfimages.1 doc/pdfinfo.1
+#SUBST_FILES.paths+=	doc/pdftoppm.1 doc/pdftops.1 doc/pdftotext.1
 SUBST_FILES.paths+=	doc/sample-xpdfrc doc/xpdf.1 doc/xpdfrc.5
 SUBST_SED.paths+=	-e 's,@PREFIX@,${PREFIX},g'
 SUBST_SED.paths+=	-e 's,@PKG_SYSCONFDIR@,${PKG_SYSCONFDIR},g'

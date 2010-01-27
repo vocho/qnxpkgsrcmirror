@@ -1,0 +1,14 @@
+$NetBSD: patch-ag,v 1.8 2009/11/15 12:48:25 drochner Exp $
+
+--- encoding.c.orig	2009-09-24 17:31:59.000000000 +0200
++++ encoding.c
+@@ -1376,6 +1376,9 @@ xmlInitCharEncodingHandlers(void) {
+     xmlRegisterCharEncodingHandlersISO8859x ();
+ #endif
+ #endif
++#ifdef __NetBSD__ /* XXX needed by selftest */
++    xmlAddEncodingAlias("CP1141", "IBM-1141");
++#endif
+ 
+ }
+ 

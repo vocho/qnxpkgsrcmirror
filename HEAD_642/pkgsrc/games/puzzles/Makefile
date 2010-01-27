@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.4 2009/08/05 00:03:14 wiz Exp $
+# $NetBSD: Makefile,v 1.7 2009/10/31 02:07:49 wiz Exp $
 #
 
-DISTNAME=	puzzles-r8605
+DISTNAME=	puzzles-r8692
 PKGNAME=	${DISTNAME:S/-r/-/}
-PKGREVISION=	1
 CATEGORIES=	games
-MASTER_SITES=	http://www.chiark.greenend.org.uk/~sgtatham/puzzles/
+# distfile changes daily
+MASTER_SITES=	# http://www.chiark.greenend.org.uk/~sgtatham/puzzles/
 
 MAINTAINER=	wiz@NetBSD.org
 HOMEPAGE=	http://www.chiark.greenend.org.uk/~sgtatham/puzzles/
@@ -15,7 +15,6 @@ LICENSE=	mit
 PKG_DESTDIR_SUPPORT=	user-destdir
 INSTALLATION_DIRS=	bin share/doc/puzzles
 
-DIST_SUBDIR=	puzzles-20090803
 USE_TOOLS+=	gmake pkg-config
 
 BUILDLINK_TRANSFORM+=	rm:-Werror

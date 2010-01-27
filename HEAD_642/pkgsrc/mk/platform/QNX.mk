@@ -101,3 +101,4 @@ GAMEDIRMODE=		0775
 
 PREFER.zlib?=		pkgsrc
 PREFER.bzip2?=		pkgsrc
+PREFER.curses?=		pkgsrc

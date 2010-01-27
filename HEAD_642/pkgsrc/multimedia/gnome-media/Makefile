@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.22 2009/07/26 18:38:14 drochner Exp $
+# $NetBSD: Makefile,v 1.26 2009/12/15 21:59:05 joerg Exp $
 
-DISTNAME=		gnome-media-2.26.0
+DISTNAME=		gnome-media-2.28.1
 PKGREVISION=		1
 CATEGORIES=		multimedia gnome
-MASTER_SITES=		${MASTER_SITE_GNOME:=sources/gnome-media/2.26/}
+MASTER_SITES=		${MASTER_SITE_GNOME:=sources/gnome-media/2.28/}
 EXTRACT_SUFX=		.tar.bz2
 
 MAINTAINER=		rh@NetBSD.org
@@ -19,19 +19,16 @@ USE_TOOLS+=		gmake intltool msgfmt perl pkg-config xgettext
 
 GCONF_SCHEMAS+=	gnome-audio-profiles.schemas
 GCONF_SCHEMAS+=	gnome-sound-recorder.schemas
+GCONF_SCHEMAS+=	gnome-volume-control.schemas
 
 .include "../../audio/libcanberra/buildlink3.mk"
-.include "../../audio/pulseaudio/buildlink3.mk"
+# pkgsrc pulseaudio is too old
+#.include "../../audio/pulseaudio/buildlink3.mk"
 .include "../../devel/GConf/schemas.mk"
 .include "../../devel/GConf-ui/buildlink3.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../devel/glib2/buildlink3.mk"
 .include "../../devel/libglade/buildlink3.mk"
-BUILDLINK_API_DEPENDS.libgnome+=		libgnome>=2.13.7
-.include "../../devel/libgnome/buildlink3.mk"
-BUILDLINK_API_DEPENDS.libgnomeui+=		libgnomeui>=2.13.2
-.include "../../devel/libgnomeui/buildlink3.mk"
-.include "../../devel/libbonobo/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 BUILDLINK_API_DEPENDS.gst-plugins0.10-base+=	gst-plugins0.10-base>=0.10.3
 .include "../../multimedia/gst-plugins0.10-base/buildlink3.mk"

@@ -1,35 +1,46 @@
-# $NetBSD: Makefile,v 1.17 2009/06/30 00:07:17 joerg Exp $
+# $NetBSD: Makefile,v 1.19 2009/11/25 20:38:45 joerg Exp $
 #
 
-DISTNAME=	libtabe-0.2.5
-PKGREVISION=	2
+DISTNAME=	libtabe-0.2.6
 CATEGORIES=	chinese inputmethod
-MASTER_SITES=	ftp://xcin.linux.org.tw/pub/xcin/libtabe/devel/
+MASTER_SITES=	ftp://cle.linux.org.tw/pub/xcin/cvs/
 
 MAINTAINER=	rxg@NetBSD.org
 HOMEPAGE=	http://libtabe.sourceforge.net/
 COMMENT=	Library for Chinese language processing
+LICENSE=	modified-bsd
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 MAKE_JOBS_SAFE=		no
 
-WRKSRC=			${WRKDIR}/libtabe
 USE_LIBTOOL=		yes
 
 GNU_CONFIGURE=		yes
-CONFIGURE_ARGS+=	--with-db-inc=${BUILDLINK_PREFIX.db3}/include/db3
-CONFIGURE_ARGS+=	--with-db-lib=${BUILDLINK_PREFIX.db3}/lib
+CONFIGURE_ARGS+=	--with-db-inc=${BDBBASE}/include/${BDB_TYPE}
+CONFIGURE_ARGS+=	--with-db-lib=${BDBBASE}/lib
+
+INSTALL_MAKE_FLAGS+=	program_prefix=${DESTDIR}
+
+INSTALLATION_DIRS+=	share/doc/tabe
 
 post-install:
-	${INSTALL_DATA_DIR} ${PREFIX}/share/doc/tabe
-	${INSTALL_DATA} ${WRKSRC}/doc/* ${PREFIX}/share/doc/tabe
+	${INSTALL_DATA} ${WRKSRC}/doc/* ${DESTDIR}${PREFIX}/share/doc/tabe
 	${INSTALL_DATA} ${WRKSRC}/src/supports/bims/README \
-		${PREFIX}/share/doc/tabe/README.bims
+		${DESTDIR}${PREFIX}/share/doc/tabe/README.bims
 	${INSTALL_DATA} ${WRKSRC}/tsi-src/README \
-		${PREFIX}/share/doc/tabe/README.tsi
+		${DESTDIR}${PREFIX}/share/doc/tabe/README.tsi
 
 BUILDLINK_DEPMETHOD.libXt?=	build
 
-.include "../../databases/db3/buildlink3.mk"
+.include "../../mk/bsd.prefs.mk"
+
+.if ${X11_TYPE} == "modular"
+CONFIGURE_ARGS+=	--x-includes=${PREFIX:Q}/include
+.endif
+
 .include "../../x11/libX11/buildlink3.mk"
 .include "../../x11/libXt/buildlink3.mk"
+BDB_ACCEPTED=	db2 db3 db4
+.include "../../mk/bdb.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

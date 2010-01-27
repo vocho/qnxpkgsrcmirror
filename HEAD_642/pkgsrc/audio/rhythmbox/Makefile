@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.68 2009/08/02 12:10:39 drochner Exp $
+# $NetBSD: Makefile,v 1.72 2009/12/09 10:30:00 drochner Exp $
 #
 
-DISTNAME=	rhythmbox-0.12.3
-PKGREVISION=	1
+DISTNAME=	rhythmbox-0.12.6
 CATEGORIES=	audio gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/rhythmbox/0.12/}
 EXTRACT_SUFX=	.tar.bz2
@@ -22,6 +21,7 @@ USE_PKGLOCALEDIR=	YES
 
 CONFIGURE_ARGS+=	--disable-browser-plugin
 CONFIGURE_ARGS+=	--with-html-dir=${PREFIX}/share/doc
+CONFIGURE_ARGS+=	--disable-fm-radio
 
 GCONF_SCHEMAS=		rhythmbox.schemas
 
@@ -46,7 +46,6 @@ BUILDLINK_API_DEPENDS.totem+=		{totem,totem-xine}>=1.1.5
 .include "../../net/libsoup24/buildlink3.mk"
 .include "../../sysutils/dbus-glib/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
-.include "../../sysutils/gnome-vfs/buildlink3.mk"
 .include "../../sysutils/brasero/buildlink3.mk"
 .include "../../sysutils/libnotify/buildlink3.mk"
 .include "../../textproc/gnome-doc-utils/buildlink3.mk"

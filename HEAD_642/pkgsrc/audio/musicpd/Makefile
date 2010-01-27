@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.39 2009/08/10 23:10:29 tnn Exp $
+# $NetBSD: Makefile,v 1.42 2009/12/16 19:28:49 drochner Exp $
 
-DISTNAME=		mpd-0.15.1
+DISTNAME=		mpd-0.15.6
 PKGNAME=		${DISTNAME:S/mpd/musicpd/}
-PKGREVISION=		1
 CATEGORIES=		audio
 #MASTER_SITES=		http://musicpd.org/uploads/files/
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=musicpd/}
@@ -37,11 +36,12 @@ SUBST_STAGE.paths=	post-patch
 SUBST_FILES.paths=	mpd.conf
 SUBST_SED.paths=	-e 's,@DEVOSSAUDIO@,${DEVOSSAUDIO},'
 
+INSTALLATION_DIRS=	${EGDIR}
+
 post-extract:
 	${CP} ${FILESDIR}/mpd.conf ${WRKSRC}/mpd.conf
 
 post-install:
-	${INSTALL_DATA_DIR} ${DESTDIR}${EGDIR}
 	${INSTALL_DATA} ${WRKSRC}/mpd.conf ${DESTDIR}${EGDIR}
 
 .include "../../devel/glib2/buildlink3.mk"

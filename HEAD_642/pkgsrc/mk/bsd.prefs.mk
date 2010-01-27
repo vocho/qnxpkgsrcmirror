@@ -1,4 +1,4 @@
-# $NetBSD: bsd.prefs.mk,v 1.294 2009/05/23 23:48:44 joerg Exp $
+# $NetBSD: bsd.prefs.mk,v 1.301 2009/12/13 08:19:45 obache Exp $
 #
 # This file includes the mk.conf file, which contains the user settings.
 #
@@ -123,7 +123,24 @@ LOWER_OPSYS?=		bsdi
 
 .elif ${OPSYS} == "Darwin"
 LOWER_OPSYS?=		darwin
+.if empty(OS_VERSION:M[1-9].*.*)
+# Automatically select the ABI under Mac OS X Snow Leopard. We don't
+# use this at the moment because too many third party programs don't
+# work with it.
+#
+# _SYSCTL_HW_OPTIONAL_X86_64!=	/usr/sbin/sysctl -n hw.optional.x86_64
+# .  if ${_SYSCTL_HW_OPTIONAL_X86_64} == "1"
+# ABI=			64
+# .else
+# ABI=			32
+#.  endif
+ABI=			32
+LOWER_ARCH.32=		i386
+LOWER_ARCH.64=		x86_64
+LOWER_ARCH=		${LOWER_ARCH.${ABI}}
+.else
 LOWER_ARCH!=		${UNAME} -p
+.endif
 MACHINE_ARCH=		${LOWER_ARCH}
 MAKEFLAGS+=		LOWER_ARCH=${LOWER_ARCH:Q}
 LOWER_OPSYS_VERSUFFIX=	${LOWER_OS_VERSION:C/([0-9]*).*/\1/}
@@ -133,7 +150,11 @@ LOWER_VENDOR?=		apple
 OS_VERSION:=		${OS_VERSION:C/-.*$//}
 LOWER_OPSYS?=		dragonfly
 LOWER_ARCH!=		${UNAME} -p
+.  if ${LOWER_ARCH} == "amd64"
+MACHINE_ARCH=		x86_64
+.  else
 MACHINE_ARCH=		${LOWER_ARCH}
+.  endif
 MAKEFLAGS+=		LOWER_ARCH=${LOWER_ARCH:Q}
 LOWER_VENDOR?=		pc
 
@@ -155,14 +176,18 @@ LOWER_VENDOR?=		unknown
 
 .elif ${OPSYS} == "Interix"
 LOWER_OPSYS?=		interix
-LOWER_OPSYS_VERSUFFIX?=	3
 LOWER_VENDOR?=		pc
-.  if exists(/usr/lib/libc.so.3.5)
-OS_VERSION=		3.5
-.  elif exists(/usr/lib/libc.so.3.1)
-OS_VERSION=		3.1
+.  if exists(/usr/lib/libc.so.5.2) || exists(/usr/lib/x86/libc.so.5.2)
+LOWER_OPSYS_VERSUFFIX=	${LOWER_OS_VERSION:C/([0-9]*).*/\1/}
 .  else
+LOWER_OPSYS_VERSUFFIX?=	3
+.    if exists(/usr/lib/libc.so.3.5)
+OS_VERSION=		3.5
+.    elif exists(/usr/lib/libc.so.3.1)
+OS_VERSION=		3.1
+.    else
 OS_VERSION=		3.0
+.    endif
 .  endif
 
 .elif !empty(OPSYS:MIRIX*)
@@ -514,7 +539,8 @@ X11_TYPE?=		native
 X11BASE?=	/usr/openwin
 .  elif ${OPSYS} == "IRIX" || ${OPSYS} == "OSF1" || ${OPSYS} == "HPUX"
 X11BASE?=	/usr
-.  elif !empty(MACHINE_PLATFORM:MDarwin-9.*-*)
+.  elif !empty(MACHINE_PLATFORM:MDarwin-9.*-*) || \
+        !empty(MACHINE_PLATFORM:MDarwin-??.*-*)
 X11BASE?=	/usr/X11
 .  elif exists(/usr/X11R7/lib/libX11.so)
 X11BASE?=	/usr/X11R7

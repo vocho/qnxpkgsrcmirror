@@ -1,6 +1,6 @@
-$NetBSD: patch-at,v 1.13 2009/07/08 19:37:27 tron Exp $
+$NetBSD: patch-at,v 1.14 2009/10/04 16:58:38 taca Exp $
 
---- configure.orig	2009-06-22 17:02:40.000000000 -0400
+--- configure.orig	2009-09-30 22:08:58.000000000 +0900
 +++ configure
 @@ -765,6 +765,7 @@ swatdir
  privatedir
@@ -79,118 +79,7 @@ $NetBSD: patch-at,v 1.13 2009/07/08 19:37:27 tron Exp $
  ## check for --enable-debug first before checking CFLAGS before
  ## so that we don't mix -O and -g
  # Check whether --enable-debug was given.
-@@ -6362,6 +6388,110 @@ _ACEOF
- 
- fi
- 
-+{ $as_echo "$as_me:$LINENO: checking for uint" >&5
-+$as_echo_n "checking for uint... " >&6; }
-+if test "${ac_cv_type_uint+set}" = set; then
-+  $as_echo_n "(cached) " >&6
-+else
-+  ac_cv_type_uint=no
-+cat >conftest.$ac_ext <<_ACEOF
-+/* confdefs.h.  */
-+_ACEOF
-+cat confdefs.h >>conftest.$ac_ext
-+cat >>conftest.$ac_ext <<_ACEOF
-+/* end confdefs.h.  */
-+$ac_includes_default
-+int
-+main ()
-+{
-+if (sizeof (uint))
-+       return 0;
-+  ;
-+  return 0;
-+}
-+_ACEOF
-+rm -f conftest.$ac_objext
-+if { (ac_try="$ac_compile"
-+case "(($ac_try" in
-+  *\"* | *\`* | *\\*) ac_try_echo=\$ac_try;;
-+  *) ac_try_echo=$ac_try;;
-+esac
-+eval ac_try_echo="\"\$as_me:$LINENO: $ac_try_echo\""
-+$as_echo "$ac_try_echo") >&5
-+  (eval "$ac_compile") 2>conftest.er1
-+  ac_status=$?
-+  grep -v '^ *+' conftest.er1 >conftest.err
-+  rm -f conftest.er1
-+  cat conftest.err >&5
-+  $as_echo "$as_me:$LINENO: \$? = $ac_status" >&5
-+  (exit $ac_status); } && {
-+	 test -z "$ac_c_werror_flag" ||
-+	 test ! -s conftest.err
-+       } && test -s conftest.$ac_objext; then
-+  cat >conftest.$ac_ext <<_ACEOF
-+/* confdefs.h.  */
-+_ACEOF
-+cat confdefs.h >>conftest.$ac_ext
-+cat >>conftest.$ac_ext <<_ACEOF
-+/* end confdefs.h.  */
-+$ac_includes_default
-+int
-+main ()
-+{
-+if (sizeof ((uint)))
-+	  return 0;
-+  ;
-+  return 0;
-+}
-+_ACEOF
-+rm -f conftest.$ac_objext
-+if { (ac_try="$ac_compile"
-+case "(($ac_try" in
-+  *\"* | *\`* | *\\*) ac_try_echo=\$ac_try;;
-+  *) ac_try_echo=$ac_try;;
-+esac
-+eval ac_try_echo="\"\$as_me:$LINENO: $ac_try_echo\""
-+$as_echo "$ac_try_echo") >&5
-+  (eval "$ac_compile") 2>conftest.er1
-+  ac_status=$?
-+  grep -v '^ *+' conftest.er1 >conftest.err
-+  rm -f conftest.er1
-+  cat conftest.err >&5
-+  $as_echo "$as_me:$LINENO: \$? = $ac_status" >&5
-+  (exit $ac_status); } && {
-+	 test -z "$ac_c_werror_flag" ||
-+	 test ! -s conftest.err
-+       } && test -s conftest.$ac_objext; then
-+  :
-+else
-+  $as_echo "$as_me: failed program was:" >&5
-+sed 's/^/| /' conftest.$ac_ext >&5
-+
-+	ac_cv_type_uint=yes
-+fi
-+
-+rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
-+else
-+  $as_echo "$as_me: failed program was:" >&5
-+sed 's/^/| /' conftest.$ac_ext >&5
-+
-+
-+fi
-+
-+rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
-+fi
-+{ $as_echo "$as_me:$LINENO: result: $ac_cv_type_uint" >&5
-+$as_echo "$ac_cv_type_uint" >&6; }
-+if test "x$ac_cv_type_uint" = x""yes; then
-+  :
-+else
-+
-+cat >>confdefs.h <<_ACEOF
-+#define uint unsigned int
-+_ACEOF
-+
-+fi
-+
- { $as_echo "$as_me:$LINENO: checking for int8_t" >&5
- $as_echo_n "checking for int8_t... " >&6; }
- if test "${ac_cv_type_int8_t+set}" = set; then
-@@ -33459,7 +33589,8 @@ done
+@@ -33670,7 +33696,8 @@ done
  
  
  
@@ -200,20 +89,7 @@ $NetBSD: patch-at,v 1.13 2009/07/08 19:37:27 tron Exp $
  do
  as_ac_var=`$as_echo "ac_cv_func_$ac_func" | $as_tr_sh`
  { $as_echo "$as_me:$LINENO: checking for $ac_func" >&5
-@@ -42384,7 +42515,11 @@ cat >>confdefs.h <<\_ACEOF
- _ACEOF
- 
- 			;;
--		*qnx*)
-+		*qnx*)  BLDSHARED="true"
-+			LDSHFLAGS="-shared"
-+			DYNEXP="-Wl,-Bdynamic"
-+			SONAMEFLAG="-Wl,-soname,"
-+			PICFLAG="-fPIC"
- cat >>confdefs.h <<\_ACEOF
- #define QNX 1
- _ACEOF
-@@ -49772,6 +49907,77 @@ done
+@@ -49983,6 +50010,77 @@ done
  ##################
  # look for a method of finding the list of network interfaces
  iface=no;
@@ -291,7 +167,7 @@ $NetBSD: patch-at,v 1.13 2009/07/08 19:37:27 tron Exp $
  { $as_echo "$as_me:$LINENO: checking for iface AIX" >&5
  $as_echo_n "checking for iface AIX... " >&6; }
  if test "${samba_cv_HAVE_IFACE_AIX+set}" = set; then
-@@ -49842,6 +50048,7 @@ cat >>confdefs.h <<\_ACEOF
+@@ -50053,6 +50151,7 @@ cat >>confdefs.h <<\_ACEOF
  _ACEOF
  
  fi
@@ -299,7 +175,7 @@ $NetBSD: patch-at,v 1.13 2009/07/08 19:37:27 tron Exp $
  
  if test $iface = no; then
  { $as_echo "$as_me:$LINENO: checking for iface ifconf" >&5
-@@ -53369,9 +53576,9 @@ LIBS="-lcrypto $KRB5_LIBS  $LIBS"
+@@ -53580,9 +53679,9 @@ LIBS="-lcrypto $KRB5_LIBS  $LIBS"
  
  
  
@@ -312,7 +188,7 @@ $NetBSD: patch-at,v 1.13 2009/07/08 19:37:27 tron Exp $
    $as_echo_n "(cached) " >&6
  else
    cat >conftest.$ac_ext <<_ACEOF
-@@ -53387,11 +53594,11 @@ cat >>conftest.$ac_ext <<_ACEOF
+@@ -53598,11 +53697,11 @@ cat >>conftest.$ac_ext <<_ACEOF
  #ifdef __cplusplus
  extern "C"
  #endif
@@ -326,7 +202,7 @@ $NetBSD: patch-at,v 1.13 2009/07/08 19:37:27 tron Exp $
    ;
    return 0;
  }
-@@ -53417,13 +53624,13 @@ $as_echo "$ac_try_echo") >&5
+@@ -53628,13 +53727,13 @@ $as_echo "$ac_try_echo") >&5
  	 test "$cross_compiling" = yes ||
  	 $as_test_x conftest$ac_exeext
         }; then
@@ -342,7 +218,7 @@ $NetBSD: patch-at,v 1.13 2009/07/08 19:37:27 tron Exp $
  		  ac_cv_lib_ext_crypto=no
  fi
  
-@@ -53432,11 +53639,11 @@ rm -f core conftest.err conftest.$ac_obj
+@@ -53643,11 +53742,11 @@ rm -f core conftest.err conftest.$ac_obj
        conftest$ac_exeext conftest.$ac_ext
  
  fi
@@ -358,7 +234,7 @@ $NetBSD: patch-at,v 1.13 2009/07/08 19:37:27 tron Exp $
  _ACEOF
  
  fi
-@@ -67188,31 +67395,39 @@ case "$host_os" in
+@@ -67399,31 +67498,39 @@ case "$host_os" in
  		NSSSONAMEVERSIONSUFFIX=".2"
  		WINBIND_NSS_EXTRA_OBJS="nsswitch/winbind_nss_linux.o"
  		;;

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.302 2009/08/09 06:56:09 minskim Exp $
+# $NetBSD: Makefile,v 1.307 2009/11/27 02:15:04 jnemeth Exp $
 #
 
 COMMENT=	Desktop publishing
@@ -40,9 +40,11 @@ SUBDIR+=	foomatic-filters
 SUBDIR+=	foomatic-filters-cups
 SUBDIR+=	foomatic-ppds
 SUBDIR+=	foomatic-ppds-cups
+SUBDIR+=	foomatic4-db
+SUBDIR+=	foomatic4-db-engine
+SUBDIR+=	foomatic4-filters
 SUBDIR+=	ghostscript
 SUBDIR+=	ghostscript-esp
-SUBDIR+=	ghostscript6
 SUBDIR+=	gimp-print
 SUBDIR+=	gimp-print-cups
 SUBDIR+=	gimp-print-escputil
@@ -95,7 +97,9 @@ SUBDIR+=	pdflib
 SUBDIR+=	pdflib-lite
 SUBDIR+=	php-pdflib
 SUBDIR+=	pnm2ppa
+SUBDIR+=	podofo
 SUBDIR+=	poppler
+SUBDIR+=	poppler-data
 SUBDIR+=	poppler-glib
 SUBDIR+=	poppler-includes
 SUBDIR+=	poppler-qt

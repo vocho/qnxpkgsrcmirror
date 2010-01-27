@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.151 2009/07/22 09:01:34 wiz Exp $
+# $NetBSD: Makefile,v 1.155 2009/12/16 18:00:23 drochner Exp $
 
-DISTNAME=		evolution-2.26.3
+DISTNAME=		evolution-2.28.2
 CATEGORIES=		mail time gnome
-MASTER_SITES=		${MASTER_SITE_GNOME:=sources/evolution/2.26/}
+MASTER_SITES=		${MASTER_SITE_GNOME:=sources/evolution/2.28/}
 EXTRACT_SUFX=		.tar.bz2
 
 MAINTAINER=		rh@NetBSD.org
@@ -34,6 +34,7 @@ CONFIGURE_ARGS+=	--with-krb5=/usr
 .if defined(PKGREVISION)
 CONFIGURE_ARGS+=	--with-sub-version=nb${PKGREVISION}
 .endif
+CONFIGURE_ARGS+=	--disable-nm
 
 PKGCONFIG_OVERRIDE=	evolution-plugin.pc.in
 PKGCONFIG_OVERRIDE+=	evolution-shell.pc.in
@@ -90,5 +91,6 @@ BUILDLINK_API_DEPENDS.evolution-data-server+=	evolution-data-server>=2.24.3
 .include "../../www/gtkhtml314/buildlink3.mk"
 BUILDLINK_API_DEPENDS.gtk2+=	gtk2+>=2.12.0
 .include "../../x11/gtk2/buildlink3.mk"
+.include "../../x11/gnome-desktop/buildlink3.mk"
 .include "../../mk/pthread.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

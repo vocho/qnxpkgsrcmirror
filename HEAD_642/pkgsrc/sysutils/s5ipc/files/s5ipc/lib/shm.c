@@ -25,7 +25,8 @@ static struct _shm_cache {
 
 static volatile int shmmgr_coid = -1;
 
-static int _shmfd_store(int shmfd, int shmid, void *shmaddr)
+static int
+_shmfd_store(int shmfd, int shmid, void *shmaddr)
 {
 	int new_total, i;
 	struct _shm_cache *sc, *new_array;
@@ -35,9 +36,9 @@ static int _shmfd_store(int shmfd, int shmid, void *shmaddr)
 		sc = &shmfd_array[shmfd];
 	} else {
 		new_total = shmfd_array_total + SHMFD_ARRAY_INC;
-		if ((new_array = realloc(shmfd_array, new_total * sizeof(struct _shm_cache))) == NULL) {
-			// no more memory
-			return NULL;
+		if ((new_array = realloc(shmfd_array,
+		    new_total * sizeof(struct _shm_cache))) == NULL) {
+			return -1;
 		}
 		for (i = 0; i < SHMFD_ARRAY_INC; i++) {
 			new_array[i].shmid = -1;
@@ -53,45 +54,50 @@ static int _shmfd_store(int shmfd, int shmid, void *shmaddr)
 	return 0;
 }
 
-static int _shmfd_find(const void *addr, struct _shm_cache *sc, int remove)
+static int
+_shmfd_find(const void *addr, struct _shm_cache *sc, int remove)
 {
 	int i;
 	
 	_mutex_lock(&shmfd_mutex);
 	for (i = 0; i < shmfd_array_total; i++) {
-		if (shmfd_array[i].shmid != -1 && shmfd_array[i].shmaddr == addr)
-		  break;
+		if (shmfd_array[i].shmid != -1 &&
+		    shmfd_array[i].shmaddr == addr) {
+			break;
+		}
 	}	
 	if (i == shmfd_array_total) {
 		_mutex_unlock(&shmfd_mutex);
 		errno = EINVAL;
 		return -1;
 	}
-	if (sc)
-	  *sc = shmfd_array[i];
+	if (sc != NULL)
+		*sc = shmfd_array[i];
 	if (remove)
-	  shmfd_array[i].shmid = -1;
+		shmfd_array[i].shmid = -1;
 	_mutex_unlock(&shmfd_mutex);
 	
 	return i;
 }
 
-static int _shm_send(void *smsg, int ssize, void *rmsg, int rsize)
+static int
+_shm_send(void *smsg, int ssize, void *rmsg, int rsize)
 {
 	int status = -1;
 	int coid = shmmgr_coid;
 
-	if (coid == -1 || ((status = MsgSend(coid, smsg, ssize, rmsg, rsize)) == -1
-					   && (errno == EBADF || errno == ENOSYS)))
-	{
+	if (coid == -1 ||
+	    ((status = MsgSend(coid, smsg, ssize, rmsg, rsize)) == -1 &&
+	    (errno == EBADF || errno == ENOSYS))) {
 		if (coid >= 0) {
 			shmmgr_coid = -1;
 			close(coid);
 		}
 		
 		// connect
-		coid = _connect(_NTO_SIDE_CHANNEL, PATH_SHMMGR, 0, O_RDWR, SH_DENYNO, _IO_CONNECT_OPEN, 0, 
-						_IO_FLAG_RD | _IO_FLAG_WR, 0, 0, 0, 0, 0, 0, 0);
+		coid = _connect(_NTO_SIDE_CHANNEL, PATH_SHMMGR, 0, O_RDWR,
+		    SH_DENYNO, _IO_CONNECT_OPEN, 0, _IO_FLAG_RD | _IO_FLAG_WR,
+		    0, 0, 0, 0, 0, 0, 0);
 
 		if (coid == -1) {
 			errno = ENOTSUP;
@@ -100,8 +106,11 @@ static int _shm_send(void *smsg, int ssize, void *rmsg, int rsize)
 			if (status == -1) {
 				close(coid);
 			} else {
-				if (_smp_cmpxchg((volatile unsigned *)&shmmgr_coid, -1, coid) != -1) 
-				  close(coid);
+				if (_smp_cmpxchg(
+				    (volatile unsigned *)&shmmgr_coid, -1,
+				    coid) != -1) {
+					close(coid);
+				}
 			}
 		}
 	}
@@ -109,7 +118,8 @@ static int _shm_send(void *smsg, int ssize, void *rmsg, int rsize)
 	return status;
 }
 
-int	shmget(key_t key, size_t size, int shmflag)
+int
+shmget(key_t key, size_t size, int shmflag)
 {
 	shmmgr_get_t msg;
 
@@ -128,7 +138,8 @@ int	shmget(key_t key, size_t size, int shmflag)
 	return msg.o.shmid;
 }
 
-void *shmat(int shmid, const void *shmaddr, int shmflag)
+void *
+shmat(int shmid, const void *shmaddr, int shmflag)
 {
 	shmmgr_attach_t msg;
 	shmmgr_detach_t dmsg;
@@ -191,7 +202,8 @@ void *shmat(int shmid, const void *shmaddr, int shmflag)
 	return addr;
 }
 
-int	shmdt(const void *addr) 
+int
+shmdt(const void *addr) 
 {
 	shmmgr_detach_t msg;
 	struct _shm_cache sc;
@@ -216,7 +228,8 @@ int	shmdt(const void *addr)
 	return 0;
 }
 
-int	shmctl(int shmid, int cmd, struct shmid_ds *buf)
+int
+shmctl(int shmid, int cmd, struct shmid_ds *buf)
 {
 	shmmgr_ctl_t msg;
 	int status;
@@ -229,24 +242,24 @@ int	shmctl(int shmid, int cmd, struct shmid_ds *buf)
 	msg.i.cmd = cmd;
 	
 	switch (cmd) {
-	  case IPC_STAT:
+	case IPC_STAT:
 		if ((status = _shm_send(&msg.i, sizeof msg.i, &msg.o, sizeof msg.o)) != -1) {
 			*buf = msg.o.buf;
 		}
 		break;
 		
-	  case IPC_SET:
+	case IPC_SET:
 		msg.i.buf = *buf;
 		status = _shm_send(&msg.i, sizeof msg.i, &msg.o, sizeof msg.o);
 		break;
 		
-	  case IPC_RMID:
-	  case SHM_LOCK:
-	  case SHM_UNLOCK:
+	case IPC_RMID:
+	case SHM_LOCK:
+	case SHM_UNLOCK:
 		status = _shm_send(&msg.i, sizeof msg.i, &msg.o, sizeof msg.o);
 		break;
 		
-	  default:
+	default:
 		errno = EINVAL;
 		status = -1;
 		break;

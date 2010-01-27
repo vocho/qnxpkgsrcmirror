@@ -1,5 +1,5 @@
 #! @PERL@
-# $NetBSD: pkglint.pl,v 1.819 2009/07/26 21:03:19 rillig Exp $
+# $NetBSD: pkglint.pl,v 1.821 2009/11/20 12:02:33 rillig Exp $
 #
 
 # pkglint - static analyzer and checker for pkgsrc packages
@@ -2512,8 +2512,8 @@ sub resolve_relative_path($$) {
 	$relpath =~ s,\$\{\.CURDIR\},.,;
 	$relpath =~ s,\$\{\.PARSEDIR\},.,;
 	$relpath =~ s,\$\{PHPPKGSRCDIR\},../../lang/php5,;
-	$relpath =~ s,\$\{SUSE_DIR_PREFIX\},suse91,;
-	$relpath =~ s,\$\{PYPKGSRCDIR\},../../lang/python23,;
+	$relpath =~ s,\$\{SUSE_DIR_PREFIX\},suse100,;
+	$relpath =~ s,\$\{PYPKGSRCDIR\},../../lang/python26,;
 	$relpath =~ s,\$\{FILESDIR\},$filesdir, if defined($filesdir);
 	if ($adjust_depth && $relpath =~ m"^\.\./\.\./([^.].*)$") {
 		$relpath = "${cur_pkgsrcdir}/$1";
@@ -4473,7 +4473,7 @@ sub checkline_mk_shelltext($$) {
 "package via pkg_add.");
 
 			} elsif (exists(get_tool_names()->{$shellword})) {
-				if (!exists($mkctx_tools->{$shellword})) {
+				if (!exists($mkctx_tools->{$shellword}) && !exists($mkctx_tools->{"g$shellword"})) {
 					$line->log_warning("The \"${shellword}\" tool is used but not added to USE_TOOLS.");
 				}
 

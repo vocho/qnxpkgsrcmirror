@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.48 2008/11/23 18:41:16 tron Exp $
+# $NetBSD: Makefile,v 1.51 2009/12/15 23:55:26 drochner Exp $
 
 DISTNAME=	imlib2-1.4.2
-PKGREVISION=	1
+PKGREVISION=	3
 CATEGORIES=	graphics
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=enlightenment/}
 
@@ -36,7 +36,6 @@ SUBST_SED.shlib+=	-e 's,"\.so",".${SHLIB_SUFFIX}",'
 .include "options.mk"
 
 .include "../../archivers/bzip2/buildlink3.mk"
-.include "../../devel/libltdl/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"
 .include "../../graphics/freetype2/buildlink3.mk"
 .include "../../graphics/jpeg/buildlink3.mk"

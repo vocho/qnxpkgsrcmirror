@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.66 2009/03/19 11:26:41 drochner Exp $
+# $NetBSD: Makefile,v 1.68 2009/09/26 22:17:16 wiz Exp $
 #
 
 DISTNAME=		libglade-2.6.4
+PKGREVISION=		1
 CATEGORIES=		devel gnome
 MASTER_SITES=		${MASTER_SITE_GNOME:=sources/libglade/2.6/}
 EXTRACT_SUFX=		.tar.bz2
@@ -17,7 +18,7 @@ GNU_CONFIGURE=		YES
 USE_LIBTOOL=		YES
 PKGCONFIG_OVERRIDE=	libglade-2.0.pc.in
 
-CONFLICTS+=		libglade-[0-9]*
+CONFLICTS+=		libglade2-[0-9]*
 
 CONFIGURE_ARGS+=	--without-xml-catalog
 

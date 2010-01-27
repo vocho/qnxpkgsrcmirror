@@ -1,0 +1,6 @@
+@comment $NetBSD: PLIST,v 1.2 2009/09/14 19:21:38 gson Exp $
+bin/anita
+${PYSITELIB}/anita.py
+${PYSITELIB}/anita.pyc
+${PYSITELIB}/anita.pyo
+man/man1/anita.1

@@ -1,4 +1,4 @@
-# $NetBSD: package.mk,v 1.17 2009/02/13 11:30:07 joerg Exp $
+# $NetBSD: package.mk,v 1.19 2009/11/05 15:39:42 joerg Exp $
 
 PKG_SUFX?=		.tgz
 PKGFILE?=		${PKGREPOSITORY}/${PKGNAME}${PKG_SUFX}
@@ -33,7 +33,6 @@ _PKG_ARGS_PACKAGE+=	-I ${PREFIX} -p ${DESTDIR}${PREFIX}
 _PKG_ARGS_PACKAGE+=	-u ${REAL_ROOT_USER} -g ${REAL_ROOT_GROUP}
 .  endif
 .endif
-_PKG_ARGS_PACKAGE+=	-L ${DESTDIR}${PREFIX}			# @src ...
 .if ${PKG_INSTALLATION_TYPE} == "pkgviews"
 _PKG_ARGS_PACKAGE+=	-E
 .endif
@@ -141,7 +140,7 @@ su-real-package-install:
 	@${SED} -e 's|@cwd ${_CROSS_DESTDIR}|@cwd |' ${_PKG_DBDIR}/${PKGNAME:Q}/+CONTENTS > ${_PKG_DBDIR}/${PKGNAME:Q}/+CONTENTS.tmp
 	@${MV} ${_PKG_DBDIR}/${PKGNAME:Q}/+CONTENTS.tmp ${_PKG_DBDIR}/${PKGNAME:Q}/+CONTENTS
 .else
-	case ${_AUTOMATIC:Q}"" in					\
+	${RUN} case ${_AUTOMATIC:Q}"" in					\
 	[yY][eE][sS])	${PKG_ADD} -A ${PKGFILE} ;;			\
 	*)		${PKG_ADD} ${PKGFILE} ;;			\
 	esac

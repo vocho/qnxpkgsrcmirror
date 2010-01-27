@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.3 2009/05/19 08:59:16 wiz Exp $
+# $NetBSD: Makefile,v 1.6 2009/10/26 08:51:01 obache Exp $
 #
 
-DISTNAME=	clutter-gtk-0.8.3
+DISTNAME=	clutter-gtk-0.10.2
 CATEGORIES=	graphics
-MASTER_SITES=	http://www.clutter-project.org/sources/clutter-gtk/0.8/
+MASTER_SITES=	http://www.clutter-project.org/sources/clutter-gtk/0.10/
 
 MAINTAINER=	obache@NetBSD.org
 HOMEPAGE=	http://www.clutter-project.org/
@@ -16,10 +16,14 @@ GNU_CONFIGURE=	yes
 USE_LIBTOOL=	yes
 USE_TOOLS+=	pkg-config
 
+# Workaround for Upstream Bug#562310.
+# for more detail, see also PR#41475.
+TOOLS_NOOP+=		gtkdoc-rebase
+
 PKGCONFIG_OVERRIDE+=	clutter-gtk.pc.in
 
+BUILDLINK_API_DEPENDS.gtk2+=	gtk2+>=2.12.0
 .include "../../x11/gtk2/buildlink3.mk"
-BUILDLINK_API_DEPENDS.clutter+=	clutter>=0.8.7
 .include "../../graphics/clutter/buildlink3.mk"
 .if !empty(PKG_BUILD_OPTIONS.clutter:Mx11)
 CONFIGURE_ARGS+=	--with-flavour=x11

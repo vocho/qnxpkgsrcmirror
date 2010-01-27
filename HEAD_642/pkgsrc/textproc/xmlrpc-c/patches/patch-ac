@@ -1,15 +1,13 @@
-$NetBSD: patch-ac,v 1.1.1.1 2007/02/24 11:00:51 wiz Exp $
+$NetBSD: patch-ac,v 1.3 2009/10/28 09:25:23 adam Exp $
 
---- src/cpp/Makefile.orig	2006-11-06 02:50:37.000000000 +0100
+--- src/cpp/Makefile.orig	2009-08-30 17:43:48.000000000 +0200
 +++ src/cpp/Makefile
-@@ -102,8 +102,8 @@ all: \
+@@ -139,7 +139,7 @@ libxmlrpc_client++.a: $(LIBXMLRPC_CLIENT
+ #  RULES TO COMPILE OBJECT MODULES FOR LIBRARIES
+ #-----------------------------------------------------------------------------
  
- # Rules for these are in Makefile.common, courtesy of TARGET_LIB_NAMES_PP:
+-CXXFLAGS = $(CXXFLAGS_COMMON) $(CFLAGS_PERSONAL) $(CADD)
++CXXFLAGS = $(CXXFLAGS_COMMON) $(CFLAGS_SHLIB) $(CFLAGS_PERSONAL) $(CADD)
  
--$(LIBXMLRPC_CPP): XmlRpcCpp.o
--$(LIBXMLRPC_CPP): LIBOBJECTS = XmlRpcCpp.o
-+$(LIBXMLRPC_CPP): XmlRpcCpp.osh
-+$(LIBXMLRPC_CPP): LIBOBJECTS = XmlRpcCpp.osh
- 
- $(LIBXMLRPCPP): $(LIBXMLRPCPP_MODS:%=%.osh)
- $(LIBXMLRPCPP): LIBOBJECTS = $(LIBXMLRPCPP_MODS:%=%.osh)
+ XmlRpcCpp.o:%.o:%.cpp
+ 	$(CXX) -c $(BASIC_INCLUDES) $(CXXFLAGS) $<

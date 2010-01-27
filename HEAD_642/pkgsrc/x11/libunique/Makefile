@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.3 2009/07/26 20:13:31 drochner Exp $
+# $NetBSD: Makefile,v 1.6 2009/11/20 11:32:38 drochner Exp $
 #
 
-DISTNAME=	libunique-1.0.8
+DISTNAME=	libunique-1.1.6
 CATEGORIES=	devel
-MASTER_SITES=	${MASTER_SITE_GNOME:=sources/libunique/1.0/}
+MASTER_SITES=	${MASTER_SITE_GNOME:=sources/libunique/1.1/}
 
 MAINTAINER=	ahoka@NetBSD.org
 HOMEPAGE=	http://live.gnome.org/LibUnique
@@ -16,6 +16,10 @@ USE_LIBTOOL=		yes
 USE_TOOLS+=		pkg-config gmake
 
 PKGCONFIG_OVERRIDE+=	unique.pc.in
+
+# Workaround for Upstream Bug#562310.
+# for more detail, see also PR#41475.
+TOOLS_NOOP+=	gtkdoc-rebase
 
 .include "options.mk"
 

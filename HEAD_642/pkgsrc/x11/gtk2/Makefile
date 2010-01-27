@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.182 2009/07/22 09:01:54 wiz Exp $
+# $NetBSD: Makefile,v 1.193 2009/12/08 18:54:36 wiz Exp $
 
-DISTNAME=		gtk+-2.16.5
+DISTNAME=		gtk+-2.18.5
 PKGNAME=		${DISTNAME:S/gtk/gtk2/}
 CATEGORIES=		x11
-MASTER_SITES=		ftp://ftp.gtk.org/pub/gtk/2.16/ \
-			${MASTER_SITE_GNOME:=sources/gtk+/2.16/}
+MASTER_SITES=		ftp://ftp.gtk.org/pub/gtk/2.18/ \
+			${MASTER_SITE_GNOME:=sources/gtk+/2.18/}
 EXTRACT_SUFX=		.tar.bz2
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
@@ -41,6 +41,10 @@ PKGCONFIG_OVERRIDE+=	gdk-pixbuf-2.0-uninstalled.pc.in
 PKGCONFIG_OVERRIDE+=	gdk-pixbuf-2.0.pc.in
 PKGCONFIG_OVERRIDE+=	contrib/gdk-pixbuf-xlib/gdk-pixbuf-xlib-2.0.pc.in
 
+INSTALLATION_DIRS+=	lib/gtk-2.0/immodules
+INSTALLATION_DIRS+=	lib/gtk-2.0/modules
+INSTALLATION_DIRS+=	lib/gtk-2.0/2.10.0/filesystems
+
 REQD_DIRS+=		${PREFIX}/libdata/gtk-2.0
 
 BUILD_DIRS=		. demos/gtk-demo
@@ -48,10 +52,6 @@ BUILD_DIRS=		. demos/gtk-demo
 .include "../../mk/bsd.prefs.mk"
 
 .if ${OPSYS} == "QNX"
-# We need GNU grep for -o option.  PR 68717.
-GREP=grep
-TOOLS_PLATFORM.grep=    # empty
-
 # At some point in the build the gtk-update-icon-cache
 # script execs the gtk-update-icon-cache executable which
 # delves into glib2. When HAVE_LANGINFO_CODESET isn't set
@@ -61,6 +61,13 @@ TOOLS_PLATFORM.grep=    # empty
 # fails as "C" isn't supported therein.  The latter two are
 # set to "C" by bsd.pkg.mk.
 MAKE_ENV=	LC_ALL=ASCII
+.endif
+
+# gtk/Makefile.am hardcodes 'grep -o' so require GNU grep on platforms
+# which do not have it.
+.if ${OPSYS} == "SunOS" || ${OPSYS} == "QNX"
+BUILD_DEPENDS+=		grep-[0-9]*:../../textproc/grep
+TOOLS_PATH.grep=	${LOCALBASE}/bin/${GNU_PROGRAM_PREFIX}grep
 .endif
 
 CPPFLAGS+=		-DPREFIX="\"${PREFIX}\""
@@ -74,7 +81,7 @@ SUBST_FILES.pthread=	gdk-pixbuf/Makefile.in
 PYTHON_PATCH_SCRIPTS=	gtk/gtk-builder-convert
 # gtk-builder-convert uses minidom from xml.dom, which needs expat
 .include "../../lang/python/pyversion.mk"
-.if ${PYPKGPREFIX} == "py24" || ${PYPKGPREFIX} == "py23"
+.if ${PYPKGPREFIX} == "py24"
 DEPENDS+=		${PYPKGPREFIX}-expat-[0-9]*:../../textproc/py-expat
 .endif
 
@@ -86,9 +93,6 @@ DEPENDS+=		${PYPKGPREFIX}-expat-[0-9]*:../../textproc/py-expat
 post-install:
 	${RM} -f ${DESTDIR}${GTK_IMMODULES_DB}
 	${RM} -f ${DESTDIR}${GDK_PIXBUF_LOADERS_DB}
-	${INSTALL_DATA_DIR} ${DESTDIR}${PREFIX}/lib/gtk-2.0/immodules
-	${INSTALL_DATA_DIR} ${DESTDIR}${PREFIX}/lib/gtk-2.0/modules
-	${INSTALL_DATA_DIR} ${DESTDIR}${PREFIX}/lib/gtk-2.0/2.10.0/filesystems
 
 EVAL_PREFIX+=		PREFIX.hicolor=hicolor-icon-theme
 FILES_SUBST+=		GTK_UPDATE_ICON_CACHE="${PREFIX}/bin/gtk-update-icon-cache"
@@ -103,7 +107,7 @@ _BUILDING_GTK2=	yes
 BUILDLINK_API_DEPENDS.atk+=	atk>=1.13.0
 .include "../../devel/atk/buildlink3.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"
-BUILDLINK_API_DEPENDS.glib2+=	glib2>=2.19.7
+BUILDLINK_API_DEPENDS.glib2+=	glib2>=2.21.3
 .include "../../devel/glib2/buildlink3.mk"
 BUILDLINK_API_DEPENDS.pango+=	pango>=1.20.0
 .include "../../devel/pango/buildlink3.mk"

@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.11 2009/06/14 21:15:50 roy Exp $
+# $NetBSD: Makefile,v 1.13 2009/11/14 12:14:07 roy Exp $
 #
 
-DISTNAME=		dnsmasq-2.49
+DISTNAME=		dnsmasq-2.51
 CATEGORIES=		net
 MASTER_SITES=		http://www.thekelleys.org.uk/dnsmasq/
 

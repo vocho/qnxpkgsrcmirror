@@ -1,14 +1,15 @@
-# $NetBSD: Makefile,v 1.135 2009/07/22 09:01:26 wiz Exp $
+# $NetBSD: Makefile,v 1.138 2009/12/15 21:42:13 joerg Exp $
 #
 
 DISTNAME=		gnucash-2.2.9
-PKGREVISION=		1
+PKGREVISION=		3
 CATEGORIES=		finance
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=gnucash/}
 
 MAINTAINER=		wiz@NetBSD.org
 HOMEPAGE=		http://www.gnucash.org/
 COMMENT=		Personal or business finance management program
+LICENSE=		gnu-gpl-v3
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 

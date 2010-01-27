@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.28 2008/01/18 05:08:34 tnn Exp $
+# $NetBSD: Makefile,v 1.30 2009/10/11 15:32:10 jmmv Exp $
 
 DISTNAME=	gkrellweather-2.0.7
 PKGNAME=	gkrellm-weather-2.0.7
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	misc
 MASTER_SITES=	http://kmlinux.fjfi.cvut.cz/~makovick/gkrellm/
 EXTRACT_SUFX=	.tgz
@@ -13,20 +13,30 @@ COMMENT=	Gkrellm2 weather plugin
 
 DEPENDS+=	wget>=1.8:../../net/wget
 
+PKG_DESTDIR_SUPPORT=	user-destdir
+
 USE_TOOLS+=		gmake msgfmt perl:run pkg-config
 USE_PKGLOCALEDIR=	YES
+REPLACE_PERL=		GrabWeather
 BUILD_TARGET=		gkrellweather.so
 
-MAKE_ENV+=	LOCALEDIR=${PREFIX}/${PKGLOCALEDIR}/locale \
-		enable_nls=1
+MAKE_ENV+=	LOCALEDIR=${PREFIX}/${PKGLOCALEDIR}/locale
+MAKE_ENV+=	enable_nls=1
+MAKE_ENV+=	PREFIX=${PREFIX:Q}
 
-pre-build:
-	${MV} ${WRKSRC}/GrabWeather ${WRKSRC}/GrabWeather.orig
-	${MV} ${WRKSRC}/Makefile ${WRKSRC}/Makefile.orig
-	${SED} -e "s|/usr/local|${PREFIX}|" \
-	${WRKSRC}/Makefile.orig > ${WRKSRC}/Makefile
-	${SED}  -e "s|/usr/bin/perl|${PERL5}|" \
-	${WRKSRC}/GrabWeather.orig > ${WRKSRC}/GrabWeather
+INSTALLATION_DIRS=	bin lib
+
+do-install:
+	${INSTALL_SCRIPT} ${WRKSRC}/GrabWeather ${DESTDIR}${PREFIX}/bin
+	${INSTALL_LIB_DIR} ${DESTDIR}${PREFIX}/lib/gkrellm2/plugins
+	${INSTALL_LIB} ${WRKSRC}/gkrellweather.so \
+	    ${DESTDIR}${PREFIX}/lib/gkrellm2/plugins
+	cd ${WRKSRC}/po && for f in *.mo; do \
+	    localedir=${DESTDIR}${PREFIX}/${PKGLOCALEDIR}/locale; \
+	    modir=$${localedir}/$$(basename $$f .mo)/LC_MESSAGES; \
+	    ${INSTALL_DATA_DIR} $${modir}; \
+	    ${INSTALL_DATA} $$f $${modir}/gkrellweather.mo; \
+	done
 
 .include "../../sysutils/gkrellm/buildlink3.mk"
 .include "../../x11/gtk2/buildlink3.mk"

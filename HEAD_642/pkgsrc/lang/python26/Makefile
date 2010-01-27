@@ -1,11 +1,10 @@
-# $NetBSD: Makefile,v 1.4 2009/07/18 10:41:33 wiz Exp $
+# $NetBSD: Makefile,v 1.16 2009/12/20 23:58:27 tnn Exp $
 
-DISTNAME=	Python-2.6.2
-PKGNAME=	python26-2.6.2
-PKGREVISION=	3
+DISTNAME=	Python-2.6.4
+PKGNAME=	${DISTNAME:S/Python/python26/}
+PKGREVISION=	2
 CATEGORIES=	lang python
-MASTER_SITES=	ftp://ftp.python.org/pub/python/2.6.2/ \
-		http://www.python.org/ftp/python/2.6.2/
+MASTER_SITES=	http://www.python.org/ftp/python/2.6.4/
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
@@ -21,7 +20,7 @@ CONFLICTS+=	python-[0-9]*
 GNU_CONFIGURE=		yes
 CONFIGURE_ARGS+=	--with-threads
 CONFIGURE_ARGS+=	--enable-shared
-CONFIGURE_ARGS+=	OPT=${CFLAGS:M*:Q}
+CONFIGURE_ARGS+=	OPT=${CFLAGS:Q}
 CONFIGURE_ARGS+=	--with-system-ffi
 
 LDFLAGS+=		-L${WRKSRC}
@@ -108,6 +107,11 @@ PLIST.oss=	yes
 # Make sure python modules can link correctly
 .if ${OPSYS} == "Darwin"
 INSTALL_UNSTRIPPED=	yes
+
+PLIST_VARS+=	nav
+.  if ${ABI} != "64"
+PLIST.nav=	yes
+.  endif
 .endif
 
 PLIST_VARS+=	bsddb dll nis no-nis
@@ -122,7 +126,10 @@ PLIST.nis=	yes
 MAKE_ENV+=	PY_BDB_TYPE=${BDB_TYPE}
 MAKE_ENV+=	PY_BDB_INCDIRS=${BUILDLINK_INCDIRS.${BDB_TYPE}:S,^,${BDBBASE}/,:Q}
 MAKE_ENV+=	PY_BDB_LIBDIRS=${BDBBASE}/lib
-LIBS+=		${BDB_LIBS}
+.if empty(BDB_LIBS)
+BUILDLINK_TRANSFORM+=	rm:-ldb
+.endif
+CFLAGS+=	-DHAVE_DB_185_H
 PLIST.bsddb=	yes
 PLIST.dll=	yes
 .  if ${OPSYS} != "NetBSD" || exists(/usr/bin/ypcat)
@@ -130,6 +137,11 @@ PLIST.nis=	yes
 .  else
 PLIST.no-nis=	yes
 .  endif
+.endif
+
+.if ${OPSYS} == "OSF1"
+# configure complains about buggy getaddrinfo()
+CONFIGURE_ARGS+=	--disable-ipv6
 .endif
 
 .if defined(BUILDLINK_TRANSFORM)

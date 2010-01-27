@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.29 2009/08/06 09:45:13 tnn Exp $
+# $NetBSD: Makefile,v 1.34 2009/10/30 15:47:26 drochner Exp $
 #
 
 DISTNAME=	gnome-python-extras-2.14.3
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME:S/gnome-python/gnome2/}
-PKGREVISION=	4
+PKGREVISION=	6
 CATEGORIES=	x11 python
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gnome-python-extras/2.14/}
 EXTRACT_SUFX=	.tar.bz2
@@ -21,7 +21,7 @@ GNU_CONFIGURE=	YES
 CONFIGURE_ENV+=	PYTHON=${PYTHONBIN:Q}
 USE_TOOLS+=		pkg-config gmake
 
-PYTHON_VERSIONS_ACCEPTED=	25 24
+PYTHON_VERSIONS_ACCEPTED=	26 25
 
 SUBST_CLASSES+=	ffhome
 SUBST_STAGE.ffhome=	pre-configure
@@ -36,7 +36,8 @@ SUBST_VARS.ffhome=	LOCALBASE
 .include "../../devel/libbonoboui/buildlink3.mk"
 .include "../../devel/xulrunner/buildlink3.mk"
 .include "../../textproc/gtkspell/buildlink3.mk"
-.include "../../devel/gdl/buildlink3.mk"
+# newer gdl versions are incompatible
+#.include "../../devel/gdl/buildlink3.mk"
 # needs older version than is in pkgsrc
 #.include "../../databases/libgda/buildlink3.mk"
 .include "../../x11/py-gnome2/buildlink3.mk"

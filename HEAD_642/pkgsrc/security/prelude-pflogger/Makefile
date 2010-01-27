@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.7 2008/08/17 03:21:45 dholland Exp $
+# $NetBSD: Makefile,v 1.9 2009/12/15 22:10:40 joerg Exp $
 #
 
 DISTNAME=	prelude-pflogger-0.9.0-rc2
 PKGNAME=	prelude-pflogger-0.9.0
-PKGREVISION=	3
+PKGREVISION=	4
 CATEGORIES=	security
 MASTER_SITES=	http://prelude-ids.org/download/releases/
 
@@ -65,6 +65,7 @@ pre-patch:
 pre-configure:
 	set -e; cd ${WRKSRC}; \
 	aclocal; autoheader; automake -a --foreign -i; autoconf
+	${LN} -s ${BUILDLINK_DIR}/lib/libltdl.so ${BUILDLINK_DIR}/lib/libltdlc.so
 
 post-build:
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${CC} ${CFLAGS} -o run-prelude-pflogger run-prelude-pflogger.c
@@ -73,4 +74,5 @@ post-install:
 	${INSTALL_PROGRAM} ${WRKSRC}/run-prelude-pflogger ${DESTDIR}${PREFIX}/sbin/run-prelude-pflogger
 
 .include "../../security/libprelude/buildlink3.mk"
+.include "../../devel/libltdl/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

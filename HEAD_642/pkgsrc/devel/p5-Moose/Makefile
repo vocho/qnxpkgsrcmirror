@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.27 2009/07/26 07:04:28 seb Exp $
+# $NetBSD: Makefile,v 1.34 2009/11/19 21:21:53 seb Exp $
 #
 
-DISTNAME=	Moose-0.88
+DISTNAME=	Moose-0.93
 PKGNAME=	p5-${DISTNAME}
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Test/}
@@ -11,12 +11,13 @@ HOMEPAGE=	http://moose.perl.org/
 COMMENT=	Postmodern object system for Perl 5
 LICENSE=	${PERL5_LICENSE}
 
-DEPENDS+=	p5-Class-MOP>=0.89:../../devel/p5-Class-MOP
+DEPENDS+=	p5-Class-MOP>=0.94:../../devel/p5-Class-MOP
 DEPENDS+=	p5-Data-OptList-[0-9]*:../../devel/p5-Data-OptList
 DEPENDS+=	p5-List-MoreUtils>=0.12:../../devel/p5-List-MoreUtils
 DEPENDS+=	p5-Sub-Exporter>=0.980:../../devel/p5-Sub-Exporter
 DEPENDS+=	p5-Sub-Name-[0-9]*:../../devel/p5-Sub-Name
 DEPENDS+=	p5-Task-Weaken-[0-9]*:../../devel/p5-Task-Weaken
+DEPENDS+=	p5-Try-Tiny>=0.02:../../devel/p5-Try-Tiny
 
 BUILD_DEPENDS+=	p5-DBM-Deep-[0-9]*:../../databases/p5-DBM-Deep
 BUILD_DEPENDS+=	p5-DateTime-Calendar-Mayan-[0-9]*:../../time/p5-DateTime-Calendar-Mayan
@@ -32,8 +33,7 @@ BUILD_DEPENDS+=	p5-Test-Exception>=0.27:../../devel/p5-Test-Exception
 BUILD_DEPENDS+=	p5-Test-Output-[0-9]*:../../devel/p5-Test-Output
 BUILD_DEPENDS+=	p5-Test-Pod-Coverage-[0-9]*:../../devel/p5-Test-Pod-Coverage
 BUILD_DEPENDS+=	p5-Test-Pod-[0-9]*:../../devel/p5-Test-Pod
-BUILD_DEPENDS+=	p5-Test-Simple>=0.77:../../devel/p5-Test-Simple
-BUILD_DEPENDS+=	p5-Test-Warn-[0-9]*:../../devel/p5-Test-Warn
+BUILD_DEPENDS+=	p5-Test-Simple>=0.88:../../devel/p5-Test-Simple
 BUILD_DEPENDS+=	p5-URI-[0-9]*:../../www/p5-URI
 BUILD_DEPENDS+=	p5-libwww-[0-9]*:../../www/p5-libwww
 

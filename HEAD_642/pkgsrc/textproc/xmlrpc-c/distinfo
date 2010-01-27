@@ -1,12 +1,14 @@
-$NetBSD: distinfo,v 1.5 2009/01/11 14:08:02 wiz Exp $
+$NetBSD: distinfo,v 1.11 2009/11/10 21:25:57 drochner Exp $
 
-SHA1 (xmlrpc-c-1.09.00.tgz) = bd4571ca3bc23c1fe9dd002659fcc2aa3d4ce8a6
-RMD160 (xmlrpc-c-1.09.00.tgz) = ef098edef126dfd5a14334e6a1e4e7919be4b40c
-Size (xmlrpc-c-1.09.00.tgz) = 701817 bytes
-SHA1 (patch-aa) = ff3f7c7d0195c10f57df4ea047eb87a5bdac5cd1
-SHA1 (patch-ab) = d3e76ddae5c22e72277878cdecc02b97e3ce95b9
-SHA1 (patch-ac) = 805aebdaa736a08482a4f82559938d38f794ab81
-SHA1 (patch-ad) = 8b7ad5b7aacb6b13f04792bc157e228deaf2de72
-SHA1 (patch-ae) = 683239483a9bfee5defe2b0c8f3ef9fd0d5735f9
-SHA1 (patch-af) = c679a0cc1b867c093e9f1c1990993f18e1f50b2a
-SHA1 (patch-ag) = 297a2cd667c0b7e7472585bdcffb2c6bb1e4bc2e
+SHA1 (xmlrpc-c-1.06.38.tgz) = 40332f0f363b9ca79242b28d4cbf13516702dacf
+RMD160 (xmlrpc-c-1.06.38.tgz) = 8d9f85a1b1be91fdc5c8aaab5571d0270ddbdf67
+Size (xmlrpc-c-1.06.38.tgz) = 702092 bytes
+SHA1 (patch-aa) = 54390ac4c2740997544cc3321aa031eff59cbf91
+SHA1 (patch-ab) = 34dd91b43385fa4a4893375dc774e0865a79b8fa
+SHA1 (patch-ac) = e553e66662aca6d7c246acc24e960074213320c6
+SHA1 (patch-ae) = 0e56c03e8066bfeb4e9a6330ee160d1ab1d68a11
+SHA1 (patch-af) = fdeabde63338443459d96aca657a3fc402b9fbc4
+SHA1 (patch-ah) = bcbca2cd9a7029bac048347b03aabce856a9eb0c
+SHA1 (patch-ai) = ef5e4fc8b412e39addbb6da2cd83ec3c345860a0
+SHA1 (patch-aj) = 48c5164a23024a1b6d3f6e53a24c2650ffcb47c9
+SHA1 (patch-ak) = cf1b406f08913c47d416cc1bbd25fb0fba67ad75

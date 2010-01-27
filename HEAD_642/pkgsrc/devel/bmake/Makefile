@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.47 2009/04/09 00:48:07 joerg Exp $
+# $NetBSD: Makefile,v 1.49 2009/09/19 06:44:33 tron Exp $
 #
 
-DISTNAME=	bmake-20081111
+DISTNAME=	bmake-20090909
 CATEGORIES=	devel
 MASTER_SITES=	# empty
 DISTFILES=	# empty
@@ -12,6 +12,7 @@ DISTFILES=	# empty
 MAINTAINER=	joerg@NetBSD.org
 HOMEPAGE=	http://www.crufty.net/help/sjg/bmake.html
 COMMENT=	Portable (autoconf) version of NetBSD 'make' utility
+LICENSE=	modified-bsd
 
 DEPENDS+=	bootstrap-mk-files-[0-9]*:../../pkgtools/bootstrap-mk-files
 
