@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.11 2009/02/04 13:16:33 tron Exp $
+# $NetBSD: Makefile,v 1.13 2009/10/25 22:54:03 tron Exp $
 
 .include "../../x11/xlockmore/Makefile.common"
 

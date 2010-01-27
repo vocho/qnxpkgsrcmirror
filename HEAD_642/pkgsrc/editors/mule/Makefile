@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.41 2008/11/10 17:21:34 wiz Exp $
+# $NetBSD: Makefile,v 1.43 2009/09/02 08:34:13 wiz Exp $
 
 DISTNAME=	mule-2.3
 PKGREVISION=	5
 CATEGORIES=	editors
 MASTER_SITES=	ftp://ftp.m17n.org/pub/mule/
 
-MAINTAINER=	kei@NetBSD.org
-HOMEPAGE=	http://www.m17n.org/mule/MulePage.en.html
+MAINTAINER=	pkgsrc-users@NetBSD.org
+HOMEPAGE=	http://www.m17n.org/mule/
 COMMENT=	Multilingual GNU editing macros (editor)
 
 CONFLICTS=	emacs-[0-9]*

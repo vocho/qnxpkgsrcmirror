@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.22 2009/03/02 14:55:05 wiz Exp $
+# $NetBSD: Makefile,v 1.24 2009/12/03 13:06:52 asau Exp $
 
 DISTNAME=	cfitsio3100
 PKGNAME=	cfitsio-3.100
+PKGREVISION=	1
 CATEGORIES=	devel
 MASTER_SITES=	ftp://heasarc.gsfc.nasa.gov/software/fitsio/c/
 
@@ -31,7 +32,7 @@ post-build:
 
 do-install:
 	cd ${WRKSRC}; \
-	${LIBTOOL} ${INSTALL_DATA} libcfitsio.la ${DESTDIR}${PREFIX}/lib; \
+	${LIBTOOL} --mode=install ${INSTALL_DATA} libcfitsio.la ${DESTDIR}${PREFIX}/lib; \
 	${INSTALL_DATA} fitsio.h fitsio2.h longnam.h drvrsmem.h ${DESTDIR}${PREFIX}/include; \
 	${INSTALL_DATA} cfitsio.pc ${DESTDIR}${PREFIX}/lib/pkgconfig; \
 	${INSTALL_DATA} fitsio.doc ${DESTDIR}${PREFIX}/share/doc/cfitsio

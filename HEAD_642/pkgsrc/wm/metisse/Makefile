@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.9 2009/07/24 12:10:18 obache Exp $
+# $NetBSD: Makefile,v 1.11 2009/09/07 16:39:28 drochner Exp $
 #
 
 DISTNAME=	metisse-0.4.1
+PKGREVISION=	1
 CATEGORIES=	wm x11
 MASTER_SITES=	http://insitu.lri.fr/metisse/download/metisse/
 EXTRACT_SUFX=	.tar.bz2
@@ -10,6 +11,8 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://insitu.lri.fr/metisse/
 COMMENT=	Window manager with novel features
 LICENSE=	gnu-gpl-v3
+
+CONFLICTS+=	fvwm-[0-9]*
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 

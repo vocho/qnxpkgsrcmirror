@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.24 2009/07/15 20:58:57 joerg Exp $
+# $NetBSD: Makefile,v 1.26 2009/08/25 11:57:46 wiz Exp $
 #
 
 DISTNAME=	hiawatha
@@ -10,7 +10,7 @@ EXTRACT_SUFX=	.zip
 DISTFILES=	${DISTNAME}${EXTRACT_SUFX} \
 		sitedrivenby.gif
 
-MAINTAINER=	jwise@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.pault.com/pault/downloads/
 COMMENT=	Barebones HTTP server with XML and XSLT support (and more)
 
@@ -27,7 +27,6 @@ USE_TOOLS+=	pax
 
 DIST_SUBDIR=	${PKGNAME_NOREV}
 EXTRACT_ONLY=	${DISTNAME}${EXTRACT_SUFX}
-EXTRACT_OPTS_ZIP=	-aq
 
 RCD_SCRIPTS=	hiawatha
 

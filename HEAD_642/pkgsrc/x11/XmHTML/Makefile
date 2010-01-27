@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.43 2008/06/12 02:14:57 joerg Exp $
+# $NetBSD: Makefile,v 1.45 2009/09/03 12:12:14 joerg Exp $
 #
 
 DISTNAME=	XmHTML-1.1.7
-PKGREVISION=	6
+PKGREVISION=	7
 CATEGORIES=	x11
 MASTER_SITES=	http://www.xs4all.nl/~ripley/XmHTML/dist/
 
@@ -19,7 +19,7 @@ USE_LIBTOOL=	YES
 INSTALLATION_DIRS=	include/XmHTML lib
 
 do-install:
-	${LIBTOOL} ${LIBTOOL_FLAGS} ${INSTALL_LIB} \
+	${LIBTOOL} --mode=install ${INSTALL_LIB} \
 		${WRKSRC}/lib/libXmHTML.la ${DESTDIR}${PREFIX}/lib
 	${INSTALL_DATA} ${WRKSRC}/include/XmHTML/*.h ${DESTDIR}${PREFIX}/include/XmHTML
 

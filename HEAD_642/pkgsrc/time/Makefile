@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.102 2009/08/08 06:22:34 tnn Exp $
+# $NetBSD: Makefile,v 1.107 2009/12/07 01:29:42 wiz Exp $
 #
 
 COMMENT=	Clocks, calendars, daily planners and other time related applications
@@ -31,6 +31,7 @@ SUBDIR+=	gtodo-applet
 SUBDIR+=	hamster-applet
 SUBDIR+=	hebcal
 SUBDIR+=	ical
+SUBDIR+=	ical2rem
 SUBDIR+=	jday
 SUBDIR+=	kronolith
 SUBDIR+=	leapsunpack
@@ -69,6 +70,9 @@ SUBDIR+=	p5-DateTime-Set
 SUBDIR+=	p5-DateTime-TimeZone
 SUBDIR+=	p5-DateTimeX-Easy
 SUBDIR+=	p5-MooseX-Types-DateTime
+SUBDIR+=	p5-MooseX-Types-DateTime-ButMaintained
+SUBDIR+=	p5-MooseX-Types-DateTimeX
+SUBDIR+=	p5-Olson-Abbreviations
 SUBDIR+=	p5-Rose-DateTime
 SUBDIR+=	p5-Schedule-Cron-Events
 SUBDIR+=	p5-Template-Plugin-DateTime
@@ -103,6 +107,7 @@ SUBDIR+=	py-mxDateTime
 SUBDIR+=	py-parsedatetime
 SUBDIR+=	py-pytz
 SUBDIR+=	rclock
+SUBDIR+=	rem2ics
 SUBDIR+=	remind
 SUBDIR+=	rsibreak
 SUBDIR+=	ruby-tzinfo

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.17 2008/10/28 13:43:58 obache Exp $
+# $NetBSD: Makefile,v 1.19 2009/10/12 03:09:33 obache Exp $
 #
 
 PKGNAME=		${RUBY_PKGPREFIX}-gnome2-panelapplet-${VERSION}
@@ -15,7 +15,7 @@ DEPENDS+=		${RUBY_PKGPREFIX}-gnome2-gnome>=${VERSION}:../../x11/ruby-gnome2-gnom
 
 USE_TOOLS+=		pkg-config
 
-BUILDLINK_API_DEPENDS.ruby-gnome2-glib+=	${RUBY_PKGPREFIX}-gnome2-glib>=${VERSION}
+BUILDLINK_API_DEPENDS.ruby-gnome2-glib+=	${RUBY_PKGPREFIX}-gnome2-glib-${VERSION}{,nb*}
 BUILDLINK_DEPMETHOD.ruby-gnome2-glib=	build
 .include "../../devel/ruby-gnome2-glib/buildlink3.mk"
 .include "../../x11/gnome-panel/buildlink3.mk"

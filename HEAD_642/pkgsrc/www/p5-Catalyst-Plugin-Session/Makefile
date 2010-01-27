@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.7 2009/07/07 21:38:45 sno Exp $
+# $NetBSD: Makefile,v 1.12 2009/11/21 14:22:50 sno Exp $
 
-DISTNAME=	Catalyst-Plugin-Session-0.24
+DISTNAME=	Catalyst-Plugin-Session-0.29
 PKGNAME=	p5-${DISTNAME}
 CATEGORIES=	www perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Catalyst/}
@@ -8,7 +8,7 @@ MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Catalyst/}
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://search.cpan.org/dist/Catalyst-Plugin-Session/
 COMMENT=	Generic Catalyst Session plugin
-LICENSE=	gnu-gpl-v2 # OR artistic
+LICENSE=	${PERL5_LICENSE}
 
 DEPENDS+=	p5-Catalyst-Runtime>=5.71001:../../www/p5-Catalyst-Runtime
 DEPENDS+=	{perl>=5.10,p5-Digest-[0-9]*}:../../security/p5-Digest
@@ -23,7 +23,6 @@ DEPENDS+=	p5-namespace-clean>=0.10:../../devel/p5-namespace-clean
 
 BUILD_DEPENDS+=	p5-Test-Deep>=0:../../devel/p5-Test-Deep
 BUILD_DEPENDS+=	p5-Test-Exception>=0:../../devel/p5-Test-Exception
-BUILD_DEPENDS+=	p5-Test-MockObject>=1.01:../../devel/p5-Test-MockObject
 # p5-Test-WWW-Mechanize-Catalyst has BUILD_DEPENDS on p5-Catalyst-Plugin-Session
 # BUILD_DEPENDS+=	p5-Test-WWW-Mechanize-Catalyst>=0:../../www/p5-Test-WWW-Mechanize-Catalyst
 

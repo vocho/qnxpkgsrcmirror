@@ -1,14 +1,15 @@
-# $NetBSD: Makefile,v 1.23 2009/05/20 00:58:11 wiz Exp $
+# $NetBSD: Makefile,v 1.27 2009/12/15 21:33:49 joerg Exp $
 
-DISTNAME=	unixODBC-2.2.12
+DISTNAME=	unixODBC-2.2.14
 PKGNAME=	${DISTNAME:S/ODBC/odbc/}
-PKGREVISION=	2
+PKGREVISION=	3
 CATEGORIES=	databases
 MASTER_SITES=	http://www.unixodbc.org/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.unixodbc.org/
 COMMENT=	ODBC 2.x/3.x driver manager
+LICENSE=	gnu-lgpl-v2.1
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 

@@ -1,20 +1,13 @@
-$NetBSD$
+$NetBSD: patch-aa,v 1.1 2009/09/04 16:57:14 wiz Exp $
 
---- src/xz/process.h.orig	2009-02-04 16:07:58.000000000 -0500
-+++ src/xz/process.h
-@@ -17,6 +17,9 @@
- //
- ///////////////////////////////////////////////////////////////////////////////
- 
-+#ifndef _XZ_PROCESS_H
-+#define _XZ_PROCESS_H
-+
- enum operation_mode {
- 	MODE_COMPRESS,
- 	MODE_DECOMPRESS,
-@@ -63,3 +66,5 @@ extern void coder_set_compression_settin
- extern void process_init(void);
- 
- extern void process_file(const char *filename);
-+
-+#endif
+--- src/common/cpucores.h.orig	2009-08-27 15:37:12.000000000 +0000
++++ src/common/cpucores.h
+@@ -40,7 +40,7 @@ cpucores(void)
+ 	int name[2] = { CTL_HW, HW_NCPU };
+ 	int cpus;
+ 	size_t cpus_size = sizeof(cpus);
+-	if (!sysctl(name, &cpus, &cpus_size, NULL, NULL)
++	if (sysctl(name, 2, &cpus, &cpus_size, NULL, 0) > 0
+ 			&& cpus_size == sizeof(cpus) && cpus > 0)
+ 		ret = (uint32_t)(cpus);
+ #endif

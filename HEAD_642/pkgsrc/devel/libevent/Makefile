@@ -1,13 +1,7 @@
-# $NetBSD: Makefile,v 1.31 2009/02/27 22:50:43 wiz Exp $
+# $NetBSD: Makefile,v 1.34 2009/08/18 16:53:14 drochner Exp $
 #
-# WARNING: updating this package (as of the 1.1/1.2 releases) means
-# updating BUILDLINK_ABI_DEPENDS in buildlink3.mk and a PKGREVISION
-# bump of all first-level dependents.  This is because the shlib
-# name contains the exact libevent release number, preventing it
-# from being ABI compatible across releases until this is fixed.
-# [tvierling 20070210]
 
-DISTNAME=	libevent-1.4.9-stable
+DISTNAME=	libevent-1.4.12-stable
 PKGNAME=	${DISTNAME:S/-stable//}
 CATEGORIES=	devel
 MASTER_SITES=	http://monkey.org/~provos/
@@ -15,6 +9,8 @@ MASTER_SITES=	http://monkey.org/~provos/
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://monkey.org/~provos/libevent/
 COMMENT=	Asynchronous event notification library
+
+CONFLICTS+=	libev-[0-9]*
 
 GNU_CONFIGURE=	yes
 USE_LIBTOOL=	yes

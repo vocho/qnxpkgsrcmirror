@@ -1,17 +1,22 @@
-$NetBSD$
+$NetBSD: patch-ae,v 1.14 2009/08/27 10:38:19 wiz Exp $
 
---- sendlib.c.orig	2009-06-14 11:46:11.000000000 -0400
-+++ sendlib.c
-@@ -1467,7 +1467,12 @@ char *mutt_make_date (char *s, size_t le
-   struct tm *l = localtime (&t);
-   time_t tz = mutt_local_tz (t);
+--- mutt_ssl.c.orig	2009-06-10 05:08:29.000000000 +0000
++++ mutt_ssl.c
+@@ -652,7 +652,7 @@ static int check_host (X509 *x509cert, c
+   char *buf = NULL;
+   int bufsize;
+   /* needed to get the DNS subjectAltNames: */
+-  STACK *subj_alt_names;
++  STACK_OF(GENERAL_NAME) *subj_alt_names;
+   int subj_alt_names_count;
+   GENERAL_NAME *subj_alt_name;
+   /* did we find a name matching hostname? */
+@@ -735,7 +735,7 @@ static int ssl_cache_trusted_cert (X509 
+ {
+   dprint (1, (debugfile, "trusted: %s\n", c->name));
+   if (!SslSessionCerts)
+-    SslSessionCerts = sk_new_null();
++    SslSessionCerts = sk_X509_new_null();
+   return (sk_X509_push (SslSessionCerts, X509_dup(c)));
+ }
  
-+#ifndef __QNXNTO__
-   tz /= 60;
-+#else
-+   /* Our time_t is unsigned. */
-+   tz = (int)tz / 60;
-+#endif
- 
-   snprintf (s, len,  "Date: %s, %d %s %d %02d:%02d:%02d %+03d%02d\n",
- 	    Weekdays[l->tm_wday], l->tm_mday, Months[l->tm_mon],

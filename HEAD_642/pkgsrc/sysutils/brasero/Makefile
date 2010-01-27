@@ -1,9 +1,10 @@
-# $NetBSD: Makefile,v 1.10 2009/07/26 18:25:01 drochner Exp $
+# $NetBSD: Makefile,v 1.14 2009/12/20 11:24:13 drochner Exp $
 #
 
-DISTNAME=	brasero-2.26.3
+DISTNAME=	brasero-2.28.3
+PKGREVISION=	1
 CATEGORIES=	sysutils gnome
-MASTER_SITES=	${MASTER_SITE_GNOME:=sources/brasero/2.26/}
+MASTER_SITES=	${MASTER_SITE_GNOME:=sources/brasero/2.28/}
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
@@ -34,10 +35,6 @@ PKG_SUGGESTED_OPTIONS=  evolution
 
 .include "../../mk/bsd.options.mk"
 
-# sent upstream in http://bugzilla.gnome.org/show_bug.cgi?id=583332
-post-extract:
-	cp ${FILESDIR}/scsi-netbsd.c ${WRKSRC}/libbrasero-media/
-
 .include "../../databases/shared-mime-info/mimedb.mk"
 .include "../../devel/GConf/schemas.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
@@ -48,7 +45,6 @@ BUILDLINK_API_DEPENDS.gstreamer0.10+=		gstreamer0.10>=0.10.15
 .include "../../sysutils/dbus/buildlink3.mk"
 .include "../../sysutils/dbus-glib/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
-.include "../../sysutils/hal/buildlink3.mk"
 .include "../../sysutils/libnotify/buildlink3.mk"
 .if !empty(PKG_OPTIONS:Mevolution)
 .include "../../multimedia/totem-pl-parser/buildlink3.mk"
@@ -56,5 +52,6 @@ BUILDLINK_API_DEPENDS.gstreamer0.10+=		gstreamer0.10>=0.10.15
 .include "../../textproc/gnome-doc-utils/buildlink3.mk"
 .include "../../x11/gtk2/buildlink3.mk"
 .include "../../x11/libSM/buildlink3.mk"
+.include "../../x11/libunique/buildlink3.mk"
 .include "../../mk/omf-scrollkeeper.mk"
 .include "../../mk/bsd.pkg.mk"

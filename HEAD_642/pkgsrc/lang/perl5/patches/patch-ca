@@ -1,8 +1,8 @@
-$NetBSD: patch-ca,v 1.6 2008/10/10 21:58:43 he Exp $
+$NetBSD: patch-ca,v 1.7 2009/12/14 06:36:57 seb Exp $
 
---- Configure.orig	2007-12-18 05:47:07.000000000 -0500
+--- Configure.orig	2009-08-18 15:03:53.000000000 -0400
 +++ Configure
-@@ -3206,13 +3206,14 @@ EOM
+@@ -3233,13 +3233,14 @@ EOM
  			osvers="$3"
  			;;
  		dragonfly) osname=dragonfly
@@ -19,7 +19,7 @@ $NetBSD: patch-ca,v 1.6 2008/10/10 21:58:43 he Exp $
  		genix)	osname=genix ;;
  		gnu)	osname=gnu
  			osvers="$3" ;;
-@@ -3234,7 +3235,7 @@ EOM
+@@ -3261,7 +3262,7 @@ EOM
  		MiNT)	osname=mint
  			;;
  		netbsd*) osname=netbsd
@@ -28,18 +28,16 @@ $NetBSD: patch-ca,v 1.6 2008/10/10 21:58:43 he Exp $
  			;;
  		news-os) osvers="$3"
  			case "$3" in
-@@ -3245,8 +3246,8 @@ EOM
+@@ -3272,7 +3273,7 @@ EOM
  		next*) osname=next ;;
  		nonstop-ux) osname=nonstopux ;;
  		openbsd) osname=openbsd
 -                	osvers="$3"
--                	;;
-+			osvers=`$uname -r | UU/tr '[A-Z]' '[a-z]'`
-+			;;
++                	osvers=`$uname -r | UU/tr '[A-Z]' '[a-z]'`
+                 	;;
  		os2)	osname=os2
  			osvers="$4"
- 			;;
-@@ -4739,7 +4740,7 @@ case "$plibpth" in
+@@ -4772,7 +4773,7 @@ case "$plibpth" in
  esac
  case "$libpth" in
  ' ') dlist='';;
@@ -48,7 +46,7 @@ $NetBSD: patch-ca,v 1.6 2008/10/10 21:58:43 he Exp $
  *) dlist="$libpth";;
  esac
  
-@@ -6425,7 +6426,9 @@ rp='Pathname for the site-specific libra
+@@ -6503,7 +6504,9 @@ rp='Pathname for the site-specific libra
  . ./getfile
  prefixvar=sitelib
  . ./setprefixvar
@@ -59,7 +57,7 @@ $NetBSD: patch-ca,v 1.6 2008/10/10 21:58:43 he Exp $
  
  : Determine list of previous versions to include in @INC
  $cat > getverlist <<EOPL
-@@ -6925,7 +6928,9 @@ case "$vendorprefix" in
+@@ -7015,7 +7018,9 @@ case "$vendorprefix" in
  	vendorlibexp="$ansexp"
  	;;
  esac
@@ -70,7 +68,7 @@ $NetBSD: patch-ca,v 1.6 2008/10/10 21:58:43 he Exp $
  prefixvar=vendorlib
  . ./installprefix
  
-@@ -8097,7 +8102,7 @@ if "$useshrplib"; then
+@@ -8297,7 +8302,7 @@ if "$useshrplib"; then
  	solaris)
  		xxx="-R $shrpdir"
  		;;
@@ -79,21 +77,21 @@ $NetBSD: patch-ca,v 1.6 2008/10/10 21:58:43 he Exp $
  		xxx="-Wl,-R$shrpdir"
  		;;
  	bsdos|linux|irix*|dec_osf|gnu*)
-@@ -9170,6 +9175,13 @@ EOCP
+@@ -9381,6 +9386,13 @@ EOCP
  	;;
  esac
  
 +: Look for a hint-file generated 'call-back-unit'.  We need
 +: to set some defaults for building perl in pkgsrc.
 +if $test -f pkgsrc.cbu; then
-+    echo "Setting pkgsrc-specific hints regarding compiler/linker flags..."
-+    . ./pkgsrc.cbu
++	echo "Setting pkgsrc-specific hints regarding compiler/linker flags..."
++	. ./pkgsrc.cbu
 +fi
 +
+ : Set the vendorbin variables
  case "$vendorprefix" in
  '')	d_vendorbin="$undef"
- 	vendorbin=''
-@@ -18347,7 +18359,15 @@ RCAT(Rei,ser)
+@@ -18816,7 +18828,15 @@ RCAT(Rei,ser)
  ACAT(Cir,cus)
  EOCP
  $cppstdin $cppflags $cppminus <cpp_stuff.c >cpp_stuff.out 2>&1

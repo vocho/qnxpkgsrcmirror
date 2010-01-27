@@ -1,13 +1,12 @@
-# $NetBSD: Makefile,v 1.80 2009/08/09 12:18:17 kefren Exp $
+# $NetBSD: Makefile,v 1.88 2009/12/17 13:04:00 tnn Exp $
 #
 
 DISTNAME=		vlc-${VLC_VERSION}
 CATEGORIES=		multimedia
-PKGREVISION=		1
 MASTER_SITES=		http://download.videolan.org/pub/videolan/vlc/${VLC_VERSION}/
 EXTRACT_SUFX=		.tar.bz2
 
-VLC_VERSION=		1.0.0
+VLC_VERSION=		1.0.4
 
 MAINTAINER=		ahoka@NetBSD.org
 HOMEPAGE=		http://videolan.org/
@@ -111,12 +110,13 @@ SUBST_MESSAGE.fnt=	Fixing hardcoded paths.
 
 REPLACE_SH+=		vlc-config.in.in
 
-# VLC embeds the build environment info to help debuging
+# VLC embeds the build environment info to help debuging.
+# Change it if it's bumped after a VLC upgrade!
 #
 CHECK_WRKREF_SKIP=	lib/libvlccore.a \
 			lib/libvlccore.so \
 			lib/libvlccore.so.2 \
-			lib/libvlccore.so.2.0.0
+			lib/libvlccore.so.2.1.1
 
 .include "../../audio/libmpcdec/buildlink3.mk"
 .include "../../audio/flac/buildlink3.mk"

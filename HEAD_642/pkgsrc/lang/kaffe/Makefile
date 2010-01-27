@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.72 2009/07/10 19:58:12 abs Exp $
+# $NetBSD: Makefile,v 1.74 2009/12/15 23:41:45 joerg Exp $
 #
 
 .include "Makefile.common"
 
-PKGREVISION=	3
+PKGREVISION=	5
 
 CONFLICTS+=		kaffe-nox11-[0-9]*
 

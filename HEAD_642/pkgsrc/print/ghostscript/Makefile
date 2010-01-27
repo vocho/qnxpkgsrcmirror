@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.62 2009/04/17 15:05:31 drochner Exp $
+# $NetBSD: Makefile,v 1.71 2009/11/02 00:00:31 gdt Exp $
 
-DISTNAME=	ghostscript-8.64
-PKGREVISION=	3
+DISTNAME=	ghostscript-8.70
+PKGREVISION=	1
 CATEGORIES=	print
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=ghostscript/}
 EXTRACT_SUFX=	.tar.bz2
@@ -10,18 +10,19 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://ghostscript.sourceforge.net/
 COMMENT=	Postscript interpreter
 
-PKG_DESTDIR_SUPPORT=	user-destdir
+# Plus adobe verbatim for Resources/CMap.
+LICENSE=	gnu-gpl-v3
+
+DEPENDS+=		ghostscript-fonts>=6.0:../../fonts/ghostscript-fonts
 
 CONFLICTS+=		ghostscript-afpl-[0-9]*
 CONFLICTS+=		ghostscript-esp{,-nox11}-[0-9]*
 CONFLICTS+=		ghostscript-gnu{,-nox11,-x11}-[0-9]*
 
-DEPENDS+=		ghostscript-fonts>=6.0:../../fonts/ghostscript-fonts
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=		gmake perl:run lex pkg-config
 GNU_CONFIGURE=		yes
-#CONFIGURE_ARGS+=	--enable-debug
-MAKE_JOBS_SAFE=		no
 UNLIMIT_RESOURCES+=	datasize	# gsromfs1.c
 
 BUILD_TARGET=		so
@@ -31,6 +32,10 @@ CONFIGURE_ARGS+=	-with-omni=no	# otherwise pulls in libstdc++
 REPLACE_PERL+=		lib/fixmswrd.pl
 
 GS_RESOURCEDIR=		${PREFIX}/share/ghostscript/${PKGVERSION}/Resource
+
+# XXX make sure the local jpeg headers are found before those pulled
+# in indirectly by cups bl3
+CPPFLAGS+=		-Ijpeg
 
 .include "../../mk/bsd.prefs.mk"
 
@@ -60,10 +65,6 @@ CFLAGS.NetBSD=		-fPIC
 CFLAGS.Linux=		-fPIC
 CFLAGS.SunOS=		-fPIC
 
-###.if ${OPSYS} == "Darwin"
-###MAKEFLAGS= "LDFLAGS_SO=-dynamiclib"
-###.endif
-
 # Interim IRIX build fix, the real problem is that fontconfig.pc doesn't
 # require linking against libiconv when it should do so.
 .if ${OPSYS} == "IRIX"
@@ -72,18 +73,12 @@ BUILDLINK_TRANSFORM+=	l:fontconfig:fontconfig:iconv
 
 CONFIGURE_ENV+=	LPLIBDIR=${LOCALBASE}/lib
 
-# XXX Sun Studio Compiler does not like DOS linebreaks
-# should be fixed in next ghostscript release
-DELDOSCR= ${WRKSRC}/jasper/src/libjasper/jpc/jpc_qmfb.c
-
 post-extract:
 	${MKDIR} ${WRKSRC}/bin
 	${MKDIR} ${WRKSRC}/obj
 #	${MV} ${WRKSRC}/jasper ${WRKSRC}/jasper.dontuse
 	${MV} ${WRKSRC}/libpng ${WRKSRC}/libpng.dontuse
 #	${MV} ${WRKSRC}/zlib ${WRKSRC}/zlib.dontuse
-	${TR} -d '\015' <${DELDOSCR} >${DELDOSCR}.tmp \
-		&& ${MV} ${DELDOSCR}.tmp ${DELDOSCR}
 
 post-install:
 	${LN} -sf gsc ${DESTDIR}${PREFIX}/bin/gs

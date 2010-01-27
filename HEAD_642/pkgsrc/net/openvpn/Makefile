@@ -1,9 +1,8 @@
-# $NetBSD: Makefile,v 1.29 2009/05/19 08:59:27 wiz Exp $
+# $NetBSD: Makefile,v 1.34 2009/11/18 08:10:15 manu Exp $
 #
 
-DISTNAME=	openvpn-2.1_rc13
+DISTNAME=	openvpn-2.1_rc21
 PKGNAME=	${DISTNAME:S/_//}
-PKGREVISION=	2
 CATEGORIES=	net
 MASTER_SITES=	http://openvpn.net/release/ \
 		http://openvpn.net/release/old/
@@ -59,11 +58,10 @@ SUBST_CLASSES+=		pkitool
 SUBST_STAGE.pkitool=	post-build
 SUBST_MESSAGE.pkitool=	Fixing up default paths to grep & openssl in pkitool.
 SUBST_FILES.pkitool=	easy-rsa/2.0/pkitool
-SUBST_SED.pkitool=	\
-	-e "s|\\(GREP\\)=.*|\\1=\""${GREP:Q}"\"|"			\
-	-e "s|\\(OPENSSL\\)=.*|\\1=\""${SSLBASE:Q}/bin/openssl"\"|"
+SUBST_SED.pkitool=	-e "s|\\(GREP\\)=.*|\\1=\""${GREP:Q}"\"|"
+SUBST_SED.pkitool+=  -e "s|\\(OPENSSL\\)=.*|\\1=\""${SSLBASE:Q}/bin/openssl"\"|"
 
-post-install:
+post-install: post-install-pam
 	cd ${WRKSRC:Q}/easy-rsa/2.0; for file in [a-zR]*; do		\
 		case $$file in						\
 		*.orig)	;;						\
@@ -82,4 +80,5 @@ post-install:
 		${INSTALL_DATA} $$file ${DESTDIR}${EGDIR:Q}/keys;	\
 	done
 
+.include "options.mk"
 .include "../../mk/bsd.pkg.mk"

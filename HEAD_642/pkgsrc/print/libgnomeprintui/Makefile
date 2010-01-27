@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.55 2009/03/06 13:56:06 wiz Exp $
+# $NetBSD: Makefile,v 1.57 2009/09/30 09:22:47 sketch Exp $
 #
 
 DISTNAME=	libgnomeprintui-2.18.4
+PKGREVISION=	1
 CATEGORIES=	print gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/libgnomeprintui/2.18/}
 EXTRACT_SUFX=	.tar.bz2
@@ -18,6 +19,10 @@ USE_TOOLS+=		gmake msgfmt pkg-config intltool
 USE_LIBTOOL=		YES
 
 PKGCONFIG_OVERRIDE=	libgnomeprintui/libgnomeprintui-2.2.pc.in
+
+# Workaround for Upstream Bug#562310.
+# for more detail, see also PR#41475.
+TOOLS_NOOP+=	gtkdoc-rebase
 
 BUILDLINK_API_DEPENDS.libgnomeprint+=	libgnomeprint>=2.12.1
 

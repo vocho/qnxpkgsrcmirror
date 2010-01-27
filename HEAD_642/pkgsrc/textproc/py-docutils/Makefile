@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.28 2009/05/10 10:31:54 zafer Exp $
+# $NetBSD: Makefile,v 1.30 2009/10/31 03:00:27 wiz Exp $
 
-DISTNAME=	docutils-0.5
+DISTNAME=	docutils-0.6
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
 CATEGORIES=	textproc python
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=docutils/}
@@ -11,7 +11,6 @@ COMMENT=	Python tool to generate documents
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
-PYTHON_VERSIONS_ACCEPTED=	26 25 24 23
 PYDISTUTILSPKG=	YES
 
 .include "../../lang/python/extension.mk"

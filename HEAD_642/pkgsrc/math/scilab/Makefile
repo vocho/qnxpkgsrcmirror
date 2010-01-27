@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.77 2008/12/05 19:02:09 ahoka Exp $
+# $NetBSD: Makefile,v 1.80 2009/12/03 13:06:55 asau Exp $
 #
 
 DISTNAME=	${SCIBASE}-src
-PKGREVISION=	3
+PKGREVISION=	4
 PKGNAME=	${SCIBASE}
 CATEGORIES=	math
 MASTER_SITES=	http://www.scilab.org/download/4.1/
@@ -46,6 +46,16 @@ CONFIGURE_ENV+=		FC_LDFLAGS=${X11_LDFLAGS:Q}\ ${COMPILER_RPATH_FLAG:Q}${BUILDLIN
 MAKE_ENV+=		HOME=${WRKSRC:Q}
 MAKE_ENV+=		PVM_ROOT=${PVM_ROOT:Q}
 CONFIGURE_ENV+=		LOCALBASE=${LOCALBASE:Q}
+
+# FIXME -- this ugly hack will go away on newer versions of scilab where the build
+# system has been improved significantly see:
+#
+#   scilab-4.1/routines/os_specific/getarg.c
+#
+.include "../../mk/compiler.mk"
+.  if !empty(FC:Mgfortran) || (defined(PKGSRC_FORTRAN) && !empty(PKGSRC_FORTRAN:Mg95))
+CFLAGS+=		-DG95_FORTRAN=1
+.endif
 
 PVM_ROOT?=		${LOCALBASE}/pvm3
 CONFIGURE_ENV+=		PVM_ROOT=${PVM_ROOT:Q}

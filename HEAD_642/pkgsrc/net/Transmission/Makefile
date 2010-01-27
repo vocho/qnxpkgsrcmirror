@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.48 2009/08/10 12:14:50 tnn Exp $
+# $NetBSD: Makefile,v 1.53 2009/12/16 19:11:49 drochner Exp $
 #
-DISTNAME=		transmission-1.73
-PKGNAME=		Transmission-1.73
+DISTNAME=		transmission-1.76
+PKGNAME=		Transmission-1.76
 CATEGORIES=		net
 MASTER_SITES=		http://download.m0k.org/transmission/files/
 EXTRACT_SUFX=		.tar.bz2
@@ -41,10 +41,8 @@ PLIST_SRC+=		${PKGDIR}/PLIST.common
 
 .include "options.mk"
 
-# Transmission bundles it's own libevent (newer version than we have in pkgsrc.)
-#BUILDLINK_API_DEPENDS.libevent+=	libevent>=1.4.12
-#.include "../../devel/libevent/buildlink3.mk"
-
+BUILDLINK_API_DEPENDS.libevent+=	libevent>=1.4.11
+.include "../../devel/libevent/buildlink3.mk"
 ALL_ENV+=		"OPENSSL_CFLAGS=-I${SSLBASE}/include"
 ALL_ENV+=		"OPENSSL_LIBS=-L${SSLBASE}/lib -lcrypto -lssl"
 .include "../../devel/libgetopt/buildlink3.mk"

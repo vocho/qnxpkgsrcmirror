@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.8 2008/10/02 17:57:39 ahoka Exp $
-#
+# $NetBSD: Makefile,v 1.14 2009/11/10 21:25:57 drochner Exp $
 
-DISTNAME=	xmlrpc-c-1.09.00
-PKGREVISION=	3
+DISTNAME=	xmlrpc-c-1.06.38
+# the "super stable" branch
+PKGNAME=	xmlrpc-c-ss-1.06.38
+PKGREVISION=	2
 CATEGORIES=	textproc devel
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=xmlrpc-c/}
 EXTRACT_SUFX=	.tgz
@@ -11,16 +12,23 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://xmlrpc-c.sourceforge.net/
 COMMENT=	Library for writing an XML-RPC server or client in C or C++
 
+CONFLICTS+=	xmlrpc-c-[0-9]*
+SUPERSEDES+=	xmlrpc-c-[0-9]*
+
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 # Sometimes can't open ../xmltok/libxmlrpc_xmltok.la
-MAKE_JOBS_SAFE=	no
+MAKE_JOBS_SAFE=		no
 
-GNU_CONFIGURE=	yes
-USE_LIBTOOL=	yes
-USE_LANGUAGES=	c99 c++
-USE_TOOLS+=	gmake
-MAKE_FILE=	GNUmakefile
+USE_LANGUAGES=		c99 c++
+USE_LIBTOOL=		yes
+USE_TOOLS+=		gmake
+GNU_CONFIGURE=		yes
+MAKE_FILE=		GNUmakefile
+MAKE_ENV=		CFLAGS_COMMON=${CFLAGS:M*:Q}
+MAKE_ENV+=		CXXFLAGS_COMMON=${CXXFLAGS:M*:Q}
+MAKE_ENV+=		LADD=${LDFLAGS:M*:Q}
+TEST_TARGET=		check
 
 SUBST_CLASSES+=	pthread
 SUBST_FILES.pthread=	xmlrpc-c-config.in xmlrpc-c-config.test.in

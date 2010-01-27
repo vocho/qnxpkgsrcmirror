@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.35 2008/05/22 12:30:44 tron Exp $
+# $NetBSD: Makefile,v 1.37 2009/12/17 18:00:12 abs Exp $
 
 DISTNAME=	wterm-6.2.9
-PKGREVISION=	8
+PKGREVISION=	9
 CATEGORIES=	x11 windowmaker
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=wterm/}
 
@@ -18,12 +18,15 @@ CONFIGURE_ARGS+= --enable-menubar --enable-graphics --enable-next-scroll
 CONFIGURE_ARGS+= --enable-half-shadow
 CONFIGURE_ARGS+= --with-xpm-library=${BUILDLINK_PREFIX.libXpm}
 
+PKG_DESTDIR_SUPPORT= destdir
+INSTALLATION_DIRS+=  share/WindowMaker/Icons
+
 post-install:
-	${CHMOD} 4755 ${PREFIX}/bin/wterm
+	${CHMOD} 4755 ${DESTDIR}${PREFIX}/bin/wterm
 	${INSTALL_DATA} ${WRKSRC}/wterm.tiff \
-		${PREFIX}/share/WindowMaker/Icons
+		${DESTDIR}${PREFIX}/share/WindowMaker/Icons
 	${INSTALL_DATA} ${WRKSRC}/wtermthai.tiff \
-		${PREFIX}/share/WindowMaker/Icons
+		${DESTDIR}${PREFIX}/share/WindowMaker/Icons
 
 BUILDLINK_DEPMETHOD.libXt?=	build
 

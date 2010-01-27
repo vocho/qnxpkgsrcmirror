@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.8 2009/07/02 05:23:18 epg Exp $
+# $NetBSD: Makefile,v 1.10 2009/10/11 18:36:15 epg Exp $
 
 DISTNAME=	bzrtools-${VER}
 #PKGREVISION=	1
 CATEGORIES=	devel scm
-MASTER_SITES=	http://launchpad.net/bzrtools/stable/1.16.0/+download/
-VER=		1.16.0
+MASTER_SITES=	http://launchpad.net/bzrtools/stable/${VER}/+download/
+VER=		2.0.0
 
 MAINTAINER=	epg@NetBSD.org
 HOMEPAGE=	http://bazaar-vcs.org/BzrTools

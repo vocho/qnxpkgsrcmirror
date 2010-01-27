@@ -1,9 +1,8 @@
-# $NetBSD: Makefile,v 1.3 2009/04/18 11:17:33 asau Exp $
+# $NetBSD: Makefile,v 1.5 2009/12/16 01:58:08 asau Exp $
 #
 
-DISTNAME=		open-axiom-1.2.1
+DISTNAME=		open-axiom-1.3.0
 PKGNAME=		${DISTNAME:S/open-/open/}
-PKGREVISION=		1
 CATEGORIES=		math
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=open-axiom/}
 EXTRACT_SUFX=		.tar.bz2
@@ -23,11 +22,5 @@ CONFIGURE_ENV=		HOST_AWK=${TOOLS_PLATFORM.awk:Q}
 BUILD_MAKE_FLAGS+=	TOOLS_PLATFORM.install=${TOOLS_PLATFORM.install:Q}
 
 .include "options.mk"
-
-SUBST_CLASSES+=			dragonfly
-SUBST_STAGE.dragonfly=		post-patch
-SUBST_MESSAGE.dragonfly=	Fixing BSD Family pattern
-SUBST_FILES.dragonfly+=		configure
-SUBST_SED.dragonfly=		-e 's/\*bsd\*)/*bsd*|*dragonfly*)/'
 
 .include "../../mk/bsd.pkg.mk"

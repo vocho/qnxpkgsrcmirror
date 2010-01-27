@@ -1,21 +1,13 @@
-$NetBSD$
+$NetBSD: patch-ab,v 1.5 2009/11/09 02:46:12 christos Exp $
 
---- configure.orig	2008-05-03 23:30:36.000000000 -0500
-+++ configure
-@@ -23553,9 +23553,16 @@ if test $ac_cv_header_langinfo_h = yes; 
-   :
- else
+--- tools/wml/wmluiltok.l.orig	2009-11-08 21:40:09.000000000 -0500
++++ tools/wml/wmluiltok.l	2009-11-08 21:40:19.000000000 -0500
+@@ -68,6 +68,8 @@
  
-+case $host_os in
-+nto-qnx*)
-+  # nothing
-+  ;;
-+*)
- cat >>confdefs.h <<\_ACEOF
- #define CSRG_BASED 1
- _ACEOF
-+;;
-+esac
+ %a 9999						/* transitions */
  
- fi
++%option main
++
+ %{
  
+ #include <stdio.h>

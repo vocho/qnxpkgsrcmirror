@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.20 2009/07/25 01:19:16 schmonz Exp $
+# $NetBSD: Makefile,v 1.22 2009/11/23 09:37:45 ghen Exp $
 #
 
 DISTNAME=	roundcubemail-${RCVERSION}-dep
@@ -14,12 +14,12 @@ LICENSE=	gnu-gpl-v2
 USE_TOOLS+=	pax
 USE_LANGUAGES=	# none
 NO_BUILD=	yes
-RCVERSION=	0.2.2
+RCVERSION=	0.3.1
 VERSION=	${RCVERSION:S/-//}
 
 PKG_DESTDIR_SUPPORT=  	user-destdir
-INSTALLATION_DIRS=	${RCDIR}/program ${RCDIR}/skins ${EGDIR}/SQL ${DOCDIR}
-INSTALLATION_DIRS+=	${RCDIR}/bin
+INSTALLATION_DIRS=	${RCDIR}/plugins ${RCDIR}/program ${RCDIR}/skins
+INSTALLATION_DIRS+=	${EGDIR}/SQL ${DOCDIR} ${RCDIR}/bin
 
 .include "../../mk/bsd.prefs.mk"
 .include "../../lang/php/phpversion.mk"
@@ -47,7 +47,7 @@ BUILD_DEFS+=		VARBASE WWW_USER WWW_GROUP APACHE_USER APACHE_GROUP
 RCDIR=			${PREFIX}/share/roundcube
 EGDIR=			${PREFIX}/share/examples/roundcube
 DOCDIR=			${PREFIX}/share/doc/roundcube
-PAX_DIRS=		program skins installer bin
+PAX_DIRS=		plugins program skins installer bin
 
 MESSAGE_SUBST+=		DOCDIR=${DOCDIR:Q} PKG_SYSCONFDIR=${PKG_SYSCONFDIR:Q}
 MESSAGE_SUBST+=		VARBASE=${VARBASE:Q} RCDIR=${RCDIR:Q}
@@ -84,18 +84,6 @@ REPLACE.php.old=	.*/bin/php
 REPLACE.php.new=	${PREFIX}/bin/php
 REPLACE_FILES.php=	bin/*.sh
 
-EMPTY_DIRS=	plugins/cleanup plugins/emotions/images \
-		plugins/emotions/jscripts plugins/media/images \
-		plugins/media/jscripts plugins/nonbreaking/images \
-		plugins/nonbreaking/langs plugins/searchreplace/images \
-		plugins/searchreplace/jscripts plugins/spellchecker/images \
-		plugins/spellchecker/langs plugins/table/images \
-		plugins/table/jscripts plugins/visualchars/images \
-		plugins/visualchars/langs themes/advanced/css \
-		themes/advanced/docs/en/images themes/advanced/images/xp \
-		themes/advanced/jscripts themes/advanced/docs/en \
-		themes/advanced/images themes/advanced/docs
-
 .include "../../mk/apache.mk"
 .include "options.mk"
 
@@ -104,10 +92,6 @@ post-extract:
 
 pre-install:
 	${FIND} ${WRKSRC} -name "*.orig" -print | ${XARGS} ${RM} -f
-
-.	for d in ${EMPTY_DIRS}
-		cd ${WRKSRC}/program/js/tiny_mce && rmdir ${d}
-.	endfor
 
 do-install:
 	${INSTALL_DATA} ${WRKSRC}/roundcube.conf \

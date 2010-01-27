@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.155 2009/01/08 14:29:18 tron Exp $
+# $NetBSD: Makefile,v 1.161 2009/12/15 21:48:00 joerg Exp $
 
 .include "Makefile.common"
 
 PKGNAME=	ImageMagick-${DISTVERSION}
+PKGREVISION=	1
 
 MAINTAINER=	adam@NetBSD.org
 HOMEPAGE=	http://www.imagemagick.org/
@@ -49,7 +50,6 @@ CONFIGURE_ARGS+=	--with-ltdl-lib=${BUILDLINK_PREFIX.libltdl}/lib
 .include "../../fonts/fontconfig/buildlink3.mk"
 .include "../../graphics/freetype2/buildlink3.mk"
 .include "../../graphics/lcms/buildlink3.mk"
-.include "../../graphics/libexif/buildlink3.mk"
 .include "../../graphics/png/buildlink3.mk"
 .include "../../graphics/tiff/buildlink3.mk"
 .include "../../textproc/libxml2/buildlink3.mk"

@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.21 2009/07/22 09:01:19 wiz Exp $
+# $NetBSD: Makefile,v 1.24 2009/11/29 22:27:54 dholland Exp $
 #
 
 DISTNAME=		solfege-3.14.1
+PKGREVISION=		1
 CATEGORIES=		audio
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=solfege/}
 
@@ -9,12 +10,14 @@ MAINTAINER=		schmonz@NetBSD.org
 HOMEPAGE=		http://www.solfege.org/
 COMMENT=		Practice several musical ear training exercises
 
+PKG_DESTDIR_SUPPORT=	user-destdir
+
 BUILD_DEPENDS+=		docbook-xsl-[0-9]*:../../textproc/docbook-xsl
 BUILD_DEPENDS+=		txt2man-[0-9]*:../../converters/txt2man
 
 USE_PKGLOCALEDIR=	yes
 GNU_CONFIGURE=		yes
-CONFIGURE_ENV+=		PYTHON=${PYTHONBIN:Q}
+CONFIGURE_ENV+=		PYTHON=${PYTHONBIN:Q} ac_cv_path_MSGGREP=true
 CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR:Q}
 CONFIGURE_ARGS+=	--disable-oss-sound
 CONFIGURE_ARGS+=	--disable-pygtk-test
@@ -61,7 +64,6 @@ post-install:
 		${DESTDIR}${PREFIX}/share/solfege/soundcard \
 		${DESTDIR}${PREFIX}/share/solfege/src
 
-PYTHON_VERSIONS_INCOMPATIBLE=	23
 .include "../../lang/python/application.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../textproc/gnome-doc-utils/buildlink3.mk"

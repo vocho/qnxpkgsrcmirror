@@ -1,6 +1,6 @@
-$NetBSD: patch-bw,v 1.5 2007/12/21 17:32:27 drochner Exp $
+$NetBSD: patch-bw,v 1.6 2009/10/04 16:58:38 taca Exp $
 
---- include/config.h.in.orig	2009-06-22 17:02:36.000000000 -0400
+--- include/config.h.in.orig	2009-09-30 22:08:50.000000000 +0900
 +++ include/config.h.in
 @@ -324,9 +324,6 @@
  /* Define to 1 if you have the `delproplist' function. */
@@ -31,14 +31,4 @@ $NetBSD: patch-bw,v 1.5 2007/12/21 17:32:27 drochner Exp $
 +
  /* Whether iface ifconf is available */
  #undef HAVE_IFACE_IFCONF
- 
-@@ -2813,6 +2816,9 @@
- /* Define to `unsigned int' if <sys/types.h> does not define. */
- #undef uint_t
- 
-+/* Define to `unsigned int' if <sys/types.h> does not define. */
-+#undef uint
-+
- /* Whether to build vfs_afsacl as shared module */
- #undef vfs_afsacl_init
  

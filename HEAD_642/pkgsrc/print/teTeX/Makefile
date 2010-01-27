@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.52 2009/04/30 01:01:41 minskim Exp $
+# $NetBSD: Makefile,v 1.55 2009/09/20 09:39:45 sno Exp $
 
 DISTNAME=	teTeX-3.0
-PKGREVISION=	6
+PKGREVISION=	7
 CATEGORIES=	print meta-pkgs
 MASTER_SITES=	# empty
 
-MAINTAINER=	kei@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.tug.org/tetex/
 COMMENT=	Thomas Esser's TeX distribution for UNIX compatible systems
 
@@ -13,12 +13,14 @@ DEPENDS+=	dviljk-[0-9]*:../../print/dviljk
 DEPENDS+=	dvipdfm-[0-9]*:../../print/dvipdfm
 DEPENDS+=	dvipng-[0-9]*:../../graphics/dvipng
 DEPENDS+=	dvipsk-[0-9]*:../../print/dvipsk
+DEPENDS+=	gsftopkk-[0-9]*:../../fonts/gsftopkk
+DEPENDS+=	ps2pkm-[0-9]*:../../fonts/ps2pkm
 DEPENDS+=	teTeX-bin-[0-9]*:../../print/teTeX3-bin
 DEPENDS+=	teTeX-texmf-[0-9]*:../../print/teTeX3-texmf
+DEPENDS+=	tex-a2ping-[0-9]*:../../graphics/tex-a2ping
 DEPENDS+=	texi2html>=1.52:../../textproc/texi2html
+DEPENDS+=	texlive-pdftools-[0-9]*:../../print/texlive-pdftools
 DEPENDS+=	xdvik-[0-9]*:../../print/xdvik
-
-CONFLICTS+=	teTeX2-[0-9]*
 
 META_PACKAGE=	yes
 

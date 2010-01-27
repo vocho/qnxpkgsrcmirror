@@ -1,11 +1,10 @@
-# $NetBSD: Makefile,v 1.29 2009/07/26 19:05:30 drochner Exp $
+# $NetBSD: Makefile,v 1.32 2009/10/22 17:20:55 drochner Exp $
 #
 
-DISTNAME=	gnome-python-desktop-2.26.0
+DISTNAME=	gnome-python-desktop-2.28.0
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME:S/-python/2/}
-PKGREVISION=	2
 CATEGORIES=	sysutils gnome
-MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gnome-python-desktop/2.26/}
+MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gnome-python-desktop/2.28/}
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
@@ -23,7 +22,7 @@ USE_TOOLS+=	pkg-config gmake
 
 PKGCONFIG_OVERRIDE+=	gnome-python-desktop-2.0.pc.in
 
-PYTHON_VERSIONS_ACCEPTED=	26 25 24
+PYTHON_VERSIONS_ACCEPTED=	26 25
 
 .include "../../lang/python/extension.mk"
 .include "../../devel/libwnck/buildlink3.mk"

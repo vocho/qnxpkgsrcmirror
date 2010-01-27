@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.85 2008/12/26 17:46:07 ahoka Exp $
+# $NetBSD: Makefile,v 1.89 2009/11/02 09:09:25 tnn Exp $
 
-DISTNAME=	SDL-1.2.13
-PKGREVISION=	4
+DISTNAME=	SDL-1.2.14
+PKGREVISION=	1
 CATEGORIES=	devel games
 MASTER_SITES=	http://www.libsdl.org/release/
 
@@ -37,7 +37,6 @@ CONFIGURE_ARGS+=	--disable-nasm
 CONFIGURE_ARGS+=	--disable-video-wscons
 .endif
 
-CONFIGURE_ARGS+=	--enable-dlopen
 CONFIGURE_ENV+=		NASMFLAGS="${NASMFLAGS_${OBJECT_FMT}}"
 MAKE_ENV+=		NASMFLAGS="${NASMFLAGS_${OBJECT_FMT}}"
 
@@ -66,8 +65,14 @@ MAKE_ENV+=		AM_CFLAGS=${AM_CFLAGS:M*:Q}
 
 # Irix comes with GL, which works fine for SDL
 .if ${OPSYS} != "IRIX" && ${OPSYS} != "Darwin"
+CONFIGURE_ARGS+=	--disable-x11-shared
 .include "../../graphics/MesaLib/buildlink3.mk"
 .include "../../graphics/glu/buildlink3.mk"
+.include "../../x11/libXext/buildlink3.mk"
+.include "../../x11/libXrandr/buildlink3.mk"
+.include "../../x11/libXt/buildlink3.mk"
+.include "../../x11/xextproto/buildlink3.mk"
+.include "../../x11/xproto/buildlink3.mk"
 .endif
 .include "../../mk/pthread.buildlink3.mk"
 
@@ -78,9 +83,4 @@ CONFIGURE_ARGS+=	--enable-pth
 .endif
 
 .include "../../converters/libiconv/buildlink3.mk"
-.include "../../x11/libXext/buildlink3.mk"
-.include "../../x11/libXrandr/buildlink3.mk"
-.include "../../x11/libXt/buildlink3.mk"
-.include "../../x11/xextproto/buildlink3.mk"
-.include "../../x11/xproto/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

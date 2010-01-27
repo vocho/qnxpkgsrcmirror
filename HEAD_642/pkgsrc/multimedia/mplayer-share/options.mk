@@ -1,4 +1,4 @@
-# $NetBSD: options.mk,v 1.36 2009/05/11 08:24:58 wiz Exp $
+# $NetBSD: options.mk,v 1.39 2009/11/04 16:00:54 pooka Exp $
 
 .if defined(PKGNAME) && empty(PKGNAME:Mmplayer-share*)
 
@@ -120,7 +120,10 @@ CONFIGURE_ARGS+=	--enable-debug
 .endif
 
 .if !empty(PKG_OPTIONS:Mdts)
-CONFIGURE_ARGS+=	--enable-libdca
+# The configure handling for --enable-libdca is broken.
+# However, it works if you omit the argument and let
+# configure autodetect support.
+#CONFIGURE_ARGS+=       --enable-libdca
 .  include "../../audio/libdca/buildlink3.mk"
 .else
 CONFIGURE_ARGS+=	--disable-libdca
@@ -154,10 +157,9 @@ CONFIGURE_ARGS+=	--disable-faac
 .endif
 
 .if empty(PKG_OPTIONS:Mfaad) && empty(PKG_OPTIONS:Mmplayer-internal-faad)
-CONFIGURE_ARGS+=	--disable-faad-external
 CONFIGURE_ARGS+=	--disable-faad-internal
 .elif !empty(PKG_OPTIONS:Mfaad)
-CONFIGURE_ARGS+=	--enable-faad-external
+CONFIGURE_ARGS+=	--enable-faad
 .  include "../../audio/faad2/buildlink3.mk"
 .else
 CONFIGURE_ARGS+=	--enable-faad-internal
@@ -257,11 +259,11 @@ CONFIGURE_ARGS+=	--disable-png
 .endif
 
 .if !empty(PKG_OPTIONS:Mpulseaudio)
-CONFIGURE_ARGS+=	--enable-polyp
+CONFIGURE_ARGS+=	--enable-pulse
 .  include "../../devel/glib2/buildlink3.mk"
 .  include "../../audio/pulseaudio/buildlink3.mk"
 .else
-CONFIGURE_ARGS+=	--disable-polyp
+CONFIGURE_ARGS+=	--disable-pulse
 .endif
 
 .if !empty(PKG_OPTIONS:Msdl)
@@ -286,8 +288,7 @@ CONFIGURE_ARGS+=	--disable-tv-v4l2
 
 # disable vidix if not in options
 .if empty(PKG_OPTIONS:Mvidix)
-CONFIGURE_ARGS+=	--disable-vidix-internal
-CONFIGURE_ARGS+=	--disable-vidix-external
+CONFIGURE_ARGS+=	--disable-vidix
 .endif
 
 .if !empty(PKG_OPTIONS:Mvorbis)

@@ -1,15 +1,16 @@
-# $NetBSD: Makefile,v 1.1.1.1 2009/04/26 03:54:57 taca Exp $
+# $NetBSD: Makefile,v 1.3 2009/11/22 16:17:59 taca Exp $
 #
 
 DISTNAME=	typolight${TL_VER}-translations-${VERS}
 CATEGORIES=	www
-MASTER_SITES=	http://www.typolight.org/download.html?file=tl_files/languages/ja/
+MASTER_SITES=	# defined for each distfiles
 DISTFILES=	${TL_DISTFILES}
 EXTRACT_DIR=	${WRKSRC}
 
 MAINTAINER=	taca@NetBSD.org
 HOMEPAGE=	http://www.typolight.org/download-translations.html
 COMMENT=	Language files for TYPOlight CMS
+LICENSE=	gnu-lgpl-v2.1
 
 DEPENDS+=	typolight${TL_VER}>=2.6.0:../../www/typolight26
 

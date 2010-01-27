@@ -1,14 +1,15 @@
-# $NetBSD: Makefile,v 1.40 2009/08/08 15:52:08 wiz Exp $
+# $NetBSD: Makefile,v 1.44 2009/11/10 19:31:31 epg Exp $
 
 DISTNAME=		bzr-${VER}
 #PKGREVISION=		1
 CATEGORIES=		devel scm
-MASTER_SITES=		http://launchpad.net/bzr/1.17/${VER}/+download/
-VER=			1.17
+MASTER_SITES=		http://launchpad.net/bzr/2.0/${VER}/+download/
+VER=			2.0.1
 
 MAINTAINER=		epg@NetBSD.org
 HOMEPAGE=		http://bazaar-vcs.org/
 COMMENT=		Bazaar open source distributed version control system
+LICENSE=		gnu-gpl-v2
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
@@ -20,7 +21,6 @@ USE_TOOLS+=		gmake
 PY_PATCHPLIST=		yes
 PYDISTUTILSPKG=		yes
 
-PYTHON_VERSIONS_ACCEPTED=	26 25 24
 PYTHON_PATCH_SCRIPTS=		bzr bzrlib/weave.py
 
 .include "../../mk/bsd.prefs.mk"

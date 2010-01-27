@@ -1,15 +1,15 @@
-# $NetBSD: Makefile,v 1.6 2009/07/13 20:42:10 taca Exp $
+# $NetBSD: Makefile,v 1.12 2009/12/20 04:22:04 taca Exp $
 #
 
 DISTNAME=	typolight-${TL_VERSION}
 PKGNAME=	typolight${TL_VER}-${TL_PKGVER}
-PKGREVISION=	1
 CATEGORIES=	www
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=typolight/}
 
 MAINTAINER=	taca@NetBSD.org
 HOMEPAGE=	http://www.typolight.org/
 COMMENT=	Powerful web content management system (CMS)
+LICENSE=	gnu-lgpl-v2.1
 
 DEPENDS+=	${PHP_PKG_PREFIX}-gd>=5.1.0:../../graphics/php-gd
 DEPENDS+=	${PHP_PKG_PREFIX}-mbstring>=5.1.0:../../misc/php-mbstring
@@ -76,22 +76,23 @@ WWW_SYSFILES=	config/.htaccess constants.php drivers functions.php \
 
 INSTALLATION_DIRS+=	${TL_DOCDIR} ${TL_EGDIR} ${TL_WEBDIR}/system/config
 OWN_DIRS_PERMS+= \
-		${TL_WEBDIR} ${BINOWN} ${APACHE_GROUP} 0775 \
-		${TL_WEBDIR}/plugins ${BINOWN} ${APACHE_GROUP} 0775 \
-		${TL_WEBDIR}/system ${BINOWN} ${APACHE_GROUP} 0775 \
-		${TL_WEBDIR}/system/drivers ${BINOWN} ${APACHE_GROUP} 0775 \
-		${TL_WEBDIR}/system/html ${BINOWN} ${APACHE_GROUP} 0770 \
-		${TL_WEBDIR}/system/libraries ${BINOWN} ${APACHE_GROUP} 0775 \
-		${TL_WEBDIR}/system/logs ${BINOWN} ${APACHE_GROUP} 0770 \
-		${TL_WEBDIR}/system/modules ${BINOWN} ${APACHE_GROUP} 0775 \
-		${TL_WEBDIR}/system/themes ${BINOWN} ${APACHE_GROUP} 0775 \
-		${TL_WEBDIR}/system/tmp ${BINOWN} ${APACHE_GROUP} 0770 \
-		${TL_WEBDIR}/templates ${BINOWN} ${APACHE_GROUP} 0770 \
-		${TL_WEBDIR}/tl_files ${BINOWN} ${APACHE_GROUP} 0770 \
-		${TL_WEBDIR}/tl_files/tiny_templates \
-		${BINOWN} ${APACHE_GROUP} 0770 \
-		${TL_WEBDIR}/tl_files/xBrowser_style_sheets \
-		${BINOWN} ${APACHE_GROUP} 0770
+	${TL_WEBDIR} ${BINOWN} ${APACHE_GROUP} 0775 \
+	${TL_WEBDIR}/plugins ${BINOWN} ${APACHE_GROUP} 0775 \
+	${TL_WEBDIR}/plugins/tcpdf/cache ${BINOWN} ${APACHE_GROUP} 0775 \
+	${TL_WEBDIR}/system ${BINOWN} ${APACHE_GROUP} 0775 \
+	${TL_WEBDIR}/system/drivers ${BINOWN} ${APACHE_GROUP} 0775 \
+	${TL_WEBDIR}/system/html ${BINOWN} ${APACHE_GROUP} 0770 \
+	${TL_WEBDIR}/system/libraries ${BINOWN} ${APACHE_GROUP} 0775 \
+	${TL_WEBDIR}/system/logs ${BINOWN} ${APACHE_GROUP} 0770 \
+	${TL_WEBDIR}/system/modules ${BINOWN} ${APACHE_GROUP} 0775 \
+	${TL_WEBDIR}/system/themes ${BINOWN} ${APACHE_GROUP} 0775 \
+	${TL_WEBDIR}/system/tmp ${BINOWN} ${APACHE_GROUP} 0770 \
+	${TL_WEBDIR}/templates ${BINOWN} ${APACHE_GROUP} 0770 \
+	${TL_WEBDIR}/tl_files ${BINOWN} ${APACHE_GROUP} 0770 \
+	${TL_WEBDIR}/tl_files/tiny_templates \
+	${BINOWN} ${APACHE_GROUP} 0770 \
+	${TL_WEBDIR}/tl_files/xBrowser_style_sheets \
+	${BINOWN} ${APACHE_GROUP} 0770
 
 PKG_GROUPS_VARS+=	APACHE_GROUP
 PKG_USERS_VARS+=	APACHE_USER
@@ -101,10 +102,10 @@ PKG_USERS_VARS+=	APACHE_USER
 pre-configure:
 	${MV} ${WRKSRC}/templates/.htaccess ${WRKDIR}/templates-htaccess
 	${CP} ${FILESDIR}/typolight.conf ${WRKDIR}
-	cd ${WRKSRC}; ${RM} -rf music_academy.css \
-		templates/example_website.sql tl_files/music_academy
 
 pre-install:
+	cd ${WRKSRC}; ${RM} -rf music_academy.css \
+		templates/example_website.sql tl_files/music_academy
 	${FIND} ${WRKSRC} -name "*.orig*" -exec ${RM} -f {} \;
 
 do-install:

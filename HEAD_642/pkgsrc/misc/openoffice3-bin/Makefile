@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.1.1.1 2009/01/31 22:05:53 bad Exp $
+# $NetBSD: Makefile,v 1.4 2009/12/10 21:33:39 abs Exp $
 
 DISTNAME=		openoffice3-bin	# overridden below
 PKGNAME=		openoffice3-bin-${OO_RELEASE}
+PKGREVISION=		1
 CATEGORIES=		misc
 MASTER_SITES=		${MASTER_SITE_OPENOFFICE:=stable/${OO_RELEASE}/}
 
@@ -18,7 +19,8 @@ CONFLICTS+=		openoffice3-[0-9]*
 CONFLICTS+=		openoffice-linux-[0-9]*
 
 OO_VER=			3
-OO_RELEASE=		3.0.1
+OO_BASEVER=		3.1
+OO_RELEASE=		3.1.1
 PLIST_SUBST+=		VER=${OO_VER:Q}
 MESSAGE_SUBST+=		VER=${OO_VER:Q}
 FILES_SUBST+=		VER=${OO_VER:Q}
@@ -37,42 +39,52 @@ EMUL_REQD=		suse>=10.0
 
 EMUL_PKG_FMT=		rpm
 RPMFILES=		${WRKSRC}/RPMS/*.rpm
-RPM2PKG_PREFIX=		${PREFIX}
+RPM2PKG_PREFIX=		${DESTDIR}${PREFIX}
 RPM2PKG_SUBPREFIX=	# empty
 RPM2PKG_STAGE=		do-install
 RUN_LDCONFIG=		no
 
 USE_TOOLS+=	patch
 
+CHECK_FILES_SKIP+=	${PREFIX}/openoffice.org/basis${OO_BASEVER}/ure-link
+CHECK_FILES_SKIP+=	${PREFIX}/openoffice.org${OO_VER}/basis-link
+
+PKG_DESTDIR_SUPPORT=	user-destdir
+
 .include "../../mk/bsd.prefs.mk"
 
 .if ${EMUL_PLATFORM} == "linux-i386"
 DISTNAME=		OOo_${OO_RELEASE}_LinuxIntel_install_en-US
-WRKSRC=			${WRKDIR}/OOO300_m15_native_packed-1_en-US.9379
+WRKSRC=			${WRKDIR}/OOO310_m19_native_packed-1_en-US.9420
 .elif ${EMUL_PLATFORM} == "solaris-i386"
 DISTNAME=		OOo_${OO_RELEASE}_Solarisx86_install_en-US
-WRKSRC=			${WRKDIR}/OOO300_m15_native_packed-1_en-US.9379/packages
+WRKSRC=			${WRKDIR}/OOO310_m19_native_packed-1_en-US.9420/packages
 .elif ${EMUL_PLATFORM} == "solaris-sparc"
 DISTNAME=		OOo_${OO_RELEASE}_SolarisSparc_install_en-US
-WRKSRC=			${WRKDIR}/OOO300_m15_native_packed-1_en-US.9379/packages
+WRKSRC=			${WRKDIR}/OOO310_m19_native_packed-1_en-US.9420/packages
 .endif
 
 .include "options.mk"
 
+INSTALLATION_DIRS= bin
+
 do-install:
-	${PATCH} -d ${PREFIX}/openoffice.org${OO_VER}/program < ${FILESDIR}/soffice-patch
+	${PATCH} -d ${DESTDIR}${PREFIX}/openoffice.org${OO_VER}/program < ${FILESDIR}/soffice-patch
+	${RM} -f ${DESTDIR}${PREFIX}/openoffice.org${OO_VER}/program/soffice.orig
+	${PATCH} -d ${DESTDIR}${PREFIX}/openoffice.org${OO_VER}/program < ${FILESDIR}/spadmin-patch
+	${RM} -f ${DESTDIR}${PREFIX}/openoffice.org${OO_VER}/program/spadmin.orig
 	uniq ${RPM2PKG_PLIST} > ${WRKDIR}/PLIST
 .if defined(PKG_JVM) && !empty(PKG_JVM)
-	${RM} -f ${PREFIX}/bin/soffice
+	${RM} -f ${DESTDIR}${PREFIX}/bin/soffice
 	${SED}  -e "s|@@PREFIX@@|${PREFIX}|g" -e "s|@@OO_VER@@|${OO_VER}|g" \
 		-e "s|@@JAVA_HOME@@|${PKG_JAVA_HOME}|g" \
-		< ${FILESDIR}/soffice > ${PREFIX}/bin/soffice
-	${CHMOD} +x ${PREFIX}/bin/soffice
+		< ${FILESDIR}/soffice > ${DESTDIR}${PREFIX}/bin/soffice
+	${CHMOD} +x ${DESTDIR}${PREFIX}/bin/soffice
 .else
-	${LN} -sf ../openoffice.org${OO_VER}/program/soffice ${PREFIX}/bin/soffice
+	${LN} -sf ../openoffice.org${OO_VER}/program/soffice ${DESTDIR}${PREFIX}/bin/soffice
 .endif
 .for i in scalc sdraw simpress smath spadmin swriter
-	${LN} -sf ../openoffice.org${OO_VER}/program/${i} ${PREFIX}/bin/${i}
+	${LN} -sf ../openoffice.org${OO_VER}/program/${i} ${DESTDIR}${PREFIX}/bin/${i}
 .endfor
 
 .include "../../mk/bsd.pkg.mk"

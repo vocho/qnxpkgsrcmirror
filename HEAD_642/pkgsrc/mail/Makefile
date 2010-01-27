@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.374 2009/08/13 15:22:54 abs Exp $
+# $NetBSD: Makefile,v 1.383 2009/12/11 20:53:59 ghen Exp $
 #
 
 COMMENT=	Electronic mail utilities
@@ -64,7 +64,6 @@ SUBDIR+=	dk-milter
 SUBDIR+=	dkim-milter
 SUBDIR+=	dot-forward
 SUBDIR+=	dovecot
-SUBDIR+=	dovecot-sieve
 SUBDIR+=	drac
 SUBDIR+=	dspam
 SUBDIR+=	elm
@@ -159,11 +158,13 @@ SUBDIR+=	nmh
 SUBDIR+=	nullmailer
 SUBDIR+=	oe2mbx
 SUBDIR+=	offlineimap
+SUBDIR+=	p5-App-Siesh
 SUBDIR+=	p5-Catalyst-View-Email
 SUBDIR+=	p5-Email-Abstract
 SUBDIR+=	p5-Email-Address
 SUBDIR+=	p5-Email-Date
 SUBDIR+=	p5-Email-Date-Format
+SUBDIR+=	p5-Email-Find
 SUBDIR+=	p5-Email-Folder
 SUBDIR+=	p5-Email-FolderType
 SUBDIR+=	p5-Email-LocalDelivery
@@ -258,6 +259,7 @@ SUBDIR+=	qtools
 SUBDIR+=	queue-fix
 SUBDIR+=	queue-repair
 SUBDIR+=	rblcheck
+SUBDIR+=	re-alpine
 SUBDIR+=	relay-ctrl
 SUBDIR+=	ripmime
 SUBDIR+=	rmail-mime
@@ -269,7 +271,6 @@ SUBDIR+=	ruby-mime-types
 SUBDIR+=	ruby-tmail
 SUBDIR+=	safecat
 SUBDIR+=	sendmail
-SUBDIR+=	sendmail813
 SUBDIR+=	sendymail
 SUBDIR+=	serialmail
 SUBDIR+=	sigrot
@@ -293,7 +294,7 @@ SUBDIR+=	t-prot
 SUBDIR+=	teapop
 SUBDIR+=	thunderbird
 SUBDIR+=	thunderbird-bin-nightly
-SUBDIR+=	thunderbird-gtk1
+SUBDIR+=	thunderbird2
 SUBDIR+=	tmda
 SUBDIR+=	tnef
 SUBDIR+=	tnef2txt

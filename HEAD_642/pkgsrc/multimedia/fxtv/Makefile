@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.20 2008/11/10 17:21:37 wiz Exp $
+# $NetBSD: Makefile,v 1.22 2009/08/29 11:49:05 wiz Exp $
 
 DISTNAME=	fxtv-1.03
-PKGREVISION=	13
+PKGREVISION=	14
 CATEGORIES=	multimedia
 MASTER_SITES=	${HOMEPAGE}
 EXTRACT_SUFX=	.tgz
@@ -10,8 +10,11 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://people.freebsd.org/~rhh/fxtv/
 COMMENT=	TV display application for Brooktree 848 compatible TV cards
 
-USE_X11BASE=	YES
+PKG_DESTDIR_SUPPORT=	user-destdir
+
 USE_TOOLS+=	gmake
+
+INSTALLATION_DIRS=	${PKGMANDIR}/man1
 
 SUBST_CLASSES+=		ossaudio
 SUBST_MESSAGE.ossaudio=	Fixing path to audio device.

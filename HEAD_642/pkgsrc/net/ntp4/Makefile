@@ -1,10 +1,9 @@
-# $NetBSD: Makefile,v 1.59 2009/01/26 20:06:15 kefren Exp $
+# $NetBSD: Makefile,v 1.66 2009/12/15 10:53:20 tnn Exp $
 #
 
-DISTNAME=	ntp-4.2.4p6
+DISTNAME=	ntp-4.2.4p8
 CATEGORIES=	net time
-MASTER_SITES=	http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/	\
-		ftp://ftp.udel.edu/pub/ntp/ntp4/
+MASTER_SITES=	http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.ntp.org/
@@ -36,10 +35,11 @@ post-install:
 	${FIND} ${ALL_NTP_DOCS} -type f -print | ${XARGS} ${CHMOD} ${SHAREMODE}
 
 .include "../../mk/bsd.prefs.mk"
+.include "options.mk"
 
 PLIST_VARS+=	ntptime tickadj timetrim
 
-.if ${OPSYS} == "NetBSD" || ${OPSYS} == "DragonFly"
+.if ${OPSYS} == "NetBSD" || ${OPSYS} == "DragonFly" || ${OPSYS} == "Linux"
 PLIST.ntptime=		yes
 PLIST.tickadj=		yes
 .elif ${OPSYS} == "IRIX"
@@ -47,6 +47,17 @@ PLIST.timetrim=		yes
 .elif ${OPSYS} == "SunOS"
 PLIST.ntptime=		yes
 .endif
+
+# chroot jail support
+.if ${OPSYS} == "NetBSD"
+CONFIGURE_ARGS+=	--enable-clockctl
+.elif ${OPSYS} == "Linux" && exists(/usr/include/sys/capability.h)
+CONFIGURE_ARGS+=	--enable-linuxcaps
+.else
+# no chroot/privilege drop supported
+.endif
+
+CPPFLAGS.Linux+=	-D_GNU_SOURCE	# for struct in6_pktinfo
 
 .include "../../security/openssl/buildlink3.mk"
 

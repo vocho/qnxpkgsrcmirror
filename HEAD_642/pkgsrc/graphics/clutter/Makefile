@@ -1,9 +1,10 @@
-# $NetBSD: Makefile,v 1.3 2009/05/19 08:59:16 wiz Exp $
+# $NetBSD: Makefile,v 1.7 2009/11/21 01:34:18 obache Exp $
 #
 
-DISTNAME=	clutter-0.8.8
+DISTNAME=	clutter-1.0.8
 CATEGORIES=	graphics
-MASTER_SITES=	http://www.clutter-project.org/sources/clutter/0.8/
+MASTER_SITES=	http://www.clutter-project.org/sources/clutter/1.0/ \
+		${MASTER_SITE_GNOME:=sources/clutter/1.0/}
 
 MAINTAINER=	obache@NetBSD.org
 HOMEPAGE=	http://clutter-project.org/
@@ -22,13 +23,18 @@ PKGCONFIG_OVERRIDE+=	clutter/x11/clutter-x11.pc.in
 PKGCONFIG_OVERRIDE+=	clutter/win32/clutter-win32.pc.in
 PKGCONFIG_OVERRIDE+=	clutter.pc.in
 
+# Workaround for Upstream Bug#562310.
+# for more detail, see also PR#41475.
+TOOLS_NOOP+=	gtkdoc-rebase
+
 .include "options.mk"
 
 TEST_TARGET=	check
 
-BUILDLINK_API_DEPENDS.glib2+=	glib2>=2.14.0
+BUILDLINK_API_DEPENDS.glib2+=	glib2>=2.16.0
 .include "../../devel/glib2/buildlink3.mk"
-BUILDLINK_API_DEPENDS.pango+=	pango>=1.18.0
+BUILDLINK_API_DEPENDS.pango+=	pango>=1.20.0
 .include "../../devel/pango/buildlink3.mk"
+BUILDLINK_API_DEPENDS.json-glib+=	json-glib>=0.7.4
 .include "../../textproc/json-glib/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

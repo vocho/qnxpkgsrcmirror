@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.16 2006/03/04 21:30:04 jlam Exp $
+# $NetBSD: Makefile,v 1.18 2009/12/12 20:11:24 asau Exp $
 
 DISTNAME=		odepack-20001130
-PKGREVISION=		1
+PKGREVISION=		2
 CATEGORIES=		math
 MASTER_SITES=		${MASTER_SITE_LOCAL}
 
@@ -13,12 +13,14 @@ DEPENDS+=		linpack>=20010427:../../math/linpack
 NO_SRC_ON_FTP=		Already in MASTER_SITE_LOCAL
 USE_LANGUAGES=		fortran
 WRKSRC=			${WRKDIR}/odepack
+INSTALLATION_DIRS=	lib
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 pre-build:
 	${CP} ${FILESDIR}/Makefile ${WRKSRC}
 
 post-install:
-	${INSTALL_DATA_DIR} ${PREFIX}/share/doc/odepack
-	cd ${WRKSRC} && ${INSTALL_DATA} doc readme ${PREFIX}/share/doc/odepack
+	${INSTALL_DATA_DIR} ${DESTDIR}${PREFIX}/share/doc/odepack
+	cd ${WRKSRC} && ${INSTALL_DATA} doc readme ${DESTDIR}${PREFIX}/share/doc/odepack
 
 .include "../../mk/bsd.pkg.mk"

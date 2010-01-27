@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.86 2009/08/13 18:56:32 snj Exp $
+# $NetBSD: Makefile,v 1.89 2009/11/03 00:15:41 wiz Exp $
 
-DISTNAME=	gnutls-2.8.3
+DISTNAME=	gnutls-2.8.5
 CATEGORIES=	security devel
 MASTER_SITES=	ftp://ftp.gnutls.org/pub/gnutls/ \
 		ftp://ftp.gnupg.org/gcrypt/gnutls/ \
@@ -49,7 +49,7 @@ post-install:
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../devel/libcfg+/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"
-BUILDLINK_API_DEPENDS.libgcrypt+=	libgcrypt>=1.2.4
+BUILDLINK_API_DEPENDS.libgcrypt+=	libgcrypt>=1.4
 .include "../../security/libgcrypt/buildlink3.mk"
 BUILDLINK_API_DEPENDS.libtasn1+=	libtasn1>=0.3.4
 .include "../../security/libtasn1/buildlink3.mk"

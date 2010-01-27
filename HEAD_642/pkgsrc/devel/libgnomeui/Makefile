@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.83 2009/07/22 09:01:23 wiz Exp $
+# $NetBSD: Makefile,v 1.88 2009/12/01 10:38:04 drochner Exp $
 #
 
-DISTNAME=	libgnomeui-2.24.1
+DISTNAME=	libgnomeui-2.24.2
+PKGREVISION=	2
 CATEGORIES=	devel gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/libgnomeui/2.24/}
 EXTRACT_SUFX=	.tar.bz2
@@ -22,6 +23,10 @@ USE_LIBTOOL=		yes
 PKGCONFIG_BASE=		${WRKSRC}/libgnomeui/libgnomeui-2.0.pc
 PKGCONFIG_OVERRIDE=	${PKGCONFIG_BASE}.in
 
+# Workaround for Upstream Bug#562310.
+# for more detail, see also PR#41475.
+TOOLS_NOOP+=	gtkdoc-rebase
+
 BUILDLINK_API_DEPENDS.glib2=		glib2>=2.15.0
 BUILDLINK_API_DEPENDS.gtk2=		gtk2+>=2.14.0
 BUILDLINK_API_DEPENDS.libbonoboui=	libbonoboui>=2.13.1
@@ -35,7 +40,6 @@ post-configure:
 		${PKGCONFIG_BASE}.tmp
 	${MV} ${PKGCONFIG_BASE}.tmp ${PKGCONFIG_BASE}
 
-.include "../../audio/libaudiofile/buildlink3.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../devel/glib2/buildlink3.mk"
 .include "../../devel/GConf/buildlink3.mk"

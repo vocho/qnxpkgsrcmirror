@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.51 2009/08/01 15:33:46 tnn Exp $
+# $NetBSD: Makefile,v 1.55 2009/10/29 19:23:09 jakllsch Exp $
 #
 
-DISTNAME=	xorg-server-1.6.3
+DISTNAME=	xorg-server-1.6.5
 PKGNAME=	modular-${DISTNAME}
+PKGREVISION=	1
 CATEGORIES=	x11
 MASTER_SITES=	${MASTER_SITE_XORG:=xserver/}
 EXTRACT_SUFX=	.tar.bz2
@@ -46,6 +47,9 @@ CONFIGURE_ARGS+=	--with-vendor-name-short="pkgsrc"
 CONFIGURE_ARGS+=	--with-builder-addr="tech-x11@NetBSD.org"
 CONFIGURE_ARGS+=	--with-os-vendor="The NetBSD Foundation"
 .endif
+.if ${OPSYS} == "FreeBSD"
+CONFIGURE_ARGS+=	--without-dtrace
+.endif
 CONFIGURE_ARGS+=	--with-os-name=${MACHINE_PLATFORM:Q}
 CONFIGURE_ARGS+=	--with-vendor-web="http://www.pkgsrc.org/"
 
@@ -72,6 +76,12 @@ CONFIGURE_ENV+=		APP_MAN_SUFFIX=1 FILE_MAN_SUFFIX=5
 # Avoid to use bsd_kqueue_apm, force to use bsd_apm instead.
 .if ${OPSYS} == "NetBSD"
 CONFIGURE_ENV+=		ac_cv_header_sys_event_h=no
+.elif ${OPSYS} == "QNX"
+post-extract:
+	${CP} -r ${FILESDIR}/nto ${WRKSRC}/hw/xfree86/os-support/
+
+pre-configure:
+	cd ${WRKSRC} && ${PREFIX}/bin/autoreconf
 .endif
 
 INSTALLATION_DIRS+=	lib/xorg/modules/drivers lib/xorg/modules/input
@@ -88,11 +98,10 @@ BUILDLINK_API_DEPENDS.renderproto+=	renderproto>=0.9.3
 BUILDLINK_API_DEPENDS.xf86dgaproto+=	xf86dgaproto>=2.0.3
 BUILDLINK_API_DEPENDS.xf86driproto+=	xf86driproto>=2.0.4
 
-post-extract:
-	${CP} -r ${FILESDIR}/nto ${WRKSRC}/hw/xfree86/os-support/
-
-pre-configure:
-	cd ${WRKSRC} && ${PREFIX}/bin/autoreconf
+.include "../../mk/compiler.mk"
+.if empty(PKGSRC_COMPILER:Mgcc)
+CONFIGURE_ENV+=		ac_cv_path_RAWCPP="cc -E -Uunix -"
+.endif
 
 .include "options.mk"
 

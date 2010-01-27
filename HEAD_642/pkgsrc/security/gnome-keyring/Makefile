@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.47 2009/07/09 17:59:25 drochner Exp $
+# $NetBSD: Makefile,v 1.52 2009/12/15 14:52:03 drochner Exp $
 
-DISTNAME=	gnome-keyring-2.26.3
+DISTNAME=	gnome-keyring-2.28.2
 CATEGORIES=	security gnome
-MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gnome-keyring/2.26/}
+MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gnome-keyring/2.28/}
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
@@ -10,14 +10,6 @@ HOMEPAGE=	http://www.gnome.org/
 COMMENT=	GNOME password and secret manager
 
 PKG_DESTDIR_SUPPORT=	user-destdir
-
-PKG_OPTIONS_VAR=	PKG_OPTIONS.gnome-keyring
-PKG_SUPPORTED_OPTIONS+=	hal
-PKG_SUGGESTED_OPTIONS+=	hal
-.include "../../mk/bsd.options.mk"
-.if !empty(PKG_OPTIONS:Mhal)
-.include "../../sysutils/hal/buildlink3.mk"
-.endif
 
 USE_TOOLS+=		gmake intltool msgfmt pkg-config
 GNU_CONFIGURE=		YES
@@ -36,6 +28,10 @@ CFLAGS.HPUX+=		-DMAP_ANON=MAP_ANONYMOUS
 # The bug is described in PR security/39313
 #
 CFLAGS.NetBSD+=		-DNO_STATIC_MODULES
+
+# Workaround for Upstream Bug#562310.
+# for more detail, see also PR#41475.
+TOOLS_NOOP+=	gtkdoc-rebase
 
 .include "../../mk/dlopen.buildlink3.mk"
 

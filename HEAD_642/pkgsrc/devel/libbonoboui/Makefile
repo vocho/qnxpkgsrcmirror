@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.69 2009/07/22 09:01:23 wiz Exp $
+# $NetBSD: Makefile,v 1.73 2009/10/29 23:08:33 drochner Exp $
 #
 
-DISTNAME=	libbonoboui-2.24.1
+DISTNAME=	libbonoboui-2.24.2
+PKGREVISION=	1
 CATEGORIES=	devel gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/libbonoboui/2.24/}
 EXTRACT_SUFX=	.tar.bz2
@@ -19,6 +20,10 @@ USE_LIBTOOL=		yes
 
 PKGCONFIG_OVERRIDE=	bonobo/libbonoboui-2.0.pc.in
 
+# Workaround for Upstream Bug#562310.
+# for more detail, see also PR#41475.
+TOOLS_NOOP+=	gtkdoc-rebase
+
 BUILDLINK_API_DEPENDS.glib2+=		glib2>=2.14.0
 BUILDLINK_API_DEPENDS.gtk2+=		gtk2+>=2.6.0
 BUILDLINK_API_DEPENDS.libbonobo+=	libbonobo>=2.16.0
@@ -31,7 +36,6 @@ BUILDLINK_API_DEPENDS.libgnome+=	libgnome>=2.13.7
 .include "../../devel/libglade/buildlink3.mk"
 .include "../../devel/libgnome/buildlink3.mk"
 .include "../../devel/pango/buildlink3.mk"
-.include "../../graphics/libart/buildlink3.mk"
 .include "../../graphics/libgnomecanvas/buildlink3.mk"
 .include "../../sysutils/gnome-vfs/buildlink3.mk"
 .include "../../textproc/libxml2/buildlink3.mk"

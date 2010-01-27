@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.41 2009/07/22 10:00:17 wiz Exp $
+# $NetBSD: Makefile,v 1.43 2009/10/22 22:01:25 wiz Exp $
 #
 
 DISTNAME=	tin-1.9.4
+PKGREVISION=	1
 CATEGORIES=	news
 MASTER_SITES=	ftp://ftp.tin.org/pub/news/clients/tin/unstable/ \
 		ftp://ftp.cs.tu-berlin.de/pub/net/news/tin/unstable/
@@ -24,7 +25,7 @@ INSTALLATION_DIRS=	share/doc/tin
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 # for tinews.pl
-USE_TOOLS+=	perl:run yacc
+USE_TOOLS+=	msgfmt perl:run yacc
 REPLACE_PERL=	tools/*.pl
 BUILD_TARGET=	build
 

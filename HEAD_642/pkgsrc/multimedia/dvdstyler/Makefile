@@ -1,32 +1,34 @@
-# $NetBSD: Makefile,v 1.18 2009/08/10 16:58:59 wiz Exp $
+# $NetBSD: Makefile,v 1.23 2009/12/15 14:37:34 joerg Exp $
 #
 
-DISTNAME=	DVDStyler-1.5.1
-PKGREVISION=	1
+DISTNAME=	DVDStyler-1.7.4
 CATEGORIES=	multimedia
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=dvdstyler/}
+EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.dvdstyler.de/
 COMMENT=	Crossplatform DVD Authoring System
 
 PKG_DESTDIR_SUPPORT=	user-destdir
+MAKE_JOBS_SAFE=		no
 
 DEPENDS+=	dvdauthor>=0.6.10:../../multimedia/dvdauthor
 DEPENDS+=	dvd+rw-tools-[0-9]*:../../sysutils/dvd+rw-tools
 DEPENDS+=	mpgtx-[0-9]*:../../graphics/mpgtx
+BUILD_DEPENDS+=	xmlto-[0-9]*:../../textproc/xmlto
+BUILD_DEPENDS+=	zip-[0-9]*:../../archivers/zip
 
 USE_LANGUAGES=		c c++
 USE_PKGLOCALEDIR=	yes
 USE_TOOLS+=		gmake pkg-config msgfmt
 GNU_CONFIGURE=		yes
 
-CONFIGURE_ARGS+=	--disable-kde
-CONFIGURE_ARGS+=	--disable-gnome
-CONFIGURE_ARGS+=	--disable-libgnomeui
-
+.include "../../graphics/libexif/buildlink3.mk"
 .include "../../graphics/netpbm/buildlink3.mk"
 .include "../../graphics/wxsvg/buildlink3.mk"
+.include "../../multimedia/ffmpeg/buildlink3.mk"
 .include "../../multimedia/mjpegtools/buildlink3.mk"
 .include "../../x11/wxGTK28/buildlink3.mk"
+.include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../mk/bsd.pkg.mk"

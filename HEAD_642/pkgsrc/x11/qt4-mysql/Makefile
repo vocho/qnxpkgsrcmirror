@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.3 2009/07/07 18:04:13 joerg Exp $
+# $NetBSD: Makefile,v 1.6 2009/10/11 09:14:52 adam Exp $
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
@@ -21,7 +21,7 @@ SQLDRVDIR=	${QTPREFIX}/plugins/sqldrivers
 INSTALLATION_DIRS=	${SQLDRVDIR}
 
 do-install:
-	${LIBTOOL} ${INSTALL_DATA} ${WRKSRC}/plugins/sqldrivers/libqsqlmysql.la \
+	${LIBTOOL} --mode=install ${INSTALL_DATA} ${WRKSRC}/plugins/sqldrivers/libqsqlmysql.la \
 		${DESTDIR}${SQLDRVDIR}
 
 .include "../../x11/qt4-libs/buildlink3.mk"

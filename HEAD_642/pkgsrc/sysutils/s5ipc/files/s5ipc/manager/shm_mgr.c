@@ -47,7 +47,8 @@ static void *shmres_handle(void *arg)
 	return NULL;
 }
 
-static int msg_get(resmgr_context_t *ctp, shmmgr_get_t *msgget, struct _client_info *info)
+static int
+msg_get(resmgr_context_t *ctp, shmmgr_get_t *msgget, struct _client_info *info)
 {
 	struct shmid_ds_pool *sd;
 	int i, error, fd, spare;
@@ -57,7 +58,7 @@ static int msg_get(resmgr_context_t *ctp, shmmgr_get_t *msgget, struct _client_i
 	_mutex_lock(&shmid_array_mutex);
 	
 	if (msgget->i.key != IPC_PRIVATE) {
-		//see if the key related to a shmid already
+		/* see if the key related to a shmid already */
 		for (i = 0; i < shmid_array_total; i++) {
 			sd = &shmid_array[i];
 			if (sd->shmds.shm_perm.mode & SHMSEG_FREE) {
@@ -73,7 +74,7 @@ static int msg_get(resmgr_context_t *ctp, shmmgr_get_t *msgget, struct _client_i
 		}
 		
 		if (sd) {
-			// if the key is already exist
+			/* if the key already exists */
 			if ((error = ipcperm(info, &sd->shmds.shm_perm, msgget->i.flag & S_IPERMS)) != 0)
 			{
 				_mutex_unlock(&shmid_array_mutex);
@@ -102,7 +103,7 @@ static int msg_get(resmgr_context_t *ctp, shmmgr_get_t *msgget, struct _client_i
 		}
 	}
 		
-	// find a spare sd (we still have the mutex);
+	/* find a spare sd (we still have the mutex) */
 	if (spare == -1) {
 		for (i = 0; i < shmid_array_total; i++) {
 			sd = &shmid_array[i];
@@ -115,7 +116,7 @@ static int msg_get(resmgr_context_t *ctp, shmmgr_get_t *msgget, struct _client_i
 			sd = NULL;
 	
 			sd = realloc(shmid_array, (shmid_array_total + SHMID_ARRAY_GROW) * sizeof(*sd));
-			if (!sd) {
+			if (sd == NULL) {
 				_mutex_unlock(&shmid_array_mutex);
 				return errno;
 			}
@@ -131,7 +132,7 @@ static int msg_get(resmgr_context_t *ctp, shmmgr_get_t *msgget, struct _client_i
 	}
 	sd = &shmid_array[i];
 	
-	sprintf(buf, "%s/%d", PATH_SHM, i);
+	snprintf(buf, sizeof(buf), "%s/%d", PATH_SHM, i);
 #if 0
 	if ((fd = shm_open(buf, O_CREAT, (msgget->i.flag & S_IPERMS))) == -1 ||
 		ftruncate(fd, msgget->i.size) == -1 ) 
@@ -151,7 +152,7 @@ static int msg_get(resmgr_context_t *ctp, shmmgr_get_t *msgget, struct _client_i
 #endif
 	close(fd);
 
-	// set up the sd
+	/* set up the sd */
 	memset(sd, 0, sizeof(*sd));
 	sd->shmds.shm_perm.cuid = info->cred.euid;
 	sd->shmds.shm_perm.cgid = info->cred.egid;
@@ -164,7 +165,7 @@ static int msg_get(resmgr_context_t *ctp, shmmgr_get_t *msgget, struct _client_i
 	sd->key                 = msgget->i.key;
 	_mutex_unlock(&shmid_array_mutex);
 	
-	// reply to let client know the shmid
+	/* reply to let client know the shmid */
 	msgget->o.key     = msgget->i.key;
 	msgget->o.shmid   = i;
 	MsgReply(ctp->rcvid, EOK, &msgget->o, sizeof(msgget->o));
@@ -176,13 +177,14 @@ fail:
 	return errno;
 }
 
-static int shm_msg(resmgr_context_t *ctp, io_msg_t *pmsg, RESMGR_OCB_T *ocb)
+static int
+shm_msg(resmgr_context_t *ctp, io_msg_t *pmsg, RESMGR_OCB_T *ocb)
 {
 	union {
 		io_msg_t        hdr;
 		shmmgr_get_t    get;
 		shmmgr_attach_t attach;
-	    shmmgr_detach_t detach;
+		shmmgr_detach_t detach;
 		shmmgr_ctl_t    ctl;
 	} *msg = (void *)pmsg;
 	struct shmid_ds_pool *sd;
@@ -200,11 +202,11 @@ static int shm_msg(resmgr_context_t *ctp, io_msg_t *pmsg, RESMGR_OCB_T *ocb)
 	}
 	
 	switch (msg->hdr.i.subtype) {
-	  case _SHMMGR_GET:
+	case _SHMMGR_GET:
 		return msg_get(ctp, &msg->get, &info);
 		
-	  case _SHMMGR_ATTACH:
-	  case _SHMMGR_DETACH:
+	case _SHMMGR_ATTACH:
+	case _SHMMGR_DETACH:
 		if (msg->attach.i.shmid < 0 || msg->attach.i.shmid >= shmid_array_total) {
 			return EINVAL;
 		}
@@ -233,7 +235,7 @@ static int shm_msg(resmgr_context_t *ctp, io_msg_t *pmsg, RESMGR_OCB_T *ocb)
 		MsgReply(ctp->rcvid, EOK, &msg->attach.o, sizeof(msg->attach.o));
 		break;
 
-	  case _SHMMGR_CTL:
+	case _SHMMGR_CTL:
 		if (msg->ctl.i.shmid < 0 || msg->ctl.i.shmid >= shmid_array_total) {
 			return EINVAL;
 		}
@@ -286,16 +288,18 @@ int shm_resinit(dispatch_t *dpp)
 {
 	int ret;
 	
-    iofunc_func_init(_RESMGR_CONNECT_NFUNCS, &shm_connect, _RESMGR_IO_NFUNCS, &shm_io);
-    shm_io.msg = shm_msg;
+	iofunc_func_init(_RESMGR_CONNECT_NFUNCS, &shm_connect,
+	    _RESMGR_IO_NFUNCS, &shm_io);
+	shm_io.msg = shm_msg;
     
-    iofunc_attr_init(&shm_ioattr, 0666, 0, 0);
-    shm_resid = resmgr_attach(dpp, 0, PATH_SHMMGR, _FTYPE_ANY, 0, &shm_connect, &shm_io, &shm_ioattr);
-    if (shm_resid == -1) {
-    	return -1;
-    }
+	iofunc_attr_init(&shm_ioattr, 0666, 0, 0);
+	shm_resid = resmgr_attach(dpp, 0, PATH_SHMMGR, _FTYPE_ANY, 0,
+	    &shm_connect, &shm_io, &shm_ioattr);
+	if (shm_resid == -1) {
+		return -1;
+	}
     
-    if ((ret = pthread_create(0, 0, shmres_handle, dpp)) != EOK) {
+	if ((ret = pthread_create(NULL, NULL, shmres_handle, dpp)) != EOK) {
 		errno = ret;
 		resmgr_detach(dpp, shm_resid, _RESMGR_DETACH_ALL);
 		return -1;

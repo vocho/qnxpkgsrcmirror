@@ -1,13 +1,26 @@
-# $NetBSD: Makefile,v 1.19 2009/05/21 11:44:42 adam Exp $
+# $NetBSD: Makefile,v 1.23 2009/12/16 19:25:38 drochner Exp $
+
+DISTNAME=	sqlite-amalgamation-3.6.21
+PKGNAME=	${DISTNAME:S/sqlite-amalgamation/sqlite3/}
+CATEGORIES=	databases
+MASTER_SITES=	http://www.hwaci.com/sw/sqlite/ \
+		http://www.sqlite.org/
+
+MAINTAINER=	pkgsrc-users@NetBSD.org
+HOMEPAGE=	http://www.sqlite.org/
+COMMENT=	SQL Database Engine in a C Library
+LICENSE=	public-domain
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
-.include "Makefile.common"
+GNU_CONFIGURE=		yes
+USE_TOOLS+=		gmake
+USE_LIBTOOL=		yes
+WRKSRC=			${WRKDIR}/sqlite-${PKGVERSION_NOREV}
+
+PKGCONFIG_OVERRIDE+=	sqlite3.pc.in
 
 INSTALLATION_DIRS+=	${PKGMANDIR}/man1
-CONFIGURE_ARGS+=	--disable-tcl
-CONFIGURE_ENV+=		ac_cv_prog_TCLSH_CMD=""
-CONFIGURE_ARGS+=	--enable-load-extension
 CONFIGURE_ARGS+=	--with-readline-inc=
 
 # Uses dlopen and friends but doesn't use -ldl on Linux.

@@ -1,12 +1,10 @@
-# $NetBSD: Makefile,v 1.5 2009/08/11 13:15:36 drochner Exp $
+# $NetBSD: Makefile,v 1.10 2009/12/15 21:59:05 joerg Exp $
 #
 
-SVNREV=		629
-DISTNAME=	fuppes-r${SVNREV}
-PKGNAME=	${DISTNAME:S/r/0./}
+DISTNAME=	fuppes-0.640
 PKGREVISION=	2
 CATEGORIES=	multimedia
-MASTER_SITES=	http://www.invisible.ca/~jmcneill/distfiles/
+MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=fuppes/}
 
 MAINTAINER=	tech-multimedia@NetBSD.org
 HOMEPAGE=	http://fuppes.ulrich-voelkel.de/
@@ -21,12 +19,10 @@ USE_TOOLS+=	autoconf automake aclocal m4 autoreconf
 USE_LIBTOOL=	yes
 
 CONFIGURE_ARGS+=	--enable-video-transcoding
+CONFIGURE_ARGS+=	--enable-faad
+CONFIGURE_ARGS+=	--enable-mad
 
-SUBST_CLASSES+=		version
-SUBST_STAGE.version=	pre-patch
-SUBST_SED.version=	-e "s,UNKNOWN,${SVNREV},g"
-SUBST_FILES.version=	version.sh
-SUBST_MESSAGE.version=	Patching version script for non-SVN checkout builds.
+.include "options.mk"
 
 pre-configure:
 	cd ${WRKSRC} && autoreconf -i

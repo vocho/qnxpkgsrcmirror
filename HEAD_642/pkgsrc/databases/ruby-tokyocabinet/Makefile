@@ -1,13 +1,14 @@
-# $NetBSD: Makefile,v 1.16 2009/07/20 02:57:13 obache Exp $
+# $NetBSD: Makefile,v 1.18 2009/12/19 12:56:45 obache Exp $
 #
 
 DISTNAME=	tokyocabinet-ruby-1.29
 PKGNAME=	${RUBY_PKGPREFIX}-${DISTNAME:S/-ruby-/-/}
+PKGREVISION=	1
 CATEGORIES=	databases ruby
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=tokyocabinet/}
 
 MAINTAINER=	obache@NetBSD.org
-HOMEPAGE=	http://tokyocabinet.sourceforge.net/rubydoc/
+HOMEPAGE=	http://1978th.net/tokyocabinet/rubydoc/
 COMMENT=	Ruby binding of Tokyo Cabinet
 LICENSE=	gnu-lgpl-v2.1
 

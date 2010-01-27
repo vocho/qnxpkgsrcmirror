@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.4 2009/02/08 23:25:32 tonnerre Exp $
+# $NetBSD: Makefile,v 1.6 2009/11/17 18:46:15 apb Exp $
 
-DISTNAME=		facter-1.5.2
+DISTNAME=		facter-1.5.7
 PKGNAME=		${RUBY_PKGPREFIX}-${DISTNAME}
 CATEGORIES=		sysutils
 
 MAINTAINER=		tonnerre@NetBSD.org
 HOMEPAGE=		http://www.reductivelabs.com/projects/facter/
-MASTER_SITE=		http://reductivelabs.com/downloads/gems/
+MASTER_SITES=		http://reductivelabs.com/downloads/gems/
 COMMENT=		Cross-platform Ruby library for retrieving facts from OS
 
 GEM_BUILD=		gemspec

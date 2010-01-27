@@ -1,9 +1,8 @@
-# $NetBSD: Makefile,v 1.53 2009/08/12 02:31:20 obache Exp $
+# $NetBSD: Makefile,v 1.56 2009/10/30 16:57:53 drochner Exp $
 
-DISTNAME=		devhelp-0.23
-PKGREVISION=		2
+DISTNAME=		devhelp-2.28.1
 CATEGORIES=		devel x11
-MASTER_SITES=		${MASTER_SITE_GNOME:=sources/devhelp/0.23/}
+MASTER_SITES=		${MASTER_SITE_GNOME:=sources/devhelp/2.28/}
 EXTRACT_SUFX=		.tar.bz2
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
@@ -14,6 +13,7 @@ USE_TOOLS+=		gmake intltool msgfmt perl pkg-config
 USE_LIBTOOL=		yes
 USE_PKGLOCALEDIR=	yes
 USE_LANGUAGES=		c c++
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=		yes
 
@@ -23,19 +23,20 @@ GCONF_SCHEMAS=		devhelp.schemas
 .include "../../devel/GConf/schemas.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../devel/glib2/buildlink3.mk"
-.include "../../devel/libglade/buildlink3.mk"
 .include "../../devel/libwnck/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../www/webkit-gtk/buildlink3.mk"
+.include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../x11/gtk2/buildlink3.mk"
+.include "../../x11/libunique/buildlink3.mk"
 
 post-install:
-	${INSTALL_DATA_DIR} ${PREFIX}/share/examples/devhelp
+	${INSTALL_DATA_DIR} ${DESTDIR}${PREFIX}/share/examples/devhelp
 	${INSTALL_DATA} ${WRKSRC}/misc/devhelp.el ${WRKSRC}/misc/devhelp.vim \
-		${PREFIX}/share/examples/devhelp
-	${INSTALL_DATA_DIR} ${PREFIX}/share/doc/devhelp
+		${DESTDIR}${PREFIX}/share/examples/devhelp
+	${INSTALL_DATA_DIR} ${DESTDIR}${PREFIX}/share/doc/devhelp
 	cd ${WRKSRC} && ${INSTALL_DATA} AUTHORS COPYING ChangeLog README TODO \
-		${PREFIX}/share/doc/devhelp
+		${DESTDIR}${PREFIX}/share/doc/devhelp
 
 .include "../../mk/bsd.pkg.mk"

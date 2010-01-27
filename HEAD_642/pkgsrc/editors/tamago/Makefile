@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.21 2009/08/06 01:44:52 minskim Exp $
+# $NetBSD: Makefile,v 1.23 2009/08/17 16:05:32 taca Exp $
 
 DISTNAME=	tamago-4.0.6
 PKGNAME=	${EMACS_PKGNAME_PREFIX}tamago-20020909

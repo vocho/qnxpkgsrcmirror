@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.14 2009/07/22 09:01:21 wiz Exp $
+# $NetBSD: Makefile,v 1.16 2009/09/06 21:06:44 abs Exp $
 #
 
 PKGNAME=	libpurple-${PIDGIN_VERSION}
@@ -29,5 +29,6 @@ BUILD_DIRS=	m4macros libpurple po share/ca-certs share/sounds
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../devel/glib2/buildlink3.mk"
 .include "../../devel/GConf/schemas.mk"
+.include "../../devel/libidn/buildlink3.mk"
 .include "../../textproc/libxml2/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

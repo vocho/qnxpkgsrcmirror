@@ -1,24 +1,45 @@
-# $NetBSD: Makefile,v 1.7 2008/03/04 17:57:19 jlam Exp $
+# $NetBSD: Makefile,v 1.9 2009/12/07 09:24:46 fhajny Exp $
 #
 
-DISTNAME=	pfqueue-0.1.4
+DISTNAME=	pfqueue-0.5.6
 CATEGORIES=	mail
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=pfqueue/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://pfqueue.sourceforge.net/
 COMMENT=	Real-time queue scanner for postfix
+LICENSE=	gnu-gpl-v2
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=	yes
+USE_LIBTOOL=	yes
 INCOMPAT_CURSES=	NetBSD-1.*-*
 
-INSTALLATION_DIRS=	bin ${PKGMANDIR}/man1
+.include "options.mk"
 
-do-install:
-	${INSTALL_PROGRAM} ${WRKSRC}/pfqueue ${DESTDIR}${PREFIX}/bin
-	${INSTALL_MAN} ${WRKSRC}/pfqueue.1 ${DESTDIR}${PREFIX}/${PKGMANDIR}/man1
+INSTALLATION_DIRS=	bin ${PKGMANDIR}/man1 share/examples/pfqueue
+
+CONF_FILES=		share/examples/pfqueue/pfqueue.conf ${PKG_SYSCONFDIR}/pfqueue.conf
+
+CONFIGURE_ARGS+=	--enable-shared
+
+SUBST_CLASSES+=		make
+SUBST_MESSAGE.make=	Fixing Makefiles for shared lib
+SUBST_STAGE.make=	pre-configure
+SUBST_FILES.make=	backends/Makefile.in
+SUBST_FILES.make+=	libpfq/Makefile.in
+SUBST_SED.make+=	-e 's,-module,,'
+
+SUBST_CLASSES+=		conf
+SUBST_MESSAGE.conf=	Fixing path to config file
+SUBST_STAGE.conf=	post-patch
+SUBST_FILES.conf=	pfqconfig.c pfqueue.conf.5
+SUBST_SED.conf=		-e 's|@PKG_SYSCONFDIR@|${PKG_SYSCONFDIR}|g'
+
+post-install:
+	${INSTALL_DATA} ${FILESDIR}/pfqueue.conf ${DESTDIR}${PREFIX}/share/examples/pfqueue
 
 .include "../../devel/ncurses/buildlink3.mk"
+.include "../../textproc/libxml2/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

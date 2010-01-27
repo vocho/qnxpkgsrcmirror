@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.97 2009/07/22 09:01:24 wiz Exp $
+# $NetBSD: Makefile,v 1.101 2009/11/15 21:18:07 wiz Exp $
 #
 
-DISTNAME=		gedit-2.26.3
+DISTNAME=		gedit-2.28.2
 CATEGORIES=		editors gnome
-MASTER_SITES=		${MASTER_SITE_GNOME:=sources/gedit/2.26/}
+MASTER_SITES=		${MASTER_SITE_GNOME:=sources/gedit/2.28/}
 EXTRACT_SUFX=		.tar.bz2
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
@@ -21,6 +21,10 @@ GNU_CONFIGURE=		YES
 PKGCONFIG_OVERRIDE+=	data/gedit.pc.in
 
 GCONF_SCHEMAS=		gedit.schemas gedit-file-browser.schemas
+
+# Workaround for Upstream Bug#562310.
+# for more detail, see also PR#41475.
+TOOLS_NOOP+=	gtkdoc-rebase
 
 .include "options.mk"
 

@@ -1,10 +1,12 @@
-# $NetBSD: developer.mk,v 1.15 2008/11/05 08:21:56 rillig Exp $
+# $NetBSD: developer.mk,v 1.18 2009/08/23 18:09:45 joerg Exp $
 #
 # Public targets for developers:
 #
 # changes-entry-noupdate:
-#	Appends a correctly-formatted entry to the pkgsrc CHANGES file.
-#	The CHANGES file is presumed to be up to date and writable.
+#	Appends a correctly-formatted entry to the pkgsrc CHANGES file,
+#	and removes any TODO entries that were completed with this
+#	update from the TODO file.
+#	The CHANGES and TODO files are presumed to be up to date and writable.
 #	Note that the first assumption is often wrong and that the
 #	second is wrong for those that set CVSREAD.
 #
@@ -30,13 +32,22 @@
 #		is appended.
 #		The default is ${PKGSRCDIR}/doc/CHANGES-YYYY.
 #
+#	PKGSRC_TODO
+#		The path to the TODO file from which now possibly
+#		obsolete entries are removed
+#		The default is ${PKGSRCDIR}/TODO.
+#
+#	USE_NETBSD_REPO
+#		Explicitly use cvs.netbsd.org:/cvsroot for all cvs commands
+#		issues by changes-entry and co.
+#
 #	Example usage:
 #		% cd /usr/pkgsrc/category/package
 #		% make changes-entry CTYPE=Added
 #
 # changes-entry:
-#	Like changes-entry-noupdate, plus the CHANGES file is updated,
-#	and if not writable, "cvs edit" is done.
+#	Like changes-entry-noupdate, plus the CHANGES and TODO files
+#	are updated, and if not writable, "cvs edit" is done.
 #
 # commit-changes-entry:
 # cce:
@@ -51,10 +62,17 @@ NETBSD_LOGIN_NAME?=	${_NETBSD_LOGIN_NAME_cmd:sh}
 PKGSRC_CHANGES_DIR=	${PKGSRCDIR}/doc/
 PKGSRC_CHANGES_BASE=	CHANGES-${_CYEAR_cmd:sh}
 PKGSRC_CHANGES?=	${PKGSRC_CHANGES_DIR}/${PKGSRC_CHANGES_BASE}
+PKGSRC_TODO?=		${PKGSRC_CHANGES_DIR}/TODO
 
 _CYEAR_cmd=		${DATE} -u +%Y
 _CDATE_cmd=		${DATE} -u +%Y-%m-%d
 _NETBSD_LOGIN_NAME_cmd=	${ID} -nu
+
+USE_NETBSD_REPO?=	no
+
+.if !empty(USE_NETBSD_REPO:M[Yy][Ee][Ss])
+_NB_CVSROOT=	-d ${NETBSD_LOGIN_NAME:Q}@cvs.NetBSD.org:/cvsroot
+.endif
 
 .if !empty(CTYPE:tl:Mup*)				# updated
 _CE_MSG1=	Updated ${PKGPATH} to ${PKGVERSION}
@@ -89,17 +107,21 @@ _CE_MSG=	${_CE_MSG1} ${_CE_MSG2}
 
 # Targets for the update, add, commit elementary operations.
 changes-entry-update: .PHONY ce-error-check
-	@${STEP_MSG} "Updating ${PKGSRC_CHANGES:T}"
-	${RUN} cd ${PKGSRC_CHANGES_DIR} && cvs update ${PKGSRC_CHANGES:T}
-	${RUN} cd ${PKGSRC_CHANGES_DIR} && test -w ${PKGSRC_CHANGES:T} || cvs edit ${PKGSRC_CHANGES:T}
+	@${STEP_MSG} "Updating ${PKGSRC_CHANGES:T} and ${PKGSRC_TODO:T}"
+	${RUN} cd ${PKGSRC_CHANGES_DIR} && cvs ${_NB_CVSROOT} update ${PKGSRC_CHANGES:T} ${PKGSRC_TODO:T}
+	${RUN} cd ${PKGSRC_CHANGES_DIR} && test -w ${PKGSRC_CHANGES:T} || cvs ${_NB_CVSROOT} edit ${PKGSRC_CHANGES:T}
+	${RUN} cd ${PKGSRC_CHANGES_DIR} && test -w ${PKGSRC_TODO:T} || cvs ${_NB_CVSROOT} edit ${PKGSRC_TODO:T}
 
 changes-entry-add: .PHONY ce-error-check
 	@${STEP_MSG} "Adding the change"
 	${RUN} ${ECHO} "	"${_CE_MSG:Q} >> ${PKGSRC_CHANGES}
 
+todo-entry-remove:
+	${RUN} ${SH} ${PKGSRCDIR}/mk/scripts/remove_todo ${PKGSRC_TODO} ${PKGBASE} ${PKGVERSION}
+
 changes-entry-commit: .PHONY ce-error-check
 	@${STEP_MSG} "Committing the change"
-	${RUN} cd ${PKGSRC_CHANGES_DIR} && cvs commit -m ${_CE_MSG1:Q} ${PKGSRC_CHANGES:T}
+	${RUN} cd ${PKGSRC_CHANGES_DIR} && cvs ${_NB_CVSROOT} commit -m ${_CE_MSG1:Q} ${PKGSRC_CHANGES:T} ${PKGSRC_TODO:T}
 
 ce-error-check: .PHONY
 .if defined(_CE_ERRORS) && !empty(_CE_ERRORS:M*)
@@ -109,11 +131,11 @@ ce-error-check: .PHONY
 .endif
 
 # Public targets
-changes-entry-noupdate: .PHONY ce-error-check changes-entry-add
+changes-entry-noupdate: .PHONY ce-error-check changes-entry-add todo-entry-remove
 	@${DO_NADA}
 
-changes-entry: .PHONY ce-error-check changes-entry-update changes-entry-add
+changes-entry: .PHONY ce-error-check changes-entry-update changes-entry-add todo-entry-remove
 	@${DO_NADA}
 
-commit-changes-entry cce: .PHONY ce-error-check changes-entry-update changes-entry-add changes-entry-commit
+commit-changes-entry cce: .PHONY ce-error-check changes-entry-update changes-entry-add todo-entry-remove changes-entry-commit
 	@${DO_NADA}

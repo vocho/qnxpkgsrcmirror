@@ -1,4 +1,4 @@
-# $NetBSD: Makefile.common,v 1.126 2009/08/04 05:53:03 martti Exp $
+# $NetBSD: Makefile.common,v 1.134 2009/12/16 19:24:11 martti Exp $
 
 # used by editors/vim/Makefile
 # used by editors/vim-gtk/Makefile
@@ -27,14 +27,10 @@ SITES.vim-${VIM_VERSION}-lang.tar.gz+=	ftp://ftp.fu-berlin.de/misc/editors/vim/e
 PATCH_SITES=		ftp://ftp.vim.org/pub/editors/vim/patches/${VIM_VERSION}/
 PATCH_SITES+=		ftp://ftp.fu-berlin.de/misc/editors/vim/patches/${VIM_VERSION}/
 
-PATCHFILES+=		7.2.001-100.gz 7.2.101-200.gz
-PATCHFILES+=		7.2.201 7.2.202 7.2.203 7.2.204 7.2.205 7.2.206 7.2.207
-PATCHFILES+=		7.2.208 7.2.209 7.2.210 7.2.211 7.2.212 7.2.213 7.2.214
-PATCHFILES+=		7.2.215 7.2.216 7.2.217 7.2.218 7.2.219 7.2.220 7.2.221
-PATCHFILES+=		7.2.222 7.2.223 7.2.224 7.2.225 7.2.226 7.2.227 7.2.228
-PATCHFILES+=		7.2.229 7.2.230 7.2.231 7.2.232 7.2.233 7.2.234 7.2.235
-PATCHFILES+=		7.2.236 7.2.237 7.2.238 7.2.239 7.2.240 7.2.241 7.2.242
-PATCHFILES+=		7.2.243 7.2.244 7.2.245
+PATCHFILES+=		7.2.001-100.gz 7.2.101-200.gz 7.2.201-300.gz
+PATCHFILES+=		7.2.301 7.2.302 7.2.303 7.2.304 7.2.305 7.2.306 7.2.307
+PATCHFILES+=		7.2.308 7.2.309 7.2.310 7.2.311 7.2.312 7.2.313 7.2.314
+PATCHFILES+=		7.2.315 7.2.316 7.2.317 7.2.318 7.2.319 7.2.320
 
 MAINTAINER=		martti@NetBSD.org
 HOMEPAGE=		http://www.vim.org/
@@ -57,6 +53,7 @@ CONFIGURE_ARGS+=	--with-modified-by="${MAINTAINER}"
 # files (and PLIST might not include all files) so use at your own risk!
 CONFIGURE_ARGS+=	${VIM_EXTRA_OPTS}
 CONFIGURE_ARGS+=	--enable-multibyte
+CONFIGURE_ARGS+=	--enable-cscope
 
 PATCH_ARGS=		-d ${WRKDIR}/${VIM_SUBDIR} --forward --quiet \
 				-E ${PATCH_STRIP:Q}
@@ -75,15 +72,10 @@ ALTERNATIVES_SRC=	${.CURDIR}/../../editors/vim-share/ALTERNATIVES
 ALTERNATIVES_SRC=
 .endif
 
-PKG_SUPPORTED_OPTIONS+=	cscope ruby
+PKG_SUPPORTED_OPTIONS+=	ruby
 PKG_OPTIONS_VAR=	PKG_OPTIONS.vim
 
 .include "../../mk/bsd.options.mk"
-
-.if !empty(PKG_OPTIONS:Mcscope)
-DEPENDS+=		cscope-[0-9]*:../../devel/cscope
-CONFIGURE_ARGS+=	--enable-cscope
-.endif
 
 .if !empty(PKG_OPTIONS:Mruby)
 .include "../../lang/ruby/buildlink3.mk"

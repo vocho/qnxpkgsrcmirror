@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.23 2009/02/08 00:01:35 cube Exp $
+# $NetBSD: Makefile,v 1.26 2009/11/09 12:46:54 joerg Exp $
 
 DISTNAME=	xtide-2.8.3
 PKGREVISION=	2
@@ -15,7 +15,7 @@ USE_LANGUAGES=	c c++
 
 HARMONICS_FILE=	harmonics-dwf-20060708.tcd
 
-CONFIGURE_ARGS+=--sysconfdir=${PKG_SYSCONFDIR:Q}
+CONFIGURE_ARGS+=--sysconfdir=${PKG_SYSCONFDIR:Q} X11BASE=${X11BASE:Q}
 EGDIR=		${PREFIX}/share/examples/xtide
 CONF_FILES=	${EGDIR}/xtide.conf ${PKG_SYSCONFDIR}/xtide.conf
 
