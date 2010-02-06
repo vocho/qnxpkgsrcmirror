@@ -99,6 +99,8 @@ GAMEMODE=		2555
 GAMEDIRMODE=		0775
 .endif
 
+PAM_DEFAULT?=		openpam
+
 PREFER.zlib?=		pkgsrc
 PREFER.bzip2?=		pkgsrc
 PREFER.curses?=		pkgsrc
