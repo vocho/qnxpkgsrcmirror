@@ -49,6 +49,10 @@ PLIST_SRC+=		${PKGDIR}/PLIST
 
 .include "options.mk"
 
+# To bring in the pkgsrc one in the configure script
+CFLAGS.QNX+=-Diconv_open=libiconv_open -D__NO_EXT_QNX
+LIBS.QNX+=-lnbutil
+
 post-patch:
 	cd ${WRKSRC}/contrib \
 	&& ${CP} -p mod_wrap.c mod_wrap.c.orig \
