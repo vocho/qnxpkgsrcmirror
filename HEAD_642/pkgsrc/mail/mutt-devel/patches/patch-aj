@@ -1,13 +1,13 @@
 $NetBSD$
 
---- buffy.c.orig	2009-06-02 17:16:26.000000000 +0000
-+++ buffy.c
-@@ -145,7 +145,7 @@ void mutt_buffy_cleanup (const char *buf
-     if (tmp && !tmp->new)
-       mutt_update_mailbox (tmp);
-   }
--  else
-+  else if (buf != NULL)
-   {
-     /* fix up the times so buffy won't get confused */
-     if (st->st_mtime > st->st_atime)
+--- commands.c.orig	2009-06-12 23:38:52.000000000 +0000
++++ commands.c
+@@ -862,7 +862,7 @@ int mutt_save_message (HEADER *h, int de
+     mx_close_mailbox (&ctx, NULL);
+ 
+     if (need_buffy_cleanup)
+-      mutt_buffy_cleanup (ctx.path, &st);
++      mutt_buffy_cleanup (buf, &st);
+ 
+     mutt_clear_error ();
+     return (0);
