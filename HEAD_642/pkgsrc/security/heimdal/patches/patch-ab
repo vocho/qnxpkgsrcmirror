@@ -1,0 +1,23 @@
+$NetBSD$
+
+--- appl/telnet/telnetd/sys_term.c.orig	2008-01-24 13:10:17.000000000 +0000
++++ appl/telnet/telnetd/sys_term.c
+@@ -124,6 +124,9 @@ char	wtmpf[]	= "/etc/wtmp";
+ #ifdef HAVE_LIBUTIL_H
+ #include <libutil.h>
+ #endif
++#ifdef __QNXNTO__
++#include <unix.h> /* openpty */
++#endif
+ 
+ # ifndef	TCSANOW
+ #  ifdef TCSETS
+@@ -1004,7 +1007,7 @@ int cleanopen(char *line)
+     return(t);
+ }
+ 
+-#if !defined(BSD4_4)
++#if !defined(BSD4_4) && !defined(__QNXNTO__)
+ 
+ int login_tty(int t)
+ {
