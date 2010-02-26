@@ -24,6 +24,13 @@ JAVA_WRAPPERS=		appletviewer jar java javac javadoc javah javakey \
 UNLIMIT_RESOURCES=        datasize
 LIBS+= -lltdl
 
+.if ${OPSYS} == "QNX"
+pre-configure:
+	cp -c ${FILESDIR}/config/i386/qnx6/* ${WRKSRC}/config/i386/qnx6
+LIBS+= -lsocket
+.endif
+
+
 .include "../../devel/gettext-lib/buildlink3.mk"
 
 post-install:

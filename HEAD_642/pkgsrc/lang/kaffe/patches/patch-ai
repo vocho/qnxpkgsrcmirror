@@ -1,0 +1,22 @@
+$NetBSD$
+
+--- kaffe/kaffevm/kaffe-gc/gc-mem.c.orig	2005-12-18 17:54:32.000000000 +0000
++++ kaffe/kaffevm/kaffe-gc/gc-mem.c
+@@ -1020,7 +1020,7 @@ pagealloc(size_t size)
+ 
+ #define	CHECK_OUT_OF_MEMORY(P)	if ((P) == 0) return 0;
+ 
+-#if defined(HAVE_SBRK) && !defined(DARWIN)
++#if defined(HAVE_SBRK) && !(defined(DARWIN) || defined(__QNXNTO__))
+ 
+ 	/* Our primary choice for basic memory allocation is sbrk() which
+ 	 * should avoid any unsee space overheads.
+@@ -1072,7 +1072,7 @@ pagealloc(size_t size)
+ }
+ 
+ /* Free memory allocated with pagealloc */
+-#ifdef HAVE_SBRK
++#if defined(HAVE_SBRK) && !(defined(DARWIN) || defined(__QNXNTO__))
+ static void pagefree(uintp base UNUSED, size_t size)
+ {
+ 	sbrk((intp)-size);
