@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.29 2008/09/25 14:02:09 wiz Exp $
+# $NetBSD: Makefile,v 1.31 2010/02/07 21:04:13 heinz Exp $
 
 DISTNAME=	lbreakout2-2.5.2
 PKGREVISION=	7
@@ -8,6 +8,7 @@ MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=lgames/}
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://lgames.sourceforge.net/
 COMMENT=	Breakout-style arcade game
+LICENSE=	gnu-gpl-v2
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
@@ -28,7 +29,7 @@ SUBST_SED.sunpro=	-e 's,^inline ,,'
 .endif
 
 CONF_FILES_PERMS+=	/dev/null ${VARBASE}/games/lbreakout2.hscr \
-			${ROOT_USER} games 664
+			${REAL_ROOT_USER} games 664
 
 .include "../../audio/SDL_mixer/buildlink3.mk"
 .include "../../graphics/png/buildlink3.mk"

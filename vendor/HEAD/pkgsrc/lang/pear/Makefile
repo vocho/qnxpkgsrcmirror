@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.11 2009/10/29 08:29:03 seb Exp $
+# $NetBSD: Makefile,v 1.13 2010/03/15 16:50:15 taca Exp $
 #
 
 DISTNAME=	PEAR-1.9.0
@@ -18,11 +18,7 @@ USE_TOOLS+=	gzcat
 
 .include "../../lang/php/phpversion.mk"
 
-.if ${PKG_PHP_VERSION} == "4"
-CONFLICTS+=	php<4.4.6nb1
-.elif ${PKG_PHP_VERSION} == "5"
 CONFLICTS+=	php<5.2.1nb2
-.endif
 
 CONF_FILES=	${PREFIX}/share/examples/pear/pear.conf \
 		${PKG_SYSCONFDIR}/pear.conf
@@ -89,17 +85,13 @@ do-build:
 	${CP} ${CONSOLE_WRKSRC}/Console/Getopt.php ${BUNDLE}
 
 do-install:
-	${PREFIX}/bin/php ${DESTDIR}${WRKSRC}/install/go-pear.php local
+	${PREFIX}/bin/php ${WRKSRC}/install/go-pear.php local
 	${INSTALL_SCRIPT} ${WRKSRC}/pear.sh ${DESTDIR}${PREFIX}/bin/pear
 	${INSTALL_DATA} ${WRKSRC}/pear.conf \
 		${DESTDIR}${PREFIX}/share/examples/pear/pear.conf
 
 .include "${PHPPKGSRCDIR}/buildlink3.mk"
 
-.if ${PKG_PHP_VERSION} == "4"
-BUILDLINK_API_DEPENDS.php+=	php>=4.4.6nb1
-.elif ${PKG_PHP_VERSION} == "5"
 BUILDLINK_API_DEPENDS.php+=	php>=5.2.1nb2
-.endif
 
 .include "../../mk/bsd.pkg.mk"

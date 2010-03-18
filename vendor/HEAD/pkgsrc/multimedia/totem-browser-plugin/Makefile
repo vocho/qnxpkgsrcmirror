@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.6 2009/09/13 11:22:58 tnn Exp $
+# $NetBSD: Makefile,v 1.8 2010/02/10 19:17:43 joerg Exp $
 #
 
 PKG_DESTDIR_SUPPORT=	user-destdir
@@ -6,7 +6,7 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 .include "../../multimedia/totem/Makefile.common"
 
 PKGNAME=	${DISTNAME:S/totem/totem-browser-plugin/}
-PKGREVISION=	2
+PKGREVISION=	3
 
 # override Makefile.common
 PLIST_SRC=      ${.CURDIR}/PLIST
@@ -34,5 +34,6 @@ BUILDLINK_API_DEPENDS.shared-mime-info+=	shared-mime-info>=0.22
 .include "../../multimedia/gst-plugins0.10-base/buildlink3.mk"
 .include "../../multimedia/gst-plugins0.10-good/buildlink3.mk"
 .include "../../multimedia/gstreamer0.10/buildlink3.mk"
+.include "../../x11/libunique/buildlink3.mk"
 .include "../../x11/startup-notification/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

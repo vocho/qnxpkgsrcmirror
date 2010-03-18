@@ -1,4 +1,4 @@
-$NetBSD: distinfo,v 1.16 2007/07/31 10:12:00 joerg Exp $
+$NetBSD: distinfo,v 1.18 2010/02/22 21:58:47 wiz Exp $
 
 SHA1 (doomsrc.zip) = ffd07e0bd95b7c6ba0cd003fb6ff5ebd535d6f99
 RMD160 (doomsrc.zip) = c88e57b3cc72ca8bbfacbe138f8a3c69a13bf2e1

@@ -1,14 +1,13 @@
-# $NetBSD: Makefile,v 1.55 2009/12/15 12:42:04 wiz Exp $
+# $NetBSD: Makefile,v 1.59 2010/02/16 13:43:09 wiz Exp $
 
-DISTNAME=	openbox-3.4.8
+DISTNAME=	openbox-3.4.11
 CATEGORIES=	wm x11
-MASTER_SITES=	http://icculus.org/openbox/releases/
-# PR pkg/36489
-MASTER_SITES+=	http://offload1.icculus.org/openbox/releases/
+MASTER_SITES=	http://openbox.org/dist/openbox/
 
 MAINTAINER=	wiz@NetBSD.org
-HOMEPAGE=	http://icculus.org/openbox/
-COMMENT=	Standards compliant, light-weight and extensible window manager
+HOMEPAGE=	http://openbox.org/
+COMMENT=	Standards compliant, light-weight, and extensible window manager
+LICENSE=	gnu-gpl-v2
 
 DEPENDS+=		vera-ttf>=1.10:../../fonts/vera-ttf
 
@@ -32,6 +31,8 @@ OWN_DIRS+=		${PKG_SYSCONFDIR}/openbox
 EGDIR=			${PREFIX}/share/examples/openbox
 CONF_FILES=		${EGDIR}/menu.xml ${PKG_SYSCONFDIR}/openbox/menu.xml
 CONF_FILES+=		${EGDIR}/rc.xml ${PKG_SYSCONFDIR}/openbox/rc.xml
+CONF_FILES+=		${EGDIR}/autostart.sh \
+			    ${PKG_SYSCONFDIR}/openbox/autostart.sh
 
 BUILDLINK_DEPMETHOD.libXt?=	build
 
@@ -39,6 +40,7 @@ BUILDLINK_DEPMETHOD.libXt?=	build
 .include "../../devel/glib2/buildlink3.mk"
 .include "../../devel/pango/buildlink3.mk"
 .include "../../textproc/libxml2/buildlink3.mk"
+.include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../x11/libSM/buildlink3.mk"
 .include "../../x11/libX11/buildlink3.mk"
 .include "../../x11/libXcursor/buildlink3.mk"

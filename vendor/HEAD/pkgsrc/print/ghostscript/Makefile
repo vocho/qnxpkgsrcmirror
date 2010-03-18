@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.71 2009/11/02 00:00:31 gdt Exp $
+# $NetBSD: Makefile,v 1.76 2010/03/11 12:53:52 drochner Exp $
 
-DISTNAME=	ghostscript-8.70
+DISTNAME=	ghostscript-8.71
 PKGREVISION=	1
 CATEGORIES=	print
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=ghostscript/}
-EXTRACT_SUFX=	.tar.bz2
+MASTER_SITES+=	http://ghostscript.com/releases/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://ghostscript.sourceforge.net/
@@ -38,6 +38,7 @@ GS_RESOURCEDIR=		${PREFIX}/share/ghostscript/${PKGVERSION}/Resource
 CPPFLAGS+=		-Ijpeg
 
 .include "../../mk/bsd.prefs.mk"
+.include "../../mk/compiler.mk"
 
 .if defined(PAPERSIZE) && (${PAPERSIZE} == "A4" || ${PAPERSIZE} == "a4")
 CFLAGS+=		-DA4
@@ -58,9 +59,9 @@ CONFIGURE_ENV+=		ac_cv_func_fopen64=no
 # On Linux-*-x86_64, there was an error message:
 # gp_unix.o: relocation R_X86_64_32 against `a local symbol' can not be
 # used when making a shared object; recompile with -fPIC
-CFLAGS.NetBSD=		-fPIC
-CFLAGS.Linux=		-fPIC
-CFLAGS.SunOS=		-fPIC
+.if !empty(PKGSRC_COMPILER:Mgcc)
+CFLAGS+=		-fPIC
+.endif
 
 # Interim IRIX build fix, the real problem is that fontconfig.pc doesn't
 # require linking against libiconv when it should do so.
@@ -75,6 +76,7 @@ post-extract:
 	${MKDIR} ${WRKSRC}/obj
 #	${MV} ${WRKSRC}/jasper ${WRKSRC}/jasper.dontuse
 	${MV} ${WRKSRC}/libpng ${WRKSRC}/libpng.dontuse
+	${MV} ${WRKSRC}/tiff ${WRKSRC}/tiff.dontuse
 #	${MV} ${WRKSRC}/zlib ${WRKSRC}/zlib.dontuse
 
 post-install:
@@ -84,6 +86,7 @@ post-install:
 
 .include "../../print/libpaper/buildlink3.mk"
 .include "../../graphics/png/buildlink3.mk"
+.include "../../graphics/tiff/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"
 # pkgsrc jasper is too new
 #.include "../../graphics/jasper/buildlink3.mk"

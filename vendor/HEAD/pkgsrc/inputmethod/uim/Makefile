@@ -1,10 +1,11 @@
-# $NetBSD: Makefile,v 1.38 2009/08/26 19:58:45 sno Exp $
+# $NetBSD: Makefile,v 1.41 2010/02/14 08:41:36 obache Exp $
 #
 
 .include "../../inputmethod/uim/Makefile.common"
 
-PKGREVISION=		1
 COMMENT=		Multilingual input method library
+
+CONFLICTS+=		uim-qt4-immodule-[0-9]*
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
@@ -19,8 +20,6 @@ CONFIGURE_ARGS+=	--with-libgcroots=installed
 
 .include "options.mk"
 
-# XXXUEBAYASI why is readline a must?
-
 PLIST_VARS+=		editline
 CHECK_BUILTIN.readline:=	yes
 .include "../../devel/readline/builtin.mk"
@@ -32,8 +31,9 @@ PLIST.editline=		yes
 CONFIGURE_ARGS+=	--with-libedit=no
 .endif
 
+INSTALLATION_DIRS+=	share/doc/uim
+
 post-install:
-	${INSTALL_DATA_DIR} ${DESTDIR}${PREFIX}/share/doc/uim
 	${INSTALL_DATA} ${WRKSRC}/README ${DESTDIR}${PREFIX}/share/doc/uim
 	${INSTALL_DATA} ${WRKSRC}/doc/COMPATIBILITY ${DESTDIR}${PREFIX}/share/doc/uim
 	${INSTALL_DATA} ${WRKSRC}/doc/CUSTOM ${DESTDIR}${PREFIX}/share/doc/uim
@@ -44,11 +44,9 @@ post-install:
 	${INSTALL_DATA} ${WRKSRC}/doc/PLUGIN ${DESTDIR}${PREFIX}/share/doc/uim
 	${INSTALL_DATA} ${WRKSRC}/doc/UIM-SCM ${DESTDIR}${PREFIX}/share/doc/uim
 	${INSTALL_DATA} ${WRKSRC}/doc/UIM-SH ${DESTDIR}${PREFIX}/share/doc/uim
-	${INSTALL_DATA_DIR} ${DESTDIR}${PREFIX}/share/doc/uim/uim-fep
-	${INSTALL_DATA} ${WRKSRC}/fep/README ${DESTDIR}${PREFIX}/share/doc/uim/uim-fep
-	${INSTALL_DATA} ${WRKSRC}/fep/README.ja ${DESTDIR}${PREFIX}/share/doc/uim/uim-fep
 
 .include "../../converters/libiconv/buildlink3.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../devel/libgcroots/buildlink3.mk"
+.include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../mk/bsd.pkg.mk"

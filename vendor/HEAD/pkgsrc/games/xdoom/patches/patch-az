@@ -1,4 +1,4 @@
-$NetBSD: patch-az,v 1.2 2007/07/31 10:12:00 joerg Exp $
+$NetBSD: patch-az,v 1.4 2010/02/22 21:58:48 wiz Exp $
 
 --- sndserv/wadread.c.orig	1997-01-30 19:54:23.000000000 +0000
 +++ sndserv/wadread.c

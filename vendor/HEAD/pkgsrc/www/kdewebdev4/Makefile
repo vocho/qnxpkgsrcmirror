@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.2 2009/10/11 08:13:39 markd Exp $
+# $NetBSD: Makefile,v 1.5 2010/01/27 10:38:40 markd Exp $
 
 DISTNAME=	kdewebdev-${_KDE_VERSION}
 CATEGORIES=	www

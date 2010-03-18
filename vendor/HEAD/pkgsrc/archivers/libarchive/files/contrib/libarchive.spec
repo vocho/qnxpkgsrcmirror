@@ -1,4 +1,4 @@
-# $Revision: 1.1.1.1 $, $Date: 2007/11/30 21:25:32 $
+# $LastChangedRevision: 8 $, $LastChangedDate: 2008-05-01 00:11:33 +0200 (Thu, 01 May 2008) $
 Summary:        Library to create and read several different archive formats
 Summary(pl):    Biblioteka do tworzenia i odczytu ró¿nych formatów archiwów
 Name:           libarchive
@@ -115,8 +115,8 @@ rm -fr %buildroot
 All persons listed below can be reached at <cvs_login>@pld-linux.org
 
 $Log: libarchive.spec,v $
-Revision 1.1.1.1  2007/11/30 21:25:32  joerg
-Import libarchive-2.4.0
+Revision 1.4  2010/03/14 18:39:08  joerg
+Merge.
 
 Release 1  2006/12/12 rm1023@dcx.com
 - added libarchive-0123457890.patch for "0123457890" error

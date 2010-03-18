@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.4 2009/06/14 18:17:25 joerg Exp $
+@comment $NetBSD: PLIST,v 1.6 2010/03/10 14:06:55 obache Exp $
 bin/pygmentize
 ${PYSITELIB}/${EGG_INFODIR}/PKG-INFO
 ${PYSITELIB}/${EGG_INFODIR}/SOURCES.txt
@@ -63,6 +63,9 @@ ${PYSITELIB}/pygments/lexer.pyo
 ${PYSITELIB}/pygments/lexers/__init__.py
 ${PYSITELIB}/pygments/lexers/__init__.pyc
 ${PYSITELIB}/pygments/lexers/__init__.pyo
+${PYSITELIB}/pygments/lexers/_asybuiltins.py
+${PYSITELIB}/pygments/lexers/_asybuiltins.pyc
+${PYSITELIB}/pygments/lexers/_asybuiltins.pyo
 ${PYSITELIB}/pygments/lexers/_clbuiltins.py
 ${PYSITELIB}/pygments/lexers/_clbuiltins.pyc
 ${PYSITELIB}/pygments/lexers/_clbuiltins.pyo
@@ -99,6 +102,9 @@ ${PYSITELIB}/pygments/lexers/math.pyo
 ${PYSITELIB}/pygments/lexers/other.py
 ${PYSITELIB}/pygments/lexers/other.pyc
 ${PYSITELIB}/pygments/lexers/other.pyo
+${PYSITELIB}/pygments/lexers/parsers.py
+${PYSITELIB}/pygments/lexers/parsers.pyc
+${PYSITELIB}/pygments/lexers/parsers.pyo
 ${PYSITELIB}/pygments/lexers/special.py
 ${PYSITELIB}/pygments/lexers/special.pyc
 ${PYSITELIB}/pygments/lexers/special.pyo
@@ -150,6 +156,9 @@ ${PYSITELIB}/pygments/styles/fruity.pyo
 ${PYSITELIB}/pygments/styles/manni.py
 ${PYSITELIB}/pygments/styles/manni.pyc
 ${PYSITELIB}/pygments/styles/manni.pyo
+${PYSITELIB}/pygments/styles/monokai.py
+${PYSITELIB}/pygments/styles/monokai.pyc
+${PYSITELIB}/pygments/styles/monokai.pyo
 ${PYSITELIB}/pygments/styles/murphy.py
 ${PYSITELIB}/pygments/styles/murphy.pyc
 ${PYSITELIB}/pygments/styles/murphy.pyo

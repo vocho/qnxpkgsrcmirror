@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.107 2009/12/07 01:29:42 wiz Exp $
+# $NetBSD: Makefile,v 1.111 2010/03/16 15:18:01 taca Exp $
 #
 
 COMMENT=	Clocks, calendars, daily planners and other time related applications
@@ -68,6 +68,7 @@ SUBDIR+=	p5-DateTime-Locale
 SUBDIR+=	p5-DateTime-Precise
 SUBDIR+=	p5-DateTime-Set
 SUBDIR+=	p5-DateTime-TimeZone
+SUBDIR+=	p5-DateTime-TimeZone-HPUX
 SUBDIR+=	p5-DateTimeX-Easy
 SUBDIR+=	p5-MooseX-Types-DateTime
 SUBDIR+=	p5-MooseX-Types-DateTime-ButMaintained
@@ -96,6 +97,7 @@ SUBDIR+=	pcal
 SUBDIR+=	pclock
 SUBDIR+=	pear-Date
 SUBDIR+=	phoon
+SUBDIR+=	php-calendar
 SUBDIR+=	plan
 SUBDIR+=	planner
 SUBDIR+=	polclock
@@ -123,6 +125,7 @@ SUBDIR+=	wmclockmon
 SUBDIR+=	wmfishtime
 SUBDIR+=	wmmoonclock
 SUBDIR+=	wmtime
+SUBDIR+=	wmzcalock
 SUBDIR+=	wxRemind
 SUBDIR+=	wyrd
 SUBDIR+=	xalarm
@@ -135,6 +138,7 @@ SUBDIR+=	xfce4-datetime-plugin
 SUBDIR+=	xfce4-orage
 SUBDIR+=	xfce4-timer-plugin
 SUBDIR+=	xonclock
+SUBDIR+=	xtide
 SUBDIR+=	xtimer
 SUBDIR+=	xtu
 SUBDIR+=	zonetab

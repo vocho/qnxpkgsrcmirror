@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.20 2009/08/20 15:24:58 jwise Exp $
+# $NetBSD: Makefile,v 1.22 2010/03/04 21:40:29 spz Exp $
 #
 
 DISTNAME=	i2cb-6.0_ALPHA
@@ -33,6 +33,6 @@ do-install:
 		${WRKSRC}/contrib/echofile \
 		${DESTDIR}${PREFIX}/libdata/i2cb
 
-.include "../../lang/tcl83/buildlink3.mk"
+.include "../../lang/tcl/buildlink3.mk"
 .include "../../devel/readline/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

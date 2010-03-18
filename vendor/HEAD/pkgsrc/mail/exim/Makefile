@@ -1,20 +1,20 @@
-# $NetBSD: Makefile,v 1.97 2009/12/07 14:29:09 adam Exp $
+# $NetBSD: Makefile,v 1.100 2010/01/31 21:06:29 heinz Exp $
 
 DISTNAME=	exim-4.71
+PKGREVISION=	1
 CATEGORIES=	mail net
 MASTER_SITES=	ftp://ftp.exim.org/pub/exim/exim4/ \
-		ftp://ftp.csx.cam.ac.uk/pub/software/email/exim/exim4/ \
-		ftp://ftp.esat.net/pub/networking/mail/mta/exim/exim4/
+	http://dl.ambiweb.de/mirrors/ftp.exim.org/exim/exim4/
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	abs@NetBSD.org
 HOMEPAGE=	http://www.exim.org/
 COMMENT=	The Exim mail transfer agent, a replacement for sendmail
+LICENSE=	gnu-gpl-v2
 
 CONFLICTS+=	exim-exiscan-[0-9]*
 
 USE_TOOLS+=	perl:run
-INSTALLATION_DIRS+=	${PKGMANDIR}/man8
 BUILD_DEFS+=	VARBASE
 
 MAKE_ENV+=	SSLBASE=${SSLBASE:Q}
@@ -22,7 +22,7 @@ MAKE_ENV+=	INST_CHOWN=${CHOWN:Q}
 MAKE_FLAGS+=	FULLECHO=''
 MAKE_JOBS_SAFE=	no
 
-PKG_DESTDIR_SUPPORT =	destdir
+PKG_DESTDIR_SUPPORT =	user-destdir
 
 .include "../../mk/bsd.prefs.mk"
 
@@ -49,12 +49,23 @@ RCD_SCRIPTS=		exim
 
 OWN_DIRS_PERMS=		${VARBASE}/log/exim ${EXIM_USER} ${EXIM_GROUP} 0750
 OWN_DIRS_PERMS+=	${VARBASE}/spool/exim ${EXIM_USER} ${EXIM_GROUP} 0750
+SPECIAL_PERMS+=		sbin/${PKGSRC_EXIM_VERSION} ${SETUID_ROOT_PERMS}
 
 # XXX: The following will be handled by buildlink3 at some point.
 CFLAGS+=		${_STRIPFLAG_CC}
 
 # pay attention to CPPFLAGS as well
 CFLAGS+=		${CPPFLAGS}
+
+PKGSRC_EXIM_VERSION=	${DISTNAME}-1
+SUBST_CLASSES+=		exim
+SUBST_STAGE.exim=	pre-configure
+SUBST_MESSAGE.exim=	Faking exim version information in exim_install
+SUBST_FILES.exim=	scripts/exim_install
+SUBST_VARS.exim=	PKGSRC_EXIM_VERSION
+
+INSTALL_ARG=		INSTALL_ARG=-no_chown
+INSTALL_ENV+=		${INSTALL_ARG:Q}
 
 .include "options.mk"
 
@@ -105,11 +116,14 @@ post-build:
 	    ${FILESDIR}/mailer.conf.exim \
 	    > ${WRKDIR}/mailer.conf
 
-INSTALLATION_DIRS =	${PKGMANDIR}/man8 sbin share/examples/exim
+INSTALLATION_DIRS = ${PKGMANDIR}/man8 sbin share/examples/exim share/doc/exim
 
 post-install:
 	${INSTALL_DATA} ${WRKDIR}/mailer.conf ${DESTDIR}${EXAMPLESDIR}
-	${INSTALL_DATA} ${WRKSRC}/doc/exim.8 ${DESTDIR}${PREFIX}/${PKGMANDIR}/man8/exim.8
+	${INSTALL_DATA} ${WRKSRC}/doc/exim.8 \
+		${DESTDIR}${PREFIX}/${PKGMANDIR}/man8/exim.8
+	${INSTALL_DATA} ${WRKSRC}/doc/spec.txt \
+		${DESTDIR}${PREFIX}/share/doc/exim
 
 .include "../../converters/libiconv/buildlink3.mk"
 .include "../../devel/pcre/buildlink3.mk"

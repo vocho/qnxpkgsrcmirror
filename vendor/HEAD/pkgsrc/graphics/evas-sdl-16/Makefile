@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.5 2009/09/11 22:31:01 joerg Exp $
+# $NetBSD: Makefile,v 1.7 2010/01/18 09:58:58 wiz Exp $
 
 PKGNAME=	${DISTNAME:S/evas/evas-sdl-16/}
+PKGREVISION=	2
 
 COMMENT=	Evas 16-bit SDL engine
 

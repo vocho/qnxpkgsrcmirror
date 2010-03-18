@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.2 2009/10/11 08:13:40 markd Exp $
+# $NetBSD: Makefile,v 1.5 2010/01/27 10:38:41 markd Exp $
 
 DISTNAME=	kdelibs-experimental-${_KDE_VERSION}
 CATEGORIES=	x11

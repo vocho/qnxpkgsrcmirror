@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.22 2009/12/15 19:50:47 drochner Exp $
+# $NetBSD: Makefile,v 1.25 2010/02/22 17:19:09 drochner Exp $
 #
 
 DISTNAME=		pinentry-0.7.6
+PKGREVISION=		1
 CATEGORIES=		security
 MASTER_SITES=		ftp://ftp.gnupg.org/gcrypt/pinentry/
 
@@ -17,6 +18,12 @@ CONFIGURE_ARGS+=	--with-libiconv-prefix=${BUILDLINK_PREFIX.iconv}
 INFO_FILES=		yes
 
 .include "options.mk"
+
+.if defined(PINENTRY_DEFAULT)
+post-install:
+	cd ${DESTDIR}${PREFIX}/bin && \
+		${LN} -sf pinentry-${PINENTRY_DEFAULT} pinentry
+.endif
 
 BUILDLINK_API_DEPENDS.libgpg-error+=	libgpg-error>=1.0.0
 

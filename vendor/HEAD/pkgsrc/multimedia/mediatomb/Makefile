@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.12 2009/07/23 12:36:56 wiz Exp $
+# $NetBSD: Makefile,v 1.15 2010/01/18 23:38:31 tron Exp $
 
 DISTNAME=	mediatomb-0.11.0
-PKGREVISION=	6
+PKGREVISION=	8
 CATEGORIES=	multimedia
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=mediatomb/}
 
@@ -67,7 +67,7 @@ PREFER.bind=	pkgsrc	# we need the package for the lwres lib
 .include "../../devel/zlib/buildlink3.mk"
 .include "../../graphics/libexif/buildlink3.mk"
 .include "../../multimedia/ffmpeg/buildlink3.mk"
-.include "../../net/bind9/buildlink3.mk"
+.include "../../net/bind95/buildlink3.mk"
 .include "../../textproc/expat/buildlink3.mk"
 .include "../../www/curl/buildlink3.mk"
 

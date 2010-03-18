@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.73 2009/09/27 01:30:38 minskim Exp $
+# $NetBSD: Makefile,v 1.75 2010/02/10 19:17:35 joerg Exp $
 
-DISTNAME=	doxygen-1.6.1.src
+DISTNAME=	doxygen-1.6.2.src
 PKGNAME=	${DISTNAME:S/.src//}
 PKGREVISION=	1
 CATEGORIES=	devel

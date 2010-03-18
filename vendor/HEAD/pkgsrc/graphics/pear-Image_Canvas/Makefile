@@ -1,12 +1,13 @@
-# $NetBSD: Makefile,v 1.7 2009/07/17 18:00:16 adrianp Exp $
+# $NetBSD: Makefile,v 1.9 2010/02/06 15:49:18 taca Exp $
 
-DISTNAME=	Image_Canvas-0.2.4
-PKGREVISION=	1
+DISTNAME=	Image_Canvas-0.3.2
 CATEGORIES=	graphics
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://pear.php.net/package/Image_Color/
 COMMENT=	Common interface to image drawing, making image source code
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 CONFLICTS=	php-pear-Image_Canvas-[0-9]*
 

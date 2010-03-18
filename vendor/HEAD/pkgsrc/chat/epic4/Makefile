@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.30 2009/04/28 19:13:11 zafer Exp $
+# $NetBSD: Makefile,v 1.32 2010/02/26 10:28:30 wiz Exp $
 #
 
 DISTNAME=	epic4-2.2
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	chat
 MASTER_SITES=	ftp://ftp.epicsol.org/pub/epic/EPIC4-PRODUCTION/ \
 		ftp://ftp.freenet.de/pub/ftp.prbh.org/pub/epic/EPIC4-PRODUCTION/ \
@@ -16,7 +16,7 @@ EXTRACT_SUFX=	.tar.bz2
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
-MAINTAINER=	zuntum@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.epicsol.org/
 COMMENT=	The (E)nhanced (P)rogrammable (I)RC-II (C)lient
 

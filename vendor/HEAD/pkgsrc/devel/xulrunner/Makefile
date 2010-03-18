@@ -1,19 +1,17 @@
-# $NetBSD: Makefile,v 1.32 2009/12/16 08:18:32 tnn Exp $
-#
+# $NetBSD: Makefile,v 1.38 2010/03/16 15:57:02 tnn Exp $
 
 .include "dist.mk"
-PKGNAME=	${DISTNAME:S/firefox/xulrunner/:S/3.5/1.9.1/:S/.source//}
+PKGNAME=	xulrunner-${MOZ_BRANCH}${MOZ_BRANCH_MINOR}
 CATEGORIES=	devel www
 
 MAINTAINER=	tnn@NetBSD.org
 HOMEPAGE=	http://developer.mozilla.org/en/docs/XULRunner
 COMMENT=	XML User Interface Language runtime environment
+LICENSE=	mpl-1.1
 
 MOZILLA_DIR=	# empty
 
-PKGCONFIG_OVERRIDE+=	xulrunner/installer/libxul-embedding-unstable.pc.in
 PKGCONFIG_OVERRIDE+=	xulrunner/installer/libxul-embedding.pc.in
-PKGCONFIG_OVERRIDE+=	xulrunner/installer/libxul-unstable.pc.in
 PKGCONFIG_OVERRIDE+=	xulrunner/installer/libxul.pc.in
 PKGCONFIG_OVERRIDE+=	xulrunner/installer/mozilla-gtkmozembed-embedding.pc.in
 PKGCONFIG_OVERRIDE+=	xulrunner/installer/mozilla-gtkmozembed.pc.in
@@ -35,16 +33,6 @@ pre-configure:
 	cd ${WRKSRC}/js/src && autoconf
 	cd ${WRKSRC}/nsprpub && autoconf
 
-INCLUDE_SUBDIRS=\
-	caps chardet commandhandler content cookie docshell dom		\
-	downloads embedcomponents exthandler fastfind find gfx		\
-	gtkembedmoz htmlparser imglib2 intl java js layout libreg	\
-	locale loginmgr mimetype necko nkcache nspr oji pipboot pipnss	\
-	places pref profdirserviceprovider rdf shistory spellchecker	\
-	string thebes toolkitcomps uconv uriloader webbrowserpersist	\
-	webbrwsr webshell widget windowwatcher xpcom xpconnect xulapp	\
-	plugin liveconnect
-
 post-install:
 	# XXX fix the pkg-config files instead
 	rm -f ${DESTDIR}${PREFIX}/lib/xulrunner/libxpcomglue.a
@@ -53,18 +41,8 @@ post-install:
 	rm -f ${DESTDIR}${PREFIX}/lib/xulrunner/libxpcomglue_s.a
 	ln -s ${PREFIX}/lib/xulrunner-sdk/sdk/lib/libxpcomglue_s.a	\
 	  ${DESTDIR}${PREFIX}/lib/xulrunner/libxpcomglue_s.a
-	${INSTALL_LIB} ${WRKSRC}/dist/lib/libunicharutil_external_s.a	\
-	  ${DESTDIR}${PREFIX}/lib/xulrunner
-.for dir in ${INCLUDE_SUBDIRS}
-	cd ${WRKSRC}/dist/include &&					\
-	  ${INSTALL_DATA} `find ${dir} -name "*.h" -print`		\
-	  ${DESTDIR}${PREFIX}/include/xulrunner/unstable
-.endfor
-	cd ${WRKSRC}/dist/include && ${INSTALL_DATA}			\
-	  js/jsproto.tbl mozilla-config.h gtkembedmoz/gtkmozembed_glue.cpp \
-	  ${DESTDIR}${PREFIX}/include/xulrunner/unstable
-	${INSTALL_DATA_DIR} ${DESTDIR}${PREFIX}/include/xulrunner/unstable/obsolete
-	cd ${WRKSRC}/dist/include/nspr/obsolete && ${INSTALL_DATA} protypes.h \
-	  ${DESTDIR}${PREFIX}/include/xulrunner/unstable/obsolete
+	rm -f ${DESTDIR}${PREFIX}/lib/xulrunner/libunicharutil_external_s.a
+	ln -s ${PREFIX}/lib/xulrunner-sdk/sdk/lib/libunicharutil_external_s.a \
+	  ${DESTDIR}${PREFIX}/lib/xulrunner/libunicharutil_external_s.a
 
 .include "../../mk/bsd.pkg.mk"

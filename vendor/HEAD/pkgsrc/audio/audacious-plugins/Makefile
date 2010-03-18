@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.11 2009/12/15 21:30:52 joerg Exp $
+# $NetBSD: Makefile,v 1.13 2010/01/18 09:58:37 wiz Exp $
 #
 
 DISTNAME=		audacious-plugins-1.5.1
-PKGREVISION=		6
+PKGREVISION=		8
 CATEGORIES=		audio
 MASTER_SITES=		http://distfiles.atheme.org/
 EXTRACT_SUFX=		.tgz

@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.2 2009/05/03 14:29:15 abs Exp $
+# $NetBSD: Makefile,v 1.4 2010/03/16 16:02:20 taca Exp $
 #
 
-DISTNAME=	ampache-3.5-beta2
-PKGNAME=	${DISTNAME:S:-beta:beta:}
+DISTNAME=	ampache-3.5.3
 CATEGORIES=	audio
 MASTER_SITES=	http://ampache.org/downloads/
 
@@ -13,13 +12,14 @@ COMMENT=	Web-based Audio file manager
 DEPENDS+=       ${APACHE_PKG_PREFIX}-${PHP_PKG_PREFIX}>=5.2:../../www/ap-php
 DEPENDS+=       ${PHP_PKG_PREFIX}-gettext>=0:../../devel/php-gettext
 DEPENDS+=       ${PHP_PKG_PREFIX}-iconv>=0:../../converters/php-iconv
-DEPENDS+=       ${PHP_PKG_PREFIX}-mbstring>=0:../../misc/php-mbstring
+DEPENDS+=       ${PHP_PKG_PREFIX}-mbstring>=0:../../converters/php-mbstring
 DEPENDS+=       ${PHP_PKG_PREFIX}-mysql>=0:../../databases/php-mysql
 
 NO_BUILD=		yes
 USE_LANGUAGES=		# none
 USE_PKGLOCALEDIR=	yes
 USE_TOOLS+=		pax
+LICENSE=       		gnu-gpl-v2
 
 INSTDIR=		${PREFIX}/share/ampache
 EGDIR=			${PREFIX}/share/examples

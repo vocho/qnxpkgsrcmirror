@@ -1,6 +1,6 @@
 #! /bin/sh
 
-# $NetBSD: bootstrap,v 1.151 2009/12/13 08:35:22 obache Exp $
+# $NetBSD: bootstrap,v 1.156 2010/02/06 10:28:54 obache Exp $
 #
 #
 # Copyright (c) 2001-2002 Alistair G. Crooks.  All rights reserved.
@@ -36,7 +36,7 @@
 #set -x
 
 # the following environment variables are honored:
-# compiler/linker flags: CFLAGS, CPPFLAGS, LDFLAGS
+# compiler/linker flags: CFLAGS, CPPFLAGS, LDFLAGS, LIBS
 # tools: CP, GREP, ID, MKDIR, SH, TEST, TOUCH, XARGS
 
 
@@ -238,6 +238,10 @@ opsys_finish()
 			need_extras=yes
 			echo "LDD=			$prefix/sbin/fakeldd" >> ${TARGET_MKCONF}
 		fi
+		;;
+	Haiku)
+		need_extras=yes
+		echo "LDD=			$prefix/sbin/fakeldd" >> ${TARGET_MKCONF}
 		;;
 	esac
 }
@@ -449,6 +453,15 @@ bmakexenv=
 bmakexargs=
 need_extras=no
 case "$opsys" in
+AIX)
+	root_group=system
+	need_bsd_install=yes
+	need_awk=yes
+	need_sed=yes
+	need_fixed_strip=yes
+	set_opsys=no
+	machine_arch=`get_machine_arch_aix`
+	;;
 Darwin)
 	root_group=wheel
 	need_bsd_install=no
@@ -497,6 +510,25 @@ FreeBSD)
 	set_opsys=no
 	machine_arch=`uname -p`
 	;;
+Haiku)
+	root_user=user
+	root_group=root
+	need_bsd_install=no
+	need_awk=no
+	need_sed=no
+	set_opsys=no
+	case `uname -m` in
+	BeMac)
+		machine_arch=powerpc
+		;;
+	BePC)
+		machine_arch=i386
+		;;
+	*)
+		machine_arch=`uname -p`
+		;;
+	esac
+	;;
 HPUX)
 	root_group=sys
 	need_bsd_install=yes
@@ -504,84 +536,6 @@ HPUX)
 	need_sed=yes
 	set_opsys=no
 	machine_arch=`uname -m | sed 's/^9000.*$/hppa/'`
-	;;
-IRIX*)
-	if [ -d "/usr/freeware/bin" ]; then
-		overpath="/usr/freeware/bin:$overpath"
-	fi
-	if [ -d "/usr/bsd" ]; then
-		overpath="/usr/bsd:$overpath"
-	fi
-	if [ -d "/usr/bsd/bin" ]; then
-		overpath="/usr/bsd/bin:$overpath"
-	fi
-	root_group=sys
-	need_bsd_install=yes
-	get_abi "IRIX"
-	opsys=IRIX
-	need_awk=yes
-	need_sed=yes
-	set_opsys=yes
-	machine_arch=mipseb
-	bmakexargs="MACHINE_ARCH=$machine_arch"
-	bmakexenv="MAKE=pmake"
-	check_compiler=yes
-	if [ `uname -r` -lt 6 ]; then
-# IRIX 5's mkdir bails out with an error when trying to create with the -p
-# option an already existing directory
-		need_mkdir=yes
-	fi
-	;;
-Linux)
-	if [ -f /etc/debian_version ]; then
-		DEBIAN=yes
-	fi
-	root_group=root
-	need_bsd_install=no
-	need_awk=no
-	need_sed=no
-	set_opsys=no
-	machine_arch=`uname -m | sed -e 's/i.86/i386/'`
-	;;
-NetBSD)
-	root_group=wheel
-	need_bsd_install=no
-	need_awk=no
-	need_sed=no
-	set_opsys=no
-	machine_arch=`uname -p`
-	;;
-OpenBSD)
-	root_group=wheel
-	need_bsd_install=no
-	need_awk=no
-	need_sed=no
-	set_opsys=no
-	machine_arch=`uname -m`
-	;;
-SunOS)
-	if [ -d "/usr/xpg4/bin" ]; then
-		overpath="/usr/xpg4/bin:$overpath"
-	fi
-	root_group=root
-	need_bsd_install=yes
-	need_awk=yes
-	need_sed=yes
-	need_ksh=yes
-	set_opsys=no
-	groupsprog="/usr/xpg4/bin/id -gn"
-	whoamiprog="/usr/xpg4/bin/id -un"
-	machine_arch=`uname -p | sed -e 's/i86pc/i386/'`
-	check_compiler=yes
-	;;
-AIX)
-	root_group=system
-	need_bsd_install=yes
-	need_awk=yes
-	need_sed=yes
-	need_fixed_strip=yes
-	set_opsys=no
-	machine_arch=`get_machine_arch_aix`
 	;;
 Interix)
 	is_root () {
@@ -619,16 +573,60 @@ Interix)
 	ac_cv_header_poll_h=no; export ac_cv_header_poll_h
 	ac_cv_func_poll=no; export ac_cv_func_poll
 	;;
-UnixWare)
+IRIX*)
+	if [ -d "/usr/freeware/bin" ]; then
+		overpath="/usr/freeware/bin:$overpath"
+	fi
+	if [ -d "/usr/bsd" ]; then
+		overpath="/usr/bsd:$overpath"
+	fi
+	if [ -d "/usr/bsd/bin" ]; then
+		overpath="/usr/bsd/bin:$overpath"
+	fi
 	root_group=sys
-	need_bsd_install=no
-	BSTRAP_ENV="INSTALL=/usr/ucb/install $BSTRAP_ENV"
-	need_mkdir=yes
+	need_bsd_install=yes
+	get_abi "IRIX"
+	opsys=IRIX
 	need_awk=yes
 	need_sed=yes
-	whoamiprog=/usr/ucb/whoami
+	set_opsys=yes
+	machine_arch=mipseb
+	bmakexargs="MACHINE_ARCH=$machine_arch"
+	bmakexenv="MAKE=pmake"
+	check_compiler=yes
+	if [ `uname -r` -lt 6 ]; then
+# IRIX 5's mkdir bails out with an error when trying to create with the -p
+# option an already existing directory
+		need_mkdir=yes
+	fi
+	;;
+Linux)
+	if [ -f /etc/ssdlinux_version ]; then
+		root_group=wheel
+	else
+		root_group=root
+	fi
+	need_bsd_install=no
+	need_awk=no
+	need_sed=no
 	set_opsys=no
-	CC="gcc -DUNIXWARE"; export CC
+	machine_arch=`uname -m | sed -e 's/i.86/i386/'`
+	;;
+NetBSD)
+	root_group=wheel
+	need_bsd_install=no
+	need_awk=no
+	need_sed=no
+	set_opsys=no
+	machine_arch=`uname -p`
+	;;
+OpenBSD)
+	root_group=wheel
+	need_bsd_install=no
+	need_awk=no
+	need_sed=no
+	set_opsys=no
+	machine_arch=`uname -m`
 	;;
 OSF1)
 	root_group=system
@@ -646,6 +644,32 @@ QNX)
 	whoamiprog="id -un"
 	fetch_cmd="/usr/bin/ftp"
 	machine_arch=`uname -p | sed -e 's/x86/i386/'`
+	;;
+SunOS)
+	if [ -d "/usr/xpg4/bin" ]; then
+		overpath="/usr/xpg4/bin:$overpath"
+	fi
+	root_group=root
+	need_bsd_install=yes
+	need_awk=yes
+	need_sed=yes
+	need_ksh=yes
+	set_opsys=no
+	groupsprog="/usr/xpg4/bin/id -gn"
+	whoamiprog="/usr/xpg4/bin/id -un"
+	machine_arch=`uname -p | sed -e 's/i86pc/i386/'`
+	check_compiler=yes
+	;;
+UnixWare)
+	root_group=sys
+	need_bsd_install=no
+	BSTRAP_ENV="INSTALL=/usr/ucb/install $BSTRAP_ENV"
+	need_mkdir=yes
+	need_awk=yes
+	need_sed=yes
+	whoamiprog=/usr/ucb/whoami
+	set_opsys=no
+	CC="gcc -DUNIXWARE"; export CC
 	;;
 *)
 	echo "This platform ($opsys) is untried - good luck, and thanks for using pkgsrc"
@@ -806,7 +830,7 @@ VARBASE=$varbase; export VARBASE
 
 # set up an example mk.conf file
 TARGET_MKCONF=${wrkdir}/mk.conf.example
-echo_msg "Creating default mk.conf. in ${wrkdir}"
+echo_msg "Creating default mk.conf in ${wrkdir}"
 echo "# Example ${sysconfdir}/mk.conf file produced by bootstrap-pkgsrc" > ${TARGET_MKCONF}
 echo "# `date`" >> ${TARGET_MKCONF}
 echo "" >> ${TARGET_MKCONF}
@@ -944,7 +968,7 @@ esac
 case "$need_sed" in
 yes)	echo_msg "Bootstrapping sed"
 	copy_src $pkgsrcdir/textproc/nbsed/files sed
-	run_cmd "(cd $wrkdir/sed; env $BSTRAP_ENV CPPFLAGS='$CPPFLAGS -I../libnbcompat' LDFLAGS='$LDFLAGS -L../libnbcompat' LIBS='-lnbcompat' $shprog ./configure $configure_quiet_flags -C --prefix=$prefix --mandir=$mandir --sysconfdir=$sysconfdir --program-transform-name='s,sed,nbsed,' && $bmake)"
+	run_cmd "(cd $wrkdir/sed; env $BSTRAP_ENV CPPFLAGS='$CPPFLAGS -I../libnbcompat' LDFLAGS='$LDFLAGS -L../libnbcompat' LIBS='$LIBS -lnbcompat' $shprog ./configure $configure_quiet_flags -C --prefix=$prefix --mandir=$mandir --sysconfdir=$sysconfdir --program-transform-name='s,sed,nbsed,' && $bmake)"
 	run_cmd "$install_sh -c -o $user -g $group -m 755 $wrkdir/sed/sed $wrkdir/bin/sed"
 	echo "TOOLS_PLATFORM.sed?=		$prefix/bin/nbsed" >> ${TARGET_MKCONF}
 	echo "TOOLS_PLATFORM.sed?=		$wrkdir/bin/sed" >> ${BOOTSTRAP_MKCONF}
@@ -957,7 +981,7 @@ copy_src $pkgsrcdir/pkgtools/pkg_install/files pkg_install
 run_cmd "(cd $wrkdir/pkg_install; env $BSTRAP_ENV \
 CPPFLAGS='$CPPFLAGS -I../libnbcompat -I../../libnbcompat' \
 LDFLAGS='$LDFLAGS -L../libnbcompat -L../../libnbcompat' \
-LIBS='-lnbcompat' $shprog ./configure $configure_quiet_flags -C \
+LIBS='$LIBS -lnbcompat' $shprog ./configure $configure_quiet_flags -C \
 --enable-bootstrap --prefix=$prefix --sysconfdir=$sysconfdir \
 --with-pkgdbdir=$pkgdbdir --mandir=$mandir $pkg_install_args && $bmake)"
 run_cmd "$install_sh -c -o $user -g $group -m 755 $wrkdir/pkg_install/admin/pkg_admin $wrkdir/sbin/pkg_admin"
@@ -1018,6 +1042,9 @@ if test -n "$CPPFLAGS"; then
 fi
 if test -n "$LDFLAGS"; then
 	echo "LDFLAGS+=		$LDFLAGS" >> ${TARGET_MKCONF}
+fi
+if test -n "$LIBS"; then
+	echo "LIBS+=		$LIBS" >> ${TARGET_MKCONF}
 fi
 
 # opsys specific fiddling

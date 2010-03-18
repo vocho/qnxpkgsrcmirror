@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.6 2009/12/14 23:37:52 gdt Exp $
+# $NetBSD: Makefile,v 1.11 2010/03/14 16:32:15 wiz Exp $
 #
 
-DISTNAME=	merkaartor-0.14
-PKGREVISION=	2
+DISTNAME=	merkaartor-0.15.2
 CATEGORIES=	geography
 MASTER_SITES=	http://www.merkaartor.org/downloads/source/
 EXTRACT_SUFX=	.tar.bz2
@@ -16,7 +15,7 @@ USE_LANGUAGES=		c c++
 USE_LIBTOOL=		yes
 QMAKE=			${QTDIR}/bin/qmake
 CONFIGURE_ARGS=		PREFIX=${PREFIX} NODEBUG=1 OSMARENDER=1 PROJ=1 GDAL=1 \
-			GEOIMAGE=1 GPSD=1
+			GEOIMAGE=1 GPSD=1 RELEASE=1
 
 SUBST_CLASSES+=			installtarget
 SUBST_MESSAGE.installtarget=	Fixing wrong install target
@@ -33,9 +32,9 @@ do-configure:
 		${QMAKE} ${CONFIGURE_ARGS} Merkaartor.pro && \
 		${MAKE} qmake
 
-.include "../../misc/proj/buildlink3.mk"
 .include "../../geography/gdal-lib/buildlink3.mk"
 .include "../../geography/gpsd/buildlink3.mk"
+.include "../../geography/proj/buildlink3.mk"
 .include "../../graphics/exiv2/buildlink3.mk"
 .include "../../graphics/tiff/buildlink3.mk"
 .include "../../textproc/libxml2/buildlink3.mk"

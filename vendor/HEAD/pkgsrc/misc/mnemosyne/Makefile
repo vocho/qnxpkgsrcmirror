@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.8 2009/08/26 19:58:02 sno Exp $
+# $NetBSD: Makefile,v 1.11 2010/02/10 19:17:42 joerg Exp $
 #
 
-DISTNAME=	mnemosyne-1.2.1
+DISTNAME=	mnemosyne-1.2.2
 PKGREVISION=	1
 CATEGORIES=	misc
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=mnemosyne-proj/}

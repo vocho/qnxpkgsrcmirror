@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.134 2009/10/16 12:59:08 reed Exp $
+# $NetBSD: Makefile,v 1.138 2010/02/10 17:34:51 joerg Exp $
 #
 
 COMMENT=	Editors
@@ -43,7 +43,7 @@ SUBDIR+=	gtranslator
 SUBDIR+=	heme
 SUBDIR+=	hexedit
 SUBDIR+=	hnb
-SUBDIR+=	jave
+SUBDIR+=	javascript-mode
 SUBDIR+=	jde
 SUBDIR+=	jed
 SUBDIR+=	joe
@@ -72,6 +72,25 @@ SUBDIR+=	notecase
 SUBDIR+=	nvi
 SUBDIR+=	nvi-m17n
 SUBDIR+=	obby
+SUBDIR+=	p5-Acme-Padre-PlayCode
+SUBDIR+=	p5-PPIx-EditorTools
+SUBDIR+=	p5-Padre
+SUBDIR+=	p5-Padre-Plugin-Autoformat
+SUBDIR+=	p5-Padre-Plugin-Catalyst
+SUBDIR+=	p5-Padre-Plugin-DataWalker
+SUBDIR+=	p5-Padre-Plugin-Debugger
+SUBDIR+=	p5-Padre-Plugin-Ecliptic
+SUBDIR+=	p5-Padre-Plugin-Encrypt
+SUBDIR+=	p5-Padre-Plugin-Git
+SUBDIR+=	p5-Padre-Plugin-HG
+SUBDIR+=	p5-Padre-Plugin-Kate
+SUBDIR+=	p5-Padre-Plugin-Nopaste
+SUBDIR+=	p5-Padre-Plugin-PerlCritic
+SUBDIR+=	p5-Padre-Plugin-PerlTidy
+SUBDIR+=	p5-Padre-Plugin-SVN
+SUBDIR+=	p5-Padre-Plugin-SpellCheck
+SUBDIR+=	p5-Padre-Plugin-Vi
+SUBDIR+=	p5-Padre-Plugin-XS
 SUBDIR+=	pico
 SUBDIR+=	poedit
 SUBDIR+=	rox-edit

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.78 2009/06/12 09:05:58 jnemeth Exp $
+# $NetBSD: Makefile,v 1.80 2010/02/10 17:08:22 joerg Exp $
 #
 
 COMMENT=	Communication utilities
@@ -55,7 +55,6 @@ SUBDIR+=	pilot-link
 SUBDIR+=	pilot-link-libs
 SUBDIR+=	pilotmgr
 SUBDIR+=	plp
-SUBDIR+=	plptools
 SUBDIR+=	py-gammu
 SUBDIR+=	qpage
 SUBDIR+=	ruby-termios
@@ -67,6 +66,7 @@ SUBDIR+=	synce-libsynce
 SUBDIR+=	synce-rra
 SUBDIR+=	synce-serial
 SUBDIR+=	tkhylafax
+SUBDIR+=	tn3270
 SUBDIR+=	xisp
 SUBDIR+=	xtel
 SUBDIR+=	zaptel-netbsd

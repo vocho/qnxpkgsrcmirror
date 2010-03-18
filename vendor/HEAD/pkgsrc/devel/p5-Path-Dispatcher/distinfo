@@ -1,5 +1,5 @@
-$NetBSD: distinfo,v 1.2 2009/08/19 19:18:46 sno Exp $
+$NetBSD: distinfo,v 1.4 2010/03/16 21:52:11 sno Exp $
 
-SHA1 (Path-Dispatcher-0.13.tar.gz) = 1faeab2a4891ba927c7e5a075c0e221ae8544e32
-RMD160 (Path-Dispatcher-0.13.tar.gz) = c789885db6dc502314df34e4040a80f85f062db4
-Size (Path-Dispatcher-0.13.tar.gz) = 37302 bytes
+SHA1 (Path-Dispatcher-0.15.tar.gz) = 22cf598a29b76d430d6a1d90ce48c3613420eea5
+RMD160 (Path-Dispatcher-0.15.tar.gz) = d49702578ca05fcee46af02823a28320f83032fc
+Size (Path-Dispatcher-0.15.tar.gz) = 32006 bytes
