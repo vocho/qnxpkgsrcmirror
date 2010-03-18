@@ -1,13 +1,26 @@
 $NetBSD: patch-af,v 1.2 2009/10/18 10:21:01 tnn Exp $
 
---- jdk/make/common/shared/Defs-utils.gmk.orig	2009-10-18 02:25:45.000000000 +0200
+--- jdk/make/common/shared/Defs-utils.gmk.orig	2010-02-28 16:48:42.000000000 +0000
 +++ jdk/make/common/shared/Defs-utils.gmk
-@@ -240,7 +240,14 @@ ifeq ($(PLATFORM),bsd)
+@@ -74,6 +74,13 @@ ifeq ($(PLATFORM),bsd)
+   UTILS_DEVTOOL_PATH=$(DEVTOOLS_PATH)
+ endif
+ 
++ifeq ($(PLATFORM),qnx)
++  UTILS_COMMAND_PATH=$(UNIXCOMMAND_PATH)
++  UTILS_USR_BIN_PATH=$(USRBIN_PATH)
++  UTILS_CCS_BIN_PATH=$(USRBIN_PATH)
++  UTILS_DEVTOOL_PATH=$(DEVTOOLS_PATH)
++endif
++
+ # Utilities
+ ADB            = $(UTILS_COMMAND_PATH)adb
+ AR             = $(UTILS_CCS_BIN_PATH)ar
+@@ -240,7 +247,55 @@ ifeq ($(PLATFORM),bsd)
    endif
    ifeq ($(OS_VENDOR), NetBSD)
      NAWK       = $(UTILS_USR_BIN_PATH)awk
 -    ZIPEXE     = $(UTILS_DEVTOOL_PATH)zip
--    UNZIP      = $(UTILS_DEVTOOL_PATH)unzip
 +    ZIPEXE     = $(PKGSRC_ZIPEXE)
 +    UNZIP      = $(PKGSRC_UNZIP)
 +    UNZIPSFX   = $(PKGSRC_UNZIPSFX)
@@ -17,5 +30,46 @@ $NetBSD: patch-af,v 1.2 2009/10/18 10:21:01 tnn Exp $
 +    ZIPEXE     = $(PKGSRC_ZIPEXE)
 +    UNZIP      = $(PKGSRC_UNZIP)
 +    UNZIPSFX   = $(PKGSRC_UNZIPSFX)
++  endif
++endif
++
++ifeq ($(PLATFORM),qnx)
++  BASENAME     = $(UTILS_USR_BIN_PATH)basename
++  DATE         = $(UTILS_USR_BIN_PATH)date
++  EGREP        = $(UTILS_USR_BIN_PATH)egrep
++  EXPR         = $(UTILS_COMMAND_PATH)expr
++  FMT          = $(UTILS_USR_BIN_PATH)fmt
++  GREP         = $(UTILS_USR_BIN_PATH)grep
++  GUNZIP       = $(UTILS_USR_BIN_PATH)gunzip
++  ID           = $(UTILS_USR_BIN_PATH)id
++  MSGFMT       = $(UTILS_DEVTOOL_PATH)msgfmt
++  SED          = $(UTILS_USR_BIN_PATH)sed
++  SORT         = $(UTILS_USR_BIN_PATH)sort
++  TEST         = $(UTILS_COMMAND_PATH)test
++  TOUCH        = $(UTILS_USR_BIN_PATH)touch
++  TRUE         = $(UTILS_USR_BIN_PATH)true
++  UNAME        = $(UTILS_USR_BIN_PATH)uname
++  NAWK         = $(UTILS_USR_BIN_PATH)awk
++  ifeq ($(OS_VENDOR), Apple)
++    UNZIPSFX   = $(UTILS_USR_BIN_PATH)unzipsfx
++    ZIPEXE     = $(UTILS_USR_BIN_PATH)zip
++  else
+     UNZIP      = $(UTILS_DEVTOOL_PATH)unzip
    endif
++  ifneq ($(OS_VENDOR), OpenBSD)
++    CPIO       = $(UTILS_USR_BIN_PATH)cpio
++    TAR        = $(UTILS_USR_BIN_PATH)tar
++  endif
++  ifeq ($(OS_VENDOR), NetBSD)
++    NAWK       = $(UTILS_USR_BIN_PATH)awk
++    ZIPEXE     = $(PKGSRC_ZIPEXE)
++    UNZIP      = $(PKGSRC_UNZIP)
++    UNZIPSFX   = $(PKGSRC_UNZIPSFX)
++  endif
++  ifeq ($(OS_VENDOR), DragonFlyBSD)
++    NAWK       = $(UTILS_USR_BIN_PATH)awk
++    ZIPEXE     = $(PKGSRC_ZIPEXE)
++    UNZIP      = $(PKGSRC_UNZIP)
++    UNZIPSFX   = $(PKGSRC_UNZIPSFX)
++  endif
  endif

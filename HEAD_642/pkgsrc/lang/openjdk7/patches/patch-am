@@ -1,8 +1,8 @@
 $NetBSD: patch-am,v 1.1.1.1 2009/10/14 11:26:15 tnn Exp $
 
---- jdk/make/common/shared/Defs.gmk.orig	2008-12-21 21:41:14.000000000 +0100
+--- jdk/make/common/shared/Defs.gmk.orig	2010-02-28 15:45:12.000000000 +0000
 +++ jdk/make/common/shared/Defs.gmk
-@@ -268,7 +268,7 @@ ifdef BUILD_NUMBER
+@@ -283,7 +283,7 @@ ifdef BUILD_NUMBER
  else
    BUILD_NUMBER = b00
    BUILD_DATE := $(shell $(DATE) '+%Y_%m_%d_%H_%M')
@@ -11,3 +11,12 @@ $NetBSD: patch-am,v 1.1.1.1 2009/10/14 11:26:15 tnn Exp $
    USER_RELEASE_SUFFIX := $(shell $(ECHO) "$(CLEAN_USERNAME)_$(BUILD_DATE)" | $(TR) '[:upper:]' '[:lower:]' )
    FULL_VERSION = $(RELEASE)-$(USER_RELEASE_SUFFIX)-$(BUILD_NUMBER)
  endif
+@@ -590,7 +590,7 @@ ifeq ($(PLATFORM), solaris)
+ endif
+ 
+ # Linux & BSD uses GNU compilers by default
+-ifneq (,$(findstring $(PLATFORM), linux bsd))
++ifneq (,$(findstring $(PLATFORM), linux bsd qnx))
+   override CC_VERSION = gcc
+ endif
+ 
