@@ -1,8 +1,20 @@
 $NetBSD: patch-ab,v 1.2 2009/10/18 10:21:01 tnn Exp $
 
---- jdk/make/common/shared/Sanity.gmk.orig	2008-12-21 21:41:14.000000000 +0100
+--- jdk/make/common/shared/Sanity.gmk.orig	2010-02-28 16:48:42.000000000 +0000
 +++ jdk/make/common/shared/Sanity.gmk
-@@ -787,7 +787,8 @@ $(TEMPDIR)/freetypeinfo: FRC
+@@ -147,6 +147,11 @@ ifeq ($(PLATFORM), bsd)
+   TEMP_FREE_SPACE := $(shell BLOCKSIZE=512 $(DF) $(TEMP_DISK) | $(TAIL) -1 | $(NAWK) '{print $$2;}')
+ endif
+ 
++ifeq ($(PLATFORM), qnx)
++  FREE_SPACE := $(shell BLOCKSIZE=512 $(DF) $(OUTPUTDIR) | $(TAIL) -1 | $(NAWK) '{print $$4;}')
++  TEMP_FREE_SPACE := $(shell BLOCKSIZE=512 $(DF) $(TEMP_DISK) | $(TAIL) -1 | $(NAWK) '{print $$4;}')
++endif
++
+ # Get the version numbers of what we are using
+ _MAKE_VER  :=$(shell $(MAKE) --version 2>&1 | $(HEAD) -n 1)
+ _ZIP_VER   :=$(shell $(ZIPEXE) -help 2>&1 | $(HEAD) -n 4 | $(EGREP) '^Zip')
+@@ -837,7 +842,8 @@ $(TEMPDIR)/freetypeinfo: FRC
  	@(($(CD) $(BUILDDIR)/tools/freetypecheck && $(MAKE)) || \
  	    $(ECHO) "Failed to build freetypecheck." ) > $@
  
