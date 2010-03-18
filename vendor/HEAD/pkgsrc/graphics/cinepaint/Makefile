@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.24 2009/08/26 19:57:37 sno Exp $
+# $NetBSD: Makefile,v 1.27 2010/01/18 09:58:56 wiz Exp $
 
 DISTNAME=	cinepaint-0.22-1
 PKGNAME=	cinepaint-0.22.1
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	graphics
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=cinepaint/}
 
@@ -12,6 +12,8 @@ COMMENT=	Motion picture painting and image retouching program
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
 PKG_DESTDIR_SUPPORT=	user-destdir
+
+MAKE_JOBS_SAFE=		no
 
 USE_LANGUAGES=		c c++
 USE_LIBTOOL=		yes
@@ -32,4 +34,5 @@ BUILDLINK_API_DEPENDS.lcms+=	lcms>=1.13 # needs _cmsLCMScolorSpace
 .include "../../x11/libXpm/buildlink3.mk"
 .include "../../x11/libXmu/buildlink3.mk"
 .include "../../mk/pthread.buildlink3.mk"
+.include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../mk/bsd.pkg.mk"

@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.40 2009/08/29 13:53:34 wiz Exp $
+# $NetBSD: Makefile,v 1.43 2010/02/24 23:22:45 mjl Exp $
 #
 
 DISTNAME=	${PKGNAME_NOREV}-stable-src
-PKGNAME=	privoxy-3.0.12
+PKGNAME=	privoxy-3.0.16
 CATEGORIES=	www
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=ijbswa/}
 
@@ -32,7 +32,8 @@ CPPFLAGS+=		-Dunix
 WRKSRC=			${WRKDIR}/${PKGNAME_NOREV}-stable
 
 USE_FEATURES=		snprintf
-USE_TOOLS+=		autoconf213 gmake mktemp
+USE_TOOLS+=		gmake mktemp autoconf autoheader
+BUILD_DEFS+=       VARBASE
 MAKE_FILE=		GNUmakefile
 
 USE_TOOLS+=		perl
@@ -54,6 +55,7 @@ CONF_FILES_PERMS+=	${EGDIR}/${i} ${PKG_SYSCONFDIR}/${i} ${USER_GROUP} 0660
 .endfor
 
 OWN_DIRS_PERMS+=	/var/log/privoxy ${USER_GROUP} 0775
+CONF_FILES_PERMS+=	/dev/null /var/log/privoxy/logfile ${USER_GROUP} 0660
 
 FILES_SUBST+=		PRIVOXY_USER=${PRIVOXY_USER:Q}
 
@@ -62,12 +64,9 @@ SUBST_FILES.paths=	config
 SUBST_SED.paths+=	-e 's,@PKG_SYSCONFDIR@,${PKG_SYSCONFDIR},g'
 SUBST_STAGE.paths=	post-patch
 
+
 pre-configure:
 	cd ${WRKSRC} && autoheader && autoconf
-
-post-install:
-	${CHOWN} -R ${ROOT_USER}:${ROOT_GROUP} ${DESTDIR}${EGDIR}
-	${CHMOD} -R a+r ${DESTDIR}${EGDIR}
 
 .include "../../devel/pcre/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"

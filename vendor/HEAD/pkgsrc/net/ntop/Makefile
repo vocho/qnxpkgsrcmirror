@@ -1,12 +1,15 @@
-# $NetBSD: Makefile,v 1.54 2009/09/26 05:58:27 taca Exp $
+# $NetBSD: Makefile,v 1.58 2010/02/11 22:24:33 joerg Exp $
 
 DISTNAME=	ntop-3.3.10
+PKGREVISION=	2
 CATEGORIES=	net
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=ntop/}
 
 MAINTAINER=	adam@NetBSD.org
 HOMEPAGE=	http://www.ntop.org/ntop.html
 COMMENT=	Shows network usage (similar to "top" for processes)
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 CONFLICTS=	ntop-[0-9]*
 
@@ -43,7 +46,7 @@ USE_BUILTIN.libevent=	no
 
 pre-configure:
 	set -e; cd ${WRKSRC}; \
-	cp ${PREFIX}/share/libtool/ltmain.sh .; \
+	cp ${PREFIX}/share/libtool/config/ltmain.sh .; \
 	aclocal; autoheader; automake -a --foreign -i; autoconf
 
 .include "../../databases/gdbm/buildlink3.mk"

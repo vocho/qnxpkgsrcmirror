@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.29 2009/12/07 00:01:54 wiz Exp $
+# $NetBSD: Makefile,v 1.31 2010/01/24 17:11:18 heinz Exp $
 #
 
 DISTNAME=	speex-1.2rc1
@@ -9,6 +9,7 @@ MASTER_SITES=	http://downloads.us.xiph.org/releases/speex/
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.speex.org/
 COMMENT=	Open-source, patent-free voice codec
+LICENSE=	modified-bsd
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
@@ -22,9 +23,6 @@ USE_TOOLS+=		pkg-config
 CONFLICTS=	Speex-[0-9]*
 
 CONFIGURE_ARGS+=	--with-ogg-dir=${BUILDLINK_PREFIX.libogg:Q}
-
-# Avoid an ICE in gcc2 on sparc64
-CONFIGURE_ENV+=		F77=${FALSE:Q}
 
 BUILDLINK_TRANSFORM+=	l:gnugetopt:getopt
 

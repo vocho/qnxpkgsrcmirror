@@ -1,4 +1,4 @@
-$NetBSD: patch-ai,v 1.4 2006/01/13 00:04:16 joerg Exp $
+$NetBSD: patch-ai,v 1.6 2010/02/22 21:58:47 wiz Exp $
 
 --- linuxdoom-1.10/i_video.c.orig	Mon Dec 22 20:39:01 1997
 +++ linuxdoom-1.10/i_video.c	Thu Aug 22 04:42:18 2002

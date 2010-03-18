@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.16 2009/12/06 15:49:25 tron Exp $
+# $NetBSD: Makefile,v 1.19 2010/03/15 23:04:09 tron Exp $
 
-DISTNAME=	squid-3.1.0.15
+DISTNAME=	squid-3.1.0.18
 PKGNAME=	${DISTNAME}	# Necessary for "pkgsrc/www/squid/options.mk"
 CATEGORIES=	www
 MASTER_SITES=	http://www.squid-cache.org/Versions/v3/3.1/ \
@@ -15,7 +15,6 @@ LICENSE=	gnu-gpl-v2
 USE_LANGUAGES=		c c++
 USE_TOOLS+=		perl gmake
 GNU_CONFIGURE=		yes
-PKG_DESTDIR_SUPPORT=	destdir
 
 .include "../../www/squid/Makefile.squid"
 

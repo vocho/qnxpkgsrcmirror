@@ -1,19 +1,32 @@
-$NetBSD: patch-aa,v 1.3 2009/09/04 15:36:16 wiz Exp $
+$NetBSD: patch-aa,v 1.5 2010/02/09 12:31:19 wiz Exp $
 
---- lib/glob/glob.c.orig	2009-09-04 15:33:42.000000000 +0000
-+++ lib/glob/glob.c
-@@ -1018,14 +1018,6 @@ glob_filename (pathname, flags)
-       if ((flags & GX_GLOBSTAR) && filename[0] == '*' && filename[1] == '*' && filename[2] == '\0')
- 	{
- 	  dflags |= GX_ALLDIRS|GX_ADDCURDIR;
--#if 0
--	  /* If we want all directories (dflags & GX_ALLDIRS) and we're not
--	     being called recursively as something like `echo **/*.o'
--	     ((flags & GX_ALLDIRS) == 0), we want to prevent glob_vector from
--	     adding a null directory name to the front of the temp_results
--	     array.  We turn off ADDCURDIR if not called recursively and
--	     dlen == 0 */
--#endif
- 	  if (directory_len == 0 && (flags & GX_ALLDIRS) == 0)
- 	    dflags &= ~GX_ADDCURDIR;
- 	}
+--- lib/sh/fpurge.c.orig	2009-04-20 01:12:23.000000000 +0000
++++ lib/sh/fpurge.c
+@@ -53,7 +53,7 @@ fpurge (FILE *fp)
+   extern int fpurge (FILE *);
+ # endif
+   int result = fpurge (fp);
+-# if defined __sferror || defined __DragonFly__ /* FreeBSD, NetBSD, OpenBSD, DragonFly, MacOS X, Cygwin */
++# if defined __sferror /* FreeBSD, NetBSD, OpenBSD, DragonFly, MacOS X, Cygwin */
+   if (result == 0)
+     /* Correct the invariants that fpurge broke.
+        <stdio.h> on BSD systems says:
+@@ -63,6 +63,9 @@ fpurge (FILE *fp)
+        into the buffer, although they shouldn't be allowed to.  */
+     if ((fp->_flags & __SRD) != 0)
+       fp->_w = 0;
++#elif defined __DragonFly__
++    if ((((struct __FILE_public *) fp)->_flags & __SRD) != 0)
++      ((struct __FILE_public *) fp)->_w = 0;
+ # endif
+   return result;
+ 
+@@ -81,7 +84,7 @@ fpurge (FILE *fp)
+       fp->_IO_save_base = NULL;
+     }
+   return 0;
+-# elif defined __sferror || defined __DragonFly__ /* FreeBSD, NetBSD, OpenBSD, DragonFly, MacOS X, Cygwin */
++# elif defined __sferror /* FreeBSD, NetBSD, OpenBSD, MacOS X, Cygwin */
+   fp_->_p = fp_->_bf._base;
+   fp_->_r = 0;
+   fp_->_w = ((fp_->_flags & (__SLBF | __SNBF | __SRD)) == 0 /* fully buffered and not currently reading? */

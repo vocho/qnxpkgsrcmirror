@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.46 2009/03/18 15:30:35 jmcneill Exp $
+# $NetBSD: Makefile,v 1.48 2010/01/17 12:02:06 wiz Exp $
 
 DISTNAME=	ircii-pana-1.1-final
 PKGNAME=	bitchx-1.1
-PKGREVISION=	3
+PKGREVISION=	4
 CATEGORIES=	chat
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=bitchx/}
 
@@ -11,7 +11,7 @@ HOMEPAGE=	http://www.bitchx.org/
 COMMENT=	IRC client based on ircII
 
 # This package is not even remotely 64-bit clean
-NOT_FOR_PLATFORM=	*-*-alpha *-*-sparc64 *-*-x86_64
+NOT_FOR_PLATFORM=	${LP64PLATFORMS}
 
 WRKSRC=			${WRKDIR}/BitchX
 GNU_CONFIGURE=		YES

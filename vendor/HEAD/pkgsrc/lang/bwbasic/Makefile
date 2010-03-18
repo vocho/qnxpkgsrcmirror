@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.12 2009/03/02 14:27:11 joerg Exp $
+# $NetBSD: Makefile,v 1.14 2010/03/03 12:38:28 obache Exp $
 
 PKGNAME=	${DISTNAME:=pl2}
 DISTNAME=	bwbasic-2.20
@@ -7,7 +7,9 @@ MASTER_SITES=	http://www.nicholson.com/rhn/files/
 EXTRACT_SUFX=	.tar.Z
 
 MAINTAINER=	jspath@bcpl.net
+HOMEPAGE=	http://bwbasic.sourceforge.net/
 COMMENT=	The Bywater Basic interpreter
+LICENSE=	gnu-gpl-v2
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 

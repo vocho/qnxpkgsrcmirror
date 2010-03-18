@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.12 2008/06/12 02:14:46 joerg Exp $
+# $NetBSD: Makefile,v 1.14 2010/03/15 16:45:59 taca Exp $
 
-DISTNAME=	Log-1.8.4
-PKGREVISION=	1
+DISTNAME=	Log-1.12.0
 CATEGORIES=	sysutils
 
 MAINTAINER=	jdolecek@NetBSD.org
@@ -10,7 +9,7 @@ COMMENT=	PHP Log framework provides an abstracted logging system
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
-CONFLICTS=	php-pear-Log-[0-9]
+CONFLICTS=	php-pear-Log-[0-9]*
 
 .include "../../lang/php/pear.mk"
 .include "../../mk/bsd.pkg.mk"

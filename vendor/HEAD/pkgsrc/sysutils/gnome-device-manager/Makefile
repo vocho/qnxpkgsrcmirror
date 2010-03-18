@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.3 2009/08/26 19:58:18 sno Exp $
+# $NetBSD: Makefile,v 1.5 2010/01/27 19:03:58 joerg Exp $
 #
 
 DISTNAME=	gnome-device-manager-0.2
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	sysutils gnome
 MASTER_SITES=	http://hal.freedesktop.org/releases/
 EXTRACT_SUFX=	.tar.bz2
@@ -10,6 +10,8 @@ EXTRACT_SUFX=	.tar.bz2
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://hal.freedesktop.org/
 COMMENT=	GNOME program to manage devices and device drivers
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=		YES
 USE_PKGLOCALEDIR=	YES

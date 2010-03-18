@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.32 2009/08/26 19:58:11 sno Exp $
+# $NetBSD: Makefile,v 1.34 2010/01/18 09:59:20 wiz Exp $
 
 DISTNAME=		tightvnc-1.3.10
-PKGREVISION=		1
+PKGREVISION=		3
 CATEGORIES=		net x11
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=vnc-tight/}
 DISTFILES=		${DISTNAME}_unixsrc.tar.bz2

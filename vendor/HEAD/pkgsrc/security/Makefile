@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.370 2009/12/14 08:01:06 agc Exp $
+# $NetBSD: Makefile,v 1.378 2010/03/15 19:44:02 pettai Exp $
 #
 
 COMMENT=	Security tools
@@ -151,6 +151,7 @@ SUBDIR+=	ocaml-ssl
 SUBDIR+=	opencdk
 SUBDIR+=	openct
 SUBDIR+=	openpam
+SUBDIR+=	opensaml
 SUBDIR+=	opensc
 SUBDIR+=	opensc-signer
 SUBDIR+=	openssh
@@ -163,10 +164,12 @@ SUBDIR+=	openvas-server
 SUBDIR+=	otpCalc
 SUBDIR+=	p0f
 SUBDIR+=	p5-Authen-CAS-Client
+SUBDIR+=	p5-Authen-Htpasswd
 SUBDIR+=	p5-Authen-PAM
 SUBDIR+=	p5-Authen-PluggableCaptcha
 SUBDIR+=	p5-Authen-SASL
 SUBDIR+=	p5-Authen-SASL-Cyrus
+SUBDIR+=	p5-Authen-TacacsPlus
 SUBDIR+=	p5-Crypt-Blowfish
 SUBDIR+=	p5-Crypt-CAST5_PP
 SUBDIR+=	p5-Crypt-CBC
@@ -237,6 +240,7 @@ SUBDIR+=	pam-passwdqc
 SUBDIR+=	pam-pwauth_suid
 SUBDIR+=	pam-radius
 SUBDIR+=	pam-saml
+SUBDIR+=	pam-tacplus
 SUBDIR+=	pam_ssh_agent_auth
 SUBDIR+=	pcsc-lite
 SUBDIR+=	pcsc-tools
@@ -248,6 +252,10 @@ SUBDIR+=	php-mcrypt
 SUBDIR+=	php-mhash
 SUBDIR+=	php-suhosin
 SUBDIR+=	pinentry
+SUBDIR+=	pinentry-gtk
+SUBDIR+=	pinentry-gtk2
+SUBDIR+=	pinentry-qt
+SUBDIR+=	pinentry-qt4
 SUBDIR+=	pinepgp
 SUBDIR+=	pkcs11-helper
 SUBDIR+=	pks
@@ -312,6 +320,7 @@ SUBDIR+=	smtpd
 SUBDIR+=	sniff
 SUBDIR+=	snortsnarf
 SUBDIR+=	snow
+SUBDIR+=	softhsm
 SUBDIR+=	srm
 SUBDIR+=	srp_client
 SUBDIR+=	ssh-askpass
@@ -339,5 +348,6 @@ SUBDIR+=	xml-security-c
 SUBDIR+=	xmlsec1
 SUBDIR+=	yafic
 SUBDIR+=	zebedee
+SUBDIR+=	zkt
 
 .include "../mk/misc/category.mk"

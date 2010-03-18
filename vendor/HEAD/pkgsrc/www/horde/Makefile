@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.64 2009/12/20 22:15:13 tonnerre Exp $
+# $NetBSD: Makefile,v 1.68 2010/03/16 16:02:21 taca Exp $
 
 DISTNAME=	horde-3.3.6
+PKGREVISION=	1
 CATEGORIES=	www
 MASTER_SITES=	http://ftp.horde.org/pub/horde/ \
 		ftp://ftp.horde.org/pub/horde/
@@ -8,6 +9,8 @@ MASTER_SITES=	http://ftp.horde.org/pub/horde/ \
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.horde.org/
 COMMENT=	PHP application framework
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 CONFLICTS+=	horde-2.*{,nb*}
 
@@ -21,11 +24,7 @@ DEPENDS+=	${PHP_PKG_PREFIX}-pear-Log-[0-9]*:../../sysutils/pear-Log
 DEPENDS+=	${PHP_PKG_PREFIX}-pear-Mail_Mime-[0-9]*:../../mail/pear-Mail_Mime
 DEPENDS+=	${PHP_PKG_PREFIX}-pear-DB-[0-9]*:../../databases/pear-DB
 DEPENDS+=	${APACHE_PKG_PREFIX}-${PHP_PKG_PREFIX}>=4.3.3:../../www/ap-php
-.if ${PKG_PHP_VERSION} == "4"
-DEPENDS+=	${PHP_PKG_PREFIX}-domxml>=4.3.3:../../textproc/php4-domxml
-.elif ${PKG_PHP_VERSION} == "5"
-DEPENDS+=	${PHP_PKG_PREFIX}-dom-[0-9]*:../../textproc/php5-dom
-.endif
+DEPENDS+=	${PHP_PKG_PREFIX}-dom-[0-9]*:../../textproc/php-dom
 DEPENDS+=	${PHP_PKG_PREFIX}-zlib>=4.3.3:../../archivers/php-zlib
 DEPENDS+=	${PHP_PKG_PREFIX}-pear-Console_Table-[0-9]*:../../textproc/pear-Console_Table
 DEPENDS+=	${PHP_PKG_PREFIX}-pear-File_Find-[0-9]*:../../textproc/pear-File_Find
@@ -60,28 +59,30 @@ REPLACE_FILES.php=	po/translation.php \
 			scripts/import_squirrelmail_sql_prefs.php
 
 CONF_FILES+=		${EGDIR}/horde.conf ${PKG_SYSCONFDIR}/horde.conf
-CONF_FILES_PERMS+=	${HORDEDIR}/config/conf.php.dist \
+OWN_DIRS_PERMS+=	${HORDEDIR}/config \
+			${APACHE_USER} ${ROOT_GROUP} 0750
+CONF_FILES_PERMS+=	${EGDIR}/config/conf.php \
 			${HORDEDIR}/config/conf.php \
 			${APACHE_USER} ${ROOT_GROUP} 0640
-CONF_FILES_PERMS+=	${HORDEDIR}/config/conf.xml.dist \
+CONF_FILES_PERMS+=	${EGDIR}/config/conf.xml \
 			${HORDEDIR}/config/conf.xml \
 			${APACHE_USER} ${ROOT_GROUP} 0440
-CONF_FILES_PERMS+=	${HORDEDIR}/config/mime_drivers.php.dist \
+CONF_FILES_PERMS+=	${EGDIR}/config/mime_drivers.php \
 			${HORDEDIR}/config/mime_drivers.php \
 			${APACHE_USER} ${ROOT_GROUP} 0440
-CONF_FILES_PERMS+=	${HORDEDIR}/config/motd.php.dist \
+CONF_FILES_PERMS+=	${EGDIR}/config/motd.php \
 			${HORDEDIR}/config/motd.php \
 			${APACHE_USER} ${ROOT_GROUP} 0440
-CONF_FILES_PERMS+=	${HORDEDIR}/config/nls.php.dist \
+CONF_FILES_PERMS+=	${EGDIR}/config/nls.php \
 			${HORDEDIR}/config/nls.php \
 			${APACHE_USER} ${ROOT_GROUP} 0440
-CONF_FILES_PERMS+=	${HORDEDIR}/config/prefs.php.dist \
+CONF_FILES_PERMS+=	${EGDIR}/config/prefs.php \
 			${HORDEDIR}/config/prefs.php \
 			${APACHE_USER} ${ROOT_GROUP} 0440
-CONF_FILES_PERMS+=	${HORDEDIR}/config/registry.php.dist \
+CONF_FILES_PERMS+=	${EGDIR}/config/registry.php \
 			${HORDEDIR}/config/registry.php \
 			${APACHE_USER} ${ROOT_GROUP} 0440
-CONF_FILES_PERMS+=	${HORDEDIR}/config/hooks.php.dist \
+CONF_FILES_PERMS+=	${EGDIR}/config/hooks.php \
 			${HORDEDIR}/config/hooks.php \
 			${APACHE_USER} ${ROOT_GROUP} 0440
 
@@ -121,31 +122,29 @@ do-build:
 	${FIND} ${WRKSRC} -name .htaccess -print | ${XARGS} ${RM} -f
 	${CHMOD} 0750 ${WRKSRC}/scripts/set_perms.sh
 
+INSTALLATION_DIRS+=	${DOCDIR} ${EGDIR}/config ${HORDEDIR}/config
+
 do-install:
-	${INSTALL_DATA_DIR} ${DOCDIR}
-	${INSTALL_DATA_DIR} ${EGDIR}
-	${INSTALL_DATA_DIR} ${HORDEDIR}
-	${INSTALL_DATA_DIR} ${HORDEDIR}/config
-	${INSTALL_DATA} ${WRKSRC}/horde.conf.dist ${EGDIR}/horde.conf
-	${INSTALL_DATA} ${WRKSRC}/COPYING ${DOCDIR}
-	${INSTALL_DATA} ${WRKSRC}/README ${DOCDIR}
-	${INSTALL_DATA} ${WRKSRC}/docs/* ${DOCDIR}
+	${INSTALL_DATA} ${WRKSRC}/horde.conf.dist ${DESTDIR}${EGDIR}/horde.conf
+	${INSTALL_DATA} ${WRKSRC}/COPYING ${DESTDIR}${DOCDIR}
+	${INSTALL_DATA} ${WRKSRC}/README ${DESTDIR}${DOCDIR}
+	${INSTALL_DATA} ${WRKSRC}/docs/* ${DESTDIR}${DOCDIR}
 
 .	for d in ${PAXDIRS}
-		${INSTALL_DATA_DIR} ${HORDEDIR}/${d}
+		${INSTALL_DATA_DIR} ${DESTDIR}${HORDEDIR}/${d}
 .	endfor
 
 .	for d in ${PAXDIRS}
-		cd ${WRKSRC}/${d} && pax -rwpam . ${HORDEDIR}/${d}
+		cd ${WRKSRC}/${d} && pax -rwpam . ${DESTDIR}${HORDEDIR}/${d}
 .	endfor
 
-	${INSTALL_DATA} ${WRKSRC}/config/*.dist ${HORDEDIR}/config
-	${INSTALL_DATA} ${WRKSRC}/*.php ${HORDEDIR}
-	${CHOWN} -R ${SHAREOWN}:${SHAREGRP} ${HORDEDIR}
-	${FIND} ${HORDEDIR} -type d -print | ${XARGS} ${CHMOD} ${PKGDIRMODE}
-	${FIND} ${HORDEDIR} -type f -print | ${XARGS} ${CHMOD} ${SHAREMODE}
-	${CHOWN} ${APACHE_USER}:${SHAREGRP} ${HORDEDIR}/config
-	${CHMOD} 0750 ${HORDEDIR}/config
+	cd ${WRKSRC}/config && for f in *.dist; do \
+		${INSTALL_DATA} $$f ${DESTDIR}${EGDIR}/config/$${f%.dist}; \
+	done
+	${INSTALL_DATA} ${WRKSRC}/*.php ${DESTDIR}${HORDEDIR}
+	${CHOWN} -R ${SHAREOWN}:${SHAREGRP} ${DESTDIR}${HORDEDIR}
+	${FIND} ${DESTDIR}${HORDEDIR} -type d -print | ${XARGS} ${CHMOD} ${PKGDIRMODE}
+	${FIND} ${DESTDIR}${HORDEDIR} -type f -print | ${XARGS} ${CHMOD} ${SHAREMODE}
 
 .include "../../mk/apachever.mk"
 .include "../../mk/bsd.pkg.mk"

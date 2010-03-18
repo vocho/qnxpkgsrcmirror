@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.9 2009/08/26 19:57:51 sno Exp $
+# $NetBSD: Makefile,v 1.12 2010/02/15 17:21:20 joerg Exp $
 #
 
 DISTNAME=	spca5xx-20060402
 PKGNAME=	spcaview-0.6b
 #PKGREVISION=	1
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	graphics x11
 MASTER_SITES=	http://mxhaard.free.fr/spca50x/Download/oldrelease/
 
@@ -16,9 +16,14 @@ MAINTAINER=	hamajima@NetBSD.org
 HOMEPAGE=	http://www.medias.ne.jp/~takam/bsd/NetBSD.html#spca561
 COMMENT=	USB Cameras based SPCA5xx Utilities
 
+PKG_DESTDIR_SUPPORT=	user-destdir
+MAKE_JOBS_SAFE=		no
+
 WRKSRC=		${WRKDIR}/${DISTNAME}/drivers/usb
 MAKE_ENV+=	NOGCCERROR=
 MAKE_ENV+=	${BSD_MAKE_ENV}
+
+INSTALLATION_DIRS+=	bin ${PKGMANDIR}/cat1 ${PKGMANDIR}/man1
 
 .include "../../graphics/imlib/buildlink3.mk"
 .include "../../x11/gtk/buildlink3.mk"

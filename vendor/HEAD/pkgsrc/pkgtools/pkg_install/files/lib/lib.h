@@ -1,4 +1,4 @@
-/* $NetBSD: lib.h,v 1.58 2009/08/16 21:10:15 joerg Exp $ */
+/* $NetBSD: lib.h,v 1.62 2010/02/20 04:40:03 joerg Exp $ */
 
 /* from FreeBSD Id: lib.h,v 1.25 1997/10/08 07:48:03 charnier Exp */
 
@@ -184,7 +184,8 @@ typedef enum bi_ent_t {
 	BI_IGNORE_RECOMMENDED,	/*  3 */
 	BI_USE_ABI_DEPENDS,	/*  4 */
 	BI_LICENSE,		/*  5 */
-	BI_ENUM_COUNT		/*  6 */
+	BI_PKGTOOLS_VERSION,	/*  6 */
+	BI_ENUM_COUNT		/*  7 */
 }	bi_ent_t;
 
 /* Types */
@@ -321,8 +322,8 @@ int	has_pkgdir(const char *);
 struct archive;
 struct archive_entry;
 
-struct archive *open_archive(const char *);
-struct archive *find_archive(const char *, int);
+struct archive *open_archive(const char *, char **);
+struct archive *find_archive(const char *, int, char **);
 void	process_pkg_path(void);
 struct url *find_best_package(const char *, const char *, int);
 
@@ -354,10 +355,18 @@ int	pkgdb_dump(void);
 int     pkgdb_remove(const char *);
 int	pkgdb_remove_pkg(const char *);
 char   *pkgdb_refcount_dir(void);
-char   *_pkgdb_getPKGDB_FILE(char *, unsigned);
-const char *_pkgdb_getPKGDB_DIR(void);
-void	_pkgdb_setPKGDB_DIR(const char *);
-
+char   *pkgdb_get_database(void);
+const char   *pkgdb_get_dir(void);
+/*
+ * Priorities:
+ * 0 builtin default
+ * 1 config file
+ * 2 environment
+ * 3 command line
+ * 4 destdir/views reset
+ */
+void	pkgdb_set_dir(const char *, int);
+char   *pkgdb_pkg_dir(const char *);
 char   *pkgdb_pkg_file(const char *, const char *);
 
 /* List of packages functions */
@@ -382,8 +391,8 @@ void pkg_install_config(void);
 void pkg_install_show_variable(const char *);
 
 /* Package signature creation and validation */
-int pkg_verify_signature(struct archive **, struct archive_entry **, char **);
-int pkg_full_signature_check(struct archive **);
+int pkg_verify_signature(const char *, struct archive **, struct archive_entry **, char **);
+int pkg_full_signature_check(const char *, struct archive **);
 #ifdef HAVE_SSL
 void pkg_sign_x509(const char *, const char *, const char *, const char *);
 #endif
@@ -426,7 +435,9 @@ extern const char *certs_packages;
 extern const char *certs_pkg_vulnerabilities;
 extern const char *check_vulnerabilities;
 extern const char *config_file;
+extern const char *config_pkg_dbdir;
 extern const char *config_pkg_path;
+extern const char *config_pkg_refcount_dbdir;
 extern const char *do_license_check;
 extern const char *verified_installation;
 extern const char *gpg_cmd;

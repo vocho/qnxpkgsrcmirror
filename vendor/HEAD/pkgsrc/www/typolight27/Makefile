@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.12 2009/12/20 04:22:04 taca Exp $
+# $NetBSD: Makefile,v 1.16 2010/03/16 16:02:21 taca Exp $
 #
 
 DISTNAME=	typolight-${TL_VERSION}
@@ -11,15 +11,13 @@ HOMEPAGE=	http://www.typolight.org/
 COMMENT=	Powerful web content management system (CMS)
 LICENSE=	gnu-lgpl-v2.1
 
-DEPENDS+=	${PHP_PKG_PREFIX}-gd>=5.1.0:../../graphics/php-gd
-DEPENDS+=	${PHP_PKG_PREFIX}-mbstring>=5.1.0:../../misc/php-mbstring
-DEPENDS+=	${PHP_PKG_PREFIX}-mysql>=5.1.0:../../databases/php-mysql
-DEPENDS+=	${PHP_PKG_PREFIX}-mcrypt>=5.1.0:../../security/php-mcrypt
-DEPENDS+=	${PHP_PKG_PREFIX}-soap>=5.1.0:../../net/php5-soap
+DEPENDS+=	${PHP_PKG_PREFIX}-gd>=5.2.0:../../graphics/php-gd
+DEPENDS+=	${PHP_PKG_PREFIX}-mbstring>=5.2.0:../../converters/php-mbstring
+DEPENDS+=	${PHP_PKG_PREFIX}-mysql>=5.2.0:../../databases/php-mysql
+DEPENDS+=	${PHP_PKG_PREFIX}-mcrypt>=5.2.0:../../security/php-mcrypt
+DEPENDS+=	${PHP_PKG_PREFIX}-soap>=5.2.0:../../net/php-soap
 
-PKG_DESTDIR_SUPPORT=	destdir
-
-PHP_VERSIONS_ACCEPTED=	5
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS=	pax
 NO_BUILD=	yes
@@ -76,23 +74,24 @@ WWW_SYSFILES=	config/.htaccess constants.php drivers functions.php \
 
 INSTALLATION_DIRS+=	${TL_DOCDIR} ${TL_EGDIR} ${TL_WEBDIR}/system/config
 OWN_DIRS_PERMS+= \
-	${TL_WEBDIR} ${BINOWN} ${APACHE_GROUP} 0775 \
-	${TL_WEBDIR}/plugins ${BINOWN} ${APACHE_GROUP} 0775 \
-	${TL_WEBDIR}/plugins/tcpdf/cache ${BINOWN} ${APACHE_GROUP} 0775 \
-	${TL_WEBDIR}/system ${BINOWN} ${APACHE_GROUP} 0775 \
-	${TL_WEBDIR}/system/drivers ${BINOWN} ${APACHE_GROUP} 0775 \
-	${TL_WEBDIR}/system/html ${BINOWN} ${APACHE_GROUP} 0770 \
-	${TL_WEBDIR}/system/libraries ${BINOWN} ${APACHE_GROUP} 0775 \
-	${TL_WEBDIR}/system/logs ${BINOWN} ${APACHE_GROUP} 0770 \
-	${TL_WEBDIR}/system/modules ${BINOWN} ${APACHE_GROUP} 0775 \
-	${TL_WEBDIR}/system/themes ${BINOWN} ${APACHE_GROUP} 0775 \
-	${TL_WEBDIR}/system/tmp ${BINOWN} ${APACHE_GROUP} 0770 \
-	${TL_WEBDIR}/templates ${BINOWN} ${APACHE_GROUP} 0770 \
-	${TL_WEBDIR}/tl_files ${BINOWN} ${APACHE_GROUP} 0770 \
+	${TL_WEBDIR} ${REAL_ROOT_USER} ${APACHE_GROUP} 0775 \
+	${TL_WEBDIR}/plugins ${REAL_ROOT_USER} ${APACHE_GROUP} 0775 \
+	${TL_WEBDIR}/plugins/tcpdf/cache \
+		${REAL_ROOT_USER} ${APACHE_GROUP} 0775 \
+	${TL_WEBDIR}/system ${REAL_ROOT_USER} ${APACHE_GROUP} 0775 \
+	${TL_WEBDIR}/system/drivers ${REAL_ROOT_USER} ${APACHE_GROUP} 0775 \
+	${TL_WEBDIR}/system/html ${REAL_ROOT_USER} ${APACHE_GROUP} 0770 \
+	${TL_WEBDIR}/system/libraries ${REAL_ROOT_USER} ${APACHE_GROUP} 0775 \
+	${TL_WEBDIR}/system/logs ${REAL_ROOT_USER} ${APACHE_GROUP} 0770 \
+	${TL_WEBDIR}/system/modules ${REAL_ROOT_USER} ${APACHE_GROUP} 0775 \
+	${TL_WEBDIR}/system/themes ${REAL_ROOT_USER} ${APACHE_GROUP} 0775 \
+	${TL_WEBDIR}/system/tmp ${REAL_ROOT_USER} ${APACHE_GROUP} 0770 \
+	${TL_WEBDIR}/templates ${REAL_ROOT_USER} ${APACHE_GROUP} 0770 \
+	${TL_WEBDIR}/tl_files ${REAL_ROOT_USER} ${APACHE_GROUP} 0770 \
 	${TL_WEBDIR}/tl_files/tiny_templates \
-	${BINOWN} ${APACHE_GROUP} 0770 \
+	${REAL_ROOT_USER} ${APACHE_GROUP} 0770 \
 	${TL_WEBDIR}/tl_files/xBrowser_style_sheets \
-	${BINOWN} ${APACHE_GROUP} 0770
+		${REAL_ROOT_USER} ${APACHE_GROUP} 0770
 
 PKG_GROUPS_VARS+=	APACHE_GROUP
 PKG_USERS_VARS+=	APACHE_USER

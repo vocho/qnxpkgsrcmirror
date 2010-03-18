@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.179 2009/11/10 16:20:17 wiz Exp $
+# $NetBSD: Makefile,v 1.182 2010/02/27 16:06:51 kent Exp $
 #
 
 COMMENT=	Emulators for other operating systems
@@ -43,6 +43,7 @@ SUBDIR+=	dega
 SUBDIR+=	dgen
 SUBDIR+=	dosbox
 SUBDIR+=	doscmd
+SUBDIR+=	dynagen
 SUBDIR+=	dynamips
 SUBDIR+=	e-uae
 SUBDIR+=	fceu
@@ -94,7 +95,6 @@ SUBDIR+=	osf1_lib
 SUBDIR+=	p11
 SUBDIR+=	palmosemulator
 SUBDIR+=	pcemu
-SUBDIR+=	peace
 SUBDIR+=	pearpc
 SUBDIR+=	qemu
 SUBDIR+=	raine
@@ -172,10 +172,6 @@ SUBDIR+=	uips
 SUBDIR+=	vba
 SUBDIR+=	vice
 SUBDIR+=	vmips
-SUBDIR+=	vmware
-SUBDIR+=	vmware-module
-SUBDIR+=	vmware-module3
-SUBDIR+=	vmware3
 SUBDIR+=	wine
 SUBDIR+=	wine-devel
 SUBDIR+=	x48

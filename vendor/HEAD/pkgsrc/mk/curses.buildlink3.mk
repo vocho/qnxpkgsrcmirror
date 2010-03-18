@@ -1,4 +1,4 @@
-# $NetBSD: curses.buildlink3.mk,v 1.14 2009/03/20 19:25:01 joerg Exp $
+# $NetBSD: curses.buildlink3.mk,v 1.17 2010/02/07 10:28:13 roy Exp $
 #
 # This Makefile fragment is meant to be included by packages that require
 # any curses implementation instead of one particular one.  The available
@@ -25,7 +25,6 @@
 #	The name of the selected curses implementation.
 
 CURSES_BUILDLINK3_MK:=	${CURSES_BUILDLINK3_MK}+
-
 .include "bsd.fast.prefs.mk"
 
 .if !empty(CURSES_BUILDLINK3_MK:M+)

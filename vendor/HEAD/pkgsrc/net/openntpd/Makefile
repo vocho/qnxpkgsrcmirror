@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.26 2009/10/04 17:31:32 zafer Exp $
+# $NetBSD: Makefile,v 1.28 2010/02/11 22:30:40 joerg Exp $
 
 DISTNAME=		openntpd-3.9p1
-PKGREVISION=		1
+PKGREVISION=		2
 CATEGORIES=		net
 MASTER_SITES=		ftp://ftp.openbsd.org/pub/OpenBSD/OpenNTPD/ \
 			ftp://ftp3.usa.openbsd.org/pub/OpenBSD/OpenNTPD/ \
@@ -13,6 +13,7 @@ MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://www.openntpd.org/
 COMMENT=		Free implementation of the Network Time Protocol
 
+PKG_DESTDIR_SUPPORT=	user-destdir
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
 
 CONFLICTS+=		ntp-[0-9]*
@@ -33,11 +34,13 @@ BUILD_DEFS+=		VARBASE
 OWN_DIRS=		${VARBASE}/chroot/ntpd
 AUTO_MKDIRS=		yes
 
+INSTALLATION_DIRS+=	sbin ${PKGMANDIR}/man5 ${PKGMANDIR}/man8 ${EGDIR}
+
 do-install:
-	${INSTALL_PROGRAM} ${WRKSRC}/ntpd ${PREFIX}/sbin/ntpd
-	${INSTALL_MAN} ${WRKSRC}/ntpd.8 ${PREFIX}/${PKGMANDIR}/man8/ntpd.8
-	${INSTALL_MAN} ${WRKSRC}/ntpd.conf.5 ${PREFIX}/${PKGMANDIR}/man5/ntpd.conf.5
-	${INSTALL_DATA} ${WRKSRC}/ntpd.conf ${EGDIR}/ntpd.conf
+	${INSTALL_PROGRAM} ${WRKSRC}/ntpd ${DESTDIR}${PREFIX}/sbin/ntpd
+	${INSTALL_MAN} ${WRKSRC}/ntpd.8 ${DESTDIR}${PREFIX}/${PKGMANDIR}/man8/ntpd.8
+	${INSTALL_MAN} ${WRKSRC}/ntpd.conf.5 ${DESTDIR}${PREFIX}/${PKGMANDIR}/man5/ntpd.conf.5
+	${INSTALL_DATA} ${WRKSRC}/ntpd.conf ${DESTDIR}${EGDIR}/ntpd.conf
 
 .include "../../security/openssl/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

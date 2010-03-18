@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.51 2009/08/26 19:58:12 sno Exp $
+# $NetBSD: Makefile,v 1.53 2010/02/11 23:26:12 joerg Exp $
 #
 
 DISTNAME=	xtraceroute-0.8.14
-PKGREVISION=	9
+PKGREVISION=	10
 CATEGORIES=	net x11
 MASTER_SITES=	http://www.dtek.chalmers.se/~d3august/xt/dl/
 DISTFILES=	${DISTNAME}${EXTRACT_SUFX} \
@@ -11,6 +11,8 @@ DISTFILES=	${DISTNAME}${EXTRACT_SUFX} \
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.dtek.chalmers.se/~d3august/xt/index.html
 COMMENT=	Graphical version of traceroute, which traces the route IP packets go
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=		yes
 USE_PKGLOCALEDIR=	yes
@@ -30,10 +32,11 @@ CONFIGURE_ARGS+= --with-lib-MesaGL
 CONFIGURE_ARGS+=	--with-traceroute=/usr/etc/traceroute
 .endif
 
+INSTALLATION_DIRS+=	share/xtraceroute
+
 post-install:
-	${INSTALL_DATA_DIR} ${PREFIX}/share/xtraceroute
-	${INSTALL_DATA} ${WRKDIR}/hosts.cache    ${PREFIX}/share/xtraceroute/hosts.cache
-	${INSTALL_DATA} ${WRKDIR}/networks.cache ${PREFIX}/share/xtraceroute/networks.cache
+	${INSTALL_DATA} ${WRKDIR}/hosts.cache    ${DESTDIR}${PREFIX}/share/xtraceroute/hosts.cache
+	${INSTALL_DATA} ${WRKDIR}/networks.cache ${DESTDIR}${PREFIX}/share/xtraceroute/networks.cache
 
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../graphics/tiff/buildlink3.mk"

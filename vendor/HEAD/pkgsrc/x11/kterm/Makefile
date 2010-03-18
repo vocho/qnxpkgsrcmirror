@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.45 2009/08/26 19:58:38 sno Exp $
+# $NetBSD: Makefile,v 1.47 2010/02/21 15:39:12 wiz Exp $
 
 DISTNAME=	kterm-6.2.0
-PKGREVISION=	12
+PKGREVISION=	13
 CATEGORIES=	x11
 MASTER_SITES=	${MASTER_SITE_XCONTRIB:=applications/}
 
@@ -29,10 +29,10 @@ BUILD_DEFS+=	KTERM_USE_WALLPAPER
 SITES.KTerm-BGP-Imlib-1.0.patch.gz=	http://delegate.uec.ac.jp:8081/club/mma/%7Etakkun/fun/handling/
 PATCHFILES+=	KTerm-BGP-Imlib-1.0.patch.gz
 .    include "../../graphics/imlib/buildlink3.mk"
-.  elif ${KTERM_USE_WALLPAPER} == "YES"
-SITES.KTerm-BGP-1.0.patch.gz=	http://delegate.uec.ac.jp:8081/club/mma/%7Etakkun/fun/handling/
-PATCHFILES+=	KTerm-BGP-1.0.patch.gz
-.    include "../../x11/libXpm/buildlink3.mk"
+#.  elif ${KTERM_USE_WALLPAPER} == "YES"
+#SITES.KTerm-BGP-1.0.patch.gz=	http://delegate.uec.ac.jp:8081/club/mma/%7Etakkun/fun/handling/
+#PATCHFILES+=	KTerm-BGP-1.0.patch.gz
+#.    include "../../x11/libXpm/buildlink3.mk"
 .  endif
 .endif
 

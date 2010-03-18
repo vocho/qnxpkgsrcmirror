@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.22 2009/11/23 09:37:45 ghen Exp $
+# $NetBSD: Makefile,v 1.25 2010/03/16 16:02:21 taca Exp $
 #
 
 DISTNAME=	roundcubemail-${RCVERSION}-dep
+PKGREVISION=	1
 PKGNAME=	${DISTNAME:S/mail-${RCVERSION}-dep/-${VERSION}/}
 CATEGORIES=	mail
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=roundcubemail/}
@@ -28,12 +29,7 @@ DEPENDS+=	${PHP_PKG_PREFIX}-pear-Net_SMTP>=1.2.10:../../net/pear-Net_SMTP
 DEPENDS+=	${PHP_PKG_PREFIX}-pear-Mail_Mime>=1.3:../../mail/pear-Mail_Mime
 DEPENDS+=	${PHP_PKG_PREFIX}-pear-MDB2>=2.4.1:../../databases/pear-MDB2
 DEPENDS+=	${PHP_PKG_PREFIX}-pear-Auth_SASL-[0-9]*:../../mail/pear-Auth_SASL
-
-.if ${PKG_PHP_VERSION} == "4"
-DEPENDS+=	${PHP_PKG_PREFIX}-domxml>=4.3.3:../../textproc/php4-domxml
-.elif ${PKG_PHP_VERSION} == "5"
-DEPENDS+=	${PHP_PKG_PREFIX}-dom-[0-9]*:../../textproc/php5-dom
-.endif
+DEPENDS+=	${PHP_PKG_PREFIX}-dom-[0-9]*:../../textproc/php-dom
 
 PKG_SYSCONFSUBDIR?=	roundcube
 
@@ -61,6 +57,8 @@ OWN_DIRS_PERMS+=	${VARBASE}/tmp/roundcube \
 
 CONF_FILES=		${EGDIR}/roundcube.conf \
 			${PKG_SYSCONFDIR}/roundcube.conf
+CONF_FILES+=		${EGDIR}/mimetypes.php \
+			${PKG_SYSCONFDIR}/mimetypes.php
 CONF_FILES_PERMS+=	${EGDIR}/db.inc.php.dist \
 			${PKG_SYSCONFDIR}/db.inc.php \
 			${WWW_USER} ${WWW_GROUP} 0640
@@ -107,6 +105,8 @@ do-install:
 	${INSTALL_DATA} ${WRKSRC}/index.php ${DESTDIR}${RCDIR}/
 	${INSTALL_DATA} ${WRKSRC}/robots.txt ${DESTDIR}${RCDIR}/
 
+	${INSTALL_DATA} ${WRKSRC}/config/mimetypes.php \
+		${DESTDIR}${EGDIR}/mimetypes.php
 	${INSTALL_DATA} ${WRKSRC}/config/db.inc.php.dist \
 		${DESTDIR}${EGDIR}/db.inc.php.dist
 	${INSTALL_DATA} ${WRKSRC}/config/main.inc.php.dist \

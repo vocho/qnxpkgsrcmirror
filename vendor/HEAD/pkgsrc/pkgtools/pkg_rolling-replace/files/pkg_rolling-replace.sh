@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# $NetBSD: pkg_rolling-replace.sh,v 1.22 2009/11/13 19:40:55 sno Exp $
+# $NetBSD: pkg_rolling-replace.sh,v 1.28 2010/02/11 12:54:27 tnn Exp $
 #<license>
 # Copyright (c) 2006 BBN Technologies Corp.  All rights reserved.
 #
@@ -109,6 +109,7 @@ usage()
         -s         Replace even if the ABIs are still compatible ("strict")
         -u         Update outdated packages
         -v         Verbose
+	-D VAR=VAL Passes given variables and values to make
         -L <path>  Log to path (<path>/pkgdir/pkg)
         -X <pkg>   exclude <pkg> from being rebuilt
         -x <pkg>   exclude <pkg> from outdated check
@@ -266,7 +267,7 @@ vsleep()
 
 report()
 {
-    for a in $SUCCESSED; do
+    for a in $SUCCEEDED; do
         verbose "+ $a"
     done
 
@@ -277,11 +278,29 @@ report()
 
 abort()
 {
-	echo "*** $1"
-	echo "*** Please read the errors listed above, fix the problem,"
-	echo "*** then re-run pkg_rolling-replace to continue."
-        report
-	exit 1
+    echo "*** $1"
+    echo "*** Please read the errors listed above, fix the problem,"
+    echo "*** then re-run pkg_rolling-replace to continue."
+    report
+    exit 1
+}
+
+error()
+{
+    if [ -z "$opt_k" ]; then
+        abort "$1"
+    fi
+    echo "*** $1"
+}
+
+mark_as_succeeded()
+{
+    SUCCEEDED=$(uniqify $SUCCEEDED $1)
+}
+
+mark_as_failed()
+{
+    FAILED=$(uniqify $FAILED $1)
 }
 
 todo()
@@ -310,8 +329,10 @@ todo()
 ##
 
 EXCLUDE=
+MAKE_VAR="IN_PKG_ROLLING_REPLACE=1"
+MAKE_VAR_SEP=" "
 
-args=$(getopt Fhknursvx:X:L: $*)
+args=$(getopt FhknursvD:x:X:L: $*)
 if [ $? -ne 0 ]; then
     opt_h=1
 fi
@@ -326,6 +347,7 @@ while [ $# -gt 0 ]; do
         -s) opt_s=1 ;;
         -u) opt_u=1 ;;
         -v) opt_v=1 ;;
+	-D) MAKE_VAR="${MAKE_VAR}${MAKE_VAR_SEP}$2"; MAKE_VAR_SEP=" "; shift ;;
         -x) EXCLUDE="$EXCLUDE $(echo $2 | sed 's/,/ /g')" ; shift ;;
         -X) REALLYEXCLUDE="$REALLYEXCLUDE $(echo $2 | sed 's/,/ /g')" ; shift ;;
         -L) LOGPATH="$2"; shift ;;
@@ -344,10 +366,10 @@ else
     UNSAFE_VAR=unsafe_depends
 fi
 
-SUCCESSED=""
-SUCCESSEDSEP=""
+MAKE="${MAKE}${MAKE_VAR_SEP}${MAKE_VAR}"
+
+SUCCEEDED=""
 FAILED=""
-FAILEDSEP=""
 
 MISMATCH_TODO=
 if [ -n "$opt_u" -o -n "$opt_F" ]; then
@@ -397,6 +419,8 @@ while [ -n "$REPLACE_TODO" ]; do
         fi
     done
     pkgdir=$(${PKG_INFO} -Q PKGPATH $pkg)
+    [ -n "$pkgdir" ] || abort "Couldn't extract PKGPATH from installed package $pkg"
+
     echo "${OPI} Selecting $pkg ($pkgdir) as next package to replace"
     sleep 1
 
@@ -457,29 +481,37 @@ while [ -n "$REPLACE_TODO" ]; do
 
     # Do make replace, with clean before, and package and clean afterwards.
     fail=
-    cd "$PKGSRCDIR/$pkgdir";
-    if [ -z "$opt_F" ]; then
-        echo "${OPI} Replacing $pkgname"
-        cmd="${MAKE} clean || fail=1"
-        if [ -n "$opt_n" ]; then
-            echo "${OPI} Would run: $cmd"
-        else
-            if [ -n "$logfile" ]; then
-                eval "$cmd" >&3 2>&3
-            else
-                eval "$cmd"
-            fi
-            if [ -n "$fail" ]; then
-                FAILED="$FAILED$FAILEDSEP$pkg"
-                FAILEDSEP=" "
-                [ -n "$opt_k" ] || abort "'make clean' failed for package $pkg."
-            fi
-        fi
-        cmd="${MAKE} replace || fail=1" # XXX OLDNAME= support? xmlrpc-c -> xmlrpc-c-ss
+    if [ -d "$PKGSRCDIR/$pkgdir" ]; then
+	cd "$PKGSRCDIR/$pkgdir";
     else
-        echo "${OPI} Fetching $pkgname"
-        cmd="${MAKE} fetch depends-fetch || fail=1"
+        mark_as_failed $pkg
+	error "No package directory '$pkgdir' for $pkg."
     fi
+
+    if [ -z "$fail" ]; then
+	if [ -z "$opt_F" ]; then
+	    echo "${OPI} Replacing $pkgname"
+	    cmd="${MAKE} clean || fail=1"
+	    if [ -n "$opt_n" ]; then
+		echo "${OPI} Would run: $cmd"
+	    else
+		if [ -n "$logfile" ]; then
+		    eval "$cmd" >&3 2>&3
+		else
+		    eval "$cmd"
+		fi
+		if [ -n "$fail" ]; then
+                    mark_as_failed $pkg
+		    error "'make clean' failed for package $pkg."
+		fi
+	    fi
+	    cmd="${MAKE} replace || fail=1" # XXX OLDNAME= support? xmlrpc-c -> xmlrpc-c-ss
+	else
+	    echo "${OPI} Fetching $pkgname"
+	    cmd="${MAKE} fetch depends-fetch || fail=1"
+	fi
+    fi
+
     if [ -n "$opt_n" -a -z "$fail" ]; then
 	echo "${OPI} Would run: $cmd"
     elif [ -z "$fail" ]; then
@@ -489,9 +521,8 @@ while [ -n "$REPLACE_TODO" ]; do
             eval "$cmd"
         fi
     	if [ -n "$fail" ]; then
-            FAILED="$FAILED$FAILEDSEP$pkg"
-            FAILEDSEP=" "
-            [ -n "$opt_k" ] || abort "'make replace' failed for package $pkg."
+            mark_as_failed $pkg
+            error "'make replace' failed for package $pkg."
         fi
     fi
     if [ -z "$opt_n" -a -z "$opt_k" -a -z "$opt_F" ]; then
@@ -515,9 +546,8 @@ while [ -n "$REPLACE_TODO" ]; do
                 eval "$cmd"
             fi
             if [ -n "$fail" ]; then
-                FAILED="$FAILED$FAILEDSEP$pkg"
-                FAILEDSEP=" "
-                [ -n "$opt_k" ] || abort "'make package' failed for package $pkg."
+                mark_as_failed $pkg
+                error "'make package' failed for package $pkg."
             fi
 	fi
     fi
@@ -530,15 +560,13 @@ while [ -n "$REPLACE_TODO" ]; do
             eval "$cmd"
         fi
     	if [ -n "$fail" ]; then
-            FAILED="$FAILED$FAILEDSEP$pkg"
-            FAILEDSEP=" "
-            [ -n "$opt_k" ] || abort "'make clean' failed for package $pkg."
+            mark_as_failed $pkg
+            error "'make clean' failed for package $pkg."
         fi
     fi
 
     if [ -z "$fail" ]; then
-        SUCCESSED="$SUCCESSED$SUCCESSEDSEP$pkg"
-        SUCCESSEDSEP=" "
+        mark_as_succeeded $pkg
     fi
 
     sleep 1

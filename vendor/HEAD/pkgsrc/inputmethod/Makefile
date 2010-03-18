@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.31 2009/11/24 12:16:27 obache Exp $
+# $NetBSD: Makefile,v 1.33 2010/02/16 01:15:21 obache Exp $
 #
 
 COMMENT=	Input method tools and libraries
@@ -54,10 +54,9 @@ SUBDIR+=	scim-thai
 SUBDIR+=	scim-tomoe
 SUBDIR+=	scim-uim
 SUBDIR+=	scim-unikey
-SUBDIR+=	sj3-dict
-SUBDIR+=	sj3-lib
+SUBDIR+=	sj3
+SUBDIR+=	sj3-client
 SUBDIR+=	sj3-server
-SUBDIR+=	sj3-server-bin
 SUBDIR+=	skk
 SUBDIR+=	skkfep
 SUBDIR+=	skkinput
@@ -67,7 +66,6 @@ SUBDIR+=	tomoe
 SUBDIR+=	tomoe-gtk
 SUBDIR+=	uim
 SUBDIR+=	uim-elisp
-SUBDIR+=	uim-qt4-immodule
 SUBDIR+=	uim-tomoe-gtk
 SUBDIR+=	unicon-im
 SUBDIR+=	xcin

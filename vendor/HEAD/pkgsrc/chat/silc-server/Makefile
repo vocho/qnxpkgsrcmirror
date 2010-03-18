@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.60 2009/04/28 19:26:24 zafer Exp $
+# $NetBSD: Makefile,v 1.62 2010/02/19 21:01:36 joerg Exp $
 #
 
 DISTNAME=		silc-server-1.1.6
+PKGREVISION=		1
 CATEGORIES=		chat security
 MASTER_SITES=		http://www.silcnet.org/download/server/sources/ \
 			ftp://ftp.silcnet.org/silc/server/sources/ 
@@ -10,6 +11,8 @@ EXTRACT_SUFX=		.tar.bz2
 MAINTAINER=		salo@NetBSD.org
 HOMEPAGE=		http://www.silcnet.org/
 COMMENT=		Server for the Secure Internet Live Conferencing (SILC) protocol
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=		yes
 USE_LIBTOOL=		yes
@@ -36,7 +39,7 @@ CONF_FILES+=		${EGDIR}/silcd.conf.default \
 CONF_FILES+=		${EGDIR}/silcalgs.conf.default \
 			${PKG_SYSCONFDIR}/silcalgs.conf
 CONF_FILES_PERMS+=	${EGDIR}/motd.txt.default ${PKG_SYSCONFDIR}/motd.txt \
-			${ROOT_USER} ${ROOT_GROUP} 0644
+			${REAL_ROOT_USER} ${ROOT_GROUP} 0644
 
 RCD_SCRIPTS=		silcd
 
@@ -76,7 +79,9 @@ SUBST_SED.paths=	-e 's,@PREFIX@,${PREFIX},'
 post-extract:
 	${CP} ${FILESDIR}/motd.txt ${WRKSRC}
 
+INSTALLATION_DIRS+=	${EGDIR}
+
 post-install:
-	${INSTALL_DATA} ${WRKSRC}/motd.txt ${EGDIR}/motd.txt.default
+	${INSTALL_DATA} ${WRKSRC}/motd.txt ${DESTDIR}${EGDIR}/motd.txt.default
 
 .include "../../mk/bsd.pkg.mk"

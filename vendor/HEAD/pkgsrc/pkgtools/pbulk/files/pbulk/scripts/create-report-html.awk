@@ -1,5 +1,5 @@
 #!@AWK@ -f
-# $NetBSD: create-report-html.awk,v 1.11 2008/06/11 19:27:03 joerg Exp $
+# $NetBSD: create-report-html.awk,v 1.14 2010/03/11 16:31:43 tnn Exp $
 #
 # Copyright (c) 2007, 2008 Joerg Sonnenberger <joerg@NetBSD.org>.
 # All rights reserved.
@@ -57,7 +57,7 @@ function print_pre_fail_reason(PKGNAME, chars, in_quote, in_sep, i) {
 	split(pre_fail_reason[PKGNAME], chars, "")
 	in_quote = 0
 	in_sep = 0
-	for (i = 1; i < length(chars); ++i) {
+	for (i = 1; i < length(pre_fail_reason[PKGNAME]); ++i) {
 		if (chars[i] == "\"") {
 			in_quote = 1 - in_quote
 			continue

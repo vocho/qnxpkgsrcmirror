@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.8 2009/11/26 20:11:13 imil Exp $
+# $NetBSD: Makefile,v 1.10 2010/02/14 18:15:31 joerg Exp $
 #
 
 PKGVER=			0.8.4
 DISTNAME=		ccsm-${PKGVER}
+PKGREVISION=		1
 CATEGORIES=		wm gnome
 MASTER_SITES=		http://releases.compiz.org/${PKGVER}/
 
@@ -21,7 +22,7 @@ REPLACE_PYTHON=		${WRKSRC}/setup.py ${WRKSRC}/ccm/*.py
 
 MAKE_ENV+=	PYTHONBIN=${PYTHONBIN:Q}
 
-PYTHON_VERSIONS_ACCEPTED=	25
+PYTHON_VERSIONS_ACCEPTED=	26 25
 
 DEPENDS+=	compizconfig-backend-gconf>=0.6.0:../../devel/compizconfig-backend-gconf
 DEPENDS+=	${PYPKGPREFIX}-gtk2-[0-9]*:../../x11/py-gtk2

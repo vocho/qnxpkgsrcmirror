@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.328 2009/12/16 23:57:37 joerg Exp $
+# $NetBSD: Makefile,v 1.336 2010/03/09 23:20:36 snj Exp $
 #
 
 COMMENT=	Games
@@ -62,6 +62,7 @@ SUBDIR+=	dd2
 SUBDIR+=	defendguin
 SUBDIR+=	digger
 SUBDIR+=	dipmap
+SUBDIR+=	doom1
 SUBDIR+=	dopewars
 SUBDIR+=	duckmaze
 SUBDIR+=	dungeon
@@ -127,11 +128,13 @@ SUBDIR+=	gtklevel9
 SUBDIR+=	gtkmagnetic
 SUBDIR+=	gturing
 SUBDIR+=	heretic2-demo
+SUBDIR+=	hex-a-hop
 SUBDIR+=	hugo
 SUBDIR+=	icbm3d
 SUBDIR+=	icebreaker
 SUBDIR+=	imaze
 SUBDIR+=	ioquake3
+SUBDIR+=	ioquake3-pk3
 SUBDIR+=	ivan
 SUBDIR+=	jetpack
 SUBDIR+=	jools
@@ -162,6 +165,7 @@ SUBDIR+=	ltris
 SUBDIR+=	maelstrom-sdl
 SUBDIR+=	maelstrom-x11
 SUBDIR+=	majesty-demo
+SUBDIR+=	marathon-trilogy
 SUBDIR+=	minami
 SUBDIR+=	mirrormagic
 SUBDIR+=	mirrormagic-sdl
@@ -211,6 +215,7 @@ SUBDIR+=	quake3server-ut
 SUBDIR+=	quake6
 SUBDIR+=	quakedata
 SUBDIR+=	quakeforge
+SUBDIR+=	quakespasm
 SUBDIR+=	quarry
 SUBDIR+=	rftg
 SUBDIR+=	rocksndiamonds
@@ -246,6 +251,7 @@ SUBDIR+=	tileworld
 SUBDIR+=	tscp
 SUBDIR+=	tuxmath
 SUBDIR+=	tuxracer
+SUBDIR+=	tyrquake
 SUBDIR+=	ufoai
 SUBDIR+=	urban
 SUBDIR+=	velena

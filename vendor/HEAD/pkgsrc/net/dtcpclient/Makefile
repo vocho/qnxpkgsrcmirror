@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.13 2008/01/18 05:08:41 tnn Exp $
+# $NetBSD: Makefile,v 1.15 2010/03/08 11:47:19 obache Exp $
 #
 
 DISTNAME=	dtcpclient-20060526
-PKGREVISION=	2
+PKGREVISION=	3
 CATEGORIES=	net
 MASTER_SITES=	http://www.imasy.or.jp/~ume/ipv6/ \
 		http://home.jp.FreeBSD.org/~ume/ipv6/
@@ -14,6 +14,10 @@ COMMENT=	Dynamic Tunnel Configuration Protocol client
 ONLY_FOR_PLATFORM=	FreeBSD-*-* NetBSD-*-* OpenBSD-*-* Darwin-*-*
 ONLY_FOR_PLATFORM+=	DragonFly-*-*
 
+PKG_DESTDIR_SUPPORT=	user-destdir
+
+USE_BSD_MAKEFILE=	yes
+
 RCD_SCRIPTS=	dtcpclient
 
 SUBST_CLASSES+=		paths
@@ -24,7 +28,7 @@ SUBST_SED.paths=	-e 's|/usr/local/etc|${PKG_SYSCONFDIR}|g'
 SUBST_SED.paths+=	-e 's|/usr/local|${PREFIX}|g'
 SUBST_SED.paths+=	-e 's|/var|${VARBASE}|g'
 
-MAKE_ENV+=	${BSD_MAKE_ENV} VARBASE=${VARBASE}
+MAKE_ENV+=	VARBASE=${VARBASE}
 
 BUILD_DEFS+=	VARBASE
 

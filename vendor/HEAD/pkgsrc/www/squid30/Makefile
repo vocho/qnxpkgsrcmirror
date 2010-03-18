@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.17 2009/11/02 15:41:30 taca Exp $
+# $NetBSD: Makefile,v 1.22 2010/03/16 13:39:06 taca Exp $
 
-DISTNAME=	squid-3.0.STABLE20
+DISTNAME=	squid-3.0.STABLE25
 PKGNAME=	${DISTNAME:S/STABLE//}
 CATEGORIES=	www
 MASTER_SITES=	${SQUID_MASTER_SITES} \
@@ -15,7 +15,6 @@ LICENSE=	gnu-gpl-v2
 USE_LANGUAGES=		c c++
 USE_TOOLS+=		perl
 GNU_CONFIGURE=		yes
-PKG_DESTDIR_SUPPORT=	destdir
 
 .include "../../www/squid/Makefile.squid"
 .include "../../www/squid/options.mk"

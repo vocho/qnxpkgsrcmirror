@@ -1,4 +1,4 @@
-$NetBSD: patch-ay,v 1.3 2006/01/13 00:04:16 joerg Exp $
+$NetBSD: patch-ay,v 1.5 2010/02/22 21:58:48 wiz Exp $
 
 --- sndserv/linux.c.orig	Sun Jan 26 07:45:01 1997
 +++ sndserv/linux.c	Thu Feb  3 01:34:05 2000

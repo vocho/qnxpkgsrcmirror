@@ -1,14 +1,16 @@
-# $NetBSD: Makefile,v 1.14 2009/08/26 19:57:33 sno Exp $
+# $NetBSD: Makefile,v 1.16 2010/02/14 22:20:05 joerg Exp $
 #
 
 DISTNAME=	qnetwalk-1.2
-PKGREVISION=	5
+PKGREVISION=	6
 CATEGORIES=	x11 games
 MASTER_SITES=	http://qt.osdn.org.ua/
 
 MAINTAINER=	ianzag@mail.ru
 HOMEPAGE=	http://qt.osdn.org.ua/qnetwalk.html
 COMMENT=	QNetwalk is a Qt-version of the popular NetWalk game
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=	gmake
 USE_LANGUAGES=	c c++
@@ -22,6 +24,8 @@ KDEDIR=		${PREFIX}/share/kde
 
 do-configure:
 	(cd ${WRKSRC} && ${QTDIR}/bin/qmake -o Makefile qnetwalk.pro)
+
+INSTALL_MAKE_FLAGS+=	INSTALL_ROOT=${DESTDIR}
 
 # Fix hardcoded paths
 SUBST_CLASSES+=		path

@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.5 2009/08/26 19:58:16 sno Exp $
+# $NetBSD: Makefile,v 1.8 2010/01/27 17:10:30 joerg Exp $
 
 DISTNAME=	qca-ossl-2.0.0-beta3
 PKGNAME=	qca2-ossl-${DISTNAME:S/-beta/beta/:C/.*-//}
-PKGREVISION=	4
+PKGREVISION=	6
 CATEGORIES=	security
 MASTER_SITES=	http://delta.affinix.com/download/qca/2.0/plugins/
 EXTRACT_SUFX=	.tar.bz2
@@ -10,6 +10,8 @@ EXTRACT_SUFX=	.tar.bz2
 MAINTAINER=	jdolecek@NetBSD.org
 HOMEPAGE=	http://delta.affinix.com/qca/
 COMMENT=	Cross-platform crypto API for QT - OpenSSL plugin
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=	gmake
 USE_LIBTOOL=	yes
@@ -20,6 +22,8 @@ CONFIGURE_ARGS+=	--qtdir=${QTDIR}
 CONFIGURE_ARGS+=	--with-qca=${QTDIR}
 CONFIGURE_ARGS+=	--with-openssl-inc=${SSLBASE}/include
 CONFIGURE_ARGS+=	--with-openssl-lib=${SSLBASE}/lib
+
+INSTALL_MAKE_FLAGS+=	INSTALL_ROOT=${DESTDIR}
 
 .include "../../security/qca2/buildlink3.mk"
 .include "../../security/openssl/buildlink3.mk"

@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.41 2009/08/26 19:57:34 sno Exp $
+# $NetBSD: Makefile,v 1.43 2010/02/14 21:36:26 joerg Exp $
 #
 
 DISTNAME=	xarchon-0.60
-PKGREVISION=	5
+PKGREVISION=	6
 CATEGORIES=	games x11
 MASTER_SITES=	http://xarchon.seul.org/ \
 		ftp://xarchon.seul.org/pub/xarchon/
@@ -10,6 +10,8 @@ MASTER_SITES=	http://xarchon.seul.org/ \
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://xarchon.seul.org/
 COMMENT=	Chess-like strategy game with battle options
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=	gmake
 GNU_CONFIGURE=	YES

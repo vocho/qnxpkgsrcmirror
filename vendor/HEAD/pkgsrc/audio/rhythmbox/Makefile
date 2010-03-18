@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.72 2009/12/09 10:30:00 drochner Exp $
+# $NetBSD: Makefile,v 1.75 2010/02/10 19:17:32 joerg Exp $
 #
 
 DISTNAME=	rhythmbox-0.12.6
+PKGREVISION=	3
 CATEGORIES=	audio gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/rhythmbox/0.12/}
 EXTRACT_SUFX=	.tar.bz2
@@ -24,9 +25,6 @@ CONFIGURE_ARGS+=	--with-html-dir=${PREFIX}/share/doc
 CONFIGURE_ARGS+=	--disable-fm-radio
 
 GCONF_SCHEMAS=		rhythmbox.schemas
-
-# for DAAP
-.include "../../net/avahi/buildlink3.mk"
 
 .include "../../lang/python/application.mk"
 .include "../../x11/py-gtk2/buildlink3.mk"

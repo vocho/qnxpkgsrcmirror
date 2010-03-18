@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.10 2009/11/19 22:55:52 joerg Exp $
+# $NetBSD: Makefile,v 1.12 2010/01/22 13:22:28 joerg Exp $
 #
 
-DISTNAME=	fetch-1.6
+DISTNAME=	fetch-1.7
 CATEGORIES=	net
 MASTER_SITES=	# empty
 DISTFILES=	# empty

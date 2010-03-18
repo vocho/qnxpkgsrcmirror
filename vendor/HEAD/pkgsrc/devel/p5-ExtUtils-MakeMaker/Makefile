@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.13 2009/07/30 07:16:09 sno Exp $
+# $NetBSD: Makefile,v 1.15 2010/02/16 15:22:44 sno Exp $
 #
 
-DISTNAME=	ExtUtils-MakeMaker-6.54
+DISTNAME=	ExtUtils-MakeMaker-6.56
 PKGNAME=	p5-${DISTNAME}
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=ExtUtils/}
@@ -17,7 +17,7 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 PERL5_PACKLIST=	auto/ExtUtils/MakeMaker/.packlist
 
 pre-configure:
-	cd ${WRKSRC} && find `pwd` -name "*.orig" -type f | xargs rm
+	${FIND} ${WRKSRC} -name "*.orig" -type f | ${XARGS} ${RM}
 
 .include "../../lang/perl5/module.mk"
 .include "../../mk/bsd.pkg.mk"

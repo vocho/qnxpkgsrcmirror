@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.99 2009/12/15 22:16:10 joerg Exp $
+# $NetBSD: Makefile,v 1.104 2010/02/24 18:47:07 drochner Exp $
 #
 
-DISTNAME=	epiphany-2.26.3
-PKGREVISION=	3
+DISTNAME=	epiphany-2.28.2
+PKGREVISION=	1
 CATEGORIES=	www gnome
-MASTER_SITES=	${MASTER_SITE_GNOME:=sources/epiphany/2.26/}
+MASTER_SITES=	${MASTER_SITE_GNOME:=sources/epiphany/2.28/}
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
@@ -19,14 +19,12 @@ USE_LIBTOOL=		YES
 USE_PKGLOCALEDIR=	YES
 USE_LANGUAGES=		c c++
 
-PKGCONFIG_OVERRIDE=	data/epiphany-2.26.pc
+PKGCONFIG_OVERRIDE=	data/epiphany-2.28.pc
 
 .include "options.mk"
 
 GCONF_SCHEMAS=		epiphany.schemas
-GCONF_SCHEMAS+=	epiphany-fonts.schemas
 GCONF_SCHEMAS+=	epiphany-lockdown.schemas
-GCONF_SCHEMAS+=	epiphany-pango.schemas
 
 .include "../../audio/libcanberra/buildlink3.mk"
 .include "../../devel/GConf/schemas.mk"
@@ -39,9 +37,12 @@ BUILDLINK_API_DEPENDS.libgnome+=	libgnome>=2.14.0
 .include "../../devel/libgnome/buildlink3.mk"
 BUILDLINK_API_DEPENDS.libgnomeui+=	libgnomeui>=2.14.0
 .include "../../devel/libgnomeui/buildlink3.mk"
-.include "../../devel/xulrunner/buildlink3.mk"
+.include "../../devel/nss/buildlink3.mk"
+.include "../../www/webkit-gtk/buildlink3.mk"
+.include "../../graphics/gnome-icon-theme/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../net/ORBit2/buildlink3.mk"
+.include "../../net/libsoup24/buildlink3.mk"
 .include "../../sysutils/dbus/buildlink3.mk"
 .include "../../sysutils/dbus-glib/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"

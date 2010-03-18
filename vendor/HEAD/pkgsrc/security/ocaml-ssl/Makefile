@@ -1,13 +1,16 @@
-# $NetBSD: Makefile,v 1.4 2008/03/03 18:14:19 tonio Exp $
+# $NetBSD: Makefile,v 1.6 2010/01/30 19:44:50 joerg Exp $
 #
 
 DISTNAME=	ocaml-ssl-0.4.2
+PKGREVISION=	1
 CATEGORIES=	security
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=savonet/}
 
 MAINTAINER=	jaapb@kerguelen.org
 HOMEPAGE=	http://savonet.sourceforge.net/wiki/OCamlLibs
 COMMENT=	SSL library for OCaml
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 DEPENDS+=	ocaml-findlib-[0-9]*:../../devel/ocaml-findlib
 

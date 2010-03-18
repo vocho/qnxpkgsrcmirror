@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.14 2008/06/02 12:23:04 obache Exp $
+# $NetBSD: Makefile,v 1.16 2010/02/25 07:15:42 agc Exp $
 #
 
 DISTNAME=		chkrootkit-0.47
@@ -9,12 +9,13 @@ MASTER_SITES=		ftp://ftp.pangeia.com.br/pub/seg/pac/
 MAINTAINER=		pancake@phreaker.net
 HOMEPAGE=		http://www.chkrootkit.org/
 COMMENT=		Locally checks for signs of a rootkit
+LICENSE=		modified-bsd
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=		gmake
 NO_CONFIGURE=		yes
-NOT_FOR_PLATFORM=	NetBSD-[2-9]*-*
 
 PROGRAMS=	chkdirs chklastlog chkproc chkwtmp ifpromisc strings-static \
 		chkutmp
@@ -49,14 +50,13 @@ MAKE_ENV+=	STATIC="-static"
 MAKE_ENV+=	STATIC="-static"
 .endif
 
-INSTALLATION_DIRS+=	bin
+INSTALLATION_DIRS+=	bin ${DOCDIR}
 
 do-install:
-	cd ${WRKSRC} && ${INSTALL_PROGRAM} ${PROGRAMS} ${PREFIX}/bin
-	${INSTALL_SCRIPT} ${WRKSRC}/chkrootkit ${PREFIX}/bin
-	${INSTALL_DATA_DIR} ${PREFIX}/share/doc/chkrootkit
-	${INSTALL_DATA} ${WRKSRC}/README ${DOCDIR}
-	${INSTALL_DATA} ${WRKSRC}/README.chklastlog ${DOCDIR}
-	${INSTALL_DATA} ${WRKSRC}/README.chkwtmp ${DOCDIR}
+	cd ${WRKSRC} && ${INSTALL_PROGRAM} ${PROGRAMS} ${DESTDIR}${PREFIX}/bin
+	${INSTALL_SCRIPT} ${WRKSRC}/chkrootkit ${DESTDIR}${PREFIX}/bin
+	${INSTALL_DATA} ${WRKSRC}/README ${DESTDIR}${DOCDIR}
+	${INSTALL_DATA} ${WRKSRC}/README.chklastlog ${DESTDIR}${DOCDIR}
+	${INSTALL_DATA} ${WRKSRC}/README.chkwtmp ${DESTDIR}${DOCDIR}
 
 .include "../../mk/bsd.pkg.mk"
