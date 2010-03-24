@@ -1,11 +1,18 @@
-$NetBSD$
+$NetBSD: patch-ah,v 1.7 2009/12/22 12:44:59 joerg Exp $
 
---- config/config.alias.orig	2006-03-23 19:52:54.000000000 +0000
-+++ config/config.alias
-@@ -46,5 +46,6 @@ sunos4*)	Khost_os=sunos4 ;;
- sysv*)		Khost_os=univel_svr4 ;;
- ultrix4*)	Khost_os=ultrix4 ;;
- uclinux*)	Khost_os=uclinux ;;
-+nto-qnx6*)	Khost_os=qnx6 ;;
+--- libraries/javalib/Makefile.in.orig	2009-12-22 11:10:05.000000000 +0000
++++ libraries/javalib/Makefile.in
+@@ -1275,11 +1275,8 @@ clean-local:
+ export JAVA_COMPILER
  
- esac
+ install-data-local: installdirs
+-	if test -f $(DESTDIR)${jrelibdir}/glibj.zip ; then \
+-		if ! test -f $(DESTDIR)${jrelibdir}/rt.jar ; then \
+-			$(LN_S) $(DESTDIR)${jrelibdir}/glibj.zip $(DESTDIR)${jrelibdir}/rt.jar ; \
+-		fi ; \
+-	fi
++	rm -f $(DESTDIR)${jrelibdir}/rt.jar
++	$(LN_S) glibj.zip $(DESTDIR)${jrelibdir}/rt.jar
+ 
+ uninstall-local: 
+ 	$(RM) $(DESTDIR)${jrelibdir}/rt.jar
