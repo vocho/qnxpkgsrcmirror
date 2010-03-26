@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.23 2009/02/17 13:02:20 joerg Exp $
+# $NetBSD: Makefile,v 1.25 2010/02/14 21:30:00 dholland Exp $
 
 DISTNAME=		gcc-core-3.1
 PKGNAME=		cross-h8300-hms-gcc-3.1
-PKGREVISION=		3
+PKGREVISION=		5
 CATEGORIES=		cross
 MASTER_SITES=		ftp://ftp.gnu.org/gnu/gcc/gcc-3.1/ \
 			ftp://sources.redhat.com/pub/newlib/
@@ -18,6 +18,8 @@ MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		#empty
 COMMENT=		GCC compiler for h8300-hms
 
+PKG_DESTDIR_SUPPORT=	user-destdir
+
 DEPENDS+=	cross-h8300-hms-binutils-[0-9]*:../../cross/h8300-hms-binutils
 
 H8300_PREFIX=		${LOCALBASE}/libexec/cross-h8300-hms
@@ -32,7 +34,9 @@ CONFIGURE_ARGS+=	--enable-languages=c,c++
 CONFIGURE_ARGS+=	--with-newlib
 CONFIGURE_SCRIPT=	${SRCDIR}/configure
 SRCDIR=			${WRKDIR}/gcc-3.1
+MAKE_ENV+=		SHELL=${CONFIG_SHELL}
 BUILD_TARGET=		CFLAGS="-O2 -fomit-frame-pointer" all
+INSTALLATION_DIRS+=	bin libexec/cross-h8300-hms/h8300-hms/bin
 INFO_FILES=		# PLIST
 
 GCC_REQD+=		2.8.0
@@ -44,8 +48,10 @@ post-extract:
 post-install:
 	for f in h8300-hms-cpp    h8300-hms-gcc \
 		 h8300-hms-c++    h8300-hms-g++ \
-		 h8300-hms-gccbug h8300-hms-gcov ; do \
-		${LN} -s ${H8300_PREFIX}/bin/$$f ${PREFIX}/bin/$$f ; \
+		 h8300-hms-gccbug h8300-hms-gcov \
+		 h8300-hms-c++filt ; do \
+		${LN} -s ../libexec/cross-h8300-hms/bin/"$$f" \
+			${DESTDIR}${PREFIX}/bin/"$$f" || exit 1; \
 	done
 
 .include "../../mk/bsd.pkg.mk"

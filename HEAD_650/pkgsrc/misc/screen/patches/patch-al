@@ -4,7 +4,7 @@ Make extra calls to remove utmp entries when utmpx is used.
 For non-login entries we only update utmpx, as it stores
 more information, and utilities are reading both.
 
---- utmp.c.orig	2003-09-08 10:27:17.000000000 -0400
+--- utmp.c.orig	2003-09-08 14:27:17.000000000 +0000
 +++ utmp.c
 @@ -43,6 +43,12 @@ extern char *LoginName;
  extern int real_uid, eff_uid;
@@ -23,9 +23,9 @@ more information, and utilities are reading both.
  #  if defined(hpux) /* cruel hpux release 8.0 */
  #   define pututline _pututline
  #  endif /* hpux */
-+#ifndef __QNXNTO__
++#  ifndef __QNXNTO__
  extern struct utmp *getutline(), *pututline();
-+#endif
++#  endif
  #  if defined(_SEQUENT_)
  extern struct utmp *ut_add_user(), *ut_delete_user();
  extern char *ut_find_host();

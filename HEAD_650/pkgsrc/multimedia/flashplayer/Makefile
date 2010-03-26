@@ -1,10 +1,12 @@
-# $NetBSD: Makefile,v 1.9 2009/08/26 19:58:05 sno Exp $
+# $NetBSD: Makefile,v 1.11 2010/02/11 20:01:50 joerg Exp $
 #
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 .include "../../multimedia/libflash/Makefile.common"
 
 PKGNAME=	${DISTNAME:C/-/player-/}
-PKGREVISION=	5
+PKGREVISION=	6
 COMMENT=	Standalone open source Flash(tm) player
 
 BUILD_DIRS=	${WRKSRC}/Player
@@ -17,6 +19,8 @@ MAKE_ENV+=	LIBSTDCPP=-lstdc++
 .else
 MAKE_ENV+=	LIBSTDCPP=
 .endif
+
+INSTALLATION_DIRS+=	bin
 
 .include "../../multimedia/libflash/buildlink3.mk"
 .include "../../x11/libXext/buildlink3.mk"

@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.38 2009/05/14 23:00:46 obache Exp $
+# $NetBSD: Makefile,v 1.40 2010/02/19 19:23:50 joerg Exp $
 
 DISTNAME=	cyrus-sasl-2.1.23
 PKGNAME=	${DISTNAME:S/sasl/saslauthd/}
+PKGREVISION=	1
 CATEGORIES=	security
 MASTER_SITES=	ftp://ftp.andrew.cmu.edu/pub/cyrus-mail/ \
 		ftp://ftp.andrew.cmu.edu/pub/cyrus-mail/OLD-VERSIONS/sasl/
@@ -36,7 +37,7 @@ CONFIGURE_ARGS+=	--with-openssl=${SSLBASE:Q}
 .include "options.mk"
 
 RCD_SCRIPTS=		saslauthd
-FILES_SUBST+=		ROOT_USER=${ROOT_USER:Q}
+FILES_SUBST+=		ROOT_USER=${REAL_ROOT_USER:Q}
 
 INSTALLATION_DIRS=	bin
 

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.2 2009/12/11 16:16:51 taca Exp $
+# $NetBSD: Makefile,v 1.13 2010/03/15 16:34:20 taca Exp $
 #
 
 DISTNAME=	typolight${TL_VER}-translations-${VERS}
@@ -15,7 +15,7 @@ LICENSE=	gnu-lgpl-v3
 DEPENDS+=	typolight${TL_VER}>=${TL_PKGVER}:../../www/typolight${TL_VER}
 
 # Use time stamp of latest translation.
-VERS=		20091210
+VERS=		20100312
 USE_TOOLS=	pax
 NO_BUILD=	yes
 NO_CONFIGURE=	yes
@@ -32,6 +32,7 @@ pre-install:
 .for d in ${SEPARATED_MODULES}
 	${RM} -fr ${WRKSRC}/system/modules/${d}
 .endfor
+	${FIND} ${WRKSRC} -type f -exec ${CHMOD} -x {} \;
 
 do-install:
 	cd ${WRKSRC}; pax -rw . ${DESTDIR}${PREFIX}/${TL_WEBDIR}

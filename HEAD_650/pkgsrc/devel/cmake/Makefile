@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.46 2009/11/25 19:08:18 adam Exp $
+# $NetBSD: Makefile,v 1.49 2010/02/23 19:51:59 drochner Exp $
 
 DISTNAME=	cmake-${CMAKE_API}.0
+PKGREVISION=	2
 CATEGORIES=	devel
 MASTER_SITES=	http://www.cmake.org/files/v2.8/
 
@@ -14,7 +15,8 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=		gmake
 USE_LANGUAGES=		c c++
-USE_NCURSES=		yes
+# wants wsyncup and wcursyncup
+USE_NCURSES=		wsyncup
 GNU_CONFIGURE=		yes
 
 BUILD_TARGET=		default_target
@@ -37,6 +39,9 @@ SUBST_STAGE.cmake=	pre-configure
 SUBST_MESSAGE.cmake=	Fixing X11 prefix.
 SUBST_FILES.cmake+=	Modules/Platform/UnixPaths.cmake
 SUBST_VARS.cmake=	X11BASE
+
+post-patch:
+	${RM} ${WRKSRC}/Modules/*.orig
 
 .include "../../devel/ncurses/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"

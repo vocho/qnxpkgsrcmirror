@@ -1,4 +1,4 @@
-# $NetBSD: pyversion.mk,v 1.77 2009/09/25 13:42:26 tron Exp $
+# $NetBSD: pyversion.mk,v 1.80 2010/02/12 13:45:54 drochner Exp $
 
 # This file determines which Python version is used as a dependency for
 # a package.
@@ -9,7 +9,7 @@
 #	The preferred Python version to use.
 #
 #	Possible values: 24 25 26
-#	Default: 25
+#	Default: 26
 #
 # === Package-settable variables ===
 #
@@ -68,11 +68,7 @@ PYTHON_VERSION_REQD?= ${PKGNAME_OLD:C/(^.*-|^)py([0-9][0-9])-.*/\2/}
 BUILD_DEFS+=		PYTHON_VERSION_DEFAULT
 BUILD_DEFS_EFFECTS+=	PYPACKAGE
 
-.if empty(MACHINE_PLATFORM:MDarwin-*-x86_64)
-PYTHON_VERSION_DEFAULT?=		25
-.else
 PYTHON_VERSION_DEFAULT?=		26
-.endif
 PYTHON_VERSIONS_ACCEPTED?=		26 25 24
 PYTHON_VERSIONS_INCOMPATIBLE?=		# empty by default
 
@@ -153,6 +149,7 @@ BUILDLINK_DEPMETHOD.python?=	build
 .endif
 
 PYTHONBIN=	${LOCALBASE}/bin/python${PYVERSSUFFIX}
+PYTHONCONFIG=	${LOCALBASE}/bin/python${PYVERSSUFFIX}-config
 PY_COMPILE_ALL= \
 	${PYTHONBIN} ${PREFIX}/lib/python${PYVERSSUFFIX}/compileall.py -q
 PY_COMPILE_O_ALL= \
@@ -178,5 +175,9 @@ PRINT_PLIST_AWK+=	/^${PYLIB:S|/|\\/|g}/ \
 .endif
 
 ALL_ENV+=	PYTHON=${PYTHONBIN}
+.if defined(USE_CMAKE)
+# used by FindPythonInterp.cmake and FindPythonLibs.cmake
+CMAKE_ARGS+=	-DPYVERSSUFFIX:STRING=${PYVERSSUFFIX}
+.endif
 
 .endif	# PYTHON_PYVERSION_MK

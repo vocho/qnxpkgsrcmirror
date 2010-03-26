@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.9 2009/12/15 21:32:37 joerg Exp $
+# $NetBSD: Makefile,v 1.13 2010/03/01 07:06:48 jnemeth Exp $
 #
 
-DISTNAME=	asterisk-1.6.1.9
-PKGREVISION=	1
+DISTNAME=	asterisk-1.6.1.17
 DIST_SUBDIR=	${PKGNAME_NOREV}
 EXTRACT_ONLY=	${DISTNAME}.tar.gz
 CATEGORIES=	comms net audio
@@ -80,7 +79,6 @@ MAKE_FLAGS+=		ASTDBDIR=${ASTDBDIR}
 MAKE_FLAGS+=		AGI_DIR=${PREFIX}/libexec/agi-bin
 MAKE_FLAGS+=		ASTEXAMPLEDIR=${ASTEXAMPLEDIR}
 MAKE_FLAGS+=		WRKSRC=${WRKSRC}
-MAKE_FLAGS+=		GLOBAL_MAKEOPTS=${WRKSRC}/pkgsrc.makeopts
 MAKE_FLAGS+=		LDOPTS=${LDFLAGS:M*:Q}
 
 .include "options.mk"

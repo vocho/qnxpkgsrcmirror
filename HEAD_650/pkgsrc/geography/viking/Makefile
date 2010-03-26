@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.6 2009/12/07 20:24:22 gdt Exp $
+# $NetBSD: Makefile,v 1.11 2010/03/15 22:58:40 gdt Exp $
 #
 
-DISTNAME=		viking-0.9.9
-PKGREVISION=		1
+DISTNAME=		viking-0.9.92
 CATEGORIES=		geography
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=viking/}
 
@@ -13,6 +12,9 @@ COMMENT=		Viking manages GPS data, supports Open Street Map and geocaching
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=		yes
+
+# Perhaps optionize use of gpsd (remove bl3, add this).
+# CONFIGURE_ARGS+=	--disable-realtime-gps-tracking
 
 DEPENDS+=		gpsbabel-[0-9]*:../../geography/gpsbabel
 REPLACE_PERL=		viking-remote

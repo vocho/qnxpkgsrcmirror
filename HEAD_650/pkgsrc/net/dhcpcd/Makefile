@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.15 2009/10/25 23:44:49 roy Exp $
+# $NetBSD: Makefile,v 1.20 2010/02/27 16:06:59 roy Exp $
 #
 
-DISTNAME=		dhcpcd-5.1.3
+DISTNAME=		dhcpcd-5.2.1
 CATEGORIES=		net
 MASTER_SITES=		ftp://roy.marples.name/pub/dhcpcd/
 MASTER_SITES+=		http://roy.aydogan.net/dhcpcd/
@@ -16,6 +16,7 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 USE_LANGUAGES=		c99
 HAS_CONFIGURE=		yes
 CONFIGURE_ARGS+=	--mandir=${PREFIX}/${PKGMANDIR}
+CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR}
 CONFIGURE_ARGS+=	--with-hooks=ntp
 
 EGDIR=			${PREFIX}/share/examples

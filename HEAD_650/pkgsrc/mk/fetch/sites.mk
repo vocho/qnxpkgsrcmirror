@@ -1,4 +1,4 @@
-# $NetBSD: sites.mk,v 1.73 2009/11/17 20:08:29 zafer Exp $
+# $NetBSD: sites.mk,v 1.78 2010/03/15 10:00:49 wiz Exp $
 #
 # This Makefile fragment defines read-only MASTER_SITE_* variables
 # representing some well-known master distribution sites for software.
@@ -86,32 +86,10 @@ MASTER_SITE_KDE+=	\
 	ftp://ftp.solnet.ch/mirror/KDE/stable/ \
 	ftp://ftp-stud.fht-esslingen.de/pub/Mirrors/ftp.kde.org/pub/kde/stable/ \
 	ftp://mirrors.dotsrc.org/kde/stable/ \
-	ftp://ftp.fi.muni.cz/pub/kde/stable/ \
-	ftp://ftp.rediris.es/mirror/kde/ftp.kde.org/pub/kde/stable/ \
-	http://sunsite.rediris.es/mirror/kde/ftp.kde.org/pub/kde/stable/
+	ftp://ftp.fi.muni.cz/pub/kde/stable/
 
 MASTER_SITE_SOURCEFORGE+=	\
-	http://freefr.dl.sourceforge.net/sourceforge/ \
-	http://garr.dl.sourceforge.net/sourceforge/ \
-	http://heanet.dl.sourceforge.net/sourceforge/ \
-	http://hivelocity.dl.sourceforge.net/sourceforge/ \
-	http://internap.dl.sourceforge.net/sourceforge/ \
-	http://internode.dl.sourceforge.net/sourceforge/ \
-	http://iweb.dl.sourceforge.net/sourceforge/ \
-	http://jaist.dl.sourceforge.net/sourceforge/ \
-	http://kent.dl.sourceforge.net/sourceforge/ \
-	http://nchc.dl.sourceforge.net/sourceforge/ \
-	http://ncu.dl.sourceforge.net/sourceforge/ \
-	http://puzzle.dl.sourceforge.net/sourceforge/ \
-	http://softlayer.dl.sourceforge.net/sourceforge/ \
-	http://sunet.dl.sourceforge.net/sourceforge/ \
-	http://superb-east.dl.sourceforge.net/sourceforge/ \
-	http://superb-west.dl.sourceforge.net/sourceforge/ \
-	http://surfnet.dl.sourceforge.net/sourceforge/ \
-	http://switch.dl.sourceforge.net/sourceforge/ \
-	http://transact.dl.sourceforge.net/sourceforge/ \
-	http://ufpr.dl.sourceforge.net/sourceforge/ \
-	http://voxel.dl.sourceforge.net/sourceforge/
+	http://downloads.sourceforge.net/sourceforge/
 
 MASTER_SITE_SOURCEFORGE_JP+=	\
 	http://osdn.dl.sourceforge.jp/ \
@@ -174,15 +152,12 @@ MASTER_SITE_MOZILLA+=	\
 	http://mozilla.ftp.iij.ad.jp/pub/mozilla/mozilla.org/ \
 	http://mozilla-mirror.naist.jp/ \
 	http://mirror.kr.freebsd.org/mozilla.org/ \
-	http://ftp.isu.edu.tw/pub/Mozilla/ \
-	http://mozilla-current.sit.kmutt.ac.th/ \
 	http://ftp.kaist.ac.kr/pub/mozilla/ \
 	http://ftp.ncnu.edu.tw/mozilla.org/ \
 	http://ftp.yz.yamagata-u.ac.jp/pub/network/mozilla/ \
 	http://ftp.ntu.edu.tw/pub/mozilla/ \
 	http://ftp.kddilabs.jp/Mozilla/ \
 	http://mozilla.hongo.wide.ad.jp/pub/mozilla.org/ \
-	http://ftp.cgu.edu.tw/Mirror/Mozilla/ \
 	http://mozilla.hns.net.in/ \
 	http://mozilla.unpad.ac.id/ \
 	http://mirror-fpt-telecom.fpt.net/mozilla/ \
@@ -197,14 +172,11 @@ MASTER_SITE_MOZILLA+=	\
 	http://mirror.yandex.ru/mozilla/ \
 	http://elizabeth.acc.umu.se/pub/mozilla.org/ \
 	http://www.mirrorservice.org/sites/releases.mozilla.org/pub/mozilla.org/ \
-	http://sunsite.rediris.es/pub/mozilla.org/ \
 	http://ftp.cvut.cz/mozilla/ \
 	http://mozilla.kn.vutbr.cz/ \
 	http://mirror.switch.ch/ftp/mirror/mozilla/ \
 	http://ftp.plusline.de/mozilla/ \
-	http://mozilla.miroir-francais.fr/ \
 	http://mozilla.mirrors.skynet.be/pub/ftp.mozilla.org/ \
-	http://mozilla.osmirror.nl/ \
 	http://mirrors.linux.edu.lv/mozilla.org/ \
 	http://www.artfiles.org/mozilla.org/ \
 	http://mirrors.xservers.ro/mozilla/ \
@@ -215,8 +187,6 @@ MASTER_SITE_MOZILLA+=	\
 	http://ftp.pwr.wroc.pl/pub/mozilla/ \
 	http://ftp.heanet.ie/mirrors/ftp.mozilla.org/pub/mozilla.org/ \
 	http://mozilla.wpro.lv/ \
-	http://mozilla.spegulo.be/ \
-	http://mozilla.nedmirror.nl/ \
 	http://mozilla.c3sl.ufpr.br/releases/ \
 	http://mozilla.mirror.pop-sc.rnp.br/mirror/mozilla.org/ \
 	http://mozilla.patan.com.ar/
@@ -281,16 +251,12 @@ MASTER_SITE_MYSQL+=	\
 	http://na.mirror.garr.it/mirrors/MySQL/Downloads/ \
 	http://mysql.bst.lt/Downloads/ \
 	http://mysql.proserve.nl/Downloads/ \
-	http://ftp.tpnet.pl/vol/d3/ftp.mysql.com/Downloads/ \
-	ftp://ftp.tpnet.pl/d3/ftp.mysql.com/Downloads/ \
 	http://mysql.nfsi.pt/Downloads/ \
 	ftp://ftp.nfsi.pt/pub/mysql/Downloads/ \
 	http://mirrors.xservers.ro/mysql/Downloads/ \
 	http://ftp.astral.ro/mirrors/mysql.com/Downloads/ \
 	ftp://ftp.astral.ro/mirrors/mysql.com/Downloads/ \
 	http://mirrors.bevc.net/mysql/Downloads/ \
-	http://mysql.rediris.es/Downloads/ \
-	ftp://ftp.rediris.es/mirror/mysql/Downloads/ \
 	http://ftp.sunet.se/pub/unix/databases/relational/mysql/Downloads/ \
 	ftp://ftp.sunet.se/pub/unix/databases/relational/mysql/Downloads/ \
 	http://mysql.dataphone.se/Downloads/ \
@@ -313,7 +279,6 @@ MASTER_SITE_MYSQL+=	\
 	http://mysql.llarian.net/Downloads/ \
 	ftp://mysql.llarian.net/pub/mysql/Downloads/ \
 	ftp://mirror.anl.gov/pub/mysql/Downloads/ \
-	http://mysql.mirrors.pair.com/Downloads/ \
 	http://mirror.services.wisc.edu/mysql/Downloads/ \
 	ftp://mirror.services.wisc.edu/mirrors/mysql/Downloads/ \
 	http://mysql.he.net/Downloads/ \
@@ -331,7 +296,6 @@ MASTER_SITE_MYSQL+=	\
 	ftp://ftp.oss.eznetsols.org/mysql/Downloads/ \
 	http://mysql.cs.pu.edu.tw/Downloads/ \
 	ftp://ftp.cs.pu.edu.tw/Unix/mysql/Downloads/ \
-	http://mysql.isu.edu.tw/Downloads/ \
 	http://mysql.ntu.edu.tw/Downloads/ \
 	ftp://ftp.ntu.edu.tw/pub/MySQL/Downloads/ \
 	http://mysql.cdpa.nsysu.edu.tw/Downloads/ \
@@ -397,7 +361,6 @@ MASTER_SITE_OPENOFFICE+=	\
 	http://ftp.iasi.roedu.net/mirrors/openoffice.org/ \
 	ftp://ftp.arnes.si/packages/OpenOffice.org/ \
 	ftp://ftp.saix.net/pub/OpenOffice.org/ \
-	http://ftp.rediris.es/ftp/mirror/openoffice.org/ \
 	http://ftp.sunet.se/pub/Office/OpenOffice.org/ \
 	ftp://mirror.switch.ch/mirror/OpenOffice/ \
 	http://mirror.pacific.net.au/openoffice/ \
@@ -417,13 +380,11 @@ MASTER_SITE_IFARCHIVE+= \
 	http://ifarchive.heanet.ie/if-archive/ \
 	ftp://ftp.giga.or.at/pub/ifarchive/
 
-### PGSQL list was last updated on 20091117
+### PGSQL list was last updated on 20100220
 MASTER_SITE_PGSQL+=	\
 	ftp://ftp.ar.postgresql.org/pub/mirrors/postgresql/ \
 	ftp://ftp2.au.postgresql.org/pub/postgresql/ \
-	http://ftp.at.postgresql.org/db/www.postgresql.org/pub/ \
 	ftp://ftp5.ca.postgresql.org/mirrors/postgresql/ \
-	ftp://ftp.cn.postgresql.org/pub/postgresql/ \
 	http://ftp.cz.postgresql.org/ \
 	ftp://ftp.cz.postgresql.org/pgsql/ \
 	http://ftp2.cz.postgresql.org/pub/postgresql/ \
@@ -454,17 +415,13 @@ MASTER_SITE_PGSQL+=	\
 	ftp://ftp2.ie.postgresql.org/mirrors/ftp.postgresql.org/ \
 	http://ftp2.it.postgresql.org/mirrors/postgres/ \
 	ftp://ftp2.it.postgresql.org/mirrors/postgres/ \
-	http://ftp7.it.postgresql.org/pub/unix/postgres/ \
-	ftp://ftp7.it.postgresql.org/pub/unix/postgres/ \
 	ftp://ftp3.jp.postgresql.org/pub/db/postgresql/ \
 	ftp://ftp2.kr.postgresql.org/pub/postgresql/ \
 	ftp://ftp.lv.postgresql.org/mirrors/ftp.postgresql.org/ \
 	http://ftp2.nl.postgresql.org/ \
 	ftp://ftp2.nl.postgresql.org/mirror/postgresql/ \
-	ftp://ftp4.nl.postgresql.org/postgresql.zeelandnet.nl/ \
 	ftp://ftp.nl.postgresql.org:21/pub/mirror/postgresql/ \
 	ftp://ftp.nz.postgresql.org/postgresql/ \
-	ftp://ftp.no.postgresql.org/pub/databases/postgresql/ \
 	http://ftp6.pl.postgresql.org/pub/postgresql/ \
 	ftp://ftp6.pl.postgresql.org/pub/postgresql/ \
 	http://ftp8.pl.postgresql.org/pub/postgresql/ \
@@ -479,8 +436,6 @@ MASTER_SITE_PGSQL+=	\
 	ftp://ftp3.ru.postgresql.org/pub/mirror/postgresql/pub/ \
 	ftp://ftp.si.postgresql.org/pub/mirrors/postgresql/ \
 	ftp://ftp.za.postgresql.org/mirror/ftp.postgresql.org/ \
-	http://ftp5.es.postgresql.org/mirror/postgresql/ \
-	ftp://ftp5.es.postgresql.org/mirror/postgresql/ \
 	http://ftp.se.postgresql.org/pub/databases/relational/postgresql/ \
 	ftp://ftp.se.postgresql.org/pub/databases/relational/postgresql/ \
 	http://ftp2.ch.postgresql.org/pub/mirrors/postgresql/ \
@@ -490,8 +445,6 @@ MASTER_SITE_PGSQL+=	\
 	ftp://ftp3.tw.postgresql.org/postgresql/ \
 	http://ftp4.tw.postgresql.org/pub/postgresql/ \
 	ftp://ftp4.tw.postgresql.org/pub/postgresql/ \
-	ftp://ftp.tw.postgresql.org/pub/postgresql/ \
-	ftp://ftp.tr.postgresql.org/pub/PostgreSQL/ \
 	http://ftp9.us.postgresql.org/pub/mirrors/postgresql/ \
 	ftp://ftp9.us.postgresql.org/pub/mirrors/postgresql/ \
 	ftp://ftp5.us.postgresql.org/pub/PostgreSQL/ \
@@ -516,7 +469,6 @@ MASTER_SITE_GENTOO+= \
 	http://mirrors.cs.wmich.edu/gentoo/ \
 	http://mirror.datapipe.net/gentoo/ \
 	ftp://mirror.datapipe.net/gentoo/ \
-	http://gentoo.mirrors.easynews.com/linux/gentoo/ \
 	ftp://ftp.gtlib.gatech.edu/pub/gentoo/ \
 	http://www.gtlib.gatech.edu/pub/gentoo/ \
 	http://gentoo.mirrors.hoobly.com/ \
@@ -530,7 +482,6 @@ MASTER_SITE_GENTOO+= \
 	http://gentoo.osuosl.org/ \
 	http://gentoo.mirrors.pair.com/ \
 	ftp://gentoo.mirrors.pair.com/ \
-	ftp://mirror.iawnet.sandia.gov/pub/gentoo/ \
 	http://gentoo.llarian.net/ \
 	ftp://gentoo.llarian.net/pub/gentoo/ \
 	http://gentoo.mirrors.tds.net/gentoo/ \
@@ -595,7 +546,6 @@ MASTER_SITE_GENTOO+= \
 	ftp://ftp.rhnet.is/pub/gentoo/ \
 	http://ftp.heanet.ie/pub/gentoo/ \
 	ftp://ftp.heanet.ie/pub/gentoo/ \
-	ftp://ftp.unina.it/pub/linux/distributions/gentoo/ \
 	http://gentoo.tups.lv/source/ \
 	http://mirror.muntinternet.net/pub/gentoo/ \
 	ftp://mirror.muntinternet.net/pub/gentoo/ \
@@ -604,7 +554,6 @@ MASTER_SITE_GENTOO+= \
 	http://ftp.snt.utwente.nl/pub/os/linux/gentoo/ \
 	ftp://ftp.snt.utwente.nl/pub/os/linux/gentoo/ \
 	http://mirror.gentoo.no/ \
-	ftp://mirror.icis.pcz.pl/gentoo/ \
 	http://gentoo.prz.rzeszow.pl/ \
 	http://gentoo.po.opole.pl/ \
 	ftp://gentoo.po.opole.pl/ \
@@ -653,9 +602,7 @@ MASTER_SITE_GENTOO+= \
 	ftp://ftp.iij.ad.jp/pub/linux/gentoo/ \
 	http://ftp.jaist.ac.jp/pub/Linux/Gentoo/ \
 	ftp://ftp.jaist.ac.jp/pub/Linux/Gentoo/ \
-	ftp://ftp.ecc.u-tokyo.ac.jp/GENTOO/ \
 	http://ftp.daum.net/gentoo/ \
-	ftp://ftp.daum.net/gentoo/ \
 	http://ftp.kaist.ac.kr/pub/gentoo/ \
 	ftp://ftp.kaist.ac.kr/gentoo/ \
 	http://ftp.lecl.net/pub/gentoo/ \

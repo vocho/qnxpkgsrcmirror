@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.28 2009/09/30 09:22:47 sketch Exp $
+# $NetBSD: Makefile,v 1.30 2010/02/16 14:54:41 wiz Exp $
 #
 
 DISTNAME=	libxklavier-4.0

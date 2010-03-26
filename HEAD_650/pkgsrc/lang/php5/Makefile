@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.74 2009/11/30 06:14:08 taca Exp $
+# $NetBSD: Makefile,v 1.78 2010/03/04 15:36:04 taca Exp $
 
 PKGNAME=		php-${PHP_BASE_VERS}
-PKGREVISION=		2
+PKGREVISION=		1
 CATEGORIES=		lang
 HOMEPAGE=		http://www.php.net/
 COMMENT=		PHP Hypertext Preprocessor version 5

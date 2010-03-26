@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.16 2006/03/04 21:29:26 jlam Exp $
+# $NetBSD: Makefile,v 1.18 2010/02/14 20:53:37 joerg Exp $
 
 DISTNAME=	dsasmsrc
 PKGNAME=	pedisassem-0.23
@@ -11,15 +11,15 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.geocities.com/SiliconValley/Foothills/4078/
 COMMENT=	Disassembler for Win32 code
 
+PKG_DESTDIR_SUPPORT=	user-destdir
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
 
 WRKSRC=		${WRKDIR}
 
 # LP64 problems
-NOT_FOR_PLATFORM=	*-*-alpha *-*-sparc64 *-*-x86_64
+NOT_FOR_PLATFORM=	${LP64PLATFORMS}
 
-MAKE_ENV+=	BINOWN=${BINOWN:Q} BINGRP=${BINGRP:Q}
-
+USE_BSD_MAKEFILE=	yes
 INSTALLATION_DIRS=	bin
 
 post-extract:

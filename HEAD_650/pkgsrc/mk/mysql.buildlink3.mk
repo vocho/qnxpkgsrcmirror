@@ -1,4 +1,4 @@
-# $NetBSD: mysql.buildlink3.mk,v 1.9 2008/03/26 13:23:34 wiz Exp $
+# $NetBSD: mysql.buildlink3.mk,v 1.11 2010/03/18 14:38:13 taca Exp $
 #
 # This file is included by packages that require some version of the
 # MySQL database client.
@@ -8,7 +8,7 @@
 # MYSQL_VERSION_DEFAULT
 #	The preferred MySQL version.
 #
-#	Possible: 50 41
+#	Possible: 51 50 41
 #	Default: 50
 #
 # === Package-settable variables ===
@@ -31,7 +31,7 @@ _SYS_VARS.mysql=	MYSQL_PKGSRCDIR
 .include "../../mk/bsd.prefs.mk"
 
 MYSQL_VERSION_DEFAULT?=		50
-MYSQL_VERSIONS_ACCEPTED?=	50 41
+MYSQL_VERSIONS_ACCEPTED?=	51 50 41
 
 # transform the list into individual variables
 .for mv in ${MYSQL_VERSIONS_ACCEPTED}
@@ -39,12 +39,19 @@ _MYSQL_VERSION_${mv}_OK=	yes
 .endfor
 
 # check what is installed
+.if exists(${LOCALBASE}/lib/mysql/libmysqlclient.so.16)
+_MYSQL_VERSION_51_INSTALLED=	yes
+_MYSQL_VERSION_INSTALLED=	51
+.endif
+
 .if exists(${LOCALBASE}/lib/mysql/libmysqlclient.so.15)
 _MYSQL_VERSION_50_INSTALLED=	yes
+_MYSQL_VERSION_INSTALLED=	50
 .endif
 
 .if exists(${LOCALBASE}/lib/mysql/libmysqlclient.so.14)
 _MYSQL_VERSION_41_INSTALLED=	yes
+_MYSQL_VERSION_INSTALLED=	41
 .endif
 
 # if a version is explicitely required, take it
@@ -84,13 +91,24 @@ _MYSQL_VERSION=	${_MYSQL_VERSION_FIRSTACCEPTED}
 #
 # set variables for the version we decided to use:
 #
-.if ${_MYSQL_VERSION} == "50"
+.if ${_MYSQL_VERSION} == "51"
+MYSQL_PKGSRCDIR=	../../databases/mysql51-client
+.elif ${_MYSQL_VERSION} == "50"
 MYSQL_PKGSRCDIR=	../../databases/mysql5-client
 .elif ${_MYSQL_VERSION} == "41"
 MYSQL_PKGSRCDIR=	../../databases/mysql4-client
 .else
 # force an error
 PKG_FAIL_REASON+=	"[mysql.buildlink3.mk] ${_MYSQL_VERSION} is not a valid mysql package."
+.endif
+
+#
+# check installed version aginst required:
+#
+.if defined(_MYSQL_VERSION_INSTALLED)
+.if ${_MYSQL_VERSION} != ${_MYSQL_VERSION_INSTALLED}
+PKG_SKIP_REASON+=	"${PKGBASE} requires mysql-${_MYSQL_VERSION}, but mysql-${_MYSQL_VERSION_INSTALLED} is already installed."
+.endif
 .endif
 
 .include "${MYSQL_PKGSRCDIR}/buildlink3.mk"

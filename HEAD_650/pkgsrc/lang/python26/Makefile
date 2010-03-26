@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.16 2009/12/20 23:58:27 tnn Exp $
+# $NetBSD: Makefile,v 1.21 2010/02/11 21:21:49 tnn Exp $
 
 DISTNAME=	Python-2.6.4
 PKGNAME=	${DISTNAME:S/Python/python26/}
-PKGREVISION=	2
+PKGREVISION=	4
 CATEGORIES=	lang python
 MASTER_SITES=	http://www.python.org/ftp/python/2.6.4/
 EXTRACT_SUFX=	.tar.bz2
@@ -10,6 +10,7 @@ EXTRACT_SUFX=	.tar.bz2
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.python.org/
 COMMENT=	Interpreted, interactive, object-oriented programming language
+LICENSE=	python-software-foundation
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
@@ -109,12 +110,12 @@ PLIST.oss=	yes
 INSTALL_UNSTRIPPED=	yes
 
 PLIST_VARS+=	nav
-.  if ${ABI} != "64"
+.  if !defined(ABI) || ${ABI} != "64"
 PLIST.nav=	yes
 .  endif
 .endif
 
-PLIST_VARS+=	bsddb dll nis no-nis
+PLIST_VARS+=	dll nis no-nis
 .if ${OPSYS} == "IRIX"
 .  if ${ABI} == "64"
 PLIST.no-nis=	yes
@@ -122,15 +123,6 @@ PLIST.no-nis=	yes
 PLIST.nis=	yes
 .  endif
 .else
-.  include "../../mk/bdb.buildlink3.mk"
-MAKE_ENV+=	PY_BDB_TYPE=${BDB_TYPE}
-MAKE_ENV+=	PY_BDB_INCDIRS=${BUILDLINK_INCDIRS.${BDB_TYPE}:S,^,${BDBBASE}/,:Q}
-MAKE_ENV+=	PY_BDB_LIBDIRS=${BDBBASE}/lib
-.if empty(BDB_LIBS)
-BUILDLINK_TRANSFORM+=	rm:-ldb
-.endif
-CFLAGS+=	-DHAVE_DB_185_H
-PLIST.bsddb=	yes
 PLIST.dll=	yes
 .  if ${OPSYS} != "NetBSD" || exists(/usr/bin/ypcat)
 PLIST.nis=	yes
@@ -138,6 +130,13 @@ PLIST.nis=	yes
 PLIST.no-nis=	yes
 .  endif
 .endif
+
+.include "../../mk/bdb.buildlink3.mk"
+MAKE_ENV+=	PY_BDB_TYPE=${BDB_TYPE}
+.if empty(BDB_LIBS)
+BUILDLINK_TRANSFORM+=	rm:-ldb
+.endif
+CFLAGS+=	-DHAVE_DB_185_H
 
 .if ${OPSYS} == "OSF1"
 # configure complains about buggy getaddrinfo()

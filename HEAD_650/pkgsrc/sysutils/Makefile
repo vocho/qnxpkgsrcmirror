@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.480 2009/12/10 17:32:20 abs Exp $
+# $NetBSD: Makefile,v 1.488 2010/03/09 07:06:00 adam Exp $
 #
 
 COMMENT=	System utilities
@@ -8,7 +8,6 @@ SUBDIR+=	915resolution
 SUBDIR+=	9base
 SUBDIR+=	acpica-utils
 SUBDIR+=	acpidump
-SUBDIR+=	adjustkernel
 SUBDIR+=	adtool
 SUBDIR+=	afbinit
 SUBDIR+=	agedu
@@ -24,7 +23,6 @@ SUBDIR+=	atitvout
 SUBDIR+=	bacula
 SUBDIR+=	bacula-clientonly
 SUBDIR+=	bacula-doc
-SUBDIR+=	bacula-gnome-console
 SUBDIR+=	bacula-qt-console
 SUBDIR+=	bacula-tray-monitor
 SUBDIR+=	bacula-wx-console
@@ -95,7 +93,6 @@ SUBDIR+=	fakeroot
 SUBDIR+=	fam
 SUBDIR+=	fastfs
 SUBDIR+=	fatback
-SUBDIR+=	fdgw
 SUBDIR+=	fdupes
 SUBDIR+=	file
 SUBDIR+=	filelight
@@ -148,6 +145,7 @@ SUBDIR+=	hfsutils
 SUBDIR+=	htop
 SUBDIR+=	i2ocfg
 SUBDIR+=	i810switch
+SUBDIR+=	iat
 SUBDIR+=	idesk
 SUBDIR+=	install-sh
 SUBDIR+=	ipa
@@ -219,7 +217,11 @@ SUBDIR+=	p5-Filesys-Df
 SUBDIR+=	p5-Filesys-DfPortable
 SUBDIR+=	p5-Filesys-Statvfs
 SUBDIR+=	p5-GTop
+SUBDIR+=	p5-IO-KQueue
 SUBDIR+=	p5-Lchown
+SUBDIR+=	p5-Linux-Inotify2
+SUBDIR+=	p5-Mac-AppleScript
+SUBDIR+=	p5-Mac-AppleScript-Glue
 SUBDIR+=	p5-Parse-Syslog
 SUBDIR+=	p5-SSH-Batch
 SUBDIR+=	p5-Sys-CpuLoad
@@ -409,7 +411,6 @@ SUBDIR+=	xmeter
 SUBDIR+=	xnc
 SUBDIR+=	xosview
 SUBDIR+=	xps
-SUBDIR+=	xraidadmin
 SUBDIR+=	xuvmstat
 SUBDIR+=	zidrav
 

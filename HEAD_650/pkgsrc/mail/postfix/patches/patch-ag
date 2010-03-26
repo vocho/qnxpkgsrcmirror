@@ -1,22 +1,22 @@
-$NetBSD: patch-ag,v 1.28 2009/05/13 10:33:23 martti Exp $
+$NetBSD: patch-ag,v 1.29 2010/02/25 13:01:23 martti Exp $
 
 Only define HAS_DB if it hasn't been defined.
 Add support for NetBSD 5.x and DragonFly BSD.
 
---- src/util/sys_defs.h.orig	2009-05-11 03:45:27.000000000 +0300
-+++ src/util/sys_defs.h	2009-05-13 12:25:40.000000000 +0300
-@@ -28,8 +28,8 @@
+--- src/util/sys_defs.h.orig	2009-11-14 23:32:37.000000000 +0000
++++ src/util/sys_defs.h
+@@ -29,8 +29,8 @@
      || defined(BSDI2) || defined(BSDI3) || defined(BSDI4) \
      || defined(OPENBSD2) || defined(OPENBSD3) || defined(OPENBSD4) \
      || defined(NETBSD1) || defined(NETBSD2) || defined(NETBSD3) \
 -    || defined(NETBSD4) \
 -    || defined(EKKOBSD1)
 +    || defined(NETBSD4) || defined(NETBSD5) \
-+    || defined(EKKOBSD1) || defined(DRAGONFLY)
++    || defined(EKKOBSD1) || defined(DRAGONFLY) || defined(QNX6)
  #define SUPPORTED
  #include <sys/types.h>
  #include <sys/param.h>
-@@ -42,7 +42,9 @@
+@@ -43,7 +43,9 @@
  #define DEF_MAILBOX_LOCK "flock, dotlock"
  #define HAS_SUN_LEN
  #define HAS_FSYNC
@@ -26,7 +26,31 @@ Add support for NetBSD 5.x and DragonFly BSD.
  #define HAS_SA_LEN
  #define DEF_DB_TYPE	"hash"
  #if (defined(__NetBSD_Version__) && __NetBSD_Version__ >= 104250000)
-@@ -158,9 +160,19 @@
+@@ -57,7 +59,7 @@
+ #endif
+ #define GETTIMEOFDAY(t)	gettimeofday(t,(struct timezone *) 0)
+ #define ROOT_PATH	"/bin:/usr/bin:/sbin:/usr/sbin"
+-#if (defined(__NetBSD_Version__) && __NetBSD_Version__ > 299000900)
++#if (defined(__NetBSD_Version__) && __NetBSD_Version__ > 299000900) || defined(__QNXNTO__)
+ # define USE_STATVFS
+ # define STATVFS_IN_SYS_STATVFS_H
+ #else
+@@ -65,8 +67,14 @@
+ # define STATFS_IN_SYS_MOUNT_H
+ #endif
+ #define HAS_POSIX_REGEXP
++#ifndef __QNXNTO__
+ #define HAS_ST_GEN			/* struct stat contains inode
+ 					 * generation number */
++#else
++# ifndef _PATH_DEFPATH
++#  define      _PATH_DEFPATH   "/usr/bin:/bin"
++# endif
++#endif
+ #define NATIVE_SENDMAIL_PATH "/usr/sbin/sendmail"
+ #define NATIVE_MAILQ_PATH "/usr/bin/mailq"
+ #define NATIVE_NEWALIAS_PATH "/usr/bin/newaliases"
+@@ -163,9 +171,19 @@
  #define HAS_FUTIMES
  #endif
  
@@ -46,7 +70,7 @@ Add support for NetBSD 5.x and DragonFly BSD.
      || defined(USAGI_LIBINET6)
  #ifndef NO_IPV6
  # define HAS_IPV6
-@@ -169,14 +181,16 @@
+@@ -174,14 +192,16 @@
  
  #if (defined(__FreeBSD_version) && __FreeBSD_version >= 300000) \
      || (defined(__NetBSD_Version__) && __NetBSD_Version__ >= 103000000) \

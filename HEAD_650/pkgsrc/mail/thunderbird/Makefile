@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.45 2009/12/16 10:05:44 tnn Exp $
+# $NetBSD: Makefile,v 1.50 2010/03/16 10:59:09 tnn Exp $
 #
 
 DISTNAME=	thunderbird-${TB_VER}.source
 PKGNAME=	thunderbird-${TB_VER}
-TB_VER=		3.0
+TB_VER=		3.0.2
 PKGREVISION=	1
 CATEGORIES=	mail
 MASTER_SITES=	${MASTER_SITE_MOZILLA:=thunderbird/releases/${TB_VER}/source/}
@@ -23,14 +23,6 @@ CONFIGURE_ARGS+=	--enable-application=mail
 CONFIGURE_ARGS+=	--enable-static
 
 ALL_ENV+=		MOZILLA_PKG_NAME=thunderbird
-
-MOZILLA_PATCHES=	${.CURDIR}/../../devel/xulrunner/patches/patch-*
-pre-patch:
-	@${STEP_MSG} "Applying common mozilla patches from devel/xulrunner"
-.for i in ${MOZILLA_PATCHES}
-	${RUN} ${CAT} ${i} | ${PATCH} -s -p0 -d ${WRKSRC}/${MOZILLA_DIR} || \
-	  { ${ERROR_MSG} "Patch ${i} failed"; ${_PKGSRC_PATCH_FAIL}; }
-.endfor
 
 pre-configure:
 	cd ${WRKSRC}/directory/c-sdk && ${SETENV} ${CONFIGURE_ENV} autoconf

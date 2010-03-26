@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.64 2009/11/10 18:35:13 wiz Exp $
+# $NetBSD: Makefile,v 1.66 2010/01/21 01:54:59 snj Exp $
 
 DISTNAME=	gc-7.1
 PKGNAME=	${DISTNAME:S/gc/boehm-gc/}
-PKGREVISION=	2
+PKGREVISION=	3
 CATEGORIES=	devel
 MASTER_SITES=	http://www.hpl.hp.com/personal/Hans_Boehm/gc/gc_source/
 
@@ -33,6 +33,10 @@ EXTRACT_ELEMENTS=	-u
 
 .if ${MACHINE_ARCH} == "mipsel"
 CFLAGS+=		-D__MIPSEL__
+.endif
+
+.if ${OPSYS} == "Darwin" && empty(OS_VERSION:M[1-9].*)
+CFLAGS+=		-D_XOPEN_SOURCE
 .endif
 
 .include "options.mk"

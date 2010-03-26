@@ -1,9 +1,11 @@
-# $NetBSD: Makefile,v 1.130 2009/11/27 13:28:11 joerg Exp $
+# $NetBSD: Makefile,v 1.133 2010/03/18 12:47:56 joerg Exp $
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 .include "Makefile.common"
 
 PKGNAME=	apache-${APACHE_VERSION}
-PKGREVISION=	5
+PKGREVISION=	7
 CATEGORIES=	www
 
 HOMEPAGE=	http://httpd.apache.org/
@@ -157,7 +159,7 @@ SUBST_SED.confs+=	-e 's|^\(Group[	 ]\).*|\1${APACHE_GROUP}|g'
 # so we fix after install to reference the installed path
 SUBST_CLASSES+=		abs_srcdir
 SUBST_STAGE.abs_srcdir=	post-install
-SUBST_FILES.abs_srcdir=	${PREFIX}/share/httpd/build/config_vars.mk
+SUBST_FILES.abs_srcdir=	${DESTDIR}${PREFIX}/share/httpd/build/config_vars.mk
 SUBST_SED.abs_srcdir=	-e 's|^\(abs_srcdir =\) .*|\1 ${PREFIX}/share/httpd|'
 SUBST_MESSAGE.abs_srcdir=	Fixing abs_srcdir
 
@@ -199,13 +201,16 @@ post-build:
 	${SED} "s#@PKG_SYSCONFDIR@#${PKG_SYSCONFDIR}#g"			\
 		< ${FILESDIR}/mkcert.sh > ${WRKDIR}/mkcert
 
+INSTALLATION_DIRS+=	share/httpd/manual
+
 pre-install:
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV}				\
-		${MAKE_PROGRAM} install-conf sysconfdir="${EGDIR}"
+		${MAKE_PROGRAM} install-conf sysconfdir="${EGDIR}" \
+		    DESTDIR=${DESTDIR}
 
 post-install:
-	${LN} -sf ${LOCALBASE}/libexec/apr/libtool ${PREFIX}/share/httpd/build
-	cd ${EGDIR} &&							\
+	${LN} -sf ../../../libexec/apr/libtool ${DESTDIR}${PREFIX}/share/httpd/build
+	cd ${DESTDIR}${EGDIR} &&					\
 	for file in							\
 		highperformance-std.conf				\
 		httpd-std.conf						\
@@ -225,26 +230,25 @@ post-install:
 		${MV} -f $${file}.new $${file};				\
 	done
 
-	${INSTALL_DATA_DIR} ${PREFIX}/share/httpd/manual
-	cd ${WRKSRC}/docs/manual && pax -rw . ${PREFIX}/share/httpd/manual
+	cd ${WRKSRC}/docs/manual && pax -rw . ${DESTDIR}${PREFIX}/share/httpd/manual
 
-	${INSTALL_SCRIPT} ${WRKDIR}/mkcert ${PREFIX}/sbin
+	${INSTALL_SCRIPT} ${WRKDIR}/mkcert ${DESTDIR}${PREFIX}/sbin
 
 	for file in ${FIX_PERMS}; do \
-		${CHOWN} ${BINOWN}:${BINGRP} ${PREFIX}/sbin/$$file && \
-		${CHMOD} ${BINMODE} ${PREFIX}/sbin/$$file; \
+		${CHOWN} ${BINOWN}:${BINGRP} ${DESTDIR}${PREFIX}/sbin/$$file && \
+		${CHMOD} ${BINMODE} ${DESTDIR}${PREFIX}/sbin/$$file; \
 	done
 
-	${CHOWN} -R ${BINOWN}:${BINGRP} ${PREFIX}/share/httpd
-	${CHOWN} -R ${BINOWN}:${BINGRP} ${PREFIX}/include/httpd
-	${CHOWN} -R ${BINOWN}:${BINGRP} ${PREFIX}/lib/httpd
-	${CHOWN} ${BINOWN}:${BINGRP} ${PREFIX}/libexec/cgi-bin/test-cgi
-	${CHOWN} ${BINOWN}:${BINGRP} ${PREFIX}/libexec/cgi-bin/printenv
+	${CHOWN} -R ${BINOWN}:${BINGRP} ${DESTDIR}${PREFIX}/share/httpd
+	${CHOWN} -R ${BINOWN}:${BINGRP} ${DESTDIR}${PREFIX}/include/httpd
+	${CHOWN} -R ${BINOWN}:${BINGRP} ${DESTDIR}${PREFIX}/lib/httpd
+	${CHOWN} ${BINOWN}:${BINGRP} ${DESTDIR}${PREFIX}/libexec/cgi-bin/test-cgi
+	${CHOWN} ${BINOWN}:${BINGRP} ${DESTDIR}${PREFIX}/libexec/cgi-bin/printenv
 
 	for file in ${FIX_MAN_PERMS}; do \
-		${CHOWN} ${MANOWN}:${MANGRP} ${PREFIX}/${PKGMANDIR}/$$file; \
+		${CHOWN} ${MANOWN}:${MANGRP} ${DESTDIR}${PREFIX}/${PKGMANDIR}/$$file; \
 	done
 
-	${INSTALL_SCRIPT} ${WRKSRC}/build/mkdir.sh ${PREFIX}/share/httpd/build
+	${INSTALL_SCRIPT} ${WRKSRC}/build/mkdir.sh ${DESTDIR}${PREFIX}/share/httpd/build
 
 .include "../../mk/bsd.pkg.mk"

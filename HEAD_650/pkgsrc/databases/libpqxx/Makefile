@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.21 2008/07/14 12:56:01 joerg Exp $
+# $NetBSD: Makefile,v 1.23 2010/02/10 19:34:05 joerg Exp $
 #
 
 PKG_DESTDIR_SUPPORT=	user-destdir
@@ -6,7 +6,7 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 .include "../../databases/libpqxx/Makefile.common"
 
 COMMENT=		C++ interface to postgresql-lib
-PKGREVISION=		2
+PKGREVISION=		3
 
 NOT_FOR_PLATFORM=	NetBSD-*-pc532
 
@@ -21,9 +21,6 @@ GNU_CONFIGURE=		yes
 # No strerror_r
 CONFIGURE_ARGS+=	--disable-thread-safety
 .endif
-
-# Avoid an ICE in gcc2 on sparc64
-CONFIGURE_ENV+=		F77=${FALSE:Q}
 
 .include "../../mk/pgsql.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

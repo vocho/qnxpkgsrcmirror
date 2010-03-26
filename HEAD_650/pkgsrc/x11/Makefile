@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.606 2009/12/14 00:49:30 snj Exp $
+# $NetBSD: Makefile,v 1.612 2010/02/10 18:15:29 joerg Exp $
 #
 
 COMMENT=	Packages to support the X window system
@@ -257,9 +257,12 @@ SUBDIR+=	ocaml-graphics
 SUBDIR+=	oneko
 SUBDIR+=	openbsd-input-ws
 SUBDIR+=	openmotif
+SUBDIR+=	p5-Alien-wxWidgets
 SUBDIR+=	p5-Clipboard
 SUBDIR+=	p5-Gtk2-Ex-FormFactory
 SUBDIR+=	p5-Tk
+SUBDIR+=	p5-Wx
+SUBDIR+=	p5-Wx-Perl-ProcessStream
 SUBDIR+=	p5-X11-Protocol
 SUBDIR+=	p5-gtk
 SUBDIR+=	p5-gtk2
@@ -292,6 +295,7 @@ SUBDIR+=	qt3-tools
 SUBDIR+=	qt4
 SUBDIR+=	qt4-docs
 SUBDIR+=	qt4-libs
+SUBDIR+=	qt4-mng
 SUBDIR+=	qt4-mysql
 SUBDIR+=	qt4-pgsql
 SUBDIR+=	qt4-qdbus
@@ -330,13 +334,11 @@ SUBDIR+=	speyes
 SUBDIR+=	ssystem
 SUBDIR+=	stalonetray
 SUBDIR+=	startup-notification
-SUBDIR+=	swing
 SUBDIR+=	tile
 SUBDIR+=	tint2
 SUBDIR+=	tk
 SUBDIR+=	tk-BWidget
 SUBDIR+=	tk-Tix
-SUBDIR+=	tk83
 SUBDIR+=	tkinfo
 SUBDIR+=	tkman
 SUBDIR+=	transset-df

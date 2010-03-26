@@ -1,16 +1,19 @@
-# $NetBSD: Makefile,v 1.25 2009/08/27 15:34:48 hasso Exp $
+# $NetBSD: Makefile,v 1.30 2010/02/19 19:13:45 joerg Exp $
 
-DISTNAME=		avrdude-5.8
+DISTNAME=		avrdude-5.10
+PKGREVISION=		1
 CATEGORIES=		cross
 MASTER_SITES=		http://download.savannah.gnu.org/releases/avrdude/
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://www.bsdhome.com/avrdude/
 COMMENT=		Downloader/uploader for Atmel AVR 8-bit RISC microcontrollers
+LICENSE=		gnu-gpl-v2
 
 BUILD_DEPENDS+=	dvipsk-[0-9]*:../../print/dvipsk
 
 PKG_DESTDIR_SUPPORT=	user-destdir
+MAKE_JOBS_SAFE=		no
 
 USE_GNU_READLINE=	yes
 TEX_DEPMETHOD=		build
@@ -24,7 +27,7 @@ INFO_FILES=		yes
 EGDIR=			${PREFIX}/share/examples/avrdude
 CONF_FILES=		${EGDIR}/avrdude.conf ${PKG_SYSCONFDIR}/avrdude.conf
 CONF_FILES_PERMS=	${EGDIR}/avrdude.conf ${PKG_SYSCONFDIR}/avrdude.conf \
-			${ROOT_USER} ${ROOT_GROUP} 644
+			${REAL_ROOT_USER} ${REAL_ROOT_GROUP} 644
 
 CONFIGURE_ARGS+=	--enable-doc
 CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR:Q}
@@ -41,6 +44,7 @@ pre-configure:
 BUILD_DEPENDS+=		gtexinfo-[0-9]*:../../devel/gtexinfo
 .endif
 
+.include "../../devel/libusb/buildlink3.mk"
 .include "../../devel/readline/buildlink3.mk"
 .include "../../mk/tex.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

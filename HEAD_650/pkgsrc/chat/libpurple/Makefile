@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.16 2009/09/06 21:06:44 abs Exp $
+# $NetBSD: Makefile,v 1.19 2010/02/26 09:48:56 wiz Exp $
 #
 
 PKGNAME=	libpurple-${PIDGIN_VERSION}
+PKGREVISION=	2
 COMMENT=	Multi-protocol Instant Messaging client backend
 
 PKG_DESTDIR_SUPPORT=	user-destdir
@@ -12,8 +13,6 @@ CONFIGURE_ENV+=		GCONF_SCHEMA_FILE_DIR=${PREFIX}/share/gconf/schemas/
 MAKE_ENV+=		GCONF_SCHEMA_FILE_DIR=${PREFIX}/share/gconf/schemas/
 
 USE_TOOLS+=		msgfmt intltool
-
-GCONF_SCHEMAS+=	purple.schemas
 
 PKGCONFIG_OVERRIDE+=	gaim.pc.in
 PKGCONFIG_OVERRIDE+=	libpurple/purple.pc.in
@@ -28,7 +27,6 @@ BUILD_DIRS=	m4macros libpurple po share/ca-certs share/sounds
 .include "../../converters/libiconv/buildlink3.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../devel/glib2/buildlink3.mk"
-.include "../../devel/GConf/schemas.mk"
 .include "../../devel/libidn/buildlink3.mk"
 .include "../../textproc/libxml2/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

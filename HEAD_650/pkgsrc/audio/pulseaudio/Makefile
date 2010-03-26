@@ -1,16 +1,18 @@
-# $NetBSD: Makefile,v 1.28 2009/12/15 21:30:53 joerg Exp $
+# $NetBSD: Makefile,v 1.35 2010/02/22 21:48:03 wiz Exp $
 
 # NOTE: Please send a copy of any patches that are not pkgsrc-specific
 # to <pulseaudio-discuss@mail.0pointer.de>
 
-DISTNAME=	pulseaudio-0.9.14
-PKGREVISION=	5
+PULSEAUDIO_VER=	0.9.21
+PKGREVISION=	2
+DISTNAME=	pulseaudio-${PULSEAUDIO_VER}
 CATEGORIES=	audio
 MASTER_SITES=	http://0pointer.de/lennart/projects/pulseaudio/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.pulseaudio.org/
 COMMENT=	Sound server for POSIX and Win32 systems
+LICENSE=	gnu-lgpl-v2.1 AND gnu-gpl-v2
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
@@ -39,6 +41,8 @@ CONF_FILES=	${EGDIR}/client.conf ${PKG_SYSCONFDIR}/client.conf
 CONF_FILES+=	${EGDIR}/daemon.conf ${PKG_SYSCONFDIR}/daemon.conf
 CONF_FILES+=	${EGDIR}/default.pa ${PKG_SYSCONFDIR}/default.pa
 CONF_FILES+=	${EGDIR}/system.pa ${PKG_SYSCONFDIR}/system.pa
+CONF_FILES+=	${EGDIR}/pulseaudio-system.conf \
+		${PKG_SYSCONFBASE}/dbus-1/system.d/pulseaudio-system.conf
 
 CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFBASE}
 CONFIGURE_ARGS+=	--localstatedir=${VARBASE}
@@ -46,6 +50,7 @@ CONFIGURE_ARGS+=	--with-system-user=${PULSE_USER}
 CONFIGURE_ARGS+=	--with-system-group=${PULSE_GROUP}
 CONFIGURE_ARGS+=	--with-realtime-group=${PULSE_GROUP_REALTIME}
 CONFIGURE_ARGS+=	--with-access-group=${PULSE_GROUP_ACCESS}
+CONFIGURE_ARGS+=	--disable-tcpwrap
 MAKE_ENV+=		EGDIR=${EGDIR}
 
 SPECIAL_PERMS+=		bin/pulseaudio ${SETUID_ROOT_PERMS}
@@ -61,8 +66,13 @@ SUBST_SED.padsp=	-e 's@libpulsedsp\.so@${PREFIX}/lib/&@'
 # broken test for TLS
 CONFIGURE_ENV+=		cc_cv_tls___thread=no
 .endif
+# see PR 42820
+.if ${OPSYS} == "NetBSD" && ${OS_VERSION:M4.*} != ""
+BUILDLINK_TRANSFORM+=	rm:-Wl,--no-undefined
+.endif
 
 PLIST_VARS+=		evdev hal oss
+PLIST_SUBST+=		PULSEAUDIO_VER=${PULSEAUDIO_VER:Q}
 
 .if ${OPSYS} == "Darwin"
 BUILDLINK_TRANSFORM+=	rm:-Wl,-version-script=./map-file
@@ -107,6 +117,7 @@ pre-configure:
 .include "../../devel/glib2/buildlink3.mk"
 .include "../../devel/libltdl/buildlink3.mk"
 .include "../../devel/liboil/buildlink3.mk"
+.include "../../security/openssl/buildlink3.mk"
 .include "../../security/policykit/buildlink3.mk"
 .include "../../sysutils/dbus/buildlink3.mk"
 .if ${OPSYS} != "Darwin"
@@ -116,5 +127,7 @@ pre-configure:
 .include "../../x11/libICE/buildlink3.mk"
 .include "../../x11/libSM/buildlink3.mk"
 .include "../../x11/libX11/buildlink3.mk"
+.include "../../x11/libXtst/buildlink3.mk"
+.include "../../x11/xextproto/buildlink3.mk"
 .include "../../mk/oss.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

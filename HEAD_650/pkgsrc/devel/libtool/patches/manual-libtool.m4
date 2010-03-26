@@ -1,6 +1,6 @@
 $NetBSD$
 
---- libltdl/m4/libtool.m4.orig	2009-11-16 08:11:59.000000000 -0500
+--- libltdl/m4/libtool.m4.orig	2009-11-16 13:11:59.000000000 +0000
 +++ libltdl/m4/libtool.m4
 @@ -118,7 +118,10 @@ m4_defun([_LT_CC_BASENAME],
      *) break;;
@@ -104,9 +104,10 @@ $NetBSD$
 +  version_type=linux
    need_lib_prefix=no
    need_version=no
-+  library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${release}${shared_ext}$major ${libname}${shared_ext}'
-   if echo __ELF__ | $CC -E - | $GREP __ELF__ >/dev/null; then
+-  if echo __ELF__ | $CC -E - | $GREP __ELF__ >/dev/null; then
 -    library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${shared_ext}$versuffix'
++  library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${release}${shared_ext}$major ${libname}${shared_ext}'
++  if echo __ELF__ | $CC -E - | $GREP __ELF__ >/dev/null && echo __G95__ | $CC -cpp -E - | $GREP __G95__ >/dev/null; then
      finish_cmds='PATH="\$PATH:/sbin" ldconfig -m $libdir'
      dynamic_linker='NetBSD (a.out) ld.so'
    else

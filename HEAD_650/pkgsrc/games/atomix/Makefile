@@ -1,14 +1,16 @@
-# $NetBSD: Makefile,v 1.8 2009/08/26 19:57:28 sno Exp $
+# $NetBSD: Makefile,v 1.10 2010/01/29 20:21:21 joerg Exp $
 #
 
 DISTNAME=		atomix-2.14.0
-PKGREVISION=		6
+PKGREVISION=		7
 CATEGORIES=		games
 MASTER_SITES=		${MASTER_SITE_GNOME:=sources/atomix/2.14/}
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://jens.triq.net/atomix.php
 COMMENT=		Puzzle game
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_PKGLOCALEDIR=	yes
 GNU_CONFIGURE=		yes

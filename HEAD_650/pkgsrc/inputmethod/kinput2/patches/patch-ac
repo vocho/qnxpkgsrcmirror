@@ -1,0 +1,44 @@
+$NetBSD: patch-ac,v 1.2 2010/02/15 13:41:18 obache Exp $
+
+Avoid to conflict with getline(3) in IEEE Std 1003.1-2008.
+
+--- lib/cconv.c.orig	2002-10-03 09:35:28.000000000 +0000
++++ lib/cconv.c
+@@ -790,7 +790,7 @@ static wchar *promptsave(wchar *);
+ static int parseLine(uchar *, uchar **, int);
+ static FILE *openfile(char *);
+ static int doinclude(uchar *, Files *, void (*)());
+-static uchar *getline(uchar *, int, Files *, void (*)());
++static uchar *get_line(uchar *, int, Files *, void (*)());
+ static int readRuleFile(ccRule, char *);
+ static int registMode(ccRule, int, uchar **);
+ static int newMode(ccRule, Files *, _strbufRec *, _funcbufRec *,
+@@ -1035,8 +1035,8 @@ void (*efunc)();
+ 	return 0;
+ }
+ 
+-/* getline -- 1行読み込む (その際 include の処理を行なう) */
+-static uchar *getline(line, linesize, files, efunc)
++/* get_line -- 1行読み込む (その際 include の処理を行なう) */
++static uchar *get_line(line, linesize, files, efunc)
+ uchar *line;
+ int linesize;
+ Files *files;
+@@ -1100,7 +1100,7 @@ char *file;
+ 	rule->nmode = 0;
+ 	rule->initialmode = -1;
+ 
+-	while (getline(line, sizeof(line), &files, efunc)) {
++	while (get_line(line, sizeof(line), &files, efunc)) {
+ 		(void)Strcpy(tmp, line);
+ 		if ((argc = parseLine(tmp, argv, 20)) == 0)
+ 			continue;
+@@ -1269,7 +1269,7 @@ uchar **av;
+ 	cdbuf.cdbuf = NULL;
+ 
+ 	/* ルールを読んでストアする */
+-	while (getline(line, sizeof(line), files, efunc)) {
++	while (get_line(line, sizeof(line), files, efunc)) {
+ 		/* '#' で始まる行はコメント */
+ 		if (*line == '\0' || *line == '\n' || *line == '#')
+ 			continue;

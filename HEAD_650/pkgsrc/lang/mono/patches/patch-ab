@@ -1,8 +1,8 @@
-$NetBSD: patch-ab,v 1.20 2009/10/11 07:49:49 kefren Exp $
+$NetBSD: patch-ab,v 1.23 2010/02/18 21:55:48 ghen Exp $
 
---- configure.orig	2009-03-13 15:51:11.000000000 +0100
+--- configure.orig	2009-12-17 15:50:43.000000000 +0000
 +++ configure
-@@ -2939,11 +2939,11 @@ _ACEOF
+@@ -3115,12 +3115,15 @@ _ACEOF
  		CPPFLAGS="$CPPFLAGS -DPLATFORM_BSD"
  		libmono_ldflags="-pthread"
  		need_link_unlink=yes
@@ -10,13 +10,17 @@ $NetBSD: patch-ab,v 1.20 2009/10/11 07:49:49 kefren Exp $
 +		libdl="-ldl /libexec/ld.elf_so"
  		libgc_threads=pthreads
  		with_sigaltstack=no
+ 		use_sigposix=yes
++		cat >>confdefs.h <<\_ACEOF
++#define PTHREAD_POINTER_ID 1
++_ACEOF
  		;;
 -	*-*-*freebsd*)
 +	*-*-*freebsd* | *-*-*dragonfly*)
  		platform_win32=no
  		if test "x$PTHREAD_CFLAGS" = "x"; then
  			CPPFLAGS="$CPPFLAGS -DGC_FREEBSD_THREADS"
-@@ -2959,7 +2959,8 @@ _ACEOF
+@@ -3136,7 +3139,8 @@ _ACEOF
  			LDFLAGS="$LDFLAGS $PTHREAD_LIBS"
  			libmono_ldflags="$PTHREAD_LIBS"
  		fi
@@ -26,27 +30,7 @@ $NetBSD: patch-ab,v 1.20 2009/10/11 07:49:49 kefren Exp $
  		need_link_unlink=yes
  
  cat >>confdefs.h <<\_ACEOF
-@@ -32274,6 +32275,9 @@ cat >>conftest.$ac_ext <<_ACEOF
- /* end confdefs.h.  */
- $ac_includes_default
- #include <$ac_header>
-+#ifdef __DragonFly__
-+#error extattr
-+#endif
- _ACEOF
- rm -f conftest.$ac_objext
- if { (ac_try="$ac_compile"
-@@ -32314,6 +32318,9 @@ cat confdefs.h >>conftest.$ac_ext
- cat >>conftest.$ac_ext <<_ACEOF
- /* end confdefs.h.  */
- #include <$ac_header>
-+#ifdef __DragonFly__
-+#error extattr
-+#endif
- _ACEOF
- if { (ac_try="$ac_cpp conftest.$ac_ext"
- case "(($ac_try" in
-@@ -39626,7 +39633,7 @@ LIBC="libc.so.6"
+@@ -36565,7 +36569,7 @@ LIBC="libc.so.6"
  INTL="libc.so.6"
  SQLITE="libsqlite.so.0"
  SQLITE3="libsqlite3.so.0"
@@ -55,7 +39,7 @@ $NetBSD: patch-ab,v 1.20 2009/10/11 07:49:49 kefren Exp $
  
  sizeof_register="SIZEOF_VOID_P"
  
-@@ -40046,10 +40053,10 @@ case "$host" in
+@@ -37054,10 +37058,10 @@ case "$host" in
  	X11="libX11.dylib"
  	;;
       *-*-*netbsd*)
@@ -65,7 +49,27 @@ $NetBSD: patch-ab,v 1.20 2009/10/11 07:49:49 kefren Exp $
 +	INTL="libintl.so"
  	;;
 -    *-*-*freebsd*)
-+    *-*-*freebsd*|*-*-*dragonfly*)
++    *-*-*freebsd* | *-*-*dragonfly*)
      	LIBC="libc.so"
  	INTL="libintl.so"
  	;;
+@@ -37358,6 +37362,9 @@ cat >>conftest.$ac_ext <<_ACEOF
+ /* end confdefs.h.  */
+ $ac_includes_default
+ #include <$ac_header>
++#ifdef __DragonFly__
++#error extattr
++#endif
+ _ACEOF
+ rm -f conftest.$ac_objext
+ if { (ac_try="$ac_compile"
+@@ -37399,6 +37406,9 @@ cat confdefs.h >>conftest.$ac_ext
+ cat >>conftest.$ac_ext <<_ACEOF
+ /* end confdefs.h.  */
+ #include <$ac_header>
++#ifdef __DragonFly__
++#error extattr
++#endif
+ _ACEOF
+ if { (ac_try="$ac_cpp conftest.$ac_ext"
+ case "(($ac_try" in

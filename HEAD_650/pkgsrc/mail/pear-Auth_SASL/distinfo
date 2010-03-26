@@ -1,5 +1,5 @@
-$NetBSD: distinfo,v 1.1.1.1 2008/04/30 19:41:26 adrianp Exp $
+$NetBSD: distinfo,v 1.3 2010/03/15 16:36:57 taca Exp $
 
-SHA1 (pear/Auth_SASL-1.0.2.tgz) = cf12a2424aa096bc4f1d6a58e4e865b1f669ce7e
-RMD160 (pear/Auth_SASL-1.0.2.tgz) = 0e85c424bef3cb164e5252183add2a4046de7c8e
-Size (pear/Auth_SASL-1.0.2.tgz) = 5645 bytes
+SHA1 (pear/Auth_SASL-1.0.4.tgz) = 1b752f3077c06399d755502dc3969cd3e4ee8fd5
+RMD160 (pear/Auth_SASL-1.0.4.tgz) = 4cbc3989d04b2881225234c13395cc6e712f538a
+Size (pear/Auth_SASL-1.0.4.tgz) = 5795 bytes

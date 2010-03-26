@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.14 2009/08/26 19:58:13 sno Exp $
+# $NetBSD: Makefile,v 1.19 2010/02/27 01:15:13 gdt Exp $
 
-VERSION=	5.2.4
+VERSION=	5.2.5
 DISTNAME=	gutenprint-${VERSION}
-EXTRACT_SUFX=	.tar.bz2
 PKGNAME=	gutenprint-lib-${VERSION}
 PKGREVISION=	1
 CATEGORIES=	print
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=gimp-print/}
+EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	gdt@NetBSD.org
 COMMENT=	Drivers for Canon, Epson, Lexmark, and PCL printers
@@ -90,6 +90,8 @@ CONFIGURE_ARGS+=	--without-readline
 # test pattern generator.
 #CONFIGURE_ARGS+=	--disable-test
 #CONFIGURE_ARGS+=	--disable-testpattern
+
+TEST_TARGET=		check
 
 # A libintl is optional in gutenprint.
 .include "../../devel/gettext-lib/buildlink3.mk"

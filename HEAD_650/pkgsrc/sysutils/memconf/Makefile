@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.10 2005/06/17 04:49:48 jlam Exp $
+# $NetBSD: Makefile,v 1.12 2010/03/07 23:15:11 joerg Exp $
 #
 
 DISTNAME=		memconf
@@ -11,6 +11,8 @@ MAINTAINER=		agc@NetBSD.org
 HOMEPAGE=		http://netnow.micron.net/~tschmidt/memconf.html
 COMMENT=		Physical memory information utility
 
+PKG_DESTDIR_SUPPORT=	user-destdir
+
 ONLY_FOR_PLATFORM=	SunOS-*-* 	# only for Solaris
 
 WRKSRC=			${WRKDIR}
@@ -18,6 +20,6 @@ NO_BUILD=		yes
 INSTALLATION_DIRS=	sbin
 
 do-install:
-	${INSTALL_SCRIPT} ${WRKSRC}/memconf ${PREFIX}/sbin/memconf
+	${INSTALL_SCRIPT} ${WRKSRC}/memconf ${DESTDIR}${PREFIX}/sbin/memconf
 
 .include "../../mk/bsd.pkg.mk"

@@ -1,8 +1,12 @@
-# $NetBSD: Makefile,v 1.8 2006/06/04 16:26:53 joerg Exp $
+# $NetBSD: Makefile,v 1.12 2010/02/27 03:35:12 taca Exp $
 
 MODNAME=		mssql
 CATEGORIES+=		databases
 COMMENT=		PHP extension for MS SQL databases
+
+PKG_DESTDIR_SUPPORT=	user-destdir
+
+USE_PHP_EXT_PATCHES=	yes
 
 CONFLICTS=	php-mssql-[0-9]*
 

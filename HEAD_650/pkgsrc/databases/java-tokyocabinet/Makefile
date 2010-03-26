@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.7 2009/12/19 12:56:45 obache Exp $
+# $NetBSD: Makefile,v 1.9 2010/03/12 10:24:54 obache Exp $
 #
 
 DISTNAME=	tokyocabinet-java-1.22
-PKGREVISION=	1
+PKGREVISION=	2
 PKGNAME=	java-${DISTNAME:S/-java//}
 CATEGORIES=	databases
-MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=tokyocabinet/}
+MASTER_SITES=	${HOMEPAGE:S/javadoc/javapkg/}
 
 MAINTAINER=	obache@NetBSD.org
 HOMEPAGE=	http://1978th.net/tokyocabinet/javadoc/

@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.70 2009/08/26 19:58:02 sno Exp $
+# $NetBSD: Makefile,v 1.73 2010/02/10 19:17:41 joerg Exp $
 
 DISTNAME=	kdeutils-${_KDE_VERSION}
-PKGREVISION=	4
+PKGREVISION=	7
 COMMENT=	Utilities for the KDE integrated X11 desktop
 
 PKG_DESTDIR_SUPPORT=	user-destdir

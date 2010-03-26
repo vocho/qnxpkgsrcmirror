@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.1.1.1 2009/10/27 03:04:22 obache Exp $
+# $NetBSD: Makefile,v 1.3 2010/02/07 12:29:18 obache Exp $
 #
 
 DISTNAME=	clutter-qt-1.0.0
+PKGREVISION=	1
 CATEGORIES=	graphics
 MASTER_SITES=	http://www.clutter-project.org/sources/clutter-qt/1.0/
 
@@ -14,12 +15,16 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=	yes
 USE_LIBTOOL=	yes
-USE_TOOLS+=	pkg-config
+USE_TOOLS+=	gmake pkg-config
 USE_LANGUAGES=	c c++
 
 PKGCONFIG_OVERRIDE+=	clutter-qt.pc.in
 
 CONFIGURE_ARGS+=	--with-moc=${QTDIR}/bin/moc
+
+post-extract:
+	rm -f ${WRKSRC}/clutter-qt/moc_clutter-qt.cc
+	rm -f ${WRKSRC}/examples/moc_testqt.cc
 
 .include "../../graphics/clutter/buildlink3.mk"
 BUILDLINK_API_DEPENDS.qt4-libs+=	qt4-libs>=4.2.0

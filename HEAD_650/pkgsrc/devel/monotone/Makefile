@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.59 2009/09/23 16:05:06 jmmv Exp $
+# $NetBSD: Makefile,v 1.62 2010/03/15 09:51:32 jmmv Exp $
 #
 
-DISTNAME=	monotone-0.45
+DISTNAME=	monotone-0.47
 CATEGORIES=	devel scm
-MASTER_SITES=	http://monotone.ca/downloads/0.45/
+MASTER_SITES=	http://monotone.ca/downloads/0.47/
 
 MAINTAINER=	jmmv@NetBSD.org
 HOMEPAGE=	http://monotone.ca/
@@ -27,9 +27,6 @@ PKG_SUPPORTED_OPTIONS=	inet6
 
 CHECK_INTERPRETER_SKIP+=	share/monotone/contrib/*
 CHECK_PORTABILITY_SKIP+=	debian/*
-
-# Remove with the 0.46 update.
-BUILDLINK_TRANSFORM+=	l:sqlite:sqlite3
 
 REPLACE_SH=			mtnopt
 

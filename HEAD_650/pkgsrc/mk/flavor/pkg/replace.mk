@@ -1,4 +1,4 @@
-# $NetBSD: replace.mk,v 1.26 2009/10/02 12:35:54 obache Exp $
+# $NetBSD: replace.mk,v 1.28 2010/01/30 21:07:29 joerg Exp $
 #
 
 # _flavor-replace:
@@ -30,8 +30,6 @@ _flavor-replace: \
 _flavor-destdir-replace: \
 	replace-names \
 	replace-destdir \
-	replace-fixup-required-by \
-	replace-fixup-installed-info \
 	.PHONY
 
 # _flavor-undo-replace:
@@ -187,10 +185,21 @@ replace-destdir: .PHONY
 	@${PHASE_MSG} "Updating using binary package of "${PKGNAME:Q}
 .if !empty(USE_CROSS_COMPILE:M[yY][eE][sS])
 	@${MKDIR} ${_CROSS_DESTDIR}${PREFIX}
-	${PKG_ADD} -u -m ${MACHINE_ARCH} -I -p ${_CROSS_DESTDIR}${PREFIX} ${PKGFILE}
+	${PKG_ADD} -U -m ${MACHINE_ARCH} -I -p ${_CROSS_DESTDIR}${PREFIX} ${PKGFILE}
 	@${ECHO} "Fixing recorded cwd..."
 	@${SED} -e 's|@cwd ${_CROSS_DESTDIR}|@cwd |' ${_PKG_DBDIR}/${PKGNAME:Q}/+CONTENTS > ${_PKG_DBDIR}/${PKGNAME:Q}/+CONTENTS.tmp
 	@${MV} ${_PKG_DBDIR}/${PKGNAME:Q}/+CONTENTS.tmp ${_PKG_DBDIR}/${PKGNAME:Q}/+CONTENTS
 .else
-	${PKG_ADD} -u ${PKGFILE}
+	${PKG_ADD} -U ${PKGFILE}
 .endif
+	${RUN}${_REPLACE_OLDNAME_CMD}; \
+	${PKG_INFO} -qR ${PKGNAME:Q} | while read pkg; do \
+		[ -n "$$pkg" ] || continue; \
+		${PKG_ADMIN} set unsafe_depends_strict=YES "$$pkg"; \
+		if [ "$$oldname" != ${PKGNAME:Q} ]; then \
+			${PKG_ADMIN} set unsafe_depends=YES "$$pkg"; \
+		fi; \
+	done
+	${RUN}${PKG_ADMIN} unset unsafe_depends ${PKGNAME:Q}
+	${RUN}${PKG_ADMIN} unset unsafe_depends_strict ${PKGNAME:Q}
+	${RUN}${PKG_ADMIN} unset rebuild ${PKGNAME:Q}

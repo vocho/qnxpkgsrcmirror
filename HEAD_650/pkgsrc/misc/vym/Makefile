@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.5 2009/10/31 14:50:28 rhaen Exp $
+# $NetBSD: Makefile,v 1.7 2010/02/04 17:09:09 joerg Exp $
 #
 
 DISTNAME=		vym-1.12.2
-PKGREVISION=		2
+PKGREVISION=		3
 CATEGORIES=		misc
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=vym/}
 EXTRACT_SUFX=		.tar.bz2
@@ -12,11 +12,15 @@ HOMEPAGE=		http://vym.sourceforge.net/
 COMMENT=		Generate and manipulate maps which show your thoughts
 LICENSE=		gnu-gpl-v2
 
+PKG_DESTDIR_SUPPORT=	user-destdir
+
 USE_LANGUAGES=		c++
 USE_TOOLS+=		perl:run bash:run
 
 REPLACE_PERL+=		scripts/exportvym scripts/niceXML
 REPLACE_BASH+=		scripts/release-mac scripts/update-bookmarks
+
+INSTALL_MAKE_FLAGS+=	INSTALL_ROOT=${DESTDIR}
 
 post-extract:
 	${CHMOD} a-x ${WRKSRC}/icons/vym.ico

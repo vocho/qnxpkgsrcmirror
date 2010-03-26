@@ -1,5 +1,5 @@
-$NetBSD: distinfo,v 1.3 2009/04/19 23:13:46 seb Exp $
+$NetBSD: distinfo,v 1.5 2010/01/25 13:16:18 sno Exp $
 
-SHA1 (namespace-clean-0.11.tar.gz) = b2916af3231c3ff58e22672e8061e110f45bb168
-RMD160 (namespace-clean-0.11.tar.gz) = 94b9848b7b9c88b0bafc605644ada301f8c42591
-Size (namespace-clean-0.11.tar.gz) = 26057 bytes
+SHA1 (namespace-clean-0.13.tar.gz) = b333b30848abc21282ce7af780e9eb397ad59027
+RMD160 (namespace-clean-0.13.tar.gz) = 79dab5ae1534a96b0233db9207bdb42486d61732
+Size (namespace-clean-0.13.tar.gz) = 29579 bytes

@@ -1,21 +1,26 @@
-# $NetBSD: Makefile,v 1.50 2009/06/07 18:20:03 tnn Exp $
+# $NetBSD: Makefile,v 1.54 2010/02/21 16:44:52 wiz Exp $
 
 DISTNAME=	grub-0.97
-PKGREVISION=	8
+PKGREVISION=	9
 CATEGORIES=	sysutils
 MASTER_SITES=	ftp://alpha.gnu.org/gnu/grub/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.gnu.org/software/grub/
 COMMENT=	GRand Unified Bootloader -- Boots *BSD, Linux, groks ffs, FAT, ext2
+LICENSE=	gnu-gpl-v2
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 ONLY_FOR_PLATFORM=	*-*-i386 NetBSD-[5-9].*-x86_64
 
 GNU_CONFIGURE=		YES
 USE_TOOLS+=		gmake
-INFO_FILES=		# PLIST
+INFO_FILES=		YES
 
-BUILDLINK_TRANSFORM+=	rename:-fno-builtin:-ffreestanding
+INSTALLATION_DIRS=	share/doc/grub
+
+BUILDLINK_TRANSFORM+=	opt:-fno-builtin:-ffreestanding
 
 .include "../../mk/bsd.prefs.mk"
 
@@ -35,8 +40,8 @@ CONFIGURE_ARGS+=	--enable-${nic}
 .endfor
 
 post-install: grub-netboot-install
+.PHONY: grub-netboot-install
 grub-netboot-install:
-	${INSTALL_DATA_DIR} ${PREFIX}/share/doc/grub
 	${INSTALL_DATA} ${WRKSRC}/netboot/README.netboot \
 		${PREFIX}/share/doc/grub
 .endif
@@ -45,6 +50,7 @@ grub-netboot-install:
 CONFIGURE_ARGS+=	--enable-preset-menu=${WRKSRC}/presetmenu
 
 post-extract: grub-presetmenu
+.PHONY: grub-presetmenu
 grub-presetmenu:
 	${ECHO} ${GRUB_PRESET_COMMAND} > ${WRKSRC}/presetmenu
 .endif
