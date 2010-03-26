@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.46 2009/11/29 20:51:51 tnn Exp $
+# $NetBSD: Makefile,v 1.48 2010/02/09 10:12:13 adam Exp $
 
 DISTNAME=	inkscape-0.47
+PKGREVISION=	1
 CATEGORIES=	graphics
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=inkscape/}
 EXTRACT_SUFX=	.tar.bz2
@@ -47,7 +48,7 @@ CONFIGURE_ARGS+= --with-gnome-vfs
 
 BUILDLINK_API_DEPENDS.poppler-includes+= poppler-includes>=0.12.2
 .include "../../devel/boehm-gc/buildlink3.mk"
-.include "../../devel/boost-libs/buildlink3.mk"
+.include "../../devel/boost-headers/buildlink3.mk"
 .include "../../devel/pango/buildlink3.mk"
 .include "../../devel/popt/buildlink3.mk"
 .include "../../graphics/lcms/buildlink3.mk"

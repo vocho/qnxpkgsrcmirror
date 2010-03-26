@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.107 2008/02/24 05:29:21 obache Exp $
+# $NetBSD: Makefile,v 1.110 2010/02/16 16:18:14 joerg Exp $
 
 DISTNAME=		mod_ssl-2.8.31-1.3.41
 PKGNAME=		ap13-ssl-2.8.31
+PKGREVISION=		2
 CATEGORIES=		www security
 MASTER_SITES=		http://www.modssl.org/source/ \
 			ftp://ftp.pca.dfn.de/pub/tools/net/mod_ssl/source/
@@ -9,6 +10,8 @@ MASTER_SITES=		http://www.modssl.org/source/ \
 MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://www.modssl.org/
 COMMENT=		SSL/TLS protocols module for Apache
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 CONFLICTS=		apache-1.3.[0-9] apache-*modssl-[0-9]* apache6-[0-9]*
 CONFLICTS+=		ap-ssl-[0-9]*
@@ -22,7 +25,7 @@ CONFIGURE_ARGS+=	--with-ssl=${SSLBASE:Q}
 .include "../../mk/bsd.prefs.mk"
 
 .include "../../www/apache/buildlink3.mk"
-BUILDLINK_API_DEPENDS.apache+=	apache>=1.3.41
+BUILDLINK_API_DEPENDS.apache+=	apache>=1.3.42
 
 SSL_RPATH_LDFLAGS=	${LINKER_RPATH_FLAG} ${SSLBASE}/lib
 FIX_RPATH+=		SSL_RPATH_LDFLAGS
@@ -63,37 +66,35 @@ SUBST_STAGE.perl=	post-patch
 post-extract:
 	${CP} ${FILESDIR}/README.mkcert ${WRKSRC}
 
-post-install:
-	${INSTALL_DATA_DIR} ${EGDIR}
-	${INSTALL_DATA_DIR} ${EGDIR}/ssl.crl
-	${INSTALL_DATA_DIR} ${EGDIR}/ssl.crt
-	${INSTALL_DATA_DIR} ${EGDIR}/ssl.csr
-	${INSTALL_DATA_DIR} ${EGDIR}/ssl.key
-	${INSTALL_DATA_DIR} ${EGDIR}/ssl.prm
+INSTALLATION_DIRS+=	lib/httpd sbin \
+			${EGDIR}/ssl.crl ${EGDIR}/ssl.crt ${EGDIR}/ssl.csr \
+			${EGDIR}/ssl.key ${EGDIR}/ssl.prm \
+			share/doc/mod_ssl \
+			share/httpd/htdocs/manual/mod/mod_ssl share/mod_ssl
 
-	cd ${PREFIX}/lib/httpd; ${MV} -f libssl.so mod_ssl.so
-	cd ${WRKSRC}/pkg.sslsup; ${INSTALL_SCRIPT} mkcert.sh		\
-		${PREFIX}/sbin/mkcert
+do-install:
+	${INSTALL_LIB} ${WRKSRC}/pkg.sslmod/libssl.so \
+	    ${DESTDIR}${PREFIX}/lib/httpd/mod_ssl.so
+	${INSTALL_SCRIPT} ${WRKSRC}/pkg.sslsup/mkcert.sh		\
+	    ${DESTDIR}${PREFIX}/sbin/mkcert
 
-	${INSTALL_DATA_DIR} ${PREFIX}/share/httpd/htdocs/manual/mod/mod_ssl
-	cd ${WRKSRC}/pkg.ssldoc; ${INSTALL_DATA} *.html *.gif *.jpg	\
-		${PREFIX}/share/httpd/htdocs/manual/mod/mod_ssl
-	${INSTALL_DATA_DIR} ${PREFIX}/share/mod_ssl
-	cd ${WRKSRC}/pkg.contrib; ${INSTALL_SCRIPT} *.sh *.cgi		\
-		${PREFIX}/share/mod_ssl
-	${INSTALL_DATA_DIR} ${PREFIX}/share/doc/mod_ssl
-	${INSTALL_DATA} ${WRKSRC}/README.mkcert ${PREFIX}/share/doc/mod_ssl
+	cd ${WRKSRC}/pkg.ssldoc && ${INSTALL_DATA} *.html *.gif *.jpg	\
+	    ${DESTDIR}${PREFIX}/share/httpd/htdocs/manual/mod/mod_ssl
+	cd ${WRKSRC}/pkg.contrib && ${INSTALL_SCRIPT} *.sh *.cgi	\
+	    ${DESTDIR}${PREFIX}/share/mod_ssl
+	${INSTALL_DATA} ${WRKSRC}/README.mkcert \
+	    ${DESTDIR}${PREFIX}/share/doc/mod_ssl
 
 	cd ${WRKSRC}/pkg.sslcfg; ${RM} -f server.*
 	cd ${WRKSRC}/pkg.sslcfg; ${INSTALL_DATA} README.CRL *.crl	\
-		${EGDIR}/ssl.crl
+	    ${DESTDIR}${EGDIR}/ssl.crl
 	cd ${WRKSRC}/pkg.sslcfg; ${INSTALL_DATA} README.CRT *.crt	\
-		${EGDIR}/ssl.crt
+	    ${DESTDIR}${EGDIR}/ssl.crt
 	cd ${WRKSRC}/pkg.sslcfg; ${INSTALL_DATA} README.CSR		\
-		${EGDIR}/ssl.csr
+	    ${DESTDIR}${EGDIR}/ssl.csr
 	cd ${WRKSRC}/pkg.sslcfg; ${INSTALL_DATA} README.KEY *.key	\
-		${EGDIR}/ssl.key
+	    ${DESTDIR}${EGDIR}/ssl.key
 	cd ${WRKSRC}/pkg.sslcfg; ${INSTALL_DATA} README.PRM *.prm	\
-		${EGDIR}/ssl.prm
+	    ${DESTDIR}${EGDIR}/ssl.prm
 
 .include "../../mk/bsd.pkg.mk"

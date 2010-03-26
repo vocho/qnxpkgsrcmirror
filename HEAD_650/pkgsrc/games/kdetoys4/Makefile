@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.2 2009/10/11 08:13:38 markd Exp $
+# $NetBSD: Makefile,v 1.5 2010/01/27 10:38:39 markd Exp $
 
 DISTNAME=	kdetoys-${_KDE_VERSION}
 CATEGORIES=	games

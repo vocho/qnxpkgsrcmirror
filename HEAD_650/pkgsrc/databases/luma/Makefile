@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.12 2009/08/26 19:57:19 sno Exp $
+# $NetBSD: Makefile,v 1.15 2010/02/10 19:17:34 joerg Exp $
 
 DISTNAME=	luma-2.3
-PKGREVISION=	1
+PKGREVISION=	3
 CATEGORIES=	databases
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=luma/}
 EXTRACT_SUFX=	.tar.bz2
@@ -9,6 +9,8 @@ EXTRACT_SUFX=	.tar.bz2
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://luma.sourceforge.net/
 COMMENT=	LDAP browser
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 SUBST_CLASSES+=		luma
 SUBST_STAGE.luma=	pre-configure
@@ -20,8 +22,8 @@ do-build:
 	(cd ${WRKSRC} && ${PYTHONBIN} install.py --compile-only)
 
 do-install:
-	(cd ${WRKSRC} && ${PYTHONBIN} install.py --prefix=${PREFIX})
-	rm -f ${PREFIX}/bin/luma.orig
+	rm ${WRKSRC}/bin/luma.orig
+	cd ${WRKSRC} && ${PYTHONBIN} install.py --prefix=${DESTDIR}${PREFIX}
 
 .include "../../databases/py-ldap/buildlink3.mk"
 .include "../../lang/python/application.mk"

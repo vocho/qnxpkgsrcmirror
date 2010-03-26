@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.164 2009/06/14 15:08:45 joerg Exp $
+# $NetBSD: Makefile,v 1.175 2010/03/17 08:19:38 obache Exp $
 
 # Notes to package maintainers:
 #
@@ -11,7 +11,7 @@ CATEGORIES=		pkgtools
 MASTER_SITES=		# empty
 DISTFILES=		# empty
 
-MAINTAINER=		joerg@NetBSD.org
+OWNER=			joerg@NetBSD.org
 HOMEPAGE=		http://www.pkgsrc.org/
 COMMENT=		Package management and administration tools for pkgsrc
 LICENSE=		modified-bsd
@@ -80,7 +80,7 @@ MESSAGE_SUBST+=		PKGVULNDIR=${PKG_DBDIR:Q}			\
 
 .include "../../mk/bsd.prefs.mk"
 
-VERSION!=		${AWK} -F '"' '/PKGTOOLS_VERSION/ {print $$2}' \
+VERSION!=		${AWK} '/PKGTOOLS_VERSION/ {print $$3}' \
 			${FILESDIR}/lib/version.h
 
 # linkresolver interface appeared in libarchive 2.5 and extract
@@ -91,6 +91,8 @@ BUILDLINK_API_DEPENDS.libarchive+=	libarchive>=2.5.4b
 .include "../../archivers/libarchive/builtin.mk"
 .include "../../devel/zlib/builtin.mk"
 .include "../../security/openssl/builtin.mk"
+
+.include "options.mk"
 
 .if !empty(USE_BUILTIN.openssl:M[yY][eE][sS])
 CONFIGURE_ARGS+=	--with-ssl
@@ -119,6 +121,12 @@ LDFLAGS+=	-L${WRKDIR}/zlib
 .if empty(USE_BUILTIN.libarchive:M[yY][eE][sS])
 CPPFLAGS+=	-I${WRKDIR}/libarchive/libarchive
 LDFLAGS+=	-L${WRKDIR}/libarchive/.libs
+
+CONFIG_GUESS_OVERRIDE+=	${WRKDIR}/libarchive/build/autoconf/config.guess
+CONFIG_SUB_OVERRIDE+=	${WRKDIR}/libarchive/build/autoconf/config.sub
+
+# Hack to make sure that the libarchive version is replaced
+pre-configure: config-guess-override config-sub-override
 .endif
 CPPFLAGS+=	-I${WRKDIR}/libfetch
 LDFLAGS+=	-L${WRKDIR}/libfetch
@@ -148,7 +156,8 @@ pre-configure:
 	${SETENV} ${_CONFIGURE_SCRIPT_ENV}				\
 		${CONFIG_SHELL} ${CONFIG_SHELL_FLAGS}			\
 		./configure --disable-shared --disable-bsdtar		\
-		--disable-dependency-tracking --disable-acl
+		--disable-bsdcpio --without-expat --without-xml2	\
+		--disable-dependency-tracking --disable-acl 
 	cd ${WRKDIR}/libarchive && ${BUILD_MAKE_CMD}
 .endif
 	cd ${WRKDIR}/libfetch && ${SETENV} ${MAKE_ENV}			\
@@ -164,5 +173,15 @@ update:
 	${MAKE} deinstall _UPDATE_RUNNING=YES
 	${MAKE} ${UPDATE_TARGET}
 	${MAKE} clean
+
+update-catpages:
+	for f in lib/pkgsrc.7 add/pkg_add.1 admin/pkg_admin.1 \
+	    create/pkg_create.1 delete/pkg_delete.1 info/pkg_info.1 \
+	    lib/pkg_summary.5 lib/pkgsrc.7; do \
+		nroff -mdoc ${FILESDIR}/$$f > \
+		    ${FILESDIR}/$${f%%.[157]}.cat; \
+	done
+	nroff -mdoc ${FILESDIR}/lib/pkg_install.conf.5.in > \
+	    ${FILESDIR}/lib/pkg_install.conf.cat.in
 
 .include "../../mk/bsd.pkg.mk"

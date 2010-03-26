@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.4 2009/10/14 12:41:04 adam Exp $
+# $NetBSD: Makefile,v 1.7 2010/01/18 09:59:02 wiz Exp $
 
-DISTNAME=	hugin-2009.2.0
+DISTNAME=	hugin-2009.4.0
+PKGREVISION=	1
 CATEGORIES=	graphics
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=hugin/}
 
@@ -39,8 +40,11 @@ SUBST_SED.pthread=	-e 's|-pthread;-D_THREAD_SAFE|-pthread -D_THREAD_SAFE|g'
 .include "../../devel/boost-libs/buildlink3.mk"
 .include "../../graphics/exiv2/buildlink3.mk"
 .include "../../graphics/glew/buildlink3.mk"
+.include "../../graphics/glut/buildlink3.mk"
 .include "../../graphics/libpano13/buildlink3.mk"
 .include "../../graphics/openexr/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
+.if ${OPSYS} != "Darwin"
 .include "../../x11/wxGTK28/buildlink3.mk"
+.endif
 .include "../../mk/bsd.pkg.mk"

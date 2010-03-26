@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.21 2009/10/19 11:31:05 joerg Exp $
+# $NetBSD: Makefile,v 1.24 2010/02/11 13:37:44 joerg Exp $
 
 DJANGOVERS=	1.1.1
 DISTNAME=	Django-${DJANGOVERS}
 PKGNAME=	${PYPKGPREFIX}-django-${DJANGOVERS}
+PKGREVISION=	1
 CATEGORIES=	www python
 MASTER_SITES=	http://media.djangoproject.com/releases/${DJANGOVERS}/
 
@@ -26,14 +27,14 @@ DEPENDS+=	${PYPKGPREFIX}-flup-[0-9]*:../../www/py-flup
 .include "options.mk"
 
 pre-configure:
+.if empty(PKG_OPTIONS:Moracle)
 	rm -r ${WRKSRC}/django/db/backends/oracle
+.endif
 .if empty(PKG_OPTIONS:Mmysql)
 	rm -r ${WRKSRC}/django/db/backends/mysql
 .endif
-.if empty(PKG_OPTIONS:Mpsycopg1) && empty(PKG_OPTIONS:Mpsycopg2)
+.if empty(PKG_OPTIONS:Mpgsql)
 	rm -r ${WRKSRC}/django/db/backends/postgresql
-.endif
-.if empty(PKG_OPTIONS:Mpsycopg2)
 	rm -r ${WRKSRC}/django/db/backends/postgresql_psycopg2
 .endif
 .if empty(PKG_OPTIONS:Msqlite)

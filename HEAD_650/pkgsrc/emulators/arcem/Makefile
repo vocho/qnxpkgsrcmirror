@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.16 2009/12/17 22:12:08 abs Exp $
+# $NetBSD: Makefile,v 1.18 2010/02/26 10:28:31 wiz Exp $
 #
 
 DISTNAME=	arcem-1.00-src
@@ -6,6 +6,8 @@ PKGNAME=	${DISTNAME:S/-src//}
 PKGREVISION=	2
 CATEGORIES=	emulators
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=arcem/}
+
+NOT_FOR_PLATFORM+=	${LP64PLATFORMS}
 
 EXTRACT_SUFX=	.tgz
 
@@ -20,7 +22,7 @@ SITES.${f}+=	\
 
 DISTFILES=	${DISTNAME}${EXTRACT_SUFX} ${LINUX_FILES}
 
-MAINTAINER=	cjep@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://arcem.sourceforge.net/
 COMMENT=	Dave Gilbert's Acorn Archimedes emulator
 

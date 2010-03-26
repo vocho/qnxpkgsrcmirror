@@ -1,4 +1,4 @@
-.\"	$NetBSD: pkg_view.1,v 1.11 2007/07/26 11:30:56 joerg Exp $
+.\"	$NetBSD: pkg_view.1,v 1.13 2010/01/22 13:30:42 joerg Exp $
 .\"
 .\" Copyright (c) 2003 The NetBSD Foundation, Inc.
 .\" All rights reserved.
@@ -115,14 +115,12 @@ to the list of files in
 that should ignored when adding or removing the package instance from
 .Ar view .
 .It Fl k Ar pkg_dbdir
-Set
-.Ar pkg_dbdir
-as the package database directory for the default (empty) view.
-If this option isn't specified, then the package database directory is
-taken from the value of the environment variable
-.Ev PKG_DBDIR ,
-otherwise it defaults to
-.Pa /var/db/pkg .
+Override the value of the
+.Dv PKG_DBDIR
+configuration option with the value
+.Ar pkg_dbdir .
+This is used as as the package database directory for the
+default (empty) view.
 .It Fl n
 Don't actually execute the commands for manipulating the package instances.
 .It Fl V

@@ -1,15 +1,17 @@
-# $NetBSD: Makefile,v 1.3 2009/08/26 19:57:32 sno Exp $
+# $NetBSD: Makefile,v 1.5 2010/01/29 20:15:46 joerg Exp $
 #
 
 DISTNAME=	LostPixels-0.5.3-source
 PKGNAME=	${DISTNAME:S/-source//}
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	games
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=blinkensisters/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.blinkensisters.org/wiki/index.php/Main_Page
 COMMENT=	Blinken Sisters - Hunt for the Lost Pixels (80s-style Jump'n'Run)
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 WRKSRC=		${WRKDIR}/blinkensisters/lostpixels/game/software
 USE_CMAKE=	yes

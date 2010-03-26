@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.13 2009/06/30 00:07:22 joerg Exp $
+# $NetBSD: Makefile,v 1.15 2010/01/21 23:40:18 heinz Exp $
 #
 
 DISTNAME=	tsocks-1.8beta5
@@ -9,6 +9,9 @@ MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=tsocks/}
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://tsocks.sourceforge.net/
 COMMENT=	Transparent SOCKS proxying library
+LICENSE=	gnu-gpl-v2
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 MAKE_JOBS_SAFE=		no
 
@@ -27,16 +30,17 @@ SUBST_MESSAGE.tsocks=	Generating tsocks wrapper script.
 SUBST_FILES.tsocks=	tsocks
 SUBST_SED.tsocks=	-e "s|@SH@|${SH}|g" -e "s|@PREFIX@|${PREFIX}|g"
 
+INSTALLATION_DIRS+=	${EGDIR}
+
 post-extract:
 	${RM} -f ${WRKSRC}/config.cache
 	${CP} ${FILESDIR}/tsocks.sh ${WRKSRC}/tsocks
 
 post-install:
-	${INSTALL_SCRIPT} ${WRKSRC}/tsocks ${PREFIX}/bin
-	${INSTALL_DATA_DIR} ${EGDIR}
+	${INSTALL_SCRIPT} ${WRKSRC}/tsocks ${DESTDIR}${PREFIX}/bin
 	${INSTALL_DATA} ${WRKSRC}/tsocks.conf.complex.example \
-		${EGDIR}/tsocks.conf.complex
+		${DESTDIR}${EGDIR}/tsocks.conf.complex
 	${INSTALL_DATA} ${WRKSRC}/tsocks.conf.simple.example \
-		${EGDIR}/tsocks.conf.simple
+		${DESTDIR}${EGDIR}/tsocks.conf.simple
 
 .include "../../mk/bsd.pkg.mk"

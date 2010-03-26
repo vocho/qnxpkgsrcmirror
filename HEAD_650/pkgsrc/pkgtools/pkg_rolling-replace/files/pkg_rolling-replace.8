@@ -1,5 +1,5 @@
-.\" $NetBSD: pkg_rolling-replace.8,v 1.16 2009/12/01 14:26:08 tnn Exp $
-.Dd November 13, 2009
+.\" $NetBSD: pkg_rolling-replace.8,v 1.19 2010/02/01 19:06:43 sno Exp $
+.Dd February 1, 2010
 .Dt PKG_ROLLING-REPLACE 8
 .Os
 .Sh NAME
@@ -7,7 +7,8 @@
 .Nd rebuild or update packages using 'make replace' in tsorted order
 .Sh SYNOPSIS
 .Nm
-.Op Fl hFknrsuv
+.Op Fl Fhknrsuv
+.Op Fl D Ar VARIABLE=VALUE
 .Op Fl L Ar path
 .Op Fl X Ar pkgs
 .Op Fl x Ar pkgs
@@ -42,6 +43,11 @@ in the resulting topological order.
 The dependency graph and topological sort are re-calculated after each
 .Dq make replace ,
 in case it causes additional packages to be marked unsafe.
+.Nm
+will pass
+.Dq IN_PKG_ROLLING_REPLACE=1
+to make, so users can set flags depending on interactive usage and
+batch-replace in their @MAKECONF@.
 .Pp
 The user can mark additional packages to be rebuilt by setting the
 .Dq rebuild=YES
@@ -64,16 +70,30 @@ assuming the pkgsrc tree is more recent than the currently installed
 packages.)
 .Ss Options
 .Bl -tag -width xxxxxxxx
-.It Fl h
-Brief help.
+.It Fl D Ar VARIABLE=VALUE
+Passes VARIABLE=VALUE to each make call.
+.Dq -D
+can be specified more than once to pass several variables to make.
 .It Fl F
 Just fetches the sources of all mismatched packages required to be updated
 (and it's dependencies).
+.It Fl h
+Brief help.
 .It Fl k
 Keep on going, even on error during handling current package.
 Warning: This could (potential will) rebuild package depending
-on the failed package, anyway. This may cause a broken tree.
+on the failed package, anyway.
+This may cause a broken tree.
 Use with caution!
+.It Fl L Ar path
+Logs each build (each command output from the commands which are run for
+packages) to given path.
+The full log file name is composed from the path given by this
+argument, the category name of the package and the package name:
+.Dq given-path/category/pkgname .
+The specified path must exists and being user writable of the invoking
+user or any parent directory must be writable by the invoking user.
+Potentially existing log in the same file name will be overwritten.
 .It Fl n
 Display actions that would be taken, but don't actually run
 .Dq make replace
@@ -100,15 +120,6 @@ Use
 to check for outdated packages, and replace those too.
 .It Fl v
 Verbose output.
-.It Fl L Ar path
-Logs each build (each command output from the commands which are run for
-packages) to given path. The full log file name is composed from the path
-given by this argument, the category name of the package and the package
-name:
-.Dq given-path/category/pkgname .
-The specified path must exists and being user writable of the invoking
-user or any parent directory must be writable by the invoking user.
-Potentially existing log in the same file name will be overwritten.
 .It Fl X Ar pkgs
 Exclude the comma-separated list of package base names
 from being rebuilt for any reason.
@@ -194,6 +205,11 @@ To mark all packages that compiled against X11 as needing rebuild
 cd /var/db/pkg \*[Am]\*[Am] grep "blddep x11-links" */* | cut -d/ -f1 | \\
 sort -u | xargs pkg_admin set rebuild=YES
 .Ed
+.Pp
+To compile all packages heavily parallel, use
+.Bd -literal -offset indent
+pkg_rolling-replace -D MAKE_JOBS=8
+.Ed
 .Sh AUTHORS
 .An -nosplit
 .An Nick Goffee
@@ -210,6 +226,7 @@ were added by
 .Aq tnn@NetBSD.org .
 The options
 .Fl k ,
+.Fl D ,
 .Fl F
 and
 .Fl L

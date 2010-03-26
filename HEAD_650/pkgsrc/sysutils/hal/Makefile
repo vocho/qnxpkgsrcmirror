@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.42 2009/10/15 00:30:38 jmcneill Exp $
+# $NetBSD: Makefile,v 1.46 2010/01/26 06:16:30 wiz Exp $
 
 DISTNAME=		hal-0.5.11
-PKGREVISION=		25
+PKGREVISION=		27
 CATEGORIES=		sysutils
 MASTER_SITES=		http://hal.freedesktop.org/releases/
 EXTRACT_SUFX=		.tar.bz2
@@ -9,6 +9,7 @@ EXTRACT_SUFX=		.tar.bz2
 MAINTAINER=		netbsd-desktop@NetBSD.org
 HOMEPAGE=		http://hal.freedesktop.org/
 COMMENT=		FreeDesktop hardware abstraction layer
+LICENSE=		gnu-gpl-v2
 
 BUILD_DEFS+=		VARBASE PKG_SYSCONFBASE
 PKG_DESTDIR_SUPPORT=	user-destdir
@@ -90,6 +91,8 @@ FILES_SUBST+=		HAL_USER=${HAL_USER}
 FILES_SUBST+=		HAL_GROUP=${HAL_GROUP}
 
 PLIST_SUBST+=		PKG_SYSCONFDIR=${PKG_SYSCONFDIR}
+
+TEST_TARGET=		check
 
 post-extract:
 	${CP} -r ${FILESDIR}/hald-netbsd ${WRKSRC}/hald/netbsd

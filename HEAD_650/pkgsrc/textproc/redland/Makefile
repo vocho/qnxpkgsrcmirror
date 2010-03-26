@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.6 2009/12/15 22:13:41 joerg Exp $
+# $NetBSD: Makefile,v 1.10 2010/01/29 13:09:55 adam Exp $
 
-DISTNAME=	redland-1.0.9
-PKGREVISION=	1
+DISTNAME=	redland-1.0.10
 CATEGORIES=	textproc
 MASTER_SITES=	http://download.librdf.org/source/
 
@@ -25,12 +24,13 @@ CONFIGURE_ARGS+=	--with-bdb-lib=${BDBBASE}/lib
 CONFIGURE_ARGS+=	--with-bdb-include=${BDBBASE}/${BUILDLINK_INCDIRS.${BDB_TYPE}}
 CONFIGURE_ARGS+=	--with-ltdl-include=${BUILDLINK_PREFIX.libltdl}/include
 CONFIGURE_ARGS+=	--with-ltdl-lib=${BUILDLINK_PREFIX.libltdl}/lib
-CONFIGURE_ARGS+=	--with-postgresql=no
 CONFIGURE_ARGS+=	--with-mysql=no
+CONFIGURE_ARGS+=	--with-postgresql=no
 CONFIGURE_ARGS+=	--with-sqlite=no
 CONFIGURE_ARGS+=	--with-threestore=no
 CONFIGURE_ARGS+=	--with-raptop=system
 CONFIGURE_ARGS+=	--with-rasqal=system
+CONFIGURE_ENV+=		ac_cv_path_IODBC_CONFIG=no
 
 PKGCONFIG_OVERRIDE+=	redland.pc.in
 

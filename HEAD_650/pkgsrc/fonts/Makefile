@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.143 2009/09/01 21:05:11 wiz Exp $
+# $NetBSD: Makefile,v 1.150 2010/03/12 23:09:42 minskim Exp $
 #
 
 COMMENT=	Fonts
@@ -129,6 +129,7 @@ SUBDIR+=	p5-Font-TTF
 SUBDIR+=	p5-Font-TTFMetrics
 SUBDIR+=	pcf2bdf
 SUBDIR+=	profont
+SUBDIR+=	proggy-fonts
 SUBDIR+=	ps2pkm
 SUBDIR+=	py-TTFQuery
 SUBDIR+=	py-fonttools
@@ -140,11 +141,10 @@ SUBDIR+=	tex-ae
 SUBDIR+=	tex-ae-doc
 SUBDIR+=	tex-amsfonts
 SUBDIR+=	tex-amsfonts-doc
-SUBDIR+=	tex-bin-metafont
 SUBDIR+=	tex-cm
+SUBDIR+=	tex-cm-doc
 SUBDIR+=	tex-cm-super
 SUBDIR+=	tex-cm-super-doc
-SUBDIR+=	tex-cmex
 SUBDIR+=	tex-courier
 SUBDIR+=	tex-euenc
 SUBDIR+=	tex-euenc-doc
@@ -163,6 +163,7 @@ SUBDIR+=	tex-marvosym-doc
 SUBDIR+=	tex-metafont
 SUBDIR+=	tex-mflogo
 SUBDIR+=	tex-mflogo-doc
+SUBDIR+=	tex-mfware
 SUBDIR+=	tex-psnfss
 SUBDIR+=	tex-psnfss-doc
 SUBDIR+=	tex-rsfs
@@ -177,7 +178,6 @@ SUBDIR+=	tex-txfonts
 SUBDIR+=	tex-txfonts-doc
 SUBDIR+=	tex-uhc-fonts-base
 SUBDIR+=	tex-uhc-fonts-extra
-SUBDIR+=	tex-unttf
 SUBDIR+=	tex-wasy
 SUBDIR+=	tex-wasy-doc
 SUBDIR+=	tex-zapfding
@@ -187,6 +187,7 @@ SUBDIR+=	ttf2pt1
 SUBDIR+=	ttftot42
 SUBDIR+=	ttmkfdir2
 SUBDIR+=	type1inst
+SUBDIR+=	umefont-ttf
 SUBDIR+=	un-core-ttf
 SUBDIR+=	un-extra-ttf
 SUBDIR+=	uralic-ttf

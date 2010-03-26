@@ -1,4 +1,4 @@
-# $NetBSD: unprivileged.mk,v 1.17 2008/11/27 19:28:01 rillig Exp $
+# $NetBSD: unprivileged.mk,v 1.20 2010/02/28 19:57:52 tnn Exp $
 #
 # This file collects definitions that are useful when using pkgsrc as an
 # unprivileged (non-root) user. It is included automatically by the
@@ -129,7 +129,11 @@ _UNPRIVILEGED+=		user-destdir
 UNPRIVILEGED_USER!=	${ID} -n -u
 .  endif
 .  if !defined(UNPRIVILEGED_GROUP) || empty(UNPRIVILEGED_GROUP)
+.    if "$(OPSYS)" == "Interix" # For at least Interix 3.5 SP-8.0.1969.1
+UNPRIVILEGED_GROUP!=	${ID} -g
+.    else
 UNPRIVILEGED_GROUP!=	${ID} -n -g
+.    endif 
 .  endif
 .  if !defined(UNPRIVILEGED_GROUPS) || empty(UNPRIVILEGED_GROUPS)
 UNPRIVILEGED_GROUPS!=	${ID} -n -G
@@ -145,6 +149,14 @@ REAL_ROOT_GROUP:=	${ROOT_GROUP}
 # Override super-user account.
 ROOT_GROUP=		${UNPRIVILEGED_GROUP}
 ROOT_USER=		${UNPRIVILEGED_USER}
+
+.  if !empty(_UNPRIVILEGED:Munprivileged)
+# Override "games" account.
+GAMES_GROUP=		${UNPRIVILEGED_GROUP}
+GAMES_USER=		${UNPRIVILEGED_USER}
+GAMEDIRMODE=		0755
+GAMEMODE=		0755
+.  endif
 
 # Override user/group pairs used to install files.
 BINGRP=			${UNPRIVILEGED_GROUP}
@@ -169,15 +181,6 @@ NONBINMODE=		644
 PKG_USERS_VARS?=	# empty
 PKG_GROUPS_VARS?=	# empty
 BUILD_DEFS+=		${PKG_USERS_VARS} ${PKG_GROUPS_VARS}
-
-.if defined(SETGIDGAME) && !empty(SETGIDGAME:M[yY][eE][sS])
-.  if defined(GAMES_USER)
-PKG_USERS_VARS+=	GAMES_USER
-.  endif
-.  if defined(GAMES_GROUP)
-PKG_GROUPS_VARS+=	GAMES_GROUP
-.  endif
-.endif
 
 # Override per-package custom users and groups, except for groups listed
 # in UNPRIVILEGED_GROUPS.

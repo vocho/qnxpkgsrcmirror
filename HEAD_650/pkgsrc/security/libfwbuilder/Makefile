@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.25 2009/08/26 19:56:47 sno Exp $
+# $NetBSD: Makefile,v 1.27 2010/01/27 21:50:27 joerg Exp $
 
 DISTNAME=	libfwbuilder-2.0.12
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	security net
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=fwbuilder/}
 
@@ -9,12 +9,16 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.fwbuilder.org/
 COMMENT=	Firewall Builder API
 
+PKG_DESTDIR_SUPPORT=	user-destdir
+
 CONFLICTS=	libfwbuilder21-[0-9]*
 
 USE_LIBTOOL=	yes
 GNU_CONFIGURE=	yes
 USE_TOOLS+=	gmake
 USE_LANGUAGES=	c c++
+
+INSTALL_MAKE_FLAGS+=	INSTALL_ROOT=${DESTDIR}
 
 .include "../../devel/glib2/buildlink3.mk"
 .include "../../net/net-snmp/buildlink3.mk"

@@ -1,6 +1,6 @@
 $NetBSD: patch-ab,v 1.28 2009/10/07 10:56:40 obache Exp $
 
---- configure.orig	2009-07-30 00:12:00.000000000 +0900
+--- configure.orig	2009-07-29 15:12:00.000000000 +0000
 +++ configure
 @@ -1856,7 +1856,7 @@ archlibdir='${libexecdir}/emacs/${versio
  docdir='${datadir}/emacs/${version}/etc'
@@ -40,7 +40,22 @@ $NetBSD: patch-ab,v 1.28 2009/10/07 10:56:40 obache Exp $
        powerpc-*-netbsd*) machine=macppc ;;
        sparc*-*-netbsd*)	machine=sparc ;;
        vax-*-netbsd*)	machine=vax ;;
-@@ -9408,9 +9417,9 @@ if test "${HAVE_NS}" = yes; then
+@@ -2620,6 +2629,14 @@ _ACEOF
+     machine=ia64 opsys=gnu-linux
+   ;;
+ 
++  *-nto-qnx6* )
++    opsys=qnx6
++    case "${canonical}" in
++      i386-pc-nto-qnx*)         machine=intel386 ;;
++      * )            unported=yes ;;
++    esac
++  ;;
++
+   ## Intel 386 machines where we don't care about the manufacturer
+   i[3456]86-*-* )
+     machine=intel386
+@@ -9408,9 +9425,9 @@ if test "${HAVE_NS}" = yes; then
    window_system=nextstep
    with_xft=no
    # set up packaging dirs

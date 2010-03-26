@@ -1,4 +1,4 @@
-# $NetBSD: options.mk,v 1.11 2006/10/14 20:34:36 tron Exp $
+# $NetBSD: options.mk,v 1.13 2010/02/26 11:00:40 drochner Exp $
 
 PKG_OPTIONS_VAR=		PKG_OPTIONS.mutt
 PKG_OPTIONS_REQUIRED_GROUPS=	display

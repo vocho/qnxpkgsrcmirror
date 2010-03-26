@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.3 2009/10/11 08:13:40 markd Exp $
+# $NetBSD: Makefile,v 1.6 2010/01/27 10:38:41 markd Exp $
 
 DISTNAME=	kdebase-runtime-${_KDE_VERSION}
 CATEGORIES=	x11

@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.8 2009/08/26 19:57:08 sno Exp $
+# $NetBSD: Makefile,v 1.11 2010/02/10 19:17:32 joerg Exp $
 #
 
 DISTNAME=		Csound${CSOUND_VERSION}_src
 PKGNAME=		csound5-${CSOUND_VERSION}
-PKGREVISION=		4
+PKGREVISION=		6
 CATEGORIES=		audio
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=csound/}
 WRKSRC=			${WRKDIR}/Csound${CSOUND_VERSION}
@@ -16,7 +16,8 @@ CSOUND_VERSION=		5.01
 USE_LANGUAGES=		c c++
 CFLAGS+=		-g -D__PKGSRC_PREFIX__=${PREFIX}/ -DBETA
 BUILD_DEPENDS+=		scons>=0.96:../../devel/scons
-NOT_FOR_PLATFORM=	*-*-alpha *-*-sparc64	# Severe LP64 problems
+# Severe LP64 problems
+NOT_FOR_PLATFORM=	${LP64PLATFORMS}
 SCONS=			${PREFIX}/bin/scons
 SCONS_ARGS=		-C ${WRKSRC} prefix=${PREFIX}
 SCONS_ARGS+=		buildDSSI=0 buildLoris=0 buildRelease=1

@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.8 2009/12/16 21:18:31 adam Exp $
+# $NetBSD: Makefile,v 1.10 2010/01/22 20:12:11 adam Exp $
 
 PKGNAME=	postgresql82-server-${BASE_VERS}
+PKGREVISION=	1
 COMMENT=	PostgreSQL database server programs
 
 PKG_DESTDIR_SUPPORT=	user-destdir
@@ -45,7 +46,7 @@ DL_LIBS+=	-lltdl
 .endif
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.postgresql82-server
-PKG_SUPPORTED_OPTIONS=	pam ldap
+PKG_SUPPORTED_OPTIONS=	krb5 pam ldap
 .include "../../databases/postgresql82/options.mk"
 
 # PGUSER	username of the database administrator
@@ -91,6 +92,6 @@ pre-build:
 		../../src/include/utils/fmgroids.h
 	${RUN} ${_ULIMIT_CMD}						\
 	cd ${WRKSRC}/src/port &&					\
-       	env ${MAKE_ENV} ${MAKE_PROGRAM} ${BUILD_MAKE_FLAGS}
+	env ${MAKE_ENV} ${MAKE_PROGRAM} ${BUILD_MAKE_FLAGS}
 
 .include "../../mk/bsd.pkg.mk"

@@ -1,4 +1,4 @@
-# $NetBSD: bsd.prefs.mk,v 1.301 2009/12/13 08:19:45 obache Exp $
+# $NetBSD: bsd.prefs.mk,v 1.307 2010/02/06 11:40:22 obache Exp $
 #
 # This file includes the mk.conf file, which contains the user settings.
 #
@@ -174,6 +174,12 @@ LOWER_VENDOR?=		pc
 .  endif
 LOWER_VENDOR?=		unknown
 
+.elif ${OPSYS} == "Haiku"
+LOWER_OPSYS?=		haiku
+.  if ${MACHINE_ARCH} == "i386"
+LOWER_VENDOR?=		pc
+.  endif
+
 .elif ${OPSYS} == "Interix"
 LOWER_OPSYS?=		interix
 LOWER_VENDOR?=		pc
@@ -219,6 +225,8 @@ LOWER_VENDOR?=		mandrake
 LOWER_VENDOR?=		redhat
 .  elif exists(/etc/slackware-version)
 LOWER_VENDOR?=		slackware
+.  elif exists(/etc/ssdlinux_version)
+LOWER_VENDOR?=		ssd
 .  elif ${LOWER_ARCH} == "i386"
 LOWER_VENDOR?=          pc
 .  endif
@@ -416,13 +424,12 @@ do-install:
 .endif
 
 # PKG_DESTDIR_SUPPORT can only be one of "destdir" or "user-destdir".
+.if defined(PKG_DEVELOPER)
+USE_DESTDIR?=		yes
+.else
 USE_DESTDIR?=		no
-PKG_DESTDIR_SUPPORT?=	# empty
-
-.if !empty(USE_DESTDIR:M[Ff][Uu][Ll][Ll])
-WARNINGS+=	"USE_DESTDIR=full is deprecated, just use USE_DESTDIR=yes"
-USE_DESTDIR:=		yes
 .endif
+PKG_DESTDIR_SUPPORT?=	# empty
 
 .if empty(PKG_DESTDIR_SUPPORT) || empty(USE_DESTDIR:M[Yy][Ee][Ss])
 .  if empty(USE_DESTDIR:M[Yy][Ee][Ss]) && empty(USE_DESTDIR:M[Nn][Oo])
@@ -438,7 +445,7 @@ PKG_FAIL_REASON+=	"PKG_DESTDIR_SUPPORT must be \`\`destdir'' or \`\`user-destdir
 .endif
 
 .if defined(PKG_DEVELOPER) && empty(PKG_DESTDIR_SUPPORT)
-WARNINGS+=	"[bsd.prefs.mk] The package ${PKGNAME} misses DESTDIR support."
+WARNINGS+=	"[bsd.prefs.mk] The package ${PKGNAME} is missing DESTDIR support."
 .endif
 
 # When using staged installation, everything gets installed into
@@ -709,5 +716,12 @@ _VARGROUPS+=		dirs
 _USER_VARS.dirs=	DISTDIR LOCALBASE PACKAGES PKG_SYSCONFDIR WRKOBJDIR
 _PKG_VARS.dirs=		WRKSRC PATCHDIR FILESDIR PKGDIR
 _SYS_VARS.dirs=		WRKDIR DESTDIR PKG_SYSCONFBASEDIR
+
+# List of 64bit operating systems with sizeof(int) != sizeof(void *).
+# This can be used for software that is not 64bit clean.
+#
+# Keywords: ONLY_FOR_PLATFORM NOT_FOR_PLATFORM 64bit
+#
+LP64PLATFORMS=		*-*-alpha *-*-sparc64 *-*-x86_64
 
 .endif	# BSD_PKG_MK

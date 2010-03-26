@@ -1,4 +1,4 @@
-#	$NetBSD: bsd.pkg.mk,v 1.1960 2009/11/03 02:14:32 joerg Exp $
+#	$NetBSD: bsd.pkg.mk,v 1.1966 2010/02/23 17:24:55 joerg Exp $
 #
 # This file is in the public domain.
 #
@@ -132,44 +132,12 @@ PKG_FAIL_REASON+=	"PKG_INSTALLATION_TYPE must be \`\`pkgviews'' or \`\`overwrite
 PKG_FAIL_REASON+=	"This package doesn't support PKG_INSTALLATION_TYPE=${PKG_INSTALLATION_TYPE}."
 .endif
 
-.if defined(ALL_TARGET)
-PKG_FAIL_REASON+='ALL_TARGET is deprecated and must be replaced with BUILD_TARGET.'
-.endif
-
-.if defined(NO_WRKSUBDIR)
-PKG_FAIL_REASON+='NO_WRKSUBDIR has been deprecated - please replace it with an explicit'
-PKG_FAIL_REASON+='assignment of WRKSRC= $${WRKDIR}'
-.endif # NO_WRKSUBDIR
-
-# We need to make sure the buildlink-x11 package is not installed since it
-# breaks builds that use imake.
-.if defined(USE_IMAKE)
-.  if exists(${LOCALBASE}/lib/X11/config/buildlinkX11.def) || \
-      exists(${X11BASE}/lib/X11/config/buildlinkX11.def)
-PKG_FAIL_REASON+= "${PKGNAME} uses imake, but the buildlink-x11 package was found." \
-	 "    Please deinstall it (pkg_delete buildlink-x11)."
-.  endif
-.endif	# USE_IMAKE
-
 .if !defined(CATEGORIES) || !defined(DISTNAME)
 PKG_FAIL_REASON+='CATEGORIES and DISTNAME are mandatory.'
 .endif
 
 .if defined(PKG_PATH)
 PKG_FAIL_REASON+='Please unset PKG_PATH before doing pkgsrc work!'
-.endif
-
-.if defined(MASTER_SITE_SUBDIR)
-PKG_FAIL_REASON+='MASTER_SITE_SUBDIR is deprecated and must be replaced with MASTER_SITES.'
-.endif
-
-.if defined(PATCH_SITE_SUBDIR)
-PKG_FAIL_REASON+='PATCH_SITE_SUBDIR is deprecated and must be replaced with PATCH_SITES.'
-.endif
-
-.if defined(ONLY_FOR_ARCHS) || defined(NOT_FOR_ARCHS) \
-	|| defined(ONLY_FOR_OPSYS) || defined(NOT_FOR_OPSYS)
-PKG_FAIL_REASON+='ONLY/NOT_FOR_ARCHS/OPSYS are deprecated and must be replaced with ONLY/NOT_FOR_PLATFORM.'
 .endif
 
 # Allow variables to be set on a per-OS basis
@@ -218,6 +186,7 @@ BSD_MAKE_ENV+=	INCSDIR=${PREFIX}/include
 BSD_MAKE_ENV+=	LIBDIR=${PREFIX}/lib
 BSD_MAKE_ENV+=	MANDIR=${PREFIX}/${PKGMANDIR}
 BSD_MAKE_ENV+=	STRIPFLAG=${_STRIPFLAG_INSTALL:Q}
+BSD_MAKE_ENV+=	MANINSTALL=${MANINSTALL:Q}
 BSD_MAKE_ENV+=	MKHTML=no
 
 _BUILD_DEFS=		${BUILD_DEFS}

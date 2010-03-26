@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.16 2009/01/09 13:42:15 tonnerre Exp $
+# $NetBSD: Makefile,v 1.23 2010/02/22 09:20:30 obache Exp $
 #
 
 .include "../../devel/scmgit/Makefile.common"
@@ -8,7 +8,7 @@ COMMENT=		GIT Tree History Storage Tool (base package)
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
-CONFLICTS+=		git-[0-9]*		# misc/git
+CONFLICTS+=		git<4.9.5nb1		# misc/git
 
 DEPENDS+=		p5-Error>=0.17015:../../devel/p5-Error
 
@@ -40,11 +40,11 @@ GIT_COREDIR=		git-core
 GIT_TEMPLATEDIR=	templates
 
 GIT_TEMPLATES=		description info/exclude
-GIT_TEMPLATES.samples=	hooks/applypatch-msg hooks/commit-msg 	\
-			hooks/post-commit hooks/post-receive	\
-			hooks/post-update hooks/pre-applypatch	\
-			hooks/pre-commit hooks/pre-rebase	\
-			hooks/prepare-commit-msg hooks/update
+GIT_TEMPLATES+=		hooks/applypatch-msg.sample hooks/commit-msg.sample 	\
+			hooks/post-commit.sample hooks/post-receive.sample	\
+			hooks/post-update.sample hooks/pre-applypatch.sample	\
+			hooks/pre-commit.sample hooks/pre-rebase.sample		\
+			hooks/prepare-commit-msg.sample hooks/update.sample
 GIT_TEMPLATES+=
 
 # XXX unused as of now
@@ -56,10 +56,6 @@ MAKE_DIRS=		${GIT_CORE_TEMPLATEDIR}
 MAKE_DIRS+=		${GIT_CORE_TEMPLATEDIR}/hooks
 MAKE_DIRS+=		${GIT_CORE_TEMPLATEDIR}/info
 
-REQD_FILES+=		${GIT_TEMPLATES.samples:@.t.@\
-				${EGDIR}/${GIT_TEMPLATEDIR}/${.t.:=.sample}\
-				${PREFIX}/${GIT_CORE_TEMPLATEDIR}/${.t.}\
-			@:M*}
 REQD_FILES+=		${GIT_TEMPLATES:@.t.@\
 				${EGDIR}/${GIT_TEMPLATEDIR}/${.t.}\
 				${PREFIX}/${GIT_CORE_TEMPLATEDIR}/${.t.}\
@@ -82,6 +78,16 @@ SUBST_VARS.fix-paths=	PREFIX
 .if ${OPSYS} == "QNX"
 post-patch:
 	${CP} ${FILESDIR}/qnxnto.c ${FILESDIR}/qnxnto.h ${WRKSRC}/compat/
+.endif
+.include "../../mk/bsd.prefs.mk"
+
+.if ${OPSYS} == "NetBSD" || ${OPSYS} == "SunOS" || ${OPSYS} == "OSF1" || ${OPSYS} == "HPUX" || ${OPSYS} == "QNX" || ${OPSYS} == "UnixWare"
+SUBST_CLASSES+=		fix-cd-P
+SUBST_FILES.fix-cd-P=	git-sh-setup.sh
+SUBST_FILES.fix-cd-P+=	t/test-lib.sh
+SUBST_MESSAGE.fix-cd-P=	Fixing cd arguments.
+SUBST_STAGE.fix-cd-P=	pre-build
+SUBST_SED.fix-cd-P=	-e "s/cd -P/cd/g"
 .endif
 
 #.include "../../editors/emacs/modules.mk" # XXX TODO (see patch-ad)

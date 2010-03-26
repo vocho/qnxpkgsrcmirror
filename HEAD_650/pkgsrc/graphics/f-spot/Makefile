@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.16 2009/12/15 21:48:00 joerg Exp $
+# $NetBSD: Makefile,v 1.19 2010/02/16 12:16:23 drochner Exp $
 #
 
 DISTNAME=	f-spot-0.6.1.5
-PKGREVISION=	1
+PKGREVISION=	4
 CATEGORIES=	graphics
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/f-spot/0.6/}
 EXTRACT_SUFX=	.tar.bz2
@@ -18,6 +18,13 @@ USE_LIBTOOL=	yes
 USE_TOOLS+=	gmake intltool pkg-config bash:run msgfmt
 
 MAKE_JOBS_SAFE=	no
+
+.include "../../mk/bsd.prefs.mk"
+.for platform in ${LP64PLATFORMS}
+.  if ${MACHINE_PLATFORM:M${platform}}
+CONFIGURE_ENV+=	EXTRACSDEFINES=-define:LONG_IS_64BITS
+.  endif
+.endfor
 
 PKGCONFIG_OVERRIDE+=	f-spot.pc.in
 

@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.4 2009/08/06 22:36:50 wiz Exp $
+# $NetBSD: Makefile,v 1.7 2010/03/07 08:56:55 wiz Exp $
 #
 
-DISTNAME=	gaupol-0.13.1
+DISTNAME=	gaupol-0.15
 CATEGORIES=	misc
-MASTER_SITES=	http://download.gna.org/gaupol/0.13/
+MASTER_SITES=	http://download.gna.org/gaupol/0.15/
 
 MAINTAINER=	wiz@NetBSD.org
 HOMEPAGE=	http://home.gna.org/gaupol/index.html
@@ -11,7 +11,7 @@ COMMENT=	Subtitle editor
 
 DEPENDS+=	iso-codes-[0-9]*:../../textproc/iso-codes
 DEPENDS+=	${PYPKGPREFIX}-chardet-[0-9]*:../../converters/py-chardet
-DEPENDS+=	${PYPKGPREFIX}-enchant-[0-9]*:../../textproc/py-enchant
+DEPENDS+=	${PYPKGPREFIX}-enchant>=1.1.3:../../textproc/py-enchant
 DEPENDS+=	${PYPKGPREFIX}-gtk2>=2.12:../../x11/py-gtk2
 
 PYTHON_VERSIONS_ACCEPTED=	26 25

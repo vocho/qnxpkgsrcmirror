@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.39 2009/07/16 14:38:32 joerg Exp $
+# $NetBSD: Makefile,v 1.41 2010/02/19 19:31:59 joerg Exp $
 
 DISTNAME=	delegate9.9.1
 PKGNAME=	delegate-9.9.1
+PKGREVISION=	1
 CATEGORIES=	net
 MASTER_SITES=	http://www.delegate.org/anonftp/DeleGate/ \
 		ftp://ftp.u-aizu.ac.jp/pub/net/DeleGate/delegate.org/ 
@@ -22,7 +23,7 @@ DELEGATE_MANAGER?=	root@localhost
 RCD_SCRIPTS=		delegated
 FILES_SUBST+=		ADMIN=${DELEGATE_MANAGER:Q}
 
-OWN_DIRS_PERMS+=${VARBASE}/spool/delegate/cache ${ROOT_USER} ${ROOT_GROUP} 1777
+OWN_DIRS_PERMS+=${VARBASE}/spool/delegate/cache ${REAL_ROOT_USER} ${REAL_ROOT_GROUP} 1777
 OWN_DIRS_PERMS+=${VARBASE}/spool/delegate-nobody nobody nobody 755
 
 INSTALLATION_DIRS=	sbin share/doc/delegate

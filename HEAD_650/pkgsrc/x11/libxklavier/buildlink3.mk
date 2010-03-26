@@ -1,4 +1,4 @@
-# $NetBSD: buildlink3.mk,v 1.15 2009/03/20 19:25:47 joerg Exp $
+# $NetBSD: buildlink3.mk,v 1.17 2010/02/16 14:54:41 wiz Exp $
 
 BUILDLINK_TREE+=	libxklavier
 

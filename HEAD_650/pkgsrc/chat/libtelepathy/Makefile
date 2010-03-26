@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.5 2009/08/29 11:33:36 obache Exp $
+# $NetBSD: Makefile,v 1.7 2010/02/10 19:17:33 joerg Exp $
 #
 
 DISTNAME=	libtelepathy-0.3.3
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	chat
 MASTER_SITES=	http://telepathy.freedesktop.org/releases/libtelepathy/
 
@@ -12,6 +12,8 @@ COMMENT=	Unified framework for many different kinds of real-time communications
 LICENSE=	gnu-lgpl-v2.1
 
 PKG_DESTDIR_SUPPORT=	user-destdir
+
+BUILD_DEPENDS+=		${PYPKGPREFIX}-expat-[0-9]*:../../textproc/py-expat
 
 GNU_CONFIGURE=	yes
 USE_LIBTOOL=	yes

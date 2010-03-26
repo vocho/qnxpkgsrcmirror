@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.12 2009/07/22 09:01:44 wiz Exp $
+# $NetBSD: Makefile,v 1.14 2010/01/28 00:17:48 joerg Exp $
 #
 
 DISTNAME=	ocr-b
@@ -10,6 +10,8 @@ MASTER_SITES=	${MASTER_SITE_TEX_CTAN:=fonts/${DISTNAME}/}
 MAINTAINER=	pkgsrc-users@NetBSD.org
 # HOMEPAGE=
 COMMENT=	OCR-B font for LaTeX
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 WRKSRC=		${WRKDIR}/ocr-b
 DIST_SUBDIR=	${DISTNAME}
@@ -30,13 +32,14 @@ do-extract:
 		${CP} ${DISTDIR}/${DIST_SUBDIR}/$$f ${WRKSRC}; \
 	done
 
+INSTALLATION_DIRS+=	${PKG_LOCALTEXMFPREFIX}/doc/fonts/ocrb \
+			${PKG_LOCALTEXMFPREFIX}/fonts/source/ocrb \
+			${PKG_LOCALTEXMFPREFIX}/fonts/tfm/ocrb
+
 do-install:
-	${INSTALL_DATA_DIR} ${PKG_LOCALTEXMFPREFIX}/doc/fonts/ocrb
-	${INSTALL_DATA_DIR} ${PKG_LOCALTEXMFPREFIX}/fonts/source/ocrb
-	${INSTALL_DATA_DIR} ${PKG_LOCALTEXMFPREFIX}/fonts/tfm/ocrb
 	${INSTALL_DATA} ${WRKSRC}/ocrbinfo \
-		${PKG_LOCALTEXMFPREFIX}/doc/fonts/ocrb
+	    ${DESTDIR}${PKG_LOCALTEXMFPREFIX}/doc/fonts/ocrb
 	${INSTALL_DATA} ${WRKSRC}/*.mf \
-		${PKG_LOCALTEXMFPREFIX}/fonts/source/ocrb
+	    ${DESTDIR}${PKG_LOCALTEXMFPREFIX}/fonts/source/ocrb
 
 .include "../../mk/bsd.pkg.mk"

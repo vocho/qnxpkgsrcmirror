@@ -1,16 +1,22 @@
-$NetBSD$
+$NetBSD: patch-au,v 1.4 2010/01/29 18:19:09 adam Exp $
 
---- qmake/generators/win32/msvc_objectmodel.cpp.orig	2009-06-20 00:57:53.000000000 -0400
-+++ qmake/generators/win32/msvc_objectmodel.cpp
-@@ -46,6 +46,11 @@
+--- src/3rdparty/javascriptcore/JavaScriptCore/runtime/JSValue.h.orig	2010-01-28 07:10:17.000000000 +0000
++++ src/3rdparty/javascriptcore/JavaScriptCore/runtime/JSValue.h
+@@ -468,7 +468,7 @@ namespace JSC {
+             u.asBits.tag = CellTag;
+         else
+             u.asBits.tag = EmptyValueTag;
+-        u.asBits.payload = reinterpret_cast<int32_t>(ptr);
++        u.asBits.payload = reinterpret_cast<intptr_t>(ptr);
+     }
  
- QT_BEGIN_NAMESPACE
+     inline JSValue::JSValue(const JSCell* ptr)
+@@ -477,7 +477,7 @@ namespace JSC {
+             u.asBits.tag = CellTag;
+         else
+             u.asBits.tag = EmptyValueTag;
+-        u.asBits.payload = reinterpret_cast<int32_t>(const_cast<JSCell*>(ptr));
++        u.asBits.payload = reinterpret_cast<intptr_t>(const_cast<JSCell*>(ptr));
+     }
  
-+#ifdef __QNXNTO__
-+/* _Files conflicts with version in <stdio.h> */
-+#define _Files _FILES_qt
-+#endif
-+
- // XML Tags ---------------------------------------------------------
- const char _Configuration[]                     = "Configuration";
- const char _Configurations[]                    = "Configurations";
+     inline JSValue::operator bool() const

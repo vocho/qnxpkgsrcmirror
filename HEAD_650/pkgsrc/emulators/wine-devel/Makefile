@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.14 2009/09/07 20:27:25 reinoud Exp $
+# $NetBSD: Makefile,v 1.16 2010/01/04 15:30:09 joerg Exp $
 
 DISTNAME=	wine-1.1.16
 PKGREVISION=	2
@@ -17,6 +17,10 @@ BUILD_DEPENDS+=	fontforge-[0-9]*:../../fonts/fontforge
 #ONLY_FOR_PLATFORM+=	FreeBSD-*-i386 Linux-*-i386 SunOS-*-i386 Darwin-*-i386
 #ONLY_FOR_PLATFORM+=	*-*-x86_64
 
+ONLY_FOR_PLATFORM+=	*-*-i386 *-*-x86_64
+
+NOT_FOR_PLATFORM+=	NetBSD-*-x86_64
+
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_LANGUAGES=		c
@@ -34,7 +38,7 @@ REPLACE_PERL+=		tools/winemaker tools/winedump/function_grep.pl
 #
 CONFIGURE_ENV+=		X_LIBS=${LDFLAGS:M*:Q}
 CONFIGURE_ENV+=		CFLAGS=${CFLAGS:M*:Q}\ -DDEVOSSAUDIO="\"${DEVOSSAUDIO}\""
-CONFIGURE_ENV+=		LDD=${LDD}
+CONFIGURE_ENV+=		LDD=${LDD:Q}
 LIBS+=			${LDFLAGS}
 
 # If we're doing a 32-bit build, make sure that the appropriate

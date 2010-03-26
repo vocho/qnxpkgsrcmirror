@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.4 2009/04/27 07:13:02 ghen Exp $
+# $NetBSD: Makefile,v 1.6 2010/02/19 20:49:29 ghen Exp $
 
 PKGNAME=		${DISTNAME:S/-/-smbk5pwd-/}
 COMMENT=		Samba and Kerberos password sync for OpenLDAP

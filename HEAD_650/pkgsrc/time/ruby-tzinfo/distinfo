@@ -1,5 +1,5 @@
-$NetBSD: distinfo,v 1.9 2009/11/30 15:48:46 taca Exp $
+$NetBSD: distinfo,v 1.11 2010/03/09 01:28:23 taca Exp $
 
-SHA1 (tzinfo-0.3.15.gem) = 9d6fafdc169947892c50bbeab1862b84b8aa64f0
-RMD160 (tzinfo-0.3.15.gem) = f5ce6a9665dea1d5fa94e6d03f8af4ca2612970c
-Size (tzinfo-0.3.15.gem) = 298496 bytes
+SHA1 (tzinfo-0.3.17.gem) = b0d494126baab4916e7f569958796a992b889655
+RMD160 (tzinfo-0.3.17.gem) = bfbab7afa4471783ad9360397a96d96eb3a3927c
+Size (tzinfo-0.3.17.gem) = 303616 bytes

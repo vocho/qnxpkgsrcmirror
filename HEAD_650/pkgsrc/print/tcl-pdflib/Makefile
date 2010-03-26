@@ -1,9 +1,11 @@
-# $NetBSD: Makefile,v 1.17 2009/08/26 19:58:15 sno Exp $
+# $NetBSD: Makefile,v 1.19 2010/01/27 22:18:35 joerg Exp $
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 .include "../../print/pdflib/Makefile.common"
 
 PKGNAME=		tcl-pdflib-${PDFLIB_BASE_VERS}
-PKGREVISION=		8
+PKGREVISION=		9
 COMMENT=		Tcl interface to PDFlib for generating PDF files
 
 BUILDLINK_API_DEPENDS.pdflib+=	pdflib>=${PDFLIB_BASE_VERS}
@@ -13,22 +15,10 @@ CONFIGURE_ARGS+=	--with-tclincl="${BUILDLINK_PREFIX.tcl}/include"
 CONFIGURE_ARGS+=	--with-tclpkg="${PREFIX}/lib/tcl8.4"
 TCLSH=			${BUILDLINK_PREFIX.tcl}/bin/tclsh
 
-DIRS_TO_BUILD=		bind/tcl
+BUILD_DIRS=		bind/tcl
 
 pre-build:
 	${TOUCH} ${WRKSRC}/pdflib/libpdf.la
-
-do-build:
-.for DIR in ${DIRS_TO_BUILD}
-	cd ${WRKSRC}/${DIR} && ${SETENV} ${MAKE_ENV}			\
-		${MAKE_PROGRAM} ${MAKE_FLAGS} ${BUILD_TARGET}
-.endfor
-
-do-install:
-.for DIR in ${DIRS_TO_BUILD}
-	cd ${WRKSRC}/${DIR} && ${SETENV} ${MAKE_ENV}			\
-		${MAKE_PROGRAM} ${MAKE_FLAGS} ${INSTALL_TARGET}
-.endfor
 
 .include "../../print/pdflib/buildlink3.mk"
 .include "../../lang/tcl/buildlink3.mk"

@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.19 2009/09/06 21:06:45 abs Exp $
+# $NetBSD: Makefile,v 1.21 2010/01/20 14:04:52 wiz Exp $
 #
 # XXX appease pkglint
 #PKGNAME=		pidgin-${PIDGIN_VERSION}
 COMMENT=		Multi-protocol Instant Messaging client GTK frontend
+PKGREVISION=		2
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 

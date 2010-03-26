@@ -8,6 +8,10 @@ PKG_SUGGESTED_OPTIONS=	tls
 
 .include "../../mk/bsd.options.mk"
 
+.if ${OPSYS} == "QNX"
+.include "../../devel/sysexits/buildlink3.mk"
+.endif
+
 ###
 ### Support "hash" (Berkeley DB) map type.
 ###

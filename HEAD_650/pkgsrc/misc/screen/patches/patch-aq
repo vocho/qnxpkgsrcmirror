@@ -2,7 +2,7 @@ $NetBSD: patch-aq,v 1.1 2005/12/10 23:28:13 rillig Exp $
 
 In Solaris 10, the setenv() function has been added.
 
---- misc.c.orig	2003-12-05 08:45:41.000000000 -0500
+--- misc.c.orig	2003-12-05 13:45:41.000000000 +0000
 +++ misc.c
 @@ -613,7 +613,7 @@ char *value;
     */

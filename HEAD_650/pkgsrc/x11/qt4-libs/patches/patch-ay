@@ -1,13 +1,13 @@
-$NetBSD$
+$NetBSD: patch-ay,v 1.5 2010/03/11 00:07:24 wiz Exp $
 
---- src/3rdparty/webkit/JavaScriptCore/runtime/DateMath.cpp.orig	2009-11-23 14:50:04.000000000 -0500
-+++ src/3rdparty/webkit/JavaScriptCore/runtime/DateMath.cpp
-@@ -950,7 +950,7 @@ double parseDate(const UString &date)
-                 return NaN;
+--- src/3rdparty/javascriptcore/JavaScriptCore/wtf/Platform.h.orig	2010-02-11 15:55:20.000000000 +0000
++++ src/3rdparty/javascriptcore/JavaScriptCore/wtf/Platform.h
+@@ -718,7 +718,7 @@
+ #endif
  
-             int sgn = (o < 0) ? -1 : 1;
--            o = abs(o);
-+            o = labs(o);
-             if (*dateString != ':') {
-                 offset = ((o / 100) * 60 + (o % 100)) * sgn;
-             } else { // GMT+05:00
+ #if !defined(WTF_USE_JSVALUE64) && !defined(WTF_USE_JSVALUE32) && !defined(WTF_USE_JSVALUE32_64)
+-#if PLATFORM(X86_64) && (PLATFORM(DARWIN) || PLATFORM(LINUX) || PLATFORM(SOLARIS) || PLATFORM(HPUX))
++#if (PLATFORM(X86_64) && (PLATFORM(UNIX) || PLATFORM(WIN_OS))) || PLATFORM(IA64) || PLATFORM(ALPHA)
+ #define WTF_USE_JSVALUE64 1
+ #elif (PLATFORM(IA64) && !PLATFORM(IA64_32)) || PLATFORM(SPARC64)
+ #define WTF_USE_JSVALUE64 1

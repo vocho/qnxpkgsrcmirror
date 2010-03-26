@@ -1,8 +1,8 @@
-$NetBSD: patch-ar,v 1.4 2009/10/11 09:14:52 adam Exp $
+$NetBSD: patch-ar,v 1.5 2010/01/29 18:19:09 adam Exp $
 
---- src/corelib/global/qglobal.h.orig	2009-10-05 09:36:44.000000000 +0200
+--- src/corelib/global/qglobal.h.orig	2010-03-25 01:57:49.000000000 +0000
 +++ src/corelib/global/qglobal.h
-@@ -176,7 +176,7 @@ namespace QT_NAMESPACE {}
+@@ -177,7 +177,7 @@ namespace QT_NAMESPACE {}
  */
  
  #if defined(__APPLE__) && (defined(__GNUC__) || defined(__xlC__) || defined(__xlc__))
@@ -11,3 +11,14 @@ $NetBSD: patch-ar,v 1.4 2009/10/11 09:14:52 adam Exp $
  #  define Q_OS_BSD4
  #  ifdef __LP64__
  #    define Q_OS_DARWIN64
+@@ -2632,9 +2632,7 @@ QT_LICENSED_MODULE(DBus)
+ #  define QT_NO_QWS_MULTIPROCESS
+ #  define QT_NO_QWS_SHARE_FONTS
+ #  define QT_NO_SYSTEMSEMAPHORE
+-#  define QT_NO_SHAREDMEMORY
+-// QNX currently doesn't support forking in a thread, so disable QProcess
+-#  define QT_NO_PROCESS
++//#  define QT_NO_SHAREDMEMORY
+ #endif
+ 
+ QT_END_NAMESPACE

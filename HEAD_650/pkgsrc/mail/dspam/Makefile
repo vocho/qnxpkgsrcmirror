@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.64 2009/12/15 21:54:17 joerg Exp $
+# $NetBSD: Makefile,v 1.66 2010/03/10 13:43:38 martti Exp $
 
 DISTNAME=	dspam-3.8.0
 PKGREVISION=	5
@@ -6,8 +6,12 @@ CATEGORIES=	mail
 MASTER_SITES=	http://dspam.nuclearelephant.com/sources/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://dspam.nuclearelephant.com/
+HOMEPAGE=	http://dspam.sourceforge.net/
 COMMENT=	Extremely scalable, statistical-hybrid anti-spam filter
+
+LICENSE=	gnu-gpl-v2
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=		yes
 USE_LIBTOOL=		yes
@@ -63,15 +67,15 @@ DSPAM_WWWGROUP?=	${APACHE_GROUP}
 PKG_GROUPS_VARS+=	DSPAM_GROUP DSPAM_WWWGROUP
 PKG_USERS_VARS+=	DSPAM_USER DSPAM_WWWUSER
 
-CONFIGURE_ARGS+=	--with-signature-life=${DSPAM_SIGNATURE_LIFE:Q}
-CONFIGURE_ARGS+=	--with-dspam-home=${DSPAM_HOME:Q}		\
-			--with-dspam-home-owner=${DSPAM_USER:Q}		\
-			--with-dspam-home-group=${DSPAM_GROUP:Q}	\
-			--with-dspam-owner=${DSPAM_USER:Q}		\
-			--with-dspam-group=${DSPAM_GROUP:Q}		\
-			--with-dspam-mode=${DSPAM_BINMODE:Q}		\
-			--with-logdir=${DSPAM_LOGDIR:Q}			\
-			--sysconfdir=${PKG_SYSCONFDIR:Q}
+CONFIGURE_ARGS+=	--with-signature-life=${DSPAM_SIGNATURE_LIFE}
+CONFIGURE_ARGS+=	--with-dspam-home=${DSPAM_HOME}			\
+			--with-dspam-home-owner=${DSPAM_USER}		\
+			--with-dspam-home-group=${DSPAM_GROUP}		\
+			--with-dspam-owner=${DSPAM_USER}		\
+			--with-dspam-group=${DSPAM_GROUP}		\
+			--with-dspam-mode=${DSPAM_BINMODE}		\
+			--with-logdir=${DSPAM_LOGDIR}			\
+			--sysconfdir=${PKG_SYSCONFDIR}
 
 .include "options.mk"
 .include "../../mk/pthread.buildlink3.mk"
@@ -102,9 +106,9 @@ OWN_DIRS_PERMS=		${DSPAM_HOME} ${DSPAM_USER} ${DSPAM_WWWGROUP} 0775
 OWN_DIRS_PERMS+=	${DSPAM_LOGDIR} ${DSPAM_USER} ${DSPAM_GROUP} 0775
 OWN_DIRS_PERMS+=	${DSPAM_PIDDIR} ${DSPAM_USER} ${DSPAM_GROUP} 0770
 
-FILES_SUBST+=		DSPAM_USER=${DSPAM_USER:Q}
-FILES_SUBST+=		DSPAM_GROUP=${DSPAM_GROUP:Q}
-FILES_SUBST+=		DSPAM_PIDDIR=${DSPAM_PIDDIR:Q}
+FILES_SUBST+=		DSPAM_USER=${DSPAM_USER}
+FILES_SUBST+=		DSPAM_GROUP=${DSPAM_GROUP}
+FILES_SUBST+=		DSPAM_PIDDIR=${DSPAM_PIDDIR}
 
 SUBST_CLASSES+=		conf
 SUBST_STAGE.conf=	pre-install
@@ -119,45 +123,44 @@ SUBST_MESSAGE.conf=	Fixing configuration file.
 post-extract:
 	${CHMOD} -R go-w ${WRKSRC}
 
+INSTALLATION_DIRS+=	${DOCDIR} ${DATADIR} ${EGDIR}
+
 post-install:
-	${INSTALL_DATA_DIR} ${DOCDIR}
-	${INSTALL_DATA} ${WRKSRC}/README ${DOCDIR}
-	${INSTALL_DATA} ${WRKSRC}/RELEASE.NOTES ${DOCDIR}
-	${INSTALL_DATA} ${WRKSRC}/UPGRADING ${DOCDIR}
-	${INSTALL_DATA} ${WRKSRC}/doc/*.txt ${DOCDIR}
-	${INSTALL_DATA_DIR} ${DATADIR}
-	${INSTALL_DATA_DIR} ${EGDIR}
-	${INSTALL_DATA} ${WRKSRC}/src/dspam.conf.in ${EGDIR}/dspam.conf
-	${INSTALL_DATA} ${WRKSRC}/webui/cgi-bin/admins ${EGDIR}/cgi-admins
+	${INSTALL_DATA} ${WRKSRC}/README ${DESTDIR}${DOCDIR}
+	${INSTALL_DATA} ${WRKSRC}/RELEASE.NOTES ${DESTDIR}${DOCDIR}
+	${INSTALL_DATA} ${WRKSRC}/UPGRADING ${DESTDIR}${DOCDIR}
+	${INSTALL_DATA} ${WRKSRC}/doc/*.txt ${DESTDIR}${DOCDIR}
+	${INSTALL_DATA} ${WRKSRC}/src/dspam.conf.in ${DESTDIR}${EGDIR}/dspam.conf
+	${INSTALL_DATA} ${WRKSRC}/webui/cgi-bin/admins ${DESTDIR}${EGDIR}/cgi-admins
 	${INSTALL_DATA} ${WRKSRC}/webui/cgi-bin/default.prefs \
-		${EGDIR}/cgi-default.prefs
+	    ${DESTDIR}${EGDIR}/cgi-default.prefs
 	${INSTALL_DATA} ${WRKSRC}/webui/cgi-bin/configure.pl \
-		${EGDIR}/configure.pl
+	    ${DESTDIR}${EGDIR}/configure.pl
 
 .for d in txt webui/cgi-bin webui/htdocs
-	${INSTALL_DATA_DIR} ${DATADIR}/${d}
+	${INSTALL_DATA_DIR} ${DESTDIR}${DATADIR}/${d}
 	cd ${WRKSRC}/${d} && pax -rwppm '-s|.*/Makefile.*$$||'	\
 		'-s|./admins.*$$||' '-s|./default.prefs.*$$||'		\
-		'-s|./configure.pl.*$$||' . ${DATADIR}/${d}
+		'-s|./configure.pl.*$$||' . ${DESTDIR}${DATADIR}/${d}
 .endfor
 
 .for drv in mysql pgsql
 .  if !empty(DSPAM_STORAGE_DRIVER:M${drv})
-	${INSTALL_DATA_DIR} ${DATADIR}/${drv}
+	${INSTALL_DATA_DIR} ${DESTDIR}${DATADIR}/${drv}
 	cd ${WRKSRC}/src/tools.${drv}_drv && \
-		pax -rwpm ./*.sql ${DATADIR}/${drv}
+		pax -rwpm ./*.sql ${DESTDIR}${DATADIR}/${drv}
 .  endif
 .endfor
 
 .if !empty(DSPAM_STORAGE_DRIVER:Msqlite*)
-	${INSTALL_DATA_DIR} ${DATADIR}/sqlite
+	${INSTALL_DATA_DIR} ${DESTDIR}${DATADIR}/sqlite
 	 cd ${WRKSRC}/src/tools.sqlite_drv && \
-	 	pax -rwpm '-s|.*/Makefile.*$$||' . ${DATADIR}/sqlite
+	 	pax -rwpm '-s|.*/Makefile.*$$||' . ${DESTDIR}${DATADIR}/sqlite
 .endif
 
-	${CHMOD} ${SHAREMODE} ${DATADIR}/webui/cgi-bin/*.txt
-	${CHMOD} ${SHAREMODE} ${DATADIR}/webui/cgi-bin/templates/*.html
-	${CHMOD} ${SHAREMODE} ${DATADIR}/webui/htdocs/*.css
-	${CHMOD} ${SHAREMODE} ${DATADIR}/webui/htdocs/*.gif
+	${CHMOD} ${SHAREMODE} ${DESTDIR}${DATADIR}/webui/cgi-bin/*.txt
+	${CHMOD} ${SHAREMODE} ${DESTDIR}${DATADIR}/webui/cgi-bin/templates/*.html
+	${CHMOD} ${SHAREMODE} ${DESTDIR}${DATADIR}/webui/htdocs/*.css
+	${CHMOD} ${SHAREMODE} ${DESTDIR}${DATADIR}/webui/htdocs/*.gif
 
 .include "../../mk/bsd.pkg.mk"

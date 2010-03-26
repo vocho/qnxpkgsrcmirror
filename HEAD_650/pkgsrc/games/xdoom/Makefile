@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.44 2009/05/19 08:59:15 wiz Exp $
+# $NetBSD: Makefile,v 1.48 2010/02/22 22:13:09 wiz Exp $
 
 DISTNAME=	linuxdoom-1.10
 PKGNAME=	xdoom-1.10
-PKGREVISION=	3
+PKGREVISION=	4
 CATEGORIES=	games x11
 MASTER_SITES=	ftp://ftp.idsoftware.com/idstuff/source/
 MASTER_SITES+=	ftp://ftp.idsoftware.com/idstuff/doom/
-DISTFILES=	doomsrc.zip doom-1.8.wad.gz
+DISTFILES=	doomsrc.zip
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 # HOMEPAGE=	http://www.idsoftware.com/archives/doomarc.html
@@ -14,15 +14,16 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 COMMENT=	3D shoot-em-up for 8-bit X11 displays
 LICENSE=	xdoom-license
 
-PKG_DESTDIR_SUPPORT=	user-destdir
+DEPENDS+=	doom1-[0-9]*:../../games/doom1
 
-EXTRACT_ONLY=		doomsrc.zip
-EXTRACT_OPTX_ZIP=	-qo
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 WRKSRC=		${WRKDIR}
 USE_X11BASE=	yes
 USE_TOOLS+=	gmake gunzip tar unzip
 MAKE_ENV+=	X11BASE=${X11BASE:Q} INSTALL_PREFIX=${PREFIX:Q}
+
+NOT_FOR_PLATFORM=	${LP64PLATFORMS}
 
 .include "../../mk/bsd.prefs.mk"
 
@@ -51,9 +52,6 @@ do-install:
 		${DESTDIR}${PREFIX}/bin/xdoom
 	${INSTALL_PROGRAM} ${WRKSRC}/sndserv/linux/sndserver \
 		${DESTDIR}${PREFIX}/bin/sndserver
-	${INSTALL_DATA_DIR} ${DESTDIR}${PREFIX}/share/doom
-	${GUNZIP_CMD} -c ${DISTDIR}/doom-1.8.wad.gz \
-		> ${DESTDIR}${PREFIX}/share/doom/doom1.wad
 
 .include "../../x11/libXext/buildlink3.mk"
 .include "../../x11/xextproto/buildlink3.mk"

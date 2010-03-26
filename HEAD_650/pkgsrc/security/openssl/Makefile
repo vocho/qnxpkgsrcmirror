@@ -1,15 +1,15 @@
-# $NetBSD: Makefile,v 1.140 2009/06/10 13:57:08 tez Exp $
+# $NetBSD: Makefile,v 1.145 2010/03/01 08:15:40 taca Exp $
 
 OPENSSL_SNAPSHOT?=	# empty
 OPENSSL_STABLE?=	# empty
-OPENSSL_VERS?=		0.9.8k
+OPENSSL_VERS?=		0.9.8m
 PKGREVISION=		1
 
 .if empty(OPENSSL_SNAPSHOT)
 DISTNAME=	openssl-${OPENSSL_VERS}
 MASTER_SITES=	ftp://ftp.openssl.org/source/ \
 				ftp://sunsite.cnlab-switch.ch/mirror/openssl/source/ \
-				ftp://sunsite.uio.no/pub/security/openssl/source/ 
+				ftp://sunsite.uio.no/pub/security/openssl/source/
 .else
 .  if !empty(OPENSSL_STABLE:M[yY][eE][sS])
 DISTNAME=	openssl-${OPENSSL_VERS:C/[a-z]$//}-stable-SNAP-${OPENSSL_SNAPSHOT}
@@ -94,6 +94,13 @@ SUBST_STAGE.dl=		post-configure
 SUBST_FILES.dl=		Makefile apps/Makefile crypto/Makefile \
 			crypto/pkcs7/Makefile test/Makefile
 SUBST_SED.dl=		-e 's,^EX_LIBS=,EX_LIBS=${DL_LDFLAGS:Q} ,g'
+
+.elif ${OPSYS} == "Interix"
+
+SUBST_CLASSES+=		soname
+SUBST_STAGE.soname=	post-configure
+SUBST_FILES.soname=	Makefile.shared
+SUBST_SED.soname=	-e 's/-Wl,-soname=/-Wl,-h,/g'
 .endif
 
 .include "../../security/openssl/options.mk"
@@ -116,6 +123,8 @@ PKG_SYSCONFSUBDIR=	openssl
 CONF_FILES=		${PREFIX}/share/examples/openssl/openssl.cnf	\
 			${PKG_SYSCONFDIR}/openssl.cnf
 OWN_DIRS=		${PKG_SYSCONFDIR}/certs ${PKG_SYSCONFDIR}/private
+
+INSTALLATION_DIRS+=	share/examples/openssl
 
 # Fix the path to perl in various scripts.
 pre-configure:

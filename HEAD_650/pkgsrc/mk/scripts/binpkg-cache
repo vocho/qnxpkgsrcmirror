@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# $NetBSD: binpkg-cache,v 1.17 2007/10/13 17:46:12 rillig Exp $
+# $NetBSD: binpkg-cache,v 1.20 2010/03/13 11:45:16 spz Exp $
 #
 # Script for generating a cache file with information about
 # all binary packages contained in a directory.
@@ -48,6 +48,7 @@ CMP=${CMP:-cmp}
 FIND=${FIND:-find}
 GREP=${GREP:-grep}
 GZIP_CMD=${GZIP_CMD:-gzip}
+BZIP2=${BZIP2:-bzip2}
 PKG_INFO=${PKG_INFO:-pkg_info}
 PKG_SUFX=${PKG_SUFX:-.tgz}
 SED=${SED:-sed}
@@ -206,7 +207,7 @@ process_binpkg_dir(){
 		need_update=yes
 	fi
 	if test "${build_summary}" = "yes" -a ${d}/${summaryfile}.gz -ot ${d}/${cachefile} ; then
-		echo "${tab}Summary file ${d}/${summaryfile}.gz is out of date and will be regnerated."
+		echo "${tab}Summary file ${d}/${summaryfile}.gz is out of date and will be regenerated."
 		need_update=yes
 	fi
 
@@ -238,6 +239,9 @@ process_binpkg_dir(){
 			fi
 			echo "pkgcache_end ${fn}" >> ${tmpd}/${cachefile}
 		done
+		if test -f ${d}/${cachefile} ; then
+			rm -f ${d}/${cachefile}
+		fi
 		mv -f ${tmpd}/${cachefile} ${d}/${cachefile}
 		if test $? -ne 0 ; then
 			echo "********** WARNING **********"
@@ -249,6 +253,9 @@ process_binpkg_dir(){
 		fi
 
 		if test "${build_summary}" = "yes" ; then
+			if test -f ${d}/${summaryfile}.gz ; then
+				rm -f ${d}/${summaryfile}.gz
+			fi
 			cat ${tmpd}/${summaryfile} | ${GZIP_CMD} > ${d}/${summaryfile}.gz
 			if test $? -ne 0 ; then
 				echo "********** WARNING **********"
@@ -256,6 +263,18 @@ process_binpkg_dir(){
 				echo "Perhaps you do not have write permissions to ${d}?"
 				echo "********** WARNING **********"
 				return
+			fi
+			# if it's there, update it, otherwise don't bother
+			if test -f ${d}/${summaryfile}.bz2 ; then
+				rm -f ${d}/${summaryfile}.bz2
+				cat ${tmpd}/${summaryfile} | ${BZIP2} > ${d}/${summaryfile}.bz2
+				if test $? -ne 0 ; then
+					echo "********** WARNING **********"
+					echo "${BZIP2} of ${tmpd}/${summaryfile} to ${d}/${summaryfile}.bz2 failed!"
+					echo "Perhaps you do not have write permissions to ${d}?"
+					echo "********** WARNING **********"
+					return
+				fi
 			fi
 		fi
 

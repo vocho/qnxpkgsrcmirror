@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.13 2009/07/19 10:58:17 sno Exp $
+# $NetBSD: Makefile,v 1.15 2010/01/20 14:48:51 wiz Exp $
 #
 
-DISTNAME=	WWW-Curl-4.09
+DISTNAME=	WWW-Curl-4.11
 PKGNAME=	p5-${DISTNAME}
 CATEGORIES=	www perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=WWW/}
@@ -9,7 +9,7 @@ MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=WWW/}
 MAINTAINER=	imil@gcu.info
 HOMEPAGE=	http://search.cpan.org/dist/WWW-Curl/
 COMMENT=	Perl binding interface for curl
-#LICENSE=	MPL or MIT/X-derivat
+LICENSE=	mpl-1.0 OR mpl-1.1 OR mit
 
 BUILDLINK_API_DEPENDS.curl+=	curl>=7.10.8
 

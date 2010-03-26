@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.25 2009/09/15 10:27:02 drochner Exp $
+# $NetBSD: Makefile,v 1.27 2010/02/03 19:45:04 drochner Exp $
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 INSTALLATION_DIRS+=	${EGDIR}
