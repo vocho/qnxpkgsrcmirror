@@ -20,10 +20,11 @@ CONFLICTS=	pbulk<0.39
 .if ${OPSYS} == "SunOS"
 LDADD+=		-lsocket -lresolv
 MAKE_ENV+=	LDADD=${LDADD:Q}
-.endif
-
-.if ${OPSYS} == "Linux"
+.elif ${OPSYS} == "Linux"
 CPPFLAGS+=	-D_GNU_SOURCE
+.elif ${OPSYS} == "QNX"
+LDADD+=		-lsocket
+MAKE_ENV+=	LDADD=${LDADD:Q}
 .endif
 
 BUILD_DIRS=	lib pbuild presolve pscan
