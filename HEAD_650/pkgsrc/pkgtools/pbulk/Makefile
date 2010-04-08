@@ -54,9 +54,4 @@ do-extract:
 post-install:
 	${INSTALL_DATA} ${WRKSRC}/pbulk.conf ${DESTDIR}${PREFIX}/share/examples/pbulk/pbulk.conf
 
-.if ${OPSYS} == "QNX"
-LDADD+=		-lsocket
-MAKE_ENV+=	LDADD=${LDADD:Q}
-.endif
-
 .include "../../mk/bsd.pkg.mk"
