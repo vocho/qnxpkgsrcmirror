@@ -1,6 +1,6 @@
 $NetBSD: patch-ad,v 1.9 2008/02/28 08:14:41 jlam Exp $
 
---- configure.orig	2008-01-24 08:14:11.000000000 -0500
+--- configure.orig	2008-01-24 13:14:11.000000000 +0000
 +++ configure
 @@ -3928,9 +3928,6 @@ ac_compiler_gnu=$ac_cv_c_compiler_gnu
  
@@ -25,6 +25,15 @@ $NetBSD: patch-ad,v 1.9 2008/02/28 08:14:41 jlam Exp $
  
  
  { echo "$as_me:$LINENO: checking for __attribute__" >&5
+@@ -12162,7 +12163,7 @@ if test -z "$aix_libpath"; then aix_libp
+   freebsd-elf*)
+     archive_cmds_need_lc_CXX=no
+     ;;
+-  freebsd* | kfreebsd*-gnu | dragonfly*)
++  freebsd* | kfreebsd*-gnu | dragonfly* | nto-qnx6*)
+     # FreeBSD 3 and later use GNU C++ and GNU ld with standard ELF
+     # conventions
+     ld_shlibs_CXX=yes
 @@ -29714,6 +29715,9 @@ _ACEOF
  cat confdefs.h >>conftest.$ac_ext
  cat >>conftest.$ac_ext <<_ACEOF
