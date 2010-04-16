@@ -1,5 +1,5 @@
 if [ "x" = "x$QNX_ROOT" ] ; then
-	QNX_ROOT=/usr/qnx641
+	QNX_ROOT=/usr/qnx650
 fi
 
 if [ "x" = "x$QNX_CONFIGURATION" ] ; then

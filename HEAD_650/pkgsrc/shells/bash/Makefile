@@ -83,11 +83,13 @@ BUILDLINK_API_DEPENDS.readline+=	readline>=6.0
 .endif
 
 .if ${OPSYS} == "QNX"
-EGDIR=		${PREFIX}/share/examples/profile.d
-CONF_FILES_PERMS=     ${EGDIR}/qnxsdk.bash /etc/profile.d/qnxsdk.bash ${ROOT_USER} ${ROOT_GROUP} 0755
+EGDIR=			${PREFIX}/share/examples/profile.d
+CONF_FILES_PERMS=	${EGDIR}/qnxsdk.bash \
+			${PKG_SYSCONFDIR}/profile.d/qnxsdk.bash \
+			${ROOT_USER} ${ROOT_GROUP} 0755
 pre-install:
-	${INSTALL_DATA_DIR} ${EGDIR}
-	${INSTALL_DATA} ${FILESDIR}/qnxsdk.bash ${EGDIR}
+	${INSTALL_DATA_DIR} ${DESTDIR}${EGDIR}
+	${INSTALL_DATA} ${FILESDIR}/qnxsdk.bash ${DESTDIR}${EGDIR}
 .endif
 	
 
