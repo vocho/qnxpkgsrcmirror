@@ -1,6 +1,6 @@
 $NetBSD: patch-af,v 1.1.1.1 2010/02/16 16:24:16 taca Exp $
 
---- configure.orig	2010-01-14 10:38:54.000000000 +0000
+--- configure.orig	2010-03-08 20:10:35.000000000 +0000
 +++ configure
 @@ -899,6 +899,7 @@ with_fhs
  with_privatedir
@@ -73,7 +73,19 @@ $NetBSD: patch-af,v 1.1.1.1 2010/02/16 16:24:16 taca Exp $
  do
  as_ac_var=`$as_echo "ac_cv_func_$ac_func" | $as_tr_sh`
  { $as_echo "$as_me:$LINENO: checking for $ac_func" >&5
-@@ -60703,9 +60728,9 @@ LIBS="-lcrypto $KRB5_LIBS  $LIBS"
+@@ -50120,6 +50145,11 @@ _ACEOF
+ 
+ 			;;
+ 		*qnx*)
++			BLDSHARED="true"
++			LDSHFLAGS="-shared"
++			DYNEXP="-Wl,--export-dynamic"
++			SONAMEFLAG="-Wl,-soname,"
++			PICFLAG="-fPIC"
+ cat >>confdefs.h <<\_ACEOF
+ #define QNX 1
+ _ACEOF
+@@ -60703,9 +60733,9 @@ LIBS="-lcrypto $KRB5_LIBS  $LIBS"
  
  
  
@@ -86,7 +98,7 @@ $NetBSD: patch-af,v 1.1.1.1 2010/02/16 16:24:16 taca Exp $
    $as_echo_n "(cached) " >&6
  else
    cat >conftest.$ac_ext <<_ACEOF
-@@ -60721,11 +60746,11 @@ cat >>conftest.$ac_ext <<_ACEOF
+@@ -60721,11 +60751,11 @@ cat >>conftest.$ac_ext <<_ACEOF
  #ifdef __cplusplus
  extern "C"
  #endif
@@ -100,7 +112,7 @@ $NetBSD: patch-af,v 1.1.1.1 2010/02/16 16:24:16 taca Exp $
    ;
    return 0;
  }
-@@ -60751,13 +60776,13 @@ $as_echo "$ac_try_echo") >&5
+@@ -60751,13 +60781,13 @@ $as_echo "$ac_try_echo") >&5
  	 test "$cross_compiling" = yes ||
  	 $as_test_x conftest$ac_exeext
         }; then
@@ -116,7 +128,7 @@ $NetBSD: patch-af,v 1.1.1.1 2010/02/16 16:24:16 taca Exp $
  		  ac_cv_lib_ext_crypto=no
  fi
  
-@@ -60766,11 +60791,11 @@ rm -f core conftest.err conftest.$ac_obj
+@@ -60766,11 +60796,11 @@ rm -f core conftest.err conftest.$ac_obj
        conftest$ac_exeext conftest.$ac_ext
  
  fi
@@ -132,7 +144,7 @@ $NetBSD: patch-af,v 1.1.1.1 2010/02/16 16:24:16 taca Exp $
  _ACEOF
  
  fi
-@@ -76724,31 +76749,39 @@ case "$host_os" in
+@@ -76724,31 +76754,39 @@ case "$host_os" in
  		NSSSONAMEVERSIONSUFFIX=".2"
  		WINBIND_NSS_EXTRA_OBJS="nsswitch/winbind_nss_linux.o"
  		;;

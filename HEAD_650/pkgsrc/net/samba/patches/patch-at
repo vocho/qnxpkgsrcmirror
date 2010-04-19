@@ -1,6 +1,6 @@
 $NetBSD: patch-at,v 1.14 2009/10/04 16:58:38 taca Exp $
 
---- configure.orig	2009-09-30 22:08:58.000000000 +0900
+--- configure.orig	2009-09-30 13:08:58.000000000 +0000
 +++ configure
 @@ -765,6 +765,7 @@ swatdir
  privatedir
@@ -89,7 +89,19 @@ $NetBSD: patch-at,v 1.14 2009/10/04 16:58:38 taca Exp $
  do
  as_ac_var=`$as_echo "ac_cv_func_$ac_func" | $as_tr_sh`
  { $as_echo "$as_me:$LINENO: checking for $ac_func" >&5
-@@ -49983,6 +50010,77 @@ done
+@@ -42596,6 +42623,11 @@ _ACEOF
+ 
+ 			;;
+ 		*qnx*)
++			BLDSHARED="true"
++			LDSHFLAGS="-shared"
++			DYNEXP="-Wl,--export-dynamic"
++			SONAMEFLAG="-Wl,-soname,"
++			PICFLAG="-fPIC"
+ cat >>confdefs.h <<\_ACEOF
+ #define QNX 1
+ _ACEOF
+@@ -49983,6 +50015,77 @@ done
  ##################
  # look for a method of finding the list of network interfaces
  iface=no;
@@ -167,7 +179,7 @@ $NetBSD: patch-at,v 1.14 2009/10/04 16:58:38 taca Exp $
  { $as_echo "$as_me:$LINENO: checking for iface AIX" >&5
  $as_echo_n "checking for iface AIX... " >&6; }
  if test "${samba_cv_HAVE_IFACE_AIX+set}" = set; then
-@@ -50053,6 +50151,7 @@ cat >>confdefs.h <<\_ACEOF
+@@ -50053,6 +50156,7 @@ cat >>confdefs.h <<\_ACEOF
  _ACEOF
  
  fi
@@ -175,7 +187,7 @@ $NetBSD: patch-at,v 1.14 2009/10/04 16:58:38 taca Exp $
  
  if test $iface = no; then
  { $as_echo "$as_me:$LINENO: checking for iface ifconf" >&5
-@@ -53580,9 +53679,9 @@ LIBS="-lcrypto $KRB5_LIBS  $LIBS"
+@@ -53580,9 +53684,9 @@ LIBS="-lcrypto $KRB5_LIBS  $LIBS"
  
  
  
@@ -188,7 +200,7 @@ $NetBSD: patch-at,v 1.14 2009/10/04 16:58:38 taca Exp $
    $as_echo_n "(cached) " >&6
  else
    cat >conftest.$ac_ext <<_ACEOF
-@@ -53598,11 +53697,11 @@ cat >>conftest.$ac_ext <<_ACEOF
+@@ -53598,11 +53702,11 @@ cat >>conftest.$ac_ext <<_ACEOF
  #ifdef __cplusplus
  extern "C"
  #endif
@@ -202,7 +214,7 @@ $NetBSD: patch-at,v 1.14 2009/10/04 16:58:38 taca Exp $
    ;
    return 0;
  }
-@@ -53628,13 +53727,13 @@ $as_echo "$ac_try_echo") >&5
+@@ -53628,13 +53732,13 @@ $as_echo "$ac_try_echo") >&5
  	 test "$cross_compiling" = yes ||
  	 $as_test_x conftest$ac_exeext
         }; then
@@ -218,7 +230,7 @@ $NetBSD: patch-at,v 1.14 2009/10/04 16:58:38 taca Exp $
  		  ac_cv_lib_ext_crypto=no
  fi
  
-@@ -53643,11 +53742,11 @@ rm -f core conftest.err conftest.$ac_obj
+@@ -53643,11 +53747,11 @@ rm -f core conftest.err conftest.$ac_obj
        conftest$ac_exeext conftest.$ac_ext
  
  fi
@@ -234,7 +246,7 @@ $NetBSD: patch-at,v 1.14 2009/10/04 16:58:38 taca Exp $
  _ACEOF
  
  fi
-@@ -67399,31 +67498,39 @@ case "$host_os" in
+@@ -67399,31 +67503,39 @@ case "$host_os" in
  		NSSSONAMEVERSIONSUFFIX=".2"
  		WINBIND_NSS_EXTRA_OBJS="nsswitch/winbind_nss_linux.o"
  		;;
