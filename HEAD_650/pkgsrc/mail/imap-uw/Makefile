@@ -24,8 +24,8 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_LIBTOOL=		yes
 MAKE_ENV+=		LIBTOOL=libtool
-MAKE_ENV+=		LTCOMPILE="libtool --mode=compile"
-MAKE_ENV+=		LTLINK="libtool --mode=link"
+MAKE_ENV+=		LTCOMPILE="libtool --tag=CC --mode=compile"
+MAKE_ENV+=		LTLINK="libtool --tag=CC --mode=link"
 LTINSTALL_PROGRAM=	${SETENV} ${MAKE_ENV} ${LIBTOOL} --mode=install ${INSTALL_PROGRAM}
 LTINSTALL_LIB=		${SETENV} ${MAKE_ENV} ${LIBTOOL} --mode=install ${INSTALL_LIB}
 
@@ -72,9 +72,7 @@ MESSAGE_SRC=		${PKGDIR}/MESSAGE
 
 .include "options.mk"
 
-.if ${OPSYS} == "QNX"
 .include "../../devel/sysexits/buildlink3.mk"
-.endif
 
 # The defaults for these values are set in pkgsrc/mk/defaults/mk.conf.
 #IMAP_UW_CCLIENT_MBOX_FMT?=	unix
