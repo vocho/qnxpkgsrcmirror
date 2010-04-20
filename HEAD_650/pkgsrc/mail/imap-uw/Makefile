@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.132 2010/01/25 23:04:49 tron Exp $
+# $NetBSD: Makefile,v 1.133 2010/04/20 12:52:00 seanb Exp $
 #
 # ATTENTION:
 # The Kerberos support in this software is known to be problematic. If you
@@ -71,8 +71,6 @@ BUILD_TARGET.*=		neb
 MESSAGE_SRC=		${PKGDIR}/MESSAGE
 
 .include "options.mk"
-
-.include "../../devel/sysexits/buildlink3.mk"
 
 # The defaults for these values are set in pkgsrc/mk/defaults/mk.conf.
 #IMAP_UW_CCLIENT_MBOX_FMT?=	unix
@@ -162,5 +160,7 @@ install-doc:
 	${CHOWN} -R ${SHAREOWN}:${SHAREGRP} ${DOCDIR}
 	${FIND} ${DOCDIR} -type d -print | ${XARGS} ${CHMOD} ${PKGDIRMODE}
 	${FIND} ${DOCDIR} -type f -print | ${XARGS} ${CHMOD} ${SHAREMODE}
+
+.include "../../devel/sysexits/buildlink3.mk"
 
 .include "../../mk/bsd.pkg.mk"
