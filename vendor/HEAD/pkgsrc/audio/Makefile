@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.434 2010/03/14 16:28:02 martin Exp $
+# $NetBSD: Makefile,v 1.436 2010/04/16 15:46:13 reed Exp $
 #
 
 COMMENT=	Audio tools
@@ -286,6 +286,7 @@ SUBDIR+=	nspmod
 SUBDIR+=	ocp
 SUBDIR+=	oggasm
 SUBDIR+=	openal
+SUBDIR+=	opencore-amr
 SUBDIR+=	p5-Audio-CD
 SUBDIR+=	p5-Audio-Scan
 SUBDIR+=	p5-Audio-Wav
@@ -309,6 +310,7 @@ SUBDIR+=	pulseaudio
 SUBDIR+=	py-ao
 SUBDIR+=	py-cddb
 SUBDIR+=	py-daap
+SUBDIR+=	py-id3
 SUBDIR+=	py-id3lib
 SUBDIR+=	py-karaoke
 SUBDIR+=	py-libmtag

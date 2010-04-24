@@ -1,4 +1,4 @@
-# $NetBSD: buildlink3.mk,v 1.6 2009/03/20 19:25:44 joerg Exp $
+# $NetBSD: buildlink3.mk,v 1.8 2010/04/10 21:09:21 tnn Exp $
 
 .include "../../mk/bsd.fast.prefs.mk"
 

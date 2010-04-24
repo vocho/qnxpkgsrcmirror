@@ -170,7 +170,7 @@ gsl			Use GNU Scientific Library.
 gstreamer		Enable gstreamer support.
 gtk			Enable support for GTK.
 gtk2			Enable support for GTK2.
-gtkspell		Enable gtkspell support.	.
+gtkspell		Enable gtkspell support.
 guile			Enable support for GUILE.
 gzip			Enable compression using gzip.
 hal			Support for the freedesktop.org Hardware Abstraction Layer.
@@ -317,6 +317,7 @@ motif			Enable motif support.
 mozilla			Use mozilla as gecko rendering engine.
 mozilla-jemalloc	Enable building with Mozilla'a jemalloc.
 mozilla-jit		Enable nanojit javascript acceleration.
+mozilla-lightning	Enable the lightning calendar extension.
 mozilla-single-profile	Enable single profiles on mozilla browsers.
 mp3tunes		Enable support for mp3tunes.com.
 mpcdec			Enable the portable Musepack decoder library.
@@ -336,9 +337,11 @@ mutt-hcache		Enable header caching in mutt.
 mutt-sidebar		Enable the mutt mailbox sidebar patch.
 mutt-smtp		Enable SMTP support in mutt.
 mysql			Enable MySQL support.
+mysqlmanager		Build mysqlmanager.
 nas			Enable usage of the Network Audio System.
 ncurses			Enable ncurses support.
 ncursesw		Enable wide character ncurses support.
+ndb-cluster		Build NDB Cluster support.
 nextstep		Enable Cocoa or GNUstep support.
 nfdump-ftconv		Build the flow-tools to nfdump converter.
 nfdump-nfprofile	Build the netflow profiler.
@@ -356,6 +359,7 @@ ogg			Enable Ogg support.
 oniguruma		Support regular expressions via the oniguruma library.
 online-tests		Requiring Internet connectivity for "make test".
 openal			Enable OpenAL support.
+opencore-amr		Enable OpenCORE Adaptive Multi-Rate speech codecs.
 openexr			Use OpenEXR as imaging library.
 opengl			Use OpenGL as display library.
 opengrok-build		Enable building of OpenGrok from source.
@@ -382,6 +386,7 @@ postfix-milter		Build the milter with support for the Postfix MTA.
 postfix-stress		Enable Postfix stress-adaptive behaviour.
 prime			Use Prime for Kana-to-Kanji conversion.
 proftpd-readme		Enable mod_readme.
+pstack			Enable pstack backtrace library.
 psycopg1		Enable psycopg 1.1.x support.
 psycopg2		Enable psycopg 2.x support.
 pulseaudio		Enable support for the PulseAudio sound server.
@@ -506,6 +511,7 @@ w3m-image-imlib		Use imlib as imaging library for W3m.
 w3m-image-imlib2	Use imlib2 as imaging library for W3m.
 w3m-lynx-key		Enable lynx-like key bindings.
 wavpack			Enable wavpack support.
+webkit-jit		Enable JIT compilation.
 wide-curses		Enable wide curses support.
 winbind			Enable name-service switch daemon support using Windows Servers.
 wmf			Enable WMF support.

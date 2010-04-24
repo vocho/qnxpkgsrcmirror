@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.57 2010/03/14 23:07:30 tron Exp $
+# $NetBSD: Makefile,v 1.59 2010/04/16 15:49:12 reed Exp $
 
-PKGREVISION=	5
+PKGREVISION=	7
 
 MAINTAINER=	ahoka@NetBSD.org
 HOMEPAGE=	http://ffmpeg.mplayerhq.hu/

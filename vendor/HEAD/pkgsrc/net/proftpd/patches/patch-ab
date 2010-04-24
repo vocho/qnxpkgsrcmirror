@@ -1,19 +1,28 @@
-$NetBSD: patch-ab,v 1.9 2008/11/21 08:00:36 martti Exp $
+$NetBSD: patch-ab,v 1.11 2010/03/23 13:45:28 wiz Exp $
 
 Make this pkgsrc friendly.
 
---- configure.orig	2008-11-19 05:54:50.000000000 +0200
-+++ configure	2008-11-21 09:55:06.000000000 +0200
-@@ -37222,7 +37222,7 @@
+--- configure.orig	2010-02-15 19:32:24.000000000 +0000
++++ configure
+@@ -12862,7 +12862,7 @@ if test "${with_modules+set}" = set; the
+     if test x"$withval" != x; then
+       modules_list=`echo "$withval" | sed -e 's/:/ /g'`;
+       for amodule in $modules_list; do
+-        if test x"$amodule" == xmod_dso ; then
++        if test x"$amodule" = xmod_dso ; then
+           { { echo "$as_me:$LINENO: error: use --enable-dso instead of --with-modules=mod_dso for DSO support" >&5
+ echo "$as_me: error: use --enable-dso instead of --with-modules=mod_dso for DSO support" >&2;}
+    { (exit 1); exit 1; }; }
+@@ -31715,7 +31715,7 @@ _ACEOF
  
  
  cat >>confdefs.h <<_ACEOF
--#define PR_RUN_DIR "`eval echo "${localstatedir}/proftpd"`"
+-#define PR_RUN_DIR "`eval echo "${localstatedir}"`"
 +#define PR_RUN_DIR "`eval echo "${localstatedir}/run"`"
  _ACEOF
  
  cat >>confdefs.h <<_ACEOF
-@@ -37230,7 +37230,7 @@
+@@ -31723,7 +31723,7 @@ cat >>confdefs.h <<_ACEOF
  _ACEOF
  
  cat >>confdefs.h <<_ACEOF

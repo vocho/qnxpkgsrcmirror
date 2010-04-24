@@ -1,4 +1,4 @@
-# $NetBSD: buildlink3.mk,v 1.2 2009/03/20 19:25:54 joerg Exp $
+# $NetBSD: buildlink3.mk,v 1.4 2010/04/10 21:09:21 tnn Exp $
 
 BUILDLINK_DEPMETHOD.xineramaproto?=	build
 
