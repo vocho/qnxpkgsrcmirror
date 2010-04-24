@@ -1,4 +1,4 @@
-# $NetBSD: buildlink3.mk,v 1.3 2009/03/20 19:25:50 joerg Exp $
+# $NetBSD: buildlink3.mk,v 1.5 2010/04/10 21:09:21 tnn Exp $
 
 BUILDLINK_DEPMETHOD.recordproto?=	build
 

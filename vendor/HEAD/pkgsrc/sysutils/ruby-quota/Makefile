@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.16 2009/10/27 15:29:32 taca Exp $
+# $NetBSD: Makefile,v 1.19 2010/04/22 15:01:07 taca Exp $
 #
 
 DISTNAME=	ruby-quota-0.5.1
 PKGNAME=	${RUBY_PKGPREFIX}-quota-0.5.1
-PKGREVISION=	7
+PKGREVISION=	10
 CATEGORIES=	sysutils ruby
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=ruby-quota/}
 

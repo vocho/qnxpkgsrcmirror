@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.529 2010/03/16 22:35:38 pettai Exp $
+# $NetBSD: Makefile,v 1.535 2010/04/24 11:05:59 seb Exp $
 #
 
 COMMENT=	Text processing utilities (does not include desktop publishing)
@@ -298,6 +298,8 @@ SUBDIR+=	p5-Text-Glob
 SUBDIR+=	p5-Text-Kakasi
 SUBDIR+=	p5-Text-LevenshteinXS
 SUBDIR+=	p5-Text-Markdown
+SUBDIR+=	p5-Text-MicroTemplate
+SUBDIR+=	p5-Text-Microformat
 SUBDIR+=	p5-Text-PDF
 SUBDIR+=	p5-Text-Quoted
 SUBDIR+=	p5-Text-RecordParser
@@ -362,6 +364,7 @@ SUBDIR+=	p5-XML-SemanticDiff
 SUBDIR+=	p5-XML-Simple
 SUBDIR+=	p5-XML-Stream
 SUBDIR+=	p5-XML-Tidy
+SUBDIR+=	p5-XML-TreeBuilder
 SUBDIR+=	p5-XML-Twig
 SUBDIR+=	p5-XML-UM
 SUBDIR+=	p5-XML-Writer
@@ -388,6 +391,7 @@ SUBDIR+=	pear-Console_Table
 SUBDIR+=	pear-File_Find
 SUBDIR+=	php-dom
 SUBDIR+=	php-enchant
+SUBDIR+=	php-intl
 SUBDIR+=	php-json
 SUBDIR+=	php-pspell
 SUBDIR+=	php-wddx
@@ -402,6 +406,7 @@ SUBDIR+=	py-Excelerator
 SUBDIR+=	py-FourSuite
 SUBDIR+=	py-HappyDoc
 SUBDIR+=	py-X
+SUBDIR+=	py-cElementTree
 SUBDIR+=	py-cmTemplate
 SUBDIR+=	py-creole
 SUBDIR+=	py-docutils
@@ -485,6 +490,8 @@ SUBDIR+=	sary
 SUBDIR+=	saxon
 SUBDIR+=	scew
 SUBDIR+=	scrollkeeper-dtd
+SUBDIR+=	sgrep
+SUBDIR+=	shared-desktop-ontologies
 SUBDIR+=	soprano
 SUBDIR+=	source-highlight
 SUBDIR+=	stardic

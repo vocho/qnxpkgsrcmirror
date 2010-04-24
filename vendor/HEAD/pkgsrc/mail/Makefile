@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.393 2010/03/12 22:46:08 pettai Exp $
+# $NetBSD: Makefile,v 1.396 2010/04/22 17:05:17 tnn Exp $
 #
 
 COMMENT=	Electronic mail utilities
@@ -143,6 +143,7 @@ SUBDIR+=	metamail
 SUBDIR+=	mew
 SUBDIR+=	mhonarc
 SUBDIR+=	milter-greylist
+SUBDIR+=	milter-manager
 SUBDIR+=	milter-regex
 SUBDIR+=	mimedefang
 SUBDIR+=	mini_sendmail
@@ -296,7 +297,7 @@ SUBDIR+=	sympa
 SUBDIR+=	t-prot
 SUBDIR+=	teapop
 SUBDIR+=	thunderbird
-SUBDIR+=	thunderbird2
+SUBDIR+=	thunderbird-l10n
 SUBDIR+=	tmda
 SUBDIR+=	tnef
 SUBDIR+=	tnef2txt

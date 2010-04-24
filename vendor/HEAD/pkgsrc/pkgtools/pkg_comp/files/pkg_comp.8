@@ -1,4 +1,4 @@
-.\" $NetBSD: pkg_comp.8,v 1.32 2009/05/13 10:39:52 wiz Exp $
+.\" $NetBSD: pkg_comp.8,v 1.35 2010/04/15 09:42:45 jmmv Exp $
 .\"
 .\" pkg_comp - Build packages inside a clean chroot environment
 .\" Copyright (c) 2002, 2003, 2004, 2005 Julio M. Merino Vidal <jmmv@NetBSD.org>
@@ -27,7 +27,7 @@
 .\" ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 .\" POSSIBILITY OF SUCH DAMAGE.
 .\"
-.Dd October 27, 2007
+.Dd April 15, 2010
 .Dt PKG_COMP 8
 .Os
 .Sh NAME
@@ -245,7 +245,7 @@ Otherwise, the package
 .Pa pkgtools/libkver
 will be installed inside the chroot, in a special purpose
 prefix whose value can be set in
-.Pa $DESTDIR/etc/mk.conf 
+.Pa $DESTDIR/etc/mk.conf
 via the configuration file
 with the
 .Va LIBKVER_STANDALONE_PREFIX
@@ -265,6 +265,10 @@ See
 for more information.
 Defaults to
 .Ql no .
+.It PKG_DBDIR
+Location of the packages database.
+Defaults to
+.Pa /var/db/pkg .
 .It PKG_SYSCONFBASE
 Base directory of configuration files.
 Defaults to
@@ -475,7 +479,8 @@ You need to pass their names as relative paths inside pkgsrc, like
 .Pa pkgtools/pkg_comp .
 .It install
 Install the specified binary packages into the chroot.
-You must specify the full name of the package and they must reside inside
+Package names can contain globs.
+The package files will be taken from within
 .Sy REAL_PACKAGES .
 .It chroot
 Enters the chroot environment.

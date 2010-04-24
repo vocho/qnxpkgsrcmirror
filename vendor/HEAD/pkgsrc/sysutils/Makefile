@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.488 2010/03/09 07:06:00 adam Exp $
+# $NetBSD: Makefile,v 1.491 2010/04/20 17:45:09 jmmv Exp $
 #
 
 COMMENT=	System utilities
@@ -110,6 +110,7 @@ SUBDIR+=	gcdmaster
 SUBDIR+=	gcombust
 SUBDIR+=	genpasswd
 SUBDIR+=	gentoo
+SUBDIR+=	gio-fam
 SUBDIR+=	gkrellm
 SUBDIR+=	gkrellm-est
 SUBDIR+=	gkrellm-server
@@ -224,6 +225,7 @@ SUBDIR+=	p5-Mac-AppleScript
 SUBDIR+=	p5-Mac-AppleScript-Glue
 SUBDIR+=	p5-Parse-Syslog
 SUBDIR+=	p5-SSH-Batch
+SUBDIR+=	p5-Server-Starter
 SUBDIR+=	p5-Sys-CpuLoad
 SUBDIR+=	p5-Sys-Filesystem
 SUBDIR+=	p5-Sys-Hostname-Long
@@ -313,7 +315,6 @@ SUBDIR+=	ups-nut-cgi
 SUBDIR+=	ups-nut-snmp
 SUBDIR+=	ups-nut-usb
 SUBDIR+=	usbutil
-SUBDIR+=	user
 SUBDIR+=	user_darwin
 SUBDIR+=	user_interix
 SUBDIR+=	vbetool

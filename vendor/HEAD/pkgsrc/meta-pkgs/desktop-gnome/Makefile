@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.3 2009/08/05 13:57:03 tnn Exp $
+# $NetBSD: Makefile,v 1.5 2010/04/22 12:10:50 reed Exp $
 #
 
 DISTNAME=	desktop-gnome-0.3
@@ -7,7 +7,7 @@ MASTER_SITES=	# empty
 
 MAINTAINER=	netbsd-desktop@NetBSD.org
 COMMENT=	Software stack for the NetBSD Desktop Project
-HOMEPAGE=	http://wiki.netbsd.se/Desktop_Project/
+HOMEPAGE=	http://wiki.netbsd.se/Desktop_Project
 
 META_PACKAGE=	yes
 
@@ -23,6 +23,7 @@ DEPENDS+=	thunderbird-[0-9]*:../../mail/thunderbird
 DEPENDS+=	pidgin-[0-9]*:../../chat/pidgin
 DEPENDS+=	pidgin-libnotify-[0-9]*:../../chat/pidgin-libnotify
 DEPENDS+=	Transmission-[0-9]*:../../net/Transmission
+DEPENDS+=	filezilla-[0-9]*:../../net/filezilla
 
 # useful fonts and themes
 #
