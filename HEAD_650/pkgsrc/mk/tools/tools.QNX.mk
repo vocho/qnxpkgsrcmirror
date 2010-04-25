@@ -9,9 +9,11 @@ TOOLS_PLATFORM.bison?=          ${QNX_HOST}/usr/bin/bison
 TOOLS_PLATFORM.bison-yacc?=     ${QNX_HOST}/usr/bin/bison -y
 .endif
 .if exists(/usr/bin/bzcat)
-TOOLS_PLATFORM.bzcat?=		/usr/bin/bzcat
+#PR 76380
+#TOOLS_PLATFORM.bzcat?=		/usr/bin/bzcat
 .endif
-TOOLS_PLATFORM.bzip2?=		/usr/bin/bzip2
+#PR 76380
+#TOOLS_PLATFORM.bzip2?=		/usr/bin/bzip2
 TOOLS_PLATFORM.cat?=		/bin/cat
 TOOLS_PLATFORM.chgrp?=		/bin/chgrp
 TOOLS_PLATFORM.chmod?=		/bin/chmod
