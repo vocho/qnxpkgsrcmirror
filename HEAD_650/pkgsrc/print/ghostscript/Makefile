@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.76 2010/03/11 12:53:52 drochner Exp $
+# $NetBSD: Makefile,v 1.78 2010/04/09 22:04:22 tron Exp $
 
 DISTNAME=	ghostscript-8.71
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	print
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=ghostscript/}
 MASTER_SITES+=	http://ghostscript.com/releases/
@@ -76,10 +76,10 @@ CONFIGURE_ENV+=	LPLIBDIR=${LOCALBASE}/lib
 post-extract:
 	${MKDIR} ${WRKSRC}/bin
 	${MKDIR} ${WRKSRC}/obj
-#	${MV} ${WRKSRC}/jasper ${WRKSRC}/jasper.dontuse
-	${MV} ${WRKSRC}/libpng ${WRKSRC}/libpng.dontuse
-	${MV} ${WRKSRC}/tiff ${WRKSRC}/tiff.dontuse
-#	${MV} ${WRKSRC}/zlib ${WRKSRC}/zlib.dontuse
+#	${RM} -rf ${WRKSRC}/jasper
+	${RM} -rf ${WRKSRC}/libpng
+	${RM} -rf ${WRKSRC}/tiff
+#	${RM} -rf ${WRKSRC}/zlib
 
 post-install:
 	${LN} -sf gsc ${DESTDIR}${PREFIX}/bin/gs

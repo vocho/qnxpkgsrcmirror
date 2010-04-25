@@ -1,10 +1,10 @@
-# $NetBSD: Makefile.common,v 1.2 2010/03/16 19:24:54 wiz Exp $
+# $NetBSD: Makefile.common,v 1.6 2010/04/24 15:59:23 taca Exp $
 #
 # used by databases/mysql51-client/Makefile
 # used by databases/mysql51-server/Makefile
 #
 
-DISTNAME=		mysql-5.1.44
+DISTNAME=		mysql-5.1.46
 CATEGORIES=		databases
 MASTER_SITES=		${MASTER_SITE_MYSQL:=MySQL-5.1/}
 
@@ -37,8 +37,8 @@ PKG_GROUPS_VARS+=	MYSQL_GROUP
 MYSQL_CHARSET?=		latin1
 MYSQL_EXTRA_CHARSET?=	all
 
+CONFIGURE_ARGS+=	--enable-thread-safe-client
 CONFIGURE_ARGS+=	--localstatedir=${MYSQL_DATADIR:Q}
-CONFIGURE_ARGS+=	--with-named-z-libs=z
 CONFIGURE_ARGS+=	--without-libwrap
 CONFIG_SHELL=		${TOOLS_PATH.bash}
 
@@ -62,10 +62,8 @@ CONFIGURE_ARGS+=	--without-libedit
 CONFIGURE_ARGS+=	--disable-dependency-tracking
 
 CONFIGURE_ARGS+=	--without-debug
-CONFIGURE_ARGS+=	--without-bench
 CONFIGURE_ARGS+=	--with-low-memory
 CONFIGURE_ARGS+=	--with-zlib-dir=${BUILDLINK_PREFIX.zlib:Q}
-CONFIGURE_ARGS+=	--with-vio
 
 CONFIGURE_ARGS+=	--with-charset=${MYSQL_CHARSET:Q}
 CONFIGURE_ARGS+=	--with-extra-charsets=${MYSQL_EXTRA_CHARSET:Q}
@@ -73,6 +71,15 @@ CONFIGURE_ARGS+=	--with-extra-charsets=${MYSQL_EXTRA_CHARSET:Q}
 .if !empty(MACHINE_ARCH:Mi386) && ${OPSYS} != "Interix" && \
 	${OPSYS} != "SunOS" && ${OPSYS} != "Darwin"
 CONFIGURE_ARGS+=	--enable-assembler
+.endif
+
+#
+# MySQL 5.1 depends on builtin functions which enabled with i486 and
+# later with GCC.
+#
+.if ${OPSYS} == "NetBSD" && !empty(MACHINE_ARCH:Mi386)
+GNU_ARCH.i386=		i486
+CFLAGS+=		-march=i486
 .endif
 
 CONFIGURE_ENV+=		mysql_cv_compress="yes"

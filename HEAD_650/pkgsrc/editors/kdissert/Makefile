@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.22 2010/02/10 19:17:37 joerg Exp $
+# $NetBSD: Makefile,v 1.25 2010/04/01 06:07:43 obache Exp $
 #
 
 DISTNAME=		kdissert-1.0.7
@@ -10,6 +10,7 @@ EXTRACT_SUFX=		.tar.bz2
 MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://freehackers.org/~tnagy/kdissert/
 COMMENT=		Mindmapping-like tool to generate text templates
+LICENSE=		gnu-gpl-v2
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
@@ -21,7 +22,7 @@ PYTHON_FOR_BUILD_ONLY=	yes
 do-configure:
 	${RUN} ${_ULIMIT_CMD} \
 	cd ${WRKSRC} && ${SETENV} ${CONFIGURE_ENV} \
-	${PYTHONBIN} waf configure --prefix=${PTEFIX}
+	${PYTHONBIN} waf configure --prefix=''
 
 do-build:
 	${RUN} ${_ULIMIT_CMD} \

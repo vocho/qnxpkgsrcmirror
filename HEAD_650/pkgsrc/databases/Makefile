@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.326 2010/03/16 19:35:58 wiz Exp $
+# $NetBSD: Makefile,v 1.329 2010/04/18 15:33:38 seb Exp $
 #
 
 COMMENT=	Databases
@@ -80,7 +80,9 @@ SUBDIR+=	openldap-server
 SUBDIR+=	openldap-smbk5pwd
 SUBDIR+=	oraedit
 SUBDIR+=	p5-AddressBook
+SUBDIR+=	p5-AnyEvent-BDB
 SUBDIR+=	p5-Apache-DBI
+SUBDIR+=	p5-BDB
 SUBDIR+=	p5-BerkeleyDB
 SUBDIR+=	p5-CDB_File
 SUBDIR+=	p5-Catalyst-Model-DBIC-Schema
@@ -94,6 +96,7 @@ SUBDIR+=	p5-Class-DBI-Pg
 SUBDIR+=	p5-Class-DBI-Plugin
 SUBDIR+=	p5-Class-DBI-Plugin-DeepAbstractSearch
 SUBDIR+=	p5-DBD-CSV
+SUBDIR+=	p5-DBD-DB2
 SUBDIR+=	p5-DBD-Google
 SUBDIR+=	p5-DBD-Mock
 SUBDIR+=	p5-DBD-ODBC

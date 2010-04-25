@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.7 2009/02/20 07:47:56 bjs Exp $
+# $NetBSD: Makefile,v 1.9 2010/04/09 09:06:52 tnn Exp $
 #
 
-DISTNAME=		xextproto-7.0.5
+DISTNAME=		xextproto-7.1.1
+PKGREVISION=		1
 CATEGORIES=		x11
 MASTER_SITES=		${MASTER_SITE_XORG:=proto/}
 EXTRACT_SUFX=		.tar.bz2
@@ -16,6 +17,8 @@ CONFLICTS+=		xextensions-[0-9]*
 
 GNU_CONFIGURE=		yes
 PKGCONFIG_OVERRIDE+=	${WRKSRC}/xextproto.pc.in
-USE_LANGUAGES=		# none, not even C
+
+post-install:
+	${INSTALL_DATA} ${FILESDIR}/shmstr.h ${DESTDIR}${PREFIX}/include/X11/extensions
 
 .include "../../mk/bsd.pkg.mk"

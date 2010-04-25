@@ -1,25 +1,15 @@
-$NetBSD$
+$NetBSD: patch-ba,v 1.4 2010/04/16 11:45:27 wiz Exp $
 
---- mkspecs/unsupported/qnx-g++/qplatformdefs.h.orig	2010-02-11 15:55:14.000000000 +0000
-+++ mkspecs/unsupported/qnx-g++/qplatformdefs.h
-@@ -155,20 +155,5 @@
- #define QT_SNPRINTF		::snprintf
- #define QT_VSNPRINTF		::vsnprintf
- 
--// QNX6 doesn't have getpagesize()
--inline int getpagesize()
--{
--    return ::sysconf(_SC_PAGESIZE);
--}
--
--#include <stdlib.h>
--
--// QNX6 doesn't have strtof - use strtod instead
--inline float strtof(const char *b, char **e)
--{
--    return float(strtod(b, e));
--}
--
--#define QT_QWS_TEMP_DIR QString::fromLatin1(qgetenv("TMP"))
- 
- #endif // QPLATFORMDEFS_H
+http://bugreports.qt.nokia.com/browse/QTBUG-6932
+
+--- src/gui/graphicsview/qgraphicsitem_p.h.orig	2010-02-11 15:55:22.000000000 +0000
++++ src/gui/graphicsview/qgraphicsitem_p.h
+@@ -678,7 +678,7 @@ inline bool qt_closestItemFirst(const QG
+     // item1Ancestor is now at the same level as item2Ancestor, but not the same.
+     const QGraphicsItem *p1 = t1;
+     const QGraphicsItem *p2 = t2;
+-    while (t1 && t1 != t2) {
++    while (t1 && t2 && t1 != t2) {
+         p1 = t1;
+         p2 = t2;
+         t1 = t1->d_ptr->parent;

@@ -1,4 +1,4 @@
-/*	$NetBSD: compat.c,v 1.5 2009/09/18 21:27:25 joerg Exp $	*/
+/*	$NetBSD: compat.c,v 1.7 2010/04/24 21:10:29 joerg Exp $	*/
 
 /*
  * Copyright (c) 1988, 1989, 1990 The Regents of the University of California.
@@ -70,14 +70,14 @@
  */
 
 #ifndef MAKE_NATIVE
-static char rcsid[] = "$NetBSD: compat.c,v 1.5 2009/09/18 21:27:25 joerg Exp $";
+static char rcsid[] = "$NetBSD: compat.c,v 1.7 2010/04/24 21:10:29 joerg Exp $";
 #else
 #include <sys/cdefs.h>
 #ifndef lint
 #if 0
 static char sccsid[] = "@(#)compat.c	8.2 (Berkeley) 3/19/94";
 #else
-__RCSID("$NetBSD: compat.c,v 1.5 2009/09/18 21:27:25 joerg Exp $");
+__RCSID("$NetBSD: compat.c,v 1.7 2010/04/24 21:10:29 joerg Exp $");
 #endif
 #endif /* not lint */
 #endif
@@ -358,7 +358,7 @@ again:
     /*
      * Fork and execute the single command. If the fork fails, we abort.
      */
-    cpid = vfork();
+    cpid = vFork();
     if (cpid < 0) {
 	Fatal("Could not fork");
     }
@@ -410,7 +410,7 @@ again:
 		        }
 			fprintf(debug_file, "\n");
 		    }
-		    fprintf(debug_file, "*** Error code %d", status);
+		    printf("*** Error code %d", status);
 		}
 	    } else {
 		status = WTERMSIG(reason);		/* signaled */
@@ -577,7 +577,7 @@ Compat_Make(void *gnp, void *pgnp)
 	} else if (keepgoing) {
 	    pgn->flags &= ~REMAKE;
 	} else {
-	    PrintOnError("\n\nStop.");
+	    PrintOnError(gn, "\n\nStop.");
 	    exit(1);
 	}
     } else if (gn->made == ERROR) {
@@ -668,7 +668,7 @@ Compat_Run(Lst targs)
 	if (gn != NULL) {
 	    Compat_Make(gn, gn);
             if (gn->made == ERROR) {
-                PrintOnError("\n\nStop.");
+                PrintOnError(gn, "\n\nStop.");
                 exit(1);
             }
 	}
@@ -709,7 +709,7 @@ Compat_Run(Lst targs)
     if (errors == 0) {
 	Compat_Make(ENDNode, ENDNode);
 	if (gn->made == ERROR) {
-	    PrintOnError("\n\nStop.");
+	    PrintOnError(gn, "\n\nStop.");
 	    exit(1);
 	}
     }

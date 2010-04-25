@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# $NetBSD: msgfmt.sh,v 1.32 2009/03/27 14:44:36 joerg Exp $
+# $NetBSD: msgfmt.sh,v 1.34 2010/04/10 00:46:23 obache Exp $
 #
 # Copyright (c) 2006 The NetBSD Foundation, Inc.
 # All rights reserved.

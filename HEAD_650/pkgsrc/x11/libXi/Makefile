@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.11 2009/02/27 21:36:10 wiz Exp $
+# $NetBSD: Makefile,v 1.13 2010/04/11 10:39:30 dholland Exp $
 #
 
-DISTNAME=		libXi-1.2.1
+DISTNAME=		libXi-1.3
 CATEGORIES=		x11 devel
 MASTER_SITES=		${MASTER_SITE_XORG:=lib/}
 EXTRACT_SUFX=		.tar.bz2
@@ -17,7 +17,7 @@ USE_LIBTOOL=		yes
 GNU_CONFIGURE=		yes
 USE_TOOLS+=		pkg-config
 
-CONFIGURE_ENV+=		LIB_MAN_SUFFIX=3
+CONFIGURE_ENV+=		LIB_MAN_SUFFIX=3 ac_cv_path_ASCIIDOC= ac_cv_path_XMLTO=
 PKGCONFIG_OVERRIDE+=	xi.pc.in
 
 .include "../../mk/bsd.prefs.mk"

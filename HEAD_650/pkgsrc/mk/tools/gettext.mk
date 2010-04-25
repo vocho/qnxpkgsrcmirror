@@ -1,4 +1,4 @@
-# $NetBSD: gettext.mk,v 1.12 2009/03/22 18:10:27 joerg Exp $
+# $NetBSD: gettext.mk,v 1.14 2010/04/10 00:46:23 obache Exp $
 #
 # Copyright (c) 2006 The NetBSD Foundation, Inc.
 # All rights reserved.
