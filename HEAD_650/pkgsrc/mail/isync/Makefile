@@ -21,6 +21,8 @@ GNU_CONFIGURE=	YES
 CONFIGURE_ARGS+=	--with-ssl=${BUILDLINK_PREFIX.openssl}
 LDFLAGS+=		-lcrypto
 
+CFLAGS.QNX+= -D__NO_EXT_QNX
+
 .include "../../security/openssl/buildlink3.mk"
 .include "../../databases/db4/buildlink3.mk"
 

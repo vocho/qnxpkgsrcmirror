@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.17 2009/08/09 22:47:09 wiz Exp $
+# $NetBSD: Makefile,v 1.19 2010/04/16 13:50:51 tnn Exp $
 
 DISTNAME=	xf86-video-nv-2.1.14
+PKGREVISION=	1
 CATEGORIES=	x11
 MASTER_SITES=	${MASTER_SITE_XORG:=driver/}
 EXTRACT_SUFX=	.tar.bz2
@@ -26,7 +27,8 @@ USE_TOOLS+=	pkg-config
 .include "../../x11/videoproto/buildlink3.mk"
 .include "../../x11/xf86driproto/buildlink3.mk"
 .include "../../x11/xf86miscproto/buildlink3.mk"
-.include "../../x11/xextproto/buildlink3.mk"
+BUILDLINK_DEPMETHOD.libXext?=	build
+.include "../../x11/libXext/buildlink3.mk"
 .include "../../x11/xineramaproto/buildlink3.mk"
 .include "../../x11/xproto/buildlink3.mk"
 

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.821 2010/03/18 09:20:08 wiz Exp $
+# $NetBSD: Makefile,v 1.828 2010/04/19 22:47:32 seb Exp $
 #
 
 COMMENT=	Networking tools
@@ -199,7 +199,7 @@ SUBDIR+=	kmldonkey
 SUBDIR+=	kmldonkey-kde3
 SUBDIR+=	kphone
 SUBDIR+=	ktorrent
-SUBDIR+=	ktorrent3
+SUBDIR+=	ktorrent-kde3
 SUBDIR+=	lambdamoo
 SUBDIR+=	lambdamoo-core
 SUBDIR+=	lambdamoo-doc
@@ -210,6 +210,7 @@ SUBDIR+=	lftp
 SUBDIR+=	libIDL
 SUBDIR+=	libares
 SUBDIR+=	libasyncns
+SUBDIR+=	libbind
 SUBDIR+=	libcares
 SUBDIR+=	libdnet
 SUBDIR+=	libfetch
@@ -269,6 +270,7 @@ SUBDIR+=	nagios-plugin-radius
 SUBDIR+=	nagios-plugin-snmp
 SUBDIR+=	nagios-plugin-spamd
 SUBDIR+=	nagios-plugins
+SUBDIR+=	nagstamon
 SUBDIR+=	nam
 SUBDIR+=	nap
 SUBDIR+=	napshare
@@ -361,6 +363,8 @@ SUBDIR+=	p5-Net-RawIP
 SUBDIR+=	p5-Net-SNMP
 SUBDIR+=	p5-Net-SNMP-Mixin
 SUBDIR+=	p5-Net-Server
+SUBDIR+=	p5-Net-Server-Coro
+SUBDIR+=	p5-Net-Server-SS-PreFork
 SUBDIR+=	p5-Net-TFTP
 SUBDIR+=	p5-Net-Telnet
 SUBDIR+=	p5-Net-Telnet-Cisco

@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.2 2010/03/16 19:24:54 wiz Exp $
+# $NetBSD: Makefile,v 1.5 2010/04/24 15:59:23 taca Exp $
 
 PKGNAME=		${DISTNAME:S/-/-server-/}
-PKGREVISION=		1
 SVR4_PKGNAME=		mysqs
 COMMENT=		MySQL 5, a free SQL database (server)
 
@@ -14,23 +13,38 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 MAKE_JOBS_SAFE=		no
 
 CONFIGURE_ARGS+=	--with-libwrap
-CONFIGURE_ARGS+=	--with-raid
-CONFIGURE_ARGS+=	--without-berkeley-db
-CONFIGURE_ARGS+=	--without-mysqlfs
 CONFIGURE_ARGS+=	--with-mysqld-user=${MYSQL_USER}
 
 .if !empty(PKG_OPTIONS:Membedded-server)
 CONFIGURE_ARGS+=	--with-embedded-privilege-control
 CONFIGURE_ARGS+=	--with-embedded-server
-#CONFIGURE_ARGS+=	--with-mysqld-ldflags=-all-static
 CONFIGURE_ARGS+=	--with-pic
 PLIST.embedded=		yes
 .endif
 
-PLIST_VARS+=		embedded
+.if !empty(PKG_OPTIONS:Mndb-cluster)
+CONFIGURE_ARGS+=	--with-plugins=innobase,ndbcluster
+REPLACE_PERL+=		storage/ndb/tools/ndb_error_reporter \
+			storage/ndb/tools/ndb_size.pl
+PLIST.ndb=		yes
+.else
+CONFIGURE_ARGS+=	--with-plugins=innobase
+.endif
+
+.if !empty(PKG_OPTIONS:Mpstack)
+CONFIGURE_ARGS+=	--with-pstack
+PLIST.pstack=		yes
+.endif
+
+.if !empty(PKG_OPTIONS:Mmysqlmanager)
+CONFIGURE_ARGS+=	--with-mysqlmanager
+PLIST.manager=		yes
+.endif
+
+PLIST_VARS+=		embedded manager ndb pstack
 
 PTHREAD_OPTS+=		require
-CONFIGURE_ARGS+=	--with-pthreads
+CONFIGURE_ARGS+=	--with-pthread
 
 PKG_GROUPS=		${MYSQL_GROUP}
 PKG_USERS=		${MYSQL_USER}:${MYSQL_GROUP}
@@ -53,6 +67,7 @@ REPLACE_PERL+=		mysql-test/lib/My/SafeProcess/safe_process.pl \
 			mysql-test/lib/v1/mysql-test-run.pl \
 			mysql-test/mysql-stress-test.pl \
 			mysql-test/mysql-test-run.pl \
+			mysql-test/suite/engines/rr_trx/run_stress_tx_rr.pl \
 			mysql-test/suite/funcs_1/lib/DataGen_local.pl \
 			mysql-test/suite/funcs_1/lib/DataGen_modify.pl \
 			mysql-test/suite/funcs_2/lib/gen_charset_utf8.pl \

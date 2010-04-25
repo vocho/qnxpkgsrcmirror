@@ -1,6 +1,6 @@
-# $Id: Makefile.in,v 1.4 2009/09/18 21:27:26 joerg Exp $
+# $Id: Makefile.in,v 1.6 2010/04/24 21:10:29 joerg Exp $
 #
-# $NetBSD: Makefile.in,v 1.4 2009/09/18 21:27:26 joerg Exp $
+# $NetBSD: Makefile.in,v 1.6 2010/04/24 21:10:29 joerg Exp $
 #
 # Unit tests for make(1)
 # The main targets are:
@@ -25,9 +25,12 @@ UNIT_TESTS:= ${srcdir}
 SUBFILES= \
 	comment \
 	cond1 \
+	error \
 	export \
 	export-all \
+	doterror \
 	dotwait \
+	forsubst \
 	moderrs \
 	modmatch \
 	modmisc \
@@ -37,24 +40,36 @@ SUBFILES= \
 	posix \
 	qequals \
 	ternary \
+	unexport \
+	unexport-env \
 	varcmd
 
 all: ${SUBFILES}
+
+flags.doterror=
 
 # the tests are actually done with sub-makes.
 .PHONY: ${SUBFILES}
 .PRECIOUS: ${SUBFILES}
 ${SUBFILES}:
-	-@${.MAKE} -k -f ${UNIT_TESTS}/$@
+	-@${.MAKE} ${flags.$@:U-k} -f ${UNIT_TESTS}/$@
 
 clean:
 	rm -f *.out *.fail *.core
 
-.include <bsd.obj.mk>
+.-include <bsd.obj.mk>
 
 TEST_MAKE?= ${.MAKE}
-TOOL_SED ?= sed
-TOOL_TR ?= tr
+TOOL_SED?= sed
+TOOL_TR?= tr
+
+# ensure consistent results from sort(1)
+LANG= C
+.export LANG
+
+# ensure consistent results from sort(1)
+LANG= C
+.export LANG
 
 # The driver.
 # We always pretend .MAKE was called 'make' 

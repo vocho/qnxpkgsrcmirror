@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.6 2009/11/12 22:05:55 adrianp Exp $
+# $NetBSD: Makefile,v 1.10 2010/04/19 22:34:02 morr Exp $
 
 DISTNAME=		wordpress-${VERSION}
-VERSION=		2.8.6
+VERSION=		2.9.2
 CATEGORIES=		www
 MASTER_SITES=		http://wordpress.org/
 
-MAINTAINER=		adrianp@NetBSD.org
+MAINTAINER=		morr@NetBSD.org
 HOMEPAGE=		http://wordpress.org/
 COMMENT=		Blogging tool written in php
 
@@ -20,11 +20,11 @@ USE_TOOLS+=		pax
 NO_BUILD=		yes
 WRKSRC=			${WRKDIR}/wordpress
 
-WWW_USER?=              ${APACHE_USER}
-WWW_GROUP?=             ${APACHE_GROUP}
+WWW_USER?=		${APACHE_USER}
+WWW_GROUP?=		${APACHE_GROUP}
 
-PKG_GROUPS_VARS+=	WWW_GROUP
-PKG_USERS_VARS+=	WWW_USER
+PKG_GROUPS_VARS=	WWW_GROUP
+PKG_USERS_VARS=		WWW_USER
 BUILD_DEFS+=		WWW_USER WWW_GROUP APACHE_USER APACHE_GROUP
 EGDIR=			${PREFIX}/share/examples/wordpress
 DOCDIR=			${PREFIX}/share/doc/wordpress
@@ -36,7 +36,7 @@ CONF_FILES+=		${EGDIR}/wordpress.conf ${PKG_SYSCONFDIR}/wordpress.conf
 CONF_FILES_PERMS+=	${EGDIR}/wp-config-sample.php ${WPHOME}/wp-config.php \
 			${WWW_USER} ${WWW_GROUP} 0640
 OWN_DIRS_PERMS+=	${WPHOME}/wp-content/uploads \
-			${WWW_USER} ${WWW_GROUP} 0640
+			${WWW_USER} ${WWW_GROUP} 0750
 
 INSTALLATION_DIRS+=	${DOCDIR} ${WPHOME} ${EGDIR}
 

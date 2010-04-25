@@ -1,11 +1,11 @@
-$NetBSD: distinfo,v 1.7 2009/08/31 07:48:22 wiz Exp $
+$NetBSD: distinfo,v 1.8 2010/04/09 08:09:11 tnn Exp $
 
-SHA1 (libpciaccess-0.10.8.tar.bz2) = 0fa152811e121b4e97eb5f53c14d7896685f79a6
-RMD160 (libpciaccess-0.10.8.tar.bz2) = dd3d329a6c20fec44add9a205af0e7f6216190ac
-Size (libpciaccess-0.10.8.tar.bz2) = 281625 bytes
-SHA1 (patch-aa) = 7472bd9794ba42346b5226b199bbf6617c6b54b8
+SHA1 (libpciaccess-0.11.0.tar.bz2) = bcebba8b8441af151b59b63e8e91e66133b64158
+RMD160 (libpciaccess-0.11.0.tar.bz2) = 7d579f024e543c97cceb47c204d395e4097becf2
+Size (libpciaccess-0.11.0.tar.bz2) = 295639 bytes
+SHA1 (patch-aa) = 6bec4e50278f7a2d92a21ebeea9871f73a4a1c00
 SHA1 (patch-ab) = 22373523a177f200f9036f9d80cdc1e12ec35b0b
-SHA1 (patch-ac) = 622e7386a00082196bde0397bb395ddccf8f7ae0
+SHA1 (patch-ac) = 3f0fb3c84f2c2cab78a9c57d844b71941efccea6
 SHA1 (patch-ad) = 6b715637dbd2768737a5c34883ee966b0b42af85
 SHA1 (patch-ae) = 4db1c0deced82c5c87e7d030d7afa5c6ecfe6233
 SHA1 (patch-af) = 769c85b5b4f7660017db8e7767d6cefc79d4670f

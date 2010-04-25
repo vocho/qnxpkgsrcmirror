@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.10 2009/08/29 15:37:47 wiz Exp $
+# $NetBSD: Makefile,v 1.13 2010/04/19 18:49:30 tnn Exp $
 #
 
-DISTNAME=		libdrm-2.4.13
+DISTNAME=		libdrm-2.4.20
 CATEGORIES=		x11 graphics
 MASTER_SITES=		http://dri.freedesktop.org/libdrm/
 EXTRACT_SUFX=		.tar.bz2
@@ -20,22 +20,20 @@ GNU_CONFIGURE=		yes
 
 .include "../../mk/bsd.prefs.mk"
 
-ATOMIC_OPS_CHECK?=	0
-
 SUBST_CLASSES+=		atomic
-SUBST_FILES.atomic=	libdrm/xf86drm.h
+SUBST_FILES.atomic=	xf86drm.h
 SUBST_MESSAGE.atomic=	Configuring xf86drm.h's atomic operations.
 SUBST_STAGE.atomic=	pre-configure
 SUBST_VARS.atomic=	ATOMIC_OPS_CHECK
 
-.if ${OPSYS} == "NetBSD" && !target(netbsd-atomic-ops-check)
-netbsd-atomic-ops-check:
-ATOMIC_OPS_CHECK!=\
-  if ( ${NM} /usr/lib/libc.so | ${GREP} -q atomic_cas_uint ); then	\
-    ${ECHO} "1";	\
-  else	\
-    ${ECHO} "0";	\
-  fi
+ATOMIC_OPS_CHECK=	0
+.if ${OPSYS} == "NetBSD"
+. if exists(/usr/include/sys/atomic.h)
+ATOMIC_OPS_CHECK=	1
+. else
+. include "../../devel/libatomic_ops/buildlink3.mk"
+CONFIGURE_ENV+=		drm_cv_atomic_primitives=libatomic-ops
+. endif
 .endif
 
 CONFIGURE_ARGS+=	PTHREADSTUBS_CFLAGS=-I${PREFIX}/include \

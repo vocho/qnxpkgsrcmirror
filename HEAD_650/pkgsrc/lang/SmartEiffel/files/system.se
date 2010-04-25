@@ -85,9 +85,9 @@ tutorial: ${path_tutorial}loadpath.se
 
 [boost]
 c_compiler_type: gcc
-c_compiler_options: -pipe -O2
+c_compiler_options: -pipe -O2 -g
 cpp_compiler_type: g++
-cpp_compiler_options: -pipe -O2
+cpp_compiler_options: -pipe -O2 -g
 
 [no_check]
 c_compiler_type: gcc
