@@ -36,6 +36,10 @@ CONFIGURE_ENV+=		drm_cv_atomic_primitives=libatomic-ops
 . endif
 .endif
 
+.if ${OPSYS} == "QNX"
+CONFIGURE_ENV+=		drm_cv_atomic_primitives=solaris
+.endif
+
 CONFIGURE_ARGS+=	PTHREADSTUBS_CFLAGS=-I${PREFIX}/include \
 			PTHREADSTUBS_LIBS=-L${PREFIX}/lib
 
