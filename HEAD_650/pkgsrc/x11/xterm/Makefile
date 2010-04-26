@@ -29,6 +29,8 @@ CONFIGURE_ARGS.xpm=	--with-Xaw3d
 CONFIGURE_ARGS.neXtaw=	--with-neXtaw
 CONFIGURE_ARGS+=	${${CONFIGURE_ARGS.${XAW_TYPE}}:L}
 
+CFLAGS.QNX+= -D__TERMCAP_H_INCLUDED
+
 .include "../../mk/bsd.prefs.mk"
 
 .if ${X11_TYPE} == "modular"
