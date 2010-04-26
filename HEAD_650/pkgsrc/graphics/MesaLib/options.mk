@@ -22,7 +22,7 @@ PKG_SUGGESTED_OPTIONS=
      ${MACHINE_ARCH} == "sparc64") && \
     ((${OPSYS} == "NetBSD" && ${X11_TYPE} == "modular") || \
      ${OPSYS} == "FreeBSD" || ${OPSYS} == "OpenBSD" || \
-     ${OPSYS} == "DragonFly" || ${OPSYS} == "Linux")
+     ${OPSYS} == "DragonFly" || ${OPSYS} == "Linux" || ${OPSYS} == "QNX")
 PKG_SUPPORTED_OPTIONS+=		dri
 .endif
 ###
@@ -36,9 +36,11 @@ PKG_SUPPORTED_OPTIONS+=		dri
 PKG_SUGGESTED_OPTIONS+=		dri
 .endif
 
-.if ${OPSYS} == "DragonFly"
+.if ${OPSYS} == "DragonFly" || ${OPSYS} == "QNX"
 PKG_SUGGESTED_OPTIONS+=		dri
 .endif
+
+CFLAGS.QNX+=-D__NO_EXT_QNX
 
 .include "../../mk/bsd.options.mk"
 ###
