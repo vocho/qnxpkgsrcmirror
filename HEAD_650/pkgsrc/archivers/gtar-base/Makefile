@@ -66,6 +66,7 @@ CONFIGURE_ENV+=		gt_cv_func_gnugettext3_libintl=yes
 post-patch:
 	${CP} ${FILESDIR}/qnx-inc.h ${WRKSRC}
 CFLAGS.QNX+=	-include qnx-inc.h
+LIBS.QNX+=	-lsocket
 .endif
 
 post-install:
