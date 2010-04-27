@@ -119,7 +119,9 @@ PLIST.nis=	yes
 .  endif
 .else
 PLIST.dll=	yes
-.  if ${OPSYS} != "NetBSD" || exists(/usr/bin/ypcat)
+.  if ${OPSYS} == "QNX"
+   # nothing
+.  elif ${OPSYS} != "NetBSD" || exists(/usr/bin/ypcat)
 PLIST.nis=	yes
 .  else
 PLIST.no-nis=	yes
@@ -157,6 +159,12 @@ REPLACE_FILES.py26+=	Lib/test/test_largefile.py Lib/test/test_optparse.py
 post-extract:
 	${MV} ${WRKSRC}/Lib/smtpd.py ${WRKSRC}/Lib/smtpd${PY_VER_SUFFIX}.py
 	${MV} ${WRKSRC}/Tools/scripts/pydoc ${WRKSRC}/Tools/scripts/pydoc${PY_VER_SUFFIX}
+
+.if ${OPSYS} == "QNX"
+# python wants a large stack
+post-build:
+	ldrel -S2M -L ${WRKSRC}/python
+.endif
 
 .if ${OPSYS} == "HPUX"
 post-install:
