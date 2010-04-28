@@ -1,8 +1,8 @@
 $NetBSD: patch-aa,v 1.4 2009/11/04 09:44:09 tnn Exp $
 
---- configure.in.orig	2009-10-16 17:13:35.000000000 +0200
+--- configure.in.orig	2010-04-02 16:02:18.000000000 +0000
 +++ configure.in
-@@ -1799,7 +1799,7 @@ case "$target" in
+@@ -1859,7 +1859,7 @@ case "$target" in
      fi
      ;;
  
@@ -11,7 +11,7 @@ $NetBSD: patch-aa,v 1.4 2009/11/04 09:44:09 tnn Exp $
      if test `test -x /usr/bin/objformat && /usr/bin/objformat || echo elf` != "elf"; then
  	DLL_SUFFIX=".so.1.0"
  	DSO_LDOPTS="-shared"
-@@ -1813,6 +1813,9 @@ case "$target" in
+@@ -1873,6 +1873,9 @@ case "$target" in
  #	MKSHLIB_FORCE_ALL='-Wl,-Bforcearchive'
  #	MKSHLIB_UNFORCE_ALL=''
  #    fi
@@ -21,17 +21,31 @@ $NetBSD: patch-aa,v 1.4 2009/11/04 09:44:09 tnn Exp $
      ;; 
  
  *-hpux*)
-@@ -3043,6 +3046,9 @@ dnl ====================================
+@@ -2373,6 +2376,10 @@ case "$target" in
+     ;;
+ 
+ *-nto*) 
++    DLL_SUFFIX=".so.1.0"
++    DSO_CFLAGS=''
++    DSO_PIC_CFLAGS='-fPIC'
++    DSO_LDOPTS='-shared -fPIC'
+ 	AC_DEFINE(NTO)	
+ 	AC_DEFINE(_QNX_SOURCE)
+ 	AC_DEFINE(_i386)
+@@ -3111,6 +3118,12 @@ dnl ====================================
  case $target in
  *-hpux11.*)
  	;;
 +*-dragonfly*)
 +	AC_CHECK_LIB(c, gethostbyname_r)
 +	;;
++*-nto*) 
++	AC_CHECK_LIB(socket, gethostbyname_r)
++	;;
  *)
  	AC_CHECK_LIB(c_r, gethostbyname_r)
  	;;
-@@ -4158,6 +4164,14 @@ else
+@@ -4290,6 +4303,14 @@ else
     fi
  fi
  
@@ -46,7 +60,7 @@ $NetBSD: patch-aa,v 1.4 2009/11/04 09:44:09 tnn Exp $
  if test -z "$SKIP_LIBRARY_CHECKS"; then
  dnl system JPEG support
  dnl ========================================================
-@@ -8375,7 +8389,8 @@ rm -f confdefs.h.save
+@@ -8468,7 +8489,8 @@ rm -f confdefs.h.save
  mv confdefs.h confdefs.h.save
  egrep -v "$_EGREP_PATTERN" confdefs.h.save > confdefs.h
  AC_OUTPUT_MAKE_DEFS()
@@ -56,7 +70,7 @@ $NetBSD: patch-aa,v 1.4 2009/11/04 09:44:09 tnn Exp $
  AC_SUBST(MOZ_DEFINES)
  rm -f confdefs.h
  mv confdefs.h.save confdefs.h
-@@ -8466,6 +8481,8 @@ if test -z "$MOZ_NATIVE_NSPR"; then
+@@ -8559,6 +8581,8 @@ if test -z "$MOZ_NATIVE_NSPR"; then
      AC_MSG_WARN([Recreating autoconf.mk with updated nspr-config output])
      if test "$OS_ARCH" != "WINNT" && test "$OS_ARCH" != "WINCE"; then
         NSPR_LIBS=`./nsprpub/config/nspr-config --prefix=$LIBXUL_DIST --exec-prefix=$MOZ_BUILD_ROOT/dist --libdir=$LIBXUL_DIST/lib --libs`
