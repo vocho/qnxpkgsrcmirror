@@ -3,3 +3,5 @@ $NetBSD: distinfo,v 1.4 2009/08/26 12:17:28 wiz Exp $
 SHA1 (xcb-util-0.3.6.tar.bz2) = 8585a421c077382937d181b921263fac2e448d31
 RMD160 (xcb-util-0.3.6.tar.bz2) = 853e53493c67d56a4ce368cc6b9512c247fc840f
 Size (xcb-util-0.3.6.tar.bz2) = 293408 bytes
+SHA1 (patch-aa) = 205f6b7ae5abebac3ed3565ef58e36103dca1f6f
+SHA1 (patch-ab) = f4eb733c3d5436a49f4f0d91fdc511dfc4f66352
