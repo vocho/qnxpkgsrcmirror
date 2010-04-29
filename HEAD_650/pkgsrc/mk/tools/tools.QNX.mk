@@ -35,7 +35,9 @@ TOOLS_PLATFORM.file?=		/usr/bin/file
 TOOLS_PLATFORM.find?=		/usr/bin/find
 TOOLS_PLATFORM.flex?=		${QNX_HOST}/usr/bin/flex
 TOOLS_PLATFORM.ftp?=		/usr/bin/ftp
-TOOLS_PLATFORM.gawk?=		/usr/bin/gawk
+
+# gawk PR 76483
+#TOOLS_PLATFORM.gawk?=		/usr/bin/gawk
 TOOLS_PLATFORM.grep?=		/usr/bin/grep
 .if exists(${QNX_HOST}/usr/bin/groff)
 TOOLS_PLATFORM.groff?=		${QNX_HOST}/usr/bin/groff
