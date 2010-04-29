@@ -1,0 +1,16 @@
+$NetBSD$
+
+--- reply/Makefile.in.orig	2009-08-24 08:47:54.000000000 +0000
++++ reply/Makefile.in
+@@ -248,7 +248,11 @@ AM_CFLAGS = $(CWARNFLAGS)
+ XCB_REPLY_LIBS = libxcb-reply.la
+ libxcb_reply_la_SOURCES = reply.c
+ libxcb_reply_la_CPPFLAGS = $(XCB_CFLAGS)
++ifneq (QNX,$(shell uname -s))
+ libxcb_reply_la_LIBADD = $(XCB_LIBS) -lpthread
++else
++libxcb_reply_la_LIBADD = $(XCB_LIBS)
++endif
+ libxcb_reply_la_LDFLAGS = -version-info 1:0:0
+ pkgconfig_DATA = xcb-reply.pc
+ EXTRA_DIST = xcb-reply.pc.in
