@@ -17,6 +17,7 @@ USE_PKGLOCALEDIR=	yes
 USE_LIBTOOL=		yes
 GNU_CONFIGURE=		yes
 USE_TOOLS+=		gmake intltool msgfmt pkg-config
+USE_TOOLS+=		autoconf automake autoreconf
 
 CONFIGURE_ARGS+=	--disable-python
 CONFIGURE_ARGS+=	--with-ft-exec-prefix=${BUILDLINK_PREFIX.freetype2}
@@ -29,6 +30,9 @@ BUILDLINK_API_DEPENDS.gtk2+=		gtk2+>=2.10.0
 BUILDLINK_API_DEPENDS.fontconfig+=	fontconfig>=2.1.93
 
 BUILDLINK_DEPMETHOD.libXt?=	build
+
+pre-configure:
+	cd ${WRKSRC}/gnome-pty-helper && autoreconf -vi
 
 .include "../../devel/glib2/buildlink3.mk"
 .include "../../devel/pango/buildlink3.mk"
