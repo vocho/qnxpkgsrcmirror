@@ -75,8 +75,8 @@ QMAKE_RANLIB=		${RANLIB}
 LDFLAGS+=		-lresolv
 .  endif
 .elif ${OPSYS} == "QNX"
-SYS_LIBS=		-lsocket -liconv
-LDFLAGS+=		-lsocket -liconv
+SYS_LIBS=		-lsocket -liconv -ls5ipc
+LDFLAGS+=		-lsocket -liconv -ls5ipc
 .elif ${OPSYS} == "Linux"
 LDFLAGS+=		-ldl
 .endif
