@@ -33,6 +33,10 @@ post-install:
 
 .include "options.mk"
 
+CFLAGS.QNX+=-D_HAS_GENERIC_TEMPLATES=0 -D_NO_CPP_INLINES
+
+
+
 .include "../../x11/libXpm/buildlink3.mk"
 .include "../../x11/libX11/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"
