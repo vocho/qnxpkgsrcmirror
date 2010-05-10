@@ -1,0 +1,26 @@
+$NetBSD$
+
+--- src/rxvt.h.orig	2008-11-05 15:42:03.000000000 +0000
++++ src/rxvt.h
+@@ -27,6 +27,9 @@
+ #else
+ // stdlib.h might provide it
+ #endif
++#ifdef __QNXNTO__
++#include <wctype.h>
++#endif
+ 
+ using namespace std;
+ 
+@@ -605,7 +608,11 @@ typedef struct _mwmhints
+ 
+ // for speed reasons, we assume that all codepoints 32 to 126 are
+ // single-width.
++#ifndef __QNXNTO__
+ #define WCWIDTH(c)		(IN_RANGE_INC (c, 0x20, 0x7e) ? 1 : wcwidth (c))
++#else
++#define WCWIDTH(c)		(IN_RANGE_INC (c, 0x20, 0x7e) ? 1 : (iswprint(c) ? 1 : -1))
++#endif
+ 
+ /* convert pixel dimensions to row/column values.  Everything as int32_t */
+ #define Pixel2Col(x)            Pixel2Width((int32_t)(x))

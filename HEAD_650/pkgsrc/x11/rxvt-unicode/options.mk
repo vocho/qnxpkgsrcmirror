@@ -2,7 +2,15 @@
 
 PKG_OPTIONS_VAR=        PKG_OPTIONS.rxvt-unicode
 PKG_SUPPORTED_OPTIONS=  perl unicode3 xft2 rxvt-term
+
+.include "../../mk/bsd.prefs.mk"
+
 PKG_SUGGESTED_OPTIONS=  perl unicode3 xft2
+.if ${OPSYS} == "QNX"
+# until QNX has an rxvt entry in termcap / ttttinfo
+PKG_SUGGESTED_OPTIONS+= rxvt-term
+.endif
+
 
 .include "../../mk/bsd.options.mk"
 
