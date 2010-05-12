@@ -1,10 +1,26 @@
-$NetBSD: patch-aa,v 1.16 2009/10/28 01:20:33 joerg Exp $
+$NetBSD$
 
-Buildlink takes care of include files.
-
---- src/auto/configure.orig	2008-07-24 15:40:36.000000000 +0300
-+++ src/auto/configure	2008-08-11 12:58:28.000000000 +0300
-@@ -8966,7 +8966,7 @@
+--- src/auto/configure.orig	2010-05-12 13:46:56.000000000 +0000
++++ src/auto/configure
+@@ -6267,7 +6267,7 @@ fi
+ $as_echo "$enable_fontset" >&6; }
+ 
+ test -z "$with_x" && with_x=yes
+-test "${enable_gui-yes}" != no -a "x$MACOSX" != "xyes" -a "x$QNX" != "xyes" && with_x=yes
++test "${enable_gui-yes}" != no -a "x$MACOSX" != "xyes" && with_x=yes
+ if test "$with_x" = no; then
+   { $as_echo "$as_me:$LINENO: result: defaulting to: don't HAVE_X11" >&5
+ $as_echo "defaulting to: don't HAVE_X11" >&6; }
+@@ -8175,7 +8175,7 @@ _ACEOF
+   fi
+ fi
+ 
+-test "x$with_x" = xno -a "x$MACOSX" != "xyes" -a "x$QNX" != "xyes" && enable_gui=no
++test "x$with_x" = xno -a "x$MACOSX" != "xyes" && enable_gui=no
+ 
+ { $as_echo "$as_me:$LINENO: checking --enable-gui argument" >&5
+ $as_echo_n "checking --enable-gui argument... " >&6; }
+@@ -9168,7 +9168,7 @@ fi
  
  
  if test -z "$SKIP_MOTIF"; then
