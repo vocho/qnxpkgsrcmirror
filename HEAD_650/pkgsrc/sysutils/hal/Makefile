@@ -35,6 +35,8 @@ CONFIGURE_ARGS+=	--with-usb-ids=${PREFIX}/share/usbids
 
 .include "../../mk/bsd.prefs.mk"
 
+LIBS.QNX+=	-lnbutil -lgetopt
+
 .if ${OPSYS} == "FreeBSD" || ${OPSYS} == "DragonFly"
 .include "../../devel/libvolume_id/buildlink3.mk"
 CONFIGURE_ARGS+=	--with-eject=/usr/sbin/cdcontrol
@@ -110,4 +112,7 @@ pre-configure:
 .include "../../sysutils/dbus-glib/buildlink3.mk"
 .include "../../sysutils/hal-info/buildlink3.mk"
 .include "../../textproc/expat/buildlink3.mk"
+.if ${OPSYS} == "QNX"
+.include "../../devel/libgetopt/buildlink3.mk"
+.endif
 .include "../../mk/bsd.pkg.mk"

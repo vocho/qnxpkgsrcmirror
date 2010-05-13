@@ -15,7 +15,7 @@ $NetBSD: patch-aa,v 1.5 2009/12/27 16:17:34 abs Exp $
  #elif sun
  #include <sys/mnttab.h>
  #include <sys/vfstab.h>
-+#elif __NetBSD__
++#elif defined(_NetBSD__) || defined(__QNXNTO__)
 +#include <fstab.h>
 +#include <sys/param.h>
 +#include <sys/mount.h>

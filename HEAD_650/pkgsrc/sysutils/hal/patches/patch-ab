@@ -1,7 +1,7 @@
 $NetBSD: patch-ab,v 1.3 2008/12/20 21:11:05 jmcneill Exp $
 
---- tools/hal-storage-shared.c.orig	2008-05-08 02:24:24 +0300
-+++ tools/hal-storage-shared.c	2008-11-23 13:38:53 +0200
+--- tools/hal-storage-shared.c.orig	2008-05-07 23:24:24.000000000 +0000
++++ tools/hal-storage-shared.c
 @@ -31,7 +31,7 @@
  #include <string.h>
  #include <glib.h>
@@ -11,23 +11,26 @@ $NetBSD: patch-ab,v 1.3 2008/12/20 21:11:05 jmcneill Exp $
  #include <fstab.h>
  #include <sys/param.h>
  #include <sys/ucred.h>
-@@ -42,6 +42,10 @@
+@@ -42,6 +42,13 @@
  #include <fcntl.h>
  #include <sys/mnttab.h>
  #include <sys/vfstab.h>
-+#elif __NetBSD__
++#elif defined(__NetBSD__) || defined(__QNXNTO__)
 +#include <fstab.h>
 +#include <sys/param.h>
 +#include <sys/mount.h>
++#ifdef __QNXNTO__
++#include <nbutil.h>
++#endif
  #else
  #include <mntent.h>
  #endif
-@@ -53,20 +57,27 @@
+@@ -53,20 +60,27 @@
  
  #include "hal-storage-shared.h"
  
 -#ifdef __FreeBSD__
-+#if defined(__FreeBSD__) || defined(__DragonFly__) || defined(__APPLE__)
++#if defined(__FreeBSD__) || defined(__DragonFly__) || defined(__APPLE__) || defined(__QNXNTO__)
  struct mtab_handle
  {
    struct statfs	*mounts;
@@ -48,20 +51,20 @@ $NetBSD: patch-ab,v 1.3 2008/12/20 21:11:05 jmcneill Exp $
  mtab_open (gpointer *handle)
  {
 -#ifdef __FreeBSD__
-+#if defined(__FreeBSD__) || defined(__NetBSD__) || defined(__DragonFly__) || defined(__APPLE__)
++#if defined(__FreeBSD__) || defined(__NetBSD__) || defined(__DragonFly__) || defined(__APPLE__) || defined(__QNXNTO__)
  	struct mtab_handle *mtab;
  
  	mtab = g_new0 (struct mtab_handle, 1);
-@@ -90,7 +101,7 @@ mtab_open (gpointer *handle)
+@@ -90,7 +104,7 @@ mtab_open (gpointer *handle)
  char *
  mtab_next (gpointer handle, char **mount_point)
  {
 -#ifdef __FreeBSD__
-+#if defined(__FreeBSD__) || defined(__NetBSD__) || defined(__DragonFly__) || defined(__APPLE__)
++#if defined(__FreeBSD__) || defined(__NetBSD__) || defined(__DragonFly__) || defined(__APPLE__) || defined(__QNXNTO__)
  	struct mtab_handle *mtab = handle;
  
  	if (mtab->iter < mtab->n_mounts) {
-@@ -131,7 +142,7 @@ mtab_next (gpointer handle, char **mount
+@@ -131,7 +145,7 @@ mtab_next (gpointer handle, char **mount
  void
  mtab_close (gpointer handle)
  {
@@ -70,30 +73,30 @@ $NetBSD: patch-ab,v 1.3 2008/12/20 21:11:05 jmcneill Exp $
  	g_free (handle);
  #else
  	fclose (handle);
-@@ -143,7 +154,7 @@ mtab_close (gpointer handle)
+@@ -143,7 +157,7 @@ mtab_close (gpointer handle)
  gboolean
  fstab_open (gpointer *handle)
  {
 -#ifdef __FreeBSD__
-+#if defined(__FreeBSD__) || defined(__NetBSD__) || defined(__DragonFly__) || defined(__APPLE__)
++#if defined(__FreeBSD__) || defined(__NetBSD__) || defined(__DragonFly__) || defined(__APPLE__) | defined(__QNXNTO__)
  	return setfsent () == 1;
  #elif sun
  	*handle = fopen (VFSTAB, "r");
-@@ -157,7 +168,7 @@ fstab_open (gpointer *handle)
+@@ -157,7 +171,7 @@ fstab_open (gpointer *handle)
  char *
  fstab_next (gpointer handle, char **mount_point)
  {
 -#ifdef __FreeBSD__
-+#if defined(__FreeBSD__) || defined(__NetBSD__) || defined(__DragonFly__) || defined(__APPLE__)
++#if defined(__FreeBSD__) || defined(__NetBSD__) || defined(__DragonFly__) || defined(__APPLE__) || defined(__QNXNTO__)
  	struct fstab *fstab;
  
  	fstab = getfsent ();
-@@ -188,14 +199,16 @@ fstab_next (gpointer handle, char **moun
+@@ -188,14 +202,16 @@ fstab_next (gpointer handle, char **moun
  void
  fstab_close (gpointer handle)
  {
 -#ifdef __FreeBSD__
-+#if defined(__FreeBSD__) || defined(__NetBSD__) || defined(__DragonFly__) || defined(__APPLE__)
++#if defined(__FreeBSD__) || defined(__NetBSD__) || defined(__DragonFly__) || defined(__APPLE__) | defined(__QNXNTO__)
  	endfsent ();
  #else
  	fclose (handle);
@@ -107,7 +110,7 @@ $NetBSD: patch-ab,v 1.3 2008/12/20 21:11:05 jmcneill Exp $
  #define UMOUNT		"/sbin/umount"
  #elif sun
  #define UMOUNT		"/sbin/umount"
-@@ -467,7 +480,7 @@ line_found:
+@@ -467,7 +483,7 @@ line_found:
  	/* construct arguments to /bin/umount */
  	na = 0;
  	args[na++] = UMOUNT;
@@ -116,7 +119,7 @@ $NetBSD: patch-ab,v 1.3 2008/12/20 21:11:05 jmcneill Exp $
  	if (option_lazy)
  		args[na++] = "-l";
  #endif
-@@ -625,13 +638,18 @@ try_open_excl_again:
+@@ -625,13 +641,18 @@ try_open_excl_again:
  	/* construct arguments to EJECT_PROGRAM (e.g. /usr/bin/eject) */
  	na = 0;
  	args[na++] = EJECT_PROGRAM;
