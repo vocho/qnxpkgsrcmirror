@@ -21,6 +21,8 @@ CONFIGURE_ARGS+=	--with-modules-dir=${PREFIX}/lib/security
 
 OWN_DIRS=		${PKG_SYSCONFDIR}/pam.d
 
+LIBS.QNX+=		-lnbutil
+
 .include "../../mk/dlopen.buildlink3.mk"
 
 # Create a fake perl binary to avoid recreating the man pages.
