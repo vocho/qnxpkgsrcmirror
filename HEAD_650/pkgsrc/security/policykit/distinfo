@@ -3,7 +3,7 @@ $NetBSD: distinfo,v 1.7 2009/01/20 10:08:17 sketch Exp $
 SHA1 (PolicyKit-0.9.tar.gz) = ac99c580eff72f6d5df261c155fb047306439f85
 RMD160 (PolicyKit-0.9.tar.gz) = 197262d1c48e55558dd4bd57d7bbd8734666129c
 Size (PolicyKit-0.9.tar.gz) = 1254318 bytes
-SHA1 (patch-aa) = 31f10985b2b9105aa260fd79a684468ca345ed7d
+SHA1 (patch-aa) = 2298e7ebfd425097cdf42c1074b61cbaf26a35aa
 SHA1 (patch-ab) = 32d9ecafd84ebf1329b17d4f5df9845591865772
 SHA1 (patch-ac) = cf4b1fcfec1f079c015672235996c5331801fb48
 SHA1 (patch-ad) = 7d34235b9672680a146fe676d84ccaa09432f52c
@@ -17,5 +17,6 @@ SHA1 (patch-ak) = d31933a6bb836311837c62a2fcf43b105d5464cf
 SHA1 (patch-al) = cd87d1c39bb38c70b8fa3170e90c641cc0029dc3
 SHA1 (patch-am) = ace4c1f393d2ced75024af147f50def686ddf4e2
 SHA1 (patch-an) = a0a54235fc72a52ace72a0d04df6c1383f7c583c
-SHA1 (patch-ao) = 0f9a87653f4902285c7420f6269e302eca896a1b
+SHA1 (patch-ao) = 8592d05a02e706abefef04ca6e8f4154c1a0f1eb
+SHA1 (patch-ap) = 0fb3be4e7af777b696a186aafb6102ec74d48fa1
 SHA1 (patch-authdb) = 449b8ac50f81cc0234e17e64bc9892ade7119028
