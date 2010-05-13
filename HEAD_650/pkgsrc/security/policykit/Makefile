@@ -70,6 +70,9 @@ SPECIAL_PERMS+=		${PREFIX}/libexec/polkit-revoke-helper \
 
 .include "../../mk/bsd.prefs.mk"
 
+CFLAGS.QNX+=	-D_LARGEFILE64_SOURCE
+LIBS.QNX+=	-lnbutil -lgetopt
+
 .if ${OPSYS} == "NetBSD" || ${OPSYS} == "DragonFly"
 post-install:
 	${INSTALL_DATA} ${FILESDIR}/PolicyKit.conf.NetBSD ${DESTDIR}${EGDIR}/PolicyKit.conf
@@ -85,5 +88,8 @@ pre-configure:
 .include "../../textproc/xmlcatmgr/buildlink3.mk"
 .include "../../sysutils/dbus/buildlink3.mk"
 .include "../../sysutils/dbus-glib/buildlink3.mk"
+.if ${OPSYS} == "QNX"
+.include "../../devel/libgetopt/buildlink3.mk"
+.endif
 .include "../../mk/pam.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"
