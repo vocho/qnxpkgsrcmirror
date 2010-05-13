@@ -1,0 +1,26 @@
+$NetBSD$
+
+--- src/tests.c.orig	2009-06-02 18:59:32.000000000 +0000
++++ src/tests.c
+@@ -513,7 +513,11 @@ test_bye (gnutls_session_t session)
+     return TEST_FAILED;
+ 
+ #ifndef _WIN32
++#ifndef __QNXNTO__
+   old = siginterrupt (SIGALRM, 1);
++#else
++  /* interrupt is the default */
++#endif
+   alarm (secs);
+ #else
+   setsockopt ((int) gnutls_transport_get_ptr (session), SOL_SOCKET,
+@@ -527,7 +531,9 @@ test_bye (gnutls_session_t session)
+   while (ret > 0);
+ 
+ #ifndef _WIN32
++#ifndef __QNXNTO__
+   siginterrupt (SIGALRM, old);
++#endif
+ #else
+   if (WSAGetLastError () == WSAETIMEDOUT ||
+       WSAGetLastError () == WSAECONNABORTED)
