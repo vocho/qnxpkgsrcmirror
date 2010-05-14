@@ -4,3 +4,4 @@ SHA1 (libgnomeui-2.24.2.tar.bz2) = 8b9e796f0c78b4b42b2f0bac0c9baf821c3bdc9f
 RMD160 (libgnomeui-2.24.2.tar.bz2) = 29f9c425c9b8a137228688b9f614e9b46cfa136b
 Size (libgnomeui-2.24.2.tar.bz2) = 1526889 bytes
 SHA1 (patch-aa) = 0f68aee3a92a4af01471eb8c3890769a587893a5
+SHA1 (patch-ab) = ec9114e40a8c32602e464e0f5d768520cb85290c
