@@ -26,3 +26,8 @@ CONFLICTS+=	gnome-applets<2.22.0
 .include "../../x11/gtk2/buildlink3.mk"
 .include "../../net/libsoup24/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"
+.if ${OPSYS} == "QNX"
+# Probably need to port gweather-timezone.c to parse /etc/timezone/uc_tz_t
+CONFIGURE_ARGS+=	--with-zoneinfo-dir=/dev/null
+.endif
+
