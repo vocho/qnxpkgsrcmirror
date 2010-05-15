@@ -1,13 +1,13 @@
 $NetBSD: patch-ab,v 1.5 2009/06/02 17:10:53 drochner Exp $
 
---- configure.orig	2009-05-28 19:13:31.000000000 +0200
+--- configure.orig	2009-05-28 17:13:31.000000000 +0000
 +++ configure
 @@ -3802,7 +3802,7 @@ SHARED_EXTENSION=""
  STATIC_EXTENSION=""
  OBJECT_EXTENSION=""
  case "$target_os" in
 -     *bsd*|linux*|beos|irix*|solaris*)
-+     *bsd*|linux*|beos|irix*|solaris*|dragonfly*)
++     *bsd*|linux*|beos|irix*|solaris*|dragonfly*|*qnx6*)
  	echo "$as_me:$LINENO: result: .so .a .o" >&5
  echo "${ECHO_T}.so .a .o" >&6
  	STATIC_EXTENSION="a"
@@ -16,7 +16,7 @@ $NetBSD: patch-ab,v 1.5 2009/06/02 17:10:53 drochner Exp $
  	SPECIFIC_CFLAGS="-fPIC"
  	;;
 -     *bsd*|irix*)
-+     *bsd*|dragonfly*|irix*)
++     *bsd*|dragonfly*|irix*|*qnx6*)
  	echo "$as_me:$LINENO: result: ok" >&5
  echo "${ECHO_T}ok" >&6
  	STATIC_LIB="libxvidcore.\$(STATIC_EXTENSION)"
@@ -41,7 +41,7 @@ $NetBSD: patch-ab,v 1.5 2009/06/02 17:10:53 drochner Exp $
  echo $ECHO_N "checking for asm object format... $ECHO_C" >&6
         case "$target_os" in
 -           *bsd*|linux*|beos|irix*|solaris*)
-+           *bsd*|linux*|beos|irix*|solaris*|dragonfly*)
++           *bsd*|linux*|beos|irix*|solaris*|dragonfly*|*qnx6*)
                 if test "$ARCHITECTURE" = "X86_64" ; then
                     echo "$as_me:$LINENO: result: elf64" >&5
  echo "${ECHO_T}elf64" >&6
@@ -59,3 +59,46 @@ $NetBSD: patch-ab,v 1.5 2009/06/02 17:10:53 drochner Exp $
         esac
  
         AS="$chosen_asm_prog"
+@@ -4526,13 +4533,13 @@ echo "${ECHO_T}$ac_cv_header_pthread_h" 
+ 
+ fi
+ if test $ac_cv_header_pthread_h = yes; then
+-  echo "$as_me:$LINENO: checking for pthread_create in -lpthread" >&5
+-echo $ECHO_N "checking for pthread_create in -lpthread... $ECHO_C" >&6
++  echo "$as_me:$LINENO: checking for pthread_create in ${PTHREAD_LIB}" >&5
++echo $ECHO_N "checking for pthread_create in ${PTHREAD_LIB}... $ECHO_C" >&6
+ if test "${ac_cv_lib_pthread_pthread_create+set}" = set; then
+   echo $ECHO_N "(cached) $ECHO_C" >&6
+ else
+   ac_check_lib_save_LIBS=$LIBS
+-LIBS="-lpthread  $LIBS"
++LIBS="${PTHREAD_LIB}  $LIBS"
+ cat >conftest.$ac_ext <<_ACEOF
+ /* confdefs.h.  */
+ _ACEOF
+@@ -4591,13 +4598,13 @@ fi
+ echo "$as_me:$LINENO: result: $ac_cv_lib_pthread_pthread_create" >&5
+ echo "${ECHO_T}$ac_cv_lib_pthread_pthread_create" >&6
+ if test $ac_cv_lib_pthread_pthread_create = yes; then
+-  echo "$as_me:$LINENO: checking for pthread_join in -lpthread" >&5
+-echo $ECHO_N "checking for pthread_join in -lpthread... $ECHO_C" >&6
++  echo "$as_me:$LINENO: checking for pthread_join in ${PTHREAD_LIB}" >&5
++echo $ECHO_N "checking for pthread_join in ${PTHREAD_LIB}... $ECHO_C" >&6
+ if test "${ac_cv_lib_pthread_pthread_join+set}" = set; then
+   echo $ECHO_N "(cached) $ECHO_C" >&6
+ else
+   ac_check_lib_save_LIBS=$LIBS
+-LIBS="-lpthread  $LIBS"
++LIBS="${PTHREAD_LIB}  $LIBS"
+ cat >conftest.$ac_ext <<_ACEOF
+ /* confdefs.h.  */
+ _ACEOF
+@@ -4657,7 +4664,7 @@ echo "$as_me:$LINENO: result: $ac_cv_lib
+ echo "${ECHO_T}$ac_cv_lib_pthread_pthread_join" >&6
+ if test $ac_cv_lib_pthread_pthread_join = yes; then
+   SPECIFIC_CFLAGS="$SPECIFIC_CFLAGS -DHAVE_PTHREAD"
+-			SPECIFIC_LDFLAGS="$SPECIFIC_LDFLAGS -lpthread"
++			SPECIFIC_LDFLAGS="$SPECIFIC_LDFLAGS ${PTHREAD_LIB}"
+ else
+   { echo "$as_me:$LINENO: WARNING: Pthread not supported. No SMP support" >&5
+ echo "$as_me: WARNING: Pthread not supported. No SMP support" >&2;}

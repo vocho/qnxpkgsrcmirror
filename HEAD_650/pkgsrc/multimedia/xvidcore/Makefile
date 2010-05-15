@@ -13,6 +13,8 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 
 .include "../../mk/bsd.prefs.mk"
 
+CONFIGURE_ENV+=		PTHREAD_LIB="${PTHREAD_LDFLAGS} ${PTHREAD_LIBS}"
+
 # the resulting objects from the asm don't link correctly on Solaris.
 # nor on amd64 -- they are not PIC, but the ABI demands it
 # big patch available from Gentoo, if someone is interested:
@@ -50,4 +52,5 @@ post-install:
 	${LN} -sf ${DESTDIR}${PREFIX}/lib/libxvidcore.4.dylib ${DESTDIR}${PREFIX}/lib/libxvidcore.dylib
 .endif
 
+.include "../../mk/pthread.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"
