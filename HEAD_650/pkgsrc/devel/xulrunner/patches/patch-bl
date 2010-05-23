@@ -1,0 +1,12 @@
+$NetBSD$
+
+--- content/base/src/Makefile.in.orig	2010-04-02 16:02:18.000000000 +0000
++++ content/base/src/Makefile.in
+@@ -199,6 +199,7 @@ INCLUDES	+= \
+ 		-I$(srcdir)/../../../layout/style \
+ 		-I$(srcdir)/../../../dom/base \
+ 		-I$(srcdir)/../../xml/document/src \
++		-I$(srcdir)/../../media \
+ 		-I$(topsrcdir)/xpcom/io \
+ 		$(NULL)
+ 
