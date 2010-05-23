@@ -1,12 +1,18 @@
 # $NetBSD: options.mk,v 1.7 2010/03/16 15:57:02 tnn Exp $
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.xulrunner
-PKG_SUPPORTED_OPTIONS=	debug mozilla-jemalloc gnome
+PKG_SUPPORTED_OPTIONS=	debug mozilla-jemalloc gnome audio
 
-PLIST_VARS+=	jit gnome debug
+PLIST_VARS+=	jit gnome debug audio
 
 .if ${OPSYS} == "Linux" || ${OPSYS} == "SunOS"
 PKG_SUGGESTED_OPTIONS+=	mozilla-jemalloc
+.endif
+
+
+# until QNX audio is figured out
+.if ${OPSYS} != "QNX"
+PKG_SUGGESTED_OPTIONS+=	audio
 .endif
 
 .if !empty(MACHINE_ARCH:Mi386) || !empty(MACHINE_ARCH:Msparc) || \
@@ -19,6 +25,14 @@ NANOJIT_ARCH.sparc=	Sparc
 .endif
 
 .include "../../mk/bsd.options.mk"
+
+
+.if !empty(PKG_OPTIONS:Maudio)
+CONFIGURE_ARGS+=	--enable-ogg --enable-wave
+PLIST.audio=		yes
+.else
+CONFIGURE_ARGS+=	--disable-ogg --disable-wave
+.endif
 
 .if !empty(PKG_OPTIONS:Mgnome)
 .include "../../devel/libgnomeui/buildlink3.mk"
