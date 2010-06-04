@@ -1,0 +1,13 @@
+$NetBSD$
+
+--- nsprpub/pr/include/obsolete/protypes.h.orig	2010-04-02 16:02:56.000000000 +0000
++++ nsprpub/pr/include/obsolete/protypes.h
+@@ -88,7 +88,7 @@ typedef PRIntn intn;
+  * uint
+  */
+ 
+-#if !defined(XP_BEOS) && !defined(XP_OS2) && !defined(XP_UNIX) || defined(NTO)
++#if !defined(XP_BEOS) && !defined(XP_OS2) && !defined(XP_UNIX)
+ typedef PRUintn uint;
+ #endif
+ 

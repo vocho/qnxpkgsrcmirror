@@ -1,6 +1,6 @@
 $NetBSD: patch-ae,v 1.1.1.1 2009/08/05 02:59:48 tnn Exp $
 
---- nsprpub/pr/src/misc/prnetdb.c.orig	2009-06-29 18:15:07.000000000 +0200
+--- nsprpub/pr/src/misc/prnetdb.c.orig	2010-04-02 16:02:56.000000000 +0000
 +++ nsprpub/pr/src/misc/prnetdb.c
 @@ -114,6 +114,11 @@ PRLock *_pr_dnsLock = NULL;
  #define _PR_HAVE_5_ARG_GETPROTO_R
@@ -19,7 +19,7 @@ $NetBSD: patch-ae,v 1.1.1.1 2009/08/05 02:59:48 tnn Exp $
  
  #elif (defined(DARWIN) && defined(HAVE_GETIFADDRS)) || defined(FREEBSD) \
 -    || defined(NETBSD) || defined(OPENBSD)
-+    || defined(NETBSD) || defined(OPENBSD) || defined(DRAGONFLY)
++    || defined(NETBSD) || defined(OPENBSD) || defined(DRAGONFLY) || defined(NTO)
  
  /*
   * Use the BSD getifaddrs function.
