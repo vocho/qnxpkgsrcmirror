@@ -1,0 +1,17 @@
+$NetBSD$
+
+--- src/auth/digest/auth_digest.cc.orig	2010-06-15 18:45:18.000000000 +0000
++++ src/auth/digest/auth_digest.cc
+@@ -585,7 +585,11 @@ AuthDigestConfig::configured() const
+ {
+     if ((authenticate != NULL) &&
+             (authenticateChildren != 0) &&
+-            (digestAuthRealm != NULL) && (noncemaxduration > -1))
++            (digestAuthRealm != NULL) && (
++#ifdef __QNXNTO__
++	    (int)
++#endif
++	    noncemaxduration > -1))
+         return true;
+ 
+     return false;

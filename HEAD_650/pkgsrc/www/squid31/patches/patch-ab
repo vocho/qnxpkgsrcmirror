@@ -1,0 +1,19 @@
+$NetBSD$
+
+--- src/acl/TimeData.cc.orig	2010-03-29 10:02:56.000000000 +0000
++++ src/acl/TimeData.cc
+@@ -89,7 +89,13 @@ ACLTimeData::match(time_t when)
+                data->start  << "-" << data->stop  << ", weekbits=" <<
+                std::hex << data->weekbits);
+ 
+-        if (t >= data->start && t <= data->stop && (data->weekbits & (1 << tm.tm_wday)))
++        if (
++#ifndef __QNXNTO__
++	    t >= data->start && t <= data->stop && (data->weekbits & (1 << tm.tm_wday))
++#else
++	    (int)t >= data->start && (int)t <= data->stop && (data->weekbits & (1 << tm.tm_wday))
++#endif
++	    )
+             return 1;
+ 
+         data = data->next;
