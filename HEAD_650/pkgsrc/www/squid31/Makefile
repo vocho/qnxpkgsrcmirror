@@ -21,6 +21,8 @@ GNU_CONFIGURE=		yes
 CONFIGURE_ARGS+=	--with-default-user=${SQUID_USER}
 CONFIGURE_ARGS+=	--with-pidfile=${VARBASE}/run/squid.pid
 
+CFLAGS.QNX+=		-D__NO_EXT_QNX
+
 EGFILES+=     errors/errorpage.css
 CONF_FILES+=  ${PREFIX}/${EGDIR}/errorpage.css ${PKG_SYSCONFDIR}/errorpage.css
 
@@ -31,5 +33,9 @@ SQUID_NTLM_AUTH_HELPERS?=  fakeauth
 post-build:
 	${CP} -pf ${WRKSRC}/src/squid.conf.documented \
 	  ${WRKSRC}/src/squid.conf.default
+
+.if ${OPSYS} == "QNX"
+.include "../../sysutils/s5ipc/buildlink3.mk"
+.endif
 
 .include "../../mk/bsd.pkg.mk"
