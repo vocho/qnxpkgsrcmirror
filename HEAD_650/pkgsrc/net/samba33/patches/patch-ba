@@ -1,0 +1,23 @@
+$NetBSD$
+
+--- lib/system.c.orig	2010-03-08 20:08:36.000000000 +0000
++++ lib/system.c
+@@ -2481,6 +2481,10 @@ int sys_getnameinfo(const struct sockadd
+ 			size_t servlen,
+ 			int flags)
+ {
++	struct sockaddr_storage sa_tmp;
++
++	memcpy(&sa_tmp, psa, salen);
++	psa = (const struct sockaddr *)&sa_tmp;
+ 	/*
+ 	 * For Solaris we must make sure salen is the
+ 	 * correct length for the incoming sa_family.
+@@ -2494,6 +2498,7 @@ int sys_getnameinfo(const struct sockadd
+ 		}
+ #endif
+ 	}
++	sa_tmp.ss_len = salen;
+ 	return getnameinfo(psa, salen, host, hostlen, service, servlen, flags);
+ }
+ 
