@@ -1,0 +1,30 @@
+$NetBSD$
+
+--- helpers/basic_auth/YP/nis_support.c.orig	2010-03-29 10:02:56.000000000 +0000
++++ helpers/basic_auth/YP/nis_support.c
+@@ -2,6 +2,20 @@
+  * Written By Rabellino Sergio (rabellino@di.unito.it) For Solaris 2.x
+  */
+ 
++//NO NIS SUPPORT ON QNX (for now?)
++#ifdef __QNX__
++
++#include <stdlib.h>
++#include <sys/types.h>
++
++#include "nis_support.h"
++char * get_nis_password(char *user, char *nisdomain, char *nismap)
++{
++    return NULL;
++}
++
++#else
++
+ #include <stdlib.h>
+ #include <stdio.h>
+ #include <string.h>
+@@ -51,3 +65,4 @@ get_nis_password(char *user, char *nisdo
+         return NULL;
+     }
+ }
++#endif

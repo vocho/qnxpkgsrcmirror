@@ -1,0 +1,17 @@
+$NetBSD$
+
+--- src/htcp.cc.orig	2010-03-29 10:02:56.000000000 +0000
++++ src/htcp.cc
+@@ -894,10 +894,10 @@ htcpTstReply(htcpDataHeader * dhdr, Stor
+         mb.reset();
+         hdr.reset();
+ 
+-        if (e && e->expires > -1)
++        if (e && (int)e->expires > -1)
+             hdr.putTime(HDR_EXPIRES, e->expires);
+ 
+-        if (e && e->lastmod > -1)
++        if (e && (int)e->lastmod > -1)
+             hdr.putTime(HDR_LAST_MODIFIED, e->lastmod);
+ 
+         hdr.packInto(&p);

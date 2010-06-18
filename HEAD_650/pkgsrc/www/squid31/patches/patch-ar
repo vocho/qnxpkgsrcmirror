@@ -1,0 +1,22 @@
+$NetBSD$
+
+--- src/store.cc.orig	2010-03-29 10:02:57.000000000 +0000
++++ src/store.cc
+@@ -1485,7 +1485,7 @@ StoreEntry::timestampsSet()
+ {
+     const HttpReply *reply = getReply();
+     time_t served_date = reply->date;
+-    int age = reply->header.getInt(HDR_AGE);
++    unsigned int age = (unsigned int)reply->header.getInt(HDR_AGE);
+     /*
+      * The timestamp calculations below tries to mimic the properties
+      * of the age calculation in RFC2616 section 13.2.3. The implementaion
+@@ -1509,7 +1509,7 @@ StoreEntry::timestampsSet()
+         if (squid_curtime > age)
+             served_date = squid_curtime - age;
+ 
+-    if (reply->expires > 0 && reply->date > -1)
++    if (reply->expires > 0 && (int)reply->date > -1)
+         expires = served_date + (reply->expires - reply->date);
+     else
+         expires = reply->expires;
