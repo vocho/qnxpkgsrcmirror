@@ -22,6 +22,7 @@ CONFIGURE_ARGS+=	--with-default-user=${SQUID_USER}
 CONFIGURE_ARGS+=	--with-pidfile=${VARBASE}/run/squid.pid
 
 CFLAGS.QNX+=		-D__NO_EXT_QNX
+LIBS.QNX+=		-ls5ipc
 
 EGFILES+=     errors/errorpage.css
 CONF_FILES+=  ${PREFIX}/${EGDIR}/errorpage.css ${PKG_SYSCONFDIR}/errorpage.css

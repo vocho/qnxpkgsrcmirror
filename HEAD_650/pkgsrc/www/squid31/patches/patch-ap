@@ -1,0 +1,31 @@
+$NetBSD$
+
+--- src/refresh.cc.orig	2010-03-29 10:02:56.000000000 +0000
++++ src/refresh.cc
+@@ -160,7 +160,7 @@ refreshStaleness(const StoreEntry * entr
+     /** \par
+      * Check for an explicit expiration time (Expires: header).
+      */
+-    if (entry->expires > -1) {
++    if ((int)entry->expires > -1) {
+         sf->expires = true;
+ 
+         if (entry->expires > check_time) {
+@@ -189,7 +189,7 @@ refreshStaleness(const StoreEntry * entr
+     /** \par
+      * Try the last-modified factor algorithm:  refresh_pattern n% percentage of Last-Modified: age.
+      */
+-    if (entry->lastmod > -1 && entry->timestamp > entry->lastmod) {
++    if ((int)entry->lastmod > -1 && entry->timestamp > entry->lastmod) {
+         /*
+          * stale_age is the Age of the response when it became/becomes
+          * stale according to the last-modified factor algorithm.
+@@ -323,7 +323,7 @@ refreshCheck(const StoreEntry * entry, H
+                     }
+ 
+ #endif
+-                    if (age > cc->max_age) {
++                    if ((int)age > (int)cc->max_age) {
+                         debugs(22, 3, "refreshCheck: YES: age > client-max-age");
+                         return STALE_EXCEEDS_REQUEST_MAX_AGE_VALUE;
+                     }
