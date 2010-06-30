@@ -11,3 +11,12 @@ $NetBSD: patch-ac,v 1.3 2005/04/08 11:54:05 adam Exp $
  	ClientData rfdc, wfdc;
  	
  	if (echo) {
+@@ -1087,7 +1087,7 @@ when trapping, see below in child half o
+ 	/* according to Stevens - Adv. Prog..., p 642 */
+ 	/* Oops, it appears that the CIBAUD is on Linux also */
+ 	/* so let's try without... */
+-#ifdef __QNX__
++#if defined(__QNX__) && !defined(__QNXNTO__)
+ 	if (tcsetct(0, getpid()) == -1) {
+ 	  restore_error_fd
+ 	  expErrorLog("failed to get controlling terminal using TIOCSCTTY");
