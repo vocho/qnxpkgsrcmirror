@@ -27,4 +27,5 @@ PKGCONFIG_OVERRIDE+=	libproxy-1.0.pc.in
 
 #.include "../../lang/python/extension.mk"
 .include "../../mk/dlopen.buildlink3.mk"
+.include "../../mk/pthread.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"
