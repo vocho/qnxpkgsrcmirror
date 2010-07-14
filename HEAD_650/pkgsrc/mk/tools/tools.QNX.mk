@@ -9,11 +9,9 @@ TOOLS_PLATFORM.bison?=          ${QNX_HOST}/usr/bin/bison
 TOOLS_PLATFORM.bison-yacc?=     ${QNX_HOST}/usr/bin/bison -y
 .endif
 .if exists(/usr/bin/bzcat)
-#PR 76380
-#TOOLS_PLATFORM.bzcat?=		/usr/bin/bzcat
+TOOLS_PLATFORM.bzcat?=		/usr/bin/bzcat
 .endif
-#PR 76380
-#TOOLS_PLATFORM.bzip2?=		/usr/bin/bzip2
+TOOLS_PLATFORM.bzip2?=		/usr/bin/bzip2
 TOOLS_PLATFORM.cat?=		/bin/cat
 TOOLS_PLATFORM.chgrp?=		/bin/chgrp
 TOOLS_PLATFORM.chmod?=		/bin/chmod
@@ -36,8 +34,7 @@ TOOLS_PLATFORM.find?=		/usr/bin/find
 TOOLS_PLATFORM.flex?=		${QNX_HOST}/usr/bin/flex
 TOOLS_PLATFORM.ftp?=		/usr/bin/ftp
 
-# gawk PR 76483
-#TOOLS_PLATFORM.gawk?=		/usr/bin/gawk
+TOOLS_PLATFORM.gawk?=		/usr/bin/gawk
 TOOLS_PLATFORM.grep?=		/usr/bin/grep
 .if exists(${QNX_HOST}/usr/bin/groff)
 TOOLS_PLATFORM.groff?=		${QNX_HOST}/usr/bin/groff
