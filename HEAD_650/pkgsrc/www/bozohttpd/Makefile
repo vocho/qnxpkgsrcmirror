@@ -34,5 +34,8 @@ do-install:
 	${INSTALL_MAN} ${WRKSRC}/bozohttpd.8 \
 		${DESTDIR}${PREFIX}/${PKGMANDIR}/man8
 
+.if ${OPSYS} == "QNX"
+LDFLAGS+= -lnbutil
+.endif
 .include "../../security/openssl/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"
