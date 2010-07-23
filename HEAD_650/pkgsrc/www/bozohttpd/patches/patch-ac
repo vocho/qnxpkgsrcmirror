@@ -1,0 +1,54 @@
+$NetBSD$
+
+--- bozohttpd.c.orig	2009-05-23 02:16:22.000000000 +0000
++++ bozohttpd.c
+@@ -144,6 +144,9 @@
+ #include <syslog.h>
+ #include <time.h>
+ #include <unistd.h>
++#ifdef __QNXNTO__
++#include <dlfcn.h>
++#endif
+ 
+ #ifndef __attribute__
+ #define __attribute__(x)
+@@ -164,6 +167,9 @@ static	int	eflag;		/* don't clean enviro
+ 	int	Iflag_set;
+ 	int	dflag = 0;	/* debugging level */
+ 	char	*myname;	/* my name */
++#ifdef __QNXNTO__
++	char *percent_s_null = "(null)";
++#endif
+ 
+ #ifndef LOG_FTP
+ #define LOG_FTP LOG_DAEMON
+@@ -276,6 +282,10 @@ main(int argc, char **argv)
+ 	char	*cleanenv[1];
+ 	uid_t	uid;
+ 	int	c;
++#ifdef __QNXNTO__
++	void  	*hdl;
++	char	**percentsp;
++#endif
+ 
+ 	uid = 0;	/* XXX gcc */
+ 
+@@ -286,6 +296,18 @@ main(int argc, char **argv)
+ 
+ 	openlog(progname, LOG_PID|LOG_NDELAY, LOG_FTP);
+ 
++#ifdef __QNXNTO__
++	/*
++	 * Print something pretty rather than faulting
++	 * in stdio when NULL is passed to %s.
++	 */
++	if ((hdl = dlopen(NULL, RTLD_WORLD)) != NULL) {
++		if ((percentsp = dlsym(hdl, "output_for_percent_s_NULL")) != NULL)
++			*percentsp = percent_s_null;
++		dlclose(hdl);
++	}
++#endif
++
+ 	while ((c = getopt(argc, argv,
+ 			   "C:HI:M:S:U:VXZ:bc:defhi:np:rst:uv:x:z:")) != -1) {
+ 		switch(c) {
