@@ -115,5 +115,4 @@ post-install:
 	${INSTALL_SCRIPT} ${WRKSRC}/scripts/mysql_secure_installation.sh \
 		${DESTDIR}${PREFIX}/bin/mysql_secure_installation
 
-.include "../../mk/pthread.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"
