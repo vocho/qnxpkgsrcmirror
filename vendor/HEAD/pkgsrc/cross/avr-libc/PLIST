@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.7 2010/04/05 00:36:42 jakllsch Exp $
+@comment $NetBSD: PLIST,v 1.9 2010/06/15 13:21:08 reinoud Exp $
 avr/include/alloca.h
 avr/include/assert.h
 avr/include/avr/boot.h

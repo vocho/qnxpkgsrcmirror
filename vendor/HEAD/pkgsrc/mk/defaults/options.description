@@ -17,7 +17,10 @@ anope-dbencryption	Enable database encryption.
 anthy			Use Anthy as Japanese conversion program.
 anthy-2ch-dict		Include the 2ch dictionary.
 anthy-okinawa-dict	Include the okinawa dictionary.
-apache			Enable support for apache web server.
+apache			Enable support for Apache web server.
+apache-mpm-event	Use multi-threaded workers in Apache web server.
+apache-mpm-prefork	Use pre-forked workers in Apache web server.
+apache-mpm-worker	Use multiple processes of multi-threaded workers in Apache web server.
 apache-shared-modules	Build all modules as shared for apache22.
 ares			Use the ares library for asynchronous name resolution.
 aria2-metalink		Enable Metalink support.
@@ -53,6 +56,7 @@ catalog-sqlite		Store Bacula catalog in SQLite database.
 catalog-sqlite3		Store Bacula catalog in SQLite 3 database.
 cdparanoia		Use cdparanoia to rip CDDA media.
 cgi			Enable CGI support.
+chasen			Use ChaSen as the Japanese Morphological Analzer.
 cjk			Enable Chinese/Japanese/Korean support.
 clamav			Enable ClamAV support.
 claws-mail-jpilot	Add jpilot support.
@@ -91,6 +95,7 @@ djvu			Enable DjVuLibRe support.
 dkim-milter-arlib	ar(3) support for dkim-milter.
 dkim-stats		dkim-stats(8) support for dkim-milter.
 dnsrbl			Enable DNS Real-time Blackhole List support.
+dnssd			Enable DNS Service Discovery Protocol support.
 doc			Include the documentation.
 drac			Enable DRAC support.
 dri			Enable Direct Rendering support.
@@ -217,6 +222,7 @@ jdbc-mysql5		Enable MySQL JDBC driver.
 jpeg			Enable JPEG support.
 jwhois-enable-cache	Enable cache support.
 kde			Enable KDE support.
+kde3			Enable support for KDE 3.
 kde4			Enable support for KDE 4.
 kerberos		Enable Kerberos support.
 kerberos4		Enable Kerberos4 support.
@@ -283,8 +289,10 @@ libmtp			Enable MTP via libmtp support.
 libofx			Enable OFX support.
 libspiff		Use libspiff for XML shareable playlist support.
 libssh2 	 	Use libssh2 for SSHv2 protocol support.
+libthai			Use libthai for Thai word segmentation.
 libvisual		Enable libvisual (audio visualisation) support.
 libwww-aliases		Install aliases for p5-libwww (e.g. HEAD, GET etc.).
+libusb			Enable USB access.
 libxml2			Use the libxml2 library for XML support.
 liferea-gtkhtml		Use libgtkhtml2 to render HTML.
 liferea-mozilla		Use xulrunner to render HTML.
@@ -293,6 +301,8 @@ links-zlib		Enable zlib support for the links WWW browser.
 live			Enable live555 support.
 lprng-priv-ports	Connections must be made from privileged ports.
 lprng-suid		Install LPRng executables setuid root.
+lsof-more-secure	Only allow root to view all open files with lsof.
+lsof-less-secure-sockets	If 'lsof-more-secure' is set, allow all sockets to be viewed at all times.
 lua			Enable Lua support.
 lynx			Use and enable support for the lynx browser.
 lzma			Enable LZMA (de)compression support.
@@ -304,6 +314,7 @@ mac			Enable Monkey's Audio Codec support.
 mad			Enable usage of the mad library to play MP3 files.
 maintainer-zts		Enable the Zend Thread Safety option for PHP.
 marble			Enable marble (virtual globe) support.
+mecab			Use MeCab as the Japanese Morphological Analzer.
 mex			Enable matlab mex support (Linux and Solaris only).
 migemo			Enable migemo (Japanese text search tool/library) support.
 mikmod			Enable MikMod sound library.
@@ -318,6 +329,7 @@ mozilla			Use mozilla as gecko rendering engine.
 mozilla-jemalloc	Enable building with Mozilla'a jemalloc.
 mozilla-jit		Enable nanojit javascript acceleration.
 mozilla-lightning	Enable the lightning calendar extension.
+mozilla-enigmail	Enable the Enigmail OpenPGP extension.
 mozilla-single-profile	Enable single profiles on mozilla browsers.
 mp3tunes		Enable support for mp3tunes.com.
 mpcdec			Enable the portable Musepack decoder library.
@@ -332,7 +344,7 @@ mplayer-runtime-cpudetection	Enable CPU detection at run time.
 mplayer-win32		Enable usage of Win32 DLLs (codecs).
 mrtg-snmpv3		Enable SNMPv3 support.
 mstats			Enable memory statistics.
-mutt-compressed-mbox    Enable compressed mailbox support in mutt.
+mutt-compressed-mbox	Enable compressed mailbox support in mutt.
 mutt-hcache		Enable header caching in mutt.
 mutt-sidebar		Enable the mutt mailbox sidebar patch.
 mutt-smtp		Enable SMTP support in mutt.
@@ -382,6 +394,7 @@ pinepwd			Enable $HOME/.pinepwd stored IMAP password file.
 pinfo-native-curses	Use NetBSD native curses rather than ncurses.
 pkcs11			Use certificate-on-a-stick (or card) support.
 png			Enable PNG support.
+poppler			Enable poppler-utils support.
 postfix-milter		Build the milter with support for the Postfix MTA.
 postfix-stress		Enable Postfix stress-adaptive behaviour.
 prime			Use Prime for Kana-to-Kanji conversion.
@@ -401,7 +414,8 @@ qmail-realrcptto	Patch to SMTP-reject nonexistent recipients.
 qmail-viruscan		Patch to SMTP-reject certain types of MIME attachments.
 qpopper-servermode	Enable server mode.
 qt			Enable support for QT.
-quartz			Enable Quartz support on Mac OS X.	.
+qt3			Enable support for QT3.
+quartz			Enable Quartz support on Mac OS X.
 readline		Enable use of GNU readline library.
 rsaref			Use RSAREF library.
 ruby			Enable Ruby support.
@@ -421,9 +435,12 @@ sendmail-milter		Build the milter with support for the Sendmail MTA.
 sendmail-socketmap	Enable Sendmail SOCKETMAP support.
 serialconsole		Enable use of serial console.
 sieve			Enable sieve support.
+sigver			Enable signature verification for debugging purposes.
 simd			Enable MMX/3DNOW/SSE/Altivec support.
 sj3			Use SJ3 for Kana-to-Kanji conversion.
 skey			Enable S/Key support.
+skk			Use SKK for Kana-to-Kanji conversion.
+skkdic-expr2		Enable fast skkdic-expr tool.
 slang			Enable S-Lang support.
 slp			Enable Service Location Protocol support.
 small-net		Tune for a smaller networks.
@@ -436,6 +453,7 @@ snort-flexresp2		NEW Flexible Responses on hostile connection attempts.
 snort-prelude		Enable support for the Prelude Hybrid IDS system.
 socks4			Enable Socks4 support.
 socks5			Enable Socks5 support.
+softhsm			Enable SoftHSM for key management.
 spamassassin		Enable SpamAssassin support.
 spamassassin-perl-warnings	Enable Perl warnings at run-time.
 spamassassin-taint-checks	Enable Perl taint checks to improve security.
@@ -462,6 +480,7 @@ ssl			Enable SSL support.
 starttls		Enable TLS support.
 streamtuner-local	Enable local metadata support.
 streamtuner-xiph	Enable the Xiph plugin	.
+suexec			Enable suEXEC support in Apache web server.
 suhosin			Enable suhosin security enhancements for PHP.
 sun-jre-jce		Use unlimited strength cryptography extension.
 svg			Enable SVG support.
@@ -472,10 +491,12 @@ syslog			Enable syslog support.
 syslogng-spoof		Spoof the original source address of forwarded packets.
 tcl			Enable Tcl scripting support.
 tcpwrappers		Enable tcpwrappers support.
+tests			Build and install tests.
 theora			Use the theora codecs.
 threads			Enable threads support.
 tin-use-inn-spool	Use the INN spool directories.
 tls			Enable TLS support.
+tokyocabinet		Enable Tokyo Cabinet support.
 trn-inn			Use INN as NNTP client.
 trn-nntpclnt		Use nntpclnt as NNTP client.
 typolight-liveupdate	Allow using TYPOlight Live Update service.
@@ -512,6 +533,7 @@ w3m-image-imlib2	Use imlib2 as imaging library for W3m.
 w3m-lynx-key		Enable lynx-like key bindings.
 wavpack			Enable wavpack support.
 webkit-jit		Enable JIT compilation.
+webvmail		Install CGI script for voicemail.
 wide-curses		Enable wide curses support.
 winbind			Enable name-service switch daemon support using Windows Servers.
 wmf			Enable WMF support.

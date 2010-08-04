@@ -1,12 +1,12 @@
-# $NetBSD: options.mk,v 1.1 2008/10/26 23:17:21 wiz Exp $
+# $NetBSD: options.mk,v 1.4 2010/07/28 07:44:50 dsainty Exp $
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.evolution
-PKG_SUPPORTED_OPTIONS=	krb4 krb5 ssl
+PKG_SUPPORTED_OPTIONS=	krb5 ssl
 PKG_SUGGESTED_OPTIONS=	ssl
 
 .include "../../mk/bsd.options.mk"
 
-.if !empty(PKG_OPTIONS:Mssl) && !empty(PKG_OPTIONS:Mkrb[45])
+.if !empty(PKG_OPTIONS:Mssl) && !empty(PKG_OPTIONS:Mkrb5)
 # If Kerberos is enabled, the libcrypto library is linked in, which causes
 # function name conflicts with libsoftokn3 provided by Mozilla NSS.  These
 # cause runtime crashes, so don't allow these options to be specified
@@ -14,14 +14,10 @@ PKG_SUGGESTED_OPTIONS=	ssl
 PKG_FAIL_REASON+=	"Kerberos support conflicts with SSL"
 .endif
 
-.if !empty(PKG_OPTIONS:Mkrb4)
-CONFIGURE_ARGS+=	--with-krb4
-.else
-CONFIGURE_ARGS+=	--without-krb4
-.endif
-
 .if !empty(PKG_OPTIONS:Mkrb5)
-CONFIGURE_ARGS+=	--with-krb5
+CPPFLAGS+=		-I/usr/include/gssapi
+CPPFLAGS+=		-I/usr/include/krb5
+CONFIGURE_ARGS+=	--with-krb5=/usr
 .  include "../../mk/krb5.buildlink3.mk"
 .else
 CONFIGURE_ARGS+=	--without-krb5

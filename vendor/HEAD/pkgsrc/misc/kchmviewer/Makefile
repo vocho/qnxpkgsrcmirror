@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.11 2010/01/18 09:59:13 wiz Exp $
+# $NetBSD: Makefile,v 1.13 2010/06/13 22:44:59 wiz Exp $
 #
 
-DISTNAME=		kchmviewer-5.0
+DISTNAME=		kchmviewer-5.2
 PKGREVISION=		1
 CATEGORIES=		misc x11
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=kchmviewer/}
@@ -13,7 +13,7 @@ LICENSE=		gnu-gpl-v3
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
-WRKSRC=			${WRKDIR}/build-5.0
+WRKSRC=			${WRKDIR}/build-5.2
 
 USE_TOOLS+=		gmake
 USE_PKGLOCALEDIR=	YES

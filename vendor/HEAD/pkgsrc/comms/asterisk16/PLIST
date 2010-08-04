@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.9 2010/03/01 07:06:48 jnemeth Exp $
+@comment $NetBSD: PLIST,v 1.14 2010/05/22 22:21:45 jnemeth Exp $
 include/asterisk.h
 include/asterisk/_private.h
 include/asterisk/abstract_jb.h
@@ -250,7 +250,7 @@ lib/asterisk/modules/res_ael_share.so
 lib/asterisk/modules/res_agi.so
 lib/asterisk/modules/res_clioriginate.so
 lib/asterisk/modules/res_config_curl.so
-lib/asterisk/modules/res_config_ldap.so
+${PLIST.ldap}lib/asterisk/modules/res_config_ldap.so
 ${PLIST.unixodbc}lib/asterisk/modules/res_config_odbc.so
 lib/asterisk/modules/res_convert.so
 lib/asterisk/modules/res_crypto.so
@@ -270,7 +270,7 @@ libdata/asterisk/images/asterisk-intro.jpg
 libdata/asterisk/images/kpad2.jpg
 libdata/asterisk/keys/freeworlddialup.pub
 libdata/asterisk/keys/iaxtel.pub
-libdata/asterisk/moh/.asterisk-moh-opsound-wav
+libdata/asterisk/moh/.asterisk-moh-opsound-wav-2.03
 libdata/asterisk/moh/CHANGES-asterisk-moh-opsound-wav
 libdata/asterisk/moh/CREDITS-asterisk-moh-opsound-wav
 libdata/asterisk/moh/LICENSE-asterisk-moh-opsound-wav
@@ -284,10 +284,10 @@ libdata/asterisk/phoneprov/000000000000-phone.cfg
 libdata/asterisk/phoneprov/000000000000.cfg
 libdata/asterisk/phoneprov/polycom.xml
 libdata/asterisk/phoneprov/polycom_line.xml
-libdata/asterisk/sounds/.asterisk-core-sounds-en-gsm-1.4.17
-libdata/asterisk/sounds/en/CHANGES-asterisk-core-en-1.4.17
-libdata/asterisk/sounds/en/CREDITS-asterisk-core-en-1.4.17
-libdata/asterisk/sounds/en/LICENSE-asterisk-core-en-1.4.17
+libdata/asterisk/sounds/.asterisk-core-sounds-en-gsm-1.4.18
+libdata/asterisk/sounds/en/CHANGES-asterisk-core-en-1.4.18
+libdata/asterisk/sounds/en/CREDITS-asterisk-core-en-1.4.18
+libdata/asterisk/sounds/en/LICENSE-asterisk-core-en-1.4.18
 libdata/asterisk/sounds/en/agent-alreadyon.gsm
 libdata/asterisk/sounds/en/agent-incorrect.gsm
 libdata/asterisk/sounds/en/agent-loggedoff.gsm
@@ -318,10 +318,14 @@ libdata/asterisk/sounds/en/conf-lockednow.gsm
 libdata/asterisk/sounds/en/conf-muted.gsm
 libdata/asterisk/sounds/en/conf-noempty.gsm
 libdata/asterisk/sounds/en/conf-nonextended.gsm
+libdata/asterisk/sounds/en/conf-now-muted.gsm
+libdata/asterisk/sounds/en/conf-now-recording.gsm
+libdata/asterisk/sounds/en/conf-now-unmuted.gsm
 libdata/asterisk/sounds/en/conf-onlyone.gsm
 libdata/asterisk/sounds/en/conf-onlyperson.gsm
 libdata/asterisk/sounds/en/conf-otherinparty.gsm
 libdata/asterisk/sounds/en/conf-placeintoconf.gsm
+libdata/asterisk/sounds/en/conf-roll-callcomplete.gsm
 libdata/asterisk/sounds/en/conf-thereare.gsm
 libdata/asterisk/sounds/en/conf-unlockednow.gsm
 libdata/asterisk/sounds/en/conf-unmuted.gsm
@@ -383,6 +387,7 @@ libdata/asterisk/sounds/en/digits/9.gsm
 libdata/asterisk/sounds/en/digits/90.gsm
 libdata/asterisk/sounds/en/digits/a-m.gsm
 libdata/asterisk/sounds/en/digits/at.gsm
+libdata/asterisk/sounds/en/digits/billion.gsm
 libdata/asterisk/sounds/en/digits/day-0.gsm
 libdata/asterisk/sounds/en/digits/day-1.gsm
 libdata/asterisk/sounds/en/digits/day-2.gsm
@@ -407,11 +412,21 @@ libdata/asterisk/sounds/en/digits/h-20.gsm
 libdata/asterisk/sounds/en/digits/h-3.gsm
 libdata/asterisk/sounds/en/digits/h-30.gsm
 libdata/asterisk/sounds/en/digits/h-4.gsm
+libdata/asterisk/sounds/en/digits/h-40.gsm
 libdata/asterisk/sounds/en/digits/h-5.gsm
+libdata/asterisk/sounds/en/digits/h-50.gsm
 libdata/asterisk/sounds/en/digits/h-6.gsm
+libdata/asterisk/sounds/en/digits/h-60.gsm
 libdata/asterisk/sounds/en/digits/h-7.gsm
+libdata/asterisk/sounds/en/digits/h-70.gsm
 libdata/asterisk/sounds/en/digits/h-8.gsm
+libdata/asterisk/sounds/en/digits/h-80.gsm
 libdata/asterisk/sounds/en/digits/h-9.gsm
+libdata/asterisk/sounds/en/digits/h-90.gsm
+libdata/asterisk/sounds/en/digits/h-billion.gsm
+libdata/asterisk/sounds/en/digits/h-hundred.gsm
+libdata/asterisk/sounds/en/digits/h-million.gsm
+libdata/asterisk/sounds/en/digits/h-thousand.gsm
 libdata/asterisk/sounds/en/digits/hundred.gsm
 libdata/asterisk/sounds/en/digits/million.gsm
 libdata/asterisk/sounds/en/digits/minus.gsm
@@ -524,6 +539,7 @@ libdata/asterisk/sounds/en/letters/zed.gsm
 libdata/asterisk/sounds/en/minutes.gsm
 libdata/asterisk/sounds/en/pbx-invalid.gsm
 libdata/asterisk/sounds/en/pbx-invalidpark.gsm
+libdata/asterisk/sounds/en/pbx-parkingfailed.gsm
 libdata/asterisk/sounds/en/pbx-transfer.gsm
 libdata/asterisk/sounds/en/phonetic/9_p.gsm
 libdata/asterisk/sounds/en/phonetic/a_p.gsm
@@ -945,6 +961,9 @@ libdata/asterisk/static-http/docs/node277.html
 libdata/asterisk/static-http/docs/node278.html
 libdata/asterisk/static-http/docs/node279.html
 libdata/asterisk/static-http/docs/node28.html
+libdata/asterisk/static-http/docs/node280.html
+libdata/asterisk/static-http/docs/node281.html
+libdata/asterisk/static-http/docs/node282.html
 libdata/asterisk/static-http/docs/node29.html
 libdata/asterisk/static-http/docs/node3.html
 libdata/asterisk/static-http/docs/node30.html
@@ -1028,6 +1047,7 @@ libexec/agi-bin/agi-test.agi
 libexec/agi-bin/eagi-sphinx-test
 libexec/agi-bin/eagi-test
 libexec/agi-bin/jukebox.agi
+${PLIST.webvmail}libexec/cgi-bin/vmail
 man/man8/asterisk.8
 man/man8/astgenkey.8
 man/man8/autosupport.8
@@ -1045,6 +1065,57 @@ sbin/refcounter
 sbin/safe_asterisk
 sbin/stereorize
 sbin/streamplayer
+share/doc/asterisk/BUGS
+share/doc/asterisk/CHANGES
+share/doc/asterisk/COPYING
+share/doc/asterisk/CREDITS
+share/doc/asterisk/ChangeLog
+share/doc/asterisk/HOWTO_collect_debug_information.txt
+share/doc/asterisk/IAX2-security.txt
+share/doc/asterisk/India-CID.txt
+share/doc/asterisk/LICENSE
+share/doc/asterisk/PEERING
+share/doc/asterisk/README
+share/doc/asterisk/README-SERIOUSLY.bestpractices.txt
+share/doc/asterisk/UPGRADE-1.2.txt
+share/doc/asterisk/UPGRADE-1.4.txt
+share/doc/asterisk/UPGRADE-1.6.txt
+share/doc/asterisk/UPGRADE.txt
+share/doc/asterisk/Zaptel-to-DAHDI.txt
+share/doc/asterisk/asterisk-mib.txt
+share/doc/asterisk/backtrace.txt
+share/doc/asterisk/callfiles.txt
+share/doc/asterisk/chan_sip-perf-testing.txt
+share/doc/asterisk/cli.txt
+share/doc/asterisk/datastores.txt
+share/doc/asterisk/digium-mib.txt
+share/doc/asterisk/distributed_devstate.txt
+share/doc/asterisk/externalivr.txt
+share/doc/asterisk/jabber.txt
+share/doc/asterisk/janitor-projects.txt
+share/doc/asterisk/jingle.txt
+share/doc/asterisk/ldap.txt
+share/doc/asterisk/macroexclusive.txt
+share/doc/asterisk/manager_1_1.txt
+share/doc/asterisk/modules.txt
+share/doc/asterisk/osp.txt
+share/doc/asterisk/queue.txt
+share/doc/asterisk/realtimetext.txt
+share/doc/asterisk/res_config_sqlite.txt
+share/doc/asterisk/rtp-packetization.txt
+share/doc/asterisk/sip-retransmit.txt
+share/doc/asterisk/siptls.txt
+share/doc/asterisk/smdi.txt
+share/doc/asterisk/sms.txt
+share/doc/asterisk/snmp.txt
+share/doc/asterisk/speechrec.txt
+share/doc/asterisk/ss7.txt
+share/doc/asterisk/timing.txt
+share/doc/asterisk/unistim.txt
+share/doc/asterisk/valgrind.txt
+share/doc/asterisk/video.txt
+share/doc/asterisk/video_console.txt
+share/doc/asterisk/voicemail_odbc_postgresql.txt
 share/examples/asterisk/adsi.conf
 share/examples/asterisk/adtranvofr.conf
 share/examples/asterisk/agents.conf
@@ -1123,6 +1194,8 @@ share/examples/asterisk/users.conf
 share/examples/asterisk/voicemail.conf
 share/examples/asterisk/vpb.conf
 share/examples/rc.d/asterisk
+${PLIST.webvmail}share/httpd/htdocs/_asterisk/animlogo.gif
+${PLIST.webvmail}share/httpd/htdocs/_asterisk/play.gif
 @pkgdir libdata/asterisk/sounds/fr
 @pkgdir libdata/asterisk/sounds/es
 @pkgdir libdata/asterisk/firmware/iax

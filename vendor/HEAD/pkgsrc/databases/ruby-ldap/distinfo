@@ -1,5 +1,5 @@
-$NetBSD: distinfo,v 1.2 2009/12/21 07:00:02 taca Exp $
+$NetBSD: distinfo,v 1.4 2010/05/28 08:25:07 obache Exp $
 
-SHA1 (ruby-ldap-0.9.9.tar.bz2) = 4927852fa38295c551a8410e5e2e91fcf9031c5d
-RMD160 (ruby-ldap-0.9.9.tar.bz2) = 2e409a34606a0888cf1f8aa6d166446f418faccb
-Size (ruby-ldap-0.9.9.tar.bz2) = 55225 bytes
+SHA1 (ruby-ldap-0.9.11.tar.gz) = bccfec885a86a7da9b73c3a501dc77e355c2aa2e
+RMD160 (ruby-ldap-0.9.11.tar.gz) = d3faab093d15aedfdaf02832033f7ec9bb35a7f6
+Size (ruby-ldap-0.9.11.tar.gz) = 66621 bytes

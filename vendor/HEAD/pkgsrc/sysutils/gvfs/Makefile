@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.24 2010/01/26 19:30:14 drochner Exp $
+# $NetBSD: Makefile,v 1.27 2010/06/19 13:57:47 drochner Exp $
 #
 
 DISTNAME=	gvfs-1.4.3
@@ -77,5 +77,5 @@ BUILDLINK_API_DEPENDS.libsoup24+=	libsoup24>=2.25.1
 .include "../../net/libsoup24/buildlink3.mk"
 .include "../../textproc/libxml2/buildlink3.mk"
 .include "../../devel/GConf/buildlink3.mk"
-.include "../../security/gnome-keyring/buildlink3.mk"
+.include "../../security/libgnome-keyring/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

@@ -1,5 +1,5 @@
-$NetBSD: distinfo,v 1.2 2010/02/03 17:05:58 wiz Exp $
+$NetBSD: distinfo,v 1.4 2010/06/15 11:43:49 wiz Exp $
 
-SHA1 (JBidwatcher-2.1pre5.jar) = 55ec2739fa8c9548eaeeea6a9d12d4f22c23a6b4
-RMD160 (JBidwatcher-2.1pre5.jar) = e3160f875e4921724a0d8ec890fc574b8f40ef2a
-Size (JBidwatcher-2.1pre5.jar) = 4015375 bytes
+SHA1 (JBidwatcher-2.1pre8.jar) = e6c0b7f29ff501f7602ee29d90a911388751fab8
+RMD160 (JBidwatcher-2.1pre8.jar) = 54630ddde779fd04b294e43ac4a872f6251fe42c
+Size (JBidwatcher-2.1pre8.jar) = 4265955 bytes

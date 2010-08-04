@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.43 2010/04/04 11:40:25 tron Exp $
+# $NetBSD: Makefile,v 1.50 2010/08/03 20:45:50 tron Exp $
 
-DISTNAME=		wireshark-1.2.7
+DISTNAME=		wireshark-1.2.10
 CATEGORIES=		net
 MASTER_SITES=		http://www.wireshark.org/download/src/ \
 			${MASTER_SITE_SOURCEFORGE:=wireshark/}
@@ -16,7 +16,7 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 CONFLICTS+=		ethereal-[0-9]*
 
 USE_LANGUAGES=		c c++
-USE_TOOLS+=		gmake perl pkg-config
+USE_TOOLS+=		gmake perl pkg-config yacc lex
 
 USE_LIBTOOL=		YES
 SHLIBTOOL_OVERRIDE=	# empty
@@ -29,6 +29,8 @@ CONFIGURE_ARGS+=	--with-ssl=${SSLBASE:Q}
 CONFIGURE_ARGS+=	--with-pcap=${BUILDLINK_PREFIX.libpcap}
 CONFIGURE_ARGS+=	--with-zlib=${BUILDLINK_PREFIX.zlib}
 CONFIGURE_ARGS+=	--with-pcre=${BUILDLINK_PREFIX.pcre}
+CONFIGURE_ENV+=		ac_cv_path_YACCDUMMY=${TOOLS_PATH.yacc}
+CONFIGURE_ENV+=		ac_cv_path_LEXDUMMY=${TOOLS_PATH.lex}
 
 PTHREAD_OPTS+=		require
 

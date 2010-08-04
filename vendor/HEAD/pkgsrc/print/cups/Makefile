@@ -1,26 +1,25 @@
-# $NetBSD: Makefile,v 1.148 2010/04/18 21:56:36 sbd Exp $
+# $NetBSD: Makefile,v 1.169 2010/07/14 11:25:19 sbd Exp $
 #
 # The CUPS author is very good about taking back changes into the main
 # CUPS distribution.  The correct place to send patches or bug-fixes is:
 # cups-bugs@cups.org.
 
 DISTNAME=	cups-${DIST_VERS}-source
-PKGNAME=	cups-${VERS}
-BASE_VERS=	1.3.11
+PKGNAME=	cups-${DIST_VERS:S/-/./g}
+BASE_VERS=	1.4.3
 DIST_VERS=	${BASE_VERS}
-DIST_SUBDIR=	cups-${DIST_VERS}	# temp fix for updated distfile
-VERS=		${DIST_VERS:S/-/./g}
-PKGREVISION=	3
+PKGREVISION=	9
+
 CATEGORIES=	print
 MASTER_SITES=	http://ftp.easysw.com/pub/cups/${BASE_VERS}/ \
-		ftp://ftp.ntua.gr/pub/gnu/cups/${BASE_VERS}/ \
-		ftp://ftp.funet.fi/pub/mirrors/ftp.easysw.com/pub/cups/${BASE_VERS}/ \
-		ftp://ftp.fisek.com.tr/pub/cups/${BASE_VERS}/
+		ftp://ftp.easysw.com/pub/cups/${BASE_VERS}/ \
+		ftp://ftp.funet.fi/pub/mirrors/ftp.easysw.com/pub/cups/${BASE_VERS}/
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	sbd@NetBSD.org
 HOMEPAGE=	http://www.cups.org/
 COMMENT=	Common UNIX Printing System
+LICENSE=	gnu-gpl-v2 AND gnu-lgpl-v2
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
@@ -42,20 +41,25 @@ GNU_CONFIGURE=		yes
 CONFIGURE_ARGS+=	--localedir=${PREFIX}/${PKGLOCALEDIR}/locale
 CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFBASEDIR:Q}
 CONFIGURE_ARGS+=	--localstatedir=${VARBASE:Q}
-CONFIGURE_ARGS+=	--with-cachedir=${VARBASE:Q}/cache/cups
+CONFIGURE_ARGS+=	--with-cachedir=${CUPS_CACHE:Q}
 CONFIGURE_ARGS+=	--with-docdir=${PREFIX}/share/doc/cups
 CONFIGURE_ARGS+=	--with-serverbindir=${PREFIX}/libexec/cups
-CONFIGURE_ARGS+=	--with-rcdir=${RCD_SCRIPTS_DIR:Q}
 CONFIGURE_ARGS+=	--with-cups-user=${CUPS_USER:Q}
 CONFIGURE_ARGS+=	--with-cups-group=${CUPS_GROUP:Q}
+CONFIGURE_ARGS+=	--with-system-groups=${CUPS_SYSTEM_GROUPS:Q}
+CONFIGURE_ARGS+=	--enable-libpaper
+CONFIGURE_ARGS+=	--enable-libtool
+CONFIGURE_ARGS+=	--enable-jpeg
+CONFIGURE_ARGS+=	--enable-png
+CONFIGURE_ARGS+=	--enable-tiff
+CONFIGURE_ARGS+=	--enable-ssl
+CONFIGURE_ARGS+=	--enable-openssl
+CONFIGURE_ARGS+=	--enable-bannertops
+CONFIGURE_ARGS+=	--enable-texttops
 CONFIGURE_ARGS+=	--with-manext=bsd
-CONFIGURE_ARGS+=	--without-perl
 CONFIGURE_ARGS+=	--without-icondir
 CONFIGURE_ARGS+=	--without-menudir
-CONFIGURE_ARGS+=	--enable-libtool
-CONFIGURE_ARGS+=	--enable-ssl
-CONFIGURE_ARGS+=	--enable-gnutls=no
-CONFIGURE_ARGS+=	--enable-openssl
+CONFIGURE_ARGS+=	--without-perl
 CONFIGURE_ARGS+=	--without-php
 CONFIGURE_ARGS+=	--without-python
 CONFIGURE_ARGS+=	--without-java
@@ -69,31 +73,34 @@ CONFIGURE_ENV+=		DSOFLAGS=${LDFLAGS:M*:Q}
 # CUPS_GROUP	group of the CUPS administrator
 #
 CUPS_USER?=		lp
-CUPS_GROUP?=		sys
+CUPS_GROUP?=		lp
+CUPS_SYSTEM_GROUPS?=	${REAL_ROOT_GROUP}
 FILES_SUBST+=		CUPS_USER=${CUPS_USER:Q}
 FILES_SUBST+=		CUPS_GROUP=${CUPS_GROUP:Q}
+FILES_SUBST+=		CUPS_SYSTEM_GROUPS=${CUPS_SYSTEM_GROUPS:Q}
 
-PKG_GROUPS_VARS+=	CUPS_GROUP
+PKG_GROUPS_VARS+=	CUPS_GROUP CUPS_SYSTEM_GROUPS
 PKG_USERS_VARS+=	CUPS_USER
 
-BUILD_DEFS+=		VARBASE
+BUILD_DEFS+=		CUPS_USER CUPS_GROUP CUPS_SYSTEM_GROUPS VARBASE
 
 DOCDIR=			${PREFIX}/share/doc/cups
 EGDIR=			${PREFIX}/share/examples/cups
+MIMEDIR=		${PREFIX}/share/cups/mime
 PKG_SYSCONFSUBDIR=	cups
 CUPS_CONFDIR=		${PKG_SYSCONFDIR}
 CUPS_LOGDIR=		${VARBASE}/log/cups
 CUPS_REQUESTS=		${VARBASE}/spool/cups
+CUPS_CACHE=		${VARBASE}/cache/cups
+CUPS_STATEDIR=		${VARBASE}/run/cups
 
 PKG_GROUPS=		${CUPS_GROUP}
 PKG_USERS=		${CUPS_USER}:${CUPS_GROUP}
 PKG_GECOS.${CUPS_USER}=	Common UNIX Printing System user
 PKG_SHELL.${CUPS_USER}=	${SH}
 
-SPECIAL_PERMS=		${PREFIX}/bin/lppasswd ${CUPS_USER} ${CUPS_GROUP} 4555
 CONF_FILES=		${EGDIR}/cupsd.conf ${CUPS_CONFDIR}/cupsd.conf
-CONF_FILES+=		${EGDIR}/mime.convs ${CUPS_CONFDIR}/mime.convs
-CONF_FILES+=		${EGDIR}/mime.types ${CUPS_CONFDIR}/mime.types
+CONF_FILES+=		${EGDIR}/snmp.conf ${CUPS_CONFDIR}/snmp.conf
 RCD_SCRIPTS=		cupsd
 
 OWN_DIRS=		${CUPS_CONFDIR}
@@ -101,11 +108,13 @@ OWN_DIRS+=		${CUPS_CONFDIR}/interfaces
 OWN_DIRS+=		${CUPS_CONFDIR}/ppd
 OWN_DIRS+=		${PREFIX}/libexec/cups/driver
 OWN_DIRS+=		${CUPS_LOGDIR}
-OWN_DIRS_PERMS=		${CUPS_CONFDIR}/certs ${CUPS_USER} ${CUPS_GROUP} 0711
-OWN_DIRS_PERMS+=	${CUPS_CONFDIR}/ssl ${CUPS_USER} ${CUPS_GROUP} 0700
-OWN_DIRS_PERMS+=	${CUPS_REQUESTS} ${CUPS_USER} ${CUPS_GROUP} 0710
-OWN_DIRS_PERMS+=	${CUPS_REQUESTS}/tmp ${CUPS_USER} ${CUPS_GROUP} 1770
-OWN_DIRS_PERMS+=	${VARBASE}/cache/cups ${CUPS_USER} ${CUPS_GROUP} 0775
+OWN_DIRS+=		${CUPS_STATEDIR}
+OWN_DIRS_PERMS=		${CUPS_STATEDIR}/certs ${CUPS_USER} ${CUPS_GROUP} 0711
+OWN_DIRS_PERMS+=	${CUPS_CONFDIR}/ssl ${REAL_ROOT_USER} ${CUPS_GROUP} 0700
+OWN_DIRS_PERMS+=	${CUPS_REQUESTS} ${REAL_ROOT_USER} ${CUPS_GROUP} 0710
+OWN_DIRS_PERMS+=	${CUPS_REQUESTS}/tmp ${REAL_ROOT_USER} ${CUPS_GROUP} 1770
+OWN_DIRS_PERMS+=	${CUPS_CACHE} ${REAL_ROOT_USER} ${CUPS_GROUP} 0775
+OWN_DIRS_PERMS+=	${CUPS_CACHE}/rss ${REAL_ROOT_USER} ${CUPS_GROUP} 0775
 
 .include "../../devel/zlib/buildlink3.mk"
 .include "../../graphics/jpeg/buildlink3.mk"
@@ -121,35 +130,36 @@ SUBST_STAGE.paths=	post-patch
 SUBST_CLASSES+=		rpathfix
 SUBST_FILES.rpathfix=	cups-config.in
 SUBST_MESSAGE.rpathfix=	Adding rpath to cups-config.
-SUBST_SED.rpathfix=	-e 's|@EXPORT_LDFLAGS@|${COMPILER_RPATH_FLAG}${LOCALBASE}/lib|g'
+SUBST_SED.rpathfix=	-e 's|@EXPORT_LDFLAGS@|${COMPILER_RPATH_FLAG}${PREFIX}/lib|g'
 SUBST_STAGE.rpathfix=	post-patch
 
-INSTALLATION_DIRS=	${DOCDIR} ${EGDIR}
+INSTALLATION_DIRS=	${DOCDIR} ${EGDIR} ${MIMEDIR}
 INSTALL_ENV+=		DSTROOT=${DESTDIR:Q}
 
 pre-configure:
+.if !empty(CUPS_SYSTEM_GROUPS:M${CUPS_GROUP})
+	${ERROR_MSG} "CUPS_SYSTEM_GROUPS may not contain the CUPS_GROUP"
+	exit 1
+.endif
 	cd ${WRKSRC} && aclocal && autoconf
 
 post-extract:
 	${CP} ${FILESDIR}/cups.pam ${WRKDIR}/cups.pam
 
 post-install:
-	for file in LICENSE.txt README.txt; do				\
+	set -e; for file in LICENSE.txt README.txt; do			\
 		${INSTALL_DATA} ${WRKSRC}/$${file}			\
 		     ${DESTDIR}${DOCDIR}/$${file}; \
 	done
-	cd ${WRKSRC}/conf; for file in *.conf mime.convs mime.types; do	\
-		case $${file} in					\
-		pam.conf)						\
-			;;						\
-		*)							\
-			${INSTALL_DATA} $${file} 			\
-			    ${DESTDIR}${EGDIR}/$${file};		\
-			;;						\
-		esac;							\
+	set -e; cd ${WRKSRC}/conf; for file in cupsd.conf snmp.conf ; do \
+		${INSTALL_DATA} $${file} ${DESTDIR}${EGDIR}/$${file};	\
+	done
+	set -e; cd ${WRKSRC}/conf; for file in mime.convs mime.types; do \
+		${INSTALL_DATA} $${file} ${DESTDIR}${MIMEDIR}/$${file};	\
 	done
 .if !empty(PKG_OPTIONS:Mpam)
 	${INSTALL_DATA} ${WRKDIR}/cups.pam ${DESTDIR}${EGDIR}
 .endif
 
+.include "../../print/libpaper/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

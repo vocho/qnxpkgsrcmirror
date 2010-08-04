@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.79 2010/03/09 22:52:56 hubertf Exp $
+# $NetBSD: Makefile,v 1.81 2010/07/20 08:33:44 adam Exp $
 
-DISTNAME=	net-snmp-5.4.2.1
-PKGREVISION=	3
+DISTNAME=	net-snmp-5.4.3
 CATEGORIES=	net
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=net-snmp/}
 
@@ -16,8 +15,7 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_LIBTOOL=		yes
 GNU_CONFIGURE=		yes
-
-MAKE_JOBS_SAFE=		NO
+MAKE_JOBS_SAFE=		no
 
 MAKE_ENV+=	OPSYS=${OPSYS}
 
@@ -56,7 +54,7 @@ CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR}
 CONFIGURE_ARGS+=	--with-libwrap=${BUILDLINK_PREFIX.tcp_wrappers}/lib
 CONFIGURE_ARGS+=	--with-sys-contact=${NET_SNMP_SYS_CONTACT:Q}
 CONFIGURE_ARGS+=	--with-sys-location=${NET_SNMP_SYS_LOCATION:Q}
-CONFIGURE_ARGS+=	--with-install-prefix=${DESTDIR:Q}
+CONFIGURE_ARGS+=	--with-install-prefix=${DESTDIR}
 #
 # NOTE:  if you specify a logfile then this file will be written to by
 # default and although it can be disabled on the command line, the

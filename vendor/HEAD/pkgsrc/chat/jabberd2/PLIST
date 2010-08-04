@@ -1,7 +1,7 @@
-@comment $NetBSD: PLIST,v 1.11 2009/08/21 02:28:12 schnoebe Exp $
+@comment $NetBSD: PLIST,v 1.13 2010/06/16 07:56:29 adam Exp $
+bin/bdbdump.pl
 bin/c2s
 bin/jabberd
-bin/migrate.pl
 bin/pipe-auth.pl
 bin/router
 bin/s2s
@@ -19,7 +19,6 @@ lib/jabberd/mod_active.la
 lib/jabberd/mod_amp.la
 lib/jabberd/mod_announce.la
 lib/jabberd/mod_deliver.la
-lib/jabberd/mod_disco-publish.la
 lib/jabberd/mod_disco.la
 lib/jabberd/mod_echo.la
 lib/jabberd/mod_help.la
@@ -30,10 +29,11 @@ lib/jabberd/mod_iq-time.la
 lib/jabberd/mod_iq-vcard.la
 lib/jabberd/mod_iq-version.la
 lib/jabberd/mod_offline.la
+lib/jabberd/mod_pep.la
 lib/jabberd/mod_presence.la
 lib/jabberd/mod_privacy.la
-lib/jabberd/mod_roster.la
 lib/jabberd/mod_roster-publish.la
+lib/jabberd/mod_roster.la
 lib/jabberd/mod_session.la
 lib/jabberd/mod_status.la
 lib/jabberd/mod_template-roster.la
@@ -50,10 +50,10 @@ man/man8/jabberd.8
 man/man8/router.8
 man/man8/s2s.8
 man/man8/sm.8
+share/doc/jabberd/ChangeLog
 share/doc/jabberd/README
 share/doc/jabberd/README.protocol
 share/doc/jabberd/UPGRADE
-share/doc/jabberd/ChangeLog
 share/examples/jabberd/c2s.xml
 share/examples/jabberd/db-jd14-2-jd2.sql
 share/examples/jabberd/db-setup.mysql

@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.12 2009/08/12 02:31:19 obache Exp $
+# $NetBSD: Makefile,v 1.14 2010/07/14 08:20:14 wiz Exp $
 
-DISTNAME=	mono-addins-0.4
-PKGREVISION=	2
+DISTNAME=	mono-addins-0.5
 CATEGORIES=	devel
 MASTER_SITES=	http://ftp.novell.com/pub/mono/sources/mono-addins/
 EXTRACT_SUFX=	.tar.bz2
@@ -9,6 +8,7 @@ EXTRACT_SUFX=	.tar.bz2
 MAINTAINER=	kefren@NetBSD.org
 HOMEPAGE=	http://www.mono-project.com/Mono.Addins
 COMMENT=	Framework for creating extensible applications
+LICENSE=	mit
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 

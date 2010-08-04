@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.7 2010/04/10 02:45:04 markd Exp $
+# $NetBSD: Makefile,v 1.12 2010/07/14 11:11:16 sbd Exp $
 
 DISTNAME=	kdebase-runtime-${_KDE_VERSION}
+PKGREVISION=	1
 CATEGORIES=	x11
 COMMENT=	Runtime requirements for the KDE integrated X11 desktop
 
@@ -24,8 +25,6 @@ SUBST_FILES.paths=	kioslave/info/kde-info2html.conf
 SUBST_SED.paths=	-e 's,@LOCALBASE@,${LOCALBASE},g'
 SUBST_STAGE.paths=	post-patch
 
-REPLACE_BASH+= pics/oxygen/scalable/export_pngs.sh
-
 REPLACE_PERL+= \
 	khelpcenter/searchhandlers/khc_docbookdig.pl.cmake \
 	khelpcenter/searchhandlers/khc_htdig.pl.cmake \
@@ -43,9 +42,11 @@ INSTALLATION_DIRS+=	${PKGMANDIR}/man1
 .include "../../archivers/xz/buildlink3.mk"
 .include "../../graphics/exiv2/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
+BUILDLINK_ABI_DEPENDS.attica?=	attica>=0.1.4
 .include "../../misc/attica/buildlink3.mk"
 .include "../../multimedia/xine-lib/buildlink3.mk"
 .include "../../net/openslp/buildlink3.mk"
+.include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../x11/kdelibs4/buildlink3.mk"
 
 .include "../../mk/bsd.pkg.mk"

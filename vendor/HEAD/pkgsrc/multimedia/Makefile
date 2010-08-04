@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.162 2010/04/22 07:03:57 wiz Exp $
+# $NetBSD: Makefile,v 1.166 2010/07/28 09:05:38 drochner Exp $
 #
 
 COMMENT=	Multimedia utilities
@@ -30,6 +30,7 @@ SUBDIR+=	flashplayer
 SUBDIR+=	fuppes
 SUBDIR+=	fxtv
 SUBDIR+=	ggrab
+SUBDIR+=	gmediaserver
 SUBDIR+=	gmencoder
 SUBDIR+=	gmplayer
 SUBDIR+=	gnash
@@ -88,6 +89,7 @@ SUBDIR+=	ming
 SUBDIR+=	mjpegtools
 SUBDIR+=	mkv2mp4
 SUBDIR+=	mkvtoolnix
+SUBDIR+=	mkvtoolnix-old
 SUBDIR+=	mpeg-lib
 SUBDIR+=	mpeg4ip
 SUBDIR+=	mpeg_encode
@@ -104,6 +106,7 @@ SUBDIR+=	p5-GStreamer
 SUBDIR+=	p5-xmltv
 SUBDIR+=	phonon
 SUBDIR+=	php-ming
+SUBDIR+=	pitivi
 SUBDIR+=	pspvc
 SUBDIR+=	py-clutter-gst
 SUBDIR+=	py-gstreamer0.10
@@ -127,6 +130,7 @@ SUBDIR+=	totem-pl-parser
 SUBDIR+=	transcode
 SUBDIR+=	tstools
 SUBDIR+=	tvtime
+SUBDIR+=	ushare
 SUBDIR+=	vlc
 SUBDIR+=	vlc08
 SUBDIR+=	vls

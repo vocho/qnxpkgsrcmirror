@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.3 2010/01/20 13:44:02 wiz Exp $
+# $NetBSD: Makefile,v 1.6 2010/06/15 08:08:49 wiz Exp $
 #
 
-DISTNAME=	gssdp-0.7.1
+DISTNAME=	gssdp-0.7.2
+PKGREVISION=	1
 CATEGORIES=	net
 MASTER_SITES=	http://www.gupnp.org/sources/gssdp/
 
@@ -19,4 +20,5 @@ PKGCONFIG_OVERRIDE+=	gssdp-1.0.pc.in
 
 .include "../../devel/glib2/buildlink3.mk"
 .include "../../net/libsoup24/buildlink3.mk"
+.include "../../x11/gtk2/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.29 2009/08/25 11:57:45 wiz Exp $
+# $NetBSD: Makefile,v 1.31 2010/06/19 13:59:52 obache Exp $
 #
 
-DISTNAME=	simhv38-0
-PKGNAME=	simh-3.8.0
+DISTNAME=	simhv38-1
+PKGNAME=	simh-3.8.1
+PKGREVISION=	1
 CATEGORIES=	emulators
 MASTER_SITES=	http://simh.trailing-edge.com/sources/
 EXTRACT_SUFX=	.zip
@@ -13,6 +14,8 @@ HOMEPAGE=	http://simh.trailing-edge.com/
 COMMENT=	Bob Supnik's historical computer simulator
 
 PKG_DESTDIR_SUPPORT=	user-destdir
+
+USE_TOOLS+=	gmake
 
 BUILDLINK_API_DEPENDS.libpcap+=	libpcap>=0.6
 
@@ -27,6 +30,7 @@ BUILDLINK_TRANSFORM+=	rm:-O2
 INSTALLATION_DIRS=	bin share/simh share/doc/simh
 
 MAKE_FILE=		makefile
+MAKE_FLAGS+=		USE_NETWORK=YES
 
 post-extract:
 	${MKDIR} ${WRKSRC}/BIN
@@ -37,9 +41,7 @@ do-install:
 		${INSTALL_PROGRAM} $$BIN ${DESTDIR}${PREFIX}/bin/simh-$$BIN; \
 		fi ;							\
 	done)
-	${INSTALL_DATA_DIR} ${DESTDIR}${PREFIX}/share/simh
 	${INSTALL_DATA} ${WRKSRC}/VAX/ka655x.bin ${DESTDIR}${PREFIX}/share/simh
-	${INSTALL_DATA_DIR} ${DESTDIR}${PREFIX}/share/doc/simh
 	(cd ${WRKSRC} && for TXT in *.txt */*.txt; do			\
 		${INSTALL_DATA} $$TXT ${DESTDIR}${PREFIX}/share/doc/simh;		\
 	done)

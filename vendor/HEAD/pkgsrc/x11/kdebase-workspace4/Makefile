@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.12 2010/04/11 13:56:14 markd Exp $
+# $NetBSD: Makefile,v 1.17 2010/07/14 11:11:16 sbd Exp $
 
 DISTNAME=	kdebase-workspace-${_KDE_VERSION}
 PKGREVISION=	1

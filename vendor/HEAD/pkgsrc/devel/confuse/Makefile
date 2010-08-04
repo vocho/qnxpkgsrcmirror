@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.6 2009/06/13 06:46:41 rillig Exp $
+# $NetBSD: Makefile,v 1.8 2010/08/04 02:52:44 dmcmahill Exp $
 #
 
 DISTNAME=	confuse-2.6
 CATEGORIES=	devel
 MASTER_SITES=	http://bzero.se/confuse/
 
-MAINTAINER=	ahoka@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.nongnu.org/confuse/
 COMMENT=	Configuration file parser library
 
@@ -20,6 +20,10 @@ USE_TOOLS+=		pkg-config msgfmt
 
 PKGCONFIG_OVERRIDE+=	libconfuse.pc.in
 INSTALLATION_DIRS=	lib include
+
+# the included, but generated, lexer.c includes a
+# definition of a function which is then not used.
+BUILDLINK_TRANSFORM+=	rm:-Werror
 
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

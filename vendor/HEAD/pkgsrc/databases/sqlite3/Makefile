@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.27 2010/04/01 12:01:53 tnn Exp $
+# $NetBSD: Makefile,v 1.30 2010/07/22 21:07:45 adam Exp $
 
-DISTNAME=	sqlite-amalgamation-3.6.23.1
+DISTNAME=	sqlite-amalgamation-3.7.0
 PKGNAME=	${DISTNAME:S/sqlite-amalgamation/sqlite3/}
 CATEGORIES=	databases
 MASTER_SITES=	http://www.hwaci.com/sw/sqlite/ \
@@ -22,6 +22,17 @@ PKGCONFIG_OVERRIDE+=	sqlite3.pc.in
 
 INSTALLATION_DIRS+=	${PKGMANDIR}/man1
 CONFIGURE_ARGS+=	--with-readline-inc= --enable-threadsafe
+
+.include "../../mk/bsd.prefs.mk"
+
+# Darwin < 9 (Mac OS X < 10.5 "Leopard") doesn't have gethostuuid(2)
+.if !empty(MACHINE_PLATFORM:MDarwin-[0-8].*-*)
+CFLAGS+=		-DSQLITE_ENABLE_LOCKING_STYLE=0
+.endif
+
+# This define includes the sqlite3_unlock_notify() API in the build.
+# It is required by Firefox 4.x.
+CFLAGS+=		-DSQLITE_ENABLE_UNLOCK_NOTIFY=1
 
 # Uses dlopen and friends but doesn't use -ldl on Linux.
 # See http://www.sqlite.org/cvstrac/tktview?tn=3555

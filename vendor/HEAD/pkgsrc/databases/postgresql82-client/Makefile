@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.14 2010/04/23 15:41:50 adam Exp $
+# $NetBSD: Makefile,v 1.16 2010/05/30 11:51:19 joerg Exp $
 
 PKGNAME=	postgresql82-client-${BASE_VERS}
 PKGREVISION=	1

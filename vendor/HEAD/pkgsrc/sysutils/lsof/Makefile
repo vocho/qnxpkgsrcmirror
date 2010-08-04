@@ -1,14 +1,23 @@
-# $NetBSD: Makefile,v 1.103 2010/03/21 16:29:43 wiz Exp $
+# $NetBSD: Makefile,v 1.108 2010/05/14 19:01:11 tez Exp $
 
-DISTNAME=		lsof_4.78
-PKGNAME=		${DISTNAME:S/_/-/}.${OS_VERSION}
-PKGREVISION=		5
+DISTNAME=		lsof_4.83
+PKGNAME=		${DISTNAME:S/_/-/}
 CATEGORIES=		sysutils
 MASTER_SITES=		ftp://lsof.itap.purdue.edu/pub/tools/unix/lsof/  \
 			ftp://lsof.itap.purdue.edu/pub/tools/unix/lsof/NEW/ \
 			ftp://lsof.itap.purdue.edu/pub/tools/unix/lsof/OLD/ \
-			ftp://ftp.sunet.se/pub/unix/admin/lsof/ \
-			http://ftp.sunet.se/pub/unix/admin/lsof/
+			ftp://ftp.cerias.purdue.edu/pub/tools/unix/sysutils/lsof/ \
+			ftp://ftp.cerias.purdue.edu/pub/tools/unix/sysutils/lsof/NEW/ \
+			ftp://ftp.cerias.purdue.edu/pub/tools/unix/sysutils/lsof/OLD/ \
+			ftp://ftp.fu-berlin.de/pub/unix/tools/lsof/ \
+			ftp://ftp.fu-berlin.de/pub/unix/tools/lsof/NEW/ \
+			ftp://ftp.fu-berlin.de/pub/unix/tools/lsof/OLD/ \
+			ftp://gd.tuwien.ac.at/utils/admin-tools/lsof/ \
+			ftp://gd.tuwien.ac.at/utils/admin-tools/lsof/NEW/ \
+			ftp://gd.tuwien.ac.at/utils/admin-tools/lsof/OLD/ \
+			ftp://sunsite.ualberta.ca/pub/Mirror/lsof/ \
+			ftp://sunsite.ualberta.ca/pub/Mirror/lsof/NEW/ \
+			ftp://sunsite.ualberta.ca/pub/Mirror/lsof/OLD/
 EXTRACT_SUFX=		.tar.bz2
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
@@ -23,8 +32,6 @@ CONFIGURE_SCRIPT=	./Configure
 CONFIGURE_ARGS+=	-n ${LOWER_OPSYS}
 CONFIGURE_ENV+=		LSOF_CC="${CC} ${CFLAGS}"
 MAKE_FLAGS+=		LSOF_BLDCMT="NetBSD pkgsrc rocks!"
-CPPFLAGS+=		-DLSOF_MORE_SECURE=${LSOF_MORE_SECURE} \
-			-DLSOF_LESS_SECURE_SOCKETS=${LSOF_LESS_SECURE_SOCKETS}
 OSVERSION_SPECIFIC=	yes
 
 TMPWRK=			${WRKDIR}/${DISTNAME}
@@ -40,20 +47,31 @@ USE_TOOLS+=	gtar pax perl:run
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
 
+TEST_DIRS=		tests
+TEST_TARGET=		test
+INTERACTIVE_STAGE+=	test
+
 .include "../../mk/bsd.prefs.mk"
+.include "options.mk"
 
 REAL_GROUP=		${REAL_ROOT_GROUP}
 .if ${OPSYS} == "NetBSD"
 REAL_GROUP=		kmem
 CONFIGURE_ENV+=		NETBSD_SYS="${NETBSDSRCDIR}/sys"
+.elif ${OPSYS} == "FreeBSD"
+BUILDLINK_PASSTHRU_DIRS+=	/usr/src/sys
 .elif ${OPSYS} == "SunOS"
 MAKE_ENV+=		CPPFLAGS=
 .endif
 INSTALLATION_DIRS=	${PKGMANDIR}/man8 sbin
 
-LSOF_MORE_SECURE?= 0
-
 post-extract:
+.if ${OPSYS} == "FreeBSD"
+	@(if [ ! -x /usr/src/sys ]; then \
+		${ECHO} "Lsof requires kernel sources to be found in /usr/src/sys." ; \
+		exit 1 ; \
+	fi)
+.endif
 	@(cd ${TMPWRK} ; \
 	EXPMD5=`${GREP} 'MD5 (' README.${DISTNAME} | ${SED} 's/^[ ]*//'` ; \
 	CALCMD5=`${DIGEST} MD5 ${SRCBALL_NAME}.tar` ; \
@@ -79,4 +97,10 @@ do-install:
 	${INSTALL_SCRIPT} ${WRKSRC}/scripts/* ${DESTDIR}${PREFIX}/share/lsof
 	@${CHMOD} 0444 ${DESTDIR}${PREFIX}/share/lsof/00*
 
+opt:
+.for _dir_ in ${TEST_DIRS}
+	${RUN}${_ULIMIT_CMD}			\
+	cd ${WRKSRC} && cd ${_dir_} &&		\
+	${TEST_MAKE_CMD} opt
+.endfor
 .include "../../mk/bsd.pkg.mk"

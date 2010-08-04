@@ -1,4 +1,4 @@
-# $NetBSD: buildlink3.mk,v 1.28 2010/01/18 09:58:46 wiz Exp $
+# $NetBSD: buildlink3.mk,v 1.30 2010/06/13 22:44:07 wiz Exp $
 
 BUILDLINK_TREE+=	libgnomeui
 
@@ -6,7 +6,7 @@ BUILDLINK_TREE+=	libgnomeui
 LIBGNOMEUI_BUILDLINK3_MK:=
 
 BUILDLINK_API_DEPENDS.libgnomeui+=		libgnomeui>=2.8.0
-BUILDLINK_ABI_DEPENDS.libgnomeui+=	libgnomeui>=2.24.2nb3
+BUILDLINK_ABI_DEPENDS.libgnomeui+=	libgnomeui>=2.24.3nb1
 BUILDLINK_PKGSRCDIR.libgnomeui?=	../../devel/libgnomeui
 
 .include "../../devel/GConf/buildlink3.mk"
@@ -17,7 +17,7 @@ BUILDLINK_PKGSRCDIR.libgnomeui?=	../../devel/libgnomeui
 .include "../../devel/popt/buildlink3.mk"
 #.include "../../graphics/jpeg/buildlink3.mk"
 .include "../../graphics/libgnomecanvas/buildlink3.mk"
-.include "../../security/gnome-keyring/buildlink3.mk"
+.include "../../security/libgnome-keyring/buildlink3.mk"
 .include "../../x11/libSM/buildlink3.mk"
 .endif # LIBGNOMEUI_BUILDLINK3_MK
 

@@ -1,4 +1,4 @@
-# $NetBSD: options.mk,v 1.16 2010/02/19 17:22:13 tron Exp $
+# $NetBSD: options.mk,v 1.20 2010/07/28 10:16:14 adam Exp $
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.squid
 PKG_SUPPORTED_OPTIONS=	snmp ssl \
@@ -25,6 +25,14 @@ PLIST_VARS+=	eacl_ip_user eacl_ldap_group eacl_unix_group
 PKG_SUGGESTED_OPTIONS=	squid-carp snmp ssl squid-pam-helper squid-unlinkd
 
 .include "../../mk/bsd.prefs.mk"
+
+#
+# Squid 3.1 and above include IPv6 support
+#
+.if empty(PKGNAME:Msquid-[0-2].*) && empty(PKGNAME:Msquid-3.0.*)
+PKG_SUPPORTED_OPTIONS+=	inet6
+PKG_SUGGESTED_OPTIONS+=	inet6
+.endif
 
 #
 # Squid 3.0's COSS support is not stable now.
@@ -56,11 +64,15 @@ PKG_SUGGESTED_OPTIONS+=	squid-ipf
 PKG_SUGGESTED_OPTIONS+=	squid-pf
 .endif
 
-# Darwin dosen't support System V IPC support.
-.if empty(OPSYS:MDarwin)
+.if ${OPSYS} == "Darwin"
+PKG_SUPPORTED_OPTIONS+=	squid-ipfw
+PKG_SUGGESTED_OPTIONS+=	squid-ipfw
+.endif
+
+# Darwin doesn't support System V IPC support.
+.if empty(PKGNAME:Msquid-[0-2].*) || empty(OPSYS:MDarwin)
 PKG_SUPPORTED_OPTIONS+=	squid-backend-diskd
 PKG_SUGGESTED_OPTIONS+=	squid-backend-diskd
-PLIST.diskd=		yes
 .endif
 
 # limited platform support squid-arp-acl
@@ -88,6 +100,8 @@ CONFIGURE_ARGS+=	--enable-linux-netfilter
 CONFIGURE_ARGS+=	--enable-pf-transparent
 .elif !empty(PKG_OPTIONS:Msquid-ipf)
 CONFIGURE_ARGS+=	--enable-ipf-transparent
+.elif !empty(PKG_OPTIONS:Msquid-ipfw)
+CONFIGURE_ARGS+=	--enable-ipfw-transparent
 .endif
 
 .if !empty(PKG_OPTIONS:Msquid-arp-acl)
@@ -96,6 +110,11 @@ CONFIGURE_ARGS+=	--enable-arp-acl
 
 .if !empty(PKG_OPTIONS:Msquid-carp)
 CONFIGURE_ARGS+=	--enable-carp
+.endif
+
+.if !empty(PKG_SUPPORTED_OPTIONS:Minet6) && \
+    empty(PKG_OPTIONS:Minet6)
+CONFIGURE_ARGS+=	--disable-ipv6
 .endif
 
 .if !empty(PKG_OPTIONS:Msquid-ldap-helper)
@@ -149,28 +168,36 @@ CONFIGURE_ARGS+=	--disable-unlinkd
 PLIST.unlinkd=		yes
 .endif
 
-.if !empty(SQUID_BASIC_AUTH_HELPERS)
+.if empty(SQUID_BASIC_AUTH_HELPERS)
+CONFIGURE_ARGS+= --enable-basic-auth-helpers=no
+.else
 CONFIGURE_ARGS+= --enable-basic-auth-helpers=${SQUID_BASIC_AUTH_HELPERS:Q}
 .for i in ${SQUID_BASIC_AUTH_HELPERS}
 PLIST.ba_${i}=		yes
 .endfor
 .endif
 
-.if !empty(SQUID_DIGEST_AUTH_HELPERS)
+.if empty(SQUID_DIGEST_AUTH_HELPERS)
+CONFIGURE_ARGS+= --enable-digest-auth-helpers=no
+.else
 CONFIGURE_ARGS+= --enable-digest-auth-helpers=${SQUID_DIGEST_AUTH_HELPERS:Q}
 .for i in ${SQUID_DIGEST_AUTH_HELPERS}
 PLIST.da_${i}=		yes
 .endfor
 .endif
 
-.if !empty(SQUID_NTLM_AUTH_HELPERS)
+.if empty(SQUID_NTLM_AUTH_HELPERS)
+CONFIGURE_ARGS+= --enable-ntlm-auth-helpers=no
+.else
 CONFIGURE_ARGS+= --enable-ntlm-auth-helpers=${SQUID_NTLM_AUTH_HELPERS:Q}
 .for i in ${SQUID_NTLM_AUTH_HELPERS}
 PLIST.na_${i}=		yes
 .endfor
 .endif
 
-.if !empty(SQUID_EXTERNAL_ACL_HELPERS)
+.if empty(SQUID_EXTERNAL_ACL_HELPERS)
+CONFIGURE_ARGS+= --enable-external-acl-helpers=no
+.else
 CONFIGURE_ARGS+= --enable-external-acl-helpers=${SQUID_EXTERNAL_ACL_HELPERS:Q}
 .for i in ${SQUID_EXTERNAL_ACL_HELPERS}
 PLIST.eacl_${i}=	yes

@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.6 2009/09/12 14:07:26 wiz Exp $
+# $NetBSD: Makefile,v 1.8 2010/06/13 22:44:15 wiz Exp $
 
 DISTNAME=	yabause-0.9.10
+PKGREVISION=	1
 CATEGORIES=	emulators
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=yabause/}
 
@@ -16,6 +17,7 @@ USE_TOOLS+=	gmake
 USE_TOOLS+=	pkg-config
 
 .include "../../devel/SDL/buildlink3.mk"
+BUILDLINK_API_DEPENDS.gtkglext+=	gtkglext>=1.2.0nb4
 .include "../../graphics/gtkglext/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../mk/bsd.pkg.mk"

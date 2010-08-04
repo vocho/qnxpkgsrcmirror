@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.491 2010/04/20 17:45:09 jmmv Exp $
+# $NetBSD: Makefile,v 1.497 2010/07/14 18:32:45 drochner Exp $
 #
 
 COMMENT=	System utilities
@@ -29,6 +29,7 @@ SUBDIR+=	bacula-wx-console
 SUBDIR+=	bbsload
 SUBDIR+=	bchunk
 SUBDIR+=	bcmfw
+SUBDIR+=	bcollect
 SUBDIR+=	bkpupsd
 SUBDIR+=	boxbackup-client
 SUBDIR+=	boxbackup-server
@@ -86,9 +87,12 @@ SUBDIR+=	dvdisaster
 SUBDIR+=	dvdrecord
 SUBDIR+=	e2fsprogs
 SUBDIR+=	easydiskpasswd
+SUBDIR+=	eggdbus
 SUBDIR+=	estd
 SUBDIR+=	etcmanage
+SUBDIR+=	etcutils
 SUBDIR+=	extipl
+SUBDIR+=	fabric
 SUBDIR+=	fakeroot
 SUBDIR+=	fam
 SUBDIR+=	fastfs
@@ -198,7 +202,6 @@ SUBDIR+=	munin-doc
 SUBDIR+=	munin-node
 SUBDIR+=	munin-server
 SUBDIR+=	nautilus
-SUBDIR+=	nautilus-cd-burner
 SUBDIR+=	nautilus-sendto
 SUBDIR+=	ndesk-dbus
 SUBDIR+=	ndesk-dbus-glib
@@ -266,6 +269,7 @@ SUBDIR+=	ruby-activesambaldap
 SUBDIR+=	ruby-directory-watcher
 SUBDIR+=	ruby-facter
 SUBDIR+=	ruby-gnome2-gnomevfs
+SUBDIR+=	ruby-notify
 SUBDIR+=	ruby-quota
 SUBDIR+=	ruby-rb-appscript
 SUBDIR+=	safetynet
