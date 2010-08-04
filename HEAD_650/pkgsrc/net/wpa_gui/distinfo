@@ -5,3 +5,4 @@ RMD160 (wpa_supplicant-0.6.9.tar.gz) = e8427935b17c354c2654250501236dcd3f239307
 Size (wpa_supplicant-0.6.9.tar.gz) = 1178238 bytes
 SHA1 (patch-aa) = 82a2ae08b2d3cd2883ebcae7049825d8a9455cbd
 SHA1 (patch-ab) = 511f97805528f518822f60459f6d900f56e38eb3
+SHA1 (patch-ac) = 86a5d048293e476f709327104e669e637fed0edf
