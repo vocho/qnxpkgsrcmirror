@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.30 2010/02/01 22:44:23 snj Exp $
+# $NetBSD: Makefile,v 1.32 2010/06/13 22:45:31 wiz Exp $
 
 DISTNAME=		obconf-2.0.3
-PKGREVISION=		3
+PKGREVISION=		4
 DIST_SUBDIR=		obconf-2.0.3.orig
 CATEGORIES=		wm
 MASTER_SITES=		http://openbox.org/dist/obconf/
@@ -12,7 +12,7 @@ COMMENT=		Tool for configuring the Openbox window manager
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
-USE_TOOLS+=		pkg-config
+USE_TOOLS+=		pkg-config gtar
 GNU_CONFIGURE=		YES
 
 .include "../../databases/shared-mime-info/mimedb.mk"

@@ -1,4 +1,4 @@
-# $NetBSD: find-libs.mk,v 1.5 2008/12/15 10:58:53 obache Exp $
+# $NetBSD: find-libs.mk,v 1.8 2010/05/03 06:58:27 obache Exp $
 #
 # Copyright (c) 2005 The NetBSD Foundation, Inc.
 # All rights reserved.

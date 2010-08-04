@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.23 2010/04/10 05:13:09 dholland Exp $
+# $NetBSD: Makefile,v 1.28 2010/07/02 21:59:39 asau Exp $
 
 DISTNAME=		${PKGNAME_NOREV}-source
-PKGNAME=		sbcl-1.0.36
+PKGNAME=		sbcl-1.0.40
 CATEGORIES=		lang
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=sbcl/}
 EXTRACT_SUFX=		.tar.bz2
@@ -43,7 +43,7 @@ WRKSRC=			${WRKDIR}/${PKGNAME_NOREV}
 .if !defined(SBCL_BOOT_SYSTEM)
 # Use "clisp -ansi -on-error abort" to make the build more reproducible,
 # per Christophe Rhodes:
-SBCL_BOOT_SYSTEM=	clisp -ansi -on-error abort
+SBCL_BOOT_SYSTEM=	clisp -norc -ansi -on-error abort
 BUILD_DEPENDS+=		clisp-[0-9]*:../../lang/clisp
 UNLIMIT_RESOURCES=	datasize
 .elif ${SBCL_BOOT_SYSTEM} == clisp
@@ -79,5 +79,11 @@ do-install:
 
 do-test:
 	cd ${WRKSRC}/tests && ${SH} ./run-tests.sh
+
+.if $(LOWER_ARCH) == "amd64" || $(LOWER_ARCH) == "x86_64"
+PLIST_SUBST+=	SUFX64=-64
+.else
+PLIST_SUBST+=	SUFX64=
+.endif
 
 .include "../../mk/bsd.pkg.mk"

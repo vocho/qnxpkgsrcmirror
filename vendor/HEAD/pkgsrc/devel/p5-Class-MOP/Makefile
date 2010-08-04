@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.33 2010/04/10 07:11:51 seb Exp $
+# $NetBSD: Makefile,v 1.37 2010/07/26 21:12:29 seb Exp $
 #
 
-DISTNAME=	Class-MOP-1.00
+DISTNAME=	Class-MOP-1.04
 PKGNAME=	p5-${DISTNAME}
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Class/}
@@ -11,8 +11,12 @@ HOMEPAGE=	http://search.cpan.org/dist/Class-MOP/
 COMMENT=	Perl 5 module providing a meta object protocol
 LICENSE=	${PERL5_LICENSE}
 
+DEPENDS+=	p5-Data-OptList-[0-9]*:../../devel/p5-Data-OptList
 DEPENDS+=	p5-Devel-GlobalDestruction-[0-9]*:../../devel/p5-Devel-GlobalDestruction
+DEPENDS+=	p5-List-MoreUtils>=0.12:../../devel/p5-List-MoreUtils
 DEPENDS+=	p5-MRO-Compat>=0.05:../../devel/p5-MRO-Compat
+DEPENDS+=	p5-Package-DeprecationManager>=0.04:../../devel/p5-Package-DeprecationManager
+DEPENDS+=	p5-Package-Stash-[0-9]*:../../devel/p5-Package-Stash
 DEPENDS+=	p5-Sub-Name>=0.04:../../devel/p5-Sub-Name
 DEPENDS+=	p5-Task-Weaken-[0-9]*:../../devel/p5-Task-Weaken
 DEPENDS+=	p5-Try-Tiny>=0.02:../../devel/p5-Try-Tiny

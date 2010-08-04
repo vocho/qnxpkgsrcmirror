@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.436 2010/04/16 15:46:13 reed Exp $
+# $NetBSD: Makefile,v 1.439 2010/07/05 00:57:47 cube Exp $
 #
 
 COMMENT=	Audio tools
@@ -38,6 +38,7 @@ SUBDIR+=	audacity
 SUBDIR+=	aumix
 SUBDIR+=	aumix-gtk
 SUBDIR+=	bladeenc
+SUBDIR+=	blop
 SUBDIR+=	bml
 SUBDIR+=	bmp
 SUBDIR+=	bmp-esound
@@ -122,6 +123,7 @@ SUBDIR+=	gkrellm-xmms
 SUBDIR+=	glurp
 SUBDIR+=	gmp3info
 SUBDIR+=	gmpc
+SUBDIR+=	gmpc-magnatune
 SUBDIR+=	gnome-audio
 SUBDIR+=	gnome-speech
 SUBDIR+=	gnome-speech-espeak
@@ -350,6 +352,7 @@ SUBDIR+=	speex
 SUBDIR+=	spiralloops
 SUBDIR+=	spiralsynth
 SUBDIR+=	splay
+SUBDIR+=	squeezeboxserver
 SUBDIR+=	streamripper
 SUBDIR+=	streamripper-current
 SUBDIR+=	streamtuner

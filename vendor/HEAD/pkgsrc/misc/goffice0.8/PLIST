@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.1.1.1 2010/02/18 20:48:56 drochner Exp $
+@comment $NetBSD: PLIST,v 1.4 2010/07/20 12:12:39 drochner Exp $
 include/libgoffice-0.8/goffice/app/error-info.h
 include/libgoffice-0.8/goffice/app/file.h
 include/libgoffice-0.8/goffice/app/go-cmd-context-impl.h
@@ -17,6 +17,7 @@ include/libgoffice-0.8/goffice/app/goffice-app.h
 include/libgoffice-0.8/goffice/app/io-context-priv.h
 include/libgoffice-0.8/goffice/app/io-context.h
 include/libgoffice-0.8/goffice/app/module-plugin-defs.h
+include/libgoffice-0.8/goffice/canvas/goc-arc.h
 include/libgoffice-0.8/goffice/canvas/goc-canvas.h
 include/libgoffice-0.8/goffice/canvas/goc-circle.h
 include/libgoffice-0.8/goffice/canvas/goc-ellipse.h
@@ -24,6 +25,7 @@ include/libgoffice-0.8/goffice/canvas/goc-graph.h
 include/libgoffice-0.8/goffice/canvas/goc-group.h
 include/libgoffice-0.8/goffice/canvas/goc-item.h
 include/libgoffice-0.8/goffice/canvas/goc-line.h
+include/libgoffice-0.8/goffice/canvas/goc-path.h
 include/libgoffice-0.8/goffice/canvas/goc-pixbuf.h
 include/libgoffice-0.8/goffice/canvas/goc-polygon.h
 include/libgoffice-0.8/goffice/canvas/goc-polyline.h
@@ -127,6 +129,7 @@ include/libgoffice-0.8/goffice/math/go-distribution.h
 include/libgoffice-0.8/goffice/math/go-fft.h
 include/libgoffice-0.8/goffice/math/go-math.h
 include/libgoffice-0.8/goffice/math/go-matrix3x3.h
+include/libgoffice-0.8/goffice/math/go-quad.h
 include/libgoffice-0.8/goffice/math/go-rangefunc.h
 include/libgoffice-0.8/goffice/math/go-regression.h
 include/libgoffice-0.8/goffice/math/goffice-math.h
@@ -168,6 +171,8 @@ lib/goffice/${PKGVERSION}/plugins/plot_barcol/plot-types.xml
 lib/goffice/${PKGVERSION}/plugins/plot_barcol/plugin.xml
 lib/goffice/${PKGVERSION}/plugins/plot_distrib/distrib.la
 lib/goffice/${PKGVERSION}/plugins/plot_distrib/gog-boxplot-prefs.ui
+lib/goffice/${PKGVERSION}/plugins/plot_distrib/gog-double-histogram-prefs.ui
+lib/goffice/${PKGVERSION}/plugins/plot_distrib/gog-histogram-prefs.ui
 lib/goffice/${PKGVERSION}/plugins/plot_distrib/plot-types.xml
 lib/goffice/${PKGVERSION}/plugins/plot_distrib/plugin.xml
 lib/goffice/${PKGVERSION}/plugins/plot_pie/gog-pie-prefs.ui
@@ -255,6 +260,7 @@ share/gtk-doc/html/goffice-0.8/GOSearchReplace.html
 share/gtk-doc/html/goffice-0.8/GOSelector.html
 share/gtk-doc/html/goffice-0.8/GOStyle.html
 share/gtk-doc/html/goffice-0.8/GOStyledObject.html
+share/gtk-doc/html/goffice-0.8/GocArc.html
 share/gtk-doc/html/goffice-0.8/GocCanvas.html
 share/gtk-doc/html/goffice-0.8/GocCircle.html
 share/gtk-doc/html/goffice-0.8/GocEllipse.html
@@ -367,6 +373,7 @@ share/gtk-doc/html/goffice-0.8/style.css
 share/gtk-doc/html/goffice-0.8/up.png
 share/locale/am/LC_MESSAGES/goffice-${PKGVERSION}.mo
 share/locale/ar/LC_MESSAGES/goffice-${PKGVERSION}.mo
+share/locale/ast/LC_MESSAGES/goffice-${PKGVERSION}.mo
 share/locale/az/LC_MESSAGES/goffice-${PKGVERSION}.mo
 share/locale/bg/LC_MESSAGES/goffice-${PKGVERSION}.mo
 share/locale/ca/LC_MESSAGES/goffice-${PKGVERSION}.mo
@@ -465,6 +472,9 @@ share/pixmaps/goffice/${PKGVERSION}/chart_cylinder_3_1.png
 share/pixmaps/goffice/${PKGVERSION}/chart_dropbar_1_1.png
 share/pixmaps/goffice/${PKGVERSION}/chart_dropbar_1_2.png
 share/pixmaps/goffice/${PKGVERSION}/chart_histogram_1_1.png
+share/pixmaps/goffice/${PKGVERSION}/chart_histogram_1_3.png
+share/pixmaps/goffice/${PKGVERSION}/chart_histogram_1_4.png
+share/pixmaps/goffice/${PKGVERSION}/chart_histogram_2_1.png
 share/pixmaps/goffice/${PKGVERSION}/chart_line_1_1.png
 share/pixmaps/goffice/${PKGVERSION}/chart_line_1_2.png
 share/pixmaps/goffice/${PKGVERSION}/chart_line_1_3.png

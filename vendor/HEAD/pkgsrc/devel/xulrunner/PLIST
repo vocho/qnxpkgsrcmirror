@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.20 2010/03/30 11:29:36 tnn Exp $
+@comment $NetBSD: PLIST,v 1.23 2010/07/21 16:55:33 tnn Exp $
 bin/xulrunner
 ${PLIST.jit}include/xulrunner/Allocator.h
 ${PLIST.jit}include/xulrunner/Assembler.h
@@ -100,6 +100,7 @@ include/xulrunner/inISearchProcess.h
 include/xulrunner/jar-ds.h
 include/xulrunner/jar.h
 include/xulrunner/jarfile.h
+${PLIST.jemalloc}include/xulrunner/jemalloc.h
 include/xulrunner/js-config.h
 include/xulrunner/js.msg
 include/xulrunner/jsapi.h
@@ -228,6 +229,8 @@ include/xulrunner/mozilla/CondVar.h
 include/xulrunner/mozilla/DeadlockDetector.h
 include/xulrunner/mozilla/Monitor.h
 include/xulrunner/mozilla/Mutex.h
+include/xulrunner/mozilla/PluginLibrary.h
+include/xulrunner/mozilla/PluginPRLibrary.h
 include/xulrunner/mozilla/TimeStamp.h
 include/xulrunner/mozilla/XPCOM.h
 include/xulrunner/mozilla/storage.h
@@ -1338,6 +1341,7 @@ include/xulrunner/nsIProxiedProtocolHandler.h
 include/xulrunner/nsIProxyAutoConfig.h
 include/xulrunner/nsIProxyInfo.h
 include/xulrunner/nsIProxyObjectManager.h
+include/xulrunner/nsIQueryContentEventResult.h
 include/xulrunner/nsIRDFCompositeDataSource.h
 include/xulrunner/nsIRDFContainer.h
 include/xulrunner/nsIRDFContainerUtils.h
@@ -2244,6 +2248,7 @@ lib/xulrunner/components/nsFilePicker.js
 lib/xulrunner/components/nsFormAutoComplete.js
 lib/xulrunner/components/nsHandlerService.js
 lib/xulrunner/components/nsHelperAppDlg.js
+lib/xulrunner/components/nsINIProcessor.js
 lib/xulrunner/components/nsLivemarkService.js
 lib/xulrunner/components/nsLoginInfo.js
 lib/xulrunner/components/nsLoginManager.js
@@ -3227,6 +3232,7 @@ share/idl/xulrunner/nsIProxiedProtocolHandler.idl
 share/idl/xulrunner/nsIProxyAutoConfig.idl
 share/idl/xulrunner/nsIProxyInfo.idl
 share/idl/xulrunner/nsIProxyObjectManager.idl
+share/idl/xulrunner/nsIQueryContentEventResult.idl
 share/idl/xulrunner/nsIRDFCompositeDataSource.idl
 share/idl/xulrunner/nsIRDFContainer.idl
 share/idl/xulrunner/nsIRDFContainerUtils.idl

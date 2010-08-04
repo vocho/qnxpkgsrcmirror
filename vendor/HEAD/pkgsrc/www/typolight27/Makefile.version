@@ -1,3 +1,0 @@
-# $NetBSD: Makefile.version,v 1.8 2009/12/20 04:22:04 taca Exp $
-#
-TL_VERSION=		2.7.6

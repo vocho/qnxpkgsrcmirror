@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.89 2010/01/18 09:59:18 wiz Exp $
+# $NetBSD: Makefile,v 1.92 2010/07/08 18:48:05 drochner Exp $
 #
 
 DISTNAME=		vlc-${VLC_VERSION}
@@ -7,7 +7,7 @@ CATEGORIES=		multimedia
 MASTER_SITES=		http://download.videolan.org/pub/videolan/vlc/${VLC_VERSION}/
 EXTRACT_SUFX=		.tar.bz2
 
-VLC_VERSION=		1.0.4
+VLC_VERSION=		1.0.6
 
 MAINTAINER=		ahoka@NetBSD.org
 HOMEPAGE=		http://videolan.org/
@@ -117,7 +117,7 @@ REPLACE_SH+=		vlc-config.in.in
 CHECK_WRKREF_SKIP=	lib/libvlccore.a \
 			lib/libvlccore.so \
 			lib/libvlccore.so.2 \
-			lib/libvlccore.so.2.1.1
+			lib/libvlccore.so.2.1.2
 
 .include "../../audio/libmpcdec/buildlink3.mk"
 .include "../../audio/flac/buildlink3.mk"
@@ -151,6 +151,8 @@ CHECK_WRKREF_SKIP=	lib/libvlccore.a \
 .include "../../multimedia/libmpeg2/buildlink3.mk"
 .include "../../multimedia/libogg/buildlink3.mk"
 .include "../../multimedia/libtheora/buildlink3.mk"
+# needs x264_encoder_delayed_frames
+BUILDLINK_API_DEPENDS.x264-devel+= x264-devel>=20090920
 .include "../../multimedia/x264-devel/buildlink3.mk"
 
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"

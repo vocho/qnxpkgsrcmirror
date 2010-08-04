@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.3 2010/02/19 18:19:45 minskim Exp $
-# TeX Live Revision 12680
+# $NetBSD: Makefile,v 1.5 2010/05/25 08:02:44 minskim Exp $
 
 DISTNAME=	ltxmisc
-PKGNAME=	tex-${DISTNAME}-2008.12680
-PKGREVISION=	2
+PKGNAME=	tex-${DISTNAME}-2009
+PKGREVISION=	1
+TEXLIVE_REV=	18137
 
 MAINTAINER=	minskim@NetBSD.org
 COMMENT=	Miscellaneous LaTeX packages
@@ -18,5 +18,5 @@ DEPENDS+=	tex-natbib-[0-9]*:../../print/tex-natbib
 DEPENDS+=	tex-psnfss-[0-9]*:../../fonts/tex-psnfss
 DEPENDS+=	tex-tools-[0-9]*:../../print/tex-tools
 
-.include "../../print/texlive/module.mk"
+.include "../../print/texlive/package.mk"
 .include "../../mk/bsd.pkg.mk"

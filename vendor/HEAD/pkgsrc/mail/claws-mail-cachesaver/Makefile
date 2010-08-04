@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.13 2010/02/03 19:45:04 drochner Exp $
+# $NetBSD: Makefile,v 1.15 2010/06/13 22:44:52 wiz Exp $
 #
 
 DISTNAME=	cachesaver-0.10.9
 PKGNAME=	claws-mail-cachesaver-0.10.9
+PKGREVISION=	2
 CATEGORIES=	mail
 MASTER_SITES=	http://claws-mail.org/downloads/plugins/
 

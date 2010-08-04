@@ -1,4 +1,4 @@
-#	$NetBSD: bsd.pkg.mk,v 1.1966 2010/02/23 17:24:55 joerg Exp $
+#	$NetBSD: bsd.pkg.mk,v 1.1973 2010/07/03 04:27:00 darcy Exp $
 #
 # This file is in the public domain.
 #
@@ -516,7 +516,23 @@ _BUILD_DEFS+=	NO_BIN_ON_FTP NO_BIN_ON_CDROM
 
 .if defined(OSVERSION_SPECIFIC)
 _BUILD_DEFS+=	OSVERSION_SPECIFIC
+DEPENDS+=	osabi-${OPSYS}-${OS_VERSION}:../../pkgtools/osabi
 .endif # OSVERSION_SPECIFIC
+
+.for _pkg_ in ${_BUILTIN_PKGS}
+.  if defined(USE_BUILTIN.${_pkg_}) && \
+      !empty(USE_BUILTIN.${_pkg_}:M[yY][eE][sS]) && \
+      defined(BUILTIN_PKG.${_pkg_}) && !empty(BUILTIN_PKG.${_pkg_})
+BUILTIN_PKGS+=	${BUILTIN_PKG.${_pkg_}}
+.  endif
+.endfor
+.if defined(BUILTIN_PKGS)
+_BUILD_DEFS+=	BUILTIN_PKGS
+.endif
+
+.if defined(GLIBC_VERSION)
+_BUILD_DEFS+=	GLIBC_VERSION
+.endif # GLIBC_VERSION
 
 .PHONY: all
 .if !target(all)
@@ -532,7 +548,6 @@ ${WRKDIR}:
 	${RUN} ${TEST} -f ${_WRKDIR_LOCKFILE} || ${RM} -fr ${WRKDIR}
 .  endif
 .endif
-	${RUN} ${MKDIR} ${WRKDIR:H}
 	${RUN} umask 077 && ${MKDIR} ${WRKDIR}
 
 # Create a symlink from ${WRKDIR} to the package directory if

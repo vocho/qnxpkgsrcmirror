@@ -1,4 +1,4 @@
-# $NetBSD: Linux.mk,v 1.37 2010/03/18 22:46:01 sbd Exp $
+# $NetBSD: Linux.mk,v 1.40 2010/07/08 04:57:36 dholland Exp $
 #
 # Variable definitions for the Linux operating system.
 
@@ -61,6 +61,8 @@ IMAKE_MANINSTALL?=	maninstall catinstall
 _OPSYS_EMULDIR.linux=	# empty
 _OPSYS_EMULDIR.linux32=	# empty
 
+_OPSYS_SYSTEM_RPATH=	/lib${LIBABISUFFIX}:/usr/lib${LIBABISUFFIX}
+
 .if exists(/usr/include/netinet6) || exists(/usr/include/linux/in6.h)
 _OPSYS_HAS_INET6=	yes	# IPv6 is standard
 .else
@@ -84,28 +86,21 @@ _OPSYS_NO_WHOLE_ARCHIVE_FLAG=	-Wl,--no-whole-archive
 _STRIPFLAG_CC?=		${_INSTALL_UNSTRIPPED:D:U-s}	# cc(1) option to strip
 _STRIPFLAG_INSTALL?=	${_INSTALL_UNSTRIPPED:D:U-s}	# install(1) option to strip
 
-_OPSYS_CAN_CHECK_SHLIBS=	no # can't use readelf in check/bsd.check-vars.mk
+_OPSYS_CAN_CHECK_SHLIBS=	yes # use readelf in check/bsd.check-vars.mk
 
 # check for maximum command line length and set it in configure's environment,
 # to avoid a test required by the libtool script that takes forever.
 # FIXME: Adjust to work on this system and enable the lines below.
 #_OPSYS_MAX_CMDLEN_CMD=	/sbin/sysctl -n kern.argmax
 
-# If games are to be installed setgid, then SETGIDGAME is set to 'yes'
-# (it defaults to 'no' as per defaults/mk.conf).
-# Set the group and mode to meaningful values in that case (defaults to
-# BINOWN, BINGRP and BINMODE as per defaults/mk.conf).
-# FIXME: Adjust to work on this system and enable the lines below.
-#.if !(empty(SETGIDGAME:M[yY][eE][sS]))
-#GAMES_USER=		games
-#GAMES_GROUP=		games
-#GAMEOWN=		${GAMES_USER}
-#GAMEGRP=		${GAMES_GROUP}
-#GAMEMODE=		2555
-#GAMEDIRMODE=		0775
-#.endif
-
 .if (${MACHINE_ARCH} == "x86_64")
 ABI?=	64
 LIBABISUFFIX?=          64
+.endif
+
+## Use _CMD so the command only gets run when needed!
+.if exists(/lib/libc.so.6)
+_GLIBC_VERSION_CMD=	/lib/libc.so.6 --version | \
+				sed -ne's/^GNU C.*version \(.*\),.*$$/\1/p'
+GLIBC_VERSION=		${_GLIBC_VERSION_CMD:sh}
 .endif

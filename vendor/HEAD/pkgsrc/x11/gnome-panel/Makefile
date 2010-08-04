@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.119 2010/02/14 11:12:21 drochner Exp $
+# $NetBSD: Makefile,v 1.122 2010/07/13 12:51:32 drochner Exp $
 #
 
-DISTNAME=		gnome-panel-2.28.0
-PKGREVISION=		2
+DISTNAME=		gnome-panel-2.30.2
+PKGREVISION=		1
 CATEGORIES=		x11 gnome
-MASTER_SITES=		${MASTER_SITE_GNOME:=sources/gnome-panel/2.28/}
+MASTER_SITES=		${MASTER_SITE_GNOME:=sources/gnome-panel/2.30/}
 EXTRACT_SUFX=		.tar.bz2
 
 MAINTAINER=		drochner@NetBSD.org
@@ -77,4 +77,5 @@ BUILDLINK_API_DEPENDS.gnome-menus+= gnome-menus>=2.28.0
 .include "../../x11/libX11/buildlink3.mk"
 BUILDLINK_DEPMETHOD.libXt?=	build
 .include "../../x11/libXt/buildlink3.mk"
+.include "../../audio/libcanberra/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

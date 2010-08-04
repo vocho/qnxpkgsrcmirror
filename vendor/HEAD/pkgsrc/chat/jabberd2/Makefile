@@ -1,15 +1,14 @@
-# $NetBSD: Makefile,v 1.56 2010/04/15 07:01:22 adam Exp $
+# $NetBSD: Makefile,v 1.59 2010/07/06 00:01:35 schnoebe Exp $
 
-DISTNAME=		jabberd-2.2.9
-PKGREVISION=		2
-CATEGORIES=		chat
-MASTER_SITES=		http://codex.xiaoka.com/pub/jabberd2/releases/
-EXTRACT_SUFX=		.tar.bz2
+DISTNAME=	jabberd-2.2.10
+CATEGORIES=	chat
+MASTER_SITES=	http://codex.xiaoka.com/pub/jabberd2/releases/
+EXTRACT_SUFX=	.tar.bz2
 
-MAINTAINER=		eric@cirr.com
-HOMEPAGE=		http://jabberd2.xiaoka.com/
-COMMENT=		XMPP (Jabber) instant messaging server
-LICENSE=		gnu-gpl-v2
+MAINTAINER=	eric@cirr.com
+HOMEPAGE=	http://jabberd2.xiaoka.com/
+COMMENT=	XMPP (Jabber) instant messaging server
+LICENSE=	gnu-gpl-v2
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
@@ -17,7 +16,13 @@ CONFLICTS=		jabberd-[0-9]*
 
 USE_LANGUAGES=		c c++
 USE_LIBTOOL=		yes
+USE_TOOLS+=		perl:run
 GNU_CONFIGURE=		yes
+CONFIGURE_ARGS+=	--enable-anon
+CONFIGURE_ARGS+=	--enable-pipe
+CONFIGURE_ARGS+=	--enable-ssl
+CONFIGURE_ARGS+=	--enable-fs
+CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR}
 
 SUBST_CLASSES+=		path
 SUBST_STAGE.path=	post-patch
@@ -26,22 +31,6 @@ SUBST_MESSAGE.path=	Fixing configure script.
 SUBST_SED.path=		-e "s,/usr/local,${PREFIX},g"
 SUBST_SED.path+=	-e "s,\$$sysconfdir/jabberd,\$$sysconfdir,g"
 
-CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR:Q}
-CONFIGURE_ARGS+=	--enable-pipe
-CONFIGURE_ARGS+=	--enable-anon
-CONFIGURE_ARGS+=	--enable-ssl
-CONFIGURE_ARGS+=	--enable-fs
-
-.if (${MACHINE_ARCH} == alpha) || (${MACHINE_ARCH} == x86_64)
-CONFIGURE_ARGS+=	CXXFLAGS=${CXXFLAGS:M*:C/-O./-Os/:Q}
-CONFIGURE_ENV+=		CXXFLAGS=${CXXFLAGS:M*:C/-O./-Os/:Q}
-MAKE_ENV+=		CXXFLAGS=${CXXFLAGS:M*:C/-O./-Os/:Q}
-CONFIGURE_ARGS+=	CFLAGS=${CFLAGS:M*:C/-O./-Os/:Q}
-CONFIGURE_ENV+=		CFLAGS=${CFLAGS:M*:C/-O./-Os/:Q}
-MAKE_ENV+=		CFLAGS=${CFLAGS:M*:C/-O./-Os/:Q}
-.endif
-
-USE_TOOLS+=		perl:run
 REPLACE_PERL+=		tools/*.pl
 
 .include "../../mk/bsd.prefs.mk"
@@ -55,10 +44,10 @@ PKG_SYSCONFSUBDIR=	jabberd
 RCD_SCRIPTS=		jabberd c2s sm router s2s
 JABBERD_USER?=		jabberd
 JABBERD_GROUP?=		jabberd
-FILES_SUBST+=		JABBERD_USER=${JABBERD_USER:Q}
-FILES_SUBST+=		JABBERD_GROUP=${JABBERD_GROUP:Q}
-FILES_SUBST+=		JABBERD_PIDDIR=${JABBERD_PIDDIR:Q}
-FILES_SUBST+=		JABBERD_LOGDIR=${JABBERD_LOGDIR:Q}
+FILES_SUBST+=		JABBERD_USER=${JABBERD_USER}
+FILES_SUBST+=		JABBERD_GROUP=${JABBERD_GROUP}
+FILES_SUBST+=		JABBERD_PIDDIR=${JABBERD_PIDDIR}
+FILES_SUBST+=		JABBERD_LOGDIR=${JABBERD_LOGDIR}
 PKG_USERS_VARS+=	JABBERD_USER
 PKG_GROUPS_VARS+=	JABBERD_GROUP
 PKG_GROUPS=		${JABBERD_GROUP}
@@ -68,9 +57,8 @@ BINDIR=			${PREFIX}/bin
 EGDIR=			${PREFIX}/share/examples/jabberd
 DOCDIR=			${PREFIX}/share/doc/jabberd
 
-FILES=			jabberd.cfg c2s.xml router.xml	\
-			router-users.xml router-filter.xml s2s.xml	\
-			sm.xml
+FILES=			jabberd.cfg c2s.xml router.xml router-users.xml \
+			router-filter.xml s2s.xml sm.xml
 DBFILES=		db-jd14-2-jd2.sql db-setup.mysql db-setup.pgsql \
 			db-update.mysql	db-setup.sqlite db-update.sqlite
 DOCFILES=		README.protocol README UPGRADE ChangeLog
@@ -95,8 +83,7 @@ post-extract:
 
 pre-configure:
 .for f in ${FILES}
-	sed								\
-		-e "s|@PKG_SYSCONFDIR@|${PKG_SYSCONFDIR}|g"		\
+	sed	-e "s|@PKG_SYSCONFDIR@|${PKG_SYSCONFDIR}|g"		\
 		-e "s|@PIDDIR@|${JABBERD_PIDDIR}|g"			\
 		-e "s|@LOGDIR@|${JABBERD_LOGDIR}|g"			\
 		-e "s|@SSLCERTS@|${SSLCERTS}|g"				\
@@ -109,8 +96,8 @@ pre-configure:
 post-install:
 	${INSTALL_DATA} ${WRKSRC}/etc/templates/roster.xml.dist.in	\
 	    ${DESTDIR}${EGDIR}/roster.xml
+	${INSTALL_SCRIPT} ${WRKSRC}/tools/bdbdump.pl ${DESTDIR}${BINDIR}
 	${INSTALL_SCRIPT} ${WRKSRC}/tools/pipe-auth.pl ${DESTDIR}${BINDIR}
-	${INSTALL_SCRIPT} ${WRKSRC}/tools/migrate.pl ${DESTDIR}${BINDIR}
 .for f in ${DBFILES}
 	${INSTALL_DATA} ${WRKSRC}/tools/${f} ${DESTDIR}${EGDIR}
 .endfor
@@ -121,9 +108,9 @@ post-install:
 	${INSTALL_DATA} ${WRKSRC}/${f} ${DESTDIR}${DOCDIR}
 .endfor
 
-.include "../../net/udns/buildlink3.mk"
 .include "../../converters/libiconv/buildlink3.mk"
 .include "../../devel/libidn/buildlink3.mk"
+.include "../../net/udns/buildlink3.mk"
 .include "../../security/openssl/buildlink3.mk"
 .include "../../textproc/expat/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.4 2010/01/28 19:27:03 joerg Exp $
+# $NetBSD: Makefile,v 1.6 2010/08/04 02:46:03 dmcmahill Exp $
 #
 
-DISTNAME=	nelma-3.0
-PKGREVISION=	1
+DISTNAME=	nelma-3.2
 CATEGORIES=	cad
 MASTER_SITES=	http://www.tablix.org/~avian/nelma/releases/
 

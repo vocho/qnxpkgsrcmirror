@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.5 2010/01/21 22:41:23 wiz Exp $
+# $NetBSD: Makefile,v 1.8 2010/06/13 22:44:37 wiz Exp $
 #
 
-DISTNAME=	lensfun-0.2.4
-PKGREVISION=	1
+DISTNAME=	lensfun-0.2.5
+PKGREVISION=	2
 CATEGORIES=	graphics
 MASTER_SITES=	http://download.berlios.de/lensfun/
 EXTRACT_SUFX=	.tar.bz2
@@ -12,11 +12,12 @@ HOMEPAGE=	http://lensfun.berlios.de/
 COMMENT=	Library for rectifying defects introduced by photographic equipment
 LICENSE=	gnu-lgpl-v3
 
-BUILD_DEPENDS+=	doxygen>=1.6.2:../../devel/doxygen
+BUILD_DEPENDS+=	doxygen>=1.6.3:../../devel/doxygen
 BUILD_DEPENDS+=	makedepend-[0-9]*:../../devel/makedepend
 
 HAS_CONFIGURE=		yes
 CONFIGURE_ARGS+=	--prefix=${PREFIX} --libdir=${PREFIX}/lib
+CONFIGURE_ARGS+=	--vectorization=
 CONFIG_SHELL=		${PYTHONBIN}
 MAKE_FILE=		GNUmakefile
 PYTHON_FOR_BUILD_ONLY=	yes

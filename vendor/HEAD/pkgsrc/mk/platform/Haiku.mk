@@ -1,4 +1,4 @@
-# $NetBSD: Haiku.mk,v 1.1 2010/02/06 10:44:14 obache Exp $
+# $NetBSD: Haiku.mk,v 1.3 2010/07/08 04:57:36 dholland Exp $
 #
 # Variable definitions for the Haiku operating system.
 
@@ -14,7 +14,7 @@ CPP_PRECOMP_FLAGS?=	# unset
 DEF_UMASK?=		022
 DEFAULT_SERIAL_DEVICE?=	/dev/tty
 EXPORT_SYMBOLS_LDFLAGS?=	# Don't add symbols to the dynamic symbol table
-#GROUPADD?=		/usr/sbin/groupadd
+#GROUPADD?=		/bin/groupadd
 MOTIF_TYPE_DEFAULT?=	openmotif	# default 2.0 compatible libs type
 NOLOGIN?=		/bin/false
 PKG_TOOLS_BIN?=		${LOCALBASE}/sbin
@@ -25,7 +25,7 @@ SERIAL_DEVICES?=	/dev/tty
 ULIMIT_CMD_datasize?=	ulimit -d `ulimit -H -d`
 ULIMIT_CMD_stacksize?=	ulimit -s `ulimit -H -s`
 ULIMIT_CMD_memorysize?=	ulimit -m `ulimit -H -m`
-USERADD?=		/usr/sbin/useradd
+USERADD?=		/bin/useradd
 
 # no native X11
 X11_TYPE?=		modular
@@ -74,17 +74,3 @@ _OPSYS_CAN_CHECK_SHLIBS=	no # can't use readelf in check/bsd.check-vars.mk
 # to avoid a test required by the libtool script that takes forever.
 # FIXME: Adjust to work on this system and enable the lines below.
 #_OPSYS_MAX_CMDLEN_CMD=	/sbin/sysctl -n kern.argmax
-
-# If games are to be installed setgid, then SETGIDGAME is set to 'yes'
-# (it defaults to 'no' as per defaults/mk.conf).
-# Set the group and mode to meaningful values in that case (defaults to
-# BINOWN, BINGRP and BINMODE as per defaults/mk.conf).
-# FIXME: Adjust to work on this system and enable the lines below.
-#.if !(empty(SETGIDGAME:M[yY][eE][sS]))
-#GAMES_USER=		games
-#GAMES_GROUP=		games
-#GAMEOWN=		${GAMES_USER}
-#GAMEGRP=		${GAMES_GROUP}
-#GAMEMODE=		2555
-#GAMEDIRMODE=		0775
-#.endif

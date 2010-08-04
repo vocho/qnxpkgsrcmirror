@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.613 2010/04/12 14:21:12 wiz Exp $
+# $NetBSD: Makefile,v 1.617 2010/07/09 19:37:11 asau Exp $
 #
 
 COMMENT=	Packages to support the X window system
@@ -23,6 +23,7 @@ SUBDIR+=	beforelight
 SUBDIR+=	bigreqsproto
 SUBDIR+=	bitmap
 SUBDIR+=	blt
+SUBDIR+=	clisp-gtk2
 SUBDIR+=	compositeproto
 SUBDIR+=	damageproto
 SUBDIR+=	desklaunch
@@ -89,6 +90,7 @@ SUBDIR+=	gtk2-engines-murrine
 SUBDIR+=	gtk2-theme-switch
 SUBDIR+=	gtkglarea
 SUBDIR+=	gtkmm
+SUBDIR+=	gtkmm-utils
 SUBDIR+=	gtksourceview
 SUBDIR+=	gtksourceview-sharp2
 SUBDIR+=	gtksourceview2
@@ -281,6 +283,7 @@ SUBDIR+=	py-qt3-base
 SUBDIR+=	py-qt3-modules
 SUBDIR+=	py-qt3-qscintilla
 SUBDIR+=	py-qt4
+SUBDIR+=	py-qt4-qscintilla
 SUBDIR+=	py-sip
 SUBDIR+=	py-wxWidgets
 SUBDIR+=	py-xcbgen
@@ -292,12 +295,14 @@ SUBDIR+=	qt3-pgsql
 SUBDIR+=	qt3-qscintilla
 SUBDIR+=	qt3-tools
 SUBDIR+=	qt4
+SUBDIR+=	qt4-creator
 SUBDIR+=	qt4-docs
 SUBDIR+=	qt4-libs
 SUBDIR+=	qt4-mng
 SUBDIR+=	qt4-mysql
 SUBDIR+=	qt4-pgsql
 SUBDIR+=	qt4-qdbus
+SUBDIR+=	qt4-qscintilla
 SUBDIR+=	qt4-sqlite3
 SUBDIR+=	qt4-tiff
 SUBDIR+=	qt4-tools

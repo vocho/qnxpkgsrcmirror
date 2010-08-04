@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.15 2008/06/20 01:09:36 joerg Exp $
+# $NetBSD: Makefile,v 1.17 2010/07/22 13:22:02 drochner Exp $
 #
 
 GST_PLUGINS0.10_NAME=	gnomevfs

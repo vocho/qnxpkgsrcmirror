@@ -1,9 +1,33 @@
-# $NetBSD: options.mk,v 1.6 2009/04/08 17:03:25 tron Exp $
+# $NetBSD: options.mk,v 1.8 2010/05/03 20:10:33 tron Exp $
 
-PKG_OPTIONS_VAR=	PKG_OPTIONS.apache
-PKG_SUPPORTED_OPTIONS=	apache-shared-modules suexec
+PKG_OPTIONS_VAR=		PKG_OPTIONS.apache
+PKG_OPTIONS_REQUIRED_GROUPS=	mpm
+PKG_OPTIONS_GROUP.mpm=		apache-mpm-event apache-mpm-prefork apache-mpm-worker
+PKG_SUPPORTED_OPTIONS=		apache-shared-modules suexec
+PKG_SUGGESTED_OPTIONS=		apache-shared-modules apache-mpm-prefork
 
 .include "../../mk/bsd.options.mk"
+
+# Set the "Multi-Processing Model" used by Apache to handle requests.
+# Valid values are:
+# 	event		multi-threaded based in worker, designed
+# 			to allow more requests to be served
+# 			simultaneously by passing off some processing
+# 			work to supporting threads.
+# 			BEWARE: does not work with SSL or input filters.
+#	prefork		non-threaded, pre-forking web server
+#	worker		hybrid multi-threaded multi-process web server
+#
+PLIST_VARS+=		worker
+.if !empty(PKG_OPTIONS:Mapache-mpm-event)
+CONFIGURE_ARGS+=	--with-mpm=event
+PLIST.worker=		yes
+.elif !empty(PKG_OPTIONS:Mapache-mpm-worker)
+CONFIGURE_ARGS+=	--with-mpm=worker
+PLIST.worker=		yes
+.else
+CONFIGURE_ARGS+=	--with-mpm=prefork
+.endif
 
 # APACHE_MODULES are the modules that are linked statically into the
 # apache httpd executable.
@@ -32,7 +56,11 @@ APACHE_SUEXEC_CONFIGURE_ARGS+=						\
 	--with-suexec-docroot=${APACHE_SUEXEC_DOCROOT:Q}		\
 	--with-suexec-logfile=${APACHE_SUEXEC_LOGFILE:Q}
 
+.  if !empty(PKG_OPTIONS:Mapache-shared-modules)
+CONFIGURE_ARGS+=        --enable-modules="all suexec"
+.  else
 APACHE_MODULES+=        suexec
+.  endif
 CONFIGURE_ARGS+=        ${APACHE_SUEXEC_CONFIGURE_ARGS:M--with-suexec-*}
 BUILD_DEFS+=            APACHE_SUEXEC_CONFIGURE_ARGS
 BUILD_TARGET=		all suexec

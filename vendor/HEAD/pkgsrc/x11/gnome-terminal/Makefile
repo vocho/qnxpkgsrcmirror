@@ -1,10 +1,9 @@
-# $NetBSD: Makefile,v 1.30 2010/01/27 08:46:50 wiz Exp $
+# $NetBSD: Makefile,v 1.33 2010/07/06 15:56:47 drochner Exp $
 #
 
-DISTNAME=		gnome-terminal-2.28.2
-PKGREVISION=		1
+DISTNAME=		gnome-terminal-2.30.2
 CATEGORIES=		x11 gnome
-MASTER_SITES=		${MASTER_SITE_GNOME:=sources/gnome-terminal/2.28/}
+MASTER_SITES=		${MASTER_SITE_GNOME:=sources/gnome-terminal/2.30/}
 EXTRACT_SUFX=		.tar.bz2
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
@@ -43,6 +42,6 @@ BUILDLINK_API_DEPENDS.gtk2+=	gtk2+>=2.13.6
 .include "../../x11/libXft/buildlink3.mk"
 BUILDLINK_API_DEPENDS.startup-notification+=	startup-notification>=0.8
 .include "../../x11/startup-notification/buildlink3.mk"
-BUILDLINK_API_DEPENDS.vte+=	vte>=0.19.1
+BUILDLINK_API_DEPENDS.vte+=	vte>=0.24.0
 .include "../../x11/vte/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

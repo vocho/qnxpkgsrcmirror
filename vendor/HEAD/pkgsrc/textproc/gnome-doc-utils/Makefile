@@ -1,10 +1,9 @@
-# $NetBSD: Makefile,v 1.47 2010/02/10 19:17:46 joerg Exp $
+# $NetBSD: Makefile,v 1.50 2010/06/11 12:58:16 drochner Exp $
 #
 
-DISTNAME=	gnome-doc-utils-0.18.1
-PKGREVISION=	1
+DISTNAME=	gnome-doc-utils-0.20.1
 CATEGORIES=	textproc gnome
-MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gnome-doc-utils/0.18/}
+MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gnome-doc-utils/0.20/}
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
@@ -19,11 +18,12 @@ DEPENDS+=	${PYPKGPREFIX}-libxslt>=1.1.12:../../textproc/py-libxslt
 DEPENDS+=	docbook-xml>=4.5:../../textproc/docbook-xml
 DEPENDS+=	scrollkeeper-dtd-[0-9]*:../../textproc/scrollkeeper-dtd
 
-USE_TOOLS+=		intltool pkg-config gmake gawk msgfmt
+USE_TOOLS+=		intltool pkg-config gmake gawk msgfmt bash:run
 GNU_CONFIGURE=		YES
 MAKE_JOBS_SAFE=		no
 TEST_TARGET=		check
 USE_PKGLOCALEDIR=	YES
+REPLACE_BASH=		tools/gnome-doc-tool.in
 
 CONFIGURE_ARGS+=	PYTHON=${PYTHONBIN:Q}
 

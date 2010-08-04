@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.28 2010/02/03 10:58:11 drochner Exp $
+# $NetBSD: Makefile,v 1.30 2010/08/03 19:14:42 drochner Exp $
 #
 
 DISTNAME=		gnupg-2.0.14
 PKGNAME=		${DISTNAME:S/gnupg/gnupg2/}
-PKGREVISION=		2
+PKGREVISION=		3
 CATEGORIES=		security
 MASTER_SITES=		ftp://ftp.gnupg.org/gcrypt/gnupg/
 EXTRACT_SUFX=		.tar.bz2
@@ -20,10 +20,6 @@ LICENSE=		gnu-gpl-v3
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
 PKG_DESTDIR_SUPPORT=	user-destdir
-
-# ../licommon/libcommon.a
-# reported upstream, should be fixed in 2.0.6
-MAKE_JOBS_SAFE=		no
 
 GNU_CONFIGURE=		yes
 INFO_FILES=		yes

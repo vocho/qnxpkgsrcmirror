@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.29 2010/01/18 09:59:12 wiz Exp $
+# $NetBSD: Makefile,v 1.31 2010/07/30 10:36:30 asau Exp $
 
 DISTNAME=	octave-forge-2006.03.17
-PKGREVISION=	5
+PKGREVISION=	6
 CATEGORIES=	math
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=octave/}
 
@@ -24,7 +24,7 @@ TEST_DIRS=	${WRKSRC}
 TEST_TARGET=	check
 
 GCC_REQD+=	3.0
-USE_LANGUAGES=	c c++ fortran
+USE_LANGUAGES=	c c++ fortran77
 
 .include "../../math/octave/octave.mk"
 

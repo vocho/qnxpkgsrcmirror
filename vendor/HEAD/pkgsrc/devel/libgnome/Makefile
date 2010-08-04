@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.75 2009/10/29 23:05:00 drochner Exp $
+# $NetBSD: Makefile,v 1.78 2010/06/13 22:44:07 wiz Exp $
 #
 
-DISTNAME=	libgnome-2.28.0
+DISTNAME=	libgnome-2.30.0
 PKGREVISION=	1
 CATEGORIES=	devel gnome
-MASTER_SITES=	${MASTER_SITE_GNOME:=sources/libgnome/2.28/}
+MASTER_SITES=	${MASTER_SITE_GNOME:=sources/libgnome/2.30/}
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
@@ -68,6 +68,10 @@ CONFIGURE_ARGS+= --disable-esd
 
 BUILDLINK_API_DEPENDS.glib2+=		glib2>=2.8.0
 BUILDLINK_API_DEPENDS.libbonobo+=	libbonobo>=2.13.0
+
+# Workaround for Upstream Bug#562310.
+# for more detail, see also PR#41475.
+TOOLS_NOOP+=		gtkdoc-rebase
 
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../devel/glib2/buildlink3.mk"
