@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.200 2010/04/15 01:09:55 wiz Exp $
+# $NetBSD: Makefile,v 1.204 2010/06/14 21:39:38 drochner Exp $
 
-DISTNAME=		gtk+-2.18.9
+DISTNAME=		gtk+-2.20.1
 PKGNAME=		${DISTNAME:S/gtk/gtk2/}
 PKGREVISION=		1
 CATEGORIES=		x11
-MASTER_SITES=		ftp://ftp.gtk.org/pub/gtk/2.18/ \
-			${MASTER_SITE_GNOME:=sources/gtk+/2.18/}
+MASTER_SITES=		ftp://ftp.gtk.org/pub/gtk/2.20/ \
+			${MASTER_SITE_GNOME:=sources/gtk+/2.20/}
 EXTRACT_SUFX=		.tar.bz2
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
@@ -24,12 +24,14 @@ CONFLICTS+=		gail-[0-9]*
 SUPERSEDES=		gail-[0-9]*
 
 USE_PKGLOCALEDIR=	yes
-USE_TOOLS+=		gmake msgfmt perl pkg-config
+USE_TOOLS+=		gmake msgfmt perl pkg-config bash
 USE_LANGUAGES=		c c++
 USE_LIBTOOL=		yes
 PTHREAD_AUTO_VARS=	yes
 
 GNU_CONFIGURE=		 yes
+# XXX there is a subtle bashism in "configure" or a bug in NetBSD's sh
+CONFIG_SHELL=		bash
 CONFIGURE_ARGS+=	--sysconfdir=${PREFIX}/libdata
 # Work around build problems, disable unstable PAPI, PR #41608:
 CONFIGURE_ARGS+=	--disable-papi
@@ -103,10 +105,10 @@ _BUILDING_GTK2=	yes
 .include "modules.mk"
 
 .include "../../databases/shared-mime-info/buildlink3.mk"
-BUILDLINK_API_DEPENDS.atk+=	atk>=1.13.0
+BUILDLINK_API_DEPENDS.atk+=	atk>=1.30.0
 .include "../../devel/atk/buildlink3.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"
-BUILDLINK_API_DEPENDS.glib2+=	glib2>=2.21.3
+BUILDLINK_API_DEPENDS.glib2+=	glib2>=2.24.0
 .include "../../devel/glib2/buildlink3.mk"
 BUILDLINK_API_DEPENDS.pango+=	pango>=1.20.0
 .include "../../devel/pango/buildlink3.mk"

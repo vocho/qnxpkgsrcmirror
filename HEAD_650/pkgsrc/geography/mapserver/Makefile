@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.24 2010/04/12 07:04:46 adam Exp $
+# $NetBSD: Makefile,v 1.27 2010/07/30 12:51:22 adam Exp $
 
-DISTNAME=	mapserver-5.6.3
+DISTNAME=	mapserver-5.6.5
 CATEGORIES=	geography www
 MASTER_SITES=	http://download.osgeo.org/mapserver/
 
@@ -54,5 +54,4 @@ do-install:
 .include "../../graphics/gd/buildlink3.mk"
 .include "../../graphics/png/buildlink3.mk"
 .include "../../textproc/libxml2/buildlink3.mk"
-.include "../../x11/libXpm/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.13 2010/01/18 09:58:40 wiz Exp $
+# $NetBSD: Makefile,v 1.16 2010/06/25 08:30:23 obache Exp $
 #
 
-DISTNAME=		amsn-0.97
+DISTNAME=		amsn-0.98.3
 PKGREVISION=		2
 CATEGORIES=		chat
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=amsn/}
-EXTRACT_SUFX=		.tar.bz2
+DISTFILES=		${DISTNAME}-src.tar.bz2
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://www.amsn-project.net/
@@ -28,17 +28,27 @@ REPLACE.TCLSH.new=	${PREFIX}/bin/tclsh
 REPLACE_FILES.TCLSH=	amsn-remote-CLI lang/convert.tcl
 
 REPLACE_PERL=		utils/amsnctl.pl lang/complete.pl
+REPLACE_PERL+=		plugins/music/infogmusicbrowser
 REPLACE_BASH=		utils/update-amsn.sh
+REPLACE_BASH+=		plugins/music/infoamarok2
+REPLACE_BASH+=		plugins/music/infoexaile
+REPLACE_BASH+=		plugins/music/infojuk2
+REPLACE_BASH+=		plugins/music/infolastfm
+REPLACE_BASH+=		plugins/music/infomoc
+REPLACE_BASH+=		plugins/music/infompris
+REPLACE_BASH+=		plugins/music/inforhythmbox
+REPLACE_BASH+=		plugins/music/infospotify
+REPLACE_BASH+=		plugins/music/infovlc
 USE_TOOLS+=		perl:run bash:run
 
-USE_TOOLS+=		autoconf gmake
+USE_TOOLS+=		gmake
 
-pre-configure:
-	cd ${WRKSRC} && autoconf
+CHECK_PORTABILITY_SKIP=	utils/macosx/finishbuild.sh
 
 .include "../../security/tcl-tls/buildlink3.mk"
 .include "../../lang/tcl/buildlink3.mk"
 .include "../../x11/tk/buildlink3.mk"
 .include "../../graphics/png/buildlink3.mk"
 .include "../../graphics/jpeg/buildlink3.mk"
+.include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../mk/bsd.pkg.mk"

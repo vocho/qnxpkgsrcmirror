@@ -1,4 +1,4 @@
-$NetBSD: distinfo,v 1.14 2009/12/16 17:06:34 drochner Exp $
+$NetBSD: distinfo,v 1.16 2010/06/19 13:57:47 drochner Exp $
 
 SHA1 (gvfs-1.4.3.tar.bz2) = 3c28516893d6829b3bbae1768fb44e8a405c44e7
 RMD160 (gvfs-1.4.3.tar.bz2) = da1458101257f5496b4469acb7bc7c646fd9c652

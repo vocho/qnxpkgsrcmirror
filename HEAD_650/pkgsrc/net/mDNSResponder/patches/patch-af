@@ -1,0 +1,16 @@
+$NetBSD$
+
+--- mDNSShared/dnssd_clientstub.c.orig	2009-06-19 23:13:24.000000000 +0000
++++ mDNSShared/dnssd_clientstub.c
+@@ -353,7 +353,11 @@ Minor textual tidying
+ 		}
+ #else
+ 
++#ifndef __QNXNTO__
+ 	#include <sys/fcntl.h>		// For O_RDWR etc.
++#else
++	#include <fcntl.h>
++#endif
+ 	#include <sys/time.h>
+ 	#include <sys/socket.h>
+ 	#include <syslog.h>

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.203 2010/03/18 08:05:51 asau Exp $
+# $NetBSD: Makefile,v 1.208 2010/07/27 17:15:09 asau Exp $
 
 COMMENT=	Mathematics
 
@@ -39,6 +39,7 @@ SUBDIR+=	R-shapefiles
 SUBDIR+=	R-sp
 SUBDIR+=	R-statmod
 SUBDIR+=	R-wle
+SUBDIR+=	TinySVM
 SUBDIR+=	aamath
 SUBDIR+=	abs
 SUBDIR+=	admesh
@@ -103,6 +104,7 @@ SUBDIR+=	mcsim
 SUBDIR+=	meschach
 SUBDIR+=	metis
 SUBDIR+=	minpack
+SUBDIR+=	mpcomplex
 SUBDIR+=	mpfr
 SUBDIR+=	mprime-bin
 SUBDIR+=	mtl
@@ -116,7 +118,6 @@ SUBDIR+=	odepack
 SUBDIR+=	openaxiom
 SUBDIR+=	openfst
 SUBDIR+=	ordCalc
-SUBDIR+=	orpie
 SUBDIR+=	otter
 SUBDIR+=	p5-Excel-Template
 SUBDIR+=	p5-Excel-Template-Plus
@@ -161,6 +162,7 @@ SUBDIR+=	py-fpconst
 SUBDIR+=	py-mpmath
 SUBDIR+=	py-networkx
 SUBDIR+=	py-numarray
+SUBDIR+=	py-numexpr
 SUBDIR+=	py-numpy
 SUBDIR+=	py-pytables
 SUBDIR+=	py-rpy
@@ -184,6 +186,7 @@ SUBDIR+=	speedcrunch
 SUBDIR+=	statist
 SUBDIR+=	superlu
 SUBDIR+=	tasp-vsipl
+SUBDIR+=	teapot
 SUBDIR+=	texdrive
 SUBDIR+=	tochnog
 SUBDIR+=	udunits

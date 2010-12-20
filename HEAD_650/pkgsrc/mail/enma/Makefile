@@ -1,14 +1,15 @@
-# $NetBSD: Makefile,v 1.4 2010/04/15 13:03:21 obache Exp $
+# $NetBSD: Makefile,v 1.6 2010/05/28 07:26:48 obache Exp $
 #
 
 DISTNAME=	enma-1.1.0
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	mail
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=enma/}
 
 MAINTAINER=	obache@NetBSD.org
 HOMEPAGE=	http://enma.sourceforge.net/
 COMMENT=	Sender authentication milter supporting SPF and Sender ID
+LICENSE=	2-clause-bsd
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
@@ -47,6 +48,9 @@ SUBST_CLASSES+=		daemon
 SUBST_STAGE.daemon=	post-configure
 SUBST_FILES.daemon=	enma/etc/enma.conf.sample
 SUBST_SED.daemon=	-e 's;daemon;${ENMA_USER};g'
+
+FILES_SUBST+=		ENMA_USER=${ENMA_USER:Q}
+FILES_SUBST+=		ENMA_GROUP=${ENMA_GROUP:Q}
 
 OWN_DIRS_PERMS+=	${VARBASE}/run/enma ${ENMA_USER} ${ENMA_GROUP} 0700
 

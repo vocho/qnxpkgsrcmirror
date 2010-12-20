@@ -1,4 +1,4 @@
-# $NetBSD: bsd.buildlink3.mk,v 1.206 2009/03/20 20:10:15 joerg Exp $
+# $NetBSD: bsd.buildlink3.mk,v 1.208 2010/05/02 18:32:29 wiz Exp $
 #
 # Copyright (c) 2004 The NetBSD Foundation, Inc.
 # All rights reserved.
@@ -282,7 +282,16 @@ _BLNK_PKG_DBDIR.${_pkg_}?=	_BLNK_PKG_DBDIR.${_pkg_}_not_found
 _BLNK_PKG_INFO.${_pkg_}?=	${TRUE}
 BUILDLINK_PKGNAME.${_pkg_}?=	${_pkg_}
 BUILDLINK_IS_DEPOT.${_pkg_}?=	no
+# Usual systems has builtin packages in /usr
+.    if exists(/usr)
 BUILDLINK_PREFIX.${_pkg_}?=	/usr
+# Haiku OS has posix packages in /boot/common
+.    elif exists(/boot/common)
+BUILDLINK_PREFIX.${_pkg_}?=	/boot/common
+.    else
+# XXX: elsewhere?
+BUILDLINK_PREFIX.${_pkg_}?=	/
+.    endif
 .  endif
 #
 # Set a default for _BLNK_PKG_DBDIR.<pkg>, which is the directory

@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.117 2010/02/10 19:17:42 joerg Exp $
+# $NetBSD: Makefile,v 1.120 2010/07/14 11:11:26 sbd Exp $
 
 DISTNAME=	koffice-1.6.3
-PKGREVISION=	16
+PKGREVISION=	18
 CATEGORIES=	misc kde
 MASTER_SITES=	${MASTER_SITE_KDE:=koffice-1.6.3/src/}
 EXTRACT_SUFX=	.tar.bz2
@@ -11,6 +11,7 @@ HOMEPAGE=	http://www.koffice.org/
 COMMENT=	KDE Office Suite
 
 PKG_DESTDIR_SUPPORT=	user-destdir
+MAKE_JOBS_SAFE=		no
 
 PATCH_SITES=	ftp://ftp.kde.org/pub/kde/security_patches/
 PATCHFILES=	koffice-xpdf-CVE-2007-3387.diff koffice-1.6.3-xpdf2-CVE-2007-4352-5392-5393.diff

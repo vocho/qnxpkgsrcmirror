@@ -1,30 +1,51 @@
-$NetBSD: patch-aa,v 1.8 2006/03/03 22:30:56 wiz Exp $
+$NetBSD: patch-aa,v 1.10 2010/07/20 00:04:08 sbd Exp $
 
---- mDNSPosix/Makefile.orig	2006-02-20 16:40:36.000000000 -0500
+Find libpthread.so when not on the default rpath.
+
+--- mDNSPosix/Makefile.orig	2009-02-02 19:44:06.000000000 +0000
 +++ mDNSPosix/Makefile
-@@ -275,6 +275,7 @@ CFLAGS_OS = -DNOT_HAVE_DAEMON -DNOT_HAVE
- CC = gcc
- LD = gcc -shared
- LIBFLAGS = -lsocket -lnsl -lresolv
-+SYSTEMLIBS = -lsocket -lnsl
- JAVACFLAGS_OS += -I$(JDK)/include/solaris
- ifneq ($(DEBUG),1)
- STRIP = strip
-@@ -293,6 +294,13 @@ CFLAGS_OS =
+@@ -326,7 +326,7 @@ LN = ln -s -f
+ CFLAGS_COMMON = -I$(COREDIR) -I$(SHAREDDIR) -I$(OBJDIR) -fwrapv -W -Wall -DPID_FILE=\"/var/run/mdnsd.pid\" -DMDNS_UDS_SERVERPATH=\"/var/run/mdnsd\"
+ CFLAGS_PTHREAD =
+ LINKOPTS =
+-LINKOPTS_PTHREAD = -lpthread
++LINKOPTS_PTHREAD = $(LIBFLAGS) ${COMPILER_RPATH_FLAG}${PTHREADBASE}/lib ${PTHREAD_LDFLAGS} ${PTHREAD_LIBS} ${EXTRA_LIBS}
+ LDSUFFIX = so
+ JAVACFLAGS_OS = -fPIC -shared -ldns_sd
+ 
+@@ -362,7 +362,7 @@ endif
+ else
+ 
+ ifeq ($(os),linux)
+-CFLAGS_OS = -DNOT_HAVE_SA_LEN -DUSES_NETLINK -DHAVE_LINUX -DTARGET_OS_LINUX
++CFLAGS_OS = -DNOT_HAVE_SA_LEN -DUSES_NETLINK -DHAVE_LINUX -DTARGET_OS_LINUX -D_GNU_SOURCE
+ FLEXFLAGS_OS = -l
+ JAVACFLAGS_OS += -I$(JDK)/include/linux
+ OPTIONALTARG = nss_mdns
+@@ -374,6 +374,13 @@ CFLAGS_OS =
  LDCONFIG = ldconfig
  else
  
 +ifeq ($(os),qnx)
 +CC = gcc
 +LD = gcc -shared
-+LIBFLAGS = -lsocket
++LINKOPTS = -lsocket
 +COMPILER_RPATH_FLAG = -L
 +else
 +
  ifeq ($(os),freebsd)
  # If not already defined, set LOCALBASE to /usr/local
  # FreeBSD requires the startup script to end in ".sh"
-@@ -347,6 +355,7 @@ endif
+@@ -388,7 +395,7 @@ CFLAGS_OS =
+ #     -pthread
+ #       Link a user-threaded process against libc_r instead of libc.
+ CFLAGS_PTHREAD   = -pthread -D_THREAD_SAFE
+-LINKOPTS_PTHREAD = -pthread
++LINKOPTS_PTHREAD = $(LIBFLAGS) ${COMPILER_RPATH_FLAG}${PTHREADBASE}/lib ${PTHREAD_LDFLAGS} ${PTHREAD_LIBS} ${EXTRA_LIBS}
+ JAVACFLAGS_OS += -I$(JDK)/include/freebsd
+ LDCONFIG = ldconfig
+ else
+@@ -419,6 +426,7 @@ endif
  endif
  endif
  endif
@@ -32,12 +53,3 @@ $NetBSD: patch-aa,v 1.8 2006/03/03 22:30:56 wiz Exp $
  
  NSSLIBNAME  := libnss_mdns
  NSSVERSION  := 0.2
-@@ -617,7 +626,7 @@ $(BUILDDIR)/mDNSNetMonitor:          $(S
- 	$(CC) $+ -o $@ $(LIBFLAGS)
- 
- $(BUILDDIR)/dnsextd:                 $(SPECIALOBJ) $(OBJDIR)/dnsextd.c.threadsafe.o
--	$(CC) $+ -o $@ $(LIBFLAGS) -lpthread
-+	$(CC) $+ -o $@ $(LIBFLAGS) ${COMPILER_RPATH_FLAG}${PTHREADBASE}/lib ${PTHREAD_LDFLAGS} ${PTHREAD_LIBS} ${EXTRA_LIBS}
- 
- #############################################################################
- 

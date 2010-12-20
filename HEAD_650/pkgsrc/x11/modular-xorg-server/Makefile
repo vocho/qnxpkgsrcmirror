@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.59 2010/04/16 13:50:51 tnn Exp $
+# $NetBSD: Makefile,v 1.61 2010/06/27 10:43:01 tnn Exp $
 #
 
 DISTNAME=	xorg-server-1.6.5
 PKGNAME=	modular-${DISTNAME}
-PKGREVISION=	5
+PKGREVISION=	7
 CATEGORIES=	x11
 MASTER_SITES=	${MASTER_SITE_XORG:=xserver/}
 EXTRACT_SUFX=	.tar.bz2
@@ -25,6 +25,7 @@ SHLIBTOOL_OVERRIDE=	# empty
 BUILD_DEFS+=		VARBASE
 BUILD_DEFS_EFFECTS+=	XKB_OUTPUT_DIR
 
+OWN_DIRS+=		${VARBASE}/log
 OWN_DIRS+=		${XKB_OUTPUT_DIR}
 XKB_OUTPUT_DIR?=	${VARBASE}/db/xkb # XXX sync with xkeyboard-config
 
@@ -110,6 +111,7 @@ CONFIGURE_ENV+=		ac_cv_path_RAWCPP="cc -E -Uunix -"
 .include "../../fonts/libfontenc/buildlink3.mk"
 .include "../../graphics/MesaLib/buildlink3.mk"
 .include "../../security/openssl/buildlink3.mk"
+BUILDLINK_API_DEPENDS.libpciaccess+=	libpciaccess>=0.11.0
 .include "../../sysutils/libpciaccess/buildlink3.mk"
 .include "../../x11/bigreqsproto/buildlink3.mk"
 .include "../../x11/compositeproto/buildlink3.mk"

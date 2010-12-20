@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.7 2010/01/18 09:58:38 wiz Exp $
+# $NetBSD: Makefile,v 1.9 2010/06/13 22:43:51 wiz Exp $
 
-DISTNAME=	MP3Diags-0.99.06.041
+DISTNAME=	MP3Diags-1.0.05.050
 PKGNAME=	${DISTNAME:S/MP3D/mp3d/}
 PKGREVISION=	1
 CATEGORIES=	audio
@@ -22,8 +22,8 @@ do-configure:
 do-install:
 	${INSTALL_PROGRAM} ${WRKSRC}/bin/MP3Diags ${DESTDIR}${PREFIX}/bin
 
-.include "../../x11/qt4-libs/buildlink3.mk"
-.include "../../x11/qt4-tools/buildlink3.mk"
 .include "../../devel/boost-headers/buildlink3.mk"
 .include "../../devel/boost-libs/buildlink3.mk"
+.include "../../x11/qt4-libs/buildlink3.mk"
+.include "../../x11/qt4-tools/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

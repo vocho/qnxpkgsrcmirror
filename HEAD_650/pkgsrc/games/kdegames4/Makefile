@@ -1,12 +1,15 @@
-# $NetBSD: Makefile,v 1.5 2010/01/27 10:38:38 markd Exp $
+# $NetBSD: Makefile,v 1.9 2010/07/14 11:11:20 sbd Exp $
 
 DISTNAME=	kdegames-${_KDE_VERSION}
+PKGREVISION=	1
 CATEGORIES=	games
 COMMENT=	Games for the KDE integrated X11 desktop
 
 .include "../../meta-pkgs/kde4/Makefile.kde4"
 
 # BUILD_MAKE_FLAGS+= VERBOSE=1
+
+REPLACE_PERL+=	katomic/katomic-levelset-upd.pl
 
 .include "../../meta-pkgs/kde4/kde4.mk"
 

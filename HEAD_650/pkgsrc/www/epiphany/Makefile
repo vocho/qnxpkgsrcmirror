@@ -1,10 +1,9 @@
-# $NetBSD: Makefile,v 1.104 2010/02/24 18:47:07 drochner Exp $
+# $NetBSD: Makefile,v 1.107 2010/07/13 12:05:57 drochner Exp $
 #
 
-DISTNAME=	epiphany-2.28.2
-PKGREVISION=	1
+DISTNAME=	epiphany-2.30.2
 CATEGORIES=	www gnome
-MASTER_SITES=	${MASTER_SITE_GNOME:=sources/epiphany/2.28/}
+MASTER_SITES=	${MASTER_SITE_GNOME:=sources/epiphany/2.30/}
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
@@ -19,7 +18,10 @@ USE_LIBTOOL=		YES
 USE_PKGLOCALEDIR=	YES
 USE_LANGUAGES=		c c++
 
-PKGCONFIG_OVERRIDE=	data/epiphany-2.28.pc
+#CONFIGURE_ARGS+=	--with-ca-file=/etc/openssl/certs/ca-certificates.crt
+CONFIGURE_ARGS+=	--without-ca-file
+
+PKGCONFIG_OVERRIDE=	data/epiphany-2.29.pc
 
 .include "options.mk"
 
@@ -31,12 +33,6 @@ GCONF_SCHEMAS+=	epiphany-lockdown.schemas
 .include "../../devel/gettext-lib/buildlink3.mk"
 BUILDLINK_API_DEPENDS.glib2+=		glib2>=2.18.0
 .include "../../devel/glib2/buildlink3.mk"
-.include "../../devel/libbonobo/buildlink3.mk"
-.include "../../devel/libglade/buildlink3.mk"
-BUILDLINK_API_DEPENDS.libgnome+=	libgnome>=2.14.0
-.include "../../devel/libgnome/buildlink3.mk"
-BUILDLINK_API_DEPENDS.libgnomeui+=	libgnomeui>=2.14.0
-.include "../../devel/libgnomeui/buildlink3.mk"
 .include "../../devel/nss/buildlink3.mk"
 .include "../../www/webkit-gtk/buildlink3.mk"
 .include "../../graphics/gnome-icon-theme/buildlink3.mk"

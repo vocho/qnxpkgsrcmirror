@@ -1,8 +1,8 @@
 $NetBSD$
 
---- configure.orig	2010-03-29 10:03:35.000000000 +0000
+--- configure.orig	2010-08-01 14:03:14.000000000 +0000
 +++ configure
-@@ -45622,7 +45622,7 @@ return gethostbyname ();
+@@ -43337,7 +43337,7 @@ return gethostbyname ();
    return 0;
  }
  _ACEOF
@@ -11,7 +11,7 @@ $NetBSD$
    if test -z "$ac_lib"; then
      ac_res="none required"
    else
-@@ -46641,7 +46641,7 @@ $as_echo "$as_me: Disabling extended mal
+@@ -44356,7 +44356,7 @@ $as_echo "$as_me: Disabling extended mal
  			  { $as_echo "$as_me:$LINENO: skipping libmalloc check for $host" >&5
  $as_echo "$as_me: skipping libmalloc check for $host" >&6;}
  				;;

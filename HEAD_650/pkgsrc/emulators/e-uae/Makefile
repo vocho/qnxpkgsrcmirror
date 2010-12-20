@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.10 2009/08/26 19:58:44 sno Exp $
+# $NetBSD: Makefile,v 1.12 2010/06/14 15:33:12 wiz Exp $
 
 DISTNAME=	e-uae-0.8.28
-PKGREVISION=	4
+PKGREVISION=	5
 CATEGORIES=	emulators
 MASTER_SITES=	http://www.rcdrummond.net/uae/e-uae-0.8.28/
 EXTRACT_SUFX=	.tar.bz2
@@ -30,5 +30,6 @@ post-install:
 	${INSTALL_DATA} ${FILESDIR}/e-uae.desktop ${DESTDIR}${PREFIX}/share/applications
 
 .include "../../devel/zlib/buildlink3.mk"
+.include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../mk/oss.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

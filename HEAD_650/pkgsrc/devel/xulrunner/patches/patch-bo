@@ -1,11 +1,11 @@
 $NetBSD$
 
---- media/libsydneyaudio/include/sydney_audio.h.orig	2010-04-02 16:02:39.000000000 +0000
+--- media/libsydneyaudio/include/sydney_audio.h.orig	2010-07-22 21:55:10.000000000 +0000
 +++ media/libsydneyaudio/include/sydney_audio.h
-@@ -85,6 +85,12 @@ async-signal safe.
- #   else
- #       define SA_LITTLE_ENDIAN 1
+@@ -87,6 +87,12 @@ async-signal safe.
  #   endif
+ #elif defined(AIX)
+ #	define SA_BIG_ENDIAN 1
 +#elif defined(__QNXNTO__)
 +#   if defined(__BIGENDIAN__)
 +#       define SA_BIG_ENDIAN 1

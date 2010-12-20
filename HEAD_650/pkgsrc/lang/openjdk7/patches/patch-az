@@ -1,0 +1,16 @@
+$NetBSD$
+
+--- corba/make/common/shared/Compiler.gmk.orig	2010-10-29 15:58:43.000000000 +0000
++++ corba/make/common/shared/Compiler.gmk
+@@ -47,6 +47,11 @@ ifeq ($(PLATFORM), bsd)
+   override CC_VERSION = gcc
+ endif
+ 
++# QNX uses GNU compilers by default
++ifeq ($(PLATFORM), qnx)
++  override CC_VERSION = gcc
++endif
++
+ # Get the compiler specific settings
+ include $(BUILDDIR)/common/shared/Compiler-$(CC_VERSION).gmk
+ 

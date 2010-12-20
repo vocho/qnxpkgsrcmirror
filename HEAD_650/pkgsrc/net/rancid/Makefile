@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.1.1.1 2010/03/12 23:39:16 pettai Exp $
+# $NetBSD: Makefile,v 1.3 2010/07/19 11:22:25 pettai Exp $
 #
 
-DISTNAME=		rancid-2.3.2
+DISTNAME=		rancid-2.3.4
 CATEGORIES=		net
 MASTER_SITES=		ftp://ftp.shrubbery.net/pub/rancid/
 
@@ -59,6 +59,12 @@ OWN_DIRS_PERMS+=	${VARBASE}/rancid ${RC_USER} ${RC_GROUP} 0755
 INSTALLATION_DIRS=	share/examples/rancid
 INSTALLATION_DIRS+=	share/doc/rancid
 INSTALLATION_DIRS+=	${VARBASE}/rancid
+
+.include "../../mk/bsd.prefs.mk"
+
+.if ${OPSYS} == "NetBSD" && exists(/sbin/ping)
+CONFIGURE_ARGS+=	ac_cv_PING_PATH=/sbin/ping
+.endif
 
 post-install:
 	${INSTALL_DATA} ${WRKSRC}/etc/lg.conf.sample ${DESTDIR}${EGDIR}

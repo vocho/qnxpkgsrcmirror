@@ -1,19 +1,19 @@
-# $NetBSD: Makefile,v 1.27 2009/10/18 20:12:57 zafer Exp $
+# $NetBSD: Makefile,v 1.31 2010/07/16 07:34:02 tnn Exp $
 
-DISTNAME=	mDNSResponder-108
-PKGREVISION=	1
+DISTNAME=	mDNSResponder-214.3.2
 CATEGORIES=	net
 MASTER_SITES=	http://www.opensource.apple.com/tarballs/mDNSResponder/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://developer.apple.com/opensource/internet/bonjour.html
+HOMEPAGE=	http://developer.apple.com/bonjour/
 COMMENT=	Apple's mDNS responder
 
 MAKE_JOBS_SAFE=	no
 
-USE_TOOLS+=	gmake
+USE_TOOLS+=	gmake flex bison
 BUILD_DIRS=	mDNSPosix
 BUILDDIR=	${WRKSRC}/mDNSPosix/build/prod
+AUTO_MKDIRS=	yes
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
@@ -50,8 +50,6 @@ BINARY=		mDNSClientPosix mDNSIdentify mDNSNetMonitor \
 		mDNSProxyResponderPosix mDNSResponderPosix
 SBINARY=	mdnsd dnsextd
 
-INSTALLATION_DIRS=	bin include lib sbin
-
 .if !empty(MACHINE_PLATFORM:MNetBSD-3.99.[1-7]-*) || \
     !empty(MACHINE_PLATFORM:MNetBSD-3.[0-9]-*) || \
     !empty(MACHINE_PLATFORM:MNetBSD-3.[0-9][._]*) || \
@@ -80,6 +78,10 @@ do-install:
 	for i in ${SBINARY}; do \
 		${INSTALL_PROGRAM} ${BUILDDIR}/$$i ${DESTDIR}${PREFIX}/sbin; \
 	done
+	${INSTALL_PROGRAM} ${WRKSRC}/Clients/build/dns-sd ${DESTDIR}${PREFIX}/bin
+	${INSTALL_MAN} ${WRKSRC}/mDNSShared/dns-sd.1 ${DESTDIR}${PREFIX}/${PKGMANDIR}/man1
+	${INSTALL_MAN} ${WRKSRC}/mDNSShared/dnsextd.8 ${DESTDIR}${PREFIX}/${PKGMANDIR}/man8
+	${INSTALL_MAN} ${WRKSRC}/mDNSShared/mDNSResponder.8 ${DESTDIR}${PREFIX}/${PKGMANDIR}/man8/mdnsd.8
 	${INSTALL_DATA} ${WRKSRC}/mDNSShared/dns_sd.h ${DESTDIR}${PREFIX}/include
 	${INSTALL_LIB} ${BUILDDIR}/libdns_sd.${SO_SUFFIX} ${DESTDIR}${PREFIX}/lib
 

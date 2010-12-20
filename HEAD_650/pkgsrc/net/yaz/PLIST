@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.11 2010/02/04 11:17:06 wiz Exp $
+@comment $NetBSD: PLIST,v 1.14 2010/07/14 12:53:51 obache Exp $
 bin/yaz-asncomp
 bin/yaz-client
 bin/yaz-config
@@ -23,6 +23,7 @@ include/yaz/diagsrw.h
 include/yaz/dirent.h
 include/yaz/errno.h
 include/yaz/file_glob.h
+include/yaz/gettimeofday.h
 include/yaz/icu.h
 include/yaz/ill-core.h
 include/yaz/ill.h
@@ -54,13 +55,17 @@ include/yaz/record_conv.h
 include/yaz/retrieval.h
 include/yaz/rpn2cql.h
 include/yaz/sc.h
+include/yaz/shptr.h
 include/yaz/snprintf.h
 include/yaz/soap.h
 include/yaz/sortspec.h
+include/yaz/spipe.h
 include/yaz/srw.h
 include/yaz/statserv.h
 include/yaz/tcpip.h
 include/yaz/test.h
+include/yaz/thread_create.h
+include/yaz/thread_id.h
 include/yaz/timing.h
 include/yaz/tokenizer.h
 include/yaz/tpath.h
@@ -85,6 +90,7 @@ include/yaz/z-diag1.h
 include/yaz/z-espec1.h
 include/yaz/z-estask.h
 include/yaz/z-exp.h
+include/yaz/z-facet-1.h
 include/yaz/z-grs.h
 include/yaz/z-mterm2.h
 include/yaz/z-oclcui.h
@@ -212,6 +218,7 @@ share/yaz/z39.50/charneg-3.asn
 share/yaz/z39.50/datetime.asn
 share/yaz/z39.50/esadmin.asn
 share/yaz/z39.50/esupdate.asn
+share/yaz/z39.50/facet.asn
 share/yaz/z39.50/mterm2.asn
 share/yaz/z39.50/oclcui.asn
 share/yaz/z39.50/univres.asn

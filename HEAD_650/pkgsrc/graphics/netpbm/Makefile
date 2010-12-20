@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.165 2010/02/19 18:25:44 drochner Exp $
+# $NetBSD: Makefile,v 1.168 2010/07/14 02:39:17 dholland Exp $
 
-DISTNAME=	netpbm-10.35.73
+DISTNAME=	netpbm-10.35.76
+PKGREVISION=	1
 CATEGORIES=	graphics
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=netpbm/}
 EXTRACT_SUFX=	.tgz
@@ -56,8 +57,11 @@ REPLACE_FILES.bash+=	other/ppmtomap
 .include "../../mk/bsd.prefs.mk"
 
 # Fiasco fails to compile on Darwin-8.x.
+PLIST_VARS+=	fiasco
 .if !empty(MACHINE_PLATFORM:MDarwin-8.*-*)
 MAKE_ENV+=	BUILD_FIASCO=N
+.else
+PLIST.fiasco=	yes
 .endif
 
 .if ${OPSYS} == "QNX"

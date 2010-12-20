@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.3 2010/02/11 18:28:07 drochner Exp $
+# $NetBSD: Makefile,v 1.5 2010/06/16 20:45:42 drochner Exp $
 #
 
-DISTNAME=	extrema-4.4.3
+DISTNAME=	extrema-4.4.4
 CATEGORIES=	graphics
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=extrema/}
 

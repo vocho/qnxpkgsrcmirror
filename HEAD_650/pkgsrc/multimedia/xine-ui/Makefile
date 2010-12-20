@@ -1,10 +1,11 @@
-# $NetBSD: Makefile,v 1.43 2010/02/17 10:36:00 zafer Exp $
+# $NetBSD: Makefile,v 1.45 2010/06/13 22:45:08 wiz Exp $
 #
 
-DISTNAME=		xine-ui-0.99.5
-PKGREVISION=		4
+DISTNAME=		xine-ui-0.99.6
+PKGREVISION=		1
 CATEGORIES=		multimedia
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=xine/}
+EXTRACT_SUFX=		.tar.bz2
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://www.xine-project.org/home
@@ -17,12 +18,14 @@ USE_TOOLS+=		msgfmt pkg-config
 USE_LIBTOOL=		YES
 GNU_CONFIGURE=		YES
 USE_GNU_READLINE=	yes
+CONFIGURE_ARGS+=	--disable-lirc
 
 BUILDLINK_DEPMETHOD.libXt?=	build
 
 PTHREAD_AUTO_VARS=	yes
 
 .include "../../converters/libiconv/buildlink3.mk"
+.include "../../databases/shared-mime-info/mimedb.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../devel/ncurses/buildlink3.mk"
 .include "../../devel/readline/buildlink3.mk"

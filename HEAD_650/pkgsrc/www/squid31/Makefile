@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.20 2010/03/31 11:15:13 tron Exp $
+# $NetBSD: Makefile,v 1.24 2010/08/04 11:36:08 tron Exp $
 
-DISTNAME=	squid-3.1.1
+DISTNAME=	squid-3.1.6
 PKGNAME=	${DISTNAME}	# Necessary for "pkgsrc/www/squid/options.mk"
 CATEGORIES=	www
 MASTER_SITES=	http://www.squid-cache.org/Versions/v3/3.1/ \
@@ -36,7 +36,13 @@ post-build:
 	  ${WRKSRC}/src/squid.conf.default
 
 .if ${OPSYS} == "QNX"
+# Gack.  Maybe QNX8 will have a signed time_t
+post-patch:
+	${CP} ${FILESDIR}/qnx-inc.h ${WRKSRC}/compat/os
+CFLAGS.QNX+=	-include ${WRKSRC}/compat/os/qnx-inc.h
+
 .include "../../sysutils/s5ipc/buildlink3.mk"
 .endif
 
+.include "../../devel/libltdl/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

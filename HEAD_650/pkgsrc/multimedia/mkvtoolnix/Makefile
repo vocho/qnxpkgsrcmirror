@@ -1,8 +1,6 @@
-# $NetBSD: Makefile,v 1.18 2010/01/18 09:59:18 wiz Exp $
-#
+# $NetBSD: Makefile,v 1.22 2010/07/09 16:04:02 drochner Exp $
 
-DISTNAME=	mkvtoolnix-2.9.8
-PKGREVISION=	1
+DISTNAME=	mkvtoolnix-4.1.1
 CATEGORIES=	multimedia
 MASTER_SITES=	http://www.bunkus.org/videotools/mkvtoolnix/sources/
 EXTRACT_SUFX=	.tar.bz2
@@ -20,6 +18,7 @@ USE_LANGUAGES=	c c++
 
 CONFIGURE_ARGS+=	--with-boost-libdir=${BUILDLINK_PREFIX.boost-libs}
 CONFIGURE_ARGS+=	--with-boost_regex=boost_regex
+CONFIGURE_ARGS+=	--with-boost-filesystem=boost_filesystem
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.mkvtoolnix
 PKG_SUPPORTED_OPTIONS=	mkvtoolnix-gui
@@ -31,10 +30,15 @@ PLIST_VARS+=	gui
 
 .if !empty(PKG_OPTIONS:Mmkvtoolnix-gui)
 PLIST.gui=	yes
-CONFIGURE_ARGS+= --enable-gui --enable-wxwidgets 
+CONFIGURE_ARGS+=	--enable-gui
+CONFIGURE_ARGS+=	--enable-wxwidgets
 .   include "../../x11/wxGTK28/buildlink3.mk"
+.include "../../sysutils/desktop-file-utils/desktopdb.mk"
+.include "../../databases/shared-mime-info/mimedb.mk"
+.include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .else
-CONFIGURE_ARGS+= --disable-gui --disable-wxwidgets
+CONFIGURE_ARGS+=	--disable-gui
+CONFIGURE_ARGS+=	--disable-wxwidgets
 .endif
 
 .include "../../archivers/bzip2/buildlink3.mk"

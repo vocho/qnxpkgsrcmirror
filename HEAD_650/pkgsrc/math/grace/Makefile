@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.46 2010/01/18 09:59:12 wiz Exp $
+# $NetBSD: Makefile,v 1.48 2010/07/30 10:36:29 asau Exp $
 #
 
 DISTNAME=	grace-5.1.22
-PKGREVISION=	3
+PKGREVISION=	4
 CATEGORIES=	math graphics x11
 MASTER_SITES=	ftp://plasma-gate.weizmann.ac.il/pub/grace/src/stable/ \
 		ftp://ftp.fu-berlin.de/unix/graphics/grace/src/stable/ \
@@ -17,7 +17,7 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_X11BASE=		YES
 USE_TOOLS+=		gmake
-USE_LANGUAGES=		c fortran
+USE_LANGUAGES=		c fortran77
 GNU_CONFIGURE=		YES
 CONFIGURE_ARGS+=	--enable-grace-home=${PREFIX}/grace
 CONFIGURE_ARGS+=	--without-bundled-xbae

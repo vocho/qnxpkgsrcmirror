@@ -1,4 +1,4 @@
-# $NetBSD: bsd.pkg.update.mk,v 1.20 2010/02/25 02:08:33 joerg Exp $
+# $NetBSD: bsd.pkg.update.mk,v 1.22 2010/07/03 04:24:14 darcy Exp $
 #
 # This Makefile fragment is included by bsd.pkg.mk and contains the targets
 # and variables for "make update".
@@ -51,6 +51,7 @@ RESUMEUPDATE?=	NO
 CLEAR_DIRLIST?=	YES
 
 update:
+	${RUN} ${RECURSIVE_MAKE} ${MAKEFLAGS} check-vulnerable
 	${RUN} ${RECURSIVE_MAKE} ${MAKEFLAGS} update-create-ddir
 .  if ${UPDATE_TARGET} != "replace"
 	${RUN} if ${PKG_INFO} -qe ${PKGBASE}; then			\
@@ -108,7 +109,7 @@ clean-update:
 
 .PHONY: update-dirlist
 update-dirlist:
-	${RUN} ${MKDIR} -p ${WRKDIR}
+	${RUN} ${MKDIR} ${WRKDIR}
 .if defined(PKGLIST)
 .  for __tmp__ in ${PKGLIST}
 	${RUN} ${ECHO} >>${_DLIST} "${__tmp__}"

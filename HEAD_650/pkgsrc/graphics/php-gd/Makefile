@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.22 2010/02/27 03:35:12 taca Exp $
+# $NetBSD: Makefile,v 1.24 2010/07/24 22:24:21 tron Exp $
 
 MODNAME=		gd
 CATEGORIES+=		graphics

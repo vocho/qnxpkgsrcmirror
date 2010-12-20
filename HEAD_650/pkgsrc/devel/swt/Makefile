@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.3 2010/02/03 18:26:53 tnn Exp $
+# $NetBSD: Makefile,v 1.6 2010/07/02 20:41:39 joerg Exp $
 #
 
 SWTREL=		3.5.1
@@ -7,6 +7,7 @@ SWTDATE=	200909170800
 
 PKGNAME=	swt-${SWTREL}.${SWTVER}
 DISTNAME=	swt-${SWTREL}-gtk-linux-x86
+PKGREVISION=	1
 CATEGORIES=	devel
 MASTER_SITES=	http://download.eclipse.org/eclipse/downloads/drops/R-${SWTREL}-${SWTDATE}/
 EXTRACT_SUFX=	.zip
@@ -19,7 +20,7 @@ COMMENT=	Open source widget toolkit for Java
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 WRKSRC=		${WRKDIR}
-USE_TOOLS+=	gmake
+USE_TOOLS+=	gmake pkg-config
 USE_LANGUAGES=	c c++
 USE_JAVA2=	yes
 
@@ -34,6 +35,13 @@ PLIST_SUBST+=	SWTVER=${SWTVER}
 INSTALLATION_DIRS+=	share/java
 INSTALLATION_DIRS+=	lib/jni
 
+.include "../../mk/bsd.prefs.mk"
+
+.if ${OPSYS} == "NetBSD" && ${LOWER_ARCH} == "x86_64"
+MY_LOWER_ARCH=	amd64
+.endif
+MY_LOWER_ARCH?=	${LOWER_ARCH}
+
 post-extract:
 	cd ${WRKSRC} && jar -xf ${WRKSRC}/src.zip
 	cp ${FILESDIR}/make_pkgsrc.mak ${WRKSRC}
@@ -43,6 +51,7 @@ do-build:
 	cd ${WRKSRC} && ${GMAKE} \
 	    JAVA_HOME=${PKG_JAVA_HOME} \
 	    LOWER_OPSYS=${LOWER_OPSYS} \
+	    LOWER_ARCH=${MY_LOWER_ARCH} \
 	    -f make_pkgsrc.mak ${target}
 .endfor
 	${TEST} -d ${WRKSRC}/bin || mkdir ${WRKSRC}/bin

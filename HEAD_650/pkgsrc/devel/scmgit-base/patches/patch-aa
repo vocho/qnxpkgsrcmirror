@@ -1,21 +1,31 @@
-$NetBSD: patch-aa,v 1.11 2010/01/15 10:36:41 wiz Exp $
+$NetBSD: patch-aa,v 1.13 2010/10/28 10:23:08 adam Exp $
 
---- Makefile.orig	2010-02-10 23:12:51.000000000 +0000
+--- Makefile.orig	2010-10-22 03:49:16.000000000 +0000
 +++ Makefile
-@@ -305,12 +305,8 @@ GITWEB_SITE_FOOTER =
+@@ -259,8 +259,6 @@ endif
  
- export prefix bindir sharedir sysconfdir
+ CFLAGS = -g -O2 -Wall
+ LDFLAGS =
+-ALL_CFLAGS = $(CPPFLAGS) $(CFLAGS)
+-ALL_LDFLAGS = $(LDFLAGS)
+ STRIP ?= strip
+ 
+ # Among the variables below, these:
+@@ -298,13 +296,9 @@ pathsep = :
+ 
+ export prefix bindir sharedir sysconfdir gitwebdir
  
 -CC = gcc
 -AR = ar
  RM = rm -f
+ DIFF = diff
 -TAR = tar
  FIND = find
 -INSTALL = install
  RPMBUILD = rpmbuild
  TCL_PATH = tclsh
  TCLTK_PATH = wish
-@@ -768,9 +764,10 @@ ifeq ($(uname_S),Darwin)
+@@ -834,9 +828,10 @@ ifeq ($(uname_S),Darwin)
  	USE_ST_TIMESPEC = YesPlease
  endif
  ifeq ($(uname_S),SunOS)
@@ -27,40 +37,16 @@ $NetBSD: patch-aa,v 1.11 2010/01/15 10:36:41 wiz Exp $
  	SANE_TOOL_PATH = /usr/xpg6/bin:/usr/xpg4/bin
  	NO_STRCASESTR = YesPlease
  	NO_MEMMEM = YesPlease
-@@ -801,8 +798,6 @@ ifeq ($(uname_S),SunOS)
- 		NO_C99_FORMAT = YesPlease
+@@ -880,8 +875,6 @@ ifeq ($(uname_S),SunOS)
  		NO_STRTOUMAX = YesPlease
+ 		GIT_TEST_CMP = cmp
  	endif
 -	INSTALL = /usr/ucb/install
 -	TAR = gtar
  	BASIC_CFLAGS += -D__EXTENSIONS__ -D__sun__ -DHAVE_ALLOCA_H
  endif
  ifeq ($(uname_O),Cygwin)
-@@ -851,15 +846,20 @@ ifeq ($(uname_S),OpenBSD)
- 	THREADED_DELTA_SEARCH = YesPlease
- endif
- ifeq ($(uname_S),NetBSD)
--	ifeq ($(shell expr "$(uname_R)" : '[01]\.'),2)
--		NEEDS_LIBICONV = YesPlease
--	endif
-+	NEEDS_LIBICONV = YesPlease
- 	BASIC_CFLAGS += -I/usr/pkg/include
- 	BASIC_LDFLAGS += -L/usr/pkg/lib $(CC_LD_DYNPATH)/usr/pkg/lib
- 	THREADED_DELTA_SEARCH = YesPlease
- 	USE_ST_TIMESPEC = YesPlease
- 	NO_MKSTEMPS = YesPlease
- endif
-+ifeq ($(uname_S),DragonFly)
-+	NEEDS_LIBICONV = YesPlease
-+	BASIC_CFLAGS += -I/usr/pkg/include
-+	BASIC_LDFLAGS += -L/usr/pkg/lib
-+	USE_ST_TIMESPEC = YesPlease
-+	THREADED_DELTA_SEARCH = YesPlease
-+endif
- ifeq ($(uname_S),AIX)
- 	NO_STRCASESTR=YesPlease
- 	NO_MEMMEM = YesPlease
-@@ -1065,6 +1065,13 @@ ifeq ($(uname_S),Darwin)
+@@ -1188,6 +1181,13 @@ ifeq ($(uname_S),Darwin)
  	PTHREAD_LIBS =
  endif
  
@@ -74,27 +60,14 @@ $NetBSD: patch-aa,v 1.11 2010/01/15 10:36:41 wiz Exp $
  ifndef CC_LD_DYNPATH
  	ifdef NO_R_TO_GCC_LINKER
  		# Some gcc does not accept and pass -R to the linker to specify
-@@ -1396,7 +1403,7 @@ SHELL_PATH_SQ = $(subst ','\'',$(SHELL_P
- PERL_PATH_SQ = $(subst ','\'',$(PERL_PATH))
- TCLTK_PATH_SQ = $(subst ','\'',$(TCLTK_PATH))
+@@ -1563,8 +1563,8 @@ DEFAULT_PAGER_CQ_SQ = $(subst ','\'',$(D
+ BASIC_CFLAGS += -DDEFAULT_PAGER='$(DEFAULT_PAGER_CQ_SQ)'
+ endif
  
--LIBS = $(GITLIBS) $(EXTLIBS)
-+LIBS += $(GITLIBS) $(EXTLIBS)
+-ALL_CFLAGS += $(BASIC_CFLAGS)
+-ALL_LDFLAGS += $(BASIC_LDFLAGS)
++ALL_CFLAGS = $(BASIC_CFLAGS) $(CPPFLAGS) $(CFLAGS)
++ALL_LDFLAGS = $(BASIC_LDFLAGS) $(LDFLAGS)
  
- BASIC_CFLAGS += -DSHA1_HEADER='$(SHA1_HEADER_SQ)' \
- 	$(COMPAT_CFLAGS)
-@@ -1789,10 +1796,10 @@ gitexec_instdir_SQ = $(subst ','\'',$(gi
- export gitexec_instdir
+ export DIFF TAR INSTALL DESTDIR SHELL_PATH
  
- install: all
--	$(INSTALL) -d -m 755 '$(DESTDIR_SQ)$(bindir_SQ)'
--	$(INSTALL) -d -m 755 '$(DESTDIR_SQ)$(gitexec_instdir_SQ)'
--	$(INSTALL) $(ALL_PROGRAMS) '$(DESTDIR_SQ)$(gitexec_instdir_SQ)'
--	$(INSTALL) git$X git-upload-pack$X git-receive-pack$X git-upload-archive$X git-shell$X git-cvsserver '$(DESTDIR_SQ)$(bindir_SQ)'
-+	$(BSD_INSTALL_PROGRAM_DIR) '$(DESTDIR_SQ)$(bindir_SQ)'
-+	$(BSD_INSTALL_SCRIPT_DIR) '$(DESTDIR_SQ)$(gitexec_instdir_SQ)'
-+	$(BSD_INSTALL_SCRIPT) $(ALL_PROGRAMS) '$(DESTDIR_SQ)$(gitexec_instdir_SQ)'
-+	$(BSD_INSTALL_SCRIPT) git$X git-upload-pack$X git-receive-pack$X git-upload-archive$X git-shell$X git-cvsserver '$(DESTDIR_SQ)$(bindir_SQ)'
- 	$(MAKE) -C templates DESTDIR='$(DESTDIR_SQ)' install
- ifndef NO_PERL
- 	$(MAKE) -C perl prefix='$(prefix_SQ)' DESTDIR='$(DESTDIR_SQ)' install

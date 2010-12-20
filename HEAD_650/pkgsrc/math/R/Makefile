@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.106 2010/02/09 07:02:53 adam Exp $
+# $NetBSD: Makefile,v 1.110 2010/07/30 10:36:25 asau Exp $
 
-DISTNAME=		R-2.10.1
+DISTNAME=		R-2.11.1
 CATEGORIES=		math
 MASTER_SITES=		${MASTER_SITE_R_CRAN:=base/R-2/}
 
@@ -19,7 +19,7 @@ TEST_TARGET=		check
 USE_TOOLS+=		gmake gzip:run makeinfo perl:run sed unzip:run xmkmf
 USE_GNU_READLINE=	yes		# uses callback interface
 USE_GNU_ICONV=		yes		# latin1 support, iconvlist
-USE_LANGUAGES=		c c++ fortran
+USE_LANGUAGES=		c c++ fortran77
 USE_LIBTOOL=		yes
 TEXINFO_REQD=		4.7
 
@@ -62,6 +62,7 @@ CONFIGURE_ENV+=		lt_cv_path_LD=${LD:Q}
 CONFIGURE_ENV+=		lt_cv_path_SED=${TOOLS_SED}
 CONFIGURE_ENV+=		ac_cv_path_R_GZIPCMD=${TOOLS_GZIP_CMD}
 CONFIGURE_ENV+=		ac_cv_path_R_UNZIPCMD=${TOOLS_PATH.unzip}
+CONFIGURE_ENV+=		r_cv_prog_f77_flag_mieee=no
 
 # Package assumes it can append to files (specifically DESCRIPTION) that have
 # been installed SHAREMODE

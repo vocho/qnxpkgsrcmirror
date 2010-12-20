@@ -19,7 +19,7 @@ CONFIGURE_ARGS+=	--disable-build-docs
 PKGCONFIG_OVERRIDE+=	libusb.pc.in
 
 ONLY_FOR_PLATFORM=	Darwin-*-* FreeBSD-*-* Linux-*-* NetBSD-*-*
-ONLY_FOR_PLATFORM+=	OpenBSD-*-* DragonFly-*-*
+ONLY_FOR_PLATFORM+=	OpenBSD-*-* DragonFly-*-* QNX-6.*-*
 
 TEST_TARGET=		check
 
