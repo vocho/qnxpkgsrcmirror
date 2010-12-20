@@ -2,7 +2,7 @@
 
 ONLY_FOR_PLATFORM=	NetBSD-[456].*-i386 NetBSD-[456].*-x86_64
 ONLY_FOR_PLATFORM+=	DragonFly-2.4.*-i386
-ONLY_FOR_PLATFORM+=	QNX-6.5.*-i386
+ONLY_FOR_PLATFORM+=	QNX-6.[56].*-i386
 
 BOOT.nb4-i386=		bootstrap-jdk-7-bin-netbsd-4-i386-20091012.tar.bz2
 # not yet

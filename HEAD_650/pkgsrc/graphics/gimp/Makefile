@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.190 2010/04/09 15:45:09 wiz Exp $
+# $NetBSD: Makefile,v 1.194 2010/07/16 06:41:42 adam Exp $
 
-DISTNAME=	gimp-2.6.8
-PKGREVISION=	2
+DISTNAME=	gimp-2.6.10
 CATEGORIES=	graphics
 MASTER_SITES=	ftp://ftp.gimp.org/pub/gimp/v2.6/ \
 		${MASTER_SITE_GNU:=gimp/v2.6/} \
@@ -11,6 +10,7 @@ EXTRACT_SUFX=	.tar.bz2
 MAINTAINER=	adam@NetBSD.org
 HOMEPAGE=	http://www.gimp.org/
 COMMENT=	The GNU image manipulation program
+LICENSE=	gnu-lgpl-v2.1 AND gnu-gpl-v2
 
 BUILD_DEPENDS+=	p5-XML-Parser>=2.31nb1:../../textproc/p5-XML-Parser
 

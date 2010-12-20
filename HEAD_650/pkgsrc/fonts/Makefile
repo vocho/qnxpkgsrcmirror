@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.151 2010/04/17 09:21:54 obache Exp $
+# $NetBSD: Makefile,v 1.157 2010/07/17 03:08:09 obache Exp $
 #
 
 COMMENT=	Fonts
@@ -89,6 +89,8 @@ SUBDIR+=	gsftopkk
 SUBDIR+=	gucharmap
 SUBDIR+=	inconsolata-ttf
 SUBDIR+=	intlfonts
+SUBDIR+=	ipaexfont
+SUBDIR+=	ipafont
 SUBDIR+=	ja-elisat
 SUBDIR+=	ja-elisau
 SUBDIR+=	ja-kaname
@@ -113,6 +115,7 @@ SUBDIR+=	linux-libertine-ttf
 SUBDIR+=	lohit-fonts
 SUBDIR+=	mftrace
 SUBDIR+=	mglfonts
+SUBDIR+=	misaki-fonts
 SUBDIR+=	mkfontalias
 SUBDIR+=	mkfontdir
 SUBDIR+=	mkfontscale
@@ -146,7 +149,11 @@ SUBDIR+=	tex-cm
 SUBDIR+=	tex-cm-doc
 SUBDIR+=	tex-cm-super
 SUBDIR+=	tex-cm-super-doc
+SUBDIR+=	tex-cmcyr
+SUBDIR+=	tex-cmcyr-doc
 SUBDIR+=	tex-courier
+SUBDIR+=	tex-ec
+SUBDIR+=	tex-ec-doc
 SUBDIR+=	tex-euenc
 SUBDIR+=	tex-euenc-doc
 SUBDIR+=	tex-fontspec
@@ -156,6 +163,8 @@ SUBDIR+=	tex-helvetic
 SUBDIR+=	tex-kotex-base
 SUBDIR+=	tex-kotex-base-doc
 SUBDIR+=	tex-latex-fonts
+SUBDIR+=	tex-lh
+SUBDIR+=	tex-lh-doc
 SUBDIR+=	tex-lm
 SUBDIR+=	tex-lm-doc
 SUBDIR+=	tex-manfnt
@@ -192,6 +201,7 @@ SUBDIR+=	umefont-ttf
 SUBDIR+=	un-core-ttf
 SUBDIR+=	un-extra-ttf
 SUBDIR+=	uralic-ttf
+SUBDIR+=	urw-fonts
 SUBDIR+=	vera-ttf
 SUBDIR+=	vfontcap-kochi
 SUBDIR+=	vlgothic-ttf

@@ -1,13 +1,13 @@
-$NetBSD: patch-al,v 1.1.1.1 2010/03/04 16:28:58 taca Exp $
+$NetBSD$
 
---- mysys/my_gethwaddr.c.orig	2010-02-04 11:38:50.000000000 +0000
-+++ mysys/my_gethwaddr.c
-@@ -33,7 +33,7 @@ static my_bool memcpy_and_test(uchar *to
- }
- #endif   /* FreeBSD || linux */
+--- server-tools/instance-manager/instance.cc.orig	2010-06-03 15:50:18.000000000 +0000
++++ server-tools/instance-manager/instance.cc
+@@ -135,7 +135,7 @@ static bool start_process(Instance_optio
+      Here we use spawnv(), which  is a combination of fork() and execv()
+      in one call. It returns the pid of newly created process (>0) or -1
+   */
+-  *pi= spawnv(P_NOWAIT, instance_options->mysqld_path, instance_options->argv);
++  *pi= spawnv(P_NOWAIT, instance_options->mysqld_path.str, instance_options->argv);
+ #endif
  
--#ifdef __FreeBSD__
-+#if defined(__FreeBSD__) || defined(__DragonFly__)
- 
- #include <net/ethernet.h>
- #include <sys/sysctl.h>
+   switch (*pi) {

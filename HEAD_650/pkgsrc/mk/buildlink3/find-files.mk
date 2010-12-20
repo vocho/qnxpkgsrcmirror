@@ -1,4 +1,4 @@
-# $NetBSD: find-files.mk,v 1.2 2005/07/15 18:27:55 jlam Exp $
+# $NetBSD: find-files.mk,v 1.8 2010/05/03 06:58:27 obache Exp $
 #
 # Copyright (c) 2005 The NetBSD Foundation, Inc.
 # All rights reserved.

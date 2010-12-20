@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.24 2010/01/18 09:59:16 wiz Exp $
+# $NetBSD: Makefile,v 1.26 2010/06/13 22:45:03 wiz Exp $
 #
 
-DISTNAME=	DVDStyler-1.7.4
+DISTNAME=	DVDStyler-1.8.0.2
 PKGREVISION=	1
 CATEGORIES=	multimedia
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=dvdstyler/}
@@ -24,6 +24,9 @@ USE_LANGUAGES=		c c++
 USE_PKGLOCALEDIR=	yes
 USE_TOOLS+=		gmake pkg-config msgfmt
 GNU_CONFIGURE=		yes
+
+post-install:
+	cd ${WRKSRC}/templates && ${SETENV} ${INSTALL_ENV} ${GMAKE} install
 
 .include "../../graphics/libexif/buildlink3.mk"
 .include "../../graphics/netpbm/buildlink3.mk"

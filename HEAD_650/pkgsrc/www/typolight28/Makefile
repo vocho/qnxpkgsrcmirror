@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.6 2010/04/17 18:23:35 taca Exp $
+# $NetBSD: Makefile,v 1.11 2010/07/28 16:24:20 taca Exp $
 #
 
 DISTNAME=	typolight-${TL_VERSION}
@@ -8,7 +8,7 @@ CATEGORIES=	www
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=typolight/}
 
 MAINTAINER=	taca@NetBSD.org
-HOMEPAGE=	http://www.typolight.org/
+HOMEPAGE=	http://www.contao.org/
 COMMENT=	Powerful web content management system (CMS)
 LICENSE=	gnu-lgpl-v3
 
@@ -25,7 +25,8 @@ NO_BUILD=	yes
 
 EG_DATA=	${WWW_EG_FILES} system/config tl_files
 EG_FILES=	system/config/config.php system/config/countries.php \
-		system/config/dcaconfig.php system/config/langconfig.php \
+		system/config/dcaconfig.php system/config/fancyUpload.php \
+		system/config/initconfig.php system/config/langconfig.php \
 		system/config/languages.php \
 		system/config/tcpdf.php system/config/timezones.php \
 		system/config/tinyFlash.php system/config/tinyMCE.php \

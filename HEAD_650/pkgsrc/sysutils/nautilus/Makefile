@@ -1,10 +1,9 @@
-# $NetBSD: Makefile,v 1.106 2010/04/11 16:38:29 tnn Exp $
+# $NetBSD: Makefile,v 1.109 2010/07/06 15:19:46 drochner Exp $
 #
 
-DISTNAME=		nautilus-2.28.4
-PKGREVISION=		1
+DISTNAME=		nautilus-2.30.1
 CATEGORIES=		sysutils gnome
-MASTER_SITES=		${MASTER_SITE_GNOME:=sources/nautilus/2.28/}
+MASTER_SITES=		${MASTER_SITE_GNOME:=sources/nautilus/2.30/}
 EXTRACT_SUFX=		.tar.bz2
 
 MAINTAINER=		rh@NetBSD.org
@@ -23,6 +22,12 @@ PKGCONFIG_OVERRIDE=	libnautilus-extension/libnautilus-extension.pc.in
 CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR:Q}
 
 GCONF_SCHEMAS=		apps_nautilus_preferences.schemas
+
+# needed for nautilus-2.28 and gtk2-2.20 -- remove on next update
+BUILDLINK_TRANSFORM+=	rm:-DG_DISABLE_DEPRECATED
+BUILDLINK_TRANSFORM+=	rm:-DGDK_DISABLE_DEPRECATED
+BUILDLINK_TRANSFORM+=	rm:-DGDK_PIXBUF_DISABLE_DEPRECATED
+BUILDLINK_TRANSFORM+=	rm:-DGTK_DISABLE_DEPRECATED
 
 post-install:
 	# current default path

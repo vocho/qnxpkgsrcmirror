@@ -1,9 +1,8 @@
-# $NetBSD: Makefile,v 1.97 2010/04/13 16:22:47 drochner Exp $
-#
+# $NetBSD: Makefile,v 1.101 2010/07/13 17:31:19 drochner Exp $
 
-DISTNAME=	evolution-data-server-2.28.3.1
+DISTNAME=	evolution-data-server-2.30.2.1
 CATEGORIES=	mail gnome
-MASTER_SITES=	${MASTER_SITE_GNOME:=sources/evolution-data-server/2.28/}
+MASTER_SITES=	${MASTER_SITE_GNOME:=sources/evolution-data-server/2.30/}
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
@@ -13,11 +12,12 @@ LICENSE=	gnu-lgpl-v2
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
-GNU_CONFIGURE=		YES
+BDB_ACCEPTED=		db4 db5
 USE_TOOLS+=		bison gmake intltool msgfmt pkg-config
 USE_LANGUAGES=		c c++
 USE_LIBTOOL=		YES
 USE_PKGLOCALEDIR=	YES
+GNU_CONFIGURE=		YES
 
 PYTHON_FOR_BUILD_ONLY=	YES
 PYTHON_PATCH_SCRIPTS=	addressbook/libebook/gen-western-table.py
@@ -41,13 +41,8 @@ CPPFLAGS+=	-DBIND_8_COMPAT
 CFLAGS.SunOS+=	-D__FUNCTION__=__func__
 .endif
 
-CONFIGURE_ARGS+=	--with-nspr-includes=${BUILDLINK_PREFIX.nspr}/include/nspr
-CONFIGURE_ARGS+=	--with-nspr-libs=${BUILDLINK_PREFIX.nspr}/lib
-CONFIGURE_ARGS+=	--with-nss-includes=${BUILDLINK_PREFIX.nss}/include/nss/nss
-CONFIGURE_ARGS+=	--with-nss-libs=${BUILDLINK_PREFIX.nss}/lib
 CONFIGURE_ARGS+=	--with-openldap
-CONFIGURE_ARGS+=	--with-libdb=${LOCALBASE}
-BUILDLINK_TRANSFORM+=	l:db:db4
+CONFIGURE_ARGS+=	--with-libdb=${BDBBASE}
 
 PKGCONFIG_OVERRIDE+=	addressbook/libebook/libebook.pc.in
 PKGCONFIG_OVERRIDE+=	addressbook/libedata-book/libedata-book.pc.in
@@ -60,16 +55,16 @@ PKGCONFIG_OVERRIDE+=	libedataserverui/libedataserverui.pc.in
 PKGCONFIG_OVERRIDE+=	servers/groupwise/libegroupwise.pc.in
 PKGCONFIG_OVERRIDE+=	evolution-data-server.pc.in
 
+BUILDLINK_TRANSFORM+=	l:db:${BDB_TYPE}
 BUILDLINK_TRANSFORM+=	rm:-ldl
 
+.include "../../devel/gperf/buildlink3.mk"
 .include "../../converters/libiconv/buildlink3.mk"
 .include "../../databases/openldap-client/buildlink3.mk"
-.include "../../databases/db4/buildlink3.mk"
 .include "../../databases/sqlite3/buildlink3.mk"
 .include "../../devel/GConf/buildlink3.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../devel/glib2/buildlink3.mk"
-.include "../../devel/libbonobo/buildlink3.mk"
 .include "../../devel/libglade/buildlink3.mk"
 .include "../../devel/libgweather/buildlink3.mk"
 .include "../../devel/nss/buildlink3.mk"
@@ -81,5 +76,6 @@ BUILDLINK_TRANSFORM+=	rm:-ldl
 BUILDLINK_API_DEPENDS.libical+=	libical>=0.43
 .include "../../time/libical/buildlink3.mk"
 .include "../../x11/gtk2/buildlink3.mk"
+.include "../../mk/bdb.buildlink3.mk"
 .include "../../mk/pthread.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

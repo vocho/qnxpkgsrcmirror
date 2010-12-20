@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.37 2010/01/18 09:58:48 wiz Exp $
+# $NetBSD: Makefile,v 1.40 2010/07/20 09:56:50 markd Exp $
 
-DISTNAME=	ted-2.16.src
-PKGNAME=	ted-2.16
-PKGREVISION=	7
+DISTNAME=	ted-2.21.src
+PKGNAME=	${DISTNAME:S/.src//}
 CATEGORIES=	editors
 MASTER_SITES=	ftp://ftp.nluug.nl/pub/editors/ted/
 
@@ -13,10 +12,11 @@ COMMENT=	X11 based WordPad-like word processor
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
 PKG_DESTDIR_SUPPORT=	user-destdir
 
+USE_LANGUAGES=	c c++
 USE_TOOLS+=	gtar
+MAKE_JOBS_SAFE=	no
 
-WRKSRC=		${WRKDIR}/Ted-2.16
-USE_X11BASE=	YES
+WRKSRC=		${WRKDIR}/Ted-2.21
 
 AFMDIR=		${PREFIX}/share/Ted/afm
 INDDIR=		${PREFIX}/share/Ted/ind
@@ -35,7 +35,7 @@ CONFIGURE_ENV+=	ac_xpm_libraries="${BUILDLINK_PREFIX.libXpm}/lib"
 CONFIGURE_ENV+=	ac_zlib_includes="${BUILDLINK_PREFIX.zlib}/include"
 CONFIGURE_ENV+=	ac_zlib_libraries="${BUILDLINK_PREFIX.zlib}/lib"
 
-MAKE_FLAGS+=	CONFIGURE_OPTIONS=--x-libraries=${X11BASE}/lib\ --with-motif
+MAKE_FLAGS+=	CONFIGURE_OPTIONS=--x-libraries=${X11BASE}/lib\ --with-MOTIF
 
 MAKE_ENV+=	${CONFIGURE_ENV}
 MAKE_ENV+=	DEF_PKGDIR='-DPKGDIR=\"${PREFIX}\"' \
@@ -46,7 +46,7 @@ MAKE_ENV+=	DEF_PKGDIR='-DPKGDIR=\"${PREFIX}\"' \
 BUILD_TARGET=	compile.shared
 INSTALL_TARGET=	install.shared
 
-INSTALLATION_DIRS=	bin lib/X11/app-defaults
+INSTALLATION_DIRS=	bin lib/X11/app-defaults ${AFMDIR} ${INDDIR} ${INFODIR}
 
 post-extract:
 	@cd ${WRKSRC} ; ${GTAR} xf tedPackage/TedBindist.tar
@@ -60,29 +60,13 @@ post-patch:
 
 do-install:
 	${INSTALL_PROGRAM} ${WRKSRC}/Ted/Ted ${DESTDIR}${PREFIX}/bin/Ted
-	${INSTALL_DATA_DIR} ${DESTDIR}${AFMDIR}
-	${INSTALL_DATA} \
-		${WRKSRC}/afm/Courier-Bold.afm \
-		${WRKSRC}/afm/Courier-BoldOblique.afm \
-		${WRKSRC}/afm/Courier-Oblique.afm \
-		${WRKSRC}/afm/Courier.afm \
-		${WRKSRC}/afm/Helvetica-Bold.afm \
-		${WRKSRC}/afm/Helvetica-BoldOblique.afm \
-		${WRKSRC}/afm/Helvetica-Oblique.afm \
-		${WRKSRC}/afm/Helvetica.afm \
-		${WRKSRC}/afm/Symbol.afm \
-		${WRKSRC}/afm/Times-Bold.afm \
-		${WRKSRC}/afm/Times-BoldItalic.afm \
-		${WRKSRC}/afm/Times-Italic.afm \
-		${WRKSRC}/afm/Times-Roman.afm \
-		${DESTDIR}${AFMDIR}
-	${INSTALL_DATA_DIR} ${DESTDIR}${INDDIR}
+	${INSTALL_DATA} ${WRKSRC}/Ted/afm/*.afm ${DESTDIR}${AFMDIR}
 	${INSTALL_DATA} ${FILESDIR}/README.ind ${DESTDIR}${INDDIR}
-	${INSTALL_DATA_DIR} ${DESTDIR}${INFODIR}
 	${INSTALL_DATA} ${WRKSRC}/Ted/TedDocument-en_US.rtf ${DESTDIR}${INFODIR}
 	${INSTALL_DATA}	${WRKSRC}/Ted/Ted.ad \
 		${DESTDIR}${PREFIX}/lib/X11/app-defaults/Ted
 
+.include "../../devel/pcre/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"
 .include "../../graphics/jpeg/buildlink3.mk"
 .include "../../graphics/png/buildlink3.mk"

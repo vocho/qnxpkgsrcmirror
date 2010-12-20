@@ -1,13 +1,17 @@
-$NetBSD: patch-ad,v 1.4 2008/09/07 13:35:17 tron Exp $
+$NetBSD$
 
---- os/os_yield.c.orig	2008-01-08 20:58:43.000000000 +0000
-+++ os/os_yield.c	2008-09-07 14:27:08.000000000 +0100
-@@ -58,7 +58,7 @@
- #elif defined(HAVE_YIELD)
- 		yield();
+--- dbinc/mutex.h.orig	2010-04-12 20:25:22.000000000 +0000
++++ dbinc/mutex.h
+@@ -153,6 +153,12 @@ static inline int __db_pthread_mutex_try
+ #define	__mutex_unlock(a, b)		__db_fcntl_mutex_unlock(a, b)
+ #define	__mutex_destroy(a, b)		__db_fcntl_mutex_destroy(a, b)
  #else
--		__os_sleep(dbenv, 0, 0);
-+		__os_sleep(env, 0, 0);
- #endif
- 	}
- }
++#ifdef __QNXNTO__
++/* These should be reserved right ? */
++#undef __mutex_lock
++#undef __mutex_unlock
++#undef __mutex_trylock
++#endif
+ #define	__mutex_init(a, b, c)		__db_tas_mutex_init(a, b, c)
+ #define	__mutex_lock(a, b)		__db_tas_mutex_lock(a, b)
+ #define	__mutex_trylock(a, b)		__db_tas_mutex_trylock(a, b)

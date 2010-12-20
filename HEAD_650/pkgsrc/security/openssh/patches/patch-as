@@ -1,6 +1,6 @@
 $NetBSD$
 
---- auth-shadow.c.orig	2007-04-28 21:10:58.000000000 -0500
+--- auth-shadow.c.orig	2007-04-29 02:10:58.000000000 +0000
 +++ auth-shadow.c
 @@ -55,6 +55,7 @@ extern Buffer loginmsg;
  int

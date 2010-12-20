@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.26 2010/01/05 11:21:42 wiz Exp $
+# $NetBSD: Makefile,v 1.28 2010/05/07 12:02:44 jmmv Exp $
 
-DISTNAME=	osh-20091218
+DISTNAME=	osh-20100430
+PKGREVISION=	1
 CATEGORIES=	shells
 MASTER_SITES=	http://v6shell.org/src/
 

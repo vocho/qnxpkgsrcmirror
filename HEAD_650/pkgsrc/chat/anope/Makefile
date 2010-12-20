@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.7 2009/12/17 20:56:46 abs Exp $
+# $NetBSD: Makefile,v 1.9 2010/06/25 08:58:38 obache Exp $
 
 DISTNAME=	anope-1.7.21
 CATEGORIES=	chat
@@ -7,6 +7,8 @@ MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=anope/}
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.anope.org/
 COMMENT=	Set of Services for IRC networks
+
+PKG_DESTDIR_SUPPORT=	destdir
 
 GNU_CONFIGURE=	YES
 PTHREAD_OPTS+=	require
@@ -17,14 +19,14 @@ RCD_SCRIPTS=	anope
 FILES_SUBST+=	ANOPE_USER=${ANOPE_USER:Q}
 FILES_SUBST+=	ANOPE_GROUP=${ANOPE_GROUP:Q}
 
+USERGROUP_PHASE=	pre-install
 PKG_USERS_VARS+=	ANOPE_USER
 PKG_GROUPS_VARS+=	ANOPE_GROUP
 
-PKG_DESTDIR_SUPPORT=	destdir
-
 .include "../../mk/bsd.prefs.mk"
 
-PKG_USERS=	${ANOPE_USER}:${ANOPE_GROUP}::anope\ user:${PREFIX}/lib/anope:${NOLOGIN}
+PKG_USERS=	${ANOPE_USER}:${ANOPE_GROUP}
+PKG_HOME.${ANOPE_USER}=		${PREFIX}/lib/anope
 PKG_GROUPS=	${ANOPE_GROUP}
 MAKE_ENV+=	RUNGROUP=${ANOPE_GROUP:Q}
 OWN_DIRS_PERMS+=	${PREFIX}/lib/anope/logs \

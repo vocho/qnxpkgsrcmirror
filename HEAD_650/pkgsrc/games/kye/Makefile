@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.22 2010/02/10 19:17:38 joerg Exp $
+# $NetBSD: Makefile,v 1.24 2010/06/13 22:44:21 wiz Exp $
 #
 
-DISTNAME=		kye-0.9.3
-PKGREVISION=		10
+DISTNAME=		kye-0.9.4
+PKGREVISION=		1
 CATEGORIES=		games
-MASTER_SITES=		http://games.moria.org.uk/kye/
+MASTER_SITES=		http://games.moria.org.uk/kye/download/
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://games.moria.org.uk/kye/pygtk

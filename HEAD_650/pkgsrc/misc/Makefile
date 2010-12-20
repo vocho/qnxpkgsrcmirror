@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.345 2010/04/09 23:45:09 markd Exp $
+# $NetBSD: Makefile,v 1.348 2010/07/30 16:06:37 drochner Exp $
 #
 
 COMMENT=	Miscellaneous utilities
@@ -175,6 +175,7 @@ SUBDIR+=	p5-Locale-libintl
 SUBDIR+=	p5-Mac-Macbinary
 SUBDIR+=	p5-Msgcat
 SUBDIR+=	p5-Search
+SUBDIR+=	p5-Vroom
 SUBDIR+=	parchive
 SUBDIR+=	pciids
 SUBDIR+=	pdmenu
@@ -219,7 +220,9 @@ SUBDIR+=	ttyrec
 SUBDIR+=	udfclient
 SUBDIR+=	ukpostcodes
 SUBDIR+=	uptimec
+SUBDIR+=	urjtag
 SUBDIR+=	usbids
+SUBDIR+=	usbprog
 SUBDIR+=	utftools
 SUBDIR+=	vera
 SUBDIR+=	vfu

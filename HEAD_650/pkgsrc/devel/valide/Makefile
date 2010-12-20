@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.5 2010/02/10 19:17:37 joerg Exp $
+# $NetBSD: Makefile,v 1.7 2010/06/13 22:44:11 wiz Exp $
 #
 
 DISTNAME=	valide-0.4.0
-PKGREVISION=	2
+PKGREVISION=	3
 CATEGORIES=	devel
 MASTER_SITES=	http://valide.googlecode.com/files/
 
-MAINTAINER=	ahoka@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.valaide.org/
 COMMENT=	IDE for the Vala programming language
 

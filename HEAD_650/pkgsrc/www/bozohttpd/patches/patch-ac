@@ -1,39 +1,30 @@
 $NetBSD$
 
---- bozohttpd.c.orig	2009-05-23 02:16:22.000000000 +0000
-+++ bozohttpd.c
-@@ -144,6 +144,9 @@
+--- main.c.orig	2010-05-10 02:51:28.000000000 +0000
++++ main.c
+@@ -46,6 +46,10 @@
  #include <syslog.h>
  #include <time.h>
  #include <unistd.h>
 +#ifdef __QNXNTO__
 +#include <dlfcn.h>
++char *percent_s_null = "(null)";
 +#endif
  
  #ifndef __attribute__
  #define __attribute__(x)
-@@ -164,6 +167,9 @@ static	int	eflag;		/* don't clean enviro
- 	int	Iflag_set;
- 	int	dflag = 0;	/* debugging level */
- 	char	*myname;	/* my name */
+@@ -127,6 +131,10 @@ main(int argc, char **argv)
+ 	bozoprefs_t	 prefs;
+ 	char		*progname;
+ 	int		 c;
 +#ifdef __QNXNTO__
-+	char *percent_s_null = "(null)";
++	void    *hdl;
++	char    **percentsp;
 +#endif
  
- #ifndef LOG_FTP
- #define LOG_FTP LOG_DAEMON
-@@ -276,6 +282,10 @@ main(int argc, char **argv)
- 	char	*cleanenv[1];
- 	uid_t	uid;
- 	int	c;
-+#ifdef __QNXNTO__
-+	void  	*hdl;
-+	char	**percentsp;
-+#endif
- 
- 	uid = 0;	/* XXX gcc */
- 
-@@ -286,6 +296,18 @@ main(int argc, char **argv)
+ 	(void) memset(&httpd, 0x0, sizeof(httpd));
+ 	(void) memset(&prefs, 0x0, sizeof(prefs));
+@@ -138,6 +146,18 @@ main(int argc, char **argv)
  
  	openlog(progname, LOG_PID|LOG_NDELAY, LOG_FTP);
  
@@ -42,13 +33,13 @@ $NetBSD$
 +	 * Print something pretty rather than faulting
 +	 * in stdio when NULL is passed to %s.
 +	 */
-+	if ((hdl = dlopen(NULL, RTLD_WORLD)) != NULL) {
-+		if ((percentsp = dlsym(hdl, "output_for_percent_s_NULL")) != NULL)
-+			*percentsp = percent_s_null;
-+		dlclose(hdl);
++	if ((hdl = dlopen(NULL, RTLD_WORLD)) != NULL &&
++	    (percentsp = dlsym(hdl, "output_for_percent_s_NULL")) != NULL) {
++		*percentsp = percent_s_null;
 +	}
++	dlclose(hdl);
 +#endif
 +
+ 	bozo_set_defaults(&httpd, &prefs);
+ 
  	while ((c = getopt(argc, argv,
- 			   "C:HI:M:S:U:VXZ:bc:defhi:np:rst:uv:x:z:")) != -1) {
- 		switch(c) {

@@ -1,18 +1,19 @@
-# $NetBSD: Makefile,v 1.2 2009/09/07 18:08:54 ahoka Exp $
+# $NetBSD: Makefile,v 1.5 2010/06/13 22:45:20 wiz Exp $
 #
 
 DISTNAME=	putty-0.60-2009-09-06
 PKGNAME=	putty-0.6.20090906
+PKGREVISION=	1
 CATEGORIES=	security
 MASTER_SITES=	ftp://ftp.netbsd.org/pub/NetBSD/misc/ahoka/dist/
 
-MAINTAINER=	ahoka@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.chiark.greenend.org.uk/~sgtatham/putty/
 COMMENT=	Free implementation of Telnet and SSH for Win32 and Unix platforms
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
-USE_TOOLS+=	gmake
+USE_TOOLS+=	gmake pkg-config
 BUILD_DIRS=	unix
 BUILD_DEPENDS+=	halibut>=1.0:../../textproc/halibut
 

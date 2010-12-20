@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.56 2010/03/09 02:30:15 taca Exp $
+# $NetBSD: Makefile,v 1.61 2010/07/26 21:38:51 tron Exp $
 
-DISTNAME=	httpd-2.2.15
+DISTNAME=	httpd-2.2.16
 PKGNAME=	${DISTNAME:S/httpd/apache/}
 CATEGORIES=	www
 MASTER_SITES=	${MASTER_SITE_APACHE:=httpd/} \
@@ -14,8 +14,6 @@ COMMENT=	Apache HTTP (Web) server, version 2.2
 LICENSE=	apache-2.0
 
 PKG_DESTDIR_SUPPORT=	user-destdir
-
-CONFLICTS=	apache-{,*ssl}-[0-9]* apache6-[0-9]*
 
 BUILD_DEFS+=	IPV6_READY
 BUILD_DEFS+=	VARBASE
@@ -52,24 +50,7 @@ APACHE_MODULES?=	${DFLT_APACHE_MODULES}
 .include "../../devel/apr-util/buildlink3.mk"
 .include "../../textproc/expat/buildlink3.mk"
 .include "../../mk/dlopen.buildlink3.mk"
-
-# Set the "Multi-Processing Model" used by Apache to handle requests.
-# Valid values are:
-# 	event		multi-threaded based in worker, designed
-# 			to allow more requests to be served
-# 			simultaneously by passing off some processing
-# 			work to supporting threads.
-# 			BEWARE: does not work with SSL or input filters.
-#	prefork		non-threaded, pre-forking web server
-#	worker		hybrid multi-threaded multi-process web server
-#
-APACHE_MPM?=		prefork
-CONFIGURE_ARGS+=	--with-mpm=${APACHE_MPM:Q}
-BUILD_DEFS+=		APACHE_MPM
-
-.if !empty(APACHE_MPM:Mevent) || !empty(APACHE_MPM:Mworker)
-PLIST_SRC+=		${PKGDIR}/PLIST.worker
-.endif
+.include "../../mk/pthread.buildlink3.mk"
 
 CONFIGURE_ARGS+=	--disable-include
 CONFIGURE_ARGS+=	--disable-log-config

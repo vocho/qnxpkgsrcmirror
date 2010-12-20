@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.66 2009/10/24 13:00:04 drochner Exp $
+# $NetBSD: Makefile,v 1.69 2010/06/15 21:01:21 drochner Exp $
 #
 
-DISTNAME=		gconf-editor-2.28.0
+DISTNAME=		gconf-editor-2.30.0
 CATEGORIES=		editors gnome
-MASTER_SITES=		${MASTER_SITE_GNOME:=sources/gconf-editor/2.28/}
+MASTER_SITES=		${MASTER_SITE_GNOME:=sources/gconf-editor/2.30/}
 EXTRACT_SUFX=		.tar.bz2
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
@@ -23,9 +23,6 @@ CONFIGURE_ARGS+=	--with-gconf-mandatory-source=${GCONF_CONFIG_SOURCE:S/gconf.xml
 GCONF_SCHEMAS=		gconf-editor.schemas
 
 BUILDLINK_API_DEPENDS.GConf+=	GConf>=2.14.0
-BUILDLINK_API_DEPENDS.gtk2+=	gtk2+>=2.6.0
-BUILDLINK_API_DEPENDS.libgnome+=	libgnome>=2.14.0
-
 .include "../../devel/GConf/schemas.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../devel/glib2/buildlink3.mk"
@@ -33,6 +30,7 @@ BUILDLINK_API_DEPENDS.libgnome+=	libgnome>=2.14.0
 .include "../../security/policykit/buildlink3.mk"
 .include "../../textproc/gnome-doc-utils/buildlink3.mk"
 .include "../../mk/omf-scrollkeeper.mk"
+BUILDLINK_API_DEPENDS.gtk2+=	gtk2+>=2.12.0
 .include "../../x11/gtk2/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../mk/bsd.pkg.mk"

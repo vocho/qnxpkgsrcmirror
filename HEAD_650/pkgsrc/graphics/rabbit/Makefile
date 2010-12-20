@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.17 2010/01/30 00:59:30 obache Exp $
+# $NetBSD: Makefile,v 1.22 2010/08/01 12:37:18 obache Exp $
 #
 
-DISTNAME=	rabbit-0.6.4
+DISTNAME=	rabbit-0.6.5
 PKGNAME=	${RUBY_PKGPREFIX}-${DISTNAME}
 CATEGORIES=	graphics ruby
 MASTER_SITES=	http://www.cozmixng.org/~kou/download/
@@ -9,6 +9,7 @@ MASTER_SITES=	http://www.cozmixng.org/~kou/download/
 MAINTAINER=	obache@NetBSD.org
 HOMEPAGE=	http://www.cozmixng.org/~rwiki/?cmd=view;name=Rabbit
 COMMENT=	Application to do presentation with RD document
+LICENSE=	ruby-license
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 

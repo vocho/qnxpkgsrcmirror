@@ -1,14 +1,12 @@
 $NetBSD$
 
---- libedataserver/e-time-utils.c.orig	2009-12-21 16:02:47.000000000 +0000
-+++ libedataserver/e-time-utils.c
-@@ -9,7 +9,9 @@
-  */
+--- camel/camel-file-utils.c.orig	2010-06-20 12:15:39.000000000 +0000
++++ camel/camel-file-utils.c
+@@ -32,6 +32,7 @@
+ #include <unistd.h>
+ #include <sys/stat.h>
+ #include <sys/types.h>
++#include <sys/select.h>
  
- #include <config.h>
-+#ifndef __QNXNTO__
- #define _XOPEN_SOURCE
-+#endif
+ #include <glib.h>
  
- /* For tm_gmtoff */
- #define _BSD_SOURCE

@@ -1,14 +1,15 @@
-# $NetBSD: Makefile,v 1.4 2009/08/26 19:57:54 sno Exp $
+# $NetBSD: Makefile,v 1.6 2010/06/13 22:44:50 wiz Exp $
 #
 
 DISTNAME=	uim-tomoe-gtk-0.6.0
-PKGREVISION=	2
+PKGREVISION=	3
 CATEGORIES=	inputmethod
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=tomoe/}
 
 MAINTAINER=	obache@NetBSD.org
 HOMEPAGE=	http://tomoe.sourceforge.jp/
 COMMENT=	UIM helper program for Tomoe
+LICENSE=	gnu-lgpl-v2.1
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 

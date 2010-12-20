@@ -1,20 +1,23 @@
-# $NetBSD: Makefile,v 1.13 2009/10/21 15:40:10 drochner Exp $
+# $NetBSD: Makefile,v 1.16 2010/06/13 22:44:09 wiz Exp $
 #
 
-DISTNAME=		at-spi-1.28.1
+DISTNAME=		at-spi-1.30.1
 PKGNAME=		${PYPKGPREFIX}-${DISTNAME}
+PKGREVISION=		1
 CATEGORIES=		devel
-MASTER_SITES=		${MASTER_SITE_GNOME:=sources/at-spi/1.28/}
+MASTER_SITES=		${MASTER_SITE_GNOME:=sources/at-spi/1.30/}
 EXTRACT_SUFX=		.tar.bz2
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://www.gnome.org/
 COMMENT=		Assistive Technology Service Provider Interface
+LICENSE=		gnu-gpl-v2
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 NO_BUILD=	yes
 PY_PATCHPLIST=	yes
+PYTHON_VERSIONS_ACCEPTED=	26 25
 
 PYATSPIDIR=		${PREFIX}/${PYSITELIB}/pyatspi
 INSTALLATION_DIRS=	${PYATSPIDIR}

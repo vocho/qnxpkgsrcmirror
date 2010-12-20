@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.4 2010/01/19 00:45:58 asau Exp $
+# $NetBSD: Makefile,v 1.6 2010/07/30 10:36:34 asau Exp $
 
-DISTNAME=	openmpi-1.4.1
+DISTNAME=	openmpi-1.4.2
 CATEGORIES=	parallel
 MASTER_SITES=	http://www.open-mpi.org/software/ompi/v1.4/downloads/
 EXTRACT_SUFX=	.tar.bz2
@@ -15,11 +15,12 @@ CONFLICTS+=	mpich2-[0-9]*	# installs bin/mpicc & other wrappers
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=		yes
-USE_LANGUAGES=		c c++ fortran
+USE_LANGUAGES=		c c++ fortran77
 USE_LIBTOOL=		yes
 LIBTOOL_OVERRIDE=	${WRKSRC}/libtool
 SHLIBTOOL_OVERRIDE=	${WRKSRC}/config/libtool.m4
 
+CONFIGURE_ARGS+=	--with-ft=cr	# for compatibility with OpenMPI 1.4.1 package
 CONFIGURE_ARGS+=	--disable-mpi-f90
 CONFIGURE_ARGS+=	--with-wrapper-ldflags="-L${PREFIX}/lib ${LINKER_RPATH_FLAG}${PREFIX}/lib"
 CONFIGURE_ENV+=		ompi_cv_f77_have_INTEGERp8=no	# no "INTEGER*8"??

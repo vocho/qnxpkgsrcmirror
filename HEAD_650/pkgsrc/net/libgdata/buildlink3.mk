@@ -1,11 +1,11 @@
-# $NetBSD: buildlink3.mk,v 1.1.1.1 2009/10/21 18:48:21 drochner Exp $
+# $NetBSD: buildlink3.mk,v 1.3 2010/07/06 15:25:06 drochner Exp $
 
 BUILDLINK_TREE+=	libgdata
 
 .if !defined(LIBGDATA_BUILDLINK3_MK)
 LIBGDATA_BUILDLINK3_MK:=
 
-BUILDLINK_API_DEPENDS.libgdata+=	libgdata>=0.1.1
+BUILDLINK_API_DEPENDS.libgdata+=	libgdata>=0.6.4
 BUILDLINK_PKGSRCDIR.libgdata?=	../../net/libgdata
 
 

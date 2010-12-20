@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.59 2010/03/16 16:27:01 tnn Exp $
+# $NetBSD: Makefile,v 1.63 2010/07/22 14:51:51 tnn Exp $
 #
-DISTNAME=		transmission-1.92
-PKGNAME=		Transmission-1.92
+DISTNAME=		transmission-2.03
+PKGNAME=		Transmission-2.03
 CATEGORIES=		net
 MASTER_SITES=		http://download.m0k.org/transmission/files/
 EXTRACT_SUFX=		.tar.bz2
@@ -13,7 +13,7 @@ COMMENT=		Free, lightweight BitTorrent client
 PKG_DESTDIR_SUPPORT=	user-destdir
 USE_LIBTOOL=		yes
 USE_TOOLS+=		gmake pkg-config intltool msgfmt
-EXTRACT_USING=		gtar
+EXTRACT_USING=		bsdtar
 
 GNU_CONFIGURE=		yes
 LDFLAGS+=		${BUILDLINK_LDADD.getopt} ${BUILDLINK_LDADD.gettext}
@@ -32,9 +32,9 @@ CPPFLAGS+=		-DBSD
 SUBST_CLASSES+=		tg
 SUBST_STAGE.tg=		pre-configure
 SUBST_MESSAGE.tg=	removing thousands grouping flag from %f (PR lib/40714)
-SUBST_FILES.tg=		daemon/remote.c gtk/util.c libtransmission/utils.c \
-			  qt/utils.cc */*.po
-SUBST_SED.tg=		-e "s,%\\([.0-9]*\\)'\\([.0-9]*\\)f,%\\1\\2f,g"
+SUBST_FILES.tg=		daemon/remote.c gtk/util.c	\
+			  libtransmission/utils.c qt/details.cc */*.po
+SUBST_SED.tg=		-e "s,%\\([.0-9$$]*\\)'\\([.0-9$$]*\\)f,%\\1\\2f,g"
 .endif
 
 PLIST_SRC+=		${PKGDIR}/PLIST.common

@@ -1,11 +1,12 @@
-# $NetBSD: Makefile,v 1.7 2010/01/30 16:28:00 heinz Exp $
+# $NetBSD: Makefile,v 1.9 2010/06/13 22:45:47 wiz Exp $
 #
 
 DISTNAME=	libunique-1.1.6
+PKGREVISION=	1
 CATEGORIES=	devel
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/libunique/1.1/}
 
-MAINTAINER=	ahoka@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://live.gnome.org/LibUnique
 COMMENT=	Library for writing single instance applications
 LICENSE=	gnu-lgpl-v2.1

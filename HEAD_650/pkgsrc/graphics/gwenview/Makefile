@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.37 2010/02/03 23:04:20 joerg Exp $
+# $NetBSD: Makefile,v 1.40 2010/07/14 11:11:21 sbd Exp $
 #
 
 DISTNAME=	gwenview-1.4.2
-PKGREVISION=	6
+PKGREVISION=	8
 CATEGORIES=	kde graphics
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=gwenview/}
 EXTRACT_SUFX=	.tar.bz2
@@ -27,6 +27,7 @@ SHLIBTOOL_OVERRIDE=	# empty
 .include "../../graphics/exiv2/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../graphics/libkipi/buildlink3.mk"
+.include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../x11/kdelibs3/buildlink3.mk"
 .include "../../x11/libSM/buildlink3.mk"
 .include "../../x11/libX11/buildlink3.mk"

@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.15 2009/08/26 19:57:26 sno Exp $
+# $NetBSD: Makefile,v 1.17 2010/06/13 22:44:14 wiz Exp $
 #
 
 DISTNAME=		gens-rc3
 PKGNAME=		gens-2.12rc3
-PKGREVISION=		10
+PKGREVISION=		11
 CATEGORIES=		emulators
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=gens/}
 
@@ -16,15 +16,18 @@ BUILD_DEPENDS+=		nasm-[0-9]*:../../devel/nasm
 # contains i386 assembler sources
 ONLY_FOR_PLATFORM=	*-*-i386
 
+PKG_DESTDIR_SUPPORT=    user-destdir
+
 WRKSRC=			${WRKDIR}/GensForLinux
 GNU_CONFIGURE=		yes
 USE_TOOLS+=		gmake pkg-config
+
+INSTALLATION_DIRS+= share/doc/gens
 
 .include "../../devel/SDL/buildlink3.mk"
 .include "../../x11/gtk2/buildlink3.mk"
 
 post-install:
-	${INSTALL_DATA_DIR} ${PREFIX}/share/doc/gens
-	${INSTALL_DATA} ${WRKSRC}/gens.txt ${PREFIX}/share/doc/gens
+	${INSTALL_DATA} ${WRKSRC}/gens.txt ${DESTDIR}${PREFIX}/share/doc/gens
 
 .include "../../mk/bsd.pkg.mk"

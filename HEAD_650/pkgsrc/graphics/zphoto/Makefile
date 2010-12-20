@@ -1,14 +1,15 @@
-# $NetBSD: Makefile,v 1.11 2010/04/09 01:38:32 obache Exp $
+# $NetBSD: Makefile,v 1.13 2010/06/13 22:44:47 wiz Exp $
 #
 
 DISTNAME=	zphoto-1.2
-PKGREVISION=	5
+PKGREVISION=	6
 CATEGORIES=	graphics
 MASTER_SITES=	http://0xcc.net/zphoto/
 
 MAINTAINER=	obache@NetBSD.org
 HOMEPAGE=	http://0xcc.net/zphoto/
 COMMENT=	Flash-based photo album generator
+LICENSE=	gnu-lgpl-v2.1
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
