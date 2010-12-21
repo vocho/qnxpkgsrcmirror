@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.30 2010/02/07 16:04:17 wiz Exp $
+# $NetBSD: Makefile,v 1.34 2010/12/02 12:15:49 wiz Exp $
 #
 
-DISTNAME=	Date-Manip-6.07
+DISTNAME=	Date-Manip-6.14
 PKGNAME=	p5-${DISTNAME}
 SVR4_PKGNAME=	p5dma
 CATEGORIES=	textproc perl5
@@ -15,6 +15,8 @@ LICENSE=	${PERL5_LICENSE}
 DEPENDS+=	p5-Test-Pod-[0-9]*:../../devel/p5-Test-Pod
 DEPENDS+=	p5-Test-Pod-Coverage-[0-9]*:../../devel/p5-Test-Pod-Coverage
 DEPENDS+=	p5-YAML-Syck-[0-9]*:../../textproc/p5-YAML-Syck
+# only needed for tests
+#DEPENDS+=	p5-Test-Inter-[0-9]*:../../devel/p5-Test-Inter
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
@@ -22,6 +24,7 @@ PKG_INSTALLATION_TYPES=	overwrite pkgviews
 USE_LANGUAGES=		# empty
 
 PERL5_PACKLIST=		auto/Date/Manip/.packlist
+PERL5_MODULE_TYPE=	Module::Build
 
 .include "../../lang/perl5/module.mk"
 .include "../../mk/bsd.pkg.mk"

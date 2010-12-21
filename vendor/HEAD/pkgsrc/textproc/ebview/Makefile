@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.6 2010/06/13 22:45:27 wiz Exp $
+# $NetBSD: Makefile,v 1.8 2010/11/15 22:58:41 abs Exp $
 
 DISTNAME=		ebview-0.3.6
-PKGREVISION=		2
+PKGREVISION=		4
 CATEGORIES=		textproc
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=ebview/}
 

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.292 2010/07/20 02:22:15 asau Exp $
+# $NetBSD: Makefile,v 1.296 2010/12/18 12:47:31 wiz Exp $
 #
 
 COMMENT=	Programming languages
@@ -10,6 +10,7 @@ SUBDIR+=	SmartEiffel
 SUBDIR+=	a60
 SUBDIR+=	awka
 SUBDIR+=	baci
+SUBDIR+=	boomerang
 SUBDIR+=	brandybasic
 SUBDIR+=	bwbasic
 SUBDIR+=	caml-light
@@ -37,6 +38,7 @@ SUBDIR+=	erlang-doc
 SUBDIR+=	erlang-man
 SUBDIR+=	ezm3
 SUBDIR+=	f2c
+SUBDIR+=	ficl
 SUBDIR+=	focal
 SUBDIR+=	fort77
 SUBDIR+=	g95
@@ -124,6 +126,7 @@ SUBDIR+=	pnetlib
 SUBDIR+=	pnetlib-nox11
 SUBDIR+=	polyml
 SUBDIR+=	py-basicproperty
+SUBDIR+=	py-cxfreeze
 SUBDIR+=	py-html-docs
 SUBDIR+=	py-psyco
 SUBDIR+=	py-pyrex
@@ -143,6 +146,8 @@ SUBDIR+=	ruby
 SUBDIR+=	ruby-doc-stdlib
 SUBDIR+=	ruby18
 SUBDIR+=	ruby18-base
+SUBDIR+=	ruby19
+SUBDIR+=	ruby19-base
 SUBDIR+=	sablevm
 SUBDIR+=	sablevm-classpath
 SUBDIR+=	sablevm-classpath-gui

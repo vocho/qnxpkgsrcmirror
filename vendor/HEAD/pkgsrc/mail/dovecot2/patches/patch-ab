@@ -1,0 +1,18 @@
+$NetBSD: patch-ab,v 1.2 2010/12/03 21:21:10 ghen Exp $
+
+--- doc/example-config/dovecot.conf.orig	2010-11-10 16:09:10.000000000 +0000
++++ doc/example-config/dovecot.conf
+@@ -12,12 +12,9 @@
+ # Default values are shown for each setting, it's not required to uncomment
+ # those. These are exceptions to this though: No sections (e.g. namespace {})
+ # or plugin settings are added by default, they're listed only as examples.
+-# Paths are also just examples with the real defaults being based on configure
+-# options. The paths listed here are for configure --prefix=/usr
+-# --sysconfdir=/etc --localstatedir=/var
+ 
+ # Protocols we want to be serving.
+-#protocols = imap pop3 lmtp
++protocols = imap pop3 lmtp
+ 
+ # A comma separated list of IPs or hosts where to listen in for connections. 
+ # "*" listens in all IPv4 interfaces, "::" listens in all IPv6 interfaces.

@@ -1,8 +1,8 @@
-$NetBSD: patch-aa,v 1.4 2010/05/05 17:58:45 minskim Exp $
+$NetBSD: patch-aa,v 1.6 2010/09/22 15:50:43 minskim Exp $
 
---- texmf/tex/generic/config/language.dat.orig	2010-05-03 01:52:21.000000000 +0000
+--- texmf/tex/generic/config/language.dat.orig	2010-09-20 02:03:56.000000000 +0000
 +++ texmf/tex/generic/config/language.dat
-@@ -47,130 +47,3 @@ usenglishmax	ushyphmax.tex
+@@ -57,138 +57,3 @@ english		hyphen.tex  % do not change!
  % 
  dumylang	dumyhyph.tex    %for testing a new language.
  nohyphenation	zerohyph.tex    %a language with no patterns at all.
@@ -11,11 +11,15 @@ $NetBSD: patch-aa,v 1.4 2010/05/05 17:58:45 minskim Exp $
 -=german-x-latest
 -ngerman-x-2009-06-19 dehyphn-x-2009-06-19.tex
 -=ngerman-x-latest
+-% from hyphen-afrikaans:
+-afrikaans loadhyph-af.tex
 -% from hyphen-ancientgreek:
 -ancientgreek loadhyph-grc.tex
 -ibycus ibyhyph.tex
 -% from hyphen-arabic:
 -arabic zerohyph.tex
+-% from hyphen-armenian:
+-armenian loadhyph-hy.tex
 -% from hyphen-basque:
 -basque loadhyph-eu.tex
 -% from hyphen-bulgarian:
@@ -34,6 +38,11 @@ $NetBSD: patch-aa,v 1.4 2010/05/05 17:58:45 minskim Exp $
 -danish loadhyph-da.tex
 -% from hyphen-dutch:
 -dutch loadhyph-nl.tex
+-% from hyphen-english:
+-ukenglish loadhyph-en-gb.tex
+-=british
+-=UKenglish
+-usenglishmax loadhyph-en-us.tex
 -% from hyphen-esperanto:
 -esperanto loadhyph-eo.tex
 -% from hyphen-estonian:
@@ -52,6 +61,7 @@ $NetBSD: patch-aa,v 1.4 2010/05/05 17:58:45 minskim Exp $
 -% from hyphen-german:
 -german loadhyph-de-1901.tex
 -ngerman loadhyph-de-1996.tex
+-swissgerman loadhyph-de-ch-1901.tex
 -% from hyphen-greek:
 -monogreek loadhyph-el-monoton.tex
 -greek loadhyph-el-polyton.tex
@@ -82,6 +92,8 @@ $NetBSD: patch-aa,v 1.4 2010/05/05 17:58:45 minskim Exp $
 -italian loadhyph-it.tex
 -% from hyphen-kurmanji:
 -kurmanji loadhyph-kmr.tex
+-% from hyphen-lao:
+-lao loadhyph-lo.tex
 -% from hyphen-latin:
 -latin loadhyph-la.tex
 -% from hyphen-latvian:
@@ -123,10 +135,6 @@ $NetBSD: patch-aa,v 1.4 2010/05/05 17:58:45 minskim Exp $
 -turkish loadhyph-tr.tex
 -% from hyphen-turkmen:
 -turkmen loadhyph-tk.tex
--% from hyphen-ukenglish:
--ukenglish loadhyph-en-gb.tex
--=british
--=UKenglish
 -% from hyphen-ukrainian:
 -ukrainian loadhyph-uk.tex
 -% from hyphen-uppersorbian:

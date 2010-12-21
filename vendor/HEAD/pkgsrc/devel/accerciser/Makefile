@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.8 2010/06/13 22:44:02 wiz Exp $
+# $NetBSD: Makefile,v 1.11 2010/11/15 22:56:34 abs Exp $
 #
 
 DISTNAME=	accerciser-1.6.1
-PKGREVISION=	3
+PKGREVISION=	5
 CATEGORIES=	misc
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/accerciser/1.6/}
 EXTRACT_SUFX=	.tar.bz2
@@ -17,7 +17,6 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 USE_TOOLS+=		gmake intltool msgfmt pkg-config
 USE_PKGLOCALEDIR=	yes
 GNU_CONFIGURE=		yes
-PYTHON_VERSIONS_ACCEPTED=	25 24
 PY_PATCHPLIST=		yes
 REPLACE_PYTHON=		plugins/ipython_view.py
 REPLACE_PYTHON+=	src/accerciser.in

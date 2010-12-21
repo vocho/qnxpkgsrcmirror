@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.71 2010/07/06 14:54:46 drochner Exp $
+# $NetBSD: Makefile,v 1.77 2010/11/24 20:14:05 drochner Exp $
 #
 
-DISTNAME=	libwnck-2.30.2
+DISTNAME=	libwnck-2.30.6
 CATEGORIES=	devel x11 gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/libwnck/2.30/}
 EXTRACT_SUFX=	.tar.bz2
@@ -9,6 +9,7 @@ EXTRACT_SUFX=	.tar.bz2
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.gnome.org/
 COMMENT=	Library to write pagers and tasklists
+LICENSE=	gnu-lgpl-v2
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 

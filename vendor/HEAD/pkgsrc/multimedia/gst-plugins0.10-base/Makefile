@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.13 2010/02/16 13:14:31 drochner Exp $
+# $NetBSD: Makefile,v 1.15 2010/12/03 18:15:44 drochner Exp $
 #
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 .include "Makefile.common"
+#CONFIGURE_ARGS+= --disable-silent-rules
 
 COMMENT+=		base plugins
 
@@ -21,5 +22,4 @@ TEST_TARGET=		check-torture
 # soft dependency only, .pc file not needed
 #.include "../../textproc/iso-codes/buildlink3.mk"
 
-.include "../../textproc/gtk-doc/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

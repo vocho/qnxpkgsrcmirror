@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.79 2010/06/13 22:45:22 wiz Exp $
+# $NetBSD: Makefile,v 1.82 2010/11/15 22:58:34 abs Exp $
 
 PKGREVISION=		1
 

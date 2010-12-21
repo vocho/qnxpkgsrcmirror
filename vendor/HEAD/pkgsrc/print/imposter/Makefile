@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.18 2010/07/06 10:17:15 jmmv Exp $
+# $NetBSD: Makefile,v 1.20 2010/11/15 22:58:23 abs Exp $
 #
 
 DISTNAME=	imposter-0.3
-PKGREVISION=	5
+PKGREVISION=	7
 CATEGORIES=	print
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=imposter/}
 

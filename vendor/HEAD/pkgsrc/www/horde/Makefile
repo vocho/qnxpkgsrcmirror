@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.68 2010/03/16 16:02:21 taca Exp $
+# $NetBSD: Makefile,v 1.71 2010/12/16 03:38:32 taca Exp $
 
-DISTNAME=	horde-3.3.6
-PKGREVISION=	1
+DISTNAME=	horde-3.3.11
 CATEGORIES=	www
 MASTER_SITES=	http://ftp.horde.org/pub/horde/ \
 		ftp://ftp.horde.org/pub/horde/
@@ -43,7 +42,7 @@ SENDMAIL?=	/usr/sbin/sendmail
 PKG_USERS_VARS+=APACHE_USER
 
 PKG_SYSCONFSUBDIR?=	httpd
-MESSAGE_SUBST+=		HORDEDIR=${HORDEDIR:Q}
+MESSAGE_SUBST+=		HORDEDIR=${HORDEDIR}
 
 REPLACE_INTERPRETER+=	php
 REPLACE.php.old=	.*/bin/php
@@ -129,15 +128,12 @@ do-install:
 	${INSTALL_DATA} ${WRKSRC}/COPYING ${DESTDIR}${DOCDIR}
 	${INSTALL_DATA} ${WRKSRC}/README ${DESTDIR}${DOCDIR}
 	${INSTALL_DATA} ${WRKSRC}/docs/* ${DESTDIR}${DOCDIR}
-
-.	for d in ${PAXDIRS}
+.for d in ${PAXDIRS}
 		${INSTALL_DATA_DIR} ${DESTDIR}${HORDEDIR}/${d}
-.	endfor
-
-.	for d in ${PAXDIRS}
+.endfor
+.for d in ${PAXDIRS}
 		cd ${WRKSRC}/${d} && pax -rwpam . ${DESTDIR}${HORDEDIR}/${d}
-.	endfor
-
+.endfor
 	cd ${WRKSRC}/config && for f in *.dist; do \
 		${INSTALL_DATA} $$f ${DESTDIR}${EGDIR}/config/$${f%.dist}; \
 	done

@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.12 2010/07/14 11:11:14 sbd Exp $
+# $NetBSD: Makefile,v 1.19 2010/12/06 11:43:43 markd Exp $
 
 DISTNAME=	kdelibs-${_KDE_VERSION}
-PKGREVISION=	1
 CATEGORIES=	x11
 COMMENT=	Support libraries for the KDE integrated X11 desktop
 
@@ -22,13 +21,17 @@ CMAKE_MODULE_PATH_OVERRIDE+=	kjsembed/qtonly/CMakeLists.txt
 CMAKE_ARGS+=	-DKDE_DISTRIBUTION_TEXT:STRING="NetBSD pkgsrc"
 CMAKE_ARGS+=	-DWITH_Avahi:BOOL=off
 
+CMAKE_ARGS+=	-DLIBLZMA_INCLUDE_DIR:PATH=${BUILDLINK_PREFIX.xz}/include
+CMAKE_ARGS+=	-DLIBLZMA_LIBRARY:FILEPATH=${BUILDLINK_PREFIX.xz}/lib/liblzma.so
+
 MAKE_DIRS+=	${PKG_SYSCONFDIR}/xdg/menus
 CONF_FILES+=	${PREFIX}/share/examples/kdelibs4/applications.menu \
 		${PKG_SYSCONFDIR}/xdg/menus/applications.menu
 CONF_FILES+=	${PREFIX}/share/examples/kde4-dbus/org.kde.auth.conf \
 		${PKG_SYSCONFDIR}/dbus-1/system.d/org.kde.auth.conf
-CONF_FILES+=	${PREFIX}/share/examples/kde4-dbus/org.kde.kcontrol.kcmremotewidgets.conf \
-		${PKG_SYSCONFDIR}/dbus-1/system.d/org.kde.kcontrol.kcmremotewidgets.conf
+
+DEPENDS+=	docbook-xml>=4.2:../../textproc/docbook-xml
+DEPENDS+=	docbook-xsl>=1.75:../../textproc/docbook-xsl
 
 INSTALLATION_DIRS+=	${PKGMANDIR}/man1 ${PKGMANDIR}/man7 ${PKGMANDIR}/man8
 
@@ -63,6 +66,7 @@ BUILDLINK_DEPMETHOD.qt4-tools=		full
 
 BUILDLINK_API_DEPENDS.strigi+=	strigi>=0.5.11
 BUILDLINK_API_DEPENDS.soprano+=	soprano>=2.3.0
+BUILDLINK_API_DEPENDS.shared-desktop-ontologies+=	shared-desktop-ontologies>=0.4
 
 .include "../../archivers/bzip2/buildlink3.mk"
 .include "../../archivers/xz/buildlink3.mk"

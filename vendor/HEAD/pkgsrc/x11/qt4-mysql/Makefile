@@ -1,10 +1,11 @@
-# $NetBSD: Makefile,v 1.10 2010/07/04 06:00:14 adam Exp $
+# $NetBSD: Makefile,v 1.14 2010/11/15 22:59:10 abs Exp $
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 .include "../../x11/qt4-libs/Makefile.common"
 
 PKGNAME=	qt4-mysql-${QTVERSION}
+PKGREVISION=	1
 COMMENT=	QT mysql driver
 
 CONFIGURE_ARGS+=	-I${QTDIR}/include
@@ -21,7 +22,7 @@ SQLDRVDIR=	${QTPREFIX}/plugins/sqldrivers
 INSTALLATION_DIRS=	${SQLDRVDIR}
 
 do-install:
-	${LIBTOOL} --mode=install ${INSTALL_DATA} ${WRKSRC}/plugins/sqldrivers/libqsqlmysql.la \
+	${LIBTOOL} --mode=install ${INSTALL_LIB} ${WRKSRC}/plugins/sqldrivers/libqsqlmysql.la \
 		${DESTDIR}${SQLDRVDIR}
 
 .include "../../x11/qt4-libs/buildlink3.mk"

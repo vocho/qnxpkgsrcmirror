@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.4 2010/07/22 13:22:02 drochner Exp $
+# $NetBSD: Makefile,v 1.6 2010/12/03 18:40:20 drochner Exp $
 #
 
 GST_PLUGINS0.10_NAME=	cairo

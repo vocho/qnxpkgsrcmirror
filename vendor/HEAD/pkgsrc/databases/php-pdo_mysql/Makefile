@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.10 2010/03/16 11:54:31 taca Exp $
+# $NetBSD: Makefile,v 1.12 2010/12/13 13:18:20 taca Exp $
 
 MODNAME=		pdo_mysql
 CATEGORIES+=		databases

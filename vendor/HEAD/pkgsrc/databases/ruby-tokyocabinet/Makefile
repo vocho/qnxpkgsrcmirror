@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.21 2010/06/18 09:55:01 obache Exp $
+# $NetBSD: Makefile,v 1.23 2010/09/10 04:54:04 taca Exp $
 #
 
 DISTNAME=	tokyocabinet-ruby-1.30
@@ -7,14 +7,13 @@ CATEGORIES=	databases ruby
 MASTER_SITES=	${HOMEPAGE:S/rubydoc/rubypkg/}
 
 MAINTAINER=	obache@NetBSD.org
-HOMEPAGE=	http://1978th.net/tokyocabinet/rubydoc/
+HOMEPAGE=	http://fallabs.com/tokyocabinet/rubydoc/
 COMMENT=	Ruby binding of Tokyo Cabinet
 LICENSE=	gnu-lgpl-v2.1
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_RUBY_EXTCONF=	yes
-RUBY_HAS_ARCHLIB=	yes
 REPLACE_RUBY_DIRS=	.
 USE_TOOLS+=		pax
 

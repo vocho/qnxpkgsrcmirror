@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.15 2010/06/02 13:19:43 adam Exp $
+# $NetBSD: Makefile,v 1.18 2010/11/01 17:44:52 adam Exp $
 
-DISTNAME=	apr-util-1.3.9
-PKGREVISION=	1
+DISTNAME=	apr-util-1.3.10
 CATEGORIES=	devel
 MASTER_SITES=	${MASTER_SITE_APACHE:=apr/}
+EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://apr.apache.org/

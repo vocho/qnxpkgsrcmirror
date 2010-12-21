@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.19 2010/07/14 16:17:41 drochner Exp $
+# $NetBSD: Makefile,v 1.22 2010/11/24 20:51:19 drochner Exp $
 #
 
-DISTNAME=	gnome-settings-daemon-2.30.2
+DISTNAME=	gnome-settings-daemon-2.32.1
 CATEGORIES=	sysutils
-MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gnome-settings-daemon/2.30/}
+MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gnome-settings-daemon/2.32/}
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
@@ -25,6 +25,7 @@ GCONF_SCHEMAS+=	apps_gnome_settings_daemon_keybindings.schemas
 GCONF_SCHEMAS+=	apps_gnome_settings_daemon_xrandr.schemas
 GCONF_SCHEMAS+=	apps_gnome_settings_daemon_housekeeping.schemas
 GCONF_SCHEMAS+=	desktop_gnome_peripherals_touchpad.schemas
+GCONF_SCHEMAS+=	desktop_gnome_peripherals_smartcard.schemas
 PKGCONFIG_OVERRIDE+=	data/gnome-settings-daemon.pc.in
 
 BUILDLINK_API_DEPENDS.libxklavier+=	libxklavier>=3.3

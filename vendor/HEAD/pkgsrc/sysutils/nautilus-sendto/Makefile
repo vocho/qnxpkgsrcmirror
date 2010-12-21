@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.10 2010/07/14 16:27:40 drochner Exp $
+# $NetBSD: Makefile,v 1.14 2010/11/29 15:17:00 drochner Exp $
 #
 
-DISTNAME=		nautilus-sendto-2.28.4
+DISTNAME=		nautilus-sendto-2.28.5
 CATEGORIES=		sysutils gnome
 MASTER_SITES=		${MASTER_SITE_GNOME:=sources/nautilus-sendto/2.28/}
 EXTRACT_SUFX=		.tar.bz2
@@ -18,6 +18,7 @@ USE_TOOLS+=		gmake intltool msgfmt pkg-config
 USE_LIBTOOL=		yes
 GCONF_SCHEMAS=		nst.schemas
 GNU_CONFIGURE=		yes
+CONFIGURE_ARGS+=	--with-plugins="bluetooth evolution nautilus-burn pidgin removable-devices"
 
 #XXX: needs libempathy-gtk >= 2.25.2
 #.include "../../chat/empathy/buildlink3.mk"

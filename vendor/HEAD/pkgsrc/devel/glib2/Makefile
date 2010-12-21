@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.175 2010/06/03 01:00:46 dsainty Exp $
+# $NetBSD: Makefile,v 1.177 2010/11/20 01:36:49 obache Exp $
 
 .include "Makefile.common"
 
+PKGREVISION=		1
 CATEGORIES=		devel
 
 COMMENT=		Some useful routines for C programming (glib2)
@@ -24,6 +25,8 @@ PKGCONFIG_OVERRIDE+=	gio-unix-2.0.pc.in
 
 # need pcre utf8 + unicode-properties
 BUILDLINK_API_DEPENDS.pcre+=	pcre>=7.4nb1
+
+LIBS.SunOS+=	-lnsl -lsocket
 
 .include "../../converters/libiconv/buildlink3.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"

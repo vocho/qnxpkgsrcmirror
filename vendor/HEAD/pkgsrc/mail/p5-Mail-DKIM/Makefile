@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.14 2009/11/05 22:53:12 heinz Exp $
+# $NetBSD: Makefile,v 1.16 2010/10/20 19:57:35 pettai Exp $
 #
 
-DISTNAME=		Mail-DKIM-0.37
+DISTNAME=		Mail-DKIM-0.38
 PKGNAME=		p5-${DISTNAME}
 SVR4_PKGNAME=		p5mdk
 CATEGORIES=		mail perl5
@@ -28,6 +28,7 @@ REPLACE_PERL+=		lib/Mail/DKIM.pm
 REPLACE_PERL+=		lib/Mail/DKIM/*.pm
 REPLACE_PERL+=		lib/Mail/DKIM/Algorithm/*.pm
 REPLACE_PERL+=		lib/Mail/DKIM/Canonicalization/*.pm
+REPLACE_PERL+=		sample_mime_lite.pl
 
 .include "../../lang/perl5/module.mk"
 .include "../../mk/bsd.pkg.mk"

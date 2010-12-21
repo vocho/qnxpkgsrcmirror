@@ -1,4 +1,4 @@
-# $NetBSD: mozilla-common.mk,v 1.15 2010/06/24 12:20:38 tnn Exp $
+# $NetBSD: mozilla-common.mk,v 1.18 2010/11/13 11:54:43 tnn Exp $
 #
 # common Makefile fragment for mozilla packages based on gecko 1.9.1.
 # 
@@ -25,7 +25,7 @@ CONFIGURE_ARGS+=	--enable-optimize=-O2 --with-pthreads
 CONFIGURE_ARGS+=	--disable-javaxpcom
 CONFIGURE_ARGS+=	--enable-default-toolkit=cairo-gtk2
 CONFIGURE_ARGS+=	--enable-svg --enable-mathml
-CONFIGURE_ARGS+=	--enable-system-cairo
+CONFIGURE_ARGS+=	--disable-system-cairo
 CONFIGURE_ARGS+=	--with-system-jpeg
 CONFIGURE_ARGS+=	--with-system-zlib --with-system-bz2
 CONFIGURE_ARGS+=	--enable-system-sqlite
@@ -84,7 +84,8 @@ PREFER.bzip2?=	pkgsrc
 .include "../../audio/alsa-lib/buildlink3.mk"
 .endif
 .include "../../archivers/bzip2/buildlink3.mk"
-BUILDLINK_API_DEPENDS.sqlite3+=	sqlite3>=3.6.22
+BUILDLINK_API_DEPENDS.sqlite3+=	sqlite3>=3.7.1
+CONFIGURE_ENV+= ac_cv_sqlite_secure_delete=yes	# c.f. patches/patch-al
 .include "../../databases/sqlite3/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"
 .include "../../graphics/jpeg/buildlink3.mk"

@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.1.1.1 2010/07/26 11:54:34 drochner Exp $
+# $NetBSD: Makefile,v 1.4 2010/11/15 22:57:07 abs Exp $
 #
 
 DISTNAME=	geoclue-0.12.0
+PKGREVISION=	2
 CATEGORIES=	geography
 MASTER_SITES=	http://folks.o-hand.com/jku/geoclue-releases/
 
@@ -17,6 +18,9 @@ USE_LIBTOOL=	yes
 USE_TOOLS+=	pkg-config gmake
 
 PKGCONFIG_OVERRIDE+=	geoclue.pc.in
+
+# for documentation build
+BUILD_DEPENDS+=	libxslt-[0-9]*:../../textproc/libxslt
 
 #for test
 #.include "../../x11/gtk2/buildlink3.mk"

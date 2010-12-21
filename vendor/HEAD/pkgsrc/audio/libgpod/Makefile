@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.11 2010/06/13 22:43:50 wiz Exp $
+# $NetBSD: Makefile,v 1.14 2010/11/15 22:56:17 abs Exp $
 
-DISTNAME=		libgpod-0.7.0
+DISTNAME=		libgpod-0.7.2
 PKGREVISION=		2
 CATEGORIES=		audio
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=gtkpod/}
@@ -8,6 +8,7 @@ MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=gtkpod/}
 MAINTAINER=		srp@tworoads.net
 HOMEPAGE=		http://www.gtkpod.org/libgpod/
 COMMENT=		Library for accessing iPod onboard databases, playlists, etc
+LICENSE=		gnu-lgpl-v2
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 

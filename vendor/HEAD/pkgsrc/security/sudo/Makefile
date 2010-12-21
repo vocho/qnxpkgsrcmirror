@@ -1,15 +1,14 @@
-# $NetBSD: Makefile,v 1.122 2010/07/05 03:08:10 taca Exp $
+# $NetBSD: Makefile,v 1.124 2010/09/21 03:05:27 taca Exp $
 #
 
-DISTNAME=		sudo-1.7.2p8
+DISTNAME=		sudo-1.7.4p4
+PKGREVISION=		1
 CATEGORIES=		security
 MASTER_SITES=		http://www.courtesan.com/sudo/dist/ \
 			ftp://ftp.courtesan.com/pub/sudo/ \
 			ftp://ftp.uwsg.indiana.edu/pub/security/sudo/ \
 			ftp://ftp.twaren.net/Unix/Security/Sudo/ \
 			http://ftp.tux.org/pub/security/sudo/
-
-DIST_SUBDIR=		${DISTNAME}-200805130
 
 MAINTAINER=		kim@tac.nyc.ny.us
 HOMEPAGE=		http://www.courtesan.com/sudo/
@@ -51,6 +50,6 @@ INSTALLATION_DIRS+=	${DOCDIR} ${EGDIR}
 post-install:
 	${INSTALL_DATA} ${WRKSRC}/UPGRADE ${DESTDIR}${PREFIX}/${DOCDIR}
 	${INSTALL_DATA} ${WRKSRC}/sudoers ${DESTDIR}${PREFIX}/${EGDIR}/sudoers
-	${INSTALL_DATA} ${WRKSRC}/README* ${DESTDIR}${PREFIX}/${DOCDIR}
+	${INSTALL_DATA} ${WRKSRC}/README ${DESTDIR}${PREFIX}/${DOCDIR}
 
 .include "../../mk/bsd.pkg.mk"

@@ -1,21 +1,21 @@
-# $NetBSD: Makefile,v 1.12 2010/06/13 22:44:44 wiz Exp $
+# $NetBSD: Makefile,v 1.17 2010/11/27 06:14:46 obache Exp $
 #
 
 PKGNAME=		${RUBY_PKGPREFIX}-gnome2-gdkpixbuf-${VERSION}
 COMMENT=		Ruby binding of GdkPixbuf-2.x
-PKGREVISION=		1
 CATEGORIES=		graphics devel
 
 CONFLICTS+=		ruby-gnome2-gdkpixbuf-[0-9]*
+CONFLICTS+=		ruby[0-9][0-9]-gnome2-gdkpixbuf-[0-9]*
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
-RUBY_EXTCONF_SUBDIRS=	gdkpixbuf
+RUBY_EXTCONF_SUBDIRS=	gdk_pixbuf2
 
 DEPENDS+=		${RUBY_PKGPREFIX}-gnome2-glib>=${VERSION}:../../devel/ruby-gnome2-glib
-USE_TOOLS+=		pkg-config
 
 .include "../../graphics/ruby-rcairo/buildlink3.mk"
 BUILDLINK_API_DEPENDS.gtk2+=	gtk2+>=2.6.0
 .include "../../x11/gtk2/buildlink3.mk"
+.include "../../devel/ruby-pkg-config/tool.mk"
 .include "../../meta-pkgs/ruby-gnome2/Makefile.common"

@@ -1,4 +1,4 @@
-# $NetBSD: tools.Darwin.mk,v 1.40 2009/08/18 04:38:24 yyamano Exp $
+# $NetBSD: tools.Darwin.mk,v 1.43 2010/11/09 07:57:16 adam Exp $
 #
 # System-supplied tools for the Darwin (Mac OS X) operating system.
 
@@ -9,6 +9,9 @@ TOOLS_PLATFORM.bash?=		/bin/bash
 # Darwin's bison is too old (1.28).
 # TOOLS_PLATFORM.bison?=		/usr/bin/bison
 # TOOLS_PLATFORM.bison-yacc?=	/usr/bin/bison -y
+.if exists(/usr/bin/bsdtar)
+TOOLS_PLATFORM.bsdtar?=		/usr/bin/bsdtar
+.endif
 TOOLS_PLATFORM.byacc?=		/usr/bin/yacc
 .if exists(/usr/bin/bzcat)
 TOOLS_PLATFORM.bzcat?=		/usr/bin/bzcat
@@ -60,7 +63,6 @@ TOOLS_PLATFORM.install-info?=	/usr/bin/install-info
 .if exists(/bin/ksh)
 TOOLS_PLATFORM.ksh?=		/bin/ksh
 .endif
-TOOLS_PLATFORM.ldconfig?=	/sbin/ldconfig
 TOOLS_PLATFORM.lex?=		/usr/bin/lex
 TOOLS_PLATFORM.ln?=		/bin/ln
 TOOLS_PLATFORM.ls?=		/bin/ls
@@ -87,6 +89,9 @@ TOOLS_PLATFORM.sh?=		/bin/sh
 TOOLS_PLATFORM.shlock?=		/usr/bin/shlock
 .endif
 TOOLS_PLATFORM.sleep?=		/bin/sleep
+.if exists(/usr/bin/soelim)
+TOOLS_PLATFORM.soelim?=		/usr/bin/soelim
+.endif
 TOOLS_PLATFORM.sort?=		/usr/bin/sort
 TOOLS_PLATFORM.strip?=		/usr/bin/strip
 TOOLS_PLATFORM.tail?=		/usr/bin/tail

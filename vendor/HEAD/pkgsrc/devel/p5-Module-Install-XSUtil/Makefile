@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.1.1.1 2010/04/10 14:20:21 seb Exp $
+# $NetBSD: Makefile,v 1.4 2010/09/23 22:43:21 sno Exp $
 #
 
-DISTNAME=	Module-Install-XSUtil-0.22
+DISTNAME=	Module-Install-XSUtil-0.33
 PKGNAME=	p5-${DISTNAME}
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Module/}
@@ -16,9 +16,10 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 
 PERL5_PACKLIST=	auto/Module/Install/XSUtil/.packlist
 
-BUILD_DEPENDS+=	p5-Devel-PPPort>=3.19:../../devel/p5-Devel-PPPort
-BUILD_DEPENDS+=	p5-ExtUtils-ParseXS>=2.21:../../devel/p5-ExtUtils-ParseXS
-BUILD_DEPENDS+=	p5-Test-Simple>=0.88:../../devel/p5-Test-Simple
+BUILD_DEPENDS+=	p5-B-Hooks-OP-Annotation>=0.43:../../devel/p5-B-Hooks-OP-Annotation
+BUILD_DEPENDS+=	{perl>=5.10.1,p5-Devel-PPPort>=3.19}:../../devel/p5-Devel-PPPort
+BUILD_DEPENDS+=	{perl>=5.12.0,p5-ExtUtils-ParseXS>=2.21}:../../devel/p5-ExtUtils-ParseXS
+BUILD_DEPENDS+=	{perl>=5.10.1,p5-Test-Simple>=0.88}:../../devel/p5-Test-Simple
 
 DEPENDS+=	p5-Module-Install>=0.91:../../devel/p5-Module-Install
 

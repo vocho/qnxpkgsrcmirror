@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.79 2010/07/24 22:23:14 tron Exp $
+# $NetBSD: Makefile,v 1.81 2010/12/13 13:15:45 taca Exp $
 
 PKGNAME=		php-${PHP_BASE_VERS}
 CATEGORIES=		lang

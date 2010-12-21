@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.6 2010/06/13 22:44:58 wiz Exp $
+# $NetBSD: Makefile,v 1.8 2010/11/15 22:57:55 abs Exp $
 #
 
 DISTNAME=	gelemental-1.2.0
-PKGREVISION=	2
+PKGREVISION=	4
 CATEGORIES=	misc
 MASTER_SITES=	http://www.kdau.com/files/
 EXTRACT_SUFX=	.tar.bz2

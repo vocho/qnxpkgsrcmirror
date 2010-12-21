@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.10 2010/06/13 22:44:35 wiz Exp $
+# $NetBSD: Makefile,v 1.15 2010/11/15 22:57:20 abs Exp $
 
-DISTNAME=	hugin-2010.0.0
+DISTNAME=	hugin-2010.2.0
 PKGREVISION=	2
 CATEGORIES=	graphics
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=hugin/}
@@ -12,6 +12,11 @@ COMMENT=	Panorama photo stitcher
 LICENSE=	gnu-gpl-v2
 
 PKG_DESTDIR_SUPPORT=	user-destdir
+
+DEPENDS+=	autopano-sift-C>=2.5.1:../../graphics/autopano-sift-C
+DEPENDS+=	panomatic>=0.9.4:../../graphics/panomatic
+DEPENDS+=	enblend-enfuse>=4.0:../../graphics/enblend-enfuse
+DEPENDS+=	p5-Image-ExifTool>=8.15:../../graphics/p5-Image-ExifTool
 
 USE_CMAKE=		yes
 USE_LANGUAGES=		c c++
@@ -41,6 +46,7 @@ SUBST_SED.pthread=	-e 's|-pthread;-D_THREAD_SAFE|-pthread -D_THREAD_SAFE|g'
 .include "../../graphics/exiv2/buildlink3.mk"
 .include "../../graphics/glew/buildlink3.mk"
 .include "../../graphics/glut/buildlink3.mk"
+.include "../../graphics/gnome-icon-theme/buildlink3.mk"
 .include "../../graphics/libpano13/buildlink3.mk"
 .include "../../graphics/openexr/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"

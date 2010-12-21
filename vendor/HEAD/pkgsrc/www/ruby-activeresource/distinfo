@@ -1,5 +1,5 @@
-$NetBSD: distinfo,v 1.8 2010/06/09 16:32:36 minskim Exp $
+$NetBSD: distinfo,v 1.10 2010/10/15 11:38:59 taca Exp $
 
-SHA1 (activeresource-2.3.8.gem) = 16305f2538c13b0161344b0bfb6baac3246e1cd5
-RMD160 (activeresource-2.3.8.gem) = bf503524fd9477aeb34cd2f5c4860b6a9508ceee
-Size (activeresource-2.3.8.gem) = 483328 bytes
+SHA1 (activeresource-2.3.10.gem) = 7a5f9b21da2db211c29b6eb5a656d1951e935c1d
+RMD160 (activeresource-2.3.10.gem) = 464d1fc059493117547e34523b8e318339e57a1e
+Size (activeresource-2.3.10.gem) = 73728 bytes

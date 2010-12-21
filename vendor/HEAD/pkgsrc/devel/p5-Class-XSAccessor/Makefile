@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.3 2009/11/22 11:50:35 seb Exp $
+# $NetBSD: Makefile,v 1.6 2010/09/21 05:59:42 sno Exp $
 #
 
-DISTNAME=	Class-XSAccessor-1.05
+DISTNAME=	Class-XSAccessor-1.08
 PKGNAME=	p5-${DISTNAME}
+#PKGREVISION=	1
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Class/}
 
@@ -12,8 +13,6 @@ COMMENT=	Perl 5 module to generate fast XS accessors
 LICENSE=	${PERL5_LICENSE}
 
 PKG_DESTDIR_SUPPORT=	user-destdir
-
-BUILD_DEPENDS+=	p5-AutoXS-Header-[0-9]*:../../devel/p5-AutoXS-Header
 
 PERL5_PACKLIST=	auto/Class/XSAccessor/.packlist
 

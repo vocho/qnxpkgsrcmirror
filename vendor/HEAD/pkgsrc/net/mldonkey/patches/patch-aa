@@ -1,15 +1,21 @@
-$NetBSD: patch-aa,v 1.18 2010/04/23 10:53:28 wiz Exp $
+$NetBSD: patch-aa,v 1.20 2010/08/28 21:35:00 wiz Exp $
 
-Ensure mldonkey accepts ocaml 3.11.1
+From upstream CVS, fixing compilation with ocaml-3.12.
 
---- config/configure.orig	2009-10-23 05:55:40.000000000 +0000
-+++ config/configure
-@@ -4784,7 +4784,7 @@ if  test -z "$OCAMLC"  ||  test -z "$CAM
- else
-   OCAMLVERSION=`$OCAMLC -v | sed -n -e 's|.*version* *\(.*\)$|\1|p' `
-   case "$OCAMLVERSION" in
--    "$REQUIRED_OCAML"*|3.11.0*|3.10.*|3.09.*|3.08.4*|3.08.3*) ;;
-+    "$REQUIRED_OCAML"*|3.11.*|3.10.*|3.09.*|3.08.4*|3.08.3*) ;;
-     *)
-         echo "Need build"
-         BUILD_OCAML=yes
+--- src/gtk2/gui/guiHtml.ml.orig	2006-05-19 23:43:54.000000000 +0000
++++ src/gtk2/gui/guiHtml.ml
+@@ -50,9 +50,13 @@ let user_agent =
+ 
+ let make_request url =
+   let module H = Http_client in
++  let auth = match !!O.gtk_connection_http_proxy_login with
++  | "" -> None
++  | _ -> Some (!!O.gtk_connection_http_proxy_login, !!O.gtk_connection_http_proxy_password)
++  in
+   let proxy =
+     if !!O.gtk_connection_http_use_proxy
+-      then Some (!!O.gtk_connection_http_proxy_server, !!O.gtk_connection_http_proxy_port)
++      then Some (!!O.gtk_connection_http_proxy_server, !!O.gtk_connection_http_proxy_port, auth)
+       else None
+   in
+   let r = {

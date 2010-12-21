@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.26 2010/04/07 14:57:49 gdt Exp $
+# $NetBSD: Makefile,v 1.28 2010/09/17 07:11:41 obache Exp $
 
-DISTNAME=	Python-2.5.5
-PKGNAME=	python25-2.5.5
+.include "dist.mk"
+
+PKGNAME=	python25-${PY_DISTVERSION}
+PKGREVISION=	1
 CATEGORIES=	lang python
-MASTER_SITES=	http://www.python.org/ftp/python/2.5.5/
-EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	recht@NetBSD.org
 HOMEPAGE=	http://www.python.org/
@@ -12,8 +12,6 @@ COMMENT=	Interpreted, interactive, object-oriented programming language
 LICENSE=	python-software-foundation
 
 PKG_DESTDIR_SUPPORT=	user-destdir
-
-# Remember to update pkgsrc/lang/python/srcdist.mk when version changes
 
 CONFLICTS+=	python-[0-9]*
 
@@ -47,6 +45,8 @@ PLIST_SRC+=	${.CURDIR}/../../lang/python25/PLIST.${OPSYS}
 
 .if ${OPSYS} == "NetBSD"
 PRIVILEGED_STAGES+=	clean
+# XXX work around a botched autoconf check which ignores libintl
+CONFIGURE_ENV+=		ac_cv_func_bind_textdomain_codeset=yes
 .endif
 
 .if ${OPSYS} == "Darwin" || ${OPSYS} == "Interix"

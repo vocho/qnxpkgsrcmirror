@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.1.1.1 2010/07/31 10:52:20 sno Exp $
+# $NetBSD: Makefile,v 1.4 2010/09/17 06:09:10 sno Exp $
 #
 
-DISTNAME=	PPIx-Regexp-0.008
+DISTNAME=	PPIx-Regexp-0.011
 PKGNAME=	p5-${DISTNAME}
+#PKGREVISION=	1
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=../../authors/id/W/WY/WYANT/}
 
@@ -14,8 +15,7 @@ LICENSE=	${PERL5_LICENSE}
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 DEPENDS+=	p5-List-MoreUtils-[0-9]*:../../devel/p5-List-MoreUtils
-DEPENDS+=	p5-PPI-[0-9]*:../../devel/p5-PPI
-DEPENDS+=	p5-Params-Util>=0.25:../../devel/p5-Params-Util
+DEPENDS+=	p5-PPI>=1.117:../../devel/p5-PPI
 DEPENDS+=	p5-Readonly-[0-9]*:../../devel/p5-Readonly
 DEPENDS+=	p5-Task-Weaken-[0-9]*:../../devel/p5-Task-Weaken
 

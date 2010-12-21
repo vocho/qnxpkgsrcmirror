@@ -1,5 +1,5 @@
-$NetBSD: distinfo,v 1.1.1.1 2008/04/04 15:19:51 jlam Exp $
+$NetBSD: distinfo,v 1.3 2010/12/04 04:12:18 taca Exp $
 
-SHA1 (configuration-0.0.5.gem) = ae65a38666706959aaaa034fb7cb3d0234349ecc
-RMD160 (configuration-0.0.5.gem) = 7caa7a4e2193086217893c71c72b63591875ba36
-Size (configuration-0.0.5.gem) = 8704 bytes
+SHA1 (configuration-1.2.0.gem) = c70790292de13fdf6a762ca215ecf2078a38ae5e
+RMD160 (configuration-1.2.0.gem) = ee2d808f2ff754c01ce958cffe506390eb62dd72
+Size (configuration-1.2.0.gem) = 9216 bytes

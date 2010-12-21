@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.4 2010/06/15 11:43:49 wiz Exp $
+# $NetBSD: Makefile,v 1.7 2010/12/12 11:39:47 wiz Exp $
 #
 
-DISTNAME=	JBidwatcher-2.1pre8
+DISTNAME=	JBidwatcher-2.1.3
 CATEGORIES=	misc
 MASTER_SITES=	http://www.jbidwatcher.com/download/
 EXTRACT_SUFX=	.jar

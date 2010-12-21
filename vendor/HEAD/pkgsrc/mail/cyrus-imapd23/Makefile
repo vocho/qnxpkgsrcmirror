@@ -1,15 +1,17 @@
-# $NetBSD: Makefile,v 1.4 2010/06/03 06:55:54 obache Exp $
+# $NetBSD: Makefile,v 1.8 2010/10/30 07:44:35 obache Exp $
 
 DISTNAME=	cyrus-imapd-2.3.16
-PKGREVISION=	1
+PKGREVISION=	3
 CATEGORIES=	mail
-MASTER_SITES=	ftp://ftp.andrew.cmu.edu/pub/cyrus-mail/ \
+MASTER_SITES=	ftp://ftp.cyrusimap.org/cyrus-imapd/ \
+		ftp://ftp.cyrusimap.org/cyrus-imapd/OLD-VERSIONS/ \
+		ftp://ftp.andrew.cmu.edu/pub/cyrus-mail/ \
 		ftp://ftp.andrew.cmu.edu/pub/cyrus-mail/OLD-VERSIONS/imap/ \
 		http://www.t.ring.gr.jp/archives/net/mail/cyrus-mail/ \
 		ftp://ftp.t.ring.gr.jp/pub/net/mail/cyrus-mail/
 
 MAINTAINER=	obache@NetBSD.org
-HOMEPAGE=	http://cyrusimap.web.cmu.edu/imapd/
+HOMEPAGE=	http://www.cyrusimap.org/
 COMMENT=	Cyrus IMAP server
 #LICENSE=	original-bsd # like license
 
@@ -97,7 +99,6 @@ CFLAGS+=	-DOPENSSL_LACK_BN_CONST
 .endif
 
 .include "../../security/tcp_wrappers/buildlink3.mk"
-.include "../../mk/bdb.buildlink3.mk"
 
 # Only imap/mupdate needs to be build with pthreads support, so selectively
 # enable it via patches for just that one program.

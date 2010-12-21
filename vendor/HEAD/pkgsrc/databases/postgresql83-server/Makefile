@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.11 2010/04/12 09:53:50 adam Exp $
+# $NetBSD: Makefile,v 1.13 2010/12/19 09:53:54 adam Exp $
 
-PKGNAME=	postgresql83-server-${BASE_VERS}
+PKGNAME=	${DISTNAME:C/-/83-server-/}
 COMMENT=	PostgreSQL database server programs
 
 PKG_DESTDIR_SUPPORT=	user-destdir
@@ -14,15 +14,17 @@ NOT_FOR_PLATFORM=	*-*-mips
 USE_LIBTOOL=		yes
 PKG_LIBTOOL=		${PKG_SHLIBTOOL}
 
-MESSAGE_SRC=		${.CURDIR}/MESSAGE
-
 CONFIGURE_ARGS+=	--with-openssl
 
-BUILD_DIRS=		src/backend
-BUILD_DIRS+=		src/backend/utils/mb/conversion_procs
-BUILD_DIRS+=		src/backend/snowball
-BUILD_DIRS+=		src/timezone
-BUILD_DIRS+=		src/pl
+INSTALL_DIRS=	src/backend
+INSTALL_DIRS+=	src/backend/utils/mb/conversion_procs
+INSTALL_DIRS+=	src/backend/snowball
+INSTALL_DIRS+=	src/timezone
+INSTALL_DIRS+=	src/pl
+BUILD_DIRS=	src/port
+BUILD_DIRS+=	${INSTALL_DIRS}
+
+LIBS.SunOS+=	-lintl
 
 # PostgreSQL has loadable server-side language modules.
 #
@@ -43,10 +45,6 @@ DL_LIBS+=	-lltdl
 .  include "../../devel/libltdl/buildlink3.mk"
 .endif
 
-PKG_OPTIONS_VAR=	PKG_OPTIONS.postgresql83-server
-PKG_SUPPORTED_OPTIONS=	gssapi krb5 ldap pam
-.include "../../databases/postgresql83/options.mk"
-
 # PGUSER	username of the database administrator
 # PGGROUP	group of the database administrator
 # PGHOME	home directory of the database administrator and location of
@@ -66,7 +64,6 @@ PKG_GROUPS=		${PGGROUP}
 PKG_USERS=		${PGUSER}:${PGGROUP}
 PKG_GECOS.${PGUSER}=	PostgreSQL database administrator
 PKG_HOME.${PGUSER}=	${PGHOME}
-PKG_SHELL.${PGUSER}=	${SH}
 
 RCD_SCRIPTS=		pgsql
 
@@ -79,15 +76,5 @@ post-wrapper:
 .if ${OPSYS} == "SunOS"
 	touch ${BUILDLINK_DIR}/include/crypt.h
 .endif
-
-pre-build:
-	${RUN} ${_ULIMIT_CMD}						\
-	cd ${WRKSRC}/src/backend &&					\
-	env ${MAKE_ENV} ${MAKE_PROGRAM} ${BUILD_MAKE_FLAGS}		\
-		../../src/include/parser/parse.h			\
-		../../src/include/utils/fmgroids.h
-	${RUN}${_ULIMIT_CMD}						\
-	cd ${WRKSRC}/src/port &&					\
-	env ${MAKE_ENV} ${MAKE_PROGRAM} ${BUILD_MAKE_FLAGS}
 
 .include "../../mk/bsd.pkg.mk"

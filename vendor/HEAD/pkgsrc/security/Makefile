@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.395 2010/08/03 05:03:41 obache Exp $
+# $NetBSD: Makefile,v 1.401 2010/11/27 06:13:25 agc Exp $
 #
 
 COMMENT=	Security tools
@@ -117,7 +117,9 @@ SUBDIR+=	libksba
 SUBDIR+=	libksba04
 SUBDIR+=	libmcrypt
 SUBDIR+=	libnasl
+SUBDIR+=	liboauth
 SUBDIR+=	libp11
+SUBDIR+=	libpbc
 SUBDIR+=	libprelude
 SUBDIR+=	libprelude-lua
 SUBDIR+=	libprelude-perl
@@ -133,8 +135,10 @@ SUBDIR+=	libssh
 SUBDIR+=	libssh2
 SUBDIR+=	libtasn1
 SUBDIR+=	libtcpa
+SUBDIR+=	libtomcrypt
 SUBDIR+=	logcheck
 SUBDIR+=	lsh
+SUBDIR+=	lua-sec
 SUBDIR+=	mcrypt
 SUBDIR+=	md4-collision
 SUBDIR+=	md5-collision
@@ -313,14 +317,15 @@ SUBDIR+=	rc5des
 SUBDIR+=	rid
 SUBDIR+=	rsaref
 SUBDIR+=	ruby-ezcrypto
+SUBDIR+=	ruby-hmac
 SUBDIR+=	ruby-net-scp
 SUBDIR+=	ruby-net-sftp
 SUBDIR+=	ruby-net-ssh
 SUBDIR+=	ruby-net-ssh-gateway
 SUBDIR+=	ruby-oauth
+SUBDIR+=	ruby-password
 SUBDIR+=	ruby-roauth
 SUBDIR+=	ruby-soauth
-SUBDIR+=	ruby-password
 SUBDIR+=	ruby-tcpwrap
 SUBDIR+=	sbd
 SUBDIR+=	scanssh

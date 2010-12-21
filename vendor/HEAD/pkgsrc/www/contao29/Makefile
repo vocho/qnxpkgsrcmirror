@@ -1,17 +1,19 @@
-# $NetBSD: Makefile,v 1.4 2010/07/28 16:28:51 taca Exp $
+# $NetBSD: Makefile,v 1.9 2010/12/02 15:41:30 taca Exp $
 #
 
 DISTNAME=	contao-${CT_VERSION}
 PKGNAME=	contao${CT_VER}-${CT_PKGVER}
-PKGREVISION=	3
+PKGREVISION=	1
 CATEGORIES=	www
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=typolight/}
+DIST_SUBDIR=	${PKGBASE}-20101203
 
 MAINTAINER=	taca@NetBSD.org
 HOMEPAGE=	http://www.contao.org/
 COMMENT=	Contao Open Source CMS
 LICENSE=	gnu-lgpl-v3
 
+DEPENDS+=	${PHP_PKG_PREFIX}-dom>=5.2.0:../../textproc/php-dom
 DEPENDS+=	${PHP_PKG_PREFIX}-gd>=5.2.0:../../graphics/php-gd
 DEPENDS+=	${PHP_PKG_PREFIX}-mbstring>=5.2.0:../../converters/php-mbstring
 DEPENDS+=	${PHP_PKG_PREFIX}-mysql>=5.2.0:../../databases/php-mysql
@@ -38,8 +40,7 @@ CONF_FILES_PERMS+=	${CT_EGDIR}/system/config/localconfig.php \
 			${CT_WEBDIR}/system/config/localconfig.php \
 			${APACHE_USER} ${APACHE_GROUP} 0600
 
-CONF_FILES+=		${CT_EGDIR}/contao.conf ${PKG_SYSCONFDIR}/contao.conf \
-			${CT_EGDIR}/htaccess.default ${CT_WEBDIR}/.htaccess
+CONF_FILES+=		${CT_EGDIR}/contao.conf ${PKG_SYSCONFDIR}/contao.conf
 
 .for f in ${EG_FILES}
 CONF_FILES+=		${CT_EGDIR}/${f} ${CT_WEBDIR}/${f}

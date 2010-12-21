@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.68 2010/06/16 18:31:27 tnn Exp $
+# $NetBSD: Makefile,v 1.76 2010/11/20 14:37:42 tsutsui Exp $
 #
 
-DISTNAME=		qemu-0.12.4
+DISTNAME=		qemu-0.13.0
+PKGREVISION=		1
 CATEGORIES=		emulators
 MASTER_SITES=		http://download.savannah.gnu.org/releases/qemu/
 
@@ -15,40 +16,23 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 CONFLICTS+=		qemu-bin-[0-9]*
 NOT_FOR_PLATFORM=	NetBSD-1.[0-6]*-*
 
-USE_TOOLS+=		gmake perl:build
+USE_TOOLS+=		gmake makeinfo perl:build
 HAS_CONFIGURE=		yes
 
 BUILD_DEPENDS+=		texi2html-[0-9]*:../../textproc/texi2html
-
-# Workaround for PR/41007 - ensure WRKSRC comes before any buildlinked
-# directories so we pickup our audio/audio.h. Cannot use CPPFLAGS for this
-CFLAGS+=		-I${WRKSRC} -I${WRKSRC}/slirp
 
 .include "../../mk/bsd.prefs.mk"
 
 CONFIGURE_ENV+=		mansuffix=/${PKGMANDIR}
 CONFIGURE_ARGS+=	--prefix=${PREFIX:Q}
 CONFIGURE_ARGS+=	--interp-prefix=${PREFIX:Q}/share/qemu
+CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR:Q}
 
-.if !empty(MACHINE_PLATFORM:MNetBSD-*)
-SUBST_CLASSES+=		lib
-SUBST_STAGE.lib=	pre-configure
-SUBST_FILES.lib=	x86_64.ld
-SUBST_SED.lib=		-e s,/lib64,/lib,g
-SUBST_MESSAGE.lib=	fixing hardcoded paths to libraries.
-.endif
-
-SUBST_CLASSES+=		snd
-SUBST_STAGE.snd=	pre-configure
-SUBST_FILES.snd=	audio/ossaudio.c
-SUBST_SED.snd=		-e s,/dev/dsp,${DEVOSSAUDIO:Q},g
-SUBST_MESSAGE.snd=	Fixing hardcoded audio device.
-
-SUBST_CLASSES+=		smbd
-SUBST_STAGE.smbd=	pre-configure
-SUBST_FILES.smbd=	vl.c
-SUBST_SED.smbd=		-e s,/usr/sbin/smbd,${PREFIX:Q}/sbin/smbd,g
-SUBST_MESSAGE.smbd=	Fixing hardcoded paths.
+CONF_FILES=		${EGDIR}/target-x86_64.conf \
+			${PKG_SYSCONFDIR}/target-x86_64.conf
+EGDIR=			${PREFIX}/share/examples/qemu
+INSTALL_MAKE_FLAGS=	egdir=${EGDIR}
+PKG_SYSCONFSUBDIR=	qemu
 
 # Avoid clash with system include file:
 pre-patch:
@@ -56,9 +40,27 @@ pre-patch:
 
 SUBST_CLASSES+=		qaudio
 SUBST_STAGE.qaudio=	pre-configure
-SUBST_FILES.qaudio=	*.c *.h audio/*.c hw/*.c
+SUBST_FILES.qaudio=	arch_init.c monitor.c savevm.c vl.c \
+			audio/*.c \
+			hw/ac97.c \
+			hw/adlib.c \
+			hw/cs4231a.c \
+			hw/es1370.c \
+			hw/gus.c \
+			hw/marvell_88w8618_audio.c \
+			hw/mips_fulong2e.c \
+			hw/mips_jazz.c \
+			hw/mips_malta.c \
+			hw/omap2.c \
+			hw/palm.c \
+			hw/pcspk.c \
+			hw/sb16.c \
+			hw/spitz.c \
+			hw/tsc210x.c \
+			hw/wm8750.c \
+			ui/vnc.h
 SUBST_SED.qaudio=	-e s,audio.h\",qaudio.h\",g
-SUBST_MESSAGE.qaudio= 	Fixing audio.h confusion
+SUBST_MESSAGE.qaudio=	Fixing audio.h confusion
 
 REPLACE_PERL+=		texi2pod.pl
 
@@ -68,11 +70,25 @@ BUILDLINK_PASSTHRU_RPATHDIRS+= /usr/lib
 INSTALLATION_DIRS=	${PKGMANDIR}/man1 share/doc/qemu
 
 UE_ARCHS+=		alpha arm armeb cris i386 m68k microblaze mips mipsel
-UE_ARCHS+=		nbd ppc ppc64 ppc64abi32 sh4 sh4eb sparc sparc32plus
+UE_ARCHS+=		ppc ppc64 ppc64abi32 sh4 sh4eb sparc sparc32plus
 UE_ARCHS+=		sparc64 x86_64
 
-.if !empty(OPSYS:M*BSD) || !empty(OPSYS:MDragonFly)
+.if ${OPSYS} == "NetBSD"
+.if (!empty(OS_VERSION:M5.99.*) || !empty(OS_VERSION:M[6-9].*))
+# XXX
+# i386 and x86_64 user emul require newer binutils for PROVIDE_HIDDEN()
+# http://git.qemu.org/qemu.git/commit/?id=845f2c2812d9ed24b36c02a3d06ee83aeafe8b49
+# but binutils-2.19 was enabled around 5.99.22:
+# http://cvsweb.NetBSD.org/bsdweb.cgi/src/share/mk/bsd.own.mk#rev1.594
 USER_EMUL=		i386 x86_64 sparc sparc64
+.else
+CONFIGURE_ARGS+=	--disable-bsd-user
+USER_EMUL=
+.endif
+PLIST.nbd=		YES
+.elif !empty(OPSYS:M*BSD) || !empty(OPSYS:MDragonFly)
+USER_EMUL=		i386 x86_64 sparc sparc64
+PLIST.nbd=		YES
 .elif !empty(OPSYS:MDarwin)
 USER_EMUL=		i386 x86_64 sparc sparc64 ppc
 .elif !empty(OPSYS:MLinux)

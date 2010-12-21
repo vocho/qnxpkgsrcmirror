@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.29 2010/06/13 22:43:49 wiz Exp $
+# $NetBSD: Makefile,v 1.32 2010/11/15 22:56:14 abs Exp $
 
 DISTNAME=	gkrellm-volume-2.1.13
-PKGREVISION=	7
+PKGREVISION=	9
 CATEGORIES=	audio
 MASTER_SITES=	http://gkrellm.luon.net/files/
 
-MAINTAINER=	cube@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://gkrellm.luon.net/volume.phtml
 COMMENT=	Gkrellm2 volume mixer plugin
 
