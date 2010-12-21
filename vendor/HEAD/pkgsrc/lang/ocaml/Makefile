@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.64 2009/11/19 03:18:58 minskim Exp $
+# $NetBSD: Makefile,v 1.68 2010/12/19 08:27:17 is Exp $
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
@@ -10,6 +10,7 @@ CONFIGURE_ENV+=		disable_x11=yes
 
 BUILD_TARGET=		world
 MAKE_JOBS_SAFE=		no
+UNLIMIT_RESOURCES=	stacksize
 
 ###
 ### PLIST components
@@ -27,6 +28,7 @@ PLIST_SRC+=	${PKGDIR}/PLIST.stub
 
 # Optional components built only on certain platforms.
 .if (${MACHINE_ARCH} == "i386") || (${MACHINE_ARCH} == "powerpc") || \
+    (${MACHINE_ARCH} == "arm") || \
     (${MACHINE_ARCH} == "sparc") || (${MACHINE_ARCH} == "x86_64")
 BUILD_TARGET+=	opt opt.opt
 PLIST_SRC+=	${PKGDIR}/PLIST.opt
@@ -35,8 +37,17 @@ PLIST_SRC+=	${PKGDIR}/PLIST.opt
       empty(MACHINE_PLATFORM:MNetBSD-*-powerpc) && \
       empty(MACHINE_PLATFORM:MNetBSD-*-x86_64) && \
       empty(MACHINE_PLATFORM:MFreeBSD-*-x86_64) && \
+      empty(MACHINE_PLATFORM:MNetBSD-*-arm) && \
       empty(MACHINE_PLATFORM:MNetBSD-*-sparc)
 PLIST_SRC+=	${PKGDIR}/PLIST.prof
+.  endif
+.endif
+
+.if (${MACHINE_ARCH} == "i386") || (${MACHINE_ARCH} == "x86_64")
+.  if !empty(MACHINE_PLATFORM:MLinux-*-*) || \
+      !empty(MACHINE_PLATFORM:MDarwin-*-*) || \
+      !empty(MACHINE_PLATFORM:MFreeBSD-*-*)
+PLIST_SRC+=	${PKGDIR}/PLIST.natdynlink
 .  endif
 .endif
 
@@ -53,5 +64,8 @@ PLIST_SRC+=	${PKGDIR}/PLIST
 .if ${OPSYS} == "SunOS"
 INSTALL_MAKE_FLAGS+=	SHELL=${SH:Q}
 .endif
+
+do-test:
+	cd $(WRKSRC)/testsuite && $(MAKE_PROGRAM) all
 
 .include "../../mk/bsd.pkg.mk"

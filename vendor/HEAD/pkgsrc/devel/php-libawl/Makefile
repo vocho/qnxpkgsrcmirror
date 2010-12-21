@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.1.1.1 2010/05/23 21:16:17 jym Exp $
+# $NetBSD: Makefile,v 1.3 2010/11/12 18:20:19 jym Exp $
 #
 
 DISTNAME=	awl-${LIBAWL_VERSION}
 PKGNAME=	${PHP_PKG_PREFIX}-libawl-${LIBAWL_VERSION}
-LIBAWL_VERSION=	0.43
+LIBAWL_VERSION=	0.45
 CATEGORIES=	devel
 MASTER_SITES=	http://debian.mcmillan.net.nz/packages/awl/
 
@@ -16,7 +16,9 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 
 .include "../../lang/php/phpversion.mk"
 
-DEPENDS+=       php>=5.2.0:../../lang/php5
+.if ${PKG_PHP_VERSION} == "5"
+DEPENDS+=       php>=5.2.0<5.3:../../lang/php5
+.endif
 DEPENDS+=	${PHP_PKG_PREFIX}-iconv-[0-9]*:../../converters/php-iconv
 DEPENDS+=	${PHP_PKG_PREFIX}-gettext-[0-9]*:../../devel/php-gettext
 

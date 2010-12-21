@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.2 2009/08/18 14:03:06 sno Exp $
+# $NetBSD: Makefile,v 1.4 2010/09/12 12:28:16 wiz Exp $
 
-DISTNAME=	Statistics-Descriptive-3.0100
+DISTNAME=	Statistics-Descriptive-3.0200
 PKGNAME=	p5-${DISTNAME}
 CATEGORIES=	math perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Statistics/}

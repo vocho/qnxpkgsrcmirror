@@ -1,14 +1,15 @@
-# $NetBSD: Makefile,v 1.17 2010/01/18 09:58:56 wiz Exp $
+# $NetBSD: Makefile,v 1.20 2010/09/12 19:06:42 wiz Exp $
 #
 
 DISTNAME=		cambevao-2.2
-PKGREVISION=		6
+PKGREVISION=		7
 CATEGORIES=		graphics
 MASTER_SITES=		http://coto.marsrakete.de/projects/cambevao/
 
 MAINTAINER=		abs@NetBSD.org
 HOMEPAGE=		http://coto.marsrakete.de/projects/cambevao/
 COMMENT=		Grabs jpg images from bktr and ov511+ based USB webcams
+LICENSE=		modified-bsd AND original-bsd
 
 MAKE_ENV+=		prefix=${PREFIX:Q}
 MAKE_FLAGS+=		INSTALL=${INSTALL_PROGRAM:Q}
@@ -20,8 +21,10 @@ INSTALLATION_DIRS=	bin share/examples/cambevao share/examples/rc.d
 ONLY_FOR_PLATFORM=	NetBSD-*-* FreeBSD-*-* DragonFly-*-*
 PKG_DESTDIR_SUPPORT= 	user-destdir
 
-INSTALLATION_DIRS+=    ${PREFIX}/share/examples/cambevao
-INSTALLATION_DIRS+=    ${PREFIX}/share/doc
+INSTALLATION_DIRS+=	${PREFIX}/share/examples/cambevao
+INSTALLATION_DIRS+=	${PREFIX}/share/doc
+
+MAKE_FLAGS+=		EXPAT_PATH=${BUILDLINK_PREFIX.expat}/lib
 
 do-install:
 	${INSTALL_PROGRAM} ${WRKSRC}/cambevao ${DESTDIR}${PREFIX}/bin

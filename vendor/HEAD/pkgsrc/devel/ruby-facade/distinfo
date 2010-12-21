@@ -1,5 +1,5 @@
-$NetBSD: distinfo,v 1.1.1.1 2009/01/27 00:11:15 ahoka Exp $
+$NetBSD: distinfo,v 1.3 2010/12/04 03:56:47 taca Exp $
 
-SHA1 (facade-1.0.2.gem) = 6e2a62af53d7b72c81c6585b4a6354b3fa4a7576
-RMD160 (facade-1.0.2.gem) = 05182578ad43da8d8f4caf8f184d75676de15867
-Size (facade-1.0.2.gem) = 5120 bytes
+SHA1 (facade-1.0.5.gem) = ec2f343cb10ef3c99123eaf945a8e959138a589e
+RMD160 (facade-1.0.5.gem) = 2e6fa3d2858dc61fba301299a1e5b14e54a04b3c
+Size (facade-1.0.5.gem) = 6144 bytes

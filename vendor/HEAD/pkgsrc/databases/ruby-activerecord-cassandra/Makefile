@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.1.1.1 2010/06/11 23:41:15 tonnerre Exp $
+# $NetBSD: Makefile,v 1.3 2010/09/23 09:22:13 taca Exp $
 
 DISTNAME=	activerecord-cassandra-adapter-0.1.0
 PKGNAME=	${RUBY_PKGPREFIX}-${DISTNAME:S/-adapter//}
@@ -11,7 +11,5 @@ COMMENT=	ActiveRecord Cassandra adapter
 DEPENDS+=	${RUBY_PKGPREFIX}-activerecord>=2.0.2:../../databases/ruby-activerecord
 DEPENDS+=	${RUBY_PKGPREFIX}-cassandra>=0:../../databases/ruby-cassandra
 
-GEM_BUILD=	gemspec
-
-.include "../../misc/rubygems/rubygem.mk"
+.include "../../lang/ruby/gem.mk"
 .include "../../mk/bsd.pkg.mk"

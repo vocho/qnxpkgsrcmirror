@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.1.1.1 2010/07/03 23:36:38 seb Exp $
+# $NetBSD: Makefile,v 1.3 2010/09/06 12:07:05 wiz Exp $
 
-DISTNAME=	POE-Filter-HTTP-Parser-1.02
+DISTNAME=	POE-Filter-HTTP-Parser-1.04
 PKGNAME=	p5-${DISTNAME}
-#PKGREVISION=	1
 CATEGORIES=	www perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=POE/}
 

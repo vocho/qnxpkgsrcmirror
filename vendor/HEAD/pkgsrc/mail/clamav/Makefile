@@ -1,33 +1,32 @@
-# $NetBSD: Makefile,v 1.103 2010/05/20 07:47:45 martti Exp $
+# $NetBSD: Makefile,v 1.109 2010/12/01 07:44:09 adam Exp $
 
-DISTNAME=	clamav-${CLAMAV_VERSION}
-PKGNAME=	clamav-${CLAMAV_VERSION:S/-/./}
-#PKGREVISION=	1
+DISTNAME=	clamav-0.96.5
 CATEGORIES=	mail
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=clamav/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.clamav.net/
 COMMENT=	Anti-virus toolkit
-
 LICENSE=	gnu-gpl-v2
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
 PKG_DESTDIR_SUPPORT=	user-destdir
 
-CLAMAV_VERSION=		0.96.1
-
 USE_LIBTOOL=		yes
-
 GNU_CONFIGURE=		yes
 CONFIGURE_ARGS+=	--disable-clamav
 CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR}
 CONFIGURE_ARGS+=	--with-dbdir=${CLAMAV_DBDIR}
 CONFIGURE_ARGS+=	--with-user=${CLAMAV_USER}
 CONFIGURE_ARGS+=	--with-group=${CLAMAV_GROUP}
-CONFIGURE_ARGS+=	--with-zlib=${BUILDLINK_PREFIX.zlib}
 CONFIGURE_ARGS+=	--with-ltdl-include=${BUILDLINK_PREFIX.libltdl}/include
 CONFIGURE_ARGS+=	--with-ltdl-lib=${BUILDLINK_PREFIX.libltdl}/lib
+CONFIGURE_ARGS+=	--with-zlib=${BUILDLINK_PREFIX.zlib}
+# pkgsrc enforces a "secure" version of zlib, so don't let this check
+# bomb the build.
+CONFIGURE_ARGS+=	--disable-zlib-vcheck
+# avoid multiarch libdir on Darwin
+CONFIGURE_ARGS+=	--libdir=${PREFIX}/lib
 
 .include "../../mk/bsd.prefs.mk"
 
@@ -67,10 +66,6 @@ CONF_FILES_PERMS+=	${EGDIR}/${i} ${CLAMAV_DBDIR}/${i}	\
 INSTALL_MAKE_FLAGS=	${MAKE_FLAGS} CFGINST=${EGDIR} DBINST=${EGDIR}
 
 .include "options.mk"
-
-# pkgsrc enforces a "secure" version of zlib, so don't let this check
-# bomb the build.
-CONFIGURE_ARGS+=	--disable-zlib-vcheck
 
 .include "../../archivers/bzip2/buildlink3.mk"
 .include "../../devel/libltdl/buildlink3.mk"

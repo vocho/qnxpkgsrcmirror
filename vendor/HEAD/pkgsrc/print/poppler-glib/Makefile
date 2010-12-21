@@ -1,9 +1,10 @@
-# $NetBSD: Makefile,v 1.27 2010/07/14 17:04:23 drochner Exp $
+# $NetBSD: Makefile,v 1.34 2010/11/15 22:58:23 abs Exp $
 #
 
 .include "../../print/poppler/Makefile.common"
 
 PKGNAME=		poppler-glib-${POPPLER_VERS}
+PKGREVISION=		1
 
 COMMENT=		PDF rendering library (GLib wrapper)
 MAINTAINER=		reed@reedmedia.net
@@ -36,14 +37,10 @@ post-install:
 	${INSTALL_DATA} ${WRKSRC}/poppler-cairo.pc ${DESTDIR}${PREFIX}/lib/pkgconfig
 	${INSTALL_DATA} ${WRKSRC}/poppler-glib.pc ${DESTDIR}${PREFIX}/lib/pkgconfig
 
-# Workaround for Upstream Bug#562310.
-# for more detail, see also PR#41475.
-TOOLS_NOOP+=		gtkdoc-rebase
-
 .include "../../devel/glib2/buildlink3.mk"
 .include "../../graphics/cairo/buildlink3.mk"
 .include "../../graphics/jpeg/buildlink3.mk"
-BUILDLINK_API_DEPENDS.poppler+=     poppler>=${POPPLER_VERS}
+BUILDLINK_API_DEPENDS.poppler+=     poppler-${POPPLER_VERS}{,nb*}
 .include "../../print/poppler/buildlink3.mk"
 .include "../../x11/gtk2/buildlink3.mk"
 .include "../../mk/pthread.buildlink3.mk"

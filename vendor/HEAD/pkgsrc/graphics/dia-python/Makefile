@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.16 2010/06/13 22:44:28 wiz Exp $
+# $NetBSD: Makefile,v 1.18 2010/11/15 22:57:11 abs Exp $
 #
-PKGREVISION=	2
+PKGREVISION=	4
 
 DIA_SUBPKG=		-python
 .include "../../graphics/dia/Makefile.common"

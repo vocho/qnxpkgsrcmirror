@@ -1,30 +1,31 @@
-# $NetBSD: Makefile,v 1.23 2010/02/14 02:05:04 obache Exp $
-#
+# $NetBSD: Makefile,v 1.26 2010/09/30 10:49:11 obache Exp $
 
-DISTNAME=		dbmail-2.2.15
-CATEGORIES=		mail
-MASTER_SITES=		http://www.dbmail.org/download/2.2/
+DISTNAME=	dbmail-2.2.17
+PKGREVISION=	1
+CATEGORIES=	mail
+MASTER_SITES=	http://www.dbmail.org/download/2.2/
 
-MAINTAINER=		pkgsrc-users@NetBSD.org
-HOMEPAGE=		http://www.dbmail.org/
-COMMENT=		Store and retrieve mail messages in a database
-LICENSE=		gnu-gpl-v2
+MAINTAINER=	pkgsrc-users@NetBSD.org
+HOMEPAGE=	http://www.dbmail.org/
+COMMENT=	Store and retrieve mail messages in a database
+LICENSE=	gnu-gpl-v2
 
+USE_TOOLS+=		gmake pkg-config
+USE_LIBTOOL=		yes
+USE_PKGLOCALEDIR=	yes
 GNU_CONFIGURE=		yes
 CONFIGURE_ARGS+=	--with-logdir=${VARBASE}/log
 CONFIGURE_ARGS+=	--with-pkglibdir=${PREFIX}/lib/dbmail
 CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR}
 CONFIGURE_ARGS+=	--localstatedir=${VARBASE}/run
-USE_TOOLS+=		gmake pkg-config
-USE_LIBTOOL=		yes
-USE_PKGLOCALEDIR=	yes
 
 BUILD_DEFS+=		VARBASE
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 EGDIR=			${PREFIX}/share/examples/dbmail
-CONF_FILES=		${EGDIR}/dbmail.conf ${PKG_SYSCONFDIR}/dbmail.conf
+CONF_FILES_PERMS+=	${EGDIR}/dbmail.conf ${PKG_SYSCONFDIR}/dbmail.conf \
+			  ${REAL_ROOT_USER} ${REAL_ROOT_GROUP} 0640
 RCD_SCRIPTS=		dbmail dbmailimapd dbmaillmtpd dbmailpop3d
 DATADIR=		${PREFIX}/share/dbmail
 DOCSDIR=		${PREFIX}/share/doc/dbmail

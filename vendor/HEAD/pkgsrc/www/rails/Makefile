@@ -1,23 +1,30 @@
-# $NetBSD: Makefile,v 1.17 2009/12/01 23:24:24 minskim Exp $
+# $NetBSD: Makefile,v 1.22 2010/10/15 11:40:05 taca Exp $
 
-DISTNAME=	rails-2.3.5
+DISTNAME=	rails-2.3.10
 CATEGORIES=	www
 
 MAINTAINER=	minskim@NetBSD.org
 HOMEPAGE=	http://www.rubyonrails.org/
 COMMENT=	Framework for developing database-backed web applications
+LICENSE=	mit
 
-DEPENDS+=	rake>=0.8.1:../../devel/rake
-DEPENDS+=	${RUBY_PKGPREFIX}-activerecord>=2.3.5:../../databases/ruby-activerecord
-DEPENDS+=	${RUBY_PKGPREFIX}-activesupport>=2.3.5:../../devel/ruby-activesupport
-DEPENDS+=	${RUBY_PKGPREFIX}-actionmailer>=2.3.5:../../mail/ruby-actionmailer
-DEPENDS+=	${RUBY_PKGPREFIX}-activeresource>=2.3.5:../../www/ruby-activeresource
-DEPENDS+=	${RUBY_PKGPREFIX}-actionpack>=2.3.5:../../www/ruby-actionpack
-DEPENDS+=	${RUBY_PKGPREFIX}-rack-[0-9]*:../../www/ruby-rack
+.include "../../lang/ruby/gem.mk"
 
-REPLACE_RUBY=	bin/about bin/console bin/dbconsole bin/destroy \
-		bin/generate bin/performance/benchmarker \
-		bin/performance/profiler bin/plugin bin/runner bin/server
+.if ${RUBY_VER} == "18"
+DEPENDS+=	${RUBY_PKGPREFIX}-rake>=0.8.3:../../devel/rake
+.endif
+DEPENDS+=	${RUBY_PKGPREFIX}-activesupport>=2.3.10<3.0.0:../../devel/ruby-activesupport
+DEPENDS+=	${RUBY_PKGPREFIX}-activerecord>=2.3.10<3.0.0:../../databases/ruby-activerecord
+DEPENDS+=	${RUBY_PKGPREFIX}-actionpack>=2.3.10<3.0.0:../../www/ruby-actionpack
+DEPENDS+=	${RUBY_PKGPREFIX}-actionmailer>=2.3.10<3.0.0:../../mail/ruby-actionmailer
+DEPENDS+=	${RUBY_PKGPREFIX}-activeresource>=2.3.10<3.0.0:../../www/ruby-activeresource
 
-.include "../../misc/rubygems/rubygem.mk"
+CONFLICTS+=	ruby[1-9][0-9]-rails-[0-9]* rails-[0-9]*
+
+REPLACE_RUBY_DIRS=	bin
+REPLACE_RUBY_PAT=	*
+
+pre-configure:
+	${RM} -f ${WRKSRC}/railties-3.0.0.beta3.gem
+
 .include "../../mk/bsd.pkg.mk"

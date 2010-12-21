@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.55 2010/07/06 16:13:41 drochner Exp $
+# $NetBSD: Makefile,v 1.58 2010/11/15 22:58:25 abs Exp $
 
 DISTNAME=	gnome-keyring-2.30.3
+PKGREVISION=	2
 CATEGORIES=	security gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gnome-keyring/2.30/}
 EXTRACT_SUFX=	.tar.bz2
@@ -28,10 +29,6 @@ CFLAGS.HPUX+=		-DMAP_ANON=MAP_ANONYMOUS
 # The bug is described in PR security/39313
 #
 CFLAGS.NetBSD+=		-DNO_STATIC_MODULES
-
-# Workaround for Upstream Bug#562310.
-# for more detail, see also PR#41475.
-TOOLS_NOOP+=	gtkdoc-rebase
 
 .include "../../mk/dlopen.buildlink3.mk"
 

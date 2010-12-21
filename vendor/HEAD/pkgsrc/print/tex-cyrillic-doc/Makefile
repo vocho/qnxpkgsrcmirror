@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.1.1.1 2010/05/10 22:46:22 minskim Exp $
+# $NetBSD: Makefile,v 1.3 2010/11/16 17:55:15 minskim Exp $
 
 DISTNAME=	cyrillic.doc
-PKGNAME=	tex-${DISTNAME:S/./-/}-2009
-TEXLIVE_REV=	15878
+PKGNAME=	tex-${DISTNAME:S/./-/}-2010
+TEXLIVE_REV=	20254
 
 MAINTAINER=	minskim@NetBSD.org
 COMMENT=	Documentation for tex-cyrillic

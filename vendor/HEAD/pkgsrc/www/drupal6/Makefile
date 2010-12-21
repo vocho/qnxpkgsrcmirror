@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.21 2010/06/03 15:42:53 taca Exp $
+# $NetBSD: Makefile,v 1.26 2010/12/17 00:04:00 rhaen Exp $
 
-DISTNAME=	drupal-6.17
+DISTNAME=	drupal-6.20
 CATEGORIES=	www
 MASTER_SITES=	http://drupal.org/files/projects/
 
@@ -11,7 +11,13 @@ LICENSE=	gnu-gpl-v2
 
 CONFLICTS+=	drupal-5.*{,nb*}
 
-DEPENDS+=	php>=5.2.0:../../lang/php5
+PKG_DESTDIR_SUPPORT=	user-destdir
+
+.include "../../lang/php/phpversion.mk"
+
+.if ${PKG_PHP_VERSION} == "5"
+DEPENDS+=	php>=5.2.0<5.3:../../lang/php5
+.endif
 DEPENDS+=	${PHP_PKG_PREFIX}-gd>=4.3.5:../../graphics/php-gd
 
 NO_BUILD=	YES
@@ -54,9 +60,6 @@ SUBST_MESSAGE.conf=	Fixing configuration files.
 
 INSTALLATION_DIRS+=	${DRUPAL}/files ${DRUPAL}/sites/all \
 			share/doc/drupal share/examples/drupal
-PKG_DESTDIR_SUPPORT=	user-destdir
-
-.include "../../lang/php/phpversion.mk"
 
 .include "options.mk"
 

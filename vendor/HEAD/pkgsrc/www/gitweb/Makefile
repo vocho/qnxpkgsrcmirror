@@ -1,11 +1,12 @@
-# $NetBSD: Makefile,v 1.7 2010/03/05 16:12:07 gdt Exp $
+# $NetBSD: Makefile,v 1.9 2010/12/17 01:19:17 gdt Exp $
 #
 
 DISTNAME=	git-${VERSION}
-VERSION=	1.6.6.2
+VERSION=	1.7.3.4
 PKGNAME=	${DISTNAME:S/git/gitweb/}
 CATEGORIES=	www
 MASTER_SITES=	http://www.kernel.org/pub/software/scm/git/
+EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	gdt@NetBSD.org
 HOMEPAGE=	http://git.or.cz/
@@ -30,7 +31,7 @@ MAKE_FLAGS+=	PERL_PATH=${PERL5:Q}
 
 GITWEB_CONFIG=	${PKG_SYSCONFDIR}/gitweb.conf
 GITWEB_CGIBIN=	${PREFIX}/libexec/cgi-bin
-# Apaache wants files in ${PREFIX}/share/httpd/htdocs/gitweb
+# Apache wants files in ${PREFIX}/share/httpd/htdocs/gitweb
 GITWEB_HTDOCS=	${PREFIX}/share/examples/gitweb/htdocs
 GITWEB_EGDIR=	${PREFIX}/share/examples/gitweb
 
@@ -44,7 +45,7 @@ INSTALLATION_DIRS=	libexec/cgi-bin share/httpd/htdocs  \
 do-install:
 	${INSTALL_SCRIPT} ${WRKSRC}/gitweb/gitweb.cgi ${DESTDIR}${GITWEB_CGIBIN}
 .for f in git-favicon.png git-logo.png gitweb.css
-	${INSTALL_DATA} ${WRKSRC}/gitweb/${f} ${DESTDIR}${GITWEB_HTDOCS}
+	${INSTALL_DATA} ${WRKSRC}/gitweb/static/${f} ${DESTDIR}${GITWEB_HTDOCS}
 .endfor
 	${INSTALL_DATA} ${WRKSRC}/gitweb/README \
 		${DESTDIR}${PREFIX}/share/doc/gitweb

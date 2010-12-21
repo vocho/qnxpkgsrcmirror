@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.16 2010/01/27 20:24:57 joerg Exp $
+# $NetBSD: Makefile,v 1.18 2010/11/18 21:00:58 shattered Exp $
 #
 
 DISTNAME=	tpb-0.6.1
@@ -32,6 +32,7 @@ post-install:
 
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../x11/libXext/buildlink3.mk"
+.include "../../x11/libXinerama/buildlink3.mk"
 .include "../../x11/xosd/buildlink3.mk"
 .include "../../mk/oss.buildlink3.mk"
 .include "../../mk/pthread.buildlink3.mk"

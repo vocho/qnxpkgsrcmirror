@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.23 2010/02/16 13:23:50 wiz Exp $
+# $NetBSD: Makefile,v 1.26 2010/12/12 13:17:45 wiz Exp $
 #
 
-DISTNAME=	dbus-glib-0.84
+DISTNAME=	dbus-glib-0.92
 CATEGORIES=	sysutils
 MASTER_SITES=	http://dbus.freedesktop.org/releases/dbus-glib/
 
@@ -19,10 +19,6 @@ USE_LIBTOOL=		YES
 
 PKGCONFIG_OVERRIDE=	dbus-glib-1.pc.in
 
-# Workaround for Upstream Bug#562310.
-# for more detail, see also PR#41475.
-TOOLS_NOOP+=		gtkdoc-rebase
-
 CONFIGURE_ARGS+=	--disable-ansi
 CONFIGURE_ARGS+=	--disable-asserts
 CONFIGURE_ARGS+=	--disable-doxygen-docs
@@ -36,6 +32,7 @@ CONFIGURE_ARGS+=	--with-xml=expat
 .include "options.mk"
 
 .include "../../devel/gettext-lib/buildlink3.mk"
+BUILDLINK_API_DEPENDS.glib2+=	glib2>=2.26
 .include "../../devel/glib2/buildlink3.mk"
 BUILDLINK_API_DEPENDS.dbus+=	dbus>=1.1
 .include "../../sysutils/dbus/buildlink3.mk"

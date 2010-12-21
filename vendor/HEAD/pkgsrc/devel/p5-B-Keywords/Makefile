@@ -1,14 +1,16 @@
-# $NetBSD: Makefile,v 1.5 2009/03/10 17:35:16 sno Exp $
+# $NetBSD: Makefile,v 1.7 2010/09/08 05:48:59 sno Exp $
 #
 
-DISTNAME=	B-Keywords-1.09
+DISTNAME=	B-Keywords-1.10
 PKGNAME=	p5-${DISTNAME}
+#PKGREVISION=	1
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=B/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://search.cpan.org/dist/B-Keywords/
 COMMENT=	Perl 5 module providing lists of reserved barewords and symbol names
+LICENSE=	gnu-gpl-v2 OR artistic
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 

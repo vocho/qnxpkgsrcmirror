@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.4 2010/07/03 12:11:43 seb Exp $
+# $NetBSD: Makefile,v 1.6 2010/09/21 06:17:21 sno Exp $
 #
 
-DISTNAME=	Package-Stash-0.05
+DISTNAME=	Package-Stash-0.08
 PKGNAME=	p5-${DISTNAME}
 #PKGREVISION=	1
 CATEGORIES=	devel perl5

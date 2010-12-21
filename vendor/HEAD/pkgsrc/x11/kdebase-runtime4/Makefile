@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.12 2010/07/14 11:11:16 sbd Exp $
+# $NetBSD: Makefile,v 1.17 2010/12/06 11:43:42 markd Exp $
 
 DISTNAME=	kdebase-runtime-${_KDE_VERSION}
-PKGREVISION=	1
 CATEGORIES=	x11
 COMMENT=	Runtime requirements for the KDE integrated X11 desktop
 
@@ -9,9 +8,13 @@ COMMENT=	Runtime requirements for the KDE integrated X11 desktop
 
 # BUILD_MAKE_FLAGS+= VERBOSE=1
 CMAKE_ARGS+=	-DWITH_PulseAudio:BOOL=off
+CMAKE_ARGS+=	-DLIBLZMA_INCLUDE_DIR:PATH=${BUILDLINK_PREFIX.xz}/include
+CMAKE_ARGS+=	-DLIBLZMA_LIBRARY:FILEPATH=${BUILDLINK_PREFIX.xz}/lib/liblzma.so
 
 DEPENDS+=	htdig>=3.2.0:../../www/htdig-devel
 DEPENDS+=	oxygen-icons-[0-9]*:../../graphics/oxygen-icons
+
+USE_TOOLS+=		gmake
 
 .include "options.mk"
 
@@ -34,6 +37,8 @@ REPLACE_PERL+= \
 
 CONF_FILES+=	${PREFIX}/share/examples/kdebase-runtime4/kde-information.menu \
                 ${PKG_SYSCONFDIR}/xdg/menus/kde-information.menu
+CONF_FILES+=	${PREFIX}/share/examples/kde4-dbus/org.kde.kcontrol.kcmremotewidgets.conf \
+		${PKG_SYSCONFDIR}/dbus-1/system.d/org.kde.kcontrol.kcmremotewidgets.conf
 
 INSTALLATION_DIRS+=	${PKGMANDIR}/man1
 

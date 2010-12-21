@@ -1,4 +1,4 @@
-#	$NetBSD: bsd.pkg.mk,v 1.1973 2010/07/03 04:27:00 darcy Exp $
+#	$NetBSD: bsd.pkg.mk,v 1.1975 2010/11/03 18:02:40 adam Exp $
 #
 # This file is in the public domain.
 #
@@ -30,7 +30,6 @@
 ##### PKGBASE, PKGNAME[_NOREV], PKGVERSION
 
 PKGBASE?=		${PKGNAME:C/-[^-]*$//}
-PKGVERSION?=		${PKGNAME:C/^.*-//}
 PKGVERSION?=		${PKGNAME:C/^.*-//}
 .if defined(PKGREVISION) && !empty(PKGREVISION) && (${PKGREVISION} != "0")
 .  if defined(PKGNAME)
@@ -778,7 +777,7 @@ ${_MAKEVARS_MK.${_phase_}}: ${WRKDIR}
 .include "pbulk/pbulk-index.mk"
 .endif
 
-.if defined(PKG_DEVELOPER)
+.if defined(PKG_DEVELOPER) && ${PKG_DEVELOPER} != "no"
 .  include "misc/developer.mk"
 .endif
 .include "misc/show.mk"

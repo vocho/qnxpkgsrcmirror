@@ -1,4 +1,4 @@
-# $NetBSD: options.mk,v 1.39 2009/11/04 16:00:54 pooka Exp $
+# $NetBSD: options.mk,v 1.42 2010/12/17 19:05:35 shattered Exp $
 
 .if defined(PKGNAME) && empty(PKGNAME:Mmplayer-share*)
 
@@ -7,6 +7,7 @@
 PKG_OPTIONS_VAR=	PKG_OPTIONS.${PKGNAME:C/-[0-9].*//}
 
 .include "../../mk/oss.buildlink3.mk"
+.include "../../multimedia/libvdpau/available.mk"
 
 # -------------------------------------------------------------------------
 # Define PKG_SUPPORTED_OPTIONS based on the current package and system.
@@ -14,7 +15,8 @@ PKG_OPTIONS_VAR=	PKG_OPTIONS.${PKGNAME:C/-[0-9].*//}
 
 # Options supported by both mplayer* or mencoder*.
 
-PKG_SUPPORTED_OPTIONS=	gif jpeg mad dts dv dvdread png theora vorbis x264 debug
+PKG_SUPPORTED_OPTIONS=	gif jpeg mad dts dv png theora vorbis x264 debug
+PKG_SUPPORTED_OPTIONS+= dvdread dvdnav
 .if ${OSS_TYPE} != "none"
 PKG_SUPPORTED_OPTIONS+=	oss
 .endif
@@ -25,7 +27,11 @@ PKG_SUGGESTED_OPTIONS+=		mplayer-internal-faad
 
 # Set options based on the specific package being built.
 .if !empty(PKGNAME:M*mplayer*)
-PKG_SUPPORTED_OPTIONS+=	aalib esound ggi mplayer-menu nas pulseaudio sdl
+PKG_SUPPORTED_OPTIONS+=	aalib caca esound ggi mplayer-menu nas pulseaudio sdl
+
+.if ${VDPAU_AVAILABLE} == "yes"
+PKG_SUPPORTED_OPTIONS+=	vdpau
+.endif
 
 .  if ${OPSYS} != "SunOS"
 PKG_SUPPORTED_OPTIONS+=	arts
@@ -73,10 +79,11 @@ PKG_SUPPORTED_OPTIONS+= xvid
 # Define PKG_SUGGESTED_OPTIONS.
 # -------------------------------------------------------------------------
 
-.for _o_ in aalib arts cdparanoia dv dvdread esound gif jpeg \
+.for _o_ in aalib arts cdparanoia dv esound gif jpeg \
+	    dvdread dvdnav \
 	    lame mad mplayer-menu mplayer-real \
 	    mplayer-default-cflags mplayer-runtime-cpudetection mplayer-win32 \
-	    nas oss pulseaudio png sdl theora vorbis x264 xvid
+	    nas oss pulseaudio png sdl theora vorbis x264 xvid vdpau
 .  if !empty(PKG_SUPPORTED_OPTIONS:M${_o_})
 PKG_SUGGESTED_OPTIONS+=	${_o_}
 .  endif
@@ -108,9 +115,15 @@ EXTRA_LIBS+=		-lartsc
 CONFIGURE_ARGS+=	--disable-arts
 .endif
 
+.if !empty(PKG_OPTIONS:Mcaca)
+CONFIGURE_ARGS+=	--enable-caca
+.  include "../../graphics/libcaca/buildlink3.mk"
+.endif
+
 .if !empty(PKG_OPTIONS:Mcdparanoia)
 CONFIGURE_ARGS+=	--enable-cdparanoia
 .  include "../../audio/cdparanoia/buildlink3.mk"
+CFLAGS+=		-I${BUILDLINK_PREFIX.cdparanoia}/include/cdparanoia
 .else
 CONFIGURE_ARGS+=	--disable-cdparanoia
 .endif
@@ -136,11 +149,22 @@ CONFIGURE_ARGS+=	--enable-libdv
 CONFIGURE_ARGS+=	--disable-libdv
 .endif
 
+CONFIGURE_ARGS+=	--disable-dvdread-internal
 .if !empty(PKG_OPTIONS:Mdvdread)
 CONFIGURE_ARGS+=	--enable-dvdread
+CONFIGURE_ARGS+=	--with-dvdread-config=${BUILDLINK_PREFIX.libdvdread}/bin/dvdread-config
 .  include "../../multimedia/libdvdread/buildlink3.mk"
 .else
 CONFIGURE_ARGS+=	--disable-dvdread
+.endif
+
+.if !empty(PKG_OPTIONS:Mdvdnav)
+CONFIGURE_ARGS+=	--enable-dvdnav
+CONFIGURE_ARGS+=	--with-dvdnav-config=${BUILDLINK_PREFIX.libdvdnav}/bin/dvdnav-config
+.  include "../../multimedia/libdvdnav/buildlink3.mk"
+#CFLAGS+=		-I${BUILDLINK_PREFIX.libdvdnav}/include/dvdnav
+.else
+CONFIGURE_ARGS+=	--disable-dvdnav
 .endif
 
 .if !empty(PKG_OPTIONS:Mesound)
@@ -216,7 +240,7 @@ CONFIGURE_ARGS+=	--disable-menu
 EVAL_PREFIX+=		PREFIX.realplayer-codecs=realplayer-codecs
 PREFIX.realplayer-codecs_DEFAULT=	${LOCALBASE}
 CONFIGURE_ARGS+=	--enable-real
-CONFIGURE_ARGS+=	--realcodecsdir="${PREFIX.realplayer-codecs}/lib/RealPlayer8-Codecs"
+#CONFIGURE_ARGS+=	--realcodecsdir="${PREFIX.realplayer-codecs}/lib/RealPlayer8-Codecs"
 DEPENDS+=		realplayer-codecs>=8nb2:../../multimedia/realplayer-codecs
 .else
 CONFIGURE_ARGS+=	--disable-real
@@ -232,7 +256,7 @@ CONFIGURE_ARGS+=	--disable-runtime-cpudetection
 EVAL_PREFIX+=		PREFIX.win32-codecs=win32-codecs
 PREFIX.win32-codecs_DEFAULT=	${LOCALBASE}
 CONFIGURE_ARGS+=	--enable-win32dll
-CONFIGURE_ARGS+=	--win32codecsdir="${PREFIX.win32-codecs}/lib/win32"
+#CONFIGURE_ARGS+=	--win32codecsdir="${PREFIX.win32-codecs}/lib/win32"
 DEPENDS+=		win32-codecs>=011227:../../multimedia/win32-codecs
 .else
 CONFIGURE_ARGS+=	--disable-win32dll
@@ -317,6 +341,12 @@ CONFIGURE_ARGS+=	--disable-xvid
 .include "../../devel/binutils/override-as.mk"
 .else
 CONFIGURE_ARGS+=	--disable-ssse3
+.endif
+
+.if !empty(PKG_OPTIONS:Mvdpau)
+.  include "../../multimedia/libvdpau/buildlink3.mk"
+.else
+CONFIGURE_ARGS+=	--disable-vdpau
 .endif
 
 # -------------------------------------------------------------------------

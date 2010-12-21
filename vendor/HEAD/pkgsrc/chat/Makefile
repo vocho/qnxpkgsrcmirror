@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.154 2010/07/09 09:48:16 drochner Exp $
+# $NetBSD: Makefile,v 1.156 2010/11/24 18:52:05 drochner Exp $
 #
 
 COMMENT=	Communication programs
@@ -90,6 +90,7 @@ SUBDIR+=	pidgin-otr
 SUBDIR+=	pidgin-sametime
 SUBDIR+=	pidgin-silc
 SUBDIR+=	pircbot
+SUBDIR+=	prosody
 SUBDIR+=	psi
 SUBDIR+=	quirc
 SUBDIR+=	riece
@@ -105,6 +106,7 @@ SUBDIR+=	telepathy-farsight
 SUBDIR+=	telepathy-gabble
 SUBDIR+=	telepathy-glib
 SUBDIR+=	telepathy-idle
+SUBDIR+=	telepathy-logger
 SUBDIR+=	telepathy-mission-control
 SUBDIR+=	telepathy-mission-control5
 SUBDIR+=	tik

@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.107 2010/07/13 12:05:57 drochner Exp $
+# $NetBSD: Makefile,v 1.112 2010/12/17 07:36:10 obache Exp $
 #
 
-DISTNAME=	epiphany-2.30.2
+DISTNAME=	epiphany-2.30.6
+PKGREVISION=	1
 CATEGORIES=	www gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/epiphany/2.30/}
 EXTRACT_SUFX=	.tar.bz2
@@ -21,7 +22,7 @@ USE_LANGUAGES=		c c++
 #CONFIGURE_ARGS+=	--with-ca-file=/etc/openssl/certs/ca-certificates.crt
 CONFIGURE_ARGS+=	--without-ca-file
 
-PKGCONFIG_OVERRIDE=	data/epiphany-2.29.pc
+PKGCONFIG_OVERRIDE=	data/epiphany.pc.in
 
 .include "options.mk"
 

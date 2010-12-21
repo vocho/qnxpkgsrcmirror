@@ -1,13 +1,66 @@
-$NetBSD: patch-dd,v 1.3 2009/10/11 16:04:13 asau Exp $
+$NetBSD: patch-dd,v 1.5 2010/11/09 10:37:12 jmmv Exp $
 
---- configure.orig	2009-09-23 23:01:31.000000000 +0400
-+++ configure	2009-09-30 14:02:37.000000000 +0400
-@@ -1384,7 +1384,7 @@
-   if test -z "$prefix" ; then
-       prefix="/usr/local"
+Remove confsuffix from sysconfdir so that our PKG_SYSCONFSUBDIR setting
+works.
+
+Install man pages into ${PREFIX}/man, not ${PREFIX}/share/man.
+
+Handle arm and armeb case on NetBSD.
+XXX: it looks mips is always treated as big endian.
+
+--- configure.orig	2010-10-15 20:56:09.000000000 +0000
++++ configure
+@@ -199,13 +199,19 @@ elif check_define __s390__ ; then
+   else
+     cpu="s390"
    fi
--  mansuffix="/share/man"
-+#  mansuffix="/share/man"
-   datasuffix="/share/qemu"
-   docsuffix="/share/doc/qemu"
-   binsuffix="/bin"
++elif check_define __arm__ ; then
++  if check_define __ARMEL__ ; then
++    cpu="arm"
++  elif check_define __ARMEB__ ; then
++    cpu="armeb"
++  fi
+ else
+   cpu=`uname -m`
+ fi
+ 
+ target_list=""
+ case "$cpu" in
+-  alpha|cris|ia64|m68k|microblaze|ppc|ppc64|sparc64)
++  alpha|arm|armeb|cris|ia64|m68k|microblaze|ppc|ppc64|sparc64)
+     cpu="$cpu"
+   ;;
+   i386|i486|i586|i686|i86pc|BePC)
+@@ -285,12 +291,12 @@ bigendian="no"
+ mingw32="no"
+ EXESUF=""
+ prefix="/usr/local"
+-mandir="\${prefix}/share/man"
++mandir="\${prefix}/man"
+ datadir="\${prefix}/share/qemu"
+ docdir="\${prefix}/share/doc/qemu"
+ bindir="\${prefix}/bin"
+ sysconfdir="\${prefix}/etc"
+-confsuffix="/qemu"
++confsuffix=""
+ slirp="yes"
+ fmod_lib=""
+ fmod_inc=""
+@@ -1036,7 +1042,7 @@ else
+ 
+ # if cross compiling, cannot launch a program, so make a static guess
+ case "$cpu" in
+-  armv4b|hppa|m68k|mips|mips64|ppc|ppc64|s390|s390x|sparc|sparc64)
++  armeb|armv4b|hppa|m68k|mips|mips64|ppc|ppc64|s390|s390x|sparc|sparc64)
+     bigendian=yes
+   ;;
+ esac
+@@ -2212,7 +2218,7 @@ case "$cpu" in
+   i386|x86_64|alpha|cris|hppa|ia64|m68k|microblaze|mips|mips64|ppc|ppc64|s390|s390x|sparc|sparc64)
+     ARCH=$cpu
+   ;;
+-  armv4b|armv4l)
++  arm|armeb|armv4b|armv4l)
+     ARCH=arm
+   ;;
+ esac

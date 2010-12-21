@@ -1,9 +1,10 @@
-# $NetBSD: Makefile,v 1.15 2010/06/16 21:25:20 zafer Exp $
+# $NetBSD: Makefile,v 1.18 2010/11/15 22:58:13 abs Exp $
 #
 
-VERSION=	3.3.3
+VERSION=	3.3.4.1
 DISTNAME=	FileZilla_${VERSION}_src
 PKGNAME=	filezilla-${VERSION}
+PKGREVISION=	1
 CATEGORIES=	net x11
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=filezilla/}
 EXTRACT_SUFX=	.tar.bz2
@@ -24,6 +25,7 @@ USE_TOOLS+=	gmake pkg-config msgfmt msgmerge
 WRKSRC=		${WRKDIR}/${PKGNAME_NOREV}
 
 CONFIGURE_ARGS+=	--disable-autoupdatecheck
+CONFIGURE_ARGS+=	--with-tinyxml=builtin
 
 .include "options.mk"
 

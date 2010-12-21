@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.30 2010/07/22 21:07:45 adam Exp $
+# $NetBSD: Makefile,v 1.37 2010/12/17 00:37:34 agc Exp $
 
-DISTNAME=	sqlite-amalgamation-3.7.0
-PKGNAME=	${DISTNAME:S/sqlite-amalgamation/sqlite3/}
+DISTNAME=	sqlite-autoconf-3070400
+PKGNAME=	sqlite3-3.7.4
 CATEGORIES=	databases
 MASTER_SITES=	http://www.hwaci.com/sw/sqlite/ \
 		http://www.sqlite.org/
@@ -13,17 +13,21 @@ LICENSE=	public-domain
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
-GNU_CONFIGURE=		yes
-USE_TOOLS+=		gmake
+.include "options.mk"
+
 USE_LIBTOOL=		yes
-WRKSRC=			${WRKDIR}/sqlite-${PKGVERSION_NOREV}
+USE_TOOLS+=		gmake
+GNU_CONFIGURE=		yes
 
 PKGCONFIG_OVERRIDE+=	sqlite3.pc.in
 
 INSTALLATION_DIRS+=	${PKGMANDIR}/man1
-CONFIGURE_ARGS+=	--with-readline-inc= --enable-threadsafe
 
 .include "../../mk/bsd.prefs.mk"
+
+# In the past, Linux had database corruption issues with pread, so
+# only enable it on safe platforms.
+CFLAGS.NetBSD+=		-DUSE_PREAD
 
 # Darwin < 9 (Mac OS X < 10.5 "Leopard") doesn't have gethostuuid(2)
 .if !empty(MACHINE_PLATFORM:MDarwin-[0-8].*-*)
@@ -37,10 +41,6 @@ CFLAGS+=		-DSQLITE_ENABLE_UNLOCK_NOTIFY=1
 # Uses dlopen and friends but doesn't use -ldl on Linux.
 # See http://www.sqlite.org/cvstrac/tktview?tn=3555
 LIBS+=			${BUILDLINK_LDADD.dl}
-
-post-install:
-	${INSTALL_MAN} ${WRKSRC}/sqlite3.1 \
-		${DESTDIR}${PREFIX}/${PKGMANDIR}/man1/sqlite3.1
 
 .include "../../devel/readline/buildlink3.mk"
 .include "../../mk/dlopen.buildlink3.mk"

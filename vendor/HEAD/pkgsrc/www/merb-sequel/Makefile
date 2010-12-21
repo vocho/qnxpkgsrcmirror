@@ -1,16 +1,18 @@
-# $NetBSD: Makefile,v 1.2 2008/04/13 06:58:03 jlam Exp $
+# $NetBSD: Makefile,v 1.4 2010/09/13 14:32:42 taca Exp $
 
-DISTNAME=	merb_sequel-0.9.2
-PKGNAME=	${DISTNAME:S/_/-/g}
-PKGREVISION=	1
+DISTNAME=	merb_sequel-1.1.1
+PKGNAME=	${RUBY_PKGPREFIX}-${DISTNAME:S/_/-/g}
 CATEGORIES=	databases www
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.merbivore.com/
+HOMEPAGE=	http://github.com/pk/merb_sequel
 COMMENT=	Merb plugin for the Sequel ORM
+LICENSE=	mit
 
-DEPENDS+=	merb-core>=0.9.2:../../www/merb-core
-DEPENDS+=	${RUBY_PKGPREFIX}-sequel>=1.4.0:../../databases/ruby-sequel
+DEPENDS+=	${RUBY_PKGPREFIX}-merb-core>=1.1.0:../../www/merb-core
+DEPENDS+=	${RUBY_PKGPREFIX}-sequel>=2.7.0:../../databases/ruby-sequel
 
-.include "../../misc/rubygems/rubygem.mk"
+CONFLICTS+=	merb-sequel-[0-9]*
+
+.include "../../lang/ruby/gem.mk"
 .include "../../mk/bsd.pkg.mk"

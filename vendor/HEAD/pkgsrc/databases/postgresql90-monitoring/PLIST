@@ -1,0 +1,11 @@
+@comment $NetBSD: PLIST,v 1.3 2010/12/19 09:53:28 adam Exp $
+lib/postgresql/auto_explain.la
+lib/postgresql/pg_buffercache.la
+lib/postgresql/pg_stat_statements.la
+lib/postgresql/pgstattuple.la
+share/postgresql/contrib/pg_buffercache.sql
+share/postgresql/contrib/pg_stat_statements.sql
+share/postgresql/contrib/pgstattuple.sql
+share/postgresql/contrib/uninstall_pg_buffercache.sql
+share/postgresql/contrib/uninstall_pg_stat_statements.sql
+share/postgresql/contrib/uninstall_pgstattuple.sql

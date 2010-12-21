@@ -1,14 +1,16 @@
-# $NetBSD: Makefile,v 1.1.1.1 2008/04/04 15:24:23 jlam Exp $
+# $NetBSD: Makefile,v 1.3 2010/09/13 14:32:41 taca Exp $
 
-DISTNAME=	merb_helpers-0.9.2
-PKGNAME=	${DISTNAME:S/_/-/g}
+DISTNAME=	merb-helpers-1.1.3
 CATEGORIES=	www
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.merbivore.com/
 COMMENT=	Merb plugin that provides various view helpers
+LICENSE=	mit
 
-DEPENDS+=	merb-core>=0.9.2:../../www/merb-core
+DEPENDS+=	${RUBY_PKGPREFIX}-merb-core>=1.1.3:../../www/merb-core
 
-.include "../../misc/rubygems/rubygem.mk"
+CONFLICTS+=	merb-helper-[0-9]*
+
+.include "../../lang/ruby/gem.mk"
 .include "../../mk/bsd.pkg.mk"

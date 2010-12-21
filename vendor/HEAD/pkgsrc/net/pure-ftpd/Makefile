@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.23 2010/02/04 12:34:08 obache Exp $
+# $NetBSD: Makefile,v 1.25 2010/10/27 20:13:59 zafer Exp $
 
-DISTNAME=		pure-ftpd-1.0.27
+DISTNAME=		pure-ftpd-1.0.29
 CATEGORIES=		net
 MASTER_SITES=		ftp://ftp.pureftpd.org/pub/pure-ftpd/releases/
 MASTER_SITES+=		http://download.pureftpd.org/pub/pure-ftpd/releases/
@@ -15,6 +15,7 @@ MASTER_SITES+=		${MASTER_SITE_SOURCEFORGE:=pureftpd/}
 MAINTAINER=		dawszy@arhea.net
 HOMEPAGE=		http://www.pureftpd.org/project/pure-ftpd
 COMMENT=		Secure FTP daemon with optional SQL support
+LICENSE=		modified-bsd
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 

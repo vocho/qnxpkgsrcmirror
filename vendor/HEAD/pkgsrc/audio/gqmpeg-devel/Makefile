@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.23 2010/06/13 22:43:50 wiz Exp $
+# $NetBSD: Makefile,v 1.25 2010/11/15 22:56:16 abs Exp $
 
 DISTNAME=		gqmpeg-0.91.1
-PKGREVISION=		8
+PKGREVISION=		10
 CATEGORIES=		audio
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=gqmpeg/}
 

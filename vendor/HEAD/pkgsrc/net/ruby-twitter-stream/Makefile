@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.2 2010/08/03 06:31:45 obache Exp $
+# $NetBSD: Makefile,v 1.5 2010/10/16 05:09:36 obache Exp $
 
-DISTNAME=	twitter-stream-0.1.7
-PKGNAME=	${RUBY_PKGPREFIX}-${DISTNAME}
+DISTNAME=	twitter-stream-0.1.10
 CATEGORIES=	net
 
 MAINTAINER=	obache@NetBSD.org
@@ -12,7 +11,5 @@ COMMENT=	Twitter realtime API client
 DEPENDS+=	${RUBY_PKGPREFIX}-eventmachine>=0.12.8:../../devel/ruby-eventmachine
 DEPENDS+=	${RUBY_PKGPREFIX}-roauth>=0.0.2:../../security/ruby-roauth
 
-GEM_BUILD=	gemspec
-
-.include "../../misc/rubygems/rubygem.mk"
+.include "../../lang/ruby/gem.mk"
 .include "../../mk/bsd.pkg.mk"

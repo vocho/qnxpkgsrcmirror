@@ -1,10 +1,9 @@
-# $NetBSD: Makefile,v 1.34 2010/07/19 12:05:33 obache Exp $
+# $NetBSD: Makefile,v 1.38 2010/12/01 08:02:33 cegger Exp $
 #
 
-DISTNAME=	gnome-control-center-2.30.1
-PKGREVISION=	1
+DISTNAME=	gnome-control-center-2.32.1
 CATEGORIES=	x11 gnome
-MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gnome-control-center/2.30/}
+MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gnome-control-center/2.32/}
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
@@ -77,7 +76,7 @@ BUILDLINK_API_DEPENDS.Xft2+=	Xft2>=2.1.2
 .include "../../x11/libXxf86misc/buildlink3.mk"
 BUILDLINK_API_DEPENDS.libxklavier=	libxklavier>=4.0
 .include "../../x11/libxklavier/buildlink3.mk"
-BUILDLINK_API_DEPENDS.libgnomekbd+= libgnomekbd>=2.28.0
+BUILDLINK_API_DEPENDS.libgnomekbd+= libgnomekbd>=2.31.1
 .include "../../x11/libgnomekbd/buildlink3.mk"
 .include "../../x11/libunique/buildlink3.mk"
 .include "../../databases/shared-mime-info/mimedb.mk"

@@ -1,5 +1,5 @@
-$NetBSD: distinfo,v 1.14 2010/07/06 15:22:23 drochner Exp $
+$NetBSD: distinfo,v 1.17 2010/11/24 20:54:00 drochner Exp $
 
-SHA1 (totem-pl-parser-2.30.1.tar.bz2) = f8fa38e4e97fb7d10c8fff4c32f36548d22701f0
-RMD160 (totem-pl-parser-2.30.1.tar.bz2) = 8a09a8b769f09420a12709f58b4eb6fd97fbae32
-Size (totem-pl-parser-2.30.1.tar.bz2) = 839807 bytes
+SHA1 (totem-pl-parser-2.32.1.tar.bz2) = 0975a66109048c2ce2af85355be4d3b4aa4c60fd
+RMD160 (totem-pl-parser-2.32.1.tar.bz2) = c4fd36da3ebf39a96a7396ad24a51dc5501b5a09
+Size (totem-pl-parser-2.32.1.tar.bz2) = 1614749 bytes

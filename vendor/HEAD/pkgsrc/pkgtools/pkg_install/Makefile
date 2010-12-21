@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.179 2010/04/20 00:39:12 joerg Exp $
+# $NetBSD: Makefile,v 1.181 2010/09/15 13:55:15 wiz Exp $
 
 # Notes to package maintainers:
 #
@@ -11,7 +11,7 @@ CATEGORIES=		pkgtools
 MASTER_SITES=		# empty
 DISTFILES=		# empty
 
-OWNER=			joerg@NetBSD.org
+MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://www.pkgsrc.org/
 COMMENT=		Package management and administration tools for pkgsrc
 LICENSE=		modified-bsd

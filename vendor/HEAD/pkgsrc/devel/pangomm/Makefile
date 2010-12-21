@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.9 2010/06/13 22:44:09 wiz Exp $
+# $NetBSD: Makefile,v 1.13 2010/12/12 12:20:10 wiz Exp $
 
-DISTNAME=	pangomm-2.26.2
-PKGREVISION=	1
+DISTNAME=	pangomm-2.26.3
 CATEGORIES=	devel
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/pangomm/2.26/}
 EXTRACT_SUFX=	.tar.bz2
@@ -9,6 +8,7 @@ EXTRACT_SUFX=	.tar.bz2
 MAINTAINER=	adam@NetBSD.org
 HOMEPAGE=	http://www.gtkmm.org/
 COMMENT=	C++ bindings for pangomm
+LICENSE=	gnu-lgpl-v2.1
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
@@ -18,8 +18,9 @@ USE_LANGUAGES=		c c++
 USE_LIBTOOL=		yes
 USE_PKGLOCALEDIR=	yes
 USE_TOOLS+=		gmake pkg-config perl:run
-PKGCONFIG_OVERRIDE+=	${WRKSRC}/pango/pangomm-1.4.pc.in
 GNU_CONFIGURE=		yes
+
+PKGCONFIG_OVERRIDE+=	pango/pangomm.pc.in
 
 BUILDLINK_API_DEPENDS.pango+=	pango>=1.26.0
 

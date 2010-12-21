@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.5 2010/08/03 21:32:43 seb Exp $
+# $NetBSD: Makefile,v 1.7 2010/09/02 19:37:02 sno Exp $
 
-DISTNAME=	MooseX-SimpleConfig-0.07
+DISTNAME=	MooseX-SimpleConfig-0.09
 PKGNAME=	p5-${DISTNAME}
 #PKGREVISION=	1
 CATEGORIES=	devel perl5

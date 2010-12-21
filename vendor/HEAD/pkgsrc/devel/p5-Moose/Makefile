@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.46 2010/07/26 21:12:49 seb Exp $
+# $NetBSD: Makefile,v 1.50 2010/09/23 22:16:41 sno Exp $
 #
 
-DISTNAME=	Moose-1.09
+DISTNAME=	Moose-1.14
 PKGNAME=	p5-${DISTNAME}
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Test/}
@@ -11,7 +11,7 @@ HOMEPAGE=	http://moose.perl.org/
 COMMENT=	Postmodern object system for Perl 5
 LICENSE=	${PERL5_LICENSE}
 
-DEPENDS+=	p5-Class-MOP>=1.04:../../devel/p5-Class-MOP
+DEPENDS+=	p5-Class-MOP>=1.05:../../devel/p5-Class-MOP
 DEPENDS+=	p5-Data-OptList-[0-9]*:../../devel/p5-Data-OptList
 DEPENDS+=	p5-List-MoreUtils>=0.12:../../devel/p5-List-MoreUtils
 DEPENDS+=	p5-Package-DeprecationManager>=0.04:../../devel/p5-Package-DeprecationManager
@@ -20,8 +20,8 @@ DEPENDS+=	p5-Sub-Name-[0-9]*:../../devel/p5-Sub-Name
 DEPENDS+=	p5-Task-Weaken-[0-9]*:../../devel/p5-Task-Weaken
 DEPENDS+=	p5-Try-Tiny>=0.02:../../devel/p5-Try-Tiny
 
-BUILD_DEPENDS+=	p5-Test-Simple>=0.88:../../devel/p5-Test-Simple
 BUILD_DEPENDS+=	p5-Test-Exception>=0.27:../../devel/p5-Test-Exception
+BUILD_DEPENDS+=	p5-Test-Requires>=0.05:../../devel/p5-Test-Requires
 
 # t/200_examples/002_example_Moose_POOP.t
 BUILD_DEPENDS+=	p5-DBM-Deep-[0-9]*:../../databases/p5-DBM-Deep

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.13 2009/09/15 10:28:29 drochner Exp $
+# $NetBSD: Makefile,v 1.15 2010/11/29 17:58:35 drochner Exp $
 #
 
 PKG_DESTDIR_SUPPORT=	user-destdir
@@ -6,7 +6,7 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 PLUGIN_NAME=	bogofilter
 .include "../../mail/claws-mail/plugins.mk"
 
-MAINTAINER=	smb@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 COMMENT=	Enables the scanning of incoming mail using Bogofilter
 
 CONFIGURE_ARGS+=	--enable-${PLUGIN_NAME}-plugin

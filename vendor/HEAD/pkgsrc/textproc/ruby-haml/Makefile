@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.4 2010/04/15 20:28:09 seb Exp $
+# $NetBSD: Makefile,v 1.6 2010/12/04 04:27:30 taca Exp $
 
-DISTNAME=	haml-2.2.23
-PKGNAME=	${RUBY_PKGPREFIX}-${DISTNAME}
+DISTNAME=	haml-3.0.24
 CATEGORIES=	textproc
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://haml-lang.com/
 COMMENT=	XHTML & CSS markup language & template engine
+LICENSE=	mit
 
-GEM_BUILD=	gemspec
+CONFLICTS+=	ruby[1-9][0-9]-haml-*
 
-.include "../../misc/rubygems/rubygem.mk"
+.include "../../lang/ruby/gem.mk"
 .include "../../mk/bsd.pkg.mk"

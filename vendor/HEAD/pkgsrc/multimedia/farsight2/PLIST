@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.1.1.1 2009/08/17 21:13:04 wiz Exp $
+@comment $NetBSD: PLIST,v 1.3 2010/11/24 03:16:45 obache Exp $
 include/gstreamer-0.10/gst/farsight/fs-base-conference.h
 include/gstreamer-0.10/gst/farsight/fs-candidate.h
 include/gstreamer-0.10/gst/farsight/fs-codec.h
@@ -15,6 +15,7 @@ include/gstreamer-0.10/gst/farsight/fs-transmitter.h
 lib/farsight2-0.0/libmulticast-transmitter.la
 lib/farsight2-0.0/libnice-transmitter.la
 lib/farsight2-0.0/librawudp-transmitter.la
+lib/farsight2-0.0/libshm-transmitter.la
 lib/gstreamer-0.10/libfsfunnel.la
 lib/gstreamer-0.10/libfsmsnconference.la
 lib/gstreamer-0.10/libfsrtcpfilter.la
@@ -27,7 +28,6 @@ share/gtk-doc/html/farsight2-libs-0.10/FsBaseConference.html
 share/gtk-doc/html/farsight2-libs-0.10/FsConference.html
 share/gtk-doc/html/farsight2-libs-0.10/FsElementAddedNotifier.html
 share/gtk-doc/html/farsight2-libs-0.10/FsParticipant.html
-share/gtk-doc/html/farsight2-libs-0.10/FsSession.html
 share/gtk-doc/html/farsight2-libs-0.10/FsStream.html
 share/gtk-doc/html/farsight2-libs-0.10/FsStreamTransmitter.html
 share/gtk-doc/html/farsight2-libs-0.10/FsTransmitter.html
@@ -43,6 +43,7 @@ share/gtk-doc/html/farsight2-libs-0.10/farsight2-libs-FsCandidate.html
 share/gtk-doc/html/farsight2-libs-0.10/farsight2-libs-FsCodec.html
 share/gtk-doc/html/farsight2-libs-0.10/farsight2-libs-FsPlugin.html
 share/gtk-doc/html/farsight2-libs-0.10/farsight2-libs-Network-interfaces-discovery.html
+share/gtk-doc/html/farsight2-libs-0.10/farsight2-libs-fs-session.html
 share/gtk-doc/html/farsight2-libs-0.10/home.png
 share/gtk-doc/html/farsight2-libs-0.10/index.html
 share/gtk-doc/html/farsight2-libs-0.10/index.sgml

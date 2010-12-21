@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.13 2010/06/13 22:45:38 wiz Exp $
+# $NetBSD: Makefile,v 1.15 2010/11/15 22:58:59 abs Exp $
 #
 
 DISTNAME=		gromit-20041213
-PKGREVISION=		5
+PKGREVISION=		7
 CATEGORIES=		x11
 MASTER_SITES=		http://www.home.unix-ag.org/simon/gromit/
 

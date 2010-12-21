@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.49 2010/02/16 13:57:20 wiz Exp $
+# $NetBSD: Makefile,v 1.51 2010/12/02 12:20:57 wiz Exp $
 
-DISTNAME=	MailTools-2.06
+DISTNAME=	MailTools-2.07
 PKGNAME=	p5-${DISTNAME}
 SVR4_PKGNAME=	p5mto
 CATEGORIES=	mail perl5
@@ -16,8 +16,6 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 
 BUILD_DEPENDS+=	{perl>=5.10,p5-Net>=1.09}:../../net/p5-Net
 DEPENDS+=	p5-TimeDate-[0-9]*:../../time/p5-TimeDate
-# just needed for tests
-#DEPENDS+=	p5-Test-Pod-[0-9]*:../../devel/p5-Test-Pod
 
 PERL5_PACKLIST=		auto/Mail/.packlist
 

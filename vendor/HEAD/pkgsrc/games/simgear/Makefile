@@ -1,29 +1,31 @@
-# $NetBSD: Makefile,v 1.9 2010/01/18 09:58:53 wiz Exp $
-#
+# $NetBSD: Makefile,v 1.12 2010/11/15 22:57:06 abs Exp $
 
-DISTNAME=		SimGear-1.0.0
-PKGNAME=		${DISTNAME:S/SimGear/simgear/}
-PKGREVISION=		2
-CATEGORIES=		devel
-MASTER_SITES=		ftp://ftp.de.simgear.org/pub/simgear/Source/
+DISTNAME=	SimGear-2.0.0
+PKGNAME=	${DISTNAME:tl}
+PKGREVISION=	2
+CATEGORIES=	games devel
+MASTER_SITES=	ftp://mirrors.ibiblio.org/pub/mirrors/simgear/ftp/Source/ \
+		ftp://ftp.goflyflightgear.com/simgear/
 
-MAINTAINER=		pkgsrc-users@NetBSD.org
-HOMEPAGE=		http://www.simgear.org/
-COMMENT=		Simulator Construction Tools
+MAINTAINER=	pkgsrc-users@NetBSD.org
+HOMEPAGE=	http://simgear.sourceforge.net/
+COMMENT=	Simulator Construction Tools
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
-MAKE_JOBS_SAFE=		no
-
+USE_LANGUAGES=		c c++
 USE_PKGLOCALEDIR=	yes
 GNU_CONFIGURE=		yes
-USE_LANGUAGES=		c c++
+CONFIGURE_ARGS+=	--with-jpeg-factory
 
-.include "../../audio/openal/buildlink3.mk"
-.include "../../audio/freealut/buildlink3.mk"
-.include "../../devel/zlib/buildlink3.mk"
 BUILDLINK_API_DEPENDS.plib+= plib>=1.8.4
+
+.include "../../audio/freealut/buildlink3.mk"
+.include "../../audio/openal/buildlink3.mk"
+.include "../../devel/boost-headers/buildlink3.mk"
+.include "../../devel/zlib/buildlink3.mk"
 .include "../../games/plib/buildlink3.mk"
 .include "../../graphics/jpeg/buildlink3.mk"
+.include "../../graphics/osg/buildlink3.mk"
 .include "../../mk/pthread.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

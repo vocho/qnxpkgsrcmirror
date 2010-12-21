@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.41 2010/06/13 22:44:47 wiz Exp $
+# $NetBSD: Makefile,v 1.44 2010/11/15 22:57:30 abs Exp $
 #
 
-DISTNAME=	xzgv-0.9
-PKGREVISION=	3
+DISTNAME=	xzgv-0.9.1
+PKGREVISION=	1
 CATEGORIES=	graphics
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=xzgv/}
 
@@ -13,7 +13,7 @@ COMMENT=	Image viewer
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_X11BASE=		yes
-USE_TOOLS+=		gmake makeinfo pkg-config
+USE_TOOLS+=		gmake makeinfo pkg-config gawk
 INFO_FILES=		yes
 INSTALLATION_DIRS=	bin ${PKGINFODIR} ${PKGMANDIR}/man1
 
@@ -22,7 +22,7 @@ do-install:
 	${INSTALL_MAN} ${WRKSRC}/doc/xzgv.1				\
 		${DESTDIR}${PREFIX}/${PKGMANDIR}/man1
 	@(cd ${WRKSRC}/doc && ${MAKEINFO} xzgv.texi)
-	cd ${WRKSRC}/doc; for f in xzgv xzgv-[0-9]*; do			\
+	cd ${WRKSRC}/doc; for f in xzgv.info; do			\
 		${TEST} ! -f "$$f" ||					\
 		${INSTALL_DATA} "$$f" ${DESTDIR}${PREFIX}/${PKGINFODIR};\
 	done

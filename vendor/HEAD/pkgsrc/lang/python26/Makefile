@@ -1,11 +1,10 @@
-# $NetBSD: Makefile,v 1.24 2010/06/29 08:15:42 tron Exp $
+# $NetBSD: Makefile,v 1.31 2010/11/23 08:24:04 tron Exp $
 
-DISTNAME=	Python-2.6.5
-PKGNAME=	${DISTNAME:S/Python/python26/}
-PKGREVISION=	1
+.include "dist.mk"
+
+PKGNAME=	python26-${PY_DISTVERSION}
+PKGREVISION=	4
 CATEGORIES=	lang python
-MASTER_SITES=	http://www.python.org/ftp/python/2.6.5/
-EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.python.org/
@@ -13,8 +12,6 @@ COMMENT=	Interpreted, interactive, object-oriented programming language
 LICENSE=	python-software-foundation
 
 PKG_DESTDIR_SUPPORT=	user-destdir
-
-# Remember to update pkgsrc/lang/python/srcdist.mk when version changes
 
 CONFLICTS+=	python-[0-9]*
 
@@ -52,6 +49,8 @@ PLIST_SRC+=	${.CURDIR}/../../lang/python26/PLIST.common_end
 
 .if ${OPSYS} == "NetBSD"
 PRIVILEGED_STAGES+=	clean
+# XXX work around a botched autoconf check which ignores libintl
+CONFIGURE_ENV+=		ac_cv_func_bind_textdomain_codeset=yes
 .endif
 
 .if ${OPSYS} == "Darwin" || ${OPSYS} == "Interix"
@@ -96,13 +95,6 @@ PLIST.openssl097=	yes
 PLIST_VARS+=	extra-so
 .if !empty(IS_64BIT_PLATFORM:M[nN][oO])
 PLIST.extra-so=	yes
-.endif
-
-# ossaudiodev is only available on x86 for the following platforms
-PLIST_VARS+=	oss
-.if (${MACHINE_ARCH} == "i386" || ${MACHINE_ARCH} == "x86_64") && \
-    (${PY_PLATNAME} == "linux2" || ${OPSYS} == "FreeBSD")
-PLIST.oss=	yes
 .endif
 
 # Make sure python modules can link correctly
@@ -157,6 +149,7 @@ REPLACE_FILES.py26+=	Lib/test/test_largefile.py Lib/test/test_optparse.py
 post-extract:
 	${MV} ${WRKSRC}/Lib/smtpd.py ${WRKSRC}/Lib/smtpd${PY_VER_SUFFIX}.py
 	${MV} ${WRKSRC}/Tools/scripts/pydoc ${WRKSRC}/Tools/scripts/pydoc${PY_VER_SUFFIX}
+	${MV} ${WRKSRC}/Tools/scripts/2to3 ${WRKSRC}/Tools/scripts/2to3-${PY_VER_SUFFIX}
 
 .if ${OPSYS} == "HPUX"
 post-install:
@@ -174,5 +167,4 @@ BUILDLINK_DEPMETHOD.readline=		build
 .include "../../devel/zlib/buildlink3.mk"
 .include "../../security/openssl/buildlink3.mk"
 .include "../../mk/dlopen.buildlink3.mk"
-.include "../../mk/oss.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

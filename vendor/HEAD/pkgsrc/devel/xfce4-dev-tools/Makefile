@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.9 2010/01/29 19:31:18 joerg Exp $
+# $NetBSD: Makefile,v 1.11 2010/11/15 22:56:47 abs Exp $
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
@@ -6,6 +6,7 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 
 XFCE4_VERSION=	4.6.0
 DISTNAME=	xfce4-dev-tools-${XFCE4_VERSION}
+PKGREVISION=	2
 CATEGORIES=	devel
 COMMENT=	Xfce development tools
 LICENSE=	gnu-gpl-v2

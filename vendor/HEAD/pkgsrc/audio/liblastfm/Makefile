@@ -1,22 +1,24 @@
-# $NetBSD: Makefile,v 1.4 2010/06/13 22:43:50 wiz Exp $
+# $NetBSD: Makefile,v 1.9 2010/11/15 22:56:17 abs Exp $
 #
 
-DISTNAME=	liblastfm-0.3.0
-PKGREVISION=	3
+DISTNAME=	mxcl-liblastfm-0.3.3-0-gf0b3239
+PKGNAME=	liblastfm-0.3.3
+PKGREVISION=	1
 CATEGORIES=	audio net
-MASTER_SITES=	http://cdn.last.fm/src/
-EXTRACT_SUFX=	.tar.bz2
+MASTER_SITES=	http://download.github.com/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://github.com/mxcl/liblastfm/tree/master
+HOMEPAGE=	http://github.com/mxcl/liblastfm
 COMMENT=	Library for accessing last.fm
 LICENSE=	gnu-gpl-v2
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
+WRKSRC=		${WRKDIR}/mxcl-liblastfm-1c739eb
+
 USE_LANGUAGES=		c c++
 USE_LIBTOOL=		yes
-USE_TOOLS+=		bash gmake perl pkg-config
+USE_TOOLS+=		bash gmake pkg-config
 PREPEND_PATH+=		${QTDIR}/bin
 
 HAS_CONFIGURE=		yes
@@ -25,14 +27,13 @@ CONFIGURE_ARGS+=	--prefix ${PREFIX}
 #CPPFLAGS+=		-fPIC
 CONFIG_SHELL=		${RUBY}
 
-REPLACE_PERL=		admin/findsrc
-
-REPLACE_RUBY+=		admin/which_qmake.rb
-REPLACE_RUBY+=		admin/lastfm.h.rb
 REPLACE_RUBY+=		admin/Makefile.rb
+REPLACE_RUBY+=		admin/findsrc.rb
+REPLACE_RUBY+=		admin/lastfm.h.rb
 REPLACE_RUBY+=		admin/platform.rb
-REPLACE_RUBY+=		admin/utils.rb
 REPLACE_RUBY+=		admin/qpp
+REPLACE_RUBY+=		admin/utils.rb
+REPLACE_RUBY+=		admin/which_qmake.rb
 
 pre-configure:
 	${LN} -sf ${QTDIR}/bin/qmake ${BUILDLINK_DIR}/bin/

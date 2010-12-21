@@ -1,4 +1,4 @@
-# $NetBSD: buildlink3.mk,v 1.23 2010/06/13 22:44:07 wiz Exp $
+# $NetBSD: buildlink3.mk,v 1.26 2010/11/15 22:56:41 abs Exp $
 
 BUILDLINK_TREE+=	libgnome
 
@@ -6,7 +6,7 @@ BUILDLINK_TREE+=	libgnome
 LIBGNOME_BUILDLINK3_MK:=
 
 BUILDLINK_API_DEPENDS.libgnome+=	libgnome>=2.8.0
-BUILDLINK_ABI_DEPENDS.libgnome+=	libgnome>=2.30.0nb1
+BUILDLINK_ABI_DEPENDS.libgnome+=	libgnome>=2.32.0nb1
 BUILDLINK_PKGSRCDIR.libgnome?=	../../devel/libgnome
 
 .include "../../mk/bsd.fast.prefs.mk"
@@ -17,6 +17,7 @@ pkgbase := libgnome
 .include "../../audio/esound/buildlink3.mk"
 .endif
 
+.include "../../audio/libcanberra/buildlink3.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../devel/glib2/buildlink3.mk"
 .include "../../devel/libbonobo/buildlink3.mk"

@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.43 2010/06/13 22:43:59 wiz Exp $
+# $NetBSD: Makefile,v 1.45 2010/11/15 22:56:31 abs Exp $
 
 DISTNAME=		jpilot-syncmal-0.80
-PKGREVISION=		3
+PKGREVISION=		5
 CATEGORIES=		comms
 MASTER_SITES=		http://jasonday.home.att.net/code/syncmal/
 

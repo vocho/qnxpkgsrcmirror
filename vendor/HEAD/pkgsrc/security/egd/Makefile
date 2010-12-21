@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.15 2009/12/21 12:06:17 joerg Exp $
+# $NetBSD: Makefile,v 1.17 2010/10/08 04:39:37 obache Exp $
 #
 
 DISTNAME=	egd-0.8
-PKGREVISION=	2
+PKGREVISION=	3
 CATEGORIES=	security
 MASTER_SITES=	http://www.lothar.com/pub/
 
@@ -14,9 +14,9 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 
 DEPENDS+=	p5-SHA-[0-9]*:../../security/p5-SHA
 
-PERL5_PACKLIST=	auto/egd/.packlist
+USE_TOOLS+=	perl
 
-BROKEN=		Conflicts with dependency
+PERL5_PACKLIST=	auto/egd/.packlist
 
 .include "../../lang/perl5/module.mk"
 .include "../../mk/bsd.pkg.mk"

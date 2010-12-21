@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.89 2010/07/06 15:12:37 drochner Exp $
+# $NetBSD: Makefile,v 1.92 2010/11/28 12:59:07 drochner Exp $
 
-DISTNAME=	seahorse-2.30.1
+DISTNAME=	seahorse-2.32.0
 CATEGORIES=	security
-MASTER_SITES=	${MASTER_SITE_GNOME:=sources/seahorse/2.30/}
+MASTER_SITES=	${MASTER_SITE_GNOME:=sources/seahorse/2.32/}
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	pkgsrc-users@NetBSD.org

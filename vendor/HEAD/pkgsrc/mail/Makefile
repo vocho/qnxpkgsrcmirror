@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.398 2010/05/11 12:15:45 jmmv Exp $
+# $NetBSD: Makefile,v 1.405 2010/11/05 12:02:37 adam Exp $
 #
 
 COMMENT=	Electronic mail utilities
@@ -56,7 +56,9 @@ SUBDIR+=	cue
 SUBDIR+=	cyrus-imapd
 SUBDIR+=	cyrus-imapd21
 SUBDIR+=	cyrus-imapd23
+SUBDIR+=	cyrus-imapd24
 SUBDIR+=	dbmail
+SUBDIR+=	dcc
 SUBDIR+=	deliver
 SUBDIR+=	demime
 SUBDIR+=	distribute
@@ -64,6 +66,8 @@ SUBDIR+=	dk-milter
 SUBDIR+=	dkim-milter
 SUBDIR+=	dot-forward
 SUBDIR+=	dovecot
+SUBDIR+=	dovecot2
+SUBDIR+=	dovecot2-pigeonhole
 SUBDIR+=	drac
 SUBDIR+=	dspam
 SUBDIR+=	elm
@@ -160,6 +164,7 @@ SUBDIR+=	nmh
 SUBDIR+=	nullmailer
 SUBDIR+=	oe2mbx
 SUBDIR+=	offlineimap
+SUBDIR+=	opendkim
 SUBDIR+=	p5-App-Siesh
 SUBDIR+=	p5-Catalyst-View-Email
 SUBDIR+=	p5-Email-Abstract
@@ -271,11 +276,14 @@ SUBDIR+=	rmail-mime
 SUBDIR+=	roundcube
 SUBDIR+=	rss2email
 SUBDIR+=	ruby-actionmailer
+SUBDIR+=	ruby-actionmailer3
+SUBDIR+=	ruby-mail
 SUBDIR+=	ruby-mailfactory
 SUBDIR+=	ruby-mime-types
 SUBDIR+=	ruby-tmail
 SUBDIR+=	safecat
 SUBDIR+=	sendmail
+SUBDIR+=	sendmail-qtool
 SUBDIR+=	sendymail
 SUBDIR+=	serialmail
 SUBDIR+=	sid-milter
