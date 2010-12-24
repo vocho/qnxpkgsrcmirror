@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.4 2010/11/22 13:31:05 obache Exp $
+# $NetBSD: Makefile,v 1.6 2010/12/23 06:18:27 obache Exp $
 #
 
-DISTNAME=	eekboard-0.0.6
+DISTNAME=	eekboard-0.0.7
 CATEGORIES=	x11
 MASTER_SITES=	http://cloud.github.com/downloads/ueno/eekboard/
 
@@ -15,7 +15,7 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 GNU_CONFIGURE=		yes
 USE_LIBTOOL=		yes
 USE_PKGLOCALEDIR=	yes
-USE_TOOLS+=		gmake pkg-config intltool
+USE_TOOLS+=		gmake pkg-config intltool msgfmt msgmerge xgettext
 
 PKGCONFIG_OVERRIDE+=	eek/eek-xkl-0.1.pc.in
 PKGCONFIG_OVERRIDE+=	eek/eek-0.1.pc.in
