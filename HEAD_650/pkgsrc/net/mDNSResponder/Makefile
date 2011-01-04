@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.31 2010/07/16 07:34:02 tnn Exp $
+# $NetBSD: Makefile,v 1.33 2010/12/20 14:17:01 tez Exp $
 
 DISTNAME=	mDNSResponder-214.3.2
+PKGREVISION=	1
 CATEGORIES=	net
 MASTER_SITES=	http://www.opensource.apple.com/tarballs/mDNSResponder/
 
@@ -61,6 +62,8 @@ MAKE_ENV+=	EXTRA_LIBS=-Wl,-R${BUILDLINK_PREFIX.librfuncs:Q}/lib\ ${BUILDLINK_LDF
 .else
 MAKE_ENV+=	EXTRA_LIBS=
 .endif
+
+LDFLAGS.SunOS+=	-lsocket
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.mDNSResponder
 PKG_SUPPORTED_OPTIONS=	inet6

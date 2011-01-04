@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.4 2010/06/13 22:44:38 wiz Exp $
+# $NetBSD: Makefile,v 1.6 2010/12/23 11:44:42 dsainty Exp $
 
-DISTNAME=	libpano13-2.9.14
-PKGREVISION=	3
+DISTNAME=	libpano13-2.9.17
 CATEGORIES=	graphics
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=panotools/}
 
@@ -16,8 +15,9 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 USE_LANGUAGES=		c c++
 USE_LIBTOOL=		yes
 GNU_CONFIGURE=		yes
+PKGCONFIG_OVERRIDE=	libpano13.pc.in
 
-.include "../../graphics/jpeg/buildlink3.mk"
+.include "../../mk/jpeg.buildlink3.mk"
 .include "../../graphics/png/buildlink3.mk"
 .include "../../graphics/tiff/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.58 2010/06/13 22:45:03 wiz Exp $
+# $NetBSD: Makefile,v 1.61 2010/12/19 09:10:10 wiz Exp $
 #
 
 DISTNAME=	avidemux_2.4.4
 PKGNAME=	${DISTNAME:S/_/-/}
-PKGREVISION=	3
+PKGREVISION=	6
 CATEGORIES=	multimedia
 MASTER_SITES=	http://download.berlios.de/avidemux/
 
@@ -21,6 +21,7 @@ USE_TOOLS+=		msgfmt pkg-config
 USE_CMAKE=		yes
 
 CMAKE_ARGS+=		-DNO_ARTS=1
+CMAKE_ARGS+=		-DUSE_X264=1
 
 LIBS+=			${LIBOSSAUDIO}
 

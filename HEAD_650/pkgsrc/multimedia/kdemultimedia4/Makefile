@@ -1,15 +1,12 @@
-# $NetBSD: Makefile,v 1.9 2010/07/14 11:11:26 sbd Exp $
+# $NetBSD: Makefile,v 1.16 2010/12/06 11:43:41 markd Exp $
 
 DISTNAME=	kdemultimedia-${_KDE_VERSION}
-PKGREVISION=	1
 CATEGORIES=	multimedia
 COMMENT=	Multimedia tools for the KDE integrated X11 desktop
 
 .include "../../meta-pkgs/kde4/Makefile.kde4"
 
 # BUILD_MAKE_FLAGS+= VERBOSE=1
-
-DEPENDS+=	xine-xcb>=1.1.9:../../x11/xine-xcb
 
 .include "../../mk/bsd.prefs.mk"
 .include "options.mk"
@@ -22,8 +19,11 @@ DEPENDS+=	xine-xcb>=1.1.9:../../x11/xine-xcb
 .include "../../audio/musicbrainz/buildlink3.mk"
 .include "../../audio/taglib/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
+.include "../../multimedia/ffmpeg/buildlink3.mk"
 .include "../../multimedia/libtheora/buildlink3.mk"
+BUILDLINK_ABI_DEPENDS.xine-lib?=	xine-lib>=1.1.19nb1
 .include "../../multimedia/xine-lib/buildlink3.mk"
+.include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../x11/kdelibs4/buildlink3.mk"
 .include "../../x11/kdebase-runtime4/buildlink3.mk"
 .include "../../mk/oss.buildlink3.mk"

@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.84 2010/07/24 09:44:57 wiz Exp $
+# $NetBSD: Makefile,v 1.87 2010/12/23 11:44:30 dsainty Exp $
 #
 
 DISTNAME=		vice-2.2
+PKGREVISION=		2
 CATEGORIES=		emulators
 MASTER_SITES=		ftp://ftp.zimmers.net/pub/cbm/crossplatform/emulators/VICE/ \
 			http://www.zimmers.net/anonftp/pub/cbm/crossplatform/emulators/VICE/ \
@@ -48,7 +49,7 @@ CONFIGURE_ARGS+=	--without-oss
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"
 .include "../../graphics/png/buildlink3.mk"
-.include "../../graphics/jpeg/buildlink3.mk"
+.include "../../mk/jpeg.buildlink3.mk"
 .include "../../x11/libXaw/buildlink3.mk"
 .include "../../x11/libXpm/buildlink3.mk"
 .include "../../x11/libXt/buildlink3.mk"

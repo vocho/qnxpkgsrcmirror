@@ -1,4 +1,4 @@
-# $NetBSD: extract.mk,v 1.31 2010/02/07 08:00:51 obache Exp $
+# $NetBSD: extract.mk,v 1.33 2010/12/22 09:33:30 tron Exp $
 #
 # The following variables may be set by the package Makefile and
 # specify how extraction happens:
@@ -7,6 +7,11 @@
 #	The directory into which the files are extracted.
 #
 #	Default value: ${WRKDIR}
+#
+#    EXTRACT_DIR.${file}
+#	The directory into which the file ${file} is extracted.
+#
+#	Default: ${EXTRACT_DIR}
 #
 #    EXTRACTOR is the the the environment and path used to execute the
 #	all-purpose extract script.
@@ -44,6 +49,9 @@
 #
 
 EXTRACT_DIR?=		${WRKDIR}
+.for f in ${EXTRACT_ONLY}
+EXTRACT_DIR.${f}?=	${EXTRACT_DIR}
+.endfor
 
 _COOKIE.extract=	${WRKDIR}/.extract_done
 
@@ -107,6 +115,9 @@ extract-message:
 .PHONY: extract-dir
 extract-dir:
 	${RUN}${MKDIR} ${EXTRACT_DIR}
+.for f in ${EXTRACT_ONLY}
+	${RUN}${MKDIR} ${EXTRACT_DIR.${f}}
+.endfor
 
 ######################################################################
 ### extract-check-interactive (PRIVATE)
@@ -165,7 +176,6 @@ _EXTRACT_ENV+=	${TOOLS_CP:D		CP=${TOOLS_CP:Q}}
 _EXTRACT_ENV+=	${TOOLS_ECHO:D		ECHO=${TOOLS_ECHO:Q}}
 _EXTRACT_ENV+=	${TOOLS_CMDLINE.gzcat:D	GZCAT=${TOOLS_CMDLINE.gzcat:Q}}
 _EXTRACT_ENV+=	${TOOLS_LHA:D		LHA=${TOOLS_LHA:Q}}
-_EXTRACT_ENV+=	${TOOLS_LZCAT:D		LZCAT=${TOOLS_LZCAT:Q}}
 _EXTRACT_ENV+=	${TOOLS_MKDIR:D		MKDIR=${TOOLS_MKDIR:Q}}
 _EXTRACT_ENV+=	${TOOLS_RM:D		RM=${TOOLS_RM:Q}}
 _EXTRACT_ENV+=	${TOOLS_RPM2PKG:D	RPM2PKG=${TOOLS_RPM2PKG:Q}}
@@ -208,7 +218,7 @@ DOWNLOADED_DISTFILE=	$${extract_file}
 do-extract: ${WRKDIR}
 .  for f in ${EXTRACT_ONLY}
 	${RUN} extract_file=${_DISTDIR:Q}/${f:Q}; export extract_file;	\
-	cd ${WRKDIR} && cd ${EXTRACT_DIR} && ${EXTRACT_CMD}
+	cd ${WRKDIR} && cd ${EXTRACT_DIR.${f}} && ${EXTRACT_CMD}
 .  endfor
 .endif
 

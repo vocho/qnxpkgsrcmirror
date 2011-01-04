@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.11 2010/01/18 09:58:40 wiz Exp $
+# $NetBSD: Makefile,v 1.13 2010/12/23 11:44:25 dsainty Exp $
 #
 
 DISTNAME=	centerim-4.22.9
-PKGREVISION=	2
+PKGREVISION=	3
 CATEGORIES=	chat
 MASTER_SITES=	http://www.centerim.org/download/releases/ \
 		http://transacid.de/centerim/releases/
@@ -27,7 +27,7 @@ REPLACE_PERL=		misc/cimconv
 INCOMPAT_CURSES+=	NetBSD-1.[45]*-* NetBSD-1.6-* NetBSD-1.6.[1-9]-*
 INCOMPAT_CURSES+=	NetBSD-1.6_*-* NetBSD-1.6.[1-9]_*-* NetBSD-1.6[A-T]-*
 INCOMPAT_CURSES+=	NetBSD-2.*-* NetBSD-3.*-*	# see PR 29060
-INCOMPAT_CURSES+=	NetBSD-4.*-*
+INCOMPAT_CURSES+=	NetBSD-4.*-* NetBSD-5.*-*
 
 .include "options.mk"
 .include "../../mk/bsd.prefs.mk"
@@ -49,7 +49,7 @@ GCC_REQD+=		3.0	# see PR 29185
 .include "../../devel/ncurses/buildlink3.mk"
 .include "../../security/openssl/buildlink3.mk"
 .include "../../www/curl/buildlink3.mk"
-.include "../../graphics/jpeg/buildlink3.mk"
+.include "../../mk/jpeg.buildlink3.mk"
 
 .if defined(BUILDLINK_LIBICONV_LDADD) && !empty(BUILDLINK_LIBICONV_LDADD)
 #

@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.5 2010/05/12 00:57:34 obache Exp $
+@comment $NetBSD: PLIST,v 1.7 2010/12/03 07:30:17 obache Exp $
 include/clutter-1.0/clutter/clutter-actor.h
 include/clutter-1.0/clutter/clutter-alpha.h
 include/clutter-1.0/clutter/clutter-animatable.h

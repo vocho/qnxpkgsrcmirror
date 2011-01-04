@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.81 2010/06/13 22:44:34 wiz Exp $
+# $NetBSD: Makefile,v 1.88 2010/12/23 11:44:38 dsainty Exp $
 
-DISTNAME=	graphviz-2.24.0
-PKGREVISION=	4
+DISTNAME=	graphviz-2.26.3
 CATEGORIES=	graphics
 MASTER_SITES=	http://www.graphviz.org/pub/graphviz/stable/SOURCES/
 
@@ -13,9 +12,7 @@ LICENSE=	cpl-1.0
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
 PKG_DESTDIR_SUPPORT=	user-destdir
 
-DEPENDS+= ghostscript-fonts>=6.0:../../fonts/ghostscript-fonts
-
-CHECK_FILES_SKIP=	${PREFIX}/lib/graphviz/config6
+CHECK_FILES_SKIP+=	${PREFIX}/lib/graphviz/config6
 
 PRIVILEGED_STAGES+=	clean
 
@@ -80,7 +77,7 @@ post-install:
 .include "../../devel/libltdl/buildlink3.mk"
 #.include "../../devel/libltdl/convenience.mk"
 .include "../../fonts/fontconfig/buildlink3.mk"
-#.include "../../graphics/jpeg/buildlink3.mk"
+#.include "../../mk/jpeg.buildlink3.mk"
 #.include "../../graphics/png/buildlink3.mk"
 .include "../../textproc/expat/buildlink3.mk"
 .include "../../mk/pthread.buildlink3.mk"

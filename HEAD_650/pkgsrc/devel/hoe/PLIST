@@ -1,6 +1,6 @@
-@comment $NetBSD: PLIST,v 1.5 2010/03/08 12:39:32 fhajny Exp $
+@comment $NetBSD: PLIST,v 1.7 2010/12/04 03:50:20 taca Exp $
 bin/sow
-${GEM_HOME}/cache/hoe-${PKGVERSION}.gem
+${GEM_HOME}/cache/${GEM_NAME}.gem
 ${GEM_LIBDIR}/.autotest
 ${GEM_LIBDIR}/History.txt
 ${GEM_LIBDIR}/Hoe.pdf
@@ -14,6 +14,7 @@ ${GEM_LIBDIR}/lib/hoe/debug.rb
 ${GEM_LIBDIR}/lib/hoe/deps.rb
 ${GEM_LIBDIR}/lib/hoe/flay.rb
 ${GEM_LIBDIR}/lib/hoe/flog.rb
+${GEM_LIBDIR}/lib/hoe/gem_prelude_sucks.rb
 ${GEM_LIBDIR}/lib/hoe/gemcutter.rb
 ${GEM_LIBDIR}/lib/hoe/inline.rb
 ${GEM_LIBDIR}/lib/hoe/newb.rb
@@ -34,4 +35,4 @@ ${GEM_LIBDIR}/template/lib/file_name.rb.erb
 ${GEM_LIBDIR}/template/test/test_file_name.rb.erb
 ${GEM_LIBDIR}/test/test_hoe.rb
 ${GEM_LIBDIR}/test/test_hoe_gemcutter.rb
-${GEM_HOME}/specifications/hoe-${PKGVERSION}.gemspec
+${GEM_HOME}/specifications/${GEM_NAME}.gemspec

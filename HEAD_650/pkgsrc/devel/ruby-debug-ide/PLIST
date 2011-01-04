@@ -1,8 +1,10 @@
-@comment $NetBSD: PLIST,v 1.6 2009/06/14 18:48:16 joerg Exp $
+@comment $NetBSD: PLIST,v 1.8 2010/12/04 03:55:29 taca Exp $
 bin/rdebug-ide
-${GEM_HOME}/cache/ruby-debug-ide-${PKGVERSION}.gem
+${GEM_HOME}/cache/${GEM_NAME}.gem
+${GEM_LIBDIR}/MIT-LICENSE
+${GEM_LIBDIR}/Rakefile
 ${GEM_LIBDIR}/bin/rdebug-ide
-${GEM_LIBDIR}/lib/ruby-debug.rb
+${GEM_LIBDIR}/lib/ruby-debug-ide.rb
 ${GEM_LIBDIR}/lib/ruby-debug/command.rb
 ${GEM_LIBDIR}/lib/ruby-debug/commands/breakpoints.rb
 ${GEM_LIBDIR}/lib/ruby-debug/commands/catchpoint.rb
@@ -12,7 +14,10 @@ ${GEM_LIBDIR}/lib/ruby-debug/commands/enable.rb
 ${GEM_LIBDIR}/lib/ruby-debug/commands/eval.rb
 ${GEM_LIBDIR}/lib/ruby-debug/commands/frame.rb
 ${GEM_LIBDIR}/lib/ruby-debug/commands/inspect.rb
+${GEM_LIBDIR}/lib/ruby-debug/commands/jump.rb
 ${GEM_LIBDIR}/lib/ruby-debug/commands/load.rb
+${GEM_LIBDIR}/lib/ruby-debug/commands/pause.rb
+${GEM_LIBDIR}/lib/ruby-debug/commands/set_type.rb
 ${GEM_LIBDIR}/lib/ruby-debug/commands/stepping.rb
 ${GEM_LIBDIR}/lib/ruby-debug/commands/threads.rb
 ${GEM_LIBDIR}/lib/ruby-debug/commands/variables.rb
@@ -21,5 +26,6 @@ ${GEM_LIBDIR}/lib/ruby-debug/helper.rb
 ${GEM_LIBDIR}/lib/ruby-debug/interface.rb
 ${GEM_LIBDIR}/lib/ruby-debug/printers.rb
 ${GEM_LIBDIR}/lib/ruby-debug/processor.rb
+${GEM_LIBDIR}/lib/ruby-debug/version.rb
 ${GEM_LIBDIR}/lib/ruby-debug/xml_printer.rb
-${GEM_HOME}/specifications/ruby-debug-ide-${PKGVERSION}.gemspec
+${GEM_HOME}/specifications/${GEM_NAME}.gemspec

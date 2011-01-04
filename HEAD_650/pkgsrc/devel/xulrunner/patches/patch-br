@@ -1,10 +1,10 @@
 $NetBSD$
 
---- nsprpub/pr/src/linking/prlink.c.orig	2010-04-02 16:02:56.000000000 +0000
+--- nsprpub/pr/src/linking/prlink.c.orig	2010-12-03 15:48:48.000000000 +0000
 +++ nsprpub/pr/src/linking/prlink.c
-@@ -1360,7 +1360,7 @@ PR_GetLibraryFilePathname(const char *na
+@@ -1356,7 +1356,7 @@ PR_GetLibraryFilePathname(const char *na
  {
- #if defined(USE_DLFCN) && (defined(SOLARIS) || defined(FREEBSD) \
+ #if defined(USE_DLFCN) && !defined(ANDROID) && (defined(SOLARIS) || defined(FREEBSD) \
          || defined(LINUX) || defined(__GNU__) || defined(__GLIBC__) \
 -        || defined(DARWIN))
 +        || defined(DARWIN) || defined(NTO))

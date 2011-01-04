@@ -1,14 +1,17 @@
-# $NetBSD: Makefile,v 1.1.1.1 2008/04/04 15:23:31 jlam Exp $
+# $NetBSD: Makefile,v 1.3 2010/09/13 14:32:41 taca Exp $
 
-DISTNAME=	merb-builder-0.9.2
+DISTNAME=	merb-builder-0.9.8
 CATEGORIES=	www
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.merbivore.com/
 COMMENT=	Merb plugin for ruby-builder XML generation
+LICENSE=	mit
 
-DEPENDS+=	merb-core>=0.9.2:../../www/merb-core
-DEPENDS+=	${RUBY_PKGPREFIX}-builder>=2.1.2:../../textproc/ruby-builder
+DEPENDS+=	${RUBY_PKGPREFIX}-merb-core>=0.9.8:../../www/merb-core
+DEPENDS+=	${RUBY_PKGPREFIX}-builder>=2.0.0:../../textproc/ruby-builder
 
-.include "../../misc/rubygems/rubygem.mk"
+CONFLICTS+=	merb-builder-[0-9]*
+
+.include "../../lang/ruby/gem.mk"
 .include "../../mk/bsd.pkg.mk"

@@ -1,7 +1,7 @@
 #!@PERL5@
 #
 # $OpenBSD: mdoclint,v 1.14 2009/04/13 12:40:05 espie Exp $
-# $NetBSD: mdoclint,v 1.9 2010/05/26 08:31:59 wiz Exp $
+# $NetBSD: mdoclint,v 1.15 2010/12/03 20:06:42 wiz Exp $
 #
 # Copyright (c) 2001-2010 Thomas Klausner
 # All rights reserved.
@@ -54,7 +54,7 @@ my $options="aDdeFfHhmnoPprSsvwXx";
 
 sub usage
 	{
-	my $default = OPENBSD ? "-aDdfHmnoPprSsXx" : "-aDdefHmnoPprSsXx";
+	my $default = OPENBSD ? "-aDdfmnoPprSsXx" : "-aDdefmnoPprSsXx";
 	
 	print STDERR <<"EOF";
 mdoclint: verify man page correctness
@@ -104,14 +104,14 @@ my $valid_date_re;
 		NETBSD ? "LIBRARY" : undef,
 		"SYNOPSIS",
 		"DESCRIPTION",
-		"IMPLEMENTATION NOTES",
+		NETBSD ? "IMPLEMENTATION NOTES" : undef,
 		"RETURN VALUES",
 		"ENVIRONMENT",
 		"FILES",
-		NETBSD ? "EXIT STATUS" : undef,
+		"EXIT STATUS",
 		"EXAMPLES",
 		"DIAGNOSTICS",
-		"COMPATIBILITY",
+		NETBSD ? "COMPATIBILITY" : undef,
 		"ERRORS",
 		"SEE ALSO",
 		"STANDARDS",
@@ -133,7 +133,8 @@ my $valid_date_re;
 		@arches =
 		    (qw(alpha amd64 arm armish aviion cats hp300 hppa
 		    hppa64 i386 landisk loongson luna88k mac68k macppc
-		    mvme68k mvme88k sgi socppc sparc sparc64 vax zaurus));
+		    mips64 mvme68k mvme88k sgi socppc sparc sparc64 vax
+		    zaurus));
 	}
 	if (NETBSD) {
 		@arches =
@@ -144,7 +145,7 @@ my $valid_date_re;
 		    mvme68k mvmeppc netwinder news68k newsmips next68k
 		    pc532 playstation2 pmax pmppc prep sandpoint sbmips
 		    sgimips shark sparc sparc64 sun2 sun3 vax walnut
-		    x68k x86_64));
+		    x68k x86 x86_64 xen));
 	}
 	my $a = join('|', @arches);
 	$arches_re = qr{(?:$a)}o;
@@ -189,7 +190,7 @@ sub handle_options
 	unless ($opt_a or $opt_D or $opt_d or $opt_e or $opt_f or $opt_H
 	    or $opt_m or $opt_n or $opt_o or $opt_P or $opt_p or $opt_r
 	    or $opt_S or $opt_s or $opt_X or $opt_x) {
-		$opt_a = $opt_D = $opt_d = $opt_f = $opt_H = $opt_m =
+		$opt_a = $opt_D = $opt_d = $opt_f = $opt_m =
 		    $opt_n = $opt_o = $opt_P = $opt_p = $opt_r = $opt_S =
 		    $opt_s = $opt_X = $opt_x = 1;
 		    $opt_e = 1 if NETBSD;

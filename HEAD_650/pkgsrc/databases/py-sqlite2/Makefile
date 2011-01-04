@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.19 2009/07/09 19:02:58 drochner Exp $
+# $NetBSD: Makefile,v 1.21 2010/10/02 06:11:03 obache Exp $
 
-DISTNAME=	pysqlite-2.5.5
-PKGNAME=	${PYPKGPREFIX}-sqlite2-2.5.5
+DISTNAME=	pysqlite-2.6.0
+PKGNAME=	${PYPKGPREFIX}-sqlite2-2.6.0
 CATEGORIES=	databases python
-MASTER_SITES=	http://oss.itsystementwicklung.de/download/pysqlite/2.5/2.5.5/
+MASTER_SITES=	http://pysqlite.googlecode.com/files/
 
 MAINTAINER=	tsarna@NetBSD.org
-HOMEPAGE=	http://pysqlite.org/
+HOMEPAGE=	http://pysqlite.googlecode.com/
 COMMENT=	SQLite database adapter for Python
 
 PKG_DESTDIR_SUPPORT=	user-destdir
@@ -15,11 +15,7 @@ PYDISTUTILSPKG=	yes
 
 .include "../../lang/python/extension.mk"
 
-.if defined(PYPACKAGE) && \
-    (${PYPACKAGE} == "python23" || ${PYPACKAGE} == "python24")
-pre-configure:
-	rm ${WRKSRC}/pysqlite2/test/py25tests.py
-.else
+.if !defined(PYPACKAGE) || ${PYPACKAGE} != "python24"
 PLIST.python25=	yes
 .endif
 

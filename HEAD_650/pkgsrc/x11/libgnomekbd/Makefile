@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.23 2010/07/14 16:16:49 drochner Exp $
+# $NetBSD: Makefile,v 1.26 2010/11/24 20:37:33 drochner Exp $
 #
 
-DISTNAME=	libgnomekbd-2.30.2
+DISTNAME=	libgnomekbd-2.32.0
 CATEGORIES=	x11
-MASTER_SITES=	${MASTER_SITE_GNOME:=sources/libgnomekbd/2.30/}
+MASTER_SITES=	${MASTER_SITE_GNOME:=sources/libgnomekbd/2.32/}
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
@@ -24,8 +24,6 @@ PKGCONFIG_OVERRIDE+=	libgnomekbd.pc.in
 PKGCONFIG_OVERRIDE+=	libgnomekbdui.pc.in
 
 .include "../../devel/GConf/schemas.mk"
-.include "../../sysutils/dbus/buildlink3.mk"
-.include "../../sysutils/dbus-glib/buildlink3.mk"
 .include "../../x11/gtk2/buildlink3.mk"
 BUILDLINK_API_DEPENDS.libxklavier+=	libxklavier>=4.0
 .include "../../x11/libxklavier/buildlink3.mk"

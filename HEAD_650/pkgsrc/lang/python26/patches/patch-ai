@@ -1,8 +1,8 @@
 $NetBSD$
 
---- pyconfig.h.in.orig	2009-05-04 13:30:43.000000000 +0000
+--- pyconfig.h.in.orig	2009-10-27 12:30:12.000000000 +0000
 +++ pyconfig.h.in
-@@ -1020,6 +1020,9 @@
+@@ -1023,6 +1023,9 @@
  /* Define on NetBSD to activate all library features */
  #undef _NETBSD_SOURCE
  

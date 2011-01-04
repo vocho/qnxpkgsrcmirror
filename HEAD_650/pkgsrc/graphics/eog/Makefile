@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.56 2010/07/06 15:33:39 drochner Exp $
+# $NetBSD: Makefile,v 1.60 2010/12/23 11:44:36 dsainty Exp $
 #
 
-DISTNAME=	eog-2.30.2
+DISTNAME=	eog-2.32.1
 CATEGORIES=	graphics gnome
-MASTER_SITES=	${MASTER_SITE_GNOME:=sources/eog/2.30/}
+MASTER_SITES=	${MASTER_SITE_GNOME:=sources/eog/2.32/}
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
@@ -33,7 +33,7 @@ BUILDLINK_API_DEPENDS.glib2+=	glib2>=2.15.3
 BUILDLINK_API_DEPENDS.gnome-icon-theme+= gnome-icon-theme>=2.20.0
 .include "../../graphics/gnome-icon-theme/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
-.include "../../graphics/jpeg/buildlink3.mk"
+.include "../../mk/jpeg.buildlink3.mk"
 .include "../../graphics/lcms/buildlink3.mk"
 BUILDLINK_API_DEPENDS.libexif+=	libexif>=0.6.12
 .include "../../graphics/libexif/buildlink3.mk"

@@ -1,62 +1,27 @@
-$NetBSD$
+$NetBSD: patch-bf,v 1.1 2010/11/15 13:05:45 adam Exp $
 
---- src/3rdparty/webkit/JavaScriptCore/runtime/Collector.cpp.orig	2010-06-02 02:03:10.000000000 +0000
-+++ src/3rdparty/webkit/JavaScriptCore/runtime/Collector.cpp
-@@ -96,10 +96,10 @@ extern int *__libc_stack_end;
- #endif
+--- src/3rdparty/webkit/JavaScriptCore/JavaScriptCore.pro.orig	2010-11-06 01:55:20.000000000 +0000
++++ src/3rdparty/webkit/JavaScriptCore/JavaScriptCore.pro
+@@ -4,7 +4,7 @@ include($$PWD/../WebKit.pri)
+ include(JavaScriptCore.pri)
  
- #if PLATFORM(QNX)
--#include <fcntl.h>
--#include <sys/procfs.h>
--#include <stdio.h>
--#include <errno.h>
-+#include <sys/storage.h>
-+#ifndef ROUNDOUP
-+#define ROUNDUP(x, m)	(((x) + (m) - 1) & ~((m) - 1))
-+#endif
- #endif
+ TEMPLATE = lib
+-CONFIG += staticlib
++CONFIG += buildling-libs
+ # Don't use JavaScriptCore as the target name. qmake would create a JavaScriptCore.vcproj for msvc
+ # which already exists as a directory
+ TARGET = $$JAVASCRIPTCORE_TARGET
+@@ -33,10 +33,11 @@ CONFIG(QTDIR_build) {
+ # WebCore adds these config only when in a standalone build.
+ # qbase.pri takes care of that when in a QTDIR_build
+ # Here we add the config for both cases since we don't include qbase.pri
+-contains(QT_CONFIG, reduce_exports):CONFIG += hide_symbols
+-unix:contains(QT_CONFIG, reduce_relocations):CONFIG += bsymbolic_functions
++#contains(QT_CONFIG, reduce_exports):CONFIG += hide_symbols
++#unix:contains(QT_CONFIG, reduce_relocations):CONFIG += bsymbolic_functions
  
- #endif
-@@ -520,33 +520,6 @@ static void* getStackBase(void* previous
- }
- #endif
- 
--#if PLATFORM(QNX)
--static inline void *currentThreadStackBaseQNX()
--{
--    static void* stackBase = 0;
--    static size_t stackSize = 0;
--    static pthread_t stackThread;
--    pthread_t thread = pthread_self();
--    if (stackBase == 0 || thread != stackThread) {
--        struct _debug_thread_info threadInfo;
--        memset(&threadInfo, 0, sizeof(threadInfo));
--        threadInfo.tid = pthread_self();
--        int fd = open("/proc/self", O_RDONLY);
--        if (fd == -1) {
--            LOG_ERROR("Unable to open /proc/self (errno: %d)", errno);
--            return 0;
--        }
--        devctl(fd, DCMD_PROC_TIDSTATUS, &threadInfo, sizeof(threadInfo), 0);
--        close(fd);
--        stackBase = reinterpret_cast<void*>(threadInfo.stkbase);
--        stackSize = threadInfo.stksize;
--        ASSERT(stackBase);
--        stackThread = thread;
--    }
--    return static_cast<char*>(stackBase) + stackSize;
--}
--#endif
--
- static inline void* currentThreadStackBase()
- {
- #if PLATFORM(DARWIN)
-@@ -573,7 +546,7 @@ static inline void* currentThreadStackBa
-         );
-     return static_cast<void*>(pTib->StackBase);
- #elif PLATFORM(QNX)
--    return currentThreadStackBaseQNX();
-+    return (void *)ROUNDUP((uintptr_t)__tls(), __PAGESIZE);
- #elif PLATFORM(SOLARIS)
-     stack_t s;
-     thr_stksegment(&s);
+ CONFIG(QTDIR_build) {
++    include($$QT_SOURCE_TREE/src/qbase.pri)
+     # Remove the following 2 lines if you want debug information in JavaScriptCore
+     CONFIG -= separate_debug_info
+     CONFIG += no_debug_info

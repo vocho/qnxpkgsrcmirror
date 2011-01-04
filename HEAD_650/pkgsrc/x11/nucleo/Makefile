@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.14 2010/07/14 11:11:13 sbd Exp $
+# $NetBSD: Makefile,v 1.16 2010/11/15 22:59:06 abs Exp $
 #
 
 DISTNAME=	nucleo-0.7.5
-PKGREVISION=	5
+PKGREVISION=	7
 CATEGORIES=	x11
 MASTER_SITES=	http://insitu.lri.fr/metisse/download/nucleo/
 EXTRACT_SUFX=	.tar.bz2

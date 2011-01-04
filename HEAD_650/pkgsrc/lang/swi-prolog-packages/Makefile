@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.26 2010/05/18 08:29:55 asau Exp $
+# $NetBSD: Makefile,v 1.28 2010/12/23 11:44:48 dsainty Exp $
 
 .include "../../lang/swi-prolog-lite/Makefile.common"
 
@@ -29,7 +29,7 @@ BUILD_DIRS+=		packages
 INSTALL_DIRS+=		packages
 
 INSTALLATION_DIRS=	bin lib/swi-prolog-${PKGVERSION_NOREV}/bin/${MACHINE_GNU_PLATFORM} \
-			lib/swi-prolog-${PKGVERSION_NOREV}/include
+			lib/swi-prolog-${PKGVERSION_NOREV}/include ${PKGMANDIR}/man1
 
 XPCE_VERSION=		6.6.66
 PLIST_SUBST+=		XPCE_VERSION=${XPCE_VERSION}
@@ -73,6 +73,8 @@ MAKE_ENV+=		DISPLAY=${DISPLAY:Q}
 
 post-install: teardownx
 	${RM} -f ${LOCALBASE}/lib/swi-prolog-${SWIPLVERS}/xpce-${XPCE_VERSION}/prolog/lib/.pwd
+	${INSTALL_DATA} ${WRKSRC}/packages/xpce/man/xpce-client.1 ${DESTDIR}${PREFIX}/${PKGMANDIR}/man1/xpce-client.1
+	${INSTALL_DATA} ${WRKSRC}/packages/xpce/man/xpce.1 ${DESTDIR}${PREFIX}/${PKGMANDIR}/man1/xpce.1
 teardownx:
 	${ECHO} teardownx: Xvfb-PID: `${CAT} ${WRKDIR}/.Xvfb.pid`
 	sleep 5
@@ -84,7 +86,7 @@ CHECK_WRKREF_SKIP=	lib/swi-prolog-${SWIPLVERS}/xpce-${XPCE_VERSION}/lib/${MACHIN
 
 
 .include "../../lang/swi-prolog-lite/buildlink3.mk"
-.include "../../graphics/jpeg/buildlink3.mk"
+.include "../../mk/jpeg.buildlink3.mk"
 .include "../../devel/gmp/buildlink3.mk"
 .include "../../devel/ncurses/buildlink3.mk"
 .include "../../devel/readline/buildlink3.mk"

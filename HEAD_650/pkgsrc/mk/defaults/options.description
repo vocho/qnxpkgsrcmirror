@@ -61,6 +61,7 @@ cjk			Enable Chinese/Japanese/Korean support.
 clamav			Enable ClamAV support.
 claws-mail-jpilot	Add jpilot support.
 clisp			Common/C Lisp.
+clutter			Use Clutter for graphics support.
 compface		Enable compface support.
 coqide			Enable ide support for coq.
 courier-dsn		Delivery Status Notification (DNS) mail delivery.
@@ -109,6 +110,7 @@ dvdread			Enable reproduction of DVDs.
 dvi			Enable device independent file format (mostly TeX) support.
 eb			Enable EB dictionary library support.
 ecl			Use Embeddable Common Lisp.
+eekboard		Use eekboard for virtual keyboard support.
 efnet			Enable tweaks to support EFNet.
 elinks-exmode		Enable vi-like command entry.
 elinks-fastmem		Allow direct use of system memory allocation functions.
@@ -118,6 +120,7 @@ emacs-xaw3d		Emacs should use Xaw3D for the scrollbar.
 embedded-server		Enable embedded server support for MySQL.
 enchant			Add spell checking support using enchant.
 enchant-zemberek	Add spell checking support for Turkish.
+epub			Enable epub support.
 epoll			Enable support for epoll I/O event notification facility.
 esound			Enable support for the Enlightment Sound Daemon.
 evolution-data-server	Enable support for evolution-data-server.
@@ -148,6 +151,7 @@ flac			Enable FLAC support.
 freeradius-simul-use	Enable Simultaneous-Use.
 freetype		Enable freetype support.
 ftp			Enable File Transfer Protocol (FTP) support.
+fts			Enable full-text searching.
 gd			Use GD to render graphical output.
 gdal			Use the GDAL library.
 gdb6-tui		Build the tui application.
@@ -164,6 +168,7 @@ gmp-fat			Build-in all x86 assembler code, detecting CPU at run-time.
 gnome			Enable GNOME support.
 gnome-keyring		Enable GNOME keyring support.
 gnutls			Enable GNU TLS support.
+goffice			Enable goffice support.
 gopher			Enable support for the Gopher information system.
 gpgme			Enable gpg support, by using the gpgme library.
 gqmpeg-japanese		Japanese ID3 tag support.
@@ -172,6 +177,7 @@ graphicsmagick		Use GraphicsMagick as imaging library.
 groff-docs		Install documentation images.
 gsasl			Enable SASL support with gsasl.
 gsl			Use GNU Scientific Library.
+gssapi			Enable gssapi support.
 gstreamer		Enable gstreamer support.
 gtk			Enable support for GTK.
 gtk2			Enable support for GTK2.
@@ -233,6 +239,7 @@ lablgtk			Use lablgtk.
 lablgtk1		Use lablgtk1 (GTK1).
 lame			Use the lame encoder to create MP3 files.
 lang-af			Add Afrikaans language support.
+lang-ar			Add Arabic language support.
 lang-be			Add Belarusian language support.
 lang-bg			Add Bulgarian language support.
 lang-bs			Add Bosnian language support.
@@ -242,11 +249,15 @@ lang-da			Add Danish language support.
 lang-de			Add German language support.
 lang-el			Add Greek language support.
 lang-es			Add Spanish language support.
+lang-et			Add Estonian language support.
 lang-fa			Add Persian language support.
 lang-fi			Add Finnish language support.
 lang-fr			Add French language support.
+lang-gl			Add Galician language support.
+lang-gn			Add Guarani language support.
 lang-gu			Add Gujarati language support.
 lang-he			Add Hebrew language support.
+lang-hi			Add Hindi language support.
 lang-hr			Add Croatian language support.
 lang-hu			Add Hungarian language support.
 lang-id			Add Indonesian language support.
@@ -254,14 +265,18 @@ lang-is			Add Icelandic language support.
 lang-it			Add Italian language support.
 lang-ja			Add Japanese language support.
 lang-ko			Add Korean language support.
+lang-ku			Add Kurdish language support.
 lang-lt			Add Lithuanian language support.
 lang-lv			Add Latvian language support.
+lang-mr			Add Marathi language support.
+lang-ms			Add Malay language support.
 lang-nb			Add Norwegian Bokmal (book language) language support.
 lang-nl			Add Dutch language support.
 lang-no			Add Norwegian language support.
 lang-pl			Add Polish language support.
 lang-pt			Add Portuguese language support.
 lang-pt-br		Add Brazilian Portuguese language support.
+lang-rm			Add Rhaeto-Romance language support.
 lang-ro			Add Romanian language support.
 lang-ru			Add Russian language support.
 lang-sk			Add Slovak language support.
@@ -287,6 +302,8 @@ liblqr			Enable liblqr (liquid rescale) support.
 libmp4v2		Enable libmp4v2 (MP4) support.
 libmtp			Enable MTP via libmtp support.
 libofx			Enable OFX support.
+libsmi			Use libsmi for SMI MIB support.
+libsoup			Use libsoup for SOUP support.
 libspiff		Use libspiff for XML shareable playlist support.
 libssh2 	 	Use libssh2 for SSHv2 protocol support.
 libthai			Use libthai for Thai word segmentation.
@@ -321,6 +338,7 @@ mikmod			Enable MikMod sound library.
 mitshm			Enable MIT-SHM X extension support.
 mlib			Enable usage of medialib (SunOS only).
 mmx			Enable MMX support (i386 only).
+modperl			Use modperl to improve speed of Perl scripts in Apache
 modperl1		Use modperl 1.x as the CGI manager (with Apache 1.x).
 modperl2		Use modperl 2.x as the CGI manager (with Apache 2.x).
 modplug			Use for decoding mod-like music formats.
@@ -418,6 +436,7 @@ qt3			Enable support for QT3.
 quartz			Enable Quartz support on Mac OS X.
 readline		Enable use of GNU readline library.
 rsaref			Use RSAREF library.
+rtree			Enable R-tree support.
 ruby			Enable Ruby support.
 ruby-build-ri-db	Build and install database for Ruby's ri utility.
 samplerate		Enable libsamplerate support.
@@ -489,6 +508,7 @@ sybase			Enable Sybase/MS SQL Server support.
 syncdir			Force synchronous link() and related syscalls.
 syslog			Enable syslog support.
 syslogng-spoof		Spoof the original source address of forwarded packets.
+terminfo		Use terminfo.
 tcl			Enable Tcl scripting support.
 tcpwrappers		Enable tcpwrappers support.
 tests			Build and install tests.
@@ -521,6 +541,7 @@ unrealircd-topicisnuhost	/topic command to show the nick!user@host of the person
 unrealircd-ziplinks	Compress data before transmitting it between servers.
 upnp			Enable support for UPnP.
 uucp			Enable support for uucp.
+vdpau			Enable support for VDPAU.
 vflib			Enable support for Japanese vector font library.
 via-padlock		Enable support for the VIA PadLock Security Engine.
 viewvc-php		Use php to colorize .php and .inc files.
@@ -555,6 +576,7 @@ xscreensaver-webcollage	Install webcollage screensaver.
 xterm-256color		Enable 256 color support.
 xterm-88color		Enable 88 color support.
 xterm-luit		Enable locale <> UTF encoding translation.
+xtest			Use XTEST Extension Library.
 xvid			Enable usage of XVid codecs.
 zaptel			Enable usage of Zaptel drivers.
 zenmap			Enable nmap GUI frontend.

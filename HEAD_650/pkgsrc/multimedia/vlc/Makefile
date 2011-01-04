@@ -1,17 +1,18 @@
-# $NetBSD: Makefile,v 1.92 2010/07/08 18:48:05 drochner Exp $
+# $NetBSD: Makefile,v 1.100 2010/12/23 11:44:52 dsainty Exp $
 #
 
 DISTNAME=		vlc-${VLC_VERSION}
-PKGREVISION=		1
+PKGREVISION=		5
 CATEGORIES=		multimedia
 MASTER_SITES=		http://download.videolan.org/pub/videolan/vlc/${VLC_VERSION}/
 EXTRACT_SUFX=		.tar.bz2
 
 VLC_VERSION=		1.0.6
 
-MAINTAINER=		ahoka@NetBSD.org
-HOMEPAGE=		http://videolan.org/
+MAINTAINER=		pkgsrc-users@NetBSD.org
+HOMEPAGE=		http://www.videolan.org/
 COMMENT=		VLC media player and streaming server
+LICENSE=		gnu-gpl-v2
 
 CONFLICTS=		vlc07-[0-9]* vlc08-[0-9]*
 
@@ -39,14 +40,15 @@ PLIST.cdda=		yes
 BUILDLINK_API_DEPENDS.zlib+=		zlib>=1.2.0
 BUILDLINK_API_DEPENDS.vcdimager+=	vcdimager>=0.7.20nb1
 
-CONFIGURE_ARGS+=	--disable-speex # needs unstable 1.1.x branch
+CONFIGURE_ARGS+=	--disable-speex # needs unstable 1.1.x branch [1.2 in pkgsrc]
 CONFIGURE_ARGS+=	--disable-smb
 
 CONFIGURE_ARGS+=	--enable-cddax \
 			--enable-dvdread \
 			--enable-flac \
 			--enable-live555 \
-			--enable-theora
+			--enable-theora \
+			--enable-lua=no
 
 # Build optimalized modules
 .if ${MACHINE_ARCH} == "i386" || ${MACHINE_ARCH} == "x86_64"
@@ -131,7 +133,7 @@ CHECK_WRKREF_SKIP=	lib/libvlccore.a \
 .include "../../audio/libcddb/buildlink3.mk"
 .include "../../misc/libcdio/buildlink3.mk"
 
-.include "../../graphics/jpeg/buildlink3.mk"
+.include "../../mk/jpeg.buildlink3.mk"
 .include "../../net/liblive/buildlink3.mk"
 .include "../../converters/fribidi/buildlink3.mk"
 .include "../../devel/libebml/buildlink3.mk"

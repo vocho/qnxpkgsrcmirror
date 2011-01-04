@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.29 2009/10/12 10:18:09 rhaen Exp $
+# $NetBSD: Makefile,v 1.31 2010/12/17 18:30:10 rhaen Exp $
 
-DISTNAME=	Log-Dispatch-2.26
+DISTNAME=	Log-Dispatch-2.28
 PKGNAME=	p5-${DISTNAME}
 SVR4_PKGNAME=	p5ldi
 CATEGORIES=	devel perl5
@@ -14,7 +14,6 @@ LICENSE=	${PERL5_LICENSE}
 PKG_DESTDIR_SUPPORT=	user-destdir
 DEPENDS+=	p5-Params-Validate>=0.15:../../devel/p5-Params-Validate
 
-PERL5_MODULE_TYPE=	Module::Build
 PERL5_PACKLIST=		auto/Log/Dispatch/.packlist
 
 .include "../../lang/perl5/module.mk"

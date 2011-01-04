@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.74 2010/03/05 14:32:26 wiz Exp $
+# $NetBSD: Makefile,v 1.76 2010/11/29 13:57:20 hauke Exp $
 
 DISTNAME=	unzip60
 PKGNAME=	unzip-6.0
@@ -22,11 +22,17 @@ CONFLICTS=	fcrackzip<1.0nb1
 
 MAKE_FILE=	unix/Makefile
 BUILD_TARGET=	generic_zlib unzipsfx
+
 .if ${OPSYS:M*BSD} != "" || ${OPSYS} == "Darwin"
-CFLAGS+=	-DBSD
+CPPFLAGS+=	-DBSD
 .endif
-CFLAGS+=	-I. -DUNIX -Dunix -DUSE_UNSHRINK
-CFLAGS.SunOS+=	-DNO_LCHMOD
+.if (${OPSYS} == "SunOS" || \
+     ${OPSYS} == "OSF1"  || \
+    (${OPSYS} == "Darwin" && !empty(OS_VERSION:M[01234678].*))) 
+CPPFLAGS+=	-DNO_LCHMOD
+.endif
+CPPFLAGS+=	-DUNIX -Dunix -DUSE_UNSHRINK -I.
+
 CFLAGS.QNX+=	-DNO_LCHMOD
 MAKE_FLAGS+=	CF=${CPPFLAGS:Q}\ ${CFLAGS:Q}
 MAKE_FLAGS+=	LF2=${_STRIPFLAG_CC:Q}\ ${LDFLAGS:Q}\ -lz

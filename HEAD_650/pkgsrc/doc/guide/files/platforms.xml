@@ -1,4 +1,4 @@
-<!-- $NetBSD: platforms.xml,v 1.62 2010/04/25 13:15:48 obache Exp $ -->
+<!-- $NetBSD: platforms.xml,v 1.64 2010/09/02 02:37:59 obache Exp $ -->
 
 <chapter id="platforms">
   <title>Using pkgsrc on systems other than &os;</title>

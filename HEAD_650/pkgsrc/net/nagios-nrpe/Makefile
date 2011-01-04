@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.11 2009/04/16 09:32:35 apb Exp $
+# $NetBSD: Makefile,v 1.14 2010/09/29 10:52:25 obache Exp $
 #
 
 DISTNAME=		nrpe-2.12
@@ -7,15 +7,16 @@ PKGREVISION=		1
 CATEGORIES=		net sysutils
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=nagios/}
 
-MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://sourceforge.net/projects/nagios/
+MAINTAINER=		pkgsrc-users@NetBSD.org
+HOMEPAGE=		http://sourceforge.net/projects/nagios/
 COMMENT=		Nagios remote program execution daemon
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 .include "../../mk/bsd.prefs.mk"
 
 GNU_CONFIGURE=		yes
 USE_TOOLS+=		perl
-USE_PKGINSTALL=		yes
 
 PKG_SYSCONFSUBDIR=	nagios
 CONFIGURE_ARGS+=	--libexecdir=${PREFIX}/libexec/nagios
@@ -41,9 +42,9 @@ INSTALLATION_DIRS=	sbin libexec/nagios share/examples/nagios share/examples/rc.d
 .include "options.mk"
 
 do-install:
-	${INSTALL_PROGRAM} ${WRKSRC}/src/nrpe ${PREFIX}/sbin
-	${INSTALL_PROGRAM} ${WRKSRC}/src/check_nrpe ${PREFIX}/libexec/nagios
-	${INSTALL_DATA} ${WRKSRC}/sample-config/nrpe.cfg ${PREFIX}/share/examples/nagios
-	${INSTALL_SCRIPT} ${WRKDIR}/nrpe ${PREFIX}/${RCD_SCRIPTS_EXAMPLEDIR}
+	${INSTALL_PROGRAM} ${WRKSRC}/src/nrpe ${DESTDIR}${PREFIX}/sbin
+	${INSTALL_PROGRAM} ${WRKSRC}/src/check_nrpe ${DESTDIR}${PREFIX}/libexec/nagios
+	${INSTALL_DATA} ${WRKSRC}/sample-config/nrpe.cfg ${DESTDIR}${PREFIX}/share/examples/nagios
+	${INSTALL_SCRIPT} ${WRKDIR}/nrpe ${DESTDIR}${PREFIX}/${RCD_SCRIPTS_EXAMPLEDIR}
 
 .include "../../mk/bsd.pkg.mk"

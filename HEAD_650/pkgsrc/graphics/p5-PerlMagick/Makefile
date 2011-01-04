@@ -1,11 +1,8 @@
-# $NetBSD: Makefile,v 1.70 2010/06/13 22:44:40 wiz Exp $
-
-PKG_DESTDIR_SUPPORT=	user-destdir
+# $NetBSD: Makefile,v 1.73 2010/12/14 10:08:40 adam Exp $
 
 .include "../../graphics/ImageMagick/Makefile.common"
 
 PKGNAME=	p5-PerlMagick-${DISTVERSION}
-PKGREVISION=	4
 
 SVR4_PKGNAME=	p5pma
 
@@ -17,6 +14,7 @@ DISTINFO_FILE=	${.CURDIR}/../../graphics/ImageMagick/distinfo
 FILESDIR=	${.CURDIR}/../../graphics/ImageMagick/files
 PATCHDIR=	${.CURDIR}/../../graphics/ImageMagick/patches
 
+PKG_DESTDIR_SUPPORT=	user-destdir
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
 
 USE_LIBTOOL=		yes

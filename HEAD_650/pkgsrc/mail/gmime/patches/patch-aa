@@ -1,4 +1,4 @@
-$NetBSD: patch-aa,v 1.6 2010/02/11 15:44:29 wiz Exp $
+$NetBSD: patch-aa,v 1.8 2010/09/08 11:56:24 drochner Exp $
 
 Fix for http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0409
 from Fedora.

@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.7 2010/02/03 10:49:40 wiz Exp $
+# $NetBSD: Makefile,v 1.10 2010/10/22 19:54:01 drochner Exp $
 #
 
-DISTNAME=	gmime-2.4.15
+DISTNAME=	gmime-2.4.20
 PKGNAME=	${DISTNAME:S/gmime/gmime24/}
 CATEGORIES=	mail
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gmime/2.4/}
@@ -13,7 +13,7 @@ LICENSE=	gnu-lgpl-v2.1
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
-CONFLICTS=	gmime-[0-9]*
+CONFLICTS=	gmime<2.2.25nb2
 
 USE_PKGLOCALEDIR=	yes
 USE_LIBTOOL=		yes

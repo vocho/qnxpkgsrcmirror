@@ -1,14 +1,15 @@
-# $NetBSD: Makefile,v 1.18 2010/06/13 22:45:37 wiz Exp $
+# $NetBSD: Makefile,v 1.21 2010/11/15 22:58:58 abs Exp $
 #
 
-DISTNAME=	gnome-sharp-2.24.1
-PKGREVISION=	7
+DISTNAME=	gnome-sharp-2.24.2
+PKGREVISION=	1
 CATEGORIES=	x11
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gnome-sharp/2.24/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.mono-project.com/GtkSharp
 COMMENT=	C\# bindings for the GNOME platform
+LICENSE=	gnu-lgpl-v2.1
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 

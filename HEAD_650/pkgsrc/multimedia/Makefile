@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.166 2010/07/28 09:05:38 drochner Exp $
+# $NetBSD: Makefile,v 1.169 2010/10/19 16:44:22 abs Exp $
 #
 
 COMMENT=	Multimedia utilities
@@ -60,6 +60,7 @@ SUBDIR+=	handbrake
 SUBDIR+=	kaffeine
 SUBDIR+=	kdemultimedia3
 SUBDIR+=	kdemultimedia4
+SUBDIR+=	kdenlive
 SUBDIR+=	kmplayer
 SUBDIR+=	kmplayer-kde3
 SUBDIR+=	libassetml
@@ -81,6 +82,7 @@ SUBDIR+=	libnms
 SUBDIR+=	libogg
 SUBDIR+=	libtheora
 SUBDIR+=	libtheora-docs
+SUBDIR+=	libvdpau
 SUBDIR+=	lsdvd
 SUBDIR+=	mediainfo
 SUBDIR+=	mediatomb
@@ -90,6 +92,7 @@ SUBDIR+=	mjpegtools
 SUBDIR+=	mkv2mp4
 SUBDIR+=	mkvtoolnix
 SUBDIR+=	mkvtoolnix-old
+SUBDIR+=	mlt
 SUBDIR+=	mpeg-lib
 SUBDIR+=	mpeg4ip
 SUBDIR+=	mpeg_encode

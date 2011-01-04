@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.3 2010/07/14 11:11:18 sbd Exp $
+# $NetBSD: Makefile,v 1.6 2010/11/15 22:56:39 abs Exp $
 #
 
-DISTNAME=	kdevelop-4.0.0
-PKGNAME=	kdevelop4-4.0.0
-PKGREVISION=	2
+DISTNAME=	kdevelop-4.1.0
+PKGNAME=	kdevelop4-4.1.0
+PKGREVISION=	1
 CATEGORIES=	devel
-MASTER_SITES=	${MASTER_SITE_KDE:=kdevelop/4.0.0/src/}
+MASTER_SITES=	${MASTER_SITE_KDE:=kdevelop/4.1.0/src/}
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	frank@fthieme.net
@@ -32,6 +32,7 @@ BUILDLINK_DEPMETHOD.qt4-tools=	full
 .include "../../devel/boost-headers/buildlink3.mk"
 .include "../../devel/kdevplatform/buildlink3.mk"
 .include "../../devel/subversion-base/buildlink3.mk"
+.include "../../misc/kdeutils4/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
 
 .include "../../mk/bsd.pkg.mk"

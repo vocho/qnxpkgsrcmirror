@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.7 2010/01/17 12:02:39 wiz Exp $
+# $NetBSD: Makefile,v 1.9 2010/11/01 00:08:15 wiz Exp $
 #
 
 DISTNAME=	CSP-0.32
-PKGREVISION=	3
+PKGREVISION=	4
 CATEGORIES=	security
 MASTER_SITES=	ftp://ftp.su.se/pub/users/leifj/
 DISTFILES=	${DISTNAME}${EXTRACT_SUFX} ${CSPGUIDE}
 
-MAINTAINER=	cube@cubidou.net
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://devel.it.su.se/pub/jsp/polopoly.jsp?d=1026&a=3290
 COMMENT=	Simple PKI Toolkit
 

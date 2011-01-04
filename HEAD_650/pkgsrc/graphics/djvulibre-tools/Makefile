@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.8 2010/01/18 09:58:57 wiz Exp $
+# $NetBSD: Makefile,v 1.10 2010/12/23 11:44:35 dsainty Exp $
 
-DISTNAME=		djvulibre-3.5.21
-PKGNAME=		djvulibre-tools-3.5.21
-PKGREVISION=		2
+DISTNAME=		djvulibre-3.5.22
+PKGNAME=		djvulibre-tools-3.5.22
 CATEGORIES=		graphics
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=djvu/}
 
@@ -28,6 +27,6 @@ INSTALL_DIRS=		tools xmltools
 REPLACE_BASH+=		tools/any2djvu
 
 .include "../../graphics/djvulibre-lib/buildlink3.mk"
-.include "../../graphics/jpeg/buildlink3.mk"
+.include "../../mk/jpeg.buildlink3.mk"
 .include "../../graphics/tiff/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

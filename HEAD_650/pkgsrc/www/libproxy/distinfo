@@ -1,4 +1,4 @@
-$NetBSD: distinfo,v 1.5 2009/12/15 11:00:11 wiz Exp $
+$NetBSD: distinfo,v 1.6 2010/08/17 13:10:22 seanb Exp $
 
 SHA1 (libproxy-0.3.0.tar.gz) = 9d0d29b352a2cc4d9511d362bc02162eca91df59
 RMD160 (libproxy-0.3.0.tar.gz) = 270d216a1e9c1d174ffc1572d2bdaa30bb51d034

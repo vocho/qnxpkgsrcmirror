@@ -1,6 +1,6 @@
 $NetBSD$
 
---- camel/camel-file-utils.c.orig	2010-06-20 12:15:39.000000000 +0000
+--- camel/camel-file-utils.c.orig	2010-09-21 06:21:00.000000000 +0000
 +++ camel/camel-file-utils.c
 @@ -32,6 +32,7 @@
  #include <unistd.h>
@@ -8,5 +8,5 @@ $NetBSD$
  #include <sys/types.h>
 +#include <sys/select.h>
  
- #include <glib.h>
+ #include <glib/gi18n-lib.h>
  

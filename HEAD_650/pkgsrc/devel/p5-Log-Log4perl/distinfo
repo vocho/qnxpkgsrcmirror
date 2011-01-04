@@ -1,5 +1,5 @@
-$NetBSD: distinfo,v 1.11 2010/03/03 16:53:59 sno Exp $
+$NetBSD: distinfo,v 1.13 2010/12/17 18:34:55 rhaen Exp $
 
-SHA1 (Log-Log4perl-1.28.tar.gz) = 5d0bf5627919dce0df8ec4a1be179e5819906d17
-RMD160 (Log-Log4perl-1.28.tar.gz) = 20d89f32b52e7685a016a644f8af90b33f859a41
-Size (Log-Log4perl-1.28.tar.gz) = 256824 bytes
+SHA1 (Log-Log4perl-1.31.tar.gz) = 1306ceab010ef2c459f9257231d6ce5e76f4a521
+RMD160 (Log-Log4perl-1.31.tar.gz) = a59ad4dc081b5b17e8f5c7bf0b55106b0f34cc92
+Size (Log-Log4perl-1.31.tar.gz) = 260741 bytes

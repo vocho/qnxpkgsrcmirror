@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.150 2010/08/01 05:24:00 obache Exp $
+# $NetBSD: Makefile,v 1.153 2010/12/03 00:17:21 taca Exp $
 
 OPENSSL_SNAPSHOT?=	# empty
 OPENSSL_STABLE?=	# empty
-OPENSSL_VERS?=		0.9.8o
+OPENSSL_VERS?=		0.9.8q
 
 .if empty(OPENSSL_SNAPSHOT)
 DISTNAME=	openssl-${OPENSSL_VERS}
@@ -37,6 +37,7 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 .include "../../mk/bsd.prefs.mk"
 .include "../../mk/compiler.mk"
 
+EXTRACT_USING=		gtar
 USE_TOOLS+=		gmake perl
 TEST_TARGET=		tests
 MAKE_JOBS_SAFE=		no

@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.9 2010/06/13 22:45:06 wiz Exp $
+# $NetBSD: Makefile,v 1.13 2010/11/15 22:58:07 abs Exp $
 
-DISTNAME=	phonon-4.4.0
+DISTNAME=	phonon-4.4.2
 PKGREVISION=	1
 CATEGORIES=	multimedia
-MASTER_SITES=	${MASTER_SITE_KDE:=phonon/4.4.0/}
-EXTRACT_SUFX=	.tgz
+MASTER_SITES=	${MASTER_SITE_KDE:=phonon/4.4.2/}
+EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	markd@NetBSD.org
 HOMEPAGE=	http://phonon.kde.org
@@ -16,9 +16,7 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 # BUILD_MAKE_FLAGS+= VERBOSE=1
 
 BUILD_DEPENDS+=	automoc4>=0.9.83:../../devel/automoc4
-DEPENDS+=	xine-xcb>=1.1.9:../../x11/xine-xcb
 
-WRKSRC=		${WRKDIR}/phonon-4.4
 USE_TOOLS+=	pkg-config
 USE_LANGUAGES=	c c++
 USE_CMAKE=	yes
@@ -34,6 +32,7 @@ pre-configure:
 
 .include "../../multimedia/gstreamer0.10/buildlink3.mk"
 .include "../../multimedia/gst-plugins0.10-base/buildlink3.mk"
+BUILDLINK_ABI_DEPENDS.xine-lib?=	xine-lib>=1.1.19nb1
 .include "../../multimedia/xine-lib/buildlink3.mk"
 .include "../../x11/libxcb/buildlink3.mk"
 .include "../../x11/qt4-libs/buildlink3.mk"

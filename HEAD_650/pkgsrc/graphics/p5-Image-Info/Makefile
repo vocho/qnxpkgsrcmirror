@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.25 2010/01/20 14:42:51 wiz Exp $
+# $NetBSD: Makefile,v 1.27 2010/12/02 12:18:12 wiz Exp $
 #
 
-DISTNAME=	Image-Info-1.30
+DISTNAME=	Image-Info-1.31
 PKGNAME=	p5-${DISTNAME}
 SVR4_PKGNAME=	p5iin
 CATEGORIES=	graphics perl5

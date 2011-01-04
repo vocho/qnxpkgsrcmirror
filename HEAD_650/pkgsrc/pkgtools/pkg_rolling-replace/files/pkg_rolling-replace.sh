@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# $NetBSD: pkg_rolling-replace.sh,v 1.28 2010/02/11 12:54:27 tnn Exp $
+# $NetBSD: pkg_rolling-replace.sh,v 1.30 2010/12/20 15:39:09 gdt Exp $
 #<license>
 # Copyright (c) 2006 BBN Technologies Corp.  All rights reserved.
 #
@@ -413,13 +413,16 @@ while [ -n "$REPLACE_TODO" ]; do
 
     echo "${OPI} Tsorting dependency graph"
     TSORTED=$(echo $DEPGRAPH_INSTALLED $DEPGRAPH_SRC | tsort)
+    pkgdir=
     for pkg in $TSORTED; do
         if is_member $pkg $REPLACE_TODO; then
+	    pkgdir=$(${PKG_INFO} -Q PKGPATH $pkg)
+	    [ -n "$pkgdir" ] || abort "Couldn't extract PKGPATH from installed package $pkg"
             break;
         fi
     done
-    pkgdir=$(${PKG_INFO} -Q PKGPATH $pkg)
-    [ -n "$pkgdir" ] || abort "Couldn't extract PKGPATH from installed package $pkg"
+    # loop should never exit without selecting a package
+    [ -n "$pkgdir" ] || abort "pkg_chk reports the following packages need replacing, but they are not installed: $REPLACE_TODO"
 
     echo "${OPI} Selecting $pkg ($pkgdir) as next package to replace"
     sleep 1
@@ -445,13 +448,20 @@ while [ -n "$REPLACE_TODO" ]; do
     # tsorted order and run 'make install' on it.  This seems like
     # such a rare case that the added complexity isn't worth it.
 
+    # Set PKGNAME_REQD to give underlying make processes a chance to
+    # set options derived from the package name.  For example,
+    # the appropriate version of Python can be derived from the
+    # package name (so, when building py25-foo, use python-2.5,
+    # not python-2.6).
+    MAKE_SET_VARS='PKGNAME_REQD=${pkg}-*'
+
     if ! is_member $pkg $DEPENDS_CHECKED; then
 	echo "${OPI} Checking if $pkg has new depends..."
 	OLD_DEPENDS=$(${PKG_INFO} -Nq $pkg | sed 's/-[0-9][^-]*$//')
 	NEW_DEPENDS=
 	cd "$PKGSRCDIR/$pkgdir"
-	bdeps=$(${MAKE} show-depends VARNAME=BUILD_DEPENDS)
-	rdeps=$(${MAKE} show-depends)
+	bdeps=$(${MAKE} ${MAKE_SET_VARS} show-depends VARNAME=BUILD_DEPENDS)
+	rdeps=$(${MAKE} ${MAKE_SET_VARS} show-depends)
 	for depver in $bdeps $rdeps; do
 	    dep=$(echo $depver | sed -e 's/[:[].*$/0/' -e 's/[<>]=/-/' \
 		-e 's/-[0-9][^-]*$//')
@@ -491,7 +501,7 @@ while [ -n "$REPLACE_TODO" ]; do
     if [ -z "$fail" ]; then
 	if [ -z "$opt_F" ]; then
 	    echo "${OPI} Replacing $pkgname"
-	    cmd="${MAKE} clean || fail=1"
+	    cmd="${MAKE} ${MAKE_SET_VARS} clean || fail=1"
 	    if [ -n "$opt_n" ]; then
 		echo "${OPI} Would run: $cmd"
 	    else
@@ -505,10 +515,10 @@ while [ -n "$REPLACE_TODO" ]; do
 		    error "'make clean' failed for package $pkg."
 		fi
 	    fi
-	    cmd="${MAKE} replace || fail=1" # XXX OLDNAME= support? xmlrpc-c -> xmlrpc-c-ss
+	    cmd="${MAKE} ${MAKE_SET_VARS} replace || fail=1" # XXX OLDNAME= support? xmlrpc-c -> xmlrpc-c-ss
 	else
 	    echo "${OPI} Fetching $pkgname"
-	    cmd="${MAKE} fetch depends-fetch || fail=1"
+	    cmd="${MAKE} ${MAKE_SET_VARS} fetch depends-fetch || fail=1"
 	fi
     fi
 
@@ -536,7 +546,7 @@ while [ -n "$REPLACE_TODO" ]; do
     # If -r not given, make a binary package.
     if [ -z "$opt_r" -a -z "$fail" -a -z "$opt_F" ]; then
 	echo "${OPI} Packaging $(${PKG_INFO} -e $pkg)"
-        cmd="${MAKE} package || fail=1"
+	cmd="${MAKE} ${MAKE_SET_VARS} package || fail=1"
 	if [ -n "$opt_n" -a -z "$fail" ]; then
 	    echo "${OPI} Would run: $cmd"
 	elif [ -z "$fail" ]; then
@@ -553,7 +563,7 @@ while [ -n "$REPLACE_TODO" ]; do
     fi
     # Clean
     if [ -z "$opt_n" -a -z "$fail" -a -z "$opt_F" ]; then
-        cmd="${MAKE} clean || fail=1"
+        cmd="${MAKE} ${MAKE_SET_VARS} clean || fail=1"
         if [ -n "$logfile" ]; then
             eval "$cmd" >&3 2>&3
         else

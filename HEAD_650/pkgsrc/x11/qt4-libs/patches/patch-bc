@@ -1,25 +1,33 @@
-$NetBSD$
+$NetBSD: patch-bc,v 1.3 2010/11/15 13:05:45 adam Exp $
 
---- mkspecs/unsupported/qnx-g++/qplatformdefs.h.orig	2010-02-11 15:55:14.000000000 +0000
-+++ mkspecs/unsupported/qnx-g++/qplatformdefs.h
-@@ -155,20 +155,5 @@
- #define QT_SNPRINTF		::snprintf
- #define QT_VSNPRINTF		::vsnprintf
+--- src/3rdparty/webkit/JavaScriptCore/wtf/Platform.h.orig	2010-11-06 01:55:19.000000000 +0000
++++ src/3rdparty/webkit/JavaScriptCore/wtf/Platform.h
+@@ -376,7 +376,7 @@
  
--// QNX6 doesn't have getpagesize()
--inline int getpagesize()
--{
--    return ::sysconf(_SC_PAGESIZE);
--}
--
--#include <stdlib.h>
--
--// QNX6 doesn't have strtof - use strtod instead
--inline float strtof(const char *b, char **e)
--{
--    return float(strtod(b, e));
--}
--
--#define QT_QWS_TEMP_DIR QString::fromLatin1(qgetenv("TMP"))
+ /* OS(NETBSD) - NetBSD */
+ #if defined(__NetBSD__)
+-#define WTF_PLATFORM_NETBSD 1
++#define WTF_OS_NETBSD 1
+ #endif
  
- #endif // QPLATFORMDEFS_H
+ /* OS(OPENBSD) - OpenBSD */
+@@ -384,6 +384,11 @@
+ #define WTF_OS_OPENBSD 1
+ #endif
+ 
++/* OS(DRAGONFLY) - DragonFly */
++#ifdef __DragonFly__
++#define WTF_OS_DRAGONFLY 1
++#endif
++
+ /* OS(QNX) - QNX */
+ #if defined(__QNXNTO__)
+ #define WTF_OS_QNX 1
+@@ -414,6 +419,7 @@
+     || OS(ANDROID)          \
+     || OS(DARWIN)           \
+     || OS(FREEBSD)          \
++    || OS(DRAGONFLY)        \
+     || OS(HAIKU)            \
+     || OS(LINUX)            \
+     || OS(NETBSD)           \

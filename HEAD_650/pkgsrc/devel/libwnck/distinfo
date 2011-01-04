@@ -1,5 +1,5 @@
-$NetBSD: distinfo,v 1.41 2010/07/06 14:54:46 drochner Exp $
+$NetBSD: distinfo,v 1.45 2010/11/24 20:14:05 drochner Exp $
 
-SHA1 (libwnck-2.30.2.tar.bz2) = 31488d8f3a4ccddd56a5b9ff7f986f2d6d56188e
-RMD160 (libwnck-2.30.2.tar.bz2) = 2eb3c519e6746e0d3f593dbae265bfad1a2302d6
-Size (libwnck-2.30.2.tar.bz2) = 707701 bytes
+SHA1 (libwnck-2.30.6.tar.bz2) = a7ef8842f85249878fd0389ae6c1b303d41e9623
+RMD160 (libwnck-2.30.6.tar.bz2) = d9c228bfe1257de9b1b1e8a3fc3b8c38d6e665d9
+Size (libwnck-2.30.6.tar.bz2) = 724558 bytes

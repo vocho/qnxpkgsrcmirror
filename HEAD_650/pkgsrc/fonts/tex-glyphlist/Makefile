@@ -1,10 +1,9 @@
-# $NetBSD: Makefile,v 1.3 2010/02/08 05:36:05 minskim Exp $
-# TeX Live Revision 15878
+# $NetBSD: Makefile,v 1.5 2010/11/11 18:30:23 minskim Exp $
 
 DISTNAME=	glyphlist
-PKGNAME=	tex-${DISTNAME}-2.0
-PKGREVISION=	1
+PKGNAME=	tex-${DISTNAME}-2.84
 CATEGORIES=	fonts
+TEXLIVE_REV=	19874
 
 MAINTAINER=	minskim@NetBSD.org
 COMMENT=	Adobe glyph list

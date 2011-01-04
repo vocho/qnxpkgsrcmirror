@@ -1,0 +1,24 @@
+$NetBSD$
+
+--- content/base/src/nsContentSink.cpp.orig	2010-12-03 15:47:56.000000000 +0000
++++ content/base/src/nsContentSink.cpp
+@@ -1865,7 +1865,9 @@ nsIAtom** const kDefaultAllowedTags [] =
+   &nsGkAtoms::output,
+   &nsGkAtoms::p,
+   &nsGkAtoms::pre,
++#ifdef MOZ_MEDIA
+   &nsGkAtoms::progress,
++#endif
+   &nsGkAtoms::q,
+   &nsGkAtoms::rp,
+   &nsGkAtoms::rt,
+@@ -1957,7 +1959,9 @@ nsIAtom** const kDefaultAllowedAttribute
+   &nsGkAtoms::lang,
+   &nsGkAtoms::list,
+   &nsGkAtoms::longdesc,
++#ifdef MOZ_MEDIA
+   &nsGkAtoms::loop,
++#endif
+   &nsGkAtoms::low,
+   &nsGkAtoms::max,
+   &nsGkAtoms::maxlength,

@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.3 2010/06/13 22:43:48 wiz Exp $
+# $NetBSD: Makefile,v 1.7 2010/12/23 05:50:10 obache Exp $
 #
 
 DISTNAME=	buzztard-0.5.0
-PKGREVISION=	1
+PKGREVISION=	4
 CATEGORIES=	audio
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=buzztard/}
 
@@ -19,7 +19,7 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 GNU_CONFIGURE=	yes
 USE_LIBTOOL=	yes
 USE_LANGUAGES=	c c++
-USE_TOOLS+=	gmake intltool pkg-config
+USE_TOOLS+=	gmake intltool pkg-config msgfmt msgmerge xgettext
 
 PKGCONFIG_OVERRIDE+=	src/lib/ic/libbuzztard-ic.pc.in
 PKGCONFIG_OVERRIDE+=	src/lib/core/libbuzztard-core.pc.in
@@ -38,6 +38,7 @@ BUILDLINK_API_DEPENDS.glib2+=	glib2>=2.10.0
 .include "../../graphics/gnome-icon-theme/buildlink3.mk"
 BUILDLINK_API_DEPENDS.gnome-vfs+=	gnome-vfs>=2.10.0
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
+.include "../../graphics/gnome-icon-theme/buildlink3.mk"
 .include "../../graphics/libgnomecanvas/buildlink3.mk"
 .include "../../graphics/librsvg/buildlink3.mk"
 BUILDLINK_API_DEPENDS.gst-plugins0.10-base+=	gst-plugins0.10-base>=0.10.7

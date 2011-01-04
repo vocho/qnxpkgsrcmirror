@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.23 2010/07/21 16:55:33 tnn Exp $
+@comment $NetBSD: PLIST,v 1.26 2010/12/11 14:46:29 tnn Exp $
 bin/xulrunner
 ${PLIST.jit}include/xulrunner/Allocator.h
 ${PLIST.jit}include/xulrunner/Assembler.h
@@ -17,6 +17,17 @@ include/xulrunner/XPCIDispatch.h
 ${PLIST.jit}include/xulrunner/avmplus.h
 include/xulrunner/base64.h
 include/xulrunner/blapit.h
+include/xulrunner/cairo/cairo-deprecated.h
+include/xulrunner/cairo/cairo-features.h
+include/xulrunner/cairo/cairo-ft.h
+include/xulrunner/cairo/cairo-pdf.h
+include/xulrunner/cairo/cairo-platform.h
+include/xulrunner/cairo/cairo-ps.h
+include/xulrunner/cairo/cairo-rename.h
+include/xulrunner/cairo/cairo-version.h
+include/xulrunner/cairo/cairo-xlib-xrender.h
+include/xulrunner/cairo/cairo-xlib.h
+include/xulrunner/cairo/cairo.h
 include/xulrunner/cert.h
 include/xulrunner/certdb.h
 include/xulrunner/certt.h
@@ -229,6 +240,7 @@ include/xulrunner/mozilla/CondVar.h
 include/xulrunner/mozilla/DeadlockDetector.h
 include/xulrunner/mozilla/Monitor.h
 include/xulrunner/mozilla/Mutex.h
+include/xulrunner/mozilla/PaintTracker.h
 include/xulrunner/mozilla/PluginLibrary.h
 include/xulrunner/mozilla/PluginPRLibrary.h
 include/xulrunner/mozilla/TimeStamp.h
@@ -590,6 +602,7 @@ include/xulrunner/nsIContentSerializer.h
 include/xulrunner/nsIContentSink.h
 include/xulrunner/nsIContentSniffer.h
 include/xulrunner/nsIContentURIGrouper.h
+include/xulrunner/nsIContentUtils.h
 include/xulrunner/nsIContentViewer.h
 include/xulrunner/nsIContentViewerContainer.h
 include/xulrunner/nsIContentViewerEdit.h
@@ -1227,6 +1240,7 @@ include/xulrunner/nsIMultiplexInputStream.h
 include/xulrunner/nsIMutable.h
 include/xulrunner/nsIMutableArray.h
 include/xulrunner/nsIMutationObserver.h
+include/xulrunner/nsIMutationObserver2.h
 include/xulrunner/nsINIParser.h
 include/xulrunner/nsINSSCertCache.h
 include/xulrunner/nsINSSErrorsService.h
@@ -1944,7 +1958,6 @@ include/xulrunner/nspr/plbase64.h
 include/xulrunner/nspr/plerror.h
 include/xulrunner/nspr/plgetopt.h
 include/xulrunner/nspr/plhash.h
-include/xulrunner/nspr/plresolv.h
 include/xulrunner/nspr/plstr.h
 include/xulrunner/nspr/pratom.h
 include/xulrunner/nspr/prbit.h
@@ -2043,9 +2056,13 @@ ${PLIST.audio}include/xulrunner/oggz/oggz_seek.h
 ${PLIST.audio}include/xulrunner/oggz/oggz_stream.h
 ${PLIST.audio}include/xulrunner/oggz/oggz_table.h
 ${PLIST.audio}include/xulrunner/oggz/oggz_write.h
+include/xulrunner/opentype-sanitiser.h
+include/xulrunner/ots-memory-stream.h
 include/xulrunner/p12.h
 include/xulrunner/p12plcy.h
 include/xulrunner/p12t.h
+include/xulrunner/pixman-version.h
+include/xulrunner/pixman.h
 include/xulrunner/pk11func.h
 include/xulrunner/pk11pqg.h
 include/xulrunner/pk11priv.h
@@ -2067,7 +2084,6 @@ include/xulrunner/pldhash.h
 include/xulrunner/plerror.h
 include/xulrunner/plgetopt.h
 include/xulrunner/plhash.h
-include/xulrunner/plresolv.h
 include/xulrunner/plstr.h
 include/xulrunner/png.h
 include/xulrunner/pngconf.h

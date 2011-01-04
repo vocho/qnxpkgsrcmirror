@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.24 2010/01/18 09:58:43 wiz Exp $
+# $NetBSD: Makefile,v 1.26 2010/12/23 11:44:26 dsainty Exp $
 #
 
 DISTNAME=	xsqlmenu-2.10
-PKGREVISION=	8
+PKGREVISION=	9
 CATEGORIES=	databases
 MASTER_SITES=	http://www.jlab.org/~saw/xsqlmenu/
 
@@ -28,7 +28,7 @@ do-install:
 		${DESTDIR}${PREFIX}/share/doc/xsqlmenu
 
 .include "../../mk/mysql.buildlink3.mk"
-.include "../../graphics/jpeg/buildlink3.mk"
+.include "../../mk/jpeg.buildlink3.mk"
 .include "../../x11/libXpm/buildlink3.mk"
 .include "../../x11/xforms/buildlink3.mk"
 

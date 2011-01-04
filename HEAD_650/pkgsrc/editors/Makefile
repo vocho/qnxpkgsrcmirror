@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.138 2010/02/10 17:34:51 joerg Exp $
+# $NetBSD: Makefile,v 1.140 2010/12/01 10:48:06 asau Exp $
 #
 
 COMMENT=	Editors
@@ -35,6 +35,7 @@ SUBDIR+=	fe
 SUBDIR+=	gate
 SUBDIR+=	gconf-editor
 SUBDIR+=	gedit
+SUBDIR+=	gedit-python
 SUBDIR+=	ghex
 SUBDIR+=	gice
 SUBDIR+=	gnuserv
@@ -137,6 +138,7 @@ SUBDIR+=	xemacs-nox11
 SUBDIR+=	xemacs-packages
 SUBDIR+=	xfce4-mousepad
 SUBDIR+=	xjed
+SUBDIR+=	xournal
 SUBDIR+=	xvile
 SUBDIR+=	xwpe
 SUBDIR+=	yudit

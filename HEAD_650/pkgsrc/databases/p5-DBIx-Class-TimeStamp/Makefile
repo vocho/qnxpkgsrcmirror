@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.6 2009/07/07 18:03:35 sno Exp $
+# $NetBSD: Makefile,v 1.9 2010/09/07 04:41:56 sno Exp $
 
-DISTNAME=	DBIx-Class-TimeStamp-0.12
+DISTNAME=	DBIx-Class-TimeStamp-0.14
 PKGNAME=	p5-${DISTNAME}
+#PKGREVISION=	1
 CATEGORIES=	databases perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=DBIx/}
 
@@ -22,9 +23,9 @@ BUILD_DEPENDS+=	p5-DateTime-Format-SQLite-[0-9]*:../../time/p5-DateTime-Format-S
 BUILD_DEPENDS+=	{perl>=5.10,p5-Time-HiRes-[0-9]*}:../../time/p5-Time-HiRes
 BUILD_DEPENDS+=	p5-Time-Warp-[0-9]*:../../time/p5-Time-Warp
 
-DEPENDS+=	p5-DBIx-Class-[0-9]*:../../databases/p5-DBIx-Class
-DEPENDS+=	p5-DBIx-Class-DynamicDefault-[0-9]*:../../databases/p5-DBIx-Class-DynamicDefault
-DEPENDS+=	p5-DateTime-[0-9]*:../../time/p5-DateTime
+DEPENDS+=	p5-DBIx-Class>=0.08009:../../databases/p5-DBIx-Class
+DEPENDS+=	p5-DBIx-Class-DynamicDefault>=0.03:../../databases/p5-DBIx-Class-DynamicDefault
+DEPENDS+=	p5-DateTime>=0.5500:../../time/p5-DateTime
 
 .include "../../lang/perl5/module.mk"
 .include "../../mk/bsd.pkg.mk"

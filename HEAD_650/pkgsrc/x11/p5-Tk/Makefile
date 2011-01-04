@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.66 2010/06/13 22:45:48 wiz Exp $
+# $NetBSD: Makefile,v 1.69 2010/12/23 11:45:02 dsainty Exp $
 
-DISTNAME=	Tk-804.028
-PKGNAME=	p5-Tk-804.028
-PKGREVISION=	5
+DISTNAME=	Tk-804.029
+PKGNAME=	p5-${DISTNAME}
 SVR4_PKGNAME=	p5tk
 CATEGORIES=	x11 tk perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Tk/}
@@ -37,6 +36,6 @@ pre-configure:
 
 .include "../../lang/perl5/module.mk"
 .include "../../graphics/png/buildlink3.mk"
-.include "../../graphics/jpeg/buildlink3.mk"
+.include "../../mk/jpeg.buildlink3.mk"
 .include "../../x11/libX11/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

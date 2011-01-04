@@ -1,12 +1,27 @@
-$NetBSD: patch-ac,v 1.4 2008/04/07 17:08:53 adam Exp $
+$NetBSD: patch-ac,v 1.6 2010/12/14 22:19:52 adam Exp $
 
---- src/inkjar/jar.cpp.orig	2008-03-11 05:20:04.000000000 +0100
-+++ src/inkjar/jar.cpp
-@@ -23,6 +23,7 @@
- # include "config.h"
+--- configure.orig	2010-08-04 16:46:39.000000000 +0000
++++ configure
+@@ -8133,11 +8133,11 @@ for ax_openmp_flag in $ax_openmp_flags; 
+ #ifdef __cplusplus
+ extern "C"
  #endif
+-char omp_set_num_threads ();
++#include <omp.h>
+ int
+ main ()
+ {
+-return omp_set_num_threads ();
++return omp_get_num_threads ();
+   ;
+   return 0;
+ }
+@@ -10765,7 +10765,7 @@ $as_echo "#define HAVE_CAIRO_PDF 1" >>co
  
-+#include <unistd.h>
+ fi
  
- //#ifdef STDC_HEADERS
- //#endif
+-INKSCAPE_LIBS="$INKSCAPE_LIBS -lpng -lz -lX11 -lxml2"
++INKSCAPE_LIBS="$INKSCAPE_LIBS -lpng -lz -lxml2"
+ if test "x$openmp_ok" = "xyes"; then
+ 	INKSCAPE_LIBS="$INKSCAPE_LIBS -lgomp"
+ fi
