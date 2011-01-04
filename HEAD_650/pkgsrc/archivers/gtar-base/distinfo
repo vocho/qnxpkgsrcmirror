@@ -5,6 +5,7 @@ RMD160 (tar-1.25.tar.gz) = 8013ed400958cc8e9d605f5541e52e413bf878dc
 Size (tar-1.25.tar.gz) = 3400086 bytes
 SHA1 (patch-aa) = 976d0caa9dd67c04a3c1b40ca5d5bea91bc9fcdf
 SHA1 (patch-ab) = ce8f4a5b0a20a5c7da44f06b0e55115e27f7d7e0
+SHA1 (patch-ac) = 0dea5e708627a650cf99363a9dc1a267604cf472
 SHA1 (patch-ad) = 5573bd0e8aaf71b8a23d8b031c61b48c97b3fa97
 SHA1 (patch-al) = 53056a3b20a40aac0e04a1137856c5b47a7d6e0c
 SHA1 (patch-am) = aec3b1496c227a64b098d0f3666ff9be4e4b10b5
