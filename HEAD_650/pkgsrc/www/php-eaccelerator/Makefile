@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.11 2010/03/16 13:58:07 taca Exp $
+# $NetBSD: Makefile,v 1.13 2010/12/13 13:18:20 taca Exp $
 
 MODNAME=	eaccelerator
 PECL_VERSION=	0.9.6

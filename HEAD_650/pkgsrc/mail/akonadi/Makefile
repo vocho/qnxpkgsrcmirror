@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.16 2010/06/13 22:44:52 wiz Exp $
+# $NetBSD: Makefile,v 1.20 2010/12/12 21:32:01 adam Exp $
 
-DISTNAME=	akonadi-1.3.1
-PKGREVISION=	2
+DISTNAME=	akonadi-1.4.0
+PKGREVISION=	1
 CATEGORIES=	mail
 MASTER_SITES=	http://download.akonadi-project.org/
 EXTRACT_SUFX=	.tar.bz2
@@ -17,8 +17,13 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 
 BUILD_DEPENDS+=	automoc4>=0.9.87:../../devel/automoc4
 BUILD_DEPENDS+=	libxslt-[0-9]*:../../textproc/libxslt
-DEPENDS+=	mysql-server-[0-9]*:../../databases/mysql5-server
 DEPENDS+=	qt4-mysql-[0-9]*:../../x11/qt4-mysql
+.include "../../mk/mysql.buildlink3.mk"
+.if ${_MYSQL_VERSION} == "51"
+DEPENDS+=	mysql-server-[0-9]*:../../databases/mysql51-server
+.else
+DEPENDS+=	mysql-server-[0-9]*:../../databases/mysql5-server
+.endif
 
 USE_TOOLS+=	pkg-config
 USE_LANGUAGES=	c c++
@@ -39,6 +44,7 @@ SUBST_FILES.mysql=	server/CMakeLists.txt
 SUBST_SED.mysql=	-e "s:MYSQLD_EXECUTABLE mysqld:MYSQLD_EXECUTABLE mysqld ${PREFIX}/libexec:"
 
 .include "../../databases/shared-mime-info/buildlink3.mk"
+.include "../../databases/sqlite3/buildlink3.mk"
 .include "../../devel/boost-libs/buildlink3.mk"
 .include "../../textproc/soprano/buildlink3.mk"
 .include "../../x11/qt4-libs/buildlink3.mk"

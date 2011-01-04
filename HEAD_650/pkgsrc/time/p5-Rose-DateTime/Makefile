@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.5 2010/02/02 12:40:22 sno Exp $
+# $NetBSD: Makefile,v 1.7 2010/09/07 05:29:40 sno Exp $
 
-DISTNAME=	Rose-DateTime-0.533
+DISTNAME=	Rose-DateTime-0.534
 PKGNAME=	p5-${DISTNAME}
 #PKGREVISION=	1
 CATEGORIES=	time perl5

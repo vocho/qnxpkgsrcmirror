@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.46 2010/01/26 06:16:30 wiz Exp $
+# $NetBSD: Makefile,v 1.48 2010/12/16 11:38:08 ahoka Exp $
 
 DISTNAME=		hal-0.5.11
-PKGREVISION=		27
+PKGREVISION=		28
 CATEGORIES=		sysutils
 MASTER_SITES=		http://hal.freedesktop.org/releases/
 EXTRACT_SUFX=		.tar.bz2
@@ -32,6 +32,7 @@ CONFIGURE_ARGS+=        --sysconfdir=${PKG_SYSCONFBASE}
 CONFIGURE_ARGS+=	--localstatedir=${VARBASE}
 CONFIGURE_ARGS+=	--with-pci-ids=${PREFIX}/share/pciids
 CONFIGURE_ARGS+=	--with-usb-ids=${PREFIX}/share/usbids
+CONFIGURE_ARGS+=	--without-os-type
 
 .include "../../mk/bsd.prefs.mk"
 

@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.8 2010/06/13 22:44:47 wiz Exp $
+# $NetBSD: Makefile,v 1.12 2010/11/15 22:57:30 abs Exp $
 
 PKGNAME=	gnuradio-radio-astronomy-${VERSION}
-PKGREVISION=	5
+PKGREVISION=	1
 COMMENT=	GNU Radio module for radio astronomy
 
 PKG_DESTDIR_SUPPORT=	user-destdir
@@ -11,7 +11,7 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 CONFIGURE_ARGS+=--enable-gr-radio-astronomy
 CONFIGURE_ARGS+=--with-gnuradio-core --with-omnithread --with-gruel
 
-#DEPENDS+=	${PYPKGPREFIX}-ephem>=3.7b:../../math/py-ephem
+DEPENDS+=	${PYPKGPREFIX}-ephem>=3.7b:../../math/py-ephem
 
 PYTHON_PATCH_SCRIPTS+=	gr-radio-astronomy/src/python/local_calibrator.py
 PYTHON_PATCH_SCRIPTS+=	gr-radio-astronomy/src/python/qa_ra.py
@@ -21,7 +21,6 @@ PYTHON_PATCH_SCRIPTS+=	gr-radio-astronomy/src/python/usrp_psr_receiver.py
 PYTHON_PATCH_SCRIPTS+=	gr-radio-astronomy/src/python/usrp_ra_receiver.py
 
 .include "../../mk/oss.buildlink3.mk"
-.include "../../math/py-ephem/buildlink3.mk"
 .include "../../ham/gnuradio-wxgui/buildlink3.mk"
 .include "../../ham/usrp/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

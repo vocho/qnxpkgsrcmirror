@@ -1,6 +1,6 @@
 $NetBSD: patch-aq,v 1.3 2009/10/28 11:36:36 tnn Exp $
 
---- media/liboggplay/src/liboggplay/std_semaphore.h.orig	2010-04-02 16:02:39.000000000 +0000
+--- media/liboggplay/src/liboggplay/std_semaphore.h.orig	2010-12-03 15:48:45.000000000 +0000
 +++ media/liboggplay/src/liboggplay/std_semaphore.h
 @@ -74,9 +74,9 @@
   * @retval non-zero on error 

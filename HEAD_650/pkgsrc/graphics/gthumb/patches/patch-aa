@@ -1,27 +1,42 @@
-$NetBSD: patch-aa,v 1.7 2010/05/17 16:56:27 drochner Exp $
+$NetBSD: patch-aa,v 1.9 2010/12/04 21:15:00 adam Exp $
 
---- data/Makefile.in.orig	2010-05-05 10:47:22.000000000 +0000
-+++ data/Makefile.in
-@@ -844,14 +844,14 @@ update-icon-cache:
- @INTLTOOL_SCHEMAS_RULE@
+--- extensions/exiv2_tools/exiv2-utils.cpp.orig	2010-09-15 19:07:15.000000000 +0000
++++ extensions/exiv2_tools/exiv2-utils.cpp
+@@ -497,6 +497,17 @@ set_attributes_from_tagsets (GFileInfo *
+ static const char *
+ get_exif_default_category (const Exiv2::Exifdatum &md)
+ {
++#if (EXIV2_TEST_VERSION(0,21,0))
++	const char *ifdName = md.ifdName();
++	if (strcmp(ifdName, "Makernote") == 0)
++		return "Exif::MakerNotes";
++	if (strcmp(ifdName, "IFD1") == 0)
++		return "Exif::Thumbnail";
++	if (strcmp(ifdName, "GPSInfo") == 0)
++		return "Exif::GPS";
++	if (strcmp(ifdName, "Iop") == 0)
++		return "Exif::Versions";
++#else
+ 	if (Exiv2::ExifTags::isMakerIfd(md.ifdId()))
+ 		return "Exif::MakerNotes";
  
- install-schemas: $(schema_DATA)
--@GCONF_SCHEMAS_INSTALL_TRUE@	if test -z "$(DESTDIR)" ; then \
--@GCONF_SCHEMAS_INSTALL_TRUE@	for p in $^ ; do \
--@GCONF_SCHEMAS_INSTALL_TRUE@		GCONF_CONFIG_SOURCE=$(GCONF_SCHEMA_CONFIG_SOURCE) \
--@GCONF_SCHEMAS_INSTALL_TRUE@			$(GCONFTOOL) \
--@GCONF_SCHEMAS_INSTALL_TRUE@			--makefile-install-rule \
--@GCONF_SCHEMAS_INSTALL_TRUE@			$(top_builddir)/data/$$p; \
--@GCONF_SCHEMAS_INSTALL_TRUE@	done \
--@GCONF_SCHEMAS_INSTALL_TRUE@	fi
-+	if test -z "$(DESTDIR)" ; then \
-+	for p in $^ ; do \
-+		GCONF_CONFIG_SOURCE=$(GCONF_SCHEMA_CONFIG_SOURCE) \
-+			$(GCONFTOOL) \
-+			--makefile-install-rule \
-+			$(top_builddir)/data/$$p; \
-+	done \
-+	fi
+@@ -510,6 +521,7 @@ get_exif_default_category (const Exiv2::
+ 	default:
+ 		break;
+ 	}
++#endif
  
- uninstall-schemas: $(schema_DATA)
- @GCONF_SCHEMAS_INSTALL_TRUE@	if test -z "$(DESTDIR)" ; then \
+ 	return "Exif::Other";
+ }
+@@ -531,7 +543,11 @@ exiv2_read_metadata (Exiv2::Image::AutoP
+ 			stringstream description;
+ 			if (! md->tagLabel().empty())
+ 				description << md->tagLabel();
++#if (EXIV2_TEST_VERSION(0,21,0))
++			else if (strcmp(md->ifdName(), "Makernote") == 0)
++#else
+ 			else if (md->ifdId () > Exiv2::ifd1Id)
++#endif
+ 				// Must be a MakerNote - include group name
+ 				description << md->groupName() << "." << md->tagName();
+ 			else

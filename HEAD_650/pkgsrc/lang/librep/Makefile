@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.50 2010/03/24 19:43:25 asau Exp $
+# $NetBSD: Makefile,v 1.52 2010/11/22 20:02:50 shattered Exp $
 #
 
-DISTNAME=		librep-0.90.0
+DISTNAME=		librep-0.90.5
 PKGREVISION=		1
 CATEGORIES=		lang devel
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=librep/}
@@ -20,7 +20,7 @@ DEPENDS+=		libtool-base-[0-9]*:../../devel/libtool-base
 INFO_FILES=		yes
 PKGCONFIG_OVERRIDE=	librep.pc.in
 
-REP_LIBTOOL=		${PREFIX}/libexec/rep/${MACHINE_GNU_PLATFORM}/libtool
+REP_LIBTOOL=		${PREFIX}/lib/rep/${MACHINE_GNU_PLATFORM}/libtool
 
 GNU_CONFIGURE=		yes
 CONFIGURE_ARGS+=	--with-readline
@@ -39,5 +39,6 @@ post-install:
 .include "../../databases/gdbm/buildlink3.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../devel/gmp/buildlink3.mk"
+.include "../../devel/libffi/buildlink3.mk"
 .include "../../devel/readline/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

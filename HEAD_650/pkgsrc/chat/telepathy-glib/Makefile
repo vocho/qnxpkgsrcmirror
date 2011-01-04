@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.19 2010/07/12 17:46:02 drochner Exp $
+# $NetBSD: Makefile,v 1.22 2010/11/29 15:29:06 drochner Exp $
 #
 
-DISTNAME=	telepathy-glib-0.11.9
+DISTNAME=	telepathy-glib-0.12.5
 CATEGORIES=	chat
 MASTER_SITES=	http://telepathy.freedesktop.org/releases/telepathy-glib/
 
@@ -21,8 +21,8 @@ USE_TOOLS+=	gmake pkg-config
 PKGCONFIG_OVERRIDE+=	telepathy-glib/telepathy-glib.pc.in
 
 CONFIGURE_ENV+=		ac_cv_prog_PYTHON=${PYTHONBIN}
-# see https://bugs.freedesktop.org/show_bug.cgi?id=23342
-CONFIGURE_ARGS+=	NM=nm
+REPLACE_PYTHON+=	tests/all-errors-documented.py
+TEST_TARGET=		check
 
 BUILDLINK_API_DEPENDS.glib2+=		glib2>=2.20.0
 .include "../../devel/glib2/buildlink3.mk"

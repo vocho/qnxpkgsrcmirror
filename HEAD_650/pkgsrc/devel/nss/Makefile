@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.37 2010/03/31 01:25:26 dsainty Exp $
+# $NetBSD: Makefile,v 1.39 2010/10/21 10:31:00 tnn Exp $
 
 .include "../../devel/xulrunner/dist.mk"
 PKGNAME=		nss-${NSS_RELEASE}${MOZ_BRANCH_MINOR}
-NSS_RELEASE=		3.12.6.2
+NSS_RELEASE=		3.12.8.0
 CATEGORIES=		security
 
 MAINTAINER=		tnn@NetBSD.org

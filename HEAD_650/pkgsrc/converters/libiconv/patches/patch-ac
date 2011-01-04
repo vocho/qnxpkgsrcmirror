@@ -1,18 +1,15 @@
-$NetBSD: patch-ac,v 1.5 2008/01/08 22:08:37 sketch Exp $
+$NetBSD$
 
---- configure.orig	Tue Jan  8 21:38:03 2008
-+++ configure	Tue Jan  8 21:38:25 2008
-@@ -25733,13 +25733,6 @@
- cat confdefs.h >>conftest.$ac_ext
- cat >>conftest.$ac_ext <<_ACEOF
- /* end confdefs.h.  */
--/* Test preprocessor.  */
--      #if ! (-9223372036854775807LL < 0 && 0 < 9223372036854775807ll)
--        error in preprocessor;
--      #endif
--      #if ! (18446744073709551615ULL <= -1ull)
--        error in preprocessor;
--      #endif
-       /* Test literals.  */
-       long long int ll = 9223372036854775807ll;
-       long long int nll = -9223372036854775807LL;
+--- include/iconv.h.orig	2011-01-01 16:08:01.000000000 +0000
++++ include/iconv.h
+@@ -64,6 +64,10 @@ typedef void* iconv_t;
+ #ifndef EILSEQ
+ #define EILSEQ 
+ #endif
++#ifdef __QNXNTO__
++/* also included below in extern "C" {} block which breaks c++ on QNX */
++#include <wchar.h>
++#endif
+ 
+ 
+ #ifdef __cplusplus

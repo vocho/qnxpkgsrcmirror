@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.24 2010/08/04 11:36:08 tron Exp $
+# $NetBSD: Makefile,v 1.27 2010/11/03 10:18:26 tron Exp $
 
-DISTNAME=	squid-3.1.6
+DISTNAME=	squid-3.1.9
 PKGNAME=	${DISTNAME}	# Necessary for "pkgsrc/www/squid/options.mk"
 CATEGORIES=	www
 MASTER_SITES=	http://www.squid-cache.org/Versions/v3/3.1/ \
@@ -44,5 +44,4 @@ CFLAGS.QNX+=	-include ${WRKSRC}/compat/os/qnx-inc.h
 .include "../../sysutils/s5ipc/buildlink3.mk"
 .endif
 
-.include "../../devel/libltdl/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

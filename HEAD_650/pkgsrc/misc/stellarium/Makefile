@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.38 2010/06/13 22:45:02 wiz Exp $
+# $NetBSD: Makefile,v 1.41 2010/12/06 21:03:18 adam Exp $
 
-DISTNAME=	stellarium-0.10.5
-PKGREVISION=	1
+DISTNAME=	stellarium-0.10.6
 CATEGORIES=	misc
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=stellarium/}
 
@@ -11,10 +10,10 @@ COMMENT=	Generate photorealistic skies with OpenGL
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
+USE_CMAKE=		yes
 USE_LANGUAGES=		c c++
 USE_PKGLOCALEDIR=	yes
 USE_TOOLS+=		gmake msgfmt perl
-USE_CMAKE=		yes
 
 CMAKE_ARGS+= -D FreeType2_INCLUDE_DIR:PATH=${BUILDLINK_PREFIX.freetype2}/include/freetype2
 CMAKE_ARGS+= -D FreeType2_LIBRARIES:PATH=${BUILDLINK_PREFIX.freetype2}/lib

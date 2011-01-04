@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.194 2010/07/16 06:41:42 adam Exp $
+# $NetBSD: Makefile,v 1.201 2010/12/23 11:44:38 dsainty Exp $
 
-DISTNAME=	gimp-2.6.10
+DISTNAME=	gimp-2.6.11
+PKGREVISION=	2
 CATEGORIES=	graphics
 MASTER_SITES=	ftp://ftp.gimp.org/pub/gimp/v2.6/ \
 		${MASTER_SITE_GNU:=gimp/v2.6/} \
@@ -29,10 +30,6 @@ PKG_SYSCONFSUBDIR=	gimp/2.0
 PKGCONFIG_OVERRIDE=	gimp.pc.in
 
 .include "../../mk/bsd.prefs.mk"
-
-# Workaround for Upstream Bug#562310.
-# for more detail, see also PR#41475.
-TOOLS_NOOP+=		gtkdoc-rebase
 
 BUILDLINK_API_DEPENDS.fontconfig+=	fontconfig>=2.2.0
 BUILDLINK_API_DEPENDS.lcms+=		lcms>=1.12
@@ -67,7 +64,7 @@ PLIST.twain=		yes
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../graphics/babl/buildlink3.mk"
 .include "../../graphics/gegl/buildlink3.mk"
-.include "../../graphics/jpeg/buildlink3.mk"
+.include "../../mk/jpeg.buildlink3.mk"
 .include "../../graphics/lcms/buildlink3.mk"
 .include "../../graphics/libart/buildlink3.mk"
 .include "../../graphics/libexif/buildlink3.mk"
@@ -80,7 +77,7 @@ PLIST.remote=	yes
 .include "../../x11/libICE/buildlink3.mk"
 .include "../../x11/libSM/buildlink3.mk"
 .include "../../x11/libXmu/buildlink3.mk"
-.endif
 .include "../../x11/libXpm/buildlink3.mk"
+.endif
 .include "../../mk/pthread.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.9 2010/07/14 11:11:20 sbd Exp $
+# $NetBSD: Makefile,v 1.16 2010/12/08 11:24:34 markd Exp $
 
 DISTNAME=	kdegames-${_KDE_VERSION}
-PKGREVISION=	1
 CATEGORIES=	games
 COMMENT=	Games for the KDE integrated X11 desktop
 
@@ -11,12 +10,21 @@ COMMENT=	Games for the KDE integrated X11 desktop
 
 REPLACE_PERL+=	katomic/katomic-levelset-upd.pl
 
+DEPENDS+=	${PYPKGPREFIX}-twisted-[0-9]*:../../net/py-twisted 
+
 .include "../../meta-pkgs/kde4/kde4.mk"
 
+.include "../../databases/sqlite3/buildlink3.mk"
+.include "../../lang/python/pyversion.mk"
+# don't add python include dir to include path
+# as eg kolf will pick up wrong versions of header files
+BUILDLINK_INCDIRS.${PYPACKAGE}=
 .include "../../games/ggz-client-libs/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../security/qca2/buildlink3.mk"
+.include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../x11/kdelibs4/buildlink3.mk"
 .include "../../x11/kdebase-runtime4/buildlink3.mk"
+.include "../../x11/kdebindings4-python/buildlink3.mk"
 
 .include "../../mk/bsd.pkg.mk"

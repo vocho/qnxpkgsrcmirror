@@ -1,0 +1,5 @@
+$NetBSD: distinfo,v 1.2 2010/11/25 10:43:44 wiz Exp $
+
+SHA1 (libwpg-0.2.0.tar.gz) = 09bdb0a8b85dfb83f28119a442a50aa4f51de9dc
+RMD160 (libwpg-0.2.0.tar.gz) = 7ee528dd721bdd6b23fcdc7e275cf330021b37ba
+Size (libwpg-0.2.0.tar.gz) = 418210 bytes

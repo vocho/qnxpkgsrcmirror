@@ -1,5 +1,5 @@
-$NetBSD: distinfo,v 1.21 2010/07/14 12:53:51 obache Exp $
+$NetBSD: distinfo,v 1.24 2010/11/23 17:25:10 wiz Exp $
 
-SHA1 (yaz-4.0.11.tar.gz) = 2800d6f88c21404d5f017276d2308225bf1a67d9
-RMD160 (yaz-4.0.11.tar.gz) = 5b56d6e53dbb8b2edded13fe5602c88cca02d10c
-Size (yaz-4.0.11.tar.gz) = 2248742 bytes
+SHA1 (yaz-4.1.2.tar.gz) = 49e1bee4229bb64b458007c79a12a6af643760fd
+RMD160 (yaz-4.1.2.tar.gz) = 86a6377e65344c0326cfa9c29d42eeb7724f3dc5
+Size (yaz-4.1.2.tar.gz) = 2286186 bytes

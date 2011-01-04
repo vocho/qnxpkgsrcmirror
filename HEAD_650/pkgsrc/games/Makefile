@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.337 2010/06/08 08:46:40 wiz Exp $
+# $NetBSD: Makefile,v 1.340 2010/12/17 09:21:22 wiz Exp $
 #
 
 COMMENT=	Games
@@ -81,7 +81,7 @@ SUBDIR+=	finalbattle
 SUBDIR+=	fire
 SUBDIR+=	fkiss
 SUBDIR+=	flightgear
-SUBDIR+=	flightgear-base
+SUBDIR+=	flightgear-data
 SUBDIR+=	fltk-sudoku
 SUBDIR+=	foobillard
 SUBDIR+=	fortune-strfile
@@ -188,6 +188,7 @@ SUBDIR+=	ninvaders
 SUBDIR+=	omega
 SUBDIR+=	openmortal
 SUBDIR+=	openttd
+SUBDIR+=	openttd-data
 SUBDIR+=	orbital_eunuchs_sniper
 SUBDIR+=	pag
 SUBDIR+=	pioneers
@@ -242,6 +243,7 @@ SUBDIR+=	spider
 SUBDIR+=	stegavorto
 SUBDIR+=	stratagus
 SUBDIR+=	sudoku-cli
+SUBDIR+=	supertuxkart
 SUBDIR+=	svb
 SUBDIR+=	tads
 SUBDIR+=	tanked

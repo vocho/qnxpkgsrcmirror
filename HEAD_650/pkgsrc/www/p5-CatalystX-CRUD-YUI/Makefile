@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.7 2010/03/10 15:28:15 sno Exp $
+# $NetBSD: Makefile,v 1.9 2010/09/05 15:18:47 sno Exp $
 
-DISTNAME=	CatalystX-CRUD-YUI-0.023
+DISTNAME=	CatalystX-CRUD-YUI-0.024
 PKGNAME=	p5-${DISTNAME}
 #PKGREVISION=	1
 CATEGORIES=	www perl5

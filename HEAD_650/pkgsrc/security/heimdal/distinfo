@@ -1,4 +1,4 @@
-$NetBSD: distinfo,v 1.25 2008/11/25 07:09:54 hasso Exp $
+$NetBSD: distinfo,v 1.26 2010/11/30 07:12:49 obache Exp $
 
 SHA1 (heimdal-1.1.tar.gz) = 64ddb2a2c47f732b2d9bbf2621062eaffa32e10f
 RMD160 (heimdal-1.1.tar.gz) = fecda9ca4db5b11c680aa3cccd705d22f98f25b7
@@ -8,6 +8,9 @@ SHA1 (patch-ab) = 698a7e1d0f11fc2fe10bc17bb1020f6ac22890d3
 SHA1 (patch-ac) = d5df5fbd77d1750eef9359ceac907547175e11dd
 SHA1 (patch-ad) = cd17b7c5193a1acbcdf06b8cb2322dac9c4e589e
 SHA1 (patch-ae) = 2e01e67d716a38a152d51db53c158210afcc2bfe
+SHA1 (patch-ah) = c8ea19182402cb778ebe13447c85f935554b0dbf
 SHA1 (patch-al) = 2e92de5779abf7455d1bea79999949faa0417945
 SHA1 (patch-ar) = 05564ffaf170c13187c66e45f1f124352bfc092e
 SHA1 (patch-as) = dc314360d65b6acf1c23ffcbef23a4f750c62dab
+SHA1 (patch-at) = cdebcb4db12f336e8b2e99d73b2f797724ba3b2a
+SHA1 (patch-au) = fc90a6ee55f98170730cae404b78bc189de9d866

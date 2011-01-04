@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.7 2010/08/04 11:58:13 obache Exp $
+# $NetBSD: Makefile,v 1.10 2010/11/18 11:54:56 obache Exp $
 #
 
 DISTNAME=	goocanvasmm-0.15.3
+PKGREVISION=	2
 CATEGORIES=	graphics
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/goocanvasmm/0.15/}
 
@@ -17,7 +18,7 @@ USE_LIBTOOL=	yes
 USE_TOOLS+=	gmake pkg-config perl
 USE_LANGUAGES=	c c++
 
-PKGCONFIG_OVERRIDE+=	goocanvas/goocanvasmm-1.0.pc.in
+PKGCONFIG_OVERRIDE+=	goocanvas/goocanvasmm.pc.in
 
 BUILDLINK_API_DEPENDS.glibmm+=	glibmm>=2.14.2
 .include "../../devel/glibmm/buildlink3.mk"

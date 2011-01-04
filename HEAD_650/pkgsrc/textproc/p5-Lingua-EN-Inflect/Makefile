@@ -1,8 +1,10 @@
-# $NetBSD: Makefile,v 1.9 2010/02/02 19:26:25 sno Exp $
+# $NetBSD: Makefile,v 1.12 2010/08/21 16:35:53 seb Exp $
 
-DISTNAME=	Lingua-EN-Inflect-1.891
-PKGNAME=	p5-${DISTNAME:S/891/89.1/}
-#PKGREVISION=	1
+# XXX when updating, use 3-digit minor version instead of splitting and
+#     adjust dependend packages (e.g. textproc/p5-Lingua-EN-Inflect-Phrase)
+DISTNAME=	Lingua-EN-Inflect-1.892
+PKGNAME=	p5-${DISTNAME:S/892/89.2/}
+PKGREVISION=	1
 SVR4_PKGNAME=	p5lei
 CATEGORIES=	textproc perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Lingua/}

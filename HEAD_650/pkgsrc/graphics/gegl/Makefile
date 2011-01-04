@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.12 2010/06/14 18:48:32 drochner Exp $
+# $NetBSD: Makefile,v 1.17 2010/12/23 11:44:37 dsainty Exp $
 
 DISTNAME=	gegl-0.1.2
+PKGREVISION=	3
 CATEGORIES=	graphics
 MASTER_SITES=	ftp://ftp.gimp.org/pub/gegl/0.1/
 EXTRACT_SUFX=	.tar.bz2
@@ -15,6 +16,7 @@ USE_LANGUAGES=		c c++
 USE_LIBTOOL=		yes
 USE_TOOLS+=		pkg-config gmake
 GNU_CONFIGURE=		yes
+CONFIGURE_ARGS+=	--disable-docs
 CONFIGURE_ENV+=		ac_cv_path_ASCIIDOC=no
 CONFIGURE_ENV+=		ac_cv_path_ENSCRIPT=no
 CONFIGURE_ENV+=		ac_cv_path_SDL_CONFIG=no
@@ -32,8 +34,9 @@ PLIST.v4l=	yes
 
 .include "options.mk"
 
+BUILDLINK_API_DEPENDS.babl+=	babl>=0.1.2
 .include "../../graphics/babl/buildlink3.mk"
-.include "../../graphics/jpeg/buildlink3.mk"
+.include "../../mk/jpeg.buildlink3.mk"
 .include "../../graphics/openexr/buildlink3.mk"
 .include "../../graphics/png/buildlink3.mk"
 .include "../../x11/gtk2/buildlink3.mk"

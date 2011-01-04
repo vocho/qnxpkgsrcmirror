@@ -1,15 +1,15 @@
-$NetBSD: patch-aa,v 1.1 2010/07/30 07:02:36 dholland Exp $
+$NetBSD: patch-aa,v 1.4 2010/10/25 10:33:53 wiz Exp $
 
-Recognize dfly, from Antonio Huete Jimenez in PR 43685.
+Fix typo in OPSYS name.
 
---- configure.ac.orig	2010-07-13 23:39:15.000000000 +0000
-+++ configure.ac
-@@ -92,7 +92,7 @@ case "${host_os}" in
-   mingw*|pw32*|cygwin*)
-     AC_DEFINE(HAVE_CODEMEM_VIRTUALALLOC, 1, [Use VirtualAlloc to allocate code for execution])
+--- configure.orig	2010-10-14 22:34:17.000000000 +0000
++++ configure
+@@ -13050,7 +13050,7 @@ $as_echo "#define HAVE_CODEMEM_MALLOC 1"
+ $as_echo "#define HAVE_CODEMEM_VIRTUALALLOC 1" >>confdefs.h
+ 
      ;;
--  linux*|darwin*|solaris*|netbsd*|freebsd*|openbsd*|kfreebsd*|gnu*)
-+  linux*|darwin*|solaris*|netbsd*|dragonfly*|freebsd*|openbsd*|kfreebsd*|gnu*)
-     AC_DEFINE(HAVE_CODEMEM_MMAP, 1, [Use mmap to allocate code for execution])
-     ;;
-   *)
+-  linux*|darwin*|solaris*|netbsd*|freebsd*|openbsd*|kfreebsd*|dragonflybsd*|gnu*)
++  linux*|darwin*|solaris*|netbsd*|freebsd*|openbsd*|kfreebsd*|dragonfly*|gnu*)
+ 
+ $as_echo "#define HAVE_CODEMEM_MMAP 1" >>confdefs.h
+ 

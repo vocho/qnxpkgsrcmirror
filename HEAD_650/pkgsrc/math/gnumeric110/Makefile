@@ -1,27 +1,30 @@
-# $NetBSD: Makefile,v 1.7 2010/07/20 12:15:43 drochner Exp $
-#
+# $NetBSD: Makefile,v 1.19 2010/12/12 11:56:25 wiz Exp $
 
-DISTNAME=		gnumeric-1.10.7
-CATEGORIES=		math gnome
-MASTER_SITES=		${MASTER_SITE_GNOME:=sources/gnumeric/1.10/}
-EXTRACT_SUFX=		.tar.bz2
+DISTNAME=	gnumeric-1.10.12
+CATEGORIES=	math gnome
+MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gnumeric/1.10/}
+EXTRACT_SUFX=	.tar.bz2
 
-MAINTAINER=		pkgsrc-users@NetBSD.org
-HOMEPAGE=		http://www.gnome.org/projects/gnumeric/
-COMMENT=		Spreadsheet program from the GNOME project (development version)
+MAINTAINER=	pkgsrc-users@NetBSD.org
+HOMEPAGE=	http://www.gnome.org/projects/gnumeric/
+COMMENT=	Spreadsheet program from the GNOME project
+LICENSE=	gnu-gpl-v2
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
-USE_PKGLOCALEDIR=	YES
 USE_TOOLS+=		gmake intltool msgfmt perl:run pkg-config
-USE_LIBTOOL=		YES
-
-GNU_CONFIGURE=		YES
+USE_LIBTOOL=		yes
+USE_PKGLOCALEDIR=	yes
+GNU_CONFIGURE=		yes
 GCONF_SCHEMAS=		gnumeric-dialogs.schemas gnumeric-general.schemas \
 			gnumeric-plugins.schemas
 PKGCONFIG_OVERRIDE=	libspreadsheet.pc.in
 
 REPLACE_PERL+=		plugins/perl-func/perl_func.pl
+
+# PLIST contains versioned directory
+GOFFICE_VERSION=	0.8.12
+PLIST_SUBST+=		GOFFICE_VERSION=${GOFFICE_VERSION}
 
 CONFIGURE_ARGS+=	--with-python
 CONFIGURE_ENV+=		PYTHON=${PYTHONBIN:Q}
@@ -35,17 +38,13 @@ CONFIGURE_ENV+=		PYTHON=${PYTHONBIN:Q}
 BUILDLINK_API_DEPENDS.libgsf+=	libgsf>=1.14.6
 .include "../../devel/libgsf/buildlink3.mk"
 .include "../../devel/GConf/schemas.mk"
-.include "../../devel/libgnomeui/buildlink3.mk"
-.include "../../devel/libbonobo/buildlink3.mk"
-.include "../../devel/libbonoboui/buildlink3.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../devel/libglade/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../lang/perl5/buildlink3.mk"
-BUILDLINK_API_DEPENDS.goffice0.6+= goffice0.8-0.8.7{,nb*}
+BUILDLINK_API_DEPENDS.goffice0.8+= goffice0.8-${GOFFICE_VERSION}{,nb*}
 .include "../../misc/goffice0.8/buildlink3.mk"
-.include "../../net/ORBit2/buildlink3.mk"
 .include "../../textproc/libxml2/buildlink3.mk"
 .include "../../mk/omf-scrollkeeper.mk"
 BUILDLINK_API_DEPENDS.gtk2+=	gtk2+>=2.10.0

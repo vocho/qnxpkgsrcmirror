@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.17 2010/07/16 14:31:46 obache Exp $
+# $NetBSD: Makefile,v 1.24 2010/12/03 07:30:17 obache Exp $
 #
 
-DISTNAME=	clutter-1.2.12
+DISTNAME=	clutter-1.2.14
+PKGREVISION=	1
 CATEGORIES=	graphics
 MASTER_SITES=	http://source.clutter-project.org/sources/clutter/1.2/
 #		${MASTER_SITE_GNOME:=sources/clutter/1.2/}
@@ -17,8 +18,9 @@ GNU_CONFIGURE=	yes
 USE_LIBTOOL=	yes
 USE_TOOLS+=	gmake pkg-config
 
-CONFIGURE_ARGS+=	--with-json=check
+CONFIGURE_ARGS+=	--with-json=system
 
+PKGCONFIG_OVERRIDE+=	clutter/cogl/cogl/cogl.pc.in
 PKGCONFIG_OVERRIDE+=	clutter/x11/clutter-x11.pc.in
 PKGCONFIG_OVERRIDE+=	clutter/win32/clutter-win32.pc.in
 PKGCONFIG_OVERRIDE+=	clutter.pc.in

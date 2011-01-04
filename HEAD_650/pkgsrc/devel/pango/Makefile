@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.145 2010/08/01 08:10:10 obache Exp $
+# $NetBSD: Makefile,v 1.149 2010/10/16 18:00:02 wiz Exp $
 
-DISTNAME=		pango-1.28.1
+DISTNAME=		pango-1.28.3
 CATEGORIES=		devel fonts
 MASTER_SITES=		${MASTER_SITE_GNOME:=sources/pango/1.28/}
 EXTRACT_SUFX=		.tar.bz2
@@ -18,6 +18,8 @@ GNU_CONFIGURE=		yes
 TEST_TARGET=		check
 USE_LIBTOOL=		yes
 USE_LANGUAGES=		c c++
+
+BUILD_DEPENDS+=		help2man-[0-9]*:../../converters/help2man
 
 PKGCONFIG_OVERRIDE=	pango-uninstalled.pc.in
 PKGCONFIG_OVERRIDE+=	pango.pc.in
@@ -42,8 +44,6 @@ PLIST_VARS+=		carbon
 
 BUILDLINK_API_DEPENDS.glib2+=	glib2>=2.17.3
 .include "../../devel/glib2/buildlink3.mk"
-# XXX: later maybe add an option for libthai to provide pango-thai-lang.la?
-#.include "../../devel/libthai/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"
 BUILDLINK_API_DEPENDS.cairo+=	cairo>=1.8.0
 .include "../../graphics/cairo/buildlink3.mk"

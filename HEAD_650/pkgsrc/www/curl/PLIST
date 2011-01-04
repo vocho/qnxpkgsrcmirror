@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.29 2009/11/15 20:09:48 drochner Exp $
+@comment $NetBSD: PLIST,v 1.31 2010/12/23 00:23:56 wiz Exp $
 bin/curl
 bin/curl-config
 include/curl/curl.h
@@ -86,6 +86,7 @@ share/examples/curl/debug.c
 share/examples/curl/evhiperfifo.c
 share/examples/curl/fileupload.c
 share/examples/curl/fopen.c
+share/examples/curl/ftp-wildcard.c
 share/examples/curl/ftpget.c
 share/examples/curl/ftpgetinfo.c
 share/examples/curl/ftpgetresp.c
@@ -116,5 +117,7 @@ share/examples/curl/sepheaders.c
 share/examples/curl/simple.c
 share/examples/curl/simplepost.c
 share/examples/curl/simplessl.c
+share/examples/curl/smooth-gtk-thread.c
+share/examples/curl/smtp-multi.c
 share/examples/curl/synctime.c
 share/examples/curl/threaded-ssl.c

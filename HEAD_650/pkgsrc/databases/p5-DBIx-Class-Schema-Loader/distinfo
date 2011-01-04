@@ -1,5 +1,5 @@
-$NetBSD: distinfo,v 1.5 2010/02/22 21:24:28 sno Exp $
+$NetBSD: distinfo,v 1.7 2010/09/21 21:50:50 sno Exp $
 
-SHA1 (DBIx-Class-Schema-Loader-0.05003.tar.gz) = 0c0c972dcc7d1402b64562b8d24de37263f1b34b
-RMD160 (DBIx-Class-Schema-Loader-0.05003.tar.gz) = 3eadb70d90aeb7e000b63f056a228e5931cc7251
-Size (DBIx-Class-Schema-Loader-0.05003.tar.gz) = 102959 bytes
+SHA1 (DBIx-Class-Schema-Loader-0.07002.tar.gz) = 6c9774a17de37a4482e11310b3404034df616a78
+RMD160 (DBIx-Class-Schema-Loader-0.07002.tar.gz) = cf9c5637599eb59a2fb97564fd0d7ded48c59cff
+Size (DBIx-Class-Schema-Loader-0.07002.tar.gz) = 138192 bytes

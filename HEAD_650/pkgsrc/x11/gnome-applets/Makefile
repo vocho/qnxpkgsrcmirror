@@ -1,9 +1,10 @@
-# $NetBSD: Makefile,v 1.83 2010/07/14 16:20:00 drochner Exp $
+# $NetBSD: Makefile,v 1.88 2010/12/16 11:37:38 ahoka Exp $
 #
 
-DISTNAME=		gnome-applets-2.30.0
+DISTNAME=		gnome-applets-2.32.1.1
+PKGREVISION=		1
 CATEGORIES=		x11 gnome
-MASTER_SITES=		${MASTER_SITE_GNOME:=sources/gnome-applets/2.30/}
+MASTER_SITES=		${MASTER_SITE_GNOME:=sources/gnome-applets/2.32/}
 EXTRACT_SUFX=		.tar.bz2
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
@@ -84,7 +85,7 @@ BUILDLINK_API_DEPENDS.dbus-glib+=	dbus-glib>=0.74
 .include "../../textproc/gnome-doc-utils/buildlink3.mk"
 .include "../../x11/gnome-control-center/buildlink3.mk"
 .include "../../x11/gnome-desktop/buildlink3.mk"
-BUILDLINK_API_DEPENDS.gnome-panel+=	gnome-panel>=2.13.4
+BUILDLINK_API_DEPENDS.gnome-panel+=	gnome-panel>=2.31.2
 .include "../../x11/gnome-panel/buildlink3.mk"
 BUILDLINK_API_DEPENDS.gtk2+=			gtk2+>=2.13.0
 .include "../../x11/gtk2/buildlink3.mk"

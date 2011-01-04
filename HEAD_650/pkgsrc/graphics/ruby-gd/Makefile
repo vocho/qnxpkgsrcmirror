@@ -1,29 +1,26 @@
-# $NetBSD: Makefile,v 1.29 2010/06/13 22:44:43 wiz Exp $
+# $NetBSD: Makefile,v 1.32 2010/12/23 11:44:45 dsainty Exp $
 
 DISTNAME=	ruby-gd-0.8.0
 PKGNAME=	${RUBY_PKGPREFIX}-${DISTNAME:S/ruby-//}
-PKGREVISION=	3
+PKGREVISION=	4
 CATEGORIES=	graphics
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://rubyforge.org/projects/ruby-gd/
 COMMENT=	Ruby extension to drive the GD library
+LICENSE=	ruby-license
 
-GEM_BUILD=		gemspec
 GEM_CLEANBUILD=		Makefile *.o GD.${RUBY_DLEXT} mkmf.log
 
 CONFIGURE_ARGS+=	--with-gd-dir=${BUILDLINK_PREFIX.gd:Q}
 CONFIGURE_ARGS+=	--with-jpeg
-CONFIGURE_ARGS+=	--with-jpeg-dir=${BUILDLINK_PREFIX.jpeg:Q}
-CONFIGURE_ARGS+=	--with-ttf
-CONFIGURE_ARGS+=	--with-ttf-dir=${BUILDLINK_PREFIX.freetype-lib:Q}
+CONFIGURE_ARGS+=	--with-jpeg-dir=${JPEGBASE:Q}
 CONFIGURE_ARGS+=	--with-freetype
 CONFIGURE_ARGS+=	--with-freetype-dir=${BUILDLINK_PREFIX.freetype2:Q}
 CONFIGURE_ARGS+=	--enable-gd2_0
 
-.include "../../misc/rubygems/rubygem.mk"
-.include "../../graphics/freetype-lib/buildlink3.mk"
+.include "../../lang/ruby/gem.mk"
 .include "../../graphics/freetype2/buildlink3.mk"
-.include "../../graphics/jpeg/buildlink3.mk"
+.include "../../mk/jpeg.buildlink3.mk"
 .include "../../graphics/gd/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

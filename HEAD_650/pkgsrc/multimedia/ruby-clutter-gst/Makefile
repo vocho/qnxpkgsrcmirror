@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.5 2010/06/13 22:45:06 wiz Exp $
+# $NetBSD: Makefile,v 1.7 2010/11/15 22:58:08 abs Exp $
 #
 
 PKGNAME=		${RUBY_PKGPREFIX}-clutter-gst-${VERSION}
 COMMENT=		Ruby binding for Clutter GStreamer library
-PKGREVISION=		4
+PKGREVISION=		6
 CATEGORIES=		multimedia
 
 PKG_DESTDIR_SUPPORT=	user-destdir

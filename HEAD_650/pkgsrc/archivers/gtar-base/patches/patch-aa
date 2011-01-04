@@ -1,28 +1,15 @@
-$NetBSD$
+$NetBSD: patch-aa,v 1.10 2010/12/12 13:10:40 wiz Exp $
 
---- src/list.c.orig	2007-10-29 12:53:06.000000000 -0500
-+++ src/list.c
-@@ -25,7 +25,9 @@
+Unportable test(1) construct.
+
+--- configure.orig	2010-12-12 12:26:48.000000000 +0000
++++ configure
+@@ -35225,7 +35225,7 @@ $as_echo "$as_me: failed program was:" >
+ sed 's/^/| /' conftest.$ac_ext >&5
  
- #include "common.h"
- 
-+#ifndef max
- #define max(a, b) ((a) < (b) ? (b) : (a))
-+#endif
- 
- union block *current_header;	/* points to current archive header */
- enum archive_format current_format; /* recognized format */
-@@ -601,8 +603,13 @@ decode_header (union block *header, stru
- 	case BLKTYPE:
- 	case CHRTYPE:
- 	  stat_info->stat.st_rdev =
-+#ifndef __QNXNTO__
- 	    makedev (MAJOR_FROM_HEADER (header->header.devmajor),
- 		     MINOR_FROM_HEADER (header->header.devminor));
-+#else
-+	    makedev (0, MAJOR_FROM_HEADER (header->header.devmajor),
-+		     MINOR_FROM_HEADER (header->header.devminor));
-+#endif
- 	  break;
- 
- 	default:
+ ( exit $ac_status )
+-if test $? == 99 && test x"$FORCE_UNSAFE_CONFIGURE" = x; then
++if test $? = 99 && test x"$FORCE_UNSAFE_CONFIGURE" = x; then
+             { { $as_echo "$as_me:$LINENO: error: in \`$ac_pwd':" >&5
+ $as_echo "$as_me: error: in \`$ac_pwd':" >&2;}
+ { { $as_echo "$as_me:$LINENO: error: you should not run configure as root (set FORCE_UNSAFE_CONFIGURE=1 in environment to bypass this check)

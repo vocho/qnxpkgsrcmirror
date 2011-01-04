@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.168 2010/07/14 02:39:17 dholland Exp $
+# $NetBSD: Makefile,v 1.170 2010/11/04 10:57:50 adam Exp $
 
-DISTNAME=	netpbm-10.35.76
-PKGREVISION=	1
+DISTNAME=	netpbm-10.35.77
 CATEGORIES=	graphics
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=netpbm/}
 EXTRACT_SUFX=	.tgz
@@ -40,7 +39,6 @@ WRAPPER_REORDER_CMDS+=	reorder:l:rle:netpbm
 
 # Several of the netpbm shell scripts use bashisms, so force using
 # bash for all of the shell scripts.
-#
 REPLACE_INTERPRETER+=	bash
 REPLACE.bash.old=	.*/bin/sh
 REPLACE.bash.new=	${TOOLS_PATH.bash}
@@ -53,6 +51,12 @@ REPLACE_FILES.bash+=	editor/pnmindex.sh
 REPLACE_FILES.bash+=	editor/pnmmargin
 REPLACE_FILES.bash+=	editor/ppmquantall
 REPLACE_FILES.bash+=	other/ppmtomap
+
+SUBST_CLASSES+=		rgb_txt
+SUBST_STAGE.rgb_txt=	post-patch
+SUBST_MESSAGE.rgb_txt=	Configure RGB_TXT
+SUBST_FILES.rgb_txt=	pm_config.in.h
+SUBST_SED.rgb_txt+=	-e 's,@@PREFIX@@,${PREFIX},'
 
 .include "../../mk/bsd.prefs.mk"
 
@@ -80,11 +84,6 @@ MAKE_ENV+=	NETPBMLIBTYPE="unixshared" NETPBMLIBSUFFIX="so"
 CPPFLAGS+=	-DSGI_IDO_CC
 .endif
 
-.include "../../graphics/jasper/buildlink3.mk"
-.include "../../graphics/png/buildlink3.mk"
-.include "../../graphics/tiff/buildlink3.mk"
-.include "../../textproc/libxml2/buildlink3.mk"
-
 pre-configure:
 	${CP} ${WRKSRC}/Makefile.config.in ${WRKSRC}/Makefile.config
 
@@ -107,4 +106,8 @@ post-install:
 	${FIND} ${DESTDIR}${PREFIX}/share/doc/netpbm -type f -print |	\
 		${XARGS} ${CHMOD} ${NONBINMODE}
 
+.include "../../graphics/jasper/buildlink3.mk"
+.include "../../graphics/png/buildlink3.mk"
+.include "../../graphics/tiff/buildlink3.mk"
+.include "../../textproc/libxml2/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

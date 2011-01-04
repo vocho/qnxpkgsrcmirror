@@ -1,13 +1,17 @@
-# $NetBSD: Makefile,v 1.1.1.1 2008/04/04 15:24:15 jlam Exp $
+# $NetBSD: Makefile,v 1.3 2010/09/13 14:32:41 taca Exp $
 
-DISTNAME=	merb_has_flash-0.9.2
-PKGNAME=	${DISTNAME:S/_/-/g}
+DISTNAME=	merb_has_flash-1.0
+PKGNAME=	${RUBY_PKGPREFIX}-${DISTNAME:S/_/-/g}
 CATEGORIES=	www
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
+HOMEPAGE=	http://github.com/eltiare/merb_has_flash
 COMMENT=	Rails-style flash for Merb
+LICENSE=	mit
 
-DEPENDS+=	merb-core>=0.9.2:../../www/merb-core
+DEPENDS+=	${RUBY_PKGPREFIX}-merb-core>=0.9.2:../../www/merb-core
 
-.include "../../misc/rubygems/rubygem.mk"
+CONFLICTS+=	merb-has-flash-[0-9]*
+
+.include "../../lang/ruby/gem.mk"
 .include "../../mk/bsd.pkg.mk"

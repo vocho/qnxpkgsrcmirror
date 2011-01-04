@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.2 2009/05/21 13:46:54 sno Exp $
+# $NetBSD: Makefile,v 1.5 2010/09/12 12:44:44 wiz Exp $
 
-DISTNAME=	Time-Progress-1.5
+DISTNAME=	Time-Progress-1.7
 PKGNAME=	p5-${DISTNAME}
 CATEGORIES=	time perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Time/}
 
 MAINTAINER=	bad@NetBSD.org
 HOMEPAGE=	http://search.cpan.org/dist/Time-Progress/
-COMMENT=	Time::Progress - Elapsed and estimated finish time reporting.
-LICENSE=	gnu-gpl-v2 # OR artistic
+COMMENT=	Elapsed and estimated finish time reporting
+LICENSE=	${PERL5_LICENSE} # see README
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
 PKG_DESTDIR_SUPPORT=	user-destdir

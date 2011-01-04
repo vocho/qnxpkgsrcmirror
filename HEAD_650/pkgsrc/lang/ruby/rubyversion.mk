@@ -1,4 +1,4 @@
-# $NetBSD: rubyversion.mk,v 1.48 2009/06/16 15:08:38 taca Exp $
+# $NetBSD: rubyversion.mk,v 1.54 2010/12/01 13:51:45 taca Exp $
 #
 
 .if !defined(_RUBYVERSION_MK)
@@ -8,14 +8,21 @@ _RUBYVERSION_MK=	# defined
 
 # current supported Ruby's version
 RUBY18_VERSION=		1.8.7
+RUBY19_VERSION=		1.9.2
 
 # patch
-RUBY18_PATCHLEVEL=	174
+RUBY18_PATCHLEVEL=	pl302
+RUBY19_PATCHLEVEL=	pl0
+
+# current API compatible version.
+RUBY18_API_VERSION=	1.8.7
+RUBY19_API_VERSION=	1.9.1
 
 # RUBY_VERSION_DEFAULT defines default version for Ruby related
-#	packages and user can define in mk.conf.  (1.6 or 1.8)
+#	packages and user can define in mk.conf.  (1.8 or 1.9)
 #
 RUBY_VERSION_DEFAULT?=	1.8
+_RUBY_VERSION_DEFAULT=	${RUBY_VERSION_DEFAULT:S/.//}
 
 # RUBY_VERSION defines the specific Ruby's version which is supported
 #	by the package.  It should be defined by packages whose distfiles
@@ -23,27 +30,45 @@ RUBY_VERSION_DEFAULT?=	1.8
 #
 #	Default value is set to ${RUBY_VERSION_DEFAULT}
 #
-.if ${RUBY_VERSION_DEFAULT} == "1.8"
+.if defined(RUBY_VERSION_REQD)
+.  if ${RUBY_VERSION_REQD} == "18"
 RUBY_VERSION?=		${RUBY18_VERSION}
-RUBY_PATCH_LEVEL?=	${RUBY18_PATCHLEVEL}
+.  elif ${RUBY_VERSION_REQD} == "19"
+RUBY_VERSION?=		${RUBY19_VERSION}
+.  else
+RUBY_VERSION?=		${RUBY18_VERSION}
+PKG_FAIL_REASON+=	"Unknown value for ${RUBY_VERSION_REQD}"
+.  endif
+.else
+.  if ${RUBY_VERSION_DEFAULT} == "1.8"
+RUBY_VERSION?=		${RUBY18_VERSION}
+.  elif ${RUBY_VERSION_DEFAULT} == "1.9"
+RUBY_VERSION?=		${RUBY19_VERSION}
+.  else
+RUBY_VERSION?=		${RUBY18_VERSION}
+.  endif
 .endif
 
-.if !empty(RUBY_PATCH_LEVEL)
-RUBY_VERSION_SUFFIX=	${RUBY_VERSION}.${RUBY_PATCH_LEVEL}
-.else
-RUBY_VERSION_SUFFIX=	${RUBY_VERSION}
+RUBY_PATCH_LEVEL=	${RUBY${RUBY_VER}_PATCHLEVEL}
+
+.if ${RUBY_VERSION} == ${RUBY18_VERSION}
+RUBY_API_VERSION=	${RUBY18_API_VERSION}
+RUBY_VERSION_SUFFIX=	${RUBY_VERSION}${RUBY_PATCH_LEVEL:S/pl/./}
+.elif ${RUBY_VERSION} == ${RUBY19_VERSION}
+RUBY_API_VERSION=	${RUBY19_API_VERSION}
+RUBY_VERSION_SUFFIX=	${RUBY_VERSION}${RUBY_PATCH_LEVEL}
 .endif
 
 # RUBY_VERSION_SUPPORTED defines the list of ${RUBY_VER} which is
 #	supported by the package.  It should be defined by the packages
 #	for specific Ruby versions.
 #
-RUBY_VERSION_SUPPORTED?= 18
+RUBY_VERSION_SUPPORTED?= 18 19
 
 # RUBY_VERSION_LIST defines the list of ${RUBY_VER} which is known to
 #	this framework.
 #
-RUBY_VERSION_LIST= 18
+RUBY_VERSION_LIST= 18 19
 
 # RUBY_NOVERSION should be set to "Yes" if the package dosen't depend on
 #	any specific version of ruby command.  In this case, package's
@@ -51,7 +76,7 @@ RUBY_VERSION_LIST= 18
 #	If RUBY_NOVERSION is "No" (default), the package's name is begin
 #	with ${RUBY_NAME}; "ruby18", "ruby19",  and so on.
 #
-#	It also affects to RUBY_DOCDIR, RUBY_EXAMPLESDIR...
+#	It also affects to RUBY_DOC, RUBY_EG...
 #
 RUBY_NOVERSION?=	No
 
@@ -63,27 +88,22 @@ _RUBY_VER=		${RUBY_VERSION:C/(-.*)//}
 _RUBY_VER_MAJOR=	${_RUBY_VER:C/([0-9]+)\.([0-9]+)\.([0-9]+)/\1/}
 _RUBY_VER_MINOR=	${_RUBY_VER:C/([0-9]+)\.([0-9]+)\.([0-9]+)/\2/}
 _RUBY_VER_TEENY=	${_RUBY_VER:C/([0-9]+)\.([0-9]+)\.([0-9]+)/\3/}
-.if !empty(RUBY_PATCH_LEVEL)
-_RUBY_PATCHLEVEL=	${RUBY_VERSION:C/(.*-)//}
-.endif
 
 # RUBY_VER defines Ruby base release.
 #
 RUBY_VER=		${_RUBY_VER_MAJOR}${_RUBY_VER_MINOR}
 
+# RUBY_API_TEENY is used by shared library version after Ruby 1.9.1
 #
-# RUBY_HAS_ARCHLIB	This package contains machine dependent binaries.
+.if ${RUBY_VER} == "19"
+RUBY_API_TEENY=		1
+.else
+RUBY_API_TEENY=		${_RUBY_VER_TEENY}
+.endif
+
 # RUBY_REQD		Minimum required Ruby's version
 #
-.if defined(RUBY_HAS_ARCHLIB) && empty(RUBY_HAS_ARCHLIB:M[nN][oO])
-.if ${RUBY_VER} == "18"
-RUBY_REQD?=		${RUBY18_VERSION}
-.endif
-.else
-.if ${RUBY_VER} == "18"
-RUBY_REQD?=		1.8.1
-.endif
-.endif
+RUBY_REQD?=		${RUBY_VERSION}
 
 # RUBY_SUFFIX is appended to Ruby's commands; ruby, irb and so on.
 #
@@ -92,6 +112,13 @@ RUBY_SUFFIX?=		${RUBY_VER}
 # RUBY_NAME defines executable's name of Ruby itself.
 #
 RUBY_NAME?=		ruby${RUBY_SUFFIX}
+
+# Optional encoding argument for shbang line
+RUBY_ENCODING_ARG?=
+
+# Name of gem and rake command
+RUBYGEM_NAME=		gem${RUBY_SUFFIX}
+RAKE_NAME=		rake${RUBY_SUFFIX}
 
 # RUBY_BASE is base of ruby package's name
 #
@@ -103,7 +130,13 @@ RUBY_PKGPREFIX?=	${RUBY_NAME}
 
 # RUBY_VER_DIR is used as part of  Ruby's library directories.
 #
+#.if ${RUBY_VER} == "18"
 RUBY_VER_DIR?=		${_RUBY_VER_MAJOR}.${_RUBY_VER_MINOR}
+#.else
+#RUBY_VER_DIR?=		${RUBY_VERSION}
+#.endif
+
+RUBY_SITE_SUBDIR?=	${_RUBY_VER_MAJOR}.${_RUBY_VER_MINOR}
 
 # Simple check for package availability with Ruby's version.
 #
@@ -119,6 +152,12 @@ RUBY_SUFFIX=
 RUBY_NAME=		ruby
 .endif
 
+# Build rdoc
+RUBY_BUILD_RDOC?=	YES
+
+# Build ri, index for ri command
+RUBY_BUILD_RI?=		YES
+
 # RUBY related command's full pathname.
 #
 RUBY?=			${PREFIX}/bin/${RUBY_NAME}
@@ -130,40 +169,46 @@ RDOC?=			${PREFIX}/bin/rdoc${RUBY_VER}
 RUBY_ARCH?= ${LOWER_ARCH}-${LOWER_OPSYS}${APPEND_ELF}${LOWER_OPSYS_VERSUFFIX}
 
 #
-# Ruby shared library version handling.
+# Ruby shared and static library version handling.
 #
-RUBY_SHLIBMAJOR?=	${_RUBY_VER_MAJOR}
-RUBY_SHLIBVER?=		${RUBY_VERSION}
+RUBY_SHLIBVER?=		${RUBY_API_VERSION}
+RUBY_SHLIB?=		${RUBY_VER}.${RUBY_SLEXT}.${RUBY_SHLIBVER}
+RUBY_SHLIBALIAS?=	@comment
+RUBY_STATICLIB?=	${RUBY_VER}-static.a
 
 .if ${OPSYS} == "NetBSD" || ${OPSYS} == "Interix"
-RUBY_SHLIBMAJOR=	${RUBY_VER}
-RUBY_SHLIBVER=		${RUBY_VER}.${_RUBY_VER_TEENY}
+RUBY_SHLIBVER=		${RUBY_VER}.${RUBY_API_TEENY}
+_RUBY_SHLIBALIAS=	${RUBY_VER}.${RUBY_SLEXT}.${RUBY_VER}
 .elif ${OPSYS} == "FreeBSD" || ${OPSYS} == "DragonFly"
-RUBY_SHLIBMAJOR=	# unused
 RUBY_SHLIBVER=		${RUBY_VER}
 .elif ${OPSYS} == "OpenBSD"
-RUBY_SHLIBMAJOR=	# unused
-RUBY_SHLIBVER=		${_RUBY_VER_MAJOR}.${_RUBY_VER_MINOR}${_RUBY_VER_TEENY}
-.elif ${OPSYS} == "IRIX"
-RUBY_SHLIBMAJOR=	# unused
-.elif ${OPSYS} == "Linux"
-RUBY_SHLIBMAJOR=	${_RUBY_VER_MAJOR}.${_RUBY_VER_MINOR}
-.endif
-
-.if empty(RUBY_SHLIBMAJOR)
-RUBY_NOSHLIBMAJOR=	"@comment "
+RUBY_SHLIBVER=		${_RUBY_VER_MAJOR}.${_RUBY_VER_MINOR}${RUBY_API_TEENY}
+.elif ${OPSYS} == "Darwin"
+RUBY_SHLIB=		${RUBY_VER}.${RUBY_SHLIBVER}.${RUBY_SLEXT}
+.if ${RUBY_VER} == "18"
+_RUBY_SHLIBALIAS=	${RUBY_VER}.${_RUBY_VER_MAJOR}.${_RUBY_VER_MINOR}.${RUBY_SLEXT}
 .else
-RUBY_NOSHLIBMAJOR=
+_RUBY_SHLIBALIAS=	.${_RUBY_VER_MAJOR}.${_RUBY_VER_MINOR}.${RUBY_SLEXT}
+RUBY_STATICLIB=		${RUBY_VER}.${RUBY_API_VERSION}-static.a
+.endif
+.elif ${OPSYS} == "Linux"
+_RUBY_SHLIBALIAS=	${RUBY_VER}.${RUBY_SLEXT}.${_RUBY_VER_MAJOR}.${_RUBY_VER_MINOR}
 .endif
 
+.if !empty(_RUBY_SHLIBALIAS)
+RUBY_SHLIBALIAS=	lib/libruby${_RUBY_SHLIBALIAS}
+.endif
 
 #
 # RUBY_DLEXT is suffix of extention library.
+# RUBY_SLEXT is suffix of shared library.
 #
 .if ${OPSYS} == "Darwin"
 RUBY_DLEXT=	bundle
+RUBY_SLEXT=	dylib
 .else
 RUBY_DLEXT=	so
+RUBY_SLEXT=	so
 .endif
 
 #
@@ -194,28 +239,30 @@ RUBY_SRCDIR?=	${_PKGSRC_TOPDIR}/lang/${RUBY_BASE}
 #
 # common paths
 #
-RUBY_LIB?=		lib/ruby/${RUBY_VER_DIR}
+RUBY_INC=		include/ruby-${RUBY_VER_DIR}
+RUBY_ARCHINC=		${RUBY_INC}/${RUBY_ARCH}
+RUBY_LIB_BASE=		lib/ruby
+RUBY_LIB?=		${RUBY_LIB_BASE}/${RUBY_VER_DIR}
 RUBY_ARCHLIB?=		${RUBY_LIB}/${RUBY_ARCH}
-RUBY_SITELIB_BASE?=	lib/ruby/site_ruby
+RUBY_SITELIB_BASE?=	${RUBY_LIB_BASE}/site_ruby
 RUBY_SITELIB?=		${RUBY_SITELIB_BASE}/${RUBY_VER_DIR}
 RUBY_SITEARCHLIB?=	${RUBY_SITELIB}/${RUBY_ARCH}
-RUBY_VENDORLIB_BASE?=	lib/ruby/vendor_ruby
+RUBY_VENDORLIB_BASE?=	${RUBY_LIB_BASE}/vendor_ruby
 RUBY_VENDORLIB?=	${RUBY_VENDORLIB_BASE}/${RUBY_VER_DIR}
 RUBY_VENDORARCHLIB?=	${RUBY_VENDORLIB}/${RUBY_ARCH}
+
 RUBY_DOC?=		share/doc/${RUBY_NAME}
 RUBY_EG?=		share/examples/${RUBY_NAME}
 
+# RUBY_GEM_BASE
+#	The base path of the gem repository.
 #
-# These will be discontinued in near future.
+RUBY_GEM_BASE?=		${RUBY_LIB_BASE}/gems
+
+# GEM_HOME
+#	The path of the gem repository.
 #
-RUBY_LIBDIR=		${PREFIX}/${RUBY_LIB}
-RUBY_ARCHLIBDIR=	${PREFIX}/${RUBY_ARCHLIB}
-RUBY_SITELIBDIR=	${PREFIX}/${RUBY_SITELIB}
-RUBY_SITEARCHLIBDIR=	${PREFIX}/${RUBY_SITEARCHLIB}
-RUBY_VENDORLIBDIR=	${PREFIX}/${RUBY_VENDORLIB}
-RUBY_VENDORARCHLIBDIR=	${PREFIX}/${RUBY_VENDORARCHLIB}
-RUBY_DOCDIR=		${PREFIX}/${RUBY_DOC}
-RUBY_EXAMPLESDIR=	${PREFIX}/${RUBY_EG}
+GEM_HOME?=		${RUBY_GEM_BASE}/${RUBY_VER_DIR}
 
 #
 # ri database relative path
@@ -235,28 +282,34 @@ MAKE_ENV+=		RUBY=${RUBY:Q} RUBY_VER=${RUBY_VER:Q} \
 MAKEFLAGS+=		RUBY_VERSION=${RUBY_VERSION:Q} \
 			RUBY_VERSION_DEFAULT=${RUBY_VERSION_DEFAULT:Q}
 
+#
 # PLIST
 #
-PLIST_RUBY_DIRS=	RUBY_LIB="${RUBY_LIB}" \
-			RUBY_ARCHLIB="${RUBY_ARCHLIB}" \
+PLIST_VARS+=		ruby18 ruby19
+.if ${RUBY_VER} == "18"
+PLIST.ruby18=		yes
+.elif ${RUBY_VER} == "19"
+PLIST.ruby19=		yes
+.endif
+
+PLIST_RUBY_DIRS=	RUBY_INC=${RUBY_INC:Q} RUBY_ARCHINC=${RUBY_ARCHINC:Q} \
+			RUBY_LIB_BASE=${RUBY_LIB_BASE:Q} \
+			RUBY_LIB=${RUBY_LIB:Q} \
+			RUBY_ARCHLIB=${RUBY_ARCHLIB:Q} \
 			RUBY_SITELIB_BASE=${RUBY_SITELIB_BASE:Q} \
-			RUBY_SITELIB="${RUBY_SITELIB}" \
-			RUBY_SITEARCHLIB="${RUBY_SITEARCHLIB}" \
+			RUBY_SITELIB=${RUBY_SITELIB:Q} \
+			RUBY_SITEARCHLIB=${RUBY_SITEARCHLIB:Q} \
 			RUBY_VENDORLIB_BASE=${RUBY_VENDORLIB_BASE:Q} \
 			RUBY_VENDORLIB=${RUBY_VENDORLIB:Q} \
 			RUBY_VENDORARCHLIB=${RUBY_VENDORARCHLIB:Q} \
-			RUBY_DOC="${RUBY_DOC}" \
-			RUBY_EG="${RUBY_EG}" \
-			RUBY_LIBDIR="${RUBY_LIBDIR}" \
-			RUBY_ARCHLIBDIR="${RUBY_ARCHLIBDIR}" \
-			RUBY_SITELIBDIR="${RUBY_SITELIBDIR}" \
-			RUBY_SITEARCHLIBDIR="${RUBY_SITEARCHLIBDIR}" \
-			RUBY_DOCDIR="${RUBY_DOCDIR}" \
-			RUBY_EXAMPLESDIR="${RUBY_EXAMPLESDIR}" \
-			RUBY_RIDIR="${RUBY_RIDIR}" \
-			RUBY_BASERIDIR="${RUBY_BASERIDIR}" \
-			RUBY_SYSRIDIR="${RUBY_SYSRIDIR}" \
-			RUBY_SITERIDIR="${RUBY_SITERIDIR}"
+			RUBY_DOC=${RUBY_DOC:Q} \
+			RUBY_EG=${RUBY_EG:Q} \
+			RUBY_GEM_BASE=${RUBY_GEM_BASE:Q} \
+			GEM_HOME=${GEM_HOME:Q} \
+			RUBY_RIDIR=${RUBY_RIDIR:Q} \
+			RUBY_BASERIDIR=${RUBY_BASERIDIR:Q} \
+			RUBY_SYSRIDIR=${RUBY_SYSRIDIR:Q} \
+			RUBY_SITERIDIR=${RUBY_SITERIDIR:Q}
 
 #
 # substitutions
@@ -272,11 +325,16 @@ MESSAGE_SUBST+=		RUBY="${RUBY}" RUBY_VER="${RUBY_VER}" \
 			${PLIST_RUBY_DIRS:S,DIR="${PREFIX}/,DIR=",}
 
 PLIST_SUBST+=		RUBY=${RUBY:Q} RUBY_VER=${RUBY_VER:Q} \
+			RUBY_PKGPREFIX=${RUBY_PKGPREFIX} \
 			RUBY_VERSION=${RUBY_VERSION:Q} \
 			RUBY_VER_DIR=${RUBY_VER_DIR:Q} \
-			RUBY_DLEXT=${RUBY_DLEXT:Q} \
+			RUBY_DLEXT=${RUBY_DLEXT:Q} RUBY_SLEXT=${RUBY_SLEXT:Q} \
+			RUBY_SHLIB=${RUBY_SHLIB:Q} \
+			RUBY_SHLIBALIAS=${RUBY_SHLIBALIAS:Q} \
+			RUBY_STATICLIB=${RUBY_STATICLIB:Q} \
 			RUBY_ARCH=${RUBY_ARCH:Q} \
-			${PLIST_RUBY_DIRS:S,DIR="${PREFIX}/,DIR=",}
+			${PLIST_RUBY_DIRS:S,DIR="${PREFIX}/,DIR=",} \
+			GEM_HOME=${GEM_HOME:Q}
 
 #
 # make dynamic PLIST
@@ -321,6 +379,27 @@ RUBY_GENERATE_PLIST =	( \
 .include "../../mk/dlopen.buildlink3.mk"
 .endif
 
+PRINT_PLIST_AWK+=	/lib\/libruby${RUBY_STATICLIB}$$/ \
+			{ sub(/${RUBY_STATICLIB}/, "$${RUBY_STATICLIB}"); }
+PRINT_PLIST_AWK+=	/lib\/libruby${RUBY_VER}\.${RUBY_SLEXT}/ \
+			{ sub(/${RUBY_VER}\.${RUBY_SLEXT}$$/, \
+			"$${RUBY_VER}.$${RUBY_SLEXT}"); }
+PRINT_PLIST_AWK+=	/${RUBY_SHLIB}$$/ \
+			{ sub(/${RUBY_SHLIB}$$/, "$${RUBY_SHLIB}"); }
+PRINT_PLIST_AWK+=	/${RUBY_SLEXT}\.${RUBY_SHLIBVER}$$/ \
+			{ sub(/${RUBY_SLEXT}\.${RUBY_SHLIBVER}$$/, \
+			"$${RUBY_SLEXT}.$${RUBY_SHLIBVER}"); }
+.if ${RUBY_SHLIBALIAS} != "@comment"
+PRINT_PLIST_AWK+=	/${RUBY_SHLIBALIAS:S/\//\\\//}$$/ \
+			{ sub(/${RUBY_SHLIBALIAS:S/\//\\\//}$$/, \
+			"$${RUBY_SHLIBALIAS}"); }
+.endif
+PRINT_PLIST_AWK+=	/^${RUBY_ARCHINC:S|/|\\/|g}/ \
+			{ gsub(/${RUBY_ARCHINC:S|/|\\/|g}/, "$${RUBY_ARCHINC}"); \
+			print; next; }
+PRINT_PLIST_AWK+=	/^${RUBY_INC:S|/|\\/|g}/ \
+			{ gsub(/${RUBY_INC:S|/|\\/|g}/, "$${RUBY_INC}"); \
+			print; next; }
 PRINT_PLIST_AWK+=	/\.${RUBY_DLEXT}$$/ \
 			{ gsub(/${RUBY_DLEXT}$$/, "$${RUBY_DLEXT}") }
 PRINT_PLIST_AWK+=	/^${RUBY_ARCHLIB:S|/|\\/|g}/ \
@@ -338,10 +417,10 @@ PRINT_PLIST_AWK+=	/^${RUBY_SITEARCHLIB:S|/|\\/|g}/ \
 PRINT_PLIST_AWK+=	/^${RUBY_SITELIB:S|/|\\/|g}/ \
 			{ gsub(/${RUBY_SITELIB:S|/|\\/|g}/, "$${RUBY_SITELIB}"); \
 			print; next; }
-PRINT_PLIST_AWK+=	/^${RUBY_SITELIB_BASE:S|/|\\/|g}$$/ \
+PRINT_PLIST_AWK+=	/^${RUBY_SITELIB_BASE:S|/|\\/|g}/ \
 			{ gsub(/${RUBY_SITELIB_BASE:S|/|\\/|g}/, "$${RUBY_SITELIB_BASE}"); \
 			print; next; }
-PRINT_PLIST_AWK+=	/^${RUBY_VENDORLIB_BASE:S|/|\\/|g}$$/ \
+PRINT_PLIST_AWK+=	/^${RUBY_VENDORLIB_BASE:S|/|\\/|g}/ \
 			{ gsub(/${RUBY_VENDORLIB_BASE:S|/|\\/|g}/, "$${RUBY_VENDORLIB_BASE}"); \
 			print; next; }
 PRINT_PLIST_AWK+=	/^${RUBY_LIB:S|/|\\/|g}/ \
@@ -356,8 +435,9 @@ PRINT_PLIST_AWK+=	/^${RUBY_EG:S|/|\\/|g}/ \
 PRINT_PLIST_AWK+=	/^${RUBY_SITERIDIR:S|/|\\/|g}/ \
 			{ gsub(/${RUBY_SITERIDIR:S|/|\\/|g}/, "$${RUBY_SITERIDIR}"); \
 			print; next; }
-PRINT_PLIST_AWK+=	/^${RUBY_SYSRIDIR:S|/|\\/|g}/ \
-			{ gsub(/${RUBY_SYSRIDIR:S|/|\\/|g}/, "$${RUBY_SYSRIDIR}"); \
-			print; next; }
+PRINT_PLIST_AWK+=	/^${RUBY_SYSRIDIR:S|/|\\/|g}\// \
+			{ next; }
+PRINT_PLIST_AWK+=	/\/${RUBY_NAME}/ \
+			{ sub(/${RUBY_NAME}/, "$${RUBY_NAME}"); }
 
 .endif # _RUBY_MK

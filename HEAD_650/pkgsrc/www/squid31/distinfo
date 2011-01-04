@@ -1,8 +1,8 @@
-$NetBSD: distinfo,v 1.22 2010/08/04 11:36:08 tron Exp $
+$NetBSD: distinfo,v 1.25 2010/11/03 10:18:26 tron Exp $
 
-SHA1 (squid-3.1.6.tar.bz2) = 16f48004e4e139da806cd9d1920ba7ee0b9416de
-RMD160 (squid-3.1.6.tar.bz2) = 95f3a4119882c2859efc4f23aaba2d4b9347f5f1
-Size (squid-3.1.6.tar.bz2) = 2421219 bytes
+SHA1 (squid-3.1.9.tar.bz2) = d80045c7ab0cadbaeafdcae42d9dd7d1861fc4c1
+RMD160 (squid-3.1.9.tar.bz2) = ea2388f5f2a8e39227b8e0c3eea4b8f44315e08f
+Size (squid-3.1.9.tar.bz2) = 2432312 bytes
 SHA1 (patch-aa) = 2ffb9838f3d15e845413695f1e3fe46d39947fbd
 SHA1 (patch-ab) = 8213ca2fd0df530c65be94b285cb30157cb08b9b
 SHA1 (patch-ac) = f98e14a814c3005816b2e925296bcf6d5423e2f9

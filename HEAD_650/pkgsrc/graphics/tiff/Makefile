@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.96 2010/06/16 13:56:41 drochner Exp $
+# $NetBSD: Makefile,v 1.98 2010/12/23 11:44:46 dsainty Exp $
 
 DISTNAME=	tiff-3.9.4
+PKGREVISION=	1
 CATEGORIES=	graphics
 MASTER_SITES=	ftp://ftp.remotesensing.org/pub/libtiff/ \
 		http://libtiff.maptools.org/dl/
@@ -34,5 +35,5 @@ post-install:
 .include "options.mk"
 
 .include "../../devel/zlib/buildlink3.mk"
-.include "../../graphics/jpeg/buildlink3.mk"
+.include "../../mk/jpeg.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

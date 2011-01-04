@@ -1,10 +1,9 @@
-# $NetBSD: Makefile,v 1.52 2010/07/14 11:11:22 sbd Exp $
+# $NetBSD: Makefile,v 1.57 2010/12/22 12:59:36 wiz Exp $
 #
 
-DISTNAME=	kipi-plugins-1.1.0
-PKGREVISION=	3
+DISTNAME=	kipi-plugins-1.7.0
 CATEGORIES=	graphics
-MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=kipi/kipi-plugins/1.1.0/}
+MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=kipi/kipi-plugins/1.7.0/}
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
@@ -16,7 +15,6 @@ BUILD_DEPENDS+=	automoc4>=0.9.83:../../devel/automoc4
 DEPENDS+=	ImageMagick-[0-9]*:../../graphics/ImageMagick
 
 PKG_DESTDIR_SUPPORT=	user-destdir
-MAKE_JOBS_SAFE=		no
 
 USE_CMAKE=		yes
 USE_PKGLOCALEDIR=	yes
@@ -36,7 +34,5 @@ BUILDLINK_API_DEPENDS.kdelibs+= kdelibs4>=4.4.0
 .include "../../security/qca2/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../textproc/expat/buildlink3.mk"
-# for Gdk for IpodExport XXX: configure doesn't accept it.
-#.include "../../x11/gtk2/buildlink3.mk"
 .include "../../x11/kdelibs4/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

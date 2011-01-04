@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.2 2010/04/15 22:52:21 minskim Exp $
-# TeX Live Revision 15878
+# $NetBSD: Makefile,v 1.4 2010/11/07 19:45:53 minskim Exp $
 
 DISTNAME=	tools.doc
-PKGNAME=	tex-${DISTNAME:S/./-/}-2009
+PKGNAME=	tex-${DISTNAME:S/./-/}-2010
+TEXLIVE_REV=	20258
 
 MAINTAINER=	minskim@NetBSD.org
 COMMENT=	Documentation for tex-tools

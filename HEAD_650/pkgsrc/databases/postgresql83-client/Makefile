@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.16 2010/05/30 11:51:19 joerg Exp $
+# $NetBSD: Makefile,v 1.19 2010/12/19 09:53:53 adam Exp $
 
-PKGNAME=	postgresql83-client-${BASE_VERS}
-PKGREVISION=	1
+PKGNAME=	${DISTNAME:C/-/83-client-/}
 COMMENT=	PostgreSQL database client programs
 
 PKG_DESTDIR_SUPPORT=	user-destdir
@@ -38,17 +37,12 @@ INSTALL_DIRS+=	src/interfaces
 INSTALL_DIRS+=	src/bin
 INSTALL_DIRS+=	src/port
 INSTALL_DIRS+=	doc
-
 BUILD_DIRS=	${INSTALL_DIRS}
-
 # Without this, the Darwin build fails (related to -bundle_loader).
 BUILD_DIRS+=	src/backend
 
-PKG_OPTIONS_VAR=	PKG_OPTIONS.postgresql83-client
-.include "../../databases/postgresql83/options.mk"
-
-.for _file_ in pg_service.conf psqlrc
-CONF_FILES+=	${PG_DATA_DIR}/${_file_}.sample ${PG_ETC_DIR}/${_file_}
+.for f in pg_service.conf psqlrc
+CONF_FILES+=	${PREFIX}/share/postgresql/${f}.sample ${PKG_SYSCONFDIR}/${f}
 .endfor
 
 # XXX work around core dumps with the native libedit
@@ -66,16 +60,16 @@ SUBST_SED.pgxs=		-e 's,${WRKDIR}/.tools,${PREFIX},'
 SUBST_SED.pgxs+=	-e 's,${WRKDIR}/.wrapper,${PREFIX},'
 SUBST_SED.pgxs+=	-e 's,${WRKSRC},/dev/null,'
 
-INSTALLATION_DIRS+=	${PG_SUBPREFIX}lib/postgresql/pgxs
-INSTALLATION_DIRS+=	${PG_SUBPREFIX}lib/postgresql/pgxs/config
-INSTALLATION_DIRS+=	${PG_SUBPREFIX}lib/postgresql/pgxs/src
-INSTALLATION_DIRS+=	${PG_SUBPREFIX}lib/postgresql/pgxs/src/makefiles
+INSTALLATION_DIRS+=	lib/postgresql/pgxs
+INSTALLATION_DIRS+=	lib/postgresql/pgxs/config
+INSTALLATION_DIRS+=	lib/postgresql/pgxs/src
+INSTALLATION_DIRS+=	lib/postgresql/pgxs/src/makefiles
 
-DEST_PG_PGXS=	${DESTDIR}${PG_PREFIX}/lib/postgresql/pgxs
-PG_PGXS_FILES=	config/install-sh config/mkinstalldirs
-PG_PGXS_FILES+=	src/makefiles/pgxs.mk src/Makefile.global
-PG_PGXS_FILES+=	src/Makefile.port src/Makefile.shlib
-PG_PGXS_FILES+=	src/nls-global.mk
+DEST_PGXS=	${DESTDIR}${PREFIX}/lib/postgresql/pgxs
+PGXS_FILES=	config/install-sh config/mkinstalldirs
+PGXS_FILES+=	src/makefiles/pgxs.mk src/Makefile.global
+PGXS_FILES+=	src/Makefile.port src/Makefile.shlib
+PGXS_FILES+=	src/nls-global.mk
 
 # On Solaris, avoid conflicts between "${SSLBASE}/include/openssl/des.h"
 # and "/usr/include/crypt.h" -- we want the definitions in the former.
@@ -92,16 +86,11 @@ pre-build:
 		../../src/include/utils/fmgroids.h
 
 post-install:
-	cd ${WRKSRC}/doc; for file in					\
-		FAQ* KNOWN_BUGS MISSING_FEATURES README.* TODO		\
-		bug.template;						\
-	do								\
-		${INSTALL_DATA} $$file ${DESTDIR}${PG_DOC_DIR}/$$file;	\
+	set -e; cd ${WRKSRC}/doc; for file in FAQ*; do \
+		${INSTALL_DATA} $$file ${DESTDIR}${PREFIX}/share/doc/postgresql/$$file;	\
 	done
-	for file in ${PG_PGXS_FILES}; do				\
-		${INSTALL_DATA} ${WRKSRC}/$$file ${DEST_PG_PGXS}/$$file;\
+	set -e; for file in ${PGXS_FILES}; do				\
+		${INSTALL_DATA} ${WRKSRC}/$$file ${DEST_PGXS}/$$file;	\
 	done
-	cp -R ${WRKSRC}/doc/TODO.detail ${DESTDIR}${PG_DOC_DIR}
-	chown -R ${DOCOWN}:${DOCGRP} ${DESTDIR}${PG_DOC_DIR}/TODO.detail
 
 .include "../../mk/bsd.pkg.mk"

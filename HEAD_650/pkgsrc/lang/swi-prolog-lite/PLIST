@@ -1,12 +1,12 @@
-@comment $NetBSD: PLIST,v 1.8 2010/05/16 18:46:10 asau Exp $
+@comment $NetBSD: PLIST,v 1.10 2010/11/23 21:56:25 asau Exp $
 bin/swi-prolog
 bin/swipl-ld
 bin/swipl-rc
 lib/pkgconfig/swipl.pc
+lib/swi-prolog-${PKGVERSION}/bin/swipl.home
 lib/swi-prolog-${PKGVERSION}/bin/${MACHINE_GNU_PLATFORM}/swi-prolog
 lib/swi-prolog-${PKGVERSION}/bin/${MACHINE_GNU_PLATFORM}/swipl-ld
 lib/swi-prolog-${PKGVERSION}/bin/${MACHINE_GNU_PLATFORM}/swipl-rc
-lib/swi-prolog-${PKGVERSION}/bin/swipl.home
 lib/swi-prolog-${PKGVERSION}/boot/apply.pl
 lib/swi-prolog-${PKGVERSION}/boot/attvar.pl
 lib/swi-prolog-${PKGVERSION}/boot/autoload.pl
@@ -62,7 +62,6 @@ lib/swi-prolog-${PKGVERSION}/doc/Manual/check.html
 lib/swi-prolog-${PKGVERSION}/doc/Manual/chr.html
 lib/swi-prolog-${PKGVERSION}/doc/Manual/chrintro.html
 lib/swi-prolog-${PKGVERSION}/doc/Manual/clicense.html
-lib/swi-prolog-${PKGVERSION}/doc/Manual/clpclp_distinct.html
 lib/swi-prolog-${PKGVERSION}/doc/Manual/clpfd.html
 lib/swi-prolog-${PKGVERSION}/doc/Manual/clpqr.html
 lib/swi-prolog-${PKGVERSION}/doc/Manual/cmdline.html
@@ -157,6 +156,7 @@ lib/swi-prolog-${PKGVERSION}/doc/Manual/mt-xpce.html
 lib/swi-prolog-${PKGVERSION}/doc/Manual/mtoplevel.html
 lib/swi-prolog-${PKGVERSION}/doc/Manual/mtunbound.html
 lib/swi-prolog-${PKGVERSION}/doc/Manual/navigator.html
+lib/swi-prolog-${PKGVERSION}/doc/Manual/nb_set.html
 lib/swi-prolog-${PKGVERSION}/doc/Manual/nbset.html
 lib/swi-prolog-${PKGVERSION}/doc/Manual/next.gif
 lib/swi-prolog-${PKGVERSION}/doc/Manual/operators.html
@@ -177,6 +177,7 @@ lib/swi-prolog-${PKGVERSION}/doc/Manual/prev.gif
 lib/swi-prolog-${PKGVERSION}/doc/Manual/profile.html
 lib/swi-prolog-${PKGVERSION}/doc/Manual/profnode.gif
 lib/swi-prolog-${PKGVERSION}/doc/Manual/projectfiles.html
+lib/swi-prolog-${PKGVERSION}/doc/Manual/prolog_xref.html
 lib/swi-prolog-${PKGVERSION}/doc/Manual/prologxref.html
 lib/swi-prolog-${PKGVERSION}/doc/Manual/protocol.html
 lib/swi-prolog-${PKGVERSION}/doc/Manual/qsaveforeign.html
@@ -264,6 +265,7 @@ lib/swi-prolog-${PKGVERSION}/library/clp/clp_distinct.pl
 lib/swi-prolog-${PKGVERSION}/library/clp/clp_events.pl
 lib/swi-prolog-${PKGVERSION}/library/clp/clpfd.pl
 lib/swi-prolog-${PKGVERSION}/library/clp/simplex.pl
+lib/swi-prolog-${PKGVERSION}/library/coinduction.pl
 lib/swi-prolog-${PKGVERSION}/library/csv.pl
 lib/swi-prolog-${PKGVERSION}/library/ctypes.pl
 lib/swi-prolog-${PKGVERSION}/library/date.pl

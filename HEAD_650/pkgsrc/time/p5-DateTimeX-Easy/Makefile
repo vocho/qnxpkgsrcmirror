@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.5 2010/02/02 14:36:46 sno Exp $
+# $NetBSD: Makefile,v 1.7 2010/09/19 11:29:41 wiz Exp $
 
-DISTNAME=	DateTimeX-Easy-0.088
+DISTNAME=	DateTimeX-Easy-0.089
 PKGNAME=	p5-${DISTNAME}
 CATEGORIES=	time perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=DateTimeX/}
@@ -11,7 +11,6 @@ COMMENT=	Parse a date/time string using the best method available
 LICENSE=	${PERL5_LICENSE}
 
 DEPENDS+=	p5-DateTime-[0-9]*:../../time/p5-DateTime
-DEPENDS+=	p5-DateTime-Format-DateManip-[0-9]*:../../time/p5-DateTime-Format-DateManip
 DEPENDS+=	p5-DateTime-Format-Flexible-[0-9]*:../../time/p5-DateTime-Format-Flexible
 DEPENDS+=	p5-DateTime-Format-ICal-[0-9]*:../../time/p5-DateTime-Format-ICal
 DEPENDS+=	p5-DateTime-Format-Natural-[0-9]*:../../time/p5-DateTime-Format-Natural

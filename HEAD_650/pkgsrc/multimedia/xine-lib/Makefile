@@ -1,12 +1,16 @@
-# $NetBSD: Makefile,v 1.80 2010/07/28 09:24:14 drochner Exp $
+# $NetBSD: Makefile,v 1.82 2010/12/23 10:46:05 obache Exp $
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 .include "Makefile.common"
+PKGREVISION=		2
 
 COMMENT=		Multimedia player library
 
+CONFLICTS+=		xine-xcb-[0-9]*
+
 CONFIGURE_ARGS+=	--disable-v4l
+CONFIGURE_ARGS+=	--disable-real-codecs
 
 BUILDLINK_API_DEPENDS.vcdimager+= vcdimager>=0.7.20nb1
 
@@ -48,5 +52,6 @@ CONFIGURE_ARGS+=	--disable-opengl
 .include "../../x11/libXt/buildlink3.mk"
 .include "../../x11/libX11/buildlink3.mk"
 .include "../../x11/libXinerama/buildlink3.mk"
+.include "../../x11/libxcb/buildlink3.mk"
 .include "../../x11/xextproto/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

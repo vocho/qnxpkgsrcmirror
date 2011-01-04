@@ -1,16 +1,16 @@
-# $NetBSD: Makefile,v 1.38 2010/07/21 18:25:05 tnn Exp $
+# $NetBSD: Makefile,v 1.45 2010/12/12 00:07:23 tnn Exp $
 #
 
 DISTNAME=	seamonkey-${SM_VER}.source
 PKGNAME=	seamonkey-${SM_VER}
-SM_VER=		2.0.6
+SM_VER=		2.0.11
 CATEGORIES=	www
 MASTER_SITES=	${MASTER_SITE_MOZILLA:=seamonkey/releases/${SM_VER}/source/}
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	tnn@NetBSD.org
-HOMEPAGE=	http://www.mozilla.org/projects/seamonkey/
-COMMENT=	Full featured gecko-based browser
+HOMEPAGE=	http://www.seamonkey-project.org/
+COMMENT=	Full-featured gecko-based browser
 
 WRKSRC=		${WRKDIR}/comm-1.9.1
 MOZILLA_DIR=	mozilla/

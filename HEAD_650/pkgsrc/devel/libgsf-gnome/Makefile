@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.6 2010/06/13 22:44:07 wiz Exp $
+# $NetBSD: Makefile,v 1.9 2010/11/15 22:56:42 abs Exp $
 #
 
-DISTNAME=	libgsf-1.14.18
-PKGNAME=	libgsf-gnome-1.14.18
+DISTNAME=	libgsf-1.14.19
+PKGNAME=	${DISTNAME:S/libgsf/libgsf-gnome/}
 PKGREVISION=	1
 CATEGORIES=	devel gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/libgsf/1.14/}

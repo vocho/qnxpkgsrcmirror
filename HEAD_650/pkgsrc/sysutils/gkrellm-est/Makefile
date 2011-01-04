@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.17 2010/06/13 22:45:22 wiz Exp $
+# $NetBSD: Makefile,v 1.20 2010/11/15 22:58:31 abs Exp $
 #
 
 DISTNAME=		gkrellm-est-20040710
-PKGREVISION=		8
+PKGREVISION=		10
 CATEGORIES=		sysutils
 MASTER_SITES=		http://cubidou.nerim.net/gkrellm-est/
 
-MAINTAINER=		cube@NetBSD.org
+MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://cubidou.nerim.net/gkrellm-est/
 COMMENT=		GKrellM plugin that controls EST-capable processors
 

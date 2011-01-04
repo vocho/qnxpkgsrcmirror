@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.77 2010/07/20 12:10:34 drochner Exp $
+# $NetBSD: Makefile,v 1.81 2010/11/17 01:14:52 obache Exp $
 #
 
-DISTNAME=	vte-0.24.3
+DISTNAME=	vte-0.26.2
 CATEGORIES=	x11
-MASTER_SITES=	${MASTER_SITE_GNOME:=sources/vte/0.24/}
+MASTER_SITES=	${MASTER_SITE_GNOME:=sources/vte/0.26/}
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
@@ -21,6 +21,7 @@ USE_TOOLS+=		autoconf automake autoreconf
 
 CONFIGURE_ARGS+=	--disable-python
 CONFIGURE_ARGS+=	--with-ft-exec-prefix=${BUILDLINK_PREFIX.freetype2}
+CONFIGURE_ARGS+=	--enable-Bsymbolic=auto
 
 PKGCONFIG_OVERRIDE+=	vte.pc.in
 

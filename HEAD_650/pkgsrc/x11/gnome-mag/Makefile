@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.56 2010/06/13 22:45:37 wiz Exp $
+# $NetBSD: Makefile,v 1.59 2010/12/06 11:47:48 markd Exp $
 #
 
 DISTNAME=		gnome-mag-0.16.1
-PKGREVISION=		1
+PKGREVISION=		3
 CATEGORIES=		x11 gnome
 MASTER_SITES=		${MASTER_SITE_GNOME:=sources/gnome-mag/0.16/}
 EXTRACT_SUFX=		.tar.bz2
@@ -20,6 +20,12 @@ USE_LIBTOOL=		yes
 GNU_CONFIGURE=		yes
 
 PKGCONFIG_OVERRIDE+=	gnome-mag-1.0.pc.in
+
+SUBST_CLASSES+=		doxy
+SUBST_STAGE.doxy=	pre-configure
+SUBST_MESSAGE.doxy=	disable doxygen docs
+SUBST_FILES.doxy=	docs/Makefile.in
+SUBST_SED.doxy=		-e 's,SUBDIRS = reference,SUBDIRS =,'
 
 BUILDLINK_DEPMETHOD.libXt?=	build
 

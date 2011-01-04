@@ -1,16 +1,19 @@
-# $NetBSD: Makefile,v 1.18 2010/01/29 19:08:31 joerg Exp $
+# $NetBSD: Makefile,v 1.20 2010/09/13 14:39:30 taca Exp $
 #
 
 DISTNAME=	newfile-1.0.14
-PKGREVISION=	3
+PKGREVISION=	4
 CATEGORIES=	devel
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=newfile/}
 
 MAINTAINER=	flynn@energyhq.es.eu.org
 HOMEPAGE=	http://newfile.sourceforge.net/
 COMMENT=	Tool for creating starter files in various languages
+LICENSE=	modified-bsd
 
 PKG_DESTDIR_SUPPORT=	user-destdir
+
+CONFLICTS+=	ruby[1-9][0-9]-newfile-* newfile-*
 
 NO_BUILD=	yes
 GNU_CONFIGURE=	yes

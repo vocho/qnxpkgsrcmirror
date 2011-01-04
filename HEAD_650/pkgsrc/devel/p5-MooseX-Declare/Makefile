@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.8 2010/02/16 12:33:42 sno Exp $
+# $NetBSD: Makefile,v 1.10 2010/09/02 19:33:37 sno Exp $
 #
 
-DISTNAME=	MooseX-Declare-0.33
+DISTNAME=	MooseX-Declare-0.34
 PKGNAME=	p5-${DISTNAME}
 #PKGREVISION=	1
 CATEGORIES=	devel perl5
@@ -15,7 +15,7 @@ LICENSE=	${PERL5_LICENSE}
 DEPENDS+=	p5-Devel-Declare>=0.005011:../../devel/p5-Devel-Declare
 DEPENDS+=	p5-List-MoreUtils-[0-9]*:../../devel/p5-List-MoreUtils
 DEPENDS+=	p5-Moose>=0.90:../../devel/p5-Moose
-DEPENDS+=	p5-MooseX-Method-Signatures>=0.30:../../devel/p5-MooseX-Method-Signatures
+DEPENDS+=	p5-MooseX-Method-Signatures>=0.36:../../devel/p5-MooseX-Method-Signatures
 DEPENDS+=	p5-MooseX-Role-Parameterized>=0.12:../../devel/p5-MooseX-Role-Parameterized
 DEPENDS+=	p5-MooseX-Types>=0.20:../../devel/p5-MooseX-Types
 DEPENDS+=	p5-namespace-autoclean>=0.09:../../devel/p5-namespace-autoclean

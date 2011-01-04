@@ -1,10 +1,9 @@
-# $NetBSD: Makefile,v 1.27 2010/06/19 13:57:47 drochner Exp $
+# $NetBSD: Makefile,v 1.31 2010/11/17 14:35:33 drochner Exp $
 #
 
-DISTNAME=	gvfs-1.4.3
-PKGREVISION=	1
+DISTNAME=	gvfs-1.6.6
 CATEGORIES=	sysutils
-MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gvfs/1.4/}
+MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gvfs/1.6/}
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
@@ -27,7 +26,7 @@ PKG_SUGGESTED_OPTIONS+= hal samba
 PLIST_VARS+=		${PKG_SUPPORTED_OPTIONS}
 
 # XXX fuse.bl3.mk will fail if we include it and fuse is not available
-.if ${OPSYS} == "Linux" || (${OPSYS} == "NetBSD" && exists(/usr/include/fuse.h))
+.if ${OPSYS} == "Linux" #|| (${OPSYS} == "NetBSD" && exists(/usr/include/fuse.h))
 PKG_SUGGESTED_OPTIONS+=	fuse
 .endif
 
@@ -70,7 +69,7 @@ CONFIGURE_ARGS+=	--disable-fuse
 .endif
 
 BUILDLINK_API_DEPENDS.glib2+=	glib2>=2.17.6
-.include "../../devel/glib2/buildlink3.mk"
+.include "../../devel/glib2/modules.mk"
 .include "../../sysutils/dbus/buildlink3.mk"
 .include "../../archivers/libarchive/buildlink3.mk"
 BUILDLINK_API_DEPENDS.libsoup24+=	libsoup24>=2.25.1

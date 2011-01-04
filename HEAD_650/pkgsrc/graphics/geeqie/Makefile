@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.10 2010/06/13 22:44:31 wiz Exp $
+# $NetBSD: Makefile,v 1.13 2010/11/15 22:57:14 abs Exp $
 #
 
 DISTNAME=	geeqie-1.0
-PKGREVISION=	1
+PKGREVISION=	3
 CATEGORIES=	graphics
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=geeqie/}
 
@@ -20,6 +20,9 @@ USE_TOOLS=		bash:run gmake intltool msgfmt pkg-config
 REPLACE_BASH=		plugins/rotate/geeqie-rotate
 REPLACE_BASH+=		plugins/ufraw/geeqie-ufraw
 REPLACE_BASH+=		plugins/import/geeqie-import
+
+post-build:
+	cd ${WRKSRC}/doc && ${MAKE_PROGRAM} html
 
 .include "../../graphics/exiv2/buildlink3.mk"
 .include "../../graphics/lcms/buildlink3.mk"

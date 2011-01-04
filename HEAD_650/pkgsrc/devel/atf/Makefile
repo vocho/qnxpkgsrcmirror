@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.13 2010/07/02 15:14:20 jmmv Exp $
+# $NetBSD: Makefile,v 1.15 2010/11/07 13:41:14 jmmv Exp $
 #
 
-DISTNAME=	atf-0.10
+DISTNAME=	atf-0.12
 CATEGORIES=	devel
-MASTER_SITES=	ftp://ftp.NetBSD.org/pub/NetBSD/misc/jmmv/atf/0.10/
+MASTER_SITES=	ftp://ftp.NetBSD.org/pub/NetBSD/misc/jmmv/atf/0.12/
 
 MAINTAINER=	jmmv@NetBSD.org
 HOMEPAGE=	http://www.NetBSD.org/~jmmv/atf/

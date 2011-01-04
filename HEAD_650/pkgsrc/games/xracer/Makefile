@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.47 2010/01/18 09:58:54 wiz Exp $
+# $NetBSD: Makefile,v 1.49 2010/12/23 11:44:32 dsainty Exp $
 #
 
 DISTNAME=		xracer-0.96.9
-PKGREVISION=		9
+PKGREVISION=		10
 CATEGORIES=		games x11
 MASTER_SITES=		http://www.annexia.org/_file/
 
@@ -34,6 +34,6 @@ post-configure: do-makemaker-configure
 
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../graphics/Mesa/buildlink3.mk"
-.include "../../graphics/jpeg/buildlink3.mk"
+.include "../../mk/jpeg.buildlink3.mk"
 .include "../../lang/perl5/module.mk"
 .include "../../mk/bsd.pkg.mk"

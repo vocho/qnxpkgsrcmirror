@@ -1,10 +1,11 @@
-# $NetBSD: Makefile,v 1.2 2009/12/02 14:46:35 fhajny Exp $
+# $NetBSD: Makefile,v 1.5 2010/09/13 14:49:54 taca Exp $
 
-DISTNAME=	capistrano-2.5.10
+DISTNAME=	capistrano-2.5.19
+PKGREVISION=	1
 CATEGORIES=	sysutils
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.capify.org/
+HOMEPAGE=	http://github.com/capistrano/capistrano
 COMMENT=	Tool for parallel execution of commands across multiple machines
 LICENSE=	mit
 
@@ -16,7 +17,7 @@ DEPENDS+=	${RUBY_PKGPREFIX}-net-sftp>=2.0.0:../../security/ruby-net-sftp
 DEPENDS+=	${RUBY_PKGPREFIX}-net-scp>=1.0.0:../../security/ruby-net-scp
 DEPENDS+=	${RUBY_PKGPREFIX}-highline>=0:../../devel/ruby-highline
 
-GEM_BUILD=	gemspec
+CONFLICTS+=	ruby[1-9][0-9]-capistrano-[0-9]* capistrano-[0-9]*
 
-.include "../../misc/rubygems/rubygem.mk"
+.include "../../lang/ruby/gem.mk"
 .include "../../mk/bsd.pkg.mk"

@@ -1,10 +1,9 @@
-# $NetBSD: Makefile,v 1.55 2010/06/13 22:44:02 wiz Exp $
+# $NetBSD: Makefile,v 1.58 2010/11/15 20:51:44 drochner Exp $
 #
 
-DISTNAME=		at-spi-1.30.1
-PKGREVISION=		1
+DISTNAME=		at-spi-1.32.0
 CATEGORIES=		devel
-MASTER_SITES=		${MASTER_SITE_GNOME:=sources/at-spi/1.30/}
+MASTER_SITES=		${MASTER_SITE_GNOME:=sources/at-spi/1.32/}
 EXTRACT_SUFX=		.tar.bz2
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
@@ -26,10 +25,6 @@ PKGCONFIG_OVERRIDE+=	libloginhelper-1.0.pc.in
 PKGCONFIG_OVERRIDE+=	libspi-1.0.pc.in
 
 GCONF_SCHEMAS=		at-spi.schemas
-
-# Workaround for Upstream Bug#562310.
-# for more detail, see also PR#41475.
-TOOLS_NOOP+=	gtkdoc-rebase
 
 .include "../../devel/GConf/schemas.mk"
 BUILDLINK_API_DEPENDS.atk+=	atk>=1.17.0

@@ -1,8 +1,8 @@
 $NetBSD$
 
---- Makefile.SH.orig	2009-08-03 20:43:30.000000000 +0000
+--- Makefile.SH.orig	2010-09-06 23:30:32.000000000 +0000
 +++ Makefile.SH
-@@ -87,7 +87,7 @@ true)
+@@ -81,7 +81,7 @@ true)
  	sunos*)
  		linklibperl="-lperl"
  		;;

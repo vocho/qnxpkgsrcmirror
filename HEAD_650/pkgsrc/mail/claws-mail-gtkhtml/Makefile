@@ -1,13 +1,12 @@
-# $NetBSD: Makefile,v 1.23 2010/06/13 22:44:52 wiz Exp $
+# $NetBSD: Makefile,v 1.26 2010/11/29 17:58:36 drochner Exp $
 #
 
-DISTNAME=	gtkhtml2_viewer-0.27
-PKGNAME=	claws-mail-gtkhtml2_viewer-0.27
-PKGREVISION=	1
+DISTNAME=	gtkhtml2_viewer-0.28
+PKGNAME=	claws-mail-gtkhtml2_viewer-0.28
 CATEGORIES=	mail
 MASTER_SITES=	http://claws-mail.org/downloads/plugins/
 
-MAINTAINER=	smb@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 COMMENT=	Renders HTML mail using the gtkhtml2 rendering widget
 
 PKG_DESTDIR_SUPPORT=	user-destdir

@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.8 2010/06/09 16:32:36 minskim Exp $
+# $NetBSD: Makefile,v 1.10 2010/10/15 11:38:59 taca Exp $
 
-DISTNAME=	activeresource-2.3.8
-PKGNAME=	${RUBY_PKGPREFIX}-${DISTNAME}
+DISTNAME=	activeresource-2.3.10
 CATEGORIES=	www
 
 MAINTAINER=	minskim@NetBSD.org
 HOMEPAGE=	http://rubyforge.org/projects/activeresource/
 COMMENT=	Object-relational mapping for REST webservices
+LICENSE=	mit
 
-DEPENDS+=	${RUBY_PKGPREFIX}-activesupport>=2.3.8:../../devel/ruby-activesupport
+DEPENDS+=	${RUBY_PKGPREFIX}-activesupport>=2.3.10<3.0.0:../../devel/ruby-activesupport
 
-.include "../../misc/rubygems/rubygem.mk"
+.include "../../lang/ruby/gem.mk"
 .include "../../mk/bsd.pkg.mk"

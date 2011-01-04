@@ -1,27 +1,30 @@
-# $NetBSD: Makefile,v 1.30 2010/01/27 13:21:58 fhajny Exp $
+# $NetBSD: Makefile,v 1.34 2010/09/16 12:02:05 taca Exp $
 
-DISTNAME=	rubygems-1.3.5
-PKGREVISION=	2
+DISTNAME=	rubygems-1.3.7
 CATEGORIES=	misc ruby
-MASTER_SITES=	http://rubyforge.org/frs/download.php/60718/
+MASTER_SITES=	http://rubyforge.org/frs/download.php/70696/
 EXTRACT_SUFX=	.tgz
 
-MAINTAINER=	minskim@NetBSD.org
+MAINTAINER=	taca@NetBSD.org
 HOMEPAGE=	http://www.rubygems.org/
 COMMENT=	Ruby standard for publishing and managing third party libraries
+LICENSE=	gnu-gpl-v2 OR ruby-license
 
 PKG_DESTDIR_SUPPORT=	user-destdir
+
+CONFLICTS+=	rubygems-[0-9]*
 
 .include "../../mk/bsd.prefs.mk"
 
 NO_CONFIGURE=	yes
 NO_BUILD=	yes
 RUBY_REQD=	1.8.7
+RUBY_VERSION=   ${RUBY18_VERSION}
 
+RUBY_VERSION_SUPPORTED= 18
 REPLACE_RUBY_DIRS=	bin
 REPLACE_RUBY_PAT=	[a-z]*
 
-GEM_HOME=	${PREFIX}/lib/ruby/gems/${RUBY_VER_DIR}
 GEM_DOCDIR=	${GEM_HOME}/doc/${DISTNAME}
 
 REQD_DIRS=	${GEM_HOME:H}
@@ -37,7 +40,6 @@ SUBST_FILES.conf=	lib/rubygems/config_file.rb
 SUBST_SED.conf=		-e "s|@PKG_SYSCONFDIR@|${PKG_SYSCONFDIR}|g"
 SUBST_MESSAGE.conf=	Fixing configuration files.
 
-
 # Generate a dynamic PLIST for the rubygems documentation directory.
 GENERATE_PLIST+=	\
 	${ECHO} "@comment The following lines are automatically generated." && \
@@ -45,17 +47,14 @@ GENERATE_PLIST+=	\
 	  ${FIND} ${GEM_DOCDIR:S|${PREFIX}/||} \! -type d -print | \
 		${SORT};
 
-.include "../../lang/ruby/modules.mk"
-
 # Force the Gem repository to be under ${DESTDIR}.  This is harmless
 # because this package depends on no other gems.
 #
-INSTALL_ENV+=		GEM_HOME=${DESTDIR}${GEM_HOME}
-INSTALL_ENV+=		GEM_PATH=${DESTDIR}${GEM_HOME}
+INSTALL_ENV+=		GEM_HOME=${DESTDIR}${PREFIX}/${GEM_HOME}
+INSTALL_ENV+=		GEM_PATH=${DESTDIR}${PREFIX}/${GEM_HOME}
 
 INSTALL_TARGET=		install
 INSTALL_TARGET+=	--vendor
-INSTALL_TARGET+=	--no-format-executable	# "bin/gem", not "bin/gem18"
 .if ${_USE_DESTDIR} != "no"
 INSTALL_TARGET+=	--destdir=${DESTDIR:Q}
 .endif
@@ -67,4 +66,5 @@ do-install:
 	cd ${WRKSRC} && ${SETENV} ${INSTALL_ENV} ${MAKE_ENV} \
 		${RUBY} setup.rb ${INSTALL_TARGET}
 
+.include "../../lang/ruby/modules.mk"
 .include "../../mk/bsd.pkg.mk"
