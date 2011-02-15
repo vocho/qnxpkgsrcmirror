@@ -1,8 +1,8 @@
 $NetBSD$
 
---- include/iconv.h.in.orig	2009-06-21 11:17:33.000000000 +0000
-+++ include/iconv.h.in
-@@ -58,6 +58,10 @@ typedef void* iconv_t;
+--- include/iconv.h.build.in.orig	2009-06-30 20:51:58.000000000 +0000
++++ include/iconv.h.build.in
+@@ -64,6 +64,10 @@ typedef void* iconv_t;
  #ifndef EILSEQ
  #define EILSEQ @EILSEQ@
  #endif
