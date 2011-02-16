@@ -37,6 +37,18 @@ PTHREAD_OPTS+=		require
 .include "../../mk/bsd.prefs.mk"
 .include "options.mk"
 
+CFLAGS.QNX+=	-D__NO_EXT_PCDOS
+.if ${OPSYS} == "QNX"
+# At some point in the build an executable that links against
+# glib2 is run. When HAVE_LANGINFO_CODESET isn't set
+# _g_locale_charset_raw() goes to getenv() and pulls out
+# 'LC_ALL', 'LC_CTYPE' and then 'LANG' in that order.  If
+# any are set to 'C' later libiconv_open ("UTF-8", "C")
+# fails as "C" isn't supported therein.  The latter two are
+# set to "C" by bsd.pkg.mk.
+MAKE_ENV=      LC_ALL=ASCII
+.endif
+
 .if !empty(MACHINE_PLATFORM:MDarwin-[567].*-*)
 USE_BUILTIN.libpcap=	no
 .endif
@@ -48,6 +60,7 @@ BUILDLINK_API_DEPENDS.zlib=zlib>=1.2.1
 .include "../../devel/pcre/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"
 .include "../../net/libpcap/buildlink3.mk"
+.include "../../devel/libgetopt/buildlink3.mk"
 .include "../../devel/libsmi/buildlink3.mk"
 .include "../../security/gnutls/buildlink3.mk"
 .include "../../security/openssl/buildlink3.mk"
