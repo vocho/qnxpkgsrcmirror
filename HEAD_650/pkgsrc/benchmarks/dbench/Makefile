@@ -19,6 +19,10 @@ GNU_CONFIGURE=		yes
 MAKE_ENV+=	DB_LDFLAGS="-lrt" TB_LDFLAGS="-lsocket -lnsl"
 .endif
 
+.if ${OPSYS} == "QNX"
+LIBS=-lsocket -ls5ipc -lnbutil
+.endif
+
 INSTALL_MAKE_FLAGS+=	prefix=${DESTDIR}${PREFIX} \
 			datadir=${DESTDIR}${PREFIX}/share/dbench \
 			mandir=${DESTDIR}${PREFIX}/${PKGMANDIR}/man1
@@ -34,4 +38,7 @@ INSTALLATION_DIRS=	share/doc/dbench
 post-install:
 	${INSTALL_DATA} ${WRKSRC}/README ${DESTDIR}${PREFIX}/share/doc/dbench
 
+.if ${OPSYS} == "QNX"
+.include "../../sysutils/s5ipc/buildlink3.mk"
+.endif
 .include "../../mk/bsd.pkg.mk"
