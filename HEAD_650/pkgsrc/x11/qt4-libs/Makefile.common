@@ -136,6 +136,6 @@ pre-configure:
 		${FILESDIR}/qmake.conf > ${WRKSRC}/qmake.conf
 	for dir in ${WRKSRC}/mkspecs/*; do \
 		cp ${WRKSRC}/qmake.conf $${dir}; \
-		rm -f $${dir}/*.orig; \
+		rm -f $${dir}/*.orig $${dir}/*/*.orig; \
 	done
 	cp ${WRKSRC}/qmake.conf ${WRKSRC}/mkspecs/unsupported/qnx-g++
