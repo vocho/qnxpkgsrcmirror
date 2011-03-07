@@ -5,7 +5,17 @@ LD_PRELOAD is supported on DragonFly.
 
 --- configure.orig	2010-09-06 16:16:46.000000000 +0000
 +++ configure
-@@ -21447,7 +21447,7 @@ xlib_xcb_NONPKGCONFIG_LIBS="$ac_env_xlib
+@@ -7392,6 +7392,9 @@ sparc*-*solaris*)
+   fi
+   rm -rf conftest*
+   ;;
++*-*qnx6*)
++  PTHREAD_LIBS="-lc"
++  ;;
+ esac
+ 
+ need_locks="$enable_libtool_lock"
+@@ -21447,7 +21450,7 @@ xlib_xcb_NONPKGCONFIG_LIBS="$ac_env_xlib
  xlib_xcb_NONPKGCONFIG_EXTRA_LIBS="$ac_env_xlib_xcb_NONPKGCONFIG_EXTRA_LIBS_value"
  
  
@@ -14,7 +24,7 @@ LD_PRELOAD is supported on DragonFly.
      xlib_xcb_REQUIRES="x11-xcb"
  
  pkg_failed=no
-@@ -21797,7 +21797,7 @@ xcb_shm_NONPKGCONFIG_LIBS="$ac_env_xcb_s
+@@ -21797,7 +21800,7 @@ xcb_shm_NONPKGCONFIG_LIBS="$ac_env_xcb_s
  xcb_shm_NONPKGCONFIG_EXTRA_LIBS="$ac_env_xcb_shm_NONPKGCONFIG_EXTRA_LIBS_value"
  
  
@@ -23,7 +33,7 @@ LD_PRELOAD is supported on DragonFly.
        xcb_shm_REQUIRES="xcb-shm"
  
  pkg_failed=no
-@@ -25203,7 +25203,7 @@ drm_xr_NONPKGCONFIG_LIBS="$ac_env_drm_xr
+@@ -25203,7 +25206,7 @@ drm_xr_NONPKGCONFIG_LIBS="$ac_env_drm_xr
  drm_xr_NONPKGCONFIG_EXTRA_LIBS="$ac_env_drm_xr_NONPKGCONFIG_EXTRA_LIBS_value"
  
  
@@ -32,7 +42,7 @@ LD_PRELOAD is supported on DragonFly.
        drm_xr_REQUIRES="xorg-server >= 1.6 xproto xextproto >= 7.0.99.1 renderproto x11"
  
  pkg_failed=no
-@@ -25845,7 +25845,7 @@ xcb_drm_NONPKGCONFIG_LIBS="$ac_env_xcb_d
+@@ -25845,7 +25848,7 @@ xcb_drm_NONPKGCONFIG_LIBS="$ac_env_xcb_d
  xcb_drm_NONPKGCONFIG_EXTRA_LIBS="$ac_env_xcb_drm_NONPKGCONFIG_EXTRA_LIBS_value"
  
  
@@ -41,12 +51,12 @@ LD_PRELOAD is supported on DragonFly.
        xcb_drm_REQUIRES="xcb-dri2"
  
  pkg_failed=no
-@@ -33603,7 +33603,7 @@ _ACEOF
+@@ -33603,7 +33606,7 @@ _ACEOF
  
  
  case $host in
 -*-linux*|*-*bsd*|*-solaris*|*-*-darwin*)
-+*-linux*|*-*bsd*|*-solaris*|*-*-darwin*|*-dragonfly*)
++*-linux*|*-*bsd*|*-solaris*|*-*-darwin*|*-dragonfly*|*-*qnx6*)
  	have_ld_preload="yes"
  	;;
  *)
