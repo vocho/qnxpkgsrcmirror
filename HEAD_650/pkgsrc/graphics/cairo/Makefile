@@ -21,6 +21,7 @@ GNU_CONFIGURE=		yes
 CONFIGURE_ARGS+=	--enable-gl
 CONFIGURE_ARGS+=	--enable-pdf
 CONFIGURE_ARGS+=	--enable-ps
+CONFIGURE_ARGS+=	--enable-egl=no # not in PLIST
 
 PLIST_VARS+=		carbon
 .if exists(/System/Library/Frameworks/Carbon.framework)
