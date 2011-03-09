@@ -1,0 +1,13 @@
+$NetBSD$
+
+--- Iex/IexThrowErrnoExc.cpp.orig	2010-01-16 00:52:36.000000000 +0000
++++ Iex/IexThrowErrnoExc.cpp
+@@ -620,7 +620,7 @@ void throwErrnoExc (const std::string &t
+ 	    throw EhostunreachExc (tmp);
+       #endif
+ 
+-      #if defined (EALREADY)
++      #if defined (EALREADY)  && ((EALREADY) != (EBUSY))
+ 	  case EALREADY:
+ 	    throw EalreadyExc (tmp);
+       #endif
