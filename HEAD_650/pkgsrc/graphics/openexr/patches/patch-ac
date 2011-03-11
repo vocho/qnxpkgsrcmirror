@@ -1,0 +1,14 @@
+$NetBSD$
+
+--- exrenvmap/blurImage.cpp.orig	2009-02-25 23:39:27.000000000 +0000
++++ exrenvmap/blurImage.cpp
+@@ -45,6 +45,9 @@
+ #include "Iex.h"
+ #include <iostream>
+ #include <algorithm>
++#ifdef __QNXNTO__
++#include <string.h> /* For memcpy() */
++#endif
+ 
+ using namespace std;
+ using namespace Imf;
