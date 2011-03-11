@@ -1,0 +1,14 @@
+$NetBSD$
+
+--- Imath/ImathMatrix.h.orig	2010-07-16 22:48:40.000000000 +0000
++++ Imath/ImathMatrix.h
+@@ -51,6 +51,9 @@
+ 
+ #include <iostream>
+ #include <iomanip>
++#ifdef __QNXNTO__
++#include <string.h> /* for memset */
++#endif
+ 
+ #if (defined _WIN32 || defined _WIN64) && defined _MSC_VER
+ // suppress exception specification warnings
