@@ -56,7 +56,7 @@ FILES_SUBST+=	DATE=${DATE:Q}
 .include "options.mk"
 
 .if ${OPSYS} == "QNX" && ${MACHINE_ARCH} == "i386"
-RUBY_ARCH= i386-nto-qnx6.6.0
+RUBY_ARCH= i386-nto-qnx${LOWER_OPSYS_VERSUFFIX}
 .endif
 
 .include "../../lang/ruby/rubyversion.mk"
