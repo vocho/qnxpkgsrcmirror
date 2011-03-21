@@ -88,6 +88,15 @@ PLIST.io=	yes
 CONFIGURE_ENV+=	ac_cv_header_ucontext_h=no
 .endif
 
+.if ${OPSYS} == "QNX"
+CONFIGURE_ENV+=	rb_cv_fork_with_pthread=yes
+
+# ruby wants a large stack
+post-build:
+	ldrel -S2M -L ${WRKSRC}/ruby19
+.endif
+
+
 #
 # work around for getaddrinfo(3)
 #

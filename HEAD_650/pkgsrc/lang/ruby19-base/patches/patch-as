@@ -4,20 +4,60 @@ Handle 64bit size of time_t.
 
 --- thread_pthread.c.orig	2010-07-22 13:13:57.000000000 +0000
 +++ thread_pthread.c
-@@ -17,6 +17,12 @@
+@@ -16,6 +16,16 @@
+ #ifdef HAVE_SYS_RESOURCE_H
  #include <sys/resource.h>
  #endif
- 
++#ifdef __QNXNTO__
++#include <sys/storage.h>
++#include <sys/mman.h>
++#endif
++
 +#if SIZEOF_TIME_T == 8
 +#define FMT_TIME_T	"lld"
 +#else
 +#define FMT_TIME_T	"ld"
 +#endif
-+
+ 
  static void native_mutex_lock(pthread_mutex_t *lock);
  static void native_mutex_unlock(pthread_mutex_t *lock);
- static int native_mutex_trylock(pthread_mutex_t *lock);
-@@ -620,7 +626,7 @@ native_sleep(rb_thread_t *th, struct tim
+@@ -66,6 +76,13 @@ static void
+ native_mutex_initialize(pthread_mutex_t *lock)
+ {
+     int r = pthread_mutex_init(lock, 0);
++#ifdef __QNXNTO__ /* sync objs inherited across fork */
++    if (r == EBUSY) {
++	    pthread_mutex_unlock(lock);
++	    r = 0;
++    }
++#endif
++
+     if (r != 0) {
+ 	rb_bug_errno("pthread_mutex_init", r);
+     }
+@@ -201,6 +218,8 @@ native_thread_destroy(rb_thread_t *th)
+ #define STACKADDR_AVAILABLE 1
+ #elif defined HAVE_PTHREAD_GETTHRDS_NP
+ #define STACKADDR_AVAILABLE 1
++#elif defined(__QNXNTO__)
++#define STACKADDR_AVAILABLE 1
+ #endif
+ 
+ #ifdef STACKADDR_AVAILABLE
+@@ -258,6 +277,12 @@ get_stack(void **addr, size_t *size)
+ 				  &reg, &regsiz));
+     *addr = thinfo.__pi_stackaddr;
+     *size = thinfo.__pi_stacksize;
++#elif defined(__QNXNTO__)
++#ifndef ROUNDUP
++#define ROUNDUP(x, m)   (((x) + (m) - 1) & ~((m) - 1))
++#endif
++    *addr = __tls()->__stackaddr;
++    *size = ROUNDUP((uintptr_t)__tls(), __PAGESIZE) - (uintptr_t)(*addr);
+ #endif
+     return 0;
+ #undef CHECK_ERR
+@@ -620,7 +645,7 @@ native_sleep(rb_thread_t *th, struct tim
  	}
      }
  
@@ -26,7 +66,7 @@ Handle 64bit size of time_t.
      GVL_UNLOCK_BEGIN();
      {
  	pthread_mutex_lock(&th->interrupt_lock);
-@@ -642,8 +648,8 @@ native_sleep(rb_thread_t *th, struct tim
+@@ -642,8 +667,8 @@ native_sleep(rb_thread_t *th, struct tim
  	    }
  	    else {
  		int r;
