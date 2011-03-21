@@ -2,7 +2,7 @@ $NetBSD: patch-ab,v 1.14 2010/09/10 03:29:00 taca Exp $
 
 * Adding Interix support.
 
---- configure.orig	2010-06-23 05:38:48.000000000 +0000
+--- configure.orig	2010-08-16 07:32:19.000000000 +0000
 +++ configure
 @@ -6212,6 +6212,9 @@ bsdi*)          LIBS="-lm $LIBS"
  		$as_echo "#define BROKEN_SETREGID 1" >>confdefs.h
@@ -14,6 +14,15 @@ $NetBSD: patch-ab,v 1.14 2010/09/10 03:29:00 taca Exp $
  freebsd*)	LIBS="-lm $LIBS"
  		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking whether -lxpg4 has to be linked" >&5
  $as_echo_n "checking whether -lxpg4 has to be linked... " >&6; }
+@@ -10180,7 +10183,7 @@ fi
+ 			rb_cv_dlopen=yes;;
+ 	sysv4*) 	: ${LDSHARED='ld -G'}
+ 			rb_cv_dlopen=yes;;
+-        nto-qnx*)       : ${LDSHARED="qcc -shared"}
++        nto-qnx*)       : ${LDSHARED='${CC} -shared'}
+                         rb_cv_dlopen=yes ;;
+ 	esix*|uxpds*) 	: ${LDSHARED="ld -G"}
+ 			rb_cv_dlopen=yes ;;
 @@ -10196,6 +10199,13 @@ fi
  			    LDFLAGS="$LDFLAGS -Wl,-export-dynamic"
  			fi
