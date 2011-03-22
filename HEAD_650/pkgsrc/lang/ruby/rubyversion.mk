@@ -179,7 +179,7 @@ RUBY_STATICLIB?=	${RUBY_VER}-static.a
 .if ${OPSYS} == "NetBSD" || ${OPSYS} == "Interix"
 RUBY_SHLIBVER=		${RUBY_VER}.${RUBY_API_TEENY}
 _RUBY_SHLIBALIAS=	${RUBY_VER}.${RUBY_SLEXT}.${RUBY_VER}
-.elif ${OPSYS} == "FreeBSD" || ${OPSYS} == "DragonFly"
+.elif ${OPSYS} == "FreeBSD" || ${OPSYS} == "DragonFly" || ${OPSYS} == "QNX"
 RUBY_SHLIBVER=		${RUBY_VER}
 .elif ${OPSYS} == "OpenBSD"
 RUBY_SHLIBVER=		${_RUBY_VER_MAJOR}.${_RUBY_VER_MINOR}${RUBY_API_TEENY}
