@@ -89,6 +89,9 @@ CONFIGURE_ENV+=	ac_cv_header_ucontext_h=no
 .endif
 
 .if ${OPSYS} == "QNX"
+.if ${MACHINE_ARCH} == "i386"
+RUBY_ARCH= i386-nto-qnx${LOWER_OPSYS_VERSUFFIX}
+.endif
 CONFIGURE_ENV+=	rb_cv_fork_with_pthread=yes
 
 # ruby wants a large stack
