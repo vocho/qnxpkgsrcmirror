@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.1.1.1 2010/11/16 20:08:16 drochner Exp $
+# $NetBSD: Makefile,v 1.7 2011/02/25 13:09:34 drochner Exp $
 #
 
-DISTNAME=	gobject-introspection-0.9.12
+DISTNAME=	gobject-introspection-0.10.3
 CATEGORIES=	devel
-MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gobject-introspection/0.9/}
+MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gobject-introspection/0.10/}
 EXTRACT_SUFX=	.tar.bz2
 
-MAINTAINER=	obache@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://live.gnome.org/GObjectIntrospection
 COMMENT=	GObject Introspection
 LICENSE=	gnu-gpl-v2 AND gnu-lgpl-v2
@@ -21,7 +21,21 @@ USE_TOOLS+=	pkg-config flex bison gmake
 
 PKGCONFIG_OVERRIDE+=	gobject-introspection-1.0.pc.in
 PKGCONFIG_OVERRIDE+=	gobject-introspection-no-export-1.0.pc.in
-PYTHON_VERSIONS_ACCEPTED=	26 25
+PYTHON_VERSIONS_ACCEPTED=	27 26 25
+
+SUBST_CLASSES+=	timet
+SUBST_STAGE.timet=	pre-configure
+SUBST_FILES.timet=	giscanner/ast.py
+SUBST_FILES.timet+=	tests/scanner/Foo-1.0-expected.gir \
+			tests/scanner/Regress-1.0-expected.gir
+.include "../../mk/bsd.prefs.mk"
+.if !empty(MACHINE_PLATFORM:MNetBSD-5.99*) || !empty(MACHINE_PLATFORM:MNetBSD-[6-9]*)
+SUBST_SED.timet=	-e 's,@TIMET_TYPENAME@,TYPE_INT64,g'
+SUBST_SED.timet+=	-e 's,@TIMET_CTYPE@,gint64,g'
+.else
+SUBST_SED.timet=	-e 's,@TIMET_TYPENAME@,TYPE_LONG,g'
+SUBST_SED.timet+=	-e 's,@TIMET_CTYPE@,glong,g'
+.endif
 
 TEST_TARGET=	check
 

@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.7 2010/09/10 05:33:12 taca Exp $
+# $NetBSD: Makefile,v 1.9 2011/03/21 08:56:40 obache Exp $
 
 DISTNAME=	ruby-eet-0.1.4
 PKGNAME=	${RUBY_PKGPREFIX}-${DISTNAME:S/ruby-//}
-PKGREVISION=	3
+PKGREVISION=	4
 CATEGORIES=	devel
 MASTER_SITES=	ftp://code-monkey.de/pub/ruby-eet/
 
@@ -10,6 +10,8 @@ MAINTAINER=	minskim@NetBSD.org
 HOMEPAGE=	http://code-monkey.de/pages/ruby-eet
 COMMENT=	Ruby module to read and write EET files
 LICENSE=	mit
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 RUBY_VERSION_SUPPORTED= 18
 
@@ -20,9 +22,9 @@ USE_TOOLS+=	pkg-config
 .include "../../lang/ruby/modules.mk"
 
 do-build:
-	cd ${WRKSRC} && ${RAKE}
+	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${RAKE}
 
 do-install:
-	cd ${WRKSRC} && ${RAKE} install
+	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${INSTALL_ENV} ${RAKE} install
 
 .include "../../mk/bsd.pkg.mk"

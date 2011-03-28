@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.2 2010/12/03 00:19:18 wiz Exp $
+# $NetBSD: Makefile,v 1.5 2011/02/10 02:55:44 chs Exp $
 
 DISTNAME=	suse_alsa-${SUSE_VERSION}
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	emulators
 DISTFILES=	alsa-1.0.23-2.12.${SUSE_ARCH}.rpm		\
 		alsa-oss-1.0.17-29.2.${SUSE_ARCH}.rpm		\
@@ -10,10 +10,16 @@ DISTFILES=	alsa-1.0.23-2.12.${SUSE_ARCH}.rpm		\
 		alsa-utils-1.0.23-1.8.${SUSE_ARCH}.rpm		\
 		libasound2-1.0.23-2.12.${SUSE_ARCH}.rpm
 
-MAINTAINER=	tonio@NetBSD.org
+MAINTAINER=	chs@NetBSD.org
 COMMENT=	Linux compatibility package for ALSA
 
 EMUL_MODULES.linux=	base
+
+PLIST_SRC=	${PKGDIR}/PLIST ${RPM2PKG_PLIST}
+
+post-install:
+	ln -sf /${EMULSUBDIR}/etc/asound-pulse.conf \
+		${DESTDIR}${PREFIX}/${EMULSUBDIR}/etc/asound.conf
 
 .include "../../emulators/suse113_linux/Makefile.common"
 .include "../../mk/bsd.pkg.mk"

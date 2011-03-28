@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.504 2010/12/19 20:30:04 plunky Exp $
+# $NetBSD: Makefile,v 1.510 2011/03/06 16:02:29 wiz Exp $
 #
 
 COMMENT=	System utilities
@@ -109,7 +109,6 @@ SUBDIR+=	flashrom
 SUBDIR+=	foremost
 SUBDIR+=	free
 SUBDIR+=	fs-kit
-SUBDIR+=	fsv
 SUBDIR+=	fsviewer
 SUBDIR+=	ftwin
 SUBDIR+=	gamin
@@ -184,6 +183,7 @@ SUBDIR+=	lsof
 SUBDIR+=	magicrescue
 SUBDIR+=	mbmon
 SUBDIR+=	mc
+SUBDIR+=	mc46
 SUBDIR+=	mdf2iso
 SUBDIR+=	memconf
 SUBDIR+=	memtest86
@@ -214,6 +214,7 @@ SUBDIR+=	notification-daemon
 SUBDIR+=	nrg2iso
 SUBDIR+=	ntfsprogs
 SUBDIR+=	nvnet
+SUBDIR+=	nvramtool
 SUBDIR+=	oak
 SUBDIR+=	open-vm-tools
 SUBDIR+=	osname
@@ -273,7 +274,6 @@ SUBDIR+=	rtty
 SUBDIR+=	ruby-activesambaldap
 SUBDIR+=	ruby-directory-watcher
 SUBDIR+=	ruby-facter
-SUBDIR+=	ruby-gnome2-gnomevfs
 SUBDIR+=	ruby-notify
 SUBDIR+=	ruby-quota
 SUBDIR+=	ruby-rb-appscript
@@ -286,6 +286,7 @@ SUBDIR+=	service-config
 SUBDIR+=	setquota
 SUBDIR+=	sformat
 SUBDIR+=	shc
+SUBDIR+=	shelldap
 SUBDIR+=	shmux
 SUBDIR+=	skill
 SUBDIR+=	slay
@@ -388,6 +389,7 @@ SUBDIR+=	wtail
 SUBDIR+=	xapply
 SUBDIR+=	xbatt
 SUBDIR+=	xbattbar
+SUBDIR+=	xc5k-firmware
 SUBDIR+=	xcdroast
 SUBDIR+=	xdu
 SUBDIR+=	xenkernel20

@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.19 2010/12/12 11:56:25 wiz Exp $
+# $NetBSD: Makefile,v 1.22 2011/02/25 13:36:43 drochner Exp $
 
-DISTNAME=	gnumeric-1.10.12
+DISTNAME=	gnumeric-1.10.13
 CATEGORIES=	math gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gnumeric/1.10/}
 EXTRACT_SUFX=	.tar.bz2
@@ -23,13 +23,15 @@ PKGCONFIG_OVERRIDE=	libspreadsheet.pc.in
 REPLACE_PERL+=		plugins/perl-func/perl_func.pl
 
 # PLIST contains versioned directory
-GOFFICE_VERSION=	0.8.12
+GOFFICE_VERSION=	0.8.13
 PLIST_SUBST+=		GOFFICE_VERSION=${GOFFICE_VERSION}
 
 CONFIGURE_ARGS+=	--with-python
 CONFIGURE_ENV+=		PYTHON=${PYTHONBIN:Q}
 .include "../../lang/python/application.mk"
 .include "../../devel/py-gobject/buildlink3.mk"
+
+#CONFIGURE_ARGS+=	--with-gnome
 
 # XXX: that version's not in pkgsrc yet
 #BUILDLINK_API_DEPENDS.libgda+=	libgda>=3.1.1
@@ -39,7 +41,6 @@ BUILDLINK_API_DEPENDS.libgsf+=	libgsf>=1.14.6
 .include "../../devel/libgsf/buildlink3.mk"
 .include "../../devel/GConf/schemas.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"
-.include "../../devel/libglade/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../lang/perl5/buildlink3.mk"

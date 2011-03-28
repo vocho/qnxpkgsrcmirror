@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.74 2010/08/31 07:02:48 taca Exp $
+# $NetBSD: Makefile,v 1.76 2011/01/17 20:52:58 is Exp $
 
 DISTNAME=	make-3.82
 PKGNAME=	g${DISTNAME}

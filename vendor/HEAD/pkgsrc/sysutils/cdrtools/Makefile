@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.77 2010/12/22 10:34:14 wiz Exp $
+# $NetBSD: Makefile,v 1.79 2011/03/12 14:23:57 wiz Exp $
 
-DISTNAME=	cdrtools-3.01a02
+DISTNAME=	cdrtools-3.01a03
 PKGNAME=	${DISTNAME:S/a/alpha/:S/-pre/pre/}
 CATEGORIES=	sysutils
 #MASTER_SITES=	ftp://ftp.berlios.de/pub/cdrecord/ \
@@ -34,6 +34,7 @@ MAKE_ENV+=	MAKEPROG="gmake"
 MAKE_ENV+=	COPTX=${CFLAGS:Q}
 MAKE_ENV+=	LDOPTX=${LDFLAGS:Q}
 MAKE_ENV+=	INS_BASE=${PREFIX:Q}
+MAKE_FLAGS+=	GMAKE_NOWARN=true
 # do we want to compile shared libraries?
 # needs changes in the install target and PLIST
 #MAKE_ENV+=	LINKMODE=dynamic
@@ -92,7 +93,7 @@ do-configure:
 			ln -sf i386-$$suffix ${MACHINE}-$$suffix;	\
 		fi;							\
 	done;								\
-	cd ${WRKSRC} && ${SETENV} ${CONFIGURE_ENV} ${MAKE_PROGRAM} config
+	cd ${WRKSRC} && ${SETENV} ${CONFIGURE_ENV} ${MAKE_PROGRAM} ${MAKE_FLAGS} config
 
 post-build:
 	cd ${WRKSRC};							\

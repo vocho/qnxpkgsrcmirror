@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.296 2010/12/18 12:47:31 wiz Exp $
+# $NetBSD: Makefile,v 1.299 2011/02/22 08:52:37 obache Exp $
 #
 
 COMMENT=	Programming languages
@@ -58,6 +58,7 @@ SUBDIR+=	gcc34-ada
 SUBDIR+=	gcc44
 SUBDIR+=	gforth
 SUBDIR+=	ghc
+SUBDIR+=	gnat-aux
 SUBDIR+=	gpc
 SUBDIR+=	gprolog
 SUBDIR+=	guile
@@ -137,6 +138,7 @@ SUBDIR+=	py26-html-docs
 SUBDIR+=	python24
 SUBDIR+=	python25
 SUBDIR+=	python26
+SUBDIR+=	python27
 SUBDIR+=	racket
 SUBDIR+=	racket-textual
 SUBDIR+=	rcfunge
@@ -148,6 +150,7 @@ SUBDIR+=	ruby18
 SUBDIR+=	ruby18-base
 SUBDIR+=	ruby19
 SUBDIR+=	ruby19-base
+SUBDIR+=	runawk
 SUBDIR+=	sablevm
 SUBDIR+=	sablevm-classpath
 SUBDIR+=	sablevm-classpath-gui

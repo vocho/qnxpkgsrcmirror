@@ -1,0 +1,49 @@
+$NetBSD: patch-ab,v 1.8 2011/02/27 23:42:10 wiz Exp $
+
+Fix build with png-1.5. From John Bowler.
+https://bugs.webkit.org/show_bug.cgi?id=54406
+
+--- WebCore/platform/image-decoders/png/PNGImageDecoder.cpp.orig	2010-12-28 12:28:51.000000000 +0000
++++ WebCore/platform/image-decoders/png/PNGImageDecoder.cpp
+@@ -216,18 +220,18 @@ void PNGImageDecoder::headerAvailable()
+ {
+     png_structp png = m_reader->pngPtr();
+     png_infop info = m_reader->infoPtr();
+-    png_uint_32 width = png->width;
+-    png_uint_32 height = png->height;
++    png_uint_32 width = png_get_image_width(png, info);
++    png_uint_32 height = png_get_image_height(png, info);
+     
+     // Protect against large images.
+-    if (png->width > cMaxPNGSize || png->height > cMaxPNGSize) {
++    if (width > cMaxPNGSize || height > cMaxPNGSize) {
+         longjmp(JMPBUF(png), 1);
+         return;
+     }
+     
+     // We can fill in the size now that the header is available.
+     if (!setSize(width, height)) {
+         longjmp(JMPBUF(png), 1);
+         return;
+     }
+ 
+@@ -277,8 +289,7 @@ void PNGImageDecoder::headerAvailable()
+ 
+     if (m_reader->decodingSizeOnly()) {
+         // If we only needed the size, halt the reader.     
+-        m_reader->setReadOffset(m_reader->currentBufferSize() - png->buffer_size);
+-        png->buffer_size = 0;
++        m_reader->setReadOffset(m_reader->currentBufferSize() - png_process_data_pause(png, 0/*do not save the data*/));
+     }
+ }
+ 
+@@ -300,7 +315,8 @@ void PNGImageDecoder::rowAvailable(unsig
+         // For PNGs, the frame always fills the entire image.
+         buffer.setRect(IntRect(IntPoint(), size()));
+ 
+-        if (m_reader->pngPtr()->interlaced)
++        if (png_get_interlace_type(m_reader->pngPtr(), m_reader->infoPtr())
++		!= PNG_INTERLACE_NONE)
+             m_reader->createInterlaceBuffer((m_reader->hasAlpha() ? 4 : 3) * size().width() * size().height());
+     }
+ 

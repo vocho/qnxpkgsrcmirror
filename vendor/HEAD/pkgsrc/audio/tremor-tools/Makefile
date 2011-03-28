@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.26 2010/05/19 18:25:19 drochner Exp $
+# $NetBSD: Makefile,v 1.28 2011/03/20 19:13:15 shattered Exp $
 
 DISTNAME=	vorbis-tools-1.0
 PKGNAME=	tremor-tools-1.0.0.8
-PKGREVISION=	11
+PKGREVISION=	12
 CATEGORIES=	audio
 MASTER_SITES=	http://www.vorbis.com/files/1.0/unix/
 
@@ -28,6 +28,7 @@ PLIST_SUBST+=	DISTNAME=${DISTNAME:Q}
 PTHREAD_OPTS+=	require
 
 pre-configure:
+	touch ${WRKSRC}/aclocal.m4
 	cd ${WRKSRC} && automake && autoconf
 
 .include "../../audio/libao/buildlink3.mk"

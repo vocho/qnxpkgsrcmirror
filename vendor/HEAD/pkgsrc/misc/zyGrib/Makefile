@@ -1,10 +1,9 @@
-# $NetBSD: Makefile,v 1.13 2010/11/15 22:58:02 abs Exp $
+# $NetBSD: Makefile,v 1.16 2011/03/21 11:44:58 plunky Exp $
 #
 
-DISTNAME=	zyGrib-3.9.7
-PKGREVISION=	1
+DISTNAME=	zyGrib-3.9.9.1
 CATEGORIES=	misc
-MASTER_SITES=	http://www.zygrib.org/files/
+MASTER_SITES=	http://www.zygrib.org/getfile.php?file=
 EXTRACT_SUFX=	.tgz
 
 MAINTAINER=	plunky@rya-online.net
@@ -17,6 +16,8 @@ DEPENDS+=	liberation-ttf-[0-9]*:../../fonts/liberation-ttf
 WRKSRC=		${WRKDIR}/${DISTNAME}/src
 USE_LANGUAGES=	c c++
 USE_TOOLS+=	make
+
+CONFIGURE_ENV+=	QTDIR=${QTDIR}
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
@@ -123,4 +124,5 @@ do-install:
 .include "../../geography/proj/buildlink3.mk"
 .include "../../x11/qt4-libs/buildlink3.mk"
 .include "../../x11/qt4-tools/buildlink3.mk"
+.include "../../x11/qwt-qt4/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

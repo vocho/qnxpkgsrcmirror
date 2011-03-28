@@ -1,13 +1,12 @@
-# $NetBSD: Makefile,v 1.5 2010/06/10 08:05:00 is Exp $
+# $NetBSD: Makefile,v 1.11 2011/03/06 18:44:59 imil Exp $
 #
 
-DISTNAME=		pkgin-0.3.3.1
-PKGREVISION=		1
+DISTNAME=		pkgin-0.4.2
 CATEGORIES=		pkgtools
 MASTER_SITES=		ftp://ftp.NetBSD.org/pub/NetBSD/misc/imil/
 
-MAINTAINER=		imil@gcu.info
-HOMEPAGE=		http://imil.net/pkgin/
+MAINTAINER=		imil@NetBSD.org
+HOMEPAGE=		http://pkgin.net/
 COMMENT=		Apt / yum like tool for managing pkgsrc binary packages
 LICENSE=		modified-bsd
 
@@ -27,14 +26,21 @@ SUBST_STAGE.path=	pre-configure
 SUBST_MESSAGE.path=	Adjusting path.
 SUBST_FILES.path=	Makefile.in actions.c pkgin.1
 SUBST_SED.path=		-e "s|/usr/pkg/etc|${PKG_SYSCONFDIR}|g"
-SUBST_SED.path+=	-e "s|/usr/pkg|${PREFIX}|g"
 SUBST_SED.path+=	-e "s|/usr/sbin|${PKG_TOOLS_BIN}|g"
 SUBST_SED.path+=	-e "s|/var|${VARBASE}|g"
+SUBST_SED.path+=	-e "s|/usr/pkg|${PREFIX}|g"
 
 GNU_CONFIGURE=		yes
 USE_FEATURES=		nbcompat
 
-NBCOMPAT_CONFIGURE_ARGS+=	--enable-db
+.include "../../mk/bsd.prefs.mk"
+
+# those have official repositories
+.if ${OPSYS} == "NetBSD" || ${OPSYS} == "DragonFly" || ${OPSYS} == "Minix"
+pre-install:
+	${GREP} -i ${OPSYS} ${WRKSRC}/REPOSITORIES >> 		\
+		${WRKSRC}/repositories.conf
+.endif
 
 do-install:
 	${INSTALL_PROGRAM} ${WRKSRC}/pkgin ${DESTDIR}${PREFIX}/bin
@@ -43,15 +49,16 @@ do-install:
 	${INSTALL_DATA} ${WRKSRC}/repositories.conf			\
 		${DESTDIR}${EGDIR}/repositories.conf.example
 
-
-.include "../../mk/bsd.prefs.mk"
-
 # libfetch has no builtin.mk and is included in NetBSD>=5
 .if ${OPSYS} != "NetBSD" || \
 	(${OPSYS} == "NetBSD" && !empty(OS_VERSION:M[0-4].*))
 .	include "../../net/libfetch/buildlink3.mk"
 .endif
 
+# Only MINIX doesn't compile SQLite Amalgation source
+.if ${OPSYS} == "Minix"
+.	include "../../databases/sqlite3/buildlink3.mk"
+.endif
+
 .include "../../archivers/libarchive/buildlink3.mk"
-.include "../../databases/sqlite3/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

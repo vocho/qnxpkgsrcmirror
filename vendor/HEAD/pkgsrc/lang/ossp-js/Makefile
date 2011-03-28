@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.5 2010/09/16 07:04:22 obache Exp $
+# $NetBSD: Makefile,v 1.7 2011/03/11 12:50:38 zafer Exp $
 #
 
 DISTNAME=	js-1.6.20070208
 PKGNAME=	ossp-${DISTNAME}
 PKGREVISION=	3
 CATEGORIES=	lang
-MASTER_SITES=	ftp://ftp.ossp.org/pkg/lib/js/
+MASTER_SITES=	http://www.ossp.org/pkg/lib/js/
 
-MAINTAINER=	bjs@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.ossp.org/pkg/lib/js/
 COMMENT=	Sanitized distribution of Mozilla's JavaScript implementation
 

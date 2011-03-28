@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.48 2010/12/16 11:38:08 ahoka Exp $
+# $NetBSD: Makefile,v 1.53 2011/03/10 19:45:03 markd Exp $
 
-DISTNAME=		hal-0.5.11
-PKGREVISION=		28
+DISTNAME=		hal-0.5.14
+PKGREVISION=		2
 CATEGORIES=		sysutils
 MASTER_SITES=		http://hal.freedesktop.org/releases/
 EXTRACT_SUFX=		.tar.bz2
@@ -48,10 +48,13 @@ CONFIGURE_ARGS+=	--with-backend=netbsd
 HAL_GROUP=		operator
 
 .elif ${OPSYS} == "Linux"
-.include "../../devel/libusb/buildlink3.mk"
+.include "../../devel/gperf/buildlink3.mk"
+.include "../../devel/libblkid/buildlink3.mk"
 .include "../../devel/libvolume_id/buildlink3.mk"
 .include "../../sysutils/pciutils/buildlink3.mk"
 CONFIGURE_ARGS+=	--with-backend=linux
+MAKE_DIRS+=		${PKG_SYSCONFBASE}/udev
+MAKE_DIRS+=		${PKG_SYSCONFBASE}/udev/rules.d
 CONF_FILES+=		${EGDIR}/90-hal.rules \
 			${PKG_SYSCONFBASE}/udev/rules.d/90-hal.rules
 

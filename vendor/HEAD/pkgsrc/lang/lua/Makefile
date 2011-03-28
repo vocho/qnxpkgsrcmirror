@@ -1,17 +1,12 @@
-# $NetBSD: Makefile,v 1.44 2009/11/05 18:03:49 joerg Exp $
+# $NetBSD: Makefile,v 1.46 2011/03/11 12:44:30 zafer Exp $
 
 DISTNAME=	lua-${LUA_VERSION}
 PKGREVISION=	2
 CATEGORIES=	lang
-MASTER_SITES=	ftp://ftp.tecgraf.puc-rio.br/pub/lua/ \
+MASTER_SITES=	http://www.lua.org/ftp/ \
 		ftp://ftp.gwdg.de/pub/languages/lua/ \
-		ftp://ftp.u-aizu.ac.jp/pub/lang/lua/ \
-		ftp://ftp.chg.ru/pub/lang/lua/ \
-		http://www.lua.org/ftp/ \
 		http://www.tecgraf.puc-rio.br/lua/ftp/ \
-		http://ftp.gwdg.de/pub/languages/lua/ \
-		http://mirrors.sunsite.dk/lua/ \
-		http://ftp.chg.ru/pub/lang/lua/
+		http://ftp.gwdg.de/pub/languages/lua/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.lua.org/
@@ -54,6 +49,8 @@ BUILD_TARGET=	generic
 
 PKGCONFIG_OVERRIDE=	${WRKSRC}/etc/lua.pc
 
+INSTALLATION_DIRS+=	lib/pkgconfig
+
 SUBST_CLASSES+=		pc-prefix
 SUBST_FILES.pc-prefix+=	${WRKSRC}/etc/lua.pc
 SUBST_SED.pc-prefix+=	-e "s,/usr/local,${PREFIX},"
@@ -79,7 +76,6 @@ post-install:
 	cd ${WRKSRC}/etc; for f in README *.c *.ico *.lua; do \
 		${INSTALL_DATA} "$$f" ${DESTDIR}${EGDIR}/etc;		\
 	done
-	${INSTALL_DATA_DIR} ${DESTDIR}${PREFIX}/lib/pkgconfig
 	${INSTALL_DATA} ${WRKSRC}/etc/lua.pc ${DESTDIR}${PREFIX}/lib/pkgconfig
 
 .include "../../devel/readline/buildlink3.mk"

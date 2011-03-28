@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.27 2010/12/12 10:19:44 jnemeth Exp $
+# $NetBSD: Makefile,v 1.29 2011/01/21 05:13:12 jnemeth Exp $
 #
 # NOTE: when updating this package, there are two places that sound
 #       tarballs need to be checked
 
-DISTNAME=	asterisk-1.6.2.15
+DISTNAME=	asterisk-1.6.2.16.1
 DIST_SUBDIR=	${PKGNAME_NOREV}
 DISTFILES=	${DEFAULT_DISTFILES}
 EXTRACT_ONLY=	${DISTNAME}.tar.gz

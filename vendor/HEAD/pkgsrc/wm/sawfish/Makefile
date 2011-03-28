@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.57 2010/11/15 22:58:48 abs Exp $
+# $NetBSD: Makefile,v 1.60 2011/01/31 15:39:11 tnn Exp $
 #
 
-DISTNAME=		sawfish-1.6.3.1
-PKGREVISION=		2
+DISTNAME=		sawfish-1.7.1
+PKGREVISION=		1
 CATEGORIES=		x11 wm
 MASTER_SITES=		http://download.tuxfamily.org/sawfish/sawfish/
 EXTRACT_SUFX=		.tar.bz2
@@ -24,7 +24,7 @@ USE_TOOLS+=		gtar:run	# for librep run-time theme extraction
 USE_LIBTOOL=		yes
 USE_PKGLOCALEDIR=	yes
 
-CONFIGURE_ARGS+=	--mandir=$(PREFIX)/$(PKGMANDIR)
+CONFIGURE_ARGS+=	--mandir=${PREFIX}/${PKGMANDIR}
 CONFIGURE_ENV+=		PKGLOCALEDIR=${PKGLOCALEDIR}
 MAKE_ENV+=		PKGLOCALEDIR=${PKGLOCALEDIR}
 CONFIGURE_ENV+=		REP_ENV_PKGSRC=${REP_ENV_PKGSRC:Q}
@@ -44,7 +44,7 @@ REP_ENV_PKGSRC=		LD_PRELOAD=/usr/lib/libpthread.so
 REP_ENV_PKGSRC=
 .endif
 
-.include "../../audio/esound/buildlink3.mk"
+.include "../../graphics/gdk-pixbuf2-xlib/buildlink3.mk"
 .include "../../lang/librep/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../x11/gtk2/buildlink3.mk"

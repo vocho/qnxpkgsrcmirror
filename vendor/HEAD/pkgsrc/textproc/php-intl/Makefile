@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.3 2010/12/17 07:36:12 obache Exp $
+# $NetBSD: Makefile,v 1.5 2011/02/26 02:55:28 taca Exp $
 
 MODNAME=		intl
 PECL_VERSION=		1.1.2

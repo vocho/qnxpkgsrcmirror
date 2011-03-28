@@ -1,10 +1,11 @@
-# $NetBSD: Makefile,v 1.17 2010/11/27 06:30:24 agc Exp $
+# $NetBSD: Makefile,v 1.19 2011/01/14 08:22:55 tron Exp $
 
 DISTNAME=	mediatomb-0.12.1
+PKGREVISION=	2
 CATEGORIES=	multimedia
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=mediatomb/}
 
-MAINTAINER=	agc@NetBSD.org
+MAINTAINER=	tron@NetBSD.org
 HOMEPAGE=	http://mediatomb.cc/
 COMMENT=	UPnP MediaServer with a web user interface
 LICENSE=	gnu-gpl-v2
@@ -29,7 +30,7 @@ PKG_HOME.${MEDIATOMB_USER}=	${VARBASE}/mediatomb
 PKG_SYSCONFSUBDIR=	mediatomb
 EGDIR=			${PREFIX}/share/examples/mediatomb
 CONF_FILES_PERMS+=	${EGDIR}/config.xml ${PKG_SYSCONFDIR}/config.xml \
-			${MEDIATOMB_USER} ${MEDIATOMB_GROUP} 0644
+			${MEDIATOMB_USER} ${MEDIATOMB_GROUP} 0640
 
 FILES_SUBST+=			PKG_HOME=${PKG_HOME.${MEDIATOMB_USER}:Q}
 FILES_SUBST+=			MEDIATOMB_GROUP=${MEDIATOMB_GROUP:Q}
@@ -66,7 +67,7 @@ post-install:
 .include "../../multimedia/ffmpeg/buildlink3.mk"
 .if ${OPSYS} == "NetBSD"
 PREFER.bind=	pkgsrc	# we need the package for the lwres lib
-.include "../../net/bind95/buildlink3.mk"
+.include "../../net/bind97/buildlink3.mk"
 .endif
 .include "../../textproc/expat/buildlink3.mk"
 .include "../../www/curl/buildlink3.mk"

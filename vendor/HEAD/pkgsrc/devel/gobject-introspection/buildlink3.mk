@@ -1,4 +1,4 @@
-# $NetBSD: buildlink3.mk,v 1.1.1.1 2010/11/16 20:08:16 drochner Exp $
+# $NetBSD: buildlink3.mk,v 1.3 2011/03/22 10:47:11 obache Exp $
 
 BUILDLINK_TREE+=	gobject-introspection
 
@@ -11,7 +11,6 @@ BUILDLINK_PKGSRCDIR.gobject-introspection?=	../../devel/gobject-introspection
 
 .include "../../devel/glib2/buildlink3.mk"
 .include "../../devel/libffi/buildlink3.mk"
-.include "../../graphics/cairo/buildlink3.mk"
 .endif	# GOBJECT_INTROSPECTION_BUILDLINK3_MK
 
 BUILDLINK_TREE+=	-gobject-introspection
