@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.402 2010/12/24 07:24:54 kefren Exp $
+# $NetBSD: Makefile,v 1.405 2011/03/22 23:20:49 tez Exp $
 #
 
 COMMENT=	Security tools
@@ -27,8 +27,8 @@ SUBDIR+=	caff
 SUBDIR+=	ccid
 SUBDIR+=	cfs
 SUBDIR+=	chkrootkit
-SUBDIR+=	courier-authlib
 SUBDIR+=	clamav
+SUBDIR+=	courier-authlib
 SUBDIR+=	crack
 #SUBDIR+=	crudesaml	# only shared files
 SUBDIR+=	crypto++
@@ -113,7 +113,6 @@ SUBDIR+=	libgpg-error
 SUBDIR+=	libidea
 SUBDIR+=	libident
 SUBDIR+=	libksba
-SUBDIR+=	libksba04
 SUBDIR+=	libmcrypt
 SUBDIR+=	libnasl
 SUBDIR+=	liboauth
@@ -144,6 +143,7 @@ SUBDIR+=	md5-collision
 SUBDIR+=	mhash
 SUBDIR+=	mirrordir
 SUBDIR+=	mit-krb5
+SUBDIR+=	mit-krb5-appl
 SUBDIR+=	mixminion
 SUBDIR+=	mozilla-rootcerts
 SUBDIR+=	msu

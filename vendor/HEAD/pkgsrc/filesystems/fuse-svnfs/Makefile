@@ -1,15 +1,16 @@
-# $NetBSD: Makefile,v 1.6 2010/01/17 12:02:16 wiz Exp $
+# $NetBSD: Makefile,v 1.8 2011/02/28 14:52:48 wiz Exp $
 #
 
 DISTNAME=	svnfs-0.4
 PKGREVISION=	5
 CATEGORIES=	filesystems
 MASTER_SITES=	http://www.jmadden.eu/wp-content/uploads/svnfs/
+EXTRACT_SUFX=	.tgz
 
-MAINTAINER=	bjs@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.jmadden.eu/
 COMMENT=	FUSE filesystem for accessing SVN repositories
-EXTRACT_SUFX=	.tgz
+LICENSE=	gnu-gpl-v2
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 

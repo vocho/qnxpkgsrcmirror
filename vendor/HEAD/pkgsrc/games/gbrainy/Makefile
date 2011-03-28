@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.32 2010/12/15 13:31:46 wiz Exp $
+# $NetBSD: Makefile,v 1.36 2011/03/21 09:58:13 wiz Exp $
 #
 
-DISTNAME=	gbrainy-1.60
+DISTNAME=	gbrainy-1.63
 CATEGORIES=	games
 MASTER_SITES=	http://gent.softcatala.org/jmas/gbrainy/
 
@@ -22,7 +22,8 @@ USE_TOOLS+=	gmake intltool pkg-config bash:run msgfmt
 BUILDLINK_API_DEPENDS.cairo+=	cairo>=1.2.0
 
 REPLACE_BASH=		src/Clients/Classical/gbrainy.in
-PKGCONFIG_OVERRIDE=	data/gbrainy.pc.in
+# mono-style, pkgsrc infrastructure doesn't change anything in it.
+#PKGCONFIG_OVERRIDE=	data/gbrainy.pc.in
 
 .include "../../devel/mono-addins/buildlink3.mk"
 .include "../../graphics/cairo/buildlink3.mk"

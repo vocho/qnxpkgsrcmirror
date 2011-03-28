@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.46 2010/12/23 11:45:00 dsainty Exp $
+# $NetBSD: Makefile,v 1.48 2011/03/09 16:30:44 drochner Exp $
 
 DISTNAME=	gnustep-gui-0.16.0
-PKGREVISION=	3
+PKGREVISION=	5
 CATEGORIES=	x11 gnustep
 MASTER_SITES=	${MASTER_SITE_GNUSTEP:=core/}
 
@@ -23,7 +23,7 @@ INSTALLATION_DIRS+=	share/GNUstep/Applications
 .include "../../audio/libaudiofile/buildlink3.mk"
 .include "../../devel/gnustep-base/buildlink3.mk"
 .include "../../mk/jpeg.buildlink3.mk"
-.include "../../graphics/libungif/buildlink3.mk"
+.include "../../mk/giflib.buildlink3.mk"
 .include "../../graphics/png/buildlink3.mk"
 .include "../../graphics/tiff/buildlink3.mk"
 .include "../../mk/pthread.buildlink3.mk"

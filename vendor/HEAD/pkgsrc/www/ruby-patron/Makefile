@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.4 2010/09/23 06:53:58 taca Exp $
+# $NetBSD: Makefile,v 1.7 2011/03/23 16:41:03 taca Exp $
 
-DISTNAME=	patron-0.4.9
+DISTNAME=	patron-0.4.11
 CATEGORIES=	www
 
 MAINTAINER=	filip@joyent.com

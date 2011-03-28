@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.2 2010/11/17 14:35:32 drochner Exp $
+# $NetBSD: Makefile,v 1.4 2011/02/25 20:46:11 drochner Exp $
 #
 
 DISTNAME=	dconf-0.5.1
@@ -13,10 +13,12 @@ COMMENT=	Backend for gsettings
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
+BUILD_DEPENDS+=		vala-[0-9]*:../../lang/vala
+
 GNU_CONFIGURE=	yes
 CONFIGURE_ARGS+= --disable-editor
 USE_LIBTOOL=	yes
-USE_TOOLS+=	pkg-config
+USE_TOOLS+=	pkg-config gmake
 
 PKGCONFIG_OVERRIDE+=	client/dconf.pc.in
 

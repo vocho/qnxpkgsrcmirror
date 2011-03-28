@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.212 2010/10/16 15:35:47 wiz Exp $
+# $NetBSD: Makefile,v 1.214 2011/03/15 18:46:57 minskim Exp $
 
 COMMENT=	Mathematics
 
@@ -191,6 +191,10 @@ SUBDIR+=	statist
 SUBDIR+=	superlu
 SUBDIR+=	tasp-vsipl
 SUBDIR+=	teapot
+SUBDIR+=	tex-fp
+SUBDIR+=	tex-fp-doc
+SUBDIR+=	tex-kastrup
+SUBDIR+=	tex-kastrup-doc
 SUBDIR+=	texdrive
 SUBDIR+=	tochnog
 SUBDIR+=	udunits

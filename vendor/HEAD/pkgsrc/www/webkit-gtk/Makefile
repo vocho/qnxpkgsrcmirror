@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.31 2010/12/23 11:44:59 dsainty Exp $
+# $NetBSD: Makefile,v 1.38 2011/03/15 21:58:56 drochner Exp $
 
-DISTNAME=	webkit-1.2.5
+DISTNAME=	webkit-1.2.7
 PKGNAME=	${DISTNAME:S/webkit/webkit-gtk/}
-PKGREVISION=	2
+PKGREVISION=	1
 CATEGORIES=	www
 MASTER_SITES=	http://www.webkitgtk.org/
 
@@ -17,6 +17,7 @@ USE_TOOLS+=	bison gmake perl:build pkg-config msgfmt
 PKGCONFIG_OVERRIDE=	WebKit/gtk/webkit.pc.in
 
 PKG_DESTDIR_SUPPORT=	user-destdir
+MAKE_JOBS_SAFE=		no
 
 MAKE_FILE=	GNUmakefile
 GNU_CONFIGURE=	yes
@@ -42,6 +43,7 @@ REPLACE_PERL+=	JavaScriptCore/pcre/dftables \
 # A correct Webkit build requires flex 2.5.33
 .include "../../graphics/freetype2/buildlink3.mk"
 .include "../../mk/jpeg.buildlink3.mk"
+BUILDLINK_API_DEPENDS.png+= png>=1.5.1beta08
 .include "../../graphics/png/buildlink3.mk"
 .include "../../multimedia/gstreamer0.10/buildlink3.mk"
 .include "../../multimedia/gst-plugins0.10-base/buildlink3.mk"

@@ -1,4 +1,4 @@
-# $NetBSD: gcc.mk,v 1.106 2010/07/30 07:58:59 asau Exp $
+# $NetBSD: gcc.mk,v 1.108 2011/02/25 13:34:56 hans Exp $
 #
 # This is the compiler definition for the GNU Compiler Collection.
 #
@@ -73,7 +73,7 @@ GCC_REQD+=	3.0
 # _GCC_DIST_VERSION is the highest version of GCC installed by the pkgsrc
 # without the PKGREVISIONs.
 #
-_GCC_DIST_VERSION=	4.4.4
+_GCC_DIST_VERSION=	4.4.5
 
 # _GCC2_PATTERNS matches N s.t. N <= 2.95.3.
 _GCC2_PATTERNS=	[0-1].* 2.[0-9] 2.[0-9].* 2.[1-8][0-9] 2.[1-8][0-9].*	\
@@ -556,7 +556,12 @@ ${_GCC_${_var_}}:
 # On older NetBSD systems and where the Fortran compiler doesn't exist,
 # force the use of f2c-f77 or some other fortran.
 #
+.if !empty(USE_LANGUAGES:Mfortran)
+PKGSRC_FORTRAN?=g95
+.endif
+#.if !empty(USE_LANGUAGES:Mfortran77)
 PKGSRC_FORTRAN?=f2c
+#.endif
 
 _GCC_NEEDS_A_FORTRAN=	no
 .if !exists(${FCPATH})

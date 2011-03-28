@@ -1,9 +1,8 @@
-# $NetBSD: Makefile,v 1.4 2010/12/03 20:34:32 adam Exp $
+# $NetBSD: Makefile,v 1.6 2011/02/02 14:44:45 drochner Exp $
 
-DISTNAME=	libgexiv2-0.2.1
-PKGREVISION=	2
+DISTNAME=	libgexiv2-0.3.0
 CATEGORIES=	graphics devel
-MASTER_SITES=	http://yorba.org/download/gexiv2/0.2/
+MASTER_SITES=	http://yorba.org/download/gexiv2/0.3/
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
@@ -17,7 +16,7 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_LANGUAGES=		c c++
 USE_LIBTOOL=		yes
-USE_TOOLS+=		gmake m4 pkg-config
+USE_TOOLS+=		gmake m4 pkg-config bash
 HAS_CONFIGURE=		yes
 CONFIGURE_ARGS+=	--prefix=${PREFIX}
 

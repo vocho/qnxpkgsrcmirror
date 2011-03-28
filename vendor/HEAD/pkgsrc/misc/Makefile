@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.349 2010/09/12 01:52:07 taca Exp $
+# $NetBSD: Makefile,v 1.354 2011/03/09 17:39:29 jmmv Exp $
 #
 
 COMMENT=	Miscellaneous utilities
@@ -47,6 +47,8 @@ SUBDIR+=	dvorakng
 SUBDIR+=	dvtm
 SUBDIR+=	dync
 SUBDIR+=	easymenu
+SUBDIR+=	ec2-ami-tools
+SUBDIR+=	ec2-api-tools
 SUBDIR+=	edict
 SUBDIR+=	elizatalk
 SUBDIR+=	elscreen
@@ -78,9 +80,9 @@ SUBDIR+=	gone
 SUBDIR+=	gperiodic
 SUBDIR+=	granulate
 SUBDIR+=	gwaei
-SUBDIR+=	gxmame
 SUBDIR+=	hanzim
 SUBDIR+=	heyu
+SUBDIR+=	howm
 SUBDIR+=	ibutton-pdkit
 SUBDIR+=	ipbt
 SUBDIR+=	iselect
@@ -194,6 +196,7 @@ SUBDIR+=	rox-memo
 SUBDIR+=	rpm
 SUBDIR+=	ruby-bundler
 SUBDIR+=	ruby-columnize
+SUBDIR+=	ruby-commander
 SUBDIR+=	ruby-configuration
 SUBDIR+=	ruby-daemons
 SUBDIR+=	ruby-gem_plugin
@@ -233,6 +236,7 @@ SUBDIR+=	vym
 SUBDIR+=	watch
 SUBDIR+=	wdic
 SUBDIR+=	whohas
+SUBDIR+=	window
 SUBDIR+=	xchm
 SUBDIR+=	xdg-utils
 SUBDIR+=	xfce4-weather-plugin

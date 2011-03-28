@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.84 2010/12/23 11:44:58 dsainty Exp $
+# $NetBSD: Makefile,v 1.87 2011/03/27 16:50:49 joerg Exp $
 
 DISTNAME=	WindowMaker-0.92.0
 PKGNAME=	${DISTNAME:S/WindowMaker/windowmaker/}
-PKGREVISION=	12
+PKGREVISION=	15
 CATEGORIES=	x11 wm windowmaker
 MASTER_SITES=	http://windowmaker.info/pub/source/release/ \
 	ftp://ftp.dti.ad.jp/pub/X/WindowMaker/source/release/
@@ -25,6 +25,7 @@ CONFIGURE_ARGS+=	--with-gnustepdir=${PREFIX}/share/GNUstep
 CONFIGURE_ARGS+=	--with-nlsdir=${PREFIX}/${PKGLOCALEDIR}/locale
 CONFIGURE_ENV+=		LINGUAS=yes
 CONFIGURE_ENV+=		CPP_PATH=${CPP:Q}
+USE_TOOLS+=		perl:run
 REPLACE_PERL+=		util/wkdemenu.pl
 
 PKG_DESTDIR_SUPPORT=	user-destdir
@@ -96,7 +97,7 @@ post-install:
 
 .include "../../converters/libiconv/buildlink3.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"
-.include "../../graphics/libungif/buildlink3.mk"
+.include "../../mk/giflib.buildlink3.mk"
 .include "../../mk/jpeg.buildlink3.mk"
 .include "../../graphics/png/buildlink3.mk"
 .include "../../graphics/tiff/buildlink3.mk"

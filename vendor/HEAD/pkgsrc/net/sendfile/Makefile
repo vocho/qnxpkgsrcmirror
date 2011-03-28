@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.23 2010/10/14 14:50:54 wiz Exp $
+# $NetBSD: Makefile,v 1.27 2011/03/23 18:22:28 joerg Exp $
 #
 
 DISTNAME=	sendfile-20010216
@@ -11,6 +11,9 @@ MASTER_SITES=	ftp://ftp.belwue.de/pub/unix/sendfile/current/
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://fex.rus.uni-stuttgart.de/saft/sendfile.html
 COMMENT=	Implementation of the Simple asynchronous file transfer protocol
+LICENSE=	gnu-gpl-v2
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 WRKSRC=		${WRKDIR}/sendfile-2.1a
 
@@ -19,15 +22,12 @@ EGDIR=		${PREFIX}/share/examples/sendfile
 CONF_FILES=	${EGDIR}/sendfile.cf ${PKG_SYSCONFDIR}/sendfile.cf
 CONF_FILES+=	${EGDIR}/sendfile.deny ${PKG_SYSCONFDIR}/sendfile.deny
 
-pre-configure:
-	@${CP} ${PKGSRCDIR}/mk/gnu-config/config.guess ${WRKSRC}/develop
-	@${CP} ${PKGSRCDIR}/mk/gnu-config/config.sub ${WRKSRC}/develop
-	cd ${WRKSRC} && \
-	${SED}  -e 's,@PREFIX@,${PREFIX},g' \
-		-e 's,@PKG_SYSCONFDIR@,${PKG_SYSCONFDIR},g' \
-		< makeconfig > makeconfig.new; \
-	${MV} makeconfig.new makeconfig; \
-	${CHMOD} +x makeconfig
+OVERRIDE_GNU_CONFIG_SCRIPTS=	yes
+
+SUBST_CLASSES+=		makeconfig
+SUBST_STAGE.makeconfig=	pre-configure
+SUBST_FILES.makeconfig=	makeconfig
+SUBST_VARS.makeconfig=	PREFIX PKG_SYSCONFBASEDIR
 
 post-configure:
 	cd ${WRKSRC} &&${SETENV} ${MAKE_ENV} ${MAKE_PROGRAM} config

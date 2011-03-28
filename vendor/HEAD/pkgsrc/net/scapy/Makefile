@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.8 2010/02/10 19:17:43 joerg Exp $
+# $NetBSD: Makefile,v 1.10 2011/02/25 15:43:51 drochner Exp $
 #
 
-DISTNAME=		scapy-2.0.1
-PKGREVISION=		1
+DISTNAME=		scapy-2.1.1
 CATEGORIES=		net
 MASTER_SITES=		http://www.secdev.org/projects/scapy/files/
 
@@ -14,7 +13,7 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 
 PYDISTUTILSPKG=			yes
 NO_BUILD=			yes
-PYTHON_VERSIONS_ACCEPTED=	26 25
+PYTHON_VERSIONS_ACCEPTED=	27 26 25
 
 .include "options.mk"
 
@@ -34,6 +33,8 @@ post-install:
 	${INSTALL_DATA_DIR} ${DESTDIR}${PREFIX}/share/examples/scapy
 	${INSTALL_DATA} ${WRKSRC}/ethertypes ${DESTDIR}${PREFIX}/share/examples/scapy/
 
+do-test:
+	cd ${WRKSRC}/test && ${SETENV} PYTHON=${PYTHONBIN} ./run_tests
 
 .include "../../lang/python/application.mk"
 .include "../../lang/python/extension.mk"

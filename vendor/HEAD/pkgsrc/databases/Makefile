@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.361 2010/12/22 15:36:07 taca Exp $
+# $NetBSD: Makefile,v 1.367 2011/03/10 22:00:23 wiz Exp $
 #
 
 COMMENT=	Databases
@@ -211,7 +211,12 @@ SUBDIR+=	php-sqlite
 SUBDIR+=	phpldapadmin
 SUBDIR+=	phpmyadmin
 SUBDIR+=	phppgadmin
+SUBDIR+=	poco-data
+SUBDIR+=	poco-data-mysql
+SUBDIR+=	poco-data-odbc
+SUBDIR+=	poco-data-sqlite
 SUBDIR+=	postgresql-postgis
+#SUBDIR+=	postgresql-uuid	# just contains files for postgresql*-uuid
 SUBDIR+=	postgresql83
 SUBDIR+=	postgresql83-adminpack
 SUBDIR+=	postgresql83-client
@@ -219,6 +224,7 @@ SUBDIR+=	postgresql83-plperl
 SUBDIR+=	postgresql83-plpython
 SUBDIR+=	postgresql83-pltcl
 SUBDIR+=	postgresql83-server
+SUBDIR+=	postgresql83-uuid
 SUBDIR+=	postgresql84
 SUBDIR+=	postgresql84-adminpack
 SUBDIR+=	postgresql84-client
@@ -228,12 +234,14 @@ SUBDIR+=	postgresql84-plperl
 SUBDIR+=	postgresql84-plpython
 SUBDIR+=	postgresql84-pltcl
 SUBDIR+=	postgresql84-server
+SUBDIR+=	postgresql84-uuid
 SUBDIR+=	postgresql90
 SUBDIR+=	postgresql90-adminpack
 SUBDIR+=	postgresql90-client
 SUBDIR+=	postgresql90-datatypes
 SUBDIR+=	postgresql90-dblink
 SUBDIR+=	postgresql90-docs
+SUBDIR+=	postgresql90-fuzzystrmatch
 SUBDIR+=	postgresql90-monitoring
 SUBDIR+=	postgresql90-pgcrypto
 SUBDIR+=	postgresql90-plperl
@@ -242,6 +250,7 @@ SUBDIR+=	postgresql90-pltcl
 SUBDIR+=	postgresql90-replicationtools
 SUBDIR+=	postgresql90-server
 SUBDIR+=	postgresql90-upgrade
+SUBDIR+=	postgresql90-uuid
 SUBDIR+=	pxtools
 SUBDIR+=	py-PgSQL
 SUBDIR+=	py-bdb-xml

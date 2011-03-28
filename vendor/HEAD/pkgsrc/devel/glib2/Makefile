@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.177 2010/11/20 01:36:49 obache Exp $
+# $NetBSD: Makefile,v 1.180 2011/03/20 21:00:10 cegger Exp $
 
 .include "Makefile.common"
 
-PKGREVISION=		1
 CATEGORIES=		devel
 
 COMMENT=		Some useful routines for C programming (glib2)
@@ -23,8 +22,13 @@ PKGCONFIG_OVERRIDE+=	gthread-2.0.pc.in
 PKGCONFIG_OVERRIDE+=	gio-2.0.pc.in
 PKGCONFIG_OVERRIDE+=	gio-unix-2.0.pc.in
 
+FILES_SUBST+=		GIO_MODULES_DIR=${PREFIX}/lib/gio/modules
+FILES_SUBST+=		GIO_QUERYMODULES=${PREFIX}/bin/gio-querymodules
+FILES_SUBST+=		GLIB_COMPILE_SCHEMAS=${PREFIX}/bin/glib-compile-schemas
+FILES_SUBST+=		GLIB_SCHEMAS_DIR=${PREFIX}/share/glib-2.0/schemas
+
 # need pcre utf8 + unicode-properties
-BUILDLINK_API_DEPENDS.pcre+=	pcre>=7.4nb1
+BUILDLINK_API_DEPENDS.pcre+=	pcre>=8.11
 
 LIBS.SunOS+=	-lnsl -lsocket
 
