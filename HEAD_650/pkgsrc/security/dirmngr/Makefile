@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.36 2010/09/01 16:40:53 drochner Exp $
-#
+# $NetBSD: Makefile,v 1.38 2011/03/11 07:20:45 adam Exp $
 
-DISTNAME=		dirmngr-1.1.0
-CATEGORIES=		security
-MASTER_SITES=		ftp://ftp.gnupg.org/gcrypt/dirmngr/
-EXTRACT_SUFX=		.tar.bz2
+DISTNAME=	dirmngr-1.1.0
+CATEGORIES=	security
+MASTER_SITES=	ftp://ftp.gnupg.org/gcrypt/dirmngr/
+EXTRACT_SUFX=	.tar.bz2
 
-MAINTAINER=		shannonjr@NetBSD.org
-HOMEPAGE=		http://www.gnupg.org/aegypten2/
-COMMENT=		X509 certificate and CRL downloader
+MAINTAINER=	shannonjr@NetBSD.org
+HOMEPAGE=	http://www.gnupg.org/aegypten2/
+COMMENT=	X509 certificate and CRL downloader
+LICENSE=	gnu-gpl-v2
 
 DIRMNGR_USER?=		dirmngr
 DIRMNGR_GROUP?=		dirmngr
@@ -21,28 +21,25 @@ BUILD_DEFS+=		VARBASE
 
 PKG_HOME.${DIRMNGR_USER}=	${VARBASE}/dirmngr
 
-GNU_CONFIGURE=		yes
-USE_TOOLS+=		gawk
+USE_TOOLS+=		autoconf automake gawk gettext
 #USE_TOOLS+=		gmake
-USE_TOOLS+=		autoconf
-USE_TOOLS+=		automake
-USE_TOOLS+=		gettext
 USE_LIBTOOL=		yes
 USE_PKGLOCALEDIR=	yes
 RCD_SCRIPTS=		dirmngr
-INFO_FILES=		YES
+INFO_FILES=		yes
 
-CONFIGURE_ARGS+=	--localstatedir=${VARBASE:Q}
-CONFIGURE_ARGS+=	--sharedstatedir=${VARBASE:Q}
-CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR:Q}
+GNU_CONFIGURE=		yes
+CONFIGURE_ARGS+=	--localstatedir=${VARBASE}
+CONFIGURE_ARGS+=	--sharedstatedir=${VARBASE}
+CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR}
 CONFIGURE_ARGS+=	--datadir=${PREFIX}/libdata
 CONFIGURE_ENV+=		BUILDLINK_PREFIX_openldap-client=${BUILDLINK_PREFIX.openldap-client}
 
-FILES_SUBST+=		VARBASE=${VARBASE:Q}
-FILES_SUBST+=		PREFIX=${PREFIX:Q}
-FILES_SUBST+=		SYSCONFDIR=${SYSCONFDIR:Q}
-FILES_SUBST+=		DIRMNGR_USER=${DIRMNGR_USER:Q}
-FILES_SUBST+=		DIRMNGR_GROUP=${DIRMNGR_GROUP:Q}
+FILES_SUBST+=		VARBASE=${VARBASE}
+FILES_SUBST+=		PREFIX=${PREFIX}
+FILES_SUBST+=		SYSCONFDIR=${SYSCONFDIR}
+FILES_SUBST+=		DIRMNGR_USER=${DIRMNGR_USER}
+FILES_SUBST+=		DIRMNGR_GROUP=${DIRMNGR_GROUP}
 FILES_SUBST+=		DIRMNGR_PATH=${DIRMNGR_PATH:Q}
 
 OWN_DIRS+=		${PKG_SYSCONFDIR}/dirmngr

@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.16 2010/11/15 22:57:54 abs Exp $
+# $NetBSD: Makefile,v 1.18 2011/02/25 09:47:25 wiz Exp $
 #
 
 DISTNAME=	calibre-0.6.24
-PKGREVISION=	11
+PKGREVISION=	12
 CATEGORIES=	misc
 MASTER_SITES=	http://calibre.kovidgoyal.net/downloads/
 
@@ -26,7 +26,7 @@ DEPENDS+=	${PYPKGPREFIX}-mechanize>=0.1.11:../../www/py-mechanize
 
 USE_LANGUAGES=	c c++
 USE_TOOLS+=	pkg-config
-PYTHON_VERSIONS_ACCEPTED=	26
+PYTHON_VERSIONS_ACCEPTED=	27 26
 PYDISTUTILSPKG=	yes
 PYSETUPOPTARGS=	# empty
 PYSETUPINSTALLARGS=	--prefix=${PREFIX}

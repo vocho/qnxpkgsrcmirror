@@ -1,5 +1,4 @@
-# $NetBSD: Makefile,v 1.76 2010/11/20 14:37:42 tsutsui Exp $
-#
+# $NetBSD: Makefile,v 1.78 2011/02/28 17:49:30 wiz Exp $
 
 DISTNAME=		qemu-0.13.0
 PKGREVISION=		1
@@ -21,12 +20,14 @@ HAS_CONFIGURE=		yes
 
 BUILD_DEPENDS+=		texi2html-[0-9]*:../../textproc/texi2html
 
+.include "options.mk"
+
 .include "../../mk/bsd.prefs.mk"
 
 CONFIGURE_ENV+=		mansuffix=/${PKGMANDIR}
-CONFIGURE_ARGS+=	--prefix=${PREFIX:Q}
-CONFIGURE_ARGS+=	--interp-prefix=${PREFIX:Q}/share/qemu
-CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR:Q}
+CONFIGURE_ARGS+=	--prefix=${PREFIX}
+CONFIGURE_ARGS+=	--interp-prefix=${PREFIX}/share/qemu
+CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR}
 
 CONF_FILES=		${EGDIR}/target-x86_64.conf \
 			${PKG_SYSCONFDIR}/target-x86_64.conf
@@ -90,7 +91,10 @@ PLIST.nbd=		YES
 USER_EMUL=		i386 x86_64 sparc sparc64
 PLIST.nbd=		YES
 .elif !empty(OPSYS:MDarwin)
-USER_EMUL=		i386 x86_64 sparc sparc64 ppc
+USER_EMUL=
+CONFIGURE_ARGS+=	--disable-bsd-user
+CONFIGURE_ARGS+=	--disable-darwin-user
+PLIST.nbd=		YES
 .elif !empty(OPSYS:MLinux)
 USER_EMUL=		${UE_ARCHS}
 PLIST.nbd=		YES
@@ -105,8 +109,10 @@ post-install:
 	${INSTALL_DATA} ${FILESDIR}/Makefile.multinode-NetBSD \
 		${DESTDIR}${PREFIX}/share/doc/qemu/
 
-.include "../../devel/SDL/buildlink3.mk"
-.include "../../devel/zlib/buildlink3.mk"
+# On Darwin, qemu uses Cocoa and CoreAudio
+.if empty(OPSYS:MDarwin)
 .include "../../mk/oss.buildlink3.mk"
+.endif
+.include "../../devel/zlib/buildlink3.mk"
 .include "../../mk/pthread.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

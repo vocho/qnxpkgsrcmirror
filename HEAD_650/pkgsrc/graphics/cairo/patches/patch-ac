@@ -1,16 +1,14 @@
-$NetBSD: patch-ac,v 1.15 2010/09/15 18:35:38 wiz Exp $
+$NetBSD: patch-ac,v 1.17 2011/02/15 11:30:47 drochner Exp $
 
-Enumerations shouldn't end with a comma.
-https://bugs.freedesktop.org/show_bug.cgi?id=30115
-
---- src/cairo.h.orig	2010-09-06 12:11:22.000000000 +0000
-+++ src/cairo.h
-@@ -1973,7 +1973,7 @@ typedef enum _cairo_device_type {
-     CAIRO_DEVICE_TYPE_SCRIPT,
-     CAIRO_DEVICE_TYPE_XCB,
-     CAIRO_DEVICE_TYPE_XLIB,
--    CAIRO_DEVICE_TYPE_XML,
-+    CAIRO_DEVICE_TYPE_XML
- } cairo_device_type_t;
+--- util/cairo-gobject/cairo-gobject.h.orig	2010-09-09 15:56:24.000000000 +0000
++++ util/cairo-gobject/cairo-gobject.h
+@@ -39,6 +39,9 @@
  
- cairo_public cairo_device_type_t
+ #include <cairo.h>
+ 
++/* if this header is installed, cairo has gobject functions */
++#define CAIRO_HAS_GOBJECT_FUNCTIONS 1
++
+ #if CAIRO_HAS_GOBJECT_FUNCTIONS
+ 
+ #include <glib-object.h>

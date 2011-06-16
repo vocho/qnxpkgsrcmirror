@@ -1,30 +1,19 @@
-$NetBSD: patch-aa,v 1.2 2008/11/10 23:01:38 wiz Exp $
+$NetBSD$
 
-This patch makes "xmlto txt" usable on pkgsrc systems, which usually do
-not have these binaries in /usr/bin.
-
---- format/docbook/txt.orig	2008-05-24 17:43:05.000000000 +0000
-+++ format/docbook/txt
-@@ -1,16 +1,16 @@
- case "$USE_BACKEND" in
- DEFAULT|DBLATEX)
--	if [ -x /usr/bin/w3m ]
-+	if (type w3m 1>/dev/null 2>&1)
- 	then
--	  CONVERT=/usr/bin/w3m
-+	  CONVERT=w3m
- 	  ARGS="-T text/html -dump"
--	elif [ -x /usr/bin/lynx ]
-+	elif (type lynx 1>/dev/null 2>&1)
- 	then
--	  CONVERT=/usr/bin/lynx
-+	  CONVERT=lynx
- 	  ARGS="-force_html -dump -nolist -width=72"
--	elif [ -x /usr/bin/links ]
-+	elif (type links 1>/dev/null 2>&1)
- 	then
--	  CONVERT=/usr/bin/links
-+	  CONVERT=links
- 	  ARGS="-dump"
- 	else
- 	  echo >&2 "No way to convert HTML to text found."
+--- format/docbook/man.orig	2009-09-18 10:02:48.000000000 +0000
++++ format/docbook/man
+@@ -9,5 +9,14 @@ stylesheet)
+ post-process)
+   [ -e "$XSLT_PROCESSED" ] && rm "$XSLT_PROCESSED"
+   ${GCP_PATH:-cp} -R -P -p -- * "$OUTPUT_DIR" 2>/dev/null
++  case "$(uname)" in
++  QNX)
++    # PR 77026
++    ${GCP_PATH:-cp} -R -p -- * "$OUTPUT_DIR" 2>/dev/null
++    ;;
++  *)
++    ${GCP_PATH:-cp} -R -P -p -- * "$OUTPUT_DIR" 2>/dev/null
++    ;;
++  esac
+   ;;
+ esac

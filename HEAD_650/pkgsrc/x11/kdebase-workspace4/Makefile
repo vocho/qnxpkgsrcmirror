@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.22 2010/12/06 11:43:42 markd Exp $
+# $NetBSD: Makefile,v 1.27 2011/03/06 16:04:33 wiz Exp $
 
 DISTNAME=	kdebase-workspace-${_KDE_VERSION}
 CATEGORIES=	x11
@@ -37,6 +37,9 @@ CONF_FILES+=		${PREFIX}/share/examples/kde4-dbus/org.kde.fontinst.conf \
 CONF_FILES+=		${PREFIX}/share/examples/kde4-dbus/org.kde.kcontrol.kcmclock.conf \
 			${PKG_SYSCONFDIR}/dbus-1/system.d/org.kde.kcontrol.kcmclock.conf
 
+SPECIAL_PERMS+=		${PREFIX}/lib/kde4/libexec/kcheckpass \
+			${REAL_ROOT_USER} ${REAL_ROOT_GROUP} 6555
+
 REPLACE_PERL+= \
 	kcontrol/keys/convertShortcuts.pl \
 	kwin/data/kwin3_plugin.pl \
@@ -47,14 +50,18 @@ PY_PATCHPLIST=	yes
 .include "../../mk/bsd.prefs.mk"
 .include "options.mk"
 
-SUBST_CLASSES+=		paths qtpath
+SUBST_CLASSES+=		paths qtpath isocodes
 SUBST_FILES.paths=	kcontrol/kdm/main.cpp
 SUBST_SED.paths=	-e 's,@PKG_SYSCONFDIR@,${PKG_SYSCONFDIR},g'
 SUBST_STAGE.paths=	post-patch
 
 SUBST_FILES.qtpath=	startkde.cmake
-SUBST_SED.qtpath=	-e 's,/usr/pkg/qt4,${QTDIR},g'
+SUBST_VARS.qtpath=	QTDIR
 SUBST_STAGE.qtpath=	post-patch
+
+SUBST_FILES.isocodes=	kcontrol/keyboard/iso_codes.h
+SUBST_SED.isocodes=	-e 's,/usr/share/xml/iso-codes,${BUILDLINK_PREFIX.iso-codes}/share/xml/iso-codes,g'
+SUBST_STAGE.isocodes=	post-patch
 
 ICONDIR=		share/icons
 
@@ -65,6 +72,7 @@ RT_LIB_SCHED=	rt
 RT_LIB_SCHED=	# empty
 .endif
 CMAKE_ARGS+=	-DRT_LIB_SCHED=${RT_LIB_SCHED}
+CMAKE_ARGS+=	-DWITH_Xmms:BOOL=OFF
 
 # genkdmconf wont install faces if using destdir so do it ourselves
 INSTALLATION_DIRS+= share/kde/apps/kdm/faces
@@ -90,7 +98,7 @@ post-install:
 BUILDLINK_DEPMETHOD.qt4-tools=	full
 .include "../../meta-pkgs/kde4/kde4.mk"
 
-PYTHON_VERSIONS_ACCEPTED= 26 25 # because kdebindings4-python
+PYTHON_VERSIONS_ACCEPTED= 27 26 25 # because kdebindings4-python
 .include "../../lang/python/application.mk"
 .include "../../lang/python/extension.mk"
 .include "../../devel/libusb/buildlink3.mk"
@@ -101,6 +109,7 @@ PYTHON_VERSIONS_ACCEPTED= 26 25 # because kdebindings4-python
 #  I don't know how consolekit works
 #.include "../../sysutils/consolekit/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
+.include "../../textproc/iso-codes/buildlink3.mk"
 .include "../../x11/kdebindings4-python/buildlink3.mk"
 .include "../../x11/kdelibs4/buildlink3.mk"
 .include "../../misc/kdepimlibs4/buildlink3.mk"

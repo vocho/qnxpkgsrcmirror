@@ -1,4 +1,4 @@
-$NetBSD: distinfo,v 1.2 2010/12/03 00:27:05 wiz Exp $
+$NetBSD: distinfo,v 1.4 2011/03/27 14:47:26 chs Exp $
 
 SHA1 (suse113/i586/cairo-1.8.10-3.1.i586.rpm) = bfee95d99a32cdd85e8863a0a6e3b24bcad88c4b
 RMD160 (suse113/i586/cairo-1.8.10-3.1.i586.rpm) = 57658933228536b1f3855c52f2e026c9d45a0eca
@@ -42,9 +42,9 @@ Size (suse113/i586/libpulse0-0.9.21-9.2.i586.rpm) = 199518 bytes
 SHA1 (suse113/i586/orbit2-2.14.18-2.8.i586.rpm) = 29ba6173936256f938563529945a6b9f67cd5ab8
 RMD160 (suse113/i586/orbit2-2.14.18-2.8.i586.rpm) = 5203c84e2ce5af80468dc78249aad541688e99fe
 Size (suse113/i586/orbit2-2.14.18-2.8.i586.rpm) = 160384 bytes
-SHA1 (suse113/i586/pango-1.28.0-2.7.i586.rpm) = d37c08d7d8d3d12035368e4a42fe3425608797e4
-RMD160 (suse113/i586/pango-1.28.0-2.7.i586.rpm) = 01bf2abd23944f3e70cbd8908ea479b449a356b2
-Size (suse113/i586/pango-1.28.0-2.7.i586.rpm) = 388224 bytes
+SHA1 (suse113/i586/pango-1.28.0-3.3.1.i586.rpm) = cc1385fd36d05137006816edef69a2f8538ac00e
+RMD160 (suse113/i586/pango-1.28.0-3.3.1.i586.rpm) = 84afc76d277db246d3458ece38be2db72f389e67
+Size (suse113/i586/pango-1.28.0-3.3.1.i586.rpm) = 388303 bytes
 SHA1 (suse113/x86_64/cairo-1.8.10-3.1.x86_64.rpm) = b6d5042729603d073b797b2f19b1eaeeff6f96a2
 RMD160 (suse113/x86_64/cairo-1.8.10-3.1.x86_64.rpm) = e1c70616604462537cef95315abd8543219e0b52
 Size (suse113/x86_64/cairo-1.8.10-3.1.x86_64.rpm) = 433901 bytes
@@ -87,6 +87,6 @@ Size (suse113/x86_64/libpulse0-0.9.21-9.2.x86_64.rpm) = 208684 bytes
 SHA1 (suse113/x86_64/orbit2-2.14.18-2.8.x86_64.rpm) = 40eb44e631c7b8d2864e7382a25ffe2f6b31dba6
 RMD160 (suse113/x86_64/orbit2-2.14.18-2.8.x86_64.rpm) = e2e5d65397cdef21c23b0e358bed98ef1b1e7799
 Size (suse113/x86_64/orbit2-2.14.18-2.8.x86_64.rpm) = 165243 bytes
-SHA1 (suse113/x86_64/pango-1.28.0-2.7.x86_64.rpm) = 39b3ac5af4bb2ce3c17e4bda577529594b505440
-RMD160 (suse113/x86_64/pango-1.28.0-2.7.x86_64.rpm) = a76beb2a42fef2e7b2bfeed24e157c284709d290
-Size (suse113/x86_64/pango-1.28.0-2.7.x86_64.rpm) = 390446 bytes
+SHA1 (suse113/x86_64/pango-1.28.0-3.3.1.x86_64.rpm) = 2cbe05cf782768fc40b26e55b8c2ff0ae8becc92
+RMD160 (suse113/x86_64/pango-1.28.0-3.3.1.x86_64.rpm) = 958c40edfafacbe0c00874c3df46cfccb649337b
+Size (suse113/x86_64/pango-1.28.0-3.3.1.x86_64.rpm) = 390134 bytes

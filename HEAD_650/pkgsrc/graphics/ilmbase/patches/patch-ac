@@ -1,13 +1,19 @@
-$NetBSD$
+$NetBSD: patch-ac,v 1.1 2011/01/03 07:58:43 dsainty Exp $
 
---- Iex/IexThrowErrnoExc.cpp.orig	2010-01-16 00:52:36.000000000 +0000
-+++ Iex/IexThrowErrnoExc.cpp
-@@ -620,7 +620,7 @@ void throwErrnoExc (const std::string &t
- 	    throw EhostunreachExc (tmp);
-       #endif
+Include <cstring> to declare memset(), used from this header in inlines.
+
+--- Imath/ImathMatrix.h.orig	2010-07-16 22:48:40.000000000 +0000
++++ Imath/ImathMatrix.h
+@@ -49,8 +49,12 @@
+ #include "ImathVec.h"
+ #include "ImathShear.h"
  
--      #if defined (EALREADY)
-+      #if defined (EALREADY)  && ((EALREADY) != (EBUSY))
- 	  case EALREADY:
- 	    throw EalreadyExc (tmp);
-       #endif
++#include <cstring>
+ #include <iostream>
+ #include <iomanip>
++#ifdef __QNXNTO__
++#include <string.h> /* for memset */
++#endif
+ 
+ #if (defined _WIN32 || defined _WIN64) && defined _MSC_VER
+ // suppress exception specification warnings

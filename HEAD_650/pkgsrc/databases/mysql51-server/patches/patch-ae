@@ -3,7 +3,7 @@ $NetBSD: patch-ae,v 1.2 2010/08/13 14:25:35 taca Exp $
 * check sizeof time_t.
 * check existence of sigsend().
 
---- configure.in.orig	2010-11-29 10:38:01.000000000 +0000
+--- configure.in.orig	2011-02-11 19:20:19.000000000 +0000
 +++ configure.in
 @@ -1200,6 +1200,10 @@ EOF
      echo "done"
@@ -24,7 +24,7 @@ $NetBSD: patch-ae,v 1.2 2010/08/13 14:25:35 taca Exp $
  
  dnl
  dnl check if time_t is unsigned
-@@ -1970,7 +1975,7 @@ AC_CHECK_HEADERS(varargs.h stdarg.h dire
+@@ -1979,7 +1984,7 @@ AC_CHECK_HEADERS(varargs.h stdarg.h dire
  paths.h semaphore.h)
  
  # Already-done: strcasecmp

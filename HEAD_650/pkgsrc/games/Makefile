@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.340 2010/12/17 09:21:22 wiz Exp $
+# $NetBSD: Makefile,v 1.344 2011/03/02 12:07:25 ryoon Exp $
 #
 
 COMMENT=	Games
@@ -160,6 +160,7 @@ SUBDIR+=	libggz
 SUBDIR+=	lincity
 SUBDIR+=	liquidwar
 SUBDIR+=	lmarbles
+SUBDIR+=	lnl
 SUBDIR+=	lpairs
 SUBDIR+=	ltris
 SUBDIR+=	maelstrom-sdl
@@ -186,11 +187,13 @@ SUBDIR+=	newvox
 SUBDIR+=	nighthawk
 SUBDIR+=	ninvaders
 SUBDIR+=	omega
+SUBDIR+=	onscripter
 SUBDIR+=	openmortal
 SUBDIR+=	openttd
 SUBDIR+=	openttd-data
 SUBDIR+=	orbital_eunuchs_sniper
 SUBDIR+=	pag
+SUBDIR+=	pingus
 SUBDIR+=	pioneers
 SUBDIR+=	plib
 SUBDIR+=	pokerth
@@ -259,9 +262,9 @@ SUBDIR+=	ufoai
 SUBDIR+=	urban
 SUBDIR+=	velena
 SUBDIR+=	vms-empire
+SUBDIR+=	warmux
 SUBDIR+=	warzone2100
 SUBDIR+=	wesnoth
-SUBDIR+=	wormux
 SUBDIR+=	wormz
 SUBDIR+=	wxhugo
 SUBDIR+=	xarchon

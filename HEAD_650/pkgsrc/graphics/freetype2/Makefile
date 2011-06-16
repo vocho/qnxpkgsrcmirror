@@ -1,16 +1,15 @@
-# $NetBSD: Makefile,v 1.77 2010/11/24 18:44:53 drochner Exp $
+# $NetBSD: Makefile,v 1.79 2011/03/11 12:28:03 zafer Exp $
 
-DISTNAME=	freetype-2.4.3
+DISTNAME=	freetype-2.4.4
 PKGNAME=	${DISTNAME:S/-/2-/}
-PKGREVISION=	2
 CATEGORIES=	graphics
-MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=freetype/} \
-		ftp://ring.aist.go.jp/pub/graphics/freetype/freetype2/
+MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=freetype/}
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	rh@NetBSD.org
 HOMEPAGE=	http://www.freetype.org/
 COMMENT=	Font rendering engine and library API
+LICENSE=	gnu-gpl-v2
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
 PKG_DESTDIR_SUPPORT=	user-destdir
@@ -18,8 +17,8 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 USE_LIBTOOL=		yes
 USE_TOOLS+=		grep gmake
 GNU_CONFIGURE=		yes
-CONFIGURE_DIRS=		${WRKSRC}/builds/unix
-BUILD_DIRS=		${WRKSRC}
+CONFIGURE_DIRS=		builds/unix
+BUILD_DIRS=		.
 CONFIGURE_ARGS+=	--includedir=${PREFIX}/include
 CONFIGURE_ARGS+=	--enable-shared
 CONFIGURE_ENV+=		ac_cv_path_GREP=${GREP:Q} ac_cv_path_EGREP=${EGREP:Q}

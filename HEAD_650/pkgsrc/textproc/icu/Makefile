@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.61 2010/12/07 17:58:13 adam Exp $
+# $NetBSD: Makefile,v 1.63 2011/03/14 13:46:32 adam Exp $
 
-DISTNAME=	icu4c-4_6-src
-PKGNAME=	icu-4.6
+DISTNAME=	icu4c-4_6_1-src
+PKGNAME=	icu-4.6.1
 CATEGORIES=	textproc
 MASTER_SITES=	http://download.icu-project.org/files/icu4c/${PKGVERSION_NOREV}/
 EXTRACT_SUFX=	.tgz
@@ -9,6 +9,7 @@ EXTRACT_SUFX=	.tgz
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.icu-project.org/
 COMMENT=	Robust and full-featured Unicode services
+LICENSE=	mit
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
@@ -50,16 +51,9 @@ PLIST_SUBST+=		MH_NAME=mh-unknown
 .endif
 
 .if ${OPSYS} == "Darwin"
-SO_EXT=
-SO_SUFFIX=.dylib
 INSTALL_UNSTRIPPED=	yes
-.else
-SO_EXT=.so
-SO_SUFFIX=
 .endif
 
 CFLAGS.QNX+= -U__STRICT_ANSI__ # It's not 1999
-
-PLIST_SUBST+=	SO_SUFFIX=${SO_SUFFIX} SO_EXT=${SO_EXT}
 
 .include "../../mk/bsd.pkg.mk"

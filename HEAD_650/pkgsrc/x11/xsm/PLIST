@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.2 2009/06/14 18:25:19 joerg Exp $
+@comment $NetBSD: PLIST,v 1.4 2011/03/23 20:44:18 zafer Exp $
 bin/xsm
 lib/X11/app-defaults/XSm
 lib/X11/xsm/system.xsm

@@ -1,12 +1,13 @@
-# $NetBSD: Makefile,v 1.5 2008/06/12 02:14:15 joerg Exp $
+# $NetBSD: Makefile,v 1.7 2011/03/11 10:20:07 zafer Exp $
 
 DISTNAME=	WMmp-0.10.0
 CATEGORIES=	audio
-MASTER_SITES=	http://mercury.chem.pitt.edu/~shank/
+MASTER_SITES=	# http://mercury.chem.pitt.edu/~shank/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://musicpd.org/WMmp.shtml
 COMMENT=	Window Maker dock app for interfacing MPD
+LICENSE=	gnu-gpl-v2
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 

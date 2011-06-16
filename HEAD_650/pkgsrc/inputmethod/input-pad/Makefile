@@ -1,17 +1,18 @@
-# $NetBSD: Makefile,v 1.5 2010/11/30 11:39:12 obache Exp $
+# $NetBSD: Makefile,v 1.7 2011/01/13 13:36:36 wiz Exp $
 #
 
 .include "Makefile.common"
 
 MAINTAINER=	obache@NetBSD.org
 COMMENT=	On-screen Input Pad to Send Characters with Mouse
+PKGREVISION=	1
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=		yes
 USE_LIBTOOL=		yes
 USE_PKGLOCALEDIR=	yes
-USE_TOOLS+=		gmake pkg-config intltool
+USE_TOOLS+=		gmake pkg-config intltool msgfmt xgettext msgmerge
 
 PKGCONFIG_OVERRIDE+=	input-pad.pc.in
 

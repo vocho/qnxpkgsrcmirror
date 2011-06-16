@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.28 2010/12/02 13:36:56 wiz Exp $
+# $NetBSD: Makefile,v 1.31 2011/03/22 10:41:10 obache Exp $
 #
 
 PKGNAME=		${PYPKGPREFIX}-gobject-2.26.0
-PKGREVISION=		1
+PKGREVISION=		2
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 .include "Makefile.common"
 
-PYTHON_VERSIONS_ACCEPTED=	26 25
+PYTHON_VERSIONS_ACCEPTED=	27 26 25
 
 SUBST_CLASSES+=		codegen
 SUBST_STAGE.codegen=	pre-configure
@@ -36,5 +36,6 @@ BUILDLINK_API_DEPENDS.py-gobject-shared+= py-gobject-shared>=${PKGVERSION_NOREV}
 .include "../../graphics/py-cairo/buildlink3.mk"
 .include "../../devel/py-gobject-shared/buildlink3.mk"
 .include "../../devel/glib2/buildlink3.mk"
+BUILDLINK_API_DEPENDS.gobject-introspection=	gobject-introspection>=0.9.5
 .include "../../devel/gobject-introspection/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

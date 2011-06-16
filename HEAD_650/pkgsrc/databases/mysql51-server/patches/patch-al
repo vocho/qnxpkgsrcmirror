@@ -1,13 +1,22 @@
-$NetBSD$
+$NetBSD: patch-al,v 1.4 2011/03/19 15:40:15 jmmv Exp $
 
---- server-tools/instance-manager/instance.cc.orig	2010-06-03 15:50:18.000000000 +0000
-+++ server-tools/instance-manager/instance.cc
-@@ -135,7 +135,7 @@ static bool start_process(Instance_optio
-      Here we use spawnv(), which  is a combination of fork() and execv()
-      in one call. It returns the pid of newly created process (>0) or -1
-   */
--  *pi= spawnv(P_NOWAIT, instance_options->mysqld_path, instance_options->argv);
-+  *pi= spawnv(P_NOWAIT, instance_options->mysqld_path.str, instance_options->argv);
- #endif
+Avoid C++ error (needed for Clang).
+
+--- storage/ndb/include/util/Parser.hpp.orig	2011-03-17 13:15:30.000000000 +0000
++++ storage/ndb/include/util/Parser.hpp
+@@ -148,12 +148,12 @@ public:
+   static const DummyRow* matchArg(Context*, const char *, const DummyRow *);
+   static bool parseArg(Context*, char*, const DummyRow*, Properties*);
+   static bool checkMandatory(Context*, const Properties*);
+-private:
+-  const DummyRow * const m_rows;
+-  class ParseInputStream & input;
+   bool m_breakOnEmpty;
+   bool m_breakOnCmd;
+   bool m_breakOnInvalidArg;
++private:
++  const DummyRow * const m_rows;
++  class ParseInputStream & input;
+ };
  
-   switch (*pi) {
+ template<class T>

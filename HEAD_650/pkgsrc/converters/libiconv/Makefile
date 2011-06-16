@@ -24,6 +24,7 @@ GNU_CONFIGURE=		yes
 CONFIGURE_ARGS+=	--disable-nls
 
 CONFIGURE_ARGS+=	--htmldir=${PREFIX}/share/doc/libiconv
+CONFIGURE_ENV+=		ICONV_CONST=const 
 
 TEST_TARGET=		check
 

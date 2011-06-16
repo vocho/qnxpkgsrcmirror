@@ -1,8 +1,8 @@
 $NetBSD$
 
---- ffserver.c.orig	2010-05-15 10:51:32.000000000 +0000
+--- ffserver.c.orig	2011-06-13 14:46:06.000000000 +0000
 +++ ffserver.c
-@@ -4556,7 +4556,10 @@ int main(int argc, char **argv)
+@@ -4634,7 +4634,10 @@ int main(int argc, char **argv)
  
      memset(&sigact, 0, sizeof(sigact));
      sigact.sa_handler = handle_child_exit;

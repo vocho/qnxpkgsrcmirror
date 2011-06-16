@@ -1,14 +1,13 @@
 $NetBSD$
 
---- Imath/ImathMatrix.h.orig	2010-07-16 22:48:40.000000000 +0000
-+++ Imath/ImathMatrix.h
-@@ -51,6 +51,9 @@
+--- Iex/IexThrowErrnoExc.cpp.orig	2010-01-16 00:52:36.000000000 +0000
++++ Iex/IexThrowErrnoExc.cpp
+@@ -620,7 +620,7 @@ void throwErrnoExc (const std::string &t
+ 	    throw EhostunreachExc (tmp);
+       #endif
  
- #include <iostream>
- #include <iomanip>
-+#ifdef __QNXNTO__
-+#include <string.h> /* for memset */
-+#endif
- 
- #if (defined _WIN32 || defined _WIN64) && defined _MSC_VER
- // suppress exception specification warnings
+-      #if defined (EALREADY)
++      #if defined (EALREADY) && ((EALREADY) != (EBUSY))
+ 	  case EALREADY:
+ 	    throw EalreadyExc (tmp);
+       #endif
