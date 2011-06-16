@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.14 2010/07/15 21:35:10 asau Exp $
+# $NetBSD: Makefile,v 1.17 2011/03/16 17:48:22 hans Exp $
 
 DISTNAME=		gcc-${GCC_VERSION}
 PKGNAME=		gcc44-${GCC_VERSION}
@@ -20,7 +20,7 @@ USE_TOOLS+=		awk:run bash:run perl chmod \
 
 DEPENDS+=		zip-[0-9]*:../../archivers/zip
 
-GCC_VERSION=		4.4.4
+GCC_VERSION=		4.4.5
 
 GCC_SUBPREFIX=		gcc44
 GCC_PREFIX=		${PREFIX}/${GCC_SUBPREFIX}
@@ -33,6 +33,7 @@ CONFIG_SHELL=		${TOOLS_PATH.bash}
 
 NOT_FOR_PLATFORM=	Interix-*-*
 UNLIMIT_RESOURCES+=	datasize
+UNLIMIT_RESOURCES+=	stacksize
 
 .include "../../mk/bsd.prefs.mk"
 .include "options.mk"
@@ -156,9 +157,9 @@ do-build:
 	(${_ULIMIT_CMD} cd ${WRKDIR}/obj && ${SETENV} ${MAKE_ENV} ${GMAKE} -j${MAKE_JOBS:U1:Q} )
 
 do-test:
-.if (${MACHINE_GNU_ARCH} == "x86_64")
-	(cd ${FILESDIR} && ${CP} netbsd64macro.dfs ${WRKSRC}/gcc/testsuite/ada/acats/support/macro.dfs)
-.endif
+#.if (${MACHINE_GNU_ARCH} == "x86_64")
+#	(cd ${FILESDIR} && ${CP} netbsd64macro.dfs ${WRKSRC}/gcc/testsuite/ada/acats/support/macro.dfs)
+#.endif
 	(cd ${WRKDIR}/obj && ${GMAKE} -k check)
 
 do-install:

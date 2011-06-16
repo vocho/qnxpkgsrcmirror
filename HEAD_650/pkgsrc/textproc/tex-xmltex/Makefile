@@ -1,10 +1,9 @@
-# $NetBSD: Makefile,v 1.11 2010/05/04 23:51:22 minskim Exp $
-# TeX Live Revision 17012
+# $NetBSD: Makefile,v 1.13 2011/03/14 18:53:31 minskim Exp $
 
 DISTNAME=	xmltex
 PKGNAME=	tex-${DISTNAME}-1.9
-PKGREVISION=	7
-DIST_SUBDIR=	${PKGNAME_NOREV}-17012
+PKGREVISION=	8
+TEXLIVE_REV=	18835
 
 MAINTAINER=	minskim@NetBSD.org
 HOMEPAGE=	http://www.dcarlisle.demon.co.uk/xmltex/manual.html
@@ -15,7 +14,6 @@ DEPENDS+=	tex-hyphen-base-[0-9]*:../../print/tex-hyphen-base
 DEPENDS+=	tex-latexconfig-[0-9]*:../../print/tex-latexconfig
 DEPENDS+=	tex-latex-[0-9]*:../../print/tex-latex
 DEPENDS+=	tex-pdftex-[0-9]*:../../print/tex-pdftex
-DEPENDS+=	tex-tex-[0-9]*:../../print/tex-tex
 
 INSTALLATION_DIRS=	bin
 

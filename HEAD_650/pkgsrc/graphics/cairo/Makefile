@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.86 2010/11/28 14:06:16 obache Exp $
+# $NetBSD: Makefile,v 1.92 2011/02/28 14:52:50 wiz Exp $
 
-DISTNAME=	cairo-1.10.0
-PKGREVISION=	2
+DISTNAME=	cairo-1.10.2
+PKGREVISION=	1
 CATEGORIES=	graphics
 MASTER_SITES=	http://cairographics.org/releases/
 
-MAINTAINER=	recht@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://cairographics.org/
 COMMENT=	Vector graphics library with cross-device output support
 LICENSE=	gnu-lgpl-v2.1 AND mpl-1.1

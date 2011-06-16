@@ -1,21 +1,24 @@
-# $NetBSD: Makefile,v 1.61 2010/09/14 11:02:37 wiz Exp $
+# $NetBSD: Makefile,v 1.66 2011/02/11 21:22:03 tnn Exp $
 
-DISTNAME=	ntop-4.0
-PKGREVISION=	1
+DISTNAME=	ntop-4.0.3
+PKGREVISION=	2
 CATEGORIES=	net
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=ntop/}
+EXTRACT_SUFX=	.tgz
 
 MAINTAINER=	adam@NetBSD.org
 HOMEPAGE=	http://www.ntop.org/ntop.html
 COMMENT=	Shows network usage (similar to "top" for processes)
+LICENSE=	gnu-gpl-v3
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 CONFLICTS=	ntop-[0-9]*
+DEPENDS+=	${PYPKGPREFIX}-mako-[0-9]*:../../devel/py-mako
 
 USE_LIBTOOL=		yes
 USE_PKGLOCALEDIR=	yes
-USE_TOOLS+=		aclocal autoconf autoheader automake gawk gmake
+USE_TOOLS+=		aclocal autoconf autoheader automake gawk gmake gunzip
 GNU_CONFIGURE=		yes
 CONFIGURE_ARGS+=	--localstatedir=${VARBASE}
 CONFIGURE_ARGS+=	--sysconfdir=${PREFIX}/share/ntop
@@ -43,7 +46,8 @@ USE_BUILTIN.libevent=	no
 
 pre-configure:
 	set -e; cd ${WRKSRC}; \
-	cp ${PREFIX}/share/libtool/config/ltmain.sh .; \
+	libtoolize -c -f; cp m4/libtool.m4 libtool.m4.in; \
+	cat acinclude.m4.in libtool.m4.in acinclude.m4.ntop > acinclude.m4; \
 	aclocal; autoheader; automake -a --foreign -i; autoconf
 
 .include "../../databases/gdbm/buildlink3.mk"

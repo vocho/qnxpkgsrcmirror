@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.19 2010/06/13 22:44:48 wiz Exp $
+# $NetBSD: Makefile,v 1.21 2011/02/28 14:52:52 wiz Exp $
 #
 
 DISTNAME=	linpsk-0.8.1
-PKGREVISION=	6
+PKGREVISION=	7
 CATEGORIES=	ham
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=linpsk/}
 
-MAINTAINER=	wulf@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://linpsk.sourceforge.net/
 COMMENT=	PSK31 terminal program using QT3
 

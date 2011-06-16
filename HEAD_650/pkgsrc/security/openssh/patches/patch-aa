@@ -1,8 +1,8 @@
-$NetBSD: patch-aa,v 1.46 2010/06/11 20:41:42 martti Exp $
+$NetBSD: patch-aa,v 1.48 2011/02/16 17:45:08 taca Exp $
 
---- configure.orig	2010-04-16 00:17:11.000000000 +0000
+--- configure.orig	2011-02-04 01:00:01.000000000 +0000
 +++ configure
-@@ -5665,6 +5665,9 @@ if test "${with_rpath+set}" = set; then
+@@ -6122,6 +6122,9 @@ if test "${with_rpath+set}" = set; then
  fi
  
  
@@ -12,7 +12,7 @@ $NetBSD: patch-aa,v 1.46 2010/06/11 20:41:42 martti Exp $
  # Allow user to specify flags
  
  # Check whether --with-cflags was given.
-@@ -5810,6 +5813,7 @@ for ac_header in \
+@@ -6267,6 +6270,7 @@ for ac_header in \
  	maillock.h \
  	ndir.h \
  	net/if_tun.h \
@@ -20,11 +20,11 @@ $NetBSD: patch-aa,v 1.46 2010/06/11 20:41:42 martti Exp $
  	netdb.h \
  	netgroup.h \
  	pam/pam_appl.h \
-@@ -7660,6 +7664,36 @@ _ACEOF
+@@ -8123,6 +8127,36 @@ _ACEOF
  		;;
  	esac
  	;;
-+*-*-interix3)
++*-*-interix*)
 +        cat >>confdefs.h <<\_ACEOF
 +#define HAVE_INTERIX 1
 +_ACEOF
@@ -57,7 +57,7 @@ $NetBSD: patch-aa,v 1.46 2010/06/11 20:41:42 martti Exp $
  *-*-irix5*)
  	PATH="$PATH:/usr/etc"
  
-@@ -8226,7 +8260,7 @@ cat >>confdefs.h <<\_ACEOF
+@@ -8689,7 +8723,7 @@ cat >>confdefs.h <<\_ACEOF
  _ACEOF
  
  	;;
@@ -66,7 +66,7 @@ $NetBSD: patch-aa,v 1.46 2010/06/11 20:41:42 martti Exp $
  	check_for_libcrypt_later=1
  
  cat >>confdefs.h <<\_ACEOF
-@@ -9468,19 +9502,10 @@ _ACEOF
+@@ -10008,19 +10042,10 @@ _ACEOF
  
  
  cat >>confdefs.h <<\_ACEOF
@@ -86,7 +86,7 @@ $NetBSD: patch-aa,v 1.46 2010/06/11 20:41:42 martti Exp $
  	cat >>confdefs.h <<\_ACEOF
  #define DISABLE_LASTLOG 1
  _ACEOF
-@@ -9496,13 +9521,26 @@ _ACEOF
+@@ -10036,13 +10061,26 @@ _ACEOF
  
  	enable_etc_default_login=no	# has incompatible /etc/default/login
  	case "$host" in
@@ -114,16 +114,7 @@ $NetBSD: patch-aa,v 1.46 2010/06/11 20:41:42 martti Exp $
  	;;
  
  *-*-ultrix*)
-@@ -12468,7 +12506,7 @@ echo "${ECHO_T}no" >&6; }
- 				LDFLAGS="-L${withval}/lib ${LDFLAGS}"
- 			fi
- 		fi
--		if test "x$use_pkgconfig_for_libedit" == "xyes"; then
-+		if test "x$use_pkgconfig_for_libedit" = "xyes"; then
- 			LIBEDIT=`$PKGCONFIG --libs-only-l libedit`
- 			CPPFLAGS="$CPPFLAGS `$PKGCONFIG --cflags libedit`"
- 		else
-@@ -29573,14 +29611,20 @@ fi
+@@ -30626,14 +30664,20 @@ fi
  rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
  if test -z "$conf_wtmpx_location"; then
  	if test x"$system_wtmpx_path" = x"no" ; then
@@ -149,7 +140,7 @@ $NetBSD: patch-aa,v 1.46 2010/06/11 20:41:42 martti Exp $
  #define CONF_WTMPX_FILE "$conf_wtmpx_location"
  _ACEOF
  
-@@ -30888,7 +30932,7 @@ echo "OpenSSH has been configured with t
+@@ -31948,7 +31992,7 @@ echo "OpenSSH has been configured with t
  echo "                     User binaries: $B"
  echo "                   System binaries: $C"
  echo "               Configuration files: $D"

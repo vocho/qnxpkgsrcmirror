@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.50 2010/07/14 11:11:24 sbd Exp $
+# $NetBSD: Makefile,v 1.52 2011/01/20 12:05:56 markd Exp $
 
 DISTNAME=	kdeadmin-${_KDE_VERSION}
 PKGREVISION=	6
@@ -16,7 +16,7 @@ CONFIGURE_ARGS+=	--with-shadow
 .else
 CONFIGURE_ARGS+=	--without-shadow
 .endif
-CONFIGURE_ENV+=		DO_NOT_COMPILE=ksysv
+CONFIGURE_ENV+=		DO_NOT_COMPILE="ksysv kdat"
 
 .include "../../meta-pkgs/kde3/kde3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"

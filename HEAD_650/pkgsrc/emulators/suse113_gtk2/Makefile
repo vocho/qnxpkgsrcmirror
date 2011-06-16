@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.2 2010/12/03 00:27:05 wiz Exp $
+# $NetBSD: Makefile,v 1.6 2011/03/27 14:47:26 chs Exp $
 
 DISTNAME=	suse_gtk2-${SUSE_VERSION}
-PKGREVISION=	1
+PKGREVISION=	3
 CATEGORIES=	emulators
 DISTFILES=	cairo-1.8.10-3.1.${SUSE_ARCH}.rpm			\
 		dbus-1-1.2.24-1.18.${SUSE_ARCH}.rpm			\
@@ -17,19 +17,21 @@ DISTFILES=	cairo-1.8.10-3.1.${SUSE_ARCH}.rpm			\
 		libgthread-2_0-0-2.24.1-2.5.${SUSE_ARCH}.rpm		\
 		libpulse0-0.9.21-9.2.${SUSE_ARCH}.rpm			\
 		orbit2-2.14.18-2.8.${SUSE_ARCH}.rpm   			\
-		pango-1.28.0-2.7.${SUSE_ARCH}.rpm
+		pango-1.28.0-3.3.1.${SUSE_ARCH}.rpm
 
-MAINTAINER=	tonio@NetBSD.org
+MAINTAINER=	chs@NetBSD.org
 COMMENT=	Linux compatibility package for GTK+-2.x
 
 EMUL_MODULES.linux=	fontconfig freetype2 jpeg png tiff x11
 
 # These files are managed by the +INSTALL/+DEINSTALL scripts.
-CHECK_FILES_SKIP+=	${EMULDIR}/etc/gtk-2.0/gtk.immodules
+CHECK_FILES_SKIP+=	${EMULDIR}/etc/gtk-2.0/gtk${ABISUFFIX}.immodules
 CHECK_FILES_SKIP+=	${EMULDIR}/etc/gtk-2.0/gdk-pixbuf.loaders
-CHECK_FILES_SKIP+=	${EMULDIR}/etc/pango/pango.modules
+CHECK_FILES_SKIP+=	${EMULDIR}/etc/pango/pango${ABISUFFIX}.modules
 
+ABISUFFIX?=	# empty
 BINSUFFIX?=	# empty
+FILES_SUBST+=	ABISUFFIX=${ABISUFFIX:Q}
 FILES_SUBST+=	BINSUFFIX=${BINSUFFIX:Q}
 
 .include "../../emulators/suse113_linux/Makefile.common"

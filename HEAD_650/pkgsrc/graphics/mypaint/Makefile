@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.1.1.1 2010/12/23 11:45:32 ryoon Exp $
+# $NetBSD: Makefile,v 1.5 2011/03/06 07:36:08 ryoon Exp $
 #
 
-DISTNAME=	mypaint-0.9.0
+DISTNAME=	mypaint-0.9.1
 CATEGORIES=	graphics
 MASTER_SITES=	http://download.gna.org/mypaint/
 EXTRACT_SUFX=	.tar.bz2
@@ -13,7 +13,7 @@ LICENSE=	gnu-gpl-v2
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
-PYTHON_VERSIONS_ACCEPTED=	26 25
+PYTHON_VERSIONS_ACCEPTED=	27 26 25
 USE_LANGUAGES=	c++
 
 USE_TOOLS+=	bash:run msgfmt pkg-config
@@ -24,11 +24,6 @@ DEPENDS+=	${PYPKGPREFIX}-cairo-[0-9]*:../../graphics/py-cairo
 
 FIND_PREFIX:=	SCONSDIR=scons
 .include "../../mk/find-prefix.mk"
-
-SUBST_CLASSES+=			python-cmd
-SUBST_STAGE.python-cmd=		pre-configure
-SUBST_FILES.python-cmd=		brushlib/SConscript
-SUBST_SED.python-cmd=		-e 's,python,${PYTHONBIN},'
 
 SUBST_CLASSES+=			locale-dir
 SUBST_STAGE.locale-dir=		pre-configure

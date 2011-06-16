@@ -1,6 +1,6 @@
-$NetBSD: patch-ae,v 1.6 2003/11/23 01:23:58 jlam Exp $
+$NetBSD: patch-ae,v 1.7 2011/01/13 15:09:58 pooka Exp $
 
---- Makefile.orig	1996-03-19 22:16:06.000000000 -0500
+--- Makefile.orig	1996-03-20 03:16:06.000000000 +0000
 +++ Makefile
 @@ -9,12 +9,10 @@
  # pick gcc if you'd rather , and/or do -g instead of -O if debugging
@@ -20,7 +20,7 @@ $NetBSD: patch-ae,v 1.6 2003/11/23 01:23:58 jlam Exp $
  
  nc:	netcat.c
 -	$(LD) $(DFLAGS) $(XFLAGS) $(STATIC) -o nc netcat.c $(XLIBS)
-+	$(CC) $(CFLAGS) $(DFLAGS) $(XFLAGS) $(STATIC) -o nc netcat.c $(XLIBS)
++	$(CC) $(CFLAGS) $(DFLAGS) $(XFLAGS) -o nc netcat.c $(XLIBS)
  
  nc-dos:
  	@echo "DOS?!  Maybe someday, but not now"

@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.54 2010/11/15 22:57:20 abs Exp $
+# $NetBSD: Makefile,v 1.58 2011/03/09 12:19:21 drochner Exp $
 
-DISTNAME=	inkscape-0.48.0
+DISTNAME=	inkscape-0.48.1
 PKGREVISION=	1
 CATEGORIES=	graphics
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=inkscape/}
@@ -9,6 +9,7 @@ EXTRACT_SUFX=	.tar.bz2
 MAINTAINER=	reed@reedmedia.net
 HOMEPAGE=	http://www.inkscape.org/
 COMMENT=	Scalable Vector Graphics (SVG) editor
+LICENSE=	gnu-gpl-v2
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 

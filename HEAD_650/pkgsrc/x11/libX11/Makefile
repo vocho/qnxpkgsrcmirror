@@ -19,20 +19,13 @@ GNU_CONFIGURE=		yes
 USE_TOOLS+=		gmake pkg-config
 
 CONFIGURE_ARGS+=	--enable-man-pages=3
+CONFIGURE_ARGS+=	--with-xcb
 CONFIGURE_ARGS+=	--disable-specs
 PKGCONFIG_OVERRIDE+=	x11.pc.in
 
 CONFIGURE_ENV+=		FILE_MAN_SUFFIX=5
 
 .include "../../mk/bsd.prefs.mk"
-
-PLIST_VARS+=	xcb
-.if ${OPSYS} != "QNX"
-CONFIGURE_ARGS+=	--with-xcb
-PLIST.xcb=		yes
-.else
-CONFIGURE_ARGS+=	--without-xcb
-.endif
 
 .if ${OPSYS} == "NetBSD"
 CONFIGURE_ARGS+=	--disable-malloc0returnsnull

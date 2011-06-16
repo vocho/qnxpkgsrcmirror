@@ -1,0 +1,17 @@
+$NetBSD$
+
+--- sendlib.c.orig	2010-09-13 17:19:55.000000000 +0000
++++ sendlib.c
+@@ -1481,7 +1481,12 @@ char *mutt_make_date (char *s, size_t le
+   struct tm *l = localtime (&t);
+   time_t tz = mutt_local_tz (t);
+ 
++#ifndef __QNXNTO__
+   tz /= 60;
++#else
++   /* Our time_t is unsigned. */
++   tz = (int)tz / 60;
++#endif
+ 
+   snprintf (s, len,  "Date: %s, %d %s %d %02d:%02d:%02d %+03d%02d\n",
+ 	    Weekdays[l->tm_wday], l->tm_mday, Months[l->tm_mon],

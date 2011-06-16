@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.184 2010/09/24 01:31:59 chs Exp $
+# $NetBSD: Makefile,v 1.187 2011/03/04 08:15:50 jnemeth Exp $
 #
 
 COMMENT=	Emulators for other operating systems
@@ -76,7 +76,9 @@ SUBDIR+=	linuxppc_lib
 SUBDIR+=	lrmi
 SUBDIR+=	m1
 SUBDIR+=	makeppf
+SUBDIR+=	mame
 SUBDIR+=	mednafen
+SUBDIR+=	mess
 SUBDIR+=	minivmac
 SUBDIR+=	mmix
 SUBDIR+=	nestopia
@@ -100,8 +102,6 @@ SUBDIR+=	pearpc
 SUBDIR+=	qemu
 SUBDIR+=	raine
 #SUBDIR+=	sap	# only contains a Makefile.common
-SUBDIR+=	sdlmame
-SUBDIR+=	sdlmess
 SUBDIR+=	simh
 SUBDIR+=	simulavr
 SUBDIR+=	ski
@@ -174,6 +174,7 @@ SUBDIR+=	suse113_32_glx
 SUBDIR+=	suse113_32_gtk2
 SUBDIR+=	suse113_32_krb5
 SUBDIR+=	suse113_32_libcups
+SUBDIR+=	suse113_32_libcurl
 SUBDIR+=	suse113_32_libjpeg
 SUBDIR+=	suse113_32_libpng
 SUBDIR+=	suse113_32_libsigc++2
@@ -197,6 +198,7 @@ SUBDIR+=	suse113_glx
 SUBDIR+=	suse113_gtk2
 SUBDIR+=	suse113_krb5
 SUBDIR+=	suse113_libcups
+SUBDIR+=	suse113_libcurl
 SUBDIR+=	suse113_libjpeg
 SUBDIR+=	suse113_libpng
 SUBDIR+=	suse113_libsigc++2
@@ -227,8 +229,6 @@ SUBDIR+=	xbeeb
 SUBDIR+=	xcopilot
 SUBDIR+=	xhomer
 SUBDIR+=	xm7
-SUBDIR+=	xmame
-SUBDIR+=	xmess
 SUBDIR+=	xtrs
 SUBDIR+=	xyame
 SUBDIR+=	yabause

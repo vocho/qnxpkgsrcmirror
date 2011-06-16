@@ -1,4 +1,7 @@
-$NetBSD: patch-ca,v 1.8 2010/08/21 03:12:46 obache Exp $
+$NetBSD: patch-ca,v 1.9 2011/01/30 21:31:43 wiz Exp $
+
+Hunk 7 (MirBSD) was submitted and accepted upstream, see
+http://rt.perl.org/rt3/Ticket/Display.html?id=82532
 
 --- Configure.orig	2010-09-06 23:30:32.000000000 +0000
 +++ Configure
@@ -73,7 +76,7 @@ $NetBSD: patch-ca,v 1.8 2010/08/21 03:12:46 obache Exp $
  		xxx="-R $shrpdir"
  		;;
 -	freebsd|netbsd|openbsd|interix|dragonfly)
-+	freebsd|netbsd|openbsd|interix|dragonfly|nto)
++	freebsd|mirbsd|netbsd|openbsd|interix|dragonfly|nto)
  		xxx="-Wl,-R$shrpdir"
  		;;
  	bsdos|linux|irix*|dec_osf|gnu*)

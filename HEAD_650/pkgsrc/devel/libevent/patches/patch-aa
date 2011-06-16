@@ -1,15 +1,14 @@
-$NetBSD: patch-aa,v 1.4 2008/04/22 17:16:54 tnn Exp $
+$NetBSD$
 
---- event_rpcgen.py.orig	2008-03-03 04:37:12.000000000 +0100
-+++ event_rpcgen.py
-@@ -1310,6 +1310,10 @@ def HeaderPreamble(name):
-         '#include <event-config.h>\n'
-         '#ifdef _EVENT_HAVE_STDINT_H\n'
-         '#include <stdint.h>\n'
-+	'#elif defined(_EVENT_HAVE_INTTYPES_H)\n'
-+	'#  include <inttypes.h>\n'
-+	'#else\n'
-+	'#  error No inttypes.h or stdint.h to give integer types\n'
-         '#endif\n' )
+--- signal.c.orig	2010-11-21 22:50:14.000000000 +0000
++++ signal.c
+@@ -255,7 +255,9 @@ _evsig_set_handler(struct event_base *ba
+ #ifdef _EVENT_HAVE_SIGACTION
+ 	memset(&sa, 0, sizeof(sa));
+ 	sa.sa_handler = handler;
++#ifdef SA_RESTART
+ 	sa.sa_flags |= SA_RESTART;
++#endif
+ 	sigfillset(&sa.sa_mask);
  
-     for statement in headerdirect:
+ 	if (sigaction(evsignal, &sa, sig->sh_old[evsignal]) == -1) {

@@ -1,16 +1,17 @@
-$NetBSD$
+$NetBSD: patch-af,v 1.1 2011/01/12 08:53:52 adam Exp $
 
---- mDNSShared/dnssd_clientstub.c.orig	2009-06-19 23:13:24.000000000 +0000
-+++ mDNSShared/dnssd_clientstub.c
-@@ -353,7 +353,11 @@ Minor textual tidying
+mDNSPlatformSetAllowSleep only defined for Mac OS X.
+
+--- mDNSCore/mDNS.c.orig	2010-10-08 23:05:00.000000000 +0000
++++ mDNSCore/mDNS.c
+@@ -4011,8 +4011,10 @@ mDNSexport void mDNS_UpdateAllowSleep(mD
+ #endif /* !defined(IDLESLEEPCONTROL_DISABLED) */
  		}
- #else
- 
-+#ifndef __QNXNTO__
- 	#include <sys/fcntl.h>		// For O_RDWR etc.
-+#else
-+	#include <fcntl.h>
+ 	
++#if 0
+ 	// Call the platform code to enable/disable sleep
+ 	mDNSPlatformSetAllowSleep(m, allowSleep);
 +#endif
- 	#include <sys/time.h>
- 	#include <sys/socket.h>
- 	#include <syslog.h>
+ 	}
+ 
+ mDNSlocal void SendSPSRegistration(mDNS *const m, NetworkInterfaceInfo *intf, const mDNSOpaque16 id)

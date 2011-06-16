@@ -1,4 +1,4 @@
-# $NetBSD: buildlink3.mk,v 1.31 2010/06/13 22:45:07 wiz Exp $
+# $NetBSD: buildlink3.mk,v 1.33 2011/01/24 18:54:04 drochner Exp $
 
 BUILDLINK_TREE+=	vlc
 

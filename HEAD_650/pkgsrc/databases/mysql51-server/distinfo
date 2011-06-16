@@ -1,20 +1,20 @@
-$NetBSD: distinfo,v 1.14 2010/12/16 03:42:50 taca Exp $
+$NetBSD: distinfo,v 1.18 2011/03/19 15:40:15 jmmv Exp $
 
-SHA1 (mysql-5.1.54.tar.gz) = c3d1fb7c1985529e7dcdc689ac7977cfff007c9c
-RMD160 (mysql-5.1.54.tar.gz) = f9252c9a62278b4a6e17d47bc901be3732c32b18
-Size (mysql-5.1.54.tar.gz) = 23672236 bytes
+SHA1 (mysql-5.1.56.tar.gz) = 8665c76ab4ab36e8d2379ddf6d678c89b95d9321
+RMD160 (mysql-5.1.56.tar.gz) = c2ff6eb06d0797d4b56630b783d4ad2d1add1422
+Size (mysql-5.1.56.tar.gz) = 24795624 bytes
 SHA1 (patch-aa) = 2a5321738e637a56e57cd6b1b40908d2bf275506
-SHA1 (patch-ab) = 1fc6939bb3021153b72479aa2413e50940878c98
+SHA1 (patch-ab) = 4c485a74d55553d63fc3dbc0350d0aa0068e1fcf
 SHA1 (patch-ac) = bfb6eec77d7c5aa8d2b849632769005dcf2e272c
 SHA1 (patch-ad) = 5fd4db0e04a97289f38a5467bbae5041f4082b51
-SHA1 (patch-ae) = c70543337a764484561797a9bfad2638b6672517
+SHA1 (patch-ae) = d29dd07c3c50c11156e0e4684caf86307cbb9b7a
 SHA1 (patch-af) = 1e13ba542b4fc2a1d59fc822d06c76bc4e92dc23
 SHA1 (patch-ag) = 85df1a0080376c5aff1a963e5532cb2c1ec5949d
 SHA1 (patch-ah) = a608060cee7aadaf8bcde84016a73131a75dea32
 SHA1 (patch-ai) = 4c5acf2b0e05765a1fe9e30558d163886e1aa492
 SHA1 (patch-aj) = b8f35d3a1bc45eb5336ae6a842898b257d2660db
 SHA1 (patch-ak) = 3c740b78afacfe05aa082c5b235c10c51ac94641
-SHA1 (patch-al) = 011201a4bf3ca88d29e49aa03723c2869afdaff1
+SHA1 (patch-al) = ca9406a8b01dffb3f515f132fa7aaef66c78f2be
 SHA1 (patch-am) = 2cf10915f5dc3caf11bb8c7c7255842da646b247
 SHA1 (patch-an) = 7b627ceb6212641b7e0de9fd7142bc95e4dcb8cb
 SHA1 (patch-ao) = 7895abad117d5c6901c2241209c5747e6c490e7d
@@ -24,11 +24,8 @@ SHA1 (patch-ar) = ed9c062adce41a840db1e908ab0657db6de540ae
 SHA1 (patch-as) = 8167416a083a011ded19d176bc488c94d9eb7abf
 SHA1 (patch-at) = 307a0785190f8bc175226ce83288cc85f7da4631
 SHA1 (patch-au) = 51291771b994d199fb6de6a17dd7809a7bf39b68
-SHA1 (patch-av) = f48c8e16fd429a49d046806ef4593d8df78d910d
 SHA1 (patch-aw) = 93ba34d66fd054fbcf9e1eb3a042770d4d6820ec
 SHA1 (patch-ax) = dbf68af2d2ded85140aac3602d4f6ce5d68cc78a
-SHA1 (patch-ay) = f70896ae71e0ca7840e9966f43c757dd5b6c87b9
-SHA1 (patch-az) = cfe77df58645dfad65ce4ff8eae868f059231233
-SHA1 (patch-ba) = f595d2063ff18c0afb7e45c41d84a22ca9c99b44
-SHA1 (patch-bb) = 11f23c63a14d301a7dfa67d6c399a748ec5631b2
-SHA1 (patch-bc) = 703ce4c2d4de6459cea0b056e5ac0d7ed992fbba
+SHA1 (patch-extra_yassl_include_lock.hpp) = b6477c297128541e5101bf3de149b130c437ec3d
+SHA1 (patch-include_my__global.h) = 7fc2fe5dc049d74450f4b4f9f95dc736c345d1f5
+SHA1 (patch-server-tools_instance-manager_instance.cc) = 830896652f939ed9a9f8ea2a1678664c8e378ead

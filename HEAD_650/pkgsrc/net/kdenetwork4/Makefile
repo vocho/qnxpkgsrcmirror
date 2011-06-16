@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.18 2010/12/06 11:43:41 markd Exp $
+# $NetBSD: Makefile,v 1.20 2011/01/23 07:55:15 markd Exp $
 
 DISTNAME=	kdenetwork-${_KDE_VERSION}
 CATEGORIES=	net

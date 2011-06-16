@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.85 2010/11/29 19:13:30 tron Exp $
+# $NetBSD: Makefile,v 1.88 2011/02/13 16:11:11 tron Exp $
 
 DISTNAME=	phpMyAdmin-${DIST_VERSION}-all-languages
 PKGNAME=	phpmyadmin-${DIST_VERSION:S/-//}
@@ -23,7 +23,7 @@ MESSAGE_SUBST+=	CONF_INC_PHP=${CONF_INC_PHP} PMCONFFILE=${PMCONFFILE:Q} \
 USE_TOOLS+=	perl:run
 
 CONF_INC_PHP=	${PREFIX}/share/phpmyadmin/config.inc.php
-DIST_VERSION=	2.11.11.1
+DIST_VERSION=	2.11.11.3
 DOC_FILES=	CREDITS ChangeLog \
 		Documentation.txt INSTALL LICENSE README \
 		RELEASE-DATE-${DIST_VERSION} TODO
@@ -54,6 +54,10 @@ INSTALL_DIRS=	js lang libraries libraries/auth libraries/dbg \
 		themes themes/darkblue_orange \
 		themes/darkblue_orange/css themes/darkblue_orange/img \
 		themes/original themes/original/css themes/original/img
+
+# Part of the fix for CVE-2010-4480.
+post-extract:
+	${RM} -f ${WRKSRC}/error.php
 
 do-configure:
 	${SED} -e "s|@PMDIR@|${PMDIR}|g" ${FILESDIR}/phpmyadmin.conf	\

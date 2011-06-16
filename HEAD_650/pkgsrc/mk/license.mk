@@ -1,4 +1,4 @@
-# $NetBSD: license.mk,v 1.35 2010/08/24 19:08:29 bad Exp $
+# $NetBSD: license.mk,v 1.39 2011/03/17 22:58:10 bad Exp $
 #
 # This file handles everything about the LICENSE variable. It is
 # included automatically by bsd.pkg.mk.
@@ -98,7 +98,7 @@
 # XXX open-font-license should perhaps be changed to open-font
 
 DEFAULT_ACCEPTABLE_LICENSES= \
-	public-domain \
+	public-domain unlicense \
 	gnu-fdl-v1.1 gnu-fdl-v1.2 gnu-fdl-v1.3 \
 	gnu-gpl-v2 gnu-lgpl-v2 gnu-lgpl-v2.1 \
 	gnu-gpl-v3 gnu-lgpl-v3 \
@@ -110,10 +110,12 @@ DEFAULT_ACCEPTABLE_LICENSES= \
 	cpl-1.0 \
 	open-font-license \
 	mpl-1.0 mpl-1.1 \
+	png-license \
 	zpl \
 	python-software-foundation \
 	ipafont \
-	isc
+	isc \
+	boost-license
 
 # not approved by OSI, derived from BSD
 DEFAULT_ACCEPTABLE_LICENSES+=	info-zip
@@ -168,7 +170,7 @@ _PKG_INSTALL_CONF?=	${PREFIX}/etc/pkg_install.conf
 .  if empty(LICENSE:MAND) && empty(LICENSE:MOR) && empty(LICENSE:M*[()]*)
 PKG_FAIL_REASON+= "${PKGNAME} has an unacceptable license condition: " \
     "    "${LICENSE:Q} \
-    "You can mark the license \`\`license'' as acceptable by adding" \
+    "You can mark the license \`\`${LICENSE}'' as acceptable by adding" \
     "    ACCEPTABLE_LICENSES+= ${LICENSE}" \
     "to ${_MAKE_CONF} or by adding" \
     "    ACCEPTABLE_LICENSES= ${LICENSE}" \
@@ -178,10 +180,12 @@ PKG_FAIL_REASON+= "The following command will show you the license text:" \
 .  else
 PKG_FAIL_REASON+= "${PKGNAME} has an unacceptable license condition: " \
     "    "${LICENSE:Q} \
-    "You can mark the license \`\`license'' as acceptable by adding" \
-    "    ACCEPTABLE_LICENSES+= license" \
+    "" \
+    "Check that you have accepted all necessary licenses." \
+    "You can mark a particular license \`\`foo'' as acceptable by adding" \
+    "    ACCEPTABLE_LICENSES+= foo" \
     "to ${_MAKE_CONF} or by adding" \
-    "    ACCEPTABLE_LICENSES= license" \
+    "    ACCEPTABLE_LICENSES= foo" \
     "to ${_PKG_INSTALL_CONF}."
 .  endif
 
