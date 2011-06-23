@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.9 2011/01/13 13:37:05 wiz Exp $
+# $NetBSD: Makefile,v 1.11 2011/04/22 13:42:57 obache Exp $
 #
 
 DISTNAME=	padevchooser-0.9.3
-PKGREVISION=	5
+PKGREVISION=	6
 CATEGORIES=	audio
 MASTER_SITES=	http://0pointer.de/lennart/projects/padevchooser/
 
@@ -19,11 +19,13 @@ USE_LIBTOOL=	yes
 
 CONFIGURE_ARGS+=	--disable-lynx
 
-pkgbase:=	pulseaudio
-.include "../../mk/pkg-build-options.mk"
-.if empty(PKG_BUILD_OPTIONS.pulseaudio)
-PKG_FAIL_REASON=	"Require pulseaudio with ZeroConf support (avahi)"
-.endif
+# XXX this test doesnt work properly
+#
+#pkgbase:=	pulseaudio
+#.include "../../mk/pkg-build-options.mk"
+#.if empty(PKG_BUILD_OPTIONS.pulseaudio)
+#PKG_FAIL_REASON=	"Require pulseaudio with ZeroConf support (avahi)"
+#.endif
 
 .include "../../audio/pulseaudio/buildlink3.mk"
 .include "../../devel/GConf/buildlink3.mk"

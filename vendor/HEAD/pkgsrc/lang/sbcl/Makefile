@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.32 2011/03/05 20:30:49 asau Exp $
+# $NetBSD: Makefile,v 1.35 2011/06/11 19:24:10 asau Exp $
 
 DISTNAME=		${PKGNAME_NOREV}-source
-PKGNAME=		sbcl-1.0.46
+PKGNAME=		sbcl-1.0.49
 CATEGORIES=		lang
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=sbcl/}
 EXTRACT_SUFX=		.tar.bz2
@@ -75,6 +75,8 @@ post-build:
 
 do-install:
 	cd ${WRKSRC} && BUILD_ROOT=${DESTDIR:Q} INSTALL_ROOT=${PREFIX:Q} MAN_DIR=${PREFIX:Q}/${PKGMANDIR} ${SH} install.sh
+	rm -f $(DESTDIR)$(PREFIX)/lib/sbcl/sb-posix/test-output/write-test.txt
+	rm -f $(DESTDIR)$(PREFIX)/lib/sbcl/sb-posix/test-output/read-test.txt
 	rm -f $(DESTDIR)$(PREFIX)/lib/sbcl/asdf-install/installer.lisp.orig
 
 do-test:

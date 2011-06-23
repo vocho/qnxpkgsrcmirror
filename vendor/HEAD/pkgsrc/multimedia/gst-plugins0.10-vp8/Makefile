@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.1.1.1 2011/01/19 21:30:03 drochner Exp $
+# $NetBSD: Makefile,v 1.3 2011/05/18 09:49:02 drochner Exp $
 #
 
 GST_PLUGINS0.10_NAME=	vp8

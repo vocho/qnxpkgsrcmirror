@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.484 2011/03/18 23:28:24 minskim Exp $
+# $NetBSD: Makefile,v 1.490 2011/06/19 14:50:37 taca Exp $
 #
 
 COMMENT=	Desktop publishing
@@ -116,7 +116,9 @@ SUBDIR+=	rlpr
 SUBDIR+=	rtf2latex
 SUBDIR+=	rtf2latex2e
 SUBDIR+=	ruby-gnome2-poppler
+SUBDIR+=	ruby-pdf-reader
 SUBDIR+=	ruby-pdf-writer
+SUBDIR+=	ruby-prawn
 SUBDIR+=	scribus
 SUBDIR+=	scribus-qt4
 SUBDIR+=	stylewriter
@@ -297,6 +299,8 @@ SUBDIR+=	tex-fnpara-doc
 SUBDIR+=	tex-foiltex
 SUBDIR+=	tex-footmisc
 SUBDIR+=	tex-footmisc-doc
+SUBDIR+=	tex-forloop
+SUBDIR+=	tex-forloop-doc
 SUBDIR+=	tex-framed
 SUBDIR+=	tex-framed-doc
 SUBDIR+=	tex-ftcap
@@ -441,6 +445,7 @@ SUBDIR+=	tex-ms-doc
 SUBDIR+=	tex-multirow
 SUBDIR+=	tex-multirow-doc
 SUBDIR+=	tex-musixtex
+SUBDIR+=	tex-musixtex-doc
 SUBDIR+=	tex-natbib
 SUBDIR+=	tex-natbib-doc
 SUBDIR+=	tex-needspace
@@ -465,6 +470,8 @@ SUBDIR+=	tex-oubraces
 SUBDIR+=	tex-oubraces-doc
 SUBDIR+=	tex-paralist
 SUBDIR+=	tex-paralist-doc
+SUBDIR+=	tex-parskip
+SUBDIR+=	tex-parskip-doc
 SUBDIR+=	tex-passivetex
 SUBDIR+=	tex-path
 SUBDIR+=	tex-path-doc

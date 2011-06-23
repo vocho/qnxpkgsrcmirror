@@ -3,7 +3,9 @@ abook			Enable abook support.
 acl			Enable POSIX ACL support.
 ads			Enable Windows's Active Directory support.
 agg			Enable agg support.
-amule-alc		Build aMule LinkCreator GUI version. .
+alsa			Enable ALSA support.
+amtterm-gamt		Build amtterm GUI version (gamt).
+amule-alc		Build aMule LinkCreator GUI version.
 amule-alcc		Build aMule LinkCreator for console.
 amule-cas		Build C aMule Statistics.
 amule-cmd		Build aMule command line client.
@@ -176,6 +178,7 @@ gqmpeg-japanese		Japanese ID3 tag support.
 gqmpeg-russian		Russian ID3 tag support.
 graphicsmagick		Use GraphicsMagick as imaging library.
 groff-docs		Install documentation images.
+groonga-suggest-learner	Enable Groonga suggest learner.
 gsasl			Enable SASL support with gsasl.
 gsl			Use GNU Scientific Library.
 gssapi			Enable gssapi support.
@@ -301,6 +304,7 @@ lcms			Enable Light Color Management System support.
 ldap			Enable LDAP support.
 lensfun			Enable lensfun (camera lens distortion rectifyer) support.
 libao			Enable the platform-independent 'ao' audio library.
+libgcrypt		Use GNU cryptographic library.
 libgpod			Enable libgpod support.
 libiconv-cp932		Add supplemental support for CP932.
 liblqr			Enable liblqr (liquid rescale) support.
@@ -373,6 +377,7 @@ mplayer-win32		Enable usage of Win32 DLLs (codecs).
 mrtg-snmpv3		Enable SNMPv3 support.
 mstats			Enable memory statistics.
 musepack		Enable the portable Musepack decoder library.
+musicbrainz		Enable musicbrainz support.
 mutt-compressed-mbox	Enable compressed mailbox support in mutt.
 mutt-hcache		Enable header caching in mutt.
 mutt-sidebar		Enable the mutt mailbox sidebar patch.
@@ -447,6 +452,8 @@ qpopper-servermode	Enable server mode.
 qt			Enable support for QT.
 qt3			Enable support for QT3.
 quartz			Enable Quartz support on Mac OS X.
+quickml-analog		Enable quickml log analizer.
+quickml-limit		Enable quickml creators and members limitation.
 readline		Enable use of GNU readline library.
 rsaref			Use RSAREF library.
 rtree			Enable R-tree support.
@@ -534,7 +541,6 @@ tls			Enable TLS support.
 tokyocabinet		Enable Tokyo Cabinet support.
 trn-inn			Use INN as NNTP client.
 trn-nntpclnt		Use nntpclnt as NNTP client.
-typolight-liveupdate	Allow using TYPOlight Live Update service.
 ucspi-ssl-perl		Enable Perl support in ucspi-ssl.
 ucspi-tcp-nodefaultrbl	Remove the (nonexistent) default RBL from rblsmtpd.
 uds			Enable support for Unix domain sockets.
@@ -556,9 +562,13 @@ unrealircd-topicisnuhost	/topic command to show the nick!user@host of the person
 unrealircd-ziplinks	Compress data before transmitting it between servers.
 upnp			Enable support for UPnP.
 uucp			Enable support for uucp.
+uulib			Enable support for uulib.
 vdpau			Enable support for VDPAU.
 vflib			Enable support for Japanese vector font library.
 via-padlock		Enable support for the VIA PadLock Security Engine.
+vice-ethernet		Enable Ethernet cartridge support.
+vice-fullscreen		Enable full-screen support.
+vice-hwscaling		Enable hardware-assisted screen scaling.
 viewvc-php		Use php to colorize .php and .inc files.
 vorbis			Enable Ogg Vorbis support.
 w3m			Use and enable support for the w3m browser.

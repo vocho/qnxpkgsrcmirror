@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.388 2011/02/01 09:08:01 wiz Exp $
+# $NetBSD: Makefile,v 1.392 2011/06/18 10:45:32 wiz Exp $
 #
 
 # Note: if you update the version number, please have a look at the
 # changes between the CVS tag "pkglint_current" and HEAD.
 # After updating, please re-set the CVS tag to HEAD.
-DISTNAME=	pkglint-4.97
+DISTNAME=	pkglint-4.101
 CATEGORIES=	pkgtools
 MASTER_SITES=	# none
 DISTFILES=	# none
@@ -21,6 +21,7 @@ PKG_INSTALLATION_TYPES=	overwrite pkgviews
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 WRKSRC=		${WRKDIR}
+NO_CHECKSUM=	yes
 NO_BUILD=	yes
 USE_LANGUAGES=	# none
 AUTO_MKDIRS=	yes

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.2 2008/11/24 12:50:17 wiz Exp $
+# $NetBSD: Makefile,v 1.4 2011/05/18 09:49:02 drochner Exp $
 #
 
 GST_PLUGINS0.10_NAME=	v4l2

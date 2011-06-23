@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.13 2011/03/20 18:06:56 minskim Exp $
+# $NetBSD: Makefile,v 1.15 2011/04/22 13:43:26 obache Exp $
 #
 
-DISTNAME=		lyx-1.6.8
+DISTNAME=		lyx-1.6.9
 PKGREVISION=		1
 CATEGORIES=		editors
 MASTER_SITES=		ftp://ftp.lyx.org/pub/lyx/stable/1.6.x/ \

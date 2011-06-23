@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.84 2010/12/26 09:23:49 sekiya Exp $
+# $NetBSD: Makefile,v 1.86 2011/05/30 10:21:43 tron Exp $
 
-DISTNAME=	net-snmp-5.4.3
-PKGREVISION=	3
+DISTNAME=	net-snmp-5.6.1.1
 CATEGORIES=	net
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=net-snmp/}
 
 MAINTAINER=	adam@NetBSD.org
 HOMEPAGE=	http://www.net-snmp.org/
 COMMENT=	Extensible SNMP implementation
+LICENSE=	modified-bsd
 
 CONFLICTS=	ucd-snmp-[0-9]*
 CONFLICTS+=	nocol-[0-9]*	# bin/snmpget bin/snmpwalk
@@ -16,9 +16,9 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_LIBTOOL=		yes
 GNU_CONFIGURE=		yes
-MAKE_JOBS_SAFE=		no
 
 MAKE_ENV+=	OPSYS=${OPSYS}
+MAKE_JOBS_SAFE=	no
 
 .include "../../mk/bsd.prefs.mk"
 
@@ -122,7 +122,7 @@ post-wrapper:
 post-install:
 	${INSTALL_DATA} ${WRKSRC}/EXAMPLE.conf	\
 		${DESTDIR}${PREFIX}/share/examples/net-snmp/EXAMPLE.conf
-	${INSTALL_SCRIPT} ${WRKSRC}/agent/snmp_perl.pl \
+	${INSTALL_DATA} ${WRKSRC}/agent/snmp_perl.pl \
 		${DESTDIR}${PREFIX}/share/snmp/
 
 .include "../../security/tcp_wrappers/buildlink3.mk"

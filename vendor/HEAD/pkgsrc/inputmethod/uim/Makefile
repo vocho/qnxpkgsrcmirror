@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.46 2011/01/13 13:53:28 wiz Exp $
+# $NetBSD: Makefile,v 1.51 2011/06/10 21:57:07 obache Exp $
 #
 
 .include "../../inputmethod/uim/Makefile.common"
 
+PKGREVISION=		1
 COMMENT=		Multilingual input method library
-PKGREVISION=		2
 
 CONFLICTS+=		uim-qt4-immodule-[0-9]*
 
@@ -48,6 +48,7 @@ post-install:
 
 .include "../../converters/libiconv/buildlink3.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"
+BUILDLINK_API_DEPENDS.libgcroots+=	libgcroots>=0.2.3
 .include "../../devel/libgcroots/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../mk/bsd.pkg.mk"

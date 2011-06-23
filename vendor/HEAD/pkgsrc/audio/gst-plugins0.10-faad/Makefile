@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.2 2008/06/20 01:09:06 joerg Exp $
+# $NetBSD: Makefile,v 1.4 2011/05/18 09:48:59 drochner Exp $
 #
 
 GST_PLUGINS0.10_NAME=	faad

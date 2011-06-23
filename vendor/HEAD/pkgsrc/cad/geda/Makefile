@@ -1,13 +1,12 @@
-# $NetBSD: Makefile,v 1.67 2011/01/13 13:37:10 wiz Exp $
+# $NetBSD: Makefile,v 1.70 2011/06/19 06:37:44 dholland Exp $
 #
 
-DISTNAME=	geda-gaf-${PKGVERSION}
-PKGNAME=	geda-${PKGVERSION}
-PKGVERSION=	1.6.1
-PKGREVISION=	6
+DISTNAME=	geda-gaf-1.6.2
+PKGNAME=	${DISTNAME:S/-gaf-/-/}
+PKGREVISION=	1
 CATEGORIES=	cad
-MASTER_SITES=	ftp://ftp.geda.seul.org/pub/geda/release/v1.6/${PKGVERSION}/ \
-		http://geda.seul.org/release/v1.6/${PKGVERSION}/
+MASTER_SITES=	ftp://ftp.geda.seul.org/pub/geda/release/v1.6/${PKGVERSION_NOREV}/ \
+		http://geda.seul.org/release/v1.6/${PKGVERSION_NOREV}/
 
 MAINTAINER=	dmcmahill@NetBSD.org
 HOMEPAGE=	http://www.gpleda.org/
@@ -64,6 +63,12 @@ EVAL_PREFIX+=	PCBDIR=pcb
 CONFIGURE_ARGS+=	--with-pcbm4dir=${PCBDIR}/share/pcb/m4
 CONFIGURE_ARGS+=	--with-pcbconfdir=${PKG_SYSCONFDIR}/pcb
 
+SUBST_CLASSES+=                 python
+SUBST_STAGE.python=             pre-configure
+SUBST_FILES.python=             utils/scripts/garchive.py
+SUBST_SED.python=               -e 's,/usr/bin/env python,${PYTHONBIN},'
+SUBST_SED.python+=              -e 's,%PYTHONBIN%,${PYTHONBIN},'
+
 REPLACE_SH+=		gnetlist/scripts/sch2eaglepos.sh
 USE_TOOLS+=		sh:run
 
@@ -71,6 +76,10 @@ USE_TOOLS+=		sh:run
 EVAL_PREFIX+=		PCBDIR=pcb
 CONFIGURE_ARGS+=	--with-pcb-datadir=${PCBDIR}/share
 USE_TOOLS+=		gawk:run lex perl:run pkg-config
+
+# disable groff for a consistent build
+# (otherwise html man pages appear if and only if groff -Thtml works)
+CONFIGURE_ENV+=		GROFF=false
 
 .include "../../lang/python/application.mk"
 .include "../../databases/shared-mime-info/mimedb.mk"

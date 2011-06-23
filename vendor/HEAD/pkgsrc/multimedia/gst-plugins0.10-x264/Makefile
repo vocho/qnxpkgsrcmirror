@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.5 2009/07/09 18:17:52 drochner Exp $
+# $NetBSD: Makefile,v 1.7 2011/05/18 09:49:02 drochner Exp $
 #
 
 GST_PLUGINS0.10_NAME=	x264

@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.12 2010/07/30 10:36:30 asau Exp $
+# $NetBSD: Makefile,v 1.14 2011/04/19 15:32:28 roy Exp $
 #
 
 DISTNAME=	numpy-1.4.1
+PKGREVISION=	1
 PKGNAME=	${PYPKGPREFIX}-numpy-1.4.1
 CATEGORIES=	math python
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=numpy/}
@@ -23,6 +24,12 @@ REPLACE_PYTHON+=	numpy/distutils/from_template.py
 REPLACE_PYTHON+=	numpy/distutils/system_info.py
 REPLACE_PYTHON+=	numpy/ma/bench.py
 REPLACE_PYTHON+=	numpy/distutils/conv_template.py
+
+SUBST_CLASSES+=	numpy
+SUBST_STAGE.numpy=	post-patch
+SUBST_FILES.numpy=	numpy/f2py/setup.py numpy/f2py/setupscons.py
+SUBST_SED.numpy=	-e 's:/usr/bin/env %s:${PYTHONBIN}:'
+SUBST_SED.numpy+=	-e 's:%(os.path.basename(sys.executable))::'
 
 # XXX Avoid picking up other compilers when installed
 .include "../../mk/compiler.mk"

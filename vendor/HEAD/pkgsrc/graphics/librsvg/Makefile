@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.47 2011/01/13 13:38:11 wiz Exp $
+# $NetBSD: Makefile,v 1.49 2011/06/06 08:34:13 obache Exp $
 
 DISTNAME=	librsvg-2.32.1
-PKGREVISION=	2
+PKGREVISION=	3
 CATEGORIES=	graphics gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/librsvg/2.32/}
 EXTRACT_SUFX=	.tar.bz2
@@ -25,10 +25,6 @@ CONFIGURE_ARGS+=	--disable-gtk-theme --disable-tools
 PKGCONFIG_OVERRIDE=	librsvg.pc.in
 
 TEST_TARGET=		check
-
-# Workaround for Upstream Bug#562310.
-# for more detail, see also PR#41475.
-TOOLS_NOOP+=	gtkdoc-rebase
 
 BUILDLINK_API_DEPENDS.cairo+=	cairo>=1.2.0
 BUILDLINK_API_DEPENDS.glib2+=	glib2>=2.24.0

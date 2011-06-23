@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.9 2011/02/11 14:09:33 obache Exp $
+# $NetBSD: Makefile,v 1.16 2011/06/12 11:08:37 obache Exp $
 #
 
-DISTNAME=	milter-manager-1.6.5
+DISTNAME=	milter-manager-1.8.0
 CATEGORIES=	mail
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=milter-manager/}
 
@@ -38,6 +38,9 @@ PKGCONFIG_OVERRIDE+=	milter-core.pc.in
 PKGCONFIG_OVERRIDE+=	milter-manager.pc.in
 PKGCONFIG_OVERRIDE+=	milter-server.pc.in
 PKGCONFIG_OVERRIDE+=	ruby-milter.pc.in
+PKGCONFIG_OVERRIDE+=	ruby-milter-client.pc.in
+PKGCONFIG_OVERRIDE+=	ruby-milter-core.pc.in
+PKGCONFIG_OVERRIDE+=	ruby-milter-server.pc.in
 
 MILTER_MANAGER_USER?=	_milter
 MILTER_MANAGER_GROUP?=	_milter
@@ -76,6 +79,13 @@ BUILD_DEFS+=		MILTER_MANAGER_GROUP
 BUILD_DEFS+=		MILTER_MANAGER_SOCKET_GROUP
 
 REPLACE_RUBY=		admin/public/dispatch.*
+REPLACE_RUBY+=		admin/script/*
+REPLACE_RUBY+=		admin/script/performance/*
+REPLACE_RUBY+=		admin/script/process/*
+REPLACE_RUBY+=		data/munin/milter_manager_
+REPLACE_RUBY+=		tool/milter-manager-log-analyzer
+REPLACE_RUBY+=		tool/milter-performance-check
+REPLACE_RUBY+=		tool/milter-report-statistics
 .include "../../lang/ruby/replace.mk"
 
 .include "../../lang/ruby/buildlink3.mk"

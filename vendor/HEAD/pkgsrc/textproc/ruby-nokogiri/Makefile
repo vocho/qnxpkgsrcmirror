@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.4 2011/02/21 16:01:21 taca Exp $
+# $NetBSD: Makefile,v 1.6 2011/06/16 15:34:12 taca Exp $
 
-DISTNAME=	nokogiri-1.4.4
-PKGREVISION=	1
+DISTNAME=	nokogiri-1.4.5
 CATEGORIES=	textproc
 
 MAINTAINER=	filip@joyent.com
@@ -9,7 +8,7 @@ HOMEPAGE=	http://nokogiri.org/
 COMMENT=	HTML, XML, SAX, and Reader parser with XPath and CSS selector support
 LICENSE=	mit
 
-CONFLICTS+=	ruby[1-9][0-9]-nokogiri-*
+CONFLICTS+=	ruby[1-9][0-9]-nokogiri-[0-9]*
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
