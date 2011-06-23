@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.52 2011/01/13 13:37:11 wiz Exp $
+# $NetBSD: Makefile,v 1.55 2011/05/11 11:53:07 dmcmahill Exp $
 #
 
-DISTNAME=	pcb-20091103
-PKGREVISION=	5
+DISTNAME=	pcb-20100929
 CATEGORIES=	cad
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=pcb/}
 
 MAINTAINER=	dmcmahill@NetBSD.org
 HOMEPAGE=	http://pcb.sourceforge.net/
 COMMENT=	Printed circuit board layout system
+LICENSE=	gnu-gpl-v2
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
 PKG_DESTDIR_SUPPORT=	user-destdir
@@ -52,6 +52,11 @@ CONFIGURE_ARGS+=	--with-gui=gtk
 CONFIGURE_ARGS+=	--with-gui=none
 .else
 PKG_FAIL_REASON=	Invalid options
+.endif
+
+# dbus is only needed if we are building a gui (lesstif/gtk)
+.if empty(PKG_OPTIONS:Mbatch)
+.include "../../sysutils/dbus/buildlink3.mk"
 .endif
 
 EXPORTERS=	bom gerber ps

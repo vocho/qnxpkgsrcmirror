@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.107 2010/12/22 15:13:39 taca Exp $
+# $NetBSD: Makefile,v 1.109 2011/06/19 14:17:51 taca Exp $
 #
 
 COMMENT=	Document format and character code converters
@@ -44,6 +44,8 @@ SUBDIR+=	p5-JSON-Any
 SUBDIR+=	p5-JSON-XS
 SUBDIR+=	p5-JSON-XS-VersionOneAndTwo
 SUBDIR+=	p5-Jcode
+SUBDIR+=	p5-MARC-Charset
+SUBDIR+=	p5-MARC-Crosswalk-DublinCore
 SUBDIR+=	p5-MIME-Base32
 SUBDIR+=	p5-MIME-Base64
 SUBDIR+=	p5-MIME-Base64-URLSafe
@@ -74,6 +76,7 @@ SUBDIR+=	rpm2cpio
 SUBDIR+=	rss2html
 SUBDIR+=	rtf2html
 SUBDIR+=	ru-d1489
+SUBDIR+=	ruby-Ascii85
 SUBDIR+=	ruby-romkan
 SUBDIR+=	ruby-uconv
 SUBDIR+=	skf

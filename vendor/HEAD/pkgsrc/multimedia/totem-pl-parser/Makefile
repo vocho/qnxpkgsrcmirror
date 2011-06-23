@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.27 2011/02/25 15:53:03 drochner Exp $
+# $NetBSD: Makefile,v 1.31 2011/06/10 09:39:45 obache Exp $
 #
 
-DISTNAME=	totem-pl-parser-2.32.3
+DISTNAME=	totem-pl-parser-2.32.5
+PKGREVISION=	1
 CATEGORIES=	multimedia
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/totem-pl-parser/2.32/}
 EXTRACT_SUFX=	.tar.bz2
@@ -21,10 +22,6 @@ CONFLICTS+=	totem<2.22.0
 
 PKGCONFIG_OVERRIDE+=	totem-plparser-mini.pc.in
 PKGCONFIG_OVERRIDE+=	totem-plparser.pc.in
-
-# Workaround for Upstream Bug#562310.
-# for more detail, see also PR#41475.
-TOOLS_NOOP+=		gtkdoc-rebase
 
 .include "../../devel/glib2/buildlink3.mk"
 .include "../../mail/gmime24/buildlink3.mk"

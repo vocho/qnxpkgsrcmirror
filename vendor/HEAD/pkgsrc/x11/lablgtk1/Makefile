@@ -1,14 +1,16 @@
-# $NetBSD: Makefile,v 1.2 2009/07/06 22:35:22 joerg Exp $
+# $NetBSD: Makefile,v 1.4 2011/04/22 13:42:11 obache Exp $
 
 DISTNAME=	lablgtk-1.2.7
 PKGNAME=	lablgtk1-1.2.7
-PKGREVISION=	4
+PKGREVISION=	5
 CATEGORIES=	x11
 MASTER_SITES=	http://wwwfun.kurims.kyoto-u.ac.jp/soft/olabl/dist/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://wwwfun.kurims.kyoto-u.ac.jp/soft/olabl/lablgtk.html
 COMMENT=	GTK+ bindings for ocaml
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 MAKE_JOBS_SAFE=	no
 
@@ -44,6 +46,8 @@ post-build:
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${MAKE_PROGRAM} ${MAKE_FLAGS} \
 		opt
 .endif
+
+INSTALLATION_DIRS+=	bin
 
 .include "../../x11/gtk/buildlink3.mk"
 .include "../../lang/ocaml/buildlink3.mk"

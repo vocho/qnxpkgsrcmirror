@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.874 2011/03/28 12:49:15 joerg Exp $
+# $NetBSD: Makefile,v 1.881 2011/06/19 14:10:39 taca Exp $
 #
 
 COMMENT=	Networking tools
@@ -82,6 +82,7 @@ SUBDIR+=	dgd
 SUBDIR+=	dhcpcd
 SUBDIR+=	dhcpcd-dbus
 SUBDIR+=	dhcpcd-gtk
+SUBDIR+=	dhcpd-pools
 SUBDIR+=	dhid
 SUBDIR+=	dhisd
 SUBDIR+=	djbdns
@@ -248,6 +249,7 @@ SUBDIR+=	mbrowse
 SUBDIR+=	mcast-tools
 SUBDIR+=	md-whois
 SUBDIR+=	microdc2
+SUBDIR+=	mikutter
 SUBDIR+=	miniupnpd
 SUBDIR+=	miredo
 SUBDIR+=	mirror
@@ -350,6 +352,7 @@ SUBDIR+=	p5-Net-Bind
 SUBDIR+=	p5-Net-Bonjour
 SUBDIR+=	p5-Net-CIDR-Lite
 SUBDIR+=	p5-Net-CIDR-Set
+SUBDIR+=	p5-Net-CUPS
 SUBDIR+=	p5-Net-DBus
 SUBDIR+=	p5-Net-DNS
 SUBDIR+=	p5-Net-DNS-Resolver-Programmable
@@ -508,6 +511,8 @@ SUBDIR+=	ruby-addressable
 SUBDIR+=	ruby-amqp
 SUBDIR+=	ruby-dnsruby
 SUBDIR+=	ruby-icmp
+SUBDIR+=	ruby-net-ldap
+SUBDIR+=	ruby-net-ping
 SUBDIR+=	ruby-netaddr
 SUBDIR+=	ruby-rubytter
 SUBDIR+=	ruby-snmp
@@ -532,6 +537,7 @@ SUBDIR+=	skype
 SUBDIR+=	slurm
 SUBDIR+=	smokeping
 SUBDIR+=	sniffit
+SUBDIR+=	snmptt
 SUBDIR+=	snort
 SUBDIR+=	snort-rules
 SUBDIR+=	socat
@@ -652,5 +658,6 @@ SUBDIR+=	yaz
 SUBDIR+=	youtube-dl
 SUBDIR+=	ytalk
 SUBDIR+=	ywho
+SUBDIR+=	zeromq
 
 .include "../mk/misc/category.mk"

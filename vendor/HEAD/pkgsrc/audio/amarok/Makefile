@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.94 2011/01/27 17:24:18 wiz Exp $
+# $NetBSD: Makefile,v 1.96 2011/04/22 13:42:50 obache Exp $
 #
 
 DISTNAME=	amarok-${VERS}
 VERS=		2.4.0
+PKGREVISION=	1
 CATEGORIES=	audio multimedia
 #MASTER_SITES=	http://download.kde.org/unstable/amarok/${VERS}/src/ \
 #		ftp://gd.tuwien.ac.at/kde/unstable/amarok/${VERS}/src/
@@ -10,7 +11,7 @@ MASTER_SITES=	http://download.kde.org/stable/amarok/${VERS}/src/ \
 		ftp://gd.tuwien.ac.at/kde/stable/amarok/${VERS}/src/
 EXTRACT_SUFX=	.tar.bz2
 
-MAINTAINER=	wiz@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://amarok.kde.org/
 COMMENT=	KDE4 audio player
 LICENSE=	gnu-gpl-v2 AND gnu-fdl-v1.2 AND gnu-lgpl-v2.1

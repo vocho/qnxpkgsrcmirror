@@ -1,6 +1,5 @@
-$NetBSD: distinfo,v 1.1.1.1 2011/02/25 02:25:59 obache Exp $
+$NetBSD: distinfo,v 1.5 2011/06/03 01:44:39 obache Exp $
 
-SHA1 (httpclient-2.1.6.1.tar.gz) = f420e20b7c6ac10e8eabce0d9bcf436e8e588da8
-RMD160 (httpclient-2.1.6.1.tar.gz) = bd66389b6c0c5dbf51129a8e3986640dc7c3854c
-Size (httpclient-2.1.6.1.tar.gz) = 253500 bytes
-SHA1 (patch-install.rb) = 20468591e2e2f0be7a654507dad653b570a5b5b6
+SHA1 (httpclient-2.2.1.gem) = 95660eb5658014ddabd7b63651351eb7dd01c26b
+RMD160 (httpclient-2.2.1.gem) = ee2913fec883457ad3d957d9183cb5d4ca44d838
+Size (httpclient-2.2.1.gem) = 197120 bytes

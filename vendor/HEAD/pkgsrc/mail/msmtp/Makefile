@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.29 2011/02/02 11:18:29 ryoon Exp $
+# $NetBSD: Makefile,v 1.31 2011/04/29 22:45:36 ryoon Exp $
 
-DISTNAME=	msmtp-1.4.23
+DISTNAME=	msmtp-1.4.24
 CATEGORIES=	mail
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=msmtp/}
 EXTRACT_SUFX=	.tar.bz2
@@ -14,6 +14,7 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=		yes
 USE_PKGLOCALEDIR=	yes
+USE_TOOLS+=		pkg-config msgfmt xgettext
 
 CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR}
 

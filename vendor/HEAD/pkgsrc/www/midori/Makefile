@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.28 2011/03/11 21:04:52 drochner Exp $
+# $NetBSD: Makefile,v 1.32 2011/06/10 09:40:03 obache Exp $
 
-DISTNAME=	midori-0.3.2
+DISTNAME=	midori-0.3.6
+PKGREVISION=	1
 CATEGORIES=	www
 MASTER_SITES=	http://archive.xfce.org/src/apps/midori/0.3/
 
@@ -16,6 +17,8 @@ USE_TOOLS+=	gmake intltool msgfmt pkg-config
 PKG_DESTDIR_SUPPORT=	user-destdir
 CONFIGURE_ARGS+=	--prefix=${PREFIX:Q}
 CONFIGURE_ARGS+=	--disable-vala
+
+CHECK_PORTABILITY_SKIP+= win32/x86-mingw32-opensuse/install.sh
 
 REPLACE_PYTHON=		waf wscript docs/api/wscript_build
 REPLACE_PYTHON+=	tests/wscript_build extensions/wscript_build

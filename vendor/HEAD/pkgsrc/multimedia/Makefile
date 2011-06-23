@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.178 2011/03/23 10:30:39 adam Exp $
+# $NetBSD: Makefile,v 1.181 2011/04/15 16:18:02 drochner Exp $
 #
 
 COMMENT=	Multimedia utilities
@@ -30,12 +30,14 @@ SUBDIR+=	ffplay
 SUBDIR+=	flashplayer
 SUBDIR+=	fuppes
 SUBDIR+=	fxtv
+SUBDIR+=	gecko-mediaplayer
 SUBDIR+=	ggrab
 SUBDIR+=	gmediaserver
 SUBDIR+=	gmencoder
 SUBDIR+=	gmplayer
 SUBDIR+=	gnash
 SUBDIR+=	gnome-media
+SUBDIR+=	gnome-mplayer
 SUBDIR+=	goggles
 SUBDIR+=	gopchop
 SUBDIR+=	gpac
@@ -97,6 +99,7 @@ SUBDIR+=	ming
 SUBDIR+=	mjpegtools
 SUBDIR+=	mkv2mp4
 SUBDIR+=	mkvtoolnix
+SUBDIR+=	mkvtoolnix-old
 SUBDIR+=	mlt
 SUBDIR+=	mpeg-lib
 SUBDIR+=	mpeg4ip

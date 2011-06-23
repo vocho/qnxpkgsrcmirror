@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.5 2011/03/24 03:04:16 obache Exp $
+# $NetBSD: Makefile,v 1.7 2011/04/22 13:42:16 obache Exp $
 #
 
-PKGREVISION=	5
+PKGREVISION=		1
 
 CONFIGURE_ARGS+=	--disable-python
-CONFIGURE_ARGS+=	--disable-php4
+CONFIGURE_ARGS+=	--disable-php5
 CONFIGURE_ARGS+=	--disable-perl
 
 PKG_DESTDIR_SUPPORT=	destdir

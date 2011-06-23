@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.1.1.1 2009/10/28 18:33:57 drochner Exp $
+# $NetBSD: Makefile,v 1.3 2011/05/18 09:49:01 drochner Exp $
 #
 
 GST_PLUGINS0.10_NAME=	twolame

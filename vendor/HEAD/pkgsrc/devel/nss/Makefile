@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.40 2011/01/23 11:18:51 markd Exp $
+# $NetBSD: Makefile,v 1.42 2011/06/10 09:39:53 obache Exp $
 
 .include "../../devel/xulrunner/dist.mk"
 PKGNAME=		nss-${NSS_RELEASE}${MOZ_BRANCH_MINOR}
-NSS_RELEASE=		3.12.8.0
+NSS_RELEASE=		3.12.9.0
+PKGREVISION=		1
 CATEGORIES=		security
 
 MAINTAINER=		tnn@NetBSD.org
@@ -12,6 +13,7 @@ COMMENT=		Libraries to support development of security-enabled applications
 PKG_DESTDIR_SUPPORT=	user-destdir
 CHECK_PORTABILITY_SKIP+=${MOZILLA_DIR}security/nss/tests/libpkix/libpkix.sh
 CHECK_PORTABILITY_SKIP+=${MOZILLA_DIR}security/nss/tests/multinit/multinit.sh
+CHECK_PORTABILITY_SKIP+=${MOZILLA_DIR}js/src/configure
 
 USE_TOOLS+=		gmake perl pax pkg-config
 

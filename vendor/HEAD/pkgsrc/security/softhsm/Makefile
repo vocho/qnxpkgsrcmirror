@@ -1,13 +1,14 @@
-# $NetBSD: Makefile,v 1.5 2010/10/18 21:03:50 pettai Exp $
+# $NetBSD: Makefile,v 1.9 2011/06/10 09:39:44 obache Exp $
 #
 
-DISTNAME=	softhsm-1.2.0
+DISTNAME=	softhsm-1.2.1
+PKGREVISION=	1
 CATEGORIES=	security
 MASTER_SITES=	http://www.opendnssec.org/files/source/
 
 MAINTAINER=	pettai@NetBSD.org
 HOMEPAGE=	http://www.opendnssec.org/softhsm/
-COMMENT=	Cryptographic store accessible through a PKCS#11 interface
+COMMENT=	Cryptographic store accessible through a PKCS\#11 interface
 LICENSE=	2-clause-bsd
 
 PKG_DESTDIR_SUPPORT=    user-destdir
@@ -34,8 +35,6 @@ CONF_FILES=		${EGDIR}/softhsm.conf ${PKG_SYSCONFDIR}/softhsm.conf
 
 INSTALLATION_DIRS=	${EGDIR} etc bin lib
 OWN_DIRS=		${VARBASE}/softhsm
-
-.include "options.mk"
 
 pre-install:
 	${INSTALL_DATA} ${WRKSRC}/softhsm.conf ${DESTDIR}${EGDIR}

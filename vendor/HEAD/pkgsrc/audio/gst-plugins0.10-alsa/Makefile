@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.1.1.1 2008/12/19 04:40:39 jmcneill Exp $
+# $NetBSD: Makefile,v 1.3 2011/05/18 09:48:59 drochner Exp $
 #
 
 GST_PLUGINS0.10_NAME=	alsa

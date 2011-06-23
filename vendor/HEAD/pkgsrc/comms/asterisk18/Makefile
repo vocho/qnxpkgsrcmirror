@@ -1,13 +1,10 @@
-# $NetBSD: Makefile,v 1.6 2011/01/28 01:50:38 jnemeth Exp $
+# $NetBSD: Makefile,v 1.9 2011/06/09 09:17:27 jnemeth Exp $
 #
 # NOTE: when updating this package, there are two places that sound
 #       tarballs need to be checked
 
-DISTNAME=	asterisk-1.8.2.3
-#XXX change back with next revision
-#DIST_SUBDIR=	${PKGNAME_NOREV}
-DIST_SUBDIR=	${PKGNAME}
-PKGREVISION=	1
+DISTNAME=	asterisk-1.8.4.2
+DIST_SUBDIR=	${PKGNAME_NOREV}
 DISTFILES=	${DEFAULT_DISTFILES}
 EXTRACT_ONLY=	${DISTNAME}.tar.gz
 CATEGORIES=	comms net audio
@@ -46,7 +43,6 @@ INSTALLATION_DIRS+=	${ASTDATADIR}/sounds/en ${ASTDATADIR}/moh
 
 BUILD_DEFS+=		VARBASE
 
-# Running as non-root will come later
 ASTERISK_USER?=		asterisk
 ASTERISK_GROUP?=	asterisk
 PKG_GROUPS=		${ASTERISK_GROUP}

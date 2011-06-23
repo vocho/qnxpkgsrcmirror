@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.53 2010/09/10 02:42:59 obache Exp $
+# $NetBSD: Makefile,v 1.55 2011/06/18 22:43:34 bsiegert Exp $
 #
 
-DISTNAME=	bmake-20100808
+DISTNAME=	bmake-20110606
 CATEGORIES=	devel
 MASTER_SITES=	# empty
 DISTFILES=	# empty
@@ -39,6 +39,9 @@ BOOTSTRAP_ARGS+=	--with-defshell=${PREFIX}/bin/pdksh
 .endif
 .if ${OPSYS} == "Interix"
 MAKE_ENV+=		XDEFS=-DUSE_SELECT
+.endif
+.if ${OPSYS} == "IRIX"
+BOOTSTRAP_ARGS+=	--with-machine_arch=${MACHINE_ARCH}
 .endif
 
 do-extract:

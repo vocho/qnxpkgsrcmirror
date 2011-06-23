@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.170 2011/01/30 21:31:42 wiz Exp $
+# $NetBSD: Makefile,v 1.172 2011/05/16 07:59:04 abs Exp $
 
 .include "license.mk"
 .include "Makefile.common"
 
-PKGREVISION=	1
+PKGREVISION=	2
 COMMENT=	Practical Extraction and Report Language
 
 PKG_DESTDIR_SUPPORT=	user-destdir
@@ -70,6 +70,7 @@ PERL5_SCRIPTDIR=	${PERL5_PERLBASE}/bin
 SUBST_VARS.policysh+=	PERL5_SCRIPTDIR
 SUBST_VARS.policysh+=	PERL5_PERLBASE
 SUBST_VARS.policysh+=	PERL5_SITEBASE
+SUBST_VARS.policysh+=	PERL5_SITEBIN
 SUBST_VARS.policysh+=	PERL5_VENDORBASE
 SUBST_VARS.policysh+=	PERL5_PRIVLIB
 SUBST_VARS.policysh+=	PERL5_SITELIB

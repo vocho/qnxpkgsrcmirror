@@ -1,14 +1,14 @@
-$NetBSD: patch-aa,v 1.2 2010/08/24 18:58:03 bad Exp $
+$NetBSD: patch-aa,v 1.4 2011/06/11 18:54:23 ryoon Exp $
 
---- Makefile.orig	2010-08-18 11:23:51.000000000 +0000
-+++ Makefile	2010-08-23 00:06:09.000000000 +0000
-@@ -20,8 +20,7 @@
- MANDIR = $(PREFIX)/share/man/man1
+--- Makefile.orig	2011-06-09 06:29:46.000000000 +0000
++++ Makefile
+@@ -24,8 +24,7 @@ LIBS = `pkg-config --libs gtk+-2.0 gthre
  
- $(PROGRAM): $(PROGRAM).o zfuncs.o
+ fotoxx: fotoxx.o fotoxx_area.o fotoxx_info.o fotoxx_edit.o zfuncs.o
+ 	$(CXX) $(LDFLAGS) fotoxx.o fotoxx_area.o fotoxx_info.o fotoxx_edit.o \
+-	           zfuncs.o $(LIBS) -ltiff -o fotoxx 
 -	@ ./dependencies.sh
--	$(CXX) $(LFLAGS) -ltiff -o $(PROGRAM) $(PROGRAM).o zfuncs.o
-+	$(CXX) $(LFLAGS) -ltiff -o $(PROGRAM) $(PROGRAM).o zfuncs.o -lcompat
++	           zfuncs.o $(LIBS) -ltiff -o fotoxx -lcompat
  
- $(PROGRAM).o: $(SOURCE)
- 	$(CXX) $(CFLAGS) -o $(PROGRAM).o $(SOURCE)		\
+ fotoxx.o: $(VERSION) fotoxx.h
+ 	$(CXX) $(CFLAGS) -o fotoxx.o $(VERSION)

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.454 2011/03/06 16:47:30 wiz Exp $
+# $NetBSD: Makefile,v 1.457 2011/05/05 05:42:55 obache Exp $
 #
 
 COMMENT=	Audio tools
@@ -199,7 +199,6 @@ SUBDIR+=	libcddb
 SUBDIR+=	libdca
 SUBDIR+=	libdiscid
 SUBDIR+=	libgpod
-SUBDIR+=	libhydrogen
 SUBDIR+=	libid3tag
 SUBDIR+=	libifp
 SUBDIR+=	liblastfm
@@ -357,6 +356,7 @@ SUBDIR+=	speex
 SUBDIR+=	spiralloops
 SUBDIR+=	spiralsynth
 SUBDIR+=	splay
+SUBDIR+=	sptk
 SUBDIR+=	squeezeboxserver
 SUBDIR+=	streamripper
 SUBDIR+=	streamripper-current

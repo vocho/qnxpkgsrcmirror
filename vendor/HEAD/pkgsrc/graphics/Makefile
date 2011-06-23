@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.599 2011/03/18 21:52:40 minskim Exp $
+# $NetBSD: Makefile,v 1.604 2011/06/19 07:29:48 taca Exp $
 #
 
 COMMENT=	Graphics tools and libraries
@@ -269,6 +269,7 @@ SUBDIR+=	mgl
 SUBDIR+=	mng
 SUBDIR+=	mpeg2codec
 SUBDIR+=	mpgtx
+SUBDIR+=	mscgen
 SUBDIR+=	mypaint
 SUBDIR+=	ncview
 SUBDIR+=	netpbm
@@ -286,6 +287,7 @@ SUBDIR+=	p5-Barcode-Code128
 SUBDIR+=	p5-Chart
 SUBDIR+=	p5-Chart-ThreeD
 SUBDIR+=	p5-GD
+SUBDIR+=	p5-GD-Barcode
 SUBDIR+=	p5-GD-Graph-sparklines
 SUBDIR+=	p5-GD-Graph3d
 SUBDIR+=	p5-GD-SVG
@@ -298,6 +300,7 @@ SUBDIR+=	p5-Gdk-Imlib
 SUBDIR+=	p5-Gdk-Pixbuf
 SUBDIR+=	p5-Gnome2-Canvas
 SUBDIR+=	p5-GraphViz
+SUBDIR+=	p5-GraphicsMagick
 SUBDIR+=	p5-Image-BMP
 SUBDIR+=	p5-Image-ExifTool
 SUBDIR+=	p5-Image-Imlib2
@@ -367,6 +370,7 @@ SUBDIR+=	refocus-it
 SUBDIR+=	resize_image
 SUBDIR+=	ristretto
 SUBDIR+=	ruby-RMagick
+SUBDIR+=	ruby-chunky_png
 SUBDIR+=	ruby-clutter
 SUBDIR+=	ruby-clutter-cairo
 SUBDIR+=	ruby-clutter-core
@@ -418,6 +422,8 @@ SUBDIR+=	tex-pst-3d
 SUBDIR+=	tex-pst-3d-doc
 SUBDIR+=	tex-pst-3dplot
 SUBDIR+=	tex-pst-3dplot-doc
+SUBDIR+=	tex-pst-barcode
+SUBDIR+=	tex-pst-barcode-doc
 SUBDIR+=	tex-pst-blur
 SUBDIR+=	tex-pst-blur-doc
 SUBDIR+=	tex-pst-circ
