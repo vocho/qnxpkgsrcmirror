@@ -70,6 +70,8 @@ CONFIGURE_ARGS+=	--with-swatdir=${PREFIX}/share/samba/swat
 
 PLIST_VARS+=		cifsmount macosx
 
+LIBS.QNX+= -lintl
+
 # Only Linux supports mount.cifs for mounting a CIFS share into the filesystem.
 .if ${OPSYS} == "Linux"
 CONFIGURE_ARGS+=	--with-cifsmount --with-cifsumount
@@ -153,5 +155,7 @@ post-install:
 .include "../../converters/libiconv/buildlink3.mk"
 .include "../../devel/popt/buildlink3.mk"
 .include "../../devel/readline/buildlink3.mk"
+.include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../security/openssl/buildlink3.mk"
+.include "../../mk/pthread.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"
