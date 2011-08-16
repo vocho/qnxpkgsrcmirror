@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.6 2010/12/23 11:44:39 dsainty Exp $
+# $NetBSD: Makefile,v 1.8 2011/05/18 09:49:01 drochner Exp $
 #
 
 GST_PLUGINS0.10_NAME=	jpeg

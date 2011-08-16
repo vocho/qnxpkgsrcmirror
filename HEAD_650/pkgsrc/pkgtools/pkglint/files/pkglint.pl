@@ -1,5 +1,5 @@
 #! @PERL@
-# $NetBSD: pkglint.pl,v 1.825 2011/02/01 09:08:01 wiz Exp $
+# $NetBSD: pkglint.pl,v 1.827 2011/05/26 20:31:47 wiz Exp $
 #
 
 # pkglint - static analyzer and checker for pkgsrc packages
@@ -6157,6 +6157,15 @@ sub checklines_mk($) {
 			if ($includefile =~ m"/x11-links/buildlink3\.mk$") {
 				$line->log_error("${includefile} must not be included directly. Include \"../../mk/x11.buildlink3.mk\" instead.");
 			}
+			if ($includefile =~ m"/giflib/buildlink3\.mk$") {
+				$line->log_error("${includefile} must not be included directly. Include \"../../mk/giflib.buildlink3.mk\" instead.");
+			}
+			if ($includefile =~ m"/jpeg/buildlink3\.mk$") {
+				$line->log_error("${includefile} must not be included directly. Include \"../../mk/jpeg.buildlink3.mk\" instead.");
+			}
+			if ($includefile =~ m"/libungif/buildlink3\.mk$") {
+				$line->log_error("${includefile} must not be included directly. Include \"../../mk/giflib.buildlink3.mk\" instead.");
+			}
 			if ($includefile =~ m"/intltool/buildlink3\.mk$") {
 				$line->log_warning("Please say \"USE_TOOLS+= intltool\" instead of this line.");
 			}
@@ -7976,9 +7985,6 @@ sub checkfile($) {
 	} elsif ($basename eq "buildlink3.mk") {
 		$opt_check_bl3 and checkfile_buildlink3_mk($fname);
 
-	} elsif ($basename =~ m"^(?:.*\.mk|Makefile.*)$") {
-		$opt_check_mk and checkfile_mk($fname);
-
 	} elsif ($basename =~ m"^DESCR") {
 		$opt_check_DESCR and checkfile_DESCR($fname);
 
@@ -7999,6 +8005,9 @@ sub checkfile($) {
 
 	} elsif ($fname =~ m"(?:^|/)patches/[^/]*$") {
 		log_warning($fname, NO_LINE_NUMBER, "Patch files should be named \"patch-\", followed by letters, '-', '_', '.', and digits only.");
+
+	} elsif ($basename =~ m"^(?:.*\.mk|Makefile.*)$") {
+		$opt_check_mk and checkfile_mk($fname);
 
 	} elsif ($basename =~ m"^PLIST") {
 		$opt_check_PLIST and checkfile_PLIST($fname);
@@ -8326,7 +8335,8 @@ sub checkdir_package() {
 	# Determine the used variables before checking any of the
 	# Makefile fragments.
 	foreach my $fname (@files) {
-		if ($fname =~ m"^((?:.*/)?Makefile\..*|.*\.mk)$"
+		if (($fname =~ m"^((?:.*/)?Makefile\..*|.*\.mk)$")
+		&& (not $fname =~ m"patch-")
 		&& (defined(my $lines = load_lines($fname, true)))) {
 			parselines_mk($lines);
 			determine_used_variables($lines);

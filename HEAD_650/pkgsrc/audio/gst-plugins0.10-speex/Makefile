@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.4 2009/01/26 11:12:39 drochner Exp $
+# $NetBSD: Makefile,v 1.6 2011/05/18 09:49:01 drochner Exp $
 #
 
 GST_PLUGINS0.10_NAME=	speex

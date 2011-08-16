@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.213 2011/03/18 16:11:46 drochner Exp $
+# $NetBSD: Makefile,v 1.218 2011/06/16 09:51:50 drochner Exp $
 
-DISTNAME=		gtk+-2.24.3
+DISTNAME=		gtk+-2.24.4
 PKGNAME=		${DISTNAME:S/gtk/gtk2/}
+PKGREVISION=		1
 CATEGORIES=		x11
 MASTER_SITES=		ftp://ftp.gtk.org/pub/gtk/2.24/ \
 			${MASTER_SITE_GNOME:=sources/gtk+/2.24/}
@@ -23,17 +24,19 @@ CONFLICTS+=		gail-[0-9]*
 SUPERSEDES=		gail-[0-9]*
 
 USE_PKGLOCALEDIR=	yes
-USE_TOOLS+=		gmake msgfmt perl pkg-config bash
+USE_TOOLS+=		gmake msgfmt perl pkg-config
 USE_LANGUAGES=		c c++
 USE_LIBTOOL=		yes
 PTHREAD_AUTO_VARS=	yes
 
 GNU_CONFIGURE=		 yes
-# XXX there is a subtle bashism in "configure" or a bug in NetBSD's sh
-CONFIG_SHELL=		bash
+# bashism in "configure" (illegal variable substitution), patched
+#CONFIG_SHELL=		bash
 CONFIGURE_ARGS+=	--sysconfdir=${PREFIX}/libdata
 # Work around build problems, disable unstable PAPI, PR #41608:
 CONFIGURE_ARGS+=	--disable-papi
+# Not to unwanted pick up of db2html, PR#44908
+CONFIGURE_ENV+=		ac_cv_prog_DB2HTML=false
 MAKE_ENV+=		PKGLOCALEDIR=${PKGLOCALEDIR:Q}
 TEST_TARGET=		check
 

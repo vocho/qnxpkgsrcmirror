@@ -1,22 +1,15 @@
-$NetBSD: patch-aa,v 1.3 2006/01/02 11:28:30 joerg Exp $
+$NetBSD: patch-aa,v 1.5 2011/06/06 12:32:02 drochner Exp $
 
---- configure.orig	2005-03-14 01:32:18.000000000 +0000
-+++ configure
-@@ -1095,7 +1095,7 @@ if test "${with_libxml_prefix+set}" = se
-   withval="$with_libxml_prefix"
-   LIBXML_PREFIX=$withval
-         LIBXML_CFLAGS="-I$withval/include/libxml2 -I$withval/include/libxml"
--        LIBXML_LIBS="$withval/lib/libxml2.a -lz -lm -lpthread -ldl"
-+        LIBXML_LIBS="-L$withval/lib -lxml2 -lz -lm ${PTHREAD_LDFLAGS} ${PTHREAD_LIBS}"
+make BRE portable: '+' is not allowed
+
+--- examples/bigxml.orig	2011-05-26 00:42:39.000000000 +0000
++++ examples/bigxml
+@@ -1,7 +1,7 @@
+ #!/bin/sh
+ # check error messages on lines past 2^16
  
- fi
+-SEDLINUM_PROG='s/^\([^:]\+:[0-9]\{4\}\)[0-9]\.[0-9]\+:.*$/\1x/p'
++SEDLINUM_PROG='s/^\([^:][^:]*:[0-9]\{4\}\)[0-9]\.[0-9][0-9]*:.*$/\1x/p'
  
-@@ -1144,7 +1144,7 @@ if test "${with_libxslt_prefix+set}" = s
-   withval="$with_libxslt_prefix"
-   LIBXSLT_PREFIX=$withval
-         LIBXSLT_CFLAGS="-I$withval/include/libxslt -I$withval/include/libexslt"
--        LIBXSLT_LIBS="$withval/lib/libxslt.a $withval/lib/libexslt.a -lz -lm -lpthread"
-+        LIBXSLT_LIBS="-L$withval/lib -lxslt -lexslt -lz -lm ${PTHREAD_LDFLAGS} ${PTHREAD_LIBS}"
- 
- fi
- 
+ xmldoc()
+ {

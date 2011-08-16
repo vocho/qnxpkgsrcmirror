@@ -1,13 +1,14 @@
-# $NetBSD: Makefile,v 1.44 2011/01/13 13:37:17 wiz Exp $
+# $NetBSD: Makefile,v 1.46 2011/04/22 13:43:12 obache Exp $
 
 DISTNAME=	gq-1.2.3
-PKGREVISION=	9
+PKGREVISION=	10
 CATEGORIES=	databases net
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=gqclient/}
 
 MAINTAINER=	rh@NetBSD.org
 HOMEPAGE=	http://gq-project.org/
 COMMENT=	GTK-based LDAP client
+LICENSE=	gnu-gpl-v2
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
@@ -24,4 +25,5 @@ CONFIGURE_ARGS+=	--with-ssl-prefix=${BUILDLINK_PREFIX.openssl}
 .include "../../security/libgnome-keyring/buildlink3.mk"
 .include "../../security/libgcrypt/buildlink3.mk"
 .include "../../security/openssl/buildlink3.mk"
+.include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../mk/bsd.pkg.mk"

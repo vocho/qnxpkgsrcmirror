@@ -1,8 +1,50 @@
-$NetBSD: patch-ac,v 1.8 2011/03/05 17:46:41 cegger Exp $
+$NetBSD: patch-ac,v 1.10 2011/04/14 21:42:42 hans Exp $
 
---- vpnc-script.in.orig	2011-03-01 14:40:25.000000000 +0000
-+++ vpnc-script.in
-@@ -94,7 +94,7 @@ do_ifconfig() {
+--- vpnc-script.in.orig	2008-11-19 21:55:51.000000000 +0100
++++ vpnc-script.in	2011-04-14 23:33:24.877879829 +0200
+@@ -48,29 +48,36 @@ PATH=/sbin:/usr/sbin:$PATH
+ 
+ OS="`uname -s`"
+ 
+-DEFAULT_ROUTE_FILE=/var/run/vpnc/defaultroute
+-RESOLV_CONF_BACKUP=/var/run/vpnc/resolv.conf-backup
++STATEDIR=@VARBASE@/run/vpnc
++DEFAULT_ROUTE_FILE=$STATEDIR/defaultroute
++RESOLV_CONF_BACKUP=$STATEDIR/resolv.conf-backup
+ FULL_SCRIPTNAME=@PREFIX@/sbin/vpnc
+ SCRIPTNAME=`basename $FULL_SCRIPTNAME`
+ 
+ # some systems, eg. Darwin & FreeBSD, prune /var/run on boot
+-if [ ! -d "/var/run/vpnc" ]; then
+-	mkdir -p /var/run/vpnc
++if [ ! -d $STATEDIR ]; then
++	mkdir -p $STATEDIR
+ fi
+ 
+ # stupid SunOS: no blubber in /usr/local/bin ... (on stdout)
+-IPROUTE="`which ip | grep '^/' 2> /dev/null`"
++IPROUTE="`command -v ip | grep '^/' 2> /dev/null`"
+ 
+ if [ "$OS" = "Linux" ]; then
+ 	ifconfig_syntax_ptp="pointopoint"
+ 	route_syntax_gw="gw"
+ 	route_syntax_del="del"
+ 	route_syntax_netmask="netmask"
++	route_syntax_iface=""
+ else
+ 	ifconfig_syntax_ptp=""
+ 	route_syntax_gw=""
+ 	route_syntax_del="delete"
+ 	route_syntax_netmask="-netmask"
++	if [ "$OS" = "SunOS" ]; then
++		route_syntax_iface="-interface"
++	else
++		route_syntax_iface=""
++	fi
+ fi
+ 
+ if [ -x /sbin/resolvconf ]; then # Optional tool on Debian, Ubuntu, Gentoo
+@@ -93,7 +100,7 @@ do_ifconfig() {
  		DEV=$($IPROUTE route | grep ^default | sed 's/^.* dev \([[:alnum:]-]\+\).*$/\1/')
  		MTU=$(($($IPROUTE link show "$DEV" | grep mtu | sed 's/^.* mtu \([[:digit:]]\+\).*$/\1/') - 88))
  	else
@@ -11,7 +53,39 @@ $NetBSD: patch-ac,v 1.8 2011/03/05 17:46:41 cegger Exp $
  	fi
  
  	# Point to point interface require a netmask of 255.255.255.255 on some systems
-@@ -440,6 +440,20 @@ do_pre_init() {
+@@ -163,11 +170,11 @@ else # use route command
+ 		# isn't -n supposed to give --numeric output?
+ 		# apperently not...
+ 		# Get rid of lines containing IPv6 addresses (':')
+-		netstat -r -n | awk '/:/ { next; } /^(default|0\.0\.0\.0)/ { print $2; }'
++		netstat -r -n | awk '/:/ { next; } $2 ~ /^link/ { next; } /^(default|0\.0\.0\.0)/ { print $2; }'
+ 	}
+ 	
+ 	set_vpngateway_route() {
+-		route add -host "$VPNGATEWAY" $route_syntax_gw "`get_default_gw`"
++		route add -host "$VPNGATEWAY" $route_syntax_gw "`get_default_gw`" $route_syntax_iface
+ 	}
+ 
+ 	del_vpngateway_route() {
+@@ -178,7 +185,7 @@ else # use route command
+ 		DEFAULTGW="`get_default_gw`"
+ 		echo "$DEFAULTGW" > "$DEFAULT_ROUTE_FILE"
+ 		route $route_syntax_del default
+-		route add default $route_syntax_gw "$INTERNAL_IP4_ADDRESS"
++		route add default $route_syntax_gw "$INTERNAL_IP4_ADDRESS" $route_syntax_iface
+ 	}
+ 	
+ 	set_network_route() {
+@@ -186,7 +193,7 @@ else # use route command
+ 		NETMASK="$2"
+ 		NETMASKLEN="$3"
+ 		del_network_route "$NETWORK" "$NETMASK" "$NETMASKLEN"
+-		route add -net "$NETWORK" $route_syntax_netmask "$NETMASK" $route_syntax_gw "$INTERNAL_IP4_ADDRESS"
++		route add -net "$NETWORK" $route_syntax_netmask "$NETMASK" $route_syntax_gw "$INTERNAL_IP4_ADDRESS" $route_syntax_iface
+ 	}
+ 	
+ 	reset_default_route() {
+@@ -439,6 +446,20 @@ do_pre_init() {
  }
  
  do_connect() {

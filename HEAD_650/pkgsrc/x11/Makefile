@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.633 2011/03/18 17:15:03 drochner Exp $
+# $NetBSD: Makefile,v 1.635 2011/04/20 18:40:43 hans Exp $
 #
 
 COMMENT=	Packages to support the X window system
@@ -24,6 +24,8 @@ SUBDIR+=	bigreqsproto
 SUBDIR+=	bitmap
 SUBDIR+=	blt
 SUBDIR+=	clisp-gtk2
+SUBDIR+=	clisp-mit-clx
+SUBDIR+=	clisp-new-clx
 SUBDIR+=	compositeproto
 SUBDIR+=	damageproto
 SUBDIR+=	desklaunch

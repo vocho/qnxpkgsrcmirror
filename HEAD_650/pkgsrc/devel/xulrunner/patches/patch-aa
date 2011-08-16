@@ -1,9 +1,18 @@
-$NetBSD: patch-aa,v 1.4 2009/11/04 09:44:09 tnn Exp $
+$NetBSD: patch-aa,v 1.5 2011/04/26 14:16:36 tnn Exp $
 
---- configure.in.orig	2010-04-02 16:02:18.000000000 +0000
+--- configure.in.orig	2011-04-14 05:28:22.000000000 +0000
 +++ configure.in
-@@ -1859,7 +1859,7 @@ case "$target" in
+@@ -1457,7 +1457,7 @@ QNX)
+         OS_RELEASE=`uname -v | sed 's/^\([0-9]\)\([0-9]*\)$/\1.\2/'`
+         changequote([,])
      fi
+-    OS_TEST=x86
++    OS_TEST=`uname -p | sed -e 's/x86/i386/'`
+     ;;
+ SCO_SV)
+     OS_ARCH=SCOOS
+@@ -2160,7 +2160,7 @@ case "$target" in
+     MOZ_FIX_LINK_PATHS='-Wl,-executable_path,$(LIBXUL_DIST)/bin'
      ;;
  
 -*-freebsd*)
@@ -11,17 +20,17 @@ $NetBSD: patch-aa,v 1.4 2009/11/04 09:44:09 tnn Exp $
      if test `test -x /usr/bin/objformat && /usr/bin/objformat || echo elf` != "elf"; then
  	DLL_SUFFIX=".so.1.0"
  	DSO_LDOPTS="-shared"
-@@ -1873,6 +1873,9 @@ case "$target" in
- #	MKSHLIB_FORCE_ALL='-Wl,-Bforcearchive'
- #	MKSHLIB_UNFORCE_ALL=''
- #    fi
+@@ -2168,6 +2168,9 @@ case "$target" in
+     if test ! "$GNU_CC"; then
+ 	DSO_LDOPTS="-Bshareable $DSO_LDOPTS"
+     fi
 +    if test "$LIBRUNPATH"; then
 +       DSO_LDOPTS="-Wl,-R$LIBRUNPATH $DSO_LDOPTS"
 +    fi
      ;; 
  
- *-hpux*)
-@@ -2373,6 +2376,9 @@ case "$target" in
+ ia64*-hpux*)
+@@ -2645,6 +2648,9 @@ ia64*-hpux*)
      ;;
  
  *-nto*) 
@@ -31,18 +40,18 @@ $NetBSD: patch-aa,v 1.4 2009/11/04 09:44:09 tnn Exp $
  	AC_DEFINE(NTO)	
  	AC_DEFINE(_QNX_SOURCE)
  	AC_DEFINE(_i386)
-@@ -2383,8 +2389,8 @@ case "$target" in
+@@ -2655,8 +2661,8 @@ ia64*-hpux*)
  	USE_PTHREADS=1
  	_PEDANTIC=
  	LIBS="$LIBS -lsocket -lstdc++"
--	_DEFINES_CFLAGS='-Wp,-include -Wp,$(DEPTH)/mozilla-config.h -DMOZILLA_CLIENT -D_POSIX_C_SOURCE=199506'
--	_DEFINES_CXXFLAGS='-DMOZILLA_CLIENT -Wp,-include -Wp,$(DEPTH)/mozilla-config.h -D_POSIX_C_SOURCE=199506'
+-	_DEFINES_CFLAGS='-include $(DEPTH)/mozilla-config.h -DMOZILLA_CLIENT -D_POSIX_C_SOURCE=199506'
+-	_DEFINES_CXXFLAGS='-DMOZILLA_CLIENT -include $(DEPTH)/mozilla-config.h -D_POSIX_C_SOURCE=199506'
 +	_DEFINES_CFLAGS='-Wp,-include -Wp,$(DEPTH)/mozilla-config.h -DMOZILLA_CLIENT'
 +	_DEFINES_CXXFLAGS='-DMOZILLA_CLIENT -Wp,-include -Wp,$(DEPTH)/mozilla-config.h'
  	if test "$with_x" != "yes"
  	then
  		_PLATFORM_DEFAULT_TOOLKIT="photon"
-@@ -2398,7 +2404,7 @@ case "$target" in
+@@ -2670,7 +2676,7 @@ ia64*-hpux*)
  	esac
  	case "${host_cpu}" in
  	i*86)
@@ -51,7 +60,16 @@ $NetBSD: patch-aa,v 1.4 2009/11/04 09:44:09 tnn Exp $
  	;;
  	esac
  	;;
-@@ -3111,6 +3117,12 @@ dnl ====================================
+@@ -3370,7 +3376,7 @@ EOF
+                        rm -f conftest.{c,S}
+                        ])
+         if test "$ac_cv_have_visibility_builtin_bug" = "no" -a \
+-                "$ac_cv_have_visibility_class_bug" = "no"; then
++                "$ac_cv_have_visibility_class_bug" = "no" -a "$OS_ARCH" != "QNX"; then
+           VISIBILITY_FLAGS='-I$(DIST)/system_wrappers -include $(topsrcdir)/config/gcc_hidden.h'
+           WRAP_SYSTEM_INCLUDES=1
+           STL_FLAGS='-I$(DIST)/stl_wrappers'
+@@ -3473,6 +3479,12 @@ dnl ====================================
  case $target in
  *-hpux11.*)
  	;;
@@ -64,8 +82,8 @@ $NetBSD: patch-aa,v 1.4 2009/11/04 09:44:09 tnn Exp $
  *)
  	AC_CHECK_LIB(c_r, gethostbyname_r)
  	;;
-@@ -4290,6 +4302,14 @@ else
-    fi
+@@ -4824,6 +4836,14 @@ if test -n "$YASM"; then
+   _YASM_BUILD=`        echo ${YASM_VERSION} | $AWK -F\. '{ print $4 }'`
  fi
  
 +if test -n "${LIBXUL_SDK_DIR}"; then
@@ -79,7 +97,7 @@ $NetBSD: patch-aa,v 1.4 2009/11/04 09:44:09 tnn Exp $
  if test -z "$SKIP_LIBRARY_CHECKS"; then
  dnl system JPEG support
  dnl ========================================================
-@@ -8468,7 +8488,8 @@ rm -f confdefs.h.save
+@@ -9527,7 +9547,8 @@ rm -f confdefs.h.save
  mv confdefs.h confdefs.h.save
  egrep -v "$_EGREP_PATTERN" confdefs.h.save > confdefs.h
  AC_OUTPUT_MAKE_DEFS()
@@ -89,9 +107,9 @@ $NetBSD: patch-aa,v 1.4 2009/11/04 09:44:09 tnn Exp $
  AC_SUBST(MOZ_DEFINES)
  rm -f confdefs.h
  mv confdefs.h.save confdefs.h
-@@ -8559,6 +8580,8 @@ if test -z "$MOZ_NATIVE_NSPR"; then
+@@ -9640,6 +9661,8 @@ if test -z "$MOZ_NATIVE_NSPR"; then
      AC_MSG_WARN([Recreating autoconf.mk with updated nspr-config output])
-     if test "$OS_ARCH" != "WINNT" && test "$OS_ARCH" != "WINCE"; then
+     if test "$OS_ARCH" != "WINNT" -a "$OS_ARCH" != "WINCE"; then
         NSPR_LIBS=`./nsprpub/config/nspr-config --prefix=$LIBXUL_DIST --exec-prefix=$MOZ_BUILD_ROOT/dist --libdir=$LIBXUL_DIST/lib --libs`
 +       AC_MSG_WARN([pkgsrc: adding run path to NSPR_LIBS for bundled NSPR.])
 +       NSPR_LIBS="-Wl,-R${prefix}/lib/\${MOZILLA_PKG_NAME} ${NSPR_LIBS}"

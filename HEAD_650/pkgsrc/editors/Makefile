@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.143 2011/03/11 14:45:12 drochner Exp $
+# $NetBSD: Makefile,v 1.145 2011/05/15 03:10:05 ryoon Exp $
 #
 
 COMMENT=	Editors
@@ -71,6 +71,7 @@ SUBDIR+=	ne
 SUBDIR+=	nedit
 SUBDIR+=	ng
 SUBDIR+=	notecase
+SUBDIR+=	nts
 SUBDIR+=	nvi
 SUBDIR+=	nvi-m17n
 SUBDIR+=	obby
@@ -146,5 +147,6 @@ SUBDIR+=	xvile
 SUBDIR+=	xwpe
 SUBDIR+=	yudit
 SUBDIR+=	zile
+SUBDIR+=	zim
 
 .include "../mk/misc/category.mk"

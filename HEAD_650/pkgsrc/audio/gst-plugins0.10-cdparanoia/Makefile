@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.3 2009/08/17 17:48:00 drochner Exp $
+# $NetBSD: Makefile,v 1.5 2011/05/18 09:48:59 drochner Exp $
 #
 
 GST_PLUGINS0.10_NAME=	cdparanoia

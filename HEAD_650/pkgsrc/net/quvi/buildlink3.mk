@@ -1,11 +1,12 @@
-# $NetBSD: buildlink3.mk,v 1.2 2010/12/24 06:54:48 wiz Exp $
+# $NetBSD: buildlink3.mk,v 1.6 2011/04/22 13:42:09 obache Exp $
 
 BUILDLINK_TREE+=	quvi
 
 .if !defined(QUVI_BUILDLINK3_MK)
 QUVI_BUILDLINK3_MK:=
 
-BUILDLINK_API_DEPENDS.quvi+=	quvi>=0.2.0
+BUILDLINK_API_DEPENDS.quvi+=	quvi>=0.2.15
+BUILDLINK_ABI_DEPENDS.quvi?=	quvi>=0.2.15nb1
 BUILDLINK_PKGSRCDIR.quvi?=	../../net/quvi
 
 .include "../../devel/pcre/buildlink3.mk"

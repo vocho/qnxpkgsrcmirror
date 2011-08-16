@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.25 2011/03/23 20:20:52 joerg Exp $
+# $NetBSD: Makefile,v 1.27 2011/05/25 12:01:51 mspo Exp $
 
 DISTNAME=	tf-40s1
 PKGNAME=	tf-4.0s1
-PKGREVISION=	5
+PKGREVISION=	6
 CATEGORIES=	net games
 MASTER_SITES=	ftp://laurel.actlab.utexas.edu/pub/tinyfugue/ \
 		${MASTER_SITE_SOURCEFORGE:=tinyfugue/}
@@ -23,6 +23,13 @@ PATCHFILES=	tf-40s1-mccp-patch.gz
 PATCH_DIST_STRIP=-p1
 
 INSTALLATION_DIRS=	bin ${PKGMANDIR}/man1
+
+SUBST_CLASSES+=         fix-paths
+SUBST_MESSAGE.fix-paths=      late-addition DESTDIR
+SUBST_STAGE.fix-paths=        pre-configure
+SUBST_FILES.fix-paths=        unix/Config
+SUBST_SED.fix-paths=          -e 's,@DESTDIR@,'${DESTDIR}',g'
+
 
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

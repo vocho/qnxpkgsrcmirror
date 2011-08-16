@@ -1,12 +1,13 @@
-# $NetBSD: Makefile,v 1.49 2011/01/28 10:35:23 adam Exp $
+# $NetBSD: Makefile,v 1.51 2011/05/10 12:50:44 ryoon Exp $
 
-DISTNAME=	xchm-1.18
+DISTNAME=	xchm-1.20
 CATEGORIES=	misc
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=xchm/}
 
 MAINTAINER=	minskim@NetBSD.org
 HOMEPAGE=	http://xchm.sourceforge.net/
 COMMENT=	CHM viewer for UNIX
+LICENSE=	gnu-gpl-v2
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 

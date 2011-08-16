@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.33 2011/01/20 08:54:56 adam Exp $
+# $NetBSD: Makefile,v 1.35 2011/05/05 08:55:23 adam Exp $
 
 DISTNAME=	gnupg-2.0.17
 PKGNAME=	${DISTNAME:S/gnupg/gnupg2/}
+PKGREVISION=	1
 CATEGORIES=	security
 MASTER_SITES=	ftp://ftp.gnupg.org/gcrypt/gnupg/
 EXTRACT_SUFX=	.tar.bz2
@@ -24,7 +25,11 @@ CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR}
 CONFIGURE_ARGS+=	--with-static-rnd=auto
 CONFIGURE_ARGS+=	--without-included-gettext
 CONFIGURE_ARGS+=	--with-pinentry-pgm=${BUILDLINK_PREFIX.pinentry}/bin/pinentry
-#CONFIGURE_ARGS+=	--enable-maintainer-mode
+
+# Sometimes wrong include file gets detected, e.g. for Clang
+.if exists(/usr/include/stdint.h)
+CONFIGURE_ENV+=		gl_cv_absolute_stdint_h=/usr/include/stdint.h
+.endif
 
 TEST_TARGET=		check
 
