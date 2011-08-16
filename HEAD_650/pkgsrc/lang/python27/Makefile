@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.1.1.1 2011/02/22 08:51:58 obache Exp $
+# $NetBSD: Makefile,v 1.5 2011/06/13 11:31:13 obache Exp $
 
 .include "dist.mk"
 
@@ -142,9 +142,7 @@ INSTALL_TARGET=	altinstall
 REPLACE_INTERPRETER+=	py27
 REPLACE.py27.old=	.*python[^ ]*
 REPLACE.py27.new=	${PREFIX}/bin/python${PY_VER_SUFFIX}
-REPLACE_FILES.py27=	Lib/cgi.py	# explicitly demanded to be patched
-REPLACE_FILES.py27+=	Lib/bsddb/dbshelve.py Lib/test/test_bz2.py
-REPLACE_FILES.py27+=	Lib/test/test_largefile.py Lib/test/test_optparse.py
+REPLACE_FILES.py27=	Lib/*.py Lib/*/*.py Lib/*/*/*.py
 
 SUBST_CLASSES+=		findlib
 SUBST_MESSAGE.findlib=	Fixing find_library_file on Darwin.

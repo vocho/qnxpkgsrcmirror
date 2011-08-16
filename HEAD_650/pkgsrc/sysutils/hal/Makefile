@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.53 2011/03/10 19:45:03 markd Exp $
+# $NetBSD: Makefile,v 1.56 2011/05/07 10:07:12 shattered Exp $
 
 DISTNAME=		hal-0.5.14
-PKGREVISION=		2
+PKGREVISION=		3
 CATEGORIES=		sysutils
 MASTER_SITES=		http://hal.freedesktop.org/releases/
 EXTRACT_SUFX=		.tar.bz2
@@ -62,13 +62,14 @@ CONF_FILES+=		${EGDIR}/90-hal.rules \
 
 .else	# Unsupported systems
 # Pull in the dummy backend
+.include "../../devel/libvolume_id/buildlink3.mk"
 CONFIGURE_ARGS+=	--with-backend=dummy
 PLIST_SRC=		PLIST
 .endif
 
 CFLAGS.SunOS+=		-Du_int32_t=uint32_t
 
-.if ${OPSYS} == "Darwin"
+.if ${OPSYS} == "Darwin" || ${OPSYS} == "SunOS"
 BUILDLINK_TRANSFORM+=	rm:-Wl,--as-needed
 .endif
 

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.354 2011/03/09 17:39:29 jmmv Exp $
+# $NetBSD: Makefile,v 1.361 2011/06/12 09:08:12 ryoon Exp $
 #
 
 COMMENT=	Miscellaneous utilities
@@ -53,6 +53,7 @@ SUBDIR+=	edict
 SUBDIR+=	elizatalk
 SUBDIR+=	elscreen
 SUBDIR+=	emacs-wiki
+SUBDIR+=	epm
 SUBDIR+=	esniper
 SUBDIR+=	fbreader
 SUBDIR+=	fd
@@ -81,6 +82,19 @@ SUBDIR+=	gperiodic
 SUBDIR+=	granulate
 SUBDIR+=	gwaei
 SUBDIR+=	hanzim
+SUBDIR+=	heirloom-banner
+SUBDIR+=	heirloom-cal
+SUBDIR+=	heirloom-calendar
+SUBDIR+=	heirloom-hd
+SUBDIR+=	heirloom-more
+SUBDIR+=	heirloom-od
+SUBDIR+=	heirloom-printenv
+SUBDIR+=	heirloom-printf
+SUBDIR+=	heirloom-random
+SUBDIR+=	heirloom-sleep
+SUBDIR+=	heirloom-sum
+SUBDIR+=	heirloom-tcopy
+SUBDIR+=	heirloom-time
 SUBDIR+=	heyu
 SUBDIR+=	howm
 SUBDIR+=	ibutton-pdkit
@@ -128,6 +142,7 @@ SUBDIR+=	latin-words-bin
 SUBDIR+=	less
 SUBDIR+=	libcdio
 SUBDIR+=	libquantum
+SUBDIR+=	libreoffice3-bin
 SUBDIR+=	libutf
 SUBDIR+=	lile
 SUBDIR+=	linux-words
@@ -208,6 +223,7 @@ SUBDIR+=	rump
 SUBDIR+=	sch
 SUBDIR+=	sci
 SUBDIR+=	screen
+SUBDIR+=	send-pr
 SUBDIR+=	siag
 SUBDIR+=	softmaker-office-demo
 SUBDIR+=	splitvt

@@ -1,8 +1,8 @@
 $NetBSD$
 
---- src/tests.c.orig	2009-06-02 18:59:32.000000000 +0000
+--- src/tests.c.orig	2011-04-10 07:31:53.000000000 +0000
 +++ src/tests.c
-@@ -513,7 +513,11 @@ test_bye (gnutls_session_t session)
+@@ -411,7 +411,11 @@ test_bye (gnutls_session_t session)
      return TEST_FAILED;
  
  #ifndef _WIN32
@@ -14,7 +14,7 @@ $NetBSD$
    alarm (secs);
  #else
    setsockopt ((int) gnutls_transport_get_ptr (session), SOL_SOCKET,
-@@ -527,7 +531,9 @@ test_bye (gnutls_session_t session)
+@@ -425,7 +429,9 @@ test_bye (gnutls_session_t session)
    while (ret > 0);
  
  #ifndef _WIN32

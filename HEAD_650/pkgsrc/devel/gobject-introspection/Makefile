@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.7 2011/02/25 13:09:34 drochner Exp $
+# $NetBSD: Makefile,v 1.11 2011/05/13 17:12:19 drochner Exp $
 #
 
-DISTNAME=	gobject-introspection-0.10.3
+DISTNAME=	gobject-introspection-0.10.8
 CATEGORIES=	devel
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gobject-introspection/0.10/}
 EXTRACT_SUFX=	.tar.bz2
@@ -37,10 +37,14 @@ SUBST_SED.timet=	-e 's,@TIMET_TYPENAME@,TYPE_LONG,g'
 SUBST_SED.timet+=	-e 's,@TIMET_CTYPE@,glong,g'
 .endif
 
+# not executable
+CHECK_INTERPRETER_SKIP+= lib/gobject-introspection/giscanner/*.py
+
 TEST_TARGET=	check
 
 .include "../../devel/glib2/buildlink3.mk"
 .include "../../devel/libffi/buildlink3.mk"
 .include "../../graphics/cairo/buildlink3.mk"
+.include "../../lang/python/application.mk"
 .include "../../lang/python/extension.mk"
 .include "../../mk/bsd.pkg.mk"

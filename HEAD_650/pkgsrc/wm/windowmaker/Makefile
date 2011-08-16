@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.87 2011/03/27 16:50:49 joerg Exp $
+# $NetBSD: Makefile,v 1.89 2011/05/15 10:28:51 hans Exp $
 
 DISTNAME=	WindowMaker-0.92.0
 PKGNAME=	${DISTNAME:S/WindowMaker/windowmaker/}
-PKGREVISION=	15
+PKGREVISION=	16
 CATEGORIES=	x11 wm windowmaker
 MASTER_SITES=	http://windowmaker.info/pub/source/release/ \
 	ftp://ftp.dti.ad.jp/pub/X/WindowMaker/source/release/
@@ -35,6 +35,10 @@ INSTALLATION_DIRS+=	share/WindowMaker/Sounds
 INSTALLATION_DIRS+=	share/doc/WindowMaker
 
 .include "../../mk/compiler.mk"
+
+.if !empty(MACHINE_PLATFORM:MSunOS-5.11-*)
+CONFIGURE_ENV+=		ac_cv_lib_Xext_XineramaGetInfo=no
+.endif
 
 .if ${MACHINE_ARCH} != "i386"
 CONFIGURE_ENV+=		ac_cv_c_inline_asm=no

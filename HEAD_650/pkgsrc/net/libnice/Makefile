@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.7 2011/02/21 15:51:13 wiz Exp $
+# $NetBSD: Makefile,v 1.9 2011/06/10 09:39:47 obache Exp $
 #
 
 DISTNAME=	libnice-0.1.0
+PKGREVISION=	2
 CATEGORIES=	net devel
 MASTER_SITES=	http://nice.freedesktop.org/releases/
 

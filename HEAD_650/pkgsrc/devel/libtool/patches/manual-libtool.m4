@@ -14,7 +14,7 @@ $NetBSD$
  ])
  
  
-@@ -1527,6 +1530,13 @@ AC_CACHE_VAL([lt_cv_sys_max_cmd_len], [d
+@@ -1527,13 +1530,20 @@ AC_CACHE_VAL([lt_cv_sys_max_cmd_len], [d
      lt_cv_sys_max_cmd_len=8192;
      ;;
  
@@ -28,6 +28,14 @@ $NetBSD$
    amigaos*)
      # On AmigaOS with pdksh, this test takes hours, literally.
      # So we just punt and use a minimum line length of 8192.
+     lt_cv_sys_max_cmd_len=8192;
+     ;;
+ 
+-  netbsd* | freebsd* | openbsd* | darwin* | dragonfly*)
++  netbsd* | freebsd* | openbsd* | mirbsd* | darwin* | dragonfly*)
+     # This has been around since 386BSD, at least.  Likely further.
+     if test -x /sbin/sysctl; then
+       lt_cv_sys_max_cmd_len=`/sbin/sysctl -n kern.argmax`
 @@ -2189,6 +2199,7 @@ beos*)
  bsdi[[45]]*)
    version_type=linux
@@ -116,9 +124,33 @@ $NetBSD$
    esac
    need_lib_prefix=no
    need_version=no
-@@ -2486,15 +2514,14 @@ linux* | k*bsd*-gnu)
+@@ -2485,16 +2513,38 @@ linux* | k*bsd*-gnu)
+   dynamic_linker='GNU/Linux ld.so'
    ;;
  
++midnightbsd*)
++  version_type=linux
++  need_lib_prefix=no
++  need_version=no
++  library_names_spec='${libname}${release}${shared_ext}${versuffix2} ${libname}${release}${shared_ext} $libname${shared_ext}'
++  finish_cmds='PATH="\$PATH:/sbin" ldconfig -m $libdir'
++  shlibpath_var=LD_LIBRARY_PATH
++  shlibpath_overrides_runpath=yes
++  hardcode_into_libs=yes
++  ;;
++
++mirbsd*)
++  version_type=linux
++  sys_lib_search_path_spec="/usr/lib"
++  sys_lib_dlsearch_path_spec="/usr/lib"
++  need_lib_prefix=no
++  need_version=no
++  library_names_spec='${libname}${release}${shared_ext}${versuffix2} ${libname}${shared_ext}${versuffix2}'
++  finish_cmds='PATH="\$PATH:/sbin" ldconfig -m $libdir'
++  shlibpath_var=LD_LIBRARY_PATH
++  shlibpath_overrides_runpath=yes
++  ;;
++
  netbsd*)
 -  version_type=sunos
 +  version_type=linux
@@ -135,7 +167,7 @@ $NetBSD$
      soname_spec='${libname}${release}${shared_ext}$major'
      dynamic_linker='NetBSD ld.elf_so'
    fi
-@@ -2511,9 +2538,10 @@ newsos6)
+@@ -2511,9 +2561,10 @@ newsos6)
    ;;
  
  *nto* | *qnx*)
@@ -147,7 +179,7 @@ $NetBSD$
    library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${release}${shared_ext}$major $libname${shared_ext}'
    soname_spec='${libname}${release}${shared_ext}$major'
    shlibpath_var=LD_LIBRARY_PATH
-@@ -2523,7 +2551,7 @@ newsos6)
+@@ -2523,7 +2574,7 @@ newsos6)
    ;;
  
  openbsd*)
@@ -156,7 +188,7 @@ $NetBSD$
    sys_lib_dlsearch_path_spec="/usr/lib"
    need_lib_prefix=no
    # Some older versions of OpenBSD (3.3 at least) *do* need versioned libs.
-@@ -2531,7 +2559,7 @@ openbsd*)
+@@ -2531,7 +2582,7 @@ openbsd*)
      openbsd3.3 | openbsd3.3.*)	need_version=yes ;;
      *)				need_version=no  ;;
    esac
@@ -165,7 +197,7 @@ $NetBSD$
    finish_cmds='PATH="\$PATH:/sbin" ldconfig -m $libdir'
    shlibpath_var=LD_LIBRARY_PATH
    if test -z "`echo __ELF__ | $CC -E - | $GREP __ELF__`" || test "$host_os-$host_cpu" = "openbsd2.8-powerpc"; then
-@@ -3038,6 +3066,10 @@ gnu*)
+@@ -3038,6 +3089,10 @@ gnu*)
    lt_cv_deplibs_check_method=pass_all
    ;;
  
@@ -176,7 +208,25 @@ $NetBSD$
  hpux10.20* | hpux11*)
    lt_cv_file_magic_cmd=/usr/bin/file
    case $host_cpu in
-@@ -3256,7 +3288,7 @@ AC_DEFUN([LT_LIB_M],
+@@ -3076,6 +3131,17 @@ linux* | k*bsd*-gnu)
+   lt_cv_deplibs_check_method=pass_all
+   ;;
+ 
++midnightbsd*)
++  # might to use match_pattern like MirBSD, but there is no well-defined
++  # naming scheme for libraries yet, as the current one is deprecated, and
++  # the new one in a state of flux especially between mports and MirPorts
++  lt_cv_deplibs_check_method=pass_all
++  ;;
++
++mirbsd*)
++  lt_cv_deplibs_check_method='match_pattern /lib[[^/]]+(\.so\.[[0-9]]+\.[[0-9]]+|\.so|_pic\.a)$'
++  ;;
++
+ netbsd*)
+   if echo __ELF__ | $CC -E - | $GREP __ELF__ > /dev/null; then
+     lt_cv_deplibs_check_method='match_pattern /lib[[^/]]+(\.so\.[[0-9]]+\.[[0-9]]+|_pic\.a)$'
+@@ -3256,7 +3322,7 @@ AC_DEFUN([LT_LIB_M],
  [AC_REQUIRE([AC_CANONICAL_HOST])dnl
  LIBM=
  case $host in
@@ -185,7 +235,7 @@ $NetBSD$
    # These system don't have libm, or don't need it
    ;;
  *-ncr-sysv4.3*)
-@@ -3580,14 +3612,25 @@ m4_if([$1], [CXX], [
+@@ -3580,14 +3646,25 @@ m4_if([$1], [CXX], [
  	[_LT_TAGVAR(lt_prog_compiler_pic, $1)='-DDLL_EXPORT'])
        ;;
      darwin* | rhapsody*)
@@ -212,7 +262,7 @@ $NetBSD$
      interix[[3-9]]*)
        # Interix 3.x gcc -fpic/-fPIC options generate broken code.
        # Instead, we relocate shared libraries at runtime.
-@@ -3650,6 +3693,9 @@ m4_if([$1], [CXX], [
+@@ -3650,6 +3727,9 @@ m4_if([$1], [CXX], [
  	    ;;
  	esac
  	;;
@@ -222,7 +272,7 @@ $NetBSD$
        freebsd* | dragonfly*)
  	# FreeBSD uses GNU C++
  	;;
-@@ -3888,9 +3934,17 @@ m4_if([$1], [CXX], [
+@@ -3888,9 +3968,17 @@ m4_if([$1], [CXX], [
        ;;
  
      darwin* | rhapsody*)
@@ -241,7 +291,7 @@ $NetBSD$
        ;;
  
      hpux*)
-@@ -3912,6 +3966,13 @@ m4_if([$1], [CXX], [
+@@ -3912,6 +4000,13 @@ m4_if([$1], [CXX], [
        # Instead, we relocate shared libraries at runtime.
        ;;
  
@@ -255,7 +305,7 @@ $NetBSD$
      msdosdjgpp*)
        # Just because we use GCC doesn't mean we suddenly get shared libraries
        # on systems that don't support them.
-@@ -4110,6 +4171,9 @@ m4_if([$1], [CXX], [
+@@ -4110,6 +4205,9 @@ m4_if([$1], [CXX], [
  ])
  case $host_os in
    # For platforms which do not support PIC, -DPIC is meaningless:
@@ -265,7 +315,7 @@ $NetBSD$
    *djgpp*)
      _LT_TAGVAR(lt_prog_compiler_pic, $1)=
      ;;
-@@ -4343,6 +4407,11 @@ _LT_EOF
+@@ -4343,6 +4441,11 @@ _LT_EOF
        fi
        ;;
  
@@ -277,7 +327,7 @@ $NetBSD$
      interix[[3-9]]*)
        _LT_TAGVAR(hardcode_direct, $1)=no
        _LT_TAGVAR(hardcode_shlibpath_var, $1)=no
-@@ -4429,7 +4498,7 @@ _LT_EOF
+@@ -4429,7 +4532,7 @@ _LT_EOF
        ;;
  
      netbsd*)
@@ -286,7 +336,40 @@ $NetBSD$
  	_LT_TAGVAR(archive_cmds, $1)='$LD -Bshareable $libobjs $deplibs $linker_flags -o $lib'
  	wlarc=
        else
-@@ -4861,6 +4930,8 @@ _LT_EOF
+@@ -4735,6 +4838,11 @@ _LT_EOF
+       _LT_TAGVAR(hardcode_shlibpath_var, $1)=no
+       ;;
+ 
++      haiku*)
++        _LT_TAGVAR(archive_cmds, $1)='$CC -shared $libobjs $deplibs $compiler_flags ${wl}-soname $wl$soname -o $lib'
++        _LT_TAGVAR(link_all_deplibs, $1)=yes
++        ;;
++
+     hpux9*)
+       if test "$GCC" = yes; then
+ 	_LT_TAGVAR(archive_cmds, $1)='$RM $output_objdir/$soname~$CC -shared -fPIC ${wl}+b ${wl}$install_libdir -o $output_objdir/$soname $libobjs $deplibs $compiler_flags~test $output_objdir/$soname = $lib || mv $output_objdir/$soname $lib'
+@@ -4841,6 +4949,20 @@ _LT_EOF
+       _LT_TAGVAR(link_all_deplibs, $1)=yes
+       ;;
+ 
++    mirbsd*)
++      if test -f /usr/libexec/ld.so; then
++	_LT_TAGVAR(hardcode_direct, $1)=yes
++	_LT_TAGVAR(hardcode_shlibpath_var, $1)=no
++	_LT_TAGVAR(hardcode_direct_absolute, $1)=yes
++	_LT_TAGVAR(archive_cmds, $1)='$CC -shared $pic_flag -o $lib $libobjs $deplibs $compiler_flags'
++	_LT_TAGVAR(archive_expsym_cmds, $1)='$CC -shared $pic_flag -o $lib $libobjs $deplibs $compiler_flags ${wl}-retain-symbols-file,$export_symbols'
++	_LT_TAGVAR(hardcode_libdir_flag_spec, $1)='${wl}-rpath,$libdir'
++	_LT_TAGVAR(export_dynamic_flag_spec, $1)='${wl}-E'
++      else
++	_LT_TAGVAR(ld_shlibs, $1)=no
++      fi
++      ;;
++
+     netbsd*)
+       if echo __ELF__ | $CC -E - | $GREP __ELF__ >/dev/null; then
+ 	_LT_TAGVAR(archive_cmds, $1)='$LD -Bshareable -o $lib $libobjs $deplibs $linker_flags'  # a.out
+@@ -4861,6 +4983,8 @@ _LT_EOF
        ;;
  
      *nto* | *qnx*)
@@ -295,7 +378,7 @@ $NetBSD$
        ;;
  
      openbsd*)
-@@ -5318,9 +5389,7 @@ m4_defun([_LT_PROG_CXX],
+@@ -5318,9 +5442,7 @@ m4_defun([_LT_PROG_CXX],
  [
  pushdef([AC_MSG_ERROR], [_lt_caught_CXX_error=yes])
  AC_PROG_CXX
@@ -306,19 +389,30 @@ $NetBSD$
    AC_PROG_CXXCPP
  else
    _lt_caught_CXX_error=yes
-@@ -5685,6 +5754,11 @@ if test "$_lt_caught_CXX_error" != yes; 
-       gnu*)
-         ;;
+@@ -5993,6 +6115,22 @@ if test "$_lt_caught_CXX_error" != yes; 
+         _LT_TAGVAR(ld_shlibs, $1)=no
+ 	;;
  
-+      haiku*)
-+        _LT_TAGVAR(archive_cmds, $1)='$CC -shared $libobjs $deplibs $compiler_flags ${wl}-soname $wl$soname -o $lib'
-+        _LT_TAGVAR(link_all_deplibs, $1)=yes
-+        ;;
++      mirbsd*)
++	if test -f /usr/libexec/ld.so; then
++	  _LT_TAGVAR(hardcode_direct, $1)=yes
++	  _LT_TAGVAR(hardcode_shlibpath_var, $1)=no
++	  _LT_TAGVAR(hardcode_direct_absolute, $1)=yes
++	  _LT_TAGVAR(archive_cmds, $1)='$CC -shared $pic_flag $predep_objects $libobjs $deplibs $postdep_objects $compiler_flags -o $lib'
++	  _LT_TAGVAR(archive_expsym_cmds, $1)='$CC -shared $pic_flag $predep_objects $libobjs $deplibs $postdep_objects $compiler_flags ${wl}-retain-symbols-file,$export_symbols -o $lib'
++	  _LT_TAGVAR(hardcode_libdir_flag_spec, $1)='${wl}-rpath,$libdir'
++	  _LT_TAGVAR(export_dynamic_flag_spec, $1)='${wl}-E'
++	  _LT_TAGVAR(whole_archive_flag_spec, $1)="$wlarc"'--whole-archive$convenience '"$wlarc"'--no-whole-archive'
++	  output_verbose_link_cmd='echo'
++	else
++	  _LT_TAGVAR(ld_shlibs, $1)=no
++	fi
++	;;
 +
-       hpux9*)
-         _LT_TAGVAR(hardcode_libdir_flag_spec, $1)='${wl}+b ${wl}$libdir'
-         _LT_TAGVAR(hardcode_libdir_separator, $1)=:
-@@ -6008,18 +6082,36 @@ if test "$_lt_caught_CXX_error" != yes; 
+       mvs*)
+         case $cc_basename in
+           cxx*)
+@@ -6008,18 +6146,36 @@ if test "$_lt_caught_CXX_error" != yes; 
  
        netbsd*)
          if echo __ELF__ | $CC -E - | $GREP __ELF__ >/dev/null; then
@@ -359,7 +453,7 @@ $NetBSD$
  	;;
  
        openbsd2*)
-@@ -6481,6 +6573,11 @@ $RM -f confest.$objext
+@@ -6481,6 +6637,11 @@ $RM -f confest.$objext
  # PORTME: override above test on systems where it is broken
  m4_if([$1], [CXX],
  [case $host_os in

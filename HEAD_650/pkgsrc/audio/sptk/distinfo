@@ -1,0 +1,11 @@
+$NetBSD: distinfo,v 1.2 2011/06/08 13:32:03 obache Exp $
+
+SHA1 (SPTK-3.4.1.tar.gz) = 296531f27a64d18ef2ee7995307ea260d40ae983
+RMD160 (SPTK-3.4.1.tar.gz) = c13c21f888008dcb8481180d181a7c6bc82279bf
+Size (SPTK-3.4.1.tar.gz) = 574062 bytes
+SHA1 (SPTKexamples-3.4.1.pdf) = f2938d4e6c5076c0851ece5cfabc0b60a9681d4d
+RMD160 (SPTKexamples-3.4.1.pdf) = 389624b90ab97c1628d2789ee8e020168245c853
+Size (SPTKexamples-3.4.1.pdf) = 2410428 bytes
+SHA1 (SPTKref-3.4.1.pdf) = 1426c0eae60e163b70a43d78c816b43f20ae4159
+RMD160 (SPTKref-3.4.1.pdf) = fd1b5893dd277a86a57ff8f3dd665642eb1bd3d8
+Size (SPTKref-3.4.1.pdf) = 783126 bytes

@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.19 2011/01/13 13:36:14 wiz Exp $
+# $NetBSD: Makefile,v 1.21 2011/05/21 08:18:16 obache Exp $
 #
 
 DISTNAME=	efltk-2.0.5
-PKGREVISION=	11
+PKGREVISION=	12
 CATEGORIES=	x11
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=ede/}
 EXTRACT_SUFX=	.tar.bz2
@@ -10,6 +10,9 @@ EXTRACT_SUFX=	.tar.bz2
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://ede.sourceforge.net/
 COMMENT=	Extended Fast Light Toolkit
+LICENSE=	gnu-lgpl-v2 # or later
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 WRKSRC=			${WRKDIR}/efltk
 GNU_CONFIGURE=		yes
@@ -23,6 +26,8 @@ CONFIGURE_ARGS+=	--enable-xft
 CONFIGURE_ARGS+=	--enable-plugins
 CONFIGURE_ARGS+=	--disable-unixODBC
 CONFIGURE_ARGS+=	--disable-shared
+
+INSTALL_MAKE_FLAGS+=	INSTALL_PREFIX=${DESTDIR:Q}
 
 .include "options.mk"
 

@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.21 2011/03/18 13:49:38 wiz Exp $
+# $NetBSD: Makefile,v 1.23 2011/05/02 10:09:11 abs Exp $
 
 DISTNAME=	kdeutils-${_KDE_VERSION}
-PKGREVISION=	1
+PKGREVISION=	3
 CATEGORIES=	misc
 COMMENT=	Utilities for the KDE integrated X11 desktop
 
@@ -14,6 +14,8 @@ CMAKE_ARGS+=	-DLIBLZMA_INCLUDE_DIR:PATH=${BUILDLINK_PREFIX.xz}/include
 CMAKE_ARGS+=	-DLIBLZMA_LIBRARY:FILEPATH=${BUILDLINK_PREFIX.xz}/lib/liblzma.so
 
 # BUILD_MAKE_FLAGS+= VERBOSE=1
+
+REPLACE_PYTHON+=	printer-applet/*.py
 
 .include "options.mk"
 

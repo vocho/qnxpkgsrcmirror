@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.214 2011/03/15 18:46:57 minskim Exp $
+# $NetBSD: Makefile,v 1.219 2011/06/14 21:31:31 alnsn Exp $
 
 COMMENT=	Mathematics
 
@@ -11,8 +11,10 @@ SUBDIR+=	R-PHYLOGR
 SUBDIR+=	R-R2HTML
 SUBDIR+=	R-RArcInfo
 SUBDIR+=	R-Rcmdr
+SUBDIR+=	R-XML
 SUBDIR+=	R-abind
 SUBDIR+=	R-akima
+SUBDIR+=	R-bitops
 SUBDIR+=	R-chron
 SUBDIR+=	R-circular
 SUBDIR+=	R-classInt
@@ -52,6 +54,7 @@ SUBDIR+=	blitz++
 SUBDIR+=	calc
 SUBDIR+=	calcoo
 SUBDIR+=	capc-calc
+SUBDIR+=	clisp-pari
 SUBDIR+=	cln
 SUBDIR+=	dcdflib.c
 SUBDIR+=	dcdflib.f
@@ -90,6 +93,8 @@ SUBDIR+=	graphopt
 SUBDIR+=	grpn
 SUBDIR+=	gsl
 SUBDIR+=	gtklife
+SUBDIR+=	heirloom-factor
+SUBDIR+=	heirloom-units
 SUBDIR+=	itpp
 SUBDIR+=	kseg
 SUBDIR+=	lapack
@@ -182,6 +187,7 @@ SUBDIR+=	qhull
 SUBDIR+=	quadpack
 SUBDIR+=	randlib
 SUBDIR+=	ruby-rb-gsl
+SUBDIR+=	ruby-spreadsheet
 SUBDIR+=	sc
 SUBDIR+=	scilab
 SUBDIR+=	slatec

@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.14 2010/03/11 05:57:52 dmcmahill Exp $
+@comment $NetBSD: PLIST,v 1.16 2011/06/19 06:37:44 dholland Exp $
 bin/convert_sym
 bin/garchive
 bin/gattrib

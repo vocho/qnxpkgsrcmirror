@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.4 2011/03/08 08:30:07 adam Exp $
+# $NetBSD: Makefile,v 1.7 2011/06/15 11:45:08 adam Exp $
 
 .include "../../net/samba/Makefile.mirrors"
 
@@ -11,7 +11,7 @@ HOMEPAGE=	http://www.samba.org/
 COMMENT=	SMB/CIFS protocol server suite
 LICENSE=	gnu-gpl-v3
 
-VERSION=	3.5.8
+VERSION=	3.5.9
 CONFLICTS+=	ja-samba-[0-9]* pam-smbpass-[0-9]* tdb-[0-9]* winbind-[0-9]*
 
 PKG_DESTDIR_SUPPORT=	user-destdir
@@ -65,6 +65,10 @@ CONFIGURE_ARGS+=	--with-statedir=${SAMBA_STATEDIR}
 CONFIGURE_ARGS+=	--localstatedir=${SAMBA_VARDIR}
 CONFIGURE_ARGS+=	--with-mandir=${PREFIX}/${PKGMANDIR}
 CONFIGURE_ARGS+=	--with-swatdir=${PREFIX}/share/samba/swat
+#
+# Explicitly disable samba4 merged-build option which is broken.
+#
+CONFIGURE_ARGS+=	--enable-merged-build=no
 
 .include "../../net/samba/options.mk"
 

@@ -1,11 +1,10 @@
-# $NetBSD: Makefile,v 1.2 2011/03/07 08:52:44 ryoon Exp $
+# $NetBSD: Makefile,v 1.4 2011/05/22 20:55:31 ryoon Exp $
 #
 
-DISTNAME=	IPAfont00302
+DISTNAME=	IPAfont00303
 PKGNAME=	${DISTNAME:S/IPAfont/ipafont-/}
 CATEGORIES=	fonts japanese
-MASTER_SITES=	${MASTER_SITE_SOURCEFORGE_JP:=ipafonts/46146/} \
-		http://info.openlab.ipa.go.jp/ipafont/fontdata/
+MASTER_SITES=	http://info.openlab.ipa.go.jp/ipafont/fontdata/
 EXTRACT_SUFX=	.zip
 
 MAINTAINER=	ryoon@NetBSD.org
@@ -32,7 +31,7 @@ INSTALL_FONTS=	ipag.ttf \
 		ipam.ttf \
 		ipamp.ttf
 INSTALL_DOCS=	IPA_Font_License_Agreement_v1.0.txt \
-		Readme_IPAfont00302.txt
+		Readme_IPAfont00303.txt
 
 USE_LANGUAGES=	# none
 

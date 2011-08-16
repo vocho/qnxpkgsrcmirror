@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.6 2010/01/17 12:02:16 wiz Exp $
+# $NetBSD: Makefile,v 1.8 2011/04/22 13:43:31 obache Exp $
 #
 
 DISTNAME=	curlftpfs-0.9.1
 PKGNAME=	fuse-${DISTNAME}
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	filesystems
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=curlftpfs/}
 
@@ -18,6 +18,7 @@ USE_LIBTOOL=	yes
 USE_TOOLS+=	gmake pkg-config
 
 CFLAGS.NetBSD+=	-D_NETBSD_SOURCE
+CFLAGS.SunOS+=	--std=c99 -D__EXTENSIONS__
 
 .include "../../devel/glib2/buildlink3.mk"
 .include "../../www/curl/buildlink3.mk"

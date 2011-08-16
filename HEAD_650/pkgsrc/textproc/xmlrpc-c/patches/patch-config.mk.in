@@ -1,0 +1,23 @@
+$NetBSD$
+
+--- config.mk.in.orig	2011-03-25 16:22:45.000000000 +0000
++++ config.mk.in
+@@ -235,6 +235,18 @@ ifeq ($(patsubst netbsd%,netbsd,$(HOST_O
+   NEED_WL_RPATH=yes
+ endif
+ 
++ifeq ($(patsubst nto-qnx6%,nto-qnx6,$(HOST_OS)),nto-qnx6)
++  SHARED_LIB_TYPE = unix
++  SHLIB_SUFFIX = so
++  MUST_BUILD_SHLIB = Y
++  MUST_BUILD_SHLIBLE = Y
++  shlibfn = $(1:%=%.$(SHLIB_SUFFIX).$(MAJ).$(MIN))
++  shliblefn = $(1:%=%.$(SHLIB_SUFFIX))
++  CFLAGS_SHLIB = -fpic
++  LDFLAGS_SHLIB = -shared -Wl,-soname,$(SONAME) $(SHLIB_CLIB)
++  NEED_WL_RPATH=yes
++endif
++
+ ifeq ($(patsubst freebsd%,freebsd,$(HOST_OS)),freebsd)
+   SHARED_LIB_TYPE = unix
+   SHLIB_SUFFIX = so

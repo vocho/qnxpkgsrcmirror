@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.97 2010/06/30 13:19:00 schmonz Exp $
+# $NetBSD: Makefile,v 1.100 2011/05/30 22:14:09 schmonz Exp $
 
-DISTNAME=	getmail-4.20.0
+DISTNAME=	getmail-4.20.3
 CATEGORIES=	mail
 MASTER_SITES=	${HOMEPAGE}old-versions/
 
@@ -11,8 +11,8 @@ LICENSE=	gnu-gpl-v2
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
-PYTHON_PATCH_SCRIPTS=		*.py getmailcore/*.py
-PYDISTUTILSPKG=			yes
+PYTHON_PATCH_SCRIPTS=	*.py getmailcore/*.py
+PYDISTUTILSPKG=		yes
 
 .include "../../lang/python/application.mk"
 .include "../../lang/python/extension.mk"

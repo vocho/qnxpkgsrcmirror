@@ -1,13 +1,11 @@
-# $NetBSD: Makefile,v 1.32 2011/01/13 13:36:43 wiz Exp $
+# $NetBSD: Makefile,v 1.34 2011/04/22 13:41:56 obache Exp $
 #
-# included by ../../audio/bmp/buildlink3.mk
-# included by ../../audio/bmp-esound/buildlink3.mk
 
 BMP_ENABLE_ENCODERS=	yes
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 .include "Makefile.common"
-PKGREVISION=		10
+PKGREVISION=		11
 
 DEPENDS+=		unzip-[0-9]*:../../archivers/unzip
 
