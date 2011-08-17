@@ -2,12 +2,21 @@ $NetBSD: patch-al,v 1.1.1.1 2011/06/17 00:10:19 reed Exp $
 
 --- configure.orig	2011-06-11 15:48:52.000000000 +0000
 +++ configure
-@@ -4848,17 +4848,18 @@ $as_echo "#define Py_ENABLE_SHARED 1" >>
+@@ -2723,6 +2723,8 @@ $as_echo "#define _GNU_SOURCE 1" >>confd
+ 
+ $as_echo "#define _NETBSD_SOURCE 1" >>confdefs.h
+ 
++$as_echo "#define _QNX_SOURCE 1" >>confdefs.h
++
+ 
+ # The later defininition of _XOPEN_SOURCE and _POSIX_C_SOURCE disables
+ # certain features on FreeBSD, so we need __BSD_VISIBLE to re-enable
+@@ -4848,17 +4850,18 @@ $as_echo "#define Py_ENABLE_SHARED 1" >>
  	  RUNSHARED=LD_LIBRARY_PATH=`pwd`:${LD_LIBRARY_PATH}
  	  INSTSONAME="$LDLIBRARY".$SOVERSION
            ;;
 -    Linux*|GNU*|NetBSD*|FreeBSD*|DragonFly*)
-+    Linux*|GNU*|NetBSD*|FreeBSD*|Interix*|DragonFly*|OpenBSD*)
++    Linux*|GNU*|NetBSD*|FreeBSD*|Interix*|DragonFly*|OpenBSD*|QNX*)
  	  LDLIBRARY='libpython$(VERSION).so'
  	  BLDLIBRARY='-L. -lpython$(VERSION)'
  	  RUNSHARED=LD_LIBRARY_PATH=`pwd`:${LD_LIBRARY_PATH}
@@ -27,7 +36,7 @@ $NetBSD: patch-al,v 1.1.1.1 2011/06/17 00:10:19 reed Exp $
      hp*|HP*)
  	  case `uname -m` in
  		ia64)
-@@ -7579,8 +7580,8 @@ then
+@@ -7579,8 +7582,8 @@ then
  			LDSHARED="$LDSHARED "'$(PYTHONFRAMEWORKPREFIX)/$(PYTHONFRAMEWORKDIR)/Versions/$(VERSION)/$(PYTHONFRAMEWORK)'
  		else
  			# No framework, use the Python app as bundle-loader
@@ -38,7 +47,7 @@ $NetBSD: patch-al,v 1.1.1.1 2011/06/17 00:10:19 reed Exp $
  		fi ;;
  	Darwin/*)
  		# Use -undefined dynamic_lookup whenever possible (10.3 and later).
-@@ -7601,12 +7602,12 @@ then
+@@ -7601,12 +7604,12 @@ then
  				LDSHARED="$LDSHARED "'$(PYTHONFRAMEWORKPREFIX)/$(PYTHONFRAMEWORKDIR)/Versions/$(VERSION)/$(PYTHONFRAMEWORK)'
  			else
  				# No framework, use the Python app as bundle-loader
@@ -54,7 +63,7 @@ $NetBSD: patch-al,v 1.1.1.1 2011/06/17 00:10:19 reed Exp $
  	BSD/OS*/4*) LDSHARED="gcc -shared";;
  	FreeBSD*)
  		if [ "`$CC -dM -E - </dev/null | grep __ELF__`" != "" ]
-@@ -7630,6 +7631,7 @@ then
+@@ -7630,6 +7633,7 @@ then
  				esac
  		fi;;
  	NetBSD*|DragonFly*) LDSHARED='$(CC) -shared ${LDFLAGS}';;
@@ -62,15 +71,17 @@ $NetBSD: patch-al,v 1.1.1.1 2011/06/17 00:10:19 reed Exp $
  	OpenUNIX*|UnixWare*)
  		if test "$GCC" = "yes"
  		then LDSHARED='$(CC) -shared'
-@@ -7664,6 +7666,7 @@ then
+@@ -7663,7 +7667,8 @@ then
+ 		 fi;;
  	Linux*|GNU*) CCSHARED="-fPIC";;
  	BSD/OS*/4*) CCSHARED="-fpic";;
- 	FreeBSD*|NetBSD*|OpenBSD*|DragonFly*) CCSHARED="-fPIC";;
+-	FreeBSD*|NetBSD*|OpenBSD*|DragonFly*) CCSHARED="-fPIC";;
++	FreeBSD*|NetBSD*|OpenBSD*|DragonFly*|QNX*) CCSHARED="-fPIC";;
 +	Interix*) CCSHARED="";;
  	OpenUNIX*|UnixWare*)
  		if test "$GCC" = "yes"
  		then CCSHARED="-fPIC"
-@@ -7712,6 +7715,7 @@ then
+@@ -7712,6 +7717,7 @@ then
  		then
  			LINKFORSHARED="-Wl,--export-dynamic"
  		fi;;
