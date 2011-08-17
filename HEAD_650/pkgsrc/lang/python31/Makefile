@@ -163,6 +163,10 @@ post-extract:
 post-install:
 	${LN} -fs ${DESTDIR}${PREFIX}/lib/libpython3.1.sl \
 		${DESTDIR}${PREFIX}/lib/libpython3.1.sl.1.0
+.elif ${OPSYS} == "QNX"
+# python wants a large stack
+post-build:
+	ldrel -S2M -L ${WRKSRC}/python
 .endif
 
 USE_GNU_READLINE=			yes
