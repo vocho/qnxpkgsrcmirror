@@ -1,4 +1,4 @@
-$NetBSD: manual-libtool.m4,v 1.32 2011/05/14 16:49:45 bsiegert Exp $
+$NetBSD$
 
 --- libltdl/m4/libtool.m4.orig	2009-11-16 13:11:59.000000000 +0000
 +++ libltdl/m4/libtool.m4
@@ -167,7 +167,19 @@ $NetBSD: manual-libtool.m4,v 1.32 2011/05/14 16:49:45 bsiegert Exp $
      soname_spec='${libname}${release}${shared_ext}$major'
      dynamic_linker='NetBSD ld.elf_so'
    fi
-@@ -2523,7 +2573,7 @@ newsos6)
+@@ -2511,9 +2561,10 @@ newsos6)
+   ;;
+ 
+ *nto* | *qnx*)
+-  version_type=qnx
++  version_type=linux
+   need_lib_prefix=no
+   need_version=no
++  sys_lib_search_path_spec="/lib /usr/lib"
+   library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${release}${shared_ext}$major $libname${shared_ext}'
+   soname_spec='${libname}${release}${shared_ext}$major'
+   shlibpath_var=LD_LIBRARY_PATH
+@@ -2523,7 +2574,7 @@ newsos6)
    ;;
  
  openbsd*)
@@ -176,7 +188,7 @@ $NetBSD: manual-libtool.m4,v 1.32 2011/05/14 16:49:45 bsiegert Exp $
    sys_lib_dlsearch_path_spec="/usr/lib"
    need_lib_prefix=no
    # Some older versions of OpenBSD (3.3 at least) *do* need versioned libs.
-@@ -2531,7 +2581,7 @@ openbsd*)
+@@ -2531,7 +2582,7 @@ openbsd*)
      openbsd3.3 | openbsd3.3.*)	need_version=yes ;;
      *)				need_version=no  ;;
    esac
@@ -185,7 +197,7 @@ $NetBSD: manual-libtool.m4,v 1.32 2011/05/14 16:49:45 bsiegert Exp $
    finish_cmds='PATH="\$PATH:/sbin" ldconfig -m $libdir'
    shlibpath_var=LD_LIBRARY_PATH
    if test -z "`echo __ELF__ | $CC -E - | $GREP __ELF__`" || test "$host_os-$host_cpu" = "openbsd2.8-powerpc"; then
-@@ -3038,6 +3088,10 @@ gnu*)
+@@ -3038,6 +3089,10 @@ gnu*)
    lt_cv_deplibs_check_method=pass_all
    ;;
  
@@ -196,7 +208,7 @@ $NetBSD: manual-libtool.m4,v 1.32 2011/05/14 16:49:45 bsiegert Exp $
  hpux10.20* | hpux11*)
    lt_cv_file_magic_cmd=/usr/bin/file
    case $host_cpu in
-@@ -3076,6 +3130,17 @@ linux* | k*bsd*-gnu)
+@@ -3076,6 +3131,17 @@ linux* | k*bsd*-gnu)
    lt_cv_deplibs_check_method=pass_all
    ;;
  
@@ -214,16 +226,7 @@ $NetBSD: manual-libtool.m4,v 1.32 2011/05/14 16:49:45 bsiegert Exp $
  netbsd*)
    if echo __ELF__ | $CC -E - | $GREP __ELF__ > /dev/null; then
      lt_cv_deplibs_check_method='match_pattern /lib[[^/]]+(\.so\.[[0-9]]+\.[[0-9]]+|_pic\.a)$'
-@@ -3091,7 +3156,7 @@ newos6*)
-   ;;
- 
- *nto* | *qnx*)
--  lt_cv_deplibs_check_method=pass_all
-+  lt_cv_deplibs_check_method='match_pattern /lib[[^/]]+(\.so|S\.a)$'
-   ;;
- 
- openbsd*)
-@@ -3256,7 +3321,7 @@ AC_DEFUN([LT_LIB_M],
+@@ -3256,7 +3322,7 @@ AC_DEFUN([LT_LIB_M],
  [AC_REQUIRE([AC_CANONICAL_HOST])dnl
  LIBM=
  case $host in
@@ -232,7 +235,7 @@ $NetBSD: manual-libtool.m4,v 1.32 2011/05/14 16:49:45 bsiegert Exp $
    # These system don't have libm, or don't need it
    ;;
  *-ncr-sysv4.3*)
-@@ -3580,14 +3645,25 @@ m4_if([$1], [CXX], [
+@@ -3580,14 +3646,25 @@ m4_if([$1], [CXX], [
  	[_LT_TAGVAR(lt_prog_compiler_pic, $1)='-DDLL_EXPORT'])
        ;;
      darwin* | rhapsody*)
@@ -259,7 +262,7 @@ $NetBSD: manual-libtool.m4,v 1.32 2011/05/14 16:49:45 bsiegert Exp $
      interix[[3-9]]*)
        # Interix 3.x gcc -fpic/-fPIC options generate broken code.
        # Instead, we relocate shared libraries at runtime.
-@@ -3650,6 +3726,9 @@ m4_if([$1], [CXX], [
+@@ -3650,6 +3727,9 @@ m4_if([$1], [CXX], [
  	    ;;
  	esac
  	;;
@@ -269,7 +272,7 @@ $NetBSD: manual-libtool.m4,v 1.32 2011/05/14 16:49:45 bsiegert Exp $
        freebsd* | dragonfly*)
  	# FreeBSD uses GNU C++
  	;;
-@@ -3888,9 +3967,17 @@ m4_if([$1], [CXX], [
+@@ -3888,9 +3968,17 @@ m4_if([$1], [CXX], [
        ;;
  
      darwin* | rhapsody*)
@@ -288,7 +291,7 @@ $NetBSD: manual-libtool.m4,v 1.32 2011/05/14 16:49:45 bsiegert Exp $
        ;;
  
      hpux*)
-@@ -3912,6 +3999,13 @@ m4_if([$1], [CXX], [
+@@ -3912,6 +4000,13 @@ m4_if([$1], [CXX], [
        # Instead, we relocate shared libraries at runtime.
        ;;
  
@@ -302,7 +305,7 @@ $NetBSD: manual-libtool.m4,v 1.32 2011/05/14 16:49:45 bsiegert Exp $
      msdosdjgpp*)
        # Just because we use GCC doesn't mean we suddenly get shared libraries
        # on systems that don't support them.
-@@ -4110,6 +4204,9 @@ m4_if([$1], [CXX], [
+@@ -4110,6 +4205,9 @@ m4_if([$1], [CXX], [
  ])
  case $host_os in
    # For platforms which do not support PIC, -DPIC is meaningless:
@@ -312,7 +315,7 @@ $NetBSD: manual-libtool.m4,v 1.32 2011/05/14 16:49:45 bsiegert Exp $
    *djgpp*)
      _LT_TAGVAR(lt_prog_compiler_pic, $1)=
      ;;
-@@ -4343,6 +4440,11 @@ _LT_EOF
+@@ -4343,6 +4441,11 @@ _LT_EOF
        fi
        ;;
  
@@ -324,7 +327,7 @@ $NetBSD: manual-libtool.m4,v 1.32 2011/05/14 16:49:45 bsiegert Exp $
      interix[[3-9]]*)
        _LT_TAGVAR(hardcode_direct, $1)=no
        _LT_TAGVAR(hardcode_shlibpath_var, $1)=no
-@@ -4429,7 +4531,7 @@ _LT_EOF
+@@ -4429,7 +4532,7 @@ _LT_EOF
        ;;
  
      netbsd*)
@@ -333,7 +336,7 @@ $NetBSD: manual-libtool.m4,v 1.32 2011/05/14 16:49:45 bsiegert Exp $
  	_LT_TAGVAR(archive_cmds, $1)='$LD -Bshareable $libobjs $deplibs $linker_flags -o $lib'
  	wlarc=
        else
-@@ -4735,6 +4837,11 @@ _LT_EOF
+@@ -4735,6 +4838,11 @@ _LT_EOF
        _LT_TAGVAR(hardcode_shlibpath_var, $1)=no
        ;;
  
@@ -345,7 +348,7 @@ $NetBSD: manual-libtool.m4,v 1.32 2011/05/14 16:49:45 bsiegert Exp $
      hpux9*)
        if test "$GCC" = yes; then
  	_LT_TAGVAR(archive_cmds, $1)='$RM $output_objdir/$soname~$CC -shared -fPIC ${wl}+b ${wl}$install_libdir -o $output_objdir/$soname $libobjs $deplibs $compiler_flags~test $output_objdir/$soname = $lib || mv $output_objdir/$soname $lib'
-@@ -4841,6 +4948,20 @@ _LT_EOF
+@@ -4841,6 +4949,20 @@ _LT_EOF
        _LT_TAGVAR(link_all_deplibs, $1)=yes
        ;;
  
@@ -366,7 +369,7 @@ $NetBSD: manual-libtool.m4,v 1.32 2011/05/14 16:49:45 bsiegert Exp $
      netbsd*)
        if echo __ELF__ | $CC -E - | $GREP __ELF__ >/dev/null; then
  	_LT_TAGVAR(archive_cmds, $1)='$LD -Bshareable -o $lib $libobjs $deplibs $linker_flags'  # a.out
-@@ -4861,6 +4982,8 @@ _LT_EOF
+@@ -4861,6 +4983,8 @@ _LT_EOF
        ;;
  
      *nto* | *qnx*)
@@ -375,7 +378,7 @@ $NetBSD: manual-libtool.m4,v 1.32 2011/05/14 16:49:45 bsiegert Exp $
        ;;
  
      openbsd*)
-@@ -5318,9 +5441,7 @@ m4_defun([_LT_PROG_CXX],
+@@ -5318,9 +5442,7 @@ m4_defun([_LT_PROG_CXX],
  [
  pushdef([AC_MSG_ERROR], [_lt_caught_CXX_error=yes])
  AC_PROG_CXX
@@ -386,7 +389,7 @@ $NetBSD: manual-libtool.m4,v 1.32 2011/05/14 16:49:45 bsiegert Exp $
    AC_PROG_CXXCPP
  else
    _lt_caught_CXX_error=yes
-@@ -5993,6 +6114,22 @@ if test "$_lt_caught_CXX_error" != yes; 
+@@ -5993,6 +6115,22 @@ if test "$_lt_caught_CXX_error" != yes; 
          _LT_TAGVAR(ld_shlibs, $1)=no
  	;;
  
@@ -409,7 +412,7 @@ $NetBSD: manual-libtool.m4,v 1.32 2011/05/14 16:49:45 bsiegert Exp $
        mvs*)
          case $cc_basename in
            cxx*)
-@@ -6008,18 +6145,37 @@ if test "$_lt_caught_CXX_error" != yes; 
+@@ -6008,18 +6146,36 @@ if test "$_lt_caught_CXX_error" != yes; 
  
        netbsd*)
          if echo __ELF__ | $CC -E - | $GREP __ELF__ >/dev/null; then
@@ -444,7 +447,6 @@ $NetBSD: manual-libtool.m4,v 1.32 2011/05/14 16:49:45 bsiegert Exp $
 -        _LT_TAGVAR(ld_shlibs, $1)=yes
 +        _LT_TAGVAR(archive_cmds, $1)='$CC -shared $libobjs $deplibs $compiler_flags ${wl}-soname $wl$soname -o $lib'
 +        _LT_TAGVAR(archive_expsym_cmds, $1)='$CC -shared $libobjs $deplibs $compiler_flags ${wl}-soname $wl$soname ${wl}-retain-symbols-file $wl$export_symbols -o $lib'
-+        _LT_TAGVAR(hardcode_libdir_flag_spec, $1)='-R$libdir'
 +        _LT_TAGVAR(hardcode_direct, $1)=yes
 +        _LT_TAGVAR(hardcode_shlibpath_var, $1)=no
 +        output_verbose_link_cmd='echo'

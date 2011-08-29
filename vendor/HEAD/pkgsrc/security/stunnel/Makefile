@@ -1,11 +1,10 @@
-# $NetBSD: Makefile,v 1.70 2010/04/15 09:57:47 tron Exp $
+# $NetBSD: Makefile,v 1.73 2011/08/25 07:20:44 tron Exp $
 
-DISTNAME=		stunnel-4.33
+DISTNAME=		stunnel-4.42
 CATEGORIES=		security
-MASTER_SITES=		ftp://stunnel.mirt.net/stunnel/ \
-			http://www.stunnel.org/download/stunnel/src/
+MASTER_SITES=		ftp://ftp.stunnel.org/stunnel/
 
-MAINTAINER=		shaun@inerd.com
+MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://www.stunnel.org/
 COMMENT=		Universal SSL tunnel
 LICENSE=		gnu-gpl-v2

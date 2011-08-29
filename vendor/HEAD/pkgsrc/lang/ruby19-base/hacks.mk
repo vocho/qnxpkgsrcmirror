@@ -1,4 +1,4 @@
-# $NetBSD: hacks.mk,v 1.1.1.1 2010/09/12 03:50:06 taca Exp $
+# $NetBSD: hacks.mk,v 1.3 2011/08/20 13:51:29 taca Exp $
 
 .if !defined(RUBY19_BASE_HACKS_MK)
 RUBY19_BASE_HACKS_MK=	defined

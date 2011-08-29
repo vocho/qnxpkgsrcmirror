@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.181 2011/04/15 16:18:02 drochner Exp $
+# $NetBSD: Makefile,v 1.183 2011/07/13 23:43:02 jmcneill Exp $
 #
 
 COMMENT=	Multimedia utilities
@@ -17,6 +17,7 @@ SUBDIR+=	clutter08-gst
 SUBDIR+=	dirac
 SUBDIR+=	divxplayer
 SUBDIR+=	dumpmpeg
+SUBDIR+=	dvb-apps
 SUBDIR+=	dvd-slideshow
 SUBDIR+=	dvdauthor
 SUBDIR+=	dvdbackup
@@ -69,6 +70,7 @@ SUBDIR+=	kdemultimedia4
 SUBDIR+=	kdenlive
 SUBDIR+=	kmplayer
 SUBDIR+=	kmplayer-kde3
+SUBDIR+=	libass
 SUBDIR+=	libassetml
 SUBDIR+=	libdv
 SUBDIR+=	libdv-tools

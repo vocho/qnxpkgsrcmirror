@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.100 2011/04/27 16:56:43 tnn Exp $
+# $NetBSD: Makefile,v 1.103 2011/08/22 15:14:58 wiz Exp $
 
-DISTNAME=	gnutls-2.12.3
-PKGREVISION=	1
+DISTNAME=	gnutls-2.12.9
 CATEGORIES=	security devel
 MASTER_SITES=	ftp://ftp.gnutls.org/pub/gnutls/ \
 		ftp://ftp.gnupg.org/gcrypt/gnutls/ \
@@ -19,13 +18,16 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 USE_LANGUAGES=		c c++
 USE_LIBTOOL=		yes
 USE_PKGLOCALEDIR=	yes
-USE_TOOLS+=		gmake
+USE_TOOLS+=		gmake perl
 GNU_CONFIGURE=		yes
+CONFIGURE_ARGS+=	--without-p11-kit
+# this library duplicates (and conflicts with) openssl
+CONFIGURE_ARGS+=	--disable-openssl-compatibility
+
 TEST_TARGET=		check
 INFO_FILES=		yes
 
-# this library duplicates (and conflicts with) openssl
-CONFIGURE_ARGS+=	--disable-openssl-compatibility
+REPLACE_PERL+=	doc/scripts/gdoc doc/scripts/sort2.pl
 
 PKGCONFIG_OVERRIDE=	lib/gnutls.pc.in
 PKGCONFIG_OVERRIDE+=	libextra/gnutls-extra.pc.in
@@ -50,8 +52,6 @@ post-install:
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../devel/libcfg+/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"
-BUILDLINK_API_DEPENDS.libgcrypt+=	libgcrypt>=1.4
-.include "../../security/libgcrypt/buildlink3.mk"
 BUILDLINK_API_DEPENDS.libtasn1+=	libtasn1>=0.3.4
 .include "../../security/libtasn1/buildlink3.mk"
 .include "../../security/nettle/buildlink3.mk"

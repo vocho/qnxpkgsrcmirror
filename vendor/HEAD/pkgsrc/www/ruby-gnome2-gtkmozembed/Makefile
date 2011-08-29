@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.20 2011/06/12 11:43:34 obache Exp $
+# $NetBSD: Makefile,v 1.23 2011/08/20 13:44:01 tnn Exp $
 #
 
 PKGNAME=		${RUBY_PKGPREFIX}-gnome2-gtkmozembed-${VERSION}
+PKGREVISION=		1
 COMMENT=		Ruby binding of gtkmozembed
 CATEGORIES=		www
 
@@ -23,7 +24,7 @@ BUILDLINK_DEPMETHOD.ruby-gnome2-glib=	build
 .include "../../devel/ruby-gnome2-glib/buildlink3.mk"
 BUILDLINK_API_DEPENDS.ruby-gnome2-pango+=	${RUBY_PKGPREFIX}-gnome2-pango>=${VERSION}
 .include "../../devel/ruby-gnome2-pango/buildlink3.mk"
-.include "../../devel/xulrunner/buildlink3.mk"
+.include "../../devel/xulrunner192/buildlink3.mk"
 .include "../../x11/gtk2/buildlink3.mk"
 .include "../../devel/ruby-pkg-config/tool.mk"
 .include "../../meta-pkgs/ruby-gnome2/Makefile.common"

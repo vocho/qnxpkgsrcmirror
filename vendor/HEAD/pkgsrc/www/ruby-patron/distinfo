@@ -1,5 +1,5 @@
-$NetBSD: distinfo,v 1.5 2011/03/23 16:41:03 taca Exp $
+$NetBSD: distinfo,v 1.7 2011/08/25 15:49:12 taca Exp $
 
-SHA1 (patron-0.4.11.gem) = 59202039facfdaf2a24ecf18df3637c109382bf5
-RMD160 (patron-0.4.11.gem) = 12b8fc13fed815820b1208faaceaf076cc811db6
-Size (patron-0.4.11.gem) = 17920 bytes
+SHA1 (patron-0.4.15.gem) = 5e68c3ccbd8f707a43f8c6b07f723fb70309e120
+RMD160 (patron-0.4.15.gem) = 7ecdfd1b1c3024a254b62763da4273ca0e81aeef
+Size (patron-0.4.15.gem) = 19456 bytes

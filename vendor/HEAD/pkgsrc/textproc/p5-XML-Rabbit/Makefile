@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.4 2010/09/19 11:09:46 wiz Exp $
+# $NetBSD: Makefile,v 1.6 2011/08/14 15:14:19 obache Exp $
 
 DISTNAME=	XML-Rabbit-0.0.3
 PKGNAME=	p5-${DISTNAME}
+PKGREVISION=	1
 CATEGORIES=	textproc perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=XML/}
 
@@ -14,6 +15,8 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_LANGUAGES=	# empty
 PERL5_PACKLIST= auto/XML/Rabbit/.packlist
+
+REPLACE_PERL+=	bin/*
 
 DEPENDS+=	p5-Data-Visitor-[0-9]*:../../devel/p5-Data-Visitor
 DEPENDS+=	p5-Moose-[0-9]*:../../devel/p5-Moose

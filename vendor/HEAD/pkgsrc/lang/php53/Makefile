@@ -1,15 +1,14 @@
-# $NetBSD: Makefile,v 1.12 2011/06/22 09:54:35 taca Exp $
+# $NetBSD: Makefile,v 1.17 2011/08/23 22:22:27 taca Exp $
 
 #
 # We can't omit PKGNAME here to handle PKG_OPTIONS.
 #
 PKGNAME=		php-${PHP_BASE_VERS}
-PKGREVISION=		4
 CATEGORIES=		lang
 
 HOMEPAGE=		http://www.php.net/
 COMMENT=		PHP Hypertext Preprocessor version 5
-LICENSE=		php-license
+LICENSE=		php
 
 TEST_TARGET=		test
 PKG_DESTDIR_SUPPORT=	user-destdir
@@ -21,10 +20,10 @@ LIBTOOL_OVERRIDE=	# empty
 
 CGIDIR=			${PREFIX}/libexec/cgi-bin
 EGDIR=			${PREFIX}/share/examples/php
-MESSAGE_SUBST+=		CGIDIR=${CGIDIR:Q}
+MESSAGE_SUBST+=		CGIDIR=${CGIDIR}
 
 CONFIGURE_ENV+=		lt_cv_path_SED=${SED:Q}
-MAKE_ENV+=		INSTALL_ROOT=${DESTDIR:Q}
+MAKE_ENV+=		INSTALL_ROOT=${DESTDIR}
 
 CONF_FILES=		${EGDIR}/php.ini-production ${PKG_SYSCONFDIR}/php.ini
 OWN_DIRS=		${PREFIX}/${PHP_EXTENSION_DIR}
@@ -37,7 +36,7 @@ SUBST_FILES.path+=	php.ini-development php.ini-production run-tests.php
 SUBST_SED.path=		-e 's,@CGIDIR@,${CGIDIR},g'
 SUBST_SED.path+=	-e 's,@PREFIX@,${PREFIX},g'
 
-INSTALLATION_DIRS+=	${CGIDIR}
+INSTALLATION_DIRS+=	${CGIDIR} ${EGDIR} share/php
 
 # Make sure modules can link correctly
 .if ${OPSYS} == "Darwin"
@@ -49,16 +48,12 @@ post-extract:
 		${FIND} . -xdev -type f -name '*.orig' -exec ${RM} -f {} \;
 
 post-install:
-	${INSTALL_PROGRAM} ${WRKSRC}/sapi/cli/php \
-		${DESTDIR:Q}${PREFIX:Q}/bin/php
+	${INSTALL_PROGRAM} ${WRKSRC}/sapi/cli/php ${DESTDIR}${PREFIX}/bin/php
 	${INSTALL_DATA} ${WRKSRC}/sapi/cli/php.1 \
-		${DESTDIR:Q}${PREFIX:Q}/${PKGMANDIR}/man1/php.1
-	${INSTALL_PROGRAM} ${WRKSRC}/sapi/cgi/php-cgi \
-		${DESTDIR:Q}${CGIDIR:Q}/php
-	${INSTALL_DATA_DIR} ${DESTDIR:Q}${EGDIR:Q}
+		${DESTDIR}${PREFIX}/${PKGMANDIR}/man1/php.1
+	${INSTALL_PROGRAM} ${WRKSRC}/sapi/cgi/php-cgi ${DESTDIR}${CGIDIR}/php
 	cd ${WRKSRC}; ${INSTALL_DATA} php.ini-development php.ini-production \
-		${DESTDIR:Q}${EGDIR:Q}
-	${INSTALL_DATA_DIR} ${DESTDIR:Q}${PREFIX:Q}/share/php
-	${INSTALL_DATA} ${WRKSRC}/php.gif ${DESTDIR:Q}${PREFIX:Q}/share/php
+		${DESTDIR}${EGDIR}
+	${INSTALL_DATA} ${WRKSRC}/php.gif ${DESTDIR}${PREFIX}/share/php
 
 .include "../../mk/bsd.pkg.mk"
