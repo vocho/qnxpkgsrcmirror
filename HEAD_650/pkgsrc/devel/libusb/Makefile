@@ -18,10 +18,15 @@ USE_LIBTOOL=		yes
 GNU_CONFIGURE=		yes
 CONFIGURE_ARGS+=	--disable-build-docs
 PKGCONFIG_OVERRIDE+=	libusb.pc.in
+USE_TOOLS+=		autoconf aclocal
 
 ONLY_FOR_PLATFORM=	Darwin-*-* FreeBSD-*-* Linux-*-* NetBSD-*-*
 ONLY_FOR_PLATFORM+=	OpenBSD-*-* DragonFly-*-* QNX-6.*-*
 
 TEST_TARGET=		check
+
+#	cd ${WRKSRC} && aclocal && automake -a --foreign -i && autoconf
+pre-configure:
+	cd ${WRKSRC} && aclocal && automake && autoconf
 
 .include "../../mk/bsd.pkg.mk"
