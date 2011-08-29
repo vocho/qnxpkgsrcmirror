@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.521 2011/06/19 07:36:56 taca Exp $
+# $NetBSD: Makefile,v 1.524 2011/07/29 15:15:45 bouyer Exp $
 #
 
 COMMENT=	System utilities
@@ -236,6 +236,7 @@ SUBDIR+=	libnotify
 SUBDIR+=	libol
 SUBDIR+=	liboobs
 SUBDIR+=	libpciaccess
+SUBDIR+=	libvirt
 SUBDIR+=	lilo
 SUBDIR+=	logfinder
 SUBDIR+=	logrot
@@ -300,6 +301,7 @@ SUBDIR+=	p5-Sys-Filesystem
 SUBDIR+=	p5-Sys-Hostname-Long
 SUBDIR+=	p5-Sys-SigAction
 SUBDIR+=	p5-Sys-Utmp
+SUBDIR+=	p5-UPS-Nut
 SUBDIR+=	p5-Unix-ConfigFile
 SUBDIR+=	p5-Unix-Syslog
 SUBDIR+=	pciutils
@@ -453,6 +455,7 @@ SUBDIR+=	wtail
 SUBDIR+=	xapply
 SUBDIR+=	xbatt
 SUBDIR+=	xbattbar
+SUBDIR+=	xc3028l-firmware
 SUBDIR+=	xc5k-firmware
 SUBDIR+=	xcdroast
 SUBDIR+=	xdu

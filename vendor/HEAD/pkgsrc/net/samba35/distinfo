@@ -1,8 +1,9 @@
-$NetBSD: distinfo,v 1.4 2011/06/15 11:45:08 adam Exp $
+$NetBSD: distinfo,v 1.7 2011/08/05 09:51:45 adam Exp $
 
-SHA1 (samba-3.5.9.tar.gz) = 77da3dff05032950fa1943057182d16894591a05
-RMD160 (samba-3.5.9.tar.gz) = c48b3d0ecf0b4cde2764cebdde5f8513320cd966
-Size (samba-3.5.9.tar.gz) = 30750297 bytes
+SHA1 (samba-3.5.11.tar.gz) = 0801871ab6a11f7d8eb8bf32ff0b87896d263441
+RMD160 (samba-3.5.11.tar.gz) = b3ee1e044e9df417b0dcaf954a6a137db742cba3
+Size (samba-3.5.11.tar.gz) = 30752782 bytes
+SHA1 (patch-aa) = 6c8497adce78e8b1dea2a0402d4a980b67b57b8e
 SHA1 (patch-ab) = 0372ff2e3caca866dacd6ed25ae1d02e34a5b567
 SHA1 (patch-ac) = 5b1c0fdb781cb75f81af71ed2695144d4a35e032
 SHA1 (patch-ad) = 447aaf4ea4cc98f0ccd5a3a22e1ffec0e69a3971

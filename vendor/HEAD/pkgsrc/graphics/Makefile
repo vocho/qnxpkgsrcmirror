@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.604 2011/06/19 07:29:48 taca Exp $
+# $NetBSD: Makefile,v 1.611 2011/08/19 06:11:02 wiz Exp $
 #
 
 COMMENT=	Graphics tools and libraries
@@ -60,6 +60,7 @@ SUBDIR+=	comix
 SUBDIR+=	compface
 SUBDIR+=	cpia2view
 SUBDIR+=	cqcam
+SUBDIR+=	darktable
 SUBDIR+=	dcraw
 SUBDIR+=	denemo
 SUBDIR+=	dia
@@ -175,6 +176,7 @@ SUBDIR+=	gnuplot
 SUBDIR+=	gocr
 SUBDIR+=	goocanvas
 SUBDIR+=	goocanvasmm
+SUBDIR+=	gource
 SUBDIR+=	gphoto2
 SUBDIR+=	gqview
 SUBDIR+=	gqview-devel
@@ -228,6 +230,7 @@ SUBDIR+=	kphotoalbum
 SUBDIR+=	kphotobook
 SUBDIR+=	kphotools
 SUBDIR+=	lcms
+SUBDIR+=	lcms2
 SUBDIR+=	lensfun
 SUBDIR+=	lib3ds
 SUBDIR+=	libart
@@ -341,7 +344,9 @@ SUBDIR+=	ps2eps
 SUBDIR+=	pstoedit
 SUBDIR+=	py-OpenGL
 SUBDIR+=	py-aafigure
+SUBDIR+=	py-actdiag
 SUBDIR+=	py-biggles
+SUBDIR+=	py-blockdiag
 SUBDIR+=	py-cairo
 SUBDIR+=	py-clutter
 SUBDIR+=	py-clutter-gtk
@@ -355,8 +360,10 @@ SUBDIR+=	py-imagingtk
 SUBDIR+=	py-matplotlib
 SUBDIR+=	py-matplotlib-gtk2
 SUBDIR+=	py-matplotlib-tk
+SUBDIR+=	py-nwdiag
 SUBDIR+=	py-piddle
 SUBDIR+=	py-pyfits
+SUBDIR+=	py-seqdiag
 SUBDIR+=	py-sk1libs
 SUBDIR+=	py-uniconvertor
 SUBDIR+=	qimageblitz

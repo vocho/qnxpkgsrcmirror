@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.31 2011/04/08 22:37:24 morr Exp $
+# $NetBSD: Makefile,v 1.33 2011/08/14 14:14:40 obache Exp $
 #
 
-DISTNAME=		nagios-3.2.3
+DISTNAME=		nagios-3.3.1
 PKGNAME=		${DISTNAME:S/-/-base-/}
+PKGREVISION=		1
 CATEGORIES=		net sysutils
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=nagios/}
 
@@ -74,6 +75,9 @@ SUBST_STAGE.files=	post-build
 SUBST_FILES.files=	nagios.conf.dist
 SUBST_SED.files=	-e "s|@PREFIX@|${PREFIX}|g"
 SUBST_MESSAGE.files=	Fixing configuration files.
+
+post-extract:
+	${MV} ${WRKDIR}/nagios ${WRKSRC}
 
 pre-build:
 	${CP} ${FILESDIR}/nagios.conf.dist ${WRKSRC}/nagios.conf.dist

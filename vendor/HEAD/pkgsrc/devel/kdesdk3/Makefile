@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.76 2011/06/10 21:57:06 obache Exp $
+# $NetBSD: Makefile,v 1.78 2011/07/03 02:08:08 markd Exp $
 
 DISTNAME=	kdesdk-${_KDE_VERSION}
-PKGREVISION=	13
+PKGREVISION=	15
 CATEGORIES=	devel
 COMMENT=	Support applications and tools used by KDE developers
 
@@ -13,7 +13,7 @@ CONFLICTS+=	umbrello-[0-9]*
 .include "../../meta-pkgs/kde3/Makefile.kde3"
 
 BDB_ACCEPTED=		db4 db5
-USE_TOOLS+=		lex perl:run
+USE_TOOLS+=		lex perl:run bash:run
 CONFIGURE_ARGS+=	--with-db-dir=${BDBBASE}
 CONFIGURE_ARGS+=	--with-db-include=${BDB_TYPE}/db.h
 #CONFIGURE_ARGS+=	--with-db-include-dir=${BDBBASE}/include/${BDB_TYPE}
@@ -27,12 +27,16 @@ REPLACE_PERL+=	cervisia/change_colors.pl \
 		kapptemplate/admin/bcheck.pl \
 		kapptemplate/admin/debianrules \
 		kapptemplate/admin/nmcheck \
+		kapptemplate/admin/conf.change.pl \
+		kapptemplate/admin/config.pl \
+		kapptemplate/admin/detect-autoconf.pl \
 		kcachegrind/converters/dprof2calltree \
 		kcachegrind/converters/memprof2calltree \
 		kcachegrind/converters/op2calltree \
 		scripts/authors2xml.pl \
 		scripts/check_licenses \
 		scripts/colorcvs \
+		scripts/colorsvn \
 		scripts/cvs-clean \
 		scripts/cvsblame \
 		scripts/cvscheck \
@@ -53,15 +57,39 @@ REPLACE_PERL+=	cervisia/change_colors.pl \
 		scripts/noncvslist \
 		scripts/png2mng.pl \
 		scripts/rc2kcfgxt.pl \
+		scripts/svn-clean \
+		scripts/svnlastchange \
 		kunittest/kunittest_debughelper
 
-REPLACE_INTERPRETER+=	bash
-REPLACE.bash.old=	/bin/bash
-REPLACE.bash.new=	${SH}
-REPLACE_FILES.bash=	scripts/cvs2dist scripts/makeobj \
+REPLACE_BASH+=	scripts/cvs2dist \
+		scripts/create_makefile \
+		scripts/kde-build \
+		scripts/makeobj \
 		scripts/package_crystalsvg \
+		scripts/svn2dist \
+		scripts/svnversions \
 		kunittest/kunittest \
-		kunittest/kunittestmod
+		kunittest/kunittestmod \
+		kapptemplate/kapptemplate.common
+
+SUBST_CLASSES+=		make
+SUBST_STAGE.make=	post-patch
+SUBST_FILES.make=	kapptemplate/Makefile.in
+SUBST_SED.make=		-e 's,/usr/bin/env bash,${BASH},'
+
+REPLACE_PYTHON+= \
+		kcachegrind/converters/hotshot2calltree \
+		scripts/kdelnk2desktop.py \
+		scripts/zonetab2pot.py
+
+# REPLACE_PHP+= kcachegrind/converters/pprof2calltree
+SUBST_CLASSES+=		php
+SUBST_MESSAGE.php=	Fixing PHP path
+SUBST_STAGE.php=	post-configure
+SUBST_FILES.php=	kcachegrind/converters/pprof2calltree
+SUBST_SED.php=		-e 's,/usr/bin/env php,${PREFIX}/bin/php,'
+
+CHECK_INTERPRETER_SKIP+=	share/kde/apps/umbrello/headings/*
 
 .include "../../mk/bsd.prefs.mk"
 
@@ -83,6 +111,7 @@ post-install:
 
 .include "../../devel/libltdl/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
+.include "../../lang/python/application.mk"
 .include "../../x11/kdebase3/buildlink3.mk"
 .include "../../x11/kdelibs3/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"

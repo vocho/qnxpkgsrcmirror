@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.124 2011/06/10 09:40:03 obache Exp $
+# $NetBSD: Makefile,v 1.126 2011/07/21 13:06:06 obache Exp $
 #
 
 DISTNAME=		gnome-session-2.26.2
-PKGREVISION=		9
+PKGREVISION=		10
 CATEGORIES=		x11 gnome
 MASTER_SITES=		${MASTER_SITE_GNOME:=sources/gnome-session/2.26/}
 SITES.gnome-splash-2.16.0.png=	${MASTER_SITE_LOCAL:=gnome-splash/}
@@ -55,7 +55,6 @@ BUILDLINK_API_DEPENDS.glib2+=	glib2>=2.16.0
 .include "../../sysutils/dbus/buildlink3.mk"
 BUILDLINK_API_DEPENDS.dbus-glib+=	dbus-glib>=0.76
 .include "../../sysutils/dbus-glib/buildlink3.mk"
-.include "../../sysutils/libnotify/buildlink3.mk"
 .include "../../sysutils/gnome-settings-daemon/buildlink3.mk"
 BUILDLINK_DEPMETHOD.libxslt?=	build
 .include "../../textproc/libxslt/buildlink3.mk"

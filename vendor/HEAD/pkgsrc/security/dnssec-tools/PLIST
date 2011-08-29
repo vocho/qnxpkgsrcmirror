@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.3 2010/07/25 19:57:25 pettai Exp $
+@comment $NetBSD: PLIST,v 1.5 2011/08/19 12:16:33 obache Exp $
 bin/getaddr
 bin/gethost
 bin/getname
@@ -9,6 +9,8 @@ bin/libval_check_conf
 bin/validate
 include/validator/resolver.h
 include/validator/val_errors.h
+include/validator/validator-compat.h
+include/validator/validator-config.h
 include/validator/validator.h
 lib/libsres.la
 lib/libval-threads.la

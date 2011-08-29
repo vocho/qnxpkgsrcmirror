@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.95 2011/04/22 13:44:13 obache Exp $
+# $NetBSD: Makefile,v 1.99 2011/08/20 13:10:25 tnn Exp $
 #
 
 DISTNAME=		yelp-2.30.2
-PKGREVISION=		2
+PKGREVISION=		6
 CATEGORIES=		misc gnome
 MASTER_SITES=		${MASTER_SITE_GNOME:=sources/yelp/2.30/}
 EXTRACT_SUFX=		.tar.bz2
@@ -38,7 +38,7 @@ BUILDLINK_DEPMETHOD.libXt?=	build
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../devel/glib2/buildlink3.mk"
 .include "../../devel/pango/buildlink3.mk"
-.include "../../devel/xulrunner/buildlink3.mk"
+.include "../../devel/xulrunner192/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../net/ORBit2/buildlink3.mk"

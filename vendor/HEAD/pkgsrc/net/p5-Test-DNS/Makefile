@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.3 2010/08/21 16:35:32 seb Exp $
+# $NetBSD: Makefile,v 1.5 2011/08/16 09:40:46 obache Exp $
 #
 
 DISTNAME=	Test-DNS-0.08
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	net perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Test/}
 
@@ -18,7 +18,6 @@ PERL5_MODULE_TYPE=	Module::Build
 USE_LANGUAGES=		# empty
 PERL5_PACKLIST=		auto/Test/DNS/.packlist
 
-BUILD_DEPENDS+=	{perl>=5.11.4,p5-Module-Build>=0.3601}:../../devel/p5-Module-Build
 BUILD_DEPENDS+=	p5-Test-Deep-[0-9]*:../../devel/p5-Test-Deep
 DEPENDS+=	p5-Moose>=0.8:../../devel/p5-Moose
 DEPENDS+=	p5-Net-DNS>=0:../../net/p5-Net-DNS
