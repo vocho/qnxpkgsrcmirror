@@ -86,7 +86,7 @@ post-build:
 	  ${ECHO} "Cflags: -I${PREFIX}/include/nspr";		\
 	  ${ECHO} "Libs: -L${PREFIX}/lib/nspr"			\
 	    "${COMPILER_RPATH_FLAG}${PREFIX}/lib/nspr"		\
-	    "-lplds4 -lplc4 -lnspr4 -pthread"			\
+	    "-lplds4 -lplc4 -lnspr4 "${BUILDLINK_LIBS.pthread:Q};	\
 	) > ${WRKDIR}/nspr.pc
 
 INSTALLATION_DIRS+=	lib/pkgconfig
