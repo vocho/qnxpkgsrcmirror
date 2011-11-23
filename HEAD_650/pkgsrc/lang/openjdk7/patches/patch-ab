@@ -1,26 +1,14 @@
-$NetBSD: patch-ab,v 1.2 2009/10/18 10:21:01 tnn Exp $
+$NetBSD: patch-ab,v 1.3 2011/08/21 22:57:55 tnn Exp $
 
---- jdk/make/common/shared/Sanity.gmk.orig	2010-02-28 16:48:42.000000000 +0000
+--- jdk/make/common/shared/Sanity.gmk.orig	2011-08-11 12:31:36.000000000 +0000
 +++ jdk/make/common/shared/Sanity.gmk
-@@ -147,6 +147,11 @@ ifeq ($(PLATFORM), bsd)
-   TEMP_FREE_SPACE := $(shell BLOCKSIZE=512 $(DF) $(TEMP_DISK) | $(TAIL) -1 | $(NAWK) '{print $$2;}')
- endif
- 
-+ifeq ($(PLATFORM), qnx)
-+  FREE_SPACE := $(shell BLOCKSIZE=512 $(DF) $(OUTPUTDIR) | $(TAIL) -1 | $(NAWK) '{print $$4;}')
-+  TEMP_FREE_SPACE := $(shell BLOCKSIZE=512 $(DF) $(TEMP_DISK) | $(TAIL) -1 | $(NAWK) '{print $$4;}')
-+endif
-+
- # Get the version numbers of what we are using
- _MAKE_VER  :=$(shell $(MAKE) --version 2>&1 | $(HEAD) -n 1)
- _ZIP_VER   :=$(shell $(ZIPEXE) -help 2>&1 | $(HEAD) -n 4 | $(EGREP) '^Zip')
-@@ -837,7 +842,8 @@ $(TEMPDIR)/freetypeinfo: FRC
+@@ -809,7 +809,8 @@ ifdef OPENJDK
  	@(($(CD) $(BUILDDIR)/tools/freetypecheck && $(MAKE)) || \
  	    $(ECHO) "Failed to build freetypecheck." ) > $@
  
--sane-freetype: $(TEMPDIR)/freetypeinfo
-+sane-freetype:
-+sane-freetype_: $(TEMPDIR)/freetypeinfo
+-    sane-freetype: $(TEMPDIR)/freetypeinfo
++    sane-freetype:
++    sane-freetype_: $(TEMPDIR)/freetypeinfo
  	@if [ "`$(CAT) $< | $(GREP) Fail`" != "" ]; then \
  	  $(ECHO) "ERROR: FreeType version " $(REQUIRED_FREETYPE_VERSION) \
  	          " or higher is required. \n" \

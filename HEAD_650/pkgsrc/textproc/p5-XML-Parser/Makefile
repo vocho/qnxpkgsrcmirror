@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.34 2010/09/19 11:07:11 wiz Exp $
+# $NetBSD: Makefile,v 1.36 2011/08/21 11:03:07 obache Exp $
 #
 
-DISTNAME=	XML-Parser-2.40
+DISTNAME=	XML-Parser-2.41
 PKGNAME=	p5-${DISTNAME}
 SVR4_PKGNAME=	p5xpa
 CATEGORIES=	textproc perl5

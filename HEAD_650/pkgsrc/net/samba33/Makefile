@@ -1,9 +1,8 @@
-# $NetBSD: Makefile,v 1.14 2011/04/22 13:44:27 obache Exp $
+# $NetBSD: Makefile,v 1.15 2011/07/27 00:53:37 taca Exp $
 
 .include "../../net/samba/Makefile.mirrors"
 
 DISTNAME=		samba-${VERSION}
-PKGREVISION=		1
 CATEGORIES=		net
 MASTER_SITES=		${SAMBA_MIRRORS:=old-versions/}
 
@@ -12,7 +11,7 @@ HOMEPAGE=		http://www.samba.org/
 COMMENT=		SMB/CIFS protocol server suite
 LICENSE=		gnu-gpl-v3
 
-VERSION=		3.3.15
+VERSION=		3.3.16
 CONFLICTS+=		ja-samba-[0-9]* pam-smbpass-[0-9]* tdb-[0-9]*	\
 			winbind-[0-9]*
 MAKE_JOBS_SAFE=		NO
@@ -72,6 +71,7 @@ CONFIGURE_ARGS+=	--with-readline=${BUILDLINK_PREFIX.readline}
 
 .include "../../net/samba/options.mk"
 
+CFLAGS.QNX+=	-D__NO_EXT_QNX
 # Only Linux supports mount.cifs for mounting a CIFS share into the
 # filesystem.
 #

@@ -168,7 +168,6 @@ CONFIGURE_ARGS+=	--with-idn=no
 .if !empty(PKG_OPTIONS:Mdebug)
 CONFIGURE_ARGS+=	--enable-debug
 CFLAGS+= -g
-LDFLAGS+= -g
 .endif
 
 ###

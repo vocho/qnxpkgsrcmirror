@@ -1,8 +1,8 @@
-$NetBSD: patch-aa,v 1.5 2011/04/26 14:16:36 tnn Exp $
+$NetBSD: patch-aa,v 1.7 2011/10/03 12:37:24 tnn Exp $
 
---- configure.in.orig	2011-04-14 05:28:22.000000000 +0000
+--- configure.in.orig	2011-09-22 20:20:19.000000000 +0000
 +++ configure.in
-@@ -1457,7 +1457,7 @@ QNX)
+@@ -1433,7 +1433,7 @@ QNX)
          OS_RELEASE=`uname -v | sed 's/^\([0-9]\)\([0-9]*\)$/\1.\2/'`
          changequote([,])
      fi
@@ -11,7 +11,7 @@ $NetBSD: patch-aa,v 1.5 2011/04/26 14:16:36 tnn Exp $
      ;;
  SCO_SV)
      OS_ARCH=SCOOS
-@@ -2160,7 +2160,7 @@ case "$target" in
+@@ -2090,7 +2090,7 @@ case "$target" in
      MOZ_FIX_LINK_PATHS='-Wl,-executable_path,$(LIBXUL_DIST)/bin'
      ;;
  
@@ -20,7 +20,7 @@ $NetBSD: patch-aa,v 1.5 2011/04/26 14:16:36 tnn Exp $
      if test `test -x /usr/bin/objformat && /usr/bin/objformat || echo elf` != "elf"; then
  	DLL_SUFFIX=".so.1.0"
  	DSO_LDOPTS="-shared"
-@@ -2168,6 +2168,9 @@ case "$target" in
+@@ -2098,6 +2098,9 @@ case "$target" in
      if test ! "$GNU_CC"; then
  	DSO_LDOPTS="-Bshareable $DSO_LDOPTS"
      fi
@@ -30,7 +30,7 @@ $NetBSD: patch-aa,v 1.5 2011/04/26 14:16:36 tnn Exp $
      ;; 
  
  ia64*-hpux*)
-@@ -2645,6 +2648,9 @@ ia64*-hpux*)
+@@ -2472,6 +2475,9 @@ ia64*-hpux*)
      ;;
  
  *-nto*) 
@@ -40,18 +40,20 @@ $NetBSD: patch-aa,v 1.5 2011/04/26 14:16:36 tnn Exp $
  	AC_DEFINE(NTO)	
  	AC_DEFINE(_QNX_SOURCE)
  	AC_DEFINE(_i386)
-@@ -2655,8 +2661,8 @@ ia64*-hpux*)
+@@ -2481,9 +2487,9 @@ ia64*-hpux*)
+ 	MOZ_DEBUG_FLAGS="-gstabs"
  	USE_PTHREADS=1
  	_PEDANTIC=
- 	LIBS="$LIBS -lsocket -lstdc++"
+-	LIBS="$LIBS -lsocket -lstdc++"
 -	_DEFINES_CFLAGS='-include $(DEPTH)/mozilla-config.h -DMOZILLA_CLIENT -D_POSIX_C_SOURCE=199506'
 -	_DEFINES_CXXFLAGS='-DMOZILLA_CLIENT -include $(DEPTH)/mozilla-config.h -D_POSIX_C_SOURCE=199506'
++	LIBS="$LIBS -lsocket -lstdc++ -lm"
 +	_DEFINES_CFLAGS='-Wp,-include -Wp,$(DEPTH)/mozilla-config.h -DMOZILLA_CLIENT'
 +	_DEFINES_CXXFLAGS='-DMOZILLA_CLIENT -Wp,-include -Wp,$(DEPTH)/mozilla-config.h'
  	if test "$with_x" != "yes"
  	then
  		_PLATFORM_DEFAULT_TOOLKIT="photon"
-@@ -2670,7 +2676,7 @@ ia64*-hpux*)
+@@ -2497,7 +2503,7 @@ ia64*-hpux*)
  	esac
  	case "${host_cpu}" in
  	i*86)
@@ -60,16 +62,7 @@ $NetBSD: patch-aa,v 1.5 2011/04/26 14:16:36 tnn Exp $
  	;;
  	esac
  	;;
-@@ -3370,7 +3376,7 @@ EOF
-                        rm -f conftest.{c,S}
-                        ])
-         if test "$ac_cv_have_visibility_builtin_bug" = "no" -a \
--                "$ac_cv_have_visibility_class_bug" = "no"; then
-+                "$ac_cv_have_visibility_class_bug" = "no" -a "$OS_ARCH" != "QNX"; then
-           VISIBILITY_FLAGS='-I$(DIST)/system_wrappers -include $(topsrcdir)/config/gcc_hidden.h'
-           WRAP_SYSTEM_INCLUDES=1
-           STL_FLAGS='-I$(DIST)/stl_wrappers'
-@@ -3473,6 +3479,12 @@ dnl ====================================
+@@ -3305,6 +3311,12 @@ dnl ====================================
  case $target in
  *-hpux11.*)
  	;;
@@ -82,7 +75,7 @@ $NetBSD: patch-aa,v 1.5 2011/04/26 14:16:36 tnn Exp $
  *)
  	AC_CHECK_LIB(c_r, gethostbyname_r)
  	;;
-@@ -4824,6 +4836,14 @@ if test -n "$YASM"; then
+@@ -4567,6 +4579,14 @@ if test -n "$YASM"; then
    _YASM_BUILD=`        echo ${YASM_VERSION} | $AWK -F\. '{ print $4 }'`
  fi
  
@@ -97,7 +90,20 @@ $NetBSD: patch-aa,v 1.5 2011/04/26 14:16:36 tnn Exp $
  if test -z "$SKIP_LIBRARY_CHECKS"; then
  dnl system JPEG support
  dnl ========================================================
-@@ -9527,7 +9547,8 @@ rm -f confdefs.h.save
+@@ -7406,10 +7426,10 @@ else
+   *-mingw*)
+     AC_DEFINE(MOZ_MEMORY_WINDOWS)
+     dnl This is sort of awful. Will revisit if we add support for more versions
+-    if test "$CC_VERSION" == "14.00.50727.762" -o "$CC_VERSION" == "15.00.30729.01"; then
++    if test "$CC_VERSION" = "14.00.50727.762" -o "$CC_VERSION" = "15.00.30729.01"; then
+       WIN32_OLD_STYLE_JEMALLOC=1
+       AC_DEFINE(WIN32_OLD_STYLE_JEMALLOC)
+-    elif test "$CC_VERSION" == "16.00.30319.01" -o "$CC_VERSION" == "16.00.40219.01"; then
++    elif test "$CC_VERSION" = "16.00.30319.01" -o "$CC_VERSION" = "16.00.40219.01"; then
+       WIN32_NEW_STYLE_JEMALLOC=1
+       AC_DEFINE(WIN32_NEW_STYLE_JEMALLOC)
+     else        
+@@ -9323,7 +9343,8 @@ rm -f confdefs.h.save
  mv confdefs.h confdefs.h.save
  egrep -v "$_EGREP_PATTERN" confdefs.h.save > confdefs.h
  AC_OUTPUT_MAKE_DEFS()
@@ -107,9 +113,9 @@ $NetBSD: patch-aa,v 1.5 2011/04/26 14:16:36 tnn Exp $
  AC_SUBST(MOZ_DEFINES)
  rm -f confdefs.h
  mv confdefs.h.save confdefs.h
-@@ -9640,6 +9661,8 @@ if test -z "$MOZ_NATIVE_NSPR"; then
+@@ -9435,6 +9456,8 @@ if test -z "$MOZ_NATIVE_NSPR"; then
      AC_MSG_WARN([Recreating autoconf.mk with updated nspr-config output])
-     if test "$OS_ARCH" != "WINNT" -a "$OS_ARCH" != "WINCE"; then
+     if test "$OS_ARCH" != "WINNT"; then
         NSPR_LIBS=`./nsprpub/config/nspr-config --prefix=$LIBXUL_DIST --exec-prefix=$MOZ_BUILD_ROOT/dist --libdir=$LIBXUL_DIST/lib --libs`
 +       AC_MSG_WARN([pkgsrc: adding run path to NSPR_LIBS for bundled NSPR.])
 +       NSPR_LIBS="-Wl,-R${prefix}/lib/\${MOZILLA_PKG_NAME} ${NSPR_LIBS}"

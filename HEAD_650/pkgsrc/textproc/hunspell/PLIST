@@ -36,4 +36,4 @@ man/man1/hunzip.1
 man/man1/hzip.1
 man/man3/hunspell.3
 man/man4/hunspell.4
-share/locale/hu/LC_MESSAGES/hunspell.mo
+${PLIST.langinfo}share/locale/hu/LC_MESSAGES/hunspell.mo

@@ -1,8 +1,10 @@
-# $NetBSD: Makefile,v 1.69 2011/03/29 13:45:01 adam Exp $
+# $NetBSD: Makefile,v 1.72 2011/08/08 07:31:52 obache Exp $
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 .include "Makefile.common"
+
+PKGREVISION=		3
 
 CONFIGURE_ARGS+=	-no-tk
 CONFIGURE_ARGS+=	-cc ${CC}
@@ -19,7 +21,7 @@ UNLIMIT_RESOURCES=	stacksize
 # Stub libraries for functions missing from base system.
 .if !empty(MACHINE_PLATFORM:MDarwin-*-powerpc) || \
     !empty(MACHINE_PLATFORM:MDarwin-9.*-i386) || \
-    !empty(MACHINE_PLATFORM:MDarwin-10.*-x86_64) || \
+    !empty(MACHINE_PLATFORM:MDarwin-1[0-9].*-x86_64) || \
     ${OPSYS} == "DragonFly" || ${OPSYS} == "NetBSD" || \
     ${OPSYS} == "FreeBSD" || ${OPSYS} == "SunOS" || \
     ${OPSYS} == "Linux"
@@ -43,9 +45,12 @@ PLIST_SRC+=	${PKGDIR}/PLIST.prof
 .  endif
 .endif
 
+# XXX This conditional is not complete.  It should match the
+# conditional in ocaml-x.y.z/configure.
 .if (${MACHINE_ARCH} == "i386") || (${MACHINE_ARCH} == "x86_64")
 .  if !empty(MACHINE_PLATFORM:MLinux-*-*) || \
-      !empty(MACHINE_PLATFORM:MFreeBSD-*-*)
+      !empty(MACHINE_PLATFORM:MFreeBSD-*-*) || \
+      !empty(MACHINE_PLATFORM:MNetBSD-*-*)
 PLIST_SRC+=	${PKGDIR}/PLIST.natdynlink
 .  endif
 .endif

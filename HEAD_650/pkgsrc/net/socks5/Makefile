@@ -43,7 +43,6 @@ CONFIGURE_ARGS+=	--with-libconffile=${PREFIX}/etc/libsocks5.conf \
 			--with-srvpidfile=/var/run/socks5.pid \
 			--with-srvidtfile=/var/run/socks5.ident \
 			${EXTRA_CONFIGURE_ARGS}
-LIBS+=			-lcrypt
 RCD_SCRIPTS=		socks5
 
 EXAMPLE_FILES=	README multiple_server.example server_2_multiple_server.example
@@ -69,5 +68,11 @@ post-install:
 .for f in ${EXAMPLE_FILES}
 	${INSTALL_DATA} ${WRKSRC}/examples/${f} ${DESTDIR}${EXAMPLE_DIR}
 .endfor
+
+.include "../../mk/bsd.prefs.mk"
+
+.if ${OPSYS} != "QNX"
+LIBS+=			-lcrypt
+.endif
 
 .include "../../mk/bsd.pkg.mk"

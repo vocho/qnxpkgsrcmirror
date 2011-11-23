@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.48 2010/12/27 15:07:52 adam Exp $
+# $NetBSD: Makefile,v 1.52 2011/07/31 20:05:58 gls Exp $
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 PKGREVISION=	1
@@ -59,9 +59,9 @@ CONF_FILES+=	${EGDIR}/${f} ${PKG_SYSCONFDIR}/sane.d/${f}
 .endfor
 
 .if (${OPSYS} == "Linux")
-.for f in qcam.conf v4l.conf
+.  for f in qcam.conf v4l.conf
 CONF_FILES+=	${EGDIR}/${f} ${PKG_SYSCONFDIR}/sane.d/${f}
-.endfor
+.  endfor
 .endif
 
 .include "options.mk"

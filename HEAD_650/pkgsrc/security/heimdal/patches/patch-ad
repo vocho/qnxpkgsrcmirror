@@ -1,18 +1,27 @@
-$NetBSD: patch-ad,v 1.9 2008/02/28 08:14:41 jlam Exp $
+$NetBSD: patch-ad,v 1.10 2011/07/08 09:49:22 adam Exp $
 
---- configure.orig	2008-01-24 13:14:11.000000000 +0000
+--- configure.orig	2010-09-13 07:24:11.000000000 +0000
 +++ configure
-@@ -3928,9 +3928,6 @@ ac_compiler_gnu=$ac_cv_c_compiler_gnu
+@@ -8828,7 +8828,7 @@ if test -z "$aix_libpath"; then aix_libp
+       ;;
  
+     # FreeBSD 3 and greater uses gcc -shared to do shared libraries.
+-    freebsd* | dragonfly*)
++    freebsd* | dragonfly* | nto-qnx*)
+       archive_cmds='$CC -shared -o $lib $libobjs $deplibs $compiler_flags'
+       hardcode_libdir_flag_spec='-R$libdir'
+       hardcode_direct=yes
+@@ -8967,9 +8967,6 @@ rm -f core conftest.err conftest.$ac_obj
+       hardcode_shlibpath_var=no
+       ;;
  
- 
--test "$sysconfdir" = '${prefix}/etc' && sysconfdir='/etc'
--test "$localstatedir" = '${prefix}/var' && localstatedir='/var/heimdal'
+-    *nto* | *qnx*)
+-      ;;
 -
- # Make sure we can run config.sub.
- $SHELL "$ac_aux_dir/config.sub" sun4 >/dev/null 2>&1 ||
-   { { echo "$as_me:$LINENO: error: cannot run $SHELL $ac_aux_dir/config.sub" >&5
-@@ -4902,7 +4899,11 @@ fi #if test -n "$GCC"; then
+     openbsd*)
+       if test -f /usr/libexec/ld.so; then
+ 	hardcode_direct=yes
+@@ -11779,7 +11776,11 @@ fi #if test -n "$GCC"; then
  esac
  
  CC="$CC $abi"
@@ -24,33 +33,4 @@ $NetBSD: patch-ad,v 1.9 2008/02/28 08:14:41 jlam Exp $
 +#libdir="$libdir$abilibdirext"
  
  
- { echo "$as_me:$LINENO: checking for __attribute__" >&5
-@@ -12162,7 +12163,7 @@ if test -z "$aix_libpath"; then aix_libp
-   freebsd-elf*)
-     archive_cmds_need_lc_CXX=no
-     ;;
--  freebsd* | kfreebsd*-gnu | dragonfly*)
-+  freebsd* | kfreebsd*-gnu | dragonfly* | nto-qnx6*)
-     # FreeBSD 3 and later use GNU C++ and GNU ld with standard ELF
-     # conventions
-     ld_shlibs_CXX=yes
-@@ -29714,6 +29715,9 @@ _ACEOF
- cat confdefs.h >>conftest.$ac_ext
- cat >>conftest.$ac_ext <<_ACEOF
- /* end confdefs.h.  */
-+#ifdef HAVE_SYS_TYPES_H
-+#include <sys/types.h>
-+#endif
- #ifdef HAVE_SYS_BSWAP_H
- #include <sys/bswap.h>
- #endif
-@@ -29925,6 +29929,9 @@ _ACEOF
- cat confdefs.h >>conftest.$ac_ext
- cat >>conftest.$ac_ext <<_ACEOF
- /* end confdefs.h.  */
-+#ifdef HAVE_SYS_TYPES_H
-+#include <sys/types.h>
-+#endif
- #ifdef HAVE_SYS_BSWAP_H
- #include <sys/bswap.h>
- #endif
+ { $as_echo "$as_me:${as_lineno-$LINENO}: checking for __attribute__" >&5

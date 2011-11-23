@@ -1,10 +1,7 @@
-# $NetBSD: Makefile,v 1.12 2010/08/21 16:35:53 seb Exp $
+# $NetBSD: Makefile,v 1.15 2011/08/18 12:57:44 joerg Exp $
 
-# XXX when updating, use 3-digit minor version instead of splitting and
-#     adjust dependend packages (e.g. textproc/p5-Lingua-EN-Inflect-Phrase)
-DISTNAME=	Lingua-EN-Inflect-1.892
-PKGNAME=	p5-${DISTNAME:S/892/89.2/}
-PKGREVISION=	1
+DISTNAME=	Lingua-EN-Inflect-1.893
+PKGNAME=	p5-${DISTNAME}
 SVR4_PKGNAME=	p5lei
 CATEGORIES=	textproc perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Lingua/}
@@ -17,13 +14,10 @@ LICENSE=	${PERL5_LICENSE}
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
 PKG_DESTDIR_SUPPORT=	user-destdir
 
-REPLACE_PERL+=	demo*.pl
+REPLACE_PERL+=	demo/demo*.pl
 
 PERL5_PACKLIST=	auto/Lingua/EN/Inflect/.packlist
-PERL5_MODULE_TYPE=	Module::Build
-
-post-extract:
-	${MV} ${WRKSRC}/Build.pl ${WRKSRC}/Build.PL
+#PERL5_MODULE_TYPE=	Module::Build
 
 .include "../../lang/perl5/module.mk"
 .include "../../mk/bsd.pkg.mk"
