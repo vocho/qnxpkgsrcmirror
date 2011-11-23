@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.586 2011/06/19 09:10:43 obache Exp $
+# $NetBSD: Makefile,v 1.593 2011/08/21 05:02:56 minskim Exp $
 #
 
 COMMENT=	Text processing utilities (does not include desktop publishing)
 
+SUBDIR+=	FlightCrew
 SUBDIR+=	GutenMark
 SUBDIR+=	GutenMark-words
 SUBDIR+=	Markdown
@@ -260,6 +261,7 @@ SUBDIR+=	p5-Data-FormValidator
 SUBDIR+=	p5-Data-HexDump
 SUBDIR+=	p5-Encode
 SUBDIR+=	p5-Encode-Detect
+SUBDIR+=	p5-Encode-Locale
 SUBDIR+=	p5-Feed-Find
 SUBDIR+=	p5-File-ReadBackwards
 SUBDIR+=	p5-Filter
@@ -501,6 +503,7 @@ SUBDIR+=	py-yamcha
 SUBDIR+=	py-yaml
 SUBDIR+=	qprint
 SUBDIR+=	qsubst
+SUBDIR+=	queequeg
 SUBDIR+=	raptor
 SUBDIR+=	rarian
 SUBDIR+=	rasqal
@@ -512,6 +515,7 @@ SUBDIR+=	robodoc
 SUBDIR+=	rtf-tools
 SUBDIR+=	rtfm
 SUBDIR+=	rubber
+SUBDIR+=	ruby-albino
 SUBDIR+=	ruby-amrita
 SUBDIR+=	ruby-bluecloth
 SUBDIR+=	ruby-builder
@@ -533,6 +537,7 @@ SUBDIR+=	ruby-htree
 SUBDIR+=	ruby-itex2MML
 SUBDIR+=	ruby-json
 SUBDIR+=	ruby-json-pure
+SUBDIR+=	ruby-kramdown
 SUBDIR+=	ruby-libxml
 SUBDIR+=	ruby-markaby
 SUBDIR+=	ruby-maruku
@@ -553,6 +558,7 @@ SUBDIR+=	ruby-stringex
 SUBDIR+=	ruby-suikyo
 SUBDIR+=	ruby-syntax
 SUBDIR+=	ruby-textpow
+SUBDIR+=	ruby-tilt
 SUBDIR+=	ruby-treetop
 SUBDIR+=	ruby-ultraviolet
 SUBDIR+=	ruby-will-paginate

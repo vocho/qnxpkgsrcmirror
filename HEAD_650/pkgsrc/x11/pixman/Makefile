@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.39 2011/02/28 14:53:08 wiz Exp $
-#
+# $NetBSD: Makefile,v 1.44 2011/07/13 19:25:42 tron Exp $
 
-DISTNAME=	pixman-0.20.2
+DISTNAME=	pixman-0.22.2
+PKGREVISION=	1
 CATEGORIES=	x11
 MASTER_SITES=	${MASTER_SITE_XORG:=lib/}
 EXTRACT_SUFX=	.tar.bz2
@@ -9,6 +9,7 @@ EXTRACT_SUFX=	.tar.bz2
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://xorg.freedesktop.org/
 COMMENT=	Library of low-level pixel manipulation routines
+LICENSE=	mit
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 

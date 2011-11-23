@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.187 2011/03/04 08:15:50 jnemeth Exp $
+# $NetBSD: Makefile,v 1.190 2011/08/15 09:08:32 wiz Exp $
 #
 
 COMMENT=	Emulators for other operating systems
@@ -105,6 +105,7 @@ SUBDIR+=	raine
 SUBDIR+=	simh
 SUBDIR+=	simulavr
 SUBDIR+=	ski
+SUBDIR+=	ski-bin
 SUBDIR+=	sms_sdl
 SUBDIR+=	snes9x
 SUBDIR+=	snes9x-gtk
@@ -175,6 +176,7 @@ SUBDIR+=	suse113_32_gtk2
 SUBDIR+=	suse113_32_krb5
 SUBDIR+=	suse113_32_libcups
 SUBDIR+=	suse113_32_libcurl
+SUBDIR+=	suse113_32_libdrm
 SUBDIR+=	suse113_32_libjpeg
 SUBDIR+=	suse113_32_libpng
 SUBDIR+=	suse113_32_libsigc++2
@@ -199,6 +201,7 @@ SUBDIR+=	suse113_gtk2
 SUBDIR+=	suse113_krb5
 SUBDIR+=	suse113_libcups
 SUBDIR+=	suse113_libcurl
+SUBDIR+=	suse113_libdrm
 SUBDIR+=	suse113_libjpeg
 SUBDIR+=	suse113_libpng
 SUBDIR+=	suse113_libsigc++2

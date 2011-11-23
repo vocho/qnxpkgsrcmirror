@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.14 2011/04/11 14:56:00 wiz Exp $
+# $NetBSD: Makefile,v 1.16 2011/08/06 11:36:30 wiz Exp $
 #
 
-DISTNAME=	gaupol-0.17.2
+DISTNAME=	gaupol-0.19
 CATEGORIES=	misc
-MASTER_SITES=	http://download.gna.org/gaupol/0.17/
+MASTER_SITES=	http://download.gna.org/gaupol/0.19/
 
 MAINTAINER=	wiz@NetBSD.org
 HOMEPAGE=	http://home.gna.org/gaupol/index.html

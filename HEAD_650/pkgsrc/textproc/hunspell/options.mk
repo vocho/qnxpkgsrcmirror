@@ -1,13 +1,23 @@
 # $NetBSD: options.mk,v 1.3 2009/02/08 18:25:40 ahoka Exp $
 
 PKG_OPTIONS_VAR=		PKG_OPTIONS.hunspell
-PKG_SUPPORTED_OPTIONS=		wide-curses
+PKG_SUPPORTED_OPTIONS=		wide-curses langinfo
 PKG_SUGGESTED_OPTIONS=		# empty
 PKG_LEGACY_OPTS+=		ncursesw:wide-curses
+
+PLIST_VARS+=	langinfo
 
 .include "../../mk/bsd.options.mk"
 
 USE_NCURSES=	yes
+
+.if ${OPSYS} != "QNX"
+PKG_SUGGESTED_OPTIONS+=		langinfo
+PLIST.langinfo=			yes
+.else
+CONFIGURE_ARGS+=	--disable-nls
+LIBS+=			-liconv
+.endif
 
 ###
 ### Wide curses support; otherwise, default to using narrow curses.

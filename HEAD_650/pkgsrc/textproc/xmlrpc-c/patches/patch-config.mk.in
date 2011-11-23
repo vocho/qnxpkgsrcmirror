@@ -6,7 +6,7 @@ $NetBSD$
    NEED_WL_RPATH=yes
  endif
  
-+ifeq ($(patsubst nto-qnx6%,nto-qnx6,$(HOST_OS)),nto-qnx6)
++ifeq ($(patsubst nto-qnx%,nto-qnx,$(HOST_OS)),nto-qnx)
 +  SHARED_LIB_TYPE = unix
 +  SHLIB_SUFFIX = so
 +  MUST_BUILD_SHLIB = Y

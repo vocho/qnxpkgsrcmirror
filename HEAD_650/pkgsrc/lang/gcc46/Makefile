@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.1.1.1 2011/05/15 00:09:55 wiz Exp $
+# $NetBSD: Makefile,v 1.3 2011/08/22 14:55:57 wiz Exp $
 
 DISTNAME=		gcc-${GCC_VERSION}
 PKGNAME=		gcc46-${GCC_VERSION}
+PKGREVISION=		1
 CATEGORIES=		lang
 MASTER_SITES=		${MASTER_SITE_GNU:=gcc/gcc-${GCC_VERSION}/}
 EXTRACT_SUFX=		.tar.bz2
@@ -18,9 +19,8 @@ USE_TOOLS+=		awk:run bash:run perl chmod \
 			sed:run unzip
 
 DEPENDS+=		zip-[0-9]*:../../archivers/zip
-DEPENDS+=		libiconv-[0-9]*:../../converters/libiconv
 
-GCC_VERSION=		4.6.0
+GCC_VERSION=		4.6.1
 
 GCC_SUBPREFIX=		gcc46
 GCC_PREFIX=		${PREFIX}/${GCC_SUBPREFIX}
@@ -104,7 +104,7 @@ CONFIGURE_ARGS+=	--enable-libssp
 CONFIGURE_ARGS+=	--enable-threads=posix
 CONFIGURE_ARGS+=	--with-gmp=${BUILDLINK_PREFIX.gmp}
 CONFIGURE_ARGS+=	--with-mpfr=${BUILDLINK_PREFIX.mpfr}
-CONFIGURE_ARGS+=	--with-libiconv-prefix=${PREFIX}
+CONFIGURE_ARGS+=	--with-libiconv-prefix=${BUILDLINK_PREFIX.libiconv}
 CONFIGURE_ARGS+=	--with-gxx-include-dir=${GCC_PREFIX}/include/c++/
 .if ${OPSYS} == "NetBSD"
 CONFIGURE_ARGS+=	--with-ld=${PREFIX}/bin/gnu-ld
@@ -113,6 +113,9 @@ MAKE_ENV+=		ac_cv_func_clock_gettime=yes
 .endif
 .if ${OPSYS} == "Linux"
 CONFIGURE_ARGS+=	--disable-libquadmath --disable-libquadmath-support
+.else
+.include "../../devel/binutils/buildlink3.mk"
+.include "../../devel/libelf/buildlink3.mk"
 .endif
 
 CONFIGURE_ENV+=		CONFIG_SHELL=${CONFIG_SHELL}
@@ -192,7 +195,5 @@ GENERATE_PLIST+=                                                        \
 .include "../../math/mpcomplex/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"
 .include "../../math/mpfr/buildlink3.mk"
-.include "../../devel/binutils/buildlink3.mk"
-.include "../../devel/libelf/buildlink3.mk"
 .include "../../converters/libiconv/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

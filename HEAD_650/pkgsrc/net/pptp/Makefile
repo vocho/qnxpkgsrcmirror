@@ -30,6 +30,8 @@ post-install:
 
 .include "../../mk/bsd.prefs.mk"
 
+CFLAGS.QNX+= -Du_int8_t=uint8_t -Du_int16_t=uint16_t -Du_int32_t=uint32_t -Du_int64_t=uint64_t
+
 # Not quite yet---special config for MPPE in pppd.
 .if defined(PPTP_USE_MPPE)
 DEPENDS+=	pppd>=2.4.3:../../net/ppp
@@ -44,4 +46,5 @@ SUBST_STAGE.pptp=	post-patch
 SUBST_FILES.pptp=	pptp.8
 SUBST_SED.pptp=		-e 's,/usr,${PREFIX},g'
 
+.include "../../devel/libgetopt/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

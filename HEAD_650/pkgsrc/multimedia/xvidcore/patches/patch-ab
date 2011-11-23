@@ -1,27 +1,27 @@
-$NetBSD: patch-ab,v 1.6 2010/05/21 13:06:19 obache Exp $
+$NetBSD: patch-ab,v 1.8 2011/07/19 18:56:46 drochner Exp $
 
---- configure.orig	2009-05-28 17:13:31.000000000 +0000
-+++ configure
-@@ -3802,7 +3802,7 @@ SHARED_EXTENSION=""
+--- build/generic/configure.orig	2011-05-23 10:22:01.000000000 +0000
++++ build/generic/configure
+@@ -4276,7 +4276,7 @@ SHARED_EXTENSION=""
  STATIC_EXTENSION=""
  OBJECT_EXTENSION=""
  case "$target_os" in
 -     *bsd*|linux*|beos|irix*|solaris*)
-+     *bsd*|linux*|beos|irix*|solaris*|dragonfly*|*qnx6*)
- 	echo "$as_me:$LINENO: result: .so .a .o" >&5
- echo "${ECHO_T}.so .a .o" >&6
++     *bsd*|linux*|beos|irix*|solaris*|dragonfly*|*nto-qnx*)
+ 	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: .so .a .o" >&5
+ $as_echo ".so .a .o" >&6; }
  	STATIC_EXTENSION="a"
-@@ -3853,7 +3853,7 @@ echo "${ECHO_T}ok" >&6
+@@ -4328,7 +4328,7 @@ $as_echo "ok" >&6; }
  	SPECIFIC_LDFLAGS="-Wl,-soname,libxvidcore.\$(SHARED_EXTENSION).\$(API_MAJOR) -shared -Wl,--version-script=libxvidcore.ld -lc -lm"
  	SPECIFIC_CFLAGS="-fPIC"
  	;;
 -     *bsd*|irix*)
-+     *bsd*|dragonfly*|irix*|*qnx6*)
- 	echo "$as_me:$LINENO: result: ok" >&5
- echo "${ECHO_T}ok" >&6
++     *bsd*|dragonfly*|irix*|*nto-qnx*)
+ 	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: ok" >&5
+ $as_echo "ok" >&6; }
  	STATIC_LIB="libxvidcore.\$(STATIC_EXTENSION)"
-@@ -3882,7 +3882,7 @@ echo "${ECHO_T}dylib options" >&6
- echo "${ECHO_T}module options" >&6
+@@ -4357,7 +4357,7 @@ $as_echo "dylib options" >&6; }
+ $as_echo "module options" >&6; }
   	   PRE_SHARED_LIB="libxvidcore.\$(SHARED_EXTENSION)-temp.o"
  	   SHARED_LIB="libxvidcore.\$(SHARED_EXTENSION).\$(API_MAJOR)"
 -	   SPECIFIC_LDFLAGS="-r -keep_private_externs -nostdlib && \$(CC) \$(LDFLAGS) \$(PRE_SHARED_LIB) -o libxvidcore.\$(SHARED_EXTENSION).\$(API_MAJOR) -bundle -flat_namespace -undefined suppress"
@@ -29,16 +29,16 @@ $NetBSD: patch-ab,v 1.6 2010/05/21 13:06:19 obache Exp $
  	fi
  	;;
       beos)
-@@ -4075,7 +4075,7 @@ echo "$as_me: WARNING: nasm version is t
-        echo "$as_me:$LINENO: checking for asm object format" >&5
- echo $ECHO_N "checking for asm object format... $ECHO_C" >&6
+@@ -4554,7 +4554,7 @@ $as_echo "$as_me: WARNING: nasm version 
+        { $as_echo "$as_me:${as_lineno-$LINENO}: checking for asm object format" >&5
+ $as_echo_n "checking for asm object format... " >&6; }
         case "$target_os" in
 -           *bsd*|linux*|beos|irix*|solaris*)
-+           *bsd*|linux*|beos|irix*|solaris*|dragonfly*|*qnx6*)
++           *bsd*|linux*|beos|irix*|solaris*|dragonfly*|*nto-qnx*)
                 if test "$ARCHITECTURE" = "X86_64" ; then
-                    echo "$as_me:$LINENO: result: elf64" >&5
- echo "${ECHO_T}elf64" >&6
-@@ -4108,6 +4108,13 @@ echo "${ECHO_T}macho" >&6
+                    { $as_echo "$as_me:${as_lineno-$LINENO}: result: elf64" >&5
+ $as_echo "elf64" >&6; }
+@@ -4593,6 +4593,13 @@ $as_echo "macho32" >&6; }
                 PREFIX="-DPREFIX"
                 MARK_FUNCS=""
                 ;;
@@ -52,46 +52,29 @@ $NetBSD: patch-ab,v 1.6 2010/05/21 13:06:19 obache Exp $
         esac
  
         AS="$chosen_asm_prog"
-@@ -4526,13 +4533,13 @@ echo "${ECHO_T}$ac_cv_header_pthread_h" 
+@@ -4733,13 +4740,13 @@ done
+ if test x"$pthread" = x"yes" ; then
+    ac_fn_c_check_header_mongrel "$LINENO" "pthread.h" "ac_cv_header_pthread_h" "$ac_includes_default"
+ if test "x$ac_cv_header_pthread_h" = xyes; then :
+-  { $as_echo "$as_me:${as_lineno-$LINENO}: checking for pthread_create in -lpthread" >&5
+-$as_echo_n "checking for pthread_create in -lpthread... " >&6; }
++  { $as_echo "$as_me:${as_lineno-$LINENO}: checking for pthread_create in ${PTHREAD_LIB}" >&5
++$as_echo_n "checking for pthread_create in ${PTHREAD_LIB}... " >&6; }
+ if ${ac_cv_lib_pthread_pthread_create+:} false; then :
+   $as_echo_n "(cached) " >&6
+ else
+   ac_check_lib_save_LIBS=$LIBS
+-LIBS="-lpthread  $LIBS"
++LIBS="${PTHREAD_LIB}  $LIBS"
+ cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
  
- fi
- if test $ac_cv_header_pthread_h = yes; then
--  echo "$as_me:$LINENO: checking for pthread_create in -lpthread" >&5
--echo $ECHO_N "checking for pthread_create in -lpthread... $ECHO_C" >&6
-+  echo "$as_me:$LINENO: checking for pthread_create in ${PTHREAD_LIB}" >&5
-+echo $ECHO_N "checking for pthread_create in ${PTHREAD_LIB}... $ECHO_C" >&6
- if test "${ac_cv_lib_pthread_pthread_create+set}" = set; then
-   echo $ECHO_N "(cached) $ECHO_C" >&6
- else
-   ac_check_lib_save_LIBS=$LIBS
--LIBS="-lpthread  $LIBS"
-+LIBS="${PTHREAD_LIB}  $LIBS"
- cat >conftest.$ac_ext <<_ACEOF
- /* confdefs.h.  */
- _ACEOF
-@@ -4591,13 +4598,13 @@ fi
- echo "$as_me:$LINENO: result: $ac_cv_lib_pthread_pthread_create" >&5
- echo "${ECHO_T}$ac_cv_lib_pthread_pthread_create" >&6
- if test $ac_cv_lib_pthread_pthread_create = yes; then
--  echo "$as_me:$LINENO: checking for pthread_join in -lpthread" >&5
--echo $ECHO_N "checking for pthread_join in -lpthread... $ECHO_C" >&6
-+  echo "$as_me:$LINENO: checking for pthread_join in ${PTHREAD_LIB}" >&5
-+echo $ECHO_N "checking for pthread_join in ${PTHREAD_LIB}... $ECHO_C" >&6
- if test "${ac_cv_lib_pthread_pthread_join+set}" = set; then
-   echo $ECHO_N "(cached) $ECHO_C" >&6
- else
-   ac_check_lib_save_LIBS=$LIBS
--LIBS="-lpthread  $LIBS"
-+LIBS="${PTHREAD_LIB}  $LIBS"
- cat >conftest.$ac_ext <<_ACEOF
- /* confdefs.h.  */
- _ACEOF
-@@ -4657,7 +4664,7 @@ echo "$as_me:$LINENO: result: $ac_cv_lib
- echo "${ECHO_T}$ac_cv_lib_pthread_pthread_join" >&6
- if test $ac_cv_lib_pthread_pthread_join = yes; then
+@@ -4771,7 +4778,7 @@ fi
+ $as_echo "$ac_cv_lib_pthread_pthread_create" >&6; }
+ if test "x$ac_cv_lib_pthread_pthread_create" = xyes; then :
    SPECIFIC_CFLAGS="$SPECIFIC_CFLAGS -DHAVE_PTHREAD"
--			SPECIFIC_LDFLAGS="$SPECIFIC_LDFLAGS -lpthread"
-+			SPECIFIC_LDFLAGS="$SPECIFIC_LDFLAGS ${PTHREAD_LIB}"
+-		 SPECIFIC_LDFLAGS="$SPECIFIC_LDFLAGS -lpthread"
++		 SPECIFIC_LDFLAGS="$SPECIFIC_LDFLAGS ${PTHREAD_LIB}"
  else
-   { echo "$as_me:$LINENO: WARNING: Pthread not supported. No SMP support" >&5
- echo "$as_me: WARNING: Pthread not supported. No SMP support" >&2;}
+   { $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: Pthread not supported. No SMP support" >&5
+ $as_echo "$as_me: WARNING: Pthread not supported. No SMP support" >&2;}

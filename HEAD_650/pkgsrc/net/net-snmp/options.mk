@@ -1,4 +1,4 @@
-# $NetBSD: options.mk,v 1.11 2011/05/27 10:55:24 adam Exp $
+# $NetBSD: options.mk,v 1.13 2011/06/24 09:46:10 adam Exp $
 
 PKG_OPTIONS_VAR=		PKG_OPTIONS.net-snmp
 PKG_SUPPORTED_OPTIONS=		ssl snmp-unprived snmp-nokmem perl
@@ -13,7 +13,7 @@ PKG_SUPPORTED_OPTIONS+=		inet6
 
 .include "../../mk/bsd.options.mk"
 
-PLIST_VARS+=		inet6
+PLIST_VARS+=		inet6 perl
 .if !empty(PKG_OPTIONS:Minet6)
 CONFIGURE_ARGS+=	--enable-ipv6
 PLIST.inet6=		yes
@@ -43,7 +43,7 @@ CONFIGURE_ARGS+=	--without-root-access
 # `make test TEST_TARGET=perltest'
 TEST_TARGET=		test
 
-# Enable the perl modules build and installation
+PLIST.perl=		yes
 USE_TOOLS+=		perl
 PERL5_CONFIGURE=	no
 PERL5_PACKLIST=		auto/Bundle/NetSNMP/.packlist
@@ -54,5 +54,6 @@ CONFIGURE_ENV+=		PERLPROG=${PERL5:Q}
 .else # !perl
 CONFIGURE_ARGS+=	--disable-perl-cc-checks
 CONFIGURE_ARGS+=	--with-perl-modules=no
+CONFIGURE_ENV+=		ac_cv_path_PERLPROG=""
 .endif
 CONFIGURE_ARGS+=	--disable-embedded-perl

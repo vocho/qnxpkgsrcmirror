@@ -1,6 +1,4 @@
-# $NetBSD: options.mk,v 1.46 2011/06/15 15:24:45 taca Exp $
-
-PKG_OPTIONS_VAR=	PKG_OPTIONS.contao-translations
+# $NetBSD: options.mk,v 1.48 2011/08/12 12:55:26 taca Exp $
 
 # Not yet ready for Contao 2.9: af ca gl id is no pt th tl zh
 #
@@ -25,7 +23,7 @@ CT_TRANSLATIONS.hu=	Contao-Hungarian-v11.zip	# 2011/05/02
 CT_TRANSLATIONS.id=	TYPOlight-Indonesian-v1.zip	# 2009/01/13
 CT_TRANSLATIONS.is=	TYPOlight-Icelandic-v5.zip	# 2010/02/10
 CT_TRANSLATIONS.it=	Contao-Italian-v27.zip		# 2010/03/08
-CT_TRANSLATIONS.ja=	Contao-Japanese-v61.zip		# 2011/06/13
+CT_TRANSLATIONS.ja=	Contao-Japanese-v62.zip		# 2011/06/29
 CT_TRANSLATIONS.ku=	Contao-Kurdish-v5.zip		# 2010/12/24
 CT_TRANSLATIONS.lt=	Contao-Lithuanian-v7.zip	# 2010/05/01
 CT_TRANSLATIONS.lv=	Contao-Latvian-v28.zip		# 2011/04/13
@@ -47,20 +45,4 @@ CT_TRANSLATIONS.tr=	Contao-Turkish-v14.zip		# 2011/03/24
 CT_TRANSLATIONS.uk=	Contao-Ukrainian-v15.zip	# 2011/03/09
 CT_TRANSLATIONS.zh=	TYPOlight-Chinese-v20.zip	# 2010/01/29
 
-.for l in ${CT_SUPPORTED_LANGUAGES}
-PKG_SUPPORTED_OPTIONS+=	lang-${l}
-PKG_SUGGESTED_OPTIONS+=	lang-${l}
-.endfor
-
-.include "../../mk/bsd.options.mk"
-
-.for l in ${PKG_OPTIONS:Mlang-*}
-CT_LANGUAGES+=	${l:S/^lang-//1}
-.endfor
-
-.for l in ${CT_LANGUAGES}
-CT_DISTFILES+=	${CT_TRANSLATIONS.${l}}
-SITES.${CT_TRANSLATIONS.${l}}= \
-	http://www.contao.org/download.html?iso=${l}&file=tl_files/languages/${l}/
-PLIST_SRC+=	PLIST.${l}
-.endfor
+.include "../../www/contao/options.translations.mk"

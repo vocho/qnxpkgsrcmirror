@@ -40,6 +40,8 @@ PKG_SUGGESTED_OPTIONS+=		dri
 PKG_SUGGESTED_OPTIONS+=		dri
 .endif
 
+CFLAGS=-fno-strict-aliasing -fvisibility=hidden -D__NO_EXT_QNX -O0 -g
+LDFLAGS+= -g
 CFLAGS.QNX+=-D__NO_EXT_QNX
 
 .include "../../mk/bsd.options.mk"

@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.64 2011/06/01 07:21:53 tron Exp $
+# $NetBSD: Makefile,v 1.67 2011/07/20 18:42:44 tron Exp $
 
-DISTNAME=		wireshark-1.4.7
+DISTNAME=		wireshark-1.6.1
 CATEGORIES=		net
 MASTER_SITES=		http://www.wireshark.org/download/src/ \
 			${MASTER_SITE_SOURCEFORGE:=wireshark/}
@@ -62,6 +62,7 @@ BUILDLINK_API_DEPENDS.zlib=zlib>=1.2.1
 .include "../../net/libpcap/buildlink3.mk"
 .include "../../devel/libgetopt/buildlink3.mk"
 .include "../../devel/libsmi/buildlink3.mk"
+.include "../../security/libgcrypt/buildlink3.mk"
 .include "../../security/gnutls/buildlink3.mk"
 .include "../../security/openssl/buildlink3.mk"
 

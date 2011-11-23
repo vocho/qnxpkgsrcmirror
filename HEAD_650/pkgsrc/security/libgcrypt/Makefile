@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.50 2011/04/22 13:42:47 obache Exp $
+# $NetBSD: Makefile,v 1.52 2011/07/15 20:58:56 drochner Exp $
 
-DISTNAME=	libgcrypt-1.4.6
-PKGREVISION=	2
+DISTNAME=	libgcrypt-1.5.0
 CATEGORIES=	security
 MASTER_SITES=	ftp://ftp.gnupg.org/gcrypt/libgcrypt/ \
 		http://gd.tuwien.ac.at/privacy/gnupg/libgcrypt/
@@ -34,6 +33,7 @@ INFO_FILES=		yes # PLIST
     empty(MACHINE_PLATFORM:M*-*-hppa)
 CONFIGURE_ARGS+=	--disable-asm
 .endif
+CONFIGURE_ARGS+=	--disable-aesni-support
 
 .include "options.mk"
 

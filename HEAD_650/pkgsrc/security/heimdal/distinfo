@@ -1,16 +1,12 @@
-$NetBSD: distinfo,v 1.26 2010/11/30 07:12:49 obache Exp $
+$NetBSD: distinfo,v 1.29 2011/07/31 21:21:01 gls Exp $
 
-SHA1 (heimdal-1.1.tar.gz) = 64ddb2a2c47f732b2d9bbf2621062eaffa32e10f
-RMD160 (heimdal-1.1.tar.gz) = fecda9ca4db5b11c680aa3cccd705d22f98f25b7
-Size (heimdal-1.1.tar.gz) = 3622005 bytes
-SHA1 (patch-aa) = f0c74f3711ce3b6092aa2476323f7715929e367f
-SHA1 (patch-ab) = 698a7e1d0f11fc2fe10bc17bb1020f6ac22890d3
-SHA1 (patch-ac) = d5df5fbd77d1750eef9359ceac907547175e11dd
-SHA1 (patch-ad) = cd17b7c5193a1acbcdf06b8cb2322dac9c4e589e
-SHA1 (patch-ae) = 2e01e67d716a38a152d51db53c158210afcc2bfe
-SHA1 (patch-ah) = c8ea19182402cb778ebe13447c85f935554b0dbf
-SHA1 (patch-al) = 2e92de5779abf7455d1bea79999949faa0417945
-SHA1 (patch-ar) = 05564ffaf170c13187c66e45f1f124352bfc092e
-SHA1 (patch-as) = dc314360d65b6acf1c23ffcbef23a4f750c62dab
-SHA1 (patch-at) = cdebcb4db12f336e8b2e99d73b2f797724ba3b2a
-SHA1 (patch-au) = fc90a6ee55f98170730cae404b78bc189de9d866
+SHA1 (heimdal-1.4.tar.gz) = b4c876df3637a11deea72f87a6e54f6caf501679
+RMD160 (heimdal-1.4.tar.gz) = 055288f1ab37781f1533299bdff9b0d1e264d470
+Size (heimdal-1.4.tar.gz) = 6095377 bytes
+SHA1 (patch-ad) = a3917bc9177a4c5d360601af352a8eb3b502507c
+SHA1 (patch-al) = 022d5f3723bd1db7fe5e92eea5d0106851a5d424
+SHA1 (patch-appl_telnet_telnetd_sys__term.c) = eac6ba753e1bdef8f9ca639387e13244875bdb97
+SHA1 (patch-ar) = 0a3e7bbd3cb04deb0f6772afd9a6b6b5353463d3
+SHA1 (patch-kdc_version-script.map) = 42b0417a16b19a680f30ae34cfffd082f609d4a6
+SHA1 (patch-lib_otp_Makefile.in) = 830f0e536a103478d147bb03e7752d5d38ddf03b
+SHA1 (patch-lib_roken_version-script.map) = d5785862c2824e567f7d43471a2bcfc0e07bb03d

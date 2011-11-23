@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.26 2011/04/05 08:29:26 adam Exp $
+# $NetBSD: Makefile,v 1.28 2011/08/23 13:06:54 obache Exp $
 
-DISTNAME=	lighttpd-1.4.28
+DISTNAME=	lighttpd-1.4.29
+PKGREVISION=	1
 CATEGORIES=	www
 MASTER_SITES=	http://download.lighttpd.net/lighttpd/releases-1.4.x/
 EXTRACT_SUFX=	.tar.bz2
@@ -9,10 +10,6 @@ MAINTAINER=	joerg@NetBSD.org
 HOMEPAGE=	http://www.lighttpd.net/
 COMMENT=	Fast, light-footprint HTTP server
 LICENSE=	modified-bsd
-
-#PATCHFILES=	08-ssl-retval-fix.patch
-#PATCH_SITES=	http://redmine.lighttpd.net/attachments/download/1095/
-#PATCH_DIST_STRIP.08-ssl-retval-fix.patch= -p1
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
@@ -41,7 +38,7 @@ OWN_DIRS+=		${PKG_SYSCONFDIR}/vhosts.d
 
 post-install:
 	set -e; cd ${WRKSRC}/doc;				\
-	for f in *.css *.dot *.txt; do				\
+	for f in *.css outdated/*.dot outdated/*.txt; do	\
 		${INSTALL_DATA} $$f ${DESTDIR}${DOCDIR};	\
 	done;							\
 	for f in config/*.conf scripts/*.sh; do			\

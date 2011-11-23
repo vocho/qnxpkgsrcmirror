@@ -1,5 +1,5 @@
 #! @PERL@
-# $NetBSD: pkglint.pl,v 1.827 2011/05/26 20:31:47 wiz Exp $
+# $NetBSD: pkglint.pl,v 1.829 2011/08/16 23:13:34 wiz Exp $
 #
 
 # pkglint - static analyzer and checker for pkgsrc packages
@@ -2299,11 +2299,11 @@ sub load_shared_dirs() {
 	my $varname_to_dirs = {};
 	my $dir_to_id = {};
 
-	foreach my $pkg qw(
+	foreach my $pkg (qw(
 		misc/gnome-dirs misc/gnome1-dirs misc/gnome2-dirs
 		misc/theme-dirs
 		misc/xdg-dirs misc/xdg-x11-dirs
-		print/texmf-dirs) {
+		print/texmf-dirs)) {
 
 		$opt_debug_trace and log_debug(NO_FILE, NO_LINES, "pkg=$pkg");
 		my $dirs_mk = load_lines("$cwd_pkgsrcdir/$pkg/dirs.mk", true);
@@ -5510,7 +5510,7 @@ sub checkline_mk_vartype_basic($$$$$$$$) {
 		} elsif ($value ne "" && $value_novar eq "") {
 			# The value of another variable
 
-		} elsif ($value_novar !~ m"^(?:\.|[0-9A-Za-z_][-0-9A-Za-z._/+]*)$") {
+		} elsif ($value_novar !~ m"^(?:\.|[0-9A-Za-z_\@][-0-9A-Za-z_\@./+]*)$") {
 			$line->log_warning("\"${value}\" is not a valid subdirectory of \${WRKSRC}.");
 		}
 

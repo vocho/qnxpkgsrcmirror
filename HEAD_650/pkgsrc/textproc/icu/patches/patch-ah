@@ -1,12 +1,12 @@
 $NetBSD$
 
---- configure.orig	2010-10-07 03:34:53.000000000 +0000
+--- configure.orig	2011-07-19 21:19:38.000000000 +0000
 +++ configure
-@@ -5104,6 +5104,7 @@ rm -f core conftest.err conftest.$ac_obj
+@@ -5131,6 +5131,7 @@ rm -f core conftest.err conftest.$ac_obj
  		icu_cv_host_frag=mh-cygwin-msvc
  	fi ;;
  *-*-*bsd*|*-*-dragonfly*) 	icu_cv_host_frag=mh-bsd-gcc ;;
-+*-*-nto-qnx6*)			icu_cv_host_frag=mh-bsd-gcc ;;
++*-*-nto-qnx*)			icu_cv_host_frag=mh-bsd-gcc ;;
  *-*-aix*)
  	if test "$GCC" = yes; then
  		icu_cv_host_frag=mh-aix-gcc

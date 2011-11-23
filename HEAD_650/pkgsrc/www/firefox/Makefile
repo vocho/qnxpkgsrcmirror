@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.85 2011/04/26 14:18:01 tnn Exp $
+# $NetBSD: Makefile,v 1.88 2011/09/12 09:19:06 tnn Exp $
 
 .include "../../devel/xulrunner/dist.mk"
 PKGNAME=	firefox-${FIREFOX_VER}
@@ -14,8 +14,6 @@ MOZILLA_DIR=	# empty
 CONFIGURE_ARGS+=	--enable-application=browser
 CONFIGURE_ARGS+=	--with-libxul-sdk=${PREFIX}/lib/xulrunner-sdk
 CONFIGURE_ARGS+=	--with-system-libxul
-# XXX tnn with omnijar enabled it just doesn't start
-CONFIGURE_ARGS+=	--enable-chrome-format=flat
 
 ALL_ENV+=		MOZILLA_PKG_NAME=firefox
 
@@ -23,12 +21,11 @@ ALL_ENV+=		MOZILLA_PKG_NAME=firefox
 .include "options.mk"
 
 MOZILLA=firefox
+MOZILLA_ICON=	${WRKSRC}/dist/firefox/chrome/icons/default/default48.png
 .if !empty(PKG_OPTIONS:Mofficial-mozilla-branding)
 MOZILLA_NAME=	Firefox
-MOZILLA_ICON=	${WRKSRC}/other-licenses/branding/firefox/default48.png
 .else
 MOZILLA_NAME=	Browser
-MOZILLA_ICON=	${WRKSRC}/browser/branding/unofficial/default48.png
 .endif
 
 pre-configure:
@@ -63,6 +60,13 @@ CONFIGURE_ARGS+=	--enable-gnomevfs --enable-dbus --enable-gnomeui
 PLIST.gnome=	yes
 .else
 CONFIGURE_ARGS+=	--disable-gnomevfs --disable-dbus --disable-gnomeui
+.endif
+.if !empty(PKG_BUILD_OPTIONS.xulrunner:Mdebug)
+CONFIGURE_ARGS+=	--enable-debug --enable-debug-symbols
+CONFIGURE_ARGS+=	--disable-install-strip
+.else   
+CONFIGURE_ARGS+=	--disable-debug --disable-debug-symbols
+CONFIGURE_ARGS+=	--enable-install-strip
 .endif
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../mk/bsd.pkg.mk"

@@ -155,6 +155,11 @@ freeradius-simul-use	Enable Simultaneous-Use.
 freetype		Enable freetype support.
 ftp			Enable File Transfer Protocol (FTP) support.
 fts			Enable full-text searching.
+gcc-ada			Build the gcc Ada frontend and libraries.
+gcc-c++			Build the gcc C++ frontend and libraries.
+gcc-fortran		Build the gcc Fortran frontend and libraries.
+gcc-java		Build the gcc Java frontend, tools and libraries.
+gcc-objc		Build the gcc Objective-C frontend and libraries.
 gd			Use GD to render graphical output.
 gdal			Use the GDAL library.
 gdb6-tui		Build the tui application.
@@ -181,7 +186,7 @@ groff-docs		Install documentation images.
 groonga-suggest-learner	Enable Groonga suggest learner.
 gsasl			Enable SASL support with gsasl.
 gsl			Use GNU Scientific Library.
-gssapi			Enable gssapi support.
+gssapi			Enable gssapi (Kerberos V) support.
 gstreamer		Enable gstreamer support.
 gtk			Enable support for GTK.
 gtk2			Enable support for GTK2.
@@ -595,6 +600,7 @@ xjdic-locale		Honor LOCALE env var, instead of requiring ISO-2022-JP.
 xlockmore-allow-root	Allow root to get access.
 xlockmore-dpms		Use DPMS.
 xml			Enable XML support.
+xmlrpc			Enable XMLRPC support.
 xrandr			Enable Xrandr support.
 xrender			Enable Xrender support.
 xscreensaver-webcollage	Install webcollage screensaver.

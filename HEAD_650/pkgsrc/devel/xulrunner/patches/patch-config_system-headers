@@ -1,0 +1,12 @@
+$NetBSD$
+
+--- config/system-headers.orig	2011-09-22 20:20:19.000000000 +0000
++++ config/system-headers
+@@ -151,6 +151,7 @@ Carbon/Carbon.h
+ CarbonEvents.h
+ Carbon.h
+ cassert
++cmath
+ c_asm.h
+ cctype
+ cderr.h
