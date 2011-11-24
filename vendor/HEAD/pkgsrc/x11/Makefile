@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.637 2011/08/13 02:13:25 taca Exp $
+# $NetBSD: Makefile,v 1.640 2011/10/30 19:59:02 jakllsch Exp $
 #
 
 COMMENT=	Packages to support the X window system
@@ -336,6 +336,7 @@ SUBDIR+=	ruby-tk
 SUBDIR+=	ruby-wxruby
 SUBDIR+=	rxvt
 SUBDIR+=	rxvt-unicode
+SUBDIR+=	sakura
 SUBDIR+=	scrnsaverproto
 SUBDIR+=	sessreg
 SUBDIR+=	setxkbmap
@@ -351,7 +352,6 @@ SUBDIR+=	tk
 SUBDIR+=	tk-BWidget
 SUBDIR+=	tk-Tix
 SUBDIR+=	tkinfo
-SUBDIR+=	tkman
 SUBDIR+=	transset-df
 SUBDIR+=	trapproto
 SUBDIR+=	tzosdclock
@@ -386,6 +386,7 @@ SUBDIR+=	xbindkeys
 SUBDIR+=	xbindkeys-tk
 SUBDIR+=	xbitmaps
 SUBDIR+=	xcalc
+SUBDIR+=	xcalib
 SUBDIR+=	xcb
 SUBDIR+=	xcb-proto
 SUBDIR+=	xcb-util
@@ -482,6 +483,7 @@ SUBDIR+=	xglobe
 SUBDIR+=	xgrk
 SUBDIR+=	xhangglider
 SUBDIR+=	xhost
+SUBDIR+=	xicc
 SUBDIR+=	xineramaproto
 SUBDIR+=	xinit
 SUBDIR+=	xinput

@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.89 2011/04/22 13:44:07 obache Exp $
+# $NetBSD: Makefile,v 1.92 2011/11/01 06:11:55 sbd Exp $
 
 DISTNAME=	octave-${OCTAVE_VER}
-PKGREVISION=	2
+PKGREVISION=	4
 CATEGORIES=	math
 MASTER_SITES=	ftp://ftp.octave.org/pub/octave/
 EXTRACT_SUFX=	.tar.bz2
@@ -27,6 +27,7 @@ USE_GNU_READLINE=	yes
 USE_LIBTOOL=		yes
 USE_TOOLS+=		autoconf gsed gmake makeinfo perl pkg-config
 GNU_CONFIGURE=		yes
+MAKE_JOBS_SAFE=		no
 
 GCC_REQD+=		3.0
 USE_LANGUAGES=		c c++ fortran77

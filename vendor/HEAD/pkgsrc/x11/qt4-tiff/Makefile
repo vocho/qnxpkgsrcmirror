@@ -1,10 +1,9 @@
-# $NetBSD: Makefile,v 1.17 2011/05/05 12:37:08 adam Exp $
-
-PKG_DESTDIR_SUPPORT=	user-destdir
+# $NetBSD: Makefile,v 1.21 2011/11/01 06:03:08 sbd Exp $
 
 .include "../../x11/qt4-libs/Makefile.common"
 
 PKGNAME=	qt4-tiff-${QTVERSION}
+PKGREVISION=	2
 COMMENT=	QT TIFF image format plugin
 
 CONFIGURE_ARGS+=	-I${QTDIR}/include

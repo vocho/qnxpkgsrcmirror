@@ -1,5 +1,5 @@
-$NetBSD: distinfo,v 1.51 2011/08/25 20:40:24 tron Exp $
+$NetBSD: distinfo,v 1.55 2011/11/13 09:10:25 tron Exp $
 
-SHA1 (phpMyAdmin-3.4.4-all-languages.tar.bz2) = 48af9356c9dbeb45b3062560b535de30af9a7dd4
-RMD160 (phpMyAdmin-3.4.4-all-languages.tar.bz2) = f7165df94b9e0449b4758d481ff8e985363c6881
-Size (phpMyAdmin-3.4.4-all-languages.tar.bz2) = 4954436 bytes
+SHA1 (phpMyAdmin-3.4.7.1-all-languages.tar.bz2) = e77765f04a6ea842417ea9ae7f02b125c2f75638
+RMD160 (phpMyAdmin-3.4.7.1-all-languages.tar.bz2) = ad2c495a304b30667ee1b785bbebab5a9882085f
+Size (phpMyAdmin-3.4.7.1-all-languages.tar.bz2) = 4605472 bytes

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.106 2011/06/28 10:11:08 obache Exp $
+# $NetBSD: Makefile,v 1.108 2011/11/22 18:40:27 shattered Exp $
 
 DISTNAME=	curl-7.21.7
 CATEGORIES=	www

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.1.1.1 2010/05/26 13:24:43 obache Exp $
+# $NetBSD: Makefile,v 1.3 2011/09/16 12:26:03 obache Exp $
 #
 
 DISTNAME=	ctorrent-dnh3.3.2
@@ -7,11 +7,12 @@ CATEGORIES=	net
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=dtorrent/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://dtorrent.sourceforge.net/
+HOMEPAGE=	http://www.rahul.net/dholmes/ctorrent/
 COMMENT=	Enhanced CTorrent, a BitTorrent console client written in C/C++
 LICENSE=	gnu-gpl-v2
 
 CONFLICTS=		ctorrent-[0-9]*
+SUPERSEDES=		ctorrent-[0-9]*
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 

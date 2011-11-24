@@ -1,11 +1,9 @@
-# $NetBSD: Makefile,v 1.45 2011/08/18 12:34:27 cheusov Exp $
-
-PKG_DESTDIR_SUPPORT=	user-destdir
+# $NetBSD: Makefile,v 1.49 2011/11/01 06:03:08 sbd Exp $
 
 .include "../../x11/qt4-libs/Makefile.common"
 
 PKGNAME=	qt4-tools-${QTVERSION}
-PKGREVISION=	1
+PKGREVISION=	2
 COMMENT=	QT GUI (WYSIWYG) builder and other tools
 
 DEPENDS+=	libtool-base-[0-9]*:../../devel/libtool-base
@@ -29,6 +27,13 @@ INSTALLATION_DIRS+=	${QTPREFIX}/plugins/designer
 INSTALLATION_DIRS+=	${QTPREFIX}/mkspecs
 INSTALLATION_DIRS+=	${QTPREFIX}/tools/qdoc3
 INSTALL_ENV+=		INSTALL_ROOT=${DESTDIR}
+
+PLIST_VARS+=	notSunOS SunOS
+.if ${OPSYS} == "SunOS"
+PLIST.SunOS=	yes
+.else
+PLIST.notSunOS=	yes
+.endif
 
 post-configure:
 	ln -sf ${QTPREFIX}/bin/moc ${WRKSRC}/bin/moc

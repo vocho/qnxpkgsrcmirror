@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.85 2011/04/08 12:36:24 taca Exp $
+# $NetBSD: Makefile,v 1.87 2011/10/19 14:47:30 ryoon Exp $
 
-DISTNAME=	rsync-3.0.8
+DISTNAME=	rsync-3.0.9
 CATEGORIES=	net
 MASTER_SITES=	http://rsync.samba.org/ftp/rsync/ \
 		http://rsync.samba.org/ftp/rsync/old-versions/  \
@@ -25,7 +25,7 @@ TEST_TARGET=		test
 
 PKG_SYSCONFSUBDIR=	rsync
 
-RCD_SCRIPTS=            rsyncd
+RCD_SCRIPTS=		rsyncd
 RCD_SCRIPT_SRC.rsyncd=	files/rsyncd.sh
 
 SUBST_CLASSES+=		paths

@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.72 2011/08/19 15:07:26 tnn Exp $
+# $NetBSD: Makefile,v 1.77 2011/11/17 00:25:35 dholland Exp $
 #
 
 DISTNAME=	thunderbird-${TB_VER}.source
 PKGNAME=	thunderbird-${TB_VER}
-TB_VER=		6.0
+TB_VER=		8.0
 CATEGORIES=	mail
 MASTER_SITES=	${MASTER_SITE_MOZILLA:=thunderbird/releases/${TB_VER}/source/}
 EXTRACT_SUFX=	.tar.bz2
@@ -17,6 +17,8 @@ WRKSRC=		${WRKDIR}/comm-release
 MOZILLA_DIR=	mozilla/
 PLIST_SRC+=	PLIST
 
+PYTHON_VERSIONS_ACCEPTED=	27
+
 CONFIG_GUESS_OVERRIDE+=	ldap/sdks/c-sdk/config/autoconf/config.guess
 CONFIG_SUB_OVERRIDE+=	ldap/sdks/c-sdk/config/autoconf/config.sub
 
@@ -24,14 +26,13 @@ CONFIGURE_ARGS+=	--enable-application=mail
 
 ALL_ENV+=		MOZILLA_PKG_NAME=thunderbird
 
-# Looks like mozilla forgot to bump allowed versions to 6.0
-SUBST_CLASSES+=			ext-compat
-SUBST_STAGE.ext-compat=		pre-configure
-SUBST_MESSAGE.ext-compat=	Fixing extension compatibility
-SUBST_FILES.ext-compat=		mailnews/extensions/enigmail/package/install.rdf
-SUBST_FILES.ext-compat+=	calendar/*/install.rdf
-SUBST_FILES.ext-compat+=	calendar/*/*/install.rdf
-SUBST_SED.ext-compat=		-e 's,\(<em:maxVersion>\)5.*<,\16.0<,g'
+#SUBST_CLASSES+=			ext-compat
+#SUBST_STAGE.ext-compat=		pre-configure
+#SUBST_MESSAGE.ext-compat=	Fixing extension compatibility
+#SUBST_FILES.ext-compat=		mailnews/extensions/enigmail/package/install.rdf
+#SUBST_FILES.ext-compat+=	calendar/*/install.rdf
+#SUBST_FILES.ext-compat+=	calendar/*/*/install.rdf
+#SUBST_SED.ext-compat=		-e 's,\(<em:maxVersion>\).*<,\19.0<,g'
 
 pre-configure:
 	cd ${WRKSRC} && ${SETENV} ${CONFIGURE_ENV} autoconf

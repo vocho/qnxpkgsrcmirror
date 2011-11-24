@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.11 2009/06/30 00:07:18 joerg Exp $
+# $NetBSD: Makefile,v 1.13 2011/11/06 19:32:07 dholland Exp $
 #
 
 DISTNAME=		cl74unix
 PKGNAME=		caml-light-0.74
-PKGREVISION=		1
+PKGREVISION=		2
 CATEGORIES=		lang
 MASTER_SITES=		ftp://ftp.inria.fr/lang/caml-light/
 
@@ -20,6 +20,12 @@ BUILD_TARGET=		world
 INSTALLATION_DIRS+=	bin lib/caml-light ${PKGMANDIR}/man1
 
 USE_TOOLS+=		pax
+
+.include "../../mk/bsd.prefs.mk"
+
+.if ${OPSYS} == "MirBSD"
+CPP=			/usr/libexec/cpp -P -C -Dunix
+.endif
 
 do-configure:
 	cd ${WRKSRC} && ${MAKE} configure

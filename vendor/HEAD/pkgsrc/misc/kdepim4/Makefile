@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.22 2011/06/19 02:26:10 dholland Exp $
+# $NetBSD: Makefile,v 1.24 2011/11/01 06:02:07 sbd Exp $
 
 #DISTNAME=	kdepim-${_KDE_VERSION}
 DISTNAME=	kdepim-4.4.9
 MASTER_SITES=	${MASTER_SITE_KDE:=kdepim-4.4.9/src/}
-PKGREVISION=	5
+PKGREVISION=	7
 CATEGORIES=	misc
 COMMENT=	Personal Information Management tools for the KDE desktop
 

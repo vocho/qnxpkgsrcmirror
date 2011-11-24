@@ -1,12 +1,14 @@
-# $NetBSD: builtin.mk,v 1.29 2010/07/04 16:33:25 obache Exp $
+# $NetBSD: builtin.mk,v 1.31 2011/11/17 13:03:19 obache Exp $
 
 BUILTIN_PKG:=	openssl
 
 BUILTIN_FIND_LIBS:=		des
 BUILTIN_FIND_FILES_VAR:=	H_OPENSSLCONF H_OPENSSLV
 BUILTIN_FIND_FILES.H_OPENSSLCONF= /usr/include/openssl/opensslconf.h \
+				/usr/sfw/include/openssl/opensslconf.h \
 				/boot/common/include/openssl/opensslconf.h
 BUILTIN_FIND_FILES.H_OPENSSLV=	/usr/include/openssl/opensslv.h \
+				/usr/sfw/include/openssl/opensslv.h \
 				/boot/common/include/openssl/opensslv.h
 
 .include "../../mk/buildlink3/bsd.builtin.mk"
@@ -102,6 +104,7 @@ BUILTIN_VERSION.openssl=	0.9.7h
 BUILTIN_PKG.openssl=	openssl-${BUILTIN_VERSION.openssl}
 .endif
 MAKEVARS+=	BUILTIN_PKG.openssl
+MAKEVARS+=	BUILTIN_VERSION.openssl
 
 .if !defined(BUILTIN_OPENSSL_HAS_THREADS) && \
     !empty(IS_BUILTIN.openssl:M[yY][eE][sS]) && \
@@ -158,7 +161,10 @@ CHECK_BUILTIN.openssl?=	no
 
 .  if !empty(USE_BUILTIN.openssl:M[yY][eE][sS])
 .    if empty(H_OPENSSLV:M__nonexistent__)
-.      if !empty(H_OPENSSLV:M/usr/*)
+.      if !empty(H_OPENSSLV:M/usr/sfw/*)
+BUILDLINK_PREFIX.openssl=	/usr/sfw
+BUILDLINK_PASSTHRU_DIRS+=	/usr/sfw
+.      elif !empty(H_OPENSSLV:M/usr/*)
 BUILDLINK_PREFIX.openssl=	/usr
 .      elif !empty(H_OPENSSLV:M/boot/common/*)
 BUILDLINK_PREFIX.openssl=	/boot/common

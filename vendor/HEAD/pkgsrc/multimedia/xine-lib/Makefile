@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.86 2011/07/10 16:52:24 jmcneill Exp $
+# $NetBSD: Makefile,v 1.93 2011/11/20 22:11:23 sbd Exp $
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 .include "Makefile.common"
-PKGREVISION=		6
+PKGREVISION=		2
 
 COMMENT=		Multimedia player library
 
@@ -31,6 +31,13 @@ SUBST_MESSAGE.w32path=	Fixing win32 dll path.
 
 # Needed to fix build problems under, at least, NetBSD/amd64.
 BUILDLINK_API_DEPENDS.libcdio+=	libcdio>=0.75
+
+.if ${OPSYS} == "SunOS"
+PLIST_VARS+=	oss
+.if ${OS_VERSION} == "5.11"
+PLIST.oss=	yes
+.endif
+.endif
 
 # flac is supported internally; don't know what the plugin is good for
 #.include "../../audio/flac/buildlink3.mk"

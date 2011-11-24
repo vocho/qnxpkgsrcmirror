@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.4 2011/07/08 09:35:40 adam Exp $
+@comment $NetBSD: PLIST,v 1.6 2011/11/05 19:09:07 adam Exp $
 share/doc/sqlite3/34to35.html
 share/doc/sqlite3/35to36.html
 share/doc/sqlite3/about.html
@@ -37,7 +37,7 @@ share/doc/sqlite3/c3ref/c_busy_recovery.html
 share/doc/sqlite3/c3ref/c_checkpoint_full.html
 share/doc/sqlite3/c3ref/c_config_getmalloc.html
 share/doc/sqlite3/c3ref/c_dbconfig_enable_fkey.html
-share/doc/sqlite3/c3ref/c_dbstatus options.html
+share/doc/sqlite3/c3ref/c_dbstatus_options.html
 share/doc/sqlite3/c3ref/c_deny.html
 share/doc/sqlite3/c3ref/c_fail.html
 share/doc/sqlite3/c3ref/c_fcntl_chunk_size.html
@@ -52,7 +52,7 @@ share/doc/sqlite3/c3ref/c_shm_nlock.html
 share/doc/sqlite3/c3ref/c_source_id.html
 share/doc/sqlite3/c3ref/c_static.html
 share/doc/sqlite3/c3ref/c_status_malloc_count.html
-share/doc/sqlite3/c3ref/c_stmtstatus counter.html
+share/doc/sqlite3/c3ref/c_stmtstatus_counter.html
 share/doc/sqlite3/c3ref/c_sync_dataonly.html
 share/doc/sqlite3/c3ref/c_testctrl_always.html
 share/doc/sqlite3/c3ref/c_vtab_constraint_support.html
@@ -194,6 +194,7 @@ share/doc/sqlite3/favicon.ico
 share/doc/sqlite3/features.html
 share/doc/sqlite3/fileformat2.html
 share/doc/sqlite3/fileio.html
+share/doc/sqlite3/footprint.html
 share/doc/sqlite3/foreignkeys.html
 share/doc/sqlite3/formatchng.html
 share/doc/sqlite3/fts3.html
@@ -313,6 +314,7 @@ share/doc/sqlite3/images/fullscanb.gif
 share/doc/sqlite3/images/harmony.gif
 share/doc/sqlite3/images/index-ex1-x-b.gif
 share/doc/sqlite3/images/indirect1b1.gif
+share/doc/sqlite3/images/joe1.jpg
 share/doc/sqlite3/images/ne.gif
 share/doc/sqlite3/images/ne.png
 share/doc/sqlite3/images/nocopy.gif
@@ -406,6 +408,7 @@ share/doc/sqlite3/images/table-ex1b2.gif
 share/doc/sqlite3/images/vfs1.gif
 share/doc/sqlite3/index.html
 share/doc/sqlite3/inmemorydb.html
+share/doc/sqlite3/intern-v-extern-blob.html
 share/doc/sqlite3/keyword_index.html
 share/doc/sqlite3/lang.html
 share/doc/sqlite3/lang_aggfunc.html
@@ -556,6 +559,8 @@ share/doc/sqlite3/releaselog/3_7_6_2.html
 share/doc/sqlite3/releaselog/3_7_6_3.html
 share/doc/sqlite3/releaselog/3_7_7.html
 share/doc/sqlite3/releaselog/3_7_7_1.html
+share/doc/sqlite3/releaselog/3_7_8.html
+share/doc/sqlite3/releaselog/3_7_9.html
 share/doc/sqlite3/requirements.html
 share/doc/sqlite3/robots.txt
 share/doc/sqlite3/rtree.html

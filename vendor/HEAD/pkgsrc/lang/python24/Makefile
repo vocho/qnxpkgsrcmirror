@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.56 2011/04/23 08:53:53 obache Exp $
+# $NetBSD: Makefile,v 1.58 2011/09/14 17:00:20 hans Exp $
 
 .include "dist.mk"
 
@@ -50,6 +50,7 @@ USE_TOOLS+=	gmake
 PY_PLATNAME=	${LOWER_OPSYS:C/\..*//}
 .elif ${OPSYS} == "SunOS"
 PY_PLATNAME=	sunos${OS_VERSION:C/\..*//}
+CONFIGURE_ENV+=	ac_cv_header_netpacket_packet_h=no
 .elif ${OPSYS} == "HPUX"
 PY_PLATNAME=	hp-ux11
 .else
@@ -163,6 +164,12 @@ post-install:
 
 USE_GNU_READLINE=	# defined
 BUILDLINK_DEPMETHOD.readline=		build
+
+.include "../../mk/compiler.mk"
+
+.if !empty(PKGSRC_COMPILER:Mclang)
+CONFIGURE_ENV+=		ac_cv_opt_olimit_ok=no
+.endif
 
 .include "../../archivers/bzip2/buildlink3.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"

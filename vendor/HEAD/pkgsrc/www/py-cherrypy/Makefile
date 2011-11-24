@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.2 2011/04/28 09:57:05 adam Exp $
+# $NetBSD: Makefile,v 1.5 2011/10/24 21:06:38 gls Exp $
 
-DISTNAME=	CherryPy-3.2.0
+DISTNAME=	CherryPy-3.2.2
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME:tl}
 CATEGORIES=	www python
 MASTER_SITES=	http://download.cherrypy.org/cherrypy/${PKGVERSION_NOREV}/
@@ -15,8 +15,10 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 USE_LANGUAGES=		# none
 EGG_NAME=		${DISTNAME}
 
-REPLACE_PYTHON=		py2/cherrypy/cherryd
-REPLACE_PYTHON+=	py3/cherrypy/cherryd
+REPLACE_PYTHON=		cherrypy/cherryd
+REPLACE_PYTHON+=	cherrypy/test/sessiondemo.py
+
+PYTHON_VERSIONS_INCOMPATIBLE=	24
 
 .include "../../lang/python/application.mk"
 .include "../../lang/python/egg.mk"

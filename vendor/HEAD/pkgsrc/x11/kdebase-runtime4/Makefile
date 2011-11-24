@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.20 2011/04/22 13:42:35 obache Exp $
+# $NetBSD: Makefile,v 1.22 2011/11/01 06:03:01 sbd Exp $
 
 DISTNAME=	kdebase-runtime-${_KDE_VERSION}
-PKGREVISION=	1
+PKGREVISION=	3
 CATEGORIES=	x11
 COMMENT=	Runtime requirements for the KDE integrated X11 desktop
 

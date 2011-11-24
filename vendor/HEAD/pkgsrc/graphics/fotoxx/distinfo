@@ -1,9 +1,8 @@
-$NetBSD: distinfo,v 1.7 2011/07/14 08:15:35 ryoon Exp $
+$NetBSD: distinfo,v 1.9 2011/11/20 00:00:28 ryoon Exp $
 
-SHA1 (fotoxx-11.07.tar.gz) = 011aeb57df73ba6689160379bf90f0b46991df65
-RMD160 (fotoxx-11.07.tar.gz) = a8b6aa6cfb6310695621bcb07932f22a4f2ea3ab
-Size (fotoxx-11.07.tar.gz) = 1404130 bytes
-SHA1 (patch-aa) = a7cb44980df7e49143689bc11d349c8aceb0115d
-SHA1 (patch-ab) = 088a467f899464221f33a1d995ea37947a940f43
-SHA1 (patch-ac) = 369ce1c76b32b47bea3e855c812a7d50474dd2ba
-SHA1 (patch-fotoxx-11.05.1.cc) = 25930c9655621132fd4e7773d006b0f75bb58df8
+SHA1 (fotoxx-11.11.1.tar.gz) = e37a0cd38427797d702735d6a57126f5ad400bf3
+RMD160 (fotoxx-11.11.1.tar.gz) = 8d74c14b291edb5c4ddc7a5e3ba4287301897bf7
+Size (fotoxx-11.11.1.tar.gz) = 1471552 bytes
+SHA1 (patch-aa) = 86bd4e42c1afde0268580a0438e123678ca2999e
+SHA1 (patch-ab) = 8a4ad79d29194a8c124ccc08d3969265d1ba33ee
+SHA1 (patch-ac) = ad0a25f030f6c897fc25af2803add2979068323b

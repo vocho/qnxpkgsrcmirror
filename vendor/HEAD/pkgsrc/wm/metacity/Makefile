@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.93 2011/07/13 20:06:15 drochner Exp $
+# $NetBSD: Makefile,v 1.96 2011/11/01 06:02:43 sbd Exp $
 #
 
 DISTNAME=	metacity-2.34.1
+PKGREVISION=	1
 CATEGORIES=	wm x11 gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/metacity/2.34/}
 EXTRACT_SUFX=	.tar.bz2
@@ -32,6 +33,12 @@ CONFIGURE_ARGS+=	--disable-xinerama
 .if ${X11_TYPE} != "modular" && !exists(${X11BASE}/lib/libXdamage.so)
 CONFIGURE_ARGS+=	--disable-compositor
 .endif
+
+CFLAGS.SunOS+=		-std=c99 -D__EXTENSIONS__
+.if ${OPSYS} == "SunOS"
+BUILDLINK_TRANSFORM+=	rm:-ansi
+.endif
+
 
 BUILDLINK_API_DEPENDS.glib2+=			glib2>=2.6.0
 BUILDLINK_API_DEPENDS.gtk2+=			gtk2+>=2.10.0

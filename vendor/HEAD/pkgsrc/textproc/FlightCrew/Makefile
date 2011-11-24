@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.2 2011/08/20 21:33:27 wiz Exp $
+# $NetBSD: Makefile,v 1.5 2011/11/10 22:05:03 ryoon Exp $
 #
 
-DISTNAME=	FlightCrew-0.7.1-Code
+DISTNAME=	FlightCrew-0.7.2-Code
 PKGNAME=	${DISTNAME:S/-Code//}
+PKGREVISION=	1
 CATEGORIES=	textproc
 MASTER_SITES=	http://flightcrew.googlecode.com/files/
 EXTRACT_SUFX=	.zip
@@ -13,6 +14,8 @@ COMMENT=	EPUB validator
 LICENSE=	gnu-lgpl-v3 AND cc-by-sa-v3.0
 
 PKG_DESTDIR_SUPPORT=	user-destdir
+
+WRKSRC=		${WRKDIR}
 
 USE_LANGUAGES=	c c++
 USE_CMAKE=	yes
@@ -27,6 +30,13 @@ SUBST_MESSAGE.fix-damaged=	fixing
 SUBST_FILES.fix-damaged=	src/FlightCrew/tests/misc_tests/ConvertUtf8PathToBoostPath_test.cpp
 SUBST_SED.fix-damaged+=		-e "2,2s/^/\//" # commented-out
 SUBST_SED.fix-damaged+=		-e "1,1d" # deleted
+
+SUBST_CLASSES+=		d2u
+SUBST_STAGE.d2u=	post-extract
+SUBST_MESSAGE.d2u=	Removing CR end-of-line markers.
+SUBST_FILES.d2u=	CMakeLists.txt
+SUBST_FILES.d2u+=	src/FlightCrew/tests/CMakeLists.txt
+SUBST_FILTER_CMD.d2u=	${TR} -d '\r'
 
 .include "../../mk/compiler.mk"
 # GCC 4.4 and above needs this

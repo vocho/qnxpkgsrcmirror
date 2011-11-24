@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.39 2011/08/22 08:51:46 wiz Exp $
+# $NetBSD: Makefile,v 1.41 2011/11/01 20:47:07 cheusov Exp $
 
 DISTNAME=	binutils-2.17
 PKGREVISION=	1
@@ -25,6 +25,7 @@ MAKEFLAGS+=		TEXINFO_LOCALE=no
 
 GNU_CONFIGURE=		yes
 CONFIGURE_ARGS+=	--with-lib-path='/lib:/usr/lib'
+CONFIGURE_ARGS+=	--disable-werror # pkg/45541
 GNU_PROGRAM_PREFIX?=	gnu-
 CONFIGURE_ARGS+=	--program-prefix=${GNU_PROGRAM_PREFIX:Q}
 PLIST_SUBST+=		GNU_PROGRAM_PREFIX=${GNU_PROGRAM_PREFIX:Q}
@@ -42,6 +43,12 @@ PLIST_VARS+=	gprof
 .include "../../mk/bsd.prefs.mk"
 .if ${OPSYS} != "IRIX"
 PLIST.gprof=	yes
+.endif
+
+.include "../../mk/compiler.mk"
+.if !empty(PKGSRC_COMPILER:Mclang)
+CFLAGS+=	-Wno-unused-value -Wno-format-security \
+		-Wno-uninitialized -Wno-format
 .endif
 
 # Prevent the need to run texi2pod.pl and pod2man hence
