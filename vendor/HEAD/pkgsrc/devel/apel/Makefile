@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.25 2011/03/23 14:55:01 minskim Exp $
+# $NetBSD: Makefile,v 1.27 2011/10/04 03:05:37 hiramatsu Exp $
 
 DISTNAME=	apel-10.8
 PKGNAME=	${EMACS_PKGNAME_PREFIX}${DISTNAME}
@@ -8,6 +8,7 @@ MASTER_SITES=	http://kanji.zinbun.kyoto-u.ac.jp/~tomo/lemi/dist/apel/
 MAINTAINER=	uebayasi@NetBSD.org
 HOMEPAGE=	http://www.kanji.zinbun.kyoto-u.ac.jp/~tomo/elisp/APEL/
 COMMENT=	Portable Emacs library
+LICENSE=	gnu-gpl-v2 OR gnu-gpl-v3
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 INSTALLATION_DIRS+=	${DOCDIR} \
@@ -37,7 +38,7 @@ MAKE_FLAGS.xemacs=	PACKAGEDIR=${EMACS_LISPPREFIX:C|/lisp$||}
 
 PLIST_VARS+=	emacs23 emacs19
 .if empty(EMACS_TYPE:Mxemacs)
-.  if !empty(EMACS_TYPE:Memacs2[3-9])
+.  if !empty(EMACS_TYPE:Memacs2[3-9]*)
 PLIST.emacs23=	yes
 .  else
 PLIST.emacs19=	yes

@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.6 2011/07/03 11:08:29 jym Exp $
+# $NetBSD: Makefile,v 1.11 2011/10/25 07:33:54 wiz Exp $
 #
 
 DISTNAME=	davical-${DAVICAL_VERSION}
-DAVICAL_VERSION=0.9.9.3
+DAVICAL_VERSION=0.9.9.7
 CATEGORIES=	www
 MASTER_SITES=	http://debian.mcmillan.net.nz/packages/davical/
 
@@ -35,9 +35,9 @@ INSTALLATION_DIRS=	${DOCDIR} ${EGDIR}/config
 DEPENDS+=	${APACHE_PKG_PREFIX}-${PHP_PKG_PREFIX}>=5.2:../../www/ap-php
 DEPENDS+=	${PHP_PKG_PREFIX}-pgsql>=4.3.1:../../databases/php-pgsql
 DEPENDS+=	${PHP_PKG_PREFIX}-pdo_pgsql>=${PHP_BASE_VERS}:../../databases/php-pdo_pgsql
-DEPENDS+=	${PHP_PKG_PREFIX}-libawl>=0.45:../../devel/php-libawl
-DEPENDS+=	p5-DBD-postgresql>=2.16.1:../../databases/p5-DBD-postgresql
-DEPENDS+=	p5-Class-DBI-Pg>=0.09:../../databases/p5-Class-DBI-Pg
+DEPENDS+=	${PHP_PKG_PREFIX}-libawl>=0.49:../../devel/php-libawl
+#DEPENDS+=	p5-DBD-postgresql>=2.16.1:../../databases/p5-DBD-postgresql
+#DEPENDS+=	p5-Class-DBI-Pg>=0.09:../../databases/p5-Class-DBI-Pg
 DEPENDS+=	p5-YAML>=0.71:../../textproc/p5-YAML
 DEPENDS+=	pwgen>=2.06:../../sysutils/pwgen
 DEPENDS+=	postgresql${PGSQL_VERSION}-client-[0-9]*:../../databases/postgresql${PGSQL_VERSION}-client
@@ -59,12 +59,15 @@ CONF_FILES_PERMS+=	${EGDIR}/config/example-config.php	\
 			${PKG_SYSCONFDIR}/config.php		\
 			${APACHE_USER} ${APACHE_GROUP} 0640
 
-REPLACE_PERL=		scripts/po/extract.pl dba/update-davical-database
+REPLACE_PERL=		dba/update-davical-database
 
 REPLACE_INTERPRETER+=	php
-REPLACE.php.old=	.*/bin/php
+REPLACE.php.old=	.*php
 REPLACE.php.new=	${PREFIX}/bin/php
-REPLACE_FILES.php=	scripts/sync-remote-caldav.php
+REPLACE_FILES.php=	scripts/cron-sync-ldap.php
+REPLACE_FILES.php+=	scripts/sync-remote-caldav.php
+REPLACE_FILES.php+=	scripts/refresh-alarms.php
+REPLACE_FILES.php+=	scripts/tz-update.php
 
 SUBST_CLASSES+=		conf-path
 SUBST_STAGE.conf-path=	pre-configure

@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.9 2011/04/22 13:43:16 obache Exp $
+# $NetBSD: Makefile,v 1.11 2011/11/01 06:00:53 sbd Exp $
 #
 
 VERSION=		0.6.1
 DISTNAME=		boa-constructor-${VERSION}.src
 PKGNAME=		boa-constructor-${VERSION}
-PKGREVISION=		7
+PKGREVISION=		8
 CATEGORIES=		devel
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=boa-constructor/}
 EXTRACT_SUFX=		.zip
@@ -26,7 +26,15 @@ SEDSUBSTS=	-e "s|@PYTHONBIN@|${PYTHONBIN}|"
 SEDSUBSTS+=	-e "s|@PREFIX@|${PREFIX}|"
 SEDSUBSTS+=	-e "s|@VERSION@|${VERSION}|"
 
+REPLACE_PYTHON+=	Boa.py
+REPLACE_PYTHON+=	Examples/advanced/FramePanels/wxApp1.py
+REPLACE_PYTHON+=	Examples/frames/wxApp1.py
+REPLACE_PYTHON+=	Examples/guide/App1.py
+REPLACE_PYTHON+=	Examples/mdi/wxApp1.py
+REPLACE_PYTHON+=	ExternalLib/ndiff.py
 REPLACE_PYTHON+=	ExternalLib/pylint.py
+REPLACE_PYTHON+=	ExternalLib/reindent.py
+REPLACE_PYTHON+=	ExternalLib/tarfile.py
 
 INSTALLATION_DIRS=	bin
 

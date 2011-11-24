@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.30 2011/01/13 13:39:19 wiz Exp $
+# $NetBSD: Makefile,v 1.32 2011/11/08 15:38:48 gavan Exp $
 
 DISTNAME=	qca-tls-1.0
-PKGREVISION=	9
+PKGREVISION=	10
 CATEGORIES=	security
 MASTER_SITES=	http://delta.affinix.com/download/qca/
 EXTRACT_SUFX=	.tar.bz2
@@ -21,6 +21,9 @@ CONFIGURE_ARGS+=	--with-openssl-inc=${SSLBASE}/include
 CONFIGURE_ARGS+=	--with-openssl-lib=${SSLBASE}/lib
 
 INSTALL_MAKE_FLAGS+=	INSTALL_ROOT=${DESTDIR:Q}
+
+pre-install:
+	mkdir -p ${DESTDIR}${PREFIX}/qt3/plugins/crypto
 
 .include "../../security/openssl/buildlink3.mk"
 .include "../../x11/qt3-libs/buildlink3.mk"

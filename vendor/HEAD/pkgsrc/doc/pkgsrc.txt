@@ -227,7 +227,8 @@ II. The pkgsrc developer's guide
         14.2. Writing buildlink3.mk files
 
             14.2.1. Anatomy of a buildlink3.mk file
-            14.2.2. Updating BUILDLINK_API_DEPENDS.pkg in buildlink3.mk files
+            14.2.2. Updating BUILDLINK_API_DEPENDS.pkg and
+                BUILDLINK_ABI_DEPENDS.pkg in buildlink3.mk files
 
         14.3. Writing builtin.mk files
 
@@ -3194,7 +3195,8 @@ Table of Contents
     14.2. Writing buildlink3.mk files
 
         14.2.1. Anatomy of a buildlink3.mk file
-        14.2.2. Updating BUILDLINK_API_DEPENDS.pkg in buildlink3.mk files
+        14.2.2. Updating BUILDLINK_API_DEPENDS.pkg and BUILDLINK_ABI_DEPENDS.
+            pkg in buildlink3.mk files
 
     14.3. Writing builtin.mk files
 
@@ -4031,7 +4033,15 @@ INSTALL
     files to install are moved in place. This can be used to do any custom
     procedures not possible with @exec commands in PLIST. See pkg_add(1) and
     pkg_create(1) for more information. See also Section 15.1, "Files and
-    directories outside the installation prefix".
+    directories outside the installation prefix". Please note that you can
+    modify variables in it easily by using FILES_SUBST in the package's
+    Makefile:
+
+    FILES_SUBST+=  SOMEVAR="somevalue"
+
+    replaces "@SOMEVAR@" with "somevalue" in the INSTALL. By default,
+    substitution is performed for PREFIX, LOCALBASE, X11BASE, VARBASE, and a
+    few others, type make help topic=FILES_SUBST for a complete list.
 
 DEINSTALL
 
@@ -4039,7 +4049,8 @@ DEINSTALL
     script's responsibility to clean up any additional messy details around the
     package's installation, since all pkg_delete knows is how to delete the
     files created in the original distribution. See pkg_delete(1) and
-    pkg_create(1) for more information.
+    pkg_create(1) for more information. The same methods to replace variables
+    can be used as for the INSTALL file.
 
 MESSAGE
 
@@ -4576,7 +4587,8 @@ Table of Contents
 14.2. Writing buildlink3.mk files
 
     14.2.1. Anatomy of a buildlink3.mk file
-    14.2.2. Updating BUILDLINK_API_DEPENDS.pkg in buildlink3.mk files
+    14.2.2. Updating BUILDLINK_API_DEPENDS.pkg and BUILDLINK_ABI_DEPENDS.pkg in
+        buildlink3.mk files
 
 14.3. Writing builtin.mk files
 
@@ -4715,7 +4727,8 @@ dependency on pkg is added. Several important variables are set in the section:
   * BUILDLINK_API_DEPENDS.pkg is the actual dependency recorded in the
     installed package; this should always be set using += to ensure that we're
     appending to any pre-existing list of values. This variable should be set
-    to the first version of the package that had an API change.
+    to the first version of the package that had an backwards-incompatible API
+    change.
 
   * BUILDLINK_PKGSRCDIR.pkg is the location of the pkg pkgsrc directory.
 
@@ -4765,24 +4778,25 @@ headers and libraries for these dependencies are also symlinked into $
 {BUILDLINK_DIR} whenever the pkg buildlink3.mk file is included. Dependencies
 are only added for directly include buildlink3.mk files.
 
-14.2.2. Updating BUILDLINK_API_DEPENDS.pkg in buildlink3.mk files
+14.2.2. Updating BUILDLINK_API_DEPENDS.pkg and BUILDLINK_ABI_DEPENDS.pkg in
+buildlink3.mk files
 
-The situation that requires increasing the dependency listed in
-BUILDLINK_API_DEPENDS.pkg after a package update is when the API or interface
-to the header files change.
+These two variables differ in that one describes source compatibility (API) and
+the other binary compatibility (ABI). The difference is that a change in the
+API breaks compilation of programs while changes in the ABI stop compiled
+programs from running.
 
-In this case, BUILDLINK_API_DEPENDS.pkg should be adjusted to require at least
-the new package version. In some cases, the packages that depend on this new
-version may need their PKGREVISIONs increased and, if they have buildlink3.mk
-files, their BUILDLINK_API_DEPENDS.pkg adjusted, too. This is needed so pkgsrc
-will require the correct package dependency and not settle for an older one
-when building the source.
+Changes to the BUILDLINK_API_DEPENDS.pkg variable in a buildlink3.mk file
+happen very rarely. One possible reason is that all packages depending on this
+already need a newer version. In case it is bumped see the description below.
 
-BUILDLINK_ABI_DEPENDS.pkg should be increased when the binary interface or
-sonames (major number of the library version) of any installed shared libraries
-change. This is needed so that binary packages made using it will require the
-correct package dependency and not settle for an older one which will not
-contain the necessary shared libraries.
+The most common example of an ABI change is that the major version of a shared
+library is increased. In this case, BUILDLINK_ABI_DEPENDS.pkg should be
+adjusted to require at least the new package version. Then the packages that
+depend on this package need their PKGREVISIONs increased and, if they have
+buildlink3.mk files, their BUILDLINK_ABI_DEPENDS.pkg adjusted, too. This is
+needed so pkgsrc will require the correct package dependency and not settle for
+an older one when building the source.
 
 See Section 19.1.6, "Handling dependencies" for more information about
 dependencies on other packages, including the BUILDLINK_ABI_DEPENDS and
@@ -5706,7 +5720,7 @@ ${MASTER_SITE_XEMACS}
 
 Some explanations for the less self-explaining ones: MASTER_SITE_BACKUP
 contains backup sites for packages that are maintained in ftp://ftp.NetBSD.org/
-pkgsrc/distfiles/${DIST_SUBDIR}. MASTER_SITE_LOCAL contains local package
+pub/pkgsrc/distfiles/${DIST_SUBDIR}. MASTER_SITE_LOCAL contains local package
 source distributions that are maintained in ftp://ftp.NetBSD.org/pub/pkgsrc/
 distfiles/LOCAL_PORTS/.
 
@@ -6324,13 +6338,11 @@ be used to define the tools needed.
 
 18.2. Tools needed by packages
 
-In the following examples, the :pkgsrc means to use the pkgsrc version and not
-the native version for a build dependency. And the :run means that it is used
-for a run-time dependencies also (and becomes a DEPENDS). The default is a
-build dependency which can be set with :build. (So in this example, it is the
-same as gmake:build and pkg-config:build.)
+In the following examples, the :run means that it is needed at run-time (and
+becomes a DEPENDS). The default is a build dependency which can be set with
+:build. (So in this example, it is the same as gmake:build and
+pkg-config:build.)
 
-USE_TOOLS+=     mktemp:pkgsrc
 USE_TOOLS+=     gmake perl:run pkg-config
 
 When using the tools framework, a TOOLS_PATH.foo variable is defined which

@@ -1,14 +1,15 @@
-# $NetBSD: Makefile,v 1.18 2011/08/20 15:35:40 obache Exp $
+# $NetBSD: Makefile,v 1.29 2011/11/23 05:34:31 taca Exp $
 #
 
-DISTNAME=	mikutter.0.0.3.472
+DISTNAME=	mikutter.0.0.4.592
 PKGNAME=	${RUBY_PKGPREFIX}-${DISTNAME:S/./-/}
+PKGREVISION=	1
 CATEGORIES=	net
 MASTER_SITES=	http://mikutter.hachune.net/bin/
 
 MAINTAINER=	obache@NetBSD.org
 HOMEPAGE=	http://mikutter.hachune.net/
-COMMENT=	Moest Twitter Client
+COMMENT=	Simply, powerfully, and moefully twitter client
 LICENSE=	gnu-gpl-v3
 
 PKG_DESTDIR_SUPPORT=	user-destdir
@@ -16,18 +17,19 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 .include "../../lang/ruby/rubyversion.mk"
 
 DEPENDS+=	xdg-utils-[0-9]*:../../misc/xdg-utils
-DEPENDS+=	${RUBY_PKGPREFIX}-json>=1.5.1:../../textproc/ruby-json
 DEPENDS+=	${RUBY_PKGPREFIX}-hmac>=0.4.0:../../security/ruby-hmac
-DEPENDS+=	${RUBY_PKGPREFIX}-gnome2-gtk-[0-9]*:../../x11/ruby-gnome2-gtk
+DEPENDS+=	${RUBY_PKGPREFIX}-gnome2-gtk>=1.0.0:../../x11/ruby-gnome2-gtk
 DEPENDS+=	${RUBY_PKGPREFIX}-oauth>=0.3.6:../../security/ruby-oauth
 # need included escape.rb
 #DEPENDS+=	${RUBY_PKGPREFIX}-escape-[0-9]*:../../textproc/ruby-escape
 DEPENDS+=	${RUBY_PKGPREFIX}-memoize>=1.3.1:../../devel/ruby-memoize
 DEPENDS+=	${RUBY_PKGPREFIX}-bsearch>=1.5:../../devel/ruby-bsearch
 DEPENDS+=	${RUBY_PKGPREFIX}-httpclient-[0-9]*:../../www/ruby-httpclient
+DEPENDS+=	${RUBY_PKGPREFIX}-addressable>=2.2.6nb1:../../net/ruby-addressable
 # notif-send
 DEPENDS+=	libnotify-[0-9]*:../../sysutils/libnotify
 
+RUBY_JSON_REQD=	1.5.1
 WRKSRC=		${WRKDIR}/mikutter
 USE_LANGUAGES=	# none
 USE_TOOLS+=	pax
@@ -40,7 +42,7 @@ INSTALLATION_DIRS+=	bin share/doc/mikutter share/applications share/mikutter
 
 do-build:
 	cd ${WRKSRC}/core/lib && \
-		${RM} -rf json* hmac*.rb oauth* memoize.rb ruby-bsearch-* && \
+		${RM} -rf json* hmac*.rb oauth* memoize.rb ruby-bsearch-* addressable && \
 		${MKDIR} miku && ${MV} escape.rb miku/escape.rb
 	${SED} -e 's,@PREFIX@,${PREFIX},g' < ${FILESDIR}/desktop.in > ${WRKDIR}/desktop
 	${SED} -e 's,@PREFIX@,${PREFIX},g' < ${FILESDIR}/mikutter.sh.in > ${WRKDIR}/mikutter.sh
@@ -52,5 +54,6 @@ do-install:
 	${INSTALL_SCRIPT} ${WRKDIR}/mikutter.sh ${DESTDIR}${PREFIX}/bin/mikutter
 	${INSTALL_DATA} ${WRKDIR}/desktop ${DESTDIR}${PREFIX}/share/applications/mikutter.desktop
 
+.include "../../lang/ruby/json.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../mk/bsd.pkg.mk"

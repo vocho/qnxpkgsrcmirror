@@ -1,4 +1,4 @@
-# $NetBSD: BSDOS.mk,v 1.28 2010/07/08 04:57:36 dholland Exp $
+# $NetBSD: BSDOS.mk,v 1.30 2011/09/17 08:06:40 abs Exp $
 #
 # Variable definitions for the BSD/OS operating system.
 

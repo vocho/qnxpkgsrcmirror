@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.31 2010/06/19 13:59:52 obache Exp $
+# $NetBSD: Makefile,v 1.33 2011/11/11 19:52:39 christos Exp $
 #
 
 DISTNAME=	simhv38-1
 PKGNAME=	simh-3.8.1
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	emulators
 MASTER_SITES=	http://simh.trailing-edge.com/sources/
 EXTRACT_SUFX=	.zip
@@ -30,7 +30,7 @@ BUILDLINK_TRANSFORM+=	rm:-O2
 INSTALLATION_DIRS=	bin share/simh share/doc/simh
 
 MAKE_FILE=		makefile
-MAKE_FLAGS+=		USE_NETWORK=YES
+MAKE_FLAGS+=		USE_NETWORK=YES OSTYPE=${LOWER_OPSYS}
 
 post-extract:
 	${MKDIR} ${WRKSRC}/BIN

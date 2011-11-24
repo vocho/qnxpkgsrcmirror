@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.40 2011/06/04 03:58:58 obache Exp $
+# $NetBSD: Makefile,v 1.43 2011/10/28 10:38:07 dsainty Exp $
 
 .include "dist.mk"
 
@@ -33,18 +33,19 @@ PTHREAD_OPTS+=	require
 CONFIGURE_ARGS+=	--with-pth
 .endif
 
+.include "../../mk/compiler.mk"
+
+# Clang needs -fwrapv
+.if !empty(PKGSRC_COMPILER:Mclang)
+CFLAGS+=	-fwrapv
+.endif
+
 .include "../../mk/bsd.prefs.mk"
 
 # fdatasync()
 LIBS.SunOS+=		-lrt
 
 PY_VER_SUFFIX=		2.6
-
-PLIST_SRC=	${.CURDIR}/../../lang/python26/PLIST.common
-.if exists(${.CURDIR}/../../lang/python26/PLIST.${OPSYS})
-PLIST_SRC+=	${.CURDIR}/../../lang/python26/PLIST.${OPSYS}
-.endif
-PLIST_SRC+=	${.CURDIR}/../../lang/python26/PLIST.common_end
 
 .if ${OPSYS} == "NetBSD"
 PRIVILEGED_STAGES+=	clean
@@ -66,6 +67,19 @@ PY_PLATNAME=	hp-ux11
 PY_PLATNAME=	${LOWER_OPSYS}${OS_VERSION:C/\..*//}
 .endif
 PLIST_SUBST+=	PY_PLATNAME=${PY_PLATNAME:Q}
+
+# PLIST to match ${WRKSRC}/Lib/plat-linux3
+.if ${PY_PLATNAME} == "linux3"
+PL_OPSYS=${OPSYS}3
+.else
+PL_OPSYS=${OPSYS}
+.endif
+
+PLIST_SRC=	${.CURDIR}/../../lang/python26/PLIST.common
+.if exists(${.CURDIR}/../../lang/python26/PLIST.${PL_OPSYS})
+PLIST_SRC+=	${.CURDIR}/../../lang/python26/PLIST.${PL_OPSYS}
+.endif
+PLIST_SRC+=	${.CURDIR}/../../lang/python26/PLIST.common_end
 
 .if (${MACHINE_ARCH} == "alpha") || (${MACHINE_ARCH} == "amd64") || \
     (${MACHINE_ARCH} == "sparc64") || (${MACHINE_ARCH} == "x86_64") || \
@@ -111,7 +125,9 @@ PLIST.nis=	yes
 .  endif
 .else
 PLIST.dll=	yes
-.  if ${OPSYS} != "NetBSD" || exists(/usr/bin/ypcat)
+.  if ${OPSYS} == "MirBSD"
+# neither nis nor no-nis
+.  elif ${OPSYS} != "NetBSD" || exists(/usr/bin/ypcat)
 PLIST.nis=	yes
 .  else
 PLIST.no-nis=	yes

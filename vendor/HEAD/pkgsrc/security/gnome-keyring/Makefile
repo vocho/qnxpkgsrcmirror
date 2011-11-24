@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.62 2011/07/14 14:25:45 obache Exp $
+# $NetBSD: Makefile,v 1.64 2011/11/01 06:02:28 sbd Exp $
 
 DISTNAME=	gnome-keyring-2.32.1
-PKGREVISION=	2
+PKGREVISION=	3
 CATEGORIES=	security gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gnome-keyring/2.32/}
 EXTRACT_SUFX=	.tar.bz2
@@ -26,6 +26,11 @@ CFLAGS.HPUX+=		-DMAP_ANON=MAP_ANONYMOUS
 # The bug is described in PR security/39313
 #
 CFLAGS.NetBSD+=		-DNO_STATIC_MODULES
+
+.include "../../mk/bsd.prefs.mk"
+.if ${OPSYS} == "SunOS"
+CONFIGURE_ENV+=	ac_cv_header_security_pam_modules_h=yes
+.endif
 
 .include "../../mk/dlopen.buildlink3.mk"
 

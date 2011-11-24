@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.8 2011/06/10 21:57:07 obache Exp $
+# $NetBSD: Makefile,v 1.11 2011/10/19 06:12:59 obache Exp $
 
 DISTNAME=	thrift-${THRIFT_VERSION}
 PKGNAME=	libthrift-${THRIFT_VERSION}
@@ -14,6 +14,8 @@ LICENSE=	apache-2.0
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
+MAKE_JOBS_SAFE=		no
+
 USE_LANGUAGES=		c c++
 USE_LIBTOOL=		yes
 USE_PKGLOCALEDIR=	yes
@@ -21,7 +23,10 @@ USE_TOOLS+=		gmake pkg-config
 GNU_CONFIGURE=		yes
 
 WRKSRC=		${WRKDIR}/thrift-${THRIFT_VERSION}
-THRIFT_VERSION=	0.6.1
+THRIFT_VERSION=	0.7.0
+
+pre-build:
+	${CHMOD} 0755 ${WRKSRC}/lib/erl/rebar
 
 .include "options.mk"
 

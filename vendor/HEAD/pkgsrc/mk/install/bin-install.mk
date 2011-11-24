@@ -1,4 +1,4 @@
-# $NetBSD: bin-install.mk,v 1.20 2011/02/07 10:33:27 wiz Exp $
+# $NetBSD: bin-install.mk,v 1.23 2011/11/05 17:04:42 tcort Exp $
 #
 
 # This file provides the following targets:
@@ -24,7 +24,7 @@
 #	any version of this package will do, but when installing
 #	dependencies, a special version may be needed.
 
-# XXX: This file contains implementation details from the "pkg" flavor,
+# XXX: This file contains implementation details from the "pkg" format,
 # for example the All/ directory and the @cwd.
 
 # List of sites carrying binary pkgs. Variables "rel" and "arch" are
@@ -32,6 +32,9 @@
 .if ${OPSYS} == "NetBSD"
 BINPKG_SITES?= \
 	ftp://ftp.NetBSD.org/pub/pkgsrc/packages/NetBSD/$${arch}/$${rel}
+.elif ${OPSYS} == "Minix"
+BINPKG_SITES?= \
+	ftp://ftp.minix3.org/pub/minix/packages/$$(${UNAME} -r)/$${arch}
 .elif ${OPSYS} == "DragonFly"
 BINPKG_SITES?= \
 	http://mirror-master.dragonflybsd.org/packages/$${arch}/DragonFly-$${rel}/stable
@@ -89,7 +92,7 @@ locked-su-do-bin-install:
 .if !empty(USE_CROSS_COMPILE:M[yY][eE][sS])
 	${RUN} ${_BIN_INSTALL_PREPARE_CMD}				\
 	${STEP_MSG} "Installing ${PKGNAME} from $$pkg_path";		\
-	if ${SETENV} PKG_PATH="$$pkg_path" ${PKG_ADD} -m ${MACHINE_ARCH} -I -p ${_CROSS_DESTDIR}${PREFIX} ${_BIN_INSTALL_FLAGS} ${PKGNAME_REQD:Q}${PKG_SUFX}; then \
+	if ${PKGSRC_SETENV} PKG_PATH="$$pkg_path" ${PKG_ADD} -m ${MACHINE_ARCH} -I -p ${_CROSS_DESTDIR}${PREFIX} ${_BIN_INSTALL_FLAGS} ${PKGNAME_REQD:Q}${PKG_SUFX}; then \
 		${ECHO} "Fixing recorded cwd...";			\
 		${SED} -e 's|@cwd ${_CROSS_DESTDIR}|@cwd |' ${_PKG_DBDIR}/${PKGNAME:Q}/+CONTENTS > ${_PKG_DBDIR}/${PKGNAME:Q}/+CONTENTS.tmp; \
 		${MV} ${_PKG_DBDIR}/${PKGNAME:Q}/+CONTENTS.tmp ${_PKG_DBDIR}/${PKGNAME:Q}/+CONTENTS; \
@@ -99,7 +102,7 @@ locked-su-do-bin-install:
 	${RUN} ${_BIN_INSTALL_PREPARE_CMD}				\
 	pkgpattern=${PKGNAME_REQD:Q};					\
 	${STEP_MSG} "Installing $$pkgpattern from $$pkg_path";		\
-	if ${SETENV} PKG_PATH="$$pkg_path" ${PKG_ADD} ${_BIN_INSTALL_FLAGS} "$$pkgpattern"; then \
+	if ${PKGSRC_SETENV} PKG_PATH="$$pkg_path" ${PKG_ADD} ${_BIN_INSTALL_FLAGS} "$$pkgpattern"; then \
 		installed=`${PKG_INFO} -e "$$pkgpattern"`;		\
 		${ECHO} "$$installed successfully installed.";		\
 	fi

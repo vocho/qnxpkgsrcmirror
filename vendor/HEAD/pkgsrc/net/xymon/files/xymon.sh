@@ -1,4 +1,4 @@
-#!/bin/sh
+#!@RCD_SCRIPTS_SHELL@
 #
 # Xymon site monitoring server
 # Startup script contributed by Nathan Arthur (originally for hobbitmon)
@@ -27,8 +27,10 @@ command_args="--config=${xymon_launchcfg} --env=${xymon_servercfg} --log=${xymon
 
 xymon_precmd()
 {
-	HOBBITCLIENTHOME="@BBHOME@/client"
-        export HOBBITCLIENTHOME
+	XYMONHOME="@XYMONHOME@"
+        export XYMONHOME
+	XYMONCLIENTHOME="@XYMONHOME@/client"
+        export XYMONCLIENTHOME
 
 	touch ${xymon_pidfile} && chown ${xymon_user} ${xymon_pidfile}
 }

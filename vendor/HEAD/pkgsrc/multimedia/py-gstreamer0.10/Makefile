@@ -1,9 +1,8 @@
-# $NetBSD: Makefile,v 1.23 2011/04/22 13:44:18 obache Exp $
+# $NetBSD: Makefile,v 1.25 2011/11/16 19:48:29 drochner Exp $
 #
 
-DISTNAME=		gst-python-0.10.21
+DISTNAME=		gst-python-0.10.22
 PKGNAME=		${PYPKGPREFIX}-${DISTNAME:S/gst-python/gstreamer0.10/}
-PKGREVISION=		1
 CATEGORIES=		multimedia
 MASTER_SITES=		http://gstreamer.freedesktop.org/src/gst-python/
 EXTRACT_SUFX=		.tar.bz2
@@ -27,6 +26,11 @@ CONFIGURE_ENV+=		PYTHON=${PYTHONBIN}
 PY_PATCHPLIST=		yes
 
 PKGCONFIG_OVERRIDE+=	pkgconfig/gst-python.pc.in
+
+.include "../../mk/bsd.prefs.mk"
+.if ${OPSYS} == "SunOS"
+CONFIGURE_ENV+=		ac_cv_prog_cc_c99=no
+.endif
 
 .include "../../multimedia/gstreamer0.10/buildlink3.mk"
 BUILDLINK_API_DEPENDS.gst-plugins0.10-base+=	gst-plugins0.10-base>=0.10.26
