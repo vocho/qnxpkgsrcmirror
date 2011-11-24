@@ -88,7 +88,9 @@ CXXFLAGS+=		-D_POSIX_C_SOURCE=199506L -D__EXTENSIONS__
 # binaries are actually linked against -lreadline, so make this only
 # a build-time dependency.
 #
+.if ${OPSYS} != "QNX"
 BUILDLINK_DEPMETHOD.readline=	build
+.endif
 .include "../../devel/readline/buildlink3.mk"
 
 post-configure:
