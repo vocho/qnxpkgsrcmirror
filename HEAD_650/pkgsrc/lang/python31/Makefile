@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.3 2011/06/22 18:42:16 adam Exp $
+# $NetBSD: Makefile,v 1.4 2011/09/10 11:23:12 obache Exp $
 
 .include "dist.mk"
 
 PKGNAME=	python31-${PY_DISTVERSION}
+PKGREVISION=	1
 CATEGORIES=	lang python
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
@@ -123,7 +124,9 @@ MAKE_ENV+=	PY_BDB_INCDIRS=${BUILDLINK_INCDIRS.${BDB_TYPE}:S,^,${BDBBASE}/,:Q}
 MAKE_ENV+=	PY_BDB_LIBDIRS=${BDBBASE}/lib
 PLIST.bsddb=	yes
 PLIST.dll=	yes
-.  if ${OPSYS} != "NetBSD" || exists(/usr/bin/ypcat)
+.  if ${OPSYS} == "QNX"
+# neither nis nor no-nis
+.  elif ${OPSYS} != "NetBSD" || exists(/usr/bin/ypcat)
 PLIST.nis=	yes
 .  else
 PLIST.no-nis=	yes
