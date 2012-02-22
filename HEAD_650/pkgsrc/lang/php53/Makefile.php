@@ -1,4 +1,4 @@
-# $NetBSD: Makefile.php,v 1.8 2011/08/23 22:22:27 taca Exp $
+# $NetBSD: Makefile.php,v 1.10 2011/10/20 12:39:33 taca Exp $
 # used by lang/php53/Makefile
 # used by www/ap-php/Makefile
 

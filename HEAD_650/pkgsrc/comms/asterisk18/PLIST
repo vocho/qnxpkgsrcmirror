@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.6 2011/07/16 21:35:11 jnemeth Exp $
+@comment $NetBSD: PLIST,v 1.9 2011/10/17 23:40:50 jnemeth Exp $
 include/asterisk.h
 include/asterisk/_private.h
 include/asterisk/abstract_jb.h
@@ -211,13 +211,17 @@ lib/asterisk/modules/cdr_csv.so
 lib/asterisk/modules/cdr_custom.so
 lib/asterisk/modules/cdr_manager.so
 ${PLIST.unixodbc}lib/asterisk/modules/cdr_odbc.so
+lib/asterisk/modules/cdr_sqlite3_custom.so
 lib/asterisk/modules/cdr_syslog.so
 lib/asterisk/modules/cel_custom.so
 lib/asterisk/modules/cel_manager.so
 ${PLIST.unixodbc}lib/asterisk/modules/cel_odbc.so
+lib/asterisk/modules/cel_sqlite3_custom.so
 lib/asterisk/modules/chan_agent.so
 lib/asterisk/modules/chan_bridge.so
+${PLIST.jabber}lib/asterisk/modules/chan_gtalk.so
 lib/asterisk/modules/chan_iax2.so
+${PLIST.jabber}lib/asterisk/modules/chan_jingle.so
 lib/asterisk/modules/chan_local.so
 lib/asterisk/modules/chan_mgcp.so
 lib/asterisk/modules/chan_multicast_rtp.so
@@ -313,6 +317,7 @@ lib/asterisk/modules/res_crypto.so
 lib/asterisk/modules/res_curl.so
 lib/asterisk/modules/res_fax.so
 ${PLIST.spandsp}lib/asterisk/modules/res_fax_spandsp.so
+${PLIST.jabber}lib/asterisk/modules/res_jabber.so
 lib/asterisk/modules/res_limit.so
 lib/asterisk/modules/res_monitor.so
 lib/asterisk/modules/res_musiconhold.so
@@ -348,7 +353,7 @@ libdata/asterisk/phoneprov/000000000000.cfg
 libdata/asterisk/phoneprov/polycom.xml
 libdata/asterisk/phoneprov/polycom_line.xml
 libdata/asterisk/phoneprov/snom-mac.xml
-libdata/asterisk/sounds/.asterisk-core-sounds-en-gsm-1.4.21
+libdata/asterisk/sounds/en/.asterisk-core-sounds-en-gsm-1.4.21
 libdata/asterisk/sounds/en/1-for-am-2-for-pm.gsm
 libdata/asterisk/sounds/en/1-yes-2-no.gsm
 libdata/asterisk/sounds/en/CHANGES-asterisk-core-en-1.4.21
@@ -2122,12 +2127,14 @@ sbin/astgenkey
 sbin/autosupport
 sbin/rasterisk
 sbin/safe_asterisk
+share/doc/asterisk/AST.pdf
 share/doc/asterisk/AST.txt
 share/doc/asterisk/BUGS
 share/doc/asterisk/CHANGES
 share/doc/asterisk/COPYING
 share/doc/asterisk/CREDITS
 share/doc/asterisk/ChangeLog
+share/doc/asterisk/IAX2-security.pdf
 share/doc/asterisk/IAX2-security.txt
 share/doc/asterisk/LICENSE
 share/doc/asterisk/README
@@ -2239,10 +2246,6 @@ share/examples/asterisk/vpb.conf
 share/examples/rc.d/asterisk
 ${PLIST.webvmail}share/httpd/htdocs/_asterisk/animlogo.gif
 ${PLIST.webvmail}share/httpd/htdocs/_asterisk/play.gif
-@pkgdir libdata/asterisk/sounds/ru
-@pkgdir libdata/asterisk/sounds/fr
-@pkgdir libdata/asterisk/sounds/es
-@pkgdir libdata/asterisk/sounds/en_AU
 @pkgdir libdata/asterisk/keys
 @pkgdir libdata/asterisk/firmware/iax
 @pkgdir libdata/asterisk/documentation/thirdparty

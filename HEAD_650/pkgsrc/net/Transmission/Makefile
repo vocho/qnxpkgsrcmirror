@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.73 2011/08/23 14:49:56 tnn Exp $
+# $NetBSD: Makefile,v 1.76 2011/11/01 06:11:56 sbd Exp $
 #
-DISTNAME=		transmission-2.32
-PKGNAME=		Transmission-2.32
+DISTNAME=		transmission-2.42
+PKGNAME=		Transmission-2.42
+PKGREVISION=		1
 CATEGORIES=		net
 MASTER_SITES=		http://download.m0k.org/transmission/files/
 EXTRACT_SUFX=		.tar.bz2
@@ -20,22 +21,10 @@ LICENSE=		gnu-gpl-v2 AND mit
 
 GNU_CONFIGURE=		yes
 LDFLAGS+=		${BUILDLINK_LDADD.getopt} ${BUILDLINK_LDADD.gettext}
-# Tell libtool to link all internal libraries statically
-LDFLAGS+=		-static
 
 .include "../../mk/bsd.prefs.mk"
 .if !empty(OPSYS:M*BSD) || !empty(OPSYS:MDragonFly)
 CPPFLAGS+=		-DBSD
-.endif
-
-# Workaround for PR lib/40714, fixed since NetBSD-5.99.16
-.if !empty(MACHINE_PLATFORM:MNetBSD-[1-5].*)
-SUBST_CLASSES+=		tg
-SUBST_STAGE.tg=		pre-configure
-SUBST_MESSAGE.tg=	removing thousands grouping flag from %f (PR lib/40714)
-SUBST_FILES.tg=		daemon/remote.c gtk/util.c	\
-			  libtransmission/utils.c qt/details.cc */*.po
-SUBST_SED.tg=		-e "s,%\\([.0-9$$]*\\)'\\([.0-9$$]*\\)f,%\\1\\2f,g"
 .endif
 
 PLIST_SRC+=		${PKGDIR}/PLIST.common

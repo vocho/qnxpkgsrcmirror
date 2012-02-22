@@ -1,4 +1,4 @@
-# $NetBSD: phpversion.mk,v 1.14 2011/03/12 14:07:13 wiz Exp $
+# $NetBSD: phpversion.mk,v 1.16 2011/10/29 13:47:03 cheusov Exp $
 #
 # This file selects a PHP version, based on the user's preferences and
 # the installed packages. It does not add a dependency on the PHP
@@ -70,26 +70,13 @@ _SYS_VARS.php=	PKG_PHP_VERSION PKG_PHP PHPPKGSRCDIR PHP_PKG_PREFIX \
 
 .include "../../mk/bsd.prefs.mk"
 
-PHP_VERSION_DEFAULT?=		5
+PHP_VERSION_DEFAULT?=		53
 PHP_VERSIONS_ACCEPTED?=		5 53
 
 # transform the list into individual variables
 .for pv in ${PHP_VERSIONS_ACCEPTED}
 _PHP_VERSION_${pv}_OK=	yes
 .endfor
-
-# most pkgsrc PHP5 extensions work on both PHP 5.2.* and 5.3.*; if marked
-# as '5', accent any 5.*
-.if defined(_PHP_VERSION_5_OK)
-.  if !defined(_PHP_VERSION_53_OK)
-_PHP_VERSION_53_OK=	yes
-PHP_VERSIONS_ACCEPTED+= 53
-.  endif
-.  if !defined(_PHP_VERSION_52_OK)
-_PHP_VERSION_52_OK=	yes
-PHP_VERSIONS_ACCEPTED+= 52
-.  endif
-.endif
 
 # check what is installed
 .if exists(${LOCALBASE}/lib/php/20040412)

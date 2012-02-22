@@ -104,4 +104,4 @@ PAM_DEFAULT?=		openpam
 PREFER.zlib?=		pkgsrc
 PREFER.bzip2?=		pkgsrc
 PREFER.curses?=		pkgsrc
-#PREFER.termcap?=	pkgsrc
+PREFER.termcap?=	pkgsrc

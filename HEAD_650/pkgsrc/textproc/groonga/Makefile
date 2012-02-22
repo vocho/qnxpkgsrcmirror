@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.7 2011/07/29 12:30:36 obache Exp $
+# $NetBSD: Makefile,v 1.11 2011/11/08 15:42:27 taca Exp $
 #
 
-DISTNAME=	groonga-1.2.4
+DISTNAME=	groonga-1.2.7
 CATEGORIES=	textproc
 MASTER_SITES=	http://packages.groonga.org/source/groonga/
 
@@ -13,7 +13,7 @@ LICENSE=	gnu-lgpl-v2.1
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 .include "../../lang/ruby/rubyversion.mk"
-DEPENDS+=	${RUBY_BASE}>=${RUBY_REQD}:../../lang/${RUBY_BASE}
+DEPENDS+=	${RUBY_BASE}>=${RUBY_VERSION}:../../lang/${RUBY_BASE}
 
 GNU_CONFIGURE=	yes
 USE_LANGUAGES=	c c++

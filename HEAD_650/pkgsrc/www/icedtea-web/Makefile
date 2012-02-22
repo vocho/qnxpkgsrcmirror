@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.1.1.1 2011/08/21 23:01:22 tnn Exp $
+# $NetBSD: Makefile,v 1.3 2011/11/01 06:02:46 sbd Exp $
 #
 
 DISTNAME=	61e08e67b176
 PKGNAME=	icedtea-web-1.2pre
+PKGREVISION=	1
 CATEGORIES=	www
 MASTER_SITES=	http://icedtea.classpath.org/hg/icedtea-web/archive/
 EXTRACT_SUFX=	.tar.bz2
@@ -16,7 +17,7 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=		yes
 USE_LANGUAGES+=		c c++
-USE_TOOLS+=		autoconf automake gmake pkg-config
+USE_TOOLS+=		autoconf automake gmake pkg-config zip
 WRKSRC=			${WRKDIR}/icedtea-web-${DISTNAME}
 
 CONFIGURE_ARGS+=	 --with-jdk-home=${PREFIX}/java/openjdk7

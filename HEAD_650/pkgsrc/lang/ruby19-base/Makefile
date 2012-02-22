@@ -1,19 +1,19 @@
-# $NetBSD: Makefile,v 1.11 2011/08/20 13:51:29 taca Exp $
+# $NetBSD: Makefile,v 1.18 2011/11/13 15:45:24 taca Exp $
 #
 
 DISTNAME=	${RUBY_DISTNAME}
-PKGNAME=	${RUBY_PKGPREFIX}-base-${RUBY_VERSION_SUFFIX}
-PKGREVISION=	1
+PKGNAME=	${RUBY_PKGPREFIX}-base-${RUBY_VERSION_FULL}
+PKGREVISION=	5
 CATEGORIES=	lang ruby
 MASTER_SITES=	${MASTER_SITE_RUBY}
 #PKGREVISION=
 
 MAINTAINER=	taca@NetBSD.org
 HOMEPAGE=	${RUBY_HOMEPAGE}
-COMMENT=	Ruby 1.9 based release minimum package
+COMMENT=	Ruby  ${RUBY_VERSION} release minimum package
 LICENSE=	gnu-gpl-v2 OR ruby-license
 
-RUBY_VERSION=	${RUBY19_VERSION}
+RUBY_VERSION_SUPPORTED=	19
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
@@ -86,9 +86,6 @@ CONFIGURE_ENV+=	ac_cv_header_ucontext_h=no
 .endif
 
 .if ${OPSYS} == "QNX"
-.if ${MACHINE_ARCH} == "i386"
-RUBY_ARCH= i386-nto-qnx${LOWER_OPSYS_VERSUFFIX}
-.endif
 CONFIGURE_ENV+=	rb_cv_fork_with_pthread=yes
 
 # ruby wants a large stack
@@ -100,7 +97,7 @@ post-build:
 #
 # work around for getaddrinfo(3)
 #
-.if ${OPSYS} == "Linux" || (${OPSYS} == "SunOS" && !empty(OS_VERSION:M5.[6-9]))
+.if ${OPSYS} == "SunOS" && !empty(OS_VERSION:M5.[6-9])
 CONFIGURE_ARGS+=	--enable-wide-getaddrinfo
 .endif
 
@@ -133,6 +130,8 @@ EMPTY_DIRS=		generator/template markup/simple_markup
 pre-configure:
 	${RM} -f ${WRKSRC}/ext/curses/extconf.rb
 	${RM} -f ${WRKSRC}/ext/gdbm/extconf.rb
+	${RM} -f ${WRKSRC}/ext/fiddle/extconf.rb
+	${RM} -f ${WRKSRC}/ext/psych/extconf.rb
 	${RM} -f ${WRKSRC}/ext/readline/extconf.rb
 	${RM} -f ${WRKSRC}/ext/tk/extconf.rb
 

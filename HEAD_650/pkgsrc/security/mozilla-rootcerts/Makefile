@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.6 2010/11/13 21:09:03 shattered Exp $
+# $NetBSD: Makefile,v 1.8 2011/09/08 19:46:01 drochner Exp $
 
 DISTNAME=	mozilla-rootcerts-1.0.${CERTDATA_DATE}
 CATEGORIES=	security
@@ -15,7 +15,7 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS=	awk:run echo:run expr:run ln:run ls:run openssl:run rm:run
 
-CERTDATA_DATE=	20100827
+CERTDATA_DATE=	20110902
 CERTDATA=	certdata-${CERTDATA_DATE}.txt
 
 WRKSRC=		${WRKDIR}

@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.12 2011/04/22 13:44:45 obache Exp $
+# $NetBSD: Makefile,v 1.14 2011/11/01 06:02:36 sbd Exp $
 
 DISTNAME=	strigi-0.6.4
-PKGREVISION=	7
+PKGREVISION=	8
 CATEGORIES=	sysutils
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=strigi/}
 EXTRACT_SUFX=	.tar.bz2
@@ -26,6 +26,8 @@ RT_LIB_SCHED=	-lrt
 .else
 RT_LIB_SCHED=	# empty
 .endif
+
+LDFLAGS.SunOS+=	-mimpure-text
 
 CMAKE_ARGS+=	-DENABLE_CPPUNIT=OFF
 .if !empty(RT_LIB_SCHED)

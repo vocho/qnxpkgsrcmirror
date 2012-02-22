@@ -18,4 +18,8 @@ CONFIGURE_ARGS+=	--with-fontrootdir=${PREFIX}/lib/X11/fonts
 
 USE_TOOLS+=		gzip mkfontscale
 
+post-build:
+	${MV} -f ${WRKSRC}/encodings.dir ${WRKSRC}/encodings.dir.bak
+	${SED} -e '/\.enc$$/ d' ${WRKSRC}/encodings.dir.bak > ${WRKSRC}/encodings.dir
+
 .include "../../mk/bsd.pkg.mk"

@@ -1,4 +1,4 @@
-# $NetBSD: bsd.prefs.mk,v 1.314 2011/04/07 08:08:45 wiz Exp $
+# $NetBSD: bsd.prefs.mk,v 1.318 2011/10/26 16:01:14 hans Exp $
 #
 # This file includes the mk.conf file, which contains the user settings.
 #
@@ -288,7 +288,7 @@ MAKEFLAGS+=		LOWER_ARCH=${LOWER_ARCH:Q}
 .  endif
 LOWER_VENDOR?=		sun
 LOWER_OPSYS?=		solaris
-LOWER_OPSYS_VERSUFFIX=	2
+LOWER_OPSYS_VERSUFFIX=	2.${OS_VERSION:C/5.//}
 
 .elif !defined(LOWER_OPSYS)
 LOWER_OPSYS:=		${OPSYS:tl}
@@ -552,7 +552,7 @@ IPV6_READY=		NO
 .endif
 
 LOCALBASE?=		/usr/pkg
-X11_TYPE?=		native
+X11_TYPE?=		modular
 .if !empty(X11_TYPE:Mnative)
 .  if ${OPSYS} == "SunOS"
 # On Solaris, we default to using OpenWindows for X11.
@@ -714,8 +714,8 @@ PREPEND_PATH+=		${LOCALBASE}/bin
 # System features framework
 .include "features/features-vars.mk"
 
-# Package system flavor definitions
-.include "flavor/bsd.flavor-vars.mk"
+# Package system format definitions
+.include "pkgformat/bsd.pkgformat-vars.mk"
 
 # Make variable definitions cache
 .include "bsd.makevars.mk"
@@ -724,7 +724,7 @@ PREPEND_PATH+=		${LOCALBASE}/bin
 # processes invoked by pkgsrc.
 #
 PKGSRC_MAKE_ENV+=	${MAKECONF:DMAKECONF=${MAKECONF:Q}}
-RECURSIVE_MAKE=		${SETENV} ${PKGSRC_MAKE_ENV} ${MAKE}
+RECURSIVE_MAKE=		${PKGSRC_SETENV} ${PKGSRC_MAKE_ENV} ${MAKE}
 
 _VARGROUPS+=		dirs
 _USER_VARS.dirs=	DISTDIR LOCALBASE PACKAGES PKG_SYSCONFDIR WRKOBJDIR

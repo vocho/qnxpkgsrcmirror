@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.64 2011/08/12 15:33:12 taca Exp $
+# $NetBSD: Makefile,v 1.67 2011/11/13 15:44:58 taca Exp $
 #
 
 DISTNAME=	${RUBY_DISTNAME}
-PKGNAME=	${RUBY_PKGPREFIX}-base-${RUBY_VERSION_SUFFIX}
+PKGNAME=	${RUBY_PKGPREFIX}-base-${RUBY_VERSION_FULL}
+PKGREVISION=	1
 CATEGORIES=	lang ruby
 MASTER_SITES=	${MASTER_SITE_RUBY}
 
@@ -11,7 +12,7 @@ HOMEPAGE=	${RUBY_HOMEPAGE}
 COMMENT=	Ruby 1.8 based release minimum package
 LICENSE=	gnu-gpl-v2 OR ruby-license
 
-RUBY_VERSION=	${RUBY18_VERSION}
+RUBY_VERSION_SUPPORTED=	18
 
 CONFLICTS=	${RUBY_PKGPREFIX}-dbm-[0-9]* \
 		${RUBY_PKGPREFIX}-digest-[0-9]* \
@@ -55,10 +56,6 @@ FILES_SUBST+=	DATE=${DATE:Q}
 
 .include "options.mk"
 
-.if ${OPSYS} == "QNX" && ${MACHINE_ARCH} == "i386"
-RUBY_ARCH= i386-nto-qnx${LOWER_OPSYS_VERSUFFIX}
-.endif
-
 .include "../../lang/ruby/rubyversion.mk"
 
 .if !empty(RUBY_SUFFIX)
@@ -84,7 +81,7 @@ CONFIGURE_ENV+=	ac_cv_header_ucontext_h=no
 #
 # work around for getaddrinfo(3)
 #
-.if ${OPSYS} == "Linux" || (${OPSYS} == "SunOS" && !empty(OS_VERSION:M5.[6-9]))
+.if ${OPSYS} == "SunOS" && !empty(OS_VERSION:M5.[6-9])
 CONFIGURE_ARGS+=	--enable-wide-getaddrinfo
 .endif
 
@@ -116,7 +113,6 @@ FIX_PERM=		${RUBY_ARCHLIB}/digest.h ${RUBY_ARCHLIB}/dl.h \
 			${RUBY_ARCHLIB}/dlconfig.h
 
 pre-configure:
-	${ECHO} >> ${WRKSRC}/version.h		# workaround for no EOL.
 	${RM} -f ${WRKSRC}/ext/curses/extconf.rb
 	${RM} -f ${WRKSRC}/ext/gdbm/extconf.rb
 	${RM} -f ${WRKSRC}/ext/readline/extconf.rb

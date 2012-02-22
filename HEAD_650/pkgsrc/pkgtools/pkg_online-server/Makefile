@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.4 2011/05/21 09:07:04 wiz Exp $
+# $NetBSD: Makefile,v 1.6 2011/10/09 10:02:45 cheusov Exp $
 #
 
 .include "../../pkgtools/pkg_online-server/Makefile.common"
 
 PKGNAME=	${DISTNAME:C/online/online-server/}
 CATEGORIES=	pkgtools
-MAINTAINER=	cheusov@tut.by
+MAINTAINER=	cheusov@NetBSD.org
 COMMENT+=	(server tools)
 
 DEPENDS+=	dict-server>=1.10.10nb2:../../textproc/dict-server
@@ -26,4 +26,5 @@ CONF_FILES=	${EGDIR}/pkg_online_server.conf \
 
 MAKE_PROGRAM=	mkcmake
 
+.include "../../devel/mk-configure/configure.mk"
 .include "../../mk/bsd.pkg.mk"

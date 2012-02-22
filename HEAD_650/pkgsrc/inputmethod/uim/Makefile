@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.52 2011/07/21 13:05:57 obache Exp $
+# $NetBSD: Makefile,v 1.54 2011/11/01 06:11:55 sbd Exp $
 #
 
 .include "../../inputmethod/uim/Makefile.common"
 
-PKGREVISION=		2
+PKGREVISION=		3
 COMMENT=		Multilingual input method library
 
 CONFLICTS+=		uim-qt4-immodule-[0-9]*
@@ -18,6 +18,12 @@ PKGCONFIG_OVERRIDE+=	${WRKSRC}/uim.pc.in
 GNU_CONFIGURE=		YES
 CONFIGURE_ARGS+=	--disable-emacs
 CONFIGURE_ARGS+=	--with-libgcroots=installed
+
+.include "../../mk/bsd.prefs.mk"
+.if ${OPSYS} == "SunOS"
+MAKE_ENV+=	SunOS_LDFLAGS="-shared -mimpure-text"
+CFLAGS.SunOS+=	-std=c99 -D__EXTENSIONS__
+.endif
 
 .include "options.mk"
 

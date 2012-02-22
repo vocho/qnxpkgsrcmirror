@@ -1,8 +1,8 @@
-# $NetBSD: options.mk,v 1.2 2011/02/10 09:49:09 ahoka Exp $
+# $NetBSD: options.mk,v 1.7 2011/11/03 18:16:52 abs Exp $
 #
 
-PKG_OPTIONS_VAR=	PKG_OPTIONS.ns-flash
-PKG_SUPPORTED_OPTIONS=	nspluginwrapper
+PKG_OPTIONS_VAR=	PKG_OPTIONS.adobe-flash-plugin
+PKG_SUPPORTED_OPTIONS=	nspluginwrapper pulseaudio
 
 # XXXX: If nspluginwrapper is enabled and this package is installed after
 # firefox (or similar) it will install a system wide wrapped plugin into
@@ -12,14 +12,22 @@ PKG_SUPPORTED_OPTIONS=	nspluginwrapper
 
 .include "../../mk/bsd.prefs.mk"
 
-.if ${MACHINE_ARCH} == "i386" && ${OPSYS} != "Linux"
-PKG_SUGGESTED_OPTIONS=  nspluginwrapper
+.if ${OPSYS} != "Linux"
+.  if ${MACHINE_ARCH} == "i386" || ${MACHINE_ARCH} == "x86_64"
+PKG_SUGGESTED_OPTIONS=	nspluginwrapper
+.  endif
 .endif
 
 .include "../../mk/bsd.options.mk"
 
 .if !empty(PKG_OPTIONS:Mnspluginwrapper)
 DEPENDS+= nspluginwrapper>0:../../www/nspluginwrapper
+.  if !empty(PKG_OPTIONS:Mpulseaudio)
+# usr/lib/libpulse.so.0 provided by suse32_gtk2
+MESSAGE_SRC+=		${PKGDIR}/MESSAGE.pulseaudio
+.  else
+DEPENDS+= libflashsupport>0:../../multimedia/libflashsupport
+.  endif
 INSTALL_TEMPLATES+=	${PKGDIR}/INSTALL.nspluginwrapper
 DEINSTALL_TEMPLATES+=	${PKGDIR}/INSTALL.nspluginwrapper
 .endif

@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.15 2011/06/09 16:44:10 drochner Exp $
+# $NetBSD: Makefile,v 1.17 2011/11/01 06:00:55 sbd Exp $
 #
 
 VERS=			4.4.15
 DISTNAME=		eric4-${VERS}
+PKGREVISION=		1
 CATEGORIES=		devel
 MASTER_SITES=	http://downloads.sourceforge.net/project/eric-ide/eric4/stable/${VERS}/
 
@@ -32,6 +33,7 @@ do-install:
 .include "../../lang/python/extension.mk"
 .include "../../x11/py-qt4/buildlink3.mk"
 .include "../../x11/qt4-qscintilla/buildlink3.mk"
+.include "../../x11/qt4-tools/buildlink3.mk"
 .include "../../x11/py-qt4-qscintilla/buildlink3.mk"
 BUILDLINK_API_DEPENDS.pyxml+=	${PYPKGPREFIX}-xml>=0.8.4nb3
 .include "../../mk/bsd.pkg.mk"

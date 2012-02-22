@@ -1,16 +1,45 @@
-$NetBSD: patch-ah,v 1.17 2010/05/21 10:05:20 sbd Exp $
+$NetBSD: patch-ah,v 1.18 2011/10/04 14:11:15 hans Exp $
 
 Some builds of gcc seem to support this for compiling but then fail during
 linking with undefined reference to `__stack_chk_fail_local'
 
---- config-scripts/cups-compiler.m4.orig	2009-05-17 00:13:47.000000000 +0000
+--- config-scripts/cups-compiler.m4.orig	2011-06-10 21:16:18.000000000 +0000
 +++ config-scripts/cups-compiler.m4
-@@ -152,7 +152,7 @@ if test -n "$GCC"; then
- 	AC_MSG_CHECKING(if GCC supports -pie)
+@@ -125,7 +125,7 @@ if test -n "$GCC"; then
+ 	AC_MSG_CHECKING(if GCC supports -fstack-protector)
  	OLDCFLAGS="$CFLAGS"
- 	CFLAGS="$CFLAGS -pie -fPIE"
--	AC_TRY_COMPILE(,,
-+	AC_TRY_LINK(,,
- 		PIEFLAGS="-pie -fPIE"
+ 	CFLAGS="$CFLAGS -fstack-protector"
+-	AC_TRY_LINK(,,
++	AC_TRY_LINK(, [return 0;],
+ 		OPTIM="$OPTIM -fstack-protector"
  		AC_MSG_RESULT(yes),
  		AC_MSG_RESULT(no))
+@@ -136,17 +136,17 @@ if test -n "$GCC"; then
+ 	# that depend on a fixed address for common functions.
+ 	AC_MSG_CHECKING(if GCC supports -fPIE)
+ 	OLDCFLAGS="$CFLAGS"
+-	CFLAGS="$CFLAGS -fPIE"
+-	AC_TRY_COMPILE(,,
+-		[case "$CC" in
+-			*clang)
+-				PIEFLAGS="-fPIE -Wl,-pie"
+-				;;
+-			*)
+-				PIEFLAGS="-fPIE -pie"
+-				;;
+-		esac
+-		AC_MSG_RESULT(yes)],
++	case "$CC" in
++		*clang)
++			CFLAGS="$CFLAGS -fPIE -Wl,-pie"
++			;;
++		*)
++			CFLAGS="-fPIE -pie"
++			;;
++	esac
++	AC_TRY_LINK(, [return 0;],
++		PIEFLAGS="$CFLAGS"
++		AC_MSG_RESULT(yes),
+ 		AC_MSG_RESULT(no))
+ 	CFLAGS="$OLDCFLAGS"
+ 

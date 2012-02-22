@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.3 2011/07/08 09:32:07 adam Exp $
+# $NetBSD: Makefile,v 1.6 2011/10/22 10:32:37 adam Exp $
 
 PKGNAME=	${DISTNAME:S/-/-server-/}
 SVR4_PKGNAME=	mysqs
@@ -18,6 +18,10 @@ CMAKE_ARGS+=		-DWITH_LIBWRAP=ON
 .if !empty(PKG_OPTIONS:Membedded-server)
 CMAKE_ARGS+=		-DWITH_EMBEDDED_SERVER=ON
 PLIST.embedded=		yes
+.else
+# We only need readline to placate the configure script if we don't build
+# the embedded server as it is the only binary linked against "readline".
+BUILDLINK_DEPMETHOD.readline=	build
 .endif
 
 # ndb-cluster does not configure with cmake
@@ -71,11 +75,6 @@ CFLAGS+=		-D_POSIX_C_SOURCE=199506L -D__EXTENSIONS__
 CXXFLAGS+=		-D_POSIX_C_SOURCE=199506L -D__EXTENSIONS__
 .endif
 
-# mysql-client includes collide with server includes
-#.include "../../databases/mysql55-client/buildlink3.mk"
-# We only need readline to placate the configure script. None of the binaries
-# are linked against -lreadline, so make this only a build-time dependency.
-BUILDLINK_DEPMETHOD.readline=	build
 .include "../../devel/readline/buildlink3.mk"
 .include "../../security/tcp_wrappers/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

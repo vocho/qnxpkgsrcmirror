@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.59 2010/06/02 12:06:21 adam Exp $
+# $NetBSD: Makefile,v 1.61 2011/08/31 21:30:40 tron Exp $
 #
 # NOTE:
 # When updating this package, a change in the minor (4.n -> 4.(n+1))

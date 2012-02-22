@@ -1,17 +1,23 @@
-$NetBSD: patch-aa,v 1.7 2011/10/03 12:37:24 tnn Exp $
+$NetBSD: patch-aa,v 1.8 2011/11/12 12:45:04 tnn Exp $
 
---- configure.in.orig	2011-09-22 20:20:19.000000000 +0000
+--- configure.in.orig	2011-11-04 21:33:54.000000000 +0000
 +++ configure.in
-@@ -1433,7 +1433,7 @@ QNX)
-         OS_RELEASE=`uname -v | sed 's/^\([0-9]\)\([0-9]*\)$/\1.\2/'`
-         changequote([,])
-     fi
--    OS_TEST=x86
-+    OS_TEST=`uname -p | sed -e 's/x86/i386/'`
+@@ -1481,6 +1481,14 @@ OS_2)
+     OS_TARGET=OS2
+     OS_RELEASE=`uname -v`
      ;;
++QNX)
++    if test "$OS_TARGET" != "NTO"; then
++        changequote(,)
++        OS_RELEASE=`uname -v | sed 's/^\([0-9]\)\([0-9]*\)$/\1.\2/'`
++        changequote([,])
++    fi
++    OS_TEST=`uname -p | sed -e 's/x86/i386/'`
++    ;;
  SCO_SV)
      OS_ARCH=SCOOS
-@@ -2090,7 +2090,7 @@ case "$target" in
+     OS_RELEASE=5.0
+@@ -2137,7 +2145,7 @@ case "$target" in
      MOZ_FIX_LINK_PATHS='-Wl,-executable_path,$(LIBXUL_DIST)/bin'
      ;;
  
@@ -20,7 +26,7 @@ $NetBSD: patch-aa,v 1.7 2011/10/03 12:37:24 tnn Exp $
      if test `test -x /usr/bin/objformat && /usr/bin/objformat || echo elf` != "elf"; then
  	DLL_SUFFIX=".so.1.0"
  	DSO_LDOPTS="-shared"
-@@ -2098,6 +2098,9 @@ case "$target" in
+@@ -2145,6 +2153,9 @@ case "$target" in
      if test ! "$GNU_CC"; then
  	DSO_LDOPTS="-Bshareable $DSO_LDOPTS"
      fi
@@ -30,39 +36,43 @@ $NetBSD: patch-aa,v 1.7 2011/10/03 12:37:24 tnn Exp $
      ;; 
  
  ia64*-hpux*)
-@@ -2472,6 +2475,9 @@ ia64*-hpux*)
+@@ -2522,6 +2533,35 @@ ia64*-hpux*)
+     MKCSHLIB='$(CC) $(CFLAGS) $(DSO_PIC_CFLAGS) $(DSO_LDOPTS) -Wl,-soname,lib$(LIBRARY_NAME)$(DLL_SUFFIX) -o $@'
      ;;
  
- *-nto*) 
++*-nto*) 
 +    DSO_CFLAGS=''
 +    DSO_PIC_CFLAGS='-fPIC'
 +    DSO_LDOPTS='-shared -fPIC'
- 	AC_DEFINE(NTO)	
- 	AC_DEFINE(_QNX_SOURCE)
- 	AC_DEFINE(_i386)
-@@ -2481,9 +2487,9 @@ ia64*-hpux*)
- 	MOZ_DEBUG_FLAGS="-gstabs"
- 	USE_PTHREADS=1
- 	_PEDANTIC=
--	LIBS="$LIBS -lsocket -lstdc++"
--	_DEFINES_CFLAGS='-include $(DEPTH)/mozilla-config.h -DMOZILLA_CLIENT -D_POSIX_C_SOURCE=199506'
--	_DEFINES_CXXFLAGS='-DMOZILLA_CLIENT -include $(DEPTH)/mozilla-config.h -D_POSIX_C_SOURCE=199506'
++	AC_DEFINE(NTO)	
++	AC_DEFINE(_QNX_SOURCE)
++	AC_DEFINE(_i386)
++	OS_TARGET=NTO
++	WARNINGS_AS_ERRORS=''
++	MOZ_OPTIMIZE_FLAGS="-O"
++	MOZ_DEBUG_FLAGS="-gstabs"
++	USE_PTHREADS=1
++	_PEDANTIC=
 +	LIBS="$LIBS -lsocket -lstdc++ -lm"
 +	_DEFINES_CFLAGS='-Wp,-include -Wp,$(DEPTH)/mozilla-config.h -DMOZILLA_CLIENT'
 +	_DEFINES_CXXFLAGS='-DMOZILLA_CLIENT -Wp,-include -Wp,$(DEPTH)/mozilla-config.h'
- 	if test "$with_x" != "yes"
- 	then
- 		_PLATFORM_DEFAULT_TOOLKIT="photon"
-@@ -2497,7 +2503,7 @@ ia64*-hpux*)
- 	esac
- 	case "${host_cpu}" in
- 	i*86)
--	USE_ELF_DYNSTR_GC=1
-+#	USE_ELF_DYNSTR_GC=1
- 	;;
- 	esac
- 	;;
-@@ -3305,6 +3311,12 @@ dnl ====================================
++	if test "$with_x" != "yes"
++	then
++		_PLATFORM_DEFAULT_TOOLKIT="photon"
++	    TK_CFLAGS='-I/usr/include/photon'
++		TK_LIBS='-lph'
++	fi
++	case "${target_cpu}" in
++	ppc*)
++	AC_DEFINE(HAVE_VA_LIST_AS_ARRAY)	
++	;;
++	esac
++	;;
++
+ *-openbsd*)
+     if test "$SO_VERSION"; then
+         DLL_SUFFIX=".so.$SO_VERSION"
+@@ -3312,6 +3352,12 @@ dnl ====================================
  case $target in
  *-hpux11.*)
  	;;
@@ -75,7 +85,7 @@ $NetBSD: patch-aa,v 1.7 2011/10/03 12:37:24 tnn Exp $
  *)
  	AC_CHECK_LIB(c_r, gethostbyname_r)
  	;;
-@@ -4567,6 +4579,14 @@ if test -n "$YASM"; then
+@@ -4520,6 +4566,14 @@ if test -n "$YASM"; then
    _YASM_BUILD=`        echo ${YASM_VERSION} | $AWK -F\. '{ print $4 }'`
  fi
  
@@ -90,30 +100,16 @@ $NetBSD: patch-aa,v 1.7 2011/10/03 12:37:24 tnn Exp $
  if test -z "$SKIP_LIBRARY_CHECKS"; then
  dnl system JPEG support
  dnl ========================================================
-@@ -7406,10 +7426,10 @@ else
+@@ -7439,7 +7493,7 @@ else
    *-mingw*)
      AC_DEFINE(MOZ_MEMORY_WINDOWS)
-     dnl This is sort of awful. Will revisit if we add support for more versions
+     AC_MSG_CHECKING([for VC2005/2008++ CRT source])
 -    if test "$CC_VERSION" == "14.00.50727.762" -o "$CC_VERSION" == "15.00.30729.01"; then
 +    if test "$CC_VERSION" = "14.00.50727.762" -o "$CC_VERSION" = "15.00.30729.01"; then
-       WIN32_OLD_STYLE_JEMALLOC=1
-       AC_DEFINE(WIN32_OLD_STYLE_JEMALLOC)
--    elif test "$CC_VERSION" == "16.00.30319.01" -o "$CC_VERSION" == "16.00.40219.01"; then
-+    elif test "$CC_VERSION" = "16.00.30319.01" -o "$CC_VERSION" = "16.00.40219.01"; then
-       WIN32_NEW_STYLE_JEMALLOC=1
-       AC_DEFINE(WIN32_NEW_STYLE_JEMALLOC)
-     else        
-@@ -9323,7 +9343,8 @@ rm -f confdefs.h.save
- mv confdefs.h confdefs.h.save
- egrep -v "$_EGREP_PATTERN" confdefs.h.save > confdefs.h
- AC_OUTPUT_MAKE_DEFS()
--MOZ_DEFINES=$DEFS
-+# nbsed broken. PR bin/42261
-+MOZ_DEFINES="$DEFS`awk 'BEGIN {while(x<1000){printf " ";x++}}'`"
- AC_SUBST(MOZ_DEFINES)
- rm -f confdefs.h
- mv confdefs.h.save confdefs.h
-@@ -9435,6 +9456,8 @@ if test -z "$MOZ_NATIVE_NSPR"; then
+       if test -z "$WIN32_CRT_SRC_DIR" -a -n "$VCINSTALLDIR"; then
+         WIN32_CRT_SRC_DIR="$VCINSTALLDIR\crt\src"
+       fi
+@@ -9516,6 +9570,8 @@ if test -z "$MOZ_NATIVE_NSPR"; then
      AC_MSG_WARN([Recreating autoconf.mk with updated nspr-config output])
      if test "$OS_ARCH" != "WINNT"; then
         NSPR_LIBS=`./nsprpub/config/nspr-config --prefix=$LIBXUL_DIST --exec-prefix=$MOZ_BUILD_ROOT/dist --libdir=$LIBXUL_DIST/lib --libs`

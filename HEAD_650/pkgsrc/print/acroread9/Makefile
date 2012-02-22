@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.1.1.1 2011/07/30 07:30:42 ryoon Exp $
+# $NetBSD: Makefile,v 1.3 2011/11/12 09:05:21 ryoon Exp $
 
 DISTNAME=	acroread9	# overridden below
-PKGNAME=	acroread9-9.4.2
+PKGNAME=	acroread9-9.4.6
 CATEGORIES=	print
-MASTER_SITES=	http://ardownload.adobe.com/pub/adobe/reader/unix/9.x/9.4.2/enu/
+MASTER_SITES=	http://ardownload.adobe.com/pub/adobe/reader/unix/9.x/9.4.6/enu/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.adobe.com/products/acrobat/readstep2.html
@@ -18,13 +18,6 @@ NO_SRC_ON_FTP=		${RESTRICTED}
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
-CONFLICTS+=	acroread-5.*{,nb*}
-# conflict with acroread5 due to bin/acroread
-# maybe should do ALTERNATIVES?
-CONFLICTS+=	acroread5-5.*{,nb*}
-CONFLICTS+=	acroread7-7.*{,nb*}
-CONFLICTS+=	acroread8-8.*{,nb*}
-
 WRKSRC=			${WRKDIR}/AdobeReader
 BUILD_DIRS=		# empty
 
@@ -35,7 +28,7 @@ EMUL_REQD=		suse>=10.0
 .include "../../mk/bsd.prefs.mk"
 
 .if ${EMUL_PLATFORM} == "linux-i386"
-DISTNAME=	AdbeRdr9.4.2-1_i486linux_enu
+DISTNAME=	AdbeRdr9.4.6-1_i486linux_enu
 EXTRACT_SUFX=	.tar.bz2
 PLATFORM=	intellinux
 PLIST_SRC=	PLIST
@@ -72,11 +65,8 @@ post-install:
 	     ${DESTDIR}${PREFIX}/bin/acroread9
 	${CHMOD} +x ${DESTDIR}${PREFIX}/bin/acroread9
 	${MV} ${DESTDIR}${PREFIX}/Acrobat9/Adobe/Reader9/Resource/Shell/acroread.1 \
-	${DESTDIR}${PREFIX}/${PKGMANDIR}/man1
-	cd ${DESTDIR}${PREFIX}/${PKGMANDIR}/man1 && \
-	${LN} -sf acroread.1 acroread9.1
+	  ${DESTDIR}${PREFIX}/${PKGMANDIR}/man1/acroread9.1
 	@${ECHO_MSG} "Be sure to read the license agreement in"
 	@${ECHO_MSG} "${DESTDIR}${PREFIX}/Acrobat9/Reader/Legal/ENU/License.html"
-	${LN} -sf acroread9 ${DESTDIR}${PREFIX}/bin/acroread
 
 .include "../../mk/bsd.pkg.mk"

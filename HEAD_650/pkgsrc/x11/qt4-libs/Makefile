@@ -1,9 +1,7 @@
-# $NetBSD: Makefile,v 1.62 2011/08/18 12:34:26 cheusov Exp $
-
-PKG_DESTDIR_SUPPORT=	user-destdir
+# $NetBSD: Makefile,v 1.66 2011/11/01 06:03:07 sbd Exp $
 
 PKGNAME=	qt4-libs-${QTVERSION}
-PKGREVISION=	1
+PKGREVISION=	2
 COMMENT=	C++ X GUI toolkit
 
 .include "../../x11/qt4-libs/Makefile.common"

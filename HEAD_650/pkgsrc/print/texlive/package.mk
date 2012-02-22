@@ -1,4 +1,4 @@
-# $NetBSD: package.mk,v 1.9 2010/09/24 16:04:19 minskim Exp $
+# $NetBSD: package.mk,v 1.11 2011/11/06 08:43:28 minskim Exp $
 #
 # This Makefile fragment is intended to be included by packages that build
 # TeX Live packages.
@@ -102,6 +102,7 @@ _texlive-install:
 .for _dir in ${_dirs}
 	if [ -d ${WRKSRC}/${_dir} ]; then \
 		cd ${WRKSRC} && \
+		${MKDIR} ${_topdir} && \
 		pax -rwpm -s ',.*\.orig$$,,' \
 			${_dir} ${_topdir}; \
 	fi
@@ -140,7 +141,7 @@ _texlive-install:
 .  include "../../print/texlive-tetex/hyphen.mk"
 .endif
 .if !empty(TEX_MAP_FILES) || !empty(TEX_MIXEDMAP_FILES)
-.  include "../../print/texlive-tetex/map.mk"
+.  include "../../print/tex-tetex/map.mk"
 .endif
 
 post-extract: _texlive-set-permission _texlive-info _texlive-man

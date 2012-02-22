@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.111 2011/06/10 09:39:43 obache Exp $
+# $NetBSD: Makefile,v 1.114 2011/11/01 06:01:59 sbd Exp $
 
 DISTNAME=	evolution-data-server-2.32.3
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	mail gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/evolution-data-server/2.32/}
 EXTRACT_SUFX=	.tar.bz2
@@ -33,6 +33,9 @@ CONFIGURE_ENV+=		PTHREAD_LIB="${PTHREAD_LDFLAGS} ${PTHREAD_LIBS}"
 .include "../../devel/pthread-sem/buildlink3.mk"
 LIBS+=		-lsemaphore
 .endif
+.if ${OPSYS} == "NetBSD" && !empty(OS_VERSION:M4.*)
+BUILDLINK_TRANSFORM+=   rm:-Wl,--no-undefined
+.endif
 
 .if ${OPSYS} == "Darwin"
 CPPFLAGS+=	-DBIND_8_COMPAT
@@ -41,6 +44,8 @@ CPPFLAGS+=	-DBIND_8_COMPAT
 .if !empty(PKGSRC_COMPILER:Msunpro)
 CFLAGS.SunOS+=	-D__FUNCTION__=__func__
 .endif
+
+CFLAGS.SunOS+=	-D__EXTENSIONS__
 
 CONFIGURE_ARGS+=	--with-openldap
 CONFIGURE_ARGS+=	--with-libdb=${BDBBASE}

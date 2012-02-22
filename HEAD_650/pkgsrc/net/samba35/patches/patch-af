@@ -1,14 +1,11 @@
-$NetBSD: patch-af,v 1.3 2011/06/15 11:45:08 adam Exp $
+$NetBSD: patch-af,v 1.4 2011/10/11 20:30:00 jmcneill Exp $
 
---- configure.orig	2011-06-14 11:18:38.000000000 +0000
+--- configure.orig	2011-08-03 18:25:14.000000000 +0000
 +++ configure
-@@ -5937,7 +5937,15 @@ rm -rf conftest*
- fi
+@@ -5938,6 +5938,13 @@ fi
  
  
--case "$host_os" in
-+ case "$host_os" in
-+
+ case "$host_os" in
 +	*qnx6.[012345]*)
 +		# PR 83106
 +cat >>confdefs.h <<\_ACEOF
@@ -19,7 +16,7 @@ $NetBSD: patch-af,v 1.3 2011/06/15 11:45:08 adam Exp $
  	*irix6*) cat >> confdefs.h <<\EOF
  #include <standards.h>
  EOF
-@@ -18317,6 +18325,7 @@ $as_echo "#define DARWINOS 1" >>confdefs
+@@ -18345,6 +18352,7 @@ $as_echo "#define DARWINOS 1" >>confdefs
  
  			BLDSHARED="true"
  			LDSHFLAGS="-dynamiclib -flat_namespace -undefined suppress"
@@ -27,7 +24,7 @@ $NetBSD: patch-af,v 1.3 2011/06/15 11:45:08 adam Exp $
  			CFLAGS="$CFLAGS -fno-common"
  			SHLD="\${CC}"
  			SHLIBEXT="dylib"
-@@ -18353,7 +18362,7 @@ fi
+@@ -18381,7 +18389,7 @@ fi
  $as_echo "$BLDSHARED" >&6; }
  
  saved_before_as_needed_ldflags="$LDFLAGS"
@@ -36,7 +33,7 @@ $NetBSD: patch-af,v 1.3 2011/06/15 11:45:08 adam Exp $
  	saved_ldflags="$LDFLAGS"
  	{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $flags works" >&5
  $as_echo_n "checking if $flags works... " >&6; }
-@@ -25327,9 +25336,9 @@ LIBS="-lcrypto $KRB5_LIBS  $LIBS"
+@@ -25355,9 +25363,9 @@ LIBS="-lcrypto $KRB5_LIBS  $LIBS"
  
  
  
@@ -49,7 +46,7 @@ $NetBSD: patch-af,v 1.3 2011/06/15 11:45:08 adam Exp $
    $as_echo_n "(cached) " >&6
  else
    cat confdefs.h - <<_ACEOF >conftest.$ac_ext
-@@ -25341,31 +25350,31 @@ else
+@@ -25369,31 +25377,31 @@ else
  #ifdef __cplusplus
  extern "C"
  #endif
@@ -89,7 +86,7 @@ $NetBSD: patch-af,v 1.3 2011/06/15 11:45:08 adam Exp $
  _ACEOF
  
  fi
-@@ -34478,31 +34487,39 @@ case "$host_os" in
+@@ -34506,31 +34514,46 @@ case "$host_os" in
  		NSSSONAMEVERSIONSUFFIX=".2"
  		WINBIND_NSS_EXTRA_OBJS="../nsswitch/winbind_nss_linux.o"
  		;;
@@ -148,10 +145,34 @@ $NetBSD: patch-af,v 1.3 2011/06/15 11:45:08 adam Exp $
 +			fi
 +			;;
 +		esac
++		;;
++	*qnx[68]*)
++		WINBIND_NSS_EXTRA_OBJS="\
++		    ../nsswitch/winbind_nss_netbsd.o \
++		    ../nsswitch/winbind_nss_linux.o"
++		WINBIND_NSS="../nsswitch/nss_winbind.$SHLIBEXT"
++		WINBIND_WINS_NSS="../nsswitch/nss_wins.$SHLIBEXT"
  		;;
  	*irix*)
  		# IRIX has differently named shared libraries
-@@ -35119,9 +35136,6 @@ fi
+@@ -34728,6 +34751,16 @@ $as_echo "#define HAVE_PASSWD_PW_AGE 1" 
+ 
+ fi
+ 
++# NetBSD
++
++ac_fn_c_check_member "$LINENO" "struct passwd" "pw_class" "ac_cv_member_struct_passwd_pw_class" "#include <pwd.h>
++"
++if test "x$ac_cv_member_struct_passwd_pw_class" = x""yes; then :
++
++$as_echo "#define HAVE_PASSWD_PW_CLASS 1" >>confdefs.h
++
++fi
++
+ 
+ # AIX 4.3.x and 5.1 do not have as many members in
+ # struct secmethod_table as AIX 5.2
+@@ -35147,9 +35180,6 @@ fi
  #################################################
  # Set pthread stuff
  

@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.15 2011/04/22 13:42:56 obache Exp $
+# $NetBSD: Makefile,v 1.19 2011/11/01 06:00:39 sbd Exp $
 
-DISTNAME=	MP3Diags-1.0.07.052
+DISTNAME=	MP3Diags-1.0.09.063
 PKGNAME=	${DISTNAME:S/MP3D/mp3d/}
 PKGREVISION=	2
 CATEGORIES=	audio
