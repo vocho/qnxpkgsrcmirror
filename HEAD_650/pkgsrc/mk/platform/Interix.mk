@@ -1,4 +1,4 @@
-# $NetBSD: Interix.mk,v 1.64 2010/07/08 04:57:36 dholland Exp $
+# $NetBSD: Interix.mk,v 1.66 2011/09/17 08:05:02 abs Exp $
 #
 # Variable definitions for the Interix operating system.
 

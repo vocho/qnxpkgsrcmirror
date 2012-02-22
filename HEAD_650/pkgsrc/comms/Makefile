@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.83 2011/05/18 02:23:22 dmcmahill Exp $
+# $NetBSD: Makefile,v 1.86 2011/10/02 14:32:32 wiz Exp $
 #
 
 COMMENT=	Communication utilities
@@ -51,6 +51,7 @@ SUBDIR+=	p5-Asterisk
 SUBDIR+=	p5-Device-Gsm
 SUBDIR+=	p5-Device-Modem
 SUBDIR+=	p5-Device-SerialPort
+SUBDIR+=	p5-Device-XBee-API
 SUBDIR+=	p5-SMS-Send
 SUBDIR+=	p5-pilot-link
 SUBDIR+=	pilot-link
@@ -63,7 +64,6 @@ SUBDIR+=	ruby-termios
 SUBDIR+=	scmxx
 SUBDIR+=	snooper
 SUBDIR+=	spandsp
-SUBDIR+=	synce-dccm
 SUBDIR+=	synce-librapi2
 SUBDIR+=	synce-libsynce
 SUBDIR+=	synce-rra
@@ -72,6 +72,5 @@ SUBDIR+=	tkhylafax
 SUBDIR+=	tn3270
 SUBDIR+=	xisp
 SUBDIR+=	xtel
-SUBDIR+=	zaptel-netbsd
 
 .include "../mk/misc/category.mk"

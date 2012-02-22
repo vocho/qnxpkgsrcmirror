@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.305 2011/07/21 04:52:55 dholland Exp $
+# $NetBSD: Makefile,v 1.310 2011/11/23 01:20:46 ryoon Exp $
 #
 
 COMMENT=	Programming languages
@@ -8,8 +8,10 @@ SUBDIR+=	LuaJIT
 SUBDIR+=	STk
 SUBDIR+=	SmartEiffel
 SUBDIR+=	a60
+SUBDIR+=	algol68g
 SUBDIR+=	awka
 SUBDIR+=	baci
+SUBDIR+=	basic256
 SUBDIR+=	boomerang
 SUBDIR+=	brandybasic
 SUBDIR+=	bwbasic
@@ -102,6 +104,7 @@ SUBDIR+=	mono-basic
 SUBDIR+=	moscow_ml
 SUBDIR+=	mpd
 SUBDIR+=	nawk
+SUBDIR+=	newlisp
 SUBDIR+=	nhc98
 SUBDIR+=	objc
 SUBDIR+=	ocaml
@@ -113,6 +116,7 @@ SUBDIR+=	openjdk7
 SUBDIR+=	openjdk7-bin
 SUBDIR+=	ossp-js
 SUBDIR+=	p2c
+SUBDIR+=	p5-Switch
 SUBDIR+=	parrot
 SUBDIR+=	pcc
 SUBDIR+=	pcc-current
@@ -156,6 +160,8 @@ SUBDIR+=	ruby18
 SUBDIR+=	ruby18-base
 SUBDIR+=	ruby19
 SUBDIR+=	ruby19-base
+SUBDIR+=	ruby193
+SUBDIR+=	ruby193-base
 SUBDIR+=	runawk
 SUBDIR+=	sablevm
 SUBDIR+=	sablevm-classpath

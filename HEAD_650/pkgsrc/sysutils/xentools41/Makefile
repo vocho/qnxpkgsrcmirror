@@ -1,6 +1,8 @@
-# $NetBSD: Makefile,v 1.10 2011/06/16 13:40:06 cegger Exp $
+# $NetBSD: Makefile,v 1.12 2011/10/16 20:33:35 bouyer Exp $
 #
-VERSION=		4.1.1
+# VERSION is set in version.mk as it is shared with other packages
+.include		"version.mk"
+
 DISTNAME=		xen-${VERSION}
 PKGNAME=		xentools41-${VERSION}
 #PKGREVISION=		1
@@ -24,6 +26,9 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 # XXX add version check: Xen requires dev86 >= 0.16.14
 BUILD_DEPENDS+= dev86-[0-9]*:../../devel/dev86 # needed to build firmware
 BUILD_DEPENDS+= ocaml-findlib-[0-9]*:../../devel/ocaml-findlib
+.if !exists(/usr/bin/iasl)
+BUILD_DEPENDS+= acpica-utils-[0-9]*:../../sysutils/acpica-utils
+.endif
 
 PKG_SYSCONFSUBDIR=	xen
 
@@ -33,6 +38,7 @@ ONLY_FOR_PLATFORM+=	NetBSD-[5-9].*-x86_64 NetBSD-[5-9].*-i386
 CONFLICTS+=		libxen-[0-9]*
 CONFLICTS+=		xentools20-[0-9]*
 CONFLICTS+=		xentools3*
+CONFLICTS+=		xenstoretools-*
 
 WRKSRC=			${WRKDIR}/xen-${VERSION}/tools
 CHECK_PORTABILITY_SKIP=	examples/*

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.42 2011/08/01 21:51:37 tron Exp $
+# $NetBSD: Makefile,v 1.46 2011/11/07 13:10:31 hans Exp $
 
 DISTNAME=	rtorrent-0.8.9
 PKGREVISION=	2
@@ -17,7 +17,15 @@ USE_LIBTOOL=		yes
 USE_NCURSES=		yes # chgat
 USE_TOOLS+=		gmake pkg-config
 GNU_CONFIGURE=		yes
+
+.include "../../mk/bsd.prefs.mk"
+.if ${MACHINE_ARCH} == "alpha" || \
+    ${MACHINE_ARCH} == "i386" || \
+    ${MACHINE_ARCH} == "x86_64"
 GCC_REQD+=		3.3
+.else
+GCC_REQD+=		4.2.1
+.endif
 
 .include "../../mk/pthread.buildlink3.mk"
 LDFLAGS+=	${PTHREAD_LDFLAGS}
@@ -33,6 +41,10 @@ MESSAGE_SRC=	${PKGDIR}/MESSAGE.BSD
 .if !empty(CC_VERSION:Mgcc-4.0.*)
 CXXFLAGS+=	-fpermissive -fno-strength-reduce -fno-thread-jumps \
 		-fno-inline -fforce-addr
+.endif
+
+.if !empty(CC_VERSION:Mgcc-*) && !empty(MACHINE_ARCH:Mi?86)
+CXXFLAGS+=	-march=i486
 .endif
 
 INSTALLATION_DIRS=	share/examples/rtorrent

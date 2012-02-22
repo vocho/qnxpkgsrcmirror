@@ -1,4 +1,4 @@
-# $NetBSD: builtin.mk,v 1.2 2008/04/11 20:37:06 joerg Exp $
+# $NetBSD: builtin.mk,v 1.4 2011/10/27 04:23:50 joerg Exp $
 
 BUILTIN_PKG:=	libarchive
 

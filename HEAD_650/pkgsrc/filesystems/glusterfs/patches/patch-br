@@ -1,15 +1,18 @@
-$NetBSD: patch-br,v 1.4 2011/08/09 07:15:42 manu Exp $
+$NetBSD: patch-br,v 1.8 2011/10/30 05:07:15 manu Exp $
 
-- Hide .attribute to glusterfs clients in order to make sure it will
-not be distributed by the cluster/dht xlator
+Use linkat(2) if available so that we can make a hardlink to symlink 
+itself, instead of symlink destination, like link(2) does. This is
+required to support moving symlinks on distributed volumes, as
+glusterfsd really wants to hardlink the symlink and not its target. 
 
-- Use mkfifo for creating fifo, as it will fail with mknod.
+If linkat(2) is inavailable, then moving a symlink on distributed
+volumes fails.
 
-- Use linkat(2) when linking on object that can be symlinks to 
-directories and non existing paths.
+Also pull upstreampatch that fix inode generation so that values 
+are reliable
 
---- xlators/storage/posix/src/posix.c.orig	2011-07-14 14:21:10.000000000 +0200
-+++ xlators/storage/posix/src/posix.c	2011-08-03 10:05:22.000000000 +0200
+--- xlators/storage/posix/src/posix.c.orig	2011-08-23 14:31:42.000000000 +0200
++++ xlators/storage/posix/src/posix.c	2011-10-28 14:59:13.000000000 +0200
 @@ -36,8 +36,12 @@
  #ifndef GF_BSD_HOST_OS
  #include <alloca.h>
@@ -23,7 +26,53 @@ directories and non existing paths.
  #include "md5.h"
  #include "checksum.h"
  #include "dict.h"
-@@ -1229,8 +1233,13 @@
+@@ -244,8 +248,23 @@
+ 
+         return ret;
+ }
+ 
++void
++posix_fill_ino_from_gfid (xlator_t *this, struct iatt *buf)
++{
++        uint64_t temp_ino = 0;
++        int j = 0;
++        int i = 0;
++
++        /* consider least significant 8 bytes of value out of gfid */
++        for (i = 15; i > (15 - 8); i--) {
++                temp_ino += (uint64_t)(buf->ia_gfid[i]) << j;
++                j += 8;
++        }
++
++        buf->ia_ino = temp_ino;
++}
+ 
+ int
+ posix_lstat_with_gfid (xlator_t *this, const char *path, struct iatt *stbuf_p)
+ {
+@@ -265,8 +284,10 @@
+         ret = posix_fill_gfid_path (this, path, &stbuf);
+         if (ret)
+                 gf_log_callingfn (this->name, GF_LOG_DEBUG, "failed to get gfid");
+ 
++        posix_fill_ino_from_gfid (this, &stbuf);
++
+         if (stbuf_p)
+                 *stbuf_p = stbuf;
+ out:
+         return ret;
+@@ -292,8 +313,10 @@
+         ret = posix_fill_gfid_fd (this, fd, &stbuf);
+         if (ret)
+                 gf_log_callingfn (this->name, GF_LOG_DEBUG, "failed to get gfid");
+ 
++        posix_fill_ino_from_gfid (this, &stbuf);
++
+         if (stbuf_p)
+                 *stbuf_p = stbuf;
+ 
+ out:
+@@ -1232,8 +1255,13 @@
                          loc->path, strerror (op_errno));
                  goto out;
          }
@@ -37,7 +86,7 @@ directories and non existing paths.
  
          if (op_ret == -1) {
                  op_errno = errno;
-@@ -2122,9 +2131,20 @@
+@@ -2125,9 +2153,20 @@
                          newparentpath, strerror (op_errno));
                  goto out;
          }
@@ -58,25 +107,24 @@ directories and non existing paths.
                  op_errno = errno;
                  gf_log (this->name, GF_LOG_ERROR,
                          "link %s to %s failed: %s",
-@@ -4313,8 +4333,21 @@
+@@ -4376,13 +4415,15 @@
  
-                 if ((!strcmp(real_path, base_path))
-                     && (!strcmp(entry->d_name, GF_REPLICATE_TRASH_DIR)))
-                         continue;
-+#ifdef __NetBSD__
-+		/*
-+		 * NetBSD with UFS1 backend uses backing files for
-+		 * extended attributes. They can be found in a
-+		 * .attribute file located at the root of the filesystem
-+		 * We hide it to glusterfs clients, since chaos will occur 
-+		 * when the cluster/dht xlator decides to distribute
-+		 * exended attribute backing file accross storage servers.
-+		 */ 
-+                if ((!strcmp(real_path, base_path))
-+                    && (!strcmp(entry->d_name, ".attribute")))
-+                        continue;
-+#endif /* __NetBSD__ */
+         /* pick ENOENT to indicate EOF */
+         op_errno = errno;
  
-                 if ((!strcmp (real_path, base_path))
-                     && (!strncmp (GF_HIDDEN_PATH, entry->d_name,
-                                   strlen(GF_HIDDEN_PATH)))) {
+-        if (whichop == GF_FOP_READDIRP) {
+-                list_for_each_entry (tmp_entry, &entries.list, list) {
+-                        strcpy (entry_path + real_path_len + 1,
+-                                tmp_entry->d_name);
+-                        posix_lstat_with_gfid (this, entry_path, &stbuf);
++        list_for_each_entry (tmp_entry, &entries.list, list) {
++                strcpy (entry_path + real_path_len + 1,
++                        tmp_entry->d_name);
++                posix_lstat_with_gfid (this, entry_path, &stbuf);
++                tmp_entry->d_ino = stbuf.ia_ino;
++
++                if (whichop == GF_FOP_READDIRP) {
+                         tmp_entry->d_stat = stbuf;
+                 }
+         }
+ 

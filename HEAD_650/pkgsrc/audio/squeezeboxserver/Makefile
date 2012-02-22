@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.7 2011/08/13 18:00:01 joerg Exp $
+# $NetBSD: Makefile,v 1.11 2011/11/18 02:38:01 joerg Exp $
 
 # To the poor soul who wants to update this package:
 #
@@ -51,6 +51,8 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.logitechsqueezebox.com/
 COMMENT=	Server for the family of networked audio players by Logitech
 
+PKG_DESTDIR_SUPPORT=	user-destdir
+
 EXTRACT_SUFX=	.tgz
 
 PRODUCT=	SqueezeboxServer_v7.5.1
@@ -65,7 +67,9 @@ NO_BIN_ON_FTP=		${RESTRICTED}
 LICENSE=	squeezeboxserver-license
 
 # Database server
-DEPENDS+=	mysql-server-[0-9]*:../../databases/mysql51-server
+MYSQL_VERSIONS_ACCEPTED=	51
+.include "../../mk/mysql.buildlink3.mk"
+.include "${MYSQL_PKGSRCDIR:S/-client$/-server/}/buildlink3.mk"
 
 # Audio converters
 DEPENDS+=	wavpack-[0-9]*:../../audio/wavpack
@@ -122,8 +126,6 @@ DEPENDS+=	p5-XML-Simple>=2.15:../../textproc/p5-XML-Simple
 
 # Optional
 #DEPENDS+=	p5-Locale-Hebrew-[0-9]*:../../somewhere/p5-Locale-Hebrew
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 REPLACE_PERL=	slimserver.pl scanner.pl
 

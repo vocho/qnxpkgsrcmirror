@@ -1,4 +1,4 @@
-#	$NetBSD: pbulk-index.mk,v 1.11 2010/09/28 20:24:25 joerg Exp $
+#	$NetBSD: pbulk-index.mk,v 1.14 2011/11/12 15:21:53 dholland Exp $
 
 # This Makefile fragment is included by bsd.pkg.mk and provides all
 # variables and targets related to the parallel bulk build
@@ -32,7 +32,7 @@ _PBULK_MULTI_DEFAULT.python=	PYTHON_VERSION_DEFAULT
 
 _PBULK_MULTI_LIST.ruby=		RUBY_VERSION_SUPPORTED
 _PBULK_MULTI_VAR.ruby=		RUBY_VERSION_REQD
-_PBULK_MULTI_DEFAULT.ruby=	_RUBY_VERSION_DEFAULT
+_PBULK_MULTI_DEFAULT.ruby=	RUBY_VERSION_DEFAULT
 
 .PHONY: pbulk-index pbulk-index-item
 
@@ -45,11 +45,14 @@ _PBULK_MULTI_DEFAULT.ruby=	_RUBY_VERSION_DEFAULT
 # don't follow the module naming conventions.
 
 .for _t in ${_PBULK_MULTI}
-.  if ${${_PBULK_MULTI_LIST.${_t}}:Unone:[\#]} != 1 && !empty(${_PBULK_MULTI_LIST.${_t}})
+.  if defined(${_PBULK_MULTI_LIST.${_t}}) && !empty(${_PBULK_MULTI_LIST.${_t}})
+.    if ${${_PBULK_MULTI_LIST.${_t}}:[\#]} != 1 || \
+        !empty(${_PBULK_MULTI_LIST.${_t}}:N${_PBULK_MULTI_DEFAULT.${_t}})
 _PBULK_MULTI_NEEDED:=	${_t} ${_PBULK_MULTI_NEEDED}
 _PBULK_SORTED_LIST.${_t}:= \
 	${${_PBULK_MULTI_LIST.${_t}}:M${${_PBULK_MULTI_DEFAULT.${_t}}}} \
 	${${_PBULK_MULTI_LIST.${_t}}:N${${_PBULK_MULTI_DEFAULT.${_t}}}}
+.    endif
 .  endif
 .endfor
 
@@ -108,4 +111,4 @@ pbulk-index-item:
 .endif
 
 pbulk-save-wrkdir:
-	${RUN} [ ! -d ${WRKDIR} ] || cd ${WRKDIR} && tar cfz ${INTO:Q} .
+	${RUN} [ ! -d ${WRKDIR} ] || cd ${WRKDIR} && ${TAR} cfz ${INTO:Q} .

@@ -1,17 +1,19 @@
-# $NetBSD: Makefile,v 1.3 2011/07/30 09:54:17 cheusov Exp $
+# $NetBSD: Makefile,v 1.13 2011/11/23 02:11:36 minskim Exp $
 
-DISTNAME=	pkg_summary-utils-0.54.0
+DISTNAME=	pkg_summary-utils-0.56.3
+PKGREVISION=	2
 CATEGORIES=	pkgtools
 MASTER_SITES=	ftp://ftp.NetBSD.org/pub/NetBSD/misc/cheusov/psu/ \
 		http://www.mova.org/~cheusov/pub/pkg_summary-utils/
 
-MAINTAINER=	cheusov@tut.by
+MAINTAINER=	cheusov@NetBSD.org
 HOMEPAGE=	http://www.mova.org/~cheusov/pub/pkg_summary-utils/
 COMMENT=	Utilities for manipulating pkg_summary(5) files
 LICENSE=	2-clause-bsd
 
 DEPENDS+=	runawk>=1.1.0:../../lang/runawk
 DEPENDS+=	pipestatus-[0-9]*:../../devel/pipestatus
+DEPENDS+=	digest-[0-9]*:../../pkgtools/digest
 
 BUILD_DEPENDS+=	mk-configure>=0.20.0:../../devel/mk-configure
 
@@ -23,21 +25,30 @@ CONFLICTS+=	pkg_src_update_summary-[0-9]*
 CONFLICTS+=	pkg_update_summary-[0-9]*
 CONFLICTS+=	pkg_summary4view-[0-9]*
 
+# usage:
+#    bmake test
+#    bmake test TESTS='show-tests'
+#    bmake test TESTS='pkg_subgraph_deps pkg_bin_summary ...'
 TEST_TARGET=		test
 
 USE_LANGUAGES=		#empty
 USE_TOOLS+=		gzip:run
 
+PKG_INSTALLATION_TYPES=	overwrite pkgviews
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 EGDIR=		${PREFIX}/share/examples/pkg_summary-utils
 
 CONF_FILES=	${EGDIR}/pkg_digger.conf ${PKG_SYSCONFDIR}/pkg_digger.conf
 
+REPLACE_SH=	tests/test.sh pkg_digger.in pkg_digger_backend.in \
+		pkg_summary2build_graph.in
+
 REPLACE_INTERPRETER+=	runawk
 REPLACE.runawk.old=	.*runawk
 REPLACE.runawk.new=	${PREFIX}/bin/runawk
-REPLACE_FILES.runawk=	get_processed_pkgs.in pkg_*.in XB2bin_summary.in direct_deps.in
+REPLACE_FILES.runawk=	get_processed_pkgs.in pkg_*.in XB2bin_summary.in \
+	direct_deps.in summary2multi_variants.in enrich_summary.in
 
 MAKE_ENV+=	AWKMODDIR=${PREFIX}/share/runawk
 MAKE_ENV+=	EGDIR=${EGDIR}
@@ -52,4 +63,5 @@ AUTO_MKDIRS=	yes
 
 MAKE_PROGRAM=	${PREFIX}/bin/mkcmake
 
+.include "../../devel/mk-configure/configure.mk"
 .include "../../mk/bsd.pkg.mk"

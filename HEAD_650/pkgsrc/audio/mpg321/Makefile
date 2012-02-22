@@ -1,13 +1,14 @@
-# $NetBSD: Makefile,v 1.14 2010/05/19 18:25:19 drochner Exp $
+# $NetBSD: Makefile,v 1.16 2011/10/18 11:15:25 ryoon Exp $
 
-DISTNAME=	mpg321-0.2.10
-PKGREVISION=	8
+DISTNAME=	mpg321-0.2.13-4
+PKGNAME=	mpg321-0.2.13.4
 CATEGORIES=	audio
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=mpg321/}
 
 MAINTAINER=	rxg@NetBSD.org
 HOMEPAGE=	http://mpg321.sourceforge.net/
 COMMENT=	Free replacement for mpg123
+LICENSE=	gnu-gpl-v2
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 

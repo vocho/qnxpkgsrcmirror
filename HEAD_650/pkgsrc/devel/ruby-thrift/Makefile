@@ -1,10 +1,11 @@
-# $NetBSD: Makefile,v 1.5 2011/06/18 02:01:06 taca Exp $
+# $NetBSD: Makefile,v 1.7 2011/11/08 15:37:34 taca Exp $
 
-DISTNAME=	thrift-0.6.0
+DISTNAME=	thrift-0.7.0
+PKGREVISION=	1
 CATEGORIES=	devel
 
 MAINTAINER=	tonnerre@NetBSD.org
-HOMEPAGE=	http://thrift.apache.org
+HOMEPAGE=	http://thrift.apache.org/
 COMMENT=	Ruby libraries for Thrift (a language-agnostic RPC system)
 LICENSE=	apache-2.0
 

@@ -3,7 +3,7 @@ $NetBSD: patch-ai,v 1.26 2010/02/25 13:01:23 martti Exp $
 Make this pkgsrc friendly.
 Add support for NetBSD 5.x and DragonFly BSD.
 
---- makedefs.orig	2010-02-03 20:58:58.000000000 +0000
+--- makedefs.orig	2011-11-02 23:46:22.000000000 +0000
 +++ makedefs
 @@ -146,6 +146,8 @@ case "$SYSTEM.$RELEASE" in
  		;;
@@ -14,7 +14,7 @@ Add support for NetBSD 5.x and DragonFly BSD.
    OpenBSD.2*)	SYSTYPE=OPENBSD2
  		;;
    OpenBSD.3*)	SYSTYPE=OPENBSD3
-@@ -162,6 +164,8 @@ case "$SYSTEM.$RELEASE" in
+@@ -164,6 +166,8 @@ case "$SYSTEM.$RELEASE" in
  		;;
     NetBSD.4*)	SYSTYPE=NETBSD4
  		;;
@@ -23,7 +23,7 @@ Add support for NetBSD 5.x and DragonFly BSD.
     BSD/OS.2*)	SYSTYPE=BSDI2
  		;;
     BSD/OS.3*)	SYSTYPE=BSDI3
-@@ -214,13 +218,6 @@ case "$SYSTEM.$RELEASE" in
+@@ -216,13 +220,6 @@ case "$SYSTEM.$RELEASE" in
  		esac
  		;;
     ULTRIX.4*)	SYSTYPE=ULTRIX4
@@ -37,7 +37,7 @@ Add support for NetBSD 5.x and DragonFly BSD.
  		for l in syslog resolv; do
  		    if [ -f /usr/local/lib/lib$l.a ]; then
  			SYSLIBS="$SYSLIBS -l$l"
-@@ -252,25 +249,8 @@ case "$SYSTEM.$RELEASE" in
+@@ -260,25 +257,8 @@ case "$SYSTEM.$RELEASE" in
  		esac;;
  		# Tested with RedHat 3.03 on 20020729.
      Linux.1*)	SYSTYPE=LINUX1
@@ -63,7 +63,7 @@ Add support for NetBSD 5.x and DragonFly BSD.
  		# GDBM locks the DBM .pag file after open. This breaks postmap.
  		# if [ -f /usr/include/gdbm-ndbm.h ]
  		# then
-@@ -281,7 +261,6 @@ case "$SYSTEM.$RELEASE" in
+@@ -289,7 +269,6 @@ case "$SYSTEM.$RELEASE" in
  		#     CCARGS="$CCARGS -DHAS_DBM -DPATH_NDBM_H='<gdbm/ndbm.h>'"
  		#     GDBM_LIBS=gdbm
  		# fi
@@ -71,7 +71,7 @@ Add support for NetBSD 5.x and DragonFly BSD.
  		for name in nsl resolv $GDBM_LIBS
  		do
  		    for lib in /usr/lib64 /lib64 /usr/lib /lib
-@@ -383,25 +362,13 @@ EOF
+@@ -418,25 +397,13 @@ EOF
  HP-UX.A.09.*)	SYSTYPE=HPUX9
  		SYSLIBS=-ldbm
  		CCARGS="$CCARGS -DMISSING_USLEEP"
@@ -97,12 +97,14 @@ Add support for NetBSD 5.x and DragonFly BSD.
  		;;
  ReliantUNIX-?.5.43) SYSTYPE=ReliantUnix543
  		RANLIB=echo
-@@ -498,6 +465,8 @@ ReliantUNIX-?.5.43) SYSTYPE=ReliantUnix5
- 		    error "Unable to determine your system type."
- 		fi
+@@ -524,6 +491,10 @@ ReliantUNIX-?.5.43) SYSTYPE=ReliantUnix5
+ 		RANLIB=echo
+ 		SYSLIBS="-lresolv -lsocket -lnsl -lc -lrpcsvc -L/usr/ucblib -lucb"
  		;;
-+   QNX.6*)	SYSTYPE=QNX6
++    QNX.6*)	SYSTYPE=QNX6
 +		;;
- 	   *)	error "Unknown system type: $SYSTEM $RELEASE";;
- esac
++    QNX.8*)	SYSTYPE=QNX8
++		;;
  
+ 	 ".")	if [ -d /NextApps ]; then
+ 		    SYSTYPE=`hostinfo | sed -n \

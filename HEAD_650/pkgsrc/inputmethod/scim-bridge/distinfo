@@ -1,4 +1,4 @@
-$NetBSD: distinfo,v 1.2 2009/11/26 12:30:12 obache Exp $
+$NetBSD: distinfo,v 1.4 2011/11/13 08:04:46 obache Exp $
 
 SHA1 (scim-bridge-0.4.16.tar.gz) = 6a7a714592dbecc9a1f44794f37319bafe2bdfae
 RMD160 (scim-bridge-0.4.16.tar.gz) = 37aed056fb880358b013f104f08b2e58c3de4188

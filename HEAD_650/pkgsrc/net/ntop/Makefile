@@ -1,10 +1,9 @@
-# $NetBSD: Makefile,v 1.68 2011/08/23 13:06:52 obache Exp $
+# $NetBSD: Makefile,v 1.70 2011/11/01 06:02:22 sbd Exp $
 
-DISTNAME=	ntop-4.0.3
-PKGREVISION=	4
+DISTNAME=	ntop-4.1.0
+PKGREVISION=	1
 CATEGORIES=	net
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=ntop/}
-EXTRACT_SUFX=	.tgz
 
 MAINTAINER=	adam@NetBSD.org
 HOMEPAGE=	http://www.ntop.org/ntop.html

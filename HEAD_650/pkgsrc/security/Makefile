@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.415 2011/08/16 22:30:41 wiz Exp $
+# $NetBSD: Makefile,v 1.419 2011/10/18 01:52:40 dholland Exp $
 #
 
 COMMENT=	Security tools
@@ -43,6 +43,7 @@ SUBDIR+=	cy2-ntlm
 SUBDIR+=	cy2-otp
 SUBDIR+=	cy2-plain
 SUBDIR+=	cy2-saml
+SUBDIR+=	cy2-scram
 SUBDIR+=	cy2-sql
 SUBDIR+=	cyrus-sasl
 SUBDIR+=	cyrus-saslauthd
@@ -113,7 +114,6 @@ SUBDIR+=	libidea
 SUBDIR+=	libident
 SUBDIR+=	libksba
 SUBDIR+=	libmcrypt
-SUBDIR+=	libnasl
 SUBDIR+=	liboauth
 SUBDIR+=	libp11
 SUBDIR+=	libpbc
@@ -147,10 +147,6 @@ SUBDIR+=	mixminion
 SUBDIR+=	mozilla-rootcerts
 SUBDIR+=	msu
 SUBDIR+=	msudir
-SUBDIR+=	nessus
-SUBDIR+=	nessus-core
-SUBDIR+=	nessus-libraries
-SUBDIR+=	nessus-plugins
 SUBDIR+=	netpgp
 SUBDIR+=	netramet
 SUBDIR+=	nettle
@@ -228,6 +224,7 @@ SUBDIR+=	p5-GSSAPI
 SUBDIR+=	p5-GnuPG-Interface
 SUBDIR+=	p5-IO-Socket-SSL
 SUBDIR+=	p5-Module-Signature
+SUBDIR+=	p5-Mozilla-CA
 SUBDIR+=	p5-Net-DNS-SEC
 SUBDIR+=	p5-Net-DNS-SEC-Maint-Key
 SUBDIR+=	p5-Net-OpenSSH
@@ -310,6 +307,7 @@ SUBDIR+=	pyca
 SUBDIR+=	qca
 SUBDIR+=	qca-tls
 SUBDIR+=	qca2
+SUBDIR+=	qca2-gnupg
 SUBDIR+=	qca2-ossl
 SUBDIR+=	qident
 SUBDIR+=	rainbowcrack

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.219 2011/06/14 21:31:31 alnsn Exp $
+# $NetBSD: Makefile,v 1.222 2011/11/12 07:53:17 hiramatsu Exp $
 
 COMMENT=	Mathematics
 
@@ -15,6 +15,7 @@ SUBDIR+=	R-XML
 SUBDIR+=	R-abind
 SUBDIR+=	R-akima
 SUBDIR+=	R-bitops
+SUBDIR+=	R-car
 SUBDIR+=	R-chron
 SUBDIR+=	R-circular
 SUBDIR+=	R-classInt
@@ -141,6 +142,7 @@ SUBDIR+=	p5-Math-MatrixReal
 SUBDIR+=	p5-Math-Pari
 SUBDIR+=	p5-Math-Random
 SUBDIR+=	p5-Math-Random-MT
+SUBDIR+=	p5-Math-Random-MT-Auto
 SUBDIR+=	p5-Math-Random-MT-Perl
 SUBDIR+=	p5-Math-Round
 SUBDIR+=	p5-Math-VecStat
@@ -174,6 +176,7 @@ SUBDIR+=	py-numarray
 SUBDIR+=	py-numexpr
 SUBDIR+=	py-numpy
 SUBDIR+=	py-pytables
+SUBDIR+=	py-roman
 SUBDIR+=	py-rpy
 SUBDIR+=	py-scipy
 SUBDIR+=	py-sympy

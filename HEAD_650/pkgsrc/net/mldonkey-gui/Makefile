@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.40 2011/04/22 13:44:24 obache Exp $
+# $NetBSD: Makefile,v 1.42 2011/11/01 06:02:21 sbd Exp $
 #
 
 .include "../../net/mldonkey/Makefile.common"

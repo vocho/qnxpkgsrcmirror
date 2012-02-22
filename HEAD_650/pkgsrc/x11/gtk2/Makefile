@@ -1,16 +1,16 @@
-# $NetBSD: Makefile,v 1.219 2011/07/08 17:20:05 drochner Exp $
+# $NetBSD: Makefile,v 1.224 2011/11/17 12:57:34 drochner Exp $
 
-DISTNAME=		gtk+-2.24.5
-PKGNAME=		${DISTNAME:S/gtk/gtk2/}
-CATEGORIES=		x11
-MASTER_SITES=		ftp://ftp.gtk.org/pub/gtk/2.24/ \
-			${MASTER_SITE_GNOME:=sources/gtk+/2.24/}
-EXTRACT_SUFX=		.tar.bz2
+DISTNAME=	gtk+-2.24.8
+PKGNAME=	${DISTNAME:S/gtk/gtk2/}
+CATEGORIES=	x11
+MASTER_SITES=	ftp://ftp.gtk.org/pub/gtk/2.24/ \
+		${MASTER_SITE_GNOME:=sources/gtk+/2.24/}
+EXTRACT_SUFX=	.tar.bz2
 
-MAINTAINER=		pkgsrc-users@NetBSD.org
-HOMEPAGE=		http://www.gtk.org/
-COMMENT=		GIMP Toolkit v2 - libraries for building X11 user interfaces
-LICENSE=		gnu-lgpl-v2.1
+MAINTAINER=	pkgsrc-users@NetBSD.org
+HOMEPAGE=	http://www.gtk.org/
+COMMENT=	GIMP Toolkit v2 - libraries for building X11 user interfaces
+LICENSE=	gnu-lgpl-v2.1
 
 # gtk-builder-convert uses minidom from xml.dom, which needs expat
 DEPENDS+=		${PYPKGPREFIX}-expat-[0-9]*:../../textproc/py-expat
@@ -28,7 +28,7 @@ USE_LANGUAGES=		c c++
 USE_LIBTOOL=		yes
 PTHREAD_AUTO_VARS=	yes
 
-GNU_CONFIGURE=		 yes
+GNU_CONFIGURE=		yes
 # bashism in "configure" (illegal variable substitution), patched
 #CONFIG_SHELL=		bash
 CONFIGURE_ARGS+=	--sysconfdir=${PREFIX}/libdata
@@ -36,7 +36,7 @@ CONFIGURE_ARGS+=	--sysconfdir=${PREFIX}/libdata
 CONFIGURE_ARGS+=	--disable-papi
 # Not to unwanted pick up of db2html, PR#44908
 CONFIGURE_ENV+=		ac_cv_prog_DB2HTML=false
-MAKE_ENV+=		PKGLOCALEDIR=${PKGLOCALEDIR:Q}
+MAKE_ENV+=		PKGLOCALEDIR=${PKGLOCALEDIR}
 TEST_TARGET=		check
 
 PKGCONFIG_OVERRIDE=	gdk-2.0-uninstalled.pc.in
@@ -68,6 +68,11 @@ BUILD_DIRS=		. demos/gtk-demo
 # fails as "C" isn't supported therein.  The latter two are
 # set to "C" by bsd.pkg.mk.
 MAKE_ENV=	LC_ALL=ASCII
+.endif
+
+# fix for 'only weak aliases are supported on darwin' error
+.if ${OPSYS} == "Darwin"
+CONFIGURE_ARGS+=	--disable-visibility
 .endif
 
 # gtk/Makefile.am hardcodes 'grep -o' so require GNU grep on platforms

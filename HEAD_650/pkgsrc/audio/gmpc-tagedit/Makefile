@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.3 2011/04/22 13:42:53 obache Exp $
+# $NetBSD: Makefile,v 1.5 2011/11/22 16:23:52 marino Exp $
 #
 
 DISTNAME=	gmpc-tagedit-0.20.0
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	audio
 MASTER_SITES=	http://download.sarine.nl/Programs/gmpc/0.20.0/
 
@@ -15,7 +15,7 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=	yes
 USE_LIBTOOL=	yes
-USE_TOOLS=	gmake intltool pkg-config
+USE_TOOLS=	gmake intltool pkg-config msgfmt
 
 .include "../../audio/gmpc/buildlink3.mk"
 .include "../../audio/taglib/buildlink3.mk"
