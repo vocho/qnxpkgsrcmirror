@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.8 2011/11/13 04:42:08 obache Exp $
+# $NetBSD: Makefile,v 1.10 2012/02/06 12:40:40 wiz Exp $
 #
 
 DISTNAME=	ibus-pinyin-1.3.11
-PKGREVISION=	2
+PKGREVISION=	3
 CATEGORIES=	inputmethod chinese
 MASTER_SITES=	http://ibus.googlecode.com/files/
 DISTFILES=	${DEFAULT_DISTFILES} ${DBTAR}
@@ -43,9 +43,14 @@ CONFIGURE_ARGS+=	--with-boost=${BUILDLINK_PREFIX.boost-headers}
 .include "options.mk"
 
 .include "../../mk/bsd.prefs.mk"
+.include "../../mk/compiler.mk"
 
 .if ${OPSYS} == "Linux"
 .  include "../../devel/libuuid/buildlink3.mk"
+.endif
+
+.if (!empty(PKGSRC_COMPILER:Mgcc) && !empty(CC_VERSION:Mgcc-4.[4-9]*)) || !empty(PKGSRC_COMPILER:Mclang)
+CXXFLAGS+=		-std=c++0x
 .endif
 
 .include "../../inputmethod/ibus/bad-env-usage.mk"

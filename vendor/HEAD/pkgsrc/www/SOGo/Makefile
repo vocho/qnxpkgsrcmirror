@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.1.1.1 2011/10/16 05:36:32 manu Exp $
+# $NetBSD: Makefile,v 1.4 2012/01/14 02:09:37 hans Exp $
 #
 
-DISTNAME=	SOGo-2.0.0b1
+DISTNAME=	SOGo-2.0.0b3
 CATEGORIES=	www
 MASTER_SITES=	http://www.sogo.nu/files/downloads/SOGo/Sources/
 
@@ -15,7 +15,7 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 WRKSRC=		${WRKDIR}/SOGo
 HAS_CONFIGURE=	yes
 USE_LANGUAGES=	c
-USE_TOOLS+=     gmake
+USE_TOOLS+=     gmake zip:run
 
 CONFIGURE_ARGS= --enable-debug --disable-strip
 
@@ -24,7 +24,9 @@ SOGOGROUP?=	sogo
 SOGOETCDIR?=	${PKG_SYSCONFDIR}/sogo
 SOGORUNDIR?=	${VARBASE}/sogo
 INSTALLATION_DIRS+=	share/examples/SOGo
-CONF_FILES=	${DESTDIR}${PREFIX}/share/examples/SOGo/SOGo.conf \
+CONF_FILES+=	${DESTDIR}${PREFIX}/share/examples/SOGo/sogo-conf.sh \
+		${PKG_SYSCONFDIR}/sogo-conf.sh
+CONF_FILES+=	${DESTDIR}${PREFIX}/share/examples/SOGo/SOGo.conf \
 		${PKG_SYSCONFDIR}/SOGo.conf
 OWN_DIRS+=	${SOGOETCDIR}
 OWN_DIRS+=	${SOGORUNDIR}
@@ -44,6 +46,8 @@ FILES_SUBST+=	SOGOUSER=${SOGOUSER}
 RCD_SCRIPTS=	sogod
 
 pre-install:
+	${SED} -e "s|@SOGOUSER@|${SOGOUSER}|" ${FILESDIR}/sogo-conf.sh > \
+	  ${DESTDIR}${PREFIX}/share/examples/SOGo/sogo-conf.sh
 	${SED} -e "s|/usr/GNUstep/System/Library|${PREFIX}/lib/GNUstep|" \
 	  ${WRKSRC}/Apache/SOGo.conf > \
 	  ${DESTDIR}${PREFIX}/share/examples/SOGo/SOGo.conf
@@ -58,5 +62,6 @@ pre-install:
 .include "../../devel/SOPE/buildlink3.mk"
 .include "../../devel/libmemcached/buildlink3.mk"
 .include "../../textproc/libxml2/buildlink3.mk"
+
 
 .include "../../mk/bsd.pkg.mk"

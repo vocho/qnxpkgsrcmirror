@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.94 2011/08/23 13:06:49 obache Exp $
+# $NetBSD: Makefile,v 1.103 2012/02/20 15:07:46 jdc Exp $
 
-DISTNAME=	SDL-1.2.14
-PKGREVISION=	3
+DISTNAME=	SDL-1.2.15
+PKGREVISION=	2
 CATEGORIES=	devel games
 MASTER_SITES=	http://www.libsdl.org/release/
 
@@ -32,10 +32,6 @@ NASMFLAGS_ELF=		-f elf
 NASMFLAGS_a.out=	-f aoutb
 .else
 CONFIGURE_ARGS+=	--disable-nasm
-.endif
-
-.if ${OPSYS:MNetBSD}
-CONFIGURE_ARGS+=	--disable-video-wscons
 .endif
 
 CONFIGURE_ENV+=		NASMFLAGS="${NASMFLAGS_${OBJECT_FMT}}"

@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.17 2011/11/01 06:02:33 sbd Exp $
+# $NetBSD: Makefile,v 1.21 2012/02/06 12:41:34 wiz Exp $
 #
 
 DISTNAME=	gnome-power-manager-2.24.4
-PKGREVISION=	10
+PKGREVISION=	13
 CATEGORIES=	sysutils gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gnome-power-manager/2.24/}
 EXTRACT_SUFX=	.tar.bz2
@@ -27,9 +27,14 @@ CONFIGURE_ENV+=		ac_cv_path_DOCBOOK2MAN=no
 GCONF_SCHEMAS+=		gnome-power-manager.schemas
 
 .include "../../mk/bsd.prefs.mk"
+.include "../../mk/compiler.mk"
 
 .if ${OPSYS} == "FreeBSD" || ${OPSYS} == "DragonFly"
 BUILDLINK_TRANSFORM+=   rm:-lresolv
+.endif
+
+.if ${PKGSRC_COMPILER:Mclang}
+CFLAGS+=	-Wno-tautological-compare
 .endif
 
 .include "../../devel/GConf/schemas.mk"

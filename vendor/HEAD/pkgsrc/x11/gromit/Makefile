@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.18 2011/11/01 06:02:51 sbd Exp $
+# $NetBSD: Makefile,v 1.20 2012/02/06 12:41:58 wiz Exp $
 #
 
 DISTNAME=		gromit-20041213
-PKGREVISION=		10
+PKGREVISION=		11
 CATEGORIES=		x11
 MASTER_SITES=		http://www.home.unix-ag.org/simon/gromit/
 
@@ -15,7 +15,8 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 USE_TOOLS+=		pkg-config
 INSTALLATION_DIRS=	bin
 
-LDFLAGS+=	${X11_LDFLAGS} -lX11
+LDFLAGS+=		${X11_LDFLAGS} -lX11
+LDFLAGS.DragonFly=	-lm
 
 do-install:
 	${INSTALL_PROGRAM} ${WRKSRC}/gromit ${DESTDIR}${PREFIX}/bin

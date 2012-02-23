@@ -1,10 +1,11 @@
-# $NetBSD: Makefile,v 1.26 2011/11/07 11:28:39 drochner Exp $
+# $NetBSD: Makefile,v 1.30 2012/02/06 12:41:33 wiz Exp $
 #
 
-DISTNAME=		gnome-commander-1.2.8.14
+DISTNAME=		gnome-commander-1.2.8.15
+PKGREVISION=		3
 CATEGORIES=		sysutils
 MASTER_SITES=		${MASTER_SITE_GNOME:=sources/gnome-commander/1.2/}
-EXTRACT_SUFX=		.tar.bz2
+EXTRACT_SUFX=		.tar.xz
 
 MAINTAINER=		pkgsrc@blackmouse.biz
 HOMEPAGE=		http://www.nongnu.org/gcmd/

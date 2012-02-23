@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.12 2011/11/01 06:00:33 sbd Exp $
+# $NetBSD: Makefile,v 1.15 2012/02/06 12:39:18 wiz Exp $
 #
 
-DISTNAME=	ario-1.3
-PKGREVISION=	10
+DISTNAME=	ario-1.5.1
+PKGREVISION=	2
 CATEGORIES=	audio
-MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=ario-player/1.3/}
+MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=ario-player/1.5.1/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://ario-player.sourceforge.net/
@@ -23,8 +23,10 @@ PKG_DESTDIR_SUPPORT= user-destdir
 BUILDLINK_TRANSFORM+=	rm:-W${fl}
 .endfor
 
+.include "../../audio/libmpdclient/buildlink3.mk"
 .include "../../devel/glib2/buildlink3.mk"
 .include "../../x11/gtk2/buildlink3.mk"
+.include "../../x11/libunique/buildlink3.mk"
 .include "../../textproc/libxml2/buildlink3.mk"
 .include "../../www/curl/buildlink3.mk"
 .include "../../security/gnutls/buildlink3.mk"

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.18 2011/05/04 11:38:05 obache Exp $
+# $NetBSD: Makefile,v 1.20 2012/01/28 07:55:57 obache Exp $
 #
 
 PKGNAME=	${PYPKGPREFIX}-cursespanel-0
@@ -9,7 +9,11 @@ MAINTAINER=	tsarna@NetBSD.org
 HOMEPAGE=	http://www.python.org/doc/current/lib/module-curses.html
 COMMENT=	Curses panel module for Python
 
+DEPENDS+=	${PYPKGPREFIX}-curses-[0-9]*:../../devel/py-curses
+
 PKG_DESTDIR_SUPPORT=	user-destdir
+
+PYTHON_VERSIONS_INCLUDE_3X=	yes
 
 USE_NCURSES=	yes
 # filter getsyx getwin has_key immedok mvwinsnstr mvwinsstr ...
@@ -32,5 +36,5 @@ do-patch:
 
 .include "../../lang/python/extension.mk"
 .include "../../lang/python/srcdist.mk"
-.include "../../devel/py-curses/buildlink3.mk"
+.include "../../devel/ncurses/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

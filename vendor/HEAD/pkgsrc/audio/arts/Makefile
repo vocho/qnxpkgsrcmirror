@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.77 2011/11/11 18:42:52 joerg Exp $
+# $NetBSD: Makefile,v 1.80 2012/02/15 19:50:12 hans Exp $
 
 DISTNAME=	arts-1.5.10
-PKGREVISION=	4
+PKGREVISION=	6
 CATEGORIES=	audio
 HOMEPAGE=	http://multimedia.kde.org/
 COMMENT=	Analog Real-Time Synthesizer
@@ -9,6 +9,8 @@ COMMENT=	Analog Real-Time Synthesizer
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 .include "../../meta-pkgs/kde3/Makefile.kde3"
+
+REPLACE_SH+=	artsc/artsc-config.in artsc/artsdsp.in
 
 .include "../../mk/bsd.prefs.mk"
 .include "../../mk/compiler.mk"

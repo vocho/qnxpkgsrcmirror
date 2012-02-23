@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.5 2011/11/01 06:00:39 sbd Exp $
+# $NetBSD: Makefile,v 1.9 2012/02/06 12:39:28 wiz Exp $
 #
 
 DISTNAME=		mp3splt-gtk-0.7
-PKGREVISION=		1
+PKGREVISION=		4
 CATEGORIES=		audio
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=mp3splt/}
 
@@ -16,6 +16,8 @@ USE_PKGLOCALEDIR=	yes
 GNU_CONFIGURE=	 	yes
 USE_TOOLS+=		pkg-config msgfmt gmake
 USE_DIRS+=		xdg-1.1
+
+LIBS.SunOS+=		-lnsl
 
 .include "options.mk"
 

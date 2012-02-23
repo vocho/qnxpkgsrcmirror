@@ -1,4 +1,4 @@
-# $NetBSD: Makefile.php,v 1.10 2011/10/20 12:39:33 taca Exp $
+# $NetBSD: Makefile.php,v 1.13 2012/02/03 03:10:34 taca Exp $
 # used by lang/php53/Makefile
 # used by www/ap-php/Makefile
 
@@ -39,6 +39,7 @@ CONFIGURE_ARGS+=	--disable-dom
 CONFIGURE_ARGS+=	--disable-pdo
 CONFIGURE_ARGS+=	--disable-json
 
+CONFIGURE_ARGS+=	--enable-cgi
 CONFIGURE_ARGS+=	--enable-xml
 CONFIGURE_ARGS+=	--with-libxml-dir=${PREFIX}
 .include "../../textproc/libxml2/buildlink3.mk"
@@ -59,8 +60,8 @@ PKG_SUGGESTED_OPTIONS+=	inet6 ssl
 .include "../../mk/bsd.options.mk"
 
 .if !empty(PKG_OPTIONS:Msuhosin)
-SUHOSIN_PHPVER=		5.3.7
-.  if ${SUHOSIN_PHPVER} != ${PHP_BASE_VERS} && ${SUHOSIN_PHPVER} != "5.3.7"
+SUHOSIN_PHPVER=		5.3.9
+.  if ${SUHOSIN_PHPVER} != ${PHP_BASE_VERS} && ${PHP_BASE_VERS} != 5.3.10
 PKG_FAIL_REASON+=	"The suhosin patch is currently not available for"
 PKG_FAIL_REASON+=	"this version of PHP.  You may have to wait until"
 PKG_FAIL_REASON+=	"an updated patch is released or temporarily"

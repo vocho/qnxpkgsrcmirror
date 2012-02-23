@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.1.1.1 2011/11/20 06:25:17 agc Exp $
+# $NetBSD: Makefile,v 1.4 2011/11/26 19:59:58 dholland Exp $
 
 DISTNAME=	elftoolchain-0.5.1
+PKGREVISION=	1
 CATEGORIES=	devel
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=elftoolchain/${DISTNAME}/}
 EXTRACT_SUFX=	.tar.bz2
@@ -15,8 +16,11 @@ CONFLICTS=	libelf-[0-9]*
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
 PKG_DESTDIR_SUPPORT=	user-destdir
 
+MAKE_JOBS_SAFE=	no
+
 USE_BSD_MAKEFILE=	yes
 MAKE_ENV+=		${BSD_MAKE_ENV}
+MAKE_FLAGS+=		MKPROFILE=yes
 
 INSTALLATION_DIRS=	bin lib
 INSTALLATION_DIRS+=	${PKGMANDIR}/man1 ${PKGMANDIR}/cat1 ${PKGMANDIR}/html1

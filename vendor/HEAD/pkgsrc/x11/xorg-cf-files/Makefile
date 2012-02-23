@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.16 2011/10/25 01:36:44 mef Exp $
+# $NetBSD: Makefile,v 1.18 2012/02/15 15:25:15 hans Exp $
 #
 
 DISTNAME=		xorg-cf-files-1.0.4
+PKGREVISION=		2
 CATEGORIES=		x11 devel
 MASTER_SITES=		${MASTER_SITE_XORG:=util/}
 EXTRACT_SUFX=		.tar.bz2
@@ -24,7 +25,7 @@ post-extract:
 	${CP} ${FILESDIR}/xorgsite.def ${WRKSRC}
 
 pre-configure:
-.for sys in NetBSD FreeBSD DragonFly linux darwin
+.for sys in NetBSD FreeBSD DragonFly linux darwin sun
 	mv ${WRKSRC}/${sys}.cf ${WRKSRC}/${sys}.cf.before && \
 	${SED} -e "s|@@PKGSRC_CC@@|${CC}|g"		\
 		-e "s|@@PKGSRC_CPP@@|${CPP}|g"		\

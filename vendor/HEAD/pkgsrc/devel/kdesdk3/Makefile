@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.80 2011/11/01 06:00:56 sbd Exp $
+# $NetBSD: Makefile,v 1.87 2012/02/06 12:39:52 wiz Exp $
 
 DISTNAME=	kdesdk-${_KDE_VERSION}
-PKGREVISION=	17
+PKGREVISION=	22
 CATEGORIES=	devel
 COMMENT=	Support applications and tools used by KDE developers
 
@@ -13,7 +13,7 @@ CONFLICTS+=	umbrello-[0-9]*
 .include "../../meta-pkgs/kde3/Makefile.kde3"
 
 BDB_ACCEPTED=		db4 db5
-USE_TOOLS+=		lex perl:run bash:run
+USE_TOOLS+=		perl:run bash:run pod2man
 CONFIGURE_ARGS+=	--with-db-dir=${BDBBASE}
 CONFIGURE_ARGS+=	--with-db-include=${BDB_TYPE}/db.h
 #CONFIGURE_ARGS+=	--with-db-include-dir=${BDBBASE}/include/${BDB_TYPE}
@@ -98,6 +98,13 @@ PLIST_SRC=	# empty
 PLIST_SRC+=	${PKGDIR}/PLIST.kmtrace
 .endif
 PLIST_SRC+=	${PKGDIR}/PLIST
+
+.if ${OPSYS} == "DragonFly"
+CONFIGURE_ENV+= LEX="${PREFIX}/bin/flex"
+.include "../../devel/flex/buildlink3.mk"
+.else
+USE_TOOLS+= lex
+.endif
 
 .include "options.mk"
 

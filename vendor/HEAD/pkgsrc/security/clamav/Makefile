@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.5 2011/10/26 17:55:05 tez Exp $
+# $NetBSD: Makefile,v 1.7 2012/01/26 06:34:19 sbd Exp $
 
 DISTNAME=	clamav-0.97.3
 CATEGORIES=	security
@@ -14,6 +14,7 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_LIBTOOL=		yes
 GNU_CONFIGURE=		yes
+SET_LIBDIR=		yes
 CONFIGURE_ARGS+=	--disable-clamav
 CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR}
 CONFIGURE_ARGS+=	--with-dbdir=${CLAMAV_DBDIR}
@@ -25,8 +26,6 @@ CONFIGURE_ARGS+=	--with-zlib=${BUILDLINK_PREFIX.zlib}
 # pkgsrc enforces a "secure" version of zlib, so don't let this check
 # bomb the build.
 CONFIGURE_ARGS+=	--disable-zlib-vcheck
-# avoid multiarch libdir on Darwin
-CONFIGURE_ARGS+=	--libdir=${PREFIX}/lib
 
 CHECK_PORTABILITY_SKIP=	contrib/* unit_tests/*
 

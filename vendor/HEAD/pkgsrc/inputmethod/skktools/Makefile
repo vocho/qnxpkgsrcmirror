@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.3 2011/04/22 14:40:43 obache Exp $
+# $NetBSD: Makefile,v 1.6 2012/02/06 12:40:45 wiz Exp $
 #
 
 DISTNAME=	skktools-1.3.1
-PKGREVISION=	1
+PKGREVISION=	4
 CATEGORIES=	japanese inputmethod
 MASTER_SITES=	http://openlab.ring.gr.jp/skk/tools/
 
@@ -23,5 +23,11 @@ SUBST_CLASSES+=		prefix
 SUBST_STAGE.prefix=	pre-configure
 SUBST_FILES.prefix=	configure
 SUBST_SED.prefix=	-e 's|/usr/local|${PREFIX}|g'
+
+.include "../../mk/bsd.prefs.mk"
+
+.if ${OPSYS} == "Linux"
+.include "../../databases/gdbm_compat/buildlink3.mk"
+.endif
 
 .include "../../mk/bsd.pkg.mk"

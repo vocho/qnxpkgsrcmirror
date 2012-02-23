@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.47 2011/11/01 06:01:48 sbd Exp $
+# $NetBSD: Makefile,v 1.49 2012/02/06 12:40:38 wiz Exp $
 #
 
 DISTNAME=	xzgv-0.9.1
-PKGREVISION=	4
+PKGREVISION=	5
 CATEGORIES=	graphics
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=xzgv/}
 
@@ -16,6 +16,7 @@ USE_X11BASE=		yes
 USE_TOOLS+=		gmake makeinfo pkg-config gawk
 INFO_FILES=		yes
 INSTALLATION_DIRS=	bin ${PKGINFODIR} ${PKGMANDIR}/man1
+LDFLAGS+=		-lm -lX11	# explicitly list for ld v2.22
 
 do-install:
 	${INSTALL_PROGRAM} ${WRKSRC}/src/xzgv ${DESTDIR}${PREFIX}/bin

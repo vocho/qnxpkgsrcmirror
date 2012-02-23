@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.13 2011/11/01 06:01:24 sbd Exp $
+# $NetBSD: Makefile,v 1.17 2012/02/06 12:40:15 wiz Exp $
 #
 
-DISTNAME=	qlandkartegt-1.0.0
-PKGREVISION=	4
+DISTNAME=	qlandkartegt-1.3.2
+PKGREVISION=	1
 CATEGORIES=	geography
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=qlandkartegt/}
 
@@ -18,6 +18,7 @@ USE_CMAKE=	yes
 CMAKE_ARGS+=	-DMAN_INSTALL_DIR:PATH=${PREFIX}/${PKGMANDIR}
 
 DEPENDS+=	qlandkartegt-garmindev>=0.3:../../geography/qlandkartegt-garmindev
+DEPENDS+=	qt4-sqlite3>=4.8:../../x11/qt4-sqlite3
 
 .include "../../devel/cmake/buildlink3.mk"
 .include "../../geography/gpsd/buildlink3.mk"

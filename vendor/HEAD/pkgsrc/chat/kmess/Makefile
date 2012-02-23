@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.43 2011/11/01 06:00:46 sbd Exp $
+# $NetBSD: Makefile,v 1.47 2012/02/17 13:46:46 hans Exp $
 #
 
 DISTNAME=	kmess-1.4.3
-PKGREVISION=	14
+PKGREVISION=	16
 CATEGORIES=	chat kde
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=kmess/}
 
@@ -13,7 +13,8 @@ COMMENT=	MSN Messenger Client for KDE3
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=		yes
-USE_TOOLS+=		gmake msgfmt
+SET_LIBDIR=		yes
+USE_TOOLS+=		gmake msgfmt perl
 USE_LANGUAGES=		c c++
 USE_LIBTOOL=		yes
 

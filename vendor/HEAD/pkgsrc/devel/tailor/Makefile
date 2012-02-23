@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.18 2010/06/04 20:01:00 gls Exp $
+# $NetBSD: Makefile,v 1.20 2012/01/28 10:43:00 obache Exp $
 #
 
 DISTNAME=		tailor-0.9.35
@@ -13,7 +13,8 @@ LICENSE=		gnu-gpl-v3
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
-PYDISTUTILSPKG=		yes
+USE_LANGUAGES=		#none
+
 PYTHON_PATCH_SCRIPTS=	tailor
 
 AUTO_MKDIRS=		yes

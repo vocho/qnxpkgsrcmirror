@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.1.1.1 2011/04/21 09:49:44 pettai Exp $
+# $NetBSD: Makefile,v 1.3 2012/01/12 20:04:25 pettai Exp $
 
 DISTNAME=	mod_authn_otp-${DISTVERS}
 PKGNAME=	${APACHE_PKG_PREFIX}-authn-otp-${DISTVERS}
@@ -12,13 +12,13 @@ COMMENT=	Apache module for one-time password authentication
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
-PKG_APACHE_ACCEPTED=	apache2 apache22
+PKG_APACHE_ACCEPTED=	apache22
 
 .include "../../mk/apache.mk"
 
 APACHE_MODULE_NAME=	mod_authn_otp.${MODULE_EXT}
 
-DISTVERS=	1.1.3
+DISTVERS=	1.1.4
 MODULE_EXT=	la
 MESSAGE_SUBST+=	MODULE_NAME=authn_otp_module
 

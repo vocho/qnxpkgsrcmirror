@@ -1,4 +1,4 @@
-# $NetBSD: Makefile.common,v 1.22 2011/11/08 15:19:55 taca Exp $
+# $NetBSD: Makefile.common,v 1.26 2012/02/18 06:28:46 taca Exp $
 #
 # Ruby base distribution common definition
 # used by databases/ruby-gdbm/Makefile
@@ -10,11 +10,18 @@
 # used by lang/ruby18-base/Makefile
 # used by lang/ruby19/Makefile
 # used by lang/ruby19-base/Makefile
+# used by lang/ruby193/Makefile
+# used by lang/ruby193-base/Makefile
 # used by textproc/ruby-psych/Makefile
 # used by x11/ruby-tk/Makefile
+#
+# RUBY_EXTNAME
+#	RUBY_EXTNAME defines name of extension which included in
+#	the Ruby's distribution file.
+#
 
 # Ruby's license
-.if ${RUBY_VER} == "18" ||  ${RUBY_VER} == "19"
+.if ${RUBY_VER} == "18" || ${RUBY_VER} == "19"
 LICENSE=		gnu-gpl-v2 OR ruby-license
 .else
 LICENSE=		2-clause-bsd OR ruby-license
@@ -45,15 +52,6 @@ RUBY_DISTINFO_FILE=	${RUBY_SRCDIR}/distinfo
 
 RUBY_HOMEPAGE=		http://www.ruby-lang.org/en/
 
-# common default
-_RUBY_PATCHLEVEL=	${RUBY_PATCHLEVEL:S/pl/p/:S/pre/preview/}
-
-.if !empty(_RUBY_PATCHLEVEL)
-RUBY_DISTNAME?=		ruby-${RUBY_VERSION}-${_RUBY_PATCHLEVEL}
-.else
-RUBY_DISTNAME?=		ruby-${RUBY_VERSION}
-.endif
-
 RUBY_WRKSRC?=		${WRKDIR}/${RUBY_DISTNAME}
 EXTRACT_SUFX=		.tar.bz2
 STRIP?=			strip
@@ -68,6 +66,11 @@ PLIST_SUBST+=		RUBY_SHLIBVER=${RUBY_SHLIBVER:Q} \
 			RUBY_NAME=${RUBY_NAME:Q}
 
 .if !empty(RUBY_EXTNAME)
+.if ${RUBY_VER} == "193"
+DIST_SUBDIR=	ruby193-base-201202170
+.endif
+
+PKGNAME?=		${RUBY_PKGPREFIX}-${RUBY_EXTNAME}-${RUBY_VERSION_FULL}
 DISTINFO_FILE=		${.CURDIR}/../../lang/${RUBY_BASE}/distinfo
 PATCHDIR=		${.CURDIR}/../../lang/${RUBY_BASE}/patches
 do-patch:

@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.9 2011/11/01 06:01:32 sbd Exp $
+# $NetBSD: Makefile,v 1.11 2012/01/12 15:34:24 hans Exp $
 #
 
+PKGNAME=	evas-${EVAS_VERSION}
 COMMENT=	Enlightened Canvas Library
-PKGREVISION=	3
 
 .include "Makefile.common"
 
@@ -11,7 +11,8 @@ CONFIGURE_ENV+=		EET_LIBS="${COMPILER_RPATH_FLAG}${BUILDLINK_PREFIX.eet}/lib -L$
 
 PKGCONFIG_OVERRIDE=	evas.pc.in
 
-INSTALLATION_DIRS=	lib/evas/modules/loaders lib/evas/modules/savers
+INSTALLATION_DIRS=	lib/evas/modules/loaders lib/evas/modules/savers \
+			share/doc/evas
 
 .include "../../mk/bsd.prefs.mk"
 
@@ -19,6 +20,12 @@ PLIST_SRC+=	PLIST
 .if ${OPSYS} != "NetBSD" && ${OPSYS} != "OpenBSD" && ${OPSYS} != "MirBSD"
 PLIST_SRC+=	PLIST.cserve
 .endif
+
+CPPFLAGS.SunOS+=	-std=gnu99 -D_XOPEN_SOURCE=600
+
+post-install:
+	${INSTALL_DATA} ${WRKSRC}/AUTHORS ${WRKSRC}/COPYING \
+	    ${DESTDIR}${PREFIX}/share/doc/evas
 
 .include "../../devel/eet/buildlink3.mk"
 .include "../../devel/eina/buildlink3.mk"

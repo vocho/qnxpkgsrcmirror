@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.5 2011/11/16 08:23:48 sbd Exp $
+# $NetBSD: Makefile,v 1.7 2012/01/13 10:55:16 obache Exp $
 
 DISTNAME=	lush-1.2.1
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	lang
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=lush/}
 
@@ -14,6 +14,7 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 GNU_CONFIGURE=	yes
 USE_TOOLS+=	gmake
 USE_LIBTOOL=	yes
+USE_GNU_READLINE=	yes # rl_getc, rl_basic_quote_characters, rl_insert_close
 
 CONFIGURE_ARGS+=	--without-bfd
 

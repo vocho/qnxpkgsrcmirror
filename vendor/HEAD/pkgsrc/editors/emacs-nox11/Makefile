@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.31 2010/06/01 21:47:00 minskim Exp $
+# $NetBSD: Makefile,v 1.35 2012/02/20 01:22:32 obache Exp $
 
 PKGNAME=	${DISTNAME:S/-/-nox11-/}
 

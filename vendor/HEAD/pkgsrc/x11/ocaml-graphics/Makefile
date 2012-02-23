@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.13 2011/08/08 07:31:52 obache Exp $
+# $NetBSD: Makefile,v 1.15 2011/12/13 06:17:35 marino Exp $
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
@@ -7,7 +7,7 @@ DISTINFO_FILE= ${PKGDIR}/../../lang/ocaml/distinfo
 PATCHDIR= ${PKGDIR}/../../lang/ocaml/patches
 
 PKGNAME=		${DISTNAME:S/ocaml/ocaml-graphics/}
-PKGREVISION=		4
+PKGREVISION=		5
 
 COMMENT+=		(graphics library)
 
@@ -32,6 +32,7 @@ PLIST_VARS+=		natdynlib
 .  if !empty(MACHINE_PLATFORM:MLinux-*-*) || \
       !empty(MACHINE_PLATFORM:MDarwin-*-*) || \
       !empty(MACHINE_PLATFORM:MFreeBSD-*-*) || \
+      !empty(MACHINE_PLATFORM:MDragonFly-*-*) || \
       !empty(MACHINE_PLATFORM:MNetBSD-*-*)
 PLIST.natdynlib=		yes
 .  endif
