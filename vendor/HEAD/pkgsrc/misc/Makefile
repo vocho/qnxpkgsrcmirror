@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.364 2011/10/13 07:30:55 jnemeth Exp $
+# $NetBSD: Makefile,v 1.370 2012/02/13 12:42:41 drochner Exp $
 #
 
 COMMENT=	Miscellaneous utilities
@@ -28,6 +28,7 @@ SUBDIR+=	chipmunk
 SUBDIR+=	chord
 SUBDIR+=	cksfv
 SUBDIR+=	color-theme
+SUBDIR+=	colorblind
 SUBDIR+=	colorize
 SUBDIR+=	colorls
 SUBDIR+=	colortail
@@ -141,6 +142,7 @@ SUBDIR+=	koffice-l10n-pl
 SUBDIR+=	kp
 SUBDIR+=	latin-words-bin
 SUBDIR+=	less
+SUBDIR+=	libcarddav
 SUBDIR+=	libcdio
 SUBDIR+=	libquantum
 SUBDIR+=	libreoffice3-bin
@@ -195,10 +197,12 @@ SUBDIR+=	p5-Vroom
 SUBDIR+=	parchive
 SUBDIR+=	pciids
 SUBDIR+=	pdmenu
+SUBDIR+=	php-orangehrm
 SUBDIR+=	pinfo
 SUBDIR+=	ppower
 SUBDIR+=	pty-redir
 SUBDIR+=	py-anita
+SUBDIR+=	py-carddav
 SUBDIR+=	qbrew
 SUBDIR+=	qterm
 SUBDIR+=	reed
@@ -216,6 +220,7 @@ SUBDIR+=	ruby-daemons
 SUBDIR+=	ruby-gem_plugin
 SUBDIR+=	ruby-launchy
 SUBDIR+=	ruby-progressbar
+SUBDIR+=	ruby-sprockets
 SUBDIR+=	ruby-transaction-simple
 SUBDIR+=	rubygems
 SUBDIR+=	rump
@@ -260,6 +265,7 @@ SUBDIR+=	xrolodex
 SUBDIR+=	xtail
 SUBDIR+=	xtend
 SUBDIR+=	yelp
+SUBDIR+=	yelp3
 SUBDIR+=	yrolo
 SUBDIR+=	zorro
 SUBDIR+=	zyGrib

@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.52 2011/11/01 06:01:11 sbd Exp $
+# $NetBSD: Makefile,v 1.56 2012/02/06 12:40:09 wiz Exp $
 
 DISTNAME=	kmymoney2-1.0.5
-PKGREVISION=	2
+PKGREVISION=	5
 CATEGORIES=	finance kde
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=kmymoney2/}
 EXTRACT_SUFX=  .tar.bz2
@@ -17,10 +17,14 @@ USE_TOOLS+=		gmake msgfmt perl pkg-config bash
 USE_LANGUAGES=		c c++
 USE_LIBTOOL=		YES
 GNU_CONFIGURE=		YES
+MAKE_JOBS_SAFE=		NO
 CONFIG_SHELL=		${BASH}
 SHLIBTOOL_OVERRIDE=	# empty
 
+.include "../../mk/bsd.prefs.mk"
+.if ${OPSYS} != "NetBSD"
 USE_TOOLS+=		gsed
+.endif
 USE_TOOLS+=		autoconf
 
 pre-configure:

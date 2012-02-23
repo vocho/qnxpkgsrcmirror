@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.21 2010/09/16 08:06:15 adam Exp $
+# $NetBSD: Makefile,v 1.23 2012/01/18 13:55:13 adam Exp $
 
 DISTNAME=	libtabe-0.2.6
-PKGREVISION=	2
+PKGREVISION=	3
 CATEGORIES=	chinese inputmethod
 MASTER_SITES=	ftp://cle.linux.org.tw/pub/xcin/cvs/
 
@@ -19,6 +19,7 @@ USE_LIBTOOL=		yes
 GNU_CONFIGURE=		yes
 CONFIGURE_ARGS+=	--with-db-inc=${BDBBASE}/include/${BDB_TYPE}
 CONFIGURE_ARGS+=	--with-db-lib=${BDBBASE}/lib
+CONFIGURE_ARGS+=	--with-db-name=${BDB_TYPE}
 
 INSTALL_MAKE_FLAGS+=	program_prefix=${DESTDIR}
 

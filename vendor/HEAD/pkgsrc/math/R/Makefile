@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.118 2011/11/20 04:57:02 markd Exp $
+# $NetBSD: Makefile,v 1.124 2012/02/06 12:40:51 wiz Exp $
 
 DISTNAME=		R-2.14.0
+PKGREVISION=		2
 CATEGORIES=		math
 MASTER_SITES=		${MASTER_SITE_R_CRAN:=base/R-2/}
 
@@ -18,9 +19,10 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 
 TEST_TARGET=		check
 USE_TOOLS+=		gmake gzip:run makeinfo perl:run sed unzip:run xmkmf
+USE_TOOLS+=		pkg-config
 USE_GNU_READLINE=	yes		# uses callback interface
 USE_GNU_ICONV=		yes		# latin1 support, iconvlist
-USE_LANGUAGES=		c c++ fortran77
+USE_LANGUAGES=		c c++ fortran
 USE_LIBTOOL=		yes
 TEXINFO_REQD=		4.7
 
@@ -90,6 +92,28 @@ CONFIGURE_ENV+=		R_PAPERSIZE=${R_PAPERSIZE:Q}
 # These macros are used during the build, so strip off the -o,-g flags.
 INSTALL_DATA=		${INSTALL} ${COPY} -m ${SHAREMODE}
 INSTALL_SCRIPT=		${INSTALL} ${COPY} -m ${BINMODE}
+
+# to build NEWS.pdf
+BUILD_DEPENDS+=		tex-latex-bin-[0-9]*:../../print/tex-latex-bin
+BUILD_DEPENDS+=		tex-metafont-[0-9]*:../../fonts/tex-metafont
+BUILD_DEPENDS+=		tex-ae-[0-9]*:../../fonts/tex-ae
+BUILD_DEPENDS+=		tex-ec-[0-9]*:../../fonts/tex-ec
+BUILD_DEPENDS+=		tex-tools-[0-9]*:../../print/tex-tools
+BUILD_DEPENDS+=		tex-url-[0-9]*:../../print/tex-url
+BUILD_DEPENDS+=		tex-oberdiek-[0-9]*:../../print/tex-oberdiek
+BUILD_DEPENDS+=		tex-amsfonts-[0-9]*:../../fonts/tex-amsfonts
+BUILD_DEPENDS+=		tex-cm-[0-9]*:../../fonts/tex-cm
+BUILD_DEPENDS+=		tex-cm-super-[0-9]*:../../fonts/tex-cm-super
+BUILD_DEPENDS+=		tex-fontname-[0-9]*:../../fonts/tex-fontname
+BUILD_DEPENDS+=		tex-graphics-[0-9]*:../../print/tex-graphics
+BUILD_DEPENDS+=		tex-hyperref-[0-9]*:../../print/tex-hyperref
+BUILD_DEPENDS+=		tex-ifluatex-[0-9]*:../../print/tex-ifluatex
+BUILD_DEPENDS+=		tex-ifxetex-[0-9]*:../../print/tex-ifxetex
+BUILD_DEPENDS+=		tex-latex-[0-9]*:../../print/tex-latex
+BUILD_DEPENDS+=		tex-latexconfig-[0-9]*:../../print/tex-latexconfig
+BUILD_DEPENDS+=		tex-mptopdf-[0-9]*:../../graphics/tex-mptopdf
+BUILD_DEPENDS+=		tex-pdftex-def-[0-9]*:../../print/tex-pdftex
+
 
 BUILDLINK_API_DEPENDS.zlib+= zlib>=1.2.3
 BUILDLINK_API_DEPENDS.bzip2+= bzip2>=1.0.5

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile.common,v 1.71 2011/11/18 07:27:43 obache Exp $
+# $NetBSD: Makefile.common,v 1.74 2012/01/09 17:20:01 drochner Exp $
 #
 # used by audio/xine-alsa/Makefile
 # used by audio/xine-arts/Makefile
@@ -7,8 +7,8 @@
 # used by multimedia/xine-v4l/Makefile
 # used by multimedia/xine-v4l2/Makefile
 
-DISTNAME=		xine-lib-1.1.20
-XINE_PKGNAME=		xine-lib-1.1.20
+DISTNAME=		xine-lib-1.1.20.1
+XINE_PKGNAME=		xine-lib-1.1.20.1
 PKGNAME?=		${XINE_PKGNAME}
 CATEGORIES?=		multimedia
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=xine/}
@@ -28,7 +28,7 @@ USE_PKGLOCALEDIR=	YES
 USE_LIBTOOL=		YES
 LIBTOOL_OVERRIDE=	libtool libtool-nofpic
 PKGCONFIG_OVERRIDE=	misc/libxine.pc.in
-USE_TOOLS+=		autoconf gmake msgfmt pkg-config xmkmf perl
+USE_TOOLS+=		autoconf automake gmake msgfmt pkg-config xmkmf perl
 
 CONFIGURE_ARGS+=	--with-w32-path='${PREFIX}/lib/win32'
 #CONFIGURE_ARGS+=	--without-external-ffmpeg --disable-ffmpegtest
@@ -66,6 +66,8 @@ BUILDLINK_TRANSFORM+=	"rm:-Wl,--no-undefined"
 
 pre-configure:
 	${TOUCH} ${WRKSRC}/lib/dummy.c
+	cd ${WRKSRC} && aclocal -I m4
+	cd ${WRKSRC} && automake -Wnone
 	cd ${WRKSRC} && autoheader
 	cd ${WRKSRC} && autoconf
 

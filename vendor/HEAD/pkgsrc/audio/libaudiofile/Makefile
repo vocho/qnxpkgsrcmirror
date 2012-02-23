@@ -1,20 +1,21 @@
-# $NetBSD: Makefile,v 1.45 2010/04/12 19:04:58 drochner Exp $
+# $NetBSD: Makefile,v 1.55 2012/01/12 16:34:28 adam Exp $
 
-DISTNAME=		audiofile-0.2.7
-PKGNAME=		lib${DISTNAME}
-CATEGORIES=		audio
-MASTER_SITES=		http://www.68k.org/~michael/audiofile/ \
-			${MASTER_SITE_GNOME:=sources/audiofile/0.2/}
+DISTNAME=	audiofile-0.3.3
+PKGNAME=	lib${DISTNAME}
+CATEGORIES=	audio
+MASTER_SITES=	http://www.68k.org/~michael/audiofile/
 
-MAINTAINER=		pkgsrc-users@NetBSD.org
-HOMEPAGE=		http://andromeda.68k.org/~michael/audiofile/
-COMMENT=		Sound library for SGI audio file
+MAINTAINER=	pkgsrc-users@NetBSD.org
+HOMEPAGE=	http://andromeda.68k.org/~michael/audiofile/
+COMMENT=	Sound library for SGI audio file
+LICENSE=	gnu-gpl-v2 AND gnu-lgpl-v2
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
 PKG_DESTDIR_SUPPORT=	user-destdir
 
-GNU_CONFIGURE=		YES
-USE_LIBTOOL=		YES
+GNU_CONFIGURE=		yes
+USE_LANGUAGES=		c c++
+USE_LIBTOOL=		yes
 PKGCONFIG_OVERRIDE=	audiofile.pc.in
 
 DOCDIR=			${PREFIX}/share/doc/libaudiofile
@@ -22,6 +23,10 @@ DOCDIR=			${PREFIX}/share/doc/libaudiofile
 INSTALLATION_DIRS=	${DOCDIR}
 
 post-install:
-	cd ${WRKSRC}/docs; ${INSTALL_DATA} af* sf* ${DESTDIR}${DOCDIR}
+	cd ${WRKSRC}/docs && ${INSTALL_DATA} af* sf* ${DESTDIR}${DOCDIR}
 
+.include "../../mk/bsd.prefs.mk"
+.if ${OPSYS} == "Linux"
+.  include "../../audio/alsa-lib/buildlink3.mk"
+.endif
 .include "../../mk/bsd.pkg.mk"

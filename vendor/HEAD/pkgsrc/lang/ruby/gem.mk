@@ -1,4 +1,4 @@
-# $NetBSD: gem.mk,v 1.9 2011/11/08 15:19:22 taca Exp $
+# $NetBSD: gem.mk,v 1.11 2012/01/12 08:43:22 obache Exp $
 #
 # This Makefile fragment is intended to be included by packages that build
 # and install Ruby gems.
@@ -110,14 +110,30 @@ UPDATE_GEMSPEC=		../../lang/ruby/files/update-gemspec.rb
 USE_RAKE=		YES
 .endif
 
-.if defined(RUBY_RAILS)
+.if defined(RUBY_RAILS_SUPPORTED)
 USE_TOOLS+=		expr
 .endif
+
+# print-PLIST support
+PRINT_PLIST_AWK+=	/${GEM_NAME}\.(gem|gemspec)$$/ \
+			{ gsub(/${GEM_NAME}\.gem/, "$${GEM_NAME}.gem"); }
+PRINT_PLIST_AWK+=	/${GEM_NAME:S/./[.]/g}[.](gem|gemspec)$$/ \
+	{ gsub(/${PKGVERSION_NOREV:S|/|\\/|g}[.]gem/, "$${PKGVERSION}.gem"); }
+PRINT_PLIST_AWK+=	/^${GEM_LIBDIR:S|/|\\/|g}/ \
+	{ gsub(/${GEM_LIBDIR:S|/|\\/|g}/, "$${GEM_LIBDIR}"); print; next; }
+PRINT_PLIST_AWK+=	/^${GEM_DOCDIR:S|/|\\/|g}/ \
+			{ next; }
+PRINT_PLIST_AWK+=	/^${GEM_HOME:S|/|\\/|g}/ \
+			{ gsub(/${GEM_HOME:S|/|\\/|g}/, "$${GEM_HOME}"); \
+			print; next; }
+PRINT_PLIST_AWK+=	/^${RUBY_GEM_BASE:S|/|\\/|g}/ \
+		{ gsub(/${RUBY_GEM_BASE:S|/|\\/|g}/, "$${RUBY_GEM_BASE}"); \
+			print; next; }
 
 # Include this early in case some of its target are needed
 .include "../../lang/ruby/modules.mk"
 
-.if defined(RUBY_RAILS)
+.if defined(RUBY_RAILS_SUPPORTED)
 .include "../../lang/ruby/rails.mk"
 .endif
 
@@ -206,22 +222,6 @@ RUBYGEM=	${RUBYGEM_PREFIX}/bin/${RUBYGEM_NAME}
 PLIST_SUBST+=		GEM_NAME=${GEM_NAME}
 PLIST_SUBST+=		GEM_LIBDIR=${GEM_LIBDIR}
 PLIST_SUBST+=		GEM_DOCDIR=${GEM_DOCDIR}
-
-# print-PLIST support
-PRINT_PLIST_AWK+=	/${GEM_NAME}\.(gem|gemspec)$$/ \
-			{ gsub(/${GEM_NAME}\.gem/, "$${GEM_NAME}.gem"); }
-PRINT_PLIST_AWK+=	/${GEM_NAME:S/./[.]/g}[.](gem|gemspec)$$/ \
-	{ gsub(/${PKGVERSION_NOREV:S|/|\\/|g}[.]gem/, "$${PKGVERSION}.gem"); }
-PRINT_PLIST_AWK+=	/^${GEM_LIBDIR:S|/|\\/|g}/ \
-	{ gsub(/${GEM_LIBDIR:S|/|\\/|g}/, "$${GEM_LIBDIR}"); print; next; }
-PRINT_PLIST_AWK+=	/^${GEM_DOCDIR:S|/|\\/|g}/ \
-			{ next; }
-PRINT_PLIST_AWK+=	/^${GEM_HOME:S|/|\\/|g}/ \
-			{ gsub(/${GEM_HOME:S|/|\\/|g}/, "$${GEM_HOME}"); \
-			print; next; }
-PRINT_PLIST_AWK+=	/^${RUBY_GEM_BASE:S|/|\\/|g}/ \
-		{ gsub(/${RUBY_GEM_BASE:S|/|\\/|g}/, "$${RUBY_GEM_BASE}"); \
-			print; next; }
 
 ###
 ### gem-extract

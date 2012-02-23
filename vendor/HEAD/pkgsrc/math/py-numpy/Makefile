@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.14 2011/04/19 15:32:28 roy Exp $
+# $NetBSD: Makefile,v 1.16 2012/02/09 13:09:09 obache Exp $
 #
 
 DISTNAME=	numpy-1.4.1
-PKGREVISION=	1
-PKGNAME=	${PYPKGPREFIX}-numpy-1.4.1
+PKGREVISION=	3
+PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
 CATEGORIES=	math python
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=numpy/}
 
@@ -14,7 +14,6 @@ LICENSE=	modified-bsd
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
-PYDISTUTILSPKG=	yes
 USE_LANGUAGES+=	c fortran77
 PLIST_SUBST+=	PYVERSSUFFIX=${PYVERSSUFFIX}
 MAKE_ENV+=	ATLAS=None
@@ -47,7 +46,7 @@ PYSETUPBUILDARGS+= --fcompiler=gnu
 #	${PYTHONBIN} -c "import numpy; numpy.test()"
 
 .include "../../lang/python/application.mk"
-.include "../../lang/python/extension.mk"
+.include "../../lang/python/distutils.mk"
 .include "../../math/blas/buildlink3.mk"
 .include "../../math/lapack/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

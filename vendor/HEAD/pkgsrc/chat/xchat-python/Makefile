@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.15 2011/04/22 13:45:17 obache Exp $
+# $NetBSD: Makefile,v 1.17 2012/02/16 16:15:01 hans Exp $
 
 .include "../../chat/xchat/Makefile.common"
 
 PKGNAME=		${DISTNAME:S/-/-python-/}
-PKGREVISION=		1
+PKGREVISION=		2
 OWNER=			tron@NetBSD.org
 
 COMMENT=		Python scripting plugin for XChat
@@ -20,7 +20,7 @@ CONFIGURE_ENV+=		ac_cv_path_pythonpath=${PYTHONBIN:Q}
 
 .include "../../mk/bsd.prefs.mk"
 
-.if ${OPSYS} == "Darwin"
+.if ${OPSYS} == "Darwin" || ${OPSYS} == "SunOS"
 SUBST_CLASSES+=		libutil
 SUBST_STAGE.libutil=	pre-configure
 SUBST_FILES.libutil=	configure

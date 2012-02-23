@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.28 2011/11/20 05:41:52 sbd Exp $
+# $NetBSD: Makefile,v 1.31 2012/02/09 21:44:28 sbd Exp $
 
 DISTNAME=	qalculate-kde-0.9.5
-PKGREVISION=	13
+PKGREVISION=	15
 CATEGORIES=	math
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=qalculate/}
 
@@ -18,6 +18,7 @@ USE_LANGUAGES=		c c++
 USE_LIBTOOL=		yes
 USE_TOOLS+=		autoconf gmake msgfmt pkg-config perl
 GNU_CONFIGURE=		yes
+SET_LIBDIR=		yes
 
 pre-configure:
 	${RUN} cd ${WRKSRC}; autoconf

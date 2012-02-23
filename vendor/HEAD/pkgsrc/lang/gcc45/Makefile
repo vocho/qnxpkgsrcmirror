@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.3 2011/10/18 17:55:27 hans Exp $
+# $NetBSD: Makefile,v 1.5 2012/01/29 16:13:06 marino Exp $
 
 DISTNAME=		gcc-${GCC_VERSION}
 PKGNAME=		gcc45-${GCC_VERSION}
@@ -16,9 +16,7 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=		awk:run bash:run perl chmod \
 			gmake:run makeinfo msgfmt bison flex gm4 \
-			sed:run unzip
-
-DEPENDS+=		zip-[0-9]*:../../archivers/zip
+			sed:run unzip zip:run
 
 GCC_VERSION=		4.5.3
 
@@ -31,7 +29,7 @@ MESSAGE_SUBST+=		GCC_PREFIX=${GCC_PREFIX}
 # To avoid GNU surprises
 CONFIG_SHELL=		${TOOLS_PATH.bash}
 
-NOT_FOR_PLATFORM=	Interix-*-*
+NOT_FOR_PLATFORM=	Interix-*-* DragonFly-*-*
 UNLIMIT_RESOURCES+=	datasize
 UNLIMIT_RESOURCES+=	stacksize
 

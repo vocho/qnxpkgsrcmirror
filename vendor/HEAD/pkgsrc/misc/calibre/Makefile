@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.27 2011/11/20 22:11:22 sbd Exp $
+# $NetBSD: Makefile,v 1.33 2012/02/16 21:29:35 gls Exp $
 #
 
-DISTNAME=	calibre-0.8.27
-PKGREVISION=	1
+DISTNAME=	calibre-0.8.39
 CATEGORIES=	misc
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=calibre/}
+EXTRACT_SUFX=	.tar.xz
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.calibre-ebook.com/
@@ -18,13 +18,14 @@ DEPENDS+=	poppler-utils-[0-9]*:../../print/poppler-utils
 DEPENDS+=	${PYPKGPREFIX}-dns>=1.6.0:../../net/py-dns
 DEPENDS+=	${PYPKGPREFIX}-lxml>=2.2.1:../../textproc/py-lxml
 DEPENDS+=	${PYPKGPREFIX}-dateutil>=1.4.1:../../time/py-dateutil
-DEPENDS+=	${PYPKGPREFIX}-ClientForm-[0-9]*:../../www/py-ClientForm
 DEPENDS+=	${PYPKGPREFIX}-beautifulsoup>=3.0.5:../../www/py-beautifulsoup
-DEPENDS+=	${PYPKGPREFIX}-mechanize>=0.1.11:../../www/py-mechanize
+DEPENDS+=	${PYPKGPREFIX}-mechanize>=0.1.11nb1:../../www/py-mechanize
 DEPENDS+=	${PYPKGPREFIX}-cssutils>=0.9.7:../../textproc/py-cssutils
 # Let's depend on the ones we have in pkgsrc instead of the bundled ones.
 DEPENDS+=	${PYPKGPREFIX}-Pdf-[0-9]*:../../print/py-Pdf
 DEPENDS+=	${PYPKGPREFIX}-cherrypy-[0-9]*:../../www/py-cherrypy
+DEPENDS+=	${PYPKGPREFIX}-html5lib-[0-9]*:../../textproc/py-html5lib
+DEPENDS+=	${PYPKGPREFIX}-chardet-[0-9]*:../../converters/py-chardet
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
@@ -63,10 +64,12 @@ FIX_PYTHON+=	src/calibre/devices/kobo/*.py
 FIX_PYTHON+=	src/calibre/devices/prs505/*.py
 FIX_PYTHON+=	src/calibre/devices/prst1/*.py
 FIX_PYTHON+=	src/calibre/devices/teclast/*.py
+FIX_PYTHON+=	src/calibre/ebooks/*.py
 FIX_PYTHON+=	src/calibre/ebooks/chm/*.py
 FIX_PYTHON+=	src/calibre/ebooks/comic/*.py
 FIX_PYTHON+=	src/calibre/ebooks/compression/*.py
 FIX_PYTHON+=	src/calibre/ebooks/conversion/*.py
+FIX_PYTHON+=	src/calibre/ebooks/conversion/plugins/*.py
 FIX_PYTHON+=	src/calibre/ebooks/djvu/*.py
 FIX_PYTHON+=	src/calibre/ebooks/epub/fix/*.py
 FIX_PYTHON+=	src/calibre/ebooks/epub/*.py
@@ -84,6 +87,8 @@ FIX_PYTHON+=	src/calibre/ebooks/metadata/sources/*.py
 FIX_PYTHON+=	src/calibre/ebooks/mobi/*.py
 FIX_PYTHON+=	src/calibre/ebooks/mobi/writer2/*.py
 FIX_PYTHON+=	src/calibre/ebooks/odt/__init__.py
+FIX_PYTHON+=	src/calibre/ebooks/oeb/*.py
+FIX_PYTHON+=	src/calibre/ebooks/oeb/display/test-cfi/*.py
 FIX_PYTHON+=	src/calibre/ebooks/oeb/transforms/*.py
 FIX_PYTHON+=	src/calibre/ebooks/pdf/__init__.py
 FIX_PYTHON+=	src/calibre/ebooks/pdf/reflow.py
@@ -107,6 +112,7 @@ FIX_PYTHON+=	src/calibre/gui2/tag_browser/*.py
 FIX_PYTHON+=	src/calibre/gui2/viewer/*.py
 FIX_PYTHON+=	src/calibre/gui2/wizard/*.py
 FIX_PYTHON+=	src/calibre/library/*.py
+FIX_PYTHON+=	src/calibre/library/catalogs/*.py
 FIX_PYTHON+=	src/calibre/library/server/*.py
 FIX_PYTHON+=	src/calibre/manual/*.py
 FIX_PYTHON+=	src/calibre/manual/plugin_examples/helloworld/*.py
@@ -156,7 +162,7 @@ MAKE_ENV+=		PODOFO_LIB_DIR=${BUILDLINK_PREFIX.podofo}/lib
 
 # Let's depend on the ones we have in pkgsrc instead of the bundled ones.
 pre-configure:
-	cd ${WRKSRC} && rm -rf src/cherrypy src/pyPdf
+	cd ${WRKSRC} && rm -rf src/cherrypy src/pyPdf src/html5lib src/chardet
 
 post-install:
 	cd ${WRKSRC}/recipes && pax -wr -pma *.recipe \

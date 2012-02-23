@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.5 2009/06/14 17:32:12 joerg Exp $
+@comment $NetBSD: PLIST,v 1.7 2012/01/04 06:46:59 sbd Exp $
 bin/jack_alias
 bin/jack_connect
 bin/jack_disconnect

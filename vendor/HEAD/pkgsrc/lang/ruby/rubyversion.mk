@@ -1,4 +1,4 @@
-# $NetBSD: rubyversion.mk,v 1.64 2011/11/08 15:18:31 taca Exp $
+# $NetBSD: rubyversion.mk,v 1.74 2012/02/23 14:15:58 taca Exp $
 #
 
 # This file determines which Ruby version is used as a dependency for
@@ -11,7 +11,6 @@
 #	The preferered Ruby version to use.
 #
 #		Possible values: 18 192 193
-#		Compatible values: 1.9(= 192) 19(= 192)
 #		Default: 192
 #
 # RUBY_BUILD_RDOC
@@ -39,7 +38,7 @@
 #		Default: 192
 #
 # RUBY_VERSION_REQD
-#	The Ruby versions force to build (for pbluk).
+#	The Ruby versions force to build (for pbulk).
 #
 # RUBY_NOVERSION
 #	If "Yes", the package dosen't depend on any version of Ruby, such
@@ -204,9 +203,9 @@ RUBY19_VERSION=		1.9.2
 RUBY193_VERSION=	1.9.3
 
 # patch
-RUBY18_PATCHLEVEL=	pl352
-RUBY19_PATCHLEVEL=	pl290
-RUBY193_PATCHLEVEL=	p0
+RUBY18_PATCHLEVEL=	pl358
+RUBY19_PATCHLEVEL=	pl318
+RUBY193_PATCHLEVEL=	p125
 
 # current API compatible version; used for version of shared library
 RUBY18_API_VERSION=	1.8.7
@@ -214,7 +213,7 @@ RUBY19_API_VERSION=	1.9.1
 RUBY193_API_VERSION=	1.9.1
 
 #
-RUBY_VERSION_DEFAULT?=	19
+RUBY_VERSION_DEFAULT?=	192
 
 RUBY_VERSION_SUPPORTED?= 18 192 193
 RUBY_VER?=		${RUBY_VERSION_DEFAULT}
@@ -232,11 +231,8 @@ RUBY_VER=	${rv}
 . endfor
 .endif
 
-# For backward compatibility
-.if ${RUBY_VER} == "1.9" || ${RUBY_VER} == "192"
+.if ${RUBY_VER} == "192"
 RUBY_VER=	19
-.elif  ${RUBY_VER} == "1.8"
-RUBY_VER=	18
 .endif
 
 .if ${RUBY_VER} == "18"
@@ -353,6 +349,17 @@ RUBY_SLEXT=	dylib
 .else
 RUBY_DLEXT=	so
 RUBY_SLEXT=	so
+.endif
+
+#
+# Ruby distribution file, few package need it.
+#
+_RUBY_PATCHLEVEL=	${RUBY_PATCHLEVEL:S/pl/p/:S/pre/preview/}
+
+.if !empty(_RUBY_PATCHLEVEL)
+RUBY_DISTNAME?=		ruby-${RUBY_VERSION}-${_RUBY_PATCHLEVEL}
+.else
+RUBY_DISTNAME?=		ruby-${RUBY_VERSION}
 .endif
 
 #
@@ -570,5 +577,7 @@ PRINT_PLIST_AWK+=	/^${RUBY_SYSRIDIR:S|/|\\/|g}\// \
 			{ next; }
 PRINT_PLIST_AWK+=	/\/${RUBY_NAME}/ \
 			{ sub(/${RUBY_NAME}/, "$${RUBY_NAME}"); }
+PRINT_PLIST_AWK+=	/^${GEM_HOME:S|/|\\/|g:S|.|\\.|g}/ \
+			{ gsub(/${GEM_HOME:S|/|\\/|g}/, "$${GEM_HOME}"); }
 
 .endif # _RUBY_MK

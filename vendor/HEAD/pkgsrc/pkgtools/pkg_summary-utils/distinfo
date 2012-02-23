@@ -1,5 +1,5 @@
-$NetBSD: distinfo,v 1.5 2011/11/17 18:47:42 cheusov Exp $
+$NetBSD: distinfo,v 1.7 2012/01/09 20:54:28 cheusov Exp $
 
-SHA1 (pkg_summary-utils-0.56.3.tar.gz) = bd4edf188ad168fb2b1d277d07d038b85d280525
-RMD160 (pkg_summary-utils-0.56.3.tar.gz) = 1336ad6b174535fe28e598822eb15e5b64283808
-Size (pkg_summary-utils-0.56.3.tar.gz) = 115487 bytes
+SHA1 (pkg_summary-utils-0.57.0.tar.gz) = 51b71f86c441f916acb631743775bd926f1ddb63
+RMD160 (pkg_summary-utils-0.57.0.tar.gz) = 7ed3cf849617ab3ba82a6884e6cd97d59b2b7e5a
+Size (pkg_summary-utils-0.57.0.tar.gz) = 118254 bytes

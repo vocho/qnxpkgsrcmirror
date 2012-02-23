@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.37 2011/11/01 06:02:37 sbd Exp $
+# $NetBSD: Makefile,v 1.39 2012/02/06 12:41:41 wiz Exp $
 
 DISTNAME=	xfe-1.04
-PKGREVISION=	6
+PKGREVISION=	7
 CATEGORIES=	sysutils
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=xfe/}
 
@@ -16,6 +16,7 @@ USE_PKGLOCALEDIR=	yes
 USE_TOOLS+=		gmake msgfmt
 GNU_CONFIGURE=		yes
 
+LDFLAGS.DragonFly=	-lXft -lX11
 PTHREAD_AUTO_VARS=	yes
 
 SUBST_CLASSES+=		conf

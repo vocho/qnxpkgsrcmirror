@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.28 2011/11/01 06:00:45 sbd Exp $
+# $NetBSD: Makefile,v 1.32 2012/02/06 12:39:34 wiz Exp $
 
 DISTNAME=	empathy-2.34.0
-PKGREVISION=	5
+PKGREVISION=	8
 CATEGORIES=	chat gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/empathy/2.34/}
 
@@ -13,7 +13,7 @@ LICENSE=	gnu-gpl-v2
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=		yes
-USE_TOOLS+=		gawk gmake intltool msgfmt pkg-config
+USE_TOOLS+=		gawk gmake gsed intltool msgfmt pkg-config
 USE_TOOLS+=		autoconf
 USE_LIBTOOL=		yes
 USE_PKGLOCALEDIR=	yes
@@ -28,8 +28,6 @@ BUILDLINK_TRANSFORM+=	rm:-Werror
 
 # notyet
 #CONFIGURE_ARGS+=	--enable-meego
-
-BUILD_DEPENDS+= gsed-[0-9]*:../../textproc/gsed
 
 .include "../../audio/libcanberra/buildlink3.mk"
 .include "../../chat/telepathy-farsight/buildlink3.mk"

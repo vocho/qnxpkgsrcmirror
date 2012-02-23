@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.13 2011/11/01 06:02:18 sbd Exp $
+# $NetBSD: Makefile,v 1.16 2012/02/06 12:41:13 wiz Exp $
 #
 
 DISTNAME=	gtk-vnc-0.3.10
-PKGREVISION=	7
+PKGREVISION=	10
 CATEGORIES=	net
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gtk-vnc/0.3/}
 

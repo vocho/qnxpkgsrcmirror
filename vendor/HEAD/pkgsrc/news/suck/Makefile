@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.30 2010/02/11 23:33:41 joerg Exp $
+# $NetBSD: Makefile,v 1.32 2012/01/24 09:11:13 sbd Exp $
 #
 
 DISTNAME=	suck-4.3.2
-PKGREVISION=	5
+PKGREVISION=	7
 CATEGORIES=	news
 MASTER_SITES=	${MASTER_SITE_SUNSITE:=system/news/transport/}
 
@@ -30,6 +30,12 @@ INSTALL_MAKE_FLAGS+=	prefix=${DESTDIR}${PREFIX} \
 
 post-install:
 	${INSTALL_DATA} ${WRKSRC}/sample/* ${DESTDIR}${PREFIX}/share/examples/suck
+
+.include "../../mk/bsd.prefs.mk"
+
+.if ${OPSYS} == "Linux"
+.include "../../databases/gdbm_compat/buildlink3.mk"
+.endif
 
 .include "../../security/openssl/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

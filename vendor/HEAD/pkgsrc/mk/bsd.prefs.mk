@@ -1,4 +1,4 @@
-# $NetBSD: bsd.prefs.mk,v 1.318 2011/10/26 16:01:14 hans Exp $
+# $NetBSD: bsd.prefs.mk,v 1.320 2012/01/17 20:43:25 sbd Exp $
 #
 # This file includes the mk.conf file, which contains the user settings.
 #
@@ -216,18 +216,11 @@ LOWER_VENDOR?=		sgi
 .elif ${OPSYS} == "Linux"
 OS_VERSION:=		${OS_VERSION:C/-.*$//}
 LOWER_OPSYS?=		linux
-MACHINE_ARCH:=          ${MACHINE_ARCH:C/i.86/i386/}
-MACHINE_ARCH:=		${MACHINE_ARCH:C/ppc/powerpc/}
 .  if !defined(LOWER_ARCH)
 LOWER_ARCH!=		${UNAME} -m | sed -e 's/i.86/i386/' -e 's/ppc/powerpc/'
 .  endif # !defined(LOWER_ARCH)
-.  if ${LOWER_ARCH} == "x86_64"
-MACHINE_ARCH=		x86_64
-.  endif
-.  if ${MACHINE_ARCH} == "unknown" || ${MACHINE_ARCH} == ""
 MACHINE_ARCH=		${LOWER_ARCH}
 MAKEFLAGS+=		LOWER_ARCH=${LOWER_ARCH:Q}
-.  endif
 .  if exists(/etc/debian_version)
 LOWER_VENDOR?=		debian
 .  elif exists(/etc/mandrake-release)
@@ -549,6 +542,8 @@ X11BASE?=	/usr
 .  elif !empty(MACHINE_PLATFORM:MDarwin-9.*-*) || \
         !empty(MACHINE_PLATFORM:MDarwin-??.*-*)
 X11BASE?=	/usr/X11
+.  elif ${OPSYS} == "NetBSD" && ${X11FLAVOUR:U} == "Xorg"
+X11BASE?=	/usr/X11R7
 .  elif exists(/usr/X11R7/lib/libX11.so)
 X11BASE?=	/usr/X11R7
 .  else

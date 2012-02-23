@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.94 2011/11/01 06:01:37 sbd Exp $
+# $NetBSD: Makefile,v 1.97 2012/02/06 12:40:27 wiz Exp $
 
 DISTNAME=	kdegraphics-${_KDE_VERSION}
-PKGREVISION=	15
+PKGREVISION=	17
 CATEGORIES=	graphics
 COMMENT=	Graphics programs for the KDE integrated X11 desktop
 
@@ -14,6 +14,7 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=		gs:run pkg-config
 
+DEPENDS+=	urw-fonts-[0-9]*:../../fonts/urw-fonts
 BUILDLINK_API_DEPENDS.lcms+=	lcms>=1.12
 
 REPLACE_PERL+=	kghostview/update-to-xt-names.pl

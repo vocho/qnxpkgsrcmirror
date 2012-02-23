@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.21 2011/11/01 06:02:35 sbd Exp $
+# $NetBSD: Makefile,v 1.23 2012/02/06 12:41:37 wiz Exp $
 #
 
 DISTNAME=		nautilus-sendto-2.32.0
-PKGREVISION=		6
+PKGREVISION=		7
 CATEGORIES=		sysutils gnome
 MASTER_SITES=		${MASTER_SITE_GNOME:=sources/nautilus-sendto/2.32/}
 EXTRACT_SUFX=		.tar.bz2
@@ -15,12 +15,10 @@ LICENSE=		gnu-gpl-v2
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_PKGLOCALEDIR=	yes
-USE_TOOLS+=		gmake intltool msgfmt pkg-config
+USE_TOOLS+=		gmake gsed intltool msgfmt pkg-config
 USE_LIBTOOL=		yes
 GNU_CONFIGURE=		yes
 CONFIGURE_ARGS+=	--with-plugins="evolution nautilus-burn pidgin removable-devices"
-
-BUILD_DEPENDS+=	gsed-[0-9]*:../../textproc/gsed
 
 #XXX: needs libempathy-gtk >= 2.25.2
 #.include "../../chat/empathy/buildlink3.mk"

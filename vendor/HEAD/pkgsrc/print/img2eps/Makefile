@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.23 2011/04/22 13:44:32 obache Exp $
+# $NetBSD: Makefile,v 1.25 2012/02/06 12:41:21 wiz Exp $
 #
 
 DISTNAME=	img2eps-0.2
-PKGREVISION=	9
+PKGREVISION=	10
 CATEGORIES=	print graphics
 MASTER_SITES=	http://www.nih.at/img2eps/
 
@@ -14,6 +14,8 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=	YES
 TEST_TARGET=	check
+
+LDFLAGS.DragonFly=	-lm
 
 .include "options.mk"
 

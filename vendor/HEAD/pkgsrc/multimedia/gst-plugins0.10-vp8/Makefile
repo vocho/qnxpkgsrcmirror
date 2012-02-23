@@ -1,5 +1,7 @@
-# $NetBSD: Makefile,v 1.3 2011/05/18 09:49:02 drochner Exp $
+# $NetBSD: Makefile,v 1.5 2012/02/06 12:41:04 wiz Exp $
 #
+
+PKGREVISION=	2
 
 GST_PLUGINS0.10_NAME=	vp8
 GST_PLUGINS0.10_DIRS=	ext/vp8

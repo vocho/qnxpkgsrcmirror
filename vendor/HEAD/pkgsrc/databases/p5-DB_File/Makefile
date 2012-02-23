@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.30 2011/08/16 20:08:56 wiz Exp $
+# $NetBSD: Makefile,v 1.32 2012/01/26 15:16:05 rhaen Exp $
 
-DISTNAME=	DB_File-1.824
+DISTNAME=	DB_File-1.826
 PKGNAME=	p5-${DISTNAME}
 SVR4_PKGNAME=	p5dfi
 CATEGORIES=	databases perl5

@@ -1,9 +1,8 @@
-# $NetBSD: Makefile,v 1.67 2011/11/13 15:44:58 taca Exp $
+# $NetBSD: Makefile,v 1.69 2012/01/20 17:05:11 joerg Exp $
 #
 
 DISTNAME=	${RUBY_DISTNAME}
 PKGNAME=	${RUBY_PKGPREFIX}-base-${RUBY_VERSION_FULL}
-PKGREVISION=	1
 CATEGORIES=	lang ruby
 MASTER_SITES=	${MASTER_SITE_RUBY}
 
@@ -46,6 +45,10 @@ LDFLAGS.SunOS+=	-L${SUNWSPROBASE}/lib ${COMPILER_RPATH_FLAG}${SUNWSPROBASE}/lib
 CONFIGURE_ENV+=	LDSHARED="${CC} -G"
 .else
 LIBS.SunOS+=	-lm
+.endif
+
+.if !empty(PKGSRC_COMPILER:Mclang)
+CONFIGURE_ARGS+=	--enable-frame-address
 .endif
 
 # Ruby build process depends on config.status's content

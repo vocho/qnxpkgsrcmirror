@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.10 2011/11/01 06:00:34 sbd Exp $
+# $NetBSD: Makefile,v 1.12 2012/02/06 12:39:20 wiz Exp $
 #
 
 DISTNAME=	xmms-pulse-0.9.4
 PKGNAME=	${DISTNAME:S/xmms/bmp/}
-PKGREVISION=	8
+PKGREVISION=	10
 CATEGORIES=	audio
 MASTER_SITES=	http://0pointer.de/lennart/projects/xmms-pulse/
 

@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.70 2011/11/01 06:02:22 sbd Exp $
+# $NetBSD: Makefile,v 1.73 2012/02/09 16:54:16 sborrill Exp $
 
 DISTNAME=	ntop-4.1.0
-PKGREVISION=	1
+PKGREVISION=	4
 CATEGORIES=	net
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=ntop/}
 
 MAINTAINER=	adam@NetBSD.org
-HOMEPAGE=	http://www.ntop.org/ntop.html
+HOMEPAGE=	http://www.ntop.org/products/ntop/
 COMMENT=	Shows network usage (similar to "top" for processes)
 LICENSE=	gnu-gpl-v3
 

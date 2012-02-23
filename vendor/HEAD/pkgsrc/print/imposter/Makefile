@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.23 2011/11/01 06:02:25 sbd Exp $
+# $NetBSD: Makefile,v 1.25 2012/02/06 12:41:21 wiz Exp $
 #
 
 DISTNAME=	imposter-0.3
-PKGREVISION=	10
+PKGREVISION=	11
 CATEGORIES=	print
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=imposter/}
 
@@ -15,6 +15,8 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 GNU_CONFIGURE=		yes
 USE_TOOLS+=		gmake msgfmt pkg-config
 USE_PKGLOCALEDIR=	yes
+
+LDFLAGS.DragonFly=	-lm
 
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../x11/gtk2/buildlink3.mk"

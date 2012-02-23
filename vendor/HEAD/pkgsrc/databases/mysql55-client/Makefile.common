@@ -1,9 +1,9 @@
-# $NetBSD: Makefile.common,v 1.11 2011/11/21 16:55:59 adam Exp $
+# $NetBSD: Makefile.common,v 1.15 2012/02/23 13:01:03 adam Exp $
 #
 # used by databases/mysql55-client/Makefile
 # used by databases/mysql55-server/Makefile
 
-DISTNAME=	mysql-5.5.18
+DISTNAME=	mysql-5.5.21
 CATEGORIES=	databases
 MASTER_SITES=	${MASTER_SITE_MYSQL:=MySQL-5.5/}
 
@@ -53,6 +53,7 @@ CMAKE_ARGS+=		-DINSTALL_DOCDIR="share/doc/mysql"
 CMAKE_ARGS+=		-DINSTALL_DOCREADMEDIR="share/doc/mysql"
 CMAKE_ARGS+=		-DINSTALL_INCLUDEDIR="include/mysql"
 CMAKE_ARGS+=		-DINSTALL_INFODIR="info"
+CMAKE_ARGS+=		-DINSTALL_MANDIR="${PKGMANDIR}"
 CMAKE_ARGS+=		-DINSTALL_MYSQLSHAREDIR="share/mysql"
 CMAKE_ARGS+=		-DINSTALL_MYSQLTESTDIR="share/mysql/test"
 CMAKE_ARGS+=		-DINSTALL_PLUGINDIR="lib/mysql/plugin"

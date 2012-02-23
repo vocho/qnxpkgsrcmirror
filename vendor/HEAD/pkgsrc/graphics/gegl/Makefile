@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.23 2011/11/01 06:01:33 sbd Exp $
+# $NetBSD: Makefile,v 1.26 2012/02/14 14:48:07 hans Exp $
 
-DISTNAME=	gegl-0.1.6
-PKGREVISION=	2
+DISTNAME=	gegl-0.1.8
+PKGREVISION=	1
 CATEGORIES=	graphics
 MASTER_SITES=	ftp://ftp.gimp.org/pub/gegl/0.1/
 EXTRACT_SUFX=	.tar.bz2
@@ -33,8 +33,7 @@ PLIST_VARS+=	v4l
 PLIST.v4l=	yes
 .endif
 
-CFLAGS.SunOS+=		-std=c99 -D_XOPEN_SOURCE=600
-CXXFLAGS.SunOS+=	--std=c99
+CFLAGS.SunOS+=		-std=c99
 
 .include "options.mk"
 

@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.45 2011/11/01 06:01:37 sbd Exp $
+# $NetBSD: Makefile,v 1.49 2012/02/09 21:44:28 sbd Exp $
 #
 
 DISTNAME=	gwenview-1.4.2
-PKGREVISION=	12
+PKGREVISION=	14
 CATEGORIES=	kde graphics
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=gwenview/}
 EXTRACT_SUFX=	.tar.bz2
@@ -14,10 +14,11 @@ LICENSE=	gnu-gpl-v2 AND gnu-fdl-v1.2
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
-USE_TOOLS+=	gmake pkg-config msgfmt
+USE_TOOLS+=	gmake pkg-config msgfmt perl
 USE_LANGUAGES=	c c++
 USE_LIBTOOL=	YES
 GNU_CONFIGURE=	YES
+SET_LIBDIR=	YES
 
 # Enable kipi (KDE Image Plugin Interface)
 CONFIGURE_ARGS+=	--enable-kipi

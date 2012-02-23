@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.13 2011/11/01 06:00:38 sbd Exp $
+# $NetBSD: Makefile,v 1.18 2012/02/15 21:48:08 hans Exp $
 #
 
 DISTNAME=	jack-rack-1.4.7
-PKGREVISION=	10
+PKGREVISION=	13
 CATEGORIES=	audio
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=jack-rack/}
 EXTRACT_SUFX=	.tar.bz2
@@ -23,6 +23,10 @@ CONFIGURE_ARGS+=	--disable-lash
 
 BUILD_DEFS+=		LADSPA_PLUGIN_PATH
 EGDIR=			${PREFIX}/share/examples/${PKGBASE}
+LDFLAGS.DragonFly=	-lm
+LDFLAGS.SunOS+=		-lm
+CFLAGS.SunOS+=          -std=c99 -D_XOPEN_SOURCE=600 -D__EXTENSIONS__
+
 ###
 ### NOTE: this is a colon-delimited list like e.g. PATH.
 ###

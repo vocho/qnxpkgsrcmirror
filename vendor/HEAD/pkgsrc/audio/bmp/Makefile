@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.37 2011/11/01 06:00:35 sbd Exp $
+# $NetBSD: Makefile,v 1.41 2012/02/06 12:39:19 wiz Exp $
 #
 
 BMP_ENABLE_ENCODERS=	yes
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 .include "Makefile.common"
-PKGREVISION=		13
+PKGREVISION=		16
 
-DEPENDS+=		unzip-[0-9]*:../../archivers/unzip
+USE_TOOLS+=		unzip:run
 
 PLIST_VARS+=		cdaudio
 .if ${OPSYS} != "Darwin"
