@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.185 2011/11/03 18:17:11 abs Exp $
+# $NetBSD: Makefile,v 1.189 2012/02/21 12:51:15 drochner Exp $
 #
 
 COMMENT=	Multimedia utilities
@@ -26,6 +26,7 @@ SUBDIR+=	dvdstyler
 SUBDIR+=	dvdview
 SUBDIR+=	farsight2
 SUBDIR+=	ffmpeg
+SUBDIR+=	ffmpeg2theora
 SUBDIR+=	ffmpegthumbnailer
 SUBDIR+=	ffplay
 SUBDIR+=	flashplayer
@@ -82,6 +83,7 @@ SUBDIR+=	libdvdread
 SUBDIR+=	libflash
 SUBDIR+=	libflashsupport
 SUBDIR+=	libflashsupport-pulse
+SUBDIR+=	libflashsupport10
 SUBDIR+=	libmatroska
 SUBDIR+=	libmp4v2
 SUBDIR+=	libmpeg2
@@ -130,6 +132,7 @@ SUBDIR+=	replex
 SUBDIR+=	ruby-clutter-gst
 SUBDIR+=	ruby-gnome2-gstreamer
 SUBDIR+=	ruby-ming
+SUBDIR+=	schroedinger
 SUBDIR+=	smpeg
 SUBDIR+=	subtitleeditor
 SUBDIR+=	swfdec
@@ -146,6 +149,7 @@ SUBDIR+=	ushare
 SUBDIR+=	vlc
 SUBDIR+=	vlc08
 SUBDIR+=	vlc10
+SUBDIR+=	vlc2
 SUBDIR+=	vls
 SUBDIR+=	win32-codecs
 SUBDIR+=	x264-devel

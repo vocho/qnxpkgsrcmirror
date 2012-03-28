@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.50 2011/11/01 06:03:02 sbd Exp $
+# $NetBSD: Makefile,v 1.56 2012/02/16 04:07:41 sbd Exp $
 #
 
 DISTNAME=	lablgtk-2.14.2
-PKGREVISION=	8
+PKGREVISION=	13
 CATEGORIES=	x11
 MASTER_SITES=	http://wwwfun.kurims.kyoto-u.ac.jp/soft/olabl/dist/
 
@@ -33,7 +33,7 @@ PLIST_VARS+=	stubs
 
 .if ${OPSYS} == "Darwin" || ${OPSYS} == "DragonFly" || \
     ${OPSYS} == "NetBSD" || ${OPSYS} == "FreeBSD" || \
-    ${OPSYS} == "SunOS"
+    ${OPSYS} == "SunOS"  || ${OPSYS} == "Linux"
 PLIST.stubs=	yes
 .endif
 

@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.31 2011/11/01 06:02:19 sbd Exp $
+# $NetBSD: Makefile,v 1.34 2012/02/09 21:44:29 sbd Exp $
 
 DISTNAME=	kftpgrabber-0.8.1
-PKGREVISION=	12
+PKGREVISION=	14
 CATEGORIES=	net kde
 MASTER_SITES=	http://www.kftp.org/uploads/files/
 EXTRACT_SUFX=	.tar.bz2
@@ -16,6 +16,7 @@ USE_LANGUAGES=		c c++
 USE_TOOLS+=		gmake msgfmt perl
 USE_LIBTOOL=		yes
 GNU_CONFIGURE=		yes
+SET_LIBDIR=		yes
 
 .include "../../meta-pkgs/kde3/kde3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"

@@ -1,15 +1,19 @@
-# $NetBSD: Makefile,v 1.16 2010/11/26 20:47:00 adam Exp $
+# $NetBSD: Makefile,v 1.19 2012/02/20 14:59:31 jdc Exp $
 
 BOOST_PACKAGE=		libs
 BOOST_COMMENT=		(binary libraries)
 BOOST_CONFIG=		installed
 BOOST_INSTALL_LIBS=	yes
+PKGREVISION=		2
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 .include "../../meta-pkgs/boost/Makefile.common"
 
 BJAM_ARGS+=		--without-python
+.if !empty(OPSYS:MNetBSD) && !empty(MACHINE_ARCH:Msparc64)
+BJAM_ARGS+=		pch=off
+.endif
 
 .include "../../devel/boost-jam/bjam.mk"
 

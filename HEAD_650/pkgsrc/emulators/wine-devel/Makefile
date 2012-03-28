@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.25 2011/11/01 06:11:54 sbd Exp $
+# $NetBSD: Makefile,v 1.28 2012/02/06 12:40:08 wiz Exp $
 
 DISTNAME=	wine-1.3.26
-PKGREVISION=	1
+PKGREVISION=	3
 CATEGORIES=	emulators
 MASTER_SITES=	http://ibiblio.org/pub/linux/system/emulators/wine/ \
 		${MASTER_SITE_SOURCEFORGE:=wine/}
@@ -23,6 +23,7 @@ USE_LANGUAGES=		c
 USE_LIBTOOL=		yes
 USE_NCURSES=		yes
 USE_TOOLS+=		bison flex gmake mktemp
+FLEX_REQD=		2.5.33
 GNU_CONFIGURE=		yes
 UNLIMIT_RESOURCES=	datasize
 

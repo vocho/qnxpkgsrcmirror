@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.18 2011/11/01 06:02:30 sbd Exp $
+# $NetBSD: Makefile,v 1.21 2012/02/06 12:41:29 wiz Exp $
 
 DISTNAME=	qca-2.0.3
 PKGNAME=	qca2-${DISTNAME:C/.*-//}
-PKGREVISION=	3
+PKGREVISION=	5
 CATEGORIES=	security
 MASTER_SITES=	http://delta.affinix.com/download/qca/2.0/
 EXTRACT_SUFX=	.tar.bz2
@@ -27,6 +27,7 @@ CONFIGURE_ARGS+=	--prefix=${QTDIR}
 CONFIGURE_ARGS+=	--qtdir=${QTDIR}
 CONFIGURE_ARGS+=	--disable-tests
 CONFIGURE_ARGS+=	--certstore-internal
+CONFIGURE_ARGS+=	--no-framework
 
 post-install:
 	${INSTALL_DATA} ${DESTDIR}${QTDIR}/lib/pkgconfig/qca2.pc ${DESTDIR}${PREFIX}/lib/pkgconfig/qca2.pc

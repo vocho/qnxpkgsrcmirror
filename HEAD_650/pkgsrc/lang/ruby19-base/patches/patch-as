@@ -1,10 +1,8 @@
-$NetBSD: patch-as,v 1.2 2011/02/07 11:15:28 taca Exp $
+$NetBSD: patch-as,v 1.3 2012/02/23 14:15:58 taca Exp $
 
 * Handle 64bit size of time_t.
-* On FreeBSD and DragonFly PTHREAD_STACK_MIN is too small. Taken from
-  FreeBSD ports
 
---- thread_pthread.c.orig	2010-12-20 13:23:17.000000000 +0000
+--- thread_pthread.c.orig	2012-02-13 15:29:27.000000000 +0000
 +++ thread_pthread.c
 @@ -17,6 +17,18 @@
  #include <sys/resource.h>
@@ -57,7 +55,7 @@ $NetBSD: patch-as,v 1.2 2011/02/07 11:15:28 taca Exp $
  
  static void
  native_mutex_destroy(pthread_mutex_t *lock)
-@@ -214,6 +242,8 @@ native_thread_destroy(rb_thread_t *th)
+@@ -226,6 +254,8 @@ native_thread_destroy(rb_thread_t *th)
  #define STACKADDR_AVAILABLE 1
  #elif defined HAVE_PTHREAD_GETTHRDS_NP
  #define STACKADDR_AVAILABLE 1
@@ -66,7 +64,7 @@ $NetBSD: patch-as,v 1.2 2011/02/07 11:15:28 taca Exp $
  #endif
  
  #ifdef STACKADDR_AVAILABLE
-@@ -271,6 +301,12 @@ get_stack(void **addr, size_t *size)
+@@ -283,6 +313,12 @@ get_stack(void **addr, size_t *size)
  				  &reg, &regsiz));
      *addr = thinfo.__pi_stackaddr;
      *size = thinfo.__pi_stacksize;
@@ -79,7 +77,7 @@ $NetBSD: patch-as,v 1.2 2011/02/07 11:15:28 taca Exp $
  #endif
      return 0;
  #undef CHECK_ERR
-@@ -633,7 +669,7 @@ native_sleep(rb_thread_t *th, struct tim
+@@ -645,7 +681,7 @@ native_sleep(rb_thread_t *th, struct tim
  	}
      }
  
@@ -88,7 +86,7 @@ $NetBSD: patch-as,v 1.2 2011/02/07 11:15:28 taca Exp $
      GVL_UNLOCK_BEGIN();
      {
  	pthread_mutex_lock(&th->interrupt_lock);
-@@ -655,8 +691,8 @@ native_sleep(rb_thread_t *th, struct tim
+@@ -667,8 +703,8 @@ native_sleep(rb_thread_t *th, struct tim
  	    }
  	    else {
  		int r;
@@ -99,12 +97,3 @@ $NetBSD: patch-as,v 1.2 2011/02/07 11:15:28 taca Exp $
  		r = pthread_cond_timedwait(&th->native_thread_data.sleep_cond,
  					   &th->interrupt_lock, &ts);
  		if (r && r != ETIMEDOUT) rb_bug_errno("pthread_cond_timedwait", r);
-@@ -822,7 +858,7 @@ rb_thread_create_timer_thread(void)
- 	int err;
- 
- 	pthread_attr_init(&attr);
--#ifdef PTHREAD_STACK_MIN
-+#if defined(PTHREAD_STACK_MIN) && !defined(__FreeBSD__) && !defined(__DragonFly__)
- 	pthread_attr_setstacksize(&attr,
- 				  PTHREAD_STACK_MIN + (THREAD_DEBUG ? BUFSIZ : 0));
- #endif

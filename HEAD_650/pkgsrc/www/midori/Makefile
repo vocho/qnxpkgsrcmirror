@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.35 2011/11/16 19:56:36 drochner Exp $
+# $NetBSD: Makefile,v 1.39 2012/02/09 19:25:04 drochner Exp $
 
-DISTNAME=	midori-0.4.2
+DISTNAME=	midori-0.4.3
+PKGREVISION=	2
 CATEGORIES=	www
 MASTER_SITES=	http://archive.xfce.org/src/apps/midori/0.4/
 
@@ -17,6 +18,8 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 CONFIGURE_ARGS+=	--prefix=${PREFIX:Q}
 
 CHECK_PORTABILITY_SKIP+= win32/x86-mingw32-opensuse/install.sh
+
+PYTHON_FOR_BUILD_ONLY=	yes
 
 REPLACE_PYTHON=		waf wscript docs/api/wscript_build
 REPLACE_PYTHON+=	tests/wscript_build extensions/wscript_build
@@ -36,6 +39,8 @@ CONF_FILES=		${EGDIR}/search ${PKG_SYSCONFDIR}/xdg/midori/search
 OWN_DIRS+=	${PKG_SYSCONFDIR}/xdg/midori/extensions/adblock
 CONF_FILES+=	${EGDIR}/extensions/adblock/config \
 		${PKG_SYSCONFDIR}/xdg/midori/extensions/adblock/config
+
+CONFIGURE_ENV=	VALAC=${VALAC}
 
 # XXX stupid hack. python has a marshal.h that gets included before
 # the local marshal.h
@@ -68,5 +73,6 @@ BUILDLINK_API_DEPENDS.libsoup24+=libsoup24>=2.26.0
 .include "../../x11/libunique/buildlink3.mk"
 .include "../../sysutils/libnotify/buildlink3.mk"
 .include "../../x11/gtk2/buildlink3.mk"
+BUILDLINK_DEPMETHOD.vala= build
 .include "../../lang/vala/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

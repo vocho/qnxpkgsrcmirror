@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.3 2010/12/19 02:22:15 taca Exp $
+# $NetBSD: Makefile,v 1.5 2012/01/20 03:23:34 taca Exp $
 #
 
 MODNAME=		suhosin
 DISTNAME=		suhosin-${PECL_VERSION}
-PECL_VERSION=		0.9.32.1
+PECL_VERSION=		0.9.33
+PECL_LEGACY_VERSION_SCHEME=	yes
 CATEGORIES=		www
 MASTER_SITES=		http://download.suhosin.org/
-EXTRACT_SUFX=		.tar.gz
 
 MAINTAINER=		cg@cgall.de
 HOMEPAGE=		http://www.hardened-php.net/suhosin/index.html

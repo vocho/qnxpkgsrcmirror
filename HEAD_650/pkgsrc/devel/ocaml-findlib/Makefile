@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.7 2010/08/21 15:27:31 asau Exp $
+# $NetBSD: Makefile,v 1.9 2011/12/06 00:19:23 sbd Exp $
 #
 
 DISTNAME=		findlib-1.2.6
 PKGNAME=		ocaml-${DISTNAME}
+PKGREVISION=		1
 CATEGORIES=		devel
 MASTER_SITES=		http://download.camlcity.org/download/
 
@@ -15,6 +16,7 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 USE_TOOLS+=		gmake m4
 USE_PKGLOCALEDIR=	yes
 HAS_CONFIGURE=		yes
+MAKE_JOBS_SAFE=		no
 CONFIGURE_ARGS+=	-bindir ${PREFIX}/bin
 CONFIGURE_ARGS+=	-mandir ${PREFIX}/${PKGMANDIR}
 CONFIGURE_ARGS+=	-config ${PKG_SYSCONFDIR}/ocamlfind.conf

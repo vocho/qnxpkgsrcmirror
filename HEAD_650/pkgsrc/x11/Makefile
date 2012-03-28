@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.640 2011/10/30 19:59:02 jakllsch Exp $
+# $NetBSD: Makefile,v 1.644 2012/02/19 14:45:37 imil Exp $
 #
 
 COMMENT=	Packages to support the X window system
@@ -18,6 +18,7 @@ SUBDIR+=	applewmproto
 SUBDIR+=	appres
 SUBDIR+=	asnap
 SUBDIR+=	aterm
+SUBDIR+=	avant-window-navigator
 SUBDIR+=	bbapm
 SUBDIR+=	beforelight
 SUBDIR+=	bigreqsproto
@@ -50,6 +51,7 @@ SUBDIR+=	filerunner
 SUBDIR+=	fixesproto
 SUBDIR+=	fixesproto4
 SUBDIR+=	fltk
+SUBDIR+=	fltk13
 SUBDIR+=	fltk2
 SUBDIR+=	fontcacheproto
 SUBDIR+=	fontsproto
@@ -229,6 +231,7 @@ SUBDIR+=	libXvMC
 SUBDIR+=	libXxf86dga
 SUBDIR+=	libXxf86misc
 SUBDIR+=	libXxf86vm
+SUBDIR+=	libdesktop-agnostic
 SUBDIR+=	libdrm
 SUBDIR+=	libfakekey
 SUBDIR+=	libgnomekbd
@@ -346,6 +349,7 @@ SUBDIR+=	speyes
 SUBDIR+=	ssystem
 SUBDIR+=	stalonetray
 SUBDIR+=	startup-notification
+SUBDIR+=	startup-notification010
 SUBDIR+=	tile
 SUBDIR+=	tint2
 SUBDIR+=	tk

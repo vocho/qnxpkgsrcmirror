@@ -139,7 +139,30 @@ $NetBSD: patch-ab,v 1.39 2011/11/14 01:31:18 marino Exp $
  	    esac
  	    ;;
  	Darwin-*)
-@@ -4003,6 +4040,9 @@ EOF
+@@ -3818,14 +3855,18 @@ EOF
+ 	    # QNX RTP
+ 	    # This may work for all QNX, but it was only reported for v6.
+ 	    SHLIB_CFLAGS="-fPIC"
+-	    SHLIB_LD="ld -Bshareable -x"
+-	    SHLIB_LD_LIBS=""
++	    SHLIB_LD='${CC} -shared ${CFLAGS} ${LDFLAGS}'
++	    SHLIB_LD_LIBS='${LIBS}'
+ 	    SHLIB_SUFFIX=".so"
+ 	    DL_OBJS="tclLoadDl.o"
+ 	    # dlopen is in -lc on QNX
+ 	    DL_LIBS=""
+-	    CC_SEARCH_FLAGS=""
+-	    LD_SEARCH_FLAGS=""
++	    LDFLAGS="$LDFLAGS -Wl,--export-dynamic"
++	    CC_SEARCH_FLAGS='-Wl,-rpath,${LIB_RUNTIME_DIR}'
++	    LD_SEARCH_FLAGS=${CC_SEARCH_FLAGS}
++	    SHARED_LIB_SUFFIX='${TCL_TRIM_DOTS}\$\{DBGX\}.so'
++	    UNSHARED_LIB_SUFFIX='${TCL_TRIM_DOTS}\$\{DBGX\}.a'
++	    TCL_LIB_VERSIONS_OK=nodots
+ 	    ;;
+ 	RISCos-*)
+ 	    SHLIB_CFLAGS="-G 0"
+@@ -4003,6 +4044,9 @@ EOF
  		CC_SEARCH_FLAGS='-Wl,-R,${LIB_RUNTIME_DIR}'
  		LD_SEARCH_FLAGS='-R ${LIB_RUNTIME_DIR}'
  	    fi
@@ -149,7 +172,7 @@ $NetBSD: patch-ab,v 1.39 2011/11/14 01:31:18 marino Exp $
  	    ;;
  	ULTRIX-4.*)
  	    SHLIB_CFLAGS="-G 0"
-@@ -4273,7 +4313,7 @@ fi
+@@ -4273,7 +4317,7 @@ fi
  		    ;;
  		IRIX*)
  		    ;;
@@ -158,7 +181,7 @@ $NetBSD: patch-ab,v 1.39 2011/11/14 01:31:18 marino Exp $
  		    ;;
  		Darwin-*)
  		    ;;
-@@ -4299,8 +4339,8 @@ fi
+@@ -4299,8 +4343,8 @@ fi
  
      if test "${SHARED_BUILD}" = "1" && test "${SHLIB_SUFFIX}" != "" ; then
          LIB_SUFFIX=${SHARED_LIB_SUFFIX}
@@ -169,7 +192,7 @@ $NetBSD: patch-ab,v 1.39 2011/11/14 01:31:18 marino Exp $
      else
          LIB_SUFFIX=${UNSHARED_LIB_SUFFIX}
  
-@@ -9247,7 +9287,7 @@ else
+@@ -9247,7 +9291,7 @@ else
              TCL_LIB_FLAG="-ltcl`echo ${TCL_VERSION} | tr -d .`\${TCL_DBGX}"
          fi
          TCL_BUILD_LIB_SPEC="-L`pwd` ${TCL_LIB_FLAG}"
@@ -178,7 +201,7 @@ $NetBSD: patch-ab,v 1.39 2011/11/14 01:31:18 marino Exp $
      else
          TCL_BUILD_EXP_FILE="lib.exp"
          eval "TCL_EXP_FILE=libtcl${TCL_EXPORT_FILE_SUFFIX}"
-@@ -9278,14 +9318,24 @@ VERSION=${TCL_VERSION}
+@@ -9278,14 +9322,24 @@ VERSION=${TCL_VERSION}
  #--------------------------------------------------------------------
  
  if test "$FRAMEWORK_BUILD" = "1" ; then
@@ -207,7 +230,7 @@ $NetBSD: patch-ab,v 1.39 2011/11/14 01:31:18 marino Exp $
  #--------------------------------------------------------------------
  #       The statements below define various symbols relating to Tcl
  #       stub support.
-@@ -9442,34 +9492,15 @@ trap 'rm -f $CONFIG_STATUS conftest*; ex
+@@ -9442,34 +9496,15 @@ trap 'rm -f $CONFIG_STATUS conftest*; ex
  # Transform confdefs.h into DEFS.
  # Protect against shell expansion while executing Makefile rules.
  # Protect against Makefile macro expansion.

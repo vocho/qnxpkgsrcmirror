@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.8 2011/11/23 19:30:08 marino Exp $
+# $NetBSD: Makefile,v 1.11 2012/02/16 16:07:09 hans Exp $
 #
 
 DISTNAME=	telepathy-logger-0.2.7
-PKGREVISION=	3
+PKGREVISION=	4
 CATEGORIES=	chat
 MASTER_SITES=	http://telepathy.freedesktop.org/releases/telepathy-logger/
 EXTRACT_SUFX=	.tar.bz2
@@ -16,12 +16,12 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=	yes
 USE_LIBTOOL=	yes
-USE_TOOLS+=	pkg-config gmake intltool msgfmt
+USE_TOOLS+=	pkg-config gmake gsed intltool msgfmt
+
+CFLAGS.SunOS+=	-std=c99 -D_XOPEN_SOURCE=600
 
 PKGCONFIG_OVERRIDE+=	extensions/tpl-extensions.pc.in
 PKGCONFIG_OVERRIDE+=	telepathy-logger/telepathy-logger-0.1.pc.in
-
-BUILD_DEPENDS+=	gsed-[0-9]*:../../textproc/gsed
 
 DEPENDS=	${PYPKGPREFIX}-expat-[0-9]*:../../textproc/py-expat
 

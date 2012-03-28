@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.516 2011/11/06 08:38:41 minskim Exp $
+# $NetBSD: Makefile,v 1.521 2012/02/14 20:09:52 wiz Exp $
 #
 
 COMMENT=	Desktop publishing
@@ -85,6 +85,7 @@ SUBDIR+=	p5-Net-CUPS
 SUBDIR+=	p5-PostScript-MailLabels
 SUBDIR+=	p5-PostScript-Simple
 SUBDIR+=	papersize
+SUBDIR+=	paps
 SUBDIR+=	pcps
 SUBDIR+=	pdf2djvu
 SUBDIR+=	pdfjam
@@ -182,6 +183,7 @@ SUBDIR+=	tex-bezos
 SUBDIR+=	tex-bezos-doc
 SUBDIR+=	tex-bibtex
 SUBDIR+=	tex-bibtex-doc
+SUBDIR+=	tex-bibtex8
 SUBDIR+=	tex-bibtopic
 SUBDIR+=	tex-bibtopic-doc
 SUBDIR+=	tex-block
@@ -563,6 +565,7 @@ SUBDIR+=	tex-soul
 SUBDIR+=	tex-soul-doc
 SUBDIR+=	tex-sphack
 SUBDIR+=	tex-sphack-doc
+SUBDIR+=	tex-splitbib
 SUBDIR+=	tex-srcltx
 SUBDIR+=	tex-srcltx-doc
 SUBDIR+=	tex-statex
@@ -586,6 +589,8 @@ SUBDIR+=	tex-tabls-doc
 SUBDIR+=	tex-tetex
 SUBDIR+=	tex-tetex-doc
 SUBDIR+=	tex-tex
+SUBDIR+=	tex-texdoc
+SUBDIR+=	tex-texdoc-doc
 SUBDIR+=	tex-texlive-common-doc
 SUBDIR+=	tex-texlive-en-doc
 SUBDIR+=	tex-texlive-scripts

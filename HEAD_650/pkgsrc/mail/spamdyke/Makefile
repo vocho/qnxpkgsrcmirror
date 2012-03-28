@@ -1,21 +1,22 @@
-# $NetBSD: Makefile,v 1.25 2011/02/07 22:33:40 schmonz Exp $
+# $NetBSD: Makefile,v 1.29 2012/01/20 18:02:43 schmonz Exp $
 #
 
-DISTNAME=	spamdyke-4.2.0
-CATEGORIES=	mail
-MASTER_SITES=	${HOMEPAGE}releases/
-EXTRACT_SUFX=	.tgz
+DISTNAME=		spamdyke-4.3.1
+CATEGORIES=		mail
+MASTER_SITES=		${HOMEPAGE}releases/
+EXTRACT_SUFX=		.tgz
 
-MAINTAINER=	schmonz@NetBSD.org
-HOMEPAGE=	http://www.spamdyke.org/
-COMMENT=	Monitors and intercept incoming SMTP connections to qmail
+MAINTAINER=		schmonz@NetBSD.org
+HOMEPAGE=		http://www.spamdyke.org/
+COMMENT=		Filters incoming SMTP connections to qmail
+LICENSE=		gnu-gpl-v2
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
-WRKSRC=		${WRKDIR}/${PKGNAME_NOREV}/${PKGBASE}
+WRKSRC=			${WRKDIR}/${PKGNAME_NOREV}/${PKGBASE}
 
-GNU_CONFIGURE=	yes
-BUILD_TARGET=	${PKGBASE}
+GNU_CONFIGURE=		yes
+BUILD_TARGET=		${PKGBASE}
 
 SUBST_CLASSES+=		paths
 SUBST_FILES.paths=	spamdyke.h

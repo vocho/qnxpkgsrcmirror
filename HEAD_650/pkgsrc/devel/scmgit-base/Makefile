@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.36 2011/10/11 12:01:25 adam Exp $
+# $NetBSD: Makefile,v 1.39 2012/02/17 13:54:02 hans Exp $
 
 .include "../../devel/scmgit/Makefile.common"
 
@@ -60,7 +60,7 @@ REQD_FILES+=		${GIT_TEMPLATES:@.t.@\
 CONFIGURE_ENV+=		HOME=${PREFIX}
 CONFIGURE_ENV+=		gitexecdir=${GITCOREDIR}
 
-MAKE_FLAGS+=		INSTALL='${INSTALL:Q} -c'
+MAKE_FLAGS+=		INSTALL=${INSTALL:Q}
 
 GIT_TEMPLATE_INSTDIR=	${EGDIR}/${GIT_TEMPLATEDIR}
 MAKE_ENV+=		GIT_TEMPLATE_INSTDIR=${GIT_TEMPLATE_INSTDIR}
@@ -86,6 +86,8 @@ SUBST_MESSAGE.fix-cd-P=	Fixing cd arguments.
 SUBST_STAGE.fix-cd-P=	pre-build
 SUBST_SED.fix-cd-P=	-e "s/cd -P/cd/g"
 .endif
+
+LDFLAGS.SunOS+=		-lintl
 
 .include "options.mk"
 

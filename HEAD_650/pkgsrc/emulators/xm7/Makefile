@@ -1,15 +1,14 @@
-# $NetBSD: Makefile,v 1.27 2009/05/19 08:59:13 wiz Exp $
+# $NetBSD: Makefile,v 1.29 2012/01/03 07:17:01 obache Exp $
 #
 
-DISTNAME=		xm71010s
-PKGNAME=		xm7-1010s
-PKGREVISION=		1
+DISTNAME=		xm71020s
+PKGNAME=		xm7-1020s
 CATEGORIES=		emulators
-MASTER_SITES=		http://www.ipc-tokai.or.jp/~ytanaka/fm7/
-EXTRACT_SUFX=		.lzh
+MASTER_SITES=		http://yohkai.no-ip.info/fm7/
+EXTRACT_SUFX=		.zip
 
 MAINTAINER=		tech-pkg-ja@jp.NetBSD.org
-HOMEPAGE=		http://www.ipc-tokai.or.jp/~ytanaka/fm7/xm7.shtml
+HOMEPAGE=		http://yohkai.no-ip.info/fm7/XM7.htm
 COMMENT=		X11-based FM-7 emulator
 LICENSE=		xm7-license
 
@@ -24,7 +23,7 @@ BUILD_DEPENDS+=		nkf>=1.7:../../converters/nkf
 PKG_DESTDIR_SUPPORT=	user-destdir
 NOT_FOR_BULK_PLATFORM=	Linux-*-*
 
-EXTRACT_OPTS_LHA=	qt	# convert CRLF to LF
+EXTRACT_OPTS_ZIP=	-aqoLL	# lower-case filenames are expected
 
 WRKSRC=			${WRKDIR}/vm
 NO_CONFIGURE=		yes

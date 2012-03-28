@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.101 2011/04/12 08:57:57 wiz Exp $
+# $NetBSD: Makefile,v 1.103 2012/02/21 13:03:00 drochner Exp $
 
-DISTNAME=	tiff-3.9.5
+DISTNAME=	tiff-4.0.1
 CATEGORIES=	graphics
 MASTER_SITES=	ftp://ftp.remotesensing.org/pub/libtiff/ \
 		http://libtiff.maptools.org/dl/
@@ -23,6 +23,8 @@ CONFIGURE_ARGS+=	--enable-cxx
 CONFIGURE_ARGS+=	--with-docdir=${PREFIX}/share/doc/tiff
 CONFIGURE_ARGS+=	--without-x # just in case detects gl to build tiffgt
 
+PKGCONFIG_OVERRIDE=	libtiff-4.pc.in
+
 TEST_TARGET=		check
 
 post-install:
@@ -34,5 +36,7 @@ post-install:
 .include "options.mk"
 
 .include "../../devel/zlib/buildlink3.mk"
+# XXX for liblzma; there are more potential suppliers
+.include "../../archivers/xz/buildlink3.mk"
 .include "../../mk/jpeg.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

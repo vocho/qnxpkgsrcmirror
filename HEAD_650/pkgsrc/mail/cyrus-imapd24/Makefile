@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.13 2011/10/05 01:32:31 obache Exp $
+# $NetBSD: Makefile,v 1.17 2011/12/31 03:03:07 obache Exp $
 
-DISTNAME=	cyrus-imapd-2.4.12
+DISTNAME=	cyrus-imapd-2.4.13
 CATEGORIES=	mail
 MASTER_SITES=	http://cyrusimap.org/releases/ \
 		ftp://ftp.cyrusimap.org/cyrus-imapd/ \
@@ -51,18 +51,6 @@ CONFIGURE_ARGS+=	--enable-nntp
 CONFIGURE_ARGS+=	--enable-replication
 
 .include "options.mk"
-
-.if exists(/usr/bin/compile_et)
-COMERRBASE?=		/usr
-.endif
-.if defined(COMERRBASE)
-.  if exists(${COMERRBASE}/include/krb5/com_err.h)
-CPPFLAGS+=		-I${COMERRBASE}/include/krb5
-.  endif
-CONFIGURE_ENV+=		COMPILE_ET=${COMERRBASE}/bin/compile_et
-.else
-CONFIGURE_ARGS+=	--with-com-err=yes
-.endif
 
 MAKE_ENV+=		PERL=${PERL5:Q}
 

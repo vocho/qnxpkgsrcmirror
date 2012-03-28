@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.36 2008/07/14 12:56:13 joerg Exp $
+# $NetBSD: Makefile,v 1.38 2012/01/12 15:58:33 hans Exp $
 
 DISTNAME=	xps-4.2
-PKGREVISION=	2
+PKGREVISION=	3
 CATEGORIES=	sysutils
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=motif-pstree/}
 
@@ -11,7 +11,7 @@ COMMENT=	Displays the Unix process list as a hierarchical tree
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
-USE_TOOLS+=		gmake perl
+USE_TOOLS+=		gmake perl pod2man pod2html
 GNU_CONFIGURE=		yes
 CONFIGURE_ARGS+=	x_applibdir=${PREFIX}/lib/X11/app-defaults
 

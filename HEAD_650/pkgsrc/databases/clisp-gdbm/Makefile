@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.2 2011/08/23 13:06:48 obache Exp $
+# $NetBSD: Makefile,v 1.4 2012/01/24 09:10:58 sbd Exp $
 #
 
 CLISP_MODULE=	gdbm
 
 PKGNAME=	clisp-$(CLISP_MODULE)-$(CLISP_VERSION)
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	databases
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=clisp/}
 
@@ -16,5 +16,6 @@ MAKE_JOBS_SAFE=	no
 
 .include "../../lang/clisp/module.mk"
 
+.include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../databases/gdbm/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

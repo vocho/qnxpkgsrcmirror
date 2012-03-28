@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.33 2011/11/01 06:11:52 sbd Exp $
+# $NetBSD: Makefile,v 1.36 2012/02/16 15:17:05 hans Exp $
 
 PKGNAME=	libpurple-${PIDGIN_VERSION}
-PKGREVISION=	1
+PKGREVISION=	3
 COMMENT=	Multi-protocol Instant Messaging client backend
 
 PKG_DESTDIR_SUPPORT=	user-destdir
@@ -14,6 +14,8 @@ MAKE_ENV+=		GCONF_SCHEMA_FILE_DIR=${PREFIX}/share/gconf/schemas/
 
 PKGCONFIG_OVERRIDE+=	gaim.pc.in
 PKGCONFIG_OVERRIDE+=	libpurple/purple.pc.in
+
+CPPFLAGS.SunOS+=	-D__SunOS
 
 .include "options.mk"
 

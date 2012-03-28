@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.17 2011/08/23 13:06:47 obache Exp $
+# $NetBSD: Makefile,v 1.19 2012/02/06 02:50:44 sbd Exp $
 
 DISTNAME=	rsynth-2.0
-PKGREVISION=	3
+PKGREVISION=	5
 CATEGORIES=	audio
 MASTER_SITES=	ftp://svr-ftp.eng.cam.ac.uk/pub/comp.speech/synthesis/
 DISTFILES=	rsynth-2.0.tar.gz ${DICT_FILES}

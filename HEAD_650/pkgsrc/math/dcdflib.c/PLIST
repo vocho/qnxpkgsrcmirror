@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.2 2009/06/14 18:05:42 joerg Exp $
+@comment $NetBSD: PLIST,v 1.4 2011/12/18 17:09:58 marino Exp $
 include/dcdflib.h
 lib/libdcdflib_c.a
 lib/libdcdflib_c.so

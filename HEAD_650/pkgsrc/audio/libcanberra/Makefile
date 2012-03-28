@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.18 2011/11/01 06:11:52 sbd Exp $
+# $NetBSD: Makefile,v 1.20 2012/02/15 21:52:53 hans Exp $
 
 DISTNAME=	libcanberra-0.26
-PKGREVISION=	3
+PKGREVISION=	4
 CATEGORIES=	audio
 MASTER_SITES=	http://0pointer.de/lennart/projects/libcanberra/
 
@@ -24,6 +24,8 @@ SUBST_SED.ltdlc=	-e "s,ltdlc,ltdl,"
 SUBST_FILES.ltdlc=	configure
 SUBST_MESSAGE.ltdlc=	Fixing libtool convenience library name.
 SUBST_STAGE.ltdlc=	pre-configure
+
+REPLACE_SH=		src/libcanberra-logout-sound.sh.in
 
 CONFIGURE_ENV+=	ac_cv_lib_ltdl_lt_dladvise_init=yes
 

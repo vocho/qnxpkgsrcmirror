@@ -1,8 +1,8 @@
-$NetBSD: patch-ad,v 1.12 2011/01/12 07:07:07 adam Exp $
+$NetBSD: patch-ad,v 1.13 2012/01/12 22:59:58 adam Exp $
 
---- src/corelib/global/qglobal.h.orig	2011-02-22 12:04:00.000000000 +0000
+--- src/corelib/global/qglobal.h.orig	2010-09-10 09:05:25.000000000 +0000
 +++ src/corelib/global/qglobal.h
-@@ -159,6 +159,7 @@ namespace QT_NAMESPACE {}
+@@ -163,6 +163,7 @@ namespace QT_NAMESPACE {}
       NETBSD   - NetBSD
       OPENBSD  - OpenBSD
       BSDI     - BSD/OS
@@ -10,7 +10,7 @@ $NetBSD: patch-ad,v 1.12 2011/01/12 07:07:07 adam Exp $
       IRIX     - SGI Irix
       OSF      - HP Tru64 UNIX
       SCO      - SCO OpenServer 5
-@@ -224,6 +225,9 @@ namespace QT_NAMESPACE {}
+@@ -229,6 +230,9 @@ namespace QT_NAMESPACE {}
  #elif defined(__NetBSD__)
  #  define Q_OS_NETBSD
  #  define Q_OS_BSD4
@@ -20,14 +20,3 @@ $NetBSD: patch-ad,v 1.12 2011/01/12 07:07:07 adam Exp $
  #elif defined(__OpenBSD__)
  #  define Q_OS_OPENBSD
  #  define Q_OS_BSD4
-@@ -2657,9 +2661,7 @@ QT_LICENSED_MODULE(DBus)
- #  define QT_NO_QWS_MULTIPROCESS
- #  define QT_NO_QWS_SHARE_FONTS
- #  define QT_NO_SYSTEMSEMAPHORE
--#  define QT_NO_SHAREDMEMORY
--// QNX currently doesn't support forking in a thread, so disable QProcess
--#  define QT_NO_PROCESS
-+//#  define QT_NO_SHAREDMEMORY
- #endif
- 
- QT_END_NAMESPACE

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.29 2011/11/01 06:03:08 sbd Exp $
+# $NetBSD: Makefile,v 1.31 2012/02/06 12:42:26 wiz Exp $
 #
 
 PKGNAME=		${RUBY_PKGPREFIX}-gnome2-gtk-${VERSION}

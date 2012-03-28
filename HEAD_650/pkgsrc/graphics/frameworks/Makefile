@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.11 2011/11/01 06:01:32 sbd Exp $
+# $NetBSD: Makefile,v 1.13 2012/02/06 12:40:22 wiz Exp $
 #
 
 DISTNAME=	frameworks-0.3.7
-PKGREVISION=	7
+PKGREVISION=	8
 CATEGORIES=	graphics
 MASTER_SITES=	http://frameworks.polycrystal.org/release/
 SITES.frameworks.png=	http://frameworks.polycrystal.org/images/
@@ -16,6 +16,7 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=	yes
 USE_TOOLS+=	pkg-config gmake autoconf
+LDFLAGS+=	-lm    # Explicit for binutils 2.22 linker
 
 SUBST_CLASSES=		xdg
 SUBST_STAGE.xdg=	pre-configure

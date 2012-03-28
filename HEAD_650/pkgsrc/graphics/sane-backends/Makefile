@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.53 2011/08/30 01:30:01 gdt Exp $
+# $NetBSD: Makefile,v 1.55 2012/02/06 12:40:35 wiz Exp $
 
 PKG_DESTDIR_SUPPORT=	user-destdir
-PKGREVISION=	1
+PKGREVISION=	2
 
 .include "Makefile.common"
 COMMENT=	API for access to scanners, digital cameras, frame grabbers etc.
@@ -15,7 +15,7 @@ DISTFILES=	${DISTNAME}${EXTRACT_SUFX}
 # the .o
 MAKE_JOBS_SAFE=		NO
 
-USE_TOOLS+=		msgfmt msgmerge
+USE_TOOLS+=		msgfmt msgmerge pkg-config
 USE_PKGLOCALEDIR=	YES
 
 CONFIGURE_ARGS+=	--with-gphoto2=no
@@ -68,6 +68,9 @@ CONF_FILES+=	${EGDIR}/${f} ${PKG_SYSCONFDIR}/sane.d/${f}
 .include "options.mk"
 .if (${OPSYS} != "SunOS")
 . include "../../devel/libusb/buildlink3.mk"
+.endif
+.if (${OPSYS} == "Linux")
+.include "../../graphics/libv4l/buildlink3.mk"
 .endif
 .include "../../graphics/tiff/buildlink3.mk"
 .include "../../mk/jpeg.buildlink3.mk"

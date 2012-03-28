@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.34 2011/04/22 13:43:02 obache Exp $
+# $NetBSD: Makefile,v 1.36 2012/02/06 12:39:32 wiz Exp $
 
-DISTNAME=	chemtool-1.6.12
+DISTNAME=	chemtool-1.6.13
 PKGREVISION=	1
 CATEGORIES=	biology
 MASTER_SITES=	http://ruby.chemie.uni-freiburg.de/~martin/chemtool/
@@ -24,5 +24,5 @@ post-install:
 	cd ${WRKSRC} && ${INSTALL_DATA} README TODO 			\
 		${DESTDIR}${PREFIX}/share/doc/chemtool/
 
-.include "../../x11/gtk/buildlink3.mk"
+.include "../../x11/gtk2/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

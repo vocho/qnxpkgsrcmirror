@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.530 2011/10/13 07:32:39 jnemeth Exp $
+# $NetBSD: Makefile,v 1.533 2012/01/28 07:08:19 jnemeth Exp $
 #
 
 COMMENT=	System utilities
@@ -91,6 +91,8 @@ SUBDIR+=	dvdisaster
 SUBDIR+=	dvdrecord
 SUBDIR+=	e2fsprogs
 SUBDIR+=	easydiskpasswd
+SUBDIR+=	edbus
+SUBDIR+=	efreet
 SUBDIR+=	eggdbus
 SUBDIR+=	estd
 SUBDIR+=	etcmanage
@@ -259,6 +261,7 @@ SUBDIR+=	mkmemstick
 SUBDIR+=	mksunbootcd
 SUBDIR+=	mktemp
 SUBDIR+=	monit
+SUBDIR+=	mrsync
 SUBDIR+=	mtools
 SUBDIR+=	mtoolsfm
 SUBDIR+=	mtree
@@ -347,6 +350,7 @@ SUBDIR+=	ruby-quota
 SUBDIR+=	ruby-rb-appscript
 SUBDIR+=	s5ipc
 SUBDIR+=	safetynet
+SUBDIR+=	salt
 SUBDIR+=	same
 SUBDIR+=	sarah
 SUBDIR+=	screentest

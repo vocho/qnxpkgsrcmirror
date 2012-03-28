@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.1.1.1 2011/07/25 17:48:55 jakllsch Exp $
+# $NetBSD: Makefile,v 1.3 2012/02/06 12:40:28 wiz Exp $
 
-DISTNAME=	lcms2-2.2
+DISTNAME=	lcms2-2.3
+PKGREVISION=	1
 CATEGORIES=	graphics
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=lcms/2.2/}
 
 MAINTAINER=	gdt@NetBSD.org
 HOMEPAGE=	http://www.littlecms.com/
 COMMENT=	Little Color Management System -- a color management library
-# This is very MIT-like, but perhaps not the exact text.
-#LICENSE=	lcms-license
+LICENSE=	mit
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
 PKG_DESTDIR_SUPPORT=	user-destdir
@@ -21,7 +21,7 @@ TEST_TARGET=		check
 # if present.  Therefore, we don't enjoin lcms from finding zlib, but
 # don't include it via bl3.
 
-PKGCONFIG_OVERRIDE=	lcms.pc.in
+PKGCONFIG_OVERRIDE=	lcms2.pc.in
 
 .include "../../mk/jpeg.buildlink3.mk"
 .include "../../graphics/tiff/buildlink3.mk"

@@ -1,23 +1,27 @@
-# $NetBSD: Makefile,v 1.43 2011/11/01 06:00:42 sbd Exp $
+# $NetBSD: Makefile,v 1.48 2012/02/15 23:13:32 hans Exp $
 #
 
 DISTNAME=	WSoundServer-0.4.0
 PKGNAME=	wsoundserver-0.4.0
-PKGREVISION=	15
+PKGREVISION=	17
 CATEGORIES=	audio wm windowmaker
 MASTER_SITES=	# ftp://shadowmere.student.utwente.nl/pub/WindowMaker/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://shadowmere.student.utwente.nl/
 COMMENT=	Sound server for windowmaker
+LICENSE=	modified-bsd
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_X11BASE=		YES
 GNU_CONFIGURE=		YES
 USE_LIBTOOL=		YES
+USE_TOOLS+=		pkg-config
 
 CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR:Q}	# not really needed
+CONFIGURE_ENV+=		ac_cv_path_AUDIOFILE_CONFIG="pkg-config audiofile"
+CONFIGURE_ENV+=		TOOLS_PATH_SH=${TOOLS_PATH.sh}
 PKG_SYSCONFSUBDIR=	WindowMaker
 EGDIR=			${PREFIX}/share/examples/wsoundserver
 CONF_FILES=		${EGDIR:Q}/WMSound ${PKG_SYSCONFDIR:Q}/WMSound

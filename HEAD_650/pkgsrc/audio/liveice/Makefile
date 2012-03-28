@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.16 2010/03/14 17:55:28 martin Exp $
+# $NetBSD: Makefile,v 1.18 2012/01/11 18:50:10 hans Exp $
 #
 
 DISTNAME=	liveice
 PKGNAME=	liveice-0.20001121
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	audio
 MASTER_SITES=	http://star.arm.ac.uk/~spm/software/
 
@@ -20,6 +20,7 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 GNU_CONFIGURE=	YES
 DIST_SUBDIR=	liveice-0.20001121
 LIBS+=		${LIBOSSAUDIO}
+LIBS.SunOS+=	-lsocket
 
 INSTALLATION_DIRS=	bin
 
@@ -37,5 +38,6 @@ do-install:
 	${INSTALL_DATA} ${WRKSRC}/${f} ${DESTDIR}${PREFIX}/share/doc/liveice
 .endfor
 
+.include "../../mk/curses.buildlink3.mk"
 .include "../../mk/oss.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"
