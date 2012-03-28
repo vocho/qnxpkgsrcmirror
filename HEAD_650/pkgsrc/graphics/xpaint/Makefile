@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.67 2011/07/14 09:52:59 shattered Exp $
+# $NetBSD: Makefile,v 1.69 2012/02/06 12:40:38 wiz Exp $
 
 DISTNAME=	xpaint-2.7.8.1
-PKGREVISION=	7
+PKGREVISION=	8
 CATEGORIES=	graphics x11
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=sf-xpaint/}
 EXTRACT_SUFX=	.tar.bz2
@@ -24,6 +24,19 @@ SUBST_SED.foo=		-e "s|@LOCALBASE@|${LOCALBASE}|g" \
 			-e "s|@PREFIX@|${PREFIX}|g" \
 			-e "s|@XAWDIR@|${BUILDLINK_PREFIX.Xaw3d}|g" \
 			-e "s|@XPMDIR@|${BUILDLINK_PREFIX.libXpm}|g"
+
+INSTALLATION_DIRS+=	bin lib/X11/app-defaults ${PKGMANDIR}/cat1
+INSTALLATION_DIRS+=	share/xpaint
+INSTALLATION_DIRS+=	share/xpaint/include
+INSTALLATION_DIRS+=	share/xpaint/c_scripts
+INSTALLATION_DIRS+=	share/xpaint/c_scripts/3d_surfaces
+INSTALLATION_DIRS+=	share/xpaint/c_scripts/filters
+INSTALLATION_DIRS+=	share/xpaint/c_scripts/images
+INSTALLATION_DIRS+=	share/xpaint/c_scripts/layers
+INSTALLATION_DIRS+=	share/xpaint/c_scripts/procedures
+INSTALLATION_DIRS+=	share/xpaint/c_scripts/3d_curves
+INSTALLATION_DIRS+=	share/xpaint/help
+INSTALLATION_DIRS+=	share/xpaint/messages
 
 pre-configure:
 	cd ${WRKSRC} && ./configure xaw3dg

@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.11 2011/10/11 20:30:00 jmcneill Exp $
+# $NetBSD: Makefile,v 1.17 2012/02/01 08:32:01 sbd Exp $
 
 .include "../../net/samba/Makefile.mirrors"
 
 DISTNAME=	samba-${VERSION}
-PKGREVISION=	1
+PKGREVISION=	3
 CATEGORIES=	net
 MASTER_SITES=	${SAMBA_MIRRORS:=stable/}
 
@@ -12,7 +12,7 @@ HOMEPAGE=	http://www.samba.org/
 COMMENT=	SMB/CIFS protocol server suite
 LICENSE=	gnu-gpl-v3
 
-VERSION=	3.5.11
+VERSION=	3.5.12
 CONFLICTS+=	ja-samba-[0-9]* pam-smbpass-[0-9]* tdb-[0-9]* winbind-[0-9]*
 
 PKG_DESTDIR_SUPPORT=	user-destdir
@@ -22,6 +22,7 @@ DESCR_SRC=		${PKGDIR}/../../net/samba/DESCR
 MESSAGE_SRC=		${PKGDIR}/../../net/samba/MESSAGE
 WRKSRC=			${WRKDIR}/${DISTNAME}/source3
 BUILD_DEFS+=		VARBASE
+CFLAGS+=		-D__stub_utimensat
 
 .include "../../mk/bsd.prefs.mk"
 
@@ -54,10 +55,10 @@ REPLACE_PERL=		script/findsmb.in
 BROKEN_GETTEXT_DETECTION=yes
 USE_GNU_READLINE=	yes
 GNU_CONFIGURE=		yes
+GNU_CONFIGURE_LIBDIR=	${SAMBA_LIBDIR}
 CONFIGURE_ARGS+=	--with-libiconv=${BUILDLINK_PREFIX.iconv}
 CONFIGURE_ARGS+=	--with-readline=${BUILDLINK_PREFIX.readline}
 CONFIGURE_ARGS+=	--with-configdir=${SAMBA_ETCDIR}
-CONFIGURE_ARGS+=	--libdir=${SAMBA_LIBDIR}
 CONFIGURE_ARGS+=	--with-lockdir=${SAMBA_LOCKDIR}
 CONFIGURE_ARGS+=	--with-logfilebase=${SAMBA_LOGDIR}
 CONFIGURE_ARGS+=	--with-modulesdir=${SAMBA_MODULESDIR}
@@ -105,17 +106,17 @@ FILES_SUBST+=	MKTEMP=${MKTEMP:Q}
 FILES_SUBST+=	PWD_MKDB=${PWD_MKDB:Q}
 
 .if ${OPSYS} == "NetBSD"
-.if !empty(PKG_OPTIONS:Mwinbind)
+.  if !empty(PKG_OPTIONS:Mwinbind)
 # Install a /usr/lib/nss_winbind.so.0 -> ${PREFIX}/lib/nss_winbind.so.0 symlink
 INSTALL_TEMPLATES+=	INSTALL.nss_winbind
-.endif
+.  endif
 .endif
 
 .if ${OPSYS} == "QNX"
-.if !empty(PKG_OPTIONS:Mwinbind)
+.  if !empty(PKG_OPTIONS:Mwinbind)
 # Install a /lib/dll/nss_winbind.so -> ${PREFIX}/lib/nss_winbind.so.0 symlink
 INSTALL_TEMPLATES+=	INSTALL.nss_winbind_qnx
-.endif
+.  endif
 .endif
 
 INSTALLATION_DIRS+=	${DOCDIR} ${EGDIR}
@@ -173,18 +174,12 @@ post-install:
 	${INSTALL_SCRIPT} ${WRKSRC}/script/updatesmbpasswd.sh \
 		${DESTDIR}${PREFIX}/${EGDIR}
 	${CHMOD} ${SHAREMODE} ${DESTDIR}${PREFIX}/include/*.h
-.if ${OPSYS} == "NetBSD" || ${OPSYS} == "QNX"
-.if !empty(PKG_OPTIONS:Mwinbind)
-	${INSTALL_LIB} ${WRKDIR}/${DISTNAME}/nsswitch/nss_winbind.${SAMBA_LIBEXT} \
-		${DESTDIR}${PREFIX}/lib/nss_winbind.${SAMBA_LIBEXT}.0
-.endif
-.endif
 
 .include "../../converters/libiconv/buildlink3.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../devel/popt/buildlink3.mk"
 .include "../../devel/readline/buildlink3.mk"
-.include "../../devel/gettext-lib/buildlink3.mk"
+.include "../../devel/zlib/buildlink3.mk"
 .include "../../security/openssl/buildlink3.mk"
 .include "../../mk/pthread.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

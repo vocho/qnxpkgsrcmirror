@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.71 2011/02/28 14:52:54 wiz Exp $
+# $NetBSD: Makefile,v 1.75 2012/01/24 09:11:07 sbd Exp $
 
 DISTNAME=		nmh-1.3
+PKGREVISION=		4
 CATEGORIES=		mail
 MASTER_SITES=		http://savannah.nongnu.org/download/nmh/
 
@@ -36,7 +37,7 @@ NMH_MTA?=		smtp
 
 GNU_CONFIGURE=		yes
 
-CONFIGURE_ARGS+=	--libdir=${PREFIX}/libexec/nmh
+GNU_CONFIGURE_LIBDIR=	${PREFIX}/libexec/nmh
 CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR:Q}
 CONFIGURE_ARGS+=	--enable-nmh-pop
 CONFIGURE_ARGS+=	--with-mts=${NMH_MTA:Q}
@@ -104,4 +105,13 @@ post-install:
 	${INSTALL_DATA} ${FILESDIR}/mhn.defaults.dist \
 	    ${DESTDIR}${EGDIR}/mhn.defaults
 
+.include "../../mk/bsd.prefs.mk"
+
+.if ${OPSYS} == "Linux"
+.include "../../databases/gdbm_compat/buildlink3.mk"
+CONFIGURE_ARGS+=	--with-ndbm='gdbm_compat -lgdbm'
+CONFIGURE_ARGS+=	--with-ndbmheader=ndbm.h
+.endif
+
+.include "../../mk/termcap.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

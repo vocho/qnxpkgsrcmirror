@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.52 2011/11/01 06:00:48 sbd Exp $
+# $NetBSD: Makefile,v 1.55 2012/02/16 16:42:17 hans Exp $
 
 DISTNAME=	efax-gtk-3.2.3.src
 PKGNAME=	efax-gtk-3.2.3
-PKGREVISION=	6
+PKGREVISION=	7
 CATEGORIES=	comms
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=efax-gtk/}
 EXTRACT_SUFX=	.tgz
@@ -20,6 +20,8 @@ USE_TOOLS+=		pkg-config
 GNU_CONFIGURE=		yes
 CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR}
 CONFIGURE_ARGS+=	--with-spooldir=${VARBASE}/spool/efax
+LDFLAGS.DragonFly=	-lX11
+LDFLAGS.SunOS+=		-lX11 -lsocket -lnsl
 
 EGDIR=			${PREFIX}/share/examples
 CONF_FILES=		${EGDIR}/efax-gtkrc ${PKG_SYSCONFDIR}/efax-gtkrc

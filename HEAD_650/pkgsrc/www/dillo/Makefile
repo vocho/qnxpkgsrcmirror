@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.51 2011/11/01 06:02:45 sbd Exp $
+# $NetBSD: Makefile,v 1.55 2012/02/16 19:59:53 hans Exp $
 
-DISTNAME=	dillo-2.2
-PKGREVISION=	3
+DISTNAME=	dillo-3.0.2
 CATEGORIES=	www
 MASTER_SITES=	http://www.dillo.org/download/
 EXTRACT_SUFX=	.tar.bz2
@@ -29,6 +28,8 @@ CONF_FILES+=	${EGDIR}/keysrc ${PKG_SYSCONFDIR}/keysrc
 
 INSTALLATION_DIRS=	share/doc/dillo ${EGDIR}
 
+LIBS.SunOS+=	-liconv
+
 .include "options.mk"
 
 post-install:
@@ -41,7 +42,7 @@ post-install:
 .include "../../devel/zlib/buildlink3.mk"
 .include "../../mk/jpeg.buildlink3.mk"
 .include "../../graphics/png/buildlink3.mk"
-.include "../../x11/fltk2/buildlink3.mk"
+.include "../../x11/fltk13/buildlink3.mk"
 
 .include "../../mk/pthread.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

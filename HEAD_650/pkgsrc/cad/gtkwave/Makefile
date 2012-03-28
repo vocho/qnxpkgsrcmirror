@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.34 2011/11/01 06:00:44 sbd Exp $
+# $NetBSD: Makefile,v 1.38 2012/02/06 12:39:33 wiz Exp $
 #
 
-DISTNAME=		gtkwave-3.3.22
+DISTNAME=		gtkwave-3.3.28
 PKGREVISION=		1
 CATEGORIES=		cad
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=gtkwave/}
@@ -16,6 +16,7 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 BUILD_DEPENDS+=		gperf-[0-9]*:../../devel/gperf
 
 GNU_CONFIGURE=		yes
+CONFIGURE_ARGS+=	--disable-tcl
 USE_TOOLS+=		gmake pkg-config
 
 PTHREAD_AUTO_VARS=	yes

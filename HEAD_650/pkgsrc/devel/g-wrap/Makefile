@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.58 2011/04/22 13:43:18 obache Exp $
+# $NetBSD: Makefile,v 1.61 2012/02/16 18:38:46 hans Exp $
 
-DISTNAME=	g-wrap-1.9.12
-PKGREVISION=	4
+DISTNAME=	g-wrap-1.9.14
+PKGREVISION=	1
 CATEGORIES=	devel
 MASTER_SITES=	http://savannah.nongnu.org/download/g-wrap/
 
@@ -12,7 +12,7 @@ COMMENT=	Tool for generating guile wrappers for C code
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 # not sure
-MAKE_JOBS_SAFE=	no
+#MAKE_JOBS_SAFE=	no
 
 DEPENDS+=	guile-lib>=0.1.2:../../devel/guile-lib
 
@@ -23,6 +23,11 @@ TEST_TARGET=		check
 INFO_FILES=		YES
 
 INSTALLATION_DIRS=	share/guile/site/g-wrap/guile/ws
+
+.include "../../mk/bsd.prefs.mk"
+.if ${OPSYS} == "SunOS"
+CONFIGURE_ARGS+=	--disable-Werror
+.endif
 
 .include "../../devel/glib2/buildlink3.mk"
 .include "../../devel/libffi/buildlink3.mk"

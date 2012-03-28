@@ -1,9 +1,10 @@
-# $NetBSD: Makefile,v 1.77 2011/11/17 00:25:35 dholland Exp $
+# $NetBSD: Makefile,v 1.86 2012/02/21 05:07:21 obache Exp $
 #
 
 DISTNAME=	thunderbird-${TB_VER}.source
 PKGNAME=	thunderbird-${TB_VER}
 TB_VER=		8.0
+PKGREVISION=	4
 CATEGORIES=	mail
 MASTER_SITES=	${MASTER_SITE_MOZILLA:=thunderbird/releases/${TB_VER}/source/}
 EXTRACT_SUFX=	.tar.bz2
@@ -12,12 +13,12 @@ MAINTAINER=	tnn@NetBSD.org
 HOMEPAGE=	http://www.mozillamessaging.com/en-US/thunderbird/
 COMMENT=	Organize, secure and customize your mail
 
+PKG_DESTDIR_SUPPORT=	user-destdir
+
 USE_TOOLS+=	unzip pax
 WRKSRC=		${WRKDIR}/comm-release
 MOZILLA_DIR=	mozilla/
-PLIST_SRC+=	PLIST
-
-PYTHON_VERSIONS_ACCEPTED=	27
+PLIST_SRC+=	${PLIST_SRC_DFLT}
 
 CONFIG_GUESS_OVERRIDE+=	ldap/sdks/c-sdk/config/autoconf/config.guess
 CONFIG_SUB_OVERRIDE+=	ldap/sdks/c-sdk/config/autoconf/config.sub
@@ -25,6 +26,13 @@ CONFIG_SUB_OVERRIDE+=	ldap/sdks/c-sdk/config/autoconf/config.sub
 CONFIGURE_ARGS+=	--enable-application=mail
 
 ALL_ENV+=		MOZILLA_PKG_NAME=thunderbird
+
+.include "../../mk/bsd.prefs.mk"
+
+.if (${OPSYS} == "Linux" || ${OPSYS} == "SunOS" || ${OPSYS} == "Darwin") && \
+    (${MACHINE_ARCH} == "i386" || ${MACHINE_ARCH} == "x86_64")
+BUILD_DEPENDS+=		yasm>=1.1.0:../../devel/yasm
+.endif
 
 #SUBST_CLASSES+=			ext-compat
 #SUBST_STAGE.ext-compat=		pre-configure

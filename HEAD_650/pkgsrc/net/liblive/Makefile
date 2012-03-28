@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.17 2008/07/26 14:44:34 tonio Exp $
+# $NetBSD: Makefile,v 1.19 2012/02/22 14:55:52 wiz Exp $
 #
 
-DISTNAME=	live.2008.07.25
+DISTNAME=	live.2012.02.04
 PKGNAME=	lib${DISTNAME:S/./-/:S/.//g}
 CATEGORIES=	net
 MASTER_SITES=	http://www.live555.com/liveMedia/public/
@@ -14,6 +14,7 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 
 WRKSRC=		${WRKDIR}/live
 USE_LANGUAGES=	c c++
+USE_TOOLS+=	gmake
 USE_LIBTOOL=	YES
 
 INSTALLATION_DIRS=	bin lib

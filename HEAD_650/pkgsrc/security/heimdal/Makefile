@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.82 2011/09/14 17:33:00 hans Exp $
+# $NetBSD: Makefile,v 1.86 2012/02/15 22:39:54 asau Exp $
 
 DISTNAME=	heimdal-1.4
-PKGREVISION=	1
+PKGREVISION=	3
 CATEGORIES=	security
 MASTER_SITES=	http://www.h5l.org/dist/src/
 
@@ -64,7 +64,7 @@ PLIST.afskauth=		yes
 PLIST.hcrypto=		yes
 .endif
 
-OWN_DIRS_PERMS=		${HEIMDAL_HDB_DIR} ${REAL_ROOT_USER} ${ROOT_GROUP} 0700
+OWN_DIRS_PERMS=		${HEIMDAL_HDB_DIR} ${REAL_ROOT_USER} ${REAL_ROOT_GROUP} 0700
 SPECIAL_PERMS+=		${PREFIX}/bin/otp ${SETUID_ROOT_PERMS}
 SPECIAL_PERMS=		${PREFIX}/bin/${KRB5_PREFIX}su ${SETUID_ROOT_PERMS}
 RCD_SCRIPTS=		kadmind kcm kdc kpasswdd
@@ -75,6 +75,8 @@ INFO_FILES=		yes
 GENERATE_PLIST+=	\
 	( cd ${WRKSRC}/lib/roken && ${BUILD_MAKE_CMD} print-xheaders |	\
 	  ${XARGS} -n 1 | ${SED} -e "s,^,include/krb5/roken/," );
+
+TEST_TARGET=		check
 
 # remove manpages conficting with OpenSSL keeping only the important ones
 pre-configure:

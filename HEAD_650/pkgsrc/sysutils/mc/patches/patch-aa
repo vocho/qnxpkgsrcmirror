@@ -12,7 +12,18 @@ Fixes segmentation fault on NetBSD
  #endif
  
  #ifdef MOUNTED_GETMNT		/* Ultrix.  */
-@@ -364,7 +365,8 @@ read_filesystem_list (int need_fs_type, 
+@@ -109,6 +110,10 @@
+ #include <sys/statvfs.h>
+ #endif
+ 
++#ifdef __QNXNTO__
++#include <nbutil.h>
++#endif
++
+ #include "lib/global.h"
+ #include "mountlist.h"
+ 
+@@ -364,7 +369,8 @@ read_filesystem_list (int need_fs_type, 
  #endif /* MOUNTED */
  #endif /* MOUNTED_GETMNTENT1 */
  
@@ -22,16 +33,16 @@ Fixes segmentation fault on NetBSD
      {
  	struct statfs *fsp;
  	int entries;
-@@ -376,7 +378,7 @@ read_filesystem_list (int need_fs_type, 
+@@ -376,7 +382,7 @@ read_filesystem_list (int need_fs_type, 
  	    me = (struct mount_entry *) malloc (sizeof (struct mount_entry));
  	    me->me_devname = strdup (fsp->f_mntfromname);
  	    me->me_mountdir = strdup (fsp->f_mntonname);
 -#ifdef HAVE_STRUCT_STATFS_F_FSTYPENAME
-+#if defined(HAVE_STRUCT_STATFS_F_FSTYPENAME) || defined(MOUNTED_GETMNTINFO2)
++#if defined(HAVE_STRUCT_STATFS_F_FSTYPENAME) || defined(MOUNTED_GETMNTINFO2) || defined(__QNXNTO__)
  	    me->me_type = strdup (fsp->f_fstypename);
  #else
  	    me->me_type = fstype_to_string (fsp->f_type);
-@@ -392,28 +394,6 @@ read_filesystem_list (int need_fs_type, 
+@@ -392,28 +398,6 @@ read_filesystem_list (int need_fs_type, 
      }
  #endif /* MOUNTED_GETMNTINFO */
  

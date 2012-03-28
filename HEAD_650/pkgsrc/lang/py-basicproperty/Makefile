@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.9 2011/10/29 05:02:28 obache Exp $
+# $NetBSD: Makefile,v 1.11 2011/12/13 23:13:28 joerg Exp $
 #
 
 DISTNAME=	basicproperty-0.6.3a
@@ -10,6 +10,7 @@ MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=basicproperty/}
 MAINTAINER=	darcy@NetBSD.org
 HOMEPAGE=	http://basicproperty.sourceforge.net/
 COMMENT=	Python RDBMS wrapper for various databases
+LICENSE=	original-bsd
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 

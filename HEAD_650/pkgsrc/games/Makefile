@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.345 2011/09/16 11:15:04 ryoon Exp $
+# $NetBSD: Makefile,v 1.348 2012/02/17 17:23:05 jakllsch Exp $
 #
 
 COMMENT=	Games
@@ -12,6 +12,7 @@ SUBDIR+=	REminiscence
 SUBDIR+=	abuse
 SUBDIR+=	adom
 SUBDIR+=	alephone
+SUBDIR+=	amaze
 SUBDIR+=	an
 SUBDIR+=	angband-tty
 SUBDIR+=	angband-x11
@@ -224,6 +225,7 @@ SUBDIR+=	quakeforge
 SUBDIR+=	quakespasm
 SUBDIR+=	quarry
 SUBDIR+=	rftg
+SUBDIR+=	robotfindskitten
 SUBDIR+=	rocksndiamonds
 SUBDIR+=	rocksndiamonds-levels
 SUBDIR+=	rollemup
@@ -260,6 +262,7 @@ SUBDIR+=	tuxmath
 SUBDIR+=	tuxracer
 SUBDIR+=	tyrquake
 SUBDIR+=	ufoai
+SUBDIR+=	ultima4-data
 SUBDIR+=	urban
 SUBDIR+=	velena
 SUBDIR+=	vms-empire
@@ -311,6 +314,7 @@ SUBDIR+=	xsokoban
 SUBDIR+=	xsoldier
 SUBDIR+=	xtris
 SUBDIR+=	xtux
+SUBDIR+=	xu4
 SUBDIR+=	xvier
 SUBDIR+=	xworm
 SUBDIR+=	xye

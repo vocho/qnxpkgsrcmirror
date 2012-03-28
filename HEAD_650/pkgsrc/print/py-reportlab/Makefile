@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.42 2011/11/01 06:02:27 sbd Exp $
+# $NetBSD: Makefile,v 1.44 2012/02/04 04:46:34 obache Exp $
 
 DISTNAME=	reportlab-2.5
 DISTFILES=	${DEFAULT_DISTFILES} pfbfer.zip
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	print python
 MASTER_SITES=	http://www.reportlab.com/ftp/
 SITES.pfbfer.zip=	http://www.reportlab.com/ftp/fonts/
@@ -13,15 +13,17 @@ HOMEPAGE=	http://www.reportlab.com/
 COMMENT=	Powerful PDF-generating toolkit for Python
 LICENSE=	modified-bsd
 
+DEPENDS+=	${PYPKGPREFIX}-expat-[0-9]*:../../textproc/py-expat
+DEPENDS+=	${PYPKGPREFIX}-imaging-[0-9]*:../../graphics/py-imaging
+
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 EXTRACT_DIR.pfbfer.zip=	${WRKSRC}/src/reportlab/fonts
 
-PYDISTUTILSPKG=	yes
+do-test:
+	${RUN}cd ${WRKSRC};${PYTHONBIN} setup.py tests
 
 .include "../../graphics/freetype2/buildlink3.mk"
 .include "../../graphics/libart/buildlink3.mk"
-.include "../../graphics/py-imaging/buildlink3.mk"
-.include "../../lang/python/extension.mk"
-.include "../../textproc/py-xml/buildlink3.mk"
+.include "../../lang/python/distutils.mk"
 .include "../../mk/bsd.pkg.mk"

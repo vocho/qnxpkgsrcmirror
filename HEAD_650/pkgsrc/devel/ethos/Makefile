@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.6 2011/11/01 06:00:55 sbd Exp $
+# $NetBSD: Makefile,v 1.8 2012/02/06 12:39:49 wiz Exp $
 #
 
 DISTNAME=	ethos-0.2.2
-PKGREVISION=	5
+PKGREVISION=	6
 CATEGORIES=	devel
 MASTER_SITES=	http://ftp.dronelabs.com/sources/ethos/0.2/
 
@@ -15,7 +15,7 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=	yes
 USE_LIBTOOL=	yes
-USE_TOOLS+=	pkg-config intltool gmake
+USE_TOOLS+=	pkg-config intltool gmake msgfmt
 
 PKGCONFIG_OVERRIDE+=	ethos-ui.pc.in
 PKGCONFIG_OVERRIDE+=	ethos.pc.in

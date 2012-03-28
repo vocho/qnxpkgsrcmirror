@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.30 2011/11/20 02:08:10 markd Exp $
+# $NetBSD: Makefile,v 1.35 2012/02/06 12:42:17 wiz Exp $
 
 DISTNAME=	kdelibs-${_KDE_VERSION}
-PKGREVISION=	8
+PKGREVISION=	11
 CATEGORIES=	x11
 COMMENT=	Support libraries for the KDE integrated X11 desktop
 
@@ -55,6 +55,7 @@ SUBST_FILES.kdelibsfix= \
 SUBST_SED.kdelibsfix=		-e 's:@LOCALBASE@:${LOCALBASE}:g' -e 's:@X11BASE@:${X11BASE}:g'
 
 USE_TOOLS+=	flex gmake
+PLIST_VARS+=	kgrantpty
 
 .include "../../mk/bsd.prefs.mk"
 
@@ -62,6 +63,12 @@ USE_TOOLS+=	flex gmake
 # make sure zone.tab is installed
 DEPENDS+=		zonetab-[0-9]*:../../time/zonetab
 .endif
+
+.if ${OPSYS} == "SunOS"
+PLIST.kgrantpty=	yes
+.endif
+
+LDFLAGS.SunOS+=	-lintl
 
 BUILDLINK_DEPMETHOD.qt4-tools=		full
 .include "../../meta-pkgs/kde4/kde4.mk"
@@ -86,11 +93,12 @@ BUILDLINK_API_DEPENDS.shared-desktop-ontologies+=	shared-desktop-ontologies>=0.4
 .include "../../multimedia/phonon/buildlink3.mk"
 
 # Avahi ? rather than mDNSResponder
+.include "../../devel/libdbusmenu-qt/buildlink3.mk"
+.include "../../mk/fam.buildlink3.mk"
 .include "../../net/mDNSResponder/buildlink3.mk"
 .include "../../security/openssl/buildlink3.mk"
 .include "../../security/polkit-qt/buildlink3.mk"
 .include "../../security/qca2/buildlink3.mk"
-.include "../../mk/fam.buildlink3.mk"
 .include "../../textproc/aspell/buildlink3.mk"
 .include "../../textproc/enchant/buildlink3.mk"
 .include "../../textproc/libxml2/buildlink3.mk"

@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.58 2011/09/14 17:00:20 hans Exp $
+# $NetBSD: Makefile,v 1.60 2012/01/18 13:59:11 adam Exp $
 
 .include "dist.mk"
 
 PKGNAME=	python24-${PY_DISTVERSION}
+PKGREVISION=	1
 CATEGORIES=	lang python
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
@@ -164,6 +165,10 @@ post-build:
 post-install:
 	${LN} -fs ${DESTDIR}${PREFIX}/lib/libpython2.4.sl \
 		${DESTDIR}${PREFIX}/lib/libpython2.4.sl.1.0
+.endif
+
+.if ${OPSYS} == "SunOS" && ${OS_VERSION} != "5.11"
+PREFER.openssl=		pkgsrc
 .endif
 
 USE_GNU_READLINE=	# defined

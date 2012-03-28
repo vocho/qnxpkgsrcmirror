@@ -1,0 +1,13 @@
+$NetBSD$
+
+--- tools/pkgdata/pkgdata.cpp.orig	2011-07-19 21:16:36.000000000 +0000
++++ tools/pkgdata/pkgdata.cpp
+@@ -17,7 +17,7 @@
+ /*
+  * We define _XOPEN_SOURCE so that we can get popen and pclose.
+  */
+-#if !defined(_XOPEN_SOURCE)
++#if !defined(_XOPEN_SOURCE) && !defined(__QNXNTO__)
+ #if __STDC_VERSION__ >= 199901L
+ /* It is invalid to compile an XPG3, XPG4, XPG4v2 or XPG5 application using c99 on Solaris */
+ #define _XOPEN_SOURCE 600

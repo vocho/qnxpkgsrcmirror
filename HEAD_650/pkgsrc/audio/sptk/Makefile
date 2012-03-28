@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.2 2011/06/08 13:32:03 obache Exp $
+# $NetBSD: Makefile,v 1.4 2012/02/19 05:10:11 obache Exp $
 #
 
-DISTNAME=	SPTK-3.4.1
+DISTNAME=	SPTK-3.5
 PKGNAME=	${DISTNAME:tl}
 CATEGORIES=	audio
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=sp-tk/}
@@ -21,6 +21,7 @@ USE_TOOLS+=	csh:run
 
 GNU_CONFIGURE_PREFIX=	${PREFIX}/SPTK
 CONFIGURE_ENV+=		CSH=${CSH}
+CONFIGURE_ARGS+=	--disable-da
 
 INSTALLATION_DIRS+=	share/doc/sptk
 

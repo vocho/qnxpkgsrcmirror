@@ -1,4 +1,4 @@
-# $NetBSD: buildlink3.mk,v 1.37 2011/02/28 11:02:46 adam Exp $
+# $NetBSD: buildlink3.mk,v 1.42 2011/12/19 11:42:47 obache Exp $
 
 BUILDLINK_TREE+=	ncurses
 
@@ -20,6 +20,15 @@ BUILDLINK_LDADD.ncurses?=	${BUILDLINK_LIBNAME.ncurses:S/^/-l/:S/^-l$//}
 BUILDLINK_TARGETS+=		buildlink-ncurses-curses-h buildlink-ncurses-ncurses-h
 BUILDLINK_TRANSFORM+=		l:curses:${BUILDLINK_LIBNAME.ncurses}
 BUILDLINK_INCDIRS.ncurses+=	include/ncurses
+
+# Many packages will prefer ncursesw over ncurses if its available (say as
+# a native library), so unless this file is being included by ncursesw
+# don't allow ncursesw to be used by causing linkage failure.
+#
+.  include "../../mk/bsd.fast.prefs.mk"
+.  if empty(BUILDLINK_TREE:Mncursesw) && empty(PKGPATH:Mdevel/ncursesw)
+BUILDLINK_TRANSFORM+=		l:ncursesw:__nonexistent__
+.  endif
 
 .PHONY: buildlink-ncurses-curses-h buildlink-ncurses-ncurses-h
 buildlink-ncurses-curses-h:

@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.19 2011/09/06 11:20:19 obache Exp $
+# $NetBSD: Makefile,v 1.21 2012/01/25 09:56:08 he Exp $
 
 DISTNAME=	yale-tftpd-3.0
-PKGREVISION=	5
+PKGREVISION=	6
 CATEGORIES=	net
 MASTER_SITES=	ftp://ftp.cert.dfn.de/pub/tools/net/yale-tftpd/
 
@@ -30,5 +30,8 @@ SUBST_SED.ytftpdman=		-e 's|@ETCDIR@|${PKG_SYSCONFDIR}|g'
 SUBST_SED.ytftpdman+=		-e 's|@PREFIX@|${PREFIX}|g'
 
 INSTALLATION_DIRS=	libexec ${PKGMANDIR}/cat8 ${PKGMANDIR}/man8
+
+# code is not clean enough for gcc-4.5
+BUILDLINK_TRANSFORM+=		rm:-Werror
 
 .include "../../mk/bsd.pkg.mk"

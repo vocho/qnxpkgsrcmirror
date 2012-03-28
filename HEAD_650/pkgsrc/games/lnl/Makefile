@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.1.1.1 2011/02/26 08:18:13 obache Exp $
+# $NetBSD: Makefile,v 1.3 2011/12/18 15:56:37 dholland Exp $
 
 DISTNAME=	lnl-3.4.19
+PKGREVISION=	1
 CATEGORIES=	games
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE_JP:=lnl/50524/}
 
@@ -17,4 +18,5 @@ USE_LANGUAGES=		c c++
 # not used
 CHECK_PORTABILITY_SKIP=	sh/*
 
+.include "../../mk/curses.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

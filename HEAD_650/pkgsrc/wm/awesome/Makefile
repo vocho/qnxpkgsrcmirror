@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.22 2011/11/01 06:02:41 sbd Exp $
+# $NetBSD: Makefile,v 1.24 2012/02/06 12:41:48 wiz Exp $
 #
 
 DISTNAME=		awesome-2.3.6
-PKGREVISION=		8
+PKGREVISION=		9
 CATEGORIES=		wm
 MASTER_SITES=		http://awesome.naquadah.org/download/
 
@@ -20,6 +20,8 @@ USE_LANGUAGES=		c99
 GNU_CONFIGURE=		yes
 USE_TOOLS+=		pkg-config
 PKG_DESTDIR_SUPPORT=	user-destdir
+
+LDFLAGS.DragonFly=	-lX11 -lXext
 
 post-install:
 	${INSTALL_DATA_DIR} ${DESTDIR}${EGDIR}

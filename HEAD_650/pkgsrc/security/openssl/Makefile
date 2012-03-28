@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.158 2011/11/02 22:51:07 jnemeth Exp $
+# $NetBSD: Makefile,v 1.161 2012/01/31 05:51:52 sno Exp $
 
 OPENSSL_SNAPSHOT?=	# empty
 OPENSSL_STABLE?=	# empty
-OPENSSL_VERS?=		0.9.8q
+OPENSSL_VERS?=		0.9.8t
 
 .if empty(OPENSSL_SNAPSHOT)
 DISTNAME=	openssl-${OPENSSL_VERS}
@@ -22,7 +22,6 @@ MASTER_SITES=	ftp://ftp.openssl.org/snapshot/
 .endif
 
 SVR4_PKGNAME=	ossl
-PKGREVISION=	3
 CATEGORIES=	security
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.openssl.org/
@@ -109,6 +108,25 @@ SUBST_CLASSES+=		soname
 SUBST_STAGE.soname=	post-configure
 SUBST_FILES.soname=	Makefile.shared
 SUBST_SED.soname=	-e 's/-Wl,-soname=/-Wl,-h,/g'
+
+.elif ${OPSYS} == "HPUX"
+
+CONFIGURE_SCRIPT=	./Configure
+
+.  if ${ABI} == "64"
+.    if ${MACHINE_ARCH} == "hppa"
+CONFIGURE_ARGS+=	hpux64-parisc2-${CC}
+.    else
+CONFIGURE_ARGS+=	hpux64-ia64-${CC}
+.    endif
+.  else
+.    if ${MACHINE_ARCH} == "hppa"
+CONFIGURE_ARGS+=	hpux-parisc-${CC}
+.    else
+CONFIGURE_ARGS+=	hpux-ia64-${CC}
+.    endif
+.  endif
+
 .endif
 
 .include "../../security/openssl/options.mk"

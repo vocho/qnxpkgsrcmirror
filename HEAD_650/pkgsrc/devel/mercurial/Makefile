@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.63 2011/11/02 23:14:33 wiz Exp $
+# $NetBSD: Makefile,v 1.67 2012/02/12 18:49:45 wiz Exp $
 #
 
-DISTNAME=	mercurial-2.0
+DISTNAME=	mercurial-2.1
 CATEGORIES=	devel scm
 MASTER_SITES=	http://mercurial.selenic.com/release/
 
@@ -15,8 +15,6 @@ BUILD_DEPENDS+=	asciidoc-[0-9]*:../../textproc/asciidoc
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
-PY_PATCHPLIST=			yes
-PYDISTUTILSPKG=			yes
 USE_TOOLS+=			gmake msgfmt
 
 INSTALLATION_DIRS=	bin ${PKGMANDIR}/man1 ${PKGMANDIR}/man5
@@ -34,5 +32,5 @@ post-install:
 PLIST_SRC+=	${.CURDIR}/PLIST ${.CURDIR}/PLIST.inotify
 .endif
 
-.include "../../lang/python/extension.mk"
+.include "../../lang/python/distutils.mk"
 .include "../../mk/bsd.pkg.mk"

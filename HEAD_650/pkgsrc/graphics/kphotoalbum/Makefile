@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.24 2011/11/01 06:01:39 sbd Exp $
+# $NetBSD: Makefile,v 1.27 2012/02/09 21:44:28 sbd Exp $
 #
 
 DISTNAME=		kphotoalbum-3.1.1
-PKGREVISION=		10
+PKGREVISION=		12
 CATEGORIES=		graphics
 MASTER_SITES=		http://ktown.kde.org/kphotoalbum/download/
 EXTRACT_SUFX=		.tar.bz2
@@ -18,6 +18,7 @@ CONFLICTS+=		kimdaba-*
 USE_LIBTOOL=		yes
 USE_LANGUAGES=		c c++
 GNU_CONFIGURE=		yes
+SET_LIBDIR=		yes
 USE_TOOLS+=		msgfmt pkg-config
 
 .include "../../meta-pkgs/kde3/kde3.mk"

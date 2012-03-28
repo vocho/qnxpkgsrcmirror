@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.30 2011/11/01 06:00:57 sbd Exp $
+# $NetBSD: Makefile,v 1.33 2012/02/08 04:01:06 sbd Exp $
 #
 
 DISTNAME=		kscope-1.6.0
-PKGREVISION=		11
+PKGREVISION=		13
 CATEGORIES=		devel kde
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=kscope/}
 
@@ -16,7 +16,10 @@ DEPENDS+=		cscope>=15.6:../../devel/cscope
 DEPENDS+=		exctags>=5.5.4:../../devel/exctags
 
 GNU_CONFIGURE=		yes
-USE_TOOLS+=		gmake flex pkg-config
+SET_LIBDIR=		yes
+USE_TOOLS+=		gmake flex pkg-config bison
+
+CONFIGURE_ENV+=		ac_cv_prog_HAVE_YACC=yes
 
 USE_LIBTOOL=		yes
 USE_LANGUAGES=		c c++

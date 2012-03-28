@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.22 2011/11/01 06:01:40 sbd Exp $
+# $NetBSD: Makefile,v 1.25 2012/02/06 12:40:29 wiz Exp $
 #
 
 DISTNAME=	libkdcraw-0.1.9
-PKGREVISION=	8
+PKGREVISION=	10
 CATEGORIES=	graphics
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=kipi/}
 EXTRACT_SUFX=	.tar.bz2
@@ -15,6 +15,7 @@ LICENSE=	gnu-gpl-v2
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=	yes
+SET_LIBDIR=	yes
 USE_TOOLS+=	pkg-config msgfmt
 USE_LANGUAGES=	c c++
 USE_LIBTOOL=	yes

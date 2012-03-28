@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.40 2011/06/10 21:57:07 obache Exp $
+# $NetBSD: Makefile,v 1.43 2012/02/06 12:40:14 wiz Exp $
 
-DISTNAME=	gdal-1.8.0
-PKGNAME=	gdal-lib-1.8.0
-PKGREVISION=	4
+VERSION=	1.8.1
+DISTNAME=	gdal-${VERSION}
+PKGNAME=	gdal-lib-${VERSION}
+PKGREVISION=	1
 CATEGORIES=	geography
 MASTER_SITES=	http://download.osgeo.org/gdal/
 
@@ -10,6 +11,11 @@ MAINTAINER=	brook@nmsu.edu
 HOMEPAGE=	http://www.gdal.org/
 COMMENT=	Translator library for raster geospatial data formats
 LICENSE=	mit
+
+# There is mysterious failure to find gdal_version.h, even though it
+# is not a generated file, apparently caused by an odd make path that
+# fails to use the right includes.
+MAKE_JOBS_SAFE=		no
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
