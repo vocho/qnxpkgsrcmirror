@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.19 2012/02/06 12:41:03 wiz Exp $
+# $NetBSD: Makefile,v 1.21 2012/03/03 00:12:20 wiz Exp $
 #
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_LANGUAGES=		c c++
 
 .include "Makefile.common"
+PKGREVISION=1
 
 COMMENT+=		bad plugins
-PKGREVISION=		3
 
 # builds gsettings module
 BUILDLINK_API_DEPENDS.glib2+= glib2>=2.26.0

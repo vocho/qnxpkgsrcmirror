@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.20 2012/02/06 12:40:01 wiz Exp $
+# $NetBSD: Makefile,v 1.23 2012/03/21 18:06:48 drochner Exp $
 #
 
-DISTNAME=		lyx-1.6.9
-PKGREVISION=		5
+DISTNAME=		lyx-1.6.10
 CATEGORIES=		editors
 MASTER_SITES=		ftp://ftp.lyx.org/pub/lyx/stable/1.6.x/ \
 			http://gd.tuwien.ac.at/publishing/tex/lyx/stable/1.6.x/ \
@@ -68,6 +67,8 @@ USE_TOOLS+=		gmake perl:run pkg-config
 USE_LIBTOOL=		YES
 USE_PKGLOCALEDIR=	YES
 GCC_REQD+=		2.95
+
+CXXFLAGS.Linux+=	-fpermissive
 
 CONFIGURE_ARGS+=	--with-extra-prefix=${BUILDLINK_PREFIX.qt4-libs} \
 			--with-qt4-dir=${QTDIR:Q} \

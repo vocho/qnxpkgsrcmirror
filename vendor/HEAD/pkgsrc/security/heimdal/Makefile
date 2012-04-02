@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.86 2012/02/15 22:39:54 asau Exp $
+# $NetBSD: Makefile,v 1.89 2012/03/13 09:04:49 fhajny Exp $
 
-DISTNAME=	heimdal-1.4
-PKGREVISION=	3
+DISTNAME=	heimdal-1.5.2
+PKGREVISION=	1
 CATEGORIES=	security
 MASTER_SITES=	http://www.h5l.org/dist/src/
 
@@ -34,7 +34,7 @@ CONFIGURE_ARGS+=	--enable-kcm
 CONFIGURE_ARGS+=	--enable-pthread-support
 CONFIGURE_ARGS+=	--includedir=${PREFIX}/include/krb5
 CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR}
-CONFIGURE_ARGS+=	--with-hdbdir=${HEIMDAL_HDB_DIR:H}
+CONFIGURE_ARGS+=	--with-hdbdir=${HEIMDAL_HDB_DIR}
 CONFIGURE_ARGS+=	--with-openssl=${SSLBASE:Q}
 CONFIGURE_ARGS+=	--with-sqlite3=${BUILDLINK_PREFIX.sqlite3}
 CONFIGURE_ARGS+=	--without-x
@@ -59,8 +59,11 @@ PLIST_VARS+=		afskauth hcrypto
 .if ${OPSYS} == "IRIX"
 PLIST.afskauth=		yes
 .endif
+
+.include "../../security/openssl/builtin.mk"
+
 .if ${MACHINE_PLATFORM:MNetBSD-[1-3]*} != "" || \
-    ${OPSYS} == "SunOS"
+    (${OPSYS} == "SunOS" && !empty(USE_BUILTIN.openssl:Myes))
 PLIST.hcrypto=		yes
 .endif
 
@@ -88,5 +91,6 @@ pre-configure:
 .include "../../devel/readline/buildlink3.mk"
 .include "../../security/openssl/buildlink3.mk"
 .include "../../mk/bdb.buildlink3.mk"
+.include "../../mk/curses.buildlink3.mk"
 .include "../../mk/pthread.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

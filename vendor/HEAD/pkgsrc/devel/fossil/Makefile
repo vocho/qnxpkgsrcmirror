@@ -1,10 +1,9 @@
-# $NetBSD: Makefile,v 1.17 2012/02/08 19:45:41 bsiegert Exp $
+# $NetBSD: Makefile,v 1.19 2012/03/22 23:12:41 asau Exp $
 
-DISTNAME=	Fossil-002580c50d94790a
-PKGNAME=	fossil-1.21
+DISTNAME=	fossil-src-20120317175325
+PKGNAME=	fossil-1.22
 CATEGORIES=	devel scm
-# have to log in to download the tarball
-MASTER_SITES=	${MASTER_SITE_LOCAL}
+MASTER_SITES=	http://www.fossil-scm.org/download/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.fossil-scm.org/
@@ -20,6 +19,7 @@ INSTALLATION_DIRS+=	bin
 do-install:
 	${INSTALL_PROGRAM} ${WRKSRC}/fossil ${DESTDIR}${PREFIX}/bin
 
+.include "../../devel/readline/buildlink3.mk"
 .include "../../security/openssl/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

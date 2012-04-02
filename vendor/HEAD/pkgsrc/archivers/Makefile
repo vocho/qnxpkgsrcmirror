@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.123 2011/10/21 21:44:11 ryoon Exp $
+# $NetBSD: Makefile,v 1.126 2012/03/22 16:07:45 sno Exp $
 #
 
 COMMENT=	Archivers
@@ -9,6 +9,7 @@ SUBDIR+=	afio
 SUBDIR+=	arc
 SUBDIR+=	archangel
 SUBDIR+=	arj
+SUBDIR+=	ark
 SUBDIR+=	bicom
 SUBDIR+=	bsdtar
 SUBDIR+=	bunzip
@@ -39,6 +40,7 @@ SUBDIR+=	libcomprex
 SUBDIR+=	liblzo
 SUBDIR+=	libzip
 SUBDIR+=	lzip
+SUBDIR+=	lziprecover
 SUBDIR+=	lzma
 SUBDIR+=	lzmalib
 SUBDIR+=	lzo
@@ -51,6 +53,7 @@ SUBDIR+=	nomarch
 SUBDIR+=	nulib2
 SUBDIR+=	ocaml-zip
 SUBDIR+=	p5-Archive-Any
+SUBDIR+=	p5-Archive-Peek
 SUBDIR+=	p5-Archive-Tar
 SUBDIR+=	p5-Archive-Zip
 SUBDIR+=	p5-Compress-Bzip2

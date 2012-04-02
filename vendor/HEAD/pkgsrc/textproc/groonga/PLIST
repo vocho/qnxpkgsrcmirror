@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.9 2011/12/29 08:17:23 obache Exp $
+@comment $NetBSD: PLIST,v 1.11 2012/03/20 08:33:16 obache Exp $
 bin/grntest
 bin/groonga
 bin/groonga-query-log-analyzer
@@ -7,6 +7,7 @@ ${PLIST.learner}bin/groonga-suggest-httpd
 ${PLIST.learner}bin/groonga-suggest-learner
 include/groonga/groonga.h
 include/groonga/groonga/plugin.h
+include/groonga/groonga/tokenizer.h
 lib/groonga/plugins/suggest/suggest.la
 ${PLIST.mecab}lib/groonga/plugins/tokenizers/mecab.la
 lib/libgroonga.la
@@ -68,6 +69,7 @@ share/doc/groonga/en/html/_sources/functions/now.txt
 share/doc/groonga/en/html/_sources/functions/rand.txt
 share/doc/groonga/en/html/_sources/geolocation_search.txt
 share/doc/groonga/en/html/_sources/index.txt
+share/doc/groonga/en/html/_sources/indexing.txt
 share/doc/groonga/en/html/_sources/install.txt
 share/doc/groonga/en/html/_sources/limitations.txt
 share/doc/groonga/en/html/_sources/log.txt
@@ -75,7 +77,9 @@ share/doc/groonga/en/html/_sources/news.txt
 share/doc/groonga/en/html/_sources/news/0.x.txt
 share/doc/groonga/en/html/_sources/news/1.0.x.txt
 share/doc/groonga/en/html/_sources/news/1.1.x.txt
+share/doc/groonga/en/html/_sources/news/1.2.x.txt
 share/doc/groonga/en/html/_sources/news/senna.txt
+share/doc/groonga/en/html/_sources/output.txt
 share/doc/groonga/en/html/_sources/pseudo_column.txt
 share/doc/groonga/en/html/_sources/reference.txt
 share/doc/groonga/en/html/_sources/spec.txt
@@ -184,6 +188,7 @@ share/doc/groonga/en/html/functions/rand.html
 share/doc/groonga/en/html/genindex.html
 share/doc/groonga/en/html/geolocation_search.html
 share/doc/groonga/en/html/index.html
+share/doc/groonga/en/html/indexing.html
 share/doc/groonga/en/html/install.html
 share/doc/groonga/en/html/limitations.html
 share/doc/groonga/en/html/log.html
@@ -191,8 +196,10 @@ share/doc/groonga/en/html/news.html
 share/doc/groonga/en/html/news/0.x.html
 share/doc/groonga/en/html/news/1.0.x.html
 share/doc/groonga/en/html/news/1.1.x.html
+share/doc/groonga/en/html/news/1.2.x.html
 share/doc/groonga/en/html/news/senna.html
 share/doc/groonga/en/html/objects.inv
+share/doc/groonga/en/html/output.html
 share/doc/groonga/en/html/pseudo_column.html
 share/doc/groonga/en/html/reference.html
 share/doc/groonga/en/html/search.html
@@ -275,6 +282,7 @@ share/doc/groonga/ja/html/_sources/functions/now.txt
 share/doc/groonga/ja/html/_sources/functions/rand.txt
 share/doc/groonga/ja/html/_sources/geolocation_search.txt
 share/doc/groonga/ja/html/_sources/index.txt
+share/doc/groonga/ja/html/_sources/indexing.txt
 share/doc/groonga/ja/html/_sources/install.txt
 share/doc/groonga/ja/html/_sources/limitations.txt
 share/doc/groonga/ja/html/_sources/log.txt
@@ -282,7 +290,9 @@ share/doc/groonga/ja/html/_sources/news.txt
 share/doc/groonga/ja/html/_sources/news/0.x.txt
 share/doc/groonga/ja/html/_sources/news/1.0.x.txt
 share/doc/groonga/ja/html/_sources/news/1.1.x.txt
+share/doc/groonga/ja/html/_sources/news/1.2.x.txt
 share/doc/groonga/ja/html/_sources/news/senna.txt
+share/doc/groonga/ja/html/_sources/output.txt
 share/doc/groonga/ja/html/_sources/pseudo_column.txt
 share/doc/groonga/ja/html/_sources/reference.txt
 share/doc/groonga/ja/html/_sources/spec.txt
@@ -391,6 +401,7 @@ share/doc/groonga/ja/html/functions/rand.html
 share/doc/groonga/ja/html/genindex.html
 share/doc/groonga/ja/html/geolocation_search.html
 share/doc/groonga/ja/html/index.html
+share/doc/groonga/ja/html/indexing.html
 share/doc/groonga/ja/html/install.html
 share/doc/groonga/ja/html/limitations.html
 share/doc/groonga/ja/html/log.html
@@ -398,8 +409,10 @@ share/doc/groonga/ja/html/news.html
 share/doc/groonga/ja/html/news/0.x.html
 share/doc/groonga/ja/html/news/1.0.x.html
 share/doc/groonga/ja/html/news/1.1.x.html
+share/doc/groonga/ja/html/news/1.2.x.html
 share/doc/groonga/ja/html/news/senna.html
 share/doc/groonga/ja/html/objects.inv
+share/doc/groonga/ja/html/output.html
 share/doc/groonga/ja/html/pseudo_column.html
 share/doc/groonga/ja/html/reference.html
 share/doc/groonga/ja/html/search.html
@@ -636,6 +649,7 @@ share/doc/groonga/source/images/geo-search-in-circle.svg
 share/doc/groonga/source/images/geo-search-in-rectangle.png
 share/doc/groonga/source/images/geo-search-in-rectangle.svg
 share/doc/groonga/source/index.txt
+share/doc/groonga/source/indexing.txt
 share/doc/groonga/source/install.txt
 share/doc/groonga/source/limitations.txt
 share/doc/groonga/source/log.txt
@@ -643,7 +657,9 @@ share/doc/groonga/source/news.txt
 share/doc/groonga/source/news/0.x.txt
 share/doc/groonga/source/news/1.0.x.txt
 share/doc/groonga/source/news/1.1.x.txt
+share/doc/groonga/source/news/1.2.x.txt
 share/doc/groonga/source/news/senna.txt
+share/doc/groonga/source/output.txt
 share/doc/groonga/source/pseudo_column.txt
 share/doc/groonga/source/rdoc.py
 share/doc/groonga/source/reference.txt

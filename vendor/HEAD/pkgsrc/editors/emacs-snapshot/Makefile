@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.26 2012/02/13 17:57:39 minskim Exp $
+# $NetBSD: Makefile,v 1.28 2012/03/06 03:01:30 minskim Exp $
 
 CONFLICTS+=	emacs-nox11-[0-9]*
 

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.1.1.1 2012/02/21 12:49:43 drochner Exp $
+# $NetBSD: Makefile,v 1.3 2012/03/21 11:01:50 drochner Exp $
 #
 
 DISTNAME=		vlc-${VLC_VERSION}
@@ -7,7 +7,7 @@ MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=vlc/} \
 			http://download.videolan.org/pub/videolan/vlc/${VLC_VERSION}/
 EXTRACT_SUFX=		.tar.xz
 
-VLC_VERSION=		2.0.0
+VLC_VERSION=		2.0.1
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://www.videolan.org/
