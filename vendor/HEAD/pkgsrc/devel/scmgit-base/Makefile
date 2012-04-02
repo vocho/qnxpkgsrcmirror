@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.39 2012/02/17 13:54:02 hans Exp $
+# $NetBSD: Makefile,v 1.42 2012/03/26 07:28:18 fhajny Exp $
 
 .include "../../devel/scmgit/Makefile.common"
 
@@ -10,6 +10,9 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 CONFLICTS+=		git<4.9.5nb1		# misc/git
 
 DEPENDS+=		p5-Error>=0.17015:../../devel/p5-Error
+# for git-send-email
+DEPENDS+=		p5-MIME-Base64>=3.13:../../converters/p5-MIME-Base64
+DEPENDS+=		p5-Authen-SASL>=1.0:../../security/p5-Authen-SASL
 
 USE_LANGUAGES=		c99
 USE_TOOLS+=		perl:run sh:run msgfmt
@@ -83,7 +86,7 @@ SUBST_STAGE.fix-cd-P=	pre-build
 SUBST_SED.fix-cd-P=	-e "s/cd -P/cd/g"
 .endif
 
-LDFLAGS.SunOS+=		-lintl
+LDFLAGS.SunOS+=		-lintl -lnsl
 
 .include "options.mk"
 

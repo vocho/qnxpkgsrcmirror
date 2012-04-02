@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.9 2012/02/06 12:41:14 wiz Exp $
+# $NetBSD: Makefile,v 1.12 2012/04/01 14:35:20 shattered Exp $
 
 DISTNAME=	ktorrent-${KTORRENT_VER}
-PKGREVISION=	12
+PKGREVISION=	14
 CATEGORIES=	net kde
 MASTER_SITES=	http://ktorrent.org/downloads/${KTORRENT_VER}/
 EXTRACT_SUFX=	.tar.bz2
@@ -11,6 +11,7 @@ KTORRENT_VER=	2.2.8
 MAINTAINER=	shattered@NetBSD.org
 HOMEPAGE=	http://ktorrent.org/
 COMMENT=	Graphical BitTorrent client for KDE
+LICENSE=	gnu-gpl-v2
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
@@ -25,6 +26,7 @@ REPLACE_BASH=	scripts/ktshell
 .include "../../devel/gmp/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../security/openssl/buildlink3.mk"
+.include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../x11/kdebase3/buildlink3.mk"
 .include "../../x11/kdelibs3/buildlink3.mk"
 .include "../../x11/libSM/buildlink3.mk"

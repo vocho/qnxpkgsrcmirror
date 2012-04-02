@@ -1,13 +1,15 @@
-# $NetBSD: Makefile,v 1.86 2012/02/21 05:07:21 obache Exp $
+# $NetBSD: Makefile,v 1.90 2012/03/16 21:09:55 ryoon Exp $
 #
 
-DISTNAME=	thunderbird-${TB_VER}.source
+DISTNAME=	# empty
 PKGNAME=	thunderbird-${TB_VER}
-TB_VER=		8.0
-PKGREVISION=	4
+PKGREVISION=	1
+TB_VER=		11.0
 CATEGORIES=	mail
-MASTER_SITES=	${MASTER_SITE_MOZILLA:=thunderbird/releases/${TB_VER}/source/}
-EXTRACT_SUFX=	.tar.bz2
+MASTER_SITES=	${MASTER_SITE_MOZILLA:=thunderbird/releases/${TB_VER}/source/} \
+		${MASTER_SITE_MOZILLA_ALL:=thunderbird/releases/${TB_VER}/source/}
+DISTFILES=	thunderbird-${TB_VER}.source.tar.bz2 \
+		comm-release-f60c071e187b.tar.bz2
 
 MAINTAINER=	tnn@NetBSD.org
 HOMEPAGE=	http://www.mozillamessaging.com/en-US/thunderbird/
@@ -27,12 +29,10 @@ CONFIGURE_ARGS+=	--enable-application=mail
 
 ALL_ENV+=		MOZILLA_PKG_NAME=thunderbird
 
-.include "../../mk/bsd.prefs.mk"
+# workround for link of xulrunner-bin etc.
+LDFLAGS+=		-Wl,-rpath,${PREFIX}/lib/thunderbird
 
-.if (${OPSYS} == "Linux" || ${OPSYS} == "SunOS" || ${OPSYS} == "Darwin") && \
-    (${MACHINE_ARCH} == "i386" || ${MACHINE_ARCH} == "x86_64")
-BUILD_DEPENDS+=		yasm>=1.1.0:../../devel/yasm
-.endif
+.include "../../mk/bsd.prefs.mk"
 
 #SUBST_CLASSES+=			ext-compat
 #SUBST_STAGE.ext-compat=		pre-configure

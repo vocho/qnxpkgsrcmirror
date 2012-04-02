@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.14 2012/02/22 15:39:44 wiz Exp $
+@comment $NetBSD: PLIST,v 1.16 2012/03/04 11:40:46 wiz Exp $
 man/cat1/pkg_add.0
 man/cat1/pkg_admin.0
 man/cat1/pkg_create.0

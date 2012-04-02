@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.161 2012/01/31 05:51:52 sno Exp $
+# $NetBSD: Makefile,v 1.164 2012/03/14 22:48:58 cegger Exp $
 
 OPENSSL_SNAPSHOT?=	# empty
 OPENSSL_STABLE?=	# empty
-OPENSSL_VERS?=		0.9.8t
+OPENSSL_VERS?=		0.9.8u
 
 .if empty(OPENSSL_SNAPSHOT)
 DISTNAME=	openssl-${OPENSSL_VERS}
@@ -89,6 +89,8 @@ CONFIGURE_ARGS+=	tru64-alpha-cc
 CONFIGURE_SCRIPT=	./Configure
 .  if defined(ABI) && ${ABI} == "64"
 CONFIGURE_ARGS+=	darwin64-${MACHINE_ARCH}-cc
+.  elif ${MACHINE_ARCH} == "powerpc"
+CONFIGURE_ARGS+=	darwin-ppc-cc
 .  else
 CONFIGURE_ARGS+=	darwin-${MACHINE_ARCH}-cc
 .  endif

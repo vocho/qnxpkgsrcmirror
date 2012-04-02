@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.15 2012/02/06 12:40:37 wiz Exp $
+# $NetBSD: Makefile,v 1.17 2012/03/08 11:44:43 wiz Exp $
 
 DISTNAME=	vigra-1.8.0-src
 PKGNAME=	${DISTNAME:S/-src//}
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	graphics
 MASTER_SITES=	http://hci.iwr.uni-heidelberg.de/vigra/
 
@@ -27,7 +27,7 @@ SUBST_STAGE.python=	pre-configure
 SUBST_FILES.python+=	config/vigra-config.in
 # Best we can do without pulling in a python dependency.
 # Update when PYTHON_VERSION_DEFAULT changes!
-SUBST_SED.python+=	-e 's,/usr/bin/env.*python,${PREFIX}/bin/python2.6,'
+SUBST_SED.python+=	-e 's,/usr/bin/env.*python,${PREFIX}/bin/python2.7,'
 SUBST_MESSAGE.python=	Fixing path to python.
 
 # Package doesn't need dependency, only packages using the script,
@@ -36,8 +36,8 @@ CHECK_INTERPRETER_SKIP=	bin/vigra-config
 
 .include "options.mk"
 
-post-patch:
-	${RM} ${WRKSRC}/include/vigra/*.orig
+pre-install:
+	${RM} -f ${WRKSRC}/include/vigra/*.orig
 
 .include "../../devel/zlib/buildlink3.mk"
 .include "../../graphics/openexr/buildlink3.mk"

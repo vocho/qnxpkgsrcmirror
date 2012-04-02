@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.18 2012/02/06 12:40:31 wiz Exp $
+# $NetBSD: Makefile,v 1.20 2012/03/24 05:54:55 markd Exp $
 #
 
 DISTNAME=		OpenCV-2.2.0
 PKGNAME=		${DISTNAME:S/OpenCV/opencv/}
-PKGREVISION=		4
+PKGREVISION=		5
 CATEGORIES=		graphics devel
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=opencvlibrary/}
 EXTRACT_SUFX=		.tar.bz2
@@ -33,6 +33,7 @@ SUBST_SED.py=		-e 's,/usr/bin/python,/usr/bin/env python,'
 CMAKE_ARGS+=	-D BUILD_NEW_PYTHON_SUPPORT=OFF
 # FIXME: should be option.mk'ed instead
 CMAKE_ARGS+=	-D WITH_OPENEXR:BOOL=OFF
+CMAKE_ARGS+=	-D BUILD_DOXYGEN_DOCS=OFF
 
 .include "../../x11/gtk2/buildlink3.mk"
 .include "../../graphics/png/buildlink3.mk"

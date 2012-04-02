@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.35 2011/10/04 04:45:22 hiramatsu Exp $
+# $NetBSD: Makefile,v 1.37 2012/03/22 14:13:06 sno Exp $
 #
 
-DISTNAME=	Text-CSV_XS-0.85
+DISTNAME=	Text-CSV_XS-0.88
 PKGNAME=	p5-${DISTNAME}
 SVR4_PKGNAME=	p5tcx
 CATEGORIES=	textproc perl5

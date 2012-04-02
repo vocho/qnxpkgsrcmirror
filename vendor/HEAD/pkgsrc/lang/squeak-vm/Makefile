@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.12 2012/02/06 12:40:47 wiz Exp $
+# $NetBSD: Makefile,v 1.14 2012/03/03 12:54:18 wiz Exp $
 #
 
 SQUEAK_VERSION=	3.11.3.2135
 
 DISTNAME=	Squeak-${SQUEAK_VERSION}-src
 PKGNAME=	squeak-vm-${SQUEAK_VERSION:C/-/./}
-PKGREVISION=	8
+PKGREVISION=	9
 CATEGORIES=	lang
 MASTER_SITES=	http://ftp.squeak.org/3.10/unix-linux/ \
 		http://squeakvm.org/unix/release/
@@ -30,6 +30,8 @@ CMAKE_ARG_PATH=	../unix
 CMAKE_ARGS+=	-DPKGMANDIR=${PKGMANDIR}
 CMAKE_ARGS+=	-DVM_HOST=${MACHINE_GNU_PLATFORM:Q} -DVM_VERSION=${SQUEAK_VERSION}
 CMAKE_ARGS+=	-DDEVOSSAUDIO=${DEVOSSAUDIO}
+
+LDFLAGS.SunOS+=	-liconv -lsocket -lnsl -lm
 
 .include "../../mk/bsd.prefs.mk"
 

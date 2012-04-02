@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.13 2012/02/06 12:40:15 wiz Exp $
+# $NetBSD: Makefile,v 1.16 2012/03/09 12:34:09 wiz Exp $
 
-DISTNAME=	qgis-1.7.3
-PKGREVISION=	1
+DISTNAME=	qgis-1.7.4
+PKGREVISION=	2
 CATEGORIES=	geography
 MASTER_SITES=	http://qgis.org/downloads/
 EXTRACT_SUFX=	.tar.bz2
@@ -12,8 +12,6 @@ COMMENT=	Geographic Information System (GIS)
 LICENSE=	gnu-gpl-v2
 
 PKG_DESTDIR_SUPPORT=	user-destdir
-
-WRKSRC=			${WRKDIR}/${PKGNAME_NOREV}
 
 USE_CMAKE=		yes
 USE_LANGUAGES=		c c++ fortran77

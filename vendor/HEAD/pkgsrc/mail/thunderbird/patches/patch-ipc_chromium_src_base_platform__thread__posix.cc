@@ -1,8 +1,8 @@
-$NetBSD: patch-ipc_chromium_src_base_platform__thread__posix.cc,v 1.1 2011/08/19 14:39:10 tnn Exp $
+$NetBSD: patch-ipc_chromium_src_base_platform__thread__posix.cc,v 1.3 2012/04/01 20:53:43 ryoon Exp $
 
---- mozilla/ipc/chromium/src/base/platform_thread_posix.cc.orig	2011-06-15 21:57:27.000000000 +0000
+--- mozilla/ipc/chromium/src/base/platform_thread_posix.cc.orig	2012-04-01 15:50:47.000000000 +0000
 +++ mozilla/ipc/chromium/src/base/platform_thread_posix.cc
-@@ -9,6 +9,8 @@
+@@ -9,9 +9,18 @@
  
  #if defined(OS_MACOSX)
  #include <mach/mach.h>
@@ -11,7 +11,17 @@ $NetBSD: patch-ipc_chromium_src_base_platform__thread__posix.cc,v 1.1 2011/08/19
  #elif defined(OS_LINUX)
  #include <sys/syscall.h>
  #include <unistd.h>
-@@ -33,6 +35,10 @@ PlatformThreadId PlatformThread::Current
++#elif defined(OS_DRAGONFLY)
++#include <unistd.h>
++#elif defined(OS_FREEBSD)
++#include <sys/thr.h>
++_Pragma("GCC visibility push(default)")
++# include <pthread_np.h>
++_Pragma("GCC visibility pop")
+ #endif
+ 
+ #if defined(OS_MACOSX)
+@@ -33,6 +42,18 @@ PlatformThreadId PlatformThread::Current
    // into the kernel.
  #if defined(OS_MACOSX)
    return mach_thread_self();
@@ -19,6 +29,14 @@ $NetBSD: patch-ipc_chromium_src_base_platform__thread__posix.cc,v 1.1 2011/08/19
 +  return _lwp_self();
 +#elif defined(OS_DRAGONFLY)
 +  return lwp_gettid();
- #elif defined(OS_LINUX)
-   return syscall(__NR_gettid);
- #endif
++#elif defined(OS_FREEBSD)
++#  if __FreeBSD_cc_version > 900000
++    return pthread_getthreadid_np();
++#  else
++    lwpid_t lwpid;
++    thr_self( &lwpid );
++    return lwpid;
++#  endif
+ #elif defined (__OpenBSD__)
+   // TODO(BSD): find a better thread ID
+   return (intptr_t)(pthread_self());

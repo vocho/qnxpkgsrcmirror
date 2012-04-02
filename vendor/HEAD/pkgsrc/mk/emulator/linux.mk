@@ -1,4 +1,4 @@
-# $NetBSD: linux.mk,v 1.14 2012/01/18 00:52:20 sbd Exp $
+# $NetBSD: linux.mk,v 1.16 2012/03/17 06:08:17 obache Exp $
 #
 # Linux binary emulation framework
 #
@@ -68,9 +68,7 @@ _EMUL_MODULES+=		drm
 _EMUL_MODULES+=		expat
 _EMUL_MODULES+=		fontconfig
 _EMUL_MODULES+=		freetype2
-_EMUL_MODULES+=		gdk-pixbuf
 _EMUL_MODULES+=		glx
-_EMUL_MODULES+=		gtk
 _EMUL_MODULES+=		gtk2
 _EMUL_MODULES+=		jpeg
 _EMUL_MODULES+=		krb5
@@ -79,12 +77,10 @@ _EMUL_MODULES+=		locale
 _EMUL_MODULES+=		motif
 _EMUL_MODULES+=		openssl
 _EMUL_MODULES+=		png
-_EMUL_MODULES+=		qt3
 _EMUL_MODULES+=		qt4
 _EMUL_MODULES+=		resmgr
 _EMUL_MODULES+=		slang
 _EMUL_MODULES+=		tiff
-_EMUL_MODULES+=		vmware
 _EMUL_MODULES+=		x11
 _EMUL_MODULES+=		xml2
 

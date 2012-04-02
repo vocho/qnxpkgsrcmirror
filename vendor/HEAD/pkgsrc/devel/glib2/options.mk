@@ -1,4 +1,4 @@
-# $NetBSD: options.mk,v 1.12 2012/01/17 16:51:04 jmmv Exp $
+# $NetBSD: options.mk,v 1.14 2012/03/23 07:11:50 obache Exp $
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.glib2
 PKG_SUPPORTED_OPTIONS=	kqueue
@@ -21,9 +21,11 @@ PATCH_SITES=		http://dmitrymatveev.co.uk/files/
 PATCHFILES=		glib-gio-kqueue-2.28.8-v3.patch
 PATCH_DIST_STRIP=	-p0
 
+BUILD_DEPENDS+=	gtk-doc-[0-9]*:../../textproc/gtk-doc
 USE_TOOLS+=	autoconf autoheader automake
 pre-configure: regen-autotools
 regen-autotools:
+	cd ${WRKSRC} && aclocal
 	cd ${WRKSRC} && automake
 	cd ${WRKSRC} && autoheader
 	cd ${WRKSRC} && autoconf

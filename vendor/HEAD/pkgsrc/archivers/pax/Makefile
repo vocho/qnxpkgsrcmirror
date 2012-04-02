@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.43 2010/07/06 23:36:51 obache Exp $
+# $NetBSD: Makefile,v 1.45 2012/03/09 10:20:15 fhajny Exp $
 
 DISTNAME=		pax-20080110
 CATEGORIES=		archivers
@@ -13,6 +13,8 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 BOOTSTRAP_PKG=	yes
 CHECK_PERMS=		no
 
+MAKE_ENV+=		MANINSTALL=${MANINSTALL:Q}
+
 USE_FEATURES=		nbcompat
 
 .include "../../mk/bsd.prefs.mk"
@@ -24,10 +26,12 @@ CONFIGURE_ARGS+=	--program-prefix=${NBPAX_PROGRAM_PREFIX:Q}
 .else
 
 # pax installs "tar" and "cpio"
-.if defined(GNU_PROGRAM_PREFIX) && empty(GNU_PROGRAM_PREFIX)
+.if defined(GNU_PROGRAM_PREFIX) && empty(GNU_PROGRAM_PREFIX) && \
+    (!defined(NBPAX_PROGRAM_PREFIX) || empty(NBPAX_PROGRAM_PREFIX))
 CONFLICTS+=		gcpio-[0-9]*
 .endif
-.if defined(GTAR_PROGRAM_PREFIX) && empty(GTAR_PROGRAM_PREFIX)
+.if defined(GTAR_PROGRAM_PREFIX) && empty(GTAR_PROGRAM_PREFIX) && \
+    (!defined(NBPAX_PROGRAM_PREFIX) || empty(NBPAX_PROGRAM_PREFIX))
 CONFLICTS+=		gtar-base-[0-9]*
 .endif
 
