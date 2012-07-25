@@ -1,14 +1,15 @@
-# $NetBSD: Makefile,v 1.49 2012/02/06 12:40:38 wiz Exp $
+# $NetBSD: Makefile,v 1.51 2012/03/10 13:20:11 shattered Exp $
 #
 
 DISTNAME=	xzgv-0.9.1
-PKGREVISION=	5
+PKGREVISION=	6
 CATEGORIES=	graphics
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=xzgv/}
 
 MAINTAINER=	shattered@NetBSD.org
 HOMEPAGE=	http://sourceforge.net/projects/xzgv
 COMMENT=	Image viewer
+LICENSE=	gnu-gpl-v2
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 

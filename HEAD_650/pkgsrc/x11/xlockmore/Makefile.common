@@ -1,4 +1,4 @@
-# $NetBSD: Makefile.common,v 1.62 2012/02/18 23:50:33 elric Exp $
+# $NetBSD: Makefile.common,v 1.66 2012/03/31 10:43:19 dholland Exp $
 #
 # This Makefile.common is included by:
 #
@@ -22,6 +22,8 @@ CONFLICTS+=	xlockmore-[0-9]* xlockmore-lite-[0-9]*
 DISTINFO_FILE?=		${.CURDIR}/../xlockmore/distinfo
 PATCHDIR?=		${.CURDIR}/../xlockmore/patches
 PLIST_SRC?=		${.CURDIR}/../xlockmore/PLIST
+FILESDIR?=		${.CURDIR}/../xlockmore/files
+MESSAGE_SRC?=		${.CURDIR}/../xlockmore/MESSAGE
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
@@ -29,7 +31,7 @@ PKG_INSTALLATION_TYPES=	overwrite pkgviews
 .include "../../mk/bsd.prefs.mk"
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.xlockmore
-PKG_SUPPORTED_OPTIONS=	xlockmore-allow-root xlockmore-dpms
+PKG_SUPPORTED_OPTIONS=	xlockmore-allow-root xlockmore-dpms pam
 .if ${OPSYS} == "NetBSD"
 PKG_SUPPORTED_OPTIONS+=	oss
 .endif
@@ -80,6 +82,13 @@ CONFIGURE_ENV+=		ac_cv_path_dpms=${DPMS_ENV:Q}
 CONFIGURE_ARGS+=	--disable-allow-root
 .endif
 
+.if !empty(PKG_OPTIONS:Mpam)
+.  include "../../mk/pam.buildlink3.mk"
+CONFIGURE_ARGS+=	--enable-pam --enable-bad-pam
+.else
+CONFIGURE_ARGS+=	--disable-pam
+.endif
+
 #
 # Special permissions of bin/xlock if any.
 #
@@ -90,6 +99,10 @@ SPECIAL_PERMS+=	bin/xlock ${SETUID_ROOT_PERMS}
 # setgid shadow should be enough for modern Linux
 SPECIAL_PERMS+=	bin/xlock ${REAL_ROOT_USER} shadow 2511
 .endif
+
+EGDIR=			${PREFIX}/share/examples/xlock
+MESSAGE_SUBST+=		EGDIR=${EGDIR:Q}
+INSTALLATION_DIRS+=	${EGDIR}/pam.d
 
 # XXX framework bug: while we don't need it, this would kill
 # the inherited full dependency
@@ -129,3 +142,5 @@ post-install:
 	for file in *.au; do						\
 		${INSTALL_DATA} $$file ${DESTDIR}${XLOCK_SOUNDDIR};	\
 	done
+	${INSTALL_DATA} ${FILESDIR}/pam-xlock-NetBSD \
+	    ${DESTDIR}${EGDIR}/pam.d/xlock-NetBSD

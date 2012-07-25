@@ -1,16 +1,17 @@
-# $NetBSD: Makefile,v 1.95 2012/02/06 12:41:09 wiz Exp $
+# $NetBSD: Makefile,v 1.98 2012/04/01 18:42:02 hans Exp $
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 .include "Makefile.common"
 
-PKGREVISION=		1
 COMMENT=		Multimedia player library
 
 CONFLICTS+=		xine-xcb-[0-9]*
 
 CONFIGURE_ARGS+=	--disable-v4l
+CONFIGURE_ARGS+=	--disable-v4l2
 CONFIGURE_ARGS+=	--disable-real-codecs
+CONFIGURE_ARGS+=	--disable-aalib
 
 BUILDLINK_API_DEPENDS.vcdimager+= vcdimager>=0.7.20nb1
 
@@ -38,6 +39,9 @@ PLIST_VARS+=	oss
 PLIST.oss=	yes
 .endif
 .endif
+
+CPPFLAGS.SunOS+=	-D__u32=uint32_t -DHAVE_SYSI86
+LDFLAGS.SunOS+=		-lresolv
 
 # flac is supported internally; don't know what the plugin is good for
 #.include "../../audio/flac/buildlink3.mk"

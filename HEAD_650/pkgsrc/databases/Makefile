@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.392 2012/01/08 15:08:32 wiz Exp $
+# $NetBSD: Makefile,v 1.399 2012/03/21 22:17:35 mspo Exp $
 #
 
 COMMENT=	Databases
@@ -200,6 +200,7 @@ SUBDIR+=	pear-MDB2_Driver_mysql
 SUBDIR+=	pear-MDB2_Driver_mysqli
 SUBDIR+=	pear-MDB2_Driver_pgsql
 SUBDIR+=	pear-MDB2_Driver_sqlite
+SUBDIR+=	percona-toolkit
 SUBDIR+=	pgadmin3
 SUBDIR+=	pgbouncer
 SUBDIR+=	pgbuildfarm
@@ -305,6 +306,7 @@ SUBDIR+=	py-sqlite2
 SUBDIR+=	py-sqlite3
 SUBDIR+=	py-sybase
 SUBDIR+=	py-table
+SUBDIR+=	py-tokyocabinet
 SUBDIR+=	qdbm
 SUBDIR+=	qdbm-cgi
 SUBDIR+=	qdbm-plus
@@ -313,15 +315,15 @@ SUBDIR+=	rdb
 SUBDIR+=	rrdtool
 SUBDIR+=	rrdtool12
 SUBDIR+=	ruby-activeldap
-SUBDIR+=	ruby-activerecord
 SUBDIR+=	ruby-activerecord-cassandra
 SUBDIR+=	ruby-activerecord-odbc
 SUBDIR+=	ruby-activerecord3
 SUBDIR+=	ruby-activerecord31
+SUBDIR+=	ruby-activerecord32
 SUBDIR+=	ruby-acts-as-versioned
-SUBDIR+=	ruby-acts-as-versioned02
 SUBDIR+=	ruby-arel
 SUBDIR+=	ruby-arel20
+SUBDIR+=	ruby-arel22
 SUBDIR+=	ruby-cassandra
 SUBDIR+=	ruby-data_objects
 SUBDIR+=	ruby-datamapper
@@ -371,7 +373,6 @@ SUBDIR+=	ruby-mysql
 SUBDIR+=	ruby-odbc
 SUBDIR+=	ruby-pg
 SUBDIR+=	ruby-postgres-pr
-SUBDIR+=	ruby-postgresql
 SUBDIR+=	ruby-qdbm
 SUBDIR+=	ruby-rrdtool
 SUBDIR+=	ruby-sequel

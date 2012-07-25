@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.18 2012/01/24 09:11:11 sbd Exp $
+# $NetBSD: Makefile,v 1.21 2012/03/21 18:02:21 brook Exp $
 
 DISTNAME=	freeradius-server-${RADVER}
 PKGNAME=	${DISTNAME:S/-server//}
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	net
 MASTER_SITES=	ftp://ftp.freeradius.org/pub/freeradius/
 EXTRACT_SUFX=	.tar.bz2
@@ -120,7 +120,7 @@ EGFILES=acct_users attrs attrs.access_reject attrs.accounting_response \
 	sql/postgresql/update_radacct_group_trigger.sql \
 	sql/postgresql/voip-postpaid.conf sqlippool.conf templates.conf users
 EGDIRS=	certs certs/demoCA modules sql sql/mssql sql/mysql sql/oracle \
-	sql/postgresql sites-available
+	sql/postgresql sites-available sites-enabled
 
 .for f in ${EGFILES}
 CONF_FILES_PERMS+=	${EGDIR}/${f} ${PKG_SYSCONFDIR}/${f} \
@@ -134,6 +134,10 @@ INSTALLATION_DIRS+=	${PKG_SYSCONFDIR}/${d}
 OWN_DIRS_PERMS+=	${PKG_SYSCONFDIR}/certs ${RADIUS_USER} \
 			${RADIUS_GROUP} 750
 OWN_DIRS_PERMS+=	${PKG_SYSCONFDIR}/certs/demoCA ${RADIUS_USER} \
+			${RADIUS_GROUP} 750
+OWN_DIRS_PERMS+=	${PKG_SYSCONFDIR}/modules ${RADIUS_USER} \
+			${RADIUS_GROUP} 750
+OWN_DIRS_PERMS+=	${PKG_SYSCONFDIR}/sites-enabled ${RADIUS_USER} \
 			${RADIUS_GROUP} 750
 
 .include "../../mk/pthread.buildlink3.mk"

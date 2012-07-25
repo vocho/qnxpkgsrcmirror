@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.47 2012/01/11 22:41:46 tron Exp $
+# $NetBSD: Makefile,v 1.49 2012/03/07 00:19:08 elric Exp $
 
 DISTNAME=	rtorrent-0.8.9
 PKGREVISION=	2

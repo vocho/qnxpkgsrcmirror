@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.70 2012/02/06 12:41:49 wiz Exp $
+# $NetBSD: Makefile,v 1.73 2012/03/08 11:44:43 wiz Exp $
 
 DISTNAME=	openbox-3.5.0
-PKGREVISION=	2
+PKGREVISION=	4
 CATEGORIES=	wm x11
 MASTER_SITES=	http://openbox.org/dist/openbox/
 
-MAINTAINER=	wiz@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://openbox.org/
 COMMENT=	Standards compliant, light-weight, and extensible window manager
 LICENSE=	gnu-gpl-v2
@@ -40,7 +40,7 @@ SUBST_STAGE.python=	pre-build
 SUBST_FILES.python+=	data/autostart/openbox-xdg-autostart
 # Best we can do without pulling in a python dependency.
 # Update when PYTHON_VERSION_DEFAULT changes!
-SUBST_SED.python+=      -e 's,/usr/bin/env.*python,${PREFIX}/bin/python2.6,'
+SUBST_SED.python+=      -e 's,/usr/bin/env.*python,${PREFIX}/bin/python2.7,'
 SUBST_MESSAGE.python=	Fixing path to python.
 CHECK_INTERPRETER_SKIP=	libexec/openbox-xdg-autostart
 

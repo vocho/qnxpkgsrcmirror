@@ -1,6 +1,6 @@
 $NetBSD$
 
---- nsprpub/pr/src/misc/prtime.c.orig	2011-09-22 20:20:37.000000000 +0000
+--- nsprpub/pr/src/misc/prtime.c.orig	2012-03-13 01:37:10.000000000 +0000
 +++ nsprpub/pr/src/misc/prtime.c
 @@ -52,6 +52,9 @@
  #include <ctype.h>

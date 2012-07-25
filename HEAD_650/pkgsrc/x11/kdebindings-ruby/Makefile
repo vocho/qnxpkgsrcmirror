@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.25 2012/02/06 12:42:17 wiz Exp $
+# $NetBSD: Makefile,v 1.28 2012/03/28 15:22:03 taca Exp $
 
 DISTNAME=	kdebindings-${_KDE_VERSION}
 PKGNAME=	kdebindings-ruby-${_KDE_VERSION}
-PKGREVISION=	13
+PKGREVISION=	15
 CATEGORIES=	x11
 COMMENT=	Ruby bindings for the KDE integrated X11 desktop
 
@@ -18,6 +18,7 @@ CONFIGURE_ARGS+=	--without-java
 CONFIGURE_ARGS+=	--without-pythondir
 CONFIGURE_ENV+=		DO_NOT_COMPILE="dcopperl python kjsembed qtsharp"
 
+RUBY_VERSION_SUPPORTED= 18
 REPLACE_RUBY+= \
 	qtruby/bin/rbqtapi \
 	qtruby/bin/rbqtsh

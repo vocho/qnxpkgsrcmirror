@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.426 2012/02/22 15:31:05 wiz Exp $
+# $NetBSD: Makefile,v 1.430 2012/03/26 09:27:27 markd Exp $
 #
 
 COMMENT=	Security tools
@@ -95,10 +95,13 @@ SUBDIR+=	jessie
 SUBDIR+=	john
 SUBDIR+=	keepassx
 SUBDIR+=	keychain
+SUBDIR+=	kgpg
 SUBDIR+=	knc
+SUBDIR+=	ksecrets
 SUBDIR+=	kssh
 SUBDIR+=	kstart
 SUBDIR+=	kth-krb4
+SUBDIR+=	kwallet
 SUBDIR+=	lasso
 SUBDIR+=	libassuan
 SUBDIR+=	libassuan2
@@ -133,6 +136,7 @@ SUBDIR+=	libssh2
 SUBDIR+=	libtasn1
 SUBDIR+=	libtcpa
 SUBDIR+=	libtomcrypt
+SUBDIR+=	libyubikey
 SUBDIR+=	logcheck
 SUBDIR+=	lsh
 SUBDIR+=	lua-sec
@@ -254,6 +258,7 @@ SUBDIR+=	pam-pwauth_suid
 SUBDIR+=	pam-radius
 SUBDIR+=	pam-saml
 SUBDIR+=	pam-tacplus
+SUBDIR+=	pam-yubico
 SUBDIR+=	pam_ssh_agent_auth
 SUBDIR+=	pcsc-lite
 SUBDIR+=	pcsc-tools
@@ -329,6 +334,7 @@ SUBDIR+=	ruby-net-ssh
 SUBDIR+=	ruby-net-ssh-gateway
 SUBDIR+=	ruby-oauth
 SUBDIR+=	ruby-password
+SUBDIR+=	ruby-rc4
 SUBDIR+=	ruby-roauth
 SUBDIR+=	ruby-simple_oauth
 SUBDIR+=	ruby-soauth
@@ -374,6 +380,8 @@ SUBDIR+=	uvscan
 SUBDIR+=	xml-security-c
 SUBDIR+=	xmlsec1
 SUBDIR+=	yafic
+SUBDIR+=	ykclient
+SUBDIR+=	ykpers
 SUBDIR+=	zebedee
 SUBDIR+=	zkt
 

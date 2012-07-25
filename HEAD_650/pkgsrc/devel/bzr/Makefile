@@ -1,9 +1,10 @@
-# $NetBSD: Makefile,v 1.53 2011/11/27 13:31:23 cheusov Exp $
+# $NetBSD: Makefile,v 1.56 2012/03/23 21:56:55 marino Exp $
 
 DISTNAME=		bzr-${VER}
+PKGREVISION=		1
 CATEGORIES=		devel scm
 MASTER_SITES=		http://launchpad.net/bzr/${VER:R}/${VER}/+download/
-VER=			2.4.2
+VER=			2.5.0
 
 MAINTAINER=		ddeus.pkgsrc@mailnull.com
 HOMEPAGE=		http://bazaar-vcs.org/
@@ -16,7 +17,7 @@ BUILD_DEPENDS+=		${PYPKGPREFIX}-pyrex>=0:../../lang/py-pyrex
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
-USE_TOOLS+=		gmake
+USE_TOOLS+=		gmake msgfmt
 
 PY_PATCHPLIST=		yes
 PYDISTUTILSPKG=		yes

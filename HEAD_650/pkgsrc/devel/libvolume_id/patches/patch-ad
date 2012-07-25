@@ -1,7 +1,7 @@
 $NetBSD: patch-ad,v 1.4 2011/07/26 14:17:53 hans Exp $
 
---- util.h.orig	2007-12-27 01:51:05.000000000 +0100
-+++ util.h	2011-07-26 16:07:46.734800140 +0200
+--- util.h.orig	2007-12-27 00:51:05.000000000 +0000
++++ util.h
 @@ -19,7 +19,7 @@
  #  include <config.h>
  #endif
@@ -11,7 +11,7 @@ $NetBSD: patch-ad,v 1.4 2011/07/26 14:17:53 hans Exp $
  #include <sys/endian.h>
  
  #define __BYTE_ORDER            _BYTE_ORDER
-@@ -29,6 +29,33 @@
+@@ -29,6 +29,43 @@
  #define bswap_16                bswap16
  #define bswap_32                bswap32
  #define bswap_64                bswap64
@@ -42,6 +42,16 @@ $NetBSD: patch-ad,v 1.4 2011/07/26 14:17:53 hans Exp $
 +#define bswap_32		BSWAP_32
 +#define bswap_64		BSWAP_64
 +
++#elif defined(__QNXNTO__)
++#include <sys/param.h>
++#include <gulliver.h>
++#define __BYTE_ORDER            BYTE_ORDER
++#define __LITTLE_ENDIAN         LITTLE_ENDIAN
++#define __BIG_ENDIAN            BIG_ENDIAN
++
++#define bswap_16                ENDIAN_SWAP16
++#define bswap_32                ENDIAN_SWAP32
++#define bswap_64                ENDIAN_SWAP64
  #else
  #include <endian.h>
  #include <byteswap.h>

@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.4 2012/02/06 12:41:44 wiz Exp $
+# $NetBSD: Makefile,v 1.6 2012/03/15 11:53:40 obache Exp $
 #
 
 DISTNAME=	libplist-1.4
-PKGREVISION=	2
+PKGREVISION=	4
 CATEGORIES=	textproc
 MASTER_SITES=	http://www.libimobiledevice.org/downloads/
 EXTRACT_SUFX=	.tar.bz2

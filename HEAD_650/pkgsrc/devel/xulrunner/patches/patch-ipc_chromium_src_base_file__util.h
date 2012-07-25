@@ -1,8 +1,10 @@
-$NetBSD: patch-ipc_chromium_src_base_file__util.h,v 1.1 2011/07/11 12:46:14 tnn Exp $
+$NetBSD: patch-ipc_chromium_src_base_file__util.h,v 1.3 2012/05/08 19:29:36 martin Exp $
 
---- ipc/chromium/src/base/file_util.h.orig	2011-08-11 21:41:01.000000000 +0000
+# Reported upstream: https://bugzilla.mozilla.org/show_bug.cgi?id=753046
+
+--- ipc/chromium/src/base/file_util.h.orig	2012-04-20 22:03:52.000000000 +0000
 +++ ipc/chromium/src/base/file_util.h
-@@ -12,11 +12,12 @@
+@@ -12,12 +12,12 @@
  
  #if defined(OS_WIN)
  #include <windows.h>
@@ -10,14 +12,14 @@ $NetBSD: patch-ipc_chromium_src_base_file__util.h,v 1.1 2011/07/11 12:46:14 tnn 
 +#elif defined(ANDROID) || defined(OS_QNX)
  #include <sys/stat.h>
  #elif defined(OS_POSIX) 
+ #include <sys/types.h>
 -#include <fts.h>
-+#include <sys/types.h>
  #include <sys/stat.h>
 +#include <fts.h>
  #endif
  
  #include <stdio.h>
-@@ -465,9 +466,9 @@ class FileEnumerator {
+@@ -466,9 +466,9 @@ class FileEnumerator {
  #if defined(OS_WIN)
    WIN32_FIND_DATA find_data_;
    HANDLE find_handle_;

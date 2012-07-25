@@ -1,8 +1,8 @@
-$NetBSD: patch-aa,v 1.8 2011/11/12 12:45:04 tnn Exp $
+$NetBSD: patch-aa,v 1.10 2012/04/26 13:30:29 ryoon Exp $
 
---- configure.in.orig	2011-11-04 21:33:54.000000000 +0000
+--- configure.in.orig	2012-04-20 22:03:44.000000000 +0000
 +++ configure.in
-@@ -1481,6 +1481,14 @@ OS_2)
+@@ -1444,6 +1444,14 @@ OS_2)
      OS_TARGET=OS2
      OS_RELEASE=`uname -v`
      ;;
@@ -14,10 +14,10 @@ $NetBSD: patch-aa,v 1.8 2011/11/12 12:45:04 tnn Exp $
 +    fi
 +    OS_TEST=`uname -p | sed -e 's/x86/i386/'`
 +    ;;
- SCO_SV)
-     OS_ARCH=SCOOS
-     OS_RELEASE=5.0
-@@ -2137,7 +2145,7 @@ case "$target" in
+ Darwin)
+     case "${target_cpu}" in
+     powerpc*)
+@@ -2413,7 +2421,7 @@ case "$target" in
      MOZ_FIX_LINK_PATHS='-Wl,-executable_path,$(LIBXUL_DIST)/bin'
      ;;
  
@@ -26,17 +26,17 @@ $NetBSD: patch-aa,v 1.8 2011/11/12 12:45:04 tnn Exp $
      if test `test -x /usr/bin/objformat && /usr/bin/objformat || echo elf` != "elf"; then
  	DLL_SUFFIX=".so.1.0"
  	DSO_LDOPTS="-shared"
-@@ -2145,6 +2153,9 @@ case "$target" in
+@@ -2421,6 +2429,9 @@ case "$target" in
      if test ! "$GNU_CC"; then
  	DSO_LDOPTS="-Bshareable $DSO_LDOPTS"
      fi
 +    if test "$LIBRUNPATH"; then
-+       DSO_LDOPTS="-Wl,-R$LIBRUNPATH $DSO_LDOPTS"
++	DSO_LDOPTS="-Wl,-R$LIBRUNPATH $DSO_LDOPTS"
 +    fi
-     ;; 
+     ;;
  
  ia64*-hpux*)
-@@ -2522,6 +2533,35 @@ ia64*-hpux*)
+@@ -2722,6 +2733,35 @@ ia64*-hpux*)
      MKCSHLIB='$(CC) $(CFLAGS) $(DSO_PIC_CFLAGS) $(DSO_LDOPTS) -Wl,-soname,lib$(LIBRARY_NAME)$(DLL_SUFFIX) -o $@'
      ;;
  
@@ -50,7 +50,7 @@ $NetBSD: patch-aa,v 1.8 2011/11/12 12:45:04 tnn Exp $
 +	OS_TARGET=NTO
 +	WARNINGS_AS_ERRORS=''
 +	MOZ_OPTIMIZE_FLAGS="-O"
-+	MOZ_DEBUG_FLAGS="-gstabs"
++	MOZ_DEBUG_FLAGS="-O0 -g"
 +	USE_PTHREADS=1
 +	_PEDANTIC=
 +	LIBS="$LIBS -lsocket -lstdc++ -lm"
@@ -72,7 +72,7 @@ $NetBSD: patch-aa,v 1.8 2011/11/12 12:45:04 tnn Exp $
  *-openbsd*)
      if test "$SO_VERSION"; then
          DLL_SUFFIX=".so.$SO_VERSION"
-@@ -3312,6 +3352,12 @@ dnl ====================================
+@@ -3412,6 +3452,12 @@ dnl ====================================
  case $target in
  *-hpux11.*)
  	;;
@@ -85,7 +85,7 @@ $NetBSD: patch-aa,v 1.8 2011/11/12 12:45:04 tnn Exp $
  *)
  	AC_CHECK_LIB(c_r, gethostbyname_r)
  	;;
-@@ -4520,6 +4566,14 @@ if test -n "$YASM"; then
+@@ -4358,6 +4404,14 @@ if test -n "$YASM"; then
    _YASM_BUILD=`        echo ${YASM_VERSION} | $AWK -F\. '{ print $4 }'`
  fi
  
@@ -100,16 +100,21 @@ $NetBSD: patch-aa,v 1.8 2011/11/12 12:45:04 tnn Exp $
  if test -z "$SKIP_LIBRARY_CHECKS"; then
  dnl system JPEG support
  dnl ========================================================
-@@ -7439,7 +7493,7 @@ else
-   *-mingw*)
-     AC_DEFINE(MOZ_MEMORY_WINDOWS)
-     AC_MSG_CHECKING([for VC2005/2008++ CRT source])
--    if test "$CC_VERSION" == "14.00.50727.762" -o "$CC_VERSION" == "15.00.30729.01"; then
-+    if test "$CC_VERSION" = "14.00.50727.762" -o "$CC_VERSION" = "15.00.30729.01"; then
-       if test -z "$WIN32_CRT_SRC_DIR" -a -n "$VCINSTALLDIR"; then
-         WIN32_CRT_SRC_DIR="$VCINSTALLDIR\crt\src"
-       fi
-@@ -9516,6 +9570,8 @@ if test -z "$MOZ_NATIVE_NSPR"; then
+@@ -5732,11 +5786,11 @@ if test -n "$MOZ_WEBM" -a -z "$MOZ_NATIV
+ 
+     dnl See if we have assembly on this platform.
+     case "$OS_ARCH:$CPU_ARCH" in
+-    Linux:x86)
++    Linux:x86|DragonFly:x86|*BSD:i386)
+       VPX_ASFLAGS="-f elf32 -rnasm -pnasm"
+       VPX_X86_ASM=1
+     ;;
+-    Linux:x86_64)
++    Linux:x86_64|DragonFly:x86_64|*BSD:x86_64)
+       VPX_ASFLAGS="-f elf64 -rnasm -pnasm -DPIC"
+       VPX_X86_ASM=1
+     ;;
+@@ -9102,6 +9156,8 @@ if test -z "$MOZ_NATIVE_NSPR"; then
      AC_MSG_WARN([Recreating autoconf.mk with updated nspr-config output])
      if test "$OS_ARCH" != "WINNT"; then
         NSPR_LIBS=`./nsprpub/config/nspr-config --prefix=$LIBXUL_DIST --exec-prefix=$MOZ_BUILD_ROOT/dist --libdir=$LIBXUL_DIST/lib --libs`

@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.8 2012/02/06 12:39:49 wiz Exp $
+# $NetBSD: Makefile,v 1.10 2012/03/26 14:00:05 joerg Exp $
 #
 
 DISTNAME=	ethos-0.2.2
-PKGREVISION=	6
+PKGREVISION=	7
 CATEGORIES=	devel
 MASTER_SITES=	http://ftp.dronelabs.com/sources/ethos/0.2/
 
@@ -21,6 +21,8 @@ PKGCONFIG_OVERRIDE+=	ethos-ui.pc.in
 PKGCONFIG_OVERRIDE+=	ethos.pc.in
 
 TEST_TARGET=	check
+
+BUILDLINK_TRANSFORM+=	rm:-DG_DISABLE_DEPRECATED
 
 .include "../../devel/glib2/buildlink3.mk"
 .include "../../x11/gtk2/buildlink3.mk"

@@ -1,7 +1,7 @@
 $NetBSD: patch-ac,v 1.19 2008/07/20 23:35:20 dbj Exp $
 
---- unix/tcl.m4.orig	2007-09-21 10:04:18.000000000 -0700
-+++ unix/tcl.m4	2008-04-16 15:30:21.000000000 -0700
+--- unix/tcl.m4.orig	2008-02-06 15:39:07.000000000 +0000
++++ unix/tcl.m4
 @@ -1033,6 +1033,7 @@ AC_DEFUN([SC_CONFIG_CFLAGS], [
      # Step 3: set configuration options based on system name and version.
  
@@ -80,7 +80,35 @@ $NetBSD: patch-ac,v 1.19 2008/07/20 23:35:20 dbj Exp $
  		if test $tcl_cv_ld_elf = yes; then
  		    SHARED_LIB_SUFFIX='${TCL_TRIM_DOTS}\$\{DBGX\}.so'
  		else
-@@ -1933,6 +1950,9 @@ dnl AC_CHECK_TOOL(AR, ar)
+@@ -1756,18 +1773,22 @@ dnl AC_CHECK_TOOL(AR, ar)
+ 	    fi
+ 
+ 	    ;;
+-	QNX-6*)
++	QNX-[68]*)
+ 	    # QNX RTP
+ 	    # This may work for all QNX, but it was only reported for v6.
+ 	    SHLIB_CFLAGS="-fPIC"
+-	    SHLIB_LD="ld -Bshareable -x"
+-	    SHLIB_LD_LIBS=""
++	    SHLIB_LD='${CC} -shared ${CFLAGS} ${LDFLAGS}'
++	    SHLIB_LD_LIBS='${LIBS}'
+ 	    SHLIB_SUFFIX=".so"
+ 	    DL_OBJS="tclLoadDl.o"
+ 	    # dlopen is in -lc on QNX
+ 	    DL_LIBS=""
+-	    CC_SEARCH_FLAGS=""
+-	    LD_SEARCH_FLAGS=""
++	    LDFLAGS="$LDFLAGS -Wl,--export-dynamic"
++	    CC_SEARCH_FLAGS='-Wl,-rpath,${LIB_RUNTIME_DIR}'
++	    LD_SEARCH_FLAGS=${CC_SEARCH_FLAGS}
++	    SHARED_LIB_SUFFIX='${TCL_TRIM_DOTS}\$\{DBGX\}.so'
++	    UNSHARED_LIB_SUFFIX='${TCL_TRIM_DOTS}\$\{DBGX\}.a'
++	    TCL_LIB_VERSIONS_OK=nodots
+ 	    ;;
+ 	RISCos-*)
+ 	    SHLIB_CFLAGS="-G 0"
+@@ -1933,6 +1954,9 @@ dnl AC_CHECK_TOOL(AR, ar)
  		CC_SEARCH_FLAGS='-Wl,-R,${LIB_RUNTIME_DIR}'
  		LD_SEARCH_FLAGS='-R ${LIB_RUNTIME_DIR}'
  	    fi
@@ -90,7 +118,7 @@ $NetBSD: patch-ac,v 1.19 2008/07/20 23:35:20 dbj Exp $
  	    ;;
  	ULTRIX-4.*)
  	    SHLIB_CFLAGS="-G 0"
-@@ -2117,8 +2137,8 @@ dnl # preprocessing tests use only CPPFL
+@@ -2117,8 +2141,8 @@ dnl # preprocessing tests use only CPPFL
  
      if test "${SHARED_BUILD}" = "1" && test "${SHLIB_SUFFIX}" != "" ; then
          LIB_SUFFIX=${SHARED_LIB_SUFFIX}
@@ -101,7 +129,7 @@ $NetBSD: patch-ac,v 1.19 2008/07/20 23:35:20 dbj Exp $
      else
          LIB_SUFFIX=${UNSHARED_LIB_SUFFIX}
  
-@@ -2148,10 +2168,10 @@ dnl        esac
+@@ -2148,10 +2172,10 @@ dnl        esac
  
      # Stub lib does not depend on shared/static configuration
      if test "$RANLIB" = "" ; then

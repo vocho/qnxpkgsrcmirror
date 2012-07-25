@@ -1,28 +1,17 @@
-# $NetBSD: options.mk,v 1.11 2012/01/05 07:53:49 sbd Exp $
+# $NetBSD: options.mk,v 1.13 2012/04/26 13:30:29 ryoon Exp $
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.xulrunner
 PKG_SUPPORTED_OPTIONS=	debug mozilla-jemalloc gnome pulseaudio audio
 
-PLIST_VARS+=	jit gnome jemalloc debug audio
+PLIST_VARS+=	gnome jemalloc debug audio
 
 .if ${OPSYS} == "Linux" || ${OPSYS} == "SunOS"
 PKG_SUGGESTED_OPTIONS+=	mozilla-jemalloc
 .endif
 
-
 # until QNX audio is figured out
 .if ${OPSYS} != "QNX"
 PKG_SUGGESTED_OPTIONS+=	audio
-.endif
-
-.if !empty(MACHINE_ARCH:Mi386) || !empty(MACHINE_ARCH:Msparc) || \
-	!empty(MACHINE_ARCH:Marm) || !empty(MACHINE_ARCH:Mx86_64)
-PKG_SUPPORTED_OPTIONS+=	mozilla-jit
-PKG_SUGGESTED_OPTIONS+=	mozilla-jit
-NANOJIT_ARCH.i386=	i386
-NANOJIT_ARCH.arm=	ARM
-NANOJIT_ARCH.sparc=	Sparc
-NANOJIT_ARCH.x86_64=	X64
 .endif
 
 .include "../../mk/bsd.options.mk"
@@ -60,14 +49,6 @@ PLIST.debug=		yes
 .else
 CONFIGURE_ARGS+=	--disable-debug --disable-debug-symbols
 CONFIGURE_ARGS+=	--enable-install-strip
-.endif
-
-.if !empty(PKG_OPTIONS:Mmozilla-jit)
-PLIST.jit=		yes
-PLIST_SUBST+=		NANOJIT_ARCH=${NANOJIT_ARCH.${MACHINE_ARCH}}
-CONFIGURE_ARGS+=	--enable-tracejit
-.else
-CONFIGURE_ARGS+=	--disable-tracejit
 .endif
 
 .if !empty(PKG_OPTIONS:Mpulseaudio)

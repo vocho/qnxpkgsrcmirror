@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.223 2012/02/09 12:42:21 drochner Exp $
+# $NetBSD: Makefile,v 1.228 2012/04/01 18:00:02 brook Exp $
 
 COMMENT=	Mathematics
 
@@ -10,6 +10,7 @@ SUBDIR+=	R-ISwR
 SUBDIR+=	R-PHYLOGR
 SUBDIR+=	R-R2HTML
 SUBDIR+=	R-RArcInfo
+SUBDIR+=	R-RandomFields
 SUBDIR+=	R-Rcmdr
 SUBDIR+=	R-XML
 SUBDIR+=	R-abind
@@ -40,6 +41,7 @@ SUBDIR+=	R-randomForest
 SUBDIR+=	R-sgeostat
 SUBDIR+=	R-shapefiles
 SUBDIR+=	R-sp
+SUBDIR+=	R-splancs
 SUBDIR+=	R-statmod
 SUBDIR+=	R-wle
 SUBDIR+=	TinySVM
@@ -47,6 +49,7 @@ SUBDIR+=	aamath
 SUBDIR+=	abs
 SUBDIR+=	admesh
 SUBDIR+=	algae
+SUBDIR+=	analitza
 SUBDIR+=	antixls
 SUBDIR+=	aribas
 SUBDIR+=	bc
@@ -54,7 +57,9 @@ SUBDIR+=	blas
 SUBDIR+=	blitz++
 SUBDIR+=	calc
 SUBDIR+=	calcoo
+SUBDIR+=	cantor
 SUBDIR+=	capc-calc
+SUBDIR+=	cgal
 SUBDIR+=	clisp-pari
 SUBDIR+=	cln
 SUBDIR+=	dcdflib.c
@@ -98,6 +103,8 @@ SUBDIR+=	gtklife
 SUBDIR+=	heirloom-factor
 SUBDIR+=	heirloom-units
 SUBDIR+=	itpp
+SUBDIR+=	kalgebra
+SUBDIR+=	kcalc
 SUBDIR+=	kseg
 SUBDIR+=	lapack
 SUBDIR+=	libffm

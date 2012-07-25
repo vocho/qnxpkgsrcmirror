@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.8 2012/02/15 08:50:55 sbd Exp $
+# $NetBSD: Makefile,v 1.11 2012/03/21 08:13:28 wiz Exp $
 
-DISTNAME=	darktable-0.9.3
-PKGREVISION=	2
+DISTNAME=	darktable-1.0
+PKGREVISION=	1
 CATEGORIES=	graphics
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=darktable/}
 
@@ -19,7 +19,6 @@ USE_TOOLS+=		gmake msgfmt pkg-config
 
 CMAKE_ARGS+=	-DGTHREAD_INCLUDE_DIR:PATH=${BUILDLINK_PREFIX.glib2}/include
 CMAKE_ARGS+=	-DGMODULE_INCLUDE_DIR:PATH=${BUILDLINK_PREFIX.glib2}/include
-#CMAKE_ARGS+=	-DUSE_OPENMP=OFF
 CMAKE_ARGS+=	-DUSE_OPENCL=OFF
 
 CMAKE_ARGS+=	-DCMAKE_BUILD_TYPE=Release
@@ -46,13 +45,20 @@ GCC_REQD=	4.2
 CFLAGS+=	-mstackrealign
 .endif
 
+.if ${OPSYS} == "NetBSD"
+CFLAGS+=	-D_NETBSD_SOURCE
+.endif
+
 # for some reason msgfmt can't handle these po files
 post-extract:
 	${RM} ${WRKSRC}/po/cs.po
 	${RM} ${WRKSRC}/po/es.po
 	${RM} ${WRKSRC}/po/fr.po
 	${RM} ${WRKSRC}/po/it.po
+	${RM} ${WRKSRC}/po/ja.po
+	${RM} ${WRKSRC}/po/nl.po
 	${RM} ${WRKSRC}/po/pl.po
+	${RM} ${WRKSRC}/po/ru.po
 	${RM} ${WRKSRC}/po/sv.po
 
 pre-configure:

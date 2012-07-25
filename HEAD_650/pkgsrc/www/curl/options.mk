@@ -1,7 +1,7 @@
 # $NetBSD: options.mk,v 1.7 2010/07/21 18:48:27 drochner Exp $
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.curl
-PKG_SUPPORTED_OPTIONS=	inet6 libssh2 gssapi ldap rtmp
+PKG_SUPPORTED_OPTIONS=	inet6 libssh2 gssapi ldap rtmp spnego
 .include "../../mk/bsd.prefs.mk"
 .if ${OPSYS} == NetBSD
 # Kerberos is built in - no additional dependency
@@ -9,6 +9,12 @@ PKG_SUGGESTED_OPTIONS+=	gssapi
 .endif
 
 .include "../../mk/bsd.options.mk"
+
+.if !empty(PKG_OPTIONS:Mspnego)
+CONFIGURE_ARGS+=	--with-spnego
+.else
+CONFIGURE_ARGS+=	--without-spnego
+.endif
 
 .if !empty(PKG_OPTIONS:Minet6)
 CONFIGURE_ARGS+=	--enable-ipv6

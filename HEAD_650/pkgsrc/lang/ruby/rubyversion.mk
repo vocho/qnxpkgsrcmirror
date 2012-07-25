@@ -1,4 +1,4 @@
-# $NetBSD: rubyversion.mk,v 1.74 2012/02/23 14:15:58 taca Exp $
+# $NetBSD: rubyversion.mk,v 1.77 2012/03/21 15:48:41 taca Exp $
 #
 
 # This file determines which Ruby version is used as a dependency for
@@ -11,7 +11,7 @@
 #	The preferered Ruby version to use.
 #
 #		Possible values: 18 192 193
-#		Default: 192
+#		Default: 193
 #
 # RUBY_BUILD_RDOC
 #	Build rdoc of this package and so that install formated
@@ -35,7 +35,7 @@
 #
 #		Possible values: 18 192 193
 #		Compatible values: 19 (= 192)
-#		Default: 192
+#		Default: 193
 #
 # RUBY_VERSION_REQD
 #	The Ruby versions force to build (for pbulk).
@@ -213,7 +213,7 @@ RUBY19_API_VERSION=	1.9.1
 RUBY193_API_VERSION=	1.9.1
 
 #
-RUBY_VERSION_DEFAULT?=	192
+RUBY_VERSION_DEFAULT?=	193
 
 RUBY_VERSION_SUPPORTED?= 18 192 193
 RUBY_VER?=		${RUBY_VERSION_DEFAULT}
@@ -325,7 +325,11 @@ RUBY_STATICLIB?=	${RUBY_VER}-static.a
 RUBY_SHLIBVER=		${_RUBY_API_MAJOR}.${_RUBY_API_MINOR}
 _RUBY_SHLIBALIAS=	${RUBY_VER}.${RUBY_SLEXT}.${_RUBY_API_MAJOR}
 .elif ${OPSYS} == "FreeBSD" || ${OPSYS} == "DragonFly"  || ${OPSYS} == "QNX"
+.if ${RUBY_VER} == "18" || ${RUBY_VER} == "19"
 RUBY_SHLIBVER=		${RUBY_VER}
+.else
+RUBY_SHLIBVER=		${_RUBY_VER_MAJOR}${_RUBY_VER_MINOR}${_RUBY_API_MINOR}
+.endif
 .elif ${OPSYS} == "OpenBSD"
 RUBY_SHLIBVER=		${_RUBY_VER_MAJOR}.${_RUBY_VER_MINOR}${_RUBY_API_MINOR}
 .elif ${OPSYS} == "Darwin"
@@ -375,8 +379,6 @@ RUBY_DISTNAME?=		ruby-${RUBY_VERSION}
 RUBY_USE_PTHREAD?=	no
 .else
 RUBY_USE_PTHREAD?=	yes
-PTHREAD_OPTS+=		native
-PTHREAD_AUTO_VARS=	yes
 .endif
 
 RUBY_DYNAMIC_DIRS?=	# empty
@@ -508,17 +510,6 @@ RUBY_PLIST_FILES_CMD= ( cd ${DESTDIR}${PREFIX}; \
 RUBY_GENERATE_PLIST =	( \
 	${RUBY_PLIST_COMMENT_CMD}; \
 	${RUBY_PLIST_FILES_CMD} ) > ${RUBY_PLIST_DYNAMIC}
-.endif
-
-.if !empty(RUBY_NOVERSION:M[nN][oO])
-.if empty(RUBY_USE_PTHREAD:M[nN][oO])
-.include "../../mk/pthread.buildlink3.mk"
-.endif
-.include "../../mk/bdb.buildlink3.mk"
-.include "../../converters/libiconv/buildlink3.mk"
-.include "../../devel/zlib/buildlink3.mk"
-.include "../../security/openssl/buildlink3.mk"
-.include "../../mk/dlopen.buildlink3.mk"
 .endif
 
 PRINT_PLIST_AWK+=	/lib\/libruby${RUBY_STATICLIB}$$/ \

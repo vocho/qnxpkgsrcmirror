@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.60 2012/01/18 13:59:11 adam Exp $
+# $NetBSD: Makefile,v 1.62 2012/03/31 02:12:34 ryoon Exp $
 
 .include "dist.mk"
 
@@ -59,6 +59,10 @@ PY_PLATNAME=	${LOWER_OPSYS}${OS_VERSION:C/\..*//}
 .endif
 PLIST_SUBST+=	PY_PLATNAME=${PY_PLATNAME:Q}
 
+.if ${PY_PLATNAME} == "linux2"
+PLIST_SRC+=     ${.CURDIR}/../../lang/python24/PLIST.Linux2
+.endif
+
 .if (${MACHINE_ARCH} == "alpha") || (${MACHINE_ARCH} == "amd64") || \
     (${MACHINE_ARCH} == "sparc64") || (${MACHINE_ARCH} == "x86_64") || \
     (defined(ABI) && ${ABI} == "64")
@@ -82,7 +86,7 @@ PLIST.extra-so=	yes
 # ossaudiodev is only available on x86 for the following platforms
 PLIST_VARS+=	oss
 .if (${MACHINE_ARCH} == "i386") && \
-    (${PY_PLATNAME} == "linux2" || ${OPSYS} == "FreeBSD")
+    ${PY_PLATNAME} == "linux2"
 PLIST.oss=	yes
 .elif (${MACHINE_ARCH} == "x86_64") && (${PY_PLATNAME} == "linux2")
 PLIST.oss=	yes

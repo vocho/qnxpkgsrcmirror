@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.4 2012/02/12 13:43:21 obache Exp $
+# $NetBSD: Makefile,v 1.6 2012/03/16 04:31:16 obache Exp $
 #
 
 DISTNAME=	salt-0.9.5
+PKGREVISION=	2
 CATEGORIES=	sysutils
 MASTER_SITES=	http://cloud.github.com/downloads/saltstack/salt/
 
