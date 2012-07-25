@@ -1,6 +1,6 @@
-$NetBSD: patch-aa-toplevel,v 1.4 2011/11/12 16:41:43 tnn Exp $
+$NetBSD: patch-aa-toplevel,v 1.6 2012/03/19 10:35:57 ryoon Exp $
 
---- configure.in.orig	2011-11-07 20:53:31.000000000 +0000
+--- configure.in.orig	2012-03-13 05:23:11.000000000 +0000
 +++ configure.in
 @@ -1950,7 +1950,7 @@ ld.])
      MOZ_FIX_LINK_PATHS='-Wl,-executable_path,$(LIBXUL_DIST)/bin'
@@ -21,7 +21,7 @@ $NetBSD: patch-aa-toplevel,v 1.4 2011/11/12 16:41:43 tnn Exp $
      ;; 
  
  ia64*-hpux*)
-@@ -3198,6 +3201,9 @@ dnl ====================================
+@@ -3231,6 +3234,9 @@ dnl ====================================
  case $target in
  *-hpux11.*)
  	;;

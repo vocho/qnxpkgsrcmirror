@@ -33,6 +33,9 @@ CCARGS+=	-DUSE_TLS
 AUXLIBS+=	-L${BUILDLINK_PREFIX.openssl}/lib			\
 		${COMPILER_RPATH_FLAG}${BUILDLINK_PREFIX.openssl}/lib	\
 		-lssl -lcrypto
+.  if ${OPSYS} == "QNX"
+AUXLIBS+=	-lsocket
+.  endif
 .endif
 
 ###

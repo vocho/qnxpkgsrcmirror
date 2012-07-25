@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.35 2012/02/06 12:40:36 wiz Exp $
+# $NetBSD: Makefile,v 1.37 2012/03/19 22:53:57 markd Exp $
 #
 
 DISTNAME=	showimg-0.9.5
-PKGREVISION=	17
+PKGREVISION=	18
 CATEGORIES=	kde graphics x11
 MASTER_SITES=	# http://www.jalix.org/projects/showimg/download/0.9.5/
 EXTRACT_SUFX=	.tar.bz2
@@ -25,7 +25,7 @@ CONFIGURE_ARGS+=	--without-showimgdb
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../graphics/libexif/buildlink3.mk"
 .include "../../graphics/libkexif/buildlink3.mk"
-.include "../../graphics/libkipi/buildlink3.mk"
+.include "../../graphics/libkipi-kde3/buildlink3.mk"
 .include "../../x11/kdebase3/buildlink3.mk"
 .include "../../x11/libSM/buildlink3.mk"
 .include "../../x11/libX11/buildlink3.mk"

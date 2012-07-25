@@ -46,6 +46,8 @@ CONFIG_SHELL=		${TOOLS_PATH.bash}
 CFLAGS+=		-DIRIX5 -DNEEDS_BSTRING_H
 .endif
 
+LIBS.QNX+=		-lsocket
+
 BUILD_DEFS+=		VARBASE
 
 # paths

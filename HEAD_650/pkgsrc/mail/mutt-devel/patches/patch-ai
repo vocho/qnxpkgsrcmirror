@@ -15,3 +15,12 @@ $NetBSD$
  
    snprintf (s, len,  "Date: %s, %d %s %d %02d:%02d:%02d %+03d%02d\n",
  	    Weekdays[l->tm_wday], l->tm_mday, Months[l->tm_mon],
+@@ -1651,7 +1656,7 @@ static int fold_one_header (FILE *fp, co
+   int first = 1, enc, col = 0, w, l = 0, fold;
+ 
+   dprint(4,(debugfile,"mwoh: pfx=[%s], tag=[%s], flags=%d value=[%s]\n",
+-	    pfx, tag, flags, value));
++	    pfx != NULL ? pfx : "<NULL>", tag, flags, value));
+ 
+   if (tag && *tag && fprintf (fp, "%s%s: ", NONULL (pfx), tag) < 0)
+     return -1;

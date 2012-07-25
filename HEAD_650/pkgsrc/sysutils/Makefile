@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.533 2012/01/28 07:08:19 jnemeth Exp $
+# $NetBSD: Makefile,v 1.538 2012/03/22 06:40:01 markd Exp $
 #
 
 COMMENT=	System utilities
@@ -107,6 +107,7 @@ SUBDIR+=	fatback
 SUBDIR+=	fdupes
 SUBDIR+=	file
 SUBDIR+=	filelight
+SUBDIR+=	filelight-kde3
 SUBDIR+=	findutils
 SUBDIR+=	fix4SA110rev2
 SUBDIR+=	fixelfprot
@@ -226,7 +227,11 @@ SUBDIR+=	iwi-firmware
 SUBDIR+=	iwi-firmware3
 SUBDIR+=	iwn-firmware
 SUBDIR+=	k3b
+SUBDIR+=	k3b-kde3
+SUBDIR+=	k4dirstat
+SUBDIR+=	kdf
 SUBDIR+=	kdirstat
+SUBDIR+=	kfloppy
 SUBDIR+=	krusader
 SUBDIR+=	lambd
 SUBDIR+=	lavaps
@@ -243,6 +248,7 @@ SUBDIR+=	libvirt
 SUBDIR+=	lilo
 SUBDIR+=	logfinder
 SUBDIR+=	logrot
+SUBDIR+=	logrotate
 SUBDIR+=	lsof
 SUBDIR+=	magicrescue
 SUBDIR+=	mbmon
@@ -264,7 +270,6 @@ SUBDIR+=	monit
 SUBDIR+=	mrsync
 SUBDIR+=	mtools
 SUBDIR+=	mtoolsfm
-SUBDIR+=	mtree
 SUBDIR+=	mtscan
 SUBDIR+=	munin-doc
 SUBDIR+=	munin-node

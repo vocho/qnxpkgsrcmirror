@@ -1,7 +1,7 @@
 $NetBSD: patch-ab,v 1.4 2011/07/26 14:17:53 hans Exp $
 
---- linux_raid.c.orig	2007-12-27 02:03:43.000000000 +0100
-+++ linux_raid.c	2011-07-26 16:10:13.635691474 +0200
+--- linux_raid.c.orig	2007-12-27 01:03:43.000000000 +0000
++++ linux_raid.c
 @@ -22,9 +22,9 @@
  #include <string.h>
  #include <errno.h>
@@ -10,7 +10,7 @@ $NetBSD: patch-ab,v 1.4 2011/07/26 14:17:53 hans Exp $
 +#if defined(__FreeBSD__) || defined(__NetBSD__) || defined(__DragonFly__)
  #include <sys/endian.h>
 -#else
-+#elif !defined(__APPLE__) && !defined(__sun)
++#elif !defined(__APPLE__) && !defined(__sun) && !defined(__QNXNTO__)
  #include <byteswap.h>
  #endif /* __FreeBSD__ */
  

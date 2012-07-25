@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.64 2012/02/06 12:39:58 wiz Exp $
+# $NetBSD: Makefile,v 1.71 2012/04/26 13:30:29 ryoon Exp $
 
 .include "dist.mk"
 PKGNAME=	xulrunner-${MOZ_BRANCH}${MOZ_BRANCH_MINOR}
-PKGREVISION=	4
 CATEGORIES=	devel www
 
 MAINTAINER=	tnn@NetBSD.org
@@ -28,13 +27,11 @@ ALL_ENV+=		MOZILLA_PKG_NAME=xulrunner
 
 MAKE_ENV+=		FREEBL_NO_DEPEND=0
 
+# workround for link of xulrunner-bin etc.
+LDFLAGS+=		-Wl,-rpath,${PREFIX}/lib/xulrunner -Wl,-rpath,${PREFIX}/lib
+
 .include "mozilla-common.mk"
 .include "options.mk"
-
-.if (${OPSYS} == "Linux" || ${OPSYS} == "SunOS" || ${OPSYS} == "Darwin") && \
-    (${MACHINE_ARCH} == "i386" || ${MACHINE_ARCH} == "x86_64")
-BUILD_DEPENDS+=		yasm>=1.1.0:../../devel/yasm
-.endif
 
 pre-configure:
 	cd ${WRKSRC} && autoconf
@@ -56,5 +53,9 @@ post-install:
 	${INSTALL_PROGRAM_DIR} ${DESTDIR}${PREFIX}/lib/xulrunner-sdk/sdk/bin
 	${INSTALL_SCRIPT} ${WRKSRC}/dist/sdk/bin/xpt.py			\
 	  ${DESTDIR}${PREFIX}/lib/xulrunner-sdk/sdk/bin
+	${INSTALL_LIB} ${WRKSRC}/mozglue/build/libmozglue.a		\
+		${DESTDIR}${PREFIX}/lib/xulrunner
+	${INSTALL_LIB} ${WRKSRC}/mozglue/build/libmozglue.a		\
+		${DESTDIR}${PREFIX}/lib/xulrunner-sdk/sdk/lib
 
 .include "../../mk/bsd.pkg.mk"

@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.13 2012/01/09 02:54:28 obache Exp $
+# $NetBSD: Makefile,v 1.15 2012/03/09 12:34:18 wiz Exp $
 
 PKGNAME=	usrp-docs-${VERSION}
-PKGREVISION=	2
+PKGREVISION=	4
 COMMENT=	Documentation for the usrp module
 
 PKG_DESTDIR_SUPPORT=	user-destdir

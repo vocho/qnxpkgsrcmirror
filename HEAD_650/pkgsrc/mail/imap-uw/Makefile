@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.134 2011/01/30 01:33:44 markd Exp $
+# $NetBSD: Makefile,v 1.135 2012/03/20 16:34:32 dholland Exp $
 #
 # ATTENTION:
 # The Kerberos support in this software is known to be problematic. If you
@@ -69,6 +69,12 @@ BUILD_TARGET.OpenBSD=	bso
 BUILD_TARGET.QNX=	nto
 BUILD_TARGET.*=		neb
 MESSAGE_SRC=		${PKGDIR}/MESSAGE
+
+# XXX this is not the right approach - should either depend on pam or
+# not, or make it an option.
+.if ${OPSYS} == NetBSD && !exists(/usr/include/security/pam_appl.h)
+.include "../../mk/pam.buildlink3.mk"
+.endif
 
 .include "options.mk"
 

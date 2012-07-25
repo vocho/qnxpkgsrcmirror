@@ -1,8 +1,10 @@
-$NetBSD: patch-ipc_chromium_src_chrome_common_ipc__channel__posix.h,v 1.1 2011/07/11 12:46:14 tnn Exp $
+$NetBSD: patch-ipc_chromium_src_chrome_common_ipc__channel__posix.h,v 1.2 2012/05/08 19:29:37 martin Exp $
 
---- ipc/chromium/src/chrome/common/ipc_channel_posix.h.orig	2011-08-11 21:41:01.000000000 +0000
+# Reported upstream: https://bugzilla.mozilla.org/show_bug.cgi?id=753046
+
+--- ipc/chromium/src/chrome/common/ipc_channel_posix.h.orig	2012-04-20 22:03:52.000000000 +0000
 +++ ipc/chromium/src/chrome/common/ipc_channel_posix.h
-@@ -92,7 +92,7 @@ class Channel::ChannelImpl : public Mess
+@@ -95,7 +95,7 @@ class Channel::ChannelImpl : public Mess
    };
  
    // This is a control message buffer large enough to hold kMaxReadFDs

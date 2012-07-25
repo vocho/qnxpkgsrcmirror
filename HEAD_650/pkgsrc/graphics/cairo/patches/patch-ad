@@ -6,7 +6,7 @@ $NetBSD$
    fi
    rm -rf conftest*
    ;;
-+*-*qnx6*)
++*-*qnx*)
 +  PTHREAD_LIBS="-lc"
 +  ;;
  esac
@@ -17,7 +17,7 @@ $NetBSD$
  
  case $host in
 -*-linux*|*-*bsd*|*-solaris*|*-*-darwin*|*-dragonfly*)
-+*-linux*|*-*bsd*|*-solaris*|*-*-darwin*|*-dragonfly*|*-*qnx6*)
++*-linux*|*-*bsd*|*-solaris*|*-*-darwin*|*-dragonfly*|*-*qnx*)
  	have_ld_preload="yes"
  	;;
  *)

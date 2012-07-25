@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.12 2012/02/06 12:40:28 wiz Exp $
+# $NetBSD: Makefile,v 1.16 2012/03/19 23:05:28 markd Exp $
 
 DISTNAME=	kipi-plugins-0.1.7
 PKGNAME=	kipi-plugins-calendar-0.1.7
-PKGREVISION=	15
+PKGREVISION=	16
 CATEGORIES=	graphics
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=kipi/}
 EXTRACT_SUFX=	.tar.bz2
@@ -31,10 +31,10 @@ INSTALL_DIRS=	kipi-plugins/calendar
 
 .include "../../meta-pkgs/kde3/kde3.mk"
 .include "../../audio/libgpod/buildlink3.mk"
-.include "../../graphics/libkipi/buildlink3.mk"
+.include "../../graphics/libkipi-kde3/buildlink3.mk"
 .include "../../graphics/kipi-plugins-kde3/buildlink3.mk"
-.include "../../graphics/libkexiv2/buildlink3.mk"
-.include "../../graphics/libkdcraw/buildlink3.mk"
+.include "../../graphics/libkexiv2-kde3/buildlink3.mk"
+.include "../../graphics/libkdcraw-kde3/buildlink3.mk"
 .include "../../misc/kdepim3/buildlink3.mk"
 .include "../../x11/kdelibs3/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

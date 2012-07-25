@@ -1,17 +1,16 @@
-$NetBSD: patch-al,v 1.5 2011/09/16 19:17:52 bsiegert Exp $
+$NetBSD: patch-al,v 1.6 2012/03/27 10:49:22 obache Exp $
 
 --- configure.orig	2011-06-11 15:46:28.000000000 +0000
 +++ configure
-@@ -2733,6 +2733,8 @@ $as_echo "#define _GNU_SOURCE 1" >>confd
+@@ -2733,6 +2733,7 @@ $as_echo "#define _GNU_SOURCE 1" >>confd
  
  $as_echo "#define _NETBSD_SOURCE 1" >>confdefs.h
  
 +$as_echo "#define _QNX_SOURCE 1" >>confdefs.h
-+
  
  # The later defininition of _XOPEN_SOURCE and _POSIX_C_SOURCE disables
  # certain features on FreeBSD, so we need __BSD_VISIBLE to re-enable
-@@ -3026,7 +3028,7 @@ case $ac_sys_system/$ac_sys_release in
+@@ -3026,7 +3027,7 @@ case $ac_sys_system/$ac_sys_release in
    # Reconfirmed for OpenBSD 3.3 by Zachary Hamm, for 3.4 by Jason Ish.
    # In addition, Stefan Krah confirms that issue #1244610 exists through
    # OpenBSD 4.6, but is fixed in 4.7.
@@ -20,7 +19,16 @@ $NetBSD: patch-al,v 1.5 2011/09/16 19:17:52 bsiegert Exp $
      define_xopen_source=no
      # OpenBSD undoes our definition of __BSD_VISIBLE if _XOPEN_SOURCE is
      # also defined. This can be overridden by defining _BSD_SOURCE
-@@ -4927,15 +4929,10 @@ $as_echo "#define Py_ENABLE_SHARED 1" >>
+@@ -3035,7 +3036,7 @@ case $ac_sys_system/$ac_sys_release in
+ $as_echo "#define _BSD_SOURCE 1" >>confdefs.h
+ 
+     ;;
+-  OpenBSD/4.[789])
++  OpenBSD/4.[789] | OpenBSD/5.*)
+     # OpenBSD undoes our definition of __BSD_VISIBLE if _XOPEN_SOURCE is
+     # also defined. This can be overridden by defining _BSD_SOURCE
+     # As this has a different meaning on Linux, only define it on OpenBSD
+@@ -4927,15 +4928,10 @@ $as_echo "#define Py_ENABLE_SHARED 1" >>
  	  RUNSHARED=LD_LIBRARY_PATH=`pwd`:${LD_LIBRARY_PATH}
  	  INSTSONAME="$LDLIBRARY".$SOVERSION
            ;;
@@ -37,7 +45,7 @@ $NetBSD: patch-al,v 1.5 2011/09/16 19:17:52 bsiegert Exp $
  	  INSTSONAME="$LDLIBRARY".$SOVERSION
  	  ;;
      hp*|HP*)
-@@ -7648,9 +7645,9 @@ then
+@@ -7648,9 +7644,9 @@ then
  			LDCXXSHARED="$LDCXXSHARED "'$(PYTHONFRAMEWORKPREFIX)/$(PYTHONFRAMEWORKDIR)/Versions/$(VERSION)/$(PYTHONFRAMEWORK)'
  		else
  			# No framework, use the Python app as bundle-loader
@@ -50,7 +58,7 @@ $NetBSD: patch-al,v 1.5 2011/09/16 19:17:52 bsiegert Exp $
  		fi ;;
  	Darwin/*)
  		# Use -undefined dynamic_lookup whenever possible (10.3 and later).
-@@ -7674,15 +7671,15 @@ then
+@@ -7674,15 +7670,15 @@ then
  				LDCXXSHARED="$LDCXXSHARED "'$(PYTHONFRAMEWORKPREFIX)/$(PYTHONFRAMEWORKDIR)/Versions/$(VERSION)/$(PYTHONFRAMEWORK)'
  			else
  				# No framework, use the Python app as bundle-loader
@@ -70,7 +78,7 @@ $NetBSD: patch-al,v 1.5 2011/09/16 19:17:52 bsiegert Exp $
  	BSD/OS*/4*)
  		LDSHARED="gcc -shared"
  		LDCXXSHARED="g++ -shared";;
-@@ -7710,9 +7707,15 @@ then
+@@ -7710,9 +7706,15 @@ then
  				   ;;
  				esac
  		fi;;
@@ -86,7 +94,7 @@ $NetBSD: patch-al,v 1.5 2011/09/16 19:17:52 bsiegert Exp $
  	OpenUNIX*|UnixWare*)
  		if test "$GCC" = "yes" ; then
  			LDSHARED='$(CC) -shared'
-@@ -7756,7 +7759,8 @@ then
+@@ -7756,7 +7758,8 @@ then
  		 fi;;
  	Linux*|GNU*) CCSHARED="-fPIC";;
  	BSD/OS*/4*) CCSHARED="-fpic";;
@@ -96,7 +104,7 @@ $NetBSD: patch-al,v 1.5 2011/09/16 19:17:52 bsiegert Exp $
  	OpenUNIX*|UnixWare*)
  		if test "$GCC" = "yes"
  		then CCSHARED="-fPIC"
-@@ -7808,11 +7812,12 @@ then
+@@ -7808,11 +7811,12 @@ then
  	OpenUNIX*|UnixWare*) LINKFORSHARED="-Wl,-Bexport";;
  	SCO_SV*) LINKFORSHARED="-Wl,-Bexport";;
  	ReliantUNIX*) LINKFORSHARED="-W1 -Blargedynsym";;

@@ -1,0 +1,23 @@
+$NetBSD$
+
+--- configure.orig	2012-01-11 13:04:10.000000000 +0000
++++ configure
+@@ -9591,7 +9591,7 @@ fi
+       ;;
+ 
+     # FreeBSD 3 and greater uses gcc -shared to do shared libraries.
+-    freebsd* | dragonfly*)
++    freebsd* | dragonfly* | nto-qnx*)
+       archive_cmds='$CC -shared $pic_flag -o $lib $libobjs $deplibs $compiler_flags'
+       hardcode_libdir_flag_spec='-R$libdir'
+       hardcode_direct=yes
+@@ -9782,9 +9782,6 @@ $as_echo "$lt_cv_irix_exported_symbol" >
+       hardcode_shlibpath_var=no
+       ;;
+ 
+-    *nto* | *qnx*)
+-      ;;
+-
+     openbsd*)
+       if test -f /usr/libexec/ld.so; then
+ 	hardcode_direct=yes

@@ -1,6 +1,8 @@
-$NetBSD: patch-ipc_chromium_src_base_third__party_nspr_prcpucfg.h,v 1.1 2011/07/11 12:46:14 tnn Exp $
+$NetBSD: patch-ipc_chromium_src_base_third__party_nspr_prcpucfg.h,v 1.3 2012/05/08 19:29:37 martin Exp $
 
---- ipc/chromium/src/base/third_party/nspr/prcpucfg.h.orig	2011-08-11 21:41:01.000000000 +0000
+# Reported upstream: https://bugzilla.mozilla.org/show_bug.cgi?id=753046
+
+--- ipc/chromium/src/base/third_party/nspr/prcpucfg.h.orig	2012-04-20 22:03:52.000000000 +0000
 +++ ipc/chromium/src/base/third_party/nspr/prcpucfg.h
 @@ -34,7 +34,7 @@
  #include "base/third_party/nspr/prcpucfg_win.h"
@@ -9,5 +11,5 @@ $NetBSD: patch-ipc_chromium_src_base_third__party_nspr_prcpucfg.h,v 1.1 2011/07/
 -#elif defined(__linux__) || defined(ANDROID)
 +#elif defined(__linux__) || defined(ANDROID) || defined(__NetBSD__) || defined(__DragonFly__) || defined(__QNXNTO__)
  #include "base/third_party/nspr/prcpucfg_linux.h"
- #else
- #error Provide a prcpucfg.h appropriate for your platform
+ #elif defined(__OpenBSD__)
+ #include "base/third_party/nspr/prcpucfg_openbsd.h"

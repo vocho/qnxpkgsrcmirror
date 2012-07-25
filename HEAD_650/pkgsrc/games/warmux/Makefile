@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.5 2012/02/06 12:40:14 wiz Exp $
+# $NetBSD: Makefile,v 1.7 2012/03/08 01:06:08 joerg Exp $
 
 DISTNAME=	warmux-11.01
-PKGREVISION=	4
+PKGREVISION=	5
 CATEGORIES=	games
 MASTER_SITES=	http://download.gna.org/warmux/
 EXTRACT_SUFX=	.tar.bz2
@@ -28,6 +28,7 @@ BUILDLINK_TRANSFORM+=	rm:-Wl,--as-needed
 .include "../../devel/SDL_ttf/buildlink3.mk"
 .include "../../devel/SDL_gfx/buildlink3.mk"
 .include "../../graphics/SDL_image/buildlink3.mk"
+.include "../../graphics/png/buildlink3.mk"
 .include "../../net/SDL_net/buildlink3.mk"
 .include "../../textproc/libxml++/buildlink3.mk"
 .include "../../www/curl/buildlink3.mk"

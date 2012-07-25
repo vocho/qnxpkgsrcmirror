@@ -1,6 +1,6 @@
 $NetBSD: patch-ab,v 1.29 2008/07/20 23:35:20 dbj Exp $
 
---- unix/configure.orig	2007-09-21 19:04:18.000000000 +0200
+--- unix/configure.orig	2008-02-06 15:39:07.000000000 +0000
 +++ unix/configure
 @@ -2062,12 +2062,13 @@ fi
      # Step 3: set configuration options based on system name and version.
@@ -50,7 +50,35 @@ $NetBSD: patch-ab,v 1.29 2008/07/20 23:35:20 dbj Exp $
  	    DL_OBJS="tclLoadDl.o"
  	    DL_LIBS=""
  	    LDFLAGS="$LDFLAGS -export-dynamic"
-@@ -3768,7 +3772,7 @@ fi
+@@ -3309,18 +3313,22 @@ EOF
+ 	    fi
+ 
+ 	    ;;
+-	QNX-6*)
++	QNX-[68]*)
+ 	    # QNX RTP
+ 	    # This may work for all QNX, but it was only reported for v6.
+ 	    SHLIB_CFLAGS="-fPIC"
+-	    SHLIB_LD="ld -Bshareable -x"
+-	    SHLIB_LD_LIBS=""
++	    SHLIB_LD='${CC} -shared ${CFLAGS} ${LDFLAGS}'
++	    SHLIB_LD_LIBS='${LIBS}'
+ 	    SHLIB_SUFFIX=".so"
+ 	    DL_OBJS="tclLoadDl.o"
+ 	    # dlopen is in -lc on QNX
+ 	    DL_LIBS=""
+-	    CC_SEARCH_FLAGS=""
+-	    LD_SEARCH_FLAGS=""
++	    LDFLAGS="$LDFLAGS -Wl,--export-dynamic"
++	    CC_SEARCH_FLAGS='-Wl,-rpath,${LIB_RUNTIME_DIR}'
++	    LD_SEARCH_FLAGS=${CC_SEARCH_FLAGS}
++	    SHARED_LIB_SUFFIX='${TCL_TRIM_DOTS}\$\{DBGX\}.so'
++	    UNSHARED_LIB_SUFFIX='${TCL_TRIM_DOTS}\$\{DBGX\}.a'
++	    TCL_LIB_VERSIONS_OK=nodots
+ 	    ;;
+ 	RISCos-*)
+ 	    SHLIB_CFLAGS="-G 0"
+@@ -3768,7 +3776,7 @@ fi
  		    ;;
  		IRIX*)
  		    ;;
@@ -59,7 +87,7 @@ $NetBSD: patch-ab,v 1.29 2008/07/20 23:35:20 dbj Exp $
  		    ;;
  		Darwin-*)
  		    ;;
-@@ -3786,16 +3790,16 @@ fi
+@@ -3786,16 +3794,16 @@ fi
      fi
  
      if test "$SHARED_LIB_SUFFIX" = "" ; then
@@ -80,7 +108,7 @@ $NetBSD: patch-ab,v 1.29 2008/07/20 23:35:20 dbj Exp $
      else
          LIB_SUFFIX=${UNSHARED_LIB_SUFFIX}
  
-@@ -5346,7 +5350,11 @@ echo "configure:5344: checking for X11 l
+@@ -5389,7 +5397,11 @@ echo "configure:5387: checking for X11 l
  	for i in $dirs ; do
  	    if test -r $i/libX11.a -o -r $i/libX11.so -o -r $i/libX11.sl; then
  		echo "$ac_t""$i" 1>&6
@@ -93,7 +121,7 @@ $NetBSD: patch-ab,v 1.29 2008/07/20 23:35:20 dbj Exp $
  		x_libraries="$i"
  		break
  	    fi
-@@ -5355,7 +5363,11 @@ echo "configure:5344: checking for X11 l
+@@ -5398,7 +5410,11 @@ echo "configure:5387: checking for X11 l
  	if test "$x_libraries" = ""; then
  	    XLIBSW=-lX11
  	else
@@ -106,7 +134,7 @@ $NetBSD: patch-ab,v 1.29 2008/07/20 23:35:20 dbj Exp $
  	fi
      fi
      if test "$XLIBSW" = nope ; then
-@@ -5427,6 +5439,10 @@ if test "x${x_libraries}" != "x"; then
+@@ -5470,6 +5486,10 @@ if test "x${x_libraries}" != "x"; then
  fi
  if test "${TCL_LD_SEARCH_FLAGS}" = '-L${LIB_RUNTIME_DIR}'; then
      LIB_RUNTIME_DIR=`echo ${LIB_RUNTIME_DIR} |sed -e 's/:/ -L/g'`
@@ -117,7 +145,7 @@ $NetBSD: patch-ab,v 1.29 2008/07/20 23:35:20 dbj Exp $
  fi
  
  # The statement below is very tricky!  It actually *evaluates* the
-@@ -5965,11 +5981,18 @@ else
+@@ -6009,11 +6029,18 @@ else
      if test "$SHARED_BUILD" = "0" || test "$TCL_NEEDS_EXP_FILE" = "0"; then
          if test "${TCL_LIB_VERSIONS_OK}" = "ok"; then
              eval TK_LIB_FLAG="-ltk${VERSION}\${TK_DBGX}"

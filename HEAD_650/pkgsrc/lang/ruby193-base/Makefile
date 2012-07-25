@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.8 2012/02/18 06:46:54 taca Exp $
+# $NetBSD: Makefile,v 1.10 2012/03/21 15:40:13 taca Exp $
 #
 
 DISTNAME=	${RUBY_DISTNAME}
@@ -41,6 +41,10 @@ LDFLAGS.SunOS+=	-L${SUNWSPROBASE}/lib -Wl,-R${SUNWSPROBASE}/lib
 CONFIGURE_ENV+=	LDSHARED="${CC} -G"
 .else
 LIBS.SunOS+=	-lm
+.endif
+
+.if ${OPSYS} == "SunOS"
+CONFIGURE_ENV+=	OBJCOPY=:
 .endif
 
 # Ruby build process depends on config.status's content
@@ -157,6 +161,10 @@ post-install:
 .endfor
 	${RUBY_GENERATE_PLIST}
 
-.include "../../lang/ruby/Makefile.common"
+.include "../../mk/bdb.buildlink3.mk"
+.include "../../converters/libiconv/buildlink3.mk"
+.include "../../devel/zlib/buildlink3.mk"
+.include "../../security/openssl/buildlink3.mk"
 .include "../../textproc/libyaml/buildlink3.mk"
+.include "../../lang/ruby/Makefile.common"
 .include "../../mk/bsd.pkg.mk"

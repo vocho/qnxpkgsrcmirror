@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.59 2011/07/27 16:33:25 tez Exp $
+# $NetBSD: Makefile,v 1.63 2012/03/31 20:17:13 hans Exp $
 #
 
 DISTNAME=	groff-1.20.1
@@ -57,6 +57,11 @@ LIBS.QNX+=	-lsocket
 BUILD_DEFS+=	PAPERSIZE
 .if defined(PAPERSIZE)
 CONFIGURE_ENV+=	PAGE=${PAPERSIZE:Q}
+.endif
+
+.include "../../mk/compiler.mk"
+.if !empty(CC_VERSION:Mgcc-4.[6-9].*)
+CFLAGS.SunOS+=		-std=c99 -D_XOPEN_SOURCE=600
 .endif
 
 # Usually the mdoc.local "volume-operating-system" definition is for
