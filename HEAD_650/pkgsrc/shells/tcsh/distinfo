@@ -5,3 +5,4 @@ RMD160 (tcsh-6.18.01.tar.gz) = ea18bb6d4d6dca2700d74daa2940f67d45a18cb9
 Size (tcsh-6.18.01.tar.gz) = 926872 bytes
 SHA1 (patch-aa) = f9d9d21482380002eaad51125310b6d36930baa7
 SHA1 (patch-ab) = ab71a3826bbcef0702a7d43446f13454176aa671
+SHA1 (patch-configure) = a72330579b7fe20d395895720a8263cc2456fb01

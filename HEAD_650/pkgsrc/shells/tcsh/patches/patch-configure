@@ -1,0 +1,13 @@
+$NetBSD$
+
+--- configure.orig	2012-08-10 13:24:14.000000000 +0000
++++ configure
+@@ -2937,7 +2937,7 @@ case "${host}" in
+   ;;
+ 
+   ## QNX6
+-  *-qnx6*)
++  *-qnx[68]*)
+     tcsh_config_file=qnx6
+   ;;
+ 
