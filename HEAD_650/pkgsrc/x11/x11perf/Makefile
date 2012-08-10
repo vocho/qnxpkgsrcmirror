@@ -18,9 +18,14 @@ USE_TOOLS+=		pkg-config
 
 CONFIGURE_ENV+=		APP_MAN_SUFFIX=1
 
+LIBS.QNX+= -ls5ipc
+
 .include "../../x11/libXext/buildlink3.mk"
 .include "../../x11/libXmu/buildlink3.mk"
 .include "../../x11/libXft/buildlink3.mk"
 .include "../../x11/libXrender/buildlink3.mk"
 .include "../../x11/xextproto/buildlink3.mk"
+.if ${OPSYS} == "QNX"
+.include "../../sysutils/s5ipc/buildlink3.mk"
+.endif
 .include "../../mk/bsd.pkg.mk"
