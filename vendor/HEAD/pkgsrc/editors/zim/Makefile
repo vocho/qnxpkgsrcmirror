@@ -1,9 +1,8 @@
-# $NetBSD: Makefile,v 1.5 2012/03/15 11:53:26 obache Exp $
+# $NetBSD: Makefile,v 1.7 2012/08/11 15:16:32 ryoon Exp $
 #
 
-DISTNAME=	zim-0.54
+DISTNAME=	zim-0.56
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
-PKGREVISION=	1
 CATEGORIES=	editors
 MASTER_SITES=	http://zim-wiki.org/downloads/
 
@@ -16,7 +15,6 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_LANGUAGES=	# none
 
-PYTHON_VERSIONS_ACCEPTED=	27 26 25
 REPLACE_PYTHON=	${WRKSRC}/zim.py
 PYDISTUTILSPKG=	YES
 

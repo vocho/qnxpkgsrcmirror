@@ -1,6 +1,6 @@
-$NetBSD: patch-qmake_generators_makefile.cpp,v 1.1 2012/01/12 22:59:58 adam Exp $
+$NetBSD: patch-qmake_generators_makefile.cpp,v 1.3 2012/05/24 08:07:33 adam Exp $
 
---- qmake/generators/makefile.cpp.orig	2012-01-06 20:25:45.000000000 +0000
+--- qmake/generators/makefile.cpp.orig	2012-05-24 05:03:21.000000000 +0000
 +++ qmake/generators/makefile.cpp
 @@ -3256,7 +3256,7 @@ MakefileGenerator::writePkgConfigFile()
              bundle = bundle.left(suffix);
@@ -9,5 +9,5 @@ $NetBSD: patch-qmake_generators_makefile.cpp,v 1.1 2012/01/12 22:59:58 adam Exp 
 -        pkgConfiglibDir = "-L${libdir}";
 +        pkgConfiglibDir = "-Wl,-R${libdir} -L${libdir}";
          pkgConfiglibName = "-l" + lname.left(lname.length()-Option::libtool_ext.length());
-     }
-     t << pkgConfiglibDir << " " << pkgConfiglibName << " " << endl;
+         if (project->isActiveConfig("shared"))
+             pkgConfiglibName += project->first("TARGET_VERSION_EXT");

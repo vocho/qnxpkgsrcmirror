@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.148 2012/03/29 13:26:33 wiz Exp $
+# $NetBSD: Makefile,v 1.150 2012/07/11 09:00:41 wiz Exp $
 
-DISTNAME=	libpng-1.5.10
+DISTNAME=	libpng-1.5.12
 PKGNAME=	${DISTNAME:S/lib//}
 CATEGORIES=	graphics
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=libpng/} \

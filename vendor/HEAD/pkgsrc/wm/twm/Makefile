@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.3 2008/05/24 21:45:14 tnn Exp $
+# $NetBSD: Makefile,v 1.6 2012/06/17 02:47:58 dholland Exp $
 
-DISTNAME=	twm-1.0.4
+DISTNAME=	twm-1.0.7
 CATEGORIES=	x11 wm
 MASTER_SITES=	${MASTER_SITE_XORG:=app/}
 EXTRACT_SUFX=	.tar.bz2
@@ -12,7 +12,10 @@ COMMENT=	Tom's Window Manager
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=		yes
-USE_TOOLS+=		pkg-config
+USE_TOOLS+=		pkg-config yacc
+
+# Work around borked configure test in 1.0.7
+CONFIGURE_ENV+=		ac_cv_prog_YACC=yacc
 
 .include "../../x11/libXext/buildlink3.mk"
 .include "../../x11/libXmu/buildlink3.mk"

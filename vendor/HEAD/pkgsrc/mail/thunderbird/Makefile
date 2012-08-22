@@ -1,15 +1,16 @@
-# $NetBSD: Makefile,v 1.90 2012/03/16 21:09:55 ryoon Exp $
+# $NetBSD: Makefile,v 1.95 2012/07/19 17:57:30 ryoon Exp $
 #
 
 DISTNAME=	# empty
 PKGNAME=	thunderbird-${TB_VER}
-PKGREVISION=	1
-TB_VER=		11.0
+TB_VER=		14.0
 CATEGORIES=	mail
 MASTER_SITES=	${MASTER_SITE_MOZILLA:=thunderbird/releases/${TB_VER}/source/} \
 		${MASTER_SITE_MOZILLA_ALL:=thunderbird/releases/${TB_VER}/source/}
 DISTFILES=	thunderbird-${TB_VER}.source.tar.bz2 \
-		comm-release-f60c071e187b.tar.bz2
+		lightning-1.6.source.tar.bz2
+SITES.lightning-1.6.source.tar.bz2=	${MASTER_SITE_MOZILLA:=calendar/lightning/releases/1.6/source/}
+EXTRACT_DIR.lightning-1.6.source.tar.bz2=	${WRKSRC}/lightning
 
 MAINTAINER=	tnn@NetBSD.org
 HOMEPAGE=	http://www.mozillamessaging.com/en-US/thunderbird/
@@ -29,9 +30,6 @@ CONFIGURE_ARGS+=	--enable-application=mail
 
 ALL_ENV+=		MOZILLA_PKG_NAME=thunderbird
 
-# workround for link of xulrunner-bin etc.
-LDFLAGS+=		-Wl,-rpath,${PREFIX}/lib/thunderbird
-
 .include "../../mk/bsd.prefs.mk"
 
 #SUBST_CLASSES+=			ext-compat
@@ -41,6 +39,11 @@ LDFLAGS+=		-Wl,-rpath,${PREFIX}/lib/thunderbird
 #SUBST_FILES.ext-compat+=	calendar/*/install.rdf
 #SUBST_FILES.ext-compat+=	calendar/*/*/install.rdf
 #SUBST_SED.ext-compat=		-e 's,\(<em:maxVersion>\).*<,\19.0<,g'
+
+post-extract:
+	cd ${WRKSRC} && ${RM} -r calendar
+	${CP} -r ${EXTRACT_DIR.lightning-1.6.source.tar.bz2}/comm-beta/calendar ${WRKSRC}
+	${RM} -r ${EXTRACT_DIR.lightning-1.6.source.tar.bz2}
 
 pre-configure:
 	cd ${WRKSRC} && ${SETENV} ${CONFIGURE_ENV} autoconf

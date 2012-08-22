@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.54 2012/03/03 00:12:14 wiz Exp $
+# $NetBSD: Makefile,v 1.59 2012/08/13 14:25:00 wiz Exp $
 
-DISTNAME=	librsvg-2.34.2
+DISTNAME=	librsvg-2.36.1
 PKGREVISION=	2
 CATEGORIES=	graphics gnome
-MASTER_SITES=	${MASTER_SITE_GNOME:=sources/librsvg/2.34/}
-EXTRACT_SUFX=	.tar.bz2
+MASTER_SITES=	${MASTER_SITE_GNOME:=sources/librsvg/2.36/}
+EXTRACT_SUFX=	.tar.xz
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://librsvg.sourceforge.net/
@@ -21,6 +21,8 @@ USE_TOOLS+=		pkg-config
 USE_LANGUAGES+=		c c++
 GNU_CONFIGURE=		yes
 CONFIGURE_ARGS+=	--disable-gtk-theme --disable-tools
+CONFIGURE_ARGS+=	--disable-introspection
+CONFIGURE_ARGS+=	--enable-Bsymbolic=auto
 
 PKGCONFIG_OVERRIDE=	librsvg.pc.in
 
@@ -28,6 +30,12 @@ TEST_TARGET=		check
 
 BUILDLINK_API_DEPENDS.cairo+=	cairo>=1.2.0
 BUILDLINK_API_DEPENDS.glib2+=	glib2>=2.24.0
+
+.include "../../mk/bsd.prefs.mk"
+
+.if ${OPSYS} == "Darwin"
+CONFIGURE_ARGS+=	--disable-Bsymbolic
+.endif
 
 .include "../../devel/glib2/buildlink3.mk"
 .include "../../devel/pango/buildlink3.mk"

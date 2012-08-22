@@ -1,5 +1,5 @@
-$NetBSD: distinfo,v 1.12 2012/03/31 12:45:25 obache Exp $
+$NetBSD: distinfo,v 1.14 2012/06/19 11:55:25 wiz Exp $
 
-SHA1 (mediawiki-1.17.3.tar.gz) = 390698c9c5b413dec00f95b620fcc1e2786631b8
-RMD160 (mediawiki-1.17.3.tar.gz) = 9db4e2bbb9b13f84194dc2aaa95c3769208e836f
-Size (mediawiki-1.17.3.tar.gz) = 14957652 bytes
+SHA1 (mediawiki-1.19.1.tar.gz) = 7e827714aab2110719bb13ae0f10919ed01c08d7
+RMD160 (mediawiki-1.19.1.tar.gz) = c54d8ae8534146237766b392dac4578ecf883b0c
+Size (mediawiki-1.19.1.tar.gz) = 17929538 bytes

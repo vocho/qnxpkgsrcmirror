@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.6 2009/11/09 18:59:19 tnn Exp $
+# $NetBSD: Makefile,v 1.9 2012/08/14 09:11:25 wiz Exp $
 #
 
-DISTNAME=	xev-1.0.4
+DISTNAME=	xev-1.2.0
 CATEGORIES=	x11
 MASTER_SITES=	${MASTER_SITE_XORG:=app/}
 EXTRACT_SUFX=	.tar.bz2
@@ -17,6 +17,11 @@ USE_TOOLS+=	pkg-config
 
 CONFIGURE_ENV+=		APP_MAN_SUFFIX=1
 
+.include "../../meta-pkgs/modular-xorg/hacks.mk"
+
 .include "../../x11/libX11/buildlink3.mk"
+.include "../../x11/libXrandr/buildlink3.mk"
+.include "../../x11/xextproto/buildlink3.mk"
+.include "../../x11/xproto/buildlink3.mk"
 
 .include "../../mk/bsd.pkg.mk"

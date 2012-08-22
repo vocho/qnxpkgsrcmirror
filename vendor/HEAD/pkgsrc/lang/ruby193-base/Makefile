@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.10 2012/03/21 15:40:13 taca Exp $
+# $NetBSD: Makefile,v 1.15 2012/07/25 14:26:57 bsiegert Exp $
 #
 
 DISTNAME=	${RUBY_DISTNAME}
@@ -45,6 +45,12 @@ LIBS.SunOS+=	-lm
 
 .if ${OPSYS} == "SunOS"
 CONFIGURE_ENV+=	OBJCOPY=:
+CONFIGURE_ENV+=	ac_cv_prog_PKG_CONFIG=""
+.endif
+
+.if ${OPSYS} == "MirBSD"
+# if present, an unsupported sysconf call is used
+CONFIGURE_ENV+=	ac_cv_func_getgrnam_r=no
 .endif
 
 # Ruby build process depends on config.status's content
@@ -90,13 +96,6 @@ CONFIGURE_ENV+=	ac_cv_header_ucontext_h=no
 .endif
 
 #
-# work around for getaddrinfo(3)
-#
-.if ${OPSYS} == "SunOS" && !empty(OS_VERSION:M5.[6-9])
-CONFIGURE_ARGS+=	--enable-wide-getaddrinfo
-.endif
-
-#
 # work around for Linux
 #
 .if ${OPSYS} == "Linux"
@@ -121,7 +120,8 @@ REPLACE_RUBY=		bin/erb bin/gem bin/irb bin/rake bin/rdoc \
 			bin/ri bin/testrb
 REPLACE_RUBY_DIRS=	ext lib sample
 INSTALLATION_DIRS=	bin ${PKGMANDIR}/man1 \
-			${RUBY_DOC}/irb ${RUBY_EG}/bigdecimal ${RUBY_EG}/pty
+			${RUBY_DOC}/irb ${RUBY_DOC}/ripper ${RUBY_DOC}/stringio \
+			${RUBY_EG}/bigdecimal ${RUBY_EG}/pty
 # ${RUBY_ARCHINC} ${RUBY_ARCHLIB}
 EMPTY_DIRS=		generator/template markup/simple_markup
 

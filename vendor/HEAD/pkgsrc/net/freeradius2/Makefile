@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.21 2012/03/21 18:02:21 brook Exp $
+# $NetBSD: Makefile,v 1.23 2012/04/03 01:38:18 obache Exp $
 
 DISTNAME=	freeradius-server-${RADVER}
 PKGNAME=	${DISTNAME:S/-server//}
-PKGREVISION=	2
+PKGREVISION=	3
 CATEGORIES=	net
 MASTER_SITES=	ftp://ftp.freeradius.org/pub/freeradius/
 EXTRACT_SUFX=	.tar.bz2
@@ -47,7 +47,7 @@ OWN_DIRS_PERMS+=	${VARBASE}/log/radiusd/radacct \
 			${RADIUS_USER} ${RADIUS_GROUP} 0750
 
 RADVER=			2.1.12
-EGDIR=			${DESTDIR}${PREFIX}/share/examples/freeradius
+EGDIR=			${PREFIX}/share/examples/freeradius
 
 BUILDLINK_API_DEPENDS.openssl+=	openssl>=0.9.7
 
@@ -128,7 +128,7 @@ CONF_FILES_PERMS+=	${EGDIR}/${f} ${PKG_SYSCONFDIR}/${f} \
 .endfor
 
 .for d in ${EGDIRS}
-INSTALLATION_DIRS+=	${PKG_SYSCONFDIR}/${d}
+INSTALLATION_DIRS+=	${EGDIR}/${d}
 .endfor
 
 OWN_DIRS_PERMS+=	${PKG_SYSCONFDIR}/certs ${RADIUS_USER} \
@@ -164,14 +164,10 @@ post-build:
 .endif
 
 post-install:
-	${INSTALL_DATA_DIR} ${EGDIR}
-.for d in ${EGDIRS}
-	${INSTALL_DATA_DIR} ${EGDIR}/${d}
-.endfor
 .for f in ${EGFILES}
-	${INSTALL_DATA} ${WRKSRC}/raddb/${f} ${EGDIR}/${f}
+	${INSTALL_DATA} ${WRKSRC}/raddb/${f} ${DESTDIR}${EGDIR}/${f}
 .endfor
-	${INSTALL_DATA} ${WRKSRC}/src/modules/rlm_perl/example.pl ${EGDIR}
+	${INSTALL_DATA} ${WRKSRC}/src/modules/rlm_perl/example.pl ${DESTDIR}${EGDIR}
 
 .include "../../devel/libltdl/buildlink3.mk"
 .include "../../net/libpcap/buildlink3.mk"

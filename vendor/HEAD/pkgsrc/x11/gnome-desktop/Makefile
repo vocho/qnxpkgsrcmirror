@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.110 2012/03/10 10:56:18 obache Exp $
+# $NetBSD: Makefile,v 1.114 2012/07/15 08:22:59 wiz Exp $
 #
 
 DISTNAME=		gnome-desktop-2.32.1
-PKGREVISION=		6
+PKGREVISION=		8
 CATEGORIES=		x11 gnome
 MASTER_SITES=		${MASTER_SITE_GNOME:=sources/gnome-desktop/2.32/}
 EXTRACT_SUFX=		.tar.bz2

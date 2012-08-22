@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.24 2012/03/03 00:11:52 wiz Exp $
+# $NetBSD: Makefile,v 1.27 2012/06/14 07:43:11 sbd Exp $
 #
 
 DISTNAME=		goffice-0.6.6
 PKGNAME=		goffice0.6-0.6.6
-PKGREVISION=		15
+PKGREVISION=		18
 CATEGORIES=		misc
 MASTER_SITES=		${MASTER_SITE_GNOME:=sources/goffice/0.6/}
 
@@ -24,6 +24,7 @@ USE_TOOLS+=		gmake intltool msgfmt pkg-config
 
 .include "../../converters/libiconv/buildlink3.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"
+.include "../../devel/pcre/buildlink3.mk"
 BUILDLINK_API_DEPENDS.glib2+=	glib2>=2.8.0
 .include "../../devel/glib2/buildlink3.mk"
 .include "../../devel/libglade/buildlink3.mk"

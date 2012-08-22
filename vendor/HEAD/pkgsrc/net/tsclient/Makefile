@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.59 2012/03/06 17:39:00 ryoon Exp $
+# $NetBSD: Makefile,v 1.63 2012/07/15 08:22:52 wiz Exp $
 #
 
 DISTNAME=		tsclient-0.132
-PKGREVISION=		37
+PKGREVISION=		41
 CATEGORIES=		net
 MASTER_SITES=		http://www.gnomepro.com/tsclient/
 
@@ -20,5 +20,6 @@ USE_PKGLOCALEDIR=	yes
 GNU_CONFIGURE=		yes
 
 .include "../../devel/gettext-lib/buildlink3.mk"
+.include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../x11/gnome-panel/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

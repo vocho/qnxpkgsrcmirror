@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.3 2012/03/17 16:42:41 taca Exp $
+# $NetBSD: Makefile,v 1.5 2012/06/02 00:57:36 taca Exp $
 
-DISTNAME=	sprockets-2.3.1
+DISTNAME=	sprockets-2.4.3
 CATEGORIES=	www
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://github.com/josh/rack-mount
+HOMEPAGE=	https://github.com/sstephenson/sprockets
 COMMENT=	Rack-based asset packaging system
 LICENSE=	mit
 

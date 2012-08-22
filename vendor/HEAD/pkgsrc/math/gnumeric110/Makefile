@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.32 2012/03/09 12:34:19 wiz Exp $
+# $NetBSD: Makefile,v 1.35 2012/06/14 07:45:08 sbd Exp $
 
 DISTNAME=	gnumeric-1.10.17
-PKGREVISION=	4
+PKGREVISION=	5
 CATEGORIES=	math gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gnumeric/1.10/}
 EXTRACT_SUFX=	.tar.bz2
@@ -27,6 +27,8 @@ REPLACE_PERL+=		plugins/perl-func/perl_func.pl
 GOFFICE_VERSION=	0.8.17
 PLIST_SUBST+=		GOFFICE_VERSION=${GOFFICE_VERSION}
 
+.include "options.mk"
+
 CONFIGURE_ARGS+=	--with-python
 CONFIGURE_ENV+=		PYTHON=${PYTHONBIN:Q}
 .include "../../lang/python/application.mk"
@@ -39,7 +41,7 @@ CONFIGURE_ENV+=		PYTHON=${PYTHONBIN:Q}
 #BUILDLINK_API_DEPENDS.libgda+=	libgda>=3.1.1
 #.include "../../databases/libgda/buildlink3.mk"
 #.include "../../databases/libgnomedb/buildlink3.mk"
-BUILDLINK_API_DEPENDS.libgsf+=	libgsf>=1.14.6
+BUILDLINK_API_DEPENDS.libgsf+=	libgsf>=1.14.18
 .include "../../devel/libgsf/buildlink3.mk"
 .include "../../devel/GConf/schemas.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"

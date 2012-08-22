@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.24 2012/03/03 00:13:50 wiz Exp $
+# $NetBSD: Makefile,v 1.26 2012/08/13 12:18:37 drochner Exp $
 #
 
 DISTNAME=	epdfview-0.1.8
-PKGREVISION=	3
+PKGREVISION=	4
 CATEGORIES=	print
 MASTER_SITES=	http://trac.emma-soft.com/epdfview/chrome/site/releases/
 EXTRACT_SUFX=	.tar.bz2
@@ -14,7 +14,7 @@ COMMENT=	Lightweight PDF viewer using Poppler and GTK2
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=		yes
-USE_LANGUAGES+=		c c++
+USE_LANGUAGES=		c c++
 USE_PKGLOCALEDIR=	yes
 USE_TOOLS+=		pkg-config msgfmt
 

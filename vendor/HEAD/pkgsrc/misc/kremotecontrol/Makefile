@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.1 2012/03/20 06:35:28 markd Exp $
+# $NetBSD: Makefile,v 1.3 2012/06/16 04:45:35 markd Exp $
 
 DISTNAME=	kremotecontrol-${_KDE_VERSION}
 CATEGORIES=	misc

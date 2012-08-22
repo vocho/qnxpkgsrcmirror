@@ -1,9 +1,10 @@
-# $NetBSD: Makefile,v 1.9 2012/03/28 12:39:47 dholland Exp $
+# $NetBSD: Makefile,v 1.11 2012/04/27 12:31:46 obache Exp $
 #
 
 VERS=			1.7.5
 DISTNAME=		pysvn-${VERS}
 PKGNAME=		${PYPKGPREFIX}-pysvn-${VERS}
+PKGREVISION=		1
 CATEGORIES=		devel
 MASTER_SITES=	http://pysvn.barrys-emacs.org/source_kits/
 
@@ -37,7 +38,7 @@ BUILDLINK_TRANSFORM+=	rm:-lresolv
 .include "../../lang/python/pyversion.mk"
 
 do-configure:
-.if ${PYVERSSUFFIX} == "2.5" || ${PYVERSSUFFIX} == "2.4"
+.if ${PYVERSSUFFIX} == "2.5"
 	cd ${WRKSRC}/${PSVNSRC} && ${PYTHONBIN} ${PYSETUP} backport
 .endif
 	cd ${WRKSRC}/${PSVNSRC} && \

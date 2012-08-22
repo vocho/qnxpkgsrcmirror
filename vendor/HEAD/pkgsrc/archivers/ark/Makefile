@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.3 2012/03/25 20:03:39 markd Exp $
+# $NetBSD: Makefile,v 1.5 2012/06/16 04:45:28 markd Exp $
 
 DISTNAME=	ark-${_KDE_VERSION}
 CATEGORIES=	archivers

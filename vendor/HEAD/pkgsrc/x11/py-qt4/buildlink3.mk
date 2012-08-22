@@ -1,4 +1,4 @@
-# $NetBSD: buildlink3.mk,v 1.3 2009/03/20 19:25:49 joerg Exp $
+# $NetBSD: buildlink3.mk,v 1.5 2012/08/09 10:15:05 sbd Exp $
 
 BUILDLINK_TREE+=	py-qt4
 

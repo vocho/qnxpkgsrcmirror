@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.14 2010/03/16 11:54:31 taca Exp $
+# $NetBSD: Makefile,v 1.16 2012/08/17 15:35:24 taca Exp $
 
 MODNAME=		pdo_pgsql
 CATEGORIES+=		databases

@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.13 2012/03/28 13:51:32 tron Exp $
+# $NetBSD: Makefile,v 1.15 2012/07/20 14:26:50 fhajny Exp $
 
-DISTNAME=	libvpx-v1.0.0
+DISTNAME=	libvpx-v1.1.0
 PKGNAME=	${DISTNAME:S/-v/-/}
 CATEGORIES=	multimedia
 MASTER_SITES=	http://webm.googlecode.com/files/
@@ -33,6 +33,7 @@ REPLACE_BASH=		configure \
 			build/make/configure.sh \
 			build/make/version.sh \
 			build/make/gen_asm_deps.sh \
+			build/make/rtcd.sh \
 			examples/gen_example_text.sh \
 			examples/gen_example_code.sh
 

@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.8 2010/01/15 18:50:32 tnn Exp $
+# $NetBSD: Makefile,v 1.10 2012/06/09 05:44:21 obache Exp $
 #
 
-DISTNAME=		libXaw-1.0.7
+DISTNAME=		libXaw-1.0.11
 CATEGORIES=		graphics x11
 MASTER_SITES=		${MASTER_SITE_XORG:=lib/}
 EXTRACT_SUFX=		.tar.bz2
@@ -18,8 +18,6 @@ PKGCONFIG_OVERRIDE+=	xaw6.pc.in
 PKGCONFIG_OVERRIDE+=	xaw7.pc.in
 GNU_CONFIGURE=		yes
 CONFIGURE_ENV+=		LIB_MAN_SUFFIX=3
-
-CONFIGURE_ARGS+=	--disable-docs
 
 .include "../../x11/libICE/buildlink3.mk"
 .include "../../x11/libSM/buildlink3.mk"

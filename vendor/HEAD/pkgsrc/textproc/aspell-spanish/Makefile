@@ -1,9 +1,8 @@
-# $NetBSD: Makefile,v 1.15 2011/04/22 13:44:48 obache Exp $
+# $NetBSD: Makefile,v 1.17 2012/05/21 09:52:11 marino Exp $
 #
 
-DISTNAME=	aspell-es-0.50-2
-PKGNAME=	${DISTNAME:C/es-(.*)-(.*)$/spanish-\1.\2/}
-PKGREVISION=	5
+DISTNAME=	aspell6-es-1.11-2
+PKGNAME=	aspell-spanish-1.11.2
 CATEGORIES=	textproc
 MASTER_SITES=	${MASTER_SITE_GNU:=aspell/dict/es/}
 EXTRACT_SUFX=	.tar.bz2

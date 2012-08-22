@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.6 2012/03/03 00:12:20 wiz Exp $
+# $NetBSD: Makefile,v 1.8 2012/06/14 07:44:03 sbd Exp $
 #
 
 .include "../../x11/vte/Makefile.common"
 
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
-PKGREVISION=	4
+PKGREVISION=	5
 CATEGORIES=	x11 python
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
@@ -22,8 +22,6 @@ USE_TOOLS+=		gmake intltool msgfmt pkg-config
 CONFIGURE_ARGS+=	--enable-python
 CONFIGURE_ARGS+=	--disable-freetype-test
 CONFIGURE_ARGS+=	--enable-Bsymbolic=auto
-
-PYTHON_VERSIONS_ACCEPTED=	27 26 25
 
 BUILD_DIRS=	python
 

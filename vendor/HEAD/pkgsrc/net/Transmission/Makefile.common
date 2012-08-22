@@ -1,8 +1,8 @@
-# $NetBSD: Makefile.common,v 1.1 2012/01/16 22:15:00 abs Exp $
+# $NetBSD: Makefile.common,v 1.4 2012/07/28 15:13:42 wiz Exp $
 # used by net/Transmission/Makefile
 # used by net/Transmission-gui/Makefile
 
-DISTNAME=		transmission-2.42
+DISTNAME=		transmission-2.61
 
 CATEGORIES=		net
 MASTER_SITES=		http://download.m0k.org/transmission/files/
@@ -20,7 +20,8 @@ EXTRACT_USING=		bsdtar
 
 LICENSE=		gnu-gpl-v2 AND mit
 
-PATCHDIR=		../../net/Transmission/patches
+PATCHDIR=		${.CURDIR}/../../net/Transmission/patches
+DISTINFO_FILE=		${.CURDIR}/../../net/Transmission/distinfo
 
 GNU_CONFIGURE=		yes
 LDFLAGS+=		${BUILDLINK_LDADD.getopt} ${BUILDLINK_LDADD.gettext}

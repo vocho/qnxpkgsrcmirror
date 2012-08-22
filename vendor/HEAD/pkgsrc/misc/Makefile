@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.378 2012/03/29 07:35:27 wiz Exp $
+# $NetBSD: Makefile,v 1.384 2012/08/17 23:39:44 seb Exp $
 #
 
 COMMENT=	Miscellaneous utilities
@@ -105,7 +105,6 @@ SUBDIR+=	iselect
 SUBDIR+=	ja-less
 SUBDIR+=	ja-man
 SUBDIR+=	jhd
-SUBDIR+=	jitterbug
 SUBDIR+=	jive
 SUBDIR+=	kaccessible
 SUBDIR+=	kalzium
@@ -162,6 +161,7 @@ SUBDIR+=	libkdeedu
 SUBDIR+=	libkgeomap
 SUBDIR+=	libkvkontakte
 SUBDIR+=	libquantum
+SUBDIR+=	libreoffice
 SUBDIR+=	libreoffice3-bin
 SUBDIR+=	libutf
 SUBDIR+=	lile
@@ -221,7 +221,9 @@ SUBDIR+=	pinfo
 SUBDIR+=	ppower
 SUBDIR+=	pty-redir
 SUBDIR+=	py-anita
+SUBDIR+=	py-anki
 SUBDIR+=	py-carddav
+SUBDIR+=	py-libanki
 SUBDIR+=	qbrew
 SUBDIR+=	qterm
 SUBDIR+=	reed
@@ -252,6 +254,7 @@ SUBDIR+=	sci
 SUBDIR+=	screen
 SUBDIR+=	send-pr
 SUBDIR+=	siag
+SUBDIR+=	since
 SUBDIR+=	softmaker-office-demo
 SUBDIR+=	splitvt
 SUBDIR+=	stellarium
@@ -287,6 +290,8 @@ SUBDIR+=	xchm
 SUBDIR+=	xdg-utils
 SUBDIR+=	xfce4-weather-plugin
 SUBDIR+=	xjdic
+SUBDIR+=	xorg-docs
+SUBDIR+=	xorg-sgml-doctools
 SUBDIR+=	xrolodex
 SUBDIR+=	xtail
 SUBDIR+=	xtend

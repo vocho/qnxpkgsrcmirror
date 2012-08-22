@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.14 2012/03/15 11:53:25 obache Exp $
+# $NetBSD: Makefile,v 1.16 2012/04/22 08:43:01 cheusov Exp $
 
 DISTNAME=	qbzr-${VER}
 PKGREVISION=	2
 CATEGORIES=	devel
-MASTER_SITES=	http://launchpad.net/qbzr/0.21/${VER}/+download/
-VER=		0.21.1
+MASTER_SITES=	http://launchpad.net/qbzr/${VER:R}/${VER}/+download/
+VER=		0.22.1
 
 MAINTAINER=	ddeus.pkgsrc@mailnull.com
 HOMEPAGE=	http://bazaar-vcs.org/QBzr
@@ -20,7 +20,7 @@ USE_TOOLS+=	msgfmt
 WRKSRC=		${WRKDIR}/qbzr
 
 PYDISTUTILSPKG=	yes
-# Only this python versions are supported, see:
+# Only these python versions are supported, see:
 # http://doc.bazaar.canonical.com/bzr.dev/en/whats-new/whats-new-in-2.4.html
 PYTHON_VERSIONS_ACCEPTED=	27 26
 

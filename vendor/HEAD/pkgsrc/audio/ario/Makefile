@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.17 2012/03/24 08:58:05 obache Exp $
+# $NetBSD: Makefile,v 1.19 2012/06/14 07:44:40 sbd Exp $
 #
 
 DISTNAME=	ario-1.5.1
-PKGREVISION=	4
+PKGREVISION=	6
 CATEGORIES=	audio
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=ario-player/1.5.1/}
 

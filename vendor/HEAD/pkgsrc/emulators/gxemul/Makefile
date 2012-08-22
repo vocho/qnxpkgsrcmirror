@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.44 2010/07/02 14:41:49 joerg Exp $
-#
+# $NetBSD: Makefile,v 1.47 2012/07/26 22:10:28 abs Exp $
 
 DISTNAME=	gxemul-0.6.0
-PKGREVISION=	1
+PKGREVISION=	3
 CATEGORIES=	emulators
 MASTER_SITES=	http://gxemul.sourceforge.net/src/
 
@@ -18,6 +17,8 @@ USE_TOOLS+=	pax
 USE_LANGUAGES=	c c++
 HAS_CONFIGURE=	yes
 BUILD_TARGET=	build
+
+LIBS.SunOS+=	-lsocket -lnsl
 
 INSTALLATION_DIRS=	bin ${PKGMANDIR}/man1 share/doc/${PKGBASE}
 

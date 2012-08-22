@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.13 2011/11/25 13:01:46 obache Exp $
+# $NetBSD: Makefile,v 1.15 2012/06/09 07:00:47 obache Exp $
 #
 
-DISTNAME=		libXext-1.1.1
+DISTNAME=		libXext-1.3.1
 CATEGORIES=		x11 devel
 MASTER_SITES=		${MASTER_SITE_XORG:=lib/}
 EXTRACT_SUFX=		.tar.bz2
@@ -33,6 +33,8 @@ CONFIGURE_ENV+=		ac_cv_path_RAWCPP="${PREFIX}/bin/ucpp -t -c90 -Uunix"
 .elif empty(PKGSRC_COMPILER:Mgcc)
 CONFIGURE_ENV+=		ac_cv_path_RAWCPP="cc -E -Uunix -"
 .endif
+
+.include "../../meta-pkgs/modular-xorg/hacks.mk"
 
 BUILDLINK_API_DEPENDS.libX11+=	libX11>=1.2
 .include "../../x11/libX11/buildlink3.mk"

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.12 2010/11/04 19:40:02 adam Exp $
+# $NetBSD: Makefile,v 1.15 2012/04/23 01:15:42 obache Exp $
 
 PKGNAME=	py-twisted-docs-${TWISTED_VERSION}
 COMMENT=	Framework for writing networked applications (documentation)

@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.48 2011/12/03 00:02:17 joerg Exp $
+# $NetBSD: Makefile,v 1.50 2012/08/21 23:49:26 marino Exp $
 #
 
 PKGNAME=	${PYPKGPREFIX}-Tk-0
-PKGREVISION=	5
+PKGREVISION=	6
 CATEGORIES=	x11 python
 
-MAINTAINER=	tsarna@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://wiki.python.org/moin/TkInter
 COMMENT=	Tkinter -- Python interface to Tcl/Tk
 

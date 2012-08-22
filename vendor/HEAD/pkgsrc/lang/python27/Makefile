@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.14 2012/03/24 12:04:36 tron Exp $
+# $NetBSD: Makefile,v 1.18 2012/08/14 18:19:01 drochner Exp $
 
 .include "dist.mk"
 
 PKGNAME=	python27-${PY_DISTVERSION}
-PKGREVISION=	3
+PKGREVISION=	1
 CATEGORIES=	lang python
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
@@ -70,14 +70,12 @@ PY_PLATNAME=	${LOWER_OPSYS:C/\..*//}
 PY_PLATNAME=	sunos${OS_VERSION:C/\..*//}
 .elif ${OPSYS} == "HPUX"
 PY_PLATNAME=	hp-ux11
+.elif ${OPSYS} == "Linux"
+PY_PLATNAME=	linux2
 .else
 PY_PLATNAME=	${LOWER_OPSYS}${OS_VERSION:C/\..*//}
 .endif
 PLIST_SUBST+=	PY_PLATNAME=${PY_PLATNAME:Q}
-
-.if ${PY_PLATNAME} == "linux2"
-PLIST_SRC+=     ${.CURDIR}/../../lang/python27/PLIST.Linux2
-.endif
 
 .if (${MACHINE_ARCH} == "alpha") || (${MACHINE_ARCH} == "amd64") || \
     (${MACHINE_ARCH} == "sparc64") || (${MACHINE_ARCH} == "x86_64") || \
@@ -95,9 +93,9 @@ PLIST.dl=	yes
 
 # builds additional modules if OpenSSL < 0.9.8
 PLIST_VARS+=		openssl097
-CHECK_BUILTIN.openssl:=	no
-.include "../../security/openssl/builtin.mk"
 CHECK_BUILTIN.openssl:=	yes
+.include "../../security/openssl/builtin.mk"
+CHECK_BUILTIN.openssl:=	no
 .if !empty(USE_BUILTIN.openssl:M[yY][eE][sS]) && \
     !empty(BUILTIN_PKG.openssl:Mopenssl-0.9.[67]*)
 PLIST.openssl097=	yes

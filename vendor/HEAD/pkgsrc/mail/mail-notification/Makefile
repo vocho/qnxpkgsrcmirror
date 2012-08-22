@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.63 2012/03/03 00:13:30 wiz Exp $
+# $NetBSD: Makefile,v 1.66 2012/07/01 19:05:20 dholland Exp $
 #
 
 DISTNAME=	mail-notification-5.4
-PKGREVISION=	13
+PKGREVISION=	15
 CATEGORIES=	mail gnome
 MASTER_SITES=	http://savannah.nongnu.org/download/mailnotify/
 EXTRACT_SUFX=	.tar.bz2
@@ -29,7 +29,7 @@ CONFIGURE_ARGS+=	evolution=no
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.mail-notification
 PKG_SUPPORTED_OPTIONS=	inet6 sasl ssl
-PKG_SUGGESTED_OPTIONS=	ssl
+PKG_SUGGESTED_OPTIONS=	inet6 ssl
 
 .include "../../mk/bsd.options.mk"
 
@@ -71,4 +71,5 @@ do-install:
 .include "../../sysutils/libnotify/buildlink3.mk"
 .include "../../mk/omf-scrollkeeper.mk"
 .include "../../x11/gtk2/buildlink3.mk"
+.include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../mk/bsd.pkg.mk"

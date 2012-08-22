@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.34 2012/03/14 03:33:51 taca Exp $
+# $NetBSD: Makefile,v 1.37 2012/06/25 09:00:26 jperkin Exp $
 
-DISTNAME=	drupal-6.25
-PKGREVISION=	1
+DISTNAME=	drupal-6.26
 CATEGORIES=	www
 MASTER_SITES=	http://drupal.org/files/projects/
 
@@ -12,11 +11,6 @@ LICENSE=	gnu-gpl-v2
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
-.include "../../lang/php/phpversion.mk"
-
-.if ${PKG_PHP_VERSION} == "5"
-DEPENDS+=	php>=5.2.0<5.3:../../lang/php5
-.endif
 DEPENDS+=	${PHP_PKG_PREFIX}-gd>=4.3.5:../../graphics/php-gd
 
 NO_BUILD=	YES
@@ -59,6 +53,9 @@ SUBST_MESSAGE.conf=	Fixing configuration files.
 
 INSTALLATION_DIRS+=	${DRUPAL}/files ${DRUPAL}/sites/all \
 			share/doc/drupal share/examples/drupal
+.for i in ${PAX_DIRS}
+INSTALLATION_DIRS+=	${DRUPAL}/${i}
+.endfor
 
 .include "options.mk"
 
@@ -91,4 +88,5 @@ post-install:
 	${FIND} ${DESTDIR}${PREFIX}/${DRUPAL} \
 		\( -name '*.jpg' -o -name '*.png' \) | ${XARGS} ${CHMOD} 0644
 
+.include "../../lang/php/phpversion.mk"
 .include "../../mk/bsd.pkg.mk"

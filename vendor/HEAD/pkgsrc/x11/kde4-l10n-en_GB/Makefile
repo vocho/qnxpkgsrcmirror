@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.2 2009/10/03 07:09:23 wiz Exp $
+# $NetBSD: Makefile,v 1.4 2012/06/16 04:45:39 markd Exp $
 
 KDE_LANGUAGE=	English (Great Britain)
 KDE_LANGCODE=	en_GB

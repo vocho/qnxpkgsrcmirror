@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.48 2012/03/06 17:39:00 ryoon Exp $
+# $NetBSD: Makefile,v 1.54 2012/08/13 14:25:42 wiz Exp $
 #
 
 .include "../../net/mldonkey/Makefile.common"
 
 PKGNAME=		${DISTNAME:S/mldonkey/mldonkey-gui/}
-PKGREVISION=		7
+PKGREVISION=		3
 
 COMMENT+=		(GTK interface)
 
@@ -15,6 +15,7 @@ USE_TOOLS+=		pkg-config
 INSTALLATION_DIRS=	bin libexec/mldonkey
 
 CONFIGURE_ARGS+=	--enable-gui=newgui2
+CONFIGURE_ARGS+=	--disable-option-checking
 
 do-install:
 	${RM} -f ${DESTDIR}${PREFIX}/bin/mlgui

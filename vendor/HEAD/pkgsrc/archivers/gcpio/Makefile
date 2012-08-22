@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.40 2011/04/22 13:42:49 obache Exp $
+# $NetBSD: Makefile,v 1.42 2012/06/02 08:38:13 cheusov Exp $
 #
 
 DISTNAME=	cpio-2.6
 PKGNAME=	g${DISTNAME}
-PKGREVISION=	8
+PKGREVISION=	10
 CATEGORIES=	archivers
 MASTER_SITES=	${MASTER_SITE_GNU:=cpio/}
 
@@ -21,20 +21,18 @@ GNU_CONFIGURE=	yes
 USE_TOOLS+=	makeinfo
 INFO_FILES=	yes
 
-TEST_TARGET=	check
+AUTO_MKDIRS=	yes
 
-CONFIGURE_ENV+=	gt_cv_func_gnugettext1_libintl=yes
+TEST_TARGET=		check
 
-.include "../../mk/bsd.prefs.mk"
+CONFIGURE_ENV+=		gt_cv_func_gnugettext1_libintl=yes
 
-.if defined(GNU_PROGRAM_PREFIX) && ${GNU_PROGRAM_PREFIX} == ""
-# pax installs a "cpio" also
-CONFLICTS+=	pax-[0-9]*
-.endif
+CONFIGURE_ARGS+=	--program-prefix=g
 
-BUILD_DEFS+=		GNU_PROGRAM_PREFIX
-CONFIGURE_ARGS+=	--program-prefix=${GNU_PROGRAM_PREFIX:Q}
-PLIST_SUBST+=		GNU_PROGRAM_PREFIX=${GNU_PROGRAM_PREFIX:Q}
+post-install:
+	${LN} -sf ${PREFIX}/bin/gcpio ${DESTDIR}${PREFIX}/gnu/bin/cpio
+	${LN} -sf ${PREFIX}/${PKGMANDIR}/man1/gcpio.1 ${DESTDIR}${PREFIX}/gnu/man/man1/cpio.1
+	${LN} -sf ${PREFIX}/${PKGMANDIR}/man1/gmt.1 ${DESTDIR}${PREFIX}/gnu/man/man1/mt.1
 
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

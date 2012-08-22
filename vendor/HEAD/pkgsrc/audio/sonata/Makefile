@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.25 2012/03/09 12:34:00 wiz Exp $
+# $NetBSD: Makefile,v 1.27 2012/06/14 07:44:03 sbd Exp $
 #
 
 EGG_NAME=	Sonata-1.6.2.1
 DISTNAME=	${EGG_NAME:tl}
-PKGREVISION=	4
+PKGREVISION=	5
 CATEGORIES=	audio
 MASTER_SITES=	http://download.berlios.de/sonata/
 EXTRACT_SUFX=	.tar.bz2
@@ -18,7 +18,6 @@ DEPENDS+=	${PYPKGPREFIX}-mpd-[0-9]*:../../audio/py-mpd
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
-PYTHON_VERSIONS_ACCEPTED=	27 26 25
 USE_TOOLS+=	pkg-config msgfmt
 
 SUBST_CLASSES+=		mandir

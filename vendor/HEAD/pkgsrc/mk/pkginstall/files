@@ -1,4 +1,4 @@
-# $NetBSD: files,v 1.6 2008/09/25 14:01:46 wiz Exp $
+# $NetBSD: files,v 1.8 2012/04/21 10:22:32 wiz Exp $
 #
 # Generate a +FILES script that reference counts config files that are
 # required for the proper functioning of the package.

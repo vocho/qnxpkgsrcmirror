@@ -1,9 +1,11 @@
 #!@RCD_SCRIPTS_SHELL@
 #
-# $NetBSD: xenguest.sh,v 1.2 2011/11/22 09:15:58 sborrill Exp $
+# $NetBSD: xenguest.sh,v 1.4 2012/06/05 12:58:53 sborrill Exp $
 #
 # PROVIDE: xenguest
 # REQUIRE: DAEMON
+
+# Set xenguest_osappend to optional string to add after OS version
 
 $_rc_subr_loaded . /etc/rc.subr
 
@@ -38,11 +40,14 @@ xenguest_precmd()
 		os_distro="$(uname -s)"
 		os_uname="$(uname -r)"
 		os_name="$(uname -s) $(uname -r)"
+		if [ -n "$xenguest_osappend" ]; then
+			os_name="${os_name} ${xenguest_osappend}"
+		fi
 		os_majorver="${os_uname%%.*}"
 		os_minorver="${os_uname#*.}"
 		os_minorver="${os_minorver%%.*}"
 
-		mkdir -p =@VARBASE@/cache
+		mkdir -p @VARBASE@/cache
 		cat << EOF > $XE_LINUX_DISTRIBUTION_CACHE
 os_distro="$os_distro"
 os_uname="$os_uname"

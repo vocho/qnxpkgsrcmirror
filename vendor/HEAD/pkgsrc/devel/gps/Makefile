@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.10 2012/03/09 12:34:06 wiz Exp $
+# $NetBSD: Makefile,v 1.13 2012/07/08 20:23:50 marino Exp $
 #
 
 DISTNAME=	gps-${GPS_VERSION}
-PKGREVISION=	4
+PKGREVISION=	7
 CATEGORIES=	devel
 MASTER_SITES=	http://downloads.dragonlace.net/src/ \
 		http://dragonlace.mirrors.ada.cx/src/
@@ -19,17 +19,14 @@ GNU_CONFIGURE=		yes
 USE_TOOLS+=		gmake sed perl awk pkg-config
 
 GPS_VERSION=		5.0.1
-MY_CONFIGURE_ENV+=	CC=gnatgcc
+USE_LANGUAGES=		c ada c++ fortran
+MY_CONFIGURE_ENV+=	ADA_PROJECT_PATH=${APP}
 MY_CONFIGURE_ENV+=	PYTHON=${PREFIX}/bin/python${PYVERSSUFFIX}
 APP=			${PREFIX}/lib/gnat
 
 .include "options.mk"
 
 CONFIGURE_ARGS+=	--with-gmp=${PREFIX}
-
-post-wrapper:
-	${RM} -rf ${WRKDIR}/.wrapper/bin
-	${RM} -rf ${WRKDIR}/.gcc/bin
 
 do-configure:
 	cd ${WRKSRC} && ${SETENV} ${MY_CONFIGURE_ENV} ./configure ${CONFIGURE_ARGS}

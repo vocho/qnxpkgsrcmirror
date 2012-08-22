@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.38 2012/03/03 00:14:02 wiz Exp $
+# $NetBSD: Makefile,v 1.40 2012/07/01 19:05:27 dholland Exp $
 #
 
 DISTNAME=	gtodo-0.14
-PKGREVISION=	24
+PKGREVISION=	26
 CATEGORIES=	time gnome
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=gtodo/}
 
@@ -24,4 +24,5 @@ GCONF_SCHEMAS=		gtodo.schemas
 .include "../../sysutils/gnome-vfs/buildlink3.mk"
 .include "../../textproc/libxml2/buildlink3.mk"
 .include "../../x11/gtk2/buildlink3.mk"
+.include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../mk/bsd.pkg.mk"

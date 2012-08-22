@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.11 2012/03/21 08:13:28 wiz Exp $
+# $NetBSD: Makefile,v 1.17 2012/08/13 14:25:39 wiz Exp $
 
-DISTNAME=	darktable-1.0
+DISTNAME=	darktable-1.0.5
 PKGREVISION=	1
 CATEGORIES=	graphics
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=darktable/}
@@ -15,10 +15,11 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 USE_CMAKE=		yes
 USE_LANGUAGES=		c c++
 USE_PKGLOCALEDIR=	yes
-USE_TOOLS+=		gmake msgfmt pkg-config
+USE_TOOLS+=		gmake msgfmt pkg-config bash
 
 CMAKE_ARGS+=	-DGTHREAD_INCLUDE_DIR:PATH=${BUILDLINK_PREFIX.glib2}/include
 CMAKE_ARGS+=	-DGMODULE_INCLUDE_DIR:PATH=${BUILDLINK_PREFIX.glib2}/include
+CMAKE_ARGS+=	-DMAN_INSTALL_DIR:PATH=${PKGMANDIR}/man1
 CMAKE_ARGS+=	-DUSE_OPENCL=OFF
 
 CMAKE_ARGS+=	-DCMAKE_BUILD_TYPE=Release
@@ -42,7 +43,7 @@ LDFLAGS+=	${COMPILER_RPATH_FLAG}${PREFIX}/lib/darktable
 .if ${MACHINE_ARCH} == "i386"
 # SSE alignment issues
 GCC_REQD=	4.2
-CFLAGS+=	-mstackrealign
+CFLAGS+=	-mstackrealign -msse2
 .endif
 
 .if ${OPSYS} == "NetBSD"
@@ -85,4 +86,5 @@ pre-configure:
 .include "../../www/curl/buildlink3.mk"
 .include "../../x11/gtk2/buildlink3.mk"
 .include "../../mk/jpeg.buildlink3.mk"
+.include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

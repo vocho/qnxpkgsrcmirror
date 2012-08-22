@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.27 2012/03/19 22:43:15 markd Exp $
+# $NetBSD: Makefile,v 1.29 2012/06/16 04:45:30 markd Exp $
 
 DISTNAME=	libkdcraw-${_KDE_VERSION}
 CATEGORIES=	graphics
