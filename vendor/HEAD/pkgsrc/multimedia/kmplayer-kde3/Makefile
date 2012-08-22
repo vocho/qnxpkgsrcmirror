@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.11 2012/03/03 00:13:40 wiz Exp $
+# $NetBSD: Makefile,v 1.15 2012/07/01 19:05:23 dholland Exp $
 #
 
 DISTNAME=	kmplayer-0.10.0c
-PKGREVISION=	12
+PKGREVISION=	14
 CATEGORIES=	multimedia kde
 MASTER_SITES=	http://kmplayer.kde.org/pkgs/
 EXTRACT_SUFX=	.tar.bz2
@@ -13,9 +13,10 @@ COMMENT=	KDE frontend to mplayer
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
+MAKE_JOBS_SAFE=		no
+
 DEPENDS+=		mplayer>=1.0rc3:../../multimedia/mplayer
 DEPENDS+=		mencoder>=1.0rc3:../../multimedia/mencoder
-DEPENDS+=		xine-arts>=1rc0a:../../audio/xine-arts
 
 GNU_CONFIGURE=		yes
 USE_TOOLS+=		gmake msgfmt perl pkg-config
@@ -41,4 +42,5 @@ SUBST_SED.desktop=	-e 's|@PREFIX@|${PREFIX}|g'
 .include "../../multimedia/xine-lib/buildlink3.mk"
 .include "../../x11/kdelibs3/buildlink3.mk"
 .include "../../x11/libXv/buildlink3.mk"
+.include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../mk/bsd.pkg.mk"

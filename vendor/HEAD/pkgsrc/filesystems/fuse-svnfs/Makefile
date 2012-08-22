@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.11 2011/12/02 07:13:49 sbd Exp $
+# $NetBSD: Makefile,v 1.13 2012/08/17 12:53:19 marino Exp $
 #
 
 DISTNAME=	svnfs-0.4
-PKGREVISION=	8
+PKGREVISION=	9
 CATEGORIES=	filesystems
 MASTER_SITES=	http://www.jmadden.eu/wp-content/uploads/svnfs/
 EXTRACT_SUFX=	.tgz
@@ -16,6 +16,8 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=	yes
 USE_TOOLS+=	perl
+
+LDFLAGS.DragonFly+=	-lsvn_subr-1
 
 REPLACE_PERL=	svn-config.pl
 

@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.22 2012/03/21 15:40:13 taca Exp $
+# $NetBSD: Makefile,v 1.25 2012/07/25 19:27:09 bsiegert Exp $
 #
 
 DISTNAME=	${RUBY_DISTNAME}
 PKGNAME=	${RUBY_PKGPREFIX}-base-${RUBY_VERSION_FULL}
+PKGREVISION=	1
 CATEGORIES=	lang ruby
 MASTER_SITES=	${MASTER_SITE_RUBY}
 #PKGREVISION=
@@ -44,6 +45,11 @@ LIBS.SunOS+=	-lm
 
 .if ${OPSYS} == "SunOS"
 CONFIGURE_ENV+=	OBJCOPY=:
+.endif
+
+.if ${OPSYS} == "MirBSD"
+# if present, an unsupported sysconf call is used
+CONFIGURE_ENV+=	ac_cv_func_getgrnam_r=no
 .endif
 
 # Ruby build process depends on config.status's content
@@ -118,7 +124,9 @@ OPENSSL_EXAMPLES=	c_rehash.rb cert2text.rb certstore.rb cipher.rb \
 
 REPLACE_RUBY_DIRS=	bin ext lib sample
 INSTALLATION_DIRS=	bin ${PKGMANDIR}/man1 ${RUBY_ARCHINC} ${RUBY_ARCHLIB} \
-			${RUBY_DOC}/irb ${RUBY_EG}/bigdecimal ${RUBY_EG}/pty
+			${RUBY_DOC}/irb ${RUBY_DOC}/ripper \
+			${RUBY_DOC}/stringio ${RUBY_EG}/bigdecimal \
+			${RUBY_EG}/pty
 EMPTY_DIRS=		generator/template markup/simple_markup
 
 pre-configure:

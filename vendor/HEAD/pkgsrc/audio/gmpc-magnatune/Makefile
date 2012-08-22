@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.10 2012/03/03 00:12:39 wiz Exp $
+# $NetBSD: Makefile,v 1.12 2012/06/14 07:45:41 sbd Exp $
 #
 
 DISTNAME=	gmpc-magnatune-0.20.0
-PKGREVISION=	8
+PKGREVISION=	10
 CATEGORIES=	audio
 MASTER_SITES=	http://download.sarine.nl/Programs/gmpc/0.20.0/ \
 		${MASTER_SITE_SOURCEFORGE:=musicpd/}

@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.9 2011/12/02 08:46:18 sborrill Exp $
+# $NetBSD: Makefile,v 1.11 2012/08/14 11:14:40 sborrill Exp $
 #
 
-DISTNAME=		istgt-20111008
+DISTNAME=		istgt-20120811
 CATEGORIES=		net
 MASTER_SITES=		http://www.peach.ne.jp/archives/istgt/
 

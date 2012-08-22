@@ -1,10 +1,12 @@
-# $NetBSD: Makefile,v 1.218 2012/03/04 01:15:21 minskim Exp $
+# $NetBSD: Makefile,v 1.224 2012/08/06 14:29:00 ryoon Exp $
 #
 
 COMMENT=	Fonts
 
 SUBDIR+=	AnonymousPro
 SUBDIR+=	EB-Garamond
+SUBDIR+=	Symbola-ttf
+SUBDIR+=	TextFonts-ttf
 SUBDIR+=	Xft2
 SUBDIR+=	Xg
 SUBDIR+=	acroread7-chsfont
@@ -28,6 +30,7 @@ SUBDIR+=	bakoma-fonts
 SUBDIR+=	bdftopcf
 SUBDIR+=	biznet-iso8859_2
 SUBDIR+=	chkfontpath
+SUBDIR+=	croscorefonts
 SUBDIR+=	cyberbase-ttf
 SUBDIR+=	cyberbit-ttf
 SUBDIR+=	cyr-rfx-bulgarian-mik
@@ -157,6 +160,7 @@ SUBDIR+=	ricty-ttf
 SUBDIR+=	roboto-fonts
 SUBDIR+=	ruby-ttfunk
 SUBDIR+=	sgi-fonts
+SUBDIR+=	sourcesans-fonts
 SUBDIR+=	t1lib
 SUBDIR+=	t1utils
 SUBDIR+=	takao-fonts-ttf
@@ -170,6 +174,10 @@ SUBDIR+=	tex-amsfonts-doc
 SUBDIR+=	tex-arphic
 SUBDIR+=	tex-arphic-doc
 SUBDIR+=	tex-avantgar
+SUBDIR+=	tex-bbold
+SUBDIR+=	tex-bbold-doc
+SUBDIR+=	tex-bbold-type1
+SUBDIR+=	tex-bbold-type1-doc
 SUBDIR+=	tex-bera
 SUBDIR+=	tex-bera-doc
 SUBDIR+=	tex-bookman
@@ -231,6 +239,8 @@ SUBDIR+=	tex-lh
 SUBDIR+=	tex-lh-doc
 SUBDIR+=	tex-lm
 SUBDIR+=	tex-lm-doc
+SUBDIR+=	tex-luaotfload
+SUBDIR+=	tex-luaotfload-doc
 SUBDIR+=	tex-ly1
 SUBDIR+=	tex-ly1-doc
 SUBDIR+=	tex-manfnt

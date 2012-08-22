@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.31 2012/01/14 15:15:16 ryoon Exp $
+# $NetBSD: Makefile,v 1.34 2012/07/03 19:39:47 ryoon Exp $
 #
 
-DISTNAME=	aria2-1.14.1
+DISTNAME=	aria2-1.15.1
 CATEGORIES=	net
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=aria2/}
 EXTRACT_SUFX=	.tar.bz2

@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.27 2012/03/03 00:12:14 wiz Exp $
+# $NetBSD: Makefile,v 1.35 2012/08/14 08:46:57 wiz Exp $
 
-DISTNAME=	gegl-0.1.8
+DISTNAME=	gegl-0.2.0
 PKGREVISION=	2
 CATEGORIES=	graphics
-MASTER_SITES=	ftp://ftp.gimp.org/pub/gegl/0.1/
+MASTER_SITES=	ftp://ftp.gimp.org/pub/gegl/${PKGVERSION_NOREV:R}/
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	adam@NetBSD.org
@@ -15,7 +15,7 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_LANGUAGES=		c c++
 USE_LIBTOOL=		yes
-USE_TOOLS+=		pkg-config gmake
+USE_TOOLS+=		gmake pkg-config intltool msgfmt
 GNU_CONFIGURE=		yes
 CONFIGURE_ARGS+=	--disable-docs
 CONFIGURE_ENV+=		ac_cv_path_ASCIIDOC=no

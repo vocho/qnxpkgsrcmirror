@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.3 2011/02/25 09:47:21 wiz Exp $
+# $NetBSD: Makefile,v 1.6 2012/08/13 14:38:37 wiz Exp $
 #
 
-DISTNAME=	Cython-0.13
-PKGNAME=	${PYPKGPREFIX}-cython-0.13
+DISTNAME=	Cython-0.16
+PKGNAME=	${PYPKGPREFIX}-cython-0.16
+PKGREVISION=	1
 CATEGORIES=	lang python
 MASTER_SITES=	http://cython.org/release/
 
@@ -16,17 +17,29 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 USE_LANGUAGES=	c
 PYDISTUTILSPKG= yes
 
-PYTHON_VERSIONS_ACCEPTED= 27 26 25
 PLIST_SUBST+=	PYVERSSUFFIX=${PYVERSSUFFIX}
+PLIST_VARS=	cygdb
+
+REPLACE_PYTHON+=	Cython/Debugger/Cygdb.py
+REPLACE_PYTHON+=	Cython/Debugger/libpython.py
+REPLACE_PYTHON+=	cython.py
+
+.include "../../lang/python/pyversion.mk"
+
+.if ${PYVERSSUFFIX} != "2.5"
+PLIST.cygdb=	yes
+.endif
 
 post-extract:
 	cd ${WRKSRC}/bin && ${MV} cython cython${PYVERSSUFFIX}
+	cd ${WRKSRC}/bin && ${MV} cygdb cygdb${PYVERSSUFFIX}
 
 # for test only
 #USE_LANGUAGES+= c++
 do-test:
 	(cd ${WRKSRC} && ${PYTHONBIN} runtests.py)
 
+.include "../../lang/python/application.mk"
 .include "../../lang/python/extension.mk"
 # for test only
 #.include "../../math/py-numpy/buildlink3.mk"

@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.30 2012/03/08 08:01:54 obache Exp $
+# $NetBSD: Makefile,v 1.35 2012/08/21 23:49:21 marino Exp $
 #
 
 DISTNAME=	vigor-0.016
-PKGREVISION=	3
+PKGREVISION=	6
 CATEGORIES=	editors
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=vigor/}
 
@@ -25,28 +25,42 @@ CONFIGURE_ENV+=	vi_cv_path_shell=${TOOLS_SH:Q}
 CONFIGURE_ARGS+=--with-x
 #		--enable-perlinterp \
 #		--disable-curses \
-#		--disable-db \
 #		--disable-re
 USE_TOOLS+=	sh
 BUILD_DIRS=	${CONFIGURE_DIRS}
 
 BUILDLINK_DEPMETHOD.libXt?=	build
 
+CHECK_BUILTIN.db1:=	yes
+.include "../../mk/db1.builtin.mk"
+CHECK_BUILTIN.db1:=	no
+
+.if empty(IS_BUILTIN.db1:Myes)
+CONFIGURE_ARGS+=	--disable-db
+.else
 SUBST_CLASSES+=		db185
 SUBST_STAGE.db185=	post-extract
 SUBST_MESSAGE.db185=	Using db_185.h instead of db.h
 SUBST_FILES.db185=	common/common.h
 SUBST_SED.db185=	-e '/^\#include <db\.h>/s/db\.h/db_185.h/'
 
+BDB_ACCEPTED=		db1
+.include "../../mk/bdb.buildlink3.mk"
+.endif
+
 .include "../../lang/tcl/buildlink3.mk"
 .include "../../x11/libXt/buildlink3.mk"
 .include "../../x11/tk/buildlink3.mk"
 
+.include "../../mk/bsd.prefs.mk"
+.if ${OPSYS} != "DragonFly"
 .if exists(/usr/include/sys/queue.h)
 # this file obscures the system header
+# (Desired for DragonFly which does not have CIRCLEQ macros)
 post-patch:
 	${RM} -f ${WRKSRC}/include/sys/queue.h
 .endif
+.endif
 
-.include "../../mk/bdb.buildlink3.mk"
+.include "../../mk/curses.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

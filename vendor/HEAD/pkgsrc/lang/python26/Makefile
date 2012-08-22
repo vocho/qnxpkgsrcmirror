@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.46 2012/03/25 09:09:05 tron Exp $
+# $NetBSD: Makefile,v 1.49 2012/08/14 18:41:19 drochner Exp $
 
 .include "dist.mk"
 
 PKGNAME=	python26-${PY_DISTVERSION}
-PKGREVISION=	3
+PKGREVISION=	1
 CATEGORIES=	lang python
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
@@ -49,7 +49,6 @@ LIBS.SunOS+=		-lrt
 PY_VER_SUFFIX=		2.6
 
 .if ${OPSYS} == "NetBSD"
-PRIVILEGED_STAGES+=	clean
 # XXX work around a botched autoconf check which ignores libintl
 CONFIGURE_ENV+=		ac_cv_func_bind_textdomain_codeset=yes
 .endif
@@ -98,9 +97,9 @@ PLIST.dl=	yes
 
 # builds additional modules if OpenSSL < 0.9.8
 PLIST_VARS+=		openssl097
-CHECK_BUILTIN.openssl:=	no
-.include "../../security/openssl/builtin.mk"
 CHECK_BUILTIN.openssl:=	yes
+.include "../../security/openssl/builtin.mk"
+CHECK_BUILTIN.openssl:=	no
 .if !empty(USE_BUILTIN.openssl:M[yY][eE][sS]) && \
     !empty(BUILTIN_PKG.openssl:Mopenssl-0.9.[67]*)
 PLIST.openssl097=	yes

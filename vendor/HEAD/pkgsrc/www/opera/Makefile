@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.94 2012/03/28 05:00:36 obache Exp $
+# $NetBSD: Makefile,v 1.97 2012/08/03 13:08:24 obache Exp $
 
 DISTNAME=		opera-${OPERA_PKG_VERSION}-${OPERA_PKG_BUILD}.${OPERA_ARCH}.${EMUL_OPSYS}
 PKGNAME=		opera-${OPERA_PKG_VERSION:S/u/pl/}
@@ -9,7 +9,7 @@ EXTRACT_SUFX=		.tar.xz
 MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://www.opera.com/
 COMMENT=		Standards-compliant graphical Web browser
-LICENSE=		opera-1100-license
+LICENSE=		opera-1200-license
 
 EMUL_PLATFORMS=		freebsd-i386 freebsd-x86_64 \
 			linux-i386 linux-x86_64
@@ -20,7 +20,6 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 
 MASTER_SITE_OPERA+=	ftp://get.opera.com/pub/opera/ \
 			http://ftp.sunet.se/pub/www/clients/Opera/ \
-			ftp://ftp.hu-berlin.de/pub/www/opera/ \
 			ftp://ftp.task.gda.pl/pub/opera/ \
 			ftp://ftp.tuwien.ac.at/infosys/browsers/opera/ \
 			ftp://opera.nsc.no/pub/nsc.no/mirrors/operasoftware/ \
@@ -30,15 +29,15 @@ MASTER_SITE_OPERA+=	ftp://get.opera.com/pub/opera/ \
 USE_LANGUAGES=		# empty
 NO_BUILD=		yes
 
-OPERA_PKG_BUILD=	1347
-OPERA_PKG_VERSION=	11.62
-OPERA_PKG_VERSION_DIR=	1162
+OPERA_PKG_BUILD=	1532
+OPERA_PKG_VERSION=	12.01
+OPERA_PKG_VERSION_DIR=	1201
 
-PLIST_VARS+=		ia32w
+PLIST_VARS+=		ia32w linux
 
 .if ${EMUL_OPSYS} == "linux"
 EMUL_MODULES.linux=	base x11 fontconfig
-EMUL_REQD=		suse>=10.0
+EMUL_REQD=		suse>=11.3
 OPERA_ARCH.x86_64=	x86_64
 OPERA_OPSYS_SUBDIR=	linux
 .if !defined(EMUL_IS_NATIVE) && ${OPSYS} == "NetBSD"
@@ -48,10 +47,16 @@ TOOLS_SCRIPT.md5=	/usr/bin/md5 -n "$$2" | { read sum file; echo $$sum; }
 .if ${EMUL_ARCH} == "x86_64"
 PLIST.ia32w=		yes
 .endif
+PLIST.linux=		yes
 
 .elif ${EMUL_OPSYS} == "freebsd"
 OPERA_ARCH.x86_64=	amd64
 OPERA_OPSYS_SUBDIR=	unix
+# XXX: TBD
+#.  if defined(EMUL_IS_NATIVE)
+#DEPENDS+=		{gtk2+-[0-9]*,kdelibs4-[0-9]*}:../../x11/gtk2
+#CHECK_SHLIBS_SUPPORTED=	no
+#.  endif
 .endif
 OPERA_ARCH=		${OPERA_ARCH.${EMUL_ARCH}:U${EMUL_ARCH}}
 OPERA_DIR=		${OPERA_OPSYS_SUBDIR}/${OPERA_PKG_VERSION_DIR}

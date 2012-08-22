@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.2 2010/12/19 09:53:41 adam Exp $
+# $NetBSD: Makefile,v 1.4 2012/07/01 19:30:23 morr Exp $
 
 PKGNAME=	${DISTNAME:C/-/84-/}
 COMMENT=	Robust, next generation, object-relational DBMS

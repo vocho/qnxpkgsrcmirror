@@ -1,24 +1,20 @@
-# $NetBSD: Makefile,v 1.20 2011/06/28 09:28:24 wiz Exp $
-#
+# $NetBSD: Makefile,v 1.22 2012/08/12 16:01:34 wiz Exp $
 
-DISTNAME=	cppunit-1.12.1
-PKGREVISION=	1
+DISTNAME=	cppunit-1.13.0
 CATEGORIES=	devel
-MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=cppunit/}
+MASTER_SITES=	http://dev-www.libreoffice.org/src/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://cppunit.sourceforge.net/
-COMMENT=	CppUnit is a C++ unit testing framework
+HOMEPAGE=	http://www.freedesktop.org/wiki/Software/cppunit
+COMMENT=	C++ unit testing framework
 LICENSE=	gnu-lgpl-v2.1
-
-BUILD_DEPENDS+=	doxygen>=1.6.3:../../devel/doxygen
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
-USE_LIBTOOL=	yes
-USE_LANGUAGES=	c c++
-USE_TOOLS+=	gmake
-GNU_CONFIGURE=	yes
+USE_LANGUAGES=		c c++
+USE_LIBTOOL=		yes
+USE_TOOLS+=		gmake
+GNU_CONFIGURE=		yes
 
 PKGCONFIG_OVERRIDE=	cppunit.pc.in
 
@@ -27,5 +23,7 @@ SUBST_SED.rpath=	-e s';-L@libdir@;${COMPILER_RPATH_FLAG}@libdir@ -L@libdir@;g'
 SUBST_FILES.rpath=	cppunit-config.in
 SUBST_STAGE.rpath=	pre-configure
 SUBST_MESSAGE.rpath=	Adding rpath to cppunit-config.
+
+.include "options.mk"
 
 .include "../../mk/bsd.pkg.mk"

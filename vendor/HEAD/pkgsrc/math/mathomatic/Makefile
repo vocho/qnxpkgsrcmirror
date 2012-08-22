@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.95 2012/03/18 17:34:16 asau Exp $
+# $NetBSD: Makefile,v 1.99 2012/08/13 15:20:19 asau Exp $
 #
 
-DISTNAME=		mathomatic-15.8.1
+DISTNAME=		mathomatic-16.0.2
 CATEGORIES=		math
 MASTER_SITES=		http://mathomatic.org/
 EXTRACT_SUFX=		.tar.bz2
@@ -26,5 +26,5 @@ TEST_TARGET=		test
 BUILDLINK_API_DEPENDS.readline+=	readline>=5.1pl1nb1
 .include "../../devel/readline/buildlink3.mk"
 #.include "../../devel/ncurses/buildlink3.mk"
-#.include "../../sysutils/desktop-file-utils/desktopdb.mk"
+.include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../mk/bsd.pkg.mk"

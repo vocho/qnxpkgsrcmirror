@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.27 2012/03/19 21:40:40 markd Exp $
+# $NetBSD: Makefile,v 1.30 2012/06/16 04:45:29 markd Exp $
 
 DISTNAME=	kdegames-${_KDE_VERSION}
 PKGNAME=	${DISTNAME:S/-4/4-4/}

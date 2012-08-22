@@ -1,9 +1,8 @@
-# $NetBSD: Makefile,v 1.2 2012/03/28 15:14:43 taca Exp $
+# $NetBSD: Makefile,v 1.4 2012/07/26 03:06:05 taca Exp $
 #
 
 DISTNAME=	contao-${CT_VERSION}
 PKGNAME=	contao${CT_VER}-${CT_PKGVER}
-PKGREVISION=	1
 CATEGORIES=	www
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=contao/}
 DIST_SUBDIR=	${CT_DIST_SUBDIR}
@@ -36,6 +35,7 @@ RESTRICT_DIRS=	system/html system/logs system/scripts system/tmp \
 		templates tl_files
 
 CONF_FILES+=	${CT_EGDIR}/contao.conf ${PKG_SYSCONFDIR}/contao.conf
+CONF_FILES+=	${CT_EGDIR}/htaccess.default ${CT_WEBDIR}/.htaccess
 
 .for f in ${EG_CONFIG}
 CONF_FILES+=	${CT_EGDIR}/system/config/${f} ${CT_WEBDIR}/system/config/${f}
@@ -82,6 +82,7 @@ pre-install:
 	cd ${WRKSRC}; ${RM} -rf music_academy.css \
 		templates/music_academy.sql tl_files/music_academy
 	${FIND} ${WRKSRC} -name "*.orig*" -exec ${RM} -f {} \;
+	${FIND} ${WRKSRC}/plugins/tinyMCE -type f -exec ${CHMOD} -x {} \;
 
 do-install:
 	cd ${WRKSRC}; pax -rw ${WWW_FILES} ${DESTDIR}${PREFIX}/${CT_WEBDIR}

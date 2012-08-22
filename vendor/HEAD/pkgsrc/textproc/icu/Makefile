@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.67 2012/02/01 23:53:32 wiz Exp $
+# $NetBSD: Makefile,v 1.75 2012/07/10 19:14:47 bsiegert Exp $
 
-DISTNAME=	icu4c-4_8_1-src
+DISTNAME=	icu4c-49_1_2-src
 PKGNAME=	${DISTNAME:S/4c//:S/-src//:S/_/./g}
-PKGREVISION=	2
+PKGREVISION=	1
 CATEGORIES=	textproc
 MASTER_SITES=	http://download.icu-project.org/files/icu4c/${PKGVERSION_NOREV}/
 EXTRACT_SUFX=	.tgz
@@ -31,7 +31,7 @@ CONFIGURE_ARGS+=	--disable-threads
 
 .include "../../mk/compiler.mk"
 
-.if ${OPSYS} == "FreeBSD" || ${OPSYS} == "NetBSD" || ${OPSYS} == "OpenBSD" || ${OPSYS} == "DragonFly"
+.if ${OPSYS} == "FreeBSD" || ${OPSYS} == "NetBSD" || ${OPSYS} == "OpenBSD" || ${OPSYS} == "DragonFly" || ${OPSYS} == "MirBSD"
 PLIST_SUBST+=		MH_NAME=mh-bsd-gcc
 .elif ${OPSYS} == "Linux"
 PLIST_SUBST+=		MH_NAME=mh-linux
@@ -41,6 +41,11 @@ PLIST_SUBST+=		MH_NAME=mh-solaris-gcc
 .  else
 PLIST_SUBST+=		MH_NAME=mh-solaris
 .  endif
+.  if !empty(CC_VERSION:Mgcc-4.[6-9].*)
+BUILDLINK_TRANSFORM+=	rm:-D__STDC__=0
+.  endif
+BUILDLINK_TRANSFORM+=	rm:-ansi
+CFLAGS.SunOS+=		-std=c99
 .elif ${OPSYS} == "IRIX"
 PLIST_SUBST+=		MH_NAME=mh-irix
 .elif ${OPSYS} == "Darwin"
@@ -53,6 +58,15 @@ PLIST_SUBST+=		MH_NAME=mh-unknown
 
 .if ${OPSYS} == "Darwin"
 INSTALL_UNSTRIPPED=	yes
+.endif
+
+# expect builtin gcc atomic functions for gcc>=4.1
+# (source/common/putilimp.h)
+.if !empty(CC_VERSION:Mgcc-*) &&	\
+	(empty(CC_VERSION:Mgcc-4.0*) && empty(CC_VERSION:Mgcc-[0-3].*))
+.  if ${MACHINE_ARCH} == "i386"
+CFLAGS+=	-march=i486
+.  endif
 .endif
 
 .include "../../mk/bsd.pkg.mk"

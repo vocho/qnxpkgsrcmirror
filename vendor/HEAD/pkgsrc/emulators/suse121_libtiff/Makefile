@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.1.1.1 2012/03/21 13:38:40 obache Exp $
+# $NetBSD: Makefile,v 1.3 2012/07/04 07:43:48 obache Exp $
 
 DISTNAME=	suse_libtiff-${SUSE_VERSION}
+PKGREVISION=	2
 CATEGORIES=	emulators
-RPMPKGS+=	libtiff3-3.9.5-8.1.2.${SUSE_ARCH}
+RPMUPDPKGS+=	libtiff3-3.9.5-8.7.1.${SUSE_ARCH}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 COMMENT=	Linux compatibility package for TIFF

@@ -1,4 +1,4 @@
-# $NetBSD: buildlink3.mk,v 1.2 2009/03/20 19:24:16 joerg Exp $
+# $NetBSD: buildlink3.mk,v 1.4 2012/06/14 07:43:18 sbd Exp $
 
 BUILDLINK_TREE+=	libcompizconfig
 
@@ -6,7 +6,7 @@ BUILDLINK_TREE+=	libcompizconfig
 LIBCOMPIZCONFIG_BUILDLINK3_MK:=
 
 BUILDLINK_API_DEPENDS.libcompizconfig+=	libcompizconfig>=0.6.0
-BUILDLINK_ABI_DEPENDS.libcompizconfig?=	libcompizconfig>=0.6.0
+BUILDLINK_ABI_DEPENDS.libcompizconfig+=	libcompizconfig>=0.8.4nb9
 BUILDLINK_PKGSRCDIR.libcompizconfig?=	../../devel/libcompizconfig
 
 .include "../../textproc/libxml2/buildlink3.mk"

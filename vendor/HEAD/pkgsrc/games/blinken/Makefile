@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.1 2012/03/20 07:20:40 markd Exp $
+# $NetBSD: Makefile,v 1.3 2012/06/16 04:45:28 markd Exp $
 
 DISTNAME=	blinken-${_KDE_VERSION}
 CATEGORIES=	games

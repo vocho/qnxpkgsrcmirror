@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.4 2012/03/20 08:40:13 markd Exp $
+# $NetBSD: Makefile,v 1.6 2012/06/16 04:45:34 markd Exp $
 
 DISTNAME=	kgeography-${_KDE_VERSION}
 CATEGORIES=	misc

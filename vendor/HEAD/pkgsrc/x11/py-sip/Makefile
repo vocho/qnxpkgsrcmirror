@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.29 2012/02/17 18:36:45 drochner Exp $
+# $NetBSD: Makefile,v 1.33 2012/07/03 18:12:00 drochner Exp $
 
-DISTNAME=	sip-4.13.2
+DISTNAME=	sip-4.13.3
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
 CATEGORIES=	x11 devel python
 MASTER_SITES=	http://www.riverbankcomputing.com/static/Downloads/sip4/
@@ -50,6 +50,12 @@ CONFIGURE_ARGS+=	LFLAGS_SHLIB="-shared -mimpure-text"
 CONFIGURE_ARGS+=	LFLAGS_SHLIB="-shared"
 .  endif
 .endif
+
+# Hack: gcc on sparc64 miscompiles sipgen/parser.c at -O2
+.if ${MACHINE_ARCH} == "sparc64" && !empty(CC_VERSION:Mgcc*)
+BUILDLINK_TRANSFORM+=	rm:-O2
+.endif
+
 
 SUBST_CLASSES+=		pyversfx
 SUBST_STAGE.pyversfx=	pre-configure

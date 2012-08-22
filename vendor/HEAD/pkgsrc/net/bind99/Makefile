@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.1.1.1 2012/03/07 14:25:00 taca Exp $
+# $NetBSD: Makefile,v 1.9 2012/07/24 20:40:12 spz Exp $
 
 DISTNAME=	bind-${BIND_VERSION}
 PKGNAME=	${DISTNAME:S/-P/pl/}
@@ -16,7 +16,7 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 
 MAKE_JOBS_SAFE=	no
 
-BIND_VERSION=	9.9.0
+BIND_VERSION=	9.9.1-P2
 
 .include "../../mk/bsd.prefs.mk"
 
@@ -53,8 +53,6 @@ PKG_USERS=		${BIND_USER}:${BIND_GROUP}
 PKG_GECOS.${BIND_USER}=	Named pseudo-user
 PKG_HOME.${BIND_USER}=	${BIND_DIR}
 
-PTHREAD_OPTS+=		native
-PTHREAD_AUTO_VARS=	yes
 DOCS=			CHANGES FAQ README REDIRECT-NOTES
 
 FILES_SUBST+=		BIND_GROUP=${BIND_GROUP:Q} \

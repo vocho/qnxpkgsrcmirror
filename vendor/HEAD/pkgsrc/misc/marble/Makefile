@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.2 2012/03/24 05:34:45 markd Exp $
+# $NetBSD: Makefile,v 1.4 2012/06/16 04:45:34 markd Exp $
 
 DISTNAME=	marble-${_KDE_VERSION}
 CATEGORIES=	misc

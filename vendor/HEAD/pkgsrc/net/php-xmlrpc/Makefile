@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.13 2010/07/24 22:24:21 tron Exp $
+# $NetBSD: Makefile,v 1.15 2012/07/20 12:30:37 taca Exp $
 
 MODNAME=		xmlrpc
 CATEGORIES+=		net

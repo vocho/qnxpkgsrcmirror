@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.72 2012/03/03 00:14:09 wiz Exp $
+# $NetBSD: Makefile,v 1.75 2012/07/01 19:05:28 dholland Exp $
 #
 
 DISTNAME=		gnopernicus-1.1.1
-PKGREVISION=		20
+PKGREVISION=		22
 CATEGORIES=		x11
 MASTER_SITES=		${MASTER_SITE_GNOME:=sources/gnopernicus/1.1/}
 EXTRACT_SUFX=		.tar.bz2
@@ -40,6 +40,7 @@ INSTALL_MAKE_FLAGS+=	translationdir=${EGDIR}/translation_tables
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.gnopernicus
 PKG_SUPPORTED_OPTIONS=	inet6
+PKG_SUGGESTED_OPTIONS=	inet6
 
 .include "../../mk/bsd.options.mk"
 
@@ -74,4 +75,5 @@ BUILDLINK_API_DEPENDS.libxml2+=		libxml2>=2.6.7
 .include "../../mk/omf-scrollkeeper.mk"
 .include "../../x11/gnome-mag/buildlink3.mk"
 .include "../../x11/gtk2/buildlink3.mk"
+.include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../mk/bsd.pkg.mk"

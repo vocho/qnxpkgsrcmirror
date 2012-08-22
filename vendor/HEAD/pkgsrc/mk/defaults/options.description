@@ -4,6 +4,10 @@ acl			Enable POSIX ACL support.
 ads			Enable Windows Active Directory support.
 agg			Enable agg support.
 alsa			Enable ALSA support.
+amanda-dump-snap	If dump supports -X, use it.
+amanda-fqdn		Use FQDN's in Amanda.
+amanda-smb		Enable SMB backup support.
+amanda-ssh		Enable ssh as a transport.
 amtterm-gamt		Build amtterm GUI version (gamt).
 amule-alc		Build aMule LinkCreator GUI version.
 amule-alcc		Build aMule LinkCreator for console.
@@ -51,7 +55,9 @@ bugzilla-imagemagick	Compress .BMPs to save space.
 bugzilla-patchviewer	Enable patchviewer support.
 bugzilla-xmlimportbugs	Bulk import/export of bugs in XML format.
 bzip2			Enable compression using bzip2.
+caca			Enable libcaca support.
 cairo			Enable cairo support.
+camlzip			Enable camlzip support (for zip/gz/jar).
 canna			Use Canna as Japanese conversion program.
 cares			Use the c-ares library for asynchronous name resolution.
 catalog-mysql		Store Bacula catalog in MySQL database.
@@ -109,8 +115,10 @@ drupal-xmlservices	Enable XML-based services.
 dspam-preferences-extension	Enable preferences extension.
 dspam-verbose-debug	Enable verbose debugging support.
 dspam-virtualusers	Enable support for virtual users.
+dtrace			Enable DTrace support.
 dts			Enable DTS Coherent Acoustics support.
 dv			Enable usage of the libdv library.
+dvdnav			Enable libdvdnav support to navigate DVDs.
 dvdread			Enable reproduction of DVDs.
 dvi			Enable device independent file format (mostly TeX) support.
 eb			Enable EB dictionary library support.
@@ -155,15 +163,21 @@ firefox3		Use firefox3 as gecko rendering engine.
 flac			Enable FLAC support.
 floppyd			Use floppyd to access floppy device.
 fluidsynth		Enable MIDI support using fluidsynth.
+freediameter-all-extensions	Build all extensions for freeDiameter (except test and debug).
 freeradius-simul-use	Enable Simultaneous-Use.
 freetype		Enable freetype support.
+fribidi			Enable BIDI support using fribidi.
 ftp			Enable File Transfer Protocol (FTP) support.
 fts			Enable full-text searching.
 gcc-ada			Build the gcc Ada frontend and libraries.
 gcc-c++			Build the gcc C++ frontend and libraries.
 gcc-fortran		Build the gcc Fortran frontend and libraries.
+gcc-go			Build the gcc Go frontend and libraries.
+gcc-inplace-math	Build math libs inplace instead of depending on them.
 gcc-java		Build the gcc Java frontend, tools and libraries.
+gcc-multilib		Build libraries for multiple ABI's.
 gcc-objc		Build the gcc Objective-C frontend and libraries.
+gcc-objc++		Build the gcc Objective-C++ frontend and libraries.
 gd			Use GD to render graphical output.
 gdal			Use the GDAL library.
 gdb6-tui		Build the tui application.
@@ -317,6 +331,7 @@ libao			Enable the platform-independent 'ao' audio library.
 libgcrypt		Use GNU cryptographic library.
 libgpod			Enable libgpod support.
 libiconv-cp932		Add supplemental support for CP932.
+libind			Add Indian script support using libind.
 liblqr			Enable liblqr (liquid rescale) support.
 libmms			Enable streaming from mms:// URLS using libmms.
 libmp4v2		Enable libmp4v2 (MP4) support.
@@ -383,9 +398,11 @@ mpg123-altivec		Enable altivec optimized dithering code.
 mpg123-fifo		Enable FIFO support for the mpg123 control interface.
 mpg123-with-fpu		Enable generic fpu code.
 mpg123-x86-dither	Enable runtime selection of optimized x86 dithering (like MMX or 3Dnow).
+mplayer-default-cflags	Enable default optimized CFLAGS.
 mplayer-menu		Enable support for user-defined menus.
 mplayer-real		Enable usage of Real codecs.
 mplayer-runtime-cpudetection	Enable CPU detection at run time.
+mplayer-ssse3		Enable SSSE3 support.
 mplayer-win32		Enable usage of Win32 DLLs (codecs).
 mrtg-snmpv3		Enable SNMPv3 support.
 mstats			Enable memory statistics.
@@ -413,7 +430,6 @@ nntp			Enable Network News Transport Protocol (NNTP) support.
 nntpcache-pgp		Enable pgp signed nocem support.
 nspluginwrapper		Enable running non native netscape compatible plugins.
 nss			Enable Network Security Services (NSS) support.
-ocamlduce		Enable OcamlDuce support.
 octave			Enable Octave support.
 odbc			Enable ODBC support.
 official-mozilla-branding	Use official Mozilla reg. trademarks and logos.
@@ -449,6 +465,7 @@ postfix-milter		Build the milter with support for the Postfix MTA.
 postfix-stress		Enable Postfix stress-adaptive behaviour.
 prime			Use Prime for Kana-to-Kanji conversion.
 proftpd-readme		Enable mod_readme.
+psiconv			Enable psiconv support (for PSION 5 file formats).
 pstack			Enable pstack backtrace library.
 psycopg1		Enable psycopg 1.1.x support.
 psycopg2		Enable psycopg 2.x support.
@@ -585,12 +602,14 @@ unrealircd-ziplinks	Compress data before transmitting it between servers.
 upnp			Enable support for UPnP.
 uucp			Enable support for uucp.
 uulib			Enable support for uulib.
+v4l2			Enable V4L2 (Video4Linux2) support.
 vdpau			Enable support for VDPAU.
 vflib			Enable support for Japanese vector font library.
 via-padlock		Enable support for the VIA PadLock Security Engine.
 vice-ethernet		Enable Ethernet cartridge support.
 vice-fullscreen		Enable full-screen support.
 vice-hwscaling		Enable hardware-assisted screen scaling.
+vidix			Enable VIDIX (Video Interface for *niX support).
 viewvc-php		Use php to colorize .php and .inc files.
 vorbis			Enable Ogg Vorbis support.
 w3m			Use and enable support for the w3m browser.
@@ -613,11 +632,13 @@ xaw			Enable Xaw support.
 xblast-mini		Use a 480x392 window instead a 960x784 window in xblast.
 xft2			Enable Xft support.
 xim			Enable X Input Method support.
+xinerama		Enable Xinerama support.
 xjdic-locale		Honor LOCALE env var, instead of requiring ISO-2022-JP.
 xlockmore-allow-root	Allow root to get access.
 xlockmore-dpms		Use DPMS.
 xml			Enable XML support.
 xmlrpc			Enable XMLRPC support.
+xnp2-ia32		Enable ia32 core instead of the default 80286 core
 xrandr			Enable Xrandr support.
 xrender			Enable Xrender support.
 xscreensaver-webcollage	Install webcollage screensaver.

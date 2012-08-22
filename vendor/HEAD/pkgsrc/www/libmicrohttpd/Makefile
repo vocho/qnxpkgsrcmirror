@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.5 2012/03/07 15:12:27 wiz Exp $
+# $NetBSD: Makefile,v 1.8 2012/07/29 20:22:24 wiz Exp $
 #
 
-DISTNAME=	libmicrohttpd-0.9.19
+DISTNAME=	libmicrohttpd-0.9.21
 CATEGORIES=	www
 MASTER_SITES=	${MASTER_SITE_GNU:=libmicrohttpd/}
 

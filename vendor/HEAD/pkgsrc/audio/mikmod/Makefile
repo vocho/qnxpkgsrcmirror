@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.44 2012/01/13 10:54:47 obache Exp $
+# $NetBSD: Makefile,v 1.46 2012/07/21 19:35:03 dholland Exp $
 
 DISTNAME=	mikmod-3.2.1
-PKGREVISION=	2
+PKGREVISION=	3
 CATEGORIES=	audio
 MASTER_SITES=	http://mikmod.raphnet.net/files/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://mikmod.raphnet.net/
+HOMEPAGE=	http://mikmod.shlomifish.org/
 COMMENT=	MOD player for UNI IT XM S3M MOD MTM STM DSM MED FAR ULT 669 files
 
 PKG_DESTDIR_SUPPORT=	user-destdir

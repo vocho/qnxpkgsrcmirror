@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.1.1.1 2012/03/20 00:28:08 markd Exp $
+# $NetBSD: Makefile,v 1.3 2012/06/16 04:45:34 markd Exp $
 
 DISTNAME=	kde-wallpapers-${_KDE_VERSION}
 PKGNAME=	${DISTNAME:S/-4/4-4/}

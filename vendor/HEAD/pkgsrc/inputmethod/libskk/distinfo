@@ -1,0 +1,5 @@
+$NetBSD: distinfo,v 1.2 2012/07/22 13:08:05 obache Exp $
+
+SHA1 (libskk-0.0.13.tar.gz) = 4ebf0a808acde27b926ae20e9a9beb2b0ca6cfbf
+RMD160 (libskk-0.0.13.tar.gz) = e02d132bee65d331d255079035e9c36e127774d4
+Size (libskk-0.0.13.tar.gz) = 922883 bytes

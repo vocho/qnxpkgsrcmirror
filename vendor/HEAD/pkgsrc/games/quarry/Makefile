@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.14 2012/03/03 00:13:08 wiz Exp $
+# $NetBSD: Makefile,v 1.17 2012/08/13 14:25:39 wiz Exp $
 #
 
 DISTNAME=	quarry-0.2.0
-PKGREVISION=	9
+PKGREVISION=	12
 CATEGORIES=	games
 MASTER_SITES=	http://download.gna.org/quarry/
 
@@ -20,5 +20,6 @@ USE_TOOLS+=		gmake pkg-config
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../x11/gtk2/buildlink3.mk"
 .include "../../graphics/librsvg/buildlink3.mk"
+.include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../mk/omf-scrollkeeper.mk"
 .include "../../mk/bsd.pkg.mk"

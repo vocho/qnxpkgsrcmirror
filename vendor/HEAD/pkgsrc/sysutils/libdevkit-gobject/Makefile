@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.4 2012/03/03 00:11:59 wiz Exp $
+# $NetBSD: Makefile,v 1.6 2012/06/14 07:44:42 sbd Exp $
 #
 
 DISTNAME=	DeviceKit-003
 PKGNAME=	${DISTNAME:S/DeviceKit/libdevkit-gobject/}
-PKGREVISION=	3
+PKGREVISION=	5
 CATEGORIES=	sysutils
 MASTER_SITES=	http://hal.freedesktop.org/releases/
 
@@ -16,7 +16,7 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=	yes
 USE_LIBTOOL=	yes
-USE_TOOLS+=	autoconf automake pkg-config
+USE_TOOLS+=	autoconf automake pkg-config gmake
 
 .include "../../mk/bsd.prefs.mk"
 
@@ -31,6 +31,11 @@ PKGCONFIG_OVERRIDE+=	src/devkit-gobject/devkit-gobject.pc.in
 
 pre-configure:
 	cd ${WRKSRC} && autoreconf
+
+BUILDLINK_DEPMETHOD.libxslt=		build
+BUILDLINK_DEPMETHOD.docbook-xsl=	build
+.include "../../textproc/libxslt/buildlink3.mk"
+.include "../../textproc/docbook-xsl/buildlink3.mk"
 
 .include "../../devel/glib2/buildlink3.mk"
 .include "../../sysutils/dbus-glib/buildlink3.mk"

@@ -1,4 +1,4 @@
-# $NetBSD: java-vm.mk,v 1.82 2011/11/26 18:25:43 ryoon Exp $
+# $NetBSD: java-vm.mk,v 1.87 2012/08/11 14:49:44 marino Exp $
 #
 # This Makefile fragment handles Java dependencies and make variables,
 # and is meant to be included by packages that require Java either at
@@ -104,6 +104,8 @@ _PKG_JVM_DEFAULT?=	sun-jdk6
 _PKG_JVM_DEFAULT?=	sun-jdk6
 .  elif !empty(MACHINE_PLATFORM:MSunOS-5.11-i386)
 _PKG_JVM_DEFAULT?=	sun-jdk6
+.  elif !empty(MACHINE_PLATFORM:MDragonFly-*-*)
+_PKG_JVM_DEFAULT?=	openjdk7
 .  else
 _PKG_JVM_DEFAULT?=	kaffe
 .  endif
@@ -118,7 +120,9 @@ _ONLY_FOR_PLATFORMS.jdk16= \
 	DragonFly-*-* \
 	NetBSD-[2-9].*-i386 NetBSD-[4-9].*-x86_64
 _ONLY_FOR_PLATFORMS.kaffe= \
-	*-*-alpha *-*-arm *-*-arm32 *-*-i386 *-*-m68k *-*-mips* *-*-sparc *-*-powerpc
+	*-*-alpha *-*-arm *-*-arm32 *-*-i386 *-*-m68k \
+	*-*-mipsel* *-*-sparc *-*-powerpc 
+# exclude *-*-x86_64 from kaffe list as it apparently doesn't work
 _ONLY_FOR_PLATFORMS.sun-jdk6= \
 	Darwin-9.*-i386 Darwin-9.*-x86_64 \
 	Darwin-10.*-i386 Darwin-10.*-x86_64 \
@@ -130,6 +134,7 @@ _ONLY_FOR_PLATFORMS.sun-jdk6= \
 	NetBSD-*-i386 NetBSD-*-x86_64 \
 	SunOS-5.11-i386
 _ONLY_FOR_PLATFORMS.openjdk7= \
+	DragonFly-*-* \
 	NetBSD-[4-9]*-i386 \
 	NetBSD-[5-9]*-x86_64
 _ONLY_FOR_PLATFORMS.openjdk7-bin= \

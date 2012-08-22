@@ -183,7 +183,7 @@ CompatInterrupt(int signo)
 	}
 
     }
-    exit(signo);
+    _exit(signo);
 }
 
 /*-

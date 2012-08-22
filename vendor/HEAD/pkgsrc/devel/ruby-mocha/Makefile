@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.10 2012/03/17 14:39:20 taca Exp $
+# $NetBSD: Makefile,v 1.12 2012/06/02 00:40:05 taca Exp $
 
-DISTNAME=	mocha-0.10.5
+DISTNAME=	mocha-0.11.4
 CATEGORIES=	devel
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://mocha.rubyforge.org/
+HOMEPAGE=	http://gofreerange.com/mocha/docs/
 COMMENT=	Ruby library for mocking and stubbing
 LICENSE=	ruby-license OR mit
 

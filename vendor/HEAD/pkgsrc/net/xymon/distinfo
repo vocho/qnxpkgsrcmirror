@@ -1,11 +1,11 @@
-$NetBSD: distinfo,v 1.7 2011/11/16 21:12:34 spz Exp $
+$NetBSD: distinfo,v 1.9 2012/08/13 18:47:40 marino Exp $
 
-SHA1 (xymon-4.3.5.tar.gz) = cd49d689bbf9c27ed4d2010cf75223d7f43f656e
-RMD160 (xymon-4.3.5.tar.gz) = 31110454d30835f758d844e3c142066566546548
-Size (xymon-4.3.5.tar.gz) = 2715187 bytes
+SHA1 (xymon-4.3.7.tar.gz) = 29339157a1a6155d134ed1ad9985391d43034ee8
+RMD160 (xymon-4.3.7.tar.gz) = 9547eac47a5893f978cace54b5761e9cabe75941
+Size (xymon-4.3.7.tar.gz) = 2740378 bytes
 SHA1 (patch-aa) = c74991627bfc4286a67f66e45915c3af69b38c2f
 SHA1 (patch-ab) = d6079a2f09c38f701c553ab9744731050f66772c
-SHA1 (patch-ac) = 0c191268606b1bc8547a0403b440e7628b6e2928
+SHA1 (patch-ac) = f65831af9899167e291aabd691945e9e4fc1d44b
 SHA1 (patch-ad) = dadd2d81ed55c70f03994b2d868cfe643969a8ba
 SHA1 (patch-ae) = aa29eefcf9f0fa87014166692dcf146cebd70ef5
 SHA1 (patch-af) = e8c3fd4ed1de6f7a74db8fac152534a1fe9f29f5
@@ -13,4 +13,5 @@ SHA1 (patch-ah) = 29942670246f55cf4e703b028cd9a0dcb0acb681
 SHA1 (patch-build_rrd.sh) = 6c9393b93265d3c6d5bda801a875ec66f3759b01
 SHA1 (patch-build_snmp.sh) = 4141c6e2bebea078ac662b7585e579f2af8ee64f
 SHA1 (patch-configure) = 7b71ed7a567124a2aa36d9bf9188209649e88a4d
+SHA1 (patch-lib_sha2.c) = 363b1680bfb70acfd5a4f768fb9688f4511846be
 SHA1 (patch-xymond_rrd_do__vmstat.c) = 8062acc24e9b0e767c5abd3373641aa7b9a5b2ae

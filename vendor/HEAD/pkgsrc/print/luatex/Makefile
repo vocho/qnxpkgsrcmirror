@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.13 2011/11/01 06:02:25 sbd Exp $
+# $NetBSD: Makefile,v 1.16 2012/08/14 11:36:25 obache Exp $
 
 DISTNAME=	luatex-beta-0.70.1
 PKGNAME=	${DISTNAME:S/-beta//:S/-source//}
-PKGREVISION=	1
+PKGREVISION=	3
 CATEGORIES=	print
 MASTER_SITES=	http://foundry.supelec.fr/gf/download/frsrelease/392/1730/
 EXTRACT_SUFX=	.tar.bz2
@@ -104,7 +104,11 @@ CONFIGURE_ARGS+=--with-system-poppler \
 		--with-poppler-libdir=${BUILDLINK_PREFIX.poppler}/lib
 CONFIGURE_DIRS+=. texk/web2c
 MAKE_FLAGS+=	LIBTOOL=${LIBTOOL:Q}
-CFLAGS+=	-DLUA_ROOT=\"${PREFIX}/\"
+
+SUBST_CLASSES+=		prefix
+SUBST_STAGE.prefix=	post-configure
+SUBST_FILES.prefix=	texk/web2c/luatexdir/lua51/luaconf.h
+SUBST_VARS.prefix=	PREFIX
 
 INSTALLATION_DIRS+=	bin
 

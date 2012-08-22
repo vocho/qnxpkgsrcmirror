@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.23 2012/03/06 17:39:01 ryoon Exp $
+# $NetBSD: Makefile,v 1.28 2012/07/15 08:22:54 wiz Exp $
 #
 
 DISTNAME=	gnome-power-manager-2.24.4
-PKGREVISION=	15
+PKGREVISION=	19
 CATEGORIES=	sysutils gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gnome-power-manager/2.24/}
 EXTRACT_SUFX=	.tar.bz2
@@ -37,6 +37,9 @@ BUILDLINK_TRANSFORM+=   rm:-lresolv
 CFLAGS+=	-Wno-tautological-compare
 .endif
 
+# using deprecated g_atexit in glib2.
+BUILDLINK_TRANSFORM+=	rm:-Werror
+
 .include "../../devel/GConf/schemas.mk"
 .include "../../devel/libgnomeui/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
@@ -44,6 +47,7 @@ CFLAGS+=	-Wno-tautological-compare
 .include "../../security/gnome-keyring/buildlink3.mk"
 .include "../../security/policykit/buildlink3.mk"
 .include "../../security/policykit-gnome/buildlink3.mk"
+.include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../sysutils/hal/buildlink3.mk"
 .include "../../sysutils/libnotify/buildlink3.mk"
 .include "../../sysutils/dbus-glib/buildlink3.mk"

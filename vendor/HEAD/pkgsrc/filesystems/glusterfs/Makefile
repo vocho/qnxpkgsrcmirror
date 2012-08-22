@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.29 2012/03/31 18:14:23 dholland Exp $
+# $NetBSD: Makefile,v 1.31 2012/06/16 01:47:33 manu Exp $
 #
 
-DISTNAME=	glusterfs-3.2.6
+DISTNAME=	glusterfs-3.2.7
 CATEGORIES=	filesystems
-MASTER_SITES=	http://download.gluster.com/pub/gluster/glusterfs/3.2/3.2.6/
+MASTER_SITES=	http://download.gluster.com/pub/gluster/glusterfs/3.2/3.2.7/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.gluster.org/
@@ -16,7 +16,6 @@ GNU_CONFIGURE=		yes
 USE_LIBTOOL=		yes
 USE_TOOLS+=		flex bison
 
-PYTHON_VERSIONS_ACCEPTED= 27 26 25
 CONFIGURE_ARGS+=	--localstatedir=${VARBASE}
 CONFIGURE_ARGS+=	CFLAGS=${CFLAGS:M*:Q}\ -D_INCOMPLETE_XOPEN_C063
 CONFIGURE_ARGS+=	CFLAGS=${CFLAGS:M*:Q}\ -DDEBUG

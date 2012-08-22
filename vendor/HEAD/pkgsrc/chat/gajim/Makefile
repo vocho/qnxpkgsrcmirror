@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.9 2012/03/09 12:34:01 wiz Exp $
+# $NetBSD: Makefile,v 1.12 2012/06/14 07:44:06 sbd Exp $
 #
 
-DISTNAME=	gajim-0.14.1
-PKGREVISION=	7
+DISTNAME=	gajim-0.15
+PKGREVISION=	1
 CATEGORIES=	chat python
-MASTER_SITES=	http://www.gajim.org/downloads/0.14/
+MASTER_SITES=	http://www.gajim.org/downloads/0.15/
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	vsevolod@highsecure.ru
@@ -22,8 +22,6 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=	gmake intltool pkg-config msgfmt
 GNU_CONFIGURE=	yes
-
-PYTHON_VERSIONS_ACCEPTED=	27 26 25
 
 .include "../../lang/python/application.mk"
 .include "../../lang/python/extension.mk"
