@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.1 2012/03/20 00:14:35 markd Exp $
+# $NetBSD: Makefile,v 1.3 2012/06/16 04:45:30 markd Exp $
 
 DISTNAME=	kcolorchooser-${_KDE_VERSION}
 CATEGORIES=	graphics

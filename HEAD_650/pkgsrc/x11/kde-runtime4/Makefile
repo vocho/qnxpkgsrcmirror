@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.3 2012/03/25 20:11:28 markd Exp $
+# $NetBSD: Makefile,v 1.7 2012/06/16 04:45:38 markd Exp $
 
 DISTNAME=	kde-runtime-${_KDE_VERSION}
 PKGNAME=	${DISTNAME:S/-4/4-4/}
-PKGREVISION=	1
 CATEGORIES=	x11
 COMMENT=	Runtime requirements for the KDE integrated X11 desktop
 
@@ -45,6 +44,8 @@ CONF_FILES+=	${PREFIX}/share/examples/kde-runtime4/kde-information.menu \
                 ${PKG_SYSCONFDIR}/xdg/menus/kde-information.menu
 CONF_FILES+=	${PREFIX}/share/examples/kde4-dbus/org.kde.kcontrol.kcmremotewidgets.conf \
 		${PKG_SYSCONFDIR}/dbus-1/system.d/org.kde.kcontrol.kcmremotewidgets.conf
+
+BUILDLINK_DEPMETHOD.qt4-tools=	full
 
 INSTALLATION_DIRS+=	${PKGMANDIR}/man1
 

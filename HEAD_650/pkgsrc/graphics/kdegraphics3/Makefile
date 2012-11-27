@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.98 2012/03/03 00:12:34 wiz Exp $
+# $NetBSD: Makefile,v 1.102 2012/08/13 12:18:37 drochner Exp $
 
 DISTNAME=	kdegraphics-${_KDE_VERSION}
-PKGREVISION=	18
+PKGREVISION=	21
 CATEGORIES=	graphics
 COMMENT=	Graphics programs for the KDE integrated X11 desktop
 
@@ -31,6 +31,12 @@ SUBST_SED.kpdf+=	-e 's:/usr/X11R6:${X11BASE}:g'
 # Ensure we export symbols in the linked shared object.
 LDFLAGS+=		${EXPORT_SYMBOLS_LDFLAGS}
 
+.include "../../mk/compiler.mk"
+.if !empty(PKGSRC_COMPILER:Mclang)
+# OpenEXR uses exceptions in the header files
+BUILDLINK_TRANSFORM+=	rm:-fno-exceptions
+.endif
+
 .include "../../meta-pkgs/kde3/kde3.mk"
 .include "../../converters/fribidi/buildlink3.mk"
 .include "../../devel/libgphoto2/buildlink3.mk"
@@ -44,4 +50,5 @@ LDFLAGS+=		${EXPORT_SYMBOLS_LDFLAGS}
 .include "../../x11/kdebase3/buildlink3.mk"
 .include "../../x11/kdelibs3/buildlink3.mk"
 .include "../../x11/libXxf86vm/buildlink3.mk"
+.include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../mk/bsd.pkg.mk"

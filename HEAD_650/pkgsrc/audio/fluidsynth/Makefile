@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.19 2012/03/03 00:12:04 wiz Exp $
+# $NetBSD: Makefile,v 1.21 2012/08/19 21:39:40 adam Exp $
 
-DISTNAME=	fluidsynth-1.1.5
-PKGREVISION=	2
+DISTNAME=	fluidsynth-1.1.6
 CATEGORIES=	audio
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=fluidsynth/}
+EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.fluidsynth.org/

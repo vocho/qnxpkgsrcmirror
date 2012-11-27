@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.60 2012/03/03 12:54:23 wiz Exp $
+# $NetBSD: Makefile,v 1.62 2012/07/01 17:36:41 wiz Exp $
 
-DISTNAME=	xterm-259
-PKGREVISION=	2
+DISTNAME=	xterm-281
 CATEGORIES=	x11
 MASTER_SITES=	ftp://invisible-island.net/xterm/ \
 		http://www.sfr-fresh.com/unix/misc/
@@ -32,6 +31,8 @@ CONFIGURE_ARGS+=	${${CONFIGURE_ARGS.${XAW_TYPE}}:L}
 
 CFLAGS.QNX+= -D__TERMCAP_H_INCLUDED
 
+INSTALLATION_DIRS=	share/applications
+
 .include "../../mk/bsd.prefs.mk"
 
 .if ${X11_TYPE} == "modular"
@@ -52,7 +53,6 @@ BUILDLINK_DEPMETHOD.libxkbfile?=	build
 .include "../../x11/libxkbfile/buildlink3.mk"
 
 post-install:
-	${INSTALL_DATA_DIR} ${DESTDIR}${PREFIX}/share/applications && \
 	${INSTALL_DATA} ${WRKSRC}/xterm.desktop \
 		${DESTDIR}${PREFIX}/share/applications && \
 	${INSTALL_DATA} ${WRKSRC}/uxterm.desktop \
@@ -62,6 +62,7 @@ post-install:
 
 .include "options.mk"
 
+.include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../mk/termcap.buildlink3.mk"
 .include "../../mk/xaw.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

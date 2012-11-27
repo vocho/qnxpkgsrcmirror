@@ -1,9 +1,8 @@
-# $NetBSD: Makefile,v 1.43 2012/03/25 15:20:04 obache Exp $
+# $NetBSD: Makefile,v 1.50 2012/07/08 12:18:21 obache Exp $
 #
 
-DISTNAME=	mikutter.0.1.0.723
+DISTNAME=	mikutter.0.1.1.814
 PKGNAME=	${RUBY_PKGPREFIX}-${DISTNAME:S/./-/}
-PKGREVISION=	1
 CATEGORIES=	net
 MASTER_SITES=	http://mikutter.hachune.net/bin/
 
@@ -21,8 +20,7 @@ RUBY_VERSION_SUPPORTED=	192 193
 DEPENDS+=	xdg-utils-[0-9]*:../../misc/xdg-utils
 DEPENDS+=	${RUBY_PKGPREFIX}-hmac>=0.4.0:../../security/ruby-hmac
 DEPENDS+=	${RUBY_PKGPREFIX}-gnome2-gtk>=1.0.0:../../x11/ruby-gnome2-gtk
-# need included oauth
-#DEPENDS+=	${RUBY_PKGPREFIX}-oauth>=0.3.6:../../security/ruby-oauth
+DEPENDS+=	${RUBY_PKGPREFIX}-oauth>=0.4.6:../../security/ruby-oauth
 # need included escape.rb
 #DEPENDS+=	${RUBY_PKGPREFIX}-escape-[0-9]*:../../textproc/ruby-escape
 DEPENDS+=	${RUBY_PKGPREFIX}-memoize>=1.3.1:../../devel/ruby-memoize
@@ -38,7 +36,6 @@ USE_LANGUAGES=	# none
 USE_TOOLS+=	pax
 
 REPLACE_RUBY=	mikutter.rb
-RUBY_ENCODING_ARG=	-Ku
 REPLACE_RUBY_DIRS=	core
 .include "../../lang/ruby/replace.mk"
 
@@ -46,7 +43,7 @@ INSTALLATION_DIRS+=	bin share/doc/mikutter share/applications share/mikutter
 
 do-build:
 	cd ${WRKSRC}/core/lib && \
-		${RM} -rf json* hmac*.rb memoize.rb ruby-bsearch-* addressable && \
+		${RM} -rf json* hmac*.rb memoize.rb oauth* ruby-bsearch-* addressable && \
 	${SED} -e 's,@PREFIX@,${PREFIX},g' < ${FILESDIR}/desktop.in > ${WRKDIR}/desktop
 	${SED} -e 's,@PREFIX@,${PREFIX},g' < ${FILESDIR}/mikutter.sh.in > ${WRKDIR}/mikutter.sh
 

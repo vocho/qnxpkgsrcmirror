@@ -1,4 +1,4 @@
-# $NetBSD: rubyversion.mk,v 1.77 2012/03/21 15:48:41 taca Exp $
+# $NetBSD: rubyversion.mk,v 1.84 2012/08/11 13:38:50 obache Exp $
 #
 
 # This file determines which Ruby version is used as a dependency for
@@ -35,7 +35,7 @@
 #
 #		Possible values: 18 192 193
 #		Compatible values: 19 (= 192)
-#		Default: 193
+#		Default: 18 192 193
 #
 # RUBY_VERSION_REQD
 #	The Ruby versions force to build (for pbulk).
@@ -203,9 +203,9 @@ RUBY19_VERSION=		1.9.2
 RUBY193_VERSION=	1.9.3
 
 # patch
-RUBY18_PATCHLEVEL=	pl358
-RUBY19_PATCHLEVEL=	pl318
-RUBY193_PATCHLEVEL=	p125
+RUBY18_PATCHLEVEL=	pl370
+RUBY19_PATCHLEVEL=	pl320
+RUBY193_PATCHLEVEL=	p194
 
 # current API compatible version; used for version of shared library
 RUBY18_API_VERSION=	1.8.7
@@ -217,10 +217,12 @@ RUBY_VERSION_DEFAULT?=	193
 
 RUBY_VERSION_SUPPORTED?= 18 192 193
 RUBY_VER?=		${RUBY_VERSION_DEFAULT}
+RUBY_VER_MAP.192=	19
 
 # If package support only one version, use it.
 .if ${RUBY_VERSION_SUPPORTED:[\#]} == 1
-RUBY_VER=	${RUBY_VERSION_SUPPORTED}
+RUBY_VER=		${RUBY_VERSION_SUPPORTED}
+RUBY_VERSION_DEFAULT=	${RUBY_VERSION_SUPPORTED}
 .endif
 
 .if defined(RUBY_VERSION_REQD)
@@ -231,9 +233,7 @@ RUBY_VER=	${rv}
 . endfor
 .endif
 
-.if ${RUBY_VER} == "192"
-RUBY_VER=	19
-.endif
+RUBY_VER:=	${RUBY_VER_MAP.${RUBY_VER}:U${RUBY_VER}}
 
 .if ${RUBY_VER} == "18"
 RUBY_VERSION=		${RUBY18_VERSION}
@@ -330,7 +330,7 @@ RUBY_SHLIBVER=		${RUBY_VER}
 .else
 RUBY_SHLIBVER=		${_RUBY_VER_MAJOR}${_RUBY_VER_MINOR}${_RUBY_API_MINOR}
 .endif
-.elif ${OPSYS} == "OpenBSD"
+.elif ${OPSYS} == "OpenBSD" || ${OPSYS} == "MirBSD"
 RUBY_SHLIBVER=		${_RUBY_VER_MAJOR}.${_RUBY_VER_MINOR}${_RUBY_API_MINOR}
 .elif ${OPSYS} == "Darwin"
 RUBY_SHLIB=		${RUBY_VER}.${RUBY_SHLIBVER}.${RUBY_SLEXT}

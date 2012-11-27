@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.22 2011/10/07 10:45:16 alnsn Exp $
+# $NetBSD: Makefile,v 1.24 2012/06/16 05:40:05 dholland Exp $
 #
 
 DISTNAME=		tables-2.2.1
@@ -13,12 +13,12 @@ COMMENT=		Database package for large amounts of data
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
-PYTHON_VERSIONS_ACCEPTED=	27 26 25
-
 PKG_OPTIONS_VAR=	PKG_OPTIONS.pytables
 PKG_SUPPORTED_OPTIONS=	lzo
 PKG_SUGGESTED_OPTIONS=
 .include "../../mk/bsd.options.mk"
+
+PYTHON_VERSIONS_INCOMPATIBLE=	25
 
 PYDISTUTILSPKG=		yes
 PYSETUPBUILDARGS=	--hdf5=${BUILDLINK_PREFIX.hdf5}

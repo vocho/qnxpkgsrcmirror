@@ -1,4 +1,4 @@
-$NetBSD: patch-src_ZipArchive_DirEnumerator.cpp,v 1.2 2011/10/14 09:49:06 ryoon Exp $
+$NetBSD: patch-src_ZipArchive_DirEnumerator.cpp,v 1.4 2012/08/12 02:12:51 marino Exp $
 
 Add DragonFly support.
 

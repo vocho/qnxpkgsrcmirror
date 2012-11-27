@@ -13,3 +13,4 @@ SHA1 (patch-ad) = e94da1c4423677b74f463d4b132c7714efc65815
 SHA1 (patch-ae) = ab346a515d5ab0efd679e7783edebd95a05db782
 SHA1 (patch-af) = 513a8f995161853870a01afabccdb2a650b794a6
 SHA1 (patch-ag) = 323daaaa0b63771296efa86cf1278d3eaa2a1551
+SHA1 (patch-libcharset_lib_localcharset.c) = c490b0910c3da62364e54d51e6652e8d620f7526

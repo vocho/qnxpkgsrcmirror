@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.7 2010/10/03 13:03:51 obache Exp $
+# $NetBSD: Makefile,v 1.10 2012/08/21 23:49:24 marino Exp $
 #
 
 DISTNAME=	hanzim-1.3
-PKGREVISION=	1
+PKGREVISION=	3
 CATEGORIES=	misc
 MASTER_SITES=	http://kamares.ucsd.edu/~arobert/Files/Chinese/
 EXTRACT_SUFX=	.tgz
@@ -10,6 +10,8 @@ EXTRACT_SUFX=	.tgz
 MAINTAINER=	rxg@NetBSD.org
 HOMEPAGE=	http://kamares.ucsd.edu/~arobert/hanzim.html
 COMMENT=	Chinese character learning-aid program
+
+PKG_DESTDIR_SUPPORT=	user-destdir
 
 WRKSRC=		${WRKDIR}/Hanzim
 

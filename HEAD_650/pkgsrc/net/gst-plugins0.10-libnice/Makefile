@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.7 2012/03/03 00:13:45 wiz Exp $
+# $NetBSD: Makefile,v 1.10 2012/06/14 07:43:45 sbd Exp $
 #
 
-DISTNAME=	libnice-0.1.1
+DISTNAME=	libnice-0.1.2
 PKGNAME=	gst-plugins0.10-${DISTNAME}
 PKGREVISION=	2
 CATEGORIES=	net devel

@@ -1,8 +1,8 @@
-$NetBSD: patch-ab,v 1.14 2010/09/10 03:29:00 taca Exp $
+$NetBSD: patch-ab,v 1.15 2012/07/25 20:25:50 bsiegert Exp $
 
-* Adding Interix support.
+* Adding Interix and MirBSD support.
 
---- configure.orig	2011-07-02 09:54:02.000000000 +0000
+--- configure.orig	2012-06-29 13:18:24.000000000 +0000
 +++ configure
 @@ -6212,6 +6212,9 @@ bsdi*)          LIBS="-lm $LIBS"
  		$as_echo "#define BROKEN_SETREGID 1" >>confdefs.h
@@ -19,7 +19,7 @@ $NetBSD: patch-ab,v 1.14 2010/09/10 03:29:00 taca Exp $
  	sysv4*) 	: ${LDSHARED='ld -G'}
  			rb_cv_dlopen=yes;;
 -        nto-qnx*)       : ${LDSHARED="qcc -shared"}
-+        nto-qnx*)       : ${LDSHARED='${CC} -shared'}
++        nto-qnx*)       : ${LDSHARED="${CC} -shared"}
                          rb_cv_dlopen=yes ;;
  	esix*|uxpds*) 	: ${LDSHARED="ld -G"}
  			rb_cv_dlopen=yes ;;
@@ -37,6 +37,15 @@ $NetBSD: patch-ab,v 1.14 2010/09/10 03:29:00 taca Exp $
  	interix*) 	: ${LDSHARED="$CC -shared"}
  			XLDFLAGS="$XLDFLAGS -Wl,-E"
  			LIBPATHFLAG=" -L%1\$-s"
+@@ -10224,7 +10234,7 @@ fi
+ 			  test "$GCC" = yes && test "$rb_cv_prog_gnu_ld" = yes || LDSHARED="ld -Bshareable"
+ 			fi
+ 			rb_cv_dlopen=yes ;;
+-	openbsd*) 	: ${LDSHARED="\$(CC) -shared ${CCDLFLAGS}"}
++	openbsd*|mirbsd*) 	: ${LDSHARED="\$(CC) -shared ${CCDLFLAGS}"}
+ 			if test "$rb_cv_binary_elf" = yes; then
+ 			    LDFLAGS="$LDFLAGS -Wl,-E"
+ 			fi
 @@ -10686,7 +10696,7 @@ if test "$enable_shared" = 'yes'; then
  	LIBRUBY_DLDFLAGS='-Wl,-soname,lib$(RUBY_SO_NAME).so.$(MAJOR).$(MINOR)'
  	LIBRUBY_ALIASES='lib$(RUBY_SO_NAME).so.$(MAJOR).$(MINOR) lib$(RUBY_SO_NAME).so'
@@ -46,6 +55,15 @@ $NetBSD: patch-ab,v 1.14 2010/09/10 03:29:00 taca Exp $
  	SOLIBS='$(LIBS)'
  	LIBRUBY_SO='lib$(RUBY_SO_NAME).so.$(MAJOR)$(MINOR)'
  	if test "$rb_cv_binary_elf" != "yes" ; then
+@@ -10704,7 +10714,7 @@ if test "$enable_shared" = 'yes'; then
+ 	   LIBRUBY_ALIASES=""
+ 	fi
+  	;;
+-    openbsd*)
++    openbsd*|mirbsd*)
+ 	SOLIBS='$(LIBS)'
+ 	LIBRUBY_SO='lib$(RUBY_INSTALL_NAME).so.$(MAJOR).'`expr ${MINOR} \* 10 + ${TEENY}`
+ 	;;
 @@ -10740,6 +10750,14 @@ if test "$enable_shared" = 'yes'; then
  	LIBRUBY_DLDFLAGS='-install_name $(libdir)/lib$(RUBY_SO_NAME).dylib -current_version $(MAJOR).$(MINOR).$(TEENY) -compatibility_version $(MAJOR).$(MINOR)'
  	LIBRUBY_ALIASES='lib$(RUBY_SO_NAME).$(MAJOR).$(MINOR).dylib lib$(RUBY_SO_NAME).dylib'

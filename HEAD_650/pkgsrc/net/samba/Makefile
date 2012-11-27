@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.217 2012/02/06 12:41:17 wiz Exp $
+# $NetBSD: Makefile,v 1.221 2012/08/19 07:28:36 sbd Exp $
 
 .include "../../net/samba/Makefile.mirrors"
 
 DISTNAME=	samba-${VERSION}
-PKGREVISION=	7
+PKGREVISION=	1
 CATEGORIES=	net
 MASTER_SITES=	${SAMBA_MIRRORS:=stable/}
 
@@ -12,7 +12,7 @@ HOMEPAGE=	http://www.samba.org/
 COMMENT=	SMB/CIFS protocol server suite
 LICENSE=	gnu-gpl-v3
 
-VERSION=	3.6.3
+VERSION=	3.6.6
 CONFLICTS+=	ja-samba-[0-9]* pam-smbpass-[0-9]* tdb-[0-9]* winbind-[0-9]*
 
 PKG_DESTDIR_SUPPORT=	user-destdir
@@ -95,13 +95,6 @@ MAKEFLAGS+=	PWD_MKDB=${PWD_MKDB:Q}
 .endif
 FILES_SUBST+=	MKTEMP=${MKTEMP:Q}
 FILES_SUBST+=	PWD_MKDB=${PWD_MKDB:Q}
-
-.if ${OPSYS} == "NetBSD"
-.  if !empty(PKG_OPTIONS:Mwinbind)
-# Install a /usr/lib/nss_winbind.so.0 -> ${PREFIX}/lib/nss_winbind.so.0 symlink
-INSTALL_TEMPLATES+=	INSTALL.nss_winbind
-.  endif
-.endif
 
 .if ${OPSYS} == "QNX"
 .  if !empty(PKG_OPTIONS:Mwinbind)

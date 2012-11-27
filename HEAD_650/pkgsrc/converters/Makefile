@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.114 2012/03/16 17:41:09 wiz Exp $
+# $NetBSD: Makefile,v 1.117 2012/07/05 16:26:05 sno Exp $
 #
 
 COMMENT=	Document format and character code converters
@@ -17,6 +17,7 @@ SUBDIR+=	cn2jp
 SUBDIR+=	code2html
 SUBDIR+=	convmv
 SUBDIR+=	doc2html
+SUBDIR+=	dos2unix
 SUBDIR+=	dvi2tty
 SUBDIR+=	enriched2html
 SUBDIR+=	fondu
@@ -28,6 +29,7 @@ SUBDIR+=	ja-dvi2tty
 SUBDIR+=	jcode-perl
 SUBDIR+=	kcc
 SUBDIR+=	latex2rtf
+SUBDIR+=	libcdr
 SUBDIR+=	libiconv
 SUBDIR+=	libvisio
 SUBDIR+=	libwpd
@@ -43,6 +45,7 @@ SUBDIR+=	p5-Convert-TNEF
 SUBDIR+=	p5-Convert-UUlib
 SUBDIR+=	p5-JSON
 SUBDIR+=	p5-JSON-Any
+SUBDIR+=	p5-JSON-PP
 SUBDIR+=	p5-JSON-XS
 SUBDIR+=	p5-JSON-XS-VersionOneAndTwo
 SUBDIR+=	p5-Jcode

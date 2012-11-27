@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.40 2012/03/20 10:36:40 markd Exp $
+# $NetBSD: Makefile,v 1.44 2012/07/02 13:37:36 adam Exp $
 #
 
 DISTNAME=	konversation-1.4
+PKGREVISION=	4
 CATEGORIES=	chat kde
 MASTER_SITES=	${MASTER_SITE_KDE:=konversation/1.4/src/}
 EXTRACT_SUFX=	.tar.xz
@@ -39,4 +40,5 @@ DEPENDS+=		psmisc>=20.1:../../sysutils/psmisc
 .include "../../security/qca2/buildlink3.mk"
 .include "../../x11/kdelibs4/buildlink3.mk"
 .include "../../x11/libXScrnSaver/buildlink3.mk"
+.include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../mk/bsd.pkg.mk"

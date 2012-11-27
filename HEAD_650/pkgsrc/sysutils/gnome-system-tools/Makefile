@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.13 2012/03/03 00:13:56 wiz Exp $
+# $NetBSD: Makefile,v 1.17 2012/08/13 14:25:43 wiz Exp $
 #
 
 DISTNAME=		gnome-system-tools-2.22.2
-PKGREVISION=		9
+PKGREVISION=		13
 CATEGORIES=		sysutils gnome
 MASTER_SITES=		${MASTER_SITE_GNOME:=sources/gnome-system-tools/2.22/}
 EXTRACT_SUFX=		.tar.bz2
@@ -33,6 +33,7 @@ GCONF_SCHEMAS+=		gnome-system-tools.schemas
 .include "../../devel/GConf/schemas.mk"
 .include "../../devel/glib2/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
+.include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../sysutils/liboobs/buildlink3.mk"
 .include "../../sysutils/nautilus/buildlink3.mk"
 .include "../../textproc/gnome-doc-utils/buildlink3.mk"

@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.48 2011/04/22 13:43:19 obache Exp $
+# $NetBSD: Makefile,v 1.50 2012/07/02 19:23:30 drochner Exp $
 
 DISTNAME=	gnustep-base-1.20.1
-PKGREVISION=	1
+PKGREVISION=	3
 CATEGORIES=	devel gnustep
 MASTER_SITES=	${MASTER_SITE_GNUSTEP:=core/}
 

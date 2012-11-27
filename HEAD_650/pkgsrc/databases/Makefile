@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.399 2012/03/21 22:17:35 mspo Exp $
+# $NetBSD: Makefile,v 1.407 2012/07/16 15:42:19 asau Exp $
 #
 
 COMMENT=	Databases
@@ -83,6 +83,7 @@ SUBDIR+=	mysqlcc
 SUBDIR+=	mytop
 SUBDIR+=	nss_ldap
 SUBDIR+=	ocaml-mysql
+SUBDIR+=	ocaml-sqlite3
 SUBDIR+=	odbc-postgresql
 SUBDIR+=	openldap
 SUBDIR+=	openldap-client
@@ -208,7 +209,6 @@ SUBDIR+=	pgpool
 SUBDIR+=	pgtcl
 SUBDIR+=	pgtclng
 SUBDIR+=	php-dba
-SUBDIR+=	php-dbase
 SUBDIR+=	php-dbx
 SUBDIR+=	php-ldap
 SUBDIR+=	php-mssql
@@ -230,6 +230,7 @@ SUBDIR+=	poco-data
 SUBDIR+=	poco-data-mysql
 SUBDIR+=	poco-data-odbc
 SUBDIR+=	poco-data-sqlite
+SUBDIR+=	postgresql-pgbench
 SUBDIR+=	postgresql-postgis
 #SUBDIR+=	postgresql-uuid	# just contains files for postgresql*-uuid
 SUBDIR+=	postgresql83
@@ -370,6 +371,7 @@ SUBDIR+=	ruby-do_sqlite3
 SUBDIR+=	ruby-gdbm
 SUBDIR+=	ruby-ldap
 SUBDIR+=	ruby-mysql
+SUBDIR+=	ruby-mysql2
 SUBDIR+=	ruby-odbc
 SUBDIR+=	ruby-pg
 SUBDIR+=	ruby-postgres-pr

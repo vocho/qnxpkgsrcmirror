@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.15 2012/02/16 20:30:55 hans Exp $
+# $NetBSD: Makefile,v 1.21 2012/08/12 16:16:39 wiz Exp $
 #
 
-DISTNAME=		libdrm-2.4.20
+DISTNAME=		libdrm-2.4.38
 CATEGORIES=		x11 graphics
 MASTER_SITES=		http://dri.freedesktop.org/libdrm/
 EXTRACT_SUFX=		.tar.bz2
@@ -31,12 +31,12 @@ SUBST_VARS.atomic=	ATOMIC_OPS_CHECK
 
 ATOMIC_OPS_CHECK=	0
 .if ${OPSYS} == "NetBSD"
-. if exists(/usr/include/sys/atomic.h)
+.  if exists(/usr/include/sys/atomic.h)
 ATOMIC_OPS_CHECK=	1
-. else
-. include "../../devel/libatomic_ops/buildlink3.mk"
+.  else
+.  include "../../devel/libatomic_ops/buildlink3.mk"
 CONFIGURE_ENV+=		drm_cv_atomic_primitives=libatomic-ops
-. endif
+.  endif
 .endif
 
 .if ${OPSYS} == "QNX"
@@ -46,4 +46,5 @@ CONFIGURE_ENV+=		drm_cv_atomic_primitives=solaris
 CONFIGURE_ARGS+=	PTHREADSTUBS_CFLAGS=-I${PREFIX}/include \
 			PTHREADSTUBS_LIBS=-L${PREFIX}/lib
 
+.include "../../sysutils/libpciaccess/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

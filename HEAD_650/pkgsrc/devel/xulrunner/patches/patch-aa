@@ -1,8 +1,8 @@
 $NetBSD: patch-aa,v 1.10 2012/04/26 13:30:29 ryoon Exp $
 
---- configure.in.orig	2012-04-20 22:03:44.000000000 +0000
+--- configure.in.orig	2012-07-13 21:42:48.000000000 +0000
 +++ configure.in
-@@ -1444,6 +1444,14 @@ OS_2)
+@@ -1464,6 +1464,14 @@ OS_2)
      OS_TARGET=OS2
      OS_RELEASE=`uname -v`
      ;;
@@ -17,7 +17,7 @@ $NetBSD: patch-aa,v 1.10 2012/04/26 13:30:29 ryoon Exp $
  Darwin)
      case "${target_cpu}" in
      powerpc*)
-@@ -2413,7 +2421,7 @@ case "$target" in
+@@ -2279,7 +2287,7 @@ case "$target" in
      MOZ_FIX_LINK_PATHS='-Wl,-executable_path,$(LIBXUL_DIST)/bin'
      ;;
  
@@ -26,7 +26,7 @@ $NetBSD: patch-aa,v 1.10 2012/04/26 13:30:29 ryoon Exp $
      if test `test -x /usr/bin/objformat && /usr/bin/objformat || echo elf` != "elf"; then
  	DLL_SUFFIX=".so.1.0"
  	DSO_LDOPTS="-shared"
-@@ -2421,6 +2429,9 @@ case "$target" in
+@@ -2287,6 +2295,9 @@ case "$target" in
      if test ! "$GNU_CC"; then
  	DSO_LDOPTS="-Bshareable $DSO_LDOPTS"
      fi
@@ -36,7 +36,7 @@ $NetBSD: patch-aa,v 1.10 2012/04/26 13:30:29 ryoon Exp $
      ;;
  
  ia64*-hpux*)
-@@ -2722,6 +2733,35 @@ ia64*-hpux*)
+@@ -2594,6 +2605,35 @@ ia64*-hpux*)
      MKCSHLIB='$(CC) $(CFLAGS) $(DSO_PIC_CFLAGS) $(DSO_LDOPTS) -Wl,-soname,lib$(LIBRARY_NAME)$(DLL_SUFFIX) -o $@'
      ;;
  
@@ -72,7 +72,7 @@ $NetBSD: patch-aa,v 1.10 2012/04/26 13:30:29 ryoon Exp $
  *-openbsd*)
      if test "$SO_VERSION"; then
          DLL_SUFFIX=".so.$SO_VERSION"
-@@ -3412,6 +3452,12 @@ dnl ====================================
+@@ -3289,6 +3329,12 @@ dnl ====================================
  case $target in
  *-hpux11.*)
  	;;
@@ -85,7 +85,7 @@ $NetBSD: patch-aa,v 1.10 2012/04/26 13:30:29 ryoon Exp $
  *)
  	AC_CHECK_LIB(c_r, gethostbyname_r)
  	;;
-@@ -4358,6 +4404,14 @@ if test -n "$YASM"; then
+@@ -4288,6 +4334,14 @@ if test -n "$YASM"; then
    _YASM_BUILD=`        echo ${YASM_VERSION} | $AWK -F\. '{ print $4 }'`
  fi
  
@@ -100,7 +100,7 @@ $NetBSD: patch-aa,v 1.10 2012/04/26 13:30:29 ryoon Exp $
  if test -z "$SKIP_LIBRARY_CHECKS"; then
  dnl system JPEG support
  dnl ========================================================
-@@ -5732,11 +5786,11 @@ if test -n "$MOZ_WEBM" -a -z "$MOZ_NATIV
+@@ -5659,11 +5713,11 @@ if test -n "$MOZ_WEBM" -a -z "$MOZ_NATIV
  
      dnl See if we have assembly on this platform.
      case "$OS_ARCH:$CPU_ARCH" in
@@ -114,7 +114,20 @@ $NetBSD: patch-aa,v 1.10 2012/04/26 13:30:29 ryoon Exp $
        VPX_ASFLAGS="-f elf64 -rnasm -pnasm -DPIC"
        VPX_X86_ASM=1
      ;;
-@@ -9102,6 +9156,8 @@ if test -z "$MOZ_NATIVE_NSPR"; then
+@@ -7180,7 +7234,11 @@ else
+   MOZ_GLUE_PROGRAM_LDFLAGS='$(MKSHLIB_FORCE_ALL) $(call EXPAND_LIBNAME_PATH,mozglue,$(LIBXUL_DIST)/lib) $(MKSHLIB_UNFORCE_ALL)'
+   if test -n "$GNU_CC"; then
+     dnl And we need mozglue symbols to be exported.
+-    MOZ_GLUE_PROGRAM_LDFLAGS="$MOZ_GLUE_PROGRAM_LDFLAGS -rdynamic"
++    if test "$OS_TARGET" != "NTO"; then
++      MOZ_GLUE_PROGRAM_LDFLAGS="$MOZ_GLUE_PROGRAM_LDFLAGS -rdynamic"
++    else  
++      MOZ_GLUE_PROGRAM_LDFLAGS="$MOZ_GLUE_PROGRAM_LDFLAGS -Wl,--export-dynamic"
++    fi
+   fi
+   if test "$MOZ_LINKER" = 1; then
+     MOZ_GLUE_PROGRAM_LDFLAGS="$MOZ_GLUE_PROGRAM_LDFLAGS $ZLIB_LIBS"
+@@ -9116,6 +9174,8 @@ if test -z "$MOZ_NATIVE_NSPR"; then
      AC_MSG_WARN([Recreating autoconf.mk with updated nspr-config output])
      if test "$OS_ARCH" != "WINNT"; then
         NSPR_LIBS=`./nsprpub/config/nspr-config --prefix=$LIBXUL_DIST --exec-prefix=$MOZ_BUILD_ROOT/dist --libdir=$LIBXUL_DIST/lib --libs`

@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.43 2012/03/03 00:14:22 wiz Exp $
+# $NetBSD: Makefile,v 1.45 2012/07/03 18:34:43 drochner Exp $
 #
 
 PKGNAME=	${DISTNAME:S/-/-demo-/}
-PKGREVISION=	3
 COMMENT=	Demo viewer and configuration tool for xscreensaver
 
 PKG_DESTDIR_SUPPORT=	user-destdir

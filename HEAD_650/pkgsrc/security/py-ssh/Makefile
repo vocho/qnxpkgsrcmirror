@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.1.1.1 2012/02/12 15:05:04 gls Exp $
+# $NetBSD: Makefile,v 1.3 2012/07/01 19:24:34 gls Exp $
 #
 DISTNAME=	ssh-${VERSION}
 PKGNAME=	${PYPKGPREFIX}-ssh-${VERSION}
 CATEGORIES=	security
 MASTER_SITES=	http://pypi.python.org/packages/source/s/ssh/
-VERSION=	1.7.12
+VERSION=	1.7.14
 
 MAINTAINER=	gls@NetBSD.org
 HOMEPAGE=	http://pypi.python.org/pypi/ssh/

@@ -1,10 +1,8 @@
-$NetBSD: distinfo,v 1.34 2008/08/06 04:09:12 dsainty Exp $
+$NetBSD: distinfo,v 1.35 2012/08/21 21:32:34 marino Exp $
 
-SHA1 (tk8.4.18-src.tar.gz) = c1032f3cacd40406065fc1f46ecd217f50329273
-RMD160 (tk8.4.18-src.tar.gz) = 9c01ba85575a230231793a9885457c98046e41bb
-Size (tk8.4.18-src.tar.gz) = 3363853 bytes
-SHA1 (patch-aa) = b729957a24ce2fb6f972bbb19af27bd7d41f1846
-SHA1 (patch-ab) = b43b097291e45d6a2328d1f0f04d1a655d7b334e
-SHA1 (patch-ac) = c545b6bafc15995c4d3458c21466f05af844b723
-SHA1 (patch-ad) = 14ad16e840a825e987721f23c6308c4a011dbe01
-SHA1 (patch-ae) = 7901a53b8f2742898f837d4587be03ef66912af4
+SHA1 (tk8.5.12-src.tar.gz) = 292a01a39e9378d2455e4492f39500baeb6b63db
+RMD160 (tk8.5.12-src.tar.gz) = fc864df9f1e1ebd4b4375cc46572834095e77372
+Size (tk8.5.12-src.tar.gz) = 3826062 bytes
+SHA1 (patch-unix_Makefile.in) = 0e1f8a8c20c426a042ab1c061cc6031283abe1d5
+SHA1 (patch-unix_configure) = 6c7d056cb720baef1fed2d1c2b6fe3dd9098b0ee
+SHA1 (patch-unix_tcl.m4) = 2c624bf359e87a86acb50a8a5eb5a22b28dd63a2

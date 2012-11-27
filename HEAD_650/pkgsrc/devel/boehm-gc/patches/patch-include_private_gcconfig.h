@@ -1,8 +1,8 @@
 $NetBSD$
 
---- include/private/gcconfig.h.orig	2008-02-20 19:23:00.000000000 +0000
+--- include/private/gcconfig.h.orig	2012-05-11 17:09:00.000000000 +0000
 +++ include/private/gcconfig.h
-@@ -334,6 +334,10 @@
+@@ -371,6 +371,10 @@
  #    define X86_64
  #    define mach_type_known
  # endif
@@ -13,9 +13,9 @@ $NetBSD$
  # if defined(FREEBSD) && defined(__sparc__)
  #    define SPARC
  #    define mach_type_known
-@@ -1299,6 +1303,17 @@
- 	 should be looked into some more */
- #      define NO_PTHREAD_TRYLOCK
+@@ -1441,6 +1445,17 @@
+       /* This should be looked into some more.                          */
+ #     define NO_PTHREAD_TRYLOCK
  #   endif /* DARWIN */
 +#   ifdef __QNXNTO__
 +#       include <sys/storage.h>

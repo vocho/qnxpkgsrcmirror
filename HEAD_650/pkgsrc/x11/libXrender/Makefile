@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.6 2010/09/10 18:56:04 joerg Exp $
+# $NetBSD: Makefile,v 1.8 2012/06/09 07:00:48 obache Exp $
 #
 
-DISTNAME=		libXrender-0.9.6
+DISTNAME=		libXrender-0.9.7
 CATEGORIES=		x11 devel
 MASTER_SITES=		${MASTER_SITE_XORG:=lib/}
 EXTRACT_SUFX=		.tar.bz2
@@ -26,6 +26,8 @@ PKGCONFIG_OVERRIDE+=	xrender.pc.in
 .if ${OPSYS} == "NetBSD"
 CONFIGURE_ARGS+=	--disable-malloc0returnsnull
 .endif
+
+.include "../../meta-pkgs/modular-xorg/hacks.mk"
 
 .include "../../x11/renderproto/buildlink3.mk"
 .include "../../x11/libX11/buildlink3.mk"

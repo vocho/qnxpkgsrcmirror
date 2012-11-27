@@ -1,19 +1,19 @@
 $NetBSD$
 
---- layout/base/nsPresArena.cpp.orig	2012-03-13 01:37:00.000000000 +0000
+--- layout/base/nsPresArena.cpp.orig	2012-07-13 21:43:04.000000000 +0000
 +++ layout/base/nsPresArena.cpp
-@@ -178,7 +178,13 @@ ReleaseRegion(void *region, PRUword size
+@@ -180,7 +180,13 @@ ReleaseRegion(void *region, uintptr_t si
  static bool
- ProbeRegion(PRUword region, PRUword size)
+ ProbeRegion(uintptr_t region, uintptr_t size)
  {
 -  if (madvise((caddr_t)region, size, MADV_NORMAL)) {
-+  if (
++  int ret;
 +#ifndef __QNXNTO__
-+    madvise((caddr_t)region, size, MADV_NORMAL)
++  ret = madvise((caddr_t)region, size, MADV_NORMAL);
 +#else
-+    posix_madvise((caddr_t)region, size, POSIX_MADV_NORMAL)
++  ret = posix_madvise((caddr_t)region, size, POSIX_MADV_NORMAL);
 +#endif
-+    ) {
++  if (ret) {
      return true;
    } else {
      return false;

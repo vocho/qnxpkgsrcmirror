@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.80 2011/11/26 23:11:37 hans Exp $
+# $NetBSD: Makefile,v 1.82 2012/06/02 07:57:21 cheusov Exp $
 
 DISTNAME=	make-3.82
 PKGNAME=	g${DISTNAME}
-PKGREVISION=	3
+PKGREVISION=	5
 CATEGORIES=	devel
 MASTER_SITES=	${MASTER_SITE_GNU:=make/}
 EXTRACT_SUFX=	.tar.bz2
@@ -26,17 +26,9 @@ TEST_TARGET=		check
 
 .include "../../mk/bsd.prefs.mk"
 
-.if defined(GNU_PROGRAM_PREFIX)
-CONFIGURE_ARGS+=	--program-prefix=${GNU_PROGRAM_PREFIX:Q}
-.endif
-PLIST_SUBST+=		GNU_PROGRAM_PREFIX=${GNU_PROGRAM_PREFIX:Q}
-BUILD_DEFS+=		GNU_PROGRAM_PREFIX
+CONFIGURE_ARGS+=	--program-prefix=g
 
-PLIST_VARS+=		gmake
-
-.if !defined(GNU_PROGRAM_PREFIX) || ${GNU_PROGRAM_PREFIX} != "g"
-PLIST.gmake=		yes
-.endif
+AUTO_MKDIRS=		yes
 
 PLIST_SRC=		${PKGDIR}/PLIST
 
@@ -48,10 +40,9 @@ CONFIGURE_ARGS+=	ac_cv_func_strndup=no
 .endif
 
 post-install:
-	${CHMOD} g-s ${DESTDIR}${PREFIX}/bin/${GNU_PROGRAM_PREFIX}make
-	${CHGRP} ${BINGRP} ${DESTDIR}${PREFIX}/bin/${GNU_PROGRAM_PREFIX}make
-.if !defined(GNU_PROGRAM_PREFIX) || ${GNU_PROGRAM_PREFIX} != "g"
-	${LN} -sf ${GNU_PROGRAM_PREFIX}make ${DESTDIR}${PREFIX}/bin/gmake
-.endif
+	${CHMOD} g-s ${DESTDIR}${PREFIX}/bin/gmake
+	${CHGRP} ${BINGRP} ${DESTDIR}${PREFIX}/bin/gmake
+	${LN} -sf ${PREFIX}/bin/gmake ${DESTDIR}${PREFIX}/gnu/bin/make
+	${LN} -sf ${PREFIX}/${PKGMANDIR}/man1/gmake.1 ${DESTDIR}${PREFIX}/gnu/man/man1/make.1
 
 .include "../../mk/bsd.pkg.mk"

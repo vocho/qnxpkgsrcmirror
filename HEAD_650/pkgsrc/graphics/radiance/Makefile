@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.29 2012/02/06 12:40:33 wiz Exp $
+# $NetBSD: Makefile,v 1.32 2012/08/21 23:49:22 marino Exp $
 #
 
 DISTNAME=	rad3R6P1
 PKGNAME=	radiance-3.6.1
-PKGREVISION=	8
+PKGREVISION=	10
 CATEGORIES=	graphics
 MASTER_SITES=	http://www.radiance-online.org/software/non-cvs/	\
 		http://www.radiance-online.org/software/
@@ -65,6 +65,8 @@ PKGSRC_ARCH=	8
 PKGSRC_ARCH=	12
 .elif ${OPSYS} == "Linux"
 PKGSRC_ARCH=	6
+.elif ${OPSYS} == "SunOS"
+PKGSRC_ARCH=	1
 .elif ${OPSYS} == "IRIX"
 PKGSRC_ARCH=	3
 PLIST.gl=	yes
@@ -101,7 +103,7 @@ do-install:
 	${INSTALL_DATA_DIR} ${DESTDIRPREFIX:Q}/radiance/lib
 	cd ${WRKSRC}/lib && pax -rw -s '|.*/\.DS_Store||' . ${DESTDIRPREFIX:Q}/radiance/lib/
 	${INSTALL_DATA_DIR} ${DESTDIRPREFIX:Q}/radiance/man
-	cd ${WRKSRC}/doc/man && pax -rw -s '|.*/\.DS_Store||' . ${DESTDIRPREFIX:Q}/radiance/man/
+	cd ${WRKSRC}/doc/man && pax -rw -s '|.*/cat.*/.*||' -s '|.*/\.DS_Store||' . ${DESTDIRPREFIX:Q}/radiance/man/
 	${INSTALL_DATA_DIR} ${DESTDIRPREFIX:Q}/share/doc/radiance
 	${INSTALL_DATA} ${WRKSRC}/doc/pdf/*.pdf \
 		${DESTDIRPREFIX:Q}/share/doc/radiance/

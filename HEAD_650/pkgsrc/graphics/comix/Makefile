@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.34 2012/03/09 12:34:09 wiz Exp $
+# $NetBSD: Makefile,v 1.36 2012/06/14 07:44:05 sbd Exp $
 #
 
 DISTNAME=		comix-4.0.4
-PKGREVISION=		13
+PKGREVISION=		14
 CATEGORIES=		graphics python
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=comix/}
 
@@ -15,11 +15,7 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 
 DEPENDS+=		unrar-[0-9]*:../../archivers/unrar
 .include "../../lang/python/extension.mk"
-.if ${PYPKGPREFIX} == "py24"
-.include "../../databases/py-sqlite2/buildlink3.mk"
-.else
 DEPENDS+=		${PYPKGPREFIX}-sqlite3-[0-9]*:../../databases/py-sqlite3
-.endif
 
 MANCOMPRESSED=		yes
 

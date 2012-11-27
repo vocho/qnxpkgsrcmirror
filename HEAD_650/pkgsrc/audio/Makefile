@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.465 2012/03/08 09:50:26 wiz Exp $
+# $NetBSD: Makefile,v 1.470 2012/08/16 07:39:18 jnemeth Exp $
 #
 
 COMMENT=	Audio tools
@@ -214,6 +214,7 @@ SUBDIR+=	libmpg123
 SUBDIR+=	libmtag
 SUBDIR+=	libmusepack
 SUBDIR+=	libmusicbrainz
+SUBDIR+=	libmusicbrainz5
 SUBDIR+=	libofa
 SUBDIR+=	libopenspc
 SUBDIR+=	libsamplerate
@@ -319,11 +320,13 @@ SUBDIR+=	portaudio
 SUBDIR+=	portaudio-devel
 SUBDIR+=	pulseaudio
 SUBDIR+=	py-ao
+SUBDIR+=	py-audiotools
 SUBDIR+=	py-cddb
 SUBDIR+=	py-daap
 SUBDIR+=	py-id3
 SUBDIR+=	py-id3lib
 SUBDIR+=	py-karaoke
+SUBDIR+=	py-last
 SUBDIR+=	py-libmtag
 SUBDIR+=	py-mad
 SUBDIR+=	py-mpd
@@ -346,6 +349,7 @@ SUBDIR+=	rplay
 SUBDIR+=	rsynth
 SUBDIR+=	rtunes
 SUBDIR+=	ruby-mp3info
+SUBDIR+=	ruby-taglib
 SUBDIR+=	sfxr
 SUBDIR+=	shntool
 SUBDIR+=	shorten
@@ -399,7 +403,6 @@ SUBDIR+=	xfce4-mixer
 SUBDIR+=	xfce4-xmms-plugin
 SUBDIR+=	xhippo
 SUBDIR+=	xine-alsa
-SUBDIR+=	xine-arts
 SUBDIR+=	xine-esound
 SUBDIR+=	xine-pulse
 SUBDIR+=	xmcd

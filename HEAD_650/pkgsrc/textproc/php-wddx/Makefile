@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.15 2010/03/15 16:48:53 taca Exp $
+# $NetBSD: Makefile,v 1.17 2012/07/20 12:30:37 taca Exp $
 
 MODNAME=		wddx
 CATEGORIES+=		textproc

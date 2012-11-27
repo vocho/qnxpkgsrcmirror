@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.99 2012/03/03 12:54:19 wiz Exp $
+# $NetBSD: Makefile,v 1.101 2012/07/05 19:18:29 asau Exp $
 
 DISTNAME=	octave-${OCTAVE_VER}
-PKGREVISION=	2
 CATEGORIES=	math
 MASTER_SITES=	$(MASTER_SITE_GNU:=octave/) \
 		ftp://ftp.octave.org/pub/octave/ \
@@ -16,7 +15,7 @@ BUILD_DEPENDS+=	gperf>=2.7:../../devel/gperf
 BUILD_DEPENDS+=	teTeX-[0-9]*:../../print/teTeX
 DEPENDS+=	gnuplot>=3.7:../../graphics/gnuplot
 
-OCTAVE_VER=	3.4.3
+OCTAVE_VER=	3.6.2
 
 .if (${MACHINE_ARCH} == "arm32")
 BROKEN=		Internal compiler error occurs on arm32 (even with gcc-2.95.3)
@@ -92,6 +91,7 @@ post-build:
 
 .include "../../audio/libsndfile/buildlink3.mk"
 .include "../../devel/ncurses/buildlink3.mk"
+.include "../../devel/pcre/buildlink3.mk"
 .include "../../devel/readline/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"
 .include "../../math/blas/buildlink3.mk"

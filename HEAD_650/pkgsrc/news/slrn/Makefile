@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.51 2012/03/03 00:13:49 wiz Exp $
+# $NetBSD: Makefile,v 1.53 2012/06/23 23:02:58 dholland Exp $
 
 DISTNAME=	slrn-0.9.9p1
 PKGREVISION=	6
@@ -33,6 +33,7 @@ CONFIGURE_ENV+=		INSTALL=/usr/bin/install
 .endif
 
 LDFLAGS.Linux+=	-ldl
+LDFLAGS.SunOS+=	-lsocket -lnsl
 
 .include "../../devel/libslang2/buildlink3.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"

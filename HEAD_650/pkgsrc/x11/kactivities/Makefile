@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.1 2012/03/19 19:44:01 markd Exp $
+# $NetBSD: Makefile,v 1.3 2012/06/16 04:45:38 markd Exp $
 
 DISTNAME=	kactivities-${_KDE_VERSION}
 CATEGORIES=	x11

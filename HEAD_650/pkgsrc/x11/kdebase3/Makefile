@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.167 2012/03/03 00:12:35 wiz Exp $
+# $NetBSD: Makefile,v 1.169 2012/06/15 23:06:03 dholland Exp $
 
 DISTNAME=	kdebase-${_KDE_VERSION}
-PKGREVISION=	20
+PKGREVISION=	21
 CATEGORIES=	x11
 COMMENT=	Base modules for the KDE 3 integrated X11 desktop
 
@@ -92,7 +92,7 @@ DEPENDS+=		htdig>=3.2.0:../../www/htdig
 
 # Solaris 10 has libusb only for 32 bit ABI (see PR 33727).
 .if ${OPSYS} == "SunOS" && ${MACHINE_ARCH} == "x86_64"
-CONFIGURE_ARGS+=       --without-libusb
+CONFIGURE_ARGS+=	--without-libusb
 .endif
 
 PLIST_VARS+=		usbview
@@ -116,11 +116,11 @@ SUBST_CLASSES+=		varlock
 SUBST_STAGE.varlock=	post-patch
 SUBST_MESSAGE.varlock=	Fix lock directory path.
 SUBST_FILES.varlock=	kcheckpass/kcheckpass.c
-.if ${OPSYS} == "SunOS"
+.  if ${OPSYS} == "SunOS"
 SUBST_SED.varlock=	-e s:/var/lock:/var/spool/locks:
-.else
+.  else
 SUBST_SED.varlock=	-e s:/var/lock:/var/spool/lock:
-.endif
+.  endif
 .endif
 
 SUBST_CLASSES+=		htdig

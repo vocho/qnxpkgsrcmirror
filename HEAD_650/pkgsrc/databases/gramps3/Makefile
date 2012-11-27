@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.26 2012/03/09 12:34:04 wiz Exp $
+# $NetBSD: Makefile,v 1.31 2012/08/14 18:12:44 drochner Exp $
 #
 
-DISTNAME=		gramps-3.2.6
-PKGREVISION=		6
+DISTNAME=		gramps-3.3.2
+PKGREVISION=		2
 CATEGORIES=		databases
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=gramps/}
 
@@ -19,8 +19,6 @@ USE_TOOLS+=		msgfmt pkg-config intltool msgconv
 USE_PKGLOCALEDIR=	yes
 GNU_CONFIGURE=		yes
 
-PYTHON_VERSIONS_ACCEPTED=	27 26 25
-
 REPLACE_PYTHON=		src/DateHandler/_Date_fr.py
 REPLACE_PYTHON+=	src/plugins/quickview/Reporef.py
 REPLACE_PYTHON+=	src/plugins/rel/rel_fr.py
@@ -28,10 +26,12 @@ REPLACE_PYTHON+=	src/plugins/rel/rel_fr.py
 # pkgsrc registers mime files using mimedb.mk (see below)
 CONFIGURE_ARGS+=	--enable-packager-mode
 
+# needs svg pixbuf loader at runtime
+DEPENDS+=	librsvg-[0-9]*:../../graphics/librsvg
+
 .include "options.mk"
 
 .include "../../databases/py-bsddb3/buildlink3.mk"
-.include "../../graphics/librsvg/buildlink3.mk"
 .include "../../graphics/gnome-icon-theme/buildlink3.mk"
 .include "../../lang/python/application.mk"
 BUILDLINK_API_DEPENDS.pygtk2+=	${PYPKGPREFIX}-gtk2>=2.10

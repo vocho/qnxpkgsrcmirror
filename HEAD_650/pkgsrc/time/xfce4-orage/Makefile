@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.14 2012/03/03 00:14:02 wiz Exp $
+# $NetBSD: Makefile,v 1.16 2012/07/15 08:22:57 wiz Exp $
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
@@ -6,14 +6,11 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 
 DISTNAME=	orage-${XFCE4_VERSION}
 PKGNAME=	xfce4-orage-${XFCE4_VERSION}
-PKGREVISION=	9
+PKGREVISION=	10
 CATEGORIES=	time
 COMMENT=	Xfce time managing application
 
 CONFIGURE_ARGS+=	--disable-libxfce4mcs
-
-MAKE_DIRS+=	${PREFIX}/libexec/xfce4 ${PREFIX}/libexec/xfce4/panel-plugins
-MAKE_DIRS+=	${PREFIX}/share/xfce4 ${PREFIX}/share/xfce4/panel-plugins
 
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../sysutils/dbus-glib/buildlink3.mk"

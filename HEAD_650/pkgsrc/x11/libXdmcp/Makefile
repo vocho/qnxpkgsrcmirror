@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.4 2010/01/15 18:46:21 tnn Exp $
+# $NetBSD: Makefile,v 1.6 2012/06/09 07:00:47 obache Exp $
 #
 
-DISTNAME=		libXdmcp-1.0.3
+DISTNAME=		libXdmcp-1.1.1
 CATEGORIES=		x11
 MASTER_SITES=		${MASTER_SITE_XORG:=lib/}
 EXTRACT_SUFX=		.tar.bz2
@@ -16,6 +16,8 @@ USE_LIBTOOL=		yes
 USE_TOOLS+=		pkg-config
 PKGCONFIG_OVERRIDE+=	xdmcp.pc.in
 GNU_CONFIGURE=		yes
+
+.include "../../meta-pkgs/modular-xorg/hacks.mk"
 
 .include "../../x11/xproto/buildlink3.mk"
 

@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.8 2009/09/28 12:38:50 drochner Exp $
+# $NetBSD: Makefile,v 1.10 2012/06/09 07:00:47 obache Exp $
 #
 
-DISTNAME=		libSM-1.1.1
-PKGREVISION=		1
+DISTNAME=		libSM-1.2.1
 CATEGORIES=		x11 devel
 MASTER_SITES=		${MASTER_SITE_XORG:=lib/}
 EXTRACT_SUFX=		.tar.bz2
@@ -23,6 +22,8 @@ PKGCONFIG_OVERRIDE+=	sm.pc.in
 CONFIGURE_ARGS+=	--without-libuuid
 
 .include "options.mk"
+
+.include "../../meta-pkgs/modular-xorg/hacks.mk"
 
 .include "../../x11/libICE/buildlink3.mk"
 .include "../../x11/xproto/buildlink3.mk"

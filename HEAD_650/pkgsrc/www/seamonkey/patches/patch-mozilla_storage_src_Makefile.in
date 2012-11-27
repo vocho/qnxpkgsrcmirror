@@ -1,0 +1,27 @@
+$NetBSD: patch-mozilla_storage_src_Makefile.in,v 1.2 2012/07/19 17:33:29 ryoon Exp $
+
+--- mozilla/storage/src/Makefile.in.orig	2012-07-17 18:13:34.000000000 +0000
++++ mozilla/storage/src/Makefile.in
+@@ -67,6 +67,22 @@ DEFINES += -DMOZ_STORAGE_MEMORY
+ endif
+ endif
+ 
++ifeq ($(OS_ARCH),DragonFly)
++DEFINES += -DXP_BSD
++endif
++
++ifeq ($(OS_ARCH),FreeBSD)
++DEFINES += -DXP_BSD
++endif
++
++ifeq ($(OS_ARCH),NetBSD)
++DEFINES += -DXP_BSD
++endif
++
++ifeq ($(OS_ARCH),FreeBSD)
++DEFINES += -DXP_BSD
++endif
++
+ EXPORTS_NAMESPACES = mozilla/storage
+ 
+ EXPORTS_mozilla/storage = \

@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.10 2011/06/15 11:43:12 adam Exp $
+# $NetBSD: Makefile,v 1.13 2012/07/02 06:16:23 adam Exp $
 
-DISTNAME=	xz-5.0.3
+DISTNAME=	xz-5.0.4
 CATEGORIES=	archivers
 MASTER_SITES=	http://tukaani.org/xz/
 EXTRACT_SUFX=	.tar.bz2
@@ -26,6 +26,11 @@ LIBS.QNX+=	-lsocket
 
 .if !empty(PKGSRC_COMPILER:Msunpro)
 CONFIGURE_ARGS+=	--disable-assembler
+.endif
+
+.if ${OPSYS} == "SunOS"
+CONFIGURE_ENV+=		ac_cv_have_decl_optreset=no
+CONFIGURE_ENV+=		gl_cv_cc_visibility=no
 .endif
 
 .include "../../devel/gettext-lib/buildlink3.mk"

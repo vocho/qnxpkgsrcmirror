@@ -1,0 +1,26 @@
+$NetBSD: patch-configure,v 1.1 2012/08/09 10:21:19 jperkin Exp $
+
+Require _XOPEN_SOURCE=600 on Solaris for sockaddr_in6 and sockaddr_storage.
+
+--- configure.orig	2012-07-18 17:22:20.000000000 +0000
++++ configure
+@@ -19700,7 +19700,9 @@ $as_echo "$ac_cv_search_clock_getres" >&
+ ac_res=$ac_cv_search_clock_getres
+ if test "$ac_res" != no; then :
+   test "$ac_res" = "none required" || LIBS="$ac_res $LIBS"
+-  THREAD_LIBS="$THREAD_LIBS -lrt"
++  if test "$ac_res" != "none required"; then :
++    THREAD_LIBS="$THREAD_LIBS -lrt"
++  fi
+ fi
+ 
+     { $as_echo "$as_me:${as_lineno-$LINENO}: checking for CLOCK_MONOTONIC" >&5
+@@ -21706,7 +21708,7 @@ case $host_os in
+         # Solaris' C library apparently needs these runes to be threadsafe...
+         CFLAGS="$CFLAGS -D_POSIX_PTHREAD_SEMANTICS -D_REENTRANT"
+         # ... and this opt-in to get file descriptor passing support
+-        CFLAGS="$CFLAGS -D_XOPEN_SOURCE=500"
++        CFLAGS="$CFLAGS -D_XOPEN_SOURCE=500 -D__EXTENSIONS__"
+         ;;
+ esac
+ 

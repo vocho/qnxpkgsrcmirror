@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.2 2012/03/20 00:57:47 markd Exp $
+# $NetBSD: Makefile,v 1.4 2012/06/16 04:45:28 markd Exp $
 
 DISTNAME=	kate-${_KDE_VERSION}
 CATEGORIES=	editors

@@ -1,8 +1,8 @@
 $NetBSD: patch-pyconfig.h.in,v 1.1 2011/12/16 17:04:18 hans Exp $
 
---- pyconfig.h.in.orig	2011-06-11 15:46:28.000000000 +0000
+--- pyconfig.h.in.orig	2012-04-09 23:07:36.000000000 +0000
 +++ pyconfig.h.in
-@@ -1143,6 +1143,9 @@
+@@ -1149,6 +1149,9 @@
  /* Define on NetBSD to activate all library features */
  #undef _NETBSD_SOURCE
  
@@ -12,7 +12,7 @@ $NetBSD: patch-pyconfig.h.in,v 1.1 2011/12/16 17:04:18 hans Exp $
  /* Define _OSF_SOURCE to get the makedev macro. */
  #undef _OSF_SOURCE
  
-@@ -1173,7 +1176,9 @@
+@@ -1179,7 +1182,9 @@
  #undef _UINT64_T
  
  /* Define to the level of X/Open that your system supports */

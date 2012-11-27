@@ -1,23 +1,21 @@
-# $NetBSD: Makefile,v 1.33 2011/11/11 19:52:39 christos Exp $
-#
+# $NetBSD: Makefile,v 1.38 2012/07/16 00:14:33 abs Exp $
 
-DISTNAME=	simhv38-1
-PKGNAME=	simh-3.8.1
+DISTNAME=	simhv39-0
+PKGNAME=	simh-3.9.0
 PKGREVISION=	2
 CATEGORIES=	emulators
 MASTER_SITES=	http://simh.trailing-edge.com/sources/
 EXTRACT_SUFX=	.zip
-DISTFILES=	${DISTNAME}${EXTRACT_SUFX}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://simh.trailing-edge.com/
-COMMENT=	Bob Supnik's historical computer simulator
+COMMENT=	Bob Supniks historical computer simulator
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=	gmake
 
-BUILDLINK_API_DEPENDS.libpcap+=	libpcap>=0.6
+BUILDLINK_API_DEPENDS.libpcap+=	libpcap>=0.9
 
 WRKSRC=			${WRKDIR}
 
@@ -27,10 +25,17 @@ WRKSRC=			${WRKDIR}
 BUILDLINK_TRANSFORM+=	rm:-O2
 .endif
 
+# Needed for PDP11/pdp11_dc.c on gcc 4.1.3
+.if (${MACHINE_ARCH} == "vax")
+CFLAGS+=	-fforce-addr
+.endif
+
 INSTALLATION_DIRS=	bin share/simh share/doc/simh
 
 MAKE_FILE=		makefile
-MAKE_FLAGS+=		USE_NETWORK=YES OSTYPE=${LOWER_OPSYS}
+MAKE_ENV+=		BUILDLINK_DIR=${BUILDLINK_DIR:Q}
+MAKE_ENV+=		GCC=${CC:Q}
+MAKE_ENV+=		OS_LDFLAGS=${LDFLAGS:Q} CFLAGS_O=${CFLAGS:Q}
 
 post-extract:
 	${MKDIR} ${WRKSRC}/BIN
@@ -47,4 +52,5 @@ do-install:
 	done)
 
 .include "../../net/libpcap/buildlink3.mk"
+.include "../../mk/pthread.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

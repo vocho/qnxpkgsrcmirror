@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.58 2012/03/03 00:12:47 wiz Exp $
+# $NetBSD: Makefile,v 1.60 2012/07/18 09:56:02 marino Exp $
 #
 
 DISTNAME=		bitlbee-3.0.3
-PKGREVISION=		4
+PKGREVISION=		5
 CATEGORIES=		chat
 MASTER_SITES=		http://get.bitlbee.org/src/
 
@@ -64,6 +64,8 @@ do-install:
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.bitlbee
 PKG_SUPPORTED_OPTIONS=	inet6
+PKG_SUGGESTED_OPTIONS=	inet6
+
 .include "../../mk/bsd.options.mk"
 
 .if !empty(PKG_OPTIONS:Minet6)

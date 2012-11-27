@@ -1,11 +1,36 @@
 #!@SH@ -e
 #
-# $Id: pkg_chk.sh,v 1.65 2009/07/22 21:56:13 sketch Exp $
+# $Id: pkg_chk.sh,v 1.69 2012/08/03 10:35:31 abs Exp $
 #
 # TODO: Make -g check dependencies and tsort
 # TODO: Make -g list user-installed packages first, followed by commented
 #	out automatically installed packages
 # TODO: List user-installed packages that are not in config
+
+# Copyright (c) 2012 David Brownlee (Standard 2 clause BSD licence)
+# All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions
+# are met:
+#
+# 1. Redistributions of source code must retain the above copyright
+#    notice, this list of conditions and the following disclaimer.
+# 2. Redistributions in binary form must reproduce the above copyright
+#    notice, this list of conditions and the following disclaimer in the
+#    documentation and/or other materials provided with the distribution.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+# "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
+# TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+# PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS
+# BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+# CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+# SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+# INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+# CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+# ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+# POSSIBILITY OF SUCH DAMAGE.
 
 PATH=${PATH}:/usr/sbin:/usr/bin
 
@@ -21,7 +46,7 @@ is_binary_available()
 		    return 0;
 		;;
 	    esac
-        done
+	done
 	return 1;
     else
 	if [ -f "$PACKAGES/$1$PKG_SUFX" ]; then
@@ -35,7 +60,7 @@ is_binary_available()
 bin_pkg_info2pkgdb()
     {
     ${AWK} '/^PKGNAME=/ {sub("^PKGNAME=", ""); PKGNAME=$0} \
-            /^PKGPATH=/ {sub("^PKGPATH=", ""); printf("%s:%s ", $0, PKGNAME)}'
+	    /^PKGPATH=/ {sub("^PKGPATH=", ""); printf("%s:%s ", $0, PKGNAME)}'
     }
 
 check_packages_installed()
@@ -53,23 +78,38 @@ check_packages_installed()
 	    PKGNAME=`pkgdir2pkgname $pkgdir`
 	fi
 	if [ -z "$PKGNAME" ]; then
-	    MISS_DONE=$MISS_DONE" "$pkgdir
+	    MISSING_DONE=$MISSING_DONE" "$pkgdir
 	    continue
 	fi
 	if [ ! -d $PKG_DBDIR/$PKGNAME ];then
 	    msg_n "$pkgdir - "
 	    pkg=$(echo $PKGNAME | ${SED} 's/-[0-9].*//')
 	    pkginstalled=$(sh -c "${PKG_INFO} -e $pkg" || true)
-	    INSTALL=
-	    if [ -n "$pkginstalled" ];then
-		msg_n "$pkginstalled < $PKGNAME"
-		MISMATCH_TODO="$MISMATCH_TODO $pkginstalled"
-	    else
+	    if [ -z "$pkginstalled" ];then
 		msg_n "$PKGNAME missing"
 		MISSING_TODO="$MISSING_TODO $PKGNAME $pkgdir"
+	    else
+		pkgmatch=$(echo $PKGNAME | ${SED} 's/-\([0-9].*\)/>=\1/')
+		if ! ${PKG_ADMIN} pmatch "$pkgmatch" "$pkginstalled" ; then
+		    INSTALL=
+		    if [ -n "$pkginstalled" ];then
+			msg_n "$pkginstalled < $PKGNAME"
+			MISMATCH_TODO="$MISMATCH_TODO $pkginstalled"
+		    else
+			msg_n "missing $PKGNAME"
+			MISSING_TODO="$MISSING_TODO $PKGNAME $pkgdir"
+		    fi
+		else
+		    if [ -n "$opt_B" ];then
+			msg_n "$pkginstalled > $PKGNAME"
+			MISMATCH_TODO="$MISMATCH_TODO $pkginstalled"
+		    else
+			msg_n "$pkginstalled > $PKGNAME - ignoring"
+		    fi
+		fi
 	    fi
 	    if is_binary_available $PKGNAME ;then
-		msg_n " (binary package available)"
+		msg_n " (has binary package)"
 	    fi
 	    msg
 	else
@@ -282,6 +322,8 @@ get_build_ver()
 
 list_bin_pkgs ()
     {
+    # XXX ls -t is usually enough to get newer packages first, but it
+    #	  depends on how files appeared in the $PACKAGES - beware
     ls -t $PACKAGES | grep "$PKG_SUFX_RE"'$' | ${SED} "s|^|$PACKAGES/|"
     }
 
@@ -369,14 +411,8 @@ pkgdir2pkgname()
     done
     }
 
-pkgdirs_from_conf()
+determine_tags()
     {
-    CONF=$1; shift
-    LIST="$*"
-    if [ ! -r $CONF ];then
-	fatal "Unable to read PKGCHK_CONF '$CONF'"
-    fi
-
     # Determine list of tags
     #
     if [ "$PKGSRCDIR" = NONE ]; then
@@ -388,7 +424,7 @@ pkgdirs_from_conf()
     fi
 
     TAGS="$(hostname | ${SED} -e 's,\..*,,'),$(hostname),$OPSYS-$OS_VERSION-$MACHINE_ARCH,$OPSYS-$OS_VERSION,$OPSYS-$MACHINE_ARCH,$OPSYS,$OS_VERSION,$MACHINE_ARCH"
-    if [ -f /usr/X11R6/lib/libX11.so -o -f /usr/X11R6/lib/libX11.a ];then
+    if [ -f /usr/X11R7/lib/libX11.a -o -f /usr/X11R6/lib/libX11.a ];then
 	TAGS="$TAGS,x11"
     fi
     if [ -n "$PKGCHK_TAGS" ];then
@@ -418,6 +454,16 @@ pkgdirs_from_conf()
 	fi
     fi
     verbose "set   TAGS=$opt_D"
+    }
+
+pkgdirs_from_conf()
+    {
+    CONF=$1; shift
+    LIST="$*"
+    if [ ! -r $CONF ];then
+	fatal "Unable to read PKGCHK_CONF '$CONF'"
+    fi
+
 
     # Extract list of valid pkgdirs (skip any 'alreadyset' in $LIST)
     #
@@ -465,7 +511,7 @@ pkgdirs_from_conf()
 	    need = 1;
 	}
     for (f = 2 ; f<=NF ; ++f) {		# For each word on the line
-	if (sub("^-", "", $f)) { 	# If it begins with a '-'
+	if (sub("^-", "", $f)) {	# If it begins with a '-'
 		if (f == 2)		# If first entry '-', assume '*'
 		    { need = 1; }
 		if (and_expr_with_dict($f, taglist))
@@ -522,7 +568,7 @@ pkg_fetch()
 
     run_cmd "cd $PKGSRCDIR/$PKGDIR && ${MAKE} fetch-list | sh"
     if [ -n "$FAIL" ]; then
-	FAIL_DONE=$FAIL_DONE" "$PKGNAME
+	FAILED_DONE=$FAILED_DONE" "$PKGNAME
     else
 	FETCH_DONE=$FETCH_DONE" "$PKGNAME
     fi
@@ -565,7 +611,7 @@ pkg_install()
     fi
 
     if [ -n "$FAIL" ]; then
-	FAIL_DONE=$FAIL_DONE" "$PKGNAME
+	FAILED_DONE=$FAILED_DONE" "$PKGNAME
     else
 	INSTALL_DONE=$INSTALL_DONE" "$PKGNAME
     fi
@@ -599,15 +645,15 @@ run_cmd()
 	    sh -c "$1" || FAIL=1
 	fi
 	if [ -n "$FAIL" ] ; then
-            msg "** '$1' failed"
+	    msg "** '$1' failed"
 	    if [ -n "$opt_L" ] ; then
 		tail -100 "$opt_L" | egrep -v '^(\*\*\* Error code 1|Stop\.)' |\
 			tail -40
 	    fi
-            if [ "$FAILOK" != 1 ]; then
-                fatal "** '$1' failed"
-            fi
-        fi
+	    if [ "$FAILOK" != 1 ]; then
+		fatal "** '$1' failed"
+	    fi
+	fi
     fi
     }
 
@@ -624,9 +670,8 @@ set_path()
     {
     arg=$1
     case $arg in
-	http://*|ftp://*|/*)
-		echo $arg ;;
-	*)	echo $basedir/$arg ;;
+	http://* | ftp://* | /*) echo $arg ;;
+			      *) echo $basedir/$arg ;;
     esac
     }
 
@@ -637,27 +682,27 @@ usage()
 	echo
     fi
     echo 'Usage: pkg_chk [opts]
-	-a      Add all missing packages
-	-B      Check the "Build version" of packages
-	-b      Use binary packages
+	-a	Add all missing packages
+	-B	Force exact pkg match - check "Build version" & even downgrade
+	-b	Use binary packages
 	-C conf Use pkgchk.conf file 'conf'
 	-D tags Comma separated list of additional pkgchk.conf tags to set
-	-f      Perform a 'make fetch' for all required packages
-	-g      Generate an initial pkgchk.conf file
-	-h      This help
+	-f	Perform a 'make fetch' for all required packages
+	-g	Generate an initial pkgchk.conf file
+	-h	This help
 	-k	Continue with further packages if errors are encountered
 	-L file Redirect output from commands run into file (should be fullpath)
 	-l	List binary packages including dependencies
 	-N	List installed packages for which a newer version is in TODO
 	-n	Display actions that would be taken, but do not perform them
 	-p	Display the list of pkgdirs that match the current tags
-	-P dir  Set PACKAGES dir (overrides any other setting)
+	-P dir	Set PACKAGES dir (overrides any other setting)
 	-q	Do not display actions or take any action; only list packages
 	-r	Recursively remove mismatches (use with care)
-	-s      Use source for building packages
+	-s	Use source for building packages
 	-U tags Comma separated list of pkgchk.conf tags to unset ('*' for all)
-	-u      Update all mismatched packages
-	-v      Verbose
+	-u	Update all mismatched packages
+	-v	Verbose
 
 pkg_chk verifies installed packages against pkgsrc.
 The most common usage is 'pkg_chk -u -q' to check all installed packages or
@@ -695,30 +740,30 @@ set -- $args
 set +o noglob
 while [ $# != 0 ]; do
     case "$1" in
-	-a )	opt_a=1 ;;
-	-B )    opt_B=1 ;;
-	-b )	opt_b=1 ;;
-	-C )	opt_C="$2" ; shift ;;
-	-c )	opt_a=1 ; opt_q=1 ; echo "-c is deprecated - use -a -q" ;;
-	-D )	opt_D="$2" ; shift ;;
-	-f )	opt_f=1 ;;
-	-g )	opt_g=1 ;;
-	-h )	opt_h=1 ;;
-	-i )	opt_u=1 ; opt_q=1 ; echo "-i is deprecated - use -u -q" ;;
-	-k )	opt_k=1 ;;
-	-L )	opt_L="$2" ; shift ;;
-	-l )	opt_l=1 ;;
-	-N )	opt_N=1 ;;
-	-n )	opt_n=1 ;;
-	-p )	opt_p=1 ;;
-	-P )	opt_P="$2" ; shift ;;
-	-q )	opt_q=1 ;;
-	-r )	opt_r=1 ;;
-	-s )	opt_s=1 ;;
-	-U )	opt_U="$2" ; shift ;;
-	-u )	opt_u=1 ;;
-	-v )	opt_v=1 ;;
-	-- )	shift; break ;;
+	-a ) opt_a=1 ;;
+	-B ) opt_B=1 ;;
+	-b ) opt_b=1 ;;
+	-C ) opt_C="$2" ; shift ;;
+	-c ) opt_a=1 ; opt_q=1 ; echo "-c is deprecated - use -a -q" ;;
+	-D ) opt_D="$2" ; shift ;;
+	-f ) opt_f=1 ;;
+	-g ) opt_g=1 ;;
+	-h ) opt_h=1 ;;
+	-i ) opt_u=1 ; opt_q=1 ; echo "-i is deprecated - use -u -q" ;;
+	-k ) opt_k=1 ;;
+	-L ) opt_L="$2" ; shift ;;
+	-l ) opt_l=1 ;;
+	-N ) opt_N=1 ;;
+	-n ) opt_n=1 ;;
+	-p ) opt_p=1 ;;
+	-P ) opt_P="$2" ; shift ;;
+	-q ) opt_q=1 ;;
+	-r ) opt_r=1 ;;
+	-s ) opt_s=1 ;;
+	-U ) opt_U="$2" ; shift ;;
+	-u ) opt_u=1 ;;
+	-v ) opt_v=1 ;;
+	-- ) shift; break ;;
     esac
     shift
 done
@@ -727,8 +772,7 @@ if [ -z "$opt_b" -a -z "$opt_s" ];then
     opt_b=1; opt_s=1;
 fi
 
-if [ -z "$opt_a$opt_g$opt_l$opt_p$opt_r$opt_u$opt_N" ];
-then
+if [ -z "$opt_a$opt_g$opt_l$opt_p$opt_r$opt_u$opt_N" ];then
     usage "Must specify at least one of -a, -g, -l, -p, -r, -u or -N";
 fi
 
@@ -744,13 +788,13 @@ fi
 saved_PKG_PATH=$PKG_PATH
 unset PKG_PATH || true
 
-test -n "$AWK"        || AWK="@AWK@"
-test -n "$GREP"       || GREP="@GREP@"
+test -n "$AWK"	      || AWK="@AWK@"
+test -n "$GREP"	      || GREP="@GREP@"
 test -n "$GZCAT"      || GZCAT="@GZCAT@"
 test -n "$GZIP_CMD"   || GZIP_CMD="@GZIP_CMD@"
 export GZIP_CMD
-test -n "$ID"         || ID="@ID@"
-test -n "$MAKE"       || MAKE="@MAKE@"
+test -n "$ID"	      || ID="@ID@"
+test -n "$MAKE"	      || MAKE="@MAKE@"
 test -n "$MAKECONF"   || MAKECONF="@MAKECONF@"
 test -n "$MKTEMP"     || MKTEMP="@MKTEMP@"
 test -n "$PKG_ADD"    || PKG_ADD="@PKG_ADD@"
@@ -758,7 +802,7 @@ test -n "$PKG_ADMIN"  || PKG_ADMIN="@PKG_ADMIN@"
 test -n "$PKG_DBDIR"  || PKG_DBDIR="@PKG_DBDIR@"
 test -n "$PKG_DELETE" || PKG_DELETE="@PKG_DELETE@"
 test -n "$PKG_INFO"   || PKG_INFO="@PKG_INFO@"
-test -n "$SED"        || SED="@SED@"
+test -n "$SED"	      || SED="@SED@"
 test -n "$SORT"	      || SORT="@SORT@"
 test -n "$TSORT"      || TSORT="@TSORT@"
 test -n "$XARGS"      || XARGS="@XARGS@"
@@ -815,13 +859,13 @@ fi
 
 if [ -n "$opt_N" ]; then
 	${PKG_INFO} | \
-		${SED} -e "s/[ 	].*//" -e "s/-[^-]*$//" \
+		${SED} -e "s/[	 ].*//" -e "s/-[^-]*$//" \
 		       -e "s/py[0-9][0-9]pth-/py-/" \
 		       -e "s/py[0-9][0-9]-/py-/" | \
 		while read a
 		do
 			b=$(grep "o $a-[0-9]" $PKGSRCDIR/doc/TODO | \
-				${SED} -e "s/[ 	]*o //")
+				${SED} -e "s/[	 ]*o //")
 		if [ "$b" ]
 		then
 			echo $a: $b
@@ -834,7 +878,7 @@ AWK_PARSE_SUMMARY='$1=="PKGNAME"{pkgname=$2} $1=="PKGPATH"{pkgpath=$2} NF==0{if 
 if [ -n "$opt_b" -a -z "$opt_s" ] ; then
     case $PACKAGES in
 	http://*|ftp://*)
-            PKGDB=`ftp -o - $PACKAGES/$SUMMARY_FILE | ${GZIP_CMD} -cd \
+	    PKGDB=`ftp -o - $PACKAGES/$SUMMARY_FILE | ${GZIP_CMD} -cd \
 		| ${AWK} -F= "$AWK_PARSE_SUMMARY"`
 	    if [ -z "$PKGDB" ]
 	    then
@@ -851,7 +895,10 @@ fi
 if [ -n "$opt_g" ]; then
     verbose "Write $PKGCHK_CONF based on installed packages"
     generate_conf_from_installed $PKGCHK_CONF
+    cleanup_and_exit
 fi
+
+determine_tags
 
 if [ -n "$opt_r" -o -n "$opt_u" ];then
     verbose "Enumerate PKGDIRLIST from installed packages"
@@ -860,7 +907,7 @@ fi
 
 if [ -n "$opt_p" ] ; then
     pkgdirs_from_conf $PKGCHK_CONF $PKGDIRLIST | tr ' ' '\n'
-    exit
+    cleanup_and_exit
 fi
 
 if [ -n "$opt_a" -o -n "$opt_l" ];then	# Append to PKGDIRLIST based on conf
@@ -921,15 +968,15 @@ if [ -n "$MISSING_TODO" ] ; then
     fi
 fi
 
-if [ -n "$opt_u" -a -z "$FAIL_DONE" -a -f $PKGCHK_UPDATE_CONF ] ; then
+if [ -n "$opt_u" -a -z "$FAILED_DONE" -a -f $PKGCHK_UPDATE_CONF ] ; then
     run_cmd "rm -f $PKGCHK_UPDATE_CONF"
 fi
 
-[ -z "$MISS_DONE" ] ||		msg "Missing:$MISS_DONE"
+[ -z "$MISSING_DONE" ] ||	msg "Missing:$MISSING_DONE"
 [ -z "$INSTALL_DONE" ] ||	msg "Installed:$INSTALL_DONE"
 
-if [ -n "$FAIL_DONE" ] ; then
-   msg "Failed:$FAIL_DONE"
+if [ -n "$FAILED_DONE" ] ; then
+   msg "Failed:$FAILED_DONE"
    cleanup_and_exit 1
 fi
 

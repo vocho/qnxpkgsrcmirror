@@ -1,33 +1,36 @@
-# $NetBSD: Makefile,v 1.25 2011/04/22 13:44:49 obache Exp $
-#
+# $NetBSD: Makefile,v 1.29 2012/08/21 18:04:58 adam Exp $
 
-DISTNAME=	grep-2.5.3
-PKGREVISION=	1
+DISTNAME=	grep-2.14
 CATEGORIES=	textproc
 MASTER_SITES=	${MASTER_SITE_GNU:=grep/}
-EXTRACT_SUFX=	.tar.bz2
+EXTRACT_SUFX=	.tar.xz
 
 MAINTAINER=	bouyer@NetBSD.org
 HOMEPAGE=	http://www.gnu.org/software/grep/grep.html
 COMMENT=	GNU grep
+LICENSE=	gnu-gpl-v3
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
-GNU_CONFIGURE=		YES
-CONFIGURE_ARGS+=	--disable-perl-regexp
-USE_PKGLOCALEDIR=	YES
+USE_PKGLOCALEDIR=	yes
 USE_TOOLS+=		makeinfo msgfmt
-INFO_FILES=		# PLIST
-TEXINFO_REQD=		4.0
+GNU_CONFIGURE=		yes
+CONFIGURE_ARGS+=	--disable-perl-regexp
+CONFIGURE_ARGS+=	--program-prefix=g
 CONFIGURE_ENV+=		MKDIR_P=${INSTALL_DATA_DIR:Q}
+INFO_FILES=		yes
+TEXINFO_REQD=		4.0
 
-.include "../../mk/bsd.prefs.mk"
+INSTALLATION_DIRS=	gnu/bin gnu/man/man1
 
-.if defined(GNU_PROGRAM_PREFIX)
-CONFIGURE_ARGS+=	--program-prefix=${GNU_PROGRAM_PREFIX:Q}
-.endif
-PLIST_SUBST+=		GNU_PROGRAM_PREFIX=${GNU_PROGRAM_PREFIX:Q}
-BUILD_DEFS+=		GNU_PROGRAM_PREFIX
+post-install:
+.for g n in  bin/ggrep gnu/bin/grep   bin/gegrep gnu/bin/egrep \
+             bin/gfgrep gnu/bin/fgrep   \
+             man/man1/ggrep.1 gnu/man/man1/grep.1 \
+             man/man1/ggrep.1 gnu/man/man1/egrep.1 \
+             man/man1/ggrep.1 gnu/man/man1/fgrep.1
+	${LN} -sf ${PREFIX}/${g} ${DESTDIR}${PREFIX}/${n}
+.endfor
 
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

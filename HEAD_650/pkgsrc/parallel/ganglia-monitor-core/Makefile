@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.36 2012/03/13 12:36:25 fhajny Exp $
+# $NetBSD: Makefile,v 1.38 2012/06/14 07:56:47 sbd Exp $
 #
 
 DISTNAME=		ganglia-3.1.2
 PKGNAME=		ganglia-monitor-core-3.1.2
-PKGREVISION=		11
+PKGREVISION=		12
 CATEGORIES=		net parallel
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=ganglia/}
 
@@ -14,6 +14,7 @@ COMMENT=		Ganglia cluster monitor, monitoring daemon
 PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=		yes
+SET_LIBDIR=		yes
 
 CONFIGURE_ARGS+=	--with-gmetad
 USE_LIBTOOL=		yes
