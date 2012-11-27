@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.18 2012/03/21 19:58:47 hans Exp $
+# $NetBSD: Makefile,v 1.24 2012/07/24 18:27:41 drochner Exp $
 
-DISTNAME=	gtk+-3.2.4
+DISTNAME=	gtk+-3.4.4
 PKGNAME=	${DISTNAME:S/gtk/gtk3/}
 CATEGORIES=	x11
-MASTER_SITES=	ftp://ftp.gtk.org/pub/gtk/3.2/ \
-		${MASTER_SITE_GNOME:=sources/gtk+/3.2/}
+MASTER_SITES=	ftp://ftp.gtk.org/pub/gtk/${PKGVERSION_NOREV:R}/ \
+		${MASTER_SITE_GNOME:=sources/gtk+/${PKGVERSION_NOREV:R}/}
 EXTRACT_SUFX=	.tar.xz
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
@@ -53,7 +53,13 @@ BUILD_DIRS=		. demos/gtk-demo
 # which do not have it.
 .if ${OPSYS} == "SunOS"
 BUILD_DEPENDS+=		grep-[0-9]*:../../textproc/grep
-TOOLS_PATH.grep=	${LOCALBASE}/bin/${GNU_PROGRAM_PREFIX}grep
+TOOLS_PATH.grep=	${LOCALBASE}/bin/ggrep
+.endif
+# isnan and isinf are part of libc, not libm on DragonFly
+# conf tests fail detection due to conflicting definitions, just skip them
+.if ${OPSYS} == "DragonFly"
+CONFIGURE_ENV+=		ac_cv_func_isnan=yes
+CONFIGURE_ENV+=		ac_cv_func_isinf=yes
 .endif
 
 CFLAGS.SunOS+=		-std=gnu99 -D_XOPEN_SOURCE=600
@@ -77,7 +83,7 @@ BUILDLINK_API_DEPENDS.glib2+=	glib2>=2.29.14
 .include "../../devel/glib2/buildlink3.mk"
 BUILDLINK_API_DEPENDS.gdk-pixbuf2+=	gdk-pixbuf2>=2.24.1nb2
 .include "../../graphics/gdk-pixbuf2/buildlink3.mk"
-BUILDLINK_API_DEPENDS.gobject-introspection+=	gobject-introspection>=0.10.1
+BUILDLINK_API_DEPENDS.gobject-introspection+=	gobject-introspection>=1.32
 .include "../../devel/gobject-introspection/buildlink3.mk"
 
 .include "options.mk"

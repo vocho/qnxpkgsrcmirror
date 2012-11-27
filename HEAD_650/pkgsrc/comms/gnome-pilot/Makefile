@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.64 2012/03/06 17:38:55 ryoon Exp $
+# $NetBSD: Makefile,v 1.68 2012/07/15 08:22:47 wiz Exp $
 #
 
 DISTNAME=		gnome-pilot-2.0.17
-PKGREVISION=		16
+PKGREVISION=		20
 CATEGORIES=		comms gnome
 MASTER_SITES=		${MASTER_SITE_GNOME:=sources/gnome-pilot/2.0/}
 
@@ -32,4 +32,5 @@ CONFIGURE_ARGS+=	--with-vfs
 .include "../../textproc/libxml2/buildlink3.mk"
 .include "../../mk/omf-scrollkeeper.mk"
 .include "../../x11/gnome-panel/buildlink3.mk"
+.include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../mk/bsd.pkg.mk"

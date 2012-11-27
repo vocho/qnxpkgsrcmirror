@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.13 2012/03/03 00:13:41 wiz Exp $
+# $NetBSD: Makefile,v 1.15 2012/06/14 07:43:46 sbd Exp $
 #
 
 DISTNAME=	pyclutter-gst-1.0.0
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME:S/^py//}
-PKGREVISION=	9
+PKGREVISION=	10
 CATEGORIES=	graphics
 MASTER_SITES=	http://source.clutter-project.org/sources/pyclutter-gst/1.0/
 
@@ -13,7 +13,6 @@ COMMENT=	Python modules for Clutter-Gstreamer
 LICENSE=	gnu-lgpl-v2.1
 
 PKG_DESTDIR_SUPPORT=	user-destdir
-PYTHON_VERSIONS_ACCEPTED=	27 26 25
 
 GNU_CONFIGURE=	yes
 USE_LIBTOOL=	yes

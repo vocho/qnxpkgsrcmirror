@@ -1,4 +1,4 @@
-# $NetBSD: buildlink3.mk,v 1.14 2011/04/22 13:42:01 obache Exp $
+# $NetBSD: buildlink3.mk,v 1.16 2012/07/22 06:15:22 obache Exp $
 
 BUILDLINK_TREE+=	uim
 
@@ -6,7 +6,7 @@ BUILDLINK_TREE+=	uim
 UIM_BUILDLINK3_MK:=
 
 BUILDLINK_API_DEPENDS.uim+=	uim>=1.5.1
-BUILDLINK_ABI_DEPENDS.uim?=	uim>=1.6.1nb1
+BUILDLINK_ABI_DEPENDS.uim+=	uim>=1.8.0
 BUILDLINK_PKGSRCDIR.uim?=	../../inputmethod/uim
 
 .include "../../devel/gettext-lib/buildlink3.mk"

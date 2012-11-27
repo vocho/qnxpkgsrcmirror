@@ -1,10 +1,6 @@
 # Variable definitions for the QNX operating system.
 
-.if defined(PKGSRC_COMPILER) && ${PKGSRC_COMPILER} == "qcc"
-CC=		qcc
-.else
 CC=		gcc
-.endif
 ECHO_N?=	${ECHO} -n
 IMAKE_MAKE?=	${MAKE}		# program which gets invoked by imake
 PKGLOCALEDIR?=	share

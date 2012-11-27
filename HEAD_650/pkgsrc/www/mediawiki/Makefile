@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.19 2012/03/31 12:45:25 obache Exp $
+# $NetBSD: Makefile,v 1.21 2012/06/19 11:55:25 wiz Exp $
 
 DISTNAME=	mediawiki-${VER}.${PVER}
 CATEGORIES=	www
 MASTER_SITES=	http://download.wikimedia.org/mediawiki/${VER}/
 
-MAINTAINER=	pkgsrc-users@NetBSD.org
+MAINTAINER=	wenheping@gmail.com
 HOMEPAGE=	http://www.mediawiki.org/
 COMMENT=	Free software wiki package originally written for Wikipedia
 LICENSE=	gnu-gpl-v2
@@ -19,8 +19,8 @@ INSTALLATION_DIRS=	${EGDIR} share/mediawiki
 .include "options.mk"
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
-VER=			1.17
-PVER=			3
+VER=			1.19
+PVER=			1
 
 APACHE_USER?=		www
 APACHE_GROUP?=		www
@@ -46,6 +46,8 @@ SUBST_STAGE.sh=		post-patch
 SUBST_MESSAGE.sh=	Fixing path to sh
 SUBST_FILES.sh+=	bin/ulimit-tvf.sh bin/ulimit.sh bin/ulimit4.sh
 SUBST_FILES.sh+=	maintenance/storage/make-blobs
+SUBST_FILES.sh+=	maintenance/dev/install.sh maintenance/dev/installphp.sh
+SUBST_FILES.sh+=	maintenance/dev/installmw.sh maintenance/dev/start.sh
 SUBST_SED.sh=		-e "s|/bin/bash|${SH}|"
 
 SUBST_CLASSES+=		perl
@@ -62,7 +64,7 @@ do-install:
 	cd ${WRKSRC} && ${FIND} . -type d -exec ${INSTALL_DATA_DIR} \
 	  ${DESTDIR}${MEDIAWIKI}/{} \; -exec ${CHOWN} \
 	  ${APACHE_USER}:${APACHE_GROUP} ${DESTDIR}${MEDIAWIKI}/{} \;
-	cd ${WRKSRC} && ${FIND} . \! -type d \! -name '*.orig' \
+	cd ${WRKSRC} && ${FIND} . \! -type d \! -name '.git*' \
 	  -exec ${INSTALL_DATA} {} ${DESTDIR}${MEDIAWIKI}/{} \; \
 	  -exec ${CHOWN} ${APACHE_USER}:${APACHE_GROUP} \
 	  ${DESTDIR}${MEDIAWIKI}/{} \;

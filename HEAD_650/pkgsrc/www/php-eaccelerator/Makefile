@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.15 2011/12/17 13:46:29 obache Exp $
+# $NetBSD: Makefile,v 1.18 2012/06/16 22:34:23 dholland Exp $
 
 MODNAME=	eaccelerator
 PECL_VERSION=	0.9.6.1
@@ -9,11 +9,13 @@ MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=eaccelerator/} \
 EXTRACT_SUFX=	.tar.bz2
 
 HOMEPAGE=	http://sourceforge.net/projects/eaccelerator/
-MAINTAINER=	jdolecek@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 COMMENT=	PHP accelerator, optimizer, encoder and dynamic content cache
 LICENSE=	gnu-gpl-v2
 
 PKG_DESTDIR_SUPPORT=	user-destdir
+
+PHP_VERSIONS_ACCEPTED=	53
 
 CONFLICTS=		php-eaccelator-[0-9]*
 

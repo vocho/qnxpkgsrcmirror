@@ -1,4 +1,4 @@
-# $NetBSD: tools.FreeBSD.mk,v 1.34 2011/12/14 03:28:54 joerg Exp $
+# $NetBSD: tools.FreeBSD.mk,v 1.36 2012/04/20 08:47:01 obache Exp $
 #
 # System-supplied tools for the FreeBSD operating system.
 
@@ -61,6 +61,7 @@ TOOLS_PLATFORM.nroff?=		/usr/bin/nroff
 TOOLS_PLATFORM.openssl?=	/usr/bin/openssl
 # Don't use GNU patch
 #TOOLS_PLATFORM.patch?=		/usr/bin/patch
+TOOLS_PLATFORM.pax?=		/bin/pax
 TOOLS_PLATFORM.printf?=		/usr/bin/printf
 TOOLS_PLATFORM.pwd?=		/bin/pwd
 TOOLS_PLATFORM.readelf?=	/usr/bin/readelf
@@ -84,4 +85,7 @@ TOOLS_PLATFORM.true?=		true			# shell builtin
 TOOLS_PLATFORM.tsort?=		/usr/bin/tsort
 TOOLS_PLATFORM.wc?=		/usr/bin/wc
 TOOLS_PLATFORM.xargs?=		/usr/bin/xargs
+.if exists(/usr/bin/xzcat)
+TOOLS_PLATFORM.xzcat?=		/usr/bin/xzcat
+.endif
 TOOLS_PLATFORM.yacc?=		/usr/bin/yacc

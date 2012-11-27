@@ -1,8 +1,8 @@
-$NetBSD: patch-aq,v 1.2 2011/03/13 11:31:57 drochner Exp $
+$NetBSD: patch-aq,v 1.4 2012/05/01 18:45:52 adam Exp $
 
---- gio/gsocket.c.orig	2011-02-11 15:23:12.000000000 +0000
+--- gio/gsocket.c.orig	2012-05-01 00:06:39.000000000 +0000
 +++ gio/gsocket.c
-@@ -33,6 +33,9 @@
+@@ -37,6 +37,9 @@
  #include <signal.h>
  #include <string.h>
  #include <stdlib.h>
@@ -12,7 +12,16 @@ $NetBSD: patch-aq,v 1.2 2011/03/13 11:31:57 drochner Exp $
  
  #ifndef G_OS_WIN32
  # include <fcntl.h>
-@@ -3540,6 +3543,35 @@ g_socket_get_credentials (GSocket   *soc
+@@ -4301,7 +4304,7 @@ g_socket_get_credentials (GSocket   *soc
+ 
+   ret = NULL;
+ 
+-#if defined(__linux__) || defined(__OpenBSD__)
++#if defined(__linux__) || (defined(__OpenBSD__) && !defined(__MirBSD__))
+   {
+     socklen_t optlen;
+ #if defined(__linux__)
+@@ -4336,6 +4339,35 @@ g_socket_get_credentials (GSocket   *soc
                                    &native_creds);
        }
    }

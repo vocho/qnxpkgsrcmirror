@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.11 2011/04/22 13:45:13 obache Exp $
+# $NetBSD: Makefile,v 1.13 2012/06/09 07:00:48 obache Exp $
 #
 
-DISTNAME=		libXpm-3.5.8
-PKGREVISION=		1
+DISTNAME=		libXpm-3.5.10
 CATEGORIES=		graphics x11
 MASTER_SITES=		${MASTER_SITE_XORG:=lib/}
 EXTRACT_SUFX=		.tar.bz2
@@ -43,6 +42,8 @@ CONFIGURE_ARGS+=	XPM_CFLAGS=${XPM_CFLAGS:Q} \
 			SXPM_CFLAGS=${SXPM_CFLAGS:Q} \
 			SXPM_LIBS=${SXPM_LIBS:Q}
 .endif
+
+.include "../../meta-pkgs/modular-xorg/hacks.mk"
 
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../x11/libX11/buildlink3.mk"

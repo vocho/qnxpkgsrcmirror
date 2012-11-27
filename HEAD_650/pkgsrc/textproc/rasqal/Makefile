@@ -1,10 +1,11 @@
-# $NetBSD: Makefile,v 1.13 2012/03/19 09:26:22 markd Exp $
+# $NetBSD: Makefile,v 1.16 2012/06/14 07:43:19 sbd Exp $
 
-DISTNAME=	rasqal-0.9.28
+DISTNAME=	rasqal-0.9.29
+PKGREVISION=	1
 CATEGORIES=	textproc
 MASTER_SITES=	http://download.librdf.org/source/
 
-MAINTAINER=	mkirby@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://librdf.org/rasqal
 COMMENT=	Library that handles RDF query syntaxes
 LICENSE=	gnu-lgpl-v2.1 OR apache-2.0
@@ -19,6 +20,7 @@ PKGCONFIG_OVERRIDE+=	rasqal.pc.in
 
 .include "../../devel/gmp/buildlink3.mk"
 .include "../../math/mpfr/buildlink3.mk"
+BUILDLINK_API_DEPENDS.raptor2+=	raptor2>=2.0.7
 .include "../../textproc/raptor2/buildlink3.mk"
 .include "../../devel/pcre/buildlink3.mk"
 .include "../../textproc/libxml2/buildlink3.mk"

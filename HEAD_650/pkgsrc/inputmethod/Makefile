@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.51 2011/09/13 07:31:17 mef Exp $
+# $NetBSD: Makefile,v 1.53 2012/08/19 08:14:38 obache Exp $
 #
 
 COMMENT=	Input method tools and libraries
@@ -47,6 +47,7 @@ SUBDIR+=	kinput2
 SUBDIR+=	libchewing
 SUBDIR+=	libchewing02
 SUBDIR+=	libhangul
+SUBDIR+=	libskk
 SUBDIR+=	libtabe
 SUBDIR+=	m17n-im-config
 SUBDIR+=	multiskkserv
@@ -62,7 +63,6 @@ SUBDIR+=	ruby-zinnia
 SUBDIR+=	scim
 SUBDIR+=	scim-anthy
 SUBDIR+=	scim-array
-SUBDIR+=	scim-bridge
 SUBDIR+=	scim-canna
 SUBDIR+=	scim-ccinput
 SUBDIR+=	scim-chewing

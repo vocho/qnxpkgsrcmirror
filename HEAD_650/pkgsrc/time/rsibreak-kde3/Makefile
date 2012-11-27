@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.9 2012/03/03 00:14:02 wiz Exp $
+# $NetBSD: Makefile,v 1.11 2012/07/01 19:05:27 dholland Exp $
 
 DISTNAME=		rsibreak-0.8.0
 PKGNAME=		rsibreak-0.8.0
-PKGREVISION=		14
+PKGREVISION=		16
 CATEGORIES=		time kde
 MASTER_SITES=		http://www.rsibreak.org/files/
 EXTRACT_SUFX=           .tar.bz2
@@ -24,5 +24,6 @@ GNU_CONFIGURE=		yes
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../x11/kdelibs3/buildlink3.mk"
 .include "../../x11/libXScrnSaver/buildlink3.mk"
+.include "../../sysutils/desktop-file-utils/desktopdb.mk"
 
 .include "../../mk/bsd.pkg.mk"

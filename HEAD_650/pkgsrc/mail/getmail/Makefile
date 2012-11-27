@@ -1,18 +1,17 @@
-# $NetBSD: Makefile,v 1.110 2012/03/15 11:53:29 obache Exp $
+# $NetBSD: Makefile,v 1.119 2012/08/08 12:22:58 schmonz Exp $
 
-DISTNAME=	getmail-4.25.0
-PKGREVISION=	1
-CATEGORIES=	mail
-MASTER_SITES=	${HOMEPAGE}old-versions/
+DISTNAME=		getmail-4.33.0
+CATEGORIES=		mail
+MASTER_SITES=		${HOMEPAGE}old-versions/
 
-MAINTAINER=	schmonz@NetBSD.org
-HOMEPAGE=	http://pyropus.ca/software/getmail/
-COMMENT=	Secure, flexible, reliable, easy-to-use fetchmail replacement
-LICENSE=	gnu-gpl-v2
+MAINTAINER=		schmonz@NetBSD.org
+HOMEPAGE=		http://pyropus.ca/software/getmail/
+COMMENT=		Secure, flexible, reliable fetchmail replacement
+LICENSE=		gnu-gpl-v2
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
-USE_LANGUAGES=	# none
+USE_LANGUAGES=		# none
 
 PYTHON_PATCH_SCRIPTS=	*.py getmailcore/*.py
 

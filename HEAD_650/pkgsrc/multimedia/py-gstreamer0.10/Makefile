@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.27 2012/03/03 00:13:41 wiz Exp $
+# $NetBSD: Makefile,v 1.29 2012/06/14 07:44:15 sbd Exp $
 #
 
 DISTNAME=		gst-python-0.10.22
 PKGNAME=		${PYPKGPREFIX}-${DISTNAME:S/gst-python/gstreamer0.10/}
-PKGREVISION=		2
+PKGREVISION=		3
 CATEGORIES=		multimedia
 MASTER_SITES=		http://gstreamer.freedesktop.org/src/gst-python/
 EXTRACT_SUFX=		.tar.bz2
@@ -14,8 +14,6 @@ COMMENT=		Python bindings for gstreamer0.10
 LICENSE=		gnu-lgpl-v2.1
 
 PKG_DESTDIR_SUPPORT=	user-destdir
-
-PYTHON_VERSIONS_ACCEPTED=	27 26 25
 
 CONFLICTS=		gst-python-[0-9]*
 

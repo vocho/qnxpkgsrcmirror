@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.5 2010/01/15 18:35:10 tnn Exp $
+# $NetBSD: Makefile,v 1.7 2012/06/09 07:00:48 obache Exp $
 #
 
-DISTNAME=		libXres-1.0.4
+DISTNAME=		libXres-1.0.6
 CATEGORIES=		x11
 MASTER_SITES=		${MASTER_SITE_XORG:=lib/}
 EXTRACT_SUFX=		.tar.bz2
@@ -23,6 +23,8 @@ PKGCONFIG_OVERRIDE+=	xres.pc.in
 .if ${OPSYS} == "NetBSD"
 CONFIGURE_ARGS+=	--disable-malloc0returnsnull
 .endif
+
+.include "../../meta-pkgs/modular-xorg/hacks.mk"
 
 .include "../../x11/libX11/buildlink3.mk"
 .include "../../x11/libXext/buildlink3.mk"

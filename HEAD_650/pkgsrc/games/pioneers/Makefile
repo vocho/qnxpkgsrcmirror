@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.30 2012/03/03 00:13:07 wiz Exp $
+# $NetBSD: Makefile,v 1.33 2012/08/13 14:25:39 wiz Exp $
 #
 
 DISTNAME=	pioneers-0.11.3
-PKGREVISION=	14
+PKGREVISION=	17
 CATEGORIES=	games gnome
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=pio/}
 
@@ -29,4 +29,5 @@ SUBST_SED.paths=	-e s,/usr/share/,${PREFIX}/share/,
 .include "../../graphics/librsvg/buildlink3.mk"
 .include "../../mk/omf-scrollkeeper.mk"
 .include "../../x11/gtk2/buildlink3.mk"
+.include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../mk/bsd.pkg.mk"

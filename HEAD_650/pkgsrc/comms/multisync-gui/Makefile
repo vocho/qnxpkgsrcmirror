@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.16 2012/03/15 11:53:22 obache Exp $
+# $NetBSD: Makefile,v 1.19 2012/06/14 07:45:11 sbd Exp $
 #
 
 DISTNAME=	multisync-gui-0.91.0
-PKGREVISION=	12
+PKGREVISION=	14
 CATEGORIES=	comms
 MASTER_SITES=	http://www.opensync.org/raw-attachment/wiki/releases/0.2x/download/
 
@@ -16,6 +16,8 @@ USE_TOOLS+=	pkg-config
 HAS_CONFIGURE=	yes
 
 REPLACE_PYTHON= waf
+
+LDFLAGS.DragonFly=	-lgthread-2.0
 
 .include "../../lang/python/application.mk"
 .include "../../devel/glib2/buildlink3.mk"

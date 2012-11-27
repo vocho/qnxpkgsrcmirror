@@ -305,7 +305,23 @@ $NetBSD$
      msdosdjgpp*)
        # Just because we use GCC doesn't mean we suddenly get shared libraries
        # on systems that don't support them.
-@@ -4110,6 +4205,9 @@ m4_if([$1], [CXX], [
+@@ -4035,6 +4130,15 @@ m4_if([$1], [CXX], [
+       esac
+       ;;
+ 
++    mirbsd*)
++      case $cc_basename in
++      # pkgsrc f77 is f2c, which uses gcc underneath.
++      f77*)
++	_LT_TAGVAR(lt_prog_compiler_wl, $1)='-Wl,'
++	;;
++      esac
++      ;;
++
+     newsos6)
+       _LT_TAGVAR(lt_prog_compiler_pic, $1)='-KPIC'
+       _LT_TAGVAR(lt_prog_compiler_static, $1)='-Bstatic'
+@@ -4110,6 +4214,9 @@ m4_if([$1], [CXX], [
  ])
  case $host_os in
    # For platforms which do not support PIC, -DPIC is meaningless:
@@ -315,7 +331,7 @@ $NetBSD$
    *djgpp*)
      _LT_TAGVAR(lt_prog_compiler_pic, $1)=
      ;;
-@@ -4343,6 +4441,11 @@ _LT_EOF
+@@ -4343,6 +4450,11 @@ _LT_EOF
        fi
        ;;
  
@@ -327,7 +343,7 @@ $NetBSD$
      interix[[3-9]]*)
        _LT_TAGVAR(hardcode_direct, $1)=no
        _LT_TAGVAR(hardcode_shlibpath_var, $1)=no
-@@ -4429,7 +4532,7 @@ _LT_EOF
+@@ -4429,7 +4541,7 @@ _LT_EOF
        ;;
  
      netbsd*)
@@ -336,7 +352,7 @@ $NetBSD$
  	_LT_TAGVAR(archive_cmds, $1)='$LD -Bshareable $libobjs $deplibs $linker_flags -o $lib'
  	wlarc=
        else
-@@ -4735,6 +4838,11 @@ _LT_EOF
+@@ -4735,6 +4847,11 @@ _LT_EOF
        _LT_TAGVAR(hardcode_shlibpath_var, $1)=no
        ;;
  
@@ -348,7 +364,7 @@ $NetBSD$
      hpux9*)
        if test "$GCC" = yes; then
  	_LT_TAGVAR(archive_cmds, $1)='$RM $output_objdir/$soname~$CC -shared -fPIC ${wl}+b ${wl}$install_libdir -o $output_objdir/$soname $libobjs $deplibs $compiler_flags~test $output_objdir/$soname = $lib || mv $output_objdir/$soname $lib'
-@@ -4841,6 +4949,20 @@ _LT_EOF
+@@ -4841,6 +4958,20 @@ _LT_EOF
        _LT_TAGVAR(link_all_deplibs, $1)=yes
        ;;
  
@@ -369,7 +385,7 @@ $NetBSD$
      netbsd*)
        if echo __ELF__ | $CC -E - | $GREP __ELF__ >/dev/null; then
  	_LT_TAGVAR(archive_cmds, $1)='$LD -Bshareable -o $lib $libobjs $deplibs $linker_flags'  # a.out
-@@ -4861,6 +4983,8 @@ _LT_EOF
+@@ -4861,6 +4992,8 @@ _LT_EOF
        ;;
  
      *nto* | *qnx*)
@@ -378,7 +394,7 @@ $NetBSD$
        ;;
  
      openbsd*)
-@@ -5318,9 +5442,7 @@ m4_defun([_LT_PROG_CXX],
+@@ -5318,9 +5451,7 @@ m4_defun([_LT_PROG_CXX],
  [
  pushdef([AC_MSG_ERROR], [_lt_caught_CXX_error=yes])
  AC_PROG_CXX
@@ -389,7 +405,7 @@ $NetBSD$
    AC_PROG_CXXCPP
  else
    _lt_caught_CXX_error=yes
-@@ -5993,6 +6115,22 @@ if test "$_lt_caught_CXX_error" != yes; 
+@@ -5993,6 +6124,22 @@ if test "$_lt_caught_CXX_error" != yes; 
          _LT_TAGVAR(ld_shlibs, $1)=no
  	;;
  
@@ -412,7 +428,7 @@ $NetBSD$
        mvs*)
          case $cc_basename in
            cxx*)
-@@ -6008,18 +6146,36 @@ if test "$_lt_caught_CXX_error" != yes; 
+@@ -6008,18 +6155,37 @@ if test "$_lt_caught_CXX_error" != yes; 
  
        netbsd*)
          if echo __ELF__ | $CC -E - | $GREP __ELF__ >/dev/null; then
@@ -447,13 +463,14 @@ $NetBSD$
 -        _LT_TAGVAR(ld_shlibs, $1)=yes
 +        _LT_TAGVAR(archive_cmds, $1)='$CC -shared $libobjs $deplibs $compiler_flags ${wl}-soname $wl$soname -o $lib'
 +        _LT_TAGVAR(archive_expsym_cmds, $1)='$CC -shared $libobjs $deplibs $compiler_flags ${wl}-soname $wl$soname ${wl}-retain-symbols-file $wl$export_symbols -o $lib'
++        _LT_TAGVAR(hardcode_libdir_flag_spec, $1)='-R$libdir'
 +        _LT_TAGVAR(hardcode_direct, $1)=yes
 +        _LT_TAGVAR(hardcode_shlibpath_var, $1)=no
 +        output_verbose_link_cmd='echo'
  	;;
  
        openbsd2*)
-@@ -6481,6 +6637,11 @@ $RM -f confest.$objext
+@@ -6481,6 +6647,11 @@ $RM -f confest.$objext
  # PORTME: override above test on systems where it is broken
  m4_if([$1], [CXX],
  [case $host_os in

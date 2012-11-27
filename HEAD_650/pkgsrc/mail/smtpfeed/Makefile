@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.33 2010/02/11 19:39:04 joerg Exp $
+# $NetBSD: Makefile,v 1.35 2012/07/10 09:09:10 mef Exp $
 
-DISTNAME=	smtpfeed-1.18
-PKGREVISION=	1
+DISTNAME=	smtpfeed-1.20
 CATEGORIES=	mail
 MASTER_SITES=	ftp://sh.wide.ad.jp/WIDE/free-ware/smtpfeed/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://member.wide.ad.jp/wg/smtp/smtpfeed.html
 COMMENT=	SMTP Fast Exploding External Deliverer for Sendmail
+LICENSE=	original-bsd
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
@@ -28,6 +28,7 @@ DOCS=	COPYRIGHT FEATURES FEATURES.j FYI FYI.j INSTALL INSTALL.j \
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.smtpfeed
 PKG_SUPPORTED_OPTIONS=	inet6
+PKG_SUGGESTED_OPTIONS=	inet6
 
 .include "../../mk/bsd.options.mk"
 

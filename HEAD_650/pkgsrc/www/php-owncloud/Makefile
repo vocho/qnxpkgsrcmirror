@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.4 2012/02/17 16:40:23 ryoon Exp $
+# $NetBSD: Makefile,v 1.17 2012/08/16 16:05:07 ryoon Exp $
 #
 
-DISTNAME=	owncloud-3.0.0
+DISTNAME=	owncloud-4.0.7
 PKGNAME=	${PHP_PKG_PREFIX}-${DISTNAME}
 CATEGORIES=	www
 MASTER_SITES=	http://owncloud.org/releases/
@@ -14,11 +14,12 @@ LICENSE=	gnu-agpl-v3
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
-DEPENDS+=	${PHP_PKG_PREFIX}-dom>=5.2.0:../../textproc/php-dom
-DEPENDS+=	${PHP_PKG_PREFIX}-gd>=5.2.0:../../graphics/php-gd
-DEPENDS+=	${PHP_PKG_PREFIX}-json>=5.2.0:../../textproc/php-json
-DEPENDS+=	${PHP_PKG_PREFIX}-mbstring>=5.2.0:../../converters/php-mbstring
-DEPENDS+=	${PHP_PKG_PREFIX}-zip>=5.2.0:../../archivers/php-zip
+DEPENDS+=	${PHP_PKG_PREFIX}-dom>=5.3.0:../../textproc/php-dom
+DEPENDS+=	${PHP_PKG_PREFIX}-gd>=5.3.0:../../graphics/php-gd
+DEPENDS+=	${PHP_PKG_PREFIX}-json>=5.3.0:../../textproc/php-json
+DEPENDS+=	${PHP_PKG_PREFIX}-mbstring>=5.3.0:../../converters/php-mbstring
+DEPENDS+=	${PHP_PKG_PREFIX}-zip>=5.3.0:../../archivers/php-zip
+
 .include "options.mk"
 
 WRKSRC=		${WRKDIR}/owncloud
@@ -36,7 +37,7 @@ FILES_SUBST+=	WWWGRP=${APACHE_GROUP} WWWOWN=${APACHE_USER} \
 		OC_DIR=${OC_DIR}
 
 do-install:
-	cd ${WRKSRC} && pax -rw -pmp * \
+	cd ${WRKSRC} && pax -rw -pmp * .htaccess \
 		${DESTDIR}${PREFIX}/${OC_DIR}
 
 .include "../../lang/php/phpversion.mk"

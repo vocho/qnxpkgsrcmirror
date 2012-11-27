@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.15 2010/10/24 16:55:03 pettai Exp $
+# $NetBSD: Makefile,v 1.16 2012/07/22 00:21:22 dholland Exp $
 
 DISTNAME=	pptp-1.7.1
 PKGREVISION=	1
@@ -34,7 +34,7 @@ CFLAGS.QNX+= -Du_int8_t=uint8_t -Du_int16_t=uint16_t -Du_int32_t=uint32_t -Du_in
 
 # Not quite yet---special config for MPPE in pppd.
 .if defined(PPTP_USE_MPPE)
-DEPENDS+=	pppd>=2.4.3:../../net/ppp
+DEPENDS+=	pppd>=2.4.3:../../net/pppd
 MAKE_FLAGS+=	PPPD=${PREFIX}/sbin/pppd
 .else
 MAKE_FLAGS+=	PPPD=/usr/sbin/pppd

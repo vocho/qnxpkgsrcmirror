@@ -1,8 +1,8 @@
-$NetBSD: patch-al,v 1.6 2012/03/27 10:49:22 obache Exp $
+$NetBSD: patch-al,v 1.7 2012/04/13 18:47:31 adam Exp $
 
---- configure.orig	2011-06-11 15:46:28.000000000 +0000
+--- configure.orig	2012-04-09 23:07:36.000000000 +0000
 +++ configure
-@@ -2733,6 +2733,7 @@ $as_echo "#define _GNU_SOURCE 1" >>confd
+@@ -2725,6 +2725,7 @@ $as_echo "#define _GNU_SOURCE 1" >>confd
  
  $as_echo "#define _NETBSD_SOURCE 1" >>confdefs.h
  
@@ -10,30 +10,21 @@ $NetBSD: patch-al,v 1.6 2012/03/27 10:49:22 obache Exp $
  
  # The later defininition of _XOPEN_SOURCE and _POSIX_C_SOURCE disables
  # certain features on FreeBSD, so we need __BSD_VISIBLE to re-enable
-@@ -3026,7 +3027,7 @@ case $ac_sys_system/$ac_sys_release in
+@@ -3019,7 +3020,7 @@ case $ac_sys_system/$ac_sys_release in
    # Reconfirmed for OpenBSD 3.3 by Zachary Hamm, for 3.4 by Jason Ish.
    # In addition, Stefan Krah confirms that issue #1244610 exists through
    # OpenBSD 4.6, but is fixed in 4.7.
--  OpenBSD/2.* | OpenBSD/3.[0123456789] | OpenBSD/4.[0123456])
-+  OpenBSD/2.* | OpenBSD/3.[0123456789] | OpenBSD/4.[0123456] | MirBSD/*)
+-  OpenBSD/2.* | OpenBSD/3.* | OpenBSD/4.[0123456])
++  OpenBSD/2.* | OpenBSD/3.* | OpenBSD/4.[0123456] | MirBSD/*)
      define_xopen_source=no
      # OpenBSD undoes our definition of __BSD_VISIBLE if _XOPEN_SOURCE is
      # also defined. This can be overridden by defining _BSD_SOURCE
-@@ -3035,7 +3036,7 @@ case $ac_sys_system/$ac_sys_release in
- $as_echo "#define _BSD_SOURCE 1" >>confdefs.h
- 
-     ;;
--  OpenBSD/4.[789])
-+  OpenBSD/4.[789] | OpenBSD/5.*)
-     # OpenBSD undoes our definition of __BSD_VISIBLE if _XOPEN_SOURCE is
-     # also defined. This can be overridden by defining _BSD_SOURCE
-     # As this has a different meaning on Linux, only define it on OpenBSD
-@@ -4927,15 +4928,10 @@ $as_echo "#define Py_ENABLE_SHARED 1" >>
+@@ -4920,15 +4921,10 @@ $as_echo "#define Py_ENABLE_SHARED 1" >>
  	  RUNSHARED=LD_LIBRARY_PATH=`pwd`:${LD_LIBRARY_PATH}
  	  INSTSONAME="$LDLIBRARY".$SOVERSION
            ;;
--    Linux*|GNU*|NetBSD*|FreeBSD*|DragonFly*)
-+    Linux*|GNU*|NetBSD*|FreeBSD*|Interix*|DragonFly*|OpenBSD*|MirBSD*|QNX*)
+-    Linux*|GNU*|NetBSD*|FreeBSD*|DragonFly*|OpenBSD*)
++    Linux*|GNU*|NetBSD*|FreeBSD*|DragonFly*|OpenBSD*|Interix*|MirBSD*|QNX*)
  	  LDLIBRARY='libpython$(VERSION).so'
  	  BLDLIBRARY='-L. -lpython$(VERSION)'
  	  RUNSHARED=LD_LIBRARY_PATH=`pwd`:${LD_LIBRARY_PATH}

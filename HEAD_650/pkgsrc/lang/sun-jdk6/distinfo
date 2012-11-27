@@ -1,8 +1,8 @@
-$NetBSD: distinfo,v 1.17 2012/02/17 08:16:14 obache Exp $
+$NetBSD: distinfo,v 1.19 2012/06/14 01:05:37 obache Exp $
 
-SHA1 (jdk-6u31-linux-i586.bin) = 8e404a292d85bddb1b39d63f4248094ca05ef0da
-RMD160 (jdk-6u31-linux-i586.bin) = a917f6233912b84e3c904220fcb0cf49399486d8
-Size (jdk-6u31-linux-i586.bin) = 85292206 bytes
-SHA1 (jdk-6u31-linux-x64.bin) = 51cc34977aef629897dda480558fc78b10166cae
-RMD160 (jdk-6u31-linux-x64.bin) = c96b98671572efcde96512649f62162d46489402
-Size (jdk-6u31-linux-x64.bin) = 85581913 bytes
+SHA1 (jdk-6u33-linux-i586.bin) = a525dd379f577d34628b89beb3ba7c1c935c9f94
+RMD160 (jdk-6u33-linux-i586.bin) = d52ca094683408acc6f62ee1770ce07ed9cfe7d4
+Size (jdk-6u33-linux-i586.bin) = 71748499 bytes
+SHA1 (jdk-6u33-linux-x64.bin) = eee126305d836533894be41cc5eb1eca7cdf5831
+RMD160 (jdk-6u33-linux-x64.bin) = 58fe852835e11743b1c2389c741deead87401cf8
+Size (jdk-6u33-linux-x64.bin) = 72029591 bytes

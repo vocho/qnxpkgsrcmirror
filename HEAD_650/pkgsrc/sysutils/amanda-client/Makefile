@@ -1,43 +1,62 @@
-# $NetBSD: Makefile,v 1.48 2010/06/28 10:09:26 joerg Exp $
+# $NetBSD: Makefile,v 1.55 2012/07/30 07:21:10 sbd Exp $
 #
 
-PKGNAME=		amanda-client-${VERS}
-PKGREVISION=		2
+PKGNAME=		amanda-client-${AMANDA_VERSION}
 SVR4_PKGNAME=		amacl
 
 COMMENT=		Client part of Amanda, a network backup system
 
-PKG_DESTDIR_SUPPORT=	destdir
+PKG_DESTDIR_SUPPORT=	user-destdir
 
-GNU_CONFIGURE=		yes
-USE_TOOLS+=		awk:run perl:run
+CONFIGURE_ARGS+=	--without-server --without-gnuplot
 
-.include "../../mk/bsd.prefs.mk"
+BUILD_DIRS=		gnulib
+BUILD_DIRS+=		client-src application-src
+BUILD_DIRS+=		recover-src oldrecover-src
+
+MANPAGES+=		amanda-applications.7
+MANPAGES+=		amdump_client.8
+MANPAGES+=		amgtar.8
+MANPAGES+=		ampgsql.8
+MANPAGES+=		amraw.8
+MANPAGES+=		amrecover.8
+MANPAGES+=		amsamba.8
+MANPAGES+=		amstar.8
+MANPAGES+=		amsuntar.8
+MANPAGES+=		amzfs-snapshot.8
+MANPAGES+=		amzfs-sendrecv.8
+
+PERL5_MODS+=		Amanda/Application.pm
+PERL5_MODS+=		Amanda/Application/Zfs.pm
+
+PERL5_LIBS+=		Application
+
 .include "../../sysutils/amanda-common/Makefile.common"
-.include "../../sysutils/amanda-common/buildlink3.mk"
-#.include "../../devel/readline/buildlink3.mk"
 
-CONFIGURE_ARGS+=	--without-server
-
-BUILD_DEFS+=		AMANDA_SMB AMANDA_DUMP_SNAP
-
-# Prevent configure script from finding unnecessary libraries.  We'll patch
-# the amrecover Makefile to add the readline libraries as it's the only
-# program that uses readline. (XXX: incorrect, does not happen)
-#
-CONFIGURE_ENV+=		ac_cv_lib_intl_main=no
-CONFIGURE_ENV+=		ac_cv_lib_termcap_tgetent=no
-CONFIGURE_ENV+=		ac_cv_lib_curses_tgetent=no
-CONFIGURE_ENV+=		ac_cv_lib_ncurses_tgetent=no
-CONFIGURE_ENV+=		ac_cv_lib_readline_readline=no
-
-.if defined(AMANDA_SMB)
+.if !empty(PKG_OPTIONS:Mamanda-smb)
 CONFIGURE_ARGS+=	--with-smbclient
 DEPENDS+=		{samba>=2.0,ja-samba>=2.0}:../../net/samba
 .endif
 
-.if defined(AMANDA_DUMP_SNAP)
+.if !empty(PKG_OPTIONS:Mamanda-dump-snap)
 CONFIGURE_ARGS+=	--with-dump-use-snapshot --with-rundump
 .endif
 
+SPECIAL_PERMS+=		libexec/amanda/application/amgtar ${AM_PROG_PERMS}
+SPECIAL_PERMS+=		libexec/amanda/application/amstar ${AM_PROG_PERMS}
+SPECIAL_PERMS+=		libexec/amanda/calcsize ${AM_PROG_PERMS}
+SPECIAL_PERMS+=		libexec/amanda/killpgrp ${AM_PROG_PERMS}
+SPECIAL_PERMS+=		libexec/amanda/rundump ${AM_PROG_PERMS}
+SPECIAL_PERMS+=		libexec/amanda/runtar ${AM_PROG_PERMS}
+
+post-build:
+	${RUN}${_ULIMIT_CMD} cd ${WRKSRC}/amandad-src &&		\
+		${BUILD_MAKE_CMD} amandad
+
+post-install:
+	${INSTALL_PROGRAM} ${WRKSRC}/amandad-src/amandad		\
+		${DESTDIR}${PREFIX}/libexec/amanda
+
+.include "../../sysutils/amanda-common/buildlink3.mk"
+.include "../../devel/readline/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

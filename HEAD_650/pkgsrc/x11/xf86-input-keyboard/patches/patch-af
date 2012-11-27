@@ -1,8 +1,8 @@
 $NetBSD$
 
---- src/nto_kbd.c.orig	2009-06-03 14:48:41.000000000 -0400
+--- src/nto_kbd.c.orig	2012-10-05 18:11:02.000000000 +0000
 +++ src/nto_kbd.c
-@@ -0,0 +1,255 @@
+@@ -0,0 +1,198 @@
 +/*
 + * Copyright (c) 2009 
 + * Author: Xiaodan Tang
@@ -92,12 +92,6 @@ $NetBSD$
 +    return(leds);
 +}
 +
-+static void
-+SetKbdRepeat(InputInfoPtr pInfo, char rad)
-+{
-+    KbdDevPtr pKbd = (KbdDevPtr) pInfo->private;
-+}
-+
 +static int
 +KbdOn(InputInfoPtr pInfo, int what)
 +{
@@ -119,53 +113,6 @@ $NetBSD$
 +    }
 +}
 +
-+#define ModifierSet(k) ((modifiers & (k)) == (k))
-+
-+static
-+Bool SpecialKey(InputInfoPtr pInfo, int key, Bool down, int modifiers)
-+{
-+  KbdDevPtr pKbd = (KbdDevPtr) pInfo->private;
-+
-+  if(!pKbd->vtSwitchSupported)
-+      return FALSE;
-+
-+	// Maybe we will support this one day
-+#if 0
-+  if ((ModifierSet(ControlMask | AltMask)) ||
-+      (ModifierSet(ControlMask | AltLangMask))) {
-+      if (VTSwitchEnabled && !xf86Info.vtSysreq && !xf86Info.dontVTSwitch) {
-+         switch (key) {
-+             case KEY_F1:
-+             case KEY_F2:
-+             case KEY_F3:
-+             case KEY_F4:
-+             case KEY_F5:
-+             case KEY_F6:
-+             case KEY_F7:
-+             case KEY_F8:
-+             case KEY_F9:
-+             case KEY_F10:
-+#ifdef VT_ACTIVATE
-+                  if (down) {
-+                    ioctl(xf86Info.consoleFd, VT_ACTIVATE, key - KEY_F1 + 1);
-+                    return TRUE;
-+                  }
-+#endif
-+             case KEY_F11:
-+             case KEY_F12:
-+#ifdef VT_ACTIVATE
-+                  if (down) {
-+                    ioctl(xf86Info.consoleFd, VT_ACTIVATE, key - KEY_F11 + 11);
-+                    return TRUE;
-+                  }
-+#endif
-+         }
-+      }
-+    }
-+#endif
-+	
-+    return FALSE;
-+}
 +
 +static void
 +hidReadInput(InputInfoPtr pInfo)
@@ -240,15 +187,11 @@ $NetBSD$
 +    pKbd->Bell		= SoundBell;
 +    pKbd->SetLeds	= SetKbdLeds;
 +    pKbd->GetLeds	= GetKbdLeds;
-+    pKbd->SetKbdRepeat	= SetKbdRepeat;
 +    pKbd->KbdGetMapping	= KbdGetMapping;
-+    pKbd->SpecialKey	= SpecialKey;
 +
 +    pKbd->RemapScanCode = NULL;
-+    pKbd->GetSpecialKey = NULL;
 +
 +    pKbd->OpenKeyboard = OpenKeyboard;
-+    pKbd->vtSwitchSupported = FALSE;
 +    pKbd->CustomKeycodes = FALSE;
 +    
 +    pKbd->private = xcalloc(sizeof(NtoKbdPrivRec), 1);

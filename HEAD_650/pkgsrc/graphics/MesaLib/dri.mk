@@ -1,4 +1,4 @@
-# $NetBSD: dri.mk,v 1.4 2009/08/08 15:03:18 drochner Exp $
+# $NetBSD: dri.mk,v 1.6 2012/05/09 07:53:04 wiz Exp $
 #
 # Currently, this is for convenience only.
 #

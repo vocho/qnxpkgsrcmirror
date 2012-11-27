@@ -1,9 +1,8 @@
-# $NetBSD: Makefile,v 1.7 2012/03/10 10:56:13 obache Exp $
+# $NetBSD: Makefile,v 1.9 2012/04/22 13:59:42 obache Exp $
 #
 
-DISTNAME=	ibus-el-0.2.1
+DISTNAME=	ibus-el-0.3.2
 PKGNAME=	${EMACS_PKGNAME_PREFIX}${DISTNAME}
-PKGREVISION=	1
 CATEGORIES=	inputmethod
 MASTER_SITES=	http://www11.atwiki.jp/s-irie/pub/emacs/ibus/
 
@@ -19,7 +18,7 @@ PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_LANGUAGES=	# none
 EMACS_VERSIONS_ACCEPTED=	emacs22 emacs23 emacs24
-PYTHON_VERSIONS_INCOMPATIBLE=	24 25
+PYTHON_VERSIONS_INCOMPATIBLE=	25
 
 REPLACE_PYTHON=	ibus-el-agent
 # then execute directly

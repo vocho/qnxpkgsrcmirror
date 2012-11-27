@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.86 2012/03/07 14:54:44 wiz Exp $
+# $NetBSD: Makefile,v 1.88 2012/08/16 15:14:20 wiz Exp $
 
-DISTNAME=	cdrtools-3.01a07
+DISTNAME=	cdrtools-3.01a08
 PKGNAME=	${DISTNAME:S/a/alpha/:S/-pre/pre/}
 CATEGORIES=	sysutils
 #MASTER_SITES=	ftp://ftp.berlios.de/pub/cdrecord/ \
@@ -141,4 +141,5 @@ do-install:
 		${DESTDIR}${PREFIX}/share/examples/cdrtools/cdrecord
 
 .include "../../mk/oss.buildlink3.mk"
+.include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

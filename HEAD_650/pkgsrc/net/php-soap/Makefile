@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.1.1.1 2010/03/16 15:08:54 taca Exp $
+# $NetBSD: Makefile,v 1.5 2012/08/17 15:35:24 taca Exp $
 
 MODNAME=		soap
 CATEGORIES+=		net
-COMMENT=		PHP5 extension for SOAP functions
+COMMENT=		PHP extension for SOAP functions
 
-MAINTAINER=		jdolecek@NetBSD.org
+MAINTAINER=		pkgsrc-users@NetBSD.org
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 

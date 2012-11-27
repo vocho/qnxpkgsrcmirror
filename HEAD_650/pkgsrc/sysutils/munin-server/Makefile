@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.14 2012/03/08 10:26:08 shattered Exp $
+# $NetBSD: Makefile,v 1.16 2012/06/18 11:10:47 joerg Exp $
 #
 
 DISTNAME=	${PKGNAME_NOREV:S:-server-:_:}

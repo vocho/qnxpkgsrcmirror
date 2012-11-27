@@ -1,8 +1,10 @@
-$NetBSD: patch-aa,v 1.5 2011/02/14 21:34:05 drochner Exp $
+$NetBSD: patch-aa,v 1.6 2012/07/14 23:42:13 wiz Exp $
 
---- configure.ac.orig	2009-12-14 21:35:07.000000000 +0000
+Check for libpci and mtrr headers on NetBSD.
+
+--- configure.ac.orig	2012-04-09 17:04:39.000000000 +0000
 +++ configure.ac
-@@ -74,15 +74,18 @@ case $host_os in
+@@ -77,15 +77,18 @@ case $host_os in
  		;;
  	*netbsd*)
  		case $host in
@@ -24,15 +26,17 @@ $NetBSD: patch-aa,v 1.5 2011/02/14 21:34:05 drochner Exp $
  	*openbsd*)
  		openbsd=yes
  		;;
-@@ -95,12 +98,26 @@ esac
+@@ -101,6 +104,7 @@ esac
  AM_CONDITIONAL(LINUX, [test "x$linux" = xyes])
  AM_CONDITIONAL(FREEBSD, [test "x$freebsd" = xyes])
  AM_CONDITIONAL(NETBSD, [test "x$netbsd" = xyes])
 +AM_CONDITIONAL(NTO, [test "x$nto" = xyes])
  AM_CONDITIONAL(OPENBSD, [test "x$openbsd" = xyes])
  AM_CONDITIONAL(SOLARIS, [test "x$solaris" = xyes])
+ AM_CONDITIONAL(GNU, [test "x$gnu" = xyes])
+@@ -109,7 +113,20 @@ AC_SYS_LARGEFILE
  
- AC_SYS_LARGEFILE
+ AC_CHECK_HEADERS([err.h])
  
 +if test "x$netbsd" = xyes; then
 +AC_CHECK_LIB([pci], [pcibus_conf_read],

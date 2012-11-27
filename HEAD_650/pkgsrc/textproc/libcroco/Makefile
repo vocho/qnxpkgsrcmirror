@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.44 2012/03/03 00:11:58 wiz Exp $
+# $NetBSD: Makefile,v 1.46 2012/06/14 07:43:21 sbd Exp $
 
-DISTNAME=	libcroco-0.6.4
+DISTNAME=	libcroco-0.6.5
 PKGREVISION=	1
 CATEGORIES=	textproc
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/libcroco/0.6/}

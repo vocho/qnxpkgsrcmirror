@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.87 2012/03/15 11:53:23 obache Exp $
+# $NetBSD: Makefile,v 1.90 2012/08/17 01:02:05 mef Exp $
 
-DISTNAME=	doxygen-1.6.3.src
+DISTNAME=	doxygen-1.8.1.1.src
 PKGNAME=	${DISTNAME:S/.src//}
-PKGREVISION=	8
+PKGREVISION=	1
 CATEGORIES=	devel
 MASTER_SITES=	ftp://ftp.stack.nl/pub/users/dimitri/ \
 		http://ftp.stack.nl/pub/users/dimitri/
@@ -28,7 +28,11 @@ CONFIGURE_ARGS+=	--docdir ${PREFIX}/share/doc/doxygen
 MAKE_ENV+=		PKGSRC_CFLAGS=${CFLAGS:Q}
 MAKE_FLAGS+=		MAN1DIR=${PKGMANDIR}/man1
 
+# Case Insensitive fs or Sensitive
 PLIST_VARS+=		ci cs
+
+# pangocairo: basic ps/pdf support via PKG_BUILD_OPTIONS.graphviz
+PLIST_VARS+=		pangocairo nopangocairo
 
 SUBST_CLASSES+=		path
 SUBST_STAGE.path=	pre-configure
@@ -75,5 +79,11 @@ BUILDLINK_API_DEPENDS.graphviz+=	graphviz>=2.12nb1
 .include "options.mk"
 .include "../../converters/libiconv/buildlink3.mk"
 .include "../../graphics/graphviz/buildlink3.mk"
+
+.if !empty(PKG_BUILD_OPTIONS.graphviz:Mpangocairo)
+PLIST.pangocairo=       yes
+.else
+PLIST.nopangocairo=       yes
+.endif
 .include "../../lang/python/application.mk"
 .include "../../mk/bsd.pkg.mk"

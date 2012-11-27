@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.54 2012/02/06 12:41:48 wiz Exp $
+# $NetBSD: Makefile,v 1.56 2012/04/17 20:08:06 bsiegert Exp $
 #
 
-DISTNAME=	fluxbox-1.1.1
-PKGREVISION=	8
+DISTNAME=	fluxbox-1.3.2
 CATEGORIES=	wm x11
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=fluxbox/}
 EXTRACT_SUFX=	.tar.bz2
@@ -21,7 +20,6 @@ USE_LIBTOOL=	YES
 .include "../../mk/bsd.prefs.mk"
 
 CONFIGURE_ARGS+=	--enable-shape
-CONFIGURE_ARGS+=	--enable-nls
 CONFIGURE_ARGS+=	--enable-xinerama
 
 .include "options.mk"
@@ -33,7 +31,6 @@ CXXFLAGS+=		-template=no%extdef
 
 BUILDLINK_DEPMETHOD.libXt?=	build
 
-.include "../../converters/libiconv/buildlink3.mk"
 .include "../../x11/libSM/buildlink3.mk"
 .include "../../x11/libX11/buildlink3.mk"
 .include "../../x11/libXext/buildlink3.mk"

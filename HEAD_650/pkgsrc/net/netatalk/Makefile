@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.81 2012/02/06 12:41:16 wiz Exp $
+# $NetBSD: Makefile,v 1.88 2012/07/25 11:33:49 fhajny Exp $
 
 DISTNAME=	netatalk-2.2.1
-PKGREVISION=	3
+PKGREVISION=	5
 CATEGORIES=	net print
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=netatalk/}
 EXTRACT_SUFX=	.tar.bz2
@@ -51,6 +51,8 @@ CONFIGURE_ARGS+=	--localstatedir=${VARBASE}/netatalk
 CONFIGURE_ARGS+=	--with-uams-path=${PREFIX}/libexec/netatalk/uams
 CONFIGURE_ARGS+=	--with-bdb=${BDBBASE}
 CONFIGURE_ARGS+=	--with-ssl-dir=${BUILDLINK_PREFIX.openssl}
+CONFIGURE_ARGS+=	--with-ldap=no
+CONFIGURE_ENV+=		MACHINE_ARCH=${MACHINE_ARCH}
 
 MAKE_DIRS+=		${PKG_SYSCONFDIR}/msg
 
@@ -60,10 +62,26 @@ SUBST_STAGE.paths=	pre-configure
 SUBST_FILES.paths=	etc/psf/etc2ps.sh distrib/initscripts/Makefile.in
 SUBST_SED.paths=	-e "s,^\\(DVIPS=\\)\\(/usr/local/tex\\)\\(/bin\\),\\1${PREFIX}\\3,"
 
+PLIST_VARS+=		rcd
+.if ${OPSYS} == "NetBSD"
 RCD_SCRIPTS=		afpd atalkd papd timelord cnid_metad
-.for f in ${RCD_SCRIPTS}
+.  for f in ${RCD_SCRIPTS}
 RCD_SCRIPT_SRC.${f}=	${WRKSRC}/distrib/initscripts/${f}
-.endfor
+.  endfor
+PLIST.rcd=		yes
+.endif
+
+PLIST_VARS+=		ea
+.if ${OPSYS} == "SunOS" || ${OPSYS} == "DragonFly"
+PLIST.ea=		yes
+.endif
+
+PLIST_VARS+=		acl
+.if ${OPSYS} == "SunOS" || ${OPSYS} == "HPUX" || ${OPSYS} == "IRIX" || \
+	${OPSYS} == "AIX" || ${OPSYS} == "OSF1" || ${OPSYS} == "Linux"
+PLIST.acl=		yes
+CONF_FILES+=	${EGDIR}/afp_ldap.conf ${PKG_SYSCONFDIR}/afp_ldap.conf
+.endif
 
 .include "options.mk"
 

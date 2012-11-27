@@ -1,4 +1,4 @@
-$NetBSD: patch-ac,v 1.4 2011/03/11 20:27:42 gdt Exp $
+$NetBSD: patch-ac,v 1.6 2012/08/03 10:32:55 marino Exp $
 
 Added experimental code to support mounting on NetBSD >= 4.99.24. The
 magic value of 256 is taken from coda_vfsops in coda_vfsops.c.

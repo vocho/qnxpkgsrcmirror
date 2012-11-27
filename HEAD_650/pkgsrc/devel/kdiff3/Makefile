@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.19 2012/03/21 23:10:54 markd Exp $
+# $NetBSD: Makefile,v 1.21 2012/07/01 19:05:16 dholland Exp $
 #
 
 DISTNAME=	kdiff3-0.9.96
+PKGREVISION=	2
 CATEGORIES=	devel
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=kdiff3/}
 
@@ -22,4 +23,5 @@ USE_TOOLS+=	msgfmt pkg-config
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../x11/kde-baseapps4/buildlink3.mk"
 .include "../../x11/kdelibs4/buildlink3.mk"
+.include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../mk/bsd.pkg.mk"

@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.10 2012/03/03 00:14:00 wiz Exp $
+# $NetBSD: Makefile,v 1.12 2012/07/02 13:37:42 adam Exp $
 #
 
 DISTNAME=	FlightCrew-0.7.2-Code
 PKGNAME=	${DISTNAME:S/-Code//}
-PKGREVISION=	6
+PKGREVISION=	7
 CATEGORIES=	textproc
 MASTER_SITES=	http://flightcrew.googlecode.com/files/
 EXTRACT_SUFX=	.zip
@@ -36,6 +36,7 @@ SUBST_STAGE.d2u=	post-extract
 SUBST_MESSAGE.d2u=	Removing CR end-of-line markers.
 SUBST_FILES.d2u=	CMakeLists.txt
 SUBST_FILES.d2u+=	src/FlightCrew/tests/CMakeLists.txt
+SUBST_FILES.d2u+=	src/FlightCrew/Validators/Opf/ReachabilityAnalysis.cpp
 SUBST_FILTER_CMD.d2u=	${TR} -d '\r'
 
 .include "../../mk/compiler.mk"

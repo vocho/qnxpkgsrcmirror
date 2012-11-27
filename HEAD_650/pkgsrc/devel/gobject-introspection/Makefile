@@ -1,11 +1,10 @@
-# $NetBSD: Makefile,v 1.18 2012/03/10 08:24:19 obache Exp $
+# $NetBSD: Makefile,v 1.21 2012/05/18 14:38:56 bsiegert Exp $
 #
 
-DISTNAME=	gobject-introspection-1.30.0
-PKGREVISION=	3
+DISTNAME=	gobject-introspection-1.32.1
 CATEGORIES=	devel
-MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gobject-introspection/1.30/}
-EXTRACT_SUFX=	.tar.bz2
+MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gobject-introspection/1.32/}
+EXTRACT_SUFX=	.tar.xz
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://live.gnome.org/GObjectIntrospection
@@ -25,7 +24,6 @@ CONFIGURE_ARGS+=	--disable-tests
 
 PKGCONFIG_OVERRIDE+=	gobject-introspection-1.0.pc.in
 PKGCONFIG_OVERRIDE+=	gobject-introspection-no-export-1.0.pc.in
-PYTHON_VERSIONS_ACCEPTED=	27 26 25
 
 SUBST_CLASSES+=	timet
 SUBST_STAGE.timet=	pre-configure
@@ -33,7 +31,7 @@ SUBST_FILES.timet=	giscanner/ast.py
 SUBST_FILES.timet+=	tests/scanner/Foo-1.0-expected.gir \
 			tests/scanner/Regress-1.0-expected.gir
 .include "../../mk/bsd.prefs.mk"
-.if !empty(MACHINE_PLATFORM:MNetBSD-5.99*) || !empty(MACHINE_PLATFORM:MNetBSD-[6-9]*)
+.if !empty(MACHINE_PLATFORM:MNetBSD-5.99*) || !empty(MACHINE_PLATFORM:MNetBSD-[6-9]*) || !empty(MACHINE_PLATFORM:MMirBSD)
 SUBST_SED.timet=	-e 's,@TIMET_TYPENAME@,TYPE_INT64,g'
 SUBST_SED.timet+=	-e 's,@TIMET_CTYPE@,gint64,g'
 .else

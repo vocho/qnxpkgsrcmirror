@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.39 2012/03/19 22:57:09 markd Exp $
+# $NetBSD: Makefile,v 1.41 2012/06/16 04:45:29 markd Exp $
 
 DISTNAME=	libkipi-${_KDE_VERSION}
 CATEGORIES=	graphics

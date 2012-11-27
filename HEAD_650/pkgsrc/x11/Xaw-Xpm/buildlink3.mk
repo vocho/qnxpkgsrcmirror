@@ -1,4 +1,4 @@
-# $NetBSD: buildlink3.mk,v 1.15 2009/03/20 19:25:38 joerg Exp $
+# $NetBSD: buildlink3.mk,v 1.17 2012/06/15 23:06:02 dholland Exp $
 
 BUILDLINK_TREE+=	Xaw-Xpm
 
@@ -6,19 +6,19 @@ BUILDLINK_TREE+=	Xaw-Xpm
 XAW_XPM_BUILDLINK3_MK:=
 
 BUILDLINK_API_DEPENDS.Xaw-Xpm+=	Xaw-Xpm>=1.1
-BUILDLINK_ABI_DEPENDS.Xaw-Xpm?=	Xaw-Xpm>=1.1nb2
+BUILDLINK_ABI_DEPENDS.Xaw-Xpm+=	Xaw-Xpm>=1.1nb2
 BUILDLINK_PKGSRCDIR.Xaw-Xpm?=	../../x11/Xaw-Xpm
 
 .include "../../mk/bsd.fast.prefs.mk"
 
-.  if ${X11_TYPE} == "modular"
+.if ${X11_TYPE} == "modular"
 buildlink-Xaw-Xpm-cookie: .PHONY buildlink-Xaw-Xpm-inc-hack
 
 buildlink-Xaw-Xpm-inc-hack: .PHONY buildlink-directories
 	[ ! -h ${BUILDLINK_DIR}/include/X11/Xaw ] && \
 		${MKDIR} ${BUILDLINK_DIR}/include/X11 && \
 		${LN} -s Xaw3d ${BUILDLINK_DIR}/include/X11/Xaw
-.  endif
+.endif
 
 LIBXAW?=	-L${BUILDLINK_PREFIX.Xaw-Xpm}/lib			\
 		${COMPILER_RPATH_FLAG}${BUILDLINK_PREFIX.Xaw-Xpm}/lib	\

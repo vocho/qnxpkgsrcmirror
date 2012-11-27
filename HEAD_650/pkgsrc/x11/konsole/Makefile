@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.1.1.1 2012/03/20 05:07:48 markd Exp $
+# $NetBSD: Makefile,v 1.3 2012/06/16 04:45:39 markd Exp $
 
 DISTNAME=	konsole-${_KDE_VERSION}
 CATEGORIES=	x11

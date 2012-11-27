@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.53 2011/06/19 16:25:12 pettai Exp $
+# $NetBSD: Makefile,v 1.56 2012/07/20 16:28:49 wiz Exp $
 
-DISTNAME=	nsd-3.2.8
+DISTNAME=	nsd-3.2.12
 CATEGORIES=	net
 MASTER_SITES=	http://www.nlnetlabs.nl/downloads/nsd/
 
@@ -14,6 +14,7 @@ BUILDLINK_API_DEPENDS.openssl+=	openssl>=0.9.7
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.nsd
 PKG_SUPPORTED_OPTIONS=	inet6
+PKG_SUGGESTED_OPTIONS=	inet6
 
 .include "../../mk/bsd.options.mk"
 
@@ -23,7 +24,6 @@ PKG_SYSCONFSUBDIR=	nsd
 
 CONFIGURE_ARGS+=--with-configdir=${PKG_SYSCONFDIR:Q}
 CONFIGURE_ARGS+=--enable-bind8-stats
-CONFIGURE_ARGS+=--with-libwrap=${BUILDLINK_PREFIX.tcp_wrappers}
 .if !empty(PKG_OPTIONS:Minet6)
 CONFIGURE_ARGS+=--enable-ipv6
 .else
@@ -52,6 +52,5 @@ INSTALLATION_DIRS=	share/examples/nsd
 post-install:
 	${INSTALL_DATA} ${WRKSRC}/contrib/nsd.zones2nsd.conf ${DESTDIR}${PREFIX}/share/examples/nsd
 
-.include "../../security/tcp_wrappers/buildlink3.mk"
 .include "../../security/openssl/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

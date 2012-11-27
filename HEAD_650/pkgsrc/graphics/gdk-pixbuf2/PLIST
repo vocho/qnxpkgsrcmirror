@@ -1,5 +1,6 @@
-@comment $NetBSD: PLIST,v 1.4 2012/02/10 15:41:40 drochner Exp $
+@comment $NetBSD: PLIST,v 1.6 2012/08/10 15:23:42 drochner Exp $
 bin/gdk-pixbuf-csource
+bin/gdk-pixbuf-pixdata
 bin/gdk-pixbuf-query-loaders
 include/gdk-pixbuf-2.0/gdk-pixbuf/gdk-pixbuf-animation.h
 include/gdk-pixbuf-2.0/gdk-pixbuf/gdk-pixbuf-core.h
@@ -40,6 +41,7 @@ share/gtk-doc/html/gdk-pixbuf/api-index-2-10.html
 share/gtk-doc/html/gdk-pixbuf/api-index-2-12.html
 share/gtk-doc/html/gdk-pixbuf/api-index-2-14.html
 share/gtk-doc/html/gdk-pixbuf/api-index-2-2.html
+share/gtk-doc/html/gdk-pixbuf/api-index-2-26.html
 share/gtk-doc/html/gdk-pixbuf/api-index-2-4.html
 share/gtk-doc/html/gdk-pixbuf/api-index-2-6.html
 share/gtk-doc/html/gdk-pixbuf/api-index-2-8.html
@@ -89,6 +91,7 @@ share/locale/ca/LC_MESSAGES/gdk-pixbuf.mo
 share/locale/ca@valencia/LC_MESSAGES/gdk-pixbuf.mo
 share/locale/crh/LC_MESSAGES/gdk-pixbuf.mo
 share/locale/cs/LC_MESSAGES/gdk-pixbuf.mo
+share/locale/csb/LC_MESSAGES/gdk-pixbuf.mo
 share/locale/cy/LC_MESSAGES/gdk-pixbuf.mo
 share/locale/da/LC_MESSAGES/gdk-pixbuf.mo
 share/locale/de/LC_MESSAGES/gdk-pixbuf.mo
@@ -119,6 +122,7 @@ share/locale/is/LC_MESSAGES/gdk-pixbuf.mo
 share/locale/it/LC_MESSAGES/gdk-pixbuf.mo
 share/locale/ja/LC_MESSAGES/gdk-pixbuf.mo
 share/locale/ka/LC_MESSAGES/gdk-pixbuf.mo
+share/locale/km/LC_MESSAGES/gdk-pixbuf.mo
 share/locale/kn/LC_MESSAGES/gdk-pixbuf.mo
 share/locale/ko/LC_MESSAGES/gdk-pixbuf.mo
 share/locale/ku/LC_MESSAGES/gdk-pixbuf.mo

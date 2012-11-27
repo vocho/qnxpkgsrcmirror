@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.80 2012/02/15 19:24:39 hans Exp $
+# $NetBSD: Makefile,v 1.82 2012/04/27 06:55:50 wiz Exp $
 
 DISTNAME=	unzip60
 PKGNAME=	unzip-6.0
+PKGREVISION=	1
 CATEGORIES=	archivers
 MASTER_SITES=	ftp://ftp.info-zip.org/pub/infozip/src/
 EXTRACT_SUFX=	.tgz
@@ -32,10 +33,13 @@ CPPFLAGS+=	-DBSD
      ${OPSYS} == "OSF1"  || \
      ${OPSYS} == "AIX"  || \
      ${OPSYS} == "OpenBSD"  || \
-    (${OPSYS} == "Darwin" && !empty(OS_VERSION:M[01234678].*))) 
+    (${OPSYS} == "Darwin" && !empty(OS_VERSION:M[01234678].*)))
 CPPFLAGS+=	-DNO_LCHMOD
 .endif
 CPPFLAGS+=	-DUNIX -Dunix -DUSE_UNSHRINK -I.
+.if (${OPSYS} != "SunOS")
+CPPFLAGS+=	-DLARGE_FILE_SUPPORT
+.endif
 
 CFLAGS.QNX+=	-DNO_LCHMOD
 MAKE_FLAGS+=	CF=${CPPFLAGS:Q}\ ${CFLAGS:Q}

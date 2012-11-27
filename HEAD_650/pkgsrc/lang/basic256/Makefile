@@ -1,9 +1,8 @@
-# $NetBSD: Makefile,v 1.6 2012/03/03 00:13:25 wiz Exp $
+# $NetBSD: Makefile,v 1.9 2012/08/10 14:20:54 ryoon Exp $
 #
 
-DISTNAME=	basic256_0.9.6.66
+DISTNAME=	basic256_0.9.6.71
 PKGNAME=	${DISTNAME:S/_/-/}
-PKGREVISION=	4
 CATEGORIES=	lang
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=kidbasic/}
 EXTRACT_SUFX=	.tgz
@@ -23,7 +22,7 @@ USE_TOOLS+=	bison flex gmake
 
 SUBST_CLASSES+=			fix-path
 SUBST_STAGE.fix-path=		pre-configure
-SUBST_MESSAGE.fix-path=		Fix hard coded pathes for qt4
+SUBST_MESSAGE.fix-path=		Fix hard coded paths for qt4
 SUBST_FILES.fix-path=		Makefile
 SUBST_FILES.fix-path+=		Makefile.Release
 SUBST_SED.fix-path=		-e 's,/usr/share,${PREFIX},g'
@@ -34,7 +33,7 @@ SUBST_SED.fix-path+=		-e 's,-I/usr/include/qt4,-I${QTDIR}/include,g'
 
 SUBST_CLASSES+=			fix-path2
 SUBST_STAGE.fix-path2=		pre-configure
-SUBST_MESSAGE.fix-path2=	Fix hard coded pathes
+SUBST_MESSAGE.fix-path2=	Fix hard coded paths
 SUBST_FILES.fix-path2+=		BASIC256.pro
 SUBST_SED.fix-path2=		-e 's,/usr/share,${PREFIX}/share,g'
 SUBST_SED.fix-path2+=		-e 's,/usr/local,${PREFIX},g'

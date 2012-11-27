@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.52 2012/03/03 00:12:18 wiz Exp $
+# $NetBSD: Makefile,v 1.54 2012/06/14 07:43:37 sbd Exp $
 #
 
 DISTNAME=	gnome-python-extras-2.25.3
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME:S/gnome-python/gnome2/}
-PKGREVISION=	9
+PKGREVISION=	10
 CATEGORIES=	x11 python
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gnome-python-extras/2.25/}
 EXTRACT_SUFX=	.tar.bz2
@@ -26,8 +26,6 @@ CONFIGURE_ENV+=	PYTHON=${PYTHONBIN:Q}
 USE_TOOLS+=		pkg-config gmake
 USE_LANGUAGES=	c c++
 CONFIGURE_ARGS+=	--enable-docs
-
-PYTHON_VERSIONS_ACCEPTED=	27 26 25
 
 .include "../../lang/python/extension.mk"
 .include "../../lang/python/application.mk"

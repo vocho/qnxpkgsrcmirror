@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.1.1.1 2012/03/20 05:25:38 markd Exp $
+# $NetBSD: Makefile,v 1.3 2012/06/16 04:45:31 markd Exp $
 
 DISTNAME=	kcalc-${_KDE_VERSION}
 CATEGORIES=	math

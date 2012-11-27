@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.1.1.1 2012/03/13 15:32:47 pettai Exp $
+# $NetBSD: Makefile,v 1.3 2012/06/16 20:45:33 pettai Exp $
 
-DISTNAME=	pam_yubico-2.11
+DISTNAME=	pam_yubico-2.12
 PKGNAME=	${DISTNAME:S/_/-/}
 CATEGORIES=	security
 MASTER_SITES=	http://yubico-pam.googlecode.com/files/
@@ -19,4 +19,5 @@ USE_LIBTOOL=		yes
 .include "../../security/libyubikey/buildlink3.mk"
 .include "../../security/ykclient/buildlink3.mk"
 .include "../../security/ykpers/buildlink3.mk"
+.include "../../mk/pam.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

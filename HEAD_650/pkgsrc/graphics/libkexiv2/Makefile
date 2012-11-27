@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.30 2012/03/19 23:12:19 markd Exp $
+# $NetBSD: Makefile,v 1.32 2012/06/16 04:45:29 markd Exp $
 #
 
 DISTNAME=	libkexiv2-${_KDE_VERSION}

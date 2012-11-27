@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.1 2012/03/20 05:55:33 markd Exp $
+# $NetBSD: Makefile,v 1.3 2012/06/16 04:45:38 markd Exp $
 
 DISTNAME=	kwallet-${_KDE_VERSION}
 CATEGORIES=	security

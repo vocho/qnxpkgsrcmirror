@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.70 2012/03/21 15:40:12 taca Exp $
+# $NetBSD: Makefile,v 1.72 2012/07/24 16:23:37 taca Exp $
 #
 
 DISTNAME=	${RUBY_DISTNAME}
@@ -49,6 +49,11 @@ LIBS.SunOS+=	-lm
 
 .if !empty(PKGSRC_COMPILER:Mclang)
 CONFIGURE_ARGS+=	--enable-frame-address
+.endif
+
+# Avoid segfaults as per https://bugs.ruby-lang.org/issues/6383
+.if !empty(CC_VERSION:Mgcc-4.[7-9].*)
+CFLAGS+=	-fno-tree-dce -fno-optimize-sibling-calls
 .endif
 
 # Ruby build process depends on config.status's content

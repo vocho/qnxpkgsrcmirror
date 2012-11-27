@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.6 2011/04/22 14:40:40 obache Exp $
+# $NetBSD: Makefile,v 1.8 2012/06/14 07:44:47 sbd Exp $
 
 DISTNAME=	sysbench-0.4.12
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	benchmarks
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=sysbench/}
 
@@ -20,6 +20,12 @@ MAKE_FLAGS+=		bin_SCRIPTS= # don't install problematic scripts
 
 .if ${OPSYS} == "NetBSD"
 CFLAGS+=		-D_NETBSD_SOURCE # hack for ulong along with patch-aa
+.endif
+
+.include "../../mk/compiler.mk"
+.if !empty(MACHINE_PLATFORM:MSunOS-5.1[0-9]-*) && \
+    !empty(CC_VERSION:Mgcc-4.[6-9].*)
+BUILDLINK_TRANSFORM+=	rm:-D_XOPEN_SOURCE=500
 .endif
 
 .include "options.mk"

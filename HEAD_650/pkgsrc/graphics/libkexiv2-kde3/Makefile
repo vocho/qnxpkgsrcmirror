@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.1.1.1 2012/03/19 23:01:43 markd Exp $
+# $NetBSD: Makefile,v 1.3 2012/06/25 10:28:11 sbd Exp $
 #
 
 DISTNAME=	libkexiv2-0.1.9
-PKGREVISION=	5
+PKGREVISION=	6
 CATEGORIES=	graphics
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=kipi/}
 EXTRACT_SUFX=	.tar.bz2
@@ -18,6 +18,7 @@ GNU_CONFIGURE=	yes
 USE_TOOLS+=	pkg-config
 USE_LANGUAGES=	c c++
 USE_LIBTOOL=	yes
+SET_LIBDIR=	yes
 
 PKGCONFIG_OVERRIDE+=	libkexiv2/libkexiv2.pc.in
 

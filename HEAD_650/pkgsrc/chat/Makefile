@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.164 2011/11/13 07:26:42 hiramatsu Exp $
+# $NetBSD: Makefile,v 1.166 2012/07/15 02:35:20 dholland Exp $
 #
 
 COMMENT=	Communication programs
@@ -13,7 +13,6 @@ SUBDIR+=	bitlbee
 SUBDIR+=	blackened
 SUBDIR+=	bnc
 SUBDIR+=	bsflite
-SUBDIR+=	centericq
 SUBDIR+=	centerim
 SUBDIR+=	cgiirc
 SUBDIR+=	climm
@@ -23,6 +22,7 @@ SUBDIR+=	dircproxy
 SUBDIR+=	eggdrop
 SUBDIR+=	ejabberd
 SUBDIR+=	ekg
+SUBDIR+=	emacs-jabber
 SUBDIR+=	emech
 SUBDIR+=	empathy
 SUBDIR+=	epic4

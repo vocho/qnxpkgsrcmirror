@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.9 2011/09/27 11:04:30 adam Exp $
+# $NetBSD: Makefile,v 1.11 2012/07/01 19:30:24 morr Exp $
 
 PKGNAME=	${DISTNAME:C/-/84-plperl-/}
 COMMENT=	PL/Perl procedural language for the PostgreSQL backend

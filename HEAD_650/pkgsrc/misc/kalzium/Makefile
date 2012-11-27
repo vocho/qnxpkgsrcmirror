@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.1 2012/03/20 08:51:13 markd Exp $
+# $NetBSD: Makefile,v 1.3 2012/06/16 04:45:33 markd Exp $
 
 DISTNAME=	kalzium-${_KDE_VERSION}
 CATEGORIES=	misc

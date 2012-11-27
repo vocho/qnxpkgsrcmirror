@@ -1,6 +1,6 @@
 $NetBSD$
 
---- src/nto_KbdMap.c.orig	2009-06-03 14:48:41.000000000 -0400
+--- src/nto_KbdMap.c.orig	2012-10-05 18:06:46.000000000 +0000
 +++ src/nto_KbdMap.c
 @@ -0,0 +1,204 @@
 +/* $XFree86$ */
@@ -197,7 +197,7 @@ $NetBSD$
 +		k[3] = defmap[i].s4;
 +	}
 +	
-+	pKbd->kbdType = 0;
++	pKbd->wsKbdType = 0;
 +	pKbd->RemapScanCode = ATScancode;
 +
 +	pKeySyms->map        = nto_map;
