@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.4 2012/03/18 21:20:49 jakllsch Exp $
+# $NetBSD: Makefile,v 1.6 2012/10/29 05:07:12 asau Exp $
 #
 
 DISTNAME=	xicc-0.1
-PKGREVISION=	3
+PKGREVISION=	4
 CATEGORIES=	x11
 MASTER_SITES=	http://www.burtonini.com/computing/
 
@@ -10,8 +10,6 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.burtonini.com/computing/xicc
 COMMENT=	Load ICC profile into X server
 LICENSE=	generic-nonlicense
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=	pkg-config
 USE_LIBTOOL=	yes

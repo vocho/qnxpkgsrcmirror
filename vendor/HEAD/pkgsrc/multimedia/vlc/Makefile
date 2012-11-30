@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.134 2012/07/13 14:22:58 wiz Exp $
+# $NetBSD: Makefile,v 1.144 2012/10/08 23:02:13 adam Exp $
 #
 
 DISTNAME=		vlc-${VLC_VERSION}
-PKGREVISION=		9
+PKGREVISION=		18
 CATEGORIES=		multimedia
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=vlc/} \
 			http://download.videolan.org/pub/videolan/vlc/${VLC_VERSION}/
@@ -17,7 +17,6 @@ LICENSE=		gnu-gpl-v2
 
 CONFLICTS=		vlc07-[0-9]* vlc08-[0-9]*
 
-PKG_DESTDIR_SUPPORT=	user-destdir
 USE_LIBTOOL=		yes
 USE_TOOLS+=		gmake perl pkg-config \
 			autoconf automake autoreconf

@@ -1,9 +1,8 @@
-# $NetBSD: Makefile,v 1.11 2012/06/14 07:43:40 sbd Exp $
-#
+# $NetBSD: Makefile,v 1.15 2012/10/08 09:21:10 asau Exp $
 
-DISTNAME=	GStreamer-0.16
+DISTNAME=	GStreamer-0.17
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	3
+PKGREVISION=	2
 CATEGORIES=	multimedia perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=GStreamer/}
 
@@ -11,8 +10,6 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://search.cpan.org/dist/GStreamer/
 COMMENT=	Perl interface to the GStreamer library
 LICENSE=	gnu-lgpl-v2.1
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 DEPENDS+=	p5-ExtUtils-Depends>=0.205:../../devel/p5-ExtUtils-Depends
 DEPENDS+=	p5-ExtUtils-PkgConfig>=1.07:../../devel/p5-ExtUtils-PkgConfig

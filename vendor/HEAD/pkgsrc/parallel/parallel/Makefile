@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.3 2011/11/29 18:26:09 hans Exp $
+# $NetBSD: Makefile,v 1.5 2012/10/03 21:57:14 wiz Exp $
 #
 
 DISTNAME=	parallel-20110522
+PKGREVISION=	1
 CATEGORIES=	parallel
 MASTER_SITES=	${MASTER_SITE_GNU:=parallel/}
 EXTRACT_SUFX=	.tar.bz2
@@ -10,8 +11,6 @@ MAINTAINER=	cheusov@NetBSD.org
 HOMEPAGE=	http://savannah.gnu.org/projects/parallel/
 COMMENT=	Build and execute shell commands in parallel
 LICENSE=	gnu-gpl-v3
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=	perl:run pod2man pod2html
 

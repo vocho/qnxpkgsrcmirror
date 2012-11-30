@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.115 2012/06/11 11:41:24 adam Exp $
+# $NetBSD: Makefile,v 1.118 2012/10/30 20:12:20 abs Exp $
 
-DISTNAME=	exim-4.80
+DISTNAME=	exim-4.80.1
 CATEGORIES=	mail net
 MASTER_SITES=	ftp://ftp.exim.org/pub/exim/exim4/ \
 		http://dl.ambiweb.de/mirrors/ftp.exim.org/exim/exim4/
@@ -20,8 +20,6 @@ MAKE_ENV+=	SSLBASE=${SSLBASE:Q}
 MAKE_ENV+=	INST_CHOWN=${CHOWN:Q}
 MAKE_FLAGS+=	FULLECHO=''
 MAKE_JOBS_SAFE=	no
-
-PKG_DESTDIR_SUPPORT =	user-destdir
 
 .include "../../mk/bsd.prefs.mk"
 

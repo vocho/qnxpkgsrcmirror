@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.12 2012/06/14 07:45:41 sbd Exp $
+# $NetBSD: Makefile,v 1.17 2012/10/08 23:01:11 adam Exp $
 #
 
 DISTNAME=	gmpc-magnatune-0.20.0
-PKGREVISION=	10
+PKGREVISION=	14
 CATEGORIES=	audio
 MASTER_SITES=	http://download.sarine.nl/Programs/gmpc/0.20.0/ \
 		${MASTER_SITE_SOURCEFORGE:=musicpd/}
@@ -11,8 +11,6 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://gmpc.wikia.com/wiki/GMPC_PLUGIN_MAGNATUNE
 COMMENT=	Magnatune plugin for GMPC
 LICENSE=	gnu-gpl-v2
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=	yes
 USE_TOOLS+=	intltool msgfmt pkg-config

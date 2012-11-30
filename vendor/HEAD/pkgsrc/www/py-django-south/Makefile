@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.1.1.1 2011/01/12 08:10:05 adam Exp $
+# $NetBSD: Makefile,v 1.3 2012/10/28 06:31:00 asau Exp $
 
-DISTNAME=	south-0.7.3
+DISTNAME=	south-0.7.6
 PKGNAME=	${PYPKGPREFIX}-django-${DISTNAME}
 CATEGORIES=	www python
 MASTER_SITES=	http://www.aeracode.org/releases/south/
@@ -10,9 +10,7 @@ HOMEPAGE=	http://south.aeracode.org/
 COMMENT=	Intelligent schema and data migrations for Django projects
 LICENSE=	apache-2.0
 
-PKG_DESTDIR_SUPPORT=	user-destdir
-
-WRKSRC=			${WRKDIR}/south
+WRKSRC=			${WRKDIR}/South-${PKGVERSION_NOREV}
 EGG_NAME=		${DISTNAME:S/south/South/}
 USE_LANGUAGES=		# empty
 

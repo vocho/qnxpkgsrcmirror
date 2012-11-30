@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.51 2012/06/14 07:45:24 sbd Exp $
+# $NetBSD: Makefile,v 1.53 2012/10/02 21:25:52 asau Exp $
 #
 
 DISTNAME=	shared-mime-info-1.0
-PKGREVISION=	2
+PKGREVISION=	3
 CATEGORIES=	databases
 MASTER_SITES=	http://people.freedesktop.org/~hadess/
 EXTRACT_SUFX=	.tar.xz
@@ -13,7 +13,6 @@ COMMENT=	Core database of common types
 LICENSE=	gnu-gpl-v2
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=		YES
 USE_LANGUAGES+=		c99

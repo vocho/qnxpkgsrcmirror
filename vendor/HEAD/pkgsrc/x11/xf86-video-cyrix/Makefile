@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.7 2012/06/15 23:06:05 dholland Exp $
+# $NetBSD: Makefile,v 1.9 2012/10/29 05:07:03 asau Exp $
 #
 
 DISTNAME=	xf86-video-cyrix-1.1.0
@@ -13,11 +13,15 @@ COMMENT=	Modular Xorg Cyrix MediaGX video driver
 
 BROKEN=		Broken with xserver 1.6 and up
 
-PKG_DESTDIR_SUPPORT=	user-destdir
-
 USE_LIBTOOL=	yes
 GNU_CONFIGURE=	yes
 USE_TOOLS+=	pkg-config
+
+.include "../../mk/bsd.prefs.mk"
+
+.if ${OPSYS} == "SunOS"
+CONFIGURE_ENV+=	DRIVER_MAN_SUFFIX=4
+.endif
 
 .include "../../x11/modular-xorg-server/buildlink3.mk"
 .include "../../x11/randrproto/buildlink3.mk"

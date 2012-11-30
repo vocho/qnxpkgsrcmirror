@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.20 2012/07/01 19:05:19 dholland Exp $
+# $NetBSD: Makefile,v 1.26 2012/10/08 23:01:46 adam Exp $
 
 PKGNAME=		koverartist-0.7.6
 DISTNAME=		38195-koverartist_0.7.6.orig
-PKGREVISION=		2
+PKGREVISION=		7
 CATEGORIES=		graphics kde
 MASTER_SITES=		http://kde-apps.org/CONTENT/content-files/
 EXTRACT_SUFX=		.tar.bz2
@@ -10,8 +10,6 @@ EXTRACT_SUFX=		.tar.bz2
 MAINTAINER=		markd@NetBSD.org
 HOMEPAGE=		http://www.kde-apps.org/content/show.php?content=38195
 COMMENT=		CD/DVD case designer
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 BUILD_DEPENDS+=	automoc4>=0.9.87:../../devel/automoc4
 

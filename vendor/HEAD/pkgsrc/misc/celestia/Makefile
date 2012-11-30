@@ -1,15 +1,13 @@
-# $NetBSD: Makefile,v 1.37 2012/07/01 19:05:20 dholland Exp $
+# $NetBSD: Makefile,v 1.42 2012/10/08 23:02:04 adam Exp $
 
 DISTNAME=	celestia-1.4.1
-PKGREVISION=	22
+PKGREVISION=	26
 CATEGORIES=	misc x11
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=celestia/}
 
 MAINTAINER=	cesar_catrian@yahoo.com
 HOMEPAGE=	http://www.shatters.net/celestia/
 COMMENT=	Free real-time 3D space simulator
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 DISTINFO_FILE=	${.CURDIR}/../../misc/celestia/distinfo
 PATCHDIR=	${.CURDIR}/../../misc/celestia/patches

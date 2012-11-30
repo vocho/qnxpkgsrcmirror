@@ -1,16 +1,15 @@
-# $NetBSD: Makefile,v 1.30 2012/07/04 20:41:29 drochner Exp $
+# $NetBSD: Makefile,v 1.35 2012/10/08 23:01:48 adam Exp $
 #
 
 DISTNAME=		matplotlib-1.1.1
 PKGNAME=		${PYPKGPREFIX}-matplotlib-gtk-1.1.1
+PKGREVISION=		4
 CATEGORIES=		graphics python
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=matplotlib/}
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://matplotlib.sourceforge.net/
 COMMENT=		GTK frontend for matplotlib
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=		pkg-config
 PY_PATCHPLIST=		yes

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.632 2012/08/04 14:32:13 drochner Exp $
+# $NetBSD: Makefile,v 1.639 2012/11/29 09:40:41 ryoon Exp $
 #
 
 COMMENT=	Graphics tools and libraries
@@ -80,6 +80,7 @@ SUBDIR+=	enblend-enfuse
 SUBDIR+=	eog
 SUBDIR+=	eog-plugins
 SUBDIR+=	eog-plugins-map
+SUBDIR+=	eog3
 SUBDIR+=	epeg
 SUBDIR+=	evas
 SUBDIR+=	evas-buffer
@@ -191,7 +192,10 @@ SUBDIR+=	gri
 SUBDIR+=	gst-plugins0.10-cairo
 SUBDIR+=	gst-plugins0.10-jpeg
 SUBDIR+=	gst-plugins0.10-png
+SUBDIR+=	gst-plugins1-jpeg
+SUBDIR+=	gst-plugins1-png
 SUBDIR+=	gthumb
+SUBDIR+=	gthumb3
 SUBDIR+=	gtkam
 SUBDIR+=	gtkglext
 SUBDIR+=	gtkimageview
@@ -322,8 +326,6 @@ SUBDIR+=	p5-GDGraph
 SUBDIR+=	p5-GDGraph-boxplot
 SUBDIR+=	p5-GDTextUtil
 SUBDIR+=	p5-GIFgraph
-SUBDIR+=	p5-Gdk-Imlib
-SUBDIR+=	p5-Gdk-Pixbuf
 SUBDIR+=	p5-Gnome2-Canvas
 SUBDIR+=	p5-GraphViz
 SUBDIR+=	p5-GraphViz2
@@ -417,6 +419,7 @@ SUBDIR+=	ruby-gnome2-rsvg
 SUBDIR+=	ruby-gnuplot
 SUBDIR+=	ruby-imlib2
 SUBDIR+=	ruby-mini-magick
+SUBDIR+=	ruby-oily_png
 SUBDIR+=	ruby-opengl
 SUBDIR+=	ruby-rcairo
 SUBDIR+=	s10sh
@@ -441,6 +444,8 @@ SUBDIR+=	tex-a2ping
 SUBDIR+=	tex-a2ping-doc
 SUBDIR+=	tex-asyfig
 SUBDIR+=	tex-asyfig-doc
+SUBDIR+=	tex-auto-pst-pdf
+SUBDIR+=	tex-auto-pst-pdf-doc
 SUBDIR+=	tex-dvipng-doc
 SUBDIR+=	tex-eepic
 SUBDIR+=	tex-eepic-doc

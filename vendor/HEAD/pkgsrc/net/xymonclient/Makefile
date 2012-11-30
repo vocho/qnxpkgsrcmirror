@@ -1,9 +1,8 @@
-# $NetBSD: Makefile,v 1.14 2012/08/13 17:28:24 marino Exp $
+# $NetBSD: Makefile,v 1.16 2012/10/23 17:19:21 asau Exp $
 #
 
-DISTNAME=		xymon-4.3.7
-PKGNAME=		xymonclient-4.3.7
-PKGREVISION=		1
+DISTNAME=		xymon-4.3.10
+PKGNAME=		xymonclient-4.3.10
 CATEGORIES=		net
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=xymon/}
 
@@ -13,7 +12,6 @@ COMMENT=		Network services monitor a la Big Brother
 
 LICENSE=		gnu-gpl-v2
 
-PKG_DESTDIR_SUPPORT=	user-destdir
 MAKE_JOBS_SAFE=		NO
 
 CONFLICTS+=		hobbitmon-[0-9]*

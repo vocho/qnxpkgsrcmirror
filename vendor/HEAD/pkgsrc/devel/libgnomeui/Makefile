@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.106 2012/06/14 07:43:26 sbd Exp $
+# $NetBSD: Makefile,v 1.112 2012/10/31 11:17:15 asau Exp $
 #
 
 DISTNAME=	libgnomeui-2.24.5
-PKGREVISION=	8
+PKGREVISION=	13
 CATEGORIES=	devel gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/libgnomeui/2.24/}
 EXTRACT_SUFX=	.tar.bz2
@@ -11,8 +11,6 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.gnome.org/
 COMMENT=	Core GNOME2 graphical libraries
 LICENSE=	gnu-lgpl-v2
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 CONFLICTS+=		gnome-libs<=1.4.2nb1
 

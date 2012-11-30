@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.18 2009/05/19 08:59:25 wiz Exp $
+# $NetBSD: Makefile,v 1.20 2012/10/23 10:24:09 wiz Exp $
 
 DISTNAME=	xanim2920
 PKGNAME=	xanim-2.92.0
@@ -14,8 +14,6 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 COMMENT=	Play a variety of simple animation formats and show pictures
 HOMEPAGE=	http://xanim.polter.net/
 LICENSE=	xanim-license
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 EXTRACT_ONLY=	${DISTNAME}${EXTRACT_SUFX}
 
@@ -57,6 +55,5 @@ post-extract:
 .include "../../devel/zlib/buildlink3.mk"
 .include "../../x11/libXext/buildlink3.mk"
 .include "../../x11/libXt/buildlink3.mk"
-.include "../../x11/xextproto/buildlink3.mk"
 .include "../../mk/oss.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

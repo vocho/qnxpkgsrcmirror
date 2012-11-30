@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.5 2011/01/21 23:17:12 wiz Exp $
+# $NetBSD: Makefile,v 1.7 2012/10/29 05:06:35 asau Exp $
 #
 
 DISTNAME=		libXp-1.0.1
@@ -9,8 +9,6 @@ EXTRACT_SUFX=		.tar.bz2
 MAINTAINER=		joerg@NetBSD.org
 HOMEPAGE=		http://xorg.freedesktop.org/
 COMMENT=		X Print Service Extension Library
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_LIBTOOL=		yes
 USE_TOOLS+=		pkg-config
@@ -36,6 +34,5 @@ CONFIGURE_ARGS+=	XPRINT_CFLAGS=${XPRINT_CFLAGS:Q} \
 .include "../../x11/libX11/buildlink3.mk"
 .include "../../x11/libXext/buildlink3.mk"
 .include "../../x11/printproto/buildlink3.mk"
-.include "../../x11/xextproto/buildlink3.mk"
 
 .include "../../mk/bsd.pkg.mk"

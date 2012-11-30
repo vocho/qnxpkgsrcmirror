@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.127 2012/08/21 23:49:23 marino Exp $
+# $NetBSD: Makefile,v 1.131 2012/10/03 21:56:35 wiz Exp $
 
 DISTNAME=		R-2.14.2
-PKGREVISION=		1
+PKGREVISION=		4
 CATEGORIES=		math
 MASTER_SITES=		${MASTER_SITE_R_CRAN:=base/R-2/}
 
@@ -15,7 +15,6 @@ NOT_FOR_PLATFORM=	NetBSD-1.[0-4]*-alpha NetBSD-1.5-alpha \
 			NetBSD-1.5.*-alpha NetBSD-1.5[A-U]-alpha
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 TEST_TARGET=		check
 USE_TOOLS+=		gmake gzip:run makeinfo perl:run sed unzip:run xmkmf

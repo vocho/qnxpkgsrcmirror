@@ -1,17 +1,16 @@
-# $NetBSD: Makefile,v 1.7 2012/03/03 00:12:05 wiz Exp $
+# $NetBSD: Makefile,v 1.17 2012/11/04 23:49:50 wiz Exp $
 
-DISTNAME=	cairo-1.10.2
-PKGNAME=	cairo-gobject-1.10.2
-PKGREVISION=	4
+DISTNAME=	cairo-1.12.8
+PKGNAME=	${DISTNAME:S/-/-gobject-/}
 CATEGORIES=	graphics
 MASTER_SITES=	http://cairographics.org/releases/
+EXTRACT_SUFX=	.tar.xz
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://cairographics.org/
 COMMENT=	Vector graphics library with cross-device output support
 LICENSE=	gnu-lgpl-v2.1 AND mpl-1.1
 
-PKG_DESTDIR_SUPPORT=	user-destdir
 PATCHDIR=	${.CURDIR}/../../graphics/cairo/patches
 DISTINFO_FILE=	${.CURDIR}/../../graphics/cairo/distinfo
 BUILD_DIRS=	util/cairo-gobject
@@ -25,6 +24,8 @@ PKGCONFIG_OVERRIDE+=	src/cairo.pc.in src/cairo-features.pc.in
 GNU_CONFIGURE=		yes
 CONFIGURE_ARGS+=	--enable-pdf
 CONFIGURE_ARGS+=	--enable-ps
+
+INSTALLATION_DIRS+=	lib/pkgconfig
 
 .if exists(/System/Library/Frameworks/Carbon.framework)
 CONFIGURE_ARGS+=        --enable-quartz
@@ -47,7 +48,6 @@ CONFIGURE_ENV+=		ac_cv_type___uint128_t=no
 .endif
 
 post-install:
-	${INSTALL_DATA_DIR} ${DESTDIR}${PREFIX}/lib/pkgconfig
 	${INSTALL_DATA} ${WRKSRC}/src/cairo-gobject.pc \
 		${DESTDIR}${PREFIX}/lib/pkgconfig
 

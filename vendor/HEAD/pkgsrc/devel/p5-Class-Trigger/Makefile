@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.14 2011/08/10 06:33:41 adam Exp $
+# $NetBSD: Makefile,v 1.16 2012/10/31 11:17:50 asau Exp $
 
 DISTNAME=	Class-Trigger-0.14
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	2
+PKGREVISION=	3
 SVR4_PKGNAME=	p5ctr
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Class/}
@@ -13,7 +13,6 @@ COMMENT=	Mixin to add/call inheritable triggers
 LICENSE=	${PERL5_LICENSE}
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 DEPENDS+=	p5-IO-stringy>=0.02:../../devel/p5-IO-stringy
 

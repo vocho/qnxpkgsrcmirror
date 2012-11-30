@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.33 2012/08/13 14:25:43 wiz Exp $
+# $NetBSD: Makefile,v 1.39 2012/10/08 23:02:20 adam Exp $
 
 VERSION=	5.2.9
 DISTNAME=	gutenprint-${VERSION}
 PKGNAME=	gutenprint-lib-${VERSION}
-PKGREVISION=	1
+PKGREVISION=	6
 CATEGORIES=	print
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=gimp-print/}
 EXTRACT_SUFX=	.tar.bz2
@@ -20,8 +20,6 @@ PRINT_PLIST_AWK+=	{ gsub("gutenprint/${INSTALLVERSION}", \
 				"gutenprint/$${INSTALLVERSION}") }
 PRINT_PLIST_AWK+=	{ gsub(".${INSTALLVERSION}$$", \
 				".$${INSTALLVERSION}") }
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=		gmake lex pkg-config perl:run
 USE_PKGLOCALEDIR=	YES

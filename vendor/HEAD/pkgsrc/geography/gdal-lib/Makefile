@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.47 2012/08/05 10:02:11 obache Exp $
+# $NetBSD: Makefile,v 1.49 2012/11/15 22:09:41 gdt Exp $
 
 VERSION=	1.9.1
 DISTNAME=	gdal-${VERSION}
 PKGNAME=	gdal-lib-${VERSION}
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	geography
 MASTER_SITES=	http://download.osgeo.org/gdal/
 
@@ -16,8 +16,6 @@ LICENSE=	mit
 # is not a generated file, apparently caused by an odd make path that
 # fails to use the right includes.
 MAKE_JOBS_SAFE=		no
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_LANGUAGES=		c c++ fortran77
 USE_LIBTOOL=		yes

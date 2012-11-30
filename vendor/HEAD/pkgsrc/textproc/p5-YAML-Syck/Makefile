@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.15 2012/04/10 13:44:29 sno Exp $
+# $NetBSD: Makefile,v 1.18 2012/10/25 06:56:43 asau Exp $
 
-DISTNAME=	YAML-Syck-1.20
+DISTNAME=	YAML-Syck-1.21
 PKGNAME=	p5-${DISTNAME}
 CATEGORIES=	perl5 textproc
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=YAML/}
@@ -15,8 +15,6 @@ PKG_INSTALLATION_TYPES=	overwrite pkgviews
 
 PERL5_PACKLIST=		auto/YAML/Syck/.packlist
 PERL5_MODULE_TYPE=	Module::Install::Bundled
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 .include "../../lang/perl5/module.mk"
 .include "../../mk/bsd.pkg.mk"

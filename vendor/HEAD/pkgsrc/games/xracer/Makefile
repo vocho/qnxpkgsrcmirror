@@ -1,16 +1,14 @@
-# $NetBSD: Makefile,v 1.52 2012/07/18 19:13:41 marino Exp $
+# $NetBSD: Makefile,v 1.54 2012/10/06 11:55:02 asau Exp $
 #
 
 DISTNAME=		xracer-0.96.9
-PKGREVISION=		12
+PKGREVISION=		13
 CATEGORIES=		games x11
 MASTER_SITES=		http://www.annexia.org/_file/
 
 MAINTAINER=		bsieker@freenet.de
 #HOMEPAGE=		http://www.annexia.org/freeware/xracer
 COMMENT=		XRacer is a clone of the popular Psygnosis game Wipeout
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=		gmake perl:run
 PERL5_PACKLIST=		auto/XRacer/.packlist

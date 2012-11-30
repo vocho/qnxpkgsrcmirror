@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.23 2012/05/27 20:53:42 dholland Exp $
+# $NetBSD: Makefile,v 1.25 2012/10/08 09:57:19 asau Exp $
 #
 
 DISTNAME=	dpkg_1.16.3
 PKGNAME=	dpkg-1.16.3
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	misc
 MASTER_SITES=	${MASTER_SITE_DEBIAN:=pool/main/d/dpkg/}
 EXTRACT_SUFX=	.tar.bz2
@@ -11,8 +11,6 @@ EXTRACT_SUFX=	.tar.bz2
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://wiki.debian.org/Teams/Dpkg
 COMMENT=	Package maintenance system for Debian
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 BUILD_DEPENDS+=		po4a>=0:../../textproc/po4a
 BUILD_DEPENDS+=		gtar>=1.26:../../archivers/gtar

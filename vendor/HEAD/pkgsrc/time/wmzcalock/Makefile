@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.3 2010/01/31 22:47:34 joerg Exp $
+# $NetBSD: Makefile,v 1.6 2012/11/01 19:28:26 joerg Exp $
 #
 
 DISTNAME=		wmzcalock-0.1
+PKGREVISION=		1
 CATEGORIES=		time x11
 MASTER_SITES=		http://zapatopi.net/zapatoware/
 
@@ -11,8 +12,6 @@ COMMENT=		Dockapp calendar clock
 LICENSE=		gnu-gpl-v2
 
 EXTRACT_SUFX=		.tgz
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=		pax
 INSTALLATION_DIRS=	bin share/wmzcalock/theme
@@ -31,5 +30,4 @@ do-install:
 
 .include "../../x11/libXext/buildlink3.mk"
 .include "../../x11/libXpm/buildlink3.mk"
-.include "../../x11/xextproto/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

@@ -1,9 +1,8 @@
-# $NetBSD: Makefile,v 1.26 2012/07/02 19:08:44 drochner Exp $
+# $NetBSD: Makefile,v 1.30 2012/10/08 23:01:59 adam Exp $
 #
 
-PKG_DESTDIR_SUPPORT=	user-destdir
-
 PLUGIN_NAME=	smime
+PKGREVISION=	3
 .include "../../mail/claws-mail/plugins.mk"
 
 MAINTAINER=	pkgsrc-users@NetBSD.org

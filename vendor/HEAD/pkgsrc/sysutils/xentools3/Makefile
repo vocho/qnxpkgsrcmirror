@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.27 2012/07/16 22:55:25 jym Exp $
+# $NetBSD: Makefile,v 1.29 2012/10/23 19:51:36 asau Exp $
 #
 
 VERSION=		3.1.4
 DISTNAME=		xen-${VERSION}
 PKGNAME=		xentools3-${VERSION}
-PKGREVISION=		10
+PKGREVISION=		11
 CATEGORIES=		sysutils
 MASTER_SITES=	http://bits.xensource.com/oss-xen/release/${VERSION}/
 EXTRACT_SUFX=		.tar.gz
@@ -12,8 +12,6 @@ EXTRACT_SUFX=		.tar.gz
 MAINTAINER=		bouyer@NetBSD.org
 HOMEPAGE=		http://xen.org/
 COMMENT=		Userland Tools for Xen
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 #DEPENDS+=		${PYPKGPREFIX}-twisted-[0-9]*:../../net/py-twisted
 DEPENDS+=		${PYPKGPREFIX}-readline-[0-9]*:../../devel/py-readline

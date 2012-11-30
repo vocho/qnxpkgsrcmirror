@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.6 2012/08/18 06:58:15 ryoon Exp $
+# $NetBSD: Makefile,v 1.12 2012/10/08 23:01:16 adam Exp $
 #
 
 DISTNAME=	LibreCAD-LibreCAD-v1.0.2-0-ga6826ad
 PKGNAME=	librecad-1.0.2
+PKGREVISION=	5
 CATEGORIES=	cad
 MASTER_SITES=	-https://github.com/LibreCAD/LibreCAD/tarball/v1.0.2
 
@@ -10,8 +11,6 @@ MAINTAINER=	ryoon@NetBSD.org
 HOMEPAGE=	http://librecad.org/
 COMMENT=	Free Open Source personal CAD application
 LICENSE=	gnu-gpl-v2
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 # Force using "curl" for fetching the distribution file. It is only available
 # over HTTPS and "curl" is the only fetch program which always supports HTTPS.

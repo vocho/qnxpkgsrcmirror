@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.44 2012/07/29 12:52:55 marino Exp $
+# $NetBSD: Makefile,v 1.50 2012/10/08 23:01:39 adam Exp $
 
 VERSION=		4.0.1
 PKGNAME=		camlimages-${VERSION}
-PKGREVISION=		11
+PKGREVISION=		16
 CATEGORIES=		graphics
 MASTER_SITES=		https://bitbucket.org/camlspotter/camlimages/get/
 DISTNAME=		v${VERSION}
@@ -15,8 +15,6 @@ LICENSE=		gnu-gpl-v2
 
 BUILD_DEPENDS+=		omake>=0.9.8.6.0rc1:../../devel/omake
 BUILD_DEPENDS+=		ocaml-findlib>=1.2.6:../../devel/ocaml-findlib
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 MAKE_JOBS_SAFE=		no
 

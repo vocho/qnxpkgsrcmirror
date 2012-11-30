@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.79 2012/03/15 11:53:36 obache Exp $
+# $NetBSD: Makefile,v 1.85 2012/10/08 23:02:21 adam Exp $
 #
 
 DISTNAME=	lilypond-2.14.2
-PKGREVISION=	5
+PKGREVISION=	10
 CATEGORIES=	print
 MASTER_SITES=	http://download.linuxaudio.org/lilypond/sources/v2.14/
 
@@ -15,8 +15,6 @@ BUILD_DEPENDS+=	tex-metafont-[0-9]*:../../fonts/tex-metafont
 BUILD_DEPENDS+=	tex-metapost-[0-9]*:../../graphics/tex-metapost
 DEPENDS+=	tex-graphics-[0-9]*:../../print/tex-graphics
 DEPENDS+=	tex-latex-bin-[0-9]*:../../print/tex-latex-bin
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=		YES
 USE_PKGLOCALEDIR=	YES

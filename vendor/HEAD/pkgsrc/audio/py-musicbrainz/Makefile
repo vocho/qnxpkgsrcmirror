@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.8 2012/04/08 19:08:45 wiz Exp $
+# $NetBSD: Makefile,v 1.11 2012/10/04 00:22:00 cheusov Exp $
 
 DISTNAME=	python-musicbrainz2-0.4.1
 PKGNAME=	${DISTNAME:S/python/${PYPKGPREFIX}/}
-PKGREVISION=	2
+PKGREVISION=	3
 CATEGORIES=	audio python
 MASTER_SITES=	http://users.musicbrainz.org/~matt/
 
@@ -11,7 +11,7 @@ HOMEPAGE=	http://musicbrainz.org/doc/PythonMusicBrainz2
 COMMENT=	Python interface to the MusicBrainz XML web service
 LICENSE=	modified-bsd
 
-PKG_DESTDIR_SUPPORT=	user-destdir
+PYTHON_SELF_CONFLICT=	yes
 
 .include "../../lang/python/pyversion.mk"
 

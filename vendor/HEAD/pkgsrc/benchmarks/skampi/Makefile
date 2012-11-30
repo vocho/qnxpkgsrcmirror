@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.24 2010/05/16 11:16:19 asau Exp $
+# $NetBSD: Makefile,v 1.26 2012/10/18 16:58:18 asau Exp $
 #
 
 DISTNAME=	skampi
@@ -11,14 +11,16 @@ HOMEPAGE=	http://liinwww.ira.uka.de/~skampi/
 COMMENT=	MPI (Message Passing Interface) benchmarks
 LICENSE=	gnu-gpl-v2
 
-PKG_DESTDIR_SUPPORT=	user-destdir
-
 DIST_SUBDIR=	${PKGNAME_NOREV}
 WRKSRC=		${WRKDIR}/skampi-5.0.4-r0355
 
 USE_TOOLS+=	gmake pax
 BUILD_TARGET=	skampi
 INSTALLATION_DIRS=	bin
+
+# Force file regeneration:
+post-extract:
+	rm $(WRKSRC)/Makefile.dep
 
 do-install:
 	${INSTALL_PROGRAM} ${WRKSRC}/skampi ${DESTDIR}${PREFIX}/bin/skampi

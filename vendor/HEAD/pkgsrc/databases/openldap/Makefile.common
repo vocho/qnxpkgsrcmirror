@@ -1,4 +1,4 @@
-# $NetBSD: Makefile.common,v 1.32 2012/08/06 13:33:38 adam Exp $
+# $NetBSD: Makefile.common,v 1.35 2012/10/22 09:41:07 ghen Exp $
 #
 # used by databases/openldap-client/Makefile
 # used by databases/openldap-cloak/Makefile
@@ -21,7 +21,7 @@ MASTER_SITES=	ftp://ftp.openldap.org/pub/OpenLDAP/openldap-release/ \
 		ftp://sunsite.cnlab-switch.ch/mirror/OpenLDAP/openldap-release/
 EXTRACT_SUFX=	.tgz
 
-MAINTAINER=	ghen@NetBSD.org
+MAINTAINER=	adam@NetBSD.org
 HOMEPAGE=	http://www.openldap.org/
 LICENSE=	modified-bsd
 
@@ -86,6 +86,8 @@ CONF_FILES_PERMS+=	${EGDIR}/${file} ${OPENLDAP_ETCDIR}/${file} ${OPENLDAP_FILEPE
 DB_CONFIG?=		# empty
 
 PTHREAD_OPTS+=		require
+
+CONFIGURE_ARGS+=	--without-fetch
 
 .include "../../security/openssl/buildlink3.mk"
 .include "../../security/tcp_wrappers/buildlink3.mk"

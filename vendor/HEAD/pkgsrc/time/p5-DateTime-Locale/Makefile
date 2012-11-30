@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.19 2011/08/14 15:28:46 obache Exp $
+# $NetBSD: Makefile,v 1.21 2012/10/08 13:04:23 asau Exp $
 
 DISTNAME=	DateTime-Locale-0.45
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	2
+PKGREVISION=	3
 CATEGORIES=	time perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=DateTime/}
 
@@ -17,8 +17,6 @@ DEPENDS+=	p5-Params-Validate>=0.91:../../devel/p5-Params-Validate
 USE_LANGUAGES=		# empty
 PERL5_MODULE_TYPE=	Module::Build
 PERL5_PACKLIST=		auto/DateTime/Locale/.packlist
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 .include "../../lang/perl5/module.mk"
 .include "../../mk/bsd.pkg.mk"

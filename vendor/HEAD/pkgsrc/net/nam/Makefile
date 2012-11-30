@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.27 2012/08/21 23:49:24 marino Exp $
+# $NetBSD: Makefile,v 1.29 2012/11/17 22:14:11 markd Exp $
 
 DISTNAME=	ns-allinone-2.29.3
 PKGNAME=	nam-1.11
-PKGREVISION=	4
+PKGREVISION=	5
 CATEGORIES=	net
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=nsnam/}
 
@@ -11,7 +11,6 @@ HOMEPAGE=	http://www.isi.edu/nsnam/nam/
 COMMENT=	The UCB/LBNL Network Animator
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 NOT_FOR_PLATFORM+=	${LP64PLATFORMS}
 
@@ -21,11 +20,13 @@ GNU_CONFIGURE=	yes
 BUILD_TARGET=
 
 CONFIGURE_ARGS+=	--with-tcl=${BUILDLINK_PREFIX.tcl}
+CONFIGURE_ARGS+=	--with-tcl-ver=8.5
 CONFIGURE_ARGS+=	--with-tk=${BUILDLINK_PREFIX.tk}
+CONFIGURE_ARGS+=	--with-tk-ver=8.5
 CONFIGURE_ARGS+=	--with-otcl=${BUILDLINK_PREFIX.tcl-otcl}
 CONFIGURE_ARGS+=	--with-tclcl=${BUILDLINK_PREFIX.tcl-tclcl}
 
-CONFIGURE_ENV+=		V_LIBS="`${CONFIG_SHELL} -c '. ${TCLCONFIG_SH}; . ${TKCONFIG_SH}; ${ECHO} $$TCL_LIBS $$TK_LIBS'`"
+CONFIGURE_ENV+=		V_LIBS="`${CONFIG_SHELL} -c '. ${TCLCONFIG_SH}; . ${TKCONFIG_SH}; ${ECHO} $$TK_LIBS'`"
 
 MESSAGE_SUBST+=		HOMEPAGE=${HOMEPAGE}
 

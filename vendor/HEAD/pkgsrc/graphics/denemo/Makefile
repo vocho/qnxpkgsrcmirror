@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.35 2012/08/13 14:25:39 wiz Exp $
+# $NetBSD: Makefile,v 1.40 2012/10/08 23:01:40 adam Exp $
 #
 
 DISTNAME=	denemo-0.9.2
-PKGREVISION=	6
+PKGREVISION=	10
 CATEGORIES=	graphics print
 MASTER_SITES=	${MASTER_SITE_GNU:=denemo/}
 
@@ -10,8 +10,6 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.denemo.org/
 COMMENT=	GUI musical score editor written in C/GTK+
 LICENSE=	gnu-gpl-v3
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 DEPENDS+=	lilypond-[0-9]*:../../print/lilypond
 

@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.14 2012/06/14 07:44:25 sbd Exp $
+# $NetBSD: Makefile,v 1.20 2012/11/03 01:58:36 ryoon Exp $
 #
 
 DISTNAME=	gecko-mediaplayer-1.0.6
-PKGREVISION=	1
+PKGREVISION=	6
 CATEGORIES=	multimedia www
 MASTER_SITES=	http://gecko-mediaplayer.googlecode.com/files/
 
@@ -12,8 +12,6 @@ COMMENT=	Multimedia browser plugin for Gecko based browsers
 LICENSE=	gnu-gpl-v2
 
 DEPENDS+=	gnome-mplayer>=${PKGVERSION_NOREV}:../../multimedia/gnome-mplayer
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=		yes
 USE_LIBTOOL=		yes

@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.82 2012/07/24 19:47:43 jperkin Exp $
+# $NetBSD: Makefile,v 1.87 2012/10/08 23:01:14 adam Exp $
 
 DISTNAME=	TiMidity++-2.14.0
 PKGNAME=	${DISTNAME:S/TiMidity++/timidity/}
-PKGREVISION=	1
+PKGREVISION=	5
 CATEGORIES=	audio
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=timidity/}
 EXTRACT_SUFX=	.tar.bz2
@@ -11,8 +11,6 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://timidity.sourceforge.net/
 COMMENT=	MIDI to WAV renderer and player
 LICENSE=	gnu-gpl-v2
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 CONFLICTS=		kdemultimedia-2.*{,nb*}
 

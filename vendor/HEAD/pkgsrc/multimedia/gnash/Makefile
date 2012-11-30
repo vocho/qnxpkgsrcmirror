@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.53 2012/07/02 13:37:41 adam Exp $
+# $NetBSD: Makefile,v 1.61 2012/10/16 17:47:21 wiz Exp $
 #
 
 DISTNAME=		gnash-0.8.10
-PKGREVISION=		4
+PKGREVISION=		11
 CATEGORIES=		multimedia
 MASTER_SITES=		${MASTER_SITE_GNU:=gnash/${PKGVERSION_NOREV}/}
 EXTRACT_SUFX=		.tar.bz2
@@ -11,8 +11,6 @@ MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://www.gnashdev.org/
 COMMENT=		GPL SWF player
 LICENSE=		gnu-gpl-v3
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_PKGLOCALEDIR=	yes
 USE_LANGUAGES=		c c++

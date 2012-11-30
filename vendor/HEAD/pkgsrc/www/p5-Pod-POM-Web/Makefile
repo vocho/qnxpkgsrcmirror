@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.9 2011/10/21 07:14:25 hiramatsu Exp $
+# $NetBSD: Makefile,v 1.11 2012/10/28 06:30:50 asau Exp $
 
 DISTNAME=	Pod-POM-Web-1.17
 PKGNAME=	p5-${DISTNAME}
+PKGREVISION=	1
 CATEGORIES=	www perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Pod/}
 
@@ -9,8 +10,6 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://search.cpan.org/dist/Pod-POM-Web/
 COMMENT=	Perl 5 module providing a HTML Perldoc server
 LICENSE=	${PERL5_LICENSE}
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_LANGUAGES=		# empty
 PERL5_PACKLIST= 	auto/Pod/POM/Web/.packlist

@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.1.1.1 2012/02/25 05:15:27 obache Exp $
+# $NetBSD: Makefile,v 1.3 2012/10/31 11:17:44 asau Exp $
 #
 
 DISTNAME=	Check-ISA-0.04
 PKGNAME=	p5-${DISTNAME}
+PKGREVISION=	1
 CATEGORIES=	devel
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=../../authors/id/N/NU/NUFFIN/}
 
@@ -10,8 +11,6 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://search.cpan.org/dist/Check-ISA/
 COMMENT=	DWIM, correct checking of an object's class
 LICENSE=	${PERL5_LICENSE}
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 DEPENDS+=	p5-Sub-Exporter-[0-9]*:../../devel/p5-Sub-Exporter
 DEPENDS+=	p5-Test-use-ok-[0-9]*:../../devel/p5-Test-use-ok

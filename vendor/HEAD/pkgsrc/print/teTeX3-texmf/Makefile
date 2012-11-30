@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.58 2012/07/11 12:59:59 minskim Exp $
+# $NetBSD: Makefile,v 1.61 2012/11/16 14:39:45 jaapb Exp $
 #
 
 DISTNAME=	tetex-texmf-3.0
 PKGNAME=	${DISTNAME:C/tetex/teTeX/}
-PKGREVISION=	37
+PKGREVISION=	39
 CATEGORIES=	print
 MASTER_SITES=	${MASTER_SITE_TEX_CTAN:=obsolete/systems/unix/teTeX/3.0/distrib/}
 
@@ -11,7 +11,6 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.tug.org/tetex/
 COMMENT=	Machine-independent part of teTeX
 
-PKG_DESTDIR_SUPPORT=	user-destdir
 NOT_FOR_BULK_PLATFORM=	HPUX-*-*
 
 CONFLICTS+=	teTeX-share-[0-9]*
@@ -48,6 +47,7 @@ DEPENDS+=	tex-collection-fontsrecommended>=2010:../../fonts/tex-collection-fonts
 DEPENDS+=	tex-collection-genericrecommended>=2010:../../print/tex-collection-genericrecommended
 DEPENDS+=	tex-collection-latex>=2010:../../print/tex-collection-latex
 DEPENDS+=	tex-colortbl-[0-9]*:../../print/tex-colortbl
+DEPENDS+=	tex-comment-[0-9]*:../../print/tex-comment
 DEPENDS+=	tex-context>=2009:../../print/tex-context
 DEPENDS+=	tex-cweb-[0-9]*:../../print/tex-cweb
 DEPENDS+=	tex-cyrillic>=2009:../../print/tex-cyrillic
@@ -107,6 +107,7 @@ DEPENDS+=	tex-hyphen-turkish-[0-9]*:../../print/tex-hyphen-turkish
 DEPENDS+=	tex-hyphen-ukrainian-[0-9]*:../../print/tex-hyphen-ukrainian
 DEPENDS+=	tex-hyphenat-[0-9]*:../../print/tex-hyphenat
 DEPENDS+=	tex-ifmtarg-[0-9]*:../../print/tex-ifmtarg
+DEPENDS+=	tex-index-[0-9]*:../../print/tex-index
 DEPENDS+=	tex-jurabib-[0-9]*:../../print/tex-jurabib
 DEPENDS+=	tex-kix-[0-9]*:../../print/tex-kix
 DEPENDS+=	tex-koma-script-[0-9]*:../../print/tex-koma-script
@@ -139,6 +140,7 @@ DEPENDS+=	tex-placeins-plain-[0-9]*:../../print/tex-placeins-plain
 DEPENDS+=	tex-preprint-[0-9]*:../../print/tex-preprint
 DEPENDS+=	tex-preview-[0-9]*:../../print/tex-preview
 DEPENDS+=	tex-printlen-[0-9]*:../../print/tex-printlen
+DEPENDS+=	tex-psfrag-[0-9]*:../../print/tex-psfrag
 DEPENDS+=	tex-psgo-[0-9]*:../../graphics/tex-psgo
 DEPENDS+=	tex-pst-3d-[0-9]*:../../graphics/tex-pst-3d
 DEPENDS+=	tex-pst-3dplot-[0-9]*:../../graphics/tex-pst-3dplot
@@ -184,6 +186,7 @@ DEPENDS+=	tex-tocbibind-[0-9]*:../../print/tex-tocbibind
 DEPENDS+=	tex-tocloft-[0-9]*:../../print/tex-tocloft
 DEPENDS+=	tex-twoinone-[0-9]*:../../print/tex-twoinone
 DEPENDS+=	tex-type1cm-[0-9]*:../../print/tex-type1cm
+DEPENDS+=	tex-umlaute-[0-9]*:../../print/tex-umlaute
 DEPENDS+=	tex-url-[0-9]*:../../print/tex-url
 DEPENDS+=	tex-verbdef-[0-9]*:../../print/tex-verbdef
 DEPENDS+=	tex-version-[0-9]*:../../print/tex-version
@@ -291,6 +294,7 @@ post-extract:
 	rm -rf ${WRKSRC}/doc/latex/booktabs
 	rm -rf ${WRKSRC}/doc/latex/ca*
 	rm -rf ${WRKSRC}/doc/latex/changebar
+	rm -rf ${WRKSRC}/doc/latex/comment
 	rm -rf ${WRKSRC}/doc/latex/c[v-z]*
 	rm -rf ${WRKSRC}/doc/latex/e[d-n]*
 	rm -rf ${WRKSRC}/doc/latex/eso-pic
@@ -302,6 +306,7 @@ post-extract:
 	rm -rf ${WRKSRC}/doc/latex/fp
 	rm -rf ${WRKSRC}/doc/latex/geo*
 	rm -rf ${WRKSRC}/doc/latex/h*
+	rm -rf ${WRKSRC}/doc/latex/index
 	rm -rf ${WRKSRC}/doc/latex/jurabib
 	rm -rf ${WRKSRC}/doc/latex/k*
 	rm -rf ${WRKSRC}/doc/latex/lastpage
@@ -318,7 +323,7 @@ post-extract:
 	rm -rf ${WRKSRC}/doc/latex/picinpar
 	rm -rf ${WRKSRC}/doc/latex/placeins
 	rm -rf ${WRKSRC}/doc/latex/pre*
-	rm -rf ${WRKSRC}/doc/latex/ps[g-n]*
+	rm -rf ${WRKSRC}/doc/latex/ps[f-n]*
 	rm -rf ${WRKSRC}/doc/latex/rotating
 	rm -rf ${WRKSRC}/doc/latex/se*
 	rm -rf ${WRKSRC}/doc/latex/soul
@@ -335,7 +340,7 @@ post-extract:
 	rm -rf ${WRKSRC}/doc/m[a-j]*
 	rm -rf ${WRKSRC}/doc/pdftex
 	rm -rf ${WRKSRC}/dvips/[b-n]*
-	rm -rf ${WRKSRC}/dvips/pstricks
+	rm -rf ${WRKSRC}/dvips/ps*
 	rm -rf ${WRKSRC}/dvips/[r-z]*
 	rm -rf ${WRKSRC}/fonts/afm/[a-o]*
 	rm -rf ${WRKSRC}/fonts/afm/public/[b-n]*
@@ -472,6 +477,7 @@ post-extract:
 	rm -rf ${WRKSRC}/tex/latex/changebar
 	rm -rf ${WRKSRC}/tex/latex/chngpage
 	rm -rf ${WRKSRC}/tex/latex/cite
+	rm -rf ${WRKSRC}/tex/latex/comment
 	rm -rf ${WRKSRC}/tex/latex/concrete
 	rm -rf ${WRKSRC}/tex/latex/con[f-z]*
 	rm -rf ${WRKSRC}/tex/latex/c[v-z]*
@@ -494,6 +500,7 @@ post-extract:
 	rm -f ${WRKSRC}/tex/latex/graphics/t[cr]*
 	rm -rf ${WRKSRC}/tex/latex/here
 	rm -rf ${WRKSRC}/tex/latex/hyp*
+	rm -rf ${WRKSRC}/tex/latex/index
 	rm -rf ${WRKSRC}/tex/latex/jurabib
 	rm -rf ${WRKSRC}/tex/latex/k*
 	rm -rf ${WRKSRC}/tex/latex/lastpage
@@ -514,9 +521,7 @@ post-extract:
 	rm -rf ${WRKSRC}/tex/latex/picinpar
 	rm -rf ${WRKSRC}/tex/latex/placeins
 	rm -rf ${WRKSRC}/tex/latex/pre*
-	rm -rf ${WRKSRC}/tex/latex/psl*
-	rm -rf ${WRKSRC}/tex/latex/pstricks
-	rm -rf ${WRKSRC}/tex/latex/psn*
+	rm -rf ${WRKSRC}/tex/latex/ps[c-z]*
 	rm -rf ${WRKSRC}/tex/latex/pxfonts
 	rm -rf ${WRKSRC}/tex/latex/relsize
 	rm -rf ${WRKSRC}/tex/latex/rotating
@@ -536,7 +541,7 @@ post-extract:
 	rm -rf ${WRKSRC}/tex/latex/toc*
 	rm -rf ${WRKSRC}/tex/latex/tools
 	rm -rf ${WRKSRC}/tex/latex/t[s-z]*
-	rm -rf ${WRKSRC}/tex/latex/ulem
+	rm -rf ${WRKSRC}/tex/latex/u[l-m]*
 	rm -rf ${WRKSRC}/tex/latex/url
 	rm -rf ${WRKSRC}/tex/latex/version
 	rm -rf ${WRKSRC}/tex/latex/wasysym

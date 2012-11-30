@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.40 2012/08/18 08:49:42 ryoon Exp $
+# $NetBSD: Makefile,v 1.47 2012/11/26 14:02:49 ryoon Exp $
 #
 
-DISTNAME=	calibre-0.8.50
-PKGREVISION=	2
+DISTNAME=	calibre-0.9.7
 CATEGORIES=	misc
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=calibre/}
 EXTRACT_SUFX=	.tar.xz
@@ -27,8 +26,7 @@ DEPENDS+=	${PYPKGPREFIX}-Pdf-[0-9]*:../../print/py-Pdf
 DEPENDS+=	${PYPKGPREFIX}-cherrypy-[0-9]*:../../www/py-cherrypy
 DEPENDS+=	${PYPKGPREFIX}-html5lib-[0-9]*:../../textproc/py-html5lib
 DEPENDS+=	${PYPKGPREFIX}-chardet-[0-9]*:../../converters/py-chardet
-
-PKG_DESTDIR_SUPPORT=	user-destdir
+DEPENDS+=	${PYPKGPREFIX}-netifaces-[0-9]*:../../net/py-netifaces
 
 USE_LANGUAGES=	c c++
 USE_TOOLS+=	pkg-config pax
@@ -214,4 +212,6 @@ BUILDLINK_API_DEPENDS.py-qt4+=	${PYPKGPREFIX}-qt4>=4.7.0
 .include "../../x11/py-qt4/buildlink3.mk"
 BUILDLINK_API_DEPENDS.qt4-tools+=	qt4-tools>=4.7.0
 .include "../../x11/qt4-tools/buildlink3.mk"
+BUILDLINK_API_DEPENDS.qt4-qdbus+=	qt4-tools>=4.7.0
+.include "../../x11/qt4-qdbus/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

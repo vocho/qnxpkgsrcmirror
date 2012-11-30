@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.25 2012/08/08 06:44:08 imil Exp $
+# $NetBSD: Makefile,v 1.28 2012/11/26 14:38:14 fhajny Exp $
 
-DISTNAME=		nginx-1.2.3
+DISTNAME=		nginx-1.2.5
 CATEGORIES=		www
 MASTER_SITES=		http://nginx.org/download/
 DISTFILES=		${DEFAULT_DISTFILES}
@@ -10,7 +10,6 @@ HOMEPAGE=		http://nginx.org/
 COMMENT=		Lightweight HTTP server and mail proxy server
 LICENSE=		2-clause-bsd
 
-PKG_DESTDIR_SUPPORT=	user-destdir
 .include "../../mk/bsd.prefs.mk"
 
 NGINX_USER?=		nginx
@@ -101,3 +100,4 @@ do-install:
 
 .include "../../devel/zlib/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"
+.include "Makefile.cflags"

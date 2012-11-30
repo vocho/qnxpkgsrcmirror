@@ -1,7 +1,8 @@
-# $NetBSD: Makefile.common,v 1.22 2012/01/21 10:51:13 wiz Exp $
+# $NetBSD: Makefile.common,v 1.24 2012/10/31 11:19:44 asau Exp $
 #
 # used by devel/scmgit-base/Makefile
 # used by devel/scmgit-docs/Makefile
+# used by devel/scmgit-gitk/Makefile
 
 .include "../../devel/scmgit/Makefile.version"
 
@@ -13,19 +14,16 @@ MAINTAINER?=	pkgsrc-users@NetBSD.org
 HOMEPAGE?=	http://git-scm.com/
 LICENSE=	gnu-gpl-v2
 
-PKG_DESTDIR_SUPPORT=	user-destdir
-
 .include "../../mk/bsd.fast.prefs.mk"
 
 PATCHDIR=	${.CURDIR}/../../devel/scmgit-base/patches
 DISTINFO_FILE=	${.CURDIR}/../../devel/scmgit-base/distinfo
 
-USE_TOOLS+=		gmake tar perl sh
+USE_TOOLS+=		gmake tar sh
 
 PKG_SYSCONFSUBDIR=	git
 
 GNU_CONFIGURE=		yes
-CONFIGURE_ARGS+=	--with-perl=${PERL5:Q}
 CONFIGURE_ARGS+=	--with-shell=${SH:Q}
 CONFIGURE_ARGS+=	TAR=${TAR:Q}
 CONFIGURE_ARGS+=	--mandir=${${PREFIX}/${PKGMANDIR}:L:Q}

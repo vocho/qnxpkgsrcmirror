@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.29 2012/03/03 00:13:57 wiz Exp $
+# $NetBSD: Makefile,v 1.34 2012/10/23 19:51:06 asau Exp $
 
 DISTNAME=	grun-0.9.3
-PKGREVISION=	9
+PKGREVISION=	13
 CATEGORIES=	misc
 MASTER_SITES=	http://grun.googlecode.com/files/
 
@@ -12,8 +12,6 @@ COMMENT=	GTK+ based Run dialog
 GNU_CONFIGURE=		YES
 USE_PKGLOCALEDIR=	YES
 USE_TOOLS+=		gmake pkg-config
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 PKG_SYSCONFSUBDIR=	grun
 EGDIR=			${PREFIX}/share/examples/grun

@@ -1,16 +1,14 @@
-# $NetBSD: Makefile,v 1.6 2011/08/14 14:52:52 obache Exp $
+# $NetBSD: Makefile,v 1.8 2012/10/23 19:51:25 asau Exp $
 #
 
 DISTNAME=	swatch-3.2.1
-PKGREVISION=	3
+PKGREVISION=	4
 CATEGORIES=	sysutils
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=swatch/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://swatch.sourceforge.net/
 COMMENT=	Simple log file watcher
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 DEPENDS+=	p5-Date-Calc>=0:../../devel/p5-Date-Calc
 DEPENDS+=	p5-Date-Manip>=0:../../devel/p5-Date-Manip

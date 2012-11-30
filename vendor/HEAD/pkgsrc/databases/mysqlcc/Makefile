@@ -1,17 +1,15 @@
-# $NetBSD: Makefile,v 1.32 2011/11/01 06:00:51 sbd Exp $
+# $NetBSD: Makefile,v 1.34 2012/10/02 21:25:23 asau Exp $
 #
 
 DISTNAME=		mysqlcc-0.9.8-src
 PKGNAME=		${DISTNAME:S/-src//}
-PKGREVISION=		4
+PKGREVISION=		5
 CATEGORIES=		databases
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=mysqlcc/}
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://mysqlcc.sourceforge.net/
 COMMENT=		MySQL Control Center
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_LANGUAGES=		c c++
 USE_PKGLOCALEDIR=	YES

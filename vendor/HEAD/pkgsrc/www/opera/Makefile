@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.97 2012/08/03 13:08:24 obache Exp $
+# $NetBSD: Makefile,v 1.99 2012/10/28 06:30:24 asau Exp $
 
 DISTNAME=		opera-${OPERA_PKG_VERSION}-${OPERA_PKG_BUILD}.${OPERA_ARCH}.${EMUL_OPSYS}
 PKGNAME=		opera-${OPERA_PKG_VERSION:S/u/pl/}
@@ -14,8 +14,6 @@ LICENSE=		opera-1200-license
 EMUL_PLATFORMS=		freebsd-i386 freebsd-x86_64 \
 			linux-i386 linux-x86_64
 
-PKG_DESTDIR_SUPPORT=	user-destdir
-
 .include "../../mk/bsd.prefs.mk"
 
 MASTER_SITE_OPERA+=	ftp://get.opera.com/pub/opera/ \
@@ -29,9 +27,9 @@ MASTER_SITE_OPERA+=	ftp://get.opera.com/pub/opera/ \
 USE_LANGUAGES=		# empty
 NO_BUILD=		yes
 
-OPERA_PKG_BUILD=	1532
-OPERA_PKG_VERSION=	12.01
-OPERA_PKG_VERSION_DIR=	1201
+OPERA_PKG_BUILD=	1578
+OPERA_PKG_VERSION=	12.02
+OPERA_PKG_VERSION_DIR=	1202
 
 PLIST_VARS+=		ia32w linux
 

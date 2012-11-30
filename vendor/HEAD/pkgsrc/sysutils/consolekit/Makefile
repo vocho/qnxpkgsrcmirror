@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.17 2012/03/03 00:12:21 wiz Exp $
+# $NetBSD: Makefile,v 1.20 2012/10/23 19:50:56 asau Exp $
 #
 
 CONSOLEKIT_VER=		0.3.0
 DISTNAME=		ConsoleKit-${CONSOLEKIT_VER}
 PKGNAME=		consolekit-${CONSOLEKIT_VER}
-PKGREVISION=		8
+PKGREVISION=		10
 CATEGORIES=		sysutils
 MASTER_SITES=		http://www.freedesktop.org/software/ConsoleKit/dist/
 EXTRACT_SUFX=		.tar.bz2
@@ -14,7 +14,6 @@ HOMEPAGE=	http://www.freedesktop.org/wiki/Software/ConsoleKit
 COMMENT=	Framework for defining and tracking users, login sessions, and seats
 LICENSE=	gnu-gpl-v2
 
-PKG_DESTDIR_SUPPORT=	user-destdir
 PKG_SYSCONFSUBDIR=	ConsoleKit
 
 EGDIR=		${PREFIX}/share/examples/consolekit

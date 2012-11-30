@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.75 2011/11/26 04:40:31 sbd Exp $
+# $NetBSD: Makefile,v 1.77 2012/10/28 06:31:10 asau Exp $
 
 DISTNAME=	wwwoffle-2.9a
-PKGREVISION=	2
+PKGREVISION=	3
 CATEGORIES=	www
 MASTER_SITES=	http://www.gedanken.demon.co.uk/download-wwwoffle/
 EXTRACT_SUFX=	.tgz
@@ -24,8 +24,6 @@ PLIST_SUBST+=		GZIP_CMD=${GZIP_CMD:Q}
 INSTALLATION_DIRS=	sbin libdata
 
 RCD_SCRIPTS=		wwwoffled
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 SUBST_CLASSES+=			fix-paths
 SUBST_STAGE.fix-paths=		pre-configure

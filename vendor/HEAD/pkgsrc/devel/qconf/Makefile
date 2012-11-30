@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.15 2012/03/03 00:12:57 wiz Exp $
+# $NetBSD: Makefile,v 1.20 2012/10/31 11:19:36 asau Exp $
 #
 
 DISTNAME=		qconf-1.4
-PKGREVISION=		11
+PKGREVISION=		15
 CATEGORIES=		devel
 MASTER_SITES=		http://delta.affinix.com/download/
 EXTRACT_SUFX=		.tar.bz2
@@ -10,8 +10,6 @@ EXTRACT_SUFX=		.tar.bz2
 MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://delta.affinix.com/qconf/
 COMMENT=		Configure script generator for qmake
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_PKGLOCALEDIR=	yes
 HAS_CONFIGURE=		yes

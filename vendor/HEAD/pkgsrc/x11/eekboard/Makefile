@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.14 2012/06/14 07:43:23 sbd Exp $
+# $NetBSD: Makefile,v 1.19 2012/10/29 05:06:10 asau Exp $
 #
 
 DISTNAME=	eekboard-1.0.5
-PKGREVISION=	1
+PKGREVISION=	5
 CATEGORIES=	x11
 MASTER_SITES=	http://cloud.github.com/downloads/ueno/eekboard/
 
@@ -10,8 +10,6 @@ MAINTAINER=	obache@NetBSD.org
 HOMEPAGE=	https://fedorahosted.org/eekboard/
 COMMENT=	Virtual keyboard for GNOME
 LICENSE=	gnu-gpl-v3
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=		yes
 USE_LIBTOOL=		yes

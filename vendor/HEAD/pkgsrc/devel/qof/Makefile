@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.13 2012/07/09 12:15:08 mef Exp $
+# $NetBSD: Makefile,v 1.16 2012/10/31 11:19:37 asau Exp $
 #
 
 DISTNAME=	qof-0.7.5
-PKGREVISION=	11
+PKGREVISION=	13
 CATEGORIES=	devel
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=qof/}
 
@@ -11,11 +11,9 @@ HOMEPAGE=	http://qof.alioth.debian.org/
 COMMENT=	Query Object Framework
 LICENSE=	gnu-gpl-v2
 
-BUILD_DEPENDS+=	doxygen>=1.8.1.1:../../devel/doxygen
+BUILD_DEPENDS+=	doxygen>=1.8.2:../../devel/doxygen
 
 MAKE_JOBS_SAFE=		no
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=		yes
 USE_LIBTOOL=		yes

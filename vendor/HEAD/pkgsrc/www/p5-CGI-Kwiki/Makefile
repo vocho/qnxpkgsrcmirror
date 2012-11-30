@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.14 2011/08/14 16:05:45 obache Exp $
+# $NetBSD: Makefile,v 1.16 2012/10/28 06:30:28 asau Exp $
 #
 
 DISTNAME=	CGI-Kwiki-0.18
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	6
+PKGREVISION=	7
 SVR4_PKGNAME=	p5ckw
 CATEGORIES=	www perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=CGI/}
@@ -12,8 +12,6 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.kwiki.org/
 COMMENT=	Quickie Wiki that is not too Tricky
 LICENSE=	${PERL5_LICENSE}
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 DEPENDS+=	{perl>=5.10.0,p5-Test-Simple>=0.47}:../../devel/p5-Test-Simple
 DEPENDS+=	{perl>=5.10.0,p5-Locale-Maketext>=1.08}:../../misc/p5-Locale-Maketext

@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.2 2011/08/12 19:12:30 adam Exp $
+# $NetBSD: Makefile,v 1.4 2012/10/31 11:18:10 asau Exp $
 
 DISTNAME=	File-DirCompare-0.6
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	sysutils perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=File/}
 
@@ -12,7 +12,6 @@ COMMENT=	Perl module to compare two directories using callbacks
 LICENSE=	${PERL5_LICENSE}
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 PERL5_PACKLIST=		auto/File/DirCompare/.packlist
 

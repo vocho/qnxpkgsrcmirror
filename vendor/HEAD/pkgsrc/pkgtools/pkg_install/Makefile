@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.186 2012/07/27 14:26:36 jperkin Exp $
+# $NetBSD: Makefile,v 1.189 2012/10/15 21:27:08 joerg Exp $
 
 # Notes to package maintainers:
 #
@@ -16,7 +16,6 @@ HOMEPAGE=		http://www.pkgsrc.org/
 COMMENT=		Package management and administration tools for pkgsrc
 LICENSE=		modified-bsd
 
-PKG_DESTDIR_SUPPORT=	user-destdir
 BOOTSTRAP_PKG=	yes
 SKIP_LICENSE_CHECK=	yes
 

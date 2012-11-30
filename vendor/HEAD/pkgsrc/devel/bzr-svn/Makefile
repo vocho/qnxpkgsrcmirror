@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.23 2012/04/08 21:28:17 wiz Exp $
+# $NetBSD: Makefile,v 1.25 2012/10/31 11:16:44 asau Exp $
 
 DISTNAME=	bzr-svn-${VER}
 CATEGORIES=	devel scm
@@ -11,11 +11,7 @@ HOMEPAGE=	http://bazaar-vcs.org/BzrForeignBranches/Subversion
 COMMENT=	Foreign Subversion repository support for Bazaar
 LICENSE=	gnu-gpl-v2
 
-PKG_DESTDIR_SUPPORT=	user-destdir
 PYTHON_PATCH_SCRIPTS= info.py wiki.py
-# Only these python versions are supported, see:
-# http://doc.bazaar.canonical.com/bzr.dev/en/whats-new/whats-new-in-2.4.html
-PYTHON_VERSIONS_ACCEPTED=	27 26
 
 DEPENDS+=	${PYPKGPREFIX}-subvertpy>=0.8.8:../../devel/py-subvertpy
 DEPENDS=	${PYPKGPREFIX}-sqlite3-[0-9]*:../../databases/py-sqlite3

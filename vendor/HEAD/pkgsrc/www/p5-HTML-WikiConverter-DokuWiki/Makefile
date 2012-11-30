@@ -1,17 +1,15 @@
-# $NetBSD: Makefile,v 1.3 2011/08/14 16:05:56 obache Exp $
+# $NetBSD: Makefile,v 1.5 2012/10/28 06:30:40 asau Exp $
 #
 
 DISTNAME=	HTML-WikiConverter-DokuWiki-0.53
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	2
+PKGREVISION=	3
 CATEGORIES=	www perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=HTML/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://search.cpan.org/~diberri/HTML-WikiConverter-DokuWiki-0.53/lib/HTML/WikiConverter/DokuWiki.pm
 COMMENT=	DokuWiki dialect module for converting HTML to wiki markup
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 DEPENDS+=	p5-HTML-WikiConverter>=0.63:../../www/p5-HTML-WikiConverter
 

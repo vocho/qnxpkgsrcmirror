@@ -1,9 +1,10 @@
-# $NetBSD: Makefile,v 1.1 2012/07/11 15:33:51 wiz Exp $
+# $NetBSD: Makefile,v 1.3 2012/10/31 11:17:33 asau Exp $
 #
 
 DISTNAME=	deriving-ocsigen-0.3c
 PKGNAME=	ocaml-${DISTNAME}
 COMMENT=	Extension to OCaml for deriving functions from type declarations
+PKGREVISION=	1
 CATEGORIES=	devel
 MASTER_SITES=	http://ocsigen.org/download/
 
@@ -12,8 +13,6 @@ HOMEPAGE=	http://ocsigen.org/eliom/install/
 LICENSE=	mit
 
 DEPENDS+=	ocaml-findlib-[0-9]*:../../devel/ocaml-findlib
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_LANGUAGES=	c
 USE_TOOLS=	gmake

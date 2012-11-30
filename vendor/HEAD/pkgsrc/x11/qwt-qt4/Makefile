@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.17 2012/05/06 18:56:30 dholland Exp $
+# $NetBSD: Makefile,v 1.22 2012/10/29 05:06:47 asau Exp $
 
 DISTNAME=	qwt-5.2.2
-PKGREVISION=	4
+PKGREVISION=	8
 CATEGORIES=	x11
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=qwt/}
 EXTRACT_SUFX=	.tar.bz2
@@ -19,7 +19,6 @@ USE_LIBTOOL=	yes
 CONFLICTS=	qwtlib-[0-9]*
 
 AUTO_MKDIRS=			yes
-PKG_DESTDIR_SUPPORT=	user-destdir
 INSTALL_MAKE_FLAGS+=	INSTALL_ROOT=${DESTDIR}
 
 do-configure:

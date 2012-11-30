@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.37 2012/07/02 13:37:40 adam Exp $
+# $NetBSD: Makefile,v 1.43 2012/10/08 23:01:01 adam Exp $
 
 DISTNAME=	akonadi-1.7.0
-PKGREVISION=	2
+PKGREVISION=	7
 CATEGORIES=	mail
 MASTER_SITES=	ftp://kde.mirror.anlx.net/stable/akonadi/src/
 EXTRACT_SUFX=	.tar.bz2
@@ -10,8 +10,6 @@ MAINTAINER=	markd@NetBSD.org
 HOMEPAGE=	http://pim.kde.org/akonadi/
 COMMENT=	The KDE PIM Storage Service
 LICENSE=	gnu-lgpl-v2.1
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 # BUILD_MAKE_FLAGS+= VERBOSE=1
 

@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.25 2012/06/22 13:46:30 obache Exp $
+# $NetBSD: Makefile,v 1.31 2012/10/08 23:01:17 adam Exp $
 
 DISTNAME=	pidgin-facebookchat-source-1.69
 PKGNAME=	${DISTNAME:S/-source-/-/}
-PKGREVISION=	8
+PKGREVISION=	13
 CATEGORIES=	chat
 MASTER_SITES=	http://pidgin-facebookchat.googlecode.com/files/
 EXTRACT_SUFX=	.tar.bz2
@@ -13,8 +13,6 @@ COMMENT=	Plugin for pidgin to support Facebook IM
 LICENSE=	gnu-gpl-v3 # or later
 
 DEPENDS+=	pidgin>=2.7.9:../../chat/pidgin
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 WRKSRC=		${WRKDIR}/${PKGBASE}
 

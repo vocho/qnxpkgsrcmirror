@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.6 2008/10/14 12:47:12 markd Exp $
+# $NetBSD: Makefile,v 1.8 2012/10/03 21:53:56 wiz Exp $
 
 DISTNAME=	nas-1.9.1.src
 PKGNAME=	nas-auscope-1.9.1
+PKGREVISION=	1
 CATEGORIES=	audio
 MASTER_SITES=	http://nas.codebrilliance.com/nas/
 
@@ -17,7 +18,6 @@ REPLACE_PERL=   auscope
 
 NO_BUILD=	yes
 
-PKG_DESTDIR_SUPPORT=	user-destdir
 INSTALLATION_DIRS=	bin ${PKGMANDIR}/man1
 
 do-install:

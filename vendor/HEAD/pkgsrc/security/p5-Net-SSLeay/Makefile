@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.52 2012/05/31 08:46:11 sno Exp $
+# $NetBSD: Makefile,v 1.55 2012/10/23 18:16:46 asau Exp $
 
-DISTNAME=	Net-SSLeay-1.48
+DISTNAME=	Net-SSLeay-1.49
 PKGNAME=	p5-${DISTNAME}
 SVR4_PKGNAME=	p5nsl
 CATEGORIES=	security perl5
@@ -12,7 +12,6 @@ COMMENT=	Perl5 module for using OpenSSL
 #LICENSE=	same as security/openssl
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 BUILD_DEPENDS+=	p5-Test-Exception-[0-9]*:../../devel/p5-Test-Exception
 BUILD_DEPENDS+=	p5-Test-Warn-[0-9]*:../../devel/p5-Test-Warn

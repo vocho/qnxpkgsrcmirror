@@ -1,17 +1,15 @@
-# $NetBSD: Makefile,v 1.29 2012/03/03 00:14:10 wiz Exp $
+# $NetBSD: Makefile,v 1.34 2012/10/29 05:06:19 asau Exp $
 #
 
 DISTNAME=		gtk-theme-switch-2.0.0rc2
 PKGNAME=		${DISTNAME:S/gtk/gtk2/}
-PKGREVISION=		15
+PKGREVISION=		19
 CATEGORIES=		x11
 MASTER_SITES=		http://www.muhri.net/
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://www.muhri.net/
 COMMENT=		Allows quick & easy switching of GTK+ 2.x themes
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=		gmake pkg-config
 

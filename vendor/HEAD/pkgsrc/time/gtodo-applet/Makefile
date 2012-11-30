@@ -1,16 +1,14 @@
-# $NetBSD: Makefile,v 1.44 2012/07/15 08:22:56 wiz Exp $
+# $NetBSD: Makefile,v 1.49 2012/10/08 23:02:29 adam Exp $
 #
 
 DISTNAME=	gtodo-applet-0.1
-PKGREVISION=	34
+PKGREVISION=	38
 CATEGORIES=	time gnome
 MASTER_SITES=	# http://download.qballcow.nl/programs/gtodo/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://qballcow.nl/index.php?s=4
 COMMENT=	GNOME applet for the gtodo application
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 DEPENDS+=		gtodo>=0.14:../../time/gtodo
 

@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.29 2012/07/23 11:17:54 ryoon Exp $
+@comment $NetBSD: PLIST,v 1.32 2012/09/26 10:42:48 sbd Exp $
 ${PLIST.alpha}bin/qemu-alpha
 ${PLIST.arm}bin/qemu-arm
 ${PLIST.armeb}bin/qemu-armeb
@@ -13,6 +13,7 @@ ${PLIST.microblazeel}bin/qemu-microblazeel
 ${PLIST.mips}bin/qemu-mips
 ${PLIST.mipsel}bin/qemu-mipsel
 ${PLIST.nbd}bin/qemu-nbd
+${PLIST.or32}bin/qemu-or32
 ${PLIST.ppc}bin/qemu-ppc
 ${PLIST.ppc64}bin/qemu-ppc64
 ${PLIST.ppc64abi32}bin/qemu-ppc64abi32
@@ -35,6 +36,7 @@ bin/qemu-system-mips
 bin/qemu-system-mips64
 bin/qemu-system-mips64el
 bin/qemu-system-mipsel
+bin/qemu-system-or32
 bin/qemu-system-ppc
 bin/qemu-system-ppc64
 bin/qemu-system-ppcemb
@@ -43,6 +45,7 @@ bin/qemu-system-sh4
 bin/qemu-system-sh4eb
 bin/qemu-system-sparc
 bin/qemu-system-sparc64
+bin/qemu-system-unicore32
 bin/qemu-system-x86_64
 bin/qemu-system-xtensa
 bin/qemu-system-xtensaeb
@@ -58,10 +61,8 @@ share/examples/qemu/cpus-x86_64.conf
 share/examples/qemu/target-x86_64.conf
 share/qemu/bamboo.dtb
 share/qemu/bios.bin
-share/qemu/kvmvapic.bin
-share/qemu/palcode-clipper
-share/qemu/sgabios.bin
 share/qemu/keymaps/ar
+share/qemu/keymaps/bepo
 share/qemu/keymaps/common
 share/qemu/keymaps/da
 share/qemu/keymaps/de
@@ -96,12 +97,13 @@ share/qemu/keymaps/sl
 share/qemu/keymaps/sv
 share/qemu/keymaps/th
 share/qemu/keymaps/tr
+share/qemu/kvmvapic.bin
 share/qemu/linuxboot.bin
-share/qemu/mpc8544ds.dtb
 share/qemu/multiboot.bin
 share/qemu/openbios-ppc
 share/qemu/openbios-sparc32
 share/qemu/openbios-sparc64
+share/qemu/palcode-clipper
 share/qemu/petalogix-ml605.dtb
 share/qemu/petalogix-s3adsp1800.dtb
 share/qemu/ppc_rom.bin
@@ -113,6 +115,7 @@ share/qemu/pxe-rtl8139.rom
 share/qemu/pxe-virtio.rom
 share/qemu/qemu-icon.bmp
 share/qemu/s390-zipl.rom
+share/qemu/sgabios.bin
 share/qemu/slof.bin
 share/qemu/spapr-rtas.bin
 share/qemu/vgabios-cirrus.bin

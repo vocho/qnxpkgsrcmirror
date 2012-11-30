@@ -1,10 +1,11 @@
-# $NetBSD: Makefile,v 1.3 2012/07/28 18:08:45 prlw1 Exp $
+# $NetBSD: Makefile,v 1.8 2012/10/31 11:19:28 asau Exp $
 #
 
-DISTNAME=	pyatspi-2.5.4
+DISTNAME=	pyatspi-2.6.0
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME:S/pyatspi/at-spi2/}
+PKGREVISION=	1
 CATEGORIES=	devel
-MASTER_SITES=	${MASTER_SITE_GNOME:=sources/pyatspi/2.5/}
+MASTER_SITES=	${MASTER_SITE_GNOME:=sources/pyatspi/2.6/}
 EXTRACT_SUFX=	.tar.xz
 
 MAINTAINER=	prlw1@cam.ac.uk
@@ -16,19 +17,17 @@ LICENSE=	gnu-lgpl-v2
 DEPENDS+=	at-spi2-core>=2.3.90:../../devel/at-spi2-core
 DEPENDS+=	at-spi2-atk-[0-9]*:../../devel/at-spi2-atk
 
-PKG_DESTDIR_SUPPORT=	user-destdir
-
-PYTHON_VERSIONS_INCOMPATIBLE=	25
-
 USE_LIBTOOL=	yes
 USE_TOOLS+=	pkg-config
 GNU_CONFIGURE=	yes
 CONFIGURE_ENV+=	PYTHON=${PYTHONBIN}
 PY_PATCHPLIST=	yes
+REPLACE_PYTHON=	examples/magFocusTracker.py
 
 CONFLICTS=	${PYPKGPREFIX}-at-spi-[0-9]*
 
 .include "../../devel/py-gobject3/buildlink3.mk"
 
+.include "../../lang/python/application.mk"
 .include "../../lang/python/extension.mk"
 .include "../../mk/bsd.pkg.mk"

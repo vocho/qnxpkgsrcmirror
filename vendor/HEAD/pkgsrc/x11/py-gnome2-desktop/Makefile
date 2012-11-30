@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.63 2012/08/13 14:25:45 wiz Exp $
+# $NetBSD: Makefile,v 1.70 2012/10/29 05:06:44 asau Exp $
 #
 
 DISTNAME=	gnome-python-desktop-2.32.0
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME:S/-python/2/}
-PKGREVISION=	14
+PKGREVISION=	19
 CATEGORIES=	sysutils gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gnome-python-desktop/2.32/}
 EXTRACT_SUFX=	.tar.bz2
@@ -11,8 +11,6 @@ EXTRACT_SUFX=	.tar.bz2
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.gnome.org/
 COMMENT=	Python modules for the GNOME desktop
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=	yes
 PY_PATCHPLIST=	yes
@@ -23,19 +21,19 @@ USE_TOOLS+=	pkg-config gmake
 
 PKGCONFIG_OVERRIDE+=	gnome-python-desktop-2.0.pc.in
 
-# The "real" value here is: 27 26 25
+# The "real" value here is: 27 26
 # but because of single-version deps of gnome bits this will only
 # ever work for the python version those gnome bits were built with.
-PYTHON_VERSIONS_REALLY_ACCEPTED=27 26 25
+PYTHON_VERSIONS_REALLY_ACCEPTED=27 26
 PYTHON_VERSIONS_ACCEPTED=	${PYTHON_VERSION_DEFAULT:M27}
 PYTHON_VERSIONS_ACCEPTED+=	${PYTHON_VERSION_DEFAULT:M26}
-PYTHON_VERSIONS_ACCEPTED+=	${PYTHON_VERSION_DEFAULT:M25}
+
+.include "options.mk"
 
 .include "../../lang/python/extension.mk"
 .include "../../devel/libwnck/buildlink3.mk"
 .include "../../graphics/librsvg/buildlink3.mk"
 .include "../../graphics/py-cairo/buildlink3.mk"
-.include "../../mail/evolution-data-server/buildlink3.mk"
 .include "../../multimedia/gnome-media/buildlink3.mk"
 .include "../../multimedia/totem-pl-parser/buildlink3.mk"
 # works, but should better be in its own pkg to limit dependencies

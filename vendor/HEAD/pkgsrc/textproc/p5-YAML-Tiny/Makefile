@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.14 2012/04/10 13:26:21 sno Exp $
+# $NetBSD: Makefile,v 1.16 2012/10/25 06:56:43 asau Exp $
 
 DISTNAME=	YAML-Tiny-1.51
 PKGNAME=	p5-${DISTNAME}
+PKGREVISION=	1
 CATEGORIES=	perl5 textproc
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=YAML/}
 
@@ -12,8 +13,6 @@ LICENSE=	${PERL5_LICENSE}
 
 USE_LANGUAGES=	# empty
 PERL5_PACKLIST=	auto/YAML/Tiny/.packlist
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 .include "../../lang/perl5/module.mk"
 .include "../../mk/bsd.pkg.mk"

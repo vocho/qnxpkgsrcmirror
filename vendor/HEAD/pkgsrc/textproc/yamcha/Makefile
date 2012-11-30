@@ -1,14 +1,12 @@
-# $NetBSD: Makefile,v 1.3 2011/11/18 09:01:27 obache Exp $
+# $NetBSD: Makefile,v 1.6 2012/10/25 06:57:09 asau Exp $
 #
 
 .include "Makefile.common"
-PKGREVISION=	1
+PKGREVISION=	3
 
 CATEGORIES=	devel
 
 COMMENT=	Yet Another Multipurpose CHunk Annotator
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=	yes
 USE_LIBTOOL=	yes

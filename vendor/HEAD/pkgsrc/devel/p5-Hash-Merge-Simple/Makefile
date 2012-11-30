@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.1 2012/07/05 13:08:15 sno Exp $
+# $NetBSD: Makefile,v 1.3 2012/10/31 11:18:18 asau Exp $
 
 DISTNAME=	Hash-Merge-Simple-0.051
 PKGNAME=	p5-${DISTNAME}
+PKGREVISION=	1
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Hash/}
 
@@ -9,8 +10,6 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://search.cpan.org/dist/Hash-Merge-Simple/
 COMMENT=	Perl 5 module to simply merge two or more hashes recursively
 LICENSE=	${PERL5_LICENSE}
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_LANGUAGES=	# empty
 PERL5_PACKLIST=	auto/Hash/Merge/Simple/.packlist

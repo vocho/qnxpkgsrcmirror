@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.8 2011/08/11 17:17:29 adam Exp $
+# $NetBSD: Makefile,v 1.10 2012/10/31 11:17:55 asau Exp $
 
 DISTNAME=	Data-Dump-Streamer-2.32
 PKGNAME=	p5-${DISTNAME}
+PKGREVISION=	1
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Data/}
 
@@ -9,8 +10,6 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://search.cpan.org/dist/Data-Dump-Streamer/
 COMMENT=	Perl 5 module to serialize a data structure as Perl
 LICENSE=	${PERL5_LICENSE}
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 BUILD_DEPENDS+=	p5-ExtUtils-Depends-[0-9]*:../../devel/p5-ExtUtils-Depends
 DEPENDS+=	p5-Algorithm-Diff-[0-9]*:../../devel/p5-Algorithm-Diff

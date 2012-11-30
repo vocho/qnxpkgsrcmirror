@@ -1,10 +1,8 @@
-$NetBSD: patch-ipc_chromium_Makefile.in,v 1.2 2012/05/08 19:29:36 martin Exp $
+$NetBSD: patch-ipc_chromium_Makefile.in,v 1.5 2012/11/21 15:26:50 ryoon Exp $
 
-# Reported upstream: https://bugzilla.mozilla.org/show_bug.cgi?id=753046
-
---- ipc/chromium/Makefile.in.orig	2012-02-16 06:40:33.000000000 +0000
+--- ipc/chromium/Makefile.in.orig	2012-10-23 19:42:37.000000000 +0000
 +++ ipc/chromium/Makefile.in
-@@ -278,6 +278,34 @@ endif
+@@ -240,6 +240,33 @@ endif
  
  endif # } OS_LINUX
  
@@ -12,7 +10,6 @@ $NetBSD: patch-ipc_chromium_Makefile.in,v 1.2 2012/05/08 19:29:36 martin Exp $
 +
 +CPPSRCS += \
 +  atomicops_internals_x86_gcc.cc \
-+  file_util_bsd.cc \
 +  process_util_bsd.cc \
 +  time_posix.cc \
 +  $(NULL)

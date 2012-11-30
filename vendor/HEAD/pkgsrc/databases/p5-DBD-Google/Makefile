@@ -1,16 +1,14 @@
-# $NetBSD: Makefile,v 1.16 2011/08/06 20:05:05 adam Exp $
+# $NetBSD: Makefile,v 1.18 2012/10/03 21:54:16 wiz Exp $
 
 DISTNAME=	DBD-Google-0.51
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	3
+PKGREVISION=	4
 CATEGORIES=	databases perl5 www
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=DBD/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://search.cpan.org/dist/DBD-Google/
 COMMENT=	Perl DBI/DBD driver for using Google as a datasource
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 DEPENDS+=	p5-DBI>=1.5:../../databases/p5-DBI
 DEPENDS+=	p5-HTML-Parser>=0:../../www/p5-HTML-Parser

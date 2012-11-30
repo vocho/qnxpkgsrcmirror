@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.3 2012/07/22 13:08:05 obache Exp $
+# $NetBSD: Makefile,v 1.5 2012/10/06 14:25:14 asau Exp $
 #
 
 DISTNAME=	libskk-0.0.13
+PKGREVISION=	1
 CATEGORIES=	inputmethod
 MASTER_SITES=	http://cloud.github.com/downloads/ueno/libskk/
 
@@ -9,8 +10,6 @@ MAINTAINER=	obache@NetBSD.org
 HOMEPAGE=	http://github.com/ueno/libskk/
 COMMENT=	Library to deal with Japnese kana-to-kanji conversion method
 LICENSE=	gnu-gpl-v3
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=		yes
 USE_LIBTOOL=		yes

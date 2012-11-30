@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.25 2012/06/15 18:51:32 joerg Exp $
+# $NetBSD: Makefile,v 1.27 2012/10/06 11:55:04 asau Exp $
 
 DISTNAME=	zoom-1.0.3
-PKGREVISION=	8
+PKGREVISION=	9
 CATEGORIES=	games
 MASTER_SITES=	http://www.logicalshift.co.uk/unix/zoom/
 
@@ -18,8 +18,6 @@ GNU_CONFIGURE=		yes
 GCC_REQD+=		3.0
 .endif
 UNLIMIT_RESOURCES+=	datasize
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 DOCDIR=			${PREFIX}/share/doc/html/zoom
 

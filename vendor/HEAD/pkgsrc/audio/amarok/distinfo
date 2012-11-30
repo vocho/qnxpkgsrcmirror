@@ -1,8 +1,8 @@
-$NetBSD: distinfo,v 1.48 2012/03/20 10:28:29 markd Exp $
+$NetBSD: distinfo,v 1.50 2012/11/17 22:04:19 markd Exp $
 
-SHA1 (amarok-2.5.0.tar.bz2) = 9849900d20225e703c43d242650a8fa211cf15f2
-RMD160 (amarok-2.5.0.tar.bz2) = 4506d4b4b1b11378d25ad488f3bdba54cd9b7567
-Size (amarok-2.5.0.tar.bz2) = 46607238 bytes
+SHA1 (amarok-2.6.0.tar.bz2) = 2cfcdabb67436418ba0012075ba105bbb630b48d
+RMD160 (amarok-2.6.0.tar.bz2) = 89b8e3a56390dc240efc7dddd8e97ac9e4a03127
+Size (amarok-2.6.0.tar.bz2) = 42331208 bytes
 SHA1 (patch-ab) = dc89394f02639c27bbcef2954aa199032c6a9ca1
 SHA1 (patch-cmake_modules_FindTagLib.cmake) = 95e195ea376746dbbc16c3fdc88b934cf711199f
 SHA1 (patch-src_context_widgets_RatingWidget.cpp) = 67d84170eacbd139ffa1f8159ad941f0f369a44a

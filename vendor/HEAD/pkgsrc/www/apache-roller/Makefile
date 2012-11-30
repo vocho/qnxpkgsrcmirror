@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.5 2010/09/30 10:49:13 obache Exp $
+# $NetBSD: Makefile,v 1.7 2012/10/28 06:30:09 asau Exp $
 #
 
 DISTNAME=	apache-roller-${ROLLER_VER}
-PKGREVISION=	2
+PKGREVISION=	3
 CATEGORIES=	www
 MASTER_SITES=	${MASTER_SITE_APACHE:=roller/roller-4/v${ROLLER_VER}/bin/}
 
@@ -16,7 +16,6 @@ USE_JAVA=	run
 USE_JAVA2=	1.5
 ROLLER_VER=	4.0.1
 
-PKG_DESTDIR_SUPPORT=	user-destdir
 PLIST_SUBST+=		PKGNAME_NOREV=${PKGNAME_NOREV:Q}
 
 .include "options.mk"

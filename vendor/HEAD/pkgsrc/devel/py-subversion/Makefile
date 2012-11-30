@@ -1,10 +1,8 @@
-# $NetBSD: Makefile,v 1.44 2012/04/27 12:31:46 obache Exp $
+# $NetBSD: Makefile,v 1.47 2012/10/31 11:19:34 asau Exp $
 
 PKGNAME=	${PYPKGPREFIX}-subversion-${SVNVER}
-PKGREVISION=	4
+PKGREVISION=	5
 COMMENT=	Python bindings and tools for Subversion
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 .include "../../devel/subversion/Makefile.common"
 
@@ -14,6 +12,7 @@ CONFIGURE_ENV+=		PYTHON2=${PYTHONBIN:Q}
 
 PY_PATCHPLIST=		YES
 PYTHON_PATCH_SCRIPTS=	tools/hook-scripts/mailer/mailer.py
+PYTHON_SELF_CONFLICT=	YES
 
 BUILD_TARGET=		swig-py
 INSTALL_TARGET=		install-swig-py

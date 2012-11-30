@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.12 2012/06/14 07:45:37 sbd Exp $
+# $NetBSD: Makefile,v 1.17 2012/10/08 23:01:55 adam Exp $
 #
 
 DISTNAME=		scim-m17n-0.2.3
-PKGREVISION=		11
+PKGREVISION=		15
 CATEGORIES=		inputmethod
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=scim/}
 
@@ -10,8 +10,6 @@ MAINTAINER=		obache@NetBSD.org
 HOMEPAGE=		http://www.scim-im.org/
 COMMENT=		SCIM IMEngine module for m17n-lib
 LICENSE=		gnu-gpl-v2
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=		yes
 USE_LIBTOOL=		yes

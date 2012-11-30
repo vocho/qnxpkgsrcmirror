@@ -1,4 +1,4 @@
-.\" $NetBSD: sysbuild.1,v 1.3 2012/08/11 19:32:50 wiz Exp $
+.\" $NetBSD: sysbuild.1,v 1.6 2012/10/13 18:40:33 jmmv Exp $
 .\" Copyright 2012 Google Inc.
 .\" All rights reserved.
 .\"
@@ -26,7 +26,7 @@
 .\" THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 .\" (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 .\" OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-.Dd July 25, 2012
+.Dd October 13, 2012
 .Dt SYSBUILD 1
 .Os
 .Sh NAME
@@ -43,6 +43,11 @@ build
 .Op Fl c Ar config_name
 .Op Fl o Ar variable=value
 config
+.Nm
+.Op Fl c Ar config_name
+.Op Fl o Ar variable=value
+env
+.Op Ar machine
 .Nm
 .Op Fl c Ar config_name
 .Op Fl o Ar variable=value
@@ -104,6 +109,8 @@ The following options apply to all commands:
 .Bl -tag -width XXXX
 .It Fl c Ar config_name
 Specifies the configuration file to use.
+The format of the file is described in
+.Xr sysbuild.conf 5 .
 .Pp
 If
 .Ar config_name
@@ -130,8 +137,7 @@ The
 .Ar variable
 part of the argument must be any of the recognized configuration variables
 described in
-.Sx Configuration file
-below.
+.Xr sysbuild.conf 5 .
 The
 .Ar value ,
 if not empty, specifies the value to set the configuration variable to.
@@ -181,6 +187,67 @@ The format of the output is not a script, so it cannot be fed back into
 The purpose of this command is to aid in debugging the configuration of the
 tool before performing any builds, particularly when the configuration
 files use shell logic to determine the value of any variables.
+.Ss The env command
+The env command prints a shell script snippet that defines environment variables
+to simplify working with the directory layout of a
+.Nx
+build for a particular machine.
+If the
+.Va MACHINES
+variable is not defined, or if it lists more than one machine, then the
+.Ar machine
+argument is required.
+.Pp
+The common mechanism to use these variables is by executing
+.Nm
+in the following way:
+.Bd -literal -offset indent
+$ eval $(sysbuild env)
+.Ed
+.Pp
+The following variables are defined and/or modified:
+.Bl -tag -width PATH
+.It Va PATH
+The path to the tools is prepended to the path.
+Of particular interest is the
+.Pa nbmake-<machine>
+script made available in this way, which allows you to build arbitrary targets
+within the source directory using the tools.
+.It Va D
+Path to the destdir.
+.It Va O
+Path to the objects directory for the source tree.
+.It Va S
+Path to the source tree.
+.It Va T
+Path to the tools.
+Note that this points to the root of the tools, not their
+.Pa bin
+subdirectory.
+.It Va XO
+If
+.Va XSRCDIR
+is defined, path to the objects directory for the X source tree.
+.It Va XS
+If
+.Va XSRCDIR
+is defined, path to the X source tree.
+.El
+.Pp
+And the following functions are defined:
+.Bl -tag -width curobj
+.It Fn curobj
+When invoked from a subdirectory of either src or xsrc, prints the path to that
+same subdirectory within the objects hierarchy.
+You may use this to reference temporary build files easily when you are working
+within the source tree as follows:
+.Bd -literal -offset indent
+$ cd /usr/src/bin/ls
+/usr/src/bin/ls$ nbmake-amd64
+/usr/src/bin/ls$ cd $(curobj)
+/usr/obj/usr/src/bin/ls$
+.Ed
+.El
 .Ss The fetch command
 The fetch command downloads or updates the
 .Nx
@@ -216,119 +283,6 @@ command as root only, set
 to
 .Sq false
 in your user configuration files, and do your builds as another user.
-.Ss Configuration file
-Configuration files for
-.Nm
-are plain shell scripts that define a set of recognized variables.
-.Pp
-As scripts, they can perform any magic they desire to deduce the value of
-the configuration variables.
-For example, the default configuration file shipped with
-.Nm
-automatically deduces the value of the
-.Va NJOBS
-variable by looking at how many CPUs are available in the system.
-.Pp
-The following variables configure the source trees:
-.Bl -tag -width INCREMENTAL_BUILD
-.It Va CVSROOT
-Location of the CVS root from which to check out or update the src and xsrc
-modules.
-.Pp
-Default:
-.Sq :ext:anoncvs@anoncvs.NetBSD.org:/cvsroot
-.It Va CVSTAG
-CVS tag to use during checkouts or updates of the src and xsrc modules.
-.Pp
-Default: not defined.
-.It Va SRCDIR
-Path to the src module.
-If you want
-.Nm
-to perform an update of this directory before every build, you will need
-write access to it.
-Otherwise, you can use a read-only directory.
-.Pp
-Default:
-.Pa /usr/src .
-.It Va UPDATE_SOURCES
-Whether to perform an update of the source tree before every build or not.
-.Pp
-Default:
-.Sq true .
-.It Va XSRCDIR
-Path to the xsrc module.
-If you want
-.Nm
-to perform an update of this directory before every build, you will need
-write access to it.
-Otherwise, you can use a read-only directory.
-.Pp
-Defining this variable causes
-.Nm
-to build the X Window System as part of the build of
-.Nx .
-.Pp
-Default: not defined.
-.El
-.Pp
-The following variables configure the location of the build files:
-.Bl -tag -width INCREMENTAL_BUILD
-.It Va BUILD_ROOT
-Path to the directory in which to place build files.
-These include the obj tree, the destdir and the cross-build tools generated
-by the
-.Nm build.sh
-script.
-The contents of this directory are sorted by machine type so that it can be
-shared across builds for different machines.
-.Pp
-Default:
-.Pa ~/sysbuild/ .
-.It Va RELEASEDIR
-Path to the directory that will contain the build products (aka the release
-files).
-The contents of this directory are sorted by machine type so that it can be
-shared across builds for different machines.
-.Pp
-Default:
-.Pa ~/sysbuild/release .
-.El
-.Pp
-The following variables configure the build process:
-.Bl -tag -width INCREMENTAL_BUILD
-.It Va BUILD_TARGETS
-Whitespace-separated list of targets to pass to
-.Nm build.sh
-during builds.
-.Pp
-Default:
-.Sq release .
-.It Va INCREMENTAL_BUILD
-Whether to perform update builds or not.
-An update build reuses existing obj, destdir and tools trees.
-.Pp
-Of special note is that
-.Nm
-will take care of pruning files likely to cause breakage during update
-builds before performing the build itself.
-As an example, this includes deleting all the modules from
-.Pa destdir/stand/<platform>/ .
-.Pp
-Default:
-.Sq false .
-.It Va MACHINES
-Whitespace-separated list of machine types to build for.
-.Pp
-Default: the name of the host machine type.
-.It Va NJOBS
-Number of parallel jobs to use during the build.
-If not set, disables parallel builds (which, due to
-.Nm make 1
-semantics, is not the same as setting this to 1).
-.Pp
-Default: not defined.
-.El
 .Sh FILES
 .Bl -tag -width XXXX
 .It Pa @SYSBUILD_ETCDIR@/
@@ -350,6 +304,7 @@ flag is not provided.
 .Sh SEE ALSO
 .Xr cvs 1 ,
 .Xr sysbuild4cron 1 ,
+.Xr sysbuild.conf 5 ,
 .Xr hier 7 ,
 .Pa /usr/src/BUILDING
 .Sh AUTHORS

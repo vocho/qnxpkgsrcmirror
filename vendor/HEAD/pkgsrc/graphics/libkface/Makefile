@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.2 2012/06/14 07:43:33 sbd Exp $
+# $NetBSD: Makefile,v 1.7 2012/10/08 23:01:04 adam Exp $
 #
 
 PKGNAME=	libkface-2.5.0
 DISTNAME=	digikam-2.5.0
-PKGREVISION=	1
+PKGREVISION=	5
 CATEGORIES=	graphics
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=digikam/}
 EXTRACT_SUFX=	.tar.bz2
@@ -14,8 +14,6 @@ COMMENT=	LibFace Library interface for KDE
 LICENSE=	gnu-gpl-v2
 
 BUILD_DEPENDS+=	automoc4>=0.9.83:../../devel/automoc4
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_LANGUAGES=		c c++
 USE_TOOLS+=		pkg-config

@@ -1,13 +1,12 @@
-# $NetBSD: Makefile,v 1.9 2012/04/14 04:27:49 obache Exp $
+# $NetBSD: Makefile,v 1.11 2012/10/31 11:19:41 asau Exp $
 #
 
 PKGNAME=		${RUBY_PKGPREFIX}-gnome2-gio-${VERSION}
 COMMENT=		Ruby binding of gio-2.0.x
+PKGREVISION=		1
 CATEGORIES=		devel
 
 CONFLICTS+=		ruby[0-9][0-9]-gnome2-gio-[0-9]*
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 RUBY_EXTCONF_SUBDIRS=	gio2
 

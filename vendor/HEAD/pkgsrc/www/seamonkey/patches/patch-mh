@@ -1,6 +1,6 @@
-$NetBSD: patch-mh,v 1.4 2012/04/28 22:48:06 ryoon Exp $
+$NetBSD: patch-mh,v 1.6 2012/11/23 17:28:49 ryoon Exp $
 
---- mozilla/security/nss/lib/Makefile.orig	2012-04-23 06:28:17.000000000 +0000
+--- mozilla/security/nss/lib/Makefile.orig	2012-11-18 10:19:50.000000000 +0000
 +++ mozilla/security/nss/lib/Makefile
 @@ -70,7 +70,7 @@ endif
  

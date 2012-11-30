@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.67 2012/08/21 21:31:47 marino Exp $
+# $NetBSD: Makefile,v 1.71 2012/11/24 21:38:49 adam Exp $
 
 DISTNAME=	tcl${TCL_VERSION}-src
 PKGNAME=	tcl-${TCL_VERSION}
@@ -12,15 +12,13 @@ LICENSE=	2-clause-bsd
 
 .include "../../lang/tcl/Makefile.version"
 
-PKG_DESTDIR_SUPPORT=	user-destdir
-
 WRKSRC=			${WRKDIR}/tcl${TCL_VERSION}
 
 GNU_CONFIGURE=		yes
 CONFIGURE_DIRS=		unix
 BUILD_DIRS=		${CONFIGURE_DIRS}
 
-CONFIGURE_ARGS+=	--prefix=${PREFIX:Q}
+CONFIGURE_ARGS+=	--prefix=${PREFIX}
 INSTALL_TARGET=		install
 
 # The test target gives better results when not run as root.

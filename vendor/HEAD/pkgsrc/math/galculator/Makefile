@@ -1,16 +1,14 @@
-# $NetBSD: Makefile,v 1.28 2012/06/14 07:45:41 sbd Exp $
+# $NetBSD: Makefile,v 1.33 2012/10/08 23:02:01 adam Exp $
 #
 
 DISTNAME=		galculator-1.3.4
-PKGREVISION=		10
+PKGREVISION=		14
 CATEGORIES=		math
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=galculator/}
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://galculator.sourceforge.net/
 COMMENT=		Desktop calculator with scientific / RPN modes
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_PKGLOCALEDIR=	yes
 GNU_CONFIGURE=		yes

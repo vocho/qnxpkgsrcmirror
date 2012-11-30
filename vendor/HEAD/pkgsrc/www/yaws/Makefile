@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.3 2012/03/20 16:25:51 dholland Exp $
+# $NetBSD: Makefile,v 1.5 2012/10/28 06:31:10 asau Exp $
 #
 
 DISTNAME=		yaws-1.91
+PKGREVISION=		1
 CATEGORIES=		www
 MASTER_SITES=		http://yaws.hyber.org/download/
 
@@ -11,8 +12,6 @@ COMMENT=		High perfomance HTTP 1.1 webserver written in Erlang
 LICENSE=		modified-bsd
 
 BUILD_DEFS+=		VARBASE
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=		gmake perl pax autoconf
 GNU_CONFIGURE=		yes

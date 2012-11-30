@@ -1,16 +1,14 @@
-# $NetBSD: Makefile,v 1.7 2012/03/03 12:54:18 wiz Exp $
+# $NetBSD: Makefile,v 1.9 2012/10/06 14:25:19 asau Exp $
 #
 
 DISTNAME=	skktools-1.3.1
-PKGREVISION=	5
+PKGREVISION=	6
 CATEGORIES=	japanese inputmethod
 MASTER_SITES=	http://openlab.ring.gr.jp/skk/tools/
 
 MAINTAINER=	ryoon@NetBSD.org
 HOMEPAGE=	http://openlab.ring.gr.jp/skk/
 COMMENT=	SKK dictionary manipulation tools
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 CONFLICTS=	skkserv<3.9.4nb7
 

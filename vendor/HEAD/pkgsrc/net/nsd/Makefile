@@ -1,14 +1,12 @@
-# $NetBSD: Makefile,v 1.56 2012/07/20 16:28:49 wiz Exp $
+# $NetBSD: Makefile,v 1.59 2012/11/04 22:17:41 pettai Exp $
 
-DISTNAME=	nsd-3.2.12
+DISTNAME=	nsd-3.2.14
 CATEGORIES=	net
 MASTER_SITES=	http://www.nlnetlabs.nl/downloads/nsd/
 
 MAINTAINER=	joerg@NetBSD.org
 HOMEPAGE=	http://www.nlnetlabs.nl/nsd/index.html
 COMMENT=	Authoritative-only DNS server
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 BUILDLINK_API_DEPENDS.openssl+=	openssl>=0.9.7
 

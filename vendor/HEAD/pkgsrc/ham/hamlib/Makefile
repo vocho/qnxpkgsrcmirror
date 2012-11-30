@@ -1,16 +1,16 @@
-# $NetBSD: Makefile,v 1.30 2012/08/07 12:21:54 gdt Exp $
+# $NetBSD: Makefile,v 1.33 2012/11/02 23:54:45 gdt Exp $
 #
 
-DISTNAME=	hamlib-1.2.15.2
+DISTNAME=	hamlib-1.2.15.3
 CATEGORIES=	ham
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=hamlib/}
 
 MAINTAINER=	gdt@NetBSD.org
 HOMEPAGE=	http://hamlib.sourceforge.net/
 COMMENT=	API for digital communications equipment
+LICENSE=	gnu-gpl-v2 AND gnu-lgpl-v2.1
 
-PKG_DESTDIR_SUPPORT=	user-destdir
-
+# As of 2012-11-02, there seems to be no good reason to set this.
 MAKE_JOBS_SAFE=		no
 
 USE_LANGUAGES=	c c++

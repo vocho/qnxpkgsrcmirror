@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.45 2012/07/02 16:24:34 drochner Exp $
+# $NetBSD: Makefile,v 1.51 2012/10/28 06:30:22 asau Exp $
 
-DISTNAME=	midori-0.4.6
-PKGREVISION=	1
+DISTNAME=	midori-0.4.7
 CATEGORIES=	www
 MASTER_SITES=	http://archive.xfce.org/src/apps/midori/0.4/
 
@@ -14,7 +13,6 @@ HAS_CONFIGURE=	yes
 USE_LIBTOOL=	yes
 USE_TOOLS+=	gmake intltool msgfmt pkg-config
 
-PKG_DESTDIR_SUPPORT=	user-destdir
 CONFIGURE_ARGS+=	--prefix=${PREFIX:Q}
 
 CHECK_PORTABILITY_SKIP+= win32/x86-mingw32-opensuse/install.sh
@@ -68,6 +66,7 @@ pre-configure:
 .include "../../lang/python/application.mk"
 BUILDLINK_API_DEPENDS.libsoup24+=libsoup24>=2.26.0
 .include "../../net/libsoup24/buildlink3.mk"
+#.include "../../security/gnome-keyring/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../textproc/libxml2/buildlink3.mk"
 .include "../../www/webkit-gtk/buildlink3.mk"
@@ -75,5 +74,5 @@ BUILDLINK_API_DEPENDS.libsoup24+=libsoup24>=2.26.0
 .include "../../sysutils/libnotify/buildlink3.mk"
 .include "../../x11/gtk2/buildlink3.mk"
 BUILDLINK_DEPMETHOD.vala= build
-.include "../../lang/vala016/buildlink3.mk"
+.include "../../lang/vala018/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

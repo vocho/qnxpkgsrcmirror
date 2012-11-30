@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.27 2012/07/18 23:23:20 marino Exp $
+# $NetBSD: Makefile,v 1.29 2012/10/23 10:24:03 wiz Exp $
 
 DISTNAME=	fMSX351
 PKGNAME=	fmsx-3.5.1
@@ -16,8 +16,6 @@ NO_BIN_ON_CDROM=	${RESTRICTED}
 NO_BIN_ON_FTP=		${RESTRICTED}
 NO_SRC_ON_CDROM=	${RESTRICTED}
 NO_SRC_ON_FTP=		${RESTRICTED}
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 WRKSRC=	${WRKDIR}
 
@@ -64,6 +62,5 @@ do-install:
 
 .include "../../devel/zlib/buildlink3.mk"
 .include "../../x11/libXext/buildlink3.mk"
-.include "../../x11/xextproto/buildlink3.mk"
 .include "../../mk/pthread.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

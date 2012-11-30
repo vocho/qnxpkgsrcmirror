@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.6 2012/08/21 23:43:46 gdt Exp $
+# $NetBSD: Makefile,v 1.8 2012/10/23 17:19:02 asau Exp $
 #
 
 DISTNAME=	foolscap-0.6.4
@@ -16,14 +16,9 @@ DEPENDS+=	${PYPKGPREFIX}-ZopeInterface>=3.6.1:../../devel/py-ZopeInterface
 DEPENDS+=	${PYPKGPREFIX}-twisted-[0-9]*:../../net/py-twisted
 DEPENDS+=	${PYPKGPREFIX}-OpenSSL>=0.6:../../security/py-OpenSSL
 
-PKG_DESTDIR_SUPPORT=	user-destdir
-
 TEST_TARGET=	test
 
 USE_LANGUAGES=	# none
-
-# Why?
-PYTHON_VERSIONS_ACCEPTED= 27 26
 
 INSTALLATION_DIRS+=	share/doc/py-foolscap
 

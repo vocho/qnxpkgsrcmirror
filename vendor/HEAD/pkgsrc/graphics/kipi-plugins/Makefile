@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.72 2012/07/02 13:37:38 adam Exp $
+# $NetBSD: Makefile,v 1.78 2012/10/08 23:01:46 adam Exp $
 #
 
 PKGNAME=	kipi-plugins-2.5.0
 DISTNAME=	digikam-2.5.0
-PKGREVISION=	3
+PKGREVISION=	8
 CATEGORIES=	graphics
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=digikam/}
 EXTRACT_SUFX=	.tar.bz2
@@ -16,8 +16,6 @@ COMMENT=	Common plugin structure for KDE4 programs
 BUILD_DEPENDS+=	automoc4>=0.9.83:../../devel/automoc4
 DEPENDS+=	ImageMagick-[0-9]*:../../graphics/ImageMagick
 DEPENDS+=	xdg-utils-[0-9]*:../../misc/xdg-utils
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_PKGLOCALEDIR=	yes
 USE_LANGUAGES=		c c++

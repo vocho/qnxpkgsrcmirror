@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.103 2011/11/01 06:02:21 sbd Exp $
+# $NetBSD: Makefile,v 1.105 2012/10/23 17:18:38 asau Exp $
 
 DISTNAME=	mrtg-2.17.2
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	net
 MASTER_SITES=	http://oss.oetiker.ch/mrtg/pub/ \
 		http://oss.oetiker.ch/mrtg/pub/old/
@@ -10,8 +10,6 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://oss.oetiker.ch/mrtg/
 COMMENT=	The Multi-Router Traffic Grapher
 LICENSE=	gnu-gpl-v2
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=		perl:run
 PERL5_REQD=		5.14.1

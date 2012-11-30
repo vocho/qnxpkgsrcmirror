@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.18 2012/03/03 00:13:59 wiz Exp $
+# $NetBSD: Makefile,v 1.20 2012/10/23 19:51:26 asau Exp $
 
 VERS=		3.2.4
 DISTNAME=	syslog-ng_${VERS}
 PKGNAME=	syslog-ng-${VERS}
-PKGREVISION=	4
+PKGREVISION=	5
 CATEGORIES=	sysutils
 MASTER_SITES=	http://www.balabit.com/downloads/files/syslog-ng/open-source-edition/${VERS}/source/
 WRKSRC=		${WRKDIR}/${PKGNAME_NOREV}
@@ -12,8 +12,6 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.balabit.com/network-security/syslog-ng/
 COMMENT=	Syslog-ng tries to fill the gaps original syslogd's were lacking
 LICENSE=	gnu-gpl-v2
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=	flex pkg-config gmake awk:run
 USE_LIBTOOL=	YES

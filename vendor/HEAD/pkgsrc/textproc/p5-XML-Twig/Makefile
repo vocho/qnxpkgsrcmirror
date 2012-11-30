@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.22 2012/01/26 13:05:56 rhaen Exp $
+# $NetBSD: Makefile,v 1.24 2012/10/25 06:56:41 asau Exp $
 #
 
 DISTNAME=	XML-Twig-3.39
 PKGNAME=	p5-${DISTNAME}
+PKGREVISION=	1
 SVR4_PKGNAME=	p5xtw
 CATEGORIES=	textproc perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=XML/}
@@ -33,7 +34,6 @@ DEPENDS+=	p5-XML-Parser>=2.23:../../textproc/p5-XML-Parser
 #DEPENDS+=	p5-libwww-[0-9]*:../../www/p5-libwww
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 PERL5_PACKLIST=		auto/XML/Twig/.packlist
 MAKE_ENV+=		PERL_MM_USE_DEFAULT=1

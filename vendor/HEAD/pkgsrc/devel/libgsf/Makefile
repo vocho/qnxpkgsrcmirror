@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.79 2012/06/14 07:43:08 sbd Exp $
+# $NetBSD: Makefile,v 1.82 2012/11/23 17:12:23 drochner Exp $
 #
 
-DISTNAME=	libgsf-1.14.22
-PKGREVISION=	3
+DISTNAME=	libgsf-1.14.25
 CATEGORIES=	devel gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/libgsf/1.14/}
 EXTRACT_SUFX=	.tar.xz
@@ -11,8 +10,6 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.gnome.org/
 COMMENT=	GNOME2 structured file library
 LICENSE=	gnu-gpl-v2 AND gnu-lgpl-v2.1
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=		gmake intltool msgfmt pkg-config
 GNU_CONFIGURE=		YES

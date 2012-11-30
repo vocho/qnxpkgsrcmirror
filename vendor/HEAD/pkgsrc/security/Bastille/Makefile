@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.6 2012/06/14 07:45:13 sbd Exp $
+# $NetBSD: Makefile,v 1.8 2012/10/23 18:16:19 asau Exp $
 #
 
 DISTNAME=	Bastille-3.0.9
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	security
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=bastille-linux/}
 EXTRACT_SUFX=	.tar.bz2
@@ -10,8 +10,6 @@ EXTRACT_SUFX=	.tar.bz2
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://bastille-linux.sourceforge.net/
 COMMENT=	System hardening tool focusing on educating the user
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 WRKSRC=			${WRKDIR}/Bastille
 CONFIGURE_ENV+=		GCONF_SCHEMA_FILE_DIR=${PREFIX:Q}/share/gconf/schemas/

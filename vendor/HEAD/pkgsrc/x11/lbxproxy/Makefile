@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.4 2010/06/26 00:39:59 joerg Exp $
+# $NetBSD: Makefile,v 1.6 2012/10/29 05:06:32 asau Exp $
 #
 
 DISTNAME=		lbxproxy-1.0.2
@@ -10,8 +10,6 @@ MAINTAINER=		joerg@NetBSD.org
 HOMEPAGE=		http://xorg.freedesktop.org/
 COMMENT=		Low Bandwidth extension proxy
 
-PKG_DESTDIR_SUPPORT=	user-destdir
-
 GNU_CONFIGURE=		yes
 USE_TOOLS+=		pkg-config
 
@@ -22,6 +20,5 @@ BROKEN=			Unsupported by modern X.org
 .include "../../x11/libXext/buildlink3.mk"
 .include "../../x11/liblbxutil/buildlink3.mk"
 .include "../../x11/xproxymanagementprotocol/buildlink3.mk"
-.include "../../x11/xextproto/buildlink3.mk"
 .include "../../x11/xtrans/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

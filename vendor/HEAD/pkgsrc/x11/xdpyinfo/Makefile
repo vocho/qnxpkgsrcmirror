@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.9 2012/07/29 19:48:35 wiz Exp $
+# $NetBSD: Makefile,v 1.11 2012/10/29 05:07:01 asau Exp $
 #
 
 DISTNAME=	xdpyinfo-1.3.0
@@ -9,8 +9,6 @@ EXTRACT_SUFX=	.tar.bz2
 MAINTAINER=	joerg@NetBSD.org
 HOMEPAGE=	http://xorg.freedesktop.org/
 COMMENT=	Display information utility for X
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=	yes
 USE_TOOLS+=	pkg-config
@@ -26,5 +24,4 @@ USE_TOOLS+=	pkg-config
 .include "../../x11/libXxf86dga/buildlink3.mk"
 .include "../../x11/libXxf86misc/buildlink3.mk"
 .include "../../x11/libXxf86vm/buildlink3.mk"
-.include "../../x11/xextproto/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

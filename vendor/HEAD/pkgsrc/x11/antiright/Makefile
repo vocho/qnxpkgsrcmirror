@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.18 2012/07/30 01:38:19 dholland Exp $
+# $NetBSD: Makefile,v 1.23 2012/10/29 05:06:07 asau Exp $
 #
 
 DISTNAME=	antiright-3.4
-PKGREVISION=	12
+PKGREVISION=	16
 CATEGORIES=	x11
 MASTER_SITES=	http://download.savannah.nongnu.org/releases/antiright/
 EXTRACT_SUFX=	.tar.bz2
@@ -12,8 +12,6 @@ HOMEPAGE=	http://www.nongnu.org/antiright/
 COMMENT=	The gtkshell GUI creator, gshterm, and ACE desktop implementation
 
 MAKE_JOBS_SAFE=		no
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 HAS_CONFIGURE=	YES
 USE_LANGUAGES=	c

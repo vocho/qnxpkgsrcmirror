@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.35 2012/08/06 15:33:07 adam Exp $
+# $NetBSD: Makefile,v 1.37 2012/10/28 06:30:59 asau Exp $
 
-DJANGOVERS=	1.4.1
+DJANGOVERS=	1.4.2
 DISTNAME=	Django-${DJANGOVERS}
 PKGNAME=	${PYPKGPREFIX}-django-${DJANGOVERS}
 CATEGORIES=	www python
@@ -14,8 +14,6 @@ LICENSE=	modified-bsd
 PREV_PKGPATH=	www/py-django-devel
 
 PLIST_SUBST+=	PYVERSSUFFIX=${PYVERSSUFFIX:Q}
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_LANGUAGES=		# empty
 REPLACE_PYTHON=		${WRKSRC}/django/bin/*.py

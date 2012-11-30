@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.49 2012/08/13 14:25:44 wiz Exp $
+# $NetBSD: Makefile,v 1.54 2012/10/08 23:00:53 adam Exp $
 #
 
 PKGVER=		0.8.4
 DISTNAME=	compiz-${PKGVER}
-PKGREVISION=	21
+PKGREVISION=	25
 CATEGORIES=	wm x11
 MASTER_SITES=	http://releases.compiz.org/${PKGVER}/
 
@@ -11,8 +11,6 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://compiz.org/
 COMMENT=	Compositing window manager
 LICENSE=	mit
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=		yes
 USE_TOOLS+=		intltool pkg-config msgfmt gmake

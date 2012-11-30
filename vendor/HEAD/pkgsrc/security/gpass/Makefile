@@ -1,16 +1,14 @@
-# $NetBSD: Makefile,v 1.40 2012/07/01 19:05:24 dholland Exp $
+# $NetBSD: Makefile,v 1.45 2012/10/23 18:16:29 asau Exp $
 #
 
 DISTNAME=	gpass-0.4.4
-PKGREVISION=	29
+PKGREVISION=	33
 CATEGORIES=	security gnome
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=gpass/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://gpass.sourceforge.net/
 COMMENT=	GNOME Password Manager
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=		pkg-config
 GNU_CONFIGURE=		YES

@@ -1,16 +1,14 @@
-# $NetBSD: Makefile,v 1.52 2012/03/03 00:13:15 wiz Exp $
+# $NetBSD: Makefile,v 1.58 2012/10/08 23:01:45 adam Exp $
 #
 
 DISTNAME=	gtkam-0.1.18
-PKGREVISION=	1
+PKGREVISION=	6
 CATEGORIES=	graphics
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=gphoto/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://gphoto.sourceforge.net/proj/gtkam/
 COMMENT=	Digital camera access graphical client (GTK2)
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_LIBTOOL=		YES
 USE_PKGLOCALEDIR=	YES

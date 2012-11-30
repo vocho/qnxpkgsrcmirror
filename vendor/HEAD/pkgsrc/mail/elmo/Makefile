@@ -1,16 +1,14 @@
-# $NetBSD: Makefile,v 1.17 2011/04/22 13:44:02 obache Exp $
+# $NetBSD: Makefile,v 1.19 2012/10/08 12:19:09 asau Exp $
 #
 
 DISTNAME=		elmo-1.3.2
-PKGREVISION=		5
+PKGREVISION=		6
 CATEGORIES=		mail
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=elmo/}
 
 MAINTAINER=		pkg@burningsoda.com
 HOMEPAGE=		http://elmo.sourceforge.net/
 COMMENT=		The ELectronic Mail Operator MUA
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_LANGUAGES=		c c++
 USE_PKGLOCALEDIR=	yes

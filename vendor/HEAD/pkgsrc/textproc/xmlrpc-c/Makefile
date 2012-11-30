@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.26 2012/07/25 20:08:16 adam Exp $
+# $NetBSD: Makefile,v 1.28 2012/11/14 16:43:10 adam Exp $
 
-DISTNAME=	xmlrpc-c-1.16.42
+DISTNAME=	xmlrpc-c-1.16.43
 # the "super stable" branch
 PKGNAME=	${DISTNAME:S/-c-/-c-ss-/}
 CATEGORIES=	textproc devel
@@ -14,8 +14,6 @@ LICENSE=	modified-bsd
 
 CONFLICTS+=	xmlrpc-c-[0-9]*
 SUPERSEDES+=	xmlrpc-c-[0-9]*
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 # Sometimes can't open ../xmltok/libxmlrpc_xmltok.la
 MAKE_JOBS_SAFE=		no

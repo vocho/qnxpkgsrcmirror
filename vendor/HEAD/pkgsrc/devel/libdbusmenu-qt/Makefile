@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.9 2012/06/09 22:54:47 markd Exp $
+# $NetBSD: Makefile,v 1.14 2012/10/31 11:17:12 asau Exp $
 #
 
 DISTNAME=	libdbusmenu-qt-0.9.2
+PKGREVISION=	4
 CATEGORIES=	devel
 MASTER_SITES=	http://launchpad.net/libdbusmenu-qt/trunk/0.9.2/+download/
 EXTRACT_SUFX=	.tar.bz2
@@ -10,8 +11,6 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://people.canonical.com/~agateau/dbusmenu/index.html
 COMMENT=	Dbusmenu library for Qt
 LICENSE=	gnu-lgpl-v2.1
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 FETCH_USING=	curl
 

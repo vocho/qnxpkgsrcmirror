@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.31 2012/07/31 08:00:28 jperkin Exp $
+# $NetBSD: Makefile,v 1.36 2012/10/29 05:07:01 asau Exp $
 #
 
 DISTNAME=		Xdialog-2.3.1
 PKGNAME=		${DISTNAME:S/^X/x/}
-PKGREVISION=		9
+PKGREVISION=		13
 CATEGORIES=		x11 misc
 MASTER_SITES=		http://xdialog.free.fr/
 EXTRACT_SUFX=		.tar.bz2
@@ -12,8 +12,6 @@ MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://xdialog.free.fr/
 COMMENT=		X11 drop-in replacement for the curses dialog program
 LICENSE=		gnu-gpl-v2
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=		msgfmt
 USE_PKGLOCALEDIR=	YES

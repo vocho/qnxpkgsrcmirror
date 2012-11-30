@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.2 2012/08/15 21:21:15 jmmv Exp $
+# $NetBSD: Makefile,v 1.6 2012/10/23 19:51:26 asau Exp $
 
-DISTNAME=	sysupgrade-1.1
+DISTNAME=	sysupgrade-1.4
 CATEGORIES=	sysutils
 MASTER_SITES=	# empty
 DISTFILES=	# empty
@@ -10,7 +10,6 @@ COMMENT=	Automate upgrades of NetBSD
 LICENSE=	modified-bsd
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 WRKSRC=			${WRKDIR}
 NO_CONFIGURE=		YES

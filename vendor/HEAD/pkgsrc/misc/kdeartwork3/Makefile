@@ -1,11 +1,9 @@
-# $NetBSD: Makefile,v 1.65 2012/06/14 07:44:11 sbd Exp $
+# $NetBSD: Makefile,v 1.67 2012/10/08 09:57:26 asau Exp $
 
 DISTNAME=	kdeartwork-${_KDE_VERSION}
-PKGREVISION=	15
+PKGREVISION=	16
 CATEGORIES=	misc
 COMMENT=	Artwork for the KDE integrated X11 desktop
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 .include "../../meta-pkgs/kde3/Makefile.kde3"
 

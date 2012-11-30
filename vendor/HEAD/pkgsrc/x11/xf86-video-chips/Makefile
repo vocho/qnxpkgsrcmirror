@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.8 2010/09/14 11:03:12 wiz Exp $
+# $NetBSD: Makefile,v 1.10 2012/10/29 05:07:03 asau Exp $
 #
 
 DISTNAME=	xf86-video-chips-1.2.1
@@ -11,11 +11,15 @@ MAINTAINER=	joerg@NetBSD.org
 HOMEPAGE=	http://xorg.freedesktop.org/
 COMMENT=	Modular Xorg Chips and Technologies video driver
 
-PKG_DESTDIR_SUPPORT=	user-destdir
-
 USE_LIBTOOL=	yes
 GNU_CONFIGURE=	yes
 USE_TOOLS+=	pkg-config
+
+.include "../../mk/bsd.prefs.mk"
+
+.if ${OPSYS} == "SunOS"
+CONFIGURE_ENV+=	DRIVER_MAN_SUFFIX=4
+.endif
 
 .include "../../x11/modular-xorg-server/buildlink3.mk"
 .include "../../x11/randrproto/buildlink3.mk"

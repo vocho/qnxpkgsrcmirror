@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.9 2012/04/22 14:00:44 obache Exp $
+# $NetBSD: Makefile,v 1.11 2012/10/06 14:25:11 asau Exp $
 #
 
 DISTNAME=	ibus-hangul-1.4.1
+PKGREVISION=	1
 CATEGORIES=	inputmethod korean
 MASTER_SITES=	http://ibus.googlecode.com/files/
 
@@ -9,8 +10,6 @@ MAINTAINER=	obache@NetBSD.org
 HOMEPAGE=	http://code.google.com/p/ibus/
 COMMENT=	Hangul engine for IBus input platform
 LICENSE=	gnu-gpl-v2
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=		yes
 USE_LIBTOOL=		yes

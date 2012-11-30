@@ -1,4 +1,4 @@
-# $NetBSD: buildlink3.mk,v 1.4 2012/06/14 07:43:35 sbd Exp $
+# $NetBSD: buildlink3.mk,v 1.8 2012/10/08 23:00:43 adam Exp $
 
 BUILDLINK_TREE+=	libdesktop-agnostic
 
@@ -6,7 +6,7 @@ BUILDLINK_TREE+=	libdesktop-agnostic
 LIBDESKTOP_AGNOSTIC_BUILDLINK3_MK:=
 
 BUILDLINK_API_DEPENDS.libdesktop-agnostic+=	libdesktop-agnostic>=0.3.92
-BUILDLINK_ABI_DEPENDS.libdesktop-agnostic+=	libdesktop-agnostic>=0.3.92nb3
+BUILDLINK_ABI_DEPENDS.libdesktop-agnostic+=	libdesktop-agnostic>=0.3.92nb7
 BUILDLINK_PKGSRCDIR.libdesktop-agnostic?=	../../x11/libdesktop-agnostic
 
 .include "../../lang/vala014/buildlink3.mk"

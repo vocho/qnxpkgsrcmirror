@@ -1,16 +1,16 @@
-# $NetBSD: Makefile,v 1.76 2012/08/18 08:49:42 ryoon Exp $
+# $NetBSD: Makefile,v 1.81 2012/11/17 21:46:44 markd Exp $
 
-DISTNAME=	transcode-1.1.5
-PKGREVISION=	14
+DISTNAME=	transcode-1.1.7
+PKGREVISION=	1
 CATEGORIES=	multimedia
-MASTER_SITES=	http://download.berlios.de/tcforge/
+#MASTER_SITES=	http://download.berlios.de/tcforge/
+MASTER_SITES=	http://bitbucket.org/france/transcode-tcforge/downloads/
 EXTRACT_SUFX=	.tar.bz2
+FETCH_USING=	curl
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://tcforge.berlios.de/
 COMMENT=	Command line video-stream processing tool
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_LANGUAGES=		c c++
 USE_LIBTOOL=		yes
@@ -63,7 +63,6 @@ LIBS+=			${LIBOSSAUDIO}
 .include "../../x11/libXext/buildlink3.mk"
 .include "../../x11/libXpm/buildlink3.mk"
 .include "../../x11/libXv/buildlink3.mk"
-.include "../../x11/xextproto/buildlink3.mk"
 .include "../../mk/oss.buildlink3.mk"
 .endif
 .include "../../mk/jpeg.buildlink3.mk"

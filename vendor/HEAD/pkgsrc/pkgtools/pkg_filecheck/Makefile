@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.32 2012/03/01 16:31:55 hans Exp $
+# $NetBSD: Makefile,v 1.34 2012/10/03 21:57:15 wiz Exp $
 #
 
 DISTNAME=		pkg_filecheck-0.4
+PKGREVISION=		1
 CATEGORIES=		pkgtools devel
 MASTER_SITES=		# empty
 DISTFILES=		# empty
@@ -9,8 +10,6 @@ DISTFILES=		# empty
 MAINTAINER=		pkgsrc-users@NetBSD.org
 #HOMEPAGE=		http://www.NetBSD.org/docs/pkgsrc/
 COMMENT=		Check for files not owned by any package
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 WRKSRC=		${WRKDIR}
 USE_TOOLS+=	perl:run

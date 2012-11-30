@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.1.1.1 2012/03/21 22:11:56 mspo Exp $
+# $NetBSD: Makefile,v 1.3 2012/10/03 21:54:25 wiz Exp $
 #
 
 DISTNAME=	percona-toolkit-2.0.4
+PKGREVISION=	1
 CATEGORIES=	databases
 MASTER_SITES=	http://www.percona.com/redir/downloads/percona-toolkit/${PKGVERSION}/
 
@@ -11,7 +12,6 @@ COMMENT=	Advanced command-line tools for open-source databases (MySQL)
 LICENSE=	gnu-gpl-v2
 
 USE_TOOLS+=	perl
-PKG_DESTDIR_SUPPORT=	user-destdir
 FETCH_USING=		curl
 
 REPLACE_PERL+=	bin/*

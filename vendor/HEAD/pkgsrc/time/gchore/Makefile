@@ -1,16 +1,14 @@
-# $NetBSD: Makefile,v 1.15 2012/06/14 07:45:21 sbd Exp $
+# $NetBSD: Makefile,v 1.20 2012/10/08 23:02:28 adam Exp $
 #
 
 DISTNAME=	gchore-1.0
-PKGREVISION=	13
+PKGREVISION=	17
 CATEGORIES=	x11 time
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=gchore/}
 
 MAINTAINER=	root@garbled.net
 HOMEPAGE=	http://gchore.sourceforge.net/
 COMMENT=	Chore reminder tool with gtk UI
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=		pkg-config
 GNU_CONFIGURE=		YES

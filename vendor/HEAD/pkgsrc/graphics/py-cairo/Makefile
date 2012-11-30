@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.32 2012/04/08 19:08:57 wiz Exp $
+# $NetBSD: Makefile,v 1.37 2012/10/06 14:11:16 asau Exp $
 #
 
 DISTNAME=		py2cairo-1.8.10
 PKGNAME=		${PYPKGPREFIX}-${DISTNAME:S/py2//}
-PKGREVISION=		2
+PKGREVISION=		5
 CATEGORIES=		graphics
 MASTER_SITES=		http://cairographics.org/releases/
 
@@ -11,8 +11,6 @@ MAINTAINER=		leuzi@trash.net
 HOMEPAGE=		http://cairographics.org/pycairo/
 COMMENT=		Python bindings for cairo
 LICENSE=		gnu-lgpl-v2.1 OR mpl-1.1
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 WRKSRC=			${WRKDIR}/${DISTNAME:S/py2/py/}
 
@@ -24,6 +22,8 @@ CONFIGURE_ENV+=		PYTHON=${PYTHONBIN:Q}
 
 PKGCONFIG_OVERRIDE+=	pycairo.pc.in
 PY_PATCHPLIST=		yes
+
+PYTHON_SELF_CONFLICT=	yes
 
 .include "../../mk/compiler.mk"
 

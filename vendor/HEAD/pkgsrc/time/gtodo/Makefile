@@ -1,16 +1,14 @@
-# $NetBSD: Makefile,v 1.40 2012/07/01 19:05:27 dholland Exp $
+# $NetBSD: Makefile,v 1.45 2012/10/08 23:02:29 adam Exp $
 #
 
 DISTNAME=	gtodo-0.14
-PKGREVISION=	26
+PKGREVISION=	30
 CATEGORIES=	time gnome
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=gtodo/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.sarine.nl/gnome-task-list-manager
 COMMENT=	To-do list manager for the GNOME desktop
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=		YES
 USE_TOOLS+=		gmake intltool msgfmt pkg-config

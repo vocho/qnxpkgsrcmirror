@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.2 2011/05/12 12:26:15 adam Exp $
+# $NetBSD: Makefile,v 1.4 2012/10/31 11:17:23 asau Exp $
 
 DISTNAME=	util-linux-2.19.1
 PKGNAME=	${DISTNAME:S/util-linux/libuuid/}
@@ -12,8 +12,6 @@ COMMENT=	Generate unique identifiers for objects
 LICENSE=	modified-bsd
 
 CONFLICTS=	ossp-uuid-[0-9]* # libuuid.* uuid.pc uuid.3
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_LIBTOOL=		yes
 GNU_CONFIGURE=		yes
@@ -39,7 +37,7 @@ BUILD_DIRS=		include shlibs/uuid
 
 .include "../../mk/bsd.prefs.mk"
 
-.if ${OPSYS} == "Darwin"
+.if ${OPSYS} == "Darwin" || ${OPSYS} == "SunOS"
 BUILDLINK_TRANSFORM+=	rm:-Wl,--version-script=../../../shlibs/uuid/src/uuid.sym
 .endif
 

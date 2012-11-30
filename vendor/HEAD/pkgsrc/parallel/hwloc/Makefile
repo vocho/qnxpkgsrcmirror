@@ -1,16 +1,13 @@
-# $NetBSD: Makefile,v 1.3 2012/06/14 07:45:26 sbd Exp $
+# $NetBSD: Makefile,v 1.8 2012/10/17 03:36:14 asau Exp $
 
-DISTNAME=	hwloc-1.4
-PKGREVISION=	1
+DISTNAME=	hwloc-1.5
 CATEGORIES=	parallel
-MASTER_SITES=	http://www.open-mpi.org/software/hwloc/v1.4/downloads/
+MASTER_SITES=	http://www.open-mpi.org/software/hwloc/v1.5/downloads/
 
 MAINTAINER=	asau@inbox.ru
 HOMEPAGE=	http://www.open-mpi.org/projects/hwloc/
 COMMENT=	Portable Hardware Locality
 LICENSE=	modified-bsd
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=	yes
 USE_LIBTOOL=	yes
@@ -22,7 +19,7 @@ CONFIGURE_ARGS+=	--enable-debug --enable-picky
 TEST_TARGET=	check
 
 pre-configure:
-	${RUN} cd ${WRKSRC} && autoreconf -ivf
+	$(RUN) cd $(WRKSRC) && autoreconf -ivf
 
 # libpci??
 #.include "../../graphics/cairo/buildlink3.mk" # optional

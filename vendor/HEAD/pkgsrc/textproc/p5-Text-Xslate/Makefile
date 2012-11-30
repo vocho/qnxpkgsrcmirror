@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.2 2012/03/15 01:17:28 joerg Exp $
+# $NetBSD: Makefile,v 1.4 2012/10/25 06:56:33 asau Exp $
 #
 
 DISTNAME=	Text-Xslate-1.5007
 PKGNAME=	p5-${DISTNAME:S/007/.7/}
+PKGREVISION=	1
 CATEGORIES=	textproc
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Text/}
 
@@ -11,7 +12,6 @@ HOMEPAGE=	http://search.cpan.org/dist/Text-Xslate/
 COMMENT=	Scalable template engine for Perl5
 LICENSE=	${PERL5_LICENSE}
 
-PKG_DESTDIR_SUPPORT=	user-destdir
 MAKE_JOBS_SAFE=		no
 
 DEPENDS+=	p5-Any-Moose>=0.13:../../devel/p5-Any-Moose

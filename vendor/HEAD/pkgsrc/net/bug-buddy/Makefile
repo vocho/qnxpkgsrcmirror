@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.82 2012/06/14 07:44:31 sbd Exp $
+# $NetBSD: Makefile,v 1.87 2012/10/23 17:18:13 asau Exp $
 #
 
 DISTNAME=		bug-buddy-2.26.0
-PKGREVISION=		15
+PKGREVISION=		19
 CATEGORIES=		net gnome
 MASTER_SITES=		${MASTER_SITE_GNOME:=sources/bug-buddy/2.26/}
 EXTRACT_SUFX=		.tar.bz2
@@ -10,8 +10,6 @@ EXTRACT_SUFX=		.tar.bz2
 MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://www.gnome.org/
 COMMENT=		Graphical GNOME2 bug reporting tool
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=		YES
 USE_PKGLOCALEDIR=	YES

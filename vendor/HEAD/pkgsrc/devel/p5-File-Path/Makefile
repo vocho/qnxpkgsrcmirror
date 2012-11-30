@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.4 2011/08/13 08:33:17 adam Exp $
+# $NetBSD: Makefile,v 1.6 2012/10/31 11:18:12 asau Exp $
 
 DISTNAME=	File-Path-2.08
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	2
+PKGREVISION=	3
 SVR4_PKGNAME=	p5fpc
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=File/}
@@ -13,7 +13,6 @@ COMMENT=	Perl5 module to create or remove directory trees
 LICENSE=	${PERL5_LICENSE}
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 PERL5_PACKLIST=		auto/File/Path/.packlist
 

@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.10 2012/08/09 10:15:28 sbd Exp $
+# $NetBSD: Makefile,v 1.18 2012/10/21 21:07:42 markd Exp $
 
 PKGNAME=	${PYPKGPREFIX}-kde4-${_KDE_VERSION}
 DISTNAME=	pykde4-${_KDE_VERSION}
-PKGREVISION=	1
+PKGREVISION=	6
 CATEGORIES=	misc
 COMMENT=	Python bindings for the KDE integrated X11 desktop
 
@@ -11,8 +11,6 @@ COMMENT=	Python bindings for the KDE integrated X11 desktop
 # BUILD_MAKE_FLAGS+= VERBOSE=1
 
 CMAKE_ARGS+=	-DPYTHON_EXECUTABLE:FILEPATH=${PYTHONBIN}
-
-PYTHON_VERSIONS_INCOMPATIBLE+=	25
 
 PY_PATCHPLIST=			yes
 PLIST_SUBST+=			PYVERSSUFFIX=${PYVERSSUFFIX:Q}
@@ -27,10 +25,14 @@ REPLACE_PYTHON+= \
 SUBST_CLASSES+=	pykdeuic4
 SUBST_STAGE.pykdeuic4=	post-build
 SUBST_FILES.pykdeuic4=	tools/pykdeuic4/pykdeuic4.py
-SUBST_SED.pykdeuic4=	's:/usr/bin/env python$$:${PYTHONBIN}:'
+SUBST_SED.pykdeuic4=	-e 's:/usr/bin/env python$$:${PYTHONBIN}:'
 
 #post-extract:
 #	${CP} ${FILESDIR}/FindPolkitQt.cmake ${WRKSRC}/cmake/modules
+
+# remove when file not patched any longer
+post-install:
+	${RM} -f ${DESTDIR}${PREFIX}/share/sip${PYVERSSUFFIX}/PyKDE4/kdecore/typedefs.sip.orig
 
 .include "../../meta-pkgs/kde4/kde4.mk"
 

@@ -1,16 +1,14 @@
-# $NetBSD: Makefile,v 1.22 2012/03/03 00:13:10 wiz Exp $
+# $NetBSD: Makefile,v 1.27 2012/10/08 23:01:39 adam Exp $
 #
 
 DISTNAME=		blinkentools-2.2
-PKGREVISION=		15
+PKGREVISION=		19
 CATEGORIES=		graphics
 MASTER_SITES=		http://sven.gimp.org/blinkenlights/old/
 
 MAINTAINER=		salo@NetBSD.org
 HOMEPAGE=		http://www.blinkenlights.de/
 COMMENT=		Blinkenlights movies tools collection
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=		pkg-config
 GNU_CONFIGURE=		YES

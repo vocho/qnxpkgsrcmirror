@@ -1,15 +1,13 @@
-# $NetBSD: Makefile,v 1.10 2011/04/22 13:44:25 obache Exp $
+# $NetBSD: Makefile,v 1.12 2012/10/23 17:18:39 asau Exp $
 #
 
 PKGNAME=	nagios-plugin-mysql-${PLUGINSVERSION}
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	net sysutils databases
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 COMMENT=	Nagios mysql plugin
 LICENSE=	gnu-gpl-v3
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 DEPENDS+=	nagios-plugins-${PLUGINSVERSION}{,nb[0-9]*}:../../net/nagios-plugins
 

@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.126 2011/04/22 13:42:06 obache Exp $
+# $NetBSD: Makefile,v 1.129 2012/10/29 05:06:17 asau Exp $
 
 DISTNAME=		gtk+-1.2.10
-PKGREVISION=		10
+PKGREVISION=		11
 CATEGORIES=		x11
 MASTER_SITES=		ftp://ftp.gtk.org/pub/gtk/v1.2/ \
 			${MASTER_SITE_GNOME:=sources/gtk+/1.2/}
@@ -11,7 +11,6 @@ HOMEPAGE=		http://www.gtk.org/
 COMMENT=		GIMP Toolkit v1 - libraries for building X11 user interfaces
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 .include "../../mk/bsd.prefs.mk"
 
@@ -68,5 +67,4 @@ BUILDLINK_DEPMETHOD.libXt?=	build
 .include "../../x11/libXext/buildlink3.mk"
 .include "../../x11/libXi/buildlink3.mk"
 .include "../../x11/libXt/buildlink3.mk"
-.include "../../x11/xextproto/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

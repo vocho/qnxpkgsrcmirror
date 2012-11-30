@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.39 2012/04/22 12:26:13 wiz Exp $
+# $NetBSD: Makefile,v 1.43 2012/11/13 11:55:47 wen Exp $
 
-DISTNAME=	DateTime-TimeZone-1.46
+DISTNAME=	DateTime-TimeZone-1.54
 PKGNAME=	p5-${DISTNAME}
 CATEGORIES=	time perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=DateTime/}
@@ -22,8 +22,6 @@ DEPENDS+=	p5-Test-Output-[0-9]*:../../devel/p5-Test-Output
 
 USE_LANGUAGES=	# empty
 PERL5_PACKLIST=		auto/DateTime/TimeZone/.packlist
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 .include "../../lang/perl5/module.mk"
 .include "../../mk/bsd.pkg.mk"

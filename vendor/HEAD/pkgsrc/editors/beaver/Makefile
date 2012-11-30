@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.24 2012/03/03 00:12:58 wiz Exp $
+# $NetBSD: Makefile,v 1.29 2012/10/08 23:01:26 adam Exp $
 #
 
 DISTNAME=	beaver${BEAVER_VERSION:S/./_/g}
 PKGNAME=	beaver-${BEAVER_VERSION}
-PKGREVISION=	9
+PKGREVISION=	13
 CATEGORIES=	editors
 MASTER_SITES=	http://download.savannah.gnu.org/releases/beaver/0.3.0.1%20-%202008.06.26/
 EXTRACT_SUFX=	.tgz
@@ -13,8 +13,6 @@ BEAVER_VERSION=	0.3.0.1
 MAINTAINER=	vincent.derrien@ahoup.net
 HOMEPAGE=	http://www.nongnu.org/beaver/
 COMMENT=	Lightweight GTK+ text editor with syntax highlighting
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 BUILD_DIRS=	src
 USE_LIBTOOL=	yes

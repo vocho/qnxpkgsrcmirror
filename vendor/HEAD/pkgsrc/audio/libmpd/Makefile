@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.14 2012/03/04 20:10:47 jakllsch Exp $
+# $NetBSD: Makefile,v 1.16 2012/09/15 10:03:40 obache Exp $
 #
 
 DISTNAME=		libmpd-0.20.0
-PKGREVISION=		4
+PKGREVISION=		5
 CATEGORIES=		audio
 MASTER_SITES=		http://download.sarine.nl/Programs/gmpc/0.20.0/ \
 			${MASTER_SITE_SOURCEFORGE:=musicpd/}
@@ -11,8 +11,6 @@ MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://gmpc.wikia.com/?title=Libmpd
 COMMENT=		Library to access mpd (musicpd)
 LICENSE=		gnu-gpl-v2
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_LIBTOOL=		yes
 GNU_CONFIGURE=		yes

@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.9 2012/07/28 21:48:17 reed Exp $
+# $NetBSD: Makefile,v 1.12 2012/10/23 18:16:32 asau Exp $
 #
 
 DISTNAME=	libgnome-keyring-3.4.1
+PKGREVISION=	1
 CATEGORIES=	security gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/libgnome-keyring/3.4/}
 EXTRACT_SUFX=	.tar.xz
@@ -12,9 +13,7 @@ COMMENT=	GNOME password and secret manager
 
 CONFLICTS+=	gnome-keyring<2.30
 
-PKG_DESTDIR_SUPPORT=	user-destdir
-
-USE_TOOLS+=		gmake intltool msgfmt pkg-config
+USE_TOOLS+=		gmake intltool msgfmt pkg-config xgettext
 GNU_CONFIGURE=		YES
 USE_LIBTOOL=		YES
 

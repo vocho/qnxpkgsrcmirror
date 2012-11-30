@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.14 2012/04/08 19:08:44 wiz Exp $
+# $NetBSD: Makefile,v 1.17 2012/11/06 18:41:44 drochner Exp $
 #
 
-DISTNAME=	picard-0.16
-PKGREVISION=	1
+DISTNAME=	picard-1.1
 CATEGORIES=	audio
 MASTER_SITES=	ftp://ftp.musicbrainz.org/pub/musicbrainz/picard/
 
@@ -13,8 +12,6 @@ LICENSE=	gnu-gpl-v2
 
 DEPENDS+=	${PYPKGPREFIX}-qt4>=4.5:../../x11/py-qt4
 DEPENDS+=	${PYPKGPREFIX}-mutagen>=1.20:../../audio/py-mutagen
-
-PKG_DESTDIR_SUPPORT= user-destdir
 
 USE_LANGUAGES=	c c++
 USE_TOOLS+=	msgfmt pkg-config

@@ -1,16 +1,14 @@
-# $NetBSD: Makefile,v 1.21 2011/08/14 07:27:39 obache Exp $
+# $NetBSD: Makefile,v 1.23 2012/10/03 21:53:59 wiz Exp $
 #
 
 DISTNAME=		bioperl-0.7.0
-PKGREVISION=		5
+PKGREVISION=		6
 CATEGORIES=		biology
 MASTER_SITES=		http://bioperl.org/DIST/old_releases/
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://bioperl.org/
 COMMENT=		Perl tools for computational molecular biology
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=	pax
 

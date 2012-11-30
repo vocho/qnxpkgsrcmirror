@@ -1,15 +1,13 @@
-# $NetBSD: Makefile,v 1.28 2012/06/14 07:45:24 sbd Exp $
+# $NetBSD: Makefile,v 1.33 2012/10/08 23:02:12 adam Exp $
 
 DISTNAME=	ogle_gui-0.9.2
-PKGREVISION=	18
+PKGREVISION=	22
 CATEGORIES=	multimedia
 MASTER_SITES=	http://www.dtek.chalmers.se/groups/dvd/dist/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.dtek.chalmers.se/groups/dvd/
 COMMENT=	GUI for the Ogle DVD player
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_PKGLOCALEDIR=	yes
 USE_TOOLS+=		gmake pkg-config

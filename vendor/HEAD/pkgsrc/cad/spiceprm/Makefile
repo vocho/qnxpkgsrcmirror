@@ -1,14 +1,13 @@
-# $NetBSD: Makefile,v 1.17 2009/05/28 20:53:12 zafer Exp $
+# $NetBSD: Makefile,v 1.19 2012/10/08 13:25:16 asau Exp $
 #
 
 DISTNAME=	spiceprm-0.11
+PKGREVISION=	1
 CATEGORIES=	cad
 MASTER_SITES=	http://www.ibiblio.org/pub/Linux/apps/circuits/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 COMMENT=	Spice preprocessor for parameterized subcircuits
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 WRKSRC=			${WRKDIR}/spiceprm
 NO_BUILD=		YES

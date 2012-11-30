@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.32 2012/06/14 07:44:08 sbd Exp $
+# $NetBSD: Makefile,v 1.38 2012/10/23 17:18:10 asau Exp $
 
 DISTNAME=		avahi-0.6.31
-PKGREVISION=		1
+PKGREVISION=		5
 CATEGORIES=		net
 MASTER_SITES=		http://avahi.org/download/
 
@@ -10,13 +10,11 @@ HOMEPAGE=		http://avahi.org/
 COMMENT=		Facilitate service discovery on a local network
 LICENSE=		gnu-lgpl-v2.1
 
-PKG_DESTDIR_SUPPORT=	user-destdir
-
 GNU_CONFIGURE=		YES
 USE_LIBTOOL=		YES
 USE_PKGINSTALL=		YES
 USE_PKGLOCALEDIR=	YES
-USE_TOOLS+=		pkg-config gmake intltool msgfmt
+USE_TOOLS+=		pkg-config gmake intltool msgfmt xgettext
 MAKE_JOBS_SAFE=		no
 
 PKGCONFIG_OVERRIDE+=	avahi-client.pc.in

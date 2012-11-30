@@ -1,15 +1,13 @@
-# $NetBSD: Makefile,v 1.38 2012/07/01 19:05:19 dholland Exp $
+# $NetBSD: Makefile,v 1.41 2012/10/06 14:11:01 asau Exp $
 
 DISTNAME=		kbarcode-2.0.7
-PKGREVISION=		14
+PKGREVISION=		16
 CATEGORIES=		graphics kde
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=kbarcode/}
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://www.kbarcode.net/
 COMMENT=		KDE barcode and label printing application
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=		gmake gs:run perl
 USE_LANGUAGES=		c c++

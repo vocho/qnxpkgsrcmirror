@@ -1,9 +1,10 @@
-# $NetBSD: Makefile,v 1.51 2012/08/05 20:59:18 wiz Exp $
+# $NetBSD: Makefile,v 1.58 2012/10/29 05:06:45 asau Exp $
 
 PKGNAME=	${PYPKGPREFIX}-qt4-${PYQT_VERSION}
-PYQT_VERSION=	4.9.4
+PYQT_VERSION=	4.9.5
 CATEGORIES=	x11 python
-MASTER_SITES=	http://www.riverbankcomputing.com/static/Downloads/PyQt4/
+#MASTER_SITES=	http://www.riverbankcomputing.com/static/Downloads/PyQt4/
+MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=pyqt/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 COMMENT=	Python binding for Qt4
@@ -12,8 +13,6 @@ HOMEPAGE=	http://www.riverbankcomputing.com/software/pyqt/intro
 USE_LIBTOOL=		yes
 USE_TOOLS+=		gmake pkg-config
 USE_LANGUAGES=		c c++
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 CONFIGURE_ARGS+=	-b ${PREFIX}/bin
 CONFIGURE_ARGS+=	-d ${PREFIX}/${PYSITELIB}
@@ -26,7 +25,6 @@ INSTALL_ENV+=		INSTALL_ROOT=${DESTDIR}
 
 PY_PATCHPLIST=		yes
 PLIST_SUBST+=		PYVERSSUFFIX=${PYVERSSUFFIX:Q}
-PYTHON_VERSIONS_INCOMPATIBLE=	25
 PYTHON_VERSIONS_INCLUDE_3X=	yes
 
 BUILDLINK_TRANSFORM+=	rm:-Wl,-R${WRKSRC}/qpy/QtCore
@@ -70,6 +68,7 @@ do-configure:
 	(cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} \
 		${PYTHONBIN} configure.py ${CONFIGURE_ARGS})
 
+BUILDLINK_API_DEPENDS.py-sip+= ${PYPKGPREFIX}-sip>=4.14
 .include "../../x11/py-sip/buildlink3.mk"
 .include "../../sysutils/dbus/buildlink3.mk"
 .include "../../sysutils/py-dbus/buildlink3.mk"

@@ -1,16 +1,14 @@
-# $NetBSD: Makefile,v 1.31 2011/11/01 06:02:43 sbd Exp $
+# $NetBSD: Makefile,v 1.33 2012/10/08 12:42:23 asau Exp $
 #
 
 DISTNAME=	ratpoison-1.4.5
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	wm
 MASTER_SITES=	http://savannah.nongnu.org/download/ratpoison/
 
 MAINTAINER=	tonio@NetBSD.org
 HOMEPAGE=	http://www.nongnu.org/ratpoison/
 COMMENT=	Simple window manager with no fat library dependencies
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=		YES
 USE_GNU_READLINE=	YES

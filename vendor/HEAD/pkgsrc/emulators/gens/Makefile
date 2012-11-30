@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.24 2012/03/03 00:13:02 wiz Exp $
+# $NetBSD: Makefile,v 1.29 2012/10/08 23:01:31 adam Exp $
 #
 
 DISTNAME=		gens-rc3
 PKGNAME=		gens-2.12rc3
-PKGREVISION=		18
+PKGREVISION=		22
 CATEGORIES=		emulators
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=gens/}
 
@@ -15,8 +15,6 @@ BUILD_DEPENDS+=		nasm-[0-9]*:../../devel/nasm
 
 # contains i386 assembler sources
 ONLY_FOR_PLATFORM=	*-*-i386
-
-PKG_DESTDIR_SUPPORT=    user-destdir
 
 WRKSRC=			${WRKDIR}/GensForLinux
 GNU_CONFIGURE=		yes

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.13 2012/06/15 23:06:08 dholland Exp $
+# $NetBSD: Makefile,v 1.15 2012/10/29 05:07:07 asau Exp $
 #
 
 DISTNAME=	xf86-video-vesa-2.3.0
@@ -11,11 +11,15 @@ MAINTAINER=	joerg@NetBSD.org
 HOMEPAGE=	http://xorg.freedesktop.org/
 COMMENT=	Modular Xorg VESA video driver
 
-PKG_DESTDIR_SUPPORT=	user-destdir
-
 USE_LIBTOOL=	yes
 GNU_CONFIGURE=	yes
 USE_TOOLS+=	pkg-config
+
+.include "../../mk/bsd.prefs.mk"
+
+.if ${OPSYS} == "SunOS"
+CONFIGURE_ENV+=	DRIVER_MAN_SUFFIX=4
+.endif
 
 .include "../../x11/modular-xorg-server/buildlink3.mk"
 BUILDLINK_DEPMETHOD.libXext?=	build

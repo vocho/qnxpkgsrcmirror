@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.31 2012/06/16 04:45:37 markd Exp $
+# $NetBSD: Makefile,v 1.38 2012/11/11 18:29:15 markd Exp $
 
 DISTNAME=	kdemultimedia-${_KDE_VERSION}
 PKGNAME=	${DISTNAME:S/-4/4-4/}
+PKGREVISION=	7
 CATEGORIES=	multimedia
 COMMENT=	Multimedia tools for the KDE integrated X11 desktop
 
@@ -10,8 +11,6 @@ COMMENT=	Multimedia tools for the KDE integrated X11 desktop
 # BUILD_MAKE_FLAGS+= VERBOSE=1
 
 REPLACE_BASH+=	kioslave/audiocd/upgrade-metadata.sh
-
-CMAKE_ARGS+=-DTAGLIB_MIN_VERSION=1.10
 
 .include "../../mk/bsd.prefs.mk"
 .include "options.mk"

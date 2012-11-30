@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.1.1.1 2012/03/08 11:23:30 fhajny Exp $
+# $NetBSD: Makefile,v 1.3 2012/10/31 11:18:28 asau Exp $
 #
 
 DISTNAME=	Log-Handler-0.72
 PKGNAME=	p5-${DISTNAME}
+PKGREVISION=	1
 CATEGORIES=	devel
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Log/}
 
@@ -10,8 +11,6 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://search.cpan.org/dist/Log-Handler/
 COMMENT=	Log messages to several outputs
 LICENSE=	${PERL5_LICENSE}
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 DEPENDS+=	p5-Config-General>=0:../../devel/p5-Config-General
 DEPENDS+=	p5-Config-Properties>=0:../../devel/p5-Config-Properties

@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.77 2012/02/15 21:22:21 hans Exp $
+# $NetBSD: Makefile,v 1.80 2012/11/29 21:47:04 jperkin Exp $
 
 DISTNAME=		esound-0.2.41
-PKGREVISION=		1
+PKGREVISION=		2
 CATEGORIES=		audio
 MASTER_SITES=		${MASTER_SITE_GNOME:=sources/esound/0.2/}
 EXTRACT_SUFX=		.tar.bz2
@@ -12,7 +12,6 @@ COMMENT=		The Enlightened sound daemon
 LICENSE=		gnu-lgpl-v2
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_LIBTOOL=		YES
 USE_TOOLS+=		pkg-config
@@ -43,7 +42,7 @@ SUBST_MESSAGE.oss=	Fixing oss.
 
 LDFLAGS.IRIX+=		-lm
 LDFLAGS.DragonFly+=	-lm
-LDFLAGS.SunOS+=		-lsocket -lnsl
+LDFLAGS.SunOS+=		-lm -lsocket -lnsl
 
 REPLACE_SH+=		esd-config.in
 

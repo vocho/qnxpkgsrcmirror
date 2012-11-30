@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.28 2012/06/04 09:29:57 wiz Exp $
+# $NetBSD: Makefile,v 1.34 2012/10/24 15:48:33 joerg Exp $
 #
 
 DISTNAME=	hugov31_unix_source
 PKGNAME=	wxhugo-3.1.02
-PKGREVISION=	16
+PKGREVISION=	21
 CATEGORIES=	games
 MASTER_SITES=	${MASTER_SITE_IFARCHIVE:=programming/hugo/source/}
 DISTFILES=	${DISTNAME}${EXTRACT_SUFX} ${DISTFILE_WX}
@@ -14,8 +14,6 @@ COMMENT=	Interactive fiction interpreter with sound and graphics support
 
 DISTFILE_WX=	hugov31_wxwin_source${EXTRACT_SUFX}
 #EXTRACT_ONLY=	${DISTNAME}${EXTRACT_SUFX}
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 DIST_SUBDIR=	hugo-3.1.02
 USE_LANGUAGES=	c c++

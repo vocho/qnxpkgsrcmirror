@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.3 2011/08/07 05:51:35 adam Exp $
+# $NetBSD: Makefile,v 1.5 2012/10/31 11:17:36 asau Exp $
 
 DISTNAME=	AnnoCPAN-Perldoc-0.10
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	2
+PKGREVISION=	3
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=../../authors/id/I/IT/ITUB/}
 
@@ -13,8 +13,6 @@ LICENSE=	${PERL5_LICENSE}
 
 USE_LANGUAGES=	# empty
 PERL5_PACKLIST=	auto/AnnoCPAN/Perldoc/.packlist
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 DEPENDS+=	p5-DBD-SQLite>=1:../../databases/p5-DBD-SQLite
 DEPENDS+=	p5-DBI>=0:../../databases/p5-DBI

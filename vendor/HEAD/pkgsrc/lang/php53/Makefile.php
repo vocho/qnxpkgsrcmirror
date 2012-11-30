@@ -1,4 +1,4 @@
-# $NetBSD: Makefile.php,v 1.22 2012/08/17 15:32:31 taca Exp $
+# $NetBSD: Makefile.php,v 1.26 2012/11/23 13:20:03 taca Exp $
 # used by lang/php53/Makefile
 # used by www/ap-php/Makefile
 
@@ -58,7 +58,7 @@ PKG_SUGGESTED_OPTIONS+=	inet6 ssl
 
 .if !empty(PKG_OPTIONS:Msuhosin)
 SUHOSIN_PHPVER=		5.3.9
-.  if ${SUHOSIN_PHPVER} != ${PHP_BASE_VERS} && ${PHP_BASE_VERS} != 5.3.16
+.  if ${SUHOSIN_PHPVER} != ${PHP_BASE_VERS} && ${PHP_BASE_VERS} != 5.3.19
 PKG_FAIL_REASON+=	"The suhosin patch is currently not available for"
 PKG_FAIL_REASON+=	"this version of PHP.  You may have to wait until"
 PKG_FAIL_REASON+=	"an updated patch is released or temporarily"
@@ -70,6 +70,22 @@ PATCH_DIST_STRIP=	-p1
 PLIST.suhosin=		yes
 MESSAGE_SRC=		${.CURDIR}/../../lang/php53/MESSAGE
 MESSAGE_SRC+=		${.CURDIR}/../../lang/php53/MESSAGE.suhosin
+
+# quick fix to apply suhosin patch
+SUBST_CLASSES+=			suhosin-pre
+SUBST_STAGE.suhosin-pre=	pre-patch # post-extract
+SUBST_FILES.suhosin-pre=	sapi/litespeed/lsapi_main.c
+SUBST_SED.suhosin-pre=		-e "s|1997-2012|1997-2004|g"
+SUBST_MESSAGE.suhosin-pre=	Modify before applying suhosin-patch
+
+# revert copyright year as original PHP
+SUBST_CLASSES+=			suhosin-post
+SUBST_STAGE.suhosin-post=	post-patch
+SUBST_FILES.suhosin-post=	sapi/litespeed/lsapi_main.c
+SUBST_SED.suhosin-post=		-e "s|1997-2004|1997-2012|g"
+SUBST_SED.suhosin-post+=	-e "s|1997-2011|1997-2012|g"
+SUBST_MESSAGE.suhosin-post=	Restore after applying suhosin-patch
+
 .  endif
 .endif
 
