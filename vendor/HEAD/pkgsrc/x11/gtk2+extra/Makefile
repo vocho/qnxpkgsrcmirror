@@ -1,17 +1,15 @@
-# $NetBSD: Makefile,v 1.17 2012/03/03 00:12:32 wiz Exp $
+# $NetBSD: Makefile,v 1.22 2012/10/29 05:06:18 asau Exp $
 #
 
 DISTNAME=	gtk+extra-2.1.2
 PKGNAME=	${DISTNAME:S/gtk/gtk2/}
-PKGREVISION=	8
+PKGREVISION=	12
 CATEGORIES=	x11
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=gtkextra/}
 
 MAINTAINER=	bouyer@NetBSD.org
 HOMEPAGE=	http://gtkextra.sourceforge.net/
 COMMENT=	Useful set of GTK+ widgets for creating GUIs
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_X11BASE=		YES
 USE_TOOLS+=		gmake pkg-config

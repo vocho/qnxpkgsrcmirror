@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.15 2012/08/19 08:09:08 obache Exp $
+# $NetBSD: Makefile,v 1.21 2012/10/08 23:00:43 adam Exp $
 #
 
 DISTNAME=		scim-1.4.14
+PKGREVISION=		5
 CATEGORIES=		inputmethod
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=scim/}
 
@@ -11,8 +12,6 @@ COMMENT=		Smart Common Input Method
 LICENSE=		gnu-lgpl-v2.1
 
 SUPERSEDES+=		scim-bridge-[0-9]*
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 PKG_SYSCONFSUBDIR=	scim
 

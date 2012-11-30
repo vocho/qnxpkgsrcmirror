@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.8 2011/11/25 21:36:20 joerg Exp $
+# $NetBSD: Makefile,v 1.10 2012/10/31 11:16:32 asau Exp $
 #
 
 DISTNAME=	RTx-Shredder-0.03
-PKGREVISION=	3
+PKGREVISION=	4
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=RTx/}
 
@@ -16,7 +16,6 @@ DEPENDS+=	rt>=3.4.5:../../devel/rt3
 BUILD_DEPENDS+=	p5-Test-Deep-[0-9]*:../../devel/p5-Test-Deep
 BUILD_DEPENDS+=	p5-DBD-SQLite-[0-9]*:../../databases/p5-DBD-SQLite
 
-PKG_DESTDIR_SUPPORT=	user-destdir
 MAKE_ENV+=		DESTDIR=${DESTDIR}
 
 .include "../../devel/rt3/dirs.mk"

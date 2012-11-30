@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.50 2012/04/27 12:32:01 obache Exp $
+# $NetBSD: Makefile,v 1.52 2012/10/08 12:27:42 asau Exp $
 #
 
 DISTNAME=	tin-2.0.1
-PKGREVISION=	2
+PKGREVISION=	3
 CATEGORIES=	news
 MASTER_SITES=	ftp://ftp.tin.org/pub/news/clients/tin/stable/ \
 		ftp://ftp.cs.tu-berlin.de/pub/net/news/tin/stable/
@@ -22,7 +22,6 @@ GNU_CONFIGURE=	yes
 USE_PKGLOCALEDIR=yes
 
 INSTALLATION_DIRS=	share/doc/tin
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 # for tinews.pl
 USE_TOOLS+=	msgfmt perl:run yacc

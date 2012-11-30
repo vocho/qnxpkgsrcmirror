@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.41 2007/12/27 11:43:37 jnemeth Exp $
+# $NetBSD: Makefile,v 1.43 2012/10/06 14:11:06 asau Exp $
 
 DISTNAME=	libungif-4.1.4
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	graphics
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=giflib/}
 EXTRACT_SUFX=	.tar.bz2
@@ -13,7 +13,6 @@ COMMENT=	Tools and library routines for working with GIF images
 CONFLICTS=	giflib-[0-9]*
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=		yes
 USE_LIBTOOL=		yes

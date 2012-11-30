@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.60 2012/03/09 10:58:30 fhajny Exp $
+# $NetBSD: Makefile,v 1.62 2012/09/11 19:47:03 asau Exp $
 
 DISTNAME=	zip30
 PKGNAME=	zip-3.0
@@ -13,13 +13,12 @@ COMMENT=	Create/update ZIP files compatible with pkzip
 LICENSE=	info-zip
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 MAKE_FILE=	unix/Makefile
 
 .include "../../mk/bsd.prefs.mk"
 
-MAKE_FLAGS+=	LOCAL_ZIP=${CFLAGS:M*:Q}
+MAKE_FLAGS+=	LOCAL_ZIP=${CFLAGS:Q}
 MAKE_FLAGS+=	LFLAGS1=${_STRIPFLAG_CC:Q}
 MAKE_FLAGS+=	-DUNICODE_SUPPORT
 .if ${OPSYS} == "NetBSD" && ${MACHINE_ARCH} == "powerpc"
@@ -28,7 +27,7 @@ CFLAGS+=	-O0
 
 .include "../../mk/compiler.mk"
 
-.if !empty(CC_VERSION:Mgcc*)
+.if !empty(PKGSRC_COMPILER:Mgcc) || !empty(PKGSRC_COMPILER:Mclang)
 BUILD_TARGET=	generic_gcc
 .else
 BUILD_TARGET=	generic

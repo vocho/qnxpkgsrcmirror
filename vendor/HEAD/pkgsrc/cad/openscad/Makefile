@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.8 2012/08/13 22:33:56 marino Exp $
+# $NetBSD: Makefile,v 1.15 2012/10/08 23:01:16 adam Exp $
 #
 
 PKGNAME=	openscad-2011.12
 DISTNAME=	openscad-2011.12.src
-PKGREVISION=	4
+PKGREVISION=	9
 CATEGORIES=	cad
 MASTER_SITES=	https://github.com/downloads/openscad/openscad/
 
@@ -13,8 +13,6 @@ COMMENT=	OpenSCAD - The Programmers Solid 3D CAD Modeller
 LICENSE=	gnu-gpl-v2
 
 FETCH_USING=	curl
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 WRKSRC=		${WRKDIR}/openscad-2011.12
 USE_LANGUAGES=	c c++
@@ -37,7 +35,7 @@ CHECK_PORTABILITY_SKIP+=tests/compare-bitmaps.sh
 CHECK_INTERPRETER_SKIP+=share/openscad/libraries/MCAD/get_submodules.py
 
 pre-build:
-	(cd ${WRKSRC} && ${QTDIR$}/bin/qmake)
+	(cd ${WRKSRC} && ${QTDIR}/bin/qmake)
 
 # DragonFly requires FlexLexer.h from pkgsrc - base doesn't cut it.
 .include "../../devel/flex/buildlink3.mk"

@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.18 2011/10/06 15:35:10 hiramatsu Exp $
+# $NetBSD: Makefile,v 1.20 2012/10/25 06:56:33 asau Exp $
 
 DISTNAME=	XML-Atom-0.41
 PKGNAME=	p5-${DISTNAME}
+PKGREVISION=	1
 SVR4_PKGNAME=	p5xat
 CATEGORIES=	textproc perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=XML/}
@@ -10,8 +11,6 @@ MAINTAINER=	kleink@NetBSD.org
 HOMEPAGE=	http://search.cpan.org/dist/XML-Atom/
 COMMENT=	Atom feed and API implementation
 LICENSE=	${PERL5_LICENSE}
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 DEPENDS+=	p5-Class-Data-Inheritable-[0-9]*:../../devel/p5-Class-Data-Inheritable
 DEPENDS+=	p5-XML-LibXML>=1.64:../../textproc/p5-XML-LibXML

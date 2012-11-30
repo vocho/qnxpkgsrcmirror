@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.240 2012/08/06 13:47:44 wen Exp $
+# $NetBSD: Makefile,v 1.243 2012/11/29 08:00:12 jnemeth Exp $
 
 COMMENT=	Mathematics
 
@@ -109,6 +109,7 @@ SUBDIR+=	graphopt
 SUBDIR+=	grpn
 SUBDIR+=	gsl
 SUBDIR+=	gtklife
+SUBDIR+=	harminv
 SUBDIR+=	heirloom-factor
 SUBDIR+=	heirloom-units
 SUBDIR+=	itpp
@@ -158,6 +159,7 @@ SUBDIR+=	p5-Math-Interpolate
 SUBDIR+=	p5-Math-MatrixReal
 SUBDIR+=	p5-Math-Pari
 SUBDIR+=	p5-Math-Permute-List
+SUBDIR+=	p5-Math-Prime-Util
 SUBDIR+=	p5-Math-Random
 SUBDIR+=	p5-Math-Random-MT
 SUBDIR+=	p5-Math-Random-MT-Auto
@@ -196,6 +198,7 @@ SUBDIR+=	py-networkx
 SUBDIR+=	py-numarray
 SUBDIR+=	py-numexpr
 SUBDIR+=	py-numpy
+SUBDIR+=	py-pandas
 SUBDIR+=	py-pytables
 SUBDIR+=	py-roman
 SUBDIR+=	py-rpy

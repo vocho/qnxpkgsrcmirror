@@ -1,10 +1,9 @@
-# $NetBSD: Makefile,v 1.6 2012/06/18 15:46:42 taca Exp $
+# $NetBSD: Makefile,v 1.8 2012/10/28 06:30:58 asau Exp $
 #
 
 .include "../../www/phraseanet/Makefile.common"
 PKGNAME=        phraseanet-${VERS}
-
-PKG_DESTDIR_SUPPORT=	user-destdir
+PKGREVISION=	1
 
 USE_TOOLS+=	pax
 

@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.36 2012/07/01 19:05:16 dholland Exp $
+# $NetBSD: Makefile,v 1.38 2012/10/03 11:43:36 asau Exp $
 #
 
 DISTNAME=		kdissert-1.0.7
-PKGREVISION=		15
+PKGREVISION=		16
 CATEGORIES=		editors
 MASTER_SITES=		http://freehackers.org/~tnagy/kdissert/
 EXTRACT_SUFX=		.tar.bz2
@@ -11,8 +11,6 @@ MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://freehackers.org/~tnagy/kdissert/
 COMMENT=		Mindmapping-like tool to generate text templates
 LICENSE=		gnu-gpl-v2
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_PKGLOCALEDIR=	yes
 USE_LANGUAGES=		c c++

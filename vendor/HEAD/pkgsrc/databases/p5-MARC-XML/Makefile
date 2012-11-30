@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.4 2011/11/12 07:50:21 hiramatsu Exp $
+# $NetBSD: Makefile,v 1.6 2012/10/03 21:54:21 wiz Exp $
 
 DISTNAME=	MARC-XML-0.93
 PKGNAME=	p5-${DISTNAME}
+PKGREVISION=	1
 CATEGORIES=	converters perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=MARC/}
 
@@ -16,8 +17,6 @@ DEPENDS+=	p5-MARC-Charset>=0.98:../../converters/p5-MARC-Charset
 
 USE_LANGUAGES=	# empty
 PERL5_PACKLIST=	auto/MARC-XML/.packlist
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 .include "../../lang/perl5/module.mk"
 .include "../../mk/bsd.pkg.mk"

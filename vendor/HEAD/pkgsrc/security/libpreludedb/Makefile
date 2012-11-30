@@ -1,10 +1,8 @@
-# $NetBSD: Makefile,v 1.31 2012/07/05 16:07:18 drochner Exp $
+# $NetBSD: Makefile,v 1.33 2012/10/23 18:16:34 asau Exp $
 #
 
 COMMENT=		LibPreludeDB libraries
-PKGREVISION=		3
-
-PKG_DESTDIR_SUPPORT=	user-destdir
+PKGREVISION=		4
 
 .include "../../security/libpreludedb/Makefile.common"
 

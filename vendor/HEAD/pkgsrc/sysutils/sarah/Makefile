@@ -1,14 +1,13 @@
-# $NetBSD: Makefile,v 1.16 2010/01/28 00:19:41 joerg Exp $
+# $NetBSD: Makefile,v 1.18 2012/10/23 19:51:22 asau Exp $
 
 DISTNAME=	sarah-0.9.1b
+PKGREVISION=	1
 CATEGORIES=	sysutils
 MASTER_SITES=	http://prdownloads.sourceforge.net/sarah/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://sarah.sourceforge.net/
 COMMENT=	Syslog automated Rotation and Archive Handler
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=	perl:run
 REPLACE_PERL=	sarah

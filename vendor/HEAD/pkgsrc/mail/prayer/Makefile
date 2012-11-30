@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.44 2012/03/20 16:26:48 dholland Exp $
+# $NetBSD: Makefile,v 1.46 2012/10/08 12:19:28 asau Exp $
 
 DISTNAME=	prayer-1.3.4
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	mail www
 MASTER_SITES=	ftp://ftp.csx.cam.ac.uk/pub/software/email/prayer/
 
@@ -42,7 +42,6 @@ PKG_SYSCONFSUBDIR=	prayer
 EGDIR=			${PREFIX}/share/examples/prayer
 
 RCD_SCRIPTS=		prayer
-PKG_DESTDIR_SUPPORT =	user-destdir
 
 CONF_FILES=	${EGDIR}/prayer.cf ${PKG_SYSCONFDIR}/prayer.cf
 CONF_FILES+=	${EGDIR}/prayer-accountd.cf ${PKG_SYSCONFDIR}/prayer-accountd.cf

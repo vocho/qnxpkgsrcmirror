@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.43 2012/08/19 18:41:10 jnemeth Exp $
+# $NetBSD: Makefile,v 1.53 2012/11/11 21:29:04 jnemeth Exp $
 #
 # NOTE: when updating this package, there are two places that sound
 #       tarballs need to be checked
 
-DISTNAME=	asterisk-1.8.15.0
+DISTNAME=	asterisk-1.8.18.0
 DIST_SUBDIR=	${PKGNAME_NOREV}
 DISTFILES=	${DEFAULT_DISTFILES}
 EXTRACT_ONLY=	${DISTNAME}.tar.gz
@@ -18,8 +18,6 @@ COMMENT=	The Asterisk Software PBX
 LICENSE=	gnu-gpl-v2
 
 CONFLICTS+=	asterisk-sounds-extra-[0-9]*
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 .include "../../mk/bsd.prefs.mk"
 

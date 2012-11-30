@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.56 2012/03/21 18:16:41 hans Exp $
+# $NetBSD: Makefile,v 1.58 2012/10/06 14:11:20 asau Exp $
 
-PKG_DESTDIR_SUPPORT=	user-destdir
-PKGREVISION=	2
+PKGREVISION=	3
 
 .include "Makefile.common"
 COMMENT=	API for access to scanners, digital cameras, frame grabbers etc.
@@ -21,6 +20,7 @@ USE_PKGLOCALEDIR=	YES
 CONFIGURE_ARGS+=	--with-gphoto2=no
 CONFIGURE_ARGS+=	--with-docdir=${PREFIX}/share/doc/sane-${SANE_VERSION}
 CONFIGURE_ARGS+=	--without-snmp
+CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR}
 
 .include "../../mk/bsd.prefs.mk"
 

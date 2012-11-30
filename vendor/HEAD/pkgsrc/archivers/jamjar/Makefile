@@ -1,18 +1,17 @@
-# $NetBSD: Makefile,v 1.17 2009/07/17 04:47:27 rillig Exp $
+# $NetBSD: Makefile,v 1.19 2012/10/13 09:34:49 skrll Exp $
 #
 
 DISTNAME=	jamjar-0.7.1
 CATEGORIES=	archivers
 MASTER_SITES=	# none
 
-MAINTAINER=	skrll@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://wonka.acunia.com/
 COMMENT=	Acunia version of the jar archiver
 
 BUILD_DEPENDS+=	acunia-jam>=1.0:../../devel/acunia-jam
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 WRKSRC=		${WRKDIR}/jamjar
 

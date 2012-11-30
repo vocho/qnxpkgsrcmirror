@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.26 2012/04/28 13:15:33 obache Exp $
+# $NetBSD: Makefile,v 1.28 2012/10/23 10:24:04 wiz Exp $
 #
 
 DISTNAME=	quake2-0.3
@@ -11,8 +11,6 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.quakeforge.net/
 COMMENT=	Enhanced Quake II engine
 LICENSE=	gnu-gpl-v2
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=	gmake
 USE_LIBTOOL=	yes
@@ -47,7 +45,6 @@ CONFIGURE_ENV+=		ac_cv_header_sys_audioio_h=no
 .include "../../x11/libXext/buildlink3.mk"
 .include "../../x11/libXxf86dga/buildlink3.mk"
 .include "../../x11/libXxf86vm/buildlink3.mk"
-.include "../../x11/xextproto/buildlink3.mk"
 .include "../../mk/oss.buildlink3.mk"
 .include "../../mk/pthread.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

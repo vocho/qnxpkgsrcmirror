@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.35 2012/08/13 14:25:39 wiz Exp $
+# $NetBSD: Makefile,v 1.40 2012/10/08 23:01:35 adam Exp $
 
 DISTNAME=	gcompris-12.01
-PKGREVISION=	4
+PKGREVISION=	8
 CATEGORIES=	games
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=gcompris/}
 
@@ -9,8 +9,6 @@ MAINTAINER=	reed@reedmedia.net
 HOMEPAGE=	http://gcompris.net/
 COMMENT=	Educational games for children
 LICENSE=	gnu-gpl-v3
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=		gmake intltool gtar pkg-config msgfmt texi2html
 GNU_CONFIGURE=		YES

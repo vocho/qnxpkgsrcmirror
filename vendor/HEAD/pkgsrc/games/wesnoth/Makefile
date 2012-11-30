@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.77 2012/07/29 16:31:26 wiz Exp $
+# $NetBSD: Makefile,v 1.86 2012/11/20 07:47:32 adam Exp $
 
-DISTNAME=	wesnoth-1.10.3
-PKGREVISION=	1
+DISTNAME=	wesnoth-1.10.5
 CATEGORIES=	games
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=wesnoth/}
 EXTRACT_SUFX=	.tar.bz2
@@ -12,8 +11,6 @@ COMMENT=	Fantasy turn-based strategy game
 LICENSE=	gnu-gpl-v2
 
 BUILD_DEPENDS+=	libxslt-[0-9]*:../../textproc/libxslt
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_CMAKE=		yes
 USE_LIBTOOL=		yes

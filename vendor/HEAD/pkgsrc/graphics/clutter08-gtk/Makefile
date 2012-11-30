@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.9 2012/03/03 00:12:28 wiz Exp $
+# $NetBSD: Makefile,v 1.14 2012/10/08 23:00:46 adam Exp $
 #
 
 DISTNAME=	clutter-gtk-0.8.3
 PKGNAME=	${DISTNAME:S/clutter/clutter08/}
-PKGREVISION=	8
+PKGREVISION=	12
 CATEGORIES=	graphics
 MASTER_SITES=	http://www.clutter-project.org/sources/clutter-gtk/0.8/
 
@@ -11,8 +11,6 @@ MAINTAINER=	obache@NetBSD.org
 HOMEPAGE=	http://www.clutter-project.org/
 COMMENT=	GTK+ Integration library for Clutter
 LICENSE=	gnu-lgpl-v2.1
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=	yes
 USE_LIBTOOL=	yes

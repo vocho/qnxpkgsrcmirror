@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.38 2012/07/02 13:37:38 adam Exp $
+# $NetBSD: Makefile,v 1.44 2012/10/08 23:01:39 adam Exp $
 #
 
 DISTNAME=		aqsis-1.8.1
-PKGREVISION=		1
+PKGREVISION=		6
 CATEGORIES=		graphics
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=aqsis/}
 
@@ -10,8 +10,6 @@ MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://www.aqsis.org/
 COMMENT=		Renderman clone
 LICENSE=		gnu-gpl-v2 AND gnu-lgpl-v2.1 AND modified-bsd
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_CMAKE=		yes
 USE_LANGUAGES=		c c++

@@ -349,7 +349,8 @@ builds)</a></span></dt>
 <dt><span class="sect2"><a href="#basic-programming-languages">19.4.1. C, C++, and Fortran</a></span></dt>
 <dt><span class="sect2"><a href="#java-programming-language">19.4.2. Java</a></span></dt>
 <dt><span class="sect2"><a href="#perl-scripts">19.4.3. Packages containing perl scripts</a></span></dt>
-<dt><span class="sect2"><a href="#other-programming-languages">19.4.4. Other programming languages</a></span></dt>
+<dt><span class="sect2"><a href="#shell-scripts">19.4.4. Packages containing shell scripts</a></span></dt>
+<dt><span class="sect2"><a href="#other-programming-languages">19.4.5. Other programming languages</a></span></dt>
 </dl></dd>
 <dt><span class="sect1"><a href="#fixes.build">19.5. Fixing problems in the <span class="emphasis"><em>build</em></span> phase</a></span></dt>
 <dd><dl>
@@ -969,7 +970,7 @@ and dashes.</p>
 <div class="titlepage"><div><div><h3 class="title">
 <a name="getting-via-cvs"></a>2.1.2. Via anonymous CVS</h3></div></div></div>
 <p>To fetch a specific pkgsrc stable branch, run:</p>
-<pre class="screen"><code class="prompt">$</code> <strong class="userinput"><code>cd /usr &amp;&amp; cvs -q -z3 -d anoncvs@anoncvs.NetBSD.org:/cvsroot checkout -r <em class="replaceable"><code>pkgsrc-20xxQy</code></em> -P pkgsrc</code></strong>
+<pre class="screen"><code class="prompt">$</code> <strong class="userinput"><code>cd /usr &amp;&amp; cvs -q -z2 -d anoncvs@anoncvs.NetBSD.org:/cvsroot checkout -r <em class="replaceable"><code>pkgsrc-20xxQy</code></em> -P pkgsrc</code></strong>
 </pre>
 <p>Where <em class="replaceable"><code>pkgsrc-20xxQy</code></em> is the stable 
 	branch to be checked out, for example, <span class="quote">&#8220;<span class="quote">pkgsrc-2009Q1</span>&#8221;</span></p>
@@ -977,11 +978,11 @@ and dashes.</p>
 	in your <code class="filename">/usr/</code> directory and all the package source 
 	will be stored under <code class="filename">/usr/pkgsrc/</code>.</p>
 <p>To fetch the pkgsrc current branch, run:</p>
-<pre class="screen"><code class="prompt">$</code> <strong class="userinput"><code>cd /usr &amp;&amp; cvs -q -z3 -d anoncvs@anoncvs.NetBSD.org:/cvsroot checkout -P pkgsrc</code></strong>
+<pre class="screen"><code class="prompt">$</code> <strong class="userinput"><code>cd /usr &amp;&amp; cvs -q -z2 -d anoncvs@anoncvs.NetBSD.org:/cvsroot checkout -P pkgsrc</code></strong>
 </pre>
 <p>Refer to the <a class="ulink" href="http://www.NetBSD.org/mirrors/" target="_top">list of available mirrors</a> to choose a faster CVS mirror, if needed.</p>
 <p>If you get error messages from <code class="literal">rsh</code>, you need to set CVS_RSH variable. E.g.:</p>
-<pre class="screen"><code class="prompt">$</code> <strong class="userinput"><code>cd /usr &amp;&amp; env CVS_RSH=ssh cvs -q -z3 -d anoncvs@anoncvs.NetBSD.org:/cvsroot checkout -P pkgsrc</code></strong>
+<pre class="screen"><code class="prompt">$</code> <strong class="userinput"><code>cd /usr &amp;&amp; env CVS_RSH=ssh cvs -q -z2 -d anoncvs@anoncvs.NetBSD.org:/cvsroot checkout -P pkgsrc</code></strong>
 </pre>
 <p>Refer to documentation on your command shell how to set CVS_RSH=ssh permanently.
 	For Bourne shells, you can set it in your <code class="filename">.profile</code>
@@ -998,7 +999,7 @@ export CVS_RSH
 	You can find an explanation of this file in the CVS documentation.</p>
 <pre class="programlisting">
 # recommended CVS configuration file from the pkgsrc guide
-cvs -q -z3
+cvs -q -z2
 checkout -P
 update -dP
 diff -upN
@@ -2749,7 +2750,7 @@ fi
       e.g. <code class="filename">/usr/sandbox</code>.  This can be done by
       using null mounts, or manually.</p>
 <p>There is a shell script called
-      <code class="filename">pkgsrc/mk/bulk/mksandbox</code> which will set
+      <code class="filename">mksandbox</code> installed by the <a href="ftp://ftp.NetBSD.org/pub/pkgsrc/current/pkgsrc/pkgtools/mksandbox/README.html" target="_top"><code class="filename">pkgtools/mksandbox</code></a> package, which will set
       up the sandbox environment using null mounts. It will also
       create a script called <code class="filename">sandbox</code> in the
       root of the sandbox environment, which will allow the null
@@ -3758,7 +3759,8 @@ anymore, you can remove that file and run <span class="command"><strong>cvs -q u
 <dt><span class="sect2"><a href="#basic-programming-languages">19.4.1. C, C++, and Fortran</a></span></dt>
 <dt><span class="sect2"><a href="#java-programming-language">19.4.2. Java</a></span></dt>
 <dt><span class="sect2"><a href="#perl-scripts">19.4.3. Packages containing perl scripts</a></span></dt>
-<dt><span class="sect2"><a href="#other-programming-languages">19.4.4. Other programming languages</a></span></dt>
+<dt><span class="sect2"><a href="#shell-scripts">19.4.4. Packages containing shell scripts</a></span></dt>
+<dt><span class="sect2"><a href="#other-programming-languages">19.4.5. Other programming languages</a></span></dt>
 </dl></dd>
 <dt><span class="sect1"><a href="#fixes.build">19.5. Fixing problems in the <span class="emphasis"><em>build</em></span> phase</a></span></dt>
 <dd><dl>
@@ -3953,7 +3955,7 @@ the software is known to work with, from the most recent to the older
 one, e.g.
 </p>
 <pre class="programlisting">
-PYTHON_VERSIONS_ACCEPTED=       25 24
+PYTHON_VERSIONS_ACCEPTED=       31 27 26
 </pre>
 <p>
 If the packaged software is a Python module, include
@@ -4628,7 +4630,7 @@ monitor_file(...)
       the fixes straight from the packaged code.</p>
 <p>This generally involves cleaning up the patches
       (because sometimes the patches that are
-      added to pkgsrc are quick hacks), filling bug reports in the
+      added to pkgsrc are quick hacks), filing bug reports in the
       appropriate trackers for the projects and working with the
       mainstream authors to accept your changes.  It is
       <span class="emphasis"><em>extremely important</em></span> that you do it so that
@@ -6944,6 +6946,12 @@ ${FETCH_CMD} ${FETCH_BEFORE_ARGS} ${site}${file} ${FETCH_AFTER_ARGS}
     <span class="quote">&#8220;<span class="quote">./configure</span>&#8221;</span>) and
     <code class="varname">CONFIGURE_ARGS</code> may all be changed by the
     package.</p>
+<p>If the program uses the Perl way of configuration (mainly Perl
+    modules, but not only), i.e. a file called
+    <code class="filename">Makefile.PL</code>, it should include
+    <code class="filename">../../lang/perl5/module.mk</code>. To set any parameter for
+    <code class="filename">Makefile.PL</code> use the <code class="varname">MAKE_PARAMS</code>
+    variable (e.g., <code class="literal">MAKE_PARAMS+=foo=bar</code></p>
 <p>If the program uses an <code class="filename">Imakefile</code>
     for configuration, the appropriate steps can be invoked by
     setting <code class="varname">USE_IMAKE</code> to
@@ -7548,7 +7556,7 @@ TOOLS_PLATFORM.true?=           true                    # shell builtin
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
 <a name="tools.questions"></a>18.4. Questions regarding the tools</h2></div></div></div>
 <div class="qandaset" title="Frequently Asked Questions">
-<a name="id1168229286474"></a><dl>
+<a name="idm20025536"></a><dl>
 <dt>18.4.1. <a href="#tools.new">How do I add a new tool?</a>
 </dt>
 <dt>18.4.2. <a href="#tools.listall">How do I get a list of all available
@@ -7565,7 +7573,7 @@ TOOLS_PLATFORM.true?=           true                    # shell builtin
 <tbody>
 <tr class="question" title="18.4.1.">
 <td align="left" valign="top">
-<a name="tools.new"></a><a name="id1168229286477"></a><p><b>18.4.1.</b></p>
+<a name="tools.new"></a><a name="idm20025152"></a><p><b>18.4.1.</b></p>
 </td>
 <td align="left" valign="top"><p>How do I add a new tool?</p></td>
 </tr>
@@ -7575,7 +7583,7 @@ TOOLS_PLATFORM.true?=           true                    # shell builtin
 </tr>
 <tr class="question" title="18.4.2.">
 <td align="left" valign="top">
-<a name="tools.listall"></a><a name="id1168229286486"></a><p><b>18.4.2.</b></p>
+<a name="tools.listall"></a><a name="idm20024128"></a><p><b>18.4.2.</b></p>
 </td>
 <td align="left" valign="top"><p>How do I get a list of all available
 	tools?</p></td>
@@ -7586,7 +7594,7 @@ TOOLS_PLATFORM.true?=           true                    # shell builtin
 </tr>
 <tr class="question" title="18.4.3.">
 <td align="left" valign="top">
-<a name="tools.used"></a><a name="id1168229286494"></a><p><b>18.4.3.</b></p>
+<a name="tools.used"></a><a name="idm20023104"></a><p><b>18.4.3.</b></p>
 </td>
 <td align="left" valign="top"><p>How can I get a list of all the tools that a
 	package is using while being built? I want to know whether it
@@ -7639,7 +7647,8 @@ TOOLS_PLATFORM.true?=           true                    # shell builtin
 <dt><span class="sect2"><a href="#basic-programming-languages">19.4.1. C, C++, and Fortran</a></span></dt>
 <dt><span class="sect2"><a href="#java-programming-language">19.4.2. Java</a></span></dt>
 <dt><span class="sect2"><a href="#perl-scripts">19.4.3. Packages containing perl scripts</a></span></dt>
-<dt><span class="sect2"><a href="#other-programming-languages">19.4.4. Other programming languages</a></span></dt>
+<dt><span class="sect2"><a href="#shell-scripts">19.4.4. Packages containing shell scripts</a></span></dt>
+<dt><span class="sect2"><a href="#other-programming-languages">19.4.5. Other programming languages</a></span></dt>
 </dl></dd>
 <dt><span class="sect1"><a href="#fixes.build">19.5. Fixing problems in the <span class="emphasis"><em>build</em></span> phase</a></span></dt>
 <dd><dl>
@@ -8560,9 +8569,20 @@ pre-configure:
 <p>See <a class="xref" href="#perl-modules" title="19.6.6. Packages installing perl modules">Section 19.6.6, &#8220;Packages installing perl modules&#8221;</a> for information
     about handling perl modules.</p>
 </div>
-<div class="sect2" title="19.4.4. Other programming languages">
+<div class="sect2" title="19.4.4. Packages containing shell scripts">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="other-programming-languages"></a>19.4.4. Other programming languages</h3></div></div></div>
+<a name="shell-scripts"></a>19.4.4. Packages containing shell scripts</h3></div></div></div>
+<p><code class="varname">REPLACE_SH</code>,
+    <code class="varname">REPLACE_BASH</code>, <code class="varname">REPLACE_CSH</code>,
+    and <code class="varname">REPLACE_KSH</code> can be used to replace shell
+    hash bangs in files. Please use the appropriate one, prefering
+    <code class="varname">REPLACE_SH</code> in case this shell is sufficient.
+    When using <code class="varname">REPLACE_BASH</code>, don't forget to add
+    <code class="filename">bash</code> to <code class="varname">USE_TOOLS</code>.</p>
+</div>
+<div class="sect2" title="19.4.5. Other programming languages">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="other-programming-languages"></a>19.4.5. Other programming languages</h3></div></div></div>
 <p>Currently, there is no special handling for other languages
     in pkgsrc.  If a compiler package provides a
     <code class="filename">buildlink3.mk</code> file, include that, otherwise
@@ -8841,8 +8861,10 @@ ${INSTALL_DATA_DIR} ${PREFIX}/dir2
     install as non-root user (<span class="quote">&#8220;<span class="quote">user-destdir</span>&#8221;</span>).</p>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
 <li class="listitem"><p><code class="varname">PKG_DESTDIR_SUPPORT</code> has to be
-      set to <span class="quote">&#8220;<span class="quote">destdir</span>&#8221;</span> or <span class="quote">&#8220;<span class="quote">user-destdir</span>&#8221;</span>. If
-      bsd.prefs.mk is included in the Makefile,
+      set to <span class="quote">&#8220;<span class="quote">none</span>&#8221;</span>, <span class="quote">&#8220;<span class="quote">destdir</span>&#8221;</span>, or
+      <span class="quote">&#8220;<span class="quote">user-destdir</span>&#8221;</span>. By default <code class="varname">PKG_DESTDIR_SUPPORT</code>
+      is set to <span class="quote">&#8220;<span class="quote">user-destdir</span>&#8221;</span> to help catching more
+      potential packaging problems. If bsd.prefs.mk is included in the Makefile,
       <code class="varname">PKG_DESTDIR_SUPPORT</code> needs to be set before
       the inclusion.</p></li>
 <li class="listitem"><p>All installation operations have to be prefixed with
@@ -9589,7 +9611,7 @@ place.</p></li>
 	and if you still don't have the answer, ask on the
 	<code class="literal">pkgsrc-users</code> mailing list.</p>
 <div class="qandaset" title="Frequently Asked Questions">
-<a name="id1168229273404"></a><dl>
+<a name="idm19487552"></a><dl>
 <dt>22.1. <a href="#devfaq.makeflags">What is the difference between
 	MAKEFLAGS, .MAKEFLAGS and
 	MAKE_FLAGS?</a>
@@ -9632,7 +9654,7 @@ do?</a>
 <tbody>
 <tr class="question" title="22.1.">
 <td align="left" valign="top">
-<a name="devfaq.makeflags"></a><a name="id1168229273408"></a><p><b>22.1.</b></p>
+<a name="devfaq.makeflags"></a><a name="idm19487168"></a><p><b>22.1.</b></p>
 </td>
 <td align="left" valign="top"><p>What is the difference between
 	<code class="varname">MAKEFLAGS</code>, <code class="varname">.MAKEFLAGS</code> and
@@ -9648,7 +9670,7 @@ do?</a>
 </tr>
 <tr class="question" title="22.2.">
 <td align="left" valign="top">
-<a name="devfaq.make"></a><a name="id1168229273476"></a><p><b>22.2.</b></p>
+<a name="devfaq.make"></a><a name="idm19483200"></a><p><b>22.2.</b></p>
 </td>
 <td align="left" valign="top"><p>What is the difference between
 	<code class="varname">MAKE</code>, <code class="varname">GMAKE</code> and
@@ -9666,7 +9688,7 @@ do?</a>
 </tr>
 <tr class="question" title="22.3.">
 <td align="left" valign="top">
-<a name="devfaq.cc"></a><a name="id1168229273512"></a><p><b>22.3.</b></p>
+<a name="devfaq.cc"></a><a name="idm19478720"></a><p><b>22.3.</b></p>
 </td>
 <td align="left" valign="top"><p>What is the difference between
 	<code class="varname">CC</code>, <code class="varname">PKG_CC</code> and
@@ -9684,7 +9706,7 @@ do?</a>
 </tr>
 <tr class="question" title="22.4.">
 <td align="left" valign="top">
-<a name="devfaq.bl3flags"></a><a name="id1168229273547"></a><p><b>22.4.</b></p>
+<a name="devfaq.bl3flags"></a><a name="idm19474624"></a><p><b>22.4.</b></p>
 </td>
 <td align="left" valign="top"><p>What is the difference between
 	<code class="varname">BUILDLINK_LDFLAGS</code>,
@@ -9697,7 +9719,7 @@ do?</a>
 </tr>
 <tr class="question" title="22.5.">
 <td align="left" valign="top">
-<a name="devfaq.bl3prefix"></a><a name="id1168229273565"></a><p><b>22.5.</b></p>
+<a name="devfaq.bl3prefix"></a><a name="idm19472320"></a><p><b>22.5.</b></p>
 </td>
 <td align="left" valign="top"><p>Why does <span class="command"><strong>make show-var
 	VARNAME=BUILDLINK_PREFIX.<em class="replaceable"><code>foo</code></em></strong></span>
@@ -9713,7 +9735,7 @@ do?</a>
 </tr>
 <tr class="question" title="22.6.">
 <td align="left" valign="top">
-<a name="devfaq.master_sites"></a><a name="id1168229273591"></a><p><b>22.6.</b></p>
+<a name="devfaq.master_sites"></a><a name="idm19469248"></a><p><b>22.6.</b></p>
 </td>
 <td align="left" valign="top"><p>What does
 	<code class="literal">${MASTER_SITE_SOURCEFORGE:=package/}</code> mean? I
@@ -9737,7 +9759,7 @@ do?</a>
 </tr>
 <tr class="question" title="22.7.">
 <td align="left" valign="top">
-<a name="devfaq.mailinglists"></a><a name="id1168229273658"></a><p><b>22.7.</b></p>
+<a name="devfaq.mailinglists"></a><a name="idm19452992"></a><p><b>22.7.</b></p>
 </td>
 <td align="left" valign="top"><p>Which mailing lists are there for package
 	developers?</p></td>
@@ -9762,7 +9784,7 @@ do?</a>
 </tr>
 <tr class="question" title="22.8.">
 <td align="left" valign="top">
-<a name="devfaq.documentation"></a><a name="id1168229273758"></a><p><b>22.8.</b></p>
+<a name="devfaq.documentation"></a><a name="idm19449280"></a><p><b>22.8.</b></p>
 </td>
 <td align="left" valign="top"><p>Where is the pkgsrc
 	documentation?</p></td>
@@ -9810,7 +9832,7 @@ do?</a>
 </tr>
 <tr class="question" title="22.9.">
 <td align="left" valign="top">
-<a name="devfaq.too-much-time"></a><a name="id1168229273881"></a><p><b>22.9.</b></p>
+<a name="devfaq.too-much-time"></a><a name="idm19442752"></a><p><b>22.9.</b></p>
 </td>
 <td align="left" valign="top"><p>I have a little time to kill.  What shall I
 do?</p></td>

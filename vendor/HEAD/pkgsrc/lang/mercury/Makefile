@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.39 2012/06/01 00:02:14 dholland Exp $
+# $NetBSD: Makefile,v 1.41 2012/10/03 21:56:19 wiz Exp $
 
 DISTNAME=		mercury-compiler-11.07
 PKGNAME=		mercury-11.07
+PKGREVISION=		1
 CATEGORIES=		lang
 MASTER_SITES=		ftp://ftp.mercury.cs.mu.oz.au/pub/mercury/ \
 			http://www.mercury.cs.mu.oz.au/download/files/ \
@@ -10,8 +11,6 @@ MASTER_SITES=		ftp://ftp.mercury.cs.mu.oz.au/pub/mercury/ \
 MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://www.cs.mu.oz.au/research/mercury/
 COMMENT=		Modern logic/functional programming language
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=		yes
 USE_TOOLS+=		gmake pax bison flex

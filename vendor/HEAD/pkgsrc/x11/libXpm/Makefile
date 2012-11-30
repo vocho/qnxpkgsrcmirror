@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.13 2012/06/09 07:00:48 obache Exp $
+# $NetBSD: Makefile,v 1.15 2012/10/29 05:06:35 asau Exp $
 #
 
 DISTNAME=		libXpm-3.5.10
@@ -11,8 +11,6 @@ HOMEPAGE=		http://xorg.freedesktop.org/
 COMMENT=		X PixMap Library from modular Xorg X11
 
 CONFLICTS+=		xpm-[0-9]*
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_LIBTOOL=		yes
 USE_TOOLS+=		pkg-config xgettext
@@ -49,7 +47,6 @@ CONFIGURE_ARGS+=	XPM_CFLAGS=${XPM_CFLAGS:Q} \
 .include "../../x11/libX11/buildlink3.mk"
 .include "../../x11/libXext/buildlink3.mk"
 .include "../../x11/libXt/buildlink3.mk"
-.include "../../x11/xextproto/buildlink3.mk"
 .include "../../x11/xproto/buildlink3.mk"
 
 .include "../../mk/bsd.pkg.mk"

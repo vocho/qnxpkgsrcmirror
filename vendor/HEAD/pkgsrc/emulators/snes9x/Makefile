@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.48 2012/03/07 19:10:30 hans Exp $
+# $NetBSD: Makefile,v 1.50 2012/10/23 10:24:04 wiz Exp $
 
 SNESVER=		1.43
 DISTNAME=		snes9x-${SNESVER}-src
@@ -10,8 +10,6 @@ MASTER_SITES=		http://www.lysator.liu.se/snes9x/${SNESVER}/ \
 MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://www.snes9x.com/
 COMMENT=		Super Nintendo Entertainment System (SNES) emulator
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 NOT_FOR_PLATFORM=	${LP64PLATFORMS}
 MAKE_JOBS_SAFE=		no
@@ -94,7 +92,6 @@ BUILDLINK_DEPMETHOD.libXt?=	build
 .include "../../x11/libXxf86dga/buildlink3.mk"
 .include "../../x11/libXxf86vm/buildlink3.mk"
 .include "../../x11/libXt/buildlink3.mk"
-.include "../../x11/xextproto/buildlink3.mk"
 .include "../../mk/oss.buildlink3.mk"
 .include "../../mk/pthread.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

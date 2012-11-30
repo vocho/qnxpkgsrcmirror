@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.26 2012/06/12 15:45:56 wiz Exp $
+# $NetBSD: Makefile,v 1.28 2012/10/23 10:24:05 wiz Exp $
 
 DISTNAME=		quakeforge-0.5.5
 PKGREVISION=		11
@@ -8,8 +8,6 @@ MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=quake/}
 MAINTAINER=		snj@NetBSD.org
 HOMEPAGE=		http://www.quakeforge.net/
 COMMENT=		Improved Quake engine
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 CONFIGURE_ARGS+=	--with-cpp="${CPP} %d %i %o"
 CONFIGURE_ARGS+=	--disable-ogg
@@ -57,7 +55,6 @@ INSTALLATION_DIRS=	include/QF/GL include/QF/plugin include/QF/ruamoko/gui
 .include "../../x11/libXext/buildlink3.mk"
 .include "../../x11/libXxf86dga/buildlink3.mk"
 .include "../../x11/libXxf86vm/buildlink3.mk"
-.include "../../x11/xextproto/buildlink3.mk"
 .include "../../x11/xf86vidmodeproto/buildlink3.mk"
 .include "../../x11/xf86dgaproto/buildlink3.mk"
 .include "../../mk/oss.buildlink3.mk"

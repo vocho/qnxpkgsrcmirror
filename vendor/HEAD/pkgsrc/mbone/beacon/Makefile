@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.16 2011/08/14 13:39:57 obache Exp $
+# $NetBSD: Makefile,v 1.18 2012/10/08 09:25:49 asau Exp $
 #
 
 DISTNAME=	beacon-1.3
-PKGREVISION=	3
+PKGREVISION=	4
 CATEGORIES=	mbone
 MASTER_SITES=	${MASTER_SITE_FREEBSD}
 
@@ -10,8 +10,6 @@ MAINTAINER=	pettai@NetBSD.org
 HOMEPAGE=	http://dast.nlanr.net/Projects/Beacon/
 COMMENT=	Multicast supervision tool
 LICENSE=	modified-bsd
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=	YES
 CONFIGURE_ARGS+=	--sysconfdir=${PREFIX}/share/examples/beacon

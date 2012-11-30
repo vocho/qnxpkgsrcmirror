@@ -1,14 +1,12 @@
-# $NetBSD: Makefile,v 1.11 2012/07/20 12:30:36 taca Exp $
+# $NetBSD: Makefile,v 1.13 2012/10/31 11:19:23 asau Exp $
 
 MODNAME=		gettext
 CATEGORIES+=		devel
 COMMENT=		PHP extension for gettext support
 
-PKG_DESTDIR_SUPPORT=	user-destdir
-
 CONFLICTS=	php-gettext-[0-9]*
 
-CONFIGURE_ARGS+=	--with-${MODNAME}=shared,${BUILDLINK_PREFIX.gettext}
+CONFIGURE_ARGS+=	--with-gettext=shared,${BUILDLINK_DIR}
 
 .include "../../lang/php/ext.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"

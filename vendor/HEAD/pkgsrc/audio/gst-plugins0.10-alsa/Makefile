@@ -1,11 +1,9 @@
-# $NetBSD: Makefile,v 1.4 2012/06/14 07:45:17 sbd Exp $
+# $NetBSD: Makefile,v 1.6 2012/09/22 12:36:44 obache Exp $
 #
 
 GST_PLUGINS0.10_NAME=	alsa
 GST_PLUGINS0.10_DIRS=	ext/alsa
-PKGREVISION=		1
-
-PKG_DESTDIR_SUPPORT=	user-destdir
+PKGREVISION=		2
 
 .include "../../multimedia/gst-plugins0.10-base/Makefile.common"
 

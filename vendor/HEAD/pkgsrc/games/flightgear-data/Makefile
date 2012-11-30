@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.2 2011/02/26 10:56:52 hans Exp $
+# $NetBSD: Makefile,v 1.4 2012/10/06 11:54:37 asau Exp $
 
-DISTNAME=	FlightGear-data-2.0.0
+DISTNAME=	FlightGear-data-2.8.0
 PKGNAME=	${DISTNAME:tl}
 CATEGORIES=	games
 MASTER_SITES=	http://mirrors.ibiblio.org/pub/mirrors/flightgear/ftp/Shared/ \
@@ -11,10 +11,7 @@ EXTRACT_SUFX=	.tar.bz2
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.flightgear.org/
 COMMENT=	FlightGear Simulator data files
-
 LICENSE=	gnu-gpl-v2
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 WRKSRC=			${WRKDIR}/data
 NO_BUILD=		yes

@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.34 2012/06/14 07:43:43 sbd Exp $
+# $NetBSD: Makefile,v 1.36 2012/10/03 00:20:18 asau Exp $
 #
 
 DISTNAME=		wv2-0.2.3
-PKGREVISION=		10
+PKGREVISION=		11
 CATEGORIES=		converters
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=wvware/}
 EXTRACT_SUFX=		.tar.bz2
@@ -10,8 +10,6 @@ EXTRACT_SUFX=		.tar.bz2
 MAINTAINER=		markd@NetBSD.org
 HOMEPAGE=		http://wvware.sourceforge.net/
 COMMENT=		Library to access Microsoft Word files
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_PKGLOCALEDIR=	yes
 USE_LIBTOOL=		yes

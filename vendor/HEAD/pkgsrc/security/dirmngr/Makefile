@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.41 2012/04/12 08:21:54 wiz Exp $
+# $NetBSD: Makefile,v 1.43 2012/10/23 18:16:25 asau Exp $
 
 DISTNAME=	dirmngr-1.1.0
 PKGREVISION=	3
@@ -23,7 +23,6 @@ BUILD_DEFS+=		VARBASE
 PKG_HOME.${DIRMNGR_USER}=	${VARBASE}/dirmngr
 
 USE_TOOLS+=		autoconf automake gawk gettext
-#USE_TOOLS+=		gmake
 USE_LIBTOOL=		yes
 USE_PKGLOCALEDIR=	yes
 RCD_SCRIPTS=		dirmngr
@@ -53,14 +52,9 @@ OWN_DIRS_PERMS+=	${PREFIX}/libdata/dirmngr ${DIRMNGR_PERMS}
 OWN_DIRS_PERMS+=	${PREFIX}/libdata/dirmngr/extra-certs ${DIRMNGR_PERMS}
 
 INSTALLATION_DIRS=	sbin
-PKG_DESTDIR_SUPPORT=	user-destdir
-
-pre-build:
-	${CP} ${FILESDIR}/runDirmngr.c ${WRKDIR}/runDirmngr.c
 
 post-build:
-	cd ${WRKDIR} && \
-	${SETENV} ${BUILDENV} ${CC} ${CFLAGS} -DDIRMNGR_USER='"${DIRMNGR_USER}"' -DDIRMNGR_PATH='"${PREFIX}/bin/dirmngr"' -o runDirmngr runDirmngr.c
+	${SETENV} ${BUILDENV} ${CC} ${CFLAGS} -DDIRMNGR_USER='"${DIRMNGR_USER}"' -DDIRMNGR_PATH='"${PREFIX}/bin/dirmngr"' -o ${WRKDIR}/runDirmngr ${FILESDIR}/runDirmngr.c
 
 post-install:
 	${INSTALL_PROGRAM} ${WRKDIR}/runDirmngr ${DESTDIR}${PREFIX}/sbin

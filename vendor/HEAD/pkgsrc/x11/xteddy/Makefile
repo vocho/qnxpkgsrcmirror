@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.21 2008/09/16 12:42:03 joerg Exp $
+# $NetBSD: Makefile,v 1.23 2012/10/29 05:07:22 asau Exp $
 
 DISTNAME=	xteddy-1.1
 PKGREVISION=	1
@@ -8,8 +8,6 @@ MASTER_SITES=	http://staffwww.itn.liu.se/~stegu/xteddy/
 MAINTAINER=	johnam@mail.kemper.org
 HOMEPAGE=	http://staffwww.itn.liu.se/~stegu/xteddy/
 COMMENT=	Cuddly teddy bear for your desktop
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=	YES
 
@@ -21,5 +19,4 @@ BUILDLINK_DEPMETHOD.libXt?=	build
 .include "../../x11/libXext/buildlink3.mk"
 .include "../../x11/libXpm/buildlink3.mk"
 .include "../../x11/libXt/buildlink3.mk"
-.include "../../x11/xextproto/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.8 2012/06/14 07:43:08 sbd Exp $
+# $NetBSD: Makefile,v 1.10 2012/10/25 06:56:03 asau Exp $
 #
 
 DISTNAME=	libplist-1.8
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	textproc
 MASTER_SITES=	http://www.libimobiledevice.org/downloads/
 EXTRACT_SUFX=	.tar.bz2
@@ -11,8 +11,6 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.libimobiledevice.org/
 COMMENT=	Handle Apple Binary and XML Property Lists
 LICENSE=	gnu-gpl-v2 AND gnu-lgpl-v2.1
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_CMAKE=	yes
 USE_TOOLS+=	gmake pkg-config

@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.26 2012/03/03 00:12:49 wiz Exp $
+# $NetBSD: Makefile,v 1.28 2012/10/03 00:02:41 asau Exp $
 
 DISTNAME=	mu-conference_0.8
 PKGNAME=	${DISTNAME:S/_/-/}
-PKGREVISION=	3
+PKGREVISION=	4
 CATEGORIES=	chat
 MASTER_SITES=	http://download.gna.org/mu-conference/
 
@@ -10,8 +10,6 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://jabber.terrapin.com/JCR/
 COMMENT=	Implementation of the XEP-0045 Multi-User Chat protocol
 LICENSE=	gnu-gpl-v2
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=		gmake pkg-config
 LDFLAGS+=		-L${BUILDLINK_PREFIX.expat}/lib

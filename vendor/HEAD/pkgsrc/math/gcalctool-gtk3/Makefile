@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.7 2012/07/06 14:48:35 drochner Exp $
+# $NetBSD: Makefile,v 1.13 2012/10/26 11:36:34 prlw1 Exp $
 #
 
-DISTNAME=		gcalctool-6.4.2.1
+DISTNAME=		gcalctool-6.6.1
 CATEGORIES=		math gnome
-MASTER_SITES=		${MASTER_SITE_GNOME:=sources/gcalctool/6.4/}
+MASTER_SITES=		${MASTER_SITE_GNOME:=sources/gcalctool/6.6/}
 EXTRACT_SUFX=		.tar.xz
 
 MAINTAINER=		prlw1@cam.ac.uk
@@ -11,13 +11,9 @@ HOMEPAGE=		http://live.gnome.org/Gcalctool
 COMMENT=		Desktop calculator for GNOME
 LICENSE=		gnu-gpl-v2
 
-PKG_DESTDIR_SUPPORT=	user-destdir
-
-GNU_CONFIGURE=		YES
-CONFIGURE_ENV+=		HAVE_YACC=yes
-
+GNU_CONFIGURE=		yes
 USE_LIBTOOL=		yes
-USE_TOOLS+=		bison gmake gsed intltool flex msgfmt pkg-config
+USE_TOOLS+=		gmake gsed intltool msgfmt pkg-config
 USE_PKGLOCALEDIR=	yes
 
 BUILD_DEPENDS+=		itstool-[0-9]*:../../textproc/itstool

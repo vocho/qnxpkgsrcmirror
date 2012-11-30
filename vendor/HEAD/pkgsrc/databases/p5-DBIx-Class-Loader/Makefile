@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.4 2011/08/14 08:18:07 obache Exp $
+# $NetBSD: Makefile,v 1.6 2012/10/03 21:54:19 wiz Exp $
 
 DISTNAME=	DBIx-Class-Loader-0.21
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	3
+PKGREVISION=	4
 CATEGORIES=	databases perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=DBIx/}
 
@@ -18,8 +18,6 @@ DEPENDS+=	p5-UNIVERSAL-require>=0.10:../../devel/p5-UNIVERSAL-require
 
 USE_LANGUAGES=	# empty
 PERL5_PACKLIST=	auto/DBIx/Class/Loader/.packlist
-
-PKG_DESTDIR_SUPPORT=    user-destdir
 
 .include "../../lang/perl5/module.mk"
 .include "../../mk/bsd.pkg.mk"

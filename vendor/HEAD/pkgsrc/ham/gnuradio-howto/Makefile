@@ -1,12 +1,10 @@
-# $NetBSD: Makefile,v 1.18 2012/07/02 13:37:39 adam Exp $
+# $NetBSD: Makefile,v 1.20 2012/10/03 13:01:44 asau Exp $
 
 DISTNAME=	gr-howto-write-a-block-${VERSION}
-PKGREVISION=	6
+PKGREVISION=	7
 CATEGORIES=	ham
 PKGNAME=	gnuradio-howto-${VERSION}
 COMMENT=	Documentation on creating GNU Radio signal processing blocks
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 .include	"../../meta-pkgs/gnuradio/Makefile.common"
 

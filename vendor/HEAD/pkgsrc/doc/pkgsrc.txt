@@ -336,7 +336,8 @@ II. The pkgsrc developer's guide
             19.4.1. C, C++, and Fortran
             19.4.2. Java
             19.4.3. Packages containing perl scripts
-            19.4.4. Other programming languages
+            19.4.4. Packages containing shell scripts
+            19.4.5. Other programming languages
 
         19.5. Fixing problems in the build phase
 
@@ -869,7 +870,7 @@ $ ftp ftp://ftp.NetBSD.org/pub/pkgsrc/current/pkgsrc.tar.gz
 
 To fetch a specific pkgsrc stable branch, run:
 
-$ cd /usr && cvs -q -z3 -d anoncvs@anoncvs.NetBSD.org:/cvsroot checkout -r pkgsrc-20xxQy -P pkgsrc
+$ cd /usr && cvs -q -z2 -d anoncvs@anoncvs.NetBSD.org:/cvsroot checkout -r pkgsrc-20xxQy -P pkgsrc
 
 Where pkgsrc-20xxQy is the stable branch to be checked out, for example, "
 pkgsrc-2009Q1"
@@ -879,14 +880,14 @@ package source will be stored under /usr/pkgsrc/.
 
 To fetch the pkgsrc current branch, run:
 
-$ cd /usr && cvs -q -z3 -d anoncvs@anoncvs.NetBSD.org:/cvsroot checkout -P pkgsrc
+$ cd /usr && cvs -q -z2 -d anoncvs@anoncvs.NetBSD.org:/cvsroot checkout -P pkgsrc
 
 Refer to the list of available mirrors to choose a faster CVS mirror, if
 needed.
 
 If you get error messages from rsh, you need to set CVS_RSH variable. E.g.:
 
-$ cd /usr && env CVS_RSH=ssh cvs -q -z3 -d anoncvs@anoncvs.NetBSD.org:/cvsroot checkout -P pkgsrc
+$ cd /usr && env CVS_RSH=ssh cvs -q -z2 -d anoncvs@anoncvs.NetBSD.org:/cvsroot checkout -P pkgsrc
 
 Refer to documentation on your command shell how to set CVS_RSH=ssh
 permanently. For Bourne shells, you can set it in your .profile or better
@@ -903,7 +904,7 @@ headache and some bug reports, so we strongly recommend it. You can find an
 explanation of this file in the CVS documentation.
 
 # recommended CVS configuration file from the pkgsrc guide
-cvs -q -z3
+cvs -q -z2
 checkout -P
 update -dP
 diff -upN
@@ -2348,11 +2349,11 @@ bulk build inside a chroot environment.
 The first step is to set up a chroot sandbox, e.g. /usr/sandbox. This can be
 done by using null mounts, or manually.
 
-There is a shell script called pkgsrc/mk/bulk/mksandbox which will set up the
-sandbox environment using null mounts. It will also create a script called
-sandbox in the root of the sandbox environment, which will allow the null
-mounts to be activated using the sandbox mount command and deactivated using
-the sandbox umount command.
+There is a shell script called mksandbox installed by the pkgtools/mksandbox
+package, which will set up the sandbox environment using null mounts. It will
+also create a script called sandbox in the root of the sandbox environment,
+which will allow the null mounts to be activated using the sandbox mount
+command and deactivated using the sandbox umount command.
 
 To set up a sandbox environment by hand, after extracting all the sets from a
 NetBSD installation or doing a make distribution DESTDIR=/usr/sandbox in /usr/
@@ -3299,7 +3300,8 @@ Table of Contents
         19.4.1. C, C++, and Fortran
         19.4.2. Java
         19.4.3. Packages containing perl scripts
-        19.4.4. Other programming languages
+        19.4.4. Packages containing shell scripts
+        19.4.5. Other programming languages
 
     19.5. Fixing problems in the build phase
 
@@ -3472,7 +3474,7 @@ If the default Python versions are not supported by the software, set the
 PYTHON_VERSIONS_ACCEPTED variable to the Python versions the software is known
 to work with, from the most recent to the older one, e.g.
 
-PYTHON_VERSIONS_ACCEPTED=       25 24
+PYTHON_VERSIONS_ACCEPTED=       31 27 26
 
 If the packaged software is a Python module, include "../../lang/python/
 extension.mk". In this case, the package directory should be called "
@@ -3990,7 +3992,7 @@ out-of-the box on NetBSD. Furthermore, any user that gets newer distfiles will
 get the fixes straight from the packaged code.
 
 This generally involves cleaning up the patches (because sometimes the patches
-that are added to pkgsrc are quick hacks), filling bug reports in the
+that are added to pkgsrc are quick hacks), filing bug reports in the
 appropriate trackers for the projects and working with the mainstream authors
 to accept your changes. It is extremely important that you do it so that the
 packages in pkgsrc are kept simple and thus further changes can be done without
@@ -5868,6 +5870,11 @@ CONFIGURE_ENV and arguments CONFIGURE_ARGS. The variables CONFIGURE_ENV,
 CONFIGURE_SCRIPT (default: "./configure") and CONFIGURE_ARGS may all be changed
 by the package.
 
+If the program uses the Perl way of configuration (mainly Perl modules, but not
+only), i.e. a file called Makefile.PL, it should include ../../lang/perl5/
+module.mk. To set any parameter for Makefile.PL use the MAKE_PARAMS variable
+(e.g., MAKE_PARAMS+=foo=bar
+
 If the program uses an Imakefile for configuration, the appropriate steps can
 be invoked by setting USE_IMAKE to "yes". (If you only want the package
 installed in ${X11PREFIX} but xmkmf not being run, set USE_X11BASE instead.)
@@ -6420,7 +6427,8 @@ Table of Contents
     19.4.1. C, C++, and Fortran
     19.4.2. Java
     19.4.3. Packages containing perl scripts
-    19.4.4. Other programming languages
+    19.4.4. Packages containing shell scripts
+    19.4.5. Other programming languages
 
 19.5. Fixing problems in the build phase
 
@@ -7193,7 +7201,14 @@ version number. The default is "5.0".
 See Section 19.6.6, "Packages installing perl modules" for information about
 handling perl modules.
 
-19.4.4. Other programming languages
+19.4.4. Packages containing shell scripts
+
+REPLACE_SH, REPLACE_BASH, REPLACE_CSH, and REPLACE_KSH can be used to replace
+shell hash bangs in files. Please use the appropriate one, prefering REPLACE_SH
+in case this shell is sufficient. When using REPLACE_BASH, don't forget to add
+bash to USE_TOOLS.
+
+19.4.5. Other programming languages
 
 Currently, there is no special handling for other languages in pkgsrc. If a
 compiler package provides a buildlink3.mk file, include that, otherwise just
@@ -7387,9 +7402,10 @@ for installation as usual. There are two ways: Either the package must install
 as root ("destdir") or the package can install as non-root user ("user-destdir"
 ).
 
-  * PKG_DESTDIR_SUPPORT has to be set to "destdir" or "user-destdir". If
-    bsd.prefs.mk is included in the Makefile, PKG_DESTDIR_SUPPORT needs to be
-    set before the inclusion.
+  * PKG_DESTDIR_SUPPORT has to be set to "none", "destdir", or "user-destdir".
+    By default PKG_DESTDIR_SUPPORT is set to "user-destdir" to help catching
+    more potential packaging problems. If bsd.prefs.mk is included in the
+    Makefile, PKG_DESTDIR_SUPPORT needs to be set before the inclusion.
 
   * All installation operations have to be prefixed with ${DESTDIR}.
 

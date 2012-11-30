@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.17 2009/06/11 10:04:27 tnn Exp $
+# $NetBSD: Makefile,v 1.19 2012/10/06 14:10:44 asau Exp $
 
 DISTNAME=	compface-1.5.2
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	graphics
 MASTER_SITES=	http://ftp.xemacs.org/pub/xemacs/aux/
 
@@ -10,7 +10,6 @@ HOMEPAGE=	http://freshmeat.net/projects/compface/
 COMMENT=	48x48x1 image compression and decompression (X-face utility)
 
 CONFLICTS=	faces-[0-9]*
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=		gmake perl:run
 GNU_CONFIGURE=		yes

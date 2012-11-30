@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.55 2012/03/03 12:54:20 wiz Exp $
+# $NetBSD: Makefile,v 1.60 2012/10/23 17:18:19 asau Exp $
 
 DISTNAME=		ettercap-0.6.b
-PKGREVISION=		13
+PKGREVISION=		17
 CATEGORIES=		security net
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=ettercap/}
 
@@ -11,8 +11,6 @@ COMMENT=		Multipurpose sniffer/interceptor/logger for switched LAN
 LICENSE=		gnu-gpl-v2
 
 CONFLICTS+=		ettercap-NG-[0-9]*
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 MAKE_JOBS_SAFE=		no
 

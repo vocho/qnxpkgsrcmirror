@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.5 2012/02/14 13:32:41 hiramatsu Exp $
+# $NetBSD: Makefile,v 1.7 2012/10/31 11:18:39 asau Exp $
 #
 
 DISTNAME=	MooseX-Types-URI-0.03
 PKGNAME=	p5-${DISTNAME}
+PKGREVISION=	1
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=MooseX/}
 
@@ -16,8 +17,6 @@ DEPENDS+=	p5-MooseX-Types>0:../../devel/p5-MooseX-Types
 DEPENDS+=	p5-MooseX-Types-Path-Class>0:../../devel/p5-MooseX-Types-Path-Class
 DEPENDS+=	p5-URI>0:../../www/p5-URI
 DEPENDS+=	p5-URI-FromHash>0:../../www/p5-URI-FromHash
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_LANGUAGES=	# empty
 PERL5_PACKLIST=	auto/MooseX/Types/URI/.packlist

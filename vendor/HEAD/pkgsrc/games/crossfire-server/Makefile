@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.17 2012/06/14 07:44:43 sbd Exp $
+# $NetBSD: Makefile,v 1.19 2012/10/06 11:54:34 asau Exp $
 
 DISTNAME=	crossfire-1.11.0
 PKGNAME=	crossfire-server-1.11.0
-PKGREVISION=	10
+PKGREVISION=	11
 CATEGORIES=	games x11
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=crossfire/}
 DISTFILES=	${DISTNAME}${EXTRACT_SUFX}
@@ -12,7 +12,6 @@ MAINTAINER=	adam@NetBSD.org
 HOMEPAGE=	http://crossfire.real-time.com/
 COMMENT=	X11 multi/single player game similar to gauntlet and nethack
 
-PKG_DESTDIR_SUPPORT=	user-destdir
 PKG_SYSCONFSUBDIR=	crossfire
 
 USE_LIBTOOL=		yes

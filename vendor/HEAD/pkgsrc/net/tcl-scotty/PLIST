@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.4 2009/06/14 18:09:44 joerg Exp $
+@comment $NetBSD: PLIST,v 1.6 2012/11/07 14:33:54 he Exp $
 bin/scotty2.1.11
 bin/scotty
 bin/ntping

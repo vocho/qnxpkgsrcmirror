@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.137 2012/08/18 08:49:42 ryoon Exp $
+# $NetBSD: Makefile,v 1.140 2012/10/08 09:57:27 asau Exp $
 
 DISTNAME=	koffice-1.6.3
-PKGREVISION=	34
+PKGREVISION=	36
 CATEGORIES=	misc kde
 MASTER_SITES=	${MASTER_SITE_KDE:=koffice-1.6.3/src/}
 EXTRACT_SUFX=	.tar.bz2
@@ -11,7 +11,6 @@ HOMEPAGE=	http://www.koffice.org/
 COMMENT=	KDE Office Suite
 LICENSE=	gnu-gpl-v2 AND gnu-lgpl-v2
 
-PKG_DESTDIR_SUPPORT=	user-destdir
 MAKE_JOBS_SAFE=		no
 
 PATCH_SITES=	ftp://ftp.kde.org/pub/kde/security_patches/

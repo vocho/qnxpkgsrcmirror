@@ -1,11 +1,9 @@
-# $NetBSD: Makefile,v 1.37 2012/07/15 08:22:47 wiz Exp $
-
-PKG_DESTDIR_SUPPORT=	user-destdir
+# $NetBSD: Makefile,v 1.42 2012/10/08 23:01:15 adam Exp $
 
 .include "../../meta-pkgs/xfce4/Makefile.common"
 
 DISTNAME=	xfce4-mixer-${XFCE4_VERSION}
-PKGREVISION=	10
+PKGREVISION=	14
 CATEGORIES=	audio
 COMMENT=	Xfce mixer plugin
 

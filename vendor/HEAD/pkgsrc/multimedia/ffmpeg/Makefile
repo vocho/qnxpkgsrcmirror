@@ -1,13 +1,10 @@
-# $NetBSD: Makefile,v 1.87 2012/07/02 18:44:31 drochner Exp $
+# $NetBSD: Makefile,v 1.93 2012/11/09 07:56:26 tron Exp $
 
-# XXX This is release 0.7.13 but we had date-based pkgnames before.
-PKGNAME=	ffmpeg-20120609.${DISTVERSION}
+PKGNAME=	ffmpeg-20121028.${DISTVERSION}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://ffmpeg.mplayerhq.hu/
 COMMENT=	Decoding, encoding and streaming software
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 CONFIGURE_ARGS+=	--enable-avfilter
 #CONFIGURE_ARGS+=	--enable-avfilter-lavf
@@ -20,15 +17,16 @@ CONF_FILES+=	${PREFIX}/share/examples/ffmpeg/ffserver.conf \
 
 .include "../../mk/bsd.prefs.mk"
 
-.if ${OPSYS} == "Darwin"
+.if !empty(MACHINE_PLATFORM:MDarwin-*-i386)
 CONFIGURE_ARGS+=	--disable-asm
 .endif
+
+# "error: can't find a register in class 'GENERAL_REGS' while reloading 'asm'"
+CFLAGS.SunOS+=	-DBROKEN_RELOCATIONS=1
 
 TEST_TARGET=	check
 
 post-install:
-	${INSTALL_DATA} ${WRKSRC}/README ${WRKSRC}/doc/TODO \
-		${DESTDIR}${PREFIX}/share/doc/ffmpeg
 	${INSTALL_DATA} ${WRKSRC}/doc/*.txt \
 		${DESTDIR}${PREFIX}/share/doc/ffmpeg
 	${INSTALL_DATA} ${WRKSRC}/doc/ffserver.conf \

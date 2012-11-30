@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.13 2012/08/21 19:50:53 drochner Exp $
+# $NetBSD: Makefile,v 1.15 2012/10/23 10:24:10 wiz Exp $
 #
 
 DISTNAME=	mupdf-1.1-source
@@ -11,8 +11,6 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://mupdf.com/
 COMMENT=	Lightweight PDF viewer and toolkit
 LICENSE=	gnu-gpl-v3
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=	pkg-config gmake
 
@@ -36,5 +34,4 @@ post-install:
 .include "../../mk/jpeg.buildlink3.mk"
 .include "../../graphics/openjpeg/buildlink3.mk"
 .include "../../x11/libXext/buildlink3.mk"
-.include "../../x11/xextproto/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

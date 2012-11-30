@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.7 2011/10/28 01:13:08 hiramatsu Exp $
+# $NetBSD: Makefile,v 1.9 2012/10/31 11:18:37 asau Exp $
 #
 
 DISTNAME=	MooseX-SemiAffordanceAccessor-0.09
 PKGNAME=	p5-${DISTNAME}
+PKGREVISION=	1
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=MooseX/}
 
@@ -10,8 +11,6 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://search.cpan.org/dist/MooseX-SemiAffordanceAccessor/
 COMMENT=	Perl 5 module to name your accessors foo() and set_foo()
 LICENSE=	artistic-2.0
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_LANGUAGES=	# empty
 PERL5_PACKLIST=		auto/MooseX/SemiAffordanceAccessor/.packlist

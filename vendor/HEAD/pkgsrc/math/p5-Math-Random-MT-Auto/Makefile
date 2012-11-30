@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.1.1.1 2011/11/12 07:51:51 hiramatsu Exp $
+# $NetBSD: Makefile,v 1.3 2012/10/03 21:56:38 wiz Exp $
 #
 
 DISTNAME=	Math-Random-MT-Auto-6.16
 PKGNAME=	p5-${DISTNAME}
+PKGREVISION=	1
 CATEGORIES=	math perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Math/}
 
@@ -10,8 +11,6 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://search.cpan.org/dist/Math-Random-MT-Auto/
 COMMENT=	Auto-seeded Mersenne Twister PRNGs
 LICENSE=	modified-bsd
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 DEPENDS+=	p5-Object-InsideOut>=2.06:../../devel/p5-Object-InsideOut
 DEPENDS+=	p5-Exception-Class>=1.22:../../devel/p5-Exception-Class

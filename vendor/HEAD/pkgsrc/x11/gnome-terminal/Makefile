@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.43 2012/07/15 08:22:59 wiz Exp $
+# $NetBSD: Makefile,v 1.49 2012/10/29 05:06:16 asau Exp $
 #
 
 DISTNAME=		gnome-terminal-2.32.1
-PKGREVISION=		7
+PKGREVISION=		12
 CATEGORIES=		x11 gnome
 MASTER_SITES=		${MASTER_SITE_GNOME:=sources/gnome-terminal/2.32/}
 EXTRACT_SUFX=		.tar.bz2
@@ -12,8 +12,6 @@ HOMEPAGE=		http://www.gnome.org/
 COMMENT=		Xterm like terminal program for GNOME 2
 
 BUILD_DEPENDS+=		${PYPKGPREFIX}-expat-[0-9]*:../../textproc/py-expat
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 CONFLICTS=		gnome-core-[0-9]* gnome2-terminal-[0-9]*
 

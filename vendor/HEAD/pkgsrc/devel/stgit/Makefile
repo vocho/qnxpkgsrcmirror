@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.18 2012/03/15 11:53:25 obache Exp $
+# $NetBSD: Makefile,v 1.20 2012/10/31 11:19:47 asau Exp $
 
 DISTNAME=	stgit-0.14.3
-PKGREVISION=	4
+PKGREVISION=	5
 CATEGORIES=	devel
 MASTER_SITES=	http://homepage.ntlworld.com/cmarinas/stgit/
 
@@ -9,8 +9,6 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.procode.org/stgit/
 COMMENT=	Stacked GIT
 LICENSE=	gnu-gpl-v2
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 BUILD_DEPENDS+=	asciidoc-[0-9]*:../../textproc/asciidoc
 BUILD_DEPENDS+= xmlto-[0-9]*:../../textproc/xmlto

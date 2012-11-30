@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.12 2012/05/12 06:36:39 obache Exp $
+# $NetBSD: Makefile,v 1.14 2012/10/08 09:21:08 asau Exp $
 #
 
 .include "Makefile.common"
 
+PKGREVISION=	1
 CATEGORIES=	multimedia
 
 MAINTAINER=	obache@NetBSD.org
@@ -14,8 +15,6 @@ GNU_CONFIGURE=	yes
 USE_TOOLS+=	pkg-config bison flex
 USE_LANGUAGES=	c c++
 USE_LIBTOOL=	yes
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 CONFIGURE_ARGS+=	--disable-python
 CONFIGURE_ARGS+=	--disable-perl

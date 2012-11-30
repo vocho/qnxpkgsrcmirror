@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.190 2012/03/19 10:14:43 markd Exp $
+# $NetBSD: Makefile,v 1.196 2012/11/29 09:40:41 ryoon Exp $
 #
 
 COMMENT=	Multimedia utilities
@@ -26,6 +26,7 @@ SUBDIR+=	dvdstyler
 SUBDIR+=	dvdview
 SUBDIR+=	farsight2
 SUBDIR+=	ffmpeg
+SUBDIR+=	ffmpeg010
 SUBDIR+=	ffmpeg2theora
 SUBDIR+=	ffmpegthumbnailer
 SUBDIR+=	ffplay
@@ -59,8 +60,21 @@ SUBDIR+=	gst-plugins0.10-v4l2
 SUBDIR+=	gst-plugins0.10-vp8
 SUBDIR+=	gst-plugins0.10-x264
 SUBDIR+=	gst-plugins0.10-xvid
+SUBDIR+=	gst-plugins1-base
+SUBDIR+=	gst-plugins1-bad
+SUBDIR+=	gst-plugins1-dvdread
+SUBDIR+=	gst-plugins1-good
+SUBDIR+=	gst-plugins1-libav
+SUBDIR+=	gst-plugins1-mpeg2dec
+SUBDIR+=	gst-plugins1-ogg
+SUBDIR+=	gst-plugins1-resindvd
+SUBDIR+=	gst-plugins1-theora
+SUBDIR+=	gst-plugins1-ugly
+SUBDIR+=	gst-plugins1-vpx
+SUBDIR+=	gst-plugins1-x264
 SUBDIR+=	gst123
 SUBDIR+=	gstreamer0.10
+SUBDIR+=	gstreamer1
 SUBDIR+=	gtranscode
 SUBDIR+=	gxine
 SUBDIR+=	handbrake
@@ -90,6 +104,7 @@ SUBDIR+=	libmpeg2
 SUBDIR+=	libmpeg3
 SUBDIR+=	libnms
 SUBDIR+=	libogg
+SUBDIR+=	libquicktime
 SUBDIR+=	libtheora
 SUBDIR+=	libtheora-docs
 SUBDIR+=	libva
@@ -100,6 +115,7 @@ SUBDIR+=	mediainfo
 SUBDIR+=	mediatomb
 SUBDIR+=	mencoder
 SUBDIR+=	ming
+SUBDIR+=	minidlna
 SUBDIR+=	mjpegtools
 SUBDIR+=	mkv2mp4
 SUBDIR+=	mkvtoolnix

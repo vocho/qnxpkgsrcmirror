@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.1 2007/05/30 01:22:12 schmonz Exp $
+# $NetBSD: Makefile,v 1.3 2012/10/29 05:06:37 asau Exp $
 #
 
 DISTNAME=		libXrandr-1.0.2
@@ -15,7 +15,6 @@ COMMENT=		X RandR extension (Library)
 CONFLICTS+=		libXrandr-[0-9]*
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=		pkg-config
 USE_LIBTOOL=		yes
@@ -28,6 +27,5 @@ BUILDLINK_API_DEPENDS.Xrender+=	Xrender>=0.8
 .include "../../x11/libXext/buildlink3.mk"
 .include "../../x11/libXrender/buildlink3.mk"
 .include "../../x11/randrproto/buildlink3.mk"
-.include "../../x11/xextproto/buildlink3.mk"
 
 .include "../../mk/bsd.pkg.mk"

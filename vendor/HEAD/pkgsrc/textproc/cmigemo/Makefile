@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.1.1.1 2012/01/21 13:38:41 obache Exp $
+# $NetBSD: Makefile,v 1.3 2012/10/25 06:55:44 asau Exp $
 #
 
 DISTNAME=	cmigemo-default-src-20110227
 PKGNAME=	${DISTNAME:S/-default-src-/-1.3e./}
+PKGREVISION=	1
 CATEGORIES=	textproc
 MASTER_SITES=	http://cmigemo.googlecode.com/files/
 EXTRACT_SUFX=	.zip
@@ -19,8 +20,6 @@ JISYOFILE=	SKK-JISYO.L.${SKKJISYO_VERS}.bz2
 SITES.${SKKJISYO_FILE}=	${MASTER_SITE_FREEBSD_LOCAL:=matusita/skk-jisyo/}
 
 BUILD_DEPENDS+= nkf>=2.06:../../converters/nkf
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 HAS_CONFIGURE=	yes
 USE_TOOLS+=	perl gzip gmake

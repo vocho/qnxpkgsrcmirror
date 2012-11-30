@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.328 2012/08/22 09:37:31 marino Exp $
+# $NetBSD: Makefile,v 1.334 2012/10/11 15:08:26 drochner Exp $
 #
 
 COMMENT=	Programming languages
@@ -63,6 +63,7 @@ SUBDIR+=	gcc44
 SUBDIR+=	gcc45
 SUBDIR+=	gcc46
 SUBDIR+=	gcc47
+SUBDIR+=	gcc47-libs
 SUBDIR+=	gforth
 SUBDIR+=	ghc
 SUBDIR+=	gnat-aux
@@ -143,12 +144,9 @@ SUBDIR+=	py-basicproperty
 SUBDIR+=	py-cxfreeze
 SUBDIR+=	py-psyco
 SUBDIR+=	py-pyrex
-SUBDIR+=	py24-html-docs
-SUBDIR+=	py25-html-docs
 SUBDIR+=	py26-html-docs
 SUBDIR+=	py27-html-docs
 #SUBDIR+=	python		# only contains Makefile fragments
-SUBDIR+=	python25
 SUBDIR+=	python26
 SUBDIR+=	python27
 SUBDIR+=	python31
@@ -165,8 +163,6 @@ SUBDIR+=	ruby-doc-stdlib
 SUBDIR+=	ruby-execjs
 SUBDIR+=	ruby18
 SUBDIR+=	ruby18-base
-SUBDIR+=	ruby19
-SUBDIR+=	ruby19-base
 SUBDIR+=	ruby193
 SUBDIR+=	ruby193-base
 SUBDIR+=	runawk
@@ -208,7 +204,7 @@ SUBDIR+=	umb-scheme
 SUBDIR+=	utilisp
 SUBDIR+=	vala
 SUBDIR+=	vala014
-SUBDIR+=	vala016
+SUBDIR+=	vala018
 SUBDIR+=	vscm
 SUBDIR+=	vslisp
 SUBDIR+=	wsbasic

@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.9 2012/08/16 19:10:15 ryoon Exp $
+# $NetBSD: Makefile,v 1.17 2012/10/16 17:47:19 wiz Exp $
 #
 
 DISTNAME=	gnome-chemistry-utils-0.12.13
+PKGREVISION=	6
 CATEGORIES=	biology
 MASTER_SITES=	http://download-mirror.savannah.gnu.org/releases/gchemutils/0.12/
 EXTRACT_SUFX=	.tar.bz2
@@ -10,8 +11,6 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://gchemutils.nongnu.org/
 COMMENT=	GChemPaint, a 2D chemical editor and other programs
 LICENSE=	gnu-gpl-v2 AND gnu-fdl-v1.1
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=	yes
 USE_LIBTOOL=	yes
@@ -32,6 +31,7 @@ CONFIGURE_ARGS+=	--disable-update-databases
 .include "../../databases/shared-mime-info/buildlink3.mk"
 .include "../../databases/gnome-mime-data/buildlink3.mk"
 .include "../../textproc/gnome-doc-utils/buildlink3.mk"
+.include "../../mk/omf-scrollkeeper.mk"
 .include "../../graphics/gtkglext/buildlink3.mk"
 .include "../../misc/goffice0.8/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"

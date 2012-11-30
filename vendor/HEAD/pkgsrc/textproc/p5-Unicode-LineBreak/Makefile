@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.3 2012/05/17 10:37:43 obache Exp $
+# $NetBSD: Makefile,v 1.5 2012/10/25 06:56:33 asau Exp $
 
 DISTNAME=	Unicode-LineBreak-2012.02
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	perl5 textproc
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Unicode/}
 
@@ -12,8 +12,6 @@ HOMEPAGE=	http://search.cpan.org/dist/Unicode-LineBreak/
 LICENSE=	${PERL5_LICENSE}
 
 DEPENDS+=	p5-MIME-Charset>=1.006.2:../../mail/p5-MIME-Charset
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 MAKE_PARAMS+=	--with-bundled-sombok
 MAKE_PARAMS+=	--disable-libthai

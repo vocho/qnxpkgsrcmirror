@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.41 2012/04/08 19:09:09 wiz Exp $
+# $NetBSD: Makefile,v 1.45 2012/10/23 17:19:01 asau Exp $
 #
 
 DISTNAME=	pyorbit-2.24.0
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME:S/pyorbit/ORBit/}
-PKGREVISION=	3
+PKGREVISION=	5
 CATEGORIES=	net python
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/pyorbit/2.24/}
 EXTRACT_SUFX=	.tar.bz2
@@ -13,14 +13,14 @@ HOMEPAGE=	http://www.gnome.org/
 COMMENT=	Python bindings for ORBit2
 LICENSE=	gnu-lgpl-v2.1
 
-PKG_DESTDIR_SUPPORT=	user-destdir
-
 PY_PATCHPLIST=	YES
 USE_TOOLS+=	gmake pkg-config
 USE_LIBTOOL=	YES
 PKGCONFIG_OVERRIDE+=	pyorbit-2.pc.in
 GNU_CONFIGURE=	YES
 CONFIGURE_ENV+=	PYTHON=${PYTHONBIN:Q}
+
+PYTHON_SELF_CONFLICT=	YES
 
 BUILDLINK_API_DEPENDS.python26+= python26>=2.6.2nb4
 BUILDLINK_API_DEPENDS.python25+= python25>=2.5.4nb2

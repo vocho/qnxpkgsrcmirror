@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.22 2012/06/14 07:44:05 sbd Exp $
+# $NetBSD: Makefile,v 1.28 2012/10/16 17:47:20 wiz Exp $
 #
 
 DISTNAME=	pygtkglext-1.1.0
 PKGNAME=	${PYPKGPREFIX}-pygtkglext-1.1.0
-PKGREVISION=	11
+PKGREVISION=	16
 CATEGORIES=	graphics
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=gtkglext/}
 EXTRACT_SUFX=	.tar.bz2
@@ -11,8 +11,6 @@ EXTRACT_SUFX=	.tar.bz2
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://gtkglext.sourceforge.net/
 COMMENT=	Python bindings for gtkglext
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=	yes
 CONFIGURE_ENV+=	PYTHON=${PYTHONBIN}

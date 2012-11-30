@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.12 2012/06/14 07:45:25 sbd Exp $
+# $NetBSD: Makefile,v 1.18 2012/10/08 23:02:21 adam Exp $
 
 DISTNAME=		scribus-1.4.1
-PKGREVISION=		1
+PKGREVISION=		6
 CATEGORIES=		print
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=scribus/}
 EXTRACT_SUFX=		.tar.bz2
@@ -9,8 +9,6 @@ EXTRACT_SUFX=		.tar.bz2
 MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://www.scribus.net/
 COMMENT=		Publishing layout with graphical interface
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 WRKSRC=			${WRKDIR}/Scribus
 USE_LANGUAGES=		c c++

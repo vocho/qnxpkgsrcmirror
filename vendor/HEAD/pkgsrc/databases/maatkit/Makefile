@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.4 2011/08/07 02:16:03 mspo Exp $
+# $NetBSD: Makefile,v 1.6 2012/10/03 21:54:13 wiz Exp $
 #
 
 DISTNAME=	maatkit-7540
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	databases
 MASTER_SITES=	http://maatkit.googlecode.com/files/
 
@@ -12,7 +12,6 @@ COMMENT=	Advanced command-line tools for open-source databases (MySQL)
 LICENSE=	gnu-gpl-v2
 
 USE_TOOLS+=	perl
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 REPLACE_PERL+=	bin/*
 

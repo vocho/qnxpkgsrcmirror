@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.25 2011/11/29 18:27:24 hans Exp $
+# $NetBSD: Makefile,v 1.27 2012/10/08 13:45:39 asau Exp $
 #
 
 DISTNAME=	if-psprint-1.10
+PKGREVISION=	1
 CATEGORIES=	print
 MASTER_SITES=	http://if-psprint.googlecode.com/files/
 EXTRACT_SUFX=  	.tbz
@@ -14,6 +15,5 @@ DEPENDS+=	enscript>=1.6.3nb1:../../print/enscript
 
 REPLACE_PERL=	if-psprint.pl
 USE_TOOLS+=	gs:run perl:run pod2man
-PKG_DESTDIR_SUPPORT = user-destdir
 
 .include "../../mk/bsd.pkg.mk"

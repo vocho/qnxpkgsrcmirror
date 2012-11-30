@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.31 2011/11/28 00:06:18 wiz Exp $
+# $NetBSD: Makefile,v 1.33 2012/10/23 10:24:13 wiz Exp $
 #
 
 DISTNAME=	evilwm-1.1.0
@@ -8,8 +8,6 @@ MASTER_SITES=	http://www.6809.org.uk/evilwm/
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.6809.org.uk/evilwm/
 COMMENT=	Minimalist Window Manager for X
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=	gmake
 
@@ -25,5 +23,4 @@ do-install:
 
 .include "../../x11/libXext/buildlink3.mk"
 .include "../../x11/libXrandr/buildlink3.mk"
-.include "../../x11/xextproto/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

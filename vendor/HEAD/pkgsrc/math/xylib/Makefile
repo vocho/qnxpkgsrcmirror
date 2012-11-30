@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.4 2011/11/05 08:07:12 sbd Exp $
+# $NetBSD: Makefile,v 1.6 2012/09/14 00:22:11 asau Exp $
 
-DISTNAME=	xylib-0.8
-PKGREVISION=	1
+DISTNAME=	xylib-1.0
 CATEGORIES=	math
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=xylib/}
 EXTRACT_SUFX=	.tar.bz2
@@ -11,8 +10,6 @@ HOMEPAGE=	http://xylib.sourceforge.net/
 COMMENT=	Library for reading powder diffraction data
 
 LICENSE=	gnu-lgpl-v2
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_LANGUAGES=		c c++
 USE_LIBTOOL=		yes

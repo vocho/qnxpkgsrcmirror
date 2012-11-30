@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.9 2012/07/27 20:22:13 morr Exp $
+# $NetBSD: Makefile,v 1.11 2012/10/31 11:16:31 asau Exp $
 #
 
-DISTNAME=	RTFM-2.4.4
+DISTNAME=	RTFM-2.4.5
 CATEGORIES=	devel
 MASTER_SITES=	http://download.bestpractical.com/pub/rt/release/
 
@@ -12,8 +12,6 @@ COMMENT=	Enterprise-grade knowledge management tool
 DEPENDS+=	rt>=3.4.5:../../devel/rt3
 
 USE_TOOLS+=	pax
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 .include "../../devel/rt3/dirs.mk"
 

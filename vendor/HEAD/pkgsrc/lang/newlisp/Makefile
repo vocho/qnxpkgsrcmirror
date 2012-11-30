@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.2 2012/02/15 03:51:51 ryoon Exp $
+# $NetBSD: Makefile,v 1.5 2012/11/22 18:54:06 ryoon Exp $
 #
 
-DISTNAME=	newlisp-10.4.0
+DISTNAME=	newlisp-10.4.5
 CATEGORIES=	lang
 MASTER_SITES=	http://www.newlisp.org/downloads/
 EXTRACT_SUFX=	.tgz
@@ -10,8 +10,6 @@ MAINTAINER=	ryoon@NetBSD.org
 HOMEPAGE=	http://www.newlisp.org/
 COMMENT=	Lisp-like, general-purpose scripting language
 LICENSE=	gnu-gpl-v3
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 HAS_CONFIGURE=		yes
 CONFIGURE_SCRIPT=	configure-alt

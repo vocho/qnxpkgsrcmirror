@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.25 2012/07/15 08:23:00 wiz Exp $
+# $NetBSD: Makefile,v 1.27 2012/10/29 05:06:53 asau Exp $
 
 DISTNAME=		startup-notification-0.12
-PKGREVISION=		2
+PKGREVISION=		3
 CATEGORIES=		x11
 MASTER_SITES=		http://www.freedesktop.org/software/startup-notification/releases/
 
@@ -11,7 +11,6 @@ COMMENT=		X11 application startup notification library
 LICENSE=		mit AND gnu-lgpl-v2.1
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=		pkg-config
 GNU_CONFIGURE=		yes

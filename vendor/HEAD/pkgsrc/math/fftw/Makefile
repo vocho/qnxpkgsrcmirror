@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.38 2012/05/29 13:40:16 wiz Exp $
+# $NetBSD: Makefile,v 1.42 2012/11/26 17:36:50 adam Exp $
 
-DISTNAME=	fftw-3.3.2
+DISTNAME=	fftw-3.3.3
 CATEGORIES=	math
 MASTER_SITES=	ftp://ftp.fftw.org/pub/fftw/ \
 		http://www.fftw.org/
@@ -11,7 +11,6 @@ COMMENT=	Collection of fast C routines to compute DFTs
 LICENSE=	gnu-gpl-v2
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_LANGUAGES=		c fortran77
 USE_LIBTOOL=		yes
@@ -28,6 +27,15 @@ TEST_TARGET=		check
 
 .if defined(PKGSRC_RUN_TEST) && !empty(PKGSRC_RUN_TEST:M[Yy][Ee][Ss])
 USE_TOOLS+=		perl
+.endif
+
+PLIST_VARS+=		pthreads
+
+PTHREAD_OPTS=		native
+.include "../../mk/pthread.buildlink3.mk"
+.if !empty(PTHREAD_TYPE:Mnative)
+CONFIGURE_ARGS+=	--enable-threads
+PLIST.pthreads=		yes
 .endif
 
 .include "../../mk/bsd.pkg.mk"

@@ -1,18 +1,16 @@
-# $NetBSD: Makefile,v 1.8 2012/06/14 07:44:03 sbd Exp $
+# $NetBSD: Makefile,v 1.13 2012/10/29 05:06:46 asau Exp $
 #
 
 .include "../../x11/vte/Makefile.common"
 
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
-PKGREVISION=	5
+PKGREVISION=	9
 CATEGORIES=	x11 python
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.gnome.org/
 COMMENT=	Python bindings for the Vte terminal widget
 LICENSE=	gnu-lgpl-v2
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_PKGLOCALEDIR=	yes
 USE_LIBTOOL=		yes

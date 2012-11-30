@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.12 2012/08/19 08:33:58 obache Exp $
+# $NetBSD: Makefile,v 1.17 2012/10/08 23:01:56 adam Exp $
 #
 
 DISTNAME=		scim-tables-0.5.11
+PKGREVISION=		4
 CATEGORIES=		inputmethod
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=scim/}
 
@@ -9,8 +10,6 @@ MAINTAINER=		obache@NetBSD.org
 HOMEPAGE=		http://www.scim-im.org/
 COMMENT=		Data files for SCIM Generic Table Input Method module
 LICENSE=		gnu-gpl-v2
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_LANGUAGES=		c c++
 USE_PKGLOCALEDIR=	yes

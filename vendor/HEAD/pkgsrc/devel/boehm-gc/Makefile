@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.70 2012/07/01 14:09:45 wiz Exp $
+# $NetBSD: Makefile,v 1.72 2012/10/31 11:16:41 asau Exp $
 
-DISTNAME=	gc-7.2c
+DISTNAME=	gc-7.2d
 PKGNAME=	${DISTNAME:S/gc/boehm-gc/}
 CATEGORIES=	devel
 MASTER_SITES=	http://www.hpl.hp.com/personal/Hans_Boehm/gc/gc_source/
@@ -10,9 +10,8 @@ HOMEPAGE=	http://www.hpl.hp.com/personal/Hans_Boehm/gc/
 COMMENT=	Garbage collection and memory leak detection for C and C++
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
-PKG_DESTDIR_SUPPORT=	user-destdir
 
-WRKSRC=		${WRKDIR}/${DISTNAME:S/c$//}
+WRKSRC=		${WRKDIR}/${DISTNAME:S/d$//}
 
 USE_TOOLS+=		gmake
 USE_LANGUAGES=		c c++

@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.5 2012/06/14 07:45:40 sbd Exp $
+# $NetBSD: Makefile,v 1.10 2012/10/08 23:01:20 adam Exp $
 #
 
 DISTNAME=	gtkdbfeditor-1.0.4
-PKGREVISION=	3
+PKGREVISION=	7
 CATEGORIES=	databases
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=gtkdbfeditor/}
 
@@ -10,8 +10,6 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://sdteffen.de/gtkdbfeditor/
 COMMENT=	Simple editor for DBF files (dBase, xBase)
 LICENSE=	gnu-gpl-v2
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=		yes
 USE_LIBTOOL=		yes

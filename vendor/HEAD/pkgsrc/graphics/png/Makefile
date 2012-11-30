@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.150 2012/07/11 09:00:41 wiz Exp $
+# $NetBSD: Makefile,v 1.152 2012/10/06 14:11:14 asau Exp $
 
-DISTNAME=	libpng-1.5.12
+DISTNAME=	libpng-1.5.13
 PKGNAME=	${DISTNAME:S/lib//}
 CATEGORIES=	graphics
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=libpng/} \
@@ -13,7 +13,6 @@ COMMENT=	Library for manipulating PNG images
 LICENSE=	zlib
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=	yes
 PKGCONFIG_OVERRIDE=	scripts/libpng.pc.in libpng.pc.in

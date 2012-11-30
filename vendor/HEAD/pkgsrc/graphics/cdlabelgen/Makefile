@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.23 2011/11/29 17:47:41 hans Exp $
+# $NetBSD: Makefile,v 1.25 2012/10/06 14:10:43 asau Exp $
 
 DISTNAME=	cdlabelgen-3.6.0
+PKGREVISION=	1
 CATEGORIES=	graphics
 MASTER_SITES=	http://www.aczoom.com/pub/tools/
 EXTRACT_SUFX=	.tgz
@@ -8,8 +9,6 @@ EXTRACT_SUFX=	.tgz
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.aczoom.com/tools/cdinsert/
 COMMENT=	Generate frontcards and traycards for CDs
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=	perl:run perldoc
 USE_LANGUAGES=	# empty

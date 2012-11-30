@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.49 2012/07/15 08:22:58 wiz Exp $
+# $NetBSD: Makefile,v 1.54 2012/10/29 05:06:09 asau Exp $
 
 DISTNAME=		devilspie-0.22
-PKGREVISION=		11
+PKGREVISION=		15
 CATEGORIES=		x11
 MASTER_SITES=		http://www.burtonini.com/computing/
 
@@ -11,8 +11,6 @@ COMMENT=		Window-matching utility to customize window behavior
 LICENSE=		gnu-gpl-v2
 
 BUILD_DEPENDS+=		libxslt>=1.0:../../textproc/libxslt
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=		intltool msgfmt pkg-config
 GNU_CONFIGURE=		YES

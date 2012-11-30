@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.9 2012/08/13 14:25:42 wiz Exp $
+# $NetBSD: Makefile,v 1.16 2012/10/08 23:02:08 adam Exp $
 
 VER=			3.5.6.2
 DISTNAME=		libreoffice-${VER}
 PKGNAME=		libreoffice-${VER:S/-//g}
-PKGREVISION=		1
+PKGREVISION=		7
 CATEGORIES=		misc
 MASTER_SITES=	http://download.documentfoundation.org/libreoffice/src/3.5.6/ \
 		http://dev-www.libreoffice.org/src/ \
@@ -14,7 +14,6 @@ HOMEPAGE=		http://www.libreoffice.org/
 COMMENT=		Office productivity suite
 LICENSE=		gnu-lgpl-v3
 
-PKG_DESTDIR_SUPPORT=	user-destdir
 CHECK_SHLIBS_SUPPORTED=	no
 
 DIST_SUBDIR=	libreoffice

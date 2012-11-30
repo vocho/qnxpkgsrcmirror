@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.6 2012/07/08 20:14:28 marino Exp $
+# $NetBSD: Makefile,v 1.8 2012/10/28 06:30:10 asau Exp $
 #
 
 DISTNAME=	aws-${AWS_VERSION}
@@ -13,7 +13,6 @@ HOMEPAGE=	http://libre.adacore.com/libre/tools/aws/
 COMMENT=	Adacore Ada Web Server and framework
 LICENSE=	gnu-gpl-v2
 
-PKG_DESTDIR_SUPPORT=	user-destdir
 AWS_VERSION=		2.10.0.1
 USE_TOOLS+=		gmake makeinfo sed gawk
 USE_LANGUAGES=  	c ada c++ fortran
@@ -22,8 +21,6 @@ USE_LANGUAGES=  	c ada c++ fortran
 # When that happens, pkgsrc wrapper emits a warning message which causes
 # gprconfig to crash due to output text not matching expected regexp
 # Adding c++ and fortran to USE_LANGUAGES avoids this issue.
-
-PYTHON_VERSIONS_ACCEPTED=	26 27
 
 .include "options.mk"
 

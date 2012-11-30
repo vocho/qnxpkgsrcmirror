@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.22 2012/06/14 07:44:31 sbd Exp $
+# $NetBSD: Makefile,v 1.28 2012/10/08 23:01:42 adam Exp $
 #
 
-DISTNAME=	geeqie-1.0
-PKGREVISION=	11
+DISTNAME=	geeqie-1.1
+PKGREVISION=	4
 CATEGORIES=	graphics
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=geeqie/}
 
@@ -10,8 +10,6 @@ MAINTAINER=	gdt@NetBSD.org
 HOMEPAGE=	http://geeqie.sourceforge.net/
 COMMENT=	Image viewer
 LICENSE=	gnu-gpl-v2
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=		yes
 CONFIGURE_ARGS+=	--enable-gps

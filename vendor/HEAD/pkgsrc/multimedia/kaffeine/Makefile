@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.27 2012/07/01 19:05:22 dholland Exp $
+# $NetBSD: Makefile,v 1.31 2012/10/08 09:21:04 asau Exp $
 #
 
 DISTNAME=	kaffeine-0.8.3
-PKGREVISION=	21
+PKGREVISION=	24
 CATEGORIES=	multimedia kde
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=kaffeine/}
 EXTRACT_SUFX=	.tar.bz2
@@ -10,8 +10,6 @@ EXTRACT_SUFX=	.tar.bz2
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://kaffeine.sourceforge.net/
 COMMENT=	Full featured Multimedia-Player for KDE
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=		yes
 SET_LIBDIR=		yes

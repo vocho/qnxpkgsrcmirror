@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.8 2011/12/14 11:02:00 hiramatsu Exp $
+# $NetBSD: Makefile,v 1.10 2012/10/31 11:19:19 asau Exp $
 
 DISTNAME=	namespace-autoclean-0.13
 PKGNAME=	p5-${DISTNAME}
+PKGREVISION=	1
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=namespace/}
 
@@ -18,8 +19,6 @@ BUILD_DEPENDS+=	p5-Sub-Name-[0-9]*:../../devel/p5-Sub-Name
 
 USE_LANGUAGES=		# empty
 PERL5_PACKLIST=		auto/namespace/autoclean/.packlist
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 .include "../../lang/perl5/module.mk"
 .include "../../mk/bsd.pkg.mk"

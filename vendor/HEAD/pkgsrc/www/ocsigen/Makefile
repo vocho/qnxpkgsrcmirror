@@ -1,9 +1,10 @@
-# $NetBSD: Makefile,v 1.7 2012/07/11 10:40:46 wiz Exp $
+# $NetBSD: Makefile,v 1.9 2012/10/28 06:30:24 asau Exp $
 #
 
 VERSION=	2.1
 PKGNAME=	ocsigen-${VERSION}
 DISTNAME=	ocsigenserver-${VERSION}
+PKGREVISION=	1
 CATEGORIES=	www
 MASTER_SITES=	http://www.ocsigen.org/download/
 
@@ -11,8 +12,6 @@ MAINTAINER=	jaapb@kerguelen.org
 HOMEPAGE=	http://www.ocsigen.org/
 COMMENT=	Web programming framework for OCaml
 LICENSE=	gnu-lgpl-v2.1
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 DEPENDS+=	ocaml-findlib-[0-9]*:../../devel/ocaml-findlib
 DEPENDS+=	ocaml-react-[0-9]*:../../devel/ocaml-react

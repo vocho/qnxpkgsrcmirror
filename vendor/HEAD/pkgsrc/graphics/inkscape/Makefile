@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.73 2012/08/13 11:25:57 drochner Exp $
+# $NetBSD: Makefile,v 1.80 2012/10/08 23:01:45 adam Exp $
 
 DISTNAME=	inkscape-0.48.3.1
-PKGREVISION=	3
+PKGREVISION=	9
 CATEGORIES=	graphics
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=inkscape/}
 EXTRACT_SUFX=	.tar.bz2
@@ -10,8 +10,6 @@ MAINTAINER=	reed@reedmedia.net
 HOMEPAGE=	http://www.inkscape.org/
 COMMENT=	Scalable Vector Graphics (SVG) editor
 LICENSE=	gnu-gpl-v2
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 .if !exists (/usr/bin/iconv)
 BUILD_DEPENDS+=		libiconv-[0-9]*:../../converters/libiconv
@@ -65,7 +63,7 @@ BUILDLINK_API_DEPENDS.poppler-includes+= poppler-includes>=0.12.2
 .include "../../devel/pango/buildlink3.mk"
 .include "../../devel/popt/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
-.include "../../graphics/lcms/buildlink3.mk"
+.include "../../graphics/lcms2/buildlink3.mk"
 .include "../../graphics/libart/buildlink3.mk"
 .include "../../graphics/png/buildlink3.mk"
 .include "../../lang/python/application.mk"

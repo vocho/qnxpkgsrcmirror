@@ -1,16 +1,14 @@
-# $NetBSD: Makefile,v 1.4 2011/12/06 00:19:25 sbd Exp $
+# $NetBSD: Makefile,v 1.6 2012/10/08 15:18:25 jaapb Exp $
 #
 
 DISTNAME=		wyrd-1.4.1
-PKGREVISION=		2
+PKGREVISION=		3
 CATEGORIES=		time
 MASTER_SITES=		http://www.eecs.umich.edu/~pelzlpj/wyrd/
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://www.eecs.umich.edu/~pelzlpj/wyrd/
 COMMENT=		Text-based front-end to Remind
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 DEPENDS+=		remind>=3.00.24:../../time/remind
 

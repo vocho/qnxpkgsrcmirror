@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.24 2011/10/17 19:32:24 shattered Exp $
+# $NetBSD: Makefile,v 1.27 2012/10/23 18:17:00 asau Exp $
 #
 
 DISTNAME=	tct-1.09
-PKGREVISION=	4
+PKGREVISION=	5
 CATEGORIES=	security
 MASTER_SITES=	http://www.porcupine.org/forensics/
 
@@ -11,8 +11,7 @@ HOMEPAGE=	http://www.porcupine.org/forensics/tct.html
 COMMENT=	Programs to aid post-mortem after a break-in
 
 NOT_FOR_PLATFORM=	NetBSD-[4-9]*-*
-
-PKG_DESTDIR_SUPPORT=	user-destdir
+MAKE_JOBS_SAFE=		no
 
 DEPENDS+=	p5-Date-Manip-[0-9]*:../../devel/p5-Date-Manip
 

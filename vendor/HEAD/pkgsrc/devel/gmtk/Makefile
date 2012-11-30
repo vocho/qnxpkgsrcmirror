@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.6 2012/06/14 07:43:34 sbd Exp $
+# $NetBSD: Makefile,v 1.12 2012/11/03 01:58:32 ryoon Exp $
 #
 
 DISTNAME=	gmtk-1.0.6
-PKGREVISION=	1
+PKGREVISION=	6
 CATEGORIES=	devel
 MASTER_SITES=	http://gmtk.googlecode.com/files/
 
@@ -10,8 +10,6 @@ MAINTAINER=	obache@NetBSD.org
 HOMEPAGE=	http://code.google.com/p/gmtk/
 COMMENT=	Gnome-mplayer toolkit
 LICENSE=	gnu-gpl-v2
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=	yes
 USE_LIBTOOL=	yes

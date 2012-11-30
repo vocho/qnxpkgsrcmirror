@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.23 2008/03/02 06:10:31 jlam Exp $
+# $NetBSD: Makefile,v 1.25 2012/10/03 21:53:54 wiz Exp $
 #
 
 DISTNAME=	disc-cover-1.5.6
+PKGREVISION=	1
 CATEGORIES=	audio
 MASTER_SITES=	http://www.vanhemert.co.uk/files/
 
@@ -10,8 +11,6 @@ HOMEPAGE=	http://www.vanhemert.co.uk/disc-cover.html
 COMMENT=	Generation of CD covers
 
 DEPENDS+=	p5-Audio-CD>=0.05:../../audio/p5-Audio-CD
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=		perl:run pod2man
 REPLACE_PERL=		disc-cover

@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.13 2012/07/01 19:05:14 dholland Exp $
+# $NetBSD: Makefile,v 1.16 2012/10/03 21:54:02 wiz Exp $
 #
 
 DISTNAME=	konversation-1.1
-PKGREVISION=	16
+PKGREVISION=	18
 CATEGORIES=	chat kde
 MASTER_SITES=	http://download.berlios.de/konversation/
 EXTRACT_SUFX=	.tar.bz2
@@ -10,8 +10,6 @@ EXTRACT_SUFX=	.tar.bz2
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://konversation.kde.org/
 COMMENT=	KDE IRC Client
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=	YES
 USE_LIBTOOL=	YES

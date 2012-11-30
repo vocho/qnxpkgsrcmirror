@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.8 2012/07/02 07:12:58 adam Exp $
+# $NetBSD: Makefile,v 1.10 2012/10/23 18:16:22 asau Exp $
 
-DISTNAME=	clamav-0.97.5
+DISTNAME=	clamav-0.97.6
 CATEGORIES=	security
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=clamav/}
 
@@ -10,7 +10,6 @@ COMMENT=	Anti-virus toolkit
 LICENSE=	gnu-gpl-v2
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_LIBTOOL=		yes
 GNU_CONFIGURE=		yes

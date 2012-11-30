@@ -1,4 +1,4 @@
-# $NetBSD: buildlink3.mk,v 1.16 2012/07/15 08:22:55 wiz Exp $
+# $NetBSD: buildlink3.mk,v 1.20 2012/10/08 23:00:52 adam Exp $
 
 BUILDLINK_TREE+=	xfce4-battery-plugin
 
@@ -6,7 +6,7 @@ BUILDLINK_TREE+=	xfce4-battery-plugin
 XFCE4_BATTERY_PLUGIN_BUILDLINK3_MK:=
 
 BUILDLINK_API_DEPENDS.xfce4-battery-plugin+=	xfce4-battery-plugin>=0.5.0nb2
-BUILDLINK_ABI_DEPENDS.xfce4-battery-plugin+=	xfce4-battery-plugin>=0.5.1nb11
+BUILDLINK_ABI_DEPENDS.xfce4-battery-plugin+=	xfce4-battery-plugin>=0.5.1nb16
 BUILDLINK_PKGSRCDIR.xfce4-battery-plugin?=	../../sysutils/xfce4-battery-plugin
 
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"

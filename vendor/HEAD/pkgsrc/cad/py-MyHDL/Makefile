@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.16 2011/04/13 14:47:18 drochner Exp $
+# $NetBSD: Makefile,v 1.18 2012/10/08 13:25:15 asau Exp $
 #
 
 DISTNAME=	myhdl-0.7
@@ -10,10 +10,7 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://jandecaluwe.com/Tools/MyHDL/Overview.html
 COMMENT=	Hardware description in Python
 
-PKG_DESTDIR_SUPPORT=	user-destdir
-
 PYDISTUTILSPKG=	yes
-PYTHON_VERSIONS_ACCEPTED=	26 27
 
 do-test:
 	cd ${WRKSRC}/myhdl/test/core && ${PYTHONBIN} test_all.py

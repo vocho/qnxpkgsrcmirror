@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.10 2009/12/01 13:58:33 itohy Exp $
+# $NetBSD: Makefile,v 1.12 2012/10/29 05:06:42 asau Exp $
 
 DISTNAME=		oneko-1.1b
 PKGNAME=		oneko-1.2
@@ -14,11 +14,8 @@ PATCH_DIST_STRIP=	-p1
 MAINTAINER=		johnam@mail.kemper.org
 COMMENT=		Like xneko except on the desktop and with other animals
 
-PKG_DESTDIR_SUPPORT=	user-destdir
-
 WRKSRC=			${WRKDIR}/oneko
 USE_IMAKE=		yes
 
 .include "../../x11/libXext/buildlink3.mk"
-.include "../../x11/xextproto/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

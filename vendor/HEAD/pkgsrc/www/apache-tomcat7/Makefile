@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.5 2012/05/06 08:08:16 ryoon Exp $
+# $NetBSD: Makefile,v 1.7 2012/11/23 11:46:24 fhajny Exp $
 #
 
 DISTNAME=	apache-tomcat-${TOMCAT_VER}
@@ -24,14 +24,13 @@ PKG_DESTDIR_SUPPORT=	destdir
 
 .include "../../mk/bsd.prefs.mk"
 
-TOMCAT_VER=		7.0.26
+TOMCAT_VER=		7.0.30
 TOMCAT_HOME=		${PREFIX}/share/tomcat
 EGDIR=			${PREFIX}/share/examples/tomcat
 DOCDIR=			${PREFIX}/share/doc/tomcat
 RCD_SCRIPTS=		tomcat
 TOMCAT_USER?=		tomcat
 TOMCAT_GROUP?=		tomcat
-USERGROUP_PHASE=	pre-install
 PKG_GROUPS=		${TOMCAT_GROUP}
 PKG_USERS=		${TOMCAT_USER}:${TOMCAT_GROUP}
 PKG_GROUPS_VARS+=	TOMCAT_GROUP
@@ -39,7 +38,7 @@ PKG_USERS_VARS+=	TOMCAT_USER
 PKG_HOME.tomcat=	${TOMCAT_HOME}
 PKG_SHELL.tomcat=	${SH}
 PKG_SYSCONFDIR.tomcat=	${TOMCAT_HOME}/conf
-OWN_DIRS+=		${PKG_SYSCONFDIR.tomcat}
+OWN_DIRS_PERMS+=	${PKG_SYSCONFDIR.tomcat} ${TOMCAT_USER} ${TOMCAT_GROUP} 0755
 FILES_SUBST+=		JAVA_HOME=${PKG_JAVA_HOME} TOMCAT_HOME=${TOMCAT_HOME} \
 			TOMCAT_USER=${TOMCAT_USER} TOMCAT_GROUP=${TOMCAT_GROUP}
 
@@ -96,11 +95,6 @@ do-install:
 		${XARGS} ${CHMOD} ${SHAREMODE}
 	${FIND} ${DESTDIR}${TOMCAT_HOME} -type f -name \*.sh -print | \
 		${XARGS} ${CHMOD} ${BINMODE}
-
-	${CHOWN} -R ${TOMCAT_USER}:${TOMCAT_GROUP} \
-		${DESTDIR}${TOMCAT_HOME}/webapps
-	${CHOWN} ${TOMCAT_USER}:${TOMCAT_GROUP} \
-		${DESTDIR}${TOMCAT_HOME}/conf
 
 .include "../../mk/java-vm.mk"
 .include "../../mk/bsd.pkg.mk"

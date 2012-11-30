@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.60 2012/03/03 00:13:03 wiz Exp $
+# $NetBSD: Makefile,v 1.65 2012/10/08 23:01:32 adam Exp $
 
 DISTNAME=	uae-0.8.25
-PKGREVISION=	12
+PKGREVISION=	16
 CATEGORIES=	emulators
 MASTER_SITES=	http://www.freiburg.linux.de/~uae/bin/sources/develop/
 
@@ -9,7 +9,6 @@ MAINTAINER=	kristerw@NetBSD.org
 HOMEPAGE=	http://uae.coresystems.de/
 COMMENT=	The UAE Amiga Emulator
 
-PKG_DESTDIR_SUPPORT=	user-destdir
 MAKE_JOBS_SAFE=		no
 
 USE_TOOLS+=	gmake pkg-config unzip:run

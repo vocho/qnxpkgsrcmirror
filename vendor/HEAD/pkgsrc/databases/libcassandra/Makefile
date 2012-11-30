@@ -1,16 +1,14 @@
-# $NetBSD: Makefile,v 1.12 2012/07/02 13:37:36 adam Exp $
+# $NetBSD: Makefile,v 1.16 2012/11/16 00:40:18 joerg Exp $
 #
 
 DISTNAME=		libcassandra-20101010
-PKGREVISION=		6
+PKGREVISION=		8
 CATEGORIES=		databases
 MASTER_SITES=		ftp://ftp.ancient-solutions.com/pub/bsdprojects/NetBSD/packages/distfiles/
 
 MAINTAINER=		tonnerre@NetBSD.org
 HOMEPAGE=		http://github.com/posulliv/libcassandra/
 LICENSE=		modified-bsd
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 COMMENT=		C++ interface to Cassandra
 
@@ -34,5 +32,10 @@ GCC_REQD+=	4.4
 
 CONFIGURE_ARGS+=	CPPFLAGS="-I${BUILDLINK_PREFIX.libthrift}/include/thrift -I${BUILDLINK_PREFIX.boost-headers}/include/boost"
 MAKE_ENV+=		AM_DEFAULT_VERBOSITY=1
+
+.include "../../mk/compiler.mk"
+.if !empty(PKGSRC_COMPILER:Mclang)
+CXXFLAGS+=	-Wno-c++11-extensions
+.endif
 
 .include "../../mk/bsd.pkg.mk"

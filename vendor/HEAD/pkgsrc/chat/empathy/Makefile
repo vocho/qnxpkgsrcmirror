@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.39 2012/07/15 08:22:47 wiz Exp $
+# $NetBSD: Makefile,v 1.45 2012/10/08 23:00:49 adam Exp $
 
 DISTNAME=	empathy-2.34.0
-PKGREVISION=	15
+PKGREVISION=	20
 CATEGORIES=	chat gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/empathy/2.34/}
 
@@ -9,8 +9,6 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://live.gnome.org/Empathy
 COMMENT=	Gnome instant messenger client
 LICENSE=	gnu-gpl-v2
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=		yes
 USE_TOOLS+=		gawk gmake gsed intltool msgfmt pkg-config

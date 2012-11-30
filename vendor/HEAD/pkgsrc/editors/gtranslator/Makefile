@@ -1,15 +1,13 @@
-# $NetBSD: Makefile,v 1.45 2012/07/01 19:05:16 dholland Exp $
+# $NetBSD: Makefile,v 1.50 2012/10/08 23:01:27 adam Exp $
 
 DISTNAME=	gtranslator-1.1.7
-PKGREVISION=	19
+PKGREVISION=	23
 CATEGORIES=	editors
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gtranslator/1.1/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://gtranslator.sourceforge.net/
 COMMENT=	Gettext po file editor for the GNOME2 desktop environment
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=		gmake intltool msgfmt pkg-config
 USE_PKGLOCALEDIR=	yes

@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.6 2012/05/30 08:21:47 wiz Exp $
+# $NetBSD: Makefile,v 1.8 2012/10/03 21:54:19 wiz Exp $
 #
 
 DISTNAME=	DBIx-Connector-0.52
 PKGNAME=	p5-${DISTNAME}
+PKGREVISION=	1
 CATEGORIES=	databases perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=DBIx/}
 
@@ -14,8 +15,6 @@ LICENSE=	${PERL5_LICENSE}
 BUILD_DEPENDS+=	p5-Test-MockModule>=0.05:../../devel/p5-Test-MockModule
 BUILD_DEPENDS+=	p5-Test-Pod>=1.26:../../devel/p5-Test-Pod
 BUILD_DEPENDS+=	p5-Test-Pod-Coverage>=1.08:../../devel/p5-Test-Pod-Coverage
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_LANGUAGES=		# empty
 PERL5_PACKLIST=		auto/DBIx/Connector/.packlist

@@ -1,11 +1,10 @@
-# $NetBSD: Makefile,v 1.22 2012/06/14 07:43:39 sbd Exp $
+# $NetBSD: Makefile,v 1.24 2012/10/08 09:21:02 asau Exp $
 #
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_LANGUAGES=		c c++
 
 .include "Makefile.common"
-PKGREVISION=2
+PKGREVISION=		3
 
 COMMENT+=		bad plugins
 

@@ -1,21 +1,19 @@
-# $NetBSD: Makefile,v 1.11 2012/08/10 09:59:47 drochner Exp $
+# $NetBSD: Makefile,v 1.15 2012/11/14 13:42:41 drochner Exp $
 #
 
-VERSION=	4.1.2
+VERSION=	4.1.3
 DISTNAME=	xen-${VERSION}
 PKGNAME=	xenkernel41-${VERSION}
-PKGREVISION=	4
+PKGREVISION=	1
 CATEGORIES=	sysutils
 MASTER_SITES=	http://bits.xensource.com/oss-xen/release/${VERSION}/
 EXTRACT_SUFX=	.tar.gz
 
 MAINTAINER=	cegger@NetBSD.org
 HOMEPAGE=	http://xen.org/
-COMMENT=	Xen 4.1.2 Kernel
+COMMENT=	Xen 4.1.x Kernel
 
 LICENSE=        gnu-gpl-v2
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 ONLY_FOR_PLATFORM=	Linux-2.6*-i386 Linux-2.6*-x86_64
 ONLY_FOR_PLATFORM+=	NetBSD-[5-9].*-x86_64 NetBSD-[5-9].*-i386

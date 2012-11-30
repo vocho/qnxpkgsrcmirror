@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.136 2012/07/15 08:22:59 wiz Exp $
+# $NetBSD: Makefile,v 1.142 2012/10/29 05:06:15 asau Exp $
 #
 
 DISTNAME=		gnome-session-2.26.2
-PKGREVISION=		20
+PKGREVISION=		25
 CATEGORIES=		x11 gnome
 MASTER_SITES=		${MASTER_SITE_GNOME:=sources/gnome-session/2.26/}
 SITES.gnome-splash-2.16.0.png=	${MASTER_SITE_LOCAL:=gnome-splash/}
@@ -14,8 +14,6 @@ HOMEPAGE=		http://www.gnome.org/
 COMMENT=		GNOME2 session management utilities
 
 BUILD_DEPENDS+=		xmlto-[0-9]*:../../textproc/xmlto
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 CONFLICTS+=		gnome-core<1.4.2nb4
 

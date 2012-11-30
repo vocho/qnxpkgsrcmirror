@@ -1,4 +1,4 @@
-# $NetBSD: buildlink3.mk,v 1.2 2012/06/14 07:43:32 sbd Exp $
+# $NetBSD: buildlink3.mk,v 1.6 2012/10/08 23:01:04 adam Exp $
 
 BUILDLINK_TREE+=	libkgeomap
 
@@ -6,7 +6,7 @@ BUILDLINK_TREE+=	libkgeomap
 LIBKGEOMAP_BUILDLINK3_MK:=
 
 BUILDLINK_API_DEPENDS.libkgeomap+=	libkgeomap>=2.5.0
-BUILDLINK_ABI_DEPENDS.libkgeomap?=	libkgeomap>=2.5.0nb1
+BUILDLINK_ABI_DEPENDS.libkgeomap?=	libkgeomap>=2.5.0nb5
 BUILDLINK_PKGSRCDIR.libkgeomap?=	../../misc/libkgeomap
 
 .include "../../misc/marble/buildlink3.mk"

@@ -1,15 +1,14 @@
-# $NetBSD: Makefile,v 1.4 2009/11/20 11:47:08 drochner Exp $
+# $NetBSD: Makefile,v 1.6 2012/10/08 13:04:20 asau Exp $
 #
 
 DISTNAME=	libical-0.44
+PKGREVISION=	1
 CATEGORIES=	time
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=freeassociation/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://freeassociation.sourceforge.net/
 COMMENT=	Reference implementation of the iCalendar data type and format
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=	perl
 USE_LIBTOOL=	yes

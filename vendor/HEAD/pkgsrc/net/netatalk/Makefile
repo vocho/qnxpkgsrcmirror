@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.88 2012/07/25 11:33:49 fhajny Exp $
+# $NetBSD: Makefile,v 1.91 2012/10/23 17:18:41 asau Exp $
 
 DISTNAME=	netatalk-2.2.1
-PKGREVISION=	5
+PKGREVISION=	7
 CATEGORIES=	net print
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=netatalk/}
 EXTRACT_SUFX=	.tar.bz2
@@ -13,8 +13,6 @@ MAINTAINER=	markd@NetBSD.org
 HOMEPAGE=	http://netatalk.sourceforge.net/
 COMMENT=	Netatalk appletalk file and print services
 LICENSE=	gnu-gpl-v2
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 BDB_ACCEPTED=		db4 db5
 USE_LIBTOOL=		yes
@@ -51,7 +49,6 @@ CONFIGURE_ARGS+=	--localstatedir=${VARBASE}/netatalk
 CONFIGURE_ARGS+=	--with-uams-path=${PREFIX}/libexec/netatalk/uams
 CONFIGURE_ARGS+=	--with-bdb=${BDBBASE}
 CONFIGURE_ARGS+=	--with-ssl-dir=${BUILDLINK_PREFIX.openssl}
-CONFIGURE_ARGS+=	--with-ldap=no
 CONFIGURE_ENV+=		MACHINE_ARCH=${MACHINE_ARCH}
 
 MAKE_DIRS+=		${PKG_SYSCONFDIR}/msg

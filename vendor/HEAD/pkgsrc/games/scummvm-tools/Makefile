@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.9 2012/08/12 22:00:34 wiz Exp $
+# $NetBSD: Makefile,v 1.15 2012/10/08 23:01:37 adam Exp $
 #
 
 DISTNAME=		scummvm-tools-1.4.0
+PKGREVISION=		5
 CATEGORIES=		games
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=scummvm/}
 EXTRACT_SUFX=		.tar.bz2
@@ -10,8 +11,6 @@ MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://scummvm.sourceforge.net/
 COMMENT=		Conversion and compression tools for ScummVM
 LICENSE=		gnu-gpl-v2
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_LANGUAGES=	c c++
 USE_TOOLS+=	gmake

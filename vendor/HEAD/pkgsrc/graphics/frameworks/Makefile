@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.16 2012/07/01 19:05:18 dholland Exp $
+# $NetBSD: Makefile,v 1.21 2012/10/08 23:01:42 adam Exp $
 #
 
 DISTNAME=	frameworks-0.3.7
-PKGREVISION=	11
+PKGREVISION=	15
 CATEGORIES=	graphics
 MASTER_SITES=	http://frameworks.polycrystal.org/release/
 SITES.frameworks.png=	http://frameworks.polycrystal.org/images/
@@ -11,8 +11,6 @@ DISTFILES=	${DISTNAME}${EXTRACT_SUFX} frameworks.png
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://frameworks.polycrystal.org/release/
 COMMENT=	Stop-motion animation frame capture software
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=	yes
 USE_TOOLS+=	pkg-config gmake autoconf

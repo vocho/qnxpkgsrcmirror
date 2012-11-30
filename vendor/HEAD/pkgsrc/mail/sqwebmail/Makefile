@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.70 2012/06/09 11:54:50 adam Exp $
+# $NetBSD: Makefile,v 1.72 2012/10/08 12:19:32 asau Exp $
 
 DISTNAME=	sqwebmail-5.5.3
+PKGREVISION=	1
 CATEGORIES=	mail www
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=courier/}
 EXTRACT_SUFX=	.tar.bz2
@@ -11,8 +12,6 @@ HOMEPAGE=	http://www.courier-mta.org/sqwebmail/
 
 DEPENDS+=	courier-maildir>=${COURIER_VERSION}:../../mail/courier-maildir
 DEPENDS+=	maildrop>=2.5.0:../../mail/maildrop
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=		env gmake gzip:run perl:run
 USE_LANGUAGES=		c c++

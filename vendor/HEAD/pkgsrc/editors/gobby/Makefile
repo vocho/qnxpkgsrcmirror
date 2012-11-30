@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.22 2012/06/14 07:44:23 sbd Exp $
+# $NetBSD: Makefile,v 1.28 2012/10/08 23:01:27 adam Exp $
 
 DISTNAME=	gobby-0.4.12
-PKGREVISION=	6
+PKGREVISION=	11
 CATEGORIES=	editors
 MASTER_SITES=	http://releases.0x539.de/gobby/
 
@@ -9,8 +9,6 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://gobby.0x539.de/
 COMMENT=	Collaborative Editor
 LICENSE=	gnu-gpl-v2
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_LANGUAGES=		c c++
 USE_PKGLOCALEDIR=	yes

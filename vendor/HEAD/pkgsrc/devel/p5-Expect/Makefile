@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.29 2011/08/12 12:32:35 adam Exp $
+# $NetBSD: Makefile,v 1.31 2012/10/31 11:18:05 asau Exp $
 
 DISTNAME=	Expect-1.21
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	3
+PKGREVISION=	4
 SVR4_PKGNAME=	p5exp
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Expect/}
@@ -12,7 +12,6 @@ HOMEPAGE=	http://search.cpan.org/dist/Expect/
 COMMENT=	Perl version of the TCL "expect" tool
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 DEPENDS+=	p5-IO-Stty-[0-9]*:../../devel/p5-IO-Stty
 DEPENDS+=	p5-IO-tty-[0-9]*:../../devel/p5-IO-Tty

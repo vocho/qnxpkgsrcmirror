@@ -1,12 +1,10 @@
-# $NetBSD: Makefile,v 1.14 2010/12/13 13:18:19 taca Exp $
+# $NetBSD: Makefile,v 1.17 2012/10/19 14:58:31 taca Exp $
 
 MODNAME=		mysql
 CATEGORIES+=		databases
 COMMENT=		PHP extension for MySQL databases
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 CONFLICTS=	php-mysql-[0-9]*
 

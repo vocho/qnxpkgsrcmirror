@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.16 2012/06/03 17:29:41 wiz Exp $
+# $NetBSD: Makefile,v 1.19 2012/10/29 05:06:38 asau Exp $
 #
 
-DISTNAME=	libxcb-1.8.1
+DISTNAME=	libxcb-1.9
 CATEGORIES=	x11
 MASTER_SITES=	http://xcb.freedesktop.org/dist/
 EXTRACT_SUFX=	.tar.bz2
@@ -14,11 +14,9 @@ LICENSE=	mit # with no-advertising clause
 BUILD_DEPENDS+=		libxslt>=1.1.0:../../textproc/libxslt
 BUILD_DEPENDS+= ${PYPKGPREFIX}-xcbgen>=1.7:../../x11/py-xcbgen
 
-PKG_DESTDIR_SUPPORT=	user-destdir
-
 GNU_CONFIGURE=	yes
 USE_LIBTOOL=	yes
-USE_TOOLS+=	pkg-config
+USE_TOOLS+=	gmake pkg-config
 
 CONFIGURE_ARGS+=	--disable-build-docs	# or needs doxygen
 CONFIGURE_ARGS+=	--disable-doxygen
@@ -82,7 +80,7 @@ post-extract:
 #.include "../../devel/gperf/buildlink3.mk"
 PYTHON_FOR_BUILD_ONLY=	yes
 .include "../../lang/python/application.mk"
-BUILDLINK_API_DEPENDS.xcb-proto?=	xcb-proto>=1.7
+BUILDLINK_API_DEPENDS.xcb-proto?=	xcb-proto>=1.8
 .include "../../x11/xcb-proto/buildlink3.mk"
 .include "../../x11/libXdmcp/buildlink3.mk"
 .include "../../x11/libXau/buildlink3.mk"

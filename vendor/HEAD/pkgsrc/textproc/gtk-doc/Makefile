@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.47 2012/06/14 07:44:41 sbd Exp $
+# $NetBSD: Makefile,v 1.49 2012/10/25 06:55:52 asau Exp $
 #
 
 DISTNAME=	gtk-doc-1.18
-PKGREVISION=	2
+PKGREVISION=	3
 CATEGORIES=	textproc
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gtk-doc/1.18/}
 EXTRACT_SUFX=	.tar.bz2
@@ -11,8 +11,6 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.gtk.org/gtk-doc/
 COMMENT=	Tools for authors of the GTK+ reference documentation
 LICENSE=	gnu-gpl-v3 AND gnu-fdl-v1.1
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 DEPENDS+=	docbook-xml>=4.4nb1:../../textproc/docbook-xml
 DEPENDS+=	docbook-xsl>=1.68.1:../../textproc/docbook-xsl

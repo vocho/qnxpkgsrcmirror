@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.3 2008/03/31 20:50:11 tnn Exp $
+# $NetBSD: Makefile,v 1.5 2012/10/08 12:19:27 asau Exp $
 #
 
 DISTNAME=		policyd-weight-0.1.14.17
+PKGREVISION=		1
 CATEGORIES=		mail
 MASTER_SITES=		http://www.policyd-weight.org/releases/
 
@@ -10,8 +11,6 @@ HOMEPAGE=		http://www.policyd-weight.org/
 COMMENT=		Weighted policy daemon for postfix
 
 DEPENDS+=		p5-Net-DNS>=0.58:../../net/p5-Net-DNS
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=		perl:run
 USE_LANGUAGES=		# none

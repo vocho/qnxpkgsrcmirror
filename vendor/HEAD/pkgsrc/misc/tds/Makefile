@@ -1,16 +1,14 @@
-# $NetBSD: Makefile,v 1.14 2009/09/02 08:34:14 wiz Exp $
+# $NetBSD: Makefile,v 1.16 2012/10/08 09:57:38 asau Exp $
 #
 
 DISTNAME=	tds-1.4.2
-PKGREVISION=	2
+PKGREVISION=	3
 CATEGORIES=	misc www japanese
 MASTER_SITES=	http://tds.dive-in.to/dist/stable/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://tds.dive-in.to/
 COMMENT=	Web diary system
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=	perl:run
 GNU_CONFIGURE=	YES

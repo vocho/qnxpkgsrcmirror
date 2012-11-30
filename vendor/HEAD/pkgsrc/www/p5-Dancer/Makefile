@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.8 2012/07/26 00:20:13 wen Exp $
+# $NetBSD: Makefile,v 1.11 2012/10/28 06:30:35 asau Exp $
 
-DISTNAME=	Dancer-1.3097
+DISTNAME=	Dancer-1.3100
 PKGNAME=	p5-${DISTNAME}
+PKGREVISION=	1
 CATEGORIES=	www perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=../../authors/id/X/XS/XSAWYERX/}
 
@@ -10,11 +11,10 @@ HOMEPAGE=	http://perldancer.org/
 COMMENT=	Perl 5 lightweight yet powerful web application framework
 LICENSE=	${PERL5_LICENSE}
 
-PKG_DESTDIR_SUPPORT=	user-destdir
-
 USE_LANGUAGES=	# empty
 PERL5_PACKLIST= auto/Dancer/.packlist
 
+DEPENDS+=	p5-Clone>=0:../../devel/p5-Clone
 DEPENDS+=	p5-libwww-[0-9]*:../../www/p5-libwww
 DEPENDS+=	p5-HTTP-Body>=1.07:../../www/p5-HTTP-Body
 DEPENDS+=	p5-HTTP-Server-Simple-PSGI>=0.11:../../www/p5-HTTP-Server-Simple-PSGI

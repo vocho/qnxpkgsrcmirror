@@ -1,3 +1,4 @@
+.\" $NetBSD: sysupgrade.conf.5,v 1.4 2012/10/11 07:56:13 wiz Exp $
 .\" Copyright 2012 Google Inc.
 .\" All rights reserved.
 .\"
@@ -25,7 +26,7 @@
 .\" THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 .\" (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 .\" OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-.Dd August 6, 2012
+.Dd October 10, 2012
 .Dt SYSUPGRADE.CONF 5
 .Os
 .Sh NAME
@@ -97,8 +98,8 @@ Default: yes.
 .It Va KERNEL
 Name of the kernel to install.
 There must be a
-.Sq kern-<KERNEL>
-distribution set in the release directory matching this name.
+.Sq netbsd-<KERNEL>.gz
+file in the release directory matching this name.
 .Pp
 If this is set to the magic value
 .Sq AUTO ,
@@ -130,6 +131,12 @@ Location of the release directory (which must hold a
 subdirectory).
 This can be either a local path or a URL.
 .Pp
+If the location is a URL, any of the HTTP, FTP or SSH protocols are supported.
+In the case of SSH, the URL takes the form:
+.Sq ssh://[user[:password]@]<host>/<absolute_path> ,
+which is different to the syntax accepted by
+.Xr scp 1 .
+.Pp
 Default: not set.
 .It Va SETS
 Whitespace-separated list of distribution sets to install.
@@ -138,9 +145,9 @@ If this is set to the magic value
 the list of sets is determined from the files in
 .Pa <DESTDIR>/etc/mtree .
 .Pp
-This list should not include any
+This list cannot include any
 .Sq kern-*
-sets as this is automatically handled by the
+sets; the kernel to be installed is determined by the
 .Va KERNEL
 variable.
 .Pp
@@ -157,4 +164,4 @@ procedure.
 Default: AUTO.
 .El
 .Sh SEE ALSO
-.Xr sysupgrade 8 .
+.Xr sysupgrade 8

@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.15 2011/11/01 06:01:13 sbd Exp $
+# $NetBSD: Makefile,v 1.17 2012/10/03 21:56:04 wiz Exp $
 #
 
 DISTNAME=	ttf2pt1-3.4.4
-PKGREVISION=	4
+PKGREVISION=	5
 CATEGORIES=	fonts
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=ttf2pt1/}
 EXTRACT_SUFX=	.tgz
@@ -10,8 +10,6 @@ EXTRACT_SUFX=	.tgz
 MAINTAINER=	reinoud@NetBSD.org
 HOMEPAGE=	http://ttf2pt1.sourceforge.net/
 COMMENT=	TrueType font converter to Postscript type 1
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 DEPENDS+=	t1utils-[0-9]*:../../fonts/t1utils
 

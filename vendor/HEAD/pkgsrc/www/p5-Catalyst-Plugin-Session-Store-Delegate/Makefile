@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.9 2011/08/14 16:05:49 obache Exp $
+# $NetBSD: Makefile,v 1.12 2012/10/28 06:30:33 asau Exp $
 
 DISTNAME=	Catalyst-Plugin-Session-Store-Delegate-0.06
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	1
+PKGREVISION=	3
 CATEGORIES=	www perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Catalyst/}
 
@@ -21,9 +21,7 @@ BUILD_DEPENDS+=	p5-Test-use-ok>=0:../../devel/p5-Test-use-ok
 
 USE_LANGUAGES=	# empty
 PERL5_PACKLIST= auto/Catalyst/Plugin/Session/Store/Delegate/.packlist
-PERL5_MODULE_TYPE=	Module::Install
-
-PKG_DESTDIR_SUPPORT=	user-destdir
+PERL5_MODULE_TYPE=	Module::Install::Bundled
 
 .include "../../lang/perl5/module.mk"
 .include "../../mk/bsd.pkg.mk"

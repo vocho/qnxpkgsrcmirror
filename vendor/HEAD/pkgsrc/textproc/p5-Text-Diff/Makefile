@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.16 2011/10/18 09:45:05 hiramatsu Exp $
+# $NetBSD: Makefile,v 1.18 2012/10/25 06:56:25 asau Exp $
 
 DISTNAME=	Text-Diff-1.41
 PKGNAME=	p5-${DISTNAME}
+PKGREVISION=	1
 CATEGORIES=	perl5 textproc
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Text/}
 
@@ -9,8 +10,6 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 COMMENT=	High-level text diffing module for Perl
 HOMEPAGE=	http://search.cpan.org/dist/Text-Diff/
 LICENSE=	${PERL5_LICENSE}
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 DEPENDS+=		p5-Algorithm-Diff>=1.19:../../devel/p5-Algorithm-Diff
 

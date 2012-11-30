@@ -1,14 +1,13 @@
-# $NetBSD: Makefile,v 1.13 2011/05/31 11:08:09 obache Exp $
+# $NetBSD: Makefile,v 1.15 2012/11/28 13:54:53 wiz Exp $
 
-DISTNAME=	rssh-2.3.3
+DISTNAME=	rssh-2.3.4
 CATEGORIES=	shells security
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=rssh/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.pizzashack.org/rssh/
 COMMENT=	Restricted shell allowing only scp and/or sftp
-
-PKG_DESTDIR_SUPPORT=	user-destdir
+LICENSE=	2-clause-bsd
 
 GNU_CONFIGURE=		yes
 CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR}
@@ -47,6 +46,6 @@ CONFIGURE_ARGS+=	--with-rsync=${RSSH_RSYNC_PATH:Q}
 .endif
 
 post-install:
-	${INSTALL_DATA} ${WRKSRC}/rssh.conf ${DESTDIR}${EGDIR}/rssh.conf
+	${INSTALL_DATA} ${WRKSRC}/rssh.conf.default ${DESTDIR}${EGDIR}/rssh.conf
 
 .include "../../mk/bsd.pkg.mk"

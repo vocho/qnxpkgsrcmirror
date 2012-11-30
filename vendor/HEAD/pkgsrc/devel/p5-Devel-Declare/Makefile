@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.19 2012/03/08 09:35:10 sno Exp $
+# $NetBSD: Makefile,v 1.22 2012/10/31 11:17:59 asau Exp $
 
 DISTNAME=	Devel-Declare-0.006011
 PKGNAME=	p5-${DISTNAME}
+PKGREVISION=	2
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Devel/}
 
@@ -9,8 +10,6 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://search.cpan.org/dist/Devel-Declare/
 COMMENT=	Declarator magic for perl
 LICENSE=	${PERL5_LICENSE}
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 DEPENDS+=	p5-B-Hooks-EndOfScope>0.05:../../devel/p5-B-Hooks-EndOfScope
 DEPENDS+=	p5-Sub-Name-[0-9]*:../../devel/p5-Sub-Name
@@ -21,7 +20,7 @@ BUILD_DEPENDS+= p5-Test-Warn-[0-9]*:../../devel/p5-Test-Warn
 
 USE_LANGUAGES=		c
 PERL5_PACKLIST=		auto/Devel/Declare/.packlist
-PERL5_MODULE_TYPE=	Module::Install
+PERL5_MODULE_TYPE=	Module::Install::Bundled
 BUILDLINK_DEPMETHOD.p5-B-Hooks-OP-Check=	full
 BUILDLINK_API_DEPENDS.p5-B-Hooks-OP-Check+=	p5-B-Hooks-OP-Check>=0.19
 

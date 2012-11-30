@@ -1,16 +1,13 @@
-# $NetBSD: Makefile,v 1.17 2010/01/24 13:26:12 wiz Exp $
+# $NetBSD: Makefile,v 1.19 2012/11/15 13:44:14 gdt Exp $
 
 PKGNAME=	${PKGNAME_BASE:S/-/-x11-/}
-PKGREVISION=	1
+PKGREVISION=	2
 
 FILESDIR=	${.CURDIR}/../../www/htmldoc/files
 PATCHDIR=	${.CURDIR}/../../www/htmldoc/patches
 PKGDIR=		${.CURDIR}/../../www/htmldoc
 
 DESCR_SRC=	${.CURDIR}/DESCR
-
-# Mirror PKG_DESTDIR_SUPPORT setting from htmldoc/Makefile.
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 .include "../../mk/bsd.prefs.mk"
 

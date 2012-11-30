@@ -1,8 +1,20 @@
-$NetBSD: patch-af,v 1.7 2012/07/09 14:30:50 adam Exp $
+$NetBSD: patch-af,v 1.10 2012/11/16 21:18:39 adam Exp $
 
---- Documentation/Makefile.orig	2010-10-22 03:49:16.000000000 +0000
+* Use BSR_INSTALL_*.
+* FIXME: Add "--skip-validation" to xmlto command.
+
+--- Documentation/Makefile.orig	2012-10-21 21:32:15.000000000 +0000
 +++ Documentation/Makefile
-@@ -187,16 +187,16 @@ pdf: user-manual.pdf
+@@ -47,7 +47,7 @@ man7dir=$(mandir)/man7
+ ASCIIDOC = asciidoc
+ ASCIIDOC_EXTRA =
+ MANPAGE_XSL = manpage-normal.xsl
+-XMLTO = xmlto
++XMLTO = xmlto --skip-validation
+ XMLTO_EXTRA =
+ INSTALL?=install
+ RM ?= rm -f
+@@ -170,16 +170,16 @@ pdf: user-manual.pdf
  install: install-man
  
  install-man: man

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.10 2012/04/17 17:35:25 drochner Exp $
+# $NetBSD: Makefile,v 1.12 2012/10/25 06:56:51 asau Exp $
 #
 
 DISTNAME=	Pygments-1.5
@@ -11,9 +11,9 @@ HOMEPAGE=	http://pygments.org/
 COMMENT=	Python syntax highlighter
 LICENSE=	2-clause-bsd
 
-PKG_DESTDIR_SUPPORT=	user-destdir
-
 USE_LANGUAGES=		#none
+
+PYTHON_VERSIONS_INCLUDE_3X=	yes
 
 .include "../../mk/bsd.prefs.mk"
 

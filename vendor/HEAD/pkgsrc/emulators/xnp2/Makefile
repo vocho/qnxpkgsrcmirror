@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.2 2012/06/23 10:12:02 tsutsui Exp $
+# $NetBSD: Makefile,v 1.7 2012/10/08 23:01:32 adam Exp $
 
 SNAPSHOTDATE=		20120618
 DISTNAME=		xnp2-${SNAPSHOTDATE}
 PKGNAME=		xnp2-0.83pl${SNAPSHOTDATE}
+PKGREVISION=		4
 CATEGORIES=		emulators
 MASTER_SITES=		http://www.asahi-net.or.jp/~aw9k-nnk/np2/
 EXTRACT_SUFX=		.tar.bz2
@@ -11,8 +12,6 @@ MAINTAINER=		tsutsui@NetBSD.org
 HOMEPAGE=		http://www.asahi-net.or.jp/~aw9k-nnk/np2/
 COMMENT=		Neko Project II PC-9801 emulator
 LICENSE=		modified-bsd
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=		pkg-config
 USE_LANGUAGES=		c c++

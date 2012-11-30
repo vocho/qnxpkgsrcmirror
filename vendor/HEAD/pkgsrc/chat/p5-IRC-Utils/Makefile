@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.1.1.1 2011/11/13 07:24:09 hiramatsu Exp $
+# $NetBSD: Makefile,v 1.3 2012/10/03 21:54:02 wiz Exp $
 
 DISTNAME=	IRC-Utils-0.12
 PKGNAME=	p5-${DISTNAME}
+PKGREVISION=	1
 CATEGORIES=	chat perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=IRC/}
 
@@ -11,8 +12,6 @@ COMMENT=	Common utilities for IRC-related tasks
 LICENSE=	${PERL5_LICENSE}
 
 PREV_PKGPATH=	chat/p5-IRC-Util
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 PERL5_PACKLIST=	auto/IRC/Utils/.packlist
 

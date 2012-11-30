@@ -1,15 +1,13 @@
-# $NetBSD: Makefile,v 1.26 2011/11/29 18:32:41 hans Exp $
+# $NetBSD: Makefile,v 1.28 2012/10/25 06:56:02 asau Exp $
 
 DISTNAME=	kdoc-2.0a54
 PKGNAME=	kdoc-3.0
-PKGREVISION=	2
+PKGREVISION=	3
 CATEGORIES=	textproc kde
 MASTER_SITES=	${MASTER_SITE_KDE:=3.0/src/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 COMMENT=	C++ and IDL Class Documentation Tool
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=		perl:run pod2man
 

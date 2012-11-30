@@ -1,17 +1,15 @@
-# $NetBSD: Makefile,v 1.13 2012/07/02 19:16:02 drochner Exp $
+# $NetBSD: Makefile,v 1.17 2012/11/15 14:49:15 drochner Exp $
 #
 
-DISTNAME=	glib-networking-2.32.3
+DISTNAME=	glib-networking-2.34.2
 CATEGORIES=	net
-MASTER_SITES=	${MASTER_SITE_GNOME:=sources/glib-networking/2.32/}
+MASTER_SITES=	${MASTER_SITE_GNOME:=sources/glib-networking/2.34/}
 EXTRACT_SUFX=	.tar.xz
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.gnome.org/
 COMMENT=	Network-related giomodules for glib
 LICENSE=	gnu-gpl-v2
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=	yes
 CONFIGURE_ARGS+= --with-ca-certificates=/etc/ssl/certs/ca-certificates.crt

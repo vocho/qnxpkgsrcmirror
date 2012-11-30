@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.18 2011/10/29 11:40:27 obache Exp $
+# $NetBSD: Makefile,v 1.21 2012/10/04 00:21:59 cheusov Exp $
 #
 
 DISTNAME=		fonttools-2.3
 PKGNAME=		${PYPKGPREFIX}-${DISTNAME}
+PKGREVISION=		1
 CATEGORIES=		fonts python
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=fonttools/}
 
@@ -13,7 +14,7 @@ COMMENT=		Library for manipulating fonts
 DEPENDS+=	${PYPKGPREFIX}-numpy-[0-9]*:../../math/py-numpy
 DEPENDS+=	${PYPKGPREFIX}-expat-[0-9]*:../../textproc/py-expat
 
-PKG_DESTDIR_SUPPORT=	user-destdir
+PYTHON_SELF_CONFLICT=	yes
 
 SUBST_CLASSES+=		fix-mandir
 SUBST_STAGE.fix-mandir=	pre-configure

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.7 2012/06/01 15:39:26 wiz Exp $
+# $NetBSD: Makefile,v 1.9 2012/10/23 10:24:14 wiz Exp $
 #
 
 DISTNAME=	notion-3-2012042300-src
@@ -11,8 +11,6 @@ MAINTAINER=	wiz@NetBSD.org
 HOMEPAGE=	http://notion.sourceforge.net/
 COMMENT=	Tiling window manager based on ion3
 LICENSE=	ion-license AND gnu-lgpl-v2.1
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 # notion is based on ion3
 CONFLICTS=	ion3-[0-9]*
@@ -59,7 +57,6 @@ post-install:
 
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../lang/lua/buildlink3.mk"
-.include "../../x11/xextproto/buildlink3.mk"
 .include "../../x11/libX11/buildlink3.mk"
 .include "../../x11/libSM/buildlink3.mk"
 .include "../../x11/libXext/buildlink3.mk"

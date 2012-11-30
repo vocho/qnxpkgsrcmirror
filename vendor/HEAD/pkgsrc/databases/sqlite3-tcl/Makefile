@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.36 2012/08/21 23:49:20 marino Exp $
+# $NetBSD: Makefile,v 1.39 2012/10/06 17:59:08 adam Exp $
 
-DISTNAME=	sqlite-autoconf-3071300
-PKGNAME=	sqlite3-tcl-3.7.13
-PKGREVISION=	1
+DISTNAME=	sqlite-autoconf-3071401
+PKGNAME=	sqlite3-tcl-3.7.14.1
 CATEGORIES=	databases
 MASTER_SITES=	http://www.hwaci.com/sw/sqlite/ \
 		http://www.sqlite.org/
@@ -11,8 +10,6 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.sqlite.org/
 COMMENT=	SQL Database Engine in a C Library (TCL extension)
 LICENSE=	public-domain
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 WRKSRC=		${WRKDIR}/${DISTNAME}/tea
 

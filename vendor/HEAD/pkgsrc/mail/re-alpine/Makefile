@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.6 2012/04/18 20:50:21 wiz Exp $
+# $NetBSD: Makefile,v 1.8 2012/10/10 19:49:07 markd Exp $
 #
 
 DISTNAME=	re-alpine-2.02
+PKGREVISION=	1
 CATEGORIES=	mail
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=re-alpine/}
 EXTRACT_SUFX=	.tar.bz2
@@ -12,8 +13,6 @@ COMMENT=	Console-based mail and news client
 LICENSE=	apache-2.0
 
 CONFLICTS=	alpine-[0-9]*
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 .include "options.mk"
 

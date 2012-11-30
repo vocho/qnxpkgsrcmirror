@@ -1,12 +1,11 @@
-$NetBSD: patch-mail_app_nsMailApp.cpp,v 1.2 2012/04/28 22:48:06 ryoon Exp $
+$NetBSD: patch-mail_app_nsMailApp.cpp,v 1.5 2012/11/23 17:28:49 ryoon Exp $
 
---- mail/app/nsMailApp.cpp.orig	2012-04-23 06:20:50.000000000 +0000
+--- mail/app/nsMailApp.cpp.orig	2012-11-18 10:14:23.000000000 +0000
 +++ mail/app/nsMailApp.cpp
-@@ -52,6 +52,27 @@
- 
- #include <stdio.h>
- #include <stdarg.h>
-+#include <sys/resource.h>
+@@ -12,6 +12,26 @@
+ #include <sys/time.h>
+ #include <sys/resource.h>
+ #endif
 +/*
 + * On netbsd-4, ulimit -n is 64 by default; too few for us.
 + */
@@ -26,11 +25,11 @@ $NetBSD: patch-mail_app_nsMailApp.cpp,v 1.2 2012/04/28 22:48:06 ryoon Exp $
 +		rlp.rlim_cur = 512;
 +	if (setrlimit(RLIMIT_NOFILE, &rlp) == -1)
 +		fprintf(stderr, "warning: setrlimit failed\n");
-+}
++	}
  
- #include "nsCOMPtr.h"
- #include "nsILocalFile.h"
-@@ -151,6 +172,7 @@ static int do_main(const char *exePath, 
+ #ifdef XP_MACOSX
+ #include "MacQuirks.h"
+@@ -115,6 +135,7 @@ static int do_main(const char *exePath, 
  
  int main(int argc, char* argv[])
  {

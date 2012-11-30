@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.88 2012/08/13 17:13:45 drochner Exp $
+# $NetBSD: Makefile,v 1.91 2012/11/26 19:00:20 drochner Exp $
 #
 
-DISTNAME=		tor-0.2.2.38
+DISTNAME=		tor-0.2.3.25
 CATEGORIES=		net security
 MASTER_SITES=		http://www.torproject.org/dist/
 # MASTER_SITES redirects to https, and ftp(1) cannot handle that.
@@ -11,8 +11,6 @@ MAINTAINER=		athaba@users.sourceforge.net
 HOMEPAGE=		http://www.torproject.org/
 COMMENT=		Anonymizing overlay network for TCP
 LICENSE=		modified-bsd
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 .include "../../mk/bsd.prefs.mk"
 

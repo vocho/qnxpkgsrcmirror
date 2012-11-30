@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.38 2012/06/14 07:45:32 sbd Exp $
+# $NetBSD: Makefile,v 1.40 2012/10/28 06:31:05 asau Exp $
 
 DISTNAME=	snownews-1.5.12
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	www
 MASTER_SITES=	http://kiza.kcore.de/software/snownews/download/
 
@@ -11,8 +11,6 @@ COMMENT=	Small, curses based RSS feed reader
 LICENSE=	gnu-gpl-v2
 
 DEPENDS+=		p5-XML-LibXML>=1.58:../../textproc/p5-XML-LibXML
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 HAS_CONFIGURE=		yes
 USE_PKGLOCALEDIR=	yes

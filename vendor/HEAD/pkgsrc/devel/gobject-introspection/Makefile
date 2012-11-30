@@ -1,17 +1,15 @@
-# $NetBSD: Makefile,v 1.21 2012/05/18 14:38:56 bsiegert Exp $
+# $NetBSD: Makefile,v 1.28 2012/11/15 14:56:34 drochner Exp $
 #
 
-DISTNAME=	gobject-introspection-1.32.1
+DISTNAME=	gobject-introspection-1.34.2
 CATEGORIES=	devel
-MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gobject-introspection/1.32/}
+MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gobject-introspection/1.34/}
 EXTRACT_SUFX=	.tar.xz
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://live.gnome.org/GObjectIntrospection
 COMMENT=	GObject Introspection
 LICENSE=	gnu-gpl-v2 AND gnu-lgpl-v2
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 DEPENDS+=	${PYPKGPREFIX}-cElementTree-[0-9]*:../../textproc/py-cElementTree
 
@@ -20,9 +18,6 @@ USE_LIBTOOL=	yes
 USE_TOOLS+=	pkg-config flex bison gmake
 GMAKE_REQD=	3.81
 
-CONFIGURE_ARGS+=	--disable-tests
-
-PKGCONFIG_OVERRIDE+=	gobject-introspection-1.0.pc.in
 PKGCONFIG_OVERRIDE+=	gobject-introspection-no-export-1.0.pc.in
 
 SUBST_CLASSES+=	timet
@@ -42,11 +37,15 @@ SUBST_SED.timet+=	-e 's,@TIMET_CTYPE@,glong,g'
 # not executable
 CHECK_INTERPRETER_SKIP+= lib/gobject-introspection/giscanner/*.py
 
-# needed for test only
-#.include "../../graphics/cairo/buildlink3.mk"
-TEST_TARGET=	check
+PKGCONFIG_OVERRIDE+=	gobject-introspection-1.0.pc.in
 
-BUILDLINK_API_DEPENDS.glib2+= glib2>=2.30.0
+CONFIGURE_ARGS+=	--disable-tests
+# needed for tests only
+#.include "../../graphics/cairo/buildlink3.mk"
+#.include "../../graphics/cairo-gobject/buildlink3.mk"
+#TEST_TARGET=	check
+
+BUILDLINK_API_DEPENDS.glib2+= glib2>=2.34.1
 .include "../../devel/glib2/buildlink3.mk"
 .include "../../devel/libffi/buildlink3.mk"
 .include "../../lang/python/application.mk"

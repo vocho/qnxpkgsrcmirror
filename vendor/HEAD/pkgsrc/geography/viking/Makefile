@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.35 2012/04/24 01:19:58 gdt Exp $
+# $NetBSD: Makefile,v 1.43 2012/10/29 01:24:04 gdt Exp $
 #
 
-DISTNAME=		viking-1.3
+DISTNAME=		viking-1.3.2.1
+PKGREVISION=		5
 CATEGORIES=		geography
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=viking/}
 
@@ -10,8 +11,6 @@ HOMEPAGE=		http://viking.sourceforge.net/
 COMMENT=		Viking manages GPS data, supports OpenStreetMap and geocaching
 
 LICENSE=		gnu-gpl-v2
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=		yes
 
@@ -32,6 +31,7 @@ USE_TOOLS+=		gmake intltool msgfmt pkg-config
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../lang/perl5/buildlink3.mk"
 .include "../../textproc/gnome-doc-utils/buildlink3.mk"
+.include "../../mk/omf-scrollkeeper.mk"
 .include "../../www/curl/buildlink3.mk"
 .include "../../x11/gtk2/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

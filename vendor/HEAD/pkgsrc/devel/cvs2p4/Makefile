@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.12 2008/03/03 17:45:34 jlam Exp $
+# $NetBSD: Makefile,v 1.14 2012/10/31 11:16:49 asau Exp $
 #
 
 DISTNAME=	cvs2p4-2.3.3
+PKGREVISION=	1
 CATEGORIES=	devel scm
 MASTER_SITES=	ftp://public.perforce.com/public/perforce/utils/cvs2p4/
 EXTRACT_SUFX=	.tar
@@ -15,8 +16,6 @@ DEPENDS+=	p4d-[0-9]*:../../devel/p4d
 .if !exists(/usr/bin/co) && !exists(${LOCALBASE}/bin/co)
 DEPENDS+=	rcs-[0-9]*:../../devel/rcs
 .endif
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=	perl:run
 NO_BUILD=	yes

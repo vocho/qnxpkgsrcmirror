@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.22 2012/08/20 11:34:58 ryoon Exp $
+# $NetBSD: Makefile,v 1.27 2012/10/23 17:18:25 asau Exp $
 #
 
 DISTNAME=	gtk-vnc-0.5.1
+PKGREVISION=	4
 CATEGORIES=	net
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gtk-vnc/0.5/}
 EXTRACT_SUFX=	.tar.xz
@@ -9,8 +10,6 @@ EXTRACT_SUFX=	.tar.xz
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://live.gnome.org/gtk-vnc
 COMMENT=	VNC viewer widget for GTK
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=	yes
 USE_LIBTOOL=	yes

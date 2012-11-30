@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.5 2012/07/22 04:12:19 ryoon Exp $
+# $NetBSD: Makefile,v 1.9 2012/11/21 21:06:52 ryoon Exp $
 #
 
-FIREFOX_VER=	10.0.6
+FIREFOX_VER=	10.0.11
 PKGNAME=	firefox10-l10n-${FIREFOX_VER}
 DISTNAME=	# empty
 CATEGORIES=	www
@@ -10,8 +10,6 @@ MASTER_SITES=	${MASTER_SITE_MOZILLA_ESR:=firefox/releases/${FIREFOX_VER}esr/linu
 MAINTAINER=	tnn@NetBSD.org
 HOMEPAGE=	http://www.mozilla.org/en-US/firefox/organizations/
 COMMENT=	Language packs for www/firefox
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 DIST_SUBDIR=	${PKGNAME_NOREV}
 DISTFILES=	${XPI_FILES}

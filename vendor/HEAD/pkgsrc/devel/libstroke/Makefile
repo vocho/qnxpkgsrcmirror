@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.24 2012/08/21 23:49:20 marino Exp $
+# $NetBSD: Makefile,v 1.26 2012/10/31 11:17:22 asau Exp $
 #
 
 DISTNAME=		libstroke-0.5.1
@@ -11,7 +11,6 @@ HOMEPAGE=		http://etla.net/libstroke/
 COMMENT=		Stroke translation library
 
 PKG_INSTALLATION_TYPES= overwrite pkgviews
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=		YES
 USE_LIBTOOL=		YES
@@ -21,6 +20,5 @@ CONFIGURE_ENV+=		ac_cv_path_GTK_CONFIG=no
 
 BUILDLINK_DEPMETHOD.libX11?=	build
 
-.include "../../lang/tcl/buildlink3.mk"
 .include "../../x11/libX11/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

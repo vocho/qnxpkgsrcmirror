@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.7 2012/07/02 13:37:38 adam Exp $
+# $NetBSD: Makefile,v 1.9 2012/10/06 14:10:56 asau Exp $
 #
 
 DISTNAME=	gource-0.38
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	graphics
 MASTER_SITES=	http://gource.googlecode.com/files/
 
@@ -10,8 +10,6 @@ MAINTAINER=	ryoon@NetBSD.org
 HOMEPAGE=	http://code.google.com/p/gource/
 COMMENT=	software version control visualization
 LICENSE=	gnu-gpl-v3
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=	yes
 USE_LANGUAGES=	c c++

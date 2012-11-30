@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.3 2011/08/14 16:06:04 obache Exp $
+# $NetBSD: Makefile,v 1.5 2012/10/28 06:30:48 asau Exp $
 #
 
 DISTNAME=	ParallelUserAgent-2.57
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	2
+PKGREVISION=	3
 CATEGORIES=	www net perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=LWP/}
 MASTER_SITES=  	${MASTER_SITE_PERL_CPAN:=../../authors/id/M/MA/MARCLANG/}
@@ -15,7 +15,6 @@ COMMENT=	CPAN Bundle for the LWP Parallel User Agent extension
 DEPENDS+=     p5-libwww>=5.64:../../www/p5-libwww
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_LANGUAGES=		# empty
 PERL5_PACKLIST=		auto/LWP/Parallel/.packlist

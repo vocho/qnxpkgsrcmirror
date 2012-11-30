@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.48 2012/06/14 07:45:03 sbd Exp $
+# $NetBSD: Makefile,v 1.51 2012/10/08 12:19:14 asau Exp $
 
 DISTNAME=	kbiff-3.9
-PKGREVISION=	12
+PKGREVISION=	14
 CATEGORIES=	devel kde
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=kbiff/}
 EXTRACT_SUFX=	.tar.bz2
@@ -9,8 +9,6 @@ EXTRACT_SUFX=	.tar.bz2
 MAINTAINER=	markd@NetBSD.org
 HOMEPAGE=	http://www.kbiff.org
 COMMENT=	Mail notification utility for KDE
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=		gmake perl
 USE_LANGUAGES=		c c++

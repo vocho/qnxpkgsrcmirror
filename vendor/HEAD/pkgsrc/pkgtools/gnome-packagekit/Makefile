@@ -1,16 +1,14 @@
-# $NetBSD: Makefile,v 1.22 2012/06/14 07:44:38 sbd Exp $
+# $NetBSD: Makefile,v 1.28 2012/10/08 23:02:19 adam Exp $
 #
 
 DISTNAME=	gnome-packagekit-0.4.0
-PKGREVISION=	15
+PKGREVISION=	20
 CATEGORIES=	pkgtools gnome
 MASTER_SITES=	http://www.packagekit.org/releases/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.packagekit.org/
 COMMENT=	GNOME frontend for PackageKit
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=	yes
 USE_LIBTOOL=	yes

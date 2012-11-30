@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.8 2010/01/27 17:17:27 joerg Exp $
+# $NetBSD: Makefile,v 1.10 2012/10/23 18:16:30 asau Exp $
 
 DISTNAME=		hackbot-2.15
+PKGREVISION=		1
 CATEGORIES=		security net
 MASTER_SITES=		http://www.xs4all.nl/~mvberkum/hackbot/
 EXTRACT_SUFX=		.tgz
@@ -8,8 +9,6 @@ EXTRACT_SUFX=		.tgz
 MAINTAINER=		nk@atki.net
 HOMEPAGE=		http://ws.obit.nl/hackbot/
 COMMENT=		Vulnerability scanner written in Perl
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 WRKSRC=			${WRKDIR}/hackbot
 MANCOMPRESSED=		YES

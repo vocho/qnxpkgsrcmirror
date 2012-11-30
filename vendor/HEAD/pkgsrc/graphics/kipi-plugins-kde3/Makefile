@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.21 2012/06/14 07:44:08 sbd Exp $
+# $NetBSD: Makefile,v 1.27 2012/10/08 23:01:46 adam Exp $
 
 DISTNAME=	kipi-plugins-0.1.7
-PKGREVISION=	20
+PKGREVISION=	25
 CATEGORIES=	graphics
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=kipi/}
 EXTRACT_SUFX=	.tar.bz2
@@ -10,8 +10,6 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.kipi-plugins.org/drupal/
 COMMENT=	Kipi (KDE Image Plugin Interface) plugins (KDE3)
 LICENSE=	gnu-gpl-v2
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=		gmake perl pkg-config msgfmt bash:run
 USE_LANGUAGES=		c c++

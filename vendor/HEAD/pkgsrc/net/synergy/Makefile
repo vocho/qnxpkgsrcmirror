@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.13 2011/06/23 03:16:50 taca Exp $
+# $NetBSD: Makefile,v 1.16 2012/11/25 16:39:40 gls Exp $
 #
 
-DISTNAME=		synergy-1.3.7-Source
+DISTNAME=		synergy-1.3.8-Source
 PKGNAME=		${DISTNAME:S/-Source//}
 CATEGORIES=		net x11
 MASTER_SITES=		http://synergy.googlecode.com/files/
@@ -10,8 +10,6 @@ MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://synergy-foss.org/
 COMMENT=		Let a user share a mouse and keyboard among computers
 LICENSE=		gnu-gpl-v2
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_LANGUAGES=		c c++
 
@@ -55,7 +53,6 @@ do-install:
 .include "../../x11/libXinerama/buildlink3.mk"
 .include "../../x11/libXt/buildlink3.mk"
 .include "../../x11/libXtst/buildlink3.mk"
-.include "../../x11/xextproto/buildlink3.mk"
 .endif
 .include "../../mk/pthread.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

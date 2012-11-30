@@ -1,16 +1,14 @@
-# $NetBSD: Makefile,v 1.184 2012/08/18 01:37:42 ryoon Exp $
+# $NetBSD: Makefile,v 1.187 2012/10/10 11:48:39 drochner Exp $
 
 .include "Makefile.common"
 
 PKGNAME=	ImageMagick-${DISTVERSION}
-PKGREVISION=	4
 
 MAINTAINER=	adam@NetBSD.org
 COMMENT=	Package for display and interactive manipulation of images
 
 CONFLICTS=	geomview<1.8.1nb2  # used to have a program named 'animate'
 
-PKG_DESTDIR_SUPPORT=	user-destdir
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
 
 USE_LANGUAGES=		c c++ c99
@@ -56,7 +54,6 @@ CONF_FILES+=	${EGDIR}/log.xml ${PKG_SYSCONFDIR}/log.xml
 CONF_FILES+=	${EGDIR}/magic.xml ${PKG_SYSCONFDIR}/magic.xml
 CONF_FILES+=	${EGDIR}/mime.xml ${PKG_SYSCONFDIR}/mime.xml
 CONF_FILES+=	${EGDIR}/policy.xml ${PKG_SYSCONFDIR}/policy.xml
-CONF_FILES+=	${EGDIR}/sRGB.icc ${PKG_SYSCONFDIR}/sRGB.icc
 CONF_FILES+=	${EGDIR}/thresholds.xml ${PKG_SYSCONFDIR}/thresholds.xml
 CONF_FILES+=	${EGDIR}/type-dejavu.xml ${PKG_SYSCONFDIR}/type-dejavu.xml
 CONF_FILES+=	${EGDIR}/type-ghostscript.xml ${PKG_SYSCONFDIR}/type-ghostscript.xml
@@ -80,7 +77,7 @@ SUBST_SED.fix-etc=	-e 's,^configlibdir =.*,configlibdir = $$(DATA_DIR)/examples/
 .include "../../devel/libltdl/buildlink3.mk"
 .include "../../fonts/fontconfig/buildlink3.mk"
 .include "../../graphics/freetype2/buildlink3.mk"
-.include "../../graphics/lcms/buildlink3.mk"
+.include "../../graphics/lcms2/buildlink3.mk"
 .include "../../graphics/openexr/buildlink3.mk"
 .include "../../graphics/libwebp/buildlink3.mk"
 .include "../../graphics/png/buildlink3.mk"

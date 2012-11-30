@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.11 2012/03/03 00:12:37 wiz Exp $
+# $NetBSD: Makefile,v 1.16 2012/10/08 23:01:09 adam Exp $
 
 DISTNAME=	xmms-scrobbler-0.4.0
 PKGNAME=	${DISTNAME:S/xmms/bmp/}
-PKGREVISION=	10
+PKGREVISION=	14
 CATEGORIES=	audio
 MASTER_SITES=	http://armish.linux-sevenler.org/downloads/pub/
 EXTRACT_SUFX=	.tar.bz2
@@ -12,7 +12,6 @@ HOMEPAGE=	http://www.last.fm/
 COMMENT=	BMP plugin for last.fm
 
 LICENSE=	gnu-lgpl-v2.1
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=	YES
 USE_LIBTOOL=	YES
