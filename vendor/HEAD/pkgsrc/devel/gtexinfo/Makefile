@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.79 2012/10/31 11:17:04 asau Exp $
+# $NetBSD: Makefile,v 1.81 2013/01/11 14:57:26 seanb Exp $
 
-DISTNAME=		texinfo-4.13
+DISTNAME=		texinfo-4.13a
 PKGNAME=		g${DISTNAME}
-PKGREVISION=		1
 CATEGORIES=		devel sysutils
 MASTER_SITES=		${MASTER_SITE_GNU:=texinfo/}
 
@@ -13,7 +12,8 @@ LICENSE=		gnu-gpl-v3
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
 
-USE_TOOLS+=		bash
+WRKSRC=			${WRKDIR}/texinfo-4.13 # just for 4.13a
+
 GNU_CONFIGURE=		yes
 INFO_FILES=		yes
 TEST_TARGET=		check
@@ -21,8 +21,6 @@ PLIST_SRC=		${PKGDIR}/PLIST
 
 PKGSRC_INFOPATH=	${PREFIX}/${PKGINFODIR}:${X11BASE}/${PKGINFODIR}:${LOCALBASE}/${PKGINFODIR}
 MAKE_ENV+=		PKGSRC_INFOPATH=${PKGSRC_INFOPATH:Q}
-
-REPLACE_BASH+=		util/texi2dvi
 
 .include "../../mk/bsd.prefs.mk"
 .include "options.mk"
