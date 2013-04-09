@@ -1,14 +1,12 @@
-# $NetBSD: Makefile,v 1.12 2012/04/14 11:01:29 gls Exp $
+# $NetBSD: Makefile,v 1.14 2012/10/23 19:50:54 asau Exp $
 
-DISTNAME=	capistrano-2.12.0
+DISTNAME=	capistrano-2.13.3
 CATEGORIES=	sysutils
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://github.com/capistrano/capistrano
 COMMENT=	Tool for parallel execution of commands across multiple machines
 LICENSE=	mit
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 DEPENDS+=	${RUBY_PKGPREFIX}-net-ssh>=2.0.14:../../security/ruby-net-ssh
 DEPENDS+=	${RUBY_PKGPREFIX}-net-ssh-gateway>=1.1.0:../../security/ruby-net-ssh-gateway

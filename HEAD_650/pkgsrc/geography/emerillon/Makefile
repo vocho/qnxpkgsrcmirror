@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.10 2012/06/14 07:44:31 sbd Exp $
+# $NetBSD: Makefile,v 1.15 2012/10/08 23:01:38 adam Exp $
 #
 
 DISTNAME=	emerillon-0.1.2
-PKGREVISION=	7
+PKGREVISION=	11
 CATEGORIES=	geography
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/emerillon/0.1/}
 EXTRACT_SUFX=	.tar.bz2
@@ -12,8 +12,6 @@ HOMEPAGE=	http://projects.gnome.org/emerillon/
 COMMENT=	Map browser
 
 BUILD_DEPENDS+=	gnome-common-[0-9]*:../../devel/gnome-common
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=		yes
 USE_TOOLS+=		pkg-config intltool gmake msgfmt

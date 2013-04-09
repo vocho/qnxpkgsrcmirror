@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.38 2012/03/03 00:12:59 wiz Exp $
+# $NetBSD: Makefile,v 1.43 2012/10/08 23:01:27 adam Exp $
 #
 
 DISTNAME=		gice-0.6.2
-PKGREVISION=		12
+PKGREVISION=		16
 CATEGORIES=		editors
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=gice/}
 EXTRACT_SUFX=		.tgz
@@ -10,8 +10,6 @@ EXTRACT_SUFX=		.tgz
 MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://gice.sourceforge.net/
 COMMENT=		Powerful C text editor with advanced features
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 WRKSRC=			${WRKDIR}/gice
 USE_TOOLS+=		gmake pkg-config

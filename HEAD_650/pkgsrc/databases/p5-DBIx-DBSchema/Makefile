@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.10 2011/08/14 08:18:07 obache Exp $
+# $NetBSD: Makefile,v 1.12 2012/10/03 21:54:19 wiz Exp $
 #
 
 DISTNAME=	DBIx-DBSchema-0.39
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	databases perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=DBIx/}
 
@@ -13,7 +13,6 @@ COMMENT=	Database-independent schema objects
 LICENSE=	${PERL5_LICENSE}
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 DEPENDS+=	p5-FreezeThaw-[0-9]*:../../devel/p5-FreezeThaw
 

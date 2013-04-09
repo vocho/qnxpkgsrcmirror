@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.221 2012/08/19 07:28:36 sbd Exp $
+# $NetBSD: Makefile,v 1.224 2012/10/30 13:24:32 drochner Exp $
 
 .include "../../net/samba/Makefile.mirrors"
 
 DISTNAME=	samba-${VERSION}
-PKGREVISION=	1
+PKGREVISION=	3
 CATEGORIES=	net
 MASTER_SITES=	${SAMBA_MIRRORS:=stable/}
 
@@ -13,9 +13,7 @@ COMMENT=	SMB/CIFS protocol server suite
 LICENSE=	gnu-gpl-v3
 
 VERSION=	3.6.6
-CONFLICTS+=	ja-samba-[0-9]* pam-smbpass-[0-9]* tdb-[0-9]* winbind-[0-9]*
-
-PKG_DESTDIR_SUPPORT=	user-destdir
+CONFLICTS+=	ja-samba-[0-9]* pam-smbpass-[0-9]* winbind-[0-9]*
 
 FILESDIR=		${PKGDIR}/../../net/samba/files
 DESCR_SRC=		${PKGDIR}/../../net/samba/DESCR
@@ -48,7 +46,7 @@ FILES_SUBST+=		WINBINDD_RCD_SCRIPT=${WINBINDD_RCD_SCRIPT:Q}
 
 # mktemp is useful for the replacement adduser script, but don't require
 # a full dependency since it's not actually needed by samba.
-USE_TOOLS+=		gmake mktemp perl:run
+USE_TOOLS+=		gmake mktemp perl:run pkg-config
 REPLACE_PERL=		script/findsmb.in
 
 BROKEN_GETTEXT_DETECTION=yes
@@ -67,10 +65,16 @@ CONFIGURE_ARGS+=	--with-statedir=${SAMBA_STATEDIR}
 CONFIGURE_ARGS+=	--localstatedir=${SAMBA_VARDIR}
 CONFIGURE_ARGS+=	--with-mandir=${PREFIX}/${PKGMANDIR}
 CONFIGURE_ARGS+=	--with-swatdir=${PREFIX}/share/samba/swat
+CONFIGURE_ARGS+=	--enable-external-libtdb
 #
 # Explicitly disable samba4 merged-build option which is broken.
 #
 CONFIGURE_ARGS+=	--enable-merged-build=no
+
+# QNX PR 288570
+.if ${OPSYS} == "QNX"
+CONFIGURE_ARGS+=	--disable-pie
+.endif
 
 .include "../../net/samba/options.mk"
 
@@ -126,6 +130,10 @@ SUBST_SED.paths+=	-e 's,@SH@,${SH},g'
 
 post-extract:
 	${CP} ${FILESDIR}/adduser.sh ${FILESDIR}/deluser.sh ${WRKDIR}
+	for n in tdbbackup.8 tdbdump.8 tdbtool.8; do \
+		${RM} ${WRKSRC}/../docs/manpages/$$n; \
+		${RM} ${WRKSRC}/../docs/htmldocs/manpages/$$n.html; \
+	done
 
 post-install:
 	${RMDIR} ${DESTDIR}${PREFIX}/share/samba/swat/js
@@ -163,6 +171,8 @@ post-install:
 .include "../../devel/libuuid/buildlink3.mk"
 .endif
 .include "../../converters/libiconv/buildlink3.mk"
+BUILDLINK_API_DEPENDS.tdb+= tdb>=1.2.10
+.include "../../databases/tdb/buildlink3.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../devel/popt/buildlink3.mk"
 .include "../../devel/readline/buildlink3.mk"

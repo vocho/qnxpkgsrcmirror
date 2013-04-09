@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.2 2012/06/14 07:45:03 sbd Exp $
+# $NetBSD: Makefile,v 1.5 2012/10/23 19:51:01 asau Exp $
 #
 
 DISTNAME=	filelight-1.0
-PKGREVISION=	21
+PKGREVISION=	23
 CATEGORIES=	sysutils
 MASTER_SITES=	http://www.methylblue.com/filelight/packages/
 EXTRACT_SUFX=	.tar.bz2
@@ -10,8 +10,6 @@ EXTRACT_SUFX=	.tar.bz2
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.methylblue.com/filelight/
 COMMENT=	Graphical filesystem usage monitor
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=	yes
 SET_LIBDIR=	yes

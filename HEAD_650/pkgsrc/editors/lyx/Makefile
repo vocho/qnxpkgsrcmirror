@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.23 2012/03/21 18:06:48 drochner Exp $
+# $NetBSD: Makefile,v 1.29 2012/10/08 23:01:28 adam Exp $
 #
 
 DISTNAME=		lyx-1.6.10
+PKGREVISION=		5
 CATEGORIES=		editors
 MASTER_SITES=		ftp://ftp.lyx.org/pub/lyx/stable/1.6.x/ \
 			http://gd.tuwien.ac.at/publishing/tex/lyx/stable/1.6.x/ \
@@ -58,8 +59,6 @@ DEPENDS+=		tex-xcolor-[0-9]*:../../print/tex-xcolor
 DEPENDS+=		tex-xypic-[0-9]*:../../graphics/tex-xypic
 
 UNLIMIT_RESOURCES+=	datasize
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_LANGUAGES=		c c++
 GNU_CONFIGURE=		YES

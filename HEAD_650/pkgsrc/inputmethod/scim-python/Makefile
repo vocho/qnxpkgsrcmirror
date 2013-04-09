@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.11 2012/06/14 07:44:03 sbd Exp $
+# $NetBSD: Makefile,v 1.16 2012/10/08 23:01:55 adam Exp $
 #
 
 DISTNAME=	scim-python-0.1.13rc1
-PKGREVISION=	11
+PKGREVISION=	15
 CATEGORIES=	inputmethod python
 MASTER_SITES=	http://scim-python.googlecode.com/files/
 DISTFILES=	${DEFAULT_DISTFILES} ${DBTAR}
@@ -14,8 +14,6 @@ LICENSE=	gnu-lgpl-v2 AND gnu-gpl-v2
 
 DEPENDS+=	${PYPKGPREFIX}-sqlite3-[0-9]*:../../databases/py-sqlite3
 DEPENDS+=	${PYPKGPREFIX}-enchant-[0-9]*:../../textproc/py-enchant
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=		yes
 USE_LIBTOOL=		yes

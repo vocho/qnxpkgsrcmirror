@@ -1,16 +1,14 @@
-# $NetBSD: Makefile,v 1.35 2012/06/14 07:44:11 sbd Exp $
+# $NetBSD: Makefile,v 1.37 2012/10/31 11:17:09 asau Exp $
 #
 
 DISTNAME=		kscope-1.6.0
-PKGREVISION=		15
+PKGREVISION=		16
 CATEGORIES=		devel kde
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=kscope/}
 
 MAINTAINER=		martijn.van.buul@gmail.com
 HOMEPAGE=		http://kscope.sourceforge.net/
 COMMENT=		KDE frontend for cscope
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 DEPENDS+=		cscope>=15.6:../../devel/cscope
 DEPENDS+=		exctags>=5.5.4:../../devel/exctags

@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.24 2012/06/14 07:44:13 sbd Exp $
+# $NetBSD: Makefile,v 1.30 2012/10/08 23:01:17 adam Exp $
 
 VERSION=	1.2.1
-PKGREVISION=	19
+PKGREVISION=	24
 DISTNAME=	pidgin-latex-${VERSION}
 EXTRACT_SUFX=	.tar.bz2
 CATEGORIES=	chat print
@@ -18,12 +18,8 @@ DEPENDS+=	tex-amsmath-[0-9]*:../../print/tex-amsmath
 DEPENDS+=	tex-graphics-[0-9]*:../../print/tex-graphics
 DEPENDS+=	tex-latex-bin-[0-9]*:../../print/tex-latex-bin
 
-PKG_DESTDIR_SUPPORT=	user-destdir
-
 USE_TOOLS+=	gmake
 USE_TOOLS+=	pkg-config
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 INSTALLATION_DIRS=	lib/pidgin share/doc/pidgin-latex
 

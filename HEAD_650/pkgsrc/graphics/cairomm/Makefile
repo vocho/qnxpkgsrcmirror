@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.19 2011/11/01 06:01:26 sbd Exp $
+# $NetBSD: Makefile,v 1.23 2012/10/06 14:10:42 asau Exp $
 
 DISTNAME=	cairomm-1.10.0
-PKGREVISION=	1
+PKGREVISION=	4
 CATEGORIES=	graphics
 MASTER_SITES=	http://cairographics.org/releases/
 
@@ -9,8 +9,6 @@ MAINTAINER=	adam@NetBSD.org
 HOMEPAGE=	http://cairographics.org/cairomm/
 COMMENT=	C++ API for cairo
 LICENSE=	gnu-lgpl-v2
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_LANGUAGES=		c c++
 USE_LIBTOOL=		yes

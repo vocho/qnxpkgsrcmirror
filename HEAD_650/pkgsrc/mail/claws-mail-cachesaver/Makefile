@@ -1,16 +1,14 @@
-# $NetBSD: Makefile,v 1.26 2012/07/02 19:08:43 drochner Exp $
+# $NetBSD: Makefile,v 1.31 2012/10/08 23:01:58 adam Exp $
 #
 
 DISTNAME=	cachesaver-0.10.9
 PKGNAME=	claws-mail-cachesaver-0.10.9
-PKGREVISION=	13
+PKGREVISION=	17
 CATEGORIES=	mail
 MASTER_SITES=	http://claws-mail.org/downloads/plugins/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 COMMENT=	Saves Claws-Mail metadata every 60 seconds
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 DEPENDS+=	claws-mail-${CLAWS_VERSION}{,nb[0-9]*}:../../mail/claws-mail
 

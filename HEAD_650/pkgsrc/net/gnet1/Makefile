@@ -1,17 +1,15 @@
-# $NetBSD: Makefile,v 1.25 2012/03/03 00:12:05 wiz Exp $
+# $NetBSD: Makefile,v 1.27 2012/10/23 17:18:23 asau Exp $
 #
 
 DISTNAME=		gnet-1.1.8
 PKGNAME=		gnet1-1.1.8
-PKGREVISION=		7
+PKGREVISION=		8
 CATEGORIES=		net
 MASTER_SITES=		http://www.gnetlibrary.org/src/
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://www.gnetlibrary.org/
 COMMENT=		Simple network library (older version)
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 CONFLICTS=		gnet<=1.1.8
 

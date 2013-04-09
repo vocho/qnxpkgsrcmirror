@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.31 2010/12/30 08:33:47 obache Exp $
+# $NetBSD: Makefile,v 1.33 2012/10/23 10:24:02 wiz Exp $
 
 DISTNAME=	RasMol_2.7.3
 PKGNAME=	rasmol-2.7.3
@@ -9,8 +9,6 @@ MASTER_SITES=	http://www.bernstein-plus-sons.com/software/
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.bernstein-plus-sons.com/software/rasmol/
 COMMENT=	Molecular Graphics Visualisation Tool
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 WRKSRC=		${WRKDIR}/${DISTNAME}/src
 USE_IMAKE=	YES
@@ -61,5 +59,4 @@ post-install:
 
 .include "../../x11/libXext/buildlink3.mk"
 .include "../../x11/libXi/buildlink3.mk"
-.include "../../x11/xextproto/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

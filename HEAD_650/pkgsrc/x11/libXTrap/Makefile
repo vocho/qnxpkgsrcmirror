@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.4 2008/05/24 21:45:15 tnn Exp $
+# $NetBSD: Makefile,v 1.6 2012/10/29 05:06:33 asau Exp $
 #
 
 DISTNAME=		libXTrap-1.0.0
@@ -11,7 +11,6 @@ HOMEPAGE=		http://xorg.freedesktop.org/
 COMMENT=		X Trap Library
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_LIBTOOL=		yes
 GNU_CONFIGURE=		yes
@@ -23,6 +22,5 @@ PKGCONFIG_OVERRIDE+=	xtrap.pc.in
 .include "../../x11/libXext/buildlink3.mk"
 .include "../../x11/libXt/buildlink3.mk"
 .include "../../x11/trapproto/buildlink3.mk"
-.include "../../x11/xextproto/buildlink3.mk"
 
 .include "../../mk/bsd.pkg.mk"

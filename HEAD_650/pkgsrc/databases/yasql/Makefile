@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.12 2008/03/03 15:21:07 jlam Exp $
+# $NetBSD: Makefile,v 1.14 2012/10/03 21:54:26 wiz Exp $
 
 DISTNAME=	yasql-1.81
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	databases
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=yasql/}
 
@@ -12,8 +12,6 @@ COMMENT=	Yet another SQLPlus replacement for Oracle
 DEPENDS+=	p5-DBD-Oracle-[0-9]*:../../databases/p5-DBD-Oracle
 DEPENDS+=	p5-Term-ReadLine-[0-9]*:../../devel/p5-Term-ReadLine
 DEPENDS+=	p5-Term-ReadKey-[0-9]*:../../devel/p5-Term-ReadKey
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=	perl:run
 GNU_CONFIGURE=	yes

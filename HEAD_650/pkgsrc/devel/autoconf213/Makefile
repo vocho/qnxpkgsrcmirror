@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.22 2010/01/16 23:37:49 heinz Exp $
+# $NetBSD: Makefile,v 1.24 2012/10/31 11:16:39 asau Exp $
 
 DISTNAME=	autoconf-2.13
 PKGNAME=	autoconf213-2.13
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	devel
 MASTER_SITES=	${MASTER_SITE_GNU:=autoconf/}
 
@@ -17,7 +17,6 @@ CONFLICTS=		autoconf-devel-[0-9]*
 CONFLICTS=		autoconf<2.50
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=		YES
 CONFIGURE_ARGS+=	--program-transform-name='s/$$/-2.13/'

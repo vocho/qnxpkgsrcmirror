@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.6 2012/06/14 07:43:36 sbd Exp $
+# $NetBSD: Makefile,v 1.9 2012/10/31 11:18:17 asau Exp $
 #
 
 DISTNAME=	Gnome2-GConf-1.044
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	5
+PKGREVISION=	7
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=gtk2-perl/}
 
@@ -14,8 +14,6 @@ COMMENT=	Perl bindings for the GConf configuration database
 
 DEPENDS+=	p5-ExtUtils-Depends>=0.300:../../devel/p5-ExtUtils-Depends
 DEPENDS+=	p5-ExtUtils-PkgConfig>=1.00:../../devel/p5-ExtUtils-PkgConfig
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 MAKE_JOBS_SAFE=	no
 

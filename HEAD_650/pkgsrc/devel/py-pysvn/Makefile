@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.11 2012/04/27 12:31:46 obache Exp $
+# $NetBSD: Makefile,v 1.14 2012/11/16 00:43:10 joerg Exp $
 #
 
 VERS=			1.7.5
 DISTNAME=		pysvn-${VERS}
 PKGNAME=		${PYPKGPREFIX}-pysvn-${VERS}
-PKGREVISION=		1
+PKGREVISION=		2
 CATEGORIES=		devel
 MASTER_SITES=	http://pysvn.barrys-emacs.org/source_kits/
 
@@ -12,8 +12,6 @@ MAINTAINER=		helgoman@users.sourceforge.net
 HOMEPAGE=		http://pysvn.tigris.org/
 COMMENT=		Python interface to Subversion
 LICENSE=		apache-1.1
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 DEPENDS+=		${PYPKGPREFIX}-expat-[0-9]*:../../textproc/py-expat
 
@@ -35,12 +33,7 @@ INSTALLATION_DIRS=	${PYSITELIB}/pysvn
 BUILDLINK_TRANSFORM+=	rm:-lresolv
 .endif
 
-.include "../../lang/python/pyversion.mk"
-
 do-configure:
-.if ${PYVERSSUFFIX} == "2.5"
-	cd ${WRKSRC}/${PSVNSRC} && ${PYTHONBIN} ${PYSETUP} backport
-.endif
 	cd ${WRKSRC}/${PSVNSRC} && \
 	${PYTHONBIN} ${PYSETUP} configure --fixed-module-name \
 		--svn-root-dir=${BUILDLINK_PREFIX.subversion-base}

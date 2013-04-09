@@ -1,4 +1,4 @@
-# $NetBSD: mozilla-common.mk,v 1.34 2012/07/18 16:10:06 ryoon Exp $
+# $NetBSD: mozilla-common.mk,v 1.37 2012/10/31 11:19:54 asau Exp $
 #
 # common Makefile fragment for mozilla packages based on gecko 2.0.
 #
@@ -12,7 +12,6 @@ USE_TOOLS+=		pkg-config perl gmake autoconf213 unzip zip
 USE_LANGUAGES+=		c99 c++
 UNLIMIT_RESOURCES+=	datasize
 
-PKG_DESTDIR_SUPPORT=	user-destdir
 CHECK_PORTABILITY_SKIP+=${MOZILLA_DIR}security/nss/tests/libpkix/libpkix.sh
 CHECK_PORTABILITY_SKIP+=${MOZILLA_DIR}security/nss/tests/multinit/multinit.sh
 CHECK_INTERPRETER_SKIP+=lib/xulrunner-sdk/sdk/bin/xpt.py
@@ -59,6 +58,14 @@ PYTHON_FOR_BUILD_ONLY=		yes
 .include "../../lang/python/application.mk"
 CONFIGURE_ENV+=		PYTHON=${PYTHONBIN:Q}
 
+#
+# pysqlite2 is used by xulrunner's Python virtualenv.  If pysqlite2 isn't
+# installed at build time it will attempt to download it instead, so the
+# problem is stealthy in a networked environment, and obvious in an
+# offline environment.
+#
+BUILD_DEPENDS+=	${PYPKGPREFIX}-sqlite2-[0-9]*:../../databases/py-sqlite2
+
 # Makefiles sometimes call "rm -f" without more arguments. Kludge around ...
 .PHONY: create-rm-wrapper
 pre-configure: create-rm-wrapper
@@ -84,7 +91,7 @@ PREFER.bzip2?=	pkgsrc
 .include "../../audio/alsa-lib/buildlink3.mk"
 .endif
 .include "../../archivers/bzip2/buildlink3.mk"
-BUILDLINK_API_DEPENDS.sqlite3+=	sqlite3>=3.7.11
+BUILDLINK_API_DEPENDS.sqlite3+=	sqlite3>=3.7.12.1
 CONFIGURE_ENV+=	ac_cv_sqlite_secure_delete=yes	# c.f. patches/patch-al
 .include "../../databases/sqlite3/buildlink3.mk"
 BUILDLINK_API_DEPENDS.libevent+=	libevent>=1.1

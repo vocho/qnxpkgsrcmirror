@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.31 2012/03/03 00:13:32 wiz Exp $
+# $NetBSD: Makefile,v 1.36 2012/10/08 23:02:02 adam Exp $
 #
 
 DISTNAME=	grpn_1.3.3-1
 PKGNAME=	grpn-1.3.3
-PKGREVISION=	3
+PKGREVISION=	7
 CATEGORIES=	math
 #MASTER_SITES=	http://lashwhip.com/grpn/
 MASTER_SITES=	http://www.getreu.net/public/downloads/software/grpn/grpn-1.3.3/
@@ -17,7 +17,6 @@ COMMENT=	Graphical reverse polish notation (RPN) calculator
 BUILD_TARGET=	grpn
 USE_TOOLS+=	mkdirhier pkg-config
 WRKSRC=		${WRKDIR}/grpn-1.3.3
-PKG_DESTDIR_SUPPORT= user-destdir
 
 .include "../../x11/gtk2/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

@@ -1,4 +1,4 @@
-# $NetBSD: options.mk,v 1.17 2012/05/09 07:53:04 wiz Exp $
+# $NetBSD: options.mk,v 1.19 2012/10/17 11:36:02 jperkin Exp $
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.MesaLib
 PKG_SUPPORTED_OPTIONS=
@@ -37,7 +37,7 @@ PKG_SUPPORTED_OPTIONS+=		dri
 PKG_SUGGESTED_OPTIONS+=		dri
 .endif
 
-.if ${OPSYS} == "DragonFly" || ${OPSYS} == "QNX"
+.if ${OPSYS} == "DragonFly" || (${OPSYS} == "SunOS" && ${OS_VERSION} == "5.11") || ${OPSYS} == "QNX"
 PKG_SUGGESTED_OPTIONS+=		dri
 .endif
 

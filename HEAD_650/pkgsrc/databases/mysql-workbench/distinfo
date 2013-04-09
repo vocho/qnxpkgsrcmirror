@@ -1,4 +1,4 @@
-$NetBSD: distinfo,v 1.4 2012/05/24 18:54:16 marino Exp $
+$NetBSD: distinfo,v 1.6 2012/09/15 05:14:07 obache Exp $
 
 SHA1 (mysql-workbench-gpl-5.2.33b-src.tar.gz) = 1d47598fb0f956ce1a0c6b1afb462e8d6beeb1ed
 RMD160 (mysql-workbench-gpl-5.2.33b-src.tar.gz) = 60213dd583da6034d5c4f7766b0a7dbafe57100c

@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.30 2012/03/03 00:12:47 wiz Exp $
+# $NetBSD: Makefile,v 1.35 2012/10/08 23:01:16 adam Exp $
 #
 
 DISTNAME=	transcalc-0.14
-PKGREVISION=	13
+PKGREVISION=	17
 CATEGORIES=	cad
 MASTER_SITES=	http://transcalc.sourceforge.net/
 #MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=transcalc/}
@@ -10,8 +10,6 @@ MASTER_SITES=	http://transcalc.sourceforge.net/
 MAINTAINER=	dmcmahill@NetBSD.org
 HOMEPAGE=	http://transcalc.sourceforge.net/
 COMMENT=	Transmission line analysis/synthesis
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=	YES
 USE_TOOLS+=	gmake pkg-config

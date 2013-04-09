@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.13 2012/04/11 11:34:59 drochner Exp $
+# $NetBSD: Makefile,v 1.15 2012/10/06 14:11:03 asau Exp $
 
 DISTNAME=	libgexiv2-0.4.1
+PKGREVISION=	1
 CATEGORIES=	graphics devel
 MASTER_SITES=	http://yorba.org/download/gexiv2/0.4/
 EXTRACT_SUFX=	.tar.bz2
@@ -12,8 +13,6 @@ LICENSE=	gnu-gpl-v2
 
 # if needed to regenerate after patches
 #BUILD_DEPENDS+=		vala-[0-9]*:../../lang/vala
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_LANGUAGES=		c c++
 USE_LIBTOOL=		yes

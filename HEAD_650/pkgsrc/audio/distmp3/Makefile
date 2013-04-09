@@ -1,15 +1,14 @@
-# $NetBSD: Makefile,v 1.12 2011/02/10 22:06:39 zafer Exp $
+# $NetBSD: Makefile,v 1.14 2012/10/03 21:53:54 wiz Exp $
 #
 
 DISTNAME=		distmp3-0.1.9
+PKGREVISION=		1
 CATEGORIES=		audio
 MASTER_SITES=	http://distfiles.aydogan.net/audio/		
 EXTRACT_SUFX=		.tar.bz2
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
 COMMENT=		Distributed mp3 encoding across multiple hosts
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_LANGUAGES=		# empty
 USE_TOOLS+=		perl:run

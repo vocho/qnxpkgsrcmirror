@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.13 2008/03/03 17:45:34 jlam Exp $
+# $NetBSD: Makefile,v 1.15 2012/10/31 11:16:33 asau Exp $
 #
 
 DISTNAME=	acunia-jam-1.0
@@ -6,14 +6,13 @@ PKGREVISION=	1
 CATEGORIES=	devel
 MASTER_SITES=	${MASTER_SITE_LOCAL}
 
-MAINTAINER=	skrll@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://wonka.acunia.com/
 COMMENT=	Acunia version of the program construction tool, like make(1)
 
 CONFLICTS=	jam-[0-9]*
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 WRKSRC=		${WRKDIR}/jam
 USE_TOOLS+=	yacc

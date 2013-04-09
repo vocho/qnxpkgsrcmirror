@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.10 2012/06/15 23:06:05 dholland Exp $
+# $NetBSD: Makefile,v 1.12 2012/10/29 05:07:04 asau Exp $
 #
 
 DISTNAME=	xf86-video-glint-1.2.4
@@ -11,13 +11,17 @@ MAINTAINER=	joerg@NetBSD.org
 HOMEPAGE=	http://xorg.freedesktop.org/
 COMMENT=	Modular Xorg GLINT/Permedia video driver
 
-PKG_DESTDIR_SUPPORT=	user-destdir
-
 CONFIGURE_ARGS+=	--enable-dri
 
 USE_LIBTOOL=	yes
 GNU_CONFIGURE=	yes
 USE_TOOLS+=	pkg-config
+
+.include "../../mk/bsd.prefs.mk"
+
+.if ${OPSYS} == "SunOS"
+CONFIGURE_ENV+=	DRIVER_MAN_SUFFIX=4
+.endif
 
 .include "../../graphics/MesaLib/buildlink3.mk"
 .include "../../x11/modular-xorg-server/buildlink3.mk"

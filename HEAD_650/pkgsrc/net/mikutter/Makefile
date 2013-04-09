@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.50 2012/07/08 12:18:21 obache Exp $
+# $NetBSD: Makefile,v 1.53 2012/10/23 17:18:36 asau Exp $
 #
 
-DISTNAME=	mikutter.0.1.1.814
+DISTNAME=	mikutter.0.1.1.863
 PKGNAME=	${RUBY_PKGPREFIX}-${DISTNAME:S/./-/}
 CATEGORIES=	net
 MASTER_SITES=	http://mikutter.hachune.net/bin/
@@ -11,9 +11,7 @@ HOMEPAGE=	http://mikutter.hachune.net/
 COMMENT=	Simply, powerfully, and moefully twitter client
 LICENSE=	gnu-gpl-v3
 
-PKG_DESTDIR_SUPPORT=	user-destdir
-
-RUBY_VERSION_SUPPORTED=	192 193
+RUBY_VERSION_SUPPORTED=	193
 
 .include "../../lang/ruby/rubyversion.mk"
 

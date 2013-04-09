@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.16 2011/10/29 04:26:12 obache Exp $
+# $NetBSD: Makefile,v 1.19 2012/10/03 22:14:02 wiz Exp $
 
 DISTNAME=	psyco-1.6-src
 EGG_NAME=	${DISTNAME:S/-src//}
@@ -12,10 +12,9 @@ HOMEPAGE=	http://psyco.sourceforge.net/
 COMMENT=	Python JIT and execution accelerator
 LICENSE=	mit
 
-PKG_DESTDIR_SUPPORT=	user-destdir
-
 WRKSRC=		${WRKDIR}/${EGG_NAME}
 
+PYTHON_VERSIONS_ACCEPTED=	26
 ONLY_FOR_PLATFORM=		*-*-i386
 
 .include "../../lang/python/distutils.mk"

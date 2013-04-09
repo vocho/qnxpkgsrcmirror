@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.20 2012/08/05 10:02:12 obache Exp $
+# $NetBSD: Makefile,v 1.25 2012/10/08 23:01:39 adam Exp $
 #
 
 DISTNAME=	qlandkartegt-1.4.2
-PKGREVISION=	1
+PKGREVISION=	5
 CATEGORIES=	geography
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=qlandkartegt/}
 
@@ -10,8 +10,6 @@ MAINTAINER=	jkunz@NetBSD.org
 HOMEPAGE=	http://www.qlandkarte.org/
 COMMENT=	GPS visualisation and mapping tool, supports Garmin devices
 LICENSE=	gnu-gpl-v2
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_LANGUAGES=	c c++
 USE_CMAKE=	yes

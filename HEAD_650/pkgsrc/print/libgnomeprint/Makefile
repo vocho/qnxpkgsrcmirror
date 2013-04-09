@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.81 2012/06/14 07:43:26 sbd Exp $
+# $NetBSD: Makefile,v 1.86 2012/10/08 23:00:37 adam Exp $
 #
 
 DISTNAME=	libgnomeprint-2.18.8
-PKGREVISION=	7
+PKGREVISION=	11
 CATEGORIES=	print gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/libgnomeprint/2.18/}
 EXTRACT_SUFX=	.tar.bz2
@@ -10,8 +10,6 @@ EXTRACT_SUFX=	.tar.bz2
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.levien.com/gnome/print-arch.html
 COMMENT=	Library for the GNOME2 Printing Architecture
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=		bison flex gmake intltool msgfmt pkg-config
 USE_PKGLOCALEDIR=	YES

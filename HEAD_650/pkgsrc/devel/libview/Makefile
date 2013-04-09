@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.9 2012/03/03 00:12:24 wiz Exp $
+# $NetBSD: Makefile,v 1.14 2012/10/31 11:17:23 asau Exp $
 #
 
 DISTNAME=	libview-0.6.4
-PKGREVISION=	8
+PKGREVISION=	12
 CATEGORIES=	devel
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=view/}
 
@@ -10,8 +10,6 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://view.sourceforge.net/
 COMMENT=	GTK+ widget collection
 LICENSE=	modified-bsd
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=	yes
 USE_LIBTOOL=	yes

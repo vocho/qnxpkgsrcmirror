@@ -1,16 +1,14 @@
-# $NetBSD: Makefile,v 1.33 2012/08/13 14:25:40 wiz Exp $
+# $NetBSD: Makefile,v 1.38 2012/10/08 23:01:42 adam Exp $
 #
 
 DISTNAME=		gimp-color-manager-0.1.0
-PKGREVISION=		26
+PKGREVISION=		30
 CATEGORIES=		graphics
 MASTER_SITES=		ftp://www.virtual-sub.org/
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://www.khk.net/color/color_manager.html
 COMMENT=		Gimp Color Manager plugin
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_PKGLOCALEDIR=	yes
 USE_TOOLS+=		intltool pkg-config

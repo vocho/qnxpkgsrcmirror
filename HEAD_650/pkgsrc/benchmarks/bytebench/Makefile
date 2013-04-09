@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.22 2008/04/04 10:49:37 obache Exp $
+# $NetBSD: Makefile,v 1.24 2012/10/03 21:53:58 wiz Exp $
 
 DISTNAME=		unixbench-4.1.0
 PKGNAME=		${DISTNAME:S/unix/byte/}
-PKGREVISION=		3
+PKGREVISION=		4
 CATEGORIES=		benchmarks
 MASTER_SITES=		http://www.tux.org/pub/tux/benchmarks/System/unixbench/
 EXTRACT_SUFX=		.tgz
@@ -11,7 +11,6 @@ MAINTAINER=		pkgsrc-users@NetBSD.org
 COMMENT=		BYTE Magazine's Public Domain benchmark for UNIX
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 BENCHMARK_ENV+=		BINDIR=${WRKSRC}/pgms
 BENCHMARK_ENV+=		SCRPDIR=${WRKSRC}/pgms

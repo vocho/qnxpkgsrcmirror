@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.7 2012/08/15 08:21:33 wiz Exp $
+# $NetBSD: Makefile,v 1.9 2012/10/31 11:17:33 asau Exp $
 #
 
 DISTNAME=	lwt-2.4.0
 PKGNAME=	ocaml-${DISTNAME}
+PKGREVISION=	1
 CATEGORIES=	devel
 MASTER_SITES=	http://www.ocsigen.org/download/
 
@@ -20,8 +21,6 @@ CONFIGURE_ARGS+=	--destdir "${DESTDIR}" --prefix "${PREFIX}" --enable-react --di
 USE_LANGUAGES+=	c
 
 BUILD_TARGET=	build
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 AUTO_MKDIRS=		yes
 

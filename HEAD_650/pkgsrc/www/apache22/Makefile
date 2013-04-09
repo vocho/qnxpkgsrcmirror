@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.80 2012/04/22 19:08:03 spz Exp $
+# $NetBSD: Makefile,v 1.83 2012/10/28 06:30:09 asau Exp $
 
-DISTNAME=	httpd-2.2.22
-PKGREVISION=	1
+DISTNAME=	httpd-2.2.23
 
 PKGNAME=	${DISTNAME:S/httpd/apache/}
+PKGREVISION=	1
 CATEGORIES=	www
 MASTER_SITES=	${MASTER_SITE_APACHE:=httpd/} \
 		http://archive.apache.org/dist/httpd/ \
@@ -14,8 +14,6 @@ MAINTAINER=	tron@NetBSD.org
 HOMEPAGE=	http://httpd.apache.org/
 COMMENT=	Apache HTTP (Web) server, version 2.2
 LICENSE=	apache-2.0
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 BUILD_DEFS+=	IPV6_READY
 BUILD_DEFS+=	VARBASE

@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.55 2012/07/15 08:22:59 wiz Exp $
+# $NetBSD: Makefile,v 1.60 2012/10/29 05:06:15 asau Exp $
 #
 
 DISTNAME=	gnome-screensaver-2.30.2
-PKGREVISION=	8
+PKGREVISION=	12
 CATEGORIES=	x11 gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gnome-screensaver/2.30/}
 EXTRACT_SUFX=	.tar.bz2
@@ -13,8 +13,6 @@ COMMENT=	Screen saver and locker for the GNOME desktop
 #LICENSE=	gnu-gpl-v2 AND gnu-lgpl-v2 AND others
 
 BUILD_DEPENDS+=	xmlto-[0-9]*:../../textproc/xmlto
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=		yes
 USE_LIBTOOL=		yes

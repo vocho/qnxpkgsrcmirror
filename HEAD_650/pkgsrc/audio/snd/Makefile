@@ -1,16 +1,14 @@
-# $NetBSD: Makefile,v 1.67 2012/03/03 12:54:15 wiz Exp $
+# $NetBSD: Makefile,v 1.72 2012/10/08 23:01:14 adam Exp $
 #
 
 DISTNAME=		snd-9.9
-PKGREVISION=		12
+PKGREVISION=		16
 CATEGORIES=		audio
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=snd/}
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://ccrma.stanford.edu/software/snd/
 COMMENT=		X based sound editor
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 DEPENDS+=		flac-[0-9]*:../../audio/flac
 DEPENDS+=		speex-[0-9]*:../../audio/speex

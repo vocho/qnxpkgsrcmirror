@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.4 2011/08/14 12:59:49 obache Exp $
+# $NetBSD: Makefile,v 1.6 2012/10/06 14:11:10 asau Exp $
 
 DISTNAME=	GDGraph-boxplot-1.00
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	2
+PKGREVISION=	3
 CATEGORIES=	graphics perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=GD/}
 
@@ -13,8 +13,6 @@ LICENSE=	${PERL5_LICENSE}
 
 DEPENDS+= p5-GDGraph>=1.30:../../graphics/p5-GDGraph
 DEPENDS+= p5-Statistics-Descriptive>=2.4:../../math/p5-Statistics-Descriptive
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 PERL5_PACKLIST=		auto/GD/Graph/boxplot/.packlist
 

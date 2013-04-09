@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.39 2011/08/11 17:05:19 adam Exp $
+# $NetBSD: Makefile,v 1.41 2012/10/31 11:17:54 asau Exp $
 
 DISTNAME=	Curses-1.28
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	2
+PKGREVISION=	3
 SVR4_PKGNAME=	p5cur
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Curses/}
@@ -15,7 +15,6 @@ COMMENT=	Perl5 module for terminal screen handling and optimization
 LICENSE=	${PERL5_LICENSE}
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_NCURSES=		yes
 PERL5_PACKLIST=		auto/Curses/.packlist

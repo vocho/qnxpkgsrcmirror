@@ -1,8 +1,8 @@
-$NetBSD: patch-aa,v 1.53 2012/05/04 10:22:08 obache Exp $
+$NetBSD: patch-aa,v 1.54 2012/10/06 20:44:05 prlw1 Exp $
 
---- configure.orig	2012-07-14 21:44:53.000000000 +0000
+--- configure.orig	2012-11-10 03:32:51.000000000 +0000
 +++ configure
-@@ -718,6 +718,7 @@ GIO
+@@ -721,6 +721,7 @@ GIO
  GSPAWN
  GLIB_DEBUG_FLAGS
  G_MODULE_NEED_USCORE
@@ -10,7 +10,7 @@ $NetBSD: patch-aa,v 1.53 2012/05/04 10:22:08 obache Exp $
  G_MODULE_BROKEN_RTLD_GLOBAL
  G_MODULE_HAVE_DLERROR
  G_MODULE_LDFLAGS
-@@ -826,6 +827,10 @@ OS_CARBON_FALSE
+@@ -831,6 +832,10 @@ OS_CARBON_FALSE
  OS_CARBON_TRUE
  OS_LINUX_FALSE
  OS_LINUX_TRUE
@@ -21,7 +21,7 @@ $NetBSD: patch-aa,v 1.53 2012/05/04 10:22:08 obache Exp $
  OS_UNIX_FALSE
  OS_UNIX_TRUE
  OS_WIN32_X64_FALSE
-@@ -4862,6 +4867,9 @@ case $host in
+@@ -4889,6 +4894,9 @@ case $host in
    *-*-linux*)
      glib_os_linux=yes
      ;;
@@ -31,7 +31,7 @@ $NetBSD: patch-aa,v 1.53 2012/05/04 10:22:08 obache Exp $
  esac
  
  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $glib_native_win32" >&5
-@@ -4941,6 +4949,28 @@ else
+@@ -4968,6 +4976,27 @@ else
    OS_LINUX_FALSE=
  fi
  
@@ -56,22 +56,30 @@ $NetBSD: patch-aa,v 1.53 2012/05/04 10:22:08 obache Exp $
 +  OS_LDPTHREAD_FALSE=
 +fi
 +
-+
   if test "$glib_have_carbon" = "yes"; then
    OS_CARBON_TRUE=
    OS_CARBON_FALSE='#'
-@@ -22497,8 +22527,8 @@ else
+@@ -21565,6 +21594,8 @@ else
+ # ifdef _MSC_VER
+ #  include <malloc.h>
+ #  define alloca _alloca
++# elif defined(__NetBSD__) || defined(__FreeBSD__) || defined(__DragonFly__) || defined(__OpenBSD__)
++#   include <stdlib.h>
+ # else
+ #  ifdef HAVE_ALLOCA_H
+ #   include <alloca.h>
+@@ -22610,8 +22641,8 @@ else
  fi
  
  
 -{ $as_echo "$as_me:${as_lineno-$LINENO}: checking whether using Sun Studio C compiler" >&5
 -$as_echo_n "checking whether using Sun Studio C compiler... " >&6; }
-+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking whether using Sun Studio C compiler visibilily" >&5
-+$as_echo_n "checking whether using Sun Studio C compiler visibilily... " >&6; }
++{ $as_echo "$as_me:${as_lineno-$LINENO}: checking whether using Sun Studio C compiler visibility" >&5
++$as_echo_n "checking whether using Sun Studio C compiler visibility... " >&6; }
  cat confdefs.h - <<_ACEOF >conftest.$ac_ext
  /* end confdefs.h.  */
  #if defined(__SUNPRO_C) || (__SUNPRO_C >= 0x550)
-@@ -24093,16 +24123,48 @@ fi
+@@ -24210,16 +24241,48 @@ fi
  
  case $host in
    *-*-solaris* )
@@ -120,8 +128,8 @@ $NetBSD: patch-aa,v 1.53 2012/05/04 10:22:08 obache Exp $
 +    ;;
  esac
  
- if test "$ac_cv_func_statfs" = yes ; then
-@@ -25095,10 +25157,11 @@ if test x"$glib_native_win32" = xyes; th
+ if test "$ac_cv_func_statfs" = yes; then :
+@@ -25231,10 +25294,11 @@ if test x"$glib_native_win32" = xyes; th
      G_MODULE_LDFLAGS=
  else
    export SED
@@ -134,7 +142,7 @@ $NetBSD: patch-aa,v 1.53 2012/05/04 10:22:08 obache Exp $
  G_MODULE_HAVE_DLERROR=0
  if test -z "$G_MODULE_IMPL"; then
    case "$host" in
-@@ -25305,13 +25368,13 @@ if test "$G_MODULE_IMPL" = "G_MODULE_IMP
+@@ -25452,13 +25516,13 @@ if  test "$G_MODULE_IMPL" = "G_MODULE_IM
  	LIBS="$G_MODULE_LIBS $LIBS"
  	LDFLAGS="$LDFLAGS $G_MODULE_LDFLAGS"
  	echo "void glib_plugin_test(void) { }" > plugin.c
@@ -151,13 +159,13 @@ $NetBSD: patch-aa,v 1.53 2012/05/04 10:22:08 obache Exp $
  	{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for RTLD_GLOBAL brokenness" >&5
  $as_echo_n "checking for RTLD_GLOBAL brokenness... " >&6; }
  if ${glib_cv_rtldglobal_broken+:} false; then :
-@@ -25420,6 +25483,56 @@ fi
- 
+@@ -25568,6 +25632,56 @@ fi
  	LIBS="$LIBS_orig"
+ 
  fi
 +	{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for dlopen(NULL, 0) brokenness" >&5
 +$as_echo_n "checking for dlopen(NULL, 0) brokenness... " >&6; }
-+if test "${glib_cv_dlopennull_broken+set}" = set; then :
++if ${glib_cv_dlopennull_broken+:} false; then :
 +  $as_echo_n "(cached) " >&6
 +else
 +
@@ -208,7 +216,7 @@ $NetBSD: patch-aa,v 1.53 2012/05/04 10:22:08 obache Exp $
  if test -z "$G_MODULE_IMPL"; then
  	G_MODULE_IMPL=0
          G_MODULE_SUPPORTED=false
-@@ -25430,7 +25543,7 @@ fi
+@@ -25578,7 +25692,7 @@ fi
  { $as_echo "$as_me:${as_lineno-$LINENO}: checking for the suffix of module shared libraries" >&5
  $as_echo_n "checking for the suffix of module shared libraries... " >&6; }
  export SED
@@ -217,16 +225,15 @@ $NetBSD: patch-aa,v 1.53 2012/05/04 10:22:08 obache Exp $
  eval $shrext_cmds
  module=yes eval std_shrext=$shrext_cmds
  # chop the initial dot
-@@ -25454,6 +25567,8 @@ fi
+@@ -25602,6 +25716,7 @@ fi
  
  
  
-+
 +
  { $as_echo "$as_me:${as_lineno-$LINENO}: checking for gspawn implementation" >&5
  $as_echo_n "checking for gspawn implementation... " >&6; }
  case "$host" in
-@@ -26389,62 +26504,8 @@ if test x"$have_threads" = xposix; then
+@@ -26543,62 +26658,8 @@ if  test x"$have_threads" = xposix; then
        G_THREAD_LIBS="-lpthread -lthread"
        ;;
      *)
@@ -290,8 +297,8 @@ $NetBSD: patch-aa,v 1.53 2012/05/04 10:22:08 obache Exp $
 +      G_THREAD_CFLAGS="${PTHREAD_CFLAGS}"
         ;;
    esac
- fi
-@@ -26942,6 +27003,7 @@ case $host in
+ 
+@@ -27112,6 +27173,7 @@ case $host in
      ;;
    *-*-openbsd*)
      LDFLAGS="$LDFLAGS -pthread"

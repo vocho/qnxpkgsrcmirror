@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.7 2012/06/14 07:44:48 sbd Exp $
+# $NetBSD: Makefile,v 1.12 2012/10/25 06:55:46 asau Exp $
 #
 
 DISTNAME=	dikt-2d
-PKGREVISION=	5
+PKGREVISION=	9
 CATEGORIES=	textproc x11
 MASTER_SITES=	http://dikt.googlecode.com/files/
 EXTRACT_SUFX=	.tbz
@@ -13,8 +13,6 @@ COMMENT=	Dictionary protocol client for KDE
 LICENSE=	2-clause-bsd
 
 BUILD_DEPENDS+=	automoc4-[0-9]*:../../devel/automoc4
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_CMAKE=	yes
 USE_LANGUAGES=	c c++

@@ -1,10 +1,9 @@
-# $NetBSD: Makefile,v 1.84 2012/06/11 13:41:12 wiz Exp $
+# $NetBSD: Makefile,v 1.87 2012/11/03 09:04:10 tron Exp $
 
 PKGNAME=	mplayer-${MPLAYER_VERSION}
+PKGREVISION=	2
 
 COMMENT=	Fast, cross-platform movie player
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 .include "../../multimedia/mplayer-share/Makefile.common"
 

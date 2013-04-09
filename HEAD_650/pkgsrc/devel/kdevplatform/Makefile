@@ -1,10 +1,9 @@
-# $NetBSD: Makefile,v 1.20 2012/06/14 07:44:52 sbd Exp $
+# $NetBSD: Makefile,v 1.27 2012/11/23 20:37:13 markd Exp $
 #
 
-DISTNAME=	kdevplatform-1.2.3
-PKGREVISION=	3
+DISTNAME=	kdevplatform-1.4.1
 CATEGORIES=	devel kde
-MASTER_SITES=	${MASTER_SITE_KDE:=kdevelop/4.2.3/src/}
+MASTER_SITES=	${MASTER_SITE_KDE:=kdevelop/4.4.1/src/}
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	frank@fthieme.net
@@ -18,8 +17,6 @@ USE_TOOLS+=	pkg-config perl msgfmt
 USE_LANGUAGES=	c c++
 
 CXXFLAGS.Linux+=	-fpermissive
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 BUILDLINK_DEPMETHOD.qt4-tools=	full
 .include "../../meta-pkgs/kde4/kde4.mk"

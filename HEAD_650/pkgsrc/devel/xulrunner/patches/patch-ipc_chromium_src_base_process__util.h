@@ -1,10 +1,8 @@
-$NetBSD: patch-ipc_chromium_src_base_process__util.h,v 1.3 2012/05/20 02:02:36 sbd Exp $
+$NetBSD: patch-ipc_chromium_src_base_process__util.h,v 1.5 2012/08/28 23:27:10 ryoon Exp $
 
-# Reported upstream: https://bugzilla.mozilla.org/show_bug.cgi?id=753046
-
---- ipc/chromium/src/base/process_util.h.orig	2012-04-20 22:03:52.000000000 +0000
+--- ipc/chromium/src/base/process_util.h.orig	2012-11-19 15:42:29.000000000 +0000
 +++ ipc/chromium/src/base/process_util.h
-@@ -280,6 +280,7 @@ class NamedProcessIterator {
+@@ -291,6 +291,7 @@ class NamedProcessIterator {
    const ProcessEntry* NextProcessEntry();
  
   private:
@@ -12,7 +10,7 @@ $NetBSD: patch-ipc_chromium_src_base_process__util.h,v 1.3 2012/05/20 02:02:36 s
    // Determines whether there's another process (regardless of executable)
    // left in the list of all processes.  Returns true and sets entry_ to
    // that process's info if there is one, false otherwise.
-@@ -292,18 +293,24 @@ class NamedProcessIterator {
+@@ -303,18 +304,24 @@ class NamedProcessIterator {
    void InitProcessEntry(ProcessEntry* entry);
  
    std::wstring executable_name_;

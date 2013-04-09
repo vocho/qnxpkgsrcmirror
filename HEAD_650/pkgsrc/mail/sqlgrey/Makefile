@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.4 2010/08/21 16:35:10 seb Exp $
+# $NetBSD: Makefile,v 1.6 2012/10/08 12:19:32 asau Exp $
 
 DISTNAME=		sqlgrey-1.6.8
-PKGREVISION=		2
+PKGREVISION=		3
 CATEGORIES=		mail
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=sqlgrey/}
 EXTRACT_SUFX=		.tar.bz2
@@ -9,8 +9,6 @@ EXTRACT_SUFX=		.tar.bz2
 MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://sqlgrey.sourceforge.net/
 COMMENT=		Postfix greylisting policy daemon
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=		perl:run
 

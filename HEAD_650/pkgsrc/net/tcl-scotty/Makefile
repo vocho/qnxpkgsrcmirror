@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.26 2012/08/21 21:54:19 marino Exp $
+# $NetBSD: Makefile,v 1.29 2012/11/07 14:33:54 he Exp $
 #
 
 DISTNAME=	scotty-${DIST_VERS}
 PKGNAME=	tcl-scotty-${DIST_VERS}
-PKGREVISION=	6
+PKGREVISION=	8
 CATEGORIES=	net tcl
 MASTER_SITES=	ftp://ftp.ibr.cs.tu-bs.de/pub/local/tkined/
 
@@ -29,6 +29,8 @@ CONFIGURE_ENV+=	TARGET=scotty
 
 USE_LIBTOOL=	yes
 USE_TOOLS+=	lex yacc
+
+PLIST_SUBST+=	MACHINE="${MACHINE}"
 
 INSTALL_TARGET= tnm-install install-man sinstall
 

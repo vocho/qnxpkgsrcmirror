@@ -55,6 +55,7 @@ msg_get(resmgr_context_t *ctp, shmmgr_get_t *msgget, struct _client_info *info)
 	char buf[128];
 	
 	spare = -1;
+	sd = NULL;
 	_mutex_lock(&shmid_array_mutex);
 	
 	if (msgget->i.key != IPC_PRIVATE) {
@@ -73,7 +74,7 @@ msg_get(resmgr_context_t *ctp, shmmgr_get_t *msgget, struct _client_info *info)
 			sd = NULL;
 		}
 		
-		if (sd) {
+		if (sd != NULL) {
 			/* if the key already exists */
 			if ((error = ipcperm(info, &sd->shmds.shm_perm, msgget->i.flag & S_IPERMS)) != 0)
 			{
@@ -131,6 +132,10 @@ msg_get(resmgr_context_t *ctp, shmmgr_get_t *msgget, struct _client_info *info)
 		i = spare;
 	}
 	sd = &shmid_array[i];
+	memset(sd, 0, sizeof(*sd));
+	sd->shmds.shm_perm.mode = (msgget->i.flag & S_IPERMS) | SHMSEG_ALLOCATED;
+	_mutex_unlock(&shmid_array_mutex);
+
 	
 	snprintf(buf, sizeof(buf), "%s/%d", PATH_SHM, i);
 #if 0
@@ -140,11 +145,11 @@ msg_get(resmgr_context_t *ctp, shmmgr_get_t *msgget, struct _client_info *info)
 		goto fail;
 	}
 #else
-	if ((fd = shm_open(buf, O_CREAT | O_RDWR, (msgget->i.flag & S_IPERMS))) == -1)
-	{
+	if ((fd = shm_open(buf, O_CREAT | O_RDWR, (msgget->i.flag & S_IPERMS))) == -1) {
 		goto fail;
 	}
-	if (ftruncate(fd, msgget->i.size) == -1 ) {
+	if (fchown(fd, info->cred.euid, info->cred.egid) == -1 ||
+	    ftruncate(fd, msgget->i.size) == -1 ) {
 		close(fd);
 		shm_unlink(buf);
 		goto fail;
@@ -153,17 +158,14 @@ msg_get(resmgr_context_t *ctp, shmmgr_get_t *msgget, struct _client_info *info)
 	close(fd);
 
 	/* set up the sd */
-	memset(sd, 0, sizeof(*sd));
 	sd->shmds.shm_perm.cuid = info->cred.euid;
 	sd->shmds.shm_perm.cgid = info->cred.egid;
 	sd->shmds.shm_perm.uid  = info->cred.ruid;
 	sd->shmds.shm_perm.gid  = info->cred.rgid;
-	sd->shmds.shm_perm.mode = (msgget->i.flag & S_IPERMS) | SHMSEG_ALLOCATED;
 	sd->shmds.shm_segsz     = msgget->i.size;
 	sd->shmds.shm_cpid      = info->pid;
 	sd->shmds.shm_ctime     = time(NULL);
 	sd->key                 = msgget->i.key;
-	_mutex_unlock(&shmid_array_mutex);
 	
 	/* reply to let client know the shmid */
 	msgget->o.key     = msgget->i.key;
@@ -172,6 +174,7 @@ msg_get(resmgr_context_t *ctp, shmmgr_get_t *msgget, struct _client_info *info)
 	return _RESMGR_NOREPLY;
 	
 fail:
+	_mutex_lock(&shmid_array_mutex);
 	sd->shmds.shm_perm.mode = SHMSEG_FREE;
 	_mutex_unlock(&shmid_array_mutex);
 	return errno;
@@ -217,7 +220,7 @@ shm_msg(resmgr_context_t *ctp, io_msg_t *pmsg, RESMGR_OCB_T *ocb)
 			return EINVAL;
 		}
 		if ((status = ipcperm(&info, &sd->shmds.shm_perm, 
-							  (msg->attach.i.flag & SHM_RDONLY) ? IPC_R : IPC_R | IPC_W)) != 0) {
+		    (msg->attach.i.flag & SHM_RDONLY) ? IPC_R : IPC_R | IPC_W)) != 0) {
 			_mutex_unlock(&shmid_array_mutex);
 			return status;
 		}
@@ -226,9 +229,9 @@ shm_msg(resmgr_context_t *ctp, io_msg_t *pmsg, RESMGR_OCB_T *ocb)
 		sd->shmds.shm_atime = time(NULL);
 
 		if (msg->hdr.i.subtype == _SHMMGR_ATTACH)
-		  sd->shmds.shm_nattch++;
+			sd->shmds.shm_nattch++;
 		else
-		  sd->shmds.shm_nattch--;
+			sd->shmds.shm_nattch--;
 		
 		msg->attach.o.size = sd->shmds.shm_segsz;
 		_mutex_unlock(&shmid_array_mutex);
@@ -272,7 +275,7 @@ shm_msg(resmgr_context_t *ctp, io_msg_t *pmsg, RESMGR_OCB_T *ocb)
 				_mutex_unlock(&shmid_array_mutex);
 				return status;
 			}
-			sprintf(buf, "%s/%d", PATH_SHM, msg->ctl.i.shmid);
+			snprintf(buf, sizeof(buf), "%s/%d", PATH_SHM, msg->ctl.i.shmid);
 			shm_unlink(buf);
 			sd->shmds.shm_perm.mode = SHMSEG_FREE;
 			break;
@@ -288,6 +291,9 @@ int shm_resinit(dispatch_t *dpp)
 {
 	int ret;
 	
+	/* shmget() doesn't talk about umask but shm_open() does. */
+	umask(0);
+
 	iofunc_func_init(_RESMGR_CONNECT_NFUNCS, &shm_connect,
 	    _RESMGR_IO_NFUNCS, &shm_io);
 	shm_io.msg = shm_msg;

@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.27 2012/08/13 12:18:37 drochner Exp $
+# $NetBSD: Makefile,v 1.34 2012/10/08 23:02:20 adam Exp $
 
 DISTNAME=		kbibtex-0.4
-PKGREVISION=		2
+PKGREVISION=		8
 CATEGORIES=		print kde
 MASTER_SITES=		http://download.gna.org/kbibtex/0.4/
 EXTRACT_SUFX=		.tar.bz2
@@ -10,8 +10,6 @@ MAINTAINER=		markd@NetBSD.org
 HOMEPAGE=		http://home.gna.org/kbibtex/
 COMMENT=		BibTeX editor for KDE
 LICENSE=		gnu-gpl-v2
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 BUILD_DEPENDS+=	automoc4>=0.9.87:../../devel/automoc4
 

@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.29 2012/03/03 00:12:09 wiz Exp $
+# $NetBSD: Makefile,v 1.32 2012/10/03 21:56:01 wiz Exp $
 
 DISTNAME=	libspectrum-1.0.0
-PKGREVISION=	4
+PKGREVISION=	6
 CATEGORIES=	emulators
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=fuse-emulator/}
 
@@ -9,8 +9,6 @@ MAINTAINER=	adam@NetBSD.org
 HOMEPAGE=	http://fuse-emulator.sourceforge.net/libspectrum.php
 COMMENT=	ZX Spectrum emulator file format library
 LICENSE=	gnu-gpl-v2
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=		gmake perl pkg-config
 USE_LIBTOOL=		yes

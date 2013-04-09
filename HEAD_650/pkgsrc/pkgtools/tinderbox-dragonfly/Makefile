@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.7 2012/08/05 10:02:13 obache Exp $
+# $NetBSD: Makefile,v 1.9 2012/10/03 21:57:16 wiz Exp $
 #
 
 DISTNAME=	tinderbox-dragonfly-${TBOX_VERSION}
-PKGREVISION=	3
+PKGREVISION=	4
 CATEGORIES=	pkgtools
 MASTER_SITES=	http://tinderbox.marcuscom.com/
 DISTFILES=	tinderbox-${TBOX_VERSION}.tar.gz
@@ -17,7 +17,6 @@ DEPENDS+=	csup>=20100101:../../net/csup
 DEPENDS+=	scmgit>1.6:../../devel/scmgit
 
 TBOX_VERSION=		3.4.1
-PKG_DESTDIR_SUPPORT=	user-destdir
 ONLY_FOR_PLATFORM=	DragonFly-*-*
 
 USE_TOOLS+=		perl perl:run

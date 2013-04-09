@@ -1,6 +1,4 @@
-# $NetBSD: Makefile,v 1.24 2012/08/21 23:49:25 marino Exp $
-
-PKG_DESTDIR_SUPPORT=	user-destdir
+# $NetBSD: Makefile,v 1.26 2012/10/08 13:45:47 asau Exp $
 
 .include "../../print/pdflib/Makefile.common"
 
@@ -14,7 +12,7 @@ BUILDLINK_API_DEPENDS.pdflib+=	pdflib>=${PDFLIB_BASE_VERS}
 
 CONFIGURE_ARGS+=	--with-tcl=${TCLSH:Q}
 CONFIGURE_ARGS+=	--with-tclincl="${BUILDLINK_PREFIX.tcl}/include"
-CONFIGURE_ARGS+=	--with-tclpkg="${PREFIX}/lib/tcl8.4"
+CONFIGURE_ARGS+=	--with-tclpkg="${PREFIX}/lib/tcl8.5"
 TCLSH=			${BUILDLINK_PREFIX.tcl}/bin/tclsh
 
 BUILD_DIRS=		bind/tcl

@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.17 2012/07/15 08:22:48 wiz Exp $
+# $NetBSD: Makefile,v 1.23 2012/10/31 11:17:11 asau Exp $
 #
 
 PKGVER=		0.8.4
 DISTNAME=	libcompizconfig-${PKGVER}
-PKGREVISION=	10
+PKGREVISION=	15
 CATEGORIES=	devel gnome
 MASTER_SITES=	http://releases.compiz.org/${PKGVER}/
 
@@ -11,8 +11,6 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://compiz.org/
 COMMENT=	Configuration backend for compiz
 LICENSE=	gnu-gpl-v2
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=	yes
 USE_LIBTOOL=	yes

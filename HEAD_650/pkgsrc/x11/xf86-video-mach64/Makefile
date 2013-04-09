@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.7 2010/09/14 11:03:14 wiz Exp $
+# $NetBSD: Makefile,v 1.9 2012/10/29 05:07:04 asau Exp $
 
 DISTNAME=	xf86-video-mach64-6.8.2
 PKGREVISION=	2
@@ -11,13 +11,18 @@ HOMEPAGE=	http://xorg.freedesktop.org/
 COMMENT=	Modular Xorg ATI Mach64 video driver
 
 CONFLICTS=		xf86-video-ati<6.9.0
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 CONFIGURE_ARGS+=	--enable-dri
 
 USE_LIBTOOL=	YES
 GNU_CONFIGURE=	YES
 USE_TOOLS+=	gmake pkg-config
+
+.include "../../mk/bsd.prefs.mk"
+
+.if ${OPSYS} == "SunOS"
+CONFIGURE_ENV+=	DRIVER_MAN_SUFFIX=4
+.endif
 
 .include "../../x11/modular-xorg-server/buildlink3.mk"
 

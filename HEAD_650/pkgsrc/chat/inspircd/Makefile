@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.26 2012/04/27 12:31:34 obache Exp $
+# $NetBSD: Makefile,v 1.28 2012/10/03 21:54:01 wiz Exp $
 #
 
 DISTNAME=	InspIRCd-1.1.23
 PKGNAME=	${DISTNAME:S/InspIRCd/inspircd/}
-PKGREVISION=	4
+PKGREVISION=	5
 CATEGORIES=	chat
 MASTER_SITES=	http://www.inspircd.org/downloads/
 EXTRACT_SUFX=	.tar.bz2
@@ -11,8 +11,6 @@ EXTRACT_SUFX=	.tar.bz2
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.inspircd.org/
 COMMENT=	Modular C++ IRC Daemon
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=		perl:build gmake pkg-config
 REPLACE_PERL+=		.inspircd.inc configure

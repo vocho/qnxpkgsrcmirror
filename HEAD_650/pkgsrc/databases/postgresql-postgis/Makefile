@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.11 2012/06/14 07:45:21 sbd Exp $
+# $NetBSD: Makefile,v 1.13 2012/10/03 21:54:25 wiz Exp $
 
 DISTNAME=	postgis-1.5.3
 PKGNAME=	postgresql${PGSQL_VERSION}-${DISTNAME}
-PKGREVISION=	3
+PKGREVISION=	4
 CATEGORIES=	databases geography
 MASTER_SITES=	http://postgis.refractions.net/download/
 
@@ -11,8 +11,6 @@ HOMEPAGE=	http://postgis.refractions.net/
 COMMENT=	Spatial database capabilities for PostgreSQL
 
 LICENSE=	gnu-gpl-v2
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 PGSQL_VERSIONS_ACCEPTED=	91 90 84 83
 

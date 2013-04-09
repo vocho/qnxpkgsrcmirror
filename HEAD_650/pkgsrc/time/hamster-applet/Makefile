@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.26 2012/06/14 07:44:04 sbd Exp $
+# $NetBSD: Makefile,v 1.31 2012/10/08 23:02:29 adam Exp $
 #
 
 DISTNAME=	hamster-applet-2.28.1
-PKGREVISION=	13
+PKGREVISION=	17
 CATEGORIES=	time
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/hamster-applet/2.28/}
 
@@ -10,8 +10,6 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://projecthamster.wordpress.com/
 COMMENT=	Time tracking applet for GNOME
 LICENSE=	gnu-gpl-v3
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=	yes
 USE_LIBTOOL=	yes

@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.6 2012/03/03 00:11:54 wiz Exp $
+# $NetBSD: Makefile,v 1.8 2012/10/23 19:51:00 asau Exp $
 
 DISTNAME=	eggdbus-0.6
-PKGREVISION=	3
+PKGREVISION=	4
 CATEGORIES=	sysutils
 MASTER_SITES=	http://cgit.freedesktop.org/~david/eggdbus/snapshot/
 EXTRACT_SUFX=	.tar.bz2
@@ -11,7 +11,6 @@ HOMEPAGE=	http://cgit.freedesktop.org/~david/eggdbus
 COMMENT=	GObject bindings for DBus
 LICENSE=	gnu-gpl-v2
 
-PKG_DESTDIR_SUPPORT=	user-destdir
 MAKE_JOBS_SAFE=		no
 
 USE_LIBTOOL=		yes

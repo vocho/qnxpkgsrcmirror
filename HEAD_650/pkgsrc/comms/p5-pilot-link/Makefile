@@ -1,12 +1,10 @@
-# $NetBSD: Makefile,v 1.48 2011/08/14 07:43:02 obache Exp $
+# $NetBSD: Makefile,v 1.50 2012/10/03 21:54:06 wiz Exp $
 #
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 .include "../../comms/pilot-link/Makefile.common"
 
 PKGNAME=		p5-${DISTNAME}
-PKGREVISION=		4
+PKGREVISION=		5
 
 COMMENT=		Perl bindings for pilot-link
 

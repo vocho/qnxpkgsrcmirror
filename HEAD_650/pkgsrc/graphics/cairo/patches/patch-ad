@@ -1,23 +1,13 @@
-$NetBSD$
+$NetBSD: patch-ad,v 1.11 2012/09/13 15:50:08 jperkin Exp $
 
---- configure.orig	2010-12-25 14:22:57.000000000 +0000
-+++ configure
-@@ -7429,6 +7429,9 @@ sparc*-*solaris*)
-   fi
-   rm -rf conftest*
-   ;;
-+*-*qnx*)
-+  PTHREAD_LIBS="-lc"
-+  ;;
- esac
- 
- need_locks="$enable_libtool_lock"
-@@ -33834,7 +33837,7 @@ _ACEOF
- 
- 
- case $host in
--*-linux*|*-*bsd*|*-solaris*|*-*-darwin*|*-dragonfly*)
-+*-linux*|*-*bsd*|*-solaris*|*-*-darwin*|*-dragonfly*|*-*qnx*)
- 	have_ld_preload="yes"
- 	;;
- *)
+The variable name is self-explanatory :)
+
+--- util/cairo-missing/getline.c.orig	Thu Sep 13 15:45:55 2012
++++ util/cairo-missing/getline.c	Thu Sep 13 15:46:18 2012
+@@ -87,4 +87,6 @@
+     return ret;
+ }
+ #undef GETLINE_BUFFER_SIZE
++#else
++int solaris_ld_requires_at_least_one_symbol = 0;
+ #endif

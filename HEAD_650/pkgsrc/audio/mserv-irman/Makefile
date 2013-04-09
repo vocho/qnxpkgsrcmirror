@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.2 2009/05/02 16:21:43 reed Exp $
+# $NetBSD: Makefile,v 1.4 2012/10/03 21:53:56 wiz Exp $
 #
 
 DISTNAME=	mserv-irman-0.21
+PKGREVISION=	1
 CATEGORIES=	audio
 MASTER_SITES=	http://mserv-irman.googlecode.com/files/
 EXTRACT_SUFX=	.tbz
@@ -19,7 +20,6 @@ DEPENDS+=	p5-Time-HiRes-[0-9]*:../../time/p5-Time-HiRes
 DEPENDS+=	p5-Config-IniFiles-[0-9]*:../../devel/p5-Config-IniFiles
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
-PKG_DESTDIR_SUPPORT= user-destdir
 
 USE_TOOLS+=	perl:run
 REPLACE_PERL=	mserv-irman.pl

@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.35 2012/01/28 11:00:55 wiz Exp $
+# $NetBSD: Makefile,v 1.37 2012/10/06 11:54:48 asau Exp $
 #
 
 DISTNAME=	openmortal-0.7
-PKGREVISION=	17
+PKGREVISION=	18
 CATEGORIES=	games
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=openmortal/}
 EXTRACT_SUFX=	.tar.bz2
@@ -10,8 +10,6 @@ EXTRACT_SUFX=	.tar.bz2
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://apocalypse.rulez.org/~upi/Mortal/
 COMMENT=	Parody of Mortal Kombat with real characters
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=	yes
 USE_LANGUAGES=	c c++

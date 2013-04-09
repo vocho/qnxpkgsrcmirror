@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.47 2012/03/03 00:14:07 wiz Exp $
+# $NetBSD: Makefile,v 1.50 2012/10/28 06:30:58 asau Exp $
 #
 
 DISTNAME=	${PKGNAME_NOREV}-stable-src
 PKGNAME=	privoxy-3.0.19
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	www
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=ijbswa/}
 
@@ -11,8 +11,6 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.privoxy.org/
 COMMENT=	Web proxy with advanced filtering capabilities
 LICENSE=	gnu-gpl-v2
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 .include "../../mk/bsd.prefs.mk"
 
@@ -35,7 +33,7 @@ WRKSRC=			${WRKDIR}/${PKGNAME_NOREV}-stable
 
 USE_FEATURES=		snprintf
 USE_TOOLS+=		gmake mktemp autoconf autoheader
-BUILD_DEFS+=       VARBASE
+BUILD_DEFS+=		VARBASE
 MAKE_FILE=		GNUmakefile
 
 USE_TOOLS+=		perl

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.45 2012/07/04 20:26:58 drochner Exp $
+# $NetBSD: Makefile,v 1.49 2012/10/11 15:13:49 drochner Exp $
 #
 
 .include "../../print/poppler/Makefile.common"
@@ -50,6 +50,5 @@ CFLAGS.QNX+= -U__STRICT_ANSI__
 .include "../../devel/glib2/buildlink3.mk"
 .include "../../graphics/cairo/buildlink3.mk"
 .include "../../mk/jpeg.buildlink3.mk"
-.include "../../x11/gtk2/buildlink3.mk"
 .include "../../mk/pthread.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

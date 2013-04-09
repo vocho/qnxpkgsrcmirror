@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.20 2012/08/13 14:25:41 wiz Exp $
+# $NetBSD: Makefile,v 1.27 2012/10/08 23:01:06 adam Exp $
 
 DISTNAME=	OpenSceneGraph-3.0.1
 PKGNAME=	osg-3.0.1
-PKGREVISION=	4
+PKGREVISION=	10
 CATEGORIES=	graphics devel
 MASTER_SITES=	http://www.openscenegraph.org/downloads/stable_releases/OpenSceneGraph-${PKGVERSION_NOREV}/source/
 EXTRACT_SUFX=	.zip
@@ -11,8 +11,6 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.openscenegraph.org/
 COMMENT=	High performance 3D graphics toolkit
 LICENSE=	gnu-lgpl-v2.1
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_CMAKE=		yes
 USE_LANGUAGES=		c c++

@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.27 2010/03/21 16:29:42 wiz Exp $
+# $NetBSD: Makefile,v 1.29 2012/10/03 21:57:15 wiz Exp $
 #
 
 DISTNAME=	pkgdepgraph-2.8
+PKGREVISION=	1
 CATEGORIES=	pkgtools devel
 MASTER_SITES=	# empty
 DISTFILES=	# empty
@@ -9,8 +10,6 @@ DISTFILES=	# empty
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	ftp://ftp.NetBSD.org/pub/NetBSD/packages/pkgsrc/doc/pkgsrc.html
 COMMENT=	Visual representation of installed NetBSD packages
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 # removed so that pkgdepgraph can be used on "client" machines -- @@@
 # DEPENDS+=	graphviz-[0-9]*:../../graphics/graphviz

@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.1.1.1 2012/07/05 09:28:41 sno Exp $
+# $NetBSD: Makefile,v 1.3 2012/10/31 11:17:43 asau Exp $
 
 DISTNAME=	CPAN-Uploader-0.103001
 PKGNAME=	p5-${DISTNAME}
+PKGREVISION=	1
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=CPAN/}
 
@@ -11,7 +12,6 @@ COMMENT=	Perl 5 module to upload things to the CPAN
 LICENSE=	${PERL5_LICENSE}
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 DEPENDS+=	p5-Getopt-Long-Descriptive>=0.084:../../devel/p5-Getopt-Long-Descriptive
 DEPENDS+=	p5-HTTP-Message-[0-9]*:../../www/p5-HTTP-Message

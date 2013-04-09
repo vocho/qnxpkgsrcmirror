@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.5 2012/01/22 19:14:26 abs Exp $
+# $NetBSD: Makefile,v 1.7 2012/10/28 06:30:56 asau Exp $
 
 DISTNAME=	Web-Scraper-0.36
 PKGNAME=	p5-${DISTNAME}
+PKGREVISION=	1
 CATEGORIES=	www perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Web/}
 
@@ -9,8 +10,6 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://search.cpan.org/dist/Web-Scraper/
 COMMENT=	Perl 5 Web Scraping Toolkit inspired by Scrapi
 LICENSE=	${PERL5_LICENSE}
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_LANGUAGES=	# empty
 PERL5_PACKLIST= auto/Web/Scraper/.packlist

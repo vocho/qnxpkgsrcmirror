@@ -1,9 +1,8 @@
-# $NetBSD: Makefile,v 1.10 2012/06/14 07:44:41 sbd Exp $
+# $NetBSD: Makefile,v 1.13 2012/10/25 06:56:51 asau Exp $
 #
 
-DISTNAME=	lxml-2.3.2
+DISTNAME=	lxml-3.0.1
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
-PKGREVISION=	1
 CATEGORIES=	textproc
 MASTER_SITES=	http://lxml.de/files/
 EXTRACT_SUFX=	.tgz
@@ -13,9 +12,8 @@ HOMEPAGE=	http://lxml.de/
 COMMENT=	Python binding for libxml2 and libxslt
 LICENSE=	modified-bsd
 
-PKG_DESTDIR_SUPPORT=	user-destdir
-
-DEPENDS+=	${PYPKGPREFIX}-setuptools>=0.6c11:../../devel/py-setuptools
+TEST_TARGET=	test_inplace
+PYTHON_VERSIONS_INCLUDE_3X=	yes
 
 .include "../../lang/python/egg.mk"
 BUILDLINK_API_DEPENDS.libxml2+=	libxml2>=2.7.8

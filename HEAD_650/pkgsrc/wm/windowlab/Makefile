@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.21 2011/11/01 06:02:44 sbd Exp $
+# $NetBSD: Makefile,v 1.23 2012/10/23 10:24:15 wiz Exp $
 #
 
 DISTNAME=	windowlab-1.33
@@ -11,7 +11,6 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://nickgravgaard.com/windowlab/
 COMMENT=	Small and simple window manager
 
-PKG_DESTDIR_SUPPORT=	user-destdir
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
 
 USE_TOOLS+=	gmake pkg-config
@@ -26,5 +25,4 @@ post-install:
 
 .include "../../x11/libXext/buildlink3.mk"
 .include "../../x11/libXft/buildlink3.mk"
-.include "../../x11/xextproto/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

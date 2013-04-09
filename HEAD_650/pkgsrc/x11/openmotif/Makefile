@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.71 2012/01/12 16:01:46 hans Exp $
+# $NetBSD: Makefile,v 1.73 2012/10/29 05:06:42 asau Exp $
 
 PKGVER=		2.3.3
 DISTNAME=	openmotif-${PKGVER}
@@ -13,7 +13,6 @@ COMMENT=		The Open Group Motif toolkit for the X Window System
 LICENSE=		openmotif-license
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 .include "../../mk/bsd.prefs.mk"
 
@@ -121,5 +120,4 @@ post-build:
 .include "../../x11/libXext/buildlink3.mk"
 .include "../../x11/libXft/buildlink3.mk"
 .include "../../x11/xbitmaps/buildlink3.mk"
-.include "../../x11/xextproto/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

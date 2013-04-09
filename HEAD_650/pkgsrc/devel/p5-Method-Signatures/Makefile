@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.2 2012/07/06 11:01:06 sno Exp $
+# $NetBSD: Makefile,v 1.4 2012/10/31 11:18:29 asau Exp $
 
 DISTNAME=	Method-Signatures-20120523
 PKGNAME=	p5-${DISTNAME}
+PKGREVISION=	1
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=../../authors/id/B/BA/BAREFOOT/}
 #MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Method/}
@@ -28,8 +29,6 @@ USE_LANGUAGES=	# empty
 
 PERL5_PACKLIST=		auto/Method/Signatures/.packlist
 PERL5_MODULE_TYPE=	Module::Build
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 .include "../../lang/perl5/module.mk"
 .include "../../mk/bsd.pkg.mk"

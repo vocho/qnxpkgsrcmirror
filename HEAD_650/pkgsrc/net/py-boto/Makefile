@@ -1,20 +1,22 @@
-# $NetBSD: Makefile,v 1.14 2012/04/08 19:09:09 wiz Exp $
+# $NetBSD: Makefile,v 1.19 2012/11/11 21:31:08 jakllsch Exp $
 #
 
-DISTNAME=	boto-1.9b
-PKGREVISION=	2
+DISTNAME=	boto-2.6.0
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
+PKGREVISON=	1
 CATEGORIES=	net
-MASTER_SITES=	http://boto.googlecode.com/files/
+MASTER_SITES=	http://cloud.github.com/downloads/boto/boto/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://boto.googlecode.com/
+HOMEPAGE=	http://docs.pythonboto.org/
 COMMENT=	Python interface to Amazon web services
 LICENSE=	mit
 
-PKG_DESTDIR_SUPPORT=	user-destdir
+DEPENDS+=	${PYPKGPREFIX}-filechunkio-[0-9]*:../../devel/py-filechunkio
 
+REPLACE_PYTHON+=	*.py
 REPLACE_PYTHON+=	boto/*/*.py
+REPLACE_PYTHON+=	bin/*
 
 .include "../../lang/python/application.mk"
 .include "../../lang/python/egg.mk"

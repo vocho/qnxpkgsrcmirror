@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.56 2012/07/04 20:25:16 drochner Exp $
+# $NetBSD: Makefile,v 1.57 2012/09/14 12:15:01 drochner Exp $
 #
 
 .include "../../print/poppler/Makefile.common"
@@ -38,7 +38,7 @@ CFLAGS.QNX+=	-U__STRICT_ANSI__
 
 .if !empty(PKG_OPTIONS:Mpoppler-cms)
 CONFIGURE_ARGS+=	--enable-cms
-.include "../../graphics/lcms/buildlink3.mk"
+.include "../../graphics/lcms2/buildlink3.mk"
 .else
 CONFIGURE_ARGS+=	--disable-cms
 .endif

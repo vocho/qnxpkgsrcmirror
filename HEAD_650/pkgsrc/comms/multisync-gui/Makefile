@@ -1,16 +1,14 @@
-# $NetBSD: Makefile,v 1.19 2012/06/14 07:45:11 sbd Exp $
+# $NetBSD: Makefile,v 1.24 2012/10/08 23:01:19 adam Exp $
 #
 
 DISTNAME=	multisync-gui-0.91.0
-PKGREVISION=	14
+PKGREVISION=	18
 CATEGORIES=	comms
 MASTER_SITES=	http://www.opensync.org/raw-attachment/wiki/releases/0.2x/download/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.opensync.org/
 COMMENT=	GUI for libopensync
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=	pkg-config
 HAS_CONFIGURE=	yes

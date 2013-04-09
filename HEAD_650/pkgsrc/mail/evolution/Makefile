@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.182 2012/07/15 08:22:50 wiz Exp $
+# $NetBSD: Makefile,v 1.187 2012/10/08 23:00:56 adam Exp $
 
 DISTNAME=		evolution-2.32.3
-PKGREVISION=		8
+PKGREVISION=		12
 CATEGORIES=		mail time gnome
 MASTER_SITES=		${MASTER_SITE_GNOME:=sources/evolution/2.32/}
 EXTRACT_SUFX=		.tar.bz2
@@ -10,8 +10,6 @@ MAINTAINER=		rh@NetBSD.org
 HOMEPAGE=		http://www.gnome.org/projects/evolution/
 COMMENT=		GNOME mailer, calendar, contact manager, and communications tool
 #LICENSE=		modified-bsd AND gnu-lgpl-v2.1 AND gnu-lgpl-v3 AND perhaps more
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 .include "options.mk"
 

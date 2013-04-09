@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.26 2009/07/07 18:22:37 joerg Exp $
+# $NetBSD: Makefile,v 1.28 2012/10/29 05:06:41 asau Exp $
 
 DISTNAME=	neXtaw-0.15.1
 PKGREVISION=	3
@@ -8,8 +8,6 @@ MASTER_SITES=	http://siag.nu/pub/neXtaw/
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://siag.nu/neXtaw/
 COMMENT=	NeXTstep-like widgets based on the Athena Widget set
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_X11BASE=		yes
 GNU_CONFIGURE=		yes
@@ -40,5 +38,4 @@ post-install:
 .include "../../x11/libXext/buildlink3.mk"
 .include "../../x11/libXmu/buildlink3.mk"
 .include "../../x11/libXt/buildlink3.mk"
-.include "../../x11/xextproto/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

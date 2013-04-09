@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.7 2012/06/09 07:00:49 obache Exp $
+# $NetBSD: Makefile,v 1.9 2012/10/29 05:06:36 asau Exp $
 #
 
 DISTNAME=		libXvMC-1.0.7
@@ -10,8 +10,6 @@ MAINTAINER=		joerg@NetBSD.org
 HOMEPAGE=		http://xorg.freedesktop.org/
 COMMENT=		XVideo Motion Compensation Library
 LICENSE=		mit
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_LIBTOOL=		yes
 USE_TOOLS+=		pkg-config
@@ -31,6 +29,5 @@ CONFIGURE_ARGS+=	--disable-malloc0returnsnull
 .include "../../x11/libXext/buildlink3.mk"
 .include "../../x11/libXv/buildlink3.mk"
 .include "../../x11/videoproto/buildlink3.mk"
-.include "../../x11/xextproto/buildlink3.mk"
 
 .include "../../mk/bsd.pkg.mk"

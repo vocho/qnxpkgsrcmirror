@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.16 2012/08/15 17:39:52 drochner Exp $
+# $NetBSD: Makefile,v 1.21 2012/10/08 23:01:49 adam Exp $
 #
 
 DISTNAME=	scidavis-0.2.4
-PKGREVISION=	9
+PKGREVISION=	13
 CATEGORIES=	graphics
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=scidavis/}
 EXTRACT_SUFX=	.tar.bz2
@@ -12,7 +12,6 @@ HOMEPAGE=	http://scidavis.sourceforge.net/
 COMMENT=	Data analysis and visualization package
 
 USE_LANGUAGES=	c c++
-PKG_DESTDIR_SUPPORT= user-destdir
 INSTALL_MAKE_FLAGS+= INSTALL_ROOT=${DESTDIR}
 
 do-configure:

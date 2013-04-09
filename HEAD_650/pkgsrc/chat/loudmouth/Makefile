@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.36 2012/03/03 00:11:57 wiz Exp $
+# $NetBSD: Makefile,v 1.38 2012/10/03 00:02:40 asau Exp $
 
 DISTNAME=	loudmouth-1.4.3
-PKGREVISION=	5
+PKGREVISION=	6
 CATEGORIES=	chat
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/loudmouth/1.4/}
 
@@ -10,8 +10,6 @@ EXTRACT_SUFX=	.tar.bz2
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.loudmouth-project.org/
 COMMENT=	Lightweight Jabber client library
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_LIBTOOL=		yes
 USE_TOOLS+=		gmake pkg-config

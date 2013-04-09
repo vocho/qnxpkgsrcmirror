@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.14 2012/03/03 00:13:22 wiz Exp $
+# $NetBSD: Makefile,v 1.19 2012/10/08 23:01:54 adam Exp $
 
 DISTNAME=	novel-pinyin-0.2.5
-PKGREVISION=	12
+PKGREVISION=	16
 CATEGORIES=	inputmethod
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=novel-pinyin/}
 
@@ -9,8 +9,6 @@ MAINTAINER=	obache@NetBSD.org
 HOMEPAGE=	http://novel-pinyin.sourceforge.net/
 COMMENT=	HMM-based sentence pinyin input method for Chinese
 LICENSE=	gnu-gpl-v2
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 BDB_ACCEPTED=		db4 db5
 USE_LANGUAGES=		c c++

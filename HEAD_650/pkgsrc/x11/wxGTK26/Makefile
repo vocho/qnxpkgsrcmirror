@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.15 2012/07/09 19:05:29 joerg Exp $
+# $NetBSD: Makefile,v 1.20 2012/10/24 15:48:32 joerg Exp $
 #
 
 .include "Makefile.common"
 
-PKGREVISION=		14
+PKGREVISION=		19
 COMMENT=		GTK-based implementation of the wxWidgets GUI library
 
 REPLACE_SH=		wx-config.in wx-config-inplace.in

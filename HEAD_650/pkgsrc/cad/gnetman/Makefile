@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.8 2012/08/21 23:49:18 marino Exp $
+# $NetBSD: Makefile,v 1.10 2012/10/08 13:25:12 asau Exp $
 #
 
 DISTNAME=		gnetman-11Feb05
@@ -11,10 +11,9 @@ MAINTAINER=		dmcmahill@NetBSD.org
 HOMEPAGE=		http://www.viasic.com/opensource/
 COMMENT=		Advanced Netlister and Netlist Manipulation Database for gEDA
 
-PKG_DESTDIR_SUPPORT=	user-destdir
-
 USE_PKGLOCALEDIR=	yes
 GNU_CONFIGURE=		yes
+CONFIGURE_ENV+=		TCL_CONFIG_SH=${BUILDLINK_PREFIX.tcl}/lib/tclConfig.sh
 
 post-extract:
 	${RM} ${WRKSRC}/src/include/tcl.h

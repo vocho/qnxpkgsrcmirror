@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.9 2012/06/30 05:10:51 dholland Exp $
+# $NetBSD: Makefile,v 1.11 2012/10/23 19:51:18 asau Exp $
 #
 
 DISTNAME=	Sys-Filesystem-1.30
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	3
+PKGREVISION=	4
 CATEGORIES=	sysutils devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Sys/}
 
@@ -16,7 +16,6 @@ DEPENDS+=	{perl>=5.10.1,p5-Module-Pluggable>=3.9}:../../devel/p5-Module-Pluggabl
 DEPENDS+=	p5-Params-Util>=1.00:../../devel/p5-Params-Util
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 PERL5_PACKLIST=		auto/Sys/Filesystem/.packlist
 PERL5_MODULE_TYPE=	Module::Build

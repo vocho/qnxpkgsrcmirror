@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.72 2012/07/24 16:23:37 taca Exp $
+# $NetBSD: Makefile,v 1.76 2012/10/12 15:27:48 taca Exp $
 #
 
 DISTNAME=	${RUBY_DISTNAME}
@@ -18,8 +18,6 @@ CONFLICTS=	${RUBY_PKGPREFIX}-dbm-[0-9]* \
 		${RUBY_PKGPREFIX}-iconv-[0-9]* \
 		${RUBY_PKGPREFIX}-openssl-[0-9]* \
 		${RUBY_PKGPREFIX}-tcltk-[0-9]*
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_LANGUAGES=	c
 USE_TOOLS+=	pax yacc

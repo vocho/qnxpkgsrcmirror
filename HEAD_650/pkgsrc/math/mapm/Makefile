@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.8 2010/09/01 10:54:31 drochner Exp $
+# $NetBSD: Makefile,v 1.10 2012/09/13 16:56:17 asau Exp $
 #
 
 DISTNAME=		mapm-4.9.5a
@@ -6,10 +6,8 @@ CATEGORIES=		math
 MASTER_SITES=		http://www.tc.umn.edu/~ringx004/
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
-HOMEPAGE=		http://www.tc.umn.edu/~ringx004/
+HOMEPAGE=		http://www.tc.umn.edu/~ringx004/mapm-main.html
 COMMENT=		Arbitrary Precision Math library
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 WRKSRC=		${WRKDIR}/${DISTNAME:S/-/_/}
 

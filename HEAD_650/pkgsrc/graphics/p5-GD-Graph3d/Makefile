@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.3 2011/08/14 12:59:48 obache Exp $
+# $NetBSD: Makefile,v 1.5 2012/10/06 14:11:10 asau Exp $
 
 DISTNAME=	GD-Graph3d-0.63
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	2
+PKGREVISION=	3
 SVR4_PKGNAME=	p5gd3
 CATEGORIES=	graphics perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=GD/}
@@ -11,8 +11,6 @@ MAINTAINER=	damon@brodiefamily.org
 COMMENT=	GDGraph3d is a pkg to generate charts, using Lincoln Stein's GD.pm
 HOMEPAGE=	http://search.cpan.org/dist/GD-Graph3d/
 LICENSE=	${PERL5_LICENSE}
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 DEPENDS+=	p5-GD>=1.18:../../graphics/p5-GD
 DEPENDS+=	p5-GDGraph>=1.30:../../graphics/p5-GDGraph

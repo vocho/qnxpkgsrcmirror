@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.26 2012/08/01 11:15:32 imil Exp $
+# $NetBSD: Makefile,v 1.29 2012/10/02 11:28:42 jperkin Exp $
 #
 
 DISTNAME=		pkgin-0.6.2.2
+PKGREVISION=		2
 CATEGORIES=		pkgtools
 MASTER_SITES=		ftp://ftp.NetBSD.org/pub/NetBSD/misc/imil/
 
@@ -9,8 +10,6 @@ MAINTAINER=		imil@NetBSD.org
 HOMEPAGE=		http://pkgin.net/
 COMMENT=		Apt / yum like tool for managing pkgsrc binary packages
 LICENSE=		modified-bsd
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 EGDIR=			${PREFIX}/share/examples/${PKGBASE}
 CONF_FILES=		${EGDIR}/repositories.conf.example		\
@@ -29,10 +28,13 @@ SUBST_SED.path=		-e "s|/usr/pkg/etc|${PKG_SYSCONFDIR}|g"
 SUBST_SED.path+=	-e "s|/usr/sbin|${PKG_TOOLS_BIN}|g"
 SUBST_SED.path+=	-e "s|/var|${VARBASE}|g"
 SUBST_SED.path+=	-e "s|/usr/pkg|${PREFIX}|g"
+SUBST_SED.path+=	-e "s|!=.*uname -p|=	${MACHINE_ARCH}|g"
 
 GNU_CONFIGURE=		yes
 USE_FEATURES=		nbcompat
 USE_TOOLS+=		nroff
+
+MAKE_ENV+=		MACHINE_ARCH=${MACHINE_ARCH}
 
 DEPENDS+=		pkg_install>=20110215:../../pkgtools/pkg_install
 
@@ -58,6 +60,7 @@ do-install:
 .	include "../../net/libfetch/buildlink3.mk"
 .endif
 
-.include "../../databases/sqlite3/buildlink3.mk"
 .include "../../archivers/libarchive/buildlink3.mk"
+.include "../../databases/sqlite3/buildlink3.mk"
+.include "../../security/openssl/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

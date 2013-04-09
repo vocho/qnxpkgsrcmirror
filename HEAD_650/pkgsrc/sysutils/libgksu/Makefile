@@ -1,16 +1,14 @@
-# $NetBSD: Makefile,v 1.19 2012/07/15 08:22:54 wiz Exp $
+# $NetBSD: Makefile,v 1.24 2012/10/23 19:51:10 asau Exp $
 #
 
 DISTNAME=	libgksu-2.0.7
-PKGREVISION=	15
+PKGREVISION=	19
 CATEGORIES=	sysutils
 MASTER_SITES=	http://people.debian.org/~kov/gksu/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.nongnu.org/gksu/
 COMMENT=	Library that provides a GTK+ frontend to su and sudo
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=	yes
 

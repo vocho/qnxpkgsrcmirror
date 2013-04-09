@@ -1,17 +1,17 @@
-# $NetBSD: options.mk,v 1.13 2011/11/13 21:49:17 sbd Exp $
+# $NetBSD: options.mk,v 1.16 2012/10/08 12:47:23 marino Exp $
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.cups
 PKG_OPTIONS_REQUIRED_GROUPS=	pdftops
 PKG_OPTIONS_GROUP.pdftops=	ghostscript poppler
-PKG_SUPPORTED_OPTIONS=	acl dbus dnssd kerberos libusb pam slp tcpwrappers
+PKG_SUPPORTED_OPTIONS=	acl dbus dnssd kerberos pam slp tcpwrappers
 PKG_SUGGESTED_OPTIONS=	dbus dnssd kerberos poppler slp
-
-# until libusb is brought over
-.if ${OPSYS} != "QNX"
-PKG_SUGGESTED_OPTIONS+=	libusb
-.endif
-
 PKG_OPTIONS_LEGACY_OPTS+=	xpdf:poppler gs:ghostscript
+
+# Neither DragonFly nor SunOS can build libusb1
+.if ${OPSYS} != "DragonFly" && ${OPSYS} != "SunOS"  && ${OPSYS} != "QNX"
+PKG_SUPPORTED_OPTIONS+= libusb
+PKG_SUGGESTED_OPTIONS+= libusb
+.endif
 
 .include "../../mk/bsd.options.mk"
 
@@ -56,9 +56,10 @@ CONFIGURE_ARGS+=	--disable-gssapi
 .endif
 
 .if !empty(PKG_OPTIONS:Mlibusb)
-.include "../../devel/libusb/buildlink3.mk"
+.include "../../devel/libusb1/buildlink3.mk"
 CONFIGURE_ARGS+=	--enable-libusb
 MESSAGE_SRC+=		${PKGDIR}/MESSAGE.libusb
+USE_TOOLS+=		pkg-config
 .else
 CONFIGURE_ARGS+=	--disable-libusb
 .endif

@@ -1,16 +1,14 @@
-# $NetBSD: Makefile,v 1.16 2012/06/14 07:44:43 sbd Exp $
+# $NetBSD: Makefile,v 1.21 2012/10/31 11:19:52 asau Exp $
 #
 
 DISTNAME=	valide-0.4.0
-PKGREVISION=	12
+PKGREVISION=	16
 CATEGORIES=	devel
 MASTER_SITES=	http://valide.googlecode.com/files/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.valaide.org/
 COMMENT=	IDE for the Vala programming language
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=	pkg-config msgfmt intltool
 

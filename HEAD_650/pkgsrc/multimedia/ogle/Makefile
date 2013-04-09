@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.30 2012/06/14 07:43:07 sbd Exp $
+# $NetBSD: Makefile,v 1.32 2012/10/23 10:24:09 wiz Exp $
 
 DISTNAME=	ogle-0.9.2
 PKGREVISION=	8
@@ -10,8 +10,6 @@ HOMEPAGE=	http://www.dtek.chalmers.se/groups/dvd/
 COMMENT=	DVD player with menus
 
 LICENSE=	gnu-gpl-v2
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 ONLY_FOR_PLATFORM=	NetBSD-1.5.[23]*-i386 NetBSD-1.5[Y-Z]*-i386
 ONLY_FOR_PLATFORM+=	NetBSD-1.6*-i386 NetBSD-[2-9]*-i386
@@ -53,5 +51,4 @@ BUILDLINK_API_DEPENDS.libdvdread+=      libdvdread>=4.1.3
 .include "../../x11/libXinerama/buildlink3.mk"
 .include "../../x11/libXv/buildlink3.mk"
 .include "../../x11/libXxf86vm/buildlink3.mk"
-.include "../../x11/xextproto/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

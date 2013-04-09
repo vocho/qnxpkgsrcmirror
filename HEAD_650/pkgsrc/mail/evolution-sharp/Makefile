@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.15 2012/06/14 07:44:31 sbd Exp $
+# $NetBSD: Makefile,v 1.17 2012/10/08 12:19:10 asau Exp $
 #
 
 DISTNAME=	evolution-sharp-0.20.0
-PKGREVISION=	9
+PKGREVISION=	10
 CATEGORIES=	mail
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/evolution-sharp/0.20/}
 EXTRACT_SUFX=	.tar.bz2
@@ -13,8 +13,6 @@ COMMENT=	.NET language binding for various Evolution libraries
 LICENSE=	gnu-gpl-v2
 
 BROKEN=		Doesn't work with newer versions of evolution-data-server
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=		yes
 USE_LIBTOOL=		yes

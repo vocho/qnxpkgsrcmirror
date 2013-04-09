@@ -1,15 +1,13 @@
-# $NetBSD: Makefile,v 1.64 2012/05/23 23:11:56 gdt Exp $
+# $NetBSD: Makefile,v 1.66 2012/10/31 11:16:58 asau Exp $
 
 DISTNAME=	g-wrap-1.9.14
-PKGREVISION=	2
+PKGREVISION=	3
 CATEGORIES=	devel
 MASTER_SITES=	http://savannah.nongnu.org/download/g-wrap/
 
 MAINTAINER=	gdt@NetBSD.org
 HOMEPAGE=	http://www.nongnu.org/g-wrap/
 COMMENT=	Tool for generating guile wrappers for C code
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 # standard.c ends up malformed with MAKE_JOBS=4
 MAKE_JOBS_SAFE=	no

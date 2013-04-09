@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.64 2012/06/14 07:43:25 sbd Exp $
+# $NetBSD: Makefile,v 1.69 2012/10/31 11:16:38 asau Exp $
 #
 
 DISTNAME=		at-spi-1.32.0
-PKGREVISION=		6
+PKGREVISION=		10
 CATEGORIES=		devel
 MASTER_SITES=		${MASTER_SITE_GNOME:=sources/at-spi/1.32/}
 EXTRACT_SUFX=		.tar.bz2
@@ -11,8 +11,6 @@ MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://www.gnome.org/
 COMMENT=		Assistive Technology Service Provider Interface
 LICENSE=		gnu-gpl-v2
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=		gmake intltool msgfmt pkg-config
 USE_PKGLOCALEDIR=	yes

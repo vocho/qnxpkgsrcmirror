@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.40 2012/06/14 07:43:36 sbd Exp $
+# $NetBSD: Makefile,v 1.47 2012/11/03 01:58:36 ryoon Exp $
 
 DISTNAME=		gnome-media-2.28.5
-PKGREVISION=		13
+PKGREVISION=		19
 CATEGORIES=		multimedia gnome
 MASTER_SITES=		${MASTER_SITE_GNOME:=sources/gnome-media/2.28/}
 EXTRACT_SUFX=		.tar.bz2
@@ -9,8 +9,6 @@ EXTRACT_SUFX=		.tar.bz2
 MAINTAINER=		rh@NetBSD.org
 HOMEPAGE=		http://www.gnome.org/
 COMMENT=		Set of audio/multimedia applications for GNOME2
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=		yes
 USE_PKGLOCALEDIR=	yes

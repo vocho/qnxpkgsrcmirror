@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.19 2012/07/01 19:05:23 dholland Exp $
+# $NetBSD: Makefile,v 1.25 2012/11/03 01:58:37 ryoon Exp $
 #
 
 DISTNAME=	swfdec-gnome-2.28.0
-PKGREVISION=	14
+PKGREVISION=	19
 CATEGORIES=	multimedia gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/swfdec-gnome/2.28/}
 EXTRACT_SUFX=	.tar.bz2
@@ -10,8 +10,6 @@ EXTRACT_SUFX=	.tar.bz2
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://swfdec.freedesktop.org/
 COMMENT=	Gnome flash player and thumbnailer using swfdec
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=		YES
 USE_TOOLS+=		gmake intltool msgfmt pkg-config

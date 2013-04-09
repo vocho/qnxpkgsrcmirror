@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.41 2012/04/13 05:43:26 dholland Exp $
+# $NetBSD: Makefile,v 1.43 2012/10/02 20:11:38 asau Exp $
 
 DISTNAME=	elk-3.99.8
 PKGREVISION=	1
@@ -10,9 +10,9 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://sam.zoy.org/elk/
 COMMENT=	Embeddable Scheme interpreter
 
-PKG_DESTDIR_SUPPORT=	user-destdir
 MAKE_JOBS_SAFE=		no
 
+USE_TOOLS+=		groff
 USE_LANGUAGES=		c c++
 USE_LIBTOOL=		yes
 GNU_CONFIGURE=		yes

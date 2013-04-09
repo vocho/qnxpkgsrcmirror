@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.75 2012/03/21 18:58:00 hans Exp $
+# $NetBSD: Makefile,v 1.77 2012/10/29 05:06:42 asau Exp $
 
 DISTNAME=	Tk-804.030
 PKGNAME=	p5-${DISTNAME}
+PKGREVISION=	1
 SVR4_PKGNAME=	p5tk
 CATEGORIES=	x11 tk perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Tk/}
@@ -10,7 +11,6 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://cpan.uwinnipeg.ca/htdocs/Tk/Tk.html
 COMMENT=	Perl5 interface to Tk
 
-PKG_DESTDIR_SUPPORT=	user-destdir
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
 
 MAKE_JOBS_SAFE=	no

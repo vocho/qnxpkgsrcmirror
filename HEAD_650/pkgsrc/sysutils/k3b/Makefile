@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.44 2012/07/01 19:05:25 dholland Exp $
+# $NetBSD: Makefile,v 1.53 2012/11/11 18:32:23 markd Exp $
 #
 
 DISTNAME=		k3b-2.0.2
-PKGREVISION=		2
+PKGREVISION=		10
 CATEGORIES=		sysutils
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=k3b/}
 EXTRACT_SUFX=		.tar.bz2
@@ -10,8 +10,6 @@ EXTRACT_SUFX=		.tar.bz2
 MAINTAINER=		markd@NetBSD.org
 HOMEPAGE=		http://www.k3b.org/
 COMMENT=		DVD and CD authoring program
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 BUILD_DEPENDS+=		automoc4>=0.9.87:../../devel/automoc4
 DEPENDS+=		cdrdao-[0-9]*:../../sysutils/cdrdao

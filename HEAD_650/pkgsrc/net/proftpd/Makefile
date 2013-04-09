@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.66 2011/12/17 10:16:28 sbd Exp $
+# $NetBSD: Makefile,v 1.68 2012/10/23 17:19:00 asau Exp $
 
 DISTNAME=	proftpd-1.3.3g
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	net
 MASTER_SITES=	ftp://ftp.proftpd.org/distrib/source/ \
 		ftp://ftp.servus.at/ProFTPD/distrib/source/ \
@@ -12,8 +12,6 @@ MAINTAINER=	kim@tac.nyc.ny.us
 HOMEPAGE=	http://www.proftpd.org/
 COMMENT=	FTP server with Apache like configuration
 LICENSE=	gnu-gpl-v2
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 WRKSRC=			${WRKDIR}/${PKGNAME_NOREV}
 

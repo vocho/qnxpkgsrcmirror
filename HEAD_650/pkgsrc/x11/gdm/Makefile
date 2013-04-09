@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.167 2012/08/13 14:25:44 wiz Exp $
+# $NetBSD: Makefile,v 1.172 2012/10/29 05:06:13 asau Exp $
 #
 
 DISTNAME=	gdm-2.20.11
-PKGREVISION=	8
+PKGREVISION=	12
 CATEGORIES=	x11 gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gdm/2.20/}
 EXTRACT_SUFX=	.tar.bz2
@@ -10,8 +10,6 @@ EXTRACT_SUFX=	.tar.bz2
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.gnome.org/
 COMMENT=	Gnome Display Manager - a re-implementation of the xdm program
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 DEPENDS+=	zenity>=2.16.0:../../x11/zenity
 

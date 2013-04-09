@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.9 2011/08/17 03:05:15 obache Exp $
+# $NetBSD: Makefile,v 1.11 2012/10/31 11:18:08 asau Exp $
 
 DISTNAME=	ExtUtils-XSpp-0.1602
 PKGNAME=	p5-${DISTNAME:S/1602/16.02/}
-PKGREVISION=	2
+PKGREVISION=	3
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=ExtUtils/}
 
@@ -16,8 +16,6 @@ BUILD_DEPENDS+=	p5-Test-Base-[0-9]*:../../devel/p5-Test-Base
 BUILD_DEPENDS+=	p5-Test-Differences-[0-9]*:../../devel/p5-Test-Differences
 DEPENDS+=	{perl>=5.14.1,p5-ExtUtils-ParseXS>=2.22.02}:../../devel/p5-ExtUtils-ParseXS
 DEPENDS+=	p5-Digest-MD5>=2.0:../../security/p5-Digest-MD5
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_LANGUAGES=		c
 PERL5_MODULE_TYPE=	Module::Build

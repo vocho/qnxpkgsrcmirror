@@ -1,15 +1,13 @@
-# $NetBSD: Makefile,v 1.12 2012/03/15 11:53:34 obache Exp $
+# $NetBSD: Makefile,v 1.15 2012/10/08 09:21:08 asau Exp $
 #
 
 SVNREV=		11
 DISTNAME=	mkv2mp4
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}-0.0alpha${SVNREV}
-PKGREVISION=	3
+PKGREVISION=	4
 CATEGORIES=	multimedia
 MASTER_SITES=	http://mkv2mp4.googlecode.com/svn-history/r${SVNREV}/trunk/
 NO_BUILD=	yes
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 DISTFILES=	${DISTNAME}.py README
 DIST_SUBDIR=	mkv2mp4
@@ -20,8 +18,6 @@ COMMENT=	Remux mkv files to mp4 files compatible with standalone players
 WRKSRC=		${WRKDIR}
 
 REPLACE_PYTHON=	${DISTNAME}.py
-# uses subprocess.check_call, which is new in 2.5
-PYTHON_VERSIONS_ACCEPTED=	25 27 26
 
 INSTALLATION_DIRS=	bin share/doc/mkv2mp4
 

@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.35 2012/06/14 07:43:23 sbd Exp $
+# $NetBSD: Makefile,v 1.37 2012/10/29 05:06:39 asau Exp $
 #
 
 DISTNAME=	libxklavier-5.0
-PKGREVISION=	4
+PKGREVISION=	5
 CATEGORIES=	x11
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=gswitchit/}
 EXTRACT_SUFX=	.tar.bz2
@@ -13,7 +13,6 @@ COMMENT=	High-level API for the X Keyboard Extension (XKB)
 LICENSE=	gnu-lgpl-v2
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=		pkg-config
 GNU_CONFIGURE=		YES

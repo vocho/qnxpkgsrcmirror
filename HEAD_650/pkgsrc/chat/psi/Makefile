@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.66 2012/03/03 00:12:49 wiz Exp $
+# $NetBSD: Makefile,v 1.71 2012/10/08 23:01:18 adam Exp $
 
 PSI_VERSION=	0.14
 DISTNAME=	psi-${PSI_VERSION}
 PKGNAME=	${DISTNAME:S/-rc/rc/}
-PKGREVISION=	6
+PKGREVISION=	10
 CATEGORIES=	chat
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=psi/}
 EXTRACT_SUFX=	.tar.bz2
@@ -12,8 +12,6 @@ MAINTAINER=	eric@cirr.com
 HOMEPAGE=	http://psi-im.org/
 COMMENT=	Psi XMPP/Jabber Client
 LICENSE=	gnu-gpl-v2
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 DEPENDS+=	qca2-ossl>=2.0.0beta3:../../security/qca2-ossl
 

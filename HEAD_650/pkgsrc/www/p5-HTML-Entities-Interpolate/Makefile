@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.1.1.1 2012/03/08 11:28:25 fhajny Exp $
+# $NetBSD: Makefile,v 1.3 2012/10/28 06:30:36 asau Exp $
 #
 
 DISTNAME=	HTML-Entities-Interpolate-1.04
 PKGNAME=	p5-${DISTNAME}
+PKGREVISION=	1
 CATEGORIES=	www
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=HTML/}
 EXTRACT_SUFX=	.tgz
@@ -11,8 +12,6 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://search.cpan.org/dist/HTML-Entities-Interpolate/
 COMMENT=	Call HTML::Entities::encode_entities, via a hash, within a string
 LICENSE=	${PERL5_LICENSE}
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 BUILD_DEPENDS+=	p5-Test-Simple>=0:../../devel/p5-Test-Simple
 BUILD_DEPENDS+=	p5-Test-Pod>=0:../../devel/p5-Test-Pod

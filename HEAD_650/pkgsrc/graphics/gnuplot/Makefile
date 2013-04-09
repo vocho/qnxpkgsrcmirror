@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.61 2012/08/10 15:14:53 drochner Exp $
+# $NetBSD: Makefile,v 1.71 2012/11/18 01:56:20 joerg Exp $
 
-DISTNAME=	gnuplot-4.6.0
+DISTNAME=	gnuplot-4.6.1
+PKGREVISION=	1
 CATEGORIES+=	graphics
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=gnuplot/}
 
@@ -14,7 +15,6 @@ PATCHDIR=		${.CURDIR}/../../graphics/gnuplot/patches
 DISTINFO_FILE=		${.CURDIR}/../../graphics/gnuplot/distinfo
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=		makeinfo pkg-config gmake
 GNU_CONFIGURE=		yes
@@ -23,6 +23,7 @@ CONFIGURE_ARGS+=	--with-plot=${PREFIX}
 CONFIGURE_ARGS+=	--without-latex
 CONFIGURE_ARGS+=	--without-lisp-files
 CONFIGURE_ARGS+=	--without-tutorial
+CONFIGURE_ARGS+=	ac_cv_prog_EMACS=
 INFO_FILES=		yes
 USE_LANGUAGES=		c
 
@@ -30,8 +31,13 @@ USE_LANGUAGES=		c
 .include "../../mk/bsd.prefs.mk"
 
 .if !empty(OPSYS:M*BSD) || ${OPSYS} == "DragonFly" || ${OPSYS} == "Darwin"
+.  if ${OPSYS} == "NetBSD" && !empty(OS_VERSION:M[01234].*)
+CONFIGURE_ARGS+=        --with-readline=${BUILDLINK_PREFIX.readline}
+.include "../../devel/readline/buildlink3.mk"
+.  else
 CONFIGURE_ARGS+=	--with-readline=bsd
 .include "../../mk/curses.buildlink3.mk"
+.  endif
 .else
 CONFIGURE_ARGS+=	--with-readline=${BUILDLINK_PREFIX.readline}
 .include "../../devel/readline/buildlink3.mk"
@@ -46,6 +52,7 @@ SUBST_SED.fontpath=	-e 's,@PKGSRC_PREFIX@,"${PREFIX}",'
 
 .include "options.mk"
 
+.include "../../converters/libiconv/buildlink3.mk"
 .include "../../devel/pango/buildlink3.mk"
 .include "../../graphics/cairo/buildlink3.mk"
 .include "../../graphics/plotutils/buildlink3.mk"

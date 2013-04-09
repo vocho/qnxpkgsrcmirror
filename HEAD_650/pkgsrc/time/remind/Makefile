@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.16 2010/09/09 11:39:58 obache Exp $
+# $NetBSD: Makefile,v 1.18 2012/10/08 13:04:29 asau Exp $
 #
 
 DISTNAME=	remind-03.01.09
 PKGNAME=	${DISTNAME:C/0([0-9])/\1/g}
+PKGREVISION=	1
 CATEGORIES=	time
 MASTER_SITES=	http://www.roaringpenguin.com/files/download/
 
@@ -10,8 +11,6 @@ MAINTAINER=	kim@tac.nyc.ny.us
 HOMEPAGE=	http://www.roaringpenguin.com/products/remind
 COMMENT=	Calendar/alarm program with interpreted input language
 LICENSE=	gnu-gpl-v2
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=	yes
 USE_TOOLS+=	perl:run

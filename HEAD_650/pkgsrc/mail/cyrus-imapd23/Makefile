@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.19 2012/04/27 12:31:52 obache Exp $
+# $NetBSD: Makefile,v 1.21 2012/10/08 12:19:07 asau Exp $
 
 DISTNAME=	cyrus-imapd-2.3.18
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	mail
 MASTER_SITES=	http://cyrusimap.org/releases/ \
 		ftp://ftp.cyrusimap.org/cyrus-imapd/ \
@@ -13,8 +13,6 @@ COMMENT=	Cyrus IMAP server
 #LICENSE=	original-bsd # like license
 
 BUILD_DEPENDS+=	p5-Digest-SHA1-[0-9]*:../../security/p5-Digest-SHA1
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=		perl makedepend
 USE_PKGLOCALEDIR=	yes

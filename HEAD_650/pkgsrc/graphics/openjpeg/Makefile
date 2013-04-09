@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.3 2012/07/11 09:07:21 wiz Exp $
+# $NetBSD: Makefile,v 1.5 2012/10/25 11:33:40 drochner Exp $
 #
 
 DISTNAME=		openjpeg-1.5.0
-PKGREVISION=		1
+PKGREVISION=		2
 CATEGORIES=		graphics
 MASTER_SITES=		http://openjpeg.googlecode.com/files/
 
@@ -10,8 +10,6 @@ MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://www.openjpeg.org/
 COMMENT=		JPEG 2000 library
 LICENSE=		2-clause-bsd
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=		yes
 CONFIGURE_ARGS+=	--disable-doc

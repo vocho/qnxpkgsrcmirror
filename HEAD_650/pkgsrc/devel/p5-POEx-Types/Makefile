@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.1.1.1 2011/12/12 03:57:11 hiramatsu Exp $
+# $NetBSD: Makefile,v 1.3 2012/10/31 11:18:43 asau Exp $
 
 DISTNAME=	POEx-Types-1.100910
 PKGNAME=	p5-${DISTNAME}
+PKGREVISION=	1
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=../../authors/id/N/NP/NPEREZ/}
 
@@ -9,8 +10,6 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://search.cpan.org/dist/POEx-Types/
 COMMENT=	Exported Types for use within POEx modules
 LICENSE=	${PERL5_LICENSE}
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_LANGUAGES=	# empty
 PERL5_PACKLIST= auto/POEx/Types/.packlist

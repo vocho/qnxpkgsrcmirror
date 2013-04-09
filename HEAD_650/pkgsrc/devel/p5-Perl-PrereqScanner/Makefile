@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.1 2012/07/05 14:42:23 sno Exp $
+# $NetBSD: Makefile,v 1.4 2012/10/31 11:18:48 asau Exp $
 #
 
-DISTNAME=	Perl-PrereqScanner-1.013
+DISTNAME=	Perl-PrereqScanner-1.014
 PKGNAME=	p5-${DISTNAME}
+PKGREVISION=	1
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Perl/}
 
@@ -12,7 +13,6 @@ COMMENT=	Tool to scan your Perl code for its prerequisites
 LICENSE=	${PERL5_LICENSE}
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 DEPENDS+=	p5-CPAN-Meta-Requirements>=2.120.630:../../devel/p5-CPAN-Meta-Requirements
 DEPENDS+=	p5-List-MoreUtils-[0-9]*:../../devel/p5-List-MoreUtils

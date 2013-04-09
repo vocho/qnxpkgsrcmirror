@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.14 2012/04/27 12:31:50 obache Exp $
+# $NetBSD: Makefile,v 1.17 2012/10/06 14:25:12 asau Exp $
 #
 
 DISTNAME=	ibus-pinyin-1.4.0
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	inputmethod chinese
 MASTER_SITES=	http://ibus.googlecode.com/files/
 DISTFILES=	${DEFAULT_DISTFILES} ${DBTAR}
@@ -11,8 +11,6 @@ MAINTAINER=	obache@NetBSD.org
 HOMEPAGE=	http://code.google.com/p/ibus/
 COMMENT=	Chinese Pinyin and Bopomofo engines for IBus input platform
 LICENSE=	gnu-gpl-v2
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=		yes
 USE_LIBTOOL=		yes
@@ -44,7 +42,7 @@ CONFIGURE_ARGS+=	--enable-db-open-phrase
 .include "../../mk/bsd.prefs.mk"
 .include "../../mk/compiler.mk"
 
-.if ${OPSYS} == "Linux"
+.if ${OPSYS} == "Linux" || ${OPSYS} == "SunOS"
 .  include "../../devel/libuuid/buildlink3.mk"
 .endif
 

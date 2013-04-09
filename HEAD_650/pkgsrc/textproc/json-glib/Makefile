@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.14 2012/03/03 00:12:13 wiz Exp $
+# $NetBSD: Makefile,v 1.16 2012/10/25 06:56:02 asau Exp $
 #
 
 DISTNAME=	json-glib-0.14.2
-PKGREVISION=	2
+PKGREVISION=	3
 CATEGORIES=	textproc
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/json-glib/0.14/}
 EXTRACT_SUFX=	.tar.bz2
@@ -11,8 +11,6 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://live.gnome.org/JsonGlib
 COMMENT=	JSON parser for GLib-based libraries and applications
 LICENSE=	gnu-lgpl-v2.1
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=	yes
 USE_LIBTOOL=	yes

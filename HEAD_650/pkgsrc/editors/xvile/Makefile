@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.63 2012/08/07 09:42:35 marino Exp $
+# $NetBSD: Makefile,v 1.65 2012/10/03 21:56:00 wiz Exp $
 
 DISTNAME=		vile-9.8
 PKGNAME=		x${DISTNAME}
+PKGREVISION=		1
 CATEGORIES=		editors
 MASTER_SITES=		ftp://invisible-island.net/vile/
 EXTRACT_SUFX=		.tgz
@@ -10,8 +11,6 @@ MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://invisible-island.net/vile/
 COMMENT=		VI Like Emacs, X11 version -- a fully "X aware" vi work-alike
 LICENSE=		gnu-gpl-v2
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 DISTINFO_FILE=		${.CURDIR}/../../editors/vile/distinfo
 PATCHDIR=		${.CURDIR}/../../editors/vile/patches

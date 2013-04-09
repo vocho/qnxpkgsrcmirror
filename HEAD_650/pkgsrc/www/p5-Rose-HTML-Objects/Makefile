@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.14 2011/10/28 01:12:22 hiramatsu Exp $
+# $NetBSD: Makefile,v 1.16 2012/10/28 06:30:50 asau Exp $
 
 DISTNAME=	Rose-HTML-Objects-0.611
 PKGNAME=	p5-${DISTNAME}
+PKGREVISION=	1
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Rose/}
 
@@ -29,8 +30,6 @@ BUILD_DEPENDS+=	p5-Test-Memory-Cycle-[0-9]*:../../devel/p5-Test-Memory-Cycle
 
 USE_LANGUAGES=	# empty
 PERL5_PACKLIST=		auto/Rose/HTML/Objects/.packlist
-
-PKG_DESTDIR_SUPPORT=    user-destdir
 
 post-extract:
 	${FIND} ${WRKSRC} -name "*.pm" -type f -exec ${CHMOD} -x {} \;

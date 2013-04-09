@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.4 2012/04/18 00:06:12 joerg Exp $
+# $NetBSD: Makefile,v 1.6 2012/10/03 18:28:27 asau Exp $
 
-DISTNAME=		misaki_bdf_b11a
-PKGNAME=		${DISTNAME:S/misaki_bdf_b/misaki-fonts-0beta/}
+DISTNAME=		misaki_bdf_2012-06-03
+PKGNAME=		${DISTNAME:S/-//g:S/misaki_bdf_/misaki-fonts-1.0./}
 CATEGORIES=		fonts x11 japanese
 MASTER_SITES=		http://www.geocities.jp/littlimi/arc/misaki/
 
@@ -9,8 +9,6 @@ MAINTAINER=		ryoon@NetBSD.org
 HOMEPAGE=		http://www.geocities.jp/littlimi/misaki.htm
 COMMENT=		8x8 dots X11 bitmap font for JIS X 0208
 LICENSE=		mplusfont
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 WRKSRC=			${WRKDIR}
 USE_X11BASE=		YES
@@ -28,7 +26,7 @@ INSTALL_FONTS=		misaki_gothic.bdf \
 			misaki_mincho.bdf \
 			misaki_4x8_iso8859.bdf \
 			misaki_4x8_jisx0201.bdf
-INSTALL_DOCS=		misaki_bdf.txt \
+INSTALL_DOCS=		misaki.txt \
 			readme.txt
 
 do-build:

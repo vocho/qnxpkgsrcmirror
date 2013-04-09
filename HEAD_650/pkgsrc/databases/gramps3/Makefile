@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.31 2012/08/14 18:12:44 drochner Exp $
+# $NetBSD: Makefile,v 1.38 2012/11/06 18:49:17 drochner Exp $
 #
 
-DISTNAME=		gramps-3.3.2
-PKGREVISION=		2
+DISTNAME=		gramps-3.4.2
 CATEGORIES=		databases
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=gramps/}
 
@@ -11,9 +10,7 @@ HOMEPAGE=		http://gramps-project.org/
 COMMENT=		Genealogical Research and Analysis Management Programming System V3
 LICENSE=		gnu-gpl-v2
 
-DEPENDS+=		xdg-utils-[0-9]*:../../misc/xdg-utils
-
-PKG_DESTDIR_SUPPORT=	user-destdir
+#DEPENDS+=		xdg-utils-[0-9]*:../../misc/xdg-utils
 
 USE_TOOLS+=		msgfmt pkg-config intltool msgconv
 USE_PKGLOCALEDIR=	yes
@@ -22,6 +19,11 @@ GNU_CONFIGURE=		yes
 REPLACE_PYTHON=		src/DateHandler/_Date_fr.py
 REPLACE_PYTHON+=	src/plugins/quickview/Reporef.py
 REPLACE_PYTHON+=	src/plugins/rel/rel_fr.py
+REPLACE_PYTHON+=	src/PlaceUtils.py
+REPLACE_PYTHON+=	src/plugins/gramplet/MetadataViewer.py
+REPLACE_PYTHON+=	src/plugins/lib/libhtml.py
+REPLACE_PYTHON+=	src/plugins/lib/libmetadata.py
+REPLACE_PYTHON+=	src/plugins/webreport/WebCal.py
 
 # pkgsrc registers mime files using mimedb.mk (see below)
 CONFIGURE_ARGS+=	--enable-packager-mode

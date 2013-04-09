@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.10 2012/05/29 13:56:36 wiz Exp $
+# $NetBSD: Makefile,v 1.15 2012/10/08 23:01:14 adam Exp $
 #
 
 DISTNAME=	sfxr-sdl-1.2.1
 PKGNAME=	${DISTNAME:S/-sdl//}
+PKGREVISION=	4
 CATEGORIES=	audio
 MASTER_SITES=	http://www.drpetter.se/files/
 
@@ -10,8 +11,6 @@ MAINTAINER=	wiz@NetBSD.org
 HOMEPAGE=	http://www.drpetter.se/project_sfxr.html
 COMMENT=	Sound generator for 8-bit game sounds
 LICENSE=	mit
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_LANGUAGES=	c++
 USE_TOOLS+=	gmake pkg-config

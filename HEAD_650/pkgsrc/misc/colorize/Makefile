@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.18 2010/02/26 10:28:33 wiz Exp $
+# $NetBSD: Makefile,v 1.20 2012/10/08 09:57:18 asau Exp $
 #
 
 DISTNAME=	colorize_0.3.0
 PKGNAME=	colorize-0.3.0
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	misc
 MASTER_SITES=	http://colorize.raszi.hu/downloads/
 EXTRACT_SUFX=	.tar.bz2
@@ -11,8 +11,6 @@ EXTRACT_SUFX=	.tar.bz2
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	# http://colorize.raszi.hu/
 COMMENT=	Log colorize perl script
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 WRKSRC=		${WRKDIR}/${PKGNAME_NOREV}
 NO_BUILD=	yes

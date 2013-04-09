@@ -1,12 +1,10 @@
-# $NetBSD: Makefile,v 1.52 2012/08/13 14:25:41 wiz Exp $
-
-PKG_DESTDIR_SUPPORT=	user-destdir
+# $NetBSD: Makefile,v 1.57 2012/10/08 23:01:49 adam Exp $
 
 .include "../../graphics/sane-backends/Makefile.common"
 
 DISTNAME=	sane-frontends-${SANE_VERSION}
 SANE_MICRO=	14
-PKGREVISION=	17
+PKGREVISION=	21
 
 COMMENT=	Frontends for access to scanners, digital cameras, frame grabbers etc
 

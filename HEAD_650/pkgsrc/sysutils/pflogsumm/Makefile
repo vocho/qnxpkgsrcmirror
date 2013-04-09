@@ -1,15 +1,14 @@
-# $NetBSD: Makefile,v 1.11 2008/06/12 02:14:46 joerg Exp $
+# $NetBSD: Makefile,v 1.13 2012/10/23 19:51:19 asau Exp $
 #
 
 DISTNAME=		pflogsumm-1.1.0
+PKGREVISION=		1
 CATEGORIES=		sysutils mail
 MASTER_SITES=		ftp://jimsun.linxnet.com/pub/postfix_contrib/
 
 MAINTAINER=		kim@tac.nyc.ny.us
 HOMEPAGE=		http://jimsun.linxnet.com/postfix_contrib.html
 COMMENT=		Produce summaries from Postfix syslog data
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 DEPENDS+=		p5-Date-Calc-[0-9]*:../../devel/p5-Date-Calc
 

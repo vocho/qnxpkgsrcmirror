@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.2 2012/07/01 03:52:54 dholland Exp $
+# $NetBSD: Makefile,v 1.7 2012/10/03 22:14:00 wiz Exp $
 #
 
 DISTNAME=	audiotools-2.18
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
+PKGREVISION=	2
 CATEGORIES=	audio
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=audiotools/2.18/}
 
@@ -11,11 +12,7 @@ HOMEPAGE=	http://audiotools.sourceforge.net/
 COMMENT=	Collection of command line audio handling programs
 LICENSE=	gnu-gpl-v2
 
-PKG_DESTDIR_SUPPORT=	user-destdir
-
 USE_LANGUAGES=	c
-
-PYTHON_VERSIONS_INCOMPATIBLE=	25
 
 REPLACE_INTERPRETER+=	python
 REPLACE.python.old=	/usr/bin/python
@@ -30,6 +27,8 @@ REPLACE.bin-python.new=	${PYTHONBIN}
 REPLACE_FILES.bin-python=	audiotools/player.py
 
 EGG_NAME=	Python_Audio_Tools-${PKGVERSION_NOREV}
+
+DEPENDS+=	${PYPKGPREFIX}-urwid-[0-9]*:../../devel/py-urwid
 
 .include "../../lang/python/distutils.mk"
 .include "../../misc/libcdio/buildlink3.mk"

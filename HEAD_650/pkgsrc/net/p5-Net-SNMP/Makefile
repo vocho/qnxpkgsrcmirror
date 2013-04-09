@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.28 2012/05/31 09:07:07 sno Exp $
+# $NetBSD: Makefile,v 1.30 2012/10/23 17:18:51 asau Exp $
 #
 
 DISTNAME=	Net-SNMP-v6.0.1
 PKGNAME=	p5-${DISTNAME:S/v6/6/}
+PKGREVISION=	1
 SVR4_PKGNAME=	p5nsn
 CATEGORIES=	net perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Net/}
@@ -11,8 +12,6 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://search.cpan.org/dist/Net-SNMP/
 COMMENT=	Perl5 module for SNMP queries
 LICENSE=	${PERL5_LICENSE}
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 DEPENDS+=	p5-Crypt-DES>=2.03:../../security/p5-Crypt-DES
 DEPENDS+=	p5-Crypt-Rijndael>=1.02:../../security/p5-Crypt-Rijndael

@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.37 2012/04/03 04:34:09 obache Exp $
+# $NetBSD: Makefile,v 1.39 2012/10/23 17:19:13 asau Exp $
 
 DISTNAME=		tightvnc-1.3.10
-PKGREVISION=		5
+PKGREVISION=		6
 CATEGORIES=		net x11
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=vnc-tight/}
 DISTFILES=		${DISTNAME}_unixsrc.tar.bz2
@@ -11,7 +11,6 @@ HOMEPAGE=		http://www.tightvnc.com/
 COMMENT=		Display X and Win32 desktops on remote X/Win32/Java displays
 
 CONFLICTS=		vnc-[0-9]* vncviewer-[0-9]*
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 WRKSRC=			${WRKDIR}/vnc_unixsrc
 CRYPTO=			yes

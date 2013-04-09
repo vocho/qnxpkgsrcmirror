@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.7 2011/08/14 14:14:43 obache Exp $
+# $NetBSD: Makefile,v 1.9 2012/10/23 17:18:48 asau Exp $
 #
 
 DISTNAME=		Net-FTPSSL-0.14
 PKGNAME=		p5-${DISTNAME}
-PKGREVISION=		2
+PKGREVISION=		3
 CATEGORIES=		net perl5 security
 MASTER_SITES=		${MASTER_SITE_PERL_CPAN:=Net/}
 
@@ -16,7 +16,6 @@ DEPENDS+=		p5-IO-Socket-SSL>=1.08:../../security/p5-IO-Socket-SSL
 DEPENDS+=		p5-Net-SSLeay-[0-9]*:../../security/p5-Net-SSLeay
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_LANGUAGES=		# empty
 PERL5_PACKLIST=		auto/Net/FTPSSL/.packlist

@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.2 2012/02/13 17:14:13 minskim Exp $
+# $NetBSD: Makefile,v 1.4 2012/10/31 11:17:00 asau Exp $
 #
 
 DISTNAME=	sitaramc-gitolite-v2.2-0-g15b17d7
 PKGNAME=	${DISTNAME:S/sitaramc-gitolite-v/gitolite-/:C/-0-.*//}
+PKGREVISION=	1
 CATEGORIES=	devel net
 MASTER_SITES=	-https://github.com/sitaramc/gitolite/tarball/v2.2
 
@@ -10,8 +11,6 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	https://github.com/sitaramc/gitolite/wiki
 COMMENT=	Gitolite allows you to host Git repositories easily and securely
 LICENSE=	gnu-gpl-v2
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 DEPENDS+=	scmgit-base-[0-9]*:../../devel/scmgit-base
 

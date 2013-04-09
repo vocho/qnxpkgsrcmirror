@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.1.1.1 2011/10/12 03:15:20 jnemeth Exp $
+# $NetBSD: Makefile,v 1.3 2012/10/25 06:55:56 asau Exp $
 #
 
 DISTNAME=	iksemel-1.4
+PKGREVISION=	1
 CATEGORIES=	textproc
 MASTER_SITES=	http://iksemel.googlecode.com/files/
 
@@ -16,8 +17,6 @@ USE_TOOLS+=	pkg-config
 INFO_FILES=	yes
 
 PKGCONFIG_OVERRIDE+=	iksemel.pc.in
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 .include "../../mk/bsd.prefs.mk"
 

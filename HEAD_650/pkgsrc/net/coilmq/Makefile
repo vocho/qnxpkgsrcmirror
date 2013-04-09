@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.2 2012/08/15 05:51:56 dholland Exp $
+# $NetBSD: Makefile,v 1.4 2012/10/23 17:18:15 asau Exp $
 #
 
 DISTNAME=	CoilMQ-0.6.1
@@ -11,16 +11,11 @@ HOMEPAGE=	http://code.google.com/p/coilmq/
 COMMENT=	Lightweight Python STOMP message broker
 LICENSE=	apache-2.0
 
-PKG_DESTDIR_SUPPORT=	user-destdir
-
 DEPENDS+=	${PYPKGPREFIX}-sqlalchemy>=0.6.9:../../databases/py-sqlalchemy
 DEPENDS+=	${PYPKGPREFIX}-stompclient>=0.3.2:../../devel/py-stompclient
 DEPENDS+=	${PYPKGPREFIX}-daemon>=1.5.5:../../devel/py-daemon
 
 USE_LANGUAGES=	# none
-
-# py-stompclient does not work on python25
-PYTHON_VERSIONS_INCOMPATIBLE=	25
 
 REPLACE_INTERPRETER+=	python
 REPLACE.python.old=	python

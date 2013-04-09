@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.190 2012/03/12 13:37:40 fhajny Exp $
+# $NetBSD: Makefile,v 1.193 2012/10/08 13:45:36 asau Exp $
 #
 # The CUPS author is very good about taking back changes into the main
 # CUPS distribution.  The correct place to send patches or bug-fixes is:
@@ -6,10 +6,10 @@
 
 DISTNAME=	cups-${DIST_VERS}-source
 PKGNAME=	cups-${DIST_VERS:S/-/./g}
-BASE_VERS=	1.5.2
+BASE_VERS=	1.5.4
 DIST_VERS=	${BASE_VERS}
-PKGREVISION=	1
 
+PKGREVISION=	1
 CATEGORIES=	print
 MASTER_SITES=	http://ftp.easysw.com/pub/cups/${BASE_VERS}/ \
 		ftp://ftp.easysw.com/pub/cups/${BASE_VERS}/ \
@@ -20,8 +20,6 @@ MAINTAINER=	sbd@NetBSD.org
 HOMEPAGE=	http://www.cups.org/
 COMMENT=	Common UNIX Printing System
 LICENSE=	gnu-gpl-v2 AND gnu-lgpl-v2
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 CONFLICTS+=	LPRng-[0-9]* LPRng-core-[0-9]*
 
@@ -140,7 +138,8 @@ SUBST_MESSAGE.rpathfix=	Adding rpath to cups-config.
 SUBST_SED.rpathfix=	-e 's|@EXPORT_LDFLAGS@|${COMPILER_RPATH_FLAG}${PREFIX}/lib|g'
 SUBST_STAGE.rpathfix=	post-patch
 
-.if !empty(OPSYS:MNetBSD) && !empty(MACHINE_ARCH:Mpowerpc)
+# QNX PR 288570
+.if (!empty(OPSYS:MNetBSD) && !empty(MACHINE_ARCH:Mpowerpc)) || ${OPSYS} == "QNX"
 SUBST_CLASSES+=		piefix
 SUBST_FILES.piefix=	Makedefs.in
 SUBST_MESSAGE.piefix=	Removing PIE flags
@@ -172,6 +171,9 @@ post-install:
 	done
 .if !empty(PKG_OPTIONS:Mpam)
 	${INSTALL_DATA} ${WRKDIR}/cups.pam ${DESTDIR}${EGDIR}
+.endif
+.if !empty(PKG_OPTIONS:Mdnssd)
+	${LN} -s ${DESTDIR}${PREFIX}/libexec/cups/backend/dnssd ${DESTDIR}${PREFIX}/libexec/cups/backend/mdns
 .endif
 
 .include "../../converters/libiconv/buildlink3.mk"

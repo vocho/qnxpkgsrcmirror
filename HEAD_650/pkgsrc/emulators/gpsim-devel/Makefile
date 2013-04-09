@@ -1,16 +1,14 @@
-# $NetBSD: Makefile,v 1.23 2012/05/10 07:10:43 dholland Exp $
+# $NetBSD: Makefile,v 1.28 2012/10/08 23:00:44 adam Exp $
 #
 
 DISTNAME=	gpsim-20050905
-PKGREVISION=	15
+PKGREVISION=	19
 CATEGORIES=	emulators
 MASTER_SITES=	http://www-asim.lip6.fr/~bouyer/pic/
 
 MAINTAINER=	bouyer@NetBSD.org
 HOMEPAGE=	http://gpsim.sourceforge.net/
 COMMENT=	PIC emulator with X interface
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=	YES
 USE_LANGUAGES=	c c++

@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.17 2012/08/13 14:25:39 wiz Exp $
+# $NetBSD: Makefile,v 1.22 2012/10/08 23:01:40 adam Exp $
 
 DISTNAME=	darktable-1.0.5
-PKGREVISION=	1
+PKGREVISION=	5
 CATEGORIES=	graphics
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=darktable/}
 
@@ -9,8 +9,6 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://darktable.sourceforge.net/
 COMMENT=	Photography workflow application
 LICENSE=	gnu-gpl-v3
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_CMAKE=		yes
 USE_LANGUAGES=		c c++

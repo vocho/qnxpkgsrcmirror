@@ -1,11 +1,10 @@
-# $NetBSD: Makefile,v 1.44 2012/06/14 07:44:24 sbd Exp $
+# $NetBSD: Makefile,v 1.50 2012/10/08 23:00:44 adam Exp $
 #
 
 BMP_ENABLE_ENCODERS=	yes
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 .include "Makefile.common"
-PKGREVISION=		19
+PKGREVISION=		23
 
 USE_TOOLS+=		unzip:run
 
@@ -21,10 +20,6 @@ PRINT_PLIST_AWK+=	/cdaudio/ { print "$${PLIST.cdaudio}" $$0; next }
 # for more information.
 USE_LANGUAGES=		c c++
 LDFLAGS.NetBSD+=	-lstdc++ -lm
-
-.if ${OPSYS} == "SunOS"
-MAKE_ENV+=	SunOS_LDFLAGS="-shared -mimpure-text"
-.endif
 
 .include "../../audio/id3lib/buildlink3.mk"
 .include "../../audio/libvorbis/buildlink3.mk"

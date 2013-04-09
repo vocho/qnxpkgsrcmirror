@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.18 2010/01/24 13:26:09 wiz Exp $
+# $NetBSD: Makefile,v 1.20 2012/10/22 21:46:26 rh Exp $
 #
 
-DISTNAME=	cdplayer-0.5
-PKGREVISION=	1
+DISTNAME=	cdplayer-0.5.1
 CATEGORIES=	audio gnustep
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=gsburn/}
 EXTRACT_SUFX=	.tar.bz2
@@ -11,8 +10,6 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://gsburn.sourceforge.net/
 COMMENT=	GNUstep CD player with CDDB support
 LICENSE=	gnu-gpl-v2
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 WRKSRC=		${WRKDIR}/CDPlayer-${PKGVERSION_NOREV}
 USE_LANGUAGES=	objc
@@ -25,13 +22,9 @@ MAKE_ENV+=	GNUSTEP_LIB_DIR=${GNUSTEP_LIB_DIR:Q}
 
 INSTALLATION_DIRS+=include/CDPlayer
 
-post-install:
-	${INSTALL_DATA} ${WRKSRC}/CDPlayer/AudioCDProtocol.h		\
-			${DESTDIR}${PREFIX}/include/CDPlayer
-
-.include "../../audio/libcdaudio/buildlink3.mk"
-.include "../../audio/cddb-bundle/buildlink3.mk"
 .include "../../x11/gnustep-back/buildlink3.mk"
 .include "../../x11/gnustep-preferences/buildlink3.mk"
+.include "../../audio/libcdaudio/buildlink3.mk"
+.include "../../audio/cddb-bundle/buildlink3.mk"
 .include "../../mk/pthread.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

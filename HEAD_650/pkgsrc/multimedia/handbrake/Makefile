@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.17 2012/07/01 19:05:22 dholland Exp $
+# $NetBSD: Makefile,v 1.23 2012/10/08 23:02:11 adam Exp $
 #
 
 DISTNAME=	HandBrake-0.9.3
 PKGNAME=	${DISTNAME:S/HandBrake/handbrake/}
-PKGREVISION=	12
+PKGREVISION=	17
 CATEGORIES=	multimedia
 MASTER_SITES=	http://download.m0k.org/handbrake/releases/ \
 		http://download.m0k.org/handbrake/contrib/
@@ -42,8 +42,6 @@ NO_BIN_ON_CDROM=${RESTRICTED}
 NO_BIN_ON_FTP=	${RESTRICTED}
 NO_SRC_ON_CDROM=${RESTRICTED}
 NO_SRC_ON_FTP=	${RESTRICTED}
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=	yes
 USE_TOOLS+=	gmake perl intltool msgfmt pkg-config bash

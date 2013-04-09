@@ -1,18 +1,20 @@
-# $NetBSD: Makefile,v 1.7 2009/07/08 14:44:00 joerg Exp $
+# $NetBSD: Makefile,v 1.10 2012/10/02 23:48:16 asau Exp $
 
-DISTNAME=	thrulay-0.8
+DISTNAME=	thrulay-0.9
 CATEGORIES=	benchmarks net
-MASTER_SITES=	http://shlang.com/thrulay/
+MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=thrulay/}
+EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://shlang.com/thrulay/
+HOMEPAGE=	http://thrulay.sourceforge.net/
 COMMENT=	TCP and UDP network capacity tester
+LICENSE=	modified-bsd
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 MAKE_JOBS_SAFE=		no
 
+USE_LIBTOOL=		yes
 GNU_CONFIGURE=		yes
 INSTALLATION_DIRS=	bin share/doc/thrulay
 

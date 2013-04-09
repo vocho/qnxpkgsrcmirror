@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.38 2011/04/22 13:42:05 obache Exp $
+# $NetBSD: Makefile,v 1.40 2012/10/03 21:54:12 wiz Exp $
 #
 
 DISTNAME=		gnome-mime-data-2.18.0
-PKGREVISION=		1
+PKGREVISION=		2
 CATEGORIES=		databases gnome
 MASTER_SITES=		${MASTER_SITE_GNOME:=sources/gnome-mime-data/2.18/}
 EXTRACT_SUFX=		.tar.bz2
@@ -12,7 +12,6 @@ HOMEPAGE=		http://www.gnome.org/
 COMMENT=		MIME and Application database for GNOME2
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 CONFLICTS=		gnome-vfs<=1.0.3
 

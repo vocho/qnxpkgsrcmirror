@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.10 2012/03/03 00:14:07 wiz Exp $
+# $NetBSD: Makefile,v 1.13 2012/10/28 06:30:24 asau Exp $
 #
 
 DISTNAME=	nvu-1.0-sources
 PKGNAME=	${DISTNAME:S/-sources//}
-PKGREVISION=	4
+PKGREVISION=	6
 CATEGORIES=	www
 MASTER_SITES=	http://cvs.nvu.com/download/
 EXTRACT_SUFX=	.tar.bz2
@@ -11,8 +11,6 @@ EXTRACT_SUFX=	.tar.bz2
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.nvu.com/
 COMMENT=	Web Authoring System
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 WRKSRC=		${WRKDIR}/mozilla
 GNU_CONFIGURE=	yes

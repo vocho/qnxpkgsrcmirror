@@ -1,16 +1,14 @@
-# $NetBSD: Makefile,v 1.11 2012/03/03 00:11:56 wiz Exp $
+# $NetBSD: Makefile,v 1.14 2012/10/23 19:51:26 asau Exp $
 #
 
 DISTNAME=		system-tools-backends-2.6.1
-PKGREVISION=		6
+PKGREVISION=		8
 CATEGORIES=		sysutils
 MASTER_SITES=		http://system-tools-backends.freedesktop.org/downloads/2.6/
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://system-tools-backends.freedesktop.org/
 COMMENT=		DBus interface for system configuration
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.system-tools-backends
 PKG_SUPPORTED_OPTIONS+=	hal

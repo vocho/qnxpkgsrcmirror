@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.26 2009/11/09 19:08:42 tnn Exp $
+# $NetBSD: Makefile,v 1.28 2012/10/29 05:07:00 asau Exp $
 #
 
 DISTNAME=	xcompmgr-1.1.5
@@ -9,8 +9,6 @@ EXTRACT_SUFX=	.tar.bz2
 MAINTAINER=	joerg@NetBSD.org
 HOMEPAGE=	http://www.freedesktop.org/
 COMMENT=	Sample compositing manager for X.org >= 6.8.0
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=	pkg-config
 GNU_CONFIGURE=	yes
@@ -27,13 +25,6 @@ XCOMPMGR_DEFS+=		-DCAN_DO_USABLE=1	# default: 0 (damage notification)
 #XCOMPMGR_DEFS+=	-DSHARP_SHADOW=0	# default  0 (?)
 
 CPPFLAGS+=	${XCOMPMGR_DEFS}
-
-.include "../../mk/bsd.prefs.mk"
-
-.if defined(X11_TYPE) && !empty(X11_TYPE:MXFree86) || \
-    defined(X11_TYPE) && !empty(X11_TYPE:Mnative) || !defined(X11_TYPE)
-PKG_FAIL_REASON+=	"This package is exclusively for X.org."
-.endif
 
 .include "../../x11/compositeproto/buildlink3.mk"
 .include "../../x11/libXdamage/buildlink3.mk"

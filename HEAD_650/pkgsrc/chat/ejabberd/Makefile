@@ -1,15 +1,14 @@
-# $NetBSD: Makefile,v 1.26 2012/06/11 13:11:11 fhajny Exp $
+# $NetBSD: Makefile,v 1.30 2012/10/03 00:02:35 asau Exp $
 
-DISTNAME=	ejabberd-2.1.10
+DISTNAME=	ejabberd-2.1.11
 CATEGORIES=	chat
-MASTER_SITES=	http://www.process-one.net/downloads/ejabberd/${PKGVERSION}/
+MASTER_SITES=	http://www.process-one.net/downloads/ejabberd/${PKGVERSION_NOREV}/
+EXTRACT_SUFX=	.tgz
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.ejabberd.im/
 COMMENT=	Free and Open Source distributed fault-tolerant Jabber server
 LICENSE=	gnu-gpl-v2
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 CONFLICTS+=	jabberd-[0-9]*
 
@@ -31,6 +30,7 @@ CONFIGURE_ARGS+=	--with-zlib=${BUILDLINK_PREFIX.zlib}
 CONFIGURE_ARGS+=	--with-expat=${BUILDLINK_PREFIX.expat}
 CONFIGURE_ARGS+=	--with-libiconv=${BUILDLINK_PREFIX.iconv}
 CONFIGURE_ARGS+=	--with-erlang=${BUILDLINK_PREFIX.erlang}
+CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFBASEDIR}
 
 CONFIGURE_DIRS+=	src
 BUILD_DIRS+=		src

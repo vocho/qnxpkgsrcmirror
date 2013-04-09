@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.18 2012/03/10 20:36:57 markd Exp $
+# $NetBSD: Makefile,v 1.21 2012/11/17 22:30:44 markd Exp $
 #
 
 DISTNAME=		opal-3.6.6
-PKGREVISION=		2
+PKGREVISION=		3
 CATEGORIES=		devel net comms
 MASTER_SITES=		${MASTER_SITE_GNOME:=sources/opal/3.6/}
 EXTRACT_SUFX=		.tar.bz2
@@ -12,7 +12,6 @@ HOMEPAGE=		http://www.opalvoip.org/
 COMMENT=		Open Phone Abstraction Library
 LICENSE=		mpl-1.0
 
-PKG_DESTDIR_SUPPORT=	user-destdir
 PREV_PKGPATH=		devel/opal-devel
 
 OPALLIBDIR=		${DISTNAME}
@@ -29,6 +28,7 @@ CONFIGURE_ARGS+=	--enable-h264
 CONFIGURE_ARGS+=	--disable-ffmpeg-h263
 CONFIGURE_ARGS+=	--disable-localgsm
 CONFIGURE_ARGS+=	--disable-localspeex
+CONFIGURE_ARGS+=	--disable-ivr
 
 USE_LANGUAGES=		c c++
 USE_TOOLS+=		gmake

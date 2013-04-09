@@ -1,11 +1,8 @@
-# $NetBSD: Makefile,v 1.60 2011/04/22 13:43:27 obache Exp $
+# $NetBSD: Makefile,v 1.62 2012/10/03 11:43:46 asau Exp $
 
 PKGNAME=		vim-gtk-${VIM_VERSION}.${VIM_PATCHLEVEL}
-PKGREVISION=		1
 
 COMMENT=		Vim editor (vi clone) with X11 GTK+ GUI
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 .include		"../../editors/vim-share/Makefile.common"
 

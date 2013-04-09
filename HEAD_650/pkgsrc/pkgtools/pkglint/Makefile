@@ -1,10 +1,9 @@
-# $NetBSD: Makefile,v 1.415 2012/08/05 09:55:54 wiz Exp $
-#
+# $NetBSD: Makefile,v 1.422 2012/11/20 11:41:29 abs Exp $
 
 # Note: if you update the version number, please have a look at the
 # changes between the CVS tag "pkglint_current" and HEAD.
 # After updating, please re-set the CVS tag to HEAD.
-DISTNAME=	pkglint-4.122
+DISTNAME=	pkglint-4.126
 CATEGORIES=	pkgtools
 MASTER_SITES=	# none
 DISTFILES=	# none
@@ -18,7 +17,6 @@ DEPENDS+=	p5-enum>=1.016:../../devel/p5-enum
 DEPENDS+=	p5-pkgsrc-Dewey>=1.0:../../pkgtools/p5-pkgsrc-Dewey
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 WRKSRC=		${WRKDIR}
 NO_CHECKSUM=	yes
