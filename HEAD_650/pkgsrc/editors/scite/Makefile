@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.8 2012/03/03 00:13:00 wiz Exp $
+# $NetBSD: Makefile,v 1.13 2012/10/08 23:01:29 adam Exp $
 #
 
 DISTNAME=	scite229
 PKGNAME=	scite-2.29
-PKGREVISION=	2
+PKGREVISION=	6
 CATEGORIES=	editors
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=scintilla/}
 EXTRACT_SUFX=	.tgz
@@ -12,8 +12,6 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://scintilla.sourceforge.net/
 COMMENT=	Source code editor
 #LICENSE=	# TODO: (see mk/license.mk)
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 WRKSRC=		${WRKDIR}/scite
 USE_LANGUAGES=	c c++

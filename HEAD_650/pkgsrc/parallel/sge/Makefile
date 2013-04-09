@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.48 2012/08/21 23:49:25 marino Exp $
+# $NetBSD: Makefile,v 1.50 2012/10/03 21:57:14 wiz Exp $
 #
 
 DISTNAME=		sge-8.0.0d
 PKGNAME=		sge-8.0.0.4
-PKGREVISION=		3
+PKGREVISION=		4
 CATEGORIES=		parallel sysutils
 MASTER_SITES=		http://arc.liv.ac.uk/downloads/SGE/releases/8.0.0d/
 
@@ -11,8 +11,6 @@ MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		https://arc.liv.ac.uk/trac/SGE
 COMMENT=		Son of Grid Engine distributed resource management system
 LICENSE=		sun-iss AND 2-clause-bsd AND gnu-gpl-v2 AND gnu-lgpl-v2
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=		YES
 USE_TOOLS+=		gmake csh perl:run

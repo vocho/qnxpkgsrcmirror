@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.9 2011/03/21 02:33:14 obache Exp $
+# $NetBSD: Makefile,v 1.11 2012/10/23 17:18:40 asau Exp $
 
 DISTNAME=		repackaged-${PKGNAME_NOREV}
 PKGNAME=		nasd-1.3
-PKGREVISION=		1
+PKGREVISION=		2
 CATEGORIES=		net sysutils
 MASTER_SITES=		${MASTER_SITE_LOCAL} # original tar file has some trailing base64 checksums
 
@@ -11,8 +11,6 @@ HOMEPAGE=		http://www.pdl.cmu.edu/NASD/Downloads/NASDcode.html
 COMMENT=		Prototype storage implementation
 
 ONLY_FOR_PLATFORM=	NetBSD-*-* SunOS-*-* Linux-*-*
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_IMAKE=		yes
 USE_TOOLS+=		perl makedepend

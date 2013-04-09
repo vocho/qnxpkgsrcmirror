@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.2 2012/06/14 07:44:44 sbd Exp $
+# $NetBSD: Makefile,v 1.4 2012/10/03 21:53:59 wiz Exp $
 #
 
 DISTNAME=	bodr-9
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	biology
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=bodr/}
 
@@ -10,8 +10,6 @@ MAINTAINER=	jihbed.research@gmail.com
 HOMEPAGE=	http://blueobelisk.org/
 COMMENT=	Blue Obelisk Data Repository
 LICENSE=	mit
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=	yes
 USE_TOOLS+=	pkg-config gmake perl

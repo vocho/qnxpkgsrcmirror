@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.6 2012/03/23 21:20:46 asau Exp $
+# $NetBSD: Makefile,v 1.8 2012/09/15 10:05:32 obache Exp $
 #
 
 DISTNAME=		open-axiom-1.4.1
 PKGNAME=		${DISTNAME:S/open-/open/}
+PKGREVISION=		1
 CATEGORIES=		math
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=open-axiom/}
 EXTRACT_SUFX=		.tar.bz2
@@ -11,7 +12,6 @@ MAINTAINER=		asau@inbox.ru
 HOMEPAGE=		http://www.open-axiom.org/
 COMMENT=		Platform for symbolic, algebraic, and numerical computations
 
-PKG_DESTDIR_SUPPORT=	user-destdir
 MAKE_JOBS_SAFE=		no
 
 USE_LANGUAGES=		c c++

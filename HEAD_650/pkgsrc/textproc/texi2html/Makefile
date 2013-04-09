@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.34 2011/01/25 11:29:54 markd Exp $
+# $NetBSD: Makefile,v 1.36 2012/10/25 06:57:04 asau Exp $
 
 DISTNAME=	texi2html-5.0
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	textproc
 MASTER_SITES=	http://savannah.nongnu.org/download/texi2html/
 EXTRACT_SUFX=	.tar.bz2
@@ -16,7 +16,6 @@ DEPENDS+=	p5-Locale-libintl-[0-9]*:../../misc/p5-Locale-libintl
 CONFLICTS=	teTeX-bin-1.*{,nb*}
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=		gmake perl:run
 GNU_CONFIGURE=		yes

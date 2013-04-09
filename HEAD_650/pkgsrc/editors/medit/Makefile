@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.3 2012/07/28 08:39:30 obache Exp $
+# $NetBSD: Makefile,v 1.8 2012/10/08 23:01:28 adam Exp $
 #
 
 DISTNAME=	medit-1.1.1
+PKGREVISION=	4
 CATEGORIES=	editors
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=mooedit/}
 EXTRACT_SUFX=	.tar.bz2
@@ -12,8 +13,6 @@ COMMENT=	Programming and around-programming text editor
 LICENSE=	gnu-lgpl-v2.1
 
 BUILD_DEPENDS+=	${PYPKGPREFIX}-expat-[0-9]*:../../textproc/py-expat
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=	yes
 USE_LIBTOOL=	yes

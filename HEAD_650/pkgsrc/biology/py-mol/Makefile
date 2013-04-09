@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.11 2012/04/08 19:08:45 wiz Exp $
+# $NetBSD: Makefile,v 1.14 2012/10/04 00:21:58 cheusov Exp $
 
 DISTNAME=	pymol-v1.4.1
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME:S/pymol-v/mol-/}
 EGG_NAME=	pymol-1.4.0
-PKGREVISION=	2
+PKGREVISION=	3
 CATEGORIES=	biology
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=pymol/}
 EXTRACT_SUFX=	.tar.bz2
@@ -17,11 +17,10 @@ USE_TOOLS+=	csh:run
 DEPENDS+=	${PYPKGPREFIX}-numpy-[0-9]*:../../math/py-numpy
 DEPENDS+=	${PYPKGPREFIX}-Pmw-[0-9]*:../../x11/py-Pmw
 
-PKG_DESTDIR_SUPPORT=	user-destdir
-
 WRKSRC=		${WRKDIR}/pymol
 
-CONFLICTS=	pymol-[0-9]*
+CONFLICTS=		pymol-[0-9]*
+PYTHON_SELF_CONFLICT=	yes
 
 USE_LANGUAGES=	c c++
 

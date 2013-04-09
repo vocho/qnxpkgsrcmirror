@@ -10,6 +10,8 @@
 #include <string.h>
 #include <sys/mman.h>
 #include <sys/neutrino.h>
+#include <sys/slog.h>
+#include <sys/slogcodes.h>
 
 #include <sys/shm.h>
 #include "shm_private.h"
@@ -134,6 +136,11 @@ shmget(key_t key, size_t size, int shmflag)
 	if (_shm_send(&msg, sizeof msg.i, &msg, sizeof msg.o) == -1) {
 		return -1;
 	}
+	/*
+	 * Added this for debugging firefox memory corruption issue
+	 * and it reliably makes it dissapear.  Leaving for now...
+	 */
+	slogf(_SLOG_SETCODE(_SLOGC_TEST, 0), _SLOG_ERROR, "shmget: size: %u pid: %d",  size, getpid());
 	
 	return msg.o.shmid;
 }
@@ -159,7 +166,7 @@ shmat(int shmid, const void *shmaddr, int shmflag)
 		return (void *)-1;
 	}
 		
-	sprintf(buf, "/dev/ipc/shm/%d", shmid);
+	snprintf(buf, sizeof(buf), "/dev/ipc/shm/%d", shmid);
 	if ((shmfd = shm_open(buf, (shmflag & SHM_RDONLY) ? O_RDONLY : O_RDWR, 0)) == -1) {
 		return (void *)-1;
 	}
@@ -174,7 +181,7 @@ shmat(int shmid, const void *shmaddr, int shmflag)
 	if (shmaddr != 0) {
 		flags |= MAP_FIXED;
 		if (shmflag & SHM_RND) {
-			shmaddr = (void *)((unsigned)shmaddr & ~(SHMLBA - 1));
+			shmaddr = (void *)((uintptr_t)shmaddr & ~(SHMLBA - 1));
 		} else if (((unsigned)shmaddr & (SHMLBA-1)) == 0) {
 			errno = EINVAL;
 			return (void *)-1;

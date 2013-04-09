@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.86 2012/06/15 23:06:02 dholland Exp $
+# $NetBSD: Makefile,v 1.91 2012/10/29 05:06:16 asau Exp $
 #
 
 DISTNAME=		gnome-themes-2.32.1
-PKGREVISION=		5
+PKGREVISION=		9
 CATEGORIES=		x11
 MASTER_SITES=		${MASTER_SITE_GNOME:=sources/gnome-themes/2.32/}
 EXTRACT_SUFX=		.tar.bz2
@@ -11,8 +11,6 @@ MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://www.gnome.org/
 COMMENT=		Collection of themes and icons for GNOME 2
 LICENSE=		gnu-lgpl-v2.1
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 CONFLICTS+=		clearlooks-metacity-[0-9]*
 

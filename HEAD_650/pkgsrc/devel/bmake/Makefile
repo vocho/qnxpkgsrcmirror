@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.58 2012/07/24 13:18:00 jperkin Exp $
+# $NetBSD: Makefile,v 1.60 2012/11/01 16:48:12 sjg Exp $
 #
 
 DISTNAME=	bmake-20110606
@@ -16,7 +16,6 @@ LICENSE=	modified-bsd
 
 DEPENDS+=	bootstrap-mk-files-[0-9]*:../../pkgtools/bootstrap-mk-files
 
-PKG_DESTDIR_SUPPORT=	user-destdir
 BOOTSTRAP_PKG=	yes
 
 WRKSRC=		${WRKDIR}/bmake
@@ -38,7 +37,7 @@ CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR:Q}
 CONFIGURE_ARGS+=	--with-defshell=/usr/bin/bash
 .elif ${OPSYS} == "SunOS" && ${OS_VERSION} == "5.11"
 CONFIGURE_ARGS+=	--with-defshell=/bin/ksh
-.elif ${OPSYS} == "SunOS" || ${OPSYS} == "OSF1"
+.elif ${OPSYS} == "SunOS" || ${OPSYS} == "OSF1" || ${OPSYS} == "IRIX"
 DEPENDS+=		pdksh-[0-9]*:../../shells/pdksh
 CONFIGURE_ARGS+=	--with-defshell=${PREFIX}/bin/pdksh
 .endif

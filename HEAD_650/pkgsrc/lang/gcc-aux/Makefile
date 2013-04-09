@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.3 2012/08/03 08:53:57 marino Exp $
+# $NetBSD: Makefile,v 1.6 2012/10/03 21:56:18 wiz Exp $
 #
 
 PKGNAME=	gcc-aux-${SNAPSHOT}
 DISTNAME=	gcc-${GCC_VERSION}
-PKGREVISION=	2
+PKGREVISION=	1
 CATEGORIES=	lang
 MASTER_SITES=	${MASTER_SITE_GNU:=gcc/gcc-${GCC_VERSION}/}
 DISTFILES=	${DISTNAME}.tar.bz2
@@ -13,13 +13,11 @@ HOMEPAGE=	http://www.dragonlace.net/
 COMMENT=	GNAT Ada compiler based on GCC ${GCC_BRANCH}
 LICENSE=	gnu-gpl-v3 AND gnu-lgpl-v3
 
-SNAPSHOT=	20120614
+SNAPSHOT=	20120920
 GCC_BRANCH=	4.7
-GCC_POINT=	1
+GCC_POINT=	2
 GCC_VERSION=	${GCC_BRANCH}.${GCC_POINT}
 LANGS=		c
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=		gmake sed:run perl makeinfo bzip2 patch pod2man
 USE_BUILTIN.iconv=	no
@@ -328,7 +326,10 @@ test-c:
 
 
 do-install:
-	cd ${BUILDDIR} && ${SETENV} ${MY_MAKE_ENV} ${GMAKE} install-strip \
+	# This was install-strip, but a bug in 4.7.x prevents libobjc
+	# from installation.  Just install the unstripped version until
+	# it's fixed (Bug filed with GCC: 54720)
+	cd ${BUILDDIR} && ${SETENV} ${MY_MAKE_ENV} ${GMAKE} install \
 	DESTDIR=${DESTDIR}
 
 

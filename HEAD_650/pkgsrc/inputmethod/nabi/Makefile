@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.38 2012/03/03 00:13:22 wiz Exp $
+# $NetBSD: Makefile,v 1.43 2012/10/08 23:01:53 adam Exp $
 #
 
 DISTNAME=		nabi-0.99.9
-PKGREVISION=		2
+PKGREVISION=		6
 CATEGORIES=		korean inputmethod
 MASTER_SITES=		http://kldp.net/frs/download.php/5926/
 
@@ -10,8 +10,6 @@ MAINTAINER=		minskim@NetBSD.org
 HOMEPAGE=		http://kldp.net/projects/nabi/
 COMMENT=		X Input Method for Korean
 LICENSE=		gnu-gpl-v2 # or later
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=		pkg-config msgfmt
 GNU_CONFIGURE=		YES

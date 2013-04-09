@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.30 2012/07/15 08:22:52 wiz Exp $
+# $NetBSD: Makefile,v 1.36 2012/10/08 23:02:13 adam Exp $
 #
 
 DISTNAME=		xfmedia-0.9.2
-PKGREVISION=		11
+PKGREVISION=		16
 CATEGORIES=		multimedia
 MASTER_SITES=		http://spuriousinterrupt.org/projects/xfmedia/files/
 EXTRACT_SUFX=		.tar.bz2
@@ -10,8 +10,6 @@ EXTRACT_SUFX=		.tar.bz2
 MAINTAINER=		dhowland@users.sourceforge.net
 HOMEPAGE=		http://spuriousinterrupt.org/projects/xfmedia/
 COMMENT=		Xfce media player based on xine
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=		yes
 USE_LIBTOOL=		yes

@@ -1,10 +1,8 @@
-$NetBSD: patch-ipc_chromium_chromium-config.mk,v 1.3 2012/05/08 19:29:36 martin Exp $
+$NetBSD: patch-ipc_chromium_chromium-config.mk,v 1.5 2012/08/28 23:27:10 ryoon Exp $
 
-# Reported upstream: https://bugzilla.mozilla.org/show_bug.cgi?id=753046
-
---- ipc/chromium/chromium-config.mk.orig	2012-04-20 22:03:52.000000000 +0000
+--- ipc/chromium/chromium-config.mk.orig	2012-11-19 15:42:29.000000000 +0000
 +++ ipc/chromium/chromium-config.mk
-@@ -56,17 +56,6 @@ LOCAL_INCLUDES += \
+@@ -24,17 +24,6 @@ LOCAL_INCLUDES += \
    -I$(DEPTH)/ipc/ipdl/_ipdlheaders \
    $(NULL)
  
@@ -22,7 +20,7 @@ $NetBSD: patch-ipc_chromium_chromium-config.mk,v 1.3 2012/05/08 19:29:36 martin 
  ifeq ($(OS_ARCH),WINNT) # {
  OS_LIBS += $(call EXPAND_LIBNAME,psapi shell32 dbghelp)
  
-@@ -93,13 +82,72 @@ DEFINES += -DCOMPILER_MSVC
+@@ -61,13 +50,73 @@ DEFINES += -DCOMPILER_MSVC
  endif
  
  else # } {
@@ -76,6 +74,7 @@ $NetBSD: patch-ipc_chromium_chromium-config.mk,v 1.3 2012/05/08 19:29:36 martin 
 +
 +OS_OPENBSD = 1
 +OS_BSD = 1
++OS_LIBS += $(call EXPAND_LIBNAME,kvm)
 +DEFINES += \
 +  -DOS_OPENBSD=1 \
 +  -DOS_BSD=1 \
@@ -98,7 +97,7 @@ $NetBSD: patch-ipc_chromium_chromium-config.mk,v 1.3 2012/05/08 19:29:36 martin 
    $(NULL)
  
  # NB: to stop gcc warnings about exporting template instantiation
-@@ -107,4 +155,9 @@ OS_CXXFLAGS := $(filter-out -pedantic,$(
+@@ -75,4 +124,9 @@ OS_CXXFLAGS := $(filter-out -pedantic,$(
  
  endif # }
  endif # }

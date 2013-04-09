@@ -1,22 +1,21 @@
-# $NetBSD: Makefile,v 1.9 2012/07/24 20:40:12 spz Exp $
+# $NetBSD: Makefile,v 1.18 2012/11/11 00:22:11 pettai Exp $
 
 DISTNAME=	bind-${BIND_VERSION}
 PKGNAME=	${DISTNAME:S/-P/pl/}
+PKGREVISION=	2
 CATEGORIES=	net
 MASTER_SITES=	ftp://ftp.isc.org/isc/bind9/${BIND_VERSION}/ \
 		http://ftp.belnet.be/pub/mirror/ftp.isc.org/isc/bind9/${BIND_VERSION}/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.isc.org/software/bind
+HOMEPAGE=	http://www.isc.org/software/bind/
 COMMENT=	Version 9.9 of the Berkeley Internet Name Daemon, implementation of DNS
 
-CONFLICTS+=	bind<9.9.0
-
-PKG_DESTDIR_SUPPORT=	user-destdir
+CONFLICTS+=	host-[0-9]*
 
 MAKE_JOBS_SAFE=	no
 
-BIND_VERSION=	9.9.1-P2
+BIND_VERSION=	9.9.2
 
 .include "../../mk/bsd.prefs.mk"
 
@@ -34,6 +33,7 @@ CONFIGURE_ARGS+=	--sysconfdir=/etc
 CONFIGURE_ARGS+=	--localstatedir=${VARBASE:Q}
 CONFIGURE_ARGS+=	--disable-openssl-version-check
 CONFIGURE_ARGS+=	--with-openssl=${SSLBASE:Q}
+CONFIGURE_ARGS+=	--with-python=no
 .if ${MACHINE_PLATFORM:MNetBSD-*-mipsel} != ""
 CONFIGURE_ARGS+=        --disable-atomic
 .endif

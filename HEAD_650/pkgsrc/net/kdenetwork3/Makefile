@@ -1,13 +1,11 @@
-# $NetBSD: Makefile,v 1.87 2012/07/01 19:05:23 dholland Exp $
+# $NetBSD: Makefile,v 1.90 2012/10/23 17:18:30 asau Exp $
 
 DISTNAME=	kdenetwork-${_KDE_VERSION}
-PKGREVISION=	19
+PKGREVISION=	20
 CATEGORIES=	net
 COMMENT=	Network modules for the KDE integrated X11 desktop
 
 CONFLICTS=	kopete-[0-9]*
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 .include "../../meta-pkgs/kde3/Makefile.kde3"
 
@@ -59,6 +57,5 @@ post-configure:
 .include "../../x11/libXmu/buildlink3.mk"
 .include "../../x11/libXtst/buildlink3.mk"
 .include "../../x11/libXxf86vm/buildlink3.mk"
-.include "../../x11/xextproto/buildlink3.mk"
 .include "../../mk/pthread.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

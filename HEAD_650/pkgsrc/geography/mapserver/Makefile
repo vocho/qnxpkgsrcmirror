@@ -1,15 +1,13 @@
-# $NetBSD: Makefile,v 1.36 2012/08/05 10:02:11 obache Exp $
+# $NetBSD: Makefile,v 1.39 2012/10/04 09:19:19 asau Exp $
 
 DISTNAME=	mapserver-5.6.8
-PKGREVISION=	2
+PKGREVISION=	4
 CATEGORIES=	geography www
 MASTER_SITES=	http://download.osgeo.org/mapserver/
 
 MAINTAINER=	hdp@cs.msu.edu
 HOMEPAGE=	http://mapserver.org/
 COMMENT=	Environment for building spatially enabled Internet apps
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 MAKE_JOBS_SAFE=		no
 

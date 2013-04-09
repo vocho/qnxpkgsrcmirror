@@ -1,8 +1,8 @@
-# $NetBSD: Makefile.common,v 1.14 2012/08/13 12:27:50 drochner Exp $
+# $NetBSD: Makefile.common,v 1.17 2012/10/30 12:46:30 drochner Exp $
 # used by www/webkit-gtk/Makefile
 # used by www/webkit-gtk3/Makefile
 
-DISTNAME=	webkit-1.8.2
+DISTNAME=	webkitgtk-1.10.1
 CATEGORIES=	www
 MASTER_SITES=	http://www.webkitgtk.org/releases/
 EXTRACT_SUFX=	.tar.xz
@@ -20,8 +20,6 @@ USE_TOOLS+=	bison gmake perl:build pkg-config msgfmt
 MAKE_JOBS_SAFE=		no
 
 PKGCONFIG_OVERRIDE=	Source/WebKit/gtk/webkit.pc.in
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 MAKE_FILE=	GNUmakefile
 GNU_CONFIGURE=	yes
@@ -43,12 +41,14 @@ REPLACE_PERL+=	Source/JavaScriptCore/create_hash_table \
 		Source/WebCore/make-hash-tools.pl \
 		Source/WebCore/platform/text/mac/*.pl
 
+BUILD_DEPENDS+=	ruby-[0-9]*:../../lang/ruby
+
 PYTHON_FOR_BUILD_ONLY=	yes
 .include "../../lang/python/application.mk"
 CONFIGURE_ENV+=	PYTHON=${PYTHONBIN}
 
 BUILDLINK_API_DEPENDS.glib2+= glib2>=2.32.1
-.include "../../devel/glib2/schemas.mk"
+.include "../../devel/glib2/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"
 .include "../../databases/sqlite3/buildlink3.mk"
 .include "../../devel/flex/buildlink3.mk"

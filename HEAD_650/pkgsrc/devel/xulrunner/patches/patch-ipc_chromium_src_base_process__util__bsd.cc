@@ -1,10 +1,8 @@
-$NetBSD: patch-ipc_chromium_src_base_process__util__bsd.cc,v 1.5 2012/05/08 19:29:36 martin Exp $
+$NetBSD: patch-ipc_chromium_src_base_process__util__bsd.cc,v 1.9 2012/11/21 15:26:50 ryoon Exp $
 
-# Reported upstream: https://bugzilla.mozilla.org/show_bug.cgi?id=753046
-
---- ipc/chromium/src/base/process_util_bsd.cc.orig	2012-06-04 00:30:07.000000000 +0000
+--- ipc/chromium/src/base/process_util_bsd.cc.orig	2013-02-20 15:58:37.000000000 +0000
 +++ ipc/chromium/src/base/process_util_bsd.cc
-@@ -0,0 +1,330 @@
+@@ -0,0 +1,371 @@
 +// Copyright (c) 2008 The Chromium Authors. All rights reserved.
 +// Use of this source code is governed by a BSD-style license that can be
 +// found in the LICENSE file.
@@ -13,35 +11,19 @@ $NetBSD: patch-ipc_chromium_src_base_process__util__bsd.cc,v 1.5 2012/05/08 19:2
 +
 +#include "base/process_util.h"
 +
++#include <sys/param.h>
++#include <sys/sysctl.h>
++#include <sys/wait.h>
++#if defined(OS_DRAGONFLY) || defined(OS_FREEBSD)
++#include <sys/user.h>
++#endif
++
 +#include <ctype.h>
 +#include <fcntl.h>
-+#include <unistd.h>
-+#include <string>
-+#if defined(OS_DRAGONFLY) || defined(OS_FREEBSD)
-+/* DragonFly, as of v3.0.1, and FreeBSD 9.0-RELEASE do not explicitly mark symbols public */
-+#define PRE_SYS_INCLUDE		_Pragma("GCC visibility push(default)")
-+#define POST_SYS_INCLUDE	_Pragma("GCC visibility pop")
-+#else
-+#define PRE_SYS_INCLUDE
-+#define POST_SYS_INCLUDE
-+#endif
-+PRE_SYS_INCLUDE
 +#include <kvm.h>
-+POST_SYS_INCLUDE
-+#include <sys/sysctl.h>
-+#include <sys/types.h>
-+#include <sys/wait.h>
-+#if defined(OS_DRAGONFLY)
-+PRE_SYS_INCLUDE
-+#include <sys/user.h>
-+POST_SYS_INCLUDE
-+#define HAVE_POSIX_SPAWN	1
-+#endif
-+#if defined(OS_FREEBSD)
-+PRE_SYS_INCLUDE
-+#include <sys/user.h>
-+POST_SYS_INCLUDE
-+#endif
++#include <unistd.h>
++
++#include <string>
 +
 +#include "base/debug_util.h"
 +#include "base/eintr_wrapper.h"
@@ -50,17 +32,35 @@ $NetBSD: patch-ipc_chromium_src_base_process__util__bsd.cc,v 1.5 2012/05/08 19:2
 +#include "base/string_tokenizer.h"
 +#include "base/string_util.h"
 +
-+#ifdef __NetBSD__
-+#include <sys/param.h>
-+#if __NetBSD_Version__ >= 600000000
++#if (defined(_POSIX_SPAWN) && _POSIX_SPAWN > 0) \
++  || (defined(OS_NETBSD) && __NetBSD_Version__ >= 599006500)
 +#define HAVE_POSIX_SPAWN	1
 +#endif
++
++/*
++ * On platforms that are not gonk based, we fall back to an arbitrary
++ * UID. This is generally the UID for user `nobody', albeit it is not
++ * always the case.
++ */
++
++#if defined(OS_NETBSD) || defined(OS_OPENBSD)
++# define CHILD_UNPRIVILEGED_UID 32767
++# define CHILD_UNPRIVILEGED_GID 32767
++#else
++# define CHILD_UNPRIVILEGED_UID 65534
++# define CHILD_UNPRIVILEGED_GID 65534
++#endif
++
++#ifndef __dso_public
++# ifdef __exported
++#  define __dso_public	__exported
++# else
++#  define __dso_public	__attribute__((__visibility__("default")))
++# endif
 +#endif
 +
 +#ifdef HAVE_POSIX_SPAWN
-+PRE_SYS_INCLUDE
 +#include <spawn.h>
-+POST_SYS_INCLUDE
 +extern "C" char **environ __dso_public;
 +#endif
 +
@@ -97,6 +97,17 @@ $NetBSD: patch-ipc_chromium_src_base_process__util__bsd.cc,v 1.5 2012/05/08 19:2
 +bool LaunchApp(const std::vector<std::string>& argv,
 +               const file_handle_mapping_vector& fds_to_remap,
 +               const environment_map& env_vars_to_set,
++               bool wait, ProcessHandle* process_handle,
++               ProcessArchitecture arch) {
++  return LaunchApp(argv, fds_to_remap, env_vars_to_set,
++                   SAME_PRIVILEGES_AS_PARENT,
++                   wait, process_handle);
++}
++
++bool LaunchApp(const std::vector<std::string>& argv,
++               const file_handle_mapping_vector& fds_to_remap,
++               const environment_map& env_vars_to_set,
++               ChildPrivileges privs,
 +               bool wait, ProcessHandle* process_handle,
 +               ProcessArchitecture arch) {
 +  bool retval = true;
@@ -213,6 +224,17 @@ $NetBSD: patch-ipc_chromium_src_base_process__util__bsd.cc,v 1.5 2012/05/08 19:2
 +               const environment_map& env_vars_to_set,
 +               bool wait, ProcessHandle* process_handle,
 +               ProcessArchitecture arch) {
++  return LaunchApp(argv, fds_to_remap, env_vars_to_set,
++                   SAME_PRIVILEGES_AS_PARENT,
++                   wait, process_handle);
++}
++
++bool LaunchApp(const std::vector<std::string>& argv,
++               const file_handle_mapping_vector& fds_to_remap,
++               const environment_map& env_vars_to_set,
++               ChildPrivileges privs,
++               bool wait, ProcessHandle* process_handle,
++               ProcessArchitecture arch) {
 +  scoped_array<char*> argv_cstr(new char*[argv.size() + 1]);
 +  // Illegal to allocate memory after fork and before execvp
 +  InjectiveMultimap fd_shuffle1, fd_shuffle2;
@@ -235,19 +257,32 @@ $NetBSD: patch-ipc_chromium_src_base_process__util__bsd.cc,v 1.5 2012/05/08 19:2
 +
 +    CloseSuperfluousFds(fd_shuffle2);
 +
++    for (size_t i = 0; i < argv.size(); i++)
++      argv_cstr[i] = const_cast<char*>(argv[i].c_str());
++    argv_cstr[argv.size()] = NULL;
++
++    if (privs == UNPRIVILEGED) {
++      if (setgid(CHILD_UNPRIVILEGED_GID) != 0) {
++        DLOG(ERROR) << "FAILED TO setgid() CHILD PROCESS, path: " << argv_cstr[0];
++        _exit(127);
++      }
++      if (setuid(CHILD_UNPRIVILEGED_UID) != 0) {
++        DLOG(ERROR) << "FAILED TO setuid() CHILD PROCESS, path: " << argv_cstr[0];
++        _exit(127);
++      }
++      if (chdir("/") != 0)
++        gProcessLog.print("==> could not chdir()\n");
++    }
++
 +    for (environment_map::const_iterator it = env_vars_to_set.begin();
 +         it != env_vars_to_set.end(); ++it) {
 +      if (setenv(it->first.c_str(), it->second.c_str(), 1/*overwrite*/))
 +        _exit(127);
 +    }
-+
-+    for (size_t i = 0; i < argv.size(); i++)
-+      argv_cstr[i] = const_cast<char*>(argv[i].c_str());
-+    argv_cstr[argv.size()] = NULL;
-+    execvp(argv_cstr[0], argv_cstr.get());
++    execv(argv_cstr[0], argv_cstr.get());
 +    // if we get here, we're in serious trouble and should complain loudly
 +    DLOG(ERROR) << "FAILED TO exec() CHILD PROCESS, path: " << argv_cstr[0];
-+    exit(127);
++    _exit(127);
 +  } else {
 +    gProcessLog.print("==> process %d launched child process %d\n",
 +                      GetCurrentProcId(), pid);
@@ -302,7 +337,11 @@ $NetBSD: patch-ipc_chromium_src_base_process__util__bsd.cc,v 1.5 2012/05/08 19:2
 +#  endif
 +#else
 +  kvm  = kvm_open(NULL, NULL, NULL, KVM_NO_FILES, NULL);
++#if defined(OS_OPENBSD)
++  struct kinfo_proc* procs = kvm_getprocs(kvm, KERN_PROC_UID, getuid(), sizeof(struct kinfo_proc), &numEntries);
++#else
 +  struct kinfo_proc2* procs = kvm_getproc2(kvm, KERN_PROC_UID, getuid(), sizeof(struct kinfo_proc2), &numEntries);
++#endif
 +  if (procs != NULL && numEntries > 0) {
 +    for (int i = 0; i < numEntries; i++) {
 +    if (exe != procs[i].p_comm) continue;

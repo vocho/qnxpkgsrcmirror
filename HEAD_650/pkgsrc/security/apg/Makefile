@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.13 2010/12/20 10:00:56 wiz Exp $
+# $NetBSD: Makefile,v 1.15 2012/10/23 18:16:21 asau Exp $
 #
 
 DISTNAME=	apg-2.2.3
+PKGREVISION=	1
 CATEGORIES=	security
 MASTER_SITES=	http://www.adel.nursat.kz/apg/download/
 
@@ -9,8 +10,6 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.adel.nursat.kz/apg/
 COMMENT=	Tool set for random password generation
 LICENSE=	modified-bsd
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 MAKE_ENV+=	FLAGS=${CFLAGS:M*:Q} INSTALL_PREFIX=${DESTDIR:Q}${PREFIX:Q}
 

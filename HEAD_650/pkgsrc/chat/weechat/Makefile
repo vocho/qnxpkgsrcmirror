@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.33 2012/06/18 00:32:07 dholland Exp $
+# $NetBSD: Makefile,v 1.37 2012/11/24 11:16:06 tonio Exp $
 
-DISTNAME=	weechat-0.3.8
+DISTNAME=	weechat-0.3.9.2
 CATEGORIES=	chat
 MASTER_SITES=	http://www.weechat.org/files/src/
 
@@ -11,7 +11,6 @@ LICENSE=	gnu-gpl-v3
 EXTRACT_SUFX=	.tar.bz2
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_PKGLOCALEDIR=	yes
 USE_TOOLS+=		msgfmt pkg-config
@@ -28,4 +27,5 @@ LIBS.SunOS+=		-lnsl
 .include "../../devel/libidn/buildlink3.mk"
 .include "../../www/curl/buildlink3.mk"
 .include "../../converters/libiconv/buildlink3.mk"
+.include "../../security/libgcrypt/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

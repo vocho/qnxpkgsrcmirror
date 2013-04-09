@@ -1,17 +1,14 @@
-# $NetBSD: Makefile,v 1.3 2012/08/13 12:18:37 drochner Exp $
+# $NetBSD: Makefile,v 1.11 2012/10/28 03:33:45 markd Exp $
 
-DISTNAME=	texworks-0.4.3-r858
-PKGNAME=	texworks-0.4.3
-PKGREVISION=	2
+DISTNAME=	texworks-0.4.4-r1004
+PKGNAME=	texworks-0.4.4
 CATEGORIES=	editors
 MASTER_SITES=	http://texworks.googlecode.com/files/
 
 MAINTAINER=	markd@NetBSD.org
 HOMEPAGE=	http://www.tug.org/texworks/
-COMMENT=	a simple TeX front-end program
+COMMENT=	Simple TeX front-end program
 LICENSE=	gnu-gpl-v2
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_LANGUAGES=	c c++
 USE_TOOLS+=	pkg-config gmake
@@ -30,7 +27,7 @@ pre-configure:
 	${LN} -sf ${QTDIR}/bin/qmake ${BUILDLINK_DIR}/bin/
 
 do-configure:
-	cd ${WRKSRC}; env QTDIR=${QTDIR} qmake INSTALL_PREFIX=${PREFIX}
+	cd ${WRKSRC}; env QTDIR=${QTDIR} qmake INSTALL_PREFIX=${PREFIX} TW_DICPATH=${BUILDLINK_PREFIX.hunspell}/share/hunspell
 
 BUILDLINK_DEPMETHOD.qt4-tools=	full
 

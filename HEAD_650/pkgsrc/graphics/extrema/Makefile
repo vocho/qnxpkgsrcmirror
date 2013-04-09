@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.12 2012/03/03 00:13:12 wiz Exp $
+# $NetBSD: Makefile,v 1.17 2012/10/08 23:01:41 adam Exp $
 #
 
 DISTNAME=	extrema-4.4.4
-PKGREVISION=	7
+PKGREVISION=	11
 CATEGORIES=	graphics
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=extrema/}
 
@@ -15,7 +15,6 @@ USE_LIBTOOL=	yes
 USE_LANGUAGES=	c c++
 USE_TOOLS+=	gmake
 CONFIGURE_ARGS+=	--with-wxGTK
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 .include "../../x11/wxGTK28/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

@@ -1,8 +1,8 @@
-$NetBSD$
+$NetBSD: patch-config_system-headers,v 1.2 2012/08/28 23:27:10 ryoon Exp $
 
---- config/system-headers.orig	2012-03-13 01:36:40.000000000 +0000
+--- config/system-headers.orig	2012-11-19 15:42:04.000000000 +0000
 +++ config/system-headers
-@@ -151,6 +151,7 @@ Carbon/Carbon.h
+@@ -144,6 +144,7 @@ Carbon/Carbon.h
  CarbonEvents.h
  Carbon.h
  cassert
@@ -10,3 +10,11 @@ $NetBSD$
  c_asm.h
  cctype
  cderr.h
+@@ -1067,3 +1068,7 @@ gst/app/gstappsrc.h
+ gst/video/video.h
+ sys/msg.h
+ sys/ipc.h
++sys/thr.h
++sys/user.h
++kvm.h
++spawn.h

@@ -1,8 +1,8 @@
-$NetBSD: patch-ad,v 1.7 2012/04/28 22:48:06 ryoon Exp $
+$NetBSD: patch-ad,v 1.9 2012/11/23 17:28:49 ryoon Exp $
 
---- mozilla/xpcom/io/nsLocalFileUnix.h.orig	2012-04-23 06:28:29.000000000 +0000
+--- mozilla/xpcom/io/nsLocalFileUnix.h.orig	2012-11-18 10:19:54.000000000 +0000
 +++ mozilla/xpcom/io/nsLocalFileUnix.h
-@@ -86,7 +86,7 @@
+@@ -53,7 +53,7 @@
  #endif
  
  // so we can statfs on freebsd

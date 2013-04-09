@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.7 2012/03/03 00:13:00 wiz Exp $
+# $NetBSD: Makefile,v 1.12 2012/10/08 23:01:29 adam Exp $
 #
 
 DISTNAME=	qgoogletranslator-1.2.1
-PKGREVISION=	5
+PKGREVISION=	9
 CATEGORIES=	editors
 MASTER_SITES=	http://qgt.googlecode.com/files/
 EXTRACT_SUFX=	.tar.bz2
@@ -11,8 +11,6 @@ MAINTAINER=	ryoon@NetBSD.org
 HOMEPAGE=	http://code.google.com/p/qgt/
 COMMENT=	Qt gui for google translate based on ajax api
 LICENSE=	gnu-gpl-v3
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 DEPENDS+=	mpg123-[0-9]*:../../audio/mpg123
 

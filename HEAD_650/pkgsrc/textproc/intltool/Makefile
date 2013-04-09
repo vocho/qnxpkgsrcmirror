@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.57 2012/05/04 08:43:28 obache Exp $
+# $NetBSD: Makefile,v 1.59 2012/10/25 06:55:56 asau Exp $
 #
 
 DISTNAME=		intltool-0.50.2
+PKGREVISION=		1
 CATEGORIES=		textproc devel gnome
 MASTER_SITES=		https://launchpad.net/intltool/trunk/${PKGVERSION_NOREV}/+download/ \
 			http://launchpadlibrarian.net/94524169/
@@ -12,7 +13,6 @@ COMMENT=		Internationalization Tool Collection
 LICENSE=		gnu-gpl-v2
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 DEPENDS+=		p5-XML-Parser>=2.34nb4:../../textproc/p5-XML-Parser
 

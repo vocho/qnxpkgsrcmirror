@@ -1,21 +1,24 @@
-# $NetBSD: Makefile,v 1.30 2011/01/19 04:24:15 uebayasi Exp $
+# $NetBSD: Makefile,v 1.33 2012/10/31 11:17:01 asau Exp $
 #
 
-DISTNAME=	global-5.9.3
+DISTNAME=	global-6.2.4
 CATEGORIES=	devel
 MASTER_SITES=	${MASTER_SITE_GNU:=global/}
 
 MAINTAINER=	uebayasi@NetBSD.org
 HOMEPAGE=	http://www.gnu.org/software/global/
 COMMENT=	Source code tag system including web browser output
+LICENSE=	gnu-gpl-v3
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=		YES
 CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR:Q}
+CONFIGURE_ARGS+=	--with-posix-sort=${SORT:Q}
+
 INFO_FILES=		YES
-USE_TOOLS+=		perl:run
+USE_LIBTOOL=		YES
+USE_TOOLS+=		perl:run sort:run
 
 CONF_FILES=	${PREFIX}/share/gtags/gtags.conf ${PKG_SYSCONFDIR}/gtags.conf
 

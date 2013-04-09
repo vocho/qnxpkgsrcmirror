@@ -1,14 +1,12 @@
-# $NetBSD: Makefile,v 1.3 2011/08/14 15:14:22 obache Exp $
+# $NetBSD: Makefile,v 1.5 2012/10/25 06:56:43 asau Exp $
 #
 
 .include "../../textproc/cabocha/Makefile.common"
 
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	2
+PKGREVISION=	3
 
 COMMENT=	CaboCha perl module
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_LANGUAGES=	c++
 

@@ -1,9 +1,10 @@
-# $NetBSD: Makefile,v 1.4 2012/08/16 11:50:46 wiz Exp $
+# $NetBSD: Makefile,v 1.6 2012/10/08 15:21:18 jaapb Exp $
 #
 
 PKGNAME=	ocaml-zip-${VERSION}
 DISTNAME=	camlzip-${VERSION}
 VERSION=	1.04
+PKGREVISION=	1
 CATEGORIES=	archivers
 MASTER_SITES=	http://forge.ocamlcore.org/frs/download.php/328/
 LICENSE=	gnu-lgpl-v2.1
@@ -14,11 +15,10 @@ COMMENT=	OCaml library to manipulate ZIP/GZIP/JAR archives
 
 BUILD_TARGET=	all
 
-PKG_DESTDIR_SUPPORT=	user-destdir
-
 PLIST_VARS+=	opt
 .if (${MACHINE_ARCH} == "i386") || (${MACHINE_ARCH} == "powerpc") || \
-    (${MACHINE_ARCH} == "sparc") || (${MACHINE_ARCH} == "x86_64")
+    (${MACHINE_ARCH} == "sparc") || (${MACHINE_ARCH} == "x86_64") || \
+    (${MACHINE_ARCH} == "arm")
 BUILD_TARGET+=	allopt
 PLIST.opt=	yes
 .endif

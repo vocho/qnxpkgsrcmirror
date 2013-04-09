@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.1.1.1 2012/04/12 23:57:24 mspo Exp $
+# $NetBSD: Makefile,v 1.3 2012/10/31 11:17:37 asau Exp $
 #
 
 DISTNAME=	AnyEvent-XMPP-0.52
 PKGNAME=	p5-${DISTNAME}
+PKGREVISION=	1
 CATEGORIES=	devel
 MASTER_SITES=	http://search.cpan.org/CPAN/authors/id/E/EL/ELMEX/
 
@@ -10,8 +11,6 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://search.cpan.org/CPAN/authors/id/E/EL/ELMEX/
 COMMENT=	Implementation of the XMPP Protocol
 LICENSE=	${PERL5_LICENSE}
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 DEPENDS+=	p5-AnyEvent>=0:../../devel/p5-AnyEvent
 DEPENDS+=	p5-Authen-SASL>=0:../../security/p5-Authen-SASL

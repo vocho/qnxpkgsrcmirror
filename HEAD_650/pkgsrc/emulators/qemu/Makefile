@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.95 2012/08/03 17:51:47 asau Exp $
+# $NetBSD: Makefile,v 1.102 2012/10/26 16:08:18 shattered Exp $
 
-DISTNAME=		qemu-1.1.1-1
-PKGNAME=		qemu-1.1.1.1
-PKGREVISION=		1
+DISTNAME=		qemu-1.2.0
+PKGREVISION=		4
 CATEGORIES=		emulators
 MASTER_SITES=		http://wiki.qemu.org/download/
 EXTRACT_SUFX=		.tar.bz2
@@ -12,12 +11,8 @@ HOMEPAGE=		http://www.qemu.org/
 COMMENT=		CPU emulator using dynamic translation
 LICENSE=		gnu-gpl-v2 AND gnu-lgpl-v2.1 AND mit AND modified-bsd
 
-PKG_DESTDIR_SUPPORT=	user-destdir
-
 CONFLICTS+=		qemu-bin-[0-9]*
 NOT_FOR_PLATFORM=	NetBSD-1.[0-6]*-*
-
-WRKSRC=			${WRKDIR}/qemu-1.1.1
 
 USE_TOOLS+=		gmake makeinfo perl:build pkg-config
 UNLIMIT_RESOURCES=	datasize
@@ -34,6 +29,7 @@ CONFIGURE_ARGS+=	--prefix=${PREFIX}
 CONFIGURE_ARGS+=	--interp-prefix=${PREFIX}/share/qemu
 CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR}
 CONFIGURE_ARGS+=	--python=${PYTHONBIN}
+CONFIGURE_ARGS+=	--smbd=${PREFIX}/sbin/smbd
 CONFIGURE_ARGS+=	--mandir=${PREFIX}/${PKGMANDIR}
 
 CONF_FILES=		${EGDIR}/target-x86_64.conf \
@@ -86,21 +82,21 @@ BUILDLINK_PASSTHRU_RPATHDIRS+= /usr/lib
 INSTALLATION_DIRS=	${PKGMANDIR}/man1 share/doc/qemu
 
 UE_ARCHS+=		alpha arm armeb cris i386 m68k microblaze mips mipsel
-UE_ARCHS+=		ppc ppc64 ppc64abi32 sh4 sh4eb sparc sparc32plus
+UE_ARCHS+=		or32 ppc ppc64 ppc64abi32 sh4 sh4eb sparc sparc32plus
 UE_ARCHS+=		sparc64 x86_64 microblazeel s390x unicore32
 
 .if ${OPSYS} == "NetBSD"
-.if (!empty(OS_VERSION:M5.99.*) || !empty(OS_VERSION:M[6-9].*))
+.  if (!empty(OS_VERSION:M5.99.*) || !empty(OS_VERSION:M[6-9].*))
 # XXX
 # i386 and x86_64 user emul require newer binutils for PROVIDE_HIDDEN()
 # http://git.qemu.org/qemu.git/commit/?id=845f2c2812d9ed24b36c02a3d06ee83aeafe8b49
 # but binutils-2.19 was enabled around 5.99.22:
 # http://cvsweb.NetBSD.org/bsdweb.cgi/src/share/mk/bsd.own.mk#rev1.594
 USER_EMUL=		i386 x86_64 sparc sparc64
-.else
+.  else
 CONFIGURE_ARGS+=	--disable-bsd-user
 USER_EMUL=
-.endif
+.  endif
 PLIST.nbd=		YES
 .elif !empty(OPSYS:M*BSD) || !empty(OPSYS:MDragonFly)
 USER_EMUL=		i386 x86_64 sparc sparc64
@@ -108,7 +104,6 @@ PLIST.nbd=		YES
 .elif !empty(OPSYS:MDarwin)
 USER_EMUL=
 CONFIGURE_ARGS+=	--disable-bsd-user
-CONFIGURE_ARGS+=	--disable-darwin-user
 PLIST.nbd=		YES
 .elif !empty(OPSYS:MLinux)
 USER_EMUL=		${UE_ARCHS}

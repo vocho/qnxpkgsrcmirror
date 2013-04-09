@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.22 2012/03/03 00:13:43 wiz Exp $
+# $NetBSD: Makefile,v 1.27 2012/10/23 17:18:16 asau Exp $
 #
 
 DISTNAME=		dhcpcd-ui-0.6.0
 PKGNAME=		dhcpcd-gtk-0.6.0
-PKGREVISION=		1
+PKGREVISION=		5
 CATEGORIES=		net
 MASTER_SITES=		http://roy.marples.name/downloads/dhcpcd/
 MASTER_SITES+=		ftp://roy.marples.name/pub/dhcpcd/
@@ -17,7 +17,6 @@ LICENSE=		modified-bsd
 
 DEPENDS+=		dhcpcd-dbus>=0.6.0:../../net/dhcpcd-dbus
 
-PKG_DESTDIR_SUPPORT=	user-destdir
 USE_LANGUAGES=		c99
 USE_TOOLS+=		pkg-config
 HAS_CONFIGURE=		yes

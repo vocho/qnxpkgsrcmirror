@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.104 2012/07/20 06:45:35 abs Exp $
+# $NetBSD: Makefile,v 1.116 2012/11/21 15:26:50 ryoon Exp $
 
 .include "../../devel/xulrunner/dist.mk"
-PKGNAME=	firefox-${FIREFOX_VER}
-PKGREVISION=	1
+PKGNAME=	firefox-${MOZ_BRANCH}
 CATEGORIES=	www
 
 MAINTAINER=	tnn@NetBSD.org
@@ -12,14 +11,16 @@ LICENSE=	mpl-1.1
 
 MOZILLA_DIR=	# empty
 
+# Note: when updating remember to conditionalise about-background.png in PLIST
 CONFIGURE_ARGS+=	--enable-application=browser
-CONFIGURE_ARGS+=	--with-libxul-sdk=${PREFIX}/lib/xulrunner-sdk
+CONFIGURE_ARGS+=	--with-libxul-sdk=${PREFIX}/lib/xulrunner
 CONFIGURE_ARGS+=	--with-system-libxul
 
 ALL_ENV+=		MOZILLA_PKG_NAME=firefox
 
 LDFLAGS.DragonFly=	-lplc4 -lnspr4
 LDFLAGS.FreeBSD=	-lplc4 -lnspr4
+LDFLAGS.Linux=		-lnspr4
 
 .include "../../devel/xulrunner/mozilla-common.mk"
 .include "options.mk"
@@ -55,8 +56,8 @@ post-install:
 	rm -f ${DESTDIR}${PREFIX}/bin/firefox
 	${INSTALL_SCRIPT} ${WRKDIR}/firefox ${DESTDIR}${PREFIX}/bin
 
-BUILDLINK_API_DEPENDS.xulrunner+=	xulrunner>=${MOZ_BRANCH}${MOZ_BRANCH_MINOR}
-BUILD_DEPENDS+=				xulrunner-${MOZ_BRANCH}${MOZ_BRANCH_MINOR}{,nb*}:../../devel/xulrunner
+BUILDLINK_API_DEPENDS.xulrunner+=	xulrunner>=${MOZ_BRANCH}
+BUILD_DEPENDS+=				xulrunner-${MOZ_BRANCH}{,nb*}:../../devel/xulrunner
 .include "../../devel/xulrunner/buildlink3.mk"
 PLIST_VARS+=	gnome
 .if !empty(PKG_BUILD_OPTIONS.xulrunner:Mgnome)

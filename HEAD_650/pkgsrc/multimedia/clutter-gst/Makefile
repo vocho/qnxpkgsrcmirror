@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.19 2012/06/14 07:43:40 sbd Exp $
+# $NetBSD: Makefile,v 1.24 2012/10/08 23:00:38 adam Exp $
 #
 
 DISTNAME=	clutter-gst-1.2.0
-PKGREVISION=	7
+PKGREVISION=	11
 CATEGORIES=	multimedia
 MASTER_SITES=	http://source.clutter-project.org/sources/clutter-gst/1.2/
 
@@ -10,8 +10,6 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.clutter-project.org/
 COMMENT=	Clutter GStreamer integration
 LICENSE=	gnu-lgpl-v2.1
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=	yes
 USE_LIBTOOL=	yes

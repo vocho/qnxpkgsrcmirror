@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.5 2012/02/01 20:39:33 rhaen Exp $
+# $NetBSD: Makefile,v 1.8 2012/10/31 11:17:52 asau Exp $
 
-DISTNAME=	Config-GitLike-1.07
+DISTNAME=	Config-GitLike-1.09
 PKGNAME=	p5-${DISTNAME}
+PKGREVISION=	1
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Config/}
 
@@ -9,8 +10,6 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://search.cpan.org/dist/Config-GitLike/
 COMMENT=	Perl 5 module providing a git-compatible config file parser
 LICENSE=	${PERL5_LICENSE}
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 DEPENDS+=	p5-Any-Moose-[0-9]*:../../devel/p5-Any-Moose
 # For test target

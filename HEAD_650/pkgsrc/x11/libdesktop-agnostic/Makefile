@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.7 2012/06/14 07:43:35 sbd Exp $
+# $NetBSD: Makefile,v 1.12 2012/10/29 05:06:37 asau Exp $
 #
 
 DISTNAME=	libdesktop-agnostic-0.3.92
-PKGREVISION=	3
+PKGREVISION=	7
 CATEGORIES=	x11
 MASTER_SITES=	https://launchpad.net/libdesktop-agnostic/0.4/0.3.92/+download/
 
@@ -10,8 +10,6 @@ MAINTAINER=	imil@NetBSD.org
 HOMEPAGE=	https://launchpad.net/libdesktop-agnostic
 COMMENT=	Desktop-agnostic library, apis and tools
 LICENSE=	gnu-lgpl-v2
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 # Needed for launchpad
 FETCH_USING=	curl

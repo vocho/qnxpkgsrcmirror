@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.75 2012/07/10 19:14:47 bsiegert Exp $
+# $NetBSD: Makefile,v 1.77 2012/11/07 20:59:50 adam Exp $
 
-DISTNAME=	icu4c-49_1_2-src
+DISTNAME=	icu4c-50_1-src
 PKGNAME=	${DISTNAME:S/4c//:S/-src//:S/_/./g}
-PKGREVISION=	1
 CATEGORIES=	textproc
 MASTER_SITES=	http://download.icu-project.org/files/icu4c/${PKGVERSION_NOREV}/
 EXTRACT_SUFX=	.tgz
@@ -11,8 +10,6 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.icu-project.org/
 COMMENT=	Robust and full-featured Unicode services
 LICENSE=	mit
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 WRKSRC=			${WRKDIR}/icu/source
 USE_TOOLS+=		gmake

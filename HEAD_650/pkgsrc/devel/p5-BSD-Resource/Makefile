@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.28 2011/08/09 09:15:01 adam Exp $
+# $NetBSD: Makefile,v 1.30 2012/10/31 11:17:41 asau Exp $
 
 DISTNAME=	BSD-Resource-1.2904
 PKGNAME=	p5-${DISTNAME:S/2904/29.04/}
-PKGREVISION=	2
+PKGREVISION=	3
 SVR4_PKGNAME=	p5bsd
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=BSD/}
@@ -13,7 +13,6 @@ COMMENT=	Perl interface to BSD process resources library
 LICENSE=	${PERL5_LICENSE}
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 UNLIMIT_RESOURCES+=	stacksize
 

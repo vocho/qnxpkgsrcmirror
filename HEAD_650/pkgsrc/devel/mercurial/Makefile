@@ -1,19 +1,16 @@
-# $NetBSD: Makefile,v 1.75 2012/08/11 00:23:03 wiz Exp $
-#
+# $NetBSD: Makefile,v 1.80 2012/11/02 01:46:05 wiz Exp $
 
-DISTNAME=	mercurial-2.3
+DISTNAME=	mercurial-2.4
 CATEGORIES=	devel scm
 MASTER_SITES=	http://mercurial.selenic.com/release/
 
 MAINTAINER=	wiz@NetBSD.org
-HOMEPAGE=	http://mercurial.selenic.com/wiki/
+HOMEPAGE=	http://mercurial.selenic.com/
 COMMENT=	Fast, lightweight source control management system
 LICENSE=	gnu-gpl-v2 OR gnu-gpl-v3 # OR newer
 
 BUILD_DEPENDS+=	xmlto-[0-9]*:../../textproc/xmlto
 BUILD_DEPENDS+=	asciidoc-[0-9]*:../../textproc/asciidoc
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=			gmake msgfmt
 

@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.57 2012/04/27 12:31:47 obache Exp $
+# $NetBSD: Makefile,v 1.62 2012/10/31 11:19:38 asau Exp $
 
 DISTNAME=		rapidsvn-0.12.0-1
 PKGNAME=		${DISTNAME:S/-1$/.1/}
-PKGREVISION=		3
+PKGREVISION=		7
 CATEGORIES=		devel x11 scm
 MASTER_SITES=		http://rapidsvn.org/download/release/0.12/
 
@@ -10,8 +10,6 @@ MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://rapidsvn.tigris.org/
 COMMENT=		Cross-platform Subversion GUI
 LICENSE=		gnu-gpl-v3
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=		gmake msgfmt
 USE_LANGUAGES=		c c++

@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.18 2011/08/14 14:42:48 obache Exp $
+# $NetBSD: Makefile,v 1.20 2012/10/23 18:16:41 asau Exp $
 #
 
 DISTNAME=		Crypt-IDEA-1.08
 PKGNAME=		p5-${DISTNAME}
-PKGREVISION=		3
+PKGREVISION=		4
 CATEGORIES=		security perl5
 MASTER_SITES=		${MASTER_SITE_PERL_CPAN:=Crypt/}
 
@@ -12,7 +12,6 @@ HOMEPAGE=		http://search.cpan.org/dist/Crypt-IDEA/
 COMMENT=		Perl5 module for the IDEA symmetric key algorithm
 LICENSE=		idea-license
 
-PKG_DESTDIR_SUPPORT=	user-destdir
 PKG_INSTALLATION_TYPES= overwrite pkgviews
 
 USE_LANGUAGES=		c

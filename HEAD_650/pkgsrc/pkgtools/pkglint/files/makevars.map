@@ -1,4 +1,4 @@
-# $NetBSD: makevars.map,v 1.225 2012/07/22 01:01:41 dholland Exp $
+# $NetBSD: makevars.map,v 1.228 2012/11/20 11:41:29 abs Exp $
 #
 
 # This file contains the guessed type of some variables, according to
@@ -524,6 +524,7 @@ PG_LIB_EXT		{ dylib so } [$system]
 PGSQL_TYPE		{ postgresql81-client postgresql80-client } [$system]
 PGPKGSRCDIR		Pathname [$system]
 PHASE_MSG		ShellCommand [$system]
+PHP_VERSION_REQD	Version [$user]
 PKGBASE			Identifier [$system]
 PKGCONFIG_OVERRIDE	List of Pathmask [m:as,c:a]
 PKGCONFIG_OVERRIDE_STAGE	Stage [$package]
@@ -575,12 +576,14 @@ PKG_JVMS_ACCEPTED	List of {					\
 				jdk jdk14				\
 				kaffe					\
 				sun-jdk13 sun-jdk14 sun-jdk15 sun-jdk6	\
+				openjdk7 openjdk7-bin			\
 			} [m:s,c:ds]
 PKG_JVM_DEFAULT		{						\
 				blackdown-jdk13				\
 				jdk jdk14				\
 				kaffe					\
 				sun-jdk13 sun-jdk14 sun-jdk15 sun-jdk6	\
+				openjdk7 openjdk7-bin			\
 			} [$user]
 PKG_LEGACY_OPTIONS	List of Option
 PKG_LIBTOOL		Pathname [m:s]
@@ -630,12 +633,13 @@ PTHREAD_OPTS		List of { native optional require } [m:as,c:a,b:a]
 PTHREAD_TYPE		Identifier [$system]
 # ^^ or "native" or "none".
 PY_PATCHLIST		Yes [$package]
-PYPKGPREFIX		{ py24 py25 py26 py27 py31 } [*:pu, pyversion.mk:s, *:]
+PYPKGPREFIX		{ py26 py27 py31 py32 } [*:pu, pyversion.mk:s, *:]
 PYTHON_FOR_BUILD_ONLY	Yes [$package]
 PYTHON_PATCH_SCRIPTS	List of Pathmask [$package_list]
 PYTHON_VERSIONS_ACCEPTED List of Version [$package]
 PYTHON_VERSIONS_INCOMPATIBLE List of Version [$package]
 PYTHON_VERSION_DEFAULT	Version [$user]
+PYTHON_VERSION_REQD	Version [$user]
 RANLIB			ShellCommand [$system]
 RCD_SCRIPTS		List of Filename [$package_list]
 RCD_SCRIPT_SRC.*	List of Pathname [m:s]
@@ -658,6 +662,7 @@ REQD_FILES_PERMS	List of ShellWord [$package_list]
 RESTRICTED		Message [$package]
 ROOT_USER		UserGroupName [$user]
 ROOT_GROUP		UserGroupName [$user]
+RUBY_VERSION_REQD	Version [$user]
 RUN			ShellCommand [$system]
 SCRIPTS_ENV		List of ShellWord [m:a,c:a]
 SETUID_ROOT_PERMS	List of ShellWord [$user]

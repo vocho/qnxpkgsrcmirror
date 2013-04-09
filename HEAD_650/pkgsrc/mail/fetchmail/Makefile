@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.178 2012/08/21 15:49:54 tez Exp $
+# $NetBSD: Makefile,v 1.180 2012/11/03 22:50:22 morr Exp $
 
 # Note to updaters: mail/fetchmailconf reaches over here, make sure it builds.
-DISTNAME=	fetchmail-6.3.21
-PKGREVISION=	1
+DISTNAME=	fetchmail-6.3.22
 CATEGORIES=	mail
 MASTER_SITES=	http://download.berlios.de/fetchmail/
 EXTRACT_SUFX=	.tar.bz2
@@ -11,7 +10,6 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://fetchmail.berlios.de/
 COMMENT=	Batch mail retrieval/forwarding utility for pop2, pop3, apop, imap
 
-PKG_DESTDIR_SUPPORT=	user-destdir
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
 
 .include "../../mk/bsd.prefs.mk"

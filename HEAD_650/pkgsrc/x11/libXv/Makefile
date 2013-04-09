@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.8 2012/06/09 07:00:48 obache Exp $
+# $NetBSD: Makefile,v 1.10 2012/10/29 05:06:36 asau Exp $
 #
 
 DISTNAME=		libXv-1.0.7
@@ -11,7 +11,6 @@ HOMEPAGE=		http://xorg.freedesktop.org/
 COMMENT=		Xv Extension library
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_LIBTOOL=		yes
 PKGCONFIG_OVERRIDE+=	xv.pc.in
@@ -29,7 +28,6 @@ CONFIGURE_ARGS+=	--disable-malloc0returnsnull
 .include "../../x11/libX11/buildlink3.mk"
 .include "../../x11/libXext/buildlink3.mk"
 .include "../../x11/videoproto/buildlink3.mk"
-.include "../../x11/xextproto/buildlink3.mk"
 .include "../../x11/xproto/buildlink3.mk"
 
 .include "../../mk/bsd.pkg.mk"

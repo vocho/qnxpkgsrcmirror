@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.18 2011/04/22 14:40:45 obache Exp $
+# $NetBSD: Makefile,v 1.21 2012/10/23 10:24:14 wiz Exp $
 
 DISTNAME=	fvwm-${FVWM_VER}
-PKGREVISION=	4
+PKGREVISION=	5
 CATEGORIES=	x11 wm
 MASTER_SITES=	ftp://ftp.fvwm.org/pub/fvwm/version-2/ \
 		http://www.fvwm.org/generated/icon_download/
@@ -22,7 +22,6 @@ USE_X11BASE=		YES
 GNU_CONFIGURE=		YES
 USE_GNU_READLINE=	YES
 USE_TOOLS+=		perl:run tar
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 PLIST_SUBST+=		FVWM_VER=${FVWM_VER:Q}
 
@@ -74,5 +73,4 @@ BUILDLINK_DEPMETHOD.libXt?=	build
 .include "../../x11/libXinerama/buildlink3.mk"
 .include "../../x11/libXpm/buildlink3.mk"
 .include "../../x11/libXt/buildlink3.mk"
-.include "../../x11/xextproto/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

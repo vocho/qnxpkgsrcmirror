@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.157 2012/06/14 07:45:15 sbd Exp $
+# $NetBSD: Makefile,v 1.163 2012/10/08 23:02:02 adam Exp $
 #
 
 DISTNAME=		gnumeric-1.8.4
-PKGREVISION=		22
+PKGREVISION=		27
 CATEGORIES=		math gnome
 MASTER_SITES=		${MASTER_SITE_GNOME:=sources/gnumeric/1.8/}
 EXTRACT_SUFX=		.tar.bz2
@@ -11,8 +11,6 @@ MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://www.gnome.org/projects/gnumeric/
 COMMENT=		Spreadsheet program from the GNOME project (development version)
 LICENSE=		gnu-gpl-v2
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_PKGLOCALEDIR=	YES
 USE_TOOLS+=		gmake intltool msgfmt perl:run pkg-config

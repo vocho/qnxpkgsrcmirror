@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.101 2011/08/07 07:47:20 tron Exp $
+# $NetBSD: Makefile,v 1.103 2012/10/08 12:19:31 asau Exp $
 
 DISTNAME=	Mail-SpamAssassin-3.3.2
 PKGNAME=	spamassassin-3.3.2
+PKGREVISION=	1
 SVR4_PKGNAME=	sa
 CATEGORIES=	mail perl5
 MASTER_SITES=	${MASTER_SITE_APACHE:=spamassassin/source/}
@@ -16,7 +17,6 @@ HOMEPAGE=	http://spamassassin.apache.org/
 COMMENT=	Mail filter to identify spam
 LICENSE=	apache-2.0
 
-PKG_DESTDIR_SUPPORT=	user-destdir
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
 
 .include "../../mk/bsd.prefs.mk"

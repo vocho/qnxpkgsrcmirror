@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.23 2012/05/22 05:58:47 joerg Exp $
+# $NetBSD: Makefile,v 1.27 2012/11/03 01:58:36 ryoon Exp $
 #
 
 DISTNAME=	gpac-0.4.5
-PKGREVISION=	16
+PKGREVISION=	19
 CATEGORIES=	multimedia
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=gpac/}
 
@@ -10,8 +10,6 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://gpac.sourceforge.net/
 COMMENT=	Open source multimedia framework
 LICENSE=	gnu-lgpl-v2.1
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 MAKE_JOBS_SAFE=		no
 

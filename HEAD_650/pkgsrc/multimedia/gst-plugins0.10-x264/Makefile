@@ -1,14 +1,11 @@
-# $NetBSD: Makefile,v 1.11 2012/06/14 07:44:17 sbd Exp $
+# $NetBSD: Makefile,v 1.13 2012/10/08 09:21:04 asau Exp $
 #
 
 GST_PLUGINS0.10_NAME=	x264
 GST_PLUGINS0.10_DIRS=	ext/x264
-PKGREVISION=		1
-
-PKG_DESTDIR_SUPPORT=	user-destdir
+PKGREVISION=		2
 
 .include "../../multimedia/gst-plugins0.10-ugly/Makefile.common"
-PKGREVISION=1
 
 # need shared lib
 BUILDLINK_API_DEPENDS.x264-devel+= x264-devel>=20071218nb1

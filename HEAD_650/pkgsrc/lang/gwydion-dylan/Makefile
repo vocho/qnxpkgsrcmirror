@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.10 2011/03/31 09:03:21 asau Exp $
+# $NetBSD: Makefile,v 1.12 2012/10/03 21:56:19 wiz Exp $
 #
 
 DISTNAME=		gwydion-dylan-${DYLAN_VERSION}
-PKGREVISION=		1
+PKGREVISION=		2
 CATEGORIES=		lang
 MASTER_SITES=		ftp://ftp.opendylan.org/pub/gd/src/tar/ \
 			ftp://ftp.fu-berlin.de/pub/unix/languages/dylan/src/tar/ \
@@ -12,7 +12,6 @@ MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://www.opendylan.org/
 COMMENT=		Functional language
 
-PKG_DESTDIR_SUPPORT=	user-destdir
 MAKE_JOBS_SAFE=		no
 
 USE_TOOLS+=		gmake perl

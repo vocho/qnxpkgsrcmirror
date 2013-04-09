@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.6 2011/08/14 08:18:10 obache Exp $
+# $NetBSD: Makefile,v 1.8 2012/10/03 21:54:23 wiz Exp $
 
 DISTNAME=	Rose-DBx-Object-MoreHelpers-0.08
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	databases perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Rose/}
 
@@ -17,8 +17,6 @@ DEPENDS+=	p5-Rose-DBx-TestDB-[0-9]*:../../databases/p5-Rose-DBx-TestDB
 
 USE_LANGUAGES=	# empty
 PERL5_PACKLIST= auto/Rose/DBx/Object/MoreHelpers/.packlist
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 .include "../../lang/perl5/module.mk"
 .include "../../mk/bsd.pkg.mk"

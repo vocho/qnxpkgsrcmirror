@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.74 2012/07/03 17:38:31 joerg Exp $
+# $NetBSD: Makefile,v 1.80 2012/11/03 01:58:35 ryoon Exp $
 #
 
 DISTNAME=	avidemux_2.5.4
 PKGNAME=	${DISTNAME:S/_/-/}
-PKGREVISION=	10
+PKGREVISION=	15
 CATEGORIES=	multimedia
 MASTER_SITES=	http://download.berlios.de/avidemux/
 
@@ -13,8 +13,6 @@ COMMENT=	Graphical video editing program
 LICENSE=	gnu-gpl-v2
 
 BUILD_DEPENDS+=	yasm-[0-9]*:../../devel/yasm
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 GCC_REQD+=		3.0
 USE_LANGUAGES=		c c++

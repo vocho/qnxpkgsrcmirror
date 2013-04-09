@@ -1,10 +1,9 @@
-# $NetBSD: Makefile,v 1.96 2012/08/01 12:22:14 drochner Exp $
+# $NetBSD: Makefile,v 1.99 2012/10/29 05:07:19 asau Exp $
 
 COMMENT=	Screen saver and locker for the X window system
+PKGREVISION=	1
 
 CONFLICTS+=	xscreensaver-gnome<4.14
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 .include "Makefile.common"
 .include "options.mk"
@@ -35,5 +34,4 @@ post-install:
 .include "../../x11/libXpm/buildlink3.mk"
 .include "../../x11/libXxf86misc/buildlink3.mk"
 .include "../../x11/libXxf86vm/buildlink3.mk"
-.include "../../x11/xextproto/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

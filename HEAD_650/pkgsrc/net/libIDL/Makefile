@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.55 2012/03/03 00:11:53 wiz Exp $
+# $NetBSD: Makefile,v 1.57 2012/10/23 17:18:32 asau Exp $
 
 DISTNAME=	libIDL-0.8.14
-PKGREVISION=	3
+PKGREVISION=	4
 CATEGORIES=	net gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/libIDL/0.8/}
 
@@ -11,7 +11,6 @@ COMMENT=	CORBA Interface Definition Language parser
 LICENSE=	gnu-lgpl-v2
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_LIBTOOL=		yes
 USE_TOOLS+=		bison flex pkg-config

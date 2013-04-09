@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.8 2012/03/26 14:02:11 joerg Exp $
+# $NetBSD: Makefile,v 1.13 2012/10/08 23:00:38 adam Exp $
 #
 
 DISTNAME=	mx-1.0.4
 PKGNAME=	clutter-mx-1.0.4
-PKGREVISION=	5
+PKGREVISION=	9
 CATEGORIES=	graphics
 MASTER_SITES=	http://source.clutter-project.org/sources/mx/1.0/
 EXTRACT_SUFX=	.tar.bz2
@@ -12,8 +12,6 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://blogs.gnome.org/thos/2010/05/20/mx-toolkit-1-0/
 COMMENT=	Clutter-based widget set
 #LICENSE=	# TODO: (see mk/license.mk)
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=	yes
 USE_LIBTOOL=	yes

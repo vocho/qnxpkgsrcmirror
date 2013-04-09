@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.4 2012/07/01 19:05:26 dholland Exp $
+# $NetBSD: Makefile,v 1.10 2012/10/23 19:51:09 asau Exp $
 
 DISTNAME=	k4dirstat-2.7.3
-PKGREVISION=	2
+PKGREVISION=	7
 CATEGORIES=	sysutils
 MASTER_SITES=	http://bitbucket.org/jeromerobert/k4dirstat/get/
 EXTRACT_SUFX=	.tar.bz2
@@ -9,8 +9,6 @@ EXTRACT_SUFX=	.tar.bz2
 MAINTAINER=	markd@NetBSD.org
 HOMEPAGE=	http://bitbucket.org/jeromerobert/k4dirstat
 COMMENT=	Graphical disk usage utility
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 BUILD_DEPENDS+=	automoc4>=0.9.87:../../devel/automoc4
 

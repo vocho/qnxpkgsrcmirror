@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.57 2012/01/24 09:11:06 sbd Exp $
+# $NetBSD: Makefile,v 1.59 2012/10/02 20:11:44 asau Exp $
 #
 
 DISTNAME=		librep-0.91.0
-PKGREVISION=		3
+PKGREVISION=		4
 CATEGORIES=		lang devel
 MASTER_SITES=		http://download.tuxfamily.org/sawfish/librep/
 EXTRACT_SUFX=		.tar.bz2
@@ -11,7 +11,6 @@ MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://librep.sourceforge.net/
 COMMENT=		Emacs Lisp-like runtime library, interpreter, compiler and VM
 
-PKG_DESTDIR_SUPPORT=	user-destdir
 USE_TOOLS+=		gmake makeinfo
 USE_GNU_READLINE=	yes # uses rl_basic_quote_characters
 USE_LIBTOOL=		yes

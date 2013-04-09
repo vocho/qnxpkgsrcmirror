@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.8 2010/04/19 06:24:33 agc Exp $
+# $NetBSD: Makefile,v 1.10 2012/10/03 21:56:20 wiz Exp $
 #
 
 DISTNAME=	see-3.0.1376
-PKGREVISION=	3
+PKGREVISION=	4
 CATEGORIES=	lang
 MASTER_SITES=	http://users.tpg.com.au/dle0nard/software/
 
@@ -11,7 +11,6 @@ HOMEPAGE=	http://www.adaptive-enterprises.com.au/~d/software/see/
 COMMENT=	JavaScript interpreter and runtime library in C
 LICENSE=	modified-bsd
 
-PKG_DESTDIR_SUPPORT=	user-destdir
 INSTALLATION_DIRS+=	share/doc/see
 
 GNU_CONFIGURE=		yes

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.21 2010/09/21 05:43:16 sno Exp $
+# $NetBSD: Makefile,v 1.23 2012/10/29 05:07:05 asau Exp $
 
 DISTNAME=	xf86-video-nv-2.1.18
 #PKGREVISION=	2
@@ -11,11 +11,15 @@ HOMEPAGE=	http://xorg.freedesktop.org/
 COMMENT=	Modular Xorg NVIDIA video driver
 LICENSE=	mit AND modified-bsd
 
-PKG_DESTDIR_SUPPORT=	user-destdir
-
 USE_LIBTOOL=	YES
 GNU_CONFIGURE=	YES
 USE_TOOLS+=	pkg-config
+
+.include "../../mk/bsd.prefs.mk"
+
+.if ${OPSYS} == "SunOS"
+CONFIGURE_ENV+=	DRIVER_MAN_SUFFIX=4
+.endif
 
 .include "../../x11/modular-xorg-server/buildlink3.mk"
 

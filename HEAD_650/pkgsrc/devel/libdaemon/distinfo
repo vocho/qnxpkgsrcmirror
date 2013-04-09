@@ -5,3 +5,6 @@ RMD160 (libdaemon-0.14.tar.gz) = 952ae993fecfe3ec765dfa43b2690a83f1a5c939
 Size (libdaemon-0.14.tar.gz) = 340474 bytes
 SHA1 (patch-aa) = f0d309bd98b19a9fcec785edfe686dd33746bf46
 SHA1 (patch-ab) = bb882643ecd8deedfb76f88ee4dea1ce42da2636
+SHA1 (patch-libdaemon_dexec.c) = 512a26f11e0ed47d00ffe90033a40521faad7768
+SHA1 (patch-libdaemon_dfork.c) = d98213c79aa6ad0cb9c7d9527237ed10a8ca3ec8
+SHA1 (patch-libdaemon_dsignal.c) = e86b79542b564d449df027eb5c2b4799faca82e0

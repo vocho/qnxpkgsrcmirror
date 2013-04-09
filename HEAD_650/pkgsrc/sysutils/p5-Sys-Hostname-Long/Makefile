@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.13 2011/08/14 14:52:51 obache Exp $
+# $NetBSD: Makefile,v 1.15 2012/10/23 19:51:18 asau Exp $
 #
 
 DISTNAME=		Sys-Hostname-Long-1.4
 PKGNAME=		p5-${DISTNAME}
-PKGREVISION=		3
+PKGREVISION=		4
 SVR4_PKGNAME=		p5shl
 CATEGORIES=		sysutils perl5
 MASTER_SITES=		${MASTER_SITE_PERL_CPAN:=Sys/}
@@ -13,7 +13,6 @@ HOMEPAGE=		http://search.cpan.org/dist/Sys-Hostname-Long/
 COMMENT=		Try to get the full hostname in Perl
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_LANGUAGES=		# empty
 

@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.2 2008/03/04 17:57:19 jlam Exp $
+# $NetBSD: Makefile,v 1.4 2012/10/08 12:19:31 asau Exp $
 #
 
 DISTNAME=		sendymail-0.5.8
+PKGREVISION=		1
 CATEGORIES=		mail
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=sendymail/}
 
@@ -15,8 +16,6 @@ DEPENDS+=		p5-Getopt-Long-[0-9]*:../../devel/p5-Getopt-Long
 DEPENDS+=		p5-libwww-[0-9]*:../../www/p5-libwww
 DEPENDS+=		p5-MailTools-[0-9]*:../../mail/p5-MailTools
 DEPENDS+=		p5-MIME-tools-[0-9]*:../../mail/p5-MIME-tools
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=		perl:run
 REPLACE_PERL=		sendymail.pl

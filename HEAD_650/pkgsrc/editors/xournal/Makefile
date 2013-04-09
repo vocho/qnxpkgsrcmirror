@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.14 2012/08/13 11:25:57 drochner Exp $
+# $NetBSD: Makefile,v 1.20 2012/10/08 23:01:30 adam Exp $
 
 DISTNAME=	xournal-0.4.7
-PKGREVISION=	1
+PKGREVISION=	6
 CATEGORIES=	editors
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=xournal/}
 
@@ -14,8 +14,6 @@ GNU_CONFIGURE=	yes
 USE_LIBTOOL=	yes
 USE_LANGUAGES=	c
 USE_TOOLS+=	pkg-config msgfmt
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 LDFLAGS.DragonFly=	-lX11 -lz -lm
 LDFLAGS.SunOS=		-lX11 -lz -lm

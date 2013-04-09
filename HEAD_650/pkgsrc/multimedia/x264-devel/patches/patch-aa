@@ -1,10 +1,10 @@
-$NetBSD: patch-aa,v 1.14 2012/01/16 11:06:06 drochner Exp $
+$NetBSD: patch-aa,v 1.16 2012/11/28 16:29:53 adam Exp $
 
---- configure.orig	2011-12-07 21:45:03.000000000 +0000
+--- configure.orig	2012-11-27 21:45:03.000000000 +0000
 +++ configure
-@@ -428,6 +428,10 @@ case $host_os in
+@@ -466,6 +466,10 @@ case $host_os in
          SYS="FREEBSD"
-         LDFLAGS="$LDFLAGS -lm"
+         libm="-lm"
          ;;
 +    dragonfly*)
 +        SYS="DRAGONFLY"
@@ -13,7 +13,7 @@ $NetBSD: patch-aa,v 1.14 2012/01/16 11:06:06 drochner Exp $
      kfreebsd*-gnu)
          SYS="FREEBSD"
          define HAVE_MALLOC_H
-@@ -481,6 +485,11 @@ case $host_os in
+@@ -521,6 +525,11 @@ case $host_os in
          fi
          HAVE_GETOPT_LONG=0
          ;;
@@ -25,7 +25,7 @@ $NetBSD: patch-aa,v 1.14 2012/01/16 11:06:06 drochner Exp $
      *)
          die "Unknown system $host, edit the configure"
          ;;
-@@ -522,7 +531,7 @@ case $host_cpu in
+@@ -567,7 +576,7 @@ case $host_cpu in
              ASFLAGS="$ASFLAGS -f elf"
          fi
          ;;
@@ -33,8 +33,8 @@ $NetBSD: patch-aa,v 1.14 2012/01/16 11:06:06 drochner Exp $
 +    x86_64|amd64)
          ARCH="X86_64"
          AS="yasm"
-         if [ "$SYS" = MACOSX ]; then
-@@ -540,13 +549,14 @@ case $host_cpu in
+         [ $compiler = GNU ] && CFLAGS="-m64 $CFLAGS" && LDFLAGS="-m64 $LDFLAGS"
+@@ -587,13 +596,14 @@ case $host_cpu in
          fi
          ;;
      powerpc|powerpc64)
@@ -50,7 +50,7 @@ $NetBSD: patch-aa,v 1.14 2012/01/16 11:06:06 drochner Exp $
                  CFLAGS="$CFLAGS -maltivec -mabi=altivec"
                  define HAVE_ALTIVEC_H
              fi
-@@ -686,7 +696,7 @@ fi
+@@ -739,7 +749,7 @@ fi
  # pthread-win32 is lgpl, prevent its use if --disable-gpl is specified and targeting windows
  [ "$SYS" = "WINDOWS" -a "$gpl" = "no" -a "$thread" = "auto" ] && thread="win32"
  
@@ -59,9 +59,9 @@ $NetBSD: patch-aa,v 1.14 2012/01/16 11:06:06 drochner Exp $
  if [ "$thread" = "auto" ]; then
      thread="no"
      case $SYS in
-@@ -717,6 +727,9 @@ if [ "$thread" = "auto" ]; then
-         OPENBSD)
-             cc_check pthread.h -pthread && thread="posix" && libpthread="-pthread"
+@@ -767,6 +777,9 @@ if [ "$thread" = "auto" ]; then
+                 thread="win32"
+             fi
              ;;
 +        QNX)
 +            cc_check pthread.h && thread="posix" && libpthread="-lc"
@@ -69,7 +69,7 @@ $NetBSD: patch-aa,v 1.14 2012/01/16 11:06:06 drochner Exp $
          *)
              cc_check pthread.h -lpthread && thread="posix" && libpthread="-lpthread"
              ;;
-@@ -872,10 +885,11 @@ fi
+@@ -922,10 +935,11 @@ fi
  cc_check "stdint.h" "" "uint32_t test_vec __attribute__ ((vector_size (16))) = {0,1,2,3};" && define HAVE_VECTOREXT
  
  if [ "$pic" = "yes" ] ; then

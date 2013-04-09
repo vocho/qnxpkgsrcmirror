@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.4 2012/06/14 07:43:08 sbd Exp $
+# $NetBSD: Makefile,v 1.6 2012/10/28 06:30:20 asau Exp $
 #
 
 DISTNAME=	rest-0.7.12
 PKGNAME=	librest07-0.7.12
-PKGREVISION=	2
+PKGREVISION=	3
 CATEGORIES=	www
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/rest/0.7/}
 EXTRACT_SUFX=	.tar.xz
@@ -12,8 +12,6 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://moblin.org/projects/librest
 COMMENT=	Library for "RESTful" web services
 #LICENSE=	# TODO: (see mk/license.mk)
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=	yes
 USE_LIBTOOL=	yes

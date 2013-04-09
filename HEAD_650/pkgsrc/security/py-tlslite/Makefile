@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.4 2011/10/29 06:22:20 obache Exp $
+# $NetBSD: Makefile,v 1.7 2012/10/23 18:16:55 asau Exp $
 #
 
 DISTNAME=	tlslite-0.3.8
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	security python
 MASTER_SITES=	${HOMEPAGE}
 
@@ -12,7 +12,7 @@ HOMEPAGE=	http://trevp.net/tlslite/
 COMMENT=	SSL 3.0, TLS 1.0, and TLS 1.1 in Python
 LICENSE=	public-domain
 
-PKG_DESTDIR_SUPPORT=	user-destdir
+PYTHON_SELF_CONFLICT=	yes
 
 USE_LANGUAGES=	# none
 

@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.25 2012/07/01 19:05:27 dholland Exp $
+# $NetBSD: Makefile,v 1.31 2012/10/08 23:02:29 adam Exp $
 
 DISTNAME=		rsibreak-0.11
-PKGREVISION=		2
+PKGREVISION=		7
 CATEGORIES=		time kde
 MASTER_SITES=		http://www.rsibreak.org/files/
 EXTRACT_SUFX=           .tar.bz2
@@ -10,8 +10,6 @@ MAINTAINER=		markd@NetBSD.org
 HOMEPAGE=		http://www.rsibreak.org/
 COMMENT=		RSI management tool
 LICENSE=		gnu-gpl-v2
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 BUILD_DEPENDS+=		automoc4>=0.9.87:../../devel/automoc4
 

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.8 2010/10/31 23:38:32 wiz Exp $
+# $NetBSD: Makefile,v 1.10 2012/10/23 19:51:27 asau Exp $
 
 DISTNAME=		torsmo-0.18
 PKGREVISION=		2
@@ -8,8 +8,6 @@ MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=torsmo/}
 MAINTAINER=		ghen@NetBSD.org
 HOMEPAGE=		http://torsmo.sourceforge.net/
 COMMENT=		Tyopoytaorvelo System Monitor
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 NOT_FOR_PLATFORM=	Darwin-*-*
 
@@ -45,5 +43,4 @@ BUILDLINK_DEPMETHOD.libXt?=	build
 .include "../../x11/libX11/buildlink3.mk"
 .include "../../x11/libXext/buildlink3.mk"
 .include "../../x11/libXt/buildlink3.mk"
-.include "../../x11/xextproto/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.5 2011/11/11 11:37:08 sno Exp $
+# $NetBSD: Makefile,v 1.7 2012/10/08 13:45:42 asau Exp $
 #
 
 DISTNAME=	LaTeX-Driver-0.10
 PKGNAME=	p5-${DISTNAME}
+PKGREVISION=	1
 CATEGORIES=	print
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=LaTeX/}
 
@@ -19,8 +20,6 @@ DEPENDS+=	tex-latex-bin-[0-9]*:../../print/tex-latex-bin
 DEPENDS+=	web2c-[0-9]*:../../print/web2c
 DEPENDS+=	dvipsk-[0-9]*:../../print/dvipsk
 DEPENDS+=	ghostscript-[0-9]*:../../print/ghostscript
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 PERL5_PACKLIST=		auto/LaTeX/Driver/.packlist
 

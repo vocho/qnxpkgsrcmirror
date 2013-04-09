@@ -1,8 +1,8 @@
 $NetBSD$
 
---- toolkit/components/startup/nsAppStartup.cpp.orig	2012-03-13 01:37:15.000000000 +0000
+--- toolkit/components/startup/nsAppStartup.cpp.orig	2012-11-19 15:43:24.000000000 +0000
 +++ toolkit/components/startup/nsAppStartup.cpp
-@@ -81,8 +81,10 @@
+@@ -47,8 +47,10 @@
  #undef GetStartupInfo
  #elif defined(XP_UNIX)
  #include <unistd.h>

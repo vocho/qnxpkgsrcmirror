@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.1 2012/08/12 17:47:43 wiz Exp $
+# $NetBSD: Makefile,v 1.3 2012/10/28 06:30:14 asau Exp $
 #
 
 DISTNAME=	eliom-2.2.2
+PKGREVISION=	1
 CATEGORIES=	www
 MASTER_SITES=	http://ocsigen.org/download/
 
@@ -9,8 +10,6 @@ MAINTAINER=	jaapb@kerguelen.org
 HOMEPAGE=	http://ocsigen.org/download/
 COMMENT=	Dynamic webpage generation library
 LICENSE=	gnu-lgpl-v2.1
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_LANGUAGES=	c
 USE_TOOLS=	gmake

@@ -1,8 +1,8 @@
 $NetBSD$
 
---- layout/base/nsPresArena.cpp.orig	2012-07-13 21:43:04.000000000 +0000
+--- layout/base/nsPresArena.cpp.orig	2012-11-19 15:42:39.000000000 +0000
 +++ layout/base/nsPresArena.cpp
-@@ -180,7 +180,13 @@ ReleaseRegion(void *region, uintptr_t si
+@@ -144,7 +144,13 @@ ReleaseRegion(void *region, uintptr_t si
  static bool
  ProbeRegion(uintptr_t region, uintptr_t size)
  {

@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.75 2012/07/15 08:22:58 wiz Exp $
+# $NetBSD: Makefile,v 1.80 2012/10/08 23:02:30 adam Exp $
 
 DISTNAME=	openbox-3.5.0
-PKGREVISION=	6
+PKGREVISION=	10
 CATEGORIES=	wm x11
 MASTER_SITES=	http://openbox.org/dist/openbox/
 
@@ -11,8 +11,6 @@ COMMENT=	Standards compliant, light-weight, and extensible window manager
 LICENSE=	gnu-gpl-v2
 
 DEPENDS+=		vera-ttf>=1.10:../../fonts/vera-ttf
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=		YES
 USE_TOOLS+=		gmake msgfmt pkg-config

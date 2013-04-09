@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.15 2011/08/06 13:29:43 adam Exp $
+# $NetBSD: Makefile,v 1.17 2012/10/03 21:54:10 wiz Exp $
 
 DISTNAME=	chkjis
 PKGNAME=	p5-chkjis-${VERSION}
-PKGREVISION=	5
+PKGREVISION=	6
 CATEGORIES=	japanese converters perl5
 MASTER_SITES=	http://www2d.biglobe.ne.jp/~msyk/software/perl5/
 EXTRACT_SUFX=	.pl
@@ -10,8 +10,6 @@ EXTRACT_SUFX=	.pl
 MAINTAINER=	tech-pkg-ja@jp.NetBSD.org
 HOMEPAGE=	http://www2d.biglobe.ne.jp/~msyk/software/chkjis.html
 COMMENT=	Filter library substituting vendor's own characters
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 WRKSRC=		${WRKDIR}
 

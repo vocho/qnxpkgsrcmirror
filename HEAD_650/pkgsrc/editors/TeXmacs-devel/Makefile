@@ -1,15 +1,14 @@
-# $NetBSD: Makefile,v 1.11 2012/07/24 18:16:31 drochner Exp $
+# $NetBSD: Makefile,v 1.17 2012/10/08 23:01:25 adam Exp $
 
 DISTNAME=		TeXmacs-1.0.7.16-src
 PKGNAME=		${DISTNAME:S/-src//}
+PKGREVISION=		5
 CATEGORIES=		editors
 MASTER_SITES=		ftp://ftp.texmacs.org/TeXmacs/tmftp/source/
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://www.texmacs.org/
 COMMENT=		GNU TeXmacs (free scientific text editor)
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 BUILD_TARGET=		TEXMACS
 

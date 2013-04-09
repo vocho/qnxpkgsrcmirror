@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.16 2009/02/16 13:48:03 joerg Exp $
+# $NetBSD: Makefile,v 1.18 2012/10/23 10:24:14 wiz Exp $
 #
 
 DISTNAME=	larswm-7.5.3
@@ -10,8 +10,6 @@ DISTFILES=	${DISTNAME}${EXTRACT_SUFX} ${DOCFILES}
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://home.earthlink.net/~lab1701/larswm/
 COMMENT=	9wm-like window manager
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 EXTRACT_ONLY=	${DISTNAME}${EXTRACT_SUFX}
 
@@ -41,5 +39,4 @@ post-install:
 
 .include "../../x11/libXext/buildlink3.mk"
 .include "../../x11/libXmu/buildlink3.mk"
-.include "../../x11/xextproto/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.8 2012/06/29 12:39:17 joerg Exp $
+# $NetBSD: Makefile,v 1.10 2012/10/23 19:50:53 asau Exp $
 #
 
 DISTNAME=	boxbackup-0.11.1
 PKGNAME=	boxbackup-client-0.11.1
+PKGREVISION=	1
 CATEGORIES=	sysutils
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=boxbackup/}
 EXTRACT_SUFX=	.tgz
@@ -10,8 +11,6 @@ EXTRACT_SUFX=	.tgz
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.boxbackup.org/
 COMMENT=	Backup tool
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 MAKE_JOBS_SAFE=	no
 

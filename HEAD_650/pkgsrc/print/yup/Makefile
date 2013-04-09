@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.13 2011/03/18 20:13:32 zafer Exp $
+# $NetBSD: Makefile,v 1.15 2012/10/08 13:45:50 asau Exp $
 #
 
 DISTNAME=		yup-r1-rel
 PKGNAME=		yup-1.0
+PKGREVISION=		1
 CATEGORIES=		print
 MASTER_SITES=		# http://redback.spyda.net/~mjch/yup/
 EXTRACT_SUFX=		.tgz
@@ -11,7 +12,6 @@ MAINTAINER=		pkgsrc-users@NetBSD.org
 COMMENT=		Print multiple PostScript/ASCII pages per sheet
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=		perl:run
 

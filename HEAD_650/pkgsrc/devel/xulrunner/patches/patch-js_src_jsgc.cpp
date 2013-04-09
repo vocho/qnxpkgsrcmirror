@@ -1,10 +1,10 @@
-$NetBSD: patch-js_src_jsgc.cpp,v 1.1 2012/07/14 21:19:48 ryoon Exp $
+$NetBSD: patch-js_src_jsgc.cpp,v 1.3 2012/08/28 23:27:10 ryoon Exp $
 
 http://gnats.netbsd.org/46622
 
---- js/src/jsgc.cpp.orig	2012-06-01 12:04:04.000000000 +0000
+--- js/src/jsgc.cpp.orig	2012-08-24 22:55:40.000000000 +0000
 +++ js/src/jsgc.cpp
-@@ -2636,8 +2636,12 @@ GetCPUCount()
+@@ -2635,8 +2635,12 @@ GetCPUCount()
          GetSystemInfo(&sysinfo);
          ncpus = unsigned(sysinfo.dwNumberOfProcessors);
  # else

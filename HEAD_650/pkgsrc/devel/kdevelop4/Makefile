@@ -1,11 +1,10 @@
-# $NetBSD: Makefile,v 1.19 2012/06/14 07:44:27 sbd Exp $
+# $NetBSD: Makefile,v 1.26 2012/11/23 20:37:41 markd Exp $
 #
 
-DISTNAME=	kdevelop-4.2.3
-PKGNAME=	kdevelop4-4.2.3
-PKGREVISION=	2
+DISTNAME=	kdevelop-4.4.1
+PKGNAME=	kdevelop4-4.4.1
 CATEGORIES=	devel
-MASTER_SITES=	${MASTER_SITE_KDE:=kdevelop/4.2.3/src/}
+MASTER_SITES=	${MASTER_SITE_KDE:=kdevelop/4.4.1/src/}
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	frank@fthieme.net
@@ -18,8 +17,6 @@ BUILD_DEPENDS+=	automoc4>=0.9.87:../../devel/automoc4
 USE_TOOLS+=	pkg-config perl msgfmt
 USE_LANGUAGES=	c c++
 
-PKG_DESTDIR_SUPPORT=	user-destdir
-
 # because of some expansion to ${PKGDIRNAME}.kdev4 which is done wrong by bmake
 USE_TOOLS+=     gmake
 
@@ -29,6 +26,7 @@ BUILDLINK_DEPMETHOD.qt4-tools=	full
 .include "../../x11/kdelibs4/buildlink3.mk"
 .include "../../x11/kde-workspace4/buildlink3.mk"
 .include "../../devel/boost-headers/buildlink3.mk"
+.include "../../devel/kdesdk4/buildlink3.mk"
 .include "../../devel/kdevplatform/buildlink3.mk"
 .include "../../devel/subversion-base/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"

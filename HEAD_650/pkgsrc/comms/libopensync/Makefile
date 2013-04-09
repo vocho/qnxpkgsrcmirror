@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.12 2012/06/14 07:43:17 sbd Exp $
+# $NetBSD: Makefile,v 1.15 2012/10/07 12:12:53 wiz Exp $
 #
 
 DISTNAME=	libopensync-0.22
-PKGREVISION=	7
+PKGREVISION=	8
 CATEGORIES=	comms
 MASTER_SITES=	http://www.opensync.org/download/releases/0.22/
 EXTRACT_SUFX=	.tar.bz2
@@ -11,14 +11,13 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.opensync.org/
 COMMENT=	Platform independent synchronization framework
 
-PKG_DESTDIR_SUPPORT=	user-destdir
-
 USE_TOOLS+=	pkg-config
 USE_LANGUAGES=	c
 USE_LIBTOOL=	yes
 GNU_CONFIGURE=	yes
 
 CONFIGURE_ARGS+=	--disable-python
+BUILDLINK_TRANSFORM+=	rm:-Werror
 
 .include "../../databases/sqlite3/buildlink3.mk"
 .include "../../devel/glib2/buildlink3.mk"

@@ -1,4 +1,4 @@
-$NetBSD: patch-library_canvas_src_stdafx_h,v 1.1 2012/05/07 18:40:35 dholland Exp $
+$NetBSD: patch-library_canvas_src_stdafx_h,v 1.3 2012/09/15 05:14:07 obache Exp $
 
 Fix build with latest glib2.
 

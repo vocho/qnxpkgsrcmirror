@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.21 2011/12/17 19:01:24 marino Exp $
+# $NetBSD: Makefile,v 1.24 2012/10/21 20:56:54 cheusov Exp $
 #
 
 DISTNAME=		sr233
 PKGNAME=		sr-2.3.3
-PKGREVISION=		7
+PKGREVISION=		9
 CATEGORIES=		lang parallel
 MASTER_SITES=		ftp://ftp.cs.arizona.edu/sr/
 EXTRACT_SUFX=		.tar.Z
@@ -13,7 +13,8 @@ HOMEPAGE=		http://www.cs.arizona.edu/sr/
 COMMENT=		The SR language compiler and run time system
 
 NOT_FOR_PLATFORM=	*-*-x86_64  # site: "doesn't run on 64-bit/AMD64"
-PKG_DESTDIR_SUPPORT=	user-destdir
+
+CONFLICTS+=		srm-[0-9]* clearsilver-base-[0-9]* netramet-[0-9]*
 
 MAKE_JOBS_SAFE=		no
 

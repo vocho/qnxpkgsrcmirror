@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.18 2012/07/15 08:22:48 wiz Exp $
+# $NetBSD: Makefile,v 1.23 2012/10/31 11:19:29 asau Exp $
 #
 
 PKGVER=			0.8.4
 DISTNAME=		compizconfig-python-${PKGVER}
 PKGNAME=		${PYPKGPREFIX}-compizconfig-${PKGVER}
-PKGREVISION=		10
+PKGREVISION=		14
 CATEGORIES=		devel gnome
 MASTER_SITES=		http://releases.compiz.org/${PKGVER}/
 
@@ -12,8 +12,6 @@ MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://compiz.org/
 COMMENT=		Python bindings for libcompizconfig
 LICENSE=		gnu-gpl-v2
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=		yes
 USE_LIBTOOL=		yes

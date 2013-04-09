@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.12 2012/03/02 16:00:58 marino Exp $
+# $NetBSD: Makefile,v 1.14 2012/10/03 21:56:19 wiz Exp $
 #
 
 PKGNAME=	gnat-aux-${SNAPSHOT}
 DISTNAME=	gcc-${GCC_VERSION}
+PKGREVISION=	1
 CATEGORIES=	lang
 MASTER_SITES=	${MASTER_SITE_GNU:=gcc/gcc-${GCC_VERSION}/}
 DISTFILES=	gcc-core-${GCC_VERSION}.tar.bz2
@@ -17,8 +18,6 @@ GCC_BRANCH=	4.6
 GCC_POINT=	3
 GCC_VERSION=	${GCC_BRANCH}.${GCC_POINT}
 LANGS=		c
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=		gmake sed perl makeinfo bzip2 patch pod2man
 USE_BUILTIN.iconv=	no

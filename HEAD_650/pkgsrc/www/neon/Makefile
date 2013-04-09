@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.55 2012/05/24 13:10:20 wiz Exp $
+# $NetBSD: Makefile,v 1.57 2012/10/28 06:30:23 asau Exp $
 
 DISTNAME=	neon-0.29.6
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	www
 MASTER_SITES=	http://www.webdav.org/neon/
 
@@ -11,7 +11,6 @@ COMMENT=	HTTP and WebDAV client library
 LICENSE=	gnu-gpl-v2 AND gnu-lgpl-v2
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_LIBTOOL=		yes
 USE_TOOLS+=		pkg-config msgfmt

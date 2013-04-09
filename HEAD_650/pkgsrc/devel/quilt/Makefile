@@ -1,15 +1,14 @@
-# $NetBSD: Makefile,v 1.7 2012/05/29 22:58:53 cheusov Exp $
+# $NetBSD: Makefile,v 1.9 2012/10/31 11:19:37 asau Exp $
 #
 
 DISTNAME=	quilt-0.48
+PKGREVISION=	1
 CATEGORIES=	devel scm
 MASTER_SITES=	http://download.savannah.gnu.org/releases/quilt/
 
 MAINTAINER=	jmmv@NetBSD.org
 HOMEPAGE=	http://savannah.nongnu.org/projects/quilt
 COMMENT=	Tools to manage series of patches
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 DEPENDS+=	coreutils-[0-9]*:../../sysutils/coreutils
 DEPENDS+=	gsed-[0-9]*:../../textproc/gsed

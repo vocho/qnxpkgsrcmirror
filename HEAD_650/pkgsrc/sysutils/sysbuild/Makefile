@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.19 2012/08/15 21:20:14 jmmv Exp $
+# $NetBSD: Makefile,v 1.23 2012/10/23 19:51:25 asau Exp $
 
-DISTNAME=	sysbuild-2.1
+DISTNAME=	sysbuild-2.4
 CATEGORIES=	sysutils
 MASTER_SITES=	# empty
 DISTFILES=	# empty
@@ -10,7 +10,6 @@ COMMENT=	Automates builds of NetBSD and manages source trees
 LICENSE=	modified-bsd
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 WRKSRC=			${WRKDIR}
 NO_CONFIGURE=		YES
@@ -18,6 +17,7 @@ NO_CONFIGURE=		YES
 BUILD_SUBST=		-e 's,@SYSBUILD_BINDIR@,${PREFIX}/bin,g'
 BUILD_SUBST+=		-e 's,@SYSBUILD_EGDIR@,${EGDIR},g'
 BUILD_SUBST+=		-e 's,@SYSBUILD_ETCDIR@,${PKG_SYSCONFDIR},g'
+BUILD_SUBST+=		-e 's,@SYSBUILD_SHAREDIR@,${PREFIX}/share/sysbuild,g'
 
 PKG_SYSCONFSUBDIR=	sysbuild
 EGDIR=			${PREFIX}/share/examples/sysbuild
@@ -55,7 +55,8 @@ install-tests:
 .endfor
 
 do-test:
-	cd ${WRKSRC} && PATH="${WRKSRC}:${PATH}" kyua test
+	cd ${WRKSRC} && PATH="${WRKSRC}:${PATH}" \
+	    SYSBUILD_SHAREDIR="${WRKSRC}" kyua test
 .else
 PLIST_SUBST+=	TESTS=@comment
 .endif
@@ -66,11 +67,14 @@ do-build:
 	    | ${BUILDLINK_PREFIX.shtk}/bin/shtk build \
 	    -s ${SH} -m ${file}_main -o ${WRKSRC}/${file} -
 .endfor
-.for file in sysbuild.1 sysbuild4cron.1 default.conf
+.for file in sysbuild.1 sysbuild4cron.1 sysbuild.conf.5 default.conf
 	sed ${BUILD_SUBST} <${FILESDIR}/${file} >${WRKSRC}/${file}
 .endfor
+	cp ${FILESDIR}/env.sh ${WRKSRC}
+	chmod +x ${WRKSRC}/env.sh
 
-INSTALLATION_DIRS+=	bin ${PKGMANDIR}/man1 share/examples/sysbuild
+INSTALLATION_DIRS+=	bin ${PKGMANDIR}/man1 ${PKGMANDIR}/man5 \
+			share/examples/sysbuild share/sysbuild
 
 do-install:
 	${INSTALL_SCRIPT} ${WRKSRC}/sysbuild ${DESTDIR}${PREFIX}/bin/
@@ -79,9 +83,12 @@ do-install:
 	    ${DESTDIR}${PREFIX}/${PKGMANDIR}/man1/
 	${INSTALL_MAN} ${WRKSRC}/sysbuild4cron.1 \
 	    ${DESTDIR}${PREFIX}/${PKGMANDIR}/man1/
+	${INSTALL_MAN} ${WRKSRC}/sysbuild.conf.5 \
+	    ${DESTDIR}${PREFIX}/${PKGMANDIR}/man5/
 .for file in default.conf
 	${INSTALL_DATA} ${WRKSRC}/${file} ${DESTDIR}${EGDIR}
 .endfor
+	${INSTALL_SCRIPT} ${WRKSRC}/env.sh ${DESTDIR}${PREFIX}/share/sysbuild
 
 .include "../../devel/shtk/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

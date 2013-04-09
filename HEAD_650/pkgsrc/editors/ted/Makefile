@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.50 2012/07/12 17:10:21 marino Exp $
+# $NetBSD: Makefile,v 1.53 2012/10/03 11:43:43 asau Exp $
 
 DISTNAME=	ted-2.21.src
 PKGNAME=	${DISTNAME:S/.src//}
@@ -12,7 +12,6 @@ COMMENT=	X11 based WordPad-like word processor
 LICENSE=	gnu-gpl-v2
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_LANGUAGES=	c c++
 USE_TOOLS+=	gtar
@@ -37,7 +36,7 @@ CONFIGURE_ENV+=	ac_xpm_libraries="${BUILDLINK_PREFIX.libXpm}/lib"
 CONFIGURE_ENV+=	ac_zlib_includes="${BUILDLINK_PREFIX.zlib}/include"
 CONFIGURE_ENV+=	ac_zlib_libraries="${BUILDLINK_PREFIX.zlib}/lib"
 
-LDFLAGS.SunOS+=	-liconv
+LDFLAGS.SunOS+=		-lXft -lfontconfig -liconv
 LDFLAGS.DragonFly+=	-lXft -lfontconfig
 
 MAKE_FLAGS+=	CONFIGURE_OPTIONS=--x-libraries=${X11BASE}/lib\ --with-MOTIF
@@ -71,11 +70,14 @@ do-install:
 	${INSTALL_DATA}	${WRKSRC}/Ted/Ted.ad \
 		${DESTDIR}${PREFIX}/lib/X11/app-defaults/Ted
 
+.include "../../converters/libiconv/buildlink3.mk"
 .include "../../devel/pcre/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"
+.include "../../fonts/fontconfig/buildlink3.mk"
 .include "../../mk/jpeg.buildlink3.mk"
 .include "../../graphics/png/buildlink3.mk"
 .include "../../graphics/tiff/buildlink3.mk"
+.include "../../x11/libXft/buildlink3.mk"
 .include "../../x11/libXpm/buildlink3.mk"
 .include "../../mk/motif.buildlink3.mk"
 

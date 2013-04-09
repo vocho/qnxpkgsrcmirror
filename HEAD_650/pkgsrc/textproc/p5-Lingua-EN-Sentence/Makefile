@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.8 2011/08/14 15:14:04 obache Exp $
+# $NetBSD: Makefile,v 1.10 2012/10/25 06:56:13 asau Exp $
 
 DISTNAME=	Lingua-EN-Sentence-0.25
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	4
+PKGREVISION=	5
 CATEGORIES=	textproc perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Lingua/}
 
@@ -11,7 +11,6 @@ HOMEPAGE=	http://search.cpan.org/dist/Lingua-EN-Sentence/
 COMMENT=	Perl module for splitting English text into sentences
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_LANGUAGES=	# empty
 

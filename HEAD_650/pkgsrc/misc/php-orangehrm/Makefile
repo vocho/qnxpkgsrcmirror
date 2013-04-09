@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.3 2012/06/16 05:25:03 taca Exp $
+# $NetBSD: Makefile,v 1.5 2012/10/08 09:57:35 asau Exp $
 #
 
 DISTNAME=	orangehrm-2.7
@@ -10,8 +10,6 @@ MAINTAINER=	ryoon@NetBSD.org
 HOMEPAGE=	http://www.orangehrm.com/
 COMMENT=	Open source Human Resource Management (HRM) solution
 LICENSE=	gnu-gpl-v2
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 DEPENDS+=	${PHP_PKG_PREFIX}-mysql>=5.2.0:../../databases/php-mysql
 DEPENDS+=	${PHP_PKG_PREFIX}-mysqli>=5.2.0:../../databases/php-mysqli
@@ -42,5 +40,4 @@ do-install:
 		${DESTDIR}${PREFIX}/${OHRDIR}
 
 .include "../../lang/php/phpversion.mk"
-.include "../../mk/mysql.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

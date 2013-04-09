@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.7 2012/06/03 18:15:21 wiz Exp $
+# $NetBSD: Makefile,v 1.9 2012/10/29 05:07:11 asau Exp $
 #
 
 DISTNAME=		xgamma-1.0.5
@@ -10,8 +10,6 @@ MAINTAINER=		joerg@NetBSD.org
 HOMEPAGE=		http://xorg.freedesktop.org/
 COMMENT=		Alter gamma correction
 
-PKG_DESTDIR_SUPPORT=	user-destdir
-
 GNU_CONFIGURE=		yes
 USE_TOOLS+=		pkg-config
 
@@ -20,6 +18,5 @@ CONFIGURE_ENV+=		APP_MAN_SUFFIX=1
 .include "../../x11/libX11/buildlink3.mk"
 .include "../../x11/libXext/buildlink3.mk"
 .include "../../x11/libXxf86vm/buildlink3.mk"
-.include "../../x11/xextproto/buildlink3.mk"
 .include "../../x11/xf86vidmodeproto/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.36 2011/08/21 11:03:07 obache Exp $
+# $NetBSD: Makefile,v 1.38 2012/10/25 06:56:38 asau Exp $
 #
 
 DISTNAME=	XML-Parser-2.41
 PKGNAME=	p5-${DISTNAME}
+PKGREVISION=	1
 SVR4_PKGNAME=	p5xpa
 CATEGORIES=	textproc perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=XML/}
@@ -15,7 +16,6 @@ LICENSE=	${PERL5_LICENSE}
 #TEST_DEPENDS+=	p5-libwww-[0-9]*:../../www/p5-libwww
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 PERL5_PACKLIST=		auto/XML/Parser/.packlist
 MAKE_PARAMS+=		EXPATLIBPATH=${BUILDLINK_PREFIX.expat}/lib

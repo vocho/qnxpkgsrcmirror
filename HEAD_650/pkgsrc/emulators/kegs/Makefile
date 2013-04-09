@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.3 2012/06/28 03:23:37 dholland Exp $
+# $NetBSD: Makefile,v 1.6 2012/10/23 10:24:03 wiz Exp $
 #
 
 DISTNAME=	kegs.0.91
 PKGNAME=	kegs-0.91
+PKGREVISION=	1
 CATEGORIES=	emulators
 MASTER_SITES=	http://kegs.sourceforge.net/
 
@@ -14,7 +15,6 @@ COMMENT=	Apple IIgs emulator for Mac OS X, Win32, Linux, and Unix/X11
 ONLY_FOR_PLATFORM=	Linux-*-i386 Linux-*-powerpc SunOS-*-i386 SunOS-*-sparc Darwin-*-* HPUX-*-*
 # Probably work
 ONLY_FOR_PLATFORM+=	*-*-i386 *-*-powerpc *-*-x86_64 *-*-ia64 *-*-mips *-*-m68k
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 #WRKSRC=		${WRKDIR}/${DISTNAME}/src
 CONFIGURE_DIRS=	src
@@ -52,5 +52,4 @@ do-install:
 .include "../../x11/xproto/buildlink3.mk"
 .include "../../x11/libX11/buildlink3.mk"
 .include "../../x11/libXext/buildlink3.mk"
-.include "../../x11/xextproto/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.18 2010/10/27 16:48:26 jakllsch Exp $
+# $NetBSD: Makefile,v 1.20 2012/10/29 05:07:03 asau Exp $
 
 DISTNAME=	xf86-video-ati-6.12.4
 PKGREVISION=	4
@@ -10,13 +10,17 @@ MAINTAINER=	joerg@NetBSD.org
 HOMEPAGE=	http://xorg.freedesktop.org/
 COMMENT=	Modular Xorg ATI Radeon video driver
 
-PKG_DESTDIR_SUPPORT=	user-destdir
-
 CONFIGURE_ARGS+=	--enable-dri
 
 USE_LIBTOOL=	YES
 GNU_CONFIGURE=	YES
 USE_TOOLS+=	gmake pkg-config
+
+.include "../../mk/bsd.prefs.mk"
+
+.if ${OPSYS} == "SunOS"
+CONFIGURE_ENV+=	DRIVER_MAN_SUFFIX=4
+.endif
 
 .include "../../x11/modular-xorg-server/buildlink3.mk"
 

@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.8 2012/07/15 08:22:58 wiz Exp $
+# $NetBSD: Makefile,v 1.13 2012/10/29 05:06:08 asau Exp $
 #
 
 DISTNAME=	avant-window-navigator-0.4.0
-PKGREVISION=	5
+PKGREVISION=	9
 CATEGORIES=	x11
 MASTER_SITES=	https://launchpad.net/awn/0.4/0.4.0/+download/
 
@@ -10,8 +10,6 @@ MAINTAINER=	imil@NetBSD.org
 HOMEPAGE=	https://launchpad.net/awn
 COMMENT=	Dock-like navigation bar
 LICENSE=	gnu-lgpl-v2
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 # Needed for launchpad
 FETCH_USING=	curl

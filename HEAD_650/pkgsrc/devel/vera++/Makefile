@@ -1,16 +1,14 @@
-# $NetBSD: Makefile,v 1.6 2012/08/21 23:49:21 marino Exp $
+# $NetBSD: Makefile,v 1.8 2012/10/31 11:19:53 asau Exp $
 #
 
 DISTNAME=	vera++-1.1.1
-PKGREVISION=	4
+PKGREVISION=	5
 CATEGORIES=	devel
 MASTER_SITES=	http://www.inspirel.com/vera/files/
 
 MAINTAINER=	jmmv@NetBSD.org
 HOMEPAGE=	http://www.inspirel.com/vera/
 COMMENT=	Programmable verification and analysis tool for C++
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 BUILD_TARGET=	build
 LICENSE=	boost-license

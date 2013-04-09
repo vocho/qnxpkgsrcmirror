@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.167 2012/05/11 13:27:26 taca Exp $
+# $NetBSD: Makefile,v 1.170 2012/10/23 18:16:38 asau Exp $
 
 OPENSSL_SNAPSHOT?=	# empty
 OPENSSL_STABLE?=	# empty
@@ -21,8 +21,10 @@ MASTER_SITES=	ftp://ftp.openssl.org/snapshot/
 .  endif
 .endif
 
+PKGREVISION=	1
 SVR4_PKGNAME=	ossl
 CATEGORIES=	security
+
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.openssl.org/
 COMMENT=	Secure Socket Layer and cryptographic library
@@ -32,7 +34,8 @@ CONFLICTS=	SSLeay-[0-9]* ssleay-[0-9]*
 CRYPTO=		yes
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
-PKG_DESTDIR_SUPPORT=	user-destdir
+
+BUILD_DEPENDS+=	p5-Perl4-CoreLibs-[0-9]*:../../devel/p5-Perl4-CoreLibs
 
 .include "../../mk/bsd.prefs.mk"
 .include "../../mk/compiler.mk"

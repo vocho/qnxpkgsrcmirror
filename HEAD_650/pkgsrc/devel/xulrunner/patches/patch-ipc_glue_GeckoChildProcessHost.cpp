@@ -1,26 +1,40 @@
-$NetBSD: patch-ipc_glue_GeckoChildProcessHost.cpp,v 1.2 2012/03/15 08:30:06 ryoon Exp $
+$NetBSD: patch-ipc_glue_GeckoChildProcessHost.cpp,v 1.5 2012/11/21 15:26:50 ryoon Exp $
 
---- ipc/glue/GeckoChildProcessHost.cpp.orig	2012-03-13 01:36:53.000000000 +0000
+--- ipc/glue/GeckoChildProcessHost.cpp.orig	2012-11-19 15:42:29.000000000 +0000
 +++ ipc/glue/GeckoChildProcessHost.cpp
-@@ -281,7 +281,7 @@ void GeckoChildProcessHost::InitWindowsG
+@@ -4,7 +4,13 @@
+  * License, v. 2.0. If a copy of the MPL was not distributed with this
+  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+ 
++#if defined(__NetBSD__)
++_Pragma("GCC visibility push(default)")
++#endif
+ #include "GeckoChildProcessHost.h"
++#if defined(__NetBSD__)
++_Pragma("GCC visibility pop")
++#endif
+ 
+ #include "base/command_line.h"
+ #include "base/path_service.h"
+@@ -274,7 +280,7 @@ void GeckoChildProcessHost::InitWindowsG
  #endif
  
  bool
 -GeckoChildProcessHost::SyncLaunch(std::vector<std::string> aExtraOpts, int aTimeoutMs, base::ProcessArchitecture arch)
 +GeckoChildProcessHost::SyncLaunch(std::vector<std::string> aExtraOpts, int32 aTimeoutMs, base::ProcessArchitecture arch)
  {
- #ifdef XP_WIN
-   InitWindowsGroupID();
-@@ -430,7 +430,7 @@ GeckoChildProcessHost::PerformAsyncLaunc
+   PrepareLaunch();
+ 
+@@ -437,7 +443,7 @@ GeckoChildProcessHost::PerformAsyncLaunc
    // and passing wstrings from one config to the other is unsafe.  So
    // we split the logic here.
  
 -#if defined(OS_LINUX) || defined(OS_MACOSX)
 +#if defined(OS_LINUX) || defined(OS_MACOSX) || defined(OS_BSD) || defined(OS_QNX)
    base::environment_map newEnvVars;
-   // XPCOM may not be initialized in some subprocesses.  We don't want
-   // to initialize XPCOM just for the directory service, especially
-@@ -445,8 +445,8 @@ GeckoChildProcessHost::PerformAsyncLaunc
+   base::ChildPrivileges privs = kLowRightsSubprocesses ?
+                                 base::UNPRIVILEGED :
+@@ -455,8 +461,8 @@ GeckoChildProcessHost::PerformAsyncLaunc
        if (NS_SUCCEEDED(rv)) {
          nsCString path;
          greDir->GetNativePath(path);
@@ -31,7 +45,7 @@ $NetBSD: patch-ipc_glue_GeckoChildProcessHost.cpp,v 1.2 2012/03/15 08:30:06 ryoo
          path += "/lib";
  #  endif  // MOZ_WIDGET_ANDROID
          const char *ld_library_path = PR_GetEnv("LD_LIBRARY_PATH");
-@@ -557,7 +557,7 @@ GeckoChildProcessHost::PerformAsyncLaunc
+@@ -575,7 +581,7 @@ GeckoChildProcessHost::PerformAsyncLaunc
    childArgv.push_back(pidstring);
  
  #if defined(MOZ_CRASHREPORTER)
@@ -40,12 +54,12 @@ $NetBSD: patch-ipc_glue_GeckoChildProcessHost.cpp,v 1.2 2012/03/15 08:30:06 ryoo
    int childCrashFd, childCrashRemapFd;
    if (!CrashReporter::CreateNotificationPipeForChild(
          &childCrashFd, &childCrashRemapFd))
-@@ -594,7 +594,7 @@ GeckoChildProcessHost::PerformAsyncLaunc
+@@ -612,7 +618,7 @@ GeckoChildProcessHost::PerformAsyncLaunc
  #endif
  
    base::LaunchApp(childArgv, mFileMap,
 -#if defined(OS_LINUX) || defined(OS_MACOSX)
 +#if defined(OS_LINUX) || defined(OS_MACOSX) || defined(OS_BSD) || defined(OS_QNX)
-                   newEnvVars,
+                   newEnvVars, privs,
  #endif
                    false, &process, arch);

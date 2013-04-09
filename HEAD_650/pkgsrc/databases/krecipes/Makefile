@@ -1,17 +1,15 @@
-# $NetBSD: Makefile,v 1.32 2012/06/14 07:45:04 sbd Exp $
+# $NetBSD: Makefile,v 1.35 2012/10/03 21:54:12 wiz Exp $
 #
 
 DISTNAME=		krecipes-1.0-beta1
 PKGNAME=		krecipes-1.0beta1
-PKGREVISION=		17
+PKGREVISION=		19
 CATEGORIES=		databases kde
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=krecipes/}
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://krecipes.sourceforge.net/
 COMMENT=		Recipe manager
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=		yes
 SET_LIBDIR=		yes

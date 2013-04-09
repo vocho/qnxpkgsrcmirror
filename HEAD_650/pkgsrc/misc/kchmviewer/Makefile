@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.25 2012/06/14 07:44:53 sbd Exp $
+# $NetBSD: Makefile,v 1.30 2012/10/08 23:02:06 adam Exp $
 #
 
 DISTNAME=		kchmviewer-6.0
-PKGREVISION=		5
+PKGREVISION=		9
 CATEGORIES=		misc x11
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=kchmviewer/}
 
@@ -10,8 +10,6 @@ MAINTAINER=		ianzag@mail.ru
 HOMEPAGE=		http://www.kchmviewer.net/
 COMMENT=		CHM (MS HTML help file format) viewer
 LICENSE=		gnu-gpl-v3
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=		gmake
 USE_PKGLOCALEDIR=	YES

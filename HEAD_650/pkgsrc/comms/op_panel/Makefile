@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.4 2009/02/10 00:20:44 jnemeth Exp $
+# $NetBSD: Makefile,v 1.6 2012/10/03 21:54:05 wiz Exp $
 #
 
 DISTNAME=	op_panel-0.29
-PKGREVISION=	3
+PKGREVISION=	4
 CATEGORIES=	comms
 MASTER_SITES=	http://www.asternic.org/files/
 
@@ -10,8 +10,6 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.asternic.org/
 COMMENT=	Flash Operator Panel for Asterisk
 #LICENSE=	gnu-gpl-v2
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 FOP=		op_panel
 MESSAGE_SUBST+=	FOP=${FOP}

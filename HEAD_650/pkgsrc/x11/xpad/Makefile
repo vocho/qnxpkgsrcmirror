@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.38 2012/03/03 00:14:22 wiz Exp $
+# $NetBSD: Makefile,v 1.43 2012/10/29 05:07:17 asau Exp $
 #
 
 DISTNAME=	xpad-4.0
-PKGREVISION=	4
+PKGREVISION=	8
 CATEGORIES=	x11
 MASTER_SITES=	http://launchpad.net/xpad/trunk/${PKGVERSION_NOREV}/+download/
 EXTRACT_SUFX=	.tar.bz2
@@ -11,8 +11,6 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://mterry.name/xpad/
 COMMENT=	Sticky notes application for GTK+ 2.0
 LICENSE=	gnu-gpl-v3
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=		yes
 USE_TOOLS+=		gmake intltool msgfmt pkg-config

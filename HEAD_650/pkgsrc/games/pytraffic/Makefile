@@ -1,16 +1,14 @@
-# $NetBSD: Makefile,v 1.27 2012/06/14 07:44:04 sbd Exp $
+# $NetBSD: Makefile,v 1.32 2012/10/08 23:01:37 adam Exp $
 #
 
 DISTNAME=		pytraffic-2.5.4
-PKGREVISION=		16
+PKGREVISION=		20
 CATEGORIES=		games
 MASTER_SITES=	http://alpha.uhasselt.be/Research/Algebra/Members/pytraffic/
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://alpha.uhasselt.be/Research/Algebra/Members/pytraffic/
 COMMENT=		Computer version of a popular board game
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 # pytraffic-2.5.4 distfile was changed after release
 DIST_SUBDIR=	pytraffic-2.5.4-070313

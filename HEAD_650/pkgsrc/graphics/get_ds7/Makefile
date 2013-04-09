@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.18 2011/08/14 12:59:47 obache Exp $
+# $NetBSD: Makefile,v 1.20 2012/10/06 14:10:51 asau Exp $
 #
 
 DISTNAME=	get_ds7_1.2.4
 PKGNAME=	get_ds7-1.2.4
-PKGREVISION=	4
+PKGREVISION=	5
 CATEGORIES=	graphics
 MASTER_SITES=	http://www.yk.rim.or.jp/~mamo/Computer/DS-7/
 EXTRACT_SUFX=	.tar
@@ -11,8 +11,6 @@ EXTRACT_SUFX=	.tar
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.yk.rim.or.jp/~mamo/Computer/DS-7/index-e.html
 COMMENT=	Read pictures from a FUJIFILM DS-7(DS series) digital camera
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=	perl:run
 

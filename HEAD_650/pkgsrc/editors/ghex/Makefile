@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.19 2012/06/14 07:43:57 sbd Exp $
+# $NetBSD: Makefile,v 1.24 2012/10/08 23:01:27 adam Exp $
 #
 
 DISTNAME=	ghex-2.24.0
-PKGREVISION=	15
+PKGREVISION=	19
 CATEGORIES=	editors
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/ghex/2.24/}
 EXTRACT_SUFX=	.tar.bz2
@@ -10,8 +10,6 @@ EXTRACT_SUFX=	.tar.bz2
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.gnome.org/
 COMMENT=	Hex editor
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=	yes
 USE_LIBTOOL=	yes

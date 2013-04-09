@@ -1,16 +1,14 @@
-# $NetBSD: Makefile,v 1.5 2010/03/15 03:02:25 schmonz Exp $
+# $NetBSD: Makefile,v 1.7 2012/10/23 17:19:15 asau Exp $
 #
 
 DISTNAME=		ucspi-ssl-0.70
-PKGREVISION=		3
+PKGREVISION=		4
 CATEGORIES=		net
 MASTER_SITES=		${HOMEPAGE}
 
 MAINTAINER=		schmonz@NetBSD.org
 HOMEPAGE=		http://www.superscript.com/ucspi-ssl/
 COMMENT=		Command-line tools for SSL client-server applications
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 DEPENDS+=		ucspi-tcp-[0-9]*:../../net/ucspi-tcp
 

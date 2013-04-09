@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.20 2012/06/04 09:29:56 wiz Exp $
+# $NetBSD: Makefile,v 1.22 2012/10/02 23:48:15 asau Exp $
 #
 
 DISTNAME=		xmms-musepack-1.1
-PKGREVISION=		6
+PKGREVISION=		7
 CATEGORIES=		audio
 MASTER_SITES=		http://musepack.imosnet.de/linux/plugins/
 EXTRACT_SUFX=		.tar.bz2
@@ -10,8 +10,6 @@ EXTRACT_SUFX=		.tar.bz2
 MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://www.musepack.net/
 COMMENT=		XMMS plugin for musepack (mpc) files
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_LANGUAGES=		c c++
 GNU_CONFIGURE=		yes

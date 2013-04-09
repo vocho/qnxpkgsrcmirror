@@ -1,4 +1,4 @@
-$NetBSD: patch-library_base_file_utilities.cpp,v 1.1 2012/05/24 18:54:16 marino Exp $
+$NetBSD: patch-library_base_file_utilities.cpp,v 1.3 2012/09/15 05:14:07 obache Exp $
 
 --- library/base/file_utilities.cpp.orig	2011-03-17 12:48:44.000000000 +0000
 +++ library/base/file_utilities.cpp

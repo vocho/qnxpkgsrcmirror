@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.6 2011/12/19 03:04:13 obache Exp $
+# $NetBSD: Makefile,v 1.8 2012/10/28 06:30:57 asau Exp $
 #
 
 .include "../../www/phraseanet/Makefile.common"
 
 MODNAME=		phrasea2
+PKGREVISION=		1
 PECL_VERSION=		${VERS}
 PECL_LEGACY_VERSION_SCHEME=	yes
-PKG_DESTDIR_SUPPORT=	user-destdir
 EXTRACT_ELEMENTS=	${DISTNAME}/bin/src/php_phrasea2
 USE_LANGUAGES=		c c++
 

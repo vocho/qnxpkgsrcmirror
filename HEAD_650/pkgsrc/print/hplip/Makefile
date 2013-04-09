@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.4 2012/06/23 04:50:06 schnoebe Exp $
+# $NetBSD: Makefile,v 1.11 2012/11/18 00:50:42 schnoebe Exp $
 #
 
-DISTNAME=		hplip-3.12.6
+DISTNAME=		hplip-3.12.10a
 CATEGORIES=		print
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=hplip/}
 
@@ -9,8 +9,6 @@ MAINTAINER=		schnoebe@NetBSD.org
 HOMEPAGE=		http://hplipopensource.com/
 COMMENT=		HP Linux Imaging and Printing
 LICENSE=		gnu-gpl-v2 AND mit AND modified-bsd
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 CONFLICTS+=		hpijs-[0-9]*
 
@@ -72,12 +70,6 @@ REPLACE_PYTHON+=	fax/filters/pstotiff
 REPLACE_PERL=		prnt/filters/hpcac prnt/hpijs/foomatic-rip-hplip
 
 PY_PATCHPLIST=		yes
-
-SUBST_CLASSES+=			strip-cr
-SUBST_STAGE.strip-cr=		post-extract
-SUBST_MESSAGE.strip-cr=		Strip trailing carriage returns
-SUBST_FILES.strip-cr=		prnt/hpcups/HPCupsFilter.cpp
-SUBST_FILTER_CMD.strip-cr=	${TR} -d '\r'
 
 SUBST_CLASSES+=			fix-python
 SUBST_STAGE.fix-python=		post-configure

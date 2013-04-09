@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.2 2011/08/13 17:51:19 joerg Exp $
+# $NetBSD: Makefile,v 1.4 2012/10/08 12:19:16 asau Exp $
 #
 
 DISTNAME=		mailhops-1.4
+PKGREVISION=		1
 CATEGORIES=		mail
 MASTER_SITES=		http://www.spinnaker.de/mutt/
 EXTRACT_SUFX=		
@@ -18,8 +19,6 @@ EXTRACT_CMD=		echo ${CP} "$${extract_file}" ${WRKSRC}/mailhops; \
 
 
 DEPENDS+=       	p5-TimeDate-[0-9]*:../../time/p5-TimeDate
-
-PKG_DESTDIR_SUPPORT=    user-destdir
 
 USE_TOOLS+=     	perl:run
 

@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.38 2012/07/18 19:03:32 adam Exp $
+# $NetBSD: Makefile,v 1.40 2012/11/08 04:18:45 taca Exp $
 
 DISTNAME=	squid-3.1.20
 PKGNAME=	${DISTNAME}	# Necessary for "pkgsrc/www/squid/options.mk"
+PKGREVISION=	1
 CATEGORIES=	www
 MASTER_SITES=	http://www.squid-cache.org/Versions/v3/3.1/ \
 		${SQUID_MASTER_SITES}
@@ -19,6 +20,7 @@ GNU_CONFIGURE=		yes
 .include "../../www/squid/Makefile.squid"
 
 CONFIGURE_ARGS+=	--disable-strict-error-checking
+CONFIGURE_ARGS+=	--enable-auth=basic,digest,ntlm
 CONFIGURE_ARGS+=	--enable-icap-client
 CONFIGURE_ARGS+=	--with-default-user=${SQUID_USER}
 CONFIGURE_ARGS+=	--with-pidfile=${VARBASE}/run/squid.pid

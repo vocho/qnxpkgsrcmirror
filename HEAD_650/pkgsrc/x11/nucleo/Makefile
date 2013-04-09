@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.25 2012/03/15 11:53:45 obache Exp $
+# $NetBSD: Makefile,v 1.31 2012/10/29 05:06:41 asau Exp $
 #
 
 DISTNAME=	nucleo-0.7.5
-PKGREVISION=	15
+PKGREVISION=	20
 CATEGORIES=	x11
 MASTER_SITES=	http://insitu.lri.fr/metisse/download/nucleo/
 EXTRACT_SUFX=	.tar.bz2
@@ -11,8 +11,6 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://insitu.lri.fr/metisse/
 COMMENT=	Toolkit to explore new uses of video and HCI techniques
 LICENSE=	gnu-lgpl-v2.1
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=		yes
 USE_TOOLS+=		pkg-config gmake

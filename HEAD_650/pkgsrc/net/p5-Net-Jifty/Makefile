@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.9 2011/12/16 06:11:42 hiramatsu Exp $
+# $NetBSD: Makefile,v 1.12 2012/10/23 17:18:50 asau Exp $
 #
 
 DISTNAME=	Net-Jifty-0.14
 PKGNAME=	p5-${DISTNAME}
+PKGREVISION=	2
 CATEGORIES=	net perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Net/}
 
@@ -24,9 +25,8 @@ DEPENDS+=	p5-YAML-[0-9]*:../../textproc/p5-YAML
 DEPENDS+=	p5-Test-MockObject-[0-9]*:../../devel/p5-Test-MockObject
 DEPENDS+=	p5-DateTime-[0-9]*:../../time/p5-DateTime
 
-PKG_DESTDIR_SUPPORT=	user-destdir
 PERL5_PACKLIST=	auto/Net/Jifty/.packlist
-PERL5_MODULE_TYPE=	Module::Install
+PERL5_MODULE_TYPE=	Module::Install::Bundled
 
 .include "../../lang/perl5/module.mk"
 .include "../../mk/bsd.pkg.mk"

@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.8 2010/04/19 06:16:40 agc Exp $
+# $NetBSD: Makefile,v 1.10 2012/10/21 21:06:05 cheusov Exp $
 #
 
 DISTNAME=		js-0.2.5
-PKGREVISION=		1
+PKGREVISION=		2
 CATEGORIES=		lang
 MASTER_SITES=		http://www.njs-javascript.org/
 
@@ -11,7 +11,7 @@ HOMEPAGE=		http://www.njs-javascript.org/
 COMMENT=		JavaScript virtual machine
 LICENSE=		gnu-lgpl-v2
 
-PKG_DESTDIR_SUPPORT=	user-destdir
+CONFLICTS=		spidermonkey-[0-9]*
 
 USE_PKGLOCALEDIR=	yes
 USE_LIBTOOL=		yes

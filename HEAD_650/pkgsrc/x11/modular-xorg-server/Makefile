@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.68 2012/04/17 17:52:01 joerg Exp $
+# $NetBSD: Makefile,v 1.72 2012/10/29 05:06:40 asau Exp $
 #
 
 DISTNAME=	xorg-server-1.6.5
 PKGNAME=	modular-${DISTNAME}
-PKGREVISION=	12
+PKGREVISION=	13
 CATEGORIES=	x11
 MASTER_SITES=	${MASTER_SITE_XORG:=xserver/}
 EXTRACT_SUFX=	.tar.bz2
@@ -12,7 +12,6 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://xorg.freedesktop.org/
 COMMENT=	Modular X11 server from modular X.org
 
-PKG_DESTDIR_SUPPORT=	user-destdir
 SPECIAL_PERMS+=		bin/Xorg ${SETUID_ROOT_PERMS}
 
 GNU_CONFIGURE=	yes
@@ -42,17 +41,17 @@ DEPENDS+=	xkeyboard-config-[0-9]*:../../x11/xkeyboard-config
 .include "../../mk/bsd.prefs.mk"
 
 CONFIGURE_ARGS+=	--with-release-version=${PKGNAME:Q}
-CONFIGURE_ARGS+=	--with-vendor-name="The NetBSD Foundation"
-CONFIGURE_ARGS+=	--with-vendor-name-short="pkgsrc"
 .if ${OPSYS} == "NetBSD"
 CONFIGURE_ARGS+=	--with-builder-addr="tech-x11@NetBSD.org"
 CONFIGURE_ARGS+=	--with-os-vendor="The NetBSD Foundation"
+.endif
+.if ${OPSYS} == "NetBSD"
+CONFIGURE_ARGS+=	--without-dtrace
 .endif
 .if ${OPSYS} == "FreeBSD"
 CONFIGURE_ARGS+=	--without-dtrace
 .endif
 CONFIGURE_ARGS+=	--with-os-name=${MACHINE_PLATFORM:Q}
-CONFIGURE_ARGS+=	--with-vendor-web="http://www.pkgsrc.org/"
 
 CONFIGURE_ARGS+=	--enable-xorg
 
@@ -175,7 +174,6 @@ BUILDLINK_API_DEPENDS.libXext+=	libXext>=1.1.1
 .include "../../x11/trapproto/buildlink3.mk"
 .include "../../x11/videoproto/buildlink3.mk"
 .include "../../x11/xcmiscproto/buildlink3.mk"
-.include "../../x11/xextproto/buildlink3.mk"
 .include "../../x11/xf86bigfontproto/buildlink3.mk"
 .include "../../x11/xf86dgaproto/buildlink3.mk"
 .include "../../x11/xf86driproto/buildlink3.mk"

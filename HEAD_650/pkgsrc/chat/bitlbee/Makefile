@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.60 2012/07/18 09:56:02 marino Exp $
+# $NetBSD: Makefile,v 1.62 2012/10/03 00:02:34 asau Exp $
 #
 
 DISTNAME=		bitlbee-3.0.3
-PKGREVISION=		5
+PKGREVISION=		6
 CATEGORIES=		chat
 MASTER_SITES=		http://get.bitlbee.org/src/
 
@@ -10,8 +10,6 @@ MAINTAINER=		tonio@NetBSD.org
 HOMEPAGE=		http://www.bitlbee.org/
 COMMENT=		IRC to other chat networks gateway
 LICENSE=		gnu-gpl-v2
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 HAS_CONFIGURE=		yes
 USE_TOOLS+=		gmake pkg-config

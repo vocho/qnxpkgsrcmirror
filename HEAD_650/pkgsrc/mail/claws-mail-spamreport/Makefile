@@ -1,15 +1,14 @@
-# $NetBSD: Makefile,v 1.29 2012/07/02 19:08:45 drochner Exp $
+# $NetBSD: Makefile,v 1.34 2012/10/08 23:01:59 adam Exp $
 #
 
 DISTNAME=	spam_report-0.3.16
 PKGNAME=	claws-mail-spam_report-0.3.16
+PKGREVISION=	4
 CATEGORIES=	mail
 MASTER_SITES=	http://claws-mail.org/downloads/plugins/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 COMMENT=	Report spam to various places
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 DEPENDS+=	claws-mail-${CLAWS_VERSION}{,nb[0-9]*}:../../mail/claws-mail
 

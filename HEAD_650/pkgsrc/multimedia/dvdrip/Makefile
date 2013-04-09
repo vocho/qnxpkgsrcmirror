@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.53 2012/01/20 13:39:38 drochner Exp $
+# $NetBSD: Makefile,v 1.55 2012/10/08 09:20:59 asau Exp $
 #
 
 DISTNAME=	dvdrip-0.98.11
-PKGREVISION=	2
+PKGREVISION=	3
 CATEGORIES=	multimedia x11 sysutils
 MASTER_SITES=	http://www.exit1.org/dvdrip/dist/
 
@@ -27,8 +27,6 @@ DEPENDS+=	p5-AnyEvent>=1.02:../../devel/p5-AnyEvent
 DEPENDS+=	ImageMagick-[0-9]*:../../graphics/ImageMagick
 # uses programs only (mplex)
 DEPENDS+=	mjpegtools-[0-9]*:../../multimedia/mjpegtools
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 .include "../../mk/bsd.prefs.mk"
 

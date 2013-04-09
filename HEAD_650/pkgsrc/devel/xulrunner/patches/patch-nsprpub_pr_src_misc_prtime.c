@@ -1,8 +1,8 @@
 $NetBSD$
 
---- nsprpub/pr/src/misc/prtime.c.orig	2012-03-13 01:37:10.000000000 +0000
+--- nsprpub/pr/src/misc/prtime.c.orig	2012-11-19 15:43:15.000000000 +0000
 +++ nsprpub/pr/src/misc/prtime.c
-@@ -52,6 +52,9 @@
+@@ -20,6 +20,9 @@
  #include <ctype.h>
  #include <errno.h>  /* for EINVAL */
  #include <time.h>

@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.24 2012/03/03 00:13:53 wiz Exp $
+# $NetBSD: Makefile,v 1.29 2012/10/23 18:16:52 asau Exp $
 #
 
 DISTNAME=	putty-0.62
-PKGREVISION=	1
+PKGREVISION=	5
 CATEGORIES=	security
 MASTER_SITES=	http://the.earth.li/~sgtatham/putty/0.62/
 
@@ -10,8 +10,6 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.chiark.greenend.org.uk/~sgtatham/putty/
 COMMENT=	Free implementation of Telnet and SSH for Win32 and Unix platforms
 LICENSE=	mit
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=	gmake pkg-config
 BUILD_DIRS=	unix

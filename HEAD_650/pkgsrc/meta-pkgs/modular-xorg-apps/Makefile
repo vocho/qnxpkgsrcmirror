@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.15 2012/06/06 09:43:14 wiz Exp $
+# $NetBSD: Makefile,v 1.17 2012/10/18 09:44:29 wiz Exp $
 
 DISTNAME=	# empty
-PKGNAME=	modular-xorg-apps-1.7
+PKGNAME=	modular-xorg-apps-1.9
 CATEGORIES=	meta-pkgs x11
 MASTER_SITES=	${MASTER_SITE_XORG:=app/}
 DISTFILES=	# empty
@@ -31,6 +31,7 @@ DEPENDS+=	xbacklight-[0-9]*:../../x11/xbacklight
 DEPENDS+=	xcalc-[0-9]*:../../x11/xcalc
 DEPENDS+=	xclock-[0-9]*:../../x11/xclock
 DEPENDS+=	xconsole-[0-9]*:../../x11/xconsole
+DEPENDS+=	xcursorgen-[0-9]*:../../x11/xcursorgen
 DEPENDS+=	xdm-[0-9]*:../../x11/xdm
 DEPENDS+=	xdpyinfo-[0-9]*:../../x11/xdpyinfo
 DEPENDS+=	xev-[0-9]*:../../x11/xev
@@ -58,6 +59,7 @@ DEPENDS+=	xprop-[0-9]*:../../x11/xprop
 DEPENDS+=	xrandr-[0-9]*:../../x11/xrandr
 DEPENDS+=	xrdb-[0-9]*:../../x11/xrdb
 DEPENDS+=	xrefresh-[0-9]*:../../x11/xrefresh
+DEPENDS+=	xscope-[0-9]*:../../x11/xscope
 DEPENDS+=	xset-[0-9]*:../../x11/xset
 DEPENDS+=	xsetmode-[0-9]*:../../x11/xsetmode
 DEPENDS+=	xsetpointer-[0-9]*:../../x11/xsetpointer

@@ -32,6 +32,12 @@
 MOCK_CVSROOT=":local:$(pwd)/cvsroot"
 
 
+# Paths to installed files.
+#
+# Can be overriden for test purposes only.
+: ${SYSBUILD_SHAREDIR="@SYSBUILD_SHAREDIR@"}
+
+
 # Creates a fake program that records its invocations for later processing.
 #
 # The fake program, when invoked, will append its arguments to a commands.log
@@ -306,6 +312,119 @@ EOF
 }
 
 
+atf_test_case build__machine_targets__ok
+build__machine_targets__ok_body() {
+    create_mock_cvsroot "${MOCK_CVSROOT}"
+
+    create_mock_binary cvs yes
+    PATH="$(pwd):${PATH}"
+
+    atf_check -o save:stdout -e save:stderr sysbuild \
+        -c /dev/null -o CVSROOT="${MOCK_CVSROOT}" \
+        -o MACHINES="amd64 macppc shark" -o NJOBS=2 build \
+        tools macppc:kernel=/foo/bar shark:sets release
+cat stdout
+    cat >expout <<EOF
+Command: cvs
+Directory: ${HOME}/sysbuild/src/.cvs-checkout
+Arg: -d${MOCK_CVSROOT}
+Arg: -q
+Arg: checkout
+Arg: -P
+Arg: src
+
+Command: build.sh
+Directory: ${HOME}/sysbuild/src
+Arg: -D${HOME}/sysbuild/amd64/destdir
+Arg: -M${HOME}/sysbuild/amd64/obj
+Arg: -N2
+Arg: -R${HOME}/sysbuild/release
+Arg: -T${HOME}/sysbuild/amd64/tools
+Arg: -U
+Arg: -j2
+Arg: -mamd64
+Arg: tools
+Arg: release
+
+Command: build.sh
+Directory: ${HOME}/sysbuild/src
+Arg: -D${HOME}/sysbuild/macppc/destdir
+Arg: -M${HOME}/sysbuild/macppc/obj
+Arg: -N2
+Arg: -R${HOME}/sysbuild/release
+Arg: -T${HOME}/sysbuild/macppc/tools
+Arg: -U
+Arg: -j2
+Arg: -mmacppc
+Arg: tools
+Arg: kernel=/foo/bar
+Arg: release
+
+Command: build.sh
+Directory: ${HOME}/sysbuild/src
+Arg: -D${HOME}/sysbuild/shark/destdir
+Arg: -M${HOME}/sysbuild/shark/obj
+Arg: -N2
+Arg: -R${HOME}/sysbuild/release
+Arg: -T${HOME}/sysbuild/shark/tools
+Arg: -U
+Arg: -j2
+Arg: -mshark
+Arg: tools
+Arg: sets
+Arg: release
+
+EOF
+    atf_check -o file:expout cat commands.log
+}
+
+
+atf_test_case build__machine_targets__unmatched
+build__machine_targets__unmatched_body() {
+    create_mock_binary cvs yes
+    PATH="$(pwd):${PATH}"
+
+    cat >experr <<EOF
+sysbuild: E: The 'macpp:kernel=/foo/bar a:b' targets do not match any machine in 'amd64 macppc shark'
+EOF
+    atf_check -s exit:1 -o empty -e file:experr sysbuild \
+        -c /dev/null -o CVSROOT="${MOCK_CVSROOT}" \
+        -o MACHINES="amd64 macppc shark" -o NJOBS=2 build \
+        tools macpp:kernel=/foo/bar a:b release
+
+    test ! -f commands.log || atf_fail "cvs should not have been executed"
+}
+
+
+atf_test_case build__mkvars
+build__mkvars_body() {
+    mkdir -p sysbuild/src
+    create_mock_binary sysbuild/src/build.sh
+
+    atf_check -o save:stdout -e save:stderr sysbuild \
+        -c /dev/null -o CVSROOT="${MOCK_CVSROOT}" \
+        -o MKVARS="MKDEBUG=yes FOO=bar" build -f
+
+    cat >expout <<EOF
+Command: build.sh
+Directory: ${HOME}/sysbuild/src
+Arg: -D${HOME}/sysbuild/$(uname -m)/destdir
+Arg: -M${HOME}/sysbuild/$(uname -m)/obj
+Arg: -N2
+Arg: -R${HOME}/sysbuild/release
+Arg: -T${HOME}/sysbuild/$(uname -m)/tools
+Arg: -U
+Arg: -VMKDEBUG=yes
+Arg: -VFOO=bar
+Arg: -m$(uname -m)
+Arg: -u
+Arg: release
+
+EOF
+    atf_check -o file:expout cat commands.log
+}
+
+
 atf_test_case build__with_x11
 build__with_x11_body() {
     create_mock_cvsroot "${MOCK_CVSROOT}"
@@ -398,6 +517,7 @@ CVSROOT = :ext:anoncvs@anoncvs.NetBSD.org:/cvsroot
 CVSTAG is undefined
 INCREMENTAL_BUILD = false
 MACHINES = $(uname -m)
+MKVARS is undefined
 NJOBS is undefined
 RELEASEDIR = ${HOME}/sysbuild/release
 SRCDIR = ${HOME}/sysbuild/src
@@ -481,6 +601,7 @@ CVSROOT = foo bar
 CVSTAG = the-new-tag
 INCREMENTAL_BUILD = false
 MACHINES = $(uname -m)
+MKVARS is undefined
 NJOBS is undefined
 RELEASEDIR = ${HOME}/sysbuild/release
 SRCDIR is undefined
@@ -499,6 +620,129 @@ sysbuild: E: config does not take any arguments
 Type 'man sysbuild' for help
 EOF
     atf_check -s exit:1 -e file:experr sysbuild -c /dev/null config foo
+}
+
+
+atf_test_case env__src_only
+env__src_only_body() {
+    cat >expout <<EOF
+. "${SYSBUILD_SHAREDIR}/env.sh" ;
+PATH="/my/root/shark/tools/bin:\${PATH}"
+D="/my/root/shark/destdir"
+O="/my/root/shark/obj/usr/src"
+S="/usr/src"
+T="/my/root/shark/tools"
+EOF
+    atf_check -s exit:0 -o file:expout sysbuild -c /dev/null \
+        -o BUILD_ROOT=/my/root -o MACHINES=shark -o SRCDIR=/usr/src env
+}
+
+
+atf_test_case env__src_and_xsrc
+env__src_and_xsrc_body() {
+    cat >expout <<EOF
+. "${SYSBUILD_SHAREDIR}/env.sh" ;
+PATH="/my/root/i386/tools/bin:\${PATH}"
+D="/my/root/i386/destdir"
+O="/my/root/i386/obj/a/b/src"
+S="/a/b/src"
+T="/my/root/i386/tools"
+XO="/my/root/i386/obj/d/xsrc"
+XS="/d/xsrc"
+EOF
+    atf_check -s exit:0 -o file:expout sysbuild -c /dev/null \
+        -o BUILD_ROOT=/my/root -o MACHINES=i386 -o SRCDIR=/a/b/src \
+        -o XSRCDIR=/d/xsrc env
+}
+
+
+atf_test_case env__explicit_machine
+env__explicit_machine_body() {
+    cat >expout <<EOF
+. "${SYSBUILD_SHAREDIR}/env.sh" ;
+PATH="/my/root/macppc/tools/bin:\${PATH}"
+D="/my/root/macppc/destdir"
+O="/my/root/macppc/obj/usr/src"
+S="/usr/src"
+T="/my/root/macppc/tools"
+EOF
+    atf_check -s exit:0 -o file:expout sysbuild -c /dev/null \
+        -o BUILD_ROOT=/my/root -o MACHINES="amd64 i386" -o SRCDIR=/usr/src \
+        env macppc
+}
+
+
+atf_test_case env__eval
+env__eval_body() {
+    make_one() {
+        mkdir -p "${1}"
+        touch "${1}/${2}"
+    }
+    make_one src src.cookie
+    make_one xsrc xsrc.cookie
+    make_one root/mach/destdir destdir.cookie
+    make_one root/mach/tools tools.cookie
+    make_one root/mach/"obj$(pwd)"/src src-obj.cookie
+    make_one root/mach/"obj$(pwd)"/xsrc xsrc-obj.cookie
+
+    find src xsrc root
+
+    mkdir -p root/mach/tools/bin
+    cat >root/mach/tools/bin/nbmake-mach <<EOF
+#! /bin/sh
+echo "This is nbmake!"
+EOF
+    chmod +x root/mach/tools/bin/nbmake-mach
+
+    atf_check -s exit:0 -o save:env.sh sysbuild -c /dev/null \
+        -o BUILD_ROOT="$(pwd)/root" \
+        -o MACHINES="mach" \
+        -o SRCDIR="$(pwd)/src" \
+        -o XSRCDIR="$(pwd)/xsrc" \
+        env
+
+    eval $(cat ./env.sh)
+
+    [ -f "${D}/destdir.cookie" ] || atf_fail "D points to the wrong place"
+    [ -f "${O}/src-obj.cookie" ] || atf_fail "O points to the wrong place"
+    [ -f "${S}/src.cookie" ] || atf_fail "S points to the wrong place"
+    [ -f "${T}/tools.cookie" ] || atf_fail "T points to the wrong place"
+    [ -f "${XO}/xsrc-obj.cookie" ] || atf_fail "XO points to the wrong place"
+    [ -f "${XS}/xsrc.cookie" ] || atf_fail "XS points to the wrong place"
+    atf_check -o inline:"This is nbmake!\n" nbmake-mach
+
+    mkdir -p src/bin/ls
+    atf_check_equal '$(pwd)/root/mach/obj$(pwd)/src/bin/ls' \
+        '$(cd src/bin/ls && curobj)'
+
+    mkdir -p xsrc/some/other/dir
+    atf_check_equal '$(pwd)/root/mach/obj$(pwd)/xsrc/some/other/dir' \
+        '$(cd xsrc/some/other/dir && curobj)'
+
+    mkdir a
+    atf_check_equal 'NOT-FOUND' '$(cd a && curobj)'
+    atf_check_equal 'NOT-FOUND' '$(cd /bin && curobj)'
+}
+
+
+atf_test_case env__too_many_machines
+env__too_many_machines_body() {
+    cat >experr <<EOF
+sysbuild: E: No machine name provided as an argument and MACHINES contains more than one name
+Type 'man sysbuild' for help
+EOF
+    atf_check -s exit:1 -e file:experr sysbuild -c /dev/null \
+        -o MACHINES="amd64 i386" env
+}
+
+
+atf_test_case env__too_many_args
+env__too_many_args_body() {
+    cat >experr <<EOF
+sysbuild: E: env takes zero or one arguments
+Type 'man sysbuild' for help
+EOF
+    atf_check -s exit:1 -e file:experr sysbuild -c /dev/null env foo bar
 }
 
 
@@ -655,6 +899,9 @@ atf_init_test_cases() {
     atf_add_test_case build__remove_all
     atf_add_test_case build__fast_mode
     atf_add_test_case build__many_machines
+    atf_add_test_case build__machine_targets__ok
+    atf_add_test_case build__machine_targets__unmatched
+    atf_add_test_case build__mkvars
     atf_add_test_case build__with_x11
     atf_add_test_case build__some_args
 
@@ -666,6 +913,13 @@ atf_init_test_cases() {
     atf_add_test_case config__name__not_found
     atf_add_test_case config__overrides
     atf_add_test_case config__too_many_args
+
+    atf_add_test_case env__src_only
+    atf_add_test_case env__src_and_xsrc
+    atf_add_test_case env__explicit_machine
+    atf_add_test_case env__eval
+    atf_add_test_case env__too_many_machines
+    atf_add_test_case env__too_many_args
 
     atf_add_test_case fetch__checkout__src_only
     atf_add_test_case fetch__checkout__src_and_xsrc

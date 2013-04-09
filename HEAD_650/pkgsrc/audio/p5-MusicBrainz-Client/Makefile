@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.16 2011/10/15 18:51:56 hiramatsu Exp $
+# $NetBSD: Makefile,v 1.18 2012/10/03 21:53:57 wiz Exp $
 
 DISTNAME=	MusicBrainz-Client-0.11
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	3
+PKGREVISION=	4
 CATEGORIES=	audio perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=MusicBrainz/}
 
@@ -10,8 +10,6 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.musicbrainz.org/
 COMMENT=	Provide access to the libmusicbrainz client library
 LICENSE=	${PERL5_LICENSE}
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 DEPENDS+=	p5-MusicBrainz-Queries>=0.10:../../audio/p5-MusicBrainz-Queries
 

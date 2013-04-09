@@ -1,15 +1,13 @@
-# $NetBSD: Makefile,v 1.14 2012/03/03 00:14:04 wiz Exp $
+# $NetBSD: Makefile,v 1.16 2012/10/08 12:42:25 asau Exp $
 
 DISTNAME=		wmctrl-1.07
-PKGREVISION=		3
+PKGREVISION=		4
 CATEGORIES=		wm
 MASTER_SITES=		http://sweb.cz/tripie/utils/wmctrl/dist/
 
 MAINTAINER=		snj@NetBSD.org
 HOMEPAGE=		http://sweb.cz/tripie/utils/wmctrl/
 COMMENT=		Command line interface to an EWMH-compliant WM
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=		pkg-config
 GNU_CONFIGURE=		YES

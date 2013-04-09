@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.13 2011/10/20 01:04:12 hiramatsu Exp $
+# $NetBSD: Makefile,v 1.15 2012/10/28 06:30:43 asau Exp $
 
 DISTNAME=	Jemplate-0.261
 PKGNAME=	p5-${DISTNAME}
+PKGREVISION=	1
 CATEGORIES=	www perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=../by-authors/id/R/RK/RKRIMEN/}
 
@@ -11,8 +12,6 @@ COMMENT=	Javascript Templating with Template Toolkit
 LICENSE=	${PERL5_LICENSE}
 
 PERL5_REQD+=	5.6.1
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 DEPENDS+=	p5-Template-Toolkit>=2.19:../../www/p5-Template-Toolkit
 DEPENDS+=	p5-File-Find-Rule>=0.30:../../devel/p5-File-Find-Rule

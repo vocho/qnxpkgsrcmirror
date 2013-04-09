@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.2 2012/02/16 13:09:26 sno Exp $
+# $NetBSD: Makefile,v 1.4 2012/10/03 21:57:15 wiz Exp $
 
 DISTNAME=	pkg_p5up2date-0.04
+PKGREVISION=	1
 CATEGORIES=	pkgtools
 MASTER_SITES=	# empty
 DISTFILES=	# empty
@@ -9,7 +10,6 @@ MAINTAINER=	pkgsrc-p5-people@NetBSD.org
 COMMENT=	check p5-* pkgsrc packages requiring updates
 
 PKG_INSTALLATION_TYPES= overwrite pkgviews
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=	perl:run
 

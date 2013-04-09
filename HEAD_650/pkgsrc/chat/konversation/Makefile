@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.44 2012/07/02 13:37:36 adam Exp $
+# $NetBSD: Makefile,v 1.51 2012/10/08 23:01:17 adam Exp $
 #
 
 DISTNAME=	konversation-1.4
-PKGREVISION=	4
+PKGREVISION=	10
 CATEGORIES=	chat kde
 MASTER_SITES=	${MASTER_SITE_KDE:=konversation/1.4/src/}
 EXTRACT_SUFX=	.tar.xz
@@ -11,8 +11,6 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://konversation.kde.org/
 COMMENT=	KDE IRC Client
 LICENSE=	gnu-gpl-v2
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 BUILD_DEPENDS+= automoc4>=0.9.87:../../devel/automoc4
 

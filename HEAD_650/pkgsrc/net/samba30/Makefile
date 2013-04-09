@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.5 2012/04/11 10:03:37 asau Exp $
+# $NetBSD: Makefile,v 1.7 2012/10/23 17:19:07 asau Exp $
 
 .include "../../net/samba/Makefile.mirrors"
 
 DISTNAME=		samba-${VERSION}
-PKGREVISION=		10
+PKGREVISION=		11
 CATEGORIES=		net
 MASTER_SITES=		${SAMBA_MIRRORS:=old-versions/}
 
@@ -18,8 +18,6 @@ VERSION=		3.0.37
 CONFLICTS+=		ja-samba-[0-9]* pam-smbpass-[0-9]* tdb-[0-9]*	\
 			winbind-[0-9]*
 MAKE_JOBS_SAFE=		NO
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 FILESDIR=		${PKGDIR}/../samba/files
 DESCR_SRC=		${PKGDIR}/../samba/DESCR

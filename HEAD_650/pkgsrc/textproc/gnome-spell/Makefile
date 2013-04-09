@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.47 2012/06/14 07:43:24 sbd Exp $
+# $NetBSD: Makefile,v 1.52 2012/10/25 06:55:51 asau Exp $
 
 DISTNAME=	gnome-spell-1.0.8
-PKGREVISION=	15
+PKGREVISION=	19
 CATEGORIES=	textproc gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gnome-spell/1.0/}
 EXTRACT_SUFX=	.tar.bz2
@@ -9,8 +9,6 @@ EXTRACT_SUFX=	.tar.bz2
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.gnome.org/
 COMMENT=	Spell checking as you type like gtkspell
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 GNU_CONFIGURE=		YES
 USE_PKGLOCALEDIR=	YES

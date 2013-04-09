@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.76 2012/05/29 22:58:52 cheusov Exp $
+# $NetBSD: Makefile,v 1.79 2012/10/03 21:57:15 wiz Exp $
 #
 
-DISTNAME=	pkgdiff-1.3
+DISTNAME=	pkgdiff-1.4
+PKGREVISION=	1
 CATEGORIES=	pkgtools devel
 MASTER_SITES=	# empty
 DISTFILES=	# empty
@@ -12,7 +13,6 @@ COMMENT=	Tools to create, maintain, and send back patches for pkgsrc
 LICENSE=	2-clause-bsd AND original-bsd
 
 PKG_INSTALLATION_TYPES= overwrite pkgviews
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 NO_CONFIGURE=	yes
 

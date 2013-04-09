@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.24 2012/04/13 04:44:30 dholland Exp $
+# $NetBSD: Makefile,v 1.26 2012/10/23 10:24:04 wiz Exp $
 
 DISTNAME=		Maelstrom-1.4.3-L2.0.6-src.tar.gz
 PKGNAME=		maelstrom-x11-2.0.6
@@ -12,8 +12,6 @@ DISTFILES=		${DISTNAME} ${STREK} ${SWARS} ${ESOUND}
 MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://www.ambrosiasw.com/Products/Maelstrom.html
 COMMENT=	High resolution graphics version of Asteroids (X11 version)
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 ESOUND=			Maelstrom-Sounds-L2.0.0.tar.gz
 STREK=			Star_Trek.tar.gz
@@ -57,6 +55,5 @@ post-install:
 
 .include "../../x11/libXext/buildlink3.mk"
 .include "../../x11/libXpm/buildlink3.mk"
-.include "../../x11/xextproto/buildlink3.mk"
 .include "../../mk/oss.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

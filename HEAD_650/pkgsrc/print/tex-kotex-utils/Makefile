@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.3 2011/11/29 21:05:36 minskim Exp $
+# $NetBSD: Makefile,v 1.5 2012/10/08 13:45:47 asau Exp $
 
 DISTNAME=	kotex-dist-20110504
 PKGNAME=	tex-kotex-utils-0.3
+PKGREVISION=	1
 CATEGORIES=	print
 MASTER_SITES=	http://ftp.ktug.or.kr/KTUG/ko.TeX/
 DISTFILES=	${DISTNAME}${EXTRACT_SUFX}
@@ -15,8 +16,6 @@ DIST_SUBDIR=	${PKGNAME_NOREV}
 MAINTAINER=	minskim@NetBSD.org
 HOMEPAGE=	http://project.ktug.or.kr/ko.TeX/
 COMMENT=	Utilities for tex-kotex
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=	perl:run
 WRKSRC=		${WRKDIR}

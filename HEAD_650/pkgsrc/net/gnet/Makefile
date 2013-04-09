@@ -1,16 +1,14 @@
-# $NetBSD: Makefile,v 1.37 2012/03/03 00:12:00 wiz Exp $
+# $NetBSD: Makefile,v 1.39 2012/10/23 17:18:23 asau Exp $
 #
 
 DISTNAME=		gnet-2.0.8
-PKGREVISION=		3
+PKGREVISION=		4
 CATEGORIES=		net
 MASTER_SITES=		${MASTER_SITE_GNOME:=sources/gnet/2.0/}
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://www.gnetlibrary.org/
 COMMENT=		Simple network library
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=		pkg-config
 USE_LIBTOOL=		YES

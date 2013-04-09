@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.232 2012/07/24 18:26:00 drochner Exp $
+# $NetBSD: Makefile,v 1.241 2012/10/29 05:06:18 asau Exp $
 
-DISTNAME=	gtk+-2.24.11
+DISTNAME=	gtk+-2.24.13
 PKGNAME=	${DISTNAME:S/gtk/gtk2/}
+PKGREVISION=	2
 CATEGORIES=	x11
-MASTER_SITES=	ftp://ftp.gtk.org/pub/gtk/2.24/ \
-		${MASTER_SITE_GNOME:=sources/gtk+/2.24/}
+MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gtk+/2.24/}
 EXTRACT_SUFX=	.tar.xz
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
@@ -14,8 +14,6 @@ LICENSE=	gnu-lgpl-v2.1
 
 # gtk-builder-convert uses minidom from xml.dom, which needs expat
 DEPENDS+=		${PYPKGPREFIX}-expat-[0-9]*:../../textproc/py-expat
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 CONFLICTS=		gtk2-engines<2.6.0
 CONFLICTS+=		gail-[0-9]*

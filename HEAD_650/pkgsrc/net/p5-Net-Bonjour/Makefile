@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.3 2011/08/14 14:14:42 obache Exp $
+# $NetBSD: Makefile,v 1.5 2012/10/23 17:18:46 asau Exp $
 #
 
 DISTNAME=		Net-Bonjour-0.96
 PKGNAME=		p5-${DISTNAME}
-PKGREVISION=		2
+PKGREVISION=		3
 CATEGORIES=		net
 MASTER_SITES=		${MASTER_SITE_PERL_CPAN:=Net/}
 
@@ -17,7 +17,6 @@ DEPENDS+=		p5-Net-DNS>=0.50:../../net/p5-Net-DNS
 SUPERSEDES+=		p5-Net-Rendezvous-[0-9]*
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 PERL5_PACKLIST=		auto/Net/Bonjour/.packlist
 

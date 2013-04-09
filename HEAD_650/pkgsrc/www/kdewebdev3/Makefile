@@ -1,11 +1,9 @@
-# $NetBSD: Makefile,v 1.41 2012/07/01 19:05:27 dholland Exp $
+# $NetBSD: Makefile,v 1.44 2012/10/28 06:30:19 asau Exp $
 
 DISTNAME=	kdewebdev-${_KDE_VERSION}
-PKGREVISION=	14
+PKGREVISION=	16
 CATEGORIES=	www
 COMMENT=	HTML editor and tools suitable for experienced web developers
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 .include "../../meta-pkgs/kde3/Makefile.kde3"
 

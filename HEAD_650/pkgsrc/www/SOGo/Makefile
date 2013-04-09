@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.5 2012/06/14 07:45:21 sbd Exp $
+# $NetBSD: Makefile,v 1.7 2012/11/24 14:06:43 manu Exp $
 #
 
-DISTNAME=	SOGo-2.0.0b3
-PKGREVISION=	1
+DISTNAME=	SOGo-2.0.2a
 CATEGORIES=	www
 MASTER_SITES=	http://www.sogo.nu/files/downloads/SOGo/Sources/
 
@@ -13,7 +12,6 @@ LICENSE=	gnu-gpl-v2
 
 PKG_DESTDIR_SUPPORT=	user-destdir
 
-WRKSRC=		${WRKDIR}/SOGo
 HAS_CONFIGURE=	yes
 USE_LANGUAGES=	c
 USE_TOOLS+=     gmake zip:run
@@ -63,6 +61,7 @@ pre-install:
 .include "../../devel/SOPE/buildlink3.mk"
 .include "../../devel/libmemcached/buildlink3.mk"
 .include "../../textproc/libxml2/buildlink3.mk"
+.include "../../www/curl/buildlink3.mk"
 
 
 .include "../../mk/bsd.pkg.mk"

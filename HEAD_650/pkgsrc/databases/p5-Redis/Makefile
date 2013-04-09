@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.3 2012/04/04 19:42:09 mishka Exp $
+# $NetBSD: Makefile,v 1.5 2012/10/03 21:54:22 wiz Exp $
 #
 
 DISTNAME=	Redis-1.951
 PKGNAME=	p5-${DISTNAME}
+PKGREVISION=	1
 SVR4_PKGNAME=	p5rds
 CATEGORIES=	databases perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=../by-authors/id/M/ME/MELO/}
@@ -15,7 +16,6 @@ LICENSE=	${PERL5_LICENSE}
 DEPENDS+=	p5-IO-String-[0-9]*:../../devel/p5-IO-String
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 PERL5_PACKLIST=	auto/Redis/.packlist
 USE_LANGUAGES=	# none

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.3 2009/08/03 15:26:25 joerg Exp $
+# $NetBSD: Makefile,v 1.5 2012/10/29 05:06:52 asau Exp $
 
 PKGNAME=		space_dapp-20060717
 CATEGORIES=		x11
@@ -9,7 +9,6 @@ HOMEPAGE=		http://darkshed.net/files/c_cpp/bits/
 COMMENT=		Tiny dock app to create an empty space
 DISTNAME=		space_dapp.c
 EXTRACT_SUFX=
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 INSTALLATION_DIRS=	bin
 
@@ -28,5 +27,4 @@ do-install:
 
 .include "../../x11/libX11/buildlink3.mk"
 .include "../../x11/libXext/buildlink3.mk"
-.include "../../x11/xextproto/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

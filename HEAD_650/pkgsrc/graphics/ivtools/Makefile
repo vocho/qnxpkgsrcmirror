@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.25 2012/02/06 12:40:27 wiz Exp $
+# $NetBSD: Makefile,v 1.27 2012/10/23 10:24:06 wiz Exp $
 
 DISTNAME=	ivtools-1.2.8
 PKGREVISION=	1
@@ -12,7 +12,6 @@ COMMENT=	Drawing editors for PostScript, TeX, and web graphics
 
 CONFLICTS+=	dclock-[0-9]*
 
-PKG_DESTDIR_SUPPORT=	user-destdir
 NOT_FOR_PLATFORM=	${LP64PLATFORMS}
 
 DEPENDS+=	pstoedit>=3.0:../../graphics/pstoedit
@@ -41,5 +40,4 @@ pre-install:
 .include "../../graphics/tiff/buildlink3.mk"
 .include "../../x11/libXext/buildlink3.mk"
 .include "../../x11/libXt/buildlink3.mk"
-.include "../../x11/xextproto/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

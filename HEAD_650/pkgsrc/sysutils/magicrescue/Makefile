@@ -1,15 +1,14 @@
-# $NetBSD: Makefile,v 1.3 2011/07/03 11:52:55 jym Exp $
+# $NetBSD: Makefile,v 1.5 2012/10/23 19:51:11 asau Exp $
 #
 
 DISTNAME=		magicrescue-1.1.4
+PKGREVISION=		1
 CATEGORIES=		sysutils
 MASTER_SITES=		http://jbj.rapanden.dk/magicrescue/release/
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://jbj.rapanden.dk/magicrescue/release/
 COMMENT=		Recover files from a block device by scanning for magic bytes
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=		perl:run
 HAS_CONFIGURE=		yes

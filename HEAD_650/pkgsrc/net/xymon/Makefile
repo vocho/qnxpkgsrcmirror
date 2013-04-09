@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.21 2012/08/13 18:47:40 marino Exp $
+# $NetBSD: Makefile,v 1.27 2012/10/23 17:19:21 asau Exp $
 #
 
-DISTNAME=		xymon-4.3.7
-PKGREVISION=		1
+DISTNAME=		xymon-4.3.10
 CATEGORIES=		net
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=xymon/}
 
@@ -11,13 +10,12 @@ HOMEPAGE=		http://sourceforge.net/projects/xymon/
 COMMENT=		Network services monitor a la Big Brother
 LICENSE=		gnu-gpl-v2
 
-PKG_DESTDIR_SUPPORT=	user-destdir
 MAKE_JOBS_SAFE=		NO
 
 CONFLICTS+=		hobbitmon-[0-9]*
 CONFLICTS+=		hobbitclient-[0-9]*
 
-DEPENDS+=		fping>2:../../net/fping
+DEPENDS+=		fping>=2:../../net/fping
 	# xymonclient ought to be the same version as the server, modulo nbN
 DEPENDS+=		xymonclient>=4.3.0b2:../../net/xymonclient
 

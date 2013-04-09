@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.14 2008/03/04 06:59:04 jlam Exp $
+# $NetBSD: Makefile,v 1.16 2012/10/06 11:54:36 asau Exp $
 
 DISTNAME=		small
 PKGNAME=		${CHESS_ENGINE}-book-${DISTNAME}-20000511
-PKGREVISION=		1
+PKGREVISION=		2
 CATEGORIES=		games
 MASTER_SITES=		ftp://ftp.cis.uab.edu/pub/hyatt/common/${DISTNAME}/
 EXTRACT_SUFX=		.zip
@@ -12,9 +12,7 @@ COMMENT=		Chess opening book for EXchess (small)
 
 DEPENDS+=		exchess-[0-9]*:../../games/exchess
 
-CONFLICTS=		${CHESS_ENGINE}-book-[0-9]*
-
-PKG_DESTDIR_SUPPORT=	user-destdir
+CONFLICTS=		${CHESS_ENGINE}-book-medium-[0-9]*
 
 WRKSRC=			${WRKDIR}
 CHESS_ENGINE=		exchess

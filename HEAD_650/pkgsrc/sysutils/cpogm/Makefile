@@ -1,14 +1,13 @@
-# $NetBSD: Makefile,v 1.8 2011/03/18 20:36:46 zafer Exp $
+# $NetBSD: Makefile,v 1.10 2012/10/23 19:50:56 asau Exp $
 #
 
 DISTNAME=		cpogm-1.0
+PKGREVISION=		1
 CATEGORIES=		sysutils
 MASTER_SITES=	# ftp://ftp.gw.com/pub/people/kim/
 
 MAINTAINER=		kim@tac.nyc.ny.us
 COMMENT=		Copy owner, group and mode of a file
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 USE_TOOLS+=		perl:run
 

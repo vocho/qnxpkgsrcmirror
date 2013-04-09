@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.9 2012/06/21 09:11:43 obache Exp $
+# $NetBSD: Makefile,v 1.11 2012/10/31 11:19:15 asau Exp $
 
 DISTNAME=	VCP-autrijus-snapshot-0.9-${SNAPSHOT_VERS}
 SNAPSHOT_VERS=	20050110
 PKGNAME=	p5-${DISTNAME:S/-autrijus-snapshot-/-/:S/-${SNAPSHOT_VERS}$/beta${SNAPSHOT_VERS}/}
-PKGREVISION=	3
+PKGREVISION=	4
 CATEGORIES=	devel perl5 scm
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:S/${MODULE_DIR}/${AUTHOR_DIR}/}
 MODULE_DIR=	modules/by-module
@@ -12,8 +12,6 @@ AUTHOR_DIR=	authors/id/A/AU/AUTRIJUS
 MAINTAINER=	pkgsrc-users@NetBSD.org
 COMMENT=	Versioned Copy, copying hierarchies of versioned files
 LICENSE=	modified-bsd
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 MAKE_JOBS_SAFE=		no
 

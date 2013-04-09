@@ -1,10 +1,8 @@
-# $NetBSD: Makefile,v 1.45 2012/07/05 15:42:55 drochner Exp $
+# $NetBSD: Makefile,v 1.47 2012/10/23 18:16:33 asau Exp $
 #
 
 COMMENT=	LibPrelude libraries and c++ easy bindings
-PKGREVISION=	4
-
-PKG_DESTDIR_SUPPORT=	user-destdir
+PKGREVISION=	5
 
 .include "../../security/libprelude/Makefile.common"
 

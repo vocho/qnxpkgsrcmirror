@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.1 2012/07/05 15:35:34 sno Exp $
+# $NetBSD: Makefile,v 1.3 2012/10/31 11:18:57 asau Exp $
 
 DISTNAME=	Sub-Exporter-ForMethods-0.100050
 PKGNAME=	p5-${DISTNAME}
+PKGREVISION=	1
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Sub/}
 
@@ -15,8 +16,6 @@ DEPENDS+=	p5-Sub-Name-[0-9]*:../../devel/p5-Sub-Name
 
 USE_LANGUAGES=	# empty
 PERL5_PACKLIST=	auto/Sub/Exporter/ForMethods/.packlist
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 .include "../../lang/perl5/module.mk"
 .include "../../mk/bsd.pkg.mk"

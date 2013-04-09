@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.2 2012/08/16 11:49:30 wiz Exp $
+# $NetBSD: Makefile,v 1.4 2012/10/31 11:17:33 asau Exp $
 
 PKGNAME=	ocaml-${DISTNAME}
 DISTNAME=	react-0.9.4
+PKGREVISION=	1
 CATEGORIES=	devel
 MASTER_SITES=	http://erratique.ch/software/react/releases/
 EXTRACT_SUFX=	.tbz
@@ -14,8 +15,6 @@ LICENSE=	modified-bsd
 USE_LANGUAGES=	c
 HAS_CONFIGURE=	yes
 CONFIGURE_ARGS=	--prefix "${PREFIX}" --destdir "${DESTDIR}"
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 SUBST_CLASSES+=   destdir
 SUBST_STAGE.destdir=  post-configure

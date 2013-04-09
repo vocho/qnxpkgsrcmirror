@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.25 2012/08/13 17:39:49 drochner Exp $
+# $NetBSD: Makefile,v 1.31 2012/10/31 11:16:56 asau Exp $
 #
 
-VERS=			4.5.5
+VERS=			4.5.6
 DISTNAME=		eric4-${VERS}
 CATEGORIES=		devel
 MASTER_SITES=	http://downloads.sourceforge.net/project/eric-ide/eric4/stable/${VERS}/
@@ -11,7 +11,6 @@ HOMEPAGE=		http://eric-ide.python-projects.org/index.html
 COMMENT=		Python - IDE
 LICENSE=		gnu-gpl-v3
 
-PKG_DESTDIR_SUPPORT=	user-destdir
 NO_BUILD=				yes
 
 PY_PATCHPLIST=			yes

@@ -1,2 +1,0 @@
-@comment $NetBSD: PLIST.QNX,v 1.2 2008/05/17 22:46:34 tnn Exp $
-lib/python${PY_VER_SUFFIX}/lib-dynload/spwd.so
