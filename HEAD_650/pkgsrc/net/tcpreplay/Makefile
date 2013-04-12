@@ -17,6 +17,12 @@ CONFIGURE_ARGS+=	--enable-dynamic-link
 CONFIGURE_ARGS+=	--with-libpcap=${BUILDLINK_PREFIX.libpcap}
 
 LIBS.QNX+=	-lsocket
+.include "../../mk/bsd.prefs.mk"
+.if ${OPSYS} == "QNX"
+# likes to free() buffer returned from pathfind and ours doesn't malloc.
+CONFIGURE_ENV+=		ac_cv_lib_gen_pathfind=no
+CONFIGURE_ENV+=		libopts_cv_run_pathfind=no
+.endif
 
 .include "../../net/libpcap/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"
