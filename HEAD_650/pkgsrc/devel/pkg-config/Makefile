@@ -37,6 +37,11 @@ CONFIGURE_ARGS+=	--disable-dtrace
 .endif
 
 LIBS.QNX+=	-lsocket
+.if ${OPSYS} == "QNX" && ${MACHINE_ARCH} == "i386" && !empty(OS_VERSION:M6.5.*)
+# This should really be against gcc version but..
+# Not needed with gcc 4.7.2 and later.
+CFLAGS+=	-march=i486
+.endif
 
 CONFIGURE_ARGS+=	${CONFIGURE_ARGS.${ICONV_TYPE}-iconv}
 CONFIGURE_ARGS.gnu-iconv=	--with-libiconv=gnu
