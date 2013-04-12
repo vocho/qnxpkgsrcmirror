@@ -9,7 +9,7 @@ $NetBSD$
 +#    ifndef __QNXNTO__
      OP_REFCNT_UNLOCK;
 +#    else
-+    if (pthread_mutex_init(&readdir_mutex, NULL) != EOK) {
++    if (pthread_mutex_init(&PL_op_mutex, NULL) != EOK) {
 +	    /* new proc that supports inheritence of sync objects */
 +	    OP_REFCNT_UNLOCK;
 +    }
