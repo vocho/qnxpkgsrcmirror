@@ -56,4 +56,10 @@ post-install:
 		${DESTDIR}${EGDIR}
 	${INSTALL_DATA} ${WRKSRC}/php.gif ${DESTDIR}${PREFIX}/share/php
 
+.if ${OPSYS} == "QNX"
+# php wants a large stack
+post-build:
+	ldrel -S2M -L ${WRKSRC}/sapi/cli/php
+.endif
+
 .include "../../mk/bsd.pkg.mk"
