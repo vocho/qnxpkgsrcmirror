@@ -1,6 +1,6 @@
 $NetBSD: patch-ab,v 1.1 2009/05/02 17:35:43 minskim Exp $
 
---- configure.orig	2009-02-04 13:07:26.000000000 -0800
+--- configure.orig	2009-02-04 21:07:26.000000000 +0000
 +++ configure
 @@ -9824,7 +9824,11 @@ darwin* | rhapsody*)
    soname_spec='${libname}${release}${major}$shared_ext'
@@ -15,7 +15,33 @@ $NetBSD: patch-ab,v 1.1 2009/05/02 17:35:43 minskim Exp $
  
    sys_lib_search_path_spec="$sys_lib_search_path_spec /usr/local/lib"
    sys_lib_dlsearch_path_spec='/usr/local/lib /lib /usr/lib'
-@@ -22072,7 +22076,7 @@ libdnet_version=
+@@ -20943,6 +20947,8 @@ fi
+ 		            LPCAPLIB="-L${testdir}/lib64 -lpcap"
+ 				elif test -f "${testdir}/lib/libpcap${shrext_cmds}" ; then
+ 					LPCAPLIB="-L${testdir}/lib -lpcap"
++				elif [ `uname` == "QNX" ] && [ -f "${testdir}/lib/libpcap.a" ]; then
++					LPCAPLIB="-L${testdir}/lib -lpcap"
+ 				else
+ 					{ { $as_echo "$as_me:$LINENO: error: Unable to find libpcap in ${testdir}" >&5
+ $as_echo "$as_me: error: Unable to find libpcap in ${testdir}" >&2;}
+@@ -20985,6 +20991,16 @@ $as_echo "$foundpcap" >&6; }
+ OLDLIBS="$LIBS"
+ OLDCFLAGS="$CFLAGS -I$LPCAPINCDIR"
+ LIBS="$LPCAPLIB"
++#if [ `uname` == "QNX" ]; then
++#LIBS="$LIBS -lsocket"
++#fi
++  #  *nto* | *qnx*)
++case $host_os in
++    *nto-qnx*)
++	LIBS="$LIBS -lsocket"
++	;;
++esac
++
+ CFLAGS="$CFLAGS -I$LPCAPINCDIR"
+ 
+ { $as_echo "$as_me:$LINENO: checking for libpcap version" >&5
+@@ -22072,7 +22088,7 @@ libdnet_version=
  enable_fragroute=no
  trydnetdir=/usr/local
  
@@ -24,7 +50,7 @@ $NetBSD: patch-ab,v 1.1 2009/05/02 17:35:43 minskim Exp $
  	{ $as_echo "$as_me:$LINENO: checking for libdnet" >&5
  $as_echo_n "checking for libdnet... " >&6; }
  
-@@ -22806,7 +22810,7 @@ esac
+@@ -22806,7 +22822,7 @@ esac
  fi
  
  
