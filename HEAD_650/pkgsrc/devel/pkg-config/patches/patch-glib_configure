@@ -1,0 +1,26 @@
+$NetBSD$
+
+--- glib/configure.orig	2012-08-24 12:34:14.000000000 +0000
++++ glib/configure
+@@ -24726,6 +24726,9 @@ if test x"$have_threads" = xposix; then
+       G_THREAD_CFLAGS="-D_REENTRANT -D_PTHREADS"
+       G_THREAD_LIBS="-lpthread -lthread"
+       ;;
++    *-nto-qnx*)
++       # nothing
++      ;;
+     *)
+       for flag in pthread pthreads mt; do
+         glib_save_CFLAGS="$CFLAGS"
+@@ -24822,6 +24825,11 @@ if test x"$G_THREAD_CFLAGS" = x; then
+ 		# No flag needed when using MSVCRT.DLL
+ 		G_THREAD_CFLAGS=""
+ 		;;
++	*-nto-qnx*)
++		# pthreads by default.  Nothing needed
++		G_THREAD_CFLAGS=""
++		G_THREAD_LIBS=""
++		;;
+ 	*)
+ 		G_THREAD_CFLAGS="-D_REENTRANT" # good default guess otherwise
+ 		;;
