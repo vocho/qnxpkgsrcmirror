@@ -16,5 +16,7 @@ USE_LIBTOOL=	yes
 CONFIGURE_ARGS+=	--enable-dynamic-link
 CONFIGURE_ARGS+=	--with-libpcap=${BUILDLINK_PREFIX.libpcap}
 
+LIBS.QNX+=	-lsocket
+
 .include "../../net/libpcap/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"
