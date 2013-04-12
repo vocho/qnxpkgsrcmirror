@@ -18,6 +18,6 @@ SHA1 (patch-cpan_Sys-Syslog_Syslog.xs) = 4413010d0b55a0ae636bca8ff3ace2ebc99e90b
 SHA1 (patch-hints_qnx.sh) = 35b8d69ea19b8b188a4f6188c38bded00db7aecf
 SHA1 (patch-hints_solaris_2.sh) = 26f804234c07da04ebd6c33ce7ad54d94c746f1e
 SHA1 (patch-ta) = 51a3e02148e78eaab882125f859e59add39a4fbe
-SHA1 (patch-util.c) = 4acaa4a3b734551b73df8bd77ed01b31e2745f06
+SHA1 (patch-util.c) = 52c41fa5384f14751a4c64ada937099e7333100f
 SHA1 (patch-zd) = 469602bc04b217f2d9929f5caeab43f77a74076f
 SHA1 (patch-ze) = a719797ccf8bb09e75aacc1609408fb4afe6aa60
