@@ -4,5 +4,6 @@ SHA1 (pkg-config-0.27.1.tar.gz) = 08249417a51c0a7a940e4276105b142b77e576b5
 RMD160 (pkg-config-0.27.1.tar.gz) = ea01357dd1bcd40766123581c7f43fe59e41f4ac
 Size (pkg-config-0.27.1.tar.gz) = 1908265 bytes
 SHA1 (patch-configure) = 286dcc405ae8f4d4c6e8598960ed03ba5822dfb1
+SHA1 (patch-glib_configure) = 622a6be8c7a6a19b756e54b3c7baa470790f2a8c
 SHA1 (patch-glib_glib_gmain.c) = fee2e76b753eed304e610c95d4ec8a6d3fcbb138
 SHA1 (patch-glib_glib_libcharset_localcharset.c) = 7b6b117dab009183ce7acc59d52bf206c65c316f
