@@ -218,6 +218,12 @@ post-build:
 INSTALL_TARGET=		install-conf install
 INSTALL_MAKE_FLAGS+=	sysconfdir="${EGDIR}"
 
+.if ${OPSYS} != "QNX"
+CHOWN_CMD=	${CHOWN} -h -R
+.else
+CHOWN_CMD=	${CHOWN} -R
+.endif
+
 post-install:
 	${LN} -sf ${LOCALBASE}/libexec/apr/libtool ${DESTDIR}${PREFIX}/share/httpd/build
 	${LN} -sf ${SBINDIR}/envvars-std ${DESTDIR}${SBINDIR}/envvars
@@ -229,9 +235,9 @@ post-install:
 		${CHMOD} ${BINMODE} ${DESTDIR}${PREFIX}/sbin/$$file; \
 	done
 
-	${CHOWN} -h -R ${BINOWN}:${BINGRP} ${DESTDIR}${PREFIX}/share/httpd
-	${CHOWN} -h -R ${BINOWN}:${BINGRP} ${DESTDIR}${PREFIX}/include/httpd
-	${CHOWN} -h -R ${BINOWN}:${BINGRP} ${DESTDIR}${PREFIX}/lib/httpd
+	${CHOWN_CMD} ${BINOWN}:${BINGRP} ${DESTDIR}${PREFIX}/share/httpd
+	${CHOWN_CMD} ${BINOWN}:${BINGRP} ${DESTDIR}${PREFIX}/include/httpd
+	${CHOWN_CMD} ${BINOWN}:${BINGRP} ${DESTDIR}${PREFIX}/lib/httpd
 	${CHOWN} ${BINOWN}:${BINGRP} ${DESTDIR}${PREFIX}/libexec/cgi-bin/test-cgi
 	${CHOWN} ${BINOWN}:${BINGRP} ${DESTDIR}${PREFIX}/libexec/cgi-bin/printenv
 
