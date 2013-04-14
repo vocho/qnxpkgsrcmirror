@@ -55,6 +55,12 @@ CONFIGURE_ENV+=		LIBELF_LIBS='-lelf'
 . endif
 .endif
 
+.if ${OPSYS} == "QNX" && ${MACHINE_ARCH} == "i386" && !empty(OS_VERSION:M6.5.*)
+# This should really be against gcc version but..
+# Not needed with gcc 4.7.2 and later.
+CFLAGS+=	-march=i486
+.endif
+
 .include "../../converters/libiconv/buildlink3.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../devel/pcre/buildlink3.mk"
