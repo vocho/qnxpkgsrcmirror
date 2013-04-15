@@ -3,3 +3,4 @@ $NetBSD: distinfo,v 1.10 2012/06/03 17:33:41 wiz Exp $
 SHA1 (libXt-1.1.3.tar.bz2) = 2cef068bc4d7170e31b89b5c06aeaf4451a7699a
 RMD160 (libXt-1.1.3.tar.bz2) = d1cffd17864ea0081437a07ea78dcaa8316a5fa0
 Size (libXt-1.1.3.tar.bz2) = 734679 bytes
+SHA1 (patch-src_ResConfig.c) = e7a49fcd4dc535e7b6ee84d50e236e7feabbaa5b
