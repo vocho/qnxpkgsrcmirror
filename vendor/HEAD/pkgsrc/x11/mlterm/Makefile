@@ -1,8 +1,6 @@
-# $NetBSD: Makefile,v 1.75 2012/10/29 05:06:40 asau Exp $
+# $NetBSD: Makefile,v 1.82 2013/03/24 16:02:13 tsutsui Exp $
 
-DISTNAME=	mlterm-3.1.4
-#PKGREVISION=
-PKGREVISION=	1
+DISTNAME=	mlterm-3.1.9
 CATEGORIES=	x11
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=mlterm/}
 
@@ -51,6 +49,7 @@ BUILDLINK_DEPMETHOD.libXt?=	build
 
 .include "../../converters/libiconv/buildlink3.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"
+.include "../../graphics/gdk-pixbuf2/buildlink3.mk"
 .include "../../x11/gtk2/buildlink3.mk"
 .include "../../x11/libSM/buildlink3.mk"
 .include "../../x11/libX11/buildlink3.mk"

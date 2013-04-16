@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.54 2012/10/29 05:06:09 asau Exp $
+# $NetBSD: Makefile,v 1.56 2013/02/16 11:24:58 wiz Exp $
 
 DISTNAME=		devilspie-0.22
-PKGREVISION=		15
+PKGREVISION=		16
 CATEGORIES=		x11
 MASTER_SITES=		http://www.burtonini.com/computing/
 
@@ -18,6 +18,7 @@ USE_PKGLOCALEDIR=	YES
 TEST_TARGET=		check
 INSTALLATION_DIRS=	share/doc/devilspie
 LDFLAGS.DragonFly=	-lX11
+LDFLAGS.SunOS+=		-lX11
 
 post-install:
 	${INSTALL_DATA} ${WRKSRC}/README \

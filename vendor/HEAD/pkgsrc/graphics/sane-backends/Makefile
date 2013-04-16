@@ -1,9 +1,7 @@
-# $NetBSD: Makefile,v 1.58 2012/10/06 14:11:20 asau Exp $
-
-PKGREVISION=	3
+# $NetBSD: Makefile,v 1.60 2013/04/06 03:45:15 rodent Exp $
 
 .include "Makefile.common"
-COMMENT=	API for access to scanners, digital cameras, frame grabbers etc.
+COMMENT=	API for access to scanners, digital cameras, frame grabbers, etc
 
 DISTNAME=	sane-backends-${SANE_VERSION}
 DISTFILES=	${DISTNAME}${EXTRACT_SUFX}

@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.102 2012/10/26 16:08:18 shattered Exp $
+# $NetBSD: Makefile,v 1.107 2013/03/29 15:26:26 tsutsui Exp $
 
-DISTNAME=		qemu-1.2.0
-PKGREVISION=		4
+DISTNAME=		qemu-1.3.1
 CATEGORIES=		emulators
 MASTER_SITES=		http://wiki.qemu.org/download/
 EXTRACT_SUFX=		.tar.bz2
@@ -13,6 +12,9 @@ LICENSE=		gnu-gpl-v2 AND gnu-lgpl-v2.1 AND mit AND modified-bsd
 
 CONFLICTS+=		qemu-bin-[0-9]*
 NOT_FOR_PLATFORM=	NetBSD-1.[0-6]*-*
+# qemu 1 does not work on NetBSD-5; see http://gnats.netbsd.org/46565.
+# As a workaround, use emulators/qemu0.
+NOT_FOR_PLATFORM=	NetBSD-5*-*
 
 USE_TOOLS+=		gmake makeinfo perl:build pkg-config
 UNLIMIT_RESOURCES=	datasize
@@ -34,8 +36,6 @@ CONFIGURE_ARGS+=	--mandir=${PREFIX}/${PKGMANDIR}
 
 CONF_FILES=		${EGDIR}/target-x86_64.conf \
 			${PKG_SYSCONFDIR}/target-x86_64.conf
-CONF_FILES+=		${EGDIR}//cpus-x86_64.conf \
-			${PKG_SYSCONFDIR}/cpus-x86_64.conf
 EGDIR=			${PREFIX}/share/examples/qemu
 INSTALL_MAKE_FLAGS=	egdir=${EGDIR}
 PKG_SYSCONFSUBDIR=	qemu
@@ -126,6 +126,7 @@ post-install:
 .include "../../devel/glib2/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"
 .include "../../lang/python/extension.mk"
+.include "../../x11/pixman/buildlink3.mk"
 .include "../../mk/curses.buildlink3.mk"
 .include "../../mk/pthread.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

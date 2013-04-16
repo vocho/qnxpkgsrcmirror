@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.94 2012/10/31 11:16:54 asau Exp $
+# $NetBSD: Makefile,v 1.97 2013/04/06 21:07:32 rodent Exp $
 
-DISTNAME=	doxygen-1.8.2.src
+DISTNAME=	doxygen-1.8.3.1.src
 PKGNAME=	${DISTNAME:S/.src//}
-PKGREVISION=	1
 CATEGORIES=	devel
 MASTER_SITES=	ftp://ftp.stack.nl/pub/users/dimitri/ \
 		http://ftp.stack.nl/pub/users/dimitri/
@@ -35,8 +34,8 @@ PLIST_VARS+=		pangocairo nopangocairo
 SUBST_CLASSES+=		path
 SUBST_STAGE.path=	pre-configure
 SUBST_FILES.path=	doc/Makefile.in
-SUBST_SED.path=		-e "s|@EPSTOPDF@|${LOCALBASE}/bin/epstopdf|g" \
-			-e "s|@PYTHONBIN@|${PYTHONBIN}|g"
+SUBST_SED.path=		-e "s|@EPSTOPDF@|${LOCALBASE}/bin/epstopdf|g"
+SUBST_SED.path+=	-e "s|@PYTHONBIN@|${PYTHONBIN}|g"
 
 SUBST_CLASSES+=		perlbin
 SUBST_STAGE.perlbin=	pre-configure

@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.11 2012/10/19 19:58:47 marino Exp $
+# $NetBSD: Makefile,v 1.14 2013/04/10 11:12:28 wiz Exp $
 
-DISTNAME=		help2man-1.40.12
-PKGREVISION=		1
+DISTNAME=		help2man-1.41.1
 CATEGORIES=		converters
 MASTER_SITES=		${MASTER_SITE_GNU:=help2man/}
 
@@ -25,6 +24,14 @@ SUBST_SED.paths=	-e 's,(libdir)/help2man,(libdir),g'
 INFO_FILES=		yes
 
 .include "../../mk/bsd.prefs.mk"
+
+# XXX: will undoubtedly include more versions
+.if ${OPSYS} == "Darwin" && !empty(OS_VERSION:M9.*)
+SUBST_CLASSES+=		shlibarg
+SUBST_STAGE.shlibarg=	pre-configure
+SUBST_FILES.shlibarg=	Makefile.in
+SUBST_SED.shlibarg=	-e 's, -shared , -dynamiclib ,g'
+.endif
 
 PLIST_VARS+=		nls
 

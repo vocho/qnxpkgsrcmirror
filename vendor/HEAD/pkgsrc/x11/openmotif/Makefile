@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.73 2012/10/29 05:06:42 asau Exp $
+# $NetBSD: Makefile,v 1.76 2013/04/06 14:58:21 rodent Exp $
 
 PKGVER=		2.3.3
 DISTNAME=	openmotif-${PKGVER}
-PKGREVISION=	1
+PKGREVISION=	3
 CATEGORIES=	x11
 MASTER_SITES=	http://ftp.ics.com/openmotif/2.3/2.3.3/
 MASTER_SITES+=	ftp://ftp.ics.com/openmotif/2.3/2.3.3/
@@ -101,7 +101,7 @@ post-patch:
 			${RM} -f $${manpage}.presubst;			\
 		done;							\
 	done
-	echo "#include <X11/Xos_r.h>" > ${WRKSRC}/lib/Xm/Xmos_r.h
+	${ECHO} "#include <X11/Xos_r.h>" > ${WRKSRC}/lib/Xm/Xmos_r.h
 
 # Filter the manpages through tbl.
 post-build:

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.31 2012/01/19 20:34:01 gdt Exp $
+# $NetBSD: Makefile,v 1.33 2013/01/30 17:39:39 adam Exp $
 
 .include "../../devel/scmgit/Makefile.version"
 
@@ -15,5 +15,6 @@ META_PACKAGE=	yes
 
 DEPENDS+=	scmgit-base>=${GIT_VERSION}:../../devel/scmgit-base
 DEPENDS+=	scmgit-docs>=${GIT_VERSION}:../../devel/scmgit-docs
+DEPENDS+=	scmgit-gitk>=${GIT_VERSION}:../../devel/scmgit-gitk
 
 .include "../../mk/bsd.pkg.mk"

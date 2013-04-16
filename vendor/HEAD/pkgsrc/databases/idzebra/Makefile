@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.6 2012/10/02 21:25:18 asau Exp $
+# $NetBSD: Makefile,v 1.8 2013/02/06 23:21:24 jperkin Exp $
 #
 
 DISTNAME=	idzebra-2.0.47
-PKGREVISION=	4
+PKGREVISION=	6
 CATEGORIES=	databases
 MASTER_SITES=	http://ftp.indexdata.dk/pub/zebra/
 

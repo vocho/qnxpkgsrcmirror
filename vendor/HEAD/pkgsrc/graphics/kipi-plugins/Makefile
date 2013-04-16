@@ -1,9 +1,8 @@
-# $NetBSD: Makefile,v 1.78 2012/10/08 23:01:46 adam Exp $
+# $NetBSD: Makefile,v 1.85 2013/04/06 14:58:18 rodent Exp $
 #
 
-PKGNAME=	kipi-plugins-2.5.0
-DISTNAME=	digikam-2.5.0
-PKGREVISION=	8
+PKGNAME=	kipi-plugins-3.1.0
+DISTNAME=	digikam-3.1.0
 CATEGORIES=	graphics
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=digikam/}
 EXTRACT_SUFX=	.tar.bz2
@@ -24,11 +23,11 @@ USE_TOOLS+=		msgfmt pkg-config
 WRKSRC=			${WRKDIR}/${DISTNAME}/extra/kipi-plugins
 
 post-patch:
-	echo "FIND_PACKAGE(Msgfmt REQUIRED)" >> ${WRKSRC}/CMakeLists.txt
-	echo "FIND_PACKAGE(Gettext REQUIRED)" >> ${WRKSRC}/CMakeLists.txt
-	echo "ADD_SUBDIRECTORY(po)" >> ${WRKSRC}/CMakeLists.txt
+	${ECHO} "FIND_PACKAGE(Msgfmt REQUIRED)" >> ${WRKSRC}/CMakeLists.txt
+	${ECHO} "FIND_PACKAGE(Gettext REQUIRED)" >> ${WRKSRC}/CMakeLists.txt
+	${ECHO} "ADD_SUBDIRECTORY(po)" >> ${WRKSRC}/CMakeLists.txt
 	ln -s ../../po ${WRKSRC}/po
-	rm ${WRKSRC}/po/*/digikam.po ${WRKSRC}/po/*/libkgeomap.po
+	rm ${WRKSRC}/po/*/digikam.po ${WRKSRC}/po/*/libkgeomap.po ${WRKSRC}/po/*/libkipi.po
 
 SUBST_CLASSES+=		xdg
 SUBST_SED.xdg=		-e "s,/usr/bin/env xdg-open,${PREFIX}/bin/xdg-open,"

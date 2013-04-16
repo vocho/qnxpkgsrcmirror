@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.25 2012/10/30 12:56:00 drochner Exp $
+# $NetBSD: Makefile,v 1.27 2013/04/06 03:45:19 rodent Exp $
 #
 
 .include "Makefile.common"
-PKGREVISION=		5
+PKGREVISION=		6
 
 #CONFIGURE_ARGS+= --disable-silent-rules
 
-COMMENT+=		base plugins
+COMMENT+=		Base plugins
 
 # some plugins were moved from bad to base
 CONFLICTS+=		gst-plugins0.10-bad<0.10.10

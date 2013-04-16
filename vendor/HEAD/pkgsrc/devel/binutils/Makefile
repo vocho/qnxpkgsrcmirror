@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.49 2012/11/21 07:46:40 jperkin Exp $
+# $NetBSD: Makefile,v 1.52 2013/04/08 06:03:03 mef Exp $
 
-DISTNAME=	binutils-2.22
-PKGREVISION=	1
+DISTNAME=	binutils-2.23.2
 CATEGORIES=	devel
 MASTER_SITES=	${MASTER_SITE_GNU:=binutils/}
 
@@ -31,7 +30,7 @@ PLIST_SRC+=	${WRKDIR}/PLIST_DYNAMIC
 
 INFO_FILES=	yes
 
-INSTALLATION_DIRS=	gnu/bin gnu/man/man1
+INSTALLATION_DIRS=	${PKGGNUDIR}bin ${PKGGNUDIR}${PKGMANDIR}/man1
 
 # gprof (XXX: and others?) cannot be built on all platforms
 #
@@ -84,11 +83,11 @@ post-install:
 .for f in ${SYMLINK_FILES}
 	set -e; \
 	if [ -f ${DESTDIR}${PREFIX}/bin/g${f:Q} ]; then \
-	    ${LN} -sf ${PREFIX}/bin/g${f} ${DESTDIR}${PREFIX}/gnu/bin/${f}; \
+	    ${LN} -sf ${PREFIX}/bin/g${f} ${DESTDIR}${PREFIX}/${PKGGNUDIR}bin/${f}; \
 	fi
 	if [ -f ${DESTDIR}${PREFIX}/${PKGMANDIR}/man1/g${f:Q}.1 ]; then \
 	    ${LN} -sf ${PREFIX}/${PKGMANDIR}/man1/g${f}.1 \
-	              ${DESTDIR}${PREFIX}/gnu/man/man1/${f}.1; \
+	              ${DESTDIR}${PREFIX}/${PKGGNUDIR}${PKGMANDIR}/man1/${f}.1; \
 	fi
 .endfor
 

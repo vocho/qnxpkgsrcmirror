@@ -1,17 +1,18 @@
-# $NetBSD: Makefile,v 1.5 2012/10/03 00:02:39 asau Exp $
+# $NetBSD: Makefile,v 1.7 2013/02/06 23:20:51 jperkin Exp $
 
-DISTNAME=	libmsn-4.1
+DISTNAME=	libmsn-4.2.1
+PKGREVISION=	1
 CATEGORIES=	chat
-MASTER_SITES=   ${MASTER_SITE_SOURCEFORGE:=libmsn/}
+MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=libmsn/}
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://sourceforge.net/projects/libmsn
-COMMENT=	library for connecting to Microsoft's MSN Messenger service
+COMMENT=	Library for connecting to Microsoft's MSN Messenger service
 LICENSE=	gnu-gpl-v2
 
 USE_CMAKE=	yes
-USE_LANGUAGES+= c c++
+USE_LANGUAGES= c c++
 
 PKGCONFIG_OVERRIDE+=	libmsn.pc.cmake
 

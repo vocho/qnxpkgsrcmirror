@@ -1,4 +1,4 @@
-# $NetBSD: buildlink3.mk,v 1.2 2012/05/07 02:45:47 dholland Exp $
+# $NetBSD: buildlink3.mk,v 1.5 2013/02/06 23:21:34 jperkin Exp $
 
 BUILDLINK_TREE+=	edje
 
@@ -6,6 +6,7 @@ BUILDLINK_TREE+=	edje
 EDJE_BUILDLINK3_MK:=
 
 BUILDLINK_API_DEPENDS.edje+=	edje>=1.1.0
+BUILDLINK_ABI_DEPENDS.edje?=	edje>=1.1.0nb3
 BUILDLINK_PKGSRCDIR.edje?=	../../graphics/edje
 
 .include	"../../devel/ecore/buildlink3.mk"

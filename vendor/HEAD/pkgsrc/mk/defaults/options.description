@@ -34,6 +34,7 @@ ares			Use the ares library for asynchronous name resolution.
 aria2-metalink		Enable Metalink support.
 arts			Use the aRts audio daemon.
 aspell			Add spell checking support using aspell.
+ass			Enable subtitle renderer for the ASS/SSA format
 aterm-big5		Enable Chinese support.
 aterm-greek		Enable Greek keyboard support.
 aterm-kanji		Enable kanji support.
@@ -125,6 +126,8 @@ dv			Enable usage of the libdv library.
 dvdnav			Enable libdvdnav support to navigate DVDs.
 dvdread			Enable reproduction of DVDs.
 dvi			Enable device independent file format (mostly TeX) support.
+eaccelerator-disassembler	Include disassembler.
+eaccelerator-doc-comment-inclusion	Retain doc-comments in internal php structures.
 eb			Enable EB dictionary library support.
 ecl			Use Embeddable Common Lisp.
 ecore			Enable ecore library support.
@@ -361,10 +364,11 @@ libgcrypt		Use GNU cryptographic library.
 libgme			Enable Game_Music_Emu video game music file library support.
 libgpod			Enable libgpod support.
 libiconv-cp932		Add supplemental support for CP932.
+libidn			Add support for libidn text conversion.
 libind			Add Indian script support using libind.
 liblqr			Enable liblqr (liquid rescale) support.
 libmms			Enable streaming from mms:// URLS using libmms.
-libmp4v2		Enable libmp4v2 (MP4) support.
+libmp4v2		Enable MP4 support using libmp4v2.
 libmpg123		Enable mpg123 project's core decoder library support.
 libmtp			Enable MTP via libmtp support.
 libofa			Enable Open Fingerprint Architecture library support.
@@ -428,6 +432,7 @@ mozilla-jit		Enable nanojit javascript acceleration.
 mozilla-lightning	Enable the lightning calendar extension.
 mozilla-single-profile	Enable single profiles on mozilla browsers.
 mp3tunes		Enable support for mp3tunes.com.
+mp4v2			Enable MP4 support using mp4v2.
 mpcdec			Enable Musepack decoder library support.
 mpeg3			Enable libmpeg3 MPEG decoding library support.
 mpeg4ip			Enable mpeg4ip support.
@@ -457,6 +462,7 @@ nas			Enable usage of the Network Audio System.
 ncurses			Enable ncurses support.
 ncursesw		Enable wide character ncurses support.
 ndb-cluster		Build NDB Cluster support.
+ndbm			Use New Database Manager (ndbm).
 ndiff			Enable tool to compare Nmap scans.
 nextstep		Enable Cocoa or GNUstep support.
 nfdump-ftconv		Build the flow-tools to nfdump converter.
@@ -476,6 +482,7 @@ online-tests		Requiring Internet connectivity for "make test".
 onscripter-pda		Enable PDA_AUTOSIZE option to fit window size to screen
 openal			Enable OpenAL support.
 opencore-amr		Enable OpenCORE Adaptive Multi-Rate speech codecs.
+opendkim-filter		Build opendkim-filter support.
 openexr			Use OpenEXR as imaging library.
 opengl			Use OpenGL as display library.
 opengrok-build		Enable building of OpenGrok from source.
@@ -588,9 +595,12 @@ squid-backend-aufs	Enable use of with Posix AIO.
 squid-backend-coss	Enable use of COSS I/O with Posix AIO.
 squid-backend-diskd	Enable use of diskd process to write to cache.
 squid-backend-null	Enable use of null backend; using only memory.
+squid-backend-rock	Enable use of rock backend; database-style storage.
 squid-backend-ufs	Enable use of UFS (Unix File System).
 squid-carp		Enable use of CARP (Cache Array Routing Protocol).
 squid-ipf		Enable use of transparent proxy with IP Filter.
+squid-ipfw		Enable use of transparent proxy with IPFW.
+squid-kerberos-helper	Enable use of Kerberos helper support.
 squid-ldap-helper	Enable use of LDAP helper support.
 squid-netfilter		Enable use of transparent proxy with Linux Net Filter.
 squid-pam-helper	Enable use of PAM helper support.
@@ -651,6 +661,7 @@ utf8			Enable UTF-8 (iconv) character encoding support.
 uucp			Enable support for uucp.
 uulib			Enable support for uulib.
 v4l2			Enable V4L2 (Video4Linux2) support.
+vaapi			Enable support for VAAPI.
 valgrind		Enable Valgrind debugging and profiling support.
 vbr			Enable Vouch By Reference support.
 vdpau			Enable support for VDPAU.

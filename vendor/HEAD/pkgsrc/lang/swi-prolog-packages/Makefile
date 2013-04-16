@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.33 2012/10/02 20:11:55 asau Exp $
+# $NetBSD: Makefile,v 1.36 2013/04/06 14:58:20 rodent Exp $
 
 .include "../../lang/swi-prolog-lite/Makefile.common"
 
 PKGNAME=		swi-prolog-packages-${SWIPLVERS}
-PKGREVISION=		2
+PKGREVISION=		4
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
 COMMENT=		Packages for SWI Prolog
@@ -54,7 +54,7 @@ pre-install: checkforx
 # Based on misc/openoffice:
 DISPLAY?=	#empty, if unset
 checkforx:
-.if ${DISPLAY} == "" || ${DISPLAY_OK:!${X11BASE}/bin/xdpyinfo >/dev/null 2>&1 && echo YES || echo NO!} == "NO"
+.if ${DISPLAY} == "" || ${DISPLAY_OK:!${X11BASE}/bin/xdpyinfo >/dev/null 2>&1 && ${ECHO} YES || ${ECHO} NO!} == "NO"
 .  if exists(${X11BASE}/bin/Xvfb)
 	-${X11BASE}/bin/Xvfb :2 & \
 	${ECHO} $$! >${WRKDIR}/.Xvfb.pid

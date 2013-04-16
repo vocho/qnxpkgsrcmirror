@@ -1,9 +1,24 @@
-# $NetBSD: options.mk,v 1.25 2012/07/13 14:22:58 wiz Exp $
+# $NetBSD: options.mk,v 1.27 2013/04/14 22:14:42 cheusov Exp $
 
 PKG_OPTIONS_VAR=		PKG_OPTIONS.vlc
 PKG_SUPPORTED_OPTIONS=		debug faad dbus hal skins sdl pulseaudio x11 gnome dts
 PKG_SUGGESTED_OPTIONS=		x11
 
+### Add VAAPI if it is available
+.include "../../multimedia/libva/available.mk"
+.if ${VAAPI_AVAILABLE} == "yes"
+PKG_SUPPORTED_OPTIONS+= vaapi
+PKG_SUGGESTED_OPTIONS+=	vaapi
+.endif
+
+### Add LIRC if it is available
+.include "../../comms/lirc/available.mk"
+.if ${LIRC_AVAILABLE} == "yes"
+PKG_SUPPORTED_OPTIONS+= lirc
+PKG_SUGGESTED_OPTIONS+=	lirc
+.endif
+
+###
 .include "../../mk/bsd.options.mk"
 
 PLIST_VARS+=		${PKG_SUPPORTED_OPTIONS}
@@ -143,4 +158,21 @@ PLIST.dts=		yes
 .  include "../../audio/libdca/buildlink3.mk"
 .else
 CONFIGURE_ARGS+=	--enable-dca=no
+.endif
+
+## VAAPI support
+.if !empty(PKG_OPTIONS:Mvaapi)
+CONFIGURE_ARGS+=	--enable-libva
+.include "../../multimedia/libva/buildlink3.mk"
+.else
+CONFIGURE_ARGS+=	--disable-libva
+.endif
+
+## LIRC support
+.if !empty(PKG_OPTIONS:Mlirc)
+CONFIGURE_ARGS+=	--enable-lirc
+PLIST.lirc=	yes
+.include "../../comms/lirc/buildlink3.mk"
+.else
+CONFIGURE_ARGS+=	--disable-lirc
 .endif

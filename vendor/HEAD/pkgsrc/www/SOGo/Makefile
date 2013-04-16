@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.7 2012/11/24 14:06:43 manu Exp $
+# $NetBSD: Makefile,v 1.12 2013/03/16 15:12:57 taca Exp $
 #
 
-DISTNAME=	SOGo-2.0.2a
+DISTNAME=	SOGo-2.0.4b
 CATEGORIES=	www
 MASTER_SITES=	http://www.sogo.nu/files/downloads/SOGo/Sources/
 
@@ -9,8 +9,6 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.sogo.nu/
 COMMENT=	Groupware server supporting CalDAV, CardDAV and GroupDAV
 LICENSE=	gnu-gpl-v2
-
-PKG_DESTDIR_SUPPORT=	user-destdir
 
 HAS_CONFIGURE=	yes
 USE_LANGUAGES=	c
@@ -20,12 +18,14 @@ CONFIGURE_ARGS= --enable-debug --disable-strip
 
 SOGOUSER?=	sogo
 SOGOGROUP?=	sogo
-SOGOETCDIR?=	${PKG_SYSCONFDIR}/sogo
+SOGOETCDIR?=	${PKG_SYSCONFDIR}
 SOGORUNDIR?=	${VARBASE}/sogo
+
 INSTALLATION_DIRS+=	share/examples/SOGo
-CONF_FILES+=	${DESTDIR}${PREFIX}/share/examples/SOGo/sogo-conf.sh \
+
+CONF_FILES+=	share/examples/SOGo/sogo-conf.sh \
 		${PKG_SYSCONFDIR}/sogo-conf.sh
-CONF_FILES+=	${DESTDIR}${PREFIX}/share/examples/SOGo/SOGo.conf \
+CONF_FILES+=	share/examples/SOGo/SOGo.conf \
 		${PKG_SYSCONFDIR}/SOGo.conf
 OWN_DIRS+=	${SOGOETCDIR}
 OWN_DIRS+=	${SOGORUNDIR}
@@ -38,6 +38,8 @@ PKG_USERS+=	${SOGOUSER}:${SOGOGROUP}
 PKG_HOME.${SOGOUSER}=	${SOGOETCDIR}
 PKG_SHELL.${SOGOUSER}=	${SH}
 PKG_GECOS.${SOGOUSER}=	SOGo daemon user
+
+PKG_SYSCONFSUBDIR=	sogo
 
 FILES_SUBST+=	SOGORUNDIR=${SOGORUNDIR}
 FILES_SUBST+=	SOGOETCDIR=${SOGOETCDIR}

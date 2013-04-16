@@ -1,6 +1,5 @@
-$NetBSD: distinfo,v 1.1 2012/11/22 00:15:13 bad Exp $
+$NetBSD: distinfo,v 1.3 2013/02/16 00:02:19 bad Exp $
 
-SHA1 (pandas-0.9.1.tar.gz) = 296e5bb0c08e01805112b7bc66edf6402fab2b75
-RMD160 (pandas-0.9.1.tar.gz) = 4e0c1682803535e1b1557cbb0763f4e70cc3227d
-Size (pandas-0.9.1.tar.gz) = 2284689 bytes
-SHA1 (patch-pandas-src-tseries.c) = 00a2971e1070932b2af3ca05fc5bdb700a28ac4b
+SHA1 (pandas-0.10.1.tar.gz) = a1da6856763509fdef82fd2029b867c270691d42
+RMD160 (pandas-0.10.1.tar.gz) = d2e64ae86d0f470f70abb74663afb5e1d72a07f4
+Size (pandas-0.10.1.tar.gz) = 2499500 bytes

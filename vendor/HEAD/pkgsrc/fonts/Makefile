@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.227 2012/11/03 22:56:57 ryoon Exp $
+# $NetBSD: Makefile,v 1.233 2013/03/11 18:48:14 wiz Exp $
 #
 
 COMMENT=	Fonts
@@ -29,7 +29,10 @@ SUBDIR+=	baekmuk-ttf
 SUBDIR+=	bakoma-fonts
 SUBDIR+=	bdftopcf
 SUBDIR+=	biznet-iso8859_2
+SUBDIR+=	cantarell-fonts
 SUBDIR+=	chkfontpath
+SUBDIR+=	consolamono-ttf
+SUBDIR+=	courier-prime
 SUBDIR+=	croscorefonts
 SUBDIR+=	cyberbase-ttf
 SUBDIR+=	cyberbit-ttf
@@ -51,6 +54,7 @@ SUBDIR+=	dejavu-ttf
 SUBDIR+=	droid-ttf
 SUBDIR+=	efont-unicode
 SUBDIR+=	encodings
+SUBDIR+=	evermono-ttf
 SUBDIR+=	fntsample
 SUBDIR+=	font-adobe-100dpi
 SUBDIR+=	font-adobe-75dpi
@@ -117,6 +121,7 @@ SUBDIR+=	jisx0208fonts
 SUBDIR+=	jisx0212fonts
 SUBDIR+=	jisx0213fonts
 SUBDIR+=	jmk-fonts
+SUBDIR+=	jsMath-fonts
 SUBDIR+=	kanjistrokeorders-ttf
 SUBDIR+=	kcfonts
 SUBDIR+=	kiloji-ttf
@@ -160,6 +165,7 @@ SUBDIR+=	py-TTFQuery
 SUBDIR+=	py-fonttools
 SUBDIR+=	ricty-ttf
 SUBDIR+=	roboto-fonts
+SUBDIR+=	ruby-afm
 SUBDIR+=	ruby-ttfunk
 SUBDIR+=	sgi-fonts
 SUBDIR+=	sourcecodepro-fonts

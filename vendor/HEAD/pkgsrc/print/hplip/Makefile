@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.11 2012/11/18 00:50:42 schnoebe Exp $
+# $NetBSD: Makefile,v 1.18 2013/04/12 03:47:30 schnoebe Exp $
 #
 
-DISTNAME=		hplip-3.12.10a
+DISTNAME=		hplip-3.13.4
 CATEGORIES=		print
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=hplip/}
 
@@ -67,6 +67,7 @@ CONF_FILES+=
 
 REPLACE_PYTHON=		*.py */*.py */*/*.py
 REPLACE_PYTHON+=	fax/filters/pstotiff
+REPLACE_PYTHON+=	prnt/filters/hpps
 REPLACE_PERL=		prnt/filters/hpcac prnt/hpijs/foomatic-rip-hplip
 
 PY_PATCHPLIST=		yes
@@ -174,7 +175,7 @@ post-install:
 .include "../../mk/jpeg.buildlink3.mk"
 .include "../../net/net-snmp/buildlink3.mk"
 .include "../../print/cups/buildlink3.mk"
-.include "../../print/ghostscript/buildlink3.mk"
+.include "../../print/ghostscript/ghostscript.buildlink3.mk"
 .include "../../devel/libusb1/buildlink3.mk"
 .include "../../security/openssl/buildlink3.mk"
 .include "../../textproc/py-xml/buildlink3.mk"

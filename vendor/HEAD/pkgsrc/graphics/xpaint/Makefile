@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.71 2012/10/23 10:24:07 wiz Exp $
+# $NetBSD: Makefile,v 1.74 2013/04/06 21:07:33 rodent Exp $
 
 DISTNAME=	xpaint-2.7.8.1
-PKGREVISION=	8
+PKGREVISION=	10
 CATEGORIES=	graphics x11
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=sf-xpaint/}
 EXTRACT_SUFX=	.tar.bz2
@@ -18,10 +18,10 @@ MAKE_JOBS_SAFE=		NO
 SUBST_CLASSES+=		foo
 SUBST_STAGE.foo=	pre-configure
 SUBST_FILES.foo=	Local.config configure
-SUBST_SED.foo=		-e "s|@LOCALBASE@|${LOCALBASE}|g" \
-			-e "s|@PREFIX@|${PREFIX}|g" \
-			-e "s|@XAWDIR@|${BUILDLINK_PREFIX.Xaw3d}|g" \
-			-e "s|@XPMDIR@|${BUILDLINK_PREFIX.libXpm}|g"
+SUBST_SED.foo=		-e "s|@LOCALBASE@|${LOCALBASE}|g"
+SUBST_SED.foo+=		-e "s|@PREFIX@|${PREFIX}|g"
+SUBST_SED.foo+=		-e "s|@XAWDIR@|${BUILDLINK_PREFIX.Xaw3d}|g"
+SUBST_SED.foo+=		-e "s|@XPMDIR@|${BUILDLINK_PREFIX.libXpm}|g"
 
 INSTALLATION_DIRS+=	bin lib/X11/app-defaults ${PKGMANDIR}/cat1
 INSTALLATION_DIRS+=	share/xpaint

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.21 2012/10/23 19:51:20 asau Exp $
+# $NetBSD: Makefile,v 1.23 2013/04/06 20:27:28 rodent Exp $
 #
 
 DISTNAME=		pv-0.9.6
@@ -14,7 +14,7 @@ COMMENT=		Monitor the progress of data through a pipeline
 GNU_CONFIGURE=		yes
 USE_TOOLS+=		gmake msgfmt
 USE_PKGLOCALEDIR=	yes
-INFO_FILES=		# PLIST
+INFO_FILES=		yes
 
 # Don't gzip the installed info file and man pages.
 CONFIGURE_ENV+=		DO_GZIP=${TOOLS_CMD.true}
@@ -27,7 +27,7 @@ post-install:
 	dir=${DOCDIR:S/^${PREFIX}\///:Q}; cd ${WRKSRC}/doc;		\
 	${GREP} "^$$dir/" ${PKGDIR}/PLIST | ${SED} "s|^$$dir/||" |	\
 	while read file; do						\
-		test ! -f "$$file" ||					\
+		${TEST} ! -f "$$file" ||					\
 			${INSTALL_DATA} "$$file" ${DESTDIR}${PREFIX}/$$dir; \
 	done
 	${INSTALL_DATA} ${WRKSRC}/README ${DESTDIR}${DOCDIR}

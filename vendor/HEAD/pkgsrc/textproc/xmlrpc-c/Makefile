@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.28 2012/11/14 16:43:10 adam Exp $
+# $NetBSD: Makefile,v 1.32 2013/02/06 23:21:18 jperkin Exp $
 
-DISTNAME=	xmlrpc-c-1.16.43
+DISTNAME=	xmlrpc-c-1.16.44
 # the "super stable" branch
 PKGNAME=	${DISTNAME:S/-c-/-c-ss-/}
+PKGREVISION=	2
 CATEGORIES=	textproc devel
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=xmlrpc-c/}
 EXTRACT_SUFX=	.tgz
@@ -35,6 +36,8 @@ SUBST_MESSAGE.pthread=	Fixing config scripts.
 SUBST_FILES.pthread=	xmlrpc-c-config.* xmlrpc-c-config.test.*
 SUBST_SED.pthread=	-e 's/-lpthread/${PTHREAD_LINKFLAGS:Q}/'
 SUBST_SED.pthread+=	-e 's/-L\(.\)libdir/-L\1libdir ${COMPILER_RPATH_FLAG}\1libdir/'
+
+LDFLAGS.OpenBSD+=	${PTHREAD_LINKFLAGS}
 
 .include "../../www/curl/buildlink3.mk"
 .include "../../www/libwww/buildlink3.mk"

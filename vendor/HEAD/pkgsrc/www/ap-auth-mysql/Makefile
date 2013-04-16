@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.28 2012/10/28 06:30:02 asau Exp $
+# $NetBSD: Makefile,v 1.30 2013/03/28 21:40:50 joerg Exp $
 #
 
 DISTNAME=		mod-auth-mysql_4.3.9.orig
 PKGNAME=		${APACHE_PKG_PREFIX}-auth-mysql-4.3.9
-PKGREVISION=		2
+PKGREVISION=		3
 WRKSRC=			${WRKDIR}/${DISTNAME:S/_/-/}
 CATEGORIES=		www databases security
 MASTER_SITES=		${MASTER_SITE_DEBIAN:=pool/main/m/mod-auth-mysql/}
@@ -19,10 +19,9 @@ CONFLICTS=	ap-auth-mysql-[0-9]*
 GNU_CONFIGURE=		yes
 USE_LIBTOOL=		yes
 
-CONFIGURE_ARGS+=	--with-mysql-includes=${BUILDLINK_PREFIX.mysql-client}/include/mysql	\
-			--with-mysql-libs=${BUILDLINK_PREFIX.mysql-client}/lib/mysql
-LDFLAGS+=		${COMPILER_RPATH_FLAG}${PREFIX}/lib/mysql
-
+CONFIGURE_ARGS+=	--with-mysql-includes=${BUILDLINK_PREFIX.mysql-client}/${BUILDLINK_INCDIRS.mysql-client}	\
+			--with-mysql-libs=${BUILDLINK_PREFIX.mysql-client}/${BUILDLINK_LIBDIRS.mysql-client}
+LDFLAGS+=		${COMPILER_RPATH_FLAG}${PREFIX}/${BUILDLINK_LIBDIRS.mysql-client}
 
 WRKSRC=			${WRKDIR}/${DISTNAME:S/.orig//:S/_/-/}
 

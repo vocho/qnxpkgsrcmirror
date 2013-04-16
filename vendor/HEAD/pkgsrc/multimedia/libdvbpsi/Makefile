@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.13 2012/10/08 09:21:05 asau Exp $
+# $NetBSD: Makefile,v 1.16 2013/02/26 11:27:28 joerg Exp $
 
-DISTNAME=	libdvbpsi-0.2.2
+DISTNAME=	libdvbpsi-1.0.0
 CATEGORIES=	multimedia
 MASTER_SITES=	http://www.videolan.org/pub/libdvbpsi/${PKGVERSION_NOREV}/
 EXTRACT_SUFX=	.tar.bz2
@@ -14,5 +14,12 @@ USE_TOOLS+=		gmake
 USE_LIBTOOL=		yes
 GNU_CONFIGURE=		yes
 PKGCONFIG_OVERRIDE=	libdvbpsi.pc.in
+
+LIBS.SunOS+=	-lsocket -lnsl
+
+.include "../../mk/compiler.mk"
+.if !empty(PKGSRC_COMPILER:Mclang)
+_WRAP_EXTRA_ARGS.CC+=	-Wno-error=tautological-constant-out-of-range-compare
+.endif
 
 .include "../../mk/bsd.pkg.mk"

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.42 2012/10/23 19:51:10 asau Exp $
+# $NetBSD: Makefile,v 1.44 2013/02/26 15:54:16 jperkin Exp $
 
 DISTNAME=		libgtop-2.28.4
 PKGREVISION=		4
@@ -45,6 +45,8 @@ PRINT_PLIST_AWK+=	/^include\/libgtop-2.0\/glibtop_suid.h$$/ \
 
 .if ${OPSYS} == NetBSD
 CONFIGURE_ENV+=	fu_cv_sys_mounted_getmntinfo=yes
+# needed since about 6.99.16
+CPPFLAGS+=	-D_KMEMUSER
 .endif
 
 INSTALL_MAKE_FLAGS+=	libgtop_postinstall=true
@@ -64,7 +66,6 @@ SPECIAL_PERMS=	bin/libgtop_server2 ${REAL_ROOT_USER} kmem 2755
 #PLIST.suid.h=	no
 .elif ${OPSYS} == "SunOS"
 PLIST.server=	yes
-PLIST.suid.h=	yes
 SPECIAL_PERMS=	bin/libgtop_server2 ${REAL_ROOT_USER} sys 2755
 .else
 PLIST.server=	yes
@@ -72,7 +73,7 @@ PLIST.suid.h=	yes
 .endif
 
 PLIST_VARS+=    glibtop_private.h
-.if ${OPSYS} == "SunOS" || ${OPSYS} == "FreeBSD" || ${OPSYS} == "DragonFly"
+.if ${OPSYS} == "FreeBSD" || ${OPSYS} == "DragonFly"
 PLIST.glibtop_private.h= yes
 .endif
 

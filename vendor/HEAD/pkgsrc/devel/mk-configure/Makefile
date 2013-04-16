@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.12 2012/10/31 11:17:29 asau Exp $
+# $NetBSD: Makefile,v 1.14 2013/04/06 08:39:31 cheusov Exp $
 #
 
-DISTNAME=	mk-configure-0.23.0
+DISTNAME=	mk-configure-0.24.0
 PKGREVISION=	1
 CATEGORIES=	devel
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=mk-configure/} \

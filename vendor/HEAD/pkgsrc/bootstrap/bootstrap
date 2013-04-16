@@ -1,6 +1,6 @@
 #! /bin/sh
 
-# $NetBSD: bootstrap,v 1.181 2012/10/02 21:02:21 cheusov Exp $
+# $NetBSD: bootstrap,v 1.191 2013/03/11 22:48:23 tcort Exp $
 #
 # Copyright (c) 2001-2011 Alistair Crooks <agc@NetBSD.org>
 # All rights reserved.
@@ -467,6 +467,25 @@ AIX)
 	set_opsys=no
 	machine_arch=`get_machine_arch_aix`
 	;;
+CYGWIN_*)
+	is_root () {
+		if id -nG | grep -q 'Administrators'; then
+			return 0
+		fi
+		return 1
+	}
+	root_user=Administrators
+	root_group=Administrators
+	need_bsd_install=no
+	opsys=`uname -o`
+	need_awk=no
+	need_sed=no
+	need_xargs=no
+	# only used for unprivileged builds.
+	whoamiprog='id -u'
+	groupsprog='id -g'
+	;;
+
 Darwin)
 	root_group=wheel
 	need_bsd_install=no
@@ -505,7 +524,7 @@ FreeBSD)
 	machine_arch=`uname -p`
 	;;
 Haiku)
-	root_user=user
+	root_user=`id -un`
 	root_group=root
 	need_bsd_install=no
 	need_awk=no
@@ -606,6 +625,15 @@ Linux)
 	set_opsys=no
 	machine_arch=`uname -m | sed -e 's/i.86/i386/'`
 	;;
+Minix)
+	root_group=operator
+	need_bsd_install=yes
+	need_awk=no
+	need_sed=no
+	set_opsys=no
+	machine_arch=`uname -p`
+	LDFLAGS="-lcompat_minix -lminlib"
+	;;	
 MirBSD)
 	root_group=wheel
 	need_pax=yes
@@ -681,17 +709,9 @@ SunOS)
 	else
 		need_sed=yes
 	fi
-	if [ "`uname -r`" = "5.11" ]; then
-		case "`uname -v`" in
-		joyent_*)
-			bootstrap_sh=${SH:-/usr/bin/bash}
-			bootstrap_sh_set=set
-			;;
-		*)
-			bootstrap_sh=${SH:-/bin/ksh}
-			bootstrap_sh_set=set
-			;;
-		esac
+	if [ "`uname -r`" = "5.11" -a -x "/usr/bin/bash" ]; then
+		bootstrap_sh=${SH:-/usr/bin/bash}
+		bootstrap_sh_set=set
 	else
 		need_ksh=yes
 	fi
@@ -874,6 +894,14 @@ sunpro)
 	echo "CXX=			CC"        >> ${TARGET_MKCONF}
 	echo "CPP=			\${CC} -E" >> ${TARGET_MKCONF}
 	;;
+clang)
+	echo "CC=			clang"     >> ${TARGET_MKCONF}
+	echo "CXX=			clang++"   >> ${TARGET_MKCONF}
+	echo "CPP=			\${CC} -E" >> ${TARGET_MKCONF}
+	if [ -n "$CLANGBASE" -o -f "/bin/clang" ]; then
+		echo "CLANGBASE=		$CLANGBASE" >> ${TARGET_MKCONF}
+	fi
+	;;
 esac
 if [ -n "$GCCBASE" ]; then
 	echo "GCCBASE=		$GCCBASE" >> ${TARGET_MKCONF}
@@ -950,8 +978,8 @@ $shprog ./bootstrap.sh)"
 bootstrap_bmake() {
 	echo_msg "Bootstrapping bmake"
 	copy_src $pkgsrcdir/devel/bmake/files bmake
-	run_cmd "(cd $wrkdir/bmake && env $bmakexenv $shprog ./boot-strap $configure_quiet_flags -q -o $opsys --prefix=$wrkdir --sysconfdir=$wrkdir --mksrc none --with-default-sys-path="$wrkdir/share/mk" $bmakexargs)"
-	run_cmd "$install_sh -c -o $user -g $group -m 755 $wrkdir/bmake/$opsys/bmake $wrkdir/bin/bmake"
+	run_cmd "(cd $wrkdir/bmake && env $bmakexenv $shprog ./boot-strap $configure_quiet_flags -q -o bootstrap.$opsys --prefix=$wrkdir --sysconfdir=$wrkdir --mksrc none --with-default-sys-path="$wrkdir/share/mk" $bmakexargs)"
+	run_cmd "$install_sh -c -o $user -g $group -m 755 $wrkdir/bmake/bootstrap.$opsys/bmake $wrkdir/bin/bmake"
 }
 bootstrap_bmake
 

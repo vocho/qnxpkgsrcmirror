@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.38 2012/10/31 11:16:50 asau Exp $
+# $NetBSD: Makefile,v 1.40 2013/02/16 11:20:43 wiz Exp $
 #
 
 DISTNAME=	cvsgraph-1.6.1
-PKGREVISION=	5
+PKGREVISION=	7
 CATEGORIES=	devel scm
 MASTER_SITES=	http://www.akhphd.au.dk/~bertho/cvsgraph/release/
 

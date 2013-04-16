@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.12 2012/10/25 06:55:46 asau Exp $
+# $NetBSD: Makefile,v 1.16 2013/02/16 11:24:38 wiz Exp $
 #
 
-DISTNAME=	dikt-2d
-PKGREVISION=	9
+DISTNAME=	dikt-2j
+PKGREVISION=	3
 CATEGORIES=	textproc x11
 MASTER_SITES=	http://dikt.googlecode.com/files/
-EXTRACT_SUFX=	.tbz
+EXTRACT_SUFX=	.txz
 
 MAINTAINER=	cheusov@NetBSD.org
 HOMEPAGE=	http://dikt.googlecode.com/
@@ -13,9 +13,16 @@ COMMENT=	Dictionary protocol client for KDE
 LICENSE=	2-clause-bsd
 
 BUILD_DEPENDS+=	automoc4-[0-9]*:../../devel/automoc4
+BUILD_DEPENDS+=	xz-[0-9]*:../../archivers/xz
 
+USE_TOOLS+=	tar
+USE_LIBTOOL=	yes
 USE_CMAKE=	yes
 USE_LANGUAGES=	c c++
+
+do-extract:
+	set -e; ${MKDIR} ${WRKDIR}; cd ${WRKDIR}; \
+	${PREFIX}/bin/xz -dc ${DISTDIR}/${DISTNAME}.txz | tar -xf-
 
 .include "../../meta-pkgs/kde4/kde4.mk"
 .include "../../x11/kdelibs4/buildlink3.mk"

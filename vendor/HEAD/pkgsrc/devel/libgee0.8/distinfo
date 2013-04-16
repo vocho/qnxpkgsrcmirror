@@ -1,0 +1,5 @@
+$NetBSD: distinfo,v 1.2 2013/03/14 19:26:55 drochner Exp $
+
+SHA1 (libgee-0.8.5.tar.xz) = 3de0238b381fbdeffdd006e52200e37e424f09ff
+RMD160 (libgee-0.8.5.tar.xz) = ba0a50f83d4e9e9c69c34d71b1ec27fc0939b14b
+Size (libgee-0.8.5.tar.xz) = 583804 bytes

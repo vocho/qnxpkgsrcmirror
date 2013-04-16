@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.4 2012/11/23 23:24:52 pettai Exp $
+# $NetBSD: Makefile,v 1.7 2012/12/23 23:38:08 pettai Exp $
 #
 
-DISTNAME=	knot-1.1.2
+DISTNAME=	knot-1.1.3
 CATEGORIES=	net
 MASTER_SITES=	https://secure.nic.cz/files/knot-dns/
 FETCH_USING=	curl
@@ -19,7 +19,7 @@ CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR}/knot
 CONFIGURE_ARGS+=	--localstatedir=${VARBASE}/knot
 
 USE_LIBTOOL=	yes
-USE_TOOLS+=	flex gmake
+USE_TOOLS+=	bison flex gmake
 RCD_SCRIPTS=	knot
 
 EGDIR=			${PREFIX}/share/examples/knot

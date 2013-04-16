@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.6 2012/10/08 15:18:25 jaapb Exp $
+# $NetBSD: Makefile,v 1.8 2012/12/16 21:23:51 dholland Exp $
 #
 
-DISTNAME=		wyrd-1.4.1
-PKGREVISION=		3
+DISTNAME=		wyrd-1.4.5
 CATEGORIES=		time
-MASTER_SITES=		http://www.eecs.umich.edu/~pelzlpj/wyrd/
+MASTER_SITES=		http://pessimization.com/software/wyrd/
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
-HOMEPAGE=		http://www.eecs.umich.edu/~pelzlpj/wyrd/
+HOMEPAGE=		http://pessimization.com/software/wyrd/
 COMMENT=		Text-based front-end to Remind
+LICENSE=		gnu-gpl-v2
 
 DEPENDS+=		remind>=3.00.24:../../time/remind
 
@@ -17,6 +17,7 @@ USE_NCURSES=		yes # chgat(), typeahead(), ...
 USE_TOOLS+=		gmake
 CONFIGURE_ARGS+=	--with-ncurses
 GNU_CONFIGURE=		yes
+MAKE_JOBS_SAFE=		no
 
 CONF_FILES+=		${PREFIX}/share/examples/wyrd/wyrdrc \
 			${PKG_SYSCONFDIR}/wyrdrc

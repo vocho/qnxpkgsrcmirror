@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.36 2012/10/08 13:45:40 asau Exp $
+# $NetBSD: Makefile,v 1.38 2013/02/16 11:24:11 wiz Exp $
 
 DISTNAME=	xdvik-${XDVIK_ORIGINAL_VERS}
 PKGNAME=	ja-vfxdvik-${XDVIK_ORIGINAL_VERS}.${XDVIK_JP_PATCH_VERS}
-PKGREVISION=	16
+PKGREVISION=	18
 CATEGORIES=	japanese print
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=xdvi/} # not xdvik
 

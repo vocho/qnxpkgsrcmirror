@@ -61,13 +61,14 @@ I. The pkgsrc user's guide
         3.2. Bootstrapping pkgsrc
         3.3. Platform-specific notes
 
-            3.3.1. Darwin (Mac OS X)
-            3.3.2. FreeBSD
-            3.3.3. Interix
-            3.3.4. IRIX
-            3.3.5. Linux
-            3.3.6. OpenBSD
-            3.3.7. Solaris
+            3.3.1. Cygwin
+            3.3.2. Darwin (Mac OS X)
+            3.3.3. FreeBSD
+            3.3.4. Interix
+            3.3.5. IRIX
+            3.3.6. Linux
+            3.3.7. OpenBSD
+            3.3.8. Solaris
 
     4. Using pkgsrc
 
@@ -588,6 +589,12 @@ Table 1.1. Platforms supported by pkgsrc
 |HP-UX                                        |     Apr 2007     |
 |---------------------------------------------+------------------|
 |Haiku                                        |     Sep 2010     |
+|---------------------------------------------+------------------|
+|MirBSD                                       |     Aug 2011     |
+|---------------------------------------------+------------------|
+|Minix3                                       |     Nov 2011     |
+|---------------------------------------------+------------------|
+|Cygwin                                       |     Mar 2013     |
 +----------------------------------------------------------------+
 
 
@@ -706,13 +713,14 @@ Table of Contents
     3.2. Bootstrapping pkgsrc
     3.3. Platform-specific notes
 
-        3.3.1. Darwin (Mac OS X)
-        3.3.2. FreeBSD
-        3.3.3. Interix
-        3.3.4. IRIX
-        3.3.5. Linux
-        3.3.6. OpenBSD
-        3.3.7. Solaris
+        3.3.1. Cygwin
+        3.3.2. Darwin (Mac OS X)
+        3.3.3. FreeBSD
+        3.3.4. Interix
+        3.3.5. IRIX
+        3.3.6. Linux
+        3.3.7. OpenBSD
+        3.3.8. Solaris
 
 4. Using pkgsrc
 
@@ -973,19 +981,26 @@ Table of Contents
 3.2. Bootstrapping pkgsrc
 3.3. Platform-specific notes
 
-    3.3.1. Darwin (Mac OS X)
-    3.3.2. FreeBSD
-    3.3.3. Interix
-    3.3.4. IRIX
-    3.3.5. Linux
-    3.3.6. OpenBSD
-    3.3.7. Solaris
+    3.3.1. Cygwin
+    3.3.2. Darwin (Mac OS X)
+    3.3.3. FreeBSD
+    3.3.4. Interix
+    3.3.5. IRIX
+    3.3.6. Linux
+    3.3.7. OpenBSD
+    3.3.8. Solaris
 
 3.1. Binary distribution
 
 See Section 4.1, "Using binary packages".
 
 3.2. Bootstrapping pkgsrc
+
+pkgsrc can be bootstrapped for use in two different modes: privileged and
+unprivileged one. In unprivileged mode in contrast to privileged one all
+programs are installed under one particular user and cannot utilise privileged
+operations (packages don't create special users and all special file
+permissions like setuid are ignored).
 
 Installing the bootstrap kit from source should be as simple as:
 
@@ -994,30 +1009,62 @@ Installing the bootstrap kit from source should be as simple as:
 # ./bootstrap
 
 
-See Chapter 2, Where to get pkgsrc and how to keep it up-to-date for other ways
-to get pkgsrc before bootstrapping. The given bootstrap command will use the
-defaults of /usr/pkg for the prefix where programs will be installed in, and /
-var/db/pkg for the package database directory where pkgsrc will do its internal
-bookkeeping. However, these can also be set using command-line arguments.
+To bootstrap in unprivileged mode pass "--unprivileged" flag to bootstrap
+
+By default, in privileged mode pkgsrc uses /usr/pkg for prefix where programs
+will be installed in, and /var/db/pkg for the package database directory where
+pkgsrc will do its internal bookkeeping, /var is used as varbase, where
+packages install their persistent data. In unprivileged mode pkgsrc uses ~/pkg
+for prefix, ~/pkg/var/db/pkg for the package database, and ~/pkg/var for 
+varbase.
+
+You can change default layout using command-line arguments. Run "./bootstrap
+--help" to get details.
 
 Note
 
 The bootstrap installs a bmake tool. Use this bmake when building via pkgsrc.
 For examples in this guide, use bmake instead of "make".
 
+Note
+
+It is possible to bootstrap multiple instances of pkgsrc using non-intersecting
+directories. Use bmake corresponding to the installation you're working with to
+build and install packages.
+
 3.3. Platform-specific notes
 
 Here are some platform-specific notes you should be aware of.
 
-3.3.1. Darwin (Mac OS X)
+3.3.1. Cygwin
 
-Darwin 5.x and up are supported. Before you start, you will need to download
-and install the Mac OS X Developer Tools from Apple's Developer Connection. See
-http://developer.apple.com/macosx/ for details. Also, make sure you install X11
-(an optional package included with the Developer Tools) if you intend to build
-packages that use the X11 Window System.
+Cygwin 1.7.x and later are supported.
 
-3.3.2. FreeBSD
+You need to install minimal base packages in `Base' category plus any of
+compiler, gcc, gcc4, and/or clang. For gcc and gcc4, C and C++ compiler will be
+installed by default, but you can install Fortran compiler additionally because
+it will be required to use libtool. If it is not installed (or too old),
+Fortran compiler will be installed with pkgsrc automatically.
+
+As noted in Cygwin FAQ: `Why doesn't su work?', su(1) command has been in
+Cygwin distribution, but it has never worked. Unless you bootstrap pkgsrc with
+the --unprivileged option, workaround is:
+
+  * Right click "Cygwin Terminal" in your Start Menu, then pick "Run as
+    administrator".
+
+3.3.2. Darwin (Mac OS X)
+
+Darwin 5.x and up are supported.
+
+Before you start, you need to download and install the Mac OS X Developer Tools
+from Apple's Developer Connection. This requires (free) membership. See http://
+developer.apple.com/macosx/ for details. Also, make sure you install X11 (an
+optional package included with the Developer Tools) if you intend to build
+packages that use the X11 Window System. (If you don't want or need the full
+Xcode GUI, download and install Command Line Tools for Xcode.)
+
+3.3.3. FreeBSD
 
 FreeBSD 8.3 and 9.0 have been tested and are supported, other versions may
 work.
@@ -1042,7 +1089,7 @@ with the FreeBSD userland tools. There are several steps:
  3. An example mk.conf file will be placed in /etc/mk.conf.example file when
     you use the bootstrap script.
 
-3.3.3. Interix
+3.3.4. Interix
 
 Interix is a POSIX-compatible subsystem for the Windows NT kernel, providing a
 Unix-like environment with a tighter kernel integration than available with
@@ -1060,7 +1107,7 @@ and Windows Server 2008 R2 (6.1). As of this writing, the SUA's Interix 6.0
 (32bit) and 6.1 (64bit) subsystems have been tested. Other versions may work as
 well. The Interix 5.x subsystem has not yet been tested with pkgsrc.
 
-3.3.3.1. When installing Interix/SFU
+3.3.4.1. When installing Interix/SFU
 
 At an absolute minimum, the following packages must be installed from the
 Windows Services for Unix 3.5 distribution in order to use pkgsrc:
@@ -1104,7 +1151,7 @@ hotfixes note above, the following option can be added to the appropriate
 will disable DEP completely, which may be a security risk if applications are
 often run as a user in the Administrators group!)
 
-3.3.3.2. What to do if Interix/SFU is already installed
+3.3.4.2. What to do if Interix/SFU is already installed
 
 If SFU is already installed and you wish to alter these settings to work with
 pkgsrc, note the following things.
@@ -1127,7 +1174,7 @@ pkgsrc, note the following things.
 
     Set the DWORD value "EnableSetuidBinaries" to 1; then reboot.
 
-3.3.3.3. Important notes for using pkgsrc
+3.3.4.3. Important notes for using pkgsrc
 
 The package manager (either the pkgsrc "su" user, or the user running
 "pkg_add") must be a member of the local Administrators group. Such a user must
@@ -1152,7 +1199,7 @@ adequate emulation in most cases:
 interix:kP=\E[S:kN=\E[T:kH=\E[U:dc@:DC@:tc=pcansi:
 
 
-3.3.3.4. Limitations of the Interix platform
+3.3.4.4. Limitations of the Interix platform
 
 Though Interix suffices as a familiar and flexible substitute for a full
 Unix-like platform, it has some drawbacks that should be noted for those
@@ -1196,7 +1243,7 @@ desiring to make the most of Interix.
     make tape drive access possible by using Cygwin as a bridge (similarly to
     audio bridged via Cygwin's esound server).
 
-3.3.3.5. Known issues for pkgsrc on Interix
+3.3.4.5. Known issues for pkgsrc on Interix
 
 It is not necessary, in general, to have a "root" user on the Windows system;
 any member of the local Administrators group will suffice. However, some
@@ -1212,7 +1259,7 @@ around the issue:
 # chmod -R g+w $PKG_DBDIR
 
 
-3.3.4. IRIX
+3.3.5. IRIX
 
 You will need a working C compiler, either gcc or SGI's MIPS and MIPSpro
 compiler (cc/c89). Please set the CC environment variable according to your
@@ -1256,7 +1303,7 @@ to make sure that MIPSPro is used, please set your PATH to not include the
 location of gcc (often /usr/freeware/bin), and (important) pass the
 '--preserve-path' flag.
 
-3.3.5. Linux
+3.3.6. Linux
 
 Some versions of Linux (for example Debian GNU/Linux) need either libtermcap or
 libcurses (libncurses). Installing the distributions libncurses-dev package (or
@@ -1298,7 +1345,7 @@ linking a C++ shared library and records it, throwing away the -Bstatic and
 libtool-linked C++ shared libraries will have a runtime dependency on the icc
 libraries until this is fixed in libtool.
 
-3.3.6. OpenBSD
+3.3.7. OpenBSD
 
 OpenBSD 5.1 has been tested and supported, other versions may work.
 
@@ -1331,7 +1378,7 @@ with the OpenBSD userland tools. There are several steps:
     .endif
 
 
-3.3.7. Solaris
+3.3.8. Solaris
 
 Solaris 2.6 through 10 are supported on both x86 and sparc. You will need a
 working C compiler. Both gcc 4.5.3 and Sun WorkShop 5 have been tested.
@@ -1356,7 +1403,7 @@ Whichever compiler you use, please ensure the compiler tools and your $prefix
 are in your PATH. This includes /usr/ccs/{bin,lib} and e.g. /usr/pkg/
 {bin,sbin}.
 
-3.3.7.1. If you are using gcc
+3.3.8.1. If you are using gcc
 
 It makes life much simpler if you only use the same gcc consistently for
 building all packages.
@@ -1367,7 +1414,7 @@ gcc used during bootstrapping.
 
 Binary packages of gcc can be found through http://www.sunfreeware.com/.
 
-3.3.7.2. If you are using Sun WorkShop
+3.3.8.2. If you are using Sun WorkShop
 
 You will need at least the following packages installed (from WorkShop 5.0)
 
@@ -1391,7 +1438,7 @@ Note
 The CPP setting might break some packages that use the C preprocessor for
 processing things other than C source code.
 
-3.3.7.3. Building 64-bit binaries with SunPro
+3.3.8.3. Building 64-bit binaries with SunPro
 
 To build 64-bit packages, you just need to have the following lines in your
 mk.conf file:
@@ -1404,7 +1451,7 @@ Note
 This setting has been tested for the SPARC architecture. Intel and AMD machines
 need some more work.
 
-3.3.7.4. Common problems
+3.3.8.4. Common problems
 
 Sometimes, when using libtool, /bin/ksh crashes with a segmentation fault. The
 workaround is to use another shell for the configure scripts, for example by
@@ -1928,17 +1975,17 @@ PKGSRC_COMPILER:
     This is a list of values specifying the chain of compilers to invoke when
     building packages. Valid values are:
 
-      * distcc: distributed C/C++ (chainable)
+      + distcc: distributed C/C++ (chainable)
 
-      * ccache: compiler cache (chainable)
+      + ccache: compiler cache (chainable)
 
-      * gcc: GNU C/C++ Compiler
+      + gcc: GNU C/C++ Compiler
 
-      * mipspro: Silicon Graphics, Inc. MIPSpro (n32/n64)
+      + mipspro: Silicon Graphics, Inc. MIPSpro (n32/n64)
 
-      * mipspro: Silicon Graphics, Inc. MIPSpro (o32)
+      + mipspro: Silicon Graphics, Inc. MIPSpro (o32)
 
-      * sunpro: Sun Microsystems, Inc. WorkShip/Forte/Sun ONE Studio
+      + sunpro: Sun Microsystems, Inc. WorkShip/Forte/Sun ONE Studio
 
     The default is "gcc". You can use ccache and/or distcc with an appropriate
     PKGSRC_COMPILER setting, e.g. "ccache gcc". This variable should always be
@@ -1980,9 +2027,9 @@ XXX
 
   * PKG_DEVELOPER: Run some sanity checks that package developers want:
 
-      o make sure patches apply with zero fuzz
+      + make sure patches apply with zero fuzz
 
-      o run check-shlibs to see that all binaries will find their shared libs.
+      + run check-shlibs to see that all binaries will find their shared libs.
 
   * PKG_DEBUG_LEVEL: The level of debugging output which is displayed whilst
     making and installing the package. The default value for this is 0, which
@@ -2131,15 +2178,15 @@ following points:
   * If you want to upload the binary packages to ftp.NetBSD.org, make sure the
     setup complies to the requirements for binary packages:
 
-      o To end up on ftp.NetBSD.org, the packages must be built by a NetBSD
+      + To end up on ftp.NetBSD.org, the packages must be built by a NetBSD
         developer on a trusted machine (that is, where you and only you have
         root access).
 
-      o Packages on ftp.NetBSD.org should only be created from the stable
+      + Packages on ftp.NetBSD.org should only be created from the stable
         branches (like 2009Q1), so that users browsing the available
         collections can see at a glance how old the packages are.
 
-      o The packages must be built as root, since some packages require set-uid
+      + The packages must be built as root, since some packages require set-uid
         binaries at runtime, and creating those packages as unprivileged user
         doesn't work well at the moment.
 
@@ -4488,11 +4535,11 @@ ${OPSYS}, ${LOWER_OPSYS}, ${OS_VERSION}
     Some packages want to embed the OS name and version into some paths. To do
     this, use these variables in the PLIST:
 
-      * ${OPSYS} - output of "uname -s"
+      + ${OPSYS} - output of "uname -s"
 
-      * ${LOWER_OPSYS} - lowercase common name (eg. "solaris")
+      + ${LOWER_OPSYS} - lowercase common name (eg. "solaris")
 
-      * ${OS_VERSION} - "uname -r"
+      + ${OS_VERSION} - "uname -r"
 
 For a complete list of values which are replaced by default, please look in
 bsd.pkg.mk (and search for PLIST_SUBST).
@@ -4659,9 +4706,9 @@ issues:
     implementation.
 
   * motif.buildlink3.mk checks for a system-provided Motif installation or adds
-    a dependency on x11/lesstif or x11/openmotif. The user can set MOTIF_TYPE
-    to "dt", "lesstif", or "openmotif" to choose which Motif version will be
-    used.
+    a dependency on x11/lesstif, x11/motif or x11/openmotif. The user can set
+    MOTIF_TYPE to "dt", "lesstif", "motif" or "openmotif" to choose which Motif
+    version will be used.
 
   * oss.buildlink3.mk defines several variables that may be used by packages
     that use the Open Sound System (OSS) API.
@@ -6295,10 +6342,10 @@ bulk-install
     A binary package is considered "up-to-date" to be installed via pkg_add(1)
     if:
 
-      * None of the package's files (Makefile, ...) were modified since it was
+      + None of the package's files (Makefile, ...) were modified since it was
         built.
 
-      * None of the package's required (binary) packages were modified since it
+      + None of the package's required (binary) packages were modified since it
         was built.
 
     Beware that this target may deinstall all packages installed on a system!
@@ -7254,11 +7301,15 @@ should use the following code.
 If this distinction is not fine enough, you can also test for the following
 macros.
 
-FreeBSD     __FreeBSD__
+Cygwin      __CYGWIN__
 DragonFly   __DragonFly__
+FreeBSD     __FreeBSD__
+Haiku       __HAIKU__
 Interix     __INTERIX
 IRIX        __sgi (TODO: get a definite source for this)
 Linux       linux, __linux, __linux__
+MirBSD      __MirBSD__ (__OpenBSD__ is also defined)
+Minix3      __minix
 NetBSD      __NetBSD__
 OpenBSD     __OpenBSD__
 Solaris     sun, __sun
@@ -7591,9 +7642,9 @@ steps to get them registered in the GTK2 database properly:
  4. Patch the package to not touch any of the GTK2 databases directly. These
     are:
 
-      * libdata/gtk-2.0/gdk-pixbuf.loaders
+      + libdata/gtk-2.0/gdk-pixbuf.loaders
 
-      * libdata/gtk-2.0/gtk.immodules
+      + libdata/gtk-2.0/gtk.immodules
 
  5. Check the PLIST and remove any entries under the libdata/gtk-2.0 directory,
     as they will be handled automatically.
@@ -8832,7 +8883,7 @@ HOMEPAGE=       http://www.gnu.org/software/bison/bison.html
 COMMENT=        GNU yacc clone
 
 GNU_CONFIGURE=  yes
-INFO_FILES=     bison.info
+INFO_FILES=     yes
 
 .include "../../mk/bsd.pkg.mk"
 
@@ -9202,11 +9253,8 @@ D.2. Procedure
 The procedure to edit the pkgsrc guide is:
 
  1. Make sure you have the packages needed to regenerate the pkgsrc guide (and
-    other XML-based NetBSD documentation) installed. These are meta-pkgs/
-    netbsd-doc for creating the ASCII and HTML versions, and meta-pkgs/
-    netbsd-doc-print for the PostScript and PDF versions. You will need both
-    packages installed, to make sure documentation is consistent across all
-    formats.
+    other XML-based NetBSD documentation) installed. These are automatically
+    installed when you install the meta-pkgs/pkgsrc-guide-tools package.
 
  2. Run cd doc/guide to get to the right directory. All further steps will take
     place here.

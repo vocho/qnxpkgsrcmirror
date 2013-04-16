@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.5 2012/03/20 13:52:43 taca Exp $
+# $NetBSD: Makefile,v 1.9 2013/04/06 13:09:26 rodent Exp $
 
-DISTNAME=	innate-2012.03
+DISTNAME=	innate-2013.02.21
 CATEGORIES=	devel
 
-MAINTAINER=	filip@joyent.com
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://github.com/manveru/innate
 COMMENT=	Powerful web-framework wrapper for Rack
 LICENSE=	mit
 
-DEPENDS+=	${RUBY_PKGPREFIX}-rack>=1.4.1<1.5:../../www/ruby-rack
+DEPENDS+=	${RUBY_PKGPREFIX}-rack>=1.5.2<1.6:../../www/ruby-rack
 
 .include "../../lang/ruby/gem.mk"
 .include "../../mk/bsd.pkg.mk"

@@ -1,10 +1,11 @@
-# $NetBSD: Makefile,v 1.20 2012/10/29 07:33:40 asau Exp $
+# $NetBSD: Makefile,v 1.26 2013/04/09 06:07:35 wiz Exp $
 #
 
 SQUEAK_VERSION=	4.10.2.2614
 
 DISTNAME=	Squeak-${SQUEAK_VERSION}-src
 PKGNAME=	squeak-vm-${SQUEAK_VERSION:C/-/./}
+PKGREVISION=	1
 CATEGORIES=	lang
 MASTER_SITES=	http://squeakvm.org/unix/release/ \
 		http://ftp.squeak.org/3.10/unix-linux/
@@ -21,7 +22,7 @@ USE_LANGUAGES=	c c++
 USE_CMAKE=	yes
 USE_TOOLS=	gzip
 
-CONFIGURE_DIRS=	${WRKSRC}/build
+CONFIGURE_DIRS=	build
 CMAKE_ARG_PATH=	../unix
 #CMAKE_ARGS+=	-DCMAKE_VERBOSE_MAKEFILE:BOOL=TRUE	# debug
 CMAKE_ARGS+=	-DPKGMANDIR=${PKGMANDIR}
@@ -44,7 +45,7 @@ PLIST_SUBST=	SQUEAK_VERSION=${SQUEAK_VERSION}
 PLIST_VARS+=	oss
 
 pre-configure:
-	${MKDIR} ${CONFIGURE_DIRS}
+	cd ${WRKSRC} && ${MKDIR} ${CONFIGURE_DIRS}
 
 .include "../../audio/libvorbis/buildlink3.mk"
 .include "../../audio/speex/buildlink3.mk"

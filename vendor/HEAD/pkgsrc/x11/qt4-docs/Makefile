@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.24 2012/10/08 23:02:38 adam Exp $
+# $NetBSD: Makefile,v 1.27 2013/02/16 11:25:25 wiz Exp $
 
 PKGNAME=	qt4-docs-${QTVERSION}
 PKGREVISION=	2

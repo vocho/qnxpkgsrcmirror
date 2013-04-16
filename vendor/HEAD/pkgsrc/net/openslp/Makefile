@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.39 2012/10/23 17:18:44 asau Exp $
+# $NetBSD: Makefile,v 1.42 2013/04/06 13:24:19 rodent Exp $
 
 DISTNAME=	openslp-1.2.1
-PKGREVISION=	4
+PKGREVISION=	6
 CATEGORIES=	net
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=openslp/}
 
@@ -25,8 +25,8 @@ EGDIR=			${PREFIX}/share/examples/${PKGBASE}
 
 CONFS=			slp.conf slp.reg slp.spi
 CONF_FILES=		# empty
-.for FILE in ${CONFS}
-CONF_FILES+=		${EGDIR}/${FILE} ${PKG_SYSCONFDIR}/${FILE}
+.for file in ${CONFS}
+CONF_FILES+=		${EGDIR}/${file} ${PKG_SYSCONFDIR}/${file}
 .endfor
 RCD_SCRIPTS=		slpd
 

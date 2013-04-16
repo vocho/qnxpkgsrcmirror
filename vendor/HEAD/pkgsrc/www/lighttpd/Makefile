@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.35 2012/11/23 13:12:49 drochner Exp $
+# $NetBSD: Makefile,v 1.40 2013/03/13 13:28:09 obache Exp $
 
 DISTNAME=	lighttpd-1.4.32
+PKGREVISION=	4
 CATEGORIES=	www
 MASTER_SITES=	http://download.lighttpd.net/lighttpd/releases-1.4.x/
 EXTRACT_SUFX=	.tar.bz2
@@ -38,6 +39,10 @@ LIGHTTPD_LOGDIR?=	${VARBASE}/log/lighttpd
 LIGHTTPD_STATEDIR?=	${VARBASE}/run
 LIGHTTPD_USER?=		lighttpd
 LIGHTTPD_GROUP?=	lighttpd
+PKG_GROUPS+=		${LIGHTTPD_GROUP}
+PKG_USERS+=		${LIGHTTPD_USER}:${LIGHTTPD_GROUP}
+PKG_GROUPS_VARS+=	LIGHTTPD_GROUP
+PKG_USERS_VARS+=	LIGHTTPD_USER
 
 INSTALLATION_DIRS=	${DOCDIR} ${EGDIR} ${EGDIR}/conf.d ${EGDIR}/vhosts.d
 OWN_DIRS=		${PKG_SYSCONFDIR}/conf.d

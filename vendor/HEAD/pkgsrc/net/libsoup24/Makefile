@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.48 2012/11/15 14:50:37 drochner Exp $
+# $NetBSD: Makefile,v 1.50 2013/03/15 17:41:27 drochner Exp $
 
-DISTNAME=	libsoup-2.40.2
+DISTNAME=	libsoup-2.40.3
 PKGNAME=	${DISTNAME:S/libsoup/libsoup24/}
 CATEGORIES=	net gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/libsoup/2.40/}

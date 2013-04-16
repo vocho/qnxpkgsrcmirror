@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.3 2012/10/31 11:19:26 asau Exp $
+# $NetBSD: Makefile,v 1.6 2013/03/29 09:17:26 asau Exp $
 #
 
-DISTNAME=	protobuf-2.4.1
+DISTNAME=	protobuf-2.5.0
+PKGREVISION=	1
 CATEGORIES=	devel
 MASTER_SITES=	http://protobuf.googlecode.com/files/
 
@@ -13,6 +14,8 @@ LICENSE=	modified-bsd
 GNU_CONFIGURE=	yes
 USE_LIBTOOL=	yes
 USE_LANGUAGES=	c++ c
+
+CONFIGURE_ARGS+=	--libdir=${PREFIX}/lib
 
 PKGCONFIG_OVERRIDE+=	protobuf-lite.pc.in
 PKGCONFIG_OVERRIDE+=	protobuf.pc.in

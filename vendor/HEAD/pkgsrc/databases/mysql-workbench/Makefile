@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.19 2012/10/08 23:01:20 adam Exp $
+# $NetBSD: Makefile,v 1.25 2013/04/01 16:03:48 wiz Exp $
 
 DISTNAME=	mysql-workbench-gpl-5.2.33b-src
 PKGNAME=	${DISTNAME:S/-gpl//:S/b-src$//}
-PKGREVISION=	15
+PKGREVISION=	20
 CATEGORIES=	databases
 MASTER_SITES=	${MASTER_SITE_MYSQL:=MySQLGUITools/}
 
@@ -48,6 +48,11 @@ SUBST_FILES.osx-gl=	configure
 SUBST_SED.osx-gl=	-e 's,-lGL,-framework OpenGL,g'
 .else
 .include "../../graphics/MesaLib/buildlink3.mk"
+.endif
+
+.include "../../mk/compiler.mk"
+.if !empty(PKGSRC_COMPILER:Mclang)
+CXXFLAGS+=	-std=c++11
 .endif
 
 .include "../../archivers/libzip/buildlink3.mk"

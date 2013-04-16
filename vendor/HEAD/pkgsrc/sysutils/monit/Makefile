@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.8 2012/10/23 19:51:13 asau Exp $
+# $NetBSD: Makefile,v 1.11 2013/03/03 01:09:55 joerg Exp $
 #
 
 DISTNAME=		monit-4.10.1
-PKGREVISION=		2
+PKGREVISION=		3
 CATEGORIES=		sysutils
 MASTER_SITES=		http://www.tildeslash.com/monit/dist/
 
-MAINTAINER=		heinz@NetBSD.org
+MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://www.tildeslash.com/monit/
 COMMENT=		Utility for monitoring processes, files, directories and devices
 LICENSE=		gnu-gpl-v3
@@ -55,6 +55,8 @@ SUBST_MESSAGE.monit=	Setting daemon interval
 SUBST_FILES.monit=	monitrc
 SUBST_SED.monit=	-e "s|^\# *set *daemon|set daemon|"
 SUBST_SED.monit+=	-e "s|include */etc/monit.d|include ${PKG_SYSCONFDIR}/monit.d|"
+
+CPPFLAGS.NetBSD+=	-D_KMEMUSER
 
 post-extract:
 	cd ${WRKSRC}/contrib && gzcat monit-OSX-startup.tar.gz | pax -r

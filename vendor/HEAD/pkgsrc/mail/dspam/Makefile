@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.70 2012/10/08 12:19:09 asau Exp $
+# $NetBSD: Makefile,v 1.73 2013/03/02 20:33:27 wiz Exp $
 
-DISTNAME=	dspam-3.8.0
-PKGREVISION=	8
+DISTNAME=	dspam-3.10.2
+PKGREVISION=	2
 CATEGORIES=	mail
-MASTER_SITES=	http://dspam.nuclearelephant.com/sources/
+MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=dspam/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://dspam.sourceforge.net/
@@ -17,7 +17,11 @@ USE_LIBTOOL=		yes
 USE_TOOLS+=		pax perl:run pkg-config
 REPLACE_PERL=		src/tools/dspam_train.in
 REPLACE_PERL+=		src/tools/dspam_logrotate
+REPLACE_PERL+=		src/tools/dspam_notify.in
 REPLACE_PERL+=		webui/cgi-bin/*.cgi webui/cgi-bin/configure.pl.in
+REPLACE_PERL+=		webui/cgi-bin/htmlize.pl
+REPLACE_PERL+=		webui/cgi-bin/templates/strings.pl
+REPLACE_PERL+=		webui/cgi-bin/templates/*/strings.pl
 
 PKGCONFIG_OVERRIDE+=	src/dspam.pc.in
 

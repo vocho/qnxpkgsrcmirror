@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.12 2012/10/08 23:01:04 adam Exp $
+# $NetBSD: Makefile,v 1.19 2013/04/07 02:30:01 markd Exp $
 
 DISTNAME=	kde-workspace-${_KDE_VERSION}
 PKGNAME=	${DISTNAME:S/-4/4-4/}
-PKGREVISION=	6
 CATEGORIES=	x11
 COMMENT=	Base workspace for the KDE 4 integrated X11 desktop
 
@@ -15,6 +14,8 @@ SITES.Daemon.README=	${MASTER_SITE_LOCAL}
 SITES.NetBSD-flag-1.0.png=	${MASTER_SITE_LOCAL}
 
 EXTRACT_ONLY=	${DISTNAME}${EXTRACT_SUFX}
+
+CMAKE_ARGS+=	-DKDE4_BUILD_TESTS:BOOL=OFF
 
 # BUILD_MAKE_FLAGS+= VERBOSE=1
 
@@ -116,6 +117,7 @@ BUILDLINK_DEPMETHOD.qt4-tools=	full
 .include "../../lang/python/application.mk"
 .include "../../lang/python/extension.mk"
 .include "../../devel/libusb/buildlink3.mk"
+.include "../../devel/qjson/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../graphics/qimageblitz/buildlink3.mk"
 .include "../../security/polkit-qt/buildlink3.mk"
@@ -125,11 +127,12 @@ BUILDLINK_DEPMETHOD.qt4-tools=	full
 .include "../../sysutils/pciutils/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../textproc/iso-codes/buildlink3.mk"
+.include "../../misc/kdepimlibs4/buildlink3.mk"
+.include "../../misc/nepomuk-core/buildlink3.mk"
 .include "../../multimedia/phonon/buildlink3.mk"
 .include "../../x11/py-kde4/buildlink3.mk"
 .include "../../x11/kactivities/buildlink3.mk"
 .include "../../x11/kdelibs4/buildlink3.mk"
-.include "../../misc/kdepimlibs4/buildlink3.mk"
 .include "../../x11/libxklavier/buildlink3.mk"
 .include "../../x11/libXcomposite/buildlink3.mk"
 .include "../../x11/libXdamage/buildlink3.mk"
@@ -137,6 +140,8 @@ BUILDLINK_DEPMETHOD.qt4-tools=	full
 .include "../../x11/libXres/buildlink3.mk"
 .include "../../x11/libXxf86misc/buildlink3.mk"
 .include "../../x11/libXScrnSaver/buildlink3.mk"
+.include "../../x11/xcb-util-image/buildlink3.mk"
+.include "../../x11/xcb-util-renderutil/buildlink3.mk"
 
 .include "../../mk/pam.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

@@ -1,4 +1,4 @@
-# $NetBSD: replace.mk,v 1.252 2012/10/01 10:45:16 ryoon Exp $
+# $NetBSD: replace.mk,v 1.255 2013/03/16 23:03:33 dholland Exp $
 #
 # Copyright (c) 2005 The NetBSD Foundation, Inc.
 # All rights reserved.
@@ -655,6 +655,15 @@ TOOLS_PATH.mtree=		${TOOLS_PREFIX.mtree}/bin/mtree
 .endif
 
 .if !defined(TOOLS_IGNORE.openssl) && !empty(_USE_TOOLS:Mopenssl)
+#
+# Ensure we use pkgsrc openssl if we're not using builtin.
+#
+CHECK_BUILTIN.openssl:=		yes
+.  include "../../security/openssl/builtin.mk"
+CHECK_BUILTIN.openssl:=		no
+.  if !empty(USE_BUILTIN.openssl:M[nN][oO])
+_TOOLS_USE_PKGSRC.openssl=	yes
+.  endif
 .  if !empty(PKGPATH:Msecurity/openssl)
 MAKEFLAGS+=			TOOLS_IGNORE.openssl=
 .  elif !empty(_TOOLS_USE_PKGSRC.openssl:M[yY][eE][sS])
@@ -1065,8 +1074,18 @@ GHOSTSCRIPT_REQD?=	6.01
 # various package options.
 #
 .if !defined(TOOLS_DEPENDS.ghostscript)
-_TOOLS_DEP.ghostscript:=	ghostscript
-TOOLS_DEPENDS.ghostscript=	ghostscript>=${GHOSTSCRIPT_REQD}:../../print/ghostscript
+_TOOLS_DEP.ghostscript:=	ghostscript-gpl
+_TOOLS_DEP.ghostscript:=	${_TOOLS_DEP.ghostscript},ghostscript-agpl
+#
+# Determine the default Ghostscript package to build based on
+# ACCEPTABLE_LICENSES.
+#
+.  if !empty(ACCEPTABLE_LICENSES:Mgnu-agpl-*)
+_TOOLS_PKGSRCDIR.ghostscript=	../../print/ghostscript-agpl
+.  else
+_TOOLS_PKGSRCDIR.ghostscript=	../../print/ghostscript-gpl
+.  endif
+TOOLS_DEPENDS.ghostscript=	{${_TOOLS_DEP.ghostscript}}>=${GHOSTSCRIPT_REQD}:${_TOOLS_PKGSRCDIR.ghostscript}
 MAKEVARS+=			TOOLS_DEPENDS.ghostscript
 .endif
 

@@ -1,15 +1,15 @@
-# $NetBSD: Makefile,v 1.23 2012/10/23 17:18:11 asau Exp $
+# $NetBSD: Makefile,v 1.28 2013/04/06 03:45:20 rodent Exp $
 
 DISTNAME=	bind-${BIND_VERSION}
 PKGNAME=	${DISTNAME:S/-P/pl/}
-PKGREVISION=	1
+PKGREVISION=	5
 CATEGORIES=	net
 MASTER_SITES=	ftp://ftp.isc.org/isc/bind9/${BIND_VERSION}/ \
 		http://ftp.belnet.be/pub/mirror/ftp.isc.org/isc/bind9/${BIND_VERSION}/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.isc.org/software/bind/
-COMMENT=	Version 9.7 of the Berkeley Internet Name Daemon, implementation of DNS
+COMMENT=	Berkeley Internet Name Daemon implementation of DNS, version 9.7
 
 CONFLICTS+=	host-[0-9]*
 
@@ -27,6 +27,9 @@ USE_TOOLS+=		pax perl
 USE_LIBTOOL=		yes
 GNU_CONFIGURE=		yes
 #CONFIG_SHELL=		sh -x
+
+# workaround for CVE-2013-2266
+CONFIGURE_ENV+=		ac_cv_header_regex_h=no
 
 CONFIGURE_ARGS+=	--with-libtool
 CONFIGURE_ARGS+=	--sysconfdir=/etc

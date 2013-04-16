@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.17 2012/10/18 09:44:29 wiz Exp $
+# $NetBSD: Makefile,v 1.19 2013/01/29 05:50:55 wiz Exp $
 
 DISTNAME=	# empty
-PKGNAME=	modular-xorg-apps-1.9
+PKGNAME=	modular-xorg-apps-1.11
 CATEGORIES=	meta-pkgs x11
 MASTER_SITES=	${MASTER_SITE_XORG:=app/}
 DISTFILES=	# empty
@@ -15,6 +15,7 @@ META_PACKAGE=	yes
 DEPENDS+=	xbiff-[0-9]*:../../mail/xbiff
 DEPENDS+=	twm-[0-9]*:../../wm/twm
 DEPENDS+=	appres-[0-9]*:../../x11/appres
+DEPENDS+=	bdftopcf-[0-9]*:../../fonts/bdftopcf
 DEPENDS+=	beforelight-[0-9]*:../../x11/beforelight
 DEPENDS+=	bitmap-[0-9]*:../../x11/bitmap
 DEPENDS+=	editres-[0-9]*:../../x11/editres
@@ -36,6 +37,7 @@ DEPENDS+=	xdm-[0-9]*:../../x11/xdm
 DEPENDS+=	xdpyinfo-[0-9]*:../../x11/xdpyinfo
 DEPENDS+=	xev-[0-9]*:../../x11/xev
 DEPENDS+=	xeyes-[0-9]*:../../x11/xeyes
+DEPENDS+=	xfd-[0-9]*:../../x11/xfd
 DEPENDS+=	xfontsel-[0-9]*:../../x11/xfontsel
 DEPENDS+=	xgamma-[0-9]*:../../x11/xgamma
 DEPENDS+=	xhost-[0-9]*:../../x11/xhost

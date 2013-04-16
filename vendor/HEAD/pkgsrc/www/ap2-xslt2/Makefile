@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.15 2012/10/28 06:30:08 asau Exp $
+# $NetBSD: Makefile,v 1.17 2013/04/08 11:17:24 rodent Exp $
 #
 
 DISTNAME=	modxslt-${DIST_VER}
@@ -14,6 +14,7 @@ COMMENT=	Apache module able to apply stylesheets to XML data on the fly
 GNU_CONFIGURE=	yes
 USE_LIBTOOL=	yes
 USE_TOOLS+=	gmake bash:run
+MAKE_JOBS_SAFE=	no
 
 APACHE_MODULE=	yes
 DIST_VER=	2004112100
@@ -25,7 +26,7 @@ CONFIGURE_ARGS+=	--enable-libxslt-hack
 CONFIGURE_ARGS+=	--with-apxs=${PREFIX}/sbin/apxs \
 			--with-xml2-config=${BUILDLINK_PREFIX.libxml2}/bin/xml2-config \
 			--with-apr-config=${BUILDLINK_PREFIX.apr}/bin/apr-config \
-			--with-apu-config=${BUILDLINK_PREFIX.apr}/bin/apu-config 
+			--with-apu-config=${BUILDLINK_PREFIX.apr}/bin/apu-config
 
 REPLACE_BASH=	utils/modxslt-config.pre.in
 
