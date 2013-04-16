@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.33 2012/11/04 04:26:03 minskim Exp $
+# $NetBSD: Makefile,v 1.35 2013/04/06 20:27:19 rodent Exp $
 #
 
 DISTNAME=	semi-1.14.6
 PKGNAME=	${EMACS_PKGNAME_PREFIX}${DISTNAME}
-PKGREVISION=	6
+PKGREVISION=	7
 CATEGORIES=	devel
 MASTER_SITES=	http://www.kanji.zinbun.kyoto-u.ac.jp/~tomo/comp/emacsen/lisp/semi/semi-1.14-for-flim-1.14/
 
@@ -28,7 +28,7 @@ MAKEFLAGS=	${MAKEFLAGS.${EMACS_FLAVOR}}
 
 EVAL_PREFIX+=	QKC_PREFIX=qkc
 USE_TOOLS+=	makeinfo
-INFO_FILES=	# PLIST
+INFO_FILES=	yes
 
 EMACS_MODULES=	base
 EMACS_BUILDLINK=# defined

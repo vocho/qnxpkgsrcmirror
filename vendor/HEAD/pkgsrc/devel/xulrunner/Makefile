@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.85 2012/11/21 15:26:49 ryoon Exp $
+# $NetBSD: Makefile,v 1.103 2013/04/05 13:30:17 ryoon Exp $
 
 .include "dist.mk"
 PKGNAME=	xulrunner-${MOZ_BRANCH}${MOZ_BRANCH_MINOR:S/esr//}
 CATEGORIES=	devel www
 
-MAINTAINER=	tnn@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://developer.mozilla.org/en/docs/XULRunner
 COMMENT=	XML User Interface Language runtime environment
 LICENSE=	mpl-1.1
@@ -28,42 +28,43 @@ ALL_ENV+=		MOZILLA_PKG_NAME=xulrunner
 MAKE_ENV+=		FREEBL_NO_DEPEND=0
 
 # workround for link of xulrunner-bin etc.
-LDFLAGS+=		-Wl,-rpath,${PREFIX}/lib/xulrunner -Wl,-rpath,${PREFIX}/lib
+LDFLAGS+=		${COMPILER_RPATH_FLAG}${PREFIX}/lib/xulrunner ${COMPILER_RPATH_FLAG}${PREFIX}/lib
+LDFLAGS.SunOS+=		-lm
 
 .include "mozilla-common.mk"
 .include "options.mk"
 
-PLIST_VARS+=	sps
+PLIST_VARS+=	sps vorbis tremor
 
-.if !empty(MACHINE_PLATFORM:S/i386/x86/:MLinux-*-x86*) || ${OPSYS} == "Darwin"
+.if !empty(MACHINE_PLATFORM:S/i386/x86/:MLinux-*-x86*)
 PLIST.sps=	yes
+.endif
+
+.if !empty(MACHINE_PLATFORM:MLinux-*-arm*) || ${OPSYS} == "DragonFly" \
+    || ${OPSYS} == "FreeBSD" || ${OPSYS} == "NetBSD" || ${OPSYS} == "OpenBSD"
+PLIST.tremor=	yes
+.else
+PLIST.vorbis=	yes
 .endif
 
 pre-configure:
 	cd ${WRKSRC} && autoconf
 	cd ${WRKSRC}/js/src && autoconf
+	mkdir ${WRKSRC}/js/src/.deps
 
 post-install:
-	# XXX fix the pkg-config files instead
-	mkdir ${DESTDIR}${PREFIX}/lib/xulrunner-sdk/sdk/lib
 	rm -f ${DESTDIR}${PREFIX}/lib/xulrunner/libxpcomglue.a
-	ln -s ${PREFIX}/lib/xulrunner-sdk/sdk/lib/libxpcomglue.a	\
+	ln -s sdk/lib/libxpcomglue.a 					\
 	  ${DESTDIR}${PREFIX}/lib/xulrunner/libxpcomglue.a
 	rm -f ${DESTDIR}${PREFIX}/lib/xulrunner/libxpcomglue_s.a
-	ln -s ${PREFIX}/lib/xulrunner-sdk/sdk/lib/libxpcomglue_s.a	\
+	ln -s sdk/lib/libxpcomglue_s.a 					\
 	  ${DESTDIR}${PREFIX}/lib/xulrunner/libxpcomglue_s.a
 	rm -f ${DESTDIR}${PREFIX}/lib/xulrunner/libunicharutil_external_s.a
-	ln -s ${PREFIX}/lib/xulrunner-sdk/sdk/lib/libunicharutil_external_s.a \
+	ln -s sdk/lib/libunicharutil_external_s.a 			\
 	  ${DESTDIR}${PREFIX}/lib/xulrunner/libunicharutil_external_s.a
+	rm -f ${DESTDIR}${PREFIX}/lib/xulrunner/libmozglue.a
+	ln -s sdk/lib/libmozglue.a 					\
+	  ${DESTDIR}${PREFIX}/lib/xulrunner/libmozglue.a
 	${TOUCH} ${TOUCH_FLAGS} ${DESTDIR}${PREFIX}/include/xulrunner/mozilla/throw_gcc.h
-	${INSTALL_PROGRAM_DIR} ${DESTDIR}${PREFIX}/lib/xulrunner-sdk/sdk/bin
-	${INSTALL_SCRIPT} ${WRKSRC}/dist/sdk/bin/xpt.py			\
-	  ${DESTDIR}${PREFIX}/lib/xulrunner-sdk/sdk/bin
-	${INSTALL_LIB} ${WRKSRC}/mozglue/build/libmozglue.a		\
-		${DESTDIR}${PREFIX}/lib/xulrunner
-	${INSTALL_LIB} ${WRKSRC}/mozglue/build/libmozglue.a		\
-		${DESTDIR}${PREFIX}/lib/xulrunner-sdk/sdk/lib
-	ln -s ${PREFIX}/lib/xulrunner/lib \
-	  ${DESTDIR}${PREFIX}/lib/xulrunner-sdk/lib
 
 .include "../../mk/bsd.pkg.mk"

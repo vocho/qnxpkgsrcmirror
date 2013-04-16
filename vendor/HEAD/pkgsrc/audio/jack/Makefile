@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.22 2012/09/12 00:24:40 asau Exp $
+# $NetBSD: Makefile,v 1.24 2013/02/10 09:38:36 ryoon Exp $
 #
 
 DISTNAME=	jack-audio-connection-kit-${JACK_VERSION}
 PKGNAME=	jack-${JACK_VERSION}
 PKGREVISION=	1
 CATEGORIES=	audio
-MASTER_SITES=	${MASTER_SITE_LOCAL}
-EXTRACT_SUFX=	.tar.bz2
+#MASTER_SITES=	${MASTER_SITE_LOCAL}
+MASTER_SITES=	http://jackaudio.org/downloads/
 
-JACK_VERSION=	0.115.1
+JACK_VERSION=	0.121.3
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.jackaudio.org/
@@ -34,7 +34,7 @@ CONFIGURE_ARGS+=	--disable-optimize
 CONFIGURE_ARGS+=	--enable-resize
 CONFIGURE_ARGS+=	--enable-timestamps
 
-CFLAGS.NetBSD+=		-D_NETBSD_SOURCE
+CFLAGS.NetBSD+=		-D_NETBSD_SOURCE -lossaudio
 CFLAGS.Linux+=		-D_GNU_SOURCE
 CFLAGS.SunOS+=		-std=c99 -D_XOPEN_SOURCE=600 -D__EXTENSIONS__
 

@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.3 2012/09/15 15:03:23 obache Exp $
+# $NetBSD: Makefile,v 1.7 2013/03/02 20:33:24 wiz Exp $
 
-DISTNAME=	do_mysql-0.10.8
+DISTNAME=	do_mysql-0.10.12
 PKGREVISION=	1
 CATEGORIES=	databases
 

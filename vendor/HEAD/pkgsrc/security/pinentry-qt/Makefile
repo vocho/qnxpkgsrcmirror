@@ -1,13 +1,14 @@
-# $NetBSD: Makefile,v 1.11 2012/10/23 18:16:50 asau Exp $
+# $NetBSD: Makefile,v 1.14 2013/02/16 11:24:21 wiz Exp $
 #
 
 DISTNAME=		pinentry-0.8.2
 PKGNAME=		pinentry-qt-0.8.2
+PKGREVISION=		2
 CATEGORIES=		security
 MASTER_SITES=		ftp://ftp.gnupg.org/gcrypt/pinentry/
 EXTRACT_SUFX=		.tar.bz2
 
-MAINTAINER=		shannonjr@NetBSD.org
+MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		ftp://ftp.gnupg.org/gcrypt/pinentry/
 COMMENT=		Applications for entering PINs or Passphrases
 

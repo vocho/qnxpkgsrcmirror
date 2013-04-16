@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.87 2012/10/08 12:19:17 asau Exp $
+# $NetBSD: Makefile,v 1.90 2013/02/17 19:18:05 dholland Exp $
 
 DISTNAME=	mew-6.5
 PKGNAME=	${EMACS_PKGNAME_PREFIX}${DISTNAME}
+PKGREVISION=	2
 CATEGORIES=	mail
 MASTER_SITES=	http://www.mew.org/Release/
 
@@ -20,7 +21,7 @@ INFO_FILES=	yes
 
 GNU_CONFIGURE=	yes
 
-EMACS_VERSIONS_ACCEPTED=	emacs23 emacs23nox emacs22 emacs22nox emacs21 emacs21nox
+EMACS_VERSIONS_ACCEPTED=	emacs24 emacs24nox emacs23 emacs23nox emacs22 emacs22nox emacs21 emacs21nox
 EMACS_MODULES+=			base
 
 MAKE_FLAGS+=	DESTDIR=${DESTDIR:Q}

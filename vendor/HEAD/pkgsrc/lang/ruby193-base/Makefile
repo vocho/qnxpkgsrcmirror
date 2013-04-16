@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.20 2012/10/12 14:51:31 taca Exp $
+# $NetBSD: Makefile,v 1.28 2013/04/04 13:31:55 obache Exp $
 #
 
 DISTNAME=	${RUBY_DISTNAME}
@@ -50,6 +50,11 @@ CONFIGURE_ENV+=	ac_cv_prog_PKG_CONFIG=""
 CONFIGURE_ENV+=	ac_cv_func_getgrnam_r=no
 .endif
 
+.if ${OPSYS} == "Cygwin"
+USE_TOOLS+=	gmake
+MAKE_FILE=	GNUmakefile
+.endif
+
 # Ruby build process depends on config.status's content
 CONFIG_STATUS_OVERRIDE=	# empty
 
@@ -78,6 +83,11 @@ CONFIGURE_ARGS+= --with-ruby-version=${RUBY_VERSION}
 CONFIGURE_ARGS+= --with-ruby-pc="ruby-${RUBY_VERSION}.pc"
 .endif
 
+PLIST_VARS+=	win32
+.if ${OPSYS} == "Cygwin"
+PLIST.win32=	yes
+.endif
+
 #
 # IRIX work around which should be fixed.
 #
@@ -102,7 +112,9 @@ CONFIGURE_ENV+=	MKDIR_P=${MKDIR:Q}
 
 DOCS=		COPYING COPYING.ja ChangeLog NEWS README \
 		README.EXT README.EXT.ja README.ja ToDo \
-		doc/ChangeLog-1.8.0 doc/ChangeLog-YARV doc/NEWS-1.8.7 \
+		doc/ChangeLog-1.8.0 doc/ChangeLog-1.9.3 doc/ChangeLog-YARV \
+		doc/NEWS-1.8.7 doc/NEWS-1.9.1 doc/NEWS-1.9.2 \
+		doc/etc.rd doc/etc.rd.ja \
 		doc/forwardable.rd doc/forwardable.rd.ja \
 		doc/irb/irb-tools.rd.ja doc/irb/irb.rd doc/irb/irb.rd.ja \
 		doc/shell.rd doc/shell.rd.ja

@@ -1,15 +1,15 @@
-# $NetBSD: Makefile,v 1.34 2012/10/23 17:18:11 asau Exp $
+# $NetBSD: Makefile,v 1.38 2013/04/06 03:45:20 rodent Exp $
 
 DISTNAME=	bind-${BIND_VERSION}
 PKGNAME=	${DISTNAME:S/-ESV/.3.1.ESV/:S/-R/./:S/-P/pl/}
-PKGREVISION=	1
+PKGREVISION=	4
 CATEGORIES=	net
 MASTER_SITES=	ftp://ftp.isc.org/isc/bind9/${BIND_VERSION}/ \
 		http://ftp.belnet.be/pub/mirror/ftp.isc.org/isc/bind9/${BIND_VERSION}/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.isc.org/software/bind/
-COMMENT=	Version 9.6 of the Berkeley Internet Name Daemon, implementation of DNS
+COMMENT=	Berkeley Internet Name Daemon implementation of DNS, version 9.6
 
 CONFLICTS+=	host-[0-9]*
 

@@ -1,4 +1,4 @@
-# $NetBSD: options.mk,v 1.9 2009/09/22 16:52:02 tron Exp $
+# $NetBSD: options.mk,v 1.11 2013/01/13 13:21:18 tron Exp $
 
 PKG_OPTIONS_VAR=		PKG_OPTIONS.milter-greylist
 PKG_OPTIONS_REQUIRED_GROUPS=	mta
@@ -33,6 +33,13 @@ CONFIGURE_ARGS+=	--disable-drac
 DRACD_DB?=		/etc/mail/dracd.db
 
 CONFIGURE_ARGS+=	--enable-drac --with-drac-db=${DRACD_DB}
+
+.  include "../../mk/bdb.buildlink3.mk"
+.  if ${BDB_TYPE} != "db1"
+CPPFLAGS+=	-DUSE_DB185_EMULATION
+.  endif
+LIBS+=		${BDB_LIBS}
+
 .endif
 
 ###

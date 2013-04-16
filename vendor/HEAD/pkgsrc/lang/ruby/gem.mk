@@ -1,4 +1,4 @@
-# $NetBSD: gem.mk,v 1.16 2012/10/03 12:58:34 asau Exp $
+# $NetBSD: gem.mk,v 1.20 2013/04/08 11:17:15 rodent Exp $
 #
 # This Makefile fragment is intended to be included by packages that build
 # and install Ruby gems.
@@ -10,6 +10,7 @@
 #
 #		ruby18-base:	none
 #		ruby193-base:	1.8.11
+#		ruby200-base:	2.0.0
 #
 #	If newer version of rubygems is resuiqred, set RUBYGEMS_REQD to
 #	minimum version.
@@ -25,19 +26,24 @@
 #		    When gemspec contains "json~>1.4.7" as runtime dependency
 #		    (i.e. json>=1.4.7<1.5) and if you want to relax it to
 #		    "json>=1.4.6" then use:
-#	
+#
 #			OVERRIDE_GEMSPEC+= json>=1.4.6
-#	
+#
 #		    If you want to change depending gem to "json_pure>=1.4.6"
 #		    then use:
-#	
+#
 #			OVERRIDE_GEMSPEC+= json:json_pure>=1.4.6
-#	
+#
 #		    You can also remove dependency:
-#	
+#
 #			OVERRIDE_GEMSPEC+= json:
 #
-#	(2) Modify files in gemspec.
+#	(2) Modify instance of gemspec.
+#
+#		Example:
+#			Rename gem's name to "foo" (setting instance @name):
+#
+#			OVERRIDE_GEMSPEC+= :name=foo
 #
 #		Example:
 #			Remove files (a.rb and b.rb) from 'files':
@@ -57,6 +63,11 @@
 #	Note: Because of limited parser, argumetns for (1) must preceed to (2).
 #
 #	Default: (empty)
+#
+# GEM_PATH
+#	Set GEM_PATH; search path for rubygems
+#
+#	Default: ${PREFIX}/${GEM_HOME}
 #
 # BUILD_TARGET
 #	The Rakefile target that creates a local gem if using the
@@ -78,7 +89,7 @@
 #
 #	Example:
 #
-#	    GEM_CLEANBUILD=	*.o *.${RUBY_DLEXT} mkmf.log	
+#	    GEM_CLEANBUILD=	*.o *.${RUBY_DLEXT} mkmf.log
 #
 # GEM_NAME
 #	The name of the gem to install.  The default value is ${DISTNAME}.
@@ -163,6 +174,7 @@ DEPENDS+=	${RUBY_PKGPREFIX}-rubygems>=1.0.1:../../misc/rubygems
 . if defined(RUBYGEMS_REQD)
 
 RUBY193_RUBYGEMS_VERS=	1.8.11
+RUBY200_RUBYGEMS_VERS=	2.0.0
 
 _RUBYGEMS_REQD_MAJOR=	${RUBYGEMS_REQD:C/\.[0-9\.]+$//}
 _RUBYGEMS_REQD_MINORS=	${RUBYGEMS_REQD:C/^([0-9]+)\.*//}
@@ -170,6 +182,9 @@ _RUBYGEMS_REQD_MINORS=	${RUBYGEMS_REQD:C/^([0-9]+)\.*//}
 .  if ${RUBY_VER} == "193"
 _RUBYGEMS_MAJOR=	${RUBY193_RUBYGEMS_VERS:C/\.[0-9\.]+$//}
 _RUBYGEMS_MINORS=	${RUBY193_RUBYGEMS_VERS:C/^([0-9]+)\.*//}
+.  elif ${RUBY_VER} == "200"
+_RUBYGEMS_MAJOR=	${RUBY200_RUBYGEMS_VERS:C/\.[0-9\.]+$//}
+_RUBYGEMS_MINORS=	${RUBY200_RUBYGEMS_VERS:C/^([0-9]+)\.*//}
 .  else
 PKG_FAIL_REASON+= "Unknown Ruby version specified: ${RUBY_VER}."
 .  endif
@@ -191,7 +206,7 @@ DEPENDS+=	${RUBY_PKGPREFIX}-rubygems>=${RUBYGEMS_REQD}:../../misc/rubygems
 .endif # !ruby18
 
 CATEGORIES+=	ruby
-MASTER_SITES?=	http://rubygems.org/gems/ http://gems.rubyforge.org/gems/
+MASTER_SITES?=	${MASTER_SITE_RUBYGEMS}
 
 EXTRACT_SUFX?=	.gem
 DISTFILES?=	${DISTNAME}${EXTRACT_SUFX}
@@ -203,8 +218,11 @@ DISTFILES?=	${DISTNAME}${EXTRACT_SUFX}
 EXTRACT_ONLY?=	# empty
 .endif
 
+# Specify GEM_PATH
+GEM_PATH?=	${PREFIX}/${GEM_HOME}
+
 # Base directory for Gems
-MAKE_ENV+=	GEM_PATH=${PREFIX}/${GEM_HOME}
+MAKE_ENV+=	GEM_PATH=${GEM_PATH}
 
 # Directory for the Gem to install
 GEM_NAME?=	${DISTNAME}
@@ -244,11 +262,10 @@ post-extract: gem-extract
 gem-extract: fake-home
 .  for _gem_ in ${DISTFILES:M*.gem}
 	${RUN} cd ${WRKDIR} && ${SETENV} ${MAKE_ENV} ${RUBYGEM_ENV} \
-		${RUBYGEM} unpack ${RUBYGEM_INSTALL_ROOT_OPTION} \
-			${_DISTDIR:Q}/${_gem_:Q}
+		${RUBYGEM} unpack ${_DISTDIR:Q}${_gem_:Q}
 	${RUN} cd ${WRKDIR} && \
 		${SETENV} ${MAKE_ENV} TZ=UTC ${RUBYGEM_ENV} \
-		${RUBYGEM} spec ${_DISTDIR:Q}/${_gem_:Q} > ${_gem_}spec
+		${RUBYGEM} spec --ruby ${_DISTDIR:Q}${_gem_:Q} > ${_gem_}spec
 .  endfor
 .endif
 
@@ -321,7 +338,7 @@ RUBYGEM_INSTALL_ROOT_OPTION=	--install-root ${RUBYGEM_INSTALL_ROOT}
 _gem-build-install-root:
 	@${STEP_MSG} "Installing gem into installation root"
 	${RUN} ${SETENV} ${MAKE_ENV} ${RUBYGEM_ENV} \
-		${RUBYGEM} install ${RUBYGEM_OPTIONS} ${_RUBYGEM_OPTIONS}
+		${RUBYGEM} install --backtrace ${RUBYGEM_OPTIONS} ${_RUBYGEM_OPTIONS}
 
 # The ``gem'' command doesn't exit with a non-zero result even if the
 # install of the gem failed, so we do the check and return the proper exit

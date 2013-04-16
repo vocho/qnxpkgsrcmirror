@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.3 2012/10/25 06:56:59 asau Exp $
+# $NetBSD: Makefile,v 1.7 2013/04/10 12:37:36 obache Exp $
 
-DISTNAME=	tilt-1.3.3
+DISTNAME=	tilt-1.3.7
 CATEGORIES=	textproc
 
 MAINTAINER=	obache@NetBSD.org

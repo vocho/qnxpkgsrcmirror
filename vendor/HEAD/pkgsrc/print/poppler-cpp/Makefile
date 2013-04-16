@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.3 2012/07/04 20:26:58 drochner Exp $
+# $NetBSD: Makefile,v 1.7 2013/03/24 07:09:25 spz Exp $
 #
 
 .include "../../print/poppler/Makefile.common"
@@ -25,7 +25,7 @@ CONFIGURE_ARGS+=	--disable-poppler-qt
 CONFIGURE_ARGS+=	--disable-gtk-test
 CONFIGURE_ARGS+=	--disable-utils
 
-BUILDLINK_API_DEPENDS.poppler+=     poppler-${POPPLER_VERS}{,nb*}
+BUILDLINK_API_DEPENDS.poppler+=	poppler-${POPPLER_VERS}{,nb*}
 .include "../../print/poppler/buildlink3.mk"
 
 .if !empty(PKG_BUILD_OPTIONS.poppler:Mpoppler-cms)
@@ -38,6 +38,18 @@ BUILD_DIRS=		cpp
 INSTALL_DIRS=		cpp
 
 INSTALLATION_DIRS+=	lib/pkgconfig
+
+.include "../../converters/libiconv/buildlink3.mk"
+
+CHECK_BUILTIN.iconv:=	yes
+.include "../../converters/libiconv/builtin.mk"
+CHECK_BUILTIN.iconv:=	no
+
+.if !empty(USE_BUILTIN.iconv:M[nN][oO])
+CONFIGURE_ARGS+=	--with-libiconv-prefix=${BUILDLINK_PREFIX.iconv}
+.else
+CONFIGURE_ARGS+=	--with-libiconv-prefix
+.endif
 
 post-install:
 	${INSTALL_DATA} ${WRKSRC}/poppler-cpp.pc ${DESTDIR}${PREFIX}/lib/pkgconfig

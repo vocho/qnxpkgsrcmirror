@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.2 2012/10/02 23:48:02 asau Exp $
+# $NetBSD: Makefile,v 1.4 2013/01/20 20:10:51 ryoon Exp $
 #
 
-DISTNAME=	opus-tools-0.1.5
+DISTNAME=	opus-tools-0.1.6
 CATEGORIES=	audio
 MASTER_SITES=	http://downloads.xiph.org/releases/opus/
 

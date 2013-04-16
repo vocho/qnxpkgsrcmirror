@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.22 2012/10/23 18:16:21 asau Exp $
+# $NetBSD: Makefile,v 1.24 2013/02/06 23:23:34 jperkin Exp $
 
 DISTNAME=	modsecurity-apache_2.5.13
 PKGNAME=	${APACHE_PKG_PREFIX}-${DISTNAME:S/apache_//}
-PKGREVISION=	3
+PKGREVISION=	5
 CATEGORIES=	www security
 MASTER_SITES=	http://www.modsecurity.org/download/
 LICENSE=	gnu-gpl-v2

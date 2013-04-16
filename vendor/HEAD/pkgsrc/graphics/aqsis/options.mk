@@ -1,4 +1,4 @@
-# $NetBSD$
+# $NetBSD: options.mk,v 1.2 2012/04/30 02:54:28 dholland Exp $
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.aqsis
 PKG_SUPPORTED_OPTIONS=	qt4

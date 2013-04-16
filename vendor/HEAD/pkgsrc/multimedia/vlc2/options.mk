@@ -1,12 +1,27 @@
-# $NetBSD: options.mk,v 1.3 2012/07/24 18:40:42 drochner Exp $
+# $NetBSD: options.mk,v 1.6 2013/04/14 22:10:23 cheusov Exp $
 
 PKG_OPTIONS_VAR=		PKG_OPTIONS.vlc
-PKG_SUPPORTED_OPTIONS=		debug faad hal skins sdl pulseaudio x11
+PKG_SUPPORTED_OPTIONS=		debug faad skins sdl pulseaudio x11
 PKG_SUPPORTED_OPTIONS+=		gnome dts rtsp
 # XXX broken
 #PKG_SUPPORTED_OPTIONS+=	dbus
 PKG_SUGGESTED_OPTIONS=		x11 rtsp
 
+### Add VAAPI if it is available
+.include "../../multimedia/libva/available.mk"
+.if ${VAAPI_AVAILABLE} == "yes"
+PKG_SUPPORTED_OPTIONS+= vaapi
+PKG_SUGGESTED_OPTIONS+=	vaapi
+.endif
+
+### Add LIRC if it is available
+.include "../../comms/lirc/available.mk"
+.if ${LIRC_AVAILABLE} == "yes"
+PKG_SUPPORTED_OPTIONS+= lirc
+PKG_SUGGESTED_OPTIONS+=	lirc
+.endif
+
+###
 .include "../../mk/bsd.options.mk"
 
 PLIST_VARS+=		${PKG_SUPPORTED_OPTIONS}
@@ -65,17 +80,8 @@ CONFIGURE_ARGS+=	--disable-telepathy
 
 PLIST.dbus=		yes
 
-## HAL support (requires dbus)
-.if !empty(PKG_OPTIONS:Mhal)
-CONFIGURE_ARGS+=	--enable-hal
-.include "../../sysutils/hal/buildlink3.mk"
-PLIST.hal=		yes
-.else
-CONFIGURE_ARGS+=	--disable-hal
-.endif
 .else
 CONFIGURE_ARGS+=	--disable-dbus
-CONFIGURE_ARGS+=	--disable-hal
 CONFIGURE_ARGS+=	--disable-notify
 .endif
 
@@ -157,4 +163,21 @@ BUILDLINK_API_DEPENDS.liblive+= liblive>=20111223
 .  include "../../net/liblive/buildlink3.mk"
 .else
 CONFIGURE_ARGS+=	--disable-live555
+.endif
+
+## VAAPI support
+.if !empty(PKG_OPTIONS:Mvaapi)
+CONFIGURE_ARGS+=	--enable-libva
+.include "../../multimedia/libva/buildlink3.mk"
+.else
+CONFIGURE_ARGS+=	--disable-libva
+.endif
+
+## LIRC support
+.if !empty(PKG_OPTIONS:Mlirc)
+CONFIGURE_ARGS+=	--enable-lirc
+PLIST.lirc=	yes
+.include "../../comms/lirc/buildlink3.mk"
+.else
+CONFIGURE_ARGS+=	--disable-lirc
 .endif

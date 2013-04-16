@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.7 2012/09/16 06:25:42 taca Exp $
+@comment $NetBSD: PLIST,v 1.9 2013/03/11 07:47:46 taca Exp $
 ${GEM_HOME}/cache/${GEM_NAME}.gem
 ${GEM_LIBDIR}/.document
 ${GEM_LIBDIR}/.yardopts
@@ -91,6 +91,7 @@ ${GEM_LIBDIR}/spec/rspec/expectations/expectation_target_spec.rb
 ${GEM_LIBDIR}/spec/rspec/expectations/extensions/kernel_spec.rb
 ${GEM_LIBDIR}/spec/rspec/expectations/fail_with_spec.rb
 ${GEM_LIBDIR}/spec/rspec/expectations/handler_spec.rb
+${GEM_LIBDIR}/spec/rspec/expectations/syntax_spec.rb
 ${GEM_LIBDIR}/spec/rspec/matchers/base_matcher_spec.rb
 ${GEM_LIBDIR}/spec/rspec/matchers/be_close_spec.rb
 ${GEM_LIBDIR}/spec/rspec/matchers/be_instance_of_spec.rb
@@ -108,6 +109,7 @@ ${GEM_LIBDIR}/spec/rspec/matchers/equal_spec.rb
 ${GEM_LIBDIR}/spec/rspec/matchers/exist_spec.rb
 ${GEM_LIBDIR}/spec/rspec/matchers/has_spec.rb
 ${GEM_LIBDIR}/spec/rspec/matchers/have_spec.rb
+${GEM_LIBDIR}/spec/rspec/matchers/include_matcher_integration_spec.rb
 ${GEM_LIBDIR}/spec/rspec/matchers/include_spec.rb
 ${GEM_LIBDIR}/spec/rspec/matchers/match_array_spec.rb
 ${GEM_LIBDIR}/spec/rspec/matchers/match_spec.rb

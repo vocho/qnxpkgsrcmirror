@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.49 2012/10/08 23:01:09 adam Exp $
+# $NetBSD: Makefile,v 1.54 2013/03/31 08:17:47 sbd Exp $
 
 DISTNAME=	bmpx-0.40.14
-PKGREVISION=	26
+PKGREVISION=	29
 CATEGORIES=	audio
 MASTER_SITES=	http://files.backtrace.info/releases/0.40/
 EXTRACT_SUFX=	.tar.bz2
@@ -22,6 +22,15 @@ CHECK_WRKREF_SKIP=	bin/beep-media-player-2
 CHECK_WRKREF_SKIP+=	bin/bmp2
 CHECK_WRKREF_SKIP+=	libexec/beep-media-player-2-bin
 
+.include "../../mk/compiler.mk"
+.if !empty(PKGSRC_COMPILER:Mclang)
+CXXFLAGS+=	-std=c++11
+.endif
+
+.include "../../mk/bsd.fast.prefs.mk"
+.if ${OPSYS} == "Linux"
+.include "../../audio/alsa-lib/buildlink3.mk"
+.endif
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../audio/cdparanoia/buildlink3.mk"
 .include "../../audio/libofa/buildlink3.mk"

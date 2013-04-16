@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.29 2012/10/08 23:02:05 adam Exp $
+# $NetBSD: Makefile,v 1.33 2013/04/06 14:22:40 rodent Exp $
 #
 
 DISTNAME=	gwaei-3.0.2
-PKGREVISION=	8
+PKGREVISION=	11
 CATEGORIES=	misc
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=gwaei/}
 
@@ -12,8 +12,9 @@ COMMENT=	Japanese dictionary for GNOME
 LICENSE=	gnu-gpl-v3
 
 GNU_CONFIGURE=		yes
+USE_LIBTOOL=		yes
 USE_PKGLOCALEDIR=	yes
-USE_TOOLS+=		perl gmake pkg-config intltool msgfmt
+USE_TOOLS+=		gmake intltool msgfmt perl pkg-config
 
 PLIST_SRC=		PLIST
 

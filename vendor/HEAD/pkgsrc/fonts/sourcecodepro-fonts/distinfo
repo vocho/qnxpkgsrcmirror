@@ -1,5 +1,5 @@
-$NetBSD: distinfo,v 1.1 2012/11/03 22:56:26 ryoon Exp $
+$NetBSD: distinfo,v 1.3 2013/01/20 09:45:25 ryoon Exp $
 
-SHA1 (SourceCodePro_FontsOnly-1.009.zip) = c0fbe8f2e119ec5292c620ef1260d80768289501
-RMD160 (SourceCodePro_FontsOnly-1.009.zip) = 62054bbd5fa573db1458d85cde72d9860f41b7f1
-Size (SourceCodePro_FontsOnly-1.009.zip) = 613755 bytes
+SHA1 (SourceCodePro_FontsOnly-1.017.zip) = c0e3f6f8e25b434c0e28a817539632f8a5ecb9e5
+RMD160 (SourceCodePro_FontsOnly-1.017.zip) = ea82d4de6fecf1aa718a371f1c436b75e0d6131d
+Size (SourceCodePro_FontsOnly-1.017.zip) = 799805 bytes

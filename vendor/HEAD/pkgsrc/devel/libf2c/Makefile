@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.6 2012/10/31 11:17:13 asau Exp $
+# $NetBSD: Makefile,v 1.8 2013/04/07 20:43:26 asau Exp $
 
 DISTNAME=	libf2c-20090201
 PKGREVISION=	3

@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.44 2012/10/03 11:43:32 asau Exp $
+# $NetBSD: Makefile,v 1.47 2013/04/06 20:27:20 rodent Exp $
 
 DISTNAME=	emacs-20.7
-PKGREVISION=	15
+PKGNAME=	${DISTNAME:S/emacs/emacs20/}
+PKGREVISION=	16
 CATEGORIES=	editors
 MASTER_SITES=	http://ftp.gnu.org/pub/old-gnu/emacs/	\
 		ftp://ftp.gnu.org/pub/old-gnu/emacs
@@ -17,6 +18,12 @@ PATCHFILES=		emacs-20.7-mule-4.1b.patch
 SITES.emacs20-xim-20000713.diff=	\
 			http://home.catv.ne.jp/pp/ginoue/software/emacs-xim/
 PATCHFILES+=		emacs20-xim-20000713.diff
+
+# dholland's jumbo patch
+PATCHFILES+=		emacs20-jumbo-patch-20121210.gz
+SITES.emacs20-jumbo-patch-20121210.gz=\
+			http://www.NetBSD.org/~dholland/patchkits/emacs20/
+
 PATCH_DIST_STRIP=	-p1
 
 MAINTAINER=	dholland@NetBSD.org
@@ -69,7 +76,7 @@ MAKE_ENV+=	INSTALL_STRIP=${_STRIPFLAG_INSTALL:Q}
 CFLAGS+=	-fno-zero-initialized-in-bss
 .endif
 
-INFO_FILES=	# PLIST
+INFO_FILES=	yes
 
 INSTALL_PROGRAM=${INSTALL} ${COPY} -o ${BINOWN} -g ${BINGRP} -m ${BINMODE}
 

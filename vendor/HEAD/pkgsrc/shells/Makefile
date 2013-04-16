@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.49 2011/05/28 08:54:03 cheusov Exp $
+# $NetBSD: Makefile,v 1.51 2013/01/31 09:36:01 wiz Exp $
 #
 
 COMMENT=	Shells
@@ -12,6 +12,7 @@ SUBDIR+=	dash
 SUBDIR+=	eltclsh
 SUBDIR+=	es
 SUBDIR+=	esh
+SUBDIR+=	fish
 SUBDIR+=	heirloom-sh
 SUBDIR+=	lshell
 SUBDIR+=	mksh
@@ -31,6 +32,5 @@ SUBDIR+=	static-tcsh
 SUBDIR+=	tcsh
 SUBDIR+=	xsh
 SUBDIR+=	zsh
-SUBDIR+=	zsh-current
 
 .include "../mk/misc/category.mk"

@@ -2,7 +2,7 @@
 # derrived from /etc/rc_d/os.sh
 
 # RCSid:
-#	$Id: machine.sh,v 1.4 2011/06/18 22:39:46 bsiegert Exp $
+#	$Id: machine.sh,v 1.7 2013/04/06 02:49:57 obache Exp $
 #
 #	@(#) Copyright (c) 1994-2002 Simon J. Gerraty
 #
@@ -81,6 +81,12 @@ Linux)
 	i?86) MACHINE_ARCH=i386;;# does anyone really care about 686 vs 586?
 	esac
         ;;
+CYGWIN_*)
+	OS=Cygwin
+	case "$machine" in
+	i?86) MACHINE_ARCH=i386;;
+	esac
+	;;
 esac
 
 MACHINE=${MACHINE:-$OS$OSMAJOR}

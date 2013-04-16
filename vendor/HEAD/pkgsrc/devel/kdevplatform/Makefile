@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.27 2012/11/23 20:37:13 markd Exp $
+# $NetBSD: Makefile,v 1.32 2013/02/16 11:20:47 wiz Exp $
 #
 
 DISTNAME=	kdevplatform-1.4.1
+PKGREVISION=	5
 CATEGORIES=	devel kde
 MASTER_SITES=	${MASTER_SITE_KDE:=kdevelop/4.4.1/src/}
 EXTRACT_SUFX=	.tar.bz2
@@ -13,10 +14,14 @@ COMMENT=	KDE development platform, used by KDevelop 4
 
 BUILD_DEPENDS+= automoc4>=0.9.87:../../devel/automoc4
 
-USE_TOOLS+=	pkg-config perl msgfmt
+USE_TOOLS+=	pkg-config perl msgfmt bash:run
 USE_LANGUAGES=	c c++
 
 CXXFLAGS.Linux+=	-fpermissive
+
+REPLACE_BASH+= \
+	util/kdevplatform_shell_environment.sh \
+	util/kdev_format_source.sh
 
 BUILDLINK_DEPMETHOD.qt4-tools=	full
 .include "../../meta-pkgs/kde4/kde4.mk"

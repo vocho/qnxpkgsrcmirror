@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.1 2012/11/29 09:27:37 ryoon Exp $
+# $NetBSD: Makefile,v 1.3 2013/04/11 11:28:18 drochner Exp $
 #
 
-DISTNAME=		gst-libav-1.0.3
-CATEGORIES=		multimedia
-MASTER_SITES=		http://gstreamer.freedesktop.org/src/gst-libav/
-EXTRACT_SUFX=		.tar.xz
+DISTNAME=	gst-libav-1.0.6
+CATEGORIES=	multimedia
+MASTER_SITES=	http://gstreamer.freedesktop.org/src/gst-libav/
+EXTRACT_SUFX=	.tar.xz
 
-MAINTAINER=		pkgsrc-users@NetBSD.org
-HOMEPAGE=		http://gstreamer.freedesktop.org/src/gst-libav/
-COMMENT=		libav/ffmpeg plugin for gstreamer
+MAINTAINER=	pkgsrc-users@NetBSD.org
+HOMEPAGE=	http://gstreamer.freedesktop.org/src/gst-libav/
+COMMENT=	GStreamer libav/ffmpeg plugin
 
 USE_PKGLOCALEDIR=	yes
 USE_LIBTOOL=		yes

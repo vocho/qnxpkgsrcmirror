@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.119 2012/11/17 22:04:18 markd Exp $
+# $NetBSD: Makefile,v 1.125 2013/04/03 12:32:03 markd Exp $
 #
 
 DISTNAME=	amarok-${VERS}
 VERS=		2.6.0
+PKGREVISION=	6
 CATEGORIES=	audio multimedia
 MASTER_SITES=	ftp://ftp.kde.org/pub/kde/stable/amarok/${VERS}/src/
 EXTRACT_SUFX=	.tar.bz2
@@ -23,6 +24,7 @@ CMAKE_ARGS+=	-DMYSQL_EMBEDDED_LIBRARIES:PATH=${BUILDLINK_PREFIX.mysql-server}/li
 CMAKE_ARGS+=	-DMYSQL_EMBEDDED_FOUND:BOOL=TRUE
 CMAKE_ARGS+=	-DHAVE_MYSQL_OPT_EMBEDDED_CONNECTION:BOOL=TRUE
 CMAKE_ARGS+=	-DMYSQL_LIBRARIES:PATH=${BUILDLINK_PREFIX.mysql-client}/lib/mysql/libmysqlclient.so
+CMAKE_ARGS+=	-DKDE4_BUILD_TESTS:BOOL=OFF
 
 REPLACE_PERL+=	src/kconf_update/amarok-2.4.1-tokens_syntax_update.pl
 
@@ -58,7 +60,7 @@ BUILDLINK_API_DEPENDS.taglib+=	taglib>=1.6nb1
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../meta-pkgs/kde4/kde4.mk"
 .include "../../multimedia/ffmpeg/buildlink3.mk"
-.include "../../multimedia/kdemultimedia4/buildlink3.mk"
+.include "../../multimedia/libkcompactdisc/buildlink3.mk"
 .include "../../security/qca2/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
 # for plasma

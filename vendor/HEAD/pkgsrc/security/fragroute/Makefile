@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.21 2012/10/23 18:16:27 asau Exp $
+# $NetBSD: Makefile,v 1.24 2013/04/06 13:24:20 rodent Exp $
 
 DISTNAME=	fragroute-1.2
-PKGREVISION=	12
+PKGREVISION=	14
 CATEGORIES=	security net
 MASTER_SITES=	http://monkey.org/~dugsong/fragroute/
 
@@ -21,8 +21,8 @@ SCRIPTS=	README.snort base-1 frag-1 frag-2 frag-3 frag-4 frag-5 \
 INSTALLATION_DIRS+=	share/fragroute
 
 pre-install:
-.for FILE in ${SCRIPTS}
-	${INSTALL_DATA} ${WRKSRC}/scripts/${FILE} ${DESTDIR}${PREFIX}/share/fragroute
+.for file in ${SCRIPTS}
+	${INSTALL_DATA} ${WRKSRC}/scripts/${file} ${DESTDIR}${PREFIX}/share/fragroute
 .endfor
 
 .include "../../net/libpcap/buildlink3.mk"

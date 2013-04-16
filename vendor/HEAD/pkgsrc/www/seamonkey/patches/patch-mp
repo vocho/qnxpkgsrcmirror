@@ -1,17 +1,17 @@
-$NetBSD: patch-mp,v 1.8 2012/11/23 17:28:50 ryoon Exp $
+$NetBSD: patch-mp,v 1.11 2013/04/07 20:23:49 ryoon Exp $
 
---- mozilla/media/libsydneyaudio/src/Makefile.in.orig	2012-11-18 10:19:46.000000000 +0000
+--- mozilla/media/libsydneyaudio/src/Makefile.in.orig	2013-04-01 03:31:06.000000000 +0000
 +++ mozilla/media/libsydneyaudio/src/Makefile.in
-@@ -72,6 +72,12 @@ ifeq ($(OS_ARCH),WINNT)
- OS_LIBS += winmm.lib
+@@ -70,6 +70,12 @@ CSRCS		= \
+ 		$(NULL)
  endif
  
-+ifdef PKGSRC_PULSEAUDIO
++ifdef MOZ_PULSEAUDIO
 +CSRCS		= \
 +		sydney_audio_pulseaudio.c \
 +		$(NULL)
 +endif
 +
- include $(topsrcdir)/config/rules.mk
- 
- LOCAL_INCLUDES += -I$(srcdir)/../include
+ ifeq ($(OS_ARCH),WINNT)
+ OS_LIBS += winmm.lib
+ endif

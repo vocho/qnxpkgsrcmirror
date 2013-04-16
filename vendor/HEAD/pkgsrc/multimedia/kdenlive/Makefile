@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.15 2012/10/08 23:02:11 adam Exp $
+# $NetBSD: Makefile,v 1.18 2013/02/16 11:23:36 wiz Exp $
 #
 
 DISTNAME=	kdenlive-0.7.8
-PKGREVISION=	12
+PKGREVISION=	15
 CATEGORIES=	multimedia
 MASTER_SITES=	http://downloads.sourceforge.net/project/kdenlive/kdenlive/0.7.8/
 

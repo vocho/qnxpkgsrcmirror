@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.39 2012/10/04 09:19:19 asau Exp $
+# $NetBSD: Makefile,v 1.44 2013/02/16 11:21:32 wiz Exp $
 
 DISTNAME=	mapserver-5.6.8
-PKGREVISION=	4
+PKGREVISION=	9
 CATEGORIES=	geography www
 MASTER_SITES=	http://download.osgeo.org/mapserver/
 
@@ -17,7 +17,6 @@ USE_PKGLOCALEDIR=	yes
 GNU_CONFIGURE=		yes
 CONFIGURE_ARGS+=	--with-cairo
 CONFIGURE_ARGS+=	--with-freetype
-CONFIGURE_ARGS+=	--with-fribidi-config=${BUILDLINK_PREFIX.fribidi}/bin/fribidi-config
 CONFIGURE_ARGS+=	--with-gdal
 CONFIGURE_ARGS+=	--with-gd=${BUILDLINK_PREFIX.gd}
 CONFIGURE_ARGS+=	--with-geos

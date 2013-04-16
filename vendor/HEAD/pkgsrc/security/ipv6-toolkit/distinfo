@@ -1,0 +1,5 @@
+$NetBSD: distinfo,v 1.4 2013/03/12 20:32:00 agc Exp $
+
+SHA1 (ipv6-toolkit-v1.3.3.tar.gz) = ab21a41c632876b639c84e8e8705a624da30f4e4
+RMD160 (ipv6-toolkit-v1.3.3.tar.gz) = 08a8ca046d2435f40b78e88686d6633503542589
+Size (ipv6-toolkit-v1.3.3.tar.gz) = 2944487 bytes

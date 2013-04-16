@@ -1,21 +1,41 @@
-# $NetBSD: options.mk,v 1.25 2012/10/10 13:33:44 drochner Exp $
+# $NetBSD: options.mk,v 1.28 2013/04/14 01:36:44 cheusov Exp $
 
 # Global and legacy options
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.ffmpeg
-PKG_SUPPORTED_OPTIONS=	faac lame libvpx opencore-amr theora vorbis x264 xvid
-PKG_SUGGESTED_OPTIONS=	lame libvpx theora vorbis x264 xvid
+PKG_SUPPORTED_OPTIONS=	faac lame ass libvpx theora vorbis x264 xvid \
+			opencore-amr
+PKG_SUGGESTED_OPTIONS=	lame ass libvpx theora vorbis x264 xvid
 #PKG_OPTIONS_OPTIONAL_GROUPS=	aac-decoder
 #PKG_OPTIONS_GROUP.aac-decoder=	faac
 
-### Add vdpau if it is available
+### Add VDPAU if it is available
 .include "../../multimedia/libvdpau/available.mk"
 .if ${VDPAU_AVAILABLE} == "yes"
 PKG_SUPPORTED_OPTIONS+= vdpau
 PKG_SUGGESTED_OPTIONS+=	vdpau
 .endif
 
+### Add VAAPI if it is available
+.include "../../multimedia/libva/available.mk"
+.if ${VAAPI_AVAILABLE} == "yes"
+PKG_SUPPORTED_OPTIONS+= vaapi
+PKG_SUGGESTED_OPTIONS+=	vaapi
+.endif
+
+###
 .include "../../mk/bsd.options.mk"
+
+###
+### ass option
+###
+.if !empty(PKG_OPTIONS:Mass)
+USE_TOOLS+=		pkg-config
+CONFIGURE_ARGS+=	--enable-libass
+.include "../../multimedia/libass/buildlink3.mk"
+.else
+CONFIGURE_ARGS+=	--disable-libass
+.endif
 
 ###
 ### faac option
@@ -101,11 +121,25 @@ CONFIGURE_ARGS+=	--disable-libx264
 ### VDPAU support
 ###
 .if !empty(PKG_OPTIONS:Mvdpau)
+CONFIGURE_ARGS+=	--enable-vdpau
 .include "../../multimedia/libvdpau/buildlink3.mk"
 .else
 CONFIGURE_ARGS+=	--disable-vdpau
 .endif
 
+###
+### VAAPI support
+###
+.if !empty(PKG_OPTIONS:Mvaapi)
+CONFIGURE_ARGS+=	--enable-vaapi
+.include "../../multimedia/libva/buildlink3.mk"
+.else
+CONFIGURE_ARGS+=	--disable-vaapi
+.endif
+
+###
+### VPX support
+###
 .if !empty(PKG_OPTIONS:Mlibvpx)
 CONFIGURE_ARGS+=	--enable-libvpx
 .include "../../multimedia/libvpx/buildlink3.mk"

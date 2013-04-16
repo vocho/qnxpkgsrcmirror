@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.11 2012/10/18 14:31:23 taca Exp $
+@comment $NetBSD: PLIST,v 1.13 2013/04/06 12:09:25 taca Exp $
 ${FO_DIR}/.htaccess
 ${FO_DIR}/application/application.php
 ${FO_DIR}/application/controllers/AccessController.class.php
@@ -688,6 +688,8 @@ ${FO_DIR}/application/widgets/activity_feed/index.php
 ${FO_DIR}/application/widgets/activity_feed/template.php
 ${FO_DIR}/application/widgets/calendar/index.php
 ${FO_DIR}/application/widgets/calendar/template.php
+${FO_DIR}/application/widgets/completed_tasks_list/index.php
+${FO_DIR}/application/widgets/completed_tasks_list/template.php
 ${FO_DIR}/application/widgets/documents/index.php
 ${FO_DIR}/application/widgets/documents/template.php
 ${FO_DIR}/application/widgets/messages/index.php
@@ -993,6 +995,26 @@ ${FO_DIR}/language/hu_hu/reporting.php
 ${FO_DIR}/language/hu_hu/site_interface.php
 ${FO_DIR}/language/hu_hu/timezones.php
 ${FO_DIR}/language/hu_hu/upgrade.php
+${FO_DIR}/language/id_ba.php
+${FO_DIR}/language/id_ba/_config.php
+${FO_DIR}/language/id_ba/actions.php
+${FO_DIR}/language/id_ba/administration.php
+${FO_DIR}/language/id_ba/calendar.php
+${FO_DIR}/language/id_ba/countries.php
+${FO_DIR}/language/id_ba/emails.php
+${FO_DIR}/language/id_ba/errors.php
+${FO_DIR}/language/id_ba/fields.php
+${FO_DIR}/language/id_ba/general.php
+${FO_DIR}/language/id_ba/help.php
+${FO_DIR}/language/id_ba/lang.js
+${FO_DIR}/language/id_ba/messages.php
+${FO_DIR}/language/id_ba/objects.php
+${FO_DIR}/language/id_ba/project_interface.php
+${FO_DIR}/language/id_ba/reporting.php
+${FO_DIR}/language/id_ba/site_interface.php
+${FO_DIR}/language/id_ba/slimey.js
+${FO_DIR}/language/id_ba/timezones.php
+${FO_DIR}/language/id_ba/upgrade.php
 ${FO_DIR}/language/index.html
 ${FO_DIR}/language/it_it.php
 ${FO_DIR}/language/it_it/_config.php
@@ -2976,6 +2998,7 @@ ${FO_DIR}/plugins/core_dimensions/language/ca_es/lang.js
 ${FO_DIR}/plugins/core_dimensions/language/ca_es/lang.php
 ${FO_DIR}/plugins/core_dimensions/language/cs_cz/lang.js
 ${FO_DIR}/plugins/core_dimensions/language/cs_cz/lang.php
+${FO_DIR}/plugins/core_dimensions/language/de_de/lang.js
 ${FO_DIR}/plugins/core_dimensions/language/de_de/lang.php
 ${FO_DIR}/plugins/core_dimensions/language/el_gr/lang.js
 ${FO_DIR}/plugins/core_dimensions/language/el_gr/lang.php
@@ -2989,6 +3012,8 @@ ${FO_DIR}/plugins/core_dimensions/language/fr_fr/lang.js
 ${FO_DIR}/plugins/core_dimensions/language/fr_fr/lang.php
 ${FO_DIR}/plugins/core_dimensions/language/hu_hu/lang.js
 ${FO_DIR}/plugins/core_dimensions/language/hu_hu/lang.php
+${FO_DIR}/plugins/core_dimensions/language/id_ba/lang.js
+${FO_DIR}/plugins/core_dimensions/language/id_ba/lang.php
 ${FO_DIR}/plugins/core_dimensions/language/it_it/lang.js
 ${FO_DIR}/plugins/core_dimensions/language/it_it/lang.php
 ${FO_DIR}/plugins/core_dimensions/language/ja_jp/lang.js
@@ -3020,7 +3045,6 @@ ${FO_DIR}/plugins/core_dimensions/language/zh_tw/lang.php
 ${FO_DIR}/plugins/core_dimensions/public/assets/javascript/core_dimensions.js
 ${FO_DIR}/plugins/core_dimensions/templates/quickadd_extra_fields.php
 ${FO_DIR}/plugins/core_dimensions/update.php
-${FO_DIR}/plugins/index.html
 ${FO_DIR}/plugins/mail/CHANGELOG.txt
 ${FO_DIR}/plugins/mail/application/controllers/MailController.class.php
 ${FO_DIR}/plugins/mail/application/helpers/MailUtilities.class.php
@@ -3066,6 +3090,8 @@ ${FO_DIR}/plugins/mail/language/ca_es/lang.js
 ${FO_DIR}/plugins/mail/language/ca_es/lang.php
 ${FO_DIR}/plugins/mail/language/cs_cz/lang.js
 ${FO_DIR}/plugins/mail/language/cs_cz/lang.php
+${FO_DIR}/plugins/mail/language/de_de/lang.js
+${FO_DIR}/plugins/mail/language/de_de/lang.php
 ${FO_DIR}/plugins/mail/language/el_gr/lang.js
 ${FO_DIR}/plugins/mail/language/el_gr/lang.php
 ${FO_DIR}/plugins/mail/language/en_us/lang.js
@@ -3078,6 +3104,8 @@ ${FO_DIR}/plugins/mail/language/fr_fr/lang.js
 ${FO_DIR}/plugins/mail/language/fr_fr/lang.php
 ${FO_DIR}/plugins/mail/language/hu_hu/lang.js
 ${FO_DIR}/plugins/mail/language/hu_hu/lang.php
+${FO_DIR}/plugins/mail/language/id_ba/lang.js
+${FO_DIR}/plugins/mail/language/id_ba/lang.php
 ${FO_DIR}/plugins/mail/language/it_it/lang.js
 ${FO_DIR}/plugins/mail/language/it_it/lang.php
 ${FO_DIR}/plugins/mail/language/ja_jp/lang.js
@@ -3130,16 +3158,22 @@ ${FO_DIR}/plugins/workspaces/language/ca_es/lang.js
 ${FO_DIR}/plugins/workspaces/language/ca_es/lang.php
 ${FO_DIR}/plugins/workspaces/language/cs_cz/lang.js
 ${FO_DIR}/plugins/workspaces/language/cs_cz/lang.php
+${FO_DIR}/plugins/workspaces/language/de_de/lang.js
+${FO_DIR}/plugins/workspaces/language/de_de/lang.php
 ${FO_DIR}/plugins/workspaces/language/el_gr/lang.js
 ${FO_DIR}/plugins/workspaces/language/el_gr/lang.php
 ${FO_DIR}/plugins/workspaces/language/en_us/lang.js
 ${FO_DIR}/plugins/workspaces/language/en_us/lang.php
+${FO_DIR}/plugins/workspaces/language/es_es/lang.js
+${FO_DIR}/plugins/workspaces/language/es_es/lang.php
 ${FO_DIR}/plugins/workspaces/language/es_la/lang.js
 ${FO_DIR}/plugins/workspaces/language/es_la/lang.php
 ${FO_DIR}/plugins/workspaces/language/fr_fr/lang.js
 ${FO_DIR}/plugins/workspaces/language/fr_fr/lang.php
 ${FO_DIR}/plugins/workspaces/language/hu_hu/lang.js
 ${FO_DIR}/plugins/workspaces/language/hu_hu/lang.php
+${FO_DIR}/plugins/workspaces/language/id_ba/lang.js
+${FO_DIR}/plugins/workspaces/language/id_ba/lang.php
 ${FO_DIR}/plugins/workspaces/language/it_it/lang.js
 ${FO_DIR}/plugins/workspaces/language/it_it/lang.php
 ${FO_DIR}/plugins/workspaces/language/ja_jp/lang.js
@@ -5476,6 +5510,7 @@ ${FO_DIR}/public/webservices/TagsServices.php
 ${FO_DIR}/public/webservices/WebServicesBase.php
 ${FO_DIR}/public/webservices/WorkspaceServices.php
 ${FO_DIR}/readme.txt
+${FO_DIR}/rebuild_sharing_table.php
 ${FO_DIR}/revision.php
 ${FO_DIR}/robots.txt
 ${FO_DIR}/s.gif

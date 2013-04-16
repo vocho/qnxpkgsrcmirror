@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.53 2012/10/03 11:43:43 asau Exp $
+# $NetBSD: Makefile,v 1.57 2013/02/16 11:21:01 wiz Exp $
 
 DISTNAME=	ted-2.21.src
 PKGNAME=	${DISTNAME:S/.src//}
-PKGREVISION=	5
+PKGREVISION=	8
 CATEGORIES=	editors
 MASTER_SITES=	ftp://ftp.nluug.nl/pub/editors/ted/
 
@@ -14,7 +14,7 @@ LICENSE=	gnu-gpl-v2
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
 
 USE_LANGUAGES=	c c++
-USE_TOOLS+=	gtar
+USE_TOOLS+=	bsdtar
 MAKE_JOBS_SAFE=	no
 
 WRKSRC=		${WRKDIR}/Ted-2.21
@@ -36,8 +36,9 @@ CONFIGURE_ENV+=	ac_xpm_libraries="${BUILDLINK_PREFIX.libXpm}/lib"
 CONFIGURE_ENV+=	ac_zlib_includes="${BUILDLINK_PREFIX.zlib}/include"
 CONFIGURE_ENV+=	ac_zlib_libraries="${BUILDLINK_PREFIX.zlib}/lib"
 
-LDFLAGS.SunOS+=		-lXft -lfontconfig -liconv
-LDFLAGS.DragonFly+=	-lXft -lfontconfig
+LDFLAGS.SunOS+=	-liconv
+LDFLAGS+=	-lXft
+LDFLAGS+=	-lfontconfig
 
 MAKE_FLAGS+=	CONFIGURE_OPTIONS=--x-libraries=${X11BASE}/lib\ --with-MOTIF
 
@@ -53,7 +54,7 @@ INSTALL_TARGET=	install.shared
 INSTALLATION_DIRS=	bin lib/X11/app-defaults ${AFMDIR} ${INDDIR} ${INFODIR}
 
 post-extract:
-	@cd ${WRKSRC} ; ${GTAR} xf tedPackage/TedBindist.tar
+	@cd ${WRKSRC} ; ${TOOLS_PATH.bsdtar} xf tedPackage/TedBindist.tar
 
 post-patch:
 	@cd ${WRKSRC}/Ted ; \

@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.31 2012/10/23 18:16:47 asau Exp $
+# $NetBSD: Makefile,v 1.33 2013/04/08 11:17:21 rodent Exp $
 
 DISTNAME=	pakemon-0.3.1
-PKGREVISION=	8
+PKGREVISION=	9
 CATEGORIES=	security
-MASTER_SITES=	http://www.binarii.com/files/security/ 
+MASTER_SITES=	http://www.binarii.com/files/security/
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	# removed in 2001
 COMMENT=	Packet monster, an Open Source Intrusion Detection System

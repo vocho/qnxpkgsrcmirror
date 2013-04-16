@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.10 2012/10/08 23:02:07 adam Exp $
+# $NetBSD: Makefile,v 1.14 2013/04/03 10:52:00 markd Exp $
 
 DISTNAME=	kgeography-${_KDE_VERSION}
-PKGREVISION=	4
 CATEGORIES=	misc
 COMMENT=	KDE geography trainer
 

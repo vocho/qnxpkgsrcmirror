@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.20 2012/11/29 13:52:51 ryoon Exp $
-#
+# $NetBSD: Makefile,v 1.24 2013/04/05 15:14:03 adam Exp $
 
-DISTNAME=	cppcheck-1.57
+DISTNAME=	cppcheck-1.59
 CATEGORIES=	devel
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=cppcheck/}
 EXTRACT_SUFX=	.tar.bz2
@@ -17,11 +16,11 @@ BUILD_DEPENDS+=	docbook-xsl-[0-9]*:../../textproc/docbook-xsl
 FIND_PREFIX:=	DBXSLDIR=docbook-xsl
 .include "../../mk/find-prefix.mk"
 
-INSTALLATION_DIRS=	${PKGMANDIR}/man1
 USE_LANGUAGES=		c c++
 USE_TOOLS+=		gmake
 BUILD_TARGET=		all man
 BUILD_MAKE_FLAGS+=	DB2MAN=${DBXSLDIR}/share/xsl/docbook/manpages/docbook.xsl
+INSTALLATION_DIRS=	${PKGMANDIR}/man1
 
 .include "options.mk"
 

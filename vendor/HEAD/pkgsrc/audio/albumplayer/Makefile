@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.23 2012/10/08 23:01:07 adam Exp $
+# $NetBSD: Makefile,v 1.25 2013/04/06 03:54:38 rodent Exp $
 #
 
 DISTNAME=	albumplayer-0.3.1
-PKGREVISION=	12
+PKGREVISION=	13
 CATEGORIES=	audio
 MASTER_SITES=	http://rvb.mytanet.de/
 
@@ -16,7 +16,6 @@ WRKSRC=		${WRKDIR}/${PKGNAME_NOREV}
 GNU_CONFIGURE=		yes
 USE_PKGLOCALEDIR=	yes
 USE_TOOLS+=		pkg-config
-USE_DIRS+=		xdg-1.1
 INSTALLATION_DIRS+=	share/applications
 REPLACE_SH=		ap_flac_embed
 

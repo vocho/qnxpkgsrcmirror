@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.26 2012/10/23 19:51:25 asau Exp $
+# $NetBSD: Makefile,v 1.32 2013/02/17 11:16:56 jperkin Exp $
 
-DISTNAME=	strigi-0.6.4
-PKGREVISION=	17
+DISTNAME=	strigi-0.7.8
+PKGREVISION=	1
 CATEGORIES=	sysutils
-MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=strigi/}
+MASTER_SITES=	http://www.vandenoever.info/software/strigi/
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	markd@NetBSD.org
@@ -26,9 +26,9 @@ RT_LIB_SCHED=	# empty
 .endif
 
 CFLAGS.SunOS+=	-DCMAKE_HAVE_PTHREAD_CREATE
-LDFLAGS.SunOS+=	-mimpure-text -lrt
+LDFLAGS.SunOS+=	-mimpure-text -lrt -lsocket
 
-CMAKE_ARGS+=	-DENABLE_CPPUNIT=OFF
+CMAKE_ARGS+=	-DENABLE_FFMPEG=OFF
 .if !empty(RT_LIB_SCHED)
 # these use sched_setscheduler
 CMAKE_ARGS+=	-Dstrigidaemon_LIBS=${RT_LIB_SCHED}
@@ -40,11 +40,14 @@ pre-configure:
 
 .include "../../archivers/bzip2/buildlink3.mk"
 .include "../../converters/libiconv/buildlink3.mk"
+.include "../../devel/cppunit/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"
+.include "../../graphics/exiv2/buildlink3.mk"
 .include "../../textproc/libclucene/buildlink3.mk"
 .include "../../textproc/libxml2/buildlink3.mk"
 .include "../../sysutils/dbus/buildlink3.mk"
 .include "../../x11/qt4-libs/buildlink3.mk"
 .include "../../x11/qt4-tools/buildlink3.mk"
 .include "../../x11/qt4-qdbus/buildlink3.mk"
+.include "../../mk/fam.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.21 2012/10/28 06:30:06 asau Exp $
+# $NetBSD: Makefile,v 1.24 2013/04/06 21:07:36 rodent Exp $
 
 DISTNAME=	mod_auth_ldap3.05
 PKGNAME=	ap2-auth-ldap-3.05
-PKGREVISION=	6
+PKGREVISION=	8
 CATEGORIES=	www databases
 MASTER_SITES=	http://www.muquit.com/muquit/software/mod_auth_ldap/
 
@@ -29,8 +29,8 @@ CONFIGURE_ARGS+=	--with-apache-ver=2
 SUBST_CLASSES+=		paths
 SUBST_STAGE.paths=	post-patch
 SUBST_FILES.paths=	configure
-SUBST_SED.paths=	-e "s|@@HASHLIB@@|${PREFIX}/include|g" \
-			-e "s|@@HASHINC@@|${PREFIX}/lib|g"
+SUBST_SED.paths=	-e "s|@@HASHLIB@@|${PREFIX}/include|g"
+SUBST_SED.paths+=	-e "s|@@HASHINC@@|${PREFIX}/lib|g"
 SUBST_MESSAGE.paths=	Fixing hardcoded paths.
 
 INSTALLATION_DIRS+=	lib/httpd

@@ -1,22 +1,21 @@
-# $NetBSD: Makefile,v 1.29 2012/10/23 19:51:36 asau Exp $
+# $NetBSD: Makefile,v 1.33 2013/04/11 19:57:52 joerg Exp $
 #
 
-VERSION=		3.1.4
-DISTNAME=		xen-${VERSION}
-PKGNAME=		xentools3-${VERSION}
-PKGREVISION=		11
-CATEGORIES=		sysutils
+VERSION=	3.1.4
+DISTNAME=	xen-${VERSION}
+PKGNAME=	xentools3-${VERSION}
+PKGREVISION=	14
+CATEGORIES=	sysutils
 MASTER_SITES=	http://bits.xensource.com/oss-xen/release/${VERSION}/
-EXTRACT_SUFX=		.tar.gz
 
-MAINTAINER=		bouyer@NetBSD.org
-HOMEPAGE=		http://xen.org/
-COMMENT=		Userland Tools for Xen
+MAINTAINER=	bouyer@NetBSD.org
+HOMEPAGE=	http://xen.org/
+COMMENT=	Userland Tools for Xen
 
-#DEPENDS+=		${PYPKGPREFIX}-twisted-[0-9]*:../../net/py-twisted
-DEPENDS+=		${PYPKGPREFIX}-readline-[0-9]*:../../devel/py-readline
+#DEPENDS+=	${PYPKGPREFIX}-twisted-[0-9]*:../../net/py-twisted
+DEPENDS+=	${PYPKGPREFIX}-readline-[0-9]*:../../devel/py-readline
 
-MAKE_JOBS_SAFE=		no
+MAKE_JOBS_SAFE=	no
 
 PKG_SYSCONFSUBDIR=	xen
 
@@ -137,6 +136,16 @@ CONF_FILES_PERMS+=	${EGDIR}/${s} ${PKG_SYSCONFDIR}/scripts/${s}	\
 .endfor
 
 OWN_DIRS=		${PKG_SYSCONFDIR}/scripts /var/log/xen
+
+.include "../../mk/compiler.mk"
+.if !empty(PKGSRC_COMPILER:Mclang)
+EXTRA_HOSTCFLAGS+=	-Wno-error=ignored-attributes -Wno-error=format-security
+EXTRA_CFLAGS+=	-Wno-error=ignored-attributes -no-integrated-as \
+		-Wno-error=tautological-compare -Wno-error=null-dereference \
+		-Wno-error=self-assign -Wno-error=sometimes-uninitialized
+.endif
+
+MAKE_ENV+=	EXTRA_HOSTCFLAGS=${EXTRA_HOSTCFLAGS:Q} EXTRA_CFLAGS=${EXTRA_CFLAGS:Q}
 
 pre-build:
 .if !exists(/usr/include/xen/xenio.h)

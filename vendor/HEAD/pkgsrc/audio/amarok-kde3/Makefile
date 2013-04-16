@@ -1,12 +1,11 @@
-# $NetBSD: Makefile,v 1.29 2012/10/08 23:01:07 adam Exp $
+# $NetBSD: Makefile,v 1.37 2013/03/16 06:20:46 obache Exp $
 
 DISTNAME=		amarok-${VERSION}
 VERSION=		1.4.10
-PKGREVISION=		28
+PKGREVISION=		35
 CATEGORIES=		audio kde
 MASTER_SITES=		${MASTER_SITE_KDE:=amarok/${VERSION}/src/}
 EXTRACT_SUFX=		.tar.bz2
-EXTRACT_USING=		gtar
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://amarok.kde.org/

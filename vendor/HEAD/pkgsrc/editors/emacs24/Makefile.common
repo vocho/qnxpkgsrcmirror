@@ -1,9 +1,10 @@
-# $NetBSD: Makefile.common,v 1.2 2012/10/03 11:43:33 asau Exp $
+# $NetBSD: Makefile.common,v 1.5 2013/03/24 15:15:09 dholland Exp $
 #
 # used by editors/emacs24/Makefile
 # used by editors/emacs24-nox11/Makefile
 
 DISTNAME=	emacs-${EMACS_VERSION}
+PKGNAME?=	${DISTNAME:S/emacs/emacs24/}
 CATEGORIES=	editors
 MASTER_SITES=	${MASTER_SITE_GNU:=emacs/}
 
@@ -15,11 +16,9 @@ LICENSE=	gnu-gpl-v3
 WRKSRC=		${WRKDIR}/${DISTNAME:S/b$//}
 MAKE_JOBS_SAFE=		no
 
-CONFLICTS+=	emacs-nox11-[0-9]*
-
 GNU_CONFIGURE=	yes
 INFO_FILES=	yes
-USE_TOOLS+=	gmake makeinfo gzip
+USE_TOOLS+=	autoconf automake gmake makeinfo gzip
 
 CONFIGURE_ARGS+=	--srcdir=${WRKSRC}
 CONFIGURE_ARGS+=	--localstatedir=${VARBASE}
@@ -72,7 +71,6 @@ CPPFLAGS+=	-DTERMINFO
 .include "../../mk/oss.buildlink3.mk"
 
 post-extract:
-	cp ${.CURDIR}/../../editors/emacs/files/site-init.el ${WRKSRC}/lisp
-	cp ${FILESDIR}/dragonfly.h ${WRKSRC}/src/s
+	cp ${.CURDIR}/../../editors/emacs23/files/site-init.el ${WRKSRC}/lisp
 	${CHMOD} -R go-w ${WRKSRC}
 	${CHMOD} ugo+rx ${WRKSRC}/leim/ja-dic ${WRKSRC}/leim/quail

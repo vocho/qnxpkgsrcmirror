@@ -1,24 +1,24 @@
-# $NetBSD: Makefile,v 1.6 2012/11/20 23:15:08 jperkin Exp $
+# $NetBSD: Makefile,v 1.12 2013/04/08 11:17:15 rodent Exp $
 
-GCC_PKGNAME=		gcc47
-.include		"../../lang/${GCC_PKGNAME}/version.mk"
+GCC_PKGNAME=	gcc47
+.include	"../../lang/${GCC_PKGNAME}/version.mk"
 
-DISTNAME=		gcc-${GCC_DIST_VERSION}
-PKGNAME=		${GCC_PKGNAME}-libs-${GCC_DIST_VERSION}
+DISTNAME=	gcc-${GCC_DIST_VERSION}
+PKGNAME=	${GCC_PKGNAME}-libs-${GCC_DIST_VERSION}
 ## The PKGREVISION of this package needs to be at least 1 more than the
-## PKGREVISION of the lang/gcc47 package so that with the dependence pattern 
+## PKGREVISION of the lang/gcc47 package so that with the dependence pattern
 ## '{gcc47,gcc47-libs}>=4.7.*' pkg_all will choose gcc47-libs over gcc47.
-PKGREVISION=		7
-CATEGORIES=		lang
-MASTER_SITES=		# empty
-DISTFILES=		# empty
+PKGREVISION=	4
+CATEGORIES=	lang
+MASTER_SITES=	# empty
+DISTFILES=	# empty
 
-MAINTAINER=		sbd@NetBSD.org
-HOMEPAGE=		http://gcc.gnu.org/
-COMMENT=		The GNU Compiler Collection (GCC) support shared libraries.
-LICENSE=		gnu-gpl-v2 AND gnu-gpl-v3 AND gnu-lgpl-v2 AND gnu-lgpl-v3
+MAINTAINER=	sbd@NetBSD.org
+HOMEPAGE=	http://gcc.gnu.org/
+COMMENT=	The GNU Compiler Collection (GCC) support shared libraries
+LICENSE=	gnu-gpl-v2 AND gnu-gpl-v3 AND gnu-lgpl-v2 AND gnu-lgpl-v3
 
-USE_TOOLS+=		pax
+USE_TOOLS+=	pax
 
 NO_BUILD=		yes
 

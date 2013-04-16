@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.4 2012/10/02 21:25:48 asau Exp $
+# $NetBSD: Makefile,v 1.7 2013/02/09 11:19:16 adam Exp $
 
 PKGNAME=	${DISTNAME:C/-/91-server-/}
 COMMENT=	PostgreSQL database server programs
@@ -75,9 +75,3 @@ post-wrapper:
 .endif
 
 .include "../../mk/bsd.pkg.mk"
-
-# Because RCD_SCRIPTS_EXAMPLEDIR isn't configurable (yet?),
-# we override it here:
-.if !empty(PG_SUBPREFIX)
-RCD_SCRIPTS_EXAMPLEDIR:=	$(PG_SUBPREFIX:/=)/$(RCD_SCRIPTS_EXAMPLEDIR)
-.endif

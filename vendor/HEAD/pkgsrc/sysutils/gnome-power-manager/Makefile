@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.34 2012/10/23 19:51:04 asau Exp $
+# $NetBSD: Makefile,v 1.38 2013/02/16 11:24:28 wiz Exp $
 #
 
 DISTNAME=	gnome-power-manager-2.24.4
-PKGREVISION=	24
+PKGREVISION=	28
 CATEGORIES=	sysutils gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gnome-power-manager/2.24/}
 EXTRACT_SUFX=	.tar.bz2

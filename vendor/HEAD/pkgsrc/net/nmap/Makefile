@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.98 2012/10/30 23:34:38 pettai Exp $
+# $NetBSD: Makefile,v 1.104 2013/04/07 10:11:54 abs Exp $
 
 DISTNAME=	nmap-6.01
-PKGREVISION=	4
+PKGREVISION=	9
 CATEGORIES=	net security
 MASTER_SITES=	http://nmap.org/dist/
 EXTRACT_SUFX=	.tar.bz2
@@ -61,12 +61,6 @@ CFLAGS.SunOS+=	-D__FUNCTION__=__FILE__
 pre-build:
 	${ECHO} "# ignored" > ${WRKSRC}/makefile.dep
 .endif
-
-SUBST_CLASSES+=		paths
-SUBST_STAGE.paths=	post-patch
-SUBST_FILES.paths=	ndiff/setup.py
-SUBST_SED.paths=	-e "s|@@PKGMANDIR@@|${PKGMANDIR}|g"
-SUBST_MESSAGE.paths=	Fixing paths.
 
 post-build:
 	${CP} ${PKGDIR}/PLIST ${WRKDIR}/.PLIST_SRC

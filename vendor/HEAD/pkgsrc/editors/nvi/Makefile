@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.44 2012/10/03 11:43:39 asau Exp $
+# $NetBSD: Makefile,v 1.46 2013/02/08 23:09:18 christos Exp $
 
 DISTNAME=	nvi-1.81.6
-PKGREVISION=	7
+PKGREVISION=	8
 CATEGORIES=	editors
 MASTER_SITES=	${HOMEPAGE:Q}
 EXTRACT_SUFX=	.tar.bz2
@@ -12,7 +12,7 @@ COMMENT=	Berkeley nvi with additional features
 
 .include "options.mk"
 
-WRKSRC=			${WRKDIR}/${DISTNAME}/build.unix
+CONFIGURE_DIRS=		build.unix
 USE_LIBTOOL=		yes
 USE_TOOLS+=		sh aclocal automake autoheader autoconf
 GNU_CONFIGURE=		yes
@@ -48,7 +48,7 @@ BUILDLINK_TRANSFORM+=	l:db:${BDB_TYPE}
 .endif
 
 pre-configure:
-	${RUN} cd ${WRKSRC}/../dist && \
+	${RUN} cd ${WRKSRC}/dist && \
 	${CHMOD} 755 configure && \
 	aclocal -I m4 && autoheader && autoconf
 

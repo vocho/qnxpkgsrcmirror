@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.10 2012/10/23 19:51:08 asau Exp $
+# $NetBSD: Makefile,v 1.12 2013/03/02 10:44:43 tron Exp $
 #
 
 DISTNAME=		ipmitool-1.8.11
-PKGREVISION=		1
+PKGREVISION=		2
 CATEGORIES=		sysutils
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=ipmitool/}
 
-MAINTAINER=		heinz@NetBSD.org
+MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://ipmitool.sourceforge.net/
 COMMENT=		Command-line utility for managing IPMI devices
 

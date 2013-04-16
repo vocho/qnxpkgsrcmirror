@@ -1,9 +1,8 @@
-# $NetBSD: Makefile,v 1.7 2012/10/08 23:02:05 adam Exp $
+# $NetBSD: Makefile,v 1.12 2013/04/06 03:45:18 rodent Exp $
 
 DISTNAME=	kalzium-${_KDE_VERSION}
-PKGREVISION=	4
 CATEGORIES=	misc
-COMMENT=	periodic table of elements
+COMMENT=	Periodic table of elements
 
 .include "../../meta-pkgs/kde4/Makefile.kde4"
 
