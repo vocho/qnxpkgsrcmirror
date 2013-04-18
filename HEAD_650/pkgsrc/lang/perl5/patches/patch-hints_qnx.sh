@@ -1,11 +1,13 @@
 $NetBSD$
 
---- hints/qnx.sh.orig	2012-10-11 18:20:45.000000000 +0000
+--- hints/qnx.sh.orig	2013-03-04 15:16:22.000000000 +0000
 +++ hints/qnx.sh
-@@ -265,4 +265,25 @@ else
+@@ -265,4 +265,27 @@ else
    # Some routines are only in our static libc.
    # eg crypt() getlogin() getlogin_r()
    usenm=false
++
++  loclibpth="/usr/local/lib ${prefix}/lib"
 +
 +  d_getprotoent_r="$undef"
 +  d_getprotobyname_r="$undef"

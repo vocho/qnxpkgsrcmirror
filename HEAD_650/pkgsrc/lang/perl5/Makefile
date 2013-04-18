@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.191 2012/11/07 03:58:00 sbd Exp $
+# $NetBSD: Makefile,v 1.199 2013/04/03 09:28:55 adam Exp $
 
 .include "license.mk"
 .include "Makefile.common"
@@ -40,6 +40,13 @@ PERL5_API_VERS_cmd=	\
 
 .include "dirs.mk"
 
+#
+# ld='g++' in hints/cygwin.sh
+#
+.if ${OPSYS} == "Cygwin"
+USE_LANGUAGES=	c c++
+.endif
+
 .include "../../mk/compiler.mk"
 
 HAS_CONFIGURE=		yes
@@ -75,12 +82,13 @@ SUBST_VARS.policysh+=	PKGMANDIR
 SUBST_VARS.policysh+=	LOCALBASE
 SUBST_VARS.policysh+=	PTHREAD_LDFLAGS
 
-.if ${OPSYS} == "Darwin"
+.if ${OPSYS} == "Darwin" || ${OPSYS} == "Cygwin"
 #
 # The Perl build attempts to work around case-insensitivity problems on
 # HFS filesystems by using GNUmakefiles, so we need to use GNU make.
 #
 USE_TOOLS+=	gmake
+MAKE_FILE=	GNUmakefile
 .endif
 
 #
@@ -109,6 +117,7 @@ SUBST_VARS.policysh+=	FALSE
 # dependencies.  If this isn't defined, then use the perl defaults for the
 # particular operating system.
 #
+LIBSWANTED.Cygwin=	m crypt dl
 LIBSWANTED.Darwin=	m c
 LIBSWANTED.DragonFly=	m crypt
 LIBSWANTED.FreeBSD=	m crypt
@@ -121,7 +130,7 @@ LIBSWANTED.NetBSD=	m crypt
 LIBSWANTED.OpenBSD=	m crypt
 LIBSWANTED.SunOS=	m crypt dl socket nsl
 LIBSWANTED.AIX=		m crypt dl socket nsl bind c
-LIBSWANTED.QNX=		m c socket
+LIBSWANTED.QNX=		m c socket s5ipc
 LIBSWANTED=		${LIBSWANTED.${OPSYS}}
 SUBST_VARS.policysh+=	LIBSWANTED
 
@@ -129,6 +138,7 @@ SUBST_VARS.policysh+=	LIBSWANTED
 # If this isn't defined, then use the perl defaults for the particular
 # operating system.
 #
+SYSLIBPATH.Cygwin=	/usr/lib
 SYSLIBPATH.Darwin=	/usr/lib
 SYSLIBPATH.DragonFly=	/usr/lib
 SYSLIBPATH.FreeBSD=	/usr/lib
@@ -243,4 +253,7 @@ perl5-post-install:
 .endif
 
 .include "packlist.mk"
+.if ${OPSYS} == "QNX"
+.include "../../sysutils/s5ipc/buildlink3.mk"
+.endif
 .include "../../mk/bsd.pkg.mk"
