@@ -91,6 +91,10 @@ pre-configure:
 .include "../../textproc/libxml2/buildlink3.mk"
 .include "../../textproc/xmlcatmgr/buildlink3.mk"
 .include "../../sysutils/dbus/buildlink3.mk"
+.if ${OPSYS} == "QNX" && !empty(OS_VERSION:M[0-6].*)
+LIBS+= -lgetopt
+.include "../../devel/libgetopt/buildlink3.mk"
+.endif
 .include "../../sysutils/dbus-glib/buildlink3.mk"
 .include "../../mk/pam.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"
