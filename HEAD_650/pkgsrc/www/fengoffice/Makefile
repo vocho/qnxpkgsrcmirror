@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.19 2012/10/28 06:30:15 asau Exp $
+# $NetBSD: Makefile,v 1.25 2013/04/06 12:09:25 taca Exp $
 #
 
-DISTNAME=	fengoffice_2.2.0
+DISTNAME=	fengoffice_2.2.4.1
 PKGNAME=	${DISTNAME:S/_/-/:C/.rc$/rc1/}
 CATEGORIES=	www
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=opengoo/}
@@ -21,6 +21,7 @@ DEPENDS+=	${PHP_PKG_PREFIX}-gd>=5.1.0:../../graphics/php-gd
 DEPENDS+=	${PHP_PKG_PREFIX}-dom>=5.1.0:../../textproc/php-dom
 DEPENDS+=	${PHP_PKG_PREFIX}-imap>=5.1.0:../../mail/php-imap
 
+EXTRACT_DIR=	${WRKDIR}/fengoffice
 WRKSRC=		${WRKDIR}/fengoffice
 USE_TOOLS=	pax
 NO_BUILD=	yes
@@ -43,6 +44,7 @@ PRINT_PLIST_AWK+= \
 .include "../../mk/bsd.prefs.mk"
 
 FO_DIR?=	share/fengoffice
+INSTALLATION_DIRS=	${FO_DIR}
 
 post-extract:
 	cd ${WRKSRC}; ${FIND} . -type f -exec ${CHMOD} -x {} \;

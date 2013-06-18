@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.18 2012/10/29 05:06:41 asau Exp $
+# $NetBSD: Makefile,v 1.20 2013/04/06 21:07:36 rodent Exp $
 
 .include "../../lang/ocaml/Makefile.common"
 DISTINFO_FILE= ${PKGDIR}/../../lang/ocaml/distinfo
@@ -12,7 +12,7 @@ CONFIGURE_ARGS+=	-x11include ${X11BASE}/include
 CONFIGURE_ARGS+=	-x11lib ${X11BASE}/lib
 CONFIGURE_ARGS+=	-no-tk
 
-BUILD_DIRS=		${WRKSRC}/otherlibs/graph
+BUILD_DIRS=		otherlibs/graph
 BUILD_TARGET=		all
 INSTALL_TARGET=		install
 
@@ -58,7 +58,8 @@ SUBST_MESSAGE.mklib=	Fixing MKLIB in otherlibs/Makefile.shared.
 SUBST_CLASSES+=		comp
 SUBST_STAGE.comp=	post-patch
 SUBST_FILES.comp=	otherlibs/Makefile
-SUBST_SED.comp=		-e 's,^CAMLC=.*,CAMLC=ocamlc,g' -e 's,^CAMLOPT=.*,CAMLOPT=ocamlopt,g'
+SUBST_SED.comp=		-e 's,^CAMLC=.*,CAMLC=ocamlc,g'
+SUBST_SED.comp+=	-e 's,^CAMLOPT=.*,CAMLOPT=ocamlopt,g'
 SUBST_MESSAGE.comp=	Fixing CAMLC OCAMLOPT in otherlibs/Makefile.
 
 INSTALLATION_DIRS+=	lib/ocaml/stublibs

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.53 2012/10/03 21:56:18 wiz Exp $
+# $NetBSD: Makefile,v 1.55 2013/02/06 23:22:37 jperkin Exp $
 
 DISTNAME=		otp_src_${DIST_VERSION_MAJOR}${DIST_VERSION_MINOR:D-${DIST_VERSION_MINOR}}
 PKGNAME=		erlang-${ERLANG_VERSION}
@@ -12,6 +12,7 @@ COMMENT=		Concurrent functional programming language
 LICENSE=		erlang-public-license
 
 DIST_SUBDIR=		erlang
+WRKSRC=			$(WRKDIR)/otp_src_${DIST_VERSION_MAJOR}
 
 MAKE_JOBS_SAFE=		no
 

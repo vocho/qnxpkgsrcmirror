@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.8 2012/10/08 12:19:27 asau Exp $
+# $NetBSD: Makefile,v 1.10 2013/04/13 07:55:06 ghen Exp $
 
 DISTNAME=		policyd-1.82
-PKGREVISION=		3
+PKGREVISION=		4
 CATEGORIES=		mail
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=policyd/}
 
-MAINTAINER=		ghen@NetBSD.org
+MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://www.policyd.org/
 COMMENT=		Policy daemon for Postfix with greylisting and throttling
 

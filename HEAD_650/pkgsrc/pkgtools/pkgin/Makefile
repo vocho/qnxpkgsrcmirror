@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.29 2012/10/02 11:28:42 jperkin Exp $
+# $NetBSD: Makefile,v 1.35 2013/03/25 10:09:04 sbd Exp $
 #
 
-DISTNAME=		pkgin-0.6.2.2
-PKGREVISION=		2
+DISTNAME=		pkgin-0.6.3.1.1
 CATEGORIES=		pkgtools
 MASTER_SITES=		ftp://ftp.NetBSD.org/pub/NetBSD/misc/imil/
 
@@ -34,11 +33,19 @@ GNU_CONFIGURE=		yes
 USE_FEATURES=		nbcompat
 USE_TOOLS+=		nroff
 
+.include "../../mk/bsd.prefs.mk"
+
+.if ${OPSYS} == "NetBSD"
+SUBST_CLASSES+=		osrel
+SUBST_STAGE.osrel=	pre-configure
+SUBST_MESSAGE.osrel=	Adjusting repository OS release
+SUBST_FILES.osrel=	REPOSITORIES
+SUBST_SED.osrel=	-e "s|@OSREL@|${OS_VERSION:C/_.*//}|"
+.endif
+
 MAKE_ENV+=		MACHINE_ARCH=${MACHINE_ARCH}
 
 DEPENDS+=		pkg_install>=20110215:../../pkgtools/pkg_install
-
-.include "../../mk/bsd.prefs.mk"
 
 # those have official repositories
 .if ${OPSYS} == "NetBSD" || ${OPSYS} == "DragonFly" || ${OPSYS} == "Minix"

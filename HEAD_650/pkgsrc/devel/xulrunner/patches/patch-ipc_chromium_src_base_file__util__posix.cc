@@ -1,6 +1,6 @@
-$NetBSD: patch-ipc_chromium_src_base_file__util__posix.cc,v 1.5 2012/08/28 23:27:10 ryoon Exp $
+$NetBSD$
 
---- ipc/chromium/src/base/file_util_posix.cc.orig	2012-11-19 15:42:29.000000000 +0000
+--- ipc/chromium/src/base/file_util_posix.cc.orig	2013-04-10 03:01:45.000000000 +0000
 +++ ipc/chromium/src/base/file_util_posix.cc
 @@ -4,6 +4,9 @@
  
@@ -20,14 +20,5 @@ $NetBSD: patch-ipc_chromium_src_base_file__util__posix.cc,v 1.5 2012/08/28 23:27
  #include <sys/errno.h>
 +#endif
  #include <sys/mman.h>
+ #define _DARWIN_USE_64_BIT_INODE // Use 64-bit inode data structures
  #include <sys/stat.h>
- #include <sys/types.h>
-@@ -33,7 +38,7 @@
- #include "base/time.h"
- 
- // FreeBSD/OpenBSD lacks stat64, but its stat handles files >2GB just fine
--#if defined(OS_FREEBSD) || defined(OS_OPENBSD)
-+#ifndef HAVE_STAT64
- #define stat64 stat
- #endif
- 

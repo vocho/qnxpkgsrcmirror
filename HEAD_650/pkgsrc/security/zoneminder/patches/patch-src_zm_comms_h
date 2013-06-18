@@ -1,0 +1,26 @@
+$NetBSD: patch-src_zm_comms_h,v 1.2 2013/03/24 16:47:47 joerg Exp $
+
+extern "C" system headers.
+
+Include missing system headers for NetBSD.
+
+--- src/zm_comms.h.orig	2009-10-14 13:08:49.000000000 +0000
++++ src/zm_comms.h
+@@ -22,10 +22,17 @@
+ 
+ #include "zm_exception.h"
+ 
++extern "C" {
+ #include <unistd.h>
+ #include <netdb.h>
+ #include <errno.h>
++#include <sys/socket.h>
++#include <sys/uio.h>
+ #include <sys/un.h>
++#include <netinet/in.h>
++#include <stdlib.h>
++#include <string.h>
++}
+ 
+ #include <set>
+ #include <vector>

@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.29 2012/10/08 23:01:31 adam Exp $
+# $NetBSD: Makefile,v 1.31 2013/02/16 11:21:04 wiz Exp $
 #
 
 DISTNAME=		gens-rc3
 PKGNAME=		gens-2.12rc3
-PKGREVISION=		22
+PKGREVISION=		23
 CATEGORIES=		emulators
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=gens/}
 
-MAINTAINER=		dillo@NetBSD.org
+MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://gens.consolemul.com/
 COMMENT=		Sega Genesis emulator with Sega CD support
 

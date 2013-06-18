@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.6 2012/10/08 13:45:40 asau Exp $
+# $NetBSD: Makefile,v 1.11 2013/02/16 11:24:11 wiz Exp $
 
 DISTNAME=		kbibtex-0.2.1
-PKGREVISION=		16
+PKGREVISION=		20
 CATEGORIES=		print kde
 MASTER_SITES=		http://www.unix-ag.uni-kl.de/~fischer/kbibtex/download/
 EXTRACT_SUFX=		.tar.bz2
 
-MAINTAINER=		markd@NetBSD.org
+MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://www.unix-ag.uni-kl.de/~fischer/kbibtex/
 COMMENT=		BibTeX editor for KDE
 

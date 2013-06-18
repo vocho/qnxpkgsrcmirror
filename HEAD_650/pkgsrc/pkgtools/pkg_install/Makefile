@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.189 2012/10/15 21:27:08 joerg Exp $
+# $NetBSD: Makefile,v 1.194 2013/04/08 11:17:20 rodent Exp $
 
 # Notes to package maintainers:
 #
@@ -7,6 +7,7 @@
 # change in the pkg_* tools that pkgsrc relies on for proper operation.
 
 DISTNAME=		pkg_install-${VERSION}
+PKGREVISION=		1
 CATEGORIES=		pkgtools
 MASTER_SITES=		# empty
 DISTFILES=		# empty
@@ -41,7 +42,7 @@ CHECK_PERMS=		no
 # pkg_install.
 #
 # We also use the newly built pkg_{add,create,delete} since upgrading
-# from an older pkg_install might required features of the new program. 
+# from an older pkg_install might required features of the new program.
 #
 # Note that the definitions are only overriden for the phases that are
 # supposed to use them.  pkg_admin pmatch might be used when looking for
@@ -77,6 +78,12 @@ FILES_SUBST+=		PKG_DBDIR=${PKG_DBDIR:Q}			\
 			MKDIR=${MKDIR:Q}
 MESSAGE_SUBST+=		PKGVULNDIR=${PKG_DBDIR:Q}			\
 			EGDIR=${EGDIR:Q}
+
+.include "../../mk/compiler.mk"
+
+.if !empty(CC_VERSION:Mclang*)
+MAKE_FLAGS+=		ACTIVE_CC=clang
+.endif
 
 .include "../../mk/bsd.prefs.mk"
 
@@ -133,6 +140,10 @@ LIBS+=		${LIBARCHIVE_LIBS:sh}
 
 CONFIG_GUESS_OVERRIDE+=	${WRKDIR}/libarchive/build/autoconf/config.guess
 CONFIG_SUB_OVERRIDE+=	${WRKDIR}/libarchive/build/autoconf/config.sub
+
+.  if ${OPSYS} == "Cygwin"
+CPPFLAGS+=	-DLIBARCHIVE_STATIC
+.  endif
 
 .  if ${OPSYS} == "Darwin"
 # Make sure that the linker used our static library instead of the

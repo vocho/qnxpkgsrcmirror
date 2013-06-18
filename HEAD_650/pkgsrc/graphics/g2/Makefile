@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.37 2012/10/06 14:10:50 asau Exp $
+# $NetBSD: Makefile,v 1.39 2013/02/16 11:21:53 wiz Exp $
 
 DISTNAME=		g2-0.50
-PKGREVISION=		9
+PKGREVISION=		11
 CATEGORIES=		graphics
 MASTER_SITES=		http://g2.sourceforge.net/pub/
 

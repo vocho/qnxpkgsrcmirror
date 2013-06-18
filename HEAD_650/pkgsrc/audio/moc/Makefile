@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.18 2012/10/02 23:47:58 asau Exp $
+# $NetBSD: Makefile,v 1.21 2013/04/08 11:17:09 rodent Exp $
 
 DISTNAME=		moc-2.4.3
-PKGREVISION=		3
+PKGREVISION=		5
 CATEGORIES=		audio
 MASTER_SITES=		ftp://ftp.daper.net/pub/soft/moc/stable/
 EXTRACT_SUFX=		.tar.bz2
@@ -29,7 +29,7 @@ SUBST_MESSAGE.oss=	Fixing hardcoded audio device.
 
 .include "options.mk"
 ###
-### This target is [currently] for regenerating configure to add the 
+### This target is [currently] for regenerating configure to add the
 ### sched_get_priority_max check of librt.
 ###
 #USE_TOOLS+=		autoconf automake

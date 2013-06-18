@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.15 2012/11/30 07:19:44 wen Exp $
+# $NetBSD: Makefile,v 1.18 2013/03/31 13:51:48 wen Exp $
 
-DISTNAME=	moodle-2.3.3
+DISTNAME=	moodle-2.4.3
 CATEGORIES=	www
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=moodle/}
 EXTRACT_SUFX=	.tgz
@@ -48,12 +48,6 @@ OWN_DIRS_PERMS+=	${MOODLEDATADIR} ${APACHE_USER} ${APACHE_GROUP} 0750
 NO_CONFIGURE=		YES
 NO_BUILD=		YES
 
-SUBST_CLASSES+=		bash
-SUBST_MESSAGE.bash=	Replacing /bin/bash with ${SH}
-SUBST_STAGE.bash=	post-patch
-SUBST_FILES.bash=	lib/editor/tinymce/extra/tools/download_langs.sh
-SUBST_SED.bash=		-e "s,/bin/bash,${SH},g"
-
 SUBST_CLASSES+=		conf
 SUBST_MESSAGE.conf=	Fixing pathnames in configuration file.
 SUBST_STAGE.conf=	post-patch
@@ -70,14 +64,7 @@ SUBST_FILES.php+=	admin/cli/install.php admin/cli/install_database.php admin/cli
 SUBST_FILES.php+=	admin/mailout-debugger.php admin/process_email.php
 SUBST_FILES.php+=	auth/ldap/cli/sync_users.php auth/cas/cli/sync_users.php auth/db/cli/sync_users.php
 SUBST_FILES.php+=	enrol/ldap/cli/sync.php enrol/database/cli/sync.php enrol/category/cli/sync.php
-SUBST_FILES.php+=	mod/chat/chatd.php
 SUBST_SED.php=		-e "s,/usr/bin/php,${PREFIX}/bin/php,g"
-
-SUBST_CLASSES+=		php2
-SUBST_MESSAGE.php2=	Fixing the path of php.
-SUBST_STAGE.php2=	post-patch
-SUBST_FILES.php2+=	lib/spikephpcoverage/src/cli/instrument.php
-SUBST_SED.php2=		-e "s,/bin/php,${PREFIX}/bin/php,g"
 
 SUBST_CLASSES+=		perl
 SUBST_MESSAGE.perl=	Fixing the path of perl.
@@ -89,7 +76,6 @@ WRKSRC=			${WRKDIR}/moodle
 
 post-extract:
 	${CP} ${FILESDIR}/moodle.conf ${WRKDIR}/moodle.conf
-	${RM} ${WRKSRC}/.gitignore
 
 do-install:
 	cd ${WRKSRC} && ${FIND} . -type d -exec ${INSTALL_DATA_DIR} \

@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.39 2012/11/02 22:28:54 joerg Exp $
+# $NetBSD: Makefile,v 1.45 2013/04/06 13:24:19 rodent Exp $
 
 DISTNAME=	openjdk-7-fcs-src-b147-27_jun_2011
 PKGNAME=	openjdk7-1.7.0.147.20110811
-PKGREVISION=	6
+PKGREVISION=	9
 CATEGORIES=	lang
 MASTER_SITES=	${MASTER_SITE_LOCAL:=openjdk7/}
 EXTRACT_SUFX=	.tar.bz2
 
-OWNER=		tnn@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://openjdk.java.net/
 COMMENT=	Open-source implementation of the Java Platform, Standard Edition
 LICENSE=	gnu-gpl-v2
@@ -128,11 +128,11 @@ post-extract:
 	printf '#!/bin/sh\nexec %s/bootstrap/bin/java-real -mx256m "$$@"\n' \
 	    ${WRKDIR} > ${WRKDIR}/bootstrap/bin/java
 	chmod a+x ${WRKDIR}/bootstrap/bin/java
-.for T in idlj jar javac javah javap native2ascii rmic
-	mv ${WRKDIR}/bootstrap/bin/$T ${WRKDIR}/bootstrap/bin/$T-real
-	printf '#!/bin/sh\n\nexec %s/bootstrap/bin/$T-real -J-mx256m "$$@"\n' \
-	    ${WRKDIR} > ${WRKDIR}/bootstrap/bin/$T
-	chmod a+x ${WRKDIR}/bootstrap/bin/$T
+.for t in idlj jar javac javah javap native2ascii rmic
+	mv ${WRKDIR}/bootstrap/bin/${t} ${WRKDIR}/bootstrap/bin/${t}-real
+	printf '#!/bin/sh\n\nexec %s/bootstrap/bin/${t}-real -J-mx256m "$$@"\n' \
+	    ${WRKDIR} > ${WRKDIR}/bootstrap/bin/${t}
+	chmod a+x ${WRKDIR}/bootstrap/bin/${t}
 .endfor
 
 do-build: ${WRKDIR}/stage3-done

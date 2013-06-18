@@ -1,4 +1,4 @@
-$NetBSD$
+$NetBSD: patch-configure_in,v 1.2 2012/04/08 05:11:13 dholland Exp $
 
 - support netbsd-6 libquota API.
 

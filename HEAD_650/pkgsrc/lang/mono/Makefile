@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.128 2012/10/21 21:21:40 wiz Exp $
+# $NetBSD: Makefile,v 1.133 2013/04/01 12:12:47 joerg Exp $
 
 DISTNAME=	mono-2.10.9
+PKGREVISION=	2
 CATEGORIES=	lang
 MASTER_SITES=	http://download.mono-project.com/sources/mono/
 EXTRACT_SUFX=	.tar.bz2
@@ -19,16 +20,17 @@ CONFLICTS=	pnet-[0-9]* mcsim-[0-9]* lc-[0-9]*
 
 ALL_ENV+=		MONO_SHARED_DIR=${WRKDIR:Q}
 
-USE_TOOLS+=		bison gmake gtar perl:run pkg-config bash:run msgfmt
+USE_TOOLS+=		bison gmake perl:run pkg-config bash:run msgfmt
 USE_LIBTOOL=		yes
 USE_LANGUAGES+=		c c++
-EXTRACT_USING=		gtar
+EXTRACT_USING=		bsdtar
 
 GNU_CONFIGURE=		yes
 CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR:Q}
 CONFIGURE_ARGS+=	--with-icu=yes
 CONFIGURE_ARGS+=	--with-preview=yes
 CONFIGURE_ARGS+=	--with-libgdiplus=installed
+CONFIGURE_ARGS+=	--disable-dtrace
 
 .include "options.mk"
 
@@ -141,6 +143,8 @@ SUBST_STAGE.fix-libx11=		pre-configure
 SUBST_MESSAGE.fix-libx11=	Fixing libX11 search path configuration
 SUBST_FILES.fix-libx11=		configure
 SUBST_SED.fix-libx11=		-e 's,@X11BASE@,${X11BASE},g'
+
+CPPFLAGS.NetBSD+=	-D_KMEMUSER
 
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../lang/python/application.mk"

@@ -1,4 +1,4 @@
-$NetBSD: distinfo,v 1.6 2011/11/27 11:17:19 marino Exp $
+$NetBSD: distinfo,v 1.8 2013/03/24 16:42:10 joerg Exp $
 
 SHA1 (Preferences-1.2.0.tar.bz2) = eb6b727c4f9eac2fd55237b3a3dc95e00bf748e9
 RMD160 (Preferences-1.2.0.tar.bz2) = b94629b8a8d44cbbcf7c0a8bff775d89b6865bed

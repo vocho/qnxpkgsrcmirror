@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.5 2012/07/29 16:02:45 fhajny Exp $
+# $NetBSD: Makefile,v 1.7 2013/04/06 15:46:35 rodent Exp $
 #
 
 PKGNAME=	poco-data-mysql-${POCO_VERSION}
+PKGREVISION=	1
 CATEGORIES=	databases
 
 COMMENT=	POCO C++ MySQL RDBMS Accessor libraries
@@ -16,7 +17,7 @@ CONFIGURE_ARGS+=	--no-samples
 
 USE_TOOLS+=	pax
 
-BUILD_DIRS=		${WRKSRC}/Data/MySQL
+BUILD_DIRS=		Data/MySQL
 INSTALLATION_DIRS=	include/Poco/Data/MySQL lib
 
 do-install:

@@ -1,14 +1,15 @@
-# $NetBSD: Makefile,v 1.39 2012/10/31 11:17:28 asau Exp $
+# $NetBSD: Makefile,v 1.41 2013/03/16 07:21:20 obache Exp $
 
-DISTNAME=	mantisbt-1.1.7
+DISTNAME=	mantisbt-1.2.12
 PKGNAME=	${DISTNAME:S/mantisbt/mantis/}
-PKGREVISION=	2
+PKGREVISION=	1
 CATEGORIES=	devel www
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=mantisbt/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.mantisbt.org/
 COMMENT=	PHP/MySQL/web based bugtracking system
+LICENSE=	gnu-gpl-v2
 
 DEPENDS+=	${APACHE_PKG_PREFIX}-${PHP_PKG_PREFIX}>=4.0.6:../../www/ap-php
 DEPENDS+=	${PHP_PKG_PREFIX}-mysql>=4.0.6:../../databases/php-mysql
@@ -59,10 +60,10 @@ do-install:
 	${INSTALL_DATA} ${WRKSRC}/doc/INSTALL ${DESTDIR}${PREFIX}/share/doc/mantis
 	${MV} ${WRKSRC}/config_inc.php.sample ${WRKSRC}/config_inc.php
 
-. 	for f in ${MANTIS_EG}
+.for f in ${MANTIS_EG}
 		${INSTALL_DATA} ${WRKSRC}/${f} ${DESTDIR}${EGDIR}
 		${RM} ${WRKSRC}/${f}
-.	endfor
+.endfor
 
 	cd ${WRKSRC} && ${FIND} . -name .cvsignore -print | ${XARGS} ${RM} -f
 	cd ${WRKSRC} && pax -rwpppm . ${DESTDIR}${MANTIS_HOME}

@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.4 2012/10/06 04:31:03 obache Exp $
+# $NetBSD: Makefile,v 1.6 2013/04/08 11:17:13 rodent Exp $
 
 DISTNAME=	suse_gtk2-${SUSE_VERSION}
-PKGREVISION=	3
+PKGREVISION=	4
 CATEGORIES=	emulators
 RPMPKGS+=	libcairo2-1.10.2-14.1.3.${SUSE_ARCH}
-RPMUPDPKGS+=	dbus-1-1.5.8-2.6.1.${SUSE_ARCH}
+RPMUPDPKGS+=	dbus-1-1.5.8-2.10.1.${SUSE_ARCH}
 RPMPKGS+=	dbus-1-glib-0.98-2.1.2.${SUSE_ARCH}
 RPMPKGS+=	gconf2-3.2.0-2.2.2.${SUSE_ARCH}
 RPMUPDPKGS+=	gdk-pixbuf-query-loaders-2.24.0-2.4.1.${SUSE_ARCH}
@@ -25,7 +25,7 @@ RPMUPDPKGS+=	libgtk-2_0-0-2.24.7-2.5.1.${SUSE_ARCH}
 RPMUPDPKGS+=	libjasper1-1.900.1-149.3.1.${SUSE_ARCH}
 RPMPKGS+=	libjson0-0.9-5.1.2.${SUSE_ARCH}
 RPMPKGS+=	libpulse0-1.1-1.2.${SUSE_ARCH}
-RPMPKGS+=	orbit2-2.14.19-5.1.3.${SUSE_ARCH} 
+RPMPKGS+=	orbit2-2.14.19-5.1.3.${SUSE_ARCH}
 RPMPKGS+=	shared-mime-info-0.91-3.1.2.${SUSE_ARCH}
 RPMPKGS+=	libpango-1_0-0-1.29.4-2.1.3.${SUSE_ARCH}
 

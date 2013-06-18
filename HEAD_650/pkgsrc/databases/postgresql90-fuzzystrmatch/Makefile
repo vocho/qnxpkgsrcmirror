@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.6 2012/10/02 21:25:45 asau Exp $
+# $NetBSD: Makefile,v 1.9 2013/02/09 11:19:13 adam Exp $
 
 PKGNAME=	${DISTNAME:C/-/90-fuzzystrmatch-/}
 COMMENT=	PostgreSQL fuzzystrmatch contribution

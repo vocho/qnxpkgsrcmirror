@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.5 2012/10/08 12:19:11 asau Exp $
+# $NetBSD: Makefile,v 1.7 2013/04/06 14:58:20 rodent Exp $
 #
 
-DISTNAME=	fml-7.98.15-${FML_STAMP}
-PKGREVISION=	2
+DISTNAME=	fml-7.98.18-${FML_STAMP}
 CATEGORIES=	mail
 MASTER_SITES=	ftp://ftp.fml.org/pub/fml8/
 
@@ -14,7 +13,7 @@ LICENSE=	gnu-gpl-v2 OR artistic
 USERGROUP_PHASE=	pre-install
 
 # development version
-FML_STAMP=	20100306
+FML_STAMP=	20121230
 
 GNU_CONFIGURE=	yes
 USE_TOOLS=	perl:run
@@ -62,7 +61,7 @@ CHECK_INTERPRETER_SKIP+= lib/fml/${FML_STAMP}/* \
 			libexec/fml/${FML_STAMP}/loader.in
 
 pre-configure:
-	echo ${FML_STAMP} > ${WRKSRC}/.version
+	${ECHO} ${FML_STAMP} > ${WRKSRC}/.version
 
 post-install:
 .for f in ${CONFS}

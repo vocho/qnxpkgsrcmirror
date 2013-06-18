@@ -1,15 +1,15 @@
-# $NetBSD: Makefile,v 1.40 2012/10/24 15:48:33 joerg Exp $
+# $NetBSD: Makefile,v 1.43 2013/04/06 03:45:29 rodent Exp $
 
-DISTNAME=		wxhaskell-src-0.9.4
-PKGNAME=		${DISTNAME:S/-src//}
-PKGREVISION=		24
-CATEGORIES=		x11
-MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=wxhaskell/}
-EXTRACT_SUFX=		.zip
+DISTNAME=	wxhaskell-src-0.9.4
+PKGNAME=	${DISTNAME:S/-src//}
+PKGREVISION=	26
+CATEGORIES=	x11
+MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=wxhaskell/}
+EXTRACT_SUFX=	.zip
 
-MAINTAINER=		pkgsrc-users@NetBSD.org
-HOMEPAGE=		http://haskell.org/haskellwiki/WxHaskell
-COMMENT=		wxGTK binding for Haskell
+MAINTAINER=	pkgsrc-users@NetBSD.org
+HOMEPAGE=	http://haskell.org/haskellwiki/WxHaskell
+COMMENT=	Haskell wxGTK bindings
 
 PKG_DESTDIR_SUPPORT=	none
 

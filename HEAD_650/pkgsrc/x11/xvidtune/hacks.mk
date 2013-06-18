@@ -1,4 +1,4 @@
-# $NetBSD$
+# $NetBSD: hacks.mk,v 1.2 2012/06/03 18:06:11 dholland Exp $
 
 #
 # Work around x11-links lossage with native X on NetBSD 5.

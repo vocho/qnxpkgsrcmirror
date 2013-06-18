@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.200 2012/08/18 16:33:36 chs Exp $
+# $NetBSD: Makefile,v 1.203 2013/03/24 17:18:25 wiz Exp $
 #
 
 COMMENT=	Emulators for other operating systems
@@ -36,6 +36,11 @@ SUBDIR+=	compat30
 SUBDIR+=	compat30-extras
 SUBDIR+=	compat40
 SUBDIR+=	compat40-extras
+SUBDIR+=	compat50
+SUBDIR+=	compat50-x11
+SUBDIR+=	compat51
+SUBDIR+=	compat51-x11
+SUBDIR+=	compat60
 #SUBDIR+=	compat_netbsd		# only contains Makefile fragments
 SUBDIR+=	cygwin_esound
 SUBDIR+=	cygwin_lib
@@ -102,11 +107,9 @@ SUBDIR+=	pearpc
 SUBDIR+=	qemu
 SUBDIR+=	qemu0
 SUBDIR+=	raine
-#SUBDIR+=	sap	# only contains a Makefile.common
 SUBDIR+=	simh
 SUBDIR+=	simulavr
 SUBDIR+=	ski
-SUBDIR+=	ski-bin
 SUBDIR+=	sms_sdl
 SUBDIR+=	snes9x
 SUBDIR+=	snes9x-gtk

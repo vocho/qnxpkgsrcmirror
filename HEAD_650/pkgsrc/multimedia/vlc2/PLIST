@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.4 2012/10/19 17:48:06 drochner Exp $
+@comment $NetBSD: PLIST,v 1.9 2013/04/14 22:10:23 cheusov Exp $
 bin/cvlc
 ${PLIST.x11}bin/qvlc
 bin/rvlc
@@ -53,6 +53,7 @@ include/vlc/plugins/vlc_image.h
 include/vlc/plugins/vlc_inhibit.h
 include/vlc/plugins/vlc_input.h
 include/vlc/plugins/vlc_input_item.h
+include/vlc/plugins/vlc_keys.h
 include/vlc/plugins/vlc_main.h
 include/vlc/plugins/vlc_md5.h
 include/vlc/plugins/vlc_media_library.h
@@ -105,7 +106,7 @@ ${PLIST.gnome}lib/vlc/plugins/access/libaccess_gnomevfs_plugin.la
 lib/vlc/plugins/access/libaccess_http_plugin.la
 lib/vlc/plugins/access/libaccess_imem_plugin.la
 lib/vlc/plugins/access/libaccess_mms_plugin.la
-lib/vlc/plugins/access/libaccess_oss_plugin.la
+${PLIST.oss}lib/vlc/plugins/access/libaccess_oss_plugin.la
 lib/vlc/plugins/access/libaccess_rar_plugin.la
 lib/vlc/plugins/access/libaccess_shm_plugin.la
 lib/vlc/plugins/access/libaccess_tcp_plugin.la
@@ -116,6 +117,7 @@ lib/vlc/plugins/access/libdvdnav_plugin.la
 lib/vlc/plugins/access/libdvdread_plugin.la
 lib/vlc/plugins/access/libfilesystem_plugin.la
 lib/vlc/plugins/access/libidummy_plugin.la
+${PLIST.pulseaudio}lib/vlc/plugins/access/libpulsesrc_plugin.la
 lib/vlc/plugins/access/librtp_plugin.la
 lib/vlc/plugins/access/libsdp_plugin.la
 lib/vlc/plugins/access/libstream_filter_rar_plugin.la
@@ -154,7 +156,7 @@ lib/vlc/plugins/audio_mixer/libfloat32_mixer_plugin.la
 lib/vlc/plugins/audio_output/libadummy_plugin.la
 lib/vlc/plugins/audio_output/libamem_plugin.la
 lib/vlc/plugins/audio_output/libaout_file_plugin.la
-lib/vlc/plugins/audio_output/liboss_plugin.la
+${PLIST.oss}lib/vlc/plugins/audio_output/liboss_plugin.la
 ${PLIST.pulseaudio}lib/vlc/plugins/audio_output/libpulse_plugin.la
 lib/vlc/plugins/codec/liba52_plugin.la
 lib/vlc/plugins/codec/libadpcm_plugin.la
@@ -190,6 +192,7 @@ lib/vlc/plugins/control/libdummy_plugin.la
 lib/vlc/plugins/control/libgestures_plugin.la
 ${PLIST.x11}lib/vlc/plugins/control/libglobalhotkeys_plugin.la
 lib/vlc/plugins/control/libhotkeys_plugin.la
+${PLIST.lirc}lib/vlc/plugins/control/liblirc_plugin.la
 lib/vlc/plugins/control/libmotion_plugin.la
 lib/vlc/plugins/control/libnetsync_plugin.la
 lib/vlc/plugins/control/liboldrc_plugin.la
@@ -274,7 +277,9 @@ lib/vlc/plugins/packetizer/libpacketizer_vc1_plugin.la
 lib/vlc/plugins/plugins.dat
 lib/vlc/plugins/services_discovery/libmediadirs_plugin.la
 lib/vlc/plugins/services_discovery/libpodcast_plugin.la
+${PLIST.pulseaudio}lib/vlc/plugins/services_discovery/libpulselist_plugin.la
 lib/vlc/plugins/services_discovery/libsap_plugin.la
+lib/vlc/plugins/services_discovery/libupnp_plugin.la
 ${PLIST.x11}lib/vlc/plugins/services_discovery/libxcb_apps_plugin.la
 lib/vlc/plugins/sse2/libi420_rgb_sse2_plugin.la
 lib/vlc/plugins/sse2/libi420_yuy2_sse2_plugin.la
@@ -404,6 +409,7 @@ share/kde/apps/solid/actions/vlc-openvcd.desktop
 share/locale/ach/LC_MESSAGES/vlc.mo
 share/locale/af/LC_MESSAGES/vlc.mo
 share/locale/am/LC_MESSAGES/vlc.mo
+share/locale/an/LC_MESSAGES/vlc.mo
 share/locale/ar/LC_MESSAGES/vlc.mo
 share/locale/ast/LC_MESSAGES/vlc.mo
 share/locale/be/LC_MESSAGES/vlc.mo
@@ -416,6 +422,7 @@ share/locale/cgg/LC_MESSAGES/vlc.mo
 share/locale/ckb/LC_MESSAGES/vlc.mo
 share/locale/co/LC_MESSAGES/vlc.mo
 share/locale/cs/LC_MESSAGES/vlc.mo
+share/locale/cy/LC_MESSAGES/vlc.mo
 share/locale/da/LC_MESSAGES/vlc.mo
 share/locale/de/LC_MESSAGES/vlc.mo
 share/locale/el/LC_MESSAGES/vlc.mo
@@ -437,6 +444,7 @@ share/locale/hi/LC_MESSAGES/vlc.mo
 share/locale/hr/LC_MESSAGES/vlc.mo
 share/locale/hu/LC_MESSAGES/vlc.mo
 share/locale/hy/LC_MESSAGES/vlc.mo
+share/locale/ia/LC_MESSAGES/vlc.mo
 share/locale/id/LC_MESSAGES/vlc.mo
 share/locale/is/LC_MESSAGES/vlc.mo
 share/locale/it/LC_MESSAGES/vlc.mo
@@ -446,7 +454,6 @@ share/locale/kk/LC_MESSAGES/vlc.mo
 share/locale/km/LC_MESSAGES/vlc.mo
 share/locale/kmr/LC_MESSAGES/vlc.mo
 share/locale/ko/LC_MESSAGES/vlc.mo
-share/locale/ku/LC_MESSAGES/vlc.mo
 share/locale/lg/LC_MESSAGES/vlc.mo
 share/locale/lt/LC_MESSAGES/vlc.mo
 share/locale/lv/LC_MESSAGES/vlc.mo

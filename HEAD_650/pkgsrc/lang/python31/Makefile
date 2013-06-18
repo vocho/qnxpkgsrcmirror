@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.13 2012/10/02 20:11:51 asau Exp $
+# $NetBSD: Makefile,v 1.15 2013/02/08 12:23:24 wiz Exp $
 
 .include "dist.mk"
 
 PKGNAME=	python31-${PY_DISTVERSION}
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	lang python
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
@@ -48,7 +48,7 @@ PLIST_SRC+=	${.CURDIR}/../../lang/python31/PLIST.${OPSYS}
 .endif
 PLIST_SRC+=	${.CURDIR}/../../lang/python31/PLIST.common_end
 
-.if ${OPSYS} == "NetBSD"
+.if ${OPSYS} == "NetBSD" && !defined(USE_DESTDIR) || empty(USE_DESTDIR:M[Yy][Ee][Ss])
 PRIVILEGED_STAGES+=	clean
 .endif
 

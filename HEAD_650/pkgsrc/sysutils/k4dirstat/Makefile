@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.10 2012/10/23 19:51:09 asau Exp $
+# $NetBSD: Makefile,v 1.14 2013/04/06 11:01:00 markd Exp $
 
-DISTNAME=	k4dirstat-2.7.3
-PKGREVISION=	7
+DISTNAME=	k4dirstat-2.7.4
 CATEGORIES=	sysutils
 MASTER_SITES=	http://bitbucket.org/jeromerobert/k4dirstat/get/
 EXTRACT_SUFX=	.tar.bz2
@@ -15,7 +14,7 @@ BUILD_DEPENDS+=	automoc4>=0.9.87:../../devel/automoc4
 USE_TOOLS+=	perl msgfmt
 USE_LANGUAGES=	c c++
 
-WRKSRC=		${WRKDIR}/jeromerobert-k4dirstat-7764f6508187
+WRKSRC=		${WRKDIR}/jeromerobert-k4dirstat-33ed79e1054e
 
 FETCH_USING=	curl
 

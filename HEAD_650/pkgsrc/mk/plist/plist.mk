@@ -1,4 +1,4 @@
-# $NetBSD: plist.mk,v 1.43 2012/05/27 14:32:28 cheusov Exp $
+# $NetBSD: plist.mk,v 1.45 2013/02/10 12:03:00 obache Exp $
 #
 # This Makefile fragment handles the creation of PLISTs for use by
 # pkg_create(8).
@@ -111,6 +111,9 @@ _PLIST_MANINSTALL=	${MANINSTALL}
 _LIBTOOL_EXPAND=							\
 	${PKGSRC_SETENV} ECHO=${TOOLS_ECHO:Q} GREP=${TOOLS_GREP:Q}		\
 		SORT=${TOOLS_SORT:Q} TEST=${TOOLS_TEST:Q}		\
+		BASENAME=${BASENAME:Q} DIRNAME=${DIRNAME:Q}		\
+		PWD_CMD=${PWD_CMD:Q} 					\
+		SHLIB_TYPE=${SHLIB_TYPE:Q}				\
 	${SH} ${.CURDIR}/../../mk/plist/libtool-expand
 
 .if !defined(_IGNORE_INFO_PATH)
@@ -136,6 +139,7 @@ _PLIST_AWK_ENV+=	LIBTOOL_EXPAND=${_LIBTOOL_EXPAND:Q}
 _PLIST_AWK_ENV+=	LS=${TOOLS_LS:Q}
 _PLIST_AWK_ENV+=	MANINSTALL=${_PLIST_MANINSTALL:Q}
 _PLIST_AWK_ENV+=	MANZ=${_MANZ:Q}
+_PLIST_AWK_ENV+=	PKGGNUDIR=${PKGGNUDIR:Q}
 _PLIST_AWK_ENV+=	PKGMANDIR=${PKGMANDIR:Q}
 _PLIST_AWK_ENV+=	PREFIX=${DESTDIR:Q}${PREFIX:Q}
 _PLIST_AWK_ENV+=	TEST=${TOOLS_TEST:Q}
@@ -169,6 +173,7 @@ PLIST_SUBST+=	OPSYS=${OPSYS:Q}					\
 		RMDIR=${RMDIR:Q}					\
 		RM=${RM:Q}						\
 		TRUE=${TRUE:Q}						\
+		PKGGNUDIR=${PKGGNUDIR:Q}				\
 		PKGMANDIR=${PKGMANDIR:Q}
 
 .for _var_ in ${PLIST_VARS}
@@ -187,9 +192,13 @@ _PLIST_1_AWK+=		-f ${PKGSRCDIR}/mk/plist/plist-macros.awk
 
 _PLIST_AWK+=		-f ${.CURDIR}/../../mk/plist/plist-functions.awk
 _PLIST_AWK+=		-f ${.CURDIR}/../../mk/plist/plist-locale.awk
+_PLIST_AWK+=		-f ${.CURDIR}/../../mk/plist/plist-gnu.awk
 _PLIST_AWK+=		-f ${.CURDIR}/../../mk/plist/plist-info.awk
 _PLIST_AWK+=		-f ${.CURDIR}/../../mk/plist/plist-man.awk
 _PLIST_AWK+=		-f ${.CURDIR}/../../mk/plist/plist-libtool.awk
+.if ${OPSYS} == "Cygwin"
+_PLIST_AWK+=		-f ${.CURDIR}/../../mk/plist/plist-cygwin.awk
+.endif
 _PLIST_AWK+=		${PLIST_AWK}
 _PLIST_AWK+=		-f ${.CURDIR}/../../mk/plist/plist-default.awk
 
@@ -202,6 +211,7 @@ _SHLIB_AWKFILE.ELF=	${.CURDIR}/../../mk/plist/shlib-elf.awk
 _SHLIB_AWKFILE.SOM=	${.CURDIR}/../../mk/plist/shlib-som.awk
 _SHLIB_AWKFILE.aixlib=	${.CURDIR}/../../mk/plist/shlib-elf.awk
 _SHLIB_AWKFILE.a.out=	${.CURDIR}/../../mk/plist/shlib-aout.awk
+_SHLIB_AWKFILE.PEwin=	${.CURDIR}/../../mk/plist/shlib-pe.awk
 _SHLIB_AWKFILE.dylib=	${.CURDIR}/../../mk/plist/shlib-dylib.awk
 _SHLIB_AWKFILE.none=	${.CURDIR}/../../mk/plist/shlib-none.awk
 

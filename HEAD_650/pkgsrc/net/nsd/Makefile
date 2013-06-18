@@ -1,17 +1,20 @@
-# $NetBSD: Makefile,v 1.59 2012/11/04 22:17:41 pettai Exp $
+# $NetBSD: Makefile,v 1.63 2013/03/04 20:33:15 jperkin Exp $
 
-DISTNAME=	nsd-3.2.14
+DISTNAME=	nsd-3.2.15
 CATEGORIES=	net
 MASTER_SITES=	http://www.nlnetlabs.nl/downloads/nsd/
 
 MAINTAINER=	joerg@NetBSD.org
 HOMEPAGE=	http://www.nlnetlabs.nl/nsd/index.html
 COMMENT=	Authoritative-only DNS server
+LICENSE=	modified-bsd
+
+BUILD_DEFS+=	VARBASE
 
 BUILDLINK_API_DEPENDS.openssl+=	openssl>=0.9.7
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.nsd
-PKG_SUPPORTED_OPTIONS=	inet6
+PKG_SUPPORTED_OPTIONS=	inet6 rrl
 PKG_SUGGESTED_OPTIONS=	inet6
 
 .include "../../mk/bsd.options.mk"
@@ -26,6 +29,11 @@ CONFIGURE_ARGS+=--enable-bind8-stats
 CONFIGURE_ARGS+=--enable-ipv6
 .else
 CONFIGURE_ARGS+=--disable-ipv6
+.endif
+.if !empty(PKG_OPTIONS:Mrrl)
+CONFIGURE_ARGS+=--enable-ratelimit
+.else
+CONFIGURE_ARGS+=--disable-ratelimit
 .endif
 
 CONFIGURE_ARGS+=--with-pidfile=${VARBASE}/run/nsd.pid
@@ -46,6 +54,8 @@ PKG_USERS=	${NSD_USER}:${NSD_GROUP}
 CONF_FILES+=	share/examples/nsd/nsd.conf ${PKG_SYSCONFDIR}/nsd.conf
 
 INSTALLATION_DIRS=	share/examples/nsd
+
+CFLAGS.SunOS+=	-Du_int32_t=uint32_t
 
 post-install:
 	${INSTALL_DATA} ${WRKSRC}/contrib/nsd.zones2nsd.conf ${DESTDIR}${PREFIX}/share/examples/nsd

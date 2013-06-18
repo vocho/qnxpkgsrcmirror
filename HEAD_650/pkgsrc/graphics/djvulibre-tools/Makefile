@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.14 2012/10/06 14:10:46 asau Exp $
+# $NetBSD: Makefile,v 1.16 2013/01/26 21:37:44 adam Exp $
 
-DISTNAME=		djvulibre-3.5.24
+DISTNAME=		djvulibre-3.5.25.3
 PKGNAME=		${DISTNAME:S/-/-tools-/}
 PKGREVISION=		1
 CATEGORIES=		graphics
@@ -20,6 +20,7 @@ USE_PKGLOCALEDIR=	yes
 USE_TOOLS+=		bash:run pkg-config
 GNU_CONFIGURE=		yes
 
+WRKSRC=			${WRKDIR}/djvulibre-3.5.25
 MAKE_ENV+=		INSTALL_SCRIPT=${INSTALL_SCRIPT:Q}
 BUILD_DIRS=		tools xmltools
 INSTALL_DIRS=		tools xmltools

@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.34 2012/10/08 12:27:42 asau Exp $
+# $NetBSD: Makefile,v 1.36 2013/04/06 13:09:26 rodent Exp $
 #
 
 DISTNAME=	suck-4.3.2
-PKGREVISION=	7
+PKGREVISION=	8
 CATEGORIES=	news
 MASTER_SITES=	${MASTER_SITE_SUNSITE:=system/news/transport/}
 
-MAINTAINER=	pkgsrc-users@netbsd.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 #failed 20120718
 #HOMEPAGE=	http://home.comcast.net/~bobyetman/
 COMMENT=	Feed a local news server without a dedicated newsfeed

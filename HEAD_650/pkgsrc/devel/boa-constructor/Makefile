@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.20 2012/10/31 11:16:40 asau Exp $
+# $NetBSD: Makefile,v 1.22 2013/02/16 11:20:42 wiz Exp $
 #
 
 VERSION=		0.6.1
 DISTNAME=		boa-constructor-${VERSION}.src
 PKGNAME=		boa-constructor-${VERSION}
-PKGREVISION=		15
+PKGREVISION=		17
 CATEGORIES=		devel
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=boa-constructor/}
 EXTRACT_SUFX=		.zip

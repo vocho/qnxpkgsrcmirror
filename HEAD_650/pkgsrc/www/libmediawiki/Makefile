@@ -1,9 +1,8 @@
-# $NetBSD: Makefile,v 1.7 2012/10/28 06:30:19 asau Exp $
+# $NetBSD: Makefile,v 1.11 2013/04/03 12:39:48 markd Exp $
 #
 
-PKGNAME=	libmediawiki-2.5.0
-DISTNAME=	digikam-2.5.0
-PKGREVISION=	5
+PKGNAME=	libmediawiki-3.1.0
+DISTNAME=	digikam-3.1.0
 CATEGORIES=	www
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=digikam/}
 EXTRACT_SUFX=	.tar.bz2

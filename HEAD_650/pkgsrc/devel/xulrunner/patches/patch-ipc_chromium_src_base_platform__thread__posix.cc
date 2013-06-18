@@ -1,78 +1,31 @@
-$NetBSD: patch-ipc_chromium_src_base_platform__thread__posix.cc,v 1.8 2012/11/21 15:26:50 ryoon Exp $
+$NetBSD: patch-ipc_chromium_src_base_platform__thread__posix.cc,v 1.10 2013/03/30 20:03:09 ryoon Exp $
 
---- ipc/chromium/src/base/platform_thread_posix.cc.orig	2012-11-19 15:42:29.000000000 +0000
+--- ipc/chromium/src/base/platform_thread_posix.cc.orig	2013-04-10 03:01:46.000000000 +0000
 +++ ipc/chromium/src/base/platform_thread_posix.cc
-@@ -9,16 +9,32 @@
- 
+@@ -10,7 +10,11 @@
  #if defined(OS_MACOSX)
  #include <mach/mach.h>
-+#elif defined(OS_NETBSD)
-+#include <lwp.h>
+ #elif defined(OS_NETBSD)
++_Pragma("GCC visibility push(default)")
+ #include <lwp.h>
++_Pragma("GCC visibility pop")
 +#elif defined(OS_QNX)
 +/* Nothing */
  #elif defined(OS_LINUX)
  #include <sys/syscall.h>
--#if !defined(__FreeBSD__) && !defined(__NetBSD__) && !defined(__OpenBSD__) && !defined(__DragonFly__)
  #include <sys/prctl.h>
--#elif !defined(__NetBSD__)
--#include <pthread_np.h>
-+#elif defined(OS_FREEBSD)
-+#include <sys/param.h>
-+#if __FreeBSD_version > 802500
-+#include <sys/thr.h>
-+#else
-+_Pragma("GCC visibility push(default)")
-+extern "C" int thr_self(long *);
-+_Pragma("GCC visibility pop")
- #endif
-+#endif
-+
-+#if !defined(OS_MACOSX)
- #include <unistd.h>
- #endif
- 
-+#if defined(OS_BSD) && !defined(OS_NETBSD)
-+#include <pthread_np.h>
-+#endif
-+
- #if defined(OS_MACOSX)
- namespace base {
- void InitThreading();
-@@ -38,9 +54,22 @@ PlatformThreadId PlatformThread::Current
-   // into the kernel.
- #if defined(OS_MACOSX)
-   return mach_thread_self();
--#elif defined(__FreeBSD__) || defined(__NetBSD__) || defined(__OpenBSD__) || defined(__DragonFly__)
--  // TODO(BSD): find a better thread ID
--  return (intptr_t)(pthread_self());
-+#elif defined(OS_NETBSD)
-+  return _lwp_self();
-+#elif defined(OS_DRAGONFLY)
-+  return lwp_gettid();
+@@ -50,6 +54,8 @@ PlatformThreadId PlatformThread::Current
+   return _lwp_self();
+ #elif defined(OS_DRAGONFLY)
+   return lwp_gettid();
 +#elif defined(OS_QNX)
 +  return pthread_self();
-+#elif defined(OS_FREEBSD)
-+#  if __FreeBSD_version > 900030
-+    return pthread_getthreadid_np();
-+#  else
-+    long lwpid;
-+    thr_self(&lwpid);
-+    return lwpid;
-+#  endif
-+#elif defined(OS_OPENBSD)
-+  return (intptr_t) (pthread_self());
- #elif defined(OS_LINUX)
-   return syscall(__NR_gettid);
- #endif
-@@ -83,10 +112,12 @@ void PlatformThread::SetName(const char*
-   // Note that glibc also has a 'pthread_setname_np' api, but it may not be
-   // available everywhere and it's only benefit over using prctl directly is
-   // that it can set the name of threads other than the current thread.
--#if defined(__FreeBSD__) || defined(__OpenBSD__) || defined(__DragonFly__)
-+#if defined(OS_BSD) && !defined(OS_NETBSD)
+ #elif defined(OS_FREEBSD)
+ #  if __FreeBSD_version > 900030
+     return pthread_getthreadid_np();
+@@ -106,6 +112,8 @@ void PlatformThread::SetName(const char*
    pthread_set_name_np(pthread_self(), name);
--#elif defined(__NetBSD__)
-+#elif defined(OS_NETBSD)
+ #elif defined(OS_NETBSD)
    pthread_setname_np(pthread_self(), "%s", (void *)name);
 +#elif defined(OS_QNX)
 +  pthread_setname_np(pthread_self(), name);

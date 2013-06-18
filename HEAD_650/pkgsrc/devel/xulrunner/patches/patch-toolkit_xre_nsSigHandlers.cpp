@@ -1,8 +1,8 @@
 $NetBSD$
 
---- toolkit/xre/nsSigHandlers.cpp.orig	2012-11-19 15:43:29.000000000 +0000
+--- toolkit/xre/nsSigHandlers.cpp.orig	2013-04-10 03:02:57.000000000 +0000
 +++ toolkit/xre/nsSigHandlers.cpp
-@@ -239,7 +239,13 @@ void InstallSignalHandlers(const char *P
+@@ -240,7 +240,13 @@ void InstallSignalHandlers(const char *P
  #ifdef SA_SIGINFO
    /* Install a handler for floating point exceptions and disable them if they occur. */
    struct sigaction sa, osa;

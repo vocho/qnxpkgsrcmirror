@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.28 2012/10/15 18:16:15 minskim Exp $
+# $NetBSD: Makefile,v 1.30 2013/02/06 23:22:04 jperkin Exp $
 
 DISTNAME=		darcs-2.0.2
-PKGREVISION=		5
+PKGREVISION=		7
 CATEGORIES=		devel scm
 MASTER_SITES=		http://www.darcs.net/
 

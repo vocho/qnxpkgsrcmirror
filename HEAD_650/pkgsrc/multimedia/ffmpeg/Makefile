@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.93 2012/11/09 07:56:26 tron Exp $
+# $NetBSD: Makefile,v 1.105 2013/04/14 01:36:44 cheusov Exp $
 
-PKGNAME=	ffmpeg-20121028.${DISTVERSION}
-
+PKGNAME=	ffmpeg-20130315.${DISTVERSION}
+PKGREVISION=	1
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://ffmpeg.mplayerhq.hu/
 COMMENT=	Decoding, encoding and streaming software
@@ -17,7 +17,8 @@ CONF_FILES+=	${PREFIX}/share/examples/ffmpeg/ffserver.conf \
 
 .include "../../mk/bsd.prefs.mk"
 
-.if !empty(MACHINE_PLATFORM:MDarwin-*-i386)
+.if !empty(MACHINE_PLATFORM:MDarwin-*-i386) \
+ || !empty(MACHINE_PLATFORM:MSunOS-*-i386)
 CONFIGURE_ARGS+=	--disable-asm
 .endif
 

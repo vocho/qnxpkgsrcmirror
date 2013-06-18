@@ -1,8 +1,8 @@
 $NetBSD$
 
---- toolkit/mozapps/update/updater/updater.cpp.orig	2012-11-19 15:43:27.000000000 +0000
+--- toolkit/mozapps/update/updater/updater.cpp.orig	2013-04-10 03:02:56.000000000 +0000
 +++ toolkit/mozapps/update/updater/updater.cpp
-@@ -3098,7 +3098,10 @@ int add_dir_entries(const NS_tchar *dirp
+@@ -3177,7 +3177,10 @@ int add_dir_entries(const NS_tchar *dirp
    return rv;
  }
  

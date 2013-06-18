@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.69 2012/10/08 23:02:31 adam Exp $
+# $NetBSD: Makefile,v 1.72 2013/02/16 11:24:48 wiz Exp $
 #
 
 DISTNAME=		sawfish-1.7.1
-PKGREVISION=		9
+PKGREVISION=		11
 CATEGORIES=		x11 wm
 MASTER_SITES=		http://download.tuxfamily.org/sawfish/sawfish/
 EXTRACT_SUFX=		.tar.bz2
 
-MAINTAINER=		tnn@NetBSD.org
+MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://sawfish.wikia.com/
 COMMENT=		Extensible window manager that is fully configurable in Lisp
 
@@ -43,6 +43,8 @@ REP_ENV_PKGSRC=
 .endif
 
 .include "../../graphics/gdk-pixbuf2-xlib/buildlink3.mk"
+.include "../../devel/pango/buildlink3.mk"
+.include "../../devel/pangox-compat/buildlink3.mk"
 .include "../../lang/librep/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../x11/gtk2/buildlink3.mk"

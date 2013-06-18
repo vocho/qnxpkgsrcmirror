@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.41 2012/11/11 22:28:28 joerg Exp $
+# $NetBSD: Makefile,v 1.48 2013/04/05 23:07:19 markd Exp $
 
 DISTNAME=	kdepimlibs-${_KDE_VERSION}
 PKGNAME=	${DISTNAME:S/-4/4-4/}
-PKGREVISION=	8
+PKGREVISION=	1
 CATEGORIES=	misc
 COMMENT=	Support libraries for PIM for the KDE integrated X11 desktop
 
@@ -10,9 +10,11 @@ COMMENT=	Support libraries for PIM for the KDE integrated X11 desktop
 
 CMAKE_DEPENDENCIES_REWRITE= _KDE_build/KDEPimLibsDependencies.cmake
 
+CMAKE_ARGS+=	-DKDE4_BUILD_TESTS:BOOL=OFF
+
 REPLACE_PERL+= mailtransport/kconf_update/migrate-transports.pl
 
-BUILDLINK_API_DEPENDS.akonadi+=	akonadi>=1.5.52
+BUILDLINK_API_DEPENDS.akonadi+=	akonadi>=1.8.51
 
 .include "../../meta-pkgs/kde4/kde4.mk"
 
@@ -21,7 +23,9 @@ BUILDLINK_API_DEPENDS.akonadi+=	akonadi>=1.5.52
 .if ${OPSYS} == "Linux"
 .include "../../devel/libuuid/buildlink3.mk"
 .endif
+.include "../../devel/qjson/buildlink3.mk"
 .include "../../mail/akonadi/buildlink3.mk"
+.include "../../misc/nepomuk-core/buildlink3.mk"
 .include "../../security/cyrus-sasl/buildlink3.mk"
 .include "../../security/gpgme/buildlink3.mk"
 .include "../../time/libical/buildlink3.mk"

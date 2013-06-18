@@ -1,12 +1,13 @@
-# $NetBSD: Makefile,v 1.40 2012/10/23 18:16:29 asau Exp $
+# $NetBSD: Makefile,v 1.44 2013/02/06 23:23:37 jperkin Exp $
 
 DISTNAME=	gnupg-2.0.19
 PKGNAME=	${DISTNAME:S/gnupg/gnupg2/}
+PKGREVISION=	3
 CATEGORIES=	security
 MASTER_SITES=	ftp://ftp.gnupg.org/gcrypt/gnupg/
 EXTRACT_SUFX=	.tar.bz2
 
-MAINTAINER=	shannonjr@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.gnupg.org/
 COMMENT=	GNUpg with OpenPGP and S/MIME capabilities
 LICENSE=	gnu-gpl-v3

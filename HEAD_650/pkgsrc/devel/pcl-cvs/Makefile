@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.24 2012/10/31 11:19:22 asau Exp $
+# $NetBSD: Makefile,v 1.27 2013/04/06 20:27:19 rodent Exp $
 #
 
 DISTNAME=	pcl-cvs-2.9.9
 PKGNAME=	${EMACS_PKGNAME_PREFIX}${DISTNAME}
-PKGREVISION=	2
+PKGREVISION=	3
 CATEGORIES=	devel scm
 MASTER_SITES=	# ftp://rum.cs.yale.edu/pub/monnier/pcl-cvs/
 
@@ -21,12 +21,12 @@ EMACS_VERSIONS_ACCEPTED=	emacs20
 .include "../../editors/emacs/modules.mk"
 
 .if !((${EMACS_FLAVOR} == "emacs") && (${EMACS_VERSION_MAJOR} == "20"))
-PKG_SKIP_REASON+=	"${PKGNAME} is only for emacs20"
+PKG_FAIL_REASON+=	"${PKGNAME} is only for emacs20"
 .endif
 
 MAKE_ENV+=	PREFIX=${DESTDIR:Q}${PREFIX:Q}
 BUILD_TARGET=	default
-INFO_FILES=	# PLIST
+INFO_FILES=	yes
 MESSAGE_SUBST+=	EMACS_LISPPREFIX=${EMACS_LISPPREFIX:Q}
 
 .include "../../mk/bsd.pkg.mk"

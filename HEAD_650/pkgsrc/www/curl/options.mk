@@ -1,8 +1,8 @@
-# $NetBSD: options.mk,v 1.9 2012/10/12 07:36:11 adam Exp $
+# $NetBSD: options.mk,v 1.10 2012/12/17 23:26:47 agc Exp $
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.curl
-PKG_SUPPORTED_OPTIONS=	inet6 libssh2 gssapi ldap rtmp spnego
-PKG_SUGGESTED_OPTIONS=	inet6
+PKG_SUPPORTED_OPTIONS=	inet6 libssh2 gssapi ldap rtmp libidn
+PKG_SUGGESTED_OPTIONS=	inet6 libidn
 
 .include "../../mk/bsd.prefs.mk"
 .if ${OPSYS} == NetBSD
@@ -11,12 +11,6 @@ PKG_SUGGESTED_OPTIONS+=	gssapi
 .endif
 
 .include "../../mk/bsd.options.mk"
-
-.if !empty(PKG_OPTIONS:Mspnego)
-CONFIGURE_ARGS+=	--with-spnego
-.else
-CONFIGURE_ARGS+=	--without-spnego
-.endif
 
 .if !empty(PKG_OPTIONS:Minet6)
 CONFIGURE_ARGS+=	--enable-ipv6
@@ -52,4 +46,11 @@ CONFIGURE_ARGS+=	--disable-ldap
 CONFIGURE_ARGS+=	--with-librtmp
 .else
 CONFIGURE_ARGS+=	--without-librtmp
+.endif
+
+.if !empty(PKG_OPTIONS:Mlibidn)
+.include "../../devel/libidn/buildlink3.mk"
+CONFIGURE_ARGS+=	--with-libidn
+.else
+CONFIGURE_ARGS+=	--without-libidn
 .endif

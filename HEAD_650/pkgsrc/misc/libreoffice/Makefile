@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.16 2012/10/08 23:02:08 adam Exp $
+# $NetBSD: Makefile,v 1.27 2013/04/12 12:48:19 joerg Exp $
 
 VER=			3.5.6.2
 DISTNAME=		libreoffice-${VER}
 PKGNAME=		libreoffice-${VER:S/-//g}
-PKGREVISION=		7
+PKGREVISION=		16
 CATEGORIES=		misc
 MASTER_SITES=	http://download.documentfoundation.org/libreoffice/src/3.5.6/ \
 		http://dev-www.libreoffice.org/src/ \
@@ -86,6 +86,7 @@ PTHREAD_OPTS+=		require
 
 HAS_CONFIGURE=		yes
 CHECK_PORTABILITY_SKIP=	configure
+DRAGONFLY_CCVER=	gcc44
 
 CONFIGURE_ARGS+=	--prefix=${DESTDIR}${PREFIX}/${PKGNAME_NOREV}
 CONFIGURE_ARGS+=	--disable-ccache
@@ -154,8 +155,7 @@ post-extract:
 	${LN} -s ${DISTDIR}/${DIST_SUBDIR}/${md} ${WRKSRC}/src/${md}
 .endfor
 
-do-configure:
-	cd ${WRKSRC} && ./autogen.sh ${CONFIGURE_ARGS}
+CONFIGURE_SCRIPT=	./autogen.sh
 
 post-configure:
 	cd ${WRKSRC} && ./bin/create_bootstrap_links

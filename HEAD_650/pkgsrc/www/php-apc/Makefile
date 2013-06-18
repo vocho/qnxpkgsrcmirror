@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.21 2012/10/28 06:30:57 asau Exp $
+# $NetBSD: Makefile,v 1.23 2013/03/17 10:46:45 taca Exp $
 
 MODNAME=	apc
 PECL_VERSION=	3.1.13

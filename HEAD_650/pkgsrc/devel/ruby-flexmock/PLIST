@@ -1,14 +1,15 @@
-@comment $NetBSD: PLIST,v 1.8 2012/09/16 06:18:57 taca Exp $
+@comment $NetBSD: PLIST,v 1.11 2013/03/11 07:33:57 taca Exp $
 ${GEM_HOME}/cache/${GEM_NAME}.gem
 ${GEM_LIBDIR}/CHANGES
 ${GEM_LIBDIR}/Gemfile
 ${GEM_LIBDIR}/Gemfile.lock
-${GEM_LIBDIR}/README.rdoc
+${GEM_LIBDIR}/README.md
 ${GEM_LIBDIR}/Rakefile
 ${GEM_LIBDIR}/TAGS
 ${GEM_LIBDIR}/doc/GoogleExample.rdoc
 ${GEM_LIBDIR}/doc/examples/rspec_examples_spec.rdoc
 ${GEM_LIBDIR}/doc/examples/test_unit_examples_test.rdoc
+${GEM_LIBDIR}/doc/index.rdoc
 ${GEM_LIBDIR}/doc/releases/flexmock-0.4.0.rdoc
 ${GEM_LIBDIR}/doc/releases/flexmock-0.4.1.rdoc
 ${GEM_LIBDIR}/doc/releases/flexmock-0.4.2.rdoc
@@ -29,6 +30,12 @@ ${GEM_LIBDIR}/doc/releases/flexmock-0.8.4.rdoc
 ${GEM_LIBDIR}/doc/releases/flexmock-0.8.5.rdoc
 ${GEM_LIBDIR}/doc/releases/flexmock-0.9.0.rdoc
 ${GEM_LIBDIR}/doc/releases/flexmock-1.0.0.rdoc
+${GEM_LIBDIR}/doc/releases/flexmock-1.0.3.rdoc
+${GEM_LIBDIR}/doc/releases/flexmock-1.0.4.rdoc
+${GEM_LIBDIR}/doc/releases/flexmock-1.1.0.rdoc
+${GEM_LIBDIR}/doc/releases/flexmock-1.2.0.rdoc
+${GEM_LIBDIR}/doc/releases/flexmock-1.3.0.rdoc
+${GEM_LIBDIR}/doc/releases/flexmock-1.3.1.rdoc
 ${GEM_LIBDIR}/flexmock.blurb
 ${GEM_LIBDIR}/install.rb
 ${GEM_LIBDIR}/lib/flexmock.rb
@@ -55,6 +62,7 @@ ${GEM_LIBDIR}/lib/flexmock/rails.rb
 ${GEM_LIBDIR}/lib/flexmock/rails/view_mocking.rb
 ${GEM_LIBDIR}/lib/flexmock/recorder.rb
 ${GEM_LIBDIR}/lib/flexmock/rspec.rb
+${GEM_LIBDIR}/lib/flexmock/rspec/configure.rb
 ${GEM_LIBDIR}/lib/flexmock/rspec_spy_matcher.rb
 ${GEM_LIBDIR}/lib/flexmock/spy_describers.rb
 ${GEM_LIBDIR}/lib/flexmock/symbol_extensions.rb
@@ -67,11 +75,13 @@ ${GEM_LIBDIR}/lib/flexmock/version.rb
 ${GEM_LIBDIR}/test/aliasing_test.rb
 ${GEM_LIBDIR}/test/assert_spy_called_test.rb
 ${GEM_LIBDIR}/test/base_class_test.rb
+${GEM_LIBDIR}/test/based_partials_test.rb
 ${GEM_LIBDIR}/test/container_methods_test.rb
 ${GEM_LIBDIR}/test/default_framework_adapter_test.rb
 ${GEM_LIBDIR}/test/demeter_mocking_test.rb
 ${GEM_LIBDIR}/test/deprecated_methods_test.rb
 ${GEM_LIBDIR}/test/examples_from_readme_test.rb
+${GEM_LIBDIR}/test/expectation_description_test.rb
 ${GEM_LIBDIR}/test/extended_should_receive_test.rb
 ${GEM_LIBDIR}/test/flexmodel_test.rb
 ${GEM_LIBDIR}/test/naming_test.rb

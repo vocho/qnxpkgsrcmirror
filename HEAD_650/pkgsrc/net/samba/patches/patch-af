@@ -1,8 +1,8 @@
-$NetBSD: patch-af,v 1.10 2011/12/16 22:32:06 asau Exp $
+$NetBSD: patch-af,v 1.11 2012/12/14 07:39:35 adam Exp $
 
---- configure.orig	2012-01-29 19:41:30.000000000 +0000
+--- configure.orig	2013-01-29 09:21:59.000000000 +0000
 +++ configure
-@@ -5937,6 +5937,13 @@ fi
+@@ -5958,6 +5958,13 @@ fi
  
  
  case "$host_os" in
@@ -16,7 +16,7 @@ $NetBSD: patch-af,v 1.10 2011/12/16 22:32:06 asau Exp $
  	*irix6*) cat >> confdefs.h <<\EOF
  #include <standards.h>
  EOF
-@@ -19413,6 +19420,7 @@ $as_echo "#define DARWINOS 1" >>confdefs
+@@ -19535,6 +19542,7 @@ $as_echo "#define DARWINOS 1" >>confdefs
  
  			BLDSHARED="true"
  			LDSHFLAGS="-dynamiclib -flat_namespace -undefined suppress"
@@ -24,7 +24,7 @@ $NetBSD: patch-af,v 1.10 2011/12/16 22:32:06 asau Exp $
  			CFLAGS="$CFLAGS -fno-common"
  			SHLD="\${CC}"
  			SHLIBEXT="dylib"
-@@ -19462,7 +19470,7 @@ fi
+@@ -19584,7 +19592,7 @@ fi
  
  if test "x$enable_as_needed" != xno; then
      saved_before_as_needed_ldflags="$LDFLAGS"
@@ -33,38 +33,20 @@ $NetBSD: patch-af,v 1.10 2011/12/16 22:32:06 asau Exp $
  	saved_ldflags="$LDFLAGS"
  	{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $flags works" >&5
  $as_echo_n "checking if $flags works... " >&6; }
-@@ -20168,7 +20176,7 @@ if test x"$VERSIONSCRIPT" != "x"; then
- 
- fi
- 
--	if test x"$USESHARED" == x"no" ; then
-+	if test x"$USESHARED" = x"no" ; then
- 		LINK_LIBTALLOC=STATIC
- 	fi
- 	LIBTALLOCVERSION=`grep ^VERSION ${tallocdir}/wscript | sed -e "s/'//g" -e 's/.* //'`
-@@ -20511,7 +20519,7 @@ if test x"$VERSIONSCRIPT" != "x"; then
- 
- fi
- 
--	if test x"$USESHARED" == x"no" ; then
-+	if test x"$USESHARED" = x"no" ; then
- 		LINK_LIBTDB=STATIC
- 	fi
- 	LIBTDBVERSION=`grep ^VERSION ${tdbdir}/wscript | sed -e "s/'//g" -e 's/.* //'`
-@@ -26273,9 +26281,9 @@ LIBS="-lcrypto $KRB5_LIBS  $LIBS"
+@@ -26385,9 +26393,9 @@ LIBS="-lcrypto $KRB5_LIBS  $LIBS"
  
  
  
 -        { $as_echo "$as_me:${as_lineno-$LINENO}: checking for des_set_key in -lcrypto" >&5
 -$as_echo_n "checking for des_set_key in -lcrypto... " >&6; }
--if test "${ac_cv_lib_ext_crypto_des_set_key+set}" = set; then :
+-if ${ac_cv_lib_ext_crypto_des_set_key+:} false; then :
 +        { $as_echo "$as_me:${as_lineno-$LINENO}: checking for EVP_des_cbc in -lcrypto" >&5
 +$as_echo_n "checking for EVP_des_cbc in -lcrypto... " >&6; }
-+if test "${ac_cv_lib_ext_crypto_EVP_des_cbc+set}" = set; then :
++if ${ac_cv_lib_ext_crypto_EVP_des_cbc+:} false; then :
    $as_echo_n "(cached) " >&6
  else
    cat confdefs.h - <<_ACEOF >conftest.$ac_ext
-@@ -26287,31 +26295,31 @@ else
+@@ -26399,31 +26407,31 @@ else
  #ifdef __cplusplus
  extern "C"
  #endif
@@ -104,7 +86,7 @@ $NetBSD: patch-af,v 1.10 2011/12/16 22:32:06 asau Exp $
  _ACEOF
  
  fi
-@@ -35686,31 +35694,46 @@ case "$host_os" in
+@@ -35790,31 +35798,46 @@ case "$host_os" in
  		NSSSONAMEVERSIONSUFFIX=".2"
  		WINBIND_NSS_EXTRA_OBJS="../nsswitch/winbind_nss_linux.o"
  		;;
@@ -173,7 +155,7 @@ $NetBSD: patch-af,v 1.10 2011/12/16 22:32:06 asau Exp $
  		;;
  	*irix*)
  		# IRIX has differently named shared libraries
-@@ -36391,9 +36414,6 @@ fi
+@@ -36495,9 +36518,6 @@ fi
  #################################################
  # Set pthread stuff
  

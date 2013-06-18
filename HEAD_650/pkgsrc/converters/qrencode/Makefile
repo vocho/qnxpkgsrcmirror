@@ -1,12 +1,13 @@
-# $NetBSD: Makefile,v 1.8 2012/10/03 00:20:16 asau Exp $
+# $NetBSD: Makefile,v 1.10 2013/02/16 11:20:37 wiz Exp $
 #
 
-DISTNAME=	qrencode-3.2.0
+DISTNAME=	qrencode-3.4.1
+PKGREVISION=	1
 CATEGORIES=	converters
 MASTER_SITES=	http://fukuchi.org/works/qrencode/
 
 MAINTAINER=	alaric@kitten-technologies.co.uk
-HOMEPAGE=	http://fukuchi.org/works/qrencode/index.en.html
+HOMEPAGE=	http://fukuchi.org/works/qrencode/index.html.en
 COMMENT=	QR Code generator
 LICENSE=	gnu-lgpl-v2.1
 

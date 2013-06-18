@@ -1,11 +1,10 @@
-# $NetBSD: Makefile,v 1.106 2012/10/31 11:17:08 asau Exp $
+# $NetBSD: Makefile,v 1.113 2013/04/10 18:01:51 wiz Exp $
 
 DISTNAME=	kdevelop_3.5.5.orig
 PKGNAME=	kdevelop-base-3.5.5
-PKGREVISION=	24
+PKGREVISION=	29
 CATEGORIES=	devel kde
 MASTER_SITES=	http://download.opensuse.org/repositories/home:/amilcarlucas/xUbuntu_6.06/
-EXTRACT_SUFX=	.tar.gz
 
 HOMEPAGE=	http://www.kdevelop.org/
 COMMENT=	Base modules for IDE for Unix/X11/KDE
@@ -14,6 +13,8 @@ LICENSE=	gnu-gpl-v2 AND gnu-lgpl-v2
 WRKSRC=		${WRKDIR}/kdevelop-3.5.5
 
 .include "../../meta-pkgs/kde3/Makefile.kde3"
+# default in Makefile.kde3 is wrong, so we need to set EXTRACT_SUFX here
+EXTRACT_SUFX=	.tar.gz
 
 DEPENDS+=		automake>=1.7:../../devel/automake
 DEPENDS+=		doxygen>=1.3.5:../../devel/doxygen

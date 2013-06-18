@@ -20,9 +20,9 @@ USE_TOOLS+=	pkg-config
 
 .include "../../mk/bsd.prefs.mk"
 
-LIBS.QNX+= -lgetopt
 
-.if ${OPSYS} == "QNX"
+.if ${OPSYS} == "QNX" && !empty(OS_VERSION:M[0-6].*)
+LIBS+= -lgetopt
 .include "../../devel/libgetopt/buildlink3.mk"
 .endif
 .include "../../x11/libXcomposite/buildlink3.mk"

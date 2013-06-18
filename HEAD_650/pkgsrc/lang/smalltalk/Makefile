@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.72 2012/10/08 23:01:57 adam Exp $
+# $NetBSD: Makefile,v 1.74 2013/03/24 16:54:59 joerg Exp $
 
 DISTNAME=	smalltalk-3.2.4
-PKGREVISION=	10
+PKGREVISION=	12
 CATEGORIES=	lang
 MASTER_SITES=	${MASTER_SITE_GNU:=smalltalk/}
 
@@ -17,6 +17,7 @@ USE_TOOLS+=		gawk gmake makeinfo pkg-config zip
 USE_GNU_READLINE=	YES
 USE_LIBTOOL=		YES
 GNU_CONFIGURE=		YES
+CONFIGURE_ARGS+=	--with-system-ltdl
 CONFIGURE_ARGS+=	--with-system-libsigsegv=${BUILDLINK_PREFIX.libsigsegv}/lib
 CONFIGURE_ARGS+=	--with-system-libffi=${BUILDLINK_PREFIX.libffi}/lib
 CONFIGURE_ARGS+=	--with-gdbm=${BUILDLINK_PREFIX.gdbm}/lib
@@ -64,6 +65,7 @@ post-extract:
 .include "../../databases/gdbm/buildlink3.mk"
 .include "../../devel/libsigsegv/buildlink3.mk"
 .include "../../devel/libffi/buildlink3.mk"
+.include "../../devel/libltdl/buildlink3.mk"
 .include "../../devel/gmp/buildlink3.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../devel/readline/buildlink3.mk"

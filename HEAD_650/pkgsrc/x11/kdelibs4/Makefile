@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.49 2012/11/11 22:24:01 joerg Exp $
+# $NetBSD: Makefile,v 1.54 2013/04/13 23:04:50 markd Exp $
 
 DISTNAME=	kdelibs-${_KDE_VERSION}
 PKGNAME=	${DISTNAME:S/-4/4-4/}
-PKGREVISION=	6
+PKGREVISION=	1
 CATEGORIES=	x11
 COMMENT=	Support libraries for the KDE integrated X11 desktop
 
@@ -41,6 +41,7 @@ REPLACE_PERL+= \
 	kio/proxytype.pl \
 	kio/useragent.pl \
 	kio/misc/fileshareset \
+	kioslave/http/kcookiejar/kcookiescfg.pl \
 	kdeui/preparetips \
 	plasma/data/kconfig_updates/plasma_popupapplet_fix_groups.pl
 
@@ -58,7 +59,7 @@ SUBST_SED.kdelibsfix=		-e 's:@LOCALBASE@:${LOCALBASE}:g'
 SUBST_CLASSES+=			phononrelpath
 SUBST_STAGE.phononrelpath=	post-configure
 SUBST_MESSAGE.phononrelpath=	Fixing phonon RELWITHDEBINFO path
-SUBST_FILES.phononrelpath=	_KDE_build/CMakeFiles/Export/${LOCALBASE:S^/^_^}/share/kde/apps/cmake/modules/KDELibs4LibraryTargets-relwithdebinfo.cmake
+SUBST_FILES.phononrelpath=	_KDE_build/CMakeFiles/Export/${LOCALBASE:S^/^_^}/share/kde/apps/cmake/modules/KDELibs4LibraryTargets-${TARGET_NAME}.cmake
 SUBST_SED.phononrelpath=	-e 's:[^"]*/\.buildlink/lib/libphonon\.so::'
 
 USE_TOOLS+=	flex gmake
@@ -82,7 +83,7 @@ BUILDLINK_DEPMETHOD.qt4-tools=		full
 
 BUILDLINK_API_DEPENDS.strigi+=	strigi>=0.5.11
 BUILDLINK_API_DEPENDS.soprano+=	soprano>=2.5.60
-BUILDLINK_API_DEPENDS.shared-desktop-ontologies+=	shared-desktop-ontologies>=0.6.5
+BUILDLINK_API_DEPENDS.shared-desktop-ontologies+=	shared-desktop-ontologies>=0.10.0
 
 .include "../../archivers/bzip2/buildlink3.mk"
 .include "../../archivers/xz/buildlink3.mk"

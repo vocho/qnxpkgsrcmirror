@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.156 2012/09/13 14:17:58 sno Exp $
+# $NetBSD: Makefile,v 1.164 2013/04/02 06:46:07 wiz Exp $
 #
 
 COMMENT=	Editors
@@ -19,6 +19,8 @@ SUBDIR+=	ce-x11
 SUBDIR+=	conglomerate
 SUBDIR+=	cooledit
 SUBDIR+=	dasher
+SUBDIR+=	deforaos-editor
+SUBDIR+=	dhex
 SUBDIR+=	easyedit
 SUBDIR+=	ed
 SUBDIR+=	edt
@@ -33,6 +35,8 @@ SUBDIR+=	emacs21
 SUBDIR+=	emacs21-nox11
 SUBDIR+=	emacs22
 SUBDIR+=	emacs22-nox11
+SUBDIR+=	emacs23
+SUBDIR+=	emacs23-nox11
 SUBDIR+=	emacs24
 SUBDIR+=	emacs24-nox11
 SUBDIR+=	ex
@@ -110,7 +114,9 @@ SUBDIR+=	poedit
 SUBDIR+=	qgoogletranslator
 SUBDIR+=	rox-edit
 SUBDIR+=	sam
+SUBDIR+=	sandy
 SUBDIR+=	scite
+SUBDIR+=	se
 SUBDIR+=	speedbar
 SUBDIR+=	ssam
 SUBDIR+=	tamago
@@ -132,6 +138,7 @@ SUBDIR+=	ted-sv
 SUBDIR+=	texmaker
 SUBDIR+=	texworks
 SUBDIR+=	tomboy
+SUBDIR+=	tweak
 SUBDIR+=	uemacs
 SUBDIR+=	ve
 SUBDIR+=	vigor

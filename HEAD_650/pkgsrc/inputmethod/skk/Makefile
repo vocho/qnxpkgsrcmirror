@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.26 2012/10/06 14:25:18 asau Exp $
+# $NetBSD: Makefile,v 1.29 2013/03/16 14:59:49 ryoon Exp $
 #
 
-DISTNAME=	ddskk-14.4
+DISTNAME=	ddskk-15.1
 PKGNAME=	${EMACS_PKGNAME_PREFIX}${DISTNAME:S/^ddskk/skk/}
 CATEGORIES=	japanese inputmethod
 MASTER_SITES=	http://openlab.ring.gr.jp/skk/maintrunk/ \
@@ -17,8 +17,7 @@ CONFLICTS=	ddskk-[0-9]*
 EMACS_MODULES+=	base leim
 EMACS_BUILDLINK=YES
 
-EMACS_VERSIONS_ACCEPTED=	emacs24 emacs23 emacs23nox emacs22 emacs22nox \
-				emacs21 emacs21nox
+EMACS_VERSIONS_ACCEPTED=	emacs24 emacs24nox emacs23 emacs23nox emacs22 emacs22nox
 
 MAKE_FLAGS+=	EMACS=${EMACS_BIN:Q}
 MAKE_ENV=	prefix=${DESTDIR:Q}${PREFIX:Q} \

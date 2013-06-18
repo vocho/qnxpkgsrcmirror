@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.90 2012/11/21 00:02:35 dsainty Exp $
+# $NetBSD: Makefile,v 1.94 2013/02/11 01:14:41 dsainty Exp $
 #
 
 COMMENT=	Communication utilities
@@ -13,6 +13,7 @@ SUBDIR+=	birda
 SUBDIR+=	bthfp
 SUBDIR+=	conserver
 SUBDIR+=	conserver8
+SUBDIR+=	deforaos-phone
 SUBDIR+=	dl-ezkit
 SUBDIR+=	efax
 SUBDIR+=	efax-gtk
@@ -23,6 +24,7 @@ SUBDIR+=	gkermit
 SUBDIR+=	gnome-pilot
 SUBDIR+=	gsmlib
 SUBDIR+=	hylafax
+SUBDIR+=	java-rxtx
 SUBDIR+=	jpilot
 SUBDIR+=	jpilot-syncmal
 SUBDIR+=	kermit
@@ -34,6 +36,7 @@ SUBDIR+=	libopensync-plugin-file
 SUBDIR+=	libopensync-plugin-kdepim
 SUBDIR+=	libopensync-plugin-syncml
 SUBDIR+=	libsyncml
+SUBDIR+=	lirc
 SUBDIR+=	lrzsz
 SUBDIR+=	malsync
 SUBDIR+=	mgetty+sendfax
@@ -58,6 +61,7 @@ SUBDIR+=	pilot-link-libs
 SUBDIR+=	pilotmgr
 SUBDIR+=	plp
 SUBDIR+=	py-gammu
+SUBDIR+=	py-serial
 SUBDIR+=	qpage
 SUBDIR+=	ruby-termios
 SUBDIR+=	scmxx

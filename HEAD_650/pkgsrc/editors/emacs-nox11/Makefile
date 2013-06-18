@@ -1,19 +1,20 @@
-# $NetBSD: Makefile,v 1.36 2012/08/13 06:53:06 wiz Exp $
+# $NetBSD: Makefile,v 1.39 2013/04/06 11:23:04 rodent Exp $
 
-PKGNAME=	${DISTNAME:S/-/-nox11-/}
-PKGREVISION=	1
+DISTNAME=	emacs-nox11-${MY_EMACS_VERSION}
+MYPKGREVISION=	0	# Do not remove this when zero
 
-CONFLICTS+=	emacs-[0-9]*
+# XXX: must set this before including bsd.prefs.mk or it doesn't work.
+META_PACKAGE=	yes
 
-FILESDIR=	${.CURDIR}/../../editors/emacs/files
-PATCHDIR=	${.CURDIR}/../../editors/emacs/patches
-PKGDIR=		${.CURDIR}/../../editors/emacs
+.include "../../mk/bsd.prefs.mk"
+
+#
+# Force a nox11 EMACS_TYPE. This way a bulk build will generate
+# emacs meta-packages for use both with and without X.
+#
+
+.if empty(EMACS_TYPE:M*nox)
+MY_EMACS_TYPE=	${EMACS_TYPE}nox
+.endif
 
 .include "../../editors/emacs/Makefile.common"
-
-CONFIGURE_ARGS+=	--without-dbus --without-m17n-flt --without-otf \
-			--without-rsvg --without-x --without-xft \
-			--without-gif --without-jpeg --without-png \
-			--without-tiff --without-xpm
-
-.include "../../mk/bsd.pkg.mk"

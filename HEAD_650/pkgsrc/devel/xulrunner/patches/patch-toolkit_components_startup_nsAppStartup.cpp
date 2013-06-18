@@ -1,8 +1,8 @@
 $NetBSD$
 
---- toolkit/components/startup/nsAppStartup.cpp.orig	2012-11-19 15:43:24.000000000 +0000
+--- toolkit/components/startup/nsAppStartup.cpp.orig	2013-04-10 03:02:51.000000000 +0000
 +++ toolkit/components/startup/nsAppStartup.cpp
-@@ -47,8 +47,10 @@
+@@ -46,8 +46,10 @@
  #undef GetStartupInfo
  #elif defined(XP_UNIX)
  #include <unistd.h>
@@ -11,5 +11,5 @@ $NetBSD$
  #endif
 +#endif
  
- #ifdef XP_MACOSX
- #include <sys/sysctl.h>
+ #if defined(XP_MACOSX) || defined(__DragonFly__) || defined(__FreeBSD__) \
+   || defined(__NetBSD__) || defined(__OpenBSD__)

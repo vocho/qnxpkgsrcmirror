@@ -1,4 +1,4 @@
-#	$NetBSD: bsd.pkg.mk,v 1.1982 2012/07/18 12:29:12 obache Exp $
+#	$NetBSD: bsd.pkg.mk,v 1.1987 2013/02/22 13:35:27 obache Exp $
 #
 # This file is in the public domain.
 #
@@ -99,6 +99,7 @@ SVR4_PKGNAME?=		${PKGNAME}
 WRKSRC?=		${WRKDIR}/${DISTNAME}
 
 # Override for SU_CMD user check
+_IS_ROOT_CMD?=		${TEST}	`${ID} -u` = `${ID} -u ${_SU_ROOT_USER}`
 _SU_ROOT_USER?=		${ROOT_USER}
 REAL_ROOT_USER?=	${ROOT_USER}
 REAL_ROOT_GROUP?=	${ROOT_GROUP}
@@ -194,6 +195,7 @@ BSD_MAKE_ENV+=	MKHTML=no
 
 _BUILD_DEFS=		${BUILD_DEFS}
 _BUILD_DEFS+=		LOCALBASE
+_BUILD_DEFS+=		PKGGNUDIR
 _BUILD_DEFS+=		PKGINFODIR
 _BUILD_DEFS+=		PKGMANDIR
 _BUILD_DEFS+=		_USE_DESTDIR
@@ -615,7 +617,7 @@ su-target: .USE
 	"")	;;							\
 	*)	${PRE_CMD.su-${.TARGET}} ;;				\
 	esac;								\
-	if ${TEST} `${ID} -u` = `${ID} -u ${_SU_ROOT_USER}`; then	\
+	if ${_IS_ROOT_CMD}; then					\
 		${_ROOT_CMD};						\
 	else								\
 		case ${PRE_ROOT_CMD:Q}"" in				\
@@ -784,6 +786,12 @@ ${_MAKEVARS_MK.${_phase_}}: ${WRKDIR}
 
 .if make(pbulk-index) || make(pbulk-index-item) || make(pbulk-save-wrkdir)
 .include "pbulk/pbulk-index.mk"
+.endif
+
+.if defined(_OPSYS_REQUIRE_UAC_MANIFEST) && !empty(_OPSYS_REQUIRE_UAC_MANIFEST:M[Yy][Ee][Ss])
+.  if defined(UAC_REQD_EXECS) && !empty(UAC_REQD_EXECS)
+.include "misc/uac-manifest.mk"
+.  endif
 .endif
 
 .if defined(PKG_DEVELOPER) && ${PKG_DEVELOPER} != "no"
