@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.105 2012/10/06 14:11:02 asau Exp $
+# $NetBSD: Makefile,v 1.113 2013/03/28 08:47:05 sbd Exp $
 
 DISTNAME=	kdegraphics-${_KDE_VERSION}
-PKGREVISION=	23
+PKGREVISION=	29
 CATEGORIES=	graphics
 COMMENT=	Graphics programs for the KDE integrated X11 desktop
 
@@ -15,6 +15,12 @@ BUILDLINK_API_DEPENDS.lcms+=	lcms>=1.12
 REPLACE_PERL+=	kghostview/update-to-xt-names.pl
 
 CONFIGURE_ARGS+=	--with-imlib-config=${X11PREFIX}/bin
+
+FRIBIDI_LIBS=	${TOOLS_PATH.pkg-config} --libs fribidi
+FRIBIDI_CFLAGS=	${TOOLS_PATH.pkg-config} --cflags fribidi
+
+CONFIGURE_ARGS+=	FRIBIDI_LIBS=${FRIBIDI_LIBS:sh:Q}
+CONFIGURE_ARGS+=	FRIBIDI_CFLAGS=${FRIBIDI_CFLAGS:sh:Q}
 
 SUBST_CLASSES+=		kpdf
 SUBST_STAGE.kpdf=	post-patch
@@ -33,6 +39,9 @@ BUILDLINK_TRANSFORM+=	rm:-fno-exceptions
 .endif
 
 .include "../../meta-pkgs/kde3/kde3.mk"
+.if ${OPSYS} == "Linux"
+.include "../../graphics/libv4l/buildlink3.mk"
+.endif
 .include "../../converters/fribidi/buildlink3.mk"
 .include "../../devel/libgphoto2/buildlink3.mk"
 .include "../../graphics/glut/buildlink3.mk"

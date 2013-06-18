@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST.common,v 1.18 2012/11/20 23:05:22 jperkin Exp $
+@comment $NetBSD: PLIST.common,v 1.21 2013/04/12 08:27:15 mef Exp $
 ${MACHINE_GNU_PLATFORM}/bin/ar
 ${MACHINE_GNU_PLATFORM}/bin/as
 ${MACHINE_GNU_PLATFORM}/bin/ld
@@ -19,6 +19,7 @@ bin/gld.bfd
 bin/gnm
 bin/gobjcopy
 bin/gobjdump
+${PLIST.gprof}gnu/bin/gprof
 bin/granlib
 bin/greadelf
 bin/gsize
@@ -129,8 +130,14 @@ share/locale/id/LC_MESSAGES/binutils.mo
 share/locale/id/LC_MESSAGES/gas.mo
 share/locale/id/LC_MESSAGES/ld.mo
 share/locale/id/LC_MESSAGES/opcodes.mo
+share/locale/it/LC_MESSAGES/binutils.mo
+${PLIST.gprof}share/locale/it/LC_MESSAGES/gprof.mo
+share/locale/it/LC_MESSAGES/ld.mo
+share/locale/it/LC_MESSAGES/opcodes.mo
 share/locale/ja/LC_MESSAGES/bfd.mo
 share/locale/ja/LC_MESSAGES/binutils.mo
+share/locale/ja/LC_MESSAGES/gas.mo
+${PLIST.gprof}share/locale/ja/LC_MESSAGES/gprof.mo
 share/locale/ja/LC_MESSAGES/ld.mo
 ${PLIST.gprof}share/locale/ms/LC_MESSAGES/gprof.mo
 ${PLIST.gprof}share/locale/nl/LC_MESSAGES/gprof.mo
@@ -150,6 +157,7 @@ share/locale/rw/LC_MESSAGES/binutils.mo
 share/locale/rw/LC_MESSAGES/gas.mo
 ${PLIST.gprof}share/locale/rw/LC_MESSAGES/gprof.mo
 share/locale/sk/LC_MESSAGES/binutils.mo
+${PLIST.gprof}share/locale/sr/LC_MESSAGES/gprof.mo
 share/locale/sv/LC_MESSAGES/bfd.mo
 share/locale/sv/LC_MESSAGES/binutils.mo
 ${PLIST.gprof}share/locale/sv/LC_MESSAGES/gprof.mo
@@ -161,7 +169,11 @@ share/locale/tr/LC_MESSAGES/gas.mo
 ${PLIST.gprof}share/locale/tr/LC_MESSAGES/gprof.mo
 share/locale/tr/LC_MESSAGES/ld.mo
 share/locale/tr/LC_MESSAGES/opcodes.mo
+share/locale/uk/LC_MESSAGES/bfd.mo
 share/locale/uk/LC_MESSAGES/binutils.mo
+${PLIST.gprof}share/locale/uk/LC_MESSAGES/gprof.mo
+share/locale/uk/LC_MESSAGES/ld.mo
+share/locale/uk/LC_MESSAGES/opcodes.mo
 share/locale/vi/LC_MESSAGES/bfd.mo
 share/locale/vi/LC_MESSAGES/binutils.mo
 share/locale/vi/LC_MESSAGES/ld.mo

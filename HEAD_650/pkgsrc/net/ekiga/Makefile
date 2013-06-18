@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.39 2012/10/23 17:18:19 asau Exp $
+# $NetBSD: Makefile,v 1.45 2013/03/28 21:34:50 joerg Exp $
 #
 
 DISTNAME=		ekiga-3.2.6
-PKGREVISION=		23
+PKGREVISION=		28
 CATEGORIES=		net comms
 MASTER_SITES=		${MASTER_SITE_GNOME:=sources/ekiga/3.2/}
 EXTRACT_SUFX=		.tar.bz2
@@ -28,6 +28,12 @@ GCONF_SCHEMAS=		ekiga.schemas
 GNU_CONFIGURE=		yes
 USE_LIBTOOL=		yes
 USE_LANGUAGES=		c c++
+
+.include "../../mk/compiler.mk"
+.if !empty(PKGSRC_COMPILER:Mclang)
+# libsigc++ uses exceptions in the header files
+BUILDLINK_TRANSFORM+=	rm:-fno-exceptions
+.endif
 
 .include "../../audio/esound/buildlink3.mk"
 .include "../../databases/openldap-client/buildlink3.mk"

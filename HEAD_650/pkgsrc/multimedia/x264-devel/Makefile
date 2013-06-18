@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.39 2012/11/28 16:29:53 adam Exp $
+# $NetBSD: Makefile,v 1.40 2013/01/16 20:55:30 adam Exp $
 
-SNAPSHOT_DATE=	20121127
+SNAPSHOT_DATE=	20130115
 
 DISTNAME=	x264-snapshot-${SNAPSHOT_DATE}-2245
 PKGNAME=	x264-devel-${SNAPSHOT_DATE}
@@ -78,7 +78,7 @@ post-extract:
 	${CP} ${FILESDIR}/strip_fopt.sh ${WRKSRC}/ && \
 	${CHMOD} +x ${WRKSRC}/strip_fopt.sh
 
-.if ${OPSYS} == "QNX"
+.if ${OPSYS} == "QNX" && !empty(OS_VERSION:M[0-6].*)
 .include "../../devel/libgetopt/buildlink3.mk"
 .endif
 

@@ -1,11 +1,10 @@
-# $NetBSD: Makefile,v 1.75 2012/10/21 16:05:19 cheusov Exp $
+# $NetBSD: Makefile,v 1.81 2013/03/11 23:09:03 wiz Exp $
 
 DISTNAME=	jabberd-2.2.17
-PKGREVISION=	2
+PKGREVISION=	7
 CATEGORIES=	chat
-MASTER_SITES=	https://github.com/downloads/Jabberd2/jabberd2/
+MASTER_SITES=	http://cloud.github.com/downloads/jabberd2/jabberd2/
 EXTRACT_SUFX=	.tar.xz
-FETCH_USING=	curl
 
 MAINTAINER=	adam@NetBSD.org
 HOMEPAGE=	http://jabberd2.xiaoka.com/
@@ -92,11 +91,11 @@ pre-configure:
 		-e "s|@jabberd_c2s_bin@|c2s|g"				\
 		-e "s|@jabberd_s2s_bin@|s2s|g"				\
 		-e "s|@jabberd_sm_bin@|sm|g"				\
-		-e "s|@localstatedir@/jabberd/db|${JABBERD_DBDIR}|g"	\
-		-e "s|@localstatedir@/jabberd/log|${JABBERD_LOGDIR}|g"	\
-		-e "s|@localstatedir@/jabberd/pid|${JABBERD_PIDDIR}|g"	\
-		-e "s|@localstatedir@/jabberd/run|${JABBERD_PIDDIR}|g"	\
-		-e "s|@localstatedir@/jabberd/stats|${JABBERD_LOGDIR}|g"\
+		-e "s|@localstatedir@/@package@/db|${JABBERD_DBDIR}|g"	\
+		-e "s|@localstatedir@/@package@/log|${JABBERD_LOGDIR}|g"	\
+		-e "s|@localstatedir@/@package@/pid|${JABBERD_PIDDIR}|g"	\
+		-e "s|@localstatedir@/@package@/run|${JABBERD_PIDDIR}|g"	\
+		-e "s|@localstatedir@/@package@/stats|${JABBERD_LOGDIR}|g"\
 		-e "s|@localstatedir@/lib/jabberd2|${JABBERD_DBDIR}|g"	\
 		-e "s|@pkglibdir@|${PREFIX}/lib/jabberd|g"		\
 		-e "s|<cachain>@sysconfdir@|<cachain>${SSLCERTS}|g"	\

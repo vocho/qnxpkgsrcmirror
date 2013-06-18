@@ -1,4 +1,4 @@
-$NetBSD$
+$NetBSD: patch-configure,v 1.2 2011/10/08 06:17:40 dholland Exp $
 
 Regenerate after patching aclocal.m4 and configure.in.
 

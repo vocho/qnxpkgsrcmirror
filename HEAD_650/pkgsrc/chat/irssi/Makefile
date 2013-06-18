@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.61 2012/10/03 21:54:01 wiz Exp $
+# $NetBSD: Makefile,v 1.63 2013/03/25 09:46:43 sbd Exp $
 
 DISTNAME=		${IRSSI_DISTNAME}
-PKGREVISION=		6
+PKGREVISION=		7
 CATEGORIES=		chat
 MASTER_SITES=		http://www.irssi.org/files/
 EXTRACT_SUFX=		${IRSSI_EXTRACT_SUFX}
@@ -34,4 +34,5 @@ INSTALL_MAKE_FLAGS+=	sysconfdir=${EGDIR}
 post-install:
 	${INSTALL_DATA} ${WRKSRC}/irssi-config ${DESTDIR}${IRSSI_CONFIG}
 
+.include "../../mk/termcap.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

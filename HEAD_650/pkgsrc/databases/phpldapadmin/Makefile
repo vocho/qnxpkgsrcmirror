@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.33 2012/10/02 21:25:40 asau Exp $
+# $NetBSD: Makefile,v 1.36 2013/04/02 16:00:10 taca Exp $
 
 DISTNAME=	phpldapadmin-${VERSION}
 CATEGORIES=	databases www
@@ -20,7 +20,7 @@ DEPENDS+=	${PHP_PKG_PREFIX}-gettext>=4.1.2:../../devel/php-gettext
 
 USE_TOOLS+=	pax
 
-VERSION=	1.2.2
+VERSION=	1.2.3
 NO_BUILD=	YES
 
 CONF_FILES+=  ${PREFIX}/share/examples/phpldapadmin/config.php.example \
@@ -48,8 +48,8 @@ do-install:
 	${INSTALL_DATA} ${WRKSRC}/index.php \
 		${DESTDIR}${PREFIX}/share/phpldapadmin
 .for i in ${PAX_DIRS}
-	cd ${WRKSRC}/${i:Q} && pax \
-		-rwppm . ${DESTDIR}${PREFIX}/share/phpldapadmin/${i:Q}
+	cd ${WRKSRC}/${i:Q} && ${FIND} . -type f \! -name '*.orig' -print | \
+		 pax -rwppm  ${DESTDIR}${PREFIX}/share/phpldapadmin/${i:Q}
 .endfor
 	${INSTALL_DATA} ${WRKSRC}/INSTALL \
 		${DESTDIR}${PREFIX}/share/doc/phpldapadmin

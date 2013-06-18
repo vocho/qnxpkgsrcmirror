@@ -1,16 +1,15 @@
-# $NetBSD: Makefile,v 1.7 2012/10/08 23:01:04 adam Exp $
+# $NetBSD: Makefile,v 1.12 2013/04/06 03:45:18 rodent Exp $
 #
 
-PKGNAME=	libkvkontakte-2.5.0
-DISTNAME=	digikam-2.5.0
-PKGREVISION=	5
+PKGNAME=	libkvkontakte-3.1.0
+DISTNAME=	digikam-3.1.0
 CATEGORIES=	misc
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=digikam/}
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.digikam.org/
-COMMENT=	KDE library for asynchronous interaction with vkontakte.rusocial network
+COMMENT=	KDE library for asynchronous interaction with vkontakte.ru
 LICENSE=	gnu-gpl-v2
 
 BUILD_DEPENDS+=	automoc4>=0.9.83:../../devel/automoc4

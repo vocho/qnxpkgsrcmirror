@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.19 2012/10/02 21:25:42 asau Exp $
+# $NetBSD: Makefile,v 1.22 2013/02/09 11:19:10 adam Exp $
 
 PKGNAME=	${DISTNAME:C/-/84-client-/}
 COMMENT=	PostgreSQL database client programs

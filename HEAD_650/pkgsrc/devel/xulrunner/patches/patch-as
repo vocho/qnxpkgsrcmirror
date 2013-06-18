@@ -1,10 +1,10 @@
-$NetBSD: patch-as,v 1.9 2012/11/21 15:26:50 ryoon Exp $
+$NetBSD: patch-as,v 1.10 2013/01/10 15:01:30 ryoon Exp $
 
 Treat DragonFly like FreeBSD.
 
---- js/src/configure.in.orig	2012-11-19 15:42:30.000000000 +0000
+--- js/src/configure.in.orig	2013-04-10 03:01:48.000000000 +0000
 +++ js/src/configure.in
-@@ -2701,7 +2701,7 @@ then
+@@ -2698,7 +2698,7 @@ then
      fi
  
  	case "$target" in
@@ -13,7 +13,7 @@ Treat DragonFly like FreeBSD.
  			AC_DEFINE(_REENTRANT)
  			AC_DEFINE(_THREAD_SAFE)
  			dnl -pthread links in -lpthread, so don't specify it explicitly.
-@@ -3545,7 +3545,7 @@ if test "$MOZ_MEMORY"; then
+@@ -3556,7 +3556,7 @@ if test "$MOZ_MEMORY"; then
    *-darwin*)
      AC_DEFINE(MOZ_MEMORY_DARWIN)
      ;;
@@ -22,7 +22,7 @@ Treat DragonFly like FreeBSD.
      AC_DEFINE(MOZ_MEMORY_BSD)
      ;;
    *-android*|*-linuxandroid*)
-@@ -3558,6 +3558,9 @@ if test "$MOZ_MEMORY"; then
+@@ -3569,6 +3569,9 @@ if test "$MOZ_MEMORY"; then
    *-netbsd*)
      AC_DEFINE(MOZ_MEMORY_BSD)
      ;;

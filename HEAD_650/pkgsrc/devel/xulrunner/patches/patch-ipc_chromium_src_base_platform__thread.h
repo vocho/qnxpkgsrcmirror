@@ -1,17 +1,8 @@
 $NetBSD$
 
---- ipc/chromium/src/base/platform_thread.h.orig	2012-11-19 15:42:29.000000000 +0000
+--- ipc/chromium/src/base/platform_thread.h.orig	2013-04-10 03:01:46.000000000 +0000
 +++ ipc/chromium/src/base/platform_thread.h
-@@ -22,12 +22,16 @@ typedef void* PlatformThreadHandle;  // 
- #elif defined(OS_POSIX)
- #include <pthread.h>
- typedef pthread_t PlatformThreadHandle;
--#if defined(OS_LINUX)
-+#if defined(OS_LINUX) || defined(OS_OPENBSD)
- #include <unistd.h>
- typedef pid_t PlatformThreadId;
-+#elif defined(OS_BSD)
-+typedef lwpid_t PlatformThreadId;
+@@ -31,6 +31,8 @@ typedef lwpid_t PlatformThreadId;
  #elif defined(OS_MACOSX)
  #include <mach/mach.h>
  typedef mach_port_t PlatformThreadId;

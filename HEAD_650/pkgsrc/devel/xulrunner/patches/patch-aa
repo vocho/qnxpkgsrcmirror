@@ -1,8 +1,8 @@
-$NetBSD: patch-aa,v 1.14 2012/11/21 15:26:49 ryoon Exp $
+$NetBSD: patch-aa,v 1.18 2013/04/05 13:30:17 ryoon Exp $
 
---- configure.in.orig	2012-11-19 15:42:04.000000000 +0000
+--- configure.in.orig	2013-04-10 03:01:22.000000000 +0000
 +++ configure.in
-@@ -1189,6 +1189,14 @@ OS_2)
+@@ -1227,6 +1227,14 @@ OS_2)
      OS_TARGET=OS2
      OS_RELEASE=`uname -v`
      ;;
@@ -17,7 +17,7 @@ $NetBSD: patch-aa,v 1.14 2012/11/21 15:26:49 ryoon Exp $
  Darwin)
      case "${target_cpu}" in
      powerpc*)
-@@ -2080,6 +2088,9 @@ ia64*-hpux*)
+@@ -2130,6 +2138,9 @@ ia64*-hpux*)
      if test -z "$MC"; then
          MC=mc.exe
      fi
@@ -27,7 +27,7 @@ $NetBSD: patch-aa,v 1.14 2012/11/21 15:26:49 ryoon Exp $
      ;;
  *-mingw*)
      DSO_CFLAGS=
-@@ -2288,6 +2299,35 @@ ia64*-hpux*)
+@@ -2346,6 +2357,35 @@ ia64*-hpux*)
      MKCSHLIB='$(CC) $(CFLAGS) $(DSO_PIC_CFLAGS) $(DSO_LDOPTS) -Wl,-soname,lib$(LIBRARY_NAME)$(DLL_SUFFIX) -o $@'
      ;;
  
@@ -63,7 +63,7 @@ $NetBSD: patch-aa,v 1.14 2012/11/21 15:26:49 ryoon Exp $
  *-openbsd*)
      if test "$SO_VERSION"; then
          DLL_SUFFIX=".so.$SO_VERSION"
-@@ -2979,6 +3019,12 @@ dnl ====================================
+@@ -3071,6 +3111,12 @@ dnl ====================================
  case $target in
  *-hpux11.*)
  	;;
@@ -76,7 +76,7 @@ $NetBSD: patch-aa,v 1.14 2012/11/21 15:26:49 ryoon Exp $
  *)
  	AC_CHECK_LIB(c_r, gethostbyname_r)
  	;;
-@@ -3279,6 +3325,9 @@ AC_CACHE_CHECK(
+@@ -3372,6 +3418,9 @@ AC_CACHE_CHECK(
          #ifdef linux
          #define _BSD_SOURCE 1
          #endif
@@ -86,7 +86,7 @@ $NetBSD: patch-aa,v 1.14 2012/11/21 15:26:49 ryoon Exp $
          #include <resolv.h>
          ],
          [int foo = res_ninit(&_res);],
-@@ -3947,6 +3996,14 @@ if test -n "$YASM"; then
+@@ -4042,6 +4091,14 @@ if test -n "$YASM"; then
    _YASM_BUILD=`        echo ${YASM_VERSION} | $AWK -F\. '{ print $4 }'`
  fi
  
@@ -101,32 +101,27 @@ $NetBSD: patch-aa,v 1.14 2012/11/21 15:26:49 ryoon Exp $
  if test -z "$SKIP_LIBRARY_CHECKS"; then
  dnl system JPEG support
  dnl ========================================================
-@@ -5158,8 +5215,8 @@ fi
- 
- AC_SUBST(MOZ_WEBRTC)
+@@ -5326,8 +5383,8 @@ AC_SUBST(MOZ_WEBRTC_IN_LIBXUL)
+ AC_SUBST(MOZ_SCTP)
+ AC_SUBST(MOZ_SRTP)
  
 -case "$target_cpu" in
 -arm*)
 +case "$target" in
 +arm-*-linux*|*-dragonfly*|*-freebsd*|*-netbsd*|*-openbsd*)
-     MOZ_SAMPLE_TYPE_S16LE=1
-     AC_DEFINE(MOZ_SAMPLE_TYPE_S16LE)
-     AC_SUBST(MOZ_SAMPLE_TYPE_S16LE)
-@@ -5356,11 +5413,11 @@ if test -n "$MOZ_VP8" -a -z "$MOZ_NATIVE
+     MOZ_SAMPLE_TYPE_S16=1
+     AC_DEFINE(MOZ_SAMPLE_TYPE_S16)
+     AC_SUBST(MOZ_SAMPLE_TYPE_S16)
+@@ -5731,7 +5788,7 @@ MOZ_ALSA=)
  
-     dnl See if we have assembly on this platform.
-     case "$OS_ARCH:$CPU_ARCH" in
--    Linux:x86)
-+    Linux:x86|DragonFly:x86|*BSD:i386)
-       VPX_ASFLAGS="-f elf32 -rnasm -pnasm"
-       VPX_X86_ASM=1
-     ;;
--    Linux:x86_64)
-+    Linux:x86_64|DragonFly:x86_64|*BSD:x86_64)
-       VPX_ASFLAGS="-f elf64 -rnasm -pnasm -DPIC"
-       VPX_X86_ASM=1
-     ;;
-@@ -6895,7 +6952,11 @@ else
+ if test -n "$MOZ_ALSA"; then
+     AC_DEFINE(MOZ_CUBEB)
+-    PKG_CHECK_MODULES(MOZ_ALSA, alsa, ,
++    PKG_CHECK_MODULES(MOZ_ALSA, alsa, MOZ_ALSA=1,
+          [echo "$MOZ_ALSA_PKG_ERRORS"
+           AC_MSG_ERROR([Need alsa for Ogg, Wave or WebM decoding on Linux.  Disable with --disable-ogg --disable-wave --disable-webm.  (On Ubuntu, you might try installing the package libasound2-dev.)])])
+ fi
+@@ -7097,7 +7154,11 @@ else
    MOZ_GLUE_PROGRAM_LDFLAGS="$MOZ_GLUE_PROGRAM_LDFLAGS "'$(MKSHLIB_UNFORCE_ALL)'
    if test -n "$GNU_CC"; then
      dnl And we need mozglue symbols to be exported.
@@ -138,4 +133,4 @@ $NetBSD: patch-aa,v 1.14 2012/11/21 15:26:49 ryoon Exp $
 +    fi
    fi
    if test "$MOZ_LINKER" = 1; then
-     MOZ_GLUE_PROGRAM_LDFLAGS="$MOZ_GLUE_PROGRAM_LDFLAGS $ZLIB_LIBS"
+     MOZ_GLUE_PROGRAM_LDFLAGS="$MOZ_GLUE_PROGRAM_LDFLAGS $MOZ_ZLIB_LIBS"

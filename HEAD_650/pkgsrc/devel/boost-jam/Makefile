@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.7 2012/10/31 11:16:42 asau Exp $
+# $NetBSD: Makefile,v 1.9 2013/02/12 21:07:21 adam Exp $
 
 BOOST_PACKAGE=		jam
 BOOST_COMMENT=		(Boost.Jam utility)
@@ -11,7 +11,7 @@ CONFLICTS+=		boost-build<=1.33.1
 SUBST_CLASSES+=		bb
 SUBST_MESSAGE.bb=	Fixing path to Boost.Build files.
 SUBST_STAGE.bb=		pre-build
-SUBST_FILES.bb=		tools/jam/src/Jambase
+SUBST_FILES.bb=		tools/build/v2/engine/Jambase
 SUBST_SED.bb=		-e 's,/usr/share/boost-build,${PREFIX}/share/boost-build,g'
 
 .include "../../devel/boost-build/toolset.mk"

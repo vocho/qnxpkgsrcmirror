@@ -1,9 +1,6 @@
-# $NetBSD: Makefile,v 1.14 2012/10/06 14:10:47 asau Exp $
+# $NetBSD: Makefile,v 1.19 2013/02/16 21:18:29 adam Exp $
 
-DISTNAME=	enblend-enfuse-4.0
-# XXX distribution file has changed; remove the line below on next update
-DIST_SUBDIR=	${PKGNAME_NOREV}
-PKGREVISION=	7
+DISTNAME=	enblend-enfuse-4.1.1
 CATEGORIES=	graphics
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=enblend/}
 
@@ -12,13 +9,11 @@ HOMEPAGE=	http://enblend.sourceforge.net/
 COMMENT=	Combines overlapping images without seams, with good exposure
 LICENSE=	gnu-gpl-v2
 
-WRKSRC=		${WRKDIR}/${PKGNAME_NOREV}-753b534c819d
-
 USE_LANGUAGES=		c c++
 USE_LIBTOOL=		yes
 USE_TOOLS+=		gmake perl:build pkg-config
 GNU_CONFIGURE=		yes
-CONFIGURE_ARGS+=	--disable-image-cache
+CONFIGURE_ARGS+=	--with-boost-filesystem
 
 .include "../../mk/bsd.prefs.mk"
 
@@ -36,9 +31,10 @@ LIBS+=			-lboost_system
 .include "../../devel/boost-libs/buildlink3.mk"
 .include "../../mk/jpeg.buildlink3.mk"
 .include "../../graphics/glew/buildlink3.mk"
-.include "../../graphics/lcms/buildlink3.mk"
-.include "../../graphics/libxmi/buildlink3.mk"
+.include "../../graphics/lcms2/buildlink3.mk"
 .include "../../graphics/openexr/buildlink3.mk"
 .include "../../graphics/png/buildlink3.mk"
 .include "../../graphics/tiff/buildlink3.mk"
+.include "../../graphics/vigra/buildlink3.mk"
+.include "../../math/gsl/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

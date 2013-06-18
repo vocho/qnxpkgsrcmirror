@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.87 2012/10/08 12:19:18 asau Exp $
+# $NetBSD: Makefile,v 1.93 2013/03/09 22:15:08 is Exp $
 
 DISTNAME=		mutt-1.5.21
-PKGREVISION=		5
+PKGREVISION=		11
 CATEGORIES=		mail
 MUTT_SITES=		ftp://ftp.mutt.org/mutt/ \
 			ftp://ftp.stealth.net/pub/mirrors/ftp.mutt.org/pub/mutt/ \
@@ -49,7 +49,7 @@ CONFIGURE_ARGS+=	--with-exec-shell=/bin/ksh
 
 .include "options.mk"
 
-LDFLAGS+=		${_STRIPFLAG_CC}
+LDFLAGS+=		${_STRIPFLAG_CC} -g
 
 DOCDIR=			${PREFIX}/share/doc/mutt
 EGDIR=			${PREFIX}/share/examples/mutt

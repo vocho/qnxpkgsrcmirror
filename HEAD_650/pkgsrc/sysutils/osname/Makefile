@@ -1,17 +1,15 @@
-# $NetBSD: Makefile,v 1.8 2012/10/23 19:51:16 asau Exp $
+# $NetBSD: Makefile,v 1.10 2013/03/14 14:25:31 kim Exp $
 #
 
-DISTNAME=		osname-1.1
-PKGREVISION=		1
+DISTNAME=		osname-2.0
 CATEGORIES=		sysutils
-MASTER_SITES=		# ftp://ftp.gw.com/pub/people/kim/
+MASTER_SITES=		http://oss.gw.com/people/kim/
 
 MAINTAINER=		kim@tac.nyc.ny.us
 COMMENT=		Print canonical name of operating system
 
 NO_CONFIGURE=		yes
-BUILD_MAKE_FLAGS+=	PREFIX=${PREFIX}
-INSTALL_MAKE_FLAGS+=	PREFIX=${PREFIX}
+MAKE_FLAGS+=		PREFIX=${PREFIX}
 
 INSTALLATION_DIRS=	bin ${PKGMANDIR}/man1
 

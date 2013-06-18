@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.38 2012/10/08 12:27:41 asau Exp $
+# $NetBSD: Makefile,v 1.40 2013/02/06 23:23:28 jperkin Exp $
 
 DISTNAME=		nntpcache-3.0.2
-PKGREVISION=		2
+PKGREVISION=		4
 CATEGORIES=		news
 MASTER_SITES=		http://www.xs4all.nl/~suelette/
 

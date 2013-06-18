@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.4 2012/03/17 14:23:21 taca Exp $
+# $NetBSD: Makefile,v 1.7 2013/02/13 15:12:42 taca Exp $
 
-DISTNAME=	data_objects-0.10.8
+DISTNAME=	data_objects-0.10.12
 CATEGORIES=	databases
 
 MAINTAINER=	pkgsrc-users@NetBSD.org

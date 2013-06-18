@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.18 2012/10/03 12:55:10 asau Exp $
+# $NetBSD: Makefile,v 1.21 2013/04/01 16:03:48 wiz Exp $
 #
 
 DISTNAME=		ckmame-0.11
-PKGREVISION=		4
+PKGREVISION=		6
 CATEGORIES=		emulators
 MASTER_SITES=		http://www.nih.at/ckmame/
 EXTRACT_SUFX=		.tar.bz2
 
-OWNER=			dillo@NetBSD.org
+MAINTAINER=		wiz@NetBSD.org
 HOMEPAGE=		http://www.nih.at/ckmame/
 COMMENT=		Check ROM sets for MAME
 LICENSE=		modified-bsd

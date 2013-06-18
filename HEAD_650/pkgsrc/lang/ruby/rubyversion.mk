@@ -1,4 +1,4 @@
-# $NetBSD: rubyversion.mk,v 1.92 2012/11/10 14:34:27 taca Exp $
+# $NetBSD: rubyversion.mk,v 1.97 2013/04/08 11:17:15 rodent Exp $
 #
 
 # This file determines which Ruby version is used as a dependency for
@@ -110,7 +110,7 @@
 #
 # RUBY_VERSION_FULL
 #	Version of Ruby including patchlevel.
-#	
+#
 # RUBY_BASE
 #	Name of ruby base package's name.
 #
@@ -176,7 +176,7 @@
 #
 # RUBY_GEM_BASE
 #	common GEM directory.
-#	
+#
 # GEM_HOME
 #	version specific GEM directory.
 #
@@ -206,7 +206,7 @@ RUBY193_VERSION=	1.9.3
 
 # patch
 RUBY18_PATCHLEVEL=	pl371
-RUBY193_PATCHLEVEL=	p327
+RUBY193_PATCHLEVEL=	p392
 
 # current API compatible version; used for version of shared library
 RUBY18_API_VERSION=	1.8.7
@@ -340,6 +340,10 @@ _RUBY_SHLIBALIAS=	${RUBY_VER}.${RUBY_SLEXT}.${_RUBY_VER_MAJOR}.${_RUBY_VER_MINOR
 .elif ${OPSYS} == "SunOS"
 RUBY_SHLIBVER=		${_RUBY_VER_MAJOR}
  _RUBY_SHLIBALIAS=	${RUBY_VER}.${RUBY_SLEXT}.${_RUBY_VER_MAJOR}.${_RUBY_VER_MINOR}.${_RUBY_API_MINOR}
+.elif ${OPSYS} == "Cygwin"
+RUBY_SHLIB=		${RUBY_VER}${_RUBY_API_MAJOR}${_RUBY_API_MINOR}.dll.a
+RUBY_SHLIBALIAS=	bin/cygruby${RUBY_VER}${_RUBY_API_MAJOR}${_RUBY_API_MINOR}.dll
+RUBY_STATICLIB=		${RUBY_VER}${_RUBY_API_MAJOR}${_RUBY_API_MINOR}-static.a
 .endif
 
 .if !empty(_RUBY_SHLIBALIAS)

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.29 2012/10/08 23:01:01 adam Exp $
+# $NetBSD: Makefile,v 1.32 2013/02/16 11:19:44 wiz Exp $
 
 .include "../../x11/qt4-libs/Makefile.common"
 

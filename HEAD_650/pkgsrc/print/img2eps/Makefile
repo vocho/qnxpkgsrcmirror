@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.26 2012/10/08 13:45:39 asau Exp $
+# $NetBSD: Makefile,v 1.29 2013/02/16 11:24:10 wiz Exp $
 #
 
 DISTNAME=	img2eps-0.2
-PKGREVISION=	10
+PKGREVISION=	12
 CATEGORIES=	print graphics
 MASTER_SITES=	http://www.nih.at/img2eps/
 
-OWNER=		dillo@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.nih.at/img2eps/
 COMMENT=	Convert raster images to EPS files
 

@@ -1,21 +1,20 @@
-# $NetBSD: Makefile,v 1.40 2012/10/29 05:06:51 asau Exp $
+# $NetBSD: Makefile,v 1.43 2013/04/06 03:45:28 rodent Exp $
 
-DISTNAME=		rxvt-unicode-9.15
-PKGREVISION=		4
-CATEGORIES=		x11
-MASTER_SITES=		http://dist.schmorp.de/rxvt-unicode/ \
-			http://dist.schmorp.de/rxvt-unicode/Attic/
-EXTRACT_SUFX=		.tar.bz2
+DISTNAME=	rxvt-unicode-9.16
+CATEGORIES=	x11
+MASTER_SITES=	http://dist.schmorp.de/rxvt-unicode/ \
+		http://dist.schmorp.de/rxvt-unicode/Attic/
+EXTRACT_SUFX=	.tar.bz2
 
-MAINTAINER=		pkgsrc-users@NetBSD.org
-HOMEPAGE=		http://software.schmorp.de/pkg/rxvt-unicode.html
-COMMENT=		rxvt clone supporting Xft fonts and Unicode
-LICENSE=		gnu-gpl-v2
+MAINTAINER=	pkgsrc-users@NetBSD.org
+HOMEPAGE=	http://software.schmorp.de/pkg/rxvt-unicode.html
+COMMENT=	Clone of rxvt supporting Xft fonts and Unicode
+LICENSE=	gnu-gpl-v2
 
-GNU_CONFIGURE=		yes
-USE_LANGUAGES=		c c++
-USE_TOOLS+=		pkg-config
-USE_FEATURES+=		snprintf
+GNU_CONFIGURE=	yes
+USE_LANGUAGES=	c c++
+USE_TOOLS+=	pkg-config
+USE_FEATURES+=	snprintf
 
 CONFIGURE_ENV+=		ac_cv_path_TIC=no
 

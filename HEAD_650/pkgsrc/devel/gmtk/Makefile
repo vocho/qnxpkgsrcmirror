@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.12 2012/11/03 01:58:32 ryoon Exp $
+# $NetBSD: Makefile,v 1.15 2013/03/16 10:43:43 obache Exp $
 #
 
-DISTNAME=	gmtk-1.0.6
-PKGREVISION=	6
+DISTNAME=	gmtk-1.0.8
 CATEGORIES=	devel
 MASTER_SITES=	http://gmtk.googlecode.com/files/
 

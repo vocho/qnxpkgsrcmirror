@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.4 2011/12/18 10:07:54 marino Exp $
+# $NetBSD: Makefile,v 1.6 2013/04/06 14:09:33 rodent Exp $
 #
 
 CLISP_MODULE=	pari
 
-PKGNAME=	clisp-$(CLISP_MODULE)-$(CLISP_VERSION)
+PKGNAME=	clisp-${CLISP_MODULE}-${CLISP_VERSION}
 PKGREVISION=	1
 CATEGORIES=	devel
-MASTER_SITES=	$(MASTER_SITE_SOURCEFORGE:=clisp/)
+MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=clisp/}
 
-MAINTAINER=	hans@netbsd.org
+MAINTAINER=	hans@NetBSD.org
 HOMEPAGE=	http://clisp.cons.org/
 COMMENT=	CLISP pari module
 

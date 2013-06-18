@@ -1,22 +1,22 @@
-# $NetBSD: Makefile,v 1.5 2012/10/03 21:57:13 wiz Exp $
+# $NetBSD: Makefile,v 1.8 2013/04/08 11:17:20 rodent Exp $
 
-PKGNAME=		gridscheduler-2011.11
-DISTNAME=		GE2011.11
-PKGREVISION=		2
-CATEGORIES=		parallel sysutils
-MASTER_SITES=		$(MASTER_SITE_SOURCEFORGE:=gridscheduler/)
+PKGNAME=	gridscheduler-2011.11
+DISTNAME=	GE2011.11
+PKGREVISION=	3
+CATEGORIES=	parallel sysutils
+MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=gridscheduler/}
 
-MAINTAINER=		pkgsrc-users@NetBSD.org
-HOMEPAGE=		http://gridscheduler.sourceforge.net/
-COMMENT=		Open Grid Scheduler/Grid Engine resource management system
+MAINTAINER=	pkgsrc-users@NetBSD.org
+HOMEPAGE=	http://gridscheduler.sourceforge.net/
+COMMENT=	Open Grid Scheduler/Grid Engine resource management system
 
-BUILD_DEPENDS+=		{standalone-tcsh,tcsh}-[0-9]*:../../shells/tcsh
+BUILD_DEPENDS+=	{standalone-tcsh,tcsh}-[0-9]*:../../shells/tcsh
 
 # Not 64-bit clean; crashes during build.
 NOT_FOR_PLATFORM=	${LP64PLATFORMS}
 
-GNU_CONFIGURE=		YES
-USE_TOOLS+=		gmake perl:run
+GNU_CONFIGURE=	yes
+USE_TOOLS+=	gmake perl:run
 
 CFLAGS+=		-D${UPPER_OPSYS}
 CONFIGURE_ENV+=		REMOTE=sge
@@ -117,7 +117,7 @@ post-patch:
 SUBST_CLASSES+=		paths
 SUBST_STAGE.paths=	post-patch
 SUBST_FILES.paths=	source/dist/util/arch_variables
-SUBST_SED.paths=	-e 's;@rcd_dir@;${RCD_SCRIPTS_DIR};' 
+SUBST_SED.paths=	-e 's;@rcd_dir@;${RCD_SCRIPTS_DIR};'
 
 do-configure:
 .for __prog__ in qmake qtcsh

@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.92 2012/10/23 17:18:40 asau Exp $
+# $NetBSD: Makefile,v 1.97 2013/04/05 18:20:08 christos Exp $
 
-DISTNAME=	net-snmp-5.6.1.1
-PKGREVISION=	4
+DISTNAME=	net-snmp-5.7.2
 CATEGORIES=	net
+PKGREVISION=	2
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=net-snmp/}
 
 MAINTAINER=	adam@NetBSD.org
@@ -24,6 +24,9 @@ MAKE_JOBS_SAFE=	no
 LIBS.QNX+= -lsocket
 
 .include "options.mk"
+
+# Don't compress manual pages as they include each other.
+.undef MANZ
 
 .if ${OPSYS} == "DragonFly"
 MAKE_ENV+=	MIB_SYSTEM_LIBS=-lkinfo

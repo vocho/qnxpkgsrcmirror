@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.62 2012/10/02 21:25:16 asau Exp $
+# $NetBSD: Makefile,v 1.66 2013/03/03 11:55:12 obache Exp $
 #
 # NOTE:
 # When updating this package, a change in the minor (4.n -> 4.(n+1))
@@ -18,6 +18,7 @@ MASTER_SITES=	http://download.oracle.com/berkeley-db/ \
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.oracle.com/database/berkeley-db/db/index.html
 COMMENT=	Berkeley DB version 4 from Oracle
+LICENSE=	sleepycat-public
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
 
@@ -35,6 +36,8 @@ CONFIGURE_ARGS+=	--program-transform-name=s,db_,db4_,
 OPSYSVARS+=		LIBSO_LIBS
 LIBSO_LIBS.SunOS+=	-lnsl -lrt
 CONFIGURE_ENV+=		LIBSO_LIBS=${LIBSO_LIBS:Q}
+
+.include "options.mk"
 
 # DB4 only want pthreads because it's really after POSIX 1003.1
 # inter-process mutexes.  In this case, we only care to use the native

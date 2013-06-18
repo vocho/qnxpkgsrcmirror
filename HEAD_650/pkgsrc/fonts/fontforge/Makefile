@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.83 2012/11/23 20:49:03 adam Exp $
+# $NetBSD: Makefile,v 1.85 2013/02/16 11:21:10 wiz Exp $
 
 DISTNAME=	fontforge_full-20120731-b
 PKGNAME=	${DISTNAME:S/_full//:S/-b//}
+PKGREVISION=	2
 CATEGORIES=	fonts editors
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=fontforge/}
 EXTRACT_SUFX=	.tar.bz2

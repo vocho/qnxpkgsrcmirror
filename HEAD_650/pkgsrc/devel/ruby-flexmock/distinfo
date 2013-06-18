@@ -1,5 +1,5 @@
-$NetBSD: distinfo,v 1.8 2012/09/16 06:18:57 taca Exp $
+$NetBSD: distinfo,v 1.11 2013/03/11 07:33:57 taca Exp $
 
-SHA1 (flexmock-1.0.2.gem) = dc9e958a7a57564923d8566abd8f3fe9208ca362
-RMD160 (flexmock-1.0.2.gem) = 8e8dc8aa81e07025caa259633acff6deb44354b6
-Size (flexmock-1.0.2.gem) = 89088 bytes
+SHA1 (flexmock-1.3.1.gem) = c151999522af5a0180cdf1c80396f2a550a41f42
+RMD160 (flexmock-1.3.1.gem) = 8c6f845e396cf86c3efd425c00a8baae55e358a4
+Size (flexmock-1.3.1.gem) = 96768 bytes

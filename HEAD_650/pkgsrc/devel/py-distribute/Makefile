@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.3 2012/10/31 11:19:30 asau Exp $
-#
+# $NetBSD: Makefile,v 1.8 2013/04/10 11:07:41 wiz Exp $
 
-DISTNAME=	distribute-0.6.29
-PKGNAME=	${PYPKGPREFIX}-distribute-0.6.29
+DISTNAME=	distribute-0.6.36
+PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
 CATEGORIES=	devel
 MASTER_SITES=	http://pypi.python.org/packages/source/d/distribute/
 
@@ -15,5 +14,9 @@ CONFLICTS+=	${PYPKGPREFIX}-setuptools-[0-9]*
 PYTHON_VERSIONS_INCLUDE_3X= yes
 PLIST_SUBST+=	PYVERSSUFFIX=${PYVERSSUFFIX}
 
+REPLACE_PYTHON=		setuptools/command/easy_install.py
+REPLACE_PYTHON+=	setuptools/tests/test_resources.py
+
+.include "../../lang/python/application.mk"
 .include "../../lang/python/distutils.mk"
 .include "../../mk/bsd.pkg.mk"

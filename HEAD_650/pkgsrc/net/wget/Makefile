@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.113 2012/10/23 17:19:18 asau Exp $
+# $NetBSD: Makefile,v 1.115 2013/02/26 11:05:10 obache Exp $
 
 DISTNAME=	wget-1.14
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	net
 MASTER_SITES=	${MASTER_SITE_GNU:=wget/}
 EXTRACT_SUFX=	.tar.xz
@@ -19,6 +19,8 @@ USE_PKGLOCALEDIR=	YES
 USE_TOOLS+=		msgfmt
 
 CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR}
+
+REPLACE_PERL+=		doc/texi2pod.pl
 
 EGDIR=			${PREFIX}/share/examples/wget
 CONF_FILES=		${EGDIR}/wgetrc ${PKG_SYSCONFDIR}/wgetrc

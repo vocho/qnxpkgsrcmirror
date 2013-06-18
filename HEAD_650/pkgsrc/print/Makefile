@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.550 2012/11/16 14:38:35 jaapb Exp $
+# $NetBSD: Makefile,v 1.559 2013/04/03 10:56:16 markd Exp $
 #
 
 COMMENT=	Desktop publishing
@@ -26,11 +26,13 @@ SUBDIR+=	cnprint
 SUBDIR+=	cups
 SUBDIR+=	cups-drivers-Magicolor5440DL
 SUBDIR+=	cups-pdf
+SUBDIR+=	deforaos-pdfviewer
 SUBDIR+=	diffpdf
 SUBDIR+=	dvidvi
 SUBDIR+=	dviljk
 SUBDIR+=	dvipdfmx
 SUBDIR+=	dvipsk
+SUBDIR+=	electrix
 SUBDIR+=	enscript
 SUBDIR+=	epdfview
 SUBDIR+=	epstool
@@ -46,7 +48,9 @@ SUBDIR+=	foomatic-ppds-cups
 SUBDIR+=	foomatic4-db
 SUBDIR+=	foomatic4-db-engine
 SUBDIR+=	foomatic4-filters
-SUBDIR+=	ghostscript
+#SUBDIR+=	ghostscript	# only contains Makefile fragments
+SUBDIR+=	ghostscript-agpl
+SUBDIR+=	ghostscript-gpl
 SUBDIR+=	glabels
 SUBDIR+=	gtklp
 SUBDIR+=	gutenprint-lib
@@ -111,7 +115,6 @@ SUBDIR+=	poppler-qt4
 SUBDIR+=	poppler-utils
 SUBDIR+=	poppler016
 SUBDIR+=	poster
-SUBDIR+=	printer-applet
 SUBDIR+=	pscal
 SUBDIR+=	psify
 SUBDIR+=	psjoin
@@ -123,6 +126,8 @@ SUBDIR+=	py-cups
 SUBDIR+=	py-pisa
 SUBDIR+=	py-pslib
 SUBDIR+=	py-reportlab
+SUBDIR+=	qpdf
+SUBDIR+=	qpdfview
 SUBDIR+=	rlpr
 SUBDIR+=	rtf2latex
 SUBDIR+=	rtf2latex2e
@@ -638,6 +643,8 @@ SUBDIR+=	tex-texmate
 SUBDIR+=	tex-texmate-doc
 SUBDIR+=	tex-texpower
 SUBDIR+=	tex-texpower-doc
+SUBDIR+=	tex-textcase
+SUBDIR+=	tex-textcase-doc
 SUBDIR+=	tex-thailatex
 SUBDIR+=	tex-threeparttable
 SUBDIR+=	tex-threeparttable-doc

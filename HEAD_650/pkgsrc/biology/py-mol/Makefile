@@ -1,9 +1,8 @@
-# $NetBSD: Makefile,v 1.14 2012/10/04 00:21:58 cheusov Exp $
+# $NetBSD: Makefile,v 1.16 2013/04/14 19:48:56 joerg Exp $
 
-DISTNAME=	pymol-v1.4.1
+DISTNAME=	pymol-v1.5.0.1
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME:S/pymol-v/mol-/}
-EGG_NAME=	pymol-1.4.0
-PKGREVISION=	3
+EGG_NAME=	pymol-1.5.0.1
 CATEGORIES=	biology
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=pymol/}
 EXTRACT_SUFX=	.tar.bz2
@@ -31,6 +30,9 @@ REPLACE_PYTHON=	test/cyg test/run test/show test/win.py
 CHECK_PORTABILITY_SKIP+=	setup/*
 
 INSTALLATION_DIRS=	bin
+
+# Gross hack
+PYSETUPBUILDTARGET=	install
 
 post-install:
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} PYTHONPATH=${DESTDIR}${PREFIX}/${PYSITELIB} ${PYTHONBIN} setup2.py install

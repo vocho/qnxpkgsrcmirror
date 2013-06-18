@@ -1,4 +1,4 @@
-# $NetBSD: options.mk,v 1.2 2012/04/26 13:27:43 hans Exp $
+# $NetBSD: options.mk,v 1.5 2013/04/06 14:58:19 rodent Exp $
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.gcc34
 PKG_SUPPORTED_OPTIONS=	nls gcc-inplace-math gcc-c++ gcc-fortran gcc-java gcc-objc gcc-ada
@@ -44,8 +44,6 @@ CONFIGURE_ARGS+=	--disable-nls
 
 ###
 ### Optional languages
-### Ada could be added although there is a bootstrapping issue.  See
-### ../gcc34-ada for guidance
 ###
 
 LANGS=			c
@@ -80,10 +78,8 @@ PTHREAD_OPTS+=          require native
 LANGS+=		ada
 
 # Ada bootstrap compiler section
-# An Ada compiler is required to build the Ada compiler. You
-# may specify:
-#USE_GCC34ADA	=# Define to use gcc-3.4.x-ada
-# Or, you may specify the path of any gcc/gnat Ada compiler
+# An Ada compiler is required to build the Ada compiler.
+# You may specify the path of any gcc/gnat Ada compiler
 # by providing the full path of the compiler (example) below:
 ALT_GCC=	/usr/pkg/bin/gnatgcc
 .  if defined(ALT_GCC)
@@ -92,33 +88,17 @@ ALT_GCC_RTS!=	${ALT_GCC} --print-file-name=adalib
 .	if !empty(ALT_GCC_RTS)
 RALT_GCC_RTS=	${ALT_GCC_RTS:S%${LOCALBASE}%%:S%/%%}
 .	else
-PKG_SKIP_REASON+=	"${ALT_GCC} does not appear to be an Ada compiler"
+PKG_FAIL_REASON+=	"${ALT_GCC} does not appear to be an Ada compiler"
 .	endif
 .     else
-PKG_SKIP_REASON+=	"Missing bootstrap Ada compiler"
+PKG_FAIL_REASON+=	"Missing bootstrap Ada compiler"
 .     endif
 .  endif
-.  if !defined(USE_GCC34ADA) && !defined(ALT_GCC)
-PKG_SKIP_REASON+=	"An Ada bootstrap compiler must be specified to build Ada"
+.  if !defined(ALT_GCC)
+PKG_FAIL_REASON+=	"An Ada bootstrap compiler must be specified to build Ada"
 .  endif
 
-.  if defined(USE_GCC34ADA)
-BUILDLINK_DEPMETHOD.gcc34-ada=build
-.include "../../lang/gcc34-ada/buildlink3.mk"
-
-post-patch:
-	(cd ${FILESDIR}; \
-		${CP} adasignal.c ${WRKSRC}/gcc/ada; \
-		${CP} ada_lwp_self.c ${WRKSRC}/gcc/ada; \
-		${CP} dummy_pthreads.c ${WRKSRC}/gcc/ada; \
-		for i in *.adb *.ads ; do \
-			${CP} $$i ${WRKSRC}/gcc/ada; \
-		done )
-
-# Overide compiler.mk setup to use gcc-3.4.x-ada
-pre-configure:
-.include "../../lang/gcc34-ada/preconfigure.mk"
-.  elif defined(ALT_GCC)
+.  if defined(ALT_GCC)
 pre-configure:
 	(${TEST} -d ${WRKDIR}/.gcc/bin/ || ${MKDIR} ${WRKDIR}/.gcc/bin/)
 	(cd ${WRKDIR}/.buildlink && ${MKDIR} ${RALT_GCC_RTS} && \
@@ -128,7 +108,7 @@ pre-configure:
 	cd ${WRKDIR}/.gcc/bin/ && \
 	for filename in ${ALT_GCC:T} $${bin_files} ; do \
 		${ECHO} '#!${TOOLS_SHELL}' > $${filename}; \
-		${ECHO} -n "exec ${ALT_GCC:H}/$${filename} " >>$${filename}; \
+		${ECHO_N} "exec ${ALT_GCC:H}/$${filename} " >>$${filename}; \
 		${ECHO} '"$$@"' >>$${filename}; \
 		${CHMOD} +x $${filename}; \
 	done )

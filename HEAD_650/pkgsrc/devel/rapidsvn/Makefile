@@ -1,10 +1,8 @@
-# $NetBSD: Makefile,v 1.62 2012/10/31 11:19:38 asau Exp $
+# $NetBSD: Makefile,v 1.67 2013/03/01 21:11:30 markd Exp $
 
-DISTNAME=		rapidsvn-0.12.0-1
-PKGNAME=		${DISTNAME:S/-1$/.1/}
-PKGREVISION=		7
+DISTNAME=		rapidsvn-0.12.1
 CATEGORIES=		devel x11 scm
-MASTER_SITES=		http://rapidsvn.org/download/release/0.12/
+MASTER_SITES=		http://www.rapidsvn.org/download/release/0.12.1/
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://rapidsvn.tigris.org/
@@ -18,6 +16,7 @@ GNU_CONFIGURE=		YES
 
 CONFIGURE_ARGS+=	--with-svn-include=${BUILDLINK_DIR}/include
 CONFIGURE_ARGS+=	--with-svn-lib=${BUILDLINK_DIR}/lib
+CONFIGURE_ARGS+=	--with-doxygen=no
 
 # While apr is actually a dependency, we ride it being included via
 # subversion-base, following the precedent of devel/foo-subversion and

@@ -1,37 +1,13 @@
-$NetBSD: patch-ipc_chromium_src_base_process__util.h,v 1.5 2012/08/28 23:27:10 ryoon Exp $
+$NetBSD$
 
---- ipc/chromium/src/base/process_util.h.orig	2012-11-19 15:42:29.000000000 +0000
+--- ipc/chromium/src/base/process_util.h.orig	2013-04-10 03:01:46.000000000 +0000
 +++ ipc/chromium/src/base/process_util.h
-@@ -291,6 +291,7 @@ class NamedProcessIterator {
-   const ProcessEntry* NextProcessEntry();
- 
-  private:
-+#if !defined(OS_BSD)
-   // Determines whether there's another process (regardless of executable)
-   // left in the list of all processes.  Returns true and sets entry_ to
-   // that process's info if there is one, false otherwise.
-@@ -303,18 +304,24 @@ class NamedProcessIterator {
-   void InitProcessEntry(ProcessEntry* entry);
- 
-   std::wstring executable_name_;
-+#endif
- 
- #if defined(OS_WIN)
-   HANDLE snapshot_;
+@@ -315,7 +315,7 @@ class NamedProcessIterator {
    bool started_iteration_;
  #elif defined(OS_LINUX)
    DIR *procfs_dir_;
+-#elif defined(OS_BSD)
 +#elif defined(OS_BSD) || defined(OS_QNX)
-+  std::vector<ProcessEntry> content;
-+  size_t nextEntry;
+   std::vector<ProcessEntry> content;
+   size_t nextEntry;
  #elif defined(OS_MACOSX)
-   std::vector<kinfo_proc> kinfo_procs_;
-   size_t index_of_kinfo_proc_;
- #endif
-+#if !defined(OS_BSD)
-   ProcessEntry entry_;
-   const ProcessFilter* filter_;
-+#endif
- 
-   DISALLOW_EVIL_CONSTRUCTORS(NamedProcessIterator);
- };

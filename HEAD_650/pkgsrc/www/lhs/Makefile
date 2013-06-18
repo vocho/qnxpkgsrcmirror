@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.15 2012/10/28 06:30:19 asau Exp $
+# $NetBSD: Makefile,v 1.18 2013/02/06 23:24:01 jperkin Exp $
 #
 
 DISTNAME=	lhs-0.1
-PKGREVISION=	5
+PKGREVISION=	6
 CATEGORIES=	www
 MASTER_SITES=	ftp://dev.null.pl/pub/
 
@@ -17,6 +17,8 @@ BUILD_DEFS+=	IPV6_READY
 
 MAKE_ENV+=	OPENSSL_ROOT=${BUILDLINK_PREFIX.openssl}
 MAKE_ENV+=	DEFAULT_ROOT_DIR=${PREFIX}/share/httpd/htdocs
+
+LIBS.SunOS+=	-lsocket
 
 INSTALLATION_DIRS=	sbin
 

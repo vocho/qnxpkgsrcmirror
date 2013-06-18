@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.26 2012/10/29 05:06:41 asau Exp $
+# $NetBSD: Makefile,v 1.28 2013/02/16 11:25:22 wiz Exp $
 #
 
 DISTNAME=	mrxvt-0.5.4
-PKGREVISION=	6
+PKGREVISION=	7
 CATEGORIES=	x11
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=materm/}
 PATCH_SITES=	${MASTER_SITES}
 PATCHFILES=	mrxvt-0.5.4-001-fix-segfault-when-wd-empty.patch
 
-MAINTAINER=	tnn@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://materm.sourceforge.net/
 COMMENT=	Multi-tabbed terminal emulator with Xft support
 

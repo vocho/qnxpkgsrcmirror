@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.24 2012/10/23 19:50:53 asau Exp $
+# $NetBSD: Makefile,v 1.27 2013/04/06 15:46:39 rodent Exp $
 #
 
 DISTNAME=	brasero-2.32.1
 PKGNAME=	brasero-nautilus-2.32.1
-PKGREVISION=	14
+PKGREVISION=	16
 CATEGORIES=	sysutils gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/brasero/2.32/}
 EXTRACT_SUFX=	.tar.bz2
@@ -26,7 +26,7 @@ USE_LIBTOOL=	yes
 USE_TOOLS+=	pkg-config gmake intltool gawk msgfmt
 
 CONFIGURE_ARGS+=	--disable-inotify
-BUILD_DIRS=		${WRKSRC}/nautilus
+BUILD_DIRS=		nautilus
 INSTALL_DIRS=		${WRKSRC}/nautilus
 
 .include "../../sysutils/brasero/buildlink3.mk"

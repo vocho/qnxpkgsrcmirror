@@ -1,17 +1,18 @@
-# $NetBSD: Makefile,v 1.9 2012/10/23 17:19:05 asau Exp $
+# $NetBSD: Makefile,v 1.15 2013/04/06 14:22:40 rodent Exp $
 
 DISTNAME=	remmina-plugins-0.9.2
-PKGREVISION=	6
+PKGREVISION=	10
 CATEGORIES=	net
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=remmina/}
 
-MAINTAINER=	pkgsrc-users@netbsd.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://remmina.sourceforge.net/
 COMMENT=	Plugins for Remmina, a remote desktop client based on GTK+
 
 DEPENDS+=	rdesktop>=1.6.0:../../net/rdesktop
 
 GNU_CONFIGURE=	yes
+USE_LIBTOOL=	yes
 USE_TOOLS+=	intltool perl pkg-config gmake msgfmt
 
 .include "../../x11/libxkbfile/buildlink3.mk"
@@ -24,7 +25,7 @@ BUILDLINK_API_DEPENDS.libvncserver=		libvncserver>=0.9.1
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
 BUILDLINK_API_DEPENDS.libgcrypt=		libgcrypt>=1.4.4
 .include "../../security/libgcrypt/buildlink3.mk"
-BUILDLINK_API_DEPENDS.libssh=		libssh>=0.11
+BUILDLINK_API_DEPENDS.libssh=		libssh>=0.54
 .include "../../security/libssh/buildlink3.mk"
 .include "../../x11/libunique/buildlink3.mk" # ???
 .include "../../x11/vte/buildlink3.mk"

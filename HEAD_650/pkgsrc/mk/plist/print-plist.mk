@@ -1,4 +1,4 @@
-# $NetBSD: print-plist.mk,v 1.20 2012/03/08 23:12:16 wiz Exp $
+# $NetBSD: print-plist.mk,v 1.23 2013/02/20 09:19:08 wiz Exp $
 
 ###
 ### Automatic PLIST generation
@@ -15,19 +15,18 @@
 _PRINT_PLIST_AWK_SUBST={
 .if !defined(EMUL_PLATFORMS)
 _PRINT_PLIST_AWK_SUBST+=						\
-	gsub(/${OPSYS}/, "$${OPSYS}");					\
 	gsub(/${OS_VERSION:S/./\./g}/, "$${OS_VERSION}");		\
 	gsub(/${MACHINE_GNU_PLATFORM}/, "$${MACHINE_GNU_PLATFORM}");	\
 	gsub(/${MACHINE_ARCH}/, "$${MACHINE_ARCH}");			\
 	gsub(/${MACHINE_GNU_ARCH}/, "$${MACHINE_GNU_ARCH}");
 _PRINT_PLIST_AWK_SUBST+=						\
-	gsub(/${LOWER_OS_VERSION:S/./\./g}/, "$${LOWER_OS_VERSION}");	\
-	gsub(/${LOWER_OPSYS}/, "$${LOWER_OPSYS}");
+	gsub(/${LOWER_OS_VERSION:S/./\./g}/, "$${LOWER_OS_VERSION}");
 .endif
 _PRINT_PLIST_AWK_SUBST+=						\
 	gsub(/${PKGNAME_NOREV}/, "$${PKGNAME}");			\
 	gsub(/${PKGVERSION:S/./\./g:C/nb[0-9]*$$//}/, "$${PKGVERSION}");\
 	gsub(/^${PKGLOCALEDIR}\/locale/, "share/locale");		\
+	gsub("^${PKGGNUDIR}", "gnu/");					\
 	gsub("^${PKGINFODIR}/", "info/");				\
 	gsub("^${PKGMANDIR}/", "man/");
 _PRINT_PLIST_AWK_SUBST+=}
@@ -176,6 +175,7 @@ print-PLIST:
 				/${DESTDIR:S|/|\\/|g:S/+/\\\\+/g}${PREFIX:S|/|\\/|g}\/\.$$/ { next; }	\
 				/${PKG_DBDIR:S|/|\\/|g}\// { next; }	\
 				{ sub("${DESTDIR:S/+/\\\\\\+/g}${PREFIX}/\\\\./", ""); }	\
+				{ sub("^${PKGGNUDIR}", "gnu/"); }	\
 				{ sub("^${PKGINFODIR}/", "info/"); }	\
 				{ sub("^${PKGMANDIR}/", "man/"); }	\
 				/^${PKG_DBDIR:S|^${PREFIX}/||:S|/|\\/|g}(\/|$$)/ { next; } \

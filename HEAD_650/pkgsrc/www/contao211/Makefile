@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.6 2012/10/01 15:35:26 taca Exp $
+# $NetBSD: Makefile,v 1.8 2013/04/02 15:29:00 taca Exp $
 #
 
 DISTNAME=	contao-${CT_VERSION}

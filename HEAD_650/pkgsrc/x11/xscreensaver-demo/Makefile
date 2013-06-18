@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.49 2012/10/29 05:07:20 asau Exp $
+# $NetBSD: Makefile,v 1.51 2013/04/06 15:46:40 rodent Exp $
 #
 
 PKGNAME=	${DISTNAME:S/-/-demo-/}
-PKGREVISION=	3
+PKGREVISION=	4
 COMMENT=	Demo viewer and configuration tool for xscreensaver
 
 CONFLICTS+=	xscreensaver<4.14 xscreensaver-gnome-[0-9]*
@@ -15,8 +15,8 @@ CONFIGURE_ARGS+=	--with-gtk=${BUILDLINK_PREFIX.gtk2}
 CONFIGURE_ARGS+=	--with-xml=${BUILDLINK_PREFIX.libxml2}
 CONFIGURE_ARGS+=	--with-configdir=${PREFIX}/libexec/xscreensaver/config
 
-BUILD_DIRS=		${WRKSRC}/utils ${WRKSRC}/driver
-INSTALL_DIRS=		${WRKSRC}/driver
+BUILD_DIRS=		utils driver
+INSTALL_DIRS=		driver
 INSTALL_TARGET=		install-gnome
 
 INSTALLATION_DIRS=	bin ${PKGMANDIR}/man1

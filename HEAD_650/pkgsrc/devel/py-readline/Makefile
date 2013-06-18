@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.24 2012/10/31 11:19:34 asau Exp $
+# $NetBSD: Makefile,v 1.26 2013/04/06 03:59:24 rodent Exp $
 #
 
 PKGNAME=	${PYPKGPREFIX}-readline-0
@@ -25,10 +25,8 @@ PYSETUPINSTALLARGS+=	--install-lib ${PREFIX}/${PYLIB}/lib-dynload
 do-patch:
 	(cd ${WRKSRC}; \
 	for f in ${PATCHDIR}/patch-*;do \
-	${PATCH} --batch <$$f || true; \
+	${PATCH} --batch <$$f || ${TRUE}; \
 	done)
-
-BUILDLINK_API_DEPENDS.python25+=	python25>=2.5.2nb2
 
 .include "../../devel/readline/buildlink3.mk"
 .include "../../lang/python/extension.mk"

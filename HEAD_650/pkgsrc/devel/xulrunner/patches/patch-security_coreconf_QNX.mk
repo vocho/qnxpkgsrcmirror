@@ -1,8 +1,8 @@
 $NetBSD$
 
---- security/coreconf/QNX.mk.orig	2012-03-13 01:37:11.000000000 +0000
+--- security/coreconf/QNX.mk.orig	2013-04-10 03:02:43.000000000 +0000
 +++ security/coreconf/QNX.mk
-@@ -43,11 +43,11 @@ ifeq ($(USE_PTHREADS),1)
+@@ -11,11 +11,11 @@ ifeq ($(USE_PTHREADS),1)
  	IMPL_STRATEGY = _PTH
  endif
  
@@ -17,7 +17,7 @@ $NetBSD$
  ifeq ($(OS_TEST),mips)
  	CPU_ARCH	= mips
  else
-@@ -59,7 +59,7 @@ ifdef BUILD_OPT
+@@ -27,7 +27,7 @@ ifdef BUILD_OPT
  	OPTIMIZER	= -O2
  endif
  
@@ -26,7 +26,7 @@ $NetBSD$
  
  ifdef USE_PTHREADS
  	DEFINES		+= -D_REENTRANT
-@@ -67,5 +67,5 @@ endif
+@@ -35,5 +35,5 @@ endif
  
  ARCH			= QNX
  

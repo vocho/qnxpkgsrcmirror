@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.6 2012/10/03 21:55:57 wiz Exp $
+# $NetBSD: Makefile,v 1.13 2013/02/16 11:20:57 wiz Exp $
 
 DISTNAME=		kile-2.0.2
-PKGREVISION=		17
+PKGREVISION=		23
 CATEGORIES=		editors kde
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=kile/}
 EXTRACT_SUFX=		.tar.bz2
 
-MAINTAINER=		markd@NetBSD.org
+MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://kile.sourceforge.net/
 COMMENT=		LaTeX source editor - TeX shell - Gnuplot front end
 

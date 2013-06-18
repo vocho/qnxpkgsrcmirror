@@ -1,4 +1,4 @@
-# $NetBSD: bsd.prefs.mk,v 1.327 2012/08/14 17:16:07 asau Exp $
+# $NetBSD: bsd.prefs.mk,v 1.335 2013/04/03 13:45:49 obache Exp $
 #
 # This file includes the mk.conf file, which contains the user settings.
 #
@@ -70,7 +70,7 @@ UNAME=echo Unknown
 .endif
 
 .if !defined(OPSYS)
-OPSYS:=			${:!${UNAME} -s!:S/-//g:S/\///g}
+OPSYS:=			${:!${UNAME} -s!:S/-//g:S/\///g:C/^CYGWIN_.*$/Cygwin/}
 MAKEFLAGS+=		OPSYS=${OPSYS:Q}
 .endif
 
@@ -127,6 +127,16 @@ LOWER_VENDOR?=		ibm
 
 .elif ${OPSYS} == "BSDOS"
 LOWER_OPSYS?=		bsdi
+
+.elif ${OPSYS} == "Cygwin"
+LOWER_OPSYS?=		cygwin
+LOWER_VENDOR?=		pc
+.  if !defined(LOWER_ARCH)
+LOWER_ARCH!=		${UNAME} -m | sed -e 's/i.86/i386/'
+.  endif # !defined(LOWER_ARCH)
+_OS_VERSION!=		${UNAME} -r
+OS_VERSION=		${_OS_VERSION:C/\(.*\)//}
+OS_VARIANT!=		${UNAME} -s
 
 .elif ${OPSYS} == "Darwin"
 LOWER_OPSYS?=		darwin
@@ -296,6 +306,11 @@ _UNAME_V!=		${UNAME} -v
 OS_VARIANT=		SmartOS
 .  endif
 
+.elif ${OPSYS} == "Minix"
+LOWER_VENDOR?=		pc
+LOWER_OPSYS:=		${OPSYS:tl}
+LDFLAGS+=		-lcompat_minix -lminlib
+
 .elif !defined(LOWER_OPSYS)
 LOWER_OPSYS:=		${OPSYS:tl}
 .endif
@@ -384,6 +399,8 @@ OBJECT_FMT=	ELF
 .  else
 OBJECT_FMT=	SOM
 .  endif
+.elif ${OPSYS} == "Cygwin"
+OBJECT_FMT=	PE
 .endif
 
 # Calculate depth
@@ -563,11 +580,14 @@ X11_TYPE?=		modular
 .  if ${OPSYS} == "SunOS"
 # On Solaris, we default to using OpenWindows for X11.
 X11BASE?=	/usr/openwin
-.  elif ${OPSYS} == "IRIX" || ${OPSYS} == "OSF1" || ${OPSYS} == "HPUX"
+.  elif ${OPSYS} == "Cygwin" || ${OPSYS} == "IRIX" || ${OPSYS} == "OSF1" || ${OPSYS} == "HPUX"
 X11BASE?=	/usr
 .  elif !empty(MACHINE_PLATFORM:MDarwin-9.*-*) || \
-        !empty(MACHINE_PLATFORM:MDarwin-??.*-*)
+        !empty(MACHINE_PLATFORM:MDarwin-10.*-*) || \
+        !empty(MACHINE_PLATFORM:MDarwin-11.*-*)
 X11BASE?=	/usr/X11
+.  elif !empty(MACHINE_PLATFORM:MDarwin-??.*-*)
+X11BASE?=	/opt/X11
 .  elif ${OPSYS} == "NetBSD" && ${X11FLAVOUR:U} == "Xorg"
 X11BASE?=	/usr/X11R7
 .  elif exists(/usr/X11R7/lib/libX11.so)
@@ -591,7 +611,11 @@ X11BASE=		${LOCALBASE}
 X11PREFIX=		${LOCALBASE}
 
 # Default directory for font encodings
+.if ${X11_TYPE} == "modular"
+X11_ENCODINGSDIR?=	${X11BASE}/share/fonts/X11/encodings
+.else
 X11_ENCODINGSDIR?=	${X11BASE}/lib/X11/fonts/encodings
+.endif
 
 IMAKE_MAN_SOURCE_PATH=	man/man
 IMAKE_MAN_SUFFIX=	1

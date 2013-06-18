@@ -1,8 +1,11 @@
-$NetBSD: patch-af,v 1.4 2011/10/11 20:30:00 jmcneill Exp $
+$NetBSD: patch-af,v 1.5 2012/12/17 12:01:35 taca Exp $
 
---- configure.orig	2011-08-03 18:25:14.000000000 +0000
+Patch to join an Active Directory from
+http://www.ogris.de/samba/unix-active-directory.html.
+
+--- configure.orig	2013-01-29 09:56:20.000000000 +0000
 +++ configure
-@@ -5938,6 +5938,13 @@ fi
+@@ -5959,6 +5959,13 @@ fi
  
  
  case "$host_os" in
@@ -16,7 +19,7 @@ $NetBSD: patch-af,v 1.4 2011/10/11 20:30:00 jmcneill Exp $
  	*irix6*) cat >> confdefs.h <<\EOF
  #include <standards.h>
  EOF
-@@ -18345,6 +18352,7 @@ $as_echo "#define DARWINOS 1" >>confdefs
+@@ -18268,6 +18275,7 @@ $as_echo "#define DARWINOS 1" >>confdefs
  
  			BLDSHARED="true"
  			LDSHFLAGS="-dynamiclib -flat_namespace -undefined suppress"
@@ -24,7 +27,7 @@ $NetBSD: patch-af,v 1.4 2011/10/11 20:30:00 jmcneill Exp $
  			CFLAGS="$CFLAGS -fno-common"
  			SHLD="\${CC}"
  			SHLIBEXT="dylib"
-@@ -18381,7 +18389,7 @@ fi
+@@ -18304,7 +18312,7 @@ fi
  $as_echo "$BLDSHARED" >&6; }
  
  saved_before_as_needed_ldflags="$LDFLAGS"
@@ -33,20 +36,20 @@ $NetBSD: patch-af,v 1.4 2011/10/11 20:30:00 jmcneill Exp $
  	saved_ldflags="$LDFLAGS"
  	{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $flags works" >&5
  $as_echo_n "checking if $flags works... " >&6; }
-@@ -25355,9 +25363,9 @@ LIBS="-lcrypto $KRB5_LIBS  $LIBS"
+@@ -25268,9 +25276,9 @@ LIBS="-lcrypto $KRB5_LIBS  $LIBS"
  
  
  
 -        { $as_echo "$as_me:${as_lineno-$LINENO}: checking for des_set_key in -lcrypto" >&5
 -$as_echo_n "checking for des_set_key in -lcrypto... " >&6; }
--if test "${ac_cv_lib_ext_crypto_des_set_key+set}" = set; then :
+-if ${ac_cv_lib_ext_crypto_des_set_key+:} false; then :
 +        { $as_echo "$as_me:${as_lineno-$LINENO}: checking for EVP_des_cbc in -lcrypto" >&5
 +$as_echo_n "checking for EVP_des_cbc in -lcrypto... " >&6; }
 +if test "${ac_cv_lib_ext_crypto_EVP_des_cbc+set}" = set; then :
    $as_echo_n "(cached) " >&6
  else
    cat confdefs.h - <<_ACEOF >conftest.$ac_ext
-@@ -25369,31 +25377,31 @@ else
+@@ -25282,31 +25290,31 @@ else
  #ifdef __cplusplus
  extern "C"
  #endif
@@ -86,7 +89,7 @@ $NetBSD: patch-af,v 1.4 2011/10/11 20:30:00 jmcneill Exp $
  _ACEOF
  
  fi
-@@ -34506,31 +34514,46 @@ case "$host_os" in
+@@ -34415,31 +34423,46 @@ case "$host_os" in
  		NSSSONAMEVERSIONSUFFIX=".2"
  		WINBIND_NSS_EXTRA_OBJS="../nsswitch/winbind_nss_linux.o"
  		;;
@@ -155,7 +158,7 @@ $NetBSD: patch-af,v 1.4 2011/10/11 20:30:00 jmcneill Exp $
  		;;
  	*irix*)
  		# IRIX has differently named shared libraries
-@@ -34728,6 +34751,16 @@ $as_echo "#define HAVE_PASSWD_PW_AGE 1" 
+@@ -34637,6 +34660,16 @@ $as_echo "#define HAVE_PASSWD_PW_AGE 1" 
  
  fi
  
@@ -172,7 +175,7 @@ $NetBSD: patch-af,v 1.4 2011/10/11 20:30:00 jmcneill Exp $
  
  # AIX 4.3.x and 5.1 do not have as many members in
  # struct secmethod_table as AIX 5.2
-@@ -35147,9 +35180,6 @@ fi
+@@ -35056,9 +35089,6 @@ fi
  #################################################
  # Set pthread stuff
  

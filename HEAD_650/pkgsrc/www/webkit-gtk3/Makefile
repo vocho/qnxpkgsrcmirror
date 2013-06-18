@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.16 2012/10/30 12:49:02 drochner Exp $
+# $NetBSD: Makefile,v 1.18 2013/04/10 11:17:32 drochner Exp $
 
 .include "../../www/webkit-gtk/Makefile.common"
 

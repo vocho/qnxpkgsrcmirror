@@ -1,4 +1,4 @@
-# $NetBSD: buildlink3.mk,v 1.6 2012/09/13 10:17:14 sbd Exp $
+# $NetBSD: buildlink3.mk,v 1.8 2013/01/31 23:34:21 hans Exp $
 
 BUILDLINK_TREE+=	gcc47
 

@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.44 2012/10/28 06:30:19 asau Exp $
+# $NetBSD: Makefile,v 1.49 2013/02/16 11:24:53 wiz Exp $
 
 DISTNAME=	kdewebdev-${_KDE_VERSION}
-PKGREVISION=	16
+PKGREVISION=	21
 CATEGORIES=	www
 COMMENT=	HTML editor and tools suitable for experienced web developers
 

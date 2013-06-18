@@ -1,4 +1,4 @@
-# $NetBSD: buildlink3.mk,v 1.30 2010/11/01 18:03:04 adam Exp $
+# $NetBSD: buildlink3.mk,v 1.33 2013/02/20 12:14:42 fhajny Exp $
 
 BUILDLINK_TREE+=	apache
 
@@ -6,12 +6,19 @@ BUILDLINK_TREE+=	apache
 APACHE_BUILDLINK3_MK:=
 
 BUILDLINK_API_DEPENDS.apache+=	apache>=2.0.51<2.2
-BUILDLINK_ABI_DEPENDS.apache+=	apache>=2.0.63nb6
+BUILDLINK_ABI_DEPENDS.apache+=	apache>=2.0.64nb4
 BUILDLINK_PKGSRCDIR.apache?=	../../www/apache2
 BUILDLINK_DEPMETHOD.apache?=	build
 .if defined(APACHE_MODULE)
 BUILDLINK_DEPMETHOD.apache+=	full
 .endif
+
+BUILDLINK_FILES.apache+=	sbin/apxs
+${BUILDLINK_DIR}/bin/apxs: buildlink-directories
+	${MKDIR} ${BUILDLINK_DIR}/bin && ${LN} -fs ../sbin/apxs ${BUILDLINK_DIR}/bin/apxs
+
+buildlink-apache-cookie: ${BUILDLINK_DIR}/bin/apxs
+
 USE_TOOLS+=	perl			# for "apxs"
 CONFIGURE_ENV+=	APR_LIBTOOL=${LIBTOOL:Q}	# make apxs use the libtool we specify
 MAKE_ENV+=	APR_LIBTOOL=${LIBTOOL:Q}

@@ -1,11 +1,11 @@
-$NetBSD: patch-ab,v 1.4 2012/11/26 16:56:16 martin Exp $
+$NetBSD: patch-ab,v 1.7 2013/03/22 18:05:10 marino Exp $
 
 Add DragonFly
 
---- configure.orig	2012-08-23 06:37:10.000000000 +0000
+--- configure.orig	2013-03-08 08:13:36.000000000 +0000
 +++ configure
-@@ -4476,6 +4476,15 @@ case "${canonical}" in
-     esac
+@@ -4539,6 +4539,15 @@ case "${canonical}" in
+     opsys=netbsd
    ;;
  
 +  ## DragonFly ports
@@ -20,16 +20,25 @@ Add DragonFly
    ## OpenBSD ports
    *-*-openbsd* )
      opsys=openbsd
-@@ -7854,7 +7854,7 @@
+@@ -8251,7 +8260,7 @@ esac
+ 
+ LD_SWITCH_SYSTEM=
+ case "$opsys" in
+-  freebsd)
++  dragonfly|freebsd)
+    ## Let `ld' find image libs and similar things in /usr/local/lib.
+    ## The system compiler, GCC, has apparently been modified to not
+    ## look there, contrary to what a stock GCC would do.
+@@ -8341,7 +8350,7 @@ case "$opsys" in
    ## IBM's X11R5 uses -lIM and -liconv in AIX 3.2.2.
    aix4-2) LIBS_SYSTEM="-lrts -lIM -liconv" ;;
  
 -  freebsd) LIBS_SYSTEM="-lutil" ;;
-+  freebsd|netbsd|openbsd) LIBS_SYSTEM="-lutil" ;;
++  freebsd|netbsd|openbsd|dragonfly) LIBS_SYSTEM="-lutil" ;;
  
    hpux*) LIBS_SYSTEM="-l:libdld.sl" ;;
  
-@@ -8095,6 +8104,11 @@ case $opsys in
+@@ -8382,6 +8391,11 @@ case $opsys in
      LIB_MATH=
      START_FILES='pre-crt0.o'
      ;;
@@ -39,9 +48,9 @@ Add DragonFly
 +    START_FILES='$(CRT_DIR)/crt1.o $(CRT_DIR)/crti.o'
 +    ;;
    freebsd )
-     LIB_STANDARD='-lgcc -lc -lgcc $(CRT_DIR)/crtend.o $(CRT_DIR)/crtn.o'
-     START_FILES='pre-crt0.o $(CRT_DIR)/crt1.o $(CRT_DIR)/crti.o $(CRT_DIR)/crtbegin.o'
-@@ -8209,6 +8223,51 @@ fi                              # crt_fi
+     LIB_STANDARD='-lgcc -lc -lgcc $(CRT_DIR)/crtn.o'
+     START_FILES='pre-crt0.o $(CRT_DIR)/crt1.o $(CRT_DIR)/crti.o'
+@@ -8508,6 +8522,51 @@ fi                              # crt_fi
  
  
  case $opsys in
@@ -93,3 +102,99 @@ Add DragonFly
    netbsd | openbsd )
      if test -f $CRT_DIR/crti.o; then
  
+@@ -13404,7 +13463,7 @@ mail_lock=no
+ case "$opsys" in
+   aix4-2) mail_lock="lockf" ;;
+ 
+-  gnu|freebsd|netbsd|openbsd|darwin|irix6-5) mail_lock="flock" ;;
++  gnu|dragonfly|freebsd|netbsd|openbsd|darwin|irix6-5) mail_lock="flock" ;;
+ 
+   ## On GNU/Linux systems, both methods are used by various mail programs.
+   ## I assume most people are using newer mailers that have heard of flock.
+@@ -13770,6 +13829,11 @@ case "$opsys" in
+   ##  option to use it.
+   darwin) LIBS_TERMCAP="-lncurses" ;;
+ 
++  dragonfly)
++    TERMINFO=yes
++    LIBS_TERMCAP="-lncurses"
++    ;;
++
+   gnu*) test -z "$LIBS_TERMCAP" && LIBS_TERMCAP="-lncurses" ;;
+ 
+   freebsd)
+@@ -15195,7 +15259,7 @@ $as_echo "#define HAVE_PROCFS 1" >>confd
+ esac
+ 
+ case $opsys in
+-  darwin | freebsd | netbsd | openbsd )
++  darwin | dragonfly | freebsd | netbsd | openbsd )
+ 
+ $as_echo "#define DONT_REOPEN_PTY 1" >>confdefs.h
+ 
+@@ -15277,7 +15341,7 @@ case $opsys in
+ 
+     ;;
+ 
+-  gnu-linux | gnu-kfreebsd | freebsd | netbsd )
++  gnu-linux | gnu-kfreebsd | dragonfly | freebsd | netbsd )
+         if test "x$ac_cv_func_grantpt" = xyes; then
+ 
+ $as_echo "#define UNIX98_PTYS 1" >>confdefs.h
+@@ -15356,7 +15420,7 @@ esac
+ 
+ 
+ case $opsys in
+-      aix4-2 | cygwin | gnu | irix6-5 | freebsd | netbsd | openbsd | darwin )
++      aix4-2 | cygwin | gnu | irix6-5 | dragonfly | freebsd | netbsd | openbsd | darwin )
+     $as_echo "#define SIGNALS_VIA_CHARACTERS 1" >>confdefs.h
+ 
+     ;;
+@@ -15514,6 +15578,11 @@ else
+ 
+       ;;
+ 
++    dragonfly)
++      $as_echo "#define PENDING_OUTPUT_COUNT(FILE) __fpending (FILE)" >>confdefs.h
++
++      ;;
++
+     unixware)
+       $as_echo "#define PENDING_OUTPUT_COUNT(FILE) ((FILE)->__ptr - (FILE)->__base)" >>confdefs.h
+ 
+@@ -15572,7 +15641,7 @@ case $opsys in
+   darwin) $as_echo "#define TAB3 OXTABS" >>confdefs.h
+  ;;
+ 
+-  gnu | freebsd | netbsd | openbsd )
++  gnu | dragonfly | freebsd | netbsd | openbsd )
+ 
+ $as_echo "#define TABDLY OXTABS" >>confdefs.h
+ 
+@@ -15687,7 +15756,7 @@ if test x$GCC = xyes; then
+ 
+ else
+   case $opsys in
+-        freebsd | netbsd | openbsd | irix6-5 | sol2* )
++        dragonfly | freebsd | netbsd | openbsd | irix6-5 | sol2* )
+       $as_echo "#define GC_SETJMP_WORKS 1" >>confdefs.h
+ 
+       ;;
+@@ -15844,7 +15913,7 @@ $as_echo "#define BSD_SYSTEM_AHB 1" >>co
+ 
+     ;;
+ 
+-  gnu | netbsd | openbsd )
++  gnu | dragonfly | netbsd | openbsd )
+     $as_echo "#define BSD4_2 /**/" >>confdefs.h
+ 
+     cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+@@ -24713,7 +24782,7 @@ LIB_GCC=
+ if test "x$GCC" = "xyes" && test "x$ORDINARY_LINK" != "xyes"; then
+ 
+   case "$opsys" in
+-    freebsd|netbsd|openbsd) LIB_GCC= ;;
++    dragonfly|freebsd|netbsd|openbsd) LIB_GCC= ;;
+ 
+     gnu-*)
+       ## armin76@gentoo.org reported that the lgcc_s flag is necessary to

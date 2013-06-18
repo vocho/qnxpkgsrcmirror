@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.15 2012/10/23 18:16:20 asau Exp $
+# $NetBSD: Makefile,v 1.17 2013/04/06 20:27:27 rodent Exp $
 
 DISTNAME=	epg-0.0.16
 PKGNAME=	${EMACS_PKGNAME_PREFIX}${DISTNAME:S/epg/EasyPG/}
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	security mail
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE_JP:=epg/29289/}
 
@@ -14,7 +14,7 @@ GNU_CONFIGURE=	YES
 MAKE_FLAGS+=	lispdir=${EMACS_LISPPREFIX:Q}
 INSTALL_MAKE_FLAGS+=	lispdir=${DESTDIR}${EMACS_LISPPREFIX:Q}
 
-INFO_FILES=	epa.info
+INFO_FILES=	yes
 
 # per README: GnuPG 1.4.3
 DEPENDS+=	gnupg>=1.4.3:../../security/gnupg

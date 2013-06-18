@@ -1,86 +1,11 @@
-$NetBSD: patch-ipc_chromium_chromium-config.mk,v 1.5 2012/08/28 23:27:10 ryoon Exp $
+$NetBSD$
 
---- ipc/chromium/chromium-config.mk.orig	2012-11-19 15:42:29.000000000 +0000
+--- ipc/chromium/chromium-config.mk.orig	2013-04-10 03:01:45.000000000 +0000
 +++ ipc/chromium/chromium-config.mk
-@@ -24,17 +24,6 @@ LOCAL_INCLUDES += \
-   -I$(DEPTH)/ipc/ipdl/_ipdlheaders \
+@@ -105,6 +105,14 @@ DEFINES += \
    $(NULL)
  
--ifeq ($(OS_ARCH),Darwin) # {
--
--OS_MACOSX = 1
--OS_POSIX = 1
--
--DEFINES += \
--  -DOS_MACOSX=1 \
--  -DOS_POSIX=1 \
--  $(NULL)
--
--else # } {
- ifeq ($(OS_ARCH),WINNT) # {
- OS_LIBS += $(call EXPAND_LIBNAME,psapi shell32 dbghelp)
- 
-@@ -61,13 +50,73 @@ DEFINES += -DCOMPILER_MSVC
- endif
- 
  else # } {
--
--OS_LINUX = 1
- OS_POSIX = 1
-+DEFINES += -DOS_POSIX=1
-+
-+ifeq ($(OS_ARCH),Darwin) # {
-+
-+OS_MACOSX = 1
-+DEFINES += \
-+  -DOS_MACOSX=1 \
-+  $(NULL)
-+
-+else # } {
-+ifeq ($(OS_ARCH),DragonFly) # {
-+
-+OS_DRAGONFLY = 1
-+OS_BSD = 1
-+OS_LIBS += $(call EXPAND_LIBNAME,kvm)
-+DEFINES += \
-+  -DOS_DRAGONFLY=1 \
-+  -DOS_BSD=1 \
-+  $(NULL)
-+
-+else # } {
-+ifeq ($(OS_ARCH),FreeBSD) # {
- 
-+OS_FREEBSD = 1
-+OS_BSD = 1
-+OS_LIBS += $(call EXPAND_LIBNAME,kvm)
-+DEFINES += \
-+  -DOS_FREEBSD=1 \
-+  -DOS_BSD=1 \
-+  $(NULL)
-+
-+else # } {
-+ifeq ($(OS_ARCH),NetBSD) # {
-+
-+OS_NETBSD = 1
-+OS_BSD = 1
-+OS_LIBS += $(call EXPAND_LIBNAME,kvm)
-+DEFINES += \
-+  -DOS_NETBSD=1 \
-+  -DOS_BSD=1 \
-+  $(NULL)
-+
-+else # } {
-+ifeq ($(OS_ARCH),OpenBSD) # {
-+
-+OS_OPENBSD = 1
-+OS_BSD = 1
-+OS_LIBS += $(call EXPAND_LIBNAME,kvm)
-+DEFINES += \
-+  -DOS_OPENBSD=1 \
-+  -DOS_BSD=1 \
-+  $(NULL)
-+
-+else # } {
 +ifeq ($(OS_ARCH),QNX) # {
 +
 +OS_QNX = 1
@@ -89,21 +14,12 @@ $NetBSD: patch-ipc_chromium_chromium-config.mk,v 1.5 2012/08/28 23:27:10 ryoon E
 + $(NULL)
 +
 +else # } {
-+
-+OS_LINUX = 1
+ 
+ OS_LINUX = 1
  DEFINES += \
-   -DOS_LINUX=1 \
--  -DOS_POSIX=1 \
-   $(NULL)
- 
- # NB: to stop gcc warnings about exporting template instantiation
-@@ -75,4 +124,9 @@ OS_CXXFLAGS := $(filter-out -pedantic,$(
- 
+@@ -120,4 +128,5 @@ endif # }
  endif # }
  endif # }
-+endif # }
-+endif # }
-+endif # }
-+endif # }
+ endif # }
 +endif # }
  

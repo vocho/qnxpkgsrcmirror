@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.6 2012/02/06 12:40:52 wiz Exp $
+# $NetBSD: Makefile,v 1.10 2013/03/16 22:54:29 dholland Exp $
 #
 
-PKGREVISION=		2
+PKGREVISION=		6
 CATEGORIES=		math
 MASTER_SITES=		${MASTER_SITE_R_CRAN:=contrib/}
 
@@ -24,5 +24,5 @@ SUBST_FILES.fix-paths=		inst/cgi-bin/R.cgi
 SUBST_SED.fix-paths=		-e 's,/usr/local,${PREFIX},g'
 
 .include "../../math/R/Makefile.extension"
-.include "../../print/ghostscript/buildlink3.mk"
+.include "../../print/ghostscript/ghostscript.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

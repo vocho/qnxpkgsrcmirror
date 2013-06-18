@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.14 2012/11/03 01:58:37 ryoon Exp $
+# $NetBSD: Makefile,v 1.20 2013/04/13 23:05:36 markd Exp $
 
 DISTNAME=	kde-runtime-${_KDE_VERSION}
 PKGNAME=	${DISTNAME:S/-4/4-4/}
-PKGREVISION=	6
+PKGREVISION=	1
 CATEGORIES=	x11
 COMMENT=	Runtime requirements for the KDE integrated X11 desktop
 
@@ -10,6 +10,7 @@ COMMENT=	Runtime requirements for the KDE integrated X11 desktop
 
 # BUILD_MAKE_FLAGS+= VERBOSE=1
 CMAKE_ARGS+=	-DWITH_PulseAudio:BOOL=off
+CMAKE_ARGS+=	-DWITH_LibSSH:BOOL=OFF
 CMAKE_ARGS+=	-DLIBLZMA_INCLUDE_DIR:PATH=${BUILDLINK_PREFIX.xz}/include
 CMAKE_ARGS+=	-DLIBLZMA_LIBRARY:FILEPATH=${BUILDLINK_PREFIX.xz}/lib/liblzma.so
 
@@ -44,9 +45,6 @@ REPLACE_PERL+= \
 	khelpcenter/searchhandlers/khc_mansearch.pl \
 	kioslave/info/kde-info2html
 
-REPLACE_PYTHON+= \
-	nepomuk/services/storage/rcgen/nepomuk-simpleresource-rcgen.py
-
 CONF_FILES+=	${PREFIX}/share/examples/kde-runtime4/kde-information.menu \
                 ${PKG_SYSCONFDIR}/xdg/menus/kde-information.menu
 CONF_FILES+=	${PREFIX}/share/examples/kde4-dbus/org.kde.kcontrol.kcmremotewidgets.conf \
@@ -60,10 +58,12 @@ INSTALLATION_DIRS+=	${PKGMANDIR}/man1
 
 .include "../../audio/pulseaudio/buildlink3.mk"
 .include "../../audio/libcanberra/buildlink3.mk"
-.include "../../lang/python/application.mk"
+#.include "../../lang/python/application.mk"
 # not the libssh the package wants
 #.include "../../security/libssh/buildlink3.mk"
 .include "../../security/qca2/buildlink3.mk"
+.include "../../misc/kdepimlibs4/buildlink3.mk"
+.include "../../misc/nepomuk-core/buildlink3.mk"
 .include "../../multimedia/phonon/buildlink3.mk"
 .include "../../archivers/xz/buildlink3.mk"
 .include "../../graphics/exiv2/buildlink3.mk"
@@ -75,6 +75,7 @@ BUILDLINK_ABI_DEPENDS.attica?=	attica>=0.1.4
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
 BUILDLINK_ABI_DEPENDS.soprano?=	soprano>=2.6.50
 .include "../../textproc/soprano/buildlink3.mk"
+.include "../../x11/kactivities/buildlink3.mk"
 .include "../../x11/kdelibs4/buildlink3.mk"
 
 .include "../../mk/bsd.pkg.mk"

@@ -1,8 +1,6 @@
-$NetBSD: distinfo,v 1.6 2012/01/16 19:47:31 adam Exp $
+$NetBSD: distinfo,v 1.8 2013/02/09 22:32:45 markd Exp $
 
-SHA1 (strigi-0.6.4.tar.bz2) = e91f31cc59fdfc303b662a8af899efe1365643bf
-RMD160 (strigi-0.6.4.tar.bz2) = 4b72de166b077778caa2b3ff31c2168a62155bd1
-Size (strigi-0.6.4.tar.bz2) = 895552 bytes
-SHA1 (patch-aa) = 96bf66b656731db79f0a52e90e294afef010b252
-SHA1 (patch-src_daemon_strigithread.cpp) = 0356c1cbe6ca490e7a916d65e6b7113c26c4d511
-SHA1 (patch-src_luceneindexer_jsgzipcompressstream.h) = a8617a73c13e9da903b114336e0c45ceeb3dcb36
+SHA1 (strigi-0.7.8.tar.bz2) = 7250fb15109d33b0c49995a2cc3513ba7d937882
+RMD160 (strigi-0.7.8.tar.bz2) = 34cbbe98e7a371467b115b18586baf299340d1b8
+Size (strigi-0.7.8.tar.bz2) = 810574 bytes
+SHA1 (patch-libstreams_CMakeLists.txt) = ce25d12f5c20f7f0be659bdccc24e8b4a898274a

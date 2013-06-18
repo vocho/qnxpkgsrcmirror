@@ -1,11 +1,8 @@
-$NetBSD: patch-toolkit_library_Makefile.in,v 1.1 2012/11/21 15:26:50 ryoon Exp $
+$NetBSD$
 
-adds --enable-alsa and makes --enable-pulseaudio
-also work with media.use_cubeb=false (aka libsydneyaudio)
-
---- toolkit/library/Makefile.in.orig	2013-04-06 16:19:46.000000000 +0000
+--- toolkit/library/Makefile.in.orig	2013-04-10 03:02:54.000000000 +0000
 +++ toolkit/library/Makefile.in
-@@ -124,6 +124,10 @@ OS_LIBS += -lrt
+@@ -134,6 +134,10 @@ OS_LIBS += -lrt
  endif
  endif
  
@@ -16,20 +13,3 @@ also work with media.use_cubeb=false (aka libsydneyaudio)
  STATIC_LIBS += \
    xpcom_core \
    ucvutil_s \
-@@ -371,14 +375,11 @@ endif
- 
- EXTRA_DSO_LDOPTS += $(call EXPAND_LIBNAME_PATH,gkmedias,$(DIST)/lib) 
- 
--ifdef MOZ_SYDNEYAUDIO
--ifeq ($(OS_ARCH),Linux)
-+ifneq (,$(MOZ_CUBEB)$(MOZ_SYDNEYAUDIO))
-+ifdef MOZ_ALSA
- EXTRA_DSO_LDOPTS += $(MOZ_ALSA_LIBS)
- endif
--endif
--
- ifdef MOZ_PULSEAUDIO
--ifdef MOZ_CUBEB
- EXTRA_DSO_LDOPTS += $(MOZ_PULSEAUDIO_LIBS)
- endif
- endif

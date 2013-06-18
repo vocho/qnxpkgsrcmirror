@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.140 2012/10/22 09:41:07 ghen Exp $
+# $NetBSD: Makefile,v 1.142 2013/04/13 12:21:31 adam Exp $
 
 .include "../../databases/openldap/Makefile.version"
 

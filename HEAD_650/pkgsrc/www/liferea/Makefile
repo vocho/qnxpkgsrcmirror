@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.111 2012/10/28 06:30:20 asau Exp $
+# $NetBSD: Makefile,v 1.113 2013/02/16 11:24:54 wiz Exp $
 
 DISTNAME=		liferea-1.4.28
-PKGREVISION=		25
+PKGREVISION=		27
 CATEGORIES=		www
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=liferea/}
 

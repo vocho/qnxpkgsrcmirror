@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.51 2012/10/08 23:01:17 adam Exp $
+# $NetBSD: Makefile,v 1.57 2013/04/08 11:17:09 rodent Exp $
 #
 
 DISTNAME=	konversation-1.4
-PKGREVISION=	10
+PKGREVISION=	15
 CATEGORIES=	chat kde
 MASTER_SITES=	${MASTER_SITE_KDE:=konversation/1.4/src/}
 EXTRACT_SUFX=	.tar.xz
@@ -21,7 +21,7 @@ REPLACE_BASH+=		data/scripts/*
 REPLACE_PERL+=		data/updaters/konversation-*.pl
 REPLACE_PERL+=		data/scripts/*
 REPLACE_PYTHON+=	data/scripts/*
-REPLACE_PYTHON+=	data/scripting_support/python/konversation/dbus.py 
+REPLACE_PYTHON+=	data/scripting_support/python/konversation/dbus.py
 
 USE_TOOLS+=		bash:run
 

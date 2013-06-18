@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.422 2012/11/05 15:07:15 reed Exp $
+# $NetBSD: Makefile,v 1.430 2013/03/10 08:02:52 taca Exp $
 #
 
 COMMENT=	Electronic mail utilities
@@ -59,6 +59,7 @@ SUBDIR+=	cyrus-imapd23
 SUBDIR+=	cyrus-imapd24
 SUBDIR+=	dbmail
 SUBDIR+=	dcc
+SUBDIR+=	deforaos-mailer
 SUBDIR+=	deliver
 SUBDIR+=	demime
 SUBDIR+=	distribute
@@ -155,7 +156,9 @@ SUBDIR+=	milter-manager
 SUBDIR+=	milter-regex
 SUBDIR+=	mime-construct
 SUBDIR+=	mimedefang
+SUBDIR+=	mimp
 SUBDIR+=	mini_sendmail
+SUBDIR+=	minimalist
 SUBDIR+=	mpop
 SUBDIR+=	msmtp
 SUBDIR+=	mush
@@ -280,12 +283,9 @@ SUBDIR+=	ripmime
 SUBDIR+=	rmail-mime
 SUBDIR+=	roundcube
 SUBDIR+=	rss2email
-SUBDIR+=	ruby-actionmailer3
-SUBDIR+=	ruby-actionmailer31
 SUBDIR+=	ruby-actionmailer32
 SUBDIR+=	ruby-mail
-SUBDIR+=	ruby-mail22
-SUBDIR+=	ruby-mail23
+SUBDIR+=	ruby-mail24
 SUBDIR+=	ruby-mailfactory
 SUBDIR+=	ruby-mime-types
 SUBDIR+=	ruby-tmail

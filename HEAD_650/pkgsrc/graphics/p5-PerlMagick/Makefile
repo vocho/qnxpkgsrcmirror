@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.87 2012/10/10 13:22:48 drochner Exp $
+# $NetBSD: Makefile,v 1.91 2013/03/05 16:50:26 adam Exp $
 
 .include "../../graphics/ImageMagick/Makefile.common"
 
@@ -21,6 +21,10 @@ PERL5_CONFIGURE=	no
 PERL5_CONFIGURE_DIRS=	${WRKSRC}/PerlMagick
 PERL5_PACKLIST=		auto/Image/Magick/.packlist
 BUILD_DIRS=		${PERL5_CONFIGURE_DIRS}
+
+pre-configure:
+	${LN} -sf ${WRKSRC}/PerlMagick/quantum/quantum.pm ${WRKSRC}/PerlMagick/quantum/Q16.pm
+	${LN} -sf ${WRKSRC}/PerlMagick/quantum/quantum.xs ${WRKSRC}/PerlMagick/quantum/Q16.xs
 
 post-configure: perl5-configure
 

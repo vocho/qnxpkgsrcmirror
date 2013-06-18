@@ -1,6 +1,6 @@
 $NetBSD$
 
---- nsprpub/pr/include/md/_nto.h.orig	2012-11-19 15:43:15.000000000 +0000
+--- nsprpub/pr/include/md/_nto.h.orig	2013-04-10 03:02:39.000000000 +0000
 +++ nsprpub/pr/include/md/_nto.h
 @@ -24,9 +24,13 @@
  #define	HAVE_WEAK_IO_SYMBOLS
@@ -27,7 +27,7 @@ $NetBSD$
  #include <sys/time.h>
  #include <sys/types.h>
  #include <sys/select.h>
-@@ -183,7 +185,13 @@ struct _MDCPU {
+@@ -182,7 +184,13 @@ struct _MDCPU {
  ** unwrapped version.
  */
  #define _MD_SELECT		select

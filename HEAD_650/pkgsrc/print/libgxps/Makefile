@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.7 2012/10/08 23:02:21 adam Exp $
+# $NetBSD: Makefile,v 1.10 2013/02/16 11:19:37 wiz Exp $
 #
 
 DISTNAME=	libgxps-0.2.2
-PKGREVISION=	5
+PKGREVISION=	7
 CATEGORIES=	print
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/libgxps/0.2/}
 EXTRACT_SUFX=	.tar.xz
@@ -19,7 +19,7 @@ USE_TOOLS+=	pkg-config
 PKGCONFIG_OVERRIDE+=	libgxps.pc.in
 
 pre-configure:
-	${CP} ${FILESDIR}/libarchive.pc ${BUILDLINK_DIR}/lib/pkgconfig
+	${TEST} -e ${BUILDLINK_DIR}/lib/pkgconfig/libarchive.pc || ${CP} ${FILESDIR}/libarchive.pc ${BUILDLINK_DIR}/lib/pkgconfig
 
 # for test
 #.include "../../x11/gtk3/buildlink3.mk"

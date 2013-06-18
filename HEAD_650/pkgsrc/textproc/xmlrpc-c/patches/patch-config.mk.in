@@ -1,4 +1,4 @@
-$NetBSD: patch-config.mk.in,v 1.1 2012/07/25 15:49:34 jperkin Exp $
+$NetBSD: patch-config.mk.in,v 1.2 2013/01/05 10:37:56 ryoon Exp $
 
 Do not use -Bdynamic -G when using GCC on Solaris, it creates non-PIC
 libraries.
@@ -25,10 +25,22 @@ libraries.
  endif
  
  ifeq ($(patsubst aix%,aix,$(HOST_OS)),aix)
-@@ -235,6 +240,18 @@ ifeq ($(patsubst netbsd%,netbsd,$(HOST_O
+@@ -235,6 +240,30 @@ ifeq ($(patsubst netbsd%,netbsd,$(HOST_O
    NEED_WL_RPATH=yes
  endif
  
++ifeq ($(patsubst openbsd%,openbsd,$(HOST_OS)),openbsd)
++  SHARED_LIB_TYPE = unix
++  SHLIB_SUFFIX = so
++  MUST_BUILD_SHLIB = Y
++  MUST_BUILD_SHLIBLE = Y
++  shlibfn = $(1:%=%.$(SHLIB_SUFFIX).$(MAJ).$(MIN))
++  shliblefn = $(1:%=%.$(SHLIB_SUFFIX))
++  CFLAGS_SHLIB = -fpic
++  LDFLAGS_SHLIB = -shared -Wl,-soname,$(SONAME) $(SHLIB_CLIB)
++  NEED_WL_RPATH=yes
++endif
++
 +ifeq ($(patsubst nto-qnx%,nto-qnx,$(HOST_OS)),nto-qnx)
 +  SHARED_LIB_TYPE = unix
 +  SHLIB_SUFFIX = so
