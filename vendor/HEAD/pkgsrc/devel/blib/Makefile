@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.31 2013/03/28 22:05:38 jperkin Exp $
+# $NetBSD: Makefile,v 1.34 2013/06/06 12:53:54 wiz Exp $
 #
 
 DISTNAME=		blib-1.0.2
-PKGREVISION=		20
+PKGREVISION=		23
 CATEGORIES=		devel graphics
 MASTER_SITES=		http://sven.gimp.org/blinkenlights/old/
 

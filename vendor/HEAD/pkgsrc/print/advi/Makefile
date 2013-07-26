@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.58 2013/02/16 11:24:06 wiz Exp $
+# $NetBSD: Makefile,v 1.65 2013/06/12 12:35:35 wiz Exp $
 
 DISTNAME=		advi-1.10.1
-PKGREVISION=		19
+PKGREVISION=		25
 CATEGORIES=		print
 MASTER_SITES=		http://gallium.inria.fr/advi/
 
@@ -18,7 +18,7 @@ DEPENDS+=		texlive-tetex>=2010:../../print/texlive-tetex
 USE_PKGLOCALEDIR=	yes
 GNU_CONFIGURE=		yes
 USE_TOOLS+=		gmake gs:run
-GNU_CONFIGURE_LIBDIR=	${PREFIX}/share/texmf-dist
+CONFIGURE_ARGS+=	--libdir=${PREFIX}/share/texmf-dist
 CONFIGURE_ARGS+=	--with-gs=${PREFIX}/bin/gs
 
 INSTALL_UNSTRIPPED=	yes

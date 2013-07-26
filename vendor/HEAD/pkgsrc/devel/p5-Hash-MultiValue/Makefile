@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.8 2012/10/31 11:18:18 asau Exp $
+# $NetBSD: Makefile,v 1.10 2013/05/31 12:40:23 wiz Exp $
 #
 
-DISTNAME=		Hash-MultiValue-0.12
+DISTNAME=		Hash-MultiValue-0.13
 PKGNAME=		p5-${DISTNAME}
 PKGREVISION=		1
 CATEGORIES=		devel perl5

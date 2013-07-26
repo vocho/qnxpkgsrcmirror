@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.30 2013/02/16 11:24:05 wiz Exp $
+# $NetBSD: Makefile,v 1.35 2013/06/06 12:54:59 wiz Exp $
 #
 
 DISTNAME=	PackageKit-0.4.0
-PKGREVISION=	23
+PKGREVISION=	27
 PKGNAME=	${DISTNAME:S/PackageKit/packagekit/}
 CATEGORIES=	pkgtools
 MASTER_SITES=	http://www.packagekit.org/releases/
@@ -66,6 +66,7 @@ pre-configure:
 
 .include "../../mk/compiler.mk"
 BUILDLINK_TRANSFORM+=	rm:-Werror
+BUILDLINK_TRANSFORM+=	rm:-DG_DISABLE_DEPRECATED
 
 .include "../../databases/shared-mime-info/mimedb.mk"
 .include "../../databases/sqlite3/buildlink3.mk"

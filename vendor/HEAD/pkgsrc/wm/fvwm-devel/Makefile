@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.42 2013/02/16 11:24:46 wiz Exp $
+# $NetBSD: Makefile,v 1.47 2013/07/15 02:02:29 ryoon Exp $
 
 DISTNAME=	fvwm-${FVWM_VER}
-PKGREVISION=	4
+PKGREVISION=	8
 CATEGORIES=	x11 wm
 MASTER_SITES=	ftp://ftp.fvwm.org/pub/fvwm/version-2/
 EXTRACT_SUFX=	.tar.bz2
@@ -18,7 +18,6 @@ PKG_INSTALLATION_TYPES=	overwrite pkgviews
 
 USE_PKGLOCALEDIR=	YES
 GNU_CONFIGURE=		YES
-USE_GNU_READLINE=	YES
 USE_TOOLS+=		perl:run
 
 PLIST_SUBST+=		FVWM_VER=${FVWM_VER:Q}

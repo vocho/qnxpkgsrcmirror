@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.104 2013/04/07 10:11:54 abs Exp $
+# $NetBSD: Makefile,v 1.109 2013/06/06 12:54:57 wiz Exp $
 
-DISTNAME=	nmap-6.01
-PKGREVISION=	9
+DISTNAME=	nmap-6.25
+PKGREVISION=	3
 CATEGORIES=	net security
 MASTER_SITES=	http://nmap.org/dist/
 EXTRACT_SUFX=	.tar.bz2
@@ -17,29 +17,26 @@ BUILDLINK_API_DEPENDS.libpcap+=	libpcap>=1.0.0
 BUILDLINK_API_DEPENDS.libpcre+=	libpcre>=7.6
 BUILDLINK_API_DEPENDS.openssl+=	openssl>=0.9.8
 
-GNU_CONFIGURE=		yes
-
 USE_LANGUAGES=		c c++
 USE_LIBTOOL=		yes
 USE_TOOLS+=		gmake
-PLIST_SRC=		${WRKDIR}/.PLIST_SRC
+GNU_CONFIGURE=		yes
+CONFIGURE_ARGS+=	--with-libpcap=${BUILDLINK_PREFIX.libpcap}
+CONFIGURE_ARGS+=	--with-libpcre=${BUILDLINK_PREFIX.pcre}
+CONFIGURE_ARGS+=	--with-openssl=${BUILDLINK_PREFIX.openssl}
+CONFIGURE_ARGS+=	--without-subversion
 
 BUILD_DEFS+=		IPV6_READY
 
 .include "options.mk"
 
-CHECK_INTERPRETER_SKIP=	bin/uninstall_zenmap
+CHECK_INTERPRETER_SKIP=		bin/uninstall_zenmap
 CHECK_INTERPRETER_SKIP+=	share/zenmap/su-to-zenmap.sh
 CHECK_INTERPRETER_SKIP+=	share/nmap/nselib/data/oracle-default-accounts.lst
 CHECK_INTERPRETER_SKIP+=	share/nmap/nselib/data/oracle-sids
 CHECK_INTERPRETER_SKIP+=	share/nmap/nselib/data/passwords.lst
 CHECK_INTERPRETER_SKIP+=	share/nmap/nselib/data/rtsp-urls.txt
 CHECK_INTERPRETER_SKIP+=	share/nmap/nselib/data/snmpcommunities.lst
-
-CONFIGURE_ARGS+=	--with-libpcap=${BUILDLINK_PREFIX.libpcap}
-CONFIGURE_ARGS+=	--with-libpcre=${BUILDLINK_PREFIX.pcre}
-CONFIGURE_ARGS+=	--with-openssl=${BUILDLINK_PREFIX.openssl}
-CONFIGURE_ARGS+=	--without-subversion
 
 .include "../../mk/bsd.prefs.mk"
 
@@ -62,12 +59,8 @@ pre-build:
 	${ECHO} "# ignored" > ${WRKSRC}/makefile.dep
 .endif
 
-post-build:
-	${CP} ${PKGDIR}/PLIST ${WRKDIR}/.PLIST_SRC
-
 .include "../../devel/pcre/buildlink3.mk"
 .include "../../net/libpcap/buildlink3.mk"
 .include "../../security/openssl/buildlink3.mk"
 #.include "../../devel/subversion-base/buildlink3.mk"
-
 .include "../../mk/bsd.pkg.mk"

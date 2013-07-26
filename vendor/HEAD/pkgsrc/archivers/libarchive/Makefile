@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.36 2012/09/11 19:46:56 asau Exp $
+# $NetBSD: Makefile,v 1.38 2013/06/13 21:46:34 jperkin Exp $
 #
 
 DISTNAME=	libarchive-2.8.4
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	archivers
 MASTER_SITES=	# empty
 DISTFILES=	# empty
@@ -30,4 +30,5 @@ CONFIGURE_ENV+=	ac_cv_header_ext2fs_ext2_fs_h=no
 .include "../../archivers/bzip2/buildlink3.mk"
 .include "../../archivers/xz/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"
+.include "../../security/openssl/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

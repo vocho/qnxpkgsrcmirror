@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.69 2013/01/26 21:36:34 adam Exp $
+# $NetBSD: Makefile,v 1.72 2013/07/15 02:02:24 ryoon Exp $
 #
 
 VERSION=		4.8.0
 RTYPE=			devel
 DISTNAME=		parrot-${VERSION}
-PKGREVISION=		2
+PKGREVISION=		4
 CATEGORIES=		lang
 MASTER_SITES=		ftp://ftp.parrot.org/pub/parrot/releases/${RTYPE}/${VERSION}/
 
@@ -92,5 +92,5 @@ pre-install:
 
 .include "../../textproc/icu/buildlink3.mk"
 .include "../../devel/gmp/buildlink3.mk"
-.include "../../devel/readline/buildlink3.mk"
+.include "../../mk/readline.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

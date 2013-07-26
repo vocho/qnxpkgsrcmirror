@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.20 2013/02/16 11:23:04 wiz Exp $
+# $NetBSD: Makefile,v 1.24 2013/07/15 02:02:25 ryoon Exp $
 
 DISTNAME=	fityk-0.9.7
-PKGREVISION=	11
+PKGREVISION=	14
 CATEGORIES=	math
 #MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=fityk/}
 MASTER_SITES=	https://cloud.github.com/downloads/wojdyr/fityk/
@@ -20,7 +20,7 @@ GNU_CONFIGURE=		yes
 CONFIGURE_ARGS+=	--disable-xyconvert
 
 .include "../../devel/boost-headers/buildlink3.mk"
-.include "../../devel/readline/buildlink3.mk"
+.include "../../mk/readline.buildlink3.mk"
 .include "../../math/xylib/buildlink3.mk"
 .include "../../x11/wxGTK28/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"

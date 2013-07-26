@@ -91,6 +91,7 @@ cvsgraph		Enable cvsgraph support.
 dar-int32		Use 32-bit integers for file lengths in Dar.
 dar-int64		Use 64-bit integers for file lengths in Dar.
 darwin			Build and/or run on Darwin and Mac OS X.
+pgadmin-db-designer	Enable pgAdmin database-designer functionality.
 db2			Enable db2 support.
 db4			Enable db4 support.
 dbh			Enable DBH support.
@@ -138,6 +139,7 @@ elinks-exmode		Enable vi-like command entry.
 elinks-fastmem		Allow direct use of system memory allocation functions.
 elinks-html-highlight	Enable HTML highlighting using DOM engine.
 elinks-root-exec	Allow elinks to run as root.
+emacs-w3m		W3m browser extention.
 emacs-xaw3d		Emacs should use Xaw3D for the scrollbar.
 embedded-server		Enable embedded server support for MySQL.
 enchant			Add spell checking support using enchant.
@@ -158,6 +160,7 @@ exim-lookup-whoson	Lookup in whoson dynamic IP address.
 exim-old-demime		Use deprecated "demime" condition in the DATA ACL.
 expat			Use the expat library for XML parsing.
 ezmlm-althash		Patch to hash subscriber list case-insensitively.
+f90			Enable Fortran 90 support.
 faac			Enable AAC decoding support using faac.
 faad			Enable AAC decoding support using faad2.
 fam			Support using File Alteration Monitor (FAM).
@@ -166,6 +169,7 @@ fastcgi			Use FastCGI as the CGI manager.
 fd-small		Build smaller misc/fd package.
 ffmpeg			Enable ffmpeg support.
 fftw			Use the fftw library for Discrete Fourier Transforms.
+fftw-fortran		Enable Fortran support.
 finger			Enable finger support.
 firefox			Use firefox as gecko rendering engine.
 firefox3		Use firefox3 as gecko rendering engine.
@@ -183,6 +187,7 @@ freetype		Enable freetype support.
 fribidi			Enable BIDI support using fribidi.
 ftp			Enable File Transfer Protocol (FTP) support.
 fts			Enable full-text searching.
+fuse			Enable Filesystem in Userspace support.
 gamin			Enable Gamin file and directory monitoring system support.
 gcc-ada			Build the gcc Ada frontend and libraries.
 gcc-c++			Build the gcc C++ frontend and libraries.
@@ -239,6 +244,7 @@ hping-suid		Install hping executable setuid root.
 hpn-patch		High Performance Enabled SSH/SCP for OpenSSH.
 hunspell		Add spell checking support using hunspell.
 i586-optimized		Optimize for i586 (only).
+ibus			Enable Intelligent Input Bus support.
 icu			Enable icu support.
 id3			Enable id3 tagging support.
 idea			Enable support for the IDEA cryptographic algorithm (possible license+patent problems).
@@ -254,12 +260,14 @@ imlib			Use imlib as imaging library.
 imlib2			Use imlib2 as imaging library.
 imlib2-amd64		Enable amd64 speedups.
 inet6			Enable support for IPv6.
+inotify			Enable libinotify support.
 inspircd-remoteinet6	Enable remote includes over IPv6.
 inspircd-sqlauth	Enable connections to be tied into a database table.
 inspircd-sqllog		Enable logging of network-wide data for your network into a database.
 inspircd-sqloper	Enable storage of oper credentials in an SQL table.
 inspircd-sqlutils	Enable developer utilities which allow certain other SQL modules to be implemented easily.
 inspircd-ziplinks	Compress data before transmitting it between servers.
+introspection		Enable GObject Introspection support.
 iodbc			Enable ODBC support via iODBC.
 ipa			Select IPA fonts.
 ipa-memfunc-debug	Enable ipa_memfunc debugging.
@@ -360,6 +368,7 @@ lcms			Enable Light Color Management System support.
 ldap			Enable LDAP support.
 lensfun			Enable lensfun (camera lens distortion rectifyer) support.
 libao			Enable the platform-independent 'ao' audio library.
+libchamplain		Enable libchamplain support (map widget).
 libgcrypt		Use GNU cryptographic library.
 libgme			Enable Game_Music_Emu video game music file library support.
 libgpod			Enable libgpod support.
@@ -396,6 +405,7 @@ lprng-suid		Install LPRng executables setuid root.
 lsof-less-secure-sockets	If 'lsof-more-secure' is set, allow all sockets to be viewed at all times.
 lsof-more-secure	Only allow root to view all open files with lsof.
 lua			Enable Lua support.
+luit			Enable luit support.
 lynx			Use and enable support for the lynx browser.
 lzma			Enable LZMA (de)compression support.
 lzo			Enable LZO (de)compression support.
@@ -417,6 +427,7 @@ migemo			Enable migemo (Japanese text search tool/library) support.
 mikmod			Enable MikMod sound library.
 mitshm			Enable MIT-SHM X extension support.
 mlib			Enable usage of medialib (SunOS only).
+mlterm-fb		Enable framebuffer support.
 mmx			Enable MMX support (i386 only).
 mng			Enable mng (Multiple-image Network Graphics) support.
 modperl			Use modperl to improve speed of Perl scripts in Apache.
@@ -477,6 +488,7 @@ octave			Enable Octave support.
 odbc			Enable ODBC support.
 official-mozilla-branding	Use official Mozilla reg. trademarks and logos.
 ogg			Enable Ogg support.
+oggz			Enable Oggz support.
 oniguruma		Support regular expressions via the oniguruma library.
 online-tests		Requiring Internet connectivity for "make test".
 onscripter-pda		Enable PDA_AUTOSIZE option to fit window size to screen
@@ -516,6 +528,7 @@ pstack			Enable pstack backtrace library.
 psycopg1		Enable psycopg 1.1.x support.
 psycopg2		Enable psycopg 2.x support.
 pulseaudio		Enable support for the PulseAudio sound server.
+py-numpy		Enable support for NumPy.
 pyrex			Enable Pyrex language support.
 python			Enable Python support.
 qdbm			Enable qdbm support.
@@ -529,6 +542,7 @@ qmail-viruscan		Patch to SMTP-reject certain types of MIME attachments.
 qpopper-servermode	Enable server mode.
 qt			Enable support for QT.
 qt3			Enable support for QT3.
+qt4			Enable support for QT4.
 quartz			Enable Quartz support on Mac OS X.
 quickml-analog		Enable quickml log analizer.
 quickml-limit		Enable quickml creators and members limitation.
@@ -608,6 +622,7 @@ squid-pf		Enable use of transparent proxy with Packet Filter.
 squid-unlinkd		Enable use of unlinkd.
 ssl			Enable SSL support.
 starttls		Enable TLS support.
+static			Allows you to build static libraries.
 streamtuner-local	Enable local metadata support.
 streamtuner-xiph	Enable the Xiph plugin.
 suexec			Enable suEXEC support in Apache web server.
@@ -645,8 +660,6 @@ unicode			Enable support for Unicode.
 unixodbc		Enable ODBC support via unixODBC.
 unrealircd-chroot	Enable support for running in a chroot jail.
 unrealircd-disableusermod	Disable /sethost, /setident, /chgname, /chghost, and /chgident.
-unrealircd-hub		IRC hub server.
-unrealircd-leaf		IRC leaf node server.
 unrealircd-no-operoverride	Disable operator override.
 unrealircd-nospoof	Enable anti-spoof protection for older TCP/IP stacks.
 unrealircd-operoverride-verify	Require opers to /invite themselves into a +s or +p channel.
@@ -663,6 +676,7 @@ uulib			Enable support for uulib.
 v4l2			Enable V4L2 (Video4Linux2) support.
 vaapi			Enable support for VAAPI.
 valgrind		Enable Valgrind debugging and profiling support.
+vatnumber-suds		Enable lightweight soap-based web services client (net/py-suds).
 vbr			Enable Vouch By Reference support.
 vdpau			Enable support for VDPAU.
 vflib			Enable support for Japanese vector font library.
@@ -692,6 +706,7 @@ xapian-quartz-backend	Enable "Quartz" format Xapian database support.
 xaw			Enable Xaw support.
 xblast-mini		Use a 480x392 window instead a 960x784 window in xblast.
 xcb			Enable XCB (libxcb) support.
+xcursor			Enable Xcursor support.
 xft2			Enable Xft support.
 xim			Enable X Input Method support.
 xinerama		Enable Xinerama support.
@@ -708,6 +723,7 @@ xscreensaver-webcollage	Install webcollage screensaver.
 xterm-256color		Enable 256 color support.
 xterm-88color		Enable 88 color support.
 xterm-luit		Enable locale <> UTF encoding translation.
+xterm-toolbar		Enable toolbar support in xterm.
 xtest			Use XTEST Extension Library.
 xvid			Enable usage of XVid codecs.
 xvideo			Enable X-Video Motion Compensation library support.

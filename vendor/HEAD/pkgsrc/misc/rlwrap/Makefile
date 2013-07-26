@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.8 2013/03/02 10:44:37 tron Exp $
+# $NetBSD: Makefile,v 1.10 2013/07/15 02:02:26 ryoon Exp $
 #
 
 DISTNAME=	rlwrap-0.37
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	misc
 MASTER_SITES=	http://utopia.knoware.nl/~hlub/uck/rlwrap/
 
@@ -17,7 +17,6 @@ GNU_CONFIGURE=		yes
 
 .include "options.mk"
 
-USE_GNU_READLINE=	yes
 USE_LANGUAGES=		c
 USE_TOOLS+=		gmake perl:run
 

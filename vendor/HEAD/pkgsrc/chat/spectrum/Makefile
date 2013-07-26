@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.32 2013/03/01 15:37:56 jperkin Exp $
+# $NetBSD: Makefile,v 1.36 2013/06/04 22:15:46 tron Exp $
 
 DISTNAME=		spectrum-1.4.8
-PKGREVISION=		19
+PKGREVISION=		22
 CATEGORIES=		chat
 MASTER_SITES=		http://cloud.github.com/downloads/hanzz/libtransport/
 
@@ -12,6 +12,7 @@ LICENSE=		gnu-gpl-v3
 
 DEPENDS+=		${PYPKGPREFIX}-xmpppy>=0.4.1:../../chat/py-xmpppy
 DEPENDS+=		${PYPKGPREFIX}-expat>=0nb4:../../textproc/py-expat
+DEPENDS+=		${PYPKGPREFIX}-readline>=0nb2:../../devel/py-readline
 
 USE_TOOLS+=		pkg-config msgfmt xgettext
 USE_CMAKE=		yes
@@ -115,7 +116,6 @@ post-install:
 .include "../../devel/cmake/buildlink3.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../devel/glib2/buildlink3.mk"
-.include "../../devel/py-readline/buildlink3.mk"
 # .include "../../devel/libev/buildlink3.mk"
 .include "../../devel/poco/buildlink3.mk"
 .include "../../graphics/ImageMagick/buildlink3.mk"

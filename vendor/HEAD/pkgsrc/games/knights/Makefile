@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.55 2013/02/16 11:21:23 wiz Exp $
+# $NetBSD: Makefile,v 1.59 2013/06/06 12:54:24 wiz Exp $
 
 DISTNAME=	knights-0.6
-PKGREVISION=	29
+PKGREVISION=	33
 CATEGORIES=	games kde
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=knights/}
 

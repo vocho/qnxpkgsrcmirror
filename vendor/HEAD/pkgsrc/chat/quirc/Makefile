@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.21 2013/04/06 21:07:31 rodent Exp $
+# $NetBSD: Makefile,v 1.25 2013/07/13 19:21:33 joerg Exp $
 #
 
 DISTNAME=	quirc-0.9.84
-PKGREVISION=	4
+PKGREVISION=	7
 CATEGORIES=	chat
 MASTER_SITES=	http://quirc.org/
 
@@ -27,7 +27,7 @@ SUBST_SED.T85+=		-e 's,8.3,8.5,g'
 SUBST_SED.T85+=		-e 's,83,85,g'
 
 pre-configure:
-	cd ${WRKSRC} && autoreconf
+	cd ${WRKSRC} && autoreconf -i
 
 BUILDLINK_DEPMETHOD.libXt?=	build
 

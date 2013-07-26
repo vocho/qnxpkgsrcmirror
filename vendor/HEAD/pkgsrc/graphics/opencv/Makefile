@@ -1,11 +1,8 @@
-# $NetBSD: Makefile,v 1.34 2013/02/16 11:22:18 wiz Exp $
+# $NetBSD: Makefile,v 1.40 2013/06/14 21:28:42 wiz Exp $
 
-DISTNAME=	OpenCV-2.4.3
-PKGNAME=	${DISTNAME:S/a$//:tl}
-PKGREVISION=	2
+DISTNAME=	opencv-2.4.5
 CATEGORIES=	graphics devel
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=opencvlibrary/}
-EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	anthony.mallet@laas.fr
 HOMEPAGE=	http://code.opencv.org/projects/OpenCV/wiki/WikiStart
@@ -32,6 +29,11 @@ WRKSRC=		${WRKDIR}/${DISTNAME:S/a$//}
 CHECK_WRKREF_SKIP=	${PREFIX}/lib/libopencv_core.*
 
 .include "options.mk"
+
+.include "../../mk/compiler.mk"
+.if !empty(PKGSRC_COMPILER:Mclang)
+CXXFLAGS+=	-std=c++11
+.endif
 
 .include "../../devel/zlib/buildlink3.mk"
 .include "../../graphics/jasper/buildlink3.mk"

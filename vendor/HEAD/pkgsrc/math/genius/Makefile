@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.51 2013/03/15 19:10:39 drochner Exp $
+# $NetBSD: Makefile,v 1.57 2013/07/24 11:15:55 drochner Exp $
 #
 
-DISTNAME=		genius-1.0.16
+DISTNAME=		genius-1.0.17
 CATEGORIES=		math
 MASTER_SITES=		http://ftp.5z.com/pub/genius/
 
@@ -16,7 +16,6 @@ USE_PKGLOCALEDIR=	yes
 USE_LIBTOOL=		yes
 GNU_CONFIGURE=		yes
 USE_TOOLS+=		pkg-config gmake intltool msgfmt
-USE_GNU_READLINE=	yes
 
 .include "options.mk"
 

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.484 2013/04/13 14:49:56 rodent Exp $
+# $NetBSD: Makefile,v 1.486 2013/07/02 12:04:57 rodent Exp $
 #
 
 COMMENT=	Audio tools
@@ -224,6 +224,7 @@ SUBDIR+=	libcdaudio
 SUBDIR+=	libcddb
 SUBDIR+=	libdca
 SUBDIR+=	libdiscid
+SUBDIR+=	libfishsound
 SUBDIR+=	libgpod
 SUBDIR+=	libid3tag
 SUBDIR+=	libifp
@@ -406,6 +407,7 @@ SUBDIR+=	streamtuner
 SUBDIR+=	sweep
 SUBDIR+=	taglib
 SUBDIR+=	taglib-extras
+SUBDIR+=	tap-plugins
 SUBDIR+=	tcd
 SUBDIR+=	tcl-snack
 SUBDIR+=	terminatorx

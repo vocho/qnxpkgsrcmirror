@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.26 2013/04/06 03:59:24 rodent Exp $
+# $NetBSD: Makefile,v 1.28 2013/07/15 02:02:21 ryoon Exp $
 #
 
-PKGNAME=	${PYPKGPREFIX}-readline-0
-PKGREVISION=	5
+PKGNAME=	${PYPKGPREFIX}-readline-${PY_DISTVERSION}
 CATEGORIES=	devel misc python
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
@@ -12,8 +11,6 @@ COMMENT=	Line editing support for Python
 PYTHON_VERSIONS_INCLUDE_3X=	yes
 
 EXTRACT_ELEMENTS=	${PYSUBDIR}/Modules/readline.c
-
-USE_GNU_READLINE=	# defined
 
 PYDISTUTILSPKG=	yes
 PY_PATCHPLIST=	yes

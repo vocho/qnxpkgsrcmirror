@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.14 2012/10/06 11:54:47 asau Exp $
+# $NetBSD: Makefile,v 1.16 2013/07/15 02:02:22 ryoon Exp $
 #
 
 DISTNAME=	minami-1.0.2
-PKGREVISION=	2
+PKGREVISION=	3
 CATEGORIES=	games
 MASTER_SITES=	ftp://ftp.guru.gr.jp/pub/minami/
 EXTRACT_SUFX=	.tgz
@@ -19,5 +19,5 @@ INSTALLATION_DIRS=	bin
 do-install:
 	${INSTALL_PROGRAM} ${WRKSRC}/minami ${DESTDIR}${PREFIX}/bin
 
-.include "../../devel/readline/buildlink3.mk"
+.include "../../mk/readline.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

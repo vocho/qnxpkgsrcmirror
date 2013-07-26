@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.22 2012/11/16 20:04:47 joerg Exp $
+# $NetBSD: Makefile,v 1.24 2013/05/17 13:17:40 joerg Exp $
 #
 
-DISTNAME=		xproto-7.0.23
-PKGREVISION=		2
+DISTNAME=		xproto-7.0.24
+PKGREVISION=		1
 CATEGORIES=		x11 devel
 MASTER_SITES=		${MASTER_SITE_XORG:=proto/}
 EXTRACT_SUFX=		.tar.bz2

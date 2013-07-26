@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.18 2013/04/12 03:47:30 schnoebe Exp $
+# $NetBSD: Makefile,v 1.25 2013/07/21 15:56:37 schnoebe Exp $
 #
 
-DISTNAME=		hplip-3.13.4
+DISTNAME=		hplip-3.13.6
 CATEGORIES=		print
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=hplip/}
 
@@ -22,7 +22,7 @@ BUILD_DEFS+=            CUPS_USER CUPS_GROUP VARBASE
 
 GNU_CONFIGURE=		yes
 USE_LIBTOOL=		yes
-USE_LANGUAGES=		c c++ # fortran
+USE_LANGUAGES=		c c++
 USE_TOOLS+=		aclocal autoconf automake gmake pkg-config
 USE_TOOLS+=		perl:run
 
@@ -175,7 +175,7 @@ post-install:
 .include "../../mk/jpeg.buildlink3.mk"
 .include "../../net/net-snmp/buildlink3.mk"
 .include "../../print/cups/buildlink3.mk"
-.include "../../print/ghostscript/ghostscript.buildlink3.mk"
+.include "../../print/ghostscript/buildlink3.mk"
 .include "../../devel/libusb1/buildlink3.mk"
 .include "../../security/openssl/buildlink3.mk"
 .include "../../textproc/py-xml/buildlink3.mk"

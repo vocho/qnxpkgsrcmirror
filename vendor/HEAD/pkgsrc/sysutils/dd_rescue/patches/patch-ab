@@ -1,28 +1,64 @@
-$NetBSD: patch-ab,v 1.5 2010/11/05 08:32:19 ghen Exp $
+$NetBSD: patch-ab,v 1.7 2013/06/14 01:07:58 mef Exp $
 
---- dd_rescue.c.orig	2010-10-11 09:50:32.000000000 +0000
-+++ dd_rescue.c
-@@ -87,6 +87,9 @@ _syscall6(long, splice, int, fdin, loff_
+(1) clang flags:
+dd_rescue.c:1494:22: warning: implicit declaration of function 'basename' is invalid in C99 [-Wimplicit-function-declaration]
+        const char* ibase = basename(inm);
+(2)
+See http://gnats.netbsd.org/38620
+dd_rescue: (fatal): allocation of aligned buffer failed!
+
+(3) clang flags:
+dd_recue.c:(.text+0x12b4): undefined reference to `mypread'
+dd_rescue.c:(.text+0x1374): undefined reference to `mypwrite'
+
+--- dd_rescue.c.orig	2013-03-31 04:24:34.000000000 +0900
++++ dd_rescue.c	2013-06-13 16:44:35.000000000 +0900
+@@ -83,6 +83,7 @@
+ #include <limits.h>
+ #include <sys/time.h>
+ #include <sys/stat.h>
++#include <libgen.h>
+ 
+ #include "frandom.h"
+ #include "list.h"
+@@ -121,6 +122,10 @@
  # endif
  #endif
  
 +#ifdef __DragonFly__
 +#undef O_DIRECT
 +#endif
++
+ /* fwd decls */
+ int cleanup();
  
- int softbs, hardbs, syncfreq;
- int maxerr, nrerr, reverse, dotrunc, abwrerr, sparse, nosparse;
-@@ -1127,7 +1130,12 @@ int main(int argc, char* argv[])
- 		ipos = 0;
+@@ -740,7 +745,7 @@
+ 	return ln;
+ }
  
+-inline ssize_t mypread(int fd, void* bf, size_t sz, off_t off)
++static inline ssize_t mypread(int fd, void* bf, size_t sz, off_t off)
+ {
+ 	if (i_repeat) {
+ 		if (i_rep_init)
+@@ -762,7 +767,7 @@
+ 		return pread(fd, bf, sz, off);
+ }
+ 
+-inline ssize_t mypwrite(int fd, void* bf, size_t sz, off_t off)
++static inline ssize_t mypwrite(int fd, void* bf, size_t sz, off_t off)
+ {
+ 	if (o_chr)
+ 		return write(fd, bf, sz);
+@@ -1452,6 +1457,11 @@
+ 	unsigned char *ptr;
  #ifdef O_DIRECT
--	if (posix_memalign(mp, sysconf(_SC_PAGESIZE), softbs)) {
+ 	void *mp;
 +#ifdef linux
-+#define my_valloc(a, b, c)	posix_memalign((a), (b), (c))
++#define my_valloc(a, b, c)     posix_memalign((a), (b), (c))
 +#else
-+#define my_valloc(a, b, c)	!(*(a) = valloc((c)))
++#define my_valloc(a, b, c)     !(*(a) = valloc((c)))
 +#endif
-+	if (my_valloc(mp, sysconf(_SC_PAGESIZE), softbs)) {
+ 	if (posix_memalign(&mp, pagesize, bs)) {
  		fplog(stderr, "dd_rescue: (fatal): allocation of aligned buffer failed!\n");
  		cleanup(); exit(18);
- 	}

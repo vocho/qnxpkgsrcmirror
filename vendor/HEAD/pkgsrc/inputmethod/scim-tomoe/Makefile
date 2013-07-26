@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.19 2013/02/16 11:22:49 wiz Exp $
+# $NetBSD: Makefile,v 1.22 2013/06/06 12:54:39 wiz Exp $
 #
 
 DISTNAME=		scim-tomoe-0.6.0
-PKGREVISION=		17
+PKGREVISION=		20
 CATEGORIES=		inputmethod
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=tomoe/}
 

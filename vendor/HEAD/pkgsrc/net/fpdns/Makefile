@@ -1,28 +1,25 @@
-# $NetBSD: Makefile,v 1.4 2012/10/23 17:18:21 asau Exp $
+# $NetBSD: Makefile,v 1.7 2013/06/23 12:18:34 pettai Exp $
 #
 
-DISTNAME=	fpdns-0.9.1
-PKGREVISION=	1
+DISTNAME=	fpdns-20130404
+PKGNAME=	fpdns-0.10.0pre20130404
 CATEGORIES=	net
-MASTER_SITES=	http://www.rfc.se/fpdns/distfiles/
+MASTER_SITES=	-https://github.com/kirei/fpdns/archive/20130404.zip
+EXTRACT_SUFX=	.zip
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.rfc.se/fpdns/
+HOMEPAGE=	https://github.com/kirei/fpdns/
 COMMENT=	Fingerprinting DNS servers
+LICENSE=	modified-bsd
 
 DEPENDS+=	p5-Net-DNS-[0-9]*:../../net/p5-Net-DNS
 
-WRKSRC=		${WRKDIR}
-REPLACE_PERL=	fpdns.pl
+FETCH_USING=	curl
+
+REPLACE_PERL=	apps/fpdns
 USE_TOOLS+=	perl
 USE_LANGUAGES=	# none
 
-INSTALLATION_DIRS=	bin ${PKGMANDIR}/man1
-
-do-build:
-
-do-install:
-	${INSTALL_SCRIPT} ${WRKSRC}/fpdns.pl ${DESTDIR}${PREFIX}/bin
-	${INSTALL_MAN} ${WRKSRC}/fpdns.1 ${DESTDIR}${PREFIX}/${PKGMANDIR}/man1
-
+PERL5_CONFIGURE=	yes
+.include "../../lang/perl5/module.mk"
 .include "../../mk/bsd.pkg.mk"

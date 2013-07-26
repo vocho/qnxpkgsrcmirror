@@ -1,15 +1,14 @@
-# $NetBSD: Makefile,v 1.20 2013/04/13 23:05:36 markd Exp $
+# $NetBSD: Makefile,v 1.29 2013/07/05 13:29:44 ryoon Exp $
 
 DISTNAME=	kde-runtime-${_KDE_VERSION}
 PKGNAME=	${DISTNAME:S/-4/4-4/}
-PKGREVISION=	1
+PKGREVISION=	4
 CATEGORIES=	x11
 COMMENT=	Runtime requirements for the KDE integrated X11 desktop
 
 .include "../../meta-pkgs/kde4/Makefile.kde4"
 
 # BUILD_MAKE_FLAGS+= VERBOSE=1
-CMAKE_ARGS+=	-DWITH_PulseAudio:BOOL=off
 CMAKE_ARGS+=	-DWITH_LibSSH:BOOL=OFF
 CMAKE_ARGS+=	-DLIBLZMA_INCLUDE_DIR:PATH=${BUILDLINK_PREFIX.xz}/include
 CMAKE_ARGS+=	-DLIBLZMA_LIBRARY:FILEPATH=${BUILDLINK_PREFIX.xz}/lib/liblzma.so
@@ -19,13 +18,16 @@ DEPENDS+=	oxygen-icons-[0-9]*:../../graphics/oxygen-icons
 
 USE_TOOLS+=		gmake
 
+.include "../../mk/bsd.prefs.mk"
 .include "options.mk"
 
 # Some files are conditional on 'md5sum' or 'md5' being present.
 PLIST_VARS+=	md5
-.if ${OPSYS} != "SunOS"
+.for dir in ${PATH:C/\:/ /g}
+.  if exists(${dir}/md5sum) || exists(${dir}/md5)
 PLIST.md5=	yes
-.endif
+.  endif
+.endfor
 
 SUBST_CLASSES+=		htdig
 SUBST_STAGE.htdig=	post-patch

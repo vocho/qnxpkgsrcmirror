@@ -1,4 +1,4 @@
-# $NetBSD: Makefile.common,v 1.34 2013/04/06 12:04:24 taca Exp $
+# $NetBSD: Makefile.common,v 1.37 2013/06/27 16:17:55 taca Exp $
 #
 # used by www/contao/Makefile.example"
 # used by www/contao211/Makefile
@@ -9,18 +9,28 @@
 # current release
 CT211_VERSION=	2.11.11
 CT300_VERSION=	3.0.6
+CT310_VERSION=	3.1.1
 
 CT_VERS?=	211
 
 .if ${CT_VERS} == "211"
 CT_VERSION=	${CT211_VERSION}
-CT_FILES=	tl_files
 .elif ${CT_VERS} == "30"
 CT_VERSION=	${CT300_VERSION}
-CT_FILES=	files
-CT_DIST_SUBDIR=	contao-20120109
+.elif ${CT_VERS} == "31"
+CT_VERSION=	${CT310_VERSION}
 .else
 .error "Illegal version specified: ${CT_VERS}"
+.endif
+
+.if ${CT_VERS} == "211"
+CT_FILES=	tl_files
+.else
+. if ${CT_VERS} == "30"
+CT_DIST_SUBDIR=	contao-20120109
+. endif
+CT_FILES=	files
+FILESDIR=	${.CURDIR}/../../www/contao/files
 .endif
 
 CT_VER=		${CT_VERSION:C/([0-9]+)\.([0-9]+)\..*/\1\2/}
@@ -52,5 +62,3 @@ CT_EGDIR?=	share/examples/contao${CT_VER}
 CT_WEBDIR?=	share/contao${CT_VER}
 
 BUILD_DEFS+=	APACHE_USER CT_DOCDIR CT_EGDIR CT_WEBDIR
-
-FILESDIR=	${.CURDIR}/../../www/contao/files

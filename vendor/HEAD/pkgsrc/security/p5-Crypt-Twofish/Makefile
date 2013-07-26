@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.22 2013/01/23 10:25:06 rhaen Exp $
+# $NetBSD: Makefile,v 1.24 2013/06/01 02:25:59 obache Exp $
 #
 
-DISTNAME=		Crypt-Twofish-2.15
+DISTNAME=		Crypt-Twofish-2.17
 PKGNAME=		p5-${DISTNAME}
 SVR4_PKGNAME=		p5ctw
 CATEGORIES=		security perl5

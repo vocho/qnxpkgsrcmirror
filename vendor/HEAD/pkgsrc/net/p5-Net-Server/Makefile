@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.29 2012/11/07 00:28:37 taca Exp $
+# $NetBSD: Makefile,v 1.31 2013/06/16 19:21:27 sno Exp $
 #
 
-DISTNAME=	Net-Server-2.006
+DISTNAME=	Net-Server-2.007
 PKGNAME=	p5-${DISTNAME}
 SVR4_PKGNAME=	p5nts
 CATEGORIES=	net perl5

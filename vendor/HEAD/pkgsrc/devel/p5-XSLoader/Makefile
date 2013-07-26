@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.6 2012/10/31 11:19:16 asau Exp $
+# $NetBSD: Makefile,v 1.8 2013/05/31 12:40:54 wiz Exp $
 #
 
-DISTNAME=	XSLoader-0.15
+DISTNAME=	XSLoader-0.16
 PKGNAME=	p5-${DISTNAME}
 PKGREVISION=	1
 CATEGORIES=	devel perl5

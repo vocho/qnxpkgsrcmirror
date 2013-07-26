@@ -1,4 +1,4 @@
-#	$NetBSD: pbulk-index.mk,v 1.15 2012/11/23 12:13:35 joerg Exp $
+#	$NetBSD: pbulk-index.mk,v 1.18 2013/06/02 04:41:39 sbd Exp $
 
 # This Makefile fragment is included by bsd.pkg.mk and provides all
 # variables and targets related to the parallel bulk build
@@ -16,15 +16,23 @@
 #	_PBULK_MULTI_VAR.foo forces a specific version
 #	_PBULK_MULTI_DEFAULT.foo contains the default value
 
-_PBULK_MULTI?=	apache php python ruby
+_PBULK_MULTI?=	apache mysql php postgresql python ruby
 
 _PBULK_MULTI_LIST.apache=	PKG_APACHE_ACCEPTED
 _PBULK_MULTI_VAR.apache=	PKG_APACHE
 _PBULK_MULTI_DEFAULT.apache=	PKG_APACHE_DEFAULT
 
+_PBULK_MULTI_LIST.mysql=	MYSQL_VERSIONS_ACCEPTED
+_PBULK_MULTI_VAR.mysql=		MYSQL_VERSION_REQD
+_PBULK_MULTI_DEFAULT.mysql=	MYSQL_VERSION_DEFAULT
+
 _PBULK_MULTI_LIST.php=		PHP_VERSIONS_ACCEPTED
 _PBULK_MULTI_VAR.php=		PHP_VERSION_REQD
 _PBULK_MULTI_DEFAULT.php=	PHP_VERSION_DEFAULT
+
+_PBULK_MULTI_LIST.postgresql=		PGSQL_VERSIONS_ACCEPTED
+_PBULK_MULTI_VAR.postgresql=		PGSQL_VERSION_REQD
+_PBULK_MULTI_DEFAULT.postgresql=	PGSQL_VERSION_DEFAULT
 
 _PBULK_MULTI_LIST.python=	_PYTHON_VERSIONS_ACCEPTED
 _PBULK_MULTI_VAR.python=	PYTHON_VERSION_REQD
@@ -44,7 +52,8 @@ _PBULK_MULTI_DEFAULT.ruby=	RUBY_VERSION_DEFAULT
 # the default value first.  This is important for packages that
 # don't follow the module naming conventions.
 
-.for _t in ${_PBULK_MULTI}
+.if !defined(NO_MULTI_PKG)
+. for _t in ${_PBULK_MULTI}
 .  if defined(${_PBULK_MULTI_LIST.${_t}}) && !empty(${_PBULK_MULTI_LIST.${_t}})
 .    if ${${_PBULK_MULTI_LIST.${_t}}:[\#]} != 1 || \
         !empty(${_PBULK_MULTI_LIST.${_t}}:N${_PBULK_MULTI_DEFAULT.${_t}})
@@ -54,7 +63,8 @@ _PBULK_SORTED_LIST.${_t}:= \
 	${${_PBULK_MULTI_LIST.${_t}}:N${${_PBULK_MULTI_DEFAULT.${_t}}}}
 .    endif
 .  endif
-.endfor
+. endfor
+.endif
 
 .if !defined(_PBULK_MULTI_NEEDED)
 # No multi-package handling needed, directly print the item.

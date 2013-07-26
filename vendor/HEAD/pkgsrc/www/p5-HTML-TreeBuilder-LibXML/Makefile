@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.9 2012/10/28 06:30:40 asau Exp $
+# $NetBSD: Makefile,v 1.11 2013/05/31 12:42:43 wiz Exp $
 
-DISTNAME=	HTML-TreeBuilder-LibXML-0.17
+DISTNAME=	HTML-TreeBuilder-LibXML-0.23
 PKGNAME=	p5-${DISTNAME}
+PKGREVISION=	1
 CATEGORIES=	www perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=HTML/}
 
@@ -13,7 +14,9 @@ LICENSE=	${PERL5_LICENSE}
 USE_LANGUAGES=	# empty
 PERL5_PACKLIST= auto/HTML/TreeBuilder/LibXML/.packlist
 
-DEPENDS+=	p5-HTML-TreeBuilder-XPath>=0.11:../../www/p5-HTML-TreeBuilder-XPath
+PERL5_MODULE_TYPE=	Module::Build
+
+DEPENDS+=	p5-HTML-TreeBuilder-XPath>=0.14:../../www/p5-HTML-TreeBuilder-XPath
 DEPENDS+=	p5-XML-LibXML>=1.70:../../textproc/p5-XML-LibXML
 
 .include "../../lang/perl5/module.mk"

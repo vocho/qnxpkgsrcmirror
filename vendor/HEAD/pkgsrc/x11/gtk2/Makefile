@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.248 2013/03/14 19:03:00 drochner Exp $
+# $NetBSD: Makefile,v 1.254 2013/07/04 21:29:05 adam Exp $
 
-DISTNAME=	gtk+-2.24.17
+DISTNAME=	gtk+-2.24.20
 PKGNAME=	${DISTNAME:S/gtk/gtk2/}
 CATEGORIES=	x11
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gtk+/2.24/}
@@ -99,6 +99,9 @@ BUILDLINK_API_DEPENDS.atk+=	atk>=1.30.0
 BUILDLINK_API_DEPENDS.glib2+=	glib2>=2.28.0
 .include "../../devel/glib2/buildlink3.mk"
 .include "../../graphics/gdk-pixbuf2/buildlink3.mk"
+BUILDLINK_DEPMETHOD.gobject-introspection:=	build
+BUILDLINK_API_DEPENDS.gobject-introspection+=	gobject-introspection>=0.9.3
+.include "../../devel/gobject-introspection/buildlink3.mk"
 
 .include "options.mk"
 

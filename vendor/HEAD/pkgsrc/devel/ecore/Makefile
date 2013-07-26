@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.6 2013/02/06 23:20:52 jperkin Exp $
+# $NetBSD: Makefile,v 1.9 2013/06/16 18:56:04 sno Exp $
 #
 
-DISTNAME=	ecore-1.1.0
-PKGREVISION=	4
+DISTNAME=	ecore-1.7.7
 CATEGORIES=	devel
 MASTER_SITES=	http://download.enlightenment.org/releases/
 EXTRACT_SUFX=	.tar.bz2

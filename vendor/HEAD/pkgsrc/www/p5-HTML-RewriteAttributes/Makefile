@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.8 2012/10/28 06:30:38 asau Exp $
+# $NetBSD: Makefile,v 1.10 2013/05/31 12:42:42 wiz Exp $
 
-DISTNAME=	HTML-RewriteAttributes-0.04
+DISTNAME=	HTML-RewriteAttributes-0.05
 PKGNAME=	p5-${DISTNAME}
 PKGREVISION=	1
 CATEGORIES=	www perl5

@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.16 2012/10/23 17:18:15 asau Exp $
+# $NetBSD: Makefile,v 1.18 2013/07/15 02:02:26 ryoon Exp $
 #
 
 DISTNAME=	coda-6.9.5
-PKGREVISION=	4
+PKGREVISION=	5
 CATEGORIES=	net
 MASTER_SITES=	http://www.coda.cs.cmu.edu/pub/coda/src/
 
@@ -25,7 +25,7 @@ REPLACE_PERL=	coda-src/scripts/tape.pl coda-src/scripts/volmunge
 .include "../../devel/lwp/buildlink3.mk"
 .include "../../devel/rpc2/buildlink3.mk"
 .include "../../devel/rvm/buildlink3.mk"
-.include "../../devel/readline/buildlink3.mk"
+.include "../../mk/readline.buildlink3.mk"
 .include "../../mk/curses.buildlink3.mk"
 .include "../../lang/python/application.mk"
 

@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.28 2013/04/04 13:31:55 obache Exp $
+# $NetBSD: Makefile,v 1.32 2013/07/20 04:02:00 taca Exp $
 #
 
 DISTNAME=	${RUBY_DISTNAME}
 PKGNAME=	${RUBY_PKGPREFIX}-base-${RUBY_VERSION_FULL}
+PKGREVISION=	2
 CATEGORIES=	lang ruby
 MASTER_SITES=	${MASTER_SITE_RUBY}
 
@@ -77,12 +78,13 @@ SUBST_MESSAGE.conf=	Fixing configuration files.
 .if !empty(RUBY_SUFFIX)
 CONFIGURE_ARGS+= --program-suffix=${RUBY_SUFFIX}
 CONFIGURE_ARGS+= --with-soname=${RUBY_NAME}
-CONFIGURE_ARGS+= --with-sitedir=${PREFIX}/${RUBY_SITELIB_BASE}
-CONFIGURE_ARGS+= --with-vendordir=${PREFIX}/${RUBY_VENDORLIB_BASE}
 CONFIGURE_ARGS+= --with-ruby-version=${RUBY_VERSION}
 CONFIGURE_ARGS+= --with-ruby-pc="ruby-${RUBY_VERSION}.pc"
 .endif
 
+#
+# Win32 support (for Cygwin)
+#
 PLIST_VARS+=	win32
 .if ${OPSYS} == "Cygwin"
 PLIST.win32=	yes
@@ -104,9 +106,9 @@ CONFIGURE_ENV+=	ac_cv_header_ucontext_h=no
 .endif
 
 #
-# work around for Linux
+# work around for Linux and Cygwin
 #
-.if ${OPSYS} == "Linux"
+.if ${OPSYS} == "Linux" || ${OPSYS} == "Cygwin"
 CONFIGURE_ENV+=	MKDIR_P=${MKDIR:Q}
 .endif
 

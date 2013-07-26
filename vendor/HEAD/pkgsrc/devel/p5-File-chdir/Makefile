@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.12 2012/10/31 11:18:14 asau Exp $
+# $NetBSD: Makefile,v 1.14 2013/07/10 01:37:29 schmonz Exp $
 
-DISTNAME=	File-chdir-0.1006
+DISTNAME=	File-chdir-0.1008
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	1
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=File/}
 

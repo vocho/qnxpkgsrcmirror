@@ -1,11 +1,9 @@
-# $NetBSD: Makefile,v 1.14 2013/02/16 11:20:50 wiz Exp $
-#
+# $NetBSD: Makefile,v 1.20 2013/07/15 12:41:03 wiz Exp $
 
-DISTNAME=		pygobject-3.4.2
-PKGNAME=		${PYPKGPREFIX}-gobject3-3.4.2
-PKGREVISION=		2
-CATEGORIES=		devel
-MASTER_SITES=		${MASTER_SITE_GNOME:=sources/pygobject/3.4/}
+DISTNAME=		pygobject-3.8.3
+PKGNAME=		${PYPKGPREFIX}-gobject3-3.8.3
+CATEGORIES=		devel gnome
+MASTER_SITES=		${MASTER_SITE_GNOME:=sources/pygobject/${PKGVERSION_NOREV:R}/}
 EXTRACT_SUFX=		.tar.xz
 
 MAINTAINER=		prlw1@cam.ac.uk
@@ -14,10 +12,14 @@ COMMENT=		Python bindings for glib2 gobject
 LICENSE=		gnu-lgpl-v2.1
 
 USE_PKGLOCALEDIR=	yes
+USE_LANGUAGES=		c c99
 USE_LIBTOOL=		yes
 USE_TOOLS+=		pkg-config gmake
 GNU_CONFIGURE=		yes
 CONFIGURE_ENV+=		PYTHON=${PYTHONBIN:Q}
+
+#PYTHON_VERSIONS_INCLUDE_3X=	yes
+PYTHON_SELF_CONFLICT=		yes
 
 PKGCONFIG_OVERRIDE+=	pygobject-3.0.pc.in
 PY_PATCHPLIST=		yes
@@ -40,8 +42,10 @@ PLATFORM!=	${PYTHONBIN:Q} -c "import sys; from distutils import util; sys.stdout
 PLIST_SUBST+=	PLATFORM=${PLATFORM:Q}
 .endif
 
-.include "../../graphics/py-cairo/buildlink3.mk"
+BUILDLINK_API_DEPENDS.glib2=	glib2>=2.34.2
 .include "../../devel/glib2/buildlink3.mk"
-BUILDLINK_API_DEPENDS.gobject-introspection=	gobject-introspection>=1.34.1.1
+BUILDLINK_API_DEPENDS.gobject-introspection=	gobject-introspection>=1.34.2
 .include "../../devel/gobject-introspection/buildlink3.mk"
+.include "../../devel/libffi/buildlink3.mk"
+.include "../../graphics/py-cairo/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

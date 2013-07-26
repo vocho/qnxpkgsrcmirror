@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.113 2013/04/06 21:07:34 rodent Exp $
+# $NetBSD: Makefile,v 1.117 2013/07/15 02:02:25 ryoon Exp $
 
 DISTNAME=	octave-${OCTAVE_VER}
+PKGREVISION=	3
 CATEGORIES=	math
 MASTER_SITES=	${MASTER_SITE_GNU:=octave/} \
 		ftp://ftp.octave.org/pub/octave/ \
@@ -21,7 +22,6 @@ OCTAVE_VER=	3.6.4
 BROKEN=		Internal compiler error occurs on arm32 (even with gcc-2.95.3)
 .endif
 
-USE_GNU_READLINE=	yes
 USE_LIBTOOL=		yes
 USE_TOOLS+=		autoconf gsed gmake:run makeinfo perl pkg-config bison
 GNU_CONFIGURE=		yes

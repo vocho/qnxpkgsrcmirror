@@ -1,4 +1,4 @@
-# $NetBSD: buildlink3.mk,v 1.20 2013/02/16 11:19:06 wiz Exp $
+# $NetBSD: buildlink3.mk,v 1.25 2013/07/05 13:29:29 ryoon Exp $
 
 BUILDLINK_TREE+=	monodevelop
 
@@ -6,14 +6,14 @@ BUILDLINK_TREE+=	monodevelop
 MONODEVELOP_BUILDLINK3_MK:=
 
 BUILDLINK_API_DEPENDS.monodevelop+=	monodevelop>=2.4
-BUILDLINK_ABI_DEPENDS.monodevelop+=	monodevelop>=2.4.2nb18
+BUILDLINK_ABI_DEPENDS.monodevelop+=	monodevelop>=2.4.2nb25
 BUILDLINK_PKGSRCDIR.monodevelop?=	../../devel/monodevelop
 BUILDLINK_CONTENTS_FILTER.monodevelop+=	${EGREP} '^lib/'
 
 .include "../../databases/shared-mime-info/buildlink3.mk"
 .include "../../devel/mono-addins/buildlink3.mk"
 .include "../../graphics/libgdiplus/buildlink3.mk"
-.include "../../lang/mono/buildlink3.mk"
+.include "../../lang/mono2/buildlink3.mk"
 .include "../../x11/gtksourceview-sharp2/buildlink3.mk"
 .include "../../x11/gtk-sharp/buildlink3.mk"
 .include "../../x11/gnome-sharp/buildlink3.mk"

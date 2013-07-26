@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.24 2013/04/13 12:55:53 obache Exp $
+# $NetBSD: Makefile,v 1.26 2013/07/15 02:02:24 ryoon Exp $
 
 .include "dist.mk"
 
@@ -18,6 +18,7 @@ CONFIGURE_ARGS+=	--enable-shared
 CONFIGURE_ARGS+=	OPT=${CFLAGS:Q}
 CONFIGURE_ARGS+=	--with-system-ffi
 CONFIGURE_ARGS+=	--with-dbmliborder=ndbm:bdb
+CONFIGURE_ENV+=		MKDIR_P=${MKDIR:Q}
 
 LDFLAGS+=		-L${WRKSRC}
 
@@ -172,7 +173,6 @@ post-install:
 		${DESTDIR}${PREFIX}/lib/libpython2.7.sl.1.0
 .endif
 
-USE_GNU_READLINE=			yes
 BUILDLINK_DEPMETHOD.readline=		build
 
 .include "../../archivers/bzip2/buildlink3.mk"

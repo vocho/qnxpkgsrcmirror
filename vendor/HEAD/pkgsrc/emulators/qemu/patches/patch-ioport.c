@@ -1,6 +1,9 @@
-$NetBSD: patch-ioport.c,v 1.6 2012/09/11 17:13:45 asau Exp $
+$NetBSD: patch-ioport.c,v 1.8 2013/07/09 17:00:58 tsutsui Exp $
 
---- ioport.c.orig	2012-09-05 14:03:06.000000000 +0000
+Avoid conflicts with SSP read() macro in NetBSD's <ssp/unistd.h>
+(PR lib/43832: ssp causes common names to be defines)
+
+--- ioport.c.orig	2013-06-26 21:47:29.000000000 +0000
 +++ ioport.c
 @@ -183,7 +183,7 @@ static uint32_t ioport_readb_thunk(void 
      IORange *ioport = opaque;

@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.11 2013/03/28 21:30:49 joerg Exp $
+# $NetBSD: Makefile,v 1.13 2013/07/15 02:02:24 ryoon Exp $
 #
 
 DISTNAME=	see-3.0.1376
-PKGREVISION=	5
+PKGREVISION=	6
 CATEGORIES=	lang
 MASTER_SITES=	http://users.tpg.com.au/dle0nard/software/
 
@@ -30,5 +30,5 @@ post-install:
 
 .include "../../devel/libltdl/buildlink3.mk"
 .include "../../devel/boehm-gc/buildlink3.mk"
-.include "../../devel/readline/buildlink3.mk"
+.include "../../mk/readline.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

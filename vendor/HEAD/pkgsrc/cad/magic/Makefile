@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.28 2013/04/02 02:29:34 sbd Exp $
+# $NetBSD: Makefile,v 1.32 2013/07/15 02:02:18 ryoon Exp $
 #
 
 DISTNAME=	magic-7.5.188
-PKGREVISION=	3
+PKGREVISION=	6
 CATEGORIES=	cad
 MASTER_SITES=	http://opencircuitdesign.com/magic/archive/
 EXTRACT_SUFX=	.tgz
@@ -15,7 +15,6 @@ LICENSE=	magic-license
 MAKE_JOBS_SAFE=		no
 
 USE_TOOLS+=	gmake printf csh
-USE_GNU_READLINE=yes	# uses rl_*_completion_function
 MAKE_ENV+=	MAGIC_HOME=${PREFIX:Q}
 MAKE_FLAGS+=	MANDIR=${PREFIX}/${PKGMANDIR}
 GNU_CONFIGURE=	yes
@@ -53,6 +52,7 @@ REPLACE.wish.old=	.*wish
 REPLACE.wish.new=	${PREFIX}/bin/wish
 REPLACE_FILES.wish=	tcltk/tkshell.tcl
 
+# uses rl_*_completion_function
 .include "../../devel/readline/buildlink3.mk"
 .include "../../lang/tcl/buildlink3.mk"
 .include "../../x11/blt/buildlink3.mk"

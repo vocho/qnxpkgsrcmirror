@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.72 2013/02/06 23:23:20 jperkin Exp $
+# $NetBSD: Makefile,v 1.74 2013/07/15 02:02:27 ryoon Exp $
 #
 
 DISTNAME=	ntp-4.2.4p8
-PKGREVISION=	4
+PKGREVISION=	5
 CATEGORIES=	net time
 MASTER_SITES=	http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/
 
@@ -67,5 +67,5 @@ CONFIGURE_ARGS+=	--with-openssl-incdir=${SSLBASE}/include
 CONFIGURE_ARGS+=	--with-openssl-libdir=${SSLBASE}/lib
 CONFIGURE_ARGS+=	--with-crypto=openssl
 
-.include "../../devel/readline/buildlink3.mk"
+.include "../../mk/readline.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

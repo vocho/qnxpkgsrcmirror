@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.18 2012/09/11 19:46:53 asau Exp $
+# $NetBSD: Makefile,v 1.20 2013/06/13 21:36:46 jperkin Exp $
 #
 
 DISTNAME=	bsdtar-2.8.4
+PKGREVISION=	1
 CATEGORIES=	archivers
 MASTER_SITES=	# empty
 DISTFILES=	# empty
@@ -18,6 +19,9 @@ GNU_CONFIGURE=	yes
 
 .include "../../archivers/bzip2/builtin.mk"
 .include "../../devel/zlib/builtin.mk"
+CHECK_BUILTIN.openssl:=	yes
+.include "../../security/openssl/builtin.mk"
+CHECK_BUILTIN.openssl:=	no
 
 .if empty(USE_BUILTIN.bzip2:M[yY][eE][sS])
 CPPFLAGS+=	-I${WRKDIR}/bzip2
@@ -26,6 +30,9 @@ LDFLAGS+=	-L${WRKDIR}/bzip2
 .if empty(USE_BUILTIN.zlib:M[yY][eE][sS])
 CPPFLAGS+=	-I${WRKDIR}/zlib
 LDFLAGS+=	-L${WRKDIR}/zlib
+.endif
+.if empty(USE_BUILTIN.openssl:M[yY][eE][sS])
+CONFIGURE_ARGS+=	--without-openssl
 .endif
 
 FILESDIR.bzip2?=	${.CURDIR}/../../archivers/bzip2/files

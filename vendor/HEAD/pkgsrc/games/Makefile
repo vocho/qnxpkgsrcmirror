@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.359 2013/04/04 11:18:10 jperkin Exp $
+# $NetBSD: Makefile,v 1.362 2013/07/06 17:37:03 kleink Exp $
 #
 
 COMMENT=	Games
@@ -250,7 +250,9 @@ SUBDIR+=	powder
 SUBDIR+=	powermanga
 SUBDIR+=	powwow
 SUBDIR+=	prboom
+SUBDIR+=	pushover
 SUBDIR+=	puzzles
+SUBDIR+=	py-ranking
 SUBDIR+=	py-trueskill
 SUBDIR+=	pysolfc
 SUBDIR+=	pytraffic
@@ -290,6 +292,7 @@ SUBDIR+=	sirius
 SUBDIR+=	six
 SUBDIR+=	sjeng
 SUBDIR+=	sl
+SUBDIR+=	solarus
 SUBDIR+=	spaceracer
 SUBDIR+=	spellcast
 SUBDIR+=	spider

@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.1 2013/03/14 18:47:29 drochner Exp $
+# $NetBSD: Makefile,v 1.5 2013/06/06 12:53:48 wiz Exp $
 #
 
 DISTNAME=	lasem-0.4.1
+PKGREVISION=	3
 CATEGORIES=	graphics gnome
 MASTER_SITES=	ftp://ftp.gnome.org/pub/gnome/sources/lasem/0.4/
 EXTRACT_SUFX=	.tar.xz
@@ -13,7 +14,7 @@ LICENSE=	gnu-gpl-v2
 
 GNU_CONFIGURE=	yes
 USE_LIBTOOL=	yes
-USE_TOOLS+=	pkg-config bison intltool flex gmake
+USE_TOOLS+=	bison flex gettext gmake intltool pkg-config
 TEST_TARGET=	check
 
 PKGCONFIG_OVERRIDE+=	lasem.pc.in

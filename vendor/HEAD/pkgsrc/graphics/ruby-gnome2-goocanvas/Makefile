@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.28 2013/03/16 12:25:48 obache Exp $
+# $NetBSD: Makefile,v 1.34 2013/06/20 09:12:14 obache Exp $
 #
 
 PKGNAME=		${RUBY_PKGPREFIX}-gnome2-goocanvas-${VERSION}
@@ -9,9 +9,10 @@ CONFLICTS+=		ruby[0-9][0-9]-gnome2-goocanvas-[0-9]*
 
 RUBY_EXTCONF_SUBDIRS=	goocanvas
 
-DEPENDS+=		${RUBY_PKGPREFIX}-gnome2-gtk>=${VERSION}:../../x11/ruby-gnome2-gtk
+DEPENDS+=		${RUBY_PKGPREFIX}-gnome2-gobject-introspection>=${VERSION}:../../devel/ruby-gnome2-gobject-introspection
+DEPENDS+=		${RUBY_PKGPREFIX}-gnome2-gtk3>=${VERSION}:../../x11/ruby-gnome2-gtk3
 
-.include "../../graphics/goocanvas/buildlink3.mk"
 .include "../../graphics/ruby-rcairo/buildlink3.mk"
+.include "../../graphics/goocanvas2/buildlink3.mk"
 .include "../../devel/ruby-pkg-config/tool.mk"
 .include "../../meta-pkgs/ruby-gnome2/Makefile.common"

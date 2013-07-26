@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.20 2012/10/29 05:06:12 asau Exp $
+# $NetBSD: Makefile,v 1.23 2013/06/06 12:55:13 wiz Exp $
 #
 
 DISTNAME=	fspanel-0.8beta1
 PKGNAME=	${DISTNAME:C/beta/.0./}
-PKGREVISION=	7
+PKGREVISION=	10
 CATEGORIES=	x11
 MASTER_SITES=	http://www.chatjunkies.org/fspanel/
 

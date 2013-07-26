@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.4 2013/04/10 16:27:24 drochner Exp $
+# $NetBSD: Makefile,v 1.10 2013/07/24 11:20:00 drochner Exp $
 #
 
-DISTNAME=	grilo-0.2.5
-PKGNAME=	grilo-testui-0.2.5
+DISTNAME=	grilo-0.2.6
+PKGNAME=	grilo-testui-0.2.6
 CATEGORIES=	net
 MASTER_SITES=	ftp://ftp.gnome.org/pub/gnome/sources/grilo/0.2/
 EXTRACT_SUFX=	.tar.xz
@@ -17,7 +17,7 @@ PATCHDIR=	${.CURDIR}/../../net/grilo/patches
 
 GNU_CONFIGURE=	yes
 USE_LIBTOOL=	yes
-USE_TOOLS+=	pkg-config
+USE_TOOLS+=	pkg-config intltool
 USE_LANGUAGES=	c99
 
 BUILD_DIRS=	tools/grilo-test-ui
