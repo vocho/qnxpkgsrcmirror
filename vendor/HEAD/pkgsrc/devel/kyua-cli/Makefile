@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.12 2013/02/23 03:37:40 jmmv Exp $
+# $NetBSD: Makefile,v 1.15 2013/07/04 21:27:56 adam Exp $
 #
 
 DISTNAME=	kyua-cli-0.6
+PKGREVISION=	3
 CATEGORIES=	devel
 MASTER_SITES=	http://kyua.googlecode.com/files/
 
@@ -43,7 +44,6 @@ post-install:
 
 .include "../../databases/sqlite3/buildlink3.mk"
 .include "../../devel/kyua-testers/buildlink3.mk"
-BUILDLINK_API_DEPENDS.lutok+=	lutok>=0.2
 .include "../../devel/lutok/buildlink3.mk"
 .include "../../lang/lua/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

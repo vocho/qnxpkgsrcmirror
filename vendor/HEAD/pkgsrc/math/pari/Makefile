@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.57 2013/02/16 11:23:08 wiz Exp $
+# $NetBSD: Makefile,v 1.59 2013/07/15 02:02:26 ryoon Exp $
 
 DISTNAME=	pari-2.3.5
-PKGREVISION=	12
+PKGREVISION=	13
 CATEGORIES=	math
 MASTER_SITES=	http://pari.math.u-bordeaux.fr/pub/pari/unix/
 
@@ -15,7 +15,6 @@ MAKE_JOBS_SAFE=	no
 USE_LIBTOOL=		yes
 USE_TOOLS+=		perl:run
 USE_LANGUAGES+=		c c++
-USE_GNU_READLINE=	yes	# rl_save_prompt()
 HAS_CONFIGURE=		yes
 CONFIGURE_ENV+=		LOCALBASE=${LOCALBASE}
 CONFIGURE_ENV+=		PERL5=${PERL5:Q}
@@ -40,5 +39,6 @@ SUBST_SED.fix-cfg=	-e 's,$$CC $$extraflag,$$CC $$CFLAGS $$extraflag,g'
 .include "options.mk"
 
 .include "../../devel/ncurses/buildlink3.mk"
+# rl_save_prompt()
 .include "../../devel/readline/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

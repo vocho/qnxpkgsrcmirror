@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.16 2012/11/25 16:39:40 gls Exp $
+# $NetBSD: Makefile,v 1.18 2013/07/05 21:34:12 joerg Exp $
 #
 
 DISTNAME=		synergy-1.3.8-Source
 PKGNAME=		${DISTNAME:S/-Source//}
+PKGREVISION=		1
 CATEGORIES=		net x11
 MASTER_SITES=		http://synergy.googlecode.com/files/
 
@@ -46,6 +47,11 @@ do-install:
 .for f in ${EXAMPLES}
 	${INSTALL_DATA} ${WRKSRC}/doc/${f} ${DESTDIR}${PREFIX}/share/examples/${PKGBASE}
 .endfor
+
+.include "../../mk/compiler.mk"
+.if !empty(PKGSRC_COMPILER:Mclang)
+_WRAP_EXTRA_ARGS.CXX+=	-std=c++11
+.endif
 
 .include "../../devel/cmake/buildlink3.mk"
 .if !exists(/System/Library/Frameworks/Carbon.framework)

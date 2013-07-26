@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.41 2013/02/16 11:20:03 wiz Exp $
+# $NetBSD: Makefile,v 1.46 2013/07/05 15:10:00 jperkin Exp $
 #
 
 DISTNAME=		audacious-plugins-1.5.1
-PKGREVISION=		32
+PKGREVISION=		36
 CATEGORIES=		audio
 MASTER_SITES=		http://distfiles.atheme.org/
 EXTRACT_SUFX=		.tgz
@@ -55,7 +55,6 @@ PLIST.oss=	yes
 .elif ${OPSYS} == "DragonFly"
 PLIST.oss=	yes
 .elif ${OPSYS} == "SunOS"
-BUILDLINK_TRANSFORM+=	rm:-Wl,-export-dynamic
 CPPFLAGS.SunOS=	-D__EXTENSIONS__ -D__uint32_t=uint32_t -D__uint64_t=uint64_t
 CONFIGURE_ARGS+=	--enable-oss4
 PLIST.oss4=	yes

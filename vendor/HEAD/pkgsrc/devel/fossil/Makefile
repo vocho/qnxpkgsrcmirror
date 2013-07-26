@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.25 2013/04/10 11:31:58 wiz Exp $
+# $NetBSD: Makefile,v 1.27 2013/07/15 02:02:20 ryoon Exp $
 
-DISTNAME=	fossil-src-20130216000435
-PKGNAME=	fossil-1.25
+DISTNAME=	fossil-src-20130618210923
+PKGNAME=	fossil-1.26
 CATEGORIES=	devel scm
 MASTER_SITES=	http://www.fossil-scm.org/download/
 
@@ -17,7 +17,7 @@ INSTALLATION_DIRS+=	bin
 do-install:
 	${INSTALL_PROGRAM} ${WRKSRC}/fossil ${DESTDIR}${PREFIX}/bin
 
-.include "../../devel/readline/buildlink3.mk"
+.include "../../mk/readline.buildlink3.mk"
 .include "../../security/openssl/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

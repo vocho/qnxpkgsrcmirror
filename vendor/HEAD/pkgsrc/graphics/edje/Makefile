@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.5 2013/02/06 23:21:34 jperkin Exp $
+# $NetBSD: Makefile,v 1.9 2013/07/04 21:27:57 adam Exp $
 #
 
-DISTNAME=	edje-1.1.0
-PKGREVISION=	3
+DISTNAME=	edje-1.7.7
+PKGREVISION=	1
 CATEGORIES=	graphics
 MASTER_SITES=	http://download.enlightenment.org/releases/
 EXTRACT_SUFX=	.tar.bz2
@@ -42,6 +42,8 @@ post-install:
 .include "../../devel/ecore/buildlink3.mk"
 .include "../../devel/eet/buildlink3.mk"
 .include "../../graphics/evas/buildlink3.mk"
+.include "../../graphics/evas-png/buildlink3.mk"
+.include "../../graphics/evas-buffer/buildlink3.mk"
 .include "../../lang/embryo/buildlink3.mk"
 .include "../../lang/lua/buildlink3.mk"
 

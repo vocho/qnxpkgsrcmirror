@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.5 2013/04/11 11:30:58 drochner Exp $
+# $NetBSD: Makefile,v 1.12 2013/06/06 12:54:05 wiz Exp $
 #
 
-DISTNAME=	rhythmbox-2.99
+DISTNAME=	rhythmbox-2.99.1
+PKGREVISION=	5
 CATEGORIES=	audio gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/rhythmbox/2.99/}
 EXTRACT_SUFX=	.tar.xz
@@ -14,6 +15,8 @@ GNU_CONFIGURE=		YES
 USE_TOOLS+=		gmake intltool msgfmt pkg-config
 USE_LIBTOOL=		YES
 USE_PKGLOCALEDIR=	YES
+
+BUILD_DEPENDS+=		itstool-[0-9]*:../../textproc/itstool
 
 CONFIGURE_ARGS+=	--disable-browser-plugin
 CONFIGURE_ARGS+=	--with-html-dir=${PREFIX}/share/doc

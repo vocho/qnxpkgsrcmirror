@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.42 2012/11/26 17:36:50 adam Exp $
+# $NetBSD: Makefile,v 1.46 2013/07/09 15:46:45 tsutsui Exp $
 
 DISTNAME=	fftw-3.3.3
+PKGREVISION=	2
 CATEGORIES=	math
 MASTER_SITES=	ftp://ftp.fftw.org/pub/fftw/ \
 		http://www.fftw.org/
@@ -12,11 +13,13 @@ LICENSE=	gnu-gpl-v2
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
 
-USE_LANGUAGES=		c fortran77
+USE_LANGUAGES=		c
 USE_LIBTOOL=		yes
 USE_TOOLS+=		gmake
 GNU_CONFIGURE=		yes
 CONFIGURE_ARGS+=	--enable-shared
+
+.include "options.mk"
 
 PKGCONFIG_OVERRIDE+=	fftw.pc.in
 INFO_FILES=		yes

@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.1 2013/04/03 12:03:39 markd Exp $
+# $NetBSD: Makefile,v 1.7 2013/07/05 13:29:32 ryoon Exp $
 
 DISTNAME=	kollision-${_KDE_VERSION}
+PKGREVISION=	4
 CATEGORIES=	games
 COMMENT=	a simple ball dodging game
 

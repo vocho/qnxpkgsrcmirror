@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.6 2013/03/16 22:59:06 dholland Exp $
+# $NetBSD: Makefile,v 1.10 2013/06/06 03:00:07 taca Exp $
 
-DISTNAME=	bulk-medium-20130316
+DISTNAME=	bulk-medium-20130606
 CATEGORIES=	meta-pkgs
 MASTER_SITES=	# empty
 DISTFILES=	# empty
@@ -92,7 +92,6 @@ BUILD_DEPENDS+=	sun-jre6-[0-9]*:../../lang/sun-jre6
 BUILD_DEPENDS+=	openjdk7-[0-9]*:../../lang/openjdk7
 BUILD_DEPENDS+=	openjdk7-bin-[0-9]*:../../lang/openjdk7-bin
 BUILD_DEPENDS+=	python26-[0-9]*:../../lang/python26
-BUILD_DEPENDS+=	python31-[0-9]*:../../lang/python31
 BUILD_DEPENDS+=	python32-[0-9]*:../../lang/python32
 BUILD_DEPENDS+=	python33-[0-9]*:../../lang/python33
 BUILD_DEPENDS+=	tcl-[0-9]*:../../lang/tcl
@@ -104,7 +103,6 @@ BUILD_DEPENDS+=	mutt-[0-9]*:../../mail/mutt
 BUILD_DEPENDS+=	re-alpine-[0-9]*:../../mail/re-alpine
 BUILD_DEPENDS+=	spamassassin-[0-9]*:../../mail/spamassassin
 BUILD_DEPENDS+=	bind>=9.6<9.7:../../net/bind96
-BUILD_DEPENDS+=	bind>=9.7<9.8:../../net/bind97
 BUILD_DEPENDS+=	bind>=9.8<9.9:../../net/bind98
 BUILD_DEPENDS+=	bind>=9.9<9.10:../../net/bind99
 BUILD_DEPENDS+=	clive-[0-9]*:../../net/clive
@@ -126,7 +124,7 @@ BUILD_DEPENDS+=	desktop-file-utils-[0-9]*:../../sysutils/desktop-file-utils
 BUILD_DEPENDS+=	xe-guest-utilities-[0-9]*:../../sysutils/xe-guest-utilities
 BUILD_DEPENDS+=	xenkernel41-[0-9]*:../../sysutils/xenkernel41
 BUILD_DEPENDS+=	xentools41-[0-9]*:../../sysutils/xentools41
-BUILD_DEPENDS+=	ispell-base-[0-9]*:../../textproc/ispell-base
+BUILD_DEPENDS+=	ispell-[0-9]*:../../textproc/ispell
 BUILD_DEPENDS+=	firefox10-[0-9]*:../../www/firefox10
 BUILD_DEPENDS+=	seamonkey-[0-9]*:../../www/seamonkey
 BUILD_DEPENDS+=	xlockmore-[0-9]*:../../x11/xlockmore

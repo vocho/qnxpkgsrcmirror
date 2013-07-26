@@ -1,9 +1,7 @@
-# $NetBSD: Makefile,v 1.61 2013/02/16 11:21:18 wiz Exp $
-#
+# $NetBSD: Makefile,v 1.68 2013/07/02 06:37:45 wiz Exp $
 
-DISTNAME=	gbrainy-2.1.5
-PKGNAME=	gbrainy-2.15
-PKGREVISION=	3
+DISTNAME=	gbrainy-2.2.1
+PKGNAME=	gbrainy-2.21
 CATEGORIES=	games
 MASTER_SITES=	http://gent.softcatala.org/jmas/gbrainy/
 
@@ -30,7 +28,7 @@ REPLACE_BASH=		src/Clients/Classical/gbrainy.in
 .include "../../graphics/librsvg/buildlink3.mk"
 .include "../../graphics/gnome-icon-theme/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
-.include "../../lang/mono/buildlink3.mk"
+.include "../../lang/mono2/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../textproc/gnome-doc-utils/buildlink3.mk"
 .include "../../x11/gtk-sharp/buildlink3.mk"

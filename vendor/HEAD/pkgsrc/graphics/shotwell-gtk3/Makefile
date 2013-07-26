@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.15 2013/04/08 16:51:59 drochner Exp $
+# $NetBSD: Makefile,v 1.21 2013/06/06 12:54:35 wiz Exp $
 #
 
 DISTNAME=		shotwell-0.14.1
+PKGREVISION=		5
 CATEGORIES=		graphics
 MASTER_SITES=		http://yorba.org/download/shotwell/0.14/
 EXTRACT_SUFX=		.tar.xz
@@ -38,7 +39,7 @@ BUILDLINK_ABI_DEPENDS.libraw+= libraw>=0.13.2
 # Required for dealing with .svg icons. Spotted on a clean box
 .include "../../graphics/librsvg/buildlink3.mk"
 BUILDLINK_DEPMETHOD.vala= build
-.include "../../lang/vala018/buildlink3.mk"
+.include "../../lang/vala020/buildlink3.mk"
 .include "../../net/libsoup24/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../sysutils/dbus-glib/buildlink3.mk"

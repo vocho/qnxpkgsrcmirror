@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.11 2012/10/23 17:18:40 asau Exp $
+# $NetBSD: Makefile,v 1.13 2013/06/23 18:21:22 dholland Exp $
 
 DISTNAME=		repackaged-${PKGNAME_NOREV}
 PKGNAME=		nasd-1.3
-PKGREVISION=		2
+PKGREVISION=		3
 CATEGORIES=		net sysutils
 MASTER_SITES=		${MASTER_SITE_LOCAL} # original tar file has some trailing base64 checksums
 
@@ -14,6 +14,7 @@ ONLY_FOR_PLATFORM=	NetBSD-*-* SunOS-*-* Linux-*-*
 
 USE_IMAKE=		yes
 USE_TOOLS+=		perl makedepend
+BUILD_DEPENDS+=		p5-Perl4-CoreLibs-[0-9]*:../../devel/p5-Perl4-CoreLibs
 WRKSRC=			${WRKDIR}/${PKGNAME_NOREV}
 
 MAKE_JOBS_SAFE=		no

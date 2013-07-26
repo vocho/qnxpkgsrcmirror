@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.16 2013/02/16 11:24:38 wiz Exp $
+# $NetBSD: Makefile,v 1.21 2013/07/05 13:29:43 ryoon Exp $
 #
 
 DISTNAME=	dikt-2j
-PKGREVISION=	3
+PKGREVISION=	8
 CATEGORIES=	textproc x11
 MASTER_SITES=	http://dikt.googlecode.com/files/
 EXTRACT_SUFX=	.txz

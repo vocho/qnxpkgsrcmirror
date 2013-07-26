@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.2 2013/04/02 16:37:55 wiz Exp $
+# $NetBSD: Makefile,v 1.6 2013/06/18 19:59:35 joerg Exp $
 
 PKGNAME=	${DISTNAME:S/-/-client-/}
 SVR4_PKGNAME=	mysqc
@@ -35,5 +35,4 @@ post-install:
 .  endfor
 .endif
 
-.include "../../devel/readline/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

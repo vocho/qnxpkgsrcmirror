@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.19 2013/04/11 19:57:51 joerg Exp $
+# $NetBSD: Makefile,v 1.23 2013/06/19 14:03:41 gdt Exp $
 #
 
-VERSION=	4.1.4
+VERSION=	4.1.5
 DISTNAME=	xen-${VERSION}
 PKGNAME=	xenkernel41-${VERSION}
 PKGREVISION=	1
@@ -20,7 +20,7 @@ ONLY_FOR_PLATFORM+=	NetBSD-[5-9].*-x86_64 NetBSD-[5-9].*-i386
 NO_CONFIGURE=	yes
 USE_TOOLS+=	gmake
 
-PYTHON_FOR_BUILD_ONLY=	# empty
+PYTHON_FOR_BUILD_ONLY=	yes
 PY_PATCHPLIST=		NO
 
 # XXX Why does this not work?

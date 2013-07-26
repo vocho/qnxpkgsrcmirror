@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.5 2012/10/06 11:54:45 asau Exp $
+# $NetBSD: Makefile,v 1.7 2013/06/04 22:16:09 tron Exp $
 #
 
 DISTNAME=	lincity-ng-2.0
-PKGREVISION=	3
+PKGREVISION=	5
 CATEGORIES=	games
 MASTER_SITES=	http://download.berlios.de/lincity-ng/
 EXTRACT_SUFX=	.tar.bz2

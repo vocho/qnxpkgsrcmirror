@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.40 2013/01/16 20:55:30 adam Exp $
+# $NetBSD: Makefile,v 1.45 2013/07/07 03:51:04 obache Exp $
 
-SNAPSHOT_DATE=	20130115
+SNAPSHOT_DATE=	20130703
 
 DISTNAME=	x264-snapshot-${SNAPSHOT_DATE}-2245
 PKGNAME=	x264-devel-${SNAPSHOT_DATE}
@@ -28,6 +28,11 @@ CFLAGS+=	-DHAVE_STDLIB_H
 	(!empty(OS_VERSION:M[1-5].*) && empty(OS_VERSION:M5.99.*))) || \
       ${OPSYS} == "Darwin"
 CONFIGURE_ARGS+=	--disable-asm
+# depends on builtin functions enabled with i486 and later with GCC.
+.    if ${OPSYS} == "NetBSD" && !empty(MACHINE_ARCH:Mi386)
+GNU_ARCH.i386=		i486
+CFLAGS+=		-march=i486
+.    endif
 .  else
 BUILD_DEPENDS+=		yasm>=0.4.0:../../devel/yasm
 .  endif
@@ -50,7 +55,13 @@ HAS_CONFIGURE=		yes
 CONFIG_SHELL=		${BASH}
 CONFIGURE_ARGS+=	--enable-pic	# uses libtool's -prefer-pic
 CONFIGURE_ARGS+=	--prefix=${PREFIX}
+CONFIGURE_ARGS+=	--disable-opencl
 MAKE_ENV+=		SH=${SH:Q}
+
+.if !empty(USE_CROSS_COMPILE:M[yY][eE][sS])
+# XXX Consider passing this whether cross-compiling or not.
+CONFIGURE_ARGS+=	--host=${MACHINE_GNU_PLATFORM:Q}
+.endif
 
 BUILD_TARGET=		default
 INSTALL_TARGET=		install-lib-static install-cli

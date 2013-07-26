@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.11 2013/02/06 23:22:27 jperkin Exp $
+# $NetBSD: Makefile,v 1.14 2013/06/16 18:56:05 sno Exp $
 
 PKGNAME=	evas-software-x11-${EVAS_VERSION}
-PKGREVISION=	1
 COMMENT=	Evas software X11 engine
 
 EVAS_ENGINES=	software-xlib

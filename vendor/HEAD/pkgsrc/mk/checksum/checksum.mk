@@ -1,4 +1,4 @@
-# $NetBSD: checksum.mk,v 1.17 2013/01/24 11:20:56 tron Exp $
+# $NetBSD: checksum.mk,v 1.19 2013/06/14 15:09:47 tron Exp $
 #
 # See bsd.checksum.mk for helpful comments.
 #
@@ -28,7 +28,7 @@ _COOKIE.checksum=	${_COOKIE.extract}
 
 _CHECKSUM_CMD=								\
 	${PKGSRC_SETENV} DIGEST=${TOOLS_DIGEST:Q} CAT=${TOOLS_CAT:Q}	\
-		ECHO=${TOOLS_ECHO:Q} SED=${TOOLS_SED:Q}			\
+		ECHO=${TOOLS_ECHO:Q} SED=${TOOLS_CMDLINE_SED:Q}		\
 		TEST=${TOOLS_TEST:Q}					\
 	${SH} ${PKGSRCDIR}/mk/checksum/checksum				\
 
@@ -52,7 +52,7 @@ checksum checksum-phase:
 .endif
 
 _DISTINFO_CMD=	${PKGSRC_SETENV} DIGEST=${TOOLS_DIGEST:Q} SED=${TOOLS_SED:Q} \
-			TEST=${TOOLS_TEST:Q} WC=${TOOLS_WC:Q} LC_ALL=C	\
+			TEST=${TOOLS_TEST:Q} WC=${TOOLS_WC:Q}	\
 		${AWK} -f ${PKGSRCDIR}/mk/checksum/distinfo.awk --
 
 .if exists(${DISTDIR})

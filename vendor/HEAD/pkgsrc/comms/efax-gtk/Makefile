@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.63 2013/02/16 11:20:36 wiz Exp $
+# $NetBSD: Makefile,v 1.66 2013/06/06 12:54:10 wiz Exp $
 
 DISTNAME=	efax-gtk-3.2.3.src
 PKGNAME=	efax-gtk-3.2.3
-PKGREVISION=	14
+PKGREVISION=	17
 CATEGORIES=	comms
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=efax-gtk/}
 EXTRACT_SUFX=	.tgz

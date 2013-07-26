@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.1 2013/04/10 11:01:23 drochner Exp $
+# $NetBSD: Makefile,v 1.3 2013/07/22 14:35:03 drochner Exp $
 #
 
 GST_PLUGINS1_NAME=	soup

@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.5 2012/10/31 11:18:50 asau Exp $
+# $NetBSD: Makefile,v 1.7 2013/07/03 16:23:16 sno Exp $
 
-DISTNAME=		Probe-Perl-0.01
+DISTNAME=		Probe-Perl-0.02
 PKGNAME=		p5-${DISTNAME}
-PKGREVISION=		3
 CATEGORIES=		devel perl5
-MASTER_SITES=		${MASTER_SITE_PERL_CPAN:=Probe/}
+MASTER_SITES=		${MASTER_SITE_PERL_CPAN:=../../authors/id/K/KW/KWILLIAMS/}
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://search.cpan.org/dist/Probe-Perl/
 COMMENT=		Information about the currently running perl
+LICENSE=		${PERL5_LICENSE}
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
 

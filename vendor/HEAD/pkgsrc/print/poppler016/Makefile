@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.4 2013/02/16 11:18:00 wiz Exp $
+# $NetBSD: Makefile,v 1.7 2013/06/04 22:17:00 tron Exp $
 #
 
-PKGREVISION=		4
+PKGREVISION=		7
 
 .include "../../print/poppler016/Makefile.common"
 

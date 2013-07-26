@@ -1,4 +1,4 @@
-# $NetBSD: pyversion.mk,v 1.105 2012/12/10 03:15:48 tsarna Exp $
+# $NetBSD: pyversion.mk,v 1.109 2013/05/12 00:19:55 riastradh Exp $
 
 # This file determines which Python version is used as a dependency for
 # a package.
@@ -8,7 +8,7 @@
 # PYTHON_VERSION_DEFAULT
 #	The preferred Python version to use.
 #
-#	Possible values: 26 27 31 32 33
+#	Possible values: 26 27 32 33
 #	Default: 27
 #
 # === Infrastructure variables ===
@@ -27,8 +27,8 @@
 #	order of the entries matters, since earlier entries are
 #	preferred over later ones.
 #
-#	Possible values: 33 32 31 27 26
-#	Default: (33 32 31) 27 26
+#	Possible values: 33 32 27 26
+#	Default: (33 32) 27 26
 #
 # PYTHON_VERSIONS_INCLUDE_3X
 #	Wether the default PYTHON_VERSIONS_ACCEPTED should include
@@ -41,14 +41,14 @@
 # PYTHON_VERSIONS_INCOMPATIBLE
 #	The Python versions that are NOT acceptable for the package.
 #
-#	Possible values: 26 27 31 32 33
+#	Possible values: 26 27 32 33
 #	Default: (depends on the platform)
 #
 # PYTHON_FOR_BUILD_ONLY
 #	Whether Python is needed only at build time or at run time.
 #
-#	Possible values: (defined) (undefined)
-#	Default: (undefined)
+#	Possible values: yes no tool
+#	Default: no
 #
 # PYTHON_SELF_CONFLICT
 #	If set to "yes", additional CONFLICTS entries are added for
@@ -94,7 +94,7 @@ BUILD_DEFS_EFFECTS+=	PYPACKAGE
 
 PYTHON_VERSION_DEFAULT?=		27
 .if ${PYTHON_VERSIONS_INCLUDE_3X:U:tl} == "yes"
-PYTHON_VERSIONS_ACCEPTED?=		33 32 31 27 26
+PYTHON_VERSIONS_ACCEPTED?=		33 32 27 26
 .else
 PYTHON_VERSIONS_ACCEPTED?=		27 26
 .endif
@@ -102,7 +102,6 @@ PYTHON_VERSIONS_INCOMPATIBLE?=		# empty by default
 
 BUILDLINK_API_DEPENDS.python26?=		python26>=2.6
 BUILDLINK_API_DEPENDS.python27?=		python27>=2.7
-BUILDLINK_API_DEPENDS.python31?=		python31>=3.1
 BUILDLINK_API_DEPENDS.python32?=		python32>=3.2
 BUILDLINK_API_DEPENDS.python33?=		python33>=3.3
 
@@ -174,13 +173,6 @@ PYPACKAGE=	python32
 PYVERSSUFFIX=	3.2
 PYPKGPREFIX=	py32
 PLIST.py3x=	yes
-.elif ${_PYTHON_VERSION} == "31"
-PYPKGSRCDIR=	../../lang/python31
-PYDEPENDENCY=	${BUILDLINK_API_DEPENDS.python31}:${PYPKGSRCDIR}
-PYPACKAGE=	python31
-PYVERSSUFFIX=	3.1
-PYPKGPREFIX=	py31
-PLIST.py3x=	yes
 .elif ${_PYTHON_VERSION} == "27"
 PYPKGSRCDIR=	../../lang/python27
 PYDEPENDENCY=	${BUILDLINK_API_DEPENDS.python27}:${PYPKGSRCDIR}
@@ -203,11 +195,16 @@ PYPKGPREFIX=
 PTHREAD_OPTS+=	require
 .include "../../mk/pthread.buildlink3.mk"
 
-.if defined(PYTHON_FOR_BUILD_ONLY)
-BUILDLINK_DEPMETHOD.python?=	build
-.endif
+PYTHON_FOR_BUILD_ONLY?=		no
 .if defined(PYPKGSRCDIR)
-.include "${PYPKGSRCDIR}/buildlink3.mk"
+.  if !empty(PYTHON_FOR_BUILD_ONLY:M[tT][oO][oO][lL])
+TOOL_DEPENDS+=			${PYDEPENDENCY}
+.  else
+.    if !empty(PYTHON_FOR_BUILD_ONLY:M[yY][eE][sS])
+BUILDLINK_DEPMETHOD.python?=	build
+.    endif
+.    include "${PYPKGSRCDIR}/buildlink3.mk"
+.  endif
 .endif
 
 PYTHONBIN=	${LOCALBASE}/bin/python${PYVERSSUFFIX}

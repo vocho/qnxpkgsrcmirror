@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.24 2013/02/16 11:24:38 wiz Exp $
+# $NetBSD: Makefile,v 1.30 2013/06/24 05:32:28 dholland Exp $
 #
 
 DISTNAME=	OdfAddinForOffice-src-3.0
 PKGNAME=	OdfConverter-3.0
-PKGREVISION=	17
+PKGREVISION=	22
 CATEGORIES=	converters textproc
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=odf-converter/}
 EXTRACT_SUFX=	.zip
@@ -70,6 +70,6 @@ do-install:
 	${INSTALL_DATA} ${WRKSRC}/source/Shell/OdfConverter/README.TXT \
 		${DESTDIR}${PREFIX}/share/doc/OdfConverter/README.TXT
 
-.include "../../lang/mono/buildlink3.mk"
+.include "../../lang/mono2/buildlink3.mk"
 .include "../../x11/gtk2/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

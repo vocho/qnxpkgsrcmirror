@@ -1,4 +1,4 @@
-# $NetBSD: IRIX.mk,v 1.40 2012/03/19 12:34:17 joerg Exp $
+# $NetBSD: IRIX.mk,v 1.42 2013/07/12 10:41:58 jperkin Exp $
 #
 # Variable definitions for the IRIX operating system.
 
@@ -33,9 +33,13 @@ ULIMIT_CMD_memorysize?=	ulimit -v `ulimit -H -v`
 USERADD?=		${LOCALBASE}/sbin/useradd
 GROUPADD?=		${LOCALBASE}/sbin/groupadd
 _PKG_USER_HOME?=	/dev/null # to match other system accounts
-_USER_DEPENDS=		user-[0-9]*:../../sysutils/user_irix
+_USER_DEPENDS=		user-irix>=20130712:../../sysutils/user_irix
 
 _OPSYS_EMULDIR.irix=	# empty
+
+_OPSYS_SYSTEM_RPATH?=	/usr/lib
+_OPSYS_LIB_DIRS?=	/usr/lib
+_OPSYS_INCLUDE_DIRS?=	/usr/include
 
 .if exists(/usr/include/netinet6)
 _OPSYS_HAS_INET6=	yes		# IPv6 is standard

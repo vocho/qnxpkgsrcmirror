@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.47 2011/12/20 09:17:01 wiz Exp $
+# $NetBSD: Makefile,v 1.50 2013/05/16 04:37:03 jnemeth Exp $
 #
 
 COMMENT=	Cross-platform development utilities
@@ -16,12 +16,15 @@ SUBDIR+=	binutils
 SUBDIR+=	cc65
 SUBDIR+=	dasm
 SUBDIR+=	dfu-programmer
+SUBDIR+=	h8300-elf-binutils
+SUBDIR+=	h8300-elf-gcc34
 SUBDIR+=	h8300-hms-binutils
 SUBDIR+=	h8300-hms-gcc
 SUBDIR+=	i386-cygwin32
 SUBDIR+=	i386-linux
 SUBDIR+=	i386-msdosdjgpp
 SUBDIR+=	icdprog
+#SUBDIR+=	libtool-base	# added here to keep pkglint happy
 SUBDIR+=	mingw
 SUBDIR+=	mingw-binutils
 SUBDIR+=	mingw-gcc

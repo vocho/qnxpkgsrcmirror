@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.38 2013/02/16 11:18:34 wiz Exp $
+# $NetBSD: Makefile,v 1.42 2013/06/06 12:53:45 wiz Exp $
 #
 
 DISTNAME=	gnome-build-2.24.1
-PKGREVISION=	23
+PKGREVISION=	27
 CATEGORIES=	devel gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gnome-build/2.24/}
 EXTRACT_SUFX=	.tar.bz2

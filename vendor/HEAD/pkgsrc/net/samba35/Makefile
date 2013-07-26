@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.27 2013/02/06 23:23:24 jperkin Exp $
+# $NetBSD: Makefile,v 1.30 2013/07/15 02:02:27 ryoon Exp $
 
 .include "../../net/samba/Makefile.mirrors"
 
 DISTNAME=	samba-${VERSION}
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	net
 MASTER_SITES=	${SAMBA_MIRRORS:=stable/}
 
@@ -51,9 +51,8 @@ USE_TOOLS+=		gmake mktemp perl:run
 REPLACE_PERL=		script/findsmb.in
 
 BROKEN_GETTEXT_DETECTION=yes
-USE_GNU_READLINE=	yes
 GNU_CONFIGURE=		yes
-GNU_CONFIGURE_LIBDIR=	${SAMBA_LIBDIR}
+CONFIGURE_ARGS+=	--libdir=${SAMBA_LIBDIR}
 CONFIGURE_ARGS+=	--with-libiconv=${BUILDLINK_PREFIX.iconv}
 CONFIGURE_ARGS+=	--with-readline=${BUILDLINK_PREFIX.readline}
 CONFIGURE_ARGS+=	--with-configdir=${SAMBA_ETCDIR}

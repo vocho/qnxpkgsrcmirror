@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.56 2013/02/16 11:24:45 wiz Exp $
+# $NetBSD: Makefile,v 1.62 2013/07/05 13:29:43 ryoon Exp $
 
 DISTNAME=	e16-0.16.8.8
 PKGNAME=	${DISTNAME:S/e16/enlightenment/}
-PKGREVISION=	13
+PKGREVISION=	18
 CATEGORIES=	x11 gnome wm
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=enlightenment/}
 
@@ -36,11 +36,19 @@ SUBST_SED.paths=	-e 's,@LOCALBASE@,${LOCALBASE},g'
 SUBST_SED.paths+=	-e 's,@PREFIX@,${PREFIX},g'
 SUBST_SED.paths+=	-e 's,@X11BASE@,${X11BASE},g'
 
+PLIST_VARS+=	libhack
+
+.include "../../mk/bsd.prefs.mk"
+
+.if ${OPSYS} == "DragonFly" || ${OPSYS} == "SunOS"
+PLIST.libhack=	yes
+.endif
+
 post-install:
-	${FIND} ${PREFIX}/share/e16/themes -type d -print | \
-	${XARGS} ${CHMOD} ${BINMODE}
-	${FIND} ${PREFIX}/share/e16/themes -type f -print | \
-	${XARGS} ${CHMOD} ${SHAREMODE}
+	${FIND} ${DESTDIR}${PREFIX}/share/e16/themes -type d -print | \
+		${XARGS} ${CHMOD} ${BINMODE}
+	${FIND} ${DESTDIR}${PREFIX}/share/e16/themes -type f -print | \
+		${XARGS} ${CHMOD} ${SHAREMODE}
 
 .include "../../audio/esound/buildlink3.mk"
 .include "../../converters/libiconv/buildlink3.mk"

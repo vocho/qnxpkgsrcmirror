@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.125 2013/04/10 15:09:10 drochner Exp $
+# $NetBSD: Makefile,v 1.130 2013/07/15 08:19:15 wiz Exp $
 
-DISTNAME=	gnutls-3.0.29
+DISTNAME=	gnutls-3.2.2
 CATEGORIES=	security devel
-MASTER_SITES=	ftp://ftp.gnutls.org/gcrypt/gnutls/v3.0/
+MASTER_SITES=	ftp://ftp.gnutls.org/gcrypt/gnutls/v3.2/
 EXTRACT_SUFX=	.tar.xz
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
@@ -45,10 +45,11 @@ post-install:
 
 .include "../../archivers/lzo/buildlink3.mk"
 .include "../../converters/libiconv/buildlink3.mk"
-.include "../../devel/readline/buildlink3.mk"
+.include "../../mk/readline.buildlink3.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../devel/libcfg+/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"
+.include "../../devel/gmp/buildlink3.mk"
 BUILDLINK_API_DEPENDS.libtasn1+=	libtasn1>=0.3.4
 .include "../../security/libtasn1/buildlink3.mk"
 .include "../../security/nettle/buildlink3.mk"

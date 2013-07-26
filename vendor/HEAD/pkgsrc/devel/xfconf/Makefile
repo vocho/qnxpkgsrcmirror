@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.17 2013/02/16 11:20:52 wiz Exp $
+# $NetBSD: Makefile,v 1.21 2013/06/06 12:54:15 wiz Exp $
 
 .include "../../meta-pkgs/xfce4/Makefile.common"
 
 DISTNAME=	xfconf-${XFCE4_VERSION}
-PKGREVISION=	15
+PKGREVISION=	19
 CATEGORIES=	devel
 COMMENT=	Xfce client-server configuration storage and query system
 

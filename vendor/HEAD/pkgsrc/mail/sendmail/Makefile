@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.114 2013/02/06 23:22:48 jperkin Exp $
+# $NetBSD: Makefile,v 1.116 2013/07/12 10:44:58 jperkin Exp $
 
 PKGNAME=	sendmail-${DIST_VERS}
 PKGREVISION=	1

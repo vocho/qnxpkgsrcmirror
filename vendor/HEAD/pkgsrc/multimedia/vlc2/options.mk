@@ -1,4 +1,4 @@
-# $NetBSD: options.mk,v 1.6 2013/04/14 22:10:23 cheusov Exp $
+# $NetBSD: options.mk,v 1.9 2013/07/04 21:27:58 adam Exp $
 
 PKG_OPTIONS_VAR=		PKG_OPTIONS.vlc
 PKG_SUPPORTED_OPTIONS=		debug faad skins sdl pulseaudio x11
@@ -9,6 +9,7 @@ PKG_SUGGESTED_OPTIONS=		x11 rtsp
 
 ### Add VAAPI if it is available
 .include "../../multimedia/libva/available.mk"
+PLIST_VARS+=		vaapi
 .if ${VAAPI_AVAILABLE} == "yes"
 PKG_SUPPORTED_OPTIONS+= vaapi
 PKG_SUGGESTED_OPTIONS+=	vaapi
@@ -16,6 +17,7 @@ PKG_SUGGESTED_OPTIONS+=	vaapi
 
 ### Add LIRC if it is available
 .include "../../comms/lirc/available.mk"
+PLIST_VARS+=		lirc
 .if ${LIRC_AVAILABLE} == "yes"
 PKG_SUPPORTED_OPTIONS+= lirc
 PKG_SUGGESTED_OPTIONS+=	lirc
@@ -71,12 +73,12 @@ CONFIGURE_ARGS+=	--enable-notify
 .include "../../sysutils/libnotify/buildlink3.mk"
 
 # telepathy needs dbus, but its also gnome-ish
-.if !empty(PKG_OPTIONS:Mgnome)
-.include "../../chat/libtelepathy/buildlink3.mk"
+.  if !empty(PKG_OPTIONS:Mgnome)
+.  include "../../chat/libtelepathy/buildlink3.mk"
 CONFIGURE_ARGS+=	--enable-telepathy
-.else
+.  else
 CONFIGURE_ARGS+=	--disable-telepathy
-.endif
+.  endif
 
 PLIST.dbus=		yes
 

@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.34 2012/10/08 13:25:17 asau Exp $
+# $NetBSD: Makefile,v 1.39 2013/06/11 13:31:58 ryoon Exp $
 
-DISTNAME=	xcircuit-3.4.26
-PKGREVISION=	1
+DISTNAME=	xcircuit-3.7.50
 CATEGORIES=	cad graphics
 MASTER_SITES=	http://opencircuitdesign.com/xcircuit/archive/
 EXTRACT_SUFX=	.tgz
@@ -11,7 +10,7 @@ HOMEPAGE=	http://opencircuitdesign.com/xcircuit/
 COMMENT=	Drawing program for X11 (especially for circuits)
 
 WRKSRC=		${WRKDIR}/${DISTNAME}
-USE_TOOLS+=	gs:run
+USE_TOOLS+=	gmake gs:run
 GNU_CONFIGURE=	yes
 
 .include "../../lang/tcl/Makefile.version"

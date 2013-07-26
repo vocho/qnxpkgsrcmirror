@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.54 2013/04/13 23:04:50 markd Exp $
+# $NetBSD: Makefile,v 1.61 2013/07/05 13:29:44 ryoon Exp $
 
 DISTNAME=	kdelibs-${_KDE_VERSION}
 PKGNAME=	${DISTNAME:S/-4/4-4/}
-PKGREVISION=	1
+PKGREVISION=	4
 CATEGORIES=	x11
 COMMENT=	Support libraries for the KDE integrated X11 desktop
 
@@ -76,6 +76,7 @@ DEPENDS+=		zonetab-[0-9]*:../../time/zonetab
 PLIST.kgrantpty=	yes
 .endif
 
+CFLAGS.SunOS+=		-D__EXTENSIONS__
 LDFLAGS.SunOS+=		-lintl
 
 BUILDLINK_DEPMETHOD.qt4-tools=		full

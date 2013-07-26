@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.3 2013/02/23 17:39:24 khorben Exp $
+# $NetBSD: Makefile,v 1.7 2013/06/15 12:42:12 khorben Exp $
 #
 
-DISTNAME=	Player-0.1.5
-PKGNAME=	deforaos-player-0.1.5
+DISTNAME=	Player-0.1.6
+PKGNAME=	deforaos-player-0.1.6
 CATEGORIES=	multimedia
-MASTER_SITES=	http://www.defora.org/os/download/download/4279/
+MASTER_SITES=	http://www.defora.org/os/download/download/4297/
 
 MAINTAINER=	khorben@defora.org
 HOMEPAGE=	http://www.defora.org/

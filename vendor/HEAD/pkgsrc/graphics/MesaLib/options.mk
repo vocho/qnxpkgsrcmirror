@@ -1,13 +1,13 @@
-# $NetBSD: options.mk,v 1.19 2012/10/17 11:36:02 jperkin Exp $
+# $NetBSD: options.mk,v 1.24 2013/05/28 11:27:09 wiz Exp $
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.MesaLib
 PKG_SUPPORTED_OPTIONS=
 
 # Assembler code build configurations
 .if (${MACHINE_ARCH} == "i386" || ${MACHINE_ARCH} == "x86_64") && \
-    ${OPSYS} != "SunOS" && ${OPSYS} != "Darwin"
-PKG_SUPPORTED_OPTIONS+=		${MACHINE_ARCH}
-PKG_SUGGESTED_OPTIONS+=		${MACHINE_ARCH}
+    ${OPSYS} != "Darwin"
+#PKG_SUPPORTED_OPTIONS+=		${MACHINE_ARCH}
+#PKG_SUGGESTED_OPTIONS+=		${MACHINE_ARCH}
 .endif
 ###
 ### XXX  There are [probably] others, but let's not get crazy just yet.
@@ -17,20 +17,16 @@ PKG_SUGGESTED_OPTIONS+=		${MACHINE_ARCH}
 .if (${MACHINE_ARCH} == "i386" || ${MACHINE_ARCH} == "x86_64" || \
      ${MACHINE_ARCH} == "powerpc" || ${MACHINE_ARCH} == "sparc" || \
      ${MACHINE_ARCH} == "sparc64") && \
-    ((${OPSYS} == "NetBSD" && ${X11_TYPE} == "modular") || \
+    (${OPSYS} == "NetBSD" || \
      ${OPSYS} == "FreeBSD" || ${OPSYS} == "OpenBSD" || \
      ${OPSYS} == "DragonFly" || ${OPSYS} == "Linux" || \
      ${OPSYS} == "SunOS")
 PKG_SUPPORTED_OPTIONS+=		dri
 .endif
-###
-### XXX OpenGL still works fine with the software fallback.  As of now,
-###	I think this is a good way to see which bugs surface before the
-###	next release branch.  Upgrading the X server to the 1.4 branch
-###	is advised given that it's glx/glcore modules are built from
-###	Mesa 6.5.3 (a development release).
-###
-.if !empty(MACHINE_PLATFORM:MNetBSD-[4-9]*-*86*) && ${X11_TYPE} == "modular"
+.if !empty(MACHINE_PLATFORM:MNetBSD-[4-9]*-*86*)
+PKG_SUGGESTED_OPTIONS+=		dri
+.endif
+.if !empty(MACHINE_PLATFORM:MLinux-*-*86*)
 PKG_SUGGESTED_OPTIONS+=		dri
 .endif
 
@@ -42,24 +38,28 @@ PKG_SUGGESTED_OPTIONS+=		dri
 ###
 ### XXX Yes, this is a bit overly verbose; with Mesa, that can't hurt much.
 ###	NOTE: there is no assembler code built with libOSMesa.
-.if (!empty(PKG_OPTIONS:Mi386) || !empty(PKG_OPTIONS:Mx86_64)) && \
-     !empty(PKG_OPTIONS:Mdri)
-BUILD_TARGET_SUFFIX=	-${MACHINE_ARCH}
-.else
-BUILD_TARGET_SUFFIX=	# empty
-.endif
+#.if (!empty(PKG_OPTIONS:Mi386) || !empty(PKG_OPTIONS:Mx86_64)) && \
+#     !empty(PKG_OPTIONS:Mdri)
+#BUILD_TARGET_SUFFIX=	-${MACHINE_ARCH}
+#.else
+#BUILD_TARGET_SUFFIX=	# empty
+#.endif
 
 .if !empty(PKG_OPTIONS:Mdri)
-BUILD_TARGET=	pkgsrc-dri${BUILD_TARGET_SUFFIX}
+CONFIGURE_ARGS+=        --with-driver=dri
 PLIST.dri=	yes
-BUILDLINK_API_DEPENDS.libdrm+= libdrm>=2.4.9
+BUILDLINK_API_DEPENDS.libdrm+= libdrm>=2.4.24
 .  include "../../sysutils/libpciaccess/buildlink3.mk"
 .  include "../../graphics/MesaLib/dri.mk"
+CONFIGURE_ARGS+=        --with-dri-drivers="i810 i915 i965 mach64 mga r128 r200 r300 r600 radeon savage sis swrast tdfx unichrome"
 .else
-BUILD_TARGET=	pkgsrc
+CONFIGURE_ARGS+=        --with-driver=xlib
 PLIST.nodri=	yes
+.if !empty(MACHINE_PLATFORM:MNetBSD-[4-9]*-*86*)
+PKG_FAIL_REASON=	"The dri option needs to be enabled for this to build on NetBSD."
+.endif
 ###
 ### XXX building libOSMesa breaks with -j, and GNU make has no .WAIT
 ###
-MAKE_JOBS_SAFE=			no
+#MAKE_JOBS_SAFE=			no
 .endif

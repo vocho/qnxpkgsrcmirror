@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.50 2013/02/16 11:24:31 wiz Exp $
+# $NetBSD: Makefile,v 1.57 2013/06/23 18:16:34 jperkin Exp $
 #
 
-DISTNAME=	gvfs-1.6.6
-PKGREVISION=	18
+DISTNAME=	gvfs-1.6.7
+PKGREVISION=	4
 CATEGORIES=	sysutils
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gvfs/1.6/}
 EXTRACT_SUFX=	.tar.bz2
@@ -10,6 +10,7 @@ EXTRACT_SUFX=	.tar.bz2
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.gnome.org/
 COMMENT=	Userspace virtual filesystem
+LICENSE=	gnu-lgpl-v2
 
 GNU_CONFIGURE=	yes
 USE_LIBTOOL=	yes
@@ -40,8 +41,8 @@ CONFIGURE_ARGS+=	--disable-avahi
 .endif
 
 .if !empty(PKG_OPTIONS:Msamba)
-CONFIGURE_ARGS+=	--with-samba-includes=${LOCALBASE}/include
-CONFIGURE_ARGS+=	--with-samba-libs=${LOCALBASE}/lib/samba
+CONFIGURE_ARGS+=	--with-samba-includes=${BUILDLINK_PREFIX.samba}/include
+CONFIGURE_ARGS+=	--with-samba-libs=${BUILDLINK_PREFIX.samba}/lib
 .include "../../net/samba/buildlink3.mk"
 PLIST.samba=		yes
 .else
@@ -67,11 +68,15 @@ PLIST.fuse=		yes
 CONFIGURE_ARGS+=	--disable-fuse
 .endif
 
-BUILDLINK_API_DEPENDS.glib2+=	glib2>=2.17.6
+BUILDLINK_TRANSFORM+=	rm:-DG_DISABLE_DEPRECATED
+
+CFLAGS.SunOS+=		-D_XOPEN_SOURCE=500 -D__EXTENSIONS__
+
+BUILDLINK_API_DEPENDS.glib2+=	glib2>=2.23.4
 .include "../../devel/glib2/modules.mk"
 .include "../../sysutils/dbus/buildlink3.mk"
 .include "../../archivers/libarchive/buildlink3.mk"
-BUILDLINK_API_DEPENDS.libsoup24+=	libsoup24>=2.25.1
+BUILDLINK_API_DEPENDS.libsoup24+=	libsoup24>=2.26.0
 .include "../../net/libsoup24/buildlink3.mk"
 .include "../../textproc/libxml2/buildlink3.mk"
 .include "../../devel/GConf/buildlink3.mk"

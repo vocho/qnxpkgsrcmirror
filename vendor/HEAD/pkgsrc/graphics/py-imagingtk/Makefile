@@ -1,15 +1,16 @@
-# $NetBSD: Makefile,v 1.28 2013/01/26 21:36:32 adam Exp $
-#
+# $NetBSD: Makefile,v 1.32 2013/06/13 14:26:14 joerg Exp $
 
 DISTNAME=	Imaging-1.1.7
 PKGNAME=	${PYPKGPREFIX}-imagingtk-1.1.7
-PKGREVISION=	3
+PKGREVISION=	5
 CATEGORIES=	graphics python
 MASTER_SITES=	http://effbot.org/downloads/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.pythonware.com/products/pil/
 COMMENT=	Tk support for the Python Imaging Library (PIL)
+
+DEPENDS+=	${PYPKGPREFIX}-Tk-[0-9]*:../../x11/py-Tk
 
 DIST_SUBDIR=	python
 PYDISTUTILSPKG=	yes
@@ -28,5 +29,5 @@ post-install:
 
 .include "../../lang/python/extension.mk"
 .include "../../graphics/py-imaging/buildlink3.mk"
-.include "../../x11/py-Tk/buildlink3.mk"
+.include "../../x11/tk/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

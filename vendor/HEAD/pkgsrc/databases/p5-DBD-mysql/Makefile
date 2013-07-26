@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.53 2013/03/02 20:33:23 wiz Exp $
+# $NetBSD: Makefile,v 1.55 2013/05/31 12:39:50 wiz Exp $
 
-DISTNAME=	DBD-mysql-4.022
+DISTNAME=	DBD-mysql-4.023
 PKGNAME=	p5-${DISTNAME}
 PKGREVISION=	1
 SVR4_PKGNAME=	p5dmy

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.7 2013/02/24 14:18:01 ryoon Exp $
+# $NetBSD: Makefile,v 1.14 2013/07/09 10:54:04 ryoon Exp $
 
 .include "../../devel/xulrunner17/dist.mk"
 PKGNAME=	firefox17-${MOZ_BRANCH}
@@ -25,7 +25,7 @@ LDFLAGS.Linux=		-lnspr4
 .include "../../devel/xulrunner17/mozilla-common.mk"
 .include "options.mk"
 
-MOZILLA=firefox
+MOZILLA=firefox17
 MOZILLA_ICON=	${WRKSRC}/dist/firefox/chrome/icons/default/default48.png
 .if !empty(PKG_OPTIONS:Mofficial-mozilla-branding)
 MOZILLA_NAME=	Firefox
@@ -50,10 +50,10 @@ post-build:
 INSTALLATION_DIRS+=	share/applications share/pixmaps
 post-install:
 	${INSTALL_DATA} ${WRKDIR}/desktop				\
-	  ${DESTDIR}${PREFIX}/share/applications/${MOZILLA}17.desktop
+	  ${DESTDIR}${PREFIX}/share/applications/${MOZILLA}.desktop
 	${INSTALL_DATA} ${MOZILLA_ICON}					\
-	  ${DESTDIR}${PREFIX}/share/pixmaps/${MOZILLA}17.png
-	rm -f ${DESTDIR}${PREFIX}/bin/firefox
+	  ${DESTDIR}${PREFIX}/share/pixmaps/${MOZILLA}.png
+	rm -f ${DESTDIR}${PREFIX}/bin/firefox17
 	${INSTALL_SCRIPT} ${WRKDIR}/firefox ${DESTDIR}${PREFIX}/bin/firefox17
 
 BUILDLINK_API_DEPENDS.xulrunner17+=	xulrunner17>=${MOZ_BRANCH}

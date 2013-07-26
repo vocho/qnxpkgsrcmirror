@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.13 2013/02/06 23:22:02 jperkin Exp $
+# $NetBSD: Makefile,v 1.15 2013/07/07 15:20:16 taca Exp $
 
-DISTNAME=	ruby-ldap-0.9.12
+DISTNAME=	ruby-ldap-0.9.13
 PKGNAME=	${DISTNAME:S/^ruby-/${RUBY_PKGPREFIX}-/}
-PKGREVISION=	2
+PKGREVISION=	1
 CATEGORIES=	databases ruby
 
 MAINTAINER=	obache@NetBSD.org
@@ -13,7 +13,7 @@ LICENSE=	modified-bsd
 CONFIGURE_ARGS+=	--with-openldap2
 CONFIGURE_ARGS+=	--with-ldap-dir=${BUILDLINK_PREFIX.openldap-client}
 
-GEM_CLEANBUILD=	*.o *.time ldap.${RUBY_DLEXT} mkmf.log
+GEM_CLEANBUILD=	Makefile *.o *.time ldap.${RUBY_DLEXT} mkmf.log
 
 .include "../../databases/openldap-client/buildlink3.mk"
 .include "../../security/cyrus-sasl/buildlink3.mk"

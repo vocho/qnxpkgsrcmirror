@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.24 2013/02/10 09:38:36 ryoon Exp $
+# $NetBSD: Makefile,v 1.26 2013/07/15 02:02:17 ryoon Exp $
 #
 
 DISTNAME=	jack-audio-connection-kit-${JACK_VERSION}
 PKGNAME=	jack-${JACK_VERSION}
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	audio
 #MASTER_SITES=	${MASTER_SITE_LOCAL}
 MASTER_SITES=	http://jackaudio.org/downloads/
@@ -119,7 +119,7 @@ post-extract:
 		${CP} ${FILESDIR}/atomicity.h ${WRKSRC}/config/os/netbsd
 
 .include "../../audio/libsamplerate/buildlink3.mk"
-.include "../../devel/readline/buildlink3.mk"
+.include "../../mk/readline.buildlink3.mk"
 .include "../../mk/dlopen.buildlink3.mk"
 .include "../../mk/pthread.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

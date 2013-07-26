@@ -1,13 +1,13 @@
-$NetBSD: patch-ae,v 1.1 2011/04/14 17:55:43 drochner Exp $
+$NetBSD: patch-ae,v 1.3 2013/05/27 10:27:02 drochner Exp $
 
---- src/update_walk.c.orig	2011-03-19 00:41:54.000000000 +0000
-+++ src/update_walk.c
-@@ -590,7 +590,7 @@ update_regular_file(struct directory *di
- 	if (suffix == NULL)
- 		return;
- 
--	if ((plugin = decoder_plugin_from_suffix(suffix, false)) != NULL)
-+	if ((plugin = decoder_plugin_from_suffix(suffix, NULL)) != NULL)
- 	{
- 		struct song* song = songvec_find(&directory->songs, name);
+--- src/update_song.c.orig	2012-12-20 12:56:41.000000000 +0000
++++ src/update_song.c
+@@ -104,7 +104,7 @@ update_song_file(struct directory *direc
+ 		 const struct stat *st)
+ {
+ 	const struct decoder_plugin *plugin =
+-		decoder_plugin_from_suffix(suffix, false);
++		decoder_plugin_from_suffix(suffix, NULL);
+ 	if (plugin == NULL)
+ 		return false;
  

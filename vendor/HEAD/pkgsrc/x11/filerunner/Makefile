@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.31 2012/10/29 05:06:11 asau Exp $
+# $NetBSD: Makefile,v 1.34 2013/06/06 12:55:12 wiz Exp $
 
 DISTNAME=	FileRunner-2.5.1
 PKGNAME=	${DISTNAME:S/FileRunner/filerunner/}
-PKGREVISION=	3
+PKGREVISION=	6
 CATEGORIES=	x11
 MASTER_SITES=	http://www.cd.chalmers.se/~hch/
 

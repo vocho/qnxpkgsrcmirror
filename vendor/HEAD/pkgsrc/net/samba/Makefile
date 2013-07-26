@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.230 2013/02/16 11:23:59 wiz Exp $
+# $NetBSD: Makefile,v 1.236 2013/07/15 02:02:27 ryoon Exp $
 
 DISTNAME=	samba-${VERSION}
-PKGREVISION=	2
 CATEGORIES=	net
 MASTER_SITES=	${SAMBA_MIRRORS:=stable/}
 
@@ -10,7 +9,7 @@ HOMEPAGE=	http://www.samba.org/
 COMMENT=	SMB/CIFS protocol server suite
 LICENSE=	gnu-gpl-v3
 
-VERSION=	3.6.12
+VERSION=	3.6.16
 CONFLICTS+=	ja-samba-[0-9]* pam-smbpass-[0-9]* winbind-[0-9]*
 
 FILESDIR=		${PKGDIR}/../../net/samba/files
@@ -48,9 +47,8 @@ USE_TOOLS+=		gmake mktemp perl:run pkg-config
 REPLACE_PERL=		script/findsmb.in
 
 BROKEN_GETTEXT_DETECTION=yes
-USE_GNU_READLINE=	yes
 GNU_CONFIGURE=		yes
-GNU_CONFIGURE_LIBDIR=	${SAMBA_LIBDIR}
+CONFIGURE_ARGS+=	--libdir=${SAMBA_LIBDIR}
 CONFIGURE_ARGS+=	--with-libiconv=${BUILDLINK_PREFIX.iconv}
 CONFIGURE_ARGS+=	--with-readline=${BUILDLINK_PREFIX.readline}
 CONFIGURE_ARGS+=	--with-configdir=${SAMBA_ETCDIR}

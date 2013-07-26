@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.34 2013/02/16 11:23:04 wiz Exp $
+# $NetBSD: Makefile,v 1.38 2013/06/06 12:54:43 wiz Exp $
 #
 
-DISTNAME=		galculator-1.3.4
-PKGREVISION=		15
+DISTNAME=		galculator-2.1.2
+PKGREVISION=		3
 CATEGORIES=		math
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=galculator/}
 
@@ -12,9 +12,10 @@ COMMENT=		Desktop calculator with scientific / RPN modes
 
 USE_PKGLOCALEDIR=	yes
 GNU_CONFIGURE=		yes
+CONFIGURE_ARGS+=	--disable-gtk3
 USE_TOOLS+=		gmake msgfmt pkg-config intltool
 
 .include "../../x11/gtk2/buildlink3.mk"
-.include "../../devel/libglade/buildlink3.mk"
+.include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../mk/bsd.pkg.mk"

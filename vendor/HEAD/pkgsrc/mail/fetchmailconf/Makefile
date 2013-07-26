@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.85 2012/11/03 22:50:22 morr Exp $
+# $NetBSD: Makefile,v 1.88 2013/06/04 22:16:36 tron Exp $
 
 DISTNAME=	fetchmail-6.3.22
 PKGNAME=	${DISTNAME:S/fetchmail/fetchmailconf/}
+PKGREVISION=	2
 CATEGORIES=	mail
 MASTER_SITES=	http://download.berlios.de/fetchmail/
 EXTRACT_SUFX=	.tar.bz2
@@ -11,6 +12,7 @@ HOMEPAGE=	http://fetchmail.berlios.de/
 COMMENT=	Configuration tool for fetchmail
 
 DEPENDS+=	${DISTNAME}{,nb*}:../../mail/fetchmail
+DEPENDS+=	${PYPKGPREFIX}-Tk-[0-9]*:../../x11/py-Tk
 
 NO_BUILD=	YES
 
@@ -35,5 +37,4 @@ post-install:
 	${LN} -s fetchmail.1 ${DESTDIR}${PREFIX}/${PKGMANDIR}/man1/fetchmailconf.1
 
 .include "../../lang/python/application.mk"
-.include "../../x11/py-Tk/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

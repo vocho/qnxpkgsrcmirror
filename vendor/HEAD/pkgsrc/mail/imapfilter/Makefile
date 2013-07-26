@@ -1,22 +1,25 @@
-# $NetBSD: Makefile,v 1.34 2013/02/06 23:22:45 jperkin Exp $
+# $NetBSD: Makefile,v 1.37 2013/07/25 13:25:08 degroote Exp $
 
-DISTNAME=		imapfilter-2.0.6
-PKGREVISION=		5
+DISTNAME=		imapfilter-${VERSION}
+VERSION=		2.5.5
 CATEGORIES=		mail
-MASTER_SITES=		http://imapfilter.hellug.gr/source/
-EXTRACT_SUFX=		.tar.bz2
+MASTER_SITES=  -https://codeload.github.com/lefcha/imapfiler/tar.gz/${VERSION}
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://imapfilter.hellug.gr/
 COMMENT=		Mail filtering utility for the IMAP
+LICENSE=		mit
 
 LDFLAGS.SunOS+=		-lsocket -lnsl
+
+FETCH_USING=   curl
+WRKSRC= 		${WRKDIR}/lefcha-imapfilter-ef03d60
 
 INSTALLATION_DIRS=	share/examples/imapfilter
 
 post-install:
-.for f in sample.config.lua sample.extend.lua
-	${INSTALL_DATA} ${WRKSRC}/${f} \
+.for f in config.lua extend.lua
+	${INSTALL_DATA} ${WRKSRC}/samples/${f} \
 		${DESTDIR}${PREFIX}/share/examples/imapfilter
 .endfor
 
