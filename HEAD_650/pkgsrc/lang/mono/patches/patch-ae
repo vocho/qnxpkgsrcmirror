@@ -1,7 +1,7 @@
 $NetBSD: patch-ae,v 1.11 2011/10/29 05:47:54 kefren Exp $
---- libgc/configure.orig	2011-09-15 20:12:48.000000000 +0300
-+++ libgc/configure	2011-10-28 18:07:42.000000000 +0300
-@@ -4921,7 +4921,7 @@ $as_echo "$as_me: WARNING: \"Only HP/UX 
+--- libgc/configure.orig	2012-02-01 20:48:08.000000000 +0000
++++ libgc/configure
+@@ -4787,7 +4787,7 @@ $as_echo "$as_me: WARNING: \"Only HP/UX 
  
  	THREADDLLIBS="-lpthread -lrt"
  	;;
@@ -10,7 +10,7 @@ $NetBSD: patch-ae,v 1.11 2011/10/29 05:47:54 kefren Exp $
  	$as_echo "#define GC_FREEBSD_THREADS 1" >>confdefs.h
  
  	if test "x$PTHREAD_CFLAGS" != "x"; then
-@@ -4960,6 +4960,8 @@ $as_echo "$as_me: WARNING: \"Only HP/UX 
+@@ -4826,6 +4826,8 @@ $as_echo "$as_me: WARNING: \"Only HP/UX 
       *-*-netbsd*)
  	$as_echo "#define GC_NETBSD_THREADS 1" >>confdefs.h
  
@@ -19,3 +19,20 @@ $NetBSD: patch-ae,v 1.11 2011/10/29 05:47:54 kefren Exp $
  	if test "${enable_parallel_mark}" = yes; then
  	  $as_echo "#define PARALLEL_MARK 1" >>confdefs.h
  
+@@ -4857,6 +4859,16 @@ $as_echo "$as_me: WARNING: \"Only HP/UX 
+ 	INCLUDES="$INCLUDES -pthread"
+ 	THREADDLLIBS="-lpthread -lrt"
+ 	;;
++     *-nto-qnx*)
++	$as_echo "#define GC_QNX_THREADS 1" >>confdefs.h
++
++        if test "${enable_parallel_mark}" = yes; then
++	  $as_echo "#define PARALLEL_MARK 1" >>confdefs.h
++
++	fi
++	$as_echo "#define THREAD_LOCAL_ALLOC 1" >>confdefs.h
++	THREADDLLIBS=""
++	;;
+       *)
+ 	as_fn_error $? "\"Pthreads not supported by the GC on this platform.\"" "$LINENO" 5
+ 	;;
