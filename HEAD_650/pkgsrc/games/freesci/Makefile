@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.31 2012/12/12 10:44:09 wiz Exp $
+# $NetBSD: Makefile,v 1.35 2013/07/15 02:02:22 ryoon Exp $
 #
 
 DISTNAME=		freesci-0.3.5
-PKGREVISION=		4
+PKGREVISION=		7
 CATEGORIES=		games
 MASTER_SITES=		http://www-plan.cs.colorado.edu/reichenb/freesci/
 
@@ -26,7 +26,7 @@ post-install:
 	${INSTALL_DATA} ${FILESDIR}/config ${DESTDIR}${PREFIX}/share/examples/freesci
 
 .include "../../devel/SDL/buildlink3.mk"
-.include "../../devel/readline/buildlink3.mk"
+.include "../../mk/readline.buildlink3.mk"
 .include "../../devel/ncurses/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../x11/libXft/buildlink3.mk"

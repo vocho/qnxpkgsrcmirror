@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.12 2012/10/02 21:25:52 asau Exp $
+# $NetBSD: Makefile,v 1.14 2013/07/07 15:21:33 taca Exp $
 
-DISTNAME=	ruby-odbc-0.99994
+DISTNAME=	ruby-odbc-0.99995
 PKGNAME=	${RUBY_PKGPREFIX}-${DISTNAME:S/ruby-//}
-PKGREVISION=	2
+PKGREVISION=	1
 CATEGORIES=	databases
 MASTER_SITES=	http://www.ch-werner.de/rubyodbc/
 # needs EXTRACT_SUFX since DISTFILE isn't Ruby's gem format.

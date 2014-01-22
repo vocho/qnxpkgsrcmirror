@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.35 2013/03/16 12:49:55 adam Exp $
+# $NetBSD: Makefile,v 1.37 2013/07/12 10:44:54 jperkin Exp $
 
 PKGNAME=	${DISTNAME:S/-/-server-/}
+PKGREVISION=	1
 COMMENT=	Lightweight Directory Access Protocol server suite
 
 CONFLICTS+=	openldap<2.3.23nb1
@@ -17,7 +18,6 @@ CONFIGURE_ARGS+=	--enable-wrappers
 # slapd backends
 CONFIGURE_ARGS+=	--enable-dnssrv
 CONFIGURE_ARGS+=	--enable-ldap
-CONFIGURE_ARGS+=	--enable-ldbm
 CONFIGURE_ARGS+=	--enable-meta
 CONFIGURE_ARGS+=	--enable-monitor
 CONFIGURE_ARGS+=	--enable-null

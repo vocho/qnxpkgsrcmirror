@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.15 2013/03/11 17:45:36 adam Exp $
+# $NetBSD: Makefile,v 1.18 2013/06/04 22:16:24 tron Exp $
 
 .include "../../graphics/GraphicsMagick/Makefile.common"
 
 PKGNAME=	p5-GraphicsMagick-${DISTVERSION}
+PKGREVISION=	3
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.graphicsmagick.org/perl.html

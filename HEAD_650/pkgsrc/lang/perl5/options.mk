@@ -1,9 +1,9 @@
-# $NetBSD: options.mk,v 1.2 2012/11/07 02:46:19 sbd Exp $
+# $NetBSD: options.mk,v 1.4 2013/07/15 09:24:57 ryoon Exp $
 
 PKG_OPTIONS_VAR=		PKG_OPTIONS.perl
 PKG_OPTIONS_REQUIRED_GROUPS=	perlbits
 PKG_OPTIONS_GROUP.perlbits=	64bitauto 64bitint 64bitmore 64bitall 64bitnone
-PKG_SUPPORTED_OPTIONS=		debug threads mstats
+PKG_SUPPORTED_OPTIONS=		debug dtrace threads mstats
 
 CHECK_BUILTIN.pthread:=	yes
 .include "../../mk/pthread.builtin.mk"
@@ -37,6 +37,10 @@ PKG_SUGGESTED_OPTIONS+=		64bitnone
 PKG_SUGGESTED_OPTIONS+=		64bitauto
 .endif
 
+.if ${OPSYS} == "Darwin" || ${OPSYS} == "SunOS" 
+PKG_SUGGESTED_OPTIONS+=		dtrace
+.endif
+
 .include "../../mk/bsd.options.mk"
 
 .if !empty(PKG_OPTIONS:Mthreads)
@@ -57,6 +61,12 @@ PERL5_RPATH_THREAD=
 
 .if !empty(PKG_OPTIONS:Mdebug)
 CFLAGS+=		-DDEBUGGING
+.endif
+
+.if !empty(PKG_OPTIONS:Mdtrace)
+CONFIGURE_ARGS+=	-Dusedtrace
+# perldtrace.h has incorrect dependencies, needs to be built first.
+BUILD_TARGET=		perldtrace.h all
 .endif
 
 .if !empty(PKG_OPTIONS:Mmstats)

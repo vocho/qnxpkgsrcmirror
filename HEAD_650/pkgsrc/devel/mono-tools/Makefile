@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.50 2013/02/16 11:20:48 wiz Exp $
+# $NetBSD: Makefile,v 1.57 2013/07/05 13:29:29 ryoon Exp $
 
 DISTNAME=	mono-tools-2.10
-PKGREVISION=	20
+PKGREVISION=	27
 CATEGORIES=	devel
 MASTER_SITES=	http://ftp.novell.com/pub/mono/sources/mono-tools/
 EXTRACT_SUFX=	.tar.bz2
@@ -21,7 +21,7 @@ MAKE_JOBS_SAFE=		no
 CONFIGURE_ARGS+=	--mandir=${PKGMANDIR}
 
 .include "../../graphics/libgdiplus/buildlink3.mk"
-.include "../../lang/mono/buildlink3.mk"
+.include "../../lang/mono2/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../x11/gnome-sharp/buildlink3.mk"
 .include "../../x11/gnome-desktop-sharp/buildlink3.mk"

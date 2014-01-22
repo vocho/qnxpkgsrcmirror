@@ -1,15 +1,14 @@
-# $NetBSD: Makefile,v 1.36 2013/04/06 14:58:20 rodent Exp $
+# $NetBSD: Makefile,v 1.40 2013/07/15 02:02:25 ryoon Exp $
 
 .include "../../lang/swi-prolog-lite/Makefile.common"
 
 PKGNAME=		swi-prolog-packages-${SWIPLVERS}
-PKGREVISION=		4
+PKGREVISION=		7
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
 COMMENT=		Packages for SWI Prolog
 
 GNU_CONFIGURE=		yes
-USE_GNU_READLINE=	yes	# uses rl_event_hook() interface
 USE_TOOLS+=		gmake pkg-config
 MAKE_JOBS_SAFE=		no
 
@@ -88,6 +87,7 @@ CHECK_WRKREF_SKIP=	lib/swi-prolog-${SWIPLVERS}/xpce-${XPCE_VERSION}/lib/${MACHIN
 .include "../../mk/jpeg.buildlink3.mk"
 .include "../../devel/gmp/buildlink3.mk"
 .include "../../devel/ncurses/buildlink3.mk"
+# uses rl_event_hook() interface
 .include "../../devel/readline/buildlink3.mk"
 .include "../../security/openssl/buildlink3.mk"
 .include "../../x11/libXft/buildlink3.mk"

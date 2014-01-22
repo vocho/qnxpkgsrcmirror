@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.49 2013/02/16 11:21:03 wiz Exp $
+# $NetBSD: Makefile,v 1.51 2013/07/15 02:02:21 ryoon Exp $
 
-DISTNAME=	atari800-2.2.1
-PKGREVISION=	1
+DISTNAME=	atari800-3.0.0
 CATEGORIES=	emulators
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=atari800/}
 DISTFILES=	${DISTNAME}${EXTRACT_SUFX} xf25.zip
@@ -37,7 +36,7 @@ post-install:
 	${INSTALL_DATA} ${WRKDIR}/*.rom ${WRKDIR}/*.xfd ${WRKDIR}/*.atr \
 		${WRKSRC}/atari800.cfg ${DESTDIR}${PREFIX}/share/atari800/
 
-.include "../../devel/readline/buildlink3.mk"
+.include "../../mk/readline.buildlink3.mk"
 .include "../../graphics/png/buildlink3.mk"
 .include "../../mk/oss.buildlink3.mk"
 .include "../../mk/termcap.buildlink3.mk"

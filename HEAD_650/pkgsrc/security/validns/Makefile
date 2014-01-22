@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.5 2012/10/23 18:17:01 asau Exp $
+# $NetBSD: Makefile,v 1.7 2013/06/15 16:51:29 pettai Exp $
 #
 
-DISTNAME=	validns-0.6
+DISTNAME=	validns-0.7
 CATEGORIES=	security
 MASTER_SITES=	http://www.validns.net/download/
 
@@ -10,9 +10,11 @@ HOMEPAGE=	http://www.validns.net/
 COMMENT=	Validns, a high performance DNS/DNSSEC zone validator
 LICENSE=	2-clause-bsd
 
+# Depends on perl for make tests
+
 #BUILD_DEPENDS+=	p5-Test-Command-Simple-[0-9]*:../../devel/p5-Test-Command-Simple
 
-USE_TOOLS+=perl
+#USE_TOOLS+=perl
 
 INSTALLATION_DIRS=	bin ${PKGMANDIR}/man1
 

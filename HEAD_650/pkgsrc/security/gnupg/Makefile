@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.118 2013/02/06 23:23:36 jperkin Exp $
+# $NetBSD: Makefile,v 1.120 2013/07/25 11:50:45 wiz Exp $
 
-DISTNAME=	gnupg-1.4.13
-PKGREVISION=	2
+DISTNAME=	gnupg-1.4.14
 CATEGORIES=	security
 MASTER_SITES=	ftp://ftp.gnupg.org/gcrypt/gnupg/ \
 		http://gd.tuwien.ac.at/privacy/gnupg/gnupg/ \
@@ -36,6 +35,10 @@ CONFIGURE_ARGS+=	--disable-gnupg-iconv
 .if (${OPSYS} == "AIX" || ${OPSYS} == "Darwin" || ${OPSYS} == "SunOS") \
     && defined(ABI) && ${ABI} == 64
 CONFIGURE_ARGS+=	--disable-asm
+.endif
+
+.if !empty(USE_CROSS_COMPILE:M[yY][eE][sS])
+CONFIGURE_ENV+=		CC_FOR_BUILD=${NATIVE_CC:Q}
 .endif
 
 post-install:

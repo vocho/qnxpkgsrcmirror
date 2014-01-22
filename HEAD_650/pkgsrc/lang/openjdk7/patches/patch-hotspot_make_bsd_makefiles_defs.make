@@ -1,6 +1,8 @@
-$NetBSD: patch-hotspot_make_bsd_makefiles_defs.make,v 1.1 2012/05/12 21:01:47 marino Exp $
+$NetBSD: patch-hotspot_make_bsd_makefiles_defs.make,v 1.3 2013/06/15 09:31:05 jperkin Exp $
 
---- hotspot/make/bsd/makefiles/defs.make.orig	2012-05-12 16:55:32.316262000 +0000
+64-bit support.
+
+--- hotspot/make/bsd/makefiles/defs.make.orig	2013-05-29 03:57:57.000000000 +0000
 +++ hotspot/make/bsd/makefiles/defs.make
 @@ -30,6 +30,10 @@ SLASH_JAVA ?= /java
  

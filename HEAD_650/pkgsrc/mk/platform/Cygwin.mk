@@ -1,4 +1,4 @@
-# $NetBSD: Cygwin.mk,v 1.11 2013/03/13 12:38:19 obache Exp $
+# $NetBSD: Cygwin.mk,v 1.13 2013/07/12 10:41:58 jperkin Exp $
 #
 # Variable definitions for the Windows with Cygwin.
 
@@ -17,7 +17,7 @@ TYPE?=		type				# Shell builtin
 USERADD?=		${LOCALBASE}/sbin/useradd
 GROUPADD?=		${LOCALBASE}/sbin/groupadd
 _PKG_USER_HOME?=	# empty by default
-_USER_DEPENDS=		user>=20130313:../../sysutils/user_cygwin
+_USER_DEPENDS=		user-cygwin>=20130712:../../sysutils/user_cygwin
 
 CPP_PRECOMP_FLAGS?=	# unset
 CONFIG_RPATH_OVERRIDE?=	config.rpath */config.rpath */*/config.rpath
@@ -39,6 +39,10 @@ ULIMIT_CMD_stacksize?=	ulimit -s `ulimit -H -s`
 ULIMIT_CMD_memorysize?=	ulimit -v `ulimit -H -v`
 
 X11_TYPE?=		native
+
+_OPSYS_SYSTEM_RPATH?=		# /usr/bin
+_OPSYS_LIB_DIRS?=		/lib /usr/lib
+_OPSYS_INCLUDE_DIRS?=		/usr/include
 
 _OPSYS_EXE_SUFFIX=	.exe	# executables may have suffix
 _OPSYS_HAS_INET6=	yes	# IPv6 is standard

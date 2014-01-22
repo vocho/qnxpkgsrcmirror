@@ -1,4 +1,4 @@
-# $NetBSD: Linux.mk,v 1.52 2012/11/19 11:34:15 ryoon Exp $
+# $NetBSD: Linux.mk,v 1.56 2013/07/23 13:01:05 ryoon Exp $
 #
 # Variable definitions for the Linux operating system.
 
@@ -48,7 +48,25 @@ USERADD?=		/usr/sbin/useradd
 _OPSYS_EMULDIR.linux=	# empty
 _OPSYS_EMULDIR.linux32=	# empty
 
+# Support Debian/Ubuntu's multiarch hierarchy.
+.if exists(/etc/debian_version)
+.if !empty(MACHINE_ARCH:Mx86_64)
+_OPSYS_SYSTEM_RPATH=	/lib${LIBABISUFFIX}:/usr/lib${LIBABISUFFIX}:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu
+_OPSYS_LIB_DIRS?=	/lib${LIBABISUFFIX} /usr/lib${LIBABISUFFIX} /lib/x86_64-linux-gnu /usr/lib/x86_64-linux-gnu
+.endif
+.if !empty(MACHINE_ARCH:Mi386)
+_OPSYS_SYSTEM_RPATH=	/lib${LIBABISUFFIX}:/usr/lib${LIBABISUFFIX}:/lib/i386-linux-gnu:/usr/lib/i386-linux-gnu
+_OPSYS_LIB_DIRS?=	/lib${LIBABISUFFIX} /usr/lib${LIBABISUFFIX} /lib/i386-linux-gnu /usr/lib/i386-linux-gnu
+.endif
+.if !empty(MACHINE_ARCH:Marm*)
+_OPSYS_SYSTEM_RPATH=	/lib${LIBABISUFFIX}:/usr/lib${LIBABISUFFIX}:/lib/arm-linux-gnueabi:/usr/lib/arm-linux-gnueabi
+_OPSYS_LIB_DIRS?=	/lib${LIBABISUFFIX} /usr/lib${LIBABISUFFIX} /lib/arm-linux-gnueabi /usr/lib/arm-linux-gnueabi
+.endif
+.else
 _OPSYS_SYSTEM_RPATH=	/lib${LIBABISUFFIX}:/usr/lib${LIBABISUFFIX}
+_OPSYS_LIB_DIRS?=	/lib${LIBABISUFFIX} /usr/lib${LIBABISUFFIX}
+.endif
+_OPSYS_INCLUDE_DIRS?=	/usr/include
 
 .if exists(/usr/include/netinet6) || exists(/usr/include/linux/in6.h)
 _OPSYS_HAS_INET6=	yes	# IPv6 is standard
@@ -57,7 +75,7 @@ _OPSYS_HAS_INET6=	no	# IPv6 is not standard
 .endif
 _OPSYS_HAS_JAVA=	no	# Java is not standard
 _OPSYS_HAS_MANZ=	no	# no MANZ for gzipping of man pages
-_OPSYS_HAS_OSSAUDIO=	no	# libossaudio is available
+_OPSYS_HAS_OSSAUDIO=	no	# libossaudio is unavailable
 _OPSYS_PERL_REQD=		# no base version of perl required
 _OPSYS_PTHREAD_AUTO=	no	# -lpthread needed for pthreads
 _OPSYS_SHLIB_TYPE=	ELF	# shared lib type

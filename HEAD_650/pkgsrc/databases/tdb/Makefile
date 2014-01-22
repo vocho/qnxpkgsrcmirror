@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.19 2012/12/14 19:35:05 drochner Exp $
-#
+# $NetBSD: Makefile,v 1.20 2013/06/14 21:18:22 wiz Exp $
 
-DISTNAME=	tdb-1.2.11
+DISTNAME=	tdb-1.2.12
 CATEGORIES=	databases
 MASTER_SITES=	http://www.samba.org/ftp/tdb/
 
@@ -24,6 +23,8 @@ PKGCONFIG_OVERRIDE=	tdb.pc.in
 
 PYTHON_FOR_BUILD_ONLY=	yes
 REPLACE_PYTHON+= buildtools/bin/waf
+
+LIBS.QNX+=	-lnbutil
 
 .include "../../lang/python/application.mk"
 .include "../../mk/bsd.pkg.mk"

@@ -1,9 +1,9 @@
 $NetBSD$
 
---- Modules/signalmodule.c.orig	2012-09-29 08:00:45.000000000 +0000
+--- Modules/signalmodule.c.orig	2013-05-15 16:32:59.000000000 +0000
 +++ Modules/signalmodule.c
-@@ -731,7 +731,11 @@ fill_siginfo(siginfo_t *si)
-     PyStructSequence_SET_ITEM(result, 4, PyLong_FromLong((long)(si->si_uid)));
+@@ -742,7 +742,11 @@ fill_siginfo(siginfo_t *si)
+     PyStructSequence_SET_ITEM(result, 4, _PyLong_FromUid(si->si_uid));
      PyStructSequence_SET_ITEM(result, 5,
                                  PyLong_FromLong((long)(si->si_status)));
 +#ifndef __QNXNTO__

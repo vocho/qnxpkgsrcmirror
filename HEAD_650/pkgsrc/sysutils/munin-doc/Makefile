@@ -1,16 +1,16 @@
-# $NetBSD: Makefile,v 1.11 2012/10/23 19:51:14 asau Exp $
-#
+# $NetBSD: Makefile,v 1.14 2013/06/17 13:28:34 wiz Exp $
 
 VERS=		1.3.2
 DISTNAME=	munin_${VERS}
 PKGNAME=	munin-doc-${VERS}
-PKGREVISION=	2
+PKGREVISION=	3
 CATEGORIES=	sysutils
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=munin/}
 
 MAINTAINER=	he@NetBSD.org
 HOMEPAGE=	http://munin-monitoring.org/
 COMMENT=	System monitoring tool, documentation
+LICENSE=	gnu-gpl-v2
 
 BUILD_DEPENDS+=	htmldoc>=0:../../www/htmldoc
 BUILD_DEPENDS+= html2text>=0:../../textproc/html2text
@@ -29,7 +29,7 @@ MAKE_ENV+=	PERL5=${PERL5:Q}
 MAKE_FLAGS+=	MANDIR=${DESTDIR}${PREFIX}/${PKGMANDIR}
 CHECK_PORTABILITY_SKIP+=	node/node.d/*
 
-PYTHON_FOR_BUILD_ONLY=	# empty
+PYTHON_FOR_BUILD_ONLY=	yes
 
 .include "../../lang/python/application.mk"
 .include "../../mk/bsd.pkg.mk"

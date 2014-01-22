@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.58 2013/03/16 22:39:20 dholland Exp $
+# $NetBSD: Makefile,v 1.63 2013/06/04 22:16:13 tron Exp $
 
 .include "Makefile.common"
 
-PKGREVISION=	1
+PKGREVISION=	6
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.graphicsmagick.org/
 COMMENT=	X application for displaying and manipulating images

@@ -1,4 +1,4 @@
-# $NetBSD: gcc.mk,v 1.133 2013/04/02 22:24:03 wiz Exp $
+# $NetBSD: gcc.mk,v 1.142 2013/07/09 10:13:43 jperkin Exp $
 #
 # This is the compiler definition for the GNU Compiler Collection.
 #
@@ -108,9 +108,9 @@ GCC_REQD+=	20120614
 
 # _GCC_DIST_VERSION is the highest version of GCC installed by the pkgsrc
 # without the PKGREVISIONs.
-#
-.include "../../lang/gcc47/version.mk"
-_GCC_DIST_VERSION:=	${GCC_DIST_VERSION}
+_GCC_DIST_NAME:=	gcc48
+.include "../../lang/${_GCC_DIST_NAME}/version.mk"
+_GCC_DIST_VERSION:=	${${_GCC_DIST_NAME:tu}_DIST_VERSION}
 
 # _GCC2_PATTERNS matches N s.t. N <= 2.95.3.
 _GCC2_PATTERNS=	[0-1].* 2.[0-9] 2.[0-9].* 2.[1-8][0-9] 2.[1-8][0-9].*	\
@@ -291,11 +291,11 @@ _NEED_GCC48=	yes
 # Assume by default that GCC will only provide a C compiler.
 LANGUAGES.gcc?=	c
 .if !empty(_NEED_GCC2:M[yY][eE][sS])
-LANGUAGES.gcc=	c c++ fortran fortran77 objc
+LANGUAGES.gcc=	c c++ fortran77 objc
 .elif !empty(_NEED_GCC3:M[yY][eE][sS])
-LANGUAGES.gcc=	c c++ fortran fortran77 java objc
+LANGUAGES.gcc=	c c++ fortran77 java objc
 .elif !empty(_NEED_GCC34:M[yY][eE][sS])
-LANGUAGES.gcc=	c c++ fortran fortran77 objc
+LANGUAGES.gcc=	c c++ fortran77 objc
 .elif !empty(_NEED_GCC44:M[yY][eE][sS])
 LANGUAGES.gcc=	c c++ fortran fortran77 java objc
 .elif !empty(_NEED_GCC45:M[yY][eE][sS])
@@ -341,7 +341,6 @@ MAKEFLAGS+=		_IGNORE_GCC=yes
 _GCC_PKGSRCDIR=		../../lang/gcc
 _GCC_DEPENDENCY=	gcc>=${_GCC_REQD}:../../lang/gcc
 .    if !empty(_LANGUAGES.gcc:Mc++) || \
-        !empty(_LANGUAGES.gcc:Mfortran) || \
         !empty(_LANGUAGES.gcc:Mfortran77) || \
         !empty(_LANGUAGES.gcc:Mobjc)
 _USE_GCC_SHLIB?=	yes
@@ -373,7 +372,6 @@ MAKEFLAGS+=		_IGNORE_GCC=yes
 _GCC_PKGSRCDIR=		../../lang/gcc34
 _GCC_DEPENDENCY=	gcc34>=${_GCC_REQD}:../../lang/gcc34
 .    if !empty(_LANGUAGES.gcc:Mc++) || \
-        !empty(_LANGUAGES.gcc:Mfortran) || \
         !empty(_LANGUAGES.gcc:Mfortran77) || \
         !empty(_LANGUAGES.gcc:Mobjc)
 _USE_GCC_SHLIB?=	yes
@@ -471,7 +469,7 @@ _GCC_PKGSRCDIR=		../../lang/gcc48
 _GCC_DEPENDENCY=	gcc48>=${_GCC_REQD}:../../lang/gcc48
 .    if !empty(_LANGUAGES.gcc:Mc++) || \
         !empty(_LANGUAGES.gcc:Mfortran) || \
-        !empty(_LANGUAGES.gcc:Mfortran88) || \
+        !empty(_LANGUAGES.gcc:Mfortran77) || \
         !empty(_LANGUAGES.gcc:Mgo) || \
         !empty(_LANGUAGES.gcc:Mobjc) || \
         !empty(_LANGUAGES.gcc:Mobj-c++)
@@ -515,7 +513,7 @@ _USE_GCC_SHLIB?=	yes
 _IGNORE_GCC3F77=	yes
 MAKEFLAGS+=		_IGNORE_GCC3F77=yes
 .  endif
-.  if !defined(_IGNORE_GCC3F77) && (!empty(_LANGUAGES.gcc:Mfortran) || !empty(_LANGUAGES.gcc:Mfortran77))
+.  if !defined(_IGNORE_GCC3F77) && !empty(_LANGUAGES.gcc:Mfortran77)
 _GCC_PKGSRCDIR+=	../../lang/gcc3-f77
 _GCC_DEPENDENCY+=	gcc3-f77>=${_GCC_REQD}:../../lang/gcc3-f77
 _USE_GCC_SHLIB?=	yes
@@ -796,8 +794,14 @@ PREPEND_PATH+=	${_GCC_DIR}/bin
 # Add dependency on GCC libraries if requested.
 .if (defined(_USE_GCC_SHLIB) && !empty(_USE_GCC_SHLIB:M[Yy][Ee][Ss])) && !empty(USE_PKGSRC_GCC_RUNTIME:M[Yy][Ee][Ss])
 #  Special case packages which are themselves a dependency of gcc runtime.
-.  if empty(PKGPATH:Mdevel/libtool-base) && empty(PKGPATH:Mdevel/binutils)
-.    include "../../lang/gcc47-libs/buildlink3.mk"
+.  if empty(PKGPATH:Mdevel/libtool-base) && empty(PKGPATH:Mdevel/binutils) && empty(PKGPATH:Mlang/gcc??)
+.    if !empty(CC_VERSION:Mgcc-4.7*)
+.      include "../../lang/gcc47-libs/buildlink3.mk"
+.    elif !empty(CC_VERSION:Mgcc-4.8*)
+.      include "../../lang/gcc48-libs/buildlink3.mk"
+.    else
+PKG_FAIL_REASON=	"No USE_PKGSRC_GCC_RUNTIME support for ${CC_VERSION}"
+.    endif
 .  endif
 .endif
 
@@ -825,15 +829,11 @@ ${_GCC_${_var_}}:
 .  endif
 .endfor
 
-# On older NetBSD systems and where the Fortran compiler doesn't exist,
-# force the use of f2c-f77 or some other fortran.
+# On systems without a Fortran compiler, pull one in if needed.
+# The default is g95 as it supports a modern dialect, but it can
+# be overridden in mk.conf to use only f2c.
 #
-.if !empty(USE_LANGUAGES:Mfortran)
 PKGSRC_FORTRAN?=g95
-.endif
-#.if !empty(USE_LANGUAGES:Mfortran77)
-PKGSRC_FORTRAN?=f2c
-#.endif
 
 _GCC_NEEDS_A_FORTRAN=	no
 .if empty(_USE_PKGSRC_GCC:M[yY][eE][sS]) && !exists(${FCPATH})

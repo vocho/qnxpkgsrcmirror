@@ -1,4 +1,4 @@
-# $NetBSD: options.mk,v 1.5 2011/10/14 03:25:33 dholland Exp $
+# $NetBSD: options.mk,v 1.7 2013/07/03 15:58:02 jperkin Exp $
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.libthrift
 PKG_SUPPORTED_OPTIONS=	csharp java erlang python perl php ruby
@@ -17,7 +17,7 @@ post-install:
 	${INSTALL_LIB} ${WRKSRC}/lib/csharp/Thrift.dll \
 	  ${DESTDIR}${PREFIX}/lib/thrift/Thrift.dll
 
-.include "../../lang/mono/buildlink3.mk"
+.include "../../lang/mono2/buildlink3.mk"
 .else
 CONFIGURE_ARGS+=	--without-csharp
 .endif
@@ -79,7 +79,8 @@ CONFIGURE_ARGS+=	--with-php
 CONFIGURE_ARGS+=	--with-php_extension
 CONFIGURE_ARGS+=	--enable-gen-php
 PLIST.php=		yes
-DIST_SUBDIR=		#
+# XXX: avoid override from php Makefile.common
+EXTRACT_SUFX=		.tar.gz
 
 .include "../../lang/php/phpversion.mk"
 .include "${PHPPKGSRCDIR}/Makefile.common"

@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.48 2012/10/03 21:56:19 wiz Exp $
+# $NetBSD: Makefile,v 1.50 2013/07/15 02:02:23 ryoon Exp $
 
 DISTNAME=	ghc-6.8.3
-PKGREVISION=	3
+PKGREVISION=	4
 CATEGORIES=	lang
 MASTER_SITES=	http://www.haskell.org/ghc/dist/6.8.3/
 DISTFILES=	ghc-6.8.3-src.tar.bz2 \
@@ -28,7 +28,6 @@ CHECK_PORTABILITY_SKIP+=	libraries/base/cbits/ubconfc
 GNU_CONFIGURE=		yes
 CONFIGURE_ARGS+=	--with-ghc=${WRKDIR}/ghc-6.4.2/ghc/compiler/ghc-inplace
 CONFIGURE_ENV+=		PerlCmd=${PERL5:Q}
-USE_GNU_READLINE=	yes	# uses the UNDO_ constants
 USE_TOOLS+=		gmake perl:run
 
 SUBST_CLASSES+=		prefix
@@ -56,6 +55,7 @@ pre-configure:
 pre-build:
 	${ECHO} "SplitObjs=NO" > ${WRKSRC}/mk/build.mk
 
+# uses the UNDO_ constants
 .include "../../devel/readline/buildlink3.mk"
 .include "../../devel/gmp/buildlink3.mk"
 .include "../../mk/pthread.buildlink3.mk"

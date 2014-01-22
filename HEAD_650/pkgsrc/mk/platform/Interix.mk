@@ -1,4 +1,4 @@
-# $NetBSD: Interix.mk,v 1.68 2012/11/19 11:34:15 ryoon Exp $
+# $NetBSD: Interix.mk,v 1.70 2013/07/12 10:41:58 jperkin Exp $
 #
 # Variable definitions for the Interix operating system.
 
@@ -85,7 +85,7 @@ TYPE?=		type				# Shell builtin
 USERADD?=		${LOCALBASE}/sbin/useradd
 GROUPADD?=		${LOCALBASE}/sbin/groupadd
 _PKG_USER_HOME?=	# empty by default
-_USER_DEPENDS=		user>=20040426:../../sysutils/user_interix
+_USER_DEPENDS=		user-interix>=20130712:../../sysutils/user_interix
 
 CPP_PRECOMP_FLAGS?=	# unset
 CONFIG_RPATH_OVERRIDE?=	config.rpath */config.rpath */*/config.rpath
@@ -104,6 +104,10 @@ TOUCH_FLAGS?=
 ULIMIT_CMD_datasize?=	ulimit -d `ulimit -H -d`
 ULIMIT_CMD_stacksize?=	ulimit -s `ulimit -H -s`
 ULIMIT_CMD_memorysize?=	ulimit -v `ulimit -H -v`
+
+_OPSYS_SYSTEM_RPATH?=	/usr/lib
+_OPSYS_LIB_DIRS?=	/usr/lib
+_OPSYS_INCLUDE_DIRS?=	/usr/include
 
 .if exists(/usr/include/netinet6)
 _OPSYS_HAS_INET6=	yes	# IPv6 is standard

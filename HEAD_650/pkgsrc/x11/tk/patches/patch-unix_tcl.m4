@@ -1,8 +1,8 @@
 $NetBSD$
 
---- unix/tcl.m4.orig	2012-07-25 16:45:53.000000000 +0000
+--- unix/tcl.m4.orig	2013-04-01 18:36:49.000000000 +0000
 +++ unix/tcl.m4
-@@ -1828,18 +1828,22 @@ AC_DEFUN([SC_CONFIG_CFLAGS], [
+@@ -1816,18 +1816,22 @@ AC_DEFUN([SC_CONFIG_CFLAGS], [
  		])
  	    ])
  	    ;;

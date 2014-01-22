@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.56 2013/02/16 11:21:01 wiz Exp $
+# $NetBSD: Makefile,v 1.59 2013/06/06 12:54:18 wiz Exp $
 
 PKGNAME=	vim-gtk2-${VIM_VERSION}.${VIM_PATCHLEVEL}
-PKGREVISION=	3
+PKGREVISION=	6
 
 COMMENT=	Vim editor (vi clone) with X11 GTK2 GUI
 

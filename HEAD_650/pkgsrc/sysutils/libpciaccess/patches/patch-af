@@ -1,8 +1,8 @@
 $NetBSD$
 
---- src/nto_pci.c.orig	2009-09-13 04:26:16.000000000 -0400
+--- src/nto_pci.c.orig	2013-10-15 15:33:06.000000000 +0000
 +++ src/nto_pci.c
-@@ -0,0 +1,390 @@
+@@ -0,0 +1,504 @@
 +/*
 + * Based on netbsd_pci.c
 + * 
@@ -31,6 +31,7 @@ $NetBSD$
 +#include <sys/mman.h>
 +
 +#include <hw/pci.h>
++#include <hw/inout.h>
 +
 +#include "pciaccess.h"
 +#include "pciaccess_private.h"
@@ -186,7 +187,7 @@ $NetBSD$
 +		}
 +		
 +		offset += towrite;
-+		data = (char *)data + towrite;
++		data = (const char *)data + towrite;
 +		size -= towrite;
 +		*bytes_written += towrite;
 +	}
@@ -295,16 +296,129 @@ $NetBSD$
 +	return 0;
 +}
 +
++static struct pci_io_handle *
++pci_device_nto_open_legacy_io(struct pci_io_handle *ret,
++    struct pci_device *dev, pciaddr_t base, pciaddr_t size)
++{
++	ret->base = base;
++	ret->size = size;
++	return ret;
++}
++
++static uint32_t
++pci_device_nto_read32(struct pci_io_handle *handle, uint32_t reg)
++{
++#if defined(__i386__) || defined(__amd64__)
++	return in32(handle->base + reg);
++#else
++	return *(uint32_t *)((uintptr_t)handle->memory + reg);
++#endif
++}
++
++static uint16_t
++pci_device_nto_read16(struct pci_io_handle *handle, uint32_t reg)
++{
++#if defined(__i386__) || defined(__amd64__)
++	return in16(handle->base + reg);
++#else
++	return *(uint16_t *)((uintptr_t)handle->memory + reg);
++#endif
++}
++
++static uint8_t
++pci_device_nto_read8(struct pci_io_handle *handle, uint32_t reg)
++{
++#if defined(__i386__) || defined(__amd64__)
++	return in8(handle->base + reg);
++#else
++	return *(uint8_t *)((uintptr_t)handle->memory + reg);
++#endif
++}
++
++static void
++pci_device_nto_write32(struct pci_io_handle *handle, uint32_t reg,
++    uint32_t data)
++{
++#if defined(__i386__) || defined(__amd64__)
++	out32(handle->base + reg, data);
++#else
++	*(uint16_t *)((uintptr_t)handle->memory + reg) = data;
++#endif
++}
++
++static void
++pci_device_nto_write16(struct pci_io_handle *handle, uint32_t reg,
++    uint16_t data)
++{
++#if defined(__i386__) || defined(__amd64__)
++	out16(handle->base + reg, data);
++#else
++	*(uint8_t *)((uintptr_t)handle->memory + reg) = data;
++#endif
++}
++
++static void
++pci_device_nto_write8(struct pci_io_handle *handle, uint32_t reg,
++    uint8_t data)
++{
++#if defined(__i386__) || defined(__amd64__)
++	out8(handle->base + reg, data);
++#else
++	*(uint32_t *)((uintptr_t)handle->memory + reg) = data;
++#endif
++}
++static int
++pci_device_nto_map_legacy(struct pci_device *dev, pciaddr_t base,
++    pciaddr_t size, unsigned map_flags, void **addr)
++{
++	struct pci_device_mapping map;
++	int err;
++
++	map.base = base;
++	map.size = size;
++	map.flags = map_flags;
++	map.memory = NULL;
++	err = pci_device_nto_map_range(dev, &map);
++	*addr = map.memory;
++
++	return err;
++}
++
++static int
++pci_device_nto_unmap_legacy(struct pci_device *dev, void *addr, pciaddr_t size)
++{
++	struct pci_device_mapping map;
++
++	map.memory = addr;
++	map.size = size;
++	map.flags = 0;
++	return pci_device_nto_unmap_range(dev, &map);
++}
++
 +static const struct pci_system_methods nto_pci_methods = {
-+	pci_system_nto_destroy,
-+	NULL,
-+	pci_device_nto_read_rom,
-+	pci_device_nto_probe,
-+	pci_device_nto_map_range,
-+	pci_device_nto_unmap_range,
-+	pci_device_nto_read,
-+	pci_device_nto_write,
-+	pci_fill_capabilities_generic
++	.destroy =		pci_system_nto_destroy,
++	.destroy_device =	NULL,
++	.read_rom =		pci_device_nto_read_rom,
++	.probe =		pci_device_nto_probe,
++	.map_range =		pci_device_nto_map_range,
++	.unmap_range =		pci_device_nto_unmap_range,
++	.read =			pci_device_nto_read,
++	.write =		pci_device_nto_write,
++	.fill_capabilities =	pci_fill_capabilities_generic,
++	.enable =		NULL,
++	.boot_vga =		NULL,
++	.has_kernel_driver =	NULL,
++	.open_device_io =	NULL,
++	.open_legacy_io =	pci_device_nto_open_legacy_io,
++	.close_io =		NULL,
++	.read32 =		pci_device_nto_read32,
++	.read16 =		pci_device_nto_read16,
++	.read8 =		pci_device_nto_read8,
++	.write32 =		pci_device_nto_write32,
++	.write16 =		pci_device_nto_write16,
++	.write8 =		pci_device_nto_write8,
++	.map_legacy =		pci_device_nto_map_legacy,
++	.unmap_legacy =		pci_device_nto_unmap_legacy,
 +};
 +
 +int

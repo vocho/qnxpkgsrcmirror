@@ -1,10 +1,11 @@
-# $NetBSD: Makefile,v 1.11 2013/04/03 12:39:48 markd Exp $
+# $NetBSD: Makefile,v 1.17 2013/07/05 13:29:44 ryoon Exp $
 #
 
-PKGNAME=	libmediawiki-3.1.0
-DISTNAME=	digikam-3.1.0
+PKGNAME=	libmediawiki-3.2.0
+DISTNAME=	digikam-3.2.0
+PKGREVISION=	4
 CATEGORIES=	www
-MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=digikam/}
+MASTER_SITES=	${MASTER_SITE_KDE:=digikam/}
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	pkgsrc-users@NetBSD.org

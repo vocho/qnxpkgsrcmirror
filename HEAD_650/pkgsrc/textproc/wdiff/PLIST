@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.10 2012/02/21 02:26:02 sbd Exp $
+@comment $NetBSD: PLIST,v 1.12 2013/07/21 10:31:26 shattered Exp $
 bin/wdiff
 info/wdiff.info
 man/man1/wdiff.1
@@ -17,6 +17,7 @@ share/locale/el/LC_MESSAGES/wdiff-gnulib.mo
 share/locale/en@boldquot/LC_MESSAGES/wdiff.mo
 share/locale/en@quot/LC_MESSAGES/wdiff.mo
 share/locale/en_GB/LC_MESSAGES/wdiff.mo
+share/locale/eo/LC_MESSAGES/wdiff-gnulib.mo
 share/locale/es/LC_MESSAGES/wdiff-gnulib.mo
 share/locale/es/LC_MESSAGES/wdiff.mo
 share/locale/et/LC_MESSAGES/wdiff-gnulib.mo

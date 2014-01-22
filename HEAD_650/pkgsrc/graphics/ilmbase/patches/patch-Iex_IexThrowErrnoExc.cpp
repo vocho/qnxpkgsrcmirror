@@ -1,8 +1,8 @@
-$NetBSD: patch-Iex_IexThrowErrnoExc.cpp,v 1.1 2012/07/26 10:58:47 bsiegert Exp $
+$NetBSD: patch-Iex_IexThrowErrnoExc.cpp,v 1.2 2013/05/08 17:48:33 adam Exp $
 
---- Iex/IexThrowErrnoExc.cpp.orig	Thu Jul 26 10:46:21 2012
+--- Iex/IexThrowErrnoExc.cpp.orig	2013-02-04 18:22:35.000000000 +0000
 +++ Iex/IexThrowErrnoExc.cpp
-@@ -410,7 +410,7 @@ void throwErrnoExc (const std::string &t
+@@ -419,7 +419,7 @@ void throwErrnoExc (const std::string &t
  	    throw EnametoolongExc (tmp);
        #endif
  
@@ -10,4 +10,13 @@ $NetBSD: patch-Iex_IexThrowErrnoExc.cpp,v 1.1 2012/07/26 10:58:47 bsiegert Exp $
 +      #if defined (EOVERFLOW) && EOVERFLOW != ERANGE
  	  case EOVERFLOW:
  	    throw EoverflowExc (tmp);
+       #endif
+@@ -629,7 +629,7 @@ void throwErrnoExc (const std::string &t
+ 	    throw EhostunreachExc (tmp);
+       #endif
+ 
+-      #if defined (EALREADY)
++      #if defined (EALREADY) && ((EALREADY) != (EBUSY))
+ 	  case EALREADY:
+ 	    throw EalreadyExc (tmp);
        #endif

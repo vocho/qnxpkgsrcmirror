@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.42 2013/04/08 16:49:04 drochner Exp $
+# $NetBSD: Makefile,v 1.49 2013/07/04 22:10:05 jperkin Exp $
 #
 
 DISTNAME=		shotwell-0.11.6
-PKGREVISION=		13
+PKGREVISION=		18
 CATEGORIES=		graphics
 MASTER_SITES=		http://yorba.org/download/shotwell/0.11/
 EXTRACT_SUFX=		.tar.bz2
@@ -23,7 +23,15 @@ MAKE_ENV+=		VALAC=${VALAC}
 
 REPLACE_SH+=		configure
 
+.include "../../mk/bsd.prefs.mk"
+
+.if ${OPSYS} == "SunOS"
+BUILDLINK_TRANSFORM+=	rm:-export-dynamic
+BUILDLINK_TRANSFORM+=	rm:-Wl,--no-as-needed
+.endif
+
 .include "../../databases/sqlite3/buildlink3.mk"
+.include "../../devel/GConf/buildlink3.mk"
 .include "../../devel/glib2/schemas.mk"
 .include "../../devel/libgee/buildlink3.mk"
 .include "../../devel/libgphoto2/buildlink3.mk"

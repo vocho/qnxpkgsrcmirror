@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.39 2012/10/31 11:19:39 asau Exp $
+# $NetBSD: Makefile,v 1.41 2013/07/15 02:02:21 ryoon Exp $
 #
 
 DISTNAME=	rpc2-2.10
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	devel
 MASTER_SITES=	http://www.coda.cs.cmu.edu/pub/rpc2/src/
 
@@ -23,6 +23,6 @@ GNU_CONFIGURE=		YES
 USE_LIBTOOL=		YES
 
 .include "../../devel/lwp/buildlink3.mk"
-.include "../../devel/readline/buildlink3.mk"
+.include "../../mk/readline.buildlink3.mk"
 
 .include "../../mk/bsd.pkg.mk"

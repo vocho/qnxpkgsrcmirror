@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.2 2012/10/20 16:11:00 wiz Exp $
+@comment $NetBSD: PLIST,v 1.4 2013/05/26 17:59:59 wiz Exp $
 bin/easy_install-${PYVERSSUFFIX}
 ${PYSITELIB}/_markerlib/__init__.py
 ${PYSITELIB}/_markerlib/__init__.pyc
@@ -28,6 +28,7 @@ ${PYSITELIB}/setuptools/archive_util.pyc
 ${PYSITELIB}/setuptools/archive_util.pyo
 ${PYSITELIB}/setuptools/cli-32.exe
 ${PYSITELIB}/setuptools/cli-64.exe
+${PYSITELIB}/setuptools/cli-arm-32.exe
 ${PYSITELIB}/setuptools/cli.exe
 ${PYSITELIB}/setuptools/command/__init__.py
 ${PYSITELIB}/setuptools/command/__init__.pyc
@@ -71,6 +72,7 @@ ${PYSITELIB}/setuptools/command/install_lib.pyo
 ${PYSITELIB}/setuptools/command/install_scripts.py
 ${PYSITELIB}/setuptools/command/install_scripts.pyc
 ${PYSITELIB}/setuptools/command/install_scripts.pyo
+${PYSITELIB}/setuptools/command/launcher manifest.xml
 ${PYSITELIB}/setuptools/command/register.py
 ${PYSITELIB}/setuptools/command/register.pyc
 ${PYSITELIB}/setuptools/command/register.pyo
@@ -106,10 +108,14 @@ ${PYSITELIB}/setuptools/extension.pyc
 ${PYSITELIB}/setuptools/extension.pyo
 ${PYSITELIB}/setuptools/gui-32.exe
 ${PYSITELIB}/setuptools/gui-64.exe
+${PYSITELIB}/setuptools/gui-arm-32.exe
 ${PYSITELIB}/setuptools/gui.exe
 ${PYSITELIB}/setuptools/package_index.py
 ${PYSITELIB}/setuptools/package_index.pyc
 ${PYSITELIB}/setuptools/package_index.pyo
+${PYSITELIB}/setuptools/py24compat.py
+${PYSITELIB}/setuptools/py24compat.pyc
+${PYSITELIB}/setuptools/py24compat.pyo
 ${PYSITELIB}/setuptools/sandbox.py
 ${PYSITELIB}/setuptools/sandbox.pyc
 ${PYSITELIB}/setuptools/sandbox.pyo
@@ -119,6 +125,9 @@ ${PYSITELIB}/setuptools/script template (dev).pyo
 ${PYSITELIB}/setuptools/script template.py
 ${PYSITELIB}/setuptools/script template.pyc
 ${PYSITELIB}/setuptools/script template.pyo
+${PYSITELIB}/setuptools/site-patch.py
+${PYSITELIB}/setuptools/site-patch.pyc
+${PYSITELIB}/setuptools/site-patch.pyo
 ${PYSITELIB}/setuptools/tests/__init__.py
 ${PYSITELIB}/setuptools/tests/__init__.pyc
 ${PYSITELIB}/setuptools/tests/__init__.pyo
@@ -167,6 +176,3 @@ ${PYSITELIB}/setuptools/tests/test_test.pyo
 ${PYSITELIB}/setuptools/tests/test_upload_docs.py
 ${PYSITELIB}/setuptools/tests/test_upload_docs.pyc
 ${PYSITELIB}/setuptools/tests/test_upload_docs.pyo
-${PYSITELIB}/site.py
-${PYSITELIB}/site.pyc
-${PYSITELIB}/site.pyo

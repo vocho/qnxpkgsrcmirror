@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.1.1.1 2013/02/28 15:43:25 agc Exp $
+# $NetBSD: Makefile,v 1.3 2013/07/11 08:22:47 wiz Exp $
 #
 
-DISTNAME=	libsodium-0.3
+DISTNAME=	libsodium-0.4.2
 CATEGORIES=	security
 MASTER_SITES=	http://download.dnscrypt.org/libsodium/releases/
 
@@ -14,5 +14,6 @@ GNU_CONFIGURE=	yes
 USE_LIBTOOL=	yes
 
 TEST_TARGET=	check
+AUTO_MKDIRS=	yes
 
 .include "../../mk/bsd.pkg.mk"

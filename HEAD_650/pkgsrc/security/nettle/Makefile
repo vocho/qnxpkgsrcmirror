@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.9 2013/03/15 18:22:03 drochner Exp $
+# $NetBSD: Makefile,v 1.12 2013/05/29 20:19:28 adam Exp $
 
-DISTNAME=	nettle-2.6
+DISTNAME=	nettle-2.7.1
 CATEGORIES=	devel security
 MASTER_SITES=	http://www.lysator.liu.se/~nisse/archive/ \
 		ftp://ftp.lysator.liu.se/pub/security/lsh/
@@ -16,6 +16,12 @@ USE_TOOLS+=		gm4 gmake
 GNU_CONFIGURE=		yes
 SET_LIBDIR=		yes
 CONFIGURE_ARGS+=	--disable-openssl --disable-shared
+
+.include "../../mk/bsd.prefs.mk"
+
+.if !empty(USE_CROSS_COMPILE:M[yY][eE][sS])
+CONFIGURE_ENV+=		CC_FOR_BUILD=${NATIVE_CC:Q}
+.endif
 
 INFO_FILES=		yes
 TEST_TARGET=		check

@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.16 2012/10/29 05:06:34 asau Exp $
-#
+# $NetBSD: Makefile,v 1.19 2013/06/16 13:34:30 obache Exp $
 
-DISTNAME=		libXext-1.3.1
+DISTNAME=		libXext-1.3.2
 CATEGORIES=		x11 devel
 MASTER_SITES=		${MASTER_SITE_XORG:=lib/}
 EXTRACT_SUFX=		.tar.bz2
@@ -26,12 +25,8 @@ CONFIGURE_ARGS+=	--disable-malloc0returnsnull
 
 .include "../../mk/compiler.mk"
 
-.if !empty(PKGSRC_COMPILER:Mclang)
-BUILD_DEPENDS+=		ucpp-[0-9]*:../../devel/ucpp
-CONFIGURE_ENV+=		ac_cv_path_RAWCPP="${PREFIX}/bin/ucpp -t -c90 -Uunix"
-.elif empty(PKGSRC_COMPILER:Mgcc)
-CONFIGURE_ENV+=		ac_cv_path_RAWCPP="cc -E -Uunix -"
-.endif
+TOOL_DEPENDS+=		tradcpp-[0-9]*:../../devel/tradcpp
+CONFIGURE_ENV+=		ac_cv_path_RAWCPP="${PREFIX}/bin/tradcpp -Uunix"
 
 .include "../../meta-pkgs/modular-xorg/hacks.mk"
 

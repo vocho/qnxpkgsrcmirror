@@ -1,4 +1,4 @@
-# $NetBSD: SunOS.mk,v 1.49 2013/03/01 16:58:51 jperkin Exp $
+# $NetBSD: SunOS.mk,v 1.53 2013/07/15 12:06:45 jperkin Exp $
 #
 # Variable definitions for the SunOS/Solaris operating system.
 
@@ -38,8 +38,9 @@ MOTIF_TYPE_DEFAULT?=	motif
 .endif
 
 # Builtin defaults which make sense for this platform.
-PREFER.solaris-pam?=	native
+PREFER.libexecinfo?=	native
 PREFER.openssl?=	pkgsrc
+PREFER.solaris-pam?=	native
 
 _OPSYS_EMULDIR.solaris=		# empty
 _OPSYS_EMULDIR.solaris32=	# empty
@@ -67,6 +68,10 @@ _USE_RPATH=		yes		# add rpath to LDFLAGS
 _OPSYS_WHOLE_ARCHIVE_FLAG=	-z allextract
 _OPSYS_NO_WHOLE_ARCHIVE_FLAG=	-z defaultextract
 
+# Remove flags specific to GNU ld.
+BUILDLINK_TRANSFORM+=	rm:-Wl,--export-dynamic
+BUILDLINK_TRANSFORM+=	rm:-export-dynamic
+
 # Solaris has /usr/include/iconv.h, but it's not GNU iconv, so mark it
 # incompatible.
 _INCOMPAT_ICONV=	SunOS-*-*
@@ -78,10 +83,10 @@ PKG_TOOLS_BIN?=		${LOCALBASE}/sbin
 
 .if ${MACHINE_ARCH} == "x86_64"
 LIBABISUFFIX=		/amd64
-_OPSYS_SYSTEM_RPATH?=	/lib/64:/usr/lib/64
-.else
-_OPSYS_SYSTEM_RPATH?=	/lib:/usr/lib
 .endif
+_OPSYS_SYSTEM_RPATH?=	/lib${LIBABISUFFIX}:/usr/lib${LIBABISUFFIX}
+_OPSYS_LIB_DIRS?=	/lib${LIBABISUFFIX} /usr/lib${LIBABISUFFIX}
+_OPSYS_INCLUDE_DIRS?=	/usr/include
 
 # Enable shlibs checks if readelf is set, not available by default.
 _OPSYS_CAN_CHECK_SHLIBS=	no

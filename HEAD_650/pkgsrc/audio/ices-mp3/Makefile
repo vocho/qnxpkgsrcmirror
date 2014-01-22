@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.22 2012/10/03 21:53:54 wiz Exp $
+# $NetBSD: Makefile,v 1.24 2013/07/18 20:19:03 joerg Exp $
 #
 
 DISTNAME=		ices-${ICES_VERSION}
 PKGNAME=		ices-mp3-${ICES_VERSION}
-PKGREVISION=		8
+PKGREVISION=		9
 ICES_VERSION=		0.4
 CATEGORIES=		audio
 MASTER_SITES=		http://svn.xiph.org/releases/ices/
@@ -35,7 +35,7 @@ MODDIR=			${PREFIX}/share/${PKGBASE}
 INSTALLATION_DIRS=	bin ${PKGMANDIR}/man1
 
 pre-configure:
-	cd ${WRKSRC} && autoreconf --force
+	cd ${WRKSRC} && autoreconf --force -i
 
 do-install:
 	${INSTALL_PROGRAM} ${WRKSRC}/src/ices \

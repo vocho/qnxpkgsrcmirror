@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.10 2013/02/06 23:22:26 jperkin Exp $
+# $NetBSD: Makefile,v 1.14 2013/07/05 13:29:34 ryoon Exp $
 
 PKGNAME=	evas-gif-${EVAS_VERSION}
 PKGREVISION=	1

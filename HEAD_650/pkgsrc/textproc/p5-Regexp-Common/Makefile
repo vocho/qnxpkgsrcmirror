@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.18 2012/10/25 06:56:19 asau Exp $
+# $NetBSD: Makefile,v 1.20 2013/05/31 12:42:12 wiz Exp $
 #
 
-DISTNAME=		Regexp-Common-2011121001
+DISTNAME=		Regexp-Common-2013031301
 PKGNAME=		p5-${DISTNAME}
 PKGREVISION=		1
 CATEGORIES=		textproc perl5

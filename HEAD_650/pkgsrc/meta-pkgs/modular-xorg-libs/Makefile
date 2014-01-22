@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.8 2011/11/01 06:02:03 sbd Exp $
+# $NetBSD: Makefile,v 1.12 2013/06/06 12:54:45 wiz Exp $
 
 DISTNAME=	# empty
-PKGNAME=	modular-xorg-libs-1.0
+PKGNAME=	modular-xorg-libs-1.1
 PKGREVISION=	3
 CATEGORIES=	meta-pkgs x11
 MASTER_SITES=	${MASTER_SITE_XORG:=lib/}
@@ -13,9 +13,15 @@ COMMENT=	Modular Xorg library meta-package
 
 META_PACKAGE=	yes
 
+.include "../../mk/bsd.fast.prefs.mk"
+
+.if ${OPSYS} == "Darwin"
+.include "../../wm/libAppleWM/buildlink3.mk"
+.endif
 .include "../../x11/libFS/buildlink3.mk"
 .include "../../x11/libICE/buildlink3.mk"
 .include "../../x11/libSM/buildlink3.mk"
+.include "../../wm/libWindowsWM/buildlink3.mk"
 .include "../../x11/libX11/buildlink3.mk"
 .include "../../x11/libXScrnSaver/buildlink3.mk"
 .include "../../x11/libXTrap/buildlink3.mk"

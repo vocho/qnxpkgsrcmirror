@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.2 2013/04/03 13:30:12 wiz Exp $
+# $NetBSD: Makefile,v 1.9 2013/06/02 18:12:22 adam Exp $
 
 GCC_PKGNAME=		gcc48
 .include		"version.mk"
@@ -8,12 +8,11 @@ PKGNAME=	${GCC_PKGNAME}-${GCC48_DIST_VERSION}
 ## When bumping the PKGREVISION of this package the PKGREVISION of
 ## lang/gcc48-libs needs to be bump to be at least 1 more than the
 ## PKGREVISION of this package!
-PKGREVISION=	0
 CATEGORIES=	lang
 MASTER_SITES=	${MASTER_SITE_GNU:=gcc/gcc-${GCC48_DIST_VERSION}/}
 EXTRACT_SUFX=	.tar.bz2
 
-MAINTAINER=	pkgsrc-users@NetBSD.org
+MAINTAINER=	sbd@NetBSD.org
 HOMEPAGE=	http://gcc.gnu.org/
 COMMENT=	The GNU Compiler Collection (GCC) - 4.8 Release Series
 LICENSE=	gnu-gpl-v2 AND gnu-gpl-v3 AND gnu-lgpl-v2 AND gnu-lgpl-v3
@@ -23,9 +22,8 @@ EXTRACT_ONLY=		${DEFAULT_DISTFILES}
 
 NOT_FOR_PLATFORM=	Interix-*-*
 
-USE_LANGUAGES=	c c++
+USE_LANGUAGES=		c c++
 USE_TOOLS+=		gmake makeinfo sed:run
-
 GNU_CONFIGURE=		yes
 ## Build outside ${WRKSRC}
 OBJDIR=			../build
@@ -39,9 +37,18 @@ INFO_FILES=		yes
 UNLIMIT_RESOURCES+=	datasize
 UNLIMIT_RESOURCES+=	stacksize
 
+SUBST_CLASSES+=		vars
+SUBST_MESSAGE.vars=	Setting target machine name path in ${SUBST_FILES.vars}
+SUBST_STAGE.vars=	pre-configure
+SUBST_FILES.vars=	gcc/Makefile.in
+SUBST_VARS.vars=	GCC_TARGET_MACHINE
+
 .include "../../mk/bsd.prefs.mk"
 
-LANGS=			c 
+LANGS=			c
+
+# In some cases LINKER_RPATH_FLAG needs a trailing space.
+LINKER_RPATH_FLAG:=	${LINKER_RPATH_FLAG:S/-rpath/& /}
 
 ## The Library rpath to use in end programs.
 LDFLAGS_FOR_TARGET=	${LDFLAGS:M${COMPILER_RPATH_FLAG}*:N*/usr/lib*}

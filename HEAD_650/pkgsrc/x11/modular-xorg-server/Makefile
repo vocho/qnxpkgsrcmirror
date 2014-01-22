@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.74 2013/02/06 23:24:16 jperkin Exp $
+# $NetBSD: Makefile,v 1.80 2013/06/16 13:34:30 obache Exp $
 #
 
-DISTNAME=	xorg-server-1.6.5
+DISTNAME=	xorg-server-1.12.4
 PKGNAME=	modular-${DISTNAME}
-PKGREVISION=	15
+PKGREVISION=	2
 CATEGORIES=	x11
 MASTER_SITES=	${MASTER_SITE_XORG:=xserver/}
 EXTRACT_SUFX=	.tar.bz2
@@ -17,6 +17,7 @@ SPECIAL_PERMS+=		bin/Xorg ${SETUID_ROOT_PERMS}
 GNU_CONFIGURE=	yes
 USE_LIBTOOL=	yes
 USE_TOOLS+=	gmake pkg-config autoconf
+USE_LANGUAGES+=	c99
 
 PKGCONFIG_OVERRIDE+=	xorg-server.pc.in
 SHLIBTOOL_OVERRIDE=	# empty
@@ -32,7 +33,7 @@ CONFIGURE_ARGS+=	--localstatedir=${VARBASE:Q}
 CONFIGURE_ARGS+=	--with-xkb-output=${XKB_OUTPUT_DIR:Q}
 
 .if !empty(USE_TOOLS:Mauto*)
-BUILD_DEPENDS+=	xorg-util-macros>=1.1.5:../../devel/xorg-util-macros
+TOOLS_DEPENDS+=	xorg-util-macros>=1.1.5:../../devel/xorg-util-macros
 .endif
 
 DEPENDS+=	xkbcomp-[0-9]*:../../x11/xkbcomp
@@ -40,22 +41,20 @@ DEPENDS+=	xkeyboard-config-[0-9]*:../../x11/xkeyboard-config
 
 .include "../../mk/bsd.prefs.mk"
 
-CONFIGURE_ARGS+=	--with-release-version=${PKGNAME:Q}
 .if ${OPSYS} == "NetBSD"
 CONFIGURE_ARGS+=	--with-builder-addr="tech-x11@NetBSD.org"
 CONFIGURE_ARGS+=	--with-os-vendor="The NetBSD Foundation"
-.endif
-.if ${OPSYS} == "NetBSD"
-CONFIGURE_ARGS+=	--without-dtrace
-.endif
-.if ${OPSYS} == "FreeBSD"
-CONFIGURE_ARGS+=	--without-dtrace
+# TLS is not supported by NetBSD<6
+.  if !empty(OS_VERSION:M[0-5].*)
+CONFIGURE_ENV+=		ac_cv_tls=no
+CONFIGURE_ARGS+=	--disable-glx-tls
+.  endif
 .endif
 CONFIGURE_ARGS+=	--with-os-name=${MACHINE_PLATFORM:Q}
 
 CONFIGURE_ARGS+=	--enable-xorg
 
-CONFIGURE_ARGS+=	--with-fontdir=${PREFIX}/share/fonts/X11
+CONFIGURE_ARGS+=	--with-fontrootdir=${PREFIX}/share/fonts/X11
 
 LEGACY_FONT_PATH=
 DEFAULT_FONT_PATH=
@@ -69,16 +68,12 @@ CONFIGURE_ARGS+=	--with-default-font-path=${FONT_PATH:ts,:Q}
 
 CONFIGURE_ARGS+=	--disable-config-hal
 CONFIGURE_ARGS+=	--disable-dmx
-CONFIGURE_ARGS+=	--disable-xprint
 CONFIGURE_ARGS+=	--disable-xwin
 CONFIGURE_ARGS+=	--disable-xephyr
 CONFIGURE_ARGS+=	--disable-kdrive
-CONFIGURE_ARGS+=	--disable-kdrive-vesa
+#CONFIGURE_ARGS+=	--disable-kdrive-vesa
 CONFIGURE_ARGS+=	--disable-xfake
-CONFIGURE_ARGS+=	--disable-xsdl
 CONFIGURE_ARGS+=	--disable-xfbdev
-CONFIGURE_ARGS+=	--disable-kbd_mode	# deprecated
-CONFIGURE_ARGS+=	--disable-xorgcfg	# deprecated
 
 CONFIGURE_ARGS+=	--with-int10=x86emu
 
@@ -111,27 +106,35 @@ pre-configure:
 	cd ${WRKSRC} && ${PREFIX}/bin/autoreconf
 .endif
 
+LIBS.QNX+=		-ls5ipc
+
 INSTALLATION_DIRS+=	lib/xorg/modules/drivers lib/xorg/modules/input
 
-BUILDLINK_API_DEPENDS.MesaLib+=		MesaLib>=7.1.0
+BUILDLINK_API_DEPENDS.MesaLib+=		MesaLib>=7.8.0
 BUILDLINK_API_DEPENDS.compositeproto+=	compositeproto>=0.4
-BUILDLINK_API_DEPENDS.fixesproto+=	fixesproto>=4.0
-BUILDLINK_API_DEPENDS.glproto+=		glproto>=1.4.9
-BUILDLINK_API_DEPENDS.inputproto+=	inputproto>=1.5
+BUILDLINK_API_DEPENDS.fixesproto+=	fixesproto>=5.0
+BUILDLINK_API_DEPENDS.damageproto+=     damageproto>=1.1
+BUILDLINK_API_DEPENDS.xcmiscproto+=     xcmiscproto>=1.2.0
+BUILDLINK_API_DEPENDS.xtrans+=      	xtrans>=1.2.2
+BUILDLINK_API_DEPENDS.bigreqsproto+=    bigreqsproto>=1.1.0
+BUILDLINK_API_DEPENDS.xproto+=      	xproto>=7.0.22
+BUILDLINK_API_DEPENDS.xextproto+=      	xextproto>=7.1.99
+BUILDLINK_API_DEPENDS.recordproto+=     recordproto>=1.13.99.1
+BUILDLINK_API_DEPENDS.scrnsaverproto+=  scrnsaverproto>=1.1
+BUILDLINK_API_DEPENDS.resourceproto+=   resourceproto>=1.2.0
+BUILDLINK_API_DEPENDS.dri+=      	dri>=7.8
+BUILDLINK_API_DEPENDS.xfont+=      	xfont>=1.4.2
+BUILDLINK_API_DEPENDS.glproto+=		glproto>=1.4.16
+BUILDLINK_API_DEPENDS.inputproto+=	inputproto>=2.1.99.6
 BUILDLINK_API_DEPENDS.kbproto+=		kbproto>=1.0.3
-BUILDLINK_API_DEPENDS.pixman+=		pixman>=0.13.2
-BUILDLINK_API_DEPENDS.randrproto+=	randrproto>=1.2.99.1
-BUILDLINK_API_DEPENDS.renderproto+=	renderproto>=0.9.3
+BUILDLINK_API_DEPENDS.pixman+=		pixman>=0.21.8
+BUILDLINK_API_DEPENDS.randrproto+=	randrproto>=1.4.0
+BUILDLINK_API_DEPENDS.renderproto+=	renderproto>=0.11
 BUILDLINK_API_DEPENDS.xf86dgaproto+=	xf86dgaproto>=2.0.3
-BUILDLINK_API_DEPENDS.xf86driproto+=	xf86driproto>=2.0.4
+BUILDLINK_API_DEPENDS.xf86driproto+=	xf86driproto>=2.1.0
 
-.include "../../mk/compiler.mk"
-.if !empty(PKGSRC_COMPILER:Mclang)
-BUILD_DEPENDS+=		ucpp-[0-9]*:../../devel/ucpp
-CONFIGURE_ENV+=		ac_cv_path_RAWCPP="${PREFIX}/bin/ucpp -t -c90 -Uunix"
-.elif empty(PKGSRC_COMPILER:Mgcc)
-CONFIGURE_ENV+=		ac_cv_path_RAWCPP="cc -E -Uunix -"
-.endif
+BUILD_DEPENDS+=		tradcpp-[0-9]*:../../devel/tradcpp
+CONFIGURE_ENV+=		ac_cv_path_RAWCPP="${PREFIX}/bin/tradcpp -Uunix"
 
 .include "options.mk"
 
@@ -174,6 +177,8 @@ BUILDLINK_API_DEPENDS.libXext+=	libXext>=1.1.1
 .include "../../x11/trapproto/buildlink3.mk"
 .include "../../x11/videoproto/buildlink3.mk"
 .include "../../x11/xcmiscproto/buildlink3.mk"
+.include "../../x11/xextproto/buildlink3.mk"
+.include "../../x11/kbproto/buildlink3.mk"
 .include "../../x11/xf86bigfontproto/buildlink3.mk"
 .include "../../x11/xf86dgaproto/buildlink3.mk"
 .include "../../x11/xf86driproto/buildlink3.mk"
@@ -182,5 +187,9 @@ BUILDLINK_API_DEPENDS.libXext+=	libXext>=1.1.1
 .include "../../x11/xineramaproto/buildlink3.mk"
 .include "../../x11/xproto/buildlink3.mk"
 .include "../../x11/xtrans/buildlink3.mk"
+.include "../../mk/pthread.buildlink3.mk"
+.if ${OPSYS} == "QNX"
+.include "../../sysutils/s5ipc/buildlink3.mk"
+.endif
 
 .include "../../mk/bsd.pkg.mk"

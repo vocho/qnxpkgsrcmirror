@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.206 2013/04/14 00:51:43 cheusov Exp $
+# $NetBSD: Makefile,v 1.213 2013/07/15 02:20:54 obache Exp $
 #
 
 COMMENT=	Multimedia utilities
@@ -14,7 +14,6 @@ SUBDIR+=	bsdav
 SUBDIR+=	ccxstream
 SUBDIR+=	cfourcc
 SUBDIR+=	clutter-gst
-SUBDIR+=	clutter08-gst
 SUBDIR+=	deforaos-player
 SUBDIR+=	dirac
 SUBDIR+=	divxplayer
@@ -106,6 +105,7 @@ SUBDIR+=	libflashsupport
 SUBDIR+=	libflashsupport-pulse
 SUBDIR+=	libflashsupport10
 SUBDIR+=	libhdhomerun
+SUBDIR+=	libkate
 SUBDIR+=	libkcddb
 SUBDIR+=	libkcompactdisc
 SUBDIR+=	libmatroska
@@ -114,6 +114,7 @@ SUBDIR+=	libmpeg2
 SUBDIR+=	libmpeg3
 SUBDIR+=	libnms
 SUBDIR+=	libogg
+SUBDIR+=	liboggz
 SUBDIR+=	libquicktime
 SUBDIR+=	libtheora
 SUBDIR+=	libtheora-docs
@@ -141,7 +142,6 @@ SUBDIR+=	mplayer
 SUBDIR+=	mplayer-plugin
 SUBDIR+=	mplayer-share
 SUBDIR+=	mplayerthumbs
-SUBDIR+=	ns-flash
 SUBDIR+=	ogle
 SUBDIR+=	ogle_gui
 SUBDIR+=	ogmtools
@@ -150,16 +150,15 @@ SUBDIR+=	p5-GStreamer
 SUBDIR+=	p5-xmltv
 SUBDIR+=	phonon
 SUBDIR+=	phonon-backend-gstreamer
+SUBDIR+=	phonon-backend-vlc
 SUBDIR+=	php-ming
 SUBDIR+=	pitivi
 SUBDIR+=	pspvc
-SUBDIR+=	py-clutter-gst
 SUBDIR+=	py-gstreamer0.10
 SUBDIR+=	py-ming
 SUBDIR+=	realplayer-codecs
 SUBDIR+=	regionset
 SUBDIR+=	replex
-SUBDIR+=	ruby-clutter-gst
 SUBDIR+=	ruby-gnome2-gstreamer
 SUBDIR+=	ruby-ming
 SUBDIR+=	schroedinger

@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.20 2012/10/29 05:07:01 asau Exp $
+# $NetBSD: Makefile,v 1.25 2013/06/16 13:34:30 obache Exp $
 
 DISTNAME=	xdm-1.1.11
-PKGREVISION=	1
+PKGREVISION=	4
 CATEGORIES=	x11
 MASTER_SITES=	${MASTER_SITE_XORG:=app/}
 EXTRACT_SUFX=	.tar.bz2
@@ -48,12 +48,8 @@ OWN_DIRS_PERMS+=	${VARBASE}/lib/xdm \
 CFLAGS+=	-fno-strict-aliasing
 .endif
 
-.if !empty(PKGSRC_COMPILER:Mclang)
-BUILD_DEPENDS+=		ucpp-[0-9]*:../../devel/ucpp
-CONFIGURE_ENV+=		ac_cv_path_RAWCPP="${PREFIX}/bin/ucpp -t -c90 -Uunix"
-.elif empty(PKGSRC_COMPILER:Mgcc)
-CONFIGURE_ENV+=		ac_cv_path_RAWCPP="cc -E -Uunix -"
-.endif
+TOOL_DEPENDS+=		tradcpp-[0-9]*:../../devel/tradcpp
+CONFIGURE_ENV+=		ac_cv_path_RAWCPP="${PREFIX}/bin/tradcpp -Uunix"
 
 .if ${OPSYS} == "NetBSD"
 CONFIGURE_ARGS+=	--with-random-device=/dev/urandom

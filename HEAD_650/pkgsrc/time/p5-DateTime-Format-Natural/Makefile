@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.14 2012/10/08 13:04:23 asau Exp $
+# $NetBSD: Makefile,v 1.16 2013/05/31 12:42:26 wiz Exp $
 
-DISTNAME=	DateTime-Format-Natural-0.89
+DISTNAME=	DateTime-Format-Natural-1.02
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	3
+PKGREVISION=	1
 CATEGORIES=	time perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=DateTime/}
 
@@ -15,6 +15,7 @@ DEPENDS+=	p5-DateTime-[0-9]*:../../time/p5-DateTime
 DEPENDS+=	p5-List-MoreUtils-[0-9]*:../../devel/p5-List-MoreUtils
 DEPENDS+=	p5-Params-Validate-[0-9]*:../../devel/p5-Params-Validate
 DEPENDS+=	p5-boolean-[0-9]*:../../devel/p5-boolean
+DEPENDS+=	p5-Module-Util>=0:../../devel/p5-Module-Util
 
 BUILD_DEPENDS+=	p5-Test-MockTime-[0-9]*:../../time/p5-Test-MockTime
 

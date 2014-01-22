@@ -1,7 +1,7 @@
 $NetBSD$
 
 --- nsprpub/pr/include/obsolete/protypes.h.orig	2012-03-06 13:13:55.000000000 +0000
-+++ nsprpub/pr/include/obsolete/protypes.h
++++ nspr/pr/include/obsolete/protypes.h
 @@ -73,7 +73,7 @@ typedef PRUint64 uint64;
   */
  

@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.12 2012/10/31 11:17:40 asau Exp $
+# $NetBSD: Makefile,v 1.14 2013/05/31 12:40:04 wiz Exp $
 
-DISTNAME=	B-Hooks-EndOfScope-0.11
+DISTNAME=	B-Hooks-EndOfScope-0.12
 PKGNAME=	p5-${DISTNAME}
 PKGREVISION=	1
 CATEGORIES=	devel perl5
@@ -11,7 +11,7 @@ HOMEPAGE=	http://search.cpan.org/dist/B-Hooks-EndOfScope/
 COMMENT=	Perl 5 module to execute code after a scope finished compilation
 LICENSE=	${PERL5_LICENSE}
 
-DEPENDS+=	p5-Sub-Exporter>0:../../devel/p5-Sub-Exporter
+DEPENDS+=	p5-Sub-Exporter-Progressive>=0.001006:../../devel/p5-Sub-Exporter-Progressive
 DEPENDS+=	p5-Variable-Magic>=0.48:../../devel/p5-Variable-Magic
 
 #USE_LANGUAGES=	c

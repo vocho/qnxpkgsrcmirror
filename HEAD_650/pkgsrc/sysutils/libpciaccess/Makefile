@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.13 2012/10/23 19:51:10 asau Exp $
-#
+# $NetBSD: Makefile,v 1.17 2013/07/21 09:42:40 wiz Exp $
 
-DISTNAME=	libpciaccess-0.13.1
+DISTNAME=	libpciaccess-0.13.2
 CATEGORIES=	sysutils x11
 MASTER_SITES=	${MASTER_SITE_XORG:=lib/}
 EXTRACT_SUFX=	.tar.bz2
@@ -9,6 +8,7 @@ EXTRACT_SUFX=	.tar.bz2
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://xorg.freedesktop.org/
 COMMENT=	PCI access utility library from X.org
+LICENSE=	mit AND x11
 
 ###
 ### XXX This list is probably not exhaustive.
@@ -19,7 +19,7 @@ ONLY_FOR_PLATFORM+=	DragonFly-*-i386 DragonFly-*-x86_64
 ONLY_FOR_PLATFORM+=	Linux-*-* SunOS-*-* QNX-*-*
 ONLY_FOR_PLATFORM+=	NetBSD-*-sparc64 NetBSD-*-hppa
 
-GNU_CONFIGURE=	yes
+GNU_CONFIGURE=		yes
 USE_LIBTOOL=	yes
 USE_TOOLS+=	pkg-config
 ###

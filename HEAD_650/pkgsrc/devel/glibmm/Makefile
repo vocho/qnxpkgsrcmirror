@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.54 2012/11/06 18:54:16 drochner Exp $
+# $NetBSD: Makefile,v 1.57 2013/05/31 12:39:59 wiz Exp $
 
-DISTNAME=	glibmm-2.34.1
+DISTNAME=	glibmm-2.36.2
+PKGREVISION=	1
 CATEGORIES=	devel
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/glibmm/${PKGVERSION_NOREV:R}/}
 EXTRACT_SUFX=	.tar.xz

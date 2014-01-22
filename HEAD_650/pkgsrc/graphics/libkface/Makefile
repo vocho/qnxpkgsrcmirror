@@ -1,10 +1,11 @@
-# $NetBSD: Makefile,v 1.11 2013/04/03 12:34:52 markd Exp $
+# $NetBSD: Makefile,v 1.17 2013/07/05 13:29:36 ryoon Exp $
 #
 
-PKGNAME=	libkface-3.1.0
-DISTNAME=	digikam-3.1.0
+PKGNAME=	libkface-3.2.0
+DISTNAME=	digikam-3.2.0
+PKGREVISION=	4
 CATEGORIES=	graphics
-MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=digikam/}
+MASTER_SITES=	${MASTER_SITE_KDE:=digikam/}
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	pkgsrc-users@NetBSD.org

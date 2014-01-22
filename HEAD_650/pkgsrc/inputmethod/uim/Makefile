@@ -1,9 +1,10 @@
-# $NetBSD: Makefile,v 1.75 2013/03/06 11:06:55 obache Exp $
+# $NetBSD: Makefile,v 1.82 2013/07/19 10:08:59 ryoon Exp $
 #
 
 .include "../../inputmethod/uim/Makefile.common"
 
 COMMENT=		Multilingual input method library
+PKGREVISION=		6
 #LICENSE=		See ${WRKSRC}/COPYING
 
 CONFLICTS+=		uim-qt4-immodule-[0-9]*
@@ -26,9 +27,7 @@ CFLAGS.SunOS+=	-std=c99 -D__EXTENSIONS__
 .include "options.mk"
 
 PLIST_VARS+=		editline
-CHECK_BUILTIN.readline:=	yes
-.include "../../devel/readline/builtin.mk"
-CHECK_BUILTIN.readline:=	no
+.include "../../mk/readline.builtin.mk"
 
 .if !empty(BUILTIN_LIB_FOUND.edit:M[yY][eE][sS])
 PLIST.editline=		yes

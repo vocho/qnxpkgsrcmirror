@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.2 2012/10/23 19:51:16 asau Exp $
+# $NetBSD: Makefile,v 1.7 2013/06/06 12:55:05 wiz Exp $
 #
 
 DISTNAME=	openxenmanager_0.r80+dfsg.orig
 PKGNAME=	openxenmanager-0.0.80
+PKGREVISION=	5
 CATEGORIES=	sysutils
 MASTER_SITES=	${MASTER_SITE_DEBIAN:=pool/main/o/openxenmanager/}
 
@@ -12,8 +13,11 @@ COMMENT=	Open source XenServer/Xen Cloud Platform interface
 LICENSE=	gnu-gpl-v2
 
 WRKSRC=		${WRKDIR}
+USE_TOOLS+=	pax
 USE_LANGUAGES=	# none
 NO_BUILD=	yes
+
+DEPENDS+=	${PYPKGPREFIX}-httplib2>=0.7.7:../../www/py-httplib2
 
 INSTALLATION_DIRS=	bin share
 
@@ -41,4 +45,8 @@ do-install:
 		${DESTDIR}${PREFIX}/bin/openxenmanager
 
 .include "../../lang/python/application.mk"
+.include "../../x11/py-gtk2/buildlink3.mk"
+.include "../../net/gtk-vnc/buildlink3.mk"
+.include "../../databases/shared-mime-info/buildlink3.mk"
+.include "../../graphics/graphviz/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

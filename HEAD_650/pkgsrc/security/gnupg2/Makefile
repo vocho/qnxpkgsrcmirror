@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.44 2013/02/06 23:23:37 jperkin Exp $
+# $NetBSD: Makefile,v 1.46 2013/07/15 02:02:27 ryoon Exp $
 
-DISTNAME=	gnupg-2.0.19
+DISTNAME=	gnupg-2.0.20
 PKGNAME=	${DISTNAME:S/gnupg/gnupg2/}
-PKGREVISION=	3
 CATEGORIES=	security
 MASTER_SITES=	ftp://ftp.gnupg.org/gcrypt/gnupg/
 EXTRACT_SUFX=	.tar.bz2
@@ -42,7 +41,7 @@ BUILDLINK_API_DEPENDS.libksba+=		libksba>=1.0.2
 .include "../../databases/openldap-client/buildlink3.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../devel/pth/buildlink3.mk"
-.include "../../devel/readline/buildlink3.mk"
+.include "../../mk/readline.buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"
 .include "../../security/libassuan2/buildlink3.mk"
 .include "../../security/libgcrypt/buildlink3.mk"

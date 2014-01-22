@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.19 2013/04/07 02:30:01 markd Exp $
+# $NetBSD: Makefile,v 1.26 2013/07/05 13:29:44 ryoon Exp $
 
 DISTNAME=	kde-workspace-${_KDE_VERSION}
 PKGNAME=	${DISTNAME:S/-4/4-4/}
+PKGREVISION=	4
 CATEGORIES=	x11
 COMMENT=	Base workspace for the KDE 4 integrated X11 desktop
 
@@ -51,6 +52,7 @@ REPLACE_PERL+= \
 	kcontrol/keys/convertShortcuts.pl \
 	kwin/data/kwin3_plugin.pl \
 	kwin/data/pluginlibFix.pl
+REPLACE_SH+=		libs/plasmagenericshell/widgetsexplorer/package/Messages.sh
 
 PY_PATCHPLIST=	yes
 
@@ -110,6 +112,9 @@ post-install:
                 kdmrc > ${WRKDIR}/kdmrc.ad;				\
 	${CP} -f ${WRKDIR}/kdmrc.ad kdmrc
 .endif
+
+CFLAGS.SunOS+=	-D__EXTENSIONS__ -D__uint16_t=uint16_t
+LDFLAGS.SunOS+=	-lsocket
 
 BUILDLINK_DEPMETHOD.qt4-tools=	full
 .include "../../meta-pkgs/kde4/kde4.mk"

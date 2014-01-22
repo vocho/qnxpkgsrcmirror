@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.14 2013/04/06 03:45:09 rodent Exp $
+# $NetBSD: Makefile,v 1.16 2013/06/25 09:44:12 jperkin Exp $
 
-DISTNAME=	gputils-0.13.5
+DISTNAME=	gputils-1.2.0
 CATEGORIES=	devel
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=gputils/}
 
@@ -12,6 +12,8 @@ CONFLICTS=	gpasm-*
 
 GNU_CONFIGURE=	yes
 USE_TOOLS+=	gmake
+
+CONFIGURE_ARGS+=	--disable-html-doc
 
 INSTALLATION_DIRS=	share/doc/gputils
 

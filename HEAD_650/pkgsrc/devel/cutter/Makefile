@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.25 2013/02/16 11:20:43 wiz Exp $
+# $NetBSD: Makefile,v 1.31 2013/06/17 10:03:41 obache Exp $
 #
 
 DISTNAME=	cutter-1.2.2
-PKGREVISION=	2
+PKGREVISION=	7
 CATEGORIES=	devel
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=cutter/}
 
@@ -28,8 +28,11 @@ TEST_TARGET=	check
 
 .include "options.mk"
 
+.include "../../mk/compiler.mk"
 # XXX: PR#lib/39986?
+.if !empty(PKGSRC_COMPILER:Mgcc)
 LDFLAGS.NetBSD+=	-lgcc_s
+.endif
 
 BUILDLINK_API_DEPENDS.glib2+=	glib2>=2.16.0
 .include "../../devel/glib2/buildlink3.mk"

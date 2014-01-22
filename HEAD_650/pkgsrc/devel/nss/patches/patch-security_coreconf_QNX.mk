@@ -1,7 +1,7 @@
 $NetBSD$
 
 --- security/coreconf/QNX.mk.orig	2009-09-03 04:57:00.000000000 +0000
-+++ security/coreconf/QNX.mk
++++ nss/coreconf/QNX.mk
 @@ -43,11 +43,11 @@ ifeq ($(USE_PTHREADS),1)
  	IMPL_STRATEGY = _PTH
  endif

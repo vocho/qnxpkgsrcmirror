@@ -1,11 +1,13 @@
-# $NetBSD: Makefile.common,v 1.26 2013/02/12 20:36:28 adam Exp $
+# $NetBSD: Makefile.common,v 1.29 2013/07/17 21:22:40 adam Exp $
 #
 # used by databases/mysql55-client/Makefile
 # used by databases/mysql55-server/Makefile
 
-DISTNAME=	mysql-5.5.30
+DISTNAME=	mysql-5.5.32
 CATEGORIES=	databases
 MASTER_SITES=	${MASTER_SITE_MYSQL:=MySQL-5.5/}
+# XXX: distfile got changed; remove the following line on next update
+DIST_SUBDIR=	mysql
 
 MAINTAINER?=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.mysql.com/
@@ -115,4 +117,5 @@ SUBST_SED.scr=		-e "s,chown,${CHOWN},g"
 SUBST_SED.scr+=		-e "s,/bin/sh,${RCD_SCRIPTS_SHELL},g"
 SUBST_MESSAGE.scr=	Fixing scripts.
 
+.include "../../devel/readline/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"

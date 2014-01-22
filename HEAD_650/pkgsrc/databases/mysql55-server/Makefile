@@ -1,14 +1,11 @@
-# $NetBSD: Makefile,v 1.9 2013/04/01 01:18:00 sbd Exp $
+# $NetBSD: Makefile,v 1.14 2013/07/17 21:22:40 adam Exp $
 
 PKGNAME=	${DISTNAME:S/-/-server-/}
+PKGREVISION=	2
 SVR4_PKGNAME=	mysqs
 COMMENT=	MySQL 5, a free SQL database (server)
 
 CONFLICTS=	{mysql-server-[0-9]*,mysql3-server-[0-9]*}
-
-# might be removed in the future
-# if mysqld_safe script is installed here, or rc.d script invokes mysqld
-DEPENDS+=	mysql-client>=${PKGVERSION_NOREV}:../../databases/mysql55-client
 
 .include "../../databases/mysql55-client/Makefile.common"
 
@@ -61,11 +58,13 @@ REPLACE_PERL+=		mysql-test/lib/My/SafeProcess/safe_process.pl
 REPLACE_PERL+=		mysql-test/lib/v1/mysql-test-run.pl
 REPLACE_PERL+=		mysql-test/mysql-stress-test.pl
 REPLACE_PERL+=		mysql-test/mysql-test-run.pl
+REPLACE_PERL+=		mysql-test/std_data/checkDBI_DBD-mysql.pl
 REPLACE_PERL+=		mysql-test/suite/engines/rr_trx/run_stress_tx_rr.pl
 REPLACE_PERL+=		mysql-test/suite/funcs_1/lib/DataGen_local.pl
 REPLACE_PERL+=		mysql-test/suite/funcs_1/lib/DataGen_modify.pl
 REPLACE_PERL+=		mysql-test/suite/funcs_2/lib/gen_charset_utf8.pl
 REPLACE_PERL+=		mysql-test/mtr
+REPLACE_PERL+=		sql-bench/*.sh
 
 INSTALLATION_DIRS=	bin
 
@@ -76,6 +75,7 @@ CFLAGS+=		-D_POSIX_C_SOURCE=199506L -D__EXTENSIONS__
 CXXFLAGS+=		-D_POSIX_C_SOURCE=199506L -D__EXTENSIONS__
 .endif
 
-.include "../../devel/readline/buildlink3.mk"
+BUILDLINK_AUTO_DIRS.mysql-client=	no
+.include "../../databases/mysql55-client/buildlink3.mk"
 .include "../../security/tcp_wrappers/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

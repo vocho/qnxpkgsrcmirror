@@ -1,4 +1,4 @@
-# $NetBSD: license.mk,v 1.56 2013/04/08 02:24:14 rodent Exp $
+# $NetBSD: license.mk,v 1.59 2013/07/09 19:15:57 sno Exp $
 #
 # This file handles everything about the LICENSE variable. It is
 # included automatically by bsd.pkg.mk.
@@ -103,9 +103,11 @@
 
 DEFAULT_ACCEPTABLE_LICENSES= \
 	apache-1.1 apache-2.0 \
+	arphic-public \
 	artistic artistic-2.0 \
 	boost-license \
 	cc-by-sa-v3.0 \
+	cc0-1.0-universal \
 	cddl-1.0 \
 	cpl-1.0 \
 	epl-v1.0 \
@@ -130,6 +132,7 @@ DEFAULT_ACCEPTABLE_LICENSES= \
 	public-domain \
 	python-software-foundation \
 	qpl-v1.0 \
+	sgi-free-software-b-v2.0 \
 	sleepycat-public \
 	unlicense \
 	x11 \

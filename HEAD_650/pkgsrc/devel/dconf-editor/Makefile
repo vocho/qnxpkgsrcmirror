@@ -1,25 +1,15 @@
-# $NetBSD: Makefile,v 1.18 2013/02/16 11:20:43 wiz Exp $
-#
+# $NetBSD: Makefile,v 1.23 2013/06/14 04:59:03 dholland Exp $
 
-DISTNAME=	dconf-0.14.1
-PKGNAME=	dconf-editor-0.14.1
-PKGREVISION=	1
-CATEGORIES=	devel
-MASTER_SITES=	${MASTER_SITE_GNOME:=sources/dconf/0.14/}
-EXTRACT_SUFX=	.tar.xz
+.include "../../devel/dconf/Makefile.common"
 
-MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://live.gnome.org/dconf
-COMMENT=	Backend for gsettings
-LICENSE=	gnu-lgpl-v2.1
+PKGNAME=	${DISTNAME:S/dconf/dconf-editor/}
+PKGREVISION=	3
 
 DISTINFO_FILE=	${.CURDIR}/../../devel/dconf/distinfo
 PATCHDIR=	${.CURDIR}/../../devel/dconf/patches
 
-GNU_CONFIGURE=	yes
 CONFIGURE_ARGS+= --enable-editor
-USE_LIBTOOL=	yes
-USE_TOOLS+=	pkg-config gmake intltool msgfmt
+CONFIGURE_ARGS+= --disable-man
 
 BUILD_DIRS=	editor
 INSTALL_DIRS=	editor

@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.56 2013/02/12 23:31:40 tcort Exp $
+# $NetBSD: Makefile,v 1.59 2013/07/15 02:02:28 ryoon Exp $
 
 BASH_VERSION=		4.2
 
 DISTNAME=	bash-${BASH_VERSION}
 #PKGNAME=	bash-${BASH_VERSION}.${BASH_PATCHLEVEL}
-PKGREVISION=	2
+PKGREVISION=	3
 CATEGORIES=	shells
 MASTER_SITES=	${MASTER_SITE_GNU:=bash/} \
 		ftp://ftp.cwru.edu/pub/bash/
@@ -84,9 +84,7 @@ CONFIGURE_ARGS+=	--enable-job-control
 .if ${OPSYS} == "Darwin"
 CONFIGURE_ARGS+=		--with-installed-readline
 
-USE_GNU_READLINE=		yes
 BUILDLINK_API_DEPENDS.readline+=	readline>=6.0
-
 .include "../../devel/readline/buildlink3.mk"
 .endif
 
@@ -100,6 +98,21 @@ pre-install:
 	${INSTALL_DATA} ${FILESDIR}/qnxsdk.bash ${DESTDIR}${EGDIR}
 .endif
 	
+
+.if !empty(USE_CROSS_COMPILE:M[yY][eE][sS]) && ${OPSYS} == "NetBSD"
+CONFIGURE_ENV+=		CC_FOR_BUILD=${NATIVE_CC:Q}
+CONFIGURE_ENV+=		ac_cv_c_long_long=yes
+CONFIGURE_ENV+=		ac_cv_c_long_double=yes
+CONFIGURE_ENV+=		bash_cv_type_rlimit=yes
+CONFIGURE_ENV+=		bash_cv_getcwd_malloc=yes
+CONFIGURE_ENV+=		bash_cv_func_sigsetjmp=yes
+CONFIGURE_ENV+=		bash_cv_printf_a_format=yes
+CONFIGURE_ENV+=		bash_cv_job_control_missing=present
+CONFIGURE_ENV+=		bash_cv_sys_named_pipes=present
+CONFIGURE_ENV+=		bash_cv_unusable_rtsigs=no
+CONFIGURE_ENV+=		bash_cv_func_ctype_nonascii=yes
+CONFIGURE_ENV+=		bash_cv_wexitstatus_offset=8
+.endif
 
 post-install:
 	${INSTALL_MAN} ${WRKSRC}/doc/bash.1 ${DESTDIR}${PREFIX}/${PKGMANDIR}/man1

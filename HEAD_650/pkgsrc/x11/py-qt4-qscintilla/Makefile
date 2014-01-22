@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.29 2013/04/10 15:05:06 drochner Exp $
+# $NetBSD: Makefile,v 1.35 2013/07/04 17:03:19 wiz Exp $
 #
 
 DISTNAME=	QScintilla-gpl-2.7.1
 PKGNAME=	${PYPKGPREFIX}-qt4-${DISTNAME:tl:S/-gpl-/-/}
+PKGREVISION=	4
 CATEGORIES=	x11
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=pyqt/}
 
@@ -19,10 +20,18 @@ USE_LANGUAGES=		c++
 PY_PATCHPLIST=		yes
 PLIST_SUBST+=		PYVERSSUFFIX=${PYVERSSUFFIX}
 
-do-configure:
-		(cd ${WRKSRC} && ${SETENV} ${MAKE_ENV}  \
-	  	${PYTHONBIN} configure.py)
+MAKE_FLAGS+=		TARGET=Qsci.la TARGETD=Qsci.la TARGETL=Qsci.la
+INSTALL_MAKE_FLAGS+=	INSTALL_ROOT=${DESTDIR}
 
+do-configure:
+	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${PYTHONBIN} configure.py \
+	    --qmake=${QTDIR}/bin/qmake --sip=${PREFIX}/bin/sip${PYVERSSUFFIX} \
+	    --pyqt-sipdir=${PREFIX}/share/sip${PYVERSSUFFIX} \
+	    --qsci-sipdir=${PREFIX}/share/sip${PYVERSSUFFIX}
+
+post-install:
+	${LIBTOOL} --mode=install ${INSTALL_LIB} ${WRKSRC}/Qsci.la \
+	    ${DESTDIR}${PREFIX}/${PYSITELIB}/PyQt4/
 
 .include "../../lang/python/extension.mk"
 .include "../../x11/py-sip/buildlink3.mk"

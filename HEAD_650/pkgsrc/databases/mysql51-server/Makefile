@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.14 2013/02/06 23:21:24 jperkin Exp $
+# $NetBSD: Makefile,v 1.16 2013/07/15 02:02:19 ryoon Exp $
 
 PKGNAME=	${DISTNAME:S/-/-server-/}
-PKGREVISION=	1
+PKGREVISION=	2
 SVR4_PKGNAME=	mysqs
 COMMENT=	MySQL 5, a free SQL database (server)
 
@@ -89,7 +89,7 @@ CXXFLAGS+=		-D_POSIX_C_SOURCE=199506L -D__EXTENSIONS__
 # is enabled that option sets a full dependency on readline otherwise
 # make this only a build-time dependency.
 BUILDLINK_DEPMETHOD.readline?=	build
-.include "../../devel/readline/buildlink3.mk"
+.include "../../mk/readline.buildlink3.mk"
 
 post-configure:
 	cd ${WRKSRC}/include && cp -f config.h my_config.h

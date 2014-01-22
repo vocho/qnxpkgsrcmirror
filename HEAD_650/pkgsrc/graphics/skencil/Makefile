@@ -1,14 +1,15 @@
-# $NetBSD: Makefile,v 1.22 2013/01/26 21:38:00 adam Exp $
-#
+# $NetBSD: Makefile,v 1.27 2013/06/13 14:26:35 joerg Exp $
 
 DISTNAME=	skencil-0.6.17
-PKGREVISION=	9
+PKGREVISION=	11
 CATEGORIES=	graphics
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=sketch/}
 
 MAINTAINER=	uebayasi@NetBSD.org
 HOMEPAGE=	http://sketch.sourceforge.net/
 COMMENT=	Interactive drawing program
+
+DEPENDS+=	${PYPKGPREFIX}-Tk-[0-9]*:../../x11/py-Tk
 
 USE_TOOLS+=	pax
 
@@ -44,5 +45,5 @@ post-install:
 .include "../../lang/python/application.mk"
 .include "../../graphics/py-imaging/buildlink3.mk"
 .include "../../x11/libXext/buildlink3.mk"
-.include "../../x11/py-Tk/buildlink3.mk"
+.include "../../x11/tk/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"
