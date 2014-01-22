@@ -1,4 +1,4 @@
-#	$NetBSD: bsd.pkg.mk,v 1.1987 2013/02/22 13:35:27 obache Exp $
+#	$NetBSD: bsd.pkg.mk,v 1.1993 2013/07/15 20:22:15 christos Exp $
 #
 # This file is in the public domain.
 #
@@ -96,6 +96,7 @@ MAINTAINER?=		pkgsrc-users@NetBSD.org
 .endif
 PKGWILDCARD?=		${PKGBASE}-[0-9]*
 SVR4_PKGNAME?=		${PKGNAME}
+TOOL_DEPENDS?=		# empty
 WRKSRC?=		${WRKDIR}/${DISTNAME}
 
 # Override for SU_CMD user check
@@ -153,6 +154,9 @@ ${_var_}+=	${${_var_}.*}
 CPPFLAGS+=	${CPP_PRECOMP_FLAGS}
 
 # To sanitise environment set PKGSRC_SETENV=${SETENV} -i
+# This will however cause build failures (e.g. "www/firefox"). Settings
+# like "ALLOW_VULNERABLE_PACKAGES" will also not be correctly passed
+# to dependence builds.
 PKGSRC_SETENV?=	${SETENV}
 
 ALL_ENV+=	CC=${CC:Q}
@@ -165,6 +169,7 @@ ALL_ENV+=	F77=${FC:Q}
 ALL_ENV+=	FC=${FC:Q}
 ALL_ENV+=	FFLAGS=${FFLAGS:M*:Q}
 ALL_ENV+=	LANG=C
+ALL_ENV+=	LC_ALL=C
 ALL_ENV+=	LC_COLLATE=C
 ALL_ENV+=	LC_CTYPE=C
 ALL_ENV+=	LC_MESSAGES=C
@@ -175,6 +180,7 @@ ALL_ENV+=	LDFLAGS=${LDFLAGS:M*:Q}
 ALL_ENV+=	LINKER_RPATH_FLAG=${LINKER_RPATH_FLAG:Q}
 ALL_ENV+=	PATH=${PATH:Q}:${LOCALBASE}/bin:${X11BASE}/bin
 ALL_ENV+=	PREFIX=${PREFIX}
+ALL_ENV+=	MAKELEVEL=0
 
 # This variable can be added to MAKE_ENV to ease installation of packages
 # that use BSD-style Makefiles.
@@ -369,7 +375,7 @@ _BUILD_DEFS+=		PKG_SYSCONFBASEDIR PKG_SYSCONFDIR
 #
 USE_TOOLS+=								\
 	[ awk basename cat chgrp chmod chown cmp cp cut dirname echo	\
-	egrep env false file find grep head hostname id install ln ls	\
+	egrep env false find grep head hostname id install ln ls	\
 	mkdir mv printf pwd rm rmdir sed sh sort			\
 	tail test touch tr true wc xargs
 
@@ -379,6 +385,11 @@ USE_TOOLS+=	expr
 # bsd.bulk-pkg.mk uses certain tools
 .if defined(BATCH)
 USE_TOOLS+=	tee tsort
+.endif
+
+# scripts/shlib-type
+.if ${_OPSYS_SHLIB_TYPE} == "ELF/a.out"
+USE_TOOLS+=	file
 .endif
 
 # INSTALL/DEINSTALL script framework

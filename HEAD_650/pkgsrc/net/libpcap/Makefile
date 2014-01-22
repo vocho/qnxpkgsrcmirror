@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.53 2013/03/30 22:21:10 tron Exp $
+# $NetBSD: Makefile,v 1.56 2013/06/21 13:36:58 jperkin Exp $
 
-DISTNAME=	libpcap-1.3.0
-PKGREVISION=	2
+DISTNAME=	libpcap-1.4.0
+PKGREVISION=	1
 SVR4_PKGNAME=	lpcap
 CATEGORIES=	net
 MASTER_SITES=	http://www.tcpdump.org/release/
@@ -23,6 +23,9 @@ GNU_CONFIGURE=		yes
 
 .if ${OPSYS} == "SunOS"
 CONFIGURE_ARGS+=	--with-pcap=dlpi
+# Versions of SunOS which include getifaddrs confuse the configure script,
+# and result in dlpi stubs not being enabled.
+CONFIGURE_ENV+=		ac_cv_func_getifaddrs=no
 .endif
 
 post-install:

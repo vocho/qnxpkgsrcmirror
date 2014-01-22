@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.5 2013/03/15 21:21:07 wiz Exp $
+# $NetBSD: Makefile,v 1.9 2013/07/05 13:29:42 ryoon Exp $
 #
 
 DISTNAME=	KeePass-2.21
+PKGREVISION=	3
 CATEGORIES=	security
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=keepass/}
 EXTRACT_SUFX=	.zip
@@ -11,7 +12,7 @@ HOMEPAGE=	http://keepass.info/
 COMMENT=	Free, open source, light-weight and easy-to-use password manager
 LICENSE=	gnu-gpl-v2
 
-DEPENDS+=	mono>=2.6:../../lang/mono
+DEPENDS+=	mono>=2.6<3:../../lang/mono2
 
 WRKSRC=		${WRKDIR}
 USE_LANGUAGES=	# none

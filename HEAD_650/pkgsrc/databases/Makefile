@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.430 2013/04/13 13:17:35 jaapb Exp $
+# $NetBSD: Makefile,v 1.435 2013/07/06 00:57:34 rodent Exp $
 
 COMMENT=	Databases
 
@@ -63,6 +63,7 @@ SUBDIR+=	libgnomedb
 SUBDIR+=	libpqxx
 SUBDIR+=	libpqxx-doc
 SUBDIR+=	lua-sqlite
+SUBDIR+=	lua-sqlite3
 SUBDIR+=	lua-tokyocabinet
 SUBDIR+=	luma
 SUBDIR+=	maatkit
@@ -108,6 +109,7 @@ SUBDIR+=	p5-CatalystX-CRUD-Model-RDBO
 SUBDIR+=	p5-CatalystX-CRUD-ModelAdapter-DBIC
 SUBDIR+=	p5-Class-DBI
 SUBDIR+=	p5-Class-DBI-AbstractSearch
+SUBDIR+=	p5-Class-DBI-BaseDSN
 SUBDIR+=	p5-Class-DBI-Pg
 SUBDIR+=	p5-Class-DBI-Plugin
 SUBDIR+=	p5-Class-DBI-Plugin-DeepAbstractSearch
@@ -139,6 +141,7 @@ SUBDIR+=	p5-DBIx-Class-DynamicDefault
 SUBDIR+=	p5-DBIx-Class-EncodedColumn
 SUBDIR+=	p5-DBIx-Class-Fixtures
 SUBDIR+=	p5-DBIx-Class-Helpers
+SUBDIR+=	p5-DBIx-Class-InflateColumn-FS
 SUBDIR+=	p5-DBIx-Class-InflateColumn-IP
 SUBDIR+=	p5-DBIx-Class-IntrospectableM2M
 SUBDIR+=	p5-DBIx-Class-Loader
@@ -327,6 +330,7 @@ SUBDIR+=	qdbm-cgi
 SUBDIR+=	qdbm-plus
 SUBDIR+=	quicklist
 SUBDIR+=	rdb
+SUBDIR+=	redis
 SUBDIR+=	rrdtool
 SUBDIR+=	rrdtool12
 SUBDIR+=	ruby-activeldap
@@ -396,6 +400,7 @@ SUBDIR+=	ruby-vapor
 SUBDIR+=	sdbm
 SUBDIR+=	shared-mime-info
 SUBDIR+=	slony1
+SUBDIR+=	soci
 SUBDIR+=	sqlite
 SUBDIR+=	sqlite3
 SUBDIR+=	sqlite3-docs

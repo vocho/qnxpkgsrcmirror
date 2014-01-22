@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.4 2013/03/08 12:34:08 wiz Exp $
+# $NetBSD: Makefile,v 1.7 2013/06/24 02:38:20 obache Exp $
 #
 
 DISTNAME=	Net-DHCP-0.693
 PKGNAME=	p5-${DISTNAME:S/693/69.3/}
+PKGREVISION=	1
 CATEGORIES=	net perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Net/}
 
@@ -28,8 +29,8 @@ PERL5_MODULE_TYPE=	Module::Build
 
 REPLACE_PERL+=	${EGFILES}
 # has /bin/false as shebang argument
-CHECK_INTERPRETER_SKIP+=	lib/perl5/vendor_perl/5.16.0/Net/DHCP/Constants.pm
-CHECK_INTERPRETER_SKIP+=	lib/perl5/vendor_perl/5.16.0/Net/DHCP/Packet.pm
+CHECK_INTERPRETER_SKIP+=	${PERL5_SUB_INSTALLVENDORLIB}/Net/DHCP/Constants.pm
+CHECK_INTERPRETER_SKIP+=	${PERL5_SUB_INSTALLVENDORLIB}/Net/DHCP/Packet.pm
 
 post-install:
 .for i in ${EGFILES}

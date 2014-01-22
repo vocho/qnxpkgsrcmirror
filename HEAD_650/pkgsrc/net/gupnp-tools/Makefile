@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.26 2013/03/15 18:12:03 drochner Exp $
+# $NetBSD: Makefile,v 1.33 2013/07/17 13:35:19 drochner Exp $
 #
 
-DISTNAME=	gupnp-tools-0.8.5
+DISTNAME=	gupnp-tools-0.8.6
 CATEGORIES=	net
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gupnp-tools/0.8/}
 EXTRACT_SUFX=	.tar.xz
@@ -13,7 +13,7 @@ LICENSE=	gnu-gpl-v2
 
 GNU_CONFIGURE=	yes
 USE_LIBTOOL=	yes
-USE_TOOLS+=	pkg-config
+USE_TOOLS+=	pkg-config intltool gmake
 
 .include "../../net/gupnp/buildlink3.mk"
 .include "../../net/gupnp-av/buildlink3.mk"

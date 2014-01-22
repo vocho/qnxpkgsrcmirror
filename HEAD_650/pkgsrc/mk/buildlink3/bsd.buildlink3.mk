@@ -1,4 +1,4 @@
-# $NetBSD: bsd.buildlink3.mk,v 1.218 2013/02/02 01:04:59 hans Exp $
+# $NetBSD: bsd.buildlink3.mk,v 1.223 2013/06/08 20:23:02 dholland Exp $
 #
 # Copyright (c) 2004 The NetBSD Foundation, Inc.
 # All rights reserved.
@@ -120,6 +120,54 @@ BUILDLINK_BUILTIN_MK.${_pkg_}?=	${BUILDLINK_PKGSRCDIR.${_pkg_}}/builtin.mk
 .  sinclude "${BUILDLINK_BUILTIN_MK.${_pkg_}}"
 .endif
 .endfor
+
+# Go through the packages in tree order and make sure USE_BUILTIN.pkg
+# is set to "no" if that package depends on any other packages where
+# USE_BUILTIN.pkg is set to "no".
+#
+
+_stack_:=bot
+_ok_:=yes
+.for _pkg_ in ${BUILDLINK_TREE}
+# work around PR 47888
+_enter_:=${_pkg_:M-*}
+# work around another bug in netbsd-5's make (fixed in HEAD)
+_use_:=${USE_BUILTIN.${_pkg_:S/^-//}:M[Yy][Ee][Ss]}
+
+.  if "${_pkg_}" == "x11-links" || "${_pkg_}" == "-x11-links"
+     # (nothing)
+.  elif empty(_enter_)
+     # entering a package (in the buildlink tree)
+     #.say "${_stack_:C/.*/  /} ${_pkg_}:"
+     _stack_:=${_ok_} ${_stack_}
+     _ok_:=yes
+.  else
+     # leaving a package (in the buildlink tree)
+.    if !empty(_use_)
+       # this package is going to use the builtin version
+.      if ${_ok_} == no
+         # not ok for it to be builtin; force it to pkgsrc
+         USE_BUILTIN.${_pkg_:S/^-//}:=no
+         FORCED_PKGSRC+=${_pkg_:S/^-//}
+         #.say "${_stack_:C/.*/  /} ${_pkg_:S/^-//} pkgsrc FORCED"
+.      else
+         #.say "${_stack_:C/.*/  /} ${_pkg_:S/^-//} built-in"
+.      endif
+.    else
+       # no builtin version or not using it
+       #.say "${_stack_:C/.*/  /} ${_pkg_:S/^-//} pkgsrc"
+       _ok_:=no
+.    endif
+     # pop the stack
+.    if ${_ok_} == yes
+       _ok_:=${_stack_:[1]}
+.    endif
+     _stack_:=${_stack_:[2..-1]}
+.  endif
+.endfor
+.if ${_stack_} != "bot"
+.error "The above loop through BUILDLINK_TREE failed to balance"
+.endif
 
 # Sorted and unified version of BUILDLINK_TREE without recursion
 # data.
@@ -295,7 +343,7 @@ BUILDLINK_PREFIX.${_pkg_}?=	/usr
 BUILDLINK_PREFIX.${_pkg_}?=	/boot/common
 .    else
 # XXX: elsewhere?
-BUILDLINK_PREFIX.${_pkg_}?=	/
+BUILDLINK_PREFIX.${_pkg_}?=	# empty
 .    endif
 .    if !empty(LIBABISUFFIX)
 BUILDLINK_LIBDIRS.${_pkg_}?=	lib${LIBABISUFFIX}
@@ -623,7 +671,7 @@ _BLNK_FILES_CMD.${_pkg_}+=	| ${SORT} -u
 
 ${_BLNK_COOKIE.${_pkg_}}:
 	${RUN}					\
-	case ${BUILDLINK_PREFIX.${_pkg_}} in				\
+	case "${BUILDLINK_PREFIX.${_pkg_}}" in				\
 	*not_found)							\
 		${ERROR_MSG} "${BUILDLINK_API_DEPENDS.${_pkg_}} is not installed; can't buildlink files."; \
 		exit 1;							\
@@ -634,7 +682,7 @@ ${_BLNK_COOKIE.${_pkg_}}:
 		exit 1;							\
 	}
 	${RUN}								\
-	case ${BUILDLINK_PREFIX.${_pkg_}} in				\
+	case "${BUILDLINK_PREFIX.${_pkg_}}" in				\
 	${LOCALBASE})   buildlink_dir="${BUILDLINK_DIR}" ;;		\
 	${X11BASE})     buildlink_dir="${BUILDLINK_X11_DIR}" ;;		\
 	*)              buildlink_dir="${BUILDLINK_DIR}" ;;		\
@@ -707,11 +755,13 @@ _BLNK_LT_ARCHIVE_FILTER_SED_SCRIPT.${_pkg_}+=				\
 #
 # Modify the dependency_libs line by removing -L/usr/lib, which is implied.
 #
+.for _dir_ in ${COMPILER_LIB_DIRS}
 _BLNK_LT_ARCHIVE_FILTER_SED_SCRIPT.${_pkg_}+=				\
-	-e "/^dependency_libs=/s,\([${_BLNK_SEP}]\)-L/usr/lib\([${_BLNK_SEP}]\),\\1\\2,g" \
-	-e "/^dependency_libs=/s,\([${_BLNK_SEP}]\)-L/usr/lib\([${_BLNK_SEP}]\),\\1\\2,g" \
-	-e "/^dependency_libs=/s,\([${_BLNK_SEP}]\)-L/usr/lib/\.\([${_BLNK_SEP}]\),\\1\\2,g" \
-	-e "/^dependency_libs=/s,\([${_BLNK_SEP}]\)-L/usr/lib/\.\([${_BLNK_SEP}]\),\\1\\2,g"
+	-e "/^dependency_libs=/s,\([${_BLNK_SEP}]\)-L${_dir_}\([${_BLNK_SEP}]\),\\1\\2,g" \
+	-e "/^dependency_libs=/s,\([${_BLNK_SEP}]\)-L${_dir_}\([${_BLNK_SEP}]\),\\1\\2,g" \
+	-e "/^dependency_libs=/s,\([${_BLNK_SEP}]\)-L${_dir_}/\.\([${_BLNK_SEP}]\),\\1\\2,g" \
+	-e "/^dependency_libs=/s,\([${_BLNK_SEP}]\)-L${_dir_}/\.\([${_BLNK_SEP}]\),\\1\\2,g"
+.endfor
 #
 # Modify the dependency_libs line by removing -L${LOCALBASE}/* and
 # -L${X11BASE}/*, since those are automatically added by the buildlink3.mk
@@ -805,11 +855,13 @@ _BLNK_PASSTHRU_DIRS+=	${PREFIX}
 #
 _BLNK_PASSTHRU_DIRS+=	${BUILDLINK_PASSTHRU_DIRS}
 #
-# Strip out /usr, /usr/include, and /usr/lib as they're always
+# Strip out ${COMPILER_LIB_DIRS}, and ${COMPILER_INCLUDE_DIRS} as they're always
 # automatically added to all of the search paths.  Also strip out
 # ${LOCALBASE} and ${X11BASE} to prevent silly mistakes.
 #
-_BLNK_PASSTHRU_DIRS:=	${_BLNK_PASSTHRU_DIRS:N/usr:N/usr/lib:N/usr/include:N${LOCALBASE}:N${X11BASE}}
+.for _dir_ in ${COMPILER_LIB_DIRS} ${COMPILER_INCLUDE_DIRS} ${LOCALBASE} ${X11BASE}
+_BLNK_PASSTHRU_DIRS:=	${_BLNK_PASSTHRU_DIRS:N${_dir_}}
+.endfor
 #
 # Allow all directories in the library subdirectories listed for each
 # package to be in the runtime library search path.
@@ -846,7 +898,9 @@ _BLNK_PASSTHRU_RPATHDIRS+=	${BUILDLINK_PASSTHRU_RPATHDIRS}
 # Strip out /usr/lib (and /usr/lib${LIBABISUFFIX}}) as it's always 
 # automatically in the runtime library search path.
 #
-_BLNK_PASSTHRU_RPATHDIRS:=	${_BLNK_PASSTHRU_RPATHDIRS:N/usr/lib:N/usr/lib${LIBABISUFFIX}}
+.for _dir_ in ${SYSTEM_DEFAULT_RPATH:S/:/ /g}
+_BLNK_PASSTHRU_RPATHDIRS:=	${_BLNK_PASSTHRU_RPATHDIRS:N${_dir_}}
+.endfor
 
 _BLNK_MANGLE_DIRS=	# empty
 _BLNK_MANGLE_DIRS+=	${BUILDLINK_DIR}
@@ -856,8 +910,8 @@ _BLNK_MANGLE_DIRS+=	${BUILDLINK_X11_DIR}
 _BLNK_MANGLE_DIRS+=	${WRKDIR}
 _BLNK_MANGLE_DIRS+=	${_BLNK_PASSTHRU_DIRS}
 _BLNK_MANGLE_DIRS+=	${_BLNK_PASSTHRU_RPATHDIRS}
-_BLNK_MANGLE_DIRS+=	/usr/include
-_BLNK_MANGLE_DIRS+=	/usr/lib${LIBABISUFFIX}
+_BLNK_MANGLE_DIRS+=	${COMPILER_INCLUDE_DIRS}
+_BLNK_MANGLE_DIRS+=	${COMPILER_LIB_DIRS}
 .if ${PKG_INSTALLATION_TYPE} == "pkgviews"
 _BLNK_MANGLE_DIRS+=	${PREFIX}
 .endif
@@ -885,8 +939,8 @@ _BLNK_PROTECT_DIRS+=	${BUILDLINK_X11_DIR}
 _BLNK_PROTECT_DIRS+=	${WRKDIR}
 _BLNK_PROTECT_DIRS+=	${_BLNK_PASSTHRU_DIRS}
 
-_BLNK_UNPROTECT_DIRS+=	/usr/include
-_BLNK_UNPROTECT_DIRS+=	/usr/lib${LIBABISUFFIX}
+_BLNK_UNPROTECT_DIRS+=	${COMPILER_INCLUDE_DIRS}
+_BLNK_UNPROTECT_DIRS+=	${COMPILER_LIB_DIRS}
 .if ${PKG_INSTALLATION_TYPE} == "pkgviews"
 _BLNK_UNPROTECT_DIRS+=	${PREFIX}
 .endif
@@ -955,8 +1009,12 @@ _BLNK_TRANSFORM+=	mangle:/usr/lib/../libx32:/usr/libx32
 # Protect -I/usr/include/* and -L/usr/lib/* from transformations (these
 # aren't part of the normal header or library search paths).
 #
-_BLNK_TRANSFORM+=	opt-sub:-I/usr/include:-I${_BLNK_MANGLE_DIR./usr/include}
-_BLNK_TRANSFORM+=	opt-sub:-L/usr/lib:-L${_BLNK_MANGLE_DIR./usr/lib}
+.for _dir_ in ${COMPILER_INCLUDE_DIRS}
+_BLNK_TRANSFORM+=	opt-sub:-I${_dir_}:-I${_BLNK_MANGLE_DIR.${_dir_}}
+.endfor
+.for _dir_ in ${COMPILER_LIB_DIRS}
+_BLNK_TRANSFORM+=	opt-sub:-L${_dir_}:-L${_BLNK_MANGLE_DIR.${_dir_}}
+.endfor
 #
 # Change any buildlink directories in runtime library search paths into
 # the canonical actual installed paths.
@@ -976,7 +1034,9 @@ _BLNK_TRANSFORM+=	rpath:${_dir_}:${_BLNK_MANGLE_DIR.${_dir_}}
 # Protect /usr/lib/* as they're all allowed to be specified for the
 # runtime library search path.
 #
-_BLNK_TRANSFORM+=	sub-rpath:/usr/lib:${_BLNK_MANGLE_DIR./usr/lib}
+.for _dir_ in ${SYSTEM_DEFAULT_RPATH:S/:/ /g}
+_BLNK_TRANSFORM+=	sub-rpath:${_dir_}:${_BLNK_MANGLE_DIR.${_dir}}
+.endfor
 #
 # Change references to ${DEPOTBASE}/<pkg> into ${LOCALBASE} so that
 # "overwrite" packages think headers and libraries for "pkgviews" packages

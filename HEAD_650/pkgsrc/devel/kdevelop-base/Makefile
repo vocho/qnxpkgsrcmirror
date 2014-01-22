@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.113 2013/04/10 18:01:51 wiz Exp $
+# $NetBSD: Makefile,v 1.119 2013/06/16 22:54:31 asau Exp $
 
 DISTNAME=	kdevelop_3.5.5.orig
 PKGNAME=	kdevelop-base-3.5.5
-PKGREVISION=	29
+PKGREVISION=	34
 CATEGORIES=	devel kde
 MASTER_SITES=	http://download.opensuse.org/repositories/home:/amilcarlucas/xUbuntu_6.06/
 
@@ -28,7 +28,7 @@ DEPENDS+=		qt3-tools>=3.1.1:../../x11/qt3-tools
 CONFLICTS+=	kdevelop<=1.3
 
 BDB_ACCEPTED=		db4 db5
-USE_LANGUAGES=		c c++ fortran77
+USE_LANGUAGES=		c c++
 USE_TOOLS+=		msgfmt perl:run
 MAKE_JOBS_SAFE=		no
 

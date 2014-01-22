@@ -1,4 +1,4 @@
-# $NetBSD: replace.mk,v 1.255 2013/03/16 23:03:33 dholland Exp $
+# $NetBSD: replace.mk,v 1.260 2013/06/06 02:17:17 obache Exp $
 #
 # Copyright (c) 2005 The NetBSD Foundation, Inc.
 # All rights reserved.
@@ -128,14 +128,14 @@ PKG_FAIL_REASON+=	"\`\`bison'' and \`\`byacc'' conflict in USE_TOOLS."
 # dependency is determined by the modifier specified for each tool:
 #
 #    BOOTSTRAP_DEPENDS:	:bootstrap
-#    BUILD_DEPENDS:	:build (default), :pkgsrc
+#    TOOL_DEPENDS:	:build (default), :pkgsrc
 #    DEPENDS:		:run
 #
 .for _t_ in ${USE_TOOLS:N*\:*} ${USE_TOOLS:M*\:bootstrap}
 _TOOLS_DEPMETHOD.${_t_:C/:.*//}=	BOOTSTRAP_DEPENDS
 .endfor
 .for _t_ in ${USE_TOOLS:N*\:*} ${USE_TOOLS:M*\:build} ${USE_TOOLS:M*\:pkgsrc}
-_TOOLS_DEPMETHOD.${_t_:C/:.*//}=	BUILD_DEPENDS
+_TOOLS_DEPMETHOD.${_t_:C/:.*//}=	TOOL_DEPENDS
 .endfor
 .for _t_ in ${USE_TOOLS:M*\:run}
 _TOOLS_DEPMETHOD.${_t_:C/:.*//}=	DEPENDS
@@ -143,37 +143,37 @@ _TOOLS_DEPMETHOD.${_t_:C/:.*//}=	DEPENDS
 
 .if !empty(_USE_TOOLS:Mbison-yacc)	# bison-yacc > yacc
 .  if defined(_TOOLS_DEPMETHOD.bison-yacc) && \
-      (${_TOOLS_DEPMETHOD.bison-yacc} == "BUILD_DEPENDS") && \
+      (${_TOOLS_DEPMETHOD.bison-yacc} == "TOOL_DEPENDS") && \
       defined(_TOOLS_DEPMETHOD.yacc)
 _TOOLS_DEPMETHOD.bison-yacc=	${_TOOLS_DEPMETHOD.yacc}
 .  endif
 .endif
 .if !empty(_USE_TOOLS:Mflex)		# flex > lex
-.  if (${_TOOLS_DEPMETHOD.flex} == "BUILD_DEPENDS") && \
+.  if (${_TOOLS_DEPMETHOD.flex} == "TOOL_DEPENDS") && \
       defined(_TOOLS_DEPMETHOD.lex)
 _TOOLS_DEPMETHOD.flex=		${_TOOLS_DEPMETHOD.lex}
 .  endif
 .endif
 .if !empty(_USE_TOOLS:Mgawk)		# gawk > awk
-.  if (${_TOOLS_DEPMETHOD.gawk} == "BUILD_DEPENDS") && \
+.  if (${_TOOLS_DEPMETHOD.gawk} == "TOOL_DEPENDS") && \
       defined(_TOOLS_DEPMETHOD.awk)
 _TOOLS_DEPMETHOD.gawk=		${_TOOLS_DEPMETHOD.awk}
 .  endif
 .endif
 .if !empty(_USE_TOOLS:Mgm4)		# gm4 > m4
-.  if (${_TOOLS_DEPMETHOD.gm4} == "BUILD_DEPENDS") && \
+.  if (${_TOOLS_DEPMETHOD.gm4} == "TOOL_DEPENDS") && \
       defined(_TOOLS_DEPMETHOD.m4)
 _TOOLS_DEPMETHOD.gm4=		${_TOOLS_DEPMETHOD.m4}
 .  endif
 .endif
 .if !empty(_USE_TOOLS:Mgsed)		# gsed > sed
-.  if (${_TOOLS_DEPMETHOD.gsed} == "BUILD_DEPENDS") && \
+.  if (${_TOOLS_DEPMETHOD.gsed} == "TOOL_DEPENDS") && \
       defined(_TOOLS_DEPMETHOD.sed)
 _TOOLS_DEPMETHOD.gsed=		${_TOOLS_DEPMETHOD.sed}
 .  endif
 .endif
 .if !empty(_USE_TOOLS:Mgsoelim)		# gsoelim > soelim
-.  if (${_TOOLS_DEPMETHOD.gsoelim} == "BUILD_DEPENDS") && \
+.  if (${_TOOLS_DEPMETHOD.gsoelim} == "TOOL_DEPENDS") && \
       defined(_TOOLS_DEPMETHOD.soelim)
 _TOOLS_DEPMETHOD.gsoelim=	${_TOOLS_DEPMETHOD.soelim}
 .  endif
@@ -454,7 +454,7 @@ TOOLS_ALIASES.gm4=		m4
 .  if !empty(PKGPATH:Mdevel/gmake)
 MAKEFLAGS+=			TOOLS_IGNORE.gmake=
 .  elif !empty(_TOOLS_USE_PKGSRC.gmake:M[yY][eE][sS])
-TOOLS_DEPENDS.gmake?=		gmake>=3.81:../../devel/gmake
+TOOLS_DEPENDS.gmake?=		gmake>=${GMAKE_REQD}:../../devel/gmake
 TOOLS_CREATE+=			gmake
 TOOLS_FIND_PREFIX+=		TOOLS_PREFIX.gmake=gmake
 TOOLS_PATH.gmake=		${TOOLS_PREFIX.gmake}/bin/gmake
@@ -1074,18 +1074,8 @@ GHOSTSCRIPT_REQD?=	6.01
 # various package options.
 #
 .if !defined(TOOLS_DEPENDS.ghostscript)
-_TOOLS_DEP.ghostscript:=	ghostscript-gpl
-_TOOLS_DEP.ghostscript:=	${_TOOLS_DEP.ghostscript},ghostscript-agpl
-#
-# Determine the default Ghostscript package to build based on
-# ACCEPTABLE_LICENSES.
-#
-.  if !empty(ACCEPTABLE_LICENSES:Mgnu-agpl-*)
-_TOOLS_PKGSRCDIR.ghostscript=	../../print/ghostscript-agpl
-.  else
-_TOOLS_PKGSRCDIR.ghostscript=	../../print/ghostscript-gpl
-.  endif
-TOOLS_DEPENDS.ghostscript=	{${_TOOLS_DEP.ghostscript}}>=${GHOSTSCRIPT_REQD}:${_TOOLS_PKGSRCDIR.ghostscript}
+_TOOLS_DEP.ghostscript:=	ghostscript
+TOOLS_DEPENDS.ghostscript=	ghostscript>=${GHOSTSCRIPT_REQD}:../../print/ghostscript
 MAKEVARS+=			TOOLS_DEPENDS.ghostscript
 .endif
 
@@ -1110,117 +1100,135 @@ TOOLS_PATH.${_t_}=	${TOOLS_PREFIX.${_t_}}/bin/${_t_}
 .if !defined(TOOLS_IGNORE.iceauth) && !empty(_USE_TOOLS:Miceauth)
 .  if !empty(PKGPATH:Mx11/iceauth)
 MAKEFLAGS+=		TOOLS_IGNORE.iceauth=
-.  elif !empty(X11_TYPE:Mnative)
+.  elif !empty(_TOOLS_USE_PKGSRC.iceauth:M[yY][eE][sS])
+TOOLS_CREATE+=			iceauth
+.    if !empty(X11_TYPE:Mnative)
 TOOLS_PATH.iceauth=	${X11BASE}/bin/iceauth
-.  else
+.    else
 TOOLS_DEPENDS.iceauth?=		iceauth-[0-9]*:../../x11/iceauth
 TOOLS_FIND_PREFIX+=		TOOLS_PREFIX.iceauth=iceauth
 TOOLS_PATH.iceauth=		${TOOLS_PREFIX.iceauth}/bin/iceauth
-TOOLS_CREATE.iceauth=		iceauth
+.    endif
 .  endif
 .endif
 
 .if !defined(TOOLS_IGNORE.mkfontdir) && !empty(_USE_TOOLS:Mmkfontdir)
 .  if !empty(PKGPATH:Mfonts/mkfontdir)
 MAKEFLAGS+=		TOOLS_IGNORE.mkfontdir=
-.  elif !empty(X11_TYPE:Mnative)
+.  elif !empty(_TOOLS_USE_PKGSRC.mkfontdir:M[yY][eE][sS])
+TOOLS_CREATE+=			mkfontdir
+.    if !empty(X11_TYPE:Mnative)
 TOOLS_PATH.mkfontdir=	${X11BASE}/bin/mkfontdir
-.  else
+.    else
 TOOLS_DEPENDS.mkfontdir?=	mkfontdir-[0-9]*:../../fonts/mkfontdir
 TOOLS_FIND_PREFIX+=		TOOLS_PREFIX.mkfontdir=mkfontdir
 TOOLS_PATH.mkfontdir=		${TOOLS_PREFIX.mkfontdir}/bin/mkfontdir
-TOOLS_CREATE.mkfontdir=		mkfontdir
+.    endif
 .  endif
 .endif
 
 .if !defined(TOOLS_IGNORE.mkfontscale) && !empty(_USE_TOOLS:Mmkfontscale)
 .  if !empty(PKGPATH:Mfonts/mkfontscale)
 MAKEFLAGS+=		TOOLS_IGNORE.mkfontscale=
-.  elif !empty(X11_TYPE:Mnative)
+.  elif !empty(_TOOLS_USE_PKGSRC.mkfontscale:M[yY][eE][sS])
+TOOLS_CREATE+=			mkfontscale
+.    if !empty(X11_TYPE:Mnative)
 TOOLS_PATH.mkfontscale=	${X11BASE}/bin/mkfontscale
-.  else
+.    else
 TOOLS_DEPENDS.mkfontscale?=	mkfontscale-[0-9]*:../../fonts/mkfontscale
 TOOLS_FIND_PREFIX+=		TOOLS_PREFIX.mkfontscale=mkfontscale
 TOOLS_PATH.mkfontscale=		${TOOLS_PREFIX.mkfontscale}/bin/mkfontscale
-TOOLS_CREATE.mkfontscale=	mkfontscale
+.    endif
 .  endif
 .endif
 
 .if !defined(TOOLS_IGNORE.bdftopcf) && !empty(_USE_TOOLS:Mbdftopcf)
 .  if !empty(PKGPATH:Mfonts/bdftopcf)
 MAKEFLAGS+=		TOOLS_IGNORE.bdftopcf=
-.  elif !empty(X11_TYPE:Mnative)
+.  elif !empty(_TOOLS_USE_PKGSRC.bdftopcf:M[yY][eE][sS])
+TOOLS_CREATE+=			bdftopcf
+.    if !empty(X11_TYPE:Mnative)
 TOOLS_PATH.bdftopcf=	${X11BASE}/bin/bdftopcf
-.  else
+.    else
 TOOLS_DEPENDS.bdftopcf?=	bdftopcf-[0-9]*:../../fonts/bdftopcf
 TOOLS_FIND_PREFIX+=		TOOLS_PREFIX.bdftopcf=bdftopcf
 TOOLS_PATH.bdftopcf=		${TOOLS_PREFIX.bdftopcf}/bin/bdftopcf
-TOOLS_CREATE.bdftopcf=		bdftopcf
+.    endif
 .  endif
 .endif
 
 .if !defined(TOOLS_IGNORE.ucs2any) && !empty(_USE_TOOLS:Mucs2any)
 .  if !empty(PKGPATH:Mfonts/font-util)
 MAKEFLAGS+=		TOOLS_IGNORE.ucs2any=
-.  elif !empty(X11_TYPE:Mnative)
+.  elif !empty(_TOOLS_USE_PKGSRC.ucs2any:M[yY][eE][sS])
+TOOLS_CREATE+=			ucs2any
+.    if !empty(X11_TYPE:Mnative)
 TOOLS_PATH.ucs2any=	${X11BASE}/bin/ucs2any
-.  else
+.    else
 TOOLS_DEPENDS.ucs2any?=		font-util-[0-9]*:../../fonts/font-util
 TOOLS_FIND_PREFIX+=		TOOLS_PREFIX.ucs2any=ucs2any
 TOOLS_PATH.ucs2any=		${TOOLS_PREFIX.ucs2any}/bin/ucs2any
-TOOLS_CREATE.ucs2any=		ucs2any
+.    endif
 .  endif
 .endif
 
 .if !defined(TOOLS_IGNORE.bdftruncate) && !empty(_USE_TOOLS:Mbdftruncate)
 .  if !empty(PKGPATH:Mfonts/font-util)
 MAKEFLAGS+=		TOOLS_IGNORE.bdftruncate=
-.  elif !empty(X11_TYPE:Mnative)
+.  elif !empty(_TOOLS_USE_PKGSRC.bdftruncate:M[yY][eE][sS])
+TOOLS_CREATE+=			bdftruncate
+.    if !empty(X11_TYPE:Mnative)
 TOOLS_PATH.bdftruncate=	${X11BASE}/bin/bdftruncate
-.  else
+.    else
 TOOLS_DEPENDS.bdftruncate?=	font-util-[0-9]*:../../fonts/font-util
 TOOLS_FIND_PREFIX+=		TOOLS_PREFIX.bdftruncate=bdftruncate
 TOOLS_PATH.bdftruncate=		${TOOLS_PREFIX.bdftruncate}/bin/bdftruncate
-TOOLS_CREATE.bdftruncate=	bdftruncate
+.    endif
 .  endif
 .endif
 
 .if !defined(TOOLS_IGNORE.xauth) && !empty(_USE_TOOLS:Mxauth)
 .  if !empty(PKGPATH:Mx11/xauth)
 MAKEFLAGS+=		TOOLS_IGNORE.xauth=
-.  elif !empty(X11_TYPE:Mnative)
+.  elif !empty(_TOOLS_USE_PKGSRC.xauth:M[yY][eE][sS])
+TOOLS_CREATE+=			xauth
+.    if !empty(X11_TYPE:Mnative)
 TOOLS_PATH.xauth=	${X11BASE}/bin/xauth
-.  else
+.    else
 TOOLS_DEPENDS.xauth?=		xauth-[0-9]*:../../x11/xauth
 TOOLS_FIND_PREFIX+=		TOOLS_PREFIX.xauth=xauth
 TOOLS_PATH.xauth=		${TOOLS_PREFIX.xauth}/bin/xauth
-TOOLS_CREATE.xauth=		xauth
+.    endif
 .  endif
 .endif
 
 .if !defined(TOOLS_IGNORE.xinit) && !empty(_USE_TOOLS:Mxinit)
 .  if !empty(PKGPATH:Mx11/xinit)
 MAKEFLAGS+=		TOOLS_IGNORE.xinit=
-.  elif !empty(X11_TYPE:Mnative)
+.  elif !empty(_TOOLS_USE_PKGSRC.xinit:M[yY][eE][sS])
+TOOLS_CREATE+=			xinit
+.    if !empty(X11_TYPE:Mnative)
 TOOLS_PATH.xinit=	${X11BASE}/bin/xinit
-.  else
+.    else
 TOOLS_DEPENDS.xinit?=		xinit-[0-9]*:../../x11/xinit
 TOOLS_FIND_PREFIX+=		TOOLS_PREFIX.xinit=xinit
 TOOLS_PATH.xinit=		${TOOLS_PREFIX.xinit}/bin/xinit
-TOOLS_CREATE.xinit=		xinit
+.    endif
 .  endif
 .endif
 
 .if !defined(TOOLS_IGNORE.xmessage) && !empty(_USE_TOOLS:Mxmessage)
 .  if !empty(PKGPATH:Mx11/xmessage)
 MAKEFLAGS+=		TOOLS_IGNORE.xmessage=
-.  elif !empty(X11_TYPE:Mnative)
+.  elif !empty(_TOOLS_USE_PKGSRC.xmessage:M[yY][eE][sS])
+TOOLS_CREATE+=			xmessage
+.    if !empty(X11_TYPE:Mnative)
 TOOLS_PATH.xmessage=	${X11BASE}/bin/xmessage
-.  else
+.    else
 TOOLS_DEPENDS.xmessage?=		xmessage-[0-9]*:../../x11/xmessage
 TOOLS_FIND_PREFIX+=		TOOLS_PREFIX.xmessage=xmessage
 TOOLS_PATH.xmessage=		${TOOLS_PREFIX.xmessage}/bin/xmessage
-TOOLS_CREATE.xmessage=		xmessage
+.    endif
 .  endif
 .endif
 

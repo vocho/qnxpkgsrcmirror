@@ -1,4 +1,4 @@
-$NetBSD: distinfo,v 1.23 2013/04/13 11:10:03 obache Exp $
+$NetBSD: distinfo,v 1.25 2013/05/16 19:03:10 adam Exp $
 
 SHA1 (pkg-config-0.28.tar.gz) = 71853779b12f958777bffcb8ca6d849b4d3bed46
 RMD160 (pkg-config-0.28.tar.gz) = 233f0b667cfb8f2e6a5647984d6389a770132173

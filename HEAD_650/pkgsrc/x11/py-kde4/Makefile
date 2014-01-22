@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.24 2013/04/03 10:52:21 markd Exp $
+# $NetBSD: Makefile,v 1.32 2013/07/05 13:29:45 ryoon Exp $
 
 PKGNAME=	${PYPKGPREFIX}-kde4-${_KDE_VERSION}
 DISTNAME=	pykde4-${_KDE_VERSION}
+PKGREVISION=	5
 CATEGORIES=	misc
 COMMENT=	Python bindings for the KDE integrated X11 desktop
 
@@ -26,6 +27,18 @@ SUBST_STAGE.pykdeuic4=	post-build
 SUBST_FILES.pykdeuic4=	tools/pykdeuic4/pykdeuic4.py
 SUBST_SED.pykdeuic4=	-e 's:/usr/bin/env python$$:${PYTHONBIN}:'
 
+.include "../../mk/bsd.prefs.mk"
+
+# pid_t in the SunOS 32-bit environment is long, not int.
+.if ${OPSYS} == "SunOS" && ${ABI} == "32"
+SUBST_CLASSES+=		pid32
+SUBST_STAGE.pid32=	pre-build
+SUBST_FILES.pid32=	sip/kdecore/typedefs.sip
+SUBST_FILES.pid32+=	sip/kdeui/kstartupinfo.sip
+SUBST_SED.pid32=	-e '/QList.*int.*pids/s/int/pid_t/'
+SUBST_SED.pid32+=	-e '/typedef.*int.*pid_t/s/int/long/'
+.endif
+
 #post-extract:
 #	${CP} ${FILESDIR}/FindPolkitQt.cmake ${WRKSRC}/cmake/modules
 
@@ -41,7 +54,6 @@ SUBST_SED.pykdeuic4=	-e 's:/usr/bin/env python$$:${PYTHONBIN}:'
 .include "../../misc/nepomuk-core/buildlink3.mk"
 .include "../../security/polkit-qt/buildlink3.mk"
 .include "../../x11/kdelibs4/buildlink3.mk"
-BUILDLINK_API_DEPENDS.py-sip+=	${PYPKGPREFIX}-sip>=4.10
 .include "../../x11/py-sip/buildlink3.mk"
 .include "../../x11/py-qt4/buildlink3.mk"
 BUILDLINK_DEPMETHOD.qt4-tools=		full

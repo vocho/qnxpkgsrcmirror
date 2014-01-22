@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.9 2012/10/31 11:19:53 asau Exp $
+# $NetBSD: Makefile,v 1.12 2013/06/06 12:54:14 wiz Exp $
 
 DISTNAME=		vtcl-1.6.0
-PKGREVISION=		4
+PKGREVISION=		7
 CATEGORIES=		devel
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=vtcl/}
 

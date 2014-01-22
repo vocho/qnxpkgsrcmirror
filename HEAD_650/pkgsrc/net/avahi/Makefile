@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.39 2013/02/16 11:19:00 wiz Exp $
+# $NetBSD: Makefile,v 1.47 2013/07/12 10:44:58 jperkin Exp $
 
 DISTNAME=		avahi-0.6.31
-PKGREVISION=		6
+PKGREVISION=		13
 CATEGORIES=		net
 MASTER_SITES=		http://avahi.org/download/
 
@@ -9,6 +9,8 @@ MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://avahi.org/
 COMMENT=		Facilitate service discovery on a local network
 LICENSE=		gnu-lgpl-v2.1
+
+EXTRACT_USING=		bsdtar
 
 GNU_CONFIGURE=		YES
 USE_LIBTOOL=		YES
@@ -72,17 +74,11 @@ CONFIGURE_ARGS+=	--with-avahi_priv_access_group=${REAL_ROOT_GROUP}
 CONFIGURE_ARGS+=	--localstatedir=${VARBASE}
 CONFIGURE_ARGS+=	--with-dbus-system-socket=${VARBASE}/run/dbus/system_bus_socket
 CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFBASE}
-CONFIGURE_ARGS+=	--disable-gtk3
-CONFIGURE_ARGS+=	--disable-qt3
-CONFIGURE_ARGS+=	--disable-qt4
-CONFIGURE_ARGS+=	--disable-mono
-CONFIGURE_ARGS+=	--disable-monodoc
 CONFIGURE_ARGS+=	--disable-doxygen-doc
 CONFIGURE_ARGS+=	--disable-doxygen-dot
-CONFIGURE_ARGS+=	--disable-doxygen-html
+CONFIGURE_ARGS+=	--disable-doxygen-html --disable-doxygen-xml
 CONFIGURE_ARGS+=	--disable-xmltoman
 CONFIGURE_ARGS+=	--disable-autoipd
-CONFIGURE_ARGS+=	--enable-tests
 CONFIGURE_ARGS+=	--with-distro=none
 
 INSTALL_MAKE_FLAGS+=	sysconfdir=${PREFIX}/share/examples
@@ -104,9 +100,6 @@ post-install:
 BUILDLINK_API_DEPENDS.libdaemon+=	libdaemon>=0.14
 .include "../../devel/libdaemon/buildlink3.mk"
 .include "../../sysutils/dbus/buildlink3.mk"
-.include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../textproc/expat/buildlink3.mk"
-BUILDLINK_API_DEPENDS.gtk2+=	gtk2+>=2.14.0
-.include "../../x11/gtk2/buildlink3.mk"
 .include "../../mk/pthread.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

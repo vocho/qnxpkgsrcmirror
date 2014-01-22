@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.29 2013/02/16 11:18:43 wiz Exp $
+# $NetBSD: Makefile,v 1.33 2013/07/15 02:02:21 ryoon Exp $
 #
 
 DISTNAME=	gpsim-20050905
-PKGREVISION=	20
+PKGREVISION=	23
 CATEGORIES=	emulators
 MASTER_SITES=	http://www-asim.lip6.fr/~bouyer/pic/
 
@@ -18,14 +18,12 @@ USE_LIBTOOL=	YES
 
 GCC_REQD+=		3.0
 
-USE_GNU_READLINE=	YES
-# rl_callback_read_char, rl_copy_text,
-# rl_callback_handler_remove, rl_forced_update_display,
-# rl_callback_handler_install
-
 CONFLICTS=	eXdbm-[0-9]* gpsim-[0-9]*
 
 .include "../../devel/popt/buildlink3.mk"
+# rl_callback_read_char, rl_copy_text,
+# rl_callback_handler_remove, rl_forced_update_display,
+# rl_callback_handler_install
 .include "../../devel/readline/buildlink3.mk"
 .include "../../devel/glib2/buildlink3.mk"
 .include "../../x11/gtk2/buildlink3.mk"

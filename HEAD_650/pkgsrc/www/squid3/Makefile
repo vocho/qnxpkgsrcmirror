@@ -1,19 +1,18 @@
-# $NetBSD: Makefile,v 1.6 2013/03/19 01:43:05 obache Exp $
+# $NetBSD: Makefile,v 1.17 2013/07/14 17:54:43 adam Exp $
 
-DISTNAME=	squid-3.3.3
-PKGREVISION=	1
+DISTNAME=	squid-3.3.8
 CATEGORIES=	www
 MASTER_SITES=	http://www.squid-cache.org/Versions/v3/${PKGVERSION_NOREV:R}/ \
 		${SQUID_MASTER_SITES}
 EXTRACT_SUFX=	.tar.xz
 
-MAINTAINER=	tron@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.squid-cache.org/
 COMMENT=	Post-Harvest_cached WWW proxy cache and accelerator
 LICENSE=	gnu-gpl-v2
 
 USE_LANGUAGES=		c c++
-USE_TOOLS+=		perl gmake
+USE_TOOLS+=		perl:run gmake
 GNU_CONFIGURE=		yes
 
 .include "../../www/squid/Makefile.squid"

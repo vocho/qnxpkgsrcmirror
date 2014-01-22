@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.199 2013/04/03 09:28:55 adam Exp $
+# $NetBSD: Makefile,v 1.207 2013/07/18 22:17:33 wiz Exp $
 
 .include "license.mk"
 .include "Makefile.common"
 
+PKGREVISION=	2
 COMMENT=	Practical Extraction and Report Language
 
 CONFLICTS=	perl-base-[0-9]* perl-thread-[0-9]*			\
@@ -10,7 +11,7 @@ CONFLICTS=	perl-base-[0-9]* perl-thread-[0-9]*			\
 		p5-Tie-File-0.96{,nb*}					\
 		p5-Memoize-1.01{,nb*}					\
 		p5-I18N-LangTags<0.35					\
-		p5-Locale-Maketext-1.[0-9]*{,nb*}			\
+		p5-Locale-Maketext<1.22					\
 		p5-Locale-Maketext-Simple<0.21				\
 		p5-Digest<=1.16						\
 		p5-Digest-MD5<=2.39					\
@@ -39,13 +40,6 @@ PERL5_API_VERS_cmd=	\
 	fi
 
 .include "dirs.mk"
-
-#
-# ld='g++' in hints/cygwin.sh
-#
-.if ${OPSYS} == "Cygwin"
-USE_LANGUAGES=	c c++
-.endif
 
 .include "../../mk/compiler.mk"
 
@@ -82,6 +76,12 @@ SUBST_VARS.policysh+=	PKGMANDIR
 SUBST_VARS.policysh+=	LOCALBASE
 SUBST_VARS.policysh+=	PTHREAD_LDFLAGS
 
+# Avoid the ${TOOLS_BIN} path getting written to installed files.
+SUBST_CLASSES+=		toolsbin
+SUBST_STAGE.toolsbin=	pre-configure
+SUBST_FILES.toolsbin=	Configure
+SUBST_VARS.toolsbin=	TOOLS_RM
+
 .if ${OPSYS} == "Darwin" || ${OPSYS} == "Cygwin"
 #
 # The Perl build attempts to work around case-insensitivity problems on
@@ -104,7 +104,7 @@ CONFIGURE_ARGS+=	-Duseshrplib
 # Perl embeds the full paths to the following tools in several installed
 # files, so make sure the paths to the ones in ${TOOLS_DIR} aren't used.
 #
-USE_TOOLS+=		hostname ln sed test
+USE_TOOLS+=		hostname ln rm sed test
 SUBST_VARS.policysh+=	TOOLS_HOSTNAME_CMD
 SUBST_VARS.policysh+=	TOOLS_LN
 TOOLS_ALIASES.sed+=	${TOOLS_SED:T}
@@ -142,6 +142,7 @@ SYSLIBPATH.Cygwin=	/usr/lib
 SYSLIBPATH.Darwin=	/usr/lib
 SYSLIBPATH.DragonFly=	/usr/lib
 SYSLIBPATH.FreeBSD=	/usr/lib
+SYSLIBPATH.Haiku=	/boot/common/lib
 SYSLIBPATH.Interix=	/usr/lib
 SYSLIBPATH.MirBSD=	/usr/lib
 SYSLIBPATH.NetBSD=	/usr/lib
@@ -166,20 +167,16 @@ SUBST_SED.mirbsd-paths=		-e 's,/usr/mpkg,${PREFIX},g'
 SUBST_MESSAGE.mirbsd-paths=	Do not use non-pkgsrc paths on MirBSD.
 .endif
 
-# Remove a spurious workdir reference
-SUBST_CLASSES+=		rm
-SUBST_STAGE.rm=		pre-install
-SUBST_FILES.rm=		lib/Config_heavy.pl
-SUBST_MESSAGE.rm=	Do not use tools version of rm.
-SUBST_SED.rm=	-e "s!^rm_try='/.*/\\.tools/bin/rm -f!rm_try='/bin/rm -f!"
-
 # Replace our perl as the interpreter
-REPLACE_PERL+=		lib/File/DosGlob.pm
-REPLACE_PERL+=		lib/unicore/mktables
-REPLACE_PERL+=		lib/version.pm
+REPLACE_PERL+=		cpan/Config-Perl-V/V.pm
+REPLACE_PERL+=		cpan/Getopt-Long/lib/Getopt/Long.pm
 REPLACE_PERL+=		dist/bignum/lib/Math/BigFloat/Trace.pm
 REPLACE_PERL+=		dist/bignum/lib/Math/BigInt/Trace.pm
 REPLACE_PERL+=		dist/ExtUtils-ParseXS/lib/ExtUtils/xsubpp
+REPLACE_PERL+=		ext/File-DosGlob/lib/File/DosGlob.pm
+REPLACE_PERL+=		lib/File/DosGlob.pm
+REPLACE_PERL+=		lib/unicore/mktables
+REPLACE_PERL+=		lib/version.pm
 
 # And replace a perl interpreter during the pre-install stage
 # I think this may be a bootstrap script, so can't use REPLACE_PERL

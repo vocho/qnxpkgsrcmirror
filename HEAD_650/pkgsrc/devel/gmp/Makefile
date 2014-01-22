@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.68 2013/02/12 09:15:36 adam Exp $
+# $NetBSD: Makefile,v 1.70 2013/05/25 13:32:26 wiz Exp $
 
-DISTNAME=	gmp-5.1.1
+DISTNAME=	gmp-5.1.2
 CATEGORIES=	devel math
 MASTER_SITES=	ftp://ftp.gmplib.org/pub/${DISTNAME}/
 # Use .tar.bz2 distfile so that no extra dependency on archivers/xz
@@ -26,6 +26,10 @@ TEST_TARGET=		check
 PLIST_VARS+=		cxx
 
 .include "../../mk/bsd.prefs.mk"
+
+.if !empty(USE_CROSS_COMPILE:M[yY][eE][sS])
+CONFIGURE_ENV+=		CC_FOR_BUILD=${NATIVE_CC:Q}
+.endif
 
 .if empty(PKGSRC_COMPILER:Msunpro)
 CONFIGURE_ARGS+=	--enable-cxx

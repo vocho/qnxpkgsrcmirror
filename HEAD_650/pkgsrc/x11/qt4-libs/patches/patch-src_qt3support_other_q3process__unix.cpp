@@ -1,8 +1,18 @@
 $NetBSD$
 
---- src/qt3support/other/q3process_unix.cpp.orig	2011-12-08 05:06:02.000000000 +0000
+--- src/qt3support/other/q3process_unix.cpp.orig	2013-06-07 05:16:58.000000000 +0000
 +++ src/qt3support/other/q3process_unix.cpp
-@@ -65,6 +65,12 @@
+@@ -39,6 +39,9 @@
+ **
+ ****************************************************************************/
+ 
++#ifdef __QNXNTO__
++#include <sys/part.h>
++#endif
+ #include "qplatformdefs.h"
+ 
+ // Solaris redefines connect -> __xnet_connect with _XOPEN_SOURCE_EXTENDED.
+@@ -65,6 +68,12 @@
  #include <stdlib.h>
  #include <errno.h>
  #include <sys/types.h>
@@ -15,7 +25,7 @@ $NetBSD$
  
  QT_BEGIN_NAMESPACE
  
-@@ -213,55 +219,6 @@ static void q3process_cleanup()
+@@ -213,55 +222,6 @@ static void q3process_cleanup()
      Q3ProcessPrivate::procManager = 0;
  }
  
@@ -71,7 +81,7 @@ $NetBSD$
  Q3ProcessManager::Q3ProcessManager() : sn(0)
  {
      procList = new Q3PtrList<QProc>;
-@@ -270,11 +227,7 @@ Q3ProcessManager::Q3ProcessManager() : s
+@@ -270,11 +230,7 @@ Q3ProcessManager::Q3ProcessManager() : s
      // The SIGCHLD handler writes to a socket to tell the manager that
      // something happened. This is done to get the processing in sync with the
      // event reporting.
@@ -83,7 +93,7 @@ $NetBSD$
  	sigchldFd[0] = 0;
  	sigchldFd[1] = 0;
      } else {
-@@ -670,29 +623,17 @@ bool Q3Process::start( QStringList *env 
+@@ -670,29 +626,17 @@ bool Q3Process::start( QStringList *env 
      int sStderr[2];
  
      // open sockets for piping
@@ -113,7 +123,7 @@ $NetBSD$
  	if ( comms & Stdin ) {
  	    qt_safe_close( sStdin[0] );
  	    qt_safe_close( sStdin[1] );
-@@ -754,7 +695,11 @@ bool Q3Process::start( QStringList *env 
+@@ -754,7 +698,11 @@ bool Q3Process::start( QStringList *env 
  
      // fork and exec
      QApplication::flushX();

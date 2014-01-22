@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.8 2012/10/03 21:54:19 wiz Exp $
+# $NetBSD: Makefile,v 1.10 2013/05/31 12:39:51 wiz Exp $
 #
 
-DISTNAME=	DBIx-Connector-0.52
+DISTNAME=	DBIx-Connector-0.53
 PKGNAME=	p5-${DISTNAME}
 PKGREVISION=	1
 CATEGORIES=	databases perl5

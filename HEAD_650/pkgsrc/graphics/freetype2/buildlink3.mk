@@ -1,12 +1,12 @@
-# $NetBSD: buildlink3.mk,v 1.33 2011/11/01 06:01:32 sbd Exp $
+# $NetBSD: buildlink3.mk,v 1.36 2013/06/04 18:02:58 tron Exp $
 
 BUILDLINK_TREE+=	freetype2
 
 .if !defined(FREETYPE2_BUILDLINK3_MK)
 FREETYPE2_BUILDLINK3_MK:=
 
-BUILDLINK_API_DEPENDS.freetype2+=	freetype2>=2.1.8
-BUILDLINK_ABI_DEPENDS.freetype2+=	freetype2>=2.4.7nb2
+BUILDLINK_API_DEPENDS.freetype2+=	freetype2>=2.4.5
+BUILDLINK_ABI_DEPENDS.freetype2+=	freetype2>=2.4.11
 BUILDLINK_PKGSRCDIR.freetype2?=	../../graphics/freetype2
 BUILDLINK_INCDIRS.freetype2?=	include/freetype2
 

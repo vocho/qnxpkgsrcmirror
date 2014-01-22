@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.76 2013/02/16 11:23:48 wiz Exp $
+# $NetBSD: Makefile,v 1.80 2013/06/12 12:35:35 wiz Exp $
 
 DISTNAME=	etherape-0.9.12
-PKGREVISION=	15
+PKGREVISION=	18
 CATEGORIES=	gnome net
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=etherape/}
 
@@ -16,7 +16,7 @@ GNU_CONFIGURE=		yes
 PKG_SYSCONFSUBDIR=	etherape
 
 # XXX: $localedir defaults to $libdir/locale
-GNU_CONFIGURE_LIBDIR=${PREFIX}/${PKGLOCALEDIR}
+CONFIGURE_ARGS+=	--libdir=${PREFIX}/${PKGLOCALEDIR}
 CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR:Q}
 
 EGDIR=		${PREFIX}/share/examples/etherape

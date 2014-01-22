@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.1 2013/04/03 12:03:42 markd Exp $
+# $NetBSD: Makefile,v 1.7 2013/07/05 13:29:32 ryoon Exp $
 
 DISTNAME=	ktuberling-${_KDE_VERSION}
+PKGREVISION=	4
 CATEGORIES=	games
 COMMENT=	kids game: make your own potato
 

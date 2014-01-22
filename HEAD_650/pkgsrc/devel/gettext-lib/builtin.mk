@@ -1,4 +1,4 @@
-# $NetBSD: builtin.mk,v 1.41 2011/04/12 17:41:28 adam Exp $
+# $NetBSD: builtin.mk,v 1.43 2013/05/03 01:57:11 obache Exp $
 
 .include "../../mk/bsd.fast.prefs.mk"
 

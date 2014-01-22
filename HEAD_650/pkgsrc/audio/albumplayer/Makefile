@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.25 2013/04/06 03:54:38 rodent Exp $
+# $NetBSD: Makefile,v 1.29 2013/07/05 15:10:00 jperkin Exp $
 #
 
 DISTNAME=	albumplayer-0.3.1
-PKGREVISION=	13
+PKGREVISION=	16
 CATEGORIES=	audio
 MASTER_SITES=	http://rvb.mytanet.de/
 
@@ -18,11 +18,6 @@ USE_PKGLOCALEDIR=	yes
 USE_TOOLS+=		pkg-config
 INSTALLATION_DIRS+=	share/applications
 REPLACE_SH=		ap_flac_embed
-
-.include "../../mk/bsd.prefs.mk"
-.if ${OPSYS} == "SunOS"
-BUILDLINK_TRANSFORM+=	rm:-export-dynamic
-.endif
 
 .include "../../devel/glib2/buildlink3.mk"
 .include "../../x11/gtk2/buildlink3.mk"

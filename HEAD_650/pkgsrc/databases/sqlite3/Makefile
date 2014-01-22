@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.63 2013/04/01 18:56:41 adam Exp $
+# $NetBSD: Makefile,v 1.67 2013/07/15 02:02:20 ryoon Exp $
 
-DISTNAME=	sqlite-autoconf-3071601
-PKGNAME=	sqlite3-3.7.16.1
+DISTNAME=	sqlite-autoconf-3071700
+PKGNAME=	sqlite3-3.7.17
 CATEGORIES=	databases
 MASTER_SITES=	http://www.hwaci.com/sw/sqlite/2013/ \
 		http://www.sqlite.org/2013/
@@ -43,6 +43,6 @@ CFLAGS+=		-DSQLITE_ENABLE_LOAD_EXTENSION
 # See http://www.sqlite.org/cvstrac/tktview?tn=3555
 LIBS+=			${BUILDLINK_LDADD.dl}
 
-.include "../../devel/readline/buildlink3.mk"
+.include "../../mk/readline.buildlink3.mk"
 .include "../../mk/dlopen.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

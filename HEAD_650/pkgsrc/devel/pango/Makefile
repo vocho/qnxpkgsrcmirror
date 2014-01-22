@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.178 2013/02/24 18:41:25 wiz Exp $
+# $NetBSD: Makefile,v 1.184 2013/06/06 12:53:41 wiz Exp $
 
-DISTNAME=	pango-1.32.5
-PKGREVISION=	1
+DISTNAME=	pango-1.34.1
+PKGREVISION=	3
 CATEGORIES=	devel fonts
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/pango/${PKGVERSION_NOREV:R}/}
 EXTRACT_SUFX=	.tar.xz
@@ -55,11 +55,11 @@ BUILDLINK_API_DEPENDS.glib2+=	glib2>=2.32.1
 BUILDLINK_DEPMETHOD.gobject-introspection:= build
 .include "../../devel/gobject-introspection/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"
-BUILDLINK_API_DEPENDS.fontconfig+=	fontconfig>=2.5.0
+BUILDLINK_API_DEPENDS.fontconfig+=	fontconfig>=2.10.91
 .include "../../fonts/fontconfig/buildlink3.mk"
 BUILDLINK_API_DEPENDS.harfbuzz+= harfbuzz>=0.9.9
 .include "../../fonts/harfbuzz/buildlink3.mk"
-BUILDLINK_API_DEPENDS.cairo+=	cairo>=1.8.0
+BUILDLINK_API_DEPENDS.cairo+=	cairo>=1.12.10
 .include "../../graphics/cairo/buildlink3.mk"
 .include "../../graphics/cairo-gobject/buildlink3.mk"
 .include "../../graphics/freetype2/buildlink3.mk"

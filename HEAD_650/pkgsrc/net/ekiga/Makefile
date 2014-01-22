@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.45 2013/03/28 21:34:50 joerg Exp $
+# $NetBSD: Makefile,v 1.51 2013/06/06 12:54:54 wiz Exp $
 #
 
 DISTNAME=		ekiga-3.2.6
-PKGREVISION=		28
+PKGREVISION=		33
 CATEGORIES=		net comms
 MASTER_SITES=		${MASTER_SITE_GNOME:=sources/ekiga/3.2/}
 EXTRACT_SUFX=		.tar.bz2
@@ -23,8 +23,6 @@ CONFIGURE_ARGS+=	--enable-gstreamer
 
 .include "options.mk"
 
-GCONF_SCHEMAS=		ekiga.schemas
-
 GNU_CONFIGURE=		yes
 USE_LIBTOOL=		yes
 USE_LANGUAGES=		c c++
@@ -37,25 +35,18 @@ BUILDLINK_TRANSFORM+=	rm:-fno-exceptions
 
 .include "../../audio/esound/buildlink3.mk"
 .include "../../databases/openldap-client/buildlink3.mk"
-.include "../../devel/GConf/schemas.mk"
 .include "../../devel/SDL/buildlink3.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../devel/glib2/buildlink3.mk"
-.include "../../devel/libgnome/buildlink3.mk"
-.include "../../devel/libgnomeui/buildlink3.mk"
 .include "../../devel/libsigc++/buildlink3.mk"
 .include "../../devel/opal/buildlink3.mk"
 .include "../../devel/ptlib/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../graphics/libv4l/buildlink3.mk"
-.include "../../mail/evolution-data-server/buildlink3.mk"
 .include "../../multimedia/gstreamer0.10/buildlink3.mk"
 .include "../../multimedia/gst-plugins0.10-base/buildlink3.mk"
 .include "../../security/cyrus-sasl/buildlink3.mk"
-.include "../../sysutils/dbus-glib/buildlink3.mk"
-.include "../../sysutils/dbus/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
-.include "../../sysutils/libnotify/buildlink3.mk"
 .include "../../textproc/gnome-doc-utils/buildlink3.mk"
 .include "../../mk/omf-scrollkeeper.mk"
 .include "../../x11/gtk2/buildlink3.mk"

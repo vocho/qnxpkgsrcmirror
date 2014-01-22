@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.93 2013/04/07 20:23:48 ryoon Exp $
+# $NetBSD: Makefile,v 1.100 2013/07/12 12:24:10 ryoon Exp $
 #
 
 DISTNAME=	# empty
-PKGNAME=	seamonkey-${SM_VER}
-SM_VER=		2.17
+PKGNAME=	seamonkey-${SM_VER:S/b/beta/}
+SM_VER=		2.19
 #LIGHTNINGVER=	1.9
 CATEGORIES=	www
-MASTER_SITES=	${MASTER_SITE_MOZILLA:=seamonkey/releases/${SM_VER}/source/} \
-		${MASTER_SITE_MOZILLA_ALL:=seamonkey/releases/${SM_VER}/source/}
+#${MASTER_SITE_MOZILLA:=seamonkey/releases/${SM_VER}/source/} 
+MASTER_SITES=	${MASTER_SITE_MOZILLA_ALL:=seamonkey/releases/${SM_VER}/source/}
 DISTFILES=	seamonkey-${SM_VER}.source.tar.bz2
 #		lightning-${LIGHTNINGVER}.source.tar.bz2
 #SITES.lightning-${LIGHTNINGVER}.source.tar.bz2=	${MASTER_SITE_MOZILLA:=calendar/lightning/releases/${LIGHTNINGVER}/source/}
@@ -32,11 +32,16 @@ ALL_ENV+=		MOZILLA_PKG_NAME=seamonkey
 
 .include "../../mk/bsd.prefs.mk"
 
-.if (${OPSYS} == "Linux" || ${OPSYS} == "SunOS" || ${OPSYS} == "Darwin" || \
-     ${OPSYS} == "DragonFly") && \
-    (${MACHINE_ARCH} == "i386" || ${MACHINE_ARCH} == "x86_64")
-BUILD_DEPENDS+=		yasm>=1.1.0:../../devel/yasm
-.endif
+#.if (${OPSYS} == "Linux" || ${OPSYS} == "SunOS" || ${OPSYS} == "Darwin" || \
+#     ${OPSYS} == "DragonFly") && \
+#    (${MACHINE_ARCH} == "i386" || ${MACHINE_ARCH} == "x86_64")
+#BUILD_DEPENDS+=		yasm>=1.1.0:../../devel/yasm
+#.endif
+
+CHECK_INTERPRETER_SKIP+=lib/seamonkey-sdk/sdk/bin/header.py
+CHECK_INTERPRETER_SKIP+=lib/seamonkey-sdk/sdk/bin/typelib.py
+CHECK_INTERPRETER_SKIP+=lib/seamonkey-sdk/sdk/bin/xpidl.py
+CHECK_INTERPRETER_SKIP+=lib/seamonkey-sdk/sdk/bin/xpt.py
 
 #post-extract:
 #	cd ${WRKSRC} && ${RM} -r calendar
@@ -71,6 +76,6 @@ post-install:
 	   ${DESTDIR}${PREFIX}/lib/seamonkey/extensions/.
 	rm -rf ${WRKDIR}/extensions
 
-.include "../../devel/xulrunner/mozilla-common.mk"
+.include "../../www/firefox/mozilla-common.mk"
 .include "options.mk"
 .include "../../mk/bsd.pkg.mk"

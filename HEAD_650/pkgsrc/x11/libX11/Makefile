@@ -1,8 +1,6 @@
-# $NetBSD: Makefile,v 1.29 2012/10/29 05:06:33 asau Exp $
-#
+# $NetBSD: Makefile,v 1.33 2013/06/16 13:34:30 obache Exp $
 
-DISTNAME=		libX11-1.5.0
-PKGREVISION=		1
+DISTNAME=		libX11-1.6.0
 CATEGORIES=		x11 devel
 MASTER_SITES=		${MASTER_SITE_XORG:=lib/}
 EXTRACT_SUFX=		.tar.bz2
@@ -33,23 +31,21 @@ CONFIGURE_ARGS+=	--disable-malloc0returnsnull
 
 LIBS.QNX+=		-ls5ipc
 
-.if !empty(USE_CROSS_COMPILE:M[yY][eE][sS])
-MAKE_ENV+=	CC_FOR_BUILD=${NATIVE_CC:Q} CPPFLAGS_FOR_BUILD=-I${PREFIX}/include
-.endif
-
 CPPFLAGS.OSF1+=		-pthread # Required by compiler if including pthread.h
 CPPFLAGS.MirBSD+=	-pthread
 LDFLAGS.MirBSD+=	-pthread
 
 BUILDLINK_API_DEPENDS.libxcb+=libxcb>=1.8.1
 
-.include "../../mk/compiler.mk"
+TOOL_DEPENDS+=		tradcpp-[0-9]*:../../devel/tradcpp
+CONFIGURE_ENV+=		ac_cv_path_RAWCPP="${PREFIX}/bin/tradcpp -Uunix"
 
-.if !empty(PKGSRC_COMPILER:Mclang)
-BUILD_DEPENDS+=		ucpp-[0-9]*:../../devel/ucpp
-CONFIGURE_ENV+=		ac_cv_path_RAWCPP="${PREFIX}/bin/ucpp -t -c90 -Uunix"
-.elif empty(PKGSRC_COMPILER:Mgcc)
-CONFIGURE_ENV+=		ac_cv_path_RAWCPP="cc -E -Uunix -"
+.if !empty(USE_CROSS_COMPILE:M[yY][eE][sS])
+CONFIGURE_ENV+=		CC_FOR_BUILD=${NATIVE_CC:Q}
+
+# XXX This needs to match the version of xcb-proto we get for the
+# target by buildlink3.
+TOOL_DEPENDS+=		xproto-[0-9]*:../../x11/xproto
 .endif
 
 .include "../../x11/bigreqsproto/buildlink3.mk"

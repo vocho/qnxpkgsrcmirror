@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.8 2012/10/06 14:10:41 asau Exp $
+# $NetBSD: Makefile,v 1.10 2013/06/04 22:16:13 tron Exp $
 #
 
 DISTNAME=	agg-2.5
-PKGREVISION=	1
+PKGREVISION=	3
 CATEGORIES=	graphics
 MASTER_SITES=	http://www.antigrain.com/
 

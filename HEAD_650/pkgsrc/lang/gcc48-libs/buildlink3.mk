@@ -1,4 +1,4 @@
-# $NetBSD: buildlink3.mk,v 1.1 2013/04/01 21:06:18 wiz Exp $
+# $NetBSD: buildlink3.mk,v 1.5 2013/06/21 09:40:47 jperkin Exp $
 
 BUILDLINK_TREE+=	gcc48-libs
 
@@ -23,14 +23,14 @@ BUILDLINK_AUTO_VARS.gcc48-libs=	no
 SPECS_LIBGCC=		${WRAPPER_DIR}/specs.libgcc
 WRAPPER_TARGETS+=	${SPECS_LIBGCC}
 
-GCC_SUBPREFIX=		gcc48
-GCC_PREFIX=		${BUILDLINK_PREFIX.gcc48-libs}/${GCC_SUBPREFIX}
-GCC_TARGET_MACHINE?= 	${MACHINE_GNU_PLATFORM}
+LIBGCC_SUBPREFIX=	gcc48
+LIBGCC_PREFIX=		${BUILDLINK_PREFIX.gcc48-libs}/${LIBGCC_SUBPREFIX}
+GCC_TARGET_MACHINE?=	${MACHINE_GNU_PLATFORM}
 
 # XXX: Using %M requires patched version of gcc (e.g. lang/gcc48)
 ${SPECS_LIBGCC}:
 	@${ECHO} "*link_libgcc:" >${SPECS_LIBGCC}
-	@${ECHO} "%D $(LINKER_RPATH_FLAG)${GCC_PREFIX}/${GCC_TARGET_MACHINE}/lib/%M $(LINKER_RPATH_FLAG)${GCC_PREFIX}/lib/%M" >>${SPECS_LIBGCC}
+	@${ECHO} "%D $(LINKER_RPATH_FLAG)${LIBGCC_PREFIX}/${GCC_TARGET_MACHINE}/lib/%M" >>${SPECS_LIBGCC}
 
 _WRAP_EXTRA_ARGS.CC+=	-specs ${SPECS_LIBGCC}
 _WRAP_EXTRA_ARGS.CXX+=	-specs ${SPECS_LIBGCC}
@@ -40,4 +40,5 @@ _WRAP_EXTRA_ARGS.FC+=	-specs ${SPECS_LIBGCC}
 .include "../../mk/dlopen.buildlink3.mk"
 .include "../../mk/pthread.buildlink3.mk"
 .endif # GCC48_LIBS_BUILDLINK3_MK
+
 BUILDLINK_TREE+=	-gcc48-libs

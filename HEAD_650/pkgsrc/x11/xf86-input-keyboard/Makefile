@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.14 2012/10/29 05:07:02 asau Exp $
+# $NetBSD: Makefile,v 1.15 2013/05/16 05:51:53 richard Exp $
 
-DISTNAME=	xf86-input-keyboard-1.6.1
+DISTNAME=	xf86-input-keyboard-1.6.2
 CATEGORIES=	x11
 MASTER_SITES=	${MASTER_SITE_XORG:=driver/}
 EXTRACT_SUFX=	.tar.bz2
@@ -13,11 +13,10 @@ USE_LIBTOOL=	YES
 GNU_CONFIGURE=	YES
 USE_TOOLS+=	gmake pkg-config automake autoconf
 
-BUILD_DEPENDS+=	autoconf>=2.63:../../devel/autoconf
-BUILD_DEPENDS+=	automake>=1.10.2:../../devel/automake
+USE_TOOLS+=	autoreconf
 
 pre-configure:
-	cd ${WRKSRC} && /usr/pkg/bin/autoreconf
+	cd ${WRKSRC} && autoreconf -vfi
 
 .include "../../mk/bsd.prefs.mk"
 

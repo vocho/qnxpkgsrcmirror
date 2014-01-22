@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.22 2013/02/16 11:24:44 wiz Exp $
+# $NetBSD: Makefile,v 1.25 2013/06/06 12:55:08 wiz Exp $
 
 .include "../../meta-pkgs/xfce4/Makefile.common"
 
 DISTNAME=	orage-${XFCE4_VERSION}
 PKGNAME=	xfce4-orage-${XFCE4_VERSION}
-PKGREVISION=	15
+PKGREVISION=	18
 CATEGORIES=	time
 COMMENT=	Xfce time managing application
 

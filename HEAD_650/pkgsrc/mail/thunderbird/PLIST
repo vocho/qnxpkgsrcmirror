@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.46 2013/01/19 03:43:52 ryoon Exp $
+@comment $NetBSD: PLIST,v 1.48 2013/05/23 13:13:30 ryoon Exp $
 bin/thunderbird
 include/thunderbird/.mkdir.done
 include/thunderbird/AccEvent.h
@@ -185,14 +185,6 @@ include/thunderbird/inIFlasher.h
 include/thunderbird/inISearchObserver.h
 include/thunderbird/inISearchProcess.h
 include/thunderbird/jArray.h
-${PLIST.jemalloc}include/thunderbird/jemalloc.h
-${PLIST.jemalloc}include/thunderbird/jemalloc_types.h
-include/thunderbird/jconfig.h
-include/thunderbird/jerror.h
-include/thunderbird/jinclude.h
-include/thunderbird/jmorecfg.h
-include/thunderbird/jpegint.h
-include/thunderbird/jpeglib.h
 include/thunderbird/js-config.h
 include/thunderbird/js.msg
 include/thunderbird/js/HashTable.h
@@ -3254,10 +3246,10 @@ lib/thunderbird/chrome/comm/content/editor/editorUtilities.js
 lib/thunderbird/chrome/comm/content/editor/images/tag-anchor.gif
 ${PLIST.nobranding}lib/thunderbird/chrome/en-US/locale/branding/brand.dtd
 ${PLIST.nobranding}lib/thunderbird/chrome/en-US/locale/branding/brand.properties
-lib/thunderbird/chrome/en-US/locale/en-US/alerts/notificationNames.properties
-lib/thunderbird/chrome/en-US/locale/en-US/autoconfig/autoconfig.properties
 ${PLIST.branding}lib/thunderbird/chrome/en-US/locale/en-US/branding/brand.dtd
 ${PLIST.branding}lib/thunderbird/chrome/en-US/locale/en-US/branding/brand.properties
+lib/thunderbird/chrome/en-US/locale/en-US/alerts/notificationNames.properties
+lib/thunderbird/chrome/en-US/locale/en-US/autoconfig/autoconfig.properties
 lib/thunderbird/chrome/en-US/locale/en-US/chat/accounts.properties
 lib/thunderbird/chrome/en-US/locale/en-US/chat/commands.properties
 lib/thunderbird/chrome/en-US/locale/en-US/chat/conversations.properties

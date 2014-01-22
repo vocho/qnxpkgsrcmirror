@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.32 2013/02/06 23:22:08 jperkin Exp $
+# $NetBSD: Makefile,v 1.34 2013/07/12 10:44:55 jperkin Exp $
 
 DISTNAME=	memcached-1.4.15
-PKGREVISION=	1
+PKGREVISION=	3
 CATEGORIES=	devel
 MASTER_SITES=	http://memcached.googlecode.com/files/
 

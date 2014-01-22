@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.50 2012/10/28 06:30:10 asau Exp $
+# $NetBSD: Makefile,v 1.52 2013/05/31 12:42:31 wiz Exp $
 
-DISTNAME=	awstats-7.1
+DISTNAME=	awstats-7.1.1
 PKGREVISION=	1
 CATEGORIES=	www
 MASTER_SITES=	http://www.awstats.org/files/
@@ -9,8 +9,6 @@ MAINTAINER=	minskim@NetBSD.org
 HOMEPAGE=	http://www.awstats.org/
 COMMENT=	Free real-time logfile analyzer to get advanced web statistics
 LICENSE=	gnu-gpl-v2
-
-DIST_SUBDIR=		${PKGNAME_NOREV}
 
 NO_BUILD=		yes
 

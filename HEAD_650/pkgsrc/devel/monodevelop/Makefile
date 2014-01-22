@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.57 2013/02/16 11:19:06 wiz Exp $
+# $NetBSD: Makefile,v 1.64 2013/07/05 13:29:29 ryoon Exp $
 
 DISTNAME=	monodevelop-2.4.2
-PKGREVISION=	18
+PKGREVISION=	25
 CATEGORIES=	devel
 MASTER_SITES=	http://ftp.novell.com/pub/mono/sources/monodevelop/
 EXTRACT_SUFX=	.tar.bz2
@@ -41,7 +41,7 @@ SUBST_SED.fix-gmake=		-e 's,MAKEPROGRAM,${MAKE_PROGRAM},'
 .include "../../devel/mono-addins/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../graphics/libgdiplus/buildlink3.mk"
-.include "../../lang/mono/buildlink3.mk"
+.include "../../lang/mono2/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../x11/gtksourceview-sharp2/buildlink3.mk"
 .include "../../x11/gtk-sharp/buildlink3.mk"

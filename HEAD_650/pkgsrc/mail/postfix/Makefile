@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.262 2013/03/02 20:33:28 wiz Exp $
+# $NetBSD: Makefile,v 1.265 2013/06/07 16:30:25 jperkin Exp $
 
 DISTNAME=	postfix-2.9.6
-PKGREVISION=	1
+PKGREVISION=	4
 CATEGORIES=	mail
 MASTER_SITES=	ftp://ftp.porcupine.org/mirrors/postfix-release/official/
 MASTER_SITES+=	http://postfix.it-austria.net/releases/official/
@@ -142,6 +142,8 @@ SUBST_MESSAGE.nis=	Working around dropped support for NIS+ on SunOS
 SUBST_STAGE.nis=	post-patch
 SUBST_SED.nis=		-e 's,\#define HAS_NISPLUS,\#undef HAS_NISPLUS,g'
 .endif
+
+CFLAGS.SunOS+=		-D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64
 
 .if !empty(USE_DESTDIR:M[Yy][Ee][Ss])
 DESTDIR_INSTALLOPTIONS=-package install_root="${DESTDIR}"

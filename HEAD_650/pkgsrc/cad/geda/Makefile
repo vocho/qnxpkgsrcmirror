@@ -1,15 +1,15 @@
-# $NetBSD: Makefile,v 1.84 2013/02/16 11:20:27 wiz Exp $
+# $NetBSD: Makefile,v 1.89 2013/07/02 01:14:40 dmcmahill Exp $
 #
 
 DISTNAME=	geda-gaf-1.6.2
 PKGNAME=	${DISTNAME:S/-gaf-/-/}
-PKGREVISION=	13
+PKGREVISION=	17
 CATEGORIES=	cad
 MASTER_SITES=	ftp://ftp.geda.seul.org/pub/geda/release/v1.6/${PKGVERSION_NOREV}/ \
 		http://geda.seul.org/release/v1.6/${PKGVERSION_NOREV}/
 
 MAINTAINER=	dmcmahill@NetBSD.org
-HOMEPAGE=	http://www.gpleda.org/
+HOMEPAGE=	http://www.geda-project.org/
 COMMENT=	Toolset for automating electronic design
 LICENSE=	gnu-gpl-v2
 

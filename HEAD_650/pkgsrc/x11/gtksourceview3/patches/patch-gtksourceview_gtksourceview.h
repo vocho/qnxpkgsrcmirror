@@ -1,4 +1,4 @@
-$NetBSD: patch-gtksourceview_gtksourceview.h,v 1.1 2012/08/31 19:43:49 prlw1 Exp $
+$NetBSD: patch-gtksourceview_gtksourceview.h,v 1.3 2013/07/08 12:14:46 ryoon Exp $
 
 Continuation lines not parsed correctly in enum.
 

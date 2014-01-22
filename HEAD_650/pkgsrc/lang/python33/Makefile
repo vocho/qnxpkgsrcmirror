@@ -1,9 +1,8 @@
-# $NetBSD: Makefile,v 1.6 2013/02/06 23:22:38 jperkin Exp $
+# $NetBSD: Makefile,v 1.8 2013/07/15 02:02:24 ryoon Exp $
 
 .include "dist.mk"
 
 PKGNAME=	python33-${PY_DISTVERSION}
-PKGREVISION=	2
 CATEGORIES=	lang python
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
@@ -114,7 +113,6 @@ post-build:
 	ldrel -S2M -L ${WRKSRC}/python
 .endif
 
-USE_GNU_READLINE=			yes
 BUILDLINK_DEPMETHOD.readline=		build
 
 .include "../../archivers/bzip2/buildlink3.mk"

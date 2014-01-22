@@ -1,6 +1,6 @@
 #! /bin/sh
 
-# $NetBSD: bootstrap,v 1.191 2013/03/11 22:48:23 tcort Exp $
+# $NetBSD: bootstrap,v 1.194 2013/06/14 15:07:37 tron Exp $
 #
 # Copyright (c) 2001-2011 Alistair Crooks <agc@NetBSD.org>
 # All rights reserved.
@@ -497,11 +497,20 @@ Darwin)
 	osrev=`uname -r`
 	macosx_version=`echo $osrev | awk -F . '{ print "10."$1-4; }'`
 	case "$macosx_version" in
+	10.[7-8])
+		packagemaker=/Applications/PackageMaker.app/Contents/MacOS/PackageMaker
+		;;
 	10.[0-4])
 		packagemaker=/Developer/Tools/packagemaker
 		;;
 	*)
 		packagemaker=/Developer/usr/bin/packagemaker
+		;;
+	esac
+	case "$macosx_version" in
+	10.[8-9])
+		need_awk=yes
+		need_sed=yes
 		;;
 	esac
 	unset osrev macosx_version
@@ -620,7 +629,13 @@ Linux)
 		root_group=root
 	fi
 	need_bsd_install=no
-	need_awk=no
+	# Debian/Ubuntu's awk is mawk, and mawk does not understand
+	# some regexp used in pkgsrc/mk.
+	if [ -f /etc/debian_version ]; then
+		need_awk=yes
+	else
+		need_awk=no
+	fi
 	need_sed=no
 	set_opsys=no
 	machine_arch=`uname -m | sed -e 's/i.86/i386/'`

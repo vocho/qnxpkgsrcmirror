@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.91 2013/01/06 03:21:46 ryoon Exp $
+# $NetBSD: Makefile,v 1.93 2013/07/15 19:55:31 christos Exp $
 
 DISTNAME=	nas-1.9.3.src
 PKGNAME=	${DISTNAME:S/.src//}
+PKGREVISION=	1
 CATEGORIES=	audio
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=nas/}
 
@@ -17,7 +18,7 @@ PKG_INSTALLATION_TYPES=	overwrite pkgviews
 MAKE_JOBS_SAFE=		no
 
 WRKSRC=			${WRKDIR}/${PKGNAME_NOREV}
-USE_TOOLS+=		gmake yacc lex makedepend
+USE_TOOLS+=		yacc lex makedepend
 USE_IMAKE=		yes
 
 PKG_SYSCONFSUBDIR=	nas

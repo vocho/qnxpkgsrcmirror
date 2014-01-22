@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.5 2013/02/16 11:18:09 wiz Exp $
+# $NetBSD: Makefile,v 1.9 2013/06/07 15:57:47 ryoon Exp $
 
 PKGVER=		2.3.4
-PKGREVISION=	3
+PKGREVISION=	6
 DISTNAME=	motif-${PKGVER}-src
 PKGNAME=	motif-${PKGVER}
 CATEGORIES=	x11
@@ -45,6 +45,8 @@ CONFIGURE_ARGS+= \
 		--x-libraries=${X11BASE}/lib
 
 CONFIGURE_ARGS+= --disable-printing
+
+BUILDLINK_TRANSFORM+=	l:Xft:Xft:fontconfig
 
 # Don't compress manual pages as they include each other.
 .undef MANZ

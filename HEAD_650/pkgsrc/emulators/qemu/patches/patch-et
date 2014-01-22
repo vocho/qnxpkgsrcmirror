@@ -1,8 +1,8 @@
-$NetBSD: patch-et,v 1.6 2013/01/24 17:52:01 ryoon Exp $
+$NetBSD: patch-et,v 1.8 2013/07/09 17:00:58 tsutsui Exp $
 
---- Makefile.orig	2012-12-03 19:37:05.000000000 +0000
+--- Makefile.orig	2013-06-26 21:47:29.000000000 +0000
 +++ Makefile
-@@ -330,8 +330,9 @@ install-datadir:
+@@ -324,8 +324,9 @@ install-datadir:
  install-confdir:
  	$(INSTALL_DIR) "$(DESTDIR)$(qemu_confdir)"
  

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.398 2013/04/13 11:13:13 ryoon Exp $
+# $NetBSD: Makefile,v 1.402 2013/05/28 12:55:22 wiz Exp $
 #
 
 COMMENT=	Miscellaneous utilities
@@ -153,6 +153,7 @@ SUBDIR+=	kstars
 SUBDIR+=	ktouch
 SUBDIR+=	kturtle
 SUBDIR+=	kwordquiz
+SUBDIR+=	kz_h8write
 SUBDIR+=	labelnation
 SUBDIR+=	latin-words-bin
 SUBDIR+=	less
@@ -227,10 +228,8 @@ SUBDIR+=	pinfo
 SUBDIR+=	ppower
 SUBDIR+=	pty-redir
 SUBDIR+=	py-anita
-SUBDIR+=	py-anki
 SUBDIR+=	py-anki2
 SUBDIR+=	py-carddav
-SUBDIR+=	py-libanki
 SUBDIR+=	qbrew
 SUBDIR+=	qterm
 SUBDIR+=	raspberrypi-userland
@@ -243,14 +242,18 @@ SUBDIR+=	routeplanner-cli
 SUBDIR+=	rox-memo
 SUBDIR+=	rpm
 SUBDIR+=	ruby-ansi
+SUBDIR+=	ruby-args_parser
 SUBDIR+=	ruby-bundler
 SUBDIR+=	ruby-columnize
 SUBDIR+=	ruby-commander
 SUBDIR+=	ruby-configuration
 SUBDIR+=	ruby-daemons
 SUBDIR+=	ruby-gem_plugin
+SUBDIR+=	ruby-hashie
 SUBDIR+=	ruby-launchy
+SUBDIR+=	ruby-parallel
 SUBDIR+=	ruby-progressbar
+SUBDIR+=	ruby-rainbow
 SUBDIR+=	ruby-sprockets
 SUBDIR+=	ruby-sprockets22
 SUBDIR+=	ruby-transaction-simple
@@ -287,6 +290,7 @@ SUBDIR+=	usbprog
 SUBDIR+=	utftools
 SUBDIR+=	vera
 SUBDIR+=	vfu
+SUBDIR+=	vimpager
 SUBDIR+=	visual-regexp
 SUBDIR+=	vttest
 SUBDIR+=	vym

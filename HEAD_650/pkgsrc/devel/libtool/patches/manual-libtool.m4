@@ -14,6 +14,24 @@ $NetBSD$
  ])
  
  
+@@ -1098,7 +1101,7 @@ m4_defun([_LT_DARWIN_LINKER_FEATURES],
+   _LT_TAGVAR(allow_undefined_flag, $1)="$_lt_dar_allow_undefined"
+   case $cc_basename in
+      ifort*) _lt_dar_can_shared=yes ;;
+-     *) _lt_dar_can_shared=$GCC ;;
++     *) _lt_dar_can_shared=yes ;;
+   esac
+   if test "$_lt_dar_can_shared" = "yes"; then
+     output_verbose_link_cmd=func_echo_all
+@@ -1638,7 +1641,7 @@ AC_CACHE_VAL([lt_cv_sys_max_cmd_len], [d
+     lt_cv_sys_max_cmd_len=8192;
+     ;;
+ 
+-  netbsd* | freebsd* | openbsd* | darwin* | dragonfly*)
++  netbsd* | freebsd* | openbsd* | mirbsd* | darwin* | dragonfly*)
+     # This has been around since 386BSD, at least.  Likely further.
+     if test -x /sbin/sysctl; then
+       lt_cv_sys_max_cmd_len=`/sbin/sysctl -n kern.argmax`
 @@ -2468,7 +2471,7 @@ dgux*)
    shlibpath_var=LD_LIBRARY_PATH
    ;;
@@ -356,7 +374,30 @@ $NetBSD$
    AC_PROG_CXXCPP
  else
    _lt_caught_CXX_error=yes
-@@ -6552,19 +6656,21 @@ if test "$_lt_caught_CXX_error" != yes; 
+@@ -6538,6 +6642,22 @@ if test "$_lt_caught_CXX_error" != yes; 
+         _LT_TAGVAR(ld_shlibs, $1)=no
+ 	;;
+ 
++      mirbsd*)
++	if test -f /usr/libexec/ld.so; then
++	  _LT_TAGVAR(hardcode_direct, $1)=yes
++	  _LT_TAGVAR(hardcode_shlibpath_var, $1)=no
++	  _LT_TAGVAR(hardcode_direct_absolute, $1)=yes
++	  _LT_TAGVAR(archive_cmds, $1)='$CC -shared $pic_flag $predep_objects $libobjs $deplibs $postdep_objects $compiler_flags -o $lib'
++	  _LT_TAGVAR(archive_expsym_cmds, $1)='$CC -shared $pic_flag $predep_objects $libobjs $deplibs $postdep_objects $compiler_flags ${wl}-retain-symbols-file,$export_symbols -o $lib'
++	  _LT_TAGVAR(hardcode_libdir_flag_spec, $1)='${wl}-rpath,$libdir'
++	  _LT_TAGVAR(export_dynamic_flag_spec, $1)='${wl}-E'
++	  _LT_TAGVAR(whole_archive_flag_spec, $1)="$wlarc"'--whole-archive$convenience '"$wlarc"'--no-whole-archive'
++	  output_verbose_link_cmd='echo'
++	else
++	  _LT_TAGVAR(ld_shlibs, $1)=no
++	fi
++	;;
++
+       mvs*)
+         case $cc_basename in
+           cxx*)
+@@ -6552,19 +6672,21 @@ if test "$_lt_caught_CXX_error" != yes; 
  	;;
  
        netbsd*)
@@ -387,7 +428,7 @@ $NetBSD$
  	;;
  
        openbsd2*)
-@@ -6740,9 +6846,9 @@ if test "$_lt_caught_CXX_error" != yes; 
+@@ -6740,9 +6862,9 @@ if test "$_lt_caught_CXX_error" != yes; 
  	    if test "$GXX" = yes && test "$with_gnu_ld" = no; then
  	      _LT_TAGVAR(no_undefined_flag, $1)=' ${wl}-z ${wl}defs'
  	      if $CC --version | $GREP -v '^2\.7' > /dev/null; then
@@ -399,7 +440,7 @@ $NetBSD$
  
  	        # Commands to make compiler produce verbose output that lists
  	        # what "hidden" libraries, object files and flags are used when
-@@ -6751,9 +6857,9 @@ if test "$_lt_caught_CXX_error" != yes; 
+@@ -6751,9 +6873,9 @@ if test "$_lt_caught_CXX_error" != yes; 
  	      else
  	        # g++ 2.7 appears to require `-G' NOT `-shared' on this
  	        # platform.
@@ -411,7 +452,7 @@ $NetBSD$
  
  	        # Commands to make compiler produce verbose output that lists
  	        # what "hidden" libraries, object files and flags are used when
-@@ -7080,6 +7186,10 @@ CFLAGS=$_lt_libdeps_save_CFLAGS
+@@ -7080,6 +7202,10 @@ CFLAGS=$_lt_libdeps_save_CFLAGS
  # PORTME: override above test on systems where it is broken
  m4_if([$1], [CXX],
  [case $host_os in

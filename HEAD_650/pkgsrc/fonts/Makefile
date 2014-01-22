@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.233 2013/03/11 18:48:14 wiz Exp $
+# $NetBSD: Makefile,v 1.235 2013/05/31 01:12:51 rodent Exp $
 #
 
 COMMENT=	Fonts
@@ -132,6 +132,7 @@ SUBDIR+=	ko-mizi
 SUBDIR+=	ko-x11fonts
 SUBDIR+=	kochi-ttf
 SUBDIR+=	konatu-ttf
+SUBDIR+=	libXfontcache
 SUBDIR+=	liberation-ttf
 SUBDIR+=	libfontenc
 SUBDIR+=	linux-libertine-ttf
@@ -302,6 +303,7 @@ SUBDIR+=	ttf2pt1
 SUBDIR+=	ttftot42
 SUBDIR+=	ttmkfdir2
 SUBDIR+=	type1inst
+SUBDIR+=	ubuntu-fonts
 SUBDIR+=	umefont-ttf
 SUBDIR+=	un-core-ttf
 SUBDIR+=	un-extra-ttf

@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.9 2013/02/19 22:35:15 joerg Exp $
+# $NetBSD: Makefile,v 1.12 2013/07/04 21:27:58 adam Exp $
 #
 
 DISTNAME=		pdns-recursor-3.3
+PKGREVISION=		1
 CATEGORIES=		net
 MASTER_SITES=		http://downloads.powerdns.com/releases/
 EXTRACT_SUFX=		.tar.bz2
@@ -28,9 +29,15 @@ INSTALL_MAKE_FLAGS+=	CONFIGDIR=${EGDIR} MANDIR=${PREFIX}/${PKGMANDIR}
 CONF_FILES+=		${EGDIR}/recursor.conf-dist \
 			${PKG_SYSCONFDIR}/recursor.conf
 
+SUBST_CLASSES+=			whitespace
+SUBST_STAGE.whitespace=		pre-configure
+SUBST_MESSAGE.whitespace=	Fixing C++ semantic whitespace.
+SUBST_FILES.whitespace=		pdns_recursor.cc
+SUBST_SED.whitespace=		-e 's|"VERSION"|" VERSION "|'
+
 .include "../../mk/compiler.mk"
 .if !empty(PKGSRC_COMPILER:Mclang)
-CXXFLAGS+=	-std=c++11
+CXXFLAGS+=	-std=c++11 -Wno-c++11-narrowing
 .endif
 
 .include "options.mk"

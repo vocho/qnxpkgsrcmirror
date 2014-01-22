@@ -153,11 +153,11 @@ $NetBSD$
 +           break;
 +        default:
 +           xf86Msg(X_ERROR,"\"%s\" is not a valid keyboard protocol name\n", s);
-+           xfree(s);
++           free(s);
 +           return FALSE;
 +    }
 +    xf86Msg(X_CONFIG, "%s: Protocol: %s\n", pInfo->name, s);
-+    xfree(s);
++    free(s);
 +
 +	n = PATH_HID_KEYBOARD;
 +    s = xf86SetStrOption(pInfo->options, "Device", NULL);
@@ -168,7 +168,7 @@ $NetBSD$
 +	if (pInfo->fd == -1) {
 +		xf86Msg(X_ERROR, "%s: cannot open \"%s\"\n", pInfo->name, n);
 +		if (s)
-+		  xfree(s);
++		  free(s);
 +		return FALSE;
 +	}
 +	
@@ -194,7 +194,7 @@ $NetBSD$
 +    pKbd->OpenKeyboard = OpenKeyboard;
 +    pKbd->CustomKeycodes = FALSE;
 +    
-+    pKbd->private = xcalloc(sizeof(NtoKbdPrivRec), 1);
++    pKbd->private = calloc(sizeof(NtoKbdPrivRec), 1);
 +    if (pKbd->private == NULL) {
 +       xf86Msg(X_ERROR,"can't allocate keyboard OS private data\n");
 +       return FALSE;

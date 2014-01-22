@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.69 2013/02/16 11:23:27 wiz Exp $
+# $NetBSD: Makefile,v 1.75 2013/06/12 15:29:37 wiz Exp $
 
-DISTNAME=	stellarium-0.12.0
-PKGREVISION=	2
+DISTNAME=	stellarium-0.12.1
+PKGREVISION=	5
 CATEGORIES=	misc
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=stellarium/}
 
@@ -33,7 +33,7 @@ BUILDLINK_TRANSFORM+=	rm:-Wno-unused-but-set-variable
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../graphics/png/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
-#.include "../../sysutils/desktop-file-utils/desktopdb.mk"
+.include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../x11/qt4-libs/buildlink3.mk"
 .include "../../x11/qt4-tools/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

@@ -1,9 +1,8 @@
-# $NetBSD: Makefile,v 1.9 2012/10/31 11:19:14 asau Exp $
+# $NetBSD: Makefile,v 1.11 2013/06/29 09:21:13 sno Exp $
 #
 
-DISTNAME=	Try-Tiny-0.11
+DISTNAME=	Try-Tiny-0.12
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	1
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=../../authors/id/D/DO/DOY/}
 

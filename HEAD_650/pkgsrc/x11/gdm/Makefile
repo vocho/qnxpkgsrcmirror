@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.173 2013/02/16 11:24:59 wiz Exp $
+# $NetBSD: Makefile,v 1.179 2013/06/23 18:00:19 jperkin Exp $
 #
 
 DISTNAME=	gdm-2.20.11
-PKGREVISION=	13
+PKGREVISION=	17
 CATEGORIES=	x11 gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gdm/2.20/}
 EXTRACT_SUFX=	.tar.bz2
@@ -121,7 +121,7 @@ PLIST.dmx=		yes
 PRINT_PLIST_AWK+=	/dmx/ { print "$${DMX}" $$0; next }
 
 PLIST_VARS+=		gdmopen
-.if exists(/usr/include/linux/vt.h)
+.if exists(/usr/include/linux/vt.h) || ${OPSYS} == "SunOS"
 PLIST.gdmopen=		yes
 .endif
 PRINT_PLIST_AWK+=	/gdmopen/ { print "$${GDMOPEN}" $$0; next }
@@ -136,6 +136,7 @@ BUILDLINK_API_DEPENDS.libart+=	libart>=2.3.11
 .include "../../graphics/libart/buildlink3.mk"
 .include "../../graphics/libgnomecanvas/buildlink3.mk"
 .include "../../graphics/librsvg/buildlink3.mk"
+.include "../../security/tcp_wrappers/buildlink3.mk"
 .include "../../textproc/gnome-doc-utils/buildlink3.mk"
 .include "../../textproc/libxml2/buildlink3.mk"
 .include "../../mk/omf-scrollkeeper.mk"

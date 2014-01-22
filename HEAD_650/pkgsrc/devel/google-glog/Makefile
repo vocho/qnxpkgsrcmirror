@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.2 2013/02/26 10:24:50 joerg Exp $
+# $NetBSD: Makefile,v 1.4 2013/07/18 12:01:29 joerg Exp $
 #
 
 DISTNAME=	glog-0.3.3
 PKGNAME=	google-${DISTNAME}
+PKGREVISION=	1
 CATEGORIES=	devel
 MASTER_SITES=	http://google-glog.googlecode.com/files/
 
@@ -22,6 +23,11 @@ PKGCONFIG_OVERRIDE+=	libglog.pc.in
 
 .if ${OPSYS} == "NetBSD" && exists(/usr/include/execinfo.h)
 LIBS+=		-lexecinfo
+.endif
+
+.include "../../mk/compiler.mk"
+.if !empty(PKGSRC_COMPILER:Mclang)
+CXXFLAGS+=	-std=c++11
 .endif
 
 .include "../../devel/googletest/buildlink3.mk"

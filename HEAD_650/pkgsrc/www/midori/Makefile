@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.54 2013/03/15 18:28:50 drochner Exp $
+# $NetBSD: Makefile,v 1.60 2013/06/06 12:55:11 wiz Exp $
 
 DISTNAME=	midori-0.4.9
+PKGREVISION=	5
 CATEGORIES=	www
 MASTER_SITES=	http://archive.xfce.org/src/apps/midori/0.4/
 
@@ -75,5 +76,5 @@ BUILDLINK_API_DEPENDS.libsoup24+=libsoup24>=2.26.0
 .include "../../sysutils/libnotify/buildlink3.mk"
 .include "../../x11/gtk2/buildlink3.mk"
 BUILDLINK_DEPMETHOD.vala= build
-.include "../../lang/vala018/buildlink3.mk"
+.include "../../lang/vala020/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

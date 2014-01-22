@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.192 2013/02/16 11:19:19 wiz Exp $
+# $NetBSD: Makefile,v 1.198 2013/07/03 21:43:14 jperkin Exp $
 
 DISTNAME=		evolution-2.32.3
-PKGREVISION=		17
+PKGREVISION=		22
 CATEGORIES=		mail time gnome
 MASTER_SITES=		${MASTER_SITE_GNOME:=sources/evolution/2.32/}
 EXTRACT_SUFX=		.tar.bz2
@@ -55,6 +55,8 @@ BUILDLINK_TRANSFORM+=	rm:-DGTK_DISABLE_DEPRECATED
 .if ${OPSYS} == "NetBSD" && !empty(OS_VERSION:M4.*)
 BUILDLINK_TRANSFORM+=	rm:-Wl,--no-undefined
 .endif
+
+LDFLAGS.SunOS+=		-lldap
 
 .if !exists(/usr/include/semaphore.h)
 LDFLAGS+=	-lsemaphore

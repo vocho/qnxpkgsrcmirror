@@ -1,10 +1,11 @@
-# $NetBSD: Makefile,v 1.85 2013/04/06 14:58:18 rodent Exp $
+# $NetBSD: Makefile,v 1.92 2013/07/05 13:29:35 ryoon Exp $
 #
 
-PKGNAME=	kipi-plugins-3.1.0
-DISTNAME=	digikam-3.1.0
+PKGNAME=	kipi-plugins-3.2.0
+DISTNAME=	digikam-3.2.0
+PKGREVISION=	4
 CATEGORIES=	graphics
-MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=digikam/}
+MASTER_SITES=	${MASTER_SITE_KDE:=digikam/}
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
@@ -18,7 +19,7 @@ DEPENDS+=	xdg-utils-[0-9]*:../../misc/xdg-utils
 
 USE_PKGLOCALEDIR=	yes
 USE_LANGUAGES=		c c++
-USE_TOOLS+=		msgfmt pkg-config
+USE_TOOLS+=		msgfmt pkg-config bison
 
 WRKSRC=			${WRKDIR}/${DISTNAME}/extra/kipi-plugins
 

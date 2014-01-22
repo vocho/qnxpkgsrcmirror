@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.3 2013/04/06 21:07:33 rodent Exp $
+# $NetBSD: Makefile,v 1.5 2013/07/21 14:05:36 shattered Exp $
 #
 #	Request by the author:
 #
@@ -8,7 +8,7 @@
 #	> There should be no patches in whatever
 #	> you distribute. Updatedcc must work.
 #
-DISTNAME=		dcc-1.3.123
+DISTNAME=		dcc-1.3.147
 CATEGORIES=		mail
 MASTER_SITES=		http://www.rhyolite.com/dcc/source/old/
 EXTRACT_SUFX=		.tar.Z

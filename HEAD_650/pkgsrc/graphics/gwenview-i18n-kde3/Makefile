@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.8 2013/02/16 11:22:08 wiz Exp $
+# $NetBSD: Makefile,v 1.12 2013/06/06 12:54:31 wiz Exp $
 #
 
 DISTNAME=	gwenview-i18n-1.4.2
-PKGREVISION=	17
+PKGREVISION=	21
 CATEGORIES=	kde graphics
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=gwenview/}
 EXTRACT_SUFX=	.tar.bz2

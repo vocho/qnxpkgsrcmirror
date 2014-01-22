@@ -1,4 +1,4 @@
-$NetBSD: patch-ag,v 1.2 2012/05/16 17:42:37 tron Exp $
+$NetBSD: patch-ag,v 1.4 2013/06/02 22:52:14 tron Exp $
 
 Fix handling of command line options. Please look here for details:
 
