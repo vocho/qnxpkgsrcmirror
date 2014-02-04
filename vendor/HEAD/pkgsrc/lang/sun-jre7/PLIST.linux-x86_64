@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST.linux-x86_64,v 1.2 2013/07/04 12:25:31 obache Exp $
+@comment $NetBSD: PLIST.linux-x86_64,v 1.4 2014/01/20 19:21:31 joerg Exp $
 bin/sun7-java
 bin/sun7-javaws
 bin/sun7-keytool
@@ -75,7 +75,6 @@ java/sun-7/lib/amd64/libnio.so
 java/sun-7/lib/amd64/libnpjp2.so
 java/sun-7/lib/amd64/libnpt.so
 java/sun-7/lib/amd64/libprism-es2.so
-java/sun-7/lib/amd64/librmi.so
 java/sun-7/lib/amd64/libsctp.so
 java/sun-7/lib/amd64/libsplashscreen.so
 java/sun-7/lib/amd64/libsunec.so
@@ -99,6 +98,7 @@ java/sun-7/lib/content-types.properties.default
 java/sun-7/lib/currency.data
 java/sun-7/lib/deploy.jar
 java/sun-7/lib/deploy/MixedCodeMainDialog.ui
+java/sun-7/lib/deploy/MixedCodeMainDialogJs.ui
 java/sun-7/lib/deploy/cautionshield.icns
 java/sun-7/lib/deploy/ffjcext.zip
 java/sun-7/lib/deploy/java-icon.ico
@@ -214,6 +214,8 @@ java/sun-7/lib/javafx.properties.default
 java/sun-7/lib/javaws.jar
 java/sun-7/lib/jce.jar
 java/sun-7/lib/jexec
+java/sun-7/lib/jfr/default.jfc
+java/sun-7/lib/jfr/profile.jfc
 java/sun-7/lib/jfr.jar
 java/sun-7/lib/jfxrt.jar
 java/sun-7/lib/jsse.jar
@@ -260,7 +262,6 @@ java/sun-7/lib/security/javafx.policy
 java/sun-7/lib/security/javaws.policy
 java/sun-7/lib/security/local_policy.jar
 java/sun-7/lib/security/trusted.libraries
-java/sun-7/lib/servicetag/jdk_header.png
 java/sun-7/lib/sound.properties.default
 java/sun-7/lib/zi/Africa/Abidjan
 java/sun-7/lib/zi/Africa/Accra

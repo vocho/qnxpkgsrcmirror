@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.56 2013/07/15 02:02:23 ryoon Exp $
+# $NetBSD: Makefile,v 1.58 2013/12/15 09:42:14 richard Exp $
 
 DISTNAME=	gawk-4.1.0
+PKGREVISION=	1
 CATEGORIES=	lang
 MASTER_SITES=	${MASTER_SITE_GNU:=gawk/}
 EXTRACT_SUFX=	.tar.xz
@@ -16,7 +17,7 @@ PKG_INSTALLATION_TYPES=	overwrite pkgviews
 
 USE_LIBTOOL=		yes
 USE_PKGLOCALEDIR=	yes
-USE_TOOLS+=		msgfmt
+USE_TOOLS+=		msgfmt msgmerge xgettext
 GNU_CONFIGURE=		yes
 TEST_TARGET=		check
 INFO_FILES=		yes
@@ -34,6 +35,11 @@ CPPFLAGS.OSF1+=		-D_OSF_SOURCE
 CFLAGS+=	-Dvm_region=vm_region_64
 .endif
 
+PLIST_VARS+=		extension
+.if "${OPSYS}" != "MirBSD"
+PLIST.extension=	yes
+.endif 
+
 INSTALLATION_DIRS+=	${PKGGNUDIR}bin ${PKGGNUDIR}${PKGMANDIR}/man1
 
 post-install:
@@ -43,4 +49,6 @@ post-install:
 BUILDLINK_API_DEPENDS.gettext+=	gettext-lib>=0.10.36
 
 .include "../../devel/gettext-lib/buildlink3.mk"
+.include "../../devel/gmp/buildlink3.mk"
+.include "../../math/mpfr/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

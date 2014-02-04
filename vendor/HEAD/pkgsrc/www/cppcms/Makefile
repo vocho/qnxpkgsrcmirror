@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.2 2013/07/16 14:37:20 joerg Exp $
+# $NetBSD: Makefile,v 1.5 2013/10/19 09:07:12 adam Exp $
 
 DISTNAME=	cppcms-1.0.4
+PKGREVISION=	2
 CATEGORIES=	www devel
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=cppcms/}
 EXTRACT_SUFX=	.tar.bz2
@@ -20,12 +21,17 @@ CMAKE_ARGS+=	-DPYTHON=${PYTHONBIN} -DDISABLE_GCRYPT=yes
 CXXFLAGS+=	-std=c++11
 .endif
 
+CXXFLAGS.Cygwin+=	-std=gnu++11
+
 LDFLAGS+=	${EXPORT_SYMBOLS_LDFLAGS}
 
 TEST_TARGET=	test
 TEST_ENV+=	LD_LIBRARY_PATH=${WRKSRC}:${WRKSRC}/booster
 
 REPLACE_PYTHON=	bin/cppcms_tmpl_cc
+
+pre-install:
+	rm -f ${WRKSRC}/cppcms/string_key.h.orig
 
 .include "../../converters/libiconv/buildlink3.mk"
 .include "../../devel/pcre/buildlink3.mk"

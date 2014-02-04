@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.50 2013/07/04 21:42:40 adam Exp $
+@comment $NetBSD: PLIST,v 1.52 2013/12/01 11:58:44 adam Exp $
 bin/gimp
 bin/gimp-2.8
 bin/gimp-console
@@ -297,6 +297,7 @@ lib/gimp/2.0/plug-ins/file-glob
 lib/gimp/2.0/plug-ins/file-header
 lib/gimp/2.0/plug-ins/file-html-table
 lib/gimp/2.0/plug-ins/file-ico
+lib/gimp/2.0/plug-ins/file-jp2-load
 lib/gimp/2.0/plug-ins/file-jpeg
 ${PLIST.mng}lib/gimp/2.0/plug-ins/file-mng
 lib/gimp/2.0/plug-ins/file-pat
@@ -421,6 +422,7 @@ man/man1/gimptool-2.0.1
 man/man5/gimprc-2.8.5
 man/man5/gimprc.5
 share/aclocal/gimp-2.0.m4
+share/appdata/gimp.appdata.xml
 share/applications/gimp.desktop
 share/examples/gimp-2.0/controllerrc
 share/examples/gimp-2.0/gimprc

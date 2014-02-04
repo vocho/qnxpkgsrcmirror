@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.22 2013/07/06 16:27:35 ryoon Exp $
-#
+# $NetBSD: Makefile,v 1.25 2014/01/25 10:30:16 wiz Exp $
 
 DISTNAME=	gupnp-igd-0.2.2
-PKGREVISION=	3
+PKGREVISION=	5
 CATEGORIES=	net devel
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gupnp-igd/0.2/}
 EXTRACT_SUFX=	.tar.xz
@@ -18,6 +17,7 @@ USE_TOOLS+=	gmake pkg-config
 
 PKGCONFIG_OVERRIDE+=	gupnp-igd-1.0.pc.in
 PY_PATCHPLIST=	yes
+PYTHON_VERSIONS_INCOMPATIBLE=	33 # not yet ported as of 0.2.2
 
 CONFIGURE_ENV+=	PYTHON=${PYTHONBIN:Q}
 

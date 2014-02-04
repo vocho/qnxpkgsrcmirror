@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.5 2013/06/04 22:16:58 tron Exp $
+# $NetBSD: Makefile,v 1.7 2014/01/10 21:49:22 joerg Exp $
 
 DISTNAME=	ghostscript-${GS_VERSION}
 PKGNAME=	${DISTNAME:S/ghostscript/ghostscript-gpl/}
@@ -11,6 +11,9 @@ EXTRACT_SUFX=	.tar.bz2
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://ghostscript.sourceforge.net/
 COMMENT=	Postscript interpreter
+
+# iconfig.c compiled before gconfig.h is created
+MAKE_JOBS_SAFE=no
 
 # Plus adobe verbatim for Resources/CMap.
 LICENSE=	gnu-gpl-v3
@@ -81,6 +84,9 @@ BUILDLINK_TRANSFORM+=	l:fontconfig:fontconfig:iconv
 .endif
 
 CONFIGURE_ENV+=	LPLIBDIR=${PREFIX}/lib
+
+# On OpenBSD 5.3, libxcb is required libXt.
+LDFLAGS.OpenBSD+=	-lxcb
 
 .include "options.mk"
 

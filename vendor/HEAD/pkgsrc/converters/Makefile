@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.122 2013/07/04 15:59:11 wiz Exp $
+# $NetBSD: Makefile,v 1.127 2014/02/02 07:33:18 ryoon Exp $
 #
 
 COMMENT=	Document format and character code converters
@@ -31,8 +31,14 @@ SUBDIR+=	ja-dvi2tty
 SUBDIR+=	jcode-perl
 SUBDIR+=	kcc
 SUBDIR+=	latex2rtf
+SUBDIR+=	libabw
 SUBDIR+=	libcdr
+SUBDIR+=	libe-book
+SUBDIR+=	libetonyek
+SUBDIR+=	libfreehand
 SUBDIR+=	libiconv
+SUBDIR+=	libmspub
+SUBDIR+=	libmwaw
 SUBDIR+=	libvisio
 SUBDIR+=	libwpd
 SUBDIR+=	libwpg
@@ -41,6 +47,7 @@ SUBDIR+=	macfork
 SUBDIR+=	mpack
 SUBDIR+=	nkf
 SUBDIR+=	odt2txt
+SUBDIR+=	orcus
 SUBDIR+=	p5-Convert-BinHex
 SUBDIR+=	p5-Convert-Color
 SUBDIR+=	p5-Convert-TNEF
@@ -82,6 +89,7 @@ SUBDIR+=	py-simplejson
 SUBDIR+=	py-zbase32
 SUBDIR+=	py-zfec
 SUBDIR+=	py-zhCodecs
+SUBDIR+=	pyzy
 SUBDIR+=	qkc
 SUBDIR+=	qrencode
 SUBDIR+=	recode

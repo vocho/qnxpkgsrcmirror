@@ -1,5 +1,5 @@
-$NetBSD: distinfo,v 1.2 2012/08/26 12:53:03 adam Exp $
+$NetBSD: distinfo,v 1.4 2013/11/01 11:11:23 adam Exp $
 
-SHA1 (south-0.7.6.tar.gz) = 651f0fdedf009fe01ab8fc7d5ebe4b38a228826d
-RMD160 (south-0.7.6.tar.gz) = 0276e4de48ee7089cb8bcb848c17388e695ff97e
-Size (south-0.7.6.tar.gz) = 91528 bytes
+SHA1 (south-0.8.2.tar.gz) = e322b957c90139503f8444a431a82ce0001c7627
+RMD160 (south-0.8.2.tar.gz) = 3df404159c40e16c46f8158a170ddfbc72e829d4
+Size (south-0.8.2.tar.gz) = 95435 bytes

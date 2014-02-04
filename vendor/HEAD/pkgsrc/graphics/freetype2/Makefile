@@ -1,12 +1,13 @@
-# $NetBSD: Makefile,v 1.89 2013/01/06 00:38:13 wiz Exp $
+# $NetBSD: Makefile,v 1.91 2013/12/23 11:57:04 wiz Exp $
 
-DISTNAME=	freetype-2.4.11
+DISTNAME=	freetype-2.4.12
 PKGNAME=	${DISTNAME:S/-/2-/}
 CATEGORIES=	graphics
-MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=freetype/}
+MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=freetype/} \
+		http://download.savannah.gnu.org/releases/freetype/
 EXTRACT_SUFX=	.tar.bz2
 
-MAINTAINER=	rh@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.freetype.org/
 COMMENT=	Font rendering engine and library API
 LICENSE=	gnu-gpl-v2

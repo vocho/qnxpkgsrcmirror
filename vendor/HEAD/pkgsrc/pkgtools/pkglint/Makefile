@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.432 2013/07/15 08:09:34 wiz Exp $
+# $NetBSD: Makefile,v 1.438 2014/01/13 01:54:52 cheusov Exp $
 
 # Note: if you update the version number, please have a look at the
 # changes between the CVS tag "pkglint_current" and HEAD.
 # After updating, please re-set the CVS tag to HEAD.
-DISTNAME=	pkglint-4.131
+DISTNAME=	pkglint-4.135
 CATEGORIES=	pkgtools
 MASTER_SITES=	# none
 DISTFILES=	# none
@@ -11,6 +11,7 @@ DISTFILES=	# none
 OWNER=		wiz@NetBSD.org
 HOMEPAGE=	http://www.NetBSD.org/docs/pkgsrc/
 COMMENT=	Verifier for NetBSD packages
+LICENSE=	2-clause-bsd
 
 DEPENDS+=	p5-Digest-SHA1-[0-9]*:../../security/p5-Digest-SHA1
 DEPENDS+=	p5-enum>=1.016:../../devel/p5-enum
@@ -24,7 +25,7 @@ PKG_INSTALLATION_TYPES=	overwrite pkgviews
 WRKSRC=		${WRKDIR}
 NO_CHECKSUM=	yes
 USE_LANGUAGES=	# none
-USE_TOOLS+=	perl
+USE_TOOLS+=	perl:run
 AUTO_MKDIRS=	yes
 
 .include "../../mk/bsd.prefs.mk"
@@ -48,13 +49,6 @@ SUBST_STAGE.mappaths=	pre-install
 SUBST_FILES.mappaths+=	pkglint.pl
 SUBST_SED.mappaths+=	-e s\|${FILESDIR}\|${PREFIX}/share/pkglint\|g
 
-# Note: This target is only intended for use by the pkglint author.
-.PHONY: quick-install
-quick-install:
-	${RM} -rf ${WRKSRC}
-	${MKDIR} ${WRKSRC}
-	${MAKE} do-extract subst-pkglint do-build do-install selftest clean
-
 do-extract:
 	cd ${FILESDIR} && ${CP} build.pl pkglint.0 pkglint.1 pkglint.pl pkglint.t plist-clash.pl ${WRKSRC}
 	mkdir ${WRKSRC}/PkgLint
@@ -71,7 +65,11 @@ do-install:
 	${INSTALL_SCRIPT} ${WRKSRC}/pkglint.pl ${DESTDIR}${PREFIX}/bin/pkglint
 	${INSTALL_SCRIPT} ${WRKSRC}/plist-clash.pl ${DESTDIR}${PREFIX}/bin/plist-clash
 .if !empty(MANINSTALL:Mcatinstall)
+.  if defined(CATMAN_SECTION_SUFFIX) && !empty(CATMAN_SECTION_SUFFIX:M[Yy][Ee][Ss])
+	${INSTALL_MAN} ${WRKSRC}/pkglint.0 ${DESTDIR}${PREFIX}/${PKGMANDIR}/cat1/pkglint.1
+.  else
 	${INSTALL_MAN} ${WRKSRC}/pkglint.0 ${DESTDIR}${PREFIX}/${PKGMANDIR}/cat1
+.  endif
 .endif
 .if !empty(MANINSTALL:Mmaninstall)
 	${INSTALL_MAN} ${WRKSRC}/pkglint.1 ${DESTDIR}${PREFIX}/${PKGMANDIR}/man1

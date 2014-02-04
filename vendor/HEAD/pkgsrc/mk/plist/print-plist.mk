@@ -1,4 +1,4 @@
-# $NetBSD: print-plist.mk,v 1.24 2013/07/05 15:31:54 jperkin Exp $
+# $NetBSD: print-plist.mk,v 1.26 2014/01/24 12:42:52 obache Exp $
 
 ###
 ### Automatic PLIST generation
@@ -29,6 +29,7 @@ _PRINT_PLIST_AWK_SUBST+=						\
 	gsub("^${PKGGNUDIR:S/\/$$//}/", "gnu/");			\
 	gsub("^${PKGINFODIR}/", "info/");				\
 	gsub("^${PKGMANDIR}/", "man/");
+
 _PRINT_PLIST_AWK_SUBST+=}
 
 _PRINT_PLIST_AWK_IGNORE=	($$0 ~ /^${PKG_DBDIR:S|^${PREFIX}/||:S|/|\\/|g}\//)

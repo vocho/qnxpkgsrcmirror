@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.73 2013/07/05 13:29:40 ryoon Exp $
+# $NetBSD: Makefile,v 1.81 2014/01/01 11:52:26 wiz Exp $
 #
 
 DISTNAME=	tellico-2.3.5
-PKGREVISION=	24
+PKGREVISION=	31
 CATEGORIES=	misc
 MASTER_SITES=	http://tellico-project.org/files/
 EXTRACT_SUFX=	.tar.bz2
@@ -21,6 +21,9 @@ REPLACE_RUBY+=		src/fetch/scripts/boardgamegeek.rb
 
 USE_LANGUAGES=	c c++
 USE_TOOLS+=	msgfmt pkg-config
+
+pre-build:
+	cd ${WRKSRC}/src/core && ${PKGSRC_SETENV} ${MAKE_ENV} ${MAKE_PROGRAM} tellico_config
 
 .include "../../meta-pkgs/kde4/kde4.mk"
 .include "../../audio/taglib/buildlink3.mk"

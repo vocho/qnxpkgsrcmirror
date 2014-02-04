@@ -1,27 +1,30 @@
-# $NetBSD: Makefile,v 1.133 2013/07/17 11:00:13 jperkin Exp $
+# $NetBSD: Makefile,v 1.150 2014/01/01 11:52:37 wiz Exp $
 
 FIREFOX_VER=	${MOZ_BRANCH}${MOZ_BRANCH_MINOR}
-MOZ_BRANCH=	22.0
+MOZ_BRANCH=	26.0
 MOZ_BRANCH_MINOR=	
 
 DISTNAME=	firefox-${FIREFOX_VER}.source
-PKGNAME=	firefox-${MOZ_BRANCH}${MOZ_BRANCH_MINOR:S/b/beta/}
+PKGNAME=	firefox-${MOZ_BRANCH}${MOZ_BRANCH_MINOR:S/b/beta/:S/esr//}
+PKGREVISION=	1
 CATEGORIES=	www
-MASTER_SITES=	${MASTER_SITE_MOZILLA:=firefox/releases/${FIREFOX_VER}/source/} \
-		${MASTER_SITE_MOZILLA_ALL:=firefox/releases/${FIREFOX_VER}/source/}
+MASTER_SITES=	${MASTER_SITE_MOZILLA:=firefox/releases/${FIREFOX_VER}/source/}
+#MASTER_SITES+=	${MASTER_SITE_MOZILLA_ALL:=firefox/releases/${FIREFOX_VER}/source/}
 EXTRACT_SUFX=	.tar.bz2
 
 WRKSRC=		${WRKDIR}/mozilla-release
 
 MAINTAINER=	ryoon@NetBSD.org
 HOMEPAGE=	http://www.mozilla.com/en-US/firefox/
-COMMENT=	Web browser with support for extensions
+COMMENT=	Web browser with support for extensions (version 26.x)
 LICENSE=	mpl-1.1
 
 MOZILLA_DIR=	# empty
 
 # Note: when updating remember to conditionalise about-background.png in PLIST
 # XXX Firefox 21.0's firefox/xulrunner separation is not working.
+#CONFIGURE_ARGS+=	--with-libxul-sdk
+#CONFIGURE_ARGS+=	--with-system-libxul
 CONFIGURE_ARGS+=	--enable-application=browser
 
 # workround for link of libxul.so etc.
@@ -42,23 +45,32 @@ LDFLAGS.DragonFly=	-lplc4 -lnspr4
 LDFLAGS.FreeBSD=	-lplc4 -lnspr4
 LDFLAGS.Linux=		-lnspr4
 
-.include "../../www/firefox/mozilla-common.mk"
+.include "mozilla-common.mk"
 .include "options.mk"
 
-CHECK_INTERPRETER_SKIP+=lib/firefox/sdk/bin/header.py
-CHECK_INTERPRETER_SKIP+=lib/firefox/sdk/bin/typelib.py
-CHECK_INTERPRETER_SKIP+=lib/firefox/sdk/bin/xpidl.py
-CHECK_INTERPRETER_SKIP+=lib/firefox/sdk/bin/xpt.py
+CHECK_PORTABILITY_SKIP+=	js/src/tests/update-test262.sh
+
+CHECK_INTERPRETER_SKIP+=lib/firefox-sdk/sdk/bin/header.py
+CHECK_INTERPRETER_SKIP+=lib/firefox-sdk/sdk/bin/typelib.py
+CHECK_INTERPRETER_SKIP+=lib/firefox-sdk/sdk/bin/xpidl.py
+CHECK_INTERPRETER_SKIP+=lib/firefox-sdk/sdk/bin/xpt.py
 
 MOZILLA=firefox
-MOZILLA_ICON=	${WRKSRC}/dist/firefox/browser/chrome/icons/default/default48.png
+MOZILLA_ICON=	${WRKSRC}/${OBJDIR}/dist/firefox/browser/chrome/icons/default/default48.png
 .if !empty(PKG_OPTIONS:Mofficial-mozilla-branding)
 MOZILLA_NAME=	Firefox
 .else
 MOZILLA_NAME=	Browser
 .endif
 
+SUBST_CLASSES+=		sys-dic
+SUBST_STAGE.sys-dic=	pre-configure
+SUBST_MESSAGE.sys-dic=	Reference to system hunspell dictionaries.
+SUBST_FILES.sys-dic=	extensions/spellcheck/hunspell/src/mozHunspell.cpp
+SUBST_VARS.sys-dic=	PREFIX
+
 pre-configure:
+	cd ${WRKSRC} && mkdir ${OBJDIR}
 	cd ${WRKSRC} && autoconf
 	cd ${WRKSRC}/js/src && autoconf
 # XXX Makefile is broken? When libxul is provided from devel/xulrunner,

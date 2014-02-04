@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.91 2013/06/06 12:54:31 wiz Exp $
+# $NetBSD: Makefile,v 1.98 2014/01/01 11:52:19 wiz Exp $
 
 DISTNAME=	inkscape-0.48.4
-PKGREVISION=	10
+PKGREVISION=	16
 CATEGORIES=	graphics
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=inkscape/}
 EXTRACT_SUFX=	.tar.bz2
@@ -44,6 +44,9 @@ CHECK_INTERPRETER_SKIP+= share/inkscape/extensions/*.py
 
 # XXX I don't see where this is used
 CHECK_INTERPRETER_SKIP+= share/inkscape/extensions/simplepath.rb
+
+# XXX these libraries are not auto-detected, at least on Darwin
+LDFLAGS.Darwin=		-lfontconfig -lpangoft2-1.0
 
 PKG_OPTIONS_VAR= PKG_OPTIONS.inkscape
 PKG_SUPPORTED_OPTIONS= gnome

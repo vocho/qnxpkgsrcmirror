@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.61 2013/06/06 12:54:27 wiz Exp $
+# $NetBSD: Makefile,v 1.68 2014/01/27 18:41:13 wiz Exp $
 
 VERSION=		4.0.1
 PKGNAME=		camlimages-${VERSION}
-PKGREVISION=		27
+PKGREVISION=		33
 CATEGORIES=		graphics
 MASTER_SITES=		https://bitbucket.org/camlspotter/camlimages/get/
 DISTNAME=		v${VERSION}
@@ -17,8 +17,6 @@ BUILD_DEPENDS+=		omake>=0.9.8.6.0rc1:../../devel/omake
 BUILD_DEPENDS+=		ocaml-findlib>=1.2.6:../../devel/ocaml-findlib
 
 MAKE_JOBS_SAFE=		no
-
-FETCH_USING=		curl
 
 WRKSRC=			${WRKDIR}/camlspotter-camlimages-v${VERSION}
 

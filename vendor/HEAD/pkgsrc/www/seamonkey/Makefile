@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.100 2013/07/12 12:24:10 ryoon Exp $
-#
+# $NetBSD: Makefile,v 1.113 2014/01/01 11:52:38 wiz Exp $
 
 DISTNAME=	# empty
 PKGNAME=	seamonkey-${SM_VER:S/b/beta/}
-SM_VER=		2.19
+SM_VER=		2.23
 #LIGHTNINGVER=	1.9
+PKGREVISION=	1
 CATEGORIES=	www
-#${MASTER_SITE_MOZILLA:=seamonkey/releases/${SM_VER}/source/} 
+#${MASTER_SITE_MOZILLA:=seamonkey/releases/${SM_VER}/source/}
 MASTER_SITES=	${MASTER_SITE_MOZILLA_ALL:=seamonkey/releases/${SM_VER}/source/}
 DISTFILES=	seamonkey-${SM_VER}.source.tar.bz2
 #		lightning-${LIGHTNINGVER}.source.tar.bz2
@@ -21,7 +21,10 @@ WRKSRC=		${WRKDIR}/comm-release
 MOZILLA_DIR=	mozilla/
 PLIST_SRC+=	${PLIST_SRC_DFLT}
 USE_LANGUAGES+=	c c++
-USE_TOOLS+=	unzip
+USE_TOOLS+=	unzip pax
+
+.include "../../www/firefox/mozilla-common.mk"
+.include "options.mk"
 
 CONFIG_GUESS_OVERRIDE+=	ldap/sdks/c-sdk/config/autoconf/config.guess
 CONFIG_SUB_OVERRIDE+=	ldap/sdks/c-sdk/config/autoconf/config.sub
@@ -38,10 +41,19 @@ ALL_ENV+=		MOZILLA_PKG_NAME=seamonkey
 #BUILD_DEPENDS+=		yasm>=1.1.0:../../devel/yasm
 #.endif
 
+CHECK_PORTABILITY_SKIP+=mozilla/js/src/tests/update-test262.sh
+CHECK_PORTABILITY_SKIP+=mozilla/security/nss/tests/libpkix/libpkix.sh
+
 CHECK_INTERPRETER_SKIP+=lib/seamonkey-sdk/sdk/bin/header.py
 CHECK_INTERPRETER_SKIP+=lib/seamonkey-sdk/sdk/bin/typelib.py
 CHECK_INTERPRETER_SKIP+=lib/seamonkey-sdk/sdk/bin/xpidl.py
 CHECK_INTERPRETER_SKIP+=lib/seamonkey-sdk/sdk/bin/xpt.py
+
+SUBST_CLASSES+=		sys-dic
+SUBST_STAGE.sys-dic=	pre-configure
+SUBST_MESSAGE.sys-dic=	Reference to system hunspell dictionaries.
+SUBST_FILES.sys-dic=	mozilla/extensions/spellcheck/hunspell/src/mozHunspell.cpp
+SUBST_VARS.sys-dic=	PREFIX
 
 #post-extract:
 #	cd ${WRKSRC} && ${RM} -r calendar
@@ -49,6 +61,7 @@ CHECK_INTERPRETER_SKIP+=lib/seamonkey-sdk/sdk/bin/xpt.py
 #	${RM} -r ${EXTRACT_DIR.lightning-${LIGHTNINGVER}.source.tar.bz2}
 
 pre-configure:
+	cd ${WRKSRC} && mkdir ${OBJDIR}
 	cd ${WRKSRC} && ${SETENV} ${CONFIGURE_ENV} autoconf
 	cd ${WRKSRC}/mozilla && ${SETENV} ${CONFIGURE_ENV} autoconf
 	cd ${WRKSRC}/mozilla/js/src && ${SETENV} ${CONFIGURE_ENV} autoconf
@@ -56,26 +69,21 @@ pre-configure:
 	cd ${WRKSRC}/ldap/sdks/c-sdk && ${SETENV} ${CONFIGURE_ENV} autoconf
 	mkdir ${WRKSRC}/mozilla/js/src/.deps
 
-do-build:
-# XXX for some reason it doesn't work unless -j is explicitly specified
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${MAKE_PROGRAM} -j${MAKE_JOBS:U1}
-
 post-install:
-	${TOUCH} ${TOUCH_FLAGS} \
-		${DESTDIR}${PREFIX}/include/seamonkey/mozilla/throw_gcc.h
+#	${TOUCH} ${TOUCH_FLAGS} \
+#		${DESTDIR}${PREFIX}/include/seamonkey/mozilla/throw_gcc.h
 	@${STEP_MSG} "Installing bundled seamonkey extensions."
-	rm -rf ${WRKDIR}/extensions
-	${MKDIR} ${WRKDIR}/extensions
+	rm -rf ${WRKDIR}/${OBJDIR}/extensions
+	${MKDIR} ${WRKDIR}/${OBJDIR}/extensions
 	${RUN} for e in ${XPI_FILES}; do				\
-	  subdir="`${UNZIP_CMD} -c "$$e" install.rdf | awk '/^    <em:id>/ {sub(".*<em:id>","");sub("</em:id>.*","");print;exit;}'`" &&	\
-	  ${MKDIR} "${WRKDIR}/extensions/$$subdir" &&			\
-	  cd "${WRKDIR}/extensions/$$subdir" &&				\
+	  subdir=`${UNZIP_CMD} -c "$$e" install.rdf | awk '/^    <em:id>/ {sub(".*<em:id>","");sub("</em:id>.*","");print;exit;}'` &&	\
+	  ${MKDIR} "${WRKDIR}/${OBJDIR}/extensions/$$subdir" &&			\
+	  cd "${WRKDIR}/${OBJDIR}/extensions/$$subdir" &&				\
 	  ${UNZIP_CMD} -aqo $$e;					\
 	done
-	cd ${WRKDIR}/extensions && pax -rw .				\
+	${INSTALL_DATA_DIR} ${DESTDIR}${PREFIX}/lib/seamonkey/extensions
+	cd ${WRKDIR}/${OBJDIR}/extensions && pax -rw .				\
 	   ${DESTDIR}${PREFIX}/lib/seamonkey/extensions/.
-	rm -rf ${WRKDIR}/extensions
+	rm -rf ${WRKDIR}/${OBJDIR}/extensions
 
-.include "../../www/firefox/mozilla-common.mk"
-.include "options.mk"
 .include "../../mk/bsd.pkg.mk"

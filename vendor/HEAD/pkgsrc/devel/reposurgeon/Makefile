@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.7 2013/05/24 11:42:04 wiz Exp $
+# $NetBSD: Makefile,v 1.12 2014/01/30 14:40:34 ryoon Exp $
 
-DISTNAME=	reposurgeon-2.39
+DISTNAME=	reposurgeon-3.1
 CATEGORIES=	devel scm
 MASTER_SITES=	http://www.catb.org/~esr/reposurgeon/
 
-MAINTAINER=	pkgsrc-users@NetBSD.or
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.catb.org/~esr/reposurgeon/
 COMMENT=	Tool for editing version-control repository history
 LICENSE=	modified-bsd

@@ -1,18 +1,19 @@
-$NetBSD: patch-media_webrtc_trunk_webrtc_modules_video__capture_linux_device__info__linux.cc,v 1.1 2013/05/23 13:12:13 ryoon Exp $
+$NetBSD: patch-media_webrtc_trunk_webrtc_modules_video__capture_linux_device__info__linux.cc,v 1.3 2013/11/02 22:57:55 ryoon Exp $
 
---- media/webrtc/trunk/webrtc/modules/video_capture/linux/device_info_linux.cc.orig	2013-05-11 19:19:45.000000000 +0000
+--- media/webrtc/trunk/webrtc/modules/video_capture/linux/device_info_linux.cc.orig	2013-10-25 22:27:35.000000000 +0000
 +++ media/webrtc/trunk/webrtc/modules/video_capture/linux/device_info_linux.cc
-@@ -19,12 +19,30 @@
+@@ -19,18 +19,30 @@
  #include <stdlib.h>
  
  //v4l includes
-+#if defined(__DragonFly__) || defined(__NetBSD__) || defined(__OpenBSD__)
-+#include <sys/videoio.h>
-+#elif defined(__sun)
-+#include <sys/videodev2.h>
-+#else
+-#if defined(__DragonFly__) || defined(__NetBSD__) || defined(__OpenBSD__)
++#if defined(__NetBSD__) || defined(__OpenBSD__)
+ #include <sys/videoio.h>
+ #elif defined(__sun)
+ #include <sys/videodev2.h>
+ #else
  #include <linux/videodev2.h>
-+#endif
+ #endif
 +#ifdef HAVE_LIBV4L2
 +#include <libv4l2.h>
 +#endif
@@ -33,7 +34,7 @@ $NetBSD: patch-media_webrtc_trunk_webrtc_modules_video__capture_linux_device__in
  namespace webrtc
  {
  namespace videocapturemodule
-@@ -130,6 +148,11 @@ WebRtc_Word32 DeviceInfoLinux::GetDevice
+@@ -137,6 +149,11 @@ int32_t DeviceInfoLinux::GetDeviceName(
      memset(deviceNameUTF8, 0, deviceNameLength);
      memcpy(cameraName, cap.card, sizeof(cap.card));
  

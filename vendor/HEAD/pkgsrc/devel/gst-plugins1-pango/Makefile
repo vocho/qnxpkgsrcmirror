@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.7 2013/07/22 14:35:03 drochner Exp $
+# $NetBSD: Makefile,v 1.9 2013/12/04 11:37:45 drochner Exp $
 #
 
 GST_PLUGINS1_NAME=	pango

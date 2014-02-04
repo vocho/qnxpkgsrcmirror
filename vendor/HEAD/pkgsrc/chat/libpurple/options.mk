@@ -1,4 +1,4 @@
-# $NetBSD: options.mk,v 1.21 2012/08/01 15:23:46 drochner Exp $
+# $NetBSD: options.mk,v 1.23 2014/02/03 16:38:53 wiz Exp $
 
 PKG_OPTIONS_VAR=		PKG_OPTIONS.libpurple
 PKG_SUPPORTED_OPTIONS+=		avahi dbus debug farsight gnome gnutls

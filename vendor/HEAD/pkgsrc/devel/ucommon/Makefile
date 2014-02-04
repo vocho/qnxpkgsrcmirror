@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.3 2013/06/27 01:36:25 rodent Exp $
+# $NetBSD: Makefile,v 1.7 2014/01/19 00:49:06 rodent Exp $
 #
 
-DISTNAME=	ucommon-6.0.5
+DISTNAME=	ucommon-6.1.0
 CATEGORIES=	devel
 MASTER_SITES=	${MASTER_SITE_GNU:=commonc++/}
 
@@ -20,6 +20,8 @@ PKGCONFIG_OVERRIDE+=	commoncpp.pc.in
 PKGCONFIG_OVERRIDE+=	ucommon.pc.in
 
 .include "options.mk"
+
+LDFLAGS.SunOS+=		-lsocket -lnsl -lintl
 
 .include "../../mk/dlopen.buildlink3.mk"
 .include "../../mk/pthread.buildlink3.mk"

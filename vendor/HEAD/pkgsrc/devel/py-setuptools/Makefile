@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.28 2013/07/21 20:31:52 wiz Exp $
+# $NetBSD: Makefile,v 1.39 2014/01/27 19:10:06 wiz Exp $
 
-EGG_VERSION=		0.9.6
+EGG_VERSION=		2.1
 DISTNAME=		setuptools-${EGG_VERSION}
 EGG_NAME=		setuptools-${EGG_VERSION}
 PKGNAME=		${PYPKGPREFIX}-setuptools-${EGG_VERSION}
 CATEGORIES=		devel python
-MASTER_SITES=		http://pypi.python.org/packages/source/s/setuptools/
+MASTER_SITES=		https://pypi.python.org/packages/source/s/setuptools/
 
 MAINTAINER=		joerg@NetBSD.org
 HOMEPAGE=		http://peak.telecommunity.com/DevCenter/setuptools
@@ -13,7 +13,6 @@ COMMENT=		New Python packaging system
 LICENSE=		python-software-foundation OR zpl
 
 PYDISTUTILSPKG=			yes
-PYTHON_VERSIONS_INCLUDE_3X=	yes
 
 PLIST_SUBST+=	PYVERSSUFFIX=${PYVERSSUFFIX} PYPKGPREFIX=${PYPKGPREFIX}
 PLIST_SUBST+=	EGG_NAME=${EGGNAME}
@@ -35,8 +34,10 @@ PYSETUPINSTALLARGS+=	--root=/
 DEPENDS+=	${PYPKGPREFIX}-expat-[0-9]*:../../textproc/py-expat
 .endif
 
+# upstream often forgets deleting files, and packages on Windows,
+# so permissions are usually wrong
 post-install:
-	${RM} ${DESTDIR}${PREFIX}/${PYSITELIB}/${EGG_NAME}-py${PYVERSSUFFIX}.egg-info/entry_points.txt.orig
+	${RM} -f ${DESTDIR}${PREFIX}/${PYSITELIB}/${EGG_NAME}-py${PYVERSSUFFIX}.egg-info/*.orig
 	${CHMOD} ${SHAREMODE} ${DESTDIR}${PREFIX}/${PYSITELIB}/${EGG_NAME}-py${PYVERSSUFFIX}.egg-info/*
 
 .include "../../lang/python/application.mk"

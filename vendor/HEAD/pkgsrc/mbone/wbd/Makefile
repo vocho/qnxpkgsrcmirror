@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.9 2013/06/06 12:54:45 wiz Exp $
+# $NetBSD: Makefile,v 1.11 2014/01/27 21:51:03 wiedi Exp $
 #
 
 DISTNAME=		wbd-1.0ucl4
 PKGNAME=		wbd-1.0p4
-PKGREVISION=		5
+PKGREVISION=		6
 CATEGORIES=		mbone tk
 MASTER_SITES=		http://www-mice.cs.ucl.ac.uk/multimedia/software/wbd/1.0ucl4/
 
@@ -17,6 +17,8 @@ BUILD_TARGET=		wbd
 NO_CONFIGURE=		yes
 
 INSTALLATION_DIRS=	bin
+
+LDFLAGS.SunOS+=		-lsocket -lnsl
 
 do-install:
 	${INSTALL_PROGRAM} ${WRKSRC}/wbd ${DESTDIR}${PREFIX}/bin/wbd

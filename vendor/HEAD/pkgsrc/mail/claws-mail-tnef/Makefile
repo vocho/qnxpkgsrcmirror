@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.35 2013/07/25 09:46:50 drochner Exp $
+# $NetBSD: Makefile,v 1.37 2014/01/15 17:22:31 drochner Exp $
 #
 
 PLUGIN_NAME=    tnef_parse

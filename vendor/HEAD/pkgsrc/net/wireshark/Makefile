@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.105 2013/07/09 08:36:38 wiz Exp $
+# $NetBSD: Makefile,v 1.115 2014/01/25 10:30:18 wiz Exp $
 
-DISTNAME=	wireshark-1.10.0
+DISTNAME=	wireshark-1.10.5
 PKGREVISION=	1
 CATEGORIES=	net
 MASTER_SITES=	http://www.wireshark.org/download/src/ \
@@ -34,6 +34,7 @@ CONFIGURE_ENV+=		ac_cv_path_LEXDUMMY=${TOOLS_PATH.lex}
 PTHREAD_OPTS+=		require
 
 PYTHON_FOR_BUILD_ONLY=	yes
+PYTHON_VERSIONS_INCOMPATIBLE=	33 # not yet ported as of 1.10.5
 REPLACE_PYTHON+=	help/faq.py
 REPLACE_PYTHON+=	tools/asn2deb
 REPLACE_PYTHON+=	tools/asn2wrs.py

@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.85 2013/03/14 14:44:58 wiz Exp $
+# $NetBSD: Makefile,v 1.88 2013/12/21 16:21:20 christos Exp $
 
 .include "Makefile.common"
 
-PKGREVISION=		2
+PKGREVISION=	1
 
 CONFIGURE_ARGS+=	-no-tk
 CONFIGURE_ARGS+=	-cc ${CC}
@@ -51,7 +51,7 @@ PLIST_SRC+=	${PKGDIR}/PLIST.prof
       !empty(MACHINE_PLATFORM:MFreeBSD-*-*) || \
       !empty(MACHINE_PLATFORM:MDragonFly-*-*) || \
       !empty(MACHINE_PLATFORM:MNetBSD-*-*) || \
-      !empty(MACHINE_PLATFORM:MDarwin-*-*)
+      !empty(MACHINE_PLATFORM:MDarwin-*-x86_64)
 PLIST_SRC+=	${PKGDIR}/PLIST.natdynlink
 .  endif
 .endif

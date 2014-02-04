@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.22 2013/06/13 14:27:59 wiz Exp $
+# $NetBSD: Makefile,v 1.26 2013/11/14 08:18:21 wiz Exp $
 
-DISTNAME=	mame0149s
+DISTNAME=	mame0151s
 PKGNAME=	${DISTNAME:S/0/-0./:S/s$//}
 MASTER_SITES=	http://mamedev.org/downloader.php?file=releases/
 
@@ -35,6 +35,6 @@ do-install:
 	do \
 		${INSTALL_DATA} ${WRKSRC}/src/osd/sdl/man/"$$man" ${DESTDIR}${PREFIX}/${PKGMANDIR}/man1; \
 	done
-	${INSTALL_DATA} ${WRKSRC}/src/osd/sdl/man/mame.6 ${DESTDIR}${PREFIX}/${PKGMANDIR}/man6; \
+	${INSTALL_DATA} ${WRKSRC}/src/osd/sdl/man/mame.6 ${DESTDIR}${PREFIX}/${PKGMANDIR}/man6
 
 .include "Makefile.common"

@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.84 2013/07/12 10:44:53 jperkin Exp $
+# $NetBSD: Makefile,v 1.89 2014/01/01 11:52:10 wiz Exp $
 
-DISTNAME=	jabberd-2.2.17
-PKGREVISION=	10
+DISTNAME=	jabberd-2.3.1
+PKGREVISION=	1
 CATEGORIES=	chat
-MASTER_SITES=	http://cloud.github.com/downloads/jabberd2/jabberd2/
+MASTER_SITES=	https://github.com/jabberd2/jabberd2/releases/download/${DISTNAME}/
 EXTRACT_SUFX=	.tar.xz
 
 MAINTAINER=	adam@NetBSD.org
-HOMEPAGE=	http://jabberd2.xiaoka.com/
+HOMEPAGE=	http://jabberd2.org/
 COMMENT=	XMPP (Jabber) instant messaging server
 LICENSE=	gnu-gpl-v2
 
@@ -64,7 +64,7 @@ FILES=			jabberd.cfg c2s.xml router.xml router-users.xml \
 			router-filter.xml s2s.xml sm.xml
 DBFILES=		db-jd14-2-jd2.sql db-setup.mysql db-setup.pgsql \
 			db-update.mysql	db-setup.sqlite db-update.sqlite
-DOCFILES=		README.protocol README UPGRADE ChangeLog
+DOCFILES=		README.protocol README README.config NEWS
 
 INSTALLATION_DIRS=	bin ${EGDIR} ${DOCDIR}
 

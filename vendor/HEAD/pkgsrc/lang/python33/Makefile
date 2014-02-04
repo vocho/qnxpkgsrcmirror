@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.8 2013/07/15 02:02:24 ryoon Exp $
+# $NetBSD: Makefile,v 1.13 2013/11/21 14:06:43 adam Exp $
 
 .include "dist.mk"
 
@@ -13,12 +13,14 @@ LICENSE=	python-software-foundation
 CONFLICTS+=	python-[0-9]*
 
 GNU_CONFIGURE=		yes
-CONFIGURE_ENV+=		ac_cv_path_mkdir=${TOOLS_PATH.mkdir:Q}
 CONFIGURE_ARGS+=	--with-threads
 CONFIGURE_ARGS+=	--enable-shared
 CONFIGURE_ARGS+=	OPT=${CFLAGS:M*:Q}
 CONFIGURE_ARGS+=	--with-system-ffi
 CONFIGURE_ARGS+=	--without-pymalloc
+CONFIGURE_ENV+=		ac_cv_path_mkdir=${TOOLS_PATH.mkdir:Q}
+
+PKGCONFIG_OVERRIDE+=	Misc/python.pc.in
 
 USE_LANGUAGES=		c c++
 
@@ -98,6 +100,12 @@ REPLACE_INTERPRETER+=	py33
 REPLACE.py33.old=	.*python[^ ]*
 REPLACE.py33.new=	${PREFIX}/bin/python${PY_VER_SUFFIX}
 REPLACE_FILES.py33=	Lib/*.py Lib/*/*.py Lib/*/*/*.py Lib/*/*/*/*.py
+
+SUBST_CLASSES+=		findlib
+SUBST_MESSAGE.findlib=	Fixing find_library_file on Darwin.
+SUBST_STAGE.findlib=	pre-configure
+SUBST_FILES.findlib=	Lib/distutils/unixccompiler.py
+SUBST_SED.findlib=	-e 's,/usr/local,${PREFIX},'
 
 CHECK_INTERPRETER_SKIP=	lib/python${PY_VER_SUFFIX}/venv/scripts/posix/pydoc
 

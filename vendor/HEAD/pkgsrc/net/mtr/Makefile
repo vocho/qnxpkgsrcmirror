@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.83 2013/07/04 03:41:48 dholland Exp $
+# $NetBSD: Makefile,v 1.86 2013/10/31 00:38:20 wiz Exp $
 
 DISTNAME=	mtr-0.85
-PKGREVISION=	1
+PKGREVISION=	3
 CATEGORIES=	net
 MASTER_SITES=	ftp://ftp.bitwizard.nl/mtr/
 
@@ -41,5 +41,4 @@ do-install:
 	${INSTALL_DATA} ${WRKSRC}/SECURITY ${DESTDIR}${PREFIX}/share/doc/mtr
 
 .include "../../devel/ncurses/buildlink3.mk"
-.include "../../devel/glib2/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

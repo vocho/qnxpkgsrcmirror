@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.25 2013/07/02 15:38:19 adam Exp $
+@comment $NetBSD: PLIST,v 1.32 2014/01/17 11:50:49 adam Exp $
 bin/doveadm
 bin/doveconf
 bin/dsync
@@ -75,6 +75,8 @@ include/dovecot/doveadm-settings.h
 include/dovecot/doveadm-util.h
 include/dovecot/doveadm.h
 include/dovecot/dovecot-version.h
+include/dovecot/dsasl-client-private.h
+include/dovecot/dsasl-client.h
 include/dovecot/duplicate.h
 include/dovecot/eacces-error.h
 include/dovecot/env-util.h
@@ -110,8 +112,13 @@ include/dovecot/http-client-private.h
 include/dovecot/http-client.h
 include/dovecot/http-date.h
 include/dovecot/http-header-parser.h
+include/dovecot/http-header.h
+include/dovecot/http-message-parser.h
 include/dovecot/http-parser.h
+include/dovecot/http-request-parser.h
+include/dovecot/http-request.h
 include/dovecot/http-response-parser.h
+include/dovecot/http-response.h
 include/dovecot/http-transfer.h
 include/dovecot/http-url.h
 include/dovecot/imap-arg.h
@@ -128,6 +135,7 @@ include/dovecot/imap-fetch.h
 include/dovecot/imap-id.h
 include/dovecot/imap-list.h
 include/dovecot/imap-match.h
+include/dovecot/imap-metadata.h
 include/dovecot/imap-msgpart-url.h
 include/dovecot/imap-msgpart.h
 include/dovecot/imap-notify.h
@@ -192,6 +200,8 @@ include/dovecot/istream-chain.h
 include/dovecot/istream-concat.h
 include/dovecot/istream-crlf.h
 include/dovecot/istream-dot.h
+include/dovecot/istream-fs-file.h
+include/dovecot/istream-hash.h
 include/dovecot/istream-header-filter.h
 include/dovecot/istream-jsonstr.h
 include/dovecot/istream-mail.h
@@ -370,8 +380,6 @@ include/dovecot/rfc822-parser.h
 include/dovecot/safe-memset.h
 include/dovecot/safe-mkdir.h
 include/dovecot/safe-mkstemp.h
-include/dovecot/sasl-client-private.h
-include/dovecot/sasl-client.h
 include/dovecot/sasl-server.h
 include/dovecot/sdbox-file.h
 include/dovecot/sdbox-storage.h
@@ -424,6 +432,7 @@ lib/dovecot/lib02_imap_acl_plugin.la
 lib/dovecot/lib02_lazy_expunge_plugin.la
 lib/dovecot/lib05_pop3_migration_plugin.la
 lib/dovecot/lib05_snarf_plugin.la
+lib/dovecot/lib10_mail_filter_plugin.la
 lib/dovecot/lib10_quota_plugin.la
 lib/dovecot/lib11_imap_quota_plugin.la
 lib/dovecot/lib11_trash_plugin.la
@@ -447,7 +456,7 @@ lib/dovecot/libdovecot-login.la
 lib/dovecot/libdovecot-sql.la
 lib/dovecot/libdovecot-storage.la
 lib/dovecot/libdovecot.la
-lib/dovecot/libssl_iostream_openssl.la
+${PLIST.ssl}lib/dovecot/libssl_iostream_openssl.la
 libexec/dovecot/aggregator
 libexec/dovecot/anvil
 libexec/dovecot/auth
@@ -485,11 +494,16 @@ libexec/dovecot/xml2text
 man/man1/deliver.1
 man/man1/doveadm-altmove.1
 man/man1/doveadm-auth.1
+man/man1/doveadm-batch.1
 man/man1/doveadm-config.1
+man/man1/doveadm-copy.1
+man/man1/doveadm-deduplicate.1
 man/man1/doveadm-director.1
 man/man1/doveadm-dump.1
+man/man1/doveadm-exec.1
 man/man1/doveadm-expunge.1
 man/man1/doveadm-fetch.1
+man/man1/doveadm-flags.1
 man/man1/doveadm-force-resync.1
 man/man1/doveadm-help.1
 man/man1/doveadm-import.1
@@ -545,6 +559,7 @@ share/doc/dovecot/wiki/Authentication.Mechanisms.Winbind.txt
 share/doc/dovecot/wiki/Authentication.Mechanisms.txt
 share/doc/dovecot/wiki/Authentication.MultipleDatabases.txt
 share/doc/dovecot/wiki/Authentication.PasswordSchemes.txt
+share/doc/dovecot/wiki/Authentication.Penalty.txt
 share/doc/dovecot/wiki/Authentication.RestrictAccess.txt
 share/doc/dovecot/wiki/Authentication.txt
 share/doc/dovecot/wiki/BasicConfiguration.txt
@@ -693,10 +708,12 @@ share/doc/dovecot/wiki/Plugins.FTS.Squat.txt
 share/doc/dovecot/wiki/Plugins.FTS.txt
 share/doc/dovecot/wiki/Plugins.Lazyexpunge.txt
 share/doc/dovecot/wiki/Plugins.Listescape.txt
+share/doc/dovecot/wiki/Plugins.MailFilter.txt
 share/doc/dovecot/wiki/Plugins.MailLog.txt
 share/doc/dovecot/wiki/Plugins.MailboxAlias.txt
 share/doc/dovecot/wiki/Plugins.Notify.txt
 share/doc/dovecot/wiki/Plugins.Snarf.txt
+share/doc/dovecot/wiki/Plugins.Stats.txt
 share/doc/dovecot/wiki/Plugins.Trash.txt
 share/doc/dovecot/wiki/Plugins.Virtual.txt
 share/doc/dovecot/wiki/Plugins.Zlib.txt
@@ -725,6 +742,7 @@ share/doc/dovecot/wiki/SharedMailboxes.Public.txt
 share/doc/dovecot/wiki/SharedMailboxes.Shared.txt
 share/doc/dovecot/wiki/SharedMailboxes.Symlinks.txt
 share/doc/dovecot/wiki/SharedMailboxes.txt
+share/doc/dovecot/wiki/SocketUnavailable.txt
 share/doc/dovecot/wiki/Statistics.txt
 share/doc/dovecot/wiki/SystemUsers.txt
 share/doc/dovecot/wiki/TestInstallation.txt

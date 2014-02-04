@@ -1,4 +1,4 @@
-# $NetBSD: Cygwin.mk,v 1.13 2013/07/12 10:41:58 jperkin Exp $
+# $NetBSD: Cygwin.mk,v 1.15 2013/10/13 10:10:05 wiz Exp $
 #
 # Variable definitions for the Windows with Cygwin.
 
@@ -6,6 +6,7 @@
 ### Platform definitions common to pkgsrc/mk/platform/*.mk
 ###
 
+CPP?=		/bin/cpp
 ECHO_N?=	${ECHO} -n
 IMAKE_MAKE?=	${GMAKE}		# program which gets invoked by imake
 IMAKEOPTS+=	-DBuildHtmlManPages=NO
@@ -20,7 +21,6 @@ _PKG_USER_HOME?=	# empty by default
 _USER_DEPENDS=		user-cygwin>=20130712:../../sysutils/user_cygwin
 
 CPP_PRECOMP_FLAGS?=	# unset
-CONFIG_RPATH_OVERRIDE?=	config.rpath */config.rpath */*/config.rpath
 DEF_UMASK?=		002
 EXPORT_SYMBOLS_LDFLAGS?=-Wl,-E	# add symbols to the dynamic symbol table
 

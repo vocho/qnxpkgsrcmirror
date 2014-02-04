@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.43 2013/07/15 02:02:26 ryoon Exp $
+# $NetBSD: Makefile,v 1.45 2013/12/15 19:41:23 joerg Exp $
 
 DISTNAME=	libqalculate-0.9.7
 PKGNAME=	qalculate-0.9.7
@@ -26,8 +26,15 @@ SUBST_STAGE.pthread=	post-patch
 
 PTHREAD_AUTO_VARS=	yes
 
+CFLAGS.SunOS+=		-D_LCONV_C99
+
 pre-configure:
 	${RUN} cd ${WRKSRC}; autoconf
+
+.include "../../mk/compiler.mk"
+.if !empty(PKGSRC_COMPILER:Mclang)
+MAKE_ENV+=	CLANG_NO_OPT=-O0
+.endif
 
 .include "../../devel/glib2/buildlink3.mk"
 .include "../../devel/readline/buildlink3.mk"

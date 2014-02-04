@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.82 2013/07/19 10:08:59 ryoon Exp $
+# $NetBSD: Makefile,v 1.90 2014/01/20 13:26:54 ryoon Exp $
 #
 
 .include "../../inputmethod/uim/Makefile.common"
 
+PKGREVISION=		7
 COMMENT=		Multilingual input method library
-PKGREVISION=		6
 #LICENSE=		See ${WRKSRC}/COPYING
 
 CONFLICTS+=		uim-qt4-immodule-[0-9]*
@@ -26,18 +26,20 @@ CFLAGS.SunOS+=	-std=c99 -D__EXTENSIONS__
 
 .include "options.mk"
 
-PLIST_VARS+=		editline
-.include "../../mk/readline.builtin.mk"
+INSTALLATION_DIRS+=	share/doc/uim share/examples/uim
 
-.if !empty(BUILTIN_LIB_FOUND.edit:M[yY][eE][sS])
-PLIST.editline=		yes
-.else
-CONFIGURE_ARGS+=	--with-libedit=no
-.endif
-
-INSTALLATION_DIRS+=	share/doc/uim
+EGDIR=			${PREFIX}/share/examples/uim
+CONF_FILES=		${EGDIR}/loader.scm.example \
+			${PREFIX}/share/uim/loader.scm
+CONF_FILES+=		${EGDIR}/installed-modules.scm.example \
+			${PREFIX}/share/uim/installed-modules.scm
 
 post-install:
+# Register uim module infomation
+	${MKDIR} ${DESTDIR}${PREFIX}/share/uim/pkgsrc
+.for m in ${UIM_MODULES}
+	${TOUCH} ${DESTDIR}${PREFIX}/share/uim/pkgsrc/${m}
+.endfor
 	${INSTALL_DATA} ${WRKSRC}/README ${DESTDIR}${PREFIX}/share/doc/uim
 	${INSTALL_DATA} ${WRKSRC}/doc/COMPATIBILITY ${DESTDIR}${PREFIX}/share/doc/uim
 	${INSTALL_DATA} ${WRKSRC}/doc/CUSTOM ${DESTDIR}${PREFIX}/share/doc/uim
@@ -48,6 +50,11 @@ post-install:
 	${INSTALL_DATA} ${WRKSRC}/doc/PLUGIN ${DESTDIR}${PREFIX}/share/doc/uim
 	${INSTALL_DATA} ${WRKSRC}/doc/UIM-SCM ${DESTDIR}${PREFIX}/share/doc/uim
 	${INSTALL_DATA} ${WRKSRC}/doc/UIM-SH ${DESTDIR}${PREFIX}/share/doc/uim
+# loader.scm and installed-modules.scm is updated by uim-module-manager.
+	${MV} ${DESTDIR}${PREFIX}/share/uim/loader.scm \
+		${DESTDIR}${EGDIR}/loader.scm.example
+	${MV} ${DESTDIR}${PREFIX}/share/uim/installed-modules.scm \
+		${DESTDIR}${EGDIR}/installed-modules.scm.example
 
 .include "../../converters/libiconv/buildlink3.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"

@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.141 2013/07/15 02:02:25 ryoon Exp $
+# $NetBSD: Makefile,v 1.143 2014/01/11 14:42:04 adam Exp $
 
-DISTNAME=		R-2.15.1
-PKGREVISION=		7
+DISTNAME=		R-3.0.1
+PKGREVISION=		1
 CATEGORIES=		math
-MASTER_SITES=		${MASTER_SITE_R_CRAN:=base/R-2/}
+MASTER_SITES=		${MASTER_SITE_R_CRAN:=base/R-3/}
 
 MAINTAINER=		markd@NetBSD.org
 HOMEPAGE=		http://www.R-project.org/

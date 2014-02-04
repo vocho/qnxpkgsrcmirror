@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.42 2013/07/03 13:09:35 sno Exp $
+# $NetBSD: Makefile,v 1.44 2013/10/21 17:56:39 sno Exp $
 #
 
-DISTNAME=	Module-CoreList-2.92
+DISTNAME=	Module-CoreList-3.00
 PKGNAME=	p5-${DISTNAME}
 SVR4_PKGNAME=	p5mcl
 CATEGORIES=	devel perl5
-MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Module/}
+MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=../../authors/id/B/BI/BINGOS/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Module-CoreList/
+HOMEPAGE=	https://metacpan.org/release/Module-CoreList
 COMMENT=	Perl 5 module inventorying modules shipped with core Perl
 LICENSE=	${PERL5_LICENSE}
 

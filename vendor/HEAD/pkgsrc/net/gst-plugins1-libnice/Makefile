@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.2 2013/07/06 16:27:35 ryoon Exp $
+# $NetBSD: Makefile,v 1.5 2014/01/01 11:52:29 wiz Exp $
 
 DISTNAME=	libnice-0.1.4
 PKGNAME=	gst-plugins1-${DISTNAME}

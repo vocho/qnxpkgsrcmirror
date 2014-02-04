@@ -1,9 +1,8 @@
-# $NetBSD: Makefile,v 1.26 2013/04/12 13:34:41 joerg Exp $
+# $NetBSD: Makefile,v 1.28 2013/11/12 16:49:07 adam Exp $
 
 BOOST_PACKAGE=		headers
 BOOST_COMMENT=		(build-time headers)
 BOOST_CONFIG=		generate
-PKGREVISION=		1
 
 .include "../../meta-pkgs/boost/Makefile.common"
 

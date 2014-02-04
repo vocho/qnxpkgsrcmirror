@@ -1,9 +1,8 @@
-# $NetBSD: Makefile,v 1.47 2013/07/12 10:44:56 jperkin Exp $
+# $NetBSD: Makefile,v 1.56 2014/01/17 11:50:49 adam Exp $
 
-DISTNAME=	dovecot-2.2.4
-PKGREVISION=	1
+DISTNAME=	dovecot-2.2.10
 CATEGORIES=	mail
-MASTER_SITES=	http://www.dovecot.org/releases/2.2/
+MASTER_SITES=	http://www.dovecot.org/releases/${PKGVERSION_NOREV:R}/
 
 MAINTAINER=	adam@NetBSD.org
 HOMEPAGE=	http://www.dovecot.org/
@@ -68,5 +67,6 @@ post-install:
 .undef MANZ
 
 .include "../../archivers/bzip2/buildlink3.mk"
+.include "../../archivers/xz/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

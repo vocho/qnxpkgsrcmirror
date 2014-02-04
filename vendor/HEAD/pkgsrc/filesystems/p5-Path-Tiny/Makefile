@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.1 2013/07/03 15:13:33 sno Exp $
+# $NetBSD: Makefile,v 1.6 2014/01/12 10:20:12 wen Exp $
 #
 
-DISTNAME=	Path-Tiny-0.024
+DISTNAME=	Path-Tiny-0.051
 PKGNAME=	p5-${DISTNAME}
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=../../authors/id/D/DA/DAGOLDEN/}
@@ -15,7 +15,6 @@ PKG_INSTALLATION_TYPES=	overwrite pkgviews
 
 PERL5_PACKLIST=		auto/Path/Tiny/.packlist
 
-DEPENDS+=	p5-autodie>=2.14:../../devel/p5-autodie
 DEPENDS+=	{perl>=5.18.0,p5-PathTools>=3.40}:../../devel/p5-PathTools
 
 BUILD_DEPENDS+=	p5-Devel-Hide-[0-9]*:../../devel/p5-Devel-Hide

@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.11 2013/07/15 02:02:23 ryoon Exp $
+# $NetBSD: Makefile,v 1.13 2013/10/18 16:05:06 roy Exp $
 
 DISTNAME=		guile-1.6.8
-PKGREVISION=		5
+PKGREVISION=		6
 PKGNAME=		guile16-1.6.8
 CATEGORIES=		lang
 MASTER_SITES=		${MASTER_SITE_GNU:=guile/}
@@ -12,6 +12,8 @@ COMMENT=		GNU's Ubiquitous Intelligent Language for Extension (1.6.x series)
 
 # Purposely not defining PREV_PKGPATH
 SUPERSEDES=		guile-1.6.*
+
+MAKE_JOBS_SAFE=		no
 
 GNU_CONFIGURE=		YES
 GNU_CONFIGURE_PREFIX=	${PREFIX}/guile/1.6
@@ -45,7 +47,6 @@ post-patch:
 .endif
 
 .include "../../devel/libltdl/buildlink3.mk"
-.include "../../devel/ncurses/buildlink3.mk"
 .include "../../devel/readline/buildlink3.mk"
 .include "../../mk/pthread.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

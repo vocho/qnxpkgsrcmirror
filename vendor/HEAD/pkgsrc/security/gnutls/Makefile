@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.130 2013/07/15 08:19:15 wiz Exp $
+# $NetBSD: Makefile,v 1.141 2014/01/26 09:38:33 tron Exp $
 
-DISTNAME=	gnutls-3.2.2
+DISTNAME=	gnutls-3.2.9
 CATEGORIES=	security devel
 MASTER_SITES=	ftp://ftp.gnutls.org/gcrypt/gnutls/v3.2/
 EXTRACT_SUFX=	.tar.xz
@@ -21,6 +21,9 @@ CONFIGURE_ARGS+=	--without-p11-kit
 # this library duplicates (and conflicts with) openssl
 CONFIGURE_ARGS+=	--disable-openssl-compatibility
 CONFIGURE_ARGS+=	--disable-guile
+CONFIGURE_ARGS+=	--disable-libdane
+CONFIGURE_ARGS+=	--without-tpm
+CONFIGURE_ARGS+=	AUTOGEN=/bin/true
 
 TEST_TARGET=		check
 INFO_FILES=		yes
@@ -28,7 +31,7 @@ INFO_FILES=		yes
 REPLACE_PERL+=	doc/scripts/gdoc doc/scripts/sort2.pl
 
 PKGCONFIG_OVERRIDE=	lib/gnutls.pc.in
-PKGCONFIG_OVERRIDE+=	libextra/gnutls-extra.pc.in
+PKGCONFIG_OVERRIDE+=	libdane/gnutls-dane.pc.in
 
 MAKE_ENV+=		RM=${RM:Q}
 MAKE_ENV+=		TZ=UTC
@@ -37,6 +40,11 @@ DOCDIR=		${PREFIX}/share/doc/gnutls
 EGDIR=		${PREFIX}/share/examples/gnutls
 
 .include "../../mk/bsd.prefs.mk"
+
+# Assembler support is broken for Mac OS X and SunOS in 3.2.9.
+.if ${OPSYS} == "Darwin" || ${OPSYS} == "SunOS"
+CONFIGURE_ARGS+=	--disable-hardware-acceleration
+.endif
 
 INSTALLATION_DIRS=	${DOCDIR} ${EGDIR} include/gnutls
 

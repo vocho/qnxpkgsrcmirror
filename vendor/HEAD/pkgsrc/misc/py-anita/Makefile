@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.25 2013/06/17 20:13:37 gdt Exp $
-#
+# $NetBSD: Makefile,v 1.28 2014/01/25 10:30:14 wiz Exp $
 
-DISTNAME=	anita-1.30
+DISTNAME=	anita-1.31
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
 CATEGORIES=	misc
 MASTER_SITES=	http://www.gson.org/netbsd/anita/download/
@@ -11,12 +10,13 @@ HOMEPAGE=	http://www.gson.org/netbsd/anita/
 COMMENT=	Automated NetBSD Installation and Test Application
 LICENSE=	isc
 
-# qemu1 does not work reliably.  See the anita(1) man page.
-DEPENDS+=	qemu>=0.12.3nb2:../../emulators/qemu0
 DEPENDS+=	cdrtools>=2.00.00.00:../../sysutils/cdrtools
 DEPENDS+=	${PYPKGPREFIX}-pexpect>=2.1:../../devel/py-pexpect
 
 USE_LANGUAGES=	#none
 
+PYTHON_VERSIONS_INCOMPATIBLE=	33 # not yet ported as of 1.31
+
+.include "options.mk"
 .include "../../lang/python/distutils.mk"
 .include "../../mk/bsd.pkg.mk"

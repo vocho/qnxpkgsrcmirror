@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.27 2013/07/12 10:45:00 jperkin Exp $
+# $NetBSD: Makefile,v 1.29 2013/11/01 13:26:53 jperkin Exp $
 #
 
 DISTNAME=	spread-src-3.17.3
 PKGNAME=	${DISTNAME:S/-src//}
-PKGREVISION=	4
+PKGREVISION=	5
 CATEGORIES=	net
 MASTER_SITES=	http://www.cnds.jhu.edu/download/noformdown/
 
@@ -15,22 +15,31 @@ WRKSRC=		${WRKDIR}/${DISTNAME}
 USE_TOOLS+=	perl
 GNU_CONFIGURE=	YES
 CONFIGURE_ARGS+=	--includedir=${PREFIX:Q}/include/spread
+CONFIGURE_ARGS+=	--with-pid-dir=${RUNTIME_DIR:Q}
 MAKE_FLAGS+=	LD=${CC:Q}
+
+BUILD_DEFS+=	SPREAD_DIR
 
 PKG_GROUPS_VARS+=	SPREAD_GROUP
 PKG_USERS_VARS+=	SPREAD_USER
 
 SPREAD_USER=	spread
 SPREAD_GROUP=	spread
+SPREAD_DIR?=	${VARBASE}/run/spread
 
 FILES_SUBST+=	SPREAD_USER=${SPREAD_USER:Q}
 FILES_SUBST+=	SPREAD_GROUP=${SPREAD_GROUP:Q}
 FILES_SUBST+=	RUNTIME_DIR=${RUNTIME_DIR:Q}
 
-INCLUDEDIR=	${PREFIX}/include/spread
+SUBST_CLASSES+=		spread
+SUBST_STAGE.spread=	pre-configure
+SUBST_MESSAGE.spread=	Fix default config
+SUBST_FILES.spread=	sample.spread.conf spread_params.h
+SUBST_VARS.spread=	SPREAD_USER SPREAD_GROUP RUNTIME_DIR
+
 DOCSDIR=	${PREFIX}/share/doc/spread
 EXAMPLEDIR=	${PREFIX}/share/examples/spread
-RUNTIME_DIR=	${VARBASE}/run/spread
+RUNTIME_DIR=	${SPREAD_DIR}
 
 RCD_SCRIPTS=	spread
 PKG_GROUPS=	${SPREAD_USER}

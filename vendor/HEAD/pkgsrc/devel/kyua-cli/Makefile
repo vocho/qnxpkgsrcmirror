@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.15 2013/07/04 21:27:56 adam Exp $
+# $NetBSD: Makefile,v 1.18 2013/12/08 01:21:59 jmmv Exp $
 #
 
-DISTNAME=	kyua-cli-0.6
-PKGREVISION=	3
+DISTNAME=	kyua-cli-0.8
 CATEGORIES=	devel
 MASTER_SITES=	http://kyua.googlecode.com/files/
 

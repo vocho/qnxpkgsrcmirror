@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.8 2013/03/16 01:58:53 taca Exp $
+# $NetBSD: Makefile,v 1.16 2013/12/13 15:32:21 taca Exp $
 
 #
 # We can't omit PKGNAME here to handle PKG_OPTIONS.
@@ -7,13 +7,16 @@ PKGNAME=		php-${PHP_BASE_VERS}
 CATEGORIES=		lang
 
 HOMEPAGE=		http://www.php.net/
-COMMENT=		PHP Hypertext Preprocessor version 5
+COMMENT=		PHP Hypertext Preprocessor version 5.4
 LICENSE=		php
 
 TEST_TARGET=		test
 
 USE_TOOLS+=		gmake lex pkg-config
 LIBTOOL_OVERRIDE=	# empty
+PHP_CHECK_INSTALLED=	No
+
+PHP_VERSIONS_ACCEPTED=		54
 
 .include "Makefile.php"
 
@@ -30,7 +33,7 @@ PLIST_SUBST+=		PHPEXTDIR="${PHP_EXTENSION_DIR}"
 SUBST_CLASSES+=		path
 SUBST_MESSAGE.path=	Fixing common paths.
 SUBST_STAGE.path=	pre-configure
-SUBST_FILES.path=	configure ext/phar/phar/phar.php
+SUBST_FILES.path=	ext/phar/phar/phar.php
 SUBST_FILES.path+=	php.ini-development php.ini-production run-tests.php
 SUBST_FILES.path+=	sapi/cgi/Makefile.frag
 SUBST_SED.path=		-e 's,@CGIDIR@,${CGIDIR},g'

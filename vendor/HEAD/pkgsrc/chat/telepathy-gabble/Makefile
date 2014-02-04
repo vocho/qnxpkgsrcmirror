@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.32 2013/07/06 16:27:35 ryoon Exp $
-#
+# $NetBSD: Makefile,v 1.36 2014/01/25 10:29:58 wiz Exp $
 
 DISTNAME=	telepathy-gabble-0.11.10
-PKGREVISION=	15
+PKGREVISION=	17
 CATEGORIES=	chat
 MASTER_SITES=	http://telepathy.freedesktop.org/releases/telepathy-gabble/
 
@@ -18,9 +17,13 @@ USE_LIBTOOL=	yes
 USE_TOOLS+=	gmake pkg-config
 CONFIGURE_ENV+=	UUID_CFLAGS=" " UUID_LIBS=" "
 
+PYTHON_VERSIONS_INCOMPATIBLE=	33 # not yet ported as of 0.11.10
+
 .include "../../mk/compiler.mk"
 .if !empty(PKGSRC_COMPILER:Mclang)
-CFLAGS+=	-Wno-error=deprecated-declarations -Wno-error=tautological-constant-out-of-range-compare
+CFLAGS+=	-Wno-error=deprecated-declarations \
+		-Wno-error=tautological-constant-out-of-range-compare \
+		-Wno-error=unused-function
 .endif
 
 # see pkgsrc/security/mozilla-rootcerts

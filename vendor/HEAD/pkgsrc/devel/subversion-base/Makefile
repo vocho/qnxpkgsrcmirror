@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.84 2013/07/10 13:28:38 wiz Exp $
+# $NetBSD: Makefile,v 1.91 2013/11/02 09:19:17 adam Exp $
 
 PKGNAME=	subversion-base-${SVNVER}
-PKGREVISION=	1
 COMMENT=	Version control system, base programs and libraries
 
 PKG_INSTALLATION_TYPES=	overwrite pkgviews
@@ -23,6 +22,8 @@ APU_OPTIONS=		PKG_BUILD_OPTIONS.apr
 .endif
 BUILD_DEFS+=		${APU_OPTIONS}
 
+CFLAGS.SunOS+=		-D__EXTENSIONS__
+
 .if !empty(PKG_OPTIONS:Mapr1)
 .  include "../../devel/apr/buildlink3.mk"
 .  include "../../devel/apr-util/buildlink3.mk"
@@ -38,7 +39,6 @@ BUILDLINK_API_DEPENDS.sqlite3+=	sqlite3>=3.7.15.1
 PLIST_VARS+=		db4
 .if !empty(PKG_OPTIONS:Mapr1) && !empty(PKG_BUILD_OPTIONS.apr-util:Mdb4)
 PLIST.db4=		yes
-#CONFIGURE_ARGS+=	--with-berkeley-db=:${BUILDLINK_PREFIX.db4:Q}/include:${BUILDLINK_PREFIX.db4:Q}/lib:${BUILDLINK_LDADD.db4:S/^-l//:Q}
 CONFIGURE_ARGS+=	--with-berkeley-db
 .else
 CONFIGURE_ARGS+=	--without-berkeley-db

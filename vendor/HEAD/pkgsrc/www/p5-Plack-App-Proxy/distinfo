@@ -1,5 +1,5 @@
-$NetBSD: distinfo,v 1.3 2013/07/13 12:12:31 wen Exp $
+$NetBSD: distinfo,v 1.5 2013/09/05 00:53:39 wen Exp $
 
-SHA1 (Plack-App-Proxy-0.27.tar.gz) = ce177927e506160c0ac02a4d1a770eacefaffc40
-RMD160 (Plack-App-Proxy-0.27.tar.gz) = 03e54244f20f98fd9fc3053ac0e54d6777f7c7a4
-Size (Plack-App-Proxy-0.27.tar.gz) = 33058 bytes
+SHA1 (Plack-App-Proxy-0.29.tar.gz) = f976438d9f733898bce2c1d9bfa342d2e7b96eec
+RMD160 (Plack-App-Proxy-0.29.tar.gz) = 10d67065eb05b54f8b8e3596eafc0987a594ef4d
+Size (Plack-App-Proxy-0.29.tar.gz) = 33506 bytes

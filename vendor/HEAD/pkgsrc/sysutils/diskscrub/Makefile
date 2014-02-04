@@ -1,17 +1,18 @@
-# $NetBSD: Makefile,v 1.5 2013/05/31 12:42:00 wiz Exp $
+# $NetBSD: Makefile,v 1.7 2013/12/15 19:44:39 joerg Exp $
 #
 
-DISTNAME=	scrub-2.0
-PKGREVISION=	2
+DISTNAME=	scrub-2.5.2
+PKGREVISION=	1
 CATEGORIES=	sysutils
-MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=diskscrub/}
+MASTER_SITES=	http://diskscrub.googlecode.com/files/
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	agc@NetBSD.org
-HOMEPAGE=	http://sourceforge.net/projects/diskscrub
+HOMEPAGE=	http://code.google.com/p/diskscrub/
 COMMENT=	Utility to overwrite disks and scrub the data on them
+LICENSE=	gnu-gpl-v2
 
 GNU_CONFIGURE=	yes
-USE_TOOLS+=	perl # this is purely for GNU configure
+USE_TOOLS+=	perl # this is purely for GNU configure (X_AC_META macro)
 
 .include "../../mk/bsd.pkg.mk"

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.4 2013/07/09 17:24:46 kleink Exp $
+# $NetBSD: Makefile,v 1.7 2014/01/25 10:30:28 wiz Exp $
 
 DISTNAME=	Flask-0.10.1
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME:tl}

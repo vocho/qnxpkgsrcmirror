@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.102 2013/06/04 22:15:51 tron Exp $
+# $NetBSD: Makefile,v 1.107 2014/01/26 04:22:03 ryoon Exp $
 
-DISTNAME=	doxygen-1.8.4.src
+DISTNAME=	doxygen-1.8.6.src
 PKGNAME=	${DISTNAME:S/.src//}
-PKGREVISION=	3
 CATEGORIES=	devel
 MASTER_SITES=	ftp://ftp.stack.nl/pub/users/dimitri/ \
 		http://ftp.stack.nl/pub/users/dimitri/
@@ -14,17 +13,25 @@ LICENSE=	gnu-gpl-v2
 
 WRKSRC=			${WRKDIR}/${PKGNAME_NOREV}
 UNLIMIT_RESOURCES+=	datasize
+# doxygen upstream uses this version of flex
+FLEX_REQD=		2.5.35
 USE_TOOLS+=		gmake gs:run perl:run bison flex
 USE_LANGUAGES=		c c++
 HAS_CONFIGURE=		yes
 CONFIGURE_ARGS+=	--make ${GMAKE}
 CONFIGURE_ARGS+=	--perl ${PERL5}
+CONFIGURE_ARGS+=	--python ${PYTHONBIN}
 CONFIGURE_ARGS+=	--install ${INSTALL}
 CONFIGURE_ARGS+=	--dot ${PREFIX}/bin/dot
 CONFIGURE_ARGS+=	--prefix ${PREFIX}
 CONFIGURE_ARGS+=	--docdir ${PREFIX}/share/doc/doxygen
 MAKE_ENV+=		PKGSRC_CFLAGS=${CFLAGS:Q}
 MAKE_FLAGS+=		MAN1DIR=${PKGMANDIR}/man1
+
+LDFLAGS.FreeBSD=	-liconv
+LDFLAGS.OpenBSD=	-liconv
+
+REPLACE_PERL=		tmake/bin/tmake
 
 # Case Insensitive fs or Sensitive
 PLIST_VARS+=		ci cs
@@ -36,7 +43,6 @@ SUBST_CLASSES+=		path
 SUBST_STAGE.path=	pre-configure
 SUBST_FILES.path=	doc/Makefile.in
 SUBST_SED.path=		-e "s|@EPSTOPDF@|${LOCALBASE}/bin/epstopdf|g"
-SUBST_SED.path+=	-e "s|@PYTHONBIN@|${PYTHONBIN}|g"
 
 SUBST_CLASSES+=		perlbin
 SUBST_STAGE.perlbin=	pre-configure
@@ -67,8 +73,15 @@ PLIST.cs=		yes	# case-sensitive
 CONFIGURE_ARGS+=	-platform freebsd-g++
 .endif
 
+LDFLAGS.FreeBSD+=	${BUILDLINK_LDADD.iconv}
+LDFLAGS.OpenBSD+=	${BUILDLINK_LDADD.iconv}
+
 post-patch:
 	touch ${WRKSRC}/src/doxytag.l
+
+# remove unnecessary files that leak tool paths
+post-install:
+	rm -f ${DESTDIR}${PREFIX}/share/doc/doxygen/examples/Makefile*
 
 BUILDLINK_API_DEPENDS.graphviz+=	graphviz>=2.12nb1
 
@@ -77,9 +90,9 @@ BUILDLINK_API_DEPENDS.graphviz+=	graphviz>=2.12nb1
 .include "../../graphics/graphviz/buildlink3.mk"
 
 .if !empty(PKG_BUILD_OPTIONS.graphviz:Mpangocairo)
-PLIST.pangocairo=       yes
+PLIST.pangocairo=	yes
 .else
-PLIST.nopangocairo=       yes
+PLIST.nopangocairo=	yes
 .endif
 .include "../../lang/python/application.mk"
 .include "../../mk/bsd.pkg.mk"

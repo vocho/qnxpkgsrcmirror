@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST.common,v 1.13 2010/09/16 11:09:50 obache Exp $
+@comment $NetBSD: PLIST.common,v 1.15 2013/11/06 07:25:49 adam Exp $
 bin/2to3-${PY_VER_SUFFIX}
 bin/pydoc${PY_VER_SUFFIX}
 bin/python${PY_VER_SUFFIX}
@@ -2601,6 +2601,7 @@ lib/python${PY_VER_SUFFIX}/test/lock_tests.pyo
 lib/python${PY_VER_SUFFIX}/test/mapping_tests.py
 lib/python${PY_VER_SUFFIX}/test/mapping_tests.pyc
 lib/python${PY_VER_SUFFIX}/test/mapping_tests.pyo
+lib/python${PY_VER_SUFFIX}/test/nullbytecert.pem
 lib/python${PY_VER_SUFFIX}/test/nullcert.pem
 lib/python${PY_VER_SUFFIX}/test/outstanding_bugs.py
 lib/python${PY_VER_SUFFIX}/test/outstanding_bugs.pyc
@@ -3307,6 +3308,9 @@ lib/python${PY_VER_SUFFIX}/test/test_new.pyo
 lib/python${PY_VER_SUFFIX}/test/test_nis.py
 lib/python${PY_VER_SUFFIX}/test/test_nis.pyc
 lib/python${PY_VER_SUFFIX}/test/test_nis.pyo
+lib/python${PY_VER_SUFFIX}/test/test_nntplib.py
+lib/python${PY_VER_SUFFIX}/test/test_nntplib.pyc
+lib/python${PY_VER_SUFFIX}/test/test_nntplib.pyo
 lib/python${PY_VER_SUFFIX}/test/test_normalization.py
 lib/python${PY_VER_SUFFIX}/test/test_normalization.pyc
 lib/python${PY_VER_SUFFIX}/test/test_normalization.pyo

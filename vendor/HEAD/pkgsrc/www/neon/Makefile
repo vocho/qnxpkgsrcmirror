@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.60 2013/06/24 13:44:20 jperkin Exp $
+# $NetBSD: Makefile,v 1.62 2014/01/14 19:35:48 wiz Exp $
 
-DISTNAME=	neon-0.29.6
-PKGREVISION=	4
+DISTNAME=	neon-0.30.0
+PKGREVISION=	1
 CATEGORIES=	www
 MASTER_SITES=	http://www.webdav.org/neon/
 
@@ -25,14 +25,6 @@ TEST_TARGET=		check
 USE_TOOLS+=		perl
 
 LDFLAGS.SunOS+=		-lintl
-
-post-build:
-	cd ${WRKSRC}/doc/man && \
-	for i in ne_*3; do \
-		if grep -q '^.so ' $$i >/dev/null; then \
-			sed -e "s_.so _.so man3/_" $$i > $$i.new && mv $$i.new $$i; \
-		fi; \
-	done
 
 .include "options.mk"
 
