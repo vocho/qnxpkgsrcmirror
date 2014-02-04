@@ -1,14 +1,11 @@
-# $NetBSD: Makefile,v 1.50 2013/07/10 13:28:38 wiz Exp $
+# $NetBSD: Makefile,v 1.53 2013/09/05 07:07:46 adam Exp $
 
 PKGNAME=	subversion-${SVNVER}
-PKGREVISION=	1
 COMMENT=	Version control system, meta-package
 
-META_PACKAGE=	# empty
+META_PACKAGE=	yes
 
 .include "../../devel/subversion/Makefile.common"
-
-RUBY_VERSION_SUPPORTED=	18
 
 DEPENDS+=	subversion-base-${SVNVER}{,nb[0-9]*}:../../devel/subversion-base
 DEPENDS+=	${APACHE_PKG_PREFIX}-subversion-${SVNVER}{,nb[0-9]*}:../../www/ap2-subversion

@@ -1,4 +1,4 @@
-# $NetBSD: rubyversion.mk,v 1.101 2013/07/21 02:27:45 taca Exp $
+# $NetBSD: rubyversion.mk,v 1.108 2014/02/02 07:46:16 taca Exp $
 #
 
 # This file determines which Ruby version is used as a dependency for
@@ -42,7 +42,7 @@
 #	The Ruby versions that are acceptable for the package.
 #
 #		Possible values: 18 193 200
-#		Default: 18 193
+#		Default: 18 193 200
 #
 # RUBY_NOVERSION
 #	If "Yes", the package dosen't depend on any version of Ruby, such
@@ -200,6 +200,10 @@ _RUBYVERSION_MK=	# defined
 
 .include "../../mk/bsd.prefs.mk"
 
+.if defined(PKGNAME_REQD) && (!empty(PKGNAME_REQD:Mruby[0-9][0-9][0-9]-*) || !empty(PKGNAME_REQD:Mruby[0-9][0-9]-*))
+RUBY_VERSION_REQD?= ${PKGNAME_REQD:C/ruby([0-9][0-9]+)-.*/\1/}
+.endif
+
 # current supported Ruby's version
 RUBY18_VERSION=		1.8.7
 RUBY193_VERSION=	1.9.3
@@ -207,8 +211,8 @@ RUBY200_VERSION=	2.0.0
 
 # patch
 RUBY18_PATCHLEVEL=	pl374
-RUBY193_PATCHLEVEL=	p448
-RUBY200_PATCHLEVEL=	p247
+RUBY193_PATCHLEVEL=	p484
+RUBY200_PATCHLEVEL=	p353
 
 # current API compatible version; used for version of shared library
 RUBY18_API_VERSION=	1.8.7
@@ -318,7 +322,7 @@ RUBY_BUILD_RI?=		Yes
 RUBY?=			${PREFIX}/bin/${RUBY_NAME}
 RDOC?=			${PREFIX}/bin/rdoc${RUBY_VER}
 
-RUBY_ARCH?= ${LOWER_ARCH}-${LOWER_OPSYS}${APPEND_ELF}${LOWER_OPSYS_VERSUFFIX}
+RUBY_ARCH?= ${MACHINE_GNU_ARCH}-${LOWER_OPSYS}${APPEND_ELF}${LOWER_OPSYS_VERSUFFIX}
 
 #
 # Ruby shared and static library version handling.
@@ -338,7 +342,11 @@ RUBY_SHLIBVER=		${RUBY_VER}
 RUBY_SHLIBVER=		${_RUBY_VER_MAJOR}${_RUBY_VER_MINOR}${_RUBY_API_MINOR}
 .endif
 .elif ${OPSYS} == "OpenBSD" || ${OPSYS} == "MirBSD"
+.if ${_RUBY_VER_MINOR} == 0
+RUBY_SHLIBVER=		${_RUBY_VER_MAJOR}.${_RUBY_API_MINOR}
+.else
 RUBY_SHLIBVER=		${_RUBY_VER_MAJOR}.${_RUBY_VER_MINOR}${_RUBY_API_MINOR}
+.endif
 .elif ${OPSYS} == "Darwin"
 RUBY_SHLIB=		${RUBY_VER}.${RUBY_SHLIBVER}.${RUBY_SLEXT}
 .if ${RUBY_VER} == "18"

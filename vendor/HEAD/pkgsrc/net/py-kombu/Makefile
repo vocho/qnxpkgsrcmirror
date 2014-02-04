@@ -1,15 +1,16 @@
-# $NetBSD: Makefile,v 1.1 2013/07/02 11:05:21 rodent Exp $
-#
+# $NetBSD: Makefile,v 1.5 2014/02/02 13:58:34 rodent Exp $
 
-DISTNAME=	kombu-2.5.12
+DISTNAME=	kombu-3.0.10
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
 CATEGORIES=	net
-MASTER_SITES=	http://pypi.python.org/packages/source/k/kombu/
+MASTER_SITES=	https://pypi.python.org/packages/source/k/kombu/
 
 MAINTAINER=	rodent@NetBSD.org
 HOMEPAGE=	http://kombu.readthedocs.org/
 COMMENT=	Messaging framework for Python
 LICENSE=	modified-bsd
+
+DEPENDS+=	${PYPKGPREFIX}-amqp>=1.4.1:../../net/py-amqp
 
 USE_LANGUAGES=	# none
 

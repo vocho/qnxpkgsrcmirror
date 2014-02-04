@@ -1,20 +1,20 @@
-# $NetBSD: Makefile,v 1.11 2013/07/04 12:25:31 obache Exp $
+# $NetBSD: Makefile,v 1.13 2013/12/31 16:47:27 christos Exp $
 
 # Note: This must be kept in sync with the sun-jre7 package
 # Note: make sure you include sums for both the x86_64 and the x86_32
 # in distinfo (make makesum will eat one of them)
 
-DISTNAME=	jdk-7u25-${DIST_OS}-${DIST_ARCH}
-PKGNAME=	sun-jdk7-7.0.25
+DISTNAME=	jdk-7u45-${DIST_OS}-${DIST_ARCH}
+PKGNAME=	sun-jdk7-7.0.45
 MASTER_SITES=	# empty
 
 LICENSE=	oracle-binary-code-license
 
-DOWNLOAD_NAME=	Java Development Kit (JDK) 7u25
+DOWNLOAD_NAME=	Java Development Kit (JDK) 7u45
 
 DEPENDS+=	${PKGNAME_NOREV:S/jdk/jre/}*:../../lang/sun-jre7
 
-WRKSRC=		${WRKDIR}/jdk1.7.0_25
+WRKSRC=		${WRKDIR}/jdk1.7.0_45
 JAVA_WRAPPERS=	appletviewer apt extcheck idlj jar jarsigner \
 		javac javadoc javah javap jdb rmic serialver
 
@@ -33,10 +33,14 @@ DISTFILES=	${DEFAULT_DISTFILES} ${DEFAULT_DISTFILES:S/x64/i586/}
 .endif
 
 PLIST_SRC=	PLIST.${DIST_OS}-${EMUL_ARCH}
+PLIST_SUBST+=	JAVA_ARCH="${JAVA_ARCH}"
 
 # Remove parts that are in common with the JRE
 #
 post-extract:
+	${MKDIR} ${WRKSRC}/lib/${JAVA_ARCH}
+	${MV} ${WRKSRC}/jre/lib/${JAVA_ARCH}/libattach.so ${WRKSRC}/lib/${JAVA_ARCH}
+	${MV} ${WRKSRC}/jre/lib/${JAVA_ARCH}/libsaproc.so ${WRKSRC}/lib/${JAVA_ARCH}
 	common=`${AWK} '/^#.*/ { next } /^$$/ { next } { print }' ${FILESDIR}/common`; \
 	cd ${WRKSRC}; for i in $$common; do				\
 		if [ -d $$i ]; then					\

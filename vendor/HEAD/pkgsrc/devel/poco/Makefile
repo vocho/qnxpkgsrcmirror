@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.7 2013/02/06 23:21:03 jperkin Exp $
+# $NetBSD: Makefile,v 1.9 2014/01/15 13:51:23 joerg Exp $
 #
 
 PKGNAME=	poco-${POCO_VERSION}

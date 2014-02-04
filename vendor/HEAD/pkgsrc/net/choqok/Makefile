@@ -1,11 +1,10 @@
-# $NetBSD: Makefile,v 1.16 2013/07/05 13:29:41 ryoon Exp $
+# $NetBSD: Makefile,v 1.18 2014/01/02 19:44:11 jaapb Exp $
 #
 
-DISTNAME=	choqok-1.3
-PKGREVISION=	12
+DISTNAME=	choqok-1.4
 CATEGORIES=	net
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=choqok/}Choqok/
-EXTRACT_SUFX=	.tar.bz2
+EXTRACT_SUFX=	.tar.xz
 
 MAINTAINER=	jaapb@NetBSD.org
 HOMEPAGE=	http://choqok.gnufolks.org/
@@ -25,4 +24,5 @@ DEPENDS=	qca2-ossl-[0-9]*:../../security/qca2-ossl
 .include "../../security/qoauth/buildlink3.mk"
 .include "../../misc/attica/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
+.include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

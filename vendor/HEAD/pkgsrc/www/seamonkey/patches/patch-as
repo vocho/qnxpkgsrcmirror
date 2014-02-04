@@ -1,11 +1,11 @@
-$NetBSD: patch-as,v 1.12 2013/05/23 13:25:30 ryoon Exp $
+$NetBSD: patch-as,v 1.15 2013/12/26 13:17:37 ryoon Exp $
 
 * Fix _res is not supported for multi-threaded programs. error.
 * Treat DragonFly like FreeBSD.
 
---- mozilla/js/src/configure.in.orig	2013-05-03 03:07:57.000000000 +0000
+--- mozilla/js/src/configure.in.orig	2013-12-11 04:28:40.000000000 +0000
 +++ mozilla/js/src/configure.in
-@@ -2399,6 +2399,7 @@ EOF
+@@ -2290,6 +2290,7 @@ EOF
  #pragma GCC visibility push(hidden)
  #pragma GCC visibility push(default)
  #include <string.h>
@@ -13,7 +13,7 @@ $NetBSD: patch-as,v 1.12 2013/05/23 13:25:30 ryoon Exp $
  #pragma GCC visibility pop
  
  __attribute__ ((visibility ("default"))) void Func() {
-@@ -2407,7 +2408,7 @@ __attribute__ ((visibility ("default")))
+@@ -2298,7 +2299,7 @@ __attribute__ ((visibility ("default")))
  }
  EOF
                         ac_cv_have_visibility_builtin_bug=no
@@ -22,7 +22,7 @@ $NetBSD: patch-as,v 1.12 2013/05/23 13:25:30 ryoon Exp $
                           ac_cv_have_visibility_builtin_bug=yes
                         else
                           if test `grep -c "@PLT" conftest.S` = 0; then
-@@ -2628,7 +2629,7 @@ then
+@@ -2515,7 +2516,7 @@ then
      fi
  
  	case "$target" in
@@ -31,17 +31,33 @@ $NetBSD: patch-as,v 1.12 2013/05/23 13:25:30 ryoon Exp $
  			AC_DEFINE(_REENTRANT)
  			AC_DEFINE(_THREAD_SAFE)
  			dnl -pthread links in -lpthread, so don't specify it explicitly.
-@@ -2711,6 +2712,9 @@ AC_CACHE_CHECK(
+@@ -2600,14 +2601,22 @@ fi
+ AC_CACHE_CHECK(
+     [for res_ninit()],
+     ac_cv_func_res_ninit,
+-    [AC_TRY_LINK([
++    [AC_TRY_RUN([
          #ifdef linux
          #define _BSD_SOURCE 1
          #endif
-+        #ifdef __NetBSD__
-+        #error use of global _res variable in threaded programs is not portable
-+        #endif
++	#ifdef __NetBSD__
++	#error use of global _res variable in threaded programs is not portable
++	#endif
++        #include <sys/types.h>
++        #include <netinet/in.h>
++        #include <arpa/nameser.h>
          #include <resolv.h>
-         ],
-         [int foo = res_ninit(&_res);],
-@@ -3486,7 +3490,7 @@ if test "$MOZ_MEMORY"; then
+-        ],
+-        [int foo = res_ninit(&_res);],
++        int main(int argc, char **argv){
++            int foo = res_ninit(&_res);
++        }],
+         [ac_cv_func_res_ninit=yes],
++        [ac_cv_func_res_ninit=no],
+         [ac_cv_func_res_ninit=no])
+     ])
+ 
+@@ -3316,7 +3325,7 @@ if test "$MOZ_MEMORY"; then
    *-darwin*)
      AC_DEFINE(MOZ_MEMORY_DARWIN)
      ;;
@@ -50,3 +66,20 @@ $NetBSD: patch-as,v 1.12 2013/05/23 13:25:30 ryoon Exp $
      AC_DEFINE(MOZ_MEMORY_BSD)
      ;;
    *-android*|*-linuxandroid*)
+@@ -4339,6 +4348,16 @@ fi
+ dnl ========================================================
+ dnl JavaScript shell
+ dnl ========================================================
++ICU_LIB_NAMES=
++MOZ_NATIVE_ICU=
++MOZ_ARG_WITH_BOOL(system-icu,
++[  --with-system-icu
++                          Use system icu (located with pkgconfig)],
++    MOZ_NATIVE_ICU=1)
++
++if test -n "$MOZ_NATIVE_ICU"; then
++    PKG_CHECK_MODULES(MOZ_ICU, icu-i18n >= 50.1)
++fi
+ 
+ AC_HAVE_FUNCS(setlocale)
+ AC_HAVE_FUNCS(localeconv)

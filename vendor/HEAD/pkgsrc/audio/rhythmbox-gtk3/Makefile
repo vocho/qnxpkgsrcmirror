@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.12 2013/06/06 12:54:05 wiz Exp $
-#
+# $NetBSD: Makefile,v 1.17 2014/01/25 10:29:57 wiz Exp $
 
 DISTNAME=	rhythmbox-2.99.1
-PKGREVISION=	5
+PKGREVISION=	9
 CATEGORIES=	audio gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/rhythmbox/2.99/}
 EXTRACT_SUFX=	.tar.xz
@@ -21,6 +20,8 @@ BUILD_DEPENDS+=		itstool-[0-9]*:../../textproc/itstool
 CONFIGURE_ARGS+=	--disable-browser-plugin
 CONFIGURE_ARGS+=	--with-html-dir=${PREFIX}/share/doc
 CONFIGURE_ARGS+=	--disable-fm-radio
+
+PYTHON_VERSIONS_INCOMPATIBLE=	33 # py-gstreamer0.10
 
 # option?
 .include "../../net/grilo/buildlink3.mk"

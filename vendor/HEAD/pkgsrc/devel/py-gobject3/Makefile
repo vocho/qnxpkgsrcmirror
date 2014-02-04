@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.20 2013/07/15 12:41:03 wiz Exp $
+# $NetBSD: Makefile,v 1.23 2014/01/25 10:30:03 wiz Exp $
 
-DISTNAME=		pygobject-3.8.3
-PKGNAME=		${PYPKGPREFIX}-gobject3-3.8.3
+DISTNAME=		pygobject-3.10.2
+PKGNAME=		${PYPKGPREFIX}-gobject3-3.10.2
 CATEGORIES=		devel gnome
 MASTER_SITES=		${MASTER_SITE_GNOME:=sources/pygobject/${PKGVERSION_NOREV:R}/}
 EXTRACT_SUFX=		.tar.xz
@@ -18,7 +18,7 @@ USE_TOOLS+=		pkg-config gmake
 GNU_CONFIGURE=		yes
 CONFIGURE_ENV+=		PYTHON=${PYTHONBIN:Q}
 
-#PYTHON_VERSIONS_INCLUDE_3X=	yes
+PYTHON_VERSIONS_INCOMPATIBLE=	26
 PYTHON_SELF_CONFLICT=		yes
 
 PKGCONFIG_OVERRIDE+=	pygobject-3.0.pc.in
@@ -29,7 +29,8 @@ CONFLICTS+=		${PYPKGPREFIX}-gobject<2.28.6nb4
 
 # needed for tests only
 # https://bugzilla.gnome.org/show_bug.cgi?id=685094
-.include "../../graphics/cairo/buildlink3.mk"
+PYTHON_VERSIONED_DEPENDENCIES=	cairo:link
+.include "../../lang/python/versioned_dependencies.mk"
 .include "../../graphics/cairo-gobject/buildlink3.mk"
 TEST_TARGET=    check
 
@@ -42,10 +43,9 @@ PLATFORM!=	${PYTHONBIN:Q} -c "import sys; from distutils import util; sys.stdout
 PLIST_SUBST+=	PLATFORM=${PLATFORM:Q}
 .endif
 
-BUILDLINK_API_DEPENDS.glib2=	glib2>=2.34.2
+BUILDLINK_API_DEPENDS.glib2=	glib2>=2.35.9
 .include "../../devel/glib2/buildlink3.mk"
-BUILDLINK_API_DEPENDS.gobject-introspection=	gobject-introspection>=1.34.2
+BUILDLINK_API_DEPENDS.gobject-introspection=	gobject-introspection>=1.35.9
 .include "../../devel/gobject-introspection/buildlink3.mk"
 .include "../../devel/libffi/buildlink3.mk"
-.include "../../graphics/py-cairo/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

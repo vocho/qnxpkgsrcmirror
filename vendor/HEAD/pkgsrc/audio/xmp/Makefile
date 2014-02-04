@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.37 2013/02/09 22:11:34 ryoon Exp $
+# $NetBSD: Makefile,v 1.40 2013/12/10 07:14:45 rxg Exp $
 
-DISTNAME=	xmp-3.4.1
-PKGREVISION=	7
+DISTNAME=	xmp-4.0.6
+PKGREVISION=	2
 CATEGORIES=	audio
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=xmp/}
 
@@ -27,4 +27,5 @@ INSTALL_MAKE_FLAGS+=	INSTALL=${INSTALL:Q}
 
 .include "options.mk"
 
+.include "../../audio/libxmp/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

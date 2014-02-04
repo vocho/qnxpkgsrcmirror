@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.21 2013/07/09 11:20:23 ryoon Exp $
+# $NetBSD: Makefile,v 1.26 2013/12/17 13:26:38 ryoon Exp $
 #
 
-TB_VER=		17.0.7
+TB_VER=		24.2.0
 PKGNAME=	thunderbird-l10n-${TB_VER}
 DISTNAME=	# empty
 CATEGORIES=	mail
-MASTER_SITES=	${MASTER_SITE_MOZILLA_ESR:=thunderbird/releases/${TB_VER}esr/linux-i686/xpi/}
+MASTER_SITES=	${MASTER_SITE_MOZILLA:=thunderbird/releases/${TB_VER}/linux-i686/xpi/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.mozillamessaging.com/en-US/thunderbird/
@@ -28,5 +28,5 @@ TB_LOCALES=	        ar be bn-BD br ca cs			\
 EXTENSIONS_DIR=		${PREFIX}/lib/thunderbird/extensions
 XPI_FILES=		${TB_LOCALES:=.xpi}
 
-.include "../../devel/xulrunner17/xpi.mk"
+.include "../../www/firefox24/xpi.mk"
 .include "../../mk/bsd.pkg.mk"

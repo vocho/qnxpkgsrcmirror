@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.34 2013/07/06 23:11:51 wiz Exp $
+# $NetBSD: Makefile,v 1.36 2013/08/04 09:59:24 jaapb Exp $
 
 DISTNAME=	swig-1.3.36
 PKGREVISION=	4

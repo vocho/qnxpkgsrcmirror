@@ -1,5 +1,7 @@
-$NetBSD: distinfo,v 1.13 2013/06/13 14:27:59 wiz Exp $
+$NetBSD: distinfo,v 1.17 2013/12/18 17:55:15 joerg Exp $
 
-SHA1 (mame0149s.zip) = 895f1d1052e1eaa2e1cb0493a421cf854322cc07
-RMD160 (mame0149s.zip) = 73e167d38019f54d5fb3e38e10c3c259b2c48cb8
-Size (mame0149s.zip) = 35160585 bytes
+SHA1 (mame0151s.zip) = 94a0a4ac865d7453cf6e8fbc40bc86a9e12b8a52
+RMD160 (mame0151s.zip) = 3e7ce1b9acf9735612a0bfb166b980463ce3a5ca
+Size (mame0151s.zip) = 36052471 bytes
+SHA1 (patch-src_emu_emualloc.h) = 22cdfbc002cda8053125ef8cedf3bcceea04deaf
+SHA1 (patch-src_osd_sdl_sdl.mak) = e4eacee6ab6c4a889dde0649ebe091970ece9624

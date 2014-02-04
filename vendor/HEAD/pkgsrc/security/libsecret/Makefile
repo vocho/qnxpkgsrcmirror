@@ -1,13 +1,12 @@
-# $NetBSD: Makefile,v 1.5 2013/05/18 09:05:46 ryoon Exp $
-#
+# $NetBSD: Makefile,v 1.7 2014/01/27 20:14:04 wiz Exp $
 
-DISTNAME=	libsecret-0.15
+DISTNAME=	libsecret-0.16
 CATEGORIES=	security gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/libsecret/${PKGVERSION_NOREV}/}
 EXTRACT_SUFX=	.tar.xz
 
 MAINTAINER=	ryoon@NetBSD.org
-HOMEPAGE=	https://live.gnome.org/Libsecret
+HOMEPAGE=	https://wiki.gnome.org/Projects/Libsecret
 COMMENT=	GObject based library for accessing the Secret Service API
 LICENSE=	gnu-lgpl-v2.1
 

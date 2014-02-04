@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.9 2013/07/15 12:11:43 fhajny Exp $
-#
+# $NetBSD: Makefile,v 1.18 2014/02/03 17:23:48 fhajny Exp $
 
-DISTNAME=	node-v0.10.13
+DISTNAME=	node-v0.10.25
 CATEGORIES=	devel
 MASTER_SITES=	http://nodejs.org/dist/${DISTNAME:S/node-//}/
 PKGNAME=	${DISTNAME:S/-v/js-/}
@@ -15,6 +14,8 @@ HAS_CONFIGURE=	yes
 USE_TOOLS+=	pkg-config
 USE_TOOLS+=	gmake
 USE_LANGUAGES=	c c++
+
+PYTHON_VERSIONS_INCOMPATIBLE=	33 # not yet ported as of 0.10.24
 
 .include "../../mk/bsd.prefs.mk"
 .include "options.mk"
@@ -42,6 +43,7 @@ MAKE_ENV+=		GYP_DEFINES="OS=netbsd"
 REPLACE_PYTHON+=	configure
 REPLACE_PYTHON+=	tools/genv8constants.py
 REPLACE_PYTHON+=	tools/gyp_node
+REPLACE_PYTHON+=	tools/gyp/pylib/gyp/flock_tool.py
 REPLACE_PYTHON+=	tools/gyp/pylib/gyp/sun_tool.py
 REPLACE_PYTHON+=	tools/node-waf
 REPLACE_PYTHON+=	tools/waf-light
@@ -56,7 +58,11 @@ BUILD_DEPENDS+=	lockf-[0-9]*:../../sysutils/lockf
 
 pre-install:
 	${FIND} ${WRKSRC}/deps/npm -name '*.orig' | ${XARGS} ${RM} -f
+	${CHMOD} -R g-w ${WRKSRC}
 
+.if ${OPSYS} != "Darwin"
 .include "../../devel/libexecinfo/buildlink3.mk"
+.endif
 .include "../../lang/python/application.mk"
+.include "../../lang/python/tool.mk"
 .include "../../mk/bsd.pkg.mk"

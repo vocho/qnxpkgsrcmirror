@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.76 2012/09/05 13:10:36 dmcmahill Exp $
+# $NetBSD: Makefile,v 1.78 2013/12/31 17:18:35 wiz Exp $
 #
 
 COMMENT=	CAD tools
@@ -23,6 +23,7 @@ SUBDIR+=	freehdl
 SUBDIR+=	gdsreader
 SUBDIR+=	geda
 SUBDIR+=	gerbv
+SUBDIR+=	ghdl
 SUBDIR+=	gnetman
 SUBDIR+=	gnucap
 SUBDIR+=	gplcver
@@ -41,7 +42,6 @@ SUBDIR+=	mpac
 SUBDIR+=	nelma
 SUBDIR+=	ng-spice
 SUBDIR+=	ntesla
-SUBDIR+=	oct-wcalc
 SUBDIR+=	openscad
 SUBDIR+=	pcb
 SUBDIR+=	py-MyHDL

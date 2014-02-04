@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.96 2013/07/21 06:55:53 jnemeth Exp $
+# $NetBSD: Makefile,v 1.103 2014/01/07 11:07:03 jnemeth Exp $
 #
 # NOTE: when updating this package, there are two places that sound
 #       tarballs need to be checked
 
-DISTNAME=	asterisk-11.5.0
+DISTNAME=	asterisk-11.7.0
 DIST_SUBDIR=	${PKGNAME_NOREV}
 DISTFILES=	${DEFAULT_DISTFILES}
 EXTRACT_ONLY=	${DISTNAME}.tar.gz
@@ -36,6 +36,8 @@ CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR}
 CONFIGURE_ARGS+=	--without-gtk2
 # XXX remove when lang/lua gets builtin.mk
 CONFIGURE_ARGS+=	--without-lua
+#JMN doesn't build properly on NetBSD, remove when -current is fixed
+CONFIGURE_ARGS+=	--without-srtp
 
 INSTALL_TARGET=		install samples
 INSTALLATION_DIRS+=	lib/pkgconfig share/doc/${PKGBASE}
@@ -140,7 +142,7 @@ SUBST_STAGE.atomics=	post-configure
 SUBST_FILES.atomics=	include/asterisk/autoconfig.h
 SUBST_SED.atomics=	-e "s|^\#define HAVE_GCC_ATOMICS 1|\#undef HAVE_GCC_ATOMICS|"
 
-# XXX gross hack, IP_PKTINFO in NetBSD isn't compatible with Linux
+# XXX gross hack, IP_PKTINFO in NetBSD isn't compatible with anything else
 SUBST_CLASSES+=		pktinfo
 SUBST_STAGE.pktinfo=	post-configure
 SUBST_FILES.pktinfo=	include/asterisk/autoconfig.h

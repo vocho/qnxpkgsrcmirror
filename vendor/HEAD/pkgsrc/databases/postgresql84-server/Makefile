@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.21 2013/07/12 10:44:54 jperkin Exp $
+# $NetBSD: Makefile,v 1.23 2013/12/10 22:34:22 adam Exp $
 
 PKGNAME=	${DISTNAME:C/-/84-server-/}
-PKGREVISION=	1
 COMMENT=	PostgreSQL database server programs
 
 # mips has no TAS implementation
@@ -46,11 +45,11 @@ DL_LIBS+=	-lltdl
 #		the databases
 PGUSER?=		pgsql
 PGGROUP?=		pgsql
-PGHOME?=		${PREFIX}/${PGUSER}
+PGHOME?=		${VARBASE}/${PGUSER}
 FILES_SUBST+=		PGUSER=${PGUSER}
 FILES_SUBST+=		PGGROUP=${PGGROUP}
 FILES_SUBST+=		PGHOME=${PGHOME}
-BUILD_DEFS+=		PGHOME
+BUILD_DEFS+=		PGHOME VARBASE
 
 PKG_GROUPS_VARS+=	PGGROUP
 PKG_USERS_VARS+=	PGUSER

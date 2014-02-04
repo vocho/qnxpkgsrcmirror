@@ -1,9 +1,8 @@
-# $NetBSD: Makefile,v 1.32 2013/07/20 04:02:00 taca Exp $
+# $NetBSD: Makefile,v 1.36 2013/11/24 14:17:19 taca Exp $
 #
 
 DISTNAME=	${RUBY_DISTNAME}
 PKGNAME=	${RUBY_PKGPREFIX}-base-${RUBY_VERSION_FULL}
-PKGREVISION=	2
 CATEGORIES=	lang ruby
 MASTER_SITES=	${MASTER_SITE_RUBY}
 
@@ -106,11 +105,9 @@ CONFIGURE_ENV+=	ac_cv_header_ucontext_h=no
 .endif
 
 #
-# work around for Linux and Cygwin
+# prevent unwanted mkdir recorded in rbconfig.rb
 #
-.if ${OPSYS} == "Linux" || ${OPSYS} == "Cygwin"
 CONFIGURE_ENV+=	MKDIR_P=${MKDIR:Q}
-.endif
 
 DOCS=		COPYING COPYING.ja ChangeLog NEWS README \
 		README.EXT README.EXT.ja README.ja ToDo \

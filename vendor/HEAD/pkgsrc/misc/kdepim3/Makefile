@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.113 2013/06/06 12:53:53 wiz Exp $
+# $NetBSD: Makefile,v 1.116 2014/01/01 11:52:05 wiz Exp $
 
 DISTNAME=	kdepim-${_KDE_VERSION}
-PKGREVISION=	30
+PKGREVISION=	33
 CATEGORIES=	misc
 COMMENT=	Personal Information Management tools for the KDE desktop
 

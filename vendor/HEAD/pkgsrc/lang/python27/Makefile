@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.26 2013/07/15 02:02:24 ryoon Exp $
+# $NetBSD: Makefile,v 1.33 2013/12/12 11:34:23 jperkin Exp $
 
 .include "dist.mk"
 
@@ -19,6 +19,8 @@ CONFIGURE_ARGS+=	OPT=${CFLAGS:Q}
 CONFIGURE_ARGS+=	--with-system-ffi
 CONFIGURE_ARGS+=	--with-dbmliborder=ndbm:bdb
 CONFIGURE_ENV+=		MKDIR_P=${MKDIR:Q}
+
+PKGCONFIG_OVERRIDE+=	Misc/python.pc.in
 
 LDFLAGS+=		-L${WRKSRC}
 
@@ -79,7 +81,7 @@ PLIST_SUBST+=	PY_PLATNAME=${PY_PLATNAME:Q}
 
 .if (${MACHINE_ARCH} == "alpha") || (${MACHINE_ARCH} == "amd64") || \
     (${MACHINE_ARCH} == "sparc64") || (${MACHINE_ARCH} == "x86_64") || \
-    (defined(ABI) && ${ABI} == "64")
+    (${MACHINE_ARCH} == "powerpc64") || (defined(ABI) && ${ABI} == "64")
 IS_64BIT_PLATFORM?=	yes
 .else
 IS_64BIT_PLATFORM?=	no
@@ -110,6 +112,12 @@ PLIST.extra-so=	yes
 # Make sure python modules can link correctly
 .if ${OPSYS} == "Darwin"
 INSTALL_UNSTRIPPED=	yes
+.endif
+
+# For Xcode 5 we need to search the SDK path for headers, otherwise certain
+# modules will not be built.
+.if ${OPSYS} == "Darwin" && exists(${OSX_SDK_PATH}/usr/include)
+CFLAGS+=		-I${OSX_SDK_PATH}/usr/include
 .endif
 
 PLIST_VARS+=	dll nis no-nis
@@ -155,6 +163,7 @@ REPLACE_INTERPRETER+=	py27
 REPLACE.py27.old=	.*python[^ ]*
 REPLACE.py27.new=	${PREFIX}/bin/python${PY_VER_SUFFIX}
 REPLACE_FILES.py27=	Lib/*.py Lib/*/*.py Lib/*/*/*.py
+REPLACE_FILES.py27+=	Lib/*/*/*/*.py
 
 SUBST_CLASSES+=		findlib
 SUBST_MESSAGE.findlib=	Fixing find_library_file on Darwin.

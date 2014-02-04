@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.1 2013/07/20 16:56:07 wiz Exp $
+# $NetBSD: Makefile,v 1.4 2014/01/05 03:38:00 dholland Exp $
 
 DISTNAME=	xnec2c-2.3-beta
 PKGNAME=	${DISTNAME:S/-beta/beta/}
+PKGREVISION=	2
 CATEGORIES=	ham
 MASTER_SITES=	http://www.qsl.net/5b4az/pkg/nec2/xnec2c/
 EXTRACT_SUFX=	.tar.bz2
@@ -13,7 +14,7 @@ LICENSE=	gnu-gpl-v3
 
 GNU_CONFIGURE=	yes
 USE_LANGUAGES=	c c++
-USE_TOOLS+=	intltool pax pkg-config
+USE_TOOLS+=	intltool msgfmt pax pkg-config
 
 INSTALLATION_DIRS=	share/doc/xnec2c
 

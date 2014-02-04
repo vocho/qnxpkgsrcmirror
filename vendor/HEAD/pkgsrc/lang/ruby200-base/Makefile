@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.1 2013/07/21 02:32:58 taca Exp $
+# $NetBSD: Makefile,v 1.7 2014/01/08 12:28:18 fhajny Exp $
 #
 
 DISTNAME=	${RUBY_DISTNAME}
 PKGNAME=	${RUBY_PKGPREFIX}-base-${RUBY_VERSION_FULL}
+PKGREVISION=	1
 CATEGORIES=	lang ruby
 MASTER_SITES=	${MASTER_SITE_RUBY}
 
@@ -82,6 +83,13 @@ CONFIGURE_ARGS+= --with-ruby-pc="ruby-${RUBY_VERSION}.pc"
 .endif
 
 #
+# Ruby 2.0 don't like Apple's builtin OpenSSL.
+#
+.if ${OPSYS} == "Darwin"
+USE_BUILTIN.openssl=	no
+.endif
+
+#
 # Win32 support (for Cygwin)
 #
 PLIST_VARS+=	win32
@@ -105,11 +113,9 @@ CONFIGURE_ENV+=	ac_cv_header_ucontext_h=no
 .endif
 
 #
-# work around for Linux and Cygwin
+# prevent unwanted mkdir recorded in rbconfig.rb
 #
-.if ${OPSYS} == "Linux" || ${OPSYS} == "Cygwin"
-CONFIGURE_ENV+=	MKDIR_P=${MKDIR:Q}
-.endif
+CONFIGURE_ENV+= MKDIR_P=${MKDIR:Q}
 
 DOCS=		COPYING COPYING.ja ChangeLog NEWS README \
 		README.EXT README.EXT.ja README.ja \

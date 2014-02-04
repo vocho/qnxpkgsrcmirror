@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.254 2013/07/04 21:29:05 adam Exp $
+# $NetBSD: Makefile,v 1.258 2014/01/25 10:45:22 wiz Exp $
 
-DISTNAME=	gtk+-2.24.20
+DISTNAME=	gtk+-2.24.22
 PKGNAME=	${DISTNAME:S/gtk/gtk2/}
 CATEGORIES=	x11
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gtk+/2.24/}
@@ -75,7 +75,7 @@ CPPFLAGS+=		-DPREFIX="\"${PREFIX}\""
 #SUBST_SED.pthread=	-e 's,__PTHREAD_FLAGS__,${BUILDLINK_LDFLAGS.pthread},g'
 #SUBST_FILES.pthread=	gdk-pixbuf/Makefile.in
 
-PYTHON_PATCH_SCRIPTS=	gtk/gtk-builder-convert
+REPLACE_PYTHON=	gtk/gtk-builder-convert
 
 # We remove the module databases during post-install since we create them
 # anew in the +INSTALL script as part of the POST-INSTALL action.

@@ -1,20 +1,15 @@
-# $NetBSD: Makefile,v 1.37 2013/07/25 13:25:08 degroote Exp $
+# $NetBSD: Makefile,v 1.40 2014/01/27 18:41:13 wiz Exp $
 
-DISTNAME=		imapfilter-${VERSION}
-VERSION=		2.5.5
-CATEGORIES=		mail
-MASTER_SITES=  -https://codeload.github.com/lefcha/imapfiler/tar.gz/${VERSION}
+DISTNAME=	imapfilter-2.5.6
+CATEGORIES=	mail
+MASTER_SITES=	-https://codeload.github.com/lefcha/imapfilter/tar.gz/v${PKGVERSION_NOREV}
 
-MAINTAINER=		pkgsrc-users@NetBSD.org
-HOMEPAGE=		http://imapfilter.hellug.gr/
-COMMENT=		Mail filtering utility for the IMAP
-LICENSE=		mit
+MAINTAINER=	pkgsrc-users@NetBSD.org
+HOMEPAGE=	http://imapfilter.hellug.gr/
+COMMENT=	Mail filtering utility for the IMAP
+LICENSE=	mit
 
 LDFLAGS.SunOS+=		-lsocket -lnsl
-
-FETCH_USING=   curl
-WRKSRC= 		${WRKDIR}/lefcha-imapfilter-ef03d60
-
 INSTALLATION_DIRS=	share/examples/imapfilter
 
 post-install:
@@ -23,7 +18,7 @@ post-install:
 		${DESTDIR}${PREFIX}/share/examples/imapfilter
 .endfor
 
-.include "../../lang/lua/buildlink3.mk"
 .include "../../devel/pcre/buildlink3.mk"
+.include "../../lang/lua/buildlink3.mk"
 .include "../../security/openssl/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

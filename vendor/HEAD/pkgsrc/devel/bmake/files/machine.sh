@@ -2,7 +2,7 @@
 # derrived from /etc/rc_d/os.sh
 
 # RCSid:
-#	$Id: machine.sh,v 1.7 2013/04/06 02:49:57 obache Exp $
+#	$Id: machine.sh,v 1.9 2013/09/08 16:32:14 ryoon Exp $
 #
 #	@(#) Copyright (c) 1994-2002 Simon J. Gerraty
 #
@@ -86,6 +86,12 @@ CYGWIN_*)
 	case "$machine" in
 	i?86) MACHINE_ARCH=i386;;
 	esac
+	;;
+GNU/kFreeBSD)
+	MACHINE_ARCH=$MACHINE
+	;;
+FreeMiNT)
+	MACHINE_ARCH=m68k
 	;;
 esac
 

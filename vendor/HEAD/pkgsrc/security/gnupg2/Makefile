@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.46 2013/07/15 02:02:27 ryoon Exp $
+# $NetBSD: Makefile,v 1.50 2014/01/01 11:52:32 wiz Exp $
 
-DISTNAME=	gnupg-2.0.20
+DISTNAME=	gnupg-2.0.22
 PKGNAME=	${DISTNAME:S/gnupg/gnupg2/}
+PKGREVISION=	1
 CATEGORIES=	security
 MASTER_SITES=	ftp://ftp.gnupg.org/gcrypt/gnupg/
 EXTRACT_SUFX=	.tar.bz2
@@ -20,7 +21,6 @@ USE_TOOLS+=		gmake
 GNU_CONFIGURE=		yes
 CONFIGURE_ARGS+=	--sharedstatedir=${VARBASE}
 CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR}
-CONFIGURE_ARGS+=	--with-static-rnd=auto
 CONFIGURE_ARGS+=	--without-included-gettext
 CONFIGURE_ARGS+=	--with-pinentry-pgm=${BUILDLINK_PREFIX.pinentry}/bin/pinentry
 

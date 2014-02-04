@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.58 2013/07/24 15:26:11 drochner Exp $
+# $NetBSD: Makefile,v 1.63 2014/01/15 17:19:30 drochner Exp $
 
 INSTALLATION_DIRS+=	${EGDIR}
 INSTALLATION_DIRS+=	share/claws-mail

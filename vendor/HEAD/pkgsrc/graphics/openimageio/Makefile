@@ -1,12 +1,11 @@
-# $NetBSD: Makefile,v 1.15 2013/07/05 21:34:11 joerg Exp $
+# $NetBSD: Makefile,v 1.21 2014/01/27 18:41:13 wiz Exp $
 
-OIIOVER=	1.1.7
+OIIOVER=	1.2.2
 DISTNAME=	oiio-Release-${OIIOVER}
 PKGNAME=	${DISTNAME:S/oiio-Release/openimageio/}
-PKGREVISION=	5
+PKGREVISION=	2
 CATEGORIES=	graphics
 MASTER_SITES=	-https://github.com/OpenImageIO/oiio/archive/Release-${OIIOVER}.tar.gz
-FETCH_USING=	curl
 
 MAINTAINER=	ryoon@NetBSD.org
 HOMEPAGE=	https://sites.google.com/site/openimageio/
@@ -29,6 +28,11 @@ pre-install:
 	${RM} -f ${WRKSRC}/include/tbb/tbb_machine.h.orig
 	${RM} -f ${WRKSRC}/include/tbb/tbb_misc.h.orig
 	${RM} -f ${WRKSRC}/include/tbb/tbb_exception.h.orig
+
+.include "../../mk/compiler.mk"
+.if !empty(PKGSRC_COMPILER:Mclang)
+CXXFLAGS+=	-Wno-deprecated-register
+.endif
 
 .include "../../devel/boost-libs/buildlink3.mk"
 .include "../../devel/hdf5/buildlink3.mk"

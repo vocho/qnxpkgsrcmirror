@@ -1,4 +1,4 @@
-# $NetBSD: makevars.map,v 1.234 2013/07/15 08:09:21 wiz Exp $
+# $NetBSD: makevars.map,v 1.241 2014/01/28 12:55:32 obache Exp $
 #
 
 # This file contains the guessed type of some variables, according to
@@ -210,6 +210,7 @@ CC			ShellCommand [$system]
 CFLAGS*			List of CFlag [$package_list]
 # ^^ may also be changed by the user
 CHECK_BUILTIN		YesNo [builtin.mk:d,m:s]
+CHECK_BUILTIN.*		YesNo [*:p]
 CHECK_FILES_SKIP	List of Pathmask [m:a,c:a]
 CHECK_FILES_SUPPORTED	YesNo [$package]
 CHECK_HEADERS		YesNo [$user]
@@ -233,6 +234,7 @@ CONFIGURE_ARGS		List of ShellWord [$package_list]
 CONFIGURE_DIRS		List of WrksrcSubdirectory [$package_list]
 CONFIGURE_ENV		List of ShellWord [$package_list]
 CONFIGURE_HAS_INFODIR	YesNo [$package]
+CONFIGURE_HAS_LIBDIR	YesNo [$package]
 CONFIGURE_HAS_MANDIR	YesNo [$package]
 CONFIGURE_SCRIPT	Pathname [$package]
 CONFIG_GUESS_OVERRIDE	List of Pathmask [m:as,c:as]
@@ -362,11 +364,15 @@ GENERATE_PLIST		List of ShellWord [$package_list]
 # ^^ List of Shellcommand, terminated with a semicolon
 GNU_ARCH		{ mips }
 GNU_CONFIGURE		Yes [c:s,m:s]
+GNU_CONFIGURE_INFODIR	Pathname [m:s,c:s]
+GNU_CONFIGURE_LIBDIR	Pathname [m:s,c:s]
+GNU_CONFIGURE_LIBSUBDIR	Pathname [$package]
 GNU_CONFIGURE_MANDIR	Pathname [m:s,c:s]
 GNU_CONFIGURE_PREFIX	Pathname [m:s]
 HAS_CONFIGURE		Yes [m:s,c:s]
 HEADER_TEMPLATES	List of Pathname [$package_list]
 HOMEPAGE		URL [$package]
+IGNORE_PKG.*		Yes [*:sp]
 INCOMPAT_CURSES		InternalList of PlatformTriple [m:as]
 INCOMPAT_ICONV		InternalList of PlatformTriple
 INFO_DIR		Pathname
@@ -539,13 +545,14 @@ PKGPATH			Pathname [$system]
 PKGREPOSITORY		Unchecked []
 PKGREVISION		PkgRevision [m:s]
 PKGSRCDIR		Pathname [$system]
+PKGSRCTOP		Yes [m:s]
 PKGTOOLS_ENV		List of ShellWord
 PKGVERSION		Version [$system]
 PKGWILDCARD		Filemask [$system]
 PKG_ADMIN		ShellCommand [$system]
-PKG_APACHE		{ apache13 apache2 apache22 } [$system]
-PKG_APACHE_ACCEPTED	List of { apache13 apache2 apache22 } [$package]
-PKG_APACHE_DEFAULT	{ apache13 apache2 apache22 } [$user]
+PKG_APACHE		{ apache13 apache2 apache22 apache24 } [$system]
+PKG_APACHE_ACCEPTED	List of { apache13 apache2 apache22 apache24 } [$package]
+PKG_APACHE_DEFAULT	{ apache13 apache2 apache22 apache24 } [$user]
 PKG_CONFIG		Yes [$user]
 # ^^ No, this is not the popular command from GNOME, but the setting
 # whether the pkgsrc user wants configuration files automatically
@@ -635,9 +642,9 @@ PTHREAD_OPTS		List of { native optional require } [m:as,c:a,b:a]
 PTHREAD_TYPE		Identifier [$system]
 # ^^ or "native" or "none".
 PY_PATCHPLIST		Yes [$package]
-PYPKGPREFIX		{ py26 py27 py31 py32 } [*:pu, pyversion.mk:s, *:]
+PYPKGPREFIX		{ py26 py27 py33 } [*:pu, pyversion.mk:s, *:]
 PYTHON_FOR_BUILD_ONLY	Yes [$package]
-PYTHON_PATCH_SCRIPTS	List of Pathmask [$package_list]
+REPLACE_PYTHON	List of Pathmask [$package_list]
 PYTHON_VERSIONS_ACCEPTED List of Version [$package]
 PYTHON_VERSIONS_INCOMPATIBLE List of Version [$package]
 PYTHON_VERSION_DEFAULT	Version [$user]
@@ -694,6 +701,7 @@ TEST_TARGET		List of Identifier [m:s,c:ds]
 TEX_ACCEPTED		List of { teTeX1 teTeX2 teTeX3 } [m:s,c:s]
 TEX_DEPMETHOD		{ build run } [m:s,c:s]
 TEXINFO_REQD		List of Version [$package_list]
+TOOL_DEPENDS		InternalList of DependencyWithPath [c:a,m:a,o:a,*.mk:a]
 TOOLS_ALIASES		List of Filename [$system]
 TOOLS_BROKEN		List of Tool [$system]
 TOOLS_CREATE		List of Tool [$system]

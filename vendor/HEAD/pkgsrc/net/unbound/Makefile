@@ -1,11 +1,10 @@
-# $NetBSD: Makefile,v 1.27 2013/07/12 10:45:01 jperkin Exp $
+# $NetBSD: Makefile,v 1.29 2013/11/24 09:39:44 pettai Exp $
 
-DISTNAME=	unbound-1.4.20
-PKGREVISION=	1
+DISTNAME=	unbound-1.4.21
 CATEGORIES=	net
 MASTER_SITES=	http://www.unbound.net/downloads/
 
-MAINTAINER=	joerg@NetBSD.org
+MAINTAINER=	pettai@NetBSD.org
 HOMEPAGE=	http://www.unbound.net/
 COMMENT=	DNS resolver and recursive server
 LICENSE=	modified-bsd

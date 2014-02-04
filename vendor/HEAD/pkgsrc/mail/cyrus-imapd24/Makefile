@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.31 2013/05/31 12:41:13 wiz Exp $
+# $NetBSD: Makefile,v 1.33 2013/11/13 13:34:32 joerg Exp $
 
 DISTNAME=	cyrus-imapd-2.4.17
-PKGREVISION=	5
+PKGREVISION=	6
 CATEGORIES=	mail
 MASTER_SITES=	http://cyrusimap.org/releases/ \
 		ftp://ftp.cyrusimap.org/cyrus-imapd/ \
@@ -50,6 +50,8 @@ CONFIGURE_ARGS+=	--enable-idled
 CONFIGURE_ARGS+=	--enable-murder
 CONFIGURE_ARGS+=	--enable-nntp
 CONFIGURE_ARGS+=	--enable-replication
+
+CONFIGURE_ARGS+=	andrew_cv_runpath_switch=${COMPILER_RPATH_FLAG}
 
 .include "options.mk"
 

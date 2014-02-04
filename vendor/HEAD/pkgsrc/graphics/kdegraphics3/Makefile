@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.119 2013/07/05 13:29:35 ryoon Exp $
+# $NetBSD: Makefile,v 1.122 2014/01/01 11:52:05 wiz Exp $
 
 DISTNAME=	kdegraphics-${_KDE_VERSION}
-PKGREVISION=	35
+PKGREVISION=	37
 CATEGORIES=	graphics
 COMMENT=	Graphics programs for the KDE integrated X11 desktop
 
@@ -47,6 +47,7 @@ BUILDLINK_TRANSFORM+=	rm:-fno-exceptions
 .include "../../graphics/glut/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../graphics/imlib/buildlink3.mk"
+.include "../../graphics/lcms/buildlink3.mk"
 .include "../../graphics/openexr/buildlink3.mk"
 .include "../../graphics/sane-backends/buildlink3.mk"
 .include "../../graphics/tiff/buildlink3.mk"

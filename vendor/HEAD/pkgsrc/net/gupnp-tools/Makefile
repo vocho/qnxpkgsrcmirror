@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.33 2013/07/17 13:35:19 drochner Exp $
+# $NetBSD: Makefile,v 1.39 2014/01/01 11:52:29 wiz Exp $
 #
 
-DISTNAME=	gupnp-tools-0.8.6
+DISTNAME=	gupnp-tools-0.8.8
+PKGREVISION=	1
 CATEGORIES=	net
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gupnp-tools/0.8/}
 EXTRACT_SUFX=	.tar.xz
@@ -13,12 +14,12 @@ LICENSE=	gnu-gpl-v2
 
 GNU_CONFIGURE=	yes
 USE_LIBTOOL=	yes
-USE_TOOLS+=	pkg-config intltool gmake
+USE_TOOLS+=	pkg-config intltool gmake msgfmt
 
+BUILDLINK_API_DEPENDS.gupnp+= gupnp>=0.20.8
 .include "../../net/gupnp/buildlink3.mk"
 .include "../../net/gupnp-av/buildlink3.mk"
 .include "../../x11/gtk3/buildlink3.mk"
-.include "../../devel/libglade/buildlink3.mk"
 .include "../../graphics/gnome-icon-theme/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../x11/gtksourceview3/buildlink3.mk"

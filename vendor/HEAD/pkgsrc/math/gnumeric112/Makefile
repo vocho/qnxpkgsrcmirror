@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.9 2013/07/20 15:49:51 wiz Exp $
+# $NetBSD: Makefile,v 1.18 2014/01/27 20:47:20 wiz Exp $
 
-DISTNAME=	gnumeric-1.12.4
+DISTNAME=	gnumeric-1.12.9
 CATEGORIES=	math gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gnumeric/1.12/}
 EXTRACT_SUFX=	.tar.xz
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.gnome.org/projects/gnumeric/
+HOMEPAGE=	https://wiki.gnome.org/Apps/Gnumeric
 COMMENT=	Spreadsheet program from the GNOME project
 LICENSE=	gnu-gpl-v2
 
@@ -26,6 +26,7 @@ PLIST_SUBST+=		GOFFICE_VERSION=${GOFFICE_VERSION}
 
 CONFIGURE_ARGS+=	--with-python
 CONFIGURE_ENV+=		PYTHON=${PYTHONBIN:Q}
+PYTHON_VERSIONS_INCOMPATIBLE=	33 # not yet ported as of 1.12.9
 .include "../../lang/python/application.mk"
 .include "../../devel/py-gobject3/buildlink3.mk"
 
@@ -42,7 +43,7 @@ BUILDLINK_API_DEPENDS.libgsf+=	libgsf>=1.14.18
 .include "../../devel/zlib/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../lang/perl5/buildlink3.mk"
-BUILDLINK_API_DEPENDS.goffice0.10+= goffice0.10>=0.10.3
+BUILDLINK_API_DEPENDS.goffice0.10+= goffice0.10>=0.10.9
 .include "../../misc/goffice0.10/buildlink3.mk"
 .include "../../textproc/libxml2/buildlink3.mk"
 .include "../../mk/omf-scrollkeeper.mk"

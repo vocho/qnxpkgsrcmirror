@@ -1,4 +1,4 @@
-# $NetBSD: bsd.prefs.mk,v 1.337 2013/07/19 14:29:16 ryoon Exp $
+# $NetBSD: bsd.prefs.mk,v 1.339 2013/12/19 23:50:29 tron Exp $
 #
 # This file includes the mk.conf file, which contains the user settings.
 #
@@ -606,6 +606,8 @@ X11_ENCODINGSDIR?=	${X11BASE}/share/fonts/X11/encodings
 X11_ENCODINGSDIR?=	${X11BASE}/lib/X11/fonts/encodings
 .endif
 
+CATMAN_SECTION_SUFFIX?=	no
+
 IMAKE_MAN_SOURCE_PATH=	man/man
 IMAKE_MAN_SUFFIX=	1
 IMAKE_LIBMAN_SUFFIX=	3
@@ -670,6 +672,16 @@ USE_TOOLS+=	awk:pkgsrc cut:pkgsrc echo:pkgsrc pwd:pkgsrc		\
 		sed:pkgsrc tr:pkgsrc uname:pkgsrc
 
 .include "${_PKGSRC_TOPDIR}/mk/tools/defaults.mk"
+
+.if ${FETCH_USING} == "auto"
+.  if defined(TOOLS_PLATFORM.fetch)
+FETCH_USING=	fetch
+.  elif defined(TOOLS_PLATFORM.curl)
+FETCH_USING=	curl
+.  else
+FETCH_USING=	ftp
+.  endif
+.endif
 
 .if !defined(_PKGSRCDIR)
 _PKGSRCDIR!=		cd ${_PKGSRC_TOPDIR} && ${PWD_CMD}

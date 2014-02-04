@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.486 2013/07/02 12:04:57 rodent Exp $
+# $NetBSD: Makefile,v 1.498 2014/02/02 23:36:32 rodent Exp $
 #
 
 COMMENT=	Audio tools
 
+SUBDIR+=	SDL2_mixer
 SUBDIR+=	SDL_mixer
 SUBDIR+=	SDL_sound
 SUBDIR+=	abcde
@@ -42,6 +43,7 @@ SUBDIR+=	bladeenc
 SUBDIR+=	blop
 SUBDIR+=	bml
 SUBDIR+=	bmp
+SUBDIR+=	bmp-crossfade
 SUBDIR+=	bmp-esound
 SUBDIR+=	bmp-flac
 SUBDIR+=	bmp-mac
@@ -125,15 +127,18 @@ SUBDIR+=	gbemol
 SUBDIR+=	gimmix
 SUBDIR+=	gkrellm-volume
 SUBDIR+=	glurp
+SUBDIR+=	glyr
 SUBDIR+=	gmp3info
 SUBDIR+=	gmpc
+SUBDIR+=	gmpc-alarm
 SUBDIR+=	gmpc-albumview
-SUBDIR+=	gmpc-lastfm
+SUBDIR+=	gmpc-jamendo
+SUBDIR+=	gmpc-libnotify
 SUBDIR+=	gmpc-lyrics
 SUBDIR+=	gmpc-lyricwiki
 SUBDIR+=	gmpc-magnatune
-SUBDIR+=	gmpc-mdcover
 SUBDIR+=	gmpc-tagedit
+SUBDIR+=	gmpc-wikipedia
 SUBDIR+=	gnome-audio
 SUBDIR+=	gnome-speech
 SUBDIR+=	gnome-speech-espeak
@@ -259,6 +264,8 @@ SUBDIR+=	libvisual0.2
 SUBDIR+=	libvisual0.2-plugins
 SUBDIR+=	libvorbis
 SUBDIR+=	libwildmidi
+SUBDIR+=	libxmp
+SUBDIR+=	libxspf
 SUBDIR+=	liteamp
 SUBDIR+=	liveice
 SUBDIR+=	lmms
@@ -354,6 +361,7 @@ SUBDIR+=	py-audiotools
 SUBDIR+=	py-beets
 SUBDIR+=	py-cddb
 SUBDIR+=	py-daap
+SUBDIR+=	py-discogs_client
 SUBDIR+=	py-dynampd
 SUBDIR+=	py-id3
 SUBDIR+=	py-id3lib
@@ -371,6 +379,7 @@ SUBDIR+=	py-vorbis
 SUBDIR+=	qjackctl
 SUBDIR+=	qsynth
 SUBDIR+=	qtplay
+SUBDIR+=	quodlibet2
 SUBDIR+=	rexima
 SUBDIR+=	rhythmbox
 SUBDIR+=	rhythmbox-gtk3

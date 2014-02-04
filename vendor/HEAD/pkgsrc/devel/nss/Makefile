@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.69 2013/07/20 09:28:11 ryoon Exp $
+# $NetBSD: Makefile,v 1.75 2014/01/15 14:38:53 ryoon Exp $
 
 DISTNAME=		nss-${NSS_RELEASE}
-NSS_RELEASE=		3.15.1
+NSS_RELEASE=		3.15.4
 CATEGORIES=		security
 MASTER_SITES=		${MASTER_SITE_MOZILLA_ALL:=security/nss/releases/NSS_${NSS_RELEASE:S/./_/g}_RTM/src/}
 
@@ -17,7 +17,7 @@ CHECK_PORTABILITY_SKIP+=${MOZILLA_DIR}configure
 
 USE_TOOLS+=		gmake perl pax pkg-config
 
-.include		"../../mk/bsd.prefs.mk"
+.include "../../mk/bsd.prefs.mk"
 
 .if ${OPSYS} == "Darwin"
 SUBST_CLASSES+=			exec_path

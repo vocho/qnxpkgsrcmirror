@@ -1,11 +1,10 @@
-# $NetBSD: Makefile,v 1.8 2013/04/02 15:29:00 taca Exp $
+# $NetBSD: Makefile,v 1.13 2013/11/19 14:19:58 taca Exp $
 #
 
-DISTNAME=	contao-${CT_VERSION}
+DISTNAME=	${CT_VERSION}
 PKGNAME=	contao${CT_VER}-${CT_PKGVER}
 CATEGORIES=	www
-MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=contao/}
-DIST_SUBDIR=	${CT_DIST_SUBDIR}
+MASTER_SITES=	${CT_MASTER_SITE}
 
 MAINTAINER=	taca@NetBSD.org
 HOMEPAGE=	http://www.contao.org/
@@ -23,7 +22,7 @@ CT_VERS=	211
 USE_TOOLS=	pax
 NO_BUILD=	yes
 
-EG_CONFIG=	agents.php codeMirror.php config.php countries.php \
+EG_CONFIG=	agents.php codeMirror.php countries.php \
 		languages.php tcpdf.php timezones.php tinyFlash.php \
 		tinyMCE.php tinyNews.php
 EG_DATA=	${WWW_EG_FILES} system/config tl_files
@@ -33,7 +32,6 @@ RESTRICT_DIRS=	system/html system/logs system/scripts system/tmp \
 		templates tl_files
 
 CONF_FILES+=	${CT_EGDIR}/contao.conf ${PKG_SYSCONFDIR}/contao.conf
-CONF_FILES+=	${CT_EGDIR}/htaccess.default ${CT_WEBDIR}/.htaccess
 
 .for f in ${EG_CONFIG}
 CONF_FILES+=	${CT_EGDIR}/system/config/${f} ${CT_WEBDIR}/system/config/${f}
@@ -59,13 +57,13 @@ SUBST_SED.conf+=        -e 's|@PREFIX@|${PREFIX:Q}|g'
 SUBST_SED.conf+=        -e 's|@CT_WEBDIR@|${CT_WEBDIR:Q}|g'
 SUBST_STAGE.conf=	post-configure
 
-WWW_FILES=	CHANGELOG.md GPL.txt LGPL.txt README.md \
+WWW_FILES=	.htaccess.default CHANGELOG.md GPL.txt LGPL.txt README.md \
 		contao cron.php index.php plugins share.php templates \
 		typolight
-WWW_SYSFILES=	config/.htaccess constants.php contao.css drivers \
-		functions.php html initialize.php interface.php libraries \
-		logs/.htaccess mbstring.php modules scripts/index.html \
-		themes tmp/.htaccess utf8_lookup.php
+WWW_SYSFILES=	config/.htaccess config/config.php constants.php contao.css \
+		drivers functions.php html initialize.php interface.php \
+		libraries logs/.htaccess mbstring.php modules \
+		scripts/index.html themes tmp/.htaccess utf8_lookup.php
 
 INSTALLATION_DIRS+=	${CT_DOCDIR} ${CT_EGDIR} ${CT_WEBDIR}/system/config
 
@@ -86,15 +84,11 @@ do-install:
 	cd ${WRKSRC}; pax -rw ${WWW_FILES} ${DESTDIR}${PREFIX}/${CT_WEBDIR}
 	cd ${WRKSRC}/system; \
 		pax -rw ${WWW_SYSFILES} \
-			${DESTDIR}${PREFIX}/${CT_WEBDIR}/system; \
-		${INSTALL_DATA} config/.htaccess \
-			${DESTDIR}${PREFIX}/${CT_WEBDIR}/system/config
+			${DESTDIR}${PREFIX}/${CT_WEBDIR}/system
 	${INSTALL_DATA} ${WRKSRC}/templates/.htaccess \
 		${DESTDIR}${PREFIX}/${CT_WEBDIR}/templates
 	cd ${WRKSRC}; pax -rw ${EG_DATA} ${DESTDIR}${PREFIX}/${CT_EGDIR}
 	rm -f ${DESTDIR}${PREFIX}/${CT_EGDIR}/system/config/.htaccess
-	${INSTALL_DATA} ${WRKSRC}/.htaccess.default \
-		${DESTDIR}${PREFIX}/${CT_EGDIR}/htaccess.default
 	${INSTALL_DATA} ${WRKDIR}/contao.conf ${DESTDIR}${PREFIX}/${CT_EGDIR}
 	${INSTALL_DATA} ${FILESDIR}/README \
 		${DESTDIR}${PREFIX}/${CT_DOCDIR}

@@ -1,4 +1,4 @@
-# $NetBSD: options.mk,v 1.25 2013/05/01 19:58:25 imil Exp $
+# $NetBSD: options.mk,v 1.27 2013/12/05 14:37:01 taca Exp $
 
 .include "../../mk/bsd.prefs.mk"
 
@@ -16,9 +16,8 @@ CONFIGURE_ENV+=		ac_cv_search_k_hasafs=no
 .endif
 
 .if !empty(PKG_OPTIONS:Mhpn-patch)
-PATCHFILES=		openssh-6.2p1-hpn13v14.diff
-PATCH_SITES=		ftp://ftp.NetBSD.org/pub/NetBSD/misc/imil/openssh/
-PATCH_DIST_STRIP=	-p1
+PATCHFILES=		openssh-6.4p1-hpn14v2.diff.gz
+PATCH_SITES=		ftp://ftp.NetBSD.org/pub/NetBSD/misc/openssh/
 .endif
 
 .if !empty(PKG_OPTIONS:Mpam)

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.436 2013/07/24 15:32:48 drochner Exp $
+# $NetBSD: Makefile,v 1.445 2014/01/12 17:43:55 wiz Exp $
 #
 
 COMMENT=	Electronic mail utilities
@@ -78,7 +78,6 @@ SUBDIR+=	etpan
 SUBDIR+=	evolution
 SUBDIR+=	evolution-data-server
 SUBDIR+=	evolution-exchange
-SUBDIR+=	evolution-sharp
 SUBDIR+=	exim
 SUBDIR+=	exim-html
 SUBDIR+=	exim3
@@ -99,6 +98,7 @@ SUBDIR+=	fromto
 SUBDIR+=	getmail
 SUBDIR+=	gld
 SUBDIR+=	gmime
+SUBDIR+=	gmime20
 SUBDIR+=	gmime24
 SUBDIR+=	gnus
 SUBDIR+=	greetdelay
@@ -161,19 +161,24 @@ SUBDIR+=	msmtp
 SUBDIR+=	mush
 SUBDIR+=	mutt
 SUBDIR+=	mutt-devel
+SUBDIR+=	mutt-kz
 SUBDIR+=	netbiff
 SUBDIR+=	newmail
 SUBDIR+=	newspipe
 SUBDIR+=	nmh
 SUBDIR+=	nmzmail
+SUBDIR+=	notmuch
 SUBDIR+=	nullmailer
 SUBDIR+=	oe2mbx
 SUBDIR+=	offlineimap
 SUBDIR+=	opendkim
+SUBDIR+=	opendmarc
+SUBDIR+=	opensmtpd
 SUBDIR+=	p5-App-Siesh
 SUBDIR+=	p5-Catalyst-View-Email
 SUBDIR+=	p5-Email-Abstract
 SUBDIR+=	p5-Email-Address
+SUBDIR+=	p5-Email-Address-List
 SUBDIR+=	p5-Email-Date
 SUBDIR+=	p5-Email-Date-Format
 SUBDIR+=	p5-Email-Find
@@ -321,6 +326,8 @@ SUBDIR+=	thunderbird
 SUBDIR+=	thunderbird-l10n
 SUBDIR+=	thunderbird10
 SUBDIR+=	thunderbird10-l10n
+SUBDIR+=	thunderbird17
+SUBDIR+=	thunderbird17-l10n
 SUBDIR+=	tmda
 SUBDIR+=	tnef
 SUBDIR+=	tnef2txt

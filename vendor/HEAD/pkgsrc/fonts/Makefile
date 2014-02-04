@@ -1,10 +1,11 @@
-# $NetBSD: Makefile,v 1.235 2013/05/31 01:12:51 rodent Exp $
+# $NetBSD: Makefile,v 1.243 2014/02/02 16:08:07 rodent Exp $
 #
 
 COMMENT=	Fonts
 
 SUBDIR+=	AnonymousPro
 SUBDIR+=	EB-Garamond
+SUBDIR+=	SDL2_ttf
 SUBDIR+=	Symbola-ttf
 SUBDIR+=	TextFonts-ttf
 SUBDIR+=	Xft2
@@ -156,6 +157,7 @@ SUBDIR+=	nanum-ttf
 SUBDIR+=	otf2bdf
 SUBDIR+=	oto
 SUBDIR+=	p5-Font-AFM
+SUBDIR+=	p5-Font-FreeType
 SUBDIR+=	p5-Font-TTF
 SUBDIR+=	p5-Font-TTFMetrics
 SUBDIR+=	pcf2bdf
@@ -225,6 +227,8 @@ SUBDIR+=	tex-eurosans
 SUBDIR+=	tex-eurosans-doc
 SUBDIR+=	tex-eurosym
 SUBDIR+=	tex-eurosym-doc
+SUBDIR+=	tex-fontinst
+SUBDIR+=	tex-fontinst-doc
 SUBDIR+=	tex-fontname
 SUBDIR+=	tex-fontname-doc
 SUBDIR+=	tex-fontspec
@@ -249,6 +253,8 @@ SUBDIR+=	tex-lh
 SUBDIR+=	tex-lh-doc
 SUBDIR+=	tex-lm
 SUBDIR+=	tex-lm-doc
+SUBDIR+=	tex-lm-math
+SUBDIR+=	tex-lm-math-doc
 SUBDIR+=	tex-luaotfload
 SUBDIR+=	tex-luaotfload-doc
 SUBDIR+=	tex-ly1
@@ -256,12 +262,18 @@ SUBDIR+=	tex-ly1-doc
 SUBDIR+=	tex-manfnt
 SUBDIR+=	tex-marvosym
 SUBDIR+=	tex-marvosym-doc
+SUBDIR+=	tex-mathdesign
+SUBDIR+=	tex-mathdesign-doc
 SUBDIR+=	tex-mathpazo
 SUBDIR+=	tex-mathpazo-doc
 SUBDIR+=	tex-metafont
 SUBDIR+=	tex-mflogo
 SUBDIR+=	tex-mflogo-doc
 SUBDIR+=	tex-mfware
+SUBDIR+=	tex-musixtex-fonts
+SUBDIR+=	tex-musixtex-fonts-doc
+SUBDIR+=	tex-nanumtype1
+SUBDIR+=	tex-nanumtype1-doc
 SUBDIR+=	tex-ncntrsbk
 SUBDIR+=	tex-norasi-c90
 SUBDIR+=	tex-ocr-b
@@ -300,6 +312,7 @@ SUBDIR+=	tex-zapfding
 SUBDIR+=	thaixfonts
 SUBDIR+=	ttf2pk
 SUBDIR+=	ttf2pt1
+SUBDIR+=	ttfdump
 SUBDIR+=	ttftot42
 SUBDIR+=	ttmkfdir2
 SUBDIR+=	type1inst

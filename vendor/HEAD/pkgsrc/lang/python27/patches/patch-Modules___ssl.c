@@ -1,8 +1,8 @@
-$NetBSD: patch-Modules___ssl.c,v 1.1 2013/04/17 13:21:05 obache Exp $
+$NetBSD: patch-Modules___ssl.c,v 1.3 2013/11/12 18:57:25 adam Exp $
 
-* from cygport 2.6.2-ssl-threads.patch
+Cygwin fix from cygport 2.6.2-ssl-threads.patch
 
---- Modules/_ssl.c.orig	2013-04-06 14:02:36.000000000 +0000
+--- Modules/_ssl.c.orig	2013-11-10 07:36:41.000000000 +0000
 +++ Modules/_ssl.c
 @@ -16,6 +16,10 @@
  
@@ -14,4 +14,4 @@ $NetBSD: patch-Modules___ssl.c,v 1.1 2013/04/17 13:21:05 obache Exp $
 +
  #ifdef WITH_THREAD
  #include "pythread.h"
- #define PySSL_BEGIN_ALLOW_THREADS { \
+ 

@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.1 2013/07/05 21:04:45 joerg Exp $
+# $NetBSD: Makefile,v 1.6 2013/10/19 09:07:02 adam Exp $
 #
 
-DISTNAME=	soci-3.2.1
+DISTNAME=	soci-3.2.2
+PKGREVISION=	3
 CATEGORIES=	databases
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=soci/}
 
@@ -15,6 +16,10 @@ USE_LANGUAGES=	c c++
 
 CMAKE_ARGS+=	-DSOCI_LIBDIR=lib
 
-.include "../../databases/sqlite3/buildlink3.mk"
-.include "../../mk/pgsql.buildlink3.mk"
+.include "../../mk/bsd.prefs.mk"
+
+CXXFLAGS.Cygwin+=	-std=gnu++11
+CMAKE_ARGS+=	-DCMAKE_CXX_FLAGS=${CXXFLAGS:Q}
+
+.include "options.mk"
 .include "../../mk/bsd.pkg.mk"

@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.57 2013/07/08 03:35:00 taca Exp $
+# $NetBSD: Makefile,v 1.60 2013/10/22 03:21:45 taca Exp $
 
-DISTNAME=	roundcubemail-0.9.2-dep
+DISTNAME=	roundcubemail-0.9.5-dep
 PKGNAME=	${DISTNAME:S/mail-/-/:S/-dep//}
-PKGREVISION=	1
 CATEGORIES=	mail
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=roundcubemail/}
 
@@ -11,9 +10,12 @@ HOMEPAGE=	http://roundcube.net/
 COMMENT=	Browser-based multilingual IMAP client
 LICENSE=	gnu-gpl-v3
 
-DEPENDS+=	${PHP_PKG_PREFIX}-dom-[0-9]*:../../textproc/php-dom
-DEPENDS+=	${PHP_PKG_PREFIX}-json-[0-9]*:../../textproc/php-json
-DEPENDS+=	${PHP_PKG_PREFIX}-mcrypt>=4.3.1:../../security/php-mcrypt
+DEPENDS+=	${PHP_PKG_PREFIX}-iconv>=${PHP_BASE_VERS}:../../converters/php-iconv
+DEPENDS+=	${PHP_PKG_PREFIX}-mbstring>=${PHP_BASE_VERS}:../../converters/php-mbstring
+DEPENDS+=	${PHP_PKG_PREFIX}-dom>=${PHP_BASE_VERS}:../../textproc/php-dom
+DEPENDS+=	${PHP_PKG_PREFIX}-intl>=${PHP_BASE_VERS}:../../textproc/php-intl
+DEPENDS+=	${PHP_PKG_PREFIX}-json>=${PHP_BASE_VERS}:../../textproc/php-json
+DEPENDS+=	${PHP_PKG_PREFIX}-mcrypt>=${PHP_BASE_VERS}:../../security/php-mcrypt
 
 DEPENDS+=	${PHP_PKG_PREFIX}-pear-Net_SMTP>=1.4.2:../../net/pear-Net_SMTP
 DEPENDS+=	${PHP_PKG_PREFIX}-pear-Net_IDNA2>=0.1.1:../../net/pear-Net_IDNA2
@@ -44,9 +46,10 @@ EGDIR=			${PREFIX}/share/examples/roundcube
 DOCDIR=			${PREFIX}/share/doc/roundcube
 PAX_DIRS=		plugins program skins installer
 
-CONF_PLUGINS=		acl additional_message_headers enigma help \
-			jqueryui managesieve newmail_notifier password \
-			redundant_attachments squirrelmail_usercopy
+CONF_PLUGINS=		acl additional_message_headers help \
+			http_authentication jqueryui managesieve \
+			newmail_notifier password redundant_attachments \
+			squirrelmail_usercopy zipdownload
 
 MESSAGE_SUBST+=		DOCDIR=${DOCDIR} PKG_SYSCONFDIR=${PKG_SYSCONFDIR}
 MESSAGE_SUBST+=		VARBASE=${VARBASE} RCDIR=${RCDIR}
@@ -79,10 +82,11 @@ SUBST_CLASSES+=		files
 SUBST_STAGE.files=	do-configure
 SUBST_FILES.files=	roundcube.conf
 SUBST_FILES.files+=	config/main.inc.php.dist
-SUBST_FILES.files+=	installer/index.php
+SUBST_FILES.files+=	installer/index.php installer/rcube_install.php
 SUBST_FILES.files+=	program/include/iniset.php
 SUBST_SED.files=	-e "s|@RCDIR@|${RCDIR}|g"
 SUBST_SED.files+=	-e "s|@VARBASE@|${VARBASE}|g"
+SUBST_SED.files+=	-e "s|@PKG_EXAMPLES@|${PREFIX}/share/examples/roundcube|g"
 SUBST_SED.files+=	-e "s|@PKG_SYSCONFDIR@|${PKG_SYSCONFDIR}|g"
 SUBST_MESSAGE.files=	Fixing configuration files.
 

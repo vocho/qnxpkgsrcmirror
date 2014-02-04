@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.46 2013/05/26 09:33:16 adam Exp $
+# $NetBSD: Makefile,v 1.48 2014/01/25 10:30:24 wiz Exp $
 
 DISTNAME=	libxml2-2.9.1
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}

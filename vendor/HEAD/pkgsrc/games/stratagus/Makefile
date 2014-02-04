@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.27 2013/07/04 21:27:57 adam Exp $
+# $NetBSD: Makefile,v 1.29 2013/11/13 22:51:37 joerg Exp $
 #
 
 DISTNAME=		stratagus-2.1-src
 PKGNAME=		${DISTNAME:S/-src//}
-PKGREVISION=		17
+PKGREVISION=		18
 CATEGORIES=		games
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=stratagus/}
 
@@ -12,6 +12,8 @@ HOMEPAGE=		http://stratagus.sourceforge.net/
 COMMENT=		Real-time strategy engine
 
 MAKE_JOBS_SAFE=		no
+
+LUA_VERSIONS_ACCEPTED=	51
 
 WRKSRC=			${WRKDIR}/stratagus-040702
 USE_TOOLS+=		gmake
