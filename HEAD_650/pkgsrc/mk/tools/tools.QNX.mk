@@ -31,7 +31,9 @@ TOOLS_PLATFORM.false?=		false			# shell builtin
 TOOLS_PLATFORM.fgrep?=		/usr/bin/fgrep
 TOOLS_PLATFORM.file?=		/usr/bin/file
 TOOLS_PLATFORM.find?=		/usr/bin/find
+.if exists(${QNX_HOST}/usr/bin/flex)
 TOOLS_PLATFORM.flex?=		${QNX_HOST}/usr/bin/flex
+.endif
 TOOLS_PLATFORM.ftp?=		/usr/bin/ftp
 
 TOOLS_PLATFORM.gawk?=		/usr/bin/gawk
@@ -60,7 +62,9 @@ TOOLS_PLATFORM.m4?=		/usr/bin/m4
 .if exists(/usr/bin/mail)
 TOOLS_PLATFORM.mail?=		/usr/bin/mail
 .endif
+.if exists(${QNX_HOST}/usr/bin/make)
 TOOLS_PLATFORM.gmake?=           ${QNX_HOST}/usr/bin/make
+.endif
 .if exists(/usr/bin/makeinfo)
 TOOLS_PLATFORM.makeinfo?=	/usr/bin/makeinfo
 .endif
@@ -82,7 +86,9 @@ TOOLS_PLATFORM.nroff?=		${QNX_HOST}/usr/bin/nroff
 .if exists(/usr/bin/openssl)
 TOOLS_PLATFORM.openssl?=	/usr/bin/openssl
 .endif
+.if exists(/usr/bin/patch)
 TOOLS_PLATFORM.patch?=		/usr/bin/patch
+.endif
 TOOLS_PLATFORM.printf?=		/usr/bin/printf
 TOOLS_PLATFORM.pwd?=		/bin/pwd
 .if empty(USE_CROSS_COMPILE:M[yY][eE][sS])
@@ -112,7 +118,11 @@ TOOLS_PLATFORM.strip?=		${QNX_HOST}/usr/bin/nto${MACHINE_GNU_PLATFORM}-strip
 .endif
 
 TOOLS_PLATFORM.tail?=		/usr/bin/tail
+.if exists(/usr/bin/tar)
 TOOLS_PLATFORM.tar?=		/usr/bin/tar
+.elif exists(/bin/tar)
+TOOLS_PLATFORM.tar?=		/bin/tar
+.endif
 .if exists(${QNX_HOST}/usr/bin/tbl)
 TOOLS_PLATFORM.tbl?=		${QNX_HOST}/usr/bin/tbl
 .endif
