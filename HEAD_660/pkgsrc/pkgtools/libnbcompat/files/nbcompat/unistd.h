@@ -34,6 +34,9 @@
 
 #if HAVE_UNISTD_H
 # include <unistd.h>
+#ifdef __QNXNTO__
+extern int	optreset;
+#endif
 #endif
 
 /*
