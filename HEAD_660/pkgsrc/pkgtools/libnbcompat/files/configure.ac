@@ -183,6 +183,9 @@ AC_CHECK_DECLS([optarg, optind, optreset], [:], [:], [
 	#include <stdio.h>
 	#include <stdlib.h>
 	#include <unistd.h>
+	#ifdef __QNXNTO__
+	#include <getopt.h>
+	#endif
 ])
 
 our_getopt_long=no
