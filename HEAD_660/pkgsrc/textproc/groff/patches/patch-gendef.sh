@@ -9,7 +9,7 @@ that changes a `makeinfo' is too old warning into a fatal error.
 
 --- gendef.sh.orig	2009-01-09 14:25:52.000000000 +0000
 +++ gendef.sh
-@@ -34,11 +34,9 @@ do
+@@ -34,11 +34,21 @@ do
  #define $def"
  done
  
@@ -18,13 +18,25 @@ that changes a `makeinfo' is too old warning into a fatal error.
 -# the file before we exit anyway).  Put the PID in the basename,
 -# since the extension can only hold 3 characters on MS-DOS.
 -t=${TMPDIR-.}/gro$$.tmp
-+t="`mktemp -t groff-gendef.XXXXXXXXXX`" || exit
++case "$(uname)" in
++    "QNX")
++	if [ -f /tmp/groff-gendef.$$ ]; then
++	    echo "tmpfile exists: exiting"
++	    exit
++	fi
++	touch /tmp/groff-gendef.$$ || exit
++	t="/tmp/groff-gendef.$$"
++	;;
++    "*")
++	t="`mktemp -t groff-gendef.XXXXXXXXXX`" || exit
++	;;
++esac
 +trap 'rm -f -- "$t"' EXIT
 +trap 'trap - EXIT; rm -f -- "$t"; exit 1' HUP INT QUIT TERM
  
  sed -e 's/=/ /' >$t <<EOF
  $defs
-@@ -46,8 +44,6 @@ EOF
+@@ -46,8 +56,6 @@ EOF
  
  test -r $file && cmp -s $t $file || cp $t $file
  

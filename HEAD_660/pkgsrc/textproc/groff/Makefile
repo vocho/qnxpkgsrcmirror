@@ -46,7 +46,10 @@ PLIST_SRC+=		PLIST
 
 .include "../../mk/bsd.prefs.mk"
 
-CPPFLAGS.QNX+=	-D_NO_CPP_INLINES -D_HAS_GENERIC_TEMPLATES=0
+.if ${OPSYS} == "QNX"
+CONFIGURE_ENV+=		groff_cv_decl_needed_hypot=no
+.endif
+
 LIBS.QNX+=	-lsocket
 
 BUILD_DEFS+=	PAPERSIZE
