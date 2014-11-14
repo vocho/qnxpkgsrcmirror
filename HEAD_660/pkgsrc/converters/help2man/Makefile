@@ -35,7 +35,8 @@ SUBST_SED.shlibarg=	-e 's, -shared , -dynamiclib ,g'
 
 PLIST_VARS+=		nls
 
-.if ${OPSYS} == "Darwin" && ${OS_VERSION:M8.*} != ""
+# QNX doesn't have langinfo, therefore our perl gets built without that module.
+.if (${OPSYS} == "Darwin" && ${OS_VERSION:M8.*} != "") || ${OPSYS} == "QNX"
 CONFIGURE_ARGS+=	--disable-nls
 .else
 .  if ${OPSYS} == "Darwin"
