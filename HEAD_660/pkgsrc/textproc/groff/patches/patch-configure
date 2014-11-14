@@ -7,9 +7,9 @@ Patches copied from:
 Modified for pkgsrc and excluded a documentaion change to doc/groff.texinfo
 that changes a `makeinfo' is too old warning into a fatal error.
 
---- configure.orig	2009-01-09 14:25:52.000000000 +0000
+--- configure.orig	2014-11-14 15:04:09.000000000 +0000
 +++ configure
-@@ -11598,18 +11598,6 @@ _ACEOF
+@@ -11601,18 +11601,6 @@ _ACEOF
     { $as_echo "$as_me:$LINENO: result: $PAGE" >&5
  $as_echo "$PAGE" >&6; }
  
@@ -28,7 +28,7 @@ that changes a `makeinfo' is too old warning into a fatal error.
  { $as_echo "$as_me:$LINENO: checking for prefix of system macro packages" >&5
  $as_echo_n "checking for prefix of system macro packages... " >&6; }
     sys_tmac_prefix=
-@@ -12937,33 +12925,12 @@ if $ac_need_defaults; then
+@@ -12940,33 +12928,21 @@ if $ac_need_defaults; then
    test "${CONFIG_HEADERS+set}" = set || CONFIG_HEADERS=$config_headers
  fi
  
@@ -38,10 +38,8 @@ that changes a `makeinfo' is too old warning into a fatal error.
 -# Hook for its removal unless debugging.
 -# Note that there is a small window in which the directory will not be cleaned:
 -# after its creation but before its name has been assigned to `$tmp'.
-+# Create a temporary directory, and hook for its removal unless debugging.
-+tmp="`mktemp -dt cs.XXXXXXXXXX`" || exit
- $debug ||
- {
+-$debug ||
+-{
 -  tmp=
 -  trap 'exit_status=$?
 -  { test -z "$tmp" || test ! -d "$tmp" || rm -fr "$tmp"; } && exit $exit_status
@@ -49,8 +47,19 @@ that changes a `makeinfo' is too old warning into a fatal error.
 -  trap '{ (exit 1); exit 1; }' 1 2 13 15
 -}
 -# Create a (secure) tmp directory for tmp files.
--
--{
++# Create a temporary directory, and hook for its removal unless debugging.
++case "$(uname)" in
++    "QNX")
++	mkdir /tmp/cs.$$ || exit 1
++	tmp="/tmp/cs.$$"
++	;;
++    "*")
++	tmp="`mktemp -dt cs.XXXXXXXXXX`" || exit
++	;;
++esac
+ 
++$debug ||
+ {
 -  tmp=`(umask 077 && mktemp -d "./confXXXXXX") 2>/dev/null` &&
 -  test -n "$tmp" && test -d "$tmp"
 -}  ||
