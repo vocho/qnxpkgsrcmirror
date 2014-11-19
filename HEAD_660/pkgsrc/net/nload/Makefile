@@ -14,6 +14,8 @@ USE_LANGUAGES=		c c++
 MANCOMPRESSED=		yes
 GNU_CONFIGURE=		yes
 
+LIBS.QNX+=		-lsocket
+
 CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR}
 
 .include "../../devel/ncurses/buildlink3.mk"

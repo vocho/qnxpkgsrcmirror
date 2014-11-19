@@ -11,7 +11,7 @@ Skip broken AC_FUNC_MALLOC.
  
          ;;
 -    *bsd*)
-+    *bsd* | *darwin* | *dragonfly*)
++    *bsd* | *darwin* | *dragonfly* | *qnx*)
  
  $as_echo "#define HAVE_BSD 1" >>confdefs.h
  
