@@ -1,16 +1,17 @@
-# $NetBSD: Makefile,v 1.28 2013/11/12 16:49:07 adam Exp $
+# $NetBSD: Makefile,v 1.32 2015/01/15 13:01:44 joerg Exp $
 
 BOOST_PACKAGE=		headers
 BOOST_COMMENT=		(build-time headers)
 BOOST_CONFIG=		generate
+PKGREVISION=		1
 
 .include "../../meta-pkgs/boost/Makefile.common"
 
 BJAM_ARGS+=		--without-* # disable all libraries
 
-.include "../../devel/boost-jam/bjam.mk"
+NO_BUILD=		yes
 
-do-build:
+.include "../../devel/boost-jam/bjam.mk"
 
 do-install: bjam-install
 	${FIND} ${DESTDIR}${PREFIX}/include/boost \
