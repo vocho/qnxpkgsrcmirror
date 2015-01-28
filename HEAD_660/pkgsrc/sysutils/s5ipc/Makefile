@@ -31,6 +31,6 @@ do-install:
 	${INSTALL} -m 444 ${WRKDIR}/s5ipc/lib/so/libs5ipcS.a ${DESTDIR}${PREFIX}/lib/libs5ipcS.a
 	${INSTALL} -m 444 ${WRKDIR}/s5ipc/lib/so/libs5ipc.so ${DESTDIR}${PREFIX}/lib/libs5ipc.so.1
 	${LN} -s libs5ipc.so.1 ${DESTDIR}${PREFIX}/lib/libs5ipc.so
-	${INSTALL} -m 444 ${WRKDIR}/s5ipc/manager/o/s5ipc ${DESTDIR}${PREFIX}/sbin/s5ipc
+	${INSTALL} -m 755 ${WRKDIR}/s5ipc/manager/o/s5ipc ${DESTDIR}${PREFIX}/sbin/s5ipc
 
 .include "../../mk/bsd.pkg.mk"
